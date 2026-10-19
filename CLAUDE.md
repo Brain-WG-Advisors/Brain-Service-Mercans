@@ -15,7 +15,7 @@ Responda e escreva sempre em **português do Brasil** (termos técnicos e nomes 
 - O que é de outros times fica em `fronteiras.md`. Não documente o trabalho de outros times além da fronteira.
 
 ## Início de toda sessão
-Ler o `PLANO.md` (modelo de construção e painel de progresso) e seguir o Protocolo de sessão dele: uma fase ou fonte por sessão; ao final, log, painel, commit e resumo.
+Colar `prompts/abrir-sessao.md`. Ler o `PLANO.md` (modelo de construção e painel de progresso) e seguir o Protocolo de sessão dele: uma fase ou fonte por sessão; padrão de dado sólido (níveis A/B/C/D); inventário antes de extrair; nada ingerido sem validação do usuário; ao final, log, painel, commit e resumo.
 
 ## Estrutura da pasta
 | Caminho | O que é |
@@ -26,6 +26,7 @@ Ler o `PLANO.md` (modelo de construção e painel de progresso) e seguir o Proto
 | `correcoes.md` | Erros já cometidos e a versão correta. **Ler antes de qualquer resposta.** |
 | `fronteiras.md` | O que não é nosso e para quem vai. |
 | `raw/` | Material bruto (exportações de chats, tickets, documentos). **Nunca editar nem apagar.** `raw/reunioes/` e `raw/drive/` ficam fora do git. |
+| `inventarios/` | Lista completa de cada fonte no período, com o resultado de cada item (cartão/descartado/pendente). |
 | `extracoes/` | Cartões extraídos de cada coleta (o filtro entre `raw/` e as notas). |
 | `testes/` | Teste de exatidão rodado no claude.ai (antes × depois). |
 | `revisoes/`, `rascunhos/` | Relatórios de revisão e rascunhos de resposta/pacotes (não enviados). |

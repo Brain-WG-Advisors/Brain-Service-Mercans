@@ -1,27 +1,34 @@
 # Extração: {{fonte}} ({{AAAA-MM-DD}})
 
-> Arquivo: `extracoes/AAAA-MM-DD-<fonte>.md`. Um cartão por item. Só entra o que muda a resposta certa.
-> Material bruto: `raw/<fonte>/...` · Fase/fonte do [[PLANO]]: {{F1–F6}}
+> Arquivo: `extracoes/AAAA-MM-DD-<fonte>[-<lote>].md`. Um cartão por item. Só entra o que muda a resposta certa.
+> Material bruto: `raw/<fonte>/...` · Inventário: `inventarios/<fonte>.md` · Padrão: [[PLANO]] §3 (níveis A/B/C/D) e §4 (validação).
 
 ## Resumo
-- Itens lidos: N · Cartões: N · Descartados: N (motivo resumido)
-- Status da ingestão: ⏳ pendente / ✅ ingerido em AAAA-MM-DD
+- Itens do inventário neste lote: N · Cartões: N · Complementos de cartão existente: N · Descartados: N
+- Risco alto: N (100% vão para validação) · Amostra dos demais: N (10%)
+- Validação: ⏳ pendente / ✅ feita em AAAA-MM-DD (confirmados N/N = X%)
+- Ingestão: ⏳ pendente / ✅ feita em AAAA-MM-DD
 
 ## Cartões
 
-### C-01 · {{tipo}} · [[{{Pais}}]]
+### {{FONTE}}-{{AAAAMMDD}}-C01 · {{tipo}} · [[{{Pais}}]]
+- **Chave:** `{{PAÍS}} | {{ARTEFATO}} | {{ITEM}}` · **Já existe?** não / sim → complementa [[correcoes]] linha AAAA-MM-DD / hub §...
 - **Tipo:** erro+causa / decisão / versão final / alerta / pendência
+- **Risco:** alto (valor estatutário, correção de erro, versão vigente) / normal
 - **Serviço:** [[research-pipeline]] / [[design]] / [[suporte]] / fronteira
 - **O que diz:** uma ou duas frases, sem dados pessoais
-- **Antes (se erro):** o que estava errado
-- **Correto / novo:** o valor ou regra certa, com vigência (`a partir de AAAA-MM-DD`)
-- **Fonte:** lei/site oficial/documento + onde foi visto (`raw/...`, ID de ticket, board/item do monday)
-- **Quem decidiu / pediu:** papel ou nome do lado Mercans (opcional)
-- **Destino:** hub do país (seção) / [[correcoes]] / skill `payroll-compliance-<pais>` / [[fronteiras]]
-- **Vira pergunta no teste?** sim / não
-- **Confiança:** alta / média / [INCERTO] (motivo)
+- **Antes (se erro):** o que estava errado e onde (artefato vX.Y, resposta de AAAA-MM-DD)
+- **Causa (se erro):** por que aconteceu (fonte secundária, cópia de outro país, leitura literal...)
+- **Correto / novo:** valor ou regra, com vigência (`a partir de AAAA-MM-DD`)
+- **Nível de evidência:** A / B / C (D não vira cartão) · **Fonte:** lei/artigo, manual, artefato+versão ou ticket+comentário
+- **Localização no raw:** `raw/...` + local exato (comentário de AAAA-MM-DD, item <ID> do board, minuto 12:30, aba "Version Control" linha 14)
+- **Quem decidiu / pediu:** papel ou nome do lado Mercans (opcional; obrigatório quando o tipo é decisão)
+- **Destino:** hub (seção) / [[correcoes]] / skill `payroll-compliance-<pais>` / [[fronteiras]] / `servicos/...`
+- **Pergunta para o teste (Conjunto B)?** sim → rascunho da pergunta / não
+- **Confiança da extração:** alta / média / [INCERTO] (motivo)
+- **Validação:** ⏳ / ✔ confirmado / ✘ rejeitado (motivo)
 
 ## Descartados
-| Item | Motivo |
+| Item (ID no inventário) | Motivo |
 |---|---|
-| | já registrado / sem impacto na resposta / dado pessoal / fora do escopo |
+| | já registrado sem informação nova / sem impacto na resposta / dado pessoal / outro time / só acknowledgment |

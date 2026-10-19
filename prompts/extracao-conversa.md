@@ -2,7 +2,9 @@
 
 > Como usar: abra a conversa (não o projeto) no Claude da Mercans, cole o prompt abaixo no fim dela, copie a resposta
 > e salve em `raw/chats/AAAA-MM-DD-<projeto>-<assunto>.md`. Depois diga aqui: "ingere raw/chats/<arquivo>".
-> Use para conversas de setembro/2026 em diante e para as que tratam dos itens em aberto listados no prompt.
+> **Atualizado em 2026-10-19:** na construção do brain (F3 do PLANO), as conversas são copiadas na íntegra pelo Chrome
+> ([coleta-chrome.md](coleta-chrome.md) §F3) e as seções abaixo servem de **roteiro de extração** aqui no Claude Code.
+> Colar este prompt numa conversa só quando não for possível copiá-la. Escopo: 2026-01-01 em diante.
 
 ---
 

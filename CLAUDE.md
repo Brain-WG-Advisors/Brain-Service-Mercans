@@ -14,6 +14,9 @@ Responda e escreva sempre em **português do Brasil** (termos técnicos e nomes 
 - **Suporte:** tickets e dúvidas sobre os artefatos que entregamos.
 - O que é de outros times fica em `fronteiras.md`. Não documente o trabalho de outros times além da fronteira.
 
+## Início de toda sessão
+Ler o `PLANO.md` (modelo de construção e painel de progresso) e seguir o Protocolo de sessão dele: uma fase ou fonte por sessão; ao final, log, painel, commit e resumo.
+
 ## Estrutura da pasta
 | Caminho | O que é |
 |---|---|
@@ -22,7 +25,11 @@ Responda e escreva sempre em **português do Brasil** (termos técnicos e nomes 
 | `paises/<País>.md` | Hub do país: etapa atual, artefatos e versões, decisões, valores com vigência, tickets. |
 | `correcoes.md` | Erros já cometidos e a versão correta. **Ler antes de qualquer resposta.** |
 | `fronteiras.md` | O que não é nosso e para quem vai. |
-| `raw/` | Material bruto (exportações de chats, tickets, documentos). **Nunca editar nem apagar.** |
+| `raw/` | Material bruto (exportações de chats, tickets, documentos). **Nunca editar nem apagar.** `raw/reunioes/` e `raw/drive/` ficam fora do git. |
+| `extracoes/` | Cartões extraídos de cada coleta (o filtro entre `raw/` e as notas). |
+| `testes/` | Teste de exatidão rodado no claude.ai (antes × depois). |
+| `revisoes/`, `rascunhos/` | Relatórios de revisão e rascunhos de resposta/pacotes (não enviados). |
+| `scripts/` | Scripts de coleta (ex.: `youtrack_fetch.ps1`). |
 | `modelos/` | Modelos de nota. Usar sempre ao criar nota nova. |
 | `prompts/` | Prompts prontos (ex.: extração de conhecimento dos projetos do Claude). |
 | `log.md` | Registro cronológico, só acrescentar no fim. |
@@ -70,6 +77,7 @@ Quando o usuário disser:
 | Fonte | Como entra |
 |---|---|
 | Projetos do Claude da Mercans (pipeline, compliance research, Design & Development, tickets) | Usuário cola `prompts/extracao-projeto.md` em cada projeto e salva a resposta em `raw/chats/`. |
-| YouTrack (`https://youtrack.hrblizz.dev`) | Script antigo em `_arquivo/automacao-trello/youtrack_fetch.ps1` (adaptar para tickets resolvidos). Token fica no `.env` da raiz: **nunca ler, exibir ou copiar o `.env`.** |
+| YouTrack (`https://youtrack.hrblizz.dev`) | `scripts/youtrack_fetch.ps1` (ver `scripts/LEIA-ME.md`). Token fica no `.env` da raiz: **nunca ler, exibir ou copiar o `.env`.** |
+| monday | Conector do claude.ai (só leitura). Boards e o que coletar: `PLANO.md` 4.2. |
 | Skills Mercans/país | Consultar via Skill quando necessário; não copiar. |
-| Google (Chat, Drive, Gmail) | Sem acesso (bloqueio da Mercans). Só se o usuário colar o conteúdo. |
+| Google (Drive, Meet/transcrições) | Sem conector (bloqueio da Mercans). Coleta pelo Claude in Chrome, só leitura, depois do ok do chefe: `prompts/coleta-chrome.md`. |

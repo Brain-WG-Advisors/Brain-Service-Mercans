@@ -1,6 +1,6 @@
-# Prompt: Fase 4, publicação no claude.ai
+# Prompt: publicação no claude.ai (MVP e incremental)
 
-> Usar no Claude Code. Plano: [[PLANO]] §5 Fase 4. Pré-requisitos: decisões 0.3 (quem publica as skills) e 0.4 (GitHub nos Projetos).
+> Usar no Claude Code. Plano: [[PLANO]] §6: usado no **MVP (Fase 2)** e a cada fonte concluída (Fase 3, passo 6). Pré-requisitos: decisões 0.3 (quem publica as skills) e 0.4 (GitHub nos Projetos).
 > Dois destinos: **(a) Projeto "Brain Service"** (estado, decisões, histórico, correções) e **(b) skills de país** (conteúdo estatutário corrigido).
 
 ## Pacote do projeto (o que sobe e o que não sobe)

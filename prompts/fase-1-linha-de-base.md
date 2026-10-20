@@ -1,7 +1,7 @@
 # Prompt: Fase 1, linha de base (Conjunto A do teste de exatidão)
 
 > Usar no Claude Code. Saída: `testes/exatidao.md` ([modelo](../modelos/teste-exatidao.md)) + `testes/rodadas/AAAA-MM-DD/`.
-> Plano: [[PLANO]] §5 Fase 1 e §7.
+> Plano: [[PLANO]] §6 Fase 1 e §7. A rodada 2 do Conjunto A acontece no MVP (Fase 2), com o mesmo protocolo.
 
 ## Parte 1: gerar as perguntas (Claude Code)
 
@@ -41,16 +41,17 @@ Mostre um resumo da estratificação (país × tipo) e pare para eu revisar ante
 
 ## Parte 2: rodar no claude.ai (usuário)
 1. Configuração da **rodada 1 (linha de base)**: claude.ai como o time usa hoje, com as skills da Mercans ativas, **fora** de qualquer projeto e sem o pacote do brain. Anotar a configuração na tabela Rodadas.
-2. **Um chat novo por pergunta.** Colar só a pergunta, sem complemento, sem "tem certeza?" e sem segunda tentativa.
-3. Copiar a resposta inteira para `testes/rodadas/AAAA-MM-DD/T-001.md` (um arquivo por pergunta).
+2. **Um chat novo por pergunta, 2 vezes cada pergunta** (60 chats). Colar só a pergunta, sem complemento, sem "tem certeza?" e sem insistir.
+3. Copiar cada resposta inteira para `testes/rodadas/AAAA-MM-DD/T-001-r1.md` e `T-001-r2.md`.
    - Alternativa com Chrome: o Claude Code roda as perguntas no claude.ai pelo navegador e salva as respostas, sem alterar nada além de criar os chats novos.
 
 ## Parte 3: corrigir (Claude Code)
 
 ```
 Corrija a rodada testes/rodadas/<AAAA-MM-DD>/ contra o gabarito de testes/exatidao.md.
-Para cada pergunta: ✅/⚠️/❌ pelo critério ESCRITO (não reinterprete), 1 linha de justificativa citando o trecho
-da resposta e "repetiu o erro conhecido?" (sim/não).
+Para cada resposta (r1 e r2): ✅/⚠️/❌ pelo critério ESCRITO (não reinterprete), 1 linha de justificativa citando o
+trecho da resposta e "repetiu o erro conhecido?" (sim/não).
+Resultado da pergunta: r1 e r2 ✅ → ✅; r1 ≠ r2 → ⚠️ instável (conta como não acerto); r1 e r2 ❌ → ❌.
 Preencha as tabelas Rodadas e Resultado por pergunta. Totais por país e por tipo (V/M/R/P).
 Não altere o gabarito. Se achar que o gabarito está errado, liste à parte para eu decidir.
 ```

@@ -1,7 +1,7 @@
 # Prompt: F2, extração do YouTrack / HRBlizz
 
 > Usar no Claude Code. Script: `scripts/youtrack_fetch.ps1` (ver `scripts/LEIA-ME.md`). **Só leitura** (a API é usada só com GET).
-> Escopo: tickets criados ou atualizados de 2026-01-01 até a data da coleta. Plano: [[PLANO]] §3, §4, §5 F2.
+> Escopo: tickets criados ou atualizados de 2026-01-01 até a data da coleta. Plano: [[PLANO]] §4, §5, §6 Fase 3 (F2). Também gera os KPIs K2 a K4 retroativos (§7) e alimenta a quarentena do Conjunto C.
 > Pré-requisito: decisão 0.6 (nome da variável do token no `.env`). **Nunca ler nem exibir o `.env`.**
 
 ## Por que a consulta precisa mudar

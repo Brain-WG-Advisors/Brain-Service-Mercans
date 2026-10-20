@@ -77,8 +77,8 @@ Quando o usuário disser:
 ## Fontes de conhecimento
 | Fonte | Como entra |
 |---|---|
-| Projetos do Claude da Mercans (pipeline, compliance research, Design & Development, tickets) | Usuário cola `prompts/extracao-projeto.md` em cada projeto e salva a resposta em `raw/chats/`. |
+| Projetos do Claude da Mercans (pipeline, compliance research, Design & Development, tickets) | Conversas copiadas na íntegra pelo Claude in Chrome (`prompts/coleta-chrome.md` §F3) para `raw/chats/conversas/`. O `prompts/extracao-projeto.md` só quando a cópia não for possível. |
 | YouTrack (`https://youtrack.hrblizz.dev`) | `scripts/youtrack_fetch.ps1` (ver `scripts/LEIA-ME.md`). Token fica no `.env` da raiz: **nunca ler, exibir ou copiar o `.env`.** |
-| monday | Conector do claude.ai (só leitura). Boards e o que coletar: `PLANO.md` 4.2. |
+| monday | Conector do claude.ai (só leitura). Boards e o que coletar: `prompts/extracao-monday.md` (PLANO §6, Fase 3 F1). |
 | Skills Mercans/país | Consultar via Skill quando necessário; não copiar. |
 | Google (Drive, Meet/transcrições) | Sem conector (bloqueio da Mercans). Coleta pelo Claude in Chrome, só leitura, depois do ok do chefe: `prompts/coleta-chrome.md`. |

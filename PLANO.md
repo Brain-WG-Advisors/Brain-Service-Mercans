@@ -1,13 +1,13 @@
 # Plano: modelo de construção do Brain Service
 
-> Índice: [[00-INDEX]] · Regras: [[CLAUDE]] · Versão 2, de 2026-10-19 (versões anteriores no git e em [[log]])
-> **Toda sessão começa por [prompts/abrir-sessao.md](prompts/abrir-sessao.md)** → Painel (seção 10) → **uma** fase ou fonte → Protocolo (seção 8).
+> Índice: [[00-INDEX]] · Regras: [[CLAUDE]] · Termo de abertura: [TERMO-DE-ABERTURA.md](TERMO-DE-ABERTURA.md) · **Versão 3, de 2026-10-20** (anteriores no git e em [[log]])
+> **Toda sessão começa por [prompts/abrir-sessao.md](prompts/abrir-sessao.md)** → Painel (§12) → **uma** fase ou fonte → Protocolo (§10).
 > **Escopo temporal: 2026-01-01 até a data da coleta, em todas as fontes.**
 
 ## 1. Objetivo
 Um cérebro que **melhora a nossa entrega**: mais acertos do que erros nos artefatos e nas respostas, antes do handover para os outros times. Ele não trabalha por nós, mas impede que a gente repita erro e responda sem fonte.
 
-**Prova:** o teste de exatidão (seção 7), rodado **no claude.ai** antes e depois, com respostas guardadas na íntegra para auditoria.
+**Prova:** medição em três camadas (§7), sempre no **claude.ai**, com linha de base antes e resultado depois.
 
 ## 2. Arquitetura
 ```
@@ -16,13 +16,30 @@ monday ─────────┐              raw/          material bruto,
 YouTrack/HRBS ──┤   inventário inventarios/  lista completa por fonte       (valores e regras corrigidos)
 Chats claude.ai ┼──────────►   extracoes/    cartões com nível de evidência Projeto "Brain Service"
 Reuniões ───────┤   validação  hubs/notas    conhecimento consolidado        (instruções + pacote de notas)
-Drive ──────────┤   humana     correcoes.md  erros e o correto
-Pipeline ───────┘              testes/       teste de exatidão + respostas ──► mede antes × depois
+Drive ──────────┤   humana     correcoes.md  erros e o correto              ▲ publicado desde o MVP (Fase 2)
+Pipeline ───────┘              testes/       medição (A, B, C + KPIs) ───────┘ e a cada fonte concluída
 ```
 - **Oficina** = esta pasta, mantida no Claude Code. **Uso diário** = claude.ai. O chefe e o time não mudam de ferramenta.
-- Conhecimento que fica só na oficina **não conta como entregue**. Ele precisa chegar ao claude.ai (Fase 4).
+- Conhecimento que fica só na oficina **não conta como entregue**. Desde o MVP, toda fonte concluída é publicada.
 
-## 3. Padrão de dado sólido
+## 3. Governança
+**Termo de abertura** ([TERMO-DE-ABERTURA.md](TERMO-DE-ABERTURA.md)): objetivo, escopo, metas, uso de dados e papéis, **aprovado pelo patrocinador antes da Fase 1**.
+
+| Atividade | Patrocinador (chefe) | Dono do brain (usuário) | Claude Code | Dono das skills (0.3) |
+|---|---|---|---|---|
+| Aprovar termo, metas, escopo de países e uso de dados | **A** | R | C | I |
+| Coletar, inventariar, extrair, consolidar | I | A | **R** | — |
+| Validar cartões | — | **A/R** | C | — |
+| Publicar o Projeto no claude.ai | I | **A/R** | C | — |
+| Aplicar pacotes de correção nas skills | I | C | C | **A/R** |
+| Rodar a medição e reportar | I (recebe relatório) | **A/R** | R (corrige e analisa) | — |
+| Manter na ausência do dono | — | Define backup | — | — |
+
+R = executa · A = responde pelo resultado · C = consultado · I = informado.
+
+**Bloqueios de governança:** sem a aprovação 0.1 não há coleta de reuniões nem de Drive (F4, F5). Sem a decisão 0.2 não há coleta de chats, reuniões nem Drive (F3, F4, F5), e nada novo e sensível vai para o GitHub.
+
+## 4. Padrão de dado sólido
 Cada cartão (`modelos/extracao.md`) recebe **um nível de evidência**:
 
 | Nível | O que é | Exemplos | Pode sustentar |
@@ -33,173 +50,219 @@ Cada cartão (`modelos/extracao.md`) recebe **um nível de evidência**:
 | **D** | Inferência, sem fonte, "acho que" | Deduções, blogs, memória | **Nada.** Vira pendência ou pergunta ao usuário |
 
 **Regras:**
-1. **Valor estatutário só entra com nível A.** Pode chegar por um documento B que cite A, mas então o A é registrado como fonte.
-2. **Conflito entre fontes:** A > B > C. No mesmo nível, vale o mais recente. Se não der para resolver, vira pendência no hub com as duas versões e as fontes. Nunca escolher em silêncio.
-3. **Chave de deduplicação:** `PAÍS | ARTEFATO | ITEM` (ex.: `ES | WTC | 62983`, `UA | 4DF | código 128`). Antes de criar um cartão, buscar a chave em [[correcoes]], no hub e em `extracoes/`. Se já existir, o cartão **complementa** (fonte nova, confirmação) em vez de duplicar.
-4. **Rastreabilidade:** todo cartão aponta para o arquivo em `raw/` e para o local exato (ticket + comentário, item do board, minuto ou trecho da transcrição, aba do arquivo).
-5. **Sem dados pessoais** (regra 3 do [[CLAUDE]]). Cliente só quando for necessário para entender o caso.
+1. **Valor estatutário só entra com nível A** (pode chegar por um B que cite o A; registrar o A como fonte).
+2. **Conflito:** A > B > C. No mesmo nível, vale o mais recente. Se não der para resolver, vira pendência no hub com as duas versões. Nunca escolher em silêncio.
+3. **Chave de deduplicação:** `PAÍS | ARTEFATO | ITEM` (ex.: `ES | WTC | 62983`). Buscar em [[correcoes]], no hub e em `extracoes/` antes de criar. Se já existir, o cartão complementa.
+4. **Rastreabilidade:** todo cartão aponta para o arquivo em `raw/` e o local exato.
+5. **Sem dados pessoais** (regra 3 do [[CLAUDE]]).
 
-## 4. Inventário antes da coleta (completude)
-Nenhuma fonte é extraída sem antes ter a **lista completa do período**, em `inventarios/<fonte>.md` ([modelos/inventario.md](modelos/inventario.md)). Cada item do inventário termina num destes três estados: **cartão** (ID), **descartado** (motivo) ou **pendente** (por quê).
-
-**Métricas por fonte**, registradas no inventário e no painel:
+## 5. Inventário, validação e limite de fila
+Nenhuma fonte é extraída sem a **lista completa do período** em `inventarios/<fonte>.md` ([modelos/inventario.md](modelos/inventario.md)). Cada item termina como **cartão**, **descartado** (com motivo) ou **pendente**, ou fica em **quarentena C** (ver §7).
 
 | Métrica | Fórmula | Meta |
 |---|---|---|
-| Cobertura | (cartão + descartado) ÷ itens do inventário | **100%** |
+| Cobertura | (cartão + descartado + quarentena) ÷ itens | **100%** |
 | Rastreabilidade | cartões com caminho em `raw/` ÷ cartões | **100%** |
-| Confirmação humana | cartões confirmados na amostra ÷ amostra | **≥ 95%** (abaixo disso, reextrair a fonte) |
-| Incerteza | cartões [INCERTO] ÷ cartões | Acompanhar; cada um vira pergunta |
+| Confirmação humana | ✔ ÷ amostra validada | **≥ 95%** (abaixo disso, reextrair a fonte) |
+| Incerteza | [INCERTO] ÷ cartões | Acompanhar; cada um vira pergunta |
 
-**Validação humana antes de ingerir:** o usuário confere **100% dos cartões de risco alto** (valor estatutário, correção de erro, versão vigente) e **10% sorteados** dos demais.
+**Validação:** o usuário confere **100% dos cartões de risco alto** e **10% sorteados** dos demais.
+- **Lotes de no máximo 40 cartões** (~1 h): risco alto ~3 min por cartão, demais ~1 min.
+- **Limite de fila:** se houver mais de **2 lotes** esperando validação, a coleta da próxima fonte para até a fila baixar. O seu tempo é o gargalo, e acumular cartões sem validar só gera retrabalho.
 
-## 5. Fases, passos e critérios
+## 6. Fases, passos e critérios
 
-### Fase 0: Preparação
-| # | Item | Responsável | Status |
+### Fase 0: Preparação e aprovação
+| # | Item | Dono | Status |
 |---|---|---|---|
-| 0.1 | Ok do chefe para coletar transcrições e Drive pelo Claude in Chrome | Usuário | ✅ decidido pelo usuário em 2026-10-19 (confirmar com o chefe) |
-| 0.2 | O repositório `ViniCerqueira/brain-service` (privado, conta pessoal) fica lá ou vai para uma conta da Mercans? | Usuário / chefe | ⏳ |
-| 0.3 | Quem publica e atualiza as skills `payroll-compliance-*` no claude.ai da Mercans? | Usuário | ⏳ |
-| 0.4 | A integração do GitHub está liberada nos Projetos do claude.ai? (Projeto → Add content → GitHub) | Usuário | ⏳ |
-| 0.5 | Extensão Claude in Chrome instalada e logada no Google da Mercans; `/chrome` conecta no Claude Code | Usuário | ⏳ |
+| 0.0 | **Termo de abertura aprovado pelo patrocinador** | Chefe | ⏳ |
+| 0.1 | Ok para coletar transcrições e Drive pelo Claude in Chrome | **Chefe** (o usuário já é a favor, desde 2026-10-19) | ⏳ |
+| 0.2 | Repositório `ViniCerqueira/brain-service` (privado, conta pessoal) fica lá ou vai para uma conta da Mercans? | Chefe / usuário | ⏳ **bloqueia F3–F5** |
+| 0.3 | Quem publica e atualiza as skills `payroll-compliance-*` no claude.ai da Mercans | Usuário | ⏳ |
+| 0.4 | A integração do GitHub está liberada nos Projetos do claude.ai? | Usuário | ⏳ |
+| 0.5 | Extensão Claude in Chrome instalada e logada; `/chrome` conecta no Claude Code | Usuário | ⏳ |
 | 0.6 | Nome da variável do token do YouTrack no `.env` (só o nome) | Usuário | ⏳ |
 | 0.7 | Onde estão o pipeline e as saídas das execuções | Usuário | ⏳ |
-| 0.8 | Meta de exatidão. Proposta: Conjunto A ≥ 27/30 e Conjunto B ≥ 80%, com zero erro repetido de [[correcoes]] | Usuário / chefe | ⏳ proposta |
-| 0.9 | **Escopo de países:** o board Compliance Artifacts tem ~80 grupos de país e o brain tem 49 hubs. Quais são nossos? (ex.: Argélia, Angola, Tanzânia, Brasil, Iraque, Iêmen, Quênia...) | Usuário | ⏳ |
-| 0.10 | O board de alertas `18227732675` parou em 2026-06-06. Existe um board ou planilha mais nova ("Alerts 2026 Link")? | Usuário | ⏳ |
+| 0.8 | Metas (§7). Proposta no termo | Chefe | ⏳ proposta |
+| 0.9 | Escopo de países: ~80 grupos no board Compliance Artifacts × 49 hubs | Chefe / usuário | ⏳ |
+| 0.10 | O board de alertas `18227732675` parou em 2026-06-06. Existe um mais novo? | Usuário | ⏳ |
+| 0.11 | Backup do dono do brain (quem mantém na ausência do usuário) | Chefe / usuário | ⏳ |
 
-**Saída:** 0.3, 0.5, 0.6 e 0.9 respondidos (os outros podem seguir em paralelo).
+**Saída:** 0.0, 0.3, 0.6 e 0.9 respondidos. Os outros seguem em paralelo, respeitando os bloqueios do §3.
 
 ### Fase 1: Linha de base
 Prompt: [prompts/fase-1-linha-de-base.md](prompts/fase-1-linha-de-base.md)
-1. Gerar o **Conjunto A**: 30 perguntas estratificadas a partir de [[correcoes]], com gabarito e critério de acerto.
-2. O usuário revisa as perguntas e o gabarito.
-3. O usuário roda as 30 perguntas no claude.ai **sem** o pacote do brain e salva as respostas.
-4. Corrigir contra o gabarito e registrar a nota da rodada 1.
+1. Gerar o **Conjunto A** (30 perguntas a partir de [[correcoes]], estratificadas, com gabarito e critérios). O usuário revisa.
+2. Rodar no claude.ai **sem** o projeto, **2 vezes cada pergunta**, e salvar as respostas.
+3. Corrigir e registrar a nota da rodada 1.
+4. **KPIs operacionais, primeira leitura:** K1 (RCA) pelo monday. K2 a K4 entram com retroativo quando a F2 terminar (§7).
 
-**Saída:** `testes/exatidao.md` com a rodada 1 registrada e as respostas em `testes/rodadas/`.
+**Saída:** `testes/exatidao.md` com a rodada 1; `testes/kpis.md` com o K1.
 
-### Fase 2: Coleta (uma fonte por ciclo, nesta ordem)
-| # | Fonte | Prompt | Volume conhecido | Destino bruto |
-|---|---|---|---|---|
-| F1 | monday | [prompts/extracao-monday.md](prompts/extracao-monday.md) | RCA 91 itens; Alerts 42; Artifacts 712; + Change Mgmt, Roadmap, Filings | `raw/monday/` |
-| F2 | YouTrack / HRBlizz | [prompts/extracao-youtrack.md](prompts/extracao-youtrack.md) | A medir no DryRun (58 já ingeridos de 04/08 a 29/09) | `raw/tickets/api/` |
-| F3 | Chats do claude.ai | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F3 + [prompts/extracao-conversa.md](prompts/extracao-conversa.md) | A medir no inventário | `raw/chats/conversas/` |
-| F4 | Reuniões | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F4 | A medir | `raw/reunioes/` (fora do git) |
-| F5 | Drive | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F5 (alvos vindos do board Artifacts) | A medir | `raw/drive/` (fora do git) |
-| F6 | Pipeline | A escrever depois de 0.7 | — | `raw/pipeline/` |
+### Fase 2: MVP, publicar o que já existe (até 1 semana depois da Fase 1)
+Prompts: [prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) + [prompts/projeto-claude-ai.md](prompts/projeto-claude-ai.md)
+1. Corrigir o que for bloqueante no pacote atual (67 correções, 49 hubs, serviços, fronteiras): dado sensível, links para `raw/`, contradição de risco alto.
+2. Montar o **Projeto "Brain Service"** no claude.ai (instruções + pacote) e passar no **teste de fumaça** (5/5).
+3. **Rodada 2 do Conjunto A** com o projeto. Primeiro resultado para o patrocinador.
+4. **A data do MVP vira a data de corte do Conjunto C** (§7).
+5. Liberar o uso pelo time e pelo patrocinador.
 
-**Ciclo de cada fonte (sempre igual):**
-1. **Inventário** do período → `inventarios/<fonte>.md`.
-2. **Coleta** para `raw/` (imutável).
-3. **Extração** de cartões → `extracoes/AAAA-MM-DD-<fonte>.md`, com nível de evidência e chave de deduplicação.
-4. **Validação humana** (seção 4) → cartões marcados como ✔ confirmado ou ✘ rejeitado.
-5. **Ingestão** dos cartões confirmados: hub, [[correcoes]], `servicos/`, [[fronteiras]].
-6. **Perguntas novas** → **Conjunto B** do teste (correções novas, que não estavam em [[correcoes]] na Fase 1).
-7. **Fechamento:** métricas no inventário, [[log]], painel e commit.
+**Saída:** projeto em uso, rodada 2 registrada e relatório curto (1 parágrafo + tabela) ao patrocinador.
 
-**Saída de cada fonte:** cobertura de 100%, confirmação ≥ 95% e ingestão feita.
+### Fase 3: Coleta (uma fonte por ciclo, nesta ordem)
+| # | Fonte | Prompt | Volume conhecido | Destino bruto | Bloqueio |
+|---|---|---|---|---|---|
+| F1 | monday | [prompts/extracao-monday.md](prompts/extracao-monday.md) | RCA 91; Alerts 42; Artifacts 712; + Change Mgmt, Roadmap, Filings | `raw/monday/` | — |
+| F2 | YouTrack / HRBlizz | [prompts/extracao-youtrack.md](prompts/extracao-youtrack.md) | A medir (58 já ingeridos de 04/08 a 29/09) | `raw/tickets/api/` | 0.6 |
+| F3 | Chats do claude.ai | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F3 | A medir | `raw/chats/conversas/` | 0.2, 0.5 |
+| F4 | Reuniões | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F4 | A medir | `raw/reunioes/` (fora do git) | 0.1, 0.2, 0.5 |
+| F5 | Drive | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F5 (alvos do F1) | A medir | `raw/drive/` (fora do git) | 0.1, 0.2, 0.5 |
+| F6 | Pipeline | A escrever depois da 0.7 | — | `raw/pipeline/` | 0.7 |
 
-### Fase 3: Consolidação
-1. Aplicar as **propostas de risco alto** de [revisoes/2026-10-05-revisao.md](revisoes/2026-10-05-revisao.md) que ainda valem depois da Fase 2.
-2. Rodar "revisa o cérebro" e resolver as contradições.
-3. Para cada país, **lista de correções que ainda não estão na skill** (insumo da Fase 4).
+**Ciclo de cada fonte:**
+1. Inventário.
+2. Coleta.
+3. Extração em cartões.
+4. Validação em lotes de até 40 (§5).
+5. Ingestão.
+6. **Publicação incremental** no Projeto (sync/upload) e **pacote de skill** quando houver correção estatutária.
+7. Perguntas novas para o **Conjunto B**.
+8. Fechamento: métricas no inventário, horas reais × estimadas (§9), [[log]], painel e commit.
 
-**Saída:** zero contradição aberta em item de risco alto; lista por país pronta.
+**Saída de cada fonte:** cobertura de 100%, confirmação ≥ 95%, ingerido **e publicado**.
 
-### Fase 4: Publicação no claude.ai
-Prompt: [prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md). Instruções do projeto: [prompts/projeto-claude-ai.md](prompts/projeto-claude-ai.md)
-1. Montar o **Projeto "Brain Service"** no claude.ai: instruções + pacote de notas (GitHub ou upload).
-2. Gerar os **pacotes de correção por skill** e entregar a quem publica (0.3).
-3. Fazer um **teste de fumaça**: 5 perguntas no projeto, para confirmar que ele lê as correções e cita a fonte.
+### Fase 4: Consolidação (depois de F2 e no fim da coleta)
+1. Propostas de risco alto de [revisoes/2026-10-05-revisao.md](revisoes/2026-10-05-revisao.md) que ainda valem.
+2. "Revisa o cérebro" e resolução das contradições.
+3. Lista, por país, das correções que ainda não estão na skill → pacotes ([prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) Passo 3).
 
-**Saída:** projeto ativo, pacotes entregues e fumaça aprovada.
+### Fase 5: Medição final
+1. Rodar A, B e C (2 vezes cada pergunta) com o projeto e as skills atualizadas.
+2. KPIs K1 a K4: período posterior ao MVP × linha de base de jan–out/2026.
+3. Cada ❌ ou ⚠️ instável: causa (falta no brain / falta na skill / erro do modelo / gabarito) → ação com dono e data.
+4. **Relatório de uma página** para o patrocinador, com a decisão: manter e escalar / ajustar / encerrar.
 
-### Fase 5: Medição
-1. Rodar o **Conjunto A** (30) e o **Conjunto B** no claude.ai **com** o projeto e as skills atualizadas.
-2. Comparar com a rodada 1. Analisar cada ❌ e ⚠️: falta no brain, falta na skill ou erro do modelo?
-3. Cada ❌ vira ação, com dono e data.
-
-**Saída:** meta 0.8 atingida, ou plano de correção com nova rodada marcada. Relatório de uma página para o chefe.
-
-### Fase 6: Rotina (~15 a 20 min por semana)
-- YouTrack desde a última data → ciclo F2 reduzido.
+### Fase 6: Rotina (~20 min por semana)
+- YouTrack desde a última data → ciclo F2 reduzido. Tickets novos alimentam o Conjunto C enquanto ele não tiver 20 perguntas.
 - monday: itens novos ou alterados no RCA e nos alertas.
-- "fechei o ticket X" a cada entrega (KCS).
-- Correção nova → skill/projeto + pergunta nova no Conjunto B.
-- Mensal: rodar o teste e "revisa o cérebro".
+- "fechei o ticket X" (KCS) a cada entrega.
+- Correção nova → projeto/skill + pergunta no B.
+- Mensal: KPIs, uma rodada do teste e "revisa o cérebro".
 
-## 6. Cronograma (proposta, ajustar na Fase 0)
-| Fase | Sessões estimadas | Data-alvo |
-|---|---|---|
-| 0. Preparação | — (decisões do usuário) | 2026-10-21 |
-| 1. Linha de base | 2 | 2026-10-23 |
-| 2. F1 monday | 2–3 | 2026-10-28 |
-| 2. F2 YouTrack (jan–out) | 4–6 (depende do volume) | 2026-11-06 |
-| 2. F3 Chats | 3–5 | 2026-11-13 |
-| 2. F4 Reuniões | 2–4 | 2026-11-19 |
-| 2. F5 Drive | 3–4 | 2026-11-26 |
-| 2. F6 Pipeline | 1–2 | depende de 0.7 |
-| 3. Consolidação | 2 | 2026-12-02 |
-| 4. Publicação | 2 | 2026-12-08 |
-| 5. Medição | 1–2 | 2026-12-11 |
+## 7. Medição em três camadas
+| Camada | O que mede | Como | Risco que cobre |
+|---|---|---|---|
+| **Conjunto A** (30) | O claude.ai ainda repete erros que já conhecemos? | Perguntas de [[correcoes]]; rodadas 1 (sem projeto), 2 (MVP) e final | Erro repetido |
+| **Conjunto B** (cresce na Fase 3) | O conhecimento novo chegou ao claude.ai? | Perguntas das correções novas de cada fonte | Publicação falha |
+| **Conjunto C** (~20, **cego**) | O brain **generaliza** para casos que nunca viu? | Perguntas de tickets **resolvidos depois da data do MVP**, escolhidos ~2 por semana. Esses tickets ficam em **quarentena C**: só são ingeridos depois da medição final | **Vício do teste**: A e B estão dentro do projeto, então melhoram por definição. O C não está |
+| **KPIs operacionais** | A entrega ficou mais robusta? | Ver abaixo, com linha de base jan–out/2026 | Exatidão sem efeito no trabalho |
 
-Depois de F1 e F2, se o usuário quiser, dá para fazer uma **publicação parcial** (Fase 4 só com as correções até ali) e começar a colher resultado mais cedo.
+**Protocolo de todas as rodadas:**
+- Chat novo para cada pergunta, sem dica.
+- **Cada pergunta roda 2 vezes.** Duas ✅ = ✅. Respostas divergentes = ⚠️ **instável**, que conta como não acerto.
+- Respostas salvas na íntegra em `testes/rodadas/AAAA-MM-DD/`.
+- Critérios escritos **antes** da rodada.
+- O gabarito nunca sobe para o projeto.
 
-## 7. Teste de exatidão
-- **Conjunto A (linha de base):** 30 perguntas tiradas de [[correcoes]] (Fase 1). Mede se o claude.ai repete erros já conhecidos.
-- **Conjunto B (controle):** perguntas das correções **novas** da Fase 2. Elas não existiam quando o teste foi desenhado, então medem se o brain generaliza.
-- **Protocolo:** chat novo no claude.ai, pergunta colada sem dica, resposta **salva na íntegra** em `testes/rodadas/AAAA-MM-DD/T-xxx.md` e correção contra o gabarito (✅ / ⚠️ / ❌) pelos critérios escritos antes da rodada.
-- **Regra:** um ❌ não é só anotado; ele vira ação com dono.
-- Detalhe: [prompts/fase-1-linha-de-base.md](prompts/fase-1-linha-de-base.md) e [modelos/teste-exatidao.md](modelos/teste-exatidao.md).
+**KPIs operacionais** (`testes/kpis.md`, mensal):
 
-## 8. Protocolo de sessão
-**Início:** colar [prompts/abrir-sessao.md](prompts/abrir-sessao.md). O Claude lê [[CLAUDE]], este plano e [[correcoes]], mostra o painel e confirma a fase/fonte e o critério de saída.
+| # | KPI | Fonte | Fórmula | Direção |
+|---|---|---|---|---|
+| K1 | RCAs atribuídos a Compliance | monday RCA (Department = Compliance & Research ou CAPA de Compliance) | nº por mês | ↓ |
+| K2 | Defeitos pós-handover em artefato nosso | YouTrack (cartões "erro+causa" apontados por BA/Dev em SR-/CT-) | nº por mês | ↓ |
+| K3 | Retrabalho de resposta | YouTrack (autocorreção nossa ou ticket reaberto) | ÷ tickets respondidos no mês | ↓ |
+| K4 | Tempo até a primeira resposta nossa | YouTrack (tickets HRBS de compliance) | mediana em dias úteis | ↓ |
+
+**Metas** (proposta para a 0.8, aprovar no termo):
+- A ≥ 27/30.
+- B ≥ 85%.
+- C ≥ 75%.
+- Zero erro repetido de [[correcoes]].
+- K2 e K3 com queda de 30% em relação à linha de base em até 3 meses depois do MVP.
+
+## 8. Cronograma (com 20% de folga incluída; recalibrar depois de cada inventário)
+| Fase | Data-alvo |
+|---|---|
+| 0. Preparação + termo aprovado | 2026-10-23 |
+| 1. Linha de base (A rodada 1, K1) | 2026-10-28 |
+| **2. MVP publicado + A rodada 2 (corte do C)** | **2026-11-04** |
+| 3. F1 monday | 2026-11-13 |
+| 3. F2 YouTrack (jan–out) + K2 a K4 retroativos | 2026-11-27 |
+| 4. Consolidação intermediária | 2026-12-02 |
+| 3. F3 Chats | 2026-12-11 |
+| 3. F4 Reuniões | 2026-12-18 |
+| 3. F5 Drive | 2027-01-15 (recesso de fim de ano considerado) |
+| 3. F6 Pipeline | depende da 0.7 |
+| 4. Consolidação final | 2027-01-20 |
+| 5. Medição final + relatório | 2027-01-27 |
+
+## 9. Capacidade (horas do usuário; o trabalho do Claude Code não entra)
+| Fase / fonte | Atividades do usuário | Estimativa | Real |
+|---|---|---|---|
+| 0 | Decisões + conversa com o patrocinador | 2 h | |
+| 1 | Revisar 30 perguntas (1 h) + rodar 60 chats (2 h) | 3 h | |
+| 2 MVP | Montar o projeto, fumaça, rodada 2 (60 chats) | 3–4 h | |
+| F1 monday | Aprovar inventário + validar ~80–150 cartões | 4–6 h | |
+| F2 YouTrack | Aprovar consulta + validar ~150–250 cartões | 8–12 h | |
+| F3 Chats | Aprovar inventário + validar | 6–10 h | |
+| F4 Reuniões | Aprovar inventário + validar | 4–8 h | |
+| F5 Drive | Aprovar inventário + validar | 4–6 h | |
+| 4 Consolidação | Decidir propostas e contradições | 3 h | |
+| 5 Medição final | ~140 chats (A + B + C, 2 vezes) + relatório | 5–6 h | |
+| **Total** | | **≈ 42–60 h em ~14 semanas ≈ 3–4,5 h/semana** | |
+
+**Regra:** se as horas reais de uma fonte passarem de 130% da estimativa, recalibrar as próximas e avisar o patrocinador sobre a nova data. Não cortar validação para recuperar prazo.
+
+## 10. Protocolo de sessão
+**Início:** colar [prompts/abrir-sessao.md](prompts/abrir-sessao.md). O Claude lê [[CLAUDE]], este plano e [[correcoes]], mostra o painel e confirma a fase/fonte, o critério de saída e os bloqueios.
 
 **Durante:**
 - Uma fase ou fonte por sessão.
-- Assunto novo vira Pendência (seção 11), não desvio.
+- Assunto novo vira Pendência (§13).
 - Na dúvida, perguntar.
-- Tarefas mecânicas (leitura em lote, formatação) vão para subagentes Sonnet/Haiku; o modelo principal coordena e revisa.
+- Tarefas mecânicas vão para subagentes Sonnet/Haiku; o modelo principal coordena e revisa.
 
 **Fim:**
 1. Métricas no inventário.
-2. Linha em [[log]].
-3. Painel atualizado.
-4. Commit + push (sem `raw/reunioes/` e `raw/drive/`).
-5. Resumo ao usuário: o que entrou, o que ficou em dúvida, próximo passo.
+2. Horas reais (§9).
+3. [[log]].
+4. Painel.
+5. Commit + push (sem `raw/reunioes/`, `raw/drive/`, `publicar/`).
+6. Resumo ao usuário: o que entrou, o que ficou em dúvida, próximo passo.
 
-## 9. Riscos e como tratamos
+## 11. Riscos e como tratamos
 | Risco | Mitigação |
 |---|---|
-| Volume grande (YouTrack desde jan, 712 itens no Artifacts) | Inventário primeiro; lotes por país/mês; subagentes para leitura |
-| Extração errada por IA (~15% de erro histórico em pesquisa estatutária) | Nível de evidência + validação humana de 100% dos de risco alto + reextração se confirmação < 95% |
-| Duplicação entre fontes (o mesmo caso em ticket, chat e RCA) | Chave `PAÍS | ARTEFATO | ITEM` |
-| Dados pessoais e de cliente | Não coletar docs nominais; `raw/reunioes` e `raw/drive` fora do git |
-| Alterar algo nas ferramentas da Mercans | Todas as coletas são **só leitura** (monday, Chrome, YouTrack) |
-| Brain que ninguém usa | Fase 4 obrigatória; medição no claude.ai |
+| **Adoção:** ninguém usa o brain | Termo aprovado pelo patrocinador; MVP no claude.ai em 2 semanas; relatório com números |
+| **Capacidade:** validação maior que o tempo do usuário | Estimativa por fonte, lotes de 40, limite de fila (2 lotes), recalibração em 130% |
+| **Vício do teste** (A/B dentro do projeto) | Conjunto C cego com quarentena + KPIs operacionais |
+| Variação do modelo | 2 rodadas por pergunta; divergência = instável |
+| Volume grande (YouTrack desde jan, 712 itens no Artifacts) | Inventário primeiro; lotes por país/mês; subagentes |
+| Extração errada por IA (~15% histórico) | Níveis de evidência + validação de 100% do risco alto + reextração abaixo de 95% |
+| Duplicação entre fontes | Chave `PAÍS | ARTEFATO | ITEM` |
+| Dados pessoais e da Mercans fora do controle | Bloqueios 0.1 e 0.2; `raw/reunioes`, `raw/drive` e `publicar/` fora do git; só leitura nas ferramentas |
+| Dependência de uma pessoa | Backup definido (0.11); protocolo e prompts escritos |
 
-## 10. Painel de progresso
-| Fase / fonte | Status | Cobertura | Confirmação | Última sessão | Próximo passo |
-|---|---|---|---|---|---|
-| 0. Preparação | 🔄 | — | — | 2026-10-19 | Responder 0.2–0.10 |
-| 1. Linha de base | ⏳ | — | — | — | Gerar o Conjunto A |
-| 2. F1 monday | ⏳ | 0/? | — | — | Inventário dos 6 boards |
-| 2. F2 YouTrack | ⏳ | 0/? | — | — | Depende de 0.6 |
-| 2. F3 Chats | ⏳ | 0/? | — | — | Depende de 0.5 |
-| 2. F4 Reuniões | ⏳ | 0/? | — | — | Depende de 0.5 |
-| 2. F5 Drive | ⏳ | 0/? | — | — | Depende de 0.5 e F1 (alvos) |
-| 2. F6 Pipeline | ⏳ | — | — | — | Depende de 0.7 |
-| 3. Consolidação | ⏳ | — | — | — | — |
-| 4. Publicação | ⏳ | — | — | — | Depende de 0.3 e 0.4 |
-| 5. Medição | ⏳ | — | — | — | — |
-| 6. Rotina | ⏳ | — | — | — | — |
+## 12. Painel de progresso
+| Fase / fonte | Status | Cobertura | Confirmação | Horas (est./real) | Última sessão | Próximo passo |
+|---|---|---|---|---|---|---|
+| 0. Preparação | 🔄 | — | — | 2 / | 2026-10-20 | Levar o termo ao patrocinador |
+| 1. Linha de base | ⏳ | — | — | 3 / | — | Gerar o Conjunto A |
+| 2. MVP | ⏳ | — | — | 3–4 / | — | Depois da Fase 1 |
+| 3. F1 monday | ⏳ | 0/? | — | 4–6 / | — | Inventário dos 6 boards |
+| 3. F2 YouTrack | ⏳ | 0/? | — | 8–12 / | — | Depende da 0.6 |
+| 3. F3 Chats | ⏳ | 0/? | — | 6–10 / | — | Depende de 0.2 e 0.5 |
+| 3. F4 Reuniões | ⏳ | 0/? | — | 4–8 / | — | Depende de 0.1, 0.2 e 0.5 |
+| 3. F5 Drive | ⏳ | 0/? | — | 4–6 / | — | Depende de 0.1, 0.2, 0.5 e F1 |
+| 3. F6 Pipeline | ⏳ | — | — | — | — | Depende da 0.7 |
+| 4. Consolidação | ⏳ | — | — | 3 / | — | — |
+| 5. Medição final | ⏳ | — | — | 5–6 / | — | — |
+| 6. Rotina | ⏳ | — | — | 20 min/sem | — | — |
 
-**Já feito (base):** estrutura e regras (2026-10-01); carga de 3 projetos do Claude + 58 tickets → 49 hubs e 67 correções (2026-10-02); fichas de 38 skills (2026-10-02); revisão de 2026-10-05 (37 propostas, 33 perguntas); repositório git privado (2026-10-08); modelo de construção v2, prompts de todas as fases e estrutura dos boards do monday levantada (2026-10-19).
+**Já feito (base):** estrutura e regras (2026-10-01); carga de 3 projetos do Claude + 58 tickets → 49 hubs e 67 correções (2026-10-02); fichas de 38 skills (2026-10-02); revisão de 2026-10-05 (37 propostas, 33 perguntas); repositório git privado (2026-10-08); modelo v2 com prompts de todas as fases e estrutura dos boards do monday (2026-10-19); modelo v3 com governança, MVP, medição em três camadas e capacidade, mais o termo de abertura (2026-10-20).
 
-## 11. Pendências fora do roteiro
-- **Third-party payroll software** (critério do checklist CT-4321) e **alertas legislativos**: viram itens de qualidade em [[research-pipeline]]/[[design]] depois de F1. Perguntas: qual software, em que etapa, qual saída.
+## 13. Pendências fora do roteiro
+- **Third-party payroll software** (critério do checklist CT-4321) e **alertas legislativos**: viram itens de qualidade em [[research-pipeline]]/[[design]] depois do F1. Perguntas: qual software, em que etapa, qual saída.
 - **Cadeia para frente** (o board Artifacts usa as fases Research → Design → Development → Deployment): uma linha em [[research-pipeline]] e o limite em [[fronteiras]].
 - O script do YouTrack usa `for: me` por padrão; para o histórico do time, ver [prompts/extracao-youtrack.md](prompts/extracao-youtrack.md).
 - Abrir a pasta como vault no Obsidian (opcional).

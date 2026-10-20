@@ -1,7 +1,7 @@
 # Extração: {{fonte}} ({{AAAA-MM-DD}})
 
 > Arquivo: `extracoes/AAAA-MM-DD-<fonte>[-<lote>].md`. Um cartão por item. Só entra o que muda a resposta certa.
-> Material bruto: `raw/<fonte>/...` · Inventário: `inventarios/<fonte>.md` · Padrão: [[PLANO]] §3 (níveis A/B/C/D) e §4 (validação).
+> Material bruto: `raw/<fonte>/...` · Inventário: `inventarios/<fonte>.md` · Padrão: [[PLANO]] §4 (níveis A/B/C/D) e §5 (validação, lotes de até 40).
 
 ## Resumo
 - Itens do inventário neste lote: N · Cartões: N · Complementos de cartão existente: N · Descartados: N

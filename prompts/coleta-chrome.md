@@ -1,12 +1,12 @@
 # Prompt: coleta com Claude in Chrome (F3 chats, F4 reuniões, F5 Drive)
 
-> Usar no Claude Code com o Chrome conectado (`/chrome`). Plano: [[PLANO]] §3, §4, §5.
-> Pré-requisitos: decisões 0.1 e 0.5. Escopo: **2026-01-01 até a data da coleta**.
+> Usar no Claude Code com o Chrome conectado (`/chrome`). Plano: [[PLANO]] §3 (bloqueios), §4, §5, §6 Fase 3.
+> Pré-requisitos: decisões 0.2 e 0.5 (F3); 0.1, 0.2 e 0.5 (F4, F5). Escopo: **2026-01-01 até a data da coleta**.
 
 ## Regras para o Claude (valem para F3, F4 e F5)
 - **Só leitura.** Não editar, mover, renomear, comentar, compartilhar nem apagar nada (Drive, Docs, Meet, claude.ai). Não enviar mensagem em conversa existente do claude.ai.
 - **Inventário antes de baixar.** Listar tudo do período em `inventarios/<fonte>.md` ([modelos/inventario.md](../modelos/inventario.md)) e **esperar o ok**.
-- **Só o que está no catálogo** ([[PLANO]] §5 F2). Na dúvida se um item entra, ele vai para o inventário como "pendente: perguntar".
+- **Só o que está no catálogo** ([[PLANO]] §6 Fase 3). Na dúvida se um item entra, ele vai para o inventário como "pendente: perguntar".
 - **Sem dados pessoais** de funcionários de clientes. Arquivo nominal (holerite, ficha, "Nome | País | ID") → pular e anotar "descartado: dado pessoal".
 - **Não baixar artefatos completos** (CCG, WTC, DD, Specs inteiros). O conteúdo estatutário já está nas skills.
 - **Texto fiel:** copiar o conteúdo como está (sem resumir) para `raw/`. A extração acontece depois, em cartões.
@@ -19,7 +19,7 @@
    - Conversa muito longa: copiar em partes (`...-parte1.md`, `-parte2.md`).
    - Alternativa, se estiver liberada: Settings → Privacy → Export data (todas as conversas num arquivo). Nesse caso, salvar o export em `raw/chats/export-AAAA-MM-DD/` e filtrar pelo inventário.
 3. **Extração:** aqui no Claude Code, cada conversa vira cartões ([modelos/extracao.md](../modelos/extracao.md)), usando as seções de [extracao-conversa.md](extracao-conversa.md) como roteiro (decisões, correções, versões, pendências). Nível C, salvo quando a conversa cita fonte A ou um artefato versionado (B). Subagentes Sonnet por lote de conversas.
-4. Validação → ingestão → Conjunto B → métricas → log/commit ([[PLANO]] §5).
+4. Validação → ingestão → Conjunto B → métricas → log/commit ([[PLANO]] §6 Fase 3).
 
 ## F4: Reuniões
 1. **Inventário:** no Drive, buscar `Transcript`, `Transcrição`, `Notes by Gemini`, `Anotações do Gemini`, `Meeting notes`, e a pasta `Meet Recordings`, de 2026-01-01 até hoje. Listar: `data | título | participantes (só papéis/times) | link | tipo (transcrição/notas)`.

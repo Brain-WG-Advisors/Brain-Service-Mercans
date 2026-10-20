@@ -1,7 +1,7 @@
 # Prompt: F1, extração do monday
 
 > Usar no Claude Code (conector monday, **só leitura**: nunca criar, editar, mover ou comentar itens).
-> Escopo: itens criados ou atualizados de 2026-01-01 até a data da coleta. Plano: [[PLANO]] §3, §4, §5 F1.
+> Escopo: itens criados ou atualizados de 2026-01-01 até a data da coleta. Plano: [[PLANO]] §4, §5, §6 Fase 3 (F1). Também gera o KPI K1 (§7).
 > Estrutura dos boards levantada em 2026-10-19 (pode ter mudado; conferir com `get_board_info` no início).
 
 ## Boards, nesta ordem

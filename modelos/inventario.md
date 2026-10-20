@@ -1,7 +1,7 @@
 # Inventário: {{fonte}}
 
-> Arquivo: `inventarios/<fonte>.md`. Lista **completa** do período, feita **antes** da extração ([[PLANO]] §4).
-> Todo item termina como **cartão** (ID), **descartado** (motivo) ou **pendente** (por quê).
+> Arquivo: `inventarios/<fonte>.md`. Lista **completa** do período, feita **antes** da extração ([[PLANO]] §5).
+> Todo item termina como **cartão** (ID), **descartado** (motivo), **pendente** (por quê) ou **quarentena C** (ticket reservado para o teste cego; ingerido só depois da medição final).
 
 ## Escopo
 - Fonte: {{board/consulta/pasta/projeto}} · Período: 2026-01-01 → {{AAAA-MM-DD}}

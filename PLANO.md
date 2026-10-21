@@ -23,7 +23,7 @@ Pipeline ───────┘              testes/       medição (A, B, C 
 - Conhecimento que fica só na oficina **não conta como entregue**. Desde o MVP, toda fonte concluída é publicada.
 
 ## 3. Governança
-**Termo de abertura** ([TERMO-DE-ABERTURA.md](TERMO-DE-ABERTURA.md)): objetivo, escopo, metas, uso de dados e papéis, **aprovado pelo patrocinador antes da Fase 1**.
+**Termo de abertura** ([TERMO-DE-ABERTURA.md](TERMO-DE-ABERTURA.md) · em inglês: [TERMO-DE-ABERTURA-EN.md](TERMO-DE-ABERTURA-EN.md)): objetivo, escopo, metas, uso de dados e papéis, **aprovado pelo patrocinador antes da Fase 1**.
 
 | Atividade | Patrocinador (chefe) | Dono do brain (usuário) | Claude Code | Dono das skills (0.3) |
 |---|---|---|---|---|
@@ -100,14 +100,14 @@ Prompt: [prompts/fase-1-linha-de-base.md](prompts/fase-1-linha-de-base.md)
 **Saída:** `testes/exatidao.md` com a rodada 1; `testes/kpis.md` com o K1.
 
 ### Fase 2: MVP, publicar o que já existe (até 1 semana depois da Fase 1)
-Prompts: [prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) + [prompts/projeto-claude-ai.md](prompts/projeto-claude-ai.md)
+Prompts: [prompts/publicacao.md](prompts/publicacao.md) + [prompts/projeto-claude-ai.md](prompts/projeto-claude-ai.md) + [prompts/fase-5-medicao.md](prompts/fase-5-medicao.md) Partes 1–2 (rodada 2 do A)
 1. Corrigir o que for bloqueante no pacote atual (67 correções, 49 hubs, serviços, fronteiras): dado sensível, links para `raw/`, contradição de risco alto.
 2. Montar o **Projeto "Brain Service"** no claude.ai (instruções + pacote) e passar no **teste de fumaça** (5/5).
 3. **Rodada 2 do Conjunto A** com o projeto. Primeiro resultado para o patrocinador.
 4. **A data do MVP vira a data de corte do Conjunto C** (§7).
 5. Liberar o uso pelo time e pelo patrocinador.
 
-**Saída:** projeto em uso, rodada 2 registrada e relatório curto (1 parágrafo + tabela) ao patrocinador.
+**Saída:** projeto em uso, rodada 2 registrada e relatório curto ao patrocinador ([modelos/relatorio-patrocinador.md](modelos/relatorio-patrocinador.md)).
 
 ### Fase 3: Coleta (uma fonte por ciclo, nesta ordem)
 | # | Fonte | Prompt | Volume conhecido | Destino bruto | Bloqueio |
@@ -117,7 +117,7 @@ Prompts: [prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) + [prompts
 | F3 | Chats do claude.ai | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F3 | A medir | `raw/chats/conversas/` | 0.2, 0.5 |
 | F4 | Reuniões | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F4 | A medir | `raw/reunioes/` (fora do git) | 0.1, 0.2, 0.5 |
 | F5 | Drive | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F5 (alvos do F1) | A medir | `raw/drive/` (fora do git) | 0.1, 0.2, 0.5 |
-| F6 | Pipeline | A escrever depois da 0.7 | — | `raw/pipeline/` | 0.7 |
+| F6 | Pipeline | [prompts/extracao-pipeline.md](prompts/extracao-pipeline.md) (3 cenários, conforme a 0.7) | — | `raw/pipeline/` | 0.7 |
 
 **Ciclo de cada fonte:**
 1. Inventário.
@@ -132,17 +132,20 @@ Prompts: [prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) + [prompts
 **Saída de cada fonte:** cobertura de 100%, confirmação ≥ 95%, ingerido **e publicado**.
 
 ### Fase 4: Consolidação (depois de F2 e no fim da coleta)
+Prompt: [prompts/fase-4-consolidacao.md](prompts/fase-4-consolidacao.md)
 1. Propostas de risco alto de [revisoes/2026-10-05-revisao.md](revisoes/2026-10-05-revisao.md) que ainda valem.
 2. "Revisa o cérebro" e resolução das contradições.
-3. Lista, por país, das correções que ainda não estão na skill → pacotes ([prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) Passo 3).
+3. Lista, por país, das correções que ainda não estão na skill → pacotes ([prompts/publicacao.md](prompts/publicacao.md) Passo 3).
 
 ### Fase 5: Medição final
+Prompt: [prompts/fase-5-medicao.md](prompts/fase-5-medicao.md) · Relatório: [modelos/relatorio-patrocinador.md](modelos/relatorio-patrocinador.md)
 1. Rodar A, B e C (2 vezes cada pergunta) com o projeto e as skills atualizadas.
 2. KPIs K1 a K4: período posterior ao MVP × linha de base de jan–out/2026.
 3. Cada ❌ ou ⚠️ instável: causa (falta no brain / falta na skill / erro do modelo / gabarito) → ação com dono e data.
 4. **Relatório de uma página** para o patrocinador, com a decisão: manter e escalar / ajustar / encerrar.
 
 ### Fase 6: Rotina (~20 min por semana)
+Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 - YouTrack desde a última data → ciclo F2 reduzido. Tickets novos alimentam o Conjunto C enquanto ele não tiver 20 perguntas.
 - monday: itens novos ou alterados no RCA e nos alertas.
 - "fechei o ticket X" (KCS) a cada entrega.
@@ -259,7 +262,7 @@ Prompts: [prompts/fase-4-publicacao.md](prompts/fase-4-publicacao.md) + [prompts
 | 5. Medição final | ⏳ | — | — | 5–6 / | — | — |
 | 6. Rotina | ⏳ | — | — | 20 min/sem | — | — |
 
-**Já feito (base):** estrutura e regras (2026-10-01); carga de 3 projetos do Claude + 58 tickets → 49 hubs e 67 correções (2026-10-02); fichas de 38 skills (2026-10-02); revisão de 2026-10-05 (37 propostas, 33 perguntas); repositório git privado (2026-10-08); modelo v2 com prompts de todas as fases e estrutura dos boards do monday (2026-10-19); modelo v3 com governança, MVP, medição em três camadas e capacidade, mais o termo de abertura (2026-10-20).
+**Já feito (base):** estrutura e regras (2026-10-01); carga de 3 projetos do Claude + 58 tickets → 49 hubs e 67 correções (2026-10-02); fichas de 38 skills (2026-10-02); revisão de 2026-10-05 (37 propostas, 33 perguntas); repositório git privado (2026-10-08); modelo v2 com prompts de todas as fases e estrutura dos boards do monday (2026-10-19); modelo v3 com governança, MVP, medição em três camadas e capacidade, mais o termo de abertura (2026-10-20); prompts das Fases 4, 5 e 6 e da F6, modelo de relatório ao patrocinador e termo em inglês (2026-10-21) → **todas as fases têm prompt**.
 
 ## 13. Pendências fora do roteiro
 - **Third-party payroll software** (critério do checklist CT-4321) e **alertas legislativos**: viram itens de qualidade em [[research-pipeline]]/[[design]] depois do F1. Perguntas: qual software, em que etapa, qual saída.

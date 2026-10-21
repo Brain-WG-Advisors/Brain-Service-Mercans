@@ -24,7 +24,7 @@ Tamanho em 2026-10-19: cerca de 70 mil palavras (cabe no conhecimento de um Proj
 Fase 4 do PLANO: publicação no claude.ai.
 
 PASSO 1. Pré-checagem do pacote
-- Confira se os arquivos do pacote (tabela "Sobe" de prompts/fase-4-publicacao.md) não têm: dado pessoal de
+- Confira se os arquivos do pacote (tabela "Sobe" de prompts/publicacao.md) não têm: dado pessoal de
   funcionário de cliente, token/chave, link para raw/ ou para extracoes/ (troque por "fonte: <ticket/doc>").
 - Confira se correcoes.md e os hubs estão coerentes (resultado da Fase 3). Liste o que bloquear.
 - Meça palavras e arquivos. Se GitHub (0.4) = sim: diga quais pastas selecionar no "Add content → GitHub".

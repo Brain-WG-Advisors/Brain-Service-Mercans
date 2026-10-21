@@ -1,8 +1,8 @@
 # Instruções do Projeto "Brain Service" no claude.ai
 
-> O que é: o texto que vai no campo **Instructions** do Projeto "Brain Service" no claude.ai (Fase 4 do [[PLANO]]).
+> O que é: o texto que vai no campo **Instructions** do Projeto "Brain Service" no claude.ai (Fase 2, MVP, do [[PLANO]]).
 > Está em inglês porque o projeto pode ser usado pelo time internacional; o Claude responde no idioma de quem pergunta.
-> Arquivos do conhecimento do projeto: ver [fase-4-publicacao.md](fase-4-publicacao.md).
+> Arquivos do conhecimento do projeto: ver [publicacao.md](publicacao.md).
 > Toda mudança neste texto entra no [[log]] e é seguida de uma rodada de fumaça (5 perguntas).
 
 ---

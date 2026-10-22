@@ -1,7 +1,7 @@
 # Prompt: coleta com Claude in Chrome (F3 chats, F4 reuniões, F5 Drive)
 
-> Usar no Claude Code com o Chrome conectado (`/chrome`). Plano: [[PLANO]] §3 (bloqueios), §4, §5, §6 Fase 3.
-> Pré-requisitos: decisões 0.2 e 0.5 (F3); 0.1, 0.2 e 0.5 (F4, F5). Escopo: **2026-01-01 até a data da coleta**.
+> Usar no Claude Code com o Chrome conectado (`/chrome`). Plano: [[PLANO]] §3 (limites de uso de dados), §4, §5, §6 Fase 3.
+> Pré-requisito: extensão Claude in Chrome conectada (0.5). Escopo: **2026-01-01 até a data da coleta**.
 
 ## Regras para o Claude (valem para F3, F4 e F5)
 - **Só leitura.** Não editar, mover, renomear, comentar, compartilhar nem apagar nada (Drive, Docs, Meet, claude.ai). Não enviar mensagem em conversa existente do claude.ai.

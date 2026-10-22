@@ -32,6 +32,6 @@ Rotina mensal do Brain Service.
    no Projeto. Os ❌ viram ação (prompts/fase-5-medicao.md, Parte 2, passo 3).
 3. "Revisa o cérebro" (lint de prompts/fase-4-consolidacao.md, Passo 2): só o relatório, aplicação depois da aprovação.
 4. Pacotes de skill pendentes há mais de 30 dias: lista para cobrar o dono das skills.
-5. Relatório de meia página ao patrocinador (modelos/relatorio-patrocinador.md, versão curta), se ele pediu acompanhamento mensal.
+5. Relatório de meia página à liderança (modelos/relatorio-lideranca.md, versão curta), se ela pediu acompanhamento mensal.
 6. log.md, painel, commit + push.
 ```

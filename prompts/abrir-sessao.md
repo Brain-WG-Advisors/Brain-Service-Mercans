@@ -18,7 +18,7 @@ Regras desta sessão:
 - Uma fase/fonte só. Assunto novo → PLANO §13, não desvio.
 - Padrão de dado sólido (PLANO §4): todo cartão com nível A/B/C/D, chave PAÍS | ARTEFATO | ITEM e caminho em raw/.
 - Inventário antes de extrair (PLANO §5). Nada é ingerido sem a minha validação (100% dos de risco alto + 10% dos demais), em lotes de até 40; com mais de 2 lotes na fila, a coleta para.
-- Respeite os bloqueios de governança (PLANO §3): sem 0.2 não há F3–F5; sem 0.1 não há F4–F5.
+- Limites de uso de dados (PLANO §3): só leitura, sem dados pessoais, material sensível fora do git.
 - Só leitura nas ferramentas da Mercans (monday, Chrome, YouTrack).
 - Na dúvida, pergunte. Não complete lacunas.
 - Tarefas mecânicas em subagentes Sonnet/Haiku; você coordena e revisa.

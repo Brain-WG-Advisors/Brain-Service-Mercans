@@ -1,6 +1,6 @@
 # Brain Service: relatório {{MVP | fonte <X> concluída | medição final}} ({{AAAA-MM-DD}})
 
-> Para o patrocinador. Uma página. Sem jargão interno. Dados: `testes/exatidao.md`, `testes/kpis.md`.
+> Para a liderança. Uma página. Sem jargão interno. Dados: `testes/exatidao.md`, `testes/kpis.md`.
 
 ## Em uma frase
 {{ex.: "Com o Brain Service, o claude.ai passou a acertar 28 de 30 perguntas sobre erros que já tínhamos cometido (antes: 17) e 16 de 20 casos novos que ele nunca tinha visto."}}

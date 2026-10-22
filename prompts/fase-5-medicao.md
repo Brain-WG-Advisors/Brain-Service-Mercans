@@ -42,8 +42,8 @@ Depois:
 ```
 1. Atualize testes/kpis.md até o mês corrente. Compare: linha de base (2026-01 a 2026-10) × meses após o MVP.
    Atenção a efeito sazonal (ex.: fim de ano fiscal) e a mudanças de volume: mostre também os valores absolutos.
-2. Preencha modelos/relatorio-patrocinador.md → rascunhos/AAAA-MM-DD-relatorio-<final|mvp>.md.
-   Recomendação ao patrocinador, com base nas metas da 0.8:
+2. Preencha modelos/relatorio-lideranca.md → rascunhos/AAAA-MM-DD-relatorio-<final|mvp>.md.
+   Recomendação à liderança, com base nas metas da 0.8:
    - metas atingidas → MANTER E ESCALAR (rotina + próximos países/skills);
    - A ok e C abaixo da meta → AJUSTAR (o brain sabe o que viu, mas não generaliza: revisar instruções e cobertura);
    - A abaixo da meta → CORRIGIR PUBLICAÇÃO (o conhecimento não está chegando: sync, instruções, skills);

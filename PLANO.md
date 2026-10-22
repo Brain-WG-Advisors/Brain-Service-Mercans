@@ -78,14 +78,14 @@ Nenhuma fonte é extraída sem a **lista completa do período** em `inventarios/
 | 0.0 | **Termo de abertura aprovado pelo patrocinador** | Chefe | ⏳ |
 | 0.1 | Ok para coletar transcrições e Drive pelo Claude in Chrome | **Chefe** (o usuário já é a favor, desde 2026-10-19) | ⏳ |
 | 0.2 | Repositório `ViniCerqueira/brain-service` (privado, conta pessoal) fica lá ou vai para uma conta da Mercans? | Chefe / usuário | ⏳ **bloqueia F3–F5** |
-| 0.3 | Quem publica e atualiza as skills `payroll-compliance-*` no claude.ai da Mercans | Usuário | ⏳ |
-| 0.4 | A integração do GitHub está liberada nos Projetos do claude.ai? | Usuário | ⏳ |
-| 0.5 | Extensão Claude in Chrome instalada e logada; `/chrome` conecta no Claude Code | Usuário | ⏳ |
-| 0.6 | Nome da variável do token do YouTrack no `.env` (só o nome) | Usuário | ⏳ |
-| 0.7 | Onde estão o pipeline e as saídas das execuções | Usuário | ⏳ |
+| 0.3 | Quem publica e atualiza as skills `payroll-compliance-*` no claude.ai da Mercans | Usuário | ✅ **o próprio usuário** (2026-10-22): os pacotes de skill da Fase 4 são aplicados por ele |
+| 0.4 | A integração do GitHub está liberada nos Projetos do claude.ai? | Usuário | 🔄 não sabe (2026-10-22). Verificar: Projeto → "+" / Add content → aparece GitHub? Se não aparecer, o MVP usa upload |
+| 0.5 | Extensão Claude in Chrome instalada e logada; `/chrome` conecta no Claude Code | Usuário | 🔄 extensão instalada (2026-10-22); falta testar o `/chrome` no Claude Code |
+| 0.6 | Nome da variável do token do YouTrack no `.env` (só o nome) | Usuário | ✅ `YOUTRACK_TOKEN` (2026-10-22), que é o padrão do script |
+| 0.7 | Onde estão o pipeline e as saídas das execuções | Usuário | 🔄 pergunta reformulada em 2026-10-22 (em qual computador/pasta ou repositório estão os scripts e onde ficam os arquivos que eles geram) |
 | 0.8 | Metas (§7). Proposta no termo | Chefe | ⏳ proposta |
 | 0.9 | Escopo de países: ~80 grupos no board Compliance Artifacts × 49 hubs | Chefe / usuário | ⏳ |
-| 0.10 | O board de alertas `18227732675` parou em 2026-06-06. Existe um mais novo? | Usuário | ⏳ |
+| 0.10 | O board de alertas `18227732675` parou em 2026-06-06. Existe um mais novo? | Usuário | ✅ não: o acompanhamento de alertas parou em 2026-06-06 (2026-10-22). Lacuna registrada no §13 |
 | 0.11 | Backup do dono do brain (quem mantém na ausência do usuário) | Chefe / usuário | ⏳ |
 
 **Saída:** 0.0, 0.3, 0.6 e 0.9 respondidos. Os outros seguem em paralelo, respeitando os bloqueios do §3.
@@ -265,6 +265,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 **Já feito (base):** estrutura e regras (2026-10-01); carga de 3 projetos do Claude + 58 tickets → 49 hubs e 67 correções (2026-10-02); fichas de 38 skills (2026-10-02); revisão de 2026-10-05 (37 propostas, 33 perguntas); repositório git privado (2026-10-08); modelo v2 com prompts de todas as fases e estrutura dos boards do monday (2026-10-19); modelo v3 com governança, MVP, medição em três camadas e capacidade, mais o termo de abertura (2026-10-20); prompts das Fases 4, 5 e 6 e da F6, modelo de relatório ao patrocinador e termo em inglês (2026-10-21) → **todas as fases têm prompt**.
 
 ## 13. Pendências fora do roteiro
+- **Alertas legislativos sem acompanhamento desde 2026-06-06** (0.10): o único board parou. A F1 coleta os 42 itens existentes, e a lacuna de jun–out precisa de um processo novo (proposta depois da F1: rotina de alertas por país, com o pipeline/Stage 1 como motor, ver a pendência abaixo).
 - **Third-party payroll software** (critério do checklist CT-4321) e **alertas legislativos**: viram itens de qualidade em [[research-pipeline]]/[[design]] depois do F1. Perguntas: qual software, em que etapa, qual saída.
 - **Cadeia para frente** (o board Artifacts usa as fases Research → Design → Development → Deployment): uma linha em [[research-pipeline]] e o limite em [[fronteiras]].
 - O script do YouTrack usa `for: me` por padrão; para o histórico do time, ver [prompts/extracao-youtrack.md](prompts/extracao-youtrack.md).

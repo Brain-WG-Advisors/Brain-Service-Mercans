@@ -8,11 +8,12 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs", incluindo as 3
 ## Arquivos
 | Arquivo | O que é |
 |---|---|
-| `Taiwan Tax Report Spec_v1.3.xlsx` | Spec v1.3 (md5 `50a250e88eb8ae6a2a37578115d4398b`) |
-| `edits_v1_3.py` | As 48 células alteradas (valor e se quebra linha) |
+| `Taiwan Tax Report Spec_v1.3.xlsx` | Spec v1.3 (md5 `32cd0a803dd3ca530d693727df11e572`, rodada 2; rodada 1 era `50a250e8…`) |
+| `edits_v1_3.py` | As células alteradas (rodada 1 + bloco `R2` da rodada 2), valor e se quebra linha |
 | `build_v1_3.py` | Geração por XML + zip: só `styles.xml` (fill `FFDDEBF7` e 21 xf acrescentados no fim) e `sheet1/2/3.xml` mudam; as outras 26 partes copiadas byte a byte |
 | `verify_v1_3.py` → `comparacao_celula_a_celula.txt` | Comparação base × v1.3: partes do zip, XML com as células editadas mascaradas, célula a célula em todas as abas (valor, fill, fonte, borda, formato, alinhamento, proteção), mesclagens e validações |
-| `validacao_toolkit.txt` | `mercans-artifact-toolkit/scripts/validate_workbook.py` na base e na v1.3 |
+| `validacao_toolkit.txt` / `validacao_toolkit_rodada2.txt` | `mercans-artifact-toolkit/scripts/validate_workbook.py` na base e na v1.3 (rodadas 1 e 2) |
+| `REVISAO-independente.md` | Revisão independente da rodada 1 (achados 1–9) |
 
 Base: `raw/docs/drive-exports/2026-10-27/Taiwan Tax Report Spec.xlsx` (md5 `8b19384f…`; conteúdo célula a célula igual ao export de 23/10). Para refazer: `python -I -X utf8 build_v1_3.py <base> <saída>` e `python -I -X utf8 verify_v1_3.py <base> <saída> <log>`.
 
@@ -37,11 +38,11 @@ Diff do texto dos itens (二)各欄項內容 feito por script e lido por mim:
 ## Decisões
 1. Correções em H (mapeamento) e J (descrição RA); nas colunas K/L (BA) só onde o mapeamento antigo estava ali (K10, K11, K22, K34, L34): texto "Superseded in v1.3, see H…" com o valor anterior citado (não se perde histórico).
 2. Report Matrix: B:C é mesclado, então as regras foram para a coluna B. B6 ("Annual/Monthly") e B10 mantidos (lista de validação); B7 "XLSX" → "TXT" (está na lista; o U8 é texto). A regra residente anual × não residente por pagamento está em B5 e B9.
-3. Version Control: linha 14 = 1.3 | 2026-10-27 | resumo | **Draft** | Wallisson Gomes. ⚠️ "Draft" não está na lista de validação de E13:E23 ("In Progress, Under Review, Approved"); gravado como pedido. Linhas 1.1/1.2 (propostas na análise) não criadas: o pedido foi só a linha 1.3.
+3. Version Control: linha 14 = 1.3 | 2026-10-27 | resumo | **Under Review** (rodada 2; "Draft" estava fora da validação E13:E23) | Wallisson Gomes. Linhas 1.1/1.2 (propostas na análise) não criadas: o pedido foi só a linha 1.3.
 4. Abas Testing/Testing1 **não tocadas** (comparação confirma 0 diferença). Os erros delas (X1 vírgula/33 campos, X11 "1: electronic", X12 UBN) ficam registrados aqui e na B16 ("pre-v1.3 test record").
 5. Variáveis que não existem no DD (data de pagamento, admissão/desligamento, endereço do empregador, país de residência, TIN estrangeiro, código de tratado, nome chinês) escritas como `<…>` + "TO BE CONFIRMED BY MOHIT/BA". Nada inventado.
 
-## Antes → depois (48 células)
+## Antes → depois (rodada 1: 48 células; ver Rodada 2 abaixo)
 | Aba | Nº | Células |
 |---|---|---|
 | Version Control | 5 | B14:F14 |
@@ -77,6 +78,7 @@ Diff do texto dos itens (二)各欄項內容 feito por script e lido por mim:
 4. Variáveis: data de pagamento (H18, H33), admissão/desligamento (H21), endereço do empregador (H20), país de residência (H30 — o país do endereço pode ser Taiwan), TIN estrangeiro (H34), código de tratado (H31), nome chinês (H19).
 5. Nome da função de zero-pad e se o contador do não residente é por arquivo ou por ano no mesmo UBN (J4).
 6. Report Code (RM B4).
+7. (rodada 2) 62640:62649 "Pension" e 62930 "Gratuity/EOS/Post-termination": formato 93 ou 50 (J7); função FULLWIDTH (J20) e de largura do nome (J19); variável do contador do não residente por UBN no ano (J4).
 
 ## Conferência
 - `comparacao_celula_a_celula.txt`: **PASS** — 48 células editadas, todas com o valor pretendido, fill `FFDDEBF7`, fonte/borda/formato mantidos; **0 diferença fora do escopo** em todas as 6 abas (Version Control 1004×26, Report Matrix 17×3, Spec 991×26, Testing1, Testing, Options); 26 partes do zip idênticas; `sheet1/2/3.xml` idênticos à base com as células editadas mascaradas; `styles.xml` só com acréscimos (fills 9→10, cellXfs 87→108); mesclagens e validações iguais.
@@ -97,7 +99,27 @@ Diff do texto dos itens (二)各欄項內容 feito por script e lido por mim:
 4. Spec J5 ainda cita "page 181 do 112年度…" (campo 3 está certo; só a referência é antiga).
 5. Prazo do 扣繳憑單 ao empregado: ITA art. 92 atual = 10/02, **15/02** se janeiro tiver 3+ feriados (análise de 23/10 só citava 10/02).
 
+## Rodada 2 (2026-10-27): achados 1–9 da revisão independente
+Cada item relido no 要點 1141210 (texto extraído; páginas do PDF). Rodada 1 × rodada 2: **22 células** (VC 1, Spec 21). Base × v1.3 final: **60 células** (VC 5, RM 10, Spec 45).
+
+| # | Célula(s) | Antes (rodada 1) | Depois | Fonte |
+|---|---|---|---|---|
+| 1 | H4, J4 | residente `LPAD(row;8;'0')` = "00000001", igual ao do não residente | residente `CONCAT('01'; LPAD(row;6;'0'))` (nunca "00"; sem letra na posição 1, reservada ao 檔案識別碼 A–Y); não residente `'00'` + contador único por UBN no ano (não reinicia por arquivo); TBC (função e variável do contador) em J4 | 要點 114 item 2 (PDF p.24): "非居住者…前２位固定為「００」"; "申報單位統一編號相同時流水號不可重複"; "流水號第1碼應為英文字母大寫A~Y表示之「檔案識別碼」" |
+| 2 | H19, J19, H20, J20 | "all full-width or all half-width" + CONCAT de larguras mistas; TBC no H | H19: nome chinês convertido inteiro para full-width; nome do passaporte inteiro half-width. H20: `FULLWIDTH(CONCAT(...))`, CEP incluído (ex.: １００). TBC (função, campo do nome chinês, endereço do empregador) movido para J19/J20 | 參.三.(三) nota 2 (PDF p.32): "此欄位須全部為全形或全部為半形"; itens 15–16 (PDF p.29) |
+| 3 | H7, J7, H10, H11, H22 | H7 vazio | H7: um registro por formato; '93' = 62180:62182 (únicas PEs com Severance Tax = Yes no WTC V2.8, conferido por script nas abas WTC e Wage Type Catalogue); '50' = demais contas de H10; empregado com os dois gera 2 registros. H10/H11/H22 começam com "Format per H7". J7: TBC sobre 62640:62649 "Pension" e 62930 "Gratuity/EOS/Post-termination" (tributadas por tabela no WTC; ITA art. 14 cat. 9 inclui 退休金、資遣費、退職金、離職金 no 退職所得) | 要點 114 item 5 (PDF pp.24–26, 【５０】/【９３】); ITA art. 14 (HTML local) |
+| 4 | VC!E14 | "Draft" | "Under Review" (na lista) | validação E13:E23 |
+| 5 | I22 | "Applies to retirement payments only" | contribuição voluntária do empregado, só formato 50, vazio no 93 | item 18(1) |
+| 6 | L10, L11 | "Non-resident: Monthly…" | "Superseded in v1.3, see H10/H11" + texto anterior | ITA art. 92 §2; item 25 |
+| 7 | G31 | "TW" | "(blank)" | item 23 (anexo 42 ou vazio) |
+| 8 | D18, D21, D28, D33 | Numeric(3/10/1/4) | Alphanumeric(3/10/1/4) | tabela de campos (PDF p.13–14): 16 X3, 19 X10, 26 X1, 31 X4 |
+| 9 | J5, J8 | "page 181 of 112…", "Page 179" | 要點 114 item 3 (PDF p.24) + anexo 7/7-1 (pp.188–189); item 6 (PDF p.27) + anexo 6/6-1 (pp.186–187) | páginas conferidas no PDF 114 |
+
+**Conferência rodada 2:** `comparacao_celula_a_celula.txt` (seções 1–4) **PASS**: 60 células com valor pretendido e `FFDDEBF7`, 0 diferença fora do escopo em todas as abas; 26 partes do zip idênticas; `sheet1/2/3.xml` idênticos à base com as células mascaradas; `styles.xml` só com acréscimos (fills 9→10, cellXfs 87→111); 4 partes alteradas well-formed. Seção 4 = rodada 1 × rodada 2 (só as 22 células acima). Toolkit C29: 15 marcadores "TO BE CONFIRMED" intencionais + 1 pré-existente (Testing!G21).
+
+**Novos TO BE CONFIRMED BY MOHIT/BA (rodada 2):** 62640:62649 e 62930 em 93 ou 50; função FULLWIDTH; variável do contador do não residente. Amostras G18/G21 continuam numéricas (fora dos achados; não alteradas).
+
 ## Linhas por frente
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-10-27 | Suporte (construtor D) | v1.3 gerada (48 células, 要點 114), comparação célula a célula PASS, comentario.md em rascunho; nada enviado nem copiado para o Drive |
+| 2026-10-27 | Suporte (construtor D, rodada 2) | achados 1–9 da revisão independente corrigidos (22 células; total 60), comparação PASS, md5 `32cd0a80…`; comentario.md atualizado; nada enviado |

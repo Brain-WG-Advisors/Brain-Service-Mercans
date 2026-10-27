@@ -9,11 +9,11 @@ base parts 30, new parts 30, same order: True
   xl/drawings/drawing4.xml: identical md5 ffdabb5a -> ffdabb5a
   xl/drawings/drawing5.xml: identical md5 ffdabb5a -> ffdabb5a
   xl/drawings/drawing6.xml: identical md5 ffdabb5a -> ffdabb5a
-  xl/worksheets/sheet1.xml: CHANGED md5 00cf2981 -> 698dbb4d
+  xl/worksheets/sheet1.xml: CHANGED md5 00cf2981 -> 758ac65c
   xl/worksheets/_rels/sheet1.xml.rels: identical md5 6b742692 -> 6b742692
   xl/worksheets/sheet2.xml: CHANGED md5 98168e44 -> 51ec6968
   xl/worksheets/_rels/sheet2.xml.rels: identical md5 e26ecef6 -> e26ecef6
-  xl/worksheets/sheet3.xml: CHANGED md5 e7b1c719 -> 585d1b5e
+  xl/worksheets/sheet3.xml: CHANGED md5 e7b1c719 -> f7716d3d
   xl/worksheets/_rels/sheet3.xml.rels: identical md5 c20286e6 -> c20286e6
   xl/worksheets/sheet4.xml: identical md5 917c4660 -> 917c4660
   xl/worksheets/_rels/sheet4.xml.rels: identical md5 38b3fb26 -> 38b3fb26
@@ -23,7 +23,7 @@ base parts 30, new parts 30, same order: True
   xl/worksheets/_rels/sheet6.xml.rels: identical md5 af5cb413 -> af5cb413
   xl/theme/theme1.xml: identical md5 e0d4a1ad -> e0d4a1ad
   xl/sharedStrings.xml: identical md5 a900d132 -> a900d132
-  xl/styles.xml: CHANGED md5 efbf1f7e -> 8fb798e6
+  xl/styles.xml: CHANGED md5 efbf1f7e -> 9bf36ffb
   xl/persons/person.xml: identical md5 cc12406b -> cc12406b
   xl/workbook.xml: identical md5 a8b09608 -> a8b09608
   xl/_rels/workbook.xml.rels: identical md5 b2b1dae1 -> b2b1dae1
@@ -38,8 +38,8 @@ base parts 30, new parts 30, same order: True
   xl/worksheets/sheet3.xml: well-formed
   xl/worksheets/sheet1.xml (Version Control) with the 5 edited cells masked: IDENTICAL
   xl/worksheets/sheet2.xml (Report Matrix) with the 10 edited cells masked: IDENTICAL
-  xl/worksheets/sheet3.xml (Spec) with the 33 edited cells masked: IDENTICAL
-  xl/styles.xml: only appended fills 9->10 and cellXfs 87->108: True
+  xl/worksheets/sheet3.xml (Spec) with the 45 edited cells masked: IDENTICAL
+  xl/styles.xml: only appended fills 9->10 and cellXfs 87->111: True
 
 == 3. Cell by cell (all sheets, values + fill + font + border + number format + alignment)
   [Version Control!B14] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
@@ -53,7 +53,7 @@ base parts 30, new parts 30, same order: True
       after : "Spec review (SR-110) against 綜合所得稅資料電子申報作業要點 (ROC 114 ed.): Mohit's 3 points reflected (resident YTD / non-resident per payment date; field 9 = tax withheld; income period by hire/termination month); serial, year, period, payment date, pension, country, treaty, TIN, name, address and file format ru
   [Version Control!E14] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
-      after : 'Draft'
+      after : 'Under Review'
   [Version Control!F14] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
       after : 'Wallisson Gomes'
@@ -91,31 +91,49 @@ base parts 30, new parts 30, same order: True
   -- Report Matrix: 17x3 cells compared; edited 10; differences outside scope: 0 []
   [Spec!H4] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: '$row_number'
-      after : "IF(EQUALS($hr.residential_status::key; '0'); LPAD($row_number; 8; '0'); CONCAT('00'; LPAD($row_number; 6; '0')))"
+      after : "IF(EQUALS($hr.residential_status::key; '0'); CONCAT('01'; LPAD($row_number; 6; '0')); CONCAT('00'; LPAD(<non-resident serial counter per UBN in the year>; 6; '0')))"
   [Spec!J4] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Serial number for the record (e.g., 00000001, 00000002).\n'
-      after : 'Resident: positions 1–2 alphanumeric, 3–8 digits. Non-resident: positions 1–2 fixed "00", 3rd alphanumeric, 4–8 digits. Must not repeat for the same business number (UBN). Src: 要點 114 item 2.\nTO BE CONFIRMED BY MOHIT/BA: zero-pad function name in the formula engine; whether the non-resident counte
+      after : 'Resident: positions 1–2 alphanumeric, 3–8 digits; prefix \'01\' (never \'00\', which is reserved for non-residents; no letters in position 1, which is reserved for the file ID code A–Y). Non-resident: positions 1–2 fixed "00", 3rd alphanumeric, 4–8 digits; the counter must not restart per payment-d
+  [Spec!J5] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Refer to page 181 of "112年度綜所稅資料電子申報作業要點(公告)_1121211"'
+      after : '8-digit UBN. Refer to 要點 114 Ch.2 Sec.1 item 3 (PDF p.24) and the check method in Annex 7 / 7-1 (PDF pp.188–189).'
+  [Spec!H7] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: None
+      after : "One record per employee per income format:\n'93' = retirement income: accounts 62180:62182 (Severance Payment; the only PEs with Severance Tax = Yes in WTC V2.8);\n'50' = salary: all other taxable accounts of H10.\nAn employee with both in the period gets two records (one 50, one 93)."
   [Spec!I7] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Income format code, indicating the type of income \n(e.g., 50 for general income, 53 for rental income, 51 for professional fees, 9B for other income, 92 for interest, 54 for dividends)'
       after : 'Income format code (所得格式): 50 = salary income; 93 = retirement income (severance). Other format codes are not produced by this report. Src: 要點 114 item 5.'
+  [Spec!J7] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Normal salary income 50 58008\nSeverance payment 93\n\n6218% is severance series. Rest all is Normal.'
+      after : "50 = salary income (薪資所得); 93 = retirement income (退職所得: pension, severance, retirement/leaving payments, ITA art. 14 cat. 9). Src: 要點 114 item 5 (PDF pp.24–26).\nTO BE CONFIRMED BY MOHIT/BA: 62640:62649 'Pension' and 62930 'Gratuity/EOS/Post-termination' are taxed by table in WTC V2.8; if they are
+  [Spec!J8] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Refer to Page 179'
+      after : 'Refer to 要點 114 Ch.2 Sec.1 item 6 (PDF p.27) and the check method in Annex 6 / 6-1 (PDF pp.186–187).'
   [Spec!J9] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "[0] The recipient is a national individual.\n[1] The recipient is a business organization.\n[3] Foreigners/Chinese living in Taiwan for over 183 days\n[4] The recipient is mainland person living in Taiwan less than 183\n[5] The recipient is alien or mainland person living in Taiwan more than 183\n[
       after : '[0] National individual.\n[1] Business organization.\n[3] Foreigner or mainland Chinese who stayed in Taiwan 183 days or more.\n[4] Taiwan branch of an enterprise with head office outside Taiwan.\n[5] Mainland Chinese who stayed in Taiwan fewer than 183 days.\n[6] Unit in the mainland area.\n[7] Fo
   [Spec!H10] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
-      after : "Format 50 (salary): resident = YTD of CONTAINS($entry.account; RANGE('58008 + 58009 + 62200:62209')); non-resident = same accounts for the payment date only.\nFormat 93 (retirement/severance): resident = YTD of 62180:62182; non-resident = 62180:62182 for the payment date. 6218x is reported under 93
+      after : "Format per H7.\nFormat 50 (salary): resident = YTD of CONTAINS($entry.account; RANGE('58008 + 58009 + 62200:62209')); non-resident = same accounts for the payment date only.\nFormat 93 (retirement/severance): resident = YTD of 62180:62182; non-resident = 62180:62182 for the payment date. 6218x is r
   [Spec!K10] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "CONTAINS($entry.account; RANGE('58008 + 58009 + 62200:62209'))"
       after : "See H10 (v1.3). Previous: CONTAINS($entry.account; RANGE('58008 + 58009 + 62200:62209'))"
+  [Spec!L10] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Resident: Annual taxable amount\nNon-resident: Monthly taxable amount'
+      after : "Superseded in v1.3, see H10. Previous: 'Resident: Annual taxable amount / Non-resident: Monthly taxable amount' (non-resident is per payment date, not monthly)."
   [Spec!B11] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Tax Exemption Amount'
       after : 'Tax Withheld Amount'
   [Spec!H11] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
-      after : 'Format 50: resident = YTD of 2552 + 2572 + 2582 + 2592; non-resident = 2593 for the payment date.\nFormat 93: resident = YTD of 2594.\n0 when nothing was withheld; never negative. Src: 要點 114 item 9.\nTO BE CONFIRMED BY MOHIT/BA: account for format 93 paid to a non-resident.'
+      after : 'Format per H7.\nFormat 50: resident = YTD of 2552 + 2572 + 2582 + 2592; non-resident = 2593 for the payment date.\nFormat 93: resident = YTD of 2594.\n0 when nothing was withheld; never negative. Src: 要點 114 item 9.\nTO BE CONFIRMED BY MOHIT/BA: account for format 93 paid to a non-resident.'
   [Spec!K11] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "CONTAINS($entry.account; RANGE('58100 + 58105'))"
       after : "Superseded in v1.3, see H11. Field 9 is the tax withheld (扣繳稅額), not an exemption. Previous mapping CONTAINS($entry.account; RANGE('58100 + 58105')): 58100 = Meal Allowance Pre-Tax Deduction; 58105 does not exist in WTC V2.8."
+  [Spec!L11] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Withheld tax amount\nIn the case of resident, input annual tax amount.\nIn the case of non-resident, input monthly tax amount.'
+      after : "Superseded in v1.3, see H11. Previous: 'Withheld tax amount. Resident: annual tax amount. Non-resident: monthly tax amount' (non-resident is per payment date, not monthly)."
   [Spec!H12] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
       after : 'Field 8 − Field 9 (Total Payment − Tax Withheld Amount); must match exactly; never negative. Src: 要點 114 參.三.(三) note 1, item 10.'
@@ -125,6 +143,9 @@ base parts 30, new parts 30, same order: True
   [Spec!J13] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Employee staff ID'
       after : 'Employee staff ID; max 12 characters (official type X, length 12). Src: 要點 114 item 11(9).'
+  [Spec!D18] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Numeric(3)'
+      after : 'Alphanumeric(3)'
   [Spec!H18] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "SUBTRACT(DATE_FORMAT($meta.as_of_date; 'yyyy'); 1911)"
       after : "Resident: SUBTRACT(DATE_FORMAT($meta.as_of_date; 'yyyy'); 1911), as_of_date inside the tax year reported.\nNon-resident: SUBTRACT(DATE_FORMAT(<payment date>; 'yyyy'); 1911).\nTO BE CONFIRMED BY MOHIT/BA: system variable for the payment date."
@@ -133,16 +154,19 @@ base parts 30, new parts 30, same order: True
       after : 'ROC year (3 digits) in which the income was paid (所得給付年度); ROC year = Gregorian year − 1911 (113 = 2024). Src: 要點 114 item 14.'
   [Spec!H19] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: '$employee_name'
-      after : '$employee_name: Chinese name if the employee has one (at least 2 Chinese characters); foreigner without a Chinese name: English name as in the passport (first 50 characters). Trim leading/trailing spaces; all full-width or all half-width; max 50.\nTO BE CONFIRMED BY MOHIT/BA: DD field holding the C
+      after : 'Chinese name (if held): whole string converted to full-width, trimmed, at least 2 Chinese characters, max 50. Otherwise passport English name ($employee_name): whole string half-width, trimmed, first 50 characters. Never mix full- and half-width in the field.'
   [Spec!J19] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Chinese names must have at least 2 characters'
-      after : 'Chinese names: at least 2 characters, no spaces before, after or between characters (rare character = full-width underscore). Foreigner without a Chinese name: passport English name. Src: 要點 114 item 15 and 參.三.(三) note 2.'
+      after : 'Chinese names: at least 2 characters, no spaces before, after or between characters (rare character = full-width underscore). Foreigner without a Chinese name: passport English name. The field must be all full-width or all half-width. Src: 要點 114 item 15 (PDF p.29) and 參.三.(三) note 2 (PDF p.32).\nT
   [Spec!H20] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "CONCAT($hr.taiwan_city; ' '; $hr.district; ' '; $address.address_line_1; IF( NOT(IS_NULL($address.address_line_2)); CONCAT(', '; $address.address_line_2); '' ) )"
-      after : 'CONCAT($hr.employee_postcode; $hr.taiwan_city; $hr.district; $address.address_line_1; $address.address_line_2) with no separators or commas, so the first 3 characters are the postcode digits. Household-registration (戶籍) address. Foreigner or mainland Chinese without a Chinese address: employer addr
+      after : 'FULLWIDTH(CONCAT($hr.employee_postcode; $hr.taiwan_city; $hr.district; $address.address_line_1; $address.address_line_2)): whole string converted to full-width, postcode digits included (e.g. １００), no separators or commas; first 3 characters = postcode. Household-registration (戶籍) address. Foreigne
   [Spec!J20] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
-      after : 'First 3 characters: postcode in Arabic numerals or the county/city name. Principle: household-registration address; foreigner without a Chinese address: employer address. Src: 要點 114 item 16 and 參.三.(三) note 2.'
+      after : 'First 3 characters: postcode in Arabic numerals or the county/city name. The field must be all full-width or all half-width. Principle: household-registration address; foreigner without a Chinese address: employer address. Src: 要點 114 item 16 (PDF p.29) and 參.三.(三) note 2 (PDF p.32).\nTO BE CONFIRM
+  [Spec!D21] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Numeric(10)'
+      after : 'Alphanumeric(10)'
   [Spec!H21] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "CONCAT(SUBTRACT(DATE_FORMAT($meta.as_of_date; 'yyyy'); 1911);'01';\nSUBTRACT(DATE_FORMAT($meta.as_of_date; 'yyyy'); 1911); '12')"
       after : "Resident: CONCAT(YYY; IF(hire date in the tax year; MM of hire date; '01'); YYY; IF(termination date in the tax year; MM of termination date; '12')), YYY = tax year − 1911.\nNon-resident: CONCAT(YYY; MM; YYY; MM) of the month the paid income relates to (e.g. 1150111501).\nTO BE CONFIRMED BY MOHIT/B
@@ -151,25 +175,37 @@ base parts 30, new parts 30, same order: True
       after : '10 digits YYYMMYYYMM: start and end ROC year (3) and month (2) of the period the income belongs to (所得所屬期間); year-month, not dates. Src: 要點 114 item 17.'
   [Spec!H22] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "IF(EQUALS($residential_status; '0'); $58105_ytd; $58105)"
-      after : 'Format 50 only: resident = YTD of 2517 (LPN EE, employee voluntary labor pension contribution); non-resident = 2517 for the payment date; 0 or blank if none. Format 93: blank.'
+      after : 'Format per H7. Format 50 only: resident = YTD of 2517 (LPN EE, employee voluntary labor pension contribution); non-resident = 2517 for the payment date; 0 or blank if none. Format 93: blank.'
+  [Spec!I22] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Applies to retirement payments only'
+      after : 'Employee voluntary labor pension contribution not counted as taxable salary; salary records (format 50) only, blank for retirement income (93).'
   [Spec!J22] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: None
       after : 'Amount contributed under the labor / civil-service pension laws that is not counted as taxable salary (依勞工、軍公教及政務人員退撫相關法令提(撥)繳(不計入薪資課稅)之金額); NT$, max 12 digits, not negative; non-salary income: 0 or blank. Src: 要點 114 item 18(1).'
   [Spec!K22] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Resident: 58160 take YTD value\n\nNon-resident (monthly): 58160\n'
       after : "Superseded in v1.3, see H22. Previous: 'Resident: 58160 take YTD value / Non-resident (monthly): 58160' (58160 = Severance Base Before Exemption); H22 used $58105, which does not exist in WTC V2.8."
+  [Spec!D28] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Numeric(1)'
+      after : 'Alphanumeric(1)'
   [Spec!H30] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "IF(CONTAINS($hr.identity_type; LIST('3'; '5'; '6'; '7'; '8'; '9'; 'A')); UPPERCASE($address.country::key); 'ZZ')"
       after : "IF(CONTAINS($hr.identity_type; LIST('3'; '5'; '6'; '7'; '8'; '9'; 'A')); IF(IS_NULL(<country of residence>); 'ZZ'; <country of residence>); '')\nTO BE CONFIRMED BY MOHIT/BA: field for the country of residence (the address country may be the Taiwan address) and that its key matches the code list in 
   [Spec!J30] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'In put when code is 3, 5, 6, 7, 8, 9, A\nIn case of other country input ZZ'
       after : "ID types 3, 5, 6, 7, 8, 9, A: 2-letter code of the country/region of residence (Annex 41); 'ZZ' only when it cannot be determined. Other ID types: blank. Src: 要點 114 item 22."
+  [Spec!G31] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'TW'
+      after : '(blank)'
   [Spec!H31] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "IF(CONTAINS($hr.identity_type; LIST('5'; '6'; '7'; '8'; '9')); 'XX'; '')"
       after : "'' (blank) by default. ID types 5–9 with a tax treaty applied: 2-character treaty code from Annex 42 ('XX' is not a valid code).\nTO BE CONFIRMED BY MOHIT/BA: DD field for the treaty code (none in DD V3.3)."
   [Spec!J31] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'In put when code is 5, 6, 7, 8, 9'
       after : 'ID types 5, 6, 7, 8, 9: treaty code (Annex 42) or blank. Other ID types: blank. Src: 要點 114 item 23.'
+  [Spec!D33] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
+      before: 'Numeric(4)'
+      after : 'Alphanumeric(4)'
   [Spec!H33] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: "DATE_FORMAT($report.generation_time; 'MMdd')"
       after : "IF(EQUALS($hr.residential_status::key; '0'); DATE_FORMAT($report.generation_time; 'MMdd'); DATE_FORMAT(<payment date>; 'MMdd'))\nTO BE CONFIRMED BY MOHIT/BA: system variable for the payment date."
@@ -188,10 +224,19 @@ base parts 30, new parts 30, same order: True
   [Spec!L34] value_ok=True fill=FFDDEBF7 font/border/numfmt_kept=True
       before: 'Blank: In the case of Taiwannese employee\nNORTIN: Foreign employee.'
       after : 'Superseded in v1.3, see H34 (NOTIN, by ID type).'
-  -- Spec: 991x26 cells compared; edited 33; differences outside scope: 0 []
+  -- Spec: 991x26 cells compared; edited 45; differences outside scope: 0 []
   -- Testing1: 4x1 cells compared; edited 0; differences outside scope: 0 []
   -- Testing: 33x24 cells compared; edited 0; differences outside scope: 0 []
   -- Options: 19x1 cells compared; edited 0; differences outside scope: 0 []
 
-Total edited cells: 48
+Total edited cells: 60
 RESULT: PASS - no difference outside scope
+
+== 4. Rodada 1 (md5 50a250e8) x Rodada 2: celulas alteradas
+  Version Control: 1 ['E14']
+  Report Matrix: 0 []
+  Spec: 21 ['H4', 'J4', 'J5', 'H7', 'J7', 'J8', 'H10', 'L10', 'H11', 'L11', 'D18', 'H19', 'J19', 'H20', 'J20', 'D21', 'H22', 'I22', 'D28', 'G31', 'D33']
+  Testing1: 0 []
+  Testing: 0 []
+  Options: 0 []
+  total: 22

@@ -2,7 +2,7 @@
 
 VC_DATE_SERIAL = 46322          # 2026-10-27 as Excel serial
 VC_BY = "Wallisson Gomes"
-VC_STATUS = "Draft"
+VC_STATUS = "Under Review"   # round 2: value of the E13:E23 validation list
 ELECTRONIC = "Electronic: Upload online "   # exact text of Options!A16 (list validation on Report Matrix B11)
 
 CMO_HEADER = "C = Conditional, M = Mandatory, O = Optional"
@@ -26,9 +26,10 @@ FOREIGN_L_NOTE = ('For "Permanent-resident foreign professional" (永居外專),
 
 NAME_RULE = ("Chinese names: nationals at least 2 characters, foreigners at least 1. "
              "English names: full name in full-width uppercase letters. Maximum 200 characters.")
-NAME_MAP = ("Nationals: Chinese name (ID Information field 'name' 名字). Foreigners with English names: "
-            "UPPERCASE full name converted to full-width characters (e.g. ＤＡＶＩＤ), max. 200 characters. "
-            "Full-width conversion function: TO BE CONFIRMED BY MOHIT/BA.")
+NAME_MAP = ("IF(EQUALS(<foreign field>; ''); $hr.name; FULLWIDTH(UPPERCASE($hr.name))) - nationals: Chinese name "
+            "($hr.name, DD V3.3 ID Information 'name' 名字); foreigners with English names: full name in full-width "
+            "uppercase (e.g. ＤＡＶＩＤ), max. 200 characters. FULLWIDTH: TO BE CONFIRMED BY MOHIT/BA (no such "
+            "function known in the formula engine; also confirm that $hr.name holds the English full name of foreigners).")
 
 ID_LI = ("IF(EQUALS($hr.id_type::key; '3'); $hr.passport_number; $hr.id_card_number) - nationals: national ID; "
          "foreigners: ARC unified ID number (id_type 2) or passport (id_type 3), the same ID used at enrolment. "
@@ -42,3 +43,13 @@ def roc(field):
 
 
 BIRTH = roc("$person.birth_date")
+
+
+SPECIAL_ID_TBC = ("TO BE CONFIRMED BY MOHIT/BA: DD V3.3 defines special_identity_code twice - ID Information ord. 36 "
+                  "(mapper 'Special Identity Code', keys 1-8, A, B, S, T; used here) and Country Fields ord. 46 "
+                  "(mapper 'Received Social Insurance Benefits Type (Occupational Accident)', keys 1, 2 only). "
+                  "Confirm the field read by the report.")
+TBC_LEN = "padding/width TO BE CONFIRMED BY MOHIT/BA"
+NOT_PRESCRIBED = "Not prescribed by the official format guide (%s)."
+INTRO_CHANNEL = ("The batch can be uploaded in the NHIA multi-certificate system (申報批次勞健合一 EXCEL) or in the BLI "
+                 "e-service (合一申報, single and batch) (NHIA East Division flyer; BLI manual ch. 9, FAQ 2 and 6).")

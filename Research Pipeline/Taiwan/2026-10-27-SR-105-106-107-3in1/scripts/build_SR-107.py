@@ -4,6 +4,7 @@ import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from xlsxpatch import Book
 from common import *
+NAME_MAP = NAME_MAP.replace("<foreign field>", "field 7")
 
 BASE = r"C:\Users\instituto\Documents\brain-service\raw\docs\drive-exports\2026-10-27\TW - SI electronic filing Joiner Specification.xlsx"
 OUT = pathlib.Path(__file__).resolve().parent.parent / "TW - SI electronic filing Joiner Specification v1.1.xlsx"
@@ -163,6 +164,25 @@ mt(31, "C", "Text")
 
 # ---- remove the withholding-tax tab
 b.remove_sheet("New Specification")
+
+
+# ================= ROUND 2 (independent review 2026-10-27, items 1, 2, 4, 6, 7, 9, 10) =================
+b.set(RM, "B9", NOT_PRESCRIBED % "01_Apply3Of1, rev. 115.03.11")
+b.set(RM, "B20", "Used to notify BLI and NHIA together, in one 3-in-1 batch, of new employees (and their NHI "
+                 "dependants) so that they are enrolled in LI/EI/OAI, LP and NHI. " + INTRO_CHANNEL)
+b.set(SP, "F10", FOREIGN + " Rows with 'Y' are excluded from this batch (Report Matrix B14); codes 1/2/L kept "
+                 "pending confirmation.")
+b.set(SP, "F26", "IF field 7 is not blank: IF(EQUALS($person.gender; 'male'); 'M'; 'F'); otherwise blank "
+                 "(foreigners only). Only rows kept in the batch (field 7 = 1, 2 or L; 'Y' excluded, see B14). "
+                 "Replaces $hr.residential_status (tax residency).")
+b.set(SP, "F17", "$hr.special_identity_code::key; blank if empty. " + SPECIAL_ID_TBC)
+for r in (14, 16):
+    b.set(SP, "L%d" % r, "Text (official sample: 36000 / 36300; %s)" % TBC_LEN)
+# 4: Sample column E - official fictitious sample 01_Apply3Of1 (employee row 2; dependant row 3 for 15-18; type-4 row 4 for 27)
+for r, v in [(3, "4"), (4, "01999999"), (5, "B"), (6, "000000000"), (7, "2"), (8, "1"), (11, "A111222333"),
+             (12, "王大寶"), (13, "0550505"), (14, "36000"), (16, "36300"), (19, "M111111111"), (20, "王小明"),
+             (21, "1040303"), (22, "3"), (23, "1"), (24, "1"), (25, "1041005"), (27, "1"), (28, "6"), (31, "1")]:
+    b.set(SP, "E%d" % r, v)
 
 b.save(OUT, log_json=str(pathlib.Path(__file__).resolve().parent / "edits_SR-107.json"))
 print("saved", OUT, len(b.log), "edits")

@@ -4,6 +4,7 @@ import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from xlsxpatch import Book
 from common import *
+NAME_MAP = NAME_MAP.replace("<foreign field>", "field 8")
 
 BASE = r"C:\Users\instituto\Documents\brain-service\raw\docs\drive-exports\2026-10-27\TW - SI Termination specification.xlsx"
 OUT = pathlib.Path(__file__).resolve().parent.parent / "TW - SI Termination specification v1.1.xlsx"
@@ -14,7 +15,6 @@ VC, RM, SP = "Version Control", "Report Matrix", "Spec"
 # ---- Version Control
 b.set(VC, "B9", "Taiwan")
 b.set(VC, "B14", "1.1", num=True, style_from="B13")
-b.set(VC, "C14", "2026-10-27", style_from="C13")   # C13 has no date format in this file -> ISO text
 b.set(VC, "D14", "Spec review against NHIA/BLI 3-in-1 batch withdrawal format (02_Stop3Of1, rev. 114.12.12): "
                  "field mappings corrected, field 15 added, C/M/O, data types and Report Matrix updated.",
       style_from="D13")
@@ -97,6 +97,22 @@ b.set(SP, "A65", "NOTE (guide rev. 114.12.12): ※ When the insured person withd
                  "transferred out; no dependant data is entered. ※ NHI Act art. 8: loss of nationality or household "
                  "registration moved out; art. 9: residence permit expired. ※ NHI-only changes are filed separately "
                  "with NHIA.")
+
+
+# ================= ROUND 2 (independent review 2026-10-27, items 4-8, 10, 11) =================
+b.set(VC, "C14", VC_DATE_SERIAL, num=True, style_from="C13", numfmt="mm/dd/yyyy")
+b.set(RM, "B9", NOT_PRESCRIBED % "02_Stop3Of1, rev. 114.12.12")
+b.set(RM, "B20", "Used to notify BLI and NHIA together, in one 3-in-1 batch, of employee withdrawals so that LI/EI/OAI, "
+                 "LP and NHI coverage stops. " + INTRO_CHANNEL)
+b.set(SP, "F60", "Date the NHI withdrawal reason occurred (guide field 16; NHI ends at 24:00 on that day, 承表L instr. 6). "
+                 "Field 14 = 1, 2, 3, 4 (transfer out): " + roc("$employee.last_working_date") + ". Field 14 = M (death), "
+                 "E (missing 6 months), U (loss of eligibility): date of that event - no DD field -> NEW DD FIELD "
+                 "(proposed): NHI withdrawal reason date; TO BE CONFIRMED BY MOHIT/BA.")
+# 4: Sample column E - official fictitious sample 02_Stop3Of1 (row 2; field 15 without the trailing spaces)
+for r, v in [(3, "2"), (5, "01999999"), (7, "B"), (9, "000000000"), (11, "1"), (18, "2"), (22, "1"), (24, "Y"),
+             (29, "ＥＭＩＬＹ"), (31, "A000000000"), (36, "AB12345678"), (40, "0660406"), (44, "2"), (47, "1"),
+             (56, "離職"), (60, "1041005")]:
+    b.set(SP, "E%d" % r, v)
 
 b.save(OUT, log_json=str(pathlib.Path(__file__).resolve().parent / "edits_SR-106.json"))
 print("saved", OUT, len(b.log), "edits")

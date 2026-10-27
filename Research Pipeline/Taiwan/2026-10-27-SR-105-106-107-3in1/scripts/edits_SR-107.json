@@ -27,7 +27,7 @@
   {
    "sheet": "Version Control",
    "cell": "E14",
-   "value": "Draft",
+   "value": "Under Review",
    "num": false
   },
   {
@@ -285,7 +285,7 @@
   {
    "sheet": "Spec",
    "cell": "F12",
-   "value": "Nationals: Chinese name (ID Information field 'name' 名字). Foreigners with English names: UPPERCASE full name converted to full-width characters (e.g. ＤＡＶＩＤ), max. 200 characters. Full-width conversion function: TO BE CONFIRMED BY MOHIT/BA.",
+   "value": "IF(EQUALS(field 7; ''); $hr.name; FULLWIDTH(UPPERCASE($hr.name))) - nationals: Chinese name ($hr.name, DD V3.3 ID Information 'name' 名字); foreigners with English names: full name in full-width uppercase (e.g. ＤＡＶＩＤ), max. 200 characters. FULLWIDTH: TO BE CONFIRMED BY MOHIT/BA (no such function known in the formula engine; also confirm that $hr.name holds the English full name of foreigners).",
    "num": false
   },
   {
@@ -723,6 +723,174 @@
     "xl/worksheets/_rels/sheet4.xml.rels",
     "xl/worksheets/sheet4.xml"
    ]
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B9",
+   "value": "Not prescribed by the official format guide (01_Apply3Of1, rev. 115.03.11).",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B20",
+   "value": "Used to notify BLI and NHIA together, in one 3-in-1 batch, of new employees (and their NHI dependants) so that they are enrolled in LI/EI/OAI, LP and NHI. The batch can be uploaded in the NHIA multi-certificate system (申報批次勞健合一 EXCEL) or in the BLI e-service (合一申報, single and batch) (NHIA East Division flyer; BLI manual ch. 9, FAQ 2 and 6).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F10",
+   "value": "Employee nationality: no field in DD V3.3 -> NEW DD FIELD (proposed): Employee Nationality (+ permanent-resident foreign professional flag for 'L'); TO BE CONFIRMED BY MOHIT/BA. Logic: nationality = TW -> blank; permanent-resident foreign professional (永居外專) -> 'L'; $hr.spouse_nationality = TW and nationality = CN -> '2'; $hr.spouse_nationality = TW and other nationality (incl. Hong Kong/Macau) -> '1'; otherwise 'Y'. Do not use $hr.residential_status (tax residency). Rows with 'Y' are excluded from this batch (Report Matrix B14); codes 1/2/L kept pending confirmation.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F26",
+   "value": "IF field 7 is not blank: IF(EQUALS($person.gender; 'male'); 'M'; 'F'); otherwise blank (foreigners only). Only rows kept in the batch (field 7 = 1, 2 or L; 'Y' excluded, see B14). Replaces $hr.residential_status (tax residency).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F17",
+   "value": "$hr.special_identity_code::key; blank if empty. TO BE CONFIRMED BY MOHIT/BA: DD V3.3 defines special_identity_code twice - ID Information ord. 36 (mapper 'Special Identity Code', keys 1-8, A, B, S, T; used here) and Country Fields ord. 46 (mapper 'Received Social Insurance Benefits Type (Occupational Accident)', keys 1, 2 only). Confirm the field read by the report.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L14",
+   "value": "Text (official sample: 36000 / 36300; padding/width TO BE CONFIRMED BY MOHIT/BA)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L16",
+   "value": "Text (official sample: 36000 / 36300; padding/width TO BE CONFIRMED BY MOHIT/BA)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E3",
+   "value": "4",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E4",
+   "value": "01999999",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E5",
+   "value": "B",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E6",
+   "value": "000000000",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E7",
+   "value": "2",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E8",
+   "value": "1",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E11",
+   "value": "A111222333",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E12",
+   "value": "王大寶",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E13",
+   "value": "0550505",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E14",
+   "value": "36000",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E16",
+   "value": "36300",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E19",
+   "value": "M111111111",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E20",
+   "value": "王小明",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E21",
+   "value": "1040303",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E22",
+   "value": "3",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E23",
+   "value": "1",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E24",
+   "value": "1",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E25",
+   "value": "1041005",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E27",
+   "value": "1",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E28",
+   "value": "6",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "E31",
+   "value": "1",
+   "num": false
   }
  ],
  "modified_parts": [

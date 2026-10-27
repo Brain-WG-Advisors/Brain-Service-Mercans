@@ -2,7 +2,7 @@
 Usage: validate.py <base.xlsx> <new.xlsx>
 Checks: every XML/rels part well-formed; [Content_Types] overrides all resolve; every .rels target exists;
 media/drawing/comment part counts vs base (minus removed sheet parts); openpyxl loads; images per sheet;
-Version Control row 14 (1.1 / 2026-10-27 date / Draft / Wallisson Gomes); data-validation lists respected."""
+Version Control row 14 (1.1 / 2026-10-27 date / status in the E13:E23 list / Wallisson Gomes); data-validation lists respected."""
 import re
 import sys
 import zipfile
@@ -54,7 +54,7 @@ def main(base, new):
     vc = wb["Version Control"]
     row = [vc["B14"].value, vc["C14"].value, vc["D14"].value, vc["E14"].value, vc["F14"].value]
     print("  Version Control 14:", row[0], row[1], "|", row[3], "|", row[4], "| date?", vc["C14"].is_date)
-    if not (row[0] == 1.1 and str(row[1]).startswith("2026-10-27") and row[3] == "Draft" and row[4] == "Wallisson Gomes"):
+    if not (row[0] == 1.1 and str(row[1]).startswith("2026-10-27") and row[3] in ("In Progress", "Under Review", "Approved") and row[4] == "Wallisson Gomes"):
         ok = False; print("  VERSION CONTROL INCORRETO")
     rm = wb["Report Matrix"]; opt = wb["Options"]
     opts = {r: [opt["A%d" % i].value for i in rng] for r, rng in

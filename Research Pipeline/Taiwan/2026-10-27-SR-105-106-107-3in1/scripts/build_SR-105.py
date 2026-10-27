@@ -4,6 +4,7 @@ import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from xlsxpatch import Book
 from common import *
+NAME_MAP = NAME_MAP.replace("<foreign field>", "field 6")
 
 BASE = r"C:\Users\instituto\Documents\brain-service\raw\docs\drive-exports\2026-10-27\TW - SI electronic filing Salary Adjustment specification.xlsx"
 OUT = pathlib.Path(__file__).resolve().parent.parent / "TW - SI electronic filing Salary Adjustment specification v1.1.xlsx"
@@ -105,6 +106,19 @@ b.set(SP, "A45", "NOTE (guide rev. 114.12.12, field 11): BLI classifies the mont
                  "contribution or LP wage adjustment is made. If the pay is below the minimum wage (e.g. part-time), "
                  "fill the special identity (field 14).\nThe 104.10.05 rule 'leave fields 2, 3 and 11 blank for an "
                  "NHI-only adjustment' is no longer in the guide: NHI-only adjustments TO BE CONFIRMED BY MOHIT/BA.")
+
+
+# ================= ROUND 2 (independent review 2026-10-27, items 1, 2, 4, 5, 10) =================
+# 1: fields 11-13 as Text (official sample: text, 6 digits with leading zero)
+for r in (36, 38, 40):
+    b.set(SP, "E%d" % r, "Text (official sample: 6 digits with leading zero, e.g. 040000; %s)" % TBC_LEN)
+# 2: special identity field
+b.set(SP, "L42", "$hr.special_identity_code::key when it is 1, 2, 6, 7 or 8; otherwise blank (the batch accepts only "
+                 "these values, guide rev. 114.12.12). " + SPECIAL_ID_TBC)
+# 4: Sample column (J, hidden in the base) - official fictitious sample 03_Adj3Of1 (row 2)
+for r, v in [(3, "3"), (5, "01999999"), (7, "B"), (9, "000000000"), (11, "1"), (18, "Y"), (23, "ＤＡＶＩＤ"),
+             (25, "W987654"), (30, "AB12345678"), (34, "0731215"), (36, "040000"), (38, "031800"), (40, "043900")]:
+    b.set(SP, "J%d" % r, v)
 
 b.save(OUT, log_json=str(pathlib.Path(__file__).resolve().parent / "edits_SR-105.json"))
 print("saved", OUT, len(b.log), "edits")

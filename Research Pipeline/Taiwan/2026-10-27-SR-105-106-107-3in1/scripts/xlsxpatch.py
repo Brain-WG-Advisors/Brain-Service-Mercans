@@ -71,10 +71,25 @@ class Book:
         self._fill_id = n
         return n
 
-    def blue_style(self, s):
+    def _numfmt_id(self, code):
+        st = self.get("xl/styles.xml")
+        m = re.search(r'<numFmt numFmtId="(\d+)" formatCode="%s"/>' % re.escape(code), st)
+        if m:
+            return int(m.group(1))
+        m = re.search(r'<numFmts count="(\d+)">(.*?)</numFmts>', st, re.S)
+        ids = [int(i) for i in re.findall(r'numFmtId="(\d+)"', m.group(2))]
+        nid = max(ids + [163]) + 1
+        st = st[:m.start()] + '<numFmts count="%d">%s<numFmt numFmtId="%d" formatCode="%s"/></numFmts>' % (
+            int(m.group(1)) + 1, m.group(2), nid, code) + st[m.end():]
+        self.put("xl/styles.xml", st)
+        return nid
+
+    def blue_style(self, s, numfmt=None):
         s = int(s)
-        if s in self._xf_clone:
-            return self._xf_clone[s]
+        key = (s, numfmt)
+        if key in self._xf_clone:
+            return self._xf_clone[key]
+        nf = self._numfmt_id(numfmt) if numfmt else None
         fid = self._blue_fill_id()
         st = self.get("xl/styles.xml")
         m = re.search(r'<cellXfs count="(\d+)">(.*?)</cellXfs>', st, re.S)
@@ -85,6 +100,9 @@ class Book:
         head = re.match(r"<xf [^>]*?/?>", src).group(0)
         newhead = re.sub(r'fillId="\d+"', 'fillId="%d"' % fid, head) if "fillId=" in head \
             else head.replace("<xf ", '<xf fillId="%d" ' % fid, 1)
+        if nf is not None:
+            newhead = re.sub(r'numFmtId="\d+"', 'numFmtId="%d"' % nf, newhead) if "numFmtId=" in newhead                 else newhead.replace("<xf ", '<xf numFmtId="%d" ' % nf, 1)
+            newhead = re.sub(r'applyNumberFormat="\d"', 'applyNumberFormat="1"', newhead) if "applyNumberFormat=" in newhead                 else newhead.replace("<xf ", '<xf applyNumberFormat="1" ', 1)
         if "applyFill=" in newhead:
             newhead = re.sub(r'applyFill="\d"', 'applyFill="1"', newhead)
         else:
@@ -92,11 +110,11 @@ class Book:
         newxf = newhead + src[len(head):]
         st = st[:m.start()] + '<cellXfs count="%d">%s%s</cellXfs>' % (n + 1, m.group(2), newxf) + st[m.end():]
         self.put("xl/styles.xml", st)
-        self._xf_clone[s] = n
+        self._xf_clone[key] = n
         return n
 
     # ---------- cells ----------
-    def set(self, sheet, ref, value, num=False, style_from=None):
+    def set(self, sheet, ref, value, num=False, style_from=None, numfmt=None):
         part = self.sheets[sheet]
         x = self.get(part)
         col, row = split_ref(ref)
@@ -111,7 +129,7 @@ class Book:
             return int(ss.group(1)) if ss else 0
 
         s = style_of(style_from) if style_from else (style_of(ref) if m else 0)
-        ns = self.blue_style(s)
+        ns = self.blue_style(s, numfmt)
         if value is None or value == "":
             newc = '<c r="%s" s="%d"/>' % (ref, ns)
         elif num:

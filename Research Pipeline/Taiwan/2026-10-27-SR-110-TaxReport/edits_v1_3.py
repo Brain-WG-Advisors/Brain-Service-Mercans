@@ -122,3 +122,77 @@ EDITS = {
     "L34": ("Superseded in v1.3, see H34 (NOTIN, by ID type).", True),
 },
 }
+
+# ---------------------------------------------------------------------------
+# Round 2 (2026-10-27): independent review findings 1-9 (REVISAO-independente.md).
+# Values below replace/add to the round-1 entries; the build still starts from the base export.
+R2 = {
+"Version Control": {
+    "E14": ("Under Review", False),
+},
+"Spec": {
+    # 1. serial: no collision resident x non-resident in the same UBN
+    "H4": ("IF(EQUALS($hr.residential_status::key; '0'); CONCAT('01'; LPAD($row_number; 6; '0')); "
+           "CONCAT('00'; LPAD(<non-resident serial counter per UBN in the year>; 6; '0')))", True),
+    "J4": ("Resident: positions 1–2 alphanumeric, 3–8 digits; prefix '01' (never '00', which is reserved for non-residents; "
+           "no letters in position 1, which is reserved for the file ID code A–Y). Non-resident: positions 1–2 fixed \"00\", 3rd "
+           "alphanumeric, 4–8 digits; the counter must not restart per payment-date file. A serial must not repeat for the same "
+           "business number (UBN). Src: " + SRC + " item 2 (PDF p.24).\n"
+           "TO BE CONFIRMED BY MOHIT/BA: zero-pad function name; variable for the non-resident counter per UBN in the year.", True),
+    # 2. name/address width
+    "H19": ("Chinese name (if held): whole string converted to full-width, trimmed, at least 2 Chinese characters, max 50. "
+            "Otherwise passport English name ($employee_name): whole string half-width, trimmed, first 50 characters. "
+            "Never mix full- and half-width in the field.", True),
+    "J19": ("Chinese names: at least 2 characters, no spaces before, after or between characters (rare character = full-width "
+            "underscore). Foreigner without a Chinese name: passport English name. The field must be all full-width or all "
+            "half-width. Src: " + SRC + " item 15 (PDF p.29) and 參.三.(三) note 2 (PDF p.32).\n"
+            "TO BE CONFIRMED BY MOHIT/BA: DD field holding the Chinese name (DD V3.3 has none); full-/half-width conversion "
+            "function in the formula engine.", True),
+    "H20": ("FULLWIDTH(CONCAT($hr.employee_postcode; $hr.taiwan_city; $hr.district; $address.address_line_1; "
+            "$address.address_line_2)): whole string converted to full-width, postcode digits included (e.g. １００), no separators "
+            "or commas; first 3 characters = postcode. Household-registration (戶籍) address. Foreigner or mainland Chinese without a "
+            "Chinese address: employer address, same conversion. Max 100 characters (if longer, omit 鄰/里).", True),
+    "J20": ("First 3 characters: postcode in Arabic numerals or the county/city name. The field must be all full-width or all "
+            "half-width. Principle: household-registration address; foreigner without a Chinese address: employer address. "
+            "Src: " + SRC + " item 16 (PDF p.29) and 參.三.(三) note 2 (PDF p.32).\n"
+            "TO BE CONFIRMED BY MOHIT/BA: FULLWIDTH function name in the formula engine; variable for the employer address.", True),
+    # 3. field 5 mapping + alignment
+    "H7": ("One record per employee per income format:\n'93' = retirement income: accounts 62180:62182 (Severance Payment; the "
+           "only PEs with Severance Tax = Yes in WTC V2.8);\n'50' = salary: all other taxable accounts of H10.\n"
+           "An employee with both in the period gets two records (one 50, one 93).", True),
+    "J7": ("50 = salary income (薪資所得); 93 = retirement income (退職所得: pension, severance, retirement/leaving payments, "
+           "ITA art. 14 cat. 9). Src: " + SRC + " item 5 (PDF pp.24–26).\n"
+           "TO BE CONFIRMED BY MOHIT/BA: 62640:62649 'Pension' and 62930 'Gratuity/EOS/Post-termination' are taxed by table in "
+           "WTC V2.8; if they are retirement/leaving payments they belong to format 93, not 50.", True),
+    "H10": ("Format per H7.\nFormat 50 (salary): resident = YTD of CONTAINS($entry.account; RANGE('58008 + 58009 + 62200:62209')); "
+            "non-resident = same accounts for the payment date only.\nFormat 93 (retirement/severance): resident = YTD of "
+            "62180:62182; non-resident = 62180:62182 for the payment date. 6218x is reported under 93 only.\n"
+            "TO BE CONFIRMED BY MOHIT/BA: whether 62200:62209 are already included in 58008 (double count) and that 6218x is not "
+            "included in 58008/58009.", True),
+    "H11": ("Format per H7.\nFormat 50: resident = YTD of 2552 + 2572 + 2582 + 2592; non-resident = 2593 for the payment date.\n"
+            "Format 93: resident = YTD of 2594.\n0 when nothing was withheld; never negative. Src: " + SRC + " item 9.\n"
+            "TO BE CONFIRMED BY MOHIT/BA: account for format 93 paid to a non-resident.", True),
+    "H22": ("Format per H7. Format 50 only: resident = YTD of 2517 (LPN EE, employee voluntary labor pension contribution); "
+            "non-resident = 2517 for the payment date; 0 or blank if none. Format 93: blank.", True),
+    # 5.
+    "I22": ("Employee voluntary labor pension contribution not counted as taxable salary; salary records (format 50) only, "
+            "blank for retirement income (93).", True),
+    # 6.
+    "L10": ("Superseded in v1.3, see H10. Previous: 'Resident: Annual taxable amount / Non-resident: Monthly taxable amount' "
+            "(non-resident is per payment date, not monthly).", True),
+    "L11": ("Superseded in v1.3, see H11. Previous: 'Withheld tax amount. Resident: annual tax amount. Non-resident: monthly tax "
+            "amount' (non-resident is per payment date, not monthly).", True),
+    # 7.
+    "G31": ("(blank)", False),
+    # 8. official type X
+    "D18": ("Alphanumeric(3)", False),
+    "D21": ("Alphanumeric(10)", False),
+    "D28": ("Alphanumeric(1)", False),
+    "D33": ("Alphanumeric(4)", False),
+    # 9.
+    "J5": ("8-digit UBN. Refer to " + SRC + " Ch.2 Sec.1 item 3 (PDF p.24) and the check method in Annex 7 / 7-1 (PDF pp.188–189).", True),
+    "J8": ("Refer to " + SRC + " Ch.2 Sec.1 item 6 (PDF p.27) and the check method in Annex 6 / 6-1 (PDF pp.186–187).", True),
+},
+}
+for _sh, _cells in R2.items():
+    EDITS.setdefault(_sh, {}).update(_cells)

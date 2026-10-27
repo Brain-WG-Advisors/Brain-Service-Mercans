@@ -1,5 +1,6 @@
 # CONFERENCIA — Taiwan SR-105 / SR-106 / SR-107 (lote 3-em-1 LI/NHI/LP) — specs v1.1
 
+> **Rodada 2 aplicada (ver seção no fim): números e md5 atuais estão lá; as seções abaixo descrevem a rodada 1.**
 > Tudo local. Nada foi gravado no Drive, YouTrack, e-mail ou chat. Specs v1.1 = **Draft** para o usuário revisar antes de qualquer envio.
 
 ## Pedido
@@ -8,9 +9,9 @@ Mohit (2026-09-15, nos 3 tickets): "Spec Review only and fill the gaps in specs.
 ## Arquivos desta pasta
 | Arquivo | md5 |
 |---|---|
-| `TW - SI electronic filing Salary Adjustment specification v1.1.xlsx` (SR-105) | `5af6c892e8fe8955a39b75e6347ba775` |
-| `TW - SI Termination specification v1.1.xlsx` (SR-106) | `1f943ccee7c9104cd334a643c721fd47` |
-| `TW - SI electronic filing Joiner Specification v1.1.xlsx` (SR-107) | `cf497ce651e1b42236f5b75730090817` |
+| `TW - SI electronic filing Salary Adjustment specification v1.1.xlsx` (SR-105) | `ba825791c28abc28fd3f1f44a368403f (rodada 2)` |
+| `TW - SI Termination specification v1.1.xlsx` (SR-106) | `65d575e5863cd7e3db2afb3962fa56d6 (rodada 2)` |
+| `TW - SI electronic filing Joiner Specification v1.1.xlsx` (SR-107) | `7d02c8bade5d37693242ba814ee87cf5 (rodada 2)` |
 | `comparacao_SR-105.md`, `comparacao_SR-106.md`, `comparacao_SR-107.md` | log célula a célula base × v1.1 |
 | `validacao.md` | validação XML/pacote + gate do toolkit |
 | `comentarios.md` | rascunho de comentário EN por ticket (não postado) |
@@ -147,3 +148,33 @@ O lote oficial é **Excel** enviado no sistema 多憑證網路承保 da NHIA (fo
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-10-27 | Suporte (construtor A) | v1.1 das 3 specs a partir dos exports de 27/10, ajustadas aos guias NHIA atuais (114.12.12 / 114.12.12 / 115.03.11); 75 / 76 / 119 células + aba removida no SR-107; comparação célula a célula sem diferença fora do escopo; validação XML OK; rascunhos de comentário em `comentarios.md`. Nada enviado. |
+
+## Rodada 2 (2026-10-27) — correção dos achados 1–11 de `REVISAO-independente.md`
+Mesmo método (XML + repack, `FFDDEBF7`, builds refeitos a partir dos exports-base; blocos "ROUND 2" no fim de cada `build_SR-10x.py`; `xlsxpatch.py` ganhou suporte a formato numérico para a data).
+
+| # | Achado | Correção | Fonte conferida |
+|---|---|---|---|
+| 1 | SR-105 E36/E38/E40 numéricos | "Text (official sample: 6 digits with leading zero, e.g. 040000; padding/width TO BE CONFIRMED)". Por coerência, o mesmo no SR-107 L14/L16 (amostra oficial "36000"/"36300", texto) | amostras `SR-105-1-5 Sample 03_Adj3Of1.xlsx` e `SR-107-1-3 Sample 01_Apply3Of1.xlsx` (formato `@`) |
+| 2 | `special_identity_code` aponta mapper errado | SR-105 L42 e SR-107 F17: `$hr.special_identity_code::key` = **ID Information ord. 36** (mapper "Special Identity Code") + TO BE CONFIRMED, porque o mesmo código existe em Country Fields ord. 46 com o mapper "Received Social Insurance Benefits Type" (só 1, 2) | DD V3.3 (dump próprio): ID Information ord. 36; Country Fields ord. 46 |
+| 3 | perguntas faltando | `comentarios.md` reescrito: uma pergunta por marcador TBC, agrupadas | — |
+| 4 | Sample vazia | SR-105 col. J (oculta na base), SR-106 e SR-107 col. E com valores da **amostra oficial fictícia**. Campos que a amostra deixa em branco ficaram em branco (SR-105 #14; SR-106 nenhum; SR-107 #7, #13, #14, #22, #25, #26). "離職" sem os espaços finais da amostra | amostras oficiais do Drive (2026-10-23) |
+| 5 | "Draft" fora da lista | E14 = "Under Review" nas 3 | validação E13:E23 |
+| 6 | B9 com nome inventado | SR-106/107: "Not prescribed by the official format guide (…)" | guias 02/01: sem regra de nome |
+| 7 | B20 só "BLI" | SR-106/107: BLI e NHIA juntos num lote 3-em-1, que pode ir no sistema 多憑證 da NHIA (申報批次勞健合一 EXCEL) **ou** no e-service do BLI (合一申報, 單筆及批次) | folheto NHIA Leste; manual BLI cap. 9 FAQ 2, 6, 8 — **novo**: o manual mostra que o BLI também recebe o lote; B22 das 3 specs fala só do sistema NHIA (não está errado, só incompleto; não mexido) |
+| 8 | SR-106 F60 | data do fato por motivo: 1–4 → `last_working_date`; M/E/U → data do evento → NEW DD FIELD (proposed) + TO BE CONFIRMED | guia 02 #16; 承表L instr. 6(二) |
+| 9 | SR-107 B14 × F10/F26 | F10: linhas "Y" não entram no lote (B14); 1/2/L mantidos até confirmação. F26: só para linhas que ficam no lote | guia 01 nota do #6 |
+| 10 | nome em prosa | `IF(EQUALS(<campo 外籍>; ''); $hr.name; FULLWIDTH(UPPERCASE($hr.name)))` + TBC da função FULLWIDTH e de o `$hr.name` trazer o nome em inglês (SR-105 L23, SR-106 F29, SR-107 F12) | DD ID Information `name` |
+| 11 | SR-106 C14 texto | data serial 46322 com formato `mm/dd/yyyy` (o mesmo de SR-105/107; numFmt novo no styles do SR-106) | — |
+
+**Números finais (base × v1.1):**
+| Spec | md5 | Células alteradas vs base | Células da rodada 2 (v1.1 r1 × r2) | Marcadores TBC (C29) |
+|---|---|---|---|---|
+| SR-105 | `ba825791c28abc28fd3f1f44a368403f` | 88 | 19 | 10 |
+| SR-106 | `65d575e5863cd7e3db2afb3962fa56d6` | 94 | 22 | 6 |
+| SR-107 | `7d02c8bade5d37693242ba814ee87cf5` | 143 + aba removida | 30 | 17 |
+
+**Conferência da rodada 2:** `compare.py` refeito nas 3 (`comparacao_SR-10x.md`): todas as diferenças na lista declarada, todas em `FFDDEBF7`, 0 fora do escopo, 0 sem efeito; partes não tocadas idênticas (20/22/21). `validate.py`: OK nas 3 (XML bem-formado, rels/Content_Types íntegros, media/comments iguais, E14 dentro da lista, C14 como data nas 3). Toolkit: só C29 (os marcadores TBC). Delta rodada 1 → 2 medido célula a célula contra cópias da rodada 1 (valor e formato numérico).
+
+| Data | Frente | O quê |
+|---|---|---|
+| 2026-10-27 | Suporte (construtor A, rodada 2) | Achados 1–11 da revisão independente corrigidos: 19 / 22 / 30 células; comparação e validação refeitas; `comentarios.md` com uma pergunta por TBC. Nada enviado. |

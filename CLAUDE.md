@@ -145,6 +145,7 @@ Quando o usuário disser:
 6. Notas em Markdown, nomes de arquivo sem acento e com hífen (`paises/Belgica.md`), links no formato `[[Belgica]]`.
 7. `raw/` é imutável; `log.md` só cresce.
 8. **Versão vigente de artefato = a de maior número de versão** (a planilha/arquivo com a atualização mais recente). Ex.: WTC Espanha V4.4. Quando fontes citarem versões diferentes, registrar a maior como vigente e as outras como histórico. (decidido em 2026-10-05)
+9. **País já ativo → ticket de alteração para o Development.** Antes de qualquer alteração em artefato de um país, perguntar: **o país já está ativo** (em produção)? Se estiver, a alteração exige abrir ticket de alteração para o time de Development (quem leva a mudança para produção, ver [[fronteiras]]); registrar o ticket no hub do país. (decidido em 2026-10-27)
 
 ## Fontes de conhecimento
 | Fonte | Como entra |

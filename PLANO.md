@@ -7,6 +7,8 @@
 ## 1. Objetivo
 Um cérebro que **melhora a nossa entrega**: mais acertos do que erros nos artefatos e nas respostas, antes do handover para os outros times. Ele não trabalha por nós, mas impede que a gente repita erro e responda sem fonte.
 
+**Prioridade desde 2026-10-27 (decisão do usuário):** primeiro a **rede de conhecimento no Obsidian** (notas ligadas por `[[links]]` nesta pasta), porque é ela que viabiliza a melhora de eficiência na entrega do dia a dia; o objetivo acima não muda. A publicação no claude.ai (Fase 2) fica pausada e volta quando a rede estiver madura, para medir.
+
 **Prova:** medição em três camadas (§7), sempre no **claude.ai**, com linha de base antes e resultado depois.
 
 ## 2. Arquitetura
@@ -20,7 +22,7 @@ Drive ──────────┤   humana     correcoes.md  erros e o cor
 Pipeline ───────┘              testes/       medição (A, B, C + KPIs) ───────┘ e a cada fonte concluída
 ```
 - **Oficina** = esta pasta, mantida no Claude Code. **Uso diário** = claude.ai. O chefe e o time não mudam de ferramenta.
-- Conhecimento que fica só na oficina **não conta como entregue**. Desde o MVP, toda fonte concluída é publicada.
+- ~~Conhecimento que fica só na oficina não conta como entregue.~~ **Revisto em 2026-10-27:** a oficina, aberta como vault no Obsidian, é o produto principal (a rede). A publicação no claude.ai volta depois da Fase R, para medir.
 
 ## 3. Governança
 **Autorização:** a empresa autoriza o projeto e as coletas descritas aqui (confirmado pelo usuário em 2026-10-22). Não há etapa de aprovação formal.
@@ -99,7 +101,15 @@ Prompt: [prompts/fase-1-linha-de-base.md](prompts/fase-1-linha-de-base.md)
 
 **Saída:** `testes/exatidao.md` com a rodada 1; `testes/kpis.md` com o K1.
 
-### Fase 2: MVP, publicar o que já existe (até 1 semana depois da Fase 1)
+### Fase R: Rede no Obsidian (prioridade desde 2026-10-27)
+1. Abrir a pasta `brain-service` como vault no Obsidian.
+2. Revisão do grafo ("revisa o cérebro" com foco em ligações): notas órfãs, links quebrados, conceitos repetidos sem nota própria, hubs sem link para [[correcoes]], [[servicos]] e [[fronteiras]].
+3. Seguir a coleta (Fase 3) ligando cada cartão ingerido aos hubs e às notas de serviço.
+4. Uso no trabalho diário: consultar a rede ao responder tickets e e-mails (Claude Code), o que mede a eficiência na entrega.
+
+**Saída:** relatório do grafo com as correções aprovadas; rede usada nas respostas do dia a dia.
+
+### Fase 2: MVP, publicar o que já existe ⏸ pausada em 2026-10-27 (volta depois da Fase R)
 Prompts: [prompts/publicacao.md](prompts/publicacao.md) + [prompts/projeto-claude-ai.md](prompts/projeto-claude-ai.md) + [prompts/fase-5-medicao.md](prompts/fase-5-medicao.md) Partes 1–2 (rodada 2 do A)
 1. Corrigir o que for bloqueante no pacote atual (67 correções, 49 hubs, serviços, fronteiras): dado sensível, links para `raw/`, contradição de risco alto.
 2. Montar o **Projeto "Brain Service"** no claude.ai (instruções + pacote) e passar no **teste de fumaça** (5/5).
@@ -125,7 +135,7 @@ Prompts: [prompts/publicacao.md](prompts/publicacao.md) + [prompts/projeto-claud
 3. Extração em cartões.
 4. Validação em lotes de até 40 (§5).
 5. Ingestão.
-6. **Publicação incremental** no Projeto (sync/upload) e **pacote de skill** quando houver correção estatutária.
+6. **Publicação incremental** no Projeto (sync/upload; ⏸ pausada enquanto durar a Fase R) e **pacote de skill** quando houver correção estatutária.
 7. Perguntas novas para o **Conjunto B**.
 8. Fechamento: métricas no inventário, horas reais × estimadas (§9), [[log]], painel e commit.
 
@@ -188,7 +198,8 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 |---|---|
 | 0. Preparação | ✅ 2026-10-22 |
 | 1. Linha de base (A rodada 1, K1) | 2026-10-28 |
-| **2. MVP publicado + A rodada 2 (corte do C)** | **2026-11-04** |
+| R. Rede no Obsidian (prioridade) | a definir depois da revisão do grafo |
+| 2. MVP publicado + A rodada 2 (corte do C) | ⏸ pausada em 2026-10-27 |
 | 3. F1 monday | 2026-11-13 |
 | 3. F2 YouTrack (jan–out) + K2 a K4 retroativos | 2026-11-27 |
 | 4. Consolidação intermediária | 2026-12-02 |
@@ -251,7 +262,8 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 |---|---|---|---|---|---|---|
 | 0. Preparação | ✅ | — | — | 2 / ~1 | 2026-10-22 | — |
 | 1. Linha de base | ✅ rodada 1 | — | — | 3 / | 2026-10-27 | **20/30**, ajustada **20/28** (T-001 e T-003 anuladas: o gabarito estava desatualizado; T-024 reescrito); pela fonte primária: 2 correções nossas desatualizadas corrigidas (ES Modelo 190, HU under-25) e 1 em revisão (ES CRA) ([testes/exatidao.md](testes/exatidao.md)) |
-| 2. MVP | 🔄 | — | — | 3–4 / | 2026-10-27 | Projeto criado (instruções ok); falta o usuário subir os 57 arquivos → fumaça → rodada 2 |
+| R. Rede no Obsidian | 🔄 prioridade | — | — | — | 2026-10-27 | Abrir o vault + revisão do grafo |
+| 2. MVP | ⏸ pausada | — | — | 3–4 / | 2026-10-27 | Projeto "Brain Service" criado (instruções ok; usuário subiu o pacote de 57 arquivos, não conferido); fumaça e rodada 2 retomam depois da Fase R |
 | 3. F1 monday | ⏳ | 0/? | — | 4–6 / | — | Inventário dos 6 boards |
 | 3. F2 YouTrack | ⏳ | 0/? | — | 8–12 / | — | Depende da 0.6 |
 | 3. F3 Chats | ⏳ | 0/? | — | 6–10 / | — | Depois da F2 |
@@ -270,4 +282,4 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 - **Third-party payroll software** (critério do checklist CT-4321) e **alertas legislativos**: viram itens de qualidade em [[research-pipeline]]/[[design]] depois do F1. Perguntas: qual software, em que etapa, qual saída.
 - **Cadeia para frente** (o board Artifacts usa as fases Research → Design → Development → Deployment): uma linha em [[research-pipeline]] e o limite em [[fronteiras]].
 - O script do YouTrack usa `for: me` por padrão; para o histórico do time, ver [prompts/extracao-youtrack.md](prompts/extracao-youtrack.md).
-- Abrir a pasta como vault no Obsidian (opcional).
+- ~~Abrir a pasta como vault no Obsidian (opcional).~~ Virou a Fase R (2026-10-27).

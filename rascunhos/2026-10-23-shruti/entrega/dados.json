@@ -336,15 +336,223 @@
    ],
    "arquivo": "../../../Research Pipeline/Algeria/2026-10-27-HRBS-3466-DAS-v2.2/CONFERENCIA.md",
    "n": 7
+  },
+  {
+   "id": "SR-105",
+   "pais": "Taiwan",
+   "tipo": "Comentário + spec v1.1 (Salary Adjustment)",
+   "para": "Mohit (mjain)",
+   "pedido": [
+    "Spec Review only and fill the gaps (Mohit 15/09)"
+   ],
+   "respondidas": 1,
+   "texto": "@mjain I reviewed the spec against the current NHIA/BLI 3-in-1 batch salary adjustment format (03_Adj3Of1, rev. 114.12.12). The changes in v1.1 are in light blue.\n- The batch is an Excel file uploaded online (NHIA system or BLI e-service). The guide gives no positions, so there is no official TXT layout.\n- All 14 fields are now mapped, with C/M/O, data type and a sample taken from the official sample.\n- Field 11 is the monthly wage total: the 3-month average, without year-end/festival bonuses. 58009/6220% are no longer used.\n- Field 14 accepts only 1, 2, 6, 7 and 8. Field 6 now includes \"L\".\n- Periodicity is no longer quarterly. Changes from Feb–Jul are filed by the end of August, and changes from Aug–Jan by the end of February. Filing method: electronic upload.\n\nQuestions:\n1. Field 11: may we create an interim pay element for the 3-month average? Which WTs should go into it? [L36]\n2. Field 12: does HR keep the previous `$hr.nhi_grade` value? [L38]\n3. Fields 11–13: the official sample uses 6-digit text with a leading zero (040000). Should we pad? [E36/E38/E40]\n4. Employee nationality is not in the DD. Can we add it, plus a flag for \"L\"? [L18]\n5. Name: is there a full-width function, and does `$hr.name` hold the English full name? [L23]\n6. Field 14: `special_identity_code` exists twice in the DD (ID Information and Country Fields, with different mappers). Which one should the report read? [L42]\n7. `labor_insure_id` is typed as Number in the DD, but it has a letter and a leading zero. Can it become Text? [L5]\n8. The current guide no longer covers NHI-only adjustments. Should we keep them out of this batch? [A45]",
+   "afirm": [
+    [
+     "Spec v1.1 conferida célula a célula; nada fora do escopo (md5 ba825791)",
+     "agente",
+     "2026-10-27-SR-105-106-107-3in1/TW - SI electronic filing Salary Adjustment specification v1.1.xlsx"
+    ],
+    [
+     "Revisor independente: achados corrigidos na rodada 2",
+     "agente",
+     "2026-10-27-SR-105-106-107-3in1/REVISAO-independente.md"
+    ],
+    [
+     "Pontos-chave relidos por mim na fonte (03_Adj3Of1 114.12.12)",
+     "eu",
+     "raw/docs/oficiais/TW (27/10)"
+    ]
+   ],
+   "alem": [],
+   "pend": [
+    "Spec é Draft: perguntas ao Mohit no texto",
+    "Referências de célula [..] no texto: tirar antes de postar, se preferir",
+    "Anexar/subir a spec só com ordem sua"
+   ],
+   "arquivo": "../../../Research Pipeline/Taiwan/2026-10-27-SR-105-106-107-3in1/CONFERENCIA.md",
+   "n": 8
+  },
+  {
+   "id": "SR-106",
+   "pais": "Taiwan",
+   "tipo": "Comentário + spec v1.1 (Termination)",
+   "para": "Mohit (mjain)",
+   "pedido": [
+    "Spec Review only and fill the gaps (Mohit 15/09)"
+   ],
+   "respondidas": 1,
+   "texto": "@mjain I reviewed the spec against the current NHIA/BLI 3-in-1 batch withdrawal format (02_Stop3Of1, rev. 114.12.12). The changes in v1.1 are in light blue.\n- The batch is an Excel file uploaded online. There is no official TXT layout.\n- Fields 8, 10 and 11 used `$hr.residential_status`, which is tax residency. They now use nationality and `$hr.id_type`.\n- Fields 13 and 14 now use the DD names `$hr.health_insurance_withdraw_reason_code` and `$hr.health_insurance_withdraw_reason_explanation` (::key). Field 15 is part of the official format and is mapped from field 14.\n- Field 6 is always \"2\". The guide no longer accepts \"3\", so NHI-only employees are not in this batch.\n- Filing is due on the separation date, not within 3 days. Filing method: electronic upload.\n\nQuestions:\n1. Employee nationality is not in the DD. Can we add it? [F24]\n2. Name: is there a full-width function, and does `$hr.name` hold the English full name? [F29]\n3. Fields 13/14: what default should we use when HR is empty? We propose 2 / 1 (resignation). [F44/F47]\n4. Field 16: for death, missing person or loss of eligibility, the date is not the last working day. Can we add a field for the reason date? [F60]\n5. `labor_insure_id` is typed as Number in the DD. Can it become Text? [F5]",
+   "afirm": [
+    [
+     "Spec v1.1 conferida célula a célula; nada fora do escopo (md5 65d575e5)",
+     "agente",
+     "2026-10-27-SR-105-106-107-3in1/TW - SI Termination specification v1.1.xlsx"
+    ],
+    [
+     "Revisor independente: achados corrigidos na rodada 2",
+     "agente",
+     "2026-10-27-SR-105-106-107-3in1/REVISAO-independente.md"
+    ],
+    [
+     "Pontos-chave relidos por mim na fonte (02_Stop3Of1 114.12.12)",
+     "eu",
+     "raw/docs/oficiais/TW (27/10)"
+    ]
+   ],
+   "alem": [],
+   "pend": [
+    "Spec é Draft: perguntas ao Mohit no texto",
+    "Referências de célula [..] no texto: tirar antes de postar, se preferir",
+    "Anexar/subir a spec só com ordem sua"
+   ],
+   "arquivo": "../../../Research Pipeline/Taiwan/2026-10-27-SR-105-106-107-3in1/CONFERENCIA.md",
+   "n": 9
+  },
+  {
+   "id": "SR-107",
+   "pais": "Taiwan",
+   "tipo": "Comentário + spec v1.1 (Joiner)",
+   "para": "Mohit (mjain)",
+   "pedido": [
+    "Spec Review only and fill the gaps (Mohit 15/09)"
+   ],
+   "respondidas": 1,
+   "texto": "@mjain I reviewed the spec against the current NHIA/BLI 3-in-1 batch enrolment format (01_Apply3Of1, rev. 115.03.11). The changes in v1.1 are in light blue.\n- The batch is an Excel file uploaded online. There is no official TXT layout.\n- Field 6 is set per row: 1 = employee, 2 = dependant. `$hr.number_of_nhi_dependents` gives the number of dependant rows, so 58212 is no longer used.\n- Field 12 used 58139, which does not exist in WTC V2.8. It now uses `$hr.nhi_grade::orLabel`.\n- Fields 7 and 22 no longer use `$hr.residential_status`.\n- In the current guide, type \"4\" means OAI/LP/NHI and makes field 27 mandatory. Foreign (\"Y\") employees are not filed in this batch.\n- Filing is due on the hire date, not within 3 days. Filing method: electronic upload. The \"New Specification\" tab (withholding tax) has been removed.\n\nQuestions:\n1. Field 11: which HR field holds the agreed monthly wage at hire? [F14]\n2. Fields 11/12: the sample uses unpadded text (36000). Is that OK? [L14/L16]\n3. Employee nationality is not in the DD. Can we add it? Are codes 1/2/L also out of the batch, or only \"Y\"? [F10, B14]\n4. Name: is there a full-width function, and does `$hr.name` hold the English full name? [F12]\n5. Field 5: for dependant rows, should we use \"3\" as in the official sample? [F7]\n6. Field 13: `special_identity_code` exists twice in the DD. Which one should the report read? [F17]\n7. Dependants: the DD has ID, name and birthday for dependants 1–3 only. Can we add 4–6? How should non-national dependants be handled? [F19]\n8. Relationship \"P\" (ward) is in the DD but not in the batch. How should we handle these dependants? [F22]\n9. Field 20: can we add an NHI enrolment reason per dependant? We propose \"4\" as the default. [F24]\n10. Fields 21/26: `health_insurance_enrollment_start_date` and `labor_pension_contribution_date` are typed as Text in the DD. Can they become Date? Can we also add the date of the dependant's enrolment reason? [F25, F30]\n11. Fields 24/25: which object holds the integer rate? 52537/52517 divide by 100. [F28/F29]\n12. Field 27: the DD mapper label for \"2\" differs from the guide (\"not received the LI old-age benefit and over 65\"). Can it be updated? [F31]\n13. `labor_insure_id` is typed as Number in the DD. Can it become Text? [F4]",
+   "afirm": [
+    [
+     "Spec v1.1 conferida célula a célula; nada fora do escopo (md5 7d02c8ba)",
+     "agente",
+     "2026-10-27-SR-105-106-107-3in1/TW - SI electronic filing Joiner Specification v1.1.xlsx"
+    ],
+    [
+     "Revisor independente: achados corrigidos na rodada 2",
+     "agente",
+     "2026-10-27-SR-105-106-107-3in1/REVISAO-independente.md"
+    ],
+    [
+     "Pontos-chave relidos por mim na fonte (01_Apply3Of1 115.03.11)",
+     "eu",
+     "raw/docs/oficiais/TW (27/10)"
+    ]
+   ],
+   "alem": [],
+   "pend": [
+    "Spec é Draft: perguntas ao Mohit no texto",
+    "Referências de célula [..] no texto: tirar antes de postar, se preferir",
+    "Anexar/subir a spec só com ordem sua"
+   ],
+   "arquivo": "../../../Research Pipeline/Taiwan/2026-10-27-SR-105-106-107-3in1/CONFERENCIA.md",
+   "n": 10
+  },
+  {
+   "id": "SR-108",
+   "pais": "Taiwan",
+   "tipo": "Comentário + spec v1.2 (SNHI)",
+   "para": "Mohit (mjain)",
+   "pedido": [
+    "Spec Review only and fill the gaps (Mohit 15/09)"
+   ],
+   "respondidas": 1,
+   "texto": "@mjain Spec review done: v1.2 (Draft), changes highlighted in light blue. Based on the NHIA TXT layout for income type 62 and the Supplementary Premium Regulations.\n\n**Verdict:** the spec is now complete except for the 3 questions below (also in column K of the spec); the February test output would be rejected by NHIA (UBN missing, so all fields shift 8 positions; negative amounts; zero bonus total).\n\n**Changes**\n1. Section C totals (21–40, 41–56) = sum of the detail lines in the file, not YTD; Total Entries (12–20) = number of detail lines.\n2. UBN (2–9) = company registration number in sections A, B and C; positions 93–101 are the 9-character NHI insured unit code, not the UBN.\n3. Dates in ROC format (yyymm / yyymmdd); Income Payment Date (22–28) proposed as the actual payment date (engine variable to confirm).\n4. Declaration Number: employer numbering, unique per line (UBN + 62 + payment date + serial), left-aligned and padded with spaces.\n5. Frequency monthly with the premium payment (or annual by 31 January); filing electronic; encoding BIG5; names in full-width; numeric fields never negative.\n\n**Please confirm**\n1. Does the bonus base feeding 2558 include the 6220x series (Bonus Annual/Referral)? 58009 currently sums 6221x and 6222x only.\n2. Insured amount (102–107): PE 58139 is not in WTC V2.8. Should it be 64550?\n3. Which fields hold the NHI insured unit code (proposed health_insure_id), the payroll payment date and the contact person name?",
+   "afirm": [
+    [
+     "Spec v1.2 conferida célula a célula; nada fora do escopo (md5 abbcd1d7)",
+     "agente",
+     "2026-10-27-SR-108-SNHI/TW - SNHI report specification_v1.2.xlsx"
+    ],
+    [
+     "Revisor independente: achados corrigidos na rodada 2",
+     "agente",
+     "2026-10-27-SR-108-SNHI/REVISAO-independente.md"
+    ],
+    [
+     "Pontos-chave relidos por mim na fonte (NHIA TXT tipo 62; NHI Act 31/34; Regs arts. 3/4/6/10)",
+     "eu",
+     "raw/docs/oficiais/TW (27/10)"
+    ]
+   ],
+   "alem": [],
+   "pend": [
+    "Spec é Draft: perguntas ao Mohit no texto",
+    "Referências de célula [..] no texto: tirar antes de postar, se preferir",
+    "Anexar/subir a spec só com ordem sua"
+   ],
+   "arquivo": "../../../Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/CONFERENCIA.md",
+   "n": 11
+  },
+  {
+   "id": "SR-109",
+   "pais": "Taiwan",
+   "tipo": "Comentário + spec v1.2 (Payslip)",
+   "para": "Mohit (mjain)",
+   "pedido": [
+    "Spec Review only and fill the gaps (Mohit 15/09)"
+   ],
+   "respondidas": 1,
+   "texto": "@mjain Spec review done; changes highlighted in light blue in the spec (v1.2).\n\n1. Overtime by day type is covered: WTC V2.3 split 62110/62111, 62120–62122 and 62130–62132, and the rates match LSA art. 24 and the MOL reference payslip. I added optional rate and hours lines. The overtime PEs have no hours input, so please confirm whether hours can be shown.\n2. I added the \"agreed total wage\" line, which is LSA Enforcement Rules art. 14-1 item 1 and the only mandatory item that was missing. Its variable is TO BE CONFIRMED.\n3. I filled Employer Address, Payment Date and Account currency with the variables used in the Mercans reference payslips. Please confirm the names; for the payment date the references use `$payroll.payment_date` or `$entry.payroll_payment_date`.\n4. I added rows for Total Gross, Total Deductions and Total ER. The 65500:65859 range includes notional benefits (65508/65509, 65609, 65659): should they be left out of Total Gross or shown separately?\n5. National ID now points to `$hr.id_card_number` (TW DD), as an optional field. Bank fields: the TW DD also has `$hr.bank_name` and `$hr.bank_account_name`. Which record is filled?\n6. Chinese version: the law does not set a language, so I proposed one bilingual zh-TW/EN layout, with the labels in column U. This is a product decision for you.\n7. I added a Report Matrix tab, RA field descriptions (column T) and the version history.\n\nThe test was run on an India entity, so the TW wage type names were not checked. Please retest on the Taiwan entity.",
+   "afirm": [
+    [
+     "Spec v1.2 conferida célula a célula; nada fora do escopo (md5 ba8c27ad)",
+     "agente",
+     "2026-10-27-SR-109-Payslip/TW Payslip Specification_v1.2.xlsx"
+    ],
+    [
+     "Revisor independente: achados corrigidos na rodada 2",
+     "agente",
+     "2026-10-27-SR-109-Payslip/REVISAO-independente.md"
+    ],
+    [
+     "Pontos-chave relidos por mim na fonte (LSA arts. 23/24/38§5/39; ER art. 14-1; modelo MOL)",
+     "eu",
+     "raw/docs/oficiais/TW (27/10)"
+    ]
+   ],
+   "alem": [],
+   "pend": [
+    "Spec é Draft: perguntas ao Mohit no texto",
+    "Referências de célula [..] no texto: tirar antes de postar, se preferir",
+    "Anexar/subir a spec só com ordem sua"
+   ],
+   "arquivo": "../../../Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/CONFERENCIA.md",
+   "n": 12
+  },
+  {
+   "id": "SR-110",
+   "pais": "Taiwan",
+   "tipo": "Comentário + spec v1.3 (Tax Report)",
+   "para": "Mohit (mjain)",
+   "pedido": [
+    "Spec Review only and fill the gaps (Mohit 15/09)"
+   ],
+   "respondidas": 1,
+   "texto": "@mjain Spec review done against the MOF e-filing rules (綜合所得稅資料電子申報作業要點, Dec 2025 edition); spec v1.3 attached, changes in light blue.\n\n**Verdict:** your 3 points are right, but none of them was in the spec yet. They are now in, along with the other gaps. Not ready for development until the open points below are answered.\n\n**Changes**\n1. Resident = YTD for the tax year, one file a year. Non-resident = one file **per payment date**, not per calendar month (file name, serial starting \"00\" and never repeated for the same UBN, field 31 = payment date, year = payment year). Resident serials start with \"01\" so they never collide with non-resident ones.\n2. Field 9 is the **tax withheld**, not an exemption: renamed \"Tax Withheld Amount\" and mapped per column P (2552+2572+2582+2592 YTD; 2594 for format 93; 2593 non-resident). The old mapping 58100+58105 is why it was not coming.\n3. Period: resident = hire month (or 01) to termination month (or 12); non-resident = YYYMMYYYMM of the month paid (year-month, not dates).\n4. Field 5 now mapped: 93 for severance (62180:62182), 50 for the rest; an employee with both gets two records.\n5. Also corrected: voluntary pension = 2517 (58105 does not exist); country code blank unless ID type 3/5/6/7/8/9/A; treaty code blank instead of \"XX\"; TIN \"NOTIN\" by ID type; name and address in a single width (full-width for Chinese text), address starting with the postcode; ID type list; text types for year/period/date fields; file format (UTF-8, \"|\", 32 fields) and file name.\n\n**Questions**\n1. Do we generate the full .U8 (with the declaration and payer records) or a CSV to import into IMX?\n2. Are 62200:62209 already inside 58008 (double count)?\n3. Which system fields/functions hold the payment date, hire/termination dates, Chinese name, country of residence, foreign TIN, treaty code, the non-resident serial counter and full-width conversion? Marked \"TO BE CONFIRMED BY MOHIT/BA\" in columns H/J.\n4. Which tax account applies when format 93 (severance) is paid to a non-resident?\n5. Should Pension (62640:62649) and Gratuity/EOS (62930) go to format 93 (retirement income) instead of 50?\n\n@manjitbali could you share the current output after your January changes?",
+   "afirm": [
+    [
+     "Spec v1.3 conferida célula a célula; nada fora do escopo (md5 32cd0a80)",
+     "agente",
+     "2026-10-27-SR-110-TaxReport/Taiwan Tax Report Spec_v1.3.xlsx"
+    ],
+    [
+     "Revisor independente: achados corrigidos na rodada 2",
+     "agente",
+     "2026-10-27-SR-110-TaxReport/REVISAO-independente.md"
+    ],
+    [
+     "Pontos-chave relidos por mim na fonte (要點 1141210 (dez/2025))",
+     "eu",
+     "raw/docs/oficiais/TW (27/10)"
+    ]
+   ],
+   "alem": [],
+   "pend": [
+    "Spec é Draft: perguntas ao Mohit no texto",
+    "Referências de célula [..] no texto: tirar antes de postar, se preferir",
+    "Anexar/subir a spec só com ordem sua"
+   ],
+   "arquivo": "../../../Research Pipeline/Taiwan/2026-10-27-SR-110-TaxReport/CONFERENCIA.md",
+   "n": 13
   }
  ],
- "pendentes": [
-  {
-   "n": 8,
-   "id": "SR-105 a SR-110",
-   "pais": "Taiwan",
-   "tipo": "Arquivos: 6 specs revisadas",
-   "nota": "Aguardando a equipe de agentes (4 construtores + revisores)."
-  }
- ]
+ "pendentes": []
 }

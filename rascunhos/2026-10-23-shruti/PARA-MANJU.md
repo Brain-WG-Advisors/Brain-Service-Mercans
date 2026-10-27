@@ -13,7 +13,7 @@
 | HRBS-16029 Singapura/GSK (Hayat) | SDL só sobre CPF-able? 62866 como CPF-able no WTC? | ✅ 27/10: WTC V4.3 pronto e conferido (só 62866: CPF Yes, Additional Wages; `Research Pipeline/Singapore/2026-10-27-HRBS-16029-62866-CPF/`) + comentário (abas 03 e 04), fontes relidas | Só falta ordem: Drive + `[link]` + rascunho |
 | HRBS-15941 Taiwan/British Council (Archit) | Tributação, LI/EI/NHI/LP, pagamento anual, payroll ou fora | ✅ 27/10: comentário enxuto (262 palavras, aba 05), as 12 afirmações relidas por nós na fonte | Só falta ordem para o rascunho. Sem arquivo (pergunta consultiva). Lead time / pedido ao MOL pela Mercans: Operations |
 | HRBS-3466 Argélia/Henkel (Vaishali, Mohit) | Spec do relatório DAS + status | ✅ 27/10: spec DAS v2.2 (Draft) construída, revisada por agente independente (2 rodadas) e conferida por nós (`Research Pipeline/Algeria/2026-10-27-HRBS-3466-DAS-v2.2/`) + comentário com pedido de dados (abas 06 e 07) | Ordem para Drive + rascunho. Faltam dados do cliente (2 locais, unidade J×M) e WTs do Dev. Sem ETA no texto (decisão sua) |
-| SR-105 a SR-110 Taiwan (Mohit, 15/09) | 6 specs | — | Equipe de agentes não autorizada; parados desde 15/09 |
+| SR-105 a SR-110 Taiwan (Mohit, 15/09) | 6 specs | ✅ 27/10: 6 specs revisadas (SR-105/106/107 v1.1 com os guias NHIA atuais 115.03.11/114.12.12; SR-108 v1.2; SR-109 v1.2; SR-110 v1.3 com o 要點 1141210), cada uma com revisor independente + rodada 2 + conferência nossa; comentários com perguntas ao Mohit (abas 08–13). `Research Pipeline/Taiwan/2026-10-27-*` | Ordem para Drive + rascunhos. Specs Draft até o Mohit responder |
 
 ## Ao voltar da conversa
 1. Marcar aqui o que a Manju disse por ticket (fazer / não fazer / devolver).

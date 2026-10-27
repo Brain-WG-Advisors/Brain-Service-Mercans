@@ -1,10 +1,10 @@
-# Validação XML / pacote — 2026-10-27
+# Validação XML / pacote — 2026-10-27 (rodada 2)
 
 Comandos: `python -I scripts/validate.py <base> <v1.1>` e `validate_workbook.py <v1.1> --quiet` (mercans-artifact-toolkit).
 
 ## SR-105 — TW - SI electronic filing Salary Adjustment specification v1.1.xlsx
 ```
-5af6c892e8fe8955a39b75e6347ba775 *TW - SI electronic filing Salary Adjustment specification v1.1.xlsx
+ba825791c28abc28fd3f1f44a368403f *TW - SI electronic filing Salary Adjustment specification v1.1.xlsx
 a8414b1c322c47f7d1945713cd644cb0 *C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW - SI electronic filing Salary Adjustment specification.xlsx
   media     base=1 nova=1
   drawings  base=4 nova=4
@@ -13,7 +13,7 @@ a8414b1c322c47f7d1945713cd644cb0 *C:/Users/instituto/Documents/brain-service/raw
   threaded  base=0 nova=0
   abas: ['Version Control', 'Report Matrix', 'Specification', 'Options']
   imagens em Version Control 1
-  Version Control 14: 1.1 2026-10-27 00:00:00 | Draft | Wallisson Gomes | date? True
+  Version Control 14: 1.1 2026-10-27 00:00:00 | Under Review | Wallisson Gomes | date? True
   B6='Period' em lista: True
   B7='XLSX' em lista: True
   B11='Electronic: Upload online ' em lista: True
@@ -22,15 +22,19 @@ RESULTADO: OK
   [BLOCKER] C29/residual-marker  Specification!L5
   [BLOCKER] C29/residual-marker  Specification!L18
   [BLOCKER] C29/residual-marker  Specification!L23
+  [BLOCKER] C29/residual-marker  Specification!E36
   [BLOCKER] C29/residual-marker  Specification!L36
+  [BLOCKER] C29/residual-marker  Specification!E38
   [BLOCKER] C29/residual-marker  Specification!L38
+  [BLOCKER] C29/residual-marker  Specification!E40
+  [BLOCKER] C29/residual-marker  Specification!L42
   [BLOCKER] C29/residual-marker  Specification!A45
-VERDICT   FAIL  (blocker=6 major=0 minor=0)
+VERDICT   FAIL  (blocker=10 major=0 minor=0)
 ```
 
 ## SR-106 — TW - SI Termination specification v1.1.xlsx
 ```
-1f943ccee7c9104cd334a643c721fd47 *TW - SI Termination specification v1.1.xlsx
+65d575e5863cd7e3db2afb3962fa56d6 *TW - SI Termination specification v1.1.xlsx
 10d1865cee8c97136496c0de2cd5dcce *C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW - SI Termination specification.xlsx
   media     base=1 nova=1
   drawings  base=4 nova=4
@@ -39,7 +43,7 @@ VERDICT   FAIL  (blocker=6 major=0 minor=0)
   threaded  base=0 nova=0
   abas: ['Version Control', 'Report Matrix', 'Spec', 'Options']
   imagens em Version Control 1
-  Version Control 14: 1.1 2026-10-27 | Draft | Wallisson Gomes | date? False
+  Version Control 14: 1.1 2026-10-27 00:00:00 | Under Review | Wallisson Gomes | date? True
   B6='Period' em lista: True
   B7='XLSX' em lista: True
   B11='Electronic: Upload online ' em lista: True
@@ -50,12 +54,13 @@ RESULTADO: OK
   [BLOCKER] C29/residual-marker  Spec!F29
   [BLOCKER] C29/residual-marker  Spec!F44
   [BLOCKER] C29/residual-marker  Spec!F47
-VERDICT   FAIL  (blocker=5 major=0 minor=0)
+  [BLOCKER] C29/residual-marker  Spec!F60
+VERDICT   FAIL  (blocker=6 major=0 minor=0)
 ```
 
 ## SR-107 — TW - SI electronic filing Joiner Specification v1.1.xlsx
 ```
-cf497ce651e1b42236f5b75730090817 *TW - SI electronic filing Joiner Specification v1.1.xlsx
+7d02c8bade5d37693242ba814ee87cf5 *TW - SI electronic filing Joiner Specification v1.1.xlsx
 575c1a2e40caf2cc383c9d8b861c431e *C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW - SI electronic filing Joiner Specification.xlsx
   media     base=1 nova=1
   drawings  base=5 nova=4
@@ -64,7 +69,7 @@ cf497ce651e1b42236f5b75730090817 *TW - SI electronic filing Joiner Specification
   threaded  base=1 nova=1
   abas: ['Version Control', 'Report Matrix', 'Spec', 'Options']
   imagens em Version Control 1
-  Version Control 14: 1.1 2026-10-27 00:00:00 | Draft | Wallisson Gomes | date? True
+  Version Control 14: 1.1 2026-10-27 00:00:00 | Under Review | Wallisson Gomes | date? True
   B6='Period' em lista: True
   B7='XLSX' em lista: True
   B11='Electronic: Upload online ' em lista: True
@@ -76,6 +81,9 @@ RESULTADO: OK
   [BLOCKER] C29/residual-marker  Spec!F10
   [BLOCKER] C29/residual-marker  Spec!F12
   [BLOCKER] C29/residual-marker  Spec!F14
+  [BLOCKER] C29/residual-marker  Spec!L14
+  [BLOCKER] C29/residual-marker  Spec!L16
+  [BLOCKER] C29/residual-marker  Spec!F17
   [BLOCKER] C29/residual-marker  Spec!F19
   [BLOCKER] C29/residual-marker  Spec!F22
   [BLOCKER] C29/residual-marker  Spec!F24
@@ -84,5 +92,5 @@ RESULTADO: OK
   [BLOCKER] C29/residual-marker  Spec!F29
   [BLOCKER] C29/residual-marker  Spec!F30
   [BLOCKER] C29/residual-marker  Spec!F31
-VERDICT   FAIL  (blocker=14 major=0 minor=0)
+VERDICT   FAIL  (blocker=17 major=0 minor=0)
 ```

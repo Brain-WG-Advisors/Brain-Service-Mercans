@@ -195,7 +195,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | 3. F3 Chats | 2026-12-11 |
 | 3. F4 Reuniões | 2026-12-18 |
 | 3. F5 Drive | 2027-01-15 (recesso de fim de ano considerado) |
-| 3. F6 Pipeline | 0.7 resolvida em 2026-10-27; inventário feito, falta aprovar o Passo 1 |
+| 3. F6 Pipeline | 0.7 resolvida e inventário aprovado em 2026-10-27; próximo: Passo 2 |
 | 4. Consolidação final | 2027-01-20 |
 | 5. Medição final + relatório | 2027-01-27 |
 
@@ -257,7 +257,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | 3. F3 Chats | ⏳ | 0/? | — | 6–10 / | — | Depois da F2 |
 | 3. F4 Reuniões | ⏳ | 0/? | — | 4–8 / | — | Depois da F3 |
 | 3. F5 Drive | ⏳ | 0/? | — | 4–6 / | — | Depois da F4 (alvos vêm do F1) |
-| 3. F6 Pipeline | 🔄 inventário | 0/4 | — | — | 2026-10-27 | Usuário aprovar o inventário (Passo 1) |
+| 3. F6 Pipeline | 🔄 inventário aprovado | 0/4 | — | — | 2026-10-27 | Passo 2: coletar os relatórios para raw/pipeline/ |
 | 4. Consolidação | ⏳ | — | — | 3 / | — | — |
 | 5. Medição final | ⏳ | — | — | 5–6 / | — | — |
 | 6. Rotina | ⏳ | — | — | 20 min/sem | — | — |

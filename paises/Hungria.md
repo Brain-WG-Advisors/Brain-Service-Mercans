@@ -55,6 +55,7 @@
 - [ ] Reconciliar SR-A-1 com SR-A-5 (bandas riscadas 9348055; bandas 8 de 9348021 e 7 de 9348059; regs 9348044–046 GYED; contas 6035/2535 vs 6037/2537; "MUTLIPLY" em 9348053; 58130 com dois usos) — (SR-A-1, SR-A-5) [INCERTO]
 - [ ] Ajustar as report specs — Suman — (chat: design-dev-kb)
 - [ ] Design "new track" — Wallisson — (chat: design-dev-kb)
+- [ ] Under-25 (Szja tv. 29/F (3)): a isenção vale até o mês do 25º aniversário inclusive (NAV nº 73, 2026-03-19); o design com idade na `end_date` (entrada de 2026-05-27) tira esse mês → corrigir o regulation design. Ver [[correcoes]] 2026-10-27.
 
 ## Correções ligadas
 - [[correcoes]]: design HU com under-25 por idade no begin_date, nacionalidade só com `CONTAINS` e `$employee.years_worked` como idade; correto end_date, nacionalidade e residência (`$58218`) em flag única e `$person.birth_date` (T-2026-05-27/29)

@@ -250,7 +250,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | Fase / fonte | Status | Cobertura | Confirmação | Horas (est./real) | Última sessão | Próximo passo |
 |---|---|---|---|---|---|---|
 | 0. Preparação | ✅ | — | — | 2 / ~1 | 2026-10-22 | — |
-| 1. Linha de base | ✅ rodada 1 | — | — | 3 / | 2026-10-27 | **20/30** (5 ⚠️, 5 ❌; M 3/8, Espanha 3/6); 3 erros conhecidos repetidos; 7 gabaritos a revisar ([testes/exatidao.md](testes/exatidao.md)) |
+| 1. Linha de base | ✅ rodada 1 | — | — | 3 / | 2026-10-27 | **20/30**, ajustada **20/28** (T-001 e T-003 anuladas: o gabarito estava desatualizado; T-024 reescrito); pela fonte primária: 2 correções nossas desatualizadas corrigidas (ES Modelo 190, HU under-25) e 1 em revisão (ES CRA) ([testes/exatidao.md](testes/exatidao.md)) |
 | 2. MVP | 🔄 | — | — | 3–4 / | 2026-10-27 | Projeto criado (instruções ok); falta o usuário subir os 57 arquivos → fumaça → rodada 2 |
 | 3. F1 monday | ⏳ | 0/? | — | 4–6 / | — | Inventário dos 6 boards |
 | 3. F2 YouTrack | ⏳ | 0/? | — | 8–12 / | — | Depende da 0.6 |

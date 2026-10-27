@@ -1,28 +1,36 @@
 # Conferência célula a célula: TW Payslip Specification base (export 2026-10-27) × v1.2
 
 - Base: `C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW Payslip Specification.xlsx` md5 1cbe1e44477b982032520e3d7c26efdc
-- v1.2: `TW Payslip Specification_v1.2.xlsx` md5 d198bd28f8c0910e47572e42c47b0c1a
+- v1.2: `TW Payslip Specification_v1.2.xlsx` md5 ba8c27add3ee9680738db2008f3985a1
 
 ## 1. Pacote (zip)
 - Partes só na v1.2: ['xl/worksheets/sheet4.xml']; só na base: []
 - Partes idênticas byte a byte: 15; alteradas: ['[Content_Types].xml', 'xl/_rels/workbook.xml.rels', 'xl/styles.xml', 'xl/workbook.xml', 'xl/worksheets/sheet1.xml', 'xl/worksheets/sheet2.xml']
 - XML bem formado: todos
-- styles: cellXfs 183/183, fills 9/9
-- maior índice de estilo usado: 182 (< 183)
+- styles: cellXfs 185/185, fills 9/9
+- maior índice de estilo usado: 184 (< 185)
 - mergeCells Spec: 142 (contagem declarada 142), sem sobreposição: sim
 
 ## 2. Célula a célula (valor e preenchimento)
 - Abas base: ['Version Control', 'Spec', 'Options']; abas v1.2: ['Version Control', 'Report Matrix', 'Spec', 'Options']
-- Células diferentes por aba: {'Version Control': 5, 'Report Matrix': 41, 'Spec': 79}
-- Total: 125; esperadas pelo script: 125
+- Células diferentes por aba: {'Version Control': 13, 'Report Matrix': 41, 'Spec': 79}
+- Total: 133; esperadas pelo script: 133
 
 | Aba | Célula | Antes | Depois | Fill | Status |
 |---|---|---|---|---|---|
-| Version Control | B13 |  | 1.2 | FFDDEBF7 | ok |
-| Version Control | C13 |  | 2026-10-27 | FFDDEBF7 | ok |
-| Version Control | D13 |  | Spec review (LSA art. 23-24, Enforcement Rules art. 14-1): added Agreed Total Wage, Payment Date, Employer Address, total rows, overtime ... | FFDDEBF7 | ok |
-| Version Control | E13 |  | Draft | FFDDEBF7 | ok |
-| Version Control | F13 |  | Wallisson Gomes | FFDDEBF7 | ok |
+| Version Control | B13 |  | 1.0 | FFDDEBF7 | ok |
+| Version Control | C13 |  | 2025-12-02 | FFDDEBF7 | ok |
+| Version Control | D13 |  | Payslip mapping done (ticket SR-109). | FFDDEBF7 | ok |
+| Version Control | F13 |  | Lily Li | FFDDEBF7 | ok |
+| Version Control | B14 |  | 1.1 | FFDDEBF7 | ok |
+| Version Control | C14 |  | 2026-01-29 | FFDDEBF7 | ok |
+| Version Control | D14 |  | Payslip configuration completed at country level; report code taiwan-payslip. | FFDDEBF7 | ok |
+| Version Control | F14 |  | Shaik Jani Sharif | FFDDEBF7 | ok |
+| Version Control | B15 |  | 1.2 | FFDDEBF7 | ok |
+| Version Control | C15 |  | 2026-10-27 | FFDDEBF7 | ok |
+| Version Control | D15 |  | Spec review (LSA art. 23-24, Enforcement Rules art. 14-1): added Agreed Total Wage, Payment Date, Employer Address, total rows, overtime ... | FFDDEBF7 | ok |
+| Version Control | E15 |  | Draft | FFDDEBF7 | ok |
+| Version Control | F15 |  | Wallisson Gomes | FFDDEBF7 | ok |
 | Report Matrix | A1 |  | Report Matrix | FFDDEBF7 | ok |
 | Report Matrix | A3 |  | Report Name | FFDDEBF7 | ok |
 | Report Matrix | B3 |  | Taiwan Payslip (工資各項目計算方式明細) | FFDDEBF7 | ok |
@@ -53,7 +61,7 @@
 | Report Matrix | A16 |  | Inclusion Filter (Event) | FFDDEBF7 | ok |
 | Report Matrix | B16 |  | Pay elements shown only when the value is not 0 (ticket, 03/12/2025). | FFDDEBF7 | ok |
 | Report Matrix | A17 |  | Reporting Currency | FFDDEBF7 | ok |
-| Report Matrix | B17 |  | TWD (NT$) - TO BE CONFIRMED BY MOHIT/BA | FFDDEBF7 | ok |
+| Report Matrix | B17 |  | TWD (NT$) | FFDDEBF7 | ok |
 | Report Matrix | A18 |  | Rounding (Report-wise) | FFDDEBF7 | ok |
 | Report Matrix | B18 |  | TO BE CONFIRMED BY MOHIT/BA | FFDDEBF7 | ok |
 | Report Matrix | A19 |  | Number Format | FFDDEBF7 | ok |
@@ -62,12 +70,12 @@
 | Report Matrix | B20 |  | N/A (PDF) | FFDDEBF7 | ok |
 | Report Matrix | A21 |  | Introduction and Purpose of Report | FFDDEBF7 | ok |
 | Report Matrix | B21 |  | LSA art. 23 para. 1 requires the employer to give each worker an itemised statement of how each wage item is calculated (工資各項目計算方式明細). LS... | FFDDEBF7 | ok |
-| Report Matrix | A22 |  | Legal basis | FFDDEBF7 | ok |
-| Report Matrix | B22 |  | Labor Standards Act arts. 23, 24, 39, 79; LSA Enforcement Rules art. 14-1; MOL reference payslip examples (參考例, attached to ticket SR-109... | FFDDEBF7 | ok |
+| Report Matrix | A23 |  | Comments | FFDDEBF7 | ok |
+| Report Matrix | B23 |  | Legal basis: Labor Standards Act arts. 23, 24, 39, 79; LSA Enforcement Rules art. 14-1; MOL reference payslip examples (參考例, attached to ... | FFDDEBF7 | ok |
 | Spec | T4 |  | Field description - RA (v1.2) | FFDDEBF7 | ok |
 | Spec | U4 |  | Label zh-TW (proposed) | FFDDEBF7 | ok |
 | Spec | T5 |  | Legal name of the employing entity. | FFDDEBF7 | ok |
-| Spec | Q6 |  | TO BE CONFIRMED BY MOHIT/BA - legal entity address variable (TW DD V3.3 has only $legal_entity_hr.post_code) | FFDDEBF7 | ok |
+| Spec | Q6 |  | CONCAT($legal_entity_address.1.address_line_1;' ';$legal_entity_address.1.address_line_2;' ';$legal_entity_address.1.city;' ';$legal_enti... | FFDDEBF7 | ok |
 | Spec | T6 |  | Registered address of the employing entity. Not a mandatory item of LSA Enforcement Rules art. 14-1; kept because the example payslip sho... | FFDDEBF7 | ok |
 | Spec | T7 |  | Country of the legal entity (Taiwan). | FFDDEBF7 | ok |
 | Spec | T8 |  | Pay period begin and end dates of the payroll run. | FFDDEBF7 | ok |
@@ -82,12 +90,12 @@
 | Spec | U12 |  | 證件號碼 | FFDDEBF7 | ok |
 | Spec | T13 |  | Employee primary email. | FFDDEBF7 | ok |
 | Spec | T14 |  | Employee hire date. | FFDDEBF7 | ok |
-| Spec | U14 |  | 到職日期 | FFDDEBF7 | ok |
-| Spec | Q15 |  | TO BE CONFIRMED BY MOHIT/BA - payment date of the payroll run (no variable found in TW DD V3.3) | FFDDEBF7 | ok |
+| Spec | U14 |  | 到（離）職日期 | FFDDEBF7 | ok |
+| Spec | Q15 |  | $payroll.payment_date (as in REFERENCE_Payslip_Tunisia) or $entry.payroll_payment_date (as in REFERENCE_Payslip_Mozambique) — proposed (a... | FFDDEBF7 | ok |
 | Spec | T15 |  | Date the net pay is paid / credited to the employee. Shown in the MOL reference payslips (發薪日期 / 入帳日期); not a mandatory item of LSA Enfor... | FFDDEBF7 | ok |
 | Spec | U15 |  | 發薪日期 | FFDDEBF7 | ok |
 | Spec | F16 |  | Agreed Total Wage | FFDDEBF7 | ok |
-| Spec | H16 |  | TO BE CONFIRMED BY MOHIT/BA | FFDDEBF7 | ok |
+| Spec | H16 |  | 3210.0 | FFDDEBF7 | ok |
 | Spec | T16 |  | Payment method (e.g. bank transfer). | FFDDEBF7 | ok |
 | Spec | T17 |  | Each earning pay element on its own line (code + name), only when the value is not 0 (ticket, 03/12/2025). Covers LSA Enforcement Rules a... | FFDDEBF7 | ok |
 | Spec | U17 |  | 應發項目 | FFDDEBF7 | ok |
@@ -95,7 +103,7 @@
 | Spec | U18 |  | 金額 | FFDDEBF7 | ok |
 | Spec | M20 |  | Earnings | FFDDEBF7 | ok |
 | Spec | N20 |  | Overtime rate (overtime lines only) | FFDDEBF7 | ok |
-| Spec | Q20 |  | Static rate from the WTC V2.8 PE name: 62110=1.33, 62111=1.67, 62120=1.33, 62121=1.67, 62122=2.67, 62130=1, 62131=1.33, 62132=1.67. Displ... | FFDDEBF7 | ok |
+| Spec | Q20 |  | Static rate from the WTC V2.8 PE name (names round 1⅓/1⅔/2⅔ to 1.33/1.67/2.67): 62110 = 1⅓, 62111 = 1⅔ (LSA art. 24 para. 1); 62120 = 1⅓,... | FFDDEBF7 | ok |
 | Spec | T20 |  | Recommended, not mandatory (MOL reference payslip model 3 shows rate and hours; note 7: items may be added or removed). Rates checked aga... | FFDDEBF7 | ok |
 | Spec | U20 |  | 倍率 | FFDDEBF7 | ok |
 | Spec | M21 |  | Earnings | FFDDEBF7 | ok |
@@ -106,7 +114,7 @@
 | Spec | M22 |  | Earnings | FFDDEBF7 | ok |
 | Spec | N22 |  | Total Gross | FFDDEBF7 | ok |
 | Spec | Q22 |  | SUM of Accounts: 62100:62103+62106:62999+65500:65859+79401:79450 | FFDDEBF7 | ok |
-| Spec | T22 |  | Sum of all earning lines shown (same accounts as Earnings). MOL reference payslips show this subtotal. | FFDDEBF7 | ok |
+| Spec | T22 |  | Sum of all earning lines shown (same accounts as Earnings). MOL reference payslips show this subtotal. Note: 65500:65859 includes notiona... | FFDDEBF7 | ok |
 | Spec | U22 |  | 應發金額 | FFDDEBF7 | ok |
 | Spec | M23 |  | Agreed wage | FFDDEBF7 | ok |
 | Spec | N23 |  | Agreed Total Wage | FFDDEBF7 | ok |
@@ -121,23 +129,23 @@
 | Spec | Q30 |  | SUM of Accounts: 21100:21999+25500:25899+2551+2555+2554+2558+2517+2557+2552+2572+2582+2592+2593+2594 | FFDDEBF7 | ok |
 | Spec | T30 |  | Sum of all deduction lines shown (same accounts as Deductions). | FFDDEBF7 | ok |
 | Spec | U30 |  | 應扣金額 | FFDDEBF7 | ok |
-| Spec | T37 |  | Amount actually paid. Covers LSA Enforcement Rules art. 14-1 item 4. Expected to equal Total Gross - Total Deductions; BA to confirm for ... | FFDDEBF7 | ok |
+| Spec | T37 |  | Amount actually paid. Covers LSA Enforcement Rules art. 14-1 item 4. Total Gross (row 22) includes notional benefits (65508/65509, 65609,... | FFDDEBF7 | ok |
 | Spec | U37 |  | 實發金額 | FFDDEBF7 | ok |
 | Spec | T38 |  | Employer contributions, one line per pay element when the value is not 0. Information only; not an item of LSA Enforcement Rules art. 14-1. | FFDDEBF7 | ok |
 | Spec | T39 |  | Amount per employer contribution (LI, EI, OAI, wage arrears fund, NHI, SNHI, labor pension new/old per WTC V2.8). | FFDDEBF7 | ok |
 | Spec | N41 |  | Total Employer Contributions | FFDDEBF7 | ok |
 | Spec | Q41 |  | SUM of Accounts: 2550+2565+2560+2566+2564+2568+2537+2538+23550:23900 | FFDDEBF7 | ok |
 | Spec | T41 |  | Sum of the employer contribution lines shown. Information only. | FFDDEBF7 | ok |
-| Spec | T47 |  | Employee bank name. | FFDDEBF7 | ok |
+| Spec | T47 |  | Employee bank name. Question to BA: TW DD V3.3 Country Fields also holds $hr.bank_name, $hr.bank_account_name and $hr.bank_branch_code (C... | FFDDEBF7 | ok |
 | Spec | U47 |  | 銀行 | FFDDEBF7 | ok |
 | Spec | T48 |  | SWIFT/BIC of the employee bank. | FFDDEBF7 | ok |
-| Spec | T49 |  | Account holder name. | FFDDEBF7 | ok |
+| Spec | T49 |  | Account holder name. Question to BA: TW DD V3.3 Country Fields also holds $hr.bank_name, $hr.bank_account_name and $hr.bank_branch_code (... | FFDDEBF7 | ok |
 | Spec | U49 |  | 帳戶名稱 | FFDDEBF7 | ok |
 | Spec | T50 |  | Employee account number. | FFDDEBF7 | ok |
 | Spec | U50 |  | 轉帳帳號 | FFDDEBF7 | ok |
 | Spec | M51 |  | Banking details | FFDDEBF7 | ok |
 | Spec | N51 |  | Account currency | FFDDEBF7 | ok |
-| Spec | Q51 |  | TO BE CONFIRMED BY MOHIT/BA (shown in the example, cell I63; no mapping) | FFDDEBF7 | ok |
+| Spec | Q51 |  | $primary_employee_bank_account.account_currency — proposed (as in Mercans reference payslips) — confirm variable name with Mohit/BA | FFDDEBF7 | ok |
 | Spec | T51 |  | Currency of the employee account. | FFDDEBF7 | ok |
 | Spec | M52 |  | Banking details | FFDDEBF7 | ok |
 | Spec | N52 |  | Account type | FFDDEBF7 | ok |

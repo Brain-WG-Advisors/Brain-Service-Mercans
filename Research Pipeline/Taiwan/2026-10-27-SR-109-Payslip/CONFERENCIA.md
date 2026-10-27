@@ -10,7 +10,7 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs." Pontos herdado
 | Arquivo | md5 |
 |---|---|
 | Base: `raw/docs/drive-exports/2026-10-27/TW Payslip Specification.xlsx` (export de hoje, igual à de 23/10) | `1cbe1e44477b982032520e3d7c26efdc` |
-| Final: `TW Payslip Specification_v1.2.xlsx` (esta pasta) | `d198bd28f8c0910e47572e42c47b0c1a` |
+| Final: `TW Payslip Specification_v1.2.xlsx` (esta pasta), após a rodada 2 | `ba8c27add3ee9680738db2008f3985a1` (rodada 1: `d198bd28f8c0910e47572e42c47b0c1a`) |
 | `scripts/build_v12.py` | gera a v1.2 por cirurgia XML + zip (partes não alteradas byte a byte) |
 | `scripts/compare_v12.py` → `comparacao-celula-a-celula.md` | conferência célula a célula + validação do pacote |
 | `scripts/changes.json` | lista das 125 células escritas |
@@ -27,7 +27,7 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs." Pontos herdado
 | I2 | WTC V2.8 | `raw/docs/drive-exports/2026-10-23/Taiwan WTC V2.8.xlsx` | PEs 62110/62111, 62120–62122, 62130–62132 (nomes com multiplicador); todos "Lump Sum", sem fórmula |
 | I3 | Outras specs TW (export 2026-10-27) | Tax Report, SNHI, SI Join/Salary/Termination | usam `$hr.id_card_number`; SI Termination usa `$hr.passport_number` para não residentes |
 
-## Decisões (o que entrou na v1.2)
+## Decisões (o que entrou na v1.2, rodada 1; o que mudou está em "Rodada 2")
 | Item | Antes | Depois | Fonte |
 |---|---|---|---|
 | Agreed Total Wage (linha 23, M–U; exemplo F16/H16) | não existia | linha nova; mapeamento TO BE CONFIRMED BY MOHIT/BA (NEW DD FIELD proposto ou valor contratual); proposta: salário mensal contratado (base + adicionais fixos, antes de proporcionalização/ausência) | P2 art. 14-1(1); P3 modelo 2 |
@@ -45,7 +45,7 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs." Pontos herdado
 
 Overtime por tipo de dia: faixas do WTC conferem com a fonte. Dia útil 1.33/1.67 = P1 art. 24 §1 (1)(2). Descanso 1.33/1.67 = P1 art. 24 §2; 2.67 (>8 h) = P3 nota 3 (a LSA, no texto lido, não traz o >8 h). Feriado 1 (≤8 h, +1 dia) e 1.33/1.67 (>8 h) = P3 nota 4 + P1 art. 39. Nada a mudar no mapeamento por faixa (62106:62999 cobre todos).
 
-## TO BE CONFIRMED BY MOHIT/BA (na planilha)
+## TO BE CONFIRMED BY MOHIT/BA (rodada 1; lista atual em "Rodada 2")
 1. Agreed Total Wage: variável/campo e definição (Q23, T23).
 2. Payment Date: variável (Q15).
 3. Employer Address: variável da entidade (Q6).
@@ -62,7 +62,7 @@ Overtime por tipo de dia: faixas do WTC conferem com a fonte. Dia útil 1.33/1.6
 - Rótulos zh-TW para campos sem rótulo em P2/P3/DD: deixados em branco na coluna U (o RA local preenche).
 - `validate_workbook.py --artifact RSPEC` dá FAIL na base e na v1.2: o contrato é o "Spain 9-sheet" (não se aplica a esta spec de 3 abas), e os marcadores "TO BE CONFIRMED" são os pedidos de confirmação intencionais. Sem erros de fórmula.
 
-## Conferência
+## Conferência (rodada 1)
 - Célula a célula (valor + preenchimento, todas as abas): 125 diferenças, todas previstas e em `FFDDEBF7`; **nenhuma fora do escopo** (`comparacao-celula-a-celula.md`). Por aba: Version Control 5, Report Matrix 41 (aba nova), Spec 79 (só Q12 tinha valor antes; as outras 78 eram vazias).
 - Pacote: 15 partes idênticas byte a byte; alteradas só `sheet1.xml`, `sheet2.xml`, `styles.xml`, `workbook.xml`, `workbook.xml.rels`, `[Content_Types].xml`; nova `sheet4.xml`. Todo XML bem formado; rels e content types íntegros; 183 cellXfs/9 fills coerentes; 142 merges sem sobreposição; abre no openpyxl. Desenhos, imagem, comentários e `person.xml` intactos.
 - Destaque em `FFDDEBF7` (pedido). O comentário da Version Control diz "highlight changes in yellow": seguimos o padrão do cérebro; ajustar se o Mohit preferir.
@@ -76,7 +76,24 @@ Overtime por tipo de dia: faixas do WTC conferem com a fonte. Dia útil 1.33/1.6
 6. Teste do Jani (29/01/2026) foi numa entidade da Índia: retestar na entidade de Taiwan.
 7. Opcional não aplicado: bloco de saldo de 特休/補休 (P3 備註; P1 art. 38 §5, art. 32-1).
 
+## Rodada 2 (revisão independente, `REVISAO-independente.md`)
+O build parte de novo da base, com `scripts/build_v12.py` ajustado; a rodada 1 foi guardada só para o diff. Diff r1 × r2: `comparacao-rodada2.md`, com **29 células** (Spec 10, Report Matrix 5, Version Control 14) e nenhuma fora do escopo. Diff base × r2: `comparacao-celula-a-celula.md`, com 133 células escritas (Spec 79, Report Matrix 41, VC 13) e nenhuma fora do escopo. Pacote: 15 partes idênticas byte a byte, XML bem formado, 185 cellXfs, 142 merges sem sobreposição.
+
+| # | Célula | Correção | Fonte conferida por mim |
+|---|---|---|---|
+| 1 | Spec!Q6, Q15, Q51 | Variáveis core propostas, com a marca "proposed (as in Mercans reference payslips) — confirm variable name with Mohit/BA". Endereço: `CONCAT($legal_entity_address.1.address_line_1;…;postal_code)`. Data: `$payroll.payment_date` (Tunísia) **ou** `$entry.payroll_payment_date` (Moçambique), as duas citadas porque divergem. Moeda: `$primary_employee_bank_account.account_currency` | `frentes/pipeline/mercans-pipeline/shared/REFERENCE_Payslip_Tunisia.xlsx` (md5 5f10c16f…), Payslip Spec!D10, D12, D62; `REFERENCE_Payslip_Mozambique.xlsx` (md5 3511b05a…), Payslip Spec 1!D11, D13, D64 |
+| 2 | Spec!T22, T37 | Deixa de afirmar Net = Gross − Deductions. Registra que 65500:65859 inclui nocionais (65508/65509 Car, 65609 Phone, 65659 Meal "(Notional)", categoria Earning) e acrescenta "TO BE CONFIRMED BY MOHIT/BA: exclude notional benefits from Total Gross or show them separately". Q22 não foi mudado | WTC V2.8, aba WTC (os 4 são os únicos "Notional" em 65500:65859) |
+| 3 | Spec!U14 | 到（離）職日期 | P3, modelo 3 (cabeçalho "到（離）職日期") |
+| 4 | Spec!H16 | Amostra fictícia 3210 (igual ao I19), sem TBC | — |
+| 5 | Spec!Q20 | 1⅓/1⅔/2⅔ por PE com a fonte de cada um; 62130 = "+1 day's wage" | P1 art. 24 §1–2; P3 notas 3–4; P1 art. 39 |
+| 6 | Spec!T47, T49 | Pergunta ao BA: o DD TW (Country Fields) tem `$hr.bank_name`/`$hr.bank_account_name`/`$hr.bank_branch_code`; qual cadastro é preenchido? Mapeamento Q47/Q49 mantido | DD V3.3, Country Fields (ordinais 7–9, CM se for transferência) |
+| 7 | Report Matrix!B17, A22–B23 | B17 "TWD (NT$)" sem TBC; a linha 22 fica vazia e a 23 vira "Comments", com a base legal dentro (layout da TW SNHI Spec: Introduction, linha vazia, Comments) | TW SNHI report specification, Report Matrix |
+| 8 | Version Control 13–15 | 1.0 (2025-12-02, Lily Li, "Payslip mapping done") e 1.1 (2026-01-29, Shaik Jani Sharif, "configuration completed at country level; report code taiwan-payslip"); a 1.2 desce para a linha 15. Status de 1.0/1.1 em branco (o ticket não diz). Destaque azul mantido | `raw/tickets/api/2026-10-23-ex-skamble/SR-109.md`, linhas 68–70 e 83–88 |
+
+**TBC restantes (15 células):** Spec Q20 (exibir rate), Q21 (horas), Q23 e T23 (salário acordado), T12 (fallback do ID), T22 e T37 (nocionais), T47 e T49 (cadastro bancário), Q52 (tipo de conta); Report Matrix B8 (encoding), B10 (nome do arquivo), B13 (idioma bilíngue), B18 (arredondamento), B19 (formato numérico). Há ainda 3 variáveis propostas que só pedem a confirmação do nome (Q6, Q15, Q51). O `validate_workbook.py` continua acusando os 16 marcadores "TO BE CONFIRMED" (os 15 acima mais o resumo da VC D15) e o contrato Spain 9-sheet; não há erro de fórmula.
+
 ## Histórico
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-10-27 | Suporte (construtor C) | v1.2 gerada da export de 27/10 (md5 1cbe1e44…); 125 células em azul-claro; Report Matrix nova; colunas RA e zh-TW; conferência célula a célula sem diferença fora do escopo; comentário EN rascunhado, nada postado |
+| 2026-10-27 | Suporte (construtor C), rodada 2 | 8 correções da revisão independente (29 células); md5 ba8c27ad…; diff r1×r2 e base×r2 sem diferença fora do escopo; comentário atualizado |

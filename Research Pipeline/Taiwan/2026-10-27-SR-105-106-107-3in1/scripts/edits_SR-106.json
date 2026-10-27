@@ -1,0 +1,467 @@
+{
+ "edits": [
+  {
+   "sheet": "Version Control",
+   "cell": "B9",
+   "value": "Taiwan",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "B14",
+   "value": "1.1",
+   "num": true
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "C14",
+   "value": "2026-10-27",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "D14",
+   "value": "Spec review against NHIA/BLI 3-in-1 batch withdrawal format (02_Stop3Of1, rev. 114.12.12): field mappings corrected, field 15 added, C/M/O, data types and Report Matrix updated.",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "E14",
+   "value": "Draft",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "F14",
+   "value": "Wallisson Gomes",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B11",
+   "value": "Electronic: Upload online ",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B14",
+   "value": "Employees leaving whose LI(+EI)/OAI, LP and NHI are filed by the same unit (insurance type 2). NHI-only withdrawals ($hr.insurance_coverage = 3) are filed with NHIA, not in this batch (guide 02_Stop3Of1, rev. 114.12.12, field 6 and reminder).",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B22",
+   "value": "File on the separation date (離職當日). LI/EI coverage ends at 24:00 on the day the filing reaches BLI; NHI ends at 24:00 on the day the withdrawal reason occurs (BLI form 承表L rev. 113.06, instr. 6). Dependants' NHI is transferred out automatically: no dependant rows. LP: the filing date is taken as the last LP contribution date; if different, file the LP stop form separately with BLI (承表L note 3). Electronic batch: Excel upload in the NHIA multi-certificate system; the official guide defines column order, values and notes only (no start/end positions, no official TXT layout).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J2",
+   "value": "C = Conditional, M = Mandatory, O = Optional",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K2",
+   "value": "Data Type",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D3",
+   "value": "2",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J3",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K3",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C5",
+   "value": "保險證號 (8位數字)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F5",
+   "value": "$legal_entity_hr.labor_insure_id - first 8 characters, as text (keep leading zeros). DD V3.3 types this field as Number although the 9th character is a letter: TO BE CONFIRMED BY MOHIT/BA (DD also has insurance_certification_number, '8 digits + 1 text').",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J5",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K5",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C7",
+   "value": "保險證號檢查碼 (1位英文字母)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F7",
+   "value": "UPPERCASE of the 9th character of $legal_entity_hr.labor_insure_id",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J7",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K7",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F9",
+   "value": "PREPAD($legal_entity_hr.health_insure_id; 9; '0') - 9 digits as text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J9",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K9",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "H11",
+   "value": "$legal_entity_hr.nhi_authority::key (DD V3.3, option mapper 'NHI Authority', keys 1-6)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J11",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K11",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D18",
+   "value": "2",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F18",
+   "value": "Always \"2\" (guide rev. 114.12.12 accepts only \"2\" = 勞(就)保/災保/勞退/健保). Employees with $hr.insurance_coverage = 3 (NHI only) are excluded from this batch.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G18",
+   "value": "To withdraw \"勞(就)保/災保/勞退/健保\" (LI/EI, OAI, LP and NHI), enter \"2\".",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G19",
+   "value": "Value \"3\" (NHI only) is no longer in the guide.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G20",
+   "value": "NHI-only changes are filed separately with NHIA (guide reminder).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J18",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K18",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D22",
+   "value": "1",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J22",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K22",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D24",
+   "value": "Y, 1, 2, L, Blank",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F24",
+   "value": "Employee nationality: no field in DD V3.3 -> NEW DD FIELD (proposed): Employee Nationality (+ permanent-resident foreign professional flag for 'L'); TO BE CONFIRMED BY MOHIT/BA. Logic: nationality = TW -> blank; permanent-resident foreign professional (永居外專) -> 'L'; $hr.spouse_nationality = TW and nationality = CN -> '2'; $hr.spouse_nationality = TW and other nationality (incl. Hong Kong/Macau) -> '1'; otherwise 'Y'. Do not use $hr.residential_status (tax residency).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G28",
+   "value": "For \"Permanent-resident foreign professional\" (永居外專), enter \"L\". \"Foreign spouse\" (\"1\") includes Hong Kong/Macau spouses.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J24",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K24",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C29",
+   "value": "被保險人姓名",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F29",
+   "value": "Nationals: Chinese name (ID Information field 'name' 名字). Foreigners with English names: UPPERCASE full name converted to full-width characters (e.g. ＤＡＶＩＤ), max. 200 characters. Full-width conversion function: TO BE CONFIRMED BY MOHIT/BA.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G29",
+   "value": "Chinese names: nationals at least 2 characters, foreigners at least 1. English names: full name in full-width uppercase letters. Maximum 200 characters.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J29",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K29",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C31",
+   "value": "被保險人身分證號",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C32",
+   "value": "(居留證統一證號或護照號碼)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F31",
+   "value": "IF(EQUALS($hr.id_type::key; '3'); $hr.passport_number; $hr.id_card_number) - nationals: national ID; foreigners: ARC unified ID number (id_type 2) or passport (id_type 3), the same ID used at enrolment. Replaces $hr.residential_status (tax residency).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J31",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K31",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C36",
+   "value": "被保險人居留證統一證號",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F36",
+   "value": "IF(EQUALS($hr.id_type::key; '2'); $hr.id_card_number; '') - ARC unified ID number; blank for nationals.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J36",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K36",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J40",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K40",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D44",
+   "value": "1, 2",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F44",
+   "value": "$hr.health_insurance_withdraw_reason_code::key (1 = withdrawal, 2 = transfer out). Default when the HR field is empty: TO BE CONFIRMED BY MOHIT/BA (proposal: 2 for a resignation).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J44",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K44",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F47",
+   "value": "$hr.health_insurance_withdraw_reason_explanation::key (if field 13 = 1: M, E, U; if 2: 1, 2, 3, 4). Default when empty: TO BE CONFIRMED BY MOHIT/BA (proposal: 1 = resignation).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G50",
+   "value": "For those who lost eligibility under NHI Act art. 8 or 9 (loss of nationality or household registration moved out; residence permit expired), enter \"U\".",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J47",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K47",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "B56",
+   "value": "Health insurance withdrawal reason description (text)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C56",
+   "value": "健保退保原因說明",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F56",
+   "value": "Text derived from field 14: M -> 死亡; E -> 失蹤; U -> 喪失資格; 1 -> 離職; 2 -> 退休; 3 -> 停、歇業; 4 -> 退會 (short labels of the guide, not the mapper Local Value).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J56",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K56",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F60",
+   "value": "CONCAT(PREPAD(SUBTRACT(DATE_FORMAT($employee.last_working_date; 'yyyy'); 1911); 3; '0'); DATE_FORMAT($employee.last_working_date; 'MMdd'))",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "J60",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K60",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "A65",
+   "value": "NOTE (guide rev. 114.12.12): ※ When the insured person withdraws from NHI, all dependants are transferred out; no dependant data is entered. ※ NHI Act art. 8: loss of nationality or household registration moved out; art. 9: residence permit expired. ※ NHI-only changes are filed separately with NHIA.",
+   "num": false
+  }
+ ],
+ "modified_parts": [
+  "xl/styles.xml",
+  "xl/worksheets/sheet1.xml",
+  "xl/worksheets/sheet2.xml",
+  "xl/worksheets/sheet3.xml"
+ ],
+ "removed_parts": []
+}

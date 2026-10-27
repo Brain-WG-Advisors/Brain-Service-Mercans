@@ -9,6 +9,7 @@ from xml.sax.saxutils import escape
 BASE, OUT = sys.argv[1], sys.argv[2]
 HL = "FFDDEBF7"
 TBC = "TO BE CONFIRMED BY MOHIT/BA"
+PROP = " — proposed (as in Mercans reference payslips) — confirm variable name with Mohit/BA"
 
 zin = zipfile.ZipFile(BASE)
 parts = {i.filename: zin.read(i.filename) for i in zin.infolist()}
@@ -68,6 +69,8 @@ def col2n(c):
     return n
 
 def cellxml(ref, s, text):
+    if isinstance(text, (int, float)):
+        return f'<c r="{ref}" s="{s}"><v>{text}</v></c>'
     if text is None or text == "":
         return f'<c r="{ref}" s="{s}"/>'
     return f'<c r="{ref}" s="{s}" t="inlineStr"><is><t xml:space="preserve">{escape(text)}</t></is></c>'
@@ -111,7 +114,7 @@ spec_edits = [
     ("U4", "Label zh-TW (proposed)", 19),
     # Company
     ("T5", "Legal name of the employing entity.", None),
-    ("Q6", f"{TBC} - legal entity address variable (TW DD V3.3 has only $legal_entity_hr.post_code)", None),
+    ("Q6", "CONCAT($legal_entity_address.1.address_line_1;' ';$legal_entity_address.1.address_line_2;' ';$legal_entity_address.1.city;' ';$legal_entity_address.1.postal_code)" + PROP, None),
     ("T6", "Registered address of the employing entity. Not a mandatory item of LSA Enforcement Rules art. 14-1; kept because the example payslip shows it.", None),
     ("T7", "Country of the legal entity (Taiwan).", None),
     ("T8", "Pay period begin and end dates of the payroll run.", None),
@@ -127,8 +130,8 @@ spec_edits = [
     ("U12", "證件號碼", None),
     ("T13", "Employee primary email.", None),
     ("T14", "Employee hire date.", None),
-    ("U14", "到職日期", None),
-    ("Q15", f"{TBC} - payment date of the payroll run (no variable found in TW DD V3.3)", None),
+    ("U14", "到（離）職日期", None),
+    ("Q15", "$payroll.payment_date (as in REFERENCE_Payslip_Tunisia) or $entry.payroll_payment_date (as in REFERENCE_Payslip_Mozambique)" + PROP + " (the two references differ)", None),
     ("T15", "Date the net pay is paid / credited to the employee. Shown in the MOL reference payslips (發薪日期 / 入帳日期); not a mandatory item of LSA Enforcement Rules art. 14-1.", None),
     ("U15", "發薪日期", None),
     ("T16", "Payment method (e.g. bank transfer).", None),
@@ -139,7 +142,7 @@ spec_edits = [
     ("U18", "金額", None),
     ("M20", "Earnings", None),
     ("N20", "Overtime rate (overtime lines only)", None),
-    ("Q20", "Static rate from the WTC V2.8 PE name: 62110=1.33, 62111=1.67, 62120=1.33, 62121=1.67, 62122=2.67, 62130=1, 62131=1.33, 62132=1.67. Display on payslip: " + TBC, None),
+    ("Q20", "Static rate from the WTC V2.8 PE name (names round 1⅓/1⅔/2⅔ to 1.33/1.67/2.67): 62110 = 1⅓, 62111 = 1⅔ (LSA art. 24 para. 1); 62120 = 1⅓, 62121 = 1⅔ (LSA art. 24 para. 2), 62122 = 2⅔ (MOL model note 3); 62130 = +1 day's wage (MOL model note 4; LSA art. 39), 62131 = 1⅓, 62132 = 1⅔ (MOL model note 4). Display on payslip: " + TBC, None),
     ("T20", "Recommended, not mandatory (MOL reference payslip model 3 shows rate and hours; note 7: items may be added or removed). Rates checked against LSA art. 24 (work day: +1/3 first 2 h, +2/3 next 2 h; rest day: 1 1/3 first 2 h, 1 2/3 after) and MOL notes 3-4 (rest day over 8 h: 2 2/3; holiday: 1 extra day within 8 h, +1/3 and +2/3 over 8 h; LSA art. 39).", None),
     ("U20", "倍率", None),
     ("M21", "Earnings", None),
@@ -150,7 +153,7 @@ spec_edits = [
     ("M22", "Earnings", None),
     ("N22", "Total Gross", None),
     ("Q22", "SUM of Accounts: 62100:62103+62106:62999+65500:65859+79401:79450", None),
-    ("T22", "Sum of all earning lines shown (same accounts as Earnings). MOL reference payslips show this subtotal.", None),
+    ("T22", "Sum of all earning lines shown (same accounts as Earnings). MOL reference payslips show this subtotal. Note: 65500:65859 includes notional benefits not paid in cash (WTC V2.8: 65508/65509 Car, 65609 Phone, 65659 Meal Benefit (Notional)). " + TBC + ": exclude notional benefits from Total Gross or show them separately.", None),
     ("U22", "應發金額", None),
     ("M23", "Agreed wage", None),
     ("N23", "Agreed Total Wage", None),
@@ -167,7 +170,7 @@ spec_edits = [
     ("T30", "Sum of all deduction lines shown (same accounts as Deductions).", None),
     ("U30", "應扣金額", None),
     # Net
-    ("T37", "Amount actually paid. Covers LSA Enforcement Rules art. 14-1 item 4. Expected to equal Total Gross - Total Deductions; BA to confirm for the system accounts used.", None),
+    ("T37", "Amount actually paid. Covers LSA Enforcement Rules art. 14-1 item 4. Total Gross (row 22) includes notional benefits (65508/65509, 65609, 65659), so while they stay in Total Gross, Net Pay = Total Gross - notional benefits - Total Deductions. " + TBC + ": exclude notional benefits from Total Gross or show them separately.", None),
     ("U37", "實發金額", None),
     # ER
     ("T38", "Employer contributions, one line per pay element when the value is not 0. Information only; not an item of LSA Enforcement Rules art. 14-1.", None),
@@ -176,16 +179,16 @@ spec_edits = [
     ("Q41", "SUM of Accounts: 2550+2565+2560+2566+2564+2568+2537+2538+23550:23900", None),
     ("T41", "Sum of the employer contribution lines shown. Information only.", None),
     # Bank
-    ("T47", "Employee bank name.", None),
+    ("T47", "Employee bank name. Question to BA: TW DD V3.3 Country Fields also holds $hr.bank_name, $hr.bank_account_name and $hr.bank_branch_code (CM, bank transfer). Which record is filled, $primary_employee_bank_account.* or the DD fields? If only the DD fields, this payslip field may come out empty. " + TBC + ".", None),
     ("U47", "銀行", None),
     ("T48", "SWIFT/BIC of the employee bank.", None),
-    ("T49", "Account holder name.", None),
+    ("T49", "Account holder name. Question to BA: TW DD V3.3 Country Fields also holds $hr.bank_name, $hr.bank_account_name and $hr.bank_branch_code (CM, bank transfer). Which record is filled, $primary_employee_bank_account.* or the DD fields? If only the DD fields, this payslip field may come out empty. " + TBC + ".", None),
     ("U49", "帳戶名稱", None),
     ("T50", "Employee account number.", None),
     ("U50", "轉帳帳號", None),
     ("M51", "Banking details", 34),
     ("N51", "Account currency", 92),
-    ("Q51", TBC + " (shown in the example, cell I63; no mapping)", 39),
+    ("Q51", "$primary_employee_bank_account.account_currency" + PROP, 39),
     ("T51", "Currency of the employee account.", None),
     ("M52", "Banking details", 125),
     ("N52", "Account type", 151),
@@ -193,7 +196,7 @@ spec_edits = [
     ("T52", "Primary / secondary account.", None),
     # Exemplo (bloco B-K)
     ("F16", "Agreed Total Wage", 102),
-    ("H16", TBC, 84),
+    ("H16", 3210.0, 84),
 ]
 for ref, text, base in spec_edits:
     col = re.match(r'[A-Z]+', ref).group(0)
@@ -217,11 +220,19 @@ parts["xl/worksheets/sheet2.xml"] = sp.encode("utf-8")
 vc = parts["xl/worksheets/sheet1.xml"].decode("utf-8")
 V = "Version Control"
 for ref, text in [
-    ("B13", "1.2"),
-    ("C13", "2026-10-27"),
-    ("D13", "Spec review (LSA art. 23-24, Enforcement Rules art. 14-1): added Agreed Total Wage, Payment Date, Employer Address, total rows, overtime rate/hours, ID field, Report Matrix, RA descriptions and zh-TW labels. Items marked TO BE CONFIRMED pending BA."),
-    ("E13", "Draft"),
-    ("F13", "Wallisson Gomes"),
+    ("B13", "1.0"),
+    ("C13", "2025-12-02"),
+    ("D13", "Payslip mapping done (ticket SR-109)."),
+    ("F13", "Lily Li"),
+    ("B14", "1.1"),
+    ("C14", "2026-01-29"),
+    ("D14", "Payslip configuration completed at country level; report code taiwan-payslip."),
+    ("F14", "Shaik Jani Sharif"),
+    ("B15", "1.2"),
+    ("C15", "2026-10-27"),
+    ("D15", "Spec review (LSA art. 23-24, Enforcement Rules art. 14-1): added Agreed Total Wage, Payment Date, Employer Address, total rows, overtime rate/hours, ID field, Report Matrix, RA descriptions and zh-TW labels. Items marked TO BE CONFIRMED pending BA."),
+    ("E15", "Draft"),
+    ("F15", "Wallisson Gomes"),
 ]:
     vc = set_cell(vc, V, ref, text)
 parts["xl/worksheets/sheet1.xml"] = vc.encode("utf-8")
@@ -242,20 +253,24 @@ RM = [
     ("Other Supported Languages", "English"),
     ("Population Range (Nature of Employee/Employee Status)", "All employees included in the payroll run."),
     ("Inclusion Filter (Event)", "Pay elements shown only when the value is not 0 (ticket, 03/12/2025)."),
-    ("Reporting Currency", "TWD (NT$) - " + TBC),
+    ("Reporting Currency", "TWD (NT$)"),
     ("Rounding (Report-wise)", TBC),
     ("Number Format", TBC),
     ("Delimiter (Used in TXT/CSV)", "N/A (PDF)"),
     ("Introduction and Purpose of Report", "LSA art. 23 para. 1 requires the employer to give each worker an itemised statement of how each wage item is calculated (工資各項目計算方式明細). LSA Enforcement Rules art. 14-1 sets the minimum content: (1) total wage agreed by employer and employee; (2) amount of each wage item; (3) amounts deducted under law or agreement; (4) amount actually paid. Breach of art. 23: fine of NT$20,000 to NT$1,000,000 (LSA art. 79)."),
-    ("Legal basis", "Labor Standards Act arts. 23, 24, 39, 79; LSA Enforcement Rules art. 14-1; MOL reference payslip examples (參考例, attached to ticket SR-109). Texts read on laws.mol.gov.tw (copies dated 2026-10-23)."),
+    None,
+    ("Comments", "Legal basis: Labor Standards Act arts. 23, 24, 39, 79; LSA Enforcement Rules art. 14-1; MOL reference payslip examples (參考例, attached to ticket SR-109). Texts read on laws.mol.gov.tw (copies dated 2026-10-23)."),
 ]
 s_title = hl(13)
 s_lab = wrapclone(118)
 s_val = wrapclone(38)
 rows = [f'<row r="1"><c r="A1" s="{s_title}" t="inlineStr"><is><t>Report Matrix</t></is></c></row>']
 CHANGES.append(("Report Matrix", "A1", "Report Matrix"))
-for i, (lab, val) in enumerate(RM):
+for i, item in enumerate(RM):
     r = 3 + i
+    if item is None:
+        continue
+    lab, val = item
     rows.append(f'<row r="{r}">{cellxml("A%d" % r, s_lab, lab)}{cellxml("B%d" % r, s_val, val)}</row>')
     CHANGES.append(("Report Matrix", f"A{r}", lab))
     CHANGES.append(("Report Matrix", f"B{r}", val))

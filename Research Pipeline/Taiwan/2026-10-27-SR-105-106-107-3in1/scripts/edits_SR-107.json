@@ -1,0 +1,742 @@
+{
+ "edits": [
+  {
+   "sheet": "Version Control",
+   "cell": "B9",
+   "value": "Taiwan",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "B14",
+   "value": "1.1",
+   "num": true
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "C14",
+   "value": 46322,
+   "num": true
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "D14",
+   "value": "Spec review against NHIA/BLI 3-in-1 batch enrolment format (01_Apply3Of1, rev. 115.03.11): field mappings, C/M/O, data types and Report Matrix updated; 'New Specification' tab (withholding tax) removed.",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "E14",
+   "value": "Draft",
+   "num": false
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "F14",
+   "value": "Wallisson Gomes",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B10",
+   "value": "Employee level: one row per new hire (投保者 = 1) plus one row per NHI dependant (投保者 = 2).",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B11",
+   "value": "Electronic: Upload online ",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B14",
+   "value": "New hires enrolled by the same unit in LI(+EI)/OAI, LP and NHI (投保別 2) or in OAI, LP and NHI (投保別 4). Excluded (guide 01_Apply3Of1, rev. 115.03.11, note to field 6): NHI-only enrolments and enrolment of foreign (外籍) employees, for whom LI and NHI are filed separately (NHI with NHIA). Whether codes 1/2/L of field 7 are also excluded: TO BE CONFIRMED BY MOHIT/BA.",
+   "num": false
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B22",
+   "value": "File on the hire date (到職當日). LI/EI coverage starts at 00:00 on the filing date; if not filed on the hire date, from the next day (BLI form 承表D rev. 115.01, note 2). NHI starts on the day the enrolment conditions are met. Electronic batch: Excel upload in the NHIA multi-certificate system; the official guide defines column order, values and notes only (no start/end positions, no official TXT layout).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K2",
+   "value": "C = Conditional, M = Mandatory, O = Optional",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L2",
+   "value": "Data Type",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D3",
+   "value": "4",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F3",
+   "value": "Always \"4\"",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K3",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L3",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C4",
+   "value": "保險證號\n(8位數字)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F4",
+   "value": "$legal_entity_hr.labor_insure_id - first 8 characters, as text (keep leading zeros). DD V3.3 types this field as Number although the 9th character is a letter: TO BE CONFIRMED BY MOHIT/BA (DD also has insurance_certification_number, '8 digits + 1 text').",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K4",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L4",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C5",
+   "value": "保險證號檢查碼",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F5",
+   "value": "UPPERCASE of the 9th character of $legal_entity_hr.labor_insure_id",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K5",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L5",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F6",
+   "value": "PREPAD($legal_entity_hr.health_insure_id; 9; '0') - 9 digits as text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K6",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L6",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G7",
+   "value": "\"2\": LI(EI), OAI, LP and NHI (勞(就)保/災保/勞退/健保);\n\"3\": NHI (健保);\n\"4\": OAI, LP and NHI (災保/勞退/健保) - field 27 is then mandatory.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F7",
+   "value": "Employee row: $hr.si_enrollment_code::key (2 or 4). Dependant row: \"3\" (as in the official sample) - TO BE CONFIRMED BY MOHIT/BA. Pay elements 58140/58120/2517/2560 are not used.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K7",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L7",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F8",
+   "value": "Employee row: \"1\"; dependant row: \"2\". $hr.number_of_nhi_dependents = number of dependant rows to generate for the employee. 58212 (tax dependants) is not used.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K8",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L8",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G9",
+   "value": "※ If field 5 = \"4\" (OAI/LP/NHI), field 27 must be filled.\n※ NHI-only changes, or enrolment of foreign (外籍) employees (LI and NHI filed separately): file with NHIA.\n※ Pay below the minimum wage (e.g. part-time): fill the special identity (field 13).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "D10",
+   "value": "Y, 1, 2, L, blank",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G10",
+   "value": "\"Y\": Foreigner\n\"1\": Foreign spouse (incl. Hong Kong/Macau spouse)\n\"2\": Mainland Chinese spouse\n\"L\": Permanent-resident foreign professional (永居外專)\nBlank: Taiwanese nationality",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F10",
+   "value": "Employee nationality: no field in DD V3.3 -> NEW DD FIELD (proposed): Employee Nationality (+ permanent-resident foreign professional flag for 'L'); TO BE CONFIRMED BY MOHIT/BA. Logic: nationality = TW -> blank; permanent-resident foreign professional (永居外專) -> 'L'; $hr.spouse_nationality = TW and nationality = CN -> '2'; $hr.spouse_nationality = TW and other nationality (incl. Hong Kong/Macau) -> '1'; otherwise 'Y'. Do not use $hr.residential_status (tax residency).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K10",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L10",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C11",
+   "value": "被保險人身分證號\n(居留證統一證號/護照號碼)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G11",
+   "value": "For Taiwanese, enter the national ID no.\nFor foreigners, enter the ARC unified ID no. or passport no.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F11",
+   "value": "IF(EQUALS($hr.id_type::key; '3'); $hr.passport_number; $hr.id_card_number) - nationals: national ID; foreigners: ARC unified ID number (id_type 2) or passport (id_type 3), the same ID used at enrolment. Replaces $hr.residential_status (tax residency).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K11",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L11",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C12",
+   "value": "被保險人姓名",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G12",
+   "value": "Chinese names: nationals at least 2 characters, foreigners at least 1. English names: full name in full-width uppercase letters. Maximum 200 characters.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F12",
+   "value": "Nationals: Chinese name (ID Information field 'name' 名字). Foreigners with English names: UPPERCASE full name converted to full-width characters (e.g. ＤＡＶＩＤ), max. 200 characters. Full-width conversion function: TO BE CONFIRMED BY MOHIT/BA.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K12",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L12",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F13",
+   "value": "CONCAT(PREPAD(SUBTRACT(DATE_FORMAT($person.birth_date; 'yyyy'); 1911); 3; '0'); DATE_FORMAT($person.birth_date; 'MMdd'))",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K13",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L13",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "B14",
+   "value": "Monthly wage total\n[LI(EI)/OAI/LP]",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C14",
+   "value": "月薪資總額\n[勞(就)保/災保/勞退]",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G14",
+   "value": "Enter the monthly wage total",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G15",
+   "value": "※ BLI classifies it into the LI, OAI and LP band tables after receiving the file",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F14",
+   "value": "TO BE CONFIRMED BY MOHIT/BA: HR field holding the agreed monthly wage at hire (no payroll result exists at the hire event); if none exists -> NEW DD FIELD (proposed): Monthly wage total at hire. Must include all regular pay for work (base salary, monthly allowances incl. meal allowance, attendance/performance bonuses) and exclude year-end/assessment bonuses, festival bonuses and profit sharing (BLI page 0022929; NHIA insured-amount guide; LSA Enforcement Rules art. 10). 58008/58009/6220% are not used.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K14",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L14",
+   "value": "Numeric (integer)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "B16",
+   "value": "Health Insurance Insured Amount",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C16",
+   "value": "健保投保金額",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F16",
+   "value": "$hr.nhi_grade::orLabel (same base as WTC 64550; pay element 58139 does not exist in WTC V2.8). Validation: not lower than the LI/EI/OAI insured salary and the LP contribution wage (BLI form 承表D instr. 9(3)).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K16",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L16",
+   "value": "Numeric (integer)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F17",
+   "value": "$hr.special_identity_code::key; blank if empty",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K17",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L17",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F18",
+   "value": "$hr.labor_standards_act_special_identity::key; blank if empty",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K18",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L18",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F19",
+   "value": "Dependant row: $hr.id_card_number_dependent_N (national dependants only); employee row: blank. NEW DD FIELD (proposed): id_card_number_dependent_4..6 (DD V3.3 has ID/name/birthday for dependants 1-3 but relationship for 1-6). Non-national dependants: TO BE CONFIRMED BY MOHIT/BA.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K19",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L19",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F20",
+   "value": "Dependant row: $hr.name_dependent_N; employee row: blank. NEW DD FIELD (proposed): name_dependent_4..6.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K20",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L20",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F21",
+   "value": "Dependant row: CONCAT(PREPAD(SUBTRACT(DATE_FORMAT($hr.birthday_dependent_N; 'yyyy'); 1911); 3; '0'); DATE_FORMAT($hr.birthday_dependent_N; 'MMdd')); employee row: blank. NEW DD FIELD (proposed): birthday_dependent_4..6.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K21",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L21",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C22",
+   "value": "稱謂代號",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F22",
+   "value": "Dependant row: $hr.dependent_N_relationship::key (1-9); employee row: blank. The batch does not accept 'P' (ward, present in the DD mapper): such dependants TO BE CONFIRMED BY MOHIT/BA.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K22",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L22",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F23",
+   "value": "$legal_entity_hr.nhi_authority::key (DD V3.3, option mapper 'NHI Authority', keys 1-6)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K23",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L23",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G24",
+   "value": "Self:\n\"1\": Employment start\n\"2\": Union membership\nDependent:\n\"4\": Affiliated coverage\n\"5\": Change in status\n\"6\": Marriage\n\"7\": Adoption\n\"8\": Newborn\nSpecial cases (dependant transferred in, aged 18 or over, relationship = 3, 5, 7):\n\"S\": Student without job\n\"P\": Under guardianship\n\"A\": Disabled & unable to work\n\"H\": Seriously ill without job\n\"G\": Recent graduate or discharged soldier without job (within 1 year)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F24",
+   "value": "Employee row: \"1\" (到職起薪). Dependant row: $hr.adult_2_lineal_relatives_code_N::key (S, P, A, H, G) when filled; otherwise NEW DD FIELD (proposed): NHI enrolment reason per dependant (4-8) - TO BE CONFIRMED BY MOHIT/BA (proposal: \"4\").",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K24",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L24",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F25",
+   "value": "Employee row: CONCAT(PREPAD(SUBTRACT(DATE_FORMAT($hr.health_insurance_enrollment_start_date; 'yyyy'); 1911); 3; '0'); DATE_FORMAT($hr.health_insurance_enrollment_start_date; 'MMdd')) - DD V3.3 types the field as Text: TO BE CONFIRMED BY MOHIT/BA. Dependant row: NEW DD FIELD (proposed): date of the dependant's enrolment reason.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K25",
+   "value": "M",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L25",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F26",
+   "value": "IF field 7 is not blank: IF(EQUALS($person.gender; 'male'); 'M'; 'F'); otherwise blank (foreigners only). Replaces $hr.residential_status (tax residency).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K26",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L26",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F27",
+   "value": "$hr.pension_contribution_identity::key (employee row only)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K27",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L27",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "B28",
+   "value": "Employer Contribution Rate (%)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C28",
+   "value": "雇主提繳率(%)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F28",
+   "value": "Rate as an integer % (e.g. 6). Object holding it: TO BE CONFIRMED BY MOHIT/BA (WTC 52537 = DIVIDE($52537.amount;100), i.e. 0.06).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K28",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L28",
+   "value": "Numeric",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "B29",
+   "value": "Personal Voluntary Contribution Rate (%)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C29",
+   "value": "個人自願提繳率(%)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F29",
+   "value": "Rate as an integer %; blank if 0. Object holding it: TO BE CONFIRMED BY MOHIT/BA (WTC 52517 = DIVIDE($52517.amount;100)).",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K29",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L29",
+   "value": "Numeric",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F30",
+   "value": "Only if the LP contribution date differs from the LI enrolment date and is 1 to 6 days before the filing date: CONCAT(PREPAD(SUBTRACT(DATE_FORMAT($hr.labor_pension_contribution_date; 'yyyy'); 1911); 3; '0'); DATE_FORMAT($hr.labor_pension_contribution_date; 'MMdd')); otherwise blank. DD V3.3 types the field as Text: TO BE CONFIRMED BY MOHIT/BA.",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K30",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L30",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "B31",
+   "value": "OAI-only enrolment condition (Occupational Accident Insurance; insurance type 4 only)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "C31",
+   "value": "<勞工職業災害保險>\n僅參加「災保」條件\n(投保別-4專用欄位)",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "G31",
+   "value": "\"1\": Already received the LI old-age benefit\n\"2\": Not received the LI old-age benefit and over 65\nBlank: other cases. Mandatory when field 5 = \"4\".",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "F31",
+   "value": "IF field 5 = \"4\": $hr.received_social_insurance_benefits_type_occupational_accident::key; otherwise blank. TO BE CONFIRMED BY MOHIT/BA: DD mapper key 2 reads \"received other social insurance benefits and over 65\"; guide rev. 115.03.11 defines 2 as \"not received the LI old-age benefit and over 65\".",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "K31",
+   "value": "C",
+   "num": false
+  },
+  {
+   "sheet": "Spec",
+   "cell": "L31",
+   "value": "Text",
+   "num": false
+  },
+  {
+   "sheet": "New Specification",
+   "cell": "*",
+   "value": "SHEET REMOVED",
+   "removed_parts": [
+    "xl/drawings/drawing4.xml",
+    "xl/worksheets/_rels/sheet4.xml.rels",
+    "xl/worksheets/sheet4.xml"
+   ]
+  }
+ ],
+ "modified_parts": [
+  "[Content_Types].xml",
+  "xl/_rels/workbook.xml.rels",
+  "xl/styles.xml",
+  "xl/workbook.xml",
+  "xl/worksheets/sheet1.xml",
+  "xl/worksheets/sheet2.xml",
+  "xl/worksheets/sheet3.xml"
+ ],
+ "removed_parts": [
+  "xl/drawings/drawing4.xml",
+  "xl/worksheets/_rels/sheet4.xml.rels",
+  "xl/worksheets/sheet4.xml"
+ ]
+}

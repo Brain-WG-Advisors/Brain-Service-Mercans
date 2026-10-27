@@ -123,7 +123,8 @@ def main():
     corr = [l for l in ler(os.path.join(RAIZ, 'correcoes.md')).splitlines()
             if l.startswith('|') and ('[[%s]]' % nome in l or '[[%s|' % nome in l)]
     out.append('\n## Correções do país (%d, correcoes.md; ler antes de responder)' % len(corr))
-    out += ['- ' + corta(l.strip('| '), completo) for l in corr]
+    # Poucas correções (≤ 10): mostrar inteiras, para não precisar abrir correcoes.md (teste de exatidão de 2026-10-27)
+    out += ['- ' + corta(l.strip('| '), completo or len(corr) <= 10) for l in corr]
 
     pend = [l for l in secao(t, 'Pendências').splitlines() if l.startswith('- [ ]')]
     out.append('\n## Pendências abertas (%d)' % len(pend))

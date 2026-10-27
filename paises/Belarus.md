@@ -1,6 +1,6 @@
 # Belarus
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-belarus`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-belarus` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

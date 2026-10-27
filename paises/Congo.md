@@ -1,6 +1,6 @@
 # República do Congo (Congo-Brazzaville, CG)
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-congo`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-congo` · Fronteiras: [[fronteiras]]
 > Atenção: não confundir com a RD Congo (skill `payroll-compliance-drcongo`).
 
 ## Situação

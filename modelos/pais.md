@@ -1,6 +1,6 @@
 # {{País}}
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-{{pais}}`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-{{pais}}` · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -30,6 +30,9 @@
 
 ## Pendências
 - [ ]
+
+## Entregas (conferências)
+- AAAA-MM-DD · ticket · assunto: [[<pasta da entrega>/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - _(links para entradas de [[correcoes]])_

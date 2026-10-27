@@ -1,6 +1,6 @@
 # Singapura
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-singapore`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-singapore` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -78,6 +78,9 @@
 
 ## Pendências
 - [ ]
+
+## Entregas (conferências)
+- 2026-10-27 · HRBS-16029 · 62866 Childbirth Allowance sujeito a CPF: [[Research Pipeline/Singapore/2026-10-27-HRBS-16029-62866-CPF/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - _(links para entradas de [[correcoes]])_

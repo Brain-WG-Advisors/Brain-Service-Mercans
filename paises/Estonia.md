@@ -1,6 +1,6 @@
 # Estônia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-estonia`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-estonia` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

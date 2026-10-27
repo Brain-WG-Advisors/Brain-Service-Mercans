@@ -1,6 +1,6 @@
 # Dinamarca
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-denmark`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-denmark` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

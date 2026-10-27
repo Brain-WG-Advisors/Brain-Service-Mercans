@@ -1,6 +1,6 @@
 # Indonésia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-indonesia`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-indonesia` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

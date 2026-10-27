@@ -1,6 +1,6 @@
 # Holanda
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-netherlands`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-netherlands` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -121,6 +121,20 @@
 - [ ] Redline §7.1.4 do NL-CCG-001: aceitar/rejeitar — humano (Wallisson) — (chat: compliance-research) [INCERTO]
 - [ ] [INCERTO] O chat mercans-compliance lista "HRBS-10563 / Holanda / Modelo BCCC/BCCP"; o ticket HRBS-10563 é da Espanha (ver [[Espanha]], quando criado). Provável erro de rótulo no chat.
 - [ ] [INCERTO] Prompt NL de Client Manual com inconsistências (58202, permanent_disability, start_date vs begin_date, ordinais duplicados) — (chat: design-dev-kb)
+
+## Entregas (conferências)
+- 2026-10-20 · — · Mammoet Montage P09 2025: relatório forense v1.2 (set V12): [[internal-certification/Netherlands/Mammoet Montage - P09-2025/2026-10-20-forensic-v1.2/CONFERENCIA|conferência]]
+- 2026-10-20 · — · Mammoet Montage P10 2025: relatório forense v1.0 (set V7): [[internal-certification/Netherlands/Mammoet Montage - P10-2025/2026-10-20-forensic-v1.0/CONFERENCIA|conferência]]
+- 2026-10-20 · — · Mammoet Montage P10 2025: relatório forense v1.1: [[internal-certification/Netherlands/Mammoet Montage - P10-2025/2026-10-20-forensic-v1.1/CONFERENCIA|conferência]]
+- 2026-10-20 · — · Mammoet Montage P10 2025: relatório forense v1.2: [[internal-certification/Netherlands/Mammoet Montage - P10-2025/2026-10-20-forensic-v1.2/CONFERENCIA|conferência]]
+- 2026-10-20 · — · Mammoet Montage P11 2025: relatório forense v1.0 (set V4): [[internal-certification/Netherlands/Mammoet Montage - P11-2025/2026-10-20-forensic-v1.0/CONFERENCIA|conferência]]
+- 2026-10-20 · — · Mammoet Montage P11 2025: relatório forense v1.1: [[internal-certification/Netherlands/Mammoet Montage - P11-2025/2026-10-20-forensic-v1.1/CONFERENCIA|conferência]]
+- 2026-10-21 · — · Mammoet Montage P12 e P13 2025: V3: [[internal-certification/Netherlands/Mammoet Montage - P12-2025/2026-10-21-V3/CONFERENCIA|conferência]]
+- 2026-10-21 · — · Mammoet Montage EM-01 aplicado: P09 V15: [[internal-certification/Netherlands/Mammoet Montage - P09-2025/2026-10-21-V15-EM01/CONFERENCIA|conferência]]
+- 2026-10-21 · — · Mammoet Montage EM-01 aplicado: P10 V10: [[internal-certification/Netherlands/Mammoet Montage - P10-2025/2026-10-21-V10-EM01/CONFERENCIA|conferência]]
+- 2026-10-21 · — · Mammoet Montage EM-01 aplicado: P11 V8: [[internal-certification/Netherlands/Mammoet Montage - P11-2025/2026-10-21-V8-EM01/CONFERENCIA|conferência]]
+- 2026-10-21 · — · Mammoet Montage EM-01 aplicado: P12 V4: [[internal-certification/Netherlands/Mammoet Montage - P12-2025/2026-10-21-V4-EM01/CONFERENCIA|conferência]]
+- 2026-10-21 · — · Mammoet Montage EM-01 aplicado: P13 V4: [[internal-certification/Netherlands/Mammoet Montage - P13-2025/2026-10-21-V4-EM01/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - [[correcoes]]: resposta do 30% ruling (HRBS-10545) com lente de consultoria fiscal; correto: lente de provedor de software de folha (chat: mercans-compliance)

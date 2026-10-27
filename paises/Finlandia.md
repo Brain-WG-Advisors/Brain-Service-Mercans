@@ -1,6 +1,6 @@
 # Finlândia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-finland`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-finland` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

@@ -1,6 +1,6 @@
 # Reino Unido
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-unitedkingdom`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-unitedkingdom` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

@@ -1,6 +1,6 @@
 # Noruega
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-norway`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-norway` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

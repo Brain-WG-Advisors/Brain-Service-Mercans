@@ -1,6 +1,6 @@
 # Bahrein
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-bahrain`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-bahrain` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

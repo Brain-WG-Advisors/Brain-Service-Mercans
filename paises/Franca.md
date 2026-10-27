@@ -1,6 +1,6 @@
 # França
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-france`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-france` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -170,6 +170,7 @@
 - [[correcoes]]: cabeçalhos "Description (NL)" (resíduo da BE) para "Description (FR)"; códigos 32/60/80 excluídos sem nome para nomeados
 
 ## Fontes
+- Cartões do pipeline (F6, 2026-10-27): [[extracoes/2026-10-27-pipeline-Franca|cartões]] · [[extracoes/2026-10-27-pipeline-Franca-conferencia|conferência]] · [[extracoes/2026-10-27-pipeline-Franca-correcoes-propostas|correções propostas]] · validação: [[extracoes/2026-10-27-pipeline-VALIDACAO|lotes]]
 - raw/chats/2026-10-01-mercans-design-dev-kb.md
 - raw/chats/2026-10-01-mercans-compliance.md
 - skill payroll-compliance-france (lida em 2026-10-02)

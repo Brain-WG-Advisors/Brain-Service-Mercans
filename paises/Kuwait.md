@@ -1,6 +1,6 @@
 # Kuwait
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-kuwait`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-kuwait` · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

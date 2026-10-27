@@ -1,6 +1,6 @@
 # Filipinas
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-philippines`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-philippines` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

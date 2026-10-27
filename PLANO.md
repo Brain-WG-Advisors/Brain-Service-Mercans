@@ -103,7 +103,7 @@ Prompt: [prompts/fase-1-linha-de-base.md](prompts/fase-1-linha-de-base.md)
 
 ### Fase R: Rede no Obsidian (prioridade desde 2026-10-27)
 1. Abrir a pasta `brain-service` como vault no Obsidian.
-2. Revisão do grafo ("revisa o cérebro" com foco em ligações): notas órfãs, links quebrados, conceitos repetidos sem nota própria, hubs sem link para [[correcoes]], [[servicos]] e [[fronteiras]].
+2. Revisão do grafo ("revisa o cérebro" com foco em ligações): notas órfãs, links quebrados, conceitos repetidos sem nota própria, hubs sem link para [[correcoes]], notas de `servicos/` e [[fronteiras]].
 3. Seguir a coleta (Fase 3) ligando cada cartão ingerido aos hubs e às notas de serviço.
 4. Uso no trabalho diário: consultar a rede ao responder tickets e e-mails (Claude Code), o que mede a eficiência na entrega.
 

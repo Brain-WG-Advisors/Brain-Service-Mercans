@@ -1,6 +1,6 @@
 # Colômbia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-colombia`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-colombia` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -179,6 +179,12 @@ Contexto comum: lista "PMI Instaroll Transition Tracker" (ELT); cliente PMI (Com
 - [ ] Base das cesantías com auxílio de transporte: ver a anotação em Q-21 (CST art. 253 citado pelo pipeline, artigo não lido; calculadora do operador omite o auxílio, déficit de COP 249.095 por empregado que ganha o mínimo, penalidade de um dia de salário por dia de atraso). Não repetir "art. 253 exige" em ticket sem ler o artigo [INCERTO] (F6-20261027-CO-C31; validação humana pendente)
 - [ ] Etapas mortas no pipeline: `wtc.log` = "Error: Reached max turns (60)" e `payslip.log` = "API Error: Connection lost mid-response"; WTC e Payslip existem e foram revisados pelo QA (passagem pós-handover em 18-set), mas não há log de execução final completa. Não tratar o log dessas etapas como prova de conclusão; a prova são os artefatos e o QA. Registro para "o que já deu errado" do serviço research-pipeline (`servicos/` não editado nesta ingestão) [INCERTO] (F6-20261027-CO-C32; validação humana pendente)
 
+## Entregas (conferências)
+- 2026-10-21 · — · CO-CCG-001 v1.3 (alinhamento): [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/CONFERENCIA-CCG|conferência]]
+- 2026-10-21 · — · CO-DD-001 v1.2 (alinhamento): [[Research Pipeline/Colombia/2026-10-21-alinhamento-DD/CONFERENCIA|conferência]]
+- 2026-10-21 · — · CO-WTC-001 v1.5 (alinhamento): [[Research Pipeline/Colombia/2026-10-21-alinhamento-WTC/CONFERENCIA|conferência]]
+- 2026-10-22 · — · Lote 1 da auditoria: regras erradas em artefatos entregues (base de CCG v1.4, WTC v1.6, DD v1.3): [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CONFERENCIA|conferência]]
+
 ## Correções ligadas
 - [[correcoes]] 2026-10-13: incapacidades e licenças de maternidade/paternidade estavam como renda isenta "within the statutory minimum" (ET 206 nums. 1–2); são tributáveis (DIAN Oficio 27408/2019 itens 7.1–7.4). Corrigido no WTC v1.4 e na CCG v1.2.
 - [[correcoes]]: taxa máxima ARL Classe IV estava errada em batch anterior; correto 6,060% (normograma.mintic.gov.co) (chat: mercans-compliance)
@@ -186,6 +192,7 @@ Contexto comum: lista "PMI Instaroll Transition Tracker" (ELT); cliente PMI (Com
 - [[correcoes]] 2026-10-22: CO-DIAN-001 M183 dizia saúde 0,00 para o pensionado que trabalha (subtipo 01); o correto é 4% sobre o salário (só a pensão é 0), e para o pensionado pago pelo empregador a faixa 4/10/12% sobre a mesada. Achado nos 871 arquivos da NE de setembro; corrigido e no Drive em 22/10.
 
 ## Fontes
+- Cartões do pipeline (F6, 2026-10-27): [[extracoes/2026-10-27-pipeline-Colombia|cartões]] · [[extracoes/2026-10-27-pipeline-Colombia-conferencia|conferência]] · [[extracoes/2026-10-27-pipeline-Colombia-correcoes-propostas|correções propostas]] · validação: [[extracoes/2026-10-27-pipeline-VALIDACAO|lotes]]
 - raw/tickets/extracao/2026-10-02-tickets-OUT.md
 - raw/chats/2026-10-01-mercans-compliance.md
 - raw/chats/2026-10-01-mercans-design-dev-kb.md

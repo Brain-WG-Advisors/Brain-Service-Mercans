@@ -1,6 +1,6 @@
 # Austrália
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-australia`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-australia` · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

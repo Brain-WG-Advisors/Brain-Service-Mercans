@@ -1,6 +1,6 @@
 # Chade (Chad, TD)
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-chad`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-chad` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

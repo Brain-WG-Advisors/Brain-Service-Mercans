@@ -1,6 +1,6 @@
 # Egito
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-egypt`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-egypt` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -80,6 +80,10 @@
 - [ ] Ler o art. 53 do Regulamento 2437/2021 (bdl excluídos ≤ 30% do salário de contribuição): citado, não conferido pessoalmente. PDF em `raw/docs/oficiais/EG/2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf`.
 - [ ] Lei 11/2026 (art. 111 da Lei 148/2019, segundo a imprensa): sem texto oficial obtido.
 - [ ] Circular MoF 14/2021: só há cópia em host não oficial (aliateck); buscar cópia oficial.
+
+## Entregas (conferências)
+- 2026-10-22 · — · Skill payroll-compliance-egypt: Fundo dos Mártires no setor privado: [[Research Pipeline/Egypt/2026-10-22-skill-fundo-martires/CONFERENCIA|conferência]]
+- 2026-10-25 · HRBS-15790 · Seguro social a partir de 01/01/2027: [[Research Pipeline/Egypt/2026-10-25-HRBS-15790-SI-2027/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - 2026-10-22: Fundo dos Mártires no setor privado ([[correcoes]]).

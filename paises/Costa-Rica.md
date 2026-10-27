@@ -1,6 +1,6 @@
 # Costa Rica
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-costarica`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-costarica` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

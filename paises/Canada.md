@@ -1,6 +1,6 @@
 # Canadá
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-canada`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-canada` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

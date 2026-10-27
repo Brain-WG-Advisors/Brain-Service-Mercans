@@ -1,6 +1,6 @@
 # Costa do Marfim (Côte d'Ivoire, CI)
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-cotedivoire`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-cotedivoire` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -122,6 +122,9 @@
 - [ ] DISA (CI-CNPS-002): o bloco DASC usa base de 240M para 45 empregados, impossível com qualquer teto — defeito à parte, verificar (frente Pipeline, 2026-10-16)
 - [ ] DISA _v1.4 local (18/08) tem um bloco DASC que não está no Drive: decidir se entra na linhagem (frente Pipeline, 2026-10-16)
 - [ ] Design CI: KT passo a passo + revisão de linguagem/estrutura (Wallisson); review points (Mohit); 3 flags string (`marital_status`, `transport_zone`, `benefit_in_kind_type`; o engine só lê números); local labels da Part 9 (266 códigos na 9384011); convenção de arredondamento; matriz da 9384011 — (chat: design-dev-kb)
+
+## Entregas (conferências)
+- 2026-10-16 · — · Teto CNPS PF/AM/AT-MP 70 000 → 75 000 XOF/mês (cópia idêntica em entregas/Costa-do-Marfim/): [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - [[correcoes]]: 2026-09-23, parecer HRBS-14996 de 22/09 ("ITS é devido") substituído pelo regime pétrolier.

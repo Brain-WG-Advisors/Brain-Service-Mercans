@@ -1,6 +1,6 @@
 # Moçambique
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-mozambique`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-mozambique` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

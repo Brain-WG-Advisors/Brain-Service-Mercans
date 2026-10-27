@@ -1,6 +1,6 @@
 # África do Sul
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-southafrica`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-southafrica` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

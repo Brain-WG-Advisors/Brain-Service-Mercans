@@ -1,6 +1,6 @@
 # Botsuana (Botswana, BW)
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-botswana`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-botswana` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

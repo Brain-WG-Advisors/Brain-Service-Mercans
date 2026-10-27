@@ -1,6 +1,6 @@
 # Bélgica
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-belgium`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-belgium` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -118,10 +118,16 @@
 - [ ] Check digit do número de empregador NSSO de 9 posições: conflito no raw. O QA (17/08 §6.1, L-06) e o handover tratam o algoritmo como não resolvido (o texto do corpus não especifica posições nem resto × complemento; "base × 100, mod 97, subtrair de 96" dá 49 e não "02" para 1234567; o scope manifest proíbe mod-97 até a autoridade), mas o VC do DD (linha 1.3, 2026-08-21) diz que a fórmula foi aplicada e `ID Information!F20` foi reescrita. Origem da fórmula do DD F20 desconhecida; não implementar nem citar a fórmula até haver documentação NSSO de identificação do empregador ou o XSD da DmfA. Nível C. Ver F6-20261027-BE-C38. (F6-20261027-BE-C38; validação humana pendente) [INCERTO]
 - [ ] SIR, registro de lacunas G1–G27 (G27 fechada): G1–G21 só fecham por consulta a autoridade nomeada (codificação do XML da DmfA, vida do token OAuth, validade do certificado X.509, retentativas, idempotência do `POST /declarations`, SLA do Dimona/lote, retenção de respostas, anomalias pós-Anexo 30 2024/1, limite de arquivo e anomalias do Finprof, SLA de reconhecimento, vigência da descrição Finprof de 26/09/2011, encoding e limite do Belcotax, limiar de recusa por erros dispensáveis, SLA do Checkinatwork, feeds do NSSO/Student@work/certificado de férias/RJV-ONVA/penhora); G22–G26 só fecham por contrato de dados do cliente (frota, emissores de vales, arquivo de prêmios de previdência complementar, canal bancário SEPA, T&A e contábil). Conflito de decisão do dono: OUT-10 `product_mapping_required` = `false` no SIR e `true` no manifest (desde 17/08). BE-TF-010: "onze fluxos governados" × "dez por spec viva + 1 descoped + 8 nenhum" somam 19 e são reconciliáveis lendo "live". O registro único de limitações do país continua inexistente (ver Lacunas). Lista de 24/08; G1–G27 não recontados. Ver F6-20261027-BE-C40. (F6-20261027-BE-C40; validação humana pendente)
 
+## Entregas (conferências)
+- 2026-10-19 · — · BE Report Specs em inglês, v1.1 final (9 specs): [[Research Pipeline/Belgium/2026-10-19-specs-idioma-ingles/CONFERENCIA|conferência]]
+- 2026-10-21 · CT-4580 · Refresh da skill payroll-compliance-belgium: [[Research Pipeline/Belgium/2026-10-21-skill-refresh/CONFERENCIA|conferência]]
+- 2026-10-21 · — · BE-WTC: séries 62, 65 e 74 × Global WTC (pedido da Suman): [[Research Pipeline/Belgium/2026-10-21-wtc-series-62-65-74/CONFERENCIA|conferência]]
+
 ## Correções ligadas
 - _(nenhuma correção concluída; as três correções acima estão pendentes)_
 
 ## Fontes
+- Cartões do pipeline (F6, 2026-10-27): [[extracoes/2026-10-27-pipeline-Belgica|cartões]] · [[extracoes/2026-10-27-pipeline-Belgica-conferencia|conferência]] · [[extracoes/2026-10-27-pipeline-Belgica-correcoes-propostas|correções propostas]] · validação: [[extracoes/2026-10-27-pipeline-VALIDACAO|lotes]]
 - raw/chats/2026-10-01-mercans-compliance.md
 - raw/chats/2026-10-01-mercans-design-dev-kb.md
 - skill payroll-compliance-belgium (lida em 2026-10-02)

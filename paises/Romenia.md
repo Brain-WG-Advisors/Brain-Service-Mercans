@@ -1,6 +1,6 @@
 # Romênia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: não há
+> Hub do país. Índice: [[00-INDEX]] · Skill: não há · Correções: [[correcoes]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

@@ -1,6 +1,6 @@
 # Gabão (Gabon)
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: não há
+> Hub do país. Índice: [[00-INDEX]] · Skill: não há · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

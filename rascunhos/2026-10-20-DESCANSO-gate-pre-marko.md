@@ -47,7 +47,7 @@ Como parar o ciclo: mandamos ao Marko e ele volta com mais erros. Precisamos de 
 
 ### Crítica de especialista (o que fazemos de errado)
 - **a) IA fazendo o papel de código.** Versões geradas por agente (`claude -p`, chat, kits como o chainfix) não se repetem igual; daí o P09 na V23 e regressões como o FND-01 no V12. Holerite → loonaangifte é tarefa determinística. A IA escreve e mantém o código; não mexe nos dados.
-- **b) Geramos e validamos a mesma coisa.** É conflito de independência e contraria [[certificacao-so-validar]]. O gate autorreferente é o sintoma.
+- **b) Geramos e validamos a mesma coisa.** É conflito de independência e contraria a memória `certificacao-so-validar`. O gate autorreferente é o sintoma.
 - **c) Não há modelo de dados.** Arquivos soltos por chat, versão no nome; falta a tabela única empregado × período × elemento.
 - **d) Corrigimos a saída, não a origem.** O defeito nasce no HR Blizz (declaração montada a partir do registro de correção).
 - **e) Cinco réguas e nenhum dono.**

@@ -1,6 +1,6 @@
 # Marrocos
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-morocco`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-morocco` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

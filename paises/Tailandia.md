@@ -1,6 +1,6 @@
 # Tailândia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: não há
+> Hub do país. Índice: [[00-INDEX]] · Skill: não há · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

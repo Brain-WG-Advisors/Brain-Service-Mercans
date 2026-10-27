@@ -237,6 +237,10 @@ Só o que foi decidido/discutido em ticket ou chat. Valores estatutários gerais
   - Campo 400 = **CCC principal** da empresa; repete o 310 só em empresa mono-CCC ou quando o movimento é no CCC principal.
 - **SR-432** (Lily, 13/10, Work Center CCC como campo do empregado): rascunho gravado — 1º par (campo 310) confirmado; 2º par (campo 400) descrito como CCC principal. Ver [[sessoes/2026-10-13]].
 
+## Entregas (conferências)
+- 2026-10-19 · — · Modelo 145 × DD (caso STG Spain): [[Research Pipeline/Spain/2026-10-19-modelo145-x-DD/CONFERENCIA|conferência]]
+- 2026-10-20 · — · DD V5.1: 2º retorno da STG sobre o ESS do Modelo 145: [[Research Pipeline/Spain/2026-10-20-modelo145-ESS-STG/CONFERENCIA|conferência]]
+
 ## Correções ligadas
 - _(entradas a serem consolidadas em [[correcoes]]; rascunho em scratchpad `correcoes-ES.md`)_
 - BCCC/BCCP zerados durante licença → as duas bases continuam (Orden PJC/297/2026 Art. 6) (HRBS-10563)

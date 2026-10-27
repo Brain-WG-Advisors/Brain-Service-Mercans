@@ -1,6 +1,6 @@
 # Líbano
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-lebanon`
+> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-lebanon` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

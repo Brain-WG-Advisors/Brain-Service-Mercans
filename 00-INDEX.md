@@ -35,7 +35,7 @@
 | [[Chile]] | ✅ | 🔄 | 🔄 | [[Chile]] |
 | [[China]] | 🔄 | ⏳ | 🔄 | [[China]] |
 | [[Chipre]] | ✅ | ⏳ | ⏳ | [[Chipre]] |
-| [[Colombia]] | 🔄 | ⏳ | 🔄 | [[Colombia]] |
+| [[Colombia]] | ✅ | ⏳ | 🔄 | [[Colombia]] |
 | [[Congo]] | ✅ | 🔄 | 🔄 | [[Congo]] |
 | [[Costa-do-Marfim]] | ✅ | 🔄 | 🔄 | [[Costa-do-Marfim]] |
 | [[Costa-Rica]] | ✅ | ⏳ | ⏳ | [[Costa-Rica]] |
@@ -59,7 +59,7 @@
 | [[Malasia]] | ✅ | ⏳ | ⏳ | [[Malasia]] |
 | [[Marrocos]] | ✅ | ⏳ | ⏳ | [[Marrocos]] |
 | [[Mocambique]] | ✅ | ⏳ | ⏳ | [[Mocambique]] |
-| [[Namibia]] | ✅ [INCERTO] | 🔄 | 🔄 | [[Namibia]] |
+| [[Namibia]] | ✅ [INCERTO] | 🔄 | ✅ | [[Namibia]] |
 | [[Noruega]] | ✅ | ⏳ | ⏳ | [[Noruega]] |
 | [[Portugal]] | ✅ | ⏳ | ⏳ | [[Portugal]] |
 | [[RD-Congo]] | ✅ | ⏳ | ⏳ | [[RD-Congo]] |

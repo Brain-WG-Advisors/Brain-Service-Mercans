@@ -4,6 +4,7 @@
 > **Conjunto A** = 30 perguntas de [[correcoes]] (Fase 1). **Conjunto B** = correções novas da coleta (Fase 3). **Conjunto C** = ~20 perguntas **cegas**, de tickets resolvidos depois da data do MVP, em quarentena (não ingeridos até a medição final).
 > Cada pergunta roda **2 vezes** (`T-xxx-r1.md`, `T-xxx-r2.md` em `testes/rodadas/AAAA-MM-DD/`). Duas ✅ = ✅; divergência = ⚠️ instável (não conta como acerto). Um ❌ vira ação com dono; não basta anotar.
 > **Este arquivo nunca sobe para o Projeto do claude.ai** (o gabarito vazaria).
+> Eficiência (idas e vindas por semana): [[testes/eficiencia]].
 > Perguntas prontas para colar: [rodadas/2026-10-27-perguntas.txt](rodadas/2026-10-27-perguntas.txt).
 
 ## Critério da seleção (Conjunto A, gerado em 2026-10-27)

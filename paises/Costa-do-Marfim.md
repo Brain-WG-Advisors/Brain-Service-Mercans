@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | 2026-08-12 (snapshot) | Skill file entregue, monolítico (refactor para thin-router pendente); 7 Report Specs (CI-CNPS-001/002/003, CI-DGI-001/002/003/004) prontas para upload no Drive (chat: mercans-compliance). Versão do CCG/WTC não citada [INCERTO] |
 | [[design]] | 🔄 | 2026-08-25 | Regulation Design do Claude (48 regs) v1.0/v1.1, revisado pelo Mohit em 25/08, precisa de revisão (contas, fórmulas, linguagem); Accuracy Score v2 ≈85% (2026-08-14); spec do produto CT-A-620 (+621/622/623) atualizada ~2026-08-07 (chat: design-dev-kb; CT-A-620) |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-09-28 | HRBS-14996 Pending on reporter (cliente escalou ao Marko); HRBS-14714 sem resposta formal |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 2 fechado(s): HRBS-14714, HRBS-14996. Antes (2026-09-28): HRBS-14996 Pending on reporter (cliente escalou ao Marko); HRBS-14714 sem resposta formal |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-cotedivoire`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

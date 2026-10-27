@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | 🔄 | ~2026-08-10 | CT-4457 (CN_China_Compliance Artifacts for development) é o pai; só o Payslip Generator aparece nas fontes. Resto [INCERTO]. |
 | [[design]] | ⏳ | | [INCERTO] sem registro |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | ~2026-08-10 | SR-316 aberto, sem resposta nossa no snapshot |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 1 fechado(s): SR-316; estado não lido na API: CT-4457. Antes (~2026-08-10): SR-316 aberto, sem resposta nossa no snapshot |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ⏳ | | [INCERTO] nenhum artefato LT citado; o ticket pergunta se existe parameter sheet de LT assinado |
 | [[design]] | ⏳ | | [INCERTO] |
 | Produção (outro time) | — | | Accenture Lithuania em Live/BAU / Production (outro time) |
-| [[suporte]] | 🔄 | 2026-09-28 | HRBS-15253 aberto, só acknowledgment do Product Support |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: HRBS-15253 Pending on Internal team. Antes (2026-09-28): HRBS-15253 aberto, só acknowledgment do Product Support |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | 2025 (base) | Base: CCG 2025, WTC v3.6, DD v3.4 (chat: design-dev-kb). Irlanda usada como baseline das sessões de gap-filling de acurácia (2026-06-30, Manju) (chat: compliance-research). |
 | [[design]] | ✅ | 2026-06-24 | Regulation Design do Claude v1.0 (31 regs, 9372xxx) comparado ao da produção (CT-A-192, 52 regs): ~72%; 6 open items |
 | Produção (outro time) | — | | Omnicom em Live/BAU |
-| [[suporte]] | 🔄 | 2026-08-27 | HRBS-13860 (NAERSA falhando) em L2, sem envolvimento de Compliance no snapshot |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 1 fechado(s): HRBS-13860. Antes (2026-08-27): HRBS-13860 (NAERSA falhando) em L2, sem envolvimento de Compliance no snapshot |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-ireland`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

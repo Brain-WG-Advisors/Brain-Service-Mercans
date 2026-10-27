@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | mai/2026 | CCG CL-CCG-001 v1.1, WTC CL-WTC-001 v1.0, DD CL-DD-001 v1.0; skill CL-SKILL-001 publicada com 7 discrepâncias de taxa em aberto |
 | [[design]] | 🔄 | jun/2026 | Regulation Design v1.1 (9152xxx, 36 regs); Q1 e Q5 abertas |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-09-28 | SR-221 e SR-232 (Report Specs) em Product Mapping com a BA; pedido de coluna de report code no WTC |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: SR-221 In Progress, SR-232 Open. Antes (2026-09-28): SR-221 e SR-232 (Report Specs) em Product Mapping com a BA; pedido de coluna de report code no WTC |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-chile`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

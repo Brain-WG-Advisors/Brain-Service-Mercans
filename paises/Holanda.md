@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | até 2026-09 | NL-CCG reconstruída após HRBS-10545; correção P13 V6 e test parts VTS v3 (cliente Mammoet) prontas; sign-offs do cliente pendentes |
 | [[design]] | ⏳ | | [INCERTO] só o prompt de Client Manual variante NL e o fix pontual do bug do 30% ruling (2026-07-10) aparecem; sem design NL registrado |
 | Produção (outro time) | — | | Omnicom em Live/BAU |
-| [[suporte]] | 🔄 | 2026-09-21 | HRBS-14675 sem resposta nossa; Mohit pediu ao Wallisson verificar se o report é statutory |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: HRBS-14394 Open, HRBS-14675 Pending on reporter; 4 fechado(s): HRBS-10545, HRBS-1534, HRBS-5499, HRBS-9646. Antes (2026-09-21): HRBS-14675 sem resposta nossa; Mohit pediu ao Wallisson verificar se o report é statutory |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-netherlands`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

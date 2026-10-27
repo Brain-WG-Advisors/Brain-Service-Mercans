@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | 🔄 | 2026-09-23 | WTC GA-WTC-001 v3.1 DRAFT (HRBS-14978); pesquisa estatutária registrada no chat; sem skill [INCERTO se CCG/DD existem] |
 | [[design]] | ⏳ | 2026-08-25 | Design novo (Manju) pedido em 2026-08-25, "a fazer" (chat: design-dev-kb) |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-09-23 | HRBS-14978 (WTC v3.1 DRAFT), HRBS-14943 (resposta, sem mudança), HRBS-12472 (payslip) |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 3 fechado(s): HRBS-12472, HRBS-14943, HRBS-14978. Antes (2026-09-23): HRBS-14978 (WTC v3.1 DRAFT), HRBS-14943 (resposta, sem mudança), HRBS-12472 (payslip) |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

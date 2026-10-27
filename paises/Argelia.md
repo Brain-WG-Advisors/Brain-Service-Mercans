@@ -36,7 +36,7 @@ Hub criado em 2026-10-27 (Fase R, revisão do grafo) a partir da conferência do
 | [[research-pipeline]] | ⏳ | | sem registro no cérebro |
 | [[design]] | 🔄 | 2026-10-27 | Spec DAS v2.2 Draft (local) |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-10-27 | HRBS-3466 resolvido e arquivado, sem publicar |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: HRBS-3466 SLA Exempt. Antes (2026-10-27): HRBS-3466 resolvido e arquivado, sem publicar |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

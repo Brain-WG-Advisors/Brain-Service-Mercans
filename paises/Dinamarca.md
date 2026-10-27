@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | 2026-08-22 | skill compilada (build do zero em 2026-08-22) |
 | [[design]] | ⏳ | | |
 | Produção (outro time) | — | | |
-| [[suporte]] | ⏳ | | |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 1 fechado(s): HRBS-15410. |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-denmark`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

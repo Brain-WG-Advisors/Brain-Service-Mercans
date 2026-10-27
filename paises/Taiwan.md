@@ -36,7 +36,7 @@ Hub criado em 2026-10-27 (Fase R, revisão do grafo) a partir das conferências 
 | [[research-pipeline]] | ⏳ | | sem registro no cérebro |
 | [[design]] | 🔄 | 2026-10-27 | Specs de relatório revisadas (SR-105 a SR-110), Draft local, nada publicado |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-10-27 | SR-105 a SR-110 resolvidos e arquivados, sem publicar |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: SR-105 Open, SR-106 Open, SR-107 Open, SR-108 In Review, SR-109 In Review, SR-110 In Review. Antes (2026-10-27): SR-105 a SR-110 resolvidos e arquivados, sem publicar |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

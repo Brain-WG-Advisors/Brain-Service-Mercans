@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ⏳ | | [INCERTO] Kuwait revisado no roadmap de automação (drift-sync); sem pipeline registrado |
 | [[design]] | ⏳ | | [INCERTO] |
 | Produção (outro time) | — | | |
-| [[suporte]] | ⏳ | | HRBS-8606 (PIFSS) citado sem conteúdo |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 1 fechado(s): HRBS-8606. Antes (sem data): HRBS-8606 (PIFSS) citado sem conteúdo |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-kuwait`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

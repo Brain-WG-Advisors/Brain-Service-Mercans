@@ -36,7 +36,7 @@ Clientes ligados: Altium Ukraine (principal), GSK Ukraine (implementação), SDL
 | [[research-pipeline]] | ✅ | 2026-09 | WTC, CCG, DD e Report Specs entregues; versões vigentes (regra 8: maior versão citada): WTC V4.1, CCG V1.5, DD V3.10. Nos tickets, WTC V3.9 e CCG V1.5 estavam em draft em ~2026-09-21 (HRBS-14331); o chat de 2026-10-01 cita WTC V4.1 e DD V3.10. |
 | [[design]] | 🔄 | 2026-09-28 | Specs D1, 4DF, D5, D6 em "In Review" (BA/Dev), faltando XML de amostra real; 1-PV (SR-414/415) em Open com perguntas da BA; Payslip (SR-340) In Progress com Dev. Advance Payroll sem especificação de desenvolvimento (HRBS-14255). |
 | Produção (outro time) | — | | Ver [[fronteiras]] |
-| [[suporte]] | 🔄 | 2026-09-29 | 18 tickets nos snapshots; vários sem resposta nossa (ver Pendências). |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: HRBS-14255 Open, HRBS-15216 Open, SR-161 In Review, SR-414 In Review, SR-415 In Review; 13 fechado(s): HRBS-12181, HRBS-12368, HRBS-12548, HRBS-12631, HRBS-13389, HRBS-13392, HRBS-13499, HRBS-14324, HRBS-14331, SR-160, SR-162, SR-163, SR-340. Antes (2026-09-29): 18 tickets nos snapshots; vários sem resposta nossa (ver Pendências). |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

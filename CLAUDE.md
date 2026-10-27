@@ -47,6 +47,8 @@ Colar `prompts/abrir-sessao.md`. Ler o `PLANO.md` (modelo de construção e pain
 
 ## Abrir a sessão
 Antes da primeira tarefa: ler `ESTADO.md` e as últimas linhas de `log.md`; rodar `scripts/youtrack_fetch.ps1 -DryRun -Query "for: me #Unresolved"` para ver a fila atual (tickets podem ter sido atribuídos depois da última sessão).
+- **Tickets dos hubs:** `python scripts/atualizar_tickets.py` (estado na API → properties, linha Suporte dos hubs e painel do 00-INDEX). Rodar ao abrir o dia.
+- **Toda task de país começa por** `python scripts/contexto_pais.py <País|código>`: versões vigentes, tickets abertos, correções, pendências e valores sem fonte num passo só. Detalhe exato: abrir o arquivo citado.
 
 ## Janelas paralelas (decidido em 2026-10-15)
 As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada uma aberta na sua pasta: **Suporte - Mercans** (`frentes/suporte`), **Gmail - Mercans** (`frentes/gmail`), **Chat - Mercans** (`frentes/chat`), **Pipeline - Mercans** (`frentes/pipeline`, desde 2026-10-15; liga `Documents\Research Pipeline` e `~/mercans-pipeline`), **Certificacao - Mercans** (`frentes/certificacao`, desde 2026-10-15; liga `Documents\internal-certification`). A sessão carrega este CLAUDE.md + o da frente, e o histórico (`/resume`) e a memória ficam separados por frente. Abrir com `scripts/abrir_frentes.ps1` (`-Retomar` para voltar à última conversa de cada uma). A janela aberta na raiz é a **geral** ("abre o dia", "revisa o cérebro", git).

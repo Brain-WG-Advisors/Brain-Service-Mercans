@@ -22,6 +22,8 @@ Cada frente 1–5 tem a sua janela do Claude Code, aberta na sua pasta `frentes/
 | 5 | **Análise de Reports** (Internal Certification) | Validar os statutory reports do HRBLIZZ com os pacotes das SBCs | Workbook de validação + achados para implementation + cobranças em rascunho | `frentes/certificacao/estado.md` + seção "Internal Certification" do hub do país; método em [[analise-reports]] |
 
 ## "Abre o dia"
+Primeiro passo: `python scripts/atualizar_tickets.py` (estado dos tickets dos hubs na API → hubs e painel `paineis/paises.base`; mostra quais hubs mudaram).
+
 Passa pelas frentes 1–3 e entrega um painel único:
 - **Urgente hoje** — calls, prazos, tickets com resposta nova.
 - **Esperando o usuário** — rascunhos prontos para enviar, arquivos para importar.

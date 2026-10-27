@@ -1,96 +1,41 @@
 filters:
   and:
     - file.inFolder("paises")
+    - tipo == "pais"
+formulas:
+  Research: if(etapa_research == "concluida", "✅", if(etapa_research == "em andamento", "🔄", if(etapa_research == "aguardando", "⏳", "")))
+  Design: if(etapa_design == "concluida", "✅", if(etapa_design == "em andamento", "🔄", if(etapa_design == "aguardando", "⏳", "")))
+  Suporte: if(tickets_abertos > 0, "🔄 " + tickets_abertos + " aberto(s)", if(tickets_abertos == 0, "✅", ""))
 properties:
   file.name:
     displayName: País
-  note.codigo:
-    displayName: Código
-  note.etapa_research:
-    displayName: Research
-  note.etapa_research_data:
-    displayName: Research (data)
-  note.etapa_design:
-    displayName: Design
-  note.etapa_design_data:
-    displayName: Design (data)
-  note.etapa_producao:
-    displayName: Produção
-  note.etapa_suporte:
-    displayName: Suporte
-  note.etapa_suporte_data:
-    displayName: Suporte (data)
   note.ccg:
     displayName: CCG
-  note.ccg_data:
-    displayName: CCG (data)
   note.wtc:
     displayName: WTC
-  note.wtc_data:
-    displayName: WTC (data)
   note.dd:
     displayName: DD
-  note.dd_data:
-    displayName: DD (data)
   note.report_specs:
     displayName: Report Specs
-  note.report_specs_data:
-    displayName: Specs (data)
   note.sir:
     displayName: SIR
-  note.sir_data:
-    displayName: SIR (data)
-  note.payslip:
-    displayName: Payslip
-  note.skill:
-    displayName: Skill
-  note.tickets_abertos:
-    displayName: Tickets abertos
-  note.tickets_conferidos_em:
-    displayName: Tickets conferidos em
-  note.atualizado_em:
-    displayName: Hub atualizado em
 views:
   - type: table
-    name: Etapas por país
-    filters:
-      and:
-        - tipo == "pais"
+    name: Resumo
     order:
       - file.name
-      - etapa_research
-      - etapa_research_data
-      - etapa_design
-      - etapa_design_data
-      - etapa_producao
-      - etapa_suporte
-      - etapa_suporte_data
-      - tickets_abertos
-      - atualizado_em
+      - formula.Research
+      - formula.Design
+      - formula.Suporte
+    sort:
+      - property: tickets_abertos
+        direction: DESC
   - type: table
-    name: Artefatos vigentes
-    filters:
-      and:
-        - tipo == "pais"
+    name: Artefatos
     order:
       - file.name
       - ccg
-      - ccg_data
       - wtc
-      - wtc_data
       - dd
-      - dd_data
       - report_specs
-      - report_specs_data
       - sir
-      - sir_data
-      - payslip
-      - skill
-  - type: table
-    name: Hubs sem properties (falta migrar)
-    filters:
-      and:
-        - tipo != "pais"
-    order:
-      - file.name
-      - file.mtime

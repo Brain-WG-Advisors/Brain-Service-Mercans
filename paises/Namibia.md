@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | ~2026-07 [INCERTO] | CCG, WTC e Report Specs (SSC Form Ten, PAYE 5, ETX) existem segundo os tickets; versões não citadas; sem skill. Chats citam a Namíbia só de passagem ("toques leves") |
 | [[design]] | 🔄 | 2026-09-18 | Relatórios (Monthly PAYE Return, G2N, SSC Contribution Return) em configuração, previstos até 2026-09-25, depois revisão de Compliance; Payslip configurado, em revisão de Compliance (HRBS-14605) |
 | Produção (outro time) | — | | Entidade Baker Hughes Namibia em implementação (HRBS-12074, fora do nosso escopo) |
-| [[suporte]] | ✅ | 2026-10-27 | Os 6 tickets da Baker Hughes Namibia estão Resolved (consulta à API em 2026-10-27; o status anterior, "6 sem resposta", vinha da carga de 2026-10-02 e estava desatualizado). Ver [[#Cliente Baker Hughes (África)]] |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 6 fechado(s): HRBS-12072, HRBS-12101, HRBS-12111, HRBS-12483, HRBS-13602, HRBS-14605. Antes (2026-10-27): Os 6 tickets da Baker Hughes Namibia estão Resolved (consulta à API em 2026-10-27; o status anterior, "6 sem resposta", vinha da carga de 2026-10-02 e estava desatualizado). Ver [[#Cliente Baker Hughes (África)]] |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

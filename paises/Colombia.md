@@ -6,7 +6,7 @@ etapa_research_data: 2026-10-26
 etapa_design: aguardando
 etapa_design_data: 2026-10-22
 etapa_producao: outro time (PMI em BAU; transição Instaroll)
-etapa_suporte: sem tickets abertos
+etapa_suporte: "sem tickets abertos"
 etapa_suporte_data: 2026-10-27
 ccg: v1.4
 ccg_data: 2026-10-26
@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ (concluída) | 2026-10-26 | PMI: pesquisa encerrada em 26/10. No Drive (com links no Monday e na CT-4593): 7 specs v1.0 (17 - Statutory Report), CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1. Delta ao design e e-mail de encerramento (thread "PMI Review") enviados pelo Wallisson em 26/10. Ficam com terceiros, sem bloquear: saúde/FSP nas mesadas adicionais e fatos da PILA-007 (cliente/BAU), consulta à DIAN sobre código do pensionado e dias fracionados (decisão da Manju). Kit e trackers: `Research Pipeline/Colombia/co-report-crosscheck/04-output/PENDING-2026-10-21.md`; confirmação: [[Research Pipeline/Colombia/co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx\|CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx]]. Histórico: pesquisa CO "na fila depois da Bélgica" (chat: mercans-compliance); Mohit: CO exige "redesign ou ao menos grande correção de gaps" (~2026-08-29). |
 | [[design]] | ⏳ | 2026-10-22 | PMI: início do design do time do Mohit estimado em 20/11 (e-mail de 22/10, sem confirmação). Antes: Colômbia citada como país sugerido para o próximo design (chat: design-dev-kb). |
 | Produção (outro time) | — | | PMI em produção/BAU; transição para Instaroll em curso (outro time) |
-| [[suporte]] | ✅ sem ticket aberto | 2026-10-27 | Os 5 tickets PMI (HRBS-12487, 12491, 12492, 13627, 13692) estão Resolved (API, 27/10). Antes: "5 tickets PMI sem resposta nossa" (snapshot de 2026-09-16) |
+| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 5 fechado(s): HRBS-12487, HRBS-12491, HRBS-12492, HRBS-13627, HRBS-13692. Antes (2026-10-27): Os 5 tickets PMI (HRBS-12487, 12491, 12492, 13627, 13692) estão Resolved (API, 27/10). Antes: "5 tickets PMI sem resposta nossa" (snapshot de 2026-09-16) |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-colombia`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

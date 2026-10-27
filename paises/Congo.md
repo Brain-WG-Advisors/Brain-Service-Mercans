@@ -35,7 +35,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | ✅ | 2026-06-30 | Pesquisa concluída (Wallisson); skill file entregue e atualizado (chat: compliance-research; mercans-compliance) |
 | [[design]] | 🔄 | 2026-08-28 | Regulation Design clean-room comparado com CT-A-590: 77%, cobertura funcional 26/26; perguntas Q1–Q11 ao Mohit abertas (chat: design-dev-kb) |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-10-27 | Baker Hughes Congo: 12472, 13841, 14054, 14055 Resolved; só o HRBS-12110 (Report Matrix) segue In Progress (consulta à API em 2026-10-27). Ver [[Namibia#Cliente Baker Hughes (África)]] |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: HRBS-12110 In Progress; 4 fechado(s): HRBS-12472, HRBS-13841, HRBS-14054, HRBS-14055. Antes (2026-10-27): Baker Hughes Congo: 12472, 13841, 14054, 14055 Resolved; só o HRBS-12110 (Report Matrix) segue In Progress (consulta à API em 2026-10-27). Ver [[Namibia#Cliente Baker Hughes (África)]] |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-congo`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

@@ -63,6 +63,19 @@ As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada u
 - Arquivo de ticket (Suporte) segue a mesma regra, na pasta do país em `Research Pipeline/<País>/`.
 - Git: tudo entra, menos `*.zip` e `*.pdf` (`.gitignore`; o GitHub recusa arquivo > 100 MB).
 
+## Rede no Obsidian e Graphify (decidido em 2026-10-27)
+- A pasta é o cofre do Obsidian.
+  - `.obsidian/app.json` exclui `publicar/`, o espelho do pipeline, `fr-research-validation/`, `raw/` e `_arquivo/`.
+  - Toda nota nova nasce ligada (hub, conferência, serviço ou nota-mapa). Nenhuma nota fica solta.
+- Graphify:
+  - O grafo da camada de conhecimento fica em `graphify-out/`, fora do git. O escopo está em `.graphifyignore`, sem cópias de skill nem saídas do pipeline.
+  - Para perguntas sobre o cérebro, começar por `graphify query`.
+  - Depois de mudar notas, rodar `graphify update .` e reler com agentes só as notas alteradas.
+- Script que altera notas em lote:
+  - não toca cópias de skill, saídas do pipeline, rascunhos nem os `estado.md` das frentes;
+  - age só na seção certa.
+- Estado de ticket citado em hub envelhece: conferir na API (`youtrack_fetch.ps1`) antes de agir.
+
 ## Papel da janela geral: orquestradora (decidido em 2026-10-15)
 Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as janelas das frentes executam (sessões `suporte-*`, `gmail-*`, `chat-*`, `pipeline-*`, `certificacao-*` em `ListAgents`; se não estiverem abertas, reabrir com `scripts/abrir_frentes.ps1 -Retomar`).
 

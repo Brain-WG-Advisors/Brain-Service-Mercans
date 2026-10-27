@@ -1,6 +1,20 @@
 # Onde paramos
 
-> Atualizado em 2026-10-26 (fim da sessão [[sessoes/2026-10-26]]; demais blocos sem mudança desde 2026-10-20). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-10-27 (fim da sessão [[sessoes/2026-10-27]]; blocos da Colômbia de 26/10 e demais sem mudança desde 2026-10-20). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+
+## Rede de conhecimento (Fase R) e teste de exatidão (2026-10-27)
+- **Prioridade:** a rede no Obsidian vem antes (Fase R do [[PLANO]]); a Fase 2 (fumaça e rodada 2 no projeto "Brain Service" do claude.ai) está pausada. O objetivo continua a eficiência da entrega no dia a dia.
+- **Pronto:**
+  - cofre `brain-service` no Obsidian, com as cópias excluídas em `.obsidian/app.json`;
+  - 0 notas soltas;
+  - hubs novos [[Taiwan]], [[Argelia]] e [[Cazaquistao]];
+  - grafo do Graphify em `graphify-out/` (abrir `graph.html`; consultar com `graphify query`).
+- **Manter o grafo:** `graphify update .` para a estrutura; para notas alteradas, releitura com agentes (skill graphify, `--update`).
+- **Tickets dos hubs:** conferidos na API em 27/10. Antes de agir sobre ticket citado em hub, conferir o estado na API.
+- **Esperando o usuário:**
+  - religar os 5 conectores do claude.ai (menu + → Conectores);
+  - push dos commits `a924890`, `afc11c8`, `5110bf5` quando quiser.
+- **Esperando frente Suporte:** conferir o teto SSC da Namíbia (GN 236/2026 × N$99 dito no HRBS-12111), em [[Namibia]] Pendências.
 
 ## Colômbia PMI — pesquisa concluída (2026-10-26)
 - Encerrada em 26/10: artefatos finais no Drive/Monday (7 specs v1.0, CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1); delta ao design e e-mail de encerramento enviados pelo usuário; registros no chat "Research Pipeline II". Resumo: [[sessoes/2026-10-26]]; planilha [[Research Pipeline/Colombia/co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx|CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx]].

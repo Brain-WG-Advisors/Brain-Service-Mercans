@@ -54,5 +54,5 @@ Saídas dos testes YY/ZZ (2026-09-11) e do Canadá (Mac) não estão nesta máqu
 - ~~Conferir os `P2-enrolment-access-credentials.md` da FR antes do Passo 2~~: não copiados (fora da lista do Passo 2).
 - ~~Passos 3–5~~ feitos em 2026-10-27 (cartões, conferência independente de 100% em `extracoes/*-conferencia.md`, ingestão nos hubs BE/CO/FR, 9 entradas em `correcoes.md`, `servicos/research-pipeline.md` e `fronteiras.md`). Tudo marcado "validação humana pendente".
 - **Usuário:** validar os 2 lotes (67 cartões de risco alto + 5 sorteados). Excedente de lote 2 listado em "Descartados" de cada extração (BE 14 itens; CO lista CO-GAP-01…14).
-- C13 da Colômbia (correção do Payslip) não foi para `correcoes.md`: depende de a frente pipeline confirmar quem corrigiu.
+- ~~C13 da Colômbia~~: confirmado pela frente pipeline (commit `fcd450d`, 2026-09-21) e gravado em `correcoes.md` em 2026-10-27.
 - 11 candidatas extras a `correcoes.md` (BE, seção B de `extracoes/2026-10-27-pipeline-Belgica-correcoes-propostas.md`) ficam para a Fase 4.

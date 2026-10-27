@@ -42,6 +42,12 @@
   - subir a skill;
   - depois, rodada 3 do teste de exatidão no claude.ai, com a skill ligada.
 
+- **Conferido no claude.ai pelo Chrome (2026-10-27):**
+  - A skill está na org **Mercans**, privada e com 61 arquivos.
+  - O 1º teste travou no conector Google Drive ("Vincular").
+  - A v2 foi salva pelo editor da skill, com a regra "use os arquivos da skill antes de conectores"; o `gerar_pacote.py` já gera essa regra.
+  - O **reteste da T-006 deu certo ✅**: a resposta veio da skill, com a versão V4.7, o SR-85 e a confiança declarada. Na rodada 1 tinha sido ❌.
+
 ## Perguntas ao usuário (respondidas em 2026-10-27)
 - O time vai usar o cérebro, ou só você? Se for o time, a skill precisa ser provisionada pelo admin da Mercans; as skills `mercans-*` já são provisionadas assim.
 - Pode subir na conta da Mercans, como skill/Projeto, o conteúdo interno do cérebro (hubs, correções, versões)? Os nomes de clientes que já estão nos hubs entram também. Sem isso, o pacote leva só as regras e as fichas, sem os tickets.

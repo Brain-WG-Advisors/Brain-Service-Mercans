@@ -24,3 +24,9 @@ O conector Gmail do claude.ai não é usado. Tudo pela aba do Chrome, na caixa `
 - Ticket é da janela Suporte: se um e-mail mexer em ticket, anotar em "Esperando ação" e avisar o usuário.
 - Escreve só o seu `estado.md` e as triagens de e-mail. Compartilhados: "Janelas paralelas" na raiz.
 - "Fecha a sessão": nota `sessoes/AAAA-MM-DD-gmail.md` e reescrita só do `estado.md` desta pasta. Sem commit.
+
+## Chrome falhou (roteiro fixo, decidido em 2026-10-27)
+Uma mensagem só ao usuário, com a ação exata:
+1. `list_connected_browsers`. Se vazio: "abra o Chrome e clique no ícone da extensão Claude".
+2. `tabs_context_mcp`. Se a aba sumiu: "reabra a aba <URL> e me avise".
+3. Se o clique ou a leitura falhar 2 vezes: parar e dizer o que tentei e o que o usuário precisa fazer (ex.: dispensar um diálogo, fazer login).

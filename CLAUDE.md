@@ -104,8 +104,51 @@ Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as jane
 
 **Nas janelas das frentes:** tarefa recebida da janela geral é tarefa do usuário (mesmas regras: apresentar antes de gravar, nunca enviar). Ao terminar, devolver o resumo à janela geral por `SendMessage`; o que precisar de aprovação, apresentar também na própria janela.
 
+## Respostas eficientes (decidido em 2026-10-27)
+Origem: análise de 1.981 mensagens do usuário ([[revisoes/2026-10-27-padroes-prompts|padrões dos prompts]]). Cada regra corta uma causa de ida e volta.
+1. **Bloco de prova** no fim de toda resposta, rascunho ou arquivo que vai para terceiros (ticket, e-mail, chat, artefato):
+   - **Pedido → resposta:** item a item, cobrindo o pedido inteiro.
+   - **Fontes:** cada afirmação → fonte primária lida, com artigo, página ou célula.
+   - **Teste:** o que foi conferido mecanicamente (XSD, conta refeita, md5).
+   - **Confiança X%:** se abaixo de 100%, dizer o que falta e não apresentar como pronto.
+
+   O usuário não deve precisar perguntar "tem 100% de confiança?".
+2. **Fazer sem perguntar:**
+   - próximo item de lista já aprovada;
+   - leitura, pesquisa e conferência;
+   - registro no cérebro (hub, log, pendência);
+   - decisão técnica reversível (dizer qual foi em 1 linha).
+
+   **Continua pedindo ok:**
+   - enviar, ou gravar em ticket/e-mail;
+   - Drive;
+   - artefato de terceiro ou de país ativo (regra 9);
+   - mudança de escopo;
+   - apagar.
+3. **Mensagem interna** (gerente, diretor, chat do time): 1 a 3 frases, só o perguntado. Achados fora do pedido vão para o hub e aparecem ao usuário numa linha separada: "Fora do pedido (não incluí): …".
+4. **Pergunta ao usuário:** contexto em 1 linha, opções em português simples (sem jargão sem tradução), recomendação e "se não responder, faço A".
+5. **Instrução de sessão** ("esquece X", "não precisa Y", "sempre Z"):
+   - gravar na hora no `estado.md` da frente (na geral, em `ESTADO.md`), seção "Instruções vigentes";
+   - reler antes de cada entrega.
+6. **Passo manual do usuário** (enviar, importar, exportar): já dizer "quando você disser 'pronto', eu faço: 1… 2…". Em "enviei" ou "pronto":
+   - registrar no hub e no log;
+   - fechar o item;
+   - abrir o próximo da fila sem perguntar.
+
+   Depois de "importei/copiei para o Drive": rodar `python scripts/conferir_import.py <local> <Drive>` e dar o resultado em 1 linha.
+7. **Antes de editar qualquer artefato:** `python scripts/achar_versao.py <país> <ccg|wtc|dd|sir|payslip|spec> [termo]`. Partir da maior versão não DRAFT; md5 diferente na mesma versão → comparar antes.
+8. **Janela geral:** pedido de ticket, e-mail, chat, pipeline ou certificação vai direto para a frente certa, com aviso de 1 linha ("mandei para a frente X"), sem perguntar a quem mandar.
+
 ## Comandos
 Quando o usuário disser:
+
+- **"chegou resposta de X" / mensagem colada de alguém:** saída fixa, sem preâmbulo:
+  - o que X pediu;
+  - o que é nosso (o resto vai para [[fronteiras]]);
+  - o que mudou desde a nossa última mensagem;
+  - rascunho da resposta (formato da regra 3 de "Respostas eficientes") + bloco de prova;
+  - onde registrar (hub, ticket, estado da frente).
+- **"onde estamos?" / "o que falta?":** rodar `python scripts/onde_estamos.py` e responder no painel ✅ pronto | ⏳ espera você | 🔄 espera outros/frente, só com o que mudou desde o último painel.
 
 - **"responde o ticket X" / rascunho de resposta / e-mail** (protocolo validado em 2026-10-13)
   1. Carregar a skill `mercans-compliance-workflow` (e `payroll-compliance-<país>` se existir) **antes** de redigir.

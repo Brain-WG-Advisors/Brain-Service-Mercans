@@ -12,6 +12,7 @@
 | Regras de motor (ex.: gross-up só na base do PIT; separação PIT/Military Levy na UA) | Dev / Product; o desenho final (motor ou PE agregado) está sem decisão entre Compliance, BA e Dev (tickets: UA) | Regra legal explicada |
 | Retro e parâmetros do engine; TT/TRG de designers novos | Configuração do engine (Dev), na development call; não é toggle de compliance (chat: design-dev-kb) | Regra estatutária |
 | Status de configuração (S/C/M/N) e mapeamento de produto | Config/Product (time do Kine, Mohit) (chat: mercans-compliance; chat: compliance-research) | Confirmar posição estatutária; não prescrever configuração |
+| Faixa numérica de códigos Mercans para país novo no WTC (ex.: Colômbia: 102 linhas `CO-` com código DERIVED, coluna "Mercans Code" vazia no WTC v1.6) | Config/Product [INCERTO quem atribui] (F6-20261027-CO-C30; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` l. 554–557; validação humana pendente) | WTC com códigos mnemônicos; não afirmar código numérico de linha `CO-` até sair a faixa |
 | Mapeamento de produto de Report Spec e atribuição de código de PE | BA (Lily Li, Ruchi Gupta) (tickets: OUT, UA, ES-B) | Spec entregue e queries da BA respondidas |
 | Planilhas Income Nature / Income Key e colunas de BA Mapping | BA (Lily Li); não editar sem aprovação explícita (chat: mercans-compliance; chat: compliance-research) | Nunca editamos |
 | WTC do cliente (ex.: Altium) e WTs "cinza" | Cliente / team lead; mantemos só o master WTC (tickets: UA) | Master WTC |

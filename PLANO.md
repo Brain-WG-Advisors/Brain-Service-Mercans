@@ -195,7 +195,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | 3. F3 Chats | 2026-12-11 |
 | 3. F4 Reuniões | 2026-12-18 |
 | 3. F5 Drive | 2027-01-15 (recesso de fim de ano considerado) |
-| 3. F6 Pipeline | 0.7, inventário e coleta em 2026-10-27; próximo: Passo 3 |
+| 3. F6 Pipeline | feita em 2026-10-27 (112 cartões ingeridos); falta a validação humana |
 | 4. Consolidação final | 2027-01-20 |
 | 5. Medição final + relatório | 2027-01-27 |
 
@@ -257,7 +257,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | 3. F3 Chats | ⏳ | 0/? | — | 6–10 / | — | Depois da F2 |
 | 3. F4 Reuniões | ⏳ | 0/? | — | 4–8 / | — | Depois da F3 |
 | 3. F5 Drive | ⏳ | 0/? | — | 4–6 / | — | Depois da F4 (alvos vêm do F1) |
-| 3. F6 Pipeline | 🔄 coleta feita | 0/4 | — | — | 2026-10-27 | Passo 3: cartões (versão final, erro+causa, pendência) |
+| 3. F6 Pipeline | ✅ ingerida · ⏳ validação | 4/4 (100%) | ⏳ (agente: 92 ✔ · 20 ◐ · 0 ✘ de 112) | — / 0 | 2026-10-27 | Usuário validar 2 lotes (67 risco alto + 5) |
 | 4. Consolidação | ⏳ | — | — | 3 / | — | — |
 | 5. Medição final | ⏳ | — | — | 5–6 / | — | — |
 | 6. Rotina | ⏳ | — | — | 20 min/sem | — | — |

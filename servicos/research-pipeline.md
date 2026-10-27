@@ -50,6 +50,8 @@ Erros de **processo** (erros de valor/artefato por país ficam em [[correcoes]])
 - **Pendência de processo (OD-13):** ticket HRBS- de Compliance Support edita artefato direto ou escala para CT-? Sem decisão da liderança (chat: mercans-compliance).
 - **Segurança:** chave da Anthropic API exposta; rotacionar no Passbolt [INCERTO onde ocorreu] (chat: compliance-research).
 - **Qualidade de IA:** a IA erra ou omite ~15% em pesquisa estatutária (TR e HU precisaram de retrabalho); payslip de Turkey reprovado por não mostrar bruto e líquido por elemento (chat: design-dev-kb; chat: compliance-research).
+- **Check de consistência que passa sem testar:** na Colômbia, `FACT-CONFLICTS.md` deu "PASS — no deterministic conflicts" e o handover registrou C32 = PASS, mas o país não tinha tags `[[FACT:]]` ("country pre-dates tagging"); o check não testou nada e há contradições reais entre artefatos (CCG × WTC, decreto do SMMLV, não residente). PASS sem tags = não verificado (F6-20261027-CO-C18; `raw/pipeline/Colombia/2026-10-27/qa/handover_status.md` l. 106; validação humana pendente).
+- **Stage morto com artefato existente:** na Colômbia, `wtc.log` terminou em "Reached max turns (60)" e `payslip.log` em "Connection lost mid-response"; os artefatos existem por execuções posteriores (`payslip_batch.log`). O log da etapa não prova conclusão; a prova são o artefato e o QA (F6-20261027-CO-C32; `raw/pipeline/Colombia/2026-10-27/logs/`; validação humana pendente).
 
 **Referência de automação (orquestrador):** ver `raw/docs/2026-09-10-orchestrator-skill-gemini.md`, `raw/docs/2026-09-11-orchestrator-handoff.md` e `raw/docs/2026-09-11-setup-shared.md` (PoC de state-machine para o pipeline; não faz parte do serviço entregue).
 

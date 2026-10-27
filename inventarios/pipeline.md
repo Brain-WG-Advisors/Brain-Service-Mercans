@@ -27,18 +27,18 @@
 | Métrica | Valor | Meta |
 |---|---|---|
 | Itens no inventário | 4 | — |
-| Cobertura ((cartão + descartado) ÷ itens) | 0% | 100% |
-| Rastreabilidade (cartões com caminho em raw ÷ cartões) | — | 100% |
-| Confirmação humana (✔ ÷ amostra) | — | ≥ 95% |
-| Incerteza ([INCERTO] ÷ cartões) | — | acompanhar |
+| Cobertura ((cartão + descartado) ÷ itens) | 100% (3 cartão + 1 descartado) | 100% |
+| Rastreabilidade (cartões com caminho em raw ÷ cartões) | 100% (112/112) | 100% |
+| Confirmação humana (✔ ÷ amostra) | ⏳ pendente (72 na amostra: 67 de risco alto + 5 sorteados; 2 lotes). Conferência independente por agente: 92 ✔ · 20 ◐ (corrigidos) · 0 ✘ | ≥ 95% |
+| Incerteza ([INCERTO] ÷ cartões) | 21% (23/112: BE 3, CO 8, FR 12) | acompanhar |
 
 ## Itens
 | # | ID/link | Título | Data | País | Estado na fonte | Arquivo em raw/ | Resultado | Cartão / motivo |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `BE-compliance/` | Build Bélgica: CCG v1.2, WTC v1.1, SIR v1.0, 8 specs (NSSO 001–005, FIN 001–002, FEDRIS 001), DD v1.4, Payslip Generator, skill; QA `BE-QA-REPORT-FINAL2-2026-08-24.md` | 2026-09-29 | BE | stages 00–08 com saída; stages 9.5–12b em notas da raiz (`BE_stage*.md`, PROPAGATION-LEDGER) | `raw/pipeline/Belgica/2026-10-27/` (qa 22, logs 66, notas 12, VC 12/14) | pendente | Passo 3 (cartões) |
-| 2 | `CO-compliance/` | Build Colômbia: CCG v1.2, WTC v1.4, SIR-INDEX v1.0, 6 specs (DIAN 001/002/004/005, PILA 003, CESANTIAS 006), DD v1.0, Payslip v1.1, skill; QA `CO-QA-REPORT.md`; `colombia-artifacts-20261026-1016.zip` (origem a confirmar) | 2026-10-26 | CO | stages 00–08 com saída; as versões vigentes (CCG v1.4, WTC v1.6, DD v1.3) estão no brain (`Research Pipeline/Colombia/`) e no Drive, **não** aqui | `raw/pipeline/Colombia/2026-10-27/` (qa 5, logs 21, VC 12/13) | pendente | Passo 3 (cartões); divergência máquina × Drive (PLANO §13) |
-| 3 | `FR-compliance/` | Build França: CCG v1.0, WTC v1.0, SIR-INDEX v1.0, 8 specs (DSN 001–003, URSSAF 001–004, DGFIP 003), DD v1.0, Payslip Generator, skill, 09-design; QA `FR-QA-REPORT-v4-20260903.md`; `_validation/`, `PROMOTION-LOG-2026-10-06/09` | 2026-10-09 | FR | stages 00–09 com saída; finais promovidos (D6: finais FR = arquivos do pipeline); DD final de 2026-10-26 veio de `fr-research-validation/` | `raw/pipeline/Franca/2026-10-27/` (qa 12, logs 32, notas 2, VC 19/20) | pendente | Passo 3 (cartões) |
-| 4 | `shared/country_failure_log.md` | Failure log F1–F74 (61 entradas) | 2026-10-17 | — | v2.12 | `raw/pipeline/_shared/2026-10-27/country_failure_log.md` | pendente | Passo 3 (cartões); erros/causas → `correcoes.md` (Fase 4) |
+| 1 | `BE-compliance/` | Build Bélgica: CCG v1.2, WTC v1.1, SIR v1.0, 8 specs (NSSO 001–005, FIN 001–002, FEDRIS 001), DD v1.4, Payslip Generator, skill; QA `BE-QA-REPORT-FINAL2-2026-08-24.md` | 2026-09-29 | BE | stages 00–08 com saída; stages 9.5–12b em notas da raiz (`BE_stage*.md`, PROPAGATION-LEDGER) | `raw/pipeline/Belgica/2026-10-27/` (qa 22, logs 66, notas 12, VC 12/14) | cartão | 40 cartões `F6-20261027-BE-C01…C40` em [extracoes/2026-10-27-pipeline-Belgica.md](../extracoes/2026-10-27-pipeline-Belgica.md) (34 risco alto) |
+| 2 | `CO-compliance/` | Build Colômbia: CCG v1.2, WTC v1.4, SIR-INDEX v1.0, 6 specs (DIAN 001/002/004/005, PILA 003, CESANTIAS 006), DD v1.0, Payslip v1.1, skill; QA `CO-QA-REPORT.md`; `colombia-artifacts-20261026-1016.zip` (origem a confirmar) | 2026-10-26 | CO | stages 00–08 com saída; as versões vigentes (CCG v1.4, WTC v1.6, DD v1.3) estão no brain (`Research Pipeline/Colombia/`) e no Drive, **não** aqui | `raw/pipeline/Colombia/2026-10-27/` (qa 5, logs 21, VC 12/13) | cartão | 32 cartões `F6-20261027-CO-C01…C32` em [extracoes/2026-10-27-pipeline-Colombia.md](../extracoes/2026-10-27-pipeline-Colombia.md) (12 risco alto) |
+| 3 | `FR-compliance/` | Build França: CCG v1.0, WTC v1.0, SIR-INDEX v1.0, 8 specs (DSN 001–003, URSSAF 001–004, DGFIP 003), DD v1.0, Payslip Generator, skill, 09-design; QA `FR-QA-REPORT-v4-20260903.md`; `_validation/`, `PROMOTION-LOG-2026-10-06/09` | 2026-10-09 | FR | stages 00–09 com saída; finais promovidos (D6: finais FR = arquivos do pipeline); DD final de 2026-10-26 veio de `fr-research-validation/` | `raw/pipeline/Franca/2026-10-27/` (qa 12, logs 32, notas 2, VC 19/20) | cartão | 40 cartões `F6-20261027-FR-C01…C40` em [extracoes/2026-10-27-pipeline-Franca.md](../extracoes/2026-10-27-pipeline-Franca.md) (21 risco alto) |
+| 4 | `shared/country_failure_log.md` | Failure log F1–F74 (61 entradas) | 2026-10-17 | — | v2.12 | `raw/pipeline/_shared/2026-10-27/country_failure_log.md` | descartado (nesta fonte) | Padrões de falha do **método** (F1–F74), já compilados na skill `mercans-pipeline-methodology` (regra 4 do CLAUDE.md: não duplicar skills); os erros por país entram pelos itens 1–3. O cruzamento failure log × [[correcoes]] fica para a Fase 4 (consolidação), com o arquivo já em raw |
 
 ### Coleta (Passo 2, 2026-10-27)
 - Copiado só: relatórios e revisões de QA (`07-qa-crosscheck/*.md|*.json`, sem `.bak`), resultados do audit (FR: `c1_result`, `c1b_result`, `audit_recheck_artifactfix`), `logs/` (inclui `FACT-CONFLICTS`), notas de stage/promoção da raiz e o **Version Control** de cada artefato (`version-control/`, extraído; não o artefato). 172 cópias + failure log, todas com md5 igual à origem (`MANIFEST-coleta.md` de cada país). Origem não alterada (`git status` do pipeline igual: 13).
@@ -52,4 +52,7 @@ Saídas dos testes YY/ZZ (2026-09-11) e do Canadá (Mac) não estão nesta máqu
 - Origem do `CO-compliance/colombia-artifacts-20261026-1016.zip`.
 - Repo `~/mercans-pipeline` sem remote e com 13 alterações sem commit: registrado (2026-10-27), sem ação por ora.
 - ~~Conferir os `P2-enrolment-access-credentials.md` da FR antes do Passo 2~~: não copiados (fora da lista do Passo 2).
-- Passo 3: cartões "versão final", "erro+causa" e "pendência" ([modelos/extracao.md](../modelos/extracao.md)), cruzando com hubs e monday.
+- ~~Passos 3–5~~ feitos em 2026-10-27 (cartões, conferência independente de 100% em `extracoes/*-conferencia.md`, ingestão nos hubs BE/CO/FR, 9 entradas em `correcoes.md`, `servicos/research-pipeline.md` e `fronteiras.md`). Tudo marcado "validação humana pendente".
+- **Usuário:** validar os 2 lotes (67 cartões de risco alto + 5 sorteados). Excedente de lote 2 listado em "Descartados" de cada extração (BE 14 itens; CO lista CO-GAP-01…14).
+- C13 da Colômbia (correção do Payslip) não foi para `correcoes.md`: depende de a frente pipeline confirmar quem corrigiu.
+- 11 candidatas extras a `correcoes.md` (BE, seção B de `extracoes/2026-10-27-pipeline-Belgica-correcoes-propostas.md`) ficam para a Fase 4.

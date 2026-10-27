@@ -91,6 +91,7 @@
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
+| 2026-10-27 | HRBS-14394 | Reabre HRBS-5499: PE 52990 "Maximum Social Security Base" exibe €5.509 (G2N de fev/2026); Config não altera PE de compliance | 15/10: teto 2026 confirmado (mês €6.617,41; tabel 11, Handboek Loonheffingen 2026). 27/10 (11:40 UTC): 52990 fora do WTC (Delete na v2.0, 31/07/2025); fórmula na configuração (L2, 14/10); pedido ao @mjain atualizar para os valores 2026. Aguardando Mohit | Não |
 | 2026-09-21 | HRBS-14675 | Omnicom: report `netherland-ssc-pdf` com % de SSI desatualizados (2026); Reports diz que é Custom Report sem spec | Sem resposta nossa; Pending on reporter | Não |
 | ~2026-07 | HRBS-1534 | 30% ruling: por que gym allowance e dedução pré-tax de pensão ficaram fora (Omnicom/Excerpta Medica) | Só salary sacrifice reduz a base | Sim, como proposta (redline em NL-CCG-001 §7.1.4 pelo drift-sync) |
 | antes de 2026-08 | HRBS-10545 | 30% ruling: teste anual EUR 48.013; leave-relief manual | Respondido; NL-CCG reconstruída | Sim |
@@ -115,6 +116,7 @@
 - [ ] Validar os % de SSI pedidos contra fonte oficial antes de passar ao Reports — Wallisson — (HRBS-14675)
 - [ ] Sign-offs do cliente Mammoet: decisão 2559, recuperação de EUR 17,48, memo de systematiek — Wallisson/cliente — (chat: mercans-compliance)
 - [ ] Reconciliação P09/P10 (Mammoet) — Wallisson — (chat: mercans-compliance)
+- [ ] HRBS-14394: confirmar com o Mohit se o 52999 traz o mesmo teto por período (alternativa não incluída na resposta por falta de prova); leitura de regulations NL no backoffice dá 403 para nós — Wallisson
 - [ ] Tickets do Statutory Alert 2027 prontos para colar — Wallisson — (chat: mercans-compliance)
 - [ ] Redline §7.1.4 do NL-CCG-001: aceitar/rejeitar — humano (Wallisson) — (chat: compliance-research) [INCERTO]
 - [ ] [INCERTO] O chat mercans-compliance lista "HRBS-10563 / Holanda / Modelo BCCC/BCCP"; o ticket HRBS-10563 é da Espanha (ver [[Espanha]], quando criado). Provável erro de rótulo no chat.

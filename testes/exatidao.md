@@ -108,41 +108,164 @@
 ## Rodadas
 | Data | Rodada | Configuração (projeto/skills ativos) | Conj. | ✅ | ⚠️ (instável) | ❌ | Nota | Repetiu erro conhecido |
 |---|---|---|---|---|---|---|---|---|
-| 2026-10-27 (planejada) | 1: linha de base | claude.ai como o time usa hoje, skills Mercans ativas, fora de projeto, sem pacote do brain | A | | | | /30 | |
+| 2026-10-27 | 1: linha de base | claude.ai fora de projeto, conectores desligados no chat, skills Mercans + busca web + memória + pesquisa em conversas anteriores ativas | A | 20 | 5 (1 instável: T-003) | 5 | **20/30** | 3 perguntas (T-001, T-003, T-024; 4 respostas) + 1 parcial (T-017, só CNPS) |
 
 ## Resultado por pergunta
 | # | Rodada 1 | Rodada 2 | Causa do ❌/⚠️ (falta no brain / falta na skill / erro do modelo / gabarito) | Ação · dono · data |
 |---|---|---|---|---|
-| T-001 | | | | |
-| T-002 | | | | |
-| T-003 | | | | |
-| T-004 | | | | |
-| T-005 | | | | |
-| T-006 | | | | |
-| T-007 | | | | |
-| T-008 | | | | |
-| T-009 | | | | |
-| T-010 | | | | |
-| T-011 | | | | |
-| T-012 | | | | |
-| T-013 | | | | |
-| T-014 | | | | |
-| T-015 | | | | |
-| T-016 | | | | |
-| T-017 | | | | |
-| T-018 | | | | |
-| T-019 | | | | |
-| T-020 | | | | |
-| T-021 | | | | |
-| T-022 | | | | |
-| T-023 | | | | |
-| T-024 | | | | |
-| T-025 | | | | |
-| T-026 | | | | |
-| T-027 | | | | |
-| T-028 | | | | |
-| T-029 | | | | |
-| T-030 | | | | |
+| T-001 | ❌ | ❌ | Resultado ❌. falta no brain/skill (erro conhecido reproduzido nas 2; as duas citam o Manual CRA de 01/07/2026, ver Gabarito a revisar) | Levar a correção SR-81 à skill do ES; revisar gabarito · usuário |
+| T-002 | ✅ | ✅ |  |  |
+| T-003 | ❌ | ✅ | Resultado ⚠️. instável (r1 reproduz o erro conhecido; r1 cita Orden HAC/1431/2025, ver Gabarito a revisar) | Corrigir na skill ES; revisar gabarito · usuário |
+| T-004 | ✅ | ✅ |  |  |
+| T-005 | ✅ | ✅ |  |  |
+| T-006 | ❌ | ❌ | Resultado ❌. falta no brain (WTC fora do alcance do claude.ai sem Drive; critério não prevê "não sabe", ver Gabarito a revisar) | Pacote do brain com a linha 65815 / WTC vigente · usuário |
+| T-007 | ✅ | ✅ |  |  |
+| T-008 | ✅ | ✅ |  |  |
+| T-009 | ✅ | ✅ |  |  |
+| T-010 | ⚠️ | ⚠️ | Resultado ⚠️. falta no brain/skill (WT 62942 interno; as duas dizem que não sabem) | Pacote do brain com o WT 62942 · usuário |
+| T-011 | ✅ | ✅ |  |  |
+| T-012 | ✅ | ✅ |  |  |
+| T-013 | ✅ | ✅ |  |  |
+| T-014 | ✅ | ✅ |  |  |
+| T-015 | ✅ | ✅ |  |  |
+| T-016 | ⚠️ | ⚠️ | Resultado ⚠️. falta no brain (design v1.1 interno; respondem pela lei, não pelo design) | Pacote do brain com CL_Regulation_Design · usuário |
+| T-017 | ⚠️ | ⚠️ | Resultado ⚠️. falta no brain/skill (excesso na CNPS afirmado ao contrário; ver Gabarito a revisar) | Incluir CGI 45-13 + base CNPS na skill do Chade · usuário |
+| T-018 | ⚠️ | ⚠️ | Resultado ⚠️. falta no brain (DevKB interno) | Pacote do brain com a regra DevKB do Differential · usuário |
+| T-019 | ✅ | ✅ |  |  |
+| T-020 | ✅ | ✅ |  |  |
+| T-021 | ✅ | ✅ |  |  |
+| T-022 | ❌ | ❌ | Resultado ❌. falta no brain (Global WTC é interno; critério não prevê "não sabe") | Pacote do brain com o Global WTC v1.0 · usuário |
+| T-023 | ✅ | ✅ |  |  |
+| T-024 | ❌ | ❌ | Resultado ❌. gabarito/falta no brain (respondem pela lei 29/F § (3); sem a variável do DD; ver Gabarito a revisar) | Decidir o gabarito antes de agir · usuário |
+| T-025 | ✅ | ✅ |  |  |
+| T-026 | ❌ | ❌ | Resultado ❌. falta no brain (KB_Bulgaria_Design interno; critério não prevê "não sabe") | Pacote do brain com o código 52560 · usuário |
+| T-027 | ✅ | ✅ |  |  |
+| T-028 | ✅ | ✅ |  |  |
+| T-029 | ✅ | ✅ |  |  |
+| T-030 | ✅ | ✅ |  |  |
+
+
+### Correção detalhada, rodada 1 (2026-10-27)
+
+Critério escrito do gabarito, sem reinterpretar. Resposta sem o dado pedido ("não tenho o arquivo") não está em nenhuma coluna do critério: contada como ❌ (ver Gabarito a revisar). Regra do resultado: ✅✅ → ✅; r1 ≠ r2 → ⚠️ instável (não acerto); ❌❌ → ❌; ⚠️⚠️ → ⚠️.
+
+| # | Resp. | Nota | Justificativa (trecho da resposta) | Repetiu o erro conhecido? |
+|---|---|---|---|---|
+| T-001 | r1 | ❌ | lista 58198 → "0054/E" e 58197 → "0054/I" e diz que 58184/86/88 "would double count" | sim |
+| T-001 | r2 | ❌ | "58197/58198 are the correct CRA lines"; diz que 58188 não pode ser E | sim |
+| T-002 | r1 | ✅ | "TRL = Tipo de Relación Laboral" (nó InformacionAfiliacion, 3 dígitos) | não |
+| T-002 | r2 | ✅ | "TRL = Tipo de Relación Laboral" (tabela T-52) | não |
+| T-003 | r1 | ❌ | 79429/79430 → "Clave B, subclave 01" (79432 = L.27 certo) | sim |
+| T-003 | r2 | ✅ | 79432 = L.27; 79430 e 79429 = "Clave B, Subclave 03", fonte AEAT FAQ | não |
+| T-004 | r1 | ✅ | "3123 → 3123000" | não |
+| T-004 | r2 | ✅ | "<CodProfesion>3123000</CodProfesion>"; "Do not left-pad" | não |
+| T-005 | r1 | ✅ | 5 valores exatos (1.989,30 … 47,48) + Orden PJC/297/2026 art. 3 | não |
+| T-005 | r2 | ✅ | 5 valores exatos + Orden PJC/297/2026, desde 01/01/2026 | não |
+| T-006 | r1 | ❌ | "I can't answer either part yet: the Spain WTC isn't attached" | não |
+| T-006 | r2 | ❌ | "I can't answer either part yet because the Spain WTC isn't in this chat" | não |
+| T-007 | r1 | ✅ | tabela 50% / 60% / 70% / 100%, Lei 1105-XIV art. 17 | não |
+| T-007 | r2 | ✅ | mesma tabela, art. 17(1) | não |
+| T-008 | r1 | ✅ | "12 calendar months … preceding the month in which the incapacity began", Postanova 1266 p. 25 | não |
+| T-008 | r2 | ✅ | "12 calendar months … that precede the month in which the insured event occurs", p. 25 | não |
+| T-009 | r1 | ✅ | "Yes, it's subject to ESV"; Res. 1170 sec. II p. 2 "Life insurance is not on that list" | não |
+| T-009 | r2 | ✅ | "subject to ESV"; Res. 1170 "Life insurance is not on the List" | não |
+| T-010 | r1 | ⚠️ | "code 157", PIT/militar/ESV não devidos (art. 177.8), mas "I can't confirm the wage type" | não |
+| T-010 | r2 | ⚠️ | "157", PIT/ML/ESV "not withheld/due", mas "I can't confirm the element number" | não |
+| T-011 | r1 | ✅ | "come from the DPS directory of territorial bodies (SPR_STI.XML)"; C_STI_ORIG = C_REG*100+C_RAJ | não |
+| T-011 | r2 | ✅ | "taken from the DPS tax-office directory (SPR_STI.XML)"; varia pelo órgão de registro | não |
+| T-012 | r1 | ✅ | "J0510611 (version 11)"; "entered into force on 17 July 2026" | não |
+| T-012 | r2 | ✅ | "J0510611 (version 11)"; "entered into force on 17.07.2026" | não |
+| T-013 | r1 | ✅ | "all of them are taxable"; Oficio 027408/2019 itens 7.1–7.4; art. 206 só indenizações | não |
+| T-013 | r2 | ✅ | "Taxable"; Oficio 027408/2019 itens 7.1–7.4 | não |
+| T-014 | r1 | ✅ | "Salud: 4%"; "FondoPension: not due" | não |
+| T-014 | r2 | ✅ | "Salud: 4% deducted from the employee"; "FondoPension: no deduction due" | não |
+| T-015 | r1 | ✅ | host "depot.dpae-edi.urssaf.fr"; "DPAE XML and flat-file … format 120" | não |
+| T-015 | r2 | ✅ | host "depot.dpae-edi.urssaf.fr"; "Both formats are accepted" | não |
+| T-016 | r1 | ⚠️ | 3 blocos (A mensal, B Art. 46, C reporte) e acumuladores por mês de competência; sem "1 step YTM" nem "3 passos" do design; admite não ter a skill | não |
+| T-016 | r2 | ⚠️ | passos A/B/C e ~9 acumuladores por mês; "proposed design, not the current artifact" | não |
+| T-017 | r1 | ⚠️ | "up to 30% of each employee's monthly base salary"; mas CNPS "no percentage cap applies" | sim (parcial, só CNPS) |
+| T-017 | r2 | ⚠️ | "capped at 30%"; CNPS "Excluded from the contribution base, with no cap" | sim (parcial, só CNPS) |
+| T-018 | r1 | ⚠️ | "Don't model … as a fixed progressive bracket table … two-rate formula"; não nomeia `Differential` | não |
+| T-018 | r2 | ⚠️ | "two-band calculation … cumulative"; não nomeia `Differential` | não |
+| T-019 | r1 | ✅ | "75,000 FCFA/month. Retirement: 3,375,000 FCFA/month"; communiqué CNPS jan/2023 | não |
+| T-019 | r2 | ✅ | "75,000 FCFA per month … 3,375,000"; communiqué CNPS | não |
+| T-020 | r1 | ✅ | "1.45%, made up of WGA 0.91% and ZW-flex 0.54%" | não |
+| T-020 | r2 | ✅ | "1.45% … 0.91% … 0.54%" | não |
+| T-021 | r1 | ✅ | "Yes … 1,000 FCFA per month"; Loi 34-2013 art. 14 / Loi 48-2014 art. 8 | não |
+| T-021 | r2 | ✅ | "Yes … XAF 1,000 per employee per month"; Art. 14 Loi 34-2013 reescrito pela Loi 48-2014 | não |
+| T-022 | r1 | ❌ | "I can't give you those ranges reliably … don't have the baseline file" | não |
+| T-022 | r2 | ❌ | "I can't give you those ranges with confidence" | não |
+| T-023 | r1 | ✅ | "Employer … 3% … Employee … 5%" | não |
+| T-023 | r2 | ✅ | "Employer 3%, Employee 5%, Total 8%" | não |
+| T-024 | r1 | ❌ | "Neither date as a simple age test … YYYYMM(DOB + 25 years) ≥ YYYYMM(payroll period)"; diz que "Period end date is wrong" | não |
+| T-024 | r2 | ❌ | "Eligible if 25th birthday ≥ period begin date" (usa begin); "Period end date" errado; sem $person.birth_date | sim (begin_date) |
+| T-025 | r1 | ✅ | "you deduct only the remaining balance … After that, the deduction is zero" | não |
+| T-025 | r2 | ✅ | "When YTD reaches the annual maximum, the final period takes only the remaining balance" | não |
+| T-026 | r1 | ❌ | "I can't confirm the code"; sugere 2566 sem afirmar | não |
+| T-026 | r2 | ❌ | "I can't pin the TZPB code" | não |
+| T-027 | r1 | ✅ | GPM313 "must also be corrected"; GPM312 "newly completed declaration … complete replacement" | não |
+| T-027 | r2 | ✅ | "they must be corrected too"; "newly completed declaration"; cita a exclusão do NPD | não |
+| T-028 | r1 | ✅ | "Yes … 5/10,000 of the salary"; "The employee bears it"; Lei 4/2021 | não |
+| T-028 | r2 | ✅ | "Yes … 0.05% … monthly salary … the employee bears it" | não |
+| T-029 | r1 | ✅ | "19.88%"; "Approximate total: 25.00%" | não |
+| T-029 | r2 | ✅ | "19.88%"; "about 25.00% of gross pay" | não |
+| T-030 | r1 | ✅ | "2 caps" + parcela elegível 50%/100%; 15% mensal "No" cumulativo; anual 312,066 TL "Yes" | não |
+| T-030 | r2 | ✅ | 15% mensal "not cumulative"; anual 312,066 "cumulative"; 50%/100% | não |
+
+### Totais da rodada 1
+
+- **Nota: 20/30 ✅** · 5 ⚠️ (4 consistentes: T-010, T-016, T-017, T-018; 1 instável: T-003) · 5 ❌ (T-001, T-006, T-022, T-024, T-026). Por resposta: r1 20 ✅ / 4 ⚠️ / 6 ❌; r2 21 ✅ / 4 ⚠️ / 5 ❌.
+- **Erro conhecido repetido:** T-001 (r1 e r2), T-003 (r1), T-024 (r2: teste no begin_date); parcial em T-017 (r1 e r2: CNPS sem teto).
+- **Causa:** T-006, T-022, T-026, T-010, T-016 e T-018 dependem de material interno que o claude.ai não alcança sem o brain/Drive (WTC, Global WTC, design, DevKB, KB Bulgária). T-001, T-003 e T-017 são erros de conteúdo.
+
+| País | ✅ / total |
+|---|---|
+| Espanha | 3/6 (T-001 ❌, T-003 ⚠️ instável, T-006 ❌) |
+| Ucrânia | 5/6 (T-010 ⚠️) |
+| Colômbia | 2/2 |
+| França | 1/1 |
+| Chile | 0/1 (⚠️) |
+| Chade | 0/1 (⚠️) |
+| Irlanda | 0/1 (⚠️) |
+| Costa do Marfim | 1/1 |
+| Holanda | 1/1 |
+| Congo | 1/1 |
+| Reino Unido | 1/1 |
+| Hungria | 0/1 (❌) |
+| Gabão | 0/1 (❌) |
+| Canadá | 1/1 |
+| Bulgária | 0/1 (❌) |
+| Lituânia | 1/1 |
+| Egito | 1/1 |
+| Bélgica | 1/1 |
+| Turquia | 1/1 |
+| **Total** | **20/30** |
+
+| Tipo | ✅ / total | Observação |
+|---|---|---|
+| V (valor) | 9/10 | só T-017 ⚠️ |
+| M (mapeamento) | 3/8 | T-001 ❌, T-022 ❌, T-026 ❌, T-010 ⚠️, T-003 ⚠️ instável |
+| R (regra/design) | 5/8 | T-024 ❌, T-016 ⚠️, T-018 ⚠️ |
+| P (processo/procedimento) | 3/4 | T-006 ❌ |
+| **Total** | **20/30** | |
+
+### Gabarito a revisar (decisão do usuário)
+
+O gabarito não foi alterado. Pontos para decidir:
+
+1. **T-001:** as duas respostas citam o Manual CRA da TGSS de 01/07/2026 (seg-social.es/descarga/es/188863, §2 "CRA 0051 a 0054"): 0054 com E e I, prorrateado nos 12 meses anteriores, e os WTs 58197/58198 como as linhas do CRA. Contradiz o gabarito (58184/58186/58188 em 0054/E e 58197/58198 fora do CRA). Conferir o manual vigente contra a SR-81 antes de manter o gabarito.
+2. **T-003:** a r1 cita a Orden HAC/1431/2025, art. 2, Tres (a partir do exercício 2025), que teria redefinido a subclave B.03 e criado o campo de tipo de prestação em B.01, e diz que a FAQ da AEAT está desatualizada. O gabarito dá B.03. Verificar se a FAQ ainda é a fonte vigente.
+3. **T-024:** as duas respostas citam Szja tv. 29/F § (3) (o mês em que o jovem faz 25 anos ainda dá direito) e rejeitam o end_date como teste de idade; o gabarito diz end_date. Também não há como acertar `$person.birth_date` sem a lista de variáveis do DD. Confirmar o gabarito com a fonte (T-2026-05-27/29).
+4. **T-006, T-022, T-026 (e T-010 em parte):** respostas "não tenho o arquivo" não cabem em ✅/⚠️/❌ como escritos. Contei ❌. Decidir se vira categoria própria ("recusa honesta"); essas perguntas dependem de arquivo interno (WTC, Global WTC, KB Bulgária) e não são respondíveis no claude.ai sem o brain.
+5. **T-017:** o critério ⚠️ diz "30% certo sem dizer que o excesso vai à CNPS", mas as duas respostas afirmam o contrário (CNPS sem teto, fora da base). Contei ⚠️ pelo texto; o ❌ ("isenção total") também poderia valer para a parte CNPS.
+6. **T-016 e T-018:** o gabarito ("3 passos + 1 step YTM"; reg `Differential`) depende do design interno; as respostas dão uma estrutura legal razoável sem esses nomes. Contei ⚠️ ("estrutura parecida"). Confirmar se o critério quer o termo exato.
+7. **T-006:** o gabarito pede conferir a versão vigente do WTC (maior número); no claude.ai sem Drive isso é inalcançável (mesmo ponto do item 4).
+
+### Observações de método
+
+- A pesquisa em conversas anteriores estava ativa nesta rodada, então a r2 pode ter lido a r1 (ex.: T-012 r2 respondeu em menos de 30 s). As duas rodadas podem não ser independentes; a instabilidade medida (só T-003) pode estar subestimada.
+- A T-001 r1 foi refeita: a 1ª tentativa (chat 0d30b93d) chamou o Google Drive e travou em "Vincular"; a refeita rodou com conectores desligados.
+- Algumas respostas citam conversas anteriores do projeto Mercans (T-001 r1/r2: resposta SR-81 de abril; T-026: revisão do BG WTC V2.0) e a página DSR da Mercans (T-019): a memória/histórico da conta traz contexto interno e enviesa a medição.
 
 ## Quarentena do Conjunto C (data de corte = data do MVP: AAAA-MM-DD)
 | # | Ticket | Resolvido em | País | Pergunta derivada | Ingerir depois de |

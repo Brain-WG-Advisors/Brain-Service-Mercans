@@ -1,0 +1,627 @@
+[
+ [
+  "Spec",
+  "T4",
+  "Field description - RA (v1.2)"
+ ],
+ [
+  "Spec",
+  "U4",
+  "Label zh-TW (proposed)"
+ ],
+ [
+  "Spec",
+  "T5",
+  "Legal name of the employing entity."
+ ],
+ [
+  "Spec",
+  "Q6",
+  "TO BE CONFIRMED BY MOHIT/BA - legal entity address variable (TW DD V3.3 has only $legal_entity_hr.post_code)"
+ ],
+ [
+  "Spec",
+  "T6",
+  "Registered address of the employing entity. Not a mandatory item of LSA Enforcement Rules art. 14-1; kept because the example payslip shows it."
+ ],
+ [
+  "Spec",
+  "T7",
+  "Country of the legal entity (Taiwan)."
+ ],
+ [
+  "Spec",
+  "T8",
+  "Pay period begin and end dates of the payroll run."
+ ],
+ [
+  "Spec",
+  "U8",
+  "薪資月份"
+ ],
+ [
+  "Spec",
+  "T9",
+  "Employee full name."
+ ],
+ [
+  "Spec",
+  "U9",
+  "姓名"
+ ],
+ [
+  "Spec",
+  "T10",
+  "Employee reference code in the system."
+ ],
+ [
+  "Spec",
+  "T11",
+  "Employee position / job title."
+ ],
+ [
+  "Spec",
+  "U11",
+  "職稱"
+ ],
+ [
+  "Spec",
+  "Q12",
+  "$hr.id_card_number"
+ ],
+ [
+  "Spec",
+  "T12",
+  "Optional. Taiwan ID card number (TW DD V3.3, ID Information, ordinal 8; same field as the Tax Report and SNHI specs). Not a mandatory item of LSA Enforcement Rules art. 14-1. Fallback for employees without ID card (the SI Termination spec uses $hr.passport_number): TO BE CONFIRMED BY MOHIT/BA."
+ ],
+ [
+  "Spec",
+  "U12",
+  "證件號碼"
+ ],
+ [
+  "Spec",
+  "T13",
+  "Employee primary email."
+ ],
+ [
+  "Spec",
+  "T14",
+  "Employee hire date."
+ ],
+ [
+  "Spec",
+  "U14",
+  "到職日期"
+ ],
+ [
+  "Spec",
+  "Q15",
+  "TO BE CONFIRMED BY MOHIT/BA - payment date of the payroll run (no variable found in TW DD V3.3)"
+ ],
+ [
+  "Spec",
+  "T15",
+  "Date the net pay is paid / credited to the employee. Shown in the MOL reference payslips (發薪日期 / 入帳日期); not a mandatory item of LSA Enforcement Rules art. 14-1."
+ ],
+ [
+  "Spec",
+  "U15",
+  "發薪日期"
+ ],
+ [
+  "Spec",
+  "T16",
+  "Payment method (e.g. bank transfer)."
+ ],
+ [
+  "Spec",
+  "T17",
+  "Each earning pay element on its own line (code + name), only when the value is not 0 (ticket, 03/12/2025). Covers LSA Enforcement Rules art. 14-1 item 2 (amount of each wage item)."
+ ],
+ [
+  "Spec",
+  "U17",
+  "應發項目"
+ ],
+ [
+  "Spec",
+  "T18",
+  "Amount per earning pay element. Overtime by day type comes from WTC V2.3+ PEs 62110/62111 (work day), 62120-62122 (rest day) and 62130-62132 (public holiday), all inside 62106:62999."
+ ],
+ [
+  "Spec",
+  "U18",
+  "金額"
+ ],
+ [
+  "Spec",
+  "M20",
+  "Earnings"
+ ],
+ [
+  "Spec",
+  "N20",
+  "Overtime rate (overtime lines only)"
+ ],
+ [
+  "Spec",
+  "Q20",
+  "Static rate from the WTC V2.8 PE name: 62110=1.33, 62111=1.67, 62120=1.33, 62121=1.67, 62122=2.67, 62130=1, 62131=1.33, 62132=1.67. Display on payslip: TO BE CONFIRMED BY MOHIT/BA"
+ ],
+ [
+  "Spec",
+  "T20",
+  "Recommended, not mandatory (MOL reference payslip model 3 shows rate and hours; note 7: items may be added or removed). Rates checked against LSA art. 24 (work day: +1/3 first 2 h, +2/3 next 2 h; rest day: 1 1/3 first 2 h, 1 2/3 after) and MOL notes 3-4 (rest day over 8 h: 2 2/3; holiday: 1 extra day within 8 h, +1/3 and +2/3 over 8 h; LSA art. 39)."
+ ],
+ [
+  "Spec",
+  "U20",
+  "倍率"
+ ],
+ [
+  "Spec",
+  "M21",
+  "Earnings"
+ ],
+ [
+  "Spec",
+  "N21",
+  "Overtime hours (overtime lines only)"
+ ],
+ [
+  "Spec",
+  "Q21",
+  "TO BE CONFIRMED BY MOHIT/BA - WTC V2.8 overtime PEs are Lump Sum without formula; no hours input found in WTC/DD. If not available, show the amount only."
+ ],
+ [
+  "Spec",
+  "T21",
+  "Optional (MOL reference payslip model 3). Shown only if the engine stores hours per overtime PE."
+ ],
+ [
+  "Spec",
+  "U21",
+  "時數"
+ ],
+ [
+  "Spec",
+  "M22",
+  "Earnings"
+ ],
+ [
+  "Spec",
+  "N22",
+  "Total Gross"
+ ],
+ [
+  "Spec",
+  "Q22",
+  "SUM of Accounts: 62100:62103+62106:62999+65500:65859+79401:79450"
+ ],
+ [
+  "Spec",
+  "T22",
+  "Sum of all earning lines shown (same accounts as Earnings). MOL reference payslips show this subtotal."
+ ],
+ [
+  "Spec",
+  "U22",
+  "應發金額"
+ ],
+ [
+  "Spec",
+  "M23",
+  "Agreed wage"
+ ],
+ [
+  "Spec",
+  "N23",
+  "Agreed Total Wage"
+ ],
+ [
+  "Spec",
+  "Q23",
+  "TO BE CONFIRMED BY MOHIT/BA - NEW DD FIELD (proposed) or contractual salary amount; no such field in TW DD V3.3"
+ ],
+ [
+  "Spec",
+  "T23",
+  "Mandatory: LSA Enforcement Rules art. 14-1 item 1 (total wage agreed by employer and employee). Proposed: monthly contractual wage (basic + fixed allowances, before proration/absence), as in MOL reference payslip model 2 (約定薪資結構). Exact definition: TO BE CONFIRMED BY MOHIT/BA."
+ ],
+ [
+  "Spec",
+  "U23",
+  "勞雇雙方議定之工資總額"
+ ],
+ [
+  "Spec",
+  "T27",
+  "Each deduction pay element on its own line, only when the value is not 0. Covers LSA Enforcement Rules art. 14-1 item 3 (amounts deducted under law or agreement)."
+ ],
+ [
+  "Spec",
+  "U27",
+  "應扣項目"
+ ],
+ [
+  "Spec",
+  "T28",
+  "Amount per deduction (LI, EI, NHI, SNHI, voluntary pension, EWF, income tax per WTC V2.8)."
+ ],
+ [
+  "Spec",
+  "U28",
+  "金額"
+ ],
+ [
+  "Spec",
+  "N30",
+  "Total Deductions"
+ ],
+ [
+  "Spec",
+  "Q30",
+  "SUM of Accounts: 21100:21999+25500:25899+2551+2555+2554+2558+2517+2557+2552+2572+2582+2592+2593+2594"
+ ],
+ [
+  "Spec",
+  "T30",
+  "Sum of all deduction lines shown (same accounts as Deductions)."
+ ],
+ [
+  "Spec",
+  "U30",
+  "應扣金額"
+ ],
+ [
+  "Spec",
+  "T37",
+  "Amount actually paid. Covers LSA Enforcement Rules art. 14-1 item 4. Expected to equal Total Gross - Total Deductions; BA to confirm for the system accounts used."
+ ],
+ [
+  "Spec",
+  "U37",
+  "實發金額"
+ ],
+ [
+  "Spec",
+  "T38",
+  "Employer contributions, one line per pay element when the value is not 0. Information only; not an item of LSA Enforcement Rules art. 14-1."
+ ],
+ [
+  "Spec",
+  "T39",
+  "Amount per employer contribution (LI, EI, OAI, wage arrears fund, NHI, SNHI, labor pension new/old per WTC V2.8)."
+ ],
+ [
+  "Spec",
+  "N41",
+  "Total Employer Contributions"
+ ],
+ [
+  "Spec",
+  "Q41",
+  "SUM of Accounts: 2550+2565+2560+2566+2564+2568+2537+2538+23550:23900"
+ ],
+ [
+  "Spec",
+  "T41",
+  "Sum of the employer contribution lines shown. Information only."
+ ],
+ [
+  "Spec",
+  "T47",
+  "Employee bank name."
+ ],
+ [
+  "Spec",
+  "U47",
+  "銀行"
+ ],
+ [
+  "Spec",
+  "T48",
+  "SWIFT/BIC of the employee bank."
+ ],
+ [
+  "Spec",
+  "T49",
+  "Account holder name."
+ ],
+ [
+  "Spec",
+  "U49",
+  "帳戶名稱"
+ ],
+ [
+  "Spec",
+  "T50",
+  "Employee account number."
+ ],
+ [
+  "Spec",
+  "U50",
+  "轉帳帳號"
+ ],
+ [
+  "Spec",
+  "M51",
+  "Banking details"
+ ],
+ [
+  "Spec",
+  "N51",
+  "Account currency"
+ ],
+ [
+  "Spec",
+  "Q51",
+  "TO BE CONFIRMED BY MOHIT/BA (shown in the example, cell I63; no mapping)"
+ ],
+ [
+  "Spec",
+  "T51",
+  "Currency of the employee account."
+ ],
+ [
+  "Spec",
+  "M52",
+  "Banking details"
+ ],
+ [
+  "Spec",
+  "N52",
+  "Account type"
+ ],
+ [
+  "Spec",
+  "Q52",
+  "TO BE CONFIRMED BY MOHIT/BA (shown in the example, cell K63; no mapping)"
+ ],
+ [
+  "Spec",
+  "T52",
+  "Primary / secondary account."
+ ],
+ [
+  "Spec",
+  "F16",
+  "Agreed Total Wage"
+ ],
+ [
+  "Spec",
+  "H16",
+  "TO BE CONFIRMED BY MOHIT/BA"
+ ],
+ [
+  "Version Control",
+  "B13",
+  "1.2"
+ ],
+ [
+  "Version Control",
+  "C13",
+  "2026-10-27"
+ ],
+ [
+  "Version Control",
+  "D13",
+  "Spec review (LSA art. 23-24, Enforcement Rules art. 14-1): added Agreed Total Wage, Payment Date, Employer Address, total rows, overtime rate/hours, ID field, Report Matrix, RA descriptions and zh-TW labels. Items marked TO BE CONFIRMED pending BA."
+ ],
+ [
+  "Version Control",
+  "E13",
+  "Draft"
+ ],
+ [
+  "Version Control",
+  "F13",
+  "Wallisson Gomes"
+ ],
+ [
+  "Report Matrix",
+  "A1",
+  "Report Matrix"
+ ],
+ [
+  "Report Matrix",
+  "A3",
+  "Report Name"
+ ],
+ [
+  "Report Matrix",
+  "B3",
+  "Taiwan Payslip (工資各項目計算方式明細)"
+ ],
+ [
+  "Report Matrix",
+  "A4",
+  "Report Code"
+ ],
+ [
+  "Report Matrix",
+  "B4",
+  "taiwan-payslip"
+ ],
+ [
+  "Report Matrix",
+  "A5",
+  "Allowed Submission Frequency"
+ ],
+ [
+  "Report Matrix",
+  "B5",
+  "Payroll Run"
+ ],
+ [
+  "Report Matrix",
+  "A6",
+  "Periodicity"
+ ],
+ [
+  "Report Matrix",
+  "B6",
+  "Each wage payment (LSA art. 23 para. 1: wages paid at least twice a month unless otherwise agreed or paid monthly in advance; the itemised statement is provided with the payment)."
+ ],
+ [
+  "Report Matrix",
+  "A7",
+  "File Format"
+ ],
+ [
+  "Report Matrix",
+  "B7",
+  "PDF"
+ ],
+ [
+  "Report Matrix",
+  "A8",
+  "Report Encoding"
+ ],
+ [
+  "Report Matrix",
+  "B8",
+  "TO BE CONFIRMED BY MOHIT/BA (must support Traditional Chinese if bilingual labels are approved)"
+ ],
+ [
+  "Report Matrix",
+  "A9",
+  "Other Supported File Formats"
+ ],
+ [
+  "Report Matrix",
+  "B9",
+  ""
+ ],
+ [
+  "Report Matrix",
+  "A10",
+  "File Naming Convention"
+ ],
+ [
+  "Report Matrix",
+  "B10",
+  "TO BE CONFIRMED BY MOHIT/BA"
+ ],
+ [
+  "Report Matrix",
+  "A11",
+  "Grouping/Filter Formula (Summary, Detail, Employee Level)"
+ ],
+ [
+  "Report Matrix",
+  "B11",
+  "Employee level: one payslip per employee per payroll run."
+ ],
+ [
+  "Report Matrix",
+  "A12",
+  "Filing Method"
+ ],
+ [
+  "Report Matrix",
+  "B12",
+  "Not filed with an authority. Issued to the employee on paper, electronically or by other means the employee can access and print at any time (LSA Enforcement Rules art. 14-1 para. 2)."
+ ],
+ [
+  "Report Matrix",
+  "A13",
+  "Language for Printing"
+ ],
+ [
+  "Report Matrix",
+  "B13",
+  "Proposed: one bilingual layout, Traditional Chinese (zh-TW) + English labels (Spec, column U). Product decision, TO BE CONFIRMED BY MOHIT/BA: LSA art. 23 and Enforcement Rules art. 14-1 do not set a language; a Chinese version was requested on the ticket (08/08/2025)."
+ ],
+ [
+  "Report Matrix",
+  "A14",
+  "Other Supported Languages"
+ ],
+ [
+  "Report Matrix",
+  "B14",
+  "English"
+ ],
+ [
+  "Report Matrix",
+  "A15",
+  "Population Range (Nature of Employee/Employee Status)"
+ ],
+ [
+  "Report Matrix",
+  "B15",
+  "All employees included in the payroll run."
+ ],
+ [
+  "Report Matrix",
+  "A16",
+  "Inclusion Filter (Event)"
+ ],
+ [
+  "Report Matrix",
+  "B16",
+  "Pay elements shown only when the value is not 0 (ticket, 03/12/2025)."
+ ],
+ [
+  "Report Matrix",
+  "A17",
+  "Reporting Currency"
+ ],
+ [
+  "Report Matrix",
+  "B17",
+  "TWD (NT$) - TO BE CONFIRMED BY MOHIT/BA"
+ ],
+ [
+  "Report Matrix",
+  "A18",
+  "Rounding (Report-wise)"
+ ],
+ [
+  "Report Matrix",
+  "B18",
+  "TO BE CONFIRMED BY MOHIT/BA"
+ ],
+ [
+  "Report Matrix",
+  "A19",
+  "Number Format"
+ ],
+ [
+  "Report Matrix",
+  "B19",
+  "TO BE CONFIRMED BY MOHIT/BA"
+ ],
+ [
+  "Report Matrix",
+  "A20",
+  "Delimiter (Used in TXT/CSV)"
+ ],
+ [
+  "Report Matrix",
+  "B20",
+  "N/A (PDF)"
+ ],
+ [
+  "Report Matrix",
+  "A21",
+  "Introduction and Purpose of Report"
+ ],
+ [
+  "Report Matrix",
+  "B21",
+  "LSA art. 23 para. 1 requires the employer to give each worker an itemised statement of how each wage item is calculated (工資各項目計算方式明細). LSA Enforcement Rules art. 14-1 sets the minimum content: (1) total wage agreed by employer and employee; (2) amount of each wage item; (3) amounts deducted under law or agreement; (4) amount actually paid. Breach of art. 23: fine of NT$20,000 to NT$1,000,000 (LSA art. 79)."
+ ],
+ [
+  "Report Matrix",
+  "A22",
+  "Legal basis"
+ ],
+ [
+  "Report Matrix",
+  "B22",
+  "Labor Standards Act arts. 23, 24, 39, 79; LSA Enforcement Rules art. 14-1; MOL reference payslip examples (參考例, attached to ticket SR-109). Texts read on laws.mol.gov.tw (copies dated 2026-10-23)."
+ ]
+]

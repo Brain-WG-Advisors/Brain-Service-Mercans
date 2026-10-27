@@ -1,0 +1,1098 @@
+{
+ "changes": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "B21",
+   "change": "C1",
+   "old": "ONE file pair per CNAS employer number (cotisant). An employer holding several employer numbers files a separate pair for each; files are never merged across employer numbers.",
+   "new": "ONE file pair per CNAS employer number (cotisant). An employer holding several employer numbers (e.g. one per establishment / work location) files a separate pair for each; files are never merged across employer numbers. Generation key: employee -> establishment -> CNAS employer number (10), centre payeur (5), Dénomination, Nom ou Raison Sociale and Adresse of that establishment - see Population Rules 'Per-establishment generation'."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L4",
+   "change": "C1+R2-#3",
+   "old": "DD: Employer.CNASNumber",
+   "new": "DD: Employer.CNASNumber - Field Name 'Employer CNAS Contributor Number' (DZ-DD-001-v1.1, ID Information) of the employee's establishment, resolved via NEW DD FIELD (proposed): Employee Establishment (CNAS employer-number assignment)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L19",
+   "change": "C1+R2-#3",
+   "old": "DD: Employer.CNASNumber",
+   "new": "DD: Employer.CNASNumber - Field Name 'Employer CNAS Contributor Number' (DZ-DD-001-v1.1, ID Information) of the employee's establishment, resolved via NEW DD FIELD (proposed): Employee Establishment (CNAS employer-number assignment)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M21",
+   "change": "C1",
+   "old": "Sequential record number starting at 1, with no gaps or duplicates. Left-justified: \"1\" followed by 5 spaces, NOT \"000001\".",
+   "new": "Sequential record number starting at 1, with no gaps or duplicates. Left-justified: \"1\" followed by 5 spaces, NOT \"000001\". Numbering restarts at 1 in each détail file (i.e. per CNAS employer number)."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M39",
+   "change": "C1",
+   "old": "Hire date, JJMMAAAA. Reported for every employee; for staff hired before the reference year the original hire date is reported, not 01/01 of the reference year.",
+   "new": "Hire date, JJMMAAAA. Reported for every employee; for staff hired before the reference year the original hire date is reported, not 01/01 of the reference year. Transfer between establishments within the year: Date Entrée of the attachment to THIS employer number - see Population Rules 'Transfer between establishments' (⚠️ proposal, no primary source)."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M40",
+   "change": "C1",
+   "old": "Termination date for leavers. Where the employee is still employed the field is 8 SPACES — never 00000000, which is not a valid calendar date. A populated exit date must be consistent with reduced quarterly durations and salaries.",
+   "new": "Termination date for leavers. Where the employee is still employed the field is 8 SPACES — never 00000000, which is not a valid calendar date. A populated exit date must be consistent with reduced quarterly durations and salaries. Transfer between establishments within the year: Date Sortie of the attachment to THIS employer number - see Population Rules 'Transfer between establishments' (⚠️ proposal, no primary source)."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "C7",
+   "change": "C1",
+   "old": "An employer with several CNAS employer numbers files a separate pair for each. Never merge across employer numbers.",
+   "new": "An employer with several CNAS employer numbers files a separate pair for each. Never merge across employer numbers. Grouping key: employee -> establishment -> CNAS employer number; one pair per distinct number in the reference-year population."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "C27",
+   "change": "C1",
+   "old": "Sequential from 1.",
+   "new": "Sequential from 1, restarting at 1 in each détail file (per CNAS employer number)."
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "E10",
+   "change": "C1",
+   "old": "A separate file pair is produced per CNAS employer number; records for more than one cotisant never share a file.",
+   "new": "A separate file pair is produced per CNAS employer number; records for more than one cotisant never share a file. Grouping key: employee -> establishment -> CNAS employer number (see Population Rules 'Per-establishment generation')."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "A26",
+   "change": "C1",
+   "old": null,
+   "new": "═══ PER-ESTABLISHMENT GENERATION (v2.2) ═══"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "B26",
+   "change": "C1",
+   "old": null,
+   "new": ""
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C26",
+   "change": "C1",
+   "old": null,
+   "new": ""
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D26",
+   "change": "C1",
+   "old": null,
+   "new": ""
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "A27",
+   "change": "C1",
+   "old": null,
+   "new": "Per-establishment generation"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "B27",
+   "change": "C1",
+   "old": null,
+   "new": "Both files; employer fields 1, 4-7"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C27",
+   "change": "C1",
+   "old": null,
+   "new": "Generate one entête + détail pair per DISTINCT CNAS employer number found in the reference-year population. Key: employee -> establishment (NEW DD FIELD (proposed): Employee Establishment (CNAS employer-number assignment)) -> CNAS employer number (10), centre payeur (5), Dénomination, Nom ou Raison Sociale and Adresse of that establishment. Each pair carries only the employees attached to that number; entête totals and headcount aggregate only its own détail file. Basis: one employer number per file name and per record (guide p.35-36) and rejection 'Numéro cotisant (employeur) erroné' (p.41). The guide does not literally say 'one DAS per establishment'."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D27",
+   "change": "C1",
+   "old": null,
+   "new": "A"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "A28",
+   "change": "C1",
+   "old": null,
+   "new": "Line numbering per file"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "B28",
+   "change": "C1",
+   "old": null,
+   "new": "N° Ligne"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C28",
+   "change": "C1",
+   "old": null,
+   "new": "N° Ligne restarts at 1 in each détail file and runs without gaps or duplicates within that file."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D28",
+   "change": "C1+R2-#9",
+   "old": null,
+   "new": "B"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "A29",
+   "change": "C1",
+   "old": null,
+   "new": "Transfer between establishments"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "B29",
+   "change": "C1",
+   "old": null,
+   "new": "Durée / Salaire Tn, Date Entrée, Date Sortie"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C29",
+   "change": "C1",
+   "old": null,
+   "new": "⚠️ PROPOSAL - NO PRIMARY SOURCE. The guide only states (p.14, EMS) that any change of the employer number to which an employee is attached is a movement. Proposed treatment: the employee appears in the pair of each employer number held during the year; each record carries only the quarters and salaries earned under that number (other quarters 0/0), with Date Entrée / Date Sortie of the attachment to that number. Confirm with CNAS / the client before go-live."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D29",
+   "change": "C1",
+   "old": null,
+   "new": "Proposal"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M3",
+   "change": "C2",
+   "old": "Composite Key: \"D\" + YY (last two digits of the reference year) + \"E\" + the 10-digit cotisant number + \".TXT\". The embedded cotisant must match field 1 and the account being filed.",
+   "new": "Composite Key: \"D\" + YY (last two digits of the reference year) + \"E\" + the 10-digit cotisant number + \".TXT\". The embedded cotisant must match field 1 and the account being filed. The cotisant is the 10-digit CNAS employer number of the establishment being filed; the same number appears in field 1 of the entête and of every détail record."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M18",
+   "change": "C2",
+   "old": "Composite Key: \"D\" + YY + \"S\" + the 10-digit cotisant number + \".TXT\". Uploaded together with the matching entête file.",
+   "new": "Composite Key: \"D\" + YY + \"S\" + the 10-digit cotisant number + \".TXT\". Uploaded together with the matching entête file. The cotisant is the 10-digit CNAS employer number of the establishment being filed; the same number appears in field 1 of the entête and of every détail record."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "C5",
+   "change": "C2",
+   "old": "YY = reference year, E = entête, 10-digit cotisant. Composite Key.",
+   "new": "YY = reference year, E = entête, 10-digit cotisant. Composite Key. Cotisant = CNAS number of the establishment being filed; same number on every record."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "C6",
+   "change": "C2",
+   "old": "YY = reference year, S = salariés, 10-digit cotisant. Composite Key.",
+   "new": "YY = reference year, S = salariés, 10-digit cotisant. Composite Key. Cotisant = CNAS number of the establishment being filed; same number on every record."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L7",
+   "change": "C3+R2-#3",
+   "old": "DD: Employer.CNASPayingCentre",
+   "new": "DD: Employer.CNASCentre - Field Name 'Employer CNAS Paying Centre' (DZ-DD-001-v1.1, ID Information) of the establishment's CNAS employer number"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L8",
+   "change": "C3",
+   "old": "DD: Employer.Denomination",
+   "new": "NEW DD FIELD (proposed): Establishment Denomination (Dénomination, A30)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L10",
+   "change": "C3+R2-#3",
+   "old": "DD: Employer.RegisteredAddress",
+   "new": "NEW DD FIELD (proposed): Establishment Address (Adresse de l'établissement, AN50). DD: Employer.Address - Field Name 'Employer Head-Office Address' (DZ-DD-001-v1.1, Country Fields) holds the head-office address only."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L22",
+   "change": "C3+R2-#3",
+   "old": "DD: Employee.SocialSecurityNumber",
+   "new": "DD: Employee.SSNumber - Field Name 'Employee CNAS Social Security Number' (DZ-DD-001-v1.1, ID Information)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L27",
+   "change": "C3+C6",
+   "old": "Derived: Employee.PayFrequency (Monthly=M, Daily=J, Hourly=H)",
+   "new": "Client parameter: NEW DD FIELD (proposed): DAS Duration Unit (M/J/H), per client / establishment; default derived from NEW DD FIELD (proposed): Pay Frequency (Monthly=M, Daily=J, Hourly=H)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L30",
+   "change": "C3+C6",
+   "old": "Derived: Employee.PayFrequency (Monthly=M, Daily=J, Hourly=H)",
+   "new": "Client parameter: NEW DD FIELD (proposed): DAS Duration Unit (M/J/H), per client / establishment; default derived from NEW DD FIELD (proposed): Pay Frequency (Monthly=M, Daily=J, Hourly=H)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L33",
+   "change": "C3+C6",
+   "old": "Derived: Employee.PayFrequency (Monthly=M, Daily=J, Hourly=H)",
+   "new": "Client parameter: NEW DD FIELD (proposed): DAS Duration Unit (M/J/H), per client / establishment; default derived from NEW DD FIELD (proposed): Pay Frequency (Monthly=M, Daily=J, Hourly=H)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L36",
+   "change": "C3+C6",
+   "old": "Derived: Employee.PayFrequency (Monthly=M, Daily=J, Hourly=H)",
+   "new": "Client parameter: NEW DD FIELD (proposed): DAS Duration Unit (M/J/H), per client / establishment; default derived from NEW DD FIELD (proposed): Pay Frequency (Monthly=M, Daily=J, Hourly=H)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L28",
+   "change": "C3+C4",
+   "old": "DD: Payroll.ContributoryBase Q1",
+   "new": "Payroll result: CNAS contributory base for Q1 (sum of the 3 months), in centimes - product WT 64551 (to be confirmed by Development; not validatable in DZ-WTC-001-v1.0, which carries no Mercans WT codes)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L31",
+   "change": "C3+C4",
+   "old": "DD: Payroll.ContributoryBase Q2",
+   "new": "Payroll result: CNAS contributory base for Q2 (sum of the 3 months), in centimes - product WT 64551 (to be confirmed by Development; not validatable in DZ-WTC-001-v1.0, which carries no Mercans WT codes)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L34",
+   "change": "C3+C4",
+   "old": "DD: Payroll.ContributoryBase Q3",
+   "new": "Payroll result: CNAS contributory base for Q3 (sum of the 3 months), in centimes - product WT 64551 (to be confirmed by Development; not validatable in DZ-WTC-001-v1.0, which carries no Mercans WT codes)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L37",
+   "change": "C3+C4",
+   "old": "DD: Payroll.ContributoryBase Q4",
+   "new": "Payroll result: CNAS contributory base for Q4 (sum of the 3 months), in centimes - product WT 64551 (to be confirmed by Development; not validatable in DZ-WTC-001-v1.0, which carries no Mercans WT codes)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L26",
+   "change": "C4+R2-#4",
+   "old": "Derived: worked time in Q1",
+   "new": "Derived: duration worked in Q1, in the unit of the Q1 unit field - months (M, 0-3), DAYS (J, 0-92: the client's full-quarter day convention minus unpaid-absence days) or hours (H). Never hours with unit J; never 'Working Hours'. The client's day convention and absence wage types are recorded in its configuration annex."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L29",
+   "change": "C4+R2-#4",
+   "old": "Derived: worked time in Q2",
+   "new": "Derived: duration worked in Q2, in the unit of the Q2 unit field - months (M, 0-3), DAYS (J, 0-92: the client's full-quarter day convention minus unpaid-absence days) or hours (H). Never hours with unit J; never 'Working Hours'. The client's day convention and absence wage types are recorded in its configuration annex."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L32",
+   "change": "C4+R2-#4",
+   "old": "Derived: worked time in Q3",
+   "new": "Derived: duration worked in Q3, in the unit of the Q3 unit field - months (M, 0-3), DAYS (J, 0-92: the client's full-quarter day convention minus unpaid-absence days) or hours (H). Never hours with unit J; never 'Working Hours'. The client's day convention and absence wage types are recorded in its configuration annex."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L35",
+   "change": "C4+R2-#4",
+   "old": "Derived: worked time in Q4",
+   "new": "Derived: duration worked in Q4, in the unit of the Q4 unit field - months (M, 0-3), DAYS (J, 0-92: the client's full-quarter day convention minus unpaid-absence days) or hours (H). Never hours with unit J; never 'Working Hours'. The client's day convention and absence wage types are recorded in its configuration annex."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M26",
+   "change": "C4",
+   "old": "Worked duration in the measure given by the Q1 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999.",
+   "new": "Worked duration in the measure given by the Q1 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999. NO SEPARATOR: the birth date (pos 83-90) is immediately followed by the Q1 duration (pos 91-93), e.g. '15011985' + '90 ' + 'J' - this is correct per the guide (p.36), not a defect. With unit J the value is DAYS 0-92; a value such as 143 with unit J is invalid ('Nombre de jours incorrect', p.42)."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M29",
+   "change": "C4",
+   "old": "Worked duration in the measure given by the Q2 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999.",
+   "new": "Worked duration in the measure given by the Q2 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999. With unit J the value is DAYS 0-92 - never hours. No separator before or after this field (guide p.36)."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M32",
+   "change": "C4",
+   "old": "Worked duration in the measure given by the Q3 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999.",
+   "new": "Worked duration in the measure given by the Q3 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999. With unit J the value is DAYS 0-92 - never hours. No separator before or after this field (guide p.36)."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M35",
+   "change": "C4",
+   "old": "Worked duration in the measure given by the Q4 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999.",
+   "new": "Worked duration in the measure given by the Q4 unit: MONTHS if M (full quarter 3), DAYS if J (full quarter 90, 30-day-month convention), HOURS if H (full quarter ≈ 520). Prorate partial quarters on the same basis. 0 where the employee was not employed in the quarter. Maximum expressible value 999. With unit J the value is DAYS 0-92 - never hours. No separator before or after this field (guide p.36)."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C9",
+   "change": "C4+C6",
+   "old": "The unit code determines the measure of the duration and MUST be derived from the employee pay frequency, never hard-coded: M = months worked (full quarter 3, pay frequency monthly); J = days worked on a 30-day-month convention (full quarter 90, pay frequency daily); H = hours worked (full quarter ≈ 520, pay frequency hourly). Partial quarters are prorated on the same basis as the unit emitted. The duration feeds the insured-period record used for pension validation, so an incorrect unit may pass the file check yet still misstate entitlement.",
+   "new": "The unit code determines the measure of the duration. The unit is a CLIENT-LEVEL PARAMETER (guide p.36: M for monthly-paid, J for day-paid, H for hourly-paid workers; the client decides and records it). M = months worked (full quarter 3); J = DAYS worked, 0-92 per quarter (client convention, e.g. 90 per full quarter minus unpaid-absence days); H = hours worked (full quarter ≈ 520). Partial quarters are prorated on the same basis as the unit emitted. Never emit hours with unit J. The layout has no separator, so the birth date is immediately followed by the Q1 duration - this is correct. The duration feeds the insured-period record used for pension validation, so an incorrect unit may pass the file check yet still misstate entitlement."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "K41",
+   "change": "C5",
+   "old": "CADRE",
+   "new": "(20 spaces)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L41",
+   "change": "C5+R2-#3",
+   "old": "DD: Employee.JobTitle",
+   "new": "Blank (20 spaces) by default. DD: Employee.JobTitle - Field Name 'Job Title / Occupation' (DZ-DD-001-v1.1, Country Fields) only where the client opts in."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M41",
+   "change": "C5",
+   "old": "Optional free text. May be left blank (20 spaces).",
+   "new": "Optional free text (guide p.36: 'dans la mesure du possible'). DEFAULT = blank (20 spaces). Populate with the employee function only on explicit client request."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "C39",
+   "change": "C5",
+   "old": "Optional; recommended to carry the function.",
+   "new": "Optional; blank (20 spaces) by default; employee function only on client request."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M27",
+   "change": "C6+R2-#4",
+   "old": "M = mensuel, J = journalier, H = horaire. MUST be derived from the employee pay frequency and never hard-coded to a single literal across the population — the duration feeds the insured-period record used for pension validation.",
+   "new": "M = mensuel, J = journalier, H = horaire. Guide p.36 prescribes M for monthly-paid workers. The unit is a CLIENT-LEVEL PARAMETER: the client decides and records it in its configuration annex; it is not a compliance decision. The duration feeds the insured-period record used for pension validation."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M30",
+   "change": "C6+R2-#4",
+   "old": "M = mensuel, J = journalier, H = horaire. MUST be derived from the employee pay frequency and never hard-coded to a single literal across the population — the duration feeds the insured-period record used for pension validation.",
+   "new": "M = mensuel, J = journalier, H = horaire. Guide p.36 prescribes M for monthly-paid workers. The unit is a CLIENT-LEVEL PARAMETER: the client decides and records it in its configuration annex; it is not a compliance decision. The duration feeds the insured-period record used for pension validation."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M33",
+   "change": "C6+R2-#4",
+   "old": "M = mensuel, J = journalier, H = horaire. MUST be derived from the employee pay frequency and never hard-coded to a single literal across the population — the duration feeds the insured-period record used for pension validation.",
+   "new": "M = mensuel, J = journalier, H = horaire. Guide p.36 prescribes M for monthly-paid workers. The unit is a CLIENT-LEVEL PARAMETER: the client decides and records it in its configuration annex; it is not a compliance decision. The duration feeds the insured-period record used for pension validation."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "M36",
+   "change": "C6+R2-#4",
+   "old": "M = mensuel, J = journalier, H = horaire. MUST be derived from the employee pay frequency and never hard-coded to a single literal across the population — the duration feeds the insured-period record used for pension validation.",
+   "new": "M = mensuel, J = journalier, H = horaire. Guide p.36 prescribes M for monthly-paid workers. The unit is a CLIENT-LEVEL PARAMETER: the client decides and records it in its configuration annex; it is not a compliance decision. The duration feeds the insured-period record used for pension validation."
+  },
+  {
+   "sheet": "Evidence Register",
+   "cell": "D16",
+   "change": "C6",
+   "old": "Documented as tolerated, NOT recommended. The standard requires the unit to follow pay frequency.",
+   "new": "Documented as tolerated. The unit is a client-level parameter (v2.2): the guide prescribes M for monthly-paid workers; a client may keep J on its own decision, recorded in its configuration annex."
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "E49",
+   "change": "C6",
+   "old": "The unit reflects the employee pay frequency rather than a single literal applied to the whole population.",
+   "new": "The unit equals the client-configured DAS unit parameter; where it differs from the guide (M for monthly-paid), the client decision is recorded in its configuration annex."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "G26",
+   "change": "C7",
+   "old": "Conditional: pairs bidirectionally with Q1 salary — duration > 0 if and only if salary > 0.",
+   "new": "Conditional: pairs bidirectionally with Q1 salary — duration > 0 if and only if salary > 0. Severity WARN only (SEM-02): the guide does not state this rule."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "G29",
+   "change": "C7",
+   "old": "Conditional: pairs bidirectionally with Q2 salary — duration > 0 if and only if salary > 0.",
+   "new": "Conditional: pairs bidirectionally with Q2 salary — duration > 0 if and only if salary > 0. Severity WARN only (SEM-02): the guide does not state this rule."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "G32",
+   "change": "C7",
+   "old": "Conditional: pairs bidirectionally with Q3 salary — duration > 0 if and only if salary > 0.",
+   "new": "Conditional: pairs bidirectionally with Q3 salary — duration > 0 if and only if salary > 0. Severity WARN only (SEM-02): the guide does not state this rule."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "G35",
+   "change": "C7",
+   "old": "Conditional: pairs bidirectionally with Q4 salary — duration > 0 if and only if salary > 0.",
+   "new": "Conditional: pairs bidirectionally with Q4 salary — duration > 0 if and only if salary > 0. Severity WARN only (SEM-02): the guide does not state this rule."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C10",
+   "change": "C7",
+   "old": "Within each quarter the duration and salary must be consistent in BOTH directions: duration > 0 if and only if salary > 0. A quarter in which the employee was not employed is written 0 duration AND 0 salary, with the unit still populated. A positive salary with zero duration, or a positive duration with zero salary, risks \"Format non valide de la durée travaillée\" / \"Nombre de jours incorrect\" (guide p.42).",
+   "new": "Within each quarter the duration and salary must be consistent in BOTH directions: duration > 0 if and only if salary > 0. A quarter in which the employee was not employed is written 0 duration AND 0 salary, with the unit still populated. A positive salary with zero duration, or a positive duration with zero salary, risks \"Format non valide de la durée travaillée\" / \"Nombre de jours incorrect\" (guide p.42). SEVERITY WARN (v2.2): this pairing is NOT stated in the guide, and an accepted submission contained 9 quarters breaching it (7 with duration > 0 and salary 0; 2 with duration 0 and salary > 0). Investigate; do not block."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D10",
+   "change": "C7",
+   "old": "A",
+   "new": "B"
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "C48",
+   "change": "C7",
+   "old": "A",
+   "new": "B"
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "D48",
+   "change": "C7",
+   "old": "BLOCK",
+   "new": "WARN"
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "E48",
+   "change": "C7",
+   "old": "Within each quarter: duration > 0 if and only if salary > 0. A non-employed quarter is 0 duration and 0 salary with the unit still populated.",
+   "new": "Within each quarter: duration > 0 if and only if salary > 0. A non-employed quarter is 0 duration and 0 salary with the unit still populated. WARN only (v2.2): the guide does not state this rule and an accepted submission contained 9 breaching quarters."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B13",
+   "change": "C8",
+   "old": "31 January of the year following the reference year (Loi 83-14 art. 14; CNAS communiqués confirm 31 January).",
+   "new": "Within thirty (30) days following the end of each calendar year: Loi n° 83-14 du 2 juillet 1983, art. 14 - \"dans les trente (30) jours qui suivent la fin de chaque année civile\". A literal count gives 30 January. ⚠️ 31 January appears in secondary sources, but no regulatory text fixing that date has been located; treat 30 January as the safe date unless a CNAS communiqué for the filing year says otherwise."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B14",
+   "change": "C8",
+   "old": "Loi n° 83-14 du 2 juillet 1983 (art. 8, art. 14). Recovery/penalties: Loi n° 08-08 du 23 février 2008. Contribution rates: Décret exécutif n° 94-187 as amended by n° 15-236 (DAC-relevant, not DAS layout).",
+   "new": "Loi n° 83-14 du 2 juillet 1983 (art. 8, art. 14; art. 16 as reworded and art. 16 bis as inserted by Loi n° 04-17 du 10 novembre 2004, JORADP n° 72 of 13/11/2004, arts. 11-12). Recovery/penalties: Loi n° 08-08 du 23 février 2008. Contribution rates: Décret exécutif n° 94-187 as amended by n° 15-236 (DAC-relevant, not DAS layout)."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B15",
+   "change": "C8",
+   "old": "Late, absent or inexact filing: 15% of contributions due plus 2% per month of delay (CNAS communiqué). Finance laws have periodically suspended or rescheduled penalties — confirm the applicable amount with the local agency.",
+   "new": "Failure to file the salary declaration in the conditions and deadline of art. 14: penalty of 15% of the contributions due, increased by 5% per month of delay (Loi 83-14 art. 16, as worded by Loi 04-17 art. 11; the original 1983 wording was 10% + 2% per month). Omitting an employee from the declaration, or deliberate inaccuracy in the declared salaries: 1,000 DA per worker and/or inaccuracy (art. 16 bis, inserted by Loi 04-17 art. 12). ⚠️ Later amendments to arts. 14/16 (finance laws, Loi 08-08) not verified - confirm with the local agency."
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "E57",
+   "change": "C8",
+   "old": "The DAS is filed between 1 and 31 January of the year following the reference year.",
+   "new": "The DAS is filed within the thirty (30) days following the end of the reference year (Loi 83-14 art. 14) - i.e. by 30 January on a literal count. ⚠️ 31 January is not confirmed by a regulatory text."
+  },
+  {
+   "sheet": "Validation Rules",
+   "cell": "F57",
+   "change": "C8",
+   "old": "Late-filing penalty (15% + 2%/month)",
+   "new": "Late-filing penalty 15% of contributions due + 5% per month of delay (art. 16, Loi 04-17); 1,000 DA per omitted worker / inaccuracy (art. 16 bis)"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D10",
+   "change": "C9",
+   "old": "= 4 x 2,700,000,000 exactly(ARI-01).",
+   "new": "Equals 4 x 2,700,000,000 exactly (ARI-01)."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D17",
+   "change": "C9",
+   "old": "= 0 + 1,800,000,000 + 2,700,000,000 + 2,700,000,000.",
+   "new": "Equals 0 + 1,800,000,000 + 2,700,000,000 + 2,700,000,000."
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "A15",
+   "change": "C10",
+   "old": null,
+   "new": ""
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "B15",
+   "change": "C10",
+   "old": null,
+   "new": "2.2"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "C15",
+   "change": "C10",
+   "old": null,
+   "new": "2026-10-27"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "D15",
+   "change": "C10",
+   "old": null,
+   "new": "Draft for HRBS-3466: per-establishment generation (one E/S pair per CNAS employer number, grouping key, line numbering per file, transfer rule as an unsourced proposal); file name per establishment number; System Mapping aligned to DZ-DD-001-v1.1 field names or marked NEW DD FIELD (proposed); duration in DAYS 0-92 for unit J and no-separator note; Observation blank by default; unit as a client parameter; SEM-02 downgraded to WARN; deadline and penalties per Loi 83-14 art. 14 and arts. 16 / 16 bis (Loi 04-17); formula-error cells fixed; Henkel Configuration annex added."
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "E15",
+   "change": "C10",
+   "old": null,
+   "new": "Draft"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "F15",
+   "change": "C10",
+   "old": null,
+   "new": "Wallisson Gomes"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B22",
+   "change": "C10",
+   "old": "2.1 — country standard",
+   "new": "2.2 - country standard (Draft, 2026-10-27); 2.1 remains the current released version"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "B5",
+   "change": "C11",
+   "old": "National standard template — no client, legal-entity or site-specific content. Every field and rule carries an evidence tier: A statutory / B observed / C excluded. See the Evidence Register tab.",
+   "new": "National standard template — no client, legal-entity or site-specific content. Every field and rule carries an evidence tier: A statutory / B observed / C excluded. See the Evidence Register tab. The 'Henkel Configuration' tab (added in v2.2) is a CLIENT ANNEX for HRBS-3466 and is not part of the national standard."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A1",
+   "change": "C11",
+   "old": null,
+   "new": "HENKEL - CLIENT CONFIGURATION ANNEX (ticket HRBS-3466) - not part of the DZ country standard"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A2",
+   "change": "C11",
+   "old": null,
+   "new": "Only values proven by a source are filled; everything else is TO BE CONFIRMED BY CLIENT. No employee personal data (names, social-security numbers, salaries) is held in this tab."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A4",
+   "change": "C11",
+   "old": null,
+   "new": "Location"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B4",
+   "change": "C11",
+   "old": null,
+   "new": "CNAS employer number (10)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "C4",
+   "change": "C11",
+   "old": null,
+   "new": "Centre payeur (5)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "D4",
+   "change": "C11",
+   "old": null,
+   "new": "Dénomination (A30)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "E4",
+   "change": "C11",
+   "old": null,
+   "new": "Nom ou Raison Sociale (A30)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "F4",
+   "change": "C11",
+   "old": null,
+   "new": "Adresse (AN50)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "G4",
+   "change": "C11",
+   "old": null,
+   "new": "Population (employees attached)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "H4",
+   "change": "C11",
+   "old": null,
+   "new": "DAS duration unit"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "I4",
+   "change": "C11",
+   "old": null,
+   "new": "Observation"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "J4",
+   "change": "C11",
+   "old": null,
+   "new": "Source / status"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A5",
+   "change": "C11",
+   "old": null,
+   "new": "Dely Ibrahim"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B5",
+   "change": "C11",
+   "old": null,
+   "new": "1638091858"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "C5",
+   "change": "C11+R2-#8",
+   "old": null,
+   "new": "11628 (from accepted DAS 2024 header; client to confirm)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "D5",
+   "change": "C11+R2-#8",
+   "old": null,
+   "new": "HENKEL ALGERIE SPA (from accepted DAS 2024 header; client to confirm)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "E5",
+   "change": "C11+R2-#8",
+   "old": null,
+   "new": "PROD DETERGENTS,PROD NETTOYAGE (from accepted DAS 2024 header - this field carried the activity, not a legal name; client to confirm)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "F5",
+   "change": "C11+R2-#8",
+   "old": null,
+   "new": "N779 PROP MED ZAOUI G VENTS 01 DELY IBRAHIM  ALGER (from accepted DAS 2024 header; client to confirm)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "G5",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "H5",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT (J used for 100% of records in the accepted DAS 2024 file; guide p.36 prescribes M for monthly-paid)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "I5",
+   "change": "C11",
+   "old": null,
+   "new": "Blank (20 spaces)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "J5",
+   "change": "C11",
+   "old": null,
+   "new": "CNAS number: file name and field 1 of the accepted DAS 2024 files D24E1638091858 / D24S1638091858 (HRBS-3466 attachments); the address field of that entête is in Dely Ibrahim. Observation blank: client request V3 (HRBS-3466, 31/12/2025). ⚠️ Not proven whether this number also covered the other locations in 2024."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A6",
+   "change": "C11",
+   "old": null,
+   "new": "Reghaia"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "C6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "D6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "E6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "F6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "G6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "H6",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT (J or M)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "I6",
+   "change": "C11",
+   "old": null,
+   "new": "Blank (20 spaces)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "J6",
+   "change": "C11",
+   "old": null,
+   "new": "Location named in the client request (HRBS-3466, 25/12/2025). ⚠️ Not proven that it holds its own CNAS employer number."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A7",
+   "change": "C11",
+   "old": null,
+   "new": "Chelghoum Laid"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "C7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "D7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "E7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "F7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "G7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "H7",
+   "change": "C11",
+   "old": null,
+   "new": "TO BE CONFIRMED BY CLIENT (J or M)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "I7",
+   "change": "C11",
+   "old": null,
+   "new": "Blank (20 spaces)"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "J7",
+   "change": "C11",
+   "old": null,
+   "new": "Location named in the client request (HRBS-3466, 25/12/2025). ⚠️ Not proven that it holds its own CNAS employer number."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A9",
+   "change": "C11",
+   "old": null,
+   "new": "Client rules applied to all locations"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A10",
+   "change": "C11",
+   "old": null,
+   "new": "Files"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B10",
+   "change": "C11",
+   "old": null,
+   "new": "One E + S pair per CNAS employer number above; names D + YY + E/S + CNAS number (10) + .TXT."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A11",
+   "change": "C11",
+   "old": null,
+   "new": "Duration"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B11",
+   "change": "C11",
+   "old": null,
+   "new": "Unit J (if confirmed): DAYS 0-92 per quarter, convention 90 per full quarter minus unpaid-absence days (absence WTs 63121 / 63122 / 63129 / 63801 - to be confirmed by Development). Never hours."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A12",
+   "change": "C11",
+   "old": null,
+   "new": "Quarterly salary"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B12",
+   "change": "C11",
+   "old": null,
+   "new": "CNAS contributory base per quarter, product WT 64551 - to be confirmed by Development."
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "A13",
+   "change": "C11",
+   "old": null,
+   "new": "Observation"
+  },
+  {
+   "sheet": "Henkel Configuration",
+   "cell": "B13",
+   "change": "C11",
+   "old": null,
+   "new": "Blank (20 spaces) for every record (client request V3)."
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L6",
+   "change": "R2-#2",
+   "old": "DD: Payroll.ReferenceYear",
+   "new": "Run parameter (reference year, CCYY) - not a DD field"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L20",
+   "change": "R2-#2",
+   "old": "DD: Payroll.ReferenceYear",
+   "new": "Run parameter (reference year, CCYY) - not a DD field"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L9",
+   "change": "R2-#3",
+   "old": "DD: Employer.LegalName",
+   "new": "DD: Employer.LegalName - Field Name 'Employer Legal Name' (DZ-DD-001-v1.1, Country Fields)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L23",
+   "change": "R2-#3",
+   "old": "DD: Employee.LastName",
+   "new": "DD: Employee.LastName - Field Name 'Surname' (DZ-DD-001-v1.1, Country Fields)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L24",
+   "change": "R2-#3",
+   "old": "DD: Employee.FirstName",
+   "new": "DD: Employee.FirstName - Field Name 'First Name' (DZ-DD-001-v1.1, Country Fields)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L25",
+   "change": "R2-#3",
+   "old": "DD: Employee.BirthDate",
+   "new": "DD: Employee.BirthDate - Field Name 'Date of Birth' (DZ-DD-001-v1.1, Country Fields)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L39",
+   "change": "R2-#3",
+   "old": "DD: Employee.HireDate",
+   "new": "DD: Employee.HireDate - Field Name 'Date of Hire' (DZ-DD-001-v1.1, Country Fields)"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "L40",
+   "change": "R2-#3",
+   "old": "DD: Employee.TerminationDate",
+   "new": "DD: Employee.TerminationDate - Field Name 'Date of Termination' (DZ-DD-001-v1.1, Country Fields)"
+  },
+  {
+   "sheet": "Evidence Register",
+   "cell": "D9",
+   "change": "R2-#5",
+   "old": "Normative. Unit derived from pay frequency.",
+   "new": "Normative code list (M / J / H). Which unit applies is a client-level parameter (v2.2); the guide prescribes M for monthly-paid workers."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "F7",
+   "change": "R2-#5",
+   "old": "Monthly-paid worker. Durée expressed in MONTHS; full quarter = 3. Use when pay frequency is monthly (guide p.36). NOTE: the value basis is inferred — M has not been observed in an accepted file.",
+   "new": "Monthly-paid worker (guide p.36: travailleurs mensuels). Durée expressed in MONTHS; full quarter = 3. Selected through the client-level DAS unit parameter. NOTE: the value basis is inferred — M has not been observed in an accepted file."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "F8",
+   "change": "R2-#5",
+   "old": "Day-paid worker. Durée expressed in DAYS on a 30-day-month convention; full quarter = 90. Use when pay frequency is daily (guide p.36). The only unit observed in an accepted file.",
+   "new": "Day-paid worker (guide p.36: journaliers). Durée expressed in DAYS on a 30-day-month convention; full quarter = 90. Selected through the client-level DAS unit parameter. The only unit observed in an accepted file."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "F9",
+   "change": "R2-#5",
+   "old": "Hourly-paid worker. Durée expressed in HOURS; full quarter ≈ 520 (3 x 173.33). Use when pay frequency is hourly (guide p.36). NOTE: the value basis is inferred — H has not been observed in an accepted file.",
+   "new": "Hourly-paid worker (guide p.36: payés à l'heure). Durée expressed in HOURS; full quarter ≈ 520 (3 x 173.33). Selected through the client-level DAS unit parameter. NOTE: the value basis is inferred — H has not been observed in an accepted file."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B28",
+   "change": "R2-#6",
+   "old": "STATUTORY LAYER — very high. All 36 fields, both filenames, the centimes and no-separator rules, the M/J/H unit rule, the deadline and the complete p.41-42 validation catalogue are taken verbatim from the guide and confirmed against the live portal copy. EMPIRICAL LAYER (tier B) — medium. Justification and padding, line terminators, the Date Sortie blank convention and the duration basis per unit are NOT in the guide and rest on ONE accepted submission from ONE employer number, ONE filing year and ONE payroll vendor. UNVERIFIED — units M and H have never been observed in an accepted file (only J); declaration type C has never been observed; multi-cotisant filing behaviour is inferred; the duration bounds in SYN-18 are inferred from error-message names, as CNAS publishes no bounds. Treat the statutory layer as settled and the tier-B layer as provisional until corroborated across 2-3 independent customers.",
+   "new": "STATUTORY LAYER — very high. All 36 fields, both filenames, the centimes and no-separator rules, the M/J/H unit codes and the complete p.41-42 validation catalogue are taken verbatim from the guide and confirmed against the live portal copy. The filing deadline is NOT in the guide: its source is Loi n° 83-14 art. 14 (30 days after the end of the calendar year; ⚠️ 31 January not confirmed by a regulatory text). EMPIRICAL LAYER (tier B) — medium. Justification and padding, line terminators, the Date Sortie blank convention and the duration basis per unit are NOT in the guide and rest on ONE accepted submission from ONE employer number, ONE filing year and ONE payroll vendor. UNVERIFIED — units M and H have never been observed in an accepted file (only J); declaration type C has never been observed; multi-cotisant filing behaviour is inferred; the duration bounds in SYN-18 are inferred from error-message names, as CNAS publishes no bounds. Treat the statutory layer as settled and the tier-B layer as provisional until corroborated across 2-3 independent customers."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A10",
+   "change": "R2-#7",
+   "old": "055577511120261     123456789012BENALI                   AMINE                    150119853  M27000000003  M27000000003  M27000000003  M270000000010800000000 01092015        CADRE               ",
+   "new": "055577511120261     123456789012BENALI                   AMINE                    150119853  M27000000003  M27000000003  M27000000003  M270000000010800000000 01092015                            "
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A11",
+   "change": "R2-#7",
+   "old": "055577511120262     234567890123HADDAD                   SAMIRA                   020319900  M0         2  M18000000003  M27000000003  M27000000007200000000  15052026        TECHNICIEN          ",
+   "new": "055577511120262     234567890123HADDAD                   SAMIRA                   020319900  M0         2  M18000000003  M27000000003  M27000000007200000000  15052026                            "
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A12",
+   "change": "R2-#7",
+   "old": "055577511120263     345678901234MEZIANE                  KARIM                    2007197890 J270000000090 J270000000090 J270000000030 J900000000 9000000000  0103201031102026OUVRIER             ",
+   "new": "055577511120263     345678901234MEZIANE                  KARIM                    2007197890 J270000000090 J270000000090 J270000000030 J900000000 9000000000  0103201031102026                    "
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A13",
+   "change": "R2-#7",
+   "old": "055577511120264     456789012345LOUNIS                   NADIA                    11121995520H1560000000520H1560000000520H1560000000520H15600000006240000000  05012024        AGENT               ",
+   "new": "055577511120264     456789012345LOUNIS                   NADIA                    11121995520H1560000000520H1560000000520H1560000000520H15600000006240000000  05012024                            "
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "I3",
+   "change": "R2-#10",
+   "old": "17",
+   "new": "18"
+  },
+  {
+   "sheet": "DAS Spec",
+   "cell": "I18",
+   "change": "R2-#10",
+   "old": "17",
+   "new": "18"
+  }
+ ],
+ "changed_parts": [
+  "[Content_Types].xml",
+  "xl/_rels/workbook.xml.rels",
+  "xl/sharedStrings.xml",
+  "xl/styles.xml",
+  "xl/workbook.xml",
+  "xl/worksheets/sheet1.xml",
+  "xl/worksheets/sheet10.xml",
+  "xl/worksheets/sheet11.xml",
+  "xl/worksheets/sheet3.xml",
+  "xl/worksheets/sheet4.xml",
+  "xl/worksheets/sheet6.xml",
+  "xl/worksheets/sheet7.xml",
+  "xl/worksheets/sheet9.xml",
+  "xl/worksheets/sheet13.xml (new)"
+ ]
+}

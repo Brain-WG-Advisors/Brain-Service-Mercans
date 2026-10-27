@@ -16,7 +16,7 @@
 | Ticket | País | Rascunho | Próximo passo |
 |---|---|---|---|
 | HRBS-14528 | Espanha | Comentário de 28/09 era descritivo; call desnecessária (511 chars) | Usuário: enviar |
-| HRBS-14394 | Holanda | Sem fórmula no WTC V3.3 (52999 sem fórmula; 52990 apagado) + tabel 11 (468 chars) | Usuário: enviar |
+| HRBS-14394 | Holanda | **Enviado** 27/10 11:40 UTC: pedido ao @mjain para atualizar o 52990 para os valores 2026 (rascunho de 16/10 substituído) | Aguardar o Mohit |
 | SR-163 | Ucrânia | schemaLocation J0510611.xsd; C_REG/C_RAJ/C_STI_ORIG obrigatórios (463 chars) | Usuário: enviar |
 
 Sem pendência nossa: HRBS-14996 (CI, último comentário 29/09), SR-161 (Lily↔Dev), SR-162 Done, SR-432 em acceptance.

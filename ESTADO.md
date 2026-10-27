@@ -22,7 +22,7 @@
   - scripts `contexto_pais`, `atualizar_tickets`, `achar_versao`, `conferir_import`, `onde_estamos` e `medir_eficiencia`;
   - regras "Respostas eficientes" no [[CLAUDE]];
   - exatidão no Claude Code: 28/28.
-- **Próxima sessão:** método para integrar o cérebro ao **Claude Desktop** e ao **claude.ai web**, levando o ganho do Claude Code para onde o time trabalha.
+- **Integração Desktop/web (sessão aberta 27/10):** método em [[revisoes/2026-10-27-integracao-desktop-web]]; esperando o usuário: quem usa e se o conteúdo interno pode subir na conta.
 - **Segunda (S45):** `medir_eficiencia.py` → [[testes/eficiencia]].
 - **Esperando o usuário:**
   - reabrir as frentes (`abrir_frentes.ps1 -Retomar`);

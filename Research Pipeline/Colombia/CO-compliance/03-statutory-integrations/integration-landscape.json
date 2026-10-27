@@ -1,0 +1,402 @@
+{
+  "_schema_note": "Agent-schema reconstruction note: the referenced agent definition file .claude/agents/si-discovery.md is NOT present in this pipeline checkout (shared/si-runbook was never installed), so the field set below is derived from the only authoritative consumer of this file - STAGE 6 of mercans_pipeline_v2_9.sh, which reads top-level 'verdict' and iterates 'authorities' selecting entries where integration is boolean true and 'code' is non-empty, and whose index prompt requires per authority: integration yes/no, channel, direction(s), dev portal, runbook location.",
+  "country": "Colombia",
+  "code": "CO",
+  "country_code": "CO",
+  "currency": "COP",
+  "year": "2026",
+  "generated": "2026-09-04",
+  "produced_by": "si-discovery (Agent 3 / STAGE 6a)",
+  "inputs_read": [
+    "CO-compliance/scope_manifest.json (scope_version 1.0, 6 in-scope filings, 7 descoped)",
+    "CO-compliance/01-ccg/CO-CCG-001-v1.0.docx (Module 10.1 / 10.2)",
+    "CO-compliance/_txt/ne_anexo.txt (DIAN Anexo Tecnico Nomina Electronica v1.0, 269 pp, ss. 9.1-9.8)",
+    "CO-compliance/_txt/res227.txt (Resolucion DIAN 000227 de 23 Sep 2025, Cap. 12)",
+    "CO-compliance/_txt/soi_cesantias.txt (ACH Colombia SOI instructivo cesantias)",
+    "CO-compliance/_txt/pagosimple_cesantias.txt (Simple S.A. Manual Cesantias)",
+    "CO-compliance/_txt/pila_anexo2.txt (Resolucion MSPS 2388 de 2016, Anexo Tecnico 2)"
+  ],
+
+  "verdict": "HAS_INTEGRATIONS",
+  "verdict_rationale": "Colombia has exactly ONE genuine system-to-system statutory channel for payroll: the DIAN electronic payroll validation web service (SOAP 1.2, operation SendNominaSync on WcfDianCustomerServices). This was verified live on 2026-09-04, not inferred: the production WSDL at https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl and the habilitacion WSDL at https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl both returned HTTP 200 without authentication (61,719 and 61,727 bytes) and both declare wsdl:operation name=\"SendNominaSync\" alongside GetStatus; and the DIAN 'Caja de Herramientas' ZIP downloaded HTTP 200 (5,528,509 bytes) containing NominaIndividualElectronicaXSDV1.0.6.xsd, NominaIndividualDeAjusteElectronicaXSDV1.0.6.xsd, the UBL 2.1 and XAdES schema set, the 269-page technical annex and two sample XMLs. EVERY OTHER Colombian payroll obligation is portal or paper. This is a one-integration country, and the honest reading is that the M2M posture is the exception, not the rule: 3 of the 4 authority channels below are manual, and 5 of the 6 in-scope filings are manual.",
+
+  "summary": {
+    "authorities_total": 4,
+    "authorities_with_system_to_system": 1,
+    "authorities_manual_only": 3,
+    "in_scope_filings_total": 6,
+    "in_scope_filings_via_system_to_system": 1,
+    "in_scope_filings_manual": 5,
+    "integration_postures_present": [
+      "machine-to-machine signed SOAP web service (DIAN electronic payroll only)",
+      "government portal round-trip authenticated by a personal electronic signature instrument (DIAN Muisca)",
+      "private-intermediary portal round-trip - the employer never reaches the government at all (PILA, cesantias)"
+    ],
+    "no_channel_type_found_anywhere": [
+      "SFTP",
+      "REST API published by an authority",
+      "AS2 / AS4",
+      "government-published message queue"
+    ]
+  },
+
+  "authorities": [
+    {
+      "code": "DIAN-NE",
+      "name": "DIAN - Servicio de Validacion de Nomina Electronica (Electronic Payroll Validation Service)",
+      "authority_legal_name": "Unidad Administrativa Especial Direccion de Impuestos y Aduanas Nacionales (DIAN)",
+      "integration": true,
+      "channel_type": "m2m_soap_web_service",
+      "channel": "Genuine machine-to-machine SOAP 1.2 web service. The electronic payroll document rides on DIAN's existing pre-validation e-invoicing service WcfDianCustomerServices, which exposes the dedicated operation SendNominaSync for synchronous transmission of ONE signed XML document inside a .zip container (max 500 KB, UTF-8 only), plus GetStatus extended to query electronic payroll documents. There is no portal step in the transmission path.",
+      "directions": ["outbound", "inbound"],
+      "direction_detail": "BOTH, in a single call. Outbound = the signed NominaIndividual / NominaIndividualDeAjuste XML. Inbound = a base64 ApplicationResponse returned synchronously in SendNominaSyncResult (elements IsValid, StatusCode, StatusDescription, StatusMessage, XmlBase64Bytes, XmlDocumentKey). The inbound leg is a HARD dependency, not a receipt: a payroll cost is tax-deductible only where the document was validated, so the engine must parse the response, persist the validation status and the CUNE, and retry or correct rejections.",
+      "protocol": "SOAP 1.2 (soap12) over HTTPS, WS-Addressing, WS-Security with timestamp; WCF service",
+      "message_format": "base64 of a ZIP containing one UBL 2.1-signed XML; max 500 KB; UTF-8 only",
+      "authentication": "Client authenticates with an X.509 digital certificate issued by a certification authority accredited by ONAC (the national accreditation body). The document carries a XAdES-EPES signature with ClaimedRole in {thirdparty, supplier}. The WSDL policy declares sp:TransportBinding + sp:HttpsToken + sp:WssX509... + sp:EndorsingSupportingTokens + sp:IncludeTimestamp.",
+      "endpoints": {
+        "production": "https://vpfe.dian.gov.co/WcfDianCustomerServices.svc",
+        "production_wsdl": "https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl",
+        "test_habilitacion": "https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc",
+        "test_habilitacion_wsdl": "https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl",
+        "document_lookup_qr": "https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey=<CUNE>",
+        "_endpoint_verification": "WSDLs retrieved 2026-09-04, HTTP 200, no authentication required. Live service endpoints were NOT called."
+      },
+      "operations_relevant_to_payroll": [
+        {
+          "name": "SendNominaSync",
+          "purpose": "Synchronous transmission and validation of one electronic payroll document or adjustment note",
+          "verified_in_wsdl": true
+        },
+        {
+          "name": "GetStatus",
+          "purpose": "Query the validation status of a transmitted document (extended by Res. 000013/2021 to cover payroll documents)",
+          "verified_in_wsdl": true
+        }
+      ],
+      "operations_present_but_e_invoicing_only": [
+        "SendBillSync", "SendBillAsync", "SendBillAttachmentAsync", "SendTestSetAsync",
+        "SendEventUpdateStatus", "GetStatusZip", "GetStatusEvent", "GetXmlByDocumentKey",
+        "GetNumberingRange", "GetAcquirer", "GetDocumentInfo", "GetExchangeEmails", "GetReferenceNotes"
+      ],
+      "dev_portal": "https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/documentacion-tecnica-soporte-de-pago-nomina-electronica/",
+      "public_artefacts": [
+        {
+          "name": "Caja de Herramientas Nomina Electronica V1-0 (ZIP)",
+          "url": "https://www.dian.gov.co/impuestos/factura-electronica/Documents/Caja-de-Herramientas-Nomina-Electronica-V1-0.zip",
+          "public": true,
+          "login_required": false,
+          "verified": "downloaded 2026-09-04, HTTP 200, 5,528,509 bytes, 19 entries"
+        },
+        {
+          "name": "NominaIndividualElectronicaXSDV1.0.6.xsd",
+          "url": "inside Caja de Herramientas /XSD/",
+          "public": true,
+          "login_required": false,
+          "verified": "present, 38,799 bytes, targetNamespace dian:gov:co:facturaelectronica:NominaIndividual"
+        },
+        {
+          "name": "NominaIndividualDeAjusteElectronicaXSDV1.0.6.xsd",
+          "url": "inside Caja de Herramientas /XSD/",
+          "public": true,
+          "login_required": false,
+          "verified": "present, 48,150 bytes, targetNamespace dian:gov:co:facturaelectronica:NominaIndividualDeAjuste"
+        },
+        {
+          "name": "UBL 2.1 + XAdES v1.3.2 / v1.4.1 + xmldsig schema set (10 xsd)",
+          "url": "inside Caja de Herramientas /Schemes/",
+          "public": true,
+          "login_required": false,
+          "verified": "present"
+        },
+        {
+          "name": "Sample XML: Nomina Individual Electronica V1.0.2.xml and Nomina Individual De Ajuste Electronica V1.0.2.xml",
+          "url": "inside Caja de Herramientas /Ejemplificaciones/",
+          "public": true,
+          "login_required": false,
+          "verified": "present"
+        },
+        {
+          "name": "Anexo Tecnico Documento Soporte de Pago de Nomina Electronica V1.0 (269 pp, incl. ss. 9.1-9.8 web-service spec and the NIE validation-rule tables)",
+          "url": "inside Caja de Herramientas /Anexo Tecnico/",
+          "public": true,
+          "login_required": false,
+          "verified": "present; also already extracted to CO-compliance/_txt/ne_anexo.txt"
+        },
+        {
+          "name": "Resolucion DIAN 000013 de 11 Feb 2021",
+          "url": "https://www.dian.gov.co/normatividad/Normatividad/Resoluci%C3%B3n%20000013%20de%2011-02-2021.pdf",
+          "public": true,
+          "login_required": false,
+          "verified": "URL published on the DIAN micrositio"
+        },
+        {
+          "name": "WSDL (production and habilitacion)",
+          "url": "https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl",
+          "public": true,
+          "login_required": false,
+          "verified": "HTTP 200 on 2026-09-04, both environments"
+        }
+      ],
+      "artefact_gaps": [],
+      "artefact_readiness": "BUILD-READY. The complete artefact set - WSDL, XSD v1.0.6, UBL/XAdES schemas, sample XML and the 269-page annex with the validation-rule tables - is publicly downloadable with no login, no certificate and no CAPTCHA.",
+      "onboarding_gating": "Portal-gated, one-time, and NOT a technical channel: habilitacion. The issuer must complete the enablement process in the DIAN portal (register own software or a proveedor tecnologico, obtain the SoftwareID and the secret PIN, pass the test set in the habilitacion environment) before transmitting in production; global validation rule 92 rejects any document from a non-enabled issuer. Where Mercans generates or transmits on the client's behalf, Res. 000013/2021 art. 22 additionally requires the provider to be enabled, registered in the RUT, and both parties to retain the mandate document. This is a contractual and administrative precondition to go-live, not an engineering blocker.",
+      "manual_alternative_exists": "Yes - DIAN publishes a free web solution for electronic payroll (https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/solucion-gratuita-de-nomina-electronica/) aimed at small employers. Irrelevant to an engine implementation, but relevant to fallback and contingency design.",
+      "filings_carried": ["CO-DIAN-NE-MONTHLY-001"],
+      "frequency": "monthly, one document per employee per month regardless of pay frequency (Res. 000013/2021 art. 3)",
+      "deadline": "within the first 10 days of the month following payment or credit (art. 8)",
+      "runbook_location": "03-statutory-integrations/DIAN-NE/",
+      "evidence": [
+        "Anexo Tecnico s. 9.1: 'La DIAN expone sobre el mismo servicio web actual de Factura Electronica en Validacion Previa (WcfDianCustomerServices) una nueva la operacion llamada SendNominaSync para la transmision sincrona de 1 documento electronico ... XML en contenedor .zip y la modificacion de la operacion actual llamada GetStatus'.",
+        "Anexo Tecnico s. 9.2.1: 'El software cliente realiza la conexion autenticando por medio de certificado digital.'",
+        "Anexo Tecnico s. 9.7.1: 'Posterior a las validaciones se genera respuesta (Response) sincrona con el detalle de la evaluacion del documento, que incluye dentro de sus elementos un ApplicationResponse codificado en Base64 con la respuesta de validacion de la DIAN.'",
+        "Anexo Tecnico s. 9.7.2: request and response envelopes reproduced verbatim; action http://wcf.dian.colombia/IWcfDianCustomerServices/SendNominaSyncResponse.",
+        "Live WSDL retrieval 2026-09-04 (both environments) confirms wsdl:operation name=\"SendNominaSync\" and soap12:address location matching the endpoints above."
+      ],
+      "notes": "One documentation defect worth carrying forward: Anexo Tecnico s. 9.7 states 'Metodo: SendBillSync' in its bullet list while the surrounding section, the request envelope and the WSDL all say SendNominaSync. The WSDL is authoritative - SendNominaSync is the correct operation. Section 14 of the annex is a SOAP UI walkthrough that likewise still shows GetStatus and SendBillAsync examples inherited from the e-invoicing annex."
+    },
+
+    {
+      "code": "DIAN-MUISCA",
+      "name": "DIAN - Servicios Informaticos Electronicos / Muisca (tax returns and information returns)",
+      "authority_legal_name": "Unidad Administrativa Especial Direccion de Impuestos y Aduanas Nacionales (DIAN)",
+      "integration": false,
+      "channel_type": "portal_round_trip",
+      "channel": "Portal round-trip. Returns and information returns are filed 'en forma virtual a traves de los servicios informaticos electronicos de la DIAN, haciendo uso del Instrumento de Firma Electronica (IFE) emitido por la DIAN'. Form 350 is keyed or loaded in the Muisca web form; Formato 2276 v4 is prepared offline (prevalidador) and uploaded as XML through the informacion exogena service. Same legal entity as DIAN-NE, entirely different posture - the electronic payroll web service does not carry these filings.",
+      "directions": ["outbound"],
+      "protocol": "HTTPS web portal (browser). No SOAP, no REST, no SFTP published for filing.",
+      "authentication": "Instrumento de Firma Electronica (IFE) - a personal electronic signature instrument issued by DIAN to a NATURAL PERSON (the legal representative, or a person registered under RUT responsabilidad 22, 'Obligados a cumplir deberes formales a nombre de terceros'). Because the IFE binds to a human and is exercised interactively, it cannot be driven unattended; this is the structural reason there is no M2M path here.",
+      "endpoints": {
+        "portal": "https://muisca.dian.gov.co/",
+        "form_350_entry": "https://muisca.dian.gov.co/WebDilIngresoFormReteFuente350/"
+      },
+      "dev_portal": null,
+      "public_artefacts": [
+        {
+          "name": "Resolucion DIAN 000227 de 23 Sep 2025 (Resolucion Unica en Materia Tributaria, Aduanera y Cambiaria)",
+          "url": "already extracted to CO-compliance/_txt/res227.txt",
+          "public": true,
+          "login_required": false,
+          "verified": "art. 1.3.12.1 read verbatim"
+        },
+        {
+          "name": "Prevalidador for the informacion exogena formats",
+          "url": "published by DIAN per reporting year",
+          "public": true,
+          "login_required": false,
+          "verified": "referenced in Res. 000227/2025 (Prevalidadores, art. 1.1.6.3 pattern); the year-specific build was not pinned this pass"
+        }
+      ],
+      "artefact_gaps": [
+        "No machine-readable layout is published for the Form 350 web form - the form design is a PDF/instructivo, which is why CO-DIAN-002 is spec'd from the form design rather than from a schema.",
+        "Formato 2276 v4 XML: the field list is prescribed in Res. 000227/2025, but DIAN does not publish a standalone public XSD for exogena formats in the way it does for e-invoicing; the prevalidador is the de facto validator."
+      ],
+      "artefact_readiness": "N/A - no integration to build. Artefacts are needed for the report specifications (04-reports-spec), not for a connection.",
+      "filings_carried": ["CO-DIAN-F350-MONTHLY-002", "CO-DIAN-EXO2276-ANNUAL-005", "CO-DIAN-F220-ANNUAL-004"],
+      "filings_note": "CO-DIAN-F220-ANNUAL-004 (Certificado de Ingresos y Retenciones) is listed here for authority attribution only. It is not transmitted to DIAN at all - the employer ISSUES it to each employee and retains it (ET arts. 378-380). Its channel is 'to the employee', so it is neither an integration nor a portal filing.",
+      "runbook_location": null,
+      "evidence": [
+        "Resolucion DIAN 000227 de 2025 art. 1.3.12.1 (verbatim): 'La informacion a que se refiere la presente resolucion debe ser presentada en forma virtual a traves de los servicios informaticos electronicos de la Unidad Administrativa Especial Direccion de Impuestos y Aduanas Nacionales (DIAN), haciendo uso del Instrumento de Firma Electronica (IFE) emitido por la DIAN.'",
+        "Res. 000227/2025 art. 1.3.12.2 sets the pre-filing procedure as RUT registration plus IFE issuance/activation - an identity-and-portal onboarding, with no technical channel registration of any kind.",
+        "Res. 000227/2025 art. 1.3.12.3 contingency is 'no disponibilidad de los servicios informaticos electronicos', i.e. portal downtime, with an 8-business-day extension - the drafting assumes an interactive service.",
+        "The same 'servicios informaticos electronicos + IFE' formula recurs across the resolution for every declaration type (e.g. art. 1.2.2.11), confirming it is DIAN's general filing posture, not a quirk of one form.",
+        "CO-CCG-001 Module 10.1 posture table: 'Form 350 monthly withholding return; Form 220; the information return | Portal round-trip - prepared and submitted through the tax authority's electronic filing portal.'"
+      ],
+      "notes": "Searched specifically for a DIAN M2M/API path for declarations; every published DIAN developer surface found is the e-invoicing / payroll validation service. The third-party 'DIAN APIs' marketed by Colombian vendors (MATIAS API, Facturalatam and similar) are commercial wrappers around that same e-invoicing SOAP service - they are not an authority-published API and they do not cover Form 350 or exogena. Do not model them as a statutory channel."
+    },
+
+    {
+      "code": "PILA-OI",
+      "name": "PILA - Planilla Integrada de Liquidacion de Aportes, filed through a licensed operador de informacion",
+      "authority_legal_name": "Ministerio de Salud y Proteccion Social (system owner); collection intermediated by private operadores de informacion supervised by the Superintendencia Financiera",
+      "integration": false,
+      "channel_type": "private_intermediary_portal_file_upload",
+      "channel": "Portal round-trip through a licensed private operador de informacion. The employer NEVER transacts directly with the government for social security. Under Res. MSPS 2388 de 2016 the 'modalidad electronica' is the contributor using the internet either to key the planilla online or to upload a flat file to the electronic means made available BY THE OPERATOR; the operator settles, collects and forwards to each administradora. There is no government-facing endpoint for the employer to integrate with, and no MinSalud-published API, SFTP or web service.",
+      "directions": ["outbound", "inbound"],
+      "direction_detail": "Outbound = Archivo Tipo 1 (employer, 34 fields / 567 positions) and Archivo Tipo 2 (header 22 fields / 359 positions plus one Registro Tipo 2 per contributor), fixed-width. Inbound = the operator's settlement/payment output, which the engine must reconcile (planilla number, payment date, per-contributor rejections). The inbound leg is operator-specific and has no published layout.",
+      "protocol": "HTTPS web portal with browser file upload (.txt / .csv, size-limited, zipped if larger). No published authority protocol.",
+      "authentication": "Operator account credentials (a commercial relationship), not a government credential. No certificate, no signature on the file.",
+      "endpoints": {
+        "note": "Operator-specific. Principal licensed operators: ACH Colombia S.A. (SOI, https://www.nuevosoi.com.co and https://www.soi.com.co), Simple S.A. (https://www.pagosimple.com), ARUS / Enlace Operativo (SuAporte, https://www.suaporte.com.co), Aportes en Linea, Mi Planilla, Asopagos, Compensar."
+      },
+      "dev_portal": "https://www.suaporte.com.co/portal-apis/ (ARUS/SuAporte 'Portal Desarrolladores APIS PILA' - see commercial_api_caveat)",
+      "commercial_api_caveat": "HONEST FINDING, DELIBERATELY NOT SCORED AS AN INTEGRATION. One operator, ARUS / Enlace Operativo, markets 'APIS PILA' on https://enlace.com.co/pila-empresa/ ('Puedes integrar la plataforma de SUAPORTE con tu software de nomina, para automatizar estos procesos') and runs a 'Portal Desarrolladores APIS PILA' at https://www.suaporte.com.co/portal-apis/. That portal was fetched on 2026-09-04 and returned only a welcome shell - no API catalogue, no endpoints, no OpenAPI or WSDL, no authentication description. This is therefore a PRIVATE COMMERCIAL offering from one intermediary, available under contract, with no public specification and no statutory standing. It is not the statutory channel, it does not generalise across operators, it would change if the client switches operator, and it cannot be built from public artefacts. Scoring PILA integration=true on this basis would fabricate a buildable integration. Recommendation: treat as a CLIENT-SPECIFIC OPTIMISATION to be scoped only once the client's operator is fixed and that operator supplies its contract.",
+      "public_artefacts": [
+        {
+          "name": "Resolucion MSPS 2388 de 2016 and Anexo Tecnico 2 (record layouts)",
+          "url": "https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-2388-2016.pdf",
+          "public": true,
+          "login_required": false,
+          "verified": "already extracted to CO-compliance/_txt/pila_anexo2.txt"
+        },
+        {
+          "name": "Decreto 1990 de 2016 (deadlines, rounding, obligated parties)",
+          "url": "already extracted to CO-compliance/_txt/Decreto_1990_de_2016.txt",
+          "public": true,
+          "login_required": false,
+          "verified": true
+        }
+      ],
+      "artefact_gaps": [
+        "No published inbound settlement-response layout from any operator - the return leg is operator-specific and not publicly documented.",
+        "Byte-exact positions of Archivo Tipo 2 Registro Tipo 2 not confirmed this pass (already recorded as a known gap in scope_manifest)."
+      ],
+      "artefact_readiness": "N/A for connection purposes - there is nothing to connect to. The outbound record layout IS public and is the basis of CO-PILA-003.",
+      "filings_carried": ["CO-PILA-MONTHLY-003"],
+      "frequency": "monthly",
+      "deadline": "2nd to 16th business day of the following month, by the last two digits of the employer NIT",
+      "runbook_location": null,
+      "evidence": [
+        "Res. MSPS 2388 de 2016: the 'modalidad Electronica' is the contributor paying via internet, online or by uploading flat files, through the electronic means provided by the operador de informacion; operadores are private entities authorised under Superintendencia Financiera supervision that settle and forward to the administradoras.",
+        "CO-CCG-001 Module 10.1 posture table: 'Integrated social-security contribution return | Portal round-trip through a licensed private information operator. The employer never reaches the government directly for social security.'",
+        "scope_manifest CO-PILA-MONTHLY-003 channel field states the same, independently."
+      ],
+      "notes": "The three payroll levies (SENA, ICBF, Cajas de Compensacion) ride on this same planilla, so there is no separate parafiscal channel to discover. UGPP is an enforcement and audit body, not a filing recipient, and receives nothing from payroll on a periodic basis."
+    },
+
+    {
+      "code": "FONDOS-CESANTIAS",
+      "name": "Fondos de Cesantias - annual severance-savings deposit allocation",
+      "authority_legal_name": "Private severance-savings funds (Porvenir, Proteccion, Colfondos, Skandia, FNA), reached through a licensed operador de informacion",
+      "integration": false,
+      "channel_type": "private_intermediary_portal_file_upload",
+      "channel": "Portal round-trip through an operador de informacion, in two selectable modes: online form (Planilla En Linea) or file upload (Envio de Archivo Unificado de Cesantias). Explicitly NOT machine-to-machine: no XSD, no SOAP, no digital signature, no certificate. The channel returns a planilla number, a comprobante PDF and post-payment reports; the fund itself issues the deposit certificate.",
+      "directions": ["outbound", "inbound"],
+      "direction_detail": "Outbound = the deposit allocation file. Inbound = planilla number, comprobante and the fund's deposit confirmation evidencing compliance with the February deadline.",
+      "protocol": "HTTPS web portal with browser file upload; permitted formats .txt and .csv (SOI, zipped above 1 MB), or XLS 97-2003 (16 columns A-P), no header row.",
+      "authentication": "Operator account credentials. No certificate, no signature.",
+      "endpoints": {
+        "note": "Operator-specific: SOI (ACH Colombia S.A.) https://www.nuevosoi.com.co, Simple S.A. https://www.pagosimple.com, and the other licensed operators."
+      },
+      "dev_portal": null,
+      "public_artefacts": [
+        {
+          "name": "ACH Colombia S.A. - SOI instructivo cesantias DDS-DES-INS-008 v2",
+          "url": "already extracted to CO-compliance/_txt/soi_cesantias.txt",
+          "public": true,
+          "login_required": false,
+          "verified": "s. 2.1.4 'Liquidacion Por Archivo' read - browser Examinar upload, .txt/.cvs, zip above 1 MB, on-screen Excel error report"
+        },
+        {
+          "name": "Simple S.A. - Manual Cesantias ss. 3.1-3.2 (20 fields / 258 positions fixed-width; 16-column XLS)",
+          "url": "already extracted to CO-compliance/_txt/pagosimple_cesantias.txt",
+          "public": true,
+          "login_required": false,
+          "verified": true
+        },
+        {
+          "name": "Ley 50 de 1990 art. 99; Ley 2466 de 2025 art. 64",
+          "url": "already extracted to CO-compliance/_txt/ley2466.txt",
+          "public": true,
+          "login_required": false,
+          "verified": true
+        }
+      ],
+      "artefact_gaps": [
+        "No published layout for the fund's inbound deposit confirmation - fund-specific."
+      ],
+      "artefact_readiness": "N/A for connection purposes. The outbound layout IS public (two independent operator manuals) and is the basis of CO-CESANTIAS-006.",
+      "filings_carried": ["CO-CESANTIAS-DEPOSIT-ANNUAL-006"],
+      "frequency": "annual",
+      "deadline": "by 14 February of the year following the 31 December liquidation (Ley 50 de 1990 art. 99 num. 3). For accrual year 2026 the last day is Sunday 14 February 2027 - deposit by Friday 12 February 2027.",
+      "runbook_location": null,
+      "evidence": [
+        "SOI instructivo s. 2.1.4: the file is loaded with a browser 'Examinar' button from the machine the user logged in from; formats .txt and .cvs; files over 1 MB must be zipped; structural errors are returned as an on-screen Excel report to be corrected and re-uploaded. That is an interactive portal upload, not an M2M channel.",
+        "scope_manifest CO-CESANTIAS-DEPOSIT-ANNUAL-006 channel field, independently verified against two operator manuals: 'Not machine-to-machine: no XSD, no SOAP, no signature, no certificate.'"
+      ],
+      "notes": "Late deposit costs one day's salary per day of delay per employee, uncapped. The absence of an integration therefore raises operational risk on the single most expensive Colombian year-end failure - worth calling out in delivery planning even though there is no runbook to write."
+    }
+  ],
+
+  "non_authority_flows_excluded_from_the_verdict": [
+    {
+      "id": "CO-OUT-BANKFILE",
+      "name": "Bank payment file",
+      "counterparty": "The client's paying bank",
+      "why_excluded": "A commercial bank is not a statutory authority and receives no statutory payroll data. Format is bank-specific; the bank-entity code catalogue must be obtained per client. Colombia does not use IBAN. Owned upstream by the client's bank (CCG control B7)."
+    },
+    {
+      "id": "CO-IN-EPS-ARL-BENEFIT",
+      "name": "EPS / ARL benefit determinations",
+      "counterparty": "Health insurers (EPS) and occupational-risk insurers (ARL)",
+      "why_excluded": "Inbound and in scope for the ENGINE (product_mapping_required true), but there is no integration to discover: recognition is an act of the insurer, there are dozens of EPS and several ARL, and not one publishes a file format, schema or column layout. Retrieval is per-insurer portal export. Revisit only if a client standardises on one EPS/ARL and supplies that institution's layout."
+    },
+    {
+      "id": "CO-IN-LIBRANZA-SCHEDULE",
+      "name": "Libranza instalment schedule",
+      "counterparty": "Private payroll lenders (entidades operadoras de libranza, Ley 1527 de 2012)",
+      "why_excluded": "Not a government-to-employer flow. Lender-specific format, no published schema, owned upstream by the lender."
+    },
+    {
+      "id": "CO-OUT-PAYSLIP",
+      "name": "Graphical representation of the payroll document (payslip) to the employee",
+      "counterparty": "The employee",
+      "why_excluded": "Not an authority. Permissive under Res. 000013/2021 art. 24; if issued it must carry the art. 5 content and a QR of at least 2 cm on every page."
+    }
+  ],
+
+  "out_of_scope_authorities": [
+    {
+      "code": "MINTRABAJO",
+      "name": "Ministerio del Trabajo - disability-hiring contract report (within 15 days of signature)",
+      "channel": "Portal",
+      "integration": false,
+      "status": "OUT OF SCOPE per scope_manifest (CO-MINTRABAJO-DISCAPACIDAD-REPORT, HR-scope: needs MinSalud disability certification and a permanent-headcount census by 100-employee tranche; more than 50% of fields originate in the HRMS). Appears in CO-CCG-001 as CO-RPT-007; the manifest governs. No integration in any case."
+    },
+    {
+      "code": "SENA-CUOTA",
+      "name": "SENA - apprentice quota determination and monetisation",
+      "channel": "Portal",
+      "integration": false,
+      "status": "OUT OF SCOPE per scope_manifest (HR-scope; the quota is fixed by SENA on headcount by occupation, and monetisation is a treasury payment). The apprentice's maintenance support and contributions ARE in scope and ride on PILA-OI and DIAN-NE."
+    },
+    {
+      "code": "RUAF-ND",
+      "name": "RUAF-ND vital-events registry",
+      "channel": "Portal",
+      "integration": false,
+      "status": "OUT OF SCOPE per scope_manifest (HR-scope; sourced from civil-registry documents, reported by health providers and HR)."
+    }
+  ],
+
+  "research_method": {
+    "primary_sources_read_verbatim": true,
+    "live_verification_performed": [
+      "GET https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl -> HTTP 200, 61,719 bytes, SendNominaSync present",
+      "GET https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl -> HTTP 200, 61,727 bytes, SendNominaSync present",
+      "GET https://www.dian.gov.co/impuestos/factura-electronica/Documents/Caja-de-Herramientas-Nomina-Electronica-V1-0.zip -> HTTP 200, 5,528,509 bytes, XSD v1.0.6 confirmed inside",
+      "GET https://enlace.com.co/pila-empresa/ -> 'APIS PILA' marketing section confirmed",
+      "GET https://www.suaporte.com.co/portal-apis/ -> welcome shell only, no public API catalogue"
+    ],
+    "live_service_endpoints_called": false,
+    "logins_accounts_certificates_captchas_used": false,
+    "negative_findings_searched_for": [
+      "DIAN M2M/API path for Form 350 or informacion exogena - none found; the only authority-published developer surface is the e-invoicing / payroll SOAP service",
+      "MinSalud or government-published PILA API/SFTP/web service - none found; the statute routes the employer through a private operator",
+      "Asofondos or fund-published cesantias web service - none found; two independent operator manuals describe browser file upload",
+      "SFTP anywhere in the Colombian payroll statutory landscape - none found"
+    ]
+  },
+
+  "open_questions": [
+    "Whether any licensed PILA operador besides ARUS/SuAporte offers a contractual API, and what the ARUS 'APIS PILA' catalogue actually contains - the developer portal renders no public content. Closeable only with an operator commercial contact, and only worth doing once the client's operator is fixed.",
+    "Whether DIAN publishes a standalone XSD for Formato 2276 v4 in the reporting-year prevalidador release, or whether the prevalidador remains the only validator. Affects 04-reports-spec fidelity, not the integration verdict."
+  ],
+
+  "sources": [
+    {"title": "DIAN WcfDianCustomerServices WSDL (production)", "url": "https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl", "type": "primary", "retrieved": "2026-09-04"},
+    {"title": "DIAN WcfDianCustomerServices WSDL (habilitacion)", "url": "https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl", "type": "primary", "retrieved": "2026-09-04"},
+    {"title": "DIAN Caja de Herramientas Nomina Electronica V1-0 (annex + XSD v1.0.6 + UBL/XAdES + samples)", "url": "https://www.dian.gov.co/impuestos/factura-electronica/Documents/Caja-de-Herramientas-Nomina-Electronica-V1-0.zip", "type": "primary", "retrieved": "2026-09-04"},
+    {"title": "DIAN micrositio - documentacion tecnica soporte de pago de nomina electronica", "url": "https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/documentacion-tecnica-soporte-de-pago-nomina-electronica/", "type": "primary", "retrieved": "2026-09-04"},
+    {"title": "Resolucion DIAN 000013 de 11 Feb 2021 and Anexo Tecnico v1.0 (269 pp)", "url": "https://www.dian.gov.co/normatividad/Normatividad/Resoluci%C3%B3n%20000013%20de%2011-02-2021.pdf", "type": "primary", "retrieved": "prior pass, extracted to _txt/ne_anexo.txt"},
+    {"title": "Resolucion DIAN 000227 de 23 Sep 2025 - Resolucion Unica, Cap. 12 arts. 1.3.12.1-1.3.12.5", "url": "https://www.dian.gov.co/normatividad/Paginas/ResolucionUnica.aspx", "type": "primary", "retrieved": "prior pass, extracted to _txt/res227.txt"},
+    {"title": "Resolucion MSPS 2388 de 2016 and Anexo Tecnico 2 (PILA layouts)", "url": "https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-2388-2016.pdf", "type": "primary", "retrieved": "prior pass, extracted to _txt/pila_anexo2.txt"},
+    {"title": "ACH Colombia S.A. - SOI instructivo cesantias DDS-DES-INS-008 v2", "url": "https://www.nuevosoi.com.co/", "type": "primary", "retrieved": "prior pass, extracted to _txt/soi_cesantias.txt"},
+    {"title": "Simple S.A. - Manual Cesantias ss. 3.1-3.2", "url": "https://www.pagosimple.com/", "type": "primary", "retrieved": "prior pass, extracted to _txt/pagosimple_cesantias.txt"},
+    {"title": "DIAN Muisca - Form 350 entry point", "url": "https://muisca.dian.gov.co/WebDilIngresoFormReteFuente350/", "type": "primary", "retrieved": "2026-09-04"},
+    {"title": "DIAN - solucion gratuita de nomina electronica", "url": "https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/solucion-gratuita-de-nomina-electronica/", "type": "primary", "retrieved": "2026-09-04"},
+    {"title": "ARUS / Enlace Operativo - PILA empresa, 'APIS PILA' section", "url": "https://enlace.com.co/pila-empresa/", "type": "commercial", "retrieved": "2026-09-04"},
+    {"title": "ARUS / SuAporte - Portal Desarrolladores APIS PILA (no public catalogue)", "url": "https://www.suaporte.com.co/portal-apis/", "type": "commercial", "retrieved": "2026-09-04"},
+    {"title": "CO-CCG-001 v1.0 Module 10.1 / 10.2", "url": "CO-compliance/01-ccg/CO-CCG-001-v1.0.docx", "type": "internal", "retrieved": "2026-09-04"},
+    {"title": "CO scope_manifest.json v1.0", "url": "CO-compliance/scope_manifest.json", "type": "internal", "retrieved": "2026-09-04"}
+  ]
+}

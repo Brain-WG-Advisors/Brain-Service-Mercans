@@ -1,0 +1,76 @@
+{
+ "spec": "CO-PILA-003",
+ "map": "04-output/final-prep/CO-PILA-003-arl-map.json",
+ "verified_on": "2026-10-21",
+ "verdict": "FAIL as written - apply required_fixes, then PASS (the legal rule itself is confirmed; one citation is misattributed and two are imprecise)",
+ "checks": [
+  {
+   "id": 1,
+   "item": "Decreto 1072 de 2015 art. 2.2.4.2.1.6",
+   "result": "CONFIRMED with precision fix",
+   "source": "raw/docs/oficiais/CO/2026-10-13-Decreto-1072-2015-FuncionPublica.html (Gestor Normativo, Funcion Publica)",
+   "quote": "ARTICULO 2.2.4.2.1.6. Contenido del formulario de novedades. Se consideran novedades: ... 1.2. Incapacidad del trabajador; 1.3. Vacaciones de un trabajador; 1.4. Licencias y suspensiones del trabajo, no remuneradas; ... 1.6. Egreso de un trabajador; ... Durante el periodo de duracion de la novedad no se causan cotizaciones a cargo del empleador, al Sistema General de Riesgos Laborales, por las contempladas en los numerales 1.2., 1.3., 1.4 y 1.6., de este articulo. (Decreto 1772 de 1994, art. 19; modificado por el Decreto 1528 de 2015, art. 1)",
+   "cite_as": "Decreto 1072 de 2015 art. 2.2.4.2.1.6 numeral 1.3 and final paragraph",
+   "note": "Covers vacation (1.3) only; remunerated leave (L) is NOT listed (1.4 is unpaid leave), so ARL stays due on L records. Maternity/paternity leave (LMA) is not named either - the pre-existing LMA clause cites this article although LMA is only arguably 1.2 (incapacity); outside this edit, flag for OPEN-POINTS."
+  },
+  {
+   "id": 2,
+   "item": "AT2 v30 §2.1.2.3.13 campo 38 (p.147)",
+   "result": "CONFIRMED",
+   "quote": "La sumatoria de los dias a reportar en el Sistema General de Riesgos Laborales de cada cotizante debe corresponder a 30 dias ... Cuando en los campos 24 SLN, 25 IGE, 26 LMA, 27 VAC-LR del registro tipo 2 se ha marcado X se reportara el numero de dias que duro la novedad.",
+   "note": "Exact reading: the VAC-LR record reports the days of the novelty and all records sum to 30. The separate record per IBC-affecting novelty is §2.1.2.2 b (p.103), not §2.1.2.3.13. For C5, §2.1.2.3.13 covers campo 38 only (pension/health days: §2.1.2.3.11/.12, which state the 30-day sum but not the VAC-LR rule)."
+  },
+  {
+   "id": "2b",
+   "item": "AT2 v30 p.47 validation of campo 44",
+   "result": "MISATTRIBUTED",
+   "quote": "b. Campo 44 ... 'IBC riesgos laborales' debe corresponder al IBC reportado en los campos 42 y 43 a excepcion cuando se presenta novedad de vacaciones, licencia no remunerada, licencia de maternidad, incapacidad por enfermedad general o incapacidad por riesgos laborales.",
+   "note": "This list (a-f, p.46-47) applies ONLY to 'T. Planilla empleados entidad beneficiaria del Sistema General de Participacion' (cotizante 47, public health entities) - p.46: 'Cuando se utilice este tipo de planilla el aportante debera registrar adicionalmente...'. It is not a general campo 44 validation and does not apply to PMI (planilla E). It also does not say 'differs'; it says 'must equal ... except'."
+  },
+  {
+   "id": "2c",
+   "item": "Does AT2 state the ARL tarifa/value on the VAC-LR record?",
+   "result": "NO",
+   "note": "No AT2 v30 passage gives the campo 44 / campo 61 / campo 63 value for a VAC record. Campo 44 (p.~91): 'Obligatorio. Lo suministra el aportante.' §2.1.2.3.25 campo 61: 'Solo se permite 0, si para el tipo de cotizante ... no es obligatorio cotizar al SGRL'; §2.1.2.3.27 campo 63 = campo 44 x campo 61. So AT2 alone neither supports nor fixes how the zero contribution is expressed (IBC 0 vs tarifa 0); the spec must not imply a value. Do not add one without an operator/MinSalud source -> OPEN-POINTS."
+  },
+  {
+   "id": 3,
+   "item": "Consejo de Estado S4 exp. 25958 of 2022",
+   "result": "CONFIRMED (as a quotation of an earlier ruling)",
+   "source": "raw/docs/oficiais/CO/2026-10-22-CE-S4-25958-2022-CRC-normograma.htm",
+   "quote": "cuando las vacaciones son disfrutadas por el trabajador: i) se deben realizar los pagos a los subsistemas de salud y pension, para lo cual debe observarse el IBC anterior al inicio del descanso, ii) no se hacen aportes a la ARL ante la ausencia de riesgo asegurable (literal c) del articulo 19 del Decreto 1772 de 1994) y iii) en el caso de aportes parafiscales, la suma pagada ... se incluye en la base de liquidacion",
+   "note": "The passage quotes exp. 24735 of 26-08-2021 (C.P. Carvajal Basto); citing 25958 of 2022 is correct and consistent with Population Rules C4."
+  },
+  {
+   "id": 4,
+   "item": "Mechanical checks",
+   "result": "PASS",
+   "detail": [
+    "'current' equals live cell for PILA Spec!M110 and Population Rules!C5 (openpyxl, exact match)",
+    "Only the described fragment changes: M110 replaces the clause 'do not reduce the ARL day count (T2R2-038) because they are paid' and keeps the LMA clause; C5 replaces 'do not reduce them at all because they are paid'",
+    "scripts/make_final.py WORDS regexes run on both proposed texts: 0 hits; no masked tokens; no formulas",
+    "No duplicated clause; Decreto 1072 cited twice in M110 (vacation and LMA) - acceptable but could be merged",
+    "Consistent with M111/M112 (cash vacation excluded from pension/health/ARL IBC; paid rest days in CCF/parafiscal bases) and Population Rules C4 (CE 25958 for enjoyed vacation)"
+   ]
+  }
+ ],
+ "required_fixes": [
+  "M110: delete 'which is why the occupational-risk IBC (campo 44) differs from the pension and health IBC on that record (AT2 v30, validation of campo 44)' - that validation belongs to planilla T (p.46-47) only, and AT2 does not say how the ARL zero is expressed on a VAC record. If the zero-contribution mechanics (campo 44 vs campo 61) must be specified, take it to OPEN-POINTS until a primary source is found.",
+  "M110 and C5: cite 'Decreto 1072 de 2015 art. 2.2.4.2.1.6 numeral 1.3' and limit the no-ARL rule to enjoyed vacation (X); remunerated leave (L) stays ARL-contributory. Suggested M110 middle: 'Vacation and paid-leave (VAC-LR) days are reported on their own detail record (AT2 v30 §2.1.2.2 b) with the number of days of the change event in the ARL day count (T2R2-038); the days of all records add up to 30 (AT2 v30 §2.1.2.3.13). No occupational-risk contribution is due for enjoyed vacation (VAC-LR = X) (Decreto 1072 de 2015 art. 2.2.4.2.1.6 numeral 1.3; Consejo de Estado, Seccion Cuarta, exp. 25958 of 2022); remunerated leave (VAC-LR = L) remains contributory.'",
+  "C5: cite 'AT2 v30 §2.1.2.3.11 to §2.1.2.3.13' for the day counters (not §2.1.2.3.13 alone), and 'numeral 1.3' for Decreto 1072.",
+  "Not a blocker for this map (pre-existing text): the LMA clause cites art. 2.2.4.2.1.6, which does not name maternity/paternity leave; record in OPEN-POINTS for a primary source."
+ ],
+ "second_pass": {
+  "verdict": "PASS",
+  "checks": [
+   "'current' equals live cells M110 and C5 (exact match)",
+   "Proposed M110 and C5 match the first-pass required_fixes wording; campo 44 / planilla T clause removed; §2.1.2.2 b, §2.1.2.3.13, §2.1.2.3.11 to §2.1.2.3.13 and numeral 1.3 cited correctly; § and ó encoded correctly (U+00A7, U+00F3)",
+   "Sentence flow reads correctly with the 'Same floor and ceiling' opener and the pre-existing LMA clause; C5 reads correctly with SLN/IGE/IRL clauses",
+   "make_final.py WORDS: 0 hits on both; no duplicate clause (art. 2.2.4.2.1.6 appears twice in M110 for two distinct rules: vacation numeral 1.3 and LMA)"
+  ],
+  "required_fixes": [],
+  "non_blocking": [
+   "The pre-existing LMA clause still cites art. 2.2.4.2.1.6 without a numeral; the article does not name maternity/paternity leave. Keep it in OPEN-POINTS for a primary source (outside this map)."
+  ]
+ }
+}

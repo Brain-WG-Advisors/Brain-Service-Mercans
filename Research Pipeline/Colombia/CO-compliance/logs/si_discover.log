@@ -1,0 +1,30 @@
+Done. `integration-landscape.json` written and validated against the pipeline's STAGE 6 consumer logic.
+
+## Verdict: `HAS_INTEGRATIONS` — but only just
+
+Colombia has **exactly one** genuine system-to-system statutory channel. 3 of 4 authority channels and 5 of 6 in-scope filings are manual.
+
+| Authority | Integration | Channel | Directions |
+|---|---|---|---|
+| **DIAN-NE** | **yes** | SOAP 1.2 `SendNominaSync` | outbound + inbound |
+| DIAN-MUISCA | no | portal round-trip (IFE) | outbound |
+| PILA-OI | no | private-operator portal upload | outbound + inbound |
+| FONDOS-CESANTIAS | no | private-operator portal upload | outbound + inbound |
+
+**Live-verified, not inferred.** Both WSDLs returned HTTP 200 unauthenticated and both declare `wsdl:operation name="SendNominaSync"` — production (`vpfe.dian.gov.co`, 61,719 bytes) and habilitación (`vpfe-hab.dian.gov.co`, 61,727 bytes). The DIAN toolkit ZIP downloaded at 5,528,509 bytes containing XSD **v1.0.6** for both `NominaIndividual` and `NominaIndividualDeAjuste`, the UBL 2.1/XAdES schema set, two sample XMLs and the 269-page annex. DIAN-NE is **BUILD-READY with zero artefact gaps** — no login, no certificate, no CAPTCHA anywhere in the artefact path. I did not call the live service endpoints.
+
+**The judgement call you should look at.** ARUS/Enlace Operativo markets "APIS PILA" and runs a developer portal at `suaporte.com.co/portal-apis/`. I fetched it — it renders a welcome shell with no catalogue, no endpoints, no OpenAPI/WSDL. So it is a *private commercial* offering from one intermediary of seven, with no public spec and no statutory standing. I scored PILA `integration: false` and recorded the finding in a `commercial_api_caveat` field rather than dropping it. Marking it true would have generated a runbook nobody can build. It is worth revisiting only once the client's operator is fixed.
+
+**Three things worth flagging:**
+
+1. **The agent definition file does not exist.** `.claude/agents/si-discovery.md` is absent, as is `shared/si-runbook/` (and `si_scope_check.py`). I reconstructed the schema from the only authoritative consumer — STAGE 6 of `mercans_pipeline_v2_9.sh`, which reads top-level `verdict` and iterates `authorities` on `integration is True` + non-empty `code`, plus the five fields its index prompt requires. Recorded in `_schema_note`. **STAGE 6b will also fail to run its scope check** until `shared/si-runbook` is installed.
+
+2. **I split DIAN into two rows.** One legal entity, two irreconcilable postures — the payroll web service is M2M, while F350/F220/2276 are portal round-trips gated by the IFE, a signature instrument bound to a *natural person* and exercised interactively. That is the structural reason no M2M exists there. A single DIAN yes/no would have been misleading.
+
+3. **A defect in DIAN's own annex.** Section 9.7 bullets `Metodo: SendBillSync` while the surrounding prose, the request envelope and both WSDLs say `SendNominaSync`. The WSDL is authoritative; noted so the runbook stage doesn't inherit the error.
+
+No runbooks written, as instructed. Next stage will branch to the runbook path and create `03-statutory-integrations/DIAN-NE/`.
+
+Sources: [DIAN production WSDL](https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl) · [habilitación WSDL](https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc?singleWsdl) · [Caja de Herramientas](https://www.dian.gov.co/impuestos/factura-electronica/Documents/Caja-de-Herramientas-Nomina-Electronica-V1-0.zip) · [DIAN micrositio](https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/documentacion-tecnica-soporte-de-pago-nomina-electronica/) · [Res. MSPS 2388/2016](https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-2388-2016.pdf) · [Muisca F350](https://muisca.dian.gov.co/WebDilIngresoFormReteFuente350/) · [ARUS PILA empresa](https://enlace.com.co/pila-empresa/) · [SuAporte dev portal](https://www.suaporte.com.co/portal-apis/)
+
+I have not written a memory entry for this — `MEMORY.md` is already flagged over its 24.4KB limit, so adding to it would push more of the index out of context. Say the word if you want it added anyway, or I can compress the existing index first.

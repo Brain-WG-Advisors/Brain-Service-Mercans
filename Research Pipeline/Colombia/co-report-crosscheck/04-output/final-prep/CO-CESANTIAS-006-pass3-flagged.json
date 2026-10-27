@@ -1,0 +1,147 @@
+{
+ "spec": "CO-CESANTIAS-006",
+ "final": "05-final/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx",
+ "flagged": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "A24",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "- Channel: online_form AND file_upload (fixed-width TXT / XLS 97-2003 / CSV) | Portal: a licensed information operator - ACH Colombia S.A. (SOI), www.nuevosoi.com.co, and Simple S.A., www.pagosimple.com; Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla offer the same service | Source: SOI instruction guide DDS-DES-INS-008 v2 and Simple S.A. 'Manual Severance savings' ss. 3.1-3.2 | The 258-position layout is the one published by Simple S.A.; whether another operator accepts that same layout or imposes its own variant is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A30",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "- integration_type = BOTH (scope_manifest). OUTBOUND: the annual return, keyed or uploaded. INBOUND: CO-IN-SEVERANCE SAVINGS-CONFIRMATION, the deposit confirmation evidencing compliance with the February deadline. Both directions are modelled on Sheet 4 - the outbound record as T01-T20, the inbound values as E10, E11, E90, E91 and E93."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C20",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "Public-sector only; PILA return types T and F are descoped in scope_manifest."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A21",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Non-executive director paid fees only (junta directiva)",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A36",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "A declared record count or control total inside the file",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A42",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Nil period still filed",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M18",
+   "field_id": "T03",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "ALPHABETIC two-character code, validated against the list printed in the layout: CC, CE, TI, PA, CD, SC, PE - and, in the XLS variant of the SAME manual, also PT (Permiso temporal). THIS IS NOT THE PILA CODE SET: PILA Record Tipo 2 campo 3 uses the same two-letter mnemonics but a different admitted list, and Form 220 / Format 2276 use DIAN NUMERIC document-type codes. The engine must hold one document type and three mappers. Note the SOI-documented length trap: where the document is a Special permanence permit the NUMBER (T04) must be exactly 15 digits. Source: Employee.Document_Type, held as its own master-data attribute and mapped to the severance-savings code. Where the HR master data has no document-type field and holds the identity number in document-specific fields ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'), the field-to-code mapping is a configuration parameter supplied at implementation ('Citizenship Card ID' -> CC and 'Indentity Card for Foreigners' -> CE; 'Identity Card' and 'National ID' are assigned in the same mapping table). The type must not be inferred from which identity field is populated, because more than one field, or none, may be filled for an employee."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M25",
+   "field_id": "T09",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Campo mandatory, validated against the funds registered in the operator's system. The published layout admits exactly FIVE values and prints them: 02 Proteccion, 03 Porvenir, 10 Colfondos, 15 Fondo Nacional del Ahorro (FNA), 19 Old Mutual (antes Skandia). STALE LABEL, LIVE CODE: code 19's printed label is out of date - the entity trades as Skandia again (Skandia Pension fund administrator y Severance savings S.A., authorised by the Financial Superintendence in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024). Send the CODE, not the name. The fund is the EMPLOYEE'S choice under Law 50 of 1990 art. 99 num. 3 and is master data on the employee, not a company default. Source: Master Data field 'Severance Fund Name', which holds the fund as a NAME and not as the 2-digit operator code; a name-to-code mapping table is therefore required and is a configuration parameter supplied at implementation (every spelling in use for a fund mapped to one of the five codes). Per Population Rules an empty fund must be escalated, never defaulted. Fund presence must not be used to select the population: an integral-salary employee may also carry a fund name and is still excluded."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M32",
+   "field_id": "T15",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "The employee's residential address, 50 positions, left-aligned and space-filled. This is the AFFILIATE'S address for the fund's own statutory communications with its member, which is why the layout asks for the residence and not the work address - contrast electronic payroll and PILA, which carry the WORK municipality. Do not send the work address; the fund will post the member's statements to it. Composite Key: the affiliate's domicile is carried across THREE fields that must describe one place - T15 the free-text street address, T16 the two-digit DANE department and T17 the three-digit DANE municipality. Within T15 itself, Colombian addresses decompose as via type (CALLE / CARRERA / DIAGONAL / TRANSVERSAL), via number, the NO separator, the cross-via number, the hyphen, the door number and any complement (APTO / TORRE / INT). Abbreviate by a documented rule where the whole exceeds 50 positions - never cut mid-token, because the fund cannot repair a truncated address. Source: Master Data fields 'Address Line 1' and 'Address Line 2' hold the residential address; concatenate Line 1 + space + Line 2 before applying the 50-position rule. Do not use 'Work location' or 'Personal Subarea', which are work places. Rule to be set at implementation: the content of T15, T16 and T17 for an affiliate whose residence is abroad (Master Data field 'Country' other than CO), since a foreign address has no DANE department or municipality code."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M33",
+   "field_id": "T16",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Two positions, per the DANE list. The DANE divipola code is hierarchical: the two-digit department prefix plus the three-digit municipality suffix form the five-digit municipality code (11 + 001 = 11001, Bogota D.C.). Composite Key: T16 and T17 must be written as the two halves of ONE divipola code, never picked from two different lists. Source: Master Data field 'Employee Address - Department', which holds a 3-letter alphabetic abbreviation (DC, ANT, CUN, VAC, ATL, CAL, QUI, RIS, NAR, NSA, MAG, TOL, BOL, SAN, BOY), not the 2-digit DANE code. Either capture the DANE code in master data or maintain an abbreviation -> DANE department mapping table, a configuration parameter supplied at implementation. Foreign provinces (abbreviations such as ON, VD, JAL) have no DANE code - see T15."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M35",
+   "field_id": "T18",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "'Solo admite 7 numeros' - exactly seven digits, so the field cannot carry a mobile number (10 digits in Colombia) nor a number written with the area code. Where only a mobile is held, the field must be zero- or space-filled rather than truncated; a truncated mobile is a wrong-number record on the fund's affiliate file. Source: Master Data field 'Phone number', which holds one undifferentiated number per employee with no landline/mobile type, normally a country-code-prefixed mobile of 12 digits. Unless a separate landline is captured, this field is zero-filled; never derive it by truncating the stored number. Rule to be set at implementation: how a landline held in the current 10-digit national numbering format is reduced to the 7 positions of this field."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M37",
+   "field_id": "T20",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Format AAAA-MM-DD, ten positions INCLUDING the two hyphens - note that the published layout types this field N while its content is not purely numeric, so a strict numeric writer would emit 20190301 and shift nothing (the field is last) but would still fail the format validation. Composite Key: positions 249-252 year, 253 hyphen, 254-255 month, 256 hyphen, 257-258 day. THIS IS THE HIRE DATE OF THE CONTRACT, NOT THE START OF THE ACCRUAL PERIOD: for an employee hired in 2019 and reported for accrual year 2026 the value is still 2019-03-01, while T10 carries 360 days. Sending the 1 January of the accrual year here is a common defect and it corrupts the fund's seniority record. Source: Master Data field 'Hire Date' (DD-MM-YYYY, converted to AAAA-MM-DD), which is the hire date of the CURRENT contract per Population Rules ('for a rehired employee, use the hire date of the CURRENT contract'). Do not use 'Adjusted Service Date' (YYYY-MM-DD, a recognised-seniority date) or 'Original Hire Date' (DD-MM-YYYY, the first hire date of a rehired employee), both of which can differ from the current-contract hire date. Rule to be set at implementation: which date the fund expects for an employee transferred within the group."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B4",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "ACH Colombia S.A. (SOI) - www.nuevosoi.com.co, instruction guide DDS-DES-INS-008 v2. Simple S.A. - www.pagosimple.com, 'Manual Severance savings'. The same service is offered by Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla, each of which may impose an operator-specific layout; this Spec is written to the SOI and Simple S.A. layouts, and the layout of any other operator is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B7",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "No XSD, no cahier des charges and no XML of any kind exists for this filing. The word XML must not appear against CO-CESANTIAS-006. scope_manifest records the format as CSV; CSV is accepted by SOI, but the two layouts published at field level are the fixed-width TXT and the XLS 97-2003, and this Spec is written to those."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A25",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "    configuration parameter supplied at implementation. The ACH Colombia (SOI)"
+  }
+ ]
+}

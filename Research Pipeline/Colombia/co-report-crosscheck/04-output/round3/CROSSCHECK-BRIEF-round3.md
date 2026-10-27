@@ -1,0 +1,34 @@
+# Round 3 cross-check brief (17 Oct 2026)
+
+Round 3 checks the FINAL specs in `05-final/` (version 1.0, the files handed to development) against 8 new client files received on 16 Oct 2026, masked in `03-client-reports-masked/round3/`. Everything is written under `04-output/round3/`; nothing from rounds 1-2 is overwritten. No spec is edited in this round: changes are proposed as change maps for Wallisson's approval.
+
+## Inputs
+- Spec inventories of the finals: `04-output/round3/specs/<SPEC>.json` (one record per row of the spec sheet, all 21 columns, `_row` = Excel row). The workbook itself: `05-final/<SPEC>-...-Spec.xlsx` (sheets: the spec sheet, Field Options, Population Rules, Payroll Scope Summary, Example Analysis, Sample File, Version Control, ...).
+- Round-3 masked files and their profiles: `03-client-reports-masked/round3/*.xlsx`, `04-output/round3/profiles/*.json` (sheets, header row, columns, types, 3 masked examples).
+- Earlier masked files (read-only, for comparison): `03-client-reports-masked/*.xlsx` (round 1: Accumulated Report = per-employee, per-wage-type monthly accumulations of the year; Master Data; Base of Withholding run REF-P201-065; Vertical G2N Dynamic run REF-P201-090; Severance Massive Calculation; Leave Absence; IBC detail) and `03-client-reports-masked/round2/*.xlsx` (G2N Monthly = run REF-P201-090 again; Monthly_fixed = Nomina Electronica segment file of Sep-2026; Validado ConsolidadoCCT = client validation + Mapping WT -> NE element + Acumulados; Formulario 220 = the client's 220 working file).
+- Open points file (internal): `04-output/OPEN-POINTS-2026-10-16.md`. Earlier cross-checks: `04-output/<SPEC>-crosscheck.json`, `04-output/round2/<SPEC>-crosscheck-r2.json`.
+
+## Round-3 files (8 distinct; 3 identical copies were discarded by hash)
+| Masked file | What it is | Used for |
+|---|---|---|
+| `1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30 (1) - 16oct.xlsx` | Base of Withholding, 261 employees, generated 2026-09-16, header row 12 (same layout as the round-1 file; a different payroll run id) | Form 350 (CO-DIAN-002) |
+| `1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30 - Weekly (1) - 16oct.xlsx` | Base of Withholding of the WEEKLY pay group, 132 employees, generated 2026-09-18 | Form 350 |
+| `Gross to net PMI 2026-09-01-2026-09-30 - 16oct.xlsx` | Gross to net, 454 employees, 43 columns, generated 2026-09-18 (a run with its own payroll id; see cell B7) | Form 350; NE monthly |
+| `Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx` | Gross to net, 261 employees, 137 columns, generated 2026-09-16 (see B7 for the run id) | Form 350; NE monthly |
+| `Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx` | Gross to net October 2026, 2 employees (generated 2026-10-06) | confirm / contradict spec rules only |
+| `Formato 2276 - Preliminar - Envio - 16oct.xlsx` | The client's PRELIMINARY Formato 2276 file (DIAN Res. 000162/2023 Anexo T3.45 v4 layout), 1035 rows, columns A-AS = the 45 attributes of the annex in order; identity columns C-H masked, codes I-K kept, amounts kept | CO-DIAN-005 field by field |
+| `Liquidacion termination 1 - 16oct.xlsx`, `Liquidacion termination 2 - 16oct.xlsx` | Two final settlements (liquidación definitiva) of employees who left; sheets: `Liquidacion` (the settlement form: identification block rows 1-10 masked, dates, days, concept rows with '<WT code> - <label>' and amounts in column J, deductions incl. '2552 - RETENCION EN LA FUENTE'), `Acumulados- Prestaciones`, `Accruals`, `Net Mes - Salario` (the employee's G2N transposed: column A labels, B amounts; cols E/F and I/J side computations), `Naturaleza conceptos` (the client's wage-type nature table: WT code, description, nature flags for Retención / Prima / Cesantías / Indemnización), `Acumulados` (per-WT monthly accumulations of the leaver), `Sheet1` (file 1 only) | cesantías leaver rule (CO-CESANTIAS-006), Form 220 casilla 47 (CO-DIAN-004), PILA RET novelty (CO-PILA-003), NE termination elements (CO-DIAN-001), Form 350 casilla 93 |
+
+Identical copies discarded: `... Base of Withholding ... - 16oct.xlsx` (= round-1 file), `... Weekly - 16oct.xlsx` (= `Weekly (1)`), `Gross to net ... Monthly - 16oct.xlsx` (= round-2 Monthly file).
+
+## Masking tokens (treat as masked, never quote or reason about the underlying person)
+NAME_nnnn, ADDRESS_nnnn, digit-substituted IDs / accounts (same length as the original, consistent across files), usernnnn@masked.example, 1900-01-01, ENTID_n, SHORTID_n, SHORTDOC_n, POSTAL_n, MASKED_TEXT (a text cell of the settlement forms that was not a concept label). In the settlement workbooks every text that is not a payroll label was masked; job titles, pay-group names and free-text observations may therefore read MASKED_TEXT. Masked employee IDs must not appear in any proposed spec text. If a masked file still shows a person's name, ID, account, e-mail, phone or address, STOP and report file / sheet / column without quoting the value.
+
+## Rules (same as rounds 1-2)
+- The spec is the MAPPING of the report for the development team; the Field Explanation is its most important column. Judge DATA COVERAGE and MEANING, not layout.
+- Verdict per spec field: Aligned / Explanation to improve / Format mismatch / Conflict / Not evidenced. Where the client file and the spec disagree on a statutory rule, record a CONFLICT and cite the official source the spec relies on; never "fix" the spec to match the client. The client's 2276 file is PRELIMINARY: a spec change is proposed only when the official annex (DIAN Res. 000162 de 2023, Anexo Técnico Formato 2276 v4, as amended) supports it; a client error is recorded as a finding, not replicated.
+- Never invent a column, code, field or mapping. Not in the data = "Not evidenced".
+- Never open `02-client-reports-raw/` or `99-local-only/`.
+- The finals already carry every decision of 15-16 Oct 2026 (see each Version Control sheet and `04-output/OPEN-POINTS-2026-10-16.md`). Do not re-open decided points; if the new data contradicts a decided point, say so explicitly as a NEW finding with the evidence.
+- Output JSON schemas: cross-check `{"spec","round":3,"fields":[{"id","name","verdict","report_evidence":[{"file","sheet","column","example_masked"}],"finding","proposed_explanation","official_source"}],"uncovered_report_columns":[{"file","sheet","column","classification","note"}],"summary":{...}}`; change map `{"spec","edits":[{"sheet","cell","row","column_letter","field_id","field_name","current","proposed","reason","basis"}],"not_applied":[...],"summary":"..."}` where `current` is the EXACT current text read from the final workbook in `05-final/` (read it with openpyxl, do not retype).
+- English everywhere; write under `04-output/round3/`; do not edit any spec or any masked file.

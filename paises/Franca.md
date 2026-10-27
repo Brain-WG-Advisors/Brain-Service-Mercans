@@ -51,7 +51,8 @@
 |---|---|---|---|---|
 | CCG FR-CCG-001 (13 módulos; 136/136 perguntas) | v1.0 | ~2026-08-26 | 01-ccg.md | QA PASS no formato |
 | WTC FR-WTC-001 (374 WTs = 300 globais + 74 FR-0xx; 6 abas) | v1.0 | 2026-08-27 | 02-wtc.md | "Draft" no Version Control |
-| DD FR-DD-001 (25 ID + 164 campos de país; 54 mappers / 303 códigos) | v1.1 (vigente: maior versão) | 2026-08-27 | 05-data-dictionary.md | Released. Histórico: arquivo nomeado v1.0 (m-2 do QA) |
+| DD FR-DD-001 (25 ID + 164 campos de país; 54 mappers / 303 códigos) | v1.1 (histórico até 2026-10-06) | 2026-08-27 | 05-data-dictionary.md | Released. Histórico: arquivo nomeado v1.0 (m-2 do QA). Drive: `02- DD/Archived/FR-DD-001-v1.1.xlsx` desde 2026-10-26 |
+| DD FR-DD-001 (pacote reemitido; numeração reiniciada) | v1.0 (vigente a partir de 2026-10-06; exceção à regra 8: número menor, emissão mais nova) | 2026-10-06 | `mercans-pipeline/FR-compliance/05-data-dictionary/FR-DD-001-v1.0.xlsx` (md5 889f66d2…) = `fr-research-validation/final/` | Promovido em 09/10 (PROMOTION-LOG-2026-10-09). Drive 2026-10-26: Google Sheet `1bQcuzfLgHznJRMB_lFe2JloJyxEHEui9o85Pr3i4dLg` na raiz de `02- DD`, linkado no Monday (Compliance Artifacts › France › DD - AI); gsheet anterior (1oY8VZuz…) e o xlsx em `Archived` |
 | Report Specs (15 workbooks: 10 outbound, 5 inbound) | v1.1 (vigente: maior versão) | 2026-08-27 | — | 15/15 no formato; anotação F-1 a corrigir. Histórico: v1.0 |
 | SIR FR-SIR-INDEX-001 + integration landscape (5 autoridades, 3 M2M) | v1.0 | 2026-08-27 | 03-sir.md | HAS_INTEGRATIONS |
 | Runbooks NETENT-DSN, URSSAF-DPAE, DGFIP-EDI (7 fases) | — | 2026-08-27 | 03-sir.md | BUILD-READY, com itens bloqueados/não verificados |
@@ -110,6 +111,7 @@
 - [ ] [INCERTO] CCG M4.2/Ex. 6 usa 151,67 mas o payslip manda 151,6667
 - [ ] [INCERTO] CCG M10 cita "FR-NSSO / FR-FIN series" (resíduo da BE?); crítica cita WTC 378/DD 173 campos vs entregue 374/189
 - [ ] Prazo do 2502-SD: 31/jan vs 15/jan — (03-sir.md)
+- [ ] FR-CCG-001 v1.0 (pacote emitido em 06/10/2026), Mod. 12 Ex. 1: 3 números digitados que não fecham na conta. Termo interno impresso 0,875970 (correto 0,875870); 0,437985^1,75 impresso 0,235942 (correto 0,235805; o C final 0,1091 está certo); 2.915,50 × 13,00 % impresso 379,01 (correto 379,02, pela regra half-up do próprio CCG). O C38 reprova a CCG por isso, e um novo Stage 9 da França para nesse ponto. Decisão do usuário (17/10/2026): só registrar, sem v1.1 — Pipeline — (`revisoes/2026-10-17-matriz-cobertura-FR-pipeline.md`; `~/mercans-pipeline/IMPROVEMENT_LOG.md` 2026-10-07 Fase 2)
 
 ## Correções ligadas
 - [[correcoes]]: QA das 12:21 deu 486/562 (86,5%); correto 720/984 (73,2%)

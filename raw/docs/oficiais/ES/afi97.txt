@@ -1,0 +1,2482 @@
+Sistema RED. Instrucciones Técnicas                               Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+                 MENSAJE DE AFILIACIÓN (AFI)
+
+1. DESCRIPCIÓN GENERAL
+
+     El mensaje .AFI es el mensaje mediante el cual se envían a la Seguridad Social los
+     documentos de altas, bajas, variaciones de datos y consultas de trabajadores y
+     empresas al Fichero General de Afiliación.
+
+     Cada mensaje se corresponde con un movimiento realizado al Fichero General de
+     Afiliación, o una solicitud de informe.
+
+     Existe una correspondencia absoluta y no alterada por la normativa vigente, entre
+     documentos de afiliación y mensajes AFI. La empresa estará obligada a incluir tantos
+     mensajes utilizando EDI como partes hubiese producido en el sistema convencional.
+
+     La estructura permite la inclusión en un solo envío EDI de:
+
+          • Agrupación de trabajadores por empresa y acción.
+
+          • Envío de documentación de Altas sucesivas, Bajas, Modificaciones de datos de
+               trabajadores y Consultas de varios tipos a nivel empresa y trabajador.
+
+          • Multi régimen, Multi empresa, Multi Código de Cuenta de Cotización (CCC).
+
+     Los segmentos que constituyen el mensaje AFI son los siguientes:
+
+                   SEGMENTO                          DESCRIPCIÓN          CARÁCTER *
+
+                 EMP         Identificación de EMPresa                            O
+                 RZS         RaZón Social                                         O
+                 EXC         EXplotación Y Clave                                  C
+                 FCE         Fechas de Control de Empresas                        C
+                 PES         Peculiaridades Solicitadas                           C
+                 TRA         TRAbajador                                           C
+                 AYN         Apellidos Y Nombre                                   C
+                 DOM         DOMicilio                                            C
+                 LDD         Localidad Domicilio Decodificado                     C
+                 FAB         Fechas de Alta y Baja                                C
+                 DAM         Datos Asociados al Movimiento                        C
+                 ODL         Otros Datos Laborales                                C
+                 OTD         OTros Datos                                          C
+                 DBA         Datos de Bases Adicionales                           C
+                 DSC         Datos de Subcontratación y Cesión                    C
+                 DJD         Datos Jornadas Diarias                               C
+                 FCT         Fechas de Control de Trabajadores                    C
+                 PIT         Períodos de Incapacidad Temporal                     C
+
+                                                                  * O = Obligatorio C = Condicional
+
+Edición 05/2025                                                   Página 1 de 34
+Sistema RED. Instrucciones Técnicas                                     Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Un mensaje AFI está compuesto por:
+
+   • Segmentos de cabecera, con los datos de la empresa.
+
+   • Segmentos de datos del trabajador.
+
+Los segmentos correspondientes a los trabajadores sólo aparecen si se realizan
+movimientos a nivel de trabajador, y pueden repetirse tantas veces como acciones se
+desee realizar. Las repeticiones se producen según el siguiente diagrama:
+
+                 ID                  NOMBRE                                         O/C R
+
+                 EMP                 Mensaje AFI, Código de Cuenta de Cotización O R
+                 RZS
+                 EXC                                             Cabecera. Empresa
+                 FCE
+                 PES                 Identificación de Empresa                      O      1
+
+                 TRA                 Razón Social                                   O      1
+                 AYN
+                 DOM                 Explotación y claves                           C      1
+                 LDD
+                 FAB                 Fechas de Control de Empresa                   C      1
+                 DAM
+                 ODL                 Peculiaridades Solicitadas                     C      R
+                 OTD
+                 DBA                 Datos trabajador                               C      R
+                 DSC
+                 DJD                 Trabajador                                     O      1
+                 FCT                 Apellidos y Nombre
+                 PIT                 Domicilio                                      C      1
+                                     Localidad Domicilio Decodificado
+                                     Fechas de Alta y Baja                          C      1
+                                     Datos Asociados al movimiento
+                                     Otros Datos Laborales                          C      1
+                                     OTros Datos
+                                     Datos de Bases Adicionales                     O      R *
+                                     Datos de Subcontratación y Cesión
+                                     Datos de Jornadas Diarias                      C      1
+                                     Fechas de Control de Trabajadores
+                                     Periodos de Incapacidad Temporal               C      1
+
+                                                                                    C      1
+
+                                                                                    C      1
+
+                                                                                    C      1
+
+                                                                                    C      1
+
+                                                                                    C      1
+
+                                                                                    C      1
+
+O/C = Obligatorio/Condicional                R = Número de repeticiones. Si R, indeterminadas
+
+* El segmento FAB aparece 2 veces en la modificación de movimientos previos. En el resto de acciones el segmento FAB
+es único.
+
+La respuesta de la Tesorería General de la Seguridad Social que se emite con el
+resultado del procesado de las diferentes acciones se da en fichero formateado (fichero
+FRA).
+
+El resto de respuestas (informes), se emiten en formato texto.
+
+Edición 05/2025                                                                               Página 2 de 34
+Sistema RED. Instrucciones Técnicas                                                                 Mensaje de Afiliación (AFI)
+
+_____________________________________________________________________________________________________________________________ ________________
+
+2. AUTÓMATA
+
+                                          Autómata del Fichero Plano AFI – Versión 9.4
+
+                                                                                FICHERO PLANO
+
+ETI       EMP  RZS  EXC              FCE  PES  TRA  AYN  DOM  LDD  FAB  DAM     ODL            OTD  DBA DSC DJD  FCT  PIT        ETF
+
+                                                                        *
+
+Etiqueta                                               Documento de Afiliación                                                   Etiqueta
+Inicio                                                                                                                           Fin
+               * Primer segmento: movimiento ya consolidado
+
+                Segundo segmento: acción en relación al0m0ov0im0iento anterior
+
+_____________________________________________________________________________________________________________________________ _________________
+Edición 05/2025
+
+                                                                                                                                                                       Página 3 de 34
+Sistema RED. Instrucciones Técnicas                                                       Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+3. FICHERO PLANO
+
+Ref. Seg. Dato Elemento                                 Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                 2.2 de CONCEPTOS COMUNES
+                                                            Form O/C Pos Long Valor NºFor Tabla
+                                                                                                 Comentarios
+
+     ETI Etiquetas de inicio                            O           70                           Etiquetas de identificador de
+                                                                                                 emisor, envío....
+                                                                      3 ETI
+10               Cabecera de segmento                   an..3 O 1
+
+20               Identificador de sintaxis              O
+
+30                       Identificador de sintaxis de   an..4 O 4   4 AFI9                       Identifica el mensaje
+                                                                    1 7
+                         mensaje                                    4 W0xx                       Identifica el programa que lo ha
+                                                                    1 x                          procesado
+40                       Número de versión de sintaxis  n1 O 8                                   Variable en función de la versión de
+                                                                                                 SILTRA.
+                         de mensaje
+
+50                       Identificador de sintaxis de   an..4 O 9
+
+                         proceso
+
+60                       Número de versión de sintaxis  n1 O 13
+
+                         de proceso
+
+70               Emisor del Intercambio                 O
+
+80                       Clave de Autorización          n..8 O 14   8                            Asignado por T.G.S.S. Clave del
+                                                                    8                            despacho
+90               Reservado                              an..8 C 22                               Asignado por el emisor del fichero en el
+                                                                    8                            momento que lo genera.
+100              Fecha/Hora de preparación              O           4                            Ver formatos comunes.
+                                                                    8                            Ver formatos comunes.
+110                      Fecha                          n..8 O 30   3 AFI      4                 Nombre externo del fichero AFI.
+                                                                    1 N        5                 Sufijo o extensión del fichero
+120                      Hora                           n..4 O 38   1                            N = Normal (fijo)
+                                                                                     T-1         Ver tabla
+130              Referencia de control de intercambio an..8 O 42    2                            Nuestra referencia
+                                                                    2
+140              Sufijo                                 an..3 O 50  1                            Asignado por el programa de la TGSS
+                                                                    5
+150              Código de prioridad de procesado       a1 O 53     4
+                                                                    1
+160              Indicador de prueba                    a1 C 54     1
+
+170              Número de identificación de Registro   C
+
+180                      Año                            n..2 C 55
+
+190                      Mes                            n..2 C 57
+
+200                      Serie                          n1 C 59
+
+210                      Número de envío                n..5 C 60
+
+220                      Número de documento dentro     n..4 C 65
+
+                         del envío
+
+230              Reservado TGSS                         an1 C 69
+
+240              Reservado                              an1 C 70
+
+     EMP Identificación de EMPresa                      O           70
+
+300              Cabecera de segmento                   an..3 O 1     3 EMP
+
+310              Código de Cuenta de Cotización a la    O             4
+                                                                      2 1..56
+                 Seguridad Social                                     9
+
+320                      Régimen de la Seguridad Social n..4 O 4               T-2 Ver tabla
+
+                         (RRSS)
+
+330                      Provincia                      n..2 O 8
+
+340                      Número                         n..9 O 10
+
+Edición 05/2025                                                                                  Página 4 de 34
+Sistema RED. Instrucciones Técnicas                                                      Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                2.2 de CONCEPTOS COMUNES
+                                                           Form O/C Pos Long Valor NºFor Tabla
+                                                                                                Comentarios
+
+350              Código de empresario                  C
+
+360                      Tipo de identificación        an1 O 19     1            T-3 Ver tabla
+
+370                      País                          an..3 O 20   3            T-12 Ver tabla
+
+380                      Número de identificación del  an..14 O 23  14                     Ajuste a derecha, relleno a ceros por
+                                                                                           izquierda.
+                         empresario                                                        Libre uso por usuario. Subcif.
+
+390                      Calificador de código de      an..2 C 37   2            T-2 Ver tabla
+
+                         empresario
+
+400              Código de Cuenta de Cotización        C
+
+                 Principal
+
+410                      Régimen de la Seguridad Social n..4 O 39   4
+
+420                      Provincia                     n..2 O 43    2 1..56
+
+430                      Número                        n..9 O 45    9
+
+440              Reservado Recaudación                 an..13 C 54  13
+
+450              Acción                                an..3 C 67   3            T-7 Ver tabla
+
+460              Reservado                             an1 C 70     1
+
+      RZS        RaZón Social                                    O  70        0                 Reservado
+                                                                                    T-8         Ver tabla
+500              Cabecera de segmento                  an..3 O 1      3 RZS
+510              Indicador de Razón social              an1 O 4       1 0..4                    Para acción CTA, número de
+520              Tipo alfabético de empresario          an1 O 5       1                         autorización de la que se desea obtener
+530              Razón social                          an..55 C 6   55                          el Informe de Trabajadores en Alta.
+540              Clave de Autorización                  n..8 C 61     8
+
+550              Reservado                             an..2 C 69     2
+
+     EXC EXplotación y Clave                           C            70                    Obligatorio para el Régimen del
+                                                                                          Mar, excepto colectivo de
+560              Cabecera de segmento                  an..3 O 1     3 EXC                estibadores.
+                                                        an1 O 4      1
+570              Tipo de explotación                   an..40 O 5   40           T-9 Ver tabla
+                                                       an..26 C 45  26
+580              Denominación de la explotación
+
+590              Reservado
+
+     FCE Fechas de Control de Empresas                 C            70
+
+600              Cabecera de segmento                   an3 O 1     3 FCE
+                                                        n..8 O 4
+610              Fecha de inicio                        n..8 O 12   8         4
+                                                        n..8 C 20
+620              Fecha de fin                           n..8 C 28   8         4
+                                                       an..35 C 36
+630              Fecha de inicio nueva                              8         4
+
+640              Fecha de fin nueva                                 8         4
+
+650              Reservado                                          35
+
+Edición 05/2025                                                                                  Página 5 de 34
+Sistema RED. Instrucciones Técnicas                                          Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                 Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                 2.2 de CONCEPTOS COMUNES
+                                                            Form O/C Pos Long Valor NºFor Tabla
+                                                                                                 Comentarios
+
+      PES PEculiaridades Solicitadas                             C  70                Obligatorio para IDC/PL-CCC
+                                                                                      Acotado
+ 750             Cabecera de segmento                   an3 O 1       3 PES
+ 760             Código de peculiaridad uno             n2 C 4        2      T-49
+ 770             Código de peculiaridad dos             n2 C 6        2      T-49
+ 780             Código de peculiaridad tres            n2 C 8        2      T-49
+ 790             Código de peculiaridad cuatro          n2 C 10       2      T-49
+ 800             Código de peculiaridad cinco           n2 C 12       2      T-49
+ 810             Código de peculiaridad seis            n2 C 14       2      T-49
+ 820             Código de peculiaridad siete           n2 C 16       2      T-49
+ 830             Código de peculiaridad ocho            n2 C 18       2      T-49
+ 840             Código de peculiaridad nueve           n2 C 20       2      T-49
+ 850             Código de peculiaridad diez            n2 C 22       2      T-49
+ 860             Código de peculiaridad once            n2 C 24       2      T-49
+ 870             Código de peculiaridad doce            n2 C 26       2      T-49
+ 880             Código de peculiaridad trece           n2 C 28       2      T-49
+ 890             Código de peculiaridad catorce         n2 C 30       2      T-49
+ 900             Código de peculiaridad quince          n2 C 32       2      T-49
+ 910             Código de peculiaridad dieciséis       n2 C 34       2      T-49
+ 920             Código de peculiaridad diecisiete      n2 C 36       2      T-49
+ 930             Código de peculiaridad dieciocho       n2 C 38       2      T-49
+ 940             Código de peculiaridad diecinueve      n2 C 40       2      T-49
+ 950             Código de peculiaridad veinte          n2 C 42       2      T-49
+ 960             Código de peculiaridad veintiuno       n2 C 44       2      T-49
+ 970             Código de peculiaridad veintidós       n2 C 46       2      T-49
+ 980             Código de peculiaridad veintitrés      n2 C 48       2      T-49
+ 990             Código de peculiaridad veinticuatro    n2 C 50       2      T-49
+1000             Código de peculiaridad veinticinco     n2 C 52       2      T-49
+1010             Código de peculiaridad veintiséis      n2 C 54       2      T-49
+1020             Código de peculiaridad veintisiete     n2 C 56       2      T-49
+1030             Código de peculiaridad veintiocho      n2 C 58       2      T-49
+1040             Código de peculiaridad veintinueve     n2 C 60       2      T-49
+1050             Código de peculiaridad treinta         n2 C 62       2      T-49
+1060             Código de peculiaridad treinta y uno   n2 C 64       2      T-49
+1070             Código de peculiaridad treinta y dos   n2 C 66       2      T-49
+1080             Código de peculiaridad treinta y tres  n2 C 68       2      T-49
+1090             Reservado                              an1 C 70      1
+
+Edición 05/2025                                                                                  Página 6 de 34
+Sistema RED. Instrucciones Técnicas                                               Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                 Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                 2.2 de CONCEPTOS COMUNES
+                                                            Form O/C Pos Long Valor NºFor Tabla
+                                                                                                 Comentarios
+
+      TRA TRAbajador                                    C              70
+
+1200             Cabecera de segmento                   an..3 O 1        3 TRA                   Obligatorio para todas las acciones a
+1210             Número de afiliación a la Seguridad                O                            nivel de trabajador excepto para acción
+                 Social (N.A.F.)                                         2 1..56                 AI.
+1220                                                     n..2 O 4      10
+1230                      Provincia                     n..10 O 6                 T-11           Ver tabla
+1240                      Número                                         1        T-12
+1250             Identificador de Persona Física (IPF)              C    3                       Indicativo del país emisor del
+1260                      Tipo de Identificador          an1 O 16      14                        documento. Ver tabla.
+1270                      País                          an..3 C 17       3                       Ajuste a derecha, relleno a ceros por
+1280                      Alfaclave                     an..14 O 20    25                        izquierda.
+1290             Reservado respuesta afiliación         an..3 C 34       3
+1300             Decodificación Código rotura de        an..25 C 37      1        T-12           Reservado Recaudación
+1310             control.                               an..3 C 62       5        T-13           Ver tabla. Necesario para extranjeros
+1320             Nacionalidad                            an1 C 65                                Futuro uso
+                 Indicadores del trabajador             an..5 C 66
+                 Reservado
+
+      AYN Apellidos y Nombre                                      C    70
+
+1400             Cabecera de segmento                   an..3 O 1        3 AYN              Reservado fichero FRA.
+1410             Apellidos y nombre                                 O             T-14 Tabla futuro uso.
+1420                                                                   20         T-15 Ver tabla.
+1430                      Primer apellido               a..20 O 4      20
+1440                      Segundo Apellido              a..20 C 24     15                           Página 7 de 34
+1450                      Nombre                        a..15 C 44     12
+                 Reservado                              an..12 C 59
+
+      DOM DOMicilio del trabajador                                C    70
+
+1500             Cabecera de segmento                   an..3 O 1        3 DOM
+1510             Tipo de domicilio                        a1 C 4         1
+1520             Domicilio postal                                   C
+1530                                                                     2
+1540                      Tipo vía                      an..2 C 5      36
+1550                      Nombre vía                    an..36 C 7
+1560                      Número                                         5
+1570                      Bis                            n..5 C 43       2
+1580                      Bloque                        an..2 C 48       2
+1590                      Escalera                      an..2 C 50       2
+                          Piso                          an..2 C 52       2
+                                                        an..2 C 54
+
+Edición 05/2025
+Sistema RED. Instrucciones Técnicas                                           Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                  Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                  2.2 de CONCEPTOS COMUNES
+                                                             Form O/C Pos Long Valor NºFor Tabla
+                                                                                                  Comentarios
+
+1600                      Puerta                         an..3 C 56  3
+1610             Teléfono
+1620             Reservado                               n..10 C 59  10
+
+                                                         an..2 C 69  2
+
+      LDD Localidad del Domicilio Decodificado C                     70
+
+1700             Cabecera de segmento                    an..3 O 1     3 LDD  T-62                Ver tabla
+1710             Código Postal                             n5 C 4      5                          Sólo utilizable en acción MA y MB
+1720             Localidad                                           40                           Sólo utilizable en acción MA y MB
+1730             Provincia                               an..40 C 9    2
+1740             Mensajes SMS                             n..2 C 49  12
+1750             Prefijo internacional país              n..12 C 51    3
+1760             Reservado                               an..3 C 63    5
+                                                         an..5 C 66
+
+      FAB Fechas de Alta Baja                            C           70                      C. para empresa, O. para
+                                                                                             trabajador
+1800             Descriptor de segmento                  an..3 O 1     3 FAB
+1810             Acción                                  an..3 O 4     3            T-7 Ver tabla
+1820             Situación                               n..2 C 7      2            T-21 Ver tabla
+1830             Fecha real                              n..8 C 9      8      4
+1840             Grupo de cotización                     n..2 C 17     2      4 T-18 Ver tabla
+1850             Indicativo grupo de cotización diario.  an1 C 19      1
+1860             Opción mensual                                        2                       S= Sí; N=No
+1870             Grado de discapacidad                    n2 C 20      3
+1880             Clave de contrato de trabajo            n..3 C 22     1      T-19                Ver tabla
+1890             Condición de desempleado                an1 C 25      1      T-37                Ver tabla
+1900             Mujer subrepresentada                   an1 C 26      3                          S= Sí; N=No
+1910             Coeficiente tiempo parcial              n..3 C 27     3
+1920             Colectivo de trabajador                 n..3 C 30     1      T-61                Ver tabla
+                 Indicador impresión                     an1 C 33
+                                                                       7                          Espacio = No Impresión; S = Impresión
+1930             Categoría profesional                   n..7 C 34                                resolución; C = Impresión resolución +
+                                                                       8                          IDC; I=IDC.
+                                                                       1                          Obligatorio para Régimen 0911.
+                                                                       1                          Opcional para Régimen Especial de
+                                                                       1                          Trabajadores del Mar. No admisible par
+                                                                       3                          resto de regímenes.
+
+1940             Fecha de nacimiento                     n..8 C 41
+1950
+1960             Sexo                                    n1 C 49                                  1 = hombre; 2 = mujer.
+1970
+1980             Inactividad Z                           an1 C 50                                 Solo admisible para acción MB. Valores
+                                                                                                  posibles: S o blanco.
+                 Exclusión de desempleo/cese de n1       C 51                                     5 = Extranjero obligación retorno país
+                 actividad                               C 52                                     origen; 6 = Cese de actividad.
+
+                 Coeficiente de actividad huelga n3
+                 parcial/ERE
+
+Edición 05/2025                                                                                   Página 8 de 34
+Sistema RED. Instrucciones Técnicas                                          Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                  Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                  2.2 de CONCEPTOS COMUNES
+                                                             Form O/C Pos Long Valor NºFor Tabla
+                                                                                                  Comentarios
+
+1990             Mujer reincorporada                     an1 C 55    1                            S= Mujer reincorporada después de
+                                                                                                  maternidad; 2=Superposición por 2ª
+                                                                                                  reincorporación; 3=5 años de
+                                                                                                  inactividad; 4=Mujer reincorporada
+                                                                                                  después de excedencia.
+
+2000             Incapacitado readmitido                 an1 C 56    1       T-101
+2010
+2020             Trabajador de autónomo                  an1 C 57    1                            S= Sí; 1= Familiar 2º grado. Bonificación
+2030                                                                                              Ley 6/2017.
+                 5JR/semana según convenio               an1 C 58    1                            S= Sí; N=No
+2040
+2050             Indicativo nº trabajadores empresa      an1 C 59    1                            1= Empresa <50 Trabajadores (Contrato
+2060                                                                                              emprendedores); 3=Menos de 10
+2061             Relación laboral de carácter especial n..4 C 60     4       T-38                 trabajadores.
+2070                                                                                              Ver tabla
+2080
+2090             Tipo de Inactividad                     an..2 C 64  2       T-41 Ver tabla
+
+                 Declaración responsable formación       an1 C 66    1                            S= Sí; N=No
+
+                 Aplicación exenciones trabajador        an1 C 67    1                            S= Sí; N=No
+
+                 Exclusión social/Víctimas               an1 C 68    1       T-83 Ver tabla
+
+                 Renta activa de inserción               an1 C 69    1                            S= Sí; N=No
+
+                 Trabajadoras contratadas en los 24      an1 C 70    1                            S= Sí; N=No
+
+                 meses siguientes a la fecha de
+
+                 alumbramiento
+
+      DAM Datos Asociados al Movimiento                  C           70
+
+2100             Descriptor de segmento                  an..3 O 1    3 DAM  4
+2110             Fecha de inicio de contrato              n8 C 4      8
+2120             FIC específico                          an1 C 12     1                       S= Sí; N=No. Obligatorio si el campo
+2130             NUSS del trabajador sustituido          n12 C 13    12                       anterior lleva contenido.
+2140             Causa sustitución                        n2 C 25     2
+2150             Permanencias                                                T-39                 Ver tabla. Obligatorio si el    campo
+2160                                                      n1 C 27     1                           anterior lleva contenido.
+2170                      Parte entera del coeficiente    n2 C 28     2                           Solo para Sistema Especial 32.
+2180                      Parte decimal del coeficiente   n2 C 30     2
+2190             Coeficiente reductor de la edad de      an1 C 32     1                           Obligatorio para altas. Valor posible 1.
+2200             jubilación                               n2 C 33     2
+2210             Relevo                                   n2 C 35     2                           Obligatorio para altas. Valores posibles
+2220             Días trabajados                          n3 C 37     3                           33 ó 61.
+2230             Sistema Especial                         n2 C 40     2
+2240             Exclusión cotización                     n2 C 42     2                           Sólo admisible en altas para regímenes
+                 Cambio puesto de trabajo                                                         0111, 0811 y 0911.
+                 Indicativo pérdida de beneficios        an1 C 44     1
+                                                         n12 C 45    12      T-91                 Ver tabla
+2250             Vínculo familiar                         n1 C 57            T-52
+2260             NSS persona física vinculada                         1      T-73                 Ver tabla
+2270             Programa Fomento Empleo Agrario                             T-68
+                                                                                                  Ver tabla
+                                                                             T-97
+                                                                                                  Para acción MC se admitirán todos los
+                                                                                                  valores. Para acción MA solo los
+                                                                                                  valores: 01=falta de concurrencia de
+                                                                                                  requisitos; 08=extinción contrato
+                                                                                                  bonificado últimos 12 meses y 99=no
+                                                                                                  aplicación peculiaridades vigentes.
+                                                                                                  Futuro uso
+
+                                                                                                  Valores: 0=No; 1=Sí; 2=Sí, con
+                                                                                                  exclusión de cotización adicional
+                                                                                                  contratos inferiores a 30 días
+
+Edición 05/2025                                                                                   Página 9 de 34
+Sistema RED. Instrucciones Técnicas                                             Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                 Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                 2.2 de CONCEPTOS COMUNES
+                                                            Form O/C Pos Long Valor NºFor Tabla
+                                                                                                 Comentarios
+
+2280             Modalidad de cotización                n1 C 58     1                            Obligatorio para altas de Régimen 0613.
+                                                                                                 No admisible para otros regímenes.
+2290             Beneficios                             n2 C 59     2                            Valores: 0=sin modalidad de cotización;
+                                                                                                 1=cotización mensual; 2=cotización por
+2300             Ocupación                              an2 C 61    2           T-58             jornadas reales.
+2310                                                                            T-85             Valor: 01=Beneficiario Sistema Nacional
+2320             Excedente sector industrial            n2 C 63     2                            de Garantía Juvenil – solicitado. 11 =
+2330                                                                                             Beneficiario Sistema Nacional de
+                 Reducción de jornada                   n3 C 65     3                            Garantía Juvenil – acreditado.16 -
+                                                                                                 Benef. SNGJ-Baja cualificación; 17 -
+                                                                                                 Ceuta y Melilla; 18 - Formación práctica
+                                                                                                 Coop.-Soc. Laboral. 19=Ct formación
+                                                                                                 Art.23 RDL 1/2023; 20=Transf. Ct fijo
+                                                                                                 disc. SEA Art. 29 RDL 1/2023; 21=
+                                                                                                 Incorporación socios coop/soc lab. Art
+                                                                                                 28 RDL 1/2023
+                                                                                                 Ver tabla.
+
+                                                                                                 1=Textil. Confección; 2=Calzado.
+                                                                                                 Curtidos. Marroquinería.
+                                                                                                 Ver tabla
+
+                 Coeficiente de tiempo parcial inicial  n3 C 68     3
+
+      ODL Otros Datos Laborales                             C       70
+
+2400             Descriptor de segmento                 an..3 O 1     3 ODL
+2410             Convenio colectivo                                 14
+2420             Reservado                              n14 C 4                 T- 79 Ver tabla.
+2430             Ocupación C.N.O.                                     4
+2440             Reservado                              an6 C 18      4         T- 90 Ver tabla.
+2450             Importe de la contribución                           6
+                                                        n4  C 24                          Obligatorio para SAA 439 para acción
+                                                                      4                   ASA; opcional para acción MSA; no
+                                                        n6  C 28      2                   admisible para ESA.
+                                                                      5
+                                                            C         3
+                                                                      3
+2460                   Parte entera                     n4  O 34      8
+2470                                                        O 38    12
+2480                   Parte decimal                    n2  C 40
+
+                 Entidad gestora del plan de pensiones an5                      T- 100           Obligatorio para SAA 439 para acción
+                                                                                T- 12            ASA; opcional para acción MSA; no
+2485             País                                   n3  C 45                T-103            admisible para ESA. Ver tabla
+                                                                                                 Obligatorio para SAA 150, 151, 152, 153
+2486             Región Especial País                   an3 C 48                                 y 154 para acciones ASA y MSA; no
+                                                                                                 admisible para ESA. Ver tabla
+2487             Fecha fin prevista contrato            n8  C 51                                 Opcional para SAA 150 para acciones
+2490             Reservado                                                                       ASA y MSA. No admisible para ESA y
+                                                                                                 resto de SAA. Ver tabla
+                                                                                                 Opcional para acción MA. No admisible
+                                                                                                 para resto de acciones
+
+                                                        an12 C 59
+
+      OTD OTros Datos                                       C       70
+
+2500             Descriptor de segmento                 an..3 O 1   3 OTD
+2510
+2520             Expediente CASIA                       an11 C 4    11
+2530
+2540             Reservado                              an3 C 15    3
+2550
+                 Fecha de inicio de excedencia          n8 C 18     8        4
+
+                 Código de Cuenta de Cotización a                   4           T-2 Ver tabla.
+                 fecha de inicio de excedencia
+
+                          Régimen de la Seguridad Social n..4 C 26
+
+Edición 05/2025                                                                                  Página 10 de 34
+Sistema RED. Instrucciones Técnicas                                         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                            Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                            2.2 de CONCEPTOS COMUNES
+                                                       Form O/C Pos Long Valor NºFor Tabla
+                                                                                            Comentarios
+
+2560                      Provincia                n..2 C 30    2
+2570                      Número
+2580             Fecha notificación                n..9 C 32    9
+2590             Indicativo readmisión
+2600             Fecha prevista fin de contrato    n..8 C 41    8
+2610             Embarcación
+2620                      Tipo de embarcación      a1 C 49      1                           Valores: S=Sí; N=No.
+
+2630                                               n8 C 50      8        4                  Solo para acción MB.
+2640
+                                                   C                                        Solo para Régimen 0811.
+
+                                                   n1 O 58      1           T-81            Obligatorio    si        el    campo
+
+                                                                                            IDENTIFICADOR            DE           LA
+
+                                                                                            EMBARCACIÓN lleva contenido.
+
+                 Identificador de la embarcación an11 O 59      11                          Obligatorio si el campo TIPO DE
+
+                                                                                            EMBARCACIÓN lleva contenido
+
+                 Reservado                         an1 C 70     1
+
+      DBA Datos de Bases Adicionales                        C   70
+
+2700             Descriptor de segmento            an..3 O 1      3 DBA                     Obligatorio para acciones ABA, MBA,
+2710             Causa base adicional               n3 C 4        3                         EBA. Opcional para las altas; no
+                                                                                            admisible para el resto de acciones.
+2720             Retribuciones anuales previstas   n8 C 7       8                           Valores posibles: 001 = Contrato Tiempo
+2730             Horas trabajo anuales previstas                                            parcial concentrado.
+2740             Fecha hasta (contrato)            n4 C 15      4
+                                                                                            Obligatorio para acción ABA. Opcional
+2750             Tipo de información               n8 C 19      8                           para MA, MBA y EBA. No admisible para
+                                                                                            resto de acciones.
+                                                   n3 C 27      3                           Obligatorio para acciones ABA, MBA,
+                                                                                            EBA; no admisible para el resto de
+2760             Fecha desde tipo de información   n8 C 30      8        4                  acciones. Valores posibles: 001= Datos
+                                                                                            comunes a la anualidad; 002= Periodos
+                                                                                            de actividad.
+                                                                                            Obligatoria para acciones ABA. MBA y
+                                                                                            EBA, y no admisible para resto de
+                                                                                            acciones.
+
+2770             Reservado                         an..33 C 38  33
+
+      DSC Datos de Subcontratación y               C            70                          Obligatorio para acciones ASC,
+                                                                                            MSC y ESC.
+                 Cesión                                           3 DSC
+                                                                  2
+2800             Descriptor de segmento            an..3 O 1
+                                                                  4
+2810             Tipo de subcontratación o cesión  n2 C 4         2         T-47            Ver tabla. Obligatorio para acciones
+                                                                  9                         ASC, MSC y ESC.
+
+2820             CCC de cesión                     C              2
+                                                                10
+2830             Régimen de la Seguridad Social n..4 C 6                    T-2 Ver tabla.
+                                                                  1
+2840             Provincia                         n..2 C 10
+
+2850             Número                            n..9 C 12
+
+2860             NSS de cesión                     C
+
+2870             Provincia                         n..2 C 21
+
+2880             Número                            n..10 C 23
+
+2890             Embarcación                                                                Solo para Régimen Especial de
+                                                                                            Trabajadores del Mar
+
+2900             Tipo de embarcación               n1 C 33                  T-81
+
+Edición 05/2025                                                                             Página 11 de 34
+Sistema RED. Instrucciones Técnicas                                            Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                          Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                          2.2 de CONCEPTOS COMUNES
+                                                     Form O/C Pos Long Valor NºFor Tabla
+                                                                                          Comentarios
+
+2910             Identificador de la embarcación an11 C 34         11
+2920
+                 Reservado                       an..26 C 45       26
+
+      DJD Datos Jornadas Diarias                          C        70
+
+3000             Descriptor de segmento          an..3 O 1           3 DJD                Obligatorio para acción MJR, MDP y
+3010             Año                              n4 C 4             4                    EDP.
+3020             Mes                              n2 C 8             2                    Obligatorio para acción MJR, MDP y
+3030             Día                                               31                     EDP.
+                                                 an31 C 10                                Obligatorio para acción MJR. Cada
+                                                                                          posición representa un día del mes.
+3040             Fecha real consolidada          n8 C 41           8                      Valores: Régimen 0163→S=Sí realiza
+3050                                                                                      jornada; N=No la realiza; P=Jornada
+3051             Nueva fecha real                n8 C 49           8                      prevista. Sistema Especial 032 del
+3052                                                                                      régimen 0111→ S=día no trabajado; N o
+3053             Días efectivos prácticas        n2 C 57           2                      blanco=día trabajado.
+3054                                                                                      Obligatorio para acción MFR
+                 Días previstos prácticas -ITAT  n2 C 59           2
+                                                                                          Obligatorio para acción MFR
+                 Días previstos prácticas -Pago Directo n2 C 61    2
+                                                                                          Solo admisible para acción MDP.A
+                 Indicativo prácticas            an1 C 63          1                      partir 01.01.2024
+                                                                                          Solo admisible para acción MDP.A
+                                                                                          partir 01.01.2024
+                                                                                          Solo admisible para acción MDP.A
+                                                                                          partir 01.01.2024
+                                                                                          Sólo admisible para acción MDP. Sólo
+                                                                                          admisible con valor N o sin contenido.
+                                                                                          N=No hay días de prácticas. Solo
+                                                                                          admisible si los campos Días efectivos
+                                                                                          prácticas, Días previstos de ITAT y Días
+                                                                                          previstos de Pago directo no llevan
+                                                                                          contenido. A partir 01.01.2024
+
+3060             Reservado                       an7 C 64          7
+
+      FCT Fechas de Control de                   C                 70
+
+                 Trabajadores
+
+3100             Descriptor de segmento          an..3 C 1         3 FCT
+                                                                   3
+3110             Tipo de situación adicional de afiliación n3 C 4  3           T-46 Obligatorio para acción ASA, MSA, ESA.
+                                                                   8
+                                                                   8                      No admisible para resto de acciones.
+
+                                                                   8                      Ver tabla.
+
+3120             Porcentaje                      n3 C 7            8                      Sólo admisible para acciones ASA y
+3130             Fecha fin de vacaciones         n8 C 10           8
+3140             Fecha desde                     n8 C 18           8                      MSA.
+                                                                   8
+                                                                            4             Opcional para acción MB. No admisible
+
+                                                                                          para resto de acciones.
+
+                                                                            4             Obligatorio para acción ASA, MSA, ESA,
+
+                                                                                          ASC, MSC, ESC, CJR, ADT, EDT y
+
+                                                                                          CTO, ECT e IDC. Opcional para
+
+                                                                                          acciones ACT, MCT, ABA, MBA, EBA y
+
+                                                                                          MA. No admisible para resto de
+
+                                                                                          acciones.
+
+3150             Fecha hasta                     n8 C 26                    4             Obligatorio para acción ASA, para tipo
+
+                                                 n8 C 34                                  de situación 001, para CJR, ADT.
+                                                 n8 C 42
+                                                 n8 C 50                                  Opcional para acciones ASC, EDT, ACT,
+                                                 n8 C 58
+                                                                                          MCT, ECT, ABA, MBA, EBA y MA. No
+
+                                                                                          admisible para resto de acciones.
+
+3160             Fecha desde nueva                                          4             Opcional para acción MSA, MSC y MCT.
+3170             Fecha hasta nueva
+3180             Fecha de presentación.                                                   No admisible para resto de acciones.
+3190             Fecha efecto de alta
+                                                                            4             Opcional para acción MSA, MSC y MCT.
+
+                                                                                          No admisible para resto de acciones.
+
+                                                                            4             Reservado respuesta afiliación (fichero
+
+                                                                                          FRA y FRE)
+
+                                                                            4             Reservado respuesta afiliación (fichero
+
+                                                                                          FRA y FRE)
+
+Edición 05/2025                                                                                       Página 12 de 34
+Sistema RED. Instrucciones Técnicas                                                       Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Dato Elemento                                  Mensaje de Afiliación. Versión 9.7       Ver significado de las columnas en el apartado
+                                                                                                  2.2 de CONCEPTOS COMUNES
+                                                             Form O/C Pos Long Valor NºFor Tabla
+                                                                                                  Comentarios
+
+3200             Indicativo SAA                          n3 C 66      3                           Opcional para acción MB. No admisible
+                                                                                                  para resto de acciones. Valores
+                                                                                                  posibles: 001= SAA 001; 015=SAA 015.
+
+3210             Reservado                               an2 C 69     2
+
+       PIT       Períodos de Incapacidad                           C  70                          Obligatorio para acciones AIT,
+                 Temporal                                                                         CIT y EIT
+3300                                                     an..3 O 1      3 PIT
+3310             Descriptor de segmento                  an..2 O 4      2         T-76
+3320                                                                    1
+3330             Tipo de prestación                        n1 O 6       1         T-35
+3340                                                       n1 O 7       8
+3350             Contingencia                             n..8 C 8      8         T-77
+                                                          n..8 C 16
+                 Forma de pago                                          8      4                  Obligatoria para acciones AIT y EIT, no
+                                                          n..8 C 24   39
+                 Fecha hecho causante o inicio de        an..39 C 32                              admisible para acción CIT.
+                 situación
+                 Fecha fin de la prestación                                    4                  Para tipo de prestación SI/SL opcional
+
+                                                                                                  para acciones AIT y EIT y obligatoria
+
+                                                                                                  para CIT.
+
+3360             Fecha efectos económicos                                      4                  Obligatoria para acciones AIT y EIT, no
+3370             Reservado
+                                                                                                  admisible para acción CIT.
+
+      ETF ETiquetas de proceso                           O            70
+
+3500             Descriptor de segmento                  an..3 O 1      3 ETF
+3510
+3520             Identificador de sintaxis               an..4 O 4    4 AFI9                      Identifica el mensaje
+3530                                                      n1 O 8      1 7
+3540                      Identificador de sintaxis de                4 W0xx                      Identifica el programa que lo ha
+3550                      mensaje                        an..4 O 9    1 x                         procesado
+3560                      Número de versión de sintaxis   n1 O 13                                 Variable en función de la versión de
+3570                      de mensaje                                  8                           SILTRA.
+3580                      Identificador de sintaxis de   an..8 O 14   8
+3590                      proceso                        an..8 O 22                               Asignado por T.G.S.S. Clave del
+3600                      Número de versión de sintaxis                                           despacho
+3610                      de proceso                     n..8 O 30
+3620             Emisor del Intercambio                  n..4 O 38    8        4                  Ver formatos comunes.
+3630                                                     an..8 O 42   4        5                  Ver formatos comunes.
+3640                      Clave de Autorización          an..3 O 50   8                           Nombre del fichero AFI
+3650                                                      a1 O 53     3 AFI          T-1          Sufijo o extensión del fichero
+3660             Reservado                                a1 C 54     1 N                         N = Normal (fijo)
+3670                                                     n..5 O 55    1                           Ver tabla
+3680             Fecha/Hora de preparación               n..8 O 60    5
+                                                         an..3 C 68   8
+                          Fecha                                       3
+
+                          Hora
+
+                 Referencia de control de intercambio
+
+                 Sufijo
+
+                 Código de prioridad de procesado
+
+                 Indicador de prueba
+
+                 Contador de segmentos EMP
+
+                 Contador de segmentos totales,
+                 incluidas ETI y ETF
+                 Reservado
+
+Edición 05/2025                                                                                              Página 13 de 34
+Sistema RED. Instrucciones Técnicas                                                 Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+4. DESCRIPCIÓN DE CAMPOS Y SUBCAMPOS
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+     ETI Etiquetas de proceso inicial
+
+                 Las etiquetas de inicio y de fin forman parte del envío pero no del mensaje. Un envío está compuesto por uno
+                 o varios mensajes de afiliación que representan uno o varios CCC y/o trabajadores, y/o acciones.
+
+10               Cabecera de segmento
+
+                 Cadena de caracteres "ETI"
+
+20               Identificador de sintaxis
+
+                 Identifica el formato del mensaje (segmentos y elementos) que se intercambia.
+
+30               Identificador de sintaxis del mensaje
+
+                 Identifica el tipo de mensaje que sigue.
+
+40               Número de versión de sintaxis del mensaje
+
+                 Versión del mensaje anterior.
+
+50               Identificador de sintaxis del proceso
+
+                 Identifica la versión del programa de validación, impresión y proceso que ha utilizado el emisor previo a
+
+                 realizar el intercambio.
+
+60               Número de versión de sintaxis del proceso
+
+                 Versión del módulo de validación anterior.
+
+70               Emisor del Intercambio
+
+80               Clave de autorización
+
+                 Número asignado por la Tesorería General de la Seguridad Social al conceder la autorización
+
+                 administrativa para la utilización del Sistema RED. Una por empresa, agrupación de empresarios,
+
+                 profesional colegiado o gestores que actúen en representación de varias empresas. La carga el
+
+                 programa de Afiliación por remesas.
+
+90               Reservado
+
+100              Fecha/Hora de preparación
+
+                 Genera una clave única para cada envío por yuxtaposición de la fecha y la hora. Esta clave es asignada por el
+
+                 emisor en el momento que genera el mensaje.
+
+110              Fecha
+
+                 El año, mes y día de preparación del envío. Ver formatos comunes.
+
+120              Hora
+
+                 En hora y minutos. Ver formatos comunes.
+
+130              Referencia de control de intercambio
+
+                 Recoge el nombre del fichero plano de Sufijo AFI que ha sido preparado para el intercambio.
+
+140              Sufijo
+
+                 Sufijo o extensión del fichero
+
+Edición 05/2025                                                                                 Página 14 de 34
+Sistema RED. Instrucciones Técnicas                                              Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+150              Código de prioridad de procesado
+
+                 Llevará valor fijo N.
+
+160              Indicador de prueba
+
+                 Indica el tipo de envío que se realiza. Ver capítulo Tablas.
+
+170              Número de identificación de registro
+
+                 De uso interno por la Tesorería General de la Seguridad Social. En Recaudación, en caso de reenvíos
+
+                 especiales permite identificar un envío y ofrecerlo como Nuestra Referencia.
+
+180              Año
+
+                 Dos dígitos que indican el año en el que se recibe el envío en el ordenador central.
+
+190              Mes
+
+                 Dos dígitos que indican el mes en el que se recibe el envío en el ordenador central.
+
+200              Serie
+
+                 Secuencial que indica el número de llegada dentro de ese mes y año.
+
+210              Número de envío
+
+                 Secuencial que indica el número de llegada dentro de su serie.
+
+220              Número de documento dentro del envío
+
+                 Secuencial que indica el orden de cada documento dentro del envío al cual pertenece.
+
+230              Reservado T.G.S.S.
+
+                 Asignado por la T.G.S.S., informa con qué programa ha sido generado el fichero AFI:
+                        A Fichero AFI generado por el programa de la TGSS.
+                        " " (en blanco) Fichero AFI generado por el programa de nómina y gestión de personal adaptado.
+
+240              Reservado
+
+     EMP Identificación de EMPresa
+
+300              Cabecera de segmento
+
+                 Cadena de caracteres "EMP".
+
+310              Código de Cuenta de Cotización
+
+                 Número de inscripción a la Seguridad Social, Antiguo número patronal. Incluye el régimen, por lo que su
+
+                 formato es RRSSPPNNNNNNNNN.
+
+320              Régimen de la Seguridad Social (RRSS)
+
+                 Clave de Régimen y Sector según capítulo Tablas
+
+330              Provincia
+340
+                 Clave de la provincia en que reside la empresa (cuenta de cotización).
+                 No puede ser diferente de 1 a 52 para todos los regímenes y 1 a 53 y 56 sólo a efectos del Régimen
+                 Especial de Trabajadores del Mar.
+
+                 Número
+
+                 Asignado a la empresa en el momento de su inscripción en la Seguridad Social o apertura de la Cuenta
+                 de Cotización.
+
+Edición 05/2025                                                                                Página 15 de 34
+Sistema RED. Instrucciones Técnicas                                                   Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+350              Código de empresario
+
+360              Tipo de identificación
+
+                 Clave según tabla reseñada en el capítulo Tablas. Califica o determina el número que le sigue.
+
+370              País
+
+                 Código del país emisor del documento. Según tabla. Si el campo queda en blanco se considerará que el
+                 documento es español.
+
+380              Número de identificación del empresario
+
+                 Número identificativo de variado carácter según el tipo de documento. Será sometido a las validaciones
+
+                 indicadas por el organismo emisor. Ver formatos comunes.
+
+390              Calificador de código de empresario
+
+                 Uso libre por el usuario. Subcif. No será utilizado por la T.G.S.S.
+
+400              Código de Cuenta de Cotización Principal
+
+                 Se indicará el Código Cuenta Cotización principal. En caso de que el movimiento se refiera al CCC principal,
+
+                 o en empresas mono-CCC, debe repetirse el contenido del campo 310- Código de cuenta de Cotización.
+
+410              Régimen de la Seguridad Social
+
+                 Clave según tabla reseñada en el capítulo Tablas.
+
+420              Provincia
+430
+                 Clave de la provincia en que reside la empresa (cuenta de cotización).
+                 No puede ser diferente de 1 a 52 para todos los regímenes y 1 a 53 y 56 sólo a efectos del Régimen
+                 Especial de Trabajadores del Mar.
+
+                 Número
+
+                 Asignado a la empresa en el momento de su inscripción en la Seguridad Social o apertura de la Cuenta
+                 de Cotización.
+
+440              Reservado Recaudación
+
+450              Acción
+
+                 Clave alfanumérica que indica al sistema la operación que se va a realizar a nivel de empresa. Ver capítulo
+                 Tablas.
+
+460              Reservado
+
+     RZS RaZón Social
+
+500              Cabecera de segmento
+
+                 Cadena de caracteres "RZS".
+
+510              Indicador de Razón Social
+
+                 Este indicador lleva un valor fijo 0.
+
+520              Tipo alfabético de empresario
+
+                 Determina la personalidad física, jurídica y sus variantes, del empresario. Clave según Tablas.
+
+530              Razón social
+
+                 Denominación de la empresa. Si el tipo alfabético de empresario es persona física, la denominación o razón
+                 social coincide con la afiliación.
+
+Edición 05/2025                                                                       Página 16 de 34
+Sistema RED. Instrucciones Técnicas                                         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+540              Clave de autorización
+550
+                 Número asignado por la Tesorería General de la Seguridad Social al conceder la autorización administrativa
+                 para la utilización del Sistema RED. Para acción CTA, deberá cumplimentarse con el número de autorización
+                 de la que se desea obtener el Informe de Trabajadores en Alta.
+
+                 Reservado
+
+     EXC EXplotación y Clave
+
+560              Descriptor de segmento
+
+                 Cadena de caracteres "EXC".
+
+570              Tipo de la explotación
+
+                 Clave del tipo de explotación. Según capítulo Tablas.
+
+580              Denominación de la explotación
+
+                 Se indicará el nombre del barco o del artefacto flotante.
+
+590              Reservado
+
+     FCE Fecha de Control de empresas
+
+600              Cabecera de segmento
+
+                 Cadena de caracteres ‘FCE’
+
+610              Fecha de inicio
+620
+630              Para informes de vida laboral de empresa, se indicará la fecha desde la que se desea obtener los
+640              movimientos de alta/baja del trabajador en ese Código de Cuenta de Cotización.
+650              Para Alta Autorización Certificado artículo 42 Estatuto de los Trabajadores y Modificación Autorización
+                 Certificado artículo 42 Estatuto de los Trabajadores, se indicará la fecha desde la que se concede la
+                 autorización.
+
+                 Fecha de fin
+
+                 Para informes de vida laboral de empresas, se indicará la fecha hasta la que se desea obtener los
+                 movimientos de alta/baja de trabajadores en ese Código de Cuenta de Cotización.
+                 Para Alta Autorización Certificado artículo 42 Estatuto de los Trabajadores y Modificación Autorización
+                 Certificado artículo 42 Estatuto de los Trabajadores, se indicará la fecha hasta la que se concede la
+                 autorización.
+
+                 Fecha de inicio nueva
+
+                 Para Alta Autorización Certificado artículo 42 Estatuto de los Trabajadores y Modificación Autorización
+                 Certificado artículo 42 Estatuto de los Trabajadores, se indicará la nueva fecha desde la que se concede la
+                 autorización.
+
+                 Fecha de fin nueva
+
+                 Para Alta Autorización Certificado artículo 42 Estatuto de los Trabajadores y Modificación Autorización
+                 Certificado artículo 42 Estatuto de los Trabajadores, se indicará la nueva fecha hasta la que se concede la
+                 autorización.
+
+                 Reservado
+
+Edición 05/2025                                                             Página 17 de 34
+Sistema RED. Instrucciones Técnicas             Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+     PES PEculiaridades Solicitadas
+
+750              Cabecera de segmento
+
+                 Cadena de caracteres ‘PES’
+
+760              Código de peculiaridad uno
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas.
+
+770              Código de peculiaridad dos
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+780              Código de peculiaridad tres
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas.
+
+790              Código de peculiaridad cuatro
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+800              Código de peculiaridad cinco
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas.
+
+810              Código de peculiaridad seis
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+820              Código de peculiaridad siete
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas.
+
+830              Código de peculiaridad ocho
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+840              Código de peculiaridad nueve
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+850              Código de peculiaridad diez
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas.
+
+860              Código de peculiaridad once
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+870              Código de peculiaridad doce
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas.
+
+880              Código de peculiaridad trece
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+
+                 Ver capítulo Tablas
+
+Edición 05/2025                                 Página 18 de 34
+Sistema RED. Instrucciones Técnicas         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+890              Código de peculiaridad catorce
+900
+910              Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+920              Ver capítulo Tablas
+930
+940              Código de peculiaridad quince
+950
+960              Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+970              Ver capítulo Tablas.
+980
+990              Código de peculiaridad dieciséis
+1000
+1010             Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+1020             Ver capítulo Tablas
+1030
+                 Código de peculiaridad diecisiete
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad dieciocho
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas.
+
+                 Código de peculiaridad diecinueve
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veinte
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veintiuna
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas.
+
+                 Código de peculiaridad veintidós
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veintitrés
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veinticuatro
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas.
+
+                 Código de peculiaridad veinticinco
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veintiséis
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veintisiete
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad veintiocho
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+Edición 05/2025                             Página 19 de 34
+Sistema RED. Instrucciones Técnicas                                               Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+1040             Código de peculiaridad veintinueve
+1050
+1060             Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+1070             Ver capítulo Tablas
+1080
+1090             Código de peculiaridad treinta
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad treinta y uno
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad treinta y dos
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Código de peculiaridad treinta y tres
+
+                 Para IDC/PL-CCC Acotado, se indicará la Peculiaridad de Cotización para la que se desea obtener el informe.
+                 Ver capítulo Tablas
+
+                 Reservado
+
+      TRA TRAbajador
+
+1200             Cabecera de segmento
+
+                 Cadena de caracteres "TRA".
+
+1210             Número de Afiliación a la Seguridad Social (NAF)
+
+                 Número concedido al trabajador en el momento de su afiliación a la Seguridad Social. Ver formatos comunes.
+
+1220                  Provincia
+1230
+1240                    Provincia de alta inicial del trabajador en el sistema de Seguridad Social. Con 2 posiciones, no pudiendo
+                        ser diferente de 1 a 56.
+
+                      Número
+
+                        Asignado al trabajador en el momento de la afiliación a la Seguridad Social. Cero y nueve dígitos antes
+                        del 03/92 y uno y nueve dígitos con posterioridad a esa fecha. Ver formatos comunes.
+
+                 Identificador de persona física (IPF)
+
+                 Tipo y número del documento presentado por el trabajador (N.I.F., N.I.E., etc.).
+
+1250             Tipo de identificador
+
+                 Determina el documento aportado según clave incluida en Tablas.
+
+1260                  País
+1270
+1280                    Código del país emisor del documento. Según Tablas. Si el campo queda en blanco se considerará que
+1290                    el documento es español.
+
+                      Alfaclave
+
+                        Campo alfanumérico en el que su estructura varía según el tipo de documento y de acuerdo con las
+                        normas que determinaron su creación y uso.
+
+                 Reservado respuesta Afiliación
+
+                 Decodificación Código Rotura de Control. Reservado Recaudación.
+
+Edición 05/2025                                                                   Página 20 de 34
+Sistema RED. Instrucciones Técnicas                                                        Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+1300             Nacionalidad
+1310
+1320             Código del país donde el trabajador esté nacionalizado, según la tabla internacional de países. Ver Tablas.
+
+                 Indicadores del trabajador
+
+                 Futuros usos.
+
+                 Reservado
+
+      AYN Apellidos Y Nombre
+
+1400             Cabecera de segmento
+
+                 Cadena de caracteres "AYN".
+
+1410             Apellidos y nombre
+
+1420             En el supuesto de existir artículo (el, la), preposición (de), contracción (del), conjunción (y), o similar, en
+                 alguno de estos subcampos, no se consignarán. Son alfanuméricos para permitir ñ y letras acentuadas que en
+1430             las tablas informáticas no se consideran letras.
+1440
+1450                  Primer Apellido
+
+                        En el supuesto de no existir criterio para separar los dos apellidos, se incluirán en este campo hasta su
+                        longitud máxima los 20 primeros caracteres del primer apellido, seguidos del segundo, seguidos de
+                        coma y del nombre.
+
+                      Segundo Apellido
+
+                      Nombre
+
+                 Reservado
+
+      DOM DOMicilio del trabajador
+
+1500             Cabecera de segmento
+
+                 Cadena de caracteres "DOM".
+
+1510             Tipo de domicilio
+
+                 Futuro uso. Expresará el objeto del domicilio postal que sigue (particular, de sede social, de negocio, etc.)
+
+1520             Domicilio postal
+
+                 Con la sintaxis e información que recoge el Fichero General de Afiliación de la Seguridad Social.
+
+1530             Tipo vía
+
+                 Calificador de vía pública (calle, plaza, etc.). Ver capítulo de tablas.
+
+1540             Nombre vía
+
+                 De la calle, plaza, avenida, etc. En cualquier idioma del Estado.
+
+1550             Número
+
+                 Autoexplicativo
+
+Edición 05/2025                                                                            Página 21 de 34
+Sistema RED. Instrucciones Técnicas                                                Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+1560                  Bis
+1570
+1580                    Autoexplicativo
+1590
+1600                  Bloque
+1610
+1620                    Autoexplicativo
+
+                      Escalera
+
+                        Autoexplicativo
+
+                      Piso
+
+                        Autoexplicativo
+
+                      Puerta
+
+                        Autoexplicativo
+
+                      Teléfono
+
+                        Número de teléfono de contacto del trabajador
+
+                 Reservado
+
+      LDD Localidad del Domicilio Decodificado
+
+1700             Cabecera de segmento
+
+                 Cadena de caracteres "LDD".
+
+1710             Código postal
+
+                 Según tabla de códigos postales publicada por la Dirección General de Correos y Telégrafos.
+
+1720             Localidad
+
+                 Nombre de la ciudad, pueblo, villa. Puede expresarse en cualquier idioma del Estado.
+
+1730             Provincia
+
+                 Código correspondiente a la provincia del domicilio según tabla.
+
+1740             Mensaje SMS
+
+                 Número de teléfono al cual se enviará un SMS cuando el trabajador cause alta o baja laboral en el sistema.
+
+1750             Prefijo internacional país
+1760
+                 Prefijo correspondiente al país del número de teléfono al cual se enviará un SMS cuando el trabajador cause
+                 alta o baja laboral en el sistema.
+
+                 Reservado
+
+      FAB Fechas de Alta y Baja
+
+1800             Cabecera de segmento
+
+                 Cadena de caracteres "FAB".
+
+Edición 05/2025                                                                                        Página 22 de 34
+Sistema RED. Instrucciones Técnicas         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+1810             Acción
+1820
+1830             Clave alfanumérica que indica al sistema la operación, a nivel trabajador, que se va a realizar. Ver capítulo
+1840             Tablas.
+1850
+1860             Situación
+1870
+1880             Clave obligatoria para altas y bajas que indica el motivo de alta o baja. Ver capítulo Tablas.
+1890
+1900             Fecha real
+
+1910             Fecha en la cual realmente cambia la situación del trabajador.
+1920
+1930             Grupo de cotización
+
+1940             Ver capítulo Tablas.
+
+                 Indicativo grupo de cotización diario. Opción mensual
+
+                 Para grupos de cotización diaria (8 a 11), indica que el empresario ha optado por cotizar como si tuviesen
+                 base mensual.
+
+                 Grado de discapacidad
+
+                 Campo que indica el porcentaje de discapacidad del trabajador. Admisible en movimientos de alta,
+                 modificación de altas previas y cambio de contrato.
+
+                 Clave de contrato de trabajo
+
+                 Ver capítulo Tablas.
+
+                 Condición de desempleado
+
+                 Campo de obligado cumplimiento para contratos bonificados por los programas de fomento de empleo
+                 estable. Según tabla. Indica la circunstancia concreta en relación a la situación de desempleo. Admisible en
+                 altas y en variaciones de altas previas.
+
+                 Mujer subrepresentada
+
+                 Campo de obligado cumplimiento para contratos bonificados por los programas de fomento de empleo
+                 estable. Según los valores S=Sí; N=No. Indica que la trabajadora está contratada para una profesión u
+                 ocupación con menor índice de empleo femenino. Admisible en altas y en variaciones de altas previas.
+
+                 Coeficiente tiempo parcial
+
+                 Coeficiente de la jornada diaria o semanal en relación con la jornada habitual de la empresa y la duración del
+                 contrato. Es obligatoria su cumplimentación para el tipo de contratos a tiempo parcial y opcional para el resto.
+                 Para las reducciones de jornada del artículo 37 del Estatuto de los Trabajadores, porcentaje de jornada que
+                 efectivamente realiza el trabajador, una vez contabilizada dicha reducción.
+
+                 Colectivo de trabajador
+
+                 Campo de obligado cumplimiento para el colectivo de estibadores portuarios (0396) del Régimen Especial de
+                 Trabajadores del Mar. Opcional para el resto de colectivos de este Régimen. Obligatorio para resto de
+                 regímenes para Consejero Administrador con contrato.
+
+                 Indicador impresión
+
+                 Indica si el usuario desea o no respuesta impresa a la petición realizada. Sus posibles valores son: Espacio=
+                 no impresión; S= Impresión resolución; C= Impresión resolución + IDC; I=IDC.
+
+                 Categoría profesional
+
+                 Clave que identifica la categoría profesional de aquellos trabajadores cuando dicha categoría determina una
+                 base de cotización específica, forma parte del cálculo de las bases normalizadas de cotización -Régimen
+                 Especial de la Minería del Carbón - o se encuentra relacionada con la aplicación de un determinado
+                 coeficiente reductor de la edad de jubilación. Admisible sólo para movimientos de alta de trabajadores.
+
+                 Fecha de nacimiento
+
+                 Fecha de nacimiento del trabajador. Ver formatos comunes.
+
+Edición 05/2025                             Página 23 de 34
+Sistema RED. Instrucciones Técnicas         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+1950             Sexo
+1960
+1970             Sexo del trabajador. Valores: 1 = hombre; 2 = mujer.
+
+1980             Reservado
+1990
+                 A cumplimentar en las bajas cuando se quiere cambiar una causa de baja de naturaleza suspensiva
+2000             inmediatamente anterior, por una baja de naturaleza extintiva. Valores posibles: S= Sí; blanco= No.
+2010
+2020             Exclusión de desempleo/cese de actividad
+2030
+2040             Valor 5= Extranjero con obligación retorno país de origen → Régimen Especial Agrario. Indica que el
+2050             trabajador no tiene que cotizar por la contingencia de desempleo porque es un trabajador extranjero con
+                 obligación de retorno a su país.
+                 Valor 6=Cese de actividad → Régimen Especial de los Trabajadores del Mar. Indica que el trabajador ha
+                 optado voluntariamente por la exclusión de la protección por cese de actividad.
+                 Valor 9= Migración circular fijos discontinuos → Régimen 0111 y 0163. Indica que el trabajador está
+                 contratado en origen según la orden ISM/13/02/2022 en una migración circular con un contrato fijo
+                 discontinuo.
+
+                 Coeficiente de actividad huelga parcial/ERE
+
+                 Para los casos en los que el tipo de inactividad tenga el valor ‘3’ Huelga Parcial o cualquier valor de
+                 Suspensión parcial por ERE, indica el porcentaje de jornada realmente trabajada, teniendo en cuenta la
+                 jornada habitual del trabajador en la empresa.
+                 En el campo debe consignarse la parte decimal del coeficiente, con tres cifras. Por ejemplo, para un
+                 coeficiente 0,40 el campo debe rellenarse con 400.
+
+                 Mujer reincorporada
+
+                 Este campo identifica a aquellas trabajadoras que se reincorporan efectivamente al trabajo, dentro de los dos
+                 años siguientes al parto, después de un descanso por maternidad o de una excedencia por cuidado de hijos.
+                 Admisible en altas y modificación de altas previas.
+                 Valores posibles: S=Mujer reincorporada después de la maternidad; 2=Superposición por 2ª reincorporación;
+                 3=5 años de inactividad.; 4=Reincorporación después de excedencia
+
+                 Incapacitado readmitido
+
+                 Indica que el trabajador se incorpora al mundo laboral desde una situación de incapacidad permanente o
+                 parcial. Admisible en movimiento de alta y de altas previas. Ver tabla.
+
+                 Trabajador de autónomo
+
+                 Indica que el trabajador es contratado por un afiliado perteneciente al Régimen Especial de Trabajadores
+                 Autónomos. Admisible en movimiento de alta y de alta previa. Valor posible: S=Sí; 1=Familiar 2º grado.
+                 Bonificación Ley 6/2017.
+
+                 5JR/semana según convenio colectivo
+
+                 Indica que el trabajador está afectado por el convenio colectivo que establece que su jornada laboral es de 5
+                 días semanales para poder aplicar lo establecido en el artículo 2.2 tercer párrafo de la Ley 28/2011, de 22 de
+                 septiembre. Valores posibles: S=Sí; N=No.
+
+                 Indicativo nº Trabajadores empresa
+
+                 Indica el número de trabajadores que tiene la empresa en su conjunto. Admisible en movimientos de altas y
+                 altas previas. Valores posibles en blanco: sin contenido; 1= Empresa < 50 trabajadores (Contrato
+                 emprendedores) artículo 4 del RDL 3/2012, de 10 de febrero; 3= Menos de 10 trabajadores (artículo 10 RD-L
+                 4/2013).
+
+                 Relación laboral de carácter especial.
+
+                 Ver capítulo tablas
+
+                 Tipo de inactividad
+
+                 Indica, según tabla, que el trabajador se encuentra en una situación en la que no realiza actividad laboral pero
+                 debe mantenerse en situación de alta.
+
+Edición 05/2025                             Página 24 de 34
+Sistema RED. Instrucciones Técnicas                                                   Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+2060             Declaración responsable Formación
+2061
+2070             Indica que la empresa declara si va a desarrollar o no acciones formativas para la persona afectada por
+2080             ERTE. Únicamente para determinadas variaciones de inactividad por ERTE COVID-19 a partir de 01.11.2021
+2090             (Real Decreto-Ley 18/2021).
+                 Valores posibles: S=Sí; N= No.
+
+                 Aplicación exenciones trabajador
+
+                 Indica si la empresa se aplica o no exenciones en la cotización por ese trabajador. Campo de obligada
+                 cumplimentación para variaciones de inactividad por ERTE COVID-19 a partir de 01.11.2021 (Real Decreto-
+                 Ley 18/2021).
+                 Valores posibles: S=Sí; N= No.
+
+                 Exclusión Social/Víctimas
+
+                 Campo de obligado cumplimiento para contratos bonificados por los programas de Fomento de Empleo
+                 Estable, en los que se contrate a un trabajador en alguna de las situaciones contempladas en la tabla. Ver
+                 tabla.
+
+                 Renta activa de inserción
+
+                 Identifica a aquellos trabajadores que perciben la ayuda específica denominada “Renta activa de inserción”,
+                 cuya contratación está bonificada por el programa de fomento de empleo estable.
+                 Admisible en altas y variaciones de altas previas.
+                 Valores posibles: S=Sí; N=No
+
+                 Trabajadoras contratadas en los 24 meses siguientes a la fecha de alumbramiento.
+
+                 Este campo identifica a aquellas trabajadoras que se incorporan al mercado laboral en los 24 meses
+                 posteriores a la fecha de alumbramiento, que hayan estado en desempleo al menos durante 12 meses.
+                 Admisible en altas y en modificación de alta previas.
+                 Valores posibles: S=Sí; N=No
+
+      DAM Datos Asociados al Movimiento
+
+2100             Descriptor de segmento
+
+                 Cadena de caracteres “DAM”
+
+2110             Fecha de inicio de contrato
+2120
+                 En los casos de subrogaciones parciales de contrato, fecha en la que se inició la relación laboral del
+                 trabajador con el contrato que se subroga.
+
+                 FIC específico
+
+                 Este campo indica que el campo anterior se refiere a una subrogación parcial.
+
+2130             NUSS del trabajador sustituido
+2140
+                 En los casos de contratos realizados para sustituir a otros trabajadores por las causas específicas en el
+                 campo posterior, se informará del Número de Seguridad Social del trabajador al cual se sustituye.
+
+                 Causa sustitución
+
+                 Ver capítulo tablas
+
+2150             Permanencias
+
+                 Conjunto de datos válidos para el cálculo de permanencias. Válido solo para el Sistema Especial 32.
+
+2160             Parte entera del coeficiente
+
+                 Parte entera del coeficiente multiplicador por los días de trabajo.
+
+Edición 05/2025                                                                       Página 25 de 34
+Sistema RED. Instrucciones Técnicas                                                   Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+2170             Parte decimal del coeficiente
+
+                 Parte decimal del coeficiente multiplicador por los días de trabajo
+
+2180             Coeficiente reductor de la edad de jubilación.
+2190
+2200             Porcentaje a aplicar a los trabajadores de aquellos regímenes y colectivos que tienen derecho a una
+                 reducción de la edad de jubilación.
+
+                 Relevo
+
+                 Indica que el contrato al que acompaña es un contrato de relevo. Acompaña a cualquier contrato indefinido
+                 (incluidos los fijos discontinuos), así como a los contratos temporales de relevo (441 y 541). Valores posibles:
+                 S=Sí; N=No.
+
+                 Días trabajados
+
+                 Para contratos a tiempo parcial, días efectivamente trabajados en un mes determinado
+
+2210             Sistema Especial
+2220
+2230             Identifica a los Sistemas Especiales 0132, 0135, 0136 y 0137, sustituyendo a los dígitos correspondientes al
+                 Sector del dato Régimen. Ver tabla.
+
+                 Exclusión cotización
+
+                 Identifica aquellas relaciones laborales en las que el trabajador tiene alguna exclusión en la cotización. Ver
+                 tabla.
+
+                 Cambio puesto de trabajo
+
+                 Indica que el trabajador ha cambiado de puesto de trabajo por esa causa. Ver tabla.
+
+2240             Indicativo pérdida de beneficios
+
+2250             Indica que la empresa no puede aplicarse los beneficios de los Programas de Fomento de Empleo, por la
+2260             causa que se indica. Ver tabla.
+                 Para acción MC se admiten todos los valores de la tabla T-68. Para acción MA solo los valores: 01= Falta de
+                 concurrencia de beneficios; 08=Extinción contrato bonificado últimos 12 meses; 99 = no aplicación
+                 peculiaridades vigentes.
+
+                 Vínculo familiar
+
+                 Indica que el trabajador es familiar del empresario, lo que da acceso a éste a determinadas particularidades
+                 en la cotización. Ver tabla.
+
+                 NSS persona física vinculada
+
+                 Para empresas colectivas, Número de Seguridad Social del empresario al que se refiere el vínculo familiar.
+
+2270             Programa Fomento Empleo Agrario
+2280
+2290             Indica que se trata de un trabajador agrario que realiza, bajo el marco del Plan de Fomento del Empleo
+                 Agrario, una actividad que da lugar a su encuadramiento en el Régimen General.
+2300             Valores posibles: 0=No; 1=Sí; 2=Sí, con exclusión de cotización adicional contratos inferiores a 30 días
+
+                 Modalidad de cotización
+
+                 Indica la forma de cotizar de los trabajadores por cuenta ajena de Régimen Especial Agrario.
+                 Valores posibles: 0=sin modalidad de cotización; 1=cotización mensual; 2=cotización por jornadas reales.
+
+                 Beneficios
+
+                 Indica que el trabajador tiene derecho a determinados beneficios en la cotización. Valores posibles:
+                 01=Beneficiario del Sistema Nacional de Garantía Juvenil (solicitado); 11=Beneficiario del Sistema Nacional
+                 de Garantía Juvenil (acreditado). 16=Beneficiario SNGJ-Baja cualificación; 17=Ceuta y Melilla; 18=Formación
+                 práctica Coop.-Soc. Laboral; 19=Ct formación Art.23 RDL 1/2023; 20=Transf. Ct fijo disc. SEA Art. 29 RDL
+                 1/2023; 21=Incorporación socios coop/soc lab. Art 28 RDL 1/2023
+
+                 Ocupación
+
+                 Este campo identifica, para la cotización por AT y EP, aquellas ocupaciones comunes a todas las actividades.
+                 Ver tabla.
+
+Edición 05/2025                                                                       Página 26 de 34
+Sistema RED. Instrucciones Técnicas                                      Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+2310             Excedente sector textil
+2320
+2330             Indica que el trabajador que se está contratando procede de una empresa del sector industrial, lo que da
+                 acceso a determinados incentivos en la cotización. Valores posibles: 1=Textil. Confección; 2=Calzado.
+                 Curtidos. Marroquinería.
+
+                 Reducción de jornada
+
+                 Indica que la jornada del trabajador se reduce en base a lo dispuesto en el artículo 37 del Estatuto de los
+                 Trabajadores. Ver tabla.
+
+                 Coeficiente de tiempo parcial inicial
+
+                 Coeficiente correspondiente a la relación laboral del trabajador antes de acogerse a la reducción de jornada.
+
+        ODL      Otros Datos Laborales
+2400
+                 Descriptor de segmento
+
+                 Cadena de caracteres “ODL”
+
+2410             Convenio Colectivo
+
+                 Código del convenio colectivo aplicable al trabajador.
+
+2420             Reservado
+2430
+                 Ocupación C.N.O.
+2440
+2450             Ocupación laboral, única o principal, a cumplimentar según la Clasificación Nacional de Ocupaciones. Ver
+                 tabla T-90
+
+                 Reservado
+
+                 Importe de la contribución
+
+                 Cuantía aportada mensualmente por la empresa para el plan de pensiones.
+
+2460             Parte entera
+
+                 Parte entera del importe de la contribución.
+
+2470             Parte decimal
+
+                 Parte decimal del importe de la contribución.
+
+2480             Entidad Gestora del Plan de pensiones
+2485
+2486             Entidad propietaria del Fondo de Pensiones.
+2487
+                 País
+
+                 Código del país de destino, en los supuestos de desplazamiento de personas trabajadoras al servicio de sus
+                 empresas fuera del territorio nacional de acuerdo con lo previsto en el artículo 166.3 del TRLGSS. Ver tabla.
+
+                 Región Especial País
+
+                 Para los casos de Quebec y Hong Kong, código de estas regiones en el país de destino, en los supuestos de
+                 desplazamiento de personas trabajadoras al servicio de sus empresas fuera del territorio nacional de acuerdo
+                 con lo previsto en el artículo 166.3 del TRLGSS. Ver tabla.
+
+                 Fecha fin prevista contrato
+
+                 Para los contratos formativos (prácticas y formación en alternancia), fecha inicial o prorrogada de finalización
+                 del contrato.
+
+Edición 05/2025                                                          Página 27 de 34
+Sistema RED. Instrucciones Técnicas          Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+2490             Reservado
+
+      OTD OTros Datos
+
+2500             Descriptor de segmento
+
+                 Cadena de caracteres “OTD”
+
+2510             Expediente CASIA
+
+2520             Código del Expediente CASIA dado por la TGSS al presentar la documentación acreditativa de víctima de
+2530             violencia sexual, de trata de seres humanos, de explotación sexual o laboral, mujeres en contextos de
+2540             prostitución, víctimas del terrorismo, excluido social, cambio de puesto de trabajo por ser mujer víctima de
+2550             violencia de género, requisitos incluidos en el Real Decreto Ley 1/2023.
+
+                 Reservado
+
+                 Fecha de inicio de excedencia
+
+                 Para situaciones adicionales 301, 302, 303, 304 y 305, para aquellos casos en los que se produzca un cambio
+                 de CCC, indica la fecha en la que se inició la excedencia.
+
+                 Código de Cuenta de Cotización a fecha de inicio de excedencia
+
+                 Para aquellos casos en los que durante la excedencia se produce un cambio de CCC, deberá anotarse el
+                 CCC en el que se encontraba el trabajador de alta cuando se inició la excedencia.
+
+                      Régimen de la Seguridad Social (RRSS)
+
+                        Clave de Régimen y Sector según capítulo Tablas
+
+2560                  Provincia
+2570
+2580                    Clave de la provincia en que reside la empresa (cuenta de cotización).
+2590                    No puede ser diferente de 1 a 52 para todos los regímenes y 1 a 53 y 56 sólo a efectos del Régimen
+2600                    Especial de Trabajadores del Mar.
+2610
+2620                  Número
+
+                        Asignado a la empresa en el momento de su inscripción en la Seguridad Social o apertura de la Cuenta
+                        de Cotización.
+
+                 Fecha Notificación
+
+                 En acción MR, para salarios de tramitación, fecha de notificación de la sentencia por la que el despido es
+                 declarado improcedente.
+
+                 Indicativo readmisión
+
+                 En acción MR, para salarios de tramitación, cuando se trate de un representante legal de los trabajadores o
+                 de un delegado sindical, carácter por el que se comunica si ha optado o no por la readmisión en la empresa.
+
+                 Fecha prevista fin de contrato
+
+                 En acción MB, para trabajadores que se encuentren en excedencia por cuidado de hijos, cuidado de familiares
+                 o por violencia de género, cuando se trate de un contrato temporal o de duración determinada, fecha en la que
+                 está previsto que finalice el contrato.
+
+                 Embarcación
+
+                 Conjunto de datos que identifica a la embarcación. Obligatorio para altas del régimen 0811 con RLCE 9922,
+                 9923, 9927 y 9928.
+
+                      Tipo de embarcación
+
+                        Clave del tipo de embarcación. Ver tabla.
+
+Edición 05/2025                              Página 28 de 34
+Sistema RED. Instrucciones Técnicas                                       Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+2630                  Identificador de la embarcación
+2640
+                        Código numérico que identifica a la embarcación.
+
+                 Reservado
+
+      DBA Datos de Bases Adicionales
+
+2700             Descriptor de segmento
+
+                 Cadena de caracteres “DBA”
+
+2710             Causa base adicional
+2720
+2730             Para aquellos contratos cuyas bases de cotización no se calculan en función de las retribuciones percibidas o
+2740             de prestaciones abonadas por las entidades gestoras o colaboradoras, indica la causa a la que se debe dicha
+                 circunstancia. Valores posibles: 001 – Contrato tiempo parcial concentrado.
+2750
+2760             Retribuciones anuales previstas
+2770
+                 Para los contratos a tiempo parcial concentrado, indica las retribuciones previstas del trabajador para el año al
+                 que se refieran. Expresado en céntimo de euro.
+
+                 Horas de trabajo anuales previstas
+
+                 Para los contratos a tiempo parcial concentrado, indica el número de horas previstas del trabajador para el
+                 año al que se refieran.
+
+                 Fecha hasta (contrato)
+
+                 Para los contratos a tiempo parcial concentrado, indica la fecha en la que está previsto que finalice la relación
+                 laboral del trabajador con la empresa. Solo deberá cumplimentarse cuando esté previsto que el contrato
+                 finalice antes del 31 de diciembre del año en el que se mecanice, excepto para acción ABA que deberá
+                 cumplimentarse siempre, o con la fecha fin del contrato o con la fecha de 31 de diciembre del año de
+                 mecanización.
+
+                 Tipo de información
+
+                 Para los contratos a tiempo parcial concentrado, para acciones ABA, MBA y EBA, indica el tipo de datos que
+                 se desean comunicar. Valores: 001= Datos comunes a la anualidad; 002= Períodos de actividad.
+
+                 Fecha desde tipo de información
+
+                 Para acciones MBA y EBA, identifica la fecha del registro con tipo de información 001 o 002, según
+                 corresponda, que se quiere modificar o eliminar. Para acción ABA, identifica la fecha desde la que el contrato
+                 a tiempo parcial en de carácter concentrado, que deberá coincidir con la FECHA REAL DEL ALTA o con la
+                 fecha de 01 de enero del año en el que se mecanice.
+
+                 Reservado
+
+      DSC Datos de Subcontratación y Cesión
+
+2800             Descriptor de segmento
+
+                 Cadena de caracteres “DSC”
+
+2810             Tipo de subcontratación o cesión
+
+                 Este campo identifica varias situaciones:
+                 - Enclaves laborales creados como medida de fomento de empleo de las personas con discapacidad.
+                 - Empresas usuarias a las que ceden sus trabajadores las Empresas de Trabajo Temporal.
+                 - Empresas que contratan o subcontratan la prestación de determinadas obras o servicios. (futuro uso)
+                 Admisible para Alta de trabajadores subcontratados o cedidos, Modificación de trabajadores subcontratados o
+                 cedidos y Eliminación de trabajadores subcontratados o cedidos.
+                 Ver tabla.
+
+Edición 05/2025                                                           Página 29 de 34
+Sistema RED. Instrucciones Técnicas          Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+2820             Código de Cuenta de Cotización de cesión
+
+2830             Número de inscripción a la Seguridad Social, Antiguo número patronal, al que se cede o subcontrata un
+2840             trabajador. Incluye el régimen, por lo que su formato es RRSSPPNNNNNNNNN. Obligatorio si no existe NSS
+2850             de cesión.
+2860
+2870                  Régimen de la Seguridad Social (RRSS)
+2880
+2890                    Clave de Régimen y Sector según capítulo Tablas
+2900
+2910                  Provincia
+2920
+                        Clave de la provincia en que reside la empresa (cuenta de cotización).
+                        No puede ser diferente de 1 a 52 para todos los regímenes y 1 a 53 y 56 sólo a efectos del Régimen
+                        Especial de Trabajadores del Mar.
+
+                      Número
+
+                        Asignado a la empresa en el momento de su inscripción en la Seguridad Social o apertura de la Cuenta
+                        de Cotización.
+
+                 NSS de cesión
+
+                 En el caso de que quien subcontrate sea un trabajador autónomo, número de afiliación a la Seguridad Social
+                 del mismo (NAF). Ver formatos comunes. Obligatorio si no existe CCC de cesión.
+
+                      Provincia
+
+                        Provincia de alta inicial del trabajador en el sistema de Seguridad Social. Con 2 posiciones, no pudiendo
+                        ser diferente de 1 a 56.
+
+                      Número
+
+                        Asignado al trabajador en el momento de la afiliación a la Seguridad Social. Cero y nueve dígitos antes
+                        del 03/92 y uno y nueve dígitos con posterioridad a esa fecha. Ver formatos comunes.
+
+                 Embarcación
+
+                 Conjunto de datos que identifica a la embarcación.
+
+                      Tipo de embarcación
+
+                        Clave del tipo de embarcación. Ver tabla.
+
+                      Identificador de la embarcación
+
+                        Código numérico que identifica a la embarcación.
+
+                 Reservado
+
+      DJD Datos Jornadas Diarias
+
+3000             Descriptor de segmento
+
+                 Cadena de caracteres “DJD”
+
+3010             Año
+3020
+                 Para la anotación de jornadas del Sistema Especial Agrario, días del Sistema Especial 32, y Días de Prácticas
+                 para prácticas no remuneradas, se indicará el año al que se refieren las jornadas a mecanizar.
+
+                 Mes
+
+                 Para la anotación de jornadas de jornadas del Sistema Especial Agrario, días del Sistema Especial 32, y Días
+                 de Prácticas para prácticas no remuneradas, se indicará el mes al que se refieren las jornadas a mecanizar.
+
+Edición 05/2025                              Página 30 de 34
+Sistema RED. Instrucciones Técnicas          Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+3030             Día
+
+3040             Cada posición representa un día del mes.
+3050
+3051             Para la anotación de jornadas del Sistema Especial Agrario (Régimen 0163), una S en una posición
+3052             determinada indicará que ese día se realiza jornada real; una N o un blanco en una posición determinada
+3053             indicará que ese día no se realiza jornada real; una P en una posición determinada indicará que ese día
+3054             estaba previsto realizar una jornada, pero no se ha realizado por encontrarse en situación de IT, maternidad,
+3060             paternidad, riesgo durante el embarazo o riesgo durante la lactancia natural.
+
+                 Para la anotación de los periodos de inactividad del Sistema Especial de frutas y hortalizas e industria de
+                 conservas vegetales, una S en una posición determinada indicará que ese día es de inactividad; una N o un
+                 blanco en una posición determinada indicará que ese día es de actividad.
+
+                 Fecha Real consolidada
+
+                 Para la modificación de la fecha real del alta en el Régimen Especial Agrario (0613), se indicará la fecha real
+                 que se desea modificar y que ya se encuentra consolidada en el sistema porque se mecanizó con
+                 anterioridad.
+
+                 Nueva Fecha Real
+
+                 Para la modificación de la fecha real del alta en el Régimen Especial Agrario (0613), se indicará la nueva
+                 fecha real que se desea se consolide en el sistema para el movimiento de alta existente.
+
+                 Días efectivos prácticas
+
+                 Para prácticas no remuneradas, número total de días en los que el estudiante realiza las prácticas en el mes.
+
+                 Días previstos ITAT
+
+                 Para prácticas no remuneradas, número total de días en los que el estudiante tenía previsto realizar prácticas
+                 en el mes pero no las ha realizado por encontrarse en situación de Incapacidad Temporal de Accidente de
+                 Trabajo.
+
+                 Días previstos Pago Directo
+
+                 Para prácticas no remuneradas, número total de días en los que el estudiante tenía previsto realizar prácticas
+                 en el mes pero no las ha realizado por encontrarse en una situación de Pago Directo: Nacimiento y Cuidado
+                 de menor, Riesgo durante el embarazo y Riesgo Durante la lactancia natural.
+
+                 Indicativo prácticas
+
+                 Para prácticas no remuneradas, a través de este campo se debe informar expresamente de la circunstancia
+                 de no haber realizado ningún día de prácticas o programas formativos no remunerados en un mes
+                 determinado.
+
+                 Reservado
+
+      FCT Fechas de Control de Trabajadores
+
+3100             Descriptor de segmento
+
+                 Cadena de caracteres “FCT”
+
+3110             Tipo de situación adicional de afiliación
+
+                 Este campo identifica a aquellas situaciones en las que el empresario debe cotizar por los trabajadores, pero a
+                 estos no se les generan días de permanencias en el sistema, por lo que se consideran situaciones asimiladas
+                 al alta.
+                 Admisible para Anotación de Situaciones Asimiladas al alta, Modificación de Situaciones Asimiladas al alta y
+                 Eliminación de Situaciones Asimiladas al alta.
+                 Ver tabla.
+
+Edición 05/2025                              Página 31 de 34
+Sistema RED. Instrucciones Técnicas         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+3120             Porcentaje
+3130
+3140             Indica el porcentaje de la bonificación de las cuotas empresariales a la Seguridad Social por contingencias
+                 comunes, aplicables en los Expedientes de Regulación de Empleo, cuando se cumplan las condiciones que
+3150             establece la normativa vigente.
+3160             Admisible para Anotación de Situaciones Adicionales de Afiliación y Modificación de Situaciones Adicionales
+3170             de afiliación, cuando el valor sea 406.
+3180
+                 Fecha fin de vacaciones
+
+                 Para las vacaciones retribuidas y no disfrutadas, en este campo se indicará la fecha hasta la que se extienden
+                 las vacaciones.
+                 Admisible en las bajas y modificación de bajas previas.
+                 La cumplimentación de este campo generará un periodo de situación asimilada al alta, desde el día siguiente
+                 de la Fecha Real de Baja hasta la fecha anotada como Fecha Fin de Vacaciones.
+                 Ver formatos comunes.
+
+                 Fecha desde
+
+                 Para Anotación de Situaciones Asimiladas al alta, Modificación de Situaciones Asimiladas al alta y Eliminación
+                 de Situaciones Asimiladas al alta, se indicará la fecha de inicio del periodo de dicha situación.
+                 Para el Alta, Modificación y Eliminación de trabajadores subcontratados o cedidos, se indicará la fecha de
+                 inicio de la subcontratación o cesión.
+                 Para informes de jornadas reales del Régimen Especial Agrario (0613), se indicará la fecha desde la que se
+                 desea obtener las jornadas reales mecanizadas para este trabajador.
+                 Para anotación de días trabajados se anotará la fecha de inicio del período al que se refieren los días
+                 trabajados.
+                 Para Consulta de Trabajadores en Otra empresa se indicará la fecha en la que se desea consultar si el
+                 trabajador está de alta.
+                 Para Modificación/Eliminación de Convenio Colectivo se indicará la fecha en la que comienza a aplicarse el
+                 convenio al que acompaña.
+                 Para solicitud de IDC se indicará la fecha para la que se desea obtener dicho informe.
+                 Ver formatos comunes.
+
+                 Fecha hasta
+
+                 Para Anotación de Situaciones Asimiladas al alta, Modificación de Situaciones Asimiladas al alta y Eliminación
+                 de Situaciones Asimiladas al alta, se indicará la fecha de fin del periodo de dicha situación.
+                 Para el Alta de trabajadores subcontratados o cedidos, se indicará la fecha de fin de la subcontratación o
+                 cesión.
+                 Para informes de jornadas reales del Régimen Especial Agrario (0613), se indicará la fecha hasta la que se
+                 desea obtener las jornadas reales mecanizadas para este trabajador.
+                 Para anotación de días trabajados se anotará la fecha de fin del período al que se refieren los días trabajados.
+                 Para Modificación/Eliminación de Convenio Colectivo se indicará la fecha en la que deja de aplicarse el
+                 convenio al que acompaña.
+                 Ver formatos comunes.
+
+                 Fecha desde nueva
+
+                 Para la Modificación de Situaciones Asimiladas al alta, se indicará la nueva fecha de inicio del periodo de
+                 dicha situación.
+                 Para la Modificación de trabajadores subcontratados o cedidos, se indicará la nueva fecha de inicio de la
+                 subcontratación o cesión.
+                 Para Modificación de Convenio Colectivo se indicará la nueva fecha en la que comienza a aplicarse el
+                 convenio al que acompaña.
+                 Ver formatos comunes.
+
+                 Fecha hasta nueva
+
+                 Para la Modificación de Situaciones Asimiladas al alta, se indicará la nueva fecha de fin del periodo de dicha
+                 situación.
+                 Para la Modificación de trabajadores subcontratados o cedidos, se indicará la nueva fecha de fin de la
+                 subcontratación o cesión.
+                 Para Modificación de Convenio Colectivo se indicará la nueva fecha en la que deja de aplicarse el convenio al
+                 que acompaña.
+                 Ver formatos comunes.
+
+                 Fecha de presentación
+
+                 Reservado respuesta afiliación.
+
+Edición 05/2025                             Página 32 de 34
+Sistema RED. Instrucciones Técnicas         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+3190             Fecha efecto de alta
+3200
+3210             Reservado respuesta afiliación.
+
+                 Indicativo SAA
+
+                 Para acción MB, cuando se anote el campo “Fecha fin de vacaciones”, indica si se trata de vacaciones
+                 retribuidas y no disfrutadas (valor 001) o de vacaciones no disfrutadas, retribuidas y cotizadas durante la
+                 relación laboral (valor 015). Valores posibles: 001=SAA 001; 015=SAA 015.
+
+                 Reservado
+
+        PIT      Períodos de Incapacidad Temporal
+3300
+3310             Descriptor de segmento
+3320
+3330             Cadena de caracteres “PIT”
+3340
+                 Tipo de prestación
+3350
+3360             Indica la causa que origina la prestación.
+3370             Ver tabla.
+
+                 Contingencia
+
+                 Indica el tipo de contingencia de la prestación.
+                 Ver tabla.
+
+                 Forma de pago
+
+                 Indica la modalidad de pago aplicable a la empresa.
+                 Ver tabla.
+
+                 Fecha hecho causante o de inicio de situación
+
+                 Para las acciones AIT y EIT se indicará la fecha en la que se inicia la baja médica o en la que se inicia la
+                 situación a la que acompaña.
+                 Ver formatos comunes.
+
+                 Fecha fin de la prestación
+
+                 Fecha en la termina el derecho a la prestación.
+                 Ver formatos comunes.
+
+                 Fecha efectos económicos
+
+                 Fecha desde la que se tiene derecho a la prestación.
+                 Ver formatos comunes.
+
+                 Reservado
+
+        ETF      Etiquetas de proceso final
+3500
+                 Las etiquetas de inicio y de fin forman parte del envío pero no del mensaje. Un envío está compuesto por uno
+                 o varios mensajes de afiliación que representan uno o varios CCC y/o trabajadores, y/o acciones.
+
+                 Descriptor de segmento
+
+                 Cadena de caracteres "ETF".
+
+3510             Identificador de sintaxis
+
+                 Identificará el formato del mensaje (segmentos y elementos) que se intercambia. Los datos serán afrontados
+                 en el momento de la concesión de la autorización.
+
+Edición 05/2025                             Página 33 de 34
+Sistema RED. Instrucciones Técnicas         Mensaje de Afiliación (AFI)
+
+______________________________________________________________________________________________
+
+Ref. Seg. Descripción (CAMPOS Y SUBCAMPOS)
+
+3520             Identificador de sintaxis del mensaje
+3530
+3540             Identifica el tipo de mensaje que sigue.
+3550
+3560             Número de versión de sintaxis del mensaje
+3570
+                 Versión del mensaje anterior.
+3580
+3590                  Identificador de sintaxis del proceso
+3600
+3610                    Identificará la versión del programa de validación, impresión y proceso que ha utilizado el emisor previo
+3620                    a realizar el intercambio.
+3630
+3640                  Número de versión de proceso
+3650
+3660                    Versión del módulo de validación anterior.
+3670
+3680                  Emisor del Intercambio
+
+                      Clave de autorización
+
+                        Número asignado por la TGSS al conceder la autorización administrativa para la utilización del Sistema
+                        RED. Una por empresa, agrupación de empresarios, profesional colegiado o gestores que actúen en
+                        representación de varias empresas. La carga el programa de Afiliación por remesas.
+
+                      Reservado
+
+                 Fecha/Hora de preparación
+
+                        Generará una clave única para cada envío por yuxtaposición de la fecha y la hora. Dicha clave es
+                        asignada por el emisor en el momento que genera el mensaje.
+
+                      Fecha
+
+                        En año, mes y día de preparación del envío. Ver formatos comunes.
+
+                      Hora
+
+                        En hora y minutos. Ver formatos comunes.
+
+                 Referencia de control de intercambio
+
+                 Recogerá el nombre del fichero plano de Sufijo AFI que ha sido preparado para el intercambio.
+
+                 Sufijo
+
+                 Sufijo o extensión del fichero.
+
+                 Código de prioridad de procesado
+
+                 No utilizado.
+
+                 Indicador de prueba
+
+                 Indica el tipo de envío que se realiza. Ver capítulo Tablas.
+
+                 Número total de Segmentos EMP
+
+                 Total de segmentos EMP que contiene el envío.
+
+                 Número total de segmentos
+
+                 Contador total de segmentos del envío, incluidas las etiquetas inicial “ETI” y final “ETF”.
+
+                 Reservado
+
+Edición 05/2025                             Página 34 de 34
+

@@ -1,0 +1,160 @@
+{
+  "spec": "04-output/new-spec/CO-PILA-007-AportesPensionados-Spec.xlsx",
+  "verified_on": "2026-10-21",
+  "primary_source": "raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf (md5 cf0bf837e8027e85cbfe4276b0d676ba, confirmed)",
+  "verdict": "FIXES REQUIRED - field table, positions, code lists, sample and standards pass; 1 major fix (health-rate periods in T2R2-048) and 6 minor text fixes before promotion to 05-final",
+  "checks": [
+    {
+      "id": 1,
+      "name": "Field table vs AT3 v15",
+      "result": "PASS",
+      "evidence": "108 rows extracted with pdfplumber from AT3 pp. 7-11, 14-16, 21-39 and compared programmatically (campo number, length, start, end, type, name): 27/18/63 fields, totals 482/285/519, positions contiguous. Zero mismatches except A1-023: AT3 p. 11 prints 422-440 for a 20-position field; the spec's 422-441 is forced by length 20, campo 24 at 442 and total 482, and M26 states this. Mandatory flags checked row by row against the 'Validaciones' text: all consistent (C for 'Obligatorio cuando...'/'Obligatorio para tipo...', N for blank or optional fields). T2R2-015 C vs AT3 'Obligatorio' is disclosed in G67 and kept in notes item 3."
+    },
+    {
+      "id": 2,
+      "name": "Code lists in Field Options",
+      "result": "PASS (health table: vigência, see fixes)",
+      "evidence": "Payer doc types NI/CC/CE/PA/CD (p. 7); class A/B/I (§1.2.1 p. 12); nature 1/2/3, person N/J, presentation U/S (pp. 9, 12); legal-rep doc CC/CE/PA/CD (p. 11); payer type 01-04 (pp. 11, 13); planilla P/R/L/V/C (pp. 15-18) with R04 P = pensioner types 1-9, R/L = 1-8 (table 7 p. 105); pensioner doc CC/CE/TI/RC/PA/CD/PE/PT (pp. 22, 25, 36); pension types for payer 01 = 2,3,4,8,10,11,12,13,14,20,21 (R02 table 5 pp. 102-103, read on the rendered pages); pensioner types 5/6/9 for payer 01 (R01 table 3 p. 101); R03 10 -> 5,6,7,8 and 13 -> 5,6 (table 6 p. 104); R6 health/pension/CCF per type (table 9 pp. 107-108); novedades ING X/C, RET X/P/C with P only for 4,7,11,14, VSP X, SUS S, corrections A/C (pp. 29, 39, 50); FSP 0 / 1% / 2% (pp. 40-47, 61-62)."
+    },
+    {
+      "id": 3,
+      "name": "Rules",
+      "result": "FAIL (fix M107 and related cells)",
+      "evidence": "Health bands 4% / 10% (>1-3) / 12% (>3): supported by Ley 100 art. 204 par. 5 with the inciso of Ley 2294 art. 78 and by Res. MSPS 1271/2023 art. 1 num. 5 ('A partir del año 2024 ... >1 SMLMV y hasta 3 SMLMV 10% >3 SMLMV 12%'); Res. 1271/2023 is listed among the acts incorporated in AT3 v15 (p. 1). The spec cites exactly these sources and keeps the conflict (AT3 §9 p. 113 shows only '2022 en adelante 4% 10% 12%' without band limits; 'previa reglamentación') in the notes, so it does not go beyond the sources. DEFECT: M107 applies the 2024 table 'From January 2020', contradicting AT3 p. 112 (2020-2021: 8/10/12) and the Ley 100 par. 5 table 'A partir del año 2022' (>1-2 / >2); this matters for R, L and V planillas of past periods (AT3 p. 20). FSP 1% (>10-20) and 2% (>20) on campo 58 with the factor on campo 63: matches AT3 pp. 40-47, 61-62, 64 (art. 27 Ley 100). Ley 797/2003 art. 8 itself is not in raw/ (the RA read it online) - observation. IBC cap 25 SMLMV: AT3 §2.2.2.13 p. 52, §2.2.2.4 p. 48 - OK. Rounding: Decreto 780 art. 3.2.1.5 num. 1 (IBC to the peso above) and num. 2 (contributions to the multiple of 100 above), text of Decreto 1990/2016 - OK in column P, File Structure B13, Population Rules C18; M108 wording inconsistent (fix). Population: employer-paid pensions only (payer 01, pensioner 5/6/9); employees to CO-PILA-003; WT 62151 retirees excluded with the condition kept (Payroll Scope C12, as in RA Q4) - OK. Prerequisite 'INFORMACIÓN PAGADORES DE PENSIONES' for P, R, L and V: AT3 pp. 16, 17, 18, 20 - OK. Decreto 780 art. 3.2.3.9 (20+ electronic from 6 Mar 2017), art. 3.2.2.1 (15 NIT bands, 'Todos los aportantes'), art. 2.2.1.1.2.1 (base = mesada) verified in the local file."
+    },
+    {
+      "id": 4,
+      "name": "Field Explanations state a rule with its source; open items kept out",
+      "result": "PASS with minor fixes",
+      "evidence": "All 108 M cells end with a 'Source:' citation (AT3 page/section or law). Open items 1-15 of the notes are not stated as rules (T2R1-011 has no +1-month rule; layout of campos 40/48 sent to operator configuration; deadline day numbers omitted). Exceptions: M107 period error and Payroll Scope C9 FSP-abroad sentence without source (fixes)."
+    },
+    {
+      "id": 5,
+      "name": "Standards",
+      "result": "PASS",
+      "evidence": "Version Control: one line '1.0 | 2026-10-21 | Initial version. | Approved | Wallisson Gomes' (row 13). Columns T/U rows 3-125 empty. WORDS of scripts/make_final.py: 0 hits; extra scan (pending, round, NOT LOCATED, TODO/TBD, warning markers, HANDOFF/OPEN-POINTS/BAU/PMI/CO-GAP/scope_manifest): 0 hits (only the header word 'Notes'). Formula cells: 0. validate_workbook --artifact RSPEC: FAIL blocker=1 major=6, all C12/columns on spec-sheet row 1 (title row), the same pattern as 05-final/CO-PILA-003; no C29 residual markers. Sample File: records 482/285/519/519, identical to sample-records.txt; parsed with the field table: every value at its position, N fields zero-filled, A fields left-justified; header echoes equal File Type 1 campos 1,2,3,4,10,5,6,27,25; T2R1-014 = 2; T2R1-015 = 25,500,000 = sum of campo 58; health 3,500,000 x 10% = 350,000 and 22,000,000 x 12% = 2,640,000; FSP 22,000,000 x 1% = 220,000; pensioner 1 equals the column K examples. NIT 900123456 DV: weights 3,7,13,17,19,23,29,37,41 from the right, sum 586, mod 11 = 3, DV = 11 - 3 = 8 = A1-004 and T2R1-006."
+    },
+    {
+      "id": 6,
+      "name": "Scope",
+      "result": "PASS with minor fix",
+      "evidence": "Rules only, no client facts. WT references: 62154 (campos 39, 58, 63, T2R1-015), 21645/21646/21647 (campo 49), 21643/21648/21644 (campo 47); each feeds a field, with 'attribute per WT from the WTC' in L105/L108. WT 62151 appears only as an exclusion (Payroll Scope A12, Population Rules D4) - fix proposed. WT 62830 not mapped (correct, notes item 13)."
+    }
+  ],
+  "required_fixes": [
+    {
+      "severity": "major",
+      "sheet": "PILA Pensioners Spec",
+      "cell": "M107",
+      "current": "The rate legally in force for the period paid. From January 2020 it follows Ley 100 de 1993 art. 204 par. 5, selected on the total mesada (campo 63): a mesada of 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with the inciso added by Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1, Anexo Técnico 1 table 'A partir del año 2024'). The information operator checks the rate against campo 63 for pension types 1 to 16, 20 and 21. Zero where the pensioner resides abroad (campo 18 = X). Source: AT3 v15 §2.2.1 campo 48, p. 35; §2.2.2.22, pp. 62-63; ch. 4 §9, pp. 109-113.",
+      "proposed": "The rate legally in force for the contribution period paid, selected on the total mesada (campo 63) under Ley 100 de 1993 art. 204 par. 5: periods 2020-2021: 1 SMLMV 8%, more than 1 and up to 2 SMLMV 10%, more than 2 SMLMV 12%; periods 2022-2023: 1 SMLMV 4%, more than 1 and up to 2 SMLMV 10%, more than 2 SMLMV 12%; periods from 2024: 1 SMLMV 4%, more than 1 and up to 3 SMLMV 10%, more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with the inciso added by Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1 nums. 3 to 5, Anexo Técnico 1). The information operator checks the rate against campo 63 for pension types 1 to 16, 20 and 21; in R, L and V planillas it validates the rate in force for the period reported. Zero where the pensioner resides abroad (campo 18 = X). Source: AT3 v15 §2.2.1 campo 48, p. 35; §2.1.2.2, p. 20; §2.2.2.22, pp. 62-63; ch. 4 §9, pp. 109-113.",
+      "reason": "Current text says 'From January 2020 ... a mesada of 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%'. That is wrong for 2020-2021 (8% at 1 SMLMV) and for 2022-2023 (10% band is >1-2, 12% from >2). R, L and V planillas settle past periods and the operator validates 'la tarifa vigente para el periodo que está reportando'.",
+      "source": "AT3 v15 ch. 4 §9 p. 112 ('1 de enero de 2020 a 31 de diciembre de 2021', pensioner types 1-6, N: 8% 10% 12%) and p. 113 ('1 de enero de 2022 en adelante': 4% 10% 12%); AT3 §2.1.2.2 p. 20; Ley 100 art. 204 par. 5, tables 2020-2021 and 'A partir del año 2022' (raw/docs/oficiais/CO/2026-10-21-Ley-100-1993-FuncionPublica.html); Res. MSPS 1271/2023 art. 1 nums. 3, 4, 5 (raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-colpensiones.htm)."
+    },
+    {
+      "severity": "minor",
+      "sheet": "Field Options",
+      "cell": "D65:D67",
+      "current": [
+        "4% (Ley 100 de 1993 art. 204 par. 5; Res. MSPS 1271 de 2023 art. 1).",
+        "10% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1, from 2024).",
+        "12% (same sources)."
+      ],
+      "proposed": [
+        "4% for periods from January 2022 (8% in 2020-2021) (Ley 100 de 1993 art. 204 par. 5; Res. MSPS 1271 de 2023 art. 1 nums. 3 to 5).",
+        "10% for periods from January 2024 (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1 num. 5). For periods 2020-2023 the 10% band is more than 1 and up to 2 SMLMV.",
+        "12% for periods from January 2024 (same sources). For periods 2020-2023 the 12% band starts above 2 SMLMV."
+      ],
+      "reason": "The code table gives the 2024 bands without the period from which each applies; R, L and V planillas of past periods need the earlier bands.",
+      "source": "Res. MSPS 1271/2023 art. 1 nums. 3-5 (raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-colpensiones.htm); Ley 100 art. 204 par. 5 (raw/docs/oficiais/CO/2026-10-21-Ley-100-1993-FuncionPublica.html); AT3 v15 ch. 4 §9 pp. 112-113."
+    },
+    {
+      "severity": "minor",
+      "sheet": "Population Rules",
+      "cell": "C9",
+      "current": "Select the rate on campo 63: a mesada of 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1). Campo 49 = campo 48 x campo 39, rounded UP to the next multiple of 100. The amount is the sum of the health WTs 21645 / 21646 / 21647 withheld from the mesada.",
+      "proposed": "Select the rate on campo 63 for the contribution period: from January 2024 a mesada of 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1); periods 2020-2023 as in T2R2-048. Campo 49 = campo 48 x campo 39, rounded UP to the next multiple of 100. The amount is the sum of the health WTs 21645 / 21646 / 21647 withheld from the mesada.",
+      "reason": "Same period issue as M107: the engine must apply the period rate in R, L and V planillas.",
+      "source": "As for M107."
+    },
+    {
+      "severity": "minor",
+      "sheet": "Payroll Scope Summary",
+      "cell": "C16",
+      "current": "Campo 49 = campo 48 x campo 39. Rate on the total mesada: 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1). Base = mesada capped at 25 SMLMV (AT3 v15 §2.2.2.13, p. 52).",
+      "proposed": "Campo 49 = campo 48 x campo 39. Rate on the total mesada, for contribution periods from January 2024: 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1); earlier periods as in T2R2-048. Base = mesada capped at 25 SMLMV (AT3 v15 §2.2.2.13, p. 52).",
+      "reason": "Same period issue as M107.",
+      "source": "As for M107."
+    },
+    {
+      "severity": "minor",
+      "sheet": "PILA Pensioners Spec",
+      "cell": "M108",
+      "current": "Campo 48 x campo 39. Where the IBC is below 1 SMLMV the value is approximated to a multiple of 100 under Decreto 780 de 2016 art. 3.2.1.5. The contribution is borne in full by the pensioner (Ley 100 de 1993 art. 143) and withheld from the mesada by the payer. Source: AT3 v15 §2.2.1 campo 49, p. 35; §2.2.2.23, p. 63.",
+      "proposed": "Campo 48 x campo 39, rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2), also where the IBC is below 1 SMLMV. The contribution is borne in full by the pensioner (Ley 100 de 1993 art. 143) and withheld from the mesada by the payer. Source: AT3 v15 §2.2.1 campo 49, p. 35; §2.2.2.23, p. 63.",
+      "reason": "Current text reads as if the multiple-of-100 rounding applied only below 1 SMLMV, while P108, File Structure B13 and Population Rules C18 round every contribution up to the next multiple of 100. The decree applies to every contribution ('múltiplo de 100 superior más cercano').",
+      "source": "Decreto 780/2016 art. 3.2.1.5 num. 2 (raw/docs/oficiais/CO/2026-10-13-Decreto-780-2016-FuncionPublica.html); AT3 v15 §2.2.2.23 p. 63."
+    },
+    {
+      "severity": "minor",
+      "sheet": "Payroll Scope Summary",
+      "cell": "C9",
+      "current": "Reported with campo 18 = X: health rate 0% and health contribution zero for periods after December 2015, EPS may be blank, date of filing abroad mandatory (AT3 v15 §2.2.2.5, p. 49; ch. 4 §9, p. 113). The FSP contribution above 10 SMLMV still applies.",
+      "proposed": "Reported with campo 18 = X: health rate 0% and health contribution zero for periods after December 2015, EPS may be blank, date of filing abroad mandatory (AT3 v15 §2.2.2.5, p. 49; ch. 4 §9, p. 113). The exemption covers the health contribution only; the FSP contribution above 10 SMLMV still applies (AT3 v15 §2.2.2.21, pp. 61-62).",
+      "reason": "The last sentence (FSP still applies) has no source; §2.2.2.5 and ch. 4 §9 deal only with health.",
+      "source": "AT3 v15 §2.2.2.5 p. 49 (exemption limited to 'aportes al Sistema General de Seguridad Social en Salud'); §2.2.2.21 pp. 61-62 (no exception for campo 18 = X)."
+    },
+    {
+      "severity": "minor",
+      "sheet": "Payroll Scope Summary / Population Rules",
+      "cell": "Payroll Scope Summary!A12; Population Rules!D4",
+      "current": [
+        "Former employee paid a retirement bonus in instalments (WT 62151)",
+        "Employees, including employed pensioners in active service, go in CO-PILA-003. Instalments of a retirement bonus (WT 62151) are not a pension and have no record. A suspended mesada is still reported, with SUS = S."
+      ],
+      "proposed": [
+        "Former employee paid a retirement bonus in instalments",
+        "Employees, including employed pensioners in active service, go in CO-PILA-003. Instalments of a retirement bonus are not a pension and have no record. A suspended mesada is still reported, with SUS = S."
+      ],
+      "reason": "Scope rule for this verification: WT references only where the WT feeds a field. WT 62151 feeds no field of this report; it is cited only to exclude it. Optional if Wallisson prefers to keep the excluded WT visible to development.",
+      "source": "Check 6 of the verification brief; RA-PENSIONERS-PILA-2026-10-21 Q4."
+    }
+  ],
+  "observations": [
+    "Notes item 1 overstates the conflict: AT3 v15 ch. 4 §9 p. 113 prints no band limits for '2022 en adelante', and Res. 1271/2023 (incorporated in AT3 v15 per p. 1) sets the 2024 bands for PILA reporting. The open point is only the Government 'reglamentación' of Ley 2294 art. 78. Internal file, no spec change.",
+    "Save Ley 797/2003 (art. 8, new Ley 100 art. 27) to raw/docs/oficiais/CO/. It is cited in T2R2-036/046/047, Field Options D71 and Population Rules C10 but was read only online by the RA; the local Ley 100 FuncionPublica art. 27 shows the original text.",
+    "Population Rules D8 / M95 state a minimum of 1 SMLMV for type 10 (ch. 4 §7 p. 109; §2.2.2.2 p. 43), while campo 9 p. 24 says types 10, 14 and 16 may be below 1 SMMLV. Two AT3 passages against one, disclosed in notes item 12 - acceptable.",
+    "T2R2-035/036 are marked C per the field table ('obligatorio para...'), while §2.2.2.10-11 p. 51 say 'Este campo es obligatorio' with 0 allowed. No effect on the file (numeric, zero-filled)."
+  ],
+  "round2": {
+    "verified_on": "2026-10-21",
+    "verdict": "PASS - all 7 round-1 fixes applied verbatim and correct; extra Report Matrix A33 change consistent; nothing else changed. Ready for promotion to 05-final.",
+    "checks": [
+      {
+        "id": "R2-1",
+        "name": "Round-1 fixes",
+        "result": "PASS",
+        "evidence": "Cell-value diff old vs new: changed cells are exactly M107, M108, Field Options D65-D67, Population Rules C9 and D4, Payroll Scope C9, C16 and A12 (+ Report Matrix A33). Each equals the proposed text. M107 period table (2020-2021 8/10 >1-2/12 >2; 2022-2023 4/10 >1-2/12 >2; from 2024 4/10 >1-3/12 >3; R/L/V at the rate of the period) matches Ley 100 art. 204 par. 5 tables and inciso Ley 2294 art. 78, Res. MSPS 1271/2023 art. 1 nums. 3-5, AT3 v15 p. 20 (tarifa vigente para el periodo) and pp. 112-113."
+      },
+      {
+        "id": "R2-2",
+        "name": "Report Matrix A33",
+        "result": "PASS",
+        "evidence": "Now states rate by total mesada and contribution period, from January 2024 4/10 (>1-3)/12 (>3), earlier periods as in T2R2-048, citing Ley 100 art. 204 par. 5 and Res. 1271/2023 art. 1: consistent with M107, Field Options D65-D67, Population Rules C9, Payroll Scope C16."
+      },
+      {
+        "id": "R2-3",
+        "name": "No collateral change",
+        "result": "PASS",
+        "evidence": "Field table re-compared with AT3: 27/18/63 fields, totals 482/285/519, only the documented A1-023 (422-441). Sample File records 482/285/519/519, identical to sample-records.txt, DV 8, arithmetic unchanged. WORDS 0, extra markers 0, formulas 0, T/U empty, Version Control one line 1.0 | 2026-10-21 | Initial version. | Approved | Wallisson Gomes; validate_workbook RSPEC: only the shared C12 title-row pattern (blocker 1, major 6), no C29."
+      },
+      {
+        "id": "R2-4",
+        "name": "Ley 797/2003 local copy",
+        "result": "PASS",
+        "evidence": "raw/docs/oficiais/CO/2026-10-21-Ley-797-2003-SecretariaSenado.html: art. 8 replaces Ley 100 art. 27; lit. d) pensioners >10 to 20 SMLMV 1%, >20 SMLMV 2% to the subsistence subaccount - supports T2R2-047, Field Options D71, Population Rules C10."
+      }
+    ],
+    "required_fixes": []
+  }
+}

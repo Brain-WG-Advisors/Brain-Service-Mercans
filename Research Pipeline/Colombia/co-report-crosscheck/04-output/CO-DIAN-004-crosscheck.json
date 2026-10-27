@@ -1,0 +1,1706 @@
+{
+ "spec": "CO-DIAN-004",
+ "fields": [
+  {
+   "id": 4,
+   "name": "Certificate number",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries a certificate number; the client reports are payroll working files, not issued certificates. The numbering series is Mercans-designed per the spec.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 5,
+   "name": "Employer NIT",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "No mapped report carries the employer NIT. The title block carries only the internal company code '1764' and the company name.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 6,
+   "name": "NIT verification digit",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped report carries the NIT verification digit.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 7,
+   "name": "First surname",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "The withholding agent is a legal person (title block 'Compañía Colombiana de Tabaco SAS'), so the natural-person name casillas stay empty for this client, as the spec's conditional rule requires.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 8,
+   "name": "Second surname",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "The withholding agent is a legal person (title block 'Compañía Colombiana de Tabaco SAS'), so the natural-person name casillas stay empty for this client, as the spec's conditional rule requires.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 9,
+   "name": "First name",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "The withholding agent is a legal person (title block 'Compañía Colombiana de Tabaco SAS'), so the natural-person name casillas stay empty for this client, as the spec's conditional rule requires.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 10,
+   "name": "Other names",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "The withholding agent is a legal person (title block 'Compañía Colombiana de Tabaco SAS'), so the natural-person name casillas stay empty for this client, as the spec's conditional rule requires.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 11,
+   "name": "Corporate name",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "C Entity Name",
+     "example_masked": "NAME_1360 (over-masked; 1 distinct value)"
+    }
+   ],
+   "finding": "The client's only source of the company name is the payroll organisation label, which carries the SAP company-code prefix '1764 - '. The spec explanation does not warn the developer that the RUT legal name must be used instead. Base of Withholding 'Entity Name' was masked as a name token and cannot be used as evidence of the value.",
+   "proposed_explanation": "Full corporate name (razon social) of the withholding agent, matching casilla 35 of the RUT; source Company.Legal_Name. Populated only for a legal person or sociedad de hecho. Do NOT copy the payroll organisation label printed in the title block of the client's payroll reports ('1764 - Compañía Colombiana de Tabaco SAS'): it prefixes the internal company code '1764 - ' and is not the RUT name. The same value feeds 'Payer or withholding agent name' on the signature line.",
+   "official_source": ""
+  },
+  {
+   "id": 13,
+   "name": "Employee document type",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AM National ID",
+     "example_masked": "1423211232"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AN Identity Card",
+     "example_masked": "80020815"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AO Indentity Card for Foreigners",
+     "example_masked": "0244621"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AP Citizenship Card ID",
+     "example_masked": "57630918"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AH Nationality",
+     "example_masked": "Ecuador"
+    }
+   ],
+   "finding": "No single document-type column; four document columns, overlapping for 14 employees (8 with National ID + Citizenship Card, 3 with National ID + Identity Card + Citizenship Card, 3 other combinations) Every employee has at least one. All 13 foreigners holding only 'Indentity Card for Foreigners' are non-Colombian nationals. The spec explanation describes the code list but not how the code is derived from client data.",
+   "proposed_explanation": "The instruction guide prints a SIX-VALUE list on the form itself: 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Foreign resident ID card, 31 NIT, 41 Passport. That is NARROWER than the electronic payroll list at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP. An employee holding a PEP or a PPT therefore has NO exact code here. SOURCE (client evidence): the client employee master holds NO document-type field. It holds one column per document - 'National ID', 'Identity Card', 'Indentity Card for Foreigners', 'Citizenship Card ID' - and 14 of 261 employees have two or three of them populated. The engine must store an explicit Employee.Document_Type for the document actually certified in casilla 25, not infer it from which column is filled. The mapping of the client columns to Form 220 codes must be confirmed with the client: 'Citizenship Card ID' -> 13 and 'Indentity Card for Foreigners' -> 22 are the evident candidates; 'National ID' and 'Identity Card' have no evident code (they appear next to a Citizenship Card for Colombian nationals).",
+   "official_source": ""
+  },
+  {
+   "id": 14,
+   "name": "Employee identification number",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "C EE Citizenship Card ID",
+     "example_masked": "5124583130"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "A ID Number",
+     "example_masked": "33484413"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "A ID Number",
+     "example_masked": "71425113"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "A Employee ID",
+     "example_masked": "71425113"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AP Citizenship Card ID",
+     "example_masked": "57630918"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "D Beneficiary National Id",
+     "example_masked": "1423211232"
+    }
+   ],
+   "finding": "'ID Number' in Base of Withholding and Accumulated Report is the employee number (all 261 Base of Withholding employee IDs match Master Data 'Employee ID'; both reports end with footer rows - 'GRAND TOTAL', and 'Confidential' in Master Data - that must be excluded), not the document. Accumulated 'EE Citizenship Card ID' equals one of the Master Data document columns for all 261 matched employees, including foreigners' cards, so its label is misleading. Accumulated covers 1,038 payees against 261 in Master Data: the 491 pension payees are not in Master Data. Masking note: numbers are digit-substituted, so leading zeros in masked examples are not evidence of leading zeros in the raw data.",
+   "proposed_explanation": "Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number column of the employee master that matches casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'); in the client's Accumulated Report the same number appears in 'EE Citizenship Card ID', which despite its label also carries foreigners' card numbers. Do NOT use the column 'ID Number' of the Accumulated Report or of the Base of Withholding: it is the internal employee number (equal to Master Data 'Employee ID'), not an identity document. For pension income the client records a separate payee ('Beneficiary National Id'); see casilla 50 for whose number is certified.",
+   "official_source": ""
+  },
+  {
+   "id": 15,
+   "name": "Employee first surname",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "D Last Name",
+     "example_masked": "NAME_0002"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "B Employee Name",
+     "example_masked": "NAME_1492 (single full-name string)"
+    }
+   ],
+   "finding": "Master Data carries the name split exactly as the casilla requires (D Last Name, 1% blank). Gap outside the explanation: pension payees (491 in the Accumulated Report) are not in Master Data, and the Accumulated Report has only a single full-name string, so split names for them need a pensioner master source (see casilla 50).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 16,
+   "name": "Employee second surname",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "E Second Last Name",
+     "example_masked": "NAME_0010"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "B Employee Name",
+     "example_masked": "NAME_1492 (single full-name string)"
+    }
+   ],
+   "finding": "Master Data carries the name split exactly as the casilla requires (E Second Last Name, 56% blank, consistent with Mandatory = N). Gap outside the explanation: pension payees (491 in the Accumulated Report) are not in Master Data, and the Accumulated Report has only a single full-name string, so split names for them need a pensioner master source (see casilla 50).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 17,
+   "name": "Employee first name",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "B First Name",
+     "example_masked": "NAME_0001"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "B Employee Name",
+     "example_masked": "NAME_1492 (single full-name string)"
+    }
+   ],
+   "finding": "Master Data carries the name split exactly as the casilla requires (B First Name, 1% blank). Gap outside the explanation: pension payees (491 in the Accumulated Report) are not in Master Data, and the Accumulated Report has only a single full-name string, so split names for them need a pensioner master source (see casilla 50).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 18,
+   "name": "Employee other names",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "C Middle Name",
+     "example_masked": "NAME_0008"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "B Employee Name",
+     "example_masked": "NAME_1492 (single full-name string)"
+    }
+   ],
+   "finding": "Master Data carries the name split exactly as the casilla requires (C Middle Name, 70% blank, consistent with Mandatory = N). Gap outside the explanation: pension payees (491 in the Accumulated Report) are not in Master Data, and the Accumulated Report has only a single full-name string, so split names for them need a pensioner master source (see casilla 50).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 20,
+   "name": "Period certified - from",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "G Hire Date",
+     "example_masked": "01-03-2026"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "H Original Hire Date",
+     "example_masked": "27-02-2014"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "X Adjusted Service Date",
+     "example_masked": "2026-03-01"
+    }
+   ],
+   "finding": "Three candidate start dates in two different formats; the spec says only 'the hire date'. The developer needs to know which client date to use and that the source format (DD-MM-YYYY / YYYY-MM-DD) differs from the output format AAAA MM DD.",
+   "proposed_explanation": "First day of the certified period, output as AAAA MM DD. Normally 1 January of the tax year, but the start date of the employment relationship where the employee joined during the year. Bidirectional pair with casilla 31. SOURCE (to be confirmed with the client): the client employee master carries three start dates - 'Hire Date' and 'Original Hire Date' (format DD-MM-YYYY) and 'Adjusted Service Date' (format YYYY-MM-DD); 'Hire Date' differs from 'Original Hire Date' for 40 of 261 employees, where the original date points to earlier service (masked example: Hire Date 01-03-2026, Original Hire Date 27-02-2014). Use the start of the employment relationship current in the tax year (candidate: 'Hire Date') and convert the source format to AAAA MM DD.",
+   "official_source": ""
+  },
+  {
+   "id": 21,
+   "name": "Period certified - to",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "R Employment Status",
+     "example_masked": "D"
+    }
+   ],
+   "finding": "Master Data carries only Employment Status (A / D: 5 employees 'D') and no termination date; no other report mapped to this spec carries one (the Vertical G2N 'Effective Leaving Date' is not mapped to CO-DIAN-004). The source of the termination date must be confirmed.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 22,
+   "name": "Date of issue",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Issue date of the certificate; no client report carries it.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 23,
+   "name": "Place where the withholding was made",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AG Work location",
+     "example_masked": "Bogota"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "U Personal Subarea",
+     "example_masked": "Bogota"
+    }
+   ],
+   "finding": "No company-level place of withholding in any mapped report; the only place data is the employee's work location / personal subarea, which the spec explicitly says is not necessarily the place of withholding. Spec-internal point for review: column L System Mapping 'Company.City_Code' is the same mapping as casilla 35, although this casilla is a text name (Format A, example 'BOGOTA D.C.').",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 24,
+   "name": "Department code",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AV Employee Address - Department",
+     "example_masked": "CUN"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AV Employee Address - Department",
+     "example_masked": "DC"
+    }
+   ],
+   "finding": "Spec requires the 2-digit DANE department code (example '11'). The only department data in the client reports is the employee's address department as an alphabetic abbreviation (DC, ANT, CUN, VAC, ATL...; also foreign values 'ON', 'VD', 'JAL'), which is neither a DANE code nor the place of withholding. A DANE code must be held on the company / withholding-place record.",
+   "proposed_explanation": "DANE department code of the place in casilla 33. The instruction guide directs the use of the DANE 'Department codes' tables. SOURCE NOTE: no client report carries a DANE code. The client master data holds only the employee's address department as an alphabetic abbreviation ('DC', 'ANT', 'CUN', ...), which is the residence, not the place of withholding, and is not a DANE code; do not reuse it. Hold the DANE department code on the company / withholding-place record.",
+   "official_source": ""
+  },
+  {
+   "id": 25,
+   "name": "City or municipality code",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AR City",
+     "example_masked": "Bogotá"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AR City",
+     "example_masked": "BOGOTA"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AG Work location",
+     "example_masked": "Medellin"
+    }
+   ],
+   "finding": "Spec requires the 3-digit DANE municipality code (example '001'). The client reports carry only free-text city names with inconsistent spelling ('Bogota', 'Bogotá', 'BOGOTA', 'Bogota D.C.', 'bogota') and work-location names; no DIVIPOLA code.",
+   "proposed_explanation": "DANE municipality code of the place in casilla 33. Like PILA and unlike the electronic payroll, Form 220 splits the DIVIPOLA code across two casillas. SOURCE NOTE: no client report carries a DIVIPOLA code; the client master data holds only free-text city names with inconsistent spelling ('Bogota', 'Bogotá', 'BOGOTA', 'Bogota D.C.') for the employee address and work location. Hold the DANE municipality code on the company / withholding-place record; do not derive it from employee text fields.",
+   "official_source": ""
+  },
+  {
+   "id": 27,
+   "name": "Salary payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62100 Ordinary Salary- 0003"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62140 Integral Salary- 0423"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "U Total",
+     "example_masked": "18179572"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "E Monthly Basic Salary and Integral Salary",
+     "example_masked": "24715285"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "F Others Income",
+     "example_masked": "3945568"
+    }
+   ],
+   "finding": "Client data supports the casilla (salary wage types per employee per month), but the spec mapping 'SUM(Payroll.Salary_Payments)' does not say which wage types feed it. The client's 30 wage types flagged 'Salary Payment Indicator' = X are not a usable casilla-36 rule (they include vacation and per-diem wage types the spec routes elsewhere). The Accumulated Report monthly columns run 01/10/2025 to 01/09/2026 (rolling 12 months, although its title line reads '01-01-2026 - 2026-09-30'), so its 'Total' column mixes two tax years and cannot feed Form 220 directly; the annual value must be the sum of the January-December monthly amounts of the tax year.",
+   "proposed_explanation": "Total salary payments ACTUALLY MADE in the period to a resident natural person whose income derives from an employment or statutory relationship. The instruction guide quotes CST art. 127 in full: salary is not only the ordinary fixed or variable remuneration but everything the employee receives in money or in kind as direct consideration for the service - primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. EXCLUSION RULE: do NOT include here any value belonging in casillas 38 to 46. CLIENT MAPPING: salary wage types evidenced in the client's accumulations include 62100 Ordinary Salary, 62101 Arrears - Ordinary salary, 62140 Integral Salary (the full integral salary, including the factor prestacional), 62141 Arrears-Integral Salary, 62118 Incentive Compensation - IC Local Country, 62133 Variable, 62208 March Bonus, 62209 Christmas Bonus, 62210 August Bonus, 62225 Salary Attendance Bonus-Monthly, 62228 Years of Service Bonus - CLA, 62113 Weekend payoff and 62841 / 62842 / 62845 overtime and night, Sunday or holiday surcharges. The client's 'Salary Payment Indicator' flag ('X') must NOT be used as the casilla-36 rule on its own: it is also set on vacation pay (79401 Annual leave payout, 62116 Vacation Terminations, 62150 Vacation Bonus) and on per diems (62805-62808), which belong to casillas 42 and 43, and it is absent from other bonuses (e.g. 62229 Years of Service Bonus NON CLA, 62224 Quarterly Salary Attendance Bonus, 62202 Ocassional Bonus Grossed Up). The engine needs an explicit wage-type-to-casilla table approved by the RA. Salary paid abroad to expatriates (25830 Salary paid in Foreign Countries, 65838 Incentive Compensation - IC-1001 Foreign Country) needs an RA decision. PERIOD: sum the payments made from 1 January to 31 December of the tax year; never a rolling 12-month total.",
+   "official_source": ""
+  },
+  {
+   "id": 28,
+   "name": "Payments made with vouchers, cheques, cards or vales",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65818 Meal Allowance Inf.-2079"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21115 Meal Allowance Inf. Deduction-2644"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65811 Gym Allowance Inf.-6969"
+    }
+   ],
+   "finding": "The client pays several benefits in kind through third parties, booked as 'Inf.' earning + equal deduction pairs (65818 and 21115 both total 1,805,980,003 over the 12 columns). The spec explains the legal categories but gives no mapping, so the developer cannot tell which client wage types feed casilla 37.",
+   "proposed_explanation": "Payments made in electronic or paper service vouchers, cheques, cards or vales - for fuel, school supplies, footwear and clothing, or any other purpose. Deductible for the employer and income for the employee. THREE EXPLICIT NOTES in the instruction guide: (1) INCLUDE meal payments for an employee earning MORE than 310 UVT per month; (2) do NOT include meal payments for an employee earning up to 310 UVT - those go to casilla 38; (3) do NOT include anything already reported in casilla 36. CLIENT EVIDENCE: the client books in-kind benefits paid to third parties as informative earning wage types ('Inf.') offset by an equal deduction - e.g. 65818 Meal Allowance Inf.-2079 offset by 21115 Meal Allowance Inf. Deduction-2644 (identical totals) - and the same pattern for 65811 Gym Allowance Inf.-6969, 65809 / 65839 Optical Allowance Inf, 65812 Text Books Allowance - Inf-6971, 65801 / 65814 / 65815 / 65831 Private Health Insurance Inf and 65817 / 65837 Life Insurance-Inf. Each must be assigned by the RA to casilla 37, 38 or 46 or to no casilla; the meal item 65818 is subject to the 41 UVT / 310 UVT test of casillas 37-38. The offsetting deduction wage types are payroll mechanics and are not themselves casilla values.",
+   "official_source": ""
+  },
+  {
+   "id": 29,
+   "name": "Excess meal payments over 41 UVT (ET art. 387-1)",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65818 Meal Allowance Inf.-2079"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "I 01/01/2026",
+     "example_masked": "monthly amount per employee"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58001 UVT"
+    }
+   ],
+   "finding": "The client has a recurring meal payment (65818, paid in every month) that this casilla tests. The explanation gives the thresholds but not the wage type nor that the test is monthly per employee and then summed.",
+   "proposed_explanation": "Where the employer pays a THIRD PARTY for the employee's or their family's meals - a restaurant, own or third-party, or vouchers for food - the payment is deductible for the employer and is NOT income for the employee but for the supplier, PROVIDED the employee's salary does not exceed 310 UVT (COP 16,235,940 per month in 2026). Where the monthly payments exceed 41 UVT (COP 2,147,334 in 2026), THE EXCESS is taxable income of the employee and is withheld as employment income. The instruction guide adds that the rule does not apply to company representation expenses, which remain deductible. Do NOT include amounts already in casilla 36. CLIENT EVIDENCE: meal payments to third parties are wage type 65818 Meal Allowance Inf.-2079, available per employee per month. Run the test MONTH BY MONTH per employee: the month's meal payment against 41 UVT and the employee's monthly salary against 310 UVT, using the UVT of the tax year (client wage type 58001 UVT); the casilla is the sum of the monthly excesses over the tax year.",
+   "official_source": ""
+  },
+  {
+   "id": 30,
+   "name": "Fee payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No fee (honorarios) or ecclesiastical-emolument wage type in the client accumulations.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 31,
+   "name": "Service payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No non-employment service payment wage type in the client accumulations.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 32,
+   "name": "Commission payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No non-employment commission wage type. The only variable pay (62133 Variable -1301) is paid under the employment contract and belongs to casilla 36, as the spec's note says.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 33,
+   "name": "Statutory benefit payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X on 79401 Annual leave payout"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X on 62116 Vacation Terminations"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X on 62150 Vacation Bonus"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62211 Service Legal Bonus - Social Benefits (no flag)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "79403 Vacations Compensated In cash (no flag)"
+    }
+   ],
+   "finding": "The spec, relying on the Form 220 instruction guide, places vacation pay ('vacaciones') with the service bonus in casilla 42. The client labels vacation pay (79401, 62116, 62150) as salary with its 'Salary Payment Indicator' while the service bonus 62211 and compensated vacations 79403 carry no flag. If that flag drove the certificate, vacation pay would land in casilla 36. The purpose of the client flag is not stated in the report (it may be the social-security salary character rather than a Form 220 classification). Not decided here: the RA must confirm the placement against the instruction guide. Client wage types for this casilla: 62211 Service Legal Bonus - Social Benefits (paid December and June), 79401 Annual leave payout, 79403 Vacations Compensated In cash, 62116 Vacation Terminations, 62150 Vacation Bonus; provision wage types (22100, 22101, 22111, 42100-42124) are accruals, not payments.",
+   "proposed_explanation": "",
+   "official_source": "DIAN Form 220 instruction guide, casilla 42 'Pagos por prestaciones sociales' (as quoted in the spec Field Explanation: service bonus, vacaciones and work clothing are listed among the prestaciones). The spec does not cite the resolution number that prescribes the guide."
+  },
+  {
+   "id": 34,
+   "name": "Per diem payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62805 Hotel per diem"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62807 Lunch per diem"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X"
+    }
+   ],
+   "finding": "The client pays per diems through four wage types, all flagged as salary. The spec does not name the wage types nor warn that the client's salary flag must not pull them into casilla 36.",
+   "proposed_explanation": "Per diems paid to cover transport, subsistence and accommodation while the employee works away from the habitual place of work. The instruction guide cites Ministry of Labour Concept 23959 of 13 February. Note the split that matters elsewhere: the PERMANENT portion is salary under CST art. 130 and feeds the contribution base, while the accidental portion does not - the electronic payroll carries them as the paired ViaticoManuAlojS / NS elements. CLIENT MAPPING: wage types 62805 Hotel per diem, 62806 Breakfast per diem, 62807 Lunch per diem and 62808 Dinner per diem. The client flags them with 'Salary Payment Indicator' = X; they are still reported here and not in casilla 36, under the casilla-36 exclusion rule.",
+   "official_source": ""
+  },
+  {
+   "id": 35,
+   "name": "Representation expense payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No representation-expense wage type in the client accumulations.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 36,
+   "name": "Cooperative associated-work compensation",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Not a cooperative; no associated-work compensation wage type.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 37,
+   "name": "Other payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62131 Scholarship-6861"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65800 Stock awards (Vesting) - Informative-1004"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62181 Severance/Layoff Payment- Non CLA"
+    }
+   ],
+   "finding": "The client pays many allowances, expatriate items, stock awards and dismissal indemnities with no obvious casilla. 'Use sparingly' does not tell the developer where each client wage type goes.",
+   "proposed_explanation": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. CLIENT EVIDENCE - earning wage types with no evident dedicated casilla, each needing an RA placement decision (casilla 36, 42, 46 or not certified): 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout. The engine must hold an explicit wage-type-to-casilla table; no earning wage type may be left unassigned.",
+   "official_source": ""
+  },
+  {
+   "id": 38,
+   "name": "Severance savings and interest paid to the employee",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62127 Advance Interest Severance Pay"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62110 Cash-out of Severance Pay - Social Benefits -541S"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62126 Advance Severance Last Year"
+    }
+   ],
+   "finding": "Client data supports the casilla. The spec maps to generic WTC codes (CO-CESANTIAS, CO-INTERESES-CESANTIAS) but does not list the client's four payment wage types nor exclude the many cesantias provision / balance wage types in the same report.",
+   "proposed_explanation": "THE FIRST OF THREE SEVERANCE LINES. Severance savings and the interest on them ACTUALLY PAID to the employee in the period - typically the January interest payment and any authorised partial withdrawal or termination settlement. Excluded from the monthly withholding base under ET art. 206 num. 4 but still certified here. CLIENT MAPPING: 62110 Cash-out of Severance Pay - Social Benefits -541S and 62117 Cash-out of Interest Severance Pay - Social Benefits-541R (termination and settlement payments, present in most months), 62126 Advance Severance Last Year (partial payments, January and March 2026) and 62127 Advance Interest Severance Pay (the annual interest on severance, paid in January: COP 269.0 million in the 01/01/2026 column). Provision wage types (22110, 22112, 42110, 42112) and balance wage types (63814, 63815, 64999, 68028) are accruals or balances, not payments, and are not certified here.",
+   "official_source": ""
+  },
+  {
+   "id": 39,
+   "name": "Severance savings under the traditional CST regime",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Y Regime",
+     "example_masked": "AReg"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "X Adjusted Service Date",
+     "example_masked": "earliest value in 1991"
+    }
+   ],
+   "finding": "No evidence of traditional-regime employees: earliest Hire / Original Hire Date is 2001 and earliest Adjusted Service Date is 1991. The Master Data 'Regime' value 'AReg' (8 employees) is on employees whose Hire Date is November 2025 or later, three of whom have fund deposits (25827), so it is not the pre-1991 regime flag.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 40,
+   "name": "Severance savings deposited to the fund",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25827 Payment Severance Funds Inf."
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65805 Payment Severance Funds Inf."
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "J 01/02/2026",
+     "example_masked": "deposit month"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AB Severance Fund Name",
+     "example_masked": "NAME_0005 (over-masked)"
+    }
+   ],
+   "finding": "Client data supports the casilla: the fund deposit is one wage type pair, paid only in February. The spec does not name it, does not warn that it appears twice (25827 and 65805), and does not say in which tax year a February deposit (for the prior 31 December balance) is certified. 61 of 261 Master Data employees have no severance fund (blank), consistent with integral-salary employees having no deposit.",
+   "proposed_explanation": "THE THIRD OF THREE SEVERANCE LINES. The amount DEPOSITED to the employee's chosen severance fund by 14 February for the balance at the preceding 31 December, under Ley 50 de 1990 art. 99. The engine must maintain all three buckets - paid to the employee, traditional regime, deposited to the fund - separately from the outset; they cannot be split retrospectively out of a single cesantias figure. CLIENT MAPPING: wage type 25827 Payment Severance Funds Inf. (mirrored by 65805 with the same amount - take one, not both), paid in February (COP 2,064.8 million in the 01/02/2026 column). Certify the deposit in the tax year in which it is made [RA to confirm the realisation rule]. The provision wage types 22110 / 42110 are accruals, not the deposit.",
+   "official_source": ""
+  },
+  {
+   "id": 41,
+   "name": "Retirement, old-age or invalidity pensions",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62154 Monthly Retired  Pension-6798"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62153 Additional Retirement Pension"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "D Beneficiary National Id",
+     "example_masked": "1423211232"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "E Beneficiary Name",
+     "example_masked": "NAME_0918"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Z Pensioner Effective Date",
+     "example_masked": "2025-11-18"
+    }
+   ],
+   "finding": "The spec says the casilla is 'nil for an ordinary corporate payroll', but this client pays pensions directly: 491 payees with 62154 every month, none of them in Master Data, and none with income-tax wage type 2552. On 330 rows of 62154 the Beneficiary National Id is filled and on 317 the Beneficiary Name differs from the Employee Name. The explanation must tell the developer that the population exists, which wage types feed it and that the certificate holder may be the beneficiary.",
+   "proposed_explanation": "Pension income paid BY THE EMPLOYER. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. THIS CLIENT IS A PENSION PAYER: its accumulations carry 62154 Monthly Retired  Pension-6798 (491 pension payees, about COP 600-660 million a month), 62153 Additional Retirement Pension (paid in December and June), 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the RA must confirm which of these are pension income for this casilla. Pension payees are NOT in the client's employee master data report, so their identification (casillas 24-29) needs a pensioner master source. For most pension rows the client records a 'Beneficiary National Id' / 'Beneficiary Name' different from the original employee (substitute pension); the RA must confirm whether the certificate is issued to the beneficiary. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54.",
+   "official_source": ""
+  },
+  {
+   "id": 42,
+   "name": "Non-reimbursable educational support financed with public funds",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62131 Scholarship-6861"
+    }
+   ],
+   "finding": "No evidence of educational support financed with public funds. 62131 Scholarship-6861 is an employer-paid scholarship and is listed for an RA decision under casilla 46, not here.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 43,
+   "name": "Total gross income",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "G Income Total",
+     "example_masked": "28660853"
+    }
+   ],
+   "finding": "Arithmetic total of casillas 36-51, fully defined by the spec. The client's Base of Withholding 'Income Total' is a monthly withholding working figure ('Monthly Basic Salary and Integral Salary' + 'Others Income') and is not a substitute for this annual gross total.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 45,
+   "name": "Mandatory health contributions borne by the employee",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2554 Medical Plan - Healthcare Insurance (EPS ) Employee"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21645 Medical Plan - Healthcare Insurance (EPS ) - Pensioner"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "H Obligatory Contributions to EPS , AFP  Solidarity and Subsistence",
+     "example_masked": "1557063"
+    }
+   ],
+   "finding": "Client data supports the casilla per employee per month. The explanation does not name the wage types, does not cover the pensioner health deductions (pension payees exist, see casilla 50), and does not warn that the client's monthly withholding report holds health, pension and solidarity in one column.",
+   "proposed_explanation": "The employee's own mandatory health contributions ACTUALLY DEDUCTED in the period. These are non-taxable income de renta and are what reduces the ET art. 388 depurated base. Must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55. CLIENT MAPPING: wage type 2554 Medical Plan - Healthcare Insurance (EPS ) Employee; for pension payees, 21645 / 21646 / 21647 Medical Plan - Healthcare Insurance (EPS ) - Pensioner. The client's Base of Withholding column 'Obligatory Contributions to EPS , AFP  Solidarity and Subsistence' is the SUM of health, pension and solidarity (equal to 2554 + 2556 + 2553 for 241 of 262 employees in September 2026) and cannot feed casilla 53 on its own. The NIE163 / PILA reconciliation applies to wage type 2554.",
+   "official_source": ""
+  },
+  {
+   "id": 46,
+   "name": "Mandatory pension and solidarity-fund contributions borne by the employee",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2556 Pension Plan Mandatory - AFP Employee"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2553 Solidarity Pension Fund"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "H Obligatory Contributions to EPS , AFP  Solidarity and Subsistence",
+     "example_masked": "1557063"
+    }
+   ],
+   "finding": "Client data supports the casilla. The explanation does not name the client wage types, nor the pensioner solidarity wage type 21643, nor that the Base of Withholding combined column is not a source.",
+   "proposed_explanation": "The employee's mandatory pension contributions AND the solidarity-fund surcharge, TAKEN TOGETHER IN ONE CASILLA. Note the asymmetry with the electronic payroll, which insists on reporting them as separate elements (NIE166 for pension, NIE168 and NIE170 for the two solidarity sub-accounts). The engine must keep them separate internally and sum them only here. CLIENT MAPPING: 2556 Pension Plan Mandatory - AFP Employee + 2553 Solidarity Pension Fund (+ 21643 Solidarity Pension Fund-Pensioner for pension payees). The client's Base of Withholding combined contributions column cannot split casillas 53 and 54.",
+   "official_source": ""
+  },
+  {
+   "id": 47,
+   "name": "Voluntary contributions to the individual-account pension regime (RAIS)",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "J Contribution  APV",
+     "example_masked": "2500000"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Q FVOL Account Number",
+     "example_masked": "21534173"
+    }
+   ],
+   "finding": "The client carries a single voluntary-pension column ('Contribution  APV') and FVOL wage types labelled as voluntary-fund contributions; nothing tags any contribution as a voluntary RAIS contribution. The RAIS / voluntary-fund split the spec requires is not present in client data (recorded under casilla 56).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 48,
+   "name": "Voluntary contributions to voluntary pension funds",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25812 Pension Voluntaria Proteccion (FVOL)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21210 Plan Institucional PROTECCION  - Plan General- 6782"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "J Contribution  APV",
+     "example_masked": "2500000"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Q FVOL Account Number",
+     "example_masked": "21534173"
+    }
+   ],
+   "finding": "Client data supports the casilla. The explanation does not name the six FVOL wage types, does not address the institutional-plan wage types, and does not say how the RAIS / voluntary-fund split is obtained when the client does not keep it.",
+   "proposed_explanation": "Voluntary contributions to voluntary pension funds under ET art. 126-1 and DUR 1625 de 2016 art. 1.2.1.22.41. Shares the ET art. 336 40% / 1,340-UVT annual cap with AFC and AVC. CLIENT MAPPING: wage types 25811 Pension Voluntaria Porvenir (FVOL), 25812 Pension Voluntaria Proteccion (FVOL), 25813 Pension Voluntaria Skandia (FVOL), 25814 Pensiones Voluntarias Metlife (FVOL), 25815 Dafuturo (FVOL) and 25823 Pension Voluntaria colfondos (FVOL); their September 2026 sum equals the Base of Withholding column 'Contribution  APV' for 261 of 262 employees. The institutional-plan wage types 21210 / 21211 Plan Institucional PROTECCION and 25820 / 25821 Plan Institucional PROTECCION - IC Bonus need an RA decision (casilla 56 or not). Because several of these fund managers also run mandatory RAIS accounts, the engine must tag each voluntary contribution as RAIS (casilla 55) or voluntary fund (casilla 56); the client data carries no such tag.",
+   "official_source": ""
+  },
+  {
+   "id": 49,
+   "name": "AFC account contributions",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25802 AFC Bancolombia (AFC)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62839 Reimbursement AFC"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "I Contribution  AFC",
+     "example_masked": "6500000"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AA AFC Account Number",
+     "example_masked": "51910312132424315941"
+    }
+   ],
+   "finding": "Client data supports the casilla (one wage type per receiving bank). The explanation names only NIE179, not the client wage types, and does not address the AFC refund earning 62839.",
+   "proposed_explanation": "Deductions to Ahorro para el Fomento de la Construccion accounts - programmed housing savings. Corresponds to electronic payroll NIE179. CLIENT MAPPING: wage types 25800-25808 (AFC AV Villas, Banco Bogota, Bancolombia, Davivienda, Banco ITAU, Banco BBVA, Colpatria, Banco Caja Social, Banco Occidente); their September 2026 sum equals the Base of Withholding column 'Contribution  AFC' for 260 of 262 employees. Any AFC refund booked as earning 62839 Reimbursement AFC must be netted [RA to confirm]. The SAP journal upload 'CARGA MASIVA AFC' is aggregated per bank, has no per-employee rows and is not a source.",
+   "official_source": ""
+  },
+  {
+   "id": 50,
+   "name": "AVC account contributions",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No AVC / Fondo Nacional del Ahorro wage type in the client accumulations.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 51,
+   "name": "Average labour income of the last six months",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "I-T monthly columns",
+     "example_masked": "monthly amounts per employee"
+    }
+   ],
+   "finding": "No client wage type is labelled as the six-month average labour income of ET art. 206 num. 4. The Accumulated Report's monthly columns would allow it to be derived, consistent with the spec's requirement that the engine maintain a rolling six-month window.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 52,
+   "name": "Withholding on labour and pension income",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2552 Income Tax (employee)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21129 Personal Income Tax Withholding-Terminations- 541T"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21330 Personal Income Tax Withholding (Theoretical)"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "V WITHOLDING TAX WITH CONTRIBUTION",
+     "example_masked": "8664327"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "X WITHOLDING TAX WITHOUT CONTRIBUTION",
+     "example_masked": "8681351"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "Y CONTINGENT WITHHOLDING",
+     "example_masked": "17024"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "U Total",
+     "example_masked": "18179572"
+    }
+   ],
+   "finding": "Client data supports the casilla, but the spec mapping 'SUM(Payroll.Income_Tax_Withheld)' hides several client choices: withholding is split over 2552, 21129 (terminations) and 21140 (retirees); notional withholding wage types (21330, 25834) sit next to real ones; the monthly working report has two withholding results (WITH / WITHOUT CONTRIBUTION). Evidence (not a decision): 2552 for September 2026 matches WITH CONTRIBUTION for 234 of 240 matched employees vs 180 for WITHOUT; CONTINGENT WITHHOLDING equals WITHOUT minus WITH where positive (e.g. 8,681,351 - 8,664,327 = 17,024). The Base of Withholding also ends with a 'GRAND TOTAL' row in column A that must be excluded. The Accumulated Report monthly columns run 01/10/2025 to 01/09/2026 (rolling 12 months, although its title line reads '01-01-2026 - 2026-09-30'), so its 'Total' column mixes two tax years and cannot feed Form 220 directly; the annual value must be the sum of the January-December monthly amounts of the tax year. In the rolling window, 3,150.9 million of 2552 sits in the October-December 2025 columns.",
+   "proposed_explanation": "THE PRINCIPAL WITHHOLDING CASILLA. Total withholding at source practised on this employee's work and pension income during the certified period. Feeds casilla 75 together with casilla 74. Must reconcile to twelve months of electronic payroll NIE177 for this employee, and the sum of casilla 60 across all employees must reconcile to twelve months of Form 350 casilla 93 - allowing for the rounding conventions. CLIENT MAPPING: the withholding practised is wage type 2552 Income Tax (employee) plus 21129 Personal Income Tax Withholding-Terminations- 541T (a separate deduction on termination payments - COP 63.13 million in January 2026 for one employee who also had 2552 that month) and 21140 Personal Income Tax Withholding-Retirees- 6799. Wage types 21330 Personal Income Tax Withholding (Theoretical) and 25834 Hypothetical Witholding Tax  - IC Foreign Country are notional and are NOT certified; 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax  - IC Local Country need an RA decision. The client's monthly 'Base of Withholding' shows two results, 'WITHOLDING TAX WITH CONTRIBUTION' and 'WITHOLDING TAX WITHOUT CONTRIBUTION'; which one is the withholding certified is an open decision (in September 2026 the 2552 amount equals the WITH CONTRIBUTION value for 234 of 240 matched employees and the WITHOUT value for 180). 'CONTINGENT WITHHOLDING' (WITHOUT minus WITH where positive) is not part of 2552 and is not certified here. Sum January to December of the tax year; never a rolling 12-month total.",
+   "official_source": ""
+  },
+  {
+   "id": 54,
+   "name": "Rentals - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 55,
+   "name": "Fees, commissions and services - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 56,
+   "name": "Interest and financial yields - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 57,
+   "name": "Disposal of fixed assets - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 58,
+   "name": "Lotteries, raffles and betting - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 59,
+   "name": "Other income - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 60,
+   "name": "Total other income received",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Arithmetic total of employee-declared casillas; no mapped client report carries the inputs.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 61,
+   "name": "Other income - amounts withheld (casillas 68 to 73)",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 62,
+   "name": "Total other income withheld",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Arithmetic total of employee-declared casillas; no mapped client report carries the inputs.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 63,
+   "name": "Total withholding for the tax year",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2552 Income Tax (employee)"
+    }
+   ],
+   "finding": "Arithmetic 'Sume 60 + 74', fully defined by the spec; only casilla 60 comes from payroll and it is evidenced (see casilla 60).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 65,
+   "name": "Identification of assets held",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 66,
+   "name": "Asset value",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 67,
+   "name": "Debts outstanding at 31 December",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employee-declared data (section 'Datos a cargo del trabajador o pensionado'); no mapped client report carries it, which is consistent with the spec (Relevant for Payroll = N).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 68,
+   "name": "Dependant document type",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "L Dependents Exemption",
+     "example_masked": "1675968"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58892 Dependents Exepmtion"
+    }
+   ],
+   "finding": "The client applies the dependants deduction (Base of Withholding 'Dependents Exemption', e.g. 1,675,968 = 32 UVT; Accumulated wage type 58892 on 49 rows) but no mapped report carries the dependant's identity. The Accumulated Report 'Beneficiary National Id' / 'Beneficiary Name' are pension-payee data (filled on pension rows, on only 1 row of 58892), not tax dependants. Development impact: every employee with 58892 must have dependant data (casillas 79-82) captured in the system; the client reports cannot supply it.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 69,
+   "name": "Dependant document number",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "L Dependents Exemption",
+     "example_masked": "1675968"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58892 Dependents Exepmtion"
+    }
+   ],
+   "finding": "The client applies the dependants deduction (Base of Withholding 'Dependents Exemption', e.g. 1,675,968 = 32 UVT; Accumulated wage type 58892 on 49 rows) but no mapped report carries the dependant's identity. The Accumulated Report 'Beneficiary National Id' / 'Beneficiary Name' are pension-payee data (filled on pension rows, on only 1 row of 58892), not tax dependants. Development impact: every employee with 58892 must have dependant data (casillas 79-82) captured in the system; the client reports cannot supply it.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 70,
+   "name": "Dependant surnames and names",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "L Dependents Exemption",
+     "example_masked": "1675968"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58892 Dependents Exepmtion"
+    }
+   ],
+   "finding": "The client applies the dependants deduction (Base of Withholding 'Dependents Exemption', e.g. 1,675,968 = 32 UVT; Accumulated wage type 58892 on 49 rows) but no mapped report carries the dependant's identity. The Accumulated Report 'Beneficiary National Id' / 'Beneficiary Name' are pension-payee data (filled on pension rows, on only 1 row of 58892), not tax dependants. Development impact: every employee with 58892 must have dependant data (casillas 79-82) captured in the system; the client reports cannot supply it.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 71,
+   "name": "Relationship",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "L Dependents Exemption",
+     "example_masked": "1675968"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58892 Dependents Exepmtion"
+    }
+   ],
+   "finding": "The client applies the dependants deduction (Base of Withholding 'Dependents Exemption', e.g. 1,675,968 = 32 UVT; Accumulated wage type 58892 on 49 rows) but no mapped report carries the dependant's identity. The Accumulated Report 'Beneficiary National Id' / 'Beneficiary Name' are pension-payee data (filled on pension rows, on only 1 row of 58892), not tax dependants. Development impact: every employee with 58892 must have dependant data (casillas 79-82) captured in the system; the client reports cannot supply it.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 73,
+   "name": "Employee's six non-filing declarations",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Display-only employee declaration; not payroll data.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 74,
+   "name": "Employee signature",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Display-only employee signature; not payroll data.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 75,
+   "name": "Payer or withholding agent name",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "Same source issue as casilla 11: the client's only company-name source carries the company-code prefix.",
+   "proposed_explanation": "Name of the payer or withholding agent above the issuing signature - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), not the payroll organisation label with the company-code prefix ('1764 - ...') shown in the client reports' title block. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN.",
+   "official_source": ""
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "column": "A ID Number",
+   "classification": "Client-specific",
+   "note": "Internal employee number used as join key; not an identity document (see casilla 25)."
+  },
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "column": "D Beneficiary National Id",
+   "classification": "Missing in spec",
+   "note": "Pension-payee (substitute pension) identification, filled on pension rows. The spec has no rule on whether a pension certificate is issued to the beneficiary or to the original pensioner; casillas 24-29 / 50 need that rule. RA to confirm."
+  },
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "column": "E Beneficiary Name",
+   "classification": "Missing in spec",
+   "note": "Pension-payee name (differs from Employee Name on 317 pension rows). Same gap as 'Beneficiary National Id'."
+  },
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "column": "U Total",
+   "classification": "Client-specific",
+   "note": "Rolling 12-month total (October 2025 - September 2026); not a tax-year total and must not feed any Form 220 casilla."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "A ID Number",
+   "classification": "Client-specific",
+   "note": "Internal employee number (equals Master Data Employee ID); join key only. The column also holds the 'GRAND TOTAL' footer row."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "B Full Name",
+   "classification": "Client-specific",
+   "note": "Single full-name string; casillas 26-29 come from the split names in Master Data."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "D % Retention ",
+   "classification": "Client-specific",
+   "note": "Procedure 2 withholding percentage (ET art. 386); a calculation input with no Form 220 casilla."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "K BASE 1",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "O BASE 2",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "Q BASES 3",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "R 40% limit",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "S TOTAL TAX RELIEF",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "T LIMIT APPLIED",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "U WITHOLDING TAX BASIS",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "W WITHOLDING TAX BASIS WITHOUT CONTRIBUTION",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration; Form 220 certifies no base or limit. Relevant to CO-DIAN-002 / CO-DIAN-005, not to this spec."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "L Dependents Exemption",
+   "classification": "Client-specific",
+   "note": "Deduction amount; Form 220 certifies only the dependant's identity (casillas 79-82), not the amount. Its presence signals that dependant data must exist for the employee."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "M Decrease Prepaid Medicine",
+   "classification": "Client-specific",
+   "note": "Prepaid-medicine deduction (ET art. 387); no Form 220 casilla. Relevant to CO-DIAN-005."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "N Decrease in Housing Interest",
+   "classification": "Client-specific",
+   "note": "Housing-interest deduction (ET art. 119); no Form 220 casilla. Relevant to CO-DIAN-005."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "P EXEMPTED INCOME 25%",
+   "classification": "Client-specific",
+   "note": "ET art. 206 num. 10 exempt income; no Form 220 casilla. Relevant to CO-DIAN-002 / CO-DIAN-005."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "Y CONTINGENT WITHHOLDING",
+   "classification": "Client-specific",
+   "note": "Equals WITHOUT minus WITH CONTRIBUTION where positive; contingent withholding on voluntary contributions is not withheld and has no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "A Employee ID",
+   "classification": "Client-specific",
+   "note": "Internal employee number; join key."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "F Formatted Full Name",
+   "classification": "Client-specific",
+   "note": "Display name; casillas 26-29 use the split name columns."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "I Business/Job Title",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "J Employment Contract Type",
+   "classification": "Client-specific",
+   "note": "Single value 'WM'; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "K Department/Division",
+   "classification": "Client-specific",
+   "note": "Organisational unit."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "L Primary Cost Center",
+   "classification": "Client-specific",
+   "note": "Accounting."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "M Enterprise ID",
+   "classification": "Client-specific",
+   "note": "Masked enterprise identifier (ENTID_ token); operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "N Grade",
+   "classification": "Client-specific",
+   "note": "HR grade."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "O Manager ID",
+   "classification": "Client-specific",
+   "note": "HR hierarchy (over-masked)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "P Employee Professional Risk Class (ARL)",
+   "classification": "Client-specific",
+   "note": "PILA data; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Q FVOL Account Number",
+   "classification": "Client-specific",
+   "note": "Voluntary-fund account; Form 220 certifies only the amount (casilla 56)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "S Pay Group Code",
+   "classification": "Client-specific",
+   "note": "Payroll grouping."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "T Personal Area",
+   "classification": "Client-specific",
+   "note": "SAP personnel area."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "V Employee Group Code",
+   "classification": "Client-specific",
+   "note": "SAP employee group."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "W Employee Subgroup Code",
+   "classification": "Client-specific",
+   "note": "SAP employee subgroup."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AA AFC Account Number",
+   "classification": "Client-specific",
+   "note": "AFC account; Form 220 certifies only the amount (casilla 57)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AB Severance Fund Name",
+   "classification": "Client-specific",
+   "note": "Fund name (over-masked); not certified on Form 220. Relevant to CO-CESANTIAS-006."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AC Pension Fund (AFP) Name",
+   "classification": "Client-specific",
+   "note": "Not certified on Form 220; relevant to PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AD EPS Provider Name",
+   "classification": "Client-specific",
+   "note": "Not certified on Form 220; relevant to PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AE Sub Function",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AF Business/Job Title ES",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AI Gender",
+   "classification": "Client-specific",
+   "note": "No Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AJ Birth Date",
+   "classification": "Client-specific",
+   "note": "Masked (1900-01-01); no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AK Primary Email Address",
+   "classification": "Client-specific",
+   "note": "Masked; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AL Phone number",
+   "classification": "Client-specific",
+   "note": "Masked; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AQ Country",
+   "classification": "Client-specific",
+   "note": "Employee address country; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AS Address Line 1",
+   "classification": "Client-specific",
+   "note": "Masked employee address; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AT Address Line 2",
+   "classification": "Client-specific",
+   "note": "Masked employee address; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AU Postal Code",
+   "classification": "Client-specific",
+   "note": "Employee address; no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AW Pay Method",
+   "classification": "Client-specific",
+   "note": "Payment operations."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AX Bank Account Type",
+   "classification": "Client-specific",
+   "note": "Payment operations."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AY Bank Name",
+   "classification": "Client-specific",
+   "note": "Payment operations."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AZ Exact Beneficiary Name (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment operations (masked)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BA Bank SWIFT (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment operations."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BB Bank Account Currency (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment operations."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BC Bank Account Number (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment operations (masked)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BD Bank Name (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment operations."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BE Tax Procedure 1",
+   "classification": "Client-specific",
+   "note": "Withholding procedure 1 / 2 (and '3'); calculation input with no Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BF Work Schedule",
+   "classification": "Client-specific",
+   "note": "Time management."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BG Marital Status",
+   "classification": "Client-specific",
+   "note": "No Form 220 casilla."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BH Basic Salary",
+   "classification": "Client-specific",
+   "note": "Contractual monthly salary; Form 220 certifies salary actually paid (casilla 36), not the rate."
+  }
+ ],
+ "summary": {
+  "Aligned": 6,
+  "Explanation to improve": 18,
+  "Format mismatch": 2,
+  "Conflict": 1,
+  "Not evidenced": 38
+ }
+}

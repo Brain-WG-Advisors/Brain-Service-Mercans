@@ -80,6 +80,11 @@
 |---|---|---|---|---|
 | | | | | |
 
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Estonia`
+
+- Sem pacote: Marju Martinson não respondeu (C-11). Report principal: TSD + anexos (formato data-based a partir de out/2026, a confirmar na fonte).
+
 ## Pendências
 - [ ]
 

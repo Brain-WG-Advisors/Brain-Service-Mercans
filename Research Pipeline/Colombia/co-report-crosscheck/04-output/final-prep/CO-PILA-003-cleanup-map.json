@@ -1,0 +1,723 @@
+{
+ "spec": "CO-PILA-003",
+ "draft": "02-specs-out/CO-PILA-003-AportesSeguridadSocial-Spec-v1.1-DRAFT-2026-10-15.xlsx",
+ "final_name": "CO-PILA-003-AportesSeguridadSocial-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "B16",
+   "field_id": null,
+   "current": "Not stated in the source content -- requires confirmation before relying on it",
+   "proposed": "Not prescribed by the annex. The file extension is a configuration parameter supplied by the chosen information operator at implementation.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B17",
+   "field_id": null,
+   "current": "Not stated in the source content -- requires confirmation before relying on it",
+   "proposed": "Not prescribed by the annex. The character encoding is a configuration parameter supplied by the chosen information operator at implementation.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A22",
+   "field_id": null,
+   "current": "DETAILED COMPLIANCE NOTES (Colombia-specific; preserved from the prior version)",
+   "proposed": "DETAILED COMPLIANCE NOTES (Colombia-specific)",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A23",
+   "field_id": null,
+   "current": "SUBMISSION CHANNEL VERIFICATION (v2.7 STEP 3.5)",
+   "proposed": "SUBMISSION CHANNEL",
+   "why": "process header"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A24",
+   "field_id": null,
+   "current": "- Channel: file_upload (fixed-width) into a PORTAL operated by a licensed private information operator | Portal: the chosen operador's web site (the operador is licensed by the Ministry of Health and Social Protection; the employer selects one commercially) | Source: Res. MSPS 2388 de 2016 Technical Annex 2 s.0 and s.2.1.1.2.1, and Decree 780 of 2016 art. 3.2.3.9 as substituted by Decree 1990 of 2016 | CONFIRMED.",
+   "proposed": "- Channel: file_upload (fixed-width) into a PORTAL operated by a licensed private information operator | Portal: the chosen operador's web site (the operador is licensed by the Ministry of Health and Social Protection; the employer selects one commercially) | Source: Res. MSPS 2388 de 2016 Technical Annex 2 s.0 and s.2.1.1.2.1, and Decree 780 of 2016 art. 3.2.3.9 as substituted by Decree 1990 of 2016",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A28",
+   "field_id": null,
+   "current": "- FORMAT TO CONFIRM vs a real filing: each operador wraps the two files in its own upload envelope and may add validations. Confirm the wrapper and any operador-specific rules with the client's chosen operador before go-live.",
+   "proposed": "- Operator upload envelope: each operador wraps the two files in its own upload envelope and may add validations. The wrapper and any operador-specific rules are a configuration parameter supplied by the chosen information operator at implementation.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A31",
+   "field_id": null,
+   "current": "- The inbound leg (CO-IN-PILA-SETTLEMENT) is specified here rather than in a separate workbook because it is the response half of one exchange and is keyed on this filing's own return number (T2R1-017). The engine must reconcile the settled contributions against its own computation, capture the return number and payment date, and detect rejected contributor records. Each operador's response layout is proprietary and must be obtained from the client's chosen operador - it has no published national standard, so no field-level spec can honestly be written for it here.",
+   "proposed": "- The inbound leg (CO-IN-PILA-SETTLEMENT) is specified here rather than in a separate workbook because it is the response half of one exchange and is keyed on this filing's own return number (T2R1-017). The engine must reconcile the settled contributions against its own computation, capture the return number and payment date, and detect rejected contributor records. Each operador's response layout is proprietary and is obtained from the chosen information operator at implementation - it has no published national standard, so this workbook carries no field-level specification for it.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A34",
+   "field_id": null,
+   "current": "RESIDENT / NON-RESIDENT TREATMENT (v2.8 control B1)",
+   "proposed": "RESIDENT / NON-RESIDENT TREATMENT",
+   "why": "process header"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C12",
+   "field_id": null,
+   "current": "Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA tipo cotizante 19 'Aprendices etapa lectiva Ley 2466 de 2025' for the lectiva phase from the health period of August 2025 (code 12 only for earlier periods); AT2 v30 names no code for the productive phase - see the RA query on T2R2-005.",
+   "proposed": "Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA tipo cotizante 19 'Aprendices etapa lectiva Ley 2466 de 2025' for the lectiva phase from the health period of August 2025 (code 12 only for earlier periods); AT2 v30 names no code for the productive phase. Rule to be set at implementation: the contributor type reported for the productive phase.",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M4",
+   "field_id": "A1-001",
+   "current": "Registered name of the contributing employer. Supplied by the contributor and echoed into File Tipo 2 Record Tipo 1 campo 4, where the annex says expressly 'El registrado en el campo 1 del file tipo 1' - the two must be byte-identical. Source: the registered legal name of the employer as in the RUT / commercial registry, held in company configuration. Do NOT take the HR Blizz 'Organization' label shown in the payroll reports (e.g. '1764 - Compañía Colombiana de Tabaco SAS'), because it prefixes the internal company code.",
+   "proposed": "Registered name of the contributing employer. Supplied by the contributor and echoed into File Tipo 2 Record Tipo 1 campo 4, where the annex says expressly 'El registrado en el campo 1 del file tipo 1' - the two must be byte-identical. Source: the registered legal name of the employer as in the RUT / commercial registry, held in company configuration. Do NOT take the HR Blizz 'Organization' label, because it prefixes the internal company code to the name.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M32",
+   "field_id": "A1-029",
+   "current": "Assigned by the system. Format AAAA-MM, seven positions. The contribution period, not the payment date. Derive AAAA-MM from the start date of the payroll period being settled (e.g. payroll period 2026-09-01 - 2026-09-30 gives 2026-09). The value contains a hyphen, so it cannot be written with a numeric zero-fill routine; confirm the field type (N vs A) against the annex.",
+   "proposed": "Assigned by the system. Format AAAA-MM, seven positions. The contribution period, not the payment date. Derive AAAA-MM from the start date of the payroll period being settled (e.g. payroll period 2026-09-01 - 2026-09-30 gives 2026-09). The value contains a hyphen, so it is written as the literal AAAA-MM string and not through the numeric zero-fill routine, although the annex types the field N(7).",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M42",
+   "field_id": "T2R1-004",
+   "current": "Must be identical to File Tipo 1 campo 1 - the annex says 'El registrado en el campo 1 del file tipo 1'. Any divergence between the two files is a validation failure at the operador, not at the Ministry. Source: the same registered legal name used in A1-001 (company configuration), never the HR Blizz 'Organization' label with the '1764 - ' company-code prefix.",
+   "proposed": "Must be identical to File Tipo 1 campo 1 - the annex says 'El registrado en el campo 1 del file tipo 1'. Any divergence between the two files is a validation failure at the operador, not at the Ministry. Source: the same registered legal name used in A1-001 (company configuration), never the HR Blizz 'Organization' label, which carries the company-code prefix.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J52",
+   "field_id": "T2R1-014",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J95",
+   "field_id": "T2R2-031",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J96",
+   "field_id": "T2R2-032",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J97",
+   "field_id": "T2R2-033",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J98",
+   "field_id": "T2R2-034",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J99",
+   "field_id": "T2R2-035",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "J134",
+   "field_id": "T2R2-077",
+   "current": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. Verified against the PILA anexo, which names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "proposed": "A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M57",
+   "field_id": "T2R1-019",
+   "current": "Must equal the number of UNIQUE contributors in the Record Tipo 2 detail, EXCLUDING those whose 'Tipo contributor' (T2R2-005) is 40 - Beneficiary UPC Adicional. That exclusion is easy to miss and produces a header-to-detail mismatch that the operador rejects. Bidirectional pair with 'Additional UPC value' (T2R2-056): contributor type 40 records are precisely the records that carry that value and that are excluded from this count. Count the Record Tipo 2 lines actually written. For PMI, the payroll headcount (261 in Sept-2026) is NOT the value: 20 interns (Employee Group 6, WT 62149) carry no contribution base and are excluded unless a contributor type is assigned to them (see T2R2-005).",
+   "proposed": "Must equal the number of UNIQUE contributors in the Record Tipo 2 detail, EXCLUDING those whose 'Tipo contributor' (T2R2-005) is 40 - Beneficiary UPC Adicional. That exclusion is easy to miss and produces a header-to-detail mismatch that the operador rejects. Bidirectional pair with 'Additional UPC value' (T2R2-056): contributor type 40 records are precisely the records that carry that value and that are excluded from this count. Count the Record Tipo 2 lines actually written, not the payroll headcount: an employee who carries no contribution base in the period (e.g. an intern in Employee Group 6 paid WT 62149) is excluded unless a contributor type is assigned through the Employee Group to contributor-type mapping table (see T2R2-005).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M65",
+   "field_id": "T2R2-003",
+   "current": "Closed list CC, CE, TI, PA, CD, SC, RC, PE, PT (PT = Permiso por Protección Temporal). PE may not be used for health contribution periods from September 2023 onwards. An ALPHANUMERIC identification number is permitted only for PA and CD; for TI, CC, SC, RC, CE, PE and PT the number must be all digits. NOTE the divergence from the electronic payroll, which uses NUMERIC codes (13 = CC) rather than these two-letter codes - the engine must MAP, not copy. Bidirectional set with 'Foreign national not liable to contribute to pension' (T2R2-007), which where marked restricts this field to CE, PA, CD, SC, PE or PT, and with 'Colombian abroad' (T2R2-008), which is used only where this field is CC or TI. COMPOSITE KEY: together with T2R2-004 (Contributor identification number), this pair is the join key for the contributor across every Colombian artefact -- electronic payroll NIE044/NIE045, Form 220 casillas 24/25, Format 2276 numeral 2 -- matching the same pair convention documented on CO-SEVERANCE SAVINGS-006 T03/T04. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campos 3, 7 and 8. PMI source: Master Data has no document-type field. Derive the type from the populated document column: 'Citizenship Card ID' -> CC; 'Indentity Card for Foreigners' -> CE. Where more than one column is populated, a precedence rule is required, and the PILA code for the columns 'National ID' and 'Identity Card' must be confirmed by the client before mapping. An employee with no document column populated is a blocking data error. Sept-2026 evidence: of 261 employees, 234 have only 'Citizenship Card ID', 13 only 'Indentity Card for Foreigners', 14 have more than one document column populated and none has no document at all.",
+   "proposed": "Closed list CC, CE, TI, PA, CD, SC, RC, PE, PT (PT = Permiso por Protección Temporal). PE may not be used for health contribution periods from September 2023 onwards. An ALPHANUMERIC identification number is permitted only for PA and CD; for TI, CC, SC, RC, CE, PE and PT the number must be all digits. NOTE the divergence from the electronic payroll, which uses NUMERIC codes (13 = CC) rather than these two-letter codes - the engine must MAP, not copy. Bidirectional set with 'Foreign national not liable to contribute to pension' (T2R2-007), which where marked restricts this field to CE, PA, CD, SC, PE or PT, and with 'Colombian abroad' (T2R2-008), which is used only where this field is CC or TI. COMPOSITE KEY: together with T2R2-004 (Contributor identification number), this pair is the join key for the contributor across every Colombian artefact -- electronic payroll NIE044/NIE045, Form 220 casillas 24/25, Format 2276 numeral 2 -- matching the same pair convention documented on CO-SEVERANCE SAVINGS-006 T03/T04. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campos 3, 7 and 8. Source: Master Data holds no document-type field. Derive the type from the populated document column: 'Citizenship Card ID' -> CC; 'Indentity Card for Foreigners' -> CE. The precedence rule where more than one document column is populated, and the PILA codes for the columns 'National ID' and 'Identity Card', are configuration parameters supplied at implementation (document-column to PILA document-type mapping table). An employee with no document column populated is rejected as a blocking data error.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M66",
+   "field_id": "T2R2-004",
+   "current": "Identity number of the contributor. Only A-Z and 0-9; alphanumeric only for PA (up to 16) and CD (up to 11). Digits only for the rest: TI up to 11, CC up to 10, SC up to 8, RC up to 11, CE up to 7, PE exactly 15, PT up to 8, PC (PEP-Tutor) up to 16. Join key to the electronic payroll NIE045, to Form 220 casilla 25 and to Format 2276 numeral 2. COMPOSITE KEY: together with T2R2-003 (Contributor document type), this pair is the join key for the contributor -- see T2R2-003 for the full cross-reference list. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 4. PMI source: take the number from the Master Data document column that determined T2R2-003 (G2N 'National ID' holds the CC only and is blank for CE holders). Join the payroll sources on document type + number, not on the HR Blizz Employee ID, which differs between the IBC report and the G2N/Master Data for some employees.",
+   "proposed": "Identity number of the contributor. Only A-Z and 0-9; alphanumeric only for PA (up to 16) and CD (up to 11). Digits only for the rest: TI up to 11, CC up to 10, SC up to 8, RC up to 11, CE up to 7, PE exactly 15, PT up to 8, PC (PEP-Tutor) up to 16. Join key to the electronic payroll NIE045, to Form 220 casilla 25 and to Format 2276 numeral 2. COMPOSITE KEY: together with T2R2-003 (Contributor document type), this pair is the join key for the contributor -- see T2R2-003 for the full cross-reference list. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 4. Source: the number in the Master Data document column that determined T2R2-003 (the payroll field 'National ID' holds the CC only and is blank for CE holders). Join the payroll sources on document type + number, not on the HR Blizz Employee ID.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M67",
+   "field_id": "T2R2-005",
+   "current": "The full PILA tipo cotizante list - far longer than the values the electronic payroll recognises. Values: 1 Dependiente, 2 Servicio domestico, 3 Independiente, 4 Madre sustituta, 12 Aprendices en etapa lectiva (ONLY for health contribution periods BEFORE August 2025), 16, 18, 19 Aprendices etapa lectiva Ley 2466 de 2025 (from the health period of August 2025: contributes to health and occupational risk only, IBC 1 SMMLV, no pension, CCF, SENA or ICBF; the operador validates the apprentice against the SENA 'REPORTE DE APRENDICES' file), 20 to 23, 30 to 36, 40 Beneficiario UPC Adicional, 42 to 45, 47, 51 to 63, 64 Trabajador penitenciario o servicio de utilidad publica, 65 Dependiente vinculado al Piso de Proteccion Social, 66 Independiente vinculado al Piso de Proteccion Social, 67 Voluntario en Primera Respuesta, 68 Dependiente veterano de la Fuerza Publica, 69 Contribuyente solidario, 70 Promotor del Servicio Social para la Paz, 71 Ley de Segundas Oportunidades, 72 Mujeres con aporte a pension por pago por tercero, 73 Interno de Medicina, 74 Reciclador de Oficio, 75 Dependiente con permanencia en el Regimen Subsidiado, 76 Trabajador de tiempo parcial independiente. Codes 3, 16, 20, 32 to 45, 52, 53, 55, 57 and 59 onwards have NO electronic payroll equivalent, so a direct copy will fail DIAN validation. Type 40 is additionally excluded from the header count in T2R1-019. Bidirectional set with the fields this code gates: 'Work location department code' (T2R2-009) and 'Work location municipality code' (T2R2-010) are blank for type 40; 'Additional UPC value' (T2R2-056) is populated for type 40 and type 69; 'Principal contributor document type' (T2R2-074) only for type 40; 'Hours worked' (T2R2-096) is optional for types 1, 2, 18, 22, 30, 51 and 55; 'Hire date' (T2R2-080) is mandatory for type 75; and 'Pension fund of the member' (T2R2-031) may be blank only for a type not obliged to contribute to pension. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 5 and §2.1.2.3.1. PMI source: no worker-type field exists in Master Data. Derive it from Employee Group / Subgroup through a client-confirmed mapping table. Evidence (Sept-2026): Employee Groups 1 and 3 carry full dependent-worker contributions; Employee Group 6 / Subgroup E2 (interns paid WT 62149) carry none. Their contributor type, or their exclusion from the return, must be confirmed before go-live.",
+   "proposed": "The full PILA tipo cotizante list - far longer than the values the electronic payroll recognises. Values: 1 Dependiente, 2 Servicio domestico, 3 Independiente, 4 Madre sustituta, 12 Aprendices en etapa lectiva (ONLY for health contribution periods BEFORE August 2025), 16, 18, 19 Aprendices etapa lectiva Ley 2466 de 2025 (from the health period of August 2025: contributes to health and occupational risk only, IBC 1 SMMLV, no pension, CCF, SENA or ICBF; the operador validates the apprentice against the SENA 'REPORTE DE APRENDICES' file), 20 to 23, 30 to 36, 40 Beneficiario UPC Adicional, 42 to 45, 47, 51 to 63, 64 Trabajador penitenciario o servicio de utilidad publica, 65 Dependiente vinculado al Piso de Proteccion Social, 66 Independiente vinculado al Piso de Proteccion Social, 67 Voluntario en Primera Respuesta, 68 Dependiente veterano de la Fuerza Publica, 69 Contribuyente solidario, 70 Promotor del Servicio Social para la Paz, 71 Ley de Segundas Oportunidades, 72 Mujeres con aporte a pension por pago por tercero, 73 Interno de Medicina, 74 Reciclador de Oficio, 75 Dependiente con permanencia en el Regimen Subsidiado, 76 Trabajador de tiempo parcial independiente. Codes 3, 16, 20, 32 to 45, 52, 53, 55, 57 and 59 onwards have NO electronic payroll equivalent, so a direct copy will fail DIAN validation. Type 40 is additionally excluded from the header count in T2R1-019. Bidirectional set with the fields this code gates: 'Work location department code' (T2R2-009) and 'Work location municipality code' (T2R2-010) are blank for type 40; 'Additional UPC value' (T2R2-056) is populated for type 40 and type 69; 'Principal contributor document type' (T2R2-074) only for type 40; 'Hours worked' (T2R2-096) is optional for types 1, 2, 18, 22, 30, 51 and 55; 'Hire date' (T2R2-080) is mandatory for type 75; and 'Pension fund of the member' (T2R2-031) may be blank only for a type not obliged to contribute to pension. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 5 and §2.1.2.3.1. Source: Master Data holds no worker-type field. Derive it from Employee Group / Subgroup through the Employee Group to contributor-type mapping table, a configuration parameter supplied at implementation. Employee Groups 1 and 3 are dependent workers with full contributions; the treatment of Employee Group 6 / Subgroup E2 (interns paid WT 62149) - their contributor type or their exclusion from the return - is set in the same table.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M71",
+   "field_id": "T2R2-009",
+   "current": "DIVIPOLA department where the work is performed. The operador validates it against the DANE DIVIPOLA catalogue. Should reconcile to electronic payroll NIE051. PMI source: Master Data 'Work location' is a city NAME (e.g. 'Bogota', 'Medellin'), not a code; a configured mapping from each work-location value to its DIVIPOLA department + municipality code is required. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation). A blank 'Work location' (4 employees in the Sept-2026 Master Data) is a blocking data error for this field.",
+   "proposed": "DIVIPOLA department where the work is performed. The operador validates it against the DANE DIVIPOLA catalogue. Should reconcile to electronic payroll NIE051. Source: Master Data field 'Work location', which holds a city name (e.g. 'Bogota', 'Medellin'), converted through the work-location to DIVIPOLA department + municipality mapping table, a configuration parameter supplied at implementation. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation). A blank 'Work location' is rejected as a blocking data error for this field.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M72",
+   "field_id": "T2R2-010",
+   "current": "THREE-digit DIVIPOLA municipality suffix - not the five-digit code used by the electronic payroll. Concatenate with T2R2-009 to obtain the five-digit form: 11 + 001 = 11001. Should reconcile to NIE052. PMI source: Master Data 'Work location' is a city NAME (e.g. 'Bogota', 'Medellin'), not a code; a configured mapping from each work-location value to its DIVIPOLA department + municipality code is required. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation). A blank 'Work location' (4 employees in the Sept-2026 Master Data) is a blocking data error for this field.",
+   "proposed": "THREE-digit DIVIPOLA municipality suffix - not the five-digit code used by the electronic payroll. Concatenate with T2R2-009 to obtain the five-digit form: 11 + 001 = 11001. Should reconcile to NIE052. Source: Master Data field 'Work location', which holds a city name (e.g. 'Bogota', 'Medellin'), converted through the work-location to DIVIPOLA department + municipality mapping table, a configuration parameter supplied at implementation. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation). A blank 'Work location' is rejected as a blocking data error for this field.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G80",
+   "field_id": "T2R2-017",
+   "current": "Must be reported BLANK. AT2 v30 no longer accepts transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "proposed": "Must be reported BLANK. AT2 v30 does not accept transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G81",
+   "field_id": "T2R2-018",
+   "current": "Must be reported BLANK. AT2 v30 no longer accepts transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "proposed": "Must be reported BLANK. AT2 v30 does not accept transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G82",
+   "field_id": "T2R2-019",
+   "current": "Must be reported BLANK. AT2 v30 no longer accepts transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "proposed": "Must be reported BLANK. AT2 v30 does not accept transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G83",
+   "field_id": "T2R2-020",
+   "current": "Must be reported BLANK. AT2 v30 no longer accepts transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "proposed": "Must be reported BLANK. AT2 v30 does not accept transfer events in this field ('Debe reportarse en blanco'); EPS and pension-fund transfers are not reported through PILA.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M86",
+   "field_id": "T2R2-023",
+   "current": "A one-off variation in the contribution base for this period only - typically a bonus or a retroactive payment - that does not change the standing salary. The trigger must be defined on payroll data: mark VST when the period's contribution base differs from the standing contractual salary because of salary-constituting variable payments (for PMI e.g. WT 62133 Variable, 62150 Vacation Bonus, 62207 Attendance Bonus; in Sept-2026, 46 of 241 employees had an IBC Total above their Salary Value). The exact list of wage types that trigger VST must be confirmed against the annex definition before configuration.",
+   "proposed": "A one-off variation in the contribution base for this period only - typically a bonus or a retroactive payment - that does not change the standing salary. Mark VST when the period's contribution base differs from the standing contractual salary because of salary-constituting variable payments (e.g. WT 62133 Variable, 62150 Vacation Bonus, 62207 Attendance Bonus). The list of wage types that trigger VST is a configuration parameter supplied at implementation (VST trigger wage-type table).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M90",
+   "field_id": "T2R2-027",
+   "current": "A THREE-VALUE flag, not a simple X: X means vacation, L means remunerated leave. They map to two DIFFERENT electronic payroll blocks - VacacionesComunes (NIE109 to NIE112) and LicenciaR (NIE132 to NIE135) respectively - so the value carries real information and must not be normalised to X. PMI mapping: WT 79001 Annual leave -> X; WT 79018 Paid Leave -> L. Vacation compensated in cash (WT 79003) involves no rest period and has no reliable dates in the client data; whether it raises VAC-LR must be stated explicitly (to be confirmed against the annex definition of VAC-LR).",
+   "proposed": "A THREE-VALUE flag, not a simple X: X means vacation, L means remunerated leave. They map to two DIFFERENT electronic payroll blocks - VacacionesComunes (NIE109 to NIE112) and LicenciaR (NIE132 to NIE135) respectively - so the value carries real information and must not be normalised to X. Mapping: WT 79001 Annual leave -> X; WT 79018 Paid Leave -> L. Vacation compensated in cash (WT 79003) involves no rest period and does not raise VAC-LR (see T2R2-089).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M95",
+   "field_id": "T2R2-031",
+   "current": "Code of the pension administrator - either Colpensiones in the average-premium regime or a private individual-account fund. The employee elects the regime and may change it every five years. PMI source: Master Data 'Pension Fund (AFP) Name' holds the administrator NAME, not the code; a configured name-to-code table (Ministry catalogue) is required. An employee with pension contributions and no administrator is a blocking data error.",
+   "proposed": "Code of the pension administrator - either Colpensiones in the average-premium regime or a private individual-account fund. The employee elects the regime and may change it every five years. Source: Master Data field 'Pension Fund (AFP) Name', which holds the administrator name, converted through the administrator name-to-code table (Ministry catalogue), a configuration parameter supplied at implementation. An employee with pension contributions and no administrator is rejected as a blocking data error.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M97",
+   "field_id": "T2R2-033",
+   "current": "Code of the health insurer. Health is the subsystem paid one month in advance, per T2R1-016. Bidirectional pair with the 'TDE - transfer from another EPS' change event (T2R2-017), which reports the move between health insurers that changes the value carried here. PMI source: Master Data 'EPS Provider Name' holds NAMES with inconsistent spelling and, for some employees, bare numbers that are not PILA codes; a cleansed name-to-code table (Ministry catalogue, EPSnnn) is required before this field can be populated.",
+   "proposed": "Code of the health insurer. Health is the subsystem paid one month in advance, per T2R1-016. Bidirectional pair with the 'TDE - transfer from another EPS' change event (T2R2-017), which reports the move between health insurers that changes the value carried here. Source: Master Data field 'EPS Provider Name', which holds the insurer name, converted through the administrator name-to-code table (Ministry catalogue, EPSnnn), a configuration parameter supplied at implementation. A value that does not resolve to a catalogue code is rejected as a blocking data error.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M106",
+   "field_id": "T2R2-040",
+   "current": "SCOPE ROUTING (v1.1 alignment patch): the amount is owned by the Wage Type Catalogue, not the Data Dictionary - the pipeline scope rule routes 'Base Salary / Basic Salary amounts -> WTC, NOT DD'. The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary correctly holds no Contractual Salary field. The employee's basic salary. Distinct from the four IBC fields that follow: the IBC is the contribution base after non-salary payments, the 40% clamp and the ceiling and floor, whereas this is the contractual salary itself.",
+   "proposed": "The employee's basic salary - a standing contract attribute, not a per-run computation. The amount is owned by the Wage Type Catalogue (CO-SALARIO-BASICO), not by the Data Dictionary master data, which is why the system mapping carries the 'Payroll.' prefix and the Payroll Field column is N. Distinct from the four IBC fields that follow: the IBC is the contribution base after non-salary payments, the 40% clamp and the ceiling and floor, whereas this is the contractual salary itself.",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M107",
+   "field_id": "T2R2-041",
+   "current": "Tipo de salario. X = salario integral; F = salario fijo; V = salario variable. Where X, the contribution base is 70% of the integral salary, not 100%, because 30% is the statutory prestacional factor (CST art. 132 num. 2, minimum 13 SMMLV). Maps to electronic payroll SalarioIntegral (NIE056) for the X case. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 41 and §2.1.2.3.40. PMI source: no salary-type field in Master Data; X where the employee is paid WT 62140 Integral Salary in the period, F where paid WT 62100 Ordinary Salary; the rule for V must be confirmed. Where X, the 70% applies to the CCF base (T2R2-045) and to the parafiscal base (T2R2-095) as well as to the pension, health and occupational-risk IBC (CST art. 132; Ley 789 de 2002 art. 49; client WT 64991 = 70% of the integral salary).",
+   "proposed": "Tipo de salario. X = salario integral; F = salario fijo; V = salario variable. Where X, the contribution base is 70% of the integral salary (the remaining 30% is the statutory prestacional factor; CST art. 132 num. 2, minimum 13 SMMLV). Maps to electronic payroll SalarioIntegral (NIE056) for the X case. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 41 and §2.1.2.3.40. Source: Master Data holds no salary-type field; X where the employee is paid WT 62140 Integral Salary in the period, F where paid WT 62100 Ordinary Salary. Rule to be set at implementation: the condition under which V (salario variable) is reported. Where X, the 70% applies to the CCF base (T2R2-045) and to the parafiscal base (T2R2-095) as well as to the pension, health and occupational-risk IBC (CST art. 132; Ley 789 de 2002 art. 49; WT 64991 'Parafiscals Base actual' carries the 70% of the integral salary).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M108",
+   "field_id": "T2R2-042",
+   "current": "Contribution base for pension. FLOOR 1 SMMLV = COP 1,750,905; CEILING 25 SMMLV = COP 43,772,625 in 2026. Must reconcile to electronic payroll NIE166 divided by the rate in T2R2-046, allowing for the different rounding conventions. Bidirectional set with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary, and with 'Solidarity pension fund - solidarity sub-account' (T2R2-051), which is payable only where this base reaches 4 SMMLV. Computation order: (a) salary-constituting pay of the period (70% of it for an integral salary); (b) plus the excess of non-salary payments over 40% of TOTAL remuneration (Ley 1393 de 2010 art. 30) - in the client's Sept-2026 data the 40% test is run on the full (100%) integral salary and the excess is added at 100% on top of the 70% base, an observed practice to be confirmed by RA, not a confirmed instruction; (c) floor 1 SMMLV, ceiling 25 SMMLV; (d) round UP to the whole peso (the payroll intermediate value may carry decimals, e.g. 17300699.5). PMI reference values: Detail IBC per Employees S.S. 'IBC Total' (the base on which WT 2556 = 4% is computed for 239 of 239 employees; 14 employees sit at the ceiling); G2N WT 64995 'Non-SSI excess' holds the Ley 1393 add-back.",
+   "proposed": "Contribution base for pension. FLOOR 1 SMMLV = COP 1,750,905; CEILING 25 SMMLV = COP 43,772,625 in 2026. Must reconcile to electronic payroll NIE166 divided by the rate in T2R2-046, allowing for the different rounding conventions. Bidirectional set with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary, and with 'Solidarity pension fund - solidarity sub-account' (T2R2-051), which is payable only where this base reaches 4 SMMLV. Computation order: (a) salary-constituting pay of the period (70% of it for an integral salary); (b) plus the excess of non-salary payments over 40% of TOTAL remuneration (Ley 1393 de 2010 art. 30) - rule to be set at implementation: for an integral salary, whether the 40% test is run on the full integral salary or on its 70% base, and whether the excess is added in full on top of the 70% base; (c) floor 1 SMMLV, ceiling 25 SMMLV; (d) round UP to the whole peso (the payroll intermediate value may carry decimals, e.g. 17300699.5). Source: payroll field 'IBC Total' (the base on which WT 2556 Pension Plan Mandatory - AFP Employee, 4%, is computed); WT 64995 'Non-SSI excess' holds the Ley 1393 de 2010 add-back.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M109",
+   "field_id": "T2R2-043",
+   "current": "Contribution base for health. Same floor and ceiling as pension. The four IBC values legitimately DIFFER from one another once a non-salary payment, a change event or a subsystem-specific rule enters - do not populate them from one variable. Bidirectional pair with 'Contributor exonerated from payment' (T2R2-076): where this base is at or above 10 SMMLV (COP 17,509,050 in 2026) T2R2-076 MUST be N (AT2 v30 campo 76); where it is below 10 SMMLV, T2R2-076 is S only if the total earnings of the month (total devengado) are also below 10 SMMLV (ET art. 114-1; Decreto 1828 de 2013 art. 7) - this base alone does not grant the exoneration. Same computation order as T2R2-042 (70% integral, Ley 1393 add-back, floor and ceiling, round UP to the peso). PMI reference (Sept-2026): Detail IBC per Employees S.S. 'IBC Total' is the base on which the client computes both the employee 4% (WT 2554) and the employer 8.5% (WT 2564) health contributions (4% of IBC Total for 239 of 239 employees).",
+   "proposed": "Contribution base for health. Same floor and ceiling as pension. The four IBC values legitimately DIFFER from one another once a non-salary payment, a change event or a subsystem-specific rule enters - do not populate them from one variable. Bidirectional pair with 'Contributor exonerated from payment' (T2R2-076): where this base is at or above 10 SMMLV (COP 17,509,050 in 2026) T2R2-076 MUST be N (AT2 v30 campo 76); where it is below 10 SMMLV, T2R2-076 is S only if the total earnings of the month (total devengado) are also below 10 SMMLV (ET art. 114-1; Decreto 1828 de 2013 art. 7) - this base alone does not grant the exoneration. Same computation order as T2R2-042 (70% integral, Ley 1393 add-back, floor and ceiling, round UP to the peso). Source: payroll field 'IBC Total', the base on which both the employee 4% (WT 2554) and the employer 8.5% (WT 2564) health contributions are computed.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M110",
+   "field_id": "T2R2-044",
+   "current": "Contribution base for occupational risk. Same floor and ceiling. State explicitly how incapacity (IGE), maternity/paternity (LMA) and vacation/paid-leave (VAC-LR) days enter the ARL base and the ARL day count (T2R2-038). Client evidence: the ARL premium is computed on the same base as pension and health, including sick-leave and vacation days; this must be confirmed against the annex and Decreto 1072 de 2015 before configuration.",
+   "proposed": "Contribution base for occupational risk. Same floor and ceiling. Vacation and paid-leave (VAC-LR) days do not reduce the ARL day count (T2R2-038) because they are paid; maternity or paternity leave days (LMA = X) carry no occupational-risk contribution (Decreto 1072 de 2015 art. 2.2.4.2.1.6). Rule to be set at implementation: how general-illness incapacity (IGE) days enter the ARL base and the ARL day count.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M111",
+   "field_id": "T2R2-045",
+   "current": "Contribution base for the family compensation fund: the monthly salary payroll of the employee (Ley 21 de 1982 art. 17). Same floor (1 SMMLV = COP 1,750,905 in 2026) as the other three bases, but NO 25-SMMLV ceiling - the ceiling applies to the pension, health and occupational-risk IBC only. Bidirectional pair with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary (Ley 789 de 2002 art. 49). PMI reference (Sept-2026): the client computes the CCF 4% (WT 25110) on the uncapped G2N WT 64991 'Parafiscals Base actual' for 225 of 241 employees (e.g. 2,030,000 on a base of 50,750,000, where the capped IBC is 43,772,625), consistent with this rule.",
+   "proposed": "Contribution base for the family compensation fund: the monthly salary payroll of the employee (Ley 21 de 1982 art. 17). Same floor (1 SMMLV = COP 1,750,905 in 2026) as the other three bases, but NO 25-SMMLV ceiling - the ceiling applies to the pension, health and occupational-risk IBC only. Bidirectional pair with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary (Ley 789 de 2002 art. 49). Source: WT 64991 'Parafiscals Base actual' (uncapped), the base on which the CCF 4% (WT 25110 Family Compensation Fund) is computed.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M112",
+   "field_id": "T2R2-095",
+   "current": "THE FIFTH AND MOST-MISSED BASE: IBC otros parafiscales diferentes a CCF - the base for SENA, ICBF, ESAP and MEN. Ley 21 de 1982 art. 17 defines it differently from the pension, health and occupational-risk IBC: it includes paid rest days and it is UNCAPPED - the 25-SMMLV ceiling does not apply. Header campo T2R1-020 is the sum of campo 45 (IBC CCF), NOT of this field. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) campo 95. For an all-inclusive (integral) salary this base is 70% of the integral salary, like the IBC fields (CST art. 132; Ley 789 de 2002 art. 49). PMI reference (Sept-2026): G2N WT 64991 'Parafiscals Base actual' (uncapped, includes paid vacation WT 79401); SENA 2% (WT 25112) and ICBF 3% (WT 25111) are computed on it for 99 of the 111 non-exonerated employees.",
+   "proposed": "THE FIFTH AND MOST-MISSED BASE: IBC otros parafiscales diferentes a CCF - the base for SENA, ICBF, ESAP and MEN. Ley 21 de 1982 art. 17 defines it differently from the pension, health and occupational-risk IBC: it includes paid rest days and it is UNCAPPED - the 25-SMMLV ceiling does not apply. Header campo T2R1-020 is the sum of campo 45 (IBC CCF), NOT of this field. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) campo 95. For an all-inclusive (integral) salary this base is 70% of the integral salary, like the IBC fields (CST art. 132; Ley 789 de 2002 art. 49). Source: WT 64991 'Parafiscals Base actual' (uncapped; includes paid vacation WT 79401), the base on which SENA 2% (WT 25112) and ICBF 3% (WT 25111) are computed.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M114",
+   "field_id": "T2R2-046",
+   "current": "TOTAL pension rate - employer 12% plus employee 4% = 16% (Law 100 of 1993 art. 20 as substituted by Law 797 of 2003 art. 7). HARD RULE from the annex: where 'Contributor sub-type' (T2R2-006) is 1, 2, 3, 4, 5, 6, 9 or 12, THIS FIELD MUST BE 0. A high-risk employee under Decree-Law 2090 of 2003 carries an additional employer charge - see scope_manifest CO-GAP-02, which must be resolved before configuring one. Bidirectional pair with 'Special pension rate indicator' (T2R2-079), which is populated wherever a non-standard rate - notably a Decree-Law 2090 of 2003 high-risk rate - replaces the standard 16%.",
+   "proposed": "TOTAL pension rate - employer 12% plus employee 4% = 16% (Law 100 of 1993 art. 20 as substituted by Law 797 of 2003 art. 7). HARD RULE from the annex: where 'Contributor sub-type' (T2R2-006) is 1, 2, 3, 4, 5, 6, 9 or 12, THIS FIELD MUST BE 0. A high-risk employee under Decree-Law 2090 of 2003 carries an additional employer charge (scope_manifest CO-GAP-02); the high-risk rate is a configuration parameter supplied at implementation. Bidirectional pair with 'Special pension rate indicator' (T2R2-079), which is populated wherever a non-standard rate - notably a Decree-Law 2090 of 2003 high-risk rate - replaces the standard 16%.",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M115",
+   "field_id": "T2R2-047",
+   "current": "16% of the pension IBC - the WHOLE contribution, employer and employee together. The electronic payroll reports only the employee's 4% (NIE166); this field reports 16%. They are not interchangeable. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which the client rounds to the peso (only 12 of 241 amounts are multiples of 100). PMI wage types for reconciliation: 2556 Pension Plan Mandatory - AFP Employee + 2567 Pension Plan Mandatory - AFP Employer.",
+   "proposed": "16% of the pension IBC - the WHOLE contribution, employer and employee together. The electronic payroll reports only the employee's 4% (NIE166); this field reports 16%. They are not interchangeable. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which are rounded to the peso. Wage types for reconciliation: 2556 Pension Plan Mandatory - AFP Employee + 2567 Pension Plan Mandatory - AFP Employer.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M116",
+   "field_id": "T2R2-048",
+   "current": "Voluntary contribution made BY THE EMPLOYEE into the mandatory pension fund. Do not map voluntary-pension-fund savings (for PMI the 'FVOL' wage types 25812, 25813, 25814, 25815 and 25823; not WT 25817 'Dividendo por Colombia Contribution', which is not an FVOL wage type) to this field: they are paid to a voluntary fund, not to the mandatory pension fund, even where the administrator is the same company.",
+   "proposed": "Voluntary contribution made BY THE EMPLOYEE into the mandatory pension fund. Do not map voluntary-pension-fund savings (the 'FVOL' wage types 25812, 25813, 25814, 25815 and 25823; WT 25817 'Dividendo por Colombia Contribution' is not an FVOL wage type) to this field: they are paid to a voluntary fund, not to the mandatory pension fund, even where the administrator is the same company.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M119",
+   "field_id": "T2R2-051",
+   "current": "0.5% of the contribution base - 50% of the additional 1% (Ley 100 art. 27 num. 1 lit. a, as amended by Ley 797 de 2003 art. 8). Borne ENTIRELY BY THE EMPLOYEE and additional to the 4% pension. Reconciles to electronic payroll NIE168. Under AT2 v30 this value is LIQUIDATED BY THE INFORMATION OPERADOR according to the rules that apply to the contributor ('Lo liquida el Operador de Información'); the engine computes it for reconciliation and for the employee deduction, not as an input the operador accepts blindly. PMI source: the client payroll holds the FSP as one combined wage type (WT 2553 'Solidarity Pension Fund'); this field is 0.5% of the pension IBC, computed separately, and the remainder of the combined amount belongs to T2R2-052.",
+   "proposed": "0.5% of the contribution base - 50% of the additional 1% (Ley 100 art. 27 num. 1 lit. a, as amended by Ley 797 de 2003 art. 8). Borne ENTIRELY BY THE EMPLOYEE and additional to the 4% pension. Reconciles to electronic payroll NIE168. Under AT2 v30 this value is LIQUIDATED BY THE INFORMATION OPERADOR according to the rules that apply to the contributor ('Lo liquida el Operador de Información'); the engine computes it for reconciliation and for the employee deduction, not as an input the operador accepts blindly. Source: the payroll holds the FSP as one combined wage type (WT 2553 'Solidarity Pension Fund'); this field is 0.5% of the pension IBC, computed separately, and the remainder of the combined amount belongs to T2R2-052.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M120",
+   "field_id": "T2R2-052",
+   "current": "0.5% of the contribution base (the other 50% of the additional 1%) plus 0.2% / 0.4% / 0.6% / 0.8% / 1.0% for bases of 16-17 / 17-18 / 18-19 / 19-20 / above 20 SMMLV, so 0.5% to 1.5%, employee-borne (Ley 100 art. 27 num. 2 lits. a-b). Reconciles to electronic payroll NIE170. Reported SEPARATELY from the solidarity sub-account - never merged. Under AT2 v30 this value is LIQUIDATED BY THE INFORMATION OPERADOR according to the rules that apply to the contributor ('Lo liquida el Operador de Información'); the engine computes it for reconciliation and for the employee deduction, not as an input the operador accepts blindly. PMI source: derive as the combined FSP wage type (WT 2553) minus the solidarity sub-account (T2R2-051), and validate it against the band table (0.5% from 4 SMMLV plus 0.2%-1.0% from 16 SMMLV).",
+   "proposed": "0.5% of the contribution base (the other 50% of the additional 1%) plus 0.2% / 0.4% / 0.6% / 0.8% / 1.0% for bases of 16-17 / 17-18 / 18-19 / 19-20 / above 20 SMMLV, so 0.5% to 1.5%, employee-borne (Ley 100 art. 27 num. 2 lits. a-b). Reconciles to electronic payroll NIE170. Reported SEPARATELY from the solidarity sub-account - never merged. Under AT2 v30 this value is LIQUIDATED BY THE INFORMATION OPERADOR according to the rules that apply to the contributor ('Lo liquida el Operador de Información'); the engine computes it for reconciliation and for the employee deduction, not as an input the operador accepts blindly. Source: derive as the combined FSP wage type (WT 2553) minus the solidarity sub-account (T2R2-051), and validate it against the band table (0.5% from 4 SMMLV plus 0.2%-1.0% from 16 SMMLV).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M124",
+   "field_id": "T2R2-055",
+   "current": "Health contribution actually due. For an exonerated employee earning under 10 SMMLV this is the employee's 4% alone; for a non-exonerated employee it is the full 12.5%. Reconciles to electronic payroll NIE163 for the employee portion. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which the client rounds to the peso (only 12 of 241 amounts are multiples of 100). PMI wage types for reconciliation: 2554 Medical Plan - EPS Employee + 2564 Medical Plan - EPS Employer.",
+   "proposed": "Health contribution actually due. For an exonerated employee earning under 10 SMMLV this is the employee's 4% alone; for a non-exonerated employee it is the full 12.5%. Reconciles to electronic payroll NIE163 for the employee portion. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which are rounded to the peso. Wage types for reconciliation: 2554 Medical Plan - EPS Employee + 2564 Medical Plan - EPS Employer.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G126",
+   "field_id": "T2R2-057",
+   "current": "Must be reported BLANK in every case ('Debe reportarse en blanco', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are no longer carried in PILA; recovery from the EPS runs outside this file.",
+   "proposed": "Must be reported BLANK in every case ('Debe reportarse en blanco', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are not carried in PILA under AT2 v30; recovery from the EPS runs outside this file.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G127",
+   "field_id": "T2R2-058",
+   "current": "Must be reported as ZERO in every case ('Debe reportarse en cero', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are no longer carried in PILA; recovery from the EPS runs outside this file.",
+   "proposed": "Must be reported as ZERO in every case ('Debe reportarse en cero', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are not carried in PILA under AT2 v30; recovery from the EPS runs outside this file.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G128",
+   "field_id": "T2R2-059",
+   "current": "Must be reported BLANK in every case ('Debe reportarse en blanco', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are no longer carried in PILA; recovery from the EPS runs outside this file.",
+   "proposed": "Must be reported BLANK in every case ('Debe reportarse en blanco', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are not carried in PILA under AT2 v30; recovery from the EPS runs outside this file.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G129",
+   "field_id": "T2R2-060",
+   "current": "Must be reported as ZERO in every case ('Debe reportarse en cero', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are no longer carried in PILA; recovery from the EPS runs outside this file.",
+   "proposed": "Must be reported as ZERO in every case ('Debe reportarse en cero', AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026)). Incapacity and leave authorisations and values are not carried in PILA under AT2 v30; recovery from the EPS runs outside this file.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M126",
+   "field_id": "T2R2-057",
+   "current": "Must be reported BLANK in every case under AT2 v30 ('Debe reportarse en blanco'). Incapacity and leave authorisations are no longer carried in PILA; EPS recovery runs outside this file. Do not map the incapacity/leave data of the payroll (for PMI, Leave Absence WTs 79006, 79008, 79011) to this field.",
+   "proposed": "Must be reported BLANK in every case under AT2 v30 ('Debe reportarse en blanco'). Incapacity and leave authorisations are not carried in PILA under AT2 v30; EPS recovery runs outside this file. Do not map the incapacity/leave wage types of the payroll (WTs 79006, 79008, 79011) to this field.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M128",
+   "field_id": "T2R2-059",
+   "current": "Must be reported BLANK in every case under AT2 v30 ('Debe reportarse en blanco'). Incapacity and leave authorisations are no longer carried in PILA; EPS recovery runs outside this file. Do not map the incapacity/leave data of the payroll (for PMI, Leave Absence WTs 79006, 79008, 79011) to this field.",
+   "proposed": "Must be reported BLANK in every case under AT2 v30 ('Debe reportarse en blanco'). Incapacity and leave authorisations are not carried in PILA under AT2 v30; EPS recovery runs outside this file. Do not map the incapacity/leave wage types of the payroll (WTs 79006, 79008, 79011) to this field.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M127",
+   "field_id": "T2R2-058",
+   "current": "Must be reported as ZERO in every case under AT2 v30 ('Debe reportarse en cero'). The benefit value advanced by the employer is recovered from the EPS outside this file. Do not map the payroll amounts of the incapacity/maternity wage types (for PMI, Leave Absence 'Amount' of WTs 79006, 79008, 79011) to this field.",
+   "proposed": "Must be reported as ZERO in every case under AT2 v30 ('Debe reportarse en cero'). The benefit value advanced by the employer is recovered from the EPS outside this file. Do not map the payroll amounts of the incapacity/maternity wage types (WTs 79006, 79008, 79011) to this field.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M129",
+   "field_id": "T2R2-060",
+   "current": "Must be reported as ZERO in every case under AT2 v30 ('Debe reportarse en cero'). The benefit value advanced by the employer is recovered from the EPS outside this file. Do not map the payroll amounts of the incapacity/maternity wage types (for PMI, Leave Absence 'Amount' of WTs 79006, 79008, 79011) to this field.",
+   "proposed": "Must be reported as ZERO in every case under AT2 v30 ('Debe reportarse en cero'). The benefit value advanced by the employer is recovered from the EPS outside this file. Do not map the payroll amounts of the incapacity/maternity wage types (WTs 79006, 79008, 79011) to this field.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "L127",
+   "field_id": "T2R2-058",
+   "current": "Payroll.IGE_Value [No dedicated WTC code found in this pass -- sickness-benefit cash value; verify against CO-INCAP-EG-EMPLEADOR/health-insurer incapacity rows before productive use]",
+   "proposed": "Payroll.IGE_Value [No dedicated WTC code -- sickness-benefit cash value, related to the CO-INCAP-EG-EMPLEADOR / health-insurer incapacity rows; always reported as zero in this field]",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "L129",
+   "field_id": "T2R2-060",
+   "current": "Payroll.LMA_Value [No dedicated WTC code found in this pass -- maternity/paternity benefit cash value; verify against the licencia rows before productive use]",
+   "proposed": "Payroll.LMA_Value [No dedicated WTC code -- maternity/paternity benefit cash value, related to the licencia rows; always reported as zero in this field]",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M133",
+   "field_id": "T2R2-063",
+   "current": "The occupational-risk premium. Employer cost in full. NOTE the rounding: 0.522% of 12,000,000 is 62,640, which rounds UP to the next multiple of 100 to give 62,700 - a worked illustration of the PILA convention. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which the client rounds to the peso (only 3 of 241 amounts are multiples of 100). PMI wage types for reconciliation: 2560 Professional Labor Risks (ARL) - Employer.",
+   "proposed": "The occupational-risk premium. Employer cost in full. NOTE the rounding: 0.522% of 12,000,000 is 62,640, which rounds UP to the next multiple of 100 to give 62,700 - a worked illustration of the PILA convention. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which are rounded to the peso. Wage type for reconciliation: 2560 Professional Labor Risks (ARL) - Employer.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M135",
+   "field_id": "T2R2-078",
+   "current": "Risk class of the work centre, reported as 1, 2, 3, 4 or 5 (= Class I, II, III, IV, V). Bidirectional with 'Work centre' (T2R2-062): the class follows the work centre, so a VCT event can change it mid-period. Blank where the contributor is not obliged to contribute to occupational risk; for type 57 the class follows Decreto 1563 de 2016; for type 70 it is always 1. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) campo 78. PMI source: Master Data 'Employee Professional Risk Class (ARL)' is held per EMPLOYEE with mixed formats ('Class 1', '1'); normalise to the single digit 1-5. Because the class varies by employee/work centre, it cannot be sourced from a single company-level value.",
+   "proposed": "Risk class of the work centre, reported as 1, 2, 3, 4 or 5 (= Class I, II, III, IV, V). Bidirectional with 'Work centre' (T2R2-062): the class follows the work centre, so a VCT event can change it mid-period. Blank where the contributor is not obliged to contribute to occupational risk; for type 57 the class follows Decreto 1563 de 2016; for type 70 it is always 1. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) campo 78. Source: Master Data field 'Employee Professional Risk Class (ARL)', held per employee; normalise the value (e.g. 'Class 1' or '1') to the single digit 1-5. Because the class varies by work centre, it is not sourced from a single company-level value.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M138",
+   "field_id": "T2R2-065",
+   "current": "4% of the CCF base in T2R2-045 (no 25-SMMLV ceiling - see T2R2-045). Employer cost in full. PMI reference (Sept-2026): WT 25110 'Family Compensation Fund' equals 4% of the uncapped G2N WT 64991 for 225 of 241 employees; the remaining employees carry prior-period adjustment wage types (e.g. 1204 / 1910) and are not evidence of a current-period rule.",
+   "proposed": "4% of the CCF base in T2R2-045 (no 25-SMMLV ceiling - see T2R2-045). Employer cost in full. Source for reconciliation: WT 25110 'Family Compensation Fund', 4% of the uncapped WT 64991. Prior-period adjustment wage types (e.g. 1204 / 1910) are not part of the current-period value.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M150",
+   "field_id": "T2R2-076",
+   "current": "THE PER-EMPLOYEE, PER-MONTH SIDE of the ET art. 114-1 exoneration (introduced by Ley 1607 de 2012 and confirmed by Ley 1819 de 2016 art. 65). Values are S and N, not X. The employer-level flag in A1-033 declares eligibility; THIS field applies it to a specific employee in a specific month. TWO RULES APPLY TOGETHER. (1) The exoneration test is on the TOTAL EARNINGS of the month (total devengado): the employee is exonerated where the total devengado of the month is below 10 SMMLV (COP 17,509,050 in 2026) - Decreto 1828 de 2013 art. 7. It is an earnings test, NOT a test on the health IBC. (2) In addition, AT2 v30 campo 76 requires N whenever the health contribution base in campo 43 (T2R2-043) is at or above 10 SMMLV. The field is therefore S only where BOTH the total devengado and the health IBC are below 10 SMMLV. The test is monthly, so an employee who crosses 10 SMMLV because of a bonus loses the exoneration for that month alone - the engine must evaluate it every period, never once a year. Where marked S, the employer's health 8.5%, SENA 2% and ICBF 3% fall away and the health rate in T2R2-054 becomes the EMPLOYEE rate alone (4%); pension, occupational risk and the CCF 4% remain payable in full. PMI evidence (Sept-2026): the client flags on an earnings figure, not on the IBC - all 88 integral-salary employees are non-exonerated, and a 'total monthly entitlements >= 10 SMMLV' test reproduces the client's flags in 233 of 241 cases, while the health-IBC test reproduces 222 of 241. No single test reproduces all 241 cases, and one employee with a health IBC above 10 SMMLV is exonerated in the client run, which rule (2) does not allow; the client's exact devengado definition is therefore to be confirmed (see Query to RA).",
+   "proposed": "THE PER-EMPLOYEE, PER-MONTH SIDE of the ET art. 114-1 exoneration (introduced by Ley 1607 de 2012 and confirmed by Ley 1819 de 2016 art. 65). Values are S and N, not X. The employer-level flag in A1-033 declares eligibility; THIS field applies it to a specific employee in a specific month. TWO RULES APPLY TOGETHER. (1) The exoneration test is on the TOTAL EARNINGS of the month (total devengado): the employee is exonerated where the total devengado of the month is below 10 SMMLV (COP 17,509,050 in 2026) - Decreto 1828 de 2013 art. 7. It is an earnings test, NOT a test on the health IBC. (2) In addition, AT2 v30 campo 76 requires N whenever the health contribution base in campo 43 (T2R2-043) is at or above 10 SMMLV. The field is therefore S only where BOTH the total devengado and the health IBC are below 10 SMMLV. The test is monthly, so an employee who crosses 10 SMMLV because of a bonus loses the exoneration for that month alone - the engine must evaluate it every period, never once a year. Where marked S, the employer's health 8.5%, SENA 2% and ICBF 3% fall away and the health rate in T2R2-054 becomes the EMPLOYEE rate alone (4%); pension, occupational risk and the CCF 4% remain payable in full. The wage types that compose the total devengado for this test are a configuration parameter supplied at implementation.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M152",
+   "field_id": "T2R2-079",
+   "current": "Signals that the pension rate in T2R2-046 departs from the standard 16%. Corresponds to the electronic payroll AltoRiesgoPension flag (NIE043). See CO-GAP-02 before use.",
+   "proposed": "Signals that the pension rate in T2R2-046 departs from the standard 16%. Corresponds to the electronic payroll AltoRiesgoPension flag (NIE043). The high-risk pension rate is a configuration parameter supplied at implementation (scope_manifest CO-GAP-02).",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M160",
+   "field_id": "T2R2-085",
+   "current": "First day of the general-illness incapacity. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days; for PMI WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.",
+   "proposed": "First day of the general-illness incapacity. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days: WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M161",
+   "field_id": "T2R2-086",
+   "current": "Last day of the general-illness incapacity. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days; for PMI WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.",
+   "proposed": "Last day of the general-illness incapacity. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days: WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M162",
+   "field_id": "T2R2-087",
+   "current": "First day of maternity or paternity leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). PMI source: WT 79006 Maternity Leave Payment.",
+   "proposed": "First day of maternity or paternity leave. Source: the payroll absence record dates of WT 79006 Maternity Leave Payment (DD-MM-YYYY, converted to AAAA-MM-DD).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M163",
+   "field_id": "T2R2-088",
+   "current": "Last day of maternity or paternity leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). PMI source: WT 79006 Maternity Leave Payment.",
+   "proposed": "Last day of maternity or paternity leave. Source: the payroll absence record dates of WT 79006 Maternity Leave Payment (DD-MM-YYYY, converted to AAAA-MM-DD).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M164",
+   "field_id": "T2R2-089",
+   "current": "First day of vacation or remunerated leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). Select absences by their dates, not by the payroll run that paid them: the client September run contains vacation rows dated in August, which must not be reported as September dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).",
+   "proposed": "First day of vacation or remunerated leave. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). Select absences by their dates, not by the payroll run that paid them: a vacation row paid in the run but dated in an earlier month is not reported with this period's dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M165",
+   "field_id": "T2R2-090",
+   "current": "Last day of vacation or remunerated leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). Select absences by their dates, not by the payroll run that paid them: the client September run contains vacation rows dated in August, which must not be reported as September dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).",
+   "proposed": "Last day of vacation or remunerated leave. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). Select absences by their dates, not by the payroll run that paid them: a vacation row paid in the run but dated in an earlier month is not reported with this period's dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).",
+   "why": "client observation"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M171",
+   "field_id": "T2R2-098",
+   "current": "Seven-digit economic-activity code for the occupational-risk system, taken from the annex of Decreto 768 de 2022, reported for contribution periods from November 2022 onwards. Added to Record Tipo 2 after this Spec's original build: the record now closes at position 693, not 686. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 98.",
+   "proposed": "Seven-digit economic-activity code for the occupational-risk system, taken from the annex of Decreto 768 de 2022, reported for contribution periods from November 2022 onwards. It is the last field of Record Tipo 2, which closes at position 693. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 98.",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A2",
+   "field_id": null,
+   "current": "═══ SUBMISSION FORMAT - VERIFIED (V2.7 STEP 3.5) ═══",
+   "proposed": "═══ SUBMISSION FORMAT ═══",
+   "why": "process header"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B5",
+   "field_id": null,
+   "current": "Res. MSPS 2388 de 2016 Technical Annex 2, s.0 (File description) and s.2.1.1.2.1 (Return type); Decree 780 of 2016 art. 3.2.3.9 as substituted by Decree 1990 of 2016. CONFIRMED.",
+   "proposed": "Res. MSPS 2388 de 2016 Technical Annex 2, s.0 (File description) and s.2.1.1.2.1 (Return type); Decree 780 of 2016 art. 3.2.3.9 as substituted by Decree 1990 of 2016.",
+   "why": "review language"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A7",
+   "field_id": null,
+   "current": "FORMAT TO CONFIRM",
+   "proposed": "Operator upload wrapper",
+   "why": "process header"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B7",
+   "field_id": null,
+   "current": "The two files below are byte-exact against the official annex. What is NOT publicly specified is each operador's upload wrapper and any additional validations it layers on top. Confirm with the client's chosen operador before go-live.",
+   "proposed": "The two files below are byte-exact against the official annex. Each operador's upload wrapper and any additional validations it layers on top are not publicly specified; they are a configuration parameter supplied by the chosen information operator at implementation.",
+   "why": "review language"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B12",
+   "field_id": null,
+   "current": "File Tipo 1 = 567 positions. File Tipo 2 Record Tipo 1 = 359 positions. File Tipo 2 Record Tipo 2 = 693 positions. All three verified against the printed totals of AT2 v30 (24-07-2026).",
+   "proposed": "File Tipo 1 = 567 positions. File Tipo 2 Record Tipo 1 = 359 positions. File Tipo 2 Record Tipo 2 = 693 positions. All three equal the printed totals of AT2 v30 (24-07-2026).",
+   "why": "review language"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B51",
+   "field_id": null,
+   "current": "Reconcile the settled contributions against its own computation per subsystem; capture the return number and payment date as evidence of compliance; and detect rejected contributor records so they can be re-filed on a correction return (type N).",
+   "proposed": "Reconcile the settled contributions against its own computation per subsystem; capture the return number and payment date as proof of compliance; and detect rejected contributor records so they can be re-filed on a correction return (type N).",
+   "why": "review language"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B52",
+   "field_id": null,
+   "current": "Each operador's response layout is PROPRIETARY. There is no published national standard for it, so writing a field-level specification would be invention. Obtain the layout from the client's chosen operador at implementation. This is an upstream-owned interface under CCG control B7.",
+   "proposed": "Each operador's response layout is PROPRIETARY. There is no published national standard for it, so writing a field-level specification would be invention. The layout is obtained from the chosen information operator at implementation. This is an upstream-owned interface under CCG control B7.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D99",
+   "field_id": null,
+   "current": "From the health period of August 2025: lectiva-phase apprentices under Ley 2466 de 2025 art. 21; health and occupational risk only, IBC 1 SMMLV (AT2 v30 (24-07-2026)). The productive-phase code is not named in the annex - see the RA query on T2R2-005.",
+   "proposed": "From the health period of August 2025: lectiva-phase apprentices under Ley 2466 de 2025 art. 21; health and occupational risk only, IBC 1 SMMLV (AT2 v30 (24-07-2026)). The annex names no code for the productive phase. Rule to be set at implementation: the contributor type reported for the productive phase.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D186",
+   "field_id": null,
+   "current": "Assigned by the operador's own system. Operadores are private entities licensed by the Ministry of Health and Social Protection. The employer chooses one commercially; the code is therefore client-specific and must be obtained at implementation, not configured from a national catalogue.",
+   "proposed": "Assigned by the operador's own system. Operadores are private entities licensed by the Ministry of Health and Social Protection. The employer chooses one commercially; the code is therefore a configuration parameter supplied by the chosen information operator at implementation, not configured from a national catalogue.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D188",
+   "field_id": null,
+   "current": "T2R1-014 (employer ARL), T2R2-031 / 032 (AFP), T2R2-033 / 034 (EPS), T2R2-035 (CCF) and T2R2-077 (employee ARL) are all SIX positions. The catalogue is maintained by the Ministry and distributed through the information operators; the placeholders used in the worked example (AFP001, EPS001, CCF001, ARL001) are illustrative only and MUST be replaced with the real codes obtained from the client's operador.",
+   "proposed": "T2R1-014 (employer ARL), T2R2-031 / 032 (AFP), T2R2-033 / 034 (EPS), T2R2-035 (CCF) and T2R2-077 (employee ARL) are all SIX positions. The catalogue is maintained by the Ministry and distributed through the information operators; the placeholders used in the worked example (AFP001, EPS001, CCF001, ARL001) are illustrative only and MUST be replaced with the real codes supplied by the chosen information operator at implementation.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C17",
+   "field_id": null,
+   "current": "The rate fields are numeric with implied decimals in their published width - seven positions for T2R2-046, 054, 064, 066, 068, 070 and 072, and nine for T2R2-061. Confirm the implied decimal placement with the chosen operador before go-live; the annex does not print it unambiguously for every rate field.",
+   "proposed": "The rate fields are numeric with implied decimals in their published width - seven positions for T2R2-046, 054, 064, 066, 068, 070 and 072, and nine for T2R2-061. The implied decimal placement is a configuration parameter supplied by the chosen information operator at implementation; the annex does not print it unambiguously for every rate field.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D17",
+   "field_id": null,
+   "current": "FORMAT TO CONFIRM. This is the one presentation detail of the layout that the annex leaves under-specified, and it differs between the seven-position and nine-position rate fields.",
+   "proposed": "This is the one presentation detail of the layout that the annex leaves under-specified, and it differs between the seven-position and nine-position rate fields.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D21",
+   "field_id": null,
+   "current": "A mid-period move can change the ARL rate. Confirm with the operador whether the period is settled at one rate or split - the annex does not prescribe a split, so market practice governs.",
+   "proposed": "A mid-period move can change the ARL rate. Rule to be set at implementation: whether the period is settled at one rate or split between the two work centres; the annex does not prescribe a split.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D23",
+   "field_id": null,
+   "current": "Without the authorisation number the institution will not reimburse. CO-GAP-03 and CO-GAP-04: the employer's first-two-days rate for general illness (Mercans default 66.67%) and the one-minimum-wage floor on incapacity pay are configurable and need the client's documented election.",
+   "proposed": "Without the authorisation number the institution will not reimburse. CO-GAP-03 and CO-GAP-04: the employer's first-two-days rate for general illness (Mercans default 66.67%) and the one-minimum-wage floor on incapacity pay are configuration parameters supplied at implementation.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A19",
+   "field_id": null,
+   "current": "applies, is operador-specific and must be confirmed before go-live.",
+   "proposed": "applies, is operador-specific and is supplied by the chosen operador at implementation.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A22",
+   "field_id": null,
+   "current": "real six-position codes come from the client's chosen operador.",
+   "proposed": "real six-position codes come from the chosen operador at implementation.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A53",
+   "field_id": null,
+   "current": "    pos 545-551  2026-03 - period de payment (see the RA query on the N/format conflict)",
+   "proposed": "    pos 545-551  2026-03 - periodo de pago, written as the literal AAAA-MM string",
+   "why": "review language"
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M30",
+   "field_id": "A1-027",
+   "current": "Date from which the employer is no longer obliged to make contributions. Format AAAA-MM-DD. This is the field that stops the obligation - not the mere absence of employees.",
+   "proposed": "Date from which the employer is not obliged to make contributions. Format AAAA-MM-DD. This is the field that stops the obligation - not the mere absence of employees.",
+   "why": "statutory wording neutralised (word list)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D42",
+   "field_id": null,
+   "current": "Cessation of activities. Where populated, A1-027 fixes the date from which the employer is no longer obliged to contribute.",
+   "proposed": "Cessation of activities. Where populated, A1-027 fixes the date from which the employer is not obliged to contribute.",
+   "why": "statutory wording neutralised (word list)"
+  }
+ ],
+ "unrewritable": [
+  "Payroll Scope Summary!C12 and Field Options!D99 (T2R2-005 context): 'AT2 v30 names no code for the productive phase - see the RA query on T2R2-005.' The annex and the spec give no contributor type for the productive phase of a Ley 2466 apprentice; rewritten as 'Rule to be set at implementation: the contributor type reported for the productive phase.'",
+  "PILA Spec!M107 (T2R2-041): 'the rule for V must be confirmed.' The spec gives no condition for reporting V (salario variable); rewritten as 'Rule to be set at implementation: the condition under which V (salario variable) is reported.'",
+  "PILA Spec!M108 (T2R2-042): 'in the client's Sept-2026 data the 40% test is run on the full (100%) integral salary and the excess is added at 100% on top of the 70% base, an observed practice to be confirmed by RA, not a confirmed instruction.' The spec gives no rule for the Ley 1393 40% test on an integral salary; rewritten as 'rule to be set at implementation: for an integral salary, whether the 40% test is run on the full integral salary or on its 70% base, and whether the excess is added in full on top of the 70% base'.",
+  "PILA Spec!M110 (T2R2-044): 'State explicitly how incapacity (IGE), maternity/paternity (LMA) and vacation/paid-leave (VAC-LR) days enter the ARL base ... must be confirmed against the annex and Decreto 1072 de 2015.' VAC-LR and LMA are covered by rules elsewhere in the spec (Population Rules C5; T2R2-026), but no rule exists for IGE days in the ARL base; rewritten as 'Rule to be set at implementation: how general-illness incapacity (IGE) days enter the ARL base and the ARL day count.'",
+  "Population Rules!D21 (Work centre and risk class): 'Confirm with the operador whether the period is settled at one rate or split - the annex does not prescribe a split, so market practice governs.' No rule exists in the spec for a mid-period ARL rate change; rewritten as 'Rule to be set at implementation: whether the period is settled at one rate or split between the two work centres; the annex does not prescribe a split.'"
+ ],
+ "summary": {
+  "cells_rewritten": 85,
+  "by_sheet": {
+   "Report Matrix": 8,
+   "Payroll Scope Summary": 1,
+   "PILA Spec": 59,
+   "File Structure": 7,
+   "Field Options": 3,
+   "Population Rules": 4,
+   "Sample File": 3
+  },
+  "unrewritable": 5
+ }
+}

@@ -1,0 +1,385 @@
+{
+ "reports": [
+  {
+   "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+   "sheet": "Detail IBC per Employees S.S.",
+   "role": "source",
+   "specs": [
+    "CO-PILA-003"
+   ],
+   "evidence": [
+    "Salary Value",
+    "Non-Wage Value",
+    "Value Not Applicable To SS",
+    "IBC Total"
+   ],
+   "confidence": "high",
+   "rationale": "Per-employee computation of the social-security contribution base (IBC): salary value plus non-wage value, less items not applicable to SS, giving one IBC Total. IBC Total for an integral-salary employee is exactly 70% of the salary value (e.g. 24,715,285 -> 17,300,699.5), which is the PILA integral-salary rule tied to the IBC fields of Record Tipo 2 (pension/health/ARL/CCF bases) and to the Ley 1393 non-salary clamp. It is NOT the PILA settlement itself: there is a single IBC column (no split per subsystem, no parafiscal base, no days, no administrator codes, no rates or contribution values, no novedades). Title block reads 'Gross to net PMI' with the same payroll id as the Base of Withholding report, i.e. it is a tab of the G2N pack. Note: Employee ID values (e.g. '540521') do not follow the 8-digit pattern used in the other reports - join key to be confirmed.",
+   "hypothesis_check": "Partly overturned: PILA-related confirmed, but role is source (IBC working) rather than direct; no per-subsystem IBC is present."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "role": "direct",
+   "specs": [
+    "CO-DIAN-002",
+    "CO-DIAN-004",
+    "CO-DIAN-005",
+    "CO-DIAN-001"
+   ],
+   "evidence": [
+    "% Retention ",
+    "Income Total",
+    "Obligatory Contributions to EPS , AFP  Solidarity and Subsistence",
+    "Contribution  AFC",
+    "Contribution  APV",
+    "EXEMPTED INCOME 25%",
+    "WITHOLDING TAX BASIS",
+    "WITHOLDING TAX WITH CONTRIBUTION"
+   ],
+   "confidence": "medium",
+   "rationale": "Per-employee monthly withholding-at-source depuration (Procedure 1/2 % Retention, income, mandatory contributions, AFC/APV, dependants, prepaid medicine, housing interest, 25% exempt income, 40% limit, withholding basis and withholding). Summing WITHOLDING TAX BASIS and the withholding columns over employees yields the Form 350 work-income base and withholding casillas, which the CO-DIAN-002 spec defines as the DEPURATED ET art. 388 base - so this is the working version of the payroll part of Form 350 (direct for CO-DIAN-002). For CO-DIAN-004/005 it is a source only (monthly values for AFC, voluntary contributions, mandatory EPS/AFP/FSP contributions that the annual certificate and 2276 accumulate), and for CO-DIAN-001 a cross-check of the income-tax withheld. Medium because two withholding columns exist (WITH / WITHOUT CONTRIBUTION) and which one is declared must be confirmed; also carries CONTINGENT WITHHOLDING, which may cover part of the 'Contingent Withholding Report' listed as not received.",
+   "hypothesis_check": "Confirmed: direct for CO-DIAN-002, source for CO-DIAN-004 and CO-DIAN-005."
+  },
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-004",
+    "CO-DIAN-005",
+    "CO-DIAN-001",
+    "CO-CESANTIAS-006",
+    "CO-DIAN-002"
+   ],
+   "evidence": [
+    "ID Number",
+    "EE Citizenship Card ID",
+    "WT Code",
+    "WT Description",
+    "Salary Payment Indicator",
+    "01/01/2026",
+    "01/09/2026",
+    "Total"
+   ],
+   "confidence": "high",
+   "rationale": "Per employee x wage type, one column per month (Oct-2025 to Sep-2026) plus Total. WT descriptions include salary (62100 Ordinary Salary, 62140 Integral Salary), statutory benefits (62211 Service Legal Bonus, 62150 Vacation Bonus), severance and interest paid (62110/62117 cash-out, 62126/62127 advances), severance-fund payment (25827/65805 Payment Severance Funds Inf.), cesantias base and balances (64998 Cesantias Base, 64999 Total Balance Cesantias, 63814 Severance Balance, 63815 Interests Balance), employee EPS/AFP/FSP (2554, 2556, 2553), AFC (25800-25808), voluntary pension FVOL (25811-25823), income tax (2552) and tax exemptions (58890-58892). These are exactly the annual accumulations Form 220 / Formato 2276 sum, and the cesantias liquidation inputs for CO-CESANTIAS-006. Caveat: the 12 monthly columns are a rolling window (Oct-2025..Sep-2026), not a calendar tax year, so the annual 220/2276 totals cannot be read straight from 'Total'.",
+   "hypothesis_check": "Confirmed (source for CO-DIAN-004/005/001); extended to CO-CESANTIAS-006 and CO-DIAN-002."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-001",
+    "CO-PILA-003",
+    "CO-DIAN-002"
+   ],
+   "evidence": [
+    "Employee ID",
+    "National ID",
+    "Bank Account",
+    "Hire Date",
+    "Effective Leaving Date",
+    "Salary Assigned",
+    "WT Code ",
+    "WT Grouping "
+   ],
+   "confidence": "high",
+   "rationale": "Vertical gross-to-net for the September run: one row per employee x wage type with Amount and WT Grouping (Entitlements / Deductions / Non Cash Earnings/Deductions). This is the devengados/deducciones source for the Nomina Electronica document (CO-DIAN-001), together with hire date, leaving date, bank account and contractual salary. It also carries PILA inputs (64990 Social security base, 64991 Parafiscals Base, 2554/2556/2553 employee contributions, 2564/2567/2560 employer EPS/AFP/ARL, 25110/25111/25112 CCF/ICBF/SENA) and income tax 2552 for Form 350. Masking note: the 'WT Name' column was over-masked to NAME_ tokens, so concept names must be read through the WT Code against the Accumulated Report.",
+   "hypothesis_check": "Confirmed (source for CO-DIAN-001); extended to CO-PILA-003 and CO-DIAN-002."
+  },
+  {
+   "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+   "sheet": "Leave Absence Report",
+   "role": "source",
+   "specs": [
+    "CO-PILA-003",
+    "CO-DIAN-001"
+   ],
+   "evidence": [
+    "Code WT",
+    "Description WT",
+    "Date From",
+    "Date To",
+    "Days ",
+    "Amount"
+   ],
+   "confidence": "high",
+   "rationale": "Absences processed in the period with wage type, start/end dates, days and amount. Codes present: 79001 Annual leave, 79003 Vacations Compensated, 79006 Maternity Leave Payment, 79008/79011 Sick Leave (employer first days / EPS reimbursed), 79018 Paid Leave. These feed the PILA novedades and their dates (VAC-LR, IGE, LMA, SLN start/end dates) and the Nomina Electronica vacation, incapacity, maternity and paid-leave blocks (start, end, days, amount). Hours column is empty. No unpaid-leave or occupational-accident (IRL) rows in this sample.",
+   "hypothesis_check": "Confirmed."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "role": "source",
+   "specs": [
+    "CO-PILA-003",
+    "CO-DIAN-001",
+    "CO-DIAN-002",
+    "CO-DIAN-004",
+    "CO-DIAN-005",
+    "CO-CESANTIAS-006"
+   ],
+   "evidence": [
+    "First Name",
+    "Second Last Name",
+    "Employee Professional Risk Class (ARL)",
+    "Severance Fund Name",
+    "Pension Fund (AFP) Name",
+    "EPS Provider Name",
+    "AFC Account Number",
+    "Tax Procedure 1"
+   ],
+   "confidence": "high",
+   "rationale": "Employee master data used by every spec: split names (first, middle, last, second last), hire date, contract type, ARL risk class, AFP/EPS/severance-fund names, AFC and FVOL accounts, pensioner date, address, department, city, e-mail, phone, identity documents, bank data, tax procedure and basic salary. Gaps against the specs: no explicit document-type column (only separate columns per document), administrators held as NAMES not codes (PILA/cesantias need operator codes), no CCF, no DANE municipality code, no worker type/subtype. Masking note: 'Severance Fund Name' was over-masked to NAME_ tokens.",
+   "hypothesis_check": "Confirmed."
+  },
+  {
+   "file": "Severance Massive Calculation Structure September 2026.xlsx",
+   "sheet": "Severance Massive Calculation S",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "TIPO DE SALARIO",
+    "TIPO DE CONTRATO",
+    "FECHA AJUSTADA",
+    "SALARIO BASICO",
+    "VALOR VARIABLE",
+    "BASE INDEMNIZACION",
+    "DIAS INDEMNIZACION",
+    "VALOR INDEMNIZACION"
+   ],
+   "confidence": "high",
+   "rationale": "Despite the name, this is NOT a cesantias (severance-savings) calculation: every amount column is about the dismissal INDEMNITY (BASE / DIAS / VALOR INDEMNIZACION, e.g. 391 or 460 indemnity days), computed for the whole headcount (371) - a massive termination-cost simulation. It has no severance-savings fund, no days worked over 360, no cesantias value or 12% interest, so it does not map CO-CESANTIAS-006. The only spec concept it touches is the Nomina Electronica 'Dismissal indemnity' field, but that field reports amounts actually paid on termination, not a simulation, so no spec relation is claimed. Masking note: 'EMPLEADO' was over-masked to NAME_ tokens.",
+   "hypothesis_check": "Overturned: not CO-CESANTIAS-006 and not direct; it is a dismissal-indemnity simulation (client-only)."
+  },
+  {
+   "file": "CARGA_MASIVA_AFC_202609.xlsx",
+   "sheet": "CARGA MASIVA AFC 202403",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Source",
+    "Company",
+    "Document",
+    "GL Account",
+    "Posting",
+    "Amount",
+    "Description",
+    "Tax Code"
+   ],
+   "confidence": "high",
+   "rationale": "SAP FI journal upload (Source FI0340, company 1764, document type YQ, GL accounts, posting keys 31/40, reference AFC1764MES09) posting the month's AFC deductions per receiving bank ('AFC Banco de Bogota', 'AFC Av Villas'). Aggregated per bank/vendor, not per employee, so it cannot feed the per-employee AFC fields of Form 220 / 2276 or Form 350 depuration; those come from the Accumulated Report and Base of Withholding. Accounting interface only. Sheet name still says 202403 although the file is 202609.",
+   "hypothesis_check": "Overturned for the source role: it is an accounting upload with no employee-level data (client-only)."
+  },
+  {
+   "file": "CCT Detailed Third Party Consolidada.xlsx",
+   "sheet": "CCT Detailed Third Party Consol",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Employee ID",
+    "WT Code",
+    "WT Description",
+    "Code",
+    "Amount"
+   ],
+   "confidence": "medium",
+   "rationale": "Per-employee third-party deductions with the creditor/third-party code: libranza loans (BBVA, Occidente, Bancolombia), cooperative fund Foncoltabaco, union dues (CUT, seccionales), pensioner associations, funeral plan, voluntary pension FVOL funds. Purpose is paying/consolidating third parties. None of these concepts belong to PILA (FVOL here is voluntary-pension-fund savings, not the PILA AVP into the mandatory fund). The same deductions appear in the G2N, which is the source for the Nomina Electronica deduction blocks (libranza, union dues, cooperative) and for 220/2276 voluntary-pension fields, so this report is not needed as a spec source. Medium because the third-party 'Code' could be useful for the NE libranza description.",
+   "hypothesis_check": "Overturned: no PILA relation; client-only third-party payment report."
+  },
+  {
+   "file": "Pac Reports.xlsx",
+   "sheet": "1868_employees_08_2026-10_2026",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Leave Type",
+    "Start Date",
+    "End Date",
+    "Days Taken",
+    "Leave Amount Type",
+    "Approver",
+    "Status",
+    "Submit Time"
+   ],
+   "confidence": "medium",
+   "rationale": "Not a PILA planilla summary: it is an employee self-service leave-request log (leave type, requested dates, days, workdays vs calendar days, approver, Approved/Pending/Rejected, submit/review timestamps), covering Aug-Oct 2026. Statutory absence data comes from the payroll-processed Leave Absence Report; this log only evidences the request workflow. Classified from the profile only - the masked workbook was not analysed further because its free-text 'Notes' column still contains a real person's name (PII alert raised).",
+   "hypothesis_check": "Overturned: not the PILA/PAC payment summary; leave-request workflow (client-only)."
+  },
+  {
+   "file": "Leave Reimbursement Report September 2026.xlsx",
+   "sheet": "Leave Reimbursement Report",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "E.P.S",
+    "WAGE TYPE CODE",
+    "WAGE TYPE DESCRIPTION",
+    "FECHA INICIAL INCAP.",
+    "DIAS INCAPACIDAD"
+   ],
+   "confidence": "medium",
+   "rationale": "List of incapacity and maternity episodes (WT 79406/79408) per EPS for the employer's reimbursement claim to the health insurers. Operational (cash recovery). It overlaps with PILA IGE/LMA novedad data, but the PILA fields it would matter for (EPS authorisation number, incapacity value) are not present, and dates/days are already in the Leave Absence Report. Labels are in Spanish (CODIGO, NOMBRE DEL EMPLEADO) unlike the other reports.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "1764_PMI_Bank_Payments_Report_202609.xlsx",
+   "sheet": "Bank Payments Report",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Beneficiary Name",
+    "Beneficiary National Id",
+    "Account Number",
+    "Swift Code",
+    "Routing Code",
+    "Type Account",
+    "Net Pay"
+   ],
+   "confidence": "high",
+   "rationale": "Net-pay bank transfer file/control (beneficiary, account, SWIFT, routing code, account type, net pay). Operational. Bank and account type are also Nomina Electronica payment fields, but those come from master data; this report is not their source.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "1764_PMI_Zero_Negative_Net_Pay_Report_202609.xlsx",
+   "sheet": "Zero & Negative Net Pay Report",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Employee Group",
+    "Net Pay",
+    "Is Net Pay Zero",
+    "Is Net Pay Negative",
+    "Is Net Pay Positive"
+   ],
+   "confidence": "high",
+   "rationale": "Payroll control exception report for zero/negative net pay. No statutory spec.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "Variance Per Employee Gross.xlsx",
+   "sheet": "Variance Per Employee Gross",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Current Month Gross",
+    "Previous Month Gross",
+    "Difference",
+    "% Deviation",
+    "Date of hiring"
+   ],
+   "confidence": "high",
+   "rationale": "Month-on-month gross variance control per employee. No statutory spec.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "Variance Per Employee Net.xlsx",
+   "sheet": "Variance Per Employee Net",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Current Month Net",
+    "Previous Month Net",
+    "Difference",
+    "% Deviation",
+    "Date of leaving"
+   ],
+   "confidence": "high",
+   "rationale": "Month-on-month net variance control per employee. No statutory spec.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "Variance on Total Statutory.xlsx",
+   "sheet": "Variance on Total Statutory",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Pay element",
+    "Current period",
+    "Previous period",
+    "Variance"
+   ],
+   "confidence": "medium",
+   "rationale": "Period-on-period variance of totals per pay element (statutory and other deductions: 2552 income tax, 2553-2567 EPS/AFP/ARL, 25110-25112 CCF/ICBF/SENA, AFC, FVOL, loans). Reconciliation control, not a filing. Medium because masking over-masked most of 'Current period' (7,123 cells replaced) and the report title, so only the first block could be read; the second block below the totals was not interpretable.",
+   "hypothesis_check": "Received (the hypothesis listed 'Variance on Totals' as not received): client-only."
+  },
+  {
+   "file": "Loans Balance New Report September 2026.xlsx",
+   "sheet": "Housing Loan Report",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Housing Loan Payout",
+    "Housing Fee Periodic",
+    "Housing Loan Interest Rate",
+    "Housing Loan Interest Amount",
+    "Housing interest Balance"
+   ],
+   "confidence": "medium",
+   "rationale": "Employer housing-loan balances, instalments and interest. Operational. Medium because the interest amount may feed the 'Decrease in Housing Interest' depuration in the Base of Withholding (CO-DIAN-002), but no column links them, so no spec relation is claimed.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "Loans Balance New Report September 2026.xlsx",
+   "sheet": "Loan without interest Fee",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Loan without interest Payout",
+    "Loan without interest Fee Periodic",
+    "Loan without interest Balance"
+   ],
+   "confidence": "high",
+   "rationale": "Interest-free employer loan balances and instalments. Operational; no statutory spec.",
+   "hypothesis_check": "Confirmed (client-only)."
+  },
+  {
+   "file": "ESS Report.xlsx",
+   "sheet": "Benefit Request Report",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Benefit Request Code",
+    "Status",
+    "Submission Date",
+    "Date of Approval",
+    "Wage type",
+    "Requested Amount",
+    "Approved Amount"
+   ],
+   "confidence": "high",
+   "rationale": "Employee self-service benefit-request workflow (birth allowance, breakfast/lunch per diem counts) with approval status and the wage type it is paid through. Workflow log; amounts reach payroll via the G2N. Masking note: 'Benefit Request Name' over-masked to NAME_ tokens.",
+   "hypothesis_check": "Confirmed (client-only)."
+  }
+ ],
+ "specs_without_evidence": [],
+ "specs_without_direct_report": [
+  {
+   "spec": "CO-PILA-003",
+   "note": "No client report is the PILA planilla itself; evidence is source-only (Detail IBC, G2N, Leave Absence, Master Data). No per-subsystem IBC, days per subsystem, administrator codes or rates are evidenced."
+  },
+  {
+   "spec": "CO-DIAN-001",
+   "note": "No Nomina Electronica working report; G2N, Leave Absence, Master Data and Accumulated are sources."
+  },
+  {
+   "spec": "CO-DIAN-004",
+   "note": "Annual certificate; only monthly/rolling sources (Accumulated, Base of Withholding)."
+  },
+  {
+   "spec": "CO-DIAN-005",
+   "note": "Annual exogena; only monthly/rolling sources. No dependant document data evidenced."
+  },
+  {
+   "spec": "CO-CESANTIAS-006",
+   "note": "Annual filing; only cesantias balance/base wage types in the Accumulated Report and severance-fund name in Master Data. The 'Severance Massive Calculation' report is a dismissal-indemnity simulation, not cesantias."
+  }
+ ],
+ "alerts": [
+  "PII: 03-client-reports-masked/Pac Reports.xlsx, sheet 1868_employees_08_2026-10_2026, column J 'Notes' still contains a real person's name in free text (also reproduced in 04-output/profiles/Pac Reports.json examples_masked). Must be re-masked by Wallisson.",
+  "Over-masking (not PII, but loses evidence): Vertical G2N 'WT Name', Master Data 'Severance Fund Name', Severance 'EMPLEADO', ESS 'Benefit Request Name', Variance on Total Statutory 'Current period' and title.",
+  "Not received / out of scope: Contingent Withholding Report (partly covered by CONTINGENT WITHHOLDING column in Base of Withholding); PDFs Duplicate Bank Accounts and OP Bancarizados (not masked, not analysed)."
+ ]
+}

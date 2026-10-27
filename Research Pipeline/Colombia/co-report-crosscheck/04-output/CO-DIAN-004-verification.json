@@ -1,0 +1,186 @@
+{
+ "spec": "CO-DIAN-004",
+ "checked": [
+  {
+   "id_or_column": "Row 33 - Statutory benefit payments (casilla 42)",
+   "original_verdict": "Conflict",
+   "result": "overturned",
+   "reason": "Correct verdict: Explanation to improve (with RA query). The data checks out: 'Salary Payment Indicator' = X on 79401, 62116 and 62150, and blank on 62211 and 79403. But this is not a Conflict under CLAUDE.md rule 2. No client report shows where the client puts vacation pay on Form 220. The flag is a payroll attribute with an unstated purpose. It is set on 30 wage types, including all leave payouts (79405-79419: maternity, sick, paternity, bereavement...) and the per diems 62805-62808. That pattern looks like salary character for the contribution base (IBC), not a Form 220 classification. So no client statement on the statutory rule contradicts the instruction guide. Also, 62150 Vacation Bonus is an extralegal bonus, not statutory vacation pay. It may legitimately be salary (casilla 36) under CST art. 127/128, so the RA query must ask about 62150 separately from 79401/62116/79403. Keep the changemap Query-to-RA text and add the client wage-type list (62211, 79401, 79403, 62116, 62150) to the Field Explanation, plus the warning not to use the flag."
+  },
+  {
+   "id_or_column": "Row 24 - Department code",
+   "original_verdict": "Format mismatch",
+   "result": "overturned",
+   "reason": "Correct verdict: Not evidenced. A Format mismatch needs the same datum in a different format. The client values are the EMPLOYEE's address department abbreviation (DC 127, ANT 60, CUN 28, VAC 20 ... plus foreign ON/VD/JAL). They are not the place of withholding (casilla 33), which the spec maps to the Company record. The crosscheck's own finding admits this. Work location / Personal Subarea are also free-text city names. No masked report carries a DANE/DIVIPOLA code for the withholding place. The proposed SOURCE NOTE is harmless and can stay as an optional clarification, but it is not a format delta."
+  },
+  {
+   "id_or_column": "Row 25 - City or municipality code",
+   "original_verdict": "Format mismatch",
+   "result": "overturned",
+   "reason": "Correct verdict: Not evidenced. A Format mismatch needs the same datum in a different format. The client values are the EMPLOYEE's address city in free text (Bogota 84, Bogotá 40, BOGOTA 5, Bogota D.C. 4, bogota 3, ... plus Lausanne, Burlington, Zapopan). They are not the place of withholding (casilla 33), which the spec maps to the Company record. The crosscheck's own finding admits this. Work location / Personal Subarea are also free-text city names. No masked report carries a DANE/DIVIPOLA code for the withholding place. The proposed SOURCE NOTE is harmless and can stay as an optional clarification, but it is not a format delta."
+  },
+  {
+   "id_or_column": "Accumulated Report / D Beneficiary National Id",
+   "original_verdict": "Missing in spec",
+   "result": "needs Wallisson",
+   "reason": "Figures re-computed: filled on 330 of 491 rows of WT 62154, and on all 330 it differs from the pensioner's 'EE Citizenship Card ID'. BUT the column is not pension-only. It is filled for 9 Master Data employees, and for 7 of them it equals the employee's own National ID / Citizenship Card. So it behaves like the PAYMENT beneficiary (who receives the money), not necessarily a substitute pensioner. Decide: ask BAU/the client what a pension row with a different Beneficiary National Id means. (a) Sustitucion pensional (the beneficiary is now the pension holder): the certificate is issued to the beneficiary, so keep 'Missing in spec' and add a pensioner-identity rule for casillas 24-29. (b) A third-party payee or bank-account holder (guardian, apoderado): reclassify as Client-specific; the certificate stays with the pensioner."
+  },
+  {
+   "id_or_column": "Accumulated Report / E Beneficiary Name",
+   "original_verdict": "Missing in spec",
+   "result": "needs Wallisson",
+   "reason": "Same decision as 'Beneficiary National Id'. Additional evidence: the column is filled for all 1,038 payees, not only pension rows. For the 261 Master Data employees it equals Master Data 'Exact Beneficiary Name (Primary Bank Account)' in 257 cases, so it is the bank-payment beneficiary name. Count correction: Beneficiary Name differs from Employee Name on 328 rows of 62154 (317 of them also carry a Beneficiary National Id), not 317. Name-token comparisons across columns are only partly reliable after masking (Accumulated 'Employee Name' equals Master Data 'Formatted Full Name' for only 89 of 261). If the answer is (b), reclassify as Client-specific."
+  },
+  {
+   "id_or_column": "Row 11 - Corporate name",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "The title-block label '1764 - Compañía Colombiana de Tabaco SAS' is identical in all three reports. Base of Withholding 'Entity Name' is a single NAME_1360 token. Telling the developer to use Company.Legal_Name (RUT casilla 35), not the payroll label, is correct and supported. Minor: the text should say the label 'is not a reliable source of the RUT name' rather than asserting 'is not the RUT name'. Without the prefix it may well match the RUT name."
+  },
+  {
+   "id_or_column": "Row 13 - Employee document type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 14 of 261 employees have 2-3 document columns filled (8 National ID + Citizenship Card, 3 National ID + Identity Card + Citizenship Card, 1 Identity Card + Foreigners card, 1 Identity Card + Citizenship Card, 1 all three except National ID). The other 247 have exactly one; none has zero. 13 employees hold only 'Indentity Card for Foreigners', all non-Colombian (Ecuador 4, Venezuela 3, Peru 2, Canada, Uruguay, Honduras, Costa Rica). Master Data has no document-type column. The proposed text is correct, and so is the open question on 'National ID'/'Identity Card'."
+  },
+  {
+   "id_or_column": "Row 14 - Employee identification number",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict stays Explanation to improve, but the proposed text has an unsupported source pointer and must be corrected. Confirmed: Base of Withholding 'ID Number' = Master Data 'Employee ID' for 261/261; Accumulated 'ID Number' is the same key; 491 payees of 62154 are absent from Master Data. WRONG: 'EE Citizenship Card ID equals one of the Master Data document columns for all 261 matched employees, including foreigners' cards'. It matches for 248. It is BLANK for 13 employees, all foreign-card holders (12 of the 13 who hold only 'Indentity Card for Foreigners', plus 1 with Identity Card + Foreigners card). Only 2 employees have a foreigner's card number in it. Corrected text: 'EE Citizenship Card ID carries the document number for 248 of 261 employees and is blank for most holders of a foreigner's card; it is not a complete source.' ALSO UNDERSTATED: the Accumulated Report has 1,038 payees = 261 Master Data + 491 pension (62154) + 286 others. 175 of the 286 received 62100 Ordinary Salary, 132 of them in September 2026, and 178 have 2552. A large salaried population (probably another pay group) plus leavers also has no Master Data row, so the identification-source gap covers 777 payees, not 491."
+  },
+  {
+   "id_or_column": "Row 20 - Period certified - from",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: Hire Date differs from Original Hire Date for 40 of 261. Formats confirmed (Hire/Original Hire DD-MM-YYYY, Adjusted Service Date YYYY-MM-DD). The masked example 01-03-2026 / 27-02-2014 exists. The proposed text correctly leaves the choice to client confirmation."
+  },
+  {
+   "id_or_column": "Row 27 - Salary payments",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: exactly 30 wage types carry 'Salary Payment Indicator' = X, and the flag is consistent per wage type. Confirmed flagged: 79401, 62116, 62150, 62805-62808. Confirmed unflagged: 62229, 62224, 62202, 25830, 65838. Every listed wage type exists. The Accumulated Total equals the sum of its 12 monthly columns (Oct-2025 to Sep-2026) on 100% of rows. Suggested addition to the RA table: the flagged leave payouts 79405-79419 (marriage, maternity, paternity, sick-leave, bereavement, paid and jury leave payouts) are not placed anywhere in the proposed text."
+  },
+  {
+   "id_or_column": "Row 28 - Payments made with vouchers, cheques, cards or vales",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 65818 and 21115 both total 1,805,980,003. All listed 'Inf.' wage types exist. The text correctly leaves casilla placement to the RA."
+  },
+  {
+   "id_or_column": "Row 29 - Excess meal payments over 41 UVT",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict stays Explanation to improve; the proposed text needs one correction. The 2026 UVT of 52,374 is confirmed by WT 58001 (2025: 49,799), and the 41/310 UVT amounts are arithmetically right. But the text tells the engine to use 'client wage type 58001 UVT' as the UVT source. That accumulated value is NOT always the UVT: it reads 104,748 (2 x UVT) for 23 payee-months in 2026 (Feb 19, Mar 1, Jul 1, Sep 2) and 102,173 for 7 in April. These are months with two payroll runs or retro runs. Corrected text: 'use the UVT parameter of the tax year (52,374 for 2026); do not read it from the accumulated 58001 wage type.' 65818 is non-zero in all 12 months, confirmed."
+  },
+  {
+   "id_or_column": "Row 34 - Per diem payments",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62805-62808 exist, are flagged X and are paid (COP 229.4M, 71.5M, 209.6M and 115.7M over the 12 columns; 43-60 payees each). Routing them to casilla 43 under the spec's own casilla-36 exclusion rule is consistent with the spec."
+  },
+  {
+   "id_or_column": "Row 37 - Other payments",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "All 17+ listed wage types exist in the Accumulated Report. The text proposes no placement; it asks the RA for an explicit table, which is correct."
+  },
+  {
+   "id_or_column": "Row 38 - Severance savings and interest paid to the employee",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 62127 = COP 269.0M in 01/01/2026, and 62110/62117 are present in most months. Minor: 62126 is paid in January (229.9M) and March (22.5M), and also COP 0.7M in February, so 'January and March' should read 'mainly January and March'."
+  },
+  {
+   "id_or_column": "Row 40 - Severance savings deposited to the fund",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 25827 and 65805 are both COP 2,064.8M, only in 01/02/2026. Severance Fund Name is blank for 61 of 261, and 8 have Regime 'AReg'. The text is correct, and the realisation rule is flagged for the RA. The finding (not the proposed text) says the 61 blanks are 'consistent with integral-salary employees'. Only 24 of the 61 had 62140 in September 2026, so do not repeat that claim."
+  },
+  {
+   "id_or_column": "Row 41 - Retirement, old-age or invalidity pensions",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 491 payees of 62154, none in Master Data, none with 2552. Monthly 62154 totals are COP 604-664M. 62153 is paid only in Dec-2025 and Jun-2026. 21645/21646/21647 are on 428/10/77 pension payees; 21643 is on 1. Extra evidence for the RA query: 21140 (retirees withholding) sits on 17 payees, all of them 62151 Retirement Payment - PRV recipients and none of them 62154 payees. Wording fix: '(substitute pension)' is an interpretation. Write 'a different payee (substitute pensioner or third-party payee - to be confirmed)', pending the Beneficiary-column decision."
+  },
+  {
+   "id_or_column": "Row 45 - Mandatory health contributions borne by the employee",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Substance confirmed, figure wrong. The Base of Withholding combined column H equals 2554 + 2556 + 2553 (September 2026) for 261 of 261 employees, not '241 of 262'; 262 counts the GRAND TOTAL row. Replace the figure. The pensioner wage types 21645/21646/21647 exist and sit only on pension payees."
+  },
+  {
+   "id_or_column": "Row 46 - Mandatory pension and solidarity-fund contributions",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "2556, 2553 and 21643 (1 pension payee) exist. The combined-column statement is confirmed (261/261, see row 45)."
+  },
+  {
+   "id_or_column": "Row 48 - Voluntary contributions to voluntary pension funds",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: the September 2026 sum of 25811/25812/25813/25814/25815/25823 equals 'Contribution  APV' for 261 of 261 employees. The text says '261 of 262'; 262 counts the GRAND TOTAL row, so fix the denominator. 21210/21211/25820/25821 exist. A Foncoltabaco voluntary contribution (21193) also exists; it is an employee fund, not a pension fund, and needs no casilla, but the RA table should list it as not certified."
+  },
+  {
+   "id_or_column": "Row 49 - AFC account contributions",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: the September 2026 sum of 25800-25808 (all 9 exist) equals 'Contribution  AFC' for 260 of 261 employees (mismatch: one employee, 4,300,000 vs 2,661,343). Fix the denominator '262' to 261. 62839 Reimbursement AFC exists (COP 2.26M, 2 payees)."
+  },
+  {
+   "id_or_column": "Row 52 - Withholding on labour and pension income",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "All key figures re-computed and confirmed. 2552 Sept-2026 equals WITH CONTRIBUTION for 234 of 240 matched employees and WITHOUT for 180. CONTINGENT = max(WITHOUT - WITH, 0) for 261/261 (example 8,681,351 - 8,664,327 = 17,024). 21129 = COP 63.13M in Jan-2026 for one employee who also had 2552 (4,332,277). 21330 and 25834 exist (notional). 2552 in Oct-Dec 2025 = COP 3,150.9M of a rolling total of 18,079.0M. So casilla 60 = 2552 + 21129 + 21140, excluding 21330/25834, is supported as a proposal; it still needs RA approval, as the changemap's Query to RA says."
+  },
+  {
+   "id_or_column": "Row 75 - Payer or withholding agent name",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Same evidence and reasoning as row 11; consistent with the spec mapping Company.Legal_Name."
+  },
+  {
+   "id_or_column": "Row 15 - Employee first surname (Aligned sample, random.seed(42) -> rows 15, 63)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Master Data 'Last Name' is 0% blank (the finding says 1%; trivial), split as the casilla requires. The verdict stands. The finding understates the gap: 777 Accumulated payees (491 pension + 286 others, 132 of them paid salary in September 2026) have no Master Data row, so the split-name source is missing for all of them, not only pensioners."
+  },
+  {
+   "id_or_column": "Row 63 - Total withholding for the tax year (Aligned sample)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Arithmetic 'Sume 60 + 74' fully defined by the spec; casilla 60 is evidenced by 2552/21129/21140. Aligned is correct."
+  },
+  {
+   "id_or_column": "Master Data / AJ Birth Date (Client-specific spot-check, random.seed(42) sample of 5)",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Masked (1900-01-01); Form 220 has no birth-date casilla. Client-specific is correct."
+  },
+  {
+   "id_or_column": "Base of Withholding / Q BASES 3 (Client-specific spot-check, random.seed(42) sample of 5)",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Intermediate monthly ET art. 388 depuration step; Form 220 certifies no base. Client-specific for this spec is correct (relevant to CO-DIAN-002/005)."
+  },
+  {
+   "id_or_column": "Accumulated Report / U Total (Client-specific spot-check, random.seed(42) sample of 5)",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Re-computed: it equals the sum of the 12 columns Oct-2025..Sep-2026 on every row, so it is a rolling total. Client-specific is correct, and it must not feed any casilla."
+  },
+  {
+   "id_or_column": "Master Data / AW Pay Method (Client-specific spot-check, random.seed(42) sample of 5)",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Payment operations; no Form 220 casilla. Client-specific is correct."
+  },
+  {
+   "id_or_column": "Base of Withholding / Y CONTINGENT WITHHOLDING (Client-specific spot-check, random.seed(42) sample of 5)",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Equals max(WITHOUT - WITH, 0) for 261/261. It is not withholding practised, so no casilla 60 content. Client-specific is correct."
+  }
+ ],
+ "agreement_rate": 0.767
+}

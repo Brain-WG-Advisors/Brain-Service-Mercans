@@ -1,0 +1,605 @@
+{
+ "spec": "CO-DIAN-001",
+ "final": "05-final/CO-DIAN-001-NominaElectronica-Spec.xlsx",
+ "flagged": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "A29",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "- integration_type = BOTH (scope_manifest CO-BOTH-NE). Outbound: the signed XML. Inbound: the synchronous base64 ApplicationResponse in the same call."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A31",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "- product_mapping_required = true. The XML separates salary from non-salary at ELEMENT level with paired S / NS element names, so every wage type must carry a HARD salary / non-salary flag set at configuration time. It cannot be derived at reporting time."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C20",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "Public-sector only; PILA return types T and F are descoped in scope_manifest."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C49",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "Reported, but see CO-GAP-06: the annex has no PPT document-type code because the PPT post-dates it. Code 47 (PEP) is the only available proxy."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A21",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Non-executive director paid fees only (junta directiva)",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A34",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Documented business-expense reimbursements",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A40",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Nil period still filed",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M16",
+   "field_id": "NIE029",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Technical Annex table 5.5.1: 1 Semanal, 2 Decenal, 3 Catorcenal, 4 Fortnightly, 5 Monthly, 6 Otro. IMPORTANT: this describes how the EMPLOYEE IS PAID; it does NOT change the document frequency. Resolution 000013 of 2021 art. 3 requires ONE monthly document per employee whatever the pay cycle, so a fortnightly payroll reports PeriodoNomina = 4 on a single monthly document.\n\nSource: the employee's pay group (HR master field 'Pay Group'), mapped to the table 5.5.1 code - for example 'CO - Monthly' -> 5. The code is set per employee from the pay group, not as a company constant. The pay-group-to-code mapping table, covering every pay cycle in use (monthly, weekly advance and any other cycle), is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M26",
+   "field_id": "NIE013",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Country in which the document was generated. Table 5.4.1. Almost always CO; it may legitimately differ where a shared service centre generates outside Colombia, which does not change the obligation.\n\nSource: the country of the generation site (company configuration), not the employee's home-address country. CO unless the document is generated at a non-Colombian site, in which case the country of that site is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M53",
+   "field_id": "NIE041",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Annex table 5.5.3 - a SIXTEEN-value list (01, 02, 04, 12, 18, 19, 21, 22, 23, 30, 31, 47, 51, 54, 56, 58). It is a SUBSET of the PILA tipo contributor list, which has far more values, so the engine must map, not copy: PILA codes with no DIAN equivalent (for example 03 independiente, 16, 20, 32-45, 52, 53, 55, 57, 59-63) are not valid here. Bidirectional pair with 'Apprentice maintenance support' (NIE157): where NIE157 is present this field must be worker type 12 or 19 (aprendiz).\n\nSource: the HR master holds no worker-type code. Derive it from the Employee Group / Employee Subgroup mapping table (HR master fields 'Employee Group Code' / 'Employee Subgroup Code' -> table 5.5.3 code), a configuration parameter supplied at implementation; for example Group 6 / Subgroup E2 (interns paid WT 62149, also flagged by WT 64116 'Apprentice formula' = 1) -> 12 or 19, all other groups -> 01. The 12 (lectiva) vs 19 (productiva) split for apprentices is not in the payroll data and is supplied through the same mapping table or an HR phase field. Where NIE157 is present, this field must be 12 or 19 and NIE061 must be 4 (bidirectional check)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M55",
+   "field_id": "NIE043",
+   "patterns": [
+    "configuration parameter",
+    "scope_manifest",
+    "CO-GAP"
+   ],
+   "current": "Whether the employee performs an activity classified as high-risk under Decree-Law 2090 of 2003, which carries an ADDITIONAL employer pension contribution and a reduced pension age. Always present (1-1); write the literal true or false. The 2026 additional rate and its base are configuration parameters supplied at implementation from a primary source (scope_manifest CO-GAP-02) before any high-risk employee is configured."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M56",
+   "field_id": "NIE044",
+   "patterns": [
+    "configuration parameter",
+    "CO-GAP"
+   ],
+   "current": "Annex table 5.2.1: 11 Record civil, 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Passport, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais, 91 NUIP (employee only). Codes 21 and 22 are both valid: 22 is reported where the employee holds a cedula de extranjeria and 21 where the employee holds a tarjeta de extranjeria; the code follows the document the employee holds, as recorded in the document-type field. NOTE CO-GAP-06: there is NO code for the PPT (Temporary protection permit, Decree 216 of 2021), created one month after this annex; 47 (PEP) is the only available proxy.\n\nSource: the HR master stores no table 5.2.1 code; it holds one field per document type ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). Derive the code from the field that is filled: 'Citizenship Card ID' -> 13; 'Indentity Card for Foreigners' -> 22 where the document recorded in it is a cedula de extranjeria and 21 where it is a tarjeta de extranjeria (the document-type attribute of that document distinguishes the two). The codes for 'Identity Card' and 'National ID', and the precedence rule applied where more than one document field is filled, are configuration parameters supplied at implementation, so that exactly one document type is reported and the same document drives NIE044 and NIE045."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M57",
+   "field_id": "NIE045",
+   "patterns": [
+    "rule to be set",
+    "CO-GAP"
+   ],
+   "current": "Identity document number without dots or hyphens. It is input [8] to the CUNE and the join key to Form 220 and Format 2276. CO-GAP-07 - KNOWN SCHEMA DEFECT: the XSD types this attribute as xsd:integer, so a passport or foreign identity document containing letters (document types 21, 41, 42, 50) cannot be schema-valid. DIAN has published no workaround; the handling of such documents is set at implementation under CO-GAP-07.\n\nSource: the same HR master document field that set NIE044 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). The pay-run field 'National ID' is not used on its own: it is blank for employees whose only document is the foreigners' card (cedula de extranjeria, code 22, or tarjeta de extranjeria, code 21). Strip dots and hyphens. A document number that carries leading zeros must be emitted exactly as held in the HR master and used in the same form as CUNE input [8]; xsd:integer typing drops leading zeros, so such numbers fall under CO-GAP-07."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M59",
+   "field_id": "NIE047",
+   "patterns": [
+    "configuration parameter",
+    "CO-GAP"
+   ],
+   "current": "Second surname. CO-GAP-07 - KNOWN SCHEMA DEFECT: this attribute is use=required, yet many Colombians and virtually all foreign nationals have only one surname. Mercans emits a placeholder; no official workaround is published.\n\nSource: HR master field 'Second Last Name'. Where the field is blank, the CO-GAP-07 placeholder is emitted; the placeholder value is a configuration parameter supplied at implementation and must never be written back to the HR master."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M62",
+   "field_id": "NIE050",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Country where the work is performed. Materially important for tax: employment income of a NON-RESIDENT for work performed entirely OUTSIDE Colombia is foreign-source and not subject to Colombian withholding (DIAN Official letter 28380 of 2019), whereas a resident is taxed on worldwide income.\n\nSource: the HR master holds no work-country field. Derive the country from the work location (HR master field 'Work location', mapped to its country); the home-address field 'Country' is NOT used. The default work country (CO) is a configuration parameter supplied at implementation. The value follows the place of work, not the employee's home address."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M63",
+   "field_id": "NIE051",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "DIVIPOLA department of the place of work. Should reconcile to PILA Record Tipo 2 field 9 (department code de la ubicacion laboral) for the same employee and month.\n\nSource: the HR master holds no DIVIPOLA code for the place of work. Build the code from the work-location-to-DIVIPOLA mapping table (HR master field 'Work location' -> 5-digit DIVIPOLA code), a configuration parameter supplied at implementation; positions 1-2 of that code give this field. The home-address field 'Employee Address - Department' (letter codes such as DC, ANT, CUN) is NOT used, and the employer's own location is NOT used as a default: this field follows the place of work of each employee and must reconcile to PILA."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M64",
+   "field_id": "NIE052",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "COMPOSITE KEY - positions 1-2 = department (= NIE051), positions 3-5 = municipality. Reconciles to PILA Record Tipo 2 field 10.\n\nSource: HR master field 'Work location' (identical to 'Personal Subarea'), a free-text city name, translated through the work-location-to-DIVIPOLA mapping table (configuration parameter supplied at implementation; for example Bogota -> 11001 as in the annex example). A blank work location is a data error that blocks the document; it is never defaulted, and the employer's own location is never used as the place of work."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M65",
+   "field_id": "NIE053",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Street address of the place of work. For a teleworker this is the agreed remote workplace, not the employer's registered office.\n\nSource: the work-site address per work location (work-location-to-address table, a configuration parameter supplied at implementation). The employee's home address (HR master field 'Address Line 1') is NOT used."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M67",
+   "field_id": "NIE061",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Annex table 5.5.2: 1 Fixed term, 2 Indefinite term, 3 Obra o Labor, 4 Aprendizaje, 5 Practicas o Pasantias. Law 2466 of 2025 art. 21 recast the apprenticeship as a labour contract, so code 4 now denotes a genuine employment relationship. Bidirectional pair with 'Apprentice maintenance support' (NIE157): where NIE157 is present this field must be contract type 4 (aprendizaje).\n\nSource: the HR master field 'Employment Contract Type' (value 'WM') does not carry the term of the contract and cannot drive this code. The table 5.5.2 code is taken from the contract-term source of the HR system (fixed / indefinite / obra o labor / aprendizaje / practicas), a configuration parameter supplied at implementation. Interns and apprentices paid WT 62149 carry code 4, consistent with NIE041 (12 or 19) and NIE157 (bidirectional check)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M68",
+   "field_id": "NIE062",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "The amount is owned by the Wage Type Catalogue, not by the Data Dictionary (scope rule: 'Base Salary / Basic Salary amounts -> WTC, NOT DD'). The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary holds no Contractual Salary field. The CONTRACTUAL monthly salary, not the amount actually paid for the period. It stays constant across a month with unpaid leave or a mid-month hire, whereas SueldoTrabajado (NIE070) moves. Never below 1 SMMLV (COP 1,750,905 in 2026) for a full-time employee.\n\nSource: pay-run field 'Salary Assigned' (the contractual monthly salary, including an integral salary whose HR master 'Basic Salary' is 0), not the HR master 'Basic Salary'. Compare as numbers (2 decimals). Rule to be set at implementation: the Sueldo value reported for an apprentice or intern whose remuneration is the maintenance support reported in ApoyoSost (NIE157)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M72",
+   "field_id": "NIE065",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Annex table 5.3.3.2 - the full UN/EDIFACT 4461 medium-of-payment list (1 to 97). For a Colombian salary the realistic values are 42 Consignacion bancaria, 45 Transferencia Credito Bancario, 10 Efectivo and 20 Cheque. Item 10 of the art. 5 mandatory content. Bidirectional set with 'Bank' (NIE066), 'Account type' (NIE067) and 'Account number' (NIE068): the three are populated together wherever this field is a bank-mediated medium, and all three must be absent where it is 10 Efectivo.\n\nSource: HR master field 'Pay Method'. Translate Cash -> 10 and Bank -> the bank-mediated code (42 Consignacion bancaria or 45 Transferencia Credito Bancario), a configuration parameter supplied at implementation. Where Pay Method = Cash, NIE066-NIE068 are omitted even if the HR master still holds bank details."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M73",
+   "field_id": "NIE066",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Name of the receiving bank. Free text - Colombia has no national bank-code catalogue in this annex, and the clearing-house entity codes used in the bank payment file are bank-specific and supplied at implementation."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M74",
+   "field_id": "NIE067",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Ahorros (savings) or Corriente (current). Free text in the annex; standardise it at configuration so the value is stable across the payment file and the XML.\n\nSource: HR master field 'Bank Account Type', which holds a code (for example '02'), not text. Translate it through the account-type code table (configuration parameter supplied at implementation; for example 02 -> AHORROS) and emit the standardised text."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M78",
+   "field_id": "NIE002",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Date the employee joined the employer. Constant across every document for that relationship; it drives TiempoLaborado (NIE006), the cesantias accrual and the seniority-based severance calculation.\n\nSource: HR master field 'Hire Date' (DD-MM-YYYY, converted to AAAA-MM-DD), the start of the current employment relationship; the same date drives NIE006. Rule to be set at implementation: which HR start date ('Hire Date', 'Original Hire Date' or 'Adjusted Service Date') is the start of the employment relationship for DIAN purposes where they differ (rehires and transfers)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M85",
+   "field_id": "NIE069",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Days actually worked and paid in the period, on the 30-day commercial month. Distinct from TiempoLaborado (NIE006), which is cumulative service. Reduced by unpaid leave, by suspension and by a mid-month hire or leave.\n\nSource: pay-run field 'Days Worked'. Unpaid leave and suspension reduce it; a mid-month hire or leaver reduces it to the days of the relationship in the period. Do not use WT 63812 (gross month count) or WT 63953 (PILA day count), and do not derive it from the leave register, which counts business days and includes compensated vacation and episodes of earlier months. Rule to be set at implementation: whether paid absence days (vacation, incapacity, paid leave) reduce 'Days Worked' - the Population Rules sheet treats them as paid days that are not subtracted."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M86",
+   "field_id": "NIE070",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "The basic salary actually earned for the days worked. Moves with DiasTrabajados; contrast Sueldo (NIE062), which is the static contractual figure. This is the single largest input to the ET art. 388 depurated withholding base and to the PILA contribution base.\n\nSource: wage types 62100 'Ordinary Salary- 0003' and 62140 'Integral Salary- 0423'. Vacation days are not in this element (paid through WT 79401 -> NIE112). WT 62149 (intern support) does not belong here (-> NIE157). Rule to be set at implementation: whether the salary arrears WTs 62101 'Arrears - Ordinary salary', 62141 'Arrears-Integral Salary' and 65820 are reported in this element or as a separate concept."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M87",
+   "field_id": "NIE071",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "The statutory transport allowance, COP 249,095 per month in 2026. It is NOT salary for contribution purposes but IS included in the base of cesantias, prima and the severance indemnity (CST art. 7 of Ley 1 de 1963) - one of the sharpest base differences in Colombian payroll.\n\nThis element carries ONLY the statutory allowance of employees earning up to 2 SMMLV (Ley 15 de 1959). Source: WT 62520 (statutory transport allowance). WT 62523 'Transportation Allowance CLA- 2008' is a collective-agreement allowance paid to employees above 2 SMMLV and is NOT reported here: it goes to Auxilios - AuxilioS (NIE141) or AuxilioNS (NIE142) according to the salary character agreed in the collective agreement, which is the S/NS configuration flag on the wage type (configuration parameter supplied at implementation)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M125",
+   "field_id": "NIE108",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Money value of the block. Base for the hourly rate is the ordinary hourly wage; note that the hourly divisor changes from 220 to 210 on 15 July 2026 as the working week steps to 42 hours (Ley 2101 de 2021), so the engine must stamp the divisor used.\n\nSource: WT 62845 'Night, Sunday or holiday surcharge'. Its label does not separate the night Sunday / holiday surcharge (this element, code 7) from the day Sunday / holiday surcharge (NIE098, code 5): the split of WT 62845 between the two codes (separate wage types or a day / night rule) is a configuration parameter supplied at implementation. The hours for Cantidad are not in the payroll amounts and are sourced from the time register."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M133",
+   "field_id": "NIE117",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Days of service on which the statutory service bonus (service bonus, CST art. 306) is computed. Paid in two instalments, by 30 June and by 20 December.\n\nSource: WT 63811 'Worked Days In Semester', a semester counter that resets on 1 January and 1 July, read in the month the service bonus (WT 62211) is paid. WT 42961 carries the same description but is a different count that does not reset in July and is NOT used. Rule to be set at implementation: whether the semester counter is net of unpaid leave."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M135",
+   "field_id": "NIE119",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Non-salary portion of a bonus. Counts toward the 40% non-salary clamp of Ley 1393 de 2010 art. 30 for contribution purposes.\n\nCandidate wage types: the extralegal bonuses 62208 'March Bonus', 62209 'Christmas Bonus/ December', 62210 'August Bonus' and 62204 'Collective Labor Agreement Signed Bonus'. This element carries only those configured as non-salary extralegal primas under a written CST art. 128 agreement; those configured as salary go to NIE139, and those that are not primas go to the Bonificacion elements (NIE139 / NIE140). The element and the S/NS character of each of these wage types are configuration parameters supplied at implementation."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M136",
+   "field_id": "NIE120",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Severance savings (auxilio de cesantia, CST art. 249 / Law 50 of 1990 art. 99): one month's salary per year of service. EXCLUDED from the monthly withholding base under both procedures because of the ET art. 206 num. 4 exemption and its taper. Cross-report: this is the figure that must reconcile to Form 220 casillas 47-49 and to Format 2276 numerals 18-20.\n\nSource: direct payments WT 62110 'Cash-out of Severance Pay', WT 62126 'Advance Severance Last Year' and WT 62182; the interest WTs 62117 / 62127 go to PagoIntereses (NIE122). The annual consignment to the severance funds appears in payroll as the informative WT 65805 / 25827 'Payment Severance Funds Inf.'. Rule to be set at implementation, with its DIAN source: whether that annual consignment is reported in this element and in which month's document."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M144",
+   "field_id": "NIE127",
+   "patterns": [
+    "configuration parameter",
+    "CO-GAP"
+   ],
+   "current": "Amount paid to the employee for the incapacity. Colombian employers universally ADVANCE the benefit and recover it from the EPS or ARL, so this line is paid to the employee but receivable from the institution - see the inbound EPS/ARL determination in the Report Matrix. CO-GAP-03 / CO-GAP-04: the employer's first-two-days rate (Mercans default 66.67%) and the one-minimum-wage floor are configuration parameters supplied at implementation.\n\nSource: amounts from WT 79408 (employer first days) and WT 79411 (EPS-reimbursed days); per-episode values from the leave register rows (WT 79008 / 79011). Each leave-register row is reported as its own Incapacidad element with its own dates, days and amount (type 1). The leave register 'Amount' must be the amount of that row, not a per-employee value repeated across rows (data check, as for NIE112)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "G160",
+   "field_id": "NIE139",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Paired salary / non-salary element. Populate S where the bonus is salary under CST art. 127; populate 'Bonus - non-salary' (NIE140) where the parties have agreed it is not salary under CST art. 128. Bidirectional pair: the S/NS split is a hard flag on the wage type set at configuration and must never be derived at reporting time."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M162",
+   "field_id": "NIE141",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Employer allowance that constitutes salary (for example a fixed, habitual connectivity or housing allowance not agreed as non-salary).\n\nWT 62523 'Transportation Allowance CLA- 2008', the collective-agreement transport allowance paid to employees earning above 2 SMMLV, is reported here where the collective agreement gives it salary character (it is not AuxilioTransporte, NIE071, which is limited to 2 SMMLV under Ley 15 de 1959); the salary character of WT 62523 is the S/NS configuration flag on the wage type. Also assigned to this element: WT 62225 'Salary Attendance Bonus-Monthly'. Rule to be set at implementation: the element for WT 62133 'Variable -1301' (allowance or variable pay)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M163",
+   "field_id": "NIE142",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Employer allowance expressly agreed as non-salary. Counts toward the 40% clamp.\n\nWT 62523 'Transportation Allowance CLA- 2008', the collective-agreement transport allowance paid to employees earning above 2 SMMLV, is reported here where the collective agreement agrees it as non-salary (it is not AuxilioTransporte, NIE071, which is limited to 2 SMMLV under Ley 15 de 1959); the salary character of WT 62523 is the S/NS configuration flag on the wage type. Also assigned to this element: 62207 'Attendance Bonus', 62811 'Health Allowance', 62540 'Housing Allowance Domestic Relocation' (negative reversals netted inside the element), 62700 'School Allowance', 62221 'Hardship Premium', 62430 'L2L Rent Allowance', 62131 'Scholarship' and 65808 'Aid Refractive Surgery'. Rule to be set at implementation: whether the informative third-party benefits 65817 / 65837 (life insurance), 65814 / 65815 (private health insurance), 65811 (gym), 65839 (optical) and 62320 / 62310 (expat leasing / allowance) are reported here or as PagoTercero (NIE193)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M164",
+   "field_id": "NIE146",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Free-text label of a concept that has no dedicated element. Mandatory (1-1) inside the block: an amount without a description is not admissible. Bidirectional set with 'Other concept - salary' (NIE147) and 'Other concept - non-salary' (NIE148): at least one of the two amounts must be present wherever this description is populated.\n\nSource: wage types with no dedicated element, for example 65821 'Expatriation Package for Inbounds' (DescripcionConcepto 'Paquete de expatriación Expats HOST'), 67090 'Pago Préstamo Sin Interés', 1910 'Previous periods receivables', 67010 and stock-award wage types. Use the wage-type description as DescripcionConcepto, in UTF-8 (accented letters preserved). Each is classified S or NS at wage-type configuration before use. Rule to be set at implementation: the element for WT 62203 'Reconciliations PMI additionall payment' (OtroConcepto or BonifRetiro, NIE159) and for the negative WT 62216."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M166",
+   "field_id": "NIE148",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Non-salary amount of the described concept.\n\nRule to be set at implementation: whether an OtroConcepto with a zero amount in the month (for example a stock-award wage type with no value) is emitted or suppressed."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M174",
+   "field_id": "NIE193",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Payments made to third parties that are income of the employee. Repeating (0-N).\n\nSource: the informative 'Inf.' earnings of grouping 'Non Cash Earnings/Deductions': 65814 / 65815 / 65801 / 65831 (private health), 65817 / 65837 (life insurance), 65811 (gym), 65809 / 65839 (optical), 65812 (text books), 62310 / 62320 (expat allowance / leasing), 65802 (Foncoltabaco employer contribution). Each has an equal offsetting 'Inf. deduction' (21563, 21802, 21801, 25837, 21110, 21111, 21213, 21310, 21320, 21613) reported in NIE195; the earning and its offset are always reported together and in matching elements. Exclude employer social-security costs and bases in the same grouping (2560, 2564, 2567, 25110-25112, 63011, 64990-64996). Exclude WT 67090 'Loan without interests Payment Inf.' (same grouping, no non-cash offset): it funds the cash deduction 21215 and is a loan, not a third-party benefit (see NIE185 / NIE189). See NIE142 for the rule to be set on the insurance, gym, optical and expat benefits."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M177",
+   "field_id": "NIE157",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Maintenance stipend paid to an apprentice. Law 2466 of 2025 art. 21 recast the apprenticeship as a labour contract, so from 2026 the support is remuneration of an employee, not a training stipend, and is regulated by Decree 0223 of 5 March 2026.\n\nSource: WT 62149 'Internship Pay - Sustainability Support- INKOMPASS - 0424' (HR master Employee Group 6 / Subgroup E2; WT 64116 'Apprentice formula' = 1). The bidirectional check with NIE061 = 4 and NIE041 = 12 / 19 relies on the contract-type and worker-type values supplied through the Employee Group mapping table (configuration parameter, see NIE041 / NIE061); the HR master field 'Employment Contract Type' ('WM') does not carry them."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M179",
+   "field_id": "NIE159",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Ex gratia or negotiated bonus paid on departure. Fully taxable employment income; it enters the ordinary monthly withholding base.\n\nRule to be set at implementation: whether WT 62203 'Reconciliations PMI additionall payment' is reported here or as OtroConcepto (NIE146), and whether a BonifRetiro element with a zero amount is emitted or suppressed."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M183",
+   "field_id": "NIE161",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Employee health contribution rate: 4.00% of the contribution base (Ley 100 de 1993 art. 204 as amended). The employer's 8.5% is NOT an employee deduction and must never appear here.\n\nRule to be set at implementation: the Porcentaje and Deduccion values of Salud and FondoPension for a worker who makes no employee contribution (the elements are 1-1 and cannot be omitted)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M191",
+   "field_id": "NIE177",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Withholding at source sobre employment income. RESIDENT: the ET art. 383 progressive table (0 / 19 / 28 / 33 / 35 / 37 / 39%) applied to the art. 388 depurated monthly base, under Procedure 1 or Procedure 2. NON-RESIDENT: the flat 20% of ET art. 408 on the gross payment, with no art. 388 depuration, no 25% exempt income, no art. 387 deductions and no tax-free band (DIAN Concept 011108 of 29 June 2026). Cross-report: the sum of this element across all employees for the month must reconcile to Form 350 casilla 93.\n\nSource: WT 2552 'Income Tax (employee)' (Deductions grouping; 0-value rows in the Non Cash grouping are ignored). WT 21330 'Personal Income Tax Withholding (Theoretical)' is included only where configured as withholding remitted to DIAN (configuration parameter supplied at implementation). The other withholding WTs 21129 (terminations), 25832 (stock-award vesting) and 25833 (IC local) are mapped at wage-type configuration; the hypothetical-tax WT 25834 is not withholding. The monthly sum must reconcile to Form 350 casilla 93."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M193",
+   "field_id": "NIE198",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Voluntary contribution to a pension fund. Reduces the withholding base within the ET art. 336 40% / 1,340 UVT annual limit. Cross-report: Form 220 casillas 55-56 and Format 2276 numerals 25-26 split RAIS voluntary contributions from voluntary pension-fund contributions, so the engine must carry the two separately even though the XML has one element.\n\nSource: the voluntary-fund ('FVOL') WTs 25811 Porvenir, 25812 Proteccion, 25813 Skandia, 25814 Metlife, 25815 Dafuturo and 25823 Colfondos, the 'Plan Institucional PROTECCION' WTs 21210 / 21211 / 21212, and WTs 21141, 25810, 25819-25822. These wage types do not distinguish RAIS voluntary contributions (Format 2276 numeral 25) from voluntary pension-fund contributions (numeral 26); the classification of each wage type between the two is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M195",
+   "field_id": "NIE171",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Percentage rate of the union subscription, set by the union's statutes.\n\nSource: the union-fee WTs 21550 (CUT), 21680 (national) and the sectional WTs 21552 / 21560 / 21562 / 21670 hold amounts only; a unionised employee pays three of them in the month (CUT + national + one sectional). The rate is not in the payroll data: it is configured per union wage type from the union's statutes (configuration parameter supplied at implementation) and reported per union - one Sindicato element (rate + amount) per union wage type, since the element repeats (0-N), never one merged amount with a single combined rate."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M201",
+   "field_id": "NIE195",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Amounts withheld for payment to third parties. Repeating (0-N).\n\nSource: the informative offsetting deductions 21115, 21563, 21802, 21801, 25837, 21110, 21111, 21213, 21310, 21320 and 21613, each equal to its paired 'Inf.' earning and reported only together with that earning (NIE193 / NIE154) so that ComprobanteTotal still equals the net paid to the bank. Also assigned to this element: 21118, 21147-21153, 21803, 25827-25829 and 26103. Rule to be set at implementation: the element for the Foncoltabaco employee-fund deductions (21192, 21193, 21123, 21116, 21117, 21122, 21124 - PagoTercero or Cooperativa, NIE180) and for 25817 'Dividendo por Colombia Contribution' and 21615 'San Vicente Funeral' (PagoTercero or OtraDeduccion, NIE197)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M202",
+   "field_id": "NIE196",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Recovery of a salary advance. Repeating (0-N).\n\nSource: WT 21215 'Legalization Salary Payment' where the line recovers an advance (61100 / 61101 / 61150 / 61200 / 62838). A 21215 line may also legalise an off-cycle payment or a loan refinancing (a line matched by the non-cash WT 67090 'Loan without interests Payment Inf.' is an advance converted into an interest-free loan); only an advance recovery goes to NIE196. Keep it separate from the employer-loan repayments 27010 / 27011 / 27040 (-> NIE185); the shared WTC code CO-DED-PRESTAMO must be split. Rule to be set at implementation: the identification rule that classifies each WT 21215 line (advance recovery, off-cycle payment or loan refinancing)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M204",
+   "field_id": "NIE180",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Contribution or repayment withheld for an employee cooperative.\n\nSource: the cooperative WTs 21616, 21617 'Coop John F. Kennedy' and 21618; where an employee has more than one in a month they are summed into the single amount. Rule to be set at implementation: whether the Foncoltabaco employee-fund deductions (21192 Aporte Legal, 21193 Aporte Voluntario, 21123 Free Destination, 21116 Vivienda, 21117 E.M.I, 21122, 21124) are reported here or as PagoTercero (NIE195)."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M206",
+   "field_id": "NIE182",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Prepaid or complementary health-plan premium withheld. Deductible from the withholding base under ET art. 387 up to 16 UVT per month.\n\nRULE: Prepaid medicine, a complementary health plan or a health insurance policy are additional health plans and are reported in PlanComplementarios; other insurance products go to OtrasDeducciones (NIE197).\n\nSource: the employee deductions WT 21611 'Private Health Insurance - Colsanitas', WT 21612 'Private Health Insurance - Sura' and WT 21610, where the product is an additional health plan under the rule above. The product classification of each of these wage types (additional health plan or other insurance) is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M209",
+   "field_id": "NIE185",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Recovery of an employee debt. Requires written authorisation (CST art. 149).\n\nSource: WTs 27010 'Housing Loan Fee', 27011 'Housing Interest Loan Fee' and 27040 'Loan without interests Fee' (employer loans). Loans are also disbursed through payroll, as an earning (WT 67010 'Housing Loan Payment') and as the non-cash WT 67090 'Loan without interests Payment Inf.' (repaid via 27040). Rule to be set at implementation: which accrued element, if any, carries a loan disbursement."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M212",
+   "field_id": "NIE187",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Sum of every element in the Devengados block. Item 6 and item 8 of the art. 5 mandatory content. Input [4] to the CUNE, where it must be TRUNCATED to two decimals - truncated, not rounded, a distinction that catches many implementations. Bidirectional set with 'Rounding residual' (NIE186), which is present only where round-half-to-even rounding of the individual concepts leaves this total differing from the sum of its parts.\n\nSource: the total is the sum of the elements reported. Payroll groups wage types as 'Entitlements', 'Deductions' and 'Non Cash Earnings/Deductions': include all 'Entitlements' wage types mapped to Devengados elements, plus only those informative 'Non Cash' earnings explicitly mapped (NIE193 / NIE154); employer contributions and bases in the Non Cash grouping are never included. A wage type that is in the gross but in no element, or in an element but not in the total, is a mapping error. Rule to be set at implementation: the treatment of a negative earning line (for example reversal WTs 62216, 62540) - netted against the same concept or reported as a deduction - since no element accepts a negative value."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M214",
+   "field_id": "NIE189",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "DevengadosTotal minus DeduccionesTotal, adjusted for the Rounding residual. Item 8 of the art. 5 mandatory content. Input [6] to the CUNE, truncated to two decimals. Bidirectional set with 'Rounding residual' (NIE186), which is present only where round-half-to-even rounding of the individual concepts leaves this total differing from the sum of its parts.\n\nSource: must reconcile to the cash net paid: ComprobanteTotal = Entitlements + Deductions + any non-cash item that funds a cash deduction (for example WT 67090 'Loan without interests Payment Inf.' offsetting WT 21215), and ties to the bank payment net of the employee; every deduction element, including Anticipo (NIE196), is subtracted. WT 26998 'Net salary (notional)' is NOT a reconciliation source. Position order: the TOT record carries Redondeo, DevengadosTotal, DeduccionesTotal and ComprobanteTotal in XSD v1.0.6 order. Carry-forward items WT 1910 'Previous periods receivables' and WT 1204 'Previous periods obligations': element to be set at implementation (see NIE146 / NIE197)."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B143",
+   "field_id": null,
+   "patterns": [
+    "NE version EN"
+   ],
+   "current": "NIE022 - the Version literal must be exactly 'V1.0: Electronic Payroll Support Document'. Global rule 90 - a document number may be transmitted only ONCE per employee. Global rule 92 - a document from a non-enabled issuer is rejected. Full rule set at Annex s.6.1."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D17",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "Passport. See CO-GAP-07: an alphanumeric passport number cannot satisfy the xsd:integer typing of NIE045."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D19",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "Special residence permit. CO-GAP-06: there is NO code for the PPT (Temporary protection permit, Decree 216 of 2021, created one month after this annex), which the large majority of regularised Venezuelan migrants now hold. Code 47 is the only available proxy."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D47",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "Employee of an SGP-beneficiary entity. Public sector; PILA return types T and F are descoped in scope_manifest."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D65",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "SOURCE CONFLICT. The annex percentages for codes 4, 5, 6 and 7 embed a 75% Sunday / public-holiday surcharge. Law 2101 of 2021 and Law 2466 of 2025 raise that surcharge to 80% from 1 July 2025 and to 90% from 1 JULY 2026, so from that date the statutory rate diverges from the printed annex value. The annex is still at version 1.0 and DIAN has not reissued table 5.5.5. This specification carries the annex values in @Porcentaje; a switch to the statutory value, on a written DIAN position, is a configuration parameter supplied at implementation."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D67",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "General illness. The employer bears days 1-2 (Decree 780 of 2016 art. 3.2.1.10); the EPS funds from day 3. CO-GAP-03: the first-two-days rate is a Mercans configurable default of 66.67%."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C4",
+   "field_id": null,
+   "patterns": [
+    "NE version EN"
+   ],
+   "current": "Emit the constant string 'V1.0: Electronic Payroll Support Document' exactly, including accents and the colon-space. Never build it from a version variable, never trim, never transliterate. Validation rule NIE022 compares the whole literal."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C12",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Every paired element (ViaticoManuAlojS / NS, BonificacionS / NS, AuxilioS / NS, ConceptoS / NS, PagoS / NS, PagoAlimentacionS / NS, Primas Payment / PagoNS) must be driven by a HARD salary / non-salary flag carried on the wage type and set at configuration time. Never infer the split at reporting time from the amount, the description or the wage-type name."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C21",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "Build the ET art. 388 depurated base: gross taxable payments, less the mandatory health, pension and solidarity-fund contributions (non-taxable income de renta), less the art. 387 deductions elected by the employee (dependants at 10% of gross capped at 32 UVT per month, prepaid health up to 16 UVT per month, housing-loan interest up to 100 UVT per month), less the 25% exempt income of art. 206 num. 10. Apply the two caps: deductions plus exempt income may not exceed 40% of gross less non-constitutive income, nor 1,340 UVT per year (Mercans apportions at 111.6667 UVT per month - see CO-GAP-05). Convert the resulting base to UVT at 52,374, read the art. 383 table, convert back to pesos, and approximate to the nearest 1,000 under ET art. 868. Under Procedure 2 apply instead the fixed percentage recomputed each June and December on the preceding twelve months divided by 13."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D26",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter",
+    "CO-GAP"
+   ],
+   "current": "CO-GAP-03: the first-two-days rate is a Mercans configurable default of 66.67% (CST art. 227 two-thirds for the first 90 days); the primary source does not state it. CO-GAP-04: the one-minimum-wage floor on incapacity pay follows settled practice. Both are configuration parameters supplied at implementation."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D27",
+   "field_id": null,
+   "patterns": [
+    "configuration parameter",
+    "CO-GAP"
+   ],
+   "current": "CO-GAP-02: the ADDITIONAL employer pension contribution for high-risk work (the Resolution 2388 rate table implies 26% total against the standard 16%, so ten additional points borne by the employer) and its precise base are configuration parameters supplied at implementation, to be set from a primary 2026 source before any high-risk employee is configured."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "A3",
+   "field_id": null,
+   "patterns": [
+    "12,0,0"
+   ],
+   "current": "═══ WORKED EXAMPLE - MARCH 2026, RESIDENT EMPLOYEE ON COP 12,0,0 ═══"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D21",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "Always emitted, as the literal true or false. See CO-GAP-02 before setting true."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D22",
+   "field_id": null,
+   "patterns": [
+    "CO-GAP"
+   ],
+   "current": "CUNE input [8]. Had this been a passport (41), CO-GAP-07 would bite: the XSD types the number as xsd:integer, so an alphanumeric passport number cannot be schema-valid."
+  }
+ ]
+}

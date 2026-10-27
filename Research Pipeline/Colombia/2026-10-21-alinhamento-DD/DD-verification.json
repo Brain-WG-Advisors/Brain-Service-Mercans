@@ -1,0 +1,48 @@
+{
+  "verifier": "independent (did not author the edit)",
+  "date": "2026-10-21",
+  "files": {
+    "base": "base/CO-DD-001-v1.1-Drive-2026-10-05.xlsx (md5 af2fc9a05b2fccbd7b24d64242ad3723, matches)",
+    "new": "CO-DD-001-v1.2.xlsx (md5 bd8e24dc6fcc3d6854b75f7f34d416e0)"
+  },
+  "verdict": "PASS_WITH_MINOR_FIX",
+  "checks": [
+    {
+      "id": 1,
+      "name": "Cell-by-cell diff, styles, images, opens",
+      "result": "PASS",
+      "evidence": "openpyxl full diff (values + style_id) over all 8 sheets: only changes = ID Information!V20, Country Fields!W24, W28, Country Option Mappers!G84 (style ids unchanged), Version Control!B15:F15 (new row 1.2 | 2026-10-21 (d-mmm-yy) | description | Draft | Wallisson Gomes). Sheet names/order, dimensions, merged cells, data validations, conditional formats, freeze panes, column widths, row heights identical. Images per sheet identical (VC 1, Introduction 1, others 0). At zip level only xl/worksheets/sheet1.xml and xl/sharedStrings.xml differ; media, drawings and VML byte-identical. zip testzip OK; openpyxl opens.",
+      "note": "Version Control!F15 style id 39 -> 37: the empty template cell carried a date-format style (d-mmm-yy); the new value uses style 37, the same as F13/F14 'Updated By'. Consistent with prior rows; not a defect."
+    },
+    {
+      "id": 2,
+      "name": "Res. 000013/2021 -> 000227/2025 article mapping and Spanish quote",
+      "result": "PASS (mapping) / MINOR FIX (quote punctuation)",
+      "evidence": "Local PDF 'Resolución 000227 de 23-09-2025.pdf' (pypdf): art. 1.5.3.1.1 Definiciones ends '(Artículo 1, Resolución 13 de 2021)'; 1.5.3.2.2 Periodicidad ends '(Artículo 3, ...)'; 1.5.3.3.1 Información y contenido ends '(Artículo 5, ...)'; 1.5.3.8.1 Representantes ends '(Artículo 22, ...)'. DIAN normograma of Res. 13/2021 confirms each: '<Artículo compilado como artículo 1.5.3.1.1 / 1.5.3.2.2 / 1.5.3.3.1 / 1.5.3.8.1 en la Resolución 227 de 2025>'. Official text of 1.5.3.2.2 (PDF and normograma agree): 'independientemente de que el sujeto obligado, realice pagos en periodos diferentes o inferiores al anteriormente indicado'. W28 quote omits the comma after 'obligado' -> words identical, punctuation not verbatim."
+    },
+    {
+      "id": 3,
+      "name": "W24 Termination Date note vs specs and Form 220 casilla 31",
+      "result": "PASS (substance) / wording precision recommended",
+      "evidence": "CO-DIAN-001 'Nomina Electronica Spec' row 79 (NIE003 FechaRetiro): 'Contract.End_Date (termination date of the system 'Termination' record)'. CO-PILA-003 row 156 (T2R2-081): same mapping. CO-DIAN-004 'Formulario 220 Spec' row 21 (casilla 31): 'PayPeriod.Year_End, or Contract.End_Date (system 'Termination' record) where the employee left during the year'; Population Rules row 5: casilla 31 = 31 December or the termination date, whichever is earlier. Official Form 220 instructions (Formulario_220_CertificadoIngresosRetenciones.pdf, 2023+ layout with casillas 38/58/59, Res. DIAN 000022/2024): '31. Período de la certificación, A: escriba en su orden el año, mes, día, en que termina el período que se certifica.' So the termination date is the value of casilla 31 for a leaver. The phrase 'closes the certification period of Form 220 casilla 31' is correct in substance but slightly loose (casilla 31 IS the end date of the certified period, not a period that is closed). Exact wording suggested: 'for a leaver who left during the year it is also the value of Form 220 casilla 31 \"Período de la certificación, A\" (end of the certified period) (CO-DIAN-004).'"
+    },
+    {
+      "id": 4,
+      "name": "Residual markers / remaining Res. 13/2021 mentions",
+      "result": "PASS",
+      "evidence": "Regex over all sheets for TODO|TBD|placeholder|RESEARCH-GAP|???|XXX: only hits are pre-existing domain text in Country Fields I6/W6 (second-surname 'placeholder' value, present in v1.1, untouched). Mentions of Res. 000013 of 2021 / 13 de 2021 / 13/2021 in data sheets: 0 (base had 3: V20, W28, G84). Only remaining mention is Version Control!D15, the change-log line describing the replacement (intended, historical)."
+    },
+    {
+      "id": 5,
+      "name": "Scope: blue/description columns only",
+      "result": "PASS",
+      "evidence": "Header row 4: ID Information!V = 'Additional Notes', Country Fields!W = 'Additional Notes' (non-orange; orange FFFF9900 dev columns are B,D,L-U in ID Information and C,E,M-V in Country Fields, none changed), Country Option Mappers!G = 'Constraint / Notes' (sheet has no orange columns). Edited rows confirmed: ID Information row 20 = 'DIAN Electronic Payroll Software Identifier'; Country Fields row 24 = 'Termination Date', row 28 = 'Pay Frequency'; Option Mappers row 84 = Pay Frequency mapper."
+    }
+  ],
+  "required_fixes": [
+    "Country Fields!W28: make the Spanish quote verbatim by restoring the comma: 'independientemente de que el sujeto obligado, realice pagos en periodos diferentes o inferiores' (Res. DIAN 000227/2025 art. 1.5.3.2.2; PDF and normograma agree)."
+  ],
+  "recommended_fixes": [
+    "Country Fields!W24 (optional precision): replace 'for a leaver it also closes the certification period of Form 220 casilla 31 (CO-DIAN-004)' with 'for a leaver who left during the year it is also the value of Form 220 casilla 31 \"Período de la certificación, A\" (end of the certified period) (CO-DIAN-004)'."
+  ]
+}

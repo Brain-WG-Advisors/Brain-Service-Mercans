@@ -1,0 +1,904 @@
+{
+ "spec": "CO-DIAN-005",
+ "final": "05-final/CO-DIAN-005-Formato2276-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "F7",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "Y",
+   "proposed": "C"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "G7",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "",
+   "proposed": "Country is always populated. Address, department and municipality are populated only where the country of residence is Colombia; for a beneficiary located outside Colombia they are left empty (Formato 2276 v4 technical specification, Anexo T3.45 of Res. 000227/2025)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I7",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "2 + 3",
+   "proposed": "Var (address) + 2 + 3 + Var (country)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J7",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "N (DIVIPOLA)",
+   "proposed": "AN (address) + N (DIVIPOLA department and municipality) + N (country code, DIAN country table)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "K7",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "11 / 001",
+   "proposed": "address / 11 / 001 / Colombia"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M7",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "COMPOSITE FIELD - department (2 digits) and municipality (3 digits) of the beneficiary, on the DANE DIVIPOLA catalogue. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data; where the master data holds a letter department code and a free-text city, the codes are obtained through a maintained mapping table validated against DIVIPOLA and supplied at implementation. Free text must never be sent. Rule to be set at implementation: the value for a beneficiary whose address is outside Colombia follows the Formato 2276 version 4 technical specifications. Location is retained for leavers and held for employer-paid pensioners.",
+   "proposed": "COMPOSITE FIELD - the beneficiary's location block of the Formato 2276 v4 technical specification (Anexo T3.45 of Res. 000227/2025): address, department (2 digits) and municipality (3 digits) on the DANE DIVIPOLA catalogue, and country. COUNTRY IS ALWAYS MANDATORY. Address, department and municipality are mandatory only where the country of residence is Colombia; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty. The country here is the country of the beneficiary's address, not a tax-residence marker. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data, with the address and the country taken from the same employee address record; where the master data holds a letter department code and a free-text city, the codes are obtained through a maintained mapping table validated against DIVIPOLA and supplied at implementation. Free text must never be sent in the department, municipality or country sub-fields. Location is retained for leavers and held for employer-paid pensioners."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B11",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "N02 Tipo de document y numero de identification | N03 Surnames and given names | N04 Ubicacion (departamento y municipio)",
+   "proposed": "N02 Tipo de document y numero de identification | N03 Surnames and given names | N04 Ubicacion (direccion, departamento, municipio y pais - pais always populated; direccion, departamento and municipio only where the country of residence is Colombia, Anexo T3.45 of Res. 000227/2025)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D37",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "The beneficiary's location. NOT the same question as the electronic payroll place of work (NIE051 / NIE052) or the Form 220 place where the withholding was practised (casillas 34 / 35) - three artefacts, three different geographic questions about the same person.",
+   "proposed": "The beneficiary's location. NOT the same question as the electronic payroll place of work (NIE051 / NIE052) or the Form 220 place where the withholding was practised (casillas 34 / 35) - three artefacts, three different geographic questions about the same person. In the technical specification (Anexo T3.45 of Res. 000227/2025) the location block carries the address, the department, the municipality and the country: the country is always populated; address, department and municipality only where the country of residence is Colombia."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A35",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "- The format has NO residence field. Residence is therefore invisible to DIAN in this return except through the arithmetic relationship between numerals 22 and 29 - a non-resident's numeral 29 is close to exactly 20% of numeral 22, which is itself a useful internal control.",
+   "proposed": "- The format has NO tax-residence field: the country in numeral 4 is the country of the beneficiary's address (Anexo T3.45 of Res. 000227/2025), not a tax-residence marker. Tax residence is therefore invisible to DIAN in this return except through the arithmetic relationship between numerals 22 and 29 - a non-resident's numeral 29 is close to exactly 20% of numeral 22, which is itself a useful internal control."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D22",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "USEFUL INTERNAL CONTROL: for a pure non-resident record, numeral 29 should be almost exactly 20% of numeral 22. A material divergence means either a residence change during the year or a misclassification. The format has no residence field, so this arithmetic is the only signal.",
+   "proposed": "USEFUL INTERNAL CONTROL: for a pure non-resident record, numeral 29 should be almost exactly 20% of numeral 22. A material divergence means either a residence change during the year or a misclassification. The format has no tax-residence field (the country in numeral 4 is the country of the beneficiary's address), so this arithmetic is the only signal."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C10",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "Bogota D.C.",
+   "proposed": "Bogota D.C.; country of residence Colombia, so the address, the department and the municipality are populated together with the country."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D10",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "The BENEFICIARY's location - a different question from the electronic payroll place of work and from the Form 220 place where the withholding was practised.",
+   "proposed": "The BENEFICIARY's location - a different question from the electronic payroll place of work and from the Form 220 place where the withholding was practised. The country is always populated; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty (Anexo T3.45 of Res. 000227/2025)."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D33",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "USEFUL CONTROL: for a pure non-resident record, N29 is almost exactly 20% of N22. Here 31,488,000 / 157,440,000 = 20.00%. A resident's ratio is 4.7%. The format has no residence field, so this arithmetic is the only signal - and a mid-year residence change breaks it, which is itself worth flagging before the control fires.",
+   "proposed": "USEFUL CONTROL: for a pure non-resident record, N29 is almost exactly 20% of N22. Here 31,488,000 / 157,440,000 = 20.00%. A resident's ratio is 4.7%. The format has no tax-residence field (the country in numeral 4 is the country of the beneficiary's address), so this arithmetic is the only signal - and a mid-year residence change breaks it, which is itself worth flagging before the control fires."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A46",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "  N04  Ubicacion del beneficiario .............. 11 / 001  (Bogota D.C.)",
+   "proposed": "  N04  Ubicacion del beneficiario .............. 11 / 001  (Bogota D.C.; pais Colombia - direccion, dpto. and municipio populated)"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A91",
+   "field_id": "N04",
+   "rule": "2276-1",
+   "current": "has no residence field:",
+   "proposed": "has no tax-residence field (the country in N04 is the country of the address):"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "G11",
+   "field_id": "N07",
+   "rule": "2276-2",
+   "current": "Populated where such payments were made AND the amount is not already reported under any other numeral (par. 6). Bidirectional exclusion with every other numeral of the format.",
+   "proposed": "Populated where such payments were made AND the amount is not already reported under any other numeral (par. 6), and for meal payments to a third party for an employee whose monthly salary exceeds 310 UVT (Anexo T3.45 of Res. 000227/2025, element pabop). Bidirectional exclusion with every other numeral of the format."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M11",
+   "field_id": "N07",
+   "rule": "2276-2",
+   "current": "Payments in vouchers, cheques, cards or vales. Res. 227 art. 1.3.7.1.1 para. 6 imposes a HARD EXCLUSION: 'El value reportado en el numeral 7 NO DEBE CONTENER la information reportada en los demas numerales del Format 2276'. It is a residual concept, and double-reporting it against numerals 5, 8 or 17 is a validation failure.",
+   "proposed": "Payments in vouchers, cheques, cards or vales. Res. 227 art. 1.3.7.1.1 para. 6 imposes a HARD EXCLUSION: 'El value reportado en el numeral 7 NO DEBE CONTENER la information reportada en los demas numerales del Format 2276'. It is a residual concept, and double-reporting it against numerals 5, 8 or 17 is a validation failure. Meal payments to a third party for an employee whose monthly salary exceeds 310 UVT (COP 16,235,940 in 2026) are reported HERE, because the ET art. 387-1 exclusion does not apply to that employee (Anexo T3.45 of Res. 000227/2025, element pabop); for an employee whose monthly salary does not exceed 310 UVT the same payment is split at 41 UVT between numeral 32 (element pagahuvt) and numeral 8 (element vaex) and nothing comes here. The 310-UVT test is applied month by month."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M12",
+   "field_id": "N08",
+   "rule": "2276-2",
+   "current": "The EXCESS over 41 UVT per month (COP 2,147,334 in 2026) of employer payments to third parties for the employee's or their family's meals. Taxable income of the employee. BIDIRECTIONAL PAIR WITH NUMERAL 32, which carries the amount UP TO 41 UVT and is informative only - the same underlying payment is split across two numerals at the 41-UVT line, and the engine must maintain that split monthly.",
+   "proposed": "The EXCESS over 41 UVT per month (COP 2,147,334 in 2026) of employer payments to third parties for the employee's or their family's meals, for an employee whose monthly salary does not exceed 310 UVT (COP 16,235,940 in 2026) - ET art. 387-1; Anexo T3.45 of Res. 000227/2025, element vaex. Taxable income of the employee. BIDIRECTIONAL PAIR WITH NUMERAL 32 (element pagahuvt), which carries the amount UP TO 41 UVT and is informative only - the same underlying payment is split across two numerals at the 41-UVT line, and the engine must maintain that split monthly. Where the monthly salary exceeds 310 UVT the whole meal payment is reported in numeral 7 (element pabop) and this numeral stays nil for that month."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M41",
+   "field_id": "N32",
+   "rule": "2276-2",
+   "current": "INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8, which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026). Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' (e.g. 'Meal Allowance Inf.'); the tag is a configuration parameter supplied at implementation and is applied only to meal payments made to a food supplier.",
+   "proposed": "INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8 (element vaex), which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026); where the salary exceeds 310 UVT the whole payment is reported in numeral 7 (element pabop) and this numeral stays nil (Anexo T3.45 of Res. 000227/2025, element pagahuvt). Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' (e.g. 'Meal Allowance Inf.'); the tag is a configuration parameter supplied at implementation and is applied only to meal payments made to a food supplier."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C26",
+   "field_id": "N32",
+   "rule": "2276-2",
+   "current": "Numeral 32. Res. 227 para. 1: 'se considera de caracter informativo'. It does NOT enter the gross total in numeral 22, because it is income of the food supplier, not of the employee. Form 220 has no counterpart casilla.",
+   "proposed": "Numeral 32 (Anexo T3.45 of Res. 000227/2025, element pagahuvt), for an employee whose monthly salary does not exceed 310 UVT. Res. 227 para. 1: 'se considera de caracter informativo'. It does NOT enter the gross total in numeral 22, because it is income of the food supplier, not of the employee. Form 220 has no counterpart casilla."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C27",
+   "field_id": "N08",
+   "rule": "2276-2",
+   "current": "Numeral 8, as taxable income of the employee.",
+   "proposed": "Numeral 8 (Anexo T3.45 of Res. 000227/2025, element vaex), as taxable income of the employee, for an employee whose monthly salary does not exceed 310 UVT; where the salary exceeds 310 UVT the whole meal payment is reported in numeral 7 (element pabop)."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D19",
+   "field_id": "N07",
+   "rule": "2276-2",
+   "current": "Where the employee's monthly salary EXCEEDS this, the art. 387-1 exclusion does not apply at all: the whole meal payment falls to numeral 7 and BOTH numeral 8 and numeral 32 stay nil.",
+   "proposed": "Where the employee's monthly salary EXCEEDS this, the art. 387-1 exclusion does not apply at all: the whole meal payment falls to numeral 7 (Anexo T3.45 of Res. 000227/2025, element pabop) and BOTH numeral 8 (element vaex) and numeral 32 (element pagahuvt) stay nil."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C12",
+   "field_id": "N08",
+   "rule": "2276-2",
+   "current": "Apply the two ET art. 387-1 tests MONTHLY and in sequence. First: does the employee's monthly salary exceed 310 UVT (COP 16,235,940 in 2026)? If YES, the whole meal payment goes to numeral 7 and both numeral 8 and numeral 32 stay nil for that month. If NO, split the payment at 41 UVT (COP 2,147,334): the part up to the threshold goes to numeral 32 (informative), and the EXCESS goes to numeral 8 (taxable).",
+   "proposed": "Apply the two ET art. 387-1 tests MONTHLY and in sequence. First: does the employee's monthly salary exceed 310 UVT (COP 16,235,940 in 2026)? If YES, the whole meal payment goes to numeral 7 and both numeral 8 and numeral 32 stay nil for that month. If NO, split the payment at 41 UVT (COP 2,147,334): the part up to the threshold goes to numeral 32 (informative), and the EXCESS goes to numeral 8 (taxable). ET art. 387-1; Anexo T3.45 of Res. 000227/2025, elements pabop, vaex and pagahuvt."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M9",
+   "field_id": "N05",
+   "rule": "2276-4;2276-3",
+   "current": "Annual salary payments to the employee: ordinary and integral salary (100% of the integral salary - the 70% factor applies only to contribution bases), salary arrears, overtime and surcharges, and other remuneration that constitutes salary under CST art. 127 and is not reported in a more specific numeral. Fed by an explicit wage-type-to-numeral classification table, NOT by the payroll 'salary' indicator, which also marks items that belong to other numerals (vacation pay, numeral 12; per diems, numeral 13). Each wage type feeds exactly one numeral. Accumulated on the PAYMENT date for 1 January to 31 December of the tax year; rolling or non-calendar accumulators must not be used. Maps to Form 220 casilla 36 and must equal it for the same employee and year.",
+   "proposed": "Annual salary payments to the employee: ordinary and integral salary (100% of the integral salary - the 70% factor applies only to contribution bases), salary arrears, overtime and surcharges, habitual bonuses, and other remuneration that constitutes salary under CST art. 127 and is not reported in a more specific numeral. Habitual bonuses - bonuses paid regularly as part of the remuneration, whatever their label - are reported here; a non-habitual, one-off bonus is reported in numeral 17 (Anexo T3.45 of Res. 000227/2025, elements pasa and potro). Fed by an explicit wage-type-to-numeral classification table, NOT by the payroll 'salary' indicator, which also marks items that belong to other numerals (vacation pay, numeral 12; per diems, numeral 13 - every per diem, including a permanent salary-type per diem, element pavia). Each wage type feeds exactly one numeral. Accumulated on the PAYMENT date for 1 January to 31 December of the tax year; rolling or non-calendar accumulators must not be used. Maps to Form 220 casilla 36, which likewise carries the habitual bonuses, and must equal it for the same employee and year."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M16",
+   "field_id": "N12",
+   "rule": "2276-4",
+   "current": "Statutory benefits OTHER THAN severance and its interest, which have their own three numerals (18, 19, 20): legal service bonus (prima de servicios), vacation pay (enjoyed, compensated in cash, or paid on termination) and work clothing. Fed by the wage-type-to-numeral classification; a wage type classified here is excluded from numeral 5 even where it carries the salary flag in payroll (e.g. vacation pay). The numeral for extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) - 12, 5 or 17 - is fixed per wage type in the wage-type-to-numeral classification table supplied at implementation. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 42.",
+   "proposed": "Statutory benefits OTHER THAN severance and its interest, which have their own three numerals (18, 19, 20): legal service bonus (prima de servicios), vacation pay (enjoyed, compensated in cash, or paid on termination) and work clothing. Fed by the wage-type-to-numeral classification; a wage type classified here is excluded from numeral 5 even where it carries the salary flag in payroll (e.g. vacation pay). Extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) are not reported here: a bonus paid habitually goes to numeral 5 and a non-habitual, one-off bonus goes to numeral 17 (Anexo T3.45 of Res. 000227/2025, elements pasa and potro); the habitual / non-habitual attribute of each bonus wage type is carried in the classification table. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 42."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M17",
+   "field_id": "N13",
+   "rule": "2276-3",
+   "current": "Per diems for transport, subsistence and accommodation away from the habitual workplace, fed by the per-diem wage types in the wage-type-to-numeral classification (e.g. hotel, breakfast, lunch and dinner per diem wage types). Rule to be set at implementation: per-diem wage types that carry the payroll salary flag (permanent, salary-type per diems) are routed to numeral 13 or to numeral 5 per wage type in the classification table; each amount is reported in one numeral only. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 43.",
+   "proposed": "Per diems for transport, subsistence and accommodation away from the habitual workplace, fed by the per-diem wage types in the wage-type-to-numeral classification (e.g. hotel, breakfast, lunch and dinner per diem wage types). Every per diem is reported in this numeral (Anexo T3.45 of Res. 000227/2025, element pavia), including permanent, salary-type per diems that carry the payroll salary flag; no per-diem wage type is routed to numeral 5, and each amount is reported in one numeral only. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 43, which likewise carries every per diem."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "G21",
+   "field_id": "N17",
+   "rule": "2276-4;2276-5",
+   "current": "Populated where a work-income payment has no dedicated numeral.",
+   "proposed": "Populated where a work-income payment has no dedicated numeral: non-habitual bonuses, one-off payments to a retiree that are not a pension, and the other items listed in the Field Explanation (Anexo T3.45 of Res. 000227/2025, element potro)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M21",
+   "field_id": "N17",
+   "rule": "2276-4;2276-5",
+   "current": "Work-income payments with no dedicated numeral (non-salary allowances and bonuses, payments in kind to third parties for the employee's benefit, equity-based compensation, termination indemnities and similar), fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary. In-kind and informative wage types (paid to third parties or abroad, e.g. the 'Inf.' and foreign-paid wage types) are explicitly classified wage type by wage type in the classification table supplied at implementation. Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here.",
+   "proposed": "Work-income payments with no dedicated numeral (Anexo T3.45 of Res. 000227/2025, element potro): non-habitual, one-off bonuses (a habitual bonus goes to numeral 5, element pasa), non-salary allowances, payments in kind to third parties for the employee's benefit, equity-based compensation, termination indemnities, and one-off payments to a retiree that are not a pension - a retirement gratuity, a pension-related compensation or settlement - while the pension itself goes to numeral 21 (element peju). Fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary. In-kind and informative wage types (paid to third parties or abroad, e.g. the 'Inf.' and foreign-paid wage types) are explicitly classified wage type by wage type in the classification table supplied at implementation. Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M27",
+   "field_id": "N21",
+   "rule": "2276-5",
+   "current": "Pension income paid BY THE EMPLOYER (retirement, old-age or invalidity). Populated for every employer-paid pensioner: where the employer pays company pensions directly through payroll (monthly pension and additional pension wage types), this numeral is populated and the pensioner population, which is not part of the active employee master data, is included in the file. Fed by the pension wage types in the wage-type-to-numeral classification. Rule to be set at implementation: the numeral for lump-sum retirement payments and pension-related compensations (21 or 17) is fixed per wage type in the classification table. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Where a fund pays the pension, the fund is the withholding agent and reporting party and nothing is reported here.",
+   "proposed": "Pension income paid BY THE EMPLOYER (retirement, old-age or invalidity). Populated for every employer-paid pensioner: where the employer pays company pensions directly through payroll (monthly pension and additional pension wage types), this numeral is populated and the pensioner population, which is not part of the active employee master data, is included in the file. Fed by the pension wage types in the wage-type-to-numeral classification. Only the pension itself - the periodic retirement, old-age or invalidity pension payments - is reported here (Anexo T3.45 of Res. 000227/2025, element peju); a lump-sum or one-off payment to a retiree that is not a pension (a retirement gratuity, a pension-related compensation or settlement) is reported in numeral 17 (element potro). Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Where a fund pays the pension, the fund is the withholding agent and reporting party and nothing is reported here."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M30",
+   "field_id": "N23",
+   "rule": "2276-6",
+   "current": "The beneficiary's own mandatory health contributions actually deducted in the tax year, by payment date. Source: the employee EPS contribution wage type (WT 2554), taken from the contribution wage type itself - never from a combined EPS+AFP+FSP total. Rule to be set at implementation: whether health contributions deducted from employer-paid pensions (the pensioner EPS wage types) are reported here on pensioner records. Maps to Form 220 casilla 53 and must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55.",
+   "proposed": "The beneficiary's own mandatory health contributions actually deducted in the tax year, by payment date. Source: the employee EPS contribution wage type (WT 2554), taken from the contribution wage type itself - never from a combined EPS+AFP+FSP total. On the record of an employer-paid pensioner, the mandatory health contribution deducted from the pension (the pensioner EPS wage types) is reported here in the same way (Anexo T3.45 of Res. 000227/2025, element apos). Maps to Form 220 casilla 53 and must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M31",
+   "field_id": "N24",
+   "rule": "2276-6",
+   "current": "Pension AND the solidarity-fund surcharge (both the solidarity and the subsistence sub-accounts) in ONE numeral, exactly as Form 220 casilla 54 combines them. Source: the employee AFP contribution wage type plus the FSP wage type (WT 2556 + WT 2553), never a combined EPS+AFP+FSP figure. Rule to be set at implementation: whether the solidarity deduction on employer-paid pensions is reported here on pensioner records. The electronic payroll and PILA both keep pension and FSP separate, so the engine must sum only at this point.",
+   "proposed": "Pension AND the solidarity-fund surcharge (both the solidarity and the subsistence sub-accounts) in ONE numeral, exactly as Form 220 casilla 54 combines them. Source: the employee AFP contribution wage type plus the FSP wage type (WT 2556 + WT 2553), never a combined EPS+AFP+FSP figure. On the record of an employer-paid pensioner, the solidarity-fund deduction on the pension is reported here (Anexo T3.45 of Res. 000227/2025, element apof). The electronic payroll and PILA both keep pension and FSP separate, so the engine must sum only at this point."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C29",
+   "field_id": "N23",
+   "rule": "2276-6",
+   "current": "Numerals 23 and 24. Pension and the solidarity fund are COMBINED in numeral 24.",
+   "proposed": "Numerals 23 and 24. Pension and the solidarity fund are COMBINED in numeral 24. On an employer-paid pensioner's record the health and solidarity deductions on the pension are reported in the same two numerals (Anexo T3.45 of Res. 000227/2025, elements apos and apof)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "G24",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "Populated for an employee under the Ley 50 de 1990 regime. Mutually exclusive with 'Severance under the traditional CST regime' (numeral 20) for the same employee. Must reconcile to the deposit made under CO-CESANTIAS-006.",
+   "proposed": "Populated for an employee under the Ley 50 de 1990 regime. Mutually exclusive with 'Severance under the traditional CST regime' (numeral 20) for the same employee. Must reconcile to the deposit made under CO-CESANTIAS-006 in the reported year - the February deposit belongs to the year of the deposit (ET art. 27 num. 3)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M24",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "THE SECOND OF THREE. The amount DEPOSITED to the employee's chosen fund by 14 February under Law 50 of 1990 art. 99. MAPS TO FORM 220 CASILLA 49 - NOT casilla 48. The second and third severance lines are TRANSPOSED between the two artefacts, and a positional mapping swaps them.",
+   "proposed": "THE SECOND OF THREE. The severance DEPOSITED to the employee's chosen fund under Law 50 of 1990 art. 99, counted in the year in which the deposit is MADE (Anexo T3.45 of Res. 000227/2025, element ceco; ET art. 27 num. 3): the deposit made by 14 February of the reported year, for the severance accrued in the preceding year, belongs to the reported year, and the deposit made in February of the following year belongs to that following year. MAPS TO FORM 220 CASILLA 49, which follows the same deposit-year rule, while numeral 20 maps to casilla 48. The second and third severance lines are TRANSPOSED between the two artefacts, and a positional mapping swaps them."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A42",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "- Numeral 19 must reconcile to the deposit made under CO-CESANTIAS-006 by 14 February.",
+   "proposed": "- Numeral 19 must reconcile to the deposit made under CO-CESANTIAS-006 in February of the reported year - the deposit is counted in the year it is made (ET art. 27 num. 3; Anexo T3.45 of Res. 000227/2025, element ceco)."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C28",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "Numerals 18 (paid to the employee), 19 (deposited to the fund) and 20 (traditional pre-1991 regime). Note the ordering difference against Form 220.",
+   "proposed": "Numerals 18 (paid to the employee), 19 (deposited to the fund in the reported year - the February deposit belongs to the year of the deposit, ET art. 27 num. 3) and 20 (traditional pre-1991 regime). Note the ordering difference against Form 220."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D14",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "Deposited to the fund by 14 February under Law 50 of 1990 art. 99. FORM 220 CASILLA 49 - NOT 48.",
+   "proposed": "Deposited to the fund under Law 50 of 1990 art. 99 and counted in the year the deposit is MADE - the February deposit belongs to the year of the deposit (ET art. 27 num. 3; Anexo T3.45 of Res. 000227/2025, element ceco). FORM 220 CASILLA 49 - NOT 48."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C31",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "Before filing, assert per beneficiary: numeral 22 equals Form 220 casilla 52; numeral 29 equals casilla 60 and twelve months of electronic payroll NIE177; numerals 23 and 24 equal casillas 53 and 54 and the employee portions of PILA campos 55, 47, 51 and 52; numeral 19 equals the deposit made under CO-SEVERANCE SAVINGS-006; numeral 34 equals Form 220 casillas 79 and 80. Across the population, assert that the sum of numeral 29 equals twelve months of Form 350 casilla 93.",
+   "proposed": "Before filing, assert per beneficiary: numeral 22 equals Form 220 casilla 52; numeral 29 equals casilla 60 and twelve months of electronic payroll NIE177; numerals 23 and 24 equal casillas 53 and 54 and the employee portions of PILA campos 55, 47, 51 and 52; numeral 19 equals the deposit made under CO-CESANTIAS-006 in the reported year (ET art. 27 num. 3); numeral 34 equals Form 220 casillas 79 and 80. Across the population, assert that the sum of numeral 29 equals twelve months of Form 350 casilla 93."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C19",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "One month's salary for 2026, deposited by 14 February 2027.",
+   "proposed": "COP 12,000,000 - the severance accrued for 2025 and deposited to the fund by 14 February 2026: the deposit made in the reported year."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D19",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "Equals Form 220 casilla 49, not casilla 48 must also reconcile to the deposit under co-severance savings-6, where late payment costs one day's salary per day of delay, uncapped.",
+   "proposed": "Counted in the year of the deposit (ET art. 27 num. 3; Anexo T3.45 of Res. 000227/2025, element ceco): the severance accrued for 2026 and deposited by 14 February 2027 belongs to the tax-year 2027 record. Equals Form 220 casilla 49, and must reconcile to the deposit made under CO-CESANTIAS-006 in February 2026, where late payment costs one day's salary per day of delay, uncapped."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A63",
+   "field_id": "N19",
+   "rule": "2276-7",
+   "current": "  N19  Cesantias CONSIGNADAS al fondo ..........  12000000    -> F220 casilla 49  (NOT 48)",
+   "proposed": "  N19  Cesantias CONSIGNADAS al fondo, Feb 2026  12000000    -> F220 casilla 49  (NOT 48)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M37",
+   "field_id": "N29",
+   "rule": "2276-8",
+   "current": "THE PRINCIPAL WITHHOLDING NUMERAL: the income-tax withholding actually practised on the beneficiary's work or pension income in the tax year, by payment date. For a RESIDENT it is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Source: every wage type that records withholding actually practised and remitted - the employee income-tax wage type and the separate withholding wage types for terminations, retirees and equity awards. Notional, theoretical or hypothetical tax-equalisation amounts are included ONLY if they were actually withheld and declared on Form 350; the inclusion of each such wage type is a configuration parameter supplied at implementation. Maps to Form 220 casilla 60, and the sum across the population reconciles to twelve months of Form 350 casilla 93.",
+   "proposed": "THE PRINCIPAL WITHHOLDING NUMERAL: the income-tax withholding ACTUALLY PRACTISED on the beneficiary's work or pension income in the tax year, by payment date (Anexo T3.45 of Res. 000227/2025, element vare). For a RESIDENT it is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Source: every wage type that records withholding actually practised and remitted - the employee income-tax wage type and the separate withholding wage types for terminations, retirees and equity awards. Hypothetical, notional or theoretical amounts are excluded: a tax-equalisation amount enters only to the extent it was actually withheld and declared on Form 350, and the contingent withholding of ET arts. 126-1 and 126-4, which the fund practises on a withdrawal, is never included. Maps to Form 220 casilla 60, likewise the withholding actually practised, and the sum across the population reconciles to twelve months of Form 350 casilla 93."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C32",
+   "field_id": "N29",
+   "rule": "2276-8",
+   "current": "Numeral 29, resident or non-resident alike.",
+   "proposed": "Numeral 29 (Anexo T3.45 of Res. 000227/2025, element vare): the withholding actually practised, resident or non-resident alike; hypothetical or contingent amounts are excluded."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C21",
+   "field_id": "N29",
+   "rule": "2276-8",
+   "current": "Accumulate the withholding actually practised under the ET art. 383 progressive table, Procedure 1 or Procedure 2, on the art. 388 depurated base. Assert that it equals Form 220 casilla 60 for the same employee and twelve months of electronic payroll NIE177.",
+   "proposed": "Accumulate the withholding actually practised under the ET art. 383 progressive table, Procedure 1 or Procedure 2, on the art. 388 depurated base - the withholding actually practised, never a hypothetical or contingent amount (Anexo T3.45 of Res. 000227/2025, element vare). Assert that it equals Form 220 casilla 60 for the same employee and twelve months of electronic payroll NIE177."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C27",
+   "field_id": "N29",
+   "rule": "2276-8",
+   "current": "The year's withholding under the ET art. 383 table.",
+   "proposed": "The year's withholding actually practised under the ET art. 383 table (element vare)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J9",
+   "field_id": "N05",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P9",
+   "field_id": "N05",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J10",
+   "field_id": "N06",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P10",
+   "field_id": "N06",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J11",
+   "field_id": "N07",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P11",
+   "field_id": "N07",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J12",
+   "field_id": "N08",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P12",
+   "field_id": "N08",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J13",
+   "field_id": "N09",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P13",
+   "field_id": "N09",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J14",
+   "field_id": "N10",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P14",
+   "field_id": "N10",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J15",
+   "field_id": "N11",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P15",
+   "field_id": "N11",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J16",
+   "field_id": "N12",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P16",
+   "field_id": "N12",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J17",
+   "field_id": "N13",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P17",
+   "field_id": "N13",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J18",
+   "field_id": "N14",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P18",
+   "field_id": "N14",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J19",
+   "field_id": "N15",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P19",
+   "field_id": "N15",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J20",
+   "field_id": "N16",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P20",
+   "field_id": "N16",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J21",
+   "field_id": "N17",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P21",
+   "field_id": "N17",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J23",
+   "field_id": "N18",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P23",
+   "field_id": "N18",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J24",
+   "field_id": "N19",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P24",
+   "field_id": "N19",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J25",
+   "field_id": "N20",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P25",
+   "field_id": "N20",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J27",
+   "field_id": "N21",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P27",
+   "field_id": "N21",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J28",
+   "field_id": "N22",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P28",
+   "field_id": "N22",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J30",
+   "field_id": "N23",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P30",
+   "field_id": "N23",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J31",
+   "field_id": "N24",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P31",
+   "field_id": "N24",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J32",
+   "field_id": "N25",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P32",
+   "field_id": "N25",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J33",
+   "field_id": "N26",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P33",
+   "field_id": "N26",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J34",
+   "field_id": "N27",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P34",
+   "field_id": "N27",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J35",
+   "field_id": "N28",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P35",
+   "field_id": "N28",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J37",
+   "field_id": "N29",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P37",
+   "field_id": "N29",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J38",
+   "field_id": "N30",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P38",
+   "field_id": "N30",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J39",
+   "field_id": "N31",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P39",
+   "field_id": "N31",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J41",
+   "field_id": "N32",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P41",
+   "field_id": "N32",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J42",
+   "field_id": "N33",
+   "rule": "2276-9",
+   "current": "N (whole pesos, no decimals, no separators; zero when nil)",
+   "proposed": "N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P42",
+   "field_id": "N33",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2)."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "P4",
+   "field_id": "N01",
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators; zero-filled when nil (Res. 227 par. 2).",
+   "proposed": "Not an amount - no rounding."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B27",
+   "field_id": null,
+   "rule": "2276-9",
+   "current": "Whole pesos, no decimals, no thousand separators, zero-filled where nil. This is the fourth Colombian convention encountered across the six filings, alongside the electronic payroll (2 decimals round-half-to-even), PILA (round UP to the next 100) and Form 350 and 220 (nearest 1,000). Store the unrounded value once and apply each convention at output.",
+   "proposed": "Positive integers in whole pesos - no decimals, no sign, no thousand separators - zero-filled where nil (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2). This is the fourth Colombian convention encountered across the six filings, alongside the electronic payroll (2 decimals round-half-to-even), PILA (round UP to the next 100) and Form 350 and 220 (nearest 1,000). Store the unrounded value once and apply each convention at output."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B28",
+   "field_id": null,
+   "rule": "2276-9",
+   "current": "Write ZERO. Res. 227 para. 2 is explicit. This matches Form 220 and INVERTS the electronic payroll, where an inapplicable element is omitted.",
+   "proposed": "Write ZERO. Res. 227 para. 2 is explicit, and the technical specification (Anexo T3.45 of Res. 000227/2025) takes positive integer values only. This matches Form 220 and INVERTS the electronic payroll, where an inapplicable element is omitted."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C10",
+   "field_id": null,
+   "rule": "2276-9",
+   "current": "Res. 227 para. 2: 'Las casillas de values son de mandatory diligenciamiento. En caso de no tener ningun value, se deben diligenciar con cero (0).' Every value numeral is populated.",
+   "proposed": "Res. 227 para. 2: 'Las casillas de values son de mandatory diligenciamiento. En caso de no tener ningun value, se deben diligenciar con cero (0).' Every value numeral is populated, as a positive integer (Anexo T3.45 of Res. 000227/2025)."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C16",
+   "field_id": null,
+   "rule": "2276-9",
+   "current": "Amounts are whole Colombian pesos with no decimals and no thousand separators. Round once, at the annual accumulation, not per month.",
+   "proposed": "Amounts are positive integers in whole Colombian pesos with no decimals, no sign and no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; Res. 227 para. 2). Round once, at the annual accumulation, not per month."
+  }
+ ],
+ "resolved_rule_to_be_set": [
+  "Formato 2276 Spec!M7 (N04): foreign address - only the country is mandatory for a beneficiary located outside Colombia; address, department and municipality are populated only where the country of residence is Colombia (Anexo T3.45). The 'Rule to be set at implementation' sentence is replaced; F7/G7/I7/J7/K7 and the File Structure, Field Options, Example Analysis and Sample File location lines follow.",
+  "Formato 2276 Spec!M11 / G11 (N07), M12 (N08), M41 (N32): meals routing - monthly salary above 310 UVT: whole meal payment in N07 (pabop); up to 310 UVT: up to 41 UVT per month in N32 (pagahuvt), excess in N08 (vaex). Stated with the Anexo T3.45 source in the three numerals, Field Options D19, Population Rules C12 and Payroll Scope Summary C26/C27.",
+  "Formato 2276 Spec!M17 (N13): per diems - every per diem, including permanent salary-type per diems carrying the payroll salary flag, in N13 (pavia); none routed to N05. The 'Rule to be set at implementation' sentence is replaced.",
+  "Formato 2276 Spec!M16 (N12), M9 (N05), M21 / G21 (N17): bonuses - habitual bonuses in N05 (pasa), non-habitual one-off bonuses in N17 (potro), none in N12; the per-wage-type '12, 5 or 17' configuration sentence in M16 is replaced by the habituality rule.",
+  "Formato 2276 Spec!M27 (N21), M21 (N17): retirement payments - only the pension itself in N21 (peju); lump-sum or one-off payments to a retiree that are not a pension in N17 (potro). The 'Rule to be set at implementation' sentence in M27 is replaced.",
+  "Formato 2276 Spec!M30 (N23), M31 (N24): pensioner deductions - the health contribution deducted from an employer-paid pension is reported in N23 (apos) and the solidarity deduction in N24 (apof) on the pensioner record. Both 'Rule to be set at implementation' sentences are replaced; Payroll Scope Summary C29 follows.",
+  "Formato 2276 Spec!M24 / G24 (N19): deposit year - N19 (ceco) carries the deposits made in the reported year; the February deposit belongs to the year of the deposit (ET art. 27 num. 3). The worked example (Example Analysis C19/D19, Sample File A63) now certifies the February 2026 deposit (2025 accrual) in the tax-year 2026 record; Report Matrix A42, Field Options D14, Population Rules C31 and Payroll Scope Summary C28 follow.",
+  "Formato 2276 Spec!M37 (N29): withholding actually practised - N29 (vare) excludes hypothetical, notional or theoretical tax-equalisation amounts and the contingent withholding of ET arts. 126-1 / 126-4 practised by the fund; the 'configuration parameter supplied at implementation' clause on tax-equalisation wage types is replaced. Population Rules C21, Payroll Scope Summary C32 and Example Analysis C27 follow.",
+  "Formato 2276 Spec!J and P of the 29 amount numerals (N05-N33), P4 (N01), File Structure B27/B28, Population Rules C10/C16: value format - positive integers in whole pesos, no sign, no decimals, no separators; zero when there is no value (Anexo T3.45; art. 1.3.7.1.1 par. 2). P4 (a code field) aligned with the other code / identifier fields."
+ ],
+ "still_open": [
+  "Report Matrix!B16 (File Extension): no rule in the brief; the extension follows the published technical specifications - kept as a configuration point.",
+  "Report Matrix!B17 (Character Encoding): no rule in the brief; the encoding follows the published technical specifications - kept as a configuration point.",
+  "Formato 2276 Spec!M34 (N27 AFC): the treatment of AFC reimbursement / reversal wage types in the annual accumulation - rule 9 fixes the sign of the reported value (never negative) but not whether reversals net against the year's deductions; the 'Rule to be set at implementation' sentence stays.",
+  "Formato 2276 Spec!M21 (N17): the wage-type-by-wage-type classification of in-kind and informative ('Inf.' / foreign-paid) wage types - no rule in the brief; stays a classification-table parameter.",
+  "Formato 2276 Spec!M5 (N02): the document-type mapping table and priority rule where the master data stores one column per document type - no rule in the brief; stays a configuration point.",
+  "Formato 2276 Spec!M32 / M33 (N25 / N26): the art. 55 versus art. 126-1 attribute of each voluntary-pension wage type and the employer- or employee-side nature of the institutional-plan wage types - no rule in the brief (the Form 220 brief keeps casilla 56 open likewise); stays a configuration point.",
+  "Formato 2276 Spec!M41 (N32): the 'meal paid to a third party' tag on the meal wage types - the routing rule is settled, the tag itself stays a configuration parameter.",
+  "Formato 2276 Spec!L7 (N04 System Mapping): kept as Employee.Department_Code + Employee.Municipality_Code; the address and country sub-fields are described in M7 as coming from the employee address record, no new mapping name is introduced."
+ ],
+ "summary": {
+  "cells": 108,
+  "by_sheet": {
+   "Formato 2276 Spec": 80,
+   "File Structure": 3,
+   "Field Options": 3,
+   "Report Matrix": 2,
+   "Population Rules": 6,
+   "Example Analysis": 6,
+   "Sample File": 3,
+   "Payroll Scope Summary": 5
+  }
+ }
+}

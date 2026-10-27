@@ -1,0 +1,1292 @@
+
+######## CO-DIAN-002 Formulario 350 Spec fields 67
+--- row 3 | None | ═══ declarant and period(sheet 1, casillas 1-12) ═══
+--- row 4 | 1 | Tax year
+   Format: N (AAAA)
+   System Mapping: PayPeriod.Year
+   Field Explanation: Calendar year of the period being declared. The form is prescribed for periods from 1 August 2024 onward (Res. DIAN 000031 de 2024 art. 3).
+   Rounding: Not an amount - no rounding.
+--- row 5 | 3 | Period
+   Format: N (01-12)
+   System Mapping: PayPeriod.Month
+   Field Explanation: Calendar month being declared, 01 to 12. Form 350 is a MONTHLY return; there is no quarterly or annual variant for withholding agents.
+   Option Values: -> Sheet 6: Period
+   Rounding: Not an amount - no rounding.
+--- row 6 | 4 | Form number
+   Format: N
+   System Mapping: System.DIAN_Form_Number
+   Field Explanation: Assigned by the DIAN electronic filing service, not by the declarant - the form prints 'Espacio reservado para la DIAN' against it. It becomes the reference quoted in casilla 26 of any later corrective return.
+   Rounding: Not an amount - no rounding.
+--- row 7 | 5 | Employer NIT
+   Format: N (no dots, no hyphens)
+   System Mapping: Company.NIT
+   Field Explanation: Tax identification number of the withholding agent, taken from casilla 5 of the RUT. The last digit of this number determines the filing deadline (7th to 16th business day of the following month). Join key to the electronic payroll (NIE033) and to PILA.
+   Rounding: Not an amount - no rounding.
+--- row 8 | 6 | NIT verification digit
+   Format: N
+   System Mapping: Company.NIT_DV
+   Field Explanation: DIAN check digit of the NIT, from casilla 6 of the RUT.
+   Rounding: Not an amount - no rounding.
+--- row 9 | 7 | First surname
+   Format: A
+   System Mapping: Company.First_Surname
+   Field Explanation: First surname of a natural-person withholding agent, from casilla 31 of the RUT. Auto-filled by the DIAN service from the RUT.
+   Rounding: Not an amount - no rounding.
+--- row 10 | 8 | Second surname
+   Format: A
+   System Mapping: Company.Second_Surname
+   Field Explanation: Second surname of a natural-person withholding agent, from casilla 32 of the RUT.
+   Rounding: Not an amount - no rounding.
+--- row 11 | 9 | First name
+   Format: A
+   System Mapping: Company.First_Name
+   Field Explanation: First given name of a natural-person withholding agent, from casilla 33 of the RUT.
+   Rounding: Not an amount - no rounding.
+--- row 12 | 10 | Other names
+   Format: A
+   System Mapping: Company.Other_Names
+   Field Explanation: Remaining given names of a natural-person withholding agent, from casilla 34 of the RUT.
+   Rounding: Not an amount - no rounding.
+--- row 13 | 11 | Corporate name
+   Format: A
+   System Mapping: Company.Legal_Name
+   Field Explanation: Corporate name, auto-filled by the DIAN service from casilla 35 of the RUT. The instruction guide says expressly that it 'se diligencia automaticamente' - do not attempt to override it.
+   Rounding: Not an amount - no rounding.
+--- row 14 | 12 | Sectional office code
+   Format: N (code)
+   System Mapping: Company.DIAN_Seccional_Code
+   Field Explanation: Code of the DIAN sectional office of the taxpayer's principal domicile, from casilla 12 of the RUT. A configuration attribute of the entity, not a period value.
+   Option Values: -> Sheet 6: Regional tax office
+   Rounding: Not an amount - no rounding.
+--- row 15 | None | ═══ correction block(sheet 1, casillas 25-26) ═══
+--- row 16 | 25 | Correction code
+   Format: N (code)
+   System Mapping: Mercans.Correction_Type
+   Field Explanation: Set by the DIAN service: 1 = correction of the taxpayer's own return; 2 = correction of a DIAN-generated correction under Ley 962 de 2005 art. 43; 3 = correction prompted by an administrative act.
+   Option Values: -> Sheet 6: Correction code
+   Rounding: Not an amount - no rounding.
+--- row 17 | 26 | Previous form number
+   Format: N
+   System Mapping: Mercans.Prior_Form_Number
+   Field Explanation: The casilla 4 form number of the return, or of the administrative act, being amended. This is the link that lets DIAN supersede the earlier filing rather than treat this one as a duplicate.
+   Rounding: Not an amount - no rounding.
+--- row 18 | None | ═══ self-withholding configuration(sheet 1, casillas 27-28) ═══
+--- row 19 | 27 | Self-withholding activity code (art. 114-1 exonerated legal persons)
+   Format: N (CIIU code)
+   System Mapping: Company.CIIU_Code
+   Field Explanation: Principal economic-activity code from casilla 46 of the RUT, chosen from the codes in DIAN Resoluciones 000114 of 21 December 2020, 001232 of 16 September 2022 and 000086 of 24 May 2023. THE SAME ART. 114-1 EXONERATION that drives this casilla also drives PILA file tipo 1 field 33 and Record Tipo 2 field 76 - the employer that is exonerated from employer health, SENA and ICBF for employees under 10 SMMLV is the employer that self-withholds here.
+   Option Values: -> Sheet 6: Economic activity (CIIU)
+   Rounding: Not an amount - no rounding.
+--- row 20 | 28 | Self-withholding rate
+   Format: N (percentage)
+   System Mapping: Mercans.Self_Withholding_Rate
+   Field Explanation: The self-withholding rate for the chosen activity, applied to ALL payments received. Set by DUR 1625 de 2016 art. 1.2.6.8. Not a payroll figure - it applies to the employer's own income, not to its employees.
+   Rounding: Rate as printed by the DIAN service.
+--- row 21 | None | ═══ payroll withholding - the two casillas that payroll owns(sheet 1, 77 and 93) ═══
+--- row 22 | 77 | Base - work income (natural persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.Taxable_Base_Art388)
+   Field Explanation: THE PRINCIPAL PAYROLL CASILLA ON THE BASE SIDE. The instruction guide defines it as 'los payments gravables (base sujeta a withholding) efectuados a natural persons por concept de salaries, commissions, prestaciones sociales, travel allowances, representation expenses, fees, emolumentos eclesiasticos, compensation received por el trabajo cooperative associate, payments en especie, payments en acciones y, en general, las compensation for personal services'. It is the DEPURATED taxable base of RESIDENT natural persons, not the gross: the ET art. 388 base after non-constitutive income, art. 387 deductions and the 25% exempt income - the base on which the casilla-93 withholding is computed. Non-resident foreign natural persons are NOT in this casilla: their payments are reported in the 'Pagos al exterior' section as sheet-2 rows (casillas 141-146) with the sheet-2 payment concept and country, at the nominal (gross) value, at the 20% rate of ET art. 408 and with no depuration; the employee's tax-residence flag decides the section. Pension income paid by the employer is not in this casilla either: it goes to casilla 78. Note also that the casilla sweeps in fees paid to natural persons under the art. 383 table, which are not employment income - payroll supplies only the employment component.
+   Rounding: Whole pesos per employee; round only the aggregated monthly casilla total to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 23 | 93 | Withholding - work income (natural persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.Income_Tax_Withheld)
+   Field Explanation: THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to RESIDENT natural persons in the calendar month, across EVERY pay group and EVERY payroll run of the entity in that month - regular, weekly or exceptional-advance, termination and settlement runs alike - in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Source: wage type 2552 'Income Tax (employee)' (Deductions), plus wage type 21330 'Personal Income Tax Withholding (Theoretical)' where it carries the withholding actually deducted from the employee's pay (the case in which the WT 2552 line is a zero-value Non Cash item). The amount is the withholding actually deducted from the employee's pay, computed with the employee's AFC and voluntary-pension contributions (ET arts. 126-1 and 126-4) taken into account; never the figure computed without those contributions. Contingent withholding (ET arts. 126-1 / 126-4) - the difference between the withholding computed without and with those contributions - is practised by the AFC or voluntary-pension fund when the savings are withdrawn before the permanence requirement is met; it is not practised by the employer and does not enter this return, and the wage types that carry a theoretical or hypothetical amount never deducted - 21114 'Theoretical income Tax-5011', 21619 'Theoretical Income Tax - Ajuste - 5035' and 25834 'Hypothetical Witholding Tax  - IC Foreign Country' - are out of scope: a theoretical or hypothetical amount is not withholding actually practised. WT 2552 withholding deducted in advance runs (WT 61100 'Weekly advance', WT 62838 'Exceptional Advance') and in termination or settlement runs (WT 62116, 62110, 62203, 62115) enters in the month it is practised, whatever the run. Withholding deducted on WT 21129 (Terminations), 25832 (Stock awards vesting) and 25833 (IC Local Country) enters in the month it is practised. Whether a wage type carries withholding actually practised, and therefore feeds casilla 93, follows from the withholding classification of each wage type, which comes from the Wage Type Catalogue (WTC) attribute; the wage types named here are the ones so classified. Withholding on the pension income the employer pays itself (WT 21140 'Personal Income Tax Withholding-Retirees- 6799', WT 21155 'Income Tax Pensioner') is not reported here: it goes to casilla 94, with its base in casilla 78. Withholding at the flat 20% of ET art. 408 on a NON-RESIDENT foreign natural person is not reported here: it is supplied as sheet-2 rows (casillas 141-146) in the 'Pagos al exterior' section, with the sheet-2 payment concept and country, on the nominal (gross) value and with no depuration, and rolls into casillas 111 / 112; the employee's tax-residence flag, not the withholding rate or the tax-procedure code, decides the section. Accumulate by the payroll engine's run key (pay group and run), not by a report-level identifier. Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130.
+   Rounding: Whole pesos per employee; round only the aggregated monthly casilla total to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 24 | 78 | Base - pension income (natural persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.Pension_Taxable_Base)
+   Field Explanation: Taxable base of the pension income the employer pays itself: the part of the monthly pension EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for retirement, invalidity, old-age, survivor and occupational-risk pensions and for substitute indemnities and returns of pension savings. Only the excess over 1,000 UVT is taxable, so the casilla is nil for a pension at or below that amount. It is the base on which the casilla-94 withholding (WT 21140, WT 21155) is computed; the pension wage types behind it are those classified as pension income, and the pension-income classification of each wage type (casilla 78 rather than casilla 77) comes from the Wage Type Catalogue (WTC) attribute. Pension income is not part of casilla 77, and a pension paid by a fund is reported by the fund, not here.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 25 | 94 | Withholding - pension income (natural persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.Pension_Tax_Withheld)
+   Field Explanation: Withholding actually practised on the pension income the employer pays itself, on the taxable excess over 1,000 UVT: wage type 21140 'Personal Income Tax Withholding-Retirees- 6799' and wage type 21155 'Income Tax Pensioner', in the month it is deducted, in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Not part of casilla 93. Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. Summed into casilla 130.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 26 | None | ═══ non-resident payments abroad - sheet 1 summary casillas ═══
+--- row 27 | 55 | Base - payments abroad, no treaty (legal persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (derived from hoja 2 casilla 148)
+   Field Explanation: Base of payments to foreign ENTITIES without a Colombian domicile, in countries with no double-tax treaty. Not a payroll casilla - a foreign entity is not an employee - but shown here because it shares the sheet 2 annex with the non-resident EMPLOYEE casillas.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 28 | 57 | Withholding - payments abroad, no treaty (legal persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (derived from hoja 2 casilla 150)
+   Field Explanation: Withholding on payments to foreign entities in non-treaty countries. Summed into casilla 130.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 29 | 56 | Base - payments abroad, treaty (legal persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (derived from hoja 2 casilla 152)
+   Field Explanation: Base of payments to foreign entities in countries with a double-tax treaty in force.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 30 | 58 | Withholding - payments abroad, treaty (legal persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (derived from hoja 2 casilla 154)
+   Field Explanation: Withholding on payments to foreign entities in treaty countries.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 31 | 109 | Base - payments abroad, no treaty (NATURAL persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.NonResident_Gross) WHERE treaty = none
+   Field Explanation: Nominal (gross) payments to non-resident foreign natural persons in non-treaty countries - ET art. 408 admits no depuration - reported through sheet-2 rows with concept de payment 5, 'Services y compensacion por personal services', the DIAN country-table code of the country and the 20% rate. These employees are excluded from casilla 77.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 32 | 111 | Withholding - payments abroad, no treaty (NATURAL persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.NonResident_Withholding) WHERE treaty = none
+   Field Explanation: Withholding on those payments - the flat 20% of ET art. 408 for employment income. Summed into casilla 130.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 33 | 110 | Base - payments abroad, treaty (NATURAL persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.NonResident_Gross) WHERE treaty = yes
+   Field Explanation: Nominal (gross) payments to non-resident foreign natural persons in treaty countries, with no depuration, reported through sheet-2 rows with concept de payment 24, 'Employment income' - the concept whose own definition is 'employment income de cualquier naturaleza en relacion con un empleo a favor de personas non-resident natural persons' - and the DIAN country-table code of the country. This is the exact place a non-resident EMPLOYEE with treaty cover is reported; these employees are excluded from casilla 77.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 34 | 112 | Withholding - payments abroad, treaty (NATURAL persons)
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: SUM(Payroll.NonResident_Withholding) WHERE treaty = yes
+   Field Explanation: Withholding after treaty relief. Where the treaty assigns taxing rights to the residence state the rate may be reduced to nil. Mercans applies treaty relief ONLY on the employer's written instruction supported by a residence certificate.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 35 | None | ═══ non-resident annex - sheet 2 (casillas 141-155) ═══
+--- row 36 | 141 | Treaty status
+   Format: Selection
+   System Mapping: Employee.Treaty_Country_Code
+   Field Explanation: Drop-down: SIN AGREEMENT or CON AGREEMENT. Choosing CON AGREEMENT switches casilla 142 to the treaty concept list (19 to 33) and requires the applicable double-tax treaty to be consulted for the rate.
+   Option Values: -> Sheet 6: Agreement
+   Rounding: Not an amount - no rounding.
+--- row 37 | 142 | Payment concept
+   Format: N (code)
+   System Mapping: Mercans.Foreign_Payment_Concept
+   Field Explanation: For a NON-RESIDENT EMPLOYEE the two relevant concepts are: SIN AGREEMENT concept 5, 'Services y compensacion por personal services'; CON AGREEMENT concept 24, 'Employment income' - expressly 'employment income de cualquier naturaleza en relacion con un empleo'. Concept 25 covers directors' fees and concept 27 pensions.
+   Option Values: -> Sheet 6: Concept de payment (sheet 2)
+   Rounding: Not an amount - no rounding.
+--- row 38 | 143 | Person type
+   Format: Selection
+   System Mapping: Mercans.Counterparty_Type
+   Field Explanation: Legal entity or Natural person. A non-resident EMPLOYEE is always Natural person; this is the field that separates employee withholding from supplier withholding in the annex.
+   Option Values: -> Sheet 6: Tipo de persona
+   Rounding: Not an amount - no rounding.
+--- row 39 | 144 | Recipient country
+   Format: N (DIAN country-table code)
+   System Mapping: Employee.Treaty_Country_Code
+   Field Explanation: Country of TAX RESIDENCE of the non-resident payee (for a treaty claim, the country on the residence certificate), expressed as the code of the DIAN country table - the same code used in the RUT and in the exogenous information formats. Do not derive it from Nationality. Where the address country (Master Data field 'Country') is used as a fallback it must be normalised to one consistent upper-case form and converted to the DIAN country-table code; neither Nationality nor address Country is tax residence by itself, and the two may name different countries. Where 'Treaty status' (casilla 141) = CON CONVENIO the country must be one with a treaty in force. Colombia's treaty network in force includes Spain, Chile, Switzerland, Canada, Mexico, South Korea, Portugal, India, the Czech Republic, the United Kingdom, France, Italy and Japan, plus Andean Community Decision 578.
+   Option Values: -> Sheet 6: Treaty countries
+   Rounding: Not an amount - no rounding.
+--- row 40 | 145 | Payments or credits
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: Payroll.NonResident_Gross [Calculated: sum of all wage types paid to this non-resident employee in the period -- no single WTC code, an aggregate]
+   Field Explanation: Nominal (gross) amount paid or credited to the non-resident. For a non-resident foreign natural person under a Colombian contract this is the whole salary - ET art. 408 taxes the nominal value, with no deduction of the mandatory social-security contributions and no art. 388 depuration - and the amount is excluded from casilla 77.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 41 | 146 | Rate
+   Format: N (percentage)
+   System Mapping: Mercans.NonResident_Rate
+   Field Explanation: 20% is the general ET art. 408 rate for employment income and personal services. Special rates in the instruction guide include 15% for long-term foreign credits, 5% for international transport and for APP-financing interest, 33% for head-office management charges, 1% for aircraft leasing and reinsurance premiums, and 7% for foreign professors on contracts of up to four months.
+   Option Values: -> Sheet 6: Rates payments al exterior
+   Rounding: Rate as a percentage.
+--- row 42 | 147 | Withholding value
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: Payroll.NonResident_Withholding [WTC: CO-RETENCION-NO-RESIDENTE]
+   Field Explanation: The instruction guide states expressly that 'el SI de Diligenciamiento calcula automaticamente los values de las withholdings multiplicando el value registrado en la casilla 145 por la rate registrada en la casilla 146'. Payroll supplies 145 and 146; it must NOT attempt to key 147.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 43 | 148 | Total base - no treaty, legal persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 145 across the matching annex rows. Carried up to sheet 1 casilla 55.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 44 | 149 | Total base - no treaty, natural persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 145 across the matching annex rows. This is where a non-resident employee in a non-treaty country lands. Carried up to sheet 1 casilla 109.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 45 | 150 | Total withholding - no treaty, legal persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 147 across the matching annex rows.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 46 | 151 | Total withholding - no treaty, natural persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 147 across the matching annex rows - the non-resident employee withholding in non-treaty countries.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 47 | 152 | Total base - treaty, legal persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 145 across the matching annex rows.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 48 | 153 | Total base - treaty, natural persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 145 across the matching annex rows - where a non-resident employee covered by a treaty lands, under concept de payment 24.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 49 | 154 | Total withholding - treaty, legal persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 147 across the matching annex rows.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 50 | 155 | Total withholding - treaty, natural persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Sum of casilla 147 across the matching annex rows - the non-resident employee withholding after treaty relief.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 51 | None | ═══ non-payroll withholding concepts - not produced by payroll ═══
+--- row 52 | 29-54 | Bases and withholdings on legal persons
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (employer accounts payable)
+   Field Explanation: Fourteen concept pairs for payments to legal persons - fees (29 / 42), commissions (30 / 43), services (31 / 44), rendimientos financieros (32 / 45), arrendamientos (33 / 46), regalias (34 / 47), dividendos (35 / 48), compras (36 / 49), tarjetas (37 / 50), contracts de construccion (38 / 51), loterias (39 / 52), hidrocarburos (40 / 53) and other payments (41 / 54). Not produced by payroll. Present on the form because Form 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the employer's accounts-payable or tax function; payroll contributes nothing to this casilla.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 53 | 79-92 / 95-108 | Bases and withholdings on natural persons, non-employment concepts
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (employer accounts payable)
+   Field Explanation: The same concept grid repeated for natural persons - fees (79 / 95), commissions (80 / 96), services (81 / 97), and so on to other payments (92 / 108), plus enajenacion de activos fijos (89 / 105) which exists only in the natural-person column. Fees paid to a natural person and withheld under the ET art. 383 table are swept into casillas 77 / 93 (ET art. 383 para. 2; see Population Rules); payroll supplies only the employment component of 77 / 93, and the fee component, like casillas 79 / 95, is supplied by the employer's accounts-payable or tax function. Not produced by payroll. Present on the form because Form 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the employer's accounts-payable or tax function; payroll contributes nothing to this casilla.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 54 | 59-76 / 113-128 | Self-withholding blocks
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (employer tax function)
+   Field Explanation: Self-withholding on the employer's OWN income - ventas, fees, commissions, services, rendimientos financieros, mining exports and other concepts, for legal persons (59-76) and natural persons (113-128). Not produced by payroll. Present on the form because Form 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the employer's accounts-payable or tax function; payroll contributes nothing to this casilla.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 55 | 131-135 | VAT and stamp-duty withholding
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (employer tax function)
+   Field Explanation: 131 VAT withheld from VAT-responsible suppliers; 132 VAT withheld on services from non-residents; 133 excess or undue VAT withholding reversed; 134 total VAT withholding (131 + 132 - 133); 135 national stamp-duty withholding. Not produced by payroll. Present on the form because Form 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the employer's accounts-payable or tax function; payroll contributes nothing to this casilla.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 56 | None | ═══ totals, penalties and signature ═══
+--- row 57 | 129 | Less excess or undue withholding
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: Payroll.Withholding_Reversal [no standing wage type - a correction/reversal mechanism applied at the engine level]
+   Field Explanation: Amounts over-withheld or wrongly withheld, and reversals of withholding on cancelled transactions. Where the month's withholding is insufficient to absorb the credit, the instruction guide permits carrying it to the immediately following periods. Payroll DOES feed this casilla where an employee's withholding is adjusted downward in a later month.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 58 | 130 | Total income-tax withholding
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: The instruction guide prints the arithmetic in full: the sum of casillas 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 57, 58, 68, 69, 70, 71, 72, 73, 74, 75, 76, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 111, 112, 121, 122, 123, 124, 125, 126, 127 and 128, LESS casilla 129. Payroll's contribution enters through 93, 94, 111 and 112.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 59 | 136 | Total withholding
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Casilla 130 (income tax) plus casilla 134 (VAT) plus casilla 135 (stamp duty).
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 60 | 137 | Penalties
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: Mercans.Penalty_Amount
+   Field Explanation: Total penalties arising from this return. The instruction guide warns that the penalty declared cannot be less than the minimum penalty of 10 UVT (COP 523,740 in 2026) for late filing, and that for a corrective return the minimum is 10 UVT of the year in which the ORIGINAL return was filed.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 61 | 138 | Total withholding plus penalties
+   Format: N (whole pesos, nearest 1,000)
+   System Mapping: (system total)
+   Field Explanation: Casilla 136 plus casilla 137. This is the amount that must be PAID IN FULL: a withholding return filed without full payment produces NO legal effect, with no administrative act needed to say so (ET art. 580-1, quoted in the instruction guide).
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 62 | 139 | Signatory identification
+   Format: N
+   System Mapping: Company.Legal_Rep_ID
+   Field Explanation: NIT assigned by DIAN to the person signing the return - the legal representative or an authorised agent.
+   Rounding: Not an amount - no rounding.
+--- row 63 | 140 | Signatory verification digit
+   Format: N
+   System Mapping: Company.Legal_Rep_ID_DV
+   Field Explanation: Verification digit of the signatory's NIT.
+   Rounding: Not an amount - no rounding.
+--- row 64 | 980 | Total payment
+   Format: N (whole pesos)
+   System Mapping: Mercans.Payment_Amount
+   Field Explanation: The amount actually paid with the return. Reserved-range casilla. Must equal casilla 138 for the return to have legal effect.
+   Rounding: Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.
+--- row 65 | 981 | Representation code
+   Format: N (code)
+   System Mapping: Mercans.Representation_Code
+   Field Explanation: Type of representation of the person signing for the declarant, taken from casilla 98 of the RUT.
+   Option Values: -> Sheet 6: Code de representacion
+   Rounding: Not an amount - no rounding.
+--- row 66 | 982 | Accountant or statutory auditor code
+   Format: N (code)
+   System Mapping: Mercans.Accountant_Type
+   Field Explanation: 1 = Contador, 2 = Revisor fiscal. The instruction guide sets the thresholds: an accountant must sign where the taxpayer keeps books and gross assets at the preceding year end exceeded 100,000 UVT; a statutory auditor must sign for joint-stock companies, for companies whose gross assets reach 5,000 SMMLV, and for companies whose gross income reaches 3,000 SMMLV.
+   Option Values: -> Sheet 6: Contador o revisor fiscal
+   Rounding: Not an amount - no rounding.
+--- row 67 | 983 | Professional card number
+   Format: AN - prefix pattern ^[0-9]{1,6}-T$: the numeric registration followed by a hyphen and the literal suffix T (for Contador). Store the printed value including the -T suffix; do not strip it, because the Junta quotes the card with it
+   System Mapping: Mercans.Accountant_Card_Number
+   Field Explanation: Professional card number issued by the Junta Central de Contadores. The -T suffix is part of the identifier, not a separator.
+   Rounding: Not an amount - no rounding.
+--- row 68 | 994 | With qualifications
+   Format: Flag (x)
+   System Mapping: Mercans.Signed_With_Qualifications
+   Field Explanation: Marked with an x where the accountant or statutory auditor signs with qualifications.
+   Rounding: Not an amount - no rounding.
+--- row 69 | 997 | Collecting-entity stamp
+   Format: Display-only
+   System Mapping: (not an input)
+   Field Explanation: DISPLAY-ONLY. Reserved for the collecting bank's stamp on a paper receipt. It is not a data field, is not keyed and is not transmitted; it exists on the printed representation only.
+   Rounding: Not an amount - no rounding.
+
+######## CO-DIAN-004 Formulario 220 Spec fields 73
+--- row 12 | None | ═══ employee or pensioner(casillas 24-29) ═══
+--- row 13 | 24 | Employee document type
+   Format: N (code)
+   System Mapping: Employee.Document_Type
+   Field Explanation: The instruction guide (Res. 000022/2024) prints a SIX-VALUE list on the form itself, and only those six codes are output: 12 Tarjeta de identidad, 13 Cedula de ciudadania, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Pasaporte. That is NARROWER than the electronic payroll list at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP: a document outside the six-value list (PEP, PPT) is not a document type of this form and is not certified under any other code. A foreign employee is certified with the admitted document held - 21 Tarjeta de extranjeria, 22 Cedula de extranjeria or 41 Pasaporte. SOURCE: the employee master holds one document-number field per document type ('National ID', 'Identity Card', 'Indentity Card for Foreigners', 'Citizenship Card ID') and no document-type field, and more than one of them may be populated for the same employee. The engine stores an explicit Employee.Document_Type for the document actually certified in casilla 25, never inferred from which field is filled. The mapping of the employee master document fields to the Form 220 codes is maintained as a configuration table: 'Citizenship Card ID' -> 13 and 'Indentity Card for Foreigners' -> 22; 'National ID' and 'Identity Card' have no direct Form 220 code.
+   Option Values: -> Sheet 6: Tipo de document (Form 220)
+   Rounding: Not an amount - no rounding.
+--- row 14 | 25 | Employee identification number
+   Format: N / AN
+   System Mapping: Employee.Document_Number
+   Field Explanation: Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number field of the employee master that matches the document type in casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'), selected through Employee.Document_Type. Do NOT use the internal employee number ('Employee ID' / 'ID Number'): it is a payroll key, not an identity document. The casilla is mandatory: a blank document number is rejected as a data error. PAYEES OUTSIDE THE EMPLOYEE MASTER (pension payees and other non-employee payees): casilla 25 and the split names of casillas 26-29 are taken from the identity source maintained for that payee population (the pensioner master), which holds the document type, the document number and the four name parts. Where a pension is paid to a beneficiary other than the pensioner, the certificate is issued in the name of the person who receives the pension, whose document and names are certified here (see casilla 50).
+   Rounding: Not an amount - no rounding.
+--- row 15 | 26 | Employee first surname
+   Format: A
+   System Mapping: Employee.First_Surname
+   Field Explanation: First surname exactly as on the identity document.
+   Rounding: Not an amount - no rounding.
+--- row 16 | 27 | Employee second surname
+   Format: A
+   System Mapping: Employee.Second_Surname
+   Field Explanation: Second surname. Not mandatory here, in contrast with the electronic payroll where it is use=required.
+   Rounding: Not an amount - no rounding.
+--- row 17 | 28 | Employee first name
+   Format: A
+   System Mapping: Employee.First_Name
+   Field Explanation: First given name exactly as on the identity document.
+   Rounding: Not an amount - no rounding.
+--- row 18 | 29 | Employee other names
+   Format: A
+   System Mapping: Employee.Other_Names
+   Field Explanation: Remaining given names.
+   Rounding: Not an amount - no rounding.
+--- row 21 | 31 | Period certified - to
+   Format: AAAA MM DD
+   System Mapping: PayPeriod.Year_End
+   Field Explanation: Last day of the certified period. Normally 31 December, but the termination date where the employee left during the year. Bidirectional pair with casilla 30.
+   Rounding: Not an amount - no rounding.
+--- row 27 | 36 | Salary payments
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Salary_Payments)
+   Field Explanation: Total salary payments ACTUALLY MADE in the period to a resident natural person whose income derives from an employment or statutory relationship. The instruction guide (Res. 000022/2024) quotes CST art. 127 in full: salary is not only the ordinary fixed or variable remuneration but everything the employee receives in money or in kind as direct consideration for the service - primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. EXCLUSION RULE: do NOT include here any value belonging in casillas 38 to 46. SOURCE: salary wage types 62100 Ordinary Salary, 62101 Arrears - Ordinary salary, 62140 Integral Salary (the full integral salary, including the factor prestacional), 62141 Arrears-Integral Salary, 62118 Incentive Compensation - IC Local Country, 62133 Variable, 62113 Weekend payoff and 62841 / 62842 / 62845 overtime and night, Sunday or holiday surcharges. BONUSES: HABITUAL bonuses are salary and are certified here - 62208 March Bonus, 62209 Christmas Bonus, 62210 August Bonus, 62225 Salary Attendance Bonus-Monthly, 62224 Quarterly Salary Attendance Bonus and 62228 Years of Service Bonus - CLA; NON-HABITUAL bonuses are certified in casilla 46 - 62202 Ocassional Bonus Grossed Up (instruction guide, Res. 000022/2024). 62229 Years of Service Bonus NON CLA is certified here where habitual and in casilla 46 where not; the habitual attribute of that bonus wage type comes from the Wage Type Catalogue (WTC). PAYMENTS IN KIND: an in-kind payment that is salary under CST art. 127 is certified here and an in-kind payment that is not salary is certified in casilla 46; the salary attribute of each in-kind wage type comes from the WTC (meal payments follow the 310 / 41 UVT test of casillas 37-38). LEAVE PAYOUTS 79405-79419 (marriage, maternity, paternity, sick-leave, bereavement, paid and jury leave payouts) and SALARY PAID ABROAD to expatriates (25830 Salary paid in Foreign Countries, 65838 Incentive Compensation - IC-1001 Foreign Country) follow the same rule as every other earning: certified here where the WTC classifies the wage type as salary and in casilla 46 where it classifies it as non-salary work income. The wage-type attribute 'Salary Payment Indicator' must NOT be used as the casilla-36 rule on its own: it is also set on vacation pay (79401 Annual leave payout, 62116 Vacation Terminations, 62150 Vacation Bonus), which is certified in casilla 42, and on per diems (62805-62808), which are always certified in casilla 43, and on the leave payouts 79405-79419; and it is absent from the bonus wage types 62229, 62224 and 62202 listed above. The engine holds an explicit wage-type-to-casilla table, maintained as a configuration table from the WTC attributes; every earning wage type is assigned. PERIOD: sum the payments made from 1 January to 31 December of the tax year; never a rolling 12-month total.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 33 | 42 | Statutory benefit payments
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Prestaciones_Sociales)
+   Field Explanation: Statutory benefits OTHER THAN severance savings and the interest on them. The instruction guide (Res. 000022/2024) lists service bonus, vacaciones and work clothing among them, and directs expressly that severance savings paid to the employee go to casilla 47 and severance savings deposited to the fund go elsewhere. VACATION PAY is certified here: wage types 79401 Annual leave payout, 62116 Vacation Terminations and 62150 Vacation Bonus, which carry the 'Salary Payment Indicator' attribute and are nonetheless certified here and not in casilla 36, under the casilla-36 exclusion rule. RECORDED DEFECT: the instruction guide for THIS casilla says the deposited severance goes to 'la casilla 48', but the form's own printed label makes casilla 48 the TRADITIONAL-REGIME severance and casilla 49 the amount deposited to the fund. The form layout is authoritative.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 37 | 46 | Other payments
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Other_Work_Payments)
+   Field Explanation: Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. Certified here (instruction guide, Res. 000022/2024): (a) NON-HABITUAL BONUSES - 62202 Ocassional Bonus Grossed Up; habitual bonuses are salary and go to casilla 36; 62229 Years of Service Bonus NON CLA is certified here where non-habitual and in casilla 36 where habitual, and the habitual attribute of that bonus wage type comes from the Wage Type Catalogue (WTC). (b) PAYMENTS TO RETIREES THAT ARE NOT A PENSION - 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the pension itself (62154 Monthly Retired  Pension-6798 and 62153 Additional Retirement Pension) is certified in casilla 50, never here (see casilla 50). (c) PAYMENTS IN KIND THAT ARE NOT SALARY - an in-kind payment that is salary under CST art. 127 is certified in casilla 36 instead; the salary attribute of each in-kind wage type comes from the WTC (meal payments follow the 310 / 41 UVT test of casillas 37-38). (d) EARNINGS WITH NO DEDICATED CASILLA - 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout: each is certified in casilla 36 where the WTC classifies the wage type as salary, in casilla 42 where it classifies it as a statutory benefit (prestacion social), here where it classifies it as other work income, and is not certified on this form where it classifies it as income that is not work income. The engine holds an explicit wage-type-to-casilla table, maintained as a configuration table from the WTC attributes; no earning wage type may be left unassigned.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 38 | 47 | Severance savings and interest paid to the employee
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: Payroll.Cesantias_Paid_To_Employee [WTC: CO-CESANTIAS (severance principal, paid directly only on termination/partial settlement) + CO-INTERESES-CESANTIAS (interest, paid directly each January)]
+   Field Explanation: THE FIRST OF THREE SEVERANCE LINES. Severance savings and the interest on them ACTUALLY PAID to the employee in the period - typically the January interest payment and any authorised partial withdrawal or termination settlement. Excluded from the monthly withholding base under ET art. 206 num. 4 but still certified here. SOURCE: wage types 62110 Cash-out of Severance Pay - Social Benefits -541S and 62117 Cash-out of Interest Severance Pay - Social Benefits-541R (termination and settlement payments), 62126 Advance Severance Last Year (authorised partial payments) and 62127 Advance Interest Severance Pay (the annual interest on severance, paid in January). Provision wage types (22110, 22112, 42110, 42112) and balance wage types (63814, 63815, 64999, 68028) are accruals or balances, not payments, and are not certified here.
+   Option Values: -> Sheet 6: Las tres lineas de severance savings
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 39 | 48 | Severance savings under the traditional CST regime
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: Payroll.Cesantias_Traditional_Regime [No dedicated WTC code -- a regime-eligibility flag (traditional CST annual-fund regime), not itself a wage type]
+   Field Explanation: THE SECOND OF THREE SEVERANCE LINES. Severance RECOGNISED - not necessarily paid - to employees remaining under the pre-1991 retroactive regime of CST Chapter VII, Title VIII, Part One, rather than the Ley 50 de 1990 annual-deposit regime. A shrinking but real population: employees hired before 1 January 1991 who did not elect the new regime.
+   Option Values: -> Sheet 6: Las tres lineas de severance savings
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 40 | 49 | Severance savings deposited to the fund
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: Payroll.Cesantias_Deposited_To_Fund [WTC: CO-PROV-CESANTIAS, the employer accrual deposited to the chosen fund]
+   Field Explanation: THE THIRD OF THREE SEVERANCE LINES. Severance savings DEPOSITED to the employee's chosen severance fund IN THE TAX YEAR, under Ley 50 de 1990 art. 99. The deposit made by 14 February for the balance at the preceding 31 December belongs to the tax year in which it is deposited, not to the year of accrual: severance income is realised on deposit to the fund (ET art. 27 num. 3; instruction guide, Res. 000022/2024). The certificate for tax year N therefore carries the deposit made by 14 February of year N (balance at 31 December of year N-1); the deposit made by 14 February of year N+1 belongs to the certificate for year N+1. The engine must maintain all three buckets - paid to the employee, traditional regime, deposited to the fund - separately from the outset; they cannot be split retrospectively out of a single cesantias figure. SOURCE: wage type 25827 Payment Severance Funds Inf. (mirrored by 65805 with the same amount - take one, not both), paid in February and certified in the tax year of that payment. The provision wage types 22110 / 42110 are accruals, not the deposit.
+   Option Values: -> Sheet 6: Las tres lineas de severance savings
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 41 | 50 | Retirement, old-age or invalidity pensions
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Pension_Payments)
+   Field Explanation: Pension income paid BY THE EMPLOYER: pensions of jubilacion, vejez or invalidez (instruction guide, Res. 000022/2024). Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Pensions paid directly by the employer are in scope and are certified here. SOURCE: the pension wage types of the wage-type-to-casilla table: 62154 Monthly Retired  Pension-6798 (the monthly pension) and 62153 Additional Retirement Pension (the additional pension instalments paid in June and December). Payments to retirees that are not a pension are certified in casilla 46, never here: 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation (see casilla 46). Pension payees are not in the employee master: their identification (casillas 24-29) comes from the pensioner master (see casilla 25). SURVIVOR OR SUBSTITUTE PENSION: where the pension is paid to a beneficiary other than the original pensioner (substitute pensioner or other recipient), the certificate is issued in the name of the person who receives the pension - that person's document type, number and names in casillas 24-29 and the pension received in casilla 50; the same identity rule applies to the Format 2276 record of that payee. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54, and the withholding on pension income (21140 Personal Income Tax Withholding-Retirees- 6799) feeds casilla 60.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 45 | 53 | Mandatory health contributions borne by the employee
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Health_Employee_Contribution)
+   Field Explanation: The employee's own mandatory health contributions ACTUALLY DEDUCTED in the period. These are non-taxable income de renta and are what reduces the ET art. 388 depurated base. Must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55. SOURCE: wage type 2554 Medical Plan - Healthcare Insurance (EPS ) Employee; for pension payees, 21645 / 21646 / 21647 Medical Plan - Healthcare Insurance (EPS ) - Pensioner. Do NOT feed this casilla from a combined health + pension + solidarity contributions total (2554 + 2556 + 2553): health is taken on its own. The NIE163 / PILA reconciliation applies to wage type 2554.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 46 | 54 | Mandatory pension and solidarity-fund contributions borne by the employee
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Pension_Employee + Payroll.FSP)
+   Field Explanation: The employee's mandatory pension contributions AND the solidarity-fund surcharge, TAKEN TOGETHER IN ONE CASILLA. Note the asymmetry with the electronic payroll, which insists on reporting them as separate elements (NIE166 for pension, NIE168 and NIE170 for the two solidarity sub-accounts). The engine must keep them separate internally and sum them only here. SOURCE: 2556 Pension Plan Mandatory - AFP Employee + 2553 Solidarity Pension Fund (+ 21643 Solidarity Pension Fund-Pensioner for pension payees). A combined health + pension + solidarity contributions total cannot split casillas 53 and 54; take the wage types individually.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 47 | 55 | Voluntary contributions to the individual-account pension regime (RAIS)
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Voluntary_RAIS)
+   Field Explanation: Voluntary contributions to the RAIS under ET art. 55 and DUR 1625 de 2016 art. 1.2.1.12.9. DISTINCT from voluntary contributions to a VOLUNTARY pension fund, which go to casilla 56. The electronic payroll has ONE element (PensionVoluntaria, NIE198) for both, so the engine must carry the distinction itself.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 48 | 56 | Voluntary contributions to voluntary pension funds
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Voluntary_Pension_Fund)
+   Field Explanation: Voluntary contributions to voluntary pension funds under ET art. 126-1 and DUR 1625 de 2016 art. 1.2.1.22.41. Shares the ET art. 336 40% / 1,340-UVT annual cap with AFC and AVC. SOURCE: wage types 25811 Pension Voluntaria Porvenir (FVOL), 25812 Pension Voluntaria Proteccion (FVOL), 25813 Pension Voluntaria Skandia (FVOL), 25814 Pensiones Voluntarias Metlife (FVOL), 25815 Dafuturo (FVOL) and 25823 Pension Voluntaria colfondos (FVOL). Wage type 21193 Foncoltabaco voluntary contribution is a contribution to an employee fund, not to a pension fund, and is not certified here. Because several of these fund managers also run mandatory RAIS accounts, the engine must tag each voluntary contribution as RAIS (casilla 55) or voluntary fund (casilla 56); the tag is carried on the wage type.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 51 | 59 | Average labour income of the last six months
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: Payroll.Rolling_6M_Average_Labour_Income [Calculated: rolling 6-month average of Payroll.Total_Income -- no dedicated WTC code, an engine-computed average]
+   Field Explanation: THE ROLLING SIX-MONTH AVERAGE that drives the ET art. 206 num. 4 severance exemption and its taper. Severance savings and the interest on them are EXEMPT IN FULL where this average does not exceed 350 UVT (COP 18,330,900 per month in 2026), and tapered above it. THE ENGINE MUST MAINTAIN THIS AVERAGE YEAR-ROUND - it cannot be reconstructed at year end from annual totals because it is a moving six-month window, and on a termination it is the average of the last six months OF EMPLOYMENT.
+   Option Values: -> Sheet 6: Umbrales UVT 2026
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 52 | 60 | Withholding on labour and pension income
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: SUM(Payroll.Income_Tax_Withheld)
+   Field Explanation: THE PRINCIPAL WITHHOLDING CASILLA. Total withholding at source ACTUALLY PRACTISED on this employee's work and pension income during the certified period; no hypothetical, theoretical or contingent amount is certified (instruction guide, Res. 000022/2024). Feeds casilla 75 together with casilla 74. Must reconcile to twelve months of electronic payroll NIE177 for this employee, and the sum of casilla 60 across all employees must reconcile to twelve months of Form 350 casilla 93 - allowing for the rounding conventions. SOURCE: the withholding practised is wage type 2552 Income Tax (employee) plus 21129 Personal Income Tax Withholding-Terminations- 541T (a separate deduction on termination payments, which can coexist with 2552 in the same month) and 21140 Personal Income Tax Withholding-Retirees- 6799. Wage types 21330 Personal Income Tax Withholding (Theoretical) and 25834 Hypothetical Witholding Tax  - IC Foreign Country are notional, not withholding practised, and are NOT certified; the same exclusion applies to every wage type that computes a theoretical, hypothetical or contingent withholding. Wage types 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax  - IC Local Country are certified here where the Wage Type Catalogue (WTC) classifies the wage type as withholding actually deducted from the employee's income, and are excluded where it classifies the wage type as theoretical, hypothetical, contingent or informative; the withholding-practised attribute of each comes from the WTC. Only the withholding actually deducted is certified: a comparison result computed without the contribution depuration, and any contingent withholding derived from it, is not part of 2552 and is not certified. Sum January to December of the tax year; never a rolling 12-month total.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 54 | 61 | Rentals - amount received
+   Format: N (whole pesos, nearest 1,000; zero where nil)
+   System Mapping: (employee declaration)
+   Field Explanation: SECTION HEADED 'DATA A CARGO DEL EMPLOYEE OR PENSIONER' - data the EMPLOYEE supplies, not payroll. Rental income received by the employee from any source. Paired with casilla 68, the amount withheld on it.
+   Rounding: Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+--- row 74 | (unnumbered) | Employee signature
+   Format: Display-only
+   System Mapping: (employee)
+   Field Explanation: DISPLAY-ONLY. The employee's signature validating the declarations. Not a payroll field.
+   Rounding: Not an amount - no rounding.
+--- row 75 | (unnumbered) | Payer or withholding agent name
+   Format: Text
+   System Mapping: Company.Legal_Name
+   Field Explanation: Name of the payer or withholding agent printed on the line that follows casilla 60, before the 'Datos a cargo del trabajador o pensionado' section - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), never a payroll organisation label with a company-code prefix. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN.
+   Rounding: Not an amount - no rounding.
+
+######## CO-CESANTIAS-006 Consignacion Cesantias Spec fields 50
+--- row 3 | None | ═══ return envelope - keyed in the operator portal, not in the detail file ═══
+--- row 4 | E01 | Contributor document type and number
+   Format: AN
+   System Mapping: Company.Document_Type + Company.Document_Number
+   Field Explanation: COMPOSITE FIELD. The employer authenticates to the information operator with the pair (document type, document number) plus a user document pair and a password; the contributor identity is then taken from the operator's registration record, not re-keyed per return. Composite Key: sub-field 1 = document type (NI for a legal person); sub-field 2 = the NIT without the check digit, without dots and without hyphens. PERSISTENCE: fixed for the life of the legal entity; it must be the SAME NIT used on the PILA return and on Form 350, because Simple S.A. offers to seed the severance savings return from the last PILA return paid for the selected year and the seed matches on this pair.
+   Rounding: Not an amount - no rounding.
+--- row 5 | E02 | Service to be settled
+   Format: AN
+   System Mapping: Constant
+   Field Explanation: A constant for this filing. The operator portals treat severance savings as one of the Supplementary social-security payments (PCSS) services and it is selected explicitly; selecting the wrong service produces a PILA return, not a severance savings return.
+   Option Values: -> Sheet 6: Service PCSS
+   Rounding: Not an amount - no rounding.
+--- row 6 | E03 | Accrual year of the severance savings
+   Format: AAAA (4)
+   System Mapping: Mercans.Cesantias_Accrual_Year
+   Field Explanation: THE PERIOD OF THIS FILING IS A YEAR, NOT A MONTH. This is the single most important structural difference from every other Colombian payroll filing: the electronic payroll, Form 350 and PILA are monthly and keyed to a payment date, whereas the severance savings return is keyed to the accrual YEAR that closed on 31 December and is paid in the FOLLOWING February. A return built in February 2027 carries ano accrued = 2026.
+   Rounding: Not an amount - no rounding.
+--- row 7 | E04 | Affiliation type of the return
+   Format: AN
+   System Mapping: Constant for employer payroll
+   Field Explanation: Three values exist - Agremiado (contributions for associated or unionised independents), Dependiente (contributions arising from an employment contract, payroll-deducted) and Independiente (a natural person contributing for themselves). For an employer filing this return it is ALWAYS Dependiente. The values offered depend on the contributor type under which the employer registered on the platform.
+   Option Values: -> Sheet 6: Tipo de afiliacion
+   Rounding: Not an amount - no rounding.
+--- row 8 | E05 | Payment method
+   Format: AN
+   System Mapping: Mercans.Payment_Channel_Config
+   Field Explanation: Selected before the detail is loaded, because it changes the OUTPUT: SOI records that where the medio de payment is Payment Credito the system issues ONE RETURN NUMBER PER ADMINISTRADORA contained in the settlement, whereas an electronic payment (PSE) yields a single return number. The engine's reconciliation must therefore expect either one or many return numbers back for the same run. See E10.
+   Option Values: -> Sheet 6: Medio de pago
+   Rounding: Not an amount - no rounding.
+--- row 9 | E06 | Return short name
+   Format: AN
+   System Mapping: Mercans.Planilla_Label
+   Field Explanation: Optional free-text label. Both operator manuals mark it optional. Use it to carry the run identifier so that the returned return number can be tied back to the payroll run without relying on the portal's own chronology.
+   Rounding: Not an amount - no rounding.
+--- row 10 | E07 | Single-fund-for-all indicator and selected fund
+   Format: AN
+   System Mapping: Mercans.Cesantias_Single_Fund_Flag + Employee.Cesantias_Fund_Code
+   Field Explanation: CONDITIONAL PAIR. Simple S.A. asks 'Deseas que las severance savings de todos los employees incluidos en esta return sean enviadas a un solo severance-savings fund?'. Answering YES overwrites the per-employee fund with one value for the whole return. For a real employer the answer is almost always NO, because the fund is the EMPLOYEE'S statutory choice (Law 50 of 1990 art. 99 num. 3: 'en el fondo de cesantia que el mismo elija'). Answering YES to save keystrokes deposits other people's money into the wrong fund and does not discharge the obligation. Set to N and let T09 carry the per-employee value.
+   Rounding: Not an amount - no rounding.
+--- row 11 | E08 | Seed-from-last-PILA-return indicator
+   Format: AN
+   System Mapping: Mercans.Cesantias_Seed_From_PILA_Flag
+   Field Explanation: Simple S.A. offers to build the severance savings return from the contributor list of the last PILA return paid for the chosen year. Convenient and dangerous: the PILA population is the population that was PAID in a month, which is not the population ENTITLED to a severance savings deposit for the year. An employee who left during the accrual year is EXCLUDED from the deposit: the severance savings are paid directly in the final settlement (Ley 50 de 1990 art. 99 num. 4; Population Rules Step 0 exclusion (2)), so a leaver must never be added to the return - a leaver included is a double payment. All-inclusive salary employees are present in PILA but owed nothing, and the other Step 0 exclusions are not visible in a PILA list either. The engine must generate the population itself from the Population Rules and set this to N. Wage-type mapping of the two exclusions: a leaver's severance savings and interest are paid directly through wage types 62110 'Cash-out of Severance Pay' and 62117 'Cash-out of Interest Severance Pay' in the termination month or the month after, and generate no fund deposit (wage type 25827 'Payment Severance Funds Inf.'); an integral-salary employee (wage type 62140 'Integral Salary') generates no 25827 either.
+   Rounding: Not an amount - no rounding.
+--- row 12 | E09 | Asofondos name-validation auto-adjust answer
+   Format: AN
+   System Mapping: Mercans.Asofondos_Autoadjust_Answer
+   Field Explanation: BOTH operators validate the surnames and names in the return against the affiliate base that ASOFONDOS delivers to the information operators ANNUALLY, and present a downloadable Excel difference report. Answering SI replaces the employer's values with the Asofondos values; answering NO keeps the employer's values. Answer NO and investigate: a mismatch is usually either a genuine misspelling in payroll master data (fix it at source, it will also be wrong on Form 220 and Format 2276) or an affiliate whose fund record is stale. Silently accepting SI hides a master-data defect that recurs every year.
+   Option Values: -> Sheet 6: Respuesta a la validacion Asofondos
+   Rounding: Not an amount - no rounding.
+--- row 13 | E10 | Return number assigned by the operator
+   Format: AN
+   System Mapping: Mercans.Cesantias_Planilla_Number (stored on return)
+   Field Explanation: OUTPUT, not input. Assigned when the settlement is finalised and printed on the pre-payment voucher PDF. Store it per run - and note the cardinality trap in E05: with Payment Credito there is one number PER FONDO, so the store must be one-to-many. This number is the key for the later return recovery, the per-fund and per-affiliate reports and the audit trail that evidences compliance with the February deadline.
+   Rounding: Not an amount - no rounding.
+--- row 14 | E11 | Total value payable in the return
+   Format: AN
+   System Mapping: Mercans.Cesantias_Planilla_Total (control total)
+   Field Explanation: CONTROL TOTAL. Displayed on the settlement summary and on the voucher. It must equal the sum of T14 across the detail records of the return; where the medio de payment splits the return per fondo, the sum of the per-fondo totals must equal the run total. This is the only arithmetic check the channel gives you - there is no header record in the file carrying a declared total, so a truncated upload is NOT self-detecting. Compare the returned total against the engine's own sum before paying.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 15 | None | ═══ detail record - identification(published layout, campos 1 to 8) ═══
+--- row 16 | T01 | Record type
+   Format: N (2) - constant '02'
+   System Mapping: Constant
+   Field Explanation: Campo mandatory, siempre debe ser 02. A CONSTANT, quoted verbatim from the published layout: every detail line of the unified severance savings file is a type-02 record. There is no type-01 header record and no trailer record in this layout - the contributor data and the period live in the portal envelope (E01 to E06), not in the file. Consequence: the file has NO declared record count and NO declared control total, so the engine must reconcile the returned return total (E11) against its own sum.
+   Rounding: Not an amount - no rounding.
+--- row 17 | T02 | Sequence number
+   Format: N (5) zero-padded, starts at 00001
+   System Mapping: Mercans.Record_Sequence
+   Field Explanation: Campo mandatory where the data are uploaded as a flat file. Must START AT 00001 and be consecutive for the remaining records. Zero-padded to 5 positions, so the layout admits at most 99,999 employees in one return. Composite Key: positions 1-7 of every line are the record key - positions 1-2 the constant '02' and positions 3-7 the sequence - and the operator's structure validation reads them first, so an off-by-one sequence rejects the whole file before any content is validated.
+   Rounding: Not an amount - no rounding.
+--- row 18 | T03 | Contributor document type
+   Format: A (2)
+   System Mapping: Employee.Document_Type
+   Field Explanation: ALPHABETIC two-character code, validated against the list printed in the layout: CC, CE, TI, PA, CD, SC, PE - and, in the XLS variant of the SAME manual, also PT (Permiso temporal). THIS IS NOT THE PILA CODE SET: PILA Record Tipo 2 campo 3 uses the same two-letter mnemonics but a different admitted list, and Form 220 / Format 2276 use DIAN NUMERIC document-type codes. The engine must hold one document type and three mappers. Note the SOI-documented length trap: where the document is a Special permanence permit the NUMBER (T04) must be exactly 15 digits. Source: Employee.Document_Type, held as its own master-data attribute and mapped to the severance-savings code. Where the HR master data has no document-type field and holds the identity number in document-specific fields ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'), the document-field to severance-savings-code mapping is maintained as a configuration table: 'Citizenship Card ID' -> CC, 'Indentity Card for Foreigners' -> CE, and 'Identity Card' and 'National ID' each mapped in the same table to the code of the published list for the document that field holds. The type must not be inferred from which identity field is populated, because more than one field, or none, may be filled for an employee.
+   Option Values: -> Sheet 6: Tipo de document (severance savings)
+   Rounding: Not an amount - no rounding.
+--- row 19 | T04 | Contributor identification number
+   Format: N (16) right-aligned, zero-filled
+   System Mapping: Employee.Document_Number
+   Field Explanation: Mandatory. RIGHT-ALIGNED, ZERO-FILLED to 16 positions - this is the only field in the layout with an explicit alignment rule and it is the one most often got wrong, because the XLS variant of the same layout takes the number LEFT-aligned with a 15-character maximum. Composite Key: together with T03 this pair is the join key for the employee across every Colombian artefact - electronic payroll NIE044/NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24/25, Format 2276 numeral 2 - and it is also the key the operator uses to match the Asofondos affiliate base. Strip dots, commas, spaces and hyphens before padding. PERSISTENCE: stable for life except on a document-type change (TI to CC on reaching majority, PEP/PPT to CE on regularisation), which must be notified to the fund, or the deposit lands on an orphan account.
+   Rounding: Not an amount - no rounding.
+--- row 20 | T05 | First surname
+   Format: A (20)
+   System Mapping: Employee.First_Surname
+   Field Explanation: Mandatory, supplied by the contributor. Left-aligned, space-filled to 20. Validated against the ASOFONDOS affiliate base (see E09) - a difference does not reject the file but raises a difference report the employer must answer SI or NO to. Strip accents and the special characters the operators reject; do not truncate silently, because a truncated surname produces a mismatch against the fund's record every single year.
+   Rounding: Not an amount - no rounding.
+--- row 21 | T06 | Second surname
+   Format: A (20)
+   System Mapping: Employee.Second_Surname
+   Field Explanation: Supplied by the contributor; the published layout does NOT mark it mandatory, and the XLS variant states 'Campo Optional - Hasta 20 caracteres'. Space-fill the whole 20 positions where the person has no second surname - do NOT shift the following fields up, because the record is positional and the fund code at 106-107 would then be read out of the name.
+   Rounding: Not an amount - no rounding.
+--- row 22 | T07 | First name
+   Format: A (20)
+   System Mapping: Employee.First_Name
+   Field Explanation: Mandatory, supplied by the contributor. Left-aligned, space-filled to 20. Both operators note that names are pre-loaded automatically from the Asofondos base held in their systems and are editable - which means the portal may DISPLAY a name the employer never sent.
+   Rounding: Not an amount - no rounding.
+--- row 23 | T08 | Second name
+   Format: A (20)
+   System Mapping: Employee.Other_Names
+   Field Explanation: Supplied by the contributor; not marked mandatory, and the XLS variant states 'Campo Optional'. Maps to the Data-Dictionary Other_Names field, which is the same field that feeds electronic payroll OtrosNombres and Form 220 - keep one source of truth.
+   Rounding: Not an amount - no rounding.
+--- row 24 | None | ═══ detail record - fund, days and amounts(published layout, campos 9 to 14) ═══
+--- row 25 | T09 | Severance-savings fund code of the affiliate
+   Format: N (2)
+   System Mapping: Employee.Cesantias_Fund_Code
+   Field Explanation: Campo mandatory, validated against the funds registered in the operator's system. The published layout admits exactly FIVE values and prints them: 02 Proteccion, 03 Porvenir, 10 Colfondos, 15 Fondo Nacional del Ahorro (FNA), 19 Old Mutual (antes Skandia). STALE LABEL, LIVE CODE: code 19's printed label is out of date - the entity trades as Skandia again (Skandia Pension fund administrator y Severance savings S.A., authorised by the Financial Superintendence in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024). Send the CODE, not the name. The fund is the EMPLOYEE'S choice under Law 50 of 1990 art. 99 num. 3 and is master data on the employee, not a company default. Source: Master Data field 'Severance Fund Name', which holds the fund as a NAME and not as the 2-digit operator code; the fund name to code mapping is maintained as a configuration table, with every spelling in use for a fund mapped to one of the five codes. Per Population Rules an empty fund must be escalated, never defaulted. Fund presence must not be used to select the population: an integral-salary employee may also carry a fund name and is still excluded.
+   Option Values: -> Sheet 6: Code del Severance-savings fund
+   Rounding: Not an amount - no rounding.
+--- row 26 | T10 | Number of days worked
+   Format: N (3), 1 to 360
+   System Mapping: Mercans.Cesantias_Days
+   Field Explanation: Mandatory. Admits values from 1 to 360 - a 360-DAY COMMERCIAL YEAR, rather than 365. A full year of service is 360, and every partial year is the actual days of service counted on the commercial convention (each month 30 days). Include the days of paid leave and of employer-paid or institution-paid incapacity, which count as service. The 3-position field cannot carry more than one year, which is the layout's way of saying that this filing is strictly one accrual year per record. SOURCE AND EXCLUSIONS: per Population Rules Step 1, count the accrual-year days of service on the 30-day convention from the later of 1 January and the current-contract hire date to the earlier of 31 December and the leaving date, EXCLUDING unpaid leave and suspensions. Wage-type mapping: the payroll counter is wage type 68029 'Days worked current year (Without Leaves)' in the December period (360 for a full year); use it only as a reconciliation check, not as the source, because it does not count a hire made late in December and, for a hire early in the accrual year, can differ from the commercial-year count from the hire date (the interest wage type 62127 uses the commercial count). Reconciliation: the December balance 68028 'Balance Cesantias' equals 'ces base' 68040 x 68029 / 360 where no in-year direct payment (62110 'Cash-out of Severance Pay') was made.
+   Rounding: Not an amount - no rounding.
+--- row 27 | T11 | Zero filler before the salary field
+   Format: N (4) - constant '0000'
+   System Mapping: Constant
+   Field Explanation: Mandatory - 'Debe contener ceros'. A four-position filler that exists only in the fixed-width variant; the XLS layout has no equivalent column. Read it together with campo 14's note, which explains the intent: 'antes de cada value deben ir 4 espacios (pueden ser rellenos con ceros o en blanco)'. In other words the two amount fields are really 13 positions each, of which the leading 4 must be zeros or blanks. Write ZEROS, not blanks - the campo-11 rule is categorical where the campo-14 note is permissive, and zeros satisfy both.
+   Rounding: Not an amount - no rounding.
+--- row 28 | T12 | Basic salary reported in the last month
+   Format: N (9) whole pesos, zero-filled
+   System Mapping: Payroll.Contractual_Salary (December of the accrual year) [WTC: CO-SALARIO-BASICO]
+   Field Explanation: SCOPE: the amount is owned by the Wage Type Catalogue, not the Data Dictionary - the scope rule routes 'Base Salary / Basic Salary amounts -> WTC, NOT DD'. The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary holds no Contractual Salary field. Mandatory. Nine integers, no decimals, no commas, no points, not less than zero. The layout is explicit about WHICH salary: 'el ultimo basic salary reportado en el mes de diciembre del ano accrued de severance savings'. THIS IS THE OPERATOR'S REPORTING FIELD, NOT THE STATUTORY BASE. CST art. 253 fixes the statutory base as the last monthly salary provided it has not varied in the last three months, otherwise the average of the last year of service (or of the whole period if shorter), INCLUDING the transport allowance. The field name says 'basico' and the operator's calculator uses it alone - see the trap documented at T14. Report the December basic here and compute T14 yourself. Source: wage type 63807 'Basic Salary Base Amount' in the December period of the accrual year (the full contractual monthly salary). Do NOT use wage type 62100 'Ordinary Salary', which is the amount actually paid in the month, prorated for absences, and is therefore equal to or lower than 63807, never higher. The Master Data field 'Basic Salary' is a snapshot of the month the report is run and is valid for T12 only when taken for December.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 29 | T13 | Zero filler before the severance-savings value
+   Format: N (4) - constant '0000'
+   System Mapping: Constant
+   Field Explanation: Mandatory - 'Debe contener ceros'. The second four-position filler, framing the amount at 128-136 exactly as T11 frames the amount at 115-123. Absent from the XLS layout. Write zeros.
+   Rounding: Not an amount - no rounding.
+--- row 30 | T14 | Value of the severance savings deposited
+   Format: N (9) whole pesos, zero-filled
+   System Mapping: Mercans.Cesantias_Annual_Liquidation
+   Field Explanation: Mandatory, nine integers. TWO RULES AND ONE TRAP. Rule one, the floor: 'el value minimo del collection debe ser de un (1) dia de un (1) SMLMV del ano accrued' - for accrual year 2026 one day of the SMMLV of COP 1,750,905 is COP 58,363.50, so a record below that is rejected. Rule two, the override: the layout's own formula is basic salary * (dias worked / 360) BUT 'en este campo el contributor puede especificar un value diferente y no se haran calculos automaticos de este value'. THE TRAP: the operator's formula omits the TRANSPORT ALLOWANCE, which CST art. 253 requires in the base. For an employee on the 2026 minimum wage the operator would compute 1,750,905 while the statute requires (1,750,905 + 249,095) = 2,000,000 - a shortfall of COP 249,095 that is a SHORT DEPOSIT, penalised at one day's salary for every day of delay under Law 50 of 1990 art. 99 num. 3, uncapped. ALWAYS write the engine's own figure into this field and never rely on the portal calculator. Where the monthly advance regime of MA01 is in use, this field carries the CONSOLIDATED annual figure and only the difference computed at MA05 is actually deposited in February. WHAT IS DEPOSITED - NET OF DIRECT PAYMENTS ALREADY MADE: T14 carries the amount actually deposited for the employee = the consolidated 31 December balance (IN01) LESS the lawful partial payments already made directly to the employee during the accrual year (CST art. 254; Population Rules Step 1 (f)) and LESS any direct payment of that balance made in January to an employee who left before the deposit, which is lawful under Ley 50 de 1990 art. 99 num. 4. An employee who left and was paid in full in the final settlement is not in the return at all (Population Rules Step 0 exclusion (2)). Keep the gross annual liquidation as a separate engine value: System Mapping 'Cesantias_Annual_Liquidation' is the gross figure, T14 is the net deposit. Wage-type mapping: the February fund deposit is wage type 25827 / 65805 'Payment Severance Funds Inf.'. The consolidated 31 December balance is the absolute value of wage type 63814 'Severance Balance (Current Month)' in the January period; it is the annual liquidation ('ces base' 68040 x days / 360) less the in-year direct payments 62110 'Cash-out of Severance Pay' (paired with 62117 'Cash-out of Interest Severance Pay' for the interest). A January direct payment of part of that balance is wage type 62126 'Advance Severance Last Year', and the deposit then carries the remainder: 25827 (February) + 62126 (January) = |63814| (January). The engine does NOT generate a direct payment of the consolidated balance to an employee who remains in service: CST art. 254 prohibits it except for the authorised housing and education purposes, so the only direct payments that reduce T14 for an active employee are those lawful partial payments; any other request to pay the consolidated balance directly to an active employee is rejected, and the balance is deposited in full. A full direct payment with fehaciente evidence is handled through E92. Where the remainder after direct payments falls below the one-day SMMLV floor the channel rejects the record and the residue is settled with the employee (Population Rules Step 0 exclusion (5)). The base 68040 exceeds the December basic salary 63807 wherever variable pay is averaged under CST art. 253, which is why T14 must never be left to the operator's basic-salary formula.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 31 | None | ═══ detail record - affiliate contact data(published layout, campos 15 to 20) ═══
+--- row 32 | T15 | Employee residential address
+   Format: CHAR (50)
+   System Mapping: Employee.Address
+   Field Explanation: The employee's residential address, 50 positions, left-aligned and space-filled. This is the AFFILIATE'S address for the fund's own statutory communications with its member, which is why the layout asks for the residence and not the work address - contrast electronic payroll and PILA, which carry the WORK municipality. Do not send the work address; the fund will post the member's statements to it. Composite Key: the affiliate's domicile is carried across THREE fields that must describe one place - T15 the free-text street address, T16 the two-digit DANE department and T17 the three-digit DANE municipality. Within T15 itself, Colombian addresses decompose as via type (CALLE / CARRERA / DIAGONAL / TRANSVERSAL), via number, the NO separator, the cross-via number, the hyphen, the door number and any complement (APTO / TORRE / INT). Abbreviate by a documented rule where the whole exceeds 50 positions - never cut mid-token, because the fund cannot repair a truncated address. Source: Master Data fields 'Address Line 1' and 'Address Line 2' hold the residential address; concatenate Line 1 + space + Line 2 before applying the 50-position rule. Do not use 'Work location' or 'Personal Subarea', which are work places. A residence abroad (Master Data field 'Country' other than CO) has no DANE department or municipality code.
+   Rounding: Not an amount - no rounding.
+--- row 33 | T16 | Department code (DANE)
+   Format: N (2)
+   System Mapping: Employee.Department_Code
+   Field Explanation: Two positions, per the DANE list. The DANE divipola code is hierarchical: the two-digit department prefix plus the three-digit municipality suffix form the five-digit municipality code (11 + 001 = 11001, Bogota D.C.). Composite Key: T16 and T17 must be written as the two halves of ONE divipola code, never picked from two different lists. Source: Master Data field 'Employee Address - Department', which holds a 3-letter alphabetic abbreviation (DC, ANT, CUN, VAC, ATL, CAL, QUI, RIS, NAR, NSA, MAG, TOL, BOL, SAN, BOY), not the 2-digit DANE code. The abbreviation to DANE department code mapping is maintained as a configuration table with one entry per abbreviation in use (DC -> 11, ANT -> 05, VAC -> 76, ATL -> 08, per the DANE divipola list - see Field Options). Foreign provinces (abbreviations such as ON, VD, JAL) have no DANE code.
+   Option Values: -> Sheet 6: Codigos DANE (referencia)
+   Rounding: Not an amount - no rounding.
+--- row 34 | T17 | Municipality code (DANE)
+   Format: N (3)
+   System Mapping: Employee.Municipality_Code
+   Field Explanation: Three positions, per the DANE list, and it is the SUFFIX only - not the five-digit code. Writing the full 11001 into a three-position field truncates to 110 and silently relocates the affiliate. Composite Key: see T16. Source: no municipality code exists in master data. The Master Data field 'City' is free text, with several spellings for the same municipality (Bogota / BOGOTA / Bogota D.C. / Santafe de Bogota D.C.; Medellin / MEDELLIN), values that are a neighbourhood or a department rather than a municipality, and foreign cities. Capture the DANE divipola municipality code as a coded master-data field; free-text matching is not reliable.
+   Option Values: -> Sheet 6: Codigos DANE (referencia)
+   Rounding: Not an amount - no rounding.
+--- row 35 | T18 | Employee landline telephone
+   Format: N (7)
+   System Mapping: Employee.Phone
+   Field Explanation: 'Solo admite 7 numeros' - exactly seven digits, so the field cannot carry a mobile number (10 digits in Colombia) nor a number written with the area code. Where only a mobile is held, the field must be zero- or space-filled rather than truncated; a truncated mobile is a wrong-number record on the fund's affiliate file. Source: Master Data field 'Phone number', which holds one undifferentiated number per employee with no landline/mobile type, normally a country-code-prefixed mobile of 12 digits. Unless a separate landline is captured, this field is zero-filled; never derive it by truncating the stored number.
+   Rounding: Not an amount - no rounding.
+--- row 36 | T19 | Employee e-mail address
+   Format: CHAR (50)
+   System Mapping: Employee.Email
+   Field Explanation: Fifty positions. The layout prints its own validation: letters A-Z, digits 0-9, hyphen, underscore, apostrophe and full stop are admitted in the local part; the @ is the mandatory indicator; the domain may contain only letters, digits and the hyphen, and the hyphen may be neither the first nor the last character of the domain. Composite Key: local-part + '@' + domain; the operator validates the three parts separately, so an address that merely 'looks' valid can still be rejected on the domain rule.
+   Rounding: Not an amount - no rounding.
+--- row 37 | T20 | Employee hire date
+   Format: AAAA-MM-DD (10)
+   System Mapping: Contract.Start_Date
+   Field Explanation: Format AAAA-MM-DD, ten positions INCLUDING the two hyphens - note that the published layout types this field N while its content is not purely numeric, so a strict numeric writer would emit 20190301 and shift nothing (the field is last) but would still fail the format validation. Composite Key: positions 249-252 year, 253 hyphen, 254-255 month, 256 hyphen, 257-258 day. THIS IS THE HIRE DATE OF THE CONTRACT, NOT THE START OF THE ACCRUAL PERIOD: for an employee hired in 2019 and reported for accrual year 2026 the value is still 2019-03-01, while T10 carries 360 days. Sending the 1 January of the accrual year here is a common defect and it corrupts the fund's seniority record. Source: Master Data field 'Hire Date' (DD-MM-YYYY, converted to AAAA-MM-DD), which is the hire date of the CURRENT contract per Population Rules ('for a rehired employee, use the hire date of the CURRENT contract'). Do not use 'Adjusted Service Date' (YYYY-MM-DD, a recognised-seniority date) or 'Original Hire Date' (DD-MM-YYYY, the first hire date of a rehired employee), both of which can differ from the current-contract hire date.
+   Rounding: Not an amount - no rounding.
+--- row 38 | None | ═══ monthly advance deposit - ley 2466 de 2025 art. 64 par. 1 (not yet operable) ═══
+--- row 39 | MA01 | Written agreement for the monthly advance deposit
+   Format: Flag (Y/N)
+   System Mapping: Contract.Cesantias_Regime
+   Field Explanation: Law 2466 of 2025 art. 64 added para. 1 to Law 50 of 1990 art. 99 permitting the employer to deposit monthly, to the severance savings fund, 8.33% of the base. The statute grants the option to the EMPLOYER ('El employer podra aportar mensualmente'); the MinTrabajo draft decree additionally requires the employee's agreement - draft art. 4 para. 2: 'constituye un mecanismo voluntario que podra ser adoptado por el employer previo acuerdo con el employee, sin que sustituya el regimen legal de consignacion annual'. Hold the flag per contract, not per company. The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists.
+   Rounding: Not an amount - no rounding.
+--- row 40 | MA02 | Monthly advance base
+   Format: N (whole pesos)
+   System Mapping: Mercans.Cesantias_Monthly_Advance_Base
+   Field Explanation: Law 2466 art. 64 para. 1 defines the base VERBATIM as 'el salary base de liquidacion compuesto por el salary monthly sumado al transport allowance en los casos en que a este hubiere lugar'. So, unlike the operator's annual calculator (see T14), the STATUTE for the monthly advance includes the transport allowance expressly. The draft decree adds the variable-salary rule: 'la consignacion monthly anticipada correspondera al 8,33% de lo earning por el employee en el respectivo mes, adicionado con el transport allowance cuando haya lugar'. The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 41 | MA03 | Monthly advance amount at 8.33%
+   Format: N (whole pesos)
+   System Mapping: Mercans.Cesantias_Monthly_Advance_Amount
+   Field Explanation: 8.33% of MA02. Note that 8.33% is an APPROXIMATION of one twelfth (8.3333...%), so twelve monthly advances do NOT reconcile exactly to one twelfth-based annual liquidation: on a 2,000,000 base, 12 x 166,600 = 1,999,200 against an annual entitlement of 2,000,000, a shortfall of 800 pesos. The statute fixes the rate at 8.33% and the draft decree requires the year-end consolidation to absorb the difference (see MA05) - so the residual is expected and must be paid, not written off. The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 42 | MA04 | PILA contribution type for the cesantias advance
+   Format: Numeric contribution-type code; no width is published
+   System Mapping: Mercans.PILA_Cesantias_Contribution_Type
+   Field Explanation: THE CHANNEL FOR THE MONTHLY ADVANCE IS NOT THIS FILING - IT IS PILA. Law 2466 art. 64 para. 1 instructs MinSalud to regulate the PILA accordingly, and the draft decree makes the point twice: the advance is paid 'exclusivamente a traves de la Integrated Contribution Settlement Return (PILA) -PILA-' (draft art. 4 para. 3) and 'debera reportarse en la PILA como contributions al sistema de severance savings mediante el tipo de contribution que defina el Ministry of Health and Social Protection' (draft art. 1 para. 2). The same paragraph gives MinSalud SIX MONTHS from the decree's entry into force to adjust PILA, and the funds and information operators a FURTHER SIX MONTHS from that regulation to build. While the decree remains a draft and no PILA contribution type exists, the feature cannot be switched on and the annual return remains the only lawful route. The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists.
+   Rounding: Not an amount - no rounding.
+--- row 43 | MA05 | Year-end consolidation adjustment
+   Format: N (whole pesos, may be nil)
+   System Mapping: Mercans.Cesantias_Consolidation_Adjustment
+   Field Explanation: THE MONTHLY ADVANCE DOES NOT REPLACE THE ANNUAL LIQUIDATION. Draft art. 1 para. 1 is categorical: 'al cierre del respectivo period annual, el employer debera efectuar la consolidacion definitiva del auxilio de cesantia con base en el promedio de lo earning en el ultimo ano de service ... y realizar los ajustes a que haya lugar. Lo anterior sin que ello implique payment anticipado, parcial o fraccionado del auxilio de cesantia, el cual se entendera consolidado unicamente al cierre del respectivo period annual'. And draft art. 4 para. 4 preserves the deadline while relaxing the monthly rhythm: 'La omision de uno o varios payments mensuales no configurara mora, siempre que se complete el value total annual a mas tardar el 14 February del ano siguiente, configurandose la mora a partir del 15 February'. So the engine must still run the annual liquidation, compare it with the sum of the advances, and deposit the difference by the February deadline. The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 44 | None | ═══ interest on severance savings - paid to the employee, never to the fund ═══
+--- row 45 | IN01 | 31 December severance-savings balance
+   Format: N (whole pesos)
+   System Mapping: Mercans.Cesantias_YearEnd_Balance
+   Field Explanation: The balance in the employee's favour at 31 December, or at the date of definitive withdrawal or partial settlement. It is the base of the Law 52 of 1975 art. 1 interest. Deliberately shown on this Spec as a NOT-APPLICABLE row: it is not a field of the severance savings return, but it is computed from the same liquidation and the two are routinely confused. Source: the consolidated 31 December balance is the absolute value of wage type 63814 'Severance Balance (Current Month)' in the January period of the following year (negative sign = liability); it equals the February deposit 25827 plus any January direct advance 62126 and is already net of in-year direct payments (62110). The December value of wage type 68028 'Balance Cesantias' is a reconciliation check, not the source; wage type 64999 'Total Balance Cesantias' is NOT this balance.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 46 | IN02 | Annual interest on severance savings at 12%
+   Format: N (whole pesos)
+   System Mapping: Mercans.Cesantias_Interest_Annual
+   Field Explanation: 12% per annum on the IN01 balance, pro-rated on days over 360. PAID TO THE EMPLOYEE DIRECTLY, IN THE MONTH OF JANUARY of the following year - not to the fund, and not in February. The two obligations have different payees, different deadlines and different penalties: failure to deposit the principal costs one day's salary per day of delay, whereas failure to pay the interest costs an indemnity equal to the interest owed, ONCE ONLY (Law 52 of 1975 art. 1). The draft decree would add a further precision at art. 4: the interest is 'entregado directamente al employee dentro del mes siguiente a la fecha de liquidacion del auxilio de cesantia'. No interest on interest may be liquidated. Source: paid in the January payroll as wage type 62127 'Advance Interest Severance Pay', equal to round(12% x IN01 x days / 360) to the peso. Do not use wage type 63815 'Interests Balance (Current Month)' at December as the payable amount: it is computed on the liquidation before direct payments and is not the amount paid.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 47 | IN03 | Monthly interest option at 1%
+   Format: N (whole pesos)
+   System Mapping: Mercans.Cesantias_Interest_Monthly
+   Field Explanation: Law 2466 of 2025 art. 64 para. 2, verbatim: 'Las partes podran acordar por escrito la mensualizacion de los intereses sobre las severance savings, pagando al employee el 1% del salary base de liquidacion compuesto por el salary monthly sumado al transport allowance en los casos en que a este hubiere lugar'. Three engine consequences. First, it needs a written agreement, so the flag is per contract. Second, the base is the SAME monthly base as MA02 (salary + transport allowance), not the accumulated balance - so the monthly route and the annual route give different figures and the draft decree confirms the 1% monthly 'correspondiente al doce por ciento (12%) annual previsto en la Law'. Third, the draft decree sets the payment window: 'dentro del mes calendario siguiente al de su causacion'. The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists.
+   Rounding: Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+--- row 48 | None | ═══ inbound - deposit confirmation and compliance evidence(co-in-cesantias-confirmation) ═══
+--- row 49 | E90 | Return payment date
+   Format: AAAA-MM-DD
+   System Mapping: Mercans.Cesantias_Payment_Date (stored on return)
+   Field Explanation: INBOUND. The date the return was actually PAID, which is the date that matters for the deadline - not the date the return was built. Both operators separate settlement from payment: the return is liquidated, a pre-payment voucher is issued, and payment then follows by PSE or by credit. A return liquidated on 13 February and paid on 17 February is LATE. Store the payment date, not the liquidation date, as the compliance evidence. Composite Key: AAAA-MM-DD - positions 1-4 the year, 5 the hyphen, 6-7 the month, 8 the hyphen, 9-10 the day; the same 10-character date frame as T20, and the pair (E10 return number, E90 payment date) is the key of the compliance evidence held per accrual year.
+   Rounding: Not an amount - no rounding.
+--- row 50 | E91 | Deposit compliance status per employee
+   Format: AN
+   System Mapping: Mercans.Cesantias_Deposit_Status
+   Field Explanation: INBOUND / DERIVED. Per employee and per accrual year, one of ON TIME, LATE (with the day count), SHORT (with the shortfall) or DISCHARGED BY DIRECT PAYMENT. This is the field that quantifies the exposure, because the Ley 50 de 1990 art. 99 num. 3 penalty is one day's salary for EACH DAY of delay, PER EMPLOYEE, and uncapped - on 100 minimum-wage employees a fortnight's delay is of the order of COP 81.7 million. Recompute it from E90 against the deadline in the Report Matrix, and hold it for the employee's three-year limitation period (CST art. 488 as substituted by Ley 2466 de 2025 art. 62). Where E92 records a discharge by proven direct payment, set this field to DISCHARGED BY DIRECT PAYMENT instead of deriving it from E90 - see E92.
+   Option Values: -> Sheet 6: Estado de cumplimiento
+   Rounding: Not an amount - no rounding.
+--- row 51 | E92 | Direct-payment discharge evidence
+   Format: AN
+   System Mapping: Mercans.Cesantias_Direct_Payment_Flag
+   Field Explanation: CST art. 57 para. 4, added by Law 2466 of 2025 art. 15, verbatim: 'Cuando el employer acredite de manera fehaciente el payment directo al employee del value correspondiente a las severance savings, dicho payment se considerara liberatorio de la obligacion, y no procedera sancion por no consignacion, salvo que se demuestre que el payment no se realizo en condiciones de libertad y que no fue utilizado en fines autorizados por la Law. No obstante, la afiliacion a Severance-savings fund es mandatory.' Three limits the engine must respect: the discharge needs FEHACIENTE evidence, it is rebuttable on the freedom-and-purpose test, and it does NOT remove the duty to affiliate the employee to a fund. A DRAFTING NOTE on the citation: art. 15's enacting formula announces only 'los paragrafos 2 y 3' of CST art. 57, yet the published text prints a Paragrafo 4 and this is it - so cite CST art. 57 para. 4 as added by Law 2466 of 2025 art. 15, and expect the discrepancy to be raised. Wage-type mapping of direct payments: during the year, wage type 62110 'Cash-out of Severance Pay'; in January, wage type 62126 'Advance Severance Last Year'; the fund deposit, wage type 25827, then carries the remainder of the balance. This flag covers a FULL discharge of the deposit obligation by proven direct payment (Population Rules Step 0 exclusion (4)). An employee who left and was paid directly in the final settlement is NOT an E92 case but a Step 0 exclusion (2) under Ley 50 de 1990 art. 99 num. 4, and a January direct payment to an employee who left before the deposit is treated as that lawful payment. A partial direct payment does not set E92 = Y: T14 carries the deposit net of the direct payments already made and the record is still produced. The engine does not generate a direct payment of the consolidated balance to an employee who remains in service except for the housing and education purposes authorised by CST art. 254; such lawful partial payments reduce T14, and any other direct payment to an active employee is rejected. E92 = Y only for a full discharge with fehaciente evidence (see T14).
+   Rounding: Not an amount - no rounding.
+--- row 52 | E93 | Fund deposit certificate
+   Format: AN
+   System Mapping: Mercans.Cesantias_Fund_Certificate_Ref
+   Field Explanation: INBOUND. Both operators issue reports after payment - por fondo, por affiliate and a consolidated informe completo, in PDF or Excel - and the fund itself issues the deposit certificate. CCG Module 10 records that the certificate is issued by the FUND but the EMPLOYER must be able to evidence it. Store the reference against E10 and E90; it is the primary evidence in a claim, and the employee's claim period runs three years.
+   Rounding: Not an amount - no rounding.
+
+######## CO-PILA-003 PILA Spec fields 169
+--- row 46 | T2R1-008 | Return type
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Mercans.PILA_Planilla_Type
+   Field Explanation: Single letter selecting the settlement type. E Employee return is the ordinary monthly employer return. The full list also carries Y (independientes empresas), A (cotizantes con novedad de ingreso), I (independientes), S (servicio domestico), M (mora), N (correcciones), H (madres sustitutas), T and F (Sistema General de Participaciones - out of scope, public sector only), J (sentencia judicial), X (empresa liquidada), U (uso UGPP pago por terceros), K (estudiantes), O (obligaciones determinadas por la UGPP), Q (acuerdos de pago UGPP / ordenes de pago en proceso especial), B (Piso de Proteccion Social), D (Contribucion Solidaria), Z (pago de calculo actuarial por omision en pensiones) and W (reliquidaciones por retroactivo servidores publicos). Types I and Y are out of scope - the contribution base for an independent worker is 40% of fees, not salary. Bidirectional set with 'Associated return number' (T2R1-009) and 'Associated return payment date' (T2R1-010), whose population depends on this type (see their conditional rules), and with the 'Corrections' change event (T2R2-022). Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.1.1 campo 8.
+   Option Values: -> Sheet 6: Return type
+   Rounding: Not an amount - no rounding.
+--- row 67 | T2R2-005 | Contributor type
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Employee.Worker_Type_Code
+   Field Explanation: The full PILA tipo cotizante list - far longer than the values the electronic payroll recognises. Values: 1 Dependiente, 2 Servicio domestico, 3 Independiente, 4 Madre sustituta, 12 Aprendices en etapa lectiva (ONLY for health contribution periods BEFORE August 2025), 16, 18, 19 Aprendices etapa lectiva Ley 2466 de 2025 (from the health period of August 2025: contributes to health and occupational risk only, IBC 1 SMMLV, no pension, CCF, SENA or ICBF; the operador validates the apprentice against the SENA 'REPORTE DE APRENDICES' file), 20 to 23, 30 to 36, 40 Beneficiario UPC Adicional, 42 to 45, 47, 51 to 63, 64 Trabajador penitenciario o servicio de utilidad publica, 65 Dependiente vinculado al Piso de Proteccion Social, 66 Independiente vinculado al Piso de Proteccion Social, 67 Voluntario en Primera Respuesta, 68 Dependiente veterano de la Fuerza Publica, 69 Contribuyente solidario, 70 Promotor del Servicio Social para la Paz, 71 Ley de Segundas Oportunidades, 72 Mujeres con aporte a pension por pago por tercero, 73 Interno de Medicina, 74 Reciclador de Oficio, 75 Dependiente con permanencia en el Regimen Subsidiado, 76 Trabajador de tiempo parcial independiente. Codes 3, 16, 20, 32 to 45, 52, 53, 55, 57 and 59 onwards have NO electronic payroll equivalent, so a direct copy will fail DIAN validation. Type 40 is additionally excluded from the header count in T2R1-019. Bidirectional set with the fields this code gates: 'Work location department code' (T2R2-009) and 'Work location municipality code' (T2R2-010) are blank for type 40; 'Additional UPC value' (T2R2-056) is populated for type 40 and type 69; 'Principal contributor document type' (T2R2-074) only for type 40; 'Hours worked' (T2R2-096) is optional for types 1, 2, 18, 22, 30, 51 and 55; 'Hire date' (T2R2-080) is mandatory for type 75; and 'Pension fund of the member' (T2R2-031) may be blank only for a type not obliged to contribute to pension. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 5 and §2.1.2.3.1. Source: Master Data holds no worker-type field. Derive it from Employee Group / Subgroup through the Employee Group to contributor-type mapping, maintained as a configuration table. Employee Groups 1 and 3 are dependent workers with full contributions (type 1); Employee Group 6 / Subgroup E2 (interns paid WT 62149) is mapped in the same table, which carries either their contributor type or their exclusion from the return.
+   Option Values: -> Sheet 6: Tipo cotizante (PILA)
+   Rounding: Not an amount - no rounding.
+--- row 68 | T2R2-006 | Contributor sub-type
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Employee.Worker_SubType_Code
+   Field Explanation: Twelve-value list: 0 No aplica, 1 Dependiente pensioner por vejez/jubilacion/invalidez activo, 2 Independiente pensioner, 3 Not required to contribute to pension por edad, 4 Requisitos cumplidos para pension, 5 Indemnizacion sustitutiva o devolucion de saldos reconocida, 6 Regimen exceptuado de pensiones, 9 Pensioner con mesada >= 25 SMLMV, 10 Residente en el exterior affiliate voluntario, 11 and 12 Conductores de taxi. HARD RULE printed in the annex: where the sub-type is 1, 2, 3, 4, 5, 6, 9 or 12, campo 46 (pension contribution rate) MUST be 0. Only sub-types 0 and 1 have a electronic payroll equivalent. Bidirectional pair with 'Pension fund of the member' (T2R2-031), which may be blank only where this sub-type is one not obliged to contribute to the Sistema General de Pensiones.
+   Option Values: -> Sheet 6: Subtipo cotizante (PILA)
+   Rounding: Not an amount - no rounding.
+--- row 70 | T2R2-008 | Colombian abroad
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.Colombian_Abroad_Flag
+   Field Explanation: Marks a Colombian national contributing from abroad. Its practical effect on this record is to suppress the DIVIPOLA work-location fields, which have no meaning outside Colombia.
+   Rounding: Not an amount - no rounding.
+--- row 71 | T2R2-009 | Work location department code
+   Format: A(2) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.Work_Department_Code
+   Field Explanation: DIVIPOLA department where the work is performed. The operador validates it against the DANE DIVIPOLA catalogue. Should reconcile to electronic payroll NIE051. Source: Master Data field 'Work location', which holds a city name (e.g. 'Bogota', 'Medellin'), converted through the work-location to DIVIPOLA department + municipality mapping, maintained as a configuration table built from the DANE DIVIPOLA catalogue. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation). A blank 'Work location' is rejected as a blocking data error for this field.
+   Option Values: -> Sheet 6: DIVIPOLA (DANE)
+   Rounding: Not an amount - no rounding.
+--- row 72 | T2R2-010 | Work location municipality code
+   Format: A(3) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.Work_Municipality_Code
+   Field Explanation: THREE-digit DIVIPOLA municipality suffix - not the five-digit code used by the electronic payroll. Concatenate with T2R2-009 to obtain the five-digit form: 11 + 001 = 11001. Should reconcile to NIE052. Source: Master Data field 'Work location', which holds a city name (e.g. 'Bogota', 'Medellin'), converted through the work-location to DIVIPOLA department + municipality mapping, maintained as a configuration table built from the DANE DIVIPOLA catalogue. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation). A blank 'Work location' is rejected as a blocking data error for this field.
+   Option Values: -> Sheet 6: DIVIPOLA (DANE)
+   Rounding: Not an amount - no rounding.
+--- row 73 | T2R2-011 | First surname
+   Format: A(20) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.First_Surname
+   Field Explanation: First surname of the contributor. Mandatory.
+   Rounding: Not an amount - no rounding.
+--- row 74 | T2R2-012 | Second surname
+   Format: A(30) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.Second_Surname
+   Field Explanation: Second surname. NOT mandatory here - a material contrast with the electronic payroll, where SegundoApellido is use=required and a single-surname employee forces a placeholder. The same employee can therefore be reported correctly in PILA and imperfectly in the XML.
+   Rounding: Not an amount - no rounding.
+--- row 75 | T2R2-013 | First name
+   Format: A(20) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.First_Name
+   Field Explanation: First given name. Mandatory.
+   Rounding: Not an amount - no rounding.
+--- row 76 | T2R2-014 | Second name
+   Format: A(30) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Employee.Other_Names
+   Field Explanation: Second given name. Optional.
+   Rounding: Not an amount - no rounding.
+--- row 78 | T2R2-015 | ING - hire
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_ING [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Marks the employee's entry into the contribution system in this period. Drives the proportional day counts in campos 36 to 39 and pairs with the hire date in campo 80.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 79 | T2R2-016 | RET - termination
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_RET [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Marks the employee's exit. Pairs with the termination date in campo 81 and reduces the contributory days in campos 36 to 39.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 80 | T2R2-017 | TDE - transfer from another EPS
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_TDE [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Transfer INTO the reported health insurer from another EPS or EOC.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 81 | T2R2-018 | TAE - transfer to another EPS
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_TAE [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Transfer OUT to another health insurer. The destination EPS code goes in campo 34.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 82 | T2R2-019 | TDP - transfer from another pension administrator
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_TDP [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Transfer INTO the reported pension administrator.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 83 | T2R2-020 | TAP - transfer to another pension administrator
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_TAP [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Transfer OUT to another pension administrator. Colombia permits a regime change every five years, so this is a recurring event, not an exception.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 84 | T2R2-021 | VSP - permanent salary variation
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_VSP [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: A permanent change in salary taking effect during the period. Distinct from VST (campo 23), which is transitory. The distinction matters: a permanent variation resets the contribution base going forward, a transitory one does not.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 85 | T2R2-022 | Corrections
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_Correccion [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: A adds a contributor omitted from the original return; C corrects a contributor already reported. Only meaningful on a correction return.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 86 | T2R2-023 | VST - transitory salary variation
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_VST [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: A one-off variation in the contribution base for this period only - typically a bonus or a retroactive payment - that does not change the standing salary. Mark VST when the period's contribution base differs from the standing contractual salary because of salary-constituting variable payments (e.g. WT 62133 Variable, 62150 Vacation Bonus, 62207 Attendance Bonus). A wage type triggers VST where it is salary-constituting and variable (not part of the standing salary); the salary-constituting and variable attributes of each wage type come from the Wage Type Catalogue (WTC).
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 87 | T2R2-024 | SLN - contract suspension or unpaid leave
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_SLN [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Temporary suspension of the contract, unpaid leave, or a commission of service. Reduces the contributory days in campos 36 to 39 and must reconcile to the electronic payroll LicenciaNR block (NIE136 to NIE138).
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 88 | T2R2-025 | IGE - temporary incapacity, general illness
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_IGE [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: IGE: incapacidad temporal por enfermedad general o licencia por cuidado de la ninez. X = general-illness incapacity in the period (the employer bears days 1-2 and the EPS funds from day 3; maps to electronic payroll Incapacidad Tipo = 1, Comun). L = licencia por cuidado de la ninez. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 25 and §2.1.2.3.42.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 89 | T2R2-026 | LMA - maternity or paternity leave
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_LMA [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: LMA: licencia de maternidad o de paternidad. X = the contributor is on maternity or paternity leave in the period (no occupational-risk contribution for those days, Decreto 1072 de 2015 art. 2.2.4.2.1.6). P = licencia parental flexible de tiempo parcial (CST art. 236 par. 5, as modified by Ley 2114 de 2021): occupational risk IS contributed for the time worked; the X portion goes on a separate line, total days in the period cannot exceed 30 and the summed IBC cannot be below 1 SMMLV. Maps to the electronic payroll LicenciaMP block (NIE128 to NIE131). Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 26 and §2.1.2.3.41.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 90 | T2R2-027 | VAC-LR - vacation or paid leave
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_VAC_LR [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: A THREE-VALUE flag, not a simple X: X means vacation, L means remunerated leave. They map to two DIFFERENT electronic payroll blocks - VacacionesComunes (NIE109 to NIE112) and LicenciaR (NIE132 to NIE135) respectively - so the value carries real information and must not be normalised to X. Mapping: WT 79001 Annual leave -> X; WT 79018 Paid Leave -> L. Vacation compensated in cash (WT 79003) involves no rest period and does not raise VAC-LR (see T2R2-089).
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 91 | T2R2-028 | AVP - voluntary contribution
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_AVP [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Signals that a voluntary pension contribution is included in this settlement.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 92 | T2R2-029 | VCT - change of work centre
+   Format: A(1) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.Novedad_VCT [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: Change of work centre during the period. It matters because THE OCCUPATIONAL-RISK CLASS ATTACHES TO THE WORK CENTRE, NOT TO THE EMPLOYER (Decree 1072 of 2015 art. 2.2.4.2.5.6), so a move can change the ARL rate mid-period.
+   Option Values: -> Sheet 6: Change events
+   Rounding: Not an amount - no rounding.
+--- row 93 | T2R2-030 | IRL - days of occupational accident or disease incapacity
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.Novedad_IRL_Days [Not an amount field -- a PILA novedad (change-event) code; no WTC code applies by design]
+   Field Explanation: UNLIKE THE OTHER CHANGE EVENT FLAGS THIS ONE CARRIES A NUMBER, not an X: it is the count of days of incapacity arising from an occupational accident or disease, funded by the ARL from day one at 100%. Maps to electronic payroll Incapacity with Tipo = 2 or 3.
+   Rounding: Not an amount - no rounding.
+--- row 95 | T2R2-031 | Pension fund of the member
+   Format: A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue
+   System Mapping: Employee.AFP_Code
+   Field Explanation: Code of the pension administrator - either Colpensiones in the average-premium regime or a private individual-account fund. The employee elects the regime and may change it every five years. Source: Master Data field 'Pension Fund (AFP) Name', which holds the administrator name, converted through the administrator name-to-code mapping, maintained as a configuration table from the Ministry catalogue of administradoras (six-position codes, distributed through the information operators). An employee with pension contributions and no administrator is rejected as a blocking data error.
+   Option Values: -> Sheet 6: Administradoras (ARL / EPS / AFP / CCF)
+   Rounding: Not an amount - no rounding.
+--- row 96 | T2R2-032 | Pension fund to which the member transfers
+   Format: A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue
+   System Mapping: Employee.AFP_Transfer_Code
+   Field Explanation: Destination pension administrator on a regime or fund change.
+   Option Values: -> Sheet 6: Administradoras (ARL / EPS / AFP / CCF)
+   Rounding: Not an amount - no rounding.
+--- row 97 | T2R2-033 | EPS or EOC of the member
+   Format: A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue
+   System Mapping: Employee.EPS_Code
+   Field Explanation: Code of the health insurer. Health is the subsystem paid one month in advance, per T2R1-016. Bidirectional pair with the 'TDE - transfer from another EPS' change event (T2R2-017), which reports the move between health insurers that changes the value carried here. Source: Master Data field 'EPS Provider Name', which holds the insurer name, converted through the administrator name-to-code mapping (EPSnnn), maintained as a configuration table from the Ministry catalogue of administradoras (six-position codes, distributed through the information operators). A value that does not resolve to a catalogue code is rejected as a blocking data error.
+   Option Values: -> Sheet 6: Administradoras (ARL / EPS / AFP / CCF)
+   Rounding: Not an amount - no rounding.
+--- row 98 | T2R2-034 | EPS or EOC to which the member transfers
+   Format: A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue
+   System Mapping: Employee.EPS_Transfer_Code
+   Field Explanation: Destination health insurer on a transfer.
+   Option Values: -> Sheet 6: Administradoras (ARL / EPS / AFP / CCF)
+   Rounding: Not an amount - no rounding.
+--- row 99 | T2R2-035 | CCF of the member
+   Format: A(6) - alphanumeric, left-justified, SPACE-filled to the right. Prefix pattern ^(ARL|EPS|EOC|AFP|CCF|FSP)[0-9]{3}$ - THREE alphabetic positions identifying the subsystem followed by THREE numeric positions identifying the administradora. The PILA anexo names FSP001, MIN001 and MIN002 in running prose. The code LIST itself is master data published by the Ministerio de Salud y Proteccion Social; validate the prefix here and the code against the catalogue
+   System Mapping: Employee.CCF_Code
+   Field Explanation: Code of the family compensation fund. Organised by department, so a multi-site employer legitimately reports several CCF codes across its population - the 4% rate does not vary, only the receiving institution.
+   Option Values: -> Sheet 6: Administradoras (ARL / EPS / AFP / CCF)
+   Rounding: Not an amount - no rounding.
+--- row 101 | T2R2-036 | Days contributed to pension
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.Pension_Days [Not an amount field -- a day-count; no WTC code applies by design]
+   Field Explanation: Contributory days for the pension subsystem on the 30-day commercial month. EACH SUBSYSTEM CARRIES ITS OWN DAY COUNT and they legitimately differ - which is precisely why the engine must compute and store four separate counters rather than one 'days worked'. Bidirectional set with the whole change event block (T2R2-015 to T2R2-030): those change-event flags are what drive this day count, so a change event reported without a matching movement in the day counters is a reconciliation error the operador will surface.
+   Rounding: Not an amount - no rounding.
+--- row 102 | T2R2-037 | Days contributed to health
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.Health_Days [Not an amount field -- a day-count; no WTC code applies by design]
+   Field Explanation: Contributory days for health. Diverges from the pension count during unpaid leave, where health may still be payable under some configurations while pension is not.
+   Rounding: Not an amount - no rounding.
+--- row 103 | T2R2-038 | Days contributed to occupational risk
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.ARL_Days [Not an amount field -- a day-count; no WTC code applies by design]
+   Field Explanation: Contributory days for the occupational-risk subsystem.
+   Rounding: Not an amount - no rounding.
+--- row 104 | T2R2-039 | Days contributed to the family compensation fund
+   Format: N(2) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.CCF_Days [Not an amount field -- a day-count; no WTC code applies by design]
+   Field Explanation: Contributory days for the family compensation fund. Bidirectional set with the whole change event block (T2R2-015 to T2R2-030): those change-event flags are what drive this day count, so a change event reported without a matching movement in the day counters is a reconciliation error the operador will surface.
+   Rounding: Not an amount - no rounding.
+--- row 110 | T2R2-044 | Occupational risk contribution base (IBC)
+   Format: N(9) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.IBC_ARL [WTC: CO-BASE-IBC]
+   Field Explanation: Contribution base for occupational risk. Same floor and ceiling. Vacation and paid-leave (VAC-LR) days do not reduce the ARL day count (T2R2-038) because they are paid; maternity or paternity leave days (LMA = X) carry no occupational-risk contribution (Decreto 1072 de 2015 art. 2.2.4.2.1.6).
+   Rounding: Round UP. Contribution base to the whole peso; each contribution value to the next multiple of 100 (Decree 1990 of 2016 art. 1).
+--- row 116 | T2R2-048 | Member's voluntary contribution to the mandatory pension fund
+   Format: N(9) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.Voluntary_Pension_Employee [WTC: CO-DED-PENSION-VOLUNTARIA]
+   Field Explanation: Voluntary contribution made BY THE EMPLOYEE into the mandatory pension fund. Do not map voluntary-pension-fund savings (the 'FVOL' wage types 25812, 25813, 25814, 25815 and 25823; WT 25817 'Dividendo por Colombia Contribution' is not an FVOL wage type) to this field: they are paid to a voluntary fund, not to the mandatory pension fund, even where the administrator is the same company.
+   Rounding: Round UP. Contribution base to the whole peso; each contribution value to the next multiple of 100 (Decree 1990 of 2016 art. 1).
+--- row 117 | T2R2-049 | Employer's voluntary contribution to the mandatory pension fund
+   Format: N(9) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Payroll.Voluntary_Pension_Employer [WTC: CO-APORTE-PENSION-VOL-ER]
+   Field Explanation: Voluntary contribution made BY THE EMPLOYER into the employee's mandatory pension fund.
+   Rounding: Round UP. Contribution base to the whole peso; each contribution value to the next multiple of 100 (Decree 1990 of 2016 art. 1).
+--- row 132 | T2R2-062 | Work centre
+   Format: N(9) - numeric, right-justified, ZERO-filled to the left
+   System Mapping: Employee.Work_Centre_Code
+   Field Explanation: Identifier of the work centre to which the employee is attached. It determines the occupational-risk class and therefore the rate: a company with two work centres legitimately carries two risk classes (Decree 1072 of 2015 art. 2.2.4.2.5.6). Where a person performs several occupations they contribute at the HIGHEST class.
+   Rounding: Not an amount - no rounding.
+--- row 155 | T2R2-080 | Hire date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Contract.Start_Date
+   Field Explanation: Date of entry, format AAAA-MM-DD. Should equal electronic payroll FechaIngreso (NIE002).
+   Rounding: Not an amount - no rounding.
+--- row 156 | T2R2-081 | Termination date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Contract.End_Date
+   Field Explanation: Date of exit, format AAAA-MM-DD. Should equal electronic payroll FechaRetiro (NIE003).
+   Rounding: Not an amount - no rounding.
+--- row 157 | T2R2-082 | VSP start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.VSP_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Effective date of the permanent salary variation, format AAAA-MM-DD. Only a start date - a permanent variation has no end.
+   Rounding: Not an amount - no rounding.
+--- row 158 | T2R2-083 | SLN start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.SLN_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of the suspension or unpaid leave, format AAAA-MM-DD.
+   Rounding: Not an amount - no rounding.
+--- row 159 | T2R2-084 | SLN end date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.SLN_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the suspension or unpaid leave.
+   Rounding: Not an amount - no rounding.
+--- row 160 | T2R2-085 | IGE start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.IGE_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of the general-illness incapacity. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days: WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.
+   Rounding: Not an amount - no rounding.
+--- row 161 | T2R2-086 | IGE end date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.IGE_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the general-illness incapacity. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days: WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.
+   Rounding: Not an amount - no rounding.
+--- row 162 | T2R2-087 | LMA start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.LMA_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of maternity or paternity leave. Source: the payroll absence record dates of WT 79006 Maternity Leave Payment (DD-MM-YYYY, converted to AAAA-MM-DD).
+   Rounding: Not an amount - no rounding.
+--- row 163 | T2R2-088 | LMA end date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.LMA_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of maternity or paternity leave. Source: the payroll absence record dates of WT 79006 Maternity Leave Payment (DD-MM-YYYY, converted to AAAA-MM-DD).
+   Rounding: Not an amount - no rounding.
+--- row 164 | T2R2-089 | VAC-LR start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.VAC_LR_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of vacation or remunerated leave. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). Select absences by their dates, not by the payroll run that paid them: a vacation row paid in the run but dated in an earlier month is not reported with this period's dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).
+   Rounding: Not an amount - no rounding.
+--- row 165 | T2R2-090 | VAC-LR end date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.VAC_LR_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of vacation or remunerated leave. Source: the payroll absence record dates (DD-MM-YYYY, converted to AAAA-MM-DD). Select absences by their dates, not by the payroll run that paid them: a vacation row paid in the run but dated in an earlier month is not reported with this period's dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).
+   Rounding: Not an amount - no rounding.
+--- row 166 | T2R2-091 | VCT start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.VCT_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Date from which the new work centre applies - and therefore from which a different occupational-risk rate may apply.
+   Rounding: Not an amount - no rounding.
+--- row 167 | T2R2-092 | VCT end date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.VCT_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Date to which the work-centre change applies.
+   Rounding: Not an amount - no rounding.
+--- row 168 | T2R2-093 | IRL start date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.IRL_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of incapacity from an occupational accident or disease.
+   Rounding: Not an amount - no rounding.
+--- row 169 | T2R2-094 | IRL end date
+   Format: A(10) - alphanumeric, left-justified, SPACE-filled to the right
+   System Mapping: Payroll.IRL_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of occupational incapacity.
+   Rounding: Not an amount - no rounding.
+
+######## CO-DIAN-001 Nomina Electronica Spec fields 224
+--- row 12 | NIE024 | CUNE - unique payroll document code
+   Format: A (hex, 96 chars)
+   System Mapping: System.CUNE
+   Field Explanation: COMPOSITE KEY - position breakdown. The CUNE is the SHA-384 hexadecimal digest (96 hex characters) of ELEVEN concatenated inputs, in this exact order and with no separators (Technical Annex s.8.1.1.1): [1] NumNE = Prefix + Sequence number (NIE012); [2] FecNE = FechaGen (NIE026, AAAA-MM-DD); [3] HorNE = HoraGen including the GMT offset (NIE027); [4] ValDev = DevengadosTotal (NIE187), decimal point, 2 decimals TRUNCATED, no thousand separators, no currency symbol; [5] ValDed = DeduccionesTotal (NIE188), same format; [6] ValTolNE = ComprobanteTotal (NIE189), same format; [7] NitNE = employer NIT (NIE033) without dots, hyphens or the verification digit; [8] DocEmp = employee document number (NIE045) without dots or hyphens; [9] TipoXML (NIE202); [10] Software-Pin - the secret PIN, which NEVER appears in the XML; [11] TipAmb = Ambiente (NIE023). PERSISTENCE: the CUNE is immutable once the document is validated. Any change to any of the eleven inputs produces a different CUNE and therefore a different document; corrections are made by an adjustment note carrying its own CUNE and referencing the original.
+   Rounding: Not an amount - no rounding.
+--- row 14 | NIE026 | Generation date
+   Format: AAAA-MM-DD
+   System Mapping: System.Document_Generation_Date
+   Field Explanation: Date on which the XML was generated, in Colombian time. Distinct from the payment date (NIE203) and from the settlement period (NIE004 / NIE005). It is input [2] to the CUNE, and it is the date against which the art. 8 deadline - transmission within the first 10 days of the month following the payment - is measured.
+   Rounding: Not an amount - no rounding.
+--- row 66 | NIE056 | All-inclusive salary flag
+   Format: Boolean (true / false)
+   System Mapping: Employee.Integral_Salary_Flag
+   Field Explanation: Whether the employee is on an all-inclusive salary under CST art. 132 num. 2 (minimum 13 SMMLV = COP 22,761,765 in 2026, of which 70% is salary and 30% is the prestacional factor). Where true, the contribution base is 70% of the integral salary and no separate prima, cesantias or interest accrues - which changes what may legitimately appear in the Devengados block.
+
+Source: the HR master holds no flag field. Set true where the employee's salary wage type is 62140 'Integral Salary- 0423' (its arrears WT 62141 'Arrears-Integral Salary' carries the same character); set false where it is 62100 'Ordinary Salary- 0003' and for every other case, including interns paid WT 62149. The flag is derived from the salary wage type only; it is consistent with the contribution calculation (health at 4% of the 70% base for an integral salary).
+   Rounding: Not an amount - no rounding.
+--- row 67 | NIE061 | Contract type
+   Format: N (code)
+   System Mapping: Contract.Type_Code
+   Field Explanation: Annex table 5.5.2: 1 Fixed term, 2 Indefinite term, 3 Obra o Labor, 4 Aprendizaje, 5 Practicas o Pasantias. Law 2466 of 2025 art. 21 recast the apprenticeship as a labour contract, so code 4 now denotes a genuine employment relationship. Bidirectional pair with 'Apprentice maintenance support' (NIE157): where NIE157 is present this field must be contract type 4 (aprendizaje).
+
+Source: the HR master field 'Employment Contract Type' (value 'WM') does not carry the term of the contract and cannot drive this code. The table 5.5.2 code is taken from the contract-term source of the HR system (fixed / indefinite / obra o labor / aprendizaje / practicas) through the contract-type mapping table, maintained as a configuration table. Interns and apprentices paid WT 62149 carry code 4, consistent with NIE041 (12 or 19) and NIE157 (bidirectional check).
+   Option Values: -> Sheet 6: Tipo de Contract (table 5.5.2)
+   Rounding: Not an amount - no rounding.
+--- row 70 | None | ═══ payment - pago and fechaspagos ═══
+--- row 76 | NIE203 | Payment date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Payment_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Repeating element, cardinality 1-N: one occurrence per actual payment inside the reported month. A fortnightly payroll reports TWO FechaPago values on ONE monthly document. Item 5 of the art. 5 mandatory content, and the date that fixes the art. 8 transmission deadline.
+   Rounding: Not an amount - no rounding.
+--- row 78 | NIE002 | Hire date
+   Format: AAAA-MM-DD
+   System Mapping: Contract.Start_Date
+   Field Explanation: Date the employee joined the employer. Constant across every document for that relationship; it drives TiempoLaborado (NIE006), the cesantias accrual and the seniority-based severance calculation.
+
+Source: HR master field 'Hire Date' (DD-MM-YYYY, converted to AAAA-MM-DD), the start of the current employment relationship; the same date drives NIE006. Where the HR master holds several start dates ('Hire Date', 'Original Hire Date', 'Adjusted Service Date'), 'Hire Date' is the one used: the annex defines this attribute as the date the worker joined the employer for the current relationship, and TiempoLaborado (NIE006) is computed from the same date. A rehired employee starts a new relationship, whose earlier contract was closed with its own FechaRetiro (NIE003), so 'Original Hire Date' and 'Adjusted Service Date' are not used; a transfer between positions within the same employer does not end the relationship and does not change this date.
+   Rounding: Not an amount - no rounding.
+--- row 79 | NIE003 | Termination date
+   Format: AAAA-MM-DD
+   System Mapping: Contract.End_Date
+   Field Explanation: Leaving date. Cardinality 0-1. Its presence signals the final settlement document, which typically also carries VacacionesCompensadas, Severance savings, Indemnizacion and BonifRetiro earning elements that do not appear in an ordinary month.
+   Rounding: Not an amount - no rounding.
+--- row 80 | NIE004 | Settlement period start
+   Format: AAAA-MM-DD
+   System Mapping: PayPeriod.Start_Date
+   Field Explanation: First day of the period the document settles. For the standard monthly document this is the first day of the calendar month, or the hire date in a joining month. Bidirectional pair with 'Termination date' (NIE003): where NIE003 is present it must fall inside or before the settlement window this field opens.
+   Rounding: Not an amount - no rounding.
+--- row 81 | NIE005 | Settlement period end
+   Format: AAAA-MM-DD
+   System Mapping: PayPeriod.End_Date
+   Field Explanation: Last day of the settled period. Must be on or after NIE004. One document per employee per month whatever the pay cycle (art. 3). Bidirectional pair with 'Termination date' (NIE003): where NIE003 is present it must fall inside or before the settlement window this field closes.
+   Rounding: Not an amount - no rounding.
+--- row 82 | NIE006 | Time worked
+   Format: N (days, decimal 2)
+   System Mapping: Payroll.Service_Days [Not an amount field -- a day/hour count; no WTC code applies by design]
+   Field Explanation: COMPOSITE VALUE - construction rule. Cumulative service with the employer expressed in DAYS on the Colombian commercial-year convention fixed by Technical Annex s.8.3.1: 1 year = 360 days, 1 month = 30 days. The annex's own worked example is 5 years + 3 months + 18 days = (5 x 360) + (3 x 30) + 18 = 1908.00. Sub-fields: [years x 360] + [months x 30] + [odd days]. PERSISTENCE: recomputed every month from FechaIngreso (NIE002) to the settlement end; it is cumulative service, NOT days worked in the period (that is DiasTrabajados, NIE069).
+
+Source: computed from the date used for NIE002 ('Hire Date'); never mix two dates between NIE002 and this field. Always the 360/30 construction above, never a calendar day-count, and always with two decimals.
+   Rounding: Two decimals, per the annex example (1908.00).
+--- row 83 | NIE008 | Generation date (period block)
+   Format: AAAA-MM-DD
+   System Mapping: System.Document_Generation_Date
+   Field Explanation: The generation date repeated inside the Period element, considering the Colombian time zone (UTC-05:00). Must equal NIE026; a mismatch between the two is a common rejection.
+   Rounding: Not an amount - no rounding.
+--- row 85 | NIE069 | Days worked
+   Format: N (integer)
+   System Mapping: Payroll.Days_Worked [Not an amount field -- a day/hour count; no WTC code applies by design]
+   Field Explanation: Days actually worked and paid in the period, on the 30-day commercial month. Distinct from TiempoLaborado (NIE006), which is cumulative service. Reduced by unpaid leave, by suspension and by a mid-month hire or leave.
+
+Source: pay-run field 'Days Worked'. Unpaid leave and suspension reduce it; a mid-month hire or leaver reduces it to the days of the relationship in the period. Do not use WT 63812 (gross month count) or WT 63953 (PILA day count), and do not derive it from the leave register, which counts business days and includes compensated vacation and episodes of earlier months. Paid absence days (vacation, incapacity, maternity / paternity and paid leave) are NOT subtracted: they are paid days, reported in their own Devengados blocks (Population Rules, DiasTrabajados). Only unpaid leave, suspension and lawful strike reduce the count.
+   Rounding: Not an amount - no rounding.
+--- row 86 | NIE070 | Salary paid for the period
+   Format: N (decimal 2)
+   System Mapping: Payroll.Basic_Salary_Paid [WTC: CO-SALARIO-BASICO]
+   Field Explanation: The basic salary actually earned for the days worked. Moves with DiasTrabajados; contrast Sueldo (NIE062), which is the static contractual figure. This is the single largest input to the ET art. 388 depurated withholding base and to the PILA contribution base.
+
+Source: wage types 62100 'Ordinary Salary- 0003' and 62140 'Integral Salary- 0423'. Vacation days are not in this element (paid through WT 79401 -> NIE112). WT 62149 (intern support) does not belong here (-> NIE157). The salary arrears WTs 62101 'Arrears - Ordinary salary', 62141 'Arrears-Integral Salary' and 65820 are basic salary of an earlier period paid in this period: under the payment-date rule (Res. DIAN 000013 de 2021 art. 3) they are reported in the month of payment, in the element of the concept they settle, so an arrears of basic salary is reported in this element; the element attribute of each arrears wage type comes from the WTC.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 87 | NIE071 | Transport allowance
+   Format: N (decimal 2)
+   System Mapping: Payroll.Transport_Allowance [WTC: CO-AUX-TRANSPORTE]
+   Field Explanation: The statutory transport allowance, COP 249,095 per month in 2026. It is NOT salary for contribution purposes but IS included in the base of cesantias, prima and the severance indemnity (CST art. 7 of Ley 1 de 1963) - one of the sharpest base differences in Colombian payroll.
+
+This element carries ONLY the statutory allowance of employees earning up to 2 SMMLV (Ley 15 de 1959). Source: WT 62520 (statutory transport allowance). WT 62523 'Transportation Allowance CLA- 2008' is a collective-agreement allowance paid to employees above 2 SMMLV and is NOT reported here: it goes to Auxilios - AuxilioS (NIE141) or AuxilioNS (NIE142) according to the salary character agreed in the collective agreement; the salary attribute of WT 62523 comes from the WTC.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 127 | NIE109 | Vacation taken - start date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Vacation_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of the vacation period actually enjoyed. Repeating block (0-N) - two separate vacation stretches in one month are two elements.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79001 'Annual leave', printed as DD-MM-YYYY; convert to AAAA-MM-DD. An episode whose dates fall in an earlier month is reported with its actual dates.
+   Rounding: Not an amount - no rounding.
+--- row 128 | NIE110 | Vacation taken - end date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Vacation_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the vacation period enjoyed. Must be on or after NIE109.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79001 'Annual leave', printed as DD-MM-YYYY; convert to AAAA-MM-DD. An episode whose dates fall in an earlier month is reported with its actual dates.
+   Rounding: Not an amount - no rounding.
+--- row 129 | NIE111 | Vacation taken - days
+   Format: N (integer days)
+   System Mapping: Payroll.Vacation_Days_Taken [Not an amount field -- a day/hour count; no WTC code applies by design]
+   Field Explanation: Number of vacation days enjoyed. Colombia grants 15 WORKING days per year of service (CST art. 186); the accumulation limits of CST art. 190 are an engine rule, not an XML rule.
+   Rounding: Not an amount - no rounding.
+--- row 130 | NIE112 | Vacation taken - amount
+   Format: N (decimal 2)
+   System Mapping: Payroll.Vacation_Pay [WTC: CO-BASE-VACACIONES (statutory vacation pay, CST art. 192)]
+   Field Explanation: Money value of the vacation enjoyed. Vacation pay IS part of the contribution base; note that vacation is paid on ordinary salary excluding overtime (CST art. 192).
+
+Source: per-employee monthly amount = WT 79401 'Annual leave payout'. The per-episode 'Amount' of the leave register is NOT used: it is a per-employee value repeated on every row and does not add up across episodes. Where an employee has several vacation episodes in the month, the Pago of each element is the monthly amount split by days (supplied by the engine). Do NOT include WT 62150 'Vacation Bonus' (extralegal premium) - it is a bonus, not vacation pay.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 131 | NIE115 | Vacation compensated in cash - days
+   Format: N (integer days)
+   System Mapping: Payroll.Vacation_Days_Compensated [Not an amount field -- a day/hour count; no WTC code applies by design]
+   Field Explanation: Vacation days paid in cash instead of enjoyed. A SEPARATE element from vacation taken, because compensated vacation is NOT part of the social-security contribution base while enjoyed vacation is - the engine must not merge them.
+   Rounding: Not an amount - no rounding.
+--- row 132 | NIE116 | Vacation compensated in cash - amount
+   Format: N (decimal 2)
+   System Mapping: Payroll.Vacation_Compensation [WTC: CO-VACACIONES-COMPENSADAS]
+   Field Explanation: Cash value of the compensated vacation days. Typical on a final settlement.
+
+Source: WT 79403 'Vacations Compensated In cash' and, on a termination document, WT 62116 'Vacation Terminations'.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 133 | NIE117 | Service bonus - days
+   Format: N (integer days)
+   System Mapping: Payroll.Prima_Days [Not an amount field -- a day/hour count; no WTC code applies by design]
+   Field Explanation: Days of service on which the statutory service bonus (service bonus, CST art. 306) is computed. Paid in two instalments, by 30 June and by 20 December.
+
+Source: WT 63811 'Worked Days In Semester', a semester counter that resets on 1 January and 1 July, read in the month the service bonus (WT 62211) is paid. WT 42961 carries the same description but is a different count that does not reset in July and is NOT used.
+   Rounding: Not an amount - no rounding.
+--- row 134 | NIE118 | Service bonus - amount (salary)
+   Format: N (decimal 2)
+   System Mapping: Payroll.Prima_Amount [WTC: CO-PRIMA-SERVICIOS]
+   Field Explanation: The statutory service bonus. Under Procedure 1 the STATUTORY MINIMUM bonus is withheld SEPARATELY on its own read of the ET art. 383 table (art. 385) - it does not merge into the ordinary monthly base. Any excess over the statutory minimum is ordinary income. Bidirectional pair with 'Service bonus - amount (non-salary)' (NIE119): the salary and non-salary portions are separate elements and must never be summed into one.
+
+Source: WT 62211 'Service Legal Bonus - Social Benefits' only. The extralegal bonuses 62208 'March Bonus', 62209 'Christmas Bonus/ December' and 62210 'August Bonus' are not the statutory prima and are classified separately (NIE119 or NIE139 / NIE140, according to the salary character configured on the wage type).
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 135 | NIE119 | Service bonus - amount (non-salary)
+   Format: N (decimal 2)
+   System Mapping: Payroll.Prima_NonSalary [WTC: CO-BONIF-NOSALARIAL, if this specific prima is structured non-salary under a written art. 128 pact -- otherwise CO-PRIMA-SERVICIOS]
+   Field Explanation: Non-salary portion of a bonus. Counts toward the 40% non-salary clamp of Ley 1393 de 2010 art. 30 for contribution purposes.
+
+Candidate wage types: the extralegal bonuses 62208 'March Bonus', 62209 'Christmas Bonus/ December', 62210 'August Bonus' and 62204 'Collective Labor Agreement Signed Bonus'. This element carries only those configured as non-salary extralegal primas under a written CST art. 128 agreement; those configured as salary go to NIE139, and those that are not primas go to the Bonificacion elements (NIE139 / NIE140). The element (Primas NS, Primas S / NIE118 or the Bonificacion elements) and the salary character of each of these wage types come from the WTC attributes of the wage type (prima or bonus class; salary or non-salary).
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 136 | NIE120 | Severance savings - amount
+   Format: N (decimal 2)
+   System Mapping: Payroll.Cesantias_Amount [WTC: CO-CESANTIAS]
+   Field Explanation: Severance savings (auxilio de cesantia, CST art. 249 / Law 50 of 1990 art. 99): one month's salary per year of service. EXCLUDED from the monthly withholding base under both procedures because of the ET art. 206 num. 4 exemption and its taper. Cross-report: this is the figure that must reconcile to Form 220 casillas 47-49 and to Format 2276 numerals 18-20.
+
+Source: direct payments WT 62110 'Cash-out of Severance Pay', WT 62126 'Advance Severance Last Year' and WT 62182; the interest WTs 62117 / 62127 go to PagoIntereses (NIE122). The annual consignment to the severance funds appears in payroll as the informative WT 65805 / 25827 'Payment Severance Funds Inf.'. That consignment is reported in this element in the document of the month in which it is consigned (by 14 February, Law 50 of 1990 art. 99 num. 3): it is a credit in account of the employee's cesantias (ET art. 27 num. 3 - cesantias are realised when paid to the employee or consigned to the fund), and this element feeds the three Form 220 buckets - paid, consigned, traditional regime (Population Rules, Cesantias). As an informative earning it is reported together with its offsetting deduction WT 25827 (NIE195), so ComprobanteTotal still equals the cash net paid.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 137 | NIE121 | Severance savings - interest rate
+   Format: N (decimal)
+   System Mapping: Mercans.Cesantias_Interest_Rate
+   Field Explanation: The statutory interest rate on severance savings: 12% per annum, or pro rata for a partial year (Ley 52 de 1975 art. 1). The 12% annual rate is a configuration constant; the value reported is pro-rated to the period the interest covers.
+
+The value reported is the annual rate pro-rated to the period the interest covers (for example 9.00 for 1 January - 30 September = 12% x 9/12). Pago x Porcentaje is not a validation of PagoIntereses (NIE122): the interest base is the severance balance of the period the interest covers, not the Pago of the document.
+   Option Values: -> Sheet 6: Cesantias interest rate
+   Rounding: Rate to 2 decimals.
+--- row 138 | NIE122 | Severance savings - interest amount
+   Format: N (decimal 2)
+   System Mapping: Payroll.Cesantias_Interest [WTC: CO-INTERESES-CESANTIAS]
+   Field Explanation: Interest on severance savings, payable TO THE EMPLOYEE during January for the balance at the preceding 31 December. Ley 2466 de 2025 art. 64 additionally permits monthly payment of the 1% by written agreement, which the engine must support as a configurable option.
+
+Source: WT 62117 'Cash-out of Interest Severance Pay' and WT 62127.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 140 | NIE123 | Incapacity - start date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Incapacity_Start_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of the incapacity. Repeating block (0-N): one element per incapacity episode, and an episode that changes type mid-way is split.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79008 (sick leave, employer-paid first days) and WT 79011 (sick leave, EPS-paid days), printed as DD-MM-YYYY; convert to AAAA-MM-DD. The employer-paid days and the EPS-paid days of the same episode are separate leave-register rows with their own dates, and each row is one Incapacidad element.
+   Rounding: Not an amount - no rounding.
+--- row 141 | NIE124 | Incapacity - end date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Incapacity_End_Date [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the incapacity episode.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79008 (sick leave, employer-paid first days) and WT 79011 (sick leave, EPS-paid days), printed as DD-MM-YYYY; convert to AAAA-MM-DD. The employer-paid days and the EPS-paid days of the same episode are separate leave-register rows with their own dates, and each row is one Incapacidad element.
+   Rounding: Not an amount - no rounding.
+--- row 144 | NIE127 | Incapacity - amount
+   Format: N (decimal 2)
+   System Mapping: Payroll.Incapacity_Pay [WTC: employer-borne days 1-2 (CCG Module 5) or EPS-borne days 3+ -- no single code, depends on which days this payment covers]
+   Field Explanation: Amount paid to the employee for the incapacity. Colombian employers universally ADVANCE the benefit and recover it from the EPS or ARL, so this line is paid to the employee but receivable from the institution - see the inbound EPS/ARL determination in the Report Matrix. The employer's first-two-days rate (configuration constant, default 66.67% - the two-thirds of CST art. 227 for the first 90 days) and the one-minimum-wage floor on incapacity pay (settled practice) are configuration constants of the incapacity calculation.
+
+Source: amounts from WT 79408 (employer first days) and WT 79411 (EPS-reimbursed days); per-episode values from the leave register rows (WT 79008 / 79011). Each leave-register row is reported as its own Incapacidad element with its own dates, days and amount (type 1). The leave register 'Amount' must be the amount of that row, not a per-employee value repeated across rows (data check, as for NIE112).
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 145 | NIE128 | Maternity / paternity leave - start date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Maternity_Leave_Start [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of maternity or paternity leave. Funded by the EPS, advanced by the employer.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79006 'Maternity Leave Payment' and WT 79007 'Paternity Leave Payment' (payout WTs 79406 / 79407), printed as DD-MM-YYYY; convert to AAAA-MM-DD.
+   Rounding: Not an amount - no rounding.
+--- row 146 | NIE129 | Maternity / paternity leave - end date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Maternity_Leave_End [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the leave.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79006 'Maternity Leave Payment' and WT 79007 'Paternity Leave Payment' (payout WTs 79406 / 79407), printed as DD-MM-YYYY; convert to AAAA-MM-DD.
+   Rounding: Not an amount - no rounding.
+--- row 149 | NIE132 | Paid leave - start date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Paid_Leave_Start [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of remunerated leave other than maternity or paternity (bereavement, marriage, voting, trade-union leave).
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79018 'Paid Leave', WT 79014 'Bereavement Leave' and WT 79019 'Jury/ Elector Leave' (all remunerated leave other than maternity / paternity), printed as DD-MM-YYYY; convert to AAAA-MM-DD.
+   Rounding: Not an amount - no rounding.
+--- row 150 | NIE133 | Paid leave - end date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Paid_Leave_End [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the remunerated leave.
+
+Source: leave register fields 'Date From' / 'Date To' for WT 79018 'Paid Leave', WT 79014 'Bereavement Leave' and WT 79019 'Jury/ Elector Leave' (all remunerated leave other than maternity / paternity), printed as DD-MM-YYYY; convert to AAAA-MM-DD.
+   Rounding: Not an amount - no rounding.
+--- row 153 | NIE136 | Unpaid leave - start date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Unpaid_Leave_Start [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of unpaid leave or suspension. Maps to the PILA SLN change-event flag.
+   Rounding: Not an amount - no rounding.
+--- row 154 | NIE137 | Unpaid leave - end date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Unpaid_Leave_End [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the unpaid leave.
+   Rounding: Not an amount - no rounding.
+--- row 155 | NIE138 | Unpaid leave - days
+   Format: N (integer days)
+   System Mapping: Payroll.Unpaid_Leave_Days [Not an amount field -- a day/hour count; no WTC code applies by design]
+   Field Explanation: Days of unpaid leave. NOTE: this block carries NO amount element - unpaid leave has no money value by definition. It still reduces DiasTrabajados (NIE069) and the contribution days.
+   Rounding: Not an amount - no rounding.
+--- row 156 | NIE143 | Legal strike - start date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Strike_Start [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: First day of a lawful strike. Suspends the contract without terminating it.
+   Rounding: Not an amount - no rounding.
+--- row 157 | NIE144 | Legal strike - end date
+   Format: AAAA-MM-DD
+   System Mapping: Payroll.Strike_End [Not an amount field -- a date; no WTC code applies by design]
+   Field Explanation: Last day of the strike, format AAAA-MM-DD (XSD v1.0.6 attribute FechaFin).
+   Rounding: Not an amount - no rounding.
+--- row 160 | NIE139 | Bonus - salary
+   Format: N (decimal 2)
+   System Mapping: Payroll.Bonus_Salary [WTC: CO-BONIF-HABITUAL]
+   Field Explanation: Discretionary or contractual bonus that constitutes salary. Fully in the contribution base and in the withholding base.
+
+Source: wage types configured as salary bonuses: 62150 'Vacation Bonus', 62118, 62228, 65838, and the extralegal bonuses 62208 / 62209 / 62210 where configured as salary bonuses rather than primas (see NIE118 / NIE119). WT 62202 'Ocassional Bonus Grossed Up' is classified BonificacionS or BonificacionNS at wage-type configuration before it is mapped. A Bonificacion record with no amount is not emitted.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 161 | NIE140 | Bonus - non-salary
+   Format: N (decimal 2)
+   System Mapping: Payroll.Bonus_NonSalary [WTC: CO-BONIF-NOSALARIAL]
+   Field Explanation: Non-salary bonus. Excluded from the contribution base, but counts toward the 40% non-salary clamp of Ley 1393 de 2010 art. 30 - the excess over 40% of total remuneration is added back into the contribution base.
+
+Source: wage types configured as non-salary bonuses: 62201 'Ocassional Bonus', 62135 'ABCD Award', 62229 'Years of Service Bonus', 62122 'GM Cost of Living Adjust.', 62226 'GM Utilities Allowance', 62590 'Marriage Allowance', 62132 'Relocation Allowance Expat', 62144 'Reunification Allowance', 62500 'Loss Comp. Car Allowance', 62206 'Home Leave Allowance', 62400, 62219, 62121, 62646, 62591, 62213, 62504, 62146, 62227, 62147, 62120, 62220, 62111, 62124, 62119 and 62560. The non-salary character of each is the configuration flag set on the wage type under CST arts. 127-128.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 162 | NIE141 | Allowance - salary
+   Format: N (decimal 2)
+   System Mapping: Payroll.Allowance_Salary [No single WTC code -- depends on which specific allowance is reported under this generic NIE element; commonly CO-AUX-CONECTIVIDAD or CO-TELETRABAJO]
+   Field Explanation: Employer allowance that constitutes salary (for example a fixed, habitual connectivity or housing allowance not agreed as non-salary).
+
+WT 62523 'Transportation Allowance CLA- 2008', the collective-agreement transport allowance paid to employees earning above 2 SMMLV, is reported here where the collective agreement gives it salary character (it is not AuxilioTransporte, NIE071, which is limited to 2 SMMLV under Ley 15 de 1959); the salary character of WT 62523 comes from the WTC. Also assigned to this element: WT 62225 'Salary Attendance Bonus-Monthly'. WT 62133 'Variable -1301' is reported in AuxilioS / AuxilioNS where its WTC class is an allowance and in the Bonificacion elements (NIE139 / NIE140) where its class is variable pay; the element class and the salary attribute come from the WTC.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 163 | NIE142 | Allowance - non-salary
+   Format: N (decimal 2)
+   System Mapping: Payroll.Allowance_NonSalary [WTC: CO-BONIF-NOSALARIAL, if structured non-salary]
+   Field Explanation: Employer allowance expressly agreed as non-salary. Counts toward the 40% clamp.
+
+WT 62523 'Transportation Allowance CLA- 2008', the collective-agreement transport allowance paid to employees earning above 2 SMMLV, is reported here where the collective agreement agrees it as non-salary (it is not AuxilioTransporte, NIE071, which is limited to 2 SMMLV under Ley 15 de 1959); the salary character of WT 62523 comes from the WTC. Also assigned to this element: 62207 'Attendance Bonus', 62811 'Health Allowance', 62540 'Housing Allowance Domestic Relocation' (negative reversals netted inside the element), 62700 'School Allowance', 62221 'Hardship Premium', 62430 'L2L Rent Allowance', 62131 'Scholarship' and 65808 'Aid Refractive Surgery'. The informative third-party benefits 65817 / 65837 (life insurance), 65814 / 65815 (private health insurance), 65811 (gym), 65839 (optical) and 62320 / 62310 (expat leasing / allowance) are paid by the employer to the third party and offset by an 'Inf. deduction', so they are reported as PagoTercero (NIE193), not here: this element carries allowances paid in cash to the employee. The element class of each wage type comes from the WTC.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 164 | NIE146 | Other concept - description
+   Format: A
+   System Mapping: Payroll.Other_Concept_Description [Not an amount field -- free text; no WTC code applies by design]
+   Field Explanation: Free-text label of a concept that has no dedicated element. Mandatory (1-1) inside the block: an amount without a description is not admissible. Bidirectional set with 'Other concept - salary' (NIE147) and 'Other concept - non-salary' (NIE148): at least one of the two amounts must be present wherever this description is populated.
+
+Source: wage types with no dedicated element, for example 65821 'Expatriation Package for Inbounds' (DescripcionConcepto 'Paquete de expatriación Expats HOST'), 67090 'Pago Préstamo Sin Interés', 1910 'Previous periods receivables', 67010 and stock-award wage types. Use the wage-type description as DescripcionConcepto, in UTF-8 (accented letters preserved). The salary attribute of each comes from the WTC. WT 62203 'Reconciliations PMI additionall payment' is reported as BonifRetiro (NIE159) where its WTC class is a termination bonus and as OtroConcepto otherwise; the element class comes from the WTC. A negative line such as WT 62216 is netted against the positive lines of the same concept in the month, inside that concept's element (no element accepts a negative value - Population Rules, amount format); the concept a reversal wage type belongs to comes from its WTC attribute.
+   Rounding: Not an amount - no rounding.
+--- row 166 | NIE148 | Other concept - non-salary
+   Format: N (decimal 2)
+   System Mapping: Payroll.Other_Concept_NonSalary [No dedicated WTC code -- see row above; classify against WTC on the specific facts]
+   Field Explanation: Non-salary amount of the described concept.
+
+An OtroConcepto whose amount for the month is zero (for example a stock-award wage type with no value) is not emitted: an element without an amount is omitted, never zero-filled (the same rule as AuxilioTransporte, NIE071, and Bonificacion, NIE139).
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 167 | NIE149 | Ordinary cooperative compensation
+   Format: N (decimal 2)
+   System Mapping: Payroll.Coop_Compensation_Ordinary [WTC: CO-COMPENSACION-COOP]
+   Field Explanation: Ordinary compensation for associated cooperative work. Not an employment salary; reported here because worker type 31 is within the annex's TipoTrabajador list.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 168 | NIE150 | Extraordinary cooperative compensation
+   Format: N (decimal 2)
+   System Mapping: Payroll.Coop_Compensation_Extraordinary [WTC: CO-COMPENSACION-COOP]
+   Field Explanation: Extraordinary compensation for associated cooperative work.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 175 | NIE194 | Advance (accrued)
+   Format: N (decimal 2)
+   System Mapping: Payroll.Advance_Paid [WTC: CO-ANTICIPO-NOMINA]
+   Field Explanation: Salary advance paid to the employee. Repeating (0-N).
+
+Source: advance wage types 61100 'Weekly advance', 61101, 61150, 61200 and 62838 'Exceptional Advance', paid in runs other than the monthly run. Every payroll run of the month is included in the document, each with its own FechaPago (NIE203), not only the monthly run. The recovery is WT 21215 'Legalization Salary Payment' (-> NIE196) where that line recovers an advance (see NIE196).
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 179 | NIE159 | Retirement bonus
+   Format: N (decimal 2)
+   System Mapping: Payroll.Retirement_Bonus [WTC: CO-BONIF-RETIRO]
+   Field Explanation: Ex gratia or negotiated bonus paid on departure. Fully taxable employment income; it enters the ordinary monthly withholding base.
+
+WT 62203 'Reconciliations PMI additionall payment' is reported here where its WTC class is a termination bonus and as OtroConcepto (NIE146) otherwise; the element class comes from the WTC. A BonifRetiro element with a zero amount is not emitted: an element without an amount is omitted, never zero-filled.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 180 | NIE160 | Dismissal indemnity
+   Format: N (decimal 2)
+   System Mapping: Payroll.Termination_Indemnity [WTC: CO-INDEM-DESPIDO, or CO-INDEM-PROTECCION if dismissal occurred during a protected status]
+   Field Explanation: Indemnity for dismissal without just cause (CST art. 64). Fully taxable and enters the ordinary monthly base; only the statutory-minimum indemnities of ET art. 206 nums. 1-3 are exempt, and then only up to the legal minimum (art. 206 par. 1).
+
+Source: WT 62180 'Severance/Layoff Payment-CLA' and WT 62181 'Severance/Layoff Payment- Non CLA'. Despite the word 'Severance', these are the dismissal indemnity (CST art. 64 / CLA), NOT cesantias (NIE120). Wage types are not mapped to NIE120 or NIE160 by the word 'Severance' alone.
+   Rounding: 2 decimals, round-half-to-even (NTC 3711 / JIS Z 8401); DIAN validation tolerance +/- 2.00; any residual is carried by the Rounding element NIE186. Technical Annex s.1.1.1.
+--- row 191 | NIE177 | Income tax withheld
+   Format: N (decimal 2)
+   System Mapping: Payroll.Income_Tax_Withheld [WTC: CO-RETENCION-FUENTE]
+   Field Explanation: Withholding at source sobre employment income. RESIDENT: the ET art. 383 progressive table (0 / 19 / 28 / 33 / 35 / 37 / 39%) applied to the art. 388 depurated monthly base, under Procedure 1 or Procedure 2. NON-RESIDENT: the flat 20% of ET art. 408 on the gross payment, with no art. 388 depuration, no 25% exempt income, no art. 387 deductions and no tax-free band (DIAN Concept 011108 of 29 June 2026). Cross-report: the sum of this element across all employees for the month must reconcile to Form 350 casilla 93.
+
+Source: WT 2552 'Income Tax (employee)' (Deductions grouping; 0-value rows in the Non Cash grouping are ignored). Only withholding actually practised is reported: WT 21330 'Personal Income Tax Withholding (Theoretical)' is included where it carries the amount actually deducted from the employee and remitted to DIAN; a theoretical, hypothetical or contingent amount is never reported. The other withholding WTs 21129 (terminations), 25832 (stock-award vesting) and 25833 (IC local) are included; the hypothetical-tax WT 25834 is not withholding. The withholding attribute of each wage type comes from the WTC. The monthly sum must reconcile to Form 350 casilla 93.
+   Rounding: Whole pesos, approximated to the nearest 1,000 per ET art. 868 par., then expressed with 2 decimals in the XML.

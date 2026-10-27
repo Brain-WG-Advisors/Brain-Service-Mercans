@@ -1,0 +1,150 @@
+{
+  "spec": "CO-DIAN-005",
+  "checked": [
+    {
+      "id_or_column": "5 Beneficiary document type and identification number",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Re-checked Master Data and Accumulated Report. There is no document-type code, there is one column per document type, and a priority rule is needed. 1,038 Accumulated persons, 491 pensioners (WT 62154) and 286 others outside Master Data/BW are all confirmed. D 'Beneficiary National Id' is filled for 345 persons (330 pensioners) and differs from C for 334. The proposed text is correct, and the 'Tipo de documento (numerals 2 and 34)' table it cites exists on the Field Options sheet. Minor count errors in the finding (they do not change the text): Master Data has 261 data rows, not 263. 234 have only AP, 13 only AO, 14 (not 13) have two or three columns filled, and 0 (not 2) have none. Also note that Accumulated C is blank for 21 persons, 8 of whom are outside Master Data, so for them the reports hold no identity at all."
+    },
+    {
+      "id_or_column": "6 Beneficiary surnames and names",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Master Data B/C/D/E are confirmed (Second Last Name blank 55%, Middle Name blank 69%). 777 = 491 pensioners + 286 others, who have only the combined Accumulated B/E name. The proposed column-to-sub-field mapping (Last Name -> first surname, Second Last Name -> second surname, First Name -> first given name, Middle Name -> other names) is correct, and so is the retention requirement."
+    },
+    {
+      "id_or_column": "7 Beneficiary location",
+      "original_verdict": "Format mismatch",
+      "result": "confirmed",
+      "reason": "Confirmed. AV holds letter department codes (DC 127, ANT 60, CUN 28, VAC 20, ATL 8, ... plus foreign ON, VD, JAL), AR is free text with 60 distinct spellings, and no DANE code exists. Minor correction: 6 Master Data persons, not 7, have a foreign country in AQ (CA, CR, cr, DO, CH, MX; 'co' x2 is Colombia in lowercase). The proposed text is supported. It sends the value for foreign addresses to RA, which is correct because it must not be invented."
+    },
+    {
+      "id_or_column": "9 Salary payments",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "BW E = Accumulated 62100+62140 (September) on all 261 employee rows (the '262' in the finding includes the GRAND TOTAL row). Salary Payment Indicator X covers 2,866 rows, including 62150, 62805-62808 and 794xx. U 'Total' = the sum of the 12 rolling months on all 86,610 rows. 62140 has 103 rows. The proposed text is correct and supported."
+    },
+    {
+      "id_or_column": "12 Excess meal payments over 41 UVT",
+      "original_verdict": "Explanation to improve",
+      "result": "needs Wallisson",
+      "reason": "Data confirmed: 65818 paid to 447 persons, 10 person-months above 2,147,334, WT 58001 UVT 52,374 (2026) / 49,799 (2025), and 91 recipients with a 2026 monthly salary above 310 UVT. One small error: the minimum monthly amount is 20,951, not 293,314. The proposed text carries over the spec's own rule (Population Rules / Field Options) that where salary exceeds 310 UVT 'the whole month's payment goes to numeral 7' (vouchers, cheques, cards, vales). At PMI the meal benefit is an in-kind 'Inf.' wage type, and nothing shows it is paid through a voucher or card. Wallisson to decide: keep the numeral-7 routing as stated in the spec, or have RA confirm whether a non-voucher meal payment for an employee above 310 UVT belongs in numeral 7 or in numeral 17/5 before this sentence is put into the Field Explanation."
+    },
+    {
+      "id_or_column": "16 Statutory benefit payments",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Verified: 62211 is paid mainly in 12/2025 (288 rows) and 06/2026 (286), and 79401/79403/62116/62150 and extralegal bonuses 62208/62209/62210/62228/62229 exist. 79401, 62116 and 62150 carry flag X. The proposed text routes by classification and leaves extralegal bonuses to RA. It is correct and invents nothing."
+    },
+    {
+      "id_or_column": "17 Per diem payments",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Verified: 62805-62808 have 213 rows, all with flag X, and are non-zero in every month. The proposed text is supported. The routing of salary-type per diems is correctly left to RA."
+    },
+    {
+      "id_or_column": "21 Other payments",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Every wage type the finding cites exists in the Accumulated catalogue with the stated descriptions (e.g. 62523, 62207, 65800, 65821, 62180/62181, 25830, 65838, and the non-income items 62838 Exceptional Advance, 61100 Weekly advance, 62832 Expense reimbursement). The proposed text is correct and keeps the para. 6 interaction."
+    },
+    {
+      "id_or_column": "23 Severance and interest actually paid to the employee (Aligned sample)",
+      "original_verdict": "Aligned",
+      "result": "confirmed",
+      "reason": "Reproducible sample (random.seed(42), 20% of 2 Aligned, rounded up to 1) = id 23. Verified: 62127 has 284 non-zero rows in 01/2026, 62126 has 54 in 01/2026, and 62110/62117 are spread over the year. 74 of the 110 62110 recipients are not in Master Data, which fits terminations. No Master Data person has an original hire date before 1991, so nothing points to a traditional-regime population. Aligned stands."
+    },
+    {
+      "id_or_column": "24 Severance deposited to the severance fund",
+      "original_verdict": "Explanation to improve",
+      "result": "needs Wallisson",
+      "reason": "Data confirmed: 25827 and its mirror 65805 each have 236 rows, only in 01/02/2026, with identical totals of 2,064,808,759. The double-count warning is correct. However, the finding says the spec does not state which tax year a February deposit belongs to. The spec's own Example Analysis sheet already does: under N19 it reports 'One month's salary for 2026, deposited by 14 February 2027' in the 2026 return, which is the accrual year. The proposed text sends this to RA as open. Wallisson to decide: (a) adopt the accrual-year rule already in the Example Analysis and state it in the explanation, or (b) have RA confirm against the primary source. Decree 1625 of 2016 art. 1.2.1.20.7, which treats severance as realised when it is deposited to the fund, would point to the year of deposit, and the Example Analysis would then need correcting. Either way, the explanation and the Example Analysis must say the same thing."
+    },
+    {
+      "id_or_column": "27 Retirement, old-age or invalidity pensions",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Verified: 62154 has 491 persons, 62153 has 485, 62151 has 20, 62152 has 6, 21140 has 17, 21645/21646/21647 have 428/10/77 rows (515), and 21643 has 1. None of the pensioners are in Master Data or BW. The proposed text is correct. Note for the change map: the Payroll Scope Summary sheet (only a NO row for fund-paid pensions) also needs an employer-paid-pension row, and the change map does not include it."
+    },
+    {
+      "id_or_column": "30 Mandatory health contributions borne by the employee",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "BW H = 2554+2556+2553 (September) on all 261 employee rows, and pensioner EPS wage types exist. The proposed text is correct. The pensioner-record question is correctly left to RA."
+    },
+    {
+      "id_or_column": "31 Mandatory pension and solidarity-fund contributions",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Verified WT 2556, 2553 and 21643 (1 row), and that BW H includes EPS. The proposed text is correct."
+    },
+    {
+      "id_or_column": "32 Voluntary contributions to RAIS",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "BW J = the FVOL wage types (25811-25815, 25823) on all 261 rows. The institutional-plan wage types are zero in September. The proposed text is correct and asks the client to classify each wage type. Minor omission in the finding: the institutional-plan family also includes 65803 'Plan Institucional PROTECCION - Payment' and 65804 'Plan Institucional PROTECCION - IC Bonus' (likely employer-side), which should be on the classification list."
+    },
+    {
+      "id_or_column": "33 Voluntary contributions to voluntary pension funds",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Same evidence as id 32, re-verified. The proposed text is correct and rightly separates employer and employee institutional-plan contributions. Add 65803/65804 to the wage types the client must classify."
+    },
+    {
+      "id_or_column": "34 AFC account contributions",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "BW I = AFC wage types 25800-25808 on 260 of 261 rows. The one exception has a difference of -1,638,657 (I 2,661,343 vs 4,300,000). 62839 Reimbursement AFC has 2 rows. The proposed text is correct."
+    },
+    {
+      "id_or_column": "37 Withholding on work or pension income",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Verified: V = 2552 on 255 of 261 rows, X = 2552 on 201, and V = X on 204. The 6 exceptions have 2552 = 0 and V = 21330. 21129/21140/25832/25833/25834 exist, and Y has 21 distinct values. Small correction: 5 of the 6 exceptions have integral salary 62140 in September, not all 6. The proposed text is correct and leaves the theoretical/hypothetical wage types to the client and RA."
+    },
+    {
+      "id_or_column": "41 Monthly meal payments up to 41 UVT",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Same data as id 12, re-verified (minimum is 20,951, not 293,314). The proposed text for numeral 32 is correct: it is informative, outside numeral 22, and only applies where salary is at or below 310 UVT. It does not repeat the numeral-7 routing questioned under id 12."
+    },
+    {
+      "id_or_column": "49 Tax year reported",
+      "original_verdict": "Explanation to improve",
+      "result": "confirmed",
+      "reason": "Verified: the monthly headers run 01/01/2026..01/09/2026 then 01/10/2025..01/12/2025, U = the 12-month sum on all 86,610 rows, and the title row reads '01-01-2026 - 2026-09-30'. The proposed calendar-year/payment-date text matches the spec's Population Rules."
+    },
+    {
+      "id_or_column": "Uncovered: Base of Withholding M Decrease Prepaid Medicine",
+      "original_verdict": "Client-specific",
+      "result": "confirmed",
+      "reason": "Spot-check: a prepaid-medicine deduction amount used in the monthly ET art. 388 depuration. Format 2276 (spec numerals 1-36) has no numeral for it, so it is not data the spec is missing."
+    },
+    {
+      "id_or_column": "Uncovered: Base of Withholding C Entity Name",
+      "original_verdict": "Client-specific",
+      "result": "confirmed",
+      "reason": "Spot-check: a single payroll-entity name (masked). The informant is identified by NIT (ENV-01) and concept code (N01), not by name, so it is not statutory 2276 data."
+    },
+    {
+      "id_or_column": "Uncovered: Master Data V Employee Group Code",
+      "original_verdict": "Client-specific",
+      "result": "confirmed",
+      "reason": "Spot-check: an internal SAP-style group code (e.g. '1'). It has no 2276 numeral. Operational only."
+    },
+    {
+      "id_or_column": "Uncovered: Master Data R Employment Status",
+      "original_verdict": "Client-specific",
+      "result": "confirmed",
+      "reason": "Spot-check: status 'A' (active). It is useful for population logic (leavers), but it is not a 2276 field."
+    },
+    {
+      "id_or_column": "Uncovered: Master Data O Manager ID",
+      "original_verdict": "Client-specific",
+      "result": "confirmed",
+      "reason": "Spot-check: a masked manager reference. Organisational data with no 2276 numeral."
+    }
+  ],
+  "agreement_rate": 0.9167
+}

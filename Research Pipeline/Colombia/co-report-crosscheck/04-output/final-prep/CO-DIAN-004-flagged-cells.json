@@ -1,0 +1,584 @@
+{
+ "spec": "CO-DIAN-004",
+ "draft": "02-specs-out/CO-DIAN-004-Formulario220-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "flagged": [
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C12",
+   "row": 12,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA worker type 12 (lectiva) or 19 (productiva)."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C14",
+   "row": 14,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Law 1221 of 2008 as amended by Law 2466 of 2025 arts. 52-54. No reporting difference; the electronic payroll carries a dedicated Teletrabajo earning element (NIE158)."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C16",
+   "row": 16,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C37",
+   "row": 37,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "The universal Colombian rule - payment o credit in account. Applies to the electronic payroll (DIAN Resolution 000013 of 2021 art. 3), to Form 350, to Form 220 and to Format 2276."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C45",
+   "row": 45,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "cross-check"
+   ],
+   "broad_patterns": [],
+   "current": "Casillas 79 to 82 identify the dependant. The same dependant is reported in Format 2276 numeral 34, where DIAN cross-checks a dependant claimed by more than one taxpayer."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M4",
+   "row": 4,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "4",
+   "strict_patterns": [
+    "corrected"
+   ],
+   "broad_patterns": [],
+   "current": "SHARP CONTRAST WITH FORM 350. The instruction guide says this number is 'asignado por la natural person o juridica que expide la certificacion' - the EMPLOYER assigns it, not DIAN. On Form 350 casilla 4 is DIAN-assigned and opaque. The engine must therefore maintain its own certificate numbering series and keep it stable, because the employee quotes it. COMPOSITE KEY - position breakdown. Because DIAN prescribes NO structure, the series is Mercans-designed and is fixed here so that it is stable and auditable: positions 1-4 = accrual year AAAA, source PayPeriod.Fiscal_Year, the year the income was earned and NOT the year of issue; position 5 = literal hyphen; positions 6-11 = a six-digit zero-filled consecutive, source Mercans.Certificate_Sequence, restarting at 000001 for each accrual year and unique per employer per year. PERSISTENCE: assigned once and NEVER reused, including after a reissue - a corrected certificate takes the NEXT consecutive and cites the superseded number, because ET art. 378 makes the employee's copy the evidential document and two certificates may not share a number."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M5",
+   "row": 5,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "5",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "verification"
+   ],
+   "current": "NIT of the withholding agent as it appears in casilla 5 of the RUT, WITHOUT the verification digit. The instruction guide is emphatic: 'En ningun caso escriba puntos, guiones o letras'."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "A6",
+   "row": 6,
+   "column_letter": "A",
+   "column_header": "Field Name (EN)",
+   "field_id": "6",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "verification"
+   ],
+   "current": "NIT verification digit"
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M11",
+   "row": 11,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "11",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)"
+   ],
+   "current": "Full corporate name (razon social) of the withholding agent, matching casilla 35 of the RUT; source Company.Legal_Name. Populated only for a legal person or sociedad de hecho. Do NOT copy the payroll organisation label printed in the title block of the client's payroll reports ('1764 - Compañía Colombiana de Tabaco SAS'): it prefixes the internal company code '1764 - ' and is not a reliable source of the RUT name. The same value feeds 'Payer or withholding agent name' on the signature line."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M13",
+   "row": 13,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "24",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "evidence / observed / confirmed"
+   ],
+   "current": "The instruction guide prints a SIX-VALUE list on the form itself: 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Foreign resident ID card, 31 NIT, 41 Passport. That is NARROWER than the electronic payroll list at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP. An employee holding a PEP or a PPT therefore has NO exact code here. SOURCE (client evidence): the client employee master holds NO document-type field. It holds one column per document - 'National ID', 'Identity Card', 'Indentity Card for Foreigners', 'Citizenship Card ID' - and 14 of 261 employees have two or three of them populated. The engine must store an explicit Employee.Document_Type for the document actually certified in casilla 25, not infer it from which column is filled. The mapping of the client columns to Form 220 codes must be confirmed with the client: 'Citizenship Card ID' -> 13 and 'Indentity Card for Foreigners' -> 22 are the evident candidates; 'National ID' and 'Identity Card' have no evident code (they appear next to a Citizenship Card for Colombian nationals)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M14",
+   "row": 14,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "25",
+   "strict_patterns": [
+    "round (1/2)",
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "Sep-2026 / September 2026",
+    "report names",
+    "CLIENT DATA labels"
+   ],
+   "current": "Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number column of the employee master that matches casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'). In the client's Accumulated Report the column 'EE Citizenship Card ID' carries the document number for 248 of 261 employees and is blank for most holders of a foreigner's card (13 blanks, all foreigner-card holders); it is not a complete source. Do NOT use the column 'ID Number' of the Accumulated Report or of the Base of Withholding: it is the internal employee number (equal to Master Data 'Employee ID' for 261 of 261 employees), not an identity document; both reports also end with footer rows ('GRAND TOTAL'; 'Confidential' in Master Data) that must be excluded. COVERAGE GAP: the Accumulated Report has 1,038 payees, of whom 777 (491 pension payees of 62154 and 286 others, 132 of them paid 62100 Ordinary Salary in September 2026) have no row in the employee master data report, so a document-number source is missing for them. For pension rows the client also records a separate payee ('Beneficiary National Id'), whose meaning (substitute pensioner or third-party payee) is not confirmed; see casilla 50. CLIENT EVIDENCE (tax-year-2025 Form 220 working table): for the 34 retirement-payment payees certified (wage types 62151 / 62152, none in the employee master, 26 of them in the round-1 Accumulated Report), casilla 25 equals the Accumulated Report column 'EE Citizenship Card ID' in 34 of 34 cases (the 'Beneficiary National Id' is blank on their rows); casillas 26-29 carry split names, which the Accumulated Report does not hold, so the client keeps an identity source for non-employee payees that has not been received and must be named (see Query to RA)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M20",
+   "row": 20,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "30",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M"
+   ],
+   "current": "First day of the certified period, output as AAAA MM DD. Normally 1 January of the tax year, but the start date of the employment relationship where the employee joined during the year. Bidirectional pair with casilla 31. SOURCE (to be confirmed with the client): the client employee master carries three start dates - 'Hire Date' and 'Original Hire Date' (format DD-MM-YYYY) and 'Adjusted Service Date' (format YYYY-MM-DD); 'Hire Date' differs from 'Original Hire Date' for 40 of 261 employees, where the original date points to earlier service (masked example: Hire Date 01-03-2026, Original Hire Date 27-02-2014). Use the start of the employment relationship current in the tax year (candidate: 'Hire Date') and convert the source format to AAAA MM DD."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M23",
+   "row": 23,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "33",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)"
+   ],
+   "current": "City or municipality where the withholding was practised - not necessarily the employer's registered domicile, and not necessarily the employee's place of work. It is a withholding-agent parameter (an employer setting), not an employee attribute: the client prints one fixed value, 'MEDELLIN' (upper case, no accents), on every row of its tax-year-2025 Form 220 working table, which pairs it with the DIVIPOLA code 05001 in the casilla-34 and casilla-35 columns. Output the municipality NAME that corresponds to the DANE code of casillas 34 and 35, so that the three casillas always describe the same place."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M24",
+   "row": 24,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "34",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "CLIENT DATA labels"
+   ],
+   "current": "DANE department code of the place in casilla 33: the FIRST TWO digits of the five-digit DIVIPOLA municipality code. The instruction guide directs the use of the DANE 'Department codes' tables. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 working table holds the five-digit code '05001' (Medellin, Antioquia) in both the casilla-34 and the casilla-35 columns on all 651 rows; its printed certificate shows two different values in casillas 34 and 35, so the split is done before printing. Hold the five-digit DIVIPOLA code of the place of withholding once and split it - casilla 34 = '05', casilla 35 = '001' - never output five digits in either casilla."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M25",
+   "row": 25,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "35",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "CLIENT DATA labels"
+   ],
+   "current": "DANE municipality code of the place in casilla 33: the LAST THREE digits of the five-digit DIVIPOLA code (e.g. '001' for 05001 Medellin). Like PILA and unlike the electronic payroll, Form 220 splits the DIVIPOLA code across two casillas. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 working table carries the full code '05001' in the column in the casilla-35 position as well as in the casilla-34 column, on all 651 rows; its printed certificate shows two different values in casillas 34 and 35, so the split is done before printing. See casilla 34 for the split rule."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M27",
+   "row": 27,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "36",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "Sep-2026 / September 2026",
+    "report names",
+    "decision / pending / query",
+    "evidence / observed / confirmed"
+   ],
+   "current": "Total salary payments ACTUALLY MADE in the period to a resident natural person whose income derives from an employment or statutory relationship. The instruction guide quotes CST art. 127 in full: salary is not only the ordinary fixed or variable remuneration but everything the employee receives in money or in kind as direct consideration for the service - primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. EXCLUSION RULE: do NOT include here any value belonging in casillas 38 to 46. CLIENT MAPPING: salary wage types evidenced in the client's accumulations include 62100 Ordinary Salary, 62101 Arrears - Ordinary salary, 62140 Integral Salary (the full integral salary, including the factor prestacional), 62141 Arrears-Integral Salary, 62118 Incentive Compensation - IC Local Country, 62133 Variable, 62208 March Bonus, 62209 Christmas Bonus, 62210 August Bonus, 62225 Salary Attendance Bonus-Monthly, 62228 Years of Service Bonus - CLA, 62113 Weekend payoff and 62841 / 62842 / 62845 overtime and night, Sunday or holiday surcharges. The client's 'Salary Payment Indicator' flag ('X', set on 30 wage types) must NOT be used as the casilla-36 rule on its own: it is also set on vacation pay (79401 Annual leave payout, 62116 Vacation Terminations, 62150 Vacation Bonus) and on per diems (62805-62808), which belong to casillas 42 and 43, and on the leave payouts 79405-79419 (marriage, maternity, paternity, sick-leave, bereavement, paid and jury leave payouts), whose casilla needs an RA decision; and it is absent from other bonuses (e.g. 62229 Years of Service Bonus NON CLA, 62224 Quarterly Salary Attendance Bonus, 62202 Ocassional Bonus Grossed Up). The engine needs an explicit wage-type-to-casilla table approved by the RA. Salary paid abroad to expatriates (25830 Salary paid in Foreign Countries, 65838 Incentive Compensation - IC-1001 Foreign Country) needs an RA decision. PERIOD: sum the payments made from 1 January to 31 December of the tax year; never a rolling 12-month total (the client's Accumulated Report 'Total' is a rolling 12-month total, October 2025 to September 2026)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M28",
+   "row": 28,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "37",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "evidence / observed / confirmed",
+    "CLIENT DATA labels"
+   ],
+   "current": "Payments made in electronic or paper service vouchers, cheques, cards or vales - for fuel, school supplies, footwear and clothing, or any other purpose. Deductible for the employer and income for the employee. THREE EXPLICIT NOTES in the instruction guide: (1) INCLUDE meal payments for an employee earning MORE than 310 UVT per month; (2) do NOT include meal payments for an employee earning up to 310 UVT - those go to casilla 38; (3) do NOT include anything already reported in casilla 36. CLIENT EVIDENCE: the client books in-kind benefits paid to third parties as informative earning wage types ('Inf.') offset by an equal deduction - e.g. 65818 Meal Allowance Inf.-2079 offset by 21115 Meal Allowance Inf. Deduction-2644 (identical totals) - and the same pattern for 65811 Gym Allowance Inf.-6969, 65809 / 65839 Optical Allowance Inf, 65812 Text Books Allowance - Inf-6971, 65801 / 65814 / 65815 / 65831 Private Health Insurance Inf and 65817 / 65837 Life Insurance-Inf. Each must be assigned by the RA to casilla 37, 38 or 46 or to no casilla; the meal item 65818 is subject to the 41 UVT / 310 UVT test of casillas 37-38. The offsetting deduction wage types are payroll mechanics and are not themselves casilla values."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M29",
+   "row": 29,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "38",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "report names",
+    "CLIENT DATA labels"
+   ],
+   "current": "Where the employer pays a THIRD PARTY for the employee's or their family's meals - a restaurant, own or third-party, or vouchers for food - the payment is deductible for the employer and is NOT income for the employee but for the supplier, PROVIDED the employee's salary does not exceed 310 UVT (COP 16,235,940 per month in 2026). Where the monthly payments exceed 41 UVT (COP 2,147,334 in 2026), THE EXCESS is taxable income of the employee and is withheld as employment income. The instruction guide adds that the rule does not apply to company representation expenses, which remain deductible. Do NOT include amounts already in casilla 36. CLIENT EVIDENCE: meal payments to third parties are wage type 65818 Meal Allowance Inf.-2079, available per employee per month (non-zero in all 12 months of the Accumulated Report). Run the test MONTH BY MONTH per employee: the month's meal payment against 41 UVT and the employee's monthly salary against 310 UVT, using the UVT parameter of the tax year (52,374 for 2026); do NOT read the UVT from the accumulated client wage type 58001 UVT, which is not always the UVT (it is doubled or altered in months with two payroll runs or retro runs). The casilla is the sum of the monthly excesses over the tax year."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M34",
+   "row": 34,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "43",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M"
+   ],
+   "current": "Per diems paid to cover transport, subsistence and accommodation while the employee works away from the habitual place of work. The instruction guide cites Ministry of Labour Concept 23959 of 13 February. Note the split that matters elsewhere: the PERMANENT portion is salary under CST art. 130 and feeds the contribution base, while the accidental portion does not - the electronic payroll carries them as the paired ViaticoManuAlojS / NS elements. CLIENT MAPPING: wage types 62805 Hotel per diem, 62806 Breakfast per diem, 62807 Lunch per diem and 62808 Dinner per diem. The client flags them with 'Salary Payment Indicator' = X; they are still reported here and not in casilla 36, under the casilla-36 exclusion rule."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M37",
+   "row": 37,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "46",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "decision / pending / query",
+    "CLIENT DATA labels"
+   ],
+   "current": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. CLIENT EVIDENCE - earning wage types with no evident dedicated casilla, each needing an RA placement decision (casilla 36, 42, 46 or not certified): 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout. The engine must hold an explicit wage-type-to-casilla table; no earning wage type may be left unassigned. CLIENT PRACTICE (tax-year-2025 Form 220 working table): the client certifies the whole income of its 34 retirement-payment payees (62151 Retirement Payment - PRV-6795 and 62152 Retirement Payment - Catleya-6796) in casilla 46 'Otros pagos', with casilla 50 = 0. This conflicts with the casilla-50 treatment if the RA classifies these wage types as pension income - see the Query to RA of casilla 50. Do not adopt either placement until the RA answers."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M41",
+   "row": 41,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "50",
+   "strict_patterns": [
+    "round (1/2)"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "PMI",
+    "Sep-2026 / September 2026",
+    "report names",
+    "evidence / observed / confirmed",
+    "CLIENT DATA labels"
+   ],
+   "current": "Pension income paid BY THE EMPLOYER. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. THIS CLIENT IS A PENSION PAYER: its accumulations carry 62154 Monthly Retired  Pension-6798 (491 pension payees, about COP 600-660 million a month), 62153 Additional Retirement Pension (paid in December and June), 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the RA must confirm which of these are pension income for this casilla. Pension payees are NOT in the client's employee master data report, so their identification (casillas 24-29) needs a pensioner master source. On 330 of the 491 pension rows of 62154 the client records a 'Beneficiary National Id' different from the pensioner's own document (and on 328 rows a 'Beneficiary Name' different from the employee name), i.e. a different payee (substitute pensioner or third-party payee - to be confirmed); the same columns are also filled for employees, where they match the bank-payment beneficiary, so their meaning on pension rows is not confirmed. The RA and the client must confirm to whom the certificate is issued. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54. CLIENT PRACTICE (tax-year-2025 Form 220 working table): the 34 payees certified are all recipients of 62151 (26) or 62152 (8), none of 62154 and none in the September 2026 employee population; the client reports casilla 50 = 0 and the whole amount in casilla 46 'Otros pagos'. Withholding (casilla 60) is non-zero for 23 of them, 22 of whom carry 21140 Personal Income Tax Withholding-Retirees in the accumulations. The certified amounts are partially reconcilable: the round-1 Accumulated Report (Oct 2025 - Sep 2026) holds Oct-Dec 2025 amounts of 62151 / 62152 for 25 of the 34, so only the fourth quarter of 2025 can be checked, not the full tax year. The client's casilla for the 62154 monthly pensioners is not evidenced."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M42",
+   "row": 42,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "51",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Non-reimbursable or forgiven educational support delivered or financed by the State. Where the EMPLOYER pays it directly it is reported here and in Format 2276 numeral 16; where a third party administers it, DIAN Resolution 000227 of 2025 art. 1.3.7.1.1 para. 7 sends it to Format 5247 concept 5102 instead."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M43",
+   "row": 43,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "52",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "CLIENT DATA labels"
+   ],
+   "current": "The form prints the arithmetic on its face: 'Sume 36 a 51'. Sixteen casillas, summed. This is GROSS income, before the contributions and deductions in casillas 53 to 58. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 table and printed certificate show casilla 52 = 0 on all 34 certified rows although casilla 46 is non-zero on every one of them. The engine must always compute casilla 52 from casillas 36 to 51 as printed on the form ('Total de ingresos brutos (Sume 36 a 51)'), never copy a total from a client source, and must block the certificate where casilla 52 differs from that sum."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M45",
+   "row": 45,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "53",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "Sep-2026 / September 2026",
+    "report names"
+   ],
+   "current": "The employee's own mandatory health contributions ACTUALLY DEDUCTED in the period. These are non-taxable income de renta and are what reduces the ET art. 388 depurated base. Must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55. CLIENT MAPPING: wage type 2554 Medical Plan - Healthcare Insurance (EPS ) Employee; for pension payees, 21645 / 21646 / 21647 Medical Plan - Healthcare Insurance (EPS ) - Pensioner. The client's Base of Withholding column 'Obligatory Contributions to EPS , AFP  Solidarity and Subsistence' is the SUM of health, pension and solidarity (equal to 2554 + 2556 + 2553 for 261 of 261 employees in September 2026) and cannot feed casilla 53 on its own. The NIE163 / PILA reconciliation applies to wage type 2554."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M46",
+   "row": 46,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "54",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "report names"
+   ],
+   "current": "The employee's mandatory pension contributions AND the solidarity-fund surcharge, TAKEN TOGETHER IN ONE CASILLA. Note the asymmetry with the electronic payroll, which insists on reporting them as separate elements (NIE166 for pension, NIE168 and NIE170 for the two solidarity sub-accounts). The engine must keep them separate internally and sum them only here. CLIENT MAPPING: 2556 Pension Plan Mandatory - AFP Employee + 2553 Solidarity Pension Fund (+ 21643 Solidarity Pension Fund-Pensioner for pension payees). The client's Base of Withholding combined contributions column cannot split casillas 53 and 54."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M48",
+   "row": 48,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "56",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "Sep-2026 / September 2026",
+    "report names",
+    "decision / pending / query"
+   ],
+   "current": "Voluntary contributions to voluntary pension funds under ET art. 126-1 and DUR 1625 de 2016 art. 1.2.1.22.41. Shares the ET art. 336 40% / 1,340-UVT annual cap with AFC and AVC. CLIENT MAPPING: wage types 25811 Pension Voluntaria Porvenir (FVOL), 25812 Pension Voluntaria Proteccion (FVOL), 25813 Pension Voluntaria Skandia (FVOL), 25814 Pensiones Voluntarias Metlife (FVOL), 25815 Dafuturo (FVOL) and 25823 Pension Voluntaria colfondos (FVOL); their September 2026 sum equals the Base of Withholding column 'Contribution  APV' for 261 of 261 employees. The institutional-plan wage types 21210 / 21211 Plan Institucional PROTECCION and 25820 / 25821 Plan Institucional PROTECCION - IC Bonus need an RA decision (casilla 56 or not). Wage type 21193 Foncoltabaco voluntary contribution is a contribution to an employee fund, not to a pension fund, and is listed for the RA as not certified here. Because several of these fund managers also run mandatory RAIS accounts, the engine must tag each voluntary contribution as RAIS (casilla 55) or voluntary fund (casilla 56); the client data carries no such tag."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M49",
+   "row": 49,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "57",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026",
+    "report names",
+    "evidence / observed / confirmed"
+   ],
+   "current": "Deductions to Ahorro para el Fomento de la Construccion accounts - programmed housing savings. Corresponds to electronic payroll NIE179. CLIENT MAPPING: wage types 25800-25808 (AFC AV Villas, Banco Bogota, Bancolombia, Davivienda, Banco ITAU, Banco BBVA, Colpatria, Banco Caja Social, Banco Occidente); their September 2026 sum equals the Base of Withholding column 'Contribution  AFC' for 260 of 261 employees. Any AFC refund booked as earning 62839 Reimbursement AFC must be netted [RA to confirm]. The SAP journal upload 'CARGA MASIVA AFC' is aggregated per bank, has no per-employee rows and is not a source."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M52",
+   "row": 52,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "60",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "Sep-2026 / September 2026",
+    "report names",
+    "decision / pending / query"
+   ],
+   "current": "THE PRINCIPAL WITHHOLDING CASILLA. Total withholding at source practised on this employee's work and pension income during the certified period. Feeds casilla 75 together with casilla 74. Must reconcile to twelve months of electronic payroll NIE177 for this employee, and the sum of casilla 60 across all employees must reconcile to twelve months of Form 350 casilla 93 - allowing for the rounding conventions. CLIENT MAPPING: the withholding practised is wage type 2552 Income Tax (employee) plus 21129 Personal Income Tax Withholding-Terminations- 541T (a separate deduction on termination payments - COP 63.13 million in January 2026 for one employee who also had 2552 that month) and 21140 Personal Income Tax Withholding-Retirees- 6799. Wage types 21330 Personal Income Tax Withholding (Theoretical) and 25834 Hypothetical Witholding Tax  - IC Foreign Country are notional and are NOT certified; 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax  - IC Local Country need an RA decision. The client's monthly 'Base of Withholding' shows two results, 'WITHOLDING TAX WITH CONTRIBUTION' and 'WITHOLDING TAX WITHOUT CONTRIBUTION'; which one is the withholding certified is an open decision (in September 2026 the 2552 amount equals the WITH CONTRIBUTION value for 234 of 240 matched employees and the WITHOUT value for 180). 'CONTINGENT WITHHOLDING' (WITHOUT minus WITH where positive) is not part of 2552 and is not certified here. Sum January to December of the tax year; never a rolling 12-month total."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M67",
+   "row": 67,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "78",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)"
+   ],
+   "current": "Total debts outstanding at 31 December. Employee-supplied. The printed label carries the year of the balance ('Deudas vigentes a 31 de diciembre de' + tax year): print the tax year certified, never a fixed year - the client's tax-year-2025 template still prints 2024."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M68",
+   "row": 68,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "79",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "Identity document type of the economic dependant, under ET art. 387 par. 2. The dependants deduction is 10% of gross employment income capped at 32 UVT per month (COP 1,675,968 in 2026), so a claimed dependant materially reduces the withholding base and must be evidenced."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M69",
+   "row": 69,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "80",
+   "strict_patterns": [
+    "cross-check"
+   ],
+   "broad_patterns": [],
+   "current": "Identity number of the dependant. Also reported in Format 2276 numeral 34, which is where DIAN cross-checks a dependant claimed by more than one taxpayer."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M75",
+   "row": 75,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "(unnumbered)",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)"
+   ],
+   "current": "Name of the payer or withholding agent printed on the line that follows casilla 60, before the 'Datos a cargo del trabajador o pensionado' section - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), not the payroll organisation label with the company-code prefix ('1764 - ...') shown in the client reports' title block. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A2",
+   "row": 2,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "VERIFIED header"
+   ],
+   "current": "═══ SUBMISSION FORMAT - VERIFIED (V2.7 STEP 3.5) ═══"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B7",
+   "row": 7,
+   "column_letter": "B",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "The employer retains the issued certificate as evidence of the withholding. Where the employee signs the six ET art. 380 declarations, the certificate substitutes for their income-tax return, so its evidential value runs beyond the employer."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D10",
+   "row": 10,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "THIS LIST IS NARROWER THAN THE ELECTRONIC PAYROLL LIST at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP. There is NO code here for a PEP holder and none for a PPT holder (Decree 216 of 2021) - which is the document the large majority of regularised Venezuelan migrants now hold. Escalated in column T of casilla 24."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D13",
+   "row": 13,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Severance RECOGNISED under the pre-1991 retroactive regime, for employees hired before 1 January 1991 who did not elect the Law 50 of 1990 regime. Format 2276 numeral 20 - NOT 19."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D14",
+   "row": 14,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "The amount DEPOSITED to the employee's chosen fund by 14 February under Law 50 of 1990 art. 99. Format 2276 numeral 19 - NOT 20. Must reconcile to CO-SEVERANCE SAVINGS-006."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D9",
+   "row": 9,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "Reconcile to twelve months of electronic payroll NIE177 for this employee BEFORE issuing. A certificate that disagrees with the transmitted documents is evidence against the employer, because the XML is the tax support for the cost."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D23",
+   "row": 23,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "cross-check"
+   ],
+   "broad_patterns": [],
+   "current": "The same dependant is reported in Format 2276 numeral 34, which is where DIAN cross-checks a dependant claimed by more than one taxpayer. Keep the two consistent or the employee receives an enquiry."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C9",
+   "row": 9,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "verification"
+   ],
+   "current": "Employer NIT and verification digit."
+  }
+ ]
+}

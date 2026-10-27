@@ -1,0 +1,20 @@
+L1
+   ANTES : # CI — Côte d'Ivoire Federal Payroll — Clean-Room Regulation Design v1.1
+   DEPOIS: # CI — Côte d'Ivoire Federal Payroll — Clean-Room Regulation Design v1.2
+L89
+   ANTES : | 58211 | CNPS PF/AM/AT-MP Shared Base (58209, ceiling 70 000) | Debit |
+   DEPOIS: | 58211 | CNPS PF/AM/AT-MP Shared Base (58209, ceiling 75 000) | Debit |
+L128
+   ANTES : | 141 | 9384141 | CNPS PF/AM/AT-MP Shared Base (ceiling 70 000) | Social Security | `_table` | Flat |
+   DEPOIS: | 141 | 9384141 | CNPS PF/AM/AT-MP Shared Base (ceiling 75 000) | Social Security | `_table` | Flat |
+L220
+   ANTES : **Band:** ceilingAmount 70 000, unitAccount 58209 → debitAccount 58211. One base intermediate feeds three separate employer-only regs (9384311/321/331) — no need to recompute the 70 000 cap three times.
+   DEPOIS: **Band:** ceilingAmount 75 000, unitAccount 58209 → debitAccount 58211. One base intermediate feeds three separate employer-only regs (9384311/321/331) — no need to recompute the 75 000 cap three times.
+L301
+   ANTES : All verified against CCG Examples (600 000 case: 46 200 / 3 500 / 525 / 2 100 (@3%) / 500 — reproduced identically in Modules 3, 5, and 12.1).
+   DEPOIS: All verified against CCG Examples (600 000 case: 46 200 / 3 750 / 563 / 2 250 (@3%) / 500 — reproduced identically in Modules 3, 5, and 12.1).
+L423
+   ANTES : | Employer on-cost | 9384301/311/321/331/341/361/371/381/351 | 46 200+3 500+525+2 100+500+7 200+2 400+7 200+0 = **69 625** | 69 625 | ✅ |
+   DEPOIS: | Employer on-cost | 9384301/311/321/331/341/361/371/381/351 | 46 200+3 750+563+2 250+500+7 200+2 400+7 200+0 = **70 063** | 70 063 | ✅ |
+INSERIDO antes do changelog v1.1:
+   **v1.2 changelog (2026-10-16):** CNPS PF / AM / AT-MP ceiling corrected 70 000 → 75 000 XOF/month from 1 Jan 2023 (CNPS communiqué of 11/01/2023; Loi 99-477 art. 23) — 9384141 band, 58211 label, verification figures (3 750 / 563 / 2 250; on-cost 70 063, AM rounded to the whole franc per CCG §1.5). No structural change.

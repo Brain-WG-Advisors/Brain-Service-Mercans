@@ -1,0 +1,16 @@
+# Phase 2A - one withholding rule in CO-DIAN-001 / -002 / -004 (HANDOFF-2026-10-21 section 8), 21 Oct 2026
+
+Conflict (OPEN-POINTS-2026-10-21 section 1): CO-DIAN-004 casilla 60 (M52) excluded WT 21330 by name as notional; CO-DIAN-002 casilla 93 (M23, Report Matrix A40, Population Rules C5) and CO-DIAN-001 RetencionFuente (M191) include it 'where it carries the withholding actually deducted'. Casilla 60 must reconcile to twelve months of 350 casilla 93 and of NIE177 (stated in the same cell), so the three must apply the same rule.
+
+Rule (statutory, not a WT classification): only withholding actually practised is declared (350 casilla 93) and certified (220 casilla 60) - ET art. 378 (certificate of income and withholding for employees) and art. 379 lit. h ('monto de las retenciones practicadas'); instruction guide of Form 220 (Res. DIAN 000022/2024), casilla 60: 'el total de las retenciones en la fuente a título del impuesto sobre la renta practicadas al trabajador o pensionado en el período'. Whether WT 21330 carries withholding actually practised is the WTC attribute of that WT (client / configuration), not decided here.
+
+Change (one cell): CO-DIAN-004 'Formulario 220 Spec'!M52 - the sentence "Wage types 21330 ... and 25834 ... are notional, not withholding practised, and are NOT certified; the same exclusion applies to every wage type that computes a theoretical, hypothetical or contingent withholding." becomes "Wage type 21330 Personal Income Tax Withholding (Theoretical) is certified only where it carries the amount actually deducted from the employee and remitted to DIAN; the hypothetical-tax wage type 25834 Hypothetical Witholding Tax  - IC Foreign Country is not withholding and is not certified; no theoretical, hypothetical or contingent amount is certified." (same wording as CO-DIAN-001 M191). CO-DIAN-001, -002 and -005 unchanged (CO-DIAN-005 does not name these WTs).
+
+Map: `final-prep/CO-DIAN-004-phase2a-map.json`. Verification: independent verifier -> `final-prep/PHASE2A-verification.json`; then `make_final.py CO-DIAN-004 --on-final --map phase2a-map`.
+
+## Pass 1 verifier (21 Oct): PASS, plus follow-ups now included
+- Nit: the closing clause of the new sentence repeated the cell's opening ("no hypothetical, theoretical or contingent amount is certified") - removed.
+- Citations of this note corrected: ET arts. 375 / 381 -> ET arts. 378 / 379 lit. h (art. 375 = duty to withhold; art. 381 = certificates for other withholdings).
+- Reconciliation target: casilla 60 (220) and numeral 29 (2276) cover work AND pension withholding; NIE177 (NE) likewise; Form 350 splits them into casilla 93 (work) and 94 (pensions) and CO-DIAN-002 already reconciles 93 + 94 to NIE177. Every cell reconciling to "casilla 93" alone now reads "casillas 93 plus 94": CO-DIAN-004 Report Matrix A40, M52, Population Rules C29, Example Analysis D27; CO-DIAN-005 Report Matrix A40, M37, Population Rules C31, Example Analysis D27; CO-DIAN-001 Report Matrix A39, M191 (twice), Population Rules C35. CO-DIAN-001 Example Analysis B46 ('-> Form 350 casilla 93') is a worked example of an employee and stays.
+- CO-DIAN-001 M191: 25832 / 25833 now carry the same WTC condition as CO-DIAN-002 and -004.
+Maps: final-prep/CO-DIAN-004-phase2a-map.json (4 cells), CO-DIAN-005-phase2a-map.json (4), CO-DIAN-001-phase2a-map.json (3).

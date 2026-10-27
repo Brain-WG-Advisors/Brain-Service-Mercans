@@ -10,10 +10,12 @@
 | 2 | Design | [[design]] |
 | — | Produção / ativação (outro time) | [[fronteiras]] |
 | 3 | Suporte | [[suporte]] |
+| — | Análise de Reports (Internal Certification) | [[analise-reports]] |
 
 ## Sempre ler
 - [[correcoes]]: erros já cometidos e a versão correta
 - [[fronteiras]]: o que não é nosso
+- [[uso-de-ia]]: regras da Mercans para uso de IA (treinamento QCRM Q3 2026) e pontos a confirmar
 
 ## Painel de países
 | País | Research | Design | Suporte | Hub |

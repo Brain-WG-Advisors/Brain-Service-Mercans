@@ -1,0 +1,77 @@
+{
+  "map": "04-output/final-prep/CO-DIAN-001-phase2d-map.json",
+  "final": "05-final/CO-DIAN-001-NominaElectronica-Spec.xlsx",
+  "verified_on": "2026-10-21",
+  "verdict": "FAIL - one required fix (inexact quote in C22); everything else passes",
+  "checks": [
+    {
+      "id": 1,
+      "check": "'current' equals live cells",
+      "result": "PASS",
+      "evidence": "Payroll Scope Summary A22 = 'Pensioner whose pension is paid by a fund, not by the employer', B22 = 'NO', C22 = 'The paying fund is the withholding agent and the reporting party, not the employer.' - identical to the map."
+    },
+    {
+      "id": 2,
+      "check": "quotes and articles exact against Res. DIAN 000227/2025 (local PDF)",
+      "result": "FAIL",
+      "evidence": [
+        "Art. 1.5.3.1.1 num. 5 (p. 243 of 449): '5. Beneficiario del pago: Se entiende como beneficiario del pago, a las personas naturales vinculadas mediante una relacion laboral o legal y reglamentaria y los pensionados a cargo del empleador, en relacion con estas actividades.' - the C22 paraphrase 'the pensioner is a beneficiary of the payment' is faithful. PASS.",
+        "Art. 1.5.3.2.3 (p. 246): '...que realizan pagos o abonos en cuenta que se derivan de una vinculacion, por una relacion laboral o legal y reglamentaria y por pagos a los pensionados a cargo del empleador, que requieran soportar los costos y deducciones...'. The string quoted in C22, 'los pagos a los pensionados a cargo del empleador', does NOT appear anywhere in Title 1.5.3 (all 'pensionad' hits pp. 237-256 checked: pp. 243, 244, 245, 246, 247, 251). The text reads 'por pagos a los pensionados a cargo del empleador'. Also, art. 1.5.3.2.3 defines the obliged subjects (who must generate the document), not what 'the document supports'; the 'document ... derived from ... los pensionados a cargo del empleador' wording is art. 1.5.3.2.1 (p. 245), already cited in C21."
+      ]
+    },
+    {
+      "id": 3,
+      "check": "'VARIES' already used in column B of the sheet",
+      "result": "PASS",
+      "evidence": "B41 = 'VARIES' (corrections row). Other column-B values: YES / NO."
+    },
+    {
+      "id": 4,
+      "check": "row coherent with the rest of the spec; nothing contradicts 'employer-paid pensioners are in the document'",
+      "result": "PASS (with one advisory)",
+      "evidence": [
+        "A17/C17 (employed old-age pensioner in active service, sub-type 01) is a different population - no conflict.",
+        "C21 already says the document supports 'pensions borne by the employer' (art. 1.5.3.2.1) - consistent with the new YES branch.",
+        "M183, M185, Field Options C55/D55/D98, Population Rules C33 deal only with SubTipoTrabajador 01 (employed pensioner) - no conflict.",
+        "M191 already includes 'the pension income the employer pays itself' and WTs 21140 / 21155 - consistent.",
+        "Field Options C49/C50 (codes 54/56 pre-pensioners) - no conflict.",
+        "ADVISORY (not blocking, pre-existing cell): Nomina Electronica Spec M54 ends 'an employed old-age pensioner is 01, everyone else is 00'. With employer-paid pensioners now in the document, this sentence reads as assigning SubTipoTrabajador 00 to them, i.e. a coding without DIAN instruction (RA F5: NOT LOCATED). Suggest Wallisson decides whether to narrow it (e.g. 'an employed old-age pensioner is 01; an employee who is not one is 00') or record it in OPEN-POINTS."
+      ]
+    },
+    {
+      "id": 5,
+      "check": "Standards: no process words, no internal refs, no unsourced coding rule",
+      "result": "PASS",
+      "evidence": "WORDS regexes from scripts/make_final.py run on the three proposed strings: 0 hits. No CO-GAP / scope_manifest / RA / OPEN-POINTS / item ids. No TipoTrabajador / SubTipoTrabajador / TipoContrato / code / Devengados element named; the YES branch states scope only, with the legal source."
+    }
+  ],
+  "required_fixes": [
+    {
+      "cell": "Payroll Scope Summary!C22",
+      "issue": "Quoted text 'los pagos a los pensionados a cargo del empleador' is not in Res. DIAN 000227/2025; art. 1.5.3.2.3 reads 'por pagos a los pensionados a cargo del empleador' and is the obliged-subject article, not the document-content article.",
+      "suggested_text": "Paid by a fund: NO - the paying fund is the withholding agent and the reporting party, not the employer. Paid directly by the employer (pensioner 'a cargo del empleador'): YES - the document supports the payments 'que se desprenden de una relacion laboral o legal y reglamentaria y los pensionados a cargo del empleador', the employer that makes payments 'a los pensionados a cargo del empleador' is obliged to issue it, and the pensioner is a beneficiary of the payment (Res. DIAN 000227 de 2025 arts. 1.5.3.2.1, 1.5.3.2.3 and 1.5.3.1.1 num. 5).",
+      "note": "In the final, keep the accents of the official text (relación). Minimum alternative: change only the quote to 'pagos a los pensionados a cargo del empleador' and the verb to 'the employer that makes ... is obliged to issue the document'."
+    }
+  ],
+  "advisories": [
+    "Nomina Electronica Spec!M54 'everyone else is 00' now implicitly codes employer-paid pensioners as SubTipoTrabajador 00 (no DIAN instruction) - Wallisson to decide; not part of this map."
+  ],
+  "second_pass": {
+    "verified_on": "2026-10-21",
+    "verdict": "FAIL - one required fix (M54 wording); C22 and the other edits pass",
+    "checks": [
+      "current == live for A22, B22, C22 and Nomina Electronica Spec M54: PASS.",
+      "C22 quotes are literal: 'que se desprenden de una relación laboral o legal y reglamentaria y los pensionados a cargo del empleador' = art. 1.5.3.2.1 (p. 245); 'a los pensionados a cargo del empleador' is a substring of art. 1.5.3.2.3 (p. 246, '...y por pagos a los pensionados a cargo del empleador...'); the num. 5 paraphrase matches p. 243. Articles correctly attributed: PASS.",
+      "WORDS (scripts/make_final.py) on all 4 proposed strings: 0 hits. No internal references: PASS.",
+      "M54 'every other worker is 00': still ambiguous. The pensioner is reported in the /NominaIndividual/Trabajador block, so a developer will read 'worker' as every person in that block, employer-paid pensioners included, which is still an implied SubTipoTrabajador 00 (RA F5: NOT LOCATED). FAIL."
+    ],
+    "required_fixes": [
+      {
+        "cell": "Nomina Electronica Spec!M54",
+        "issue": "'every other worker is 00' still reaches employer-paid pensioners, who are reported in the Trabajador block.",
+        "suggested_text": "Annex table 5.5.4 recognises only TWO values: 00 No Aplica and 01 Dependiente pensionado por vejez activo. This is much narrower than the twelve-value PILA subtipo list; an employed old-age pensioner is 01, every other employee is 00.",
+        "note": "'employee' (the spec's term for a person in an employment relationship) leaves the retired, employer-paid pensioner uncoded. Optional: also restore the official label of code 01, 'Dependiente pensionado por vejez activo' (Field Options C55), which is currently half-translated in M54."
+      }
+    ]
+  }
+}

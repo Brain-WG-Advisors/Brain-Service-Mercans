@@ -1,0 +1,913 @@
+{
+ "spec": "CO-DIAN-005",
+ "round": 3,
+ "report_file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+ "fields": [
+  {
+   "id": 3,
+   "name": "═══ reporting entity and beneficiary(numerals 1 to 4) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "A-K",
+     "example_masked": "11 columns: A Entidad Informante ... K País del beneficiario"
+    }
+   ],
+   "finding": "Section header, not a field. The client's columns A-K are the 11 annex attributes (entinfo, tdocb, nitb, pap, sap, pno, ono, dir, dpto, mun, pais) in annex order, i.e. numerals 1-4 of the resolution split exactly as the spec describes (N02 = 2 columns, N03 = 4, N04 = 4).",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 4,
+   "name": "Reporting entity concept",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "A Entidad Informante",
+     "example_masked": "'1' on 1035 of 1035 rows (text, length 1)"
+    }
+   ],
+   "finding": "Value 1 (Informante general) on every record, exactly as Res. 227 par. 4 requires for an employer reporting work and pension income; numerals 35 and 36 are zero/blank on every record (columns AQ-AS), consistent with par. 4. Field Explanation, Option Values, Rounding, Negative and Value Type are correct. Only the Field Length differs from the annex: attribute entinfo is 'int 2' (XSD pattern [0-9]{1,2}); the spec says 1. Format 'N (code 1 to 8)' stays.",
+   "proposed_explanation": "Field Length: 2 (annex attribute entinfo, int 2; the valid codes are 1 to 8).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 par. 3 and 4; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute entinfo int 2"
+  },
+  {
+   "id": 5,
+   "name": "Beneficiary document type and identification number",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "B Tipo de documento del beneficiario",
+     "example_masked": "13 x 1015, 22 x 18, 12 x 2 (text, 2 characters)"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "C Número de Identificación del beneficiario",
+     "example_masked": "text, digits only, 5-10 characters (8: 571, 10: 326, 7: 121, 6: 15, 5: 2); 145 values start with 0 in the masked copy; no dots or hyphens; 1035 distinct"
+    }
+   ],
+   "finding": "Two columns as the spec says (type code + number as text). The three codes used (13 CC, 22 CE, 12 TI) are all in the spec's 'Tipo de documento (numerals 2 and 34)' table; the 2 TI records are pensioners (numeral 21 > 0, first name present), which is the survivor/substitute-pension case the Field Explanation covers (record in the recipient's name - here a minor). The number is sent without dots or hyphens, as the annex requires ('sin guiones, puntos, comas o espacios en blanco'); the identification is unique (no duplicate C), which satisfies the annex's unique key (entinfo + tdocb + nitb + identfc + tdocpcc + nitpcc). Leading zeros in the masked copy may be an artefact of digit substitution and are not evidence either way. Field Length: the annex gives tdocb int 2 and nitb string 20 (XSD maxLength 20); the spec says 2 + 16.",
+   "proposed_explanation": "Field Length: 2 + 20 (annex attributes tdocb int 2 and nitb string 20).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes tdocb (int 2) and nitb (string 20, 'sin guiones, puntos, comas o espacios en blanco')"
+  },
+  {
+   "id": 6,
+   "name": "Beneficiary surnames and names",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "D Primer Apellido",
+     "example_masked": "NAME_ token on 1035 of 1035 rows"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "E Segundo Apellido",
+     "example_masked": "NAME_ token on 810 rows, blank on 225"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "F Primer Nombre",
+     "example_masked": "NAME_ token on 985 rows, BLANK on 50 rows - all 50 are pensioner records (numeral 21 > 0), 47 of them also without Otros Nombres"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "G Otros Nombres",
+     "example_masked": "NAME_ token on 605 rows, blank on 430"
+    }
+   ],
+   "finding": "Four columns in the annex order (pap, sap, pno, ono), as the spec says; blank second surname (225) and blank other names (430) are allowed by the annex ('Si se conoce debe diligenciarse', XSD optional). CLIENT ERROR, NOT REPLICATED: 50 pensioner records carry no first name at all, although the annex makes pno mandatory ('Siempre debe diligenciarse', XSD use=required, minLength 1) - these 50 records would be rejected by the XSD validation. The spec's Field Explanation (first given name mandatory, held for pensioners who are not in the active master data) is right and stays; the client must complete the pensioner name data.",
+   "proposed_explanation": "",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 3; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes pap (required), sap (optional), pno (required, minLength 1), ono (optional)"
+  },
+  {
+   "id": 7,
+   "name": "Beneficiary location",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "H Dirección del beneficiario",
+     "example_masked": "ADDRESS_ token on 1035 of 1035 rows"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "I Departamento del beneficiario",
+     "example_masked": "2-digit text with leading zero: 05 x 659, 11 x 203, 25 x 45, 76 x 39, 08 x 23, 68 x 15 ... (20 distinct)"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "J Municipio del beneficiario",
+     "example_masked": "3-digit text with leading zeros: 001, 266, 360, 088, 129, 631, 758 ... (30 distinct)"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "K País del beneficiario",
+     "example_masked": "'169' on 1035 of 1035 rows (3-digit text)"
+    }
+   ],
+   "finding": "The client's block is the annex block: address (free text), DANE department 2 digits and municipality 3 digits with leading zeros, and country as a NUMERIC CODE - 169 on every record (Colombia; all beneficiaries resident in Colombia, so address/department/municipality are filled on every row, as the annex requires 'en caso que el País de residencia sea Colombia'). This confirms the spec's rule and System Mapping; what the spec lacks is the shape of the country sub-field: the annex defines pais as 'int 4, de acuerdo con los definidos por resolución' (a code, never the name), while the spec's Example shows 'Colombia' and the Field Length says 'Var (country)'; the address is string 200. QUESTION FOR THE CLIENT (no spec change): 31 records carry department 25 with municipality 001 (DIVIPOLA 25001 = Agua de Dios), 29 of them active employees - implausible as a real location and consistent with a default municipality where only the department (Cundinamarca) is known; the spec already requires every entry to be validated against DIVIPOLA.",
+   "proposed_explanation": "Field Length: 200 (address) + 2 + 3 + 4 (country code). Example: address / 11 / 001 / 169. Field Explanation, add: 'The country is sent as the numeric code of the DIAN country table (attribute pais, int 4, \"de acuerdo con los definidos por resolución\"), never as a name; Colombia is code 169, the value the client's own file carries on every record. Department and municipality are sent with their leading zeros (attributes dpto int 2 and mun int 3, \"debe incluir los ceros a la izquierda\").'",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 4; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes dir (string 200), dpto (int 2, código DANE con ceros a la izquierda), mun (int 3), pais (int 4, 'de acuerdo con los definidos por resolución', always mandatory)"
+  },
+  {
+   "id": 8,
+   "name": "═══ work income paid(numerals 5 to 17) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "L-X",
+     "example_masked": "13 columns L Pagos por salarios ... X Otros pagos"
+    }
+   ],
+   "finding": "Section header. Columns L-X are the 13 annex attributes pasa, paec, pabop, vaex, paho, pase, paco, papre, pavia, paga, patra, vapo, potro in annex order = numerals 5-17.",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 9,
+   "name": "Salary payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "L Pagos por salarios",
+     "example_masked": "460 rows > 0; sum 73,649,044,000; min 164,000; max 1,238,128,000; 0 negative; 0 decimals; 460 of 460 non-zero values end in 000"
+    }
+   ],
+   "finding": "Populated on the 460 active/leaver employee records and on no pensioner record, consistent with the spec's routing (salary to numeral 5, pension to 21). The amount is an annual total (the file is the full tax year 2025, see N22), so the wage-type composition cannot be reproduced from the 2026 Accumulated Report; the spec's classification-table rule stands. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 5 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pasa (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 10,
+   "name": "Ecclesiastical emolument payments",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "M Pagos por emolumentos eclesiásticos",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record, written as 0 (not blank) as par. 2 requires; no such payments at this employer. Explanation correct. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 6 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute paec (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 11,
+   "name": "Payments made with vouchers, cheques, cards or vales",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "N Pagos realizados con bonos electrónicos ...",
+     "example_masked": "447 rows > 0; sum 1,792,539,000; min 410,000; max 7,146,000; 100% end in 000; 423 of the 447 are salary records, 24 are leaver records with no salary, 0 pensioners"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "WT 65818 Meal Allowance Inf.-2079: 447 persons; for the matched persons column N is ~11.7 x the December-2025 monthly amount of WT 65818 (median 11.67)",
+     "column": "Accumulated Report.xlsx",
+     "example_masked": "Accumulated Report"
+    }
+   ],
+   "finding": "The client reports the WHOLE meal allowance (WT 65818, 447 recipients = the 447 rows > 0 here) in numeral 7 and leaves numerals 8 (column O) and 32 (column AM) at zero on every record. The spec's rule is different and is the statutory one: ET art. 387-1 and Res. 227 numerals 8 and 32 with par. 1 and par. 6 split a meal payment to a third party at 41 UVT per month into numeral 32 (informative, up to 41 UVT) and numeral 8 (excess) for an employee whose monthly salary does not exceed 310 UVT, and route the payment to numeral 7 only where the salary exceeds 310 UVT; the 2025 file does not apply the fork at all. CONFLICT recorded, spec not changed. Whether 65818 is paid through vouchers/cards or to a food supplier, and why numerals 8/32 are nil, goes to the client as a question (it was already open from round 1). Field Length: annex long 18, spec 14. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). ",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 7 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pabop (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numerals 8 and 32, par. 1 and par. 6; ET art. 387-1"
+  },
+  {
+   "id": 12,
+   "name": "Excess meal payments over 41 UVT (ET art. 387-1)",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "O Valor del exceso de los pagos por alimentacion mayores a 41 uvt",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record although the client pays a meal allowance to 447 persons (reported in full in numeral 7, see N07) and round 1 found 10 person-months above 41 UVT in 2026. The spec's bidirectional 8/32 rule is the statutory one (Res. 227 numerals 8 and 32, par. 1; ET art. 387-1); the client's practice is recorded as a finding, not replicated. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 8 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute vaex (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 387-1"
+  },
+  {
+   "id": 13,
+   "name": "Fee payments",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "P Pagos por honorarios",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0, par. 2). No non-employment work income is paid through this payroll, consistent with the spec's par. 5 explanation. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 9 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute paho (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 14,
+   "name": "Service payments",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "Q Pagos por servicios",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0, par. 2). No non-employment work income is paid through this payroll, consistent with the spec's par. 5 explanation. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 10 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pase (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 15,
+   "name": "Commission payments",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "R Pagos por comisiones",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0, par. 2). No non-employment work income is paid through this payroll, consistent with the spec's par. 5 explanation. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 11 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute paco (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 16,
+   "name": "Statutory benefit payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "S Pagos por prestaciones sociales",
+     "example_masked": "442 rows > 0 (441 salary records + 1 leaver record); sum 7,329,881,000; max 428,835,000; 100% end in 000; 0 pensioners"
+    }
+   ],
+   "finding": "Populated on employee and leaver records only, never on pensioners, consistent with the spec (prima, vacation pay; severance in its own numerals). Composition not reproducible from the 2026 accumulators (different year). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 12 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute papre (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 17,
+   "name": "Per diem payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "T Pagos por viáticos",
+     "example_masked": "62 rows > 0, all salary records; sum 485,440,000; max 43,943,000; 100% end in 000"
+    }
+   ],
+   "finding": "Per diems are reported in numeral 13 as the spec says (element pavia), on 62 employees; in the 2026 accumulators the per-diem wage types 62805-62808 are paid to 43-60 persons, the same order of magnitude. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 13 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pavia (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 18,
+   "name": "Representation expense payments",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "U Pagos por gastos de representación",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0, par. 2); no such population or payment at this employer, as the spec expects. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 14 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute paga (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 19,
+   "name": "Cooperative associated-work compensation",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "V Pagos por compensaciones por el trabajo asociado cooperativo",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0, par. 2); no such population or payment at this employer, as the spec expects. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 15 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute patra (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 20,
+   "name": "Non-reimbursable educational support financed with public funds",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "W Valor apoyos economicos no reembolsables ...",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0, par. 2); no such population or payment at this employer, as the spec expects. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 16 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute vapo (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 21,
+   "name": "Other payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "X Otros pagos",
+     "example_masked": "971 rows > 0 (452 salary records, 458 pensioner records, 61 records with neither salary nor pension); sum 30,673,726,000; max 1,970,942,000; 100% end in 000"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "for 382 matched pensioners column X = exactly 12 x the December-2025 monthly WT 62155 'Medical Plan - Healthcare Insurance (EPS) Pensioner - PMI Offset Compensation' (median ratio 12.0, q25-q75 12.0-12.01)",
+     "column": "Accumulated Report.xlsx",
+     "example_masked": "Accumulated Report"
+    }
+   ],
+   "finding": "Numeral 17 is the residual numeral for employees (non-salary allowances, bonuses, in-kind benefits) AND, on pensioner records, carries the employer's EPS-offset compensation paid to the pensioner (WT 62155), while the pension itself (including the two additional mesadas) sits in numeral 21 - exactly the peju / potro split the spec's N17 and N21 explanations describe. The 61 'neither' records are leavers/others paid only settlements or benefits in the year (24 of them with a meal allowance in numeral 7, 25 with withholding), which the Payroll Scope Summary covers ('Employee who left during the year'). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 17 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute potro (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 22,
+   "name": "═══ the three severance lines(numerals 18, 19, 20) - order differs from form 220 ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "Y-AA",
+     "example_masked": "Y Cesantías e intereses efectivamente pagadas | Z Cesantías consignadas al fondo | AA Auxilio de cesantías régimen tradicional"
+    }
+   ],
+   "finding": "Section header. Columns Y, Z, AA are the annex attributes cein, ceco, auce in annex order = numerals 18, 19, 20 - paid, deposited, traditional - confirming the order the spec documents (transposed against Form 220 casillas 48/49).",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 23,
+   "name": "Severance and interest actually paid to the employee",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "Y Cesantías e intereses de cesantías efectivamente pagadas al empleado",
+     "example_masked": "304 rows > 0 (301 salary + 3 leaver records); sum 1,404,117,000; min 6,000; max 34,015,000; 100% end in 000; every record with a fund deposit (Z > 0) also has Y > 0 (235), and 69 records have Y > 0 with Z = 0"
+    }
+   ],
+   "finding": "Populated as the spec describes: the January interest payment on every employee with a deposit, plus severance paid directly on termination (Y without Z on 69 leaver records). No pensioner carries it. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 18 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute cein (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 24,
+   "name": "Severance deposited to the severance fund",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "Z Cesantías consignadas al fondo de cesantías",
+     "example_masked": "235 rows > 0 (234 salary + 1 leaver); sum 1,885,297,000; min 27,000; max 20,722,000; 100% end in 000"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "WT 25827 Payment Severance Funds Inf.: 236 persons, booked only in 02/2026 (2,064,808,759) - the deposit of the 2026 return; the 2025 file's column Z is a different, earlier deposit (ratio Z / Feb-2026 deposit median 0.83)",
+     "column": "Accumulated Report.xlsx",
+     "example_masked": "Accumulated Report"
+    }
+   ],
+   "finding": "One deposit per employee per year, on 235 records, in the year's file - consistent with the deposit-year rule (ET art. 27 num. 3) the spec states; which February the client counted cannot be proven from the file alone (the 2025 file carries amounts about 17% below the February-2026 deposit, consistent with the February-2025 deposit). Numeral 20 is zero on every record, so numerals 19 and 20 are mutually exclusive as the spec requires. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 19 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute ceco (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 27 num. 3"
+  },
+  {
+   "id": 25,
+   "name": "Severance recognised under the traditional CST regime",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AA Auxilio de cesantías reconocido a trabajadores del régimen tradicional ...",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record: no pre-1991 traditional-regime employee, as round 1 concluded from the hire dates. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 20 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute auce (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 26,
+   "name": "═══ pensions and total(numerals 21, 22) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AB-AC",
+     "example_masked": "AB Pensiones de jubilación, vejez o invalidez | AC Total ingresos brutos por rentas de trabajo y pension"
+    }
+   ],
+   "finding": "Section header. Columns AB, AC = annex attributes peju and tingbtp = numerals 21 and 22.",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 27,
+   "name": "Retirement, old-age or invalidity pensions",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AB Pensiones de jubilación, vejez o invalidez",
+     "example_masked": "512 rows > 0; sum 8,749,872,000; min 71,000; max 294,235,000; 100% end in 000; no record has both salary (L) and pension (AB) > 0; 511 of the 512 also carry health contributions (AD), 2 carry solidarity (AE), none carries withholding (AJ)"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "for 448 matched pensioners AB = exactly 14 x the December-2025 monthly WT 62154 Monthly Retired Pension (median 14.0) = 12 monthly mesadas + 2 additional mesadas (WT 62153, equal to one mesada in December)",
+     "column": "Accumulated Report.xlsx",
+     "example_masked": "Accumulated Report"
+    }
+   ],
+   "finding": "The employer-paid pensioner population is reported, one record each, with the pension (monthly mesadas plus the two additional mesadas) in numeral 21 and the EPS-offset compensation in numeral 17 - the peju / potro split of the spec's Field Explanation. Zero withholding on every pensioner is consistent with ET art. 206 num. 5 (all pensions here are far below 1,000 UVT a month). The 2 TI-document pensioners support the spec's survivor-pension identity rule. The Payroll Scope Summary has a NO row for fund-paid pensioners but no YES row for the employer-paid pensioner, who is half of this file (512 of 1035 records): proposed as a new row. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}). Payroll Scope Summary: add the row 'Pensioner whose pension is paid by the EMPLOYER through payroll' = YES (see change map).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 21 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute peju (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 206 num. 5"
+  },
+  {
+   "id": 28,
+   "name": "Total gross income from work or pension payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AC Total ingresos brutos por rentas de trabajo y pension",
+     "example_masked": "1035 rows > 0; sum 125,969,916,000; AC = L+M+N+O+P+Q+R+S+T+U+V+W+X+Y+Z+AA+AB on 1035 of 1035 rows (0 differences); AM (numeral 32) is zero so its exclusion cannot be tested; 100% end in 000"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "L:AS row 1037",
+     "example_masked": "totals row: AC 125,969,916,000 = sum of the column"
+    }
+   ],
+   "finding": "ARITHMETIC CONFIRMED: numeral 22 equals the sum of numerals 5 to 21 on every record, as the spec's System Mapping and Population Rules state. No record has a zero total (every beneficiary in the file received income). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). The file is a FULL-YEAR return, evidently tax year 2025: pension records carry exactly 14 x the December-2025 monthly pension of the Accumulated Report (12 mesadas + 2 additional), the pensioner EPS-offset amounts are exactly 12 x December 2025, every amount is >= the Oct-Dec 2025 months of the same wage types, and the records appear in the same identity order as the client's Form 220 working file for 2025-01-01..2025-12-31. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 22 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute tingbtp (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); par. 1 (numeral 32 informative)"
+  },
+  {
+   "id": 29,
+   "name": "═══ employee contributions and voluntary savings(numerals 23 to 28) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AD-AI",
+     "example_masked": "AD salud | AE pensión y FSP | AF RAIS | AG fondos voluntarios | AH AFC | AI AVC"
+    }
+   ],
+   "finding": "Section header. Columns AD-AI = annex attributes apos, apof, aprais, apov, apafc, apavc = numerals 23-28.",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 30,
+   "name": "Mandatory health contributions borne by the employee",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AD Aportes obligatorios por salud a cargo del trabajador",
+     "example_masked": "973 rows > 0 (460 salary + 511 pensioner + 2 other); sum 3,122,528,000; min 3,000; max 30,264,000; 100% end in 000; every salary record has AD > 0"
+    }
+   ],
+   "finding": "Health contributions are reported on every employee AND on 511 of the 512 pensioner records - the health deduction on the pension (pensioner EPS wage types 21645/21646/21647) is reported in numeral 23, exactly as the spec's Field Explanation says (element apos). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 23 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute apos (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 31,
+   "name": "Mandatory pension and solidarity-fund contributions borne by the employee",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AE Aportes obligatorios a fondos de pensiones y solidaridad pensional a cargo del trabajador",
+     "example_masked": "464 rows > 0 (460 salary + 2 pensioner + 2 other); sum 3,437,605,000; max 25,623,000; 100% end in 000; every salary record has AE > 0; 2 pensioner records > 0 (the pensioner solidarity deduction WT 21643 has 1-2 persons in the accumulators)"
+    }
+   ],
+   "finding": "One combined numeral for pension + solidarity fund on every employee record; on pensioner records only the solidarity deduction appears (2 records), matching the spec's apof explanation (no mandatory pension contribution on a pension, solidarity where it applies). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 24 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute apof (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 32,
+   "name": "Voluntary contributions to the individual-account regime (RAIS)",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AF Aportes voluntarios al régimen de ahorro individual con solidaridad - RAIS",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record: the client classifies ALL voluntary pension contributions as art. 126-1 voluntary-fund contributions (numeral 26, column AG), none as art. 55 RAIS. This is a classification the spec leaves to the wage-type attribute (open point N25 of 16 Oct): the file shows the client's current answer (all FVOL = numeral 26) but is not proof of the legal attribute, so no spec change. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 25 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute aprais (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 55"
+  },
+  {
+   "id": 33,
+   "name": "Voluntary contributions to voluntary pension funds",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AG Aportes voluntarios a fondos de pensiones voluntarias",
+     "example_masked": "43 rows > 0, all salary records; sum 2,146,928,000; min 900,000; max 347,405,000; 100% end in 000; 42 of the 43 also carry withholding"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "FVOL wage types 25811-25815/25823: 40 persons in 2026 (Proteccion 24, Skandia 8 ...); institutional plans 25820/25821/21210/21211: 31/15/3/1 persons",
+     "column": "Accumulated Report.xlsx",
+     "example_masked": "Accumulated Report"
+    }
+   ],
+   "finding": "Voluntary pension contributions are reported here for 43 employees, consistent with the spec's numeral-26 explanation; the amounts are annual deductions (gross contributions, not net of any exempt-income computation - the 25% exempt income of ET art. 206 num. 10 has no numeral in the format and is not netted anywhere in the file, consistent with the spec which reports contributions and withholding, not the depurated base). Whether institutional-plan amounts are included cannot be read from the annual figure (RA question M33 of 16 Oct remains). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 26 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute apov (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 126-1"
+  },
+  {
+   "id": 34,
+   "name": "AFC account contributions",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AH Aportes a cuentas AFC",
+     "example_masked": "59 rows > 0, all salary records; sum 2,142,683,000; min 2,400,000; max 189,600,000; 100% end in 000; for 42 matched persons AH >= the Oct-Dec 2025 AFC deductions on 42 of 42"
+    }
+   ],
+   "finding": "AFC deductions are reported for 59 employees as a positive annual total, as the spec says (gross deductions through payroll; any 'Reimbursement AFC' netting cannot be seen in an annual figure). CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 27 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute apafc (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 126-4"
+  },
+  {
+   "id": 35,
+   "name": "AVC account contributions",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AI Aportes a cuentas AVC",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record: no AVC / Fondo Nacional del Ahorro savings at this employer, as round 1 found. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 28 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute apavc (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 36,
+   "name": "═══ withholding and vat(numerals 29 to 31) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AJ-AL",
+     "example_masked": "AJ retenciones | AK IVA mayor valor | AL retención IVA"
+    }
+   ],
+   "finding": "Section header. Columns AJ, AK, AL = annex attributes vare, ivav, rfiva = numerals 29-31.",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 37,
+   "name": "Withholding on work or pension income",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AJ Valor de las retenciones en la fuente por pagos de rentas de trabajo o pensiones",
+     "example_masked": "460 rows > 0 (435 salary records + 25 leaver/other records); sum 13,926,475,000; min 35,000; max 608,700,000; 100% end in 000; 0 on all 512 pensioner records; 25 salary records at 0; 14 records with AJ/AC between 19.5% and 20.5% (10 CC, 4 CE), all with health and pension contributions"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "WT 2552 Income Tax (employee) Jan-Sep 2026 = 14,928,096,127 (418 persons); WT 21140 Withholding-Retirees Jan-Sep 2026 = 48,229,727 (17 persons); WT 21155 does not exist in the catalogue; sum 14,976,325,854",
+     "column": "Accumulated Report.xlsx",
+     "example_masked": "Accumulated Report"
+    }
+   ],
+   "finding": "Withholding is reported on employee and leaver records; zero on every pensioner (consistent with ET art. 206 num. 5 - pensions below 1,000 UVT/month are exempt - and with WT 21140 being charged in 2026 to 15 persons who are employee records, not pensioner records, in this file). The 14 records at ~20% of gross are the spec's own non-resident internal control firing (ET art. 408), 4 of them with a foreign document. RECONCILIATION TO THE ACCUMULATED REPORT: NOT THE SAME YEAR - column AJ (13,926,475,000) is the withholding of the full tax year 2025, while WT 2552 + 21140 for Jan-Sep 2026 is 14,976,325,854; per person the 2025 amounts are >= the Oct-Dec 2025 months of 2552+21140 on 366 of 371 matched persons (5 below - to be explained by the client: a reversal or a correction in Q4 2025?). Meaning for the spec: the preliminary file is not a 2026 year-to-date extract, so the 2026 return cannot be checked against it; the engine must accumulate 1 Jan-31 Dec 2026 by payment date as the spec says, and the client's 2025 withholding total is the figure to reconcile against the twelve 2025 Form 350 returns (casilla 93), not against the 2026 accumulators. CLIENT PRACTICE, NOT REPLICATED: every non-zero amount in the client's file is a multiple of 1,000 (100% of the non-zero values in this column end in 000). The annex prescribes a positive integer in pesos without points or commas ('El valor debe ser positivo, entero y no debe incluir ni puntos ni comas') and the validations say the numeric attributes carry the values 'según lo reportado por el informante'; no rounding to thousands is prescribed. The spec's Rounding column (whole pesos, no decimals, no thousand rounding) matches the annex and stays. The thousand-rounding appears to be inherited from the client's Form 220 figures (casillas rounded to the nearest 1,000). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 29 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute vare (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET arts. 383 and 408; ET art. 206 num. 5"
+  },
+  {
+   "id": 38,
+   "name": "VAT as a higher cost or expense",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AK Impuestos sobre las ventas - IVA, mayor valor del costo o gasto",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0), as the spec expects for employment income (not a payroll field). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 30 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute ivav (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 39,
+   "name": "VAT withholding",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AL Retención en la fuente a título de impuestos sobre las ventas - IVA",
+     "example_masked": "0 on 1035 of 1035 rows"
+    }
+   ],
+   "finding": "Zero on every record (written as 0), as the spec expects for employment income (not a payroll field). Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 31 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute rfiva (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero')"
+  },
+  {
+   "id": 40,
+   "name": "═══ informative and special numerals(numerals 32 to 36) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AM-AS",
+     "example_masked": "AM alimentación hasta 41 UVT | AN ingreso laboral promedio 6 meses | AO-AP dependiente | AQ fideicomiso | AR-AS participante en contrato"
+    }
+   ],
+   "finding": "Section header. Columns AM-AS = annex attributes pagahuvt, vilap, tdocde, nitde, identfc, tdocpcc, nitpcc = numerals 32-36 (numerals 34 and 36 split into two columns each).",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.2"
+  },
+  {
+   "id": 41,
+   "name": "Monthly meal payments up to 41 UVT",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AM Pagos por Alimentación mayor a 41 UVT (client header)",
+     "example_masked": "0 on 1035 of 1035 rows; the client's column HEADER reads 'mayor a 41 UVT' although the annex attribute pagahuvt / numeral 32 is 'Pagos por alimentación mensuales HASTA 41 UVT'"
+    }
+   ],
+   "finding": "Two client issues, neither replicated: (1) the column is zero on every record although the meal allowance is paid to 447 persons (all of it reported in numeral 7, see N07) - contrary to Res. 227 numeral 32 and par. 1 (informative value up to 41 UVT for employees at or below 310 UVT); (2) the client's column label says 'mayor a 41 UVT' (the excess), which is numeral 8's definition - a labelling error that may explain why the column stays at zero. The spec's explanation (informative, outside numeral 22, bidirectional pair with numeral 8, monthly fork) is the statutory one and stays. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 32 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pagahuvt (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); par. 1; ET art. 387-1"
+  },
+  {
+   "id": 42,
+   "name": "Average labour income of the last six months",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AN Valor ingreso laboral promedio de los últimos seis meses",
+     "example_masked": "351 rows > 0, all salary records (0 pensioners, 0 leavers without salary); sum 3,798,112,000; min 36,000; max 78,413,000; 100% end in 000; 299 of the 351 also carry severance paid or deposited (Y or Z > 0), 52 carry NEITHER; conversely 5 records with severance paid or deposited carry AN = 0; AN is about 1.1 x L/12 (median 1.116)"
+    }
+   ],
+   "finding": "The client populates numeral 33 on 52 records to which ET art. 206 num. 4 does not apply in the year (no severance paid or deposited) and leaves it at zero on 5 records where it does apply - both contrary to the resolution's 'Únicamente para trabajadores que aplique el numeral 4 artículo 206 E.T.' and to the spec's Population Rules (numerals 18/19/20 and 33 travel together). Finding, not replicated. One spec correction supported by the annex: the Population Rules say numeral 33 'should be blank' where numerals 18-20 are zero, but the attribute vilap is 'Siempre debe diligenciarse' and par. 2 requires zero, never blank - the client's file correctly writes 0. The magnitude (about 1.1 x average monthly salary) is consistent with a six-month average of total labour income. Field Length: annex long 18, spec 14.",
+   "proposed_explanation": "Field Length: 18 (annex: long 18, XSD pattern [0-9]{1,18}). Population Rules C29: replace 'should be blank' by 'should be zero' (attribute vilap always sent, zero when nil).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 33 and par. 2; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute vilap (long 18, 'Siempre debe diligenciarse. El valor debe ser positivo, entero y no debe incluir ni puntos ni comas'); validations 3.1 item 3 (numeric attributes positive, without signs or punctuation, 'según lo reportado por el informante o en su defecto con cero'); ET art. 206 num. 4"
+  },
+  {
+   "id": 43,
+   "name": "Economic dependant document type and identification number",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AO Tipo de documento del dependiente económico",
+     "example_masked": "0 on 1035 of 1035 rows (numeric)"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AP Número de identificación del dependiente económico",
+     "example_masked": "0 on 1035 of 1035 rows (numeric)"
+    }
+   ],
+   "finding": "Not populated on any record although the dependants deduction is claimed by 30-49 employees in 2026 (round 1) - in the client's Excel the two columns carry a numeric 0. In the XML these are OPTIONAL attributes ('Si se conoce se debe diligenciar'; XSD use=optional, tdocde pattern [0-9]{0,2}, nitde [a-zA-Z0-9]*): they are omitted or empty when unknown, and a literal '0' is not a code of the document-type table - a caution for the client, not a spec change. Spec Field Length 2 + 16 vs annex int 2 + string 20.",
+   "proposed_explanation": "Field Length: 2 + 20 (annex attributes tdocde int 2 and nitde string 20).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 34; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes tdocde (int 2, optional, 'si se conoce') and nitde (string 20, optional, 'sin guiones, puntos, comas o espacios en blanco'); ET art. 387 par. 2"
+  },
+  {
+   "id": 44,
+   "name": "Trust identification",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AQ identificacion del fideicomiso",
+     "example_masked": "0 on 1035 of 1035 rows (numeric)"
+    }
+   ],
+   "finding": "Blank/zero on every record, as par. 4 requires under concept 1 (the client writes a numeric 0 in Excel; in the XML the attribute identfc is optional and omitted). The annex fixes the shape: identfc string 14, digits only (XSD pattern [0-9]{0,14}), 'el valor debe ser positivo, entero'; the spec says Var / AN.",
+   "proposed_explanation": "Field Length: 14. Format: N (digits only; annex attribute identfc string 14, XSD pattern [0-9]{0,14}).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 35 and par. 4; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute identfc (string 14, 'valor positivo, entero', filled only for a fiduciaria)"
+  },
+  {
+   "id": 45,
+   "name": "Contract participant document type and identification number",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AR Tipo documento participante en contrato de colaboracion",
+     "example_masked": "0 on 1035 of 1035 rows (numeric)"
+    },
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "AS identificacion participante en contrato colaboracion",
+     "example_masked": "0 on 1035 of 1035 rows (numeric)"
+    }
+   ],
+   "finding": "Blank/zero on every record, as par. 4 requires under concept 1 (numeric 0 in Excel; optional attributes in the XML). Annex: tdocpcc int 2, nitpcc string 20; spec 2 + 16.",
+   "proposed_explanation": "Field Length: 2 + 20 (annex attributes tdocpcc int 2 and nitpcc string 20).",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 36 and par. 4; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes tdocpcc (int 2) and nitpcc (string 20)"
+  },
+  {
+   "id": 46,
+   "name": "═══ filing control fields(not numerals - envelope and deadline drivers) ═══",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "(none)",
+     "example_masked": "the client's Excel has no header block; the XML header 'Cab' of the annex is not represented in the file"
+    }
+   ],
+   "finding": "Section header. The client's preliminary file carries only the record attributes (rentra); the header attributes of the annex (Cab) are not in the Excel.",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.1"
+  },
+  {
+   "id": 47,
+   "name": "Informant NIT",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "(none)",
+     "example_masked": "no NIT in the file"
+    }
+   ],
+   "finding": "The client's file carries no informant NIT, and the annex header Cab has no NIT attribute either (the informant is identified by the portal session); the deadline rule in the Field Explanation is unaffected.",
+   "proposed_explanation": "",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 art. 1.3.9.1.3; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.1 (Cab: Ano, CodCpt, Formato, Version, NumEnvio, FecEnvio, FecInicial, FecFinal, ValorTotal, CantReg)"
+  },
+  {
+   "id": 48,
+   "name": "Taxpayer category",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "(none)",
+     "example_masked": "not in the file"
+    }
+   ],
+   "finding": "Not in the client's file and not a header attribute of the annex; deadline driver only.",
+   "proposed_explanation": "",
+   "official_source": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 art. 1.3.9.1.3 par. 1"
+  },
+  {
+   "id": 49,
+   "name": "Tax year reported",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "(whole file)",
+     "example_masked": "The file is a FULL-YEAR return, evidently tax year 2025: pension records carry exactly 14 x the December-2025 monthly pension of the Accumulated Report (12 mesadas + 2 additional), the pensioner EPS-offset amounts are exactly 12 x December 2025, every amount is >= the Oct-Dec 2025 months of the same wage types, and the records appear in the same identity order as the client's Form 220 working file for 2025-01-01..2025-12-31."
+    }
+   ],
+   "finding": "The file is a full-year 2025 return (12 mesadas + 2 additional mesadas on pensioners, 12 x December on the EPS offset, same identity order as the client's 2025 Form 220 working file), so the spec's calendar-year rule is what the client applies. The annex shows how the year is carried in the XML header and the spec does not: the header attribute 'Ano' is the YEAR OF SENDING (año de envío - the same aaaa as the file name), while the tax year reported is carried by FecInicial / FecFinal (the first and last date to which the records correspond, AAAA-MM-DD). A developer reading 'Ano' as the tax year would be one year out.",
+   "proposed_explanation": "Append to the Field Explanation: 'In the XML header (element Cab, Anexo T3.45) the tax year is carried by FecInicial and FecFinal - the first and last day of the tax year reported, format AAAA-MM-DD - while the header attribute Ano is the YEAR OF SENDING (año de envío, the same aaaa as in the file name), not the tax year: for the 2026 return filed in 2027, Ano = 2027, FecInicial = 2026-01-01 and FecFinal = 2026-12-31.'",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.1 (Ano 'Año de envío' int 4; FecInicial / FecFinal date 10 'Los registros corresponden mínimo/máximo a esta fecha'); file name 'aaaa: Año de envío'"
+  },
+  {
+   "id": 50,
+   "name": "Format and version",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+     "sheet": "2276",
+     "column": "(whole file)",
+     "example_masked": "45 columns = the 45 attributes of Formato 2276 versión 4 in annex order"
+    }
+   ],
+   "finding": "The client's column set is the version-4 attribute set; the annex header fixes Formato = 2276 and Version = 4 (XSD fixed values) and the file name 02276 / 04, exactly as the spec states.",
+   "proposed_explanation": "",
+   "official_source": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) sections 1 and 2.1 (Formato fixed 2276, Version fixed 4)"
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+   "sheet": "2276",
+   "column": "L:AS row 1037 (totals row)",
+   "classification": "Client working artefact",
+   "note": "A totals row below the 1035 records (sum of every amount column; AC total 125,969,916,000). Not part of the XML; the annex header carries CantReg and ValorTotal instead."
+  },
+  {
+   "file": "Formato 2276 - Preliminar - Envio - 16oct.xlsx",
+   "sheet": "2276",
+   "column": "AM (header text)",
+   "classification": "Client labelling error",
+   "note": "Header reads 'Pagos por Alimentación mayor a 41 UVT'; the annex attribute in this position (pagahuvt, numeral 32) is 'Pagos por alimentación mensuales hasta 41 UVT'. Column is zero on every record."
+  }
+ ],
+ "summary": {
+  "rows_checked": 48,
+  "verdict_counts": {
+   "Aligned": 9,
+   "Format mismatch": 18,
+   "Conflict": 18,
+   "Not evidenced": 2,
+   "Explanation to improve": 1
+  },
+  "file_identity": "Client's preliminary Formato 2276 v4: 1035 beneficiary records + 1 totals row, 45 columns A-AS = the 45 annex attributes in order; evidence shows it is the FULL tax year 2025 (not a 2026 year-to-date extract).",
+  "population": "460 employee/leaver records with salary (numeral 5), 512 employer-paid pensioner records (numeral 21), 63 records with neither (leavers paid settlements/benefits only); no record with both; no zero-total record.",
+  "key_findings": [
+   "Attribute order, count and split match the annex and the spec (45 columns).",
+   "All amounts are multiples of 1,000 - a client practice the annex does not prescribe (whole pesos); spec unchanged.",
+   "Meal allowance (447 persons) reported entirely in numeral 7; numerals 8 and 32 at zero - contrary to Res. 227 numerals 8/32, par. 1 and ET art. 387-1; spec unchanged, question to client.",
+   "Numeral 33 populated on 52 records without severance and missing on 5 with severance - contrary to 'Únicamente'; spec unchanged.",
+   "50 pensioner records without first name - annex pno is mandatory; client must fix.",
+   "Numeral 22 = sum of numerals 5-21 on all 1035 records.",
+   "Pensioners: pension incl. additional mesadas in 21, EPS offset in 17, health on pension in 23, no withholding - all consistent with the spec.",
+   "Country is a numeric code (169); annex pais int 4 - spec Example/Field Length to be corrected.",
+   "Field Length of every amount attribute is 18 in the annex (spec says 14); identification numbers are string 20 (spec 16); fideicomiso string 14.",
+   "Header: Ano = year of sending; tax year = FecInicial/FecFinal - to be added to ENV-03 and File Structure.",
+   "Withholding (AJ) cannot be reconciled to the Jan-Sep 2026 Accumulated Report because the file is the 2025 year; per person the 2025 figures are >= the Oct-Dec 2025 months on 366 of 371 matched persons."
+  ],
+  "official_sources_reached": "Res. 000227/2025 Título 3 text (art. 1.3.7.1.1 numerals 1-36 and par. 1-7; formats table entry T3.45 = 2276 v4) from the cijuf.org.co PDF mirror of the resolution; Anexo T3.45 (Formato 2276 v4 technical specification incl. XSD) from the Diario Oficial 53.254 text mirrored at enlegislacion.com. dian.gov.co and the Res. 162/2023 annex on sisjur.bogotajuridica.gov.co could not be read (certificate error / wrong annex); Res. 227/2025 compiles Res. 162/2023 art. 51, so the compiled text is the governing one for tax years 2025 and 2026."
+ }
+}

@@ -90,6 +90,11 @@
 | 2026-08-27 | HRBS-13860 | Omnicom (Clavis Technologies Ltd e OMG): submissão NAERSA de agosto falhou; classes PRSI incorretas; processos 8211/8212 errored | Só acknowledgment e dados de processo (Romano Fusana, L2); sem Compliance; In Progress | Não |
 | 2026-06 | CT-A-192 | Comparação do design Claude vs dev | ~72%; 6 open items | Sim (aprendizados no design) |
 
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Ireland`
+
+- Sem Primary SBC no board; definir com Manju/Marko (C-13). Report principal a confirmar: PSR + RPN.
+
 ## Pendências
 - [ ] Classes PRSI incorretas em Clavis e OMG: corrigir e resubmeter no mesmo dia — L2 (Romano Fusana); Compliance só se a causa for regra estatutária — (HRBS-13860) [INCERTO se há ação nossa]
 - [ ] Advance Holiday Pay sem campo no DD v3.4 — a definir — (chat: design-dev-kb)

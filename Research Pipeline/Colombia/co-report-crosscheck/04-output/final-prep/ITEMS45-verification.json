@@ -1,0 +1,125 @@
+{
+ "date": "2026-10-22",
+ "scope": "CO-PILA-003-items45-map.json (Payroll Scope Summary!C27, PILA Spec!M111, Population Rules!C4) and CO-DIAN-001-items45-map.json (Payroll Scope Summary!C27, Nomina Electronica Spec!M130, M131); targets in 05-final/ read with openpyxl read_only; sources in raw/docs/oficiais/CO/",
+ "verdict": "FAIL - apply required_fixes, then verify again. Check 1 and the WORDS scan pass and the legal substance is correct, but three citations do not support the clause they are attached to and two clauses carry no source.",
+ "checks": [
+  {"id": "1", "check": "current == live cell; only described fragments change", "result": "PASS",
+   "evidence": "All 6 'current' strings equal the live cell (string equality). difflib: PILA C27 = 1 append; PILA M111 = 1 insert after 'enter both campo 45 and campo 95'; PILA C4 = 2 inserts (after the three-IBC sentence; after 'INCLUDES paid rest days' of the fourth base); DIAN C27 and M131 = rewrite of the rule sentence (intended); DIAN M130 = first paragraph only, the 'Source:' paragraph and WT list unchanged. Only C/M cells; T/U untouched."},
+  {"id": "2a", "check": "Compensated vacation (during employment and on termination) in the Ley 21 art. 17 parafiscal base", "result": "PARTIAL",
+   "evidence": [
+    "Sala de Consulta 2027 (2026-10-22-CE-SalaConsulta-2027-2010-vacaciones-compensadas-FuncionPublica.html): 'Número interno: 2027', 'Bogotá D.C., cuatro (04) de octubre de dos mil diez (2010)'; Respuesta: 'Las vacaciones pagadas en dinero a la terminación de la relación laboral hacen parte de la base para la liquidación y pago de los aportes parafiscales al SENA, ICFB y Cajas de Compensación Familiar'; and 'darle un alcance amplio a la expresión descansos remunerados del artículo 17 de la Ley 21 de 1982, que comprende tanto las vacaciones disfrutadas como las pagadas en dinero'. Supports termination and cash compensation generally. Number and date match.",
+    "CE S4 exp. 25958 (2026-10-22-CE-S4-25958-2022-CRC-normograma.htm), 'ocho (8) de septiembre de dos mil veintidós (2022)', C.P. Myriam Stella Gutiérrez Argüello. Holding (quoting exp. 24735): 'cuando las vacaciones son disfrutadas por el trabajador: ... iii) en el caso de aportes parafiscales, la suma pagada por ese concepto se incluye en la base de liquidación'. ENJOYED vacation only. The only mention of 'compensación de vacaciones en dinero' in 25958 is in the summary of a party's argument ('Extrajo apartes de providencias ... que, a su juicio, señalaban que la compensación de vacaciones en dinero formaba parte del IBC para el cálculo de aportes parafiscales'), not a holding. 25958 does NOT support compensated vacation in the parafiscal base.",
+    "CE S4 exp. 26941 (2024-04-04): 'el hecho que las vacaciones se paguen a la terminación del contrato laboral no tiene como consecuencia la pérdida de su connotación de descanso remunerado' - follows the art. 17 parafiscal paragraph; indirect support for termination vacation; nothing on cash compensation during employment.",
+    "Ley 21/1982 art. 17 (2026-10-21-Ley-21-1982-FuncionPublica.html): '... y además, los verificados por descansos remunerados de ley y convencionales o contractuales' - the statute does not name compensated vacation; inclusion rests on the case-law reading.",
+    "Effect: PILA C27 OK (cites concept 2027 next to 25958/26941). PILA M111 cites ONLY 25958 for compensated vacation -> unsupported. DIAN C27 cites 25958 for 'Both enjoyed and compensated' -> compensated half unsupported by the cited ruling. DIAN M131 cites only Ley 21 art. 17."
+   ]},
+  {"id": "2b", "check": "Excluded from health / pension / ARL IBC", "result": "PASS",
+   "evidence": [
+    "26941 (2026-10-22-CE-S4-26941-2024-DIAN-normograma.htm): 'Bogotá D.C., cuatro (04) de abril de dos mil veinticuatro (2024)', C.P. Wilson Ramos Girón; '... sin que se consideren salario y, por ende, no se incluyan para liquidar los aportes al Sistema de Seguridad Social Integral.' On the facts: 'vacaciones compensadas $68.914, en la determinación de la base solamente incluyó el sueldo y las horas extras'. Quote exact.",
+    "SU 25185 ficha (2026-10-22-CE-S4-SU-25185-2021-ficha.pdf, p.1): 'Providencia del: jueves, 9 de diciembre de 2021  Tipo: Unificación - Sentencia'; 'UNIFICAR ... reglas: 1. El IBC de aportes al Sistema de Seguridad Social subsistemas de pensión, salud y riesgos profesionales únicamente lo componen los factores constitutivos de salario, en los términos del artículo 127 del CST'. Rule 1 confirmed; number and date match."
+   ]},
+  {"id": "2c", "check": "ICBF base = same payroll (Ley 89/1988 art. 1 par. 1)", "result": "PASS (citation); attribution issue in M130/M131",
+   "evidence": "2026-10-22-Ley-89-1988-ICBF.pdf p.1: 'PARÁGRAFO 1o. ... Estos aportes se calcularán y pagarán teniendo como base de liquidación el concepto de nómina mensual de salarios establecidos en el artículo 17 de la Ley 21 de 1982'. PILA C27 and DIAN C27 cite it correctly. DIAN M130 and M131 write '(CCF, SENA, ICBF - Ley 21 de 1982 art. 17)': art. 17 names Subsidio Familiar, SENA, ESAP and Escuelas Industriales, not ICBF; the ICBF limb needs Ley 89."},
+  {"id": "2d", "check": "DUR 780/2016 art. 3.2.5.1 - enjoyed vacation on the prior IBC", "result": "PASS with qualification",
+   "evidence": "2026-10-13-Decreto-780-2016-FuncionPublica.html, chapter 'COTIZACIÓN A LA SEGURIDAD SOCIAL EN SALUD EN CASOS ESPECIALES', 'ARTÍCULO 3.2.5.1. ... Las cotizaciones durante vacaciones y permisos remunerados se causarán en su totalidad y el pago de los aportes se efectuará sobre el último salario base de cotización reportado con anterioridad a la fecha en la cual el trabajador hubiere iniciado el disfrute de las respectivas vacaciones o permisos.' The article is in the HEALTH chapter; its application to pension comes from CE S4 24735 as quoted in 25958 ('se deben realizar los pagos a los subsistemas de salud y pensión, para lo cual debe observarse el IBC anterior al inicio del descanso'). 'IBC of the month before the vacation starts' is a fair paraphrase."},
+  {"id": "2e", "check": "CST art. 189 = compensation of vacation in cash", "result": "PASS",
+   "evidence": "2026-10-21-CST-pr006-SecretariaSenado.html: 'ARTICULO 189. COMPENSACION EN DINERO DE LAS VACACIONES ... 1. <mod. Ley 1429 de 2010 art. 20> Empleador y trabajador, podrán acordar por escrito, previa solicitud del trabajador, que se pague en dinero hasta la mitad de las vacaciones'; num. 2 'derogado por el artículo 2 de la Ley 995 de 2005'. M131 cites art. 189 for 'during employment' only - correct; the termination limb has no source in M131 (Ley 995 de 2005 art. 1, quoted in 26941 fn. 47)."},
+  {"id": "3", "check": "Consistency CO-PILA-003 C27/M111/C4 vs CO-DIAN-001 C27/M130/M131, M112 and the parafiscal / IBC rows", "result": "PARTIAL",
+   "evidence": [
+    "Agreement on substance: compensated vacation out of the pension/health/ARL IBC, all vacation in the CCF/SENA/ICBF base, enjoyed vacation on the prior IBC. PILA M112 ('includes paid rest days and it is UNCAPPED'), Example Analysis D21/D22 and PILA M90/M164/M165 (WT 79003 is not a VAC-LR period) remain consistent.",
+    "Conflict (new text): Population Rules C4 places 'enjoyed vacation days are contributed on the IBC of the month before the vacation starts' under the three IBCs including occupational risk, while DIAN C27/M130/M131 say 'health and pension'. CE 25958 (quoting 24735): 'ii) no se hacen aportes a la ARL ante la ausencia de riesgo asegurable (literal c) del artículo 19 del Decreto 1772 de 1994)'.",
+    "Pre-existing conflict outside items 4-5: PILA M110 'Vacation and paid-leave (VAC-LR) days do not reduce the ARL day count (T2R2-038) because they are paid' and Population Rules C5 'vacation and remunerated leave do not reduce them at all' against the same CE holding on ARL during enjoyed vacation.",
+    "DIAN M130/M131 attribute ICBF to Ley 21 art. 17 only, while DIAN C27 and PILA C27 add Ley 89/1988."
+   ]},
+  {"id": "4", "check": "Standards (WORDS of make_final.py, internal refs, English, legal source per rule, no duplicated clause, no new WT classification)", "result": "PARTIAL",
+   "evidence": [
+    "WORDS regex from scripts/make_final.py applied to the 6 proposed texts: 0 hits. No internal references (CO-GAP, scope_manifest, CCG control). English. No WT numbers added; existing WTs in M111/M130 unchanged. No duplicated clause within any cell.",
+    "Missing source: Population Rules C4 'Vacation compensated in cash ... is NOT a salary-constituting payment and is excluded from these three IBCs and from the 40% computation' carries no citation; the '40% computation' limb rests only on UGPP guidance (2021 guide p. 18), which the RA file lists as open.",
+    "Drafting: the second C4 insert leaves '- vacation enjoyed, compensated in cash, or paid on termination - (70% of the integral salary, Ley 789 de 2002 art. 49)', so the integral-salary parenthesis now reads as qualifying the vacation list."
+   ]}
+ ],
+ "required_fixes": [
+  {"spec": "CO-PILA-003", "cell": "PILA Spec!M111", "fix": "Replace '(Consejo de Estado, Sección Cuarta, exp. 25958 of 2022)' attached to compensated vacation with '(Consejo de Estado, Sala de Consulta y Servicio Civil, concept 2027 of 2010-10-04; Sección Cuarta, exp. 26941 of 2024-04-04)'. 25958 holds only on enjoyed vacation."},
+  {"spec": "CO-DIAN-001", "cell": "Payroll Scope Summary!C27", "fix": "In the parafiscal sentence replace 'Consejo de Estado, Sección Cuarta, exp. 25958 of 2022' with 'Consejo de Estado, Sala de Consulta y Servicio Civil, concept 2027 of 2010-10-04'. Attach CE S4 exp. 25958 of 2022-09-08 to the clause 'contributed to health and pension on the IBC of the month before', since DUR 780 art. 3.2.5.1 is a health-chapter article."},
+  {"spec": "CO-DIAN-001", "cell": "Nomina Electronica Spec!M131 and M130", "fix": "Change '(CCF, SENA, ICBF - Ley 21 de 1982 art. 17)' to '(CCF, SENA, ICBF - Ley 21 de 1982 art. 17; Ley 89 de 1988 art. 1 par. 1)'. In M131 add the case-law source for compensated vacation (Sala de Consulta concept 2027 of 2010-10-04) and the termination source ('or on termination, Ley 995 de 2005 art. 1'). In M130 cite '(DUR 780 de 2016 art. 3.2.5.1; Consejo de Estado, Sección Cuarta, exp. 25958 of 2022)' for the health-and-pension clause."},
+  {"spec": "CO-PILA-003", "cell": "Population Rules!C4", "fix": "(a) Source the exclusion: '(Consejo de Estado, Sección Cuarta, exp. 26941 of 2024-04-04; unification ruling exp. 25185 of 2021-12-09, rule 1)'. (b) Drop 'and from the 40% computation' (UGPP guidance only; open point) and record it in OPEN-POINTS. (c) Restrict the enjoyed-vacation clause to 'contributed to health and pension' (no ARL contribution during enjoyed vacation: CE S4 25958 quoting 24735; Decreto 1772 de 1994 art. 19). (d) Keep the integral-salary parenthesis attached to the base, e.g. 'which INCLUDES paid rest days (vacation enjoyed, compensated in cash, or paid on termination) and is 70% of the integral salary (Ley 789 de 2002 art. 49)'."}
+ ],
+ "open_points_outside_set": [
+  "PILA M110 and Population Rules C5 say vacation days do not reduce the ARL day count; CE S4 25958 (quoting 24735) holds that no ARL contribution is made during enjoyed vacation (Decreto 1772 de 1994 art. 19 lit. c). Not part of items 4-5; record in OPEN-POINTS and check against AT2 v30 before any change.",
+  "CE 25958 footnote 8 calls the Sala de Consulta concept 'Nro. 2028'; the primary text (FuncionPublica) shows 'Número interno: 2027'. Keep 2027."
+ ],
+ "second_pass": {
+ "date": "2026-10-22",
+ "verdict": "FAIL - two small citation fixes, then apply. All 6 'current' strings equal the live cells, only the described fragments change, WORDS = 0 hits, no duplicated clauses, cross-spec substance consistent; pass-1 fixes (b), (c) and (d) resolved; (a) resolved for concept 2027 but 26941 is still cited for a parafiscal holding it does not make, and the M131 termination limb still has no source.",
+ "checks": [
+  {
+   "id": "1a",
+   "check": "Compensated / termination vacation in the PARAFISCAL base cited to Sala de Consulta 2027 of 2010-10-04; does 26941 support the parafiscal limb?",
+   "result": "PARTIAL",
+   "evidence": [
+    "Concept 2027 (FuncionPublica html): 'Bogotá D.C., cuatro (04) de octubre de dos mil diez (2010)', 'Número interno: 2027'; Respuesta: 'Las vacaciones pagadas en dinero a la terminación de la relación laboral hacen parte de la base para la liquidación y pago de los aportes parafiscales al SENA, ICFB y Cajas de Compensación Familiar'; síntesis: 'comprende tanto las vacaciones disfrutadas como las pagadas en dinero'. Now cited in PILA C27, PILA M111, DIAN C27, DIAN M131 - correct.",
+    "CE S4 26941, section 5.4, deals only with the ARL/health IBC: 'el hecho que las vacaciones se paguen a la terminación del contrato laboral no tiene como consecuencia la pérdida de su connotación de descanso remunerado, pues se causaron día a día ... sin que se consideren salario y, por ende, no se incluyan para liquidar los aportes al Sistema de Seguridad Social Integral.' Its only parafiscal holding (section 5.3, quoting 24735) is on ENJOYED vacation: 'cuando las vacaciones son disfrutadas ... (iii) en el caso de aportes parafiscales, la suma pagada por ese concepto se incluye en la base de liquidación'. 26941 never states that vacation paid in cash or on termination is in the parafiscal base; that is an inference from 'descanso remunerado'. 26941 supports the SGSS exclusion only.",
+    "Citation to drop: 'Sección Cuarta, exp. 26941 of 2024-04-04' in PILA Payroll Scope Summary!C27 and 'Sección Cuarta, exp. 26941 of 2024' in the FIRST parenthesis of PILA Spec!M111 (the parafiscal limb). Keep 26941 in the second M111 parenthesis and in C4 / DIAN C27 / M131 (SGSS exclusion), where it is on point."
+   ]
+  },
+  {
+   "id": "1b",
+   "check": "ICBF credited to Ley 89/1988 art. 1 par. 1",
+   "result": "PASS",
+   "evidence": "PILA C27 ('The ICBF base is the same payroll (Ley 89 de 1988 art. 1 par. 1)'), DIAN C27, M130 and M131 ('ICBF - Ley 89 de 1988 art. 1 par. 1'). Ley 21 art. 17 now cited only for CCF and SENA in M130/M131."
+  },
+  {
+   "id": "1c",
+   "check": "'health and pension' on enjoyed vacation = DUR 780 art. 3.2.5.1 + CE 25958; does 25958 cover pension?",
+   "result": "PASS",
+   "evidence": "25958 ('ocho (8) de septiembre de dos mil veintidós (2022)', C.P. Myriam Stella Gutiérrez Argüello) quoting 24735: 'cuando las vacaciones son disfrutadas por el trabajador: i) se deben realizar los pagos a los subsistemas de salud y pensión, para lo cual debe observarse el IBC anterior al inicio del descanso, ii) no se hacen aportes a la ARL ...'; resolutive table applies it to 'Salud y pensión'. Covers pension. Pairing present in PILA C4, DIAN C27, M130, M131."
+  },
+  {
+   "id": "1d",
+   "check": "Population Rules C4",
+   "result": "PASS",
+   "evidence": "Exclusion sourced '(Consejo de Estado, Sección Cuarta, exp. 26941 of 2024; unification ruling exp. 25185 of 2021, rule 1)' - 26941 on point for health/ARL, SU 25185 rule 1 covers 'pensión, salud y riesgos profesionales'. No '40% computation' text. Enjoyed-vacation clause limited to 'health and pension' (no ARL claim). The single insert sits after the three-IBC sentence; 'which INCLUDES paid rest days (70% of the integral salary, Ley 789 de 2002 art. 49)' is byte-identical to the live cell, so the bracket stays on the CCF base."
+  },
+  {
+   "id": "1e",
+   "check": "Pass-1 fix M131 termination source (Ley 995 de 2005 art. 1)",
+   "result": "FAIL",
+   "evidence": "M131 proposed: '(during employment, CST art. 189, or on termination)' - the termination limb still carries no source. Ley 995 de 2005 art. 1 text is quoted verbatim in 26941 fn. 47 ('Del reconocimiento de vacaciones en caso de retiro del servicio o terminación del contrato de trabajo ... tendrán derecho a que estas se les reconozcan y compensen en dinero proporcionalmente')."
+  },
+  {
+   "id": "2",
+   "check": "current == live cell; only described fragments change",
+   "result": "PASS",
+   "evidence": "openpyxl read_only, string equality: PILA C27, M111, C4 and DIAN C27, M131, M130 all EQUAL. difflib: PILA C27 = 1 append; M111 = 1 insert before ' The engine stores...'; C4 = 1 insert after the three-IBC sentence; DIAN C27 / M131 = rewrite of the rule sentence (intended); M130 = first paragraph only, 'Source:' paragraph unchanged. Only column M/C cells touched."
+  },
+  {
+   "id": "3",
+   "check": "Standards and consistency",
+   "result": "PASS (advisory noted)",
+   "evidence": [
+    "WORDS regex from scripts/make_final.py on all 6 proposed texts: 0 hits. No duplicated sentence in any cell. No internal references; English.",
+    "Consistency: cash/termination vacation out of the pension, health and occupational-risk IBC (PILA M111, C4; DIAN C27, M131); enjoyed vacation on the prior-month IBC for health and pension only (PILA C4; DIAN C27, M130, M131); all vacation in the CCF/SENA/ICBF base (PILA C27, M111; DIAN C27, M130, M131). No contradiction among the six cells.",
+    "Advisory (not blocking): citation dates are mixed ('2027 of 2010-10-04' / '26941 of 2024-04-04' in the C27 cells vs 'of 2010' / 'of 2024' elsewhere); harmonise if convenient.",
+    "Outside the set, unchanged from pass 1: PILA M110 and Population Rules C5 (vacation days do not reduce the ARL day count) vs 25958/26941 'no se hacen aportes a la ARL' during enjoyed vacation - keep in OPEN-POINTS."
+   ]
+  }
+ ],
+ "required_fixes": [
+  {
+   "spec": "CO-PILA-003",
+   "cell": "Payroll Scope Summary!C27",
+   "fix": "Replace '(Consejo de Estado, Sala de Consulta, concept 2027 of 2010-10-04; Sección Cuarta, exp. 26941 of 2024-04-04)' with '(Consejo de Estado, Sala de Consulta, concept 2027 of 2010-10-04)'."
+  },
+  {
+   "spec": "CO-PILA-003",
+   "cell": "PILA Spec!M111",
+   "fix": "In the first parenthesis replace '(Consejo de Estado, Sala de Consulta, concept 2027 of 2010; Sección Cuarta, exp. 26941 of 2024)' with '(Consejo de Estado, Sala de Consulta, concept 2027 of 2010)'. Keep the second parenthesis (26941; 25185 rule 1) unchanged."
+  },
+  {
+   "spec": "CO-DIAN-001",
+   "cell": "Nomina Electronica Spec!M131",
+   "fix": "Replace '(during employment, CST art. 189, or on termination)' with '(during employment, CST art. 189, or on termination, Ley 995 de 2005 art. 1)'."
+  }
+ ]
+}
+}

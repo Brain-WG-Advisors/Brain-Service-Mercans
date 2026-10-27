@@ -69,7 +69,9 @@
 ## Valores-chave (com vigência)
 | Item | Valor | A partir de | Até | Fonte |
 |---|---|---|---|---|
-| | | | | |
+| Feriegodtgørelse na rescisão (mensalista) | 12,5% só sobre a férias acumulada **não gozada**, como parte proporcional do valor do ano de férias | 2020-09-01 (lei de férias atual) | | Ferieloven LBK 152/2024 § 16 stk. 4; LSF 116 (2017-18), nota ao § 16 stk. 4: "afregne en forholdsmæssig andel heraf i forhold til den optjente og afholdte ferie" (raw/docs/oficiais/DK/2026-10-22-*) |
+| Base sem løn under ferie | Não há feriegodtgørelse/ferietillæg sobre salário de férias | 2020-09-01 | | Ferieloven § 19 stk. 4 |
+| Ferietillæg 1% já pago (maio/agosto) | Não se pede de volta | 2020-09-01 | | Ferieloven § 18 |
 
 ## Decisões
 - 
@@ -77,10 +79,24 @@
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-15 | HRBS-15410 (STG, parallel run) | 1% (ferietillæg) na rescisão | Sem novo acúmulo de 1% no mês da saída (regulações 9208041/9208061 com EQUALS($58299;0)); 1% só para dias gozados ainda não suplementados; fórmulas 62220/64552/64992 conforme WTC 4.1 (Resolved; não foi nosso) | CCG V2.3.8 (exemplos ajustados em 22/10, ver abaixo) |
+| 2026-10-22 | CCG V2.3.8 — 3 comentários da Ruchi (Holiday Pay na rescisão) | Assumido a pedido da Manju (Enaakshi fora até segunda) | 3 respostas publicadas pelo usuário; 2 sugestões no CCG (modo Sugestão): Cenário C passo 7 sem 1% no mês da saída; exemplo da Versão 2 com 10 dias gozados (provisão proporcional, DKK 24.804,49 + 1% DKK 2.275,64). Rascunho e fontes: `rascunhos/2026-10-22-dk-ccg-comentarios-ruchi-holiday-pay.md` | Sugestões abertas: aceitar só depois da confirmação da Ruchi (pedida no chat 22/10 18:28) |
+
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Denmark`
+
+| Pacote | Período | Pass / Finding / NT | Recibo | Situação |
+|---|---|---|---|---|
+| Sherwin-Williams Denmark A/S (SE 24502511) | set/26 | 18 / 5 / 2 | Sim (Afstemning SKAT) | Fechado 2026-10-14 |
+| KGS Fire & Security Danmark ApS (SE 18458195) | set/26 | 15 / 5 / 4 | Sim | Fechado 2026-10-14 (banco = Out of scope, money movement fora da Mercans) |
+
+- AM-bidrag 8%, A-skat e ATP: 24/24; totais do eIndkomst batem campo a campo com a Afstemning do SKAT.
+- **High (KGS):** seguro-saúde do empregador não tributado e fora do campo 0026 (a Sherwin tributa) → A-02.
+- **Medium (Sherwin):** indenização no campo 0069 pelo líquido, não bruto → A-03. Base do Store Bededag/ferietillæg diverge entre os dois clientes → decisão D-03.
 
 ## Pendências
-- [ ]
+- [ ] CCG V2.3.8: aceitar as 2 sugestões de 22/10 depois do ok da Ruchi (pedido no chat STG: Denmark, 22/10 18:28; sem resposta até o fim do dia). Se ela pedir ajuste, mudar a sugestão antes. — Wallisson
+- [ ] CCG usa 4,8% do salário mensal por dia de férias **pago**; a lei só fixa 4,8% para dia **sem** pagamento (Ferieloven § 15 stk. 3). Não citado à Ruchi; avaliar com a Enaakshi. — Wallisson
 
 ## Correções ligadas
 - _(links para entradas de [[correcoes]])_

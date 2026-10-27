@@ -1,0 +1,312 @@
+{
+ "spec": "CO-PILA-003",
+ "checked": [
+  {
+   "id_or_column": "row 58 T2R1-020 Total payroll value",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Re-computed: sum of G2N WT 64991 'Parafiscals Base actual' = 4,354,789,323 (sum of capped WT 64992 = 4,139,010,679). The spec contradicts the row's own Field Explanation (sum of campo 45, NOT campo 95) in more places than the cross-check says. The SAME row's System Mapping is 'SUM(Payroll.Parafiscal_Base)'. Example Analysis row 18 says the sum of campo 95. Population Rules row 4 says the sum of campo 95, NOT campo 45. Population Rules row 9 says T2R1-020 equals the sum of T2R2-095. So the Field Explanation is the only place that says campo 45 (1 against 4). The client has no T2R1-020 figure of its own, but its parafiscal base supports the campo-95 reading. The verdict stays a Conflict because only the AT2 v30 text of §2.1.1.1 campo 20 can decide it."
+  },
+  {
+   "id_or_column": "row 68 T2R2-006 Contributor sub-type",
+   "original_verdict": "Conflict",
+   "result": "overturned",
+   "reason": "Correct verdict: Not evidenced. Both employees with a 'Pensioner Effective Date' have a date EXACTLY equal to their Hire Date (89447129: 18-11-2025 = 2025-11-18; 21244719: 02-12-2025 = 2025-12-02). Both have an AFP (SKANDIA, COLPENSIONES) and pay full pension and FSP. Both are among the 8 'Regime = AReg' employees, and the other 6 AReg employees have no pensioner date. This looks like a defaulted or copied date, not proof that these employees are active pensioners. The client therefore holds no reliable PILA sub-type, and the data does not contradict the annex rule (campo 46 = 0 for sub-types 1-6, 9, 12). Keep a data-quality question for the client: are these two employees pensioners?"
+  },
+  {
+   "id_or_column": "row 111 T2R2-045 IBC CCF",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Re-computed: employee 21804582 has 64990 = 72,500,000, 64991 = 50,750,000 (70% integral), 64992 = 43,772,625 and IBC Total = 43,772,625 (25 SMMLV), with CCF WT 25110 = -2,030,000 = 4% of 50,750,000 exactly. CCF = 4% of 64991 for 225 of 241 employees. Of the 58 employees whose 64991 is above 64992 (the capped base), 50 pay 4% of the uncapped 64991 and NONE pays 4% of the capped base (1,750,905). The other 8 carry prior-period WTs 1204/1910 or similar adjustments. The client clearly applies no 25-SMMLV cap to the CCF base. The spec (row 111 and Population Rules row 4) caps it. This is a genuine statutory conflict, to be settled from the AT2 campo 45 text and the CCF base rules."
+  },
+  {
+   "id_or_column": "row 138 T2R2-065 CCF contribution value",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Same evidence as row 111: 25110 = 4% of uncapped 64991 (e.g. -2,030,000 on 50,750,000, while 4% of the capped 43,772,625 would be 1,750,905). This depends on the row 111 decision."
+  },
+  {
+   "id_or_column": "row 150 T2R2-076 Contributor exonerated from payment",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "The verdict holds, but part of the evidence is wrong. (1) The cross-check took the 'health base' from G2N 64991/64992. The real base is 'IBC Total' in the Detail IBC report: WT 2554/2556 = 4% of IBC Total for 239 of 239 employees, but 4% of 64992 for only 183. On IBC Total, the counter-example 61710144 is WRONG: its IBC Total is 6,550,482 (below 10 SMMLV), so its exoneration agrees with the spec test. Its 64991/64992 of 31,034,251 is not its monthly IBC. (2) The figure of '23 non-integral employees' could not be reproduced. On IBC Total there are 17 non-exonerated employees below 17,509,050 (9 integral, 8 non-integral) and 1 exonerated employee above it (89447129, IBC 17,541,271). The spec test therefore matches the client in 222 of 241 cases. (3) Reproduced: the 'total monthly entitlements >= 10 SMMLV' test matches 233 of 241. The IBC report's 'Salary Value + Non-Wage Value >= 10 SMMLV' matches 234 of 241. No test matches exactly. All 88 integral employees are non-exonerated (confirmed). The client clearly tests an earnings ('devengado') figure, not the IBC, so the Conflict stands. The evidence text should replace the 61710144 example with 05115902 (IBC 16,546,284.5, non-exonerated) and 89447129."
+  },
+  {
+   "id_or_column": "row 71 T2R2-009 Work location department code",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Master Data 'Work location' holds 12 distinct city names (Bogota 166, Medellin 57, Cali 18, ...), and 'Employee Address - Department' holds residence abbreviations (DC, ANT, CUN, ...). There is no DIVIPOLA code. Add to the finding: 4 employees have a blank 'Work location'."
+  },
+  {
+   "id_or_column": "row 72 T2R2-010 Work location municipality code",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Same evidence as row 71. Confirmed. 4 blank 'Work location' values should also be listed as blocking data errors."
+  },
+  {
+   "id_or_column": "row 95 T2R2-031 Pension fund of the member",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "5 AFP names (PROTECCION 88, COLPENSIONES 60, PORVENIR 46, SKANDIA 24, CITICOLFONDOS 20), no codes. 3 employees with pension WT 2556 have no AFP name (08352740, 57025853, 10537110; the last two were hired on 2026-09-01)."
+  },
+  {
+   "id_or_column": "row 97 T2R2-033 EPS or EOC of the member",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Counts reproduced: 'SANITAS  EPS' 60 vs 'SANITAS' 25, bare numbers in 26 records ('6' x15, '12' x3, '11' x3, '1', '13', '24', '8', '3'), and 24 blanks, of which 20 are Employee Group 6 interns."
+  },
+  {
+   "id_or_column": "row 135 T2R2-078 Risk class",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Reproduced: 'Class 1' 196, 'Class 2' 60, '1' 2, blank 5. The class is held per employee."
+  },
+  {
+   "id_or_column": "row 160 T2R2-085 IGE start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave report dates are DD-MM-YYYY text in 97 of 97 rows. 31309721 has 79008 on 08-09..09-09-2026 followed by 79011 on 10-09..12-09-2026 (one incapacity on two rows), as stated."
+  },
+  {
+   "id_or_column": "row 161 T2R2-086 IGE end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "As row 160. Date To is DD-MM-YYYY text, and the split-row merge rule is supported."
+  },
+  {
+   "id_or_column": "row 162 T2R2-087 LMA start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "One 79006 row: 01-09-2026 to 30-09-2026, DD-MM-YYYY text. Confirmed."
+  },
+  {
+   "id_or_column": "row 163 T2R2-088 LMA end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "As row 162."
+  },
+  {
+   "id_or_column": "row 164 T2R2-089 VAC-LR start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Confirmed: 79001 rows dated 27-08-2026 (30591217) and 31-08-2026 (45680439) appear in the September report, and 2 rows of 79003 (01-05-2026, 01-07-2026) have a blank Date To."
+  },
+  {
+   "id_or_column": "row 165 T2R2-090 VAC-LR end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "As row 164."
+  },
+  {
+   "id_or_column": "row 4 A1-001 Employer name",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "The report title 'Organization' = '1764 - Compañía Colombiana de Tabaco SAS' in every report. The proposed text keeps the spec text and adds the right source (RUT / company configuration)."
+  },
+  {
+   "id_or_column": "row 32 A1-029 Payment period",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Spec row 32 is N(7) zero-filled with example '2026-03', while T2R1-015 (row 53) is A(7). The inconsistency is real. Deriving AAAA-MM from the period '2026-09-01 - 2026-09-30' is correct."
+  },
+  {
+   "id_or_column": "row 42 T2R1-004 Employer name",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Same evidence as row 4."
+  },
+  {
+   "id_or_column": "row 57 T2R1-019 Total number of contributors",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "IBC report headcount 261. 20 rows have IBC Total = 0, and those are exactly the 20 WT 62149 interns (Employee Group 6 / E2). None of them has a 64990 base. 241 employees have 64990. The proposed text is correct."
+  },
+  {
+   "id_or_column": "row 65 T2R2-003 Contributor document type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "The verdict and proposed text are correct, but two evidence counts are wrong. Actual combinations among the 261 Master Data employees: CC only 234, CE only 13, CC+National ID 8, CC+National ID+Identity Card 3, CE+Identity Card 1, CC+Identity Card 1, CC+CE+Identity Card 1, NONE 0. The cross-check says '2 have Identity Card + CE' and '2 have none'; both are wrong. The precedence rule the proposal asks for is still needed."
+  },
+  {
+   "id_or_column": "row 66 T2R2-004 Contributor identification number",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "IBC IDs 540521 and 548939 are not in the G2N, and G2N 71425113 and 29161671 are not in the IBC report. 28 of the 80 Leave report employees are in neither the G2N nor Master Data (their name tokens NAME_1600-1627 are also absent, so this is a real population difference, not a masking artefact). G2N National ID is blank for 14 employees. CC lengths are 7/8/10 and CE lengths are 6/7. The proposed join on document type + number is sound."
+  },
+  {
+   "id_or_column": "row 67 T2R2-005 Contributor type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Groups reproduced: 1/1A 154, 1/1B 74, group 3 = 13 (3C, 6A, 7A, 7G, 7J, 9A), 6/E2 20. The interns have no 64990, EPS, AFP or ARL WTs. The proposed text only adds a PMI derivation note to the spec's own code list."
+  },
+  {
+   "id_or_column": "row 86 T2R2-023 VST",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "IBC Total > Salary Value for 46 employees (the cross-check says 45; a trivial difference). Example 43437487: 15,739,167 vs 22,751,667. The proposed text is hedged (the trigger list must be confirmed against the annex), which is appropriate."
+  },
+  {
+   "id_or_column": "row 90 T2R2-027 VAC-LR",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "79001 has 81 rows, 79018 has 1 and 79003 has 7, 2 of which have a blank Date To and start on 01-05-2026 / 01-07-2026. The proposal leaves the 79003 rule open rather than inventing it, which is correct."
+  },
+  {
+   "id_or_column": "row 107 T2R2-041 All-inclusive salary flag",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62140 is paid to 88 employees and 62100 to 153. 71425113: 64991 = 17,300,699 = 70% of 24,715,285. 70% for parafiscals on an integral salary is consistent with CST art. 132 and Ley 789 de 2002 art. 49."
+  },
+  {
+   "id_or_column": "row 108 T2R2-042 Pension IBC",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed. 14 employees sit at the ceiling of 43,772,625 and none above it. 85 of 261 IBC Total values have decimals. 540521: 17,300,699.5 = 0.7 x 24,715,285. 54952425: 6,093,273.6 = 60% of (6,027,817 + 4,127,639). 53618643: 0.7 x 22,761,765 + (23,801,108 - 0.4 x 46,562,873) = 21,109,194.3. So the 40% test runs on the FULL integral salary; a test on the 70% figure would give 23,840,606. WT 2556 = round(4% of IBC Total) for 239 of 239 employees, so IBC Total is the pension base. Round-up to the peso matches the spec's Rounding column."
+  },
+  {
+   "id_or_column": "row 109 T2R2-043 Health IBC",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "WT 2554 = 4% of IBC Total for 239 of 239 employees. The proposal correctly marks the 10-SMMLV sentence as under review (see row 150)."
+  },
+  {
+   "id_or_column": "row 110 T2R2-044 ARL IBC",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "WT 2560 = 0.522% of IBC Total for 186 employees and 1.044% for 51 (2 outliers). 31309721: 179,511 = 0.522% x 34,388,925 (its 70% integral IBC); its 5 sick-leave days are inside that base. The proposed text asks for the rule to be stated and confirmed, and does not assert it."
+  },
+  {
+   "id_or_column": "row 112 T2R2-095 Parafiscal base",
+   "original_verdict": "Explanation to improve",
+   "result": "needs Wallisson",
+   "reason": "The data claims are correct: 67169834 has 64991 = 67,724,592; 05115902 has 64991 = 15,618,776 = 14,748,072 + 870,704 (WT 79401); SENA 2% and ICBF 3% of 64991 for 99 of the 111 non-exonerated employees; integral = 70%. BUT the proposed text keeps the sentence 'Header campo T2R1-020 is the sum of campo 45 (IBC CCF), NOT of this field'. That sentence is exactly what the row 58 Conflict disputes, and Population Rules rows 4 and 9, Example Analysis and the row 58 System Mapping all say the opposite. Decide row 58 first. Then either delete that sentence or replace it with 'Header T2R1-020 is the sum of this field' before approving this change."
+  },
+  {
+   "id_or_column": "row 115 T2R2-047 Mandatory pension contribution",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "12 of the 241 WT 2556 amounts and 14 of the 241 WT 2567 amounts are multiples of 100. The payroll rounds to the peso. Recomputing with round-up to 100 matches the spec Rounding column (Decree 1990 of 2016)."
+  },
+  {
+   "id_or_column": "row 116 T2R2-048 Voluntary contribution to mandatory fund",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "25812/25813/25814/25815/25823 are FVOL voluntary-fund WTs (per the Accumulated Report). Small fix: the range '25812-25823' also covers 25817 'Dividendo por Colombia Contribution', which is not an FVOL. Better to list the codes explicitly. Excluding 25817 from this field does no harm."
+  },
+  {
+   "id_or_column": "row 119 T2R2-051 FSP solidarity",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed on IBC Total. WT 2553 rates: 0% below 4 SMMLV (17), 1.0% for 4-16 (179), 1.2% (10), 1.4% (7), 1.6% (3), 1.8% (3), 2.0% at 20 or more (20). That is 239 of 239 in the right band; the other 2 G2N employees have no IBC report row. The client uses one combined WT, so the split instruction is right."
+  },
+  {
+   "id_or_column": "row 120 T2R2-052 FSP subsistence",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "As row 119. Deriving subsistence as the combined WT 2553 minus 0.5% of the IBC is consistent with the band table."
+  },
+  {
+   "id_or_column": "row 124 T2R2-055 Mandatory health contribution",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "12 of the 241 WT 2554 amounts are multiples of 100. The recompute-and-round-up instruction is consistent with the spec."
+  },
+  {
+   "id_or_column": "row 126 T2R2-057 IGE authorisation number",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Spec row 126 says BLANK in the Conditional Reason, but its Field Explanation and Population Rules row 23 say report it. The inconsistency is real and the proposal fixes the explanation."
+  },
+  {
+   "id_or_column": "row 127 T2R2-058 IGE value",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "As row 126 (the Conditional Reason says ZERO). The Leave amounts quoted (199,033; 2,122,835; 5,605,600) were found."
+  },
+  {
+   "id_or_column": "row 128 T2R2-059 LMA authorisation number",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "As row 126."
+  },
+  {
+   "id_or_column": "row 129 T2R2-060 LMA value",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "As row 127."
+  },
+  {
+   "id_or_column": "row 133 T2R2-063 Mandatory ARL contribution",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "3 of the 241 WT 2560 amounts are multiples of 100. The 62,640 to 62,700 illustration comes from the spec's own Example Analysis."
+  },
+  {
+   "id_or_column": "row 10 A1-007 Class of contributor (sample)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "241 employees have a 64990 base, which means class A (200 or more). The spec explanation covers this, and example 'B' is only illustrative."
+  },
+  {
+   "id_or_column": "row 73 T2R2-011 First surname (sample)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Master Data 'Last Name' is populated for 261 of 261 employees (masked tokens)."
+  },
+  {
+   "id_or_column": "row 78 T2R2-015 ING (sample)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "The G2N Hire Date is 2026-09-01 for 57025853 and 10537110, both new hires in the period."
+  },
+  {
+   "id_or_column": "row 88 T2R2-025 IGE (sample)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "The Leave report has WTs 79008 'Sick Leave - Employer Paid First Days (2 days)' and 79011 'Sick Leave - Healthcare Insurance Reimbursed', matching the explanation (days 1-2 paid by the employer, from day 3 by the EPS)."
+  },
+  {
+   "id_or_column": "row 155 T2R2-080 Hire date (sample)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "The G2N Hire Date is AAAA-MM-DD for 261 of 261 employees and equals the Master Data DD-MM-YYYY date for 261 of 261."
+  },
+  {
+   "id_or_column": "spec_internal_inconsistencies: '21 amount fields (rows 106-146) have Field Length 9 but a 12-position Example'",
+   "original_verdict": "Spec internal inconsistency",
+   "result": "overturned",
+   "reason": "The count is 19, not 21: rows 106, 108-112, 115-118, 121, 124, 125, 133, 138, 140, 142, 144 and 146 have Field Length 9 / N(9) with a 12-character example. The inconsistency itself is real. The 9-digit examples in the spec's Example Analysis (e.g. '012000000') support 9 as the length and show that the 12-digit Examples are the defect."
+  },
+  {
+   "id_or_column": "uncovered: G2N WT 63011 'SS carry-forward 1'",
+   "original_verdict": "Client-specific (uncovered)",
+   "result": "confirmed",
+   "reason": "Client-specific is correct (239 employees, never equal to 64990). Add a note: G2N bases 64990/64992 differ from the IBC report 'IBC Total' for 60 of 239 employees (e.g. 61710144: 64992 = 31,034,251 vs IBC Total = 6,550,482). The IBC report, not G2N 64992, is the monthly IBC source."
+  },
+  {
+   "id_or_column": "uncovered: G2N WT 1204 / 1910 prior-period obligations",
+   "original_verdict": "Client-specific (uncovered)",
+   "result": "confirmed",
+   "reason": "Client-specific with a correction-return caveat is right. 6 employees (04302342, 06132904, 08352740, 21533978, 56231402, 67169834) are the same ones whose CCF does not fit the 4% rule (rows 111/138)."
+  },
+  {
+   "id_or_column": "uncovered: Master Data 'Employment Status'",
+   "original_verdict": "Client-specific (uncovered)",
+   "result": "confirmed",
+   "reason": "5 'D' employees (all Employee Group 3) and no Effective Leaving Date anywhere in the G2N. The statement that it may signal RET but holds no date is correct. There is no unmapped statutory field."
+  },
+  {
+   "id_or_column": "uncovered: Master Data 'Regime'",
+   "original_verdict": "Client-specific (uncovered)",
+   "result": "confirmed",
+   "reason": "'AReg' for 8 employees, all hired from Nov-2025 onwards. It includes both 'pensioner' employees and 3 of the group-3 expatriates. Its meaning is unknown, so 'client to explain' is the right call. It is relevant to the row 68 question."
+  },
+  {
+   "id_or_column": "uncovered: Master Data 'Nationality'",
+   "original_verdict": "Client-specific (uncovered)",
+   "result": "confirmed",
+   "reason": "16 non-Colombian employees. All of them pay pension (2556/2567), so none would carry T2R2-007. The classification as supporting T2R2-007 checks only is correct. There is no statutory data missing from the spec."
+  }
+ ],
+ "agreement_rate": 0.941
+}

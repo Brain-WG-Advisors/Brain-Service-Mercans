@@ -34,6 +34,8 @@ if ($Since -notmatch '^\d{4}-\d{2}-\d{2}$') {
     Write-Host "ERRO: -Since deve estar no formato AAAA-MM-DD (recebido: '$Since')." -ForegroundColor Red
     exit 1
 }
+# Padrao: tickets atribuidos a mim. (Este YouTrack rejeita "(a or b) updated:" com HTTP 400;
+# para abertos/comentados use -Query "reporter: me" ou -Query "commenter: me".)
 if ([string]::IsNullOrWhiteSpace($Query)) { $Query = "for: me updated: $Since .. Today" }
 # raw/ e imutavel: cada execucao grava numa pasta nova com a data do dia (nunca sobrescreve)
 if ([string]::IsNullOrWhiteSpace($OutDir)) { $OutDir = Join-Path $brainRoot ('raw\tickets\api\' + (Get-Date -Format 'yyyy-MM-dd')) }

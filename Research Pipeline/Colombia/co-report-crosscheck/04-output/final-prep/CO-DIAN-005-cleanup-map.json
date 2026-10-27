@@ -1,0 +1,448 @@
+{
+ "spec": "CO-DIAN-005",
+ "draft": "02-specs-out/CO-DIAN-005-Formato2276-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "final_name": "CO-DIAN-005-Formato2276-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "B15",
+   "field_id": null,
+   "current": "Not stated in the source content -- requires confirmation before relying on it (uploaded to DIAN third-party (exogenous) information service per published technical specifications)",
+   "proposed": "XML prepared to the DIAN technical specifications for Format 2276 version 4 and uploaded to the DIAN third-party (exogenous) information service (DIAN Resolution 000227 of 2025 art. 1.3.10.1, entry T3.45).",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B16",
+   "field_id": null,
+   "current": "Not stated in the source content -- requires confirmation before relying on it",
+   "proposed": "Rule to be set at implementation: the file extension follows the published DIAN technical specifications for Format 2276 version 4 (Res. 000227 of 2025 art. 1.3.10.1, entry T3.45).",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B17",
+   "field_id": null,
+   "current": "Not stated in the source content -- requires confirmation before relying on it",
+   "proposed": "Rule to be set at implementation: the character encoding follows the published DIAN technical specifications for Format 2276 version 4 (Res. 000227 of 2025 art. 1.3.10.1, entry T3.45).",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B18",
+   "field_id": null,
+   "current": "Not stated in the source content -- requires confirmation before relying on it",
+   "proposed": "One record per beneficiary carrying numerals 1 to 36 of Res. 000227 of 2025 art. 1.3.7.1.1 in their published order, plus the envelope attributes (informant NIT, taxpayer category, tax year, format and version); the physical record layout follows the published DIAN technical specifications for Format 2276 version 4 (see the File Structure sheet).",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A22",
+   "field_id": null,
+   "current": "DETAILED COMPLIANCE NOTES (Colombia-specific; preserved from the prior version)",
+   "proposed": "DETAILED COMPLIANCE NOTES (Colombia-specific)",
+   "why": "version comparison"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A23",
+   "field_id": null,
+   "current": "SUBMISSION CHANNEL VERIFICATION (v2.7 STEP 3.5)",
+   "proposed": "SUBMISSION CHANNEL",
+   "why": "process header"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A24",
+   "field_id": null,
+   "current": "- Channel: file_upload (XML) into the DIAN third-party (exogenous) information service | Portal: www.dian.gov.co, Electronic Computer Services, with the Electronic Signature Instrument (IFE) | Source: DIAN Resolution 000227 of 2025 arts. 1.3.7.1.1 and 1.3.10.1 | CONFIRMED as to channel; FORMAT TO CONFIRM as to the XML schema.",
+   "proposed": "- Channel: file_upload (XML) into the DIAN third-party (exogenous) information service | Portal: www.dian.gov.co, Electronic Computer Services, with the Electronic Signature Instrument (IFE) | Source: DIAN Resolution 000227 of 2025 arts. 1.3.7.1.1 and 1.3.10.1 | The XML schema is defined by the published technical specifications of Format 2276 version 4.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A26",
+   "field_id": null,
+   "current": "- The word 'XML' is used here because Res. 227 art. 1.3.10.1 lists Format 2276 among the formats with published technical specifications, and the exogena service accepts XML. It is NOT used because an XSD has been cited - none is in the local registry. Column T marks every element path DERIVED accordingly.",
+   "proposed": "- The word 'XML' is used here because Res. 227 art. 1.3.10.1 lists Format 2276 among the formats with published technical specifications, and the exogena service accepts XML. The resolution itself prescribes no XSD: the element names, ordering and lengths are fixed by the technical specifications of Format 2276 version 4, so every element path in this specification is a logical name marked DERIVED, to be mapped to the published technical specifications at implementation.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A32",
+   "field_id": null,
+   "current": "RESIDENT / NON-RESIDENT TREATMENT (v2.8 control B1)",
+   "proposed": "RESIDENT / NON-RESIDENT TREATMENT",
+   "why": "process header"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A45",
+   "field_id": null,
+   "current": "- Numerals 30, 31, 35 and 36 are NOT payroll fields - VAT and collaboration-contract identifiers, owned by the client's tax function.",
+   "proposed": "- Numerals 30, 31, 35 and 36 are NOT payroll fields - VAT and collaboration-contract identifiers, owned by the employer's tax function outside payroll.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M5",
+   "field_id": "N02",
+   "current": "COMPOSITE FIELD as drafted in the resolution - numeral 2 names BOTH the document type and the number in a single numeral, and the technical specification splits them into two columns. Sub-field 1 = the DIAN identity-document type code from the 'Tipo de documento (numerals 2 and 34)' table on the Field Options sheet; sub-field 2 = the identification number without dots or hyphens, kept as text so leading zeros survive. SOURCE AT PMI: the client master data has no type-code field - it stores the number in one column per document type (Citizenship Card ID, Indentity Card for Foreigners, Identity Card, National ID). The engine must hold an explicit Employee.Document_Type, derived once from the populated column through a client-confirmed mapping, with a priority rule where more than one column is filled (14 of 261 master-data rows). POPULATION: the record is required for EVERY person paid in the tax year, including leavers and employer-paid pensioners who are not in the current master-data snapshot - their document type and number must be retained after termination. At PMI 8 persons paid in the year and absent from the master data have no identification number in any mapped report; their identity must be sourced before build. Where a payment is made to a payee other than the employee (the client's accumulators carry a separate 'Beneficiary National Id', mostly on pension payments), the identity reported is that of the beneficiary of the payment - to be confirmed with RA. PERSISTENCE: this pair is the join key across every Colombian artefact for the employee - electronic payroll NIE044 / NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24 and 25.",
+   "proposed": "COMPOSITE FIELD as drafted in the resolution - numeral 2 names BOTH the document type and the number in a single numeral, and the technical specification splits them into two columns. Sub-field 1 = the DIAN identity-document type code from the 'Tipo de documento (numerals 2 and 34)' table on the Field Options sheet; sub-field 2 = the identification number without dots or hyphens, kept as text so leading zeros survive. SOURCE: Employee.Document_Type and Employee.Document_Number in the employee master data. Where the master data holds no type-code field and stores the number in one column per document type (Citizenship Card ID, Identity Card for Foreigners, Identity Card, National ID), the engine holds an explicit Employee.Document_Type derived once from the populated column through a document-type mapping table supplied at implementation, with a priority rule where more than one column is filled. POPULATION: the record is required for EVERY person paid in the tax year, including leavers and employer-paid pensioners who are not active employees in the master data - their document type and number are retained after termination and held for every pensioner. Where a payment is made to a payee other than the employee (payroll field 'Beneficiary National Id', typically on pension payments), the identity reported is that of the beneficiary of the payment. PERSISTENCE: this pair is the join key across every Colombian artefact for the employee - electronic payroll NIE044 / NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24 and 25.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M6",
+   "field_id": "N03",
+   "current": "COMPOSITE FIELD. The resolution names one numeral; the technical specification splits it into four columns - first surname, second surname, first given name, other given names - in the same order as every other DIAN artefact. Sub-field order matters: DIAN matches on the surname columns. SOURCE AT PMI: first surname = master-data Last Name; second surname = Second Last Name (blank allowed); first given name = First Name; other given names = Middle Name (blank allowed). Do NOT use the formatted full name. The four name parts must be retained for leavers and for employer-paid pensioners, who are not in the current master-data snapshot.",
+   "proposed": "COMPOSITE FIELD. The resolution names one numeral; the technical specification splits it into four columns - first surname, second surname, first given name, other given names - in the same order as every other DIAN artefact. Sub-field order matters: DIAN matches on the surname columns. SOURCE: first surname = Master Data field 'Last Name'; second surname = Master Data field 'Second Last Name' (blank allowed); first given name = Master Data field 'First Name'; other given names = Master Data field 'Middle Name' (blank allowed). Do NOT use the formatted full name. The four name parts are retained for leavers and held for employer-paid pensioners, who are not active employees in the master data.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M7",
+   "field_id": "N04",
+   "current": "COMPOSITE FIELD - department (2 digits) and municipality (3 digits) of the beneficiary, on the DANE DIVIPOLA catalogue. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE AT PMI: the client stores a letter department code and a free-text city, so the system must hold the beneficiary's DIVIPOLA department and municipality codes as master data (or convert through a maintained mapping table validated against DIVIPOLA); free text must never be sent. The value for a beneficiary whose address is outside Colombia must be confirmed against the Formato 2276 v4 technical specification (RA). Location must be retained for leavers and employer-paid pensioners.",
+   "proposed": "COMPOSITE FIELD - department (2 digits) and municipality (3 digits) of the beneficiary, on the DANE DIVIPOLA catalogue. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data; where the master data holds a letter department code and a free-text city, the codes are obtained through a maintained mapping table validated against DIVIPOLA and supplied at implementation. Free text must never be sent. Rule to be set at implementation: the value for a beneficiary whose address is outside Colombia follows the Formato 2276 version 4 technical specifications. Location is retained for leavers and held for employer-paid pensioners.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M9",
+   "field_id": "N05",
+   "current": "Annual salary payments to the employee: ordinary and integral salary (100% of the integral salary - the 70% factor applies only to contribution bases), salary arrears, overtime and surcharges, and other remuneration that constitutes salary under CST art. 127 and is not reported in a more specific numeral. Fed by an explicit wage-type-to-numeral classification table, NOT by the payroll 'salary' indicator: at PMI that indicator also marks vacation pay and per diems, which belong to numerals 12 and 13. Each wage type feeds exactly one numeral. Accumulated on the PAYMENT date for 1 January to 31 December of the tax year; rolling or non-calendar accumulators must not be used. Maps to Form 220 casilla 36 and must equal it for the same employee and year.",
+   "proposed": "Annual salary payments to the employee: ordinary and integral salary (100% of the integral salary - the 70% factor applies only to contribution bases), salary arrears, overtime and surcharges, and other remuneration that constitutes salary under CST art. 127 and is not reported in a more specific numeral. Fed by an explicit wage-type-to-numeral classification table, NOT by the payroll 'salary' indicator, which also marks items that belong to other numerals (vacation pay, numeral 12; per diems, numeral 13). Each wage type feeds exactly one numeral. Accumulated on the PAYMENT date for 1 January to 31 December of the tax year; rolling or non-calendar accumulators must not be used. Maps to Form 220 casilla 36 and must equal it for the same employee and year.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M16",
+   "field_id": "N12",
+   "current": "Statutory benefits OTHER THAN severance and its interest, which have their own three numerals (18, 19, 20): legal service bonus (prima de servicios), vacation pay (enjoyed, compensated in cash, or paid on termination) and work clothing. Fed by the wage-type-to-numeral classification; a wage type classified here must be excluded from numeral 5 even where it is flagged as salary in payroll (at PMI vacation pay and the vacation bonus carry the salary flag). Whether extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) are reported here or in numeral 5 / 17 must be fixed per wage type and confirmed with RA. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 42.",
+   "proposed": "Statutory benefits OTHER THAN severance and its interest, which have their own three numerals (18, 19, 20): legal service bonus (prima de servicios), vacation pay (enjoyed, compensated in cash, or paid on termination) and work clothing. Fed by the wage-type-to-numeral classification; a wage type classified here is excluded from numeral 5 even where it carries the salary flag in payroll (e.g. vacation pay). The numeral for extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) - 12, 5 or 17 - is fixed per wage type in the wage-type-to-numeral classification table supplied at implementation. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 42.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M17",
+   "field_id": "N13",
+   "current": "Per diems for transport, subsistence and accommodation away from the habitual workplace, fed by the per-diem wage types in the wage-type-to-numeral classification (at PMI: hotel, breakfast, lunch and dinner per diem). These wage types carry the payroll salary flag at PMI; the routing of salary-type (permanent) per diems - numeral 13 or numeral 5 - must be confirmed with RA, and each amount reported in one numeral only. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 43.",
+   "proposed": "Per diems for transport, subsistence and accommodation away from the habitual workplace, fed by the per-diem wage types in the wage-type-to-numeral classification (e.g. hotel, breakfast, lunch and dinner per diem wage types). Rule to be set at implementation: per-diem wage types that carry the payroll salary flag (permanent, salary-type per diems) are routed to numeral 13 or to numeral 5 per wage type in the classification table; each amount is reported in one numeral only. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 43.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M21",
+   "field_id": "N17",
+   "current": "Work-income payments with no dedicated numeral (non-salary allowances and bonuses, payments in kind to third parties for the employee's benefit, equity-based compensation, termination indemnities and similar), fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary; in-kind and informative wage types (paid to third parties or abroad) must be explicitly classified - at PMI the 'Inf.' and foreign-paid wage types need a decision per wage type, confirmed with RA. Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here.",
+   "proposed": "Work-income payments with no dedicated numeral (non-salary allowances and bonuses, payments in kind to third parties for the employee's benefit, equity-based compensation, termination indemnities and similar), fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary. In-kind and informative wage types (paid to third parties or abroad, e.g. the 'Inf.' and foreign-paid wage types) are explicitly classified wage type by wage type in the classification table supplied at implementation. Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M27",
+   "field_id": "N21",
+   "current": "Pension income paid BY THE EMPLOYER (retirement, old-age or invalidity). Populated for every employer-paid pensioner: at PMI the employer pays company pensions directly (monthly pension and additional pension wage types), so this numeral is NOT nil for this client and the pensioner population (not present in the employee master data) must be included in the file. Fed by the pension wage types in the wage-type-to-numeral classification; whether lump-sum retirement payments and pension-related compensations belong here or in numeral 17 must be confirmed per wage type with RA. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Where a fund pays the pension, the fund is the withholding agent and reporting party and nothing is reported here.",
+   "proposed": "Pension income paid BY THE EMPLOYER (retirement, old-age or invalidity). Populated for every employer-paid pensioner: where the employer pays company pensions directly through payroll (monthly pension and additional pension wage types), this numeral is populated and the pensioner population, which is not part of the active employee master data, is included in the file. Fed by the pension wage types in the wage-type-to-numeral classification. Rule to be set at implementation: the numeral for lump-sum retirement payments and pension-related compensations (21 or 17) is fixed per wage type in the classification table. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Where a fund pays the pension, the fund is the withholding agent and reporting party and nothing is reported here.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M30",
+   "field_id": "N23",
+   "current": "The beneficiary's own mandatory health contributions actually deducted in the tax year, by payment date. Source: the employee EPS contribution wage type (at PMI WT 2554), taken from the contribution wage type itself - never from a combined EPS+AFP+FSP total. Whether health contributions deducted from employer-paid pensions (at PMI the pensioner EPS wage types) are reported here for pensioner records must be confirmed with RA. Maps to Form 220 casilla 53 and must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55.",
+   "proposed": "The beneficiary's own mandatory health contributions actually deducted in the tax year, by payment date. Source: the employee EPS contribution wage type (WT 2554), taken from the contribution wage type itself - never from a combined EPS+AFP+FSP total. Rule to be set at implementation: whether health contributions deducted from employer-paid pensions (the pensioner EPS wage types) are reported here on pensioner records. Maps to Form 220 casilla 53 and must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M31",
+   "field_id": "N24",
+   "current": "Pension AND the solidarity-fund surcharge (both the solidarity and the subsistence sub-accounts) in ONE numeral, exactly as Form 220 casilla 54 combines them. Source: the employee AFP contribution wage type plus the FSP wage type (at PMI WT 2556 + WT 2553), never a combined EPS+AFP+FSP figure. Whether the solidarity deduction on employer-paid pensions is reported here must be confirmed with RA. The electronic payroll and PILA both keep pension and FSP separate, so the engine must sum only at this point.",
+   "proposed": "Pension AND the solidarity-fund surcharge (both the solidarity and the subsistence sub-accounts) in ONE numeral, exactly as Form 220 casilla 54 combines them. Source: the employee AFP contribution wage type plus the FSP wage type (WT 2556 + WT 2553), never a combined EPS+AFP+FSP figure. Rule to be set at implementation: whether the solidarity deduction on employer-paid pensions is reported here on pensioner records. The electronic payroll and PILA both keep pension and FSP separate, so the engine must sum only at this point.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M32",
+   "field_id": "N25",
+   "current": "Voluntary contributions to the mandatory individual-account regime (RAIS) under ET art. 55. DISTINCT from numeral 26. Source: voluntary-pension deduction wage types carrying the configuration attribute 'RAIS voluntary (art. 55)'. At PMI the voluntary pension deductions (the '(FVOL)' provider wage types 25811-25815 and 25823, and the institutional-plan wage types 25820, 25821, 21210, 21211, 65803 and 65804) and the APV total in the withholding working report do not carry this distinction - the client must classify each wage type before build. Maps to Form 220 casilla 55.",
+   "proposed": "Voluntary contributions to the mandatory individual-account regime (RAIS) under ET art. 55. DISTINCT from numeral 26. Source: voluntary-pension deduction wage types carrying the configuration attribute 'RAIS voluntary (art. 55)'. The attribute is assigned per wage type in the classification table supplied at implementation, across the voluntary-pension deduction wage types - the '(FVOL)' provider wage types 25811-25815 and 25823 and the institutional-plan wage types 25820, 25821, 21210, 21211, 65803 and 65804 - each of which is classified as art. 55 (numeral 25) or art. 126-1 (numeral 26). A combined APV total is never used as the source. Maps to Form 220 casilla 55.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M33",
+   "field_id": "N26",
+   "current": "Voluntary contributions to voluntary pension funds under ET art. 126-1. Source: voluntary-pension deduction wage types carrying the configuration attribute 'voluntary pension fund (art. 126-1)'. At PMI the candidates are the '(FVOL)' provider wage types (25811-25815, 25823) and the institutional-plan wage types (25820, 25821, 21210, 21211, 65803, 65804); employer contributions to institutional plans and employee contributions must be told apart (65803 and 65804 are payment / bonus entries whose employer- or employee-side nature is not evidenced in the reports - client to confirm), and each wage type classified by the client before build. Maps to Form 220 casilla 56.",
+   "proposed": "Voluntary contributions to voluntary pension funds under ET art. 126-1. Source: voluntary-pension deduction wage types carrying the configuration attribute 'voluntary pension fund (art. 126-1)'. The attribute is assigned per wage type in the classification table supplied at implementation, across the '(FVOL)' provider wage types (25811-25815, 25823) and the institutional-plan wage types (25820, 25821, 21210, 21211, 65803, 65804). Employer contributions to institutional plans are distinguished from employee contributions; the employer- or employee-side nature of each institutional-plan wage type (including the payment / bonus entries 65803 and 65804) is a configuration parameter supplied at implementation. Maps to Form 220 casilla 56.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M34",
+   "field_id": "N27",
+   "current": "Ahorro para el Fomento de la Construccion: the employee's AFC contributions withheld through payroll in the tax year, by payment date. Source: the AFC deduction wage types (at PMI one wage type per bank, 'AFC <bank>'), summed across banks. Treatment of AFC reimbursements / reversals (at PMI 'Reimbursement AFC') must be confirmed with RA. Maps to Form 220 casilla 57 and to electronic payroll NIE179.",
+   "proposed": "Ahorro para el Fomento de la Construccion: the employee's AFC contributions withheld through payroll in the tax year, by payment date. Source: the AFC deduction wage types (one wage type per bank, 'AFC <bank>'), summed across banks. Rule to be set at implementation: the treatment of AFC reimbursement / reversal wage types ('Reimbursement AFC') in the annual accumulation. Maps to Form 220 casilla 57 and to electronic payroll NIE179.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M37",
+   "field_id": "N29",
+   "current": "THE PRINCIPAL WITHHOLDING NUMERAL: the income-tax withholding actually practised on the beneficiary's work or pension income in the tax year, by payment date. For a RESIDENT it is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Source: every wage type that records withholding actually practised and remitted (at PMI the candidates are the employee income-tax wage type and the separate withholding wage types for terminations, retirees and equity awards; in the September withholding working report the 'with contribution' column equals the income-tax wage type for 255 of 261 employees and the 'Theoretical' withholding wage type for the other 6, 5 of them on integral salary). Notional, theoretical or hypothetical tax-equalisation amounts are included ONLY if they were actually withheld and declared on Form 350 - each wage type to be confirmed with the client and RA. Maps to Form 220 casilla 60, and the sum across the population reconciles to twelve months of Form 350 casilla 93.",
+   "proposed": "THE PRINCIPAL WITHHOLDING NUMERAL: the income-tax withholding actually practised on the beneficiary's work or pension income in the tax year, by payment date. For a RESIDENT it is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Source: every wage type that records withholding actually practised and remitted - the employee income-tax wage type and the separate withholding wage types for terminations, retirees and equity awards. Notional, theoretical or hypothetical tax-equalisation amounts are included ONLY if they were actually withheld and declared on Form 350; the inclusion of each such wage type is a configuration parameter supplied at implementation. Maps to Form 220 casilla 60, and the sum across the population reconciles to twelve months of Form 350 casilla 93.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "G38",
+   "field_id": "N30",
+   "current": "Populated by the client's tax function where non-deductible VAT attached to the payment. Payroll contributes nothing.",
+   "proposed": "Populated by the employer's tax function, outside payroll, where non-deductible VAT attached to the payment. Payroll contributes nothing.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "L38",
+   "field_id": "N30",
+   "current": "(client tax function)",
+   "proposed": "(employer tax function - outside payroll)",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "G39",
+   "field_id": "N31",
+   "current": "Populated by the client's tax function where VAT was withheld from the payment. Payroll contributes nothing.",
+   "proposed": "Populated by the employer's tax function, outside payroll, where VAT was withheld from the payment. Payroll contributes nothing.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "L39",
+   "field_id": "N31",
+   "current": "(client tax function)",
+   "proposed": "(employer tax function - outside payroll)",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M41",
+   "field_id": "N32",
+   "current": "INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8, which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026). Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' (at PMI the candidate is 'Meal Allowance Inf.' - client to confirm it is paid to a food supplier).",
+   "proposed": "INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8, which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026). Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' (e.g. 'Meal Allowance Inf.'); the tag is a configuration parameter supplied at implementation and is applied only to meal payments made to a food supplier.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A2",
+   "field_id": null,
+   "current": "═══ SUBMISSION FORMAT - VERIFIED CHANNEL, UNVERIFIED SCHEMA (V2.7 STEP 3.5) ═══",
+   "proposed": "═══ SUBMISSION FORMAT ═══",
+   "why": "process header"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B3",
+   "field_id": null,
+   "current": "file_upload into the DIAN third-party (exogenous) information service at www.dian.gov.co, in an authenticated portal session signed with the Electronic Signature Instrument (IFE). CONFIRMED.",
+   "proposed": "file_upload into the DIAN third-party (exogenous) information service at www.dian.gov.co, in an authenticated portal session signed with the Electronic Signature Instrument (IFE).",
+   "why": "review language"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A5",
+   "field_id": null,
+   "current": "FORMAT TO CONFIRM",
+   "proposed": "Technical specifications",
+   "why": "review language"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B5",
+   "field_id": null,
+   "current": "The technical specifications annex that fixes the XML ELEMENT NAMES, the field ordering and the column lengths is a SEPARATE document and is NOT in the local source registry. Res. 227 prescribes WHAT to report, not how the file is shaped. Every element path in this Spec is therefore marked DERIVED in column T. Obtain the published technical specifications before configuring a productive layout.",
+   "proposed": "The technical specifications annex of Format 2276 version 4 fixes the XML ELEMENT NAMES, the field ordering and the column lengths; it is a SEPARATE document from Res. 227, which prescribes WHAT to report, not how the file is shaped. Every element path in this specification is therefore a logical name marked DERIVED. The productive layout is configured from the published technical specifications.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "A23",
+   "field_id": null,
+   "current": "═══ TIPO DE DOCUMENTO (NUMERALS 2 AND 34) - THE DIAN NUMERIC CATALOGUE (ANEXO TECNICO DE LA NOMINA ELECTRONICA, TABLE 5.2.1). RES. 227 DOES NOT PRINT THE LIST; THE ESPECIFICACIONES TECNICAS OF THE EXOGENA REUSE THE DIAN CATALOGUE, SO THE CODES BELOW ARE DERIVED FROM TABLE 5.2.1 AND ARE THE SAME TABLE THE DATA DICTIONARY MAPPER 'EMPLOYEE DOCUMENT TYPE' HOLDS. CONFIRM AGAINST THE ESPECIFICACIONES TECNICAS OF FORMATO 2276 VERSION 4 BEFORE CONFIGURING ═══",
+   "proposed": "═══ TIPO DE DOCUMENTO (NUMERALS 2 AND 34) - THE DIAN NUMERIC CATALOGUE (ANEXO TECNICO DE LA NOMINA ELECTRONICA, TABLE 5.2.1). RES. 227 DOES NOT PRINT THE LIST; THE ESPECIFICACIONES TECNICAS OF THE EXOGENA REUSE THE DIAN CATALOGUE, SO THE CODES BELOW ARE DERIVED FROM TABLE 5.2.1 AND ARE THE SAME TABLE THE DATA DICTIONARY MAPPER 'EMPLOYEE DOCUMENT TYPE' HOLDS. THE PRODUCTIVE CODE LIST IS TAKEN FROM THE ESPECIFICACIONES TECNICAS OF FORMATO 2276 VERSION 4 AT CONFIGURATION ═══",
+   "why": "process header"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D32",
+   "field_id": null,
+   "current": "Special residence permit. CO-GAP-06: there is still no code for the PPT.",
+   "proposed": "Special residence permit. The catalogue has no code for the PPT.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D50",
+   "field_id": null,
+   "current": "Colombian employment income carries no VAT. Relevant only where the beneficiary is a VAT-responsible contractor paid under the ET art. 383 table. Owned by the client's tax function.",
+   "proposed": "Colombian employment income carries no VAT. Relevant only where the beneficiary is a VAT-responsible contractor paid under the ET art. 383 table. Owned by the employer's tax function, outside payroll.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D25",
+   "field_id": null,
+   "current": "The evidencing field is the electronic payroll place of work (NIE050). Keep the two consistent: a document showing a non-CO place of work for a non-resident should produce no 2276 record.",
+   "proposed": "The corresponding field is the electronic payroll place of work (NIE050). Keep the two consistent: a document showing a non-CO place of work for a non-resident should produce no 2276 record.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D31",
+   "field_id": null,
+   "current": "Colombian employment income carries no VAT. Relevant only for a VAT-responsible contractor paid under the art. 383 table; owned by the client's tax function.",
+   "proposed": "Colombian employment income carries no VAT. Relevant only for a VAT-responsible contractor paid under the art. 383 table; owned by the employer's tax function, outside payroll.",
+   "why": "client observation"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "A32",
+   "field_id": null,
+   "current": "═══ NON-RESIDENT CONTRAST (V2.8 CONTROL B1) ═══",
+   "proposed": "═══ NON-RESIDENT CONTRAST ═══",
+   "why": "process header"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A1",
+   "field_id": null,
+   "current": "SAMPLE FILE - VERIFIED CHANNEL STATEMENT AND NEUTRAL RECORD MODEL",
+   "proposed": "SAMPLE FILE - CHANNEL STATEMENT AND NEUTRAL RECORD MODEL",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A7",
+   "field_id": null,
+   "current": "service, and the exogena service accepts XML. That much is CONFIRMED from",
+   "proposed": "service, and the exogena service accepts XML. This is established by",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A8",
+   "field_id": null,
+   "current": "DIAN Resolution 000227 of 2025 arts. 1.3.7.1.1 and 1.3.10.1, both held locally.",
+   "proposed": "DIAN Resolution 000227 of 2025 arts. 1.3.7.1.1 and 1.3.10.1.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A10",
+   "field_id": null,
+   "current": "What is NOT held locally, and is not published inside the resolution, is the",
+   "proposed": "What is not published inside the resolution itself is the",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A17",
+   "field_id": null,
+   "current": "Writing an XML instance here would therefore mean INVENTING element names. That",
+   "proposed": "An XML instance is therefore not reproduced here: its element names are",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A18",
+   "field_id": null,
+   "current": "is exactly the fabrication the v2.7 standard forbids and the C25 audit fails.",
+   "proposed": "fixed by the technical specifications, not by the resolution.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A25",
+   "field_id": null,
+   "current": "FORMAT TO CONFIRM vs a real filing: obtain the published especificaciones",
+   "proposed": "PRODUCTIVE LAYOUT: the published especificaciones tecnicas for Format 2276 v4",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A26",
+   "field_id": null,
+   "current": "tecnicas for Format 2276 v4 and map each numeral below to its element name,",
+   "proposed": "fix the element name, ordinal position and column length of each numeral",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A27",
+   "field_id": null,
+   "current": "ordinal position and column length before configuring a productive layout.",
+   "proposed": "below; the productive layout is configured from them.",
+   "why": "review language"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A88",
+   "field_id": null,
+   "current": "NON-RESIDENT VARIANT (v2.8 control B1)",
+   "proposed": "NON-RESIDENT VARIANT",
+   "why": "process header"
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A43",
+   "field_id": null,
+   "current": "- Numeral 34 must agree with Form 220 casillas 79 and 80 - DIAN cross-checks a dependant claimed by more than one taxpayer.",
+   "proposed": "- Numeral 34 must agree with Form 220 casillas 79 and 80 - DIAN checks a dependant claimed by more than one taxpayer.",
+   "why": "statutory wording neutralised (word list)"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C48",
+   "field_id": null,
+   "current": "Numeral 34. Must agree with Form 220 casillas 79 and 80 - this is where DIAN cross-checks a dependant claimed twice.",
+   "proposed": "Numeral 34. Must agree with Form 220 casillas 79 and 80 - this is where DIAN checks a dependant claimed twice.",
+   "why": "statutory wording neutralised (word list)"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D29",
+   "field_id": null,
+   "current": "Where one is claimed, this must be byte-identical to Form 220 casillas 79 and 80. It is where DIAN cross-checks a dependant claimed by more than one taxpayer.",
+   "proposed": "Where one is claimed, this must be byte-identical to Form 220 casillas 79 and 80. It is where DIAN checks a dependant claimed by more than one taxpayer.",
+   "why": "statutory wording neutralised (word list)"
+  }
+ ],
+ "unrewritable": [
+  "Report Matrix!B16 (File Extension): 'Not stated in the source content -- requires confirmation before relying on it' - the spec gives no extension anywhere; written as 'Rule to be set at implementation: ... follows the published DIAN technical specifications for Format 2276 version 4'.",
+  "Report Matrix!B17 (Character Encoding): 'Not stated in the source content -- requires confirmation before relying on it' - the spec gives no encoding anywhere; written as 'Rule to be set at implementation: ... follows the published DIAN technical specifications for Format 2276 version 4'.",
+  "Formato 2276 Spec!M7 (N04): 'The value for a beneficiary whose address is outside Colombia must be confirmed against the Formato 2276 v4 technical specification (RA).' - the spec gives no value for a foreign address; written as 'Rule to be set at implementation: ... follows the Formato 2276 version 4 technical specifications'.",
+  "Formato 2276 Spec!M16 (N12): 'Whether extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) are reported here or in numeral 5 / 17 must be fixed per wage type and confirmed with RA.' - the spec gives no legal routing (12 vs 5 vs 17); written as a per-wage-type configuration parameter in the classification table.",
+  "Formato 2276 Spec!M17 (N13): 'the routing of salary-type (permanent) per diems - numeral 13 or numeral 5 - must be confirmed with RA' - the spec gives no rule; written as 'Rule to be set at implementation: ... routed to numeral 13 or to numeral 5 per wage type in the classification table'.",
+  "Formato 2276 Spec!M21 (N17): 'at PMI the 'Inf.' and foreign-paid wage types need a decision per wage type, confirmed with RA' - the spec's only rule is explicit classification per wage type; written as a configuration parameter (classification table), the legal treatment of in-kind / informative wage types is not fixed in the spec.",
+  "Formato 2276 Spec!M27 (N21): 'whether lump-sum retirement payments and pension-related compensations belong here or in numeral 17 must be confirmed per wage type with RA' - the spec gives no rule; written as 'Rule to be set at implementation: ... (21 or 17) is fixed per wage type in the classification table'.",
+  "Formato 2276 Spec!M30 (N23): 'Whether health contributions deducted from employer-paid pensions (at PMI the pensioner EPS wage types) are reported here for pensioner records must be confirmed with RA.' - the spec gives no rule; written as 'Rule to be set at implementation: whether health contributions deducted from employer-paid pensions ... are reported here on pensioner records'.",
+  "Formato 2276 Spec!M31 (N24): 'Whether the solidarity deduction on employer-paid pensions is reported here must be confirmed with RA.' - the spec gives no rule; written as 'Rule to be set at implementation: whether the solidarity deduction on employer-paid pensions is reported here on pensioner records'.",
+  "Formato 2276 Spec!M34 (N27): 'Treatment of AFC reimbursements / reversals (at PMI 'Reimbursement AFC') must be confirmed with RA.' - the spec gives no rule; written as 'Rule to be set at implementation: the treatment of AFC reimbursement / reversal wage types ('Reimbursement AFC') in the annual accumulation'."
+ ],
+ "summary": {
+  "cells_rewritten": 49,
+  "by_sheet": {
+   "Report Matrix": 10,
+   "Formato 2276 Spec": 19,
+   "File Structure": 4,
+   "Field Options": 3,
+   "Population Rules": 1,
+   "Example Analysis": 2,
+   "Sample File": 10
+  },
+  "unrewritable": 10
+ }
+}

@@ -80,6 +80,11 @@
 |---|---|---|---|---|
 | | | | | |
 
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Finland`
+
+- Sem pacote: Marju Martinson não respondeu aos pedidos de 07/10 e 09/10 (C-11). Report principal a confirmar: Tulorekisteri.
+
 ## Pendências
 - [ ]
 

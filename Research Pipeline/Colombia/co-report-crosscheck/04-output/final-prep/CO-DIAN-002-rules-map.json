@@ -1,0 +1,356 @@
+{
+ "spec": "CO-DIAN-002",
+ "final": "05-final/CO-DIAN-002-Formulario350-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M22",
+   "field_id": "77",
+   "rule": "350-1; 350-3",
+   "current": "THE PRINCIPAL PAYROLL CASILLA ON THE BASE SIDE. The instruction guide defines it as 'los payments gravables (base sujeta a withholding) efectuados a natural persons por concept de salaries, commissions, prestaciones sociales, travel allowances, representation expenses, fees, emolumentos eclesiasticos, compensation received por el trabajo cooperative associate, payments en especie, payments en acciones y, en general, las compensation for personal services'. NOTE that it is the DEPURATED taxable base, not the gross: for a resident it is the ET art. 388 base after non-constitutive income, art. 387 deductions and the 25% exempt income; for a NON-RESIDENT taxed under art. 408 the base is the GROSS, because art. 408 admits no depuration. Note also that it sweeps in fees paid to natural persons under the art. 383 table, which are not employment income - payroll supplies only the employment component.",
+   "proposed": "THE PRINCIPAL PAYROLL CASILLA ON THE BASE SIDE. The instruction guide defines it as 'los payments gravables (base sujeta a withholding) efectuados a natural persons por concept de salaries, commissions, prestaciones sociales, travel allowances, representation expenses, fees, emolumentos eclesiasticos, compensation received por el trabajo cooperative associate, payments en especie, payments en acciones y, en general, las compensation for personal services'. It is the DEPURATED taxable base of RESIDENT natural persons, not the gross: the ET art. 388 base after non-constitutive income, art. 387 deductions and the 25% exempt income - the base on which the casilla-93 withholding is computed. Non-resident foreign natural persons are NOT in this casilla: their payments are reported in the 'Pagos al exterior' section as sheet-2 rows (casillas 141-146) with the sheet-2 payment concept and country, at the nominal (gross) value, at the 20% rate of ET art. 408 and with no depuration; the employee's tax-residence flag decides the section. Pension income paid by the employer is not in this casilla either: it goes to casilla 78. Note also that the casilla sweeps in fees paid to natural persons under the art. 383 table, which are not employment income - payroll supplies only the employment component."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M23",
+   "field_id": "93",
+   "rule": "350-1; 350-2; 350-3",
+   "current": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to natural persons in the calendar month, across EVERY pay group and EVERY payroll run of the entity in that month - regular, weekly or exceptional-advance, termination and settlement runs alike - in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Source: wage type 2552 'Income Tax (employee)' (Deductions), plus wage type 21330 'Personal Income Tax Withholding (Theoretical)' for the employees whose WT 2552 line is a zero-value Non Cash item and whose withholding is deducted on WT 21330. The amount is the withholding actually deducted from the employee's pay, computed with the employee's AFC and voluntary-pension contributions (ET arts. 126-1 and 126-4) taken into account; never the figure computed without those contributions. Contingent withholding - the difference between the withholding computed without and with those contributions, which is not deducted by any wage type - is not withholding practised and is excluded. WT 2552 withholding deducted in advance runs (WT 61100 'Weekly advance', WT 62838 'Exceptional Advance') and in termination or settlement runs (WT 62116, 62110, 62203, 62115) enters in the month it is practised, whatever the run. Withholding deducted on WT 21129 (Terminations), 25832 (Stock awards vesting) and 25833 (IC Local Country) enters in the month it is practised. Rule to be set at implementation: whether WT 25834 (Hypothetical - IC Foreign Country) and the theoretical-tax wage types 21114 (Theoretical income Tax-5011) and 21619 (Theoretical Income Tax - Ajuste - 5035) carry withholding actually practised; they enter casilla 93 only where they do, and the wage-type to casilla-93 mapping table is a configuration parameter supplied at implementation. Withholding at the flat 20% of ET art. 408 on a NON-RESIDENT employee is not reported here: it is supplied as sheet-2 rows (casillas 141-146) and rolls into casillas 111 / 112; the employee's tax-residence flag, not the withholding rate or the tax-procedure code, decides the sheet. Accumulate by the payroll engine's run key (pay group and run), not by a report-level identifier. Must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130.",
+   "proposed": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to RESIDENT natural persons in the calendar month, across EVERY pay group and EVERY payroll run of the entity in that month - regular, weekly or exceptional-advance, termination and settlement runs alike - in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Source: wage type 2552 'Income Tax (employee)' (Deductions), plus wage type 21330 'Personal Income Tax Withholding (Theoretical)' where it carries the withholding actually deducted from the employee's pay (the case in which the WT 2552 line is a zero-value Non Cash item). The amount is the withholding actually deducted from the employee's pay, computed with the employee's AFC and voluntary-pension contributions (ET arts. 126-1 and 126-4) taken into account; never the figure computed without those contributions. Contingent withholding (ET arts. 126-1 / 126-4) - the difference between the withholding computed without and with those contributions - is practised by the AFC or voluntary-pension fund when the savings are withdrawn before the permanence requirement is met; it is not practised by the employer and does not enter this return, and the wage types that carry a theoretical or hypothetical amount never deducted - 21114 'Theoretical income Tax-5011', 21619 'Theoretical Income Tax - Ajuste - 5035' and 25834 'Hypothetical Witholding Tax  - IC Foreign Country' - are out of scope: a theoretical or hypothetical amount is not withholding actually practised. WT 2552 withholding deducted in advance runs (WT 61100 'Weekly advance', WT 62838 'Exceptional Advance') and in termination or settlement runs (WT 62116, 62110, 62203, 62115) enters in the month it is practised, whatever the run. Withholding deducted on WT 21129 (Terminations), 25832 (Stock awards vesting) and 25833 (IC Local Country) enters in the month it is practised. The wage-type to casilla-93 mapping table is a configuration parameter supplied at implementation. Withholding on the pension income the employer pays itself (WT 21140 'Personal Income Tax Withholding-Retirees- 6799', WT 21155 'Income Tax Pensioner') is not reported here: it goes to casilla 94, with its base in casilla 78. Withholding at the flat 20% of ET art. 408 on a NON-RESIDENT foreign natural person is not reported here: it is supplied as sheet-2 rows (casillas 141-146) in the 'Pagos al exterior' section, with the sheet-2 payment concept and country, on the nominal (gross) value and with no depuration, and rolls into casillas 111 / 112; the employee's tax-residence flag, not the withholding rate or the tax-procedure code, decides the section. Accumulate by the payroll engine's run key (pay group and run), not by a report-level identifier. Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "G24",
+   "field_id": "78",
+   "rule": "350-3",
+   "current": "Populated only where the EMPLOYER itself pays a pension. Bidirectional pair with 'Withholding - pension income' (casilla 94): a base without a withholding, or the reverse, is an inconsistency. Blank for an ordinary corporate payroll, where pensions are paid by a fund.",
+   "proposed": "Populated where the EMPLOYER itself pays pensions - the retirees' pay group - and blank where every pension is paid by a fund. Bidirectional pair with 'Withholding - pension income' (casilla 94): a base without a withholding, or the reverse, is an inconsistency."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M24",
+   "field_id": "78",
+   "rule": "350-3",
+   "current": "The monthly pension payment EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for retirement, invalidity, old-age, survivor and occupational-risk pensions and for substitute indemnities and returns of pension savings. Only the excess over 1,000 UVT is taxable, so the casilla is nil for the overwhelming majority of pensions.",
+   "proposed": "Taxable base of the pension income the employer pays itself: the part of the monthly pension EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for retirement, invalidity, old-age, survivor and occupational-risk pensions and for substitute indemnities and returns of pension savings. Only the excess over 1,000 UVT is taxable, so the casilla is nil for a pension at or below that amount. It is the base on which the casilla-94 withholding (WT 21140, WT 21155) is computed; the pension wage types behind it are those classified as pension income in the wage-type classification table. Pension income is not part of casilla 77, and a pension paid by a fund is reported by the fund, not here."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "G25",
+   "field_id": "94",
+   "rule": "350-3",
+   "current": "Populated only where the employer pays a pension. Bidirectional pair with 'Base - pension income' (casilla 78).",
+   "proposed": "Populated where the employer itself pays pensions - the retirees' pay group. Bidirectional pair with 'Base - pension income' (casilla 78)."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M25",
+   "field_id": "94",
+   "rule": "350-3",
+   "current": "Withholding on the taxable excess of employer-paid pension income. Summed into casilla 130.",
+   "proposed": "Withholding actually practised on the pension income the employer pays itself, on the taxable excess over 1,000 UVT: wage type 21140 'Personal Income Tax Withholding-Retirees- 6799' and wage type 21155 'Income Tax Pensioner', in the month it is deducted, in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Not part of casilla 93. Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. Summed into casilla 130."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M31",
+   "field_id": "109",
+   "rule": "350-1; 350-4",
+   "current": "Gross payments to non-resident natural persons in non-treaty countries. For an employee this is the GROSS salary - ET art. 408 admits no depuration - reported through sheet 2 concept de payment 5, 'Services y compensacion por personal services'.",
+   "proposed": "Nominal (gross) payments to non-resident foreign natural persons in non-treaty countries - ET art. 408 admits no depuration - reported through sheet-2 rows with concept de payment 5, 'Services y compensacion por personal services', the DIAN country-table code of the country and the 20% rate. These employees are excluded from casilla 77."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M33",
+   "field_id": "110",
+   "rule": "350-1; 350-4",
+   "current": "Gross payments to non-resident natural persons in treaty countries, reported through sheet 2 concept de payment 24, 'Employment income' - the concept whose own definition is 'employment income de cualquier naturaleza en relacion con un empleo a favor de personas non-resident natural persons'. This is the exact place a non-resident EMPLOYEE with treaty cover is reported.",
+   "proposed": "Nominal (gross) payments to non-resident foreign natural persons in treaty countries, with no depuration, reported through sheet-2 rows with concept de payment 24, 'Employment income' - the concept whose own definition is 'employment income de cualquier naturaleza en relacion con un empleo a favor de personas non-resident natural persons' - and the DIAN country-table code of the country. This is the exact place a non-resident EMPLOYEE with treaty cover is reported; these employees are excluded from casilla 77."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "I39",
+   "field_id": "144",
+   "rule": "350-4",
+   "current": "Var",
+   "proposed": "3"
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "J39",
+   "field_id": "144",
+   "rule": "350-4",
+   "current": "Country code",
+   "proposed": "N (DIAN country-table code)"
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "K39",
+   "field_id": "144",
+   "rule": "350-4",
+   "current": "ES",
+   "proposed": "245"
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M39",
+   "field_id": "144",
+   "rule": "350-4",
+   "current": "Country of TAX RESIDENCE of the non-resident payee (for a treaty claim, the country on the residence certificate), expressed with the country code required by the DIAN Form 350 sheet-2 list. Do not derive it from Nationality. Where the address country (Master Data field 'Country') is used as a fallback it must be normalised to one consistent upper-case form and converted to the DIAN code; neither Nationality nor address Country is tax residence by itself, and the two may name different countries. Where 'Treaty status' (casilla 141) = CON CONVENIO the country must be one with a treaty in force. Colombia's treaty network in force includes Spain, Chile, Switzerland, Canada, Mexico, South Korea, Portugal, India, the Czech Republic, the United Kingdom, France, Italy and Japan, plus Andean Community Decision 578.",
+   "proposed": "Country of TAX RESIDENCE of the non-resident payee (for a treaty claim, the country on the residence certificate), expressed as the code of the DIAN country table - the same code used in the RUT and in the exogenous information formats. Do not derive it from Nationality. Where the address country (Master Data field 'Country') is used as a fallback it must be normalised to one consistent upper-case form and converted to the DIAN country-table code; neither Nationality nor address Country is tax residence by itself, and the two may name different countries. Where 'Treaty status' (casilla 141) = CON CONVENIO the country must be one with a treaty in force. Colombia's treaty network in force includes Spain, Chile, Switzerland, Canada, Mexico, South Korea, Portugal, India, the Czech Republic, the United Kingdom, France, Italy and Japan, plus Andean Community Decision 578."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M40",
+   "field_id": "145",
+   "rule": "350-1",
+   "current": "GROSS amount paid or credited to the non-resident. For an employee this is the whole salary - ET art. 408 taxes the gross, with no deduction of the mandatory social-security contributions.",
+   "proposed": "Nominal (gross) amount paid or credited to the non-resident. For a non-resident foreign natural person under a Colombian contract this is the whole salary - ET art. 408 taxes the nominal value, with no deduction of the mandatory social-security contributions and no art. 388 depuration - and the amount is excluded from casilla 77."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A32",
+   "field_id": null,
+   "rule": "350-1; 350-3",
+   "current": "- Payroll owns four casillas directly - 77, 93 and, for non-residents, the sheet-2 rows that roll into 109 / 111 or 110 / 112 - plus casilla 129 where a prior over-withholding is reversed. Everything else on the form comes from accounts payable or the tax function.",
+   "proposed": "- Payroll owns six casillas directly - 77 and 93 for resident employees, 78 and 94 for the pensions the employer pays itself, and, for non-residents, the sheet-2 rows that roll into 109 / 111 or 110 / 112 - plus casilla 129 where a prior over-withholding is reversed. Everything else on the form comes from accounts payable or the tax function."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A35",
+   "field_id": null,
+   "rule": "350-1; 350-4",
+   "current": "- NON-RESIDENT employees are reported on SHEET 2 and roll up to casillas 109 / 111 (no treaty) or 110 / 112 (treaty). The base in casilla 145 is the GROSS payment, because ET art. 408 admits no depuration, and the rate in casilla 146 is 20%.",
+   "proposed": "- NON-RESIDENT foreign natural persons are reported in the 'Pagos al exterior' section: SHEET 2 rows carrying the sheet-2 payment concept and the DIAN country-table code, rolling up to casillas 109 / 111 (no treaty) or 110 / 112 (treaty). The base in casilla 145 is the NOMINAL (gross) payment, because ET art. 408 admits no depuration, and the rate in casilla 146 is 20%. They are excluded from casillas 77 / 93."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A40",
+   "field_id": null,
+   "rule": "350-2; 350-3",
+   "current": "- Casilla 93 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month - CO-DIAN-001 - after the nearest-1,000 rounding.",
+   "proposed": "- Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month - CO-DIAN-001 - after the nearest-1,000 rounding. The contingent withholding of ET arts. 126-1 / 126-4 is practised by the fund and is in neither casilla; the theoretical and hypothetical wage types (21114, 21619, 25834) are out of scope; wage type 21330 is included only where it carries the withholding actually deducted."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C16",
+   "field_id": null,
+   "rule": "350-1; 350-4",
+   "current": "IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix.",
+   "proposed": "IN SCOPE and frequently mis-configured. Reported in the 'Pagos al exterior' section - sheet-2 rows with the sheet-2 payment concept and the DIAN country-table code - and excluded from casillas 77 / 93: withheld at the flat 20% of ET art. 408 on the NOMINAL (gross) value, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C26",
+   "field_id": null,
+   "rule": "350-1",
+   "current": "Sheet 2 casilla 145, rolling up to casilla 109 or 110. The GROSS, because art. 408 admits no depuration.",
+   "proposed": "Sheet 2 casilla 145, rolling up to casilla 109 or 110. The NOMINAL (gross) value, because art. 408 admits no depuration. Excluded from casilla 77."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C28",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "Casillas 78 / 94, where the employer itself pays a pension.",
+   "proposed": "Casillas 78 / 94, where the employer itself pays pensions (the retirees' pay group): the taxable excess over 1,000 UVT in 78 and the withholding actually practised on it (WT 21140, WT 21155) in 94 - never in 77 / 93. Casilla 93 plus casilla 94 reconcile to the electronic payroll RetencionFuente."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B15",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "77 base employment income  <-- PAYROLL | 78 base pension income | 79-92 bases by other concept || 93 withholding employment income  <-- PAYROLL | 94 withholding pension income | 95-108 withholdings by other concept. Note that 89 / 105 (enajenacion de activos fijos y actividades de transito) exist only in the natural-person column.",
+   "proposed": "77 base employment income (residents)  <-- PAYROLL | 78 base pension income (pensions the employer pays itself)  <-- PAYROLL | 79-92 bases by other concept || 93 withholding employment income  <-- PAYROLL | 94 withholding pension income (WT 21140 / 21155)  <-- PAYROLL | 95-108 withholdings by other concept. Note that 89 / 105 (enajenacion de activos fijos y actividades de transito) exist only in the natural-person column."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "A57",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "ES / CL / CH",
+   "proposed": "(DIAN table)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D57",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "Treaties in force.",
+   "proposed": "Treaties in force. Casilla 144 carries the DIAN country-table code of the country - the same code used in the RUT and in exogenous information."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "A58",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "CA / MX / KR",
+   "proposed": "(DIAN table)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D58",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "Treaties in force.",
+   "proposed": "Treaties in force. Casilla 144 carries the DIAN country-table code of the country - the same code used in the RUT and in exogenous information."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "A59",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "PT / IN / CZ",
+   "proposed": "(DIAN table)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D59",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "Treaties in force.",
+   "proposed": "Treaties in force. Casilla 144 carries the DIAN country-table code of the country - the same code used in the RUT and in exogenous information."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "A60",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "GB / FR / IT / JP",
+   "proposed": "(DIAN table)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D60",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "Treaties in force.",
+   "proposed": "Treaties in force. Casilla 144 carries the DIAN country-table code of the country - the same code used in the RUT and in exogenous information."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C4",
+   "field_id": "77",
+   "rule": "350-1; 350-3",
+   "current": "Accumulate, across every employee paid in the month, the taxable base actually used to compute the withholding. For a RESIDENT this is the ET art. 388 DEPURATED base - gross taxable payments less non-constitutive income (mandatory health, pension and solidarity-fund contributions), less the art. 387 deductions elected in writing by the employee, less the 25% exempt income of art. 206 num. 10, subject to the 40% and 1,340-UVT caps. Do NOT report the gross. Round the accumulated total to the nearest 1,000 (ET art. 577), once, at the end - never round each employee and then sum.",
+   "proposed": "Accumulate, across every RESIDENT employee paid in the month, the taxable base actually used to compute the withholding: the ET art. 388 DEPURATED base - gross taxable payments less non-constitutive income (mandatory health, pension and solidarity-fund contributions), less the art. 387 deductions elected in writing by the employee, less the 25% exempt income of art. 206 num. 10, subject to the 40% and 1,340-UVT caps. Do NOT report the gross. Non-resident foreign natural persons are not accumulated here: they are reported as sheet-2 rows in the 'Pagos al exterior' section at the nominal (gross) value. Pension income the employer pays itself is not accumulated here: it goes to casilla 78. Round the accumulated total to the nearest 1,000 (ET art. 577), once, at the end - never round each employee and then sum."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C5",
+   "field_id": "93",
+   "rule": "350-2; 350-3",
+   "current": "Accumulate the withholding at source actually withheld on work income from natural persons in the month. Each employee's withholding is itself already approximated to the nearest 1,000 under ET art. 868; accumulate those approximated figures and then apply the art. 577 nearest-1,000 rounding to the total. Reconcile the result to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month BEFORE filing.",
+   "proposed": "Accumulate the withholding at source actually withheld on work income from resident natural persons in the month: wage type 2552 'Income Tax (employee)', plus the withholding deducted on 21129 (terminations), 25832 (stock-award vesting) and 25833 (IC local) in the month it is practised, across every pay group and run. Exclude the contingent withholding of ET arts. 126-1 / 126-4 - the withholding computed without the AFC and voluntary-pension contributions less the withholding computed with them - which is practised by the fund on an early withdrawal and never by the employer, and exclude the theoretical and hypothetical wage types 21114, 21619 and 25834, which carry no withholding actually practised (wage type 21330 is included only where it carries the withholding actually deducted). Withholding on the pensions the employer pays itself (21140, 21155) goes to casilla 94, not here. Each employee's withholding is itself already approximated to the nearest 1,000 under ET art. 868; accumulate those approximated figures and then apply the art. 577 nearest-1,000 rounding to the total. Reconcile casilla 93 plus casilla 94 to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month BEFORE filing."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C6",
+   "field_id": "78 / 94",
+   "rule": "350-3",
+   "current": "Populate only where the EMPLOYER itself pays a pension. Report the monthly amount EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, and the withholding on that excess. Where the pension is paid by a pension fund, the fund is the withholding agent and nothing is reported here.",
+   "proposed": "Populate where the EMPLOYER itself pays pensions (the retirees' pay group). Casilla 78: the monthly amount EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for the wage types classified as pension income in the wage-type classification table. Casilla 94: the withholding actually practised on that excess - wage type 21140 'Personal Income Tax Withholding-Retirees- 6799' and wage type 21155 'Income Tax Pensioner'. Neither amount enters casillas 77 / 93. Where the pension is paid by a pension fund, the fund is the withholding agent and nothing is reported here."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D15",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "The reconciliation between casilla 93 and SUM(NIE177) must therefore be performed on the UNROUNDED values with a tolerance, not on the rounded ones.",
+   "proposed": "The reconciliation between casilla 93 plus casilla 94 and SUM(NIE177) must therefore be performed on the UNROUNDED values with a tolerance, not on the rounded ones."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C18",
+   "field_id": null,
+   "rule": "350-1; 350-4",
+   "current": "For each non-resident employee, create one sheet-2 row per country and treaty status. Set casilla 141 to SIN AGREEMENT or CON AGREEMENT; casilla 142 to concept 5 (Services y compensacion por personal services) for non-treaty countries or concept 24 (Employment income) for treaty countries; casilla 143 to Natural person; casilla 144 to the country of residence; casilla 145 to the GROSS payment - not a depurated base, because ET art. 408 admits no depuration; and casilla 146 to 20.00, or to the treaty rate. The portal computes casilla 147 and the four totals.",
+   "proposed": "For each non-resident foreign natural person, create one sheet-2 row per country and treaty status in the 'Pagos al exterior' section. Set casilla 141 to SIN AGREEMENT or CON AGREEMENT; casilla 142 to concept 5 (Services y compensacion por personal services) for non-treaty countries or concept 24 (Employment income) for treaty countries; casilla 143 to Natural person; casilla 144 to the DIAN country-table code of the country of tax residence (the same code used in the RUT and in exogenous information); casilla 145 to the NOMINAL (gross) payment - not a depurated base, because ET art. 408 admits no depuration; and casilla 146 to 20.00, or to the treaty rate. The employee is excluded from casillas 77 and 93. The portal computes casilla 147 and the four totals."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C29",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "Before filing, assert: SUM(NIE177) over all electronic payroll documents for the month, unrounded, equals the unrounded accumulation behind casilla 93, within a tolerance of one peso per employee. Assert also that the employee count behind casilla 77 equals the number of validated electronic payroll documents for the month.",
+   "proposed": "Before filing, assert: SUM(NIE177) over all electronic payroll documents for the month, unrounded, equals the unrounded accumulation behind casilla 93 plus casilla 94, within a tolerance of one peso per employee. Assert also that the employee count behind casilla 77 equals the number of validated electronic payroll documents for the month."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D15",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "Must equal SUM(NIE177) across the month's electronic payroll documents. Here there is one document carrying exactly 617,000.00.",
+   "proposed": "Casilla 93 plus casilla 94 must equal SUM(NIE177) across the month's electronic payroll documents. Here casilla 94 is nil and there is one document carrying exactly 617,000.00."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D16",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "They would be populated only for the excess over 1,000 UVT (COP 52,374,000 per month) of an employer-paid pension.",
+   "proposed": "They are populated only where the employer itself pays pensions: the excess over 1,000 UVT (COP 52,374,000 per month) in 78 and the withholding actually practised on it (WT 21140 / 21155) in 94 - never in 77 / 93."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "A21",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "ES",
+   "proposed": "245"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C21",
+   "field_id": null,
+   "rule": "350-4",
+   "current": "Spain.",
+   "proposed": "Spain - DIAN country-table code 245, the same code used in the RUT and in exogenous information."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C22",
+   "field_id": null,
+   "rule": "350-1",
+   "current": "The GROSS salary. ET art. 408 admits no depuration - no deduction of the mandatory contributions, no exempt income.",
+   "proposed": "The NOMINAL (gross) salary. ET art. 408 admits no depuration - no deduction of the mandatory contributions, no exempt income. The employee is excluded from casilla 77."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C38",
+   "field_id": null,
+   "rule": "350-3",
+   "current": "Casilla 93 must equal the sum of RetencionFuente across the month's validated electronic payroll documents.",
+   "proposed": "Casilla 93 plus casilla 94 must equal the sum of RetencionFuente across the month's validated electronic payroll documents; here casilla 94 is nil."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A99",
+   "field_id": null,
+   "rule": "350-4",
+   "current": " 1  CON CONVENIO    24            Persona natural   ES        12.000.000     20,00       [PORTAL] 2.400.000",
+   "proposed": " 1  CON CONVENIO    24            Persona natural   245       12.000.000     20,00       [PORTAL] 2.400.000"
+  }
+ ],
+ "resolved_rule_to_be_set": [
+  "Formulario 350 Spec!M23 (93): 'whether WT 25834 (Hypothetical - IC Foreign Country) and the theoretical-tax wage types 21114 and 21619 carry withholding actually practised' - settled by rule 350-2: a theoretical or hypothetical amount is not withholding actually practised; 25834, 21114, 21619 and the theoretical 21330 stay out of casilla 93, and the contingent withholding of ET arts. 126-1 / 126-4 is practised by the fund and excluded. Propagated to Report Matrix!A40 and Population Rules!C5.",
+  "Formulario 350 Spec!M39 (144): country-code standard - settled by rule 350-4: the DIAN country table, the same code used in the RUT and in exogenous information. Propagated to I39 / J39 / K39, Field Options A57-D60, Population Rules!C18, Example Analysis!A21 / C21 and Sample File!A99 (Spain = 245 in the DIAN country table; the example value comes from that table, not from a project source)."
+ ],
+ "still_open": [
+  "Formulario 350 Spec!M37 (142): the rule names the sheet-2 concept (5 without treaty, 24 with treaty), which the cell already states; the source conflict on the casilla numbering in Res. 000227/2025 art. 1.2.2.26 is not a rule and is not in the cell - no change.",
+  "Formulario 350 Spec!M23 (93): the wage-type to casilla-93 mapping table stays a configuration parameter supplied at implementation - the rule settles the named wage types, not the whole table.",
+  "Formulario 350 Spec!M24 and Population Rules!C6 (78): which retiree payment wage types (62154, 62153, 62151, 62152, 62115, 62830, 62155) are pension income stays in the wage-type classification table, as in Form 220 casilla 50 - the rule settles where pension withholding goes (94, base in 78), not which earnings are a pension."
+ ],
+ "summary": {
+  "cells": 41,
+  "by_sheet": {
+   "Formulario 350 Spec": 13,
+   "Field Options": 8,
+   "Population Rules": 6,
+   "Example Analysis": 6,
+   "Report Matrix": 3,
+   "Payroll Scope Summary": 3,
+   "File Structure": 1,
+   "Sample File": 1
+  }
+ }
+}

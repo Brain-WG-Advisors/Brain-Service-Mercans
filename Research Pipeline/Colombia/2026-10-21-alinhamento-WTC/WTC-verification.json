@@ -1,0 +1,31 @@
+{
+  "artifact": "CO-WTC-001-v1.5.xlsx",
+  "base": "base/CO-WTC-001-v1-gsheet-export-2026-10-21.xlsx",
+  "md5": {"base": "40d176082821752ee9f15afb0e0c8afc", "new": "116cced89519a5c44f2370f3783e1eeb"},
+  "verified_on": "2026-10-21",
+  "verifier": "independent subagent (did not author the edit)",
+  "verdict": "PASS",
+  "checks": [
+    {"id": 1, "name": "Cell-by-cell diff (values, data types, style ids) over all 6 sheets, A1:AB1000",
+     "result": "PASS",
+     "evidence": "117 cells differ: Wage Type Catalogue Y1 (1) + Z (109) + Employer Sick Pay A59 (1) + Global WTC Coverage C31 (1) = 112 citation cells, plus Version Control B17:F17 (5). Each citation cell equals base.replace('Resolucion DIAN 000013 de 2021 Anexo Tecnico v1.0', 'Resolucion DIAN 000227 de 2025 arts. 1.5.3.1.1 to 1.5.3.9.8, Anexo Tecnico v1.0') exactly (Y1: 'Res. DIAN 000013 de 2021' -> 'Res. DIAN 000227 de 2025'); 112 ok / 0 bad; no style id change on any citation cell. Zip parts: same name list; only xl/sharedStrings.xml (5 strings swapped in place, count 1131 unchanged) and xl/worksheets/sheet1.xml (row 17 only) differ; xl/media/image1.png and styles.xml byte-identical; merged ranges and dimensions identical. Only remaining '000013' string in the workbook is the change-log text in Version Control D17."},
+    {"id": 2, "name": "Legal basis of the replacement",
+     "result": "PASS",
+     "evidence": "Res. DIAN 000227 de 23-09-2025 (local PDF, pdftotext): CAPITULO 3 'NOMINA ELECTRONICA' opens at Articulo 1.5.3.1.1 (Definiciones) and closes at Articulo 1.5.3.9.8 (Confidencialidad y reserva), followed by CAPITULO 4 RADIAN (Art. 1.5.4.1.1). The 35 articles in the chapter each end with '(Articulo N, Resolucion 13 de 2021)', N = 1-5 and 8-35. Art. 1.5.3.7.1 Paragrafo adopts the 'Anexo tecnico documento soporte de pago de Nomina Electronica' version 1.0 (Articulo 20, Resolucion 13 de 2021). Res. 227 art. 8 repeals the compiled text of the source resolutions. Normograma notes for Res. 13/2021 confirm '<Articulo compilado como articulo 1.5.3.1.1 / 1.5.3.2.1 / ... en la Resolucion 227 de 2025>'."},
+    {"id": 3, "name": "Version Control row 17",
+     "result": "PASS",
+     "evidence": "Style ids B17:F17 = B16:F16 (and A, G:Z = row 16). B17 '1.5' string as B16 '1.4' (string, fmt 0.0); C17 date 2026-10-22 (type d, fmt d-mmm-yy) as C16; E17 'Draft', F17 'Wallisson Gomes'; row height 15 as row 16. D17 in English, factual. Cells written as inlineStr (valid OOXML; reads correctly in openpyxl)."},
+    {"id": 4, "name": "Dev columns and Formula column untouched",
+     "result": "PASS",
+     "evidence": "Orange FFFF9900 header columns on Wage Type Catalogue: A, D, H, I, K, L, M, AA, AB. Changed columns: Y, Z (Wage Type Catalogue), A (Employer Sick Pay), C (Global WTC Coverage) - none orange. Column F (Formula): zero differences."},
+    {"id": 5, "name": "validate_workbook.py --artifact WTC, base vs new",
+     "result": "PASS",
+     "evidence": "Both: VERDICT FAIL (blocker=1 major=0 minor=0), same single finding C12/columns Wage Type Catalogue!A1:AB1 (28 header cells vs 20 in contract). Outputs identical apart from the file path. Pre-existing, not introduced by v1.5."}
+  ],
+  "required_fixes": [],
+  "observations": [
+    "CONFERENCIA.md says '113 celulas de citacao'; the measured count is 112 (1 + 109 + 2, matching its own table). Correct the number in the note.",
+    "C17 and CONFERENCIA.md are dated 22-Oct-2026 while this machine's date and the file mtime are 21-Oct-2026; confirm the intended date before upload.",
+    "D17 ends with 'Base: the Google Sheet as exported on 21 Oct 2026.' This is provenance, not a content change; optional to drop if the change log must stay purely factual about content."
+  ]
+}

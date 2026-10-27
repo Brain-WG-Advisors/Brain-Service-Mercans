@@ -1,0 +1,995 @@
+{
+ "spec": "CO-CESANTIAS-006",
+ "draft": "02-specs-out/CO-CESANTIAS-006-ConsignacionAnual-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "flagged": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "A24",
+   "row": 24,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "verified"
+   ],
+   "broad_patterns": [],
+   "current": "- Channel: online_form AND file_upload (fixed-width TXT / XLS 97-2003 / CSV) | Portal: a licensed information operator - ACH Colombia S.A. (SOI), www.nuevosoi.com.co, and Simple S.A., www.pagosimple.com, both verified; Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla offer the same service | Source: SOI instruction guide DDS-DES-INS-008 v2 and Simple S.A. 'Manual Severance savings' ss. 3.1-3.2, both held in 00-official-sources/pdfs/ | CONFIRMED as to channel and as to the 258-position layout; TO CONFIRM whether every operator accepts that same layout."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A43",
+   "row": 43,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "- CO-PILA-003 - the future channel for the monthly advance deposit under Law 2466 of 2025 art. 64 para. 1, once MinSalud defines the tipo de contribution (see MA04). The PILA Spec will need a new contribution type when that happens."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C12",
+   "row": 12,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA worker type 12 (lectiva) or 19 (productiva)."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C14",
+   "row": 14,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Law 1221 of 2008 as amended by Law 2466 of 2025 arts. 52-54. No reporting difference; the electronic payroll carries a dedicated Teletrabajo earning element (NIE158)."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C16",
+   "row": 16,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C33",
+   "row": 33,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "Not a field of this layout. CST art. 254 prohibits partial payment before termination except for the authorised housing and education purposes; a lawful partial settlement reduces the balance and the interest, and is evidenced separately."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C40",
+   "row": 40,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "The universal Colombian rule - payment o credit in account. Applies to the electronic payroll (DIAN Resolution 000013 of 2021 art. 3), to Form 350, to Form 220 and to Format 2276."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C50",
+   "row": 50,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026, so the ordinary CST prestaciones including severance savings apply to the productive phase."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M9",
+   "row": 9,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E06",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "payroll id / run"
+   ],
+   "current": "Optional free-text label. Both operator manuals mark it optional. Use it to carry the run identifier so that the returned return number can be tied back to the payroll run without relying on the portal's own chronology."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M10",
+   "row": 10,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E07",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "CONDITIONAL PAIR. Simple S.A. asks 'Deseas que las severance savings de todos los employees incluidos en esta return sean enviadas a un solo severance-savings fund?'. Answering YES overwrites the per-employee fund with one value for the whole return. For a real employer the answer is almost always NO, because the fund is the EMPLOYEE'S statutory choice (Law 50 of 1990 art. 99 num. 3: 'en el fondo de cesantia que el mismo elija'). Answering YES to save keystrokes deposits other people's money into the wrong fund and does not discharge the obligation. Set to N and let T09 carry the per-employee value."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M11",
+   "row": 11,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E08",
+   "strict_patterns": [
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "report names",
+    "CLIENT DATA labels"
+   ],
+   "current": "Simple S.A. offers to build the severance savings return from the contributor list of the last PILA return paid for the chosen year. Convenient and dangerous: the PILA population is the population that was PAID in a month, which is not the population ENTITLED to a severance savings deposit for the year. An employee who left during the accrual year is EXCLUDED from the deposit: the severance savings are paid directly in the final settlement (Ley 50 de 1990 art. 99 num. 4; Population Rules Step 0 exclusion (2)), so a leaver must never be added to the return - a leaver included is a double payment. All-inclusive salary employees are present in PILA but owed nothing, and the other Step 0 exclusions are not visible in a PILA list either. The engine must generate the population itself from the Population Rules and set this to N. CLIENT DATA (Accumulated Report): all 10 employees whose last salary fell in Oct-Dec 2025 received severance savings and interest directly through WT 62110 'Cash-out of Severance Pay' and WT 62117 'Cash-out of Interest Severance Pay' in the termination month or the month after, and none has a February-2026 fund payment (WT 25827); the 103 integral-salary employees (WT 62140) likewise carry no 25827 - both exclusions are confirmed by the client's practice."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M14",
+   "row": 14,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E11",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "payroll id / run"
+   ],
+   "current": "CONTROL TOTAL. Displayed on the settlement summary and on the voucher. It must equal the sum of T14 across the detail records of the return; where the medio de payment splits the return per fondo, the sum of the per-fondo totals must equal the run total. This is the only arithmetic check the channel gives you - there is no header record in the file carrying a declared total, so a truncated upload is NOT self-detecting. Compare the returned total against the engine's own sum before paying."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P14",
+   "row": 14,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "E11",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M18",
+   "row": 18,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T03",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "PMI",
+    "N of M",
+    "Sep-2026 / September 2026",
+    "report names",
+    "decision / pending / query",
+    "CLIENT DATA labels"
+   ],
+   "current": "ALPHABETIC two-character code, validated against the list printed in the layout: CC, CE, TI, PA, CD, SC, PE - and, in the XLS variant of the SAME manual, also PT (Permiso temporal). THIS IS NOT THE PILA CODE SET: PILA Record Tipo 2 campo 3 uses the same two-letter mnemonics but a different admitted list, and Form 220 / Format 2276 use DIAN NUMERIC document-type codes. The engine must hold one document type and three mappers. Note the SOI-documented length trap: where the document is a Special permanence permit the NUMBER (T04) must be exactly 15 digits. CLIENT DATA (PMI Master Data Report, Sep-2026): there is NO document-type column. The identity number sits in four separate columns - 'Citizenship Card ID' (247 of 263 employees), 'Indentity Card for Foreigners' (15), 'Identity Card' (6) and 'National ID' (11) - and the Accumulated Report carries only 'EE Citizenship Card ID'. 14 employees have two or three of these columns filled and 2 have none, so the type cannot be inferred reliably from which column is populated: hold Employee.Document_Type as its own master-data attribute and map it to the severance-savings code. The column-to-code mapping is an inference pending RA confirmation (see Query to RA): 'Citizenship Card ID' -> CC and 'Indentity Card for Foreigners' -> CE are the natural readings; 'Identity Card' and 'National ID' are not determinable from the client data."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M25",
+   "row": 25,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T09",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M",
+    "CLIENT DATA labels"
+   ],
+   "current": "Campo mandatory, validated against the funds registered in the operator's system. The published layout admits exactly FIVE values and prints them: 02 Proteccion, 03 Porvenir, 10 Colfondos, 15 Fondo Nacional del Ahorro (FNA), 19 Old Mutual (antes Skandia). STALE LABEL, LIVE CODE: code 19's printed label is out of date - the entity trades as Skandia again (Skandia Pension fund administrator y Severance savings S.A., authorised by the Financial Superintendence in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024). Send the CODE, not the name. The fund is the EMPLOYEE'S choice under Law 50 of 1990 art. 99 num. 3 and is master data on the employee, not a company default. CLIENT DATA: the Master Data Report holds only a fund NAME ('Severance Fund Name'), no 2-digit operator code, so a name-to-code mapping table is required. 11 distinct non-blank name values were found against the 5 codes of the layout; because the names are masked, the reading that several spellings exist per fund is an inference, not a confirmed fact. The fund is blank for 63 of 263 employees, including 12 employees who received a February-2026 fund payment (25827) - per Population Rules an empty fund must be escalated, never defaulted. 64 of the 88 integral-salary employees present in Master Data also carry a fund name, so fund presence must not be used to select the population."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M26",
+   "row": 26,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T10",
+   "strict_patterns": [
+    "verified",
+    "not <number>",
+    "the client's file/certificates"
+   ],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "report names"
+   ],
+   "current": "Mandatory. Admits values from 1 to 360 - a 360-DAY COMMERCIAL YEAR, not 365. A full year of service is 360, and every partial year is the actual days of service counted on the commercial convention (each month 30 days). Include the days of paid leave and of employer-paid or institution-paid incapacity, which count as service. The 3-position field cannot carry more than one year, which is the layout's way of saying that this filing is strictly one accrual year per record. SOURCE AND EXCLUSIONS: per Population Rules Step 1, count the accrual-year days of service on the 30-day convention from the later of 1 January and the current-contract hire date to the earlier of 31 December and the leaving date, EXCLUDING unpaid leave and suspensions. In the client payroll the equivalent counter is wage type 68029 'Days worked current year (Without Leaves)' in the December period (360 for a full year). The December balance 68028 equals 'ces base' 68040 x 68029 / 360 for 204 of 284 employees; for the others the difference is consistent with in-year direct payments (62110), but this can only be verified from the Accumulated Report for payments from October 2025 onwards, because earlier months fall outside its window. Use 68029 only as a reconciliation check, not as the source: it shows 0 for a late-December hire (16-12-2025) who was nevertheless deposited for 15 days, and for early-2025 hires it differs from the commercial count from the hire date (300 for a 10-02-2025 hire, while the client's own interest 62127 for the same employee uses 321 days; 300 vs 314 for a 17-02-2025 hire)."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M28",
+   "row": 28,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T12",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "SCOPE ROUTING (v1.1 alignment patch): the amount is owned by the Wage Type Catalogue, not the Data Dictionary - the pipeline scope rule routes 'Base Salary / Basic Salary amounts -> WTC, NOT DD'. The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary correctly holds no Contractual Salary field. Mandatory. Nine integers, no decimals, no commas, no points, not less than zero. The layout is explicit about WHICH salary: 'el ultimo basic salary reportado en el mes de diciembre del ano accrued de severance savings'. THIS IS THE OPERATOR'S REPORTING FIELD, NOT THE STATUTORY BASE. CST art. 253 fixes the statutory base as the last monthly salary provided it has not varied in the last three months, otherwise the average of the last year of service (or of the whole period if shorter), INCLUDING the transport allowance. The field name says 'basico' and the operator's calculator uses it alone - see the trap documented at T14. Report the December basic here and compute T14 yourself. SOURCE IN THE CLIENT PAYROLL: wage type 63807 'Basic Salary Base Amount' in the December period of the accrual year (the full contractual monthly salary). Do NOT use 62100 'Ordinary Salary' (the amount actually paid in the month, prorated for absences): in December 2025, 63807 equals 62100 for 190 of 286 employees and is higher for 96, never lower - e.g. masked employee 27114435, 62100 = 7,603,589 while 63807 = 8,448,432. The Master Data 'Basic Salary' column is a snapshot of the report month and is valid for T12 only when the report is run for December."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P28",
+   "row": 28,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "T12",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M30",
+   "row": 30,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T14",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "report names",
+    "decision / pending / query",
+    "evidence / observed / confirmed",
+    "CLIENT DATA labels"
+   ],
+   "current": "Mandatory, nine integers. TWO RULES AND ONE TRAP. Rule one, the floor: 'el value minimo del collection debe ser de un (1) dia de un (1) SMLMV del ano accrued' - for accrual year 2026 one day of the SMMLV of COP 1,750,905 is COP 58,363.50, so a record below that is rejected. Rule two, the override: the layout's own formula is basic salary * (dias worked / 360) BUT 'en este campo el contributor puede especificar un value diferente y no se haran calculos automaticos de este value'. THE TRAP: the operator's formula omits the TRANSPORT ALLOWANCE, which CST art. 253 requires in the base. For an employee on the 2026 minimum wage the operator would compute 1,750,905 while the statute requires (1,750,905 + 249,095) = 2,000,000 - a shortfall of COP 249,095 that is a SHORT DEPOSIT, penalised at one day's salary for every day of delay under Law 50 of 1990 art. 99 num. 3, uncapped. ALWAYS write the engine's own figure into this field and never rely on the portal calculator. Where the monthly advance regime of MA01 is in use, this field carries the CONSOLIDATED annual figure and only the difference computed at MA05 is actually deposited in February. WHAT IS DEPOSITED - NET OF DIRECT PAYMENTS ALREADY MADE: T14 carries the amount actually deposited for the employee = the consolidated 31 December balance (IN01) LESS the lawful partial payments already made directly to the employee during the accrual year (CST art. 254; Population Rules Step 1 (f)) and LESS any direct payment of that balance made in January to an employee who left before the deposit, which is lawful under Ley 50 de 1990 art. 99 num. 4. An employee who left and was paid in full in the final settlement is not in the return at all (Population Rules Step 0 exclusion (2)). Keep the gross annual liquidation as a separate engine value: System Mapping 'Cesantias_Annual_Liquidation' is the gross figure, T14 is the net deposit. CLIENT EVIDENCE (Accumulated Report): the February payroll carries 25827 / 65805 'Payment Severance Funds Inf.' for 236 employees, in 01/02/2026 only. For 280 of 282 employees with a deposit or a January advance, 25827 (Feb) + 62126 'Advance Severance Last Year' (Jan) = the absolute value of 63814 'Severance Balance (Current Month)' in January, i.e. the consolidated 31 December balance (the 2 exceptions are late-December hires with no January balance). That balance is the annual liquidation ('ces base' 68040 x days / 360) less the in-year direct payments 62110 'Cash-out of Severance Pay' (110 employees carry 62110 and 62117 in the 12-month window; e.g. 2,120,000 in Nov-2025, balance 9,051,613 = 11,171,613 - 2,120,000); this deduction can be reproduced from the report for 174 of 285 balances only, because payments made in Jan-Sep 2025 fall outside its window. 54 employees received part of the consolidated balance directly in January via 62126 and only the remainder was deposited (e.g. balance 16,074,021: 16,000,000 via 62126 and 74,021 via 25827); the reports examined do not split these 54 between employees who had left and employees still in service, and whether such a January payment to an employee STILL IN SERVICE lawfully reduces T14 is pending RA confirmation (see Query to RA) - the engine must not copy that practice until RA confirms it. Where the remainder after direct payments falls below the one-day SMMLV floor the channel would reject the record - treatment pending RA. The client base 68040 exceeds the December basic salary 63807 for 202 of the 236 depositees (variable pay averaged under CST art. 253), which confirms that T14 must never be left to the operator's basic-salary formula."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P30",
+   "row": 30,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "T14",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M32",
+   "row": 32,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T15",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M",
+    "decision / pending / query",
+    "CLIENT DATA labels"
+   ],
+   "current": "The employee's residential address, 50 positions, left-aligned and space-filled. This is the AFFILIATE'S address for the fund's own statutory communications with its member, which is why the layout asks for the residence and not the work address - contrast electronic payroll and PILA, which carry the WORK municipality. Do not send the work address; the fund will post the member's statements to it. Composite Key: the affiliate's domicile is carried across THREE fields that must describe one place - T15 the free-text street address, T16 the two-digit DANE department and T17 the three-digit DANE municipality. Within T15 itself, Colombian addresses decompose as via type (CALLE / CARRERA / DIAGONAL / TRANSVERSAL), via number, the NO separator, the cross-via number, the hyphen, the door number and any complement (APTO / TORRE / INT). Abbreviate by a documented rule where the whole exceeds 50 positions - never cut mid-token, because the fund cannot repair a truncated address. CLIENT DATA: the Master Data Report holds the residential address in 'Address Line 1' (filled for 261 of 263) and 'Address Line 2' (filled for 159 of 263, about 60%); concatenate Line 1 + space + Line 2 before applying the 50-position rule. The 'Country' column is not CO for 6 employees (CA, CR, DO, CH, MX) and is lower-case 'co' for 2: what is sent in T15-T17 for an affiliate whose residence is abroad is pending RA confirmation (see Query to RA). Do not use 'Work location' or 'Personal Subarea', which are work places."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M33",
+   "row": 33,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T16",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "CLIENT DATA labels"
+   ],
+   "current": "Two positions, per the DANE list. The DANE divipola code is hierarchical: the two-digit department prefix plus the three-digit municipality suffix form the five-digit municipality code (11 + 001 = 11001, Bogota D.C.). Composite Key: T16 and T17 must be written as the two halves of ONE divipola code, never picked from two different lists. CLIENT DATA: the Master Data column 'Employee Address - Department' holds a 3-letter alphabetic abbreviation (DC, ANT, CUN, VAC, ATL, CAL, QUI, RIS, NAR, NSA, MAG, TOL, BOL, SAN, BOY - 18 distinct values, including non-Colombian ON, VD, JAL) and is blank for 3 employees; it is not the 2-digit DANE code. Either capture the DANE code in master data or maintain an abbreviation -> DANE department table; foreign provinces have no DANE code."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M34",
+   "row": 34,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T17",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "CLIENT DATA labels"
+   ],
+   "current": "Three positions, per the DANE list, and it is the SUFFIX only - not the five-digit code. Writing the full 11001 into a three-position field truncates to 110 and silently relocates the affiliate. Composite Key: see T16. CLIENT DATA: no municipality code exists. The Master Data 'City' column is free text with 60 distinct values and several spellings for the same municipality (Bogota / Bogotá / BOGOTA / bogota / Bogota D.C. / Santafé de Bogotá D.C.; Medellin / medellín / MEDELLIN); some values are neighbourhoods or a department rather than a municipality (Suba Compartir, Portales del Norte, Cundinamarca) and some are foreign cities (Burlington, Lausanne, Zapopan - Jalisco). Capture the DANE divipola municipality code as a coded master-data field; free-text matching is not reliable."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M35",
+   "row": 35,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T18",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M",
+    "decision / pending / query",
+    "CLIENT DATA labels"
+   ],
+   "current": "'Solo admite 7 numeros' - exactly seven digits, so the field cannot carry a mobile number (10 digits in Colombia) nor a number written with the area code. Where only a mobile is held, the field must be zero- or space-filled rather than truncated; a truncated mobile is a wrong-number record on the fund's affiliate file. CLIENT DATA: the Master Data 'Phone number' column holds one undifferentiated number per employee with no landline/mobile type: 12 digits for 237 of 263 employees (also 10 digits for 8, 14 for 3, 11 for 2; only 1 value has 7 digits; 3 junk values of 1-3 digits and 9 blanks), consistent with a country-code-prefixed mobile. Unless a separate landline is captured, this field will be zero-filled for almost the whole population; never derive it by truncating the stored number. How a landline held in the current national numbering format is reduced to the 7 positions is pending RA confirmation (see Query to RA)."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M37",
+   "row": 37,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "T20",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M",
+    "decision / pending / query",
+    "CLIENT DATA labels"
+   ],
+   "current": "Format AAAA-MM-DD, ten positions INCLUDING the two hyphens - note that the published layout types this field N while its content is not purely numeric, so a strict numeric writer would emit 20190301 and shift nothing (the field is last) but would still fail the format validation. Composite Key: positions 249-252 year, 253 hyphen, 254-255 month, 256 hyphen, 257-258 day. THIS IS THE HIRE DATE OF THE CONTRACT, NOT THE START OF THE ACCRUAL PERIOD: for an employee hired in 2019 and reported for accrual year 2026 the value is still 2019-03-01, while T10 carries 360 days. Sending the 1 January of the accrual year here is a common defect and it corrupts the fund's seniority record. CLIENT DATA: the Master Data Report holds three dates - 'Hire Date' and 'Original Hire Date' in DD-MM-YYYY (text) and 'Adjusted Service Date' in YYYY-MM-DD (text). 'Hire Date' differs from 'Adjusted Service Date' for 21 of 261 employees and from 'Original Hire Date' for 40 (e.g. Hire Date 02-04-2025, Original Hire Date 02-07-2019, Adjusted Service Date 2019-07-02; or Hire Date 01-05-2005 with Adjusted Service Date 1991-12-02). Per Population Rules ('for a rehired employee, use the hire date of the CURRENT contract'), source T20 from 'Hire Date' and convert DD-MM-YYYY to AAAA-MM-DD; do not use 'Adjusted Service Date' (a recognised-seniority date). Which date the fund expects for an intra-group transfer is pending RA confirmation (see Query to RA)."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M39",
+   "row": 39,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "MA01",
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026"
+   ],
+   "current": "Law 2466 of 2025 art. 64 added para. 1 to Law 50 of 1990 art. 99 permitting the employer to deposit monthly, to the severance savings fund, 8.33% of the base. The statute grants the option to the EMPLOYER ('El employer podra aportar mensualmente'); the MinTrabajo draft decree additionally requires the employee's agreement - draft art. 4 para. 2: 'constituye un mecanismo voluntario que podra ser adoptado por el employer previo acuerdo con el employee, sin que sustituya el regimen legal de consignacion annual'. Hold the flag per contract, not per company. DRAFT NORM, NOT IN FORCE as at 4 September 2026. MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf). Build the field, leave the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M40",
+   "row": 40,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "MA02",
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026"
+   ],
+   "current": "Law 2466 art. 64 para. 1 defines the base VERBATIM as 'el salary base de liquidacion compuesto por el salary monthly sumado al transport allowance en los casos en que a este hubiere lugar'. So, unlike the operator's annual calculator (see T14), the STATUTE for the monthly advance includes the transport allowance expressly. The draft decree adds the variable-salary rule: 'la consignacion monthly anticipada correspondera al 8,33% de lo earning por el employee en el respectivo mes, adicionado con el transport allowance cuando haya lugar'. DRAFT NORM, NOT IN FORCE as at 4 September 2026. MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf). Build the field, leave the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P40",
+   "row": 40,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "MA02",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M41",
+   "row": 41,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "MA03",
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026"
+   ],
+   "current": "8.33% of MA02. Note that 8.33% is an APPROXIMATION of one twelfth (8.3333...%), so twelve monthly advances do NOT reconcile exactly to one twelfth-based annual liquidation: on a 2,000,000 base, 12 x 166,600 = 1,999,200 against an annual entitlement of 2,000,000, a shortfall of 800 pesos. The statute fixes the rate at 8.33% and the draft decree requires the year-end consolidation to absorb the difference (see MA05) - so the residual is expected and must be paid, not written off. DRAFT NORM, NOT IN FORCE as at 4 September 2026. MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf). Build the field, leave the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P41",
+   "row": 41,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "MA03",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M42",
+   "row": 42,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "MA04",
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026"
+   ],
+   "current": "THE CHANNEL FOR THE MONTHLY ADVANCE IS NOT THIS FILING - IT IS PILA. Law 2466 art. 64 para. 1 instructs MinSalud to regulate the PILA accordingly, and the draft decree makes the point twice: the advance is paid 'exclusivamente a traves de la Integrated Contribution Settlement Return (PILA) -PILA-' (draft art. 4 para. 3) and 'debera reportarse en la PILA como contributions al sistema de severance savings mediante el tipo de contribution que defina el Ministry of Health and Social Protection' (draft art. 1 para. 2). The same paragraph gives MinSalud SIX MONTHS from the decree's entry into force to adjust PILA, and the funds and information operators a FURTHER SIX MONTHS from that regulation to build. As at 4 September 2026 the decree is a draft and no PILA contribution type exists, so the feature cannot be switched on and the annual return remains the only lawful route. DRAFT NORM, NOT IN FORCE as at 4 September 2026. MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf). Build the field, leave the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M43",
+   "row": 43,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "MA05",
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026"
+   ],
+   "current": "THE MONTHLY ADVANCE DOES NOT REPLACE THE ANNUAL LIQUIDATION. Draft art. 1 para. 1 is categorical: 'al cierre del respectivo period annual, el employer debera efectuar la consolidacion definitiva del auxilio de cesantia con base en el promedio de lo earning en el ultimo ano de service ... y realizar los ajustes a que haya lugar. Lo anterior sin que ello implique payment anticipado, parcial o fraccionado del auxilio de cesantia, el cual se entendera consolidado unicamente al cierre del respectivo period annual'. And draft art. 4 para. 4 preserves the deadline while relaxing the monthly rhythm: 'La omision de uno o varios payments mensuales no configurara mora, siempre que se complete el value total annual a mas tardar el 14 February del ano siguiente, configurandose la mora a partir del 15 February'. So the engine must still run the annual liquidation, compare it with the sum of the advances, and deposit the difference by the February deadline. DRAFT NORM, NOT IN FORCE as at 4 September 2026. MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf). Build the field, leave the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P43",
+   "row": 43,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "MA05",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "H45",
+   "row": 45,
+   "column_letter": "H",
+   "column_header": "Position (Start-End)",
+   "field_id": "IN01",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "NOT in this filing - engine output, evidenced to the employee"
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M45",
+   "row": 45,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "IN01",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "The balance in the employee's favour at 31 December, or at the date of definitive withdrawal or partial settlement. It is the base of the Law 52 of 1975 art. 1 interest. Deliberately shown on this Spec as a NOT-APPLICABLE row: it is not a field of the severance savings return, but it is computed from the same liquidation and the two are routinely confused. SOURCE IN THE CLIENT PAYROLL: the consolidated 31 December balance appears as the absolute value of wage type 63814 'Severance Balance (Current Month)' in the January period of the following year (negative sign = liability); it equals the February deposit 25827 plus any January direct advance 62126 for 280 of 282 employees and is already net of in-year direct payments (62110). The December value of 68028 'Balance Cesantias' matches it for 238 of 285 employees - most but not all cases - and 64999 'Total Balance Cesantias' is NOT this balance (it is about twice 68028 in 1,983 of 3,715 non-zero cells)."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P45",
+   "row": 45,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "IN01",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M46",
+   "row": 46,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "IN02",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "12% per annum on the IN01 balance, pro-rated on days over 360. PAID TO THE EMPLOYEE DIRECTLY, IN THE MONTH OF JANUARY of the following year - not to the fund, and not in February. The two obligations have different payees, different deadlines and different penalties: failure to deposit the principal costs one day's salary per day of delay, whereas failure to pay the interest costs an indemnity equal to the interest owed, ONCE ONLY (Law 52 of 1975 art. 1). The draft decree would add a further precision at art. 4: the interest is 'entregado directamente al employee dentro del mes siguiente a la fecha de liquidacion del auxilio de cesantia'. No interest on interest may be liquidated. SOURCE IN THE CLIENT PAYROLL: paid in the January payroll as wage type 62127 'Advance Interest Severance Pay' (284 employees in 01/01/2026); for 281 of 284 it equals round(12% x IN01 x days / 360) within 1 peso (e.g. 12% x 6,422,811 = 770,737); the 3 exceptions follow the 68029 day-count anomalies noted at T10 and one late-2025 hire. Do not use 63815 'Interests Balance (Current Month)' at December as the payable amount: it is computed on the liquidation before direct payments and differs from the amount paid for 104 employees. 4 payments fall in February/March 2026 (2 late-December hires and 2 leavers whose last salary is March 2026), which this rule would flag as late."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P46",
+   "row": 46,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "IN02",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M47",
+   "row": 47,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "IN03",
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "N of M",
+    "Sep-2026 / September 2026"
+   ],
+   "current": "Law 2466 of 2025 art. 64 para. 2, verbatim: 'Las partes podran acordar por escrito la mensualizacion de los intereses sobre las severance savings, pagando al employee el 1% del salary base de liquidacion compuesto por el salary monthly sumado al transport allowance en los casos en que a este hubiere lugar'. Three engine consequences. First, it needs a written agreement, so the flag is per contract. Second, the base is the SAME monthly base as MA02 (salary + transport allowance), not the accumulated balance - so the monthly route and the annual route give different figures and the draft decree confirms the 1% monthly 'correspondiente al doce por ciento (12%) annual previsto en la Law'. Third, the draft decree sets the payment window: 'dentro del mes calendario siguiente al de su causacion'. DRAFT NORM, NOT IN FORCE as at 4 September 2026. MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf). Build the field, leave the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "P47",
+   "row": 47,
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "field_id": "IN03",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "A48",
+   "row": 48,
+   "column_letter": "A",
+   "column_header": "Field Name (EN)",
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "═══ inbound - deposit confirmation and compliance evidence(co-in-cesantias-confirmation) ═══"
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M49",
+   "row": 49,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E90",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "INBOUND. The date the return was actually PAID, which is the date that matters for the deadline - not the date the return was built. Both operators separate settlement from payment: the return is liquidated, a pre-payment voucher is issued, and payment then follows by PSE or by credit. A return liquidated on 13 February and paid on 17 February is LATE. Store the payment date, not the liquidation date, as the compliance evidence. Composite Key: AAAA-MM-DD - positions 1-4 the year, 5 the hyphen, 6-7 the month, 8 the hyphen, 9-10 the day; the same 10-character date frame as T20, and the pair (E10 return number, E90 payment date) is the key of the compliance evidence held per accrual year."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "A51",
+   "row": 51,
+   "column_letter": "A",
+   "column_header": "Field Name (EN)",
+   "field_id": "E92",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "Direct-payment discharge evidence"
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M51",
+   "row": 51,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E92",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "client (any)",
+    "N of M",
+    "decision / pending / query",
+    "evidence / observed / confirmed",
+    "CLIENT DATA labels"
+   ],
+   "current": "CST art. 57 para. 4, added by Law 2466 of 2025 art. 15, verbatim: 'Cuando el employer acredite de manera fehaciente el payment directo al employee del value correspondiente a las severance savings, dicho payment se considerara liberatorio de la obligacion, y no procedera sancion por no consignacion, salvo que se demuestre que el payment no se realizo en condiciones de libertad y que no fue utilizado en fines autorizados por la Law. No obstante, la afiliacion a Severance-savings fund es mandatory.' Three limits the engine must respect: the discharge needs FEHACIENTE evidence, it is rebuttable on the freedom-and-purpose test, and it does NOT remove the duty to affiliate the employee to a fund. A DRAFTING NOTE on the citation: art. 15's enacting formula announces only 'los paragrafos 2 y 3' of CST art. 57, yet the published text prints a Paragrafo 4 and this is it - so cite CST art. 57 para. 4 as added by Law 2466 of 2025 art. 15, and expect the discrepancy to be raised. CLIENT PRACTICE - DIRECT PAYMENTS AND THE DEPOSIT: the client pays part of the severance savings directly to the employee (62110 'Cash-out of Severance Pay' during the year, 110 employees in the 12-month window; 62126 'Advance Severance Last Year' in January, 54 employees) and deposits only the remainder (25827) - e.g. masked employee 27114435, balance 9,051,613: 8,466,400 via 62126 in January and 585,213 via 25827 in February. This flag covers a FULL discharge of the deposit obligation by proven direct payment (Population Rules Step 0 exclusion (4)). An employee who left and was paid directly in the final settlement is NOT an E92 case but a Step 0 exclusion (2) under Ley 50 de 1990 art. 99 num. 4, and a January direct payment to an employee who left before the deposit is treated as that lawful payment. A partial direct payment does not set E92 = Y: T14 carries the deposit net of the direct payments already made and the record is still produced. Whether a January direct payment of part of the consolidated balance to an employee who REMAINS in service is a lawful partial payment or a CST art. 57 para. 4 direct payment needing fehaciente evidence is pending RA confirmation (see T14 and Query to RA)."
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "M52",
+   "row": 52,
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "field_id": "E93",
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "INBOUND. Both operators issue reports after payment - por fondo, por affiliate and a consolidated informe completo, in PDF or Excel - and the fund itself issues the deposit certificate. CCG Module 10 records that the certificate is issued by the FUND but the EMPLOYER must be able to evidence it. Store the reference against E10 and E90; it is the primary evidence in a claim, and the employee's claim period runs three years."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A2",
+   "row": 2,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "VERIFIED header"
+   ],
+   "current": "═══ SUBMISSION CHANNEL - VERIFIED (V2.7 STEP 3.5) ═══"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A4",
+   "row": 4,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "verified"
+   ],
+   "broad_patterns": [],
+   "current": "Portals verified"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B4",
+   "row": 4,
+   "column_letter": "B",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "verified"
+   ],
+   "broad_patterns": [],
+   "current": "ACH Colombia S.A. (SOI) - www.nuevosoi.com.co, instruction guide DDS-DES-INS-008 v2. Simple S.A. - www.pagosimple.com, 'Manual Severance savings'. The same service is offered by Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla; those were NOT verified and may impose an operator-specific layout."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B35",
+   "row": 35,
+   "column_letter": "B",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "verified"
+   ],
+   "broad_patterns": [],
+   "current": "2+5+2+16+20+20+20+20+2+3+4+9+4+9+50+2+3+7+50+10 = 258. Every Inicial-Final pair in the published table is consistent with its stated length and with its neighbours; there are no gaps and no overlaps. This was verified field by field, and the Sheet-9 sample is generated from the same table with a 258-character assertion."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B58",
+   "row": 58,
+   "column_letter": "B",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "corrected"
+   ],
+   "broad_patterns": [],
+   "current": "Run on upload. Errors are returned as a downloadable Excel report; the file must be corrected and re-uploaded. Nothing is partially accepted."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "A63",
+   "row": 63,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "decision / pending / query"
+   ],
+   "current": "═══ THE MONTHLY ADVANCE - A DIFFERENT CHANNEL ENTIRELY, AND NOT YET OPEN ═══"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B64",
+   "row": 64,
+   "column_letter": "B",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "NOT to this file. Law 2466 of 2025 art. 64 para. 1 routes the 8.33% monthly advance through PILA, and the MinTrabajo draft decree repeats it twice: 'exclusivamente a traves de la Integrated Contribution Settlement Return (PILA) -PILA-' and 'debera reportarse en la PILA como contributions al sistema de severance savings mediante el tipo de contribution que defina el Ministry of Health and Social Protection'."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B65",
+   "row": 65,
+   "column_letter": "B",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "DRAFT"
+   ],
+   "broad_patterns": [
+    "Sep-2026 / September 2026"
+   ],
+   "current": "The decree is a DRAFT as at 4 September 2026. Even on publication, its art. 1 para. 2 gives MinSalud SIX MONTHS to adjust PILA and then gives the fondos and the information operators a FURTHER SIX MONTHS to build. Until both are done there is no tipo de contribution to write and the annual return is the only lawful route."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D8",
+   "row": 8,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "STALE LABEL, LIVE CODE. The published layout prints 'Old Mutual (Antes Skandia)', but the administrator trades as Skandia again - Skandia Pension fund administrator y Severance savings S.A., authorised by the Financial Superintendence in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024. Send the CODE 19, never the name. Colombian press coverage of the 2026 deadline lists the five funds as FNA, Colfondos, Porvenir, Proteccion and Skandia, which corroborates the code table one-for-one."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D38",
+   "row": 38,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M",
+    "evidence / observed / confirmed"
+   ],
+   "current": "CST art. 57 para. 4, added by Law 2466 of 2025 art. 15. No return record and no penalty, but the evidence must be fehaciente, the discharge is rebuttable on the freedom-and-purpose test, and fund affiliation remains compulsory."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D47",
+   "row": 47,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Decree 1469 of 2025. Sets the minimum-collection validation (one day = COP 58,363.50) and, for a minimum-wage employee, the salary half of the base."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D48",
+   "row": 48,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Decree 1469 of 2025. PART OF THE SEVERANCE SAVINGS BASE under CST art. 253, payable where the salary does not exceed 2 SMMLV (COP 3,501,810). The operator's calculator omits it - see T14."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D50",
+   "row": 50,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Res. DIAN 000238 of 15 Dec 2025. Not used in this file, but it fixes the ET art. 206 num. 4 exemption bands (350 UVT = COP 18,330,900) that apply when the money is PAID and reported on Form 220 and Format 2276."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C4",
+   "row": 4,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Select every employee IN SERVICE AT 31 DECEMBER of the accrual year who is on the annual severance savings regime (Law 50 of 1990 art. 99 - all employees hired from 1 January 1991, plus pre-1991 hires who migrated). EXCLUDE, in this order: (1) all-inclusive salary employees, whose severance savings is absorbed by CST art. 132 num. 2; (2) employees who LEFT during the year, whose severance savings was settled and paid in the final settlement; (3) pre-1991 non-migrated employees on the retrospective regime, for whom there is no fund deposit at all; (4) employees discharged by proven direct payment under CST art. 57 para. 4; (5) records whose liquidation falls below one day of one SMMLV, which the channel rejects. Do NOT build the population from the December PILA return, however convenient the portal makes it (E08): PILA is the population PAID in a month, not the population ENTITLED for the year - it contains every all-inclusive salary employee and omits every mid-year leaver."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C5",
+   "row": 5,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Read Employee.Cesantias_Fund_Code. It is the EMPLOYEE'S statutory choice under Law 50 of 1990 art. 99 num. 3 ('en el fondo de cesantia que el mismo elija'), so it is employee master data and never a company default. Where a mid-year change of fund has been notified, use the fund in force at the date of the deposit. Where the field is empty the record cannot be built - escalate, because affiliation is compulsory even where the severance savings is paid directly (CST art. 57 para. 4 in fine). Set E07 to N so that this per-employee value governs."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C9",
+   "row": 9,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "not <number>"
+   ],
+   "broad_patterns": [],
+   "current": "Count the days of service in the accrual year on the 360-day COMMERCIAL convention: each complete month is 30 days, a full year is 360. Include paid leave, paid holidays and recognised incapacity, all of which count as service. Exclude unpaid leave (unpaid leave) and suspension. For an employee in service the whole year write 360, not 365 and not 366. The field admits 1 to 360 only, so any computation that can produce 361 or more is wrong before it reaches the file."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D9",
+   "row": 9,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "not <number>"
+   ],
+   "broad_patterns": [],
+   "current": "A leap year does not change the divisor. An employee hired on 31 January accrues 330 days, not 335. Where unpaid leave straddles a month end, count the calendar days of the leave on the 30-day convention and subtract - do not subtract whole months."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C14",
+   "row": 14,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "not <number>"
+   ],
+   "broad_patterns": [],
+   "current": "Write the CONTRACT HIRE DATE in AAAA-MM-DD, ten positions including the hyphens, at 249-258. For an employee hired in 2019 and reported for accrual year 2026 the value is 2019-03-01 - not 2026-01-01, and not the start of the accrual period."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C16",
+   "row": 16,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "payroll id / run"
+   ],
+   "current": "Authenticate with the company document pair, select the service SEVERANCE SAVINGS (not PILA), enter the ACCRUAL YEAR (not a month), select afiliacion type DEPENDIENTE, select the medio de payment and label the return with the run identifier so the returned return number can be tied back. Answer NO to the seed-from-PILA question and NO to the single-fund question."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D17",
+   "row": 17,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "Liquidating the return is not paying it. A return liquidated on 13 February and paid on 17 February is LATE - the deadline attaches to the deposit, so the compliance evidence is the payment date, not the liquidation date."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "A18",
+   "row": 18,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "E91-E93 Compliance status and evidence"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D18",
+   "row": 18,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "The certificate is issued by the FUND, but CCG Module 10 records that the EMPLOYER must be able to evidence it - so the reference must be stored employer-side, not left on a portal. A SHORT deposit made on time is not a lesser problem than a late one: the shortfall is treated as non-deposit and accrues the same daily penalty."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D5",
+   "row": 5,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "Decree 1469 of 2025 sets both figures. The base is exactly two million, which makes the arithmetic below checkable by eye."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D17",
+   "row": 17,
+   "column_letter": "D",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "not <number>"
+   ],
+   "broad_patterns": [],
+   "current": "Not 365, and not 366 in a leap year. The field cannot carry more than 360."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C21",
+   "row": 21,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "N of M"
+   ],
+   "current": "COP 2,000,000 - the CST art. 253 base of 2,000,000 for 360 of 360 days."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C35",
+   "row": 35,
+   "column_letter": "C",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [
+    "not <number>"
+   ],
+   "broad_patterns": [],
+   "current": "360, not 365 or 366."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A149",
+   "row": 149,
+   "column_letter": "A",
+   "column_header": null,
+   "field_id": null,
+   "strict_patterns": [],
+   "broad_patterns": [
+    "evidence / observed / confirmed"
+   ],
+   "current": "                              evidence."
+  }
+ ]
+}

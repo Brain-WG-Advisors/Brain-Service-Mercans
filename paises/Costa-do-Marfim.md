@@ -22,7 +22,7 @@
 1. Mecânica pré-reforma do ITS (F18): IS, CN do empregado, IGR, abatimento de 20%, quociente familiar e CNPS deduzido da base do ITS estão abolidos desde 01/01/2024; ITS único sobre o bruto total, RICF como crédito → SKILL.md §0, §3
 2. Calculadoras web (talent.com etc.) e tabelas "0/10/15/20/25/35%" ou "150k/300k/600k" estão erradas; a tabela válida é 0/16/21/24/28/32% → §3.1
 3. "CN empregador 1,2%" é outro tributo (vigente), não confundir com a CN do empregado abolida → §0 e §2.2
-4. Tetos/SMIG de PDFs velhos: pensão 3.375.000 (não 1.647.315/2.700.000) e SMIG 75.000 (não 36.607/60.000); PF/AM/AT-MP têm teto 70.000 → §2.1, risco 5
+4. Tetos/SMIG de PDFs velhos: pensão 3.375.000 (não 1.647.315/2.700.000) e SMIG 75.000 (não 36.607/60.000); PF/AM/AT-MP têm teto **75.000** desde 2023-01-01 (o 70.000 é pré-2023; a skill ainda diz 70.000, corrigir) → §2.1, risco 5 [corrigido em 2026-10-16, ver [[correcoes]] 2026-10-15]
 5. Divisão local × expatriado: CE 0% local / 9,2% expat; carga patronal de impostos sobre salário 2,8% → 12% → §2.2
 6. Prime de panier: CCG/art. 23 CPS excluem do CNPS até 3× SMIG horário, mas o WTC a codifica como totalmente sociável (CI-TX-01); tratar como CI-TX-03 e sinalizar o WTC → §8 risco 3, §9
 7. Abatimento de 320.000 XOF vale só para pensionistas, não para ativos → §3.3
@@ -45,7 +45,7 @@
 | ITS (bruto total, sem abatimento) | 0% até 75.000; 16% até 240.000; 21% até 800.000; 24% até 2.400.000; 28% até 8.000.000; 32% acima (mensal) | 2024-01-01 | Ordonnance 2023-719; CGI art. 119 bis |
 | RICF | 5.500/mês por meia parte acima de 1 (2 partes = 11.000; máx. 5 partes) | 2024-01-01 | CGI art. 120 |
 | CNPS pensão | ER 7,70% / EE 6,30%, teto 3.375.000/mês | 2026 | Loi 99-477; CLEISS |
-| CNPS PF / AM / AT-MP (ER) | 5% / 0,75% / 2-5%, teto 70.000/mês | 2026 | Loi 99-477; CLEISS |
+| CNPS PF / AM / AT-MP (ER) | 5% / 0,75% / 2-5%, teto 75.000/mês | 2023-01-01 | Communiqué CNPS de 11/01/2023 (Décret 2022-986); Loi 99-477 art. 23 (raw/docs/oficiais/CI/2026-10-15-VERIFICACAO-teto-CNPS.md e 2026-10-16-VERIFICACAO-complemento-teto-CNPS.md) (a ficha dizia 70.000, da skill/CLEISS: errado) |
 | Contribution employeurs | CE 0% local / 9,2% expat; CN 1,2%; TA 0,4%; TFPC 1,2% | 2026 | CGI art. 134-146 |
 | SMIG | 75.000 XOF/mês | 2023-01-01 | Décret 2022-986 |
 
@@ -62,13 +62,17 @@
 ## Valores-chave (com vigência)
 | Item | Valor | A partir de | Até | Fonte |
 |---|---|---|---|---|
-| Teto CNPS PF / maternidade / AT-MP | 70.000 XOF/mês | 2025-01-01 | — | CLEISS CI (HRBS-14996; chat: mercans-compliance) |
-| SMIG (piso da assiette, NÃO é teto) | 75.000 XOF/mês | 2025-01-01 | — | CLEISS CI (HRBS-14996) |
-| Teto CNPS pensão | 3.375.000 XOF/mês (45 × SMIG) | 2025-01-01 | — | CLEISS CI (HRBS-14996) |
+| Teto CNPS PF / maternidade / AT-MP | 70.000 XOF/mês | 2025-01-01 ❌ | 2022-12-31 | CLEISS CI (HRBS-14996; chat: mercans-compliance). ❌ Vigência errada: o 70.000 é anterior a 2023 (página "Employeur" e guia de 2021 da CNPS). Ver [[correcoes]] 2026-10-15 |
+| Teto CNPS PF / maternidade / AT-MP | 75.000 XOF/mês (900.000/ano; 225.000/trimestre) | 2023-01-01 | — | Communiqué CNPS de 11/01/2023 (Décret 2022-986); Loi 99-477 art. 23 (raw/docs/oficiais/CI/2026-10-15-VERIFICACAO-teto-CNPS.md e 2026-10-16-VERIFICACAO-complemento-teto-CNPS.md) |
+| SMIG (piso da assiette, NÃO é teto) | 75.000 XOF/mês | 2025-01-01 ❌ | — | CLEISS CI (HRBS-14996). ❌ Vigência real 2023-01-01 (linha abaixo) e o SMIG também é o teto de PF/AM/AT-MP |
+| SMIG = piso de todos os ramos CNPS | 75.000 XOF/mês | 2023-01-01 | — | Communiqué CNPS de 11/01/2023 (Décret 2022-986); Loi 99-477 art. 23 (raw/docs/oficiais/CI/2026-10-15-VERIFICACAO-teto-CNPS.md e 2026-10-16-VERIFICACAO-complemento-teto-CNPS.md). Nenhum decreto posterior encontrado (⚠️ só fontes secundárias, 2026-10-16) |
+| Teto CNPS pensão | 3.375.000 XOF/mês (45 × SMIG) | 2025-01-01 ❌ | — | CLEISS CI (HRBS-14996). Valor certo, vigência real 2023-01-01 (linha abaixo) |
+| Teto CNPS pensão | 3.375.000 XOF/mês | 2023-01-01 | — | Communiqué CNPS de 11/01/2023 (Décret 2022-986); Loi 99-477 art. 23 (raw/docs/oficiais/CI/2026-10-15-VERIFICACAO-teto-CNPS.md e 2026-10-16-VERIFICACAO-complemento-teto-CNPS.md) |
 | Prestações familiares (ER) | 5% | 2025-01-01 | — | CLEISS CI (HRBS-14996) |
 | Maternidade (ER) | 0,75% | 2025-01-01 | — | CLEISS CI (HRBS-14996) |
 | AT/MP (ER) | 2–5% (cliente aplica 3%) | 2025-01-01 | — | CLEISS CI (HRBS-14996) |
-| Máximos no teto (EE pensão / ER pensão / PF / AM / AT-MP 3%) | 212.625 / 259.875 / 3.500 / 525 / 2.100 XOF | derivado dos tetos | — | cálculo de Wallisson (HRBS-14996) |
+| Máximos no teto (EE pensão / ER pensão / PF / AM / AT-MP 3%) | 212.625 / 259.875 / 3.500 / 525 / 2.100 XOF | derivado dos tetos | substituído em 2026-10-16 | cálculo de Wallisson (HRBS-14996), feito sobre o teto errado de 70.000 |
+| Máximos no teto (EE pensão / ER pensão / PF / AM / AT-MP 3%) | 212.625 / 259.875 / 3.750 / 562,50 / 2.250 XOF | 2023-01-01 (derivado) | — | 6,3% e 7,7% × 3.375.000; 5%, 0,75% e 3% × 75.000 |
 | CN empregador | 1,2% | 2026 (skill; data de início não informada) | — | CGI art. 146 (confirmado: skill §2.2; CT-A-620 reg. 4111, taxa 1,20) (citado por Wallisson, HRBS-14996) |
 | CE expatriados | 9,2% (local 0%) | 2026 (skill; data de início não informada) | — | CGI arts. 134 e ss., 146 (confirmado: skill §2.2; CT-A-620 reg. 4111, taxa 9,20 com Worker Type = 1) (HRBS-14996) |
 | Prime de transport isenta (Abidjan) | 30.000 XOF (Bouaké 24.000; demais 20.000); excluída do CNPS uma vez por mês | 2020-01-30 | — | Arrêté n° 2020-012/MEPS/CAB; CPS art. 23; NS n° 054/MFB/DGI-DLCD (chat: mercans-compliance; HRBS-14996) |
@@ -86,7 +90,7 @@
 - 2026-08-25: cap de previdência privada 320.000 anual e cumulativo — CCG — Mohit (chat: design-dev-kb)
 - 2026-08-25: automação de design começa por países pequenos (CI, Chad, Gabon, Iraq, Yemen) — Manju propôs, Mohit concordou (chat: design-dev-kb)
 - s.d. [INCERTO data]: reconciliação dirigida por flag (58206) em vez de retro — retro de componente único é impraticável — Mohit (chat: design-dev-kb)
-- ~2026-09-22: parecer 1 do HRBS-14996: nenhum flag STR, "ITS é devido" (impôt synthétique/microentreprises exclui ITS); teto 70.000 correto, 75.000 é SMIG; defeitos do GTN vão para tickets separados — Wallisson (HRBS-14996). SUBSTITUÍDO em 23/09 (ver [[correcoes]])
+- ~2026-09-22: parecer 1 do HRBS-14996: nenhum flag STR, "ITS é devido" (impôt synthétique/microentreprises exclui ITS); teto 70.000 correto, 75.000 é SMIG [❌ errado: o teto é 75.000 desde 2023-01-01, ver [[correcoes]] 2026-10-15]; defeitos do GTN vão para tickets separados — Wallisson (HRBS-14996). SUBSTITUÍDO em 23/09 (ver [[correcoes]])
 - 2026-09-22: transporte de 30.000 (Abidjan) é valor estatutário, excluído do CNPS uma vez por mês; no chat a base CNPS do cliente foi dada como correta — Wallisson (chat: mercans-compliance). [INCERTO] o ticket diz que o motor não exclui o transporte das bases ITS/CNPS (leituras a conciliar)
 - 2026-09-23: parecer corrigido: o enquadramento é o regime des prestataires de services pétroliers (sem ITS na folha se a entidade estiver inscrita; CNPS/CMU devidos); pede ao cliente a Déclaration du Prestataire de service trimestral (BIC Pétrole/Gaz) e prova de nacionalidade estrangeira — Wallisson (HRBS-14996; chat: mercans-compliance)
 - ~2026-09-25: nacionalidade estrangeira confirmada (succursale D1020 de empresa estrangeira); regime confirmado para 2025 pela carta DGI nº 0984/MFB/DGI/DGE de 19/08/2025; confirmação do flag para 2026 só com a declaração IFPGAZ 2026 — Wallisson (HRBS-14996)
@@ -102,7 +106,7 @@
 ## Pendências
 - [ ] Divergência hub × skill: o hub (parecer de 23/09, HRBS-14996) enquadra o cliente no regime des prestataires de services pétroliers (sem ITS na folha), mas a skill não menciona esse regime e diz que o ITS é retido sobre o bruto total de todos os empregados — verificar (skill lida em 2026-10-02)
 - [ ] Divergência hub × skill: o hub registra "previdência privada, cap 320.000 anual (CCG)"; a skill só tem o abatimento de 320.000 para pensionistas (§3.3) e nada sobre cap de previdência privada de empregado ativo — verificar se são regras distintas (skill lida em 2026-10-02)
-- [ ] Divergência hub × skill: o hub dá vigência 2025-01-01 aos tetos/SMIG (fonte CLEISS); a skill dá SMIG 75.000 desde 2023-01-01 (Décret 2022-986) — verificar vigência (skill lida em 2026-10-02)
+- [x] Divergência hub × skill sobre a vigência dos tetos/SMIG: resolvida em 2026-10-16. Vigência 2023-01-01, e o teto de PF/AM/AT-MP é 75.000, não 70.000 (communiqué CNPS de 11/01/2023)
 - [ ] Documento que ainda falta no cliente + declaração IFPGAZ 2026 para confirmar o flag de 2026 — cliente (HRBS-14996)
 - [ ] Resposta detalhada em inglês, sem "cara de IA"; responder se os documentos são exigidos todo ano — Wallisson (HRBS-14996)
 - [ ] Abrir tickets separados dos defeitos do GTN REF-P201-861 (pensão CNPS lançada e estornada em 2517/2556 e 2537/2566; acima do teto de pensão; rótulos 2531, 2538, 2560, 2569 "EIS"; falta linha CE 9,2%; bases de transporte e moradia) — Wallisson [INCERTO se já abertos] (HRBS-14996)
@@ -112,12 +116,18 @@
 - [ ] Refatorar a skill para thin-router — Wallisson (chat: mercans-compliance)
 - [x] Conferir se o 9,20% (Worker Type = 1) da spec CT-A-620 é a linha CE que falta no GTN: confirmado no PDF original que o 9,20% é a CE do expatriado (reg. 4111, `58215 = 1`), 1,20% = CN; falta apenas ligar ao GTN do cliente (2026-10-05) (CT-A-620; HRBS-14996)
 - [x] Conferir valores quebrados do CT-A-620 no original do YouTrack: feito em 2026-10-05, valores na tabela de Valores-chave (CT-A-620)
+- [ ] **Importação em espera (decisão do usuário, 2026-10-16):** versões novas no Drive como .xlsx/.docx, NÃO importadas (WTC v1.3, CNPS-001 v1.4, CNPS-002 v1.5, CCG v1.3, Design v1_2). Importar só depois do retorno da Sivaranjani/cliente ao e-mail de 16/10 11:00. Conferência: `Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CONFERENCIA.md`
+- [ ] Teto CNPS 70.000 → 75.000 nos artefatos: WTC v1.1, CNPS-001, CNPS-002 (DISA), CCG (definir a base entre v1.0 de 22/09 e v1.1), Regulation Design v1.1 → frente Pipeline (2026-10-16); skill payroll-compliance-cotedivoire §2.1/risco 5 (achar onde está instalada); avisar o Mohit sobre o CT-A-620 reg. 4061 (840.000 → 900.000). DD sem ocorrências
+- [ ] Avisar o Mohit (fora do escopo, produção): CT-A-620 reg. 4061 e `ci.json` de produção (Drive, 07 - Design, ordinal 61) com piso e teto de 840.000/ano; o certo é 900.000 (75.000 × 12) desde 2023-01-01 — Wallisson (achado da frente Pipeline, 2026-10-16)
+- [ ] DISA (CI-CNPS-002): o bloco DASC usa base de 240M para 45 empregados, impossível com qualquer teto — defeito à parte, verificar (frente Pipeline, 2026-10-16)
+- [ ] DISA _v1.4 local (18/08) tem um bloco DASC que não está no Drive: decidir se entra na linhagem (frente Pipeline, 2026-10-16)
 - [ ] Design CI: KT passo a passo + revisão de linguagem/estrutura (Wallisson); review points (Mohit); 3 flags string (`marital_status`, `transport_zone`, `benefit_in_kind_type`; o engine só lê números); local labels da Part 9 (266 códigos na 9384011); convenção de arredondamento; matriz da 9384011 — (chat: design-dev-kb)
 
 ## Correções ligadas
 - [[correcoes]]: 2026-09-23, parecer HRBS-14996 de 22/09 ("ITS é devido") substituído pelo regime pétrolier.
 - [[correcoes]]: design CI v1.0 sem intern/apprentice/first-employment/senior officer nem teto 320k, corrigido na v1.1; `_table` sobre "parts" dava 44.000 para todos e defeito de 12× em faixas/pisos/tetos (chat: design-dev-kb).
-- Erros do cliente apontados (não são nossos, não entram em correcoes): teto 75.000 (é o SMIG), rótulos "CNAMGS"/"FNH" (órgãos do Gabão; na CI são AT/MP 3% e PF+AM 5,75%), "Single Tax Regime isenta ITS".
+- [[correcoes]]: 2026-10-15, teto CNPS de PF/AM/AT-MP era 70.000 no parecer de 22/09, no hub, na skill e nos artefatos; o certo é 75.000 desde 2023-01-01 (e-mail "Ceiling for Ivory coast", Sivaranjani). Artefatos em correção pela frente Pipeline (2026-10-16).
+- Erros do cliente apontados (não são nossos, não entram em correcoes): ~~teto 75.000 (é o SMIG)~~ (o cliente estava certo, ver linha acima), rótulos "CNAMGS"/"FNH" (órgãos do Gabão; na CI são AT/MP 3% e PF+AM 5,75%), "Single Tax Regime isenta ITS".
 
 ## Fontes
 - raw/tickets/extracao/2026-10-02-tickets-AF.md

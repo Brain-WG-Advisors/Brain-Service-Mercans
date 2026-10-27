@@ -1,0 +1,2830 @@
+{
+ "spec": "CO-PILA-003",
+ "spec_file": "CO-PILA-003-AportesSeguridadSocial-Spec-v1.1-DRAFT-2026-10-06.xlsx",
+ "sheet": "PILA Spec",
+ "header_row": 2,
+ "sources_checked": [
+  "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+  "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+  "1764_PMI_Leave_Absence_Report_.xlsx",
+  "1764_Master_Data_Report_202609.xlsx",
+  "Accumulated Report.xlsx (WT descriptions only, for over-masked WT Name)"
+ ],
+ "fields": [
+  {
+   "id": 4,
+   "name": "Employer name or corporate name",
+   "field_position": "A1-001",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "Every client report labels the employer with the HR Blizz organisation string, which prefixes the internal company code ('1764 - '). Copying that label into the 200-position name field would put the internal code into the return and break the byte-identity check with the operador's registry.",
+   "proposed_explanation": "Registered name of the contributing employer. Supplied by the contributor and echoed into File Tipo 2 Record Tipo 1 campo 4, where the annex says expressly 'El registrado en el campo 1 del file tipo 1' - the two must be byte-identical. Source: the registered legal name of the employer as in the RUT / commercial registry, held in company configuration. Do NOT take the HR Blizz 'Organization' label shown in the payroll reports (e.g. '1764 - Compañía Colombiana de Tabaco SAS'), because it prefixes the internal company code.",
+   "official_source": null
+  },
+  {
+   "id": 5,
+   "name": "Employer document type",
+   "field_position": "A1-002",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 6,
+   "name": "Employer identification number",
+   "field_position": "A1-003",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 7,
+   "name": "Verification digit",
+   "field_position": "A1-004",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 8,
+   "name": "Branch or dependency code",
+   "field_position": "A1-005",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 9,
+   "name": "Branch or dependency name",
+   "field_position": "A1-006",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 10,
+   "name": "Class of contributor",
+   "field_position": "A1-007",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "Title line 'Total headcount'",
+     "example_masked": "261"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64990 (Social security base) - employees with a base",
+     "example_masked": "241 employees"
+    }
+   ],
+   "finding": "The Sept-2026 run has 241 employees with a social-security base (261 headcount incl. 20 interns with no base), i.e. 200 or more contributors, which points to class A for this client. The spec example 'B' is illustrative only; the explanation (headcount test across all branches) is sufficient.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 11,
+   "name": "Legal nature",
+   "field_position": "A1-008",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 12,
+   "name": "Employer person type",
+   "field_position": "A1-009",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 13,
+   "name": "Form of presentation",
+   "field_position": "A1-010",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 14,
+   "name": "Correspondence address",
+   "field_position": "A1-011",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 15,
+   "name": "City or municipality code",
+   "field_position": "A1-012",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 16,
+   "name": "Department code",
+   "field_position": "A1-013",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 17,
+   "name": "DANE economic activity code",
+   "field_position": "A1-014",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 18,
+   "name": "Telephone",
+   "field_position": "A1-015",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 19,
+   "name": "Fax",
+   "field_position": "A1-016",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 20,
+   "name": "E-mail address",
+   "field_position": "A1-017",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 21,
+   "name": "Legal representative identification number",
+   "field_position": "A1-018",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 22,
+   "name": "Legal representative verification digit",
+   "field_position": "A1-019",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 23,
+   "name": "Legal representative document type",
+   "field_position": "A1-020",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 24,
+   "name": "Legal representative first surname",
+   "field_position": "A1-021",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 25,
+   "name": "Legal representative second surname",
+   "field_position": "A1-022",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 26,
+   "name": "Legal representative first name",
+   "field_position": "A1-023",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 27,
+   "name": "Legal representative second name",
+   "field_position": "A1-024",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 28,
+   "name": "Insolvency, restructuring, liquidation or cessation start date",
+   "field_position": "A1-025",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 29,
+   "name": "Type of action",
+   "field_position": "A1-026",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 30,
+   "name": "Date commercial activities ceased",
+   "field_position": "A1-027",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 31,
+   "name": "Information operator code",
+   "field_position": "A1-028",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 32,
+   "name": "Payment period",
+   "field_position": "A1-029",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Title line 'Period'",
+     "example_masked": "2026-09-01 - 2026-09-30"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Title line 'Period'",
+     "example_masked": "2026-09-01 - 2026-09-30"
+    }
+   ],
+   "finding": "The client's run is identified by a date range ('2026-09-01 - 2026-09-30'); the field needs the AAAA-MM contribution month derived from it. Note a spec-internal inconsistency: Format says N(7) numeric zero-filled, but the value AAAA-MM contains a hyphen (example '2026-03') and the sibling T2R1-015 is typed A(7). Type to be confirmed against the annex before the file writer is built.",
+   "proposed_explanation": "Assigned by the system. Format AAAA-MM, seven positions. The contribution period, not the payment date. Derive AAAA-MM from the start date of the payroll period being settled (e.g. payroll period 2026-09-01 - 2026-09-30 gives 2026-09). The value contains a hyphen, so it cannot be written with a numeric zero-fill routine; confirm the field type (N vs A) against the annex.",
+   "official_source": null
+  },
+  {
+   "id": 33,
+   "name": "Contributor type",
+   "field_position": "A1-030",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 34,
+   "name": "Commercial registry date",
+   "field_position": "A1-031",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 35,
+   "name": "Department code (registered seat)",
+   "field_position": "A1-032",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 36,
+   "name": "Employer exonerated from health, SENA and ICBF contributions",
+   "field_position": "A1-033",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2564 / 25111 / 25112 (employer EPS, ICBF, SENA)",
+     "example_masked": "absent for 130 of 241 employees; present for 111"
+    }
+   ],
+   "finding": "The client applies the ET art. 114-1 exoneration: 130 of the 241 contributing employees carry no employer health (2564), ICBF (25111) or SENA (25112), while pension (2567), ARL (2560) and CCF (25110) are charged to all 241. This confirms the employer-level flag is S for this client and that pension, ARL and CCF are never exonerated, exactly as the explanation states. The per-employee test is discussed under T2R2-076.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 37,
+   "name": "Employer electing Ley 1429 art. 5 benefits for the family compensation fund",
+   "field_position": "A1-034",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Employer-level (File Tipo 1) attribute. None of the mapped client reports (Detail IBC, Vertical G2N, Leave Absence, Master Data) carries employer master data beyond the organisation label in the title block.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 39,
+   "name": "Record type",
+   "field_position": "T2R1-001",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 40,
+   "name": "Return modality",
+   "field_position": "T2R1-002",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 41,
+   "name": "Sequence",
+   "field_position": "T2R1-003",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 42,
+   "name": "Employer name or corporate name",
+   "field_position": "T2R1-004",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Title line 'Organization'",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "Same issue as A1-001: the client reports carry the organisation label with the internal company code prefix.",
+   "proposed_explanation": "Must be identical to File Tipo 1 campo 1 - the annex says 'El registrado en el campo 1 del file tipo 1'. Any divergence between the two files is a validation failure at the operador, not at the Ministry. Source: the same registered legal name used in A1-001 (company configuration), never the HR Blizz 'Organization' label with the '1764 - ' company-code prefix.",
+   "official_source": null
+  },
+  {
+   "id": 43,
+   "name": "Employer document type",
+   "field_position": "T2R1-005",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 44,
+   "name": "Employer identification number",
+   "field_position": "T2R1-006",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 45,
+   "name": "Employer verification digit",
+   "field_position": "T2R1-007",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 46,
+   "name": "Return type",
+   "field_position": "T2R1-008",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 47,
+   "name": "Associated return number",
+   "field_position": "T2R1-009",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 48,
+   "name": "Associated return payment date",
+   "field_position": "T2R1-010",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 49,
+   "name": "Form of presentation",
+   "field_position": "T2R1-011",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 50,
+   "name": "Branch code",
+   "field_position": "T2R1-012",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 51,
+   "name": "Branch name",
+   "field_position": "T2R1-013",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 52,
+   "name": "ARL code",
+   "field_position": "T2R1-014",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employee Professional Risk Class (ARL)",
+     "example_masked": "Class 1"
+    }
+   ],
+   "finding": "No mapped report holds the ARL administrator (name or code). Master Data carries only the risk class. The employer ARL code must come from company configuration.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 53,
+   "name": "Payment period for subsystems other than health",
+   "field_position": "T2R1-015",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Title line 'Period'",
+     "example_masked": "2026-09-01 - 2026-09-30"
+    }
+   ],
+   "finding": "The settled month (2026-09) is the run period in every source report; the field is calculated by the operador as the spec says.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 54,
+   "name": "Payment period for the health subsystem",
+   "field_position": "T2R1-016",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No client report shows the health period; the one-month-ahead rule cannot be checked against client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 55,
+   "name": "Return filing number",
+   "field_position": "T2R1-017",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 56,
+   "name": "Payment date",
+   "field_position": "T2R1-018",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 57,
+   "name": "Total number of contributors",
+   "field_position": "T2R1-019",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "Title line 'Total headcount'",
+     "example_masked": "261"
+    },
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "0 (20 rows, e.g. Employee ID 52385232)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64990",
+     "example_masked": "241 employees with a base"
+    }
+   ],
+   "finding": "The client's IBC report lists 261 employees, of whom 20 have IBC Total = 0 (Master Data Employee Group 6 / Subgroup E2, paid only WT 62149 'Internship Pay - Sustainability Support - INKOMPASS', no EPS/AFP). Only 241 have contribution bases in the G2N. A developer reading 'headcount' from the report title would over-count by 20.",
+   "proposed_explanation": "Must equal the number of UNIQUE contributors in the Record Tipo 2 detail, EXCLUDING those whose 'Tipo contributor' (T2R2-005) is 40 - Beneficiary UPC Adicional. That exclusion is easy to miss and produces a header-to-detail mismatch that the operador rejects. Bidirectional pair with 'Additional UPC value' (T2R2-056): contributor type 40 records are precisely the records that carry that value and that are excluded from this count. Count the Record Tipo 2 lines actually written. For PMI, the payroll headcount (261 in Sept-2026) is NOT the value: 20 interns (Employee Group 6, WT 62149) carry no contribution base and are excluded unless a contributor type is assigned to them (see T2R2-005).",
+   "official_source": null
+  },
+  {
+   "id": 58,
+   "name": "Total payroll value",
+   "field_position": "T2R1-020",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64991 (Parafiscals Base actual), sum",
+     "example_masked": "4354789323"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25110 (Family Compensation Fund) / 64991",
+     "example_masked": "4.0% for 225 of 241 employees, base uncapped (e.g. 50750000 -> 2030000)"
+    }
+   ],
+   "finding": "Spec row says T2R1-020 = sum of campo 45 (IBC CCF, capped at 25 SMMLV) and 'NOT the parafiscal base in campo 95'. The spec's own 'Example Analysis' sheet says the opposite: 'The sum of the PARAFISCAL base (T2R2-095) across the detail - not the CCF base', quoting the annex as 'la sumatoria de los IBC para el pago de los aportes de PARAFISCALES'. The client computes the CCF 4% on the uncapped parafiscal base (WT 64991), consistent with the Example Analysis reading. Not decided here: the annex text must be checked.",
+   "proposed_explanation": null,
+   "official_source": "AT2 v30 (MinSalud, Res. 2388/2016 Anexo Tecnico 2, version 30, 24-07-2026) §2.1.1.1 campo 20 (cited by the spec row) versus the annex quotation in the spec's 'Example Analysis' sheet; Ley 21 de 1982 art. 17 (cited by the spec at T2R2-095)."
+  },
+  {
+   "id": 59,
+   "name": "Contributor type",
+   "field_position": "T2R1-021",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 60,
+   "name": "Information operator code",
+   "field_position": "T2R1-022",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Return header attribute supplied by configuration or by the operador; no mapped client report carries it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 63,
+   "name": "Record type",
+   "field_position": "T2R2-001",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System-generated constant/sequence; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 64,
+   "name": "Sequence",
+   "field_position": "T2R2-002",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System-generated constant/sequence; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 65,
+   "name": "Contributor document type",
+   "field_position": "T2R2-003",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Citizenship Card ID",
+     "example_masked": "57630918 (247 employees)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Indentity Card for Foreigners",
+     "example_masked": "0244621 (15 employees)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "National ID",
+     "example_masked": "1423211232 (11 employees)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Identity Card",
+     "example_masked": "80020815 (6 employees)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "National ID",
+     "example_masked": "57630918 (equals Citizenship Card ID; blank for 14 employees)"
+    }
+   ],
+   "finding": "The client master data has no document-type column: one column per document. 234 employees have only 'Citizenship Card ID', 13 only 'Indentity Card for Foreigners', but 11 have 'National ID' AND 'Citizenship Card ID' (3 of them also 'Identity Card'), 2 have 'Identity Card' + 'Indentity Card for Foreigners', and 2 have none. The meaning of 'National ID' and 'Identity Card' (TI? foreign national ID?) is not evident. The developer needs a derivation and precedence rule.",
+   "proposed_explanation": "Closed list CC, CE, TI, PA, CD, SC, RC, PE, PT (PT = Permiso por Protección Temporal). PE may not be used for health contribution periods from September 2023 onwards. An ALPHANUMERIC identification number is permitted only for PA and CD; for TI, CC, SC, RC, CE, PE and PT the number must be all digits. NOTE the divergence from the electronic payroll, which uses NUMERIC codes (13 = CC) rather than these two-letter codes - the engine must MAP, not copy. Bidirectional set with 'Foreign national not liable to contribute to pension' (T2R2-007), which where marked restricts this field to CE, PA, CD, SC, PE or PT, and with 'Colombian abroad' (T2R2-008), which is used only where this field is CC or TI. COMPOSITE KEY: together with T2R2-004 (Contributor identification number), this pair is the join key for the contributor across every Colombian artefact -- electronic payroll NIE044/NIE045, Form 220 casillas 24/25, Format 2276 numeral 2 -- matching the same pair convention documented on CO-SEVERANCE SAVINGS-006 T03/T04. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campos 3, 7 and 8. PMI source: Master Data has no document-type field. Derive the type from the populated document column: 'Citizenship Card ID' -> CC; 'Indentity Card for Foreigners' -> CE. Where more than one column is populated, a precedence rule is required, and the PILA code for the columns 'National ID' and 'Identity Card' must be confirmed by the client before mapping. An employee with no document column populated is a blocking data error.",
+   "official_source": null
+  },
+  {
+   "id": 66,
+   "name": "Contributor identification number",
+   "field_position": "T2R2-004",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "Employee ID",
+     "example_masked": "540521 (6 digits; not found in G2N or Master Data)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Employee ID",
+     "example_masked": "71425113"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Employee ID",
+     "example_masked": "31336030 (28 of 80 leave employees not in the Sept G2N / Master Data)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "National ID",
+     "example_masked": "blank for 14 employees (CE holders)"
+    }
+   ],
+   "finding": "The internal Employee ID is not a reliable join key across the source reports: the IBC report carries two 6-digit IDs (540521, 548939) that do not exist in the G2N or Master Data (the G2N has two 8-digit IDs not in the IBC report), and 28 of the 80 employees in the Leave Absence report are not in the September G2N/Master Data. The G2N 'National ID' only holds the CC number and is blank for the 14 CE holders. Document lengths observed (CC 7-10 digits, CE 6-7 digits) fit the annex limits.",
+   "proposed_explanation": "Identity number of the contributor. Only A-Z and 0-9; alphanumeric only for PA (up to 16) and CD (up to 11). Digits only for the rest: TI up to 11, CC up to 10, SC up to 8, RC up to 11, CE up to 7, PE exactly 15, PT up to 8, PC (PEP-Tutor) up to 16. Join key to the electronic payroll NIE045, to Form 220 casilla 25 and to Format 2276 numeral 2. COMPOSITE KEY: together with T2R2-003 (Contributor document type), this pair is the join key for the contributor -- see T2R2-003 for the full cross-reference list. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 4. PMI source: take the number from the Master Data document column that determined T2R2-003 (G2N 'National ID' holds the CC only and is blank for CE holders). Join the payroll sources on document type + number, not on the HR Blizz Employee ID, which differs between the IBC report and the G2N/Master Data for some employees.",
+   "official_source": null
+  },
+  {
+   "id": 67,
+   "name": "Contributor type",
+   "field_position": "T2R2-005",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employee Group Code / Employee Subgroup Code",
+     "example_masked": "1/1A (154), 1/1B (74), 3/6A..9A (13), 6/E2 (20)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 62149",
+     "example_masked": "Internship Pay - Sustainability Support- INKOMPASS (20 employees, no 64990 base, no EPS/AFP/ARL)"
+    }
+   ],
+   "finding": "Master Data holds no PILA contributor type. Groups 1 and 3 (241 employees) all carry full contributions in the G2N (dependiente pattern). Group 6 / subgroup E2 (20 interns paid WT 62149) has no contribution of any kind, not even ARL, and no EPS/AFP in Master Data. Whether these interns belong in the PILA (e.g. as an apprentice or student type) or are legitimately outside it is a client/legal decision; the spec does not tell the developer how to derive the type from client data.",
+   "proposed_explanation": "The full PILA tipo cotizante list - far longer than the values the electronic payroll recognises. Values: 1 Dependiente, 2 Servicio domestico, 3 Independiente, 4 Madre sustituta, 12 Aprendices en etapa lectiva (ONLY for health contribution periods BEFORE August 2025), 16, 18, 19 Aprendices etapa lectiva Ley 2466 de 2025 (from the health period of August 2025: contributes to health and occupational risk only, IBC 1 SMMLV, no pension, CCF, SENA or ICBF; the operador validates the apprentice against the SENA 'REPORTE DE APRENDICES' file), 20 to 23, 30 to 36, 40 Beneficiario UPC Adicional, 42 to 45, 47, 51 to 63, 64 Trabajador penitenciario o servicio de utilidad publica, 65 Dependiente vinculado al Piso de Proteccion Social, 66 Independiente vinculado al Piso de Proteccion Social, 67 Voluntario en Primera Respuesta, 68 Dependiente veterano de la Fuerza Publica, 69 Contribuyente solidario, 70 Promotor del Servicio Social para la Paz, 71 Ley de Segundas Oportunidades, 72 Mujeres con aporte a pension por pago por tercero, 73 Interno de Medicina, 74 Reciclador de Oficio, 75 Dependiente con permanencia en el Regimen Subsidiado, 76 Trabajador de tiempo parcial independiente. Codes 3, 16, 20, 32 to 45, 52, 53, 55, 57 and 59 onwards have NO electronic payroll equivalent, so a direct copy will fail DIAN validation. Type 40 is additionally excluded from the header count in T2R1-019. Bidirectional set with the fields this code gates: 'Work location department code' (T2R2-009) and 'Work location municipality code' (T2R2-010) are blank for type 40; 'Additional UPC value' (T2R2-056) is populated for type 40 and type 69; 'Principal contributor document type' (T2R2-074) only for type 40; 'Hours worked' (T2R2-096) is optional for types 1, 2, 18, 22, 30, 51 and 55; 'Hire date' (T2R2-080) is mandatory for type 75; and 'Pension fund of the member' (T2R2-031) may be blank only for a type not obliged to contribute to pension. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 5 and §2.1.2.3.1. PMI source: no worker-type field exists in Master Data. Derive it from Employee Group / Subgroup through a client-confirmed mapping table. Evidence (Sept-2026): Employee Groups 1 and 3 carry full dependent-worker contributions; Employee Group 6 / Subgroup E2 (interns paid WT 62149) carry none. Their contributor type, or their exclusion from the return, must be confirmed before go-live.",
+   "official_source": null
+  },
+  {
+   "id": 68,
+   "name": "Contributor sub-type",
+   "field_position": "T2R2-006",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Pensioner Effective Date",
+     "example_masked": "2025-11-18 (Employee ID 89447129), 2025-12-02 (21244719)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2556 / 2567 / 2553",
+     "example_masked": "89447129: -701651 / -2104953 / -175413"
+    }
+   ],
+   "finding": "Two employees carry a 'Pensioner Effective Date' in Master Data, yet the September payroll still deducts and charges full pension (employee 4% WT 2556, employer 12% WT 2567) and FSP (WT 2553). The spec says that for sub-type 1 (active pensioner) the pension rate (campo 46) MUST be 0. Either the Master Data date does not mean 'pensioned' for this client, or the client's calculation contradicts the annex rule. Not decided here.",
+   "proposed_explanation": null,
+   "official_source": "AT2 v30 (MinSalud, Res. 2388/2016 Anexo Tecnico 2, version 30, 24-07-2026) §2.1.2.1 campo 6 hard rule (pension rate campo 46 = 0 for sub-types 1, 2, 3, 4, 5, 6, 9, 12), as quoted in the spec."
+  },
+  {
+   "id": 69,
+   "name": "Foreign national not liable to contribute to pensions",
+   "field_position": "T2R2-007",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Pension Fund (AFP) Name",
+     "example_masked": "blank for 3 contributing employees incl. nationalities Venezuela and Costa Rica"
+    }
+   ],
+   "finding": "No foreign-national opt-out is evidenced: the three employees without an AFP name in Master Data (two of them foreign nationals) still pay full pension in the G2N. This is a master-data gap for T2R2-031, not evidence for this flag.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 70,
+   "name": "Colombian abroad",
+   "field_position": "T2R2-008",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 71,
+   "name": "Work location department code",
+   "field_position": "T2R2-009",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Work location",
+     "example_masked": "Bogota / Medellin / Cali (12 distinct city names)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employee Address - Department",
+     "example_masked": "DC / ANT / CUN (alphabetic abbreviations)"
+    }
+   ],
+   "finding": "The client holds the work location as a free-text city name (and the residence department as an alphabetic abbreviation, which is the address, not the work location). The spec requires the DANE DIVIPOLA 2-digit department / 3-digit municipality codes. No code exists in any client report.",
+   "proposed_explanation": "DIVIPOLA department where the work is performed. The operador validates it against the DANE DIVIPOLA catalogue. Should reconcile to electronic payroll NIE051. PMI source: Master Data 'Work location' is a city NAME (e.g. 'Bogota', 'Medellin'), not a code; a configured mapping from each work-location value to its DIVIPOLA department + municipality code is required. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation).",
+   "official_source": null
+  },
+  {
+   "id": 72,
+   "name": "Work location municipality code",
+   "field_position": "T2R2-010",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Work location",
+     "example_masked": "Bogota / Medellin / Cali (12 distinct city names)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employee Address - Department",
+     "example_masked": "DC / ANT / CUN (alphabetic abbreviations)"
+    }
+   ],
+   "finding": "The client holds the work location as a free-text city name (and the residence department as an alphabetic abbreviation, which is the address, not the work location). The spec requires the DANE DIVIPOLA 2-digit department / 3-digit municipality codes. No code exists in any client report.",
+   "proposed_explanation": "THREE-digit DIVIPOLA municipality suffix - not the five-digit code used by the electronic payroll. Concatenate with T2R2-009 to obtain the five-digit form: 11 + 001 = 11001. Should reconcile to NIE052. PMI source: Master Data 'Work location' is a city NAME (e.g. 'Bogota', 'Medellin'), not a code; a configured mapping from each work-location value to its DIVIPOLA department + municipality code is required. Do not use 'Employee Address - Department' (residence, alphabetic abbreviation).",
+   "official_source": null
+  },
+  {
+   "id": 73,
+   "name": "First surname",
+   "field_position": "T2R2-011",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Last Name",
+     "example_masked": "NAME_0002"
+    }
+   ],
+   "finding": "Master Data splits the surname; 'Last Name' populated for all active employees.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 74,
+   "name": "Second surname",
+   "field_position": "T2R2-012",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Second Last Name",
+     "example_masked": "NAME_0010 (blank for 56%)"
+    }
+   ],
+   "finding": "Second surname held separately and often blank, consistent with Mandatory = N.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 75,
+   "name": "First name",
+   "field_position": "T2R2-013",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "First Name",
+     "example_masked": "NAME_0001"
+    }
+   ],
+   "finding": "First name held separately.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 76,
+   "name": "Second name",
+   "field_position": "T2R2-014",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Middle Name",
+     "example_masked": "NAME_0008 (blank for 70%)"
+    }
+   ],
+   "finding": "Middle name held separately and optional.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 78,
+   "name": "ING - hire",
+   "field_position": "T2R2-015",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Hire Date",
+     "example_masked": "2026-09-01 (Employee IDs 57025853, 10537110)"
+    }
+   ],
+   "finding": "Two employees hired within the settled period; the hire date in the G2N supports the ING flag and its date.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 79,
+   "name": "RET - termination",
+   "field_position": "T2R2-016",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Effective Leaving Date",
+     "example_masked": "blank in all 6,804 rows"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employment Status",
+     "example_masked": "D (5 employees, all present in the Sept G2N)"
+    }
+   ],
+   "finding": "No termination date exists in any source: the G2N column 'Effective Leaving Date' is empty for every row, including the 5 employees with Master Data status 'D'. Whether 'D' means terminated (which would require RET in September) must be confirmed; the source of the termination date for RET/T2R2-081 is an open data gap.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 80,
+   "name": "TDE - transfer from another EPS",
+   "field_position": "T2R2-017",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Must be reported blank under AT2 v30; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 81,
+   "name": "TAE - transfer to another EPS",
+   "field_position": "T2R2-018",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Must be reported blank under AT2 v30; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 82,
+   "name": "TDP - transfer from another pension administrator",
+   "field_position": "T2R2-019",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Must be reported blank under AT2 v30; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 83,
+   "name": "TAP - transfer to another pension administrator",
+   "field_position": "T2R2-020",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Must be reported blank under AT2 v30; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 84,
+   "name": "VSP - permanent salary variation",
+   "field_position": "T2R2-021",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No event of this kind in the September client data (no salary-change history, no unpaid leave/suspension, no AVP into the mandatory fund, no work-centre change, no occupational incapacity rows in the Leave Absence report).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 85,
+   "name": "Corrections",
+   "field_position": "T2R2-022",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No event of this kind in the September client data (no salary-change history, no unpaid leave/suspension, no AVP into the mandatory fund, no work-centre change, no occupational incapacity rows in the Leave Absence report).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 86,
+   "name": "VST - transitory salary variation",
+   "field_position": "T2R2-023",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total vs Salary Value",
+     "example_masked": "43437487: Salary Value 15739167, IBC Total 22751667"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 62133 / 62150 / 62207",
+     "example_masked": "Variable / Vacation Bonus / Attendance Bonus"
+    }
+   ],
+   "finding": "45 employees have an IBC above their salary value in September because of salary-constituting variable items (WT 62133 Variable, 62150 Vacation Bonus, 62207 Attendance Bonus) or vacation days valued in the base (WT 64996 SS Leave Base). The explanation ('typically a bonus or a retroactive payment') does not tell the developer which payroll items trigger VST, so the flag cannot be built deterministically.",
+   "proposed_explanation": "A one-off variation in the contribution base for this period only - typically a bonus or a retroactive payment - that does not change the standing salary. The trigger must be defined on payroll data: mark VST when the period's contribution base differs from the standing contractual salary because of salary-constituting variable payments (for PMI e.g. WT 62133 Variable, 62150 Vacation Bonus, 62207 Attendance Bonus). The exact list of wage types that trigger VST must be confirmed against the annex definition before configuration.",
+   "official_source": null
+  },
+  {
+   "id": 87,
+   "name": "SLN - contract suspension or unpaid leave",
+   "field_position": "T2R2-024",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No event of this kind in the September client data (no salary-change history, no unpaid leave/suspension, no AVP into the mandatory fund, no work-centre change, no occupational incapacity rows in the Leave Absence report).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 88,
+   "name": "IGE - temporary incapacity, general illness",
+   "field_position": "T2R2-025",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT / Description WT",
+     "example_masked": "79008 Sick Leave - Employer Paid First Days (2 days); 79011 Sick Leave - Healthcare Insurance Reimbursed"
+    }
+   ],
+   "finding": "General-illness incapacity is recorded with an employer-paid first-days WT and an EPS-reimbursed WT, matching the explanation (employer days 1-2, EPS from day 3). Date handling is discussed under T2R2-085/086.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 89,
+   "name": "LMA - maternity or paternity leave",
+   "field_position": "T2R2-026",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT / Description WT",
+     "example_masked": "79006 Maternity Leave Payment (01-09-2026 to 30-09-2026, 30 days)"
+    }
+   ],
+   "finding": "Maternity leave is recorded as its own WT with dates. The employee (31336030) is not in the September G2N, so the effect on the bases could not be traced.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 90,
+   "name": "VAC-LR - vacation or paid leave",
+   "field_position": "T2R2-027",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT",
+     "example_masked": "79001 Annual leave (81 rows)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT",
+     "example_masked": "79018 Paid Leave (1 row)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT",
+     "example_masked": "79003 Vacations Compensated (7 rows; Date To blank for 2, Date From 01-05-2026 / 01-07-2026)"
+    }
+   ],
+   "finding": "The client distinguishes enjoyed vacation (79001), paid leave (79018) and vacation compensated in cash (79003). The first two map to X and L as the spec says. 79003 is a cash payment with no time off (two rows have no end date and start months before the period), and the spec does not say whether it raises VAC-LR. Without that rule a developer mapping 'all vacation WTs' would flag VAC-LR with dates outside the period.",
+   "proposed_explanation": "A THREE-VALUE flag, not a simple X: X means vacation, L means remunerated leave. They map to two DIFFERENT electronic payroll blocks - VacacionesComunes (NIE109 to NIE112) and LicenciaR (NIE132 to NIE135) respectively - so the value carries real information and must not be normalised to X. PMI mapping: WT 79001 Annual leave -> X; WT 79018 Paid Leave -> L. Vacation compensated in cash (WT 79003) involves no rest period and has no reliable dates in the client data; whether it raises VAC-LR must be stated explicitly (to be confirmed against the annex definition of VAC-LR).",
+   "official_source": null
+  },
+  {
+   "id": 91,
+   "name": "AVP - voluntary contribution",
+   "field_position": "T2R2-028",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No event of this kind in the September client data (no salary-change history, no unpaid leave/suspension, no AVP into the mandatory fund, no work-centre change, no occupational incapacity rows in the Leave Absence report).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 92,
+   "name": "VCT - change of work centre",
+   "field_position": "T2R2-029",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No event of this kind in the September client data (no salary-change history, no unpaid leave/suspension, no AVP into the mandatory fund, no work-centre change, no occupational incapacity rows in the Leave Absence report).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 93,
+   "name": "IRL - days of occupational accident or disease incapacity",
+   "field_position": "T2R2-030",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No event of this kind in the September client data (no salary-change history, no unpaid leave/suspension, no AVP into the mandatory fund, no work-centre change, no occupational incapacity rows in the Leave Absence report).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 95,
+   "name": "Pension fund of the member",
+   "field_position": "T2R2-031",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Pension Fund (AFP) Name",
+     "example_masked": "COLPENSIONES / PROTECCION / PORVENIR / SKANDIA / CITICOLFONDOS"
+    }
+   ],
+   "finding": "Client holds the pension administrator as a NAME (5 values), the spec requires the 6-position code AFPnnn from the Ministry catalogue. Also 3 employees with pension contributions in the G2N have no AFP name at all.",
+   "proposed_explanation": "Code of the pension administrator - either Colpensiones in the average-premium regime or a private individual-account fund. The employee elects the regime and may change it every five years. PMI source: Master Data 'Pension Fund (AFP) Name' holds the administrator NAME, not the code; a configured name-to-code table (Ministry catalogue) is required. An employee with pension contributions and no administrator is a blocking data error.",
+   "official_source": null
+  },
+  {
+   "id": 96,
+   "name": "Pension fund to which the member transfers",
+   "field_position": "T2R2-032",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Must be reported blank under AT2 v30; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 97,
+   "name": "EPS or EOC of the member",
+   "field_position": "T2R2-033",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "EPS Provider Name",
+     "example_masked": "EPS SURA / SANITAS  EPS / SANITAS / '6' / '12' / '11'"
+    }
+   ],
+   "finding": "Client holds the health insurer as a NAME, with inconsistent spellings ('SANITAS  EPS' vs 'SANITAS') and, for 26 employees, bare numbers ('6', '12', '11', '3', '8', '24', '1', '13') that are neither names nor the PILA EPSnnn code. 24 records are blank (20 of them the interns).",
+   "proposed_explanation": "Code of the health insurer. Health is the subsystem paid one month in advance, per T2R1-016. Bidirectional pair with the 'TDE - transfer from another EPS' change event (T2R2-017), which reports the move between health insurers that changes the value carried here. PMI source: Master Data 'EPS Provider Name' holds NAMES with inconsistent spelling and, for some employees, bare numbers that are not PILA codes; a cleansed name-to-code table (Ministry catalogue, EPSnnn) is required before this field can be populated.",
+   "official_source": null
+  },
+  {
+   "id": 98,
+   "name": "EPS or EOC to which the member transfers",
+   "field_position": "T2R2-034",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Must be reported blank under AT2 v30; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 99,
+   "name": "CCF of the member",
+   "field_position": "T2R2-035",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25110",
+     "example_masked": "Family Compensation Fund (CCF), 241 employees"
+    }
+   ],
+   "finding": "CCF contributions are charged for all 241 contributors, but no report (Master Data included) holds the CCF of affiliation. Master-data gap to close before the file can be built.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 101,
+   "name": "Days contributed to pension",
+   "field_position": "T2R2-036",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Days ",
+     "example_masked": "18 for 79001 from 07-09-2026 to 30-09-2026"
+    }
+   ],
+   "finding": "No report carries contributory days. The Leave Absence 'Days' column counts BUSINESS days for vacation (24 calendar days -> 18) and calendar days for sick leave (01-09 to 15-09 -> 15), so it cannot be used directly for the 30-day-month counters.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 102,
+   "name": "Days contributed to health",
+   "field_position": "T2R2-037",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Days ",
+     "example_masked": "18 for 79001 from 07-09-2026 to 30-09-2026"
+    }
+   ],
+   "finding": "No report carries contributory days. The Leave Absence 'Days' column counts BUSINESS days for vacation (24 calendar days -> 18) and calendar days for sick leave (01-09 to 15-09 -> 15), so it cannot be used directly for the 30-day-month counters.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 103,
+   "name": "Days contributed to occupational risk",
+   "field_position": "T2R2-038",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Days ",
+     "example_masked": "18 for 79001 from 07-09-2026 to 30-09-2026"
+    }
+   ],
+   "finding": "No report carries contributory days. The Leave Absence 'Days' column counts BUSINESS days for vacation (24 calendar days -> 18) and calendar days for sick leave (01-09 to 15-09 -> 15), so it cannot be used directly for the 30-day-month counters.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 104,
+   "name": "Days contributed to the family compensation fund",
+   "field_position": "T2R2-039",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Days ",
+     "example_masked": "18 for 79001 from 07-09-2026 to 30-09-2026"
+    }
+   ],
+   "finding": "No report carries contributory days. The Leave Absence 'Days' column counts BUSINESS days for vacation (24 calendar days -> 18) and calendar days for sick leave (01-09 to 15-09 -> 15), so it cannot be used directly for the 30-day-month counters.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 106,
+   "name": "Basic salary",
+   "field_position": "T2R2-040",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Basic Salary",
+     "example_masked": "24715285"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Salary Assigned",
+     "example_masked": "24715285 (integral employee, full salary)"
+    },
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "Salary Value",
+     "example_masked": "247109548 (max, 9 digits)"
+    }
+   ],
+   "finding": "Master Data 'Basic Salary' equals G2N 'Salary Assigned'; for integral employees it is the full integral salary (the 70% applies only to the bases). Values fit N(9). Spec-internal issue: the Example '000012000000' has 12 positions for a 9-position field.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 107,
+   "name": "All-inclusive salary flag",
+   "field_position": "T2R2-041",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 62140",
+     "example_masked": "Integral Salary- 0423 (88 employees)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 62100",
+     "example_masked": "Ordinary Salary- 0003 (153 employees)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64991",
+     "example_masked": "17300699 for integral salary 24715285 (70%)"
+    }
+   ],
+   "finding": "Master Data has no salary-type field; integral employees are identifiable only by WT 62140. The client applies the 70% to the parafiscal base as well (64991 = 70% of the integral salary), while the spec condition only mentions the four IBC fields. The client also adds the Ley 1393 excess at 100% on top of the 70% (see T2R2-042).",
+   "proposed_explanation": "Tipo de salario. X = salario integral; F = salario fijo; V = salario variable. Where X, the contribution base is 70% of the integral salary, not 100%, because 30% is the statutory prestacional factor (CST art. 132 num. 2, minimum 13 SMMLV). Maps to electronic payroll SalarioIntegral (NIE056) for the X case. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) §2.1.2.1 campo 41 and §2.1.2.3.40. PMI source: no salary-type field in Master Data; X where the employee is paid WT 62140 Integral Salary in the period, F where paid WT 62100 Ordinary Salary; the rule for V must be confirmed. Where X, the 70% applies to the parafiscal base T2R2-095 as well as to the four IBC fields (CST art. 132; client WT 64991 = 70% of the integral salary).",
+   "official_source": null
+  },
+  {
+   "id": 108,
+   "name": "Pension contribution base (IBC)",
+   "field_position": "T2R2-042",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "17300699.5 (= 70% of Salary Value 24715285)"
+    },
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "43772625 (25 SMMLV ceiling, 14 employees)"
+    },
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "6093273.6 (Salary 6027817 + Non-Wage 4127639: 60% of total, Ley 1393 clamp)"
+    },
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "21109194.3 (integral 22761765 x 70% + Ley 1393 excess 5175959)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2556 / IBC Total",
+     "example_masked": "4.0% of IBC Total (rounded to the peso)"
+    }
+   ],
+   "finding": "The client confirms the floor/ceiling, the 70% integral rule and the Ley 1393 40% clamp, and stores the add-back as its own WT (64995 'Non-SSI excess'). Two points the explanation does not tell the developer: (1) for an integral employee the 40% test is run on the FULL integral salary and the excess is added at 100% on top of the 70% base (employee 53618643: 0.7 x 22,761,765 + 5,175,959 = 21,109,194.3); (2) the client report carries unrounded bases with decimals (85 of 262 rows, e.g. 17300699.5) - the PILA base must be rounded UP to the whole peso. The client uses one base ('IBC Total') for pension, health and ARL.",
+   "proposed_explanation": "Contribution base for pension. FLOOR 1 SMMLV = COP 1,750,905; CEILING 25 SMMLV = COP 43,772,625 in 2026. Must reconcile to electronic payroll NIE166 divided by the rate in T2R2-046, allowing for the different rounding conventions. Bidirectional set with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary, and with 'Solidarity pension fund - solidarity sub-account' (T2R2-051), which is payable only where this base reaches 4 SMMLV. Computation order evidenced in the client data: (a) salary-constituting pay of the period (70% of it for an integral salary); (b) plus the excess of non-salary payments over 40% of TOTAL remuneration, the test being run on the full (100%) integral salary and the excess added at 100% (Ley 1393 de 2010 art. 30); (c) floor 1 SMMLV, ceiling 25 SMMLV; (d) round UP to the whole peso (the payroll intermediate value may carry decimals, e.g. 17300699.5). PMI reference values: Detail IBC per Employees S.S. 'IBC Total'; G2N WT 64995 'Non-SSI excess' holds the Ley 1393 add-back.",
+   "official_source": null
+  },
+  {
+   "id": 109,
+   "name": "Health contribution base (IBC)",
+   "field_position": "T2R2-043",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "17300699.5 (= 70% of Salary Value 24715285)"
+    },
+    {
+     "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+     "sheet": "Detail IBC per Employees S.S.",
+     "column": "IBC Total",
+     "example_masked": "43772625 (25 SMMLV ceiling, 14 employees)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2554 / IBC Total",
+     "example_masked": "4.0% of IBC Total"
+    }
+   ],
+   "finding": "Health base = the same 'IBC Total' as pension in the client data (employee 4% WT 2554 and employer 8.5% WT 2564 both on it). The sentence that the exoneration flag 'is marked only where this base is below 10 SMMLV' is contradicted by the client data - see the Conflict on T2R2-076.",
+   "proposed_explanation": "Contribution base for health. Same floor and ceiling as pension. The four IBC values legitimately DIFFER from one another once a non-salary payment, a change event or a subsystem-specific rule enters - do not populate them from one variable. Bidirectional pair with 'Contributor exonerated from payment' (T2R2-076), which is marked only where this base is below 10 SMMLV. Same computation order as T2R2-042 (70% integral, Ley 1393 add-back on the full integral salary, floor and ceiling, round UP to the peso). The statement on the exoneration test is under review - see T2R2-076.",
+   "official_source": null
+  },
+  {
+   "id": 110,
+   "name": "Occupational risk contribution base (IBC)",
+   "field_position": "T2R2-044",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2560 / IBC Total",
+     "example_masked": "0.522% (186 employees) and 1.044% (51 employees) of IBC Total"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2560",
+     "example_masked": "31309721: 179511 = 0.522% of 34388925 incl. 5 sick-leave days"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT",
+     "example_masked": "79008/79011 for Employee ID 31309721, 08-09-2026 to 12-09-2026"
+    }
+   ],
+   "finding": "The client charges ARL on the same 'IBC Total' as pension and health, including the days of general-illness incapacity and vacation valued in the base. The explanation ('Same floor and ceiling') does not say how absence days affect the ARL base, so the developer cannot tell whether the client's practice is correct; the spec's LMA explanation states no ARL is due for leave days, and Population Rules say IGE/IRL 'follow the subsystem-specific rules' without stating them.",
+   "proposed_explanation": "Contribution base for occupational risk. Same floor and ceiling. State explicitly how incapacity (IGE), maternity/paternity (LMA) and vacation/paid-leave (VAC-LR) days enter the ARL base and the ARL day count (T2R2-038). Client evidence: the ARL premium is computed on the same base as pension and health, including sick-leave and vacation days; this must be confirmed against the annex and Decreto 1072 de 2015 before configuration.",
+   "official_source": null
+  },
+  {
+   "id": 111,
+   "name": "Family compensation fund contribution base (IBC)",
+   "field_position": "T2R2-045",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25110 / 64991",
+     "example_masked": "4.0% of 64991 for 225 employees; 21804582: 64991 50750000 -> 25110 2030000"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64992",
+     "example_masked": "43772625 (capped) for the same employee"
+    }
+   ],
+   "finding": "The spec gives the IBC CCF the same 25-SMMLV ceiling as pension/health/ARL and says campo 65 = campo 45 x 4%. The client computes the CCF 4% on the UNCAPPED parafiscal base (WT 64991), e.g. 4% of 50,750,000 where the capped IBC is 43,772,625. The spec's own Example Analysis also treats the parafiscal base as the payroll-total base (see T2R1-020). Not decided here.",
+   "proposed_explanation": null,
+   "official_source": "AT2 v30 (MinSalud, Res. 2388/2016 Anexo Tecnico 2, version 30, 24-07-2026) campo 45 and campo 65 (= campo 45 x campo 64, per the spec's Population Rules); Ley 21 de 1982 art. 17 (parafiscal base, cited by the spec at T2R2-095)."
+  },
+  {
+   "id": 112,
+   "name": "Contribution base for parafiscals other than the CCF",
+   "field_position": "T2R2-095",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64991",
+     "example_masked": "67724592 (above the 43772625 ceiling) for Employee ID 67169834"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 64991",
+     "example_masked": "15618776 = 64990 14748072 + vacation pay WT 79401 870704 (05115902)"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25111 / 25112 vs 64991",
+     "example_masked": "3% / 2% for 99 non-exonerated employees"
+    }
+   ],
+   "finding": "Client data confirms the parafiscal base is uncapped and includes paid vacation (WT 79401), and that SENA 2% / ICBF 3% are computed on it. Missing from the explanation: for an integral salary the parafiscal base is also 70% (client 64991 = 17,300,699 for a 24,715,285 integral salary), and the client's CCF is computed on this base too (see Conflict on T2R2-045).",
+   "proposed_explanation": "THE FIFTH AND MOST-MISSED BASE: IBC otros parafiscales diferentes a CCF - the base for SENA, ICBF, ESAP and MEN. Ley 21 de 1982 art. 17 defines it differently from the contribution bases: it includes paid rest days and it is UNCAPPED - the 25-SMMLV ceiling does not apply. Header campo T2R1-020 is the sum of campo 45 (IBC CCF), NOT of this field. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) campo 95. For an all-inclusive (integral) salary this base is 70% of the integral salary, like the IBC fields (CST art. 132). PMI reference: G2N WT 64991 'Parafiscals Base actual' (uncapped, includes paid vacation WT 79401).",
+   "official_source": null
+  },
+  {
+   "id": 114,
+   "name": "Pension contribution rate",
+   "field_position": "T2R2-046",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2556 / 2567 vs 64990",
+     "example_masked": "4% / 12% (non-integral, 108-109 employees); 2.8% / 8.4% (integral, 64 employees = rates on 70% base)"
+    }
+   ],
+   "finding": "Employee 4% + employer 12% = 16% on the contribution base, as specified.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 115,
+   "name": "Mandatory pension contribution",
+   "field_position": "T2R2-047",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2556",
+     "example_masked": "-692028"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2567",
+     "example_masked": "-2076084"
+    }
+   ],
+   "finding": "Client splits the contribution into employee (WT 2556) and employer (WT 2567) wage types, rounded to the peso (12 of 241 employee amounts are multiples of 100). The explanation does not tell the developer to recompute and round to 100 rather than sum the payroll amounts.",
+   "proposed_explanation": "16% of the pension IBC - the WHOLE contribution, employer and employee together. The electronic payroll reports only the employee's 4% (NIE166); this field reports 16%. They are not interchangeable. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which the client rounds to the peso (only 12 of 241 amounts are multiples of 100). PMI wage types for reconciliation: 2556 Pension Plan Mandatory - AFP Employee + 2567 Pension Plan Mandatory - AFP Employer.",
+   "official_source": null
+  },
+  {
+   "id": 116,
+   "name": "Member's voluntary contribution to the mandatory pension fund",
+   "field_position": "T2R2-048",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25812 / 25813 / 25823",
+     "example_masked": "Pension Voluntaria Proteccion (FVOL) / Skandia (FVOL) / colfondos (FVOL)"
+    }
+   ],
+   "finding": "The client deducts voluntary pension savings to voluntary funds ('FVOL', WT 25812-25823), some run by the same administrators as the mandatory fund (Proteccion, Colfondos). These are not, on the evidence, voluntary contributions INTO the mandatory fund; without a warning a developer could map them here.",
+   "proposed_explanation": "Voluntary contribution made BY THE EMPLOYEE into the mandatory pension fund. Do not map voluntary-pension-fund savings (for PMI the 'FVOL' wage types 25812-25823) to this field: they are paid to a voluntary fund, not to the mandatory pension fund, even where the administrator is the same company.",
+   "official_source": null
+  },
+  {
+   "id": 117,
+   "name": "Employer's voluntary contribution to the mandatory pension fund",
+   "field_position": "T2R2-049",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No employer voluntary contribution to the mandatory fund in the client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 118,
+   "name": "Total contribution to the general pension system",
+   "field_position": "T2R2-050",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2556 + 2567",
+     "example_masked": "-692028 + -2076084"
+    }
+   ],
+   "finding": "With no AVP in the client data, the total equals the mandatory contribution, as the formula gives.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 119,
+   "name": "Solidarity pension fund - solidarity sub-account",
+   "field_position": "T2R2-051",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2553",
+     "example_masked": "Solidarity Pension Fund: single WT, -173007"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2553 / IBC Total",
+     "example_masked": "1.0% (4-16 SMMLV, 179), 1.2%..1.8% (16-20 SMMLV), 2.0% (>=20 SMMLV, 20), 0 below 4 SMMLV (17)"
+    }
+   ],
+   "finding": "The client's FSP rates match the spec's band table exactly, but the client carries solidarity and subsistence as ONE wage type (2553). The spec requires two separate fields; the developer must be told to split the combined amount, not map the WT to one field.",
+   "proposed_explanation": "0.5% of the contribution base - 50% of the additional 1% (Ley 100 art. 27 num. 1 lit. a, as amended by Ley 797 de 2003 art. 8). Borne ENTIRELY BY THE EMPLOYEE and additional to the 4% pension. Reconciles to electronic payroll NIE168. Under AT2 v30 this value is LIQUIDATED BY THE INFORMATION OPERADOR according to the rules that apply to the contributor ('Lo liquida el Operador de Información'); the engine computes it for reconciliation and for the employee deduction, not as an input the operador accepts blindly. PMI source: the client payroll holds the FSP as one combined wage type (WT 2553 'Solidarity Pension Fund'); this field is 0.5% of the pension IBC, computed separately, and the remainder of the combined amount belongs to T2R2-052.",
+   "official_source": null
+  },
+  {
+   "id": 120,
+   "name": "Solidarity pension fund - subsistence sub-account",
+   "field_position": "T2R2-052",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2553",
+     "example_masked": "Solidarity Pension Fund: single WT, -173007"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2553 / IBC Total",
+     "example_masked": "1.0% (4-16 SMMLV, 179), 1.2%..1.8% (16-20 SMMLV), 2.0% (>=20 SMMLV, 20), 0 below 4 SMMLV (17)"
+    }
+   ],
+   "finding": "Same as T2R2-051: single combined client WT 2553 must be split.",
+   "proposed_explanation": "0.5% of the contribution base (the other 50% of the additional 1%) plus 0.2% / 0.4% / 0.6% / 0.8% / 1.0% for bases of 16-17 / 17-18 / 18-19 / 19-20 / above 20 SMMLV, so 0.5% to 1.5%, employee-borne (Ley 100 art. 27 num. 2 lits. a-b). Reconciles to electronic payroll NIE170. Reported SEPARATELY from the solidarity sub-account - never merged. Under AT2 v30 this value is LIQUIDATED BY THE INFORMATION OPERADOR according to the rules that apply to the contributor ('Lo liquida el Operador de Información'); the engine computes it for reconciliation and for the employee deduction, not as an input the operador accepts blindly. PMI source: derive as the combined FSP wage type (WT 2553) minus the solidarity sub-account (T2R2-051), and validate it against the band table (0.5% from 4 SMMLV plus 0.2%-1.0% from 16 SMMLV).",
+   "official_source": null
+  },
+  {
+   "id": 121,
+   "name": "Value not withheld for voluntary contributions",
+   "field_position": "T2R2-053",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 123,
+   "name": "Health contribution rate",
+   "field_position": "T2R2-054",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2554 / 2564 vs 64990",
+     "example_masked": "4% + 8.5% (111 non-exonerated); 4% only (130 exonerated)"
+    }
+   ],
+   "finding": "Total 12.5% or employee-only 4% where exonerated, as specified.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 124,
+   "name": "Mandatory health contribution",
+   "field_position": "T2R2-055",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2554",
+     "example_masked": "-692028"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2564",
+     "example_masked": "-1470559"
+    }
+   ],
+   "finding": "Client splits health into employee (2554) and employer (2564) WTs rounded to the peso (12 of 241 employee amounts are multiples of 100).",
+   "proposed_explanation": "Health contribution actually due. For an exonerated employee earning under 10 SMMLV this is the employee's 4% alone; for a non-exonerated employee it is the full 12.5%. Reconciles to electronic payroll NIE163 for the employee portion. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which the client rounds to the peso (only 12 of 241 amounts are multiples of 100). PMI wage types for reconciliation: 2554 Medical Plan - EPS Employee + 2564 Medical Plan - EPS Employer.",
+   "official_source": null
+  },
+  {
+   "id": 125,
+   "name": "Additional UPC value",
+   "field_position": "T2R2-056",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 126,
+   "name": "General-illness incapacity authorisation number",
+   "field_position": "T2R2-057",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Amount",
+     "example_masked": "199033 (79008), 2122835 (79011), 5605600 (79006)"
+    }
+   ],
+   "finding": "The Field Explanation describes an authorisation number to be reported and says 'Without it the EPS will not reimburse', while the Conditional Reason says the field must be BLANK in every case under AT2 v30; the spec's Population Rules sheet also tells the engine to report these numbers. The client's Leave Absence report carries incapacity/maternity amounts, which invites a developer to map them. The explanation must state the blank rule unambiguously.",
+   "proposed_explanation": "Must be reported BLANK in every case under AT2 v30 ('Debe reportarse en blanco'). Incapacity and leave authorisations are no longer carried in PILA; EPS recovery runs outside this file. Do not map the incapacity/leave data of the payroll (for PMI, Leave Absence WTs 79006, 79008, 79011) to this field. Note: the 'Population Rules' sheet still instructs reporting these values and must be aligned.",
+   "official_source": null
+  },
+  {
+   "id": 127,
+   "name": "General-illness incapacity value",
+   "field_position": "T2R2-058",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Amount",
+     "example_masked": "199033 (79008), 2122835 (79011), 5605600 (79006)"
+    }
+   ],
+   "finding": "The Field Explanation describes the money value of the benefit, while the Conditional Reason says ZERO in every case under AT2 v30; the Population Rules sheet says report the values. The client's Leave Absence 'Amount' column holds exactly these values and must not be mapped here.",
+   "proposed_explanation": "Must be reported as ZERO in every case under AT2 v30 ('Debe reportarse en cero'). The benefit value advanced by the employer is recovered from the EPS outside this file. Do not map the payroll amounts of the incapacity/maternity wage types (for PMI, Leave Absence 'Amount' of WTs 79006, 79008, 79011) to this field. Note: the 'Population Rules' sheet still instructs reporting these values and must be aligned.",
+   "official_source": null
+  },
+  {
+   "id": 128,
+   "name": "Maternity or paternity leave authorisation number",
+   "field_position": "T2R2-059",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Amount",
+     "example_masked": "199033 (79008), 2122835 (79011), 5605600 (79006)"
+    }
+   ],
+   "finding": "The Field Explanation describes an authorisation number to be reported and says 'Without it the EPS will not reimburse', while the Conditional Reason says the field must be BLANK in every case under AT2 v30; the spec's Population Rules sheet also tells the engine to report these numbers. The client's Leave Absence report carries incapacity/maternity amounts, which invites a developer to map them. The explanation must state the blank rule unambiguously.",
+   "proposed_explanation": "Must be reported BLANK in every case under AT2 v30 ('Debe reportarse en blanco'). Incapacity and leave authorisations are no longer carried in PILA; EPS recovery runs outside this file. Do not map the incapacity/leave data of the payroll (for PMI, Leave Absence WTs 79006, 79008, 79011) to this field. Note: the 'Population Rules' sheet still instructs reporting these values and must be aligned.",
+   "official_source": null
+  },
+  {
+   "id": 129,
+   "name": "Maternity leave value",
+   "field_position": "T2R2-060",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Amount",
+     "example_masked": "199033 (79008), 2122835 (79011), 5605600 (79006)"
+    }
+   ],
+   "finding": "The Field Explanation describes the money value of the benefit, while the Conditional Reason says ZERO in every case under AT2 v30; the Population Rules sheet says report the values. The client's Leave Absence 'Amount' column holds exactly these values and must not be mapped here.",
+   "proposed_explanation": "Must be reported as ZERO in every case under AT2 v30 ('Debe reportarse en cero'). The benefit value advanced by the employer is recovered from the EPS outside this file. Do not map the payroll amounts of the incapacity/maternity wage types (for PMI, Leave Absence 'Amount' of WTs 79006, 79008, 79011) to this field. Note: the 'Population Rules' sheet still instructs reporting these values and must be aligned.",
+   "official_source": null
+  },
+  {
+   "id": 131,
+   "name": "Occupational risk contribution rate",
+   "field_position": "T2R2-061",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2560 / IBC Total",
+     "example_masked": "0.522% (Class I, 186) and 1.044% (Class II, 51)"
+    }
+   ],
+   "finding": "Client rates are the Class I and II initial rates of the spec table.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 132,
+   "name": "Work centre",
+   "field_position": "T2R2-062",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employee Professional Risk Class (ARL)",
+     "example_masked": "Class 1 / Class 2"
+    }
+   ],
+   "finding": "No work centre in any client report; the client holds the risk class per employee instead.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 133,
+   "name": "Mandatory occupational risk contribution",
+   "field_position": "T2R2-063",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2560",
+     "example_masked": "-90310"
+    }
+   ],
+   "finding": "Client WT 2560 (employer ARL) is rounded to the peso (3 of 241 amounts are multiples of 100).",
+   "proposed_explanation": "The occupational-risk premium. Employer cost in full. NOTE the rounding: 0.522% of 12,000,000 is 62,640, which rounds UP to the next multiple of 100 to give 62,700 - a worked illustration of the PILA convention. Compute the PILA value as base x rate rounded UP to the next multiple of 100; do not copy the payroll wage-type amounts, which the client rounds to the peso (only 3 of 241 amounts are multiples of 100). PMI wage types for reconciliation: 2560 Professional Labor Risks (ARL) - Employer.",
+   "official_source": null
+  },
+  {
+   "id": 134,
+   "name": "ARL of the member",
+   "field_position": "T2R2-077",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No ARL administrator per employee in any client report.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 135,
+   "name": "Risk class",
+   "field_position": "T2R2-078",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Employee Professional Risk Class (ARL)",
+     "example_masked": "'Class 1' (196), 'Class 2' (60), '1' (2), blank (5)"
+    }
+   ],
+   "finding": "Client stores the class as mixed text ('Class 1', 'Class 2') and digits ('1'); the field is A(1) with values 1-5. 5 employees have no class. The class is also held PER EMPLOYEE, while the System Mapping points to Company.Risk_Class, which cannot represent two classes (I and II) inside one company.",
+   "proposed_explanation": "Risk class of the work centre, reported as 1, 2, 3, 4 or 5 (= Class I, II, III, IV, V). Bidirectional with 'Work centre' (T2R2-062): the class follows the work centre, so a VCT event can change it mid-period. Blank where the contributor is not obliged to contribute to occupational risk; for type 57 the class follows Decreto 1563 de 2016; for type 70 it is always 1. Source: AT2 v30 (MinSalud, Res. 2388/2016 Anexo Técnico 2, version 30, 24-07-2026) campo 78. PMI source: Master Data 'Employee Professional Risk Class (ARL)' is held per EMPLOYEE with mixed formats ('Class 1', '1'); normalise to the single digit 1-5. Because the class varies by employee/work centre, it cannot be sourced from a single company-level value.",
+   "official_source": null
+  },
+  {
+   "id": 137,
+   "name": "CCF contribution rate",
+   "field_position": "T2R2-064",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25110 / 64991",
+     "example_masked": "4.0% for 225 employees"
+    }
+   ],
+   "finding": "Rate 4%, never exonerated (charged to all 241 contributors).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 138,
+   "name": "CCF contribution value",
+   "field_position": "T2R2-065",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25110",
+     "example_masked": "-2030000 for 64991 50750000 (capped IBC 43772625)"
+    }
+   ],
+   "finding": "The client's CCF value is 4% of the uncapped parafiscal base, not of a capped IBC CCF. Same conflict as T2R2-045.",
+   "proposed_explanation": null,
+   "official_source": "AT2 v30 (MinSalud, Res. 2388/2016 Anexo Tecnico 2, version 30, 24-07-2026) campo 65 (= campo 45 x campo 64, per the spec's Population Rules); Ley 21 de 1982 art. 17."
+  },
+  {
+   "id": 139,
+   "name": "SENA contribution rate",
+   "field_position": "T2R2-066",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25112 / 25111",
+     "example_masked": "2% / 3% of 64991 for non-exonerated; absent for the 130 exonerated"
+    }
+   ],
+   "finding": "Rates and the exoneration effect match the spec.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 140,
+   "name": "SENA contribution value",
+   "field_position": "T2R2-067",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25112 / 25111",
+     "example_masked": "-346014 / -519021"
+    }
+   ],
+   "finding": "Computed on the parafiscal base (WT 64991) as the spec says; payroll amounts are rounded to the peso, the PILA rounding rule in the Rounding column applies.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 141,
+   "name": "ICBF contribution rate",
+   "field_position": "T2R2-068",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25112 / 25111",
+     "example_masked": "2% / 3% of 64991 for non-exonerated; absent for the 130 exonerated"
+    }
+   ],
+   "finding": "Rates and the exoneration effect match the spec.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 142,
+   "name": "ICBF contribution value",
+   "field_position": "T2R2-069",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 25112 / 25111",
+     "example_masked": "-346014 / -519021"
+    }
+   ],
+   "finding": "Computed on the parafiscal base (WT 64991) as the spec says; payroll amounts are rounded to the peso, the PILA rounding rule in the Rounding column applies.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 143,
+   "name": "ESAP contribution rate",
+   "field_position": "T2R2-070",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Public-sector levies; zero for this private employer; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 144,
+   "name": "ESAP contribution value",
+   "field_position": "T2R2-071",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Public-sector levies; zero for this private employer; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 145,
+   "name": "MEN contribution rate",
+   "field_position": "T2R2-072",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Public-sector levies; zero for this private employer; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 146,
+   "name": "MEN contribution value",
+   "field_position": "T2R2-073",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Public-sector levies; zero for this private employer; no client data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 148,
+   "name": "Principal contributor document type",
+   "field_position": "T2R2-074",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 149,
+   "name": "Principal contributor identification number",
+   "field_position": "T2R2-075",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 150,
+   "name": "Contributor exonerated from payment",
+   "field_position": "T2R2-076",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2564 / 64992",
+     "example_masked": "05115902: base 14748072 (< 10 SMMLV) but employer health 2564 -1406434 and ICBF charged"
+    },
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "WT Code 2564 / 64992",
+     "example_masked": "61710144: base 31034251 (> 10 SMMLV) but no 2564/ICBF/SENA (exonerated)"
+    }
+   ],
+   "finding": "The spec (here, at T2R2-043 and in Population Rules) defines the per-employee test as 'health base (T2R2-043) below 10 SMMLV'. The client's test is different: 23 non-integral employees with a health base under 17,509,050 are NOT exonerated, and one employee with a base of 31,034,251 IS exonerated. The client's result matches 'total monthly entitlements >= 10 SMMLV' in 233 of 241 cases, i.e. the client tests total earnings, not the IBC. All 88 integral-salary employees are non-exonerated. Not decided here.",
+   "proposed_explanation": null,
+   "official_source": "ET art. 114-1 (Ley 1607 de 2012; Ley 1819 de 2016 art. 65), as cited by the spec; the regulatory definition of 'trabajadores que devenguen ... menos de diez (10) SMMLV' must be checked in the implementing decree before choosing the test basis."
+  },
+  {
+   "id": 152,
+   "name": "Special pension rate indicator",
+   "field_position": "T2R2-079",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 153,
+   "name": "Hours worked",
+   "field_position": "T2R2-096",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Hours",
+     "example_masked": "blank for all rows"
+    }
+   ],
+   "finding": "Hours column in the Leave Absence report is empty; Master Data 'Work Schedule' holds schedule codes (3407, 3308), not hours worked.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 155,
+   "name": "Hire date",
+   "field_position": "T2R2-080",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Hire Date",
+     "example_masked": "2025-03-10 (AAAA-MM-DD)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Hire Date",
+     "example_masked": "10-03-2025 (DD-MM-YYYY)"
+    }
+   ],
+   "finding": "G2N hire date is already AAAA-MM-DD and equals Master Data for all 261 employees; Master Data/Leave hold it as DD-MM-YYYY, so take it from the payroll date field, not from the report text.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 156,
+   "name": "Termination date",
+   "field_position": "T2R2-081",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Vertical G2N Dynamic 2026-09-01",
+     "column": "Effective Leaving Date",
+     "example_masked": "blank in all rows"
+    }
+   ],
+   "finding": "See RET (T2R2-016): no termination date in any source.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 157,
+   "name": "VSP start date",
+   "field_position": "T2R2-082",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 158,
+   "name": "SLN start date",
+   "field_position": "T2R2-083",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 159,
+   "name": "SLN end date",
+   "field_position": "T2R2-084",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 160,
+   "name": "IGE start date",
+   "field_position": "T2R2-085",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From",
+     "example_masked": "14-09-2026 (DD-MM-YYYY text)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date To",
+     "example_masked": "14-09-2026"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT / Date From / Date To",
+     "example_masked": "31309721: 79008 08-09-2026..09-09-2026 then 79011 10-09-2026..12-09-2026"
+    }
+   ],
+   "finding": "Client dates are DD-MM-YYYY text; the field is AAAA-MM-DD. In addition, one incapacity is split into two WT rows (employer days 79008 then EPS days 79011) - the PILA start/end dates describe the incapacity, so consecutive rows must be merged.",
+   "proposed_explanation": "First day of the general-illness incapacity. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days; for PMI WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.",
+   "official_source": null
+  },
+  {
+   "id": 161,
+   "name": "IGE end date",
+   "field_position": "T2R2-086",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From",
+     "example_masked": "14-09-2026 (DD-MM-YYYY text)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date To",
+     "example_masked": "14-09-2026"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Code WT / Date From / Date To",
+     "example_masked": "31309721: 79008 08-09-2026..09-09-2026 then 79011 10-09-2026..12-09-2026"
+    }
+   ],
+   "finding": "Client dates are DD-MM-YYYY text; the field is AAAA-MM-DD. In addition, one incapacity is split into two WT rows (employer days 79008 then EPS days 79011) - the PILA start/end dates describe the incapacity, so consecutive rows must be merged.",
+   "proposed_explanation": "Last day of the general-illness incapacity. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). One incapacity may appear as two consecutive payroll rows (employer-paid days, then EPS-reimbursed days; for PMI WT 79008 then 79011); merge them into one start/end pair. Only dates inside the settled period may be reported.",
+   "official_source": null
+  },
+  {
+   "id": 162,
+   "name": "LMA start date",
+   "field_position": "T2R2-087",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From / Date To",
+     "example_masked": "01-09-2026 / 30-09-2026 (79006)"
+    }
+   ],
+   "finding": "Client dates are DD-MM-YYYY text; the field is AAAA-MM-DD.",
+   "proposed_explanation": "First day of maternity or paternity leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). PMI source: WT 79006 Maternity Leave Payment.",
+   "official_source": null
+  },
+  {
+   "id": 163,
+   "name": "LMA end date",
+   "field_position": "T2R2-088",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From / Date To",
+     "example_masked": "01-09-2026 / 30-09-2026 (79006)"
+    }
+   ],
+   "finding": "Client dates are DD-MM-YYYY text; the field is AAAA-MM-DD.",
+   "proposed_explanation": "Last day of maternity or paternity leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). PMI source: WT 79006 Maternity Leave Payment.",
+   "official_source": null
+  },
+  {
+   "id": 164,
+   "name": "VAC-LR start date",
+   "field_position": "T2R2-089",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From",
+     "example_masked": "14-09-2026 (DD-MM-YYYY text)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date To",
+     "example_masked": "14-09-2026"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From",
+     "example_masked": "27-08-2026 and 31-08-2026 (79001 rows in the Sept report)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date To",
+     "example_masked": "blank for 2 rows of 79003"
+    }
+   ],
+   "finding": "Client dates are DD-MM-YYYY text; the field is AAAA-MM-DD. The September report also contains vacation rows dated in August (27-08 and 31-08-2026), which fall outside the period being settled and cannot be reported with the September return as-is, and 79003 rows with no end date.",
+   "proposed_explanation": "First day of vacation or remunerated leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). Select absences by their dates, not by the payroll run that paid them: the client September run contains vacation rows dated in August, which must not be reported as September dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).",
+   "official_source": null
+  },
+  {
+   "id": 165,
+   "name": "VAC-LR end date",
+   "field_position": "T2R2-090",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From",
+     "example_masked": "14-09-2026 (DD-MM-YYYY text)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date To",
+     "example_masked": "14-09-2026"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date From",
+     "example_masked": "27-08-2026 and 31-08-2026 (79001 rows in the Sept report)"
+    },
+    {
+     "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+     "sheet": "Leave Absence Report",
+     "column": "Date To",
+     "example_masked": "blank for 2 rows of 79003"
+    }
+   ],
+   "finding": "Client dates are DD-MM-YYYY text; the field is AAAA-MM-DD. The September report also contains vacation rows dated in August (27-08 and 31-08-2026), which fall outside the period being settled and cannot be reported with the September return as-is, and 79003 rows with no end date.",
+   "proposed_explanation": "Last day of vacation or remunerated leave. Format AAAA-MM-DD (the client Leave Absence report shows DD-MM-YYYY). Select absences by their dates, not by the payroll run that paid them: the client September run contains vacation rows dated in August, which must not be reported as September dates. Rows without an end date (cash-compensated vacation, WT 79003) are not a VAC-LR period (see T2R2-027).",
+   "official_source": null
+  },
+  {
+   "id": 166,
+   "name": "VCT start date",
+   "field_position": "T2R2-091",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 167,
+   "name": "VCT end date",
+   "field_position": "T2R2-092",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 168,
+   "name": "IRL start date",
+   "field_position": "T2R2-093",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 169,
+   "name": "IRL end date",
+   "field_position": "T2R2-094",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 170,
+   "name": "Date of filing abroad",
+   "field_position": "T2R2-097",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 171,
+   "name": "Economic activity for the occupational-risk system",
+   "field_position": "T2R2-098",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped client report carries this data.",
+   "proposed_explanation": null,
+   "official_source": null
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+   "sheet": "Detail IBC per Employees S.S.",
+   "column": "Employee ID",
+   "classification": "Client-specific",
+   "note": "Internal HR Blizz ID; not a PILA field. Two values (540521, 548939) do not match the G2N/Master Data IDs - join on document number instead (see T2R2-004)."
+  },
+  {
+   "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+   "sheet": "Detail IBC per Employees S.S.",
+   "column": "Employee Name",
+   "classification": "Client-specific",
+   "note": "Formatted full name; PILA needs the split names from Master Data (T2R2-011 to 014)."
+  },
+  {
+   "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+   "sheet": "Detail IBC per Employees S.S.",
+   "column": "Salary Value",
+   "classification": "Client-specific",
+   "note": "Salary-constituting pay of the month; input to the IBC computation (Ley 1393 40% test), not a PILA field. Not the same as T2R2-040 Basic salary."
+  },
+  {
+   "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+   "sheet": "Detail IBC per Employees S.S.",
+   "column": "Non-Wage Value",
+   "classification": "Client-specific",
+   "note": "Non-salary payments of the month; input to the Ley 1393 de 2010 art. 30 clamp, covered by the spec's Population Rules, no PILA field."
+  },
+  {
+   "file": "1764_PMI_Detail_IBC_per_Employees_S.S._Report_202609.xlsx",
+   "sheet": "Detail IBC per Employees S.S.",
+   "column": "Value Not Applicable To SS",
+   "classification": "Client-specific",
+   "note": "All 262 values are 0; payments excluded from the contribution base. Working column, no PILA field."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "column": "Employee ID",
+   "classification": "Client-specific",
+   "note": "Internal HR Blizz ID; join key only."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "column": "Bank Account",
+   "classification": "Client-specific",
+   "note": "Payment data; not part of PILA (relevant to Nomina Electronica)."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "column": "WT Grouping ",
+   "classification": "Client-specific",
+   "note": "Entitlements / Deductions / Non Cash grouping of the G2N; operational."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "column": "WT Code  63011 'SS carry-forward 1' (row-level wage type)",
+   "classification": "Client-specific",
+   "note": "Informative accumulator (sum 4,969,771,275); meaning not evident from the data and not used in any contribution checked. To be explained by the client before it is ignored."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "column": "WT Code  64994 'Gross earnings base' / 64996 'SS Leave Base' (row-level wage types)",
+   "classification": "Client-specific",
+   "note": "Intermediate bases: 64994 = 64990 + 64996 (vacation days valued in the SS base). Feed the IBC (T2R2-042 to 044) but are not PILA fields themselves."
+  },
+  {
+   "file": "Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Vertical G2N Dynamic 2026-09-01",
+   "column": "WT Code  1204 / 1910 'Previous periods obligations / receivables' (row-level wage types)",
+   "classification": "Client-specific",
+   "note": "Prior-period adjustments for 6 expatriate employees. If they change a prior month's contribution base they may require a correction return (Return type N / T2R2-022); the spec has the fields but no rule on retroactive payroll differences - Wallisson to decide whether to raise it."
+  },
+  {
+   "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+   "sheet": "Leave Absence Report",
+   "column": "Employee ID",
+   "classification": "Client-specific",
+   "note": "Internal ID; 28 of 80 IDs not present in the September G2N/Master Data."
+  },
+  {
+   "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+   "sheet": "Leave Absence Report",
+   "column": "Full Name",
+   "classification": "Client-specific",
+   "note": "Not used by PILA."
+  },
+  {
+   "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+   "sheet": "Leave Absence Report",
+   "column": "Description WT",
+   "classification": "Client-specific",
+   "note": "Label of the absence WT; the Code WT drives the change-event mapping."
+  },
+  {
+   "file": "1764_PMI_Leave_Absence_Report_.xlsx",
+   "sheet": "Leave Absence Report",
+   "column": "Amount",
+   "classification": "Client-specific",
+   "note": "Absence pay amounts. The PILA value fields that could take them (T2R2-058, 060) must be zero under AT2 v30; relevant to Nomina Electronica, not to PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Employee ID",
+   "classification": "Client-specific",
+   "note": "Internal ID; join key only."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Formatted Full Name",
+   "classification": "Client-specific",
+   "note": "Display name."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Original Hire Date",
+   "classification": "Client-specific",
+   "note": "Not a PILA field (hire date comes from Hire Date)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Business/Job Title",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Employment Contract Type",
+   "classification": "Client-specific",
+   "note": "Single value 'WM'; not a PILA field (contract term is not reported in PILA)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Department/Division",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Primary Cost Center",
+   "classification": "Client-specific",
+   "note": "Accounting."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Enterprise ID",
+   "classification": "Client-specific",
+   "note": "Internal ID (ENTID token)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Grade",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Manager ID",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "FVOL Account Number",
+   "classification": "Client-specific",
+   "note": "Voluntary pension fund account; not the PILA AVP (see T2R2-048)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Employment Status",
+   "classification": "Client-specific",
+   "note": "A/D status; may signal RET (T2R2-016) but holds no date - see finding on RET."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Pay Group Code",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Personal Area",
+   "classification": "Client-specific",
+   "note": "Operational (CO03/CO04/CO05)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Personal Subarea",
+   "classification": "Client-specific",
+   "note": "City label duplicated by 'Work location'."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Employee Group Code",
+   "classification": "Client-specific",
+   "note": "No PILA field; currently the only way to identify interns (group 6) for T2R2-005 - see finding."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Employee Subgroup Code",
+   "classification": "Client-specific",
+   "note": "As Employee Group Code."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Adjusted Service Date",
+   "classification": "Client-specific",
+   "note": "Seniority; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Regime",
+   "classification": "Client-specific",
+   "note": "'AReg' for 8 employees; meaning not evident (could relate to a pension or labour regime). Client to explain; classified client-specific until then."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AFC Account Number",
+   "classification": "Client-specific",
+   "note": "Tax-relevant (AFC), not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Severance Fund Name",
+   "classification": "Client-specific",
+   "note": "Cesantias fund (CO-CESANTIAS-006), not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Sub Function",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Business/Job Title ES",
+   "classification": "Client-specific",
+   "note": "Operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Nationality",
+   "classification": "Client-specific",
+   "note": "No direct PILA field; supports T2R2-007 checks only."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Gender",
+   "classification": "Client-specific",
+   "note": "Not in PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Birth Date",
+   "classification": "Client-specific",
+   "note": "Not in PILA (masked 1900-01-01)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Primary Email Address",
+   "classification": "Client-specific",
+   "note": "Not in PILA Record Tipo 2."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Phone number",
+   "classification": "Client-specific",
+   "note": "Not in PILA Record Tipo 2."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Country",
+   "classification": "Client-specific",
+   "note": "Residence country; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "City",
+   "classification": "Client-specific",
+   "note": "Residence city; not the work location."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Address Line 1",
+   "classification": "Client-specific",
+   "note": "Residence; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Address Line 2",
+   "classification": "Client-specific",
+   "note": "Residence; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Postal Code",
+   "classification": "Client-specific",
+   "note": "Not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Employee Address - Department",
+   "classification": "Client-specific",
+   "note": "Residence department abbreviation; not the work-location department (T2R2-009)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Pay Method",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Bank Account Type",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Bank Name",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Exact Beneficiary Name (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Bank SWIFT (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Bank Account Currency (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Bank Account Number (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Bank Name (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "Payment; not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Tax Procedure 1",
+   "classification": "Client-specific",
+   "note": "Withholding procedure (CO-DIAN), not PILA."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Work Schedule",
+   "classification": "Client-specific",
+   "note": "Schedule code (3407/3308); not hours worked (T2R2-096)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Marital Status",
+   "classification": "Client-specific",
+   "note": "Not PILA."
+  }
+ ],
+ "summary": {
+  "Aligned": 21,
+  "Explanation to improve": 24,
+  "Format mismatch": 11,
+  "Conflict": 5,
+  "Not evidenced": 93,
+  "total_fields": 154,
+  "section_header_rows_excluded": [
+   3,
+   38,
+   61,
+   62,
+   77,
+   94,
+   100,
+   105,
+   113,
+   122,
+   130,
+   136,
+   147,
+   151,
+   154
+  ]
+ },
+ "spec_internal_inconsistencies": [
+  "T2R1-020 (row 58): PILA Spec says sum of campo 45 NOT campo 95; Example Analysis sheet says sum of the parafiscal base campo 95, not the CCF base.",
+  "T2R2-057 to 060 (rows 126-129): Field Explanation and Population Rules ('Incapacity and leave advanced by the employer') say report authorisation numbers and values; Conditional Reason says blank/zero in every case under AT2 v30.",
+  "21 amount fields (rows 106-146) have Field Length 9 but a 12-position Example (e.g. '000012000000').",
+  "A1-029 (row 32): Format N(7) numeric zero-filled, but the value is AAAA-MM with a hyphen (example '2026-03'); sibling T2R1-015 is A(7)."
+ ]
+}

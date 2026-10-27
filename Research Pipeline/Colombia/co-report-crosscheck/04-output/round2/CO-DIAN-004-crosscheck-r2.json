@@ -1,0 +1,1244 @@
+{
+ "spec": "CO-DIAN-004",
+ "round": 2,
+ "spec_file": "02-specs-out/CO-DIAN-004-Formulario220-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "evidence_note": "Population of the client file: 651 numbered rows, 34 with values; tax year 2025 (casilla 30 = 2025-01-01, 31 = 2025-12-31, 32 = 2026-03-31). All 34 are found by personnel number ('pern') and by document (casilla 25 = 'EE Citizenship Card ID', 34/34) in the Acumulados tab of the ConsolidadoCCT file (organisation '1724 - PHILIP MORRIS COLOMBIA SA', window Jun-2023..May-2024), all carry 62151 Retirement Payment - PRV-6795 (26) or 62152 Retirement Payment - Catleya-6796 (8), none carries 62154 Monthly Retired Pension, and none is among the 261 employees of the Sep-2026 G2N. Amounts in NOM_U_203 are not masked (masking touched only columns C-G and the personnel-number columns). CIR 2024 labels of casillas 30-36/37 values and casillas 34-35 values are over-masked.",
+ "fields": [
+  {
+   "id": 4,
+   "name": "Certificate number",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AK4 (value of '4. Numero de formulario')",
+     "example_masked": "34"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "A (row number, header '1')",
+     "example_masked": "34"
+    }
+   ],
+   "finding": "The client's printed certificate shows casilla 4 = 34, which is the row number (column A) of the certified payee in the NOM_U_203 table (the same sheet's hidden helper XFD1 holds that payee's personnel number). The client therefore numbers certificates with a plain integer consecutive per tax-year table, with no year prefix. The draft designs a Mercans series 'AAAA-nnnnnn' (example '2026-000417') but declares Format 'N', which a hyphenated value cannot satisfy: the draft is internally inconsistent and differs from the client's practice. Both are permitted by the instruction guide quoted in the draft (number assigned by the issuer). Decision needed, no edit proposed: keep the Mercans series and change Format to AN, or follow the client's numeric consecutive.",
+   "proposed_explanation": "",
+   "official_source": "Form 220 instruction guide, casilla 4 ('asignado por la persona natural o juridica que expide la certificacion'), as quoted in the draft."
+  },
+  {
+   "id": 5,
+   "name": "Employer NIT",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "DATOS",
+     "column": "E8 ('Numero Identificacion Trib:')",
+     "example_masked": "352203552"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "D7 (under '5. Numero de Identificacion Tributaria (NIT)')",
+     "example_masked": "352203552"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "column": "Acumulados B1 (Organization)",
+     "example_masked": "1724 - PHILIP MORRIS COLOMBIA SA"
+    }
+   ],
+   "finding": "Format aligned: the client holds the NIT as 9 digits without dots, hyphens or DV, with the DV in a separate cell. NEW: the 34 payees certified in the client's Form 220 are booked in payroll organisation '1724 - PHILIP MORRIS COLOMBIA SA' (Acumulados), while the 261 September 2026 employees and the round-1 reports are organisation '1764 - Compañía Colombiana de Tabaco SAS'. The client file has one employer parameter block (DATOS), so a certificate run covers one withholding agent; which entity the masked DATOS name/NIT belongs to cannot be confirmed from the masked copy. The draft does not say how the employer block is chosen when the client runs more than one organisation.",
+   "proposed_explanation": "NIT of the withholding agent as it appears in casilla 5 of the RUT, WITHOUT the verification digit. The instruction guide is emphatic: 'En ningun caso escriba puntos, guiones o letras'. ONE WITHHOLDING AGENT PER CERTIFICATE RUN: the client keeps the employer block as a single parameter set (NIT as digits only, verification digit in a separate cell, razon social) and runs more than one payroll organisation - '1764 - Compañía Colombiana de Tabaco SAS' and '1724 - PHILIP MORRIS COLOMBIA SA' (the organisation in which the retirement-payment payees certified for tax year 2025 are booked). Company.NIT, Company.NIT_DV and Company.Legal_Name must be taken from the legal entity that made the payments and practised the withholding for each payee, and certificates must be generated per withholding agent.",
+   "official_source": ""
+  },
+  {
+   "id": 6,
+   "name": "NIT verification digit",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "DATOS",
+     "column": "E9 ('Codigo Verificacion:')",
+     "example_masked": "8"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "R7 (under '6. DV.')",
+     "example_masked": "8"
+    }
+   ],
+   "finding": "Single-digit DV held separately from the NIT, as the draft requires.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 7,
+   "name": "First surname",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '7. Primer apellido' (row 6)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "The client's certificate prints the casilla label with no value: the withholding agent is a legal person, so the natural-person name casillas stay empty, consistent with Mandatory = C. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 8,
+   "name": "Second surname",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '8. Segundo apellido' (row 6)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "The client's certificate prints the casilla label with no value: the withholding agent is a legal person, so the natural-person name casillas stay empty, consistent with Mandatory = C. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 9,
+   "name": "First name",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '9. Primer nombre' (row 6)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "The client's certificate prints the casilla label with no value: the withholding agent is a legal person, so the natural-person name casillas stay empty, consistent with Mandatory = C. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 10,
+   "name": "Other names",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '10. Otros nombres' (row 6)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "The client's certificate prints the casilla label with no value: the withholding agent is a legal person, so the natural-person name casillas stay empty, consistent with Mandatory = C. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 11,
+   "name": "Corporate name",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "DATOS",
+     "column": "E10 ('Razon Social:')",
+     "example_masked": "NAME_3590"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "C10 (under '11. Razon social')",
+     "example_masked": "NAME_3590"
+    }
+   ],
+   "finding": "The client keeps the razon social as a parameter of the certificate workbook (DATOS) and prints it in casilla 11, not the payroll organisation label - consistent with the point decided on 15 Oct 2026 (Company.Legal_Name). The DATOS title still reads 'Ano gravable 2019' (template leftover, client-specific). Multi-organisation point recorded under casilla 5.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 13,
+   "name": "Employee document type",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "B 'Campo 24'",
+     "example_masked": "13"
+    }
+   ],
+   "finding": "Two-character code, '13' (Cedula de ciudadania) on all 34 rows, held as text; within the six-value list of the draft. For these payees casilla 25 is the Accumulated 'EE Citizenship Card ID', which supports the candidate mapping 'Citizenship Card ID' -> 13 already raised as a query; the decided query is not re-opened.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 14,
+   "name": "Employee identification number",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "C 'Campo 25'",
+     "example_masked": "20309351"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "column": "Acumulados C 'EE Citizenship Card ID'",
+     "example_masked": "(equal to Campo 25 for 34 of 34 payees)"
+    }
+   ],
+   "finding": "Format aligned: held as text, 7-8 characters, no dots or hyphens. NEW evidence on the coverage gap recorded on 15 Oct 2026: the client does certify non-employee payees (34 recipients of 62151 / 62152, none in the employee master), and for them casilla 25 equals the Accumulated Report 'EE Citizenship Card ID' in 34 of 34 cases (never 'Beneficiary National Id', which is blank on their rows). The split names of casillas 26-29 are also filled for them although the Accumulated Report has only one name string, so the client has an identity source for non-employee payees outside the reports received. This does not contradict the decided text; it narrows the open query.",
+   "proposed_explanation": "Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number column of the employee master that matches casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'). In the client's Accumulated Report the column 'EE Citizenship Card ID' carries the document number for 248 of 261 employees and is blank for most holders of a foreigner's card (13 blanks, all foreigner-card holders); it is not a complete source. Do NOT use the column 'ID Number' of the Accumulated Report or of the Base of Withholding: it is the internal employee number (equal to Master Data 'Employee ID' for 261 of 261 employees), not an identity document; both reports also end with footer rows ('GRAND TOTAL'; 'Confidential' in Master Data) that must be excluded. COVERAGE GAP: the Accumulated Report has 1,038 payees, of whom 777 (491 pension payees of 62154 and 286 others, 132 of them paid 62100 Ordinary Salary in September 2026) have no row in the employee master data report, so a document-number source is missing for them. For pension rows the client also records a separate payee ('Beneficiary National Id'), whose meaning (substitute pensioner or third-party payee) is not confirmed; see casilla 50. CLIENT EVIDENCE (tax-year-2025 Form 220 working table): for the 34 retirement-payment payees certified (wage types 62151 / 62152, none in the employee master), casilla 25 equals the Accumulated Report column 'EE Citizenship Card ID' in 34 of 34 cases and never the 'Beneficiary National Id'; casillas 26-29 carry split names, which the Accumulated Report does not hold, so the client keeps an identity source for non-employee payees that has not been received and must be named (see Query to RA).",
+   "official_source": ""
+  },
+  {
+   "id": 15,
+   "name": "Employee first surname",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "D 'Campo 26'",
+     "example_masked": "NAME_3591"
+    }
+   ],
+   "finding": "The client fills the split name for every certified payee (0 of 34 blank), consistent with the draft's Mandatory flag. NEW: the payees are retirement-payment recipients who are not in the employee master, so the client holds split names for them in a source not received (see casilla 25).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 16,
+   "name": "Employee second surname",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "E 'Campo 27'",
+     "example_masked": "NAME_3592"
+    }
+   ],
+   "finding": "The client fills the split name for every certified payee (2 of 34 blank), consistent with the draft's Mandatory flag. NEW: the payees are retirement-payment recipients who are not in the employee master, so the client holds split names for them in a source not received (see casilla 25).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 17,
+   "name": "Employee first name",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "F 'Campo 28'",
+     "example_masked": "NAME_0087"
+    }
+   ],
+   "finding": "The client fills the split name for every certified payee (0 of 34 blank), consistent with the draft's Mandatory flag. NEW: the payees are retirement-payment recipients who are not in the employee master, so the client holds split names for them in a source not received (see casilla 25).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 18,
+   "name": "Employee other names",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "G 'Campo 29'",
+     "example_masked": "NAME_3593"
+    }
+   ],
+   "finding": "The client fills the split name for every certified payee (4 of 34 blank), consistent with the draft's Mandatory flag. NEW: the payees are retirement-payment recipients who are not in the employee master, so the client holds split names for them in a source not received (see casilla 25).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 20,
+   "name": "Period certified - from",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "H 'Campo 30'",
+     "example_masked": "2025-01-01"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "E16/H16/J16 (casilla 30 in three boxes: year, month, day)",
+     "example_masked": "2025 / NAME_3693 / NAME_3693 (month and day over-masked)"
+    }
+   ],
+   "finding": "Full tax year start for all 34 non-employee payees; printed as year / month / day boxes, consistent with AAAA MM DD. The hire-date rule decided on 15 Oct 2026 concerns employees and is not tested by this population.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 21,
+   "name": "Period certified - to",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "I 'Campo 31'",
+     "example_masked": "2025-12-31"
+    }
+   ],
+   "finding": "31 December of the tax year for all 34 payees; no leaver in the population, so the termination-date rule is not tested.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 22,
+   "name": "Date of issue",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "J 'Campo 32'",
+     "example_masked": "2026-03-31"
+    }
+   ],
+   "finding": "Issue date 31 March 2026 for tax year 2025, i.e. on the last business day of March, consistent with the draft's deadline rule and AAAA MM DD format.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 23,
+   "name": "Place where the withholding was made",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "K 'Campo 33'",
+     "example_masked": "MEDELLIN"
+    }
+   ],
+   "finding": "Round 1 had no evidence (decided Not evidenced). NEW: the client prints one constant value, 'MEDELLIN' (upper case, no accents), on all 651 rows of its table, paired with DIVIPOLA 05001 in casillas 34-35 - i.e. a withholding-agent parameter, not an employee attribute. The draft explanation does not say where the value comes from, and its System Mapping 'Company.City_Code' points to a code while the casilla holds a name (Format A).",
+   "proposed_explanation": "City or municipality where the withholding was practised - not necessarily the employer's registered domicile, and not necessarily the employee's place of work. It is a withholding-agent parameter, not an employee attribute: the client prints one value, 'MEDELLIN' (upper case, no accents), on every row of its tax-year-2025 Form 220 table, together with the DIVIPOLA code 05001 in casillas 34-35. Output the municipality NAME that corresponds to the DANE code of casillas 34 and 35, so that the three casillas always describe the same place.",
+   "official_source": ""
+  },
+  {
+   "id": 24,
+   "name": "Department code",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "L 'Campo 34'",
+     "example_masked": "05001"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AX15 label '34. Cod. Dpto' / AX17 value",
+     "example_masked": "NAME_3701 (over-masked)"
+    }
+   ],
+   "finding": "Round 1 had no evidence (decided Not evidenced). NEW: the client stores the full five-digit DIVIPOLA municipality code '05001' (Medellin, Antioquia) in the casilla-34 column on all 651 rows, whereas the draft and the form label '34. Cod. Dpto' require the two-digit department code ('05'). The printed value is over-masked, so whether the client's print truncates it is not visible.",
+   "proposed_explanation": "DANE department code of the place in casilla 33: the FIRST TWO digits of the five-digit DIVIPOLA municipality code. The instruction guide directs the use of the DANE 'Department codes' tables. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 table holds the full five-digit code '05001' (Medellin, Antioquia) both in the casilla-34 column and in the casilla-35 column. Hold the five-digit DIVIPOLA code of the place of withholding once and split it - casilla 34 = '05', casilla 35 = '001' - never output five digits in either casilla.",
+   "official_source": "Form 220 printed labels '34. Cod. Dpto' and '35. Cod. Ciudad/Municipio' (present in the client's own CIR 2024 sheet) and the instruction guide reference to the DANE tables quoted in the draft."
+  },
+  {
+   "id": 25,
+   "name": "City or municipality code",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "M 'Textbox113' (casilla-35 position, between Campo 34 and Campo 36)",
+     "example_masked": "05001"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "BA15 label '35. Cod. Ciudad/ Municipio' / BA17 value",
+     "example_masked": "NAME_3702 (over-masked)"
+    }
+   ],
+   "finding": "NEW: the column in the casilla-35 position carries the same five-digit '05001' as casilla 34 instead of the three-digit municipality code '001'. Length 5 vs draft length 3.",
+   "proposed_explanation": "DANE municipality code of the place in casilla 33: the LAST THREE digits of the five-digit DIVIPOLA code (e.g. '001' for 05001 Medellin). Like PILA and unlike the electronic payroll, Form 220 splits the DIVIPOLA code across two casillas. CLIENT EVIDENCE: the client's table carries the full code '05001' in this position as well as in casilla 34; see casilla 34 for the split rule.",
+   "official_source": "Form 220 printed label '35. Cod. Ciudad/Municipio' (client CIR 2024 sheet) and the draft's DIVIPOLA table."
+  },
+  {
+   "id": 27,
+   "name": "Salary payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "O 'Campo 36'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 28,
+   "name": "Payments made with vouchers, cheques, cards or vales",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "P 'Campo 37'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 29,
+   "name": "Excess meal payments over 41 UVT (ET art. 387-1)",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "Q 'Campo 38'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 30,
+   "name": "Fee payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "R 'Campo 39'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 31,
+   "name": "Service payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "S 'Campo 40'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 32,
+   "name": "Commission payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "T 'Campo 41'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 33,
+   "name": "Statutory benefit payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "U 'Campo 42'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 34,
+   "name": "Per diem payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "V 'Campo 43'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 35,
+   "name": "Representation expense payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "W 'Campo 44'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 36,
+   "name": "Cooperative associated-work compensation",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "X 'Campo 45'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 37,
+   "name": "Other payments",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "Y 'Campo 46'",
+     "example_masked": "187793472"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV29 ('Otros pagos', 46)",
+     "example_masked": "18429540"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "column": "Acumulados F/G 'WT Code'/'WT Description'",
+     "example_masked": "62151 Retirement Payment - PRV-6795; 62152 Retirement Payment - Catleya-6796"
+    }
+   ],
+   "finding": "The client puts the WHOLE income of all 34 payees in casilla 46 'Otros pagos' (sum 2,731,679,473; 34 of 34 non-zero), with casillas 36-45 and 47-51 at 0. The payees are recipients of 62151 / 62152 'Retirement Payment' (and 21140 'Personal Income Tax Withholding-Retirees'), which the draft lists under casilla 50 as candidate PENSION income pending RA confirmation, and not among the casilla-46 wage types. Mirror of the casilla-50 conflict: not decided here. Amounts cannot be reconciled to wage types because the available accumulations cover Jun-2023..May-2024, not tax year 2025. Format: amounts are whole pesos NOT rounded to the nearest 1,000 (32 of 34 are not multiples of 1,000) - see casilla 60 for the rounding finding.",
+   "proposed_explanation": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. CLIENT EVIDENCE - earning wage types with no evident dedicated casilla, each needing an RA placement decision (casilla 36, 42, 46 or not certified): 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout. The engine must hold an explicit wage-type-to-casilla table; no earning wage type may be left unassigned. CLIENT PRACTICE (tax-year-2025 Form 220 working table): the client certifies the whole income of its 34 retirement-payment payees (62151 Retirement Payment - PRV-6795 and 62152 Retirement Payment - Catleya-6796) in casilla 46, with casilla 50 = 0. This conflicts with the casilla-50 treatment if the RA classifies these wage types as pension income - see the Query to RA of casilla 50. Do not adopt either placement until the RA answers.",
+   "official_source": "Form 220 printed label of casilla 50 'Pensiones de jubilacion, vejez o invalidez' (also in the client's CIR 2024 sheet, row 33) and ET art. 206 num. 5, on which the draft's casilla-50 rule relies."
+  },
+  {
+   "id": 38,
+   "name": "Severance savings and interest paid to the employee",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "Z 'Campo 47'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 39,
+   "name": "Severance savings under the traditional CST regime",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AA 'Campo 48'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 40,
+   "name": "Severance savings deposited to the fund",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AB 'Campo 49'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 41,
+   "name": "Retirement, old-age or invalidity pensions",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AC 'Campo 50'",
+     "example_masked": "0"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "Y 'Campo 46'",
+     "example_masked": "187793472"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV33 ('Pensiones de jubilacion, vejez o invalidez', 50)",
+     "example_masked": "0"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "column": "Acumulados F 'WT Code'",
+     "example_masked": "62151 (26 payees), 62152 (8 payees), 21140 (24 payees)"
+    }
+   ],
+   "finding": "CANDIDATE CONFLICT. The draft's rule: pension income paid by the employer goes to casilla 50 (ET art. 206 num. 5); 62151 and 62152 are listed as candidate pension wage types under query (a). The client's tax-year-2025 certificates put 0 in casilla 50 for all 34 payees and certify their full income in casilla 46. All 34 are recipients of 62151 Retirement Payment - PRV (26) or 62152 Retirement Payment - Catleya (8); 22 of the 23 payees with casilla 60 > 0 carry 21140 Personal Income Tax Withholding-Retirees. Whether these 'retirement payments' are pensions (casilla 50) or another work-income payment (casilla 46) depends on what 'PRV' and 'Catleya' designate, which the data does not say - so the conflict is conditional on the RA's answer to query (a). None of the 577 holders of 62154 Monthly Retired Pension in the Acumulados appears in the 34 populated rows; the client's casilla for the monthly pensioners is NOT evidenced (617 of 651 rows are empty in the values-only copy). Draft-internal point for the RA: Field Options D38 says 'Taxable only above 1,000 UVT per month; below that, certified at zero', which a developer could read as casilla 50 = 0 below the threshold; the casilla-52 definition ('GROSS income') implies the full pension is certified.",
+   "proposed_explanation": "Pension income paid BY THE EMPLOYER. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. THIS CLIENT IS A PENSION PAYER: its accumulations carry 62154 Monthly Retired  Pension-6798 (491 pension payees, about COP 600-660 million a month), 62153 Additional Retirement Pension (paid in December and June), 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the RA must confirm which of these are pension income for this casilla. Pension payees are NOT in the client's employee master data report, so their identification (casillas 24-29) needs a pensioner master source. On 330 of the 491 pension rows of 62154 the client records a 'Beneficiary National Id' different from the pensioner's own document (and on 328 rows a 'Beneficiary Name' different from the employee name), i.e. a different payee (substitute pensioner or third-party payee - to be confirmed); the same columns are also filled for employees, where they match the bank-payment beneficiary, so their meaning on pension rows is not confirmed. The RA and the client must confirm to whom the certificate is issued. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54. CLIENT PRACTICE (tax-year-2025 Form 220 working table): the 34 payees certified are all recipients of 62151 (26) or 62152 (8), none of 62154 and none in the September 2026 employee population; the client reports casilla 50 = 0 and the whole amount in casilla 46 'Otros pagos'. Withholding (casilla 60) is non-zero for 23 of them, 22 of whom carry 21140 Personal Income Tax Withholding-Retirees in the accumulations. The client's casilla for the 62154 monthly pensioners is not evidenced.",
+   "official_source": "Form 220 printed label of casilla 50 'Pensiones de jubilacion, vejez o invalidez' (present in the client's CIR 2024 sheet) and ET art. 206 num. 5, as relied on by the draft. Not decided here."
+  },
+  {
+   "id": 42,
+   "name": "Non-reimbursable educational support financed with public funds",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AD 'Campo 51'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 43,
+   "name": "Total gross income",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AE 'Campo 52'",
+     "example_masked": "0"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV35 ('Total de ingresos brutos (Sume 36 a 51)', 52)",
+     "example_masked": "0 (with casilla 46 = 18429540)"
+    }
+   ],
+   "finding": "The client reports casilla 52 = 0 on all 34 rows although casilla 46 is non-zero on every row; its own printed certificate shows 46 = 18,429,540 and 52 = 0 under the printed label 'Total de ingresos brutos (Sume 36 a 51)'. This contradicts the arithmetic printed on the form, which the draft follows. The values-only copy keeps the cached results, so the zero is what the client's workbook produced. The draft's rule stands; the build must compute and validate casilla 52.",
+   "proposed_explanation": "The form prints the arithmetic on its face: 'Sume 36 a 51'. Sixteen casillas, summed. This is GROSS income, before the contributions and deductions in casillas 53 to 58. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 table and printed certificate show casilla 52 = 0 on all 34 certified rows although casilla 46 is non-zero on every one of them. Always compute casilla 52 from casillas 36 to 51 as printed on the form, never copy a total from a client source, and block issue where casilla 52 differs from that sum.",
+   "official_source": "Form 220 printed label of casilla 52 'Total de ingresos brutos (Sume 36 a 51)', reproduced in the client's own CIR 2024 sheet (A35)."
+  },
+  {
+   "id": 45,
+   "name": "Mandatory health contributions borne by the employee",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AF 'Campo 53'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client. The certified payees carry none of the pensioner health wage types 21645 / 21646 / 21647 named by the draft, so 0 is consistent; the draft's rule is not contradicted.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 46,
+   "name": "Mandatory pension and solidarity-fund contributions borne by the employee",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AG 'Campo 54'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client. The certified payees carry neither 21643 nor 2556 / 2553 in their pension-payment rows, so 0 is consistent.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 47,
+   "name": "Voluntary contributions to the individual-account pension regime (RAIS)",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AH 'Campo 55'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 48,
+   "name": "Voluntary contributions to voluntary pension funds",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AI 'Campo 56'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 49,
+   "name": "AFC account contributions",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AJ 'Campo 57'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 50,
+   "name": "AVC account contributions",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AK 'Campo 58'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 51,
+   "name": "Average labour income of the last six months",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AL 'Campo 59'",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "The client file carries this casilla with 0 on all 34 populated rows (retirement-payment payees only); no non-zero data, so the wage-type mapping cannot be checked. The zero-fill convention ('write ZERO - do not leave it blank') matches the client. Zero is expected for non-employee payees (no severance).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 52,
+   "name": "Withholding on labour and pension income",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "AM 'Campo 60'",
+     "example_masked": "12426492"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV44 ('Valor de la retencion en la fuente por rentas de trabajo y pensiones', 60)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Casilla 60 is non-zero for 23 of 34 payees (sum 105,111,856); 22 of the 23 carry 21140 Personal Income Tax Withholding-Retirees, which the draft already maps. FORMAT: none of the 23 values is a multiple of 1,000 (and 32 of 34 casilla-46 values are not), so the client certifies whole pesos without the nearest-1,000 approximation that the draft's Rounding column applies to every amount casilla. Client-specific control columns 'VALOR RETENCION A INCLUI' / 'DIF' hold decimals (e.g. 19612991.09) but are not certified values. Decision needed: keep the draft's rounding (citing the instruction-guide passage) or certify whole pesos as the client does; the draft cites no Form 220-specific article.",
+   "proposed_explanation": "",
+   "official_source": "Form 220 instruction guide as quoted in the draft's Rounding column ('approximated to the NEAREST 1,000, exactly as the instruction guide directs') and Population Rules ('exactly as on Form 350'); no Form 220-specific article is cited in the draft."
+  },
+  {
+   "id": 54,
+   "name": "Rentals - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ (row 'Arrendamientos', 61)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Employee-declared casilla: the client's certificate prints the label and number in the official order with 0; NOM_U_203 has no column for casillas 61-75. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 55,
+   "name": "Fees, commissions and services - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ (row 'Honorarios, comisiones y servicios', 62)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Employee-declared casilla: the client's certificate prints the label and number in the official order with 0; NOM_U_203 has no column for casillas 61-75. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 56,
+   "name": "Interest and financial yields - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ (row 'Intereses y rendimientos financieros', 63)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Employee-declared casilla: the client's certificate prints the label and number in the official order with 0; NOM_U_203 has no column for casillas 61-75. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 57,
+   "name": "Disposal of fixed assets - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ (row 'Enajenacion de activos fijos', 64)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Employee-declared casilla: the client's certificate prints the label and number in the official order with 0; NOM_U_203 has no column for casillas 61-75. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 58,
+   "name": "Lotteries, raffles and betting - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ (row 'Loterias, rifas, apuestas y similares', 65)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Employee-declared casilla: the client's certificate prints the label and number in the official order with 0; NOM_U_203 has no column for casillas 61-75. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 59,
+   "name": "Other income - amount received",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ (row 'Otros', 66)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Employee-declared casilla: the client's certificate prints the label and number in the official order with 0; NOM_U_203 has no column for casillas 61-75. No data to check.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 60,
+   "name": "Total other income received",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AJ54 ('Totales: (Valor recibido: Sume 61a 66)', 67)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Label and arithmetic 'Sume 61 a 66' match the draft.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 61,
+   "name": "Other income - amounts withheld (casillas 68 to 73)",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV48:AV53 (68-73)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Printed with 0 in the official pairing 68-61 ... 73-66; no data.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 62,
+   "name": "Total other income withheld",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "A54 / AV54 (74)",
+     "example_masked": "label '(Valor retenido: Sume 63 a 68)', value 0"
+    }
+   ],
+   "finding": "The client's certificate template labels casilla 74 as 'Sume 63 a 68', while the draft (and the pairing 68-73) define 74 as the sum of casillas 68 to 73. The value printed is 0, so no amount is affected; it is a label defect in the client template, recorded for completeness. No build impact; the draft stands.",
+   "proposed_explanation": "",
+   "official_source": "Form 220 casilla 74 'Totales - valor retenido (Sume 68 a 73)' as relied on by the draft."
+  },
+  {
+   "id": 63,
+   "name": "Total withholding for the tax year",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV55 ('Total retencion ano gravable (sume 60 + 74)', 75)",
+     "example_masked": "0"
+    }
+   ],
+   "finding": "Label 'sume 60 + 74' matches the draft. NOM_U_203 carries no casilla 75, so the 23 payees with casilla 60 > 0 cannot be checked for 75 = 60.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 65,
+   "name": "Identification of assets held",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "C56 '76. Identificacion de los bienes y derechos poseidos'",
+     "example_masked": "(three empty item rows)"
+    }
+   ],
+   "finding": "Layout only (three item lines); no data.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 66,
+   "name": "Asset value",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AV56 '77. Valor Patrimonial'",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "Layout only; no data.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 67,
+   "name": "Debts outstanding at 31 December",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "A60 / AT60 (78)",
+     "example_masked": "'Deudas vigentes a 31 de Diciembre de 2024' on the tax-year-2025 certificate"
+    }
+   ],
+   "finding": "No data, but the printed label carries a year and the client's tax-year-2025 certificate still prints 2024: the year in the label must follow the tax year. The draft does not say so.",
+   "proposed_explanation": "Total debts outstanding at 31 December. Employee-supplied. The printed label carries the year of the balance ('Deudas vigentes a 31 de diciembre de' + tax year): print the tax year certified, never a fixed year - the client's tax-year-2025 template still prints 2024.",
+   "official_source": ""
+  },
+  {
+   "id": 68,
+   "name": "Dependant document type",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '79. Tipo documento' (row 62)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "Label present in the official order; no dependant data in the client file.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 69,
+   "name": "Dependant document number",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '80. No. Documento' (row 62)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "Label present in the official order; no dependant data in the client file.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 70,
+   "name": "Dependant surnames and names",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '81. Apellidos y Nombres' (row 62)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "Label present in the official order; no dependant data in the client file.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 71,
+   "name": "Relationship",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "label '82. Parentesco' (row 62)",
+     "example_masked": "(blank)"
+    }
+   ],
+   "finding": "Label present in the official order; no dependant data in the client file.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 73,
+   "name": "Employee's six non-filing declarations",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "A65:A73 ('Certifico que durante el ano gravable:' and items 1-6, note)",
+     "example_masked": "'1. Mi patrimonio bruto no excedio de 4.500 UVT.' ..."
+    }
+   ],
+   "finding": "The six declarations printed by the client match the draft's list and thresholds; the client's note cites DUR 1625 de 2016 art. 1.6.1.13.2.7 and the SIMPLE regime. Display-only, as the draft says.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 74,
+   "name": "Employee signature",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "AQ65",
+     "example_masked": "Firma del Trabajador o Pensionado"
+    }
+   ],
+   "finding": "Printed signature line present, display-only.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 75,
+   "name": "Payer or withholding agent name",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "CIR 2024",
+     "column": "A45",
+     "example_masked": "'Nombre del pagador o agente retenedor' (line directly after casilla 60, before 'Datos a cargo del trabajador o pensionado')"
+    }
+   ],
+   "finding": "The client's certificate (official layout) places 'Nombre del pagador o agente retenedor' on the line immediately after casilla 60 and before the employee-declared section, not on a signature line; the template has no issuer-signature line. The value cell is empty in the masked copy. The 15 Oct 2026 decision (source Company.Legal_Name) is unaffected; only the position wording changes.",
+   "proposed_explanation": "Name of the payer or withholding agent printed on the line that follows casilla 60, before the 'Datos a cargo del trabajador o pensionado' section - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), not the payroll organisation label with the company-code prefix ('1764 - ...') shown in the client reports' title block. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN.",
+   "official_source": ""
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "A (header '1', row consecutive 1..651)",
+   "classification": "Client-specific",
+   "note": "Row consecutive of the working table; the printed certificate uses it as casilla 4 (row 34 -> '4. Numero de formulario' = 34). Covered by casilla 4 (see that finding); not a separate statutory field."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "N 'Textbox100'",
+   "classification": "Client-specific",
+   "note": "Constant 1 on all 651 rows; no Form 220 casilla corresponds and its meaning is not evidenced."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AN 'pern '",
+   "classification": "Client-specific",
+   "note": "Internal personnel number (join key to the Acumulados 'ID Number'); not printed on the certificate."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AO (no header)",
+   "classification": "Client-specific",
+   "note": "Free-text marker 'Activos' on 6 unpopulated rows (45-50); control note."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AP 'len'",
+   "classification": "Client-specific",
+   "note": "Length check of the personnel number (8)."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AQ 'check pern '",
+   "classification": "Client-specific",
+   "note": "Copy of the personnel number for lookup."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AR 'putn co'",
+   "classification": "Client-specific",
+   "note": "Constant '00'; control helper."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AS 'cruce con el  req'",
+   "classification": "Client-specific",
+   "note": "Lookup result ('#N/A' / 'ESTE') against a requirement list; control."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AT 'VALOR RETENCION A INCLUI'",
+   "classification": "Client-specific",
+   "note": "Withholding amount to include, with decimals, on 8 unpopulated rows (e.g. 19612991.09); reconciliation helper, not a certified value."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AU (no header)",
+   "classification": "Client-specific",
+   "note": "Comparison amount (e.g. 95272991.09); reconciliation helper."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "column": "AV 'DIF'",
+   "classification": "Client-specific",
+   "note": "Difference of the two helpers (e.g. -75660000); control."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "CIR 2024",
+   "column": "XFD1 / XFD4 / XFD5 / XFD8 / XFD9 (hidden helper cells)",
+   "classification": "Client-specific",
+   "note": "Personnel number of the printed payee and lookup helpers; not part of the form."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "DATOS",
+   "column": "E2 title 'Certificado de Ingresos y Retenciones ... Ano gravable 2019'",
+   "classification": "Client-specific",
+   "note": "Template leftover; the tax year printed on the certificate comes from CIR 2024 K1 ('Ano gravable 2025')."
+  }
+ ],
+ "summary": {
+  "Aligned": 14,
+  "Explanation to improve": 5,
+  "Format mismatch": 4,
+  "Conflict": 4,
+  "Not evidenced": 38
+ }
+}

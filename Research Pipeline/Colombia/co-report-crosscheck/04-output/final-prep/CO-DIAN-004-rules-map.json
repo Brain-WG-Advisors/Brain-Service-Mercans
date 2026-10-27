@@ -1,0 +1,292 @@
+{
+ "spec": "CO-DIAN-004",
+ "final": "05-final/CO-DIAN-004-Formulario220-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "J4",
+   "field_id": "4",
+   "rule": "220-2",
+   "current": "N",
+   "proposed": "AN"
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M4",
+   "field_id": "4",
+   "rule": "220-2",
+   "current": "SHARP CONTRAST WITH FORM 350. The instruction guide says this number is 'asignado por la natural person o juridica que expide la certificacion' - the EMPLOYER assigns it, not DIAN. On Form 350 casilla 4 is DIAN-assigned and opaque. The engine must therefore maintain its own certificate numbering series and keep it stable, because the employee quotes it. COMPOSITE KEY - position breakdown. Because DIAN prescribes NO structure, the series is Mercans-designed and is fixed here so that it is stable and auditable: positions 1-4 = accrual year AAAA, source PayPeriod.Fiscal_Year, the year the income was earned and NOT the year of issue; position 5 = literal hyphen; positions 6-11 = a six-digit zero-filled consecutive, source Mercans.Certificate_Sequence, restarting at 000001 for each accrual year and unique per employer per year. PERSISTENCE: assigned once and NEVER reused, including after a reissue - a replacement certificate takes the NEXT consecutive and cites the superseded number, because ET art. 378 makes the employee's copy the document that proves the withholding and two certificates may not share a number.",
+   "proposed": "SHARP CONTRAST WITH FORM 350. The instruction guide (Res. 000022/2024) says this number is 'asignado por la natural person o juridica que expide la certificacion' - the EMPLOYER assigns it, not DIAN. On Form 350 casilla 4 is DIAN-assigned and opaque. The engine must therefore maintain its own certificate numbering series and keep it stable, because the employee quotes it. FORMAT: DIAN prescribes no format for this number and the value is alphanumeric (instruction guide, Res. 000022/2024). COMPOSITE KEY - position breakdown. Because DIAN prescribes NO structure, the series is Mercans-designed and is fixed here so that it is stable and auditable: positions 1-4 = accrual year AAAA, source PayPeriod.Fiscal_Year, the year the income was earned and NOT the year of issue; position 5 = literal hyphen; positions 6-11 = a six-digit zero-filled consecutive, source Mercans.Certificate_Sequence, restarting at 000001 for each accrual year and unique per employer per year. PERSISTENCE: assigned once and NEVER reused, including after a reissue - a replacement certificate takes the NEXT consecutive and cites the superseded number, because ET art. 378 makes the employee's copy the document that proves the withholding and two certificates may not share a number."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C4",
+   "field_id": "Casilla 4",
+   "rule": "220-2",
+   "current": "Assign the certificate number from the ENGINE's own series - the instruction guide says it is 'asignado por la natural person o juridica que expide la certificacion'. Keep the series stable and unique per employee per tax year, because the employee may quote it when filing or when asking for a duplicate.",
+   "proposed": "Assign the certificate number from the ENGINE's own series - the instruction guide says it is 'asignado por la natural person o juridica que expide la certificacion'. Keep the series stable and unique per employee per tax year, because the employee may quote it when filing or when asking for a duplicate. The number is alphanumeric: DIAN prescribes no format for it (instruction guide, Res. 000022/2024)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M13",
+   "field_id": "24",
+   "rule": "220-11",
+   "current": "The instruction guide prints a SIX-VALUE list on the form itself: 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Foreign resident ID card, 31 NIT, 41 Passport. That is NARROWER than the electronic payroll list at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP. An employee holding a PEP or a PPT therefore has NO exact code here. Rule to be set at implementation: the code to output for a PEP or PPT holder. SOURCE: the employee master holds one document-number field per document type ('National ID', 'Identity Card', 'Indentity Card for Foreigners', 'Citizenship Card ID') and no document-type field, and more than one of them may be populated for the same employee. The engine must store an explicit Employee.Document_Type for the document actually certified in casilla 25, never infer it from which field is filled. The mapping of the employee master document fields to the Form 220 codes is a configuration parameter supplied at implementation (e.g. 'Citizenship Card ID' -> 13 and 'Indentity Card for Foreigners' -> 22; 'National ID' and 'Identity Card' have no direct Form 220 code).",
+   "proposed": "The instruction guide (Res. 000022/2024) prints a SIX-VALUE list on the form itself: 12 Tarjeta de identidad, 13 Cedula de ciudadania, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Pasaporte. That is NARROWER than the electronic payroll list at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP. An employee holding a PEP or a PPT therefore has NO exact code here. Rule to be set at implementation: the code to output for a PEP or PPT holder. SOURCE: the employee master holds one document-number field per document type ('National ID', 'Identity Card', 'Indentity Card for Foreigners', 'Citizenship Card ID') and no document-type field, and more than one of them may be populated for the same employee. The engine must store an explicit Employee.Document_Type for the document actually certified in casilla 25, never infer it from which field is filled. The mapping of the employee master document fields to the Form 220 codes is a configuration parameter supplied at implementation (e.g. 'Citizenship Card ID' -> 13 and 'Indentity Card for Foreigners' -> 22; 'National ID' and 'Identity Card' have no direct Form 220 code)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M23",
+   "field_id": "33",
+   "rule": "220-10",
+   "current": "City or municipality where the withholding was practised - not necessarily the employer's registered domicile, and not necessarily the employee's place of work. It is a withholding-agent parameter (an employer setting supplied at implementation, held as the five-digit DIVIPOLA code of the place of withholding), not an employee attribute. Output the municipality NAME, in upper case without accents, that corresponds to the DANE code of casillas 34 and 35, so that the three casillas always describe the same place.",
+   "proposed": "City or municipality where the withholding was practised (instruction guide, Res. 000022/2024) - not necessarily the employer's registered domicile, and not necessarily the employee's place of work. It is a withholding-agent parameter (an employer setting supplied at implementation, held as the five-digit DIVIPOLA code of the place of withholding), not an employee attribute. Output the municipality NAME, in upper case without accents, that corresponds to the DANE code of casillas 34 and 35, so that the three casillas always describe the same place."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M24",
+   "field_id": "34",
+   "rule": "220-10",
+   "current": "DANE department code of the place in casilla 33: the FIRST TWO digits of the five-digit DIVIPOLA municipality code. The instruction guide directs the use of the DANE 'Department codes' tables. Hold the five-digit DIVIPOLA code of the place of withholding once (e.g. 11001 Bogota D.C.) and split it - casilla 34 = the first two digits ('11'), casilla 35 = the last three ('001') - never output five digits in either casilla.",
+   "proposed": "DANE department code of the place in casilla 33: the FIRST TWO digits of the five-digit DIVIPOLA municipality code. The instruction guide (Res. 000022/2024) directs the use of the DANE 'Department codes' tables for casillas 34 and 35: both casillas carry DANE codes. Hold the five-digit DIVIPOLA code of the place of withholding once (e.g. 11001 Bogota D.C.) and split it - casilla 34 = the first two digits ('11'), casilla 35 = the last three ('001') - never output five digits in either casilla."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M27",
+   "field_id": "36",
+   "rule": "220-6",
+   "current": "Total salary payments ACTUALLY MADE in the period to a resident natural person whose income derives from an employment or statutory relationship. The instruction guide quotes CST art. 127 in full: salary is not only the ordinary fixed or variable remuneration but everything the employee receives in money or in kind as direct consideration for the service - primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. EXCLUSION RULE: do NOT include here any value belonging in casillas 38 to 46. SOURCE: salary wage types 62100 Ordinary Salary, 62101 Arrears - Ordinary salary, 62140 Integral Salary (the full integral salary, including the factor prestacional), 62141 Arrears-Integral Salary, 62118 Incentive Compensation - IC Local Country, 62133 Variable, 62208 March Bonus, 62209 Christmas Bonus, 62210 August Bonus, 62225 Salary Attendance Bonus-Monthly, 62228 Years of Service Bonus - CLA, 62113 Weekend payoff and 62841 / 62842 / 62845 overtime and night, Sunday or holiday surcharges. The wage-type attribute 'Salary Payment Indicator' must NOT be used as the casilla-36 rule on its own: it is also set on vacation pay (79401 Annual leave payout, 62116 Vacation Terminations, 62150 Vacation Bonus) and on per diems (62805-62808), which belong to casillas 42 and 43, and on the leave payouts 79405-79419 (marriage, maternity, paternity, sick-leave, bereavement, paid and jury leave payouts); and it is absent from other bonuses (e.g. 62229 Years of Service Bonus NON CLA, 62224 Quarterly Salary Attendance Bonus, 62202 Ocassional Bonus Grossed Up). The engine holds an explicit wage-type-to-casilla table, a configuration parameter supplied at implementation; every earning wage type is assigned. Rule to be set at implementation: the casilla of the leave payouts 79405-79419 and of salary paid abroad to expatriates (25830 Salary paid in Foreign Countries, 65838 Incentive Compensation - IC-1001 Foreign Country). PERIOD: sum the payments made from 1 January to 31 December of the tax year; never a rolling 12-month total.",
+   "proposed": "Total salary payments ACTUALLY MADE in the period to a resident natural person whose income derives from an employment or statutory relationship. The instruction guide (Res. 000022/2024) quotes CST art. 127 in full: salary is not only the ordinary fixed or variable remuneration but everything the employee receives in money or in kind as direct consideration for the service - primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. EXCLUSION RULE: do NOT include here any value belonging in casillas 38 to 46. SOURCE: salary wage types 62100 Ordinary Salary, 62101 Arrears - Ordinary salary, 62140 Integral Salary (the full integral salary, including the factor prestacional), 62141 Arrears-Integral Salary, 62118 Incentive Compensation - IC Local Country, 62133 Variable, 62113 Weekend payoff and 62841 / 62842 / 62845 overtime and night, Sunday or holiday surcharges. BONUSES: HABITUAL bonuses are salary and are certified here - 62208 March Bonus, 62209 Christmas Bonus, 62210 August Bonus, 62225 Salary Attendance Bonus-Monthly, 62224 Quarterly Salary Attendance Bonus and 62228 Years of Service Bonus - CLA; NON-HABITUAL bonuses are certified in casilla 46 - 62202 Ocassional Bonus Grossed Up (instruction guide, Res. 000022/2024). 62229 Years of Service Bonus NON CLA is routed by the habitual / non-habitual flag held on the wage-type-to-casilla table (casilla 36 where habitual, casilla 46 where not). The wage-type attribute 'Salary Payment Indicator' must NOT be used as the casilla-36 rule on its own: it is also set on vacation pay (79401 Annual leave payout, 62116 Vacation Terminations, 62150 Vacation Bonus), which is certified in casilla 42, and on per diems (62805-62808), which are always certified in casilla 43, and on the leave payouts 79405-79419 (marriage, maternity, paternity, sick-leave, bereavement, paid and jury leave payouts); and it is absent from the bonus wage types 62229, 62224 and 62202 listed above. The engine holds an explicit wage-type-to-casilla table, a configuration parameter supplied at implementation; every earning wage type is assigned. Rule to be set at implementation: the casilla of the leave payouts 79405-79419 and of salary paid abroad to expatriates (25830 Salary paid in Foreign Countries, 65838 Incentive Compensation - IC-1001 Foreign Country). PERIOD: sum the payments made from 1 January to 31 December of the tax year; never a rolling 12-month total."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M28",
+   "field_id": "37",
+   "rule": "220-7",
+   "current": "Payments made in electronic or paper service vouchers, cheques, cards or vales - for fuel, school supplies, footwear and clothing, or any other purpose. Deductible for the employer and income for the employee. THREE EXPLICIT NOTES in the instruction guide: (1) INCLUDE meal payments for an employee earning MORE than 310 UVT per month; (2) do NOT include meal payments for an employee earning up to 310 UVT - those go to casilla 38; (3) do NOT include anything already reported in casilla 36. SOURCE: in-kind benefits paid to third parties are booked as informative earning wage types ('Inf.') offset by an equal informative deduction - e.g. 65818 Meal Allowance Inf.-2079 offset by 21115 Meal Allowance Inf. Deduction-2644 - and the same pattern applies to 65811 Gym Allowance Inf.-6969, 65809 / 65839 Optical Allowance Inf, 65812 Text Books Allowance - Inf-6971, 65801 / 65814 / 65815 / 65831 Private Health Insurance Inf and 65817 / 65837 Life Insurance-Inf. The earning side is the certified value; the offsetting deduction wage types are payroll mechanics and are not themselves casilla values. The meal item 65818 is subject to the 41 UVT / 310 UVT test of casillas 37-38. Rule to be set at implementation: the casilla (37, 38, 46 or none) of each of the other in-kind benefit wage types listed above, in the wage-type-to-casilla table.",
+   "proposed": "Payments made in electronic or paper service vouchers, cheques, cards or vales - for fuel, school supplies, footwear and clothing, or any other purpose. Deductible for the employer and income for the employee. THREE EXPLICIT NOTES in the instruction guide: (1) INCLUDE meal payments for an employee earning MORE than 310 UVT per month; (2) do NOT include meal payments for an employee earning up to 310 UVT - those go to casilla 38; (3) do NOT include anything already reported in casilla 36. SOURCE: in-kind benefits paid to third parties are booked as informative earning wage types ('Inf.') offset by an equal informative deduction - e.g. 65818 Meal Allowance Inf.-2079 offset by 21115 Meal Allowance Inf. Deduction-2644 - and the same pattern applies to 65811 Gym Allowance Inf.-6969, 65809 / 65839 Optical Allowance Inf, 65812 Text Books Allowance - Inf-6971, 65801 / 65814 / 65815 / 65831 Private Health Insurance Inf and 65817 / 65837 Life Insurance-Inf. The earning side is the certified value; the offsetting deduction wage types are payroll mechanics and are not themselves casilla values. The meal item 65818 is subject to the 41 UVT / 310 UVT test of casillas 37-38, applied month by month: in a month in which the employee's salary exceeds 310 UVT the whole 65818 amount is certified here; in a month in which it does not, nothing is certified here and the excess over 41 UVT goes to casilla 38 (instruction guide, Res. 000022/2024; ET art. 387-1). Rule to be set at implementation: the casilla (37, 38, 46 or none) of each of the other in-kind benefit wage types listed above, in the wage-type-to-casilla table."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M33",
+   "field_id": "42",
+   "rule": "220-4",
+   "current": "Statutory benefits OTHER THAN severance savings and the interest on them. The instruction guide lists service bonus, vacaciones and work clothing among them, and directs expressly that severance savings paid to the employee go to casilla 47 and severance savings deposited to the fund go elsewhere. RECORDED DEFECT: the instruction guide for THIS casilla says the deposited severance goes to 'la casilla 48', but the form's own printed label makes casilla 48 the TRADITIONAL-REGIME severance and casilla 49 the amount deposited to the fund. The form layout is authoritative.",
+   "proposed": "Statutory benefits OTHER THAN severance savings and the interest on them. The instruction guide (Res. 000022/2024) lists service bonus, vacaciones and work clothing among them, and directs expressly that severance savings paid to the employee go to casilla 47 and severance savings deposited to the fund go elsewhere. VACATION PAY is certified here: wage types 79401 Annual leave payout, 62116 Vacation Terminations and 62150 Vacation Bonus, which carry the 'Salary Payment Indicator' attribute and are nonetheless certified here and not in casilla 36, under the casilla-36 exclusion rule. RECORDED DEFECT: the instruction guide for THIS casilla says the deposited severance goes to 'la casilla 48', but the form's own printed label makes casilla 48 the TRADITIONAL-REGIME severance and casilla 49 the amount deposited to the fund. The form layout is authoritative."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M34",
+   "field_id": "43",
+   "rule": "220-5",
+   "current": "Per diems paid to cover transport, subsistence and accommodation while the employee works away from the habitual place of work. The instruction guide cites Ministry of Labour Concept 23959 of 13 February. Note the split that matters elsewhere: the PERMANENT portion is salary under CST art. 130 and feeds the contribution base, while the accidental portion does not - the electronic payroll carries them as the paired ViaticoManuAlojS / NS elements. SOURCE: wage types 62805 Hotel per diem, 62806 Breakfast per diem, 62807 Lunch per diem and 62808 Dinner per diem. These carry the 'Salary Payment Indicator' attribute; they are nonetheless reported here and not in casilla 36, under the casilla-36 exclusion rule.",
+   "proposed": "Per diems paid to cover transport, subsistence and accommodation while the employee works away from the habitual place of work. Per diems are ALWAYS certified here, whatever their salary character (instruction guide, Res. 000022/2024). The instruction guide cites Ministry of Labour Concept 23959 of 13 February. Note the split that matters elsewhere: the PERMANENT portion is salary under CST art. 130 and feeds the contribution base, while the accidental portion does not - the electronic payroll carries them as the paired ViaticoManuAlojS / NS elements. SOURCE: wage types 62805 Hotel per diem, 62806 Breakfast per diem, 62807 Lunch per diem and 62808 Dinner per diem. These carry the 'Salary Payment Indicator' attribute; they are nonetheless reported here and not in casilla 36, under the casilla-36 exclusion rule."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M37",
+   "field_id": "46",
+   "rule": "220-3",
+   "current": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. The engine holds an explicit wage-type-to-casilla table (a configuration parameter supplied at implementation); no earning wage type may be left unassigned. Rule to be set at implementation: the casilla (36, 42, 46 or not certified) of the earning wage types with no dedicated casilla: 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout. Pension income paid directly by the employer is certified in casilla 50, never here (see casilla 50).",
+   "proposed": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. Certified here (instruction guide, Res. 000022/2024): (a) NON-HABITUAL BONUSES - 62202 Ocassional Bonus Grossed Up; habitual bonuses are salary and go to casilla 36; 62229 Years of Service Bonus NON CLA is routed by the habitual / non-habitual flag of the wage-type-to-casilla table (casilla 36 where habitual, casilla 46 where not). (b) PAYMENTS TO RETIREES THAT ARE NOT A PENSION - 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the pension itself (62154 Monthly Retired  Pension-6798 and 62153 Additional Retirement Pension) is certified in casilla 50, never here (see casilla 50). The engine holds an explicit wage-type-to-casilla table (a configuration parameter supplied at implementation); no earning wage type may be left unassigned. Rule to be set at implementation: the casilla (36, 42, 46 or not certified) of the earning wage types with no dedicated casilla: 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M40",
+   "field_id": "49",
+   "rule": "220-8",
+   "current": "THE THIRD OF THREE SEVERANCE LINES. The amount DEPOSITED to the employee's chosen severance fund by 14 February for the balance at the preceding 31 December, under Ley 50 de 1990 art. 99. The engine must maintain all three buckets - paid to the employee, traditional regime, deposited to the fund - separately from the outset; they cannot be split retrospectively out of a single cesantias figure. SOURCE: wage type 25827 Payment Severance Funds Inf. (mirrored by 65805 with the same amount - take one, not both), paid in February. Rule to be set at implementation: the tax year in which a February deposit (for the balance at the preceding 31 December) is certified. The provision wage types 22110 / 42110 are accruals, not the deposit.",
+   "proposed": "THE THIRD OF THREE SEVERANCE LINES. Severance savings DEPOSITED to the employee's chosen severance fund IN THE TAX YEAR, under Ley 50 de 1990 art. 99. The deposit made by 14 February for the balance at the preceding 31 December belongs to the tax year in which it is deposited, not to the year of accrual: severance income is realised on deposit to the fund (ET art. 27 num. 3; instruction guide, Res. 000022/2024). The certificate for tax year N therefore carries the deposit made by 14 February of year N (balance at 31 December of year N-1); the deposit made by 14 February of year N+1 belongs to the certificate for year N+1. The engine must maintain all three buckets - paid to the employee, traditional regime, deposited to the fund - separately from the outset; they cannot be split retrospectively out of a single cesantias figure. SOURCE: wage type 25827 Payment Severance Funds Inf. (mirrored by 65805 with the same amount - take one, not both), paid in February and certified in the tax year of that payment. The provision wage types 22110 / 42110 are accruals, not the deposit."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M41",
+   "field_id": "50",
+   "rule": "220-3",
+   "current": "Pension income paid BY THE EMPLOYER. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Pensions paid directly by the employer are in scope and are certified here. SOURCE: the pension wage types of the wage-type-to-casilla table: 62154 Monthly Retired  Pension-6798 (the monthly pension), 62153 Additional Retirement Pension (the additional instalments paid in June and December), 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation. Rule to be set at implementation: which of these wage types are pension income for this casilla and which, if any, belong in casilla 46. Pension payees are not in the employee master: their identification (casillas 24-29) comes from the pensioner identity source configured at implementation (see casilla 25). Rule to be set at implementation: to whom the certificate is issued where the pension is paid to a beneficiary other than the pensioner (substitute pensioner or third-party payee). Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54, and the withholding on pension income (21140 Personal Income Tax Withholding-Retirees- 6799) feeds casilla 60.",
+   "proposed": "Pension income paid BY THE EMPLOYER: pensions of jubilacion, vejez or invalidez (instruction guide, Res. 000022/2024). Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Pensions paid directly by the employer are in scope and are certified here. SOURCE: the pension wage types of the wage-type-to-casilla table: 62154 Monthly Retired  Pension-6798 (the monthly pension) and 62153 Additional Retirement Pension (the additional pension instalments paid in June and December). Payments to retirees that are not a pension are certified in casilla 46, never here: 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation (see casilla 46). Pension payees are not in the employee master: their identification (casillas 24-29) comes from the pensioner identity source configured at implementation (see casilla 25). Rule to be set at implementation: to whom the certificate is issued where the pension is paid to a beneficiary other than the pensioner (substitute pensioner or third-party payee). Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54, and the withholding on pension income (21140 Personal Income Tax Withholding-Retirees- 6799) feeds casilla 60."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M52",
+   "field_id": "60",
+   "rule": "220-9",
+   "current": "THE PRINCIPAL WITHHOLDING CASILLA. Total withholding at source practised on this employee's work and pension income during the certified period. Feeds casilla 75 together with casilla 74. Must reconcile to twelve months of electronic payroll NIE177 for this employee, and the sum of casilla 60 across all employees must reconcile to twelve months of Form 350 casilla 93 - allowing for the rounding conventions. SOURCE: the withholding practised is wage type 2552 Income Tax (employee) plus 21129 Personal Income Tax Withholding-Terminations- 541T (a separate deduction on termination payments, which can coexist with 2552 in the same month) and 21140 Personal Income Tax Withholding-Retirees- 6799. Wage types 21330 Personal Income Tax Withholding (Theoretical) and 25834 Hypothetical Witholding Tax  - IC Foreign Country are notional and are NOT certified. Rule to be set at implementation: whether 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax  - IC Local Country are certified here. Only the withholding actually deducted is certified: a comparison result computed without the contribution depuration, and any contingent withholding derived from it, is not part of 2552 and is not certified. Sum January to December of the tax year; never a rolling 12-month total.",
+   "proposed": "THE PRINCIPAL WITHHOLDING CASILLA. Total withholding at source ACTUALLY PRACTISED on this employee's work and pension income during the certified period; no hypothetical, theoretical or contingent amount is certified (instruction guide, Res. 000022/2024). Feeds casilla 75 together with casilla 74. Must reconcile to twelve months of electronic payroll NIE177 for this employee, and the sum of casilla 60 across all employees must reconcile to twelve months of Form 350 casilla 93 - allowing for the rounding conventions. SOURCE: the withholding practised is wage type 2552 Income Tax (employee) plus 21129 Personal Income Tax Withholding-Terminations- 541T (a separate deduction on termination payments, which can coexist with 2552 in the same month) and 21140 Personal Income Tax Withholding-Retirees- 6799. Wage types 21330 Personal Income Tax Withholding (Theoretical) and 25834 Hypothetical Witholding Tax  - IC Foreign Country are notional, not withholding practised, and are NOT certified; the same exclusion applies to every wage type that computes a theoretical, hypothetical or contingent withholding. Rule to be set at implementation: whether 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax  - IC Local Country carry withholding actually practised on this employee's income and are certified here. Only the withholding actually deducted is certified: a comparison result computed without the contribution depuration, and any contingent withholding derived from it, is not part of 2552 and is not certified. Sum January to December of the tax year; never a rolling 12-month total."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "J66",
+   "field_id": "77",
+   "rule": "220-1",
+   "current": "N (whole pesos, nearest 1,000)",
+   "proposed": "N (whole pesos, nearest 1,000; zero where nil)"
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "J67",
+   "field_id": "78",
+   "rule": "220-1",
+   "current": "N (whole pesos, nearest 1,000)",
+   "proposed": "N (whole pesos, nearest 1,000; zero where nil)"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B26",
+   "field_id": "Rounding",
+   "rule": "220-1",
+   "current": "The instruction guide is explicit: values 'deben ser expresados en pesos colombianos y aproximados al multiplo de mil (1.000) mas cercano'. The SAME convention as Form 350, and NOT the electronic payroll convention of two decimals round-half-to-even.",
+   "proposed": "The instruction guide (Res. 000022/2024) is explicit: values 'deben ser expresados en pesos colombianos y aproximados al multiplo de mil (1.000) mas cercano'. The SAME convention as Form 350, and NOT the electronic payroll convention of two decimals round-half-to-even."
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B27",
+   "field_id": "Nil values",
+   "rule": "220-1",
+   "current": "'En el evento en que no haya value a registrar en alguna casilla escriba cero (0)'. Write ZERO, do not leave blank. This differs from the electronic payroll, where an inapplicable element is OMITTED rather than zero-filled.",
+   "proposed": "The instruction guide (Res. 000022/2024) directs: 'En el evento en que no haya value a registrar en alguna casilla escriba cero (0)'. Write ZERO, do not leave blank. This differs from the electronic payroll, where an inapplicable element is OMITTED rather than zero-filled."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C11",
+   "field_id": "Write zero, never blank",
+   "rule": "220-1",
+   "current": "The instruction guide directs: 'En el evento en que no haya value a registrar en alguna casilla escriba cero (0)'. Every money casilla is populated, with zero where there is nothing.",
+   "proposed": "The instruction guide (Res. 000022/2024) directs: 'En el evento en que no haya value a registrar en alguna casilla escriba cero (0)'. Every money casilla is populated, with zero where there is nothing."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C12",
+   "field_id": "Round to the nearest 1,000",
+   "rule": "220-1",
+   "current": "All money casillas are expressed in Colombian pesos and approximated to the nearest 1,000, exactly as on Form 350. Apply the rounding to each casilla value, then check that the printed sums still tie - casilla 52 = sum of 36 to 51, casilla 75 = 60 + 74.",
+   "proposed": "All money casillas are expressed in Colombian pesos and approximated to the nearest 1,000, as the instruction guide (Res. 000022/2024) directs and exactly as on Form 350. Apply the rounding to each casilla value, then check that the printed sums still tie - casilla 52 = sum of 36 to 51, casilla 75 = 60 + 74."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D6",
+   "field_id": "Casilla 36 - Salary payments",
+   "rule": "220-6",
+   "current": "The exclusion rule is the trap. Commissions under an employment contract are salary and stay in casilla 36; commissions outside an employment relationship go to casilla 41. Per diems go to casilla 43 even where the permanent portion is salary for contribution purposes. The certificate's classification and the contribution base's classification are NOT the same.",
+   "proposed": "The exclusion rule is the trap. Commissions under an employment contract are salary and stay in casilla 36; commissions outside an employment relationship go to casilla 41. Habitual bonuses are salary and stay in casilla 36; non-habitual bonuses go to casilla 46. Vacation pay goes to casilla 42. Per diems ALWAYS go to casilla 43, even where the permanent portion is salary for contribution purposes. The certificate's classification and the contribution base's classification are NOT the same."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C7",
+   "field_id": "Casillas 47, 48 and 49",
+   "rule": "220-8",
+   "current": "Maintain THREE separate severance buckets from the outset, not one: (47) amounts and interest ACTUALLY PAID to the employee, (48) amounts RECOGNISED under the pre-1991 traditional CST regime, and (49) amounts DEPOSITED to the fund by 14 February. Casillas 48 and 49 are mutually exclusive for the same employee, because an employee is in one regime or the other.",
+   "proposed": "Maintain THREE separate severance buckets from the outset, not one: (47) amounts and interest ACTUALLY PAID to the employee, (48) amounts RECOGNISED under the pre-1991 traditional CST regime, and (49) amounts DEPOSITED to the fund in the tax year - the deposit made by 14 February is certified in the year of the deposit (ET art. 27 num. 3). Casillas 48 and 49 are mutually exclusive for the same employee, because an employee is in one regime or the other."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C9",
+   "field_id": "Casilla 60 - Valor de la retencion",
+   "rule": "220-9",
+   "current": "Accumulate the retencion en la fuente actually practised on this employee's work and pension income during the certified period. For a RESIDENT this is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Where the employee changed residence status mid-year, sum both.",
+   "proposed": "Accumulate the retencion en la fuente actually practised on this employee's work and pension income during the certified period. For a RESIDENT this is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Where the employee changed residence status mid-year, sum both. Only withholding actually practised is accumulated: theoretical, hypothetical or contingent withholding amounts are excluded (instruction guide, Res. 000022/2024)."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C29",
+   "field_id": "Cross-report reconciliation",
+   "rule": "220-8",
+   "current": "Before issuing, assert per employee: casilla 60 equals twelve months of electronic payroll NIE177; casilla 53 equals twelve months of NIE163 and the employee portion of PILA campo 55; casilla 54 equals twelve months of NIE166 + NIE168 + NIE170 and the employee portions of PILA campos 47, 51 and 52; casilla 49 equals the amount actually deposited under CO-SEVERANCE SAVINGS-006. Across the population, assert that the sum of casilla 60 equals twelve months of Form 350 casilla 93.",
+   "proposed": "Before issuing, assert per employee: casilla 60 equals twelve months of electronic payroll NIE177; casilla 53 equals twelve months of NIE163 and the employee portion of PILA campo 55; casilla 54 equals twelve months of NIE166 + NIE168 + NIE170 and the employee portions of PILA campos 47, 51 and 52; casilla 49 equals the amount actually deposited under CO-SEVERANCE SAVINGS-006 in the tax year. Across the population, assert that the sum of casilla 60 equals twelve months of Form 350 casilla 93."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A42",
+   "field_id": "Related filings - casilla 49",
+   "rule": "220-8",
+   "current": "- Casilla 49 must reconcile to the amount actually deposited under CO-CESANTIAS-006 by 14 February.",
+   "proposed": "- Casilla 49 must reconcile to the amount actually deposited under CO-CESANTIAS-006 by 14 February OF THE TAX YEAR: the February deposit is certified in the year of the deposit (ET art. 27 num. 3)."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C28",
+   "field_id": "Severance savings, split three ways",
+   "rule": "220-8",
+   "current": "Casillas 47 (paid to the employee), 48 (traditional pre-1991 regime) and 49 (deposited to the fund). Three separate buckets that must be maintained year-round.",
+   "proposed": "Casillas 47 (paid to the employee), 48 (traditional pre-1991 regime) and 49 (deposited to the fund in the tax year; the February deposit is certified in the year of the deposit, ET art. 27 num. 3). Three separate buckets that must be maintained year-round."
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D14",
+   "field_id": "49",
+   "rule": "220-8",
+   "current": "The amount DEPOSITED to the employee's chosen fund by 14 February under Law 50 of 1990 art. 99. Format 2276 numeral 19 - NOT 20. Must reconcile to CO-SEVERANCE SAVINGS-006.",
+   "proposed": "The amount DEPOSITED to the employee's chosen fund by 14 February under Law 50 of 1990 art. 99, certified in the tax year of the deposit (ET art. 27 num. 3). Format 2276 numeral 19 - NOT 20. Must reconcile to CO-SEVERANCE SAVINGS-006."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C6",
+   "field_id": "Annual build-up",
+   "rule": "220-8",
+   "current": "Salary 12 x 12,000,000 = 144,000,000. Service bonus 12,000,000 (two instalments). Severance savings for 2026 = 12,000,000, deposited to the fund by 14 February 2027. Interest on the 2025 severance savings balance = 1,440,000, paid in January 2026.",
+   "proposed": "Salary 12 x 12,000,000 = 144,000,000. Service bonus 12,000,000 (two instalments). Severance savings balance at 31 December 2025 = 12,000,000, deposited to the fund by 14 February 2026 and certified in the 2026 certificate, the year of the deposit (ET art. 27 num. 3). Interest on the 2025 severance savings balance = 1,440,000, paid in January 2026. The severance accrued for 2026 is deposited by 14 February 2027 and belongs to the 2027 certificate."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D6",
+   "field_id": "Annual build-up",
+   "rule": "220-8",
+   "current": "The January interest payment falls in the 2026 certificate because Colombia certifies on the PAYMENT date, not the accrual date.",
+   "proposed": "The January interest payment and the February fund deposit both fall in the 2026 certificate because Colombia certifies on the PAYMENT or deposit date, not the accrual date (ET art. 27 num. 3)."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C20",
+   "field_id": "Casilla 49",
+   "rule": "220-8",
+   "current": "One month's salary for the year, deposited by 14 February 2027.",
+   "proposed": "The deposit made by 14 February 2026 for the balance at 31 December 2025, certified in the year of the deposit (ET art. 27 num. 3)."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D20",
+   "field_id": "Casilla 49",
+   "rule": "220-8",
+   "current": "Maps to Format 2276 numeral 19 - NOT numeral 20. The second and third severance lines are TRANSPOSED between the two artefacts; map by meaning, never by position. Must reconcile to CO-SEVERANCE SAVINGS-006.",
+   "proposed": "Maps to Format 2276 numeral 19 - NOT numeral 20. The second and third severance lines are TRANSPOSED between the two artefacts; map by meaning, never by position. Must reconcile to CO-SEVERANCE SAVINGS-006. The deposit made by 14 February 2027 for the 2026 balance belongs to the 2027 certificate."
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "C37",
+   "field_id": "Casilla 49 reconciliation",
+   "rule": "220-8",
+   "current": "Casilla 49 equals the fund deposit.",
+   "proposed": "Casilla 49 equals the fund deposit made in the tax year (by 14 February 2026)."
+  }
+ ],
+ "resolved_rule_to_be_set": [
+  "Formulario 220 Spec!M41 (50): the sentence 'which of these wage types are pension income for this casilla and which belong in casilla 46' is settled - 62154 Monthly Retired Pension and 62153 Additional Retirement Pension (pension instalments) stay in casilla 50; 62151 / 62152 Retirement Payment, 62115 Retirement Allowance, 62830 Pensioner Allowance and 62155 EPS Pensioner Offset Compensation are payments to retirees that are not a pension and go to casilla 46 (rule 220-3).",
+  "Formulario 220 Spec!M37 (46): the placement of the retiree payments is settled (62151, 62152, 62115, 62830, 62155 -> casilla 46) and the non-habitual bonus 62202 Ocassional Bonus Grossed Up -> casilla 46; the habitual bonuses 62224 Quarterly Salary Attendance Bonus and (already there) 62208 / 62209 / 62210 / 62225 / 62228 -> casilla 36 (rules 220-3, 220-6). The 'Rule to be set at implementation' sentence stays only for the allowance / expat / stock / indemnity / leave-payout wage types that no rule covers.",
+  "Formulario 220 Spec!M40 (49): the sentence 'the tax year in which a February deposit is certified' is settled - the deposit is certified in the tax year of the deposit (ET art. 27 num. 3); the Example Analysis (C6, D6, C20, D20, C37), Report Matrix A42, Payroll Scope Summary C28, Field Options D14 and Population Rules C7 / C29 follow the same rule (rule 220-8).",
+  "Formulario 220 Spec!M27 (36): the three bonus wage types without the Salary Payment Indicator are routed - 62224 Quarterly Salary Attendance Bonus -> 36 (habitual), 62202 Ocassional Bonus Grossed Up -> 46 (non-habitual); vacation pay (79401, 62116, 62150) -> 42 and per diems (62805-62808) -> always 43 (rules 220-4, 220-5, 220-6). The 'Rule to be set at implementation' sentence for the leave payouts 79405-79419 and the salary paid abroad (25830, 65838) stays: no rule covers them.",
+  "Formulario 220 Spec!J4 (4): Format N -> AN; DIAN prescribes no format (rule 220-2).",
+  "Formulario 220 Spec!J66 / J67 (77, 78): Format completed with 'zero where nil' so every amount casilla states the same rounding / zero rule (rule 220-1)."
+ ],
+ "still_open": [
+  "Formulario 220 Spec!M48 (56): employer contributions to institutional plans in casilla 56 - the sentence 'whether the institutional-plan wage types 21210 / 21211 Plan Institucional PROTECCION and 25820 / 25821 Plan Institucional PROTECCION - IC Bonus are certified in casilla 56' stays as a configuration point (the brief keeps it open; cell untouched). The related earning wage types 65803 / 65804 Plan Institucional PROTECCION stay in the casilla-46 rule-to-be-set list for the same reason.",
+  "Formulario 220 Spec!M52 (60): whether 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax - IC Local Country carry withholding actually practised - rule 220-9 fixes the test (only withholding actually practised; theoretical / hypothetical / contingent amounts excluded, so 21330 and 25834 are out) but the spec does not evidence whether these three wage types are withholding actually deducted, so the sentence stays with the test written into it.",
+  "Formulario 220 Spec!M27 / M37 (36 / 46): 62229 Years of Service Bonus NON CLA - the habitual / non-habitual character of this bonus is not evidenced in the spec (62228, its CLA counterpart, is already in casilla 36); it is routed by the habitual flag of the wage-type-to-casilla table.",
+  "Formulario 220 Spec!M37 (46): the allowance, expat, stock-award, dismissal-indemnity and leave-payout wage types listed in the cell (62131, 62700, 62590, 62591, 62112, 62811, 62523, 62540, 62310, 62320, 65821, 65800, 62138, 65803, 65804, 62180 / 62181, 62837) - no rule in the brief places them; the 'Rule to be set at implementation' sentence stays.",
+  "Formulario 220 Spec!M27 (36): the leave payouts 79405-79419 and the salary paid abroad to expatriates (25830, 65838) - no rule in the brief; sentence stays.",
+  "Formulario 220 Spec!M28 (37): the in-kind benefit wage types other than meals (65811 gym, 65809 / 65839 optical, 65812 text books, 65801 / 65814 / 65815 / 65831 private health insurance, 65817 / 65837 life insurance) - rule 220-7 settles only the meal item 65818; sentence stays.",
+  "Formulario 220 Spec!M41 (50): to whom the certificate is issued where the pension is paid to a beneficiary other than the pensioner - no rule in the brief; sentence stays.",
+  "Formulario 220 Spec!M13 (24): the code to output for a PEP or PPT holder - rule 220-11 confirms the six codes 12, 13, 21, 22, 31, 41 (already in the Field Options table) and gives no code for PEP / PPT; sentence stays (also referenced from Payroll Scope Summary!C47, Field Options!D10 and Example Analysis!D11)."
+ ],
+ "summary": {
+  "cells": 32,
+  "by_sheet": {
+   "Formulario 220 Spec": 15,
+   "Population Rules": 7,
+   "File Structure": 2,
+   "Report Matrix": 1,
+   "Payroll Scope Summary": 1,
+   "Field Options": 1,
+   "Example Analysis": 5
+  }
+ }
+}

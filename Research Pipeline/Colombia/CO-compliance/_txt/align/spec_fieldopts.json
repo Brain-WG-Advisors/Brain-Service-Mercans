@@ -1,0 +1,2548 @@
+{
+ "CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx": {
+  "CODIGO DEL FONDO DE CESANTIAS (Spec field T09 / XLS column G) - VERBATIM from the published layout; exactly five values are admitted": [
+   [
+    "02",
+    "PROTECCION",
+    "Fondo de Cesantias Proteccion (Proteccion S.A.)",
+    "Private severance-savings fund administered by Proteccion S.A."
+   ],
+   [
+    "03",
+    "PORVENIR",
+    "Porvenir Cesantias (Porvenir S.A.)",
+    "Private severance-savings fund administered by Porvenir S.A., the largest by affiliates."
+   ],
+   [
+    "10",
+    "COLFONDOS",
+    "Colfondos Cesantias (Colfondos S.A. Pensiones y Cesantias)",
+    "Private severance-savings fund administered by Colfondos S.A."
+   ],
+   [
+    "15",
+    "FNA",
+    "Fondo Nacional del Ahorro (FNA)",
+    "The STATE-OWNED fund - an Empresa Industrial y Comercial del Estado. The only public-sector option, and the one whose own employer instructivo would be the single genuinely official schema for this filing; its published URL now 404s after the FNA site redesign."
+   ],
+   [
+    "19",
+    "SKANDIA",
+    "Old Mutual (antes Skandia) - printed label; the entity trades as Skandia",
+    "STALE LABEL, LIVE CODE. The published layout prints 'Old Mutual (Antes Skandia)', but the administrator trades as Skandia again - Skandia Administradora de Fondos de Pensiones y Cesantias S.A., authorised by the Superintendencia Financiera in January 2025 as SKANDIA AFP-ACCAI S.A. under Ley 2381 de 2024. Send the CODE 19, never the name. Colombian press coverage of the 2026 deadline lists the five funds as FNA, Colfondos, Porvenir, Proteccion and Skandia, which corroborates the code table one-for-one."
+   ],
+   [
+    "-",
+    "-",
+    "Any other value",
+    "REJECTED. The layout states the codes are 'validado contra el listado de Fondos de Cesantias registrados en el sistema. Solo son validos' the five above."
+   ]
+  ],
+  "TIPO DE DOCUMENTO (Spec field T03 / XLS column A) - VERBATIM; note the TXT and XLS lists differ": [
+   [
+    "CC",
+    "CC",
+    "Cedula de ciudadania",
+    "Colombian national identity card. In both layouts."
+   ],
+   [
+    "CE",
+    "CE",
+    "Cedula de extranjeria",
+    "Foreign resident identity card. In both layouts."
+   ],
+   [
+    "TI",
+    "TI",
+    "Tarjeta de identidad",
+    "Minor's identity card. In both layouts. Converts to CC on majority - a change of the T03+T04 join key that must reach the fund."
+   ],
+   [
+    "PA",
+    "PA",
+    "Pasaporte",
+    "Passport. In both layouts."
+   ],
+   [
+    "CD",
+    "CD",
+    "Carnet diplomatico",
+    "Diplomatic card. In both layouts."
+   ],
+   [
+    "SC",
+    "SC",
+    "Salvoconducto de permanencia",
+    "Safe-conduct of stay. In both layouts."
+   ],
+   [
+    "PE",
+    "PE",
+    "Permiso especial de permanencia (PEP)",
+    "In both layouts. SOI records a hard length rule: where the document is a PEP the NUMBER must be EXACTLY 15 digits."
+   ],
+   [
+    "PT",
+    "PT",
+    "Permiso temporal (PPT - Permiso por Proteccion Temporal)",
+    "PRINTED IN THE XLS LIST ONLY. The fixed-width document-type list in the same manual stops at PE. Where the workforce includes PPT holders (a large Venezuelan-migrant population), prefer the XLS route or confirm PT with the operator before generating fixed-width files."
+   ],
+   [
+    "-",
+    "-",
+    "Cross-reference warning",
+    "THESE ARE NOT THE CODES USED ELSEWHERE. Formulario 220, Formato 2276 and the nomina electronica use DIAN NUMERIC document-type codes (13 = cedula de ciudadania, and so on) and PILA Registro Tipo 2 campo 3 uses a different admitted list. One document type in master data, three mappers out."
+   ]
+  ],
+  "SERVICIO PCSS (Spec field E02) - the service selected in the operator portal": [
+   [
+    "CESANTIAS",
+    "CES",
+    "Cesantias",
+    "This filing. A Pago Complementario a la Seguridad Social."
+   ],
+   [
+    "PENSIONES VOLUNTARIAS",
+    "PVOL",
+    "Pensiones voluntarias",
+    "The other PCSS service the same portals offer. NOT this filing and not a statutory employer obligation."
+   ],
+   [
+    "PILA",
+    "PILA",
+    "Planilla Integrada de Liquidacion de Aportes",
+    "A DIFFERENT service in the same portal, with the same login. Monthly, not annual. See CO-PILA-003. Building a PILA planilla and expecting the cesantias to be inside it is the most common channel error."
+   ]
+  ],
+  "TIPO DE AFILIACION DE LA PLANILLA (Spec field E04) - VERBATIM from the SOI instructivo": [
+   [
+    "DEPENDIENTE",
+    "DEP",
+    "Dependiente",
+    "'Pago de aportes derivados de contrato por nomina'. THE VALUE FOR THIS FILING - always."
+   ],
+   [
+    "AGREMIADO",
+    "AGR",
+    "Agremiado",
+    "'Pago de aportes de independientes asociados o agremiados'. Not an employer filing."
+   ],
+   [
+    "INDEPENDIENTE",
+    "IND",
+    "Independiente",
+    "'Aportes realizados por parte de una persona natural para si misma'. Not an employer filing; and note that independent workers have no cesantias entitlement at all - cesantias is a prestacion social of an employment contract."
+   ]
+  ],
+  "MEDIO DE PAGO (Spec field E05) - changes the CARDINALITY of the return": [
+   [
+    "PSE",
+    "PSE",
+    "Pago por PSE (Proveedor de Servicios Electronicos)",
+    "Electronic bank payment. ONE planilla number for the whole settlement."
+   ],
+   [
+    "PAGO CREDITO",
+    "CRE",
+    "Pago credito",
+    "ONE PLANILLA NUMBER PER ADMINISTRADORA contained in the settlement (SOI instructivo, footnote 6). The reconciliation store must therefore be one-to-many. See E05 and E10."
+   ]
+  ],
+  "RESPUESTA A LA VALIDACION ASOFONDOS (Spec field E09)": [
+   [
+    "SI",
+    "SI",
+    "Si - ajustar automaticamente",
+    "The system replaces the employer's names with the values from the Asofondos affiliate base. Convenient and wrong: it hides a master-data defect that will recur every year and that is also wrong on Formulario 220 and Formato 2276."
+   ],
+   [
+    "NO",
+    "NO",
+    "No - mantener la informacion reportada",
+    "Keeps the employer's values. THE CORRECT ANSWER, followed by an investigation of each difference at source."
+   ]
+  ],
+  "ESTADO DE CUMPLIMIENTO DE LA CONSIGNACION (Spec field E91) - Mercans-derived, not a channel code": [
+   [
+    "ON TIME",
+    "OK",
+    "Consignado en plazo",
+    "Payment date (E90) at or before the deadline. No exposure."
+   ],
+   [
+    "LATE",
+    "MORA",
+    "Consignado en mora",
+    "One day's salary per day of delay, per employee, UNCAPPED - Ley 50 de 1990 art. 99 num. 3. Store the day count. The draft decree fixes the first day of mora as 15 February."
+   ],
+   [
+    "SHORT",
+    "CORTO",
+    "Consignado por menor valor",
+    "The deposit was made in time but for less than the statutory liquidation - typically because the auxilio de transporte was omitted from the base (see T14). Treated as non-deposit of the shortfall."
+   ],
+   [
+    "DISCHARGED",
+    "PAGO DIRECTO",
+    "Liberado por pago directo al trabajador",
+    "CST art. 57 par. 4, added by Ley 2466 de 2025 art. 15. No planilla record and no penalty, but the evidence must be fehaciente, the discharge is rebuttable on the freedom-and-purpose test, and fund affiliation remains compulsory."
+   ],
+   [
+    "N/A",
+    "NA",
+    "No aplica",
+    "Salario integral, leaver settled in the final settlement, pre-1991 retrospective regime, or a residue below one day of the SMMLV. See the Payroll Scope Summary."
+   ]
+  ],
+  "CODIGOS DANE (Spec fields T16 and T17) - reference only; the full divipola list is master data": [
+   [
+    "11 / 001",
+    "BOG",
+    "Bogota, D.C.",
+    "Department 11, municipality 001 - divipola 11001. The example used on Sheets 8 and 9."
+   ],
+   [
+    "05 / 001",
+    "MED",
+    "Medellin (Antioquia)",
+    "Department 05, municipality 001 - divipola 05001."
+   ],
+   [
+    "76 / 001",
+    "CAL",
+    "Cali (Valle del Cauca)",
+    "Department 76, municipality 001 - divipola 76001."
+   ],
+   [
+    "08 / 001",
+    "BAQ",
+    "Barranquilla (Atlantico)",
+    "Department 08, municipality 001 - divipola 08001."
+   ],
+   [
+    "-",
+    "-",
+    "Composite rule",
+    "T16 is the two-digit DEPARTMENT prefix and T17 the three-digit MUNICIPALITY suffix of ONE five-digit divipola code. Writing the full 11001 into the three-position T17 truncates to 110 and relocates the affiliate."
+   ]
+  ],
+  "FISCAL PARAMETERS THAT DRIVE THIS FILING - accrual year 2026": [
+   [
+    "1750905",
+    "SMMLV",
+    "Salario minimo mensual legal vigente 2026",
+    "Decreto 1469 de 2025. Sets the minimum-recaudo validation (one day = COP 58,363.50) and, for a minimum-wage employee, the salary half of the base."
+   ],
+   [
+    "249095",
+    "AUX TTE",
+    "Auxilio de transporte 2026",
+    "Decreto 1469 de 2025. PART OF THE CESANTIAS BASE under CST art. 253, payable where the salary does not exceed 2 SMMLV (COP 3,501,810). The operator's calculator omits it - see T14."
+   ],
+   [
+    "2000000",
+    "BASE MIN",
+    "Base de liquidacion de un trabajador de salario minimo 2026",
+    "1,750,905 + 249,095 = exactly COP 2,000,000. A full year at 360 days therefore liquidates to COP 2,000,000, against COP 1,750,905 if the transport allowance is wrongly excluded - a shortfall of COP 249,095 per employee."
+   ],
+   [
+    "52374",
+    "UVT",
+    "Unidad de Valor Tributario 2026",
+    "Res. DIAN 000238 of 15 Dec 2025. Not used in this file, but it fixes the ET art. 206 num. 4 exemption bands (350 UVT = COP 18,330,900) that apply when the money is PAID and reported on Formulario 220 and Formato 2276."
+   ],
+   [
+    "360",
+    "ANO COMERCIAL",
+    "Ano comercial de 360 dias",
+    "The divisor in both the statutory formula and the layout's own calculator. Not 365."
+   ]
+  ]
+ },
+ "CO-DIAN-001-NominaElectronica-Spec.xlsx": {
+  "AMBIENTE - destination environment (Anexo table 5.1.1, NIE023)": [
+   [
+    "1",
+    "Produccion",
+    "Produccion",
+    "Production. Documents have legal effect."
+   ],
+   [
+    "2",
+    "Pruebas",
+    "Pruebas / Habilitacion",
+    "Test. Used for the DIAN enablement process. Because Ambiente is an input to the CUNE, a test document can never be replayed into production."
+   ]
+  ],
+  "ALGORITMO CUNE (Anexo table 5.1.2, NIE025)": [
+   [
+    "CUNE-SHA384",
+    "SHA-384",
+    "CUNE-SHA384",
+    "The only permitted value. Declares that the CUNE in NIE024 is a SHA-384 digest."
+   ]
+  ],
+  "VERSION LITERAL (NIE022) - a constant, not a code table": [
+   [
+    "(literal)",
+    "V1.0",
+    "V1.0: Documento Soporte de Pago de Nomina Electronica",
+    "Must be emitted character for character, accents included. Validation rule NIE022 rejects any variation, including a trimmed or unaccented form."
+   ]
+  ],
+  "TIPO DE DOCUMENTO DE IDENTIFICACION (Anexo table 5.2.1, NIE044)": [
+   [
+    "11",
+    "RC",
+    "Registro civil",
+    "Civil birth registration. Used for minors."
+   ],
+   [
+    "12",
+    "TI",
+    "Tarjeta de identidad",
+    "Identity card for a person aged 7 to 17."
+   ],
+   [
+    "13",
+    "CC",
+    "Cedula de ciudadania",
+    "National identity card. The overwhelming majority of Colombian employees."
+   ],
+   [
+    "21",
+    "TE",
+    "Tarjeta de extranjeria",
+    "Foreigner's identity card."
+   ],
+   [
+    "22",
+    "CE",
+    "Cedula de extranjeria",
+    "Foreign resident's identity card."
+   ],
+   [
+    "31",
+    "NIT",
+    "NIT",
+    "Tax identification number. Used where the beneficiary is an entity."
+   ],
+   [
+    "41",
+    "PA",
+    "Pasaporte",
+    "Passport. See CO-GAP-07: an alphanumeric passport number cannot satisfy the xsd:integer typing of NIE045."
+   ],
+   [
+    "42",
+    "DIE",
+    "Documento de identificacion extranjero",
+    "Foreign identity document."
+   ],
+   [
+    "47",
+    "PEP",
+    "PEP - Permiso Especial de Permanencia",
+    "Special residence permit. CO-GAP-06: there is NO code for the PPT (Permiso por Proteccion Temporal, Decreto 216 de 2021, created one month after this annex), which the large majority of regularised Venezuelan migrants now hold. Code 47 is the only available proxy."
+   ],
+   [
+    "50",
+    "NIT-EXT",
+    "NIT de otro pais",
+    "Foreign tax identification number."
+   ],
+   [
+    "91",
+    "NUIP",
+    "NUIP",
+    "Unique personal identification number. The annex restricts this code to the EMPLOYEE, because it is not a RUT document type."
+   ]
+  ],
+  "PERIODO DE NOMINA (Anexo table 5.5.1, NIE029)": [
+   [
+    "1",
+    "SEM",
+    "Semanal",
+    "Weekly."
+   ],
+   [
+    "2",
+    "DEC",
+    "Decenal",
+    "Every ten days."
+   ],
+   [
+    "3",
+    "CAT",
+    "Catorcenal",
+    "Every fourteen days."
+   ],
+   [
+    "4",
+    "QUI",
+    "Quincenal",
+    "Semi-monthly - the most common Colombian cycle. Still ONE monthly document, carrying two FechaPago occurrences."
+   ],
+   [
+    "5",
+    "MEN",
+    "Mensual",
+    "Monthly."
+   ],
+   [
+    "6",
+    "OTR",
+    "Otro",
+    "Any other cycle."
+   ]
+  ],
+  "TIPO DE CONTRATO (Anexo table 5.5.2, NIE061)": [
+   [
+    "1",
+    "FIJO",
+    "Termino Fijo",
+    "Fixed-term contract. CST art. 46; maximum four years after Ley 2466 de 2025 art. 6."
+   ],
+   [
+    "2",
+    "INDEF",
+    "Termino Indefinido",
+    "Indefinite-term contract. CST art. 47."
+   ],
+   [
+    "3",
+    "OBRA",
+    "Obra o Labor",
+    "Contract for a specific work or task. CST art. 46."
+   ],
+   [
+    "4",
+    "APREN",
+    "Aprendizaje",
+    "Apprenticeship. Ley 2466 de 2025 art. 21 recast this as a special fixed-term LABOUR contract, regulated by Decreto 0223 of 5 March 2026."
+   ],
+   [
+    "5",
+    "PRACT",
+    "Practicas o Pasantias",
+    "Internship or practical placement."
+   ]
+  ],
+  "TIPO DE TRABAJADOR (Anexo table 5.5.3, NIE041) - 16 values only": [
+   [
+    "01",
+    "DEP",
+    "Dependiente",
+    "Standard employee. The default for corporate payroll."
+   ],
+   [
+    "02",
+    "DOM",
+    "Servicio domestico",
+    "Domestic service worker."
+   ],
+   [
+    "04",
+    "MAD",
+    "Madre comunitaria",
+    "Community mother."
+   ],
+   [
+    "12",
+    "APR-L",
+    "Aprendices del Sena en etapa lectiva",
+    "SENA apprentice, classroom phase."
+   ],
+   [
+    "18",
+    "FUN",
+    "Funcionarios publicos sin tope maximo de ibc",
+    "Public official with no contribution-base ceiling."
+   ],
+   [
+    "19",
+    "APR-P",
+    "Aprendices del SENA en etapa productiva",
+    "SENA apprentice, productive phase."
+   ],
+   [
+    "21",
+    "EST-P",
+    "Estudiantes de postgrado en salud",
+    "Health postgraduate student."
+   ],
+   [
+    "22",
+    "PROF",
+    "Profesor de establecimiento particular",
+    "Teacher at a private establishment."
+   ],
+   [
+    "23",
+    "EST-RL",
+    "Estudiantes aportes solo riesgos laborales",
+    "Student contributing to occupational risk only."
+   ],
+   [
+    "30",
+    "DEP-ESP",
+    "Dependiente entidades o universidades publicas con regimen especial en salud",
+    "Employee of a public entity or university under a special health regime."
+   ],
+   [
+    "31",
+    "COOP",
+    "Cooperados o pre cooperativas de trabajo asociado",
+    "Associated-work cooperative member. The only worker type for which the Compensacion elements (NIE149 / NIE150) apply."
+   ],
+   [
+    "47",
+    "SGP",
+    "Trabajador dependiente de entidad beneficiaria del sistema general de participaciones - aportes patronales",
+    "Employee of an SGP-beneficiary entity. Public sector; PILA planilla types T and F are descoped in scope_manifest."
+   ],
+   [
+    "51",
+    "PARC",
+    "Trabajador de tiempo parcial",
+    "Part-time worker under the special partial-time contribution regime."
+   ],
+   [
+    "54",
+    "PREP",
+    "Pre pensionado de entidad en liquidacion",
+    "Pre-pensioner of an entity in liquidation."
+   ],
+   [
+    "56",
+    "PREP-V",
+    "Pre pensionado con aporte voluntario a salud",
+    "Pre-pensioner with a voluntary health contribution."
+   ],
+   [
+    "58",
+    "EST-PUB",
+    "Estudiantes de practicas laborales en el sector publico",
+    "Student on a public-sector work placement."
+   ],
+   [
+    "(mapping warning)",
+    "-",
+    "-",
+    "This 16-value list is a SUBSET of the PILA tipo cotizante list, which carries far more values (03, 16, 20, 32 to 45, 52, 53, 55, 57, 59 to 63). The engine must MAP between the two, never copy: a PILA code with no DIAN equivalent is not valid here."
+   ]
+  ],
+  "SUBTIPO DE TRABAJADOR (Anexo table 5.5.4, NIE042) - only 2 values": [
+   [
+    "00",
+    "NA",
+    "No Aplica",
+    "Does not apply. The value for almost every employee."
+   ],
+   [
+    "01",
+    "PEN",
+    "Dependiente pensionado por vejez activo",
+    "Employed old-age pensioner in active service. Pension contribution is nil, so NIE164 (pension rate) must be 0.00."
+   ],
+   [
+    "(mapping warning)",
+    "-",
+    "-",
+    "The PILA subtipo cotizante list carries twelve values (00 to 06, 09 to 12). Only 00 and 01 exist here."
+   ]
+  ],
+  "TIPO DE HORA EXTRA O RECARGO (Anexo table 5.5.5, @Porcentaje on the 7 hour blocks)": [
+   [
+    "1",
+    "HED",
+    "Hora Extra Diurna",
+    "Day overtime. Annex percentage 25.00. CST art. 168."
+   ],
+   [
+    "2",
+    "HEN",
+    "Hora Extra Nocturna",
+    "Night overtime. Annex percentage 75.00."
+   ],
+   [
+    "3",
+    "HRN",
+    "Hora Recargo Nocturno",
+    "Night-work surcharge. Annex percentage 35.00. The night window is 21:00 to 06:00 following Ley 2101 de 2021."
+   ],
+   [
+    "4",
+    "HEDDF",
+    "Hora Extra Diurna Dominical y Festivos",
+    "Sunday / holiday day overtime. Annex percentage 100.00."
+   ],
+   [
+    "5",
+    "HRDDF",
+    "Hora Recargo Diurno Dominical y Festivos",
+    "Sunday / holiday day surcharge. Annex percentage 75.00."
+   ],
+   [
+    "6",
+    "HENDF",
+    "Hora Extra Nocturna Dominical y Festivos",
+    "Sunday / holiday night overtime. Annex percentage 150.00."
+   ],
+   [
+    "7",
+    "HRNDF",
+    "Hora Recargo Nocturno Dominical y Festivos",
+    "Sunday / holiday night surcharge. Annex percentage 110.00."
+   ],
+   [
+    "(source conflict)",
+    "-",
+    "-",
+    "ESCALATE. The annex percentages for codes 4, 5, 6 and 7 embed a 75% Sunday / public-holiday surcharge. Ley 2101 de 2021 and Ley 2466 de 2025 raise that surcharge to 80% from 1 July 2025 and to 90% from 1 JULY 2026, so from that date the statutory rate diverges from the printed annex value. The annex is still at version 1.0 and DIAN has not reissued table 5.5.5. A written DIAN position is required on whether @Porcentaje must carry the annex value or the statutory value."
+   ]
+  ],
+  "TIPO DE INCAPACIDAD (Anexo table 5.5.6, NIE126)": [
+   [
+    "1",
+    "COM",
+    "Comun",
+    "General illness. The employer bears days 1-2 (Decreto 780 de 2016 art. 3.2.1.10); the EPS funds from day 3. CO-GAP-03: the first-two-days rate is a Mercans configurable default of 66.67%."
+   ],
+   [
+    "2",
+    "PROF",
+    "Profesional",
+    "Occupational disease. Funded by the ARL from day one at 100%."
+   ],
+   [
+    "3",
+    "LAB",
+    "Laboral",
+    "Occupational accident. Funded by the ARL from day one at 100%."
+   ]
+  ],
+  "TIPO DE XML (Anexo table 5.5.7, NIE202 / NIAE202)": [
+   [
+    "102",
+    "NI",
+    "NominaIndividual",
+    "Documento Soporte de Pago de Nomina Electronica - the payroll support document itself."
+   ],
+   [
+    "103",
+    "NIA",
+    "NominaIndividualDeAjuste",
+    "Nota de Ajuste - the adjustment note."
+   ]
+  ],
+  "TIPO DE NOTA DE AJUSTE (Anexo table 5.5.8, NIAE214)": [
+   [
+    "1",
+    "REEMP",
+    "Reemplazar",
+    "Replace. Used for arithmetic, accounting or content errors. The Reemplazar block repeats the entire document with corrected values and carries its own CUNE."
+   ],
+   [
+    "2",
+    "ELIM",
+    "Eliminar",
+    "Cancel. Used where a document was transmitted in error. The annex warns expressly that this only INVALIDATES the erroneous document; a corrected document must follow. Its CUNE is computed with ValDev, ValDed and ValTol forced to 0.00 and DocEmp to 0."
+   ]
+  ],
+  "FORMA DE PAGO (Anexo table 5.3.3.1, NIE064)": [
+   [
+    "1",
+    "CONT",
+    "Contado",
+    "Cash / immediate settlement. The annex publishes this single value."
+   ]
+  ],
+  "MEDIO DE PAGO (Anexo table 5.3.3.2, NIE065) - realistic payroll subset of the 1-97 list": [
+   [
+    "10",
+    "EFEC",
+    "Efectivo",
+    "Cash. Where used, the Banco, TipoCuenta and NumeroCuenta attributes (NIE066-NIE068) must be absent."
+   ],
+   [
+    "20",
+    "CHEQ",
+    "Cheque",
+    "Cheque."
+   ],
+   [
+    "42",
+    "CONS",
+    "Consignacion bancaria",
+    "Bank deposit. The most common Colombian payroll method."
+   ],
+   [
+    "45",
+    "TCB",
+    "Transferencia Credito Bancario",
+    "Bank credit transfer."
+   ],
+   [
+    "47",
+    "TDB",
+    "Transferencia Debito Bancaria",
+    "Bank debit transfer."
+   ],
+   [
+    "48",
+    "TCRE",
+    "Tarjeta Credito",
+    "Credit card."
+   ],
+   [
+    "49",
+    "TDEB",
+    "Tarjeta Debito",
+    "Debit card."
+   ],
+   [
+    "71",
+    "BON",
+    "Bonos",
+    "Vouchers. Where salary is paid in vouchers the amount also belongs in the BonoEPCTV devengado elements (NIE151-NIE154)."
+   ],
+   [
+    "72",
+    "VAL",
+    "Vales",
+    "Vales / meal tickets."
+   ],
+   [
+    "(full list)",
+    "-",
+    "-",
+    "The complete UN/EDIFACT 4461 medium-of-payment catalogue, codes 1 to 97, is printed at Anexo table 5.3.3.2. Only the subset above is realistic for Colombian payroll."
+   ]
+  ],
+  "IDIOMA (Anexo table 5.3.1, NIE016) and MONEDA (table 5.3.2, NIE030)": [
+   [
+    "es",
+    "ES",
+    "Espanol",
+    "ISO 639-1. Spanish is MANDATORY on the graphical representation (Res. 000013 de 2021 art. 26); another language may be added, never substituted."
+   ],
+   [
+    "COP",
+    "COP",
+    "Peso colombiano",
+    "ISO 4217. The Colombian peso is MANDATORY (art. 26). The TRM element (NIE200) exists for foreign-currency documents but is out of scope for Colombian payroll."
+   ]
+  ],
+  "GEOGRAPHIC CODES (Anexo tables 5.4.1 to 5.4.3)": [
+   [
+    "CO",
+    "CO",
+    "Colombia",
+    "ISO 3166-1 alpha-2, table 5.4.1."
+   ],
+   [
+    "11",
+    "BOG",
+    "Bogota D.C.",
+    "DANE DIVIPOLA department code, table 5.4.2 (ISO 3166-2:CO)."
+   ],
+   [
+    "11001",
+    "BOG",
+    "Bogota D.C.",
+    "DANE DIVIPOLA municipality code, table 5.4.3. Positions 1-2 are the department, positions 3-5 the municipality. The annex prints the full national catalogue at pages 144-178."
+   ]
+  ],
+  "CONTRIBUTION RATES 2026 (context for the Deducciones rate attributes)": [
+   [
+    "4.00",
+    "Salud EE",
+    "Salud - aporte del trabajador",
+    "Employee health rate for NIE161. The employer's 8.5% is not an employee deduction."
+   ],
+   [
+    "4.00",
+    "Pension EE",
+    "Pension - aporte del trabajador",
+    "Employee pension rate for NIE164. Employer 12%; total 16%. Set to 0.00 for an employed old-age pensioner (SubTipoTrabajador 01)."
+   ],
+   [
+    "1.00",
+    "FSP solidaridad",
+    "Fondo de solidaridad pensional - subcuenta de solidaridad",
+    "NIE167. Trigger: contribution base at or above 4 SMMLV = COP 7,003,620 in 2026."
+   ],
+   [
+    "0.20 - 1.00",
+    "FSP subsistencia",
+    "Fondo de solidaridad pensional - subcuenta de subsistencia",
+    "NIE169. Banded, from 16 SMMLV = COP 28,014,480. See the band table below."
+   ]
+  ],
+  "SOLIDARITY PENSION FUND BANDS (Ley 100 art. 20 as substituted by Ley 797 de 2003 art. 7)": [
+   [
+    "4 to 16 SMMLV",
+    "1.0% / 0%",
+    "Solo subcuenta de solidaridad",
+    "COP 7,003,620 to 28,014,480. Solidarity 1.0%; subsistence nil. Total 1.0%."
+   ],
+   [
+    "16 to 17 SMMLV",
+    "1.0% / 0.2%",
+    "Solidaridad + subsistencia",
+    "COP 28,014,480 to 29,765,385. Total 1.2%."
+   ],
+   [
+    "17 to 18 SMMLV",
+    "1.0% / 0.4%",
+    "Solidaridad + subsistencia",
+    "Total 1.4%."
+   ],
+   [
+    "18 to 19 SMMLV",
+    "1.0% / 0.6%",
+    "Solidaridad + subsistencia",
+    "Total 1.6%."
+   ],
+   [
+    "19 to 20 SMMLV",
+    "1.0% / 0.8%",
+    "Solidaridad + subsistencia",
+    "Total 1.8%."
+   ],
+   [
+    "above 20 SMMLV",
+    "1.0% / 1.0%",
+    "Solidaridad + subsistencia",
+    "Total 2.0%, up to the 25-SMMLV contribution ceiling of COP 43,772,625."
+   ],
+   [
+    "(pension reform)",
+    "-",
+    "Ley 2381 de 2024",
+    "Ley 2381 de 2024 would REPLACE this two-account structure with a single five-band scale (1.5 / 1.8 / 2.5 / 2.8 / 3.0%). Its entry into force was SUSPENDED by Constitutional Court Auto 841 of 18 June 2025 pending a re-run of the fourth plenary debate. Until that is cured the table above remains in force. Monitor."
+   ]
+  ],
+  "CESANTIAS INTEREST RATE (NIE121)": [
+   [
+    "12.00",
+    "12%",
+    "Intereses sobre cesantias",
+    "12% per annum on the 31 December balance, or pro rata for a partial year (Ley 52 de 1975 art. 1). Paid TO THE EMPLOYEE during January. Ley 2466 de 2025 art. 64 permits monthly payment of the 1% by written agreement."
+   ]
+  ],
+  "VALIDATION OUTCOME (inbound ApplicationResponse, INB-03)": [
+   [
+    "Aceptado",
+    "OK",
+    "Documento validado",
+    "Accepted. Store the CUNE and the validation timestamp; the payroll cost is now supported for income-tax purposes."
+   ],
+   [
+    "Rechazado",
+    "KO",
+    "Documento rechazado",
+    "Rejected. Store the rule codes from INB-04, correct and re-transmit with a NEW consecutive number - rule 90 forbids reuse."
+   ],
+   [
+    "(rule NIE022)",
+    "-",
+    "Version literal incorrecta",
+    "The Version element does not carry the exact required literal."
+   ],
+   [
+    "(rule 90)",
+    "-",
+    "Numero de documento repetido",
+    "That document number has already been transmitted for that employee."
+   ],
+   [
+    "(rule 92)",
+    "-",
+    "Emisor no habilitado",
+    "The issuer is not enabled in the DIAN payroll platform. This is an enablement failure, not a data failure."
+   ]
+  ]
+ },
+ "CO-DIAN-002-Formulario350-Spec.xlsx": {
+  "PERIODO (casilla 3)": [
+   [
+    "01",
+    "ENE",
+    "Enero",
+    "January. The return is always monthly for a withholding agent."
+   ],
+   [
+    "02",
+    "FEB",
+    "Febrero",
+    "February."
+   ],
+   [
+    "03",
+    "MAR",
+    "Marzo",
+    "March - the period used in the worked example."
+   ],
+   [
+    "04 - 12",
+    "ABR - DIC",
+    "Abril a Diciembre",
+    "The remaining months."
+   ]
+  ],
+  "CODIGO DE CORRECCION (casilla 25)": [
+   [
+    "1",
+    "PRIV",
+    "Correccion a la declaracion privada",
+    "The taxpayer corrects its own return."
+   ],
+   [
+    "2",
+    "962",
+    "Correccion a la correccion generada por la DIAN",
+    "Correction of a DIAN-generated correction under Ley 962 de 2005 art. 43."
+   ],
+   [
+    "3",
+    "ACTO",
+    "Correccion provocada por acto administrativo",
+    "Correction prompted by an administrative act."
+   ]
+  ],
+  "TIPO DE PERSONA - hoja 2 (casilla 143), NEW in the 2024 form": [
+   [
+    "PJ",
+    "PJ",
+    "Persona juridica",
+    "Foreign entity without a Colombian domicile. Rolls into casillas 148 / 150 / 152 / 154."
+   ],
+   [
+    "PN",
+    "PN",
+    "Persona natural",
+    "Non-resident natural person, including a NON-RESIDENT EMPLOYEE. Rolls into casillas 149 / 151 / 153 / 155."
+   ]
+  ],
+  "TRATAMIENTO DE CONVENIO - hoja 2 (casilla 141)": [
+   [
+    "SIN CONVENIO",
+    "SC",
+    "Paises sin convenio",
+    "No double-tax treaty in force. Concepto de pago list 1 to 18. Rates from ET arts. 408-415."
+   ],
+   [
+    "CON CONVENIO",
+    "CC",
+    "Paises con convenio vigente",
+    "A double-tax treaty is in force. Concepto de pago list 19 to 33. The rate must be taken from the applicable treaty."
+   ]
+  ],
+  "CONCEPTO DE PAGO - hoja 2, SIN CONVENIO (casilla 142, codes 1-18)": [
+   [
+    "1",
+    "INT",
+    "Intereses",
+    "Interest on credits of any nature."
+   ],
+   [
+    "2",
+    "DIV",
+    "Dividendos y participaciones",
+    "Dividends, ET art. 407."
+   ],
+   [
+    "3",
+    "RF-1A",
+    "Rendimientos financieros - creditos exterior >= 1 ano",
+    "Financial yields on foreign credits of one year or more, and leasing finance costs. 15%."
+   ],
+   [
+    "4",
+    "REG",
+    "Regalias y explotacion de intangibles",
+    "Royalties, industrial and intellectual property, films, software, know-how."
+   ],
+   [
+    "5",
+    "SERV-PER",
+    "Prestaciones de servicios y compensacion por servicios personales",
+    "THE NON-RESIDENT EMPLOYEE CONCEPT for a country with NO treaty. Remuneration of services in favour of non-resident natural persons and foreign entities. Rate 20% under ET art. 408."
+   ],
+   [
+    "6",
+    "SERV-TEC",
+    "Servicios tecnicos, de asistencia tecnica y consultoria",
+    "Technical services, technical assistance and consultancy, including from abroad."
+   ],
+   [
+    "7",
+    "COM",
+    "Comisiones",
+    "Commissions."
+   ],
+   [
+    "8",
+    "HON",
+    "Honorarios",
+    "Professional fees."
+   ],
+   [
+    "9",
+    "ARR",
+    "Arrendamientos",
+    "Rental of movable and immovable property."
+   ],
+   [
+    "10",
+    "LEAS",
+    "Contratos de leasing sobre naves, helicopteros y/o aerodinos",
+    "1%."
+   ],
+   [
+    "11",
+    "REAS",
+    "Prima cedida por reaseguros",
+    "1%."
+   ],
+   [
+    "12",
+    "RF-8A",
+    "Rendimientos financieros - creditos APP >= 8 anos",
+    "5%, APP infrastructure."
+   ],
+   [
+    "13",
+    "CASA",
+    "Administracion o direccion a la casa matriz",
+    "33%, ET art. 124."
+   ],
+   [
+    "14",
+    "TRANS",
+    "Servicios de transporte internacional",
+    "5%."
+   ],
+   [
+    "15",
+    "PES",
+    "Venta y/o servicios por Presencia Economica Significativa - PES",
+    "ET art. 20-3."
+   ],
+   [
+    "16",
+    "JNC",
+    "Jurisdicciones no cooperantes o de baja o nula imposicion",
+    "General corporate income-tax rate."
+   ],
+   [
+    "17",
+    "PROF-EXT",
+    "Pagos a profesores extranjeros",
+    "7%, foreign professors on ICFES-approved contracts of up to four months."
+   ],
+   [
+    "18",
+    "OTROS",
+    "Otros conceptos",
+    "Any other beneficially owned income not listed above."
+   ]
+  ],
+  "CONCEPTO DE PAGO - hoja 2, CON CONVENIO (casilla 142, codes 19-33)": [
+   [
+    "19",
+    "INM",
+    "Rentas inmobiliarias",
+    "Income from immovable property situated in Colombia."
+   ],
+   [
+    "20",
+    "DIV-CC",
+    "Dividendos y participaciones",
+    "Dividends under the treaty dividend article."
+   ],
+   [
+    "21",
+    "INT-CC",
+    "Intereses",
+    "Interest under the treaty interest article."
+   ],
+   [
+    "23",
+    "GC",
+    "Ganancias de capital",
+    "Gains on the disposal of Colombian immovable property."
+   ],
+   [
+    "24",
+    "RT",
+    "Rentas de trabajo",
+    "THE NON-RESIDENT EMPLOYEE CONCEPT for a treaty country. The form's own definition is 'rentas de trabajo de cualquier naturaleza EN RELACION CON UN EMPLEO a favor de personas naturales no residentes o sucesiones iliquidas de personas naturales que no eran residentes en Colombia'."
+   ],
+   [
+    "25",
+    "HON-DIR",
+    "Honorarios de directores",
+    "Directors' fees and similar payments to a member of a board or equivalent organ. NOT the employee concept."
+   ],
+   [
+    "26",
+    "ART",
+    "Artistas y deportistas",
+    "Entertainers and sportspersons."
+   ],
+   [
+    "27",
+    "PEN",
+    "Pensiones",
+    "Pensions and similar remuneration. Use where the EMPLOYER pays the pension to a non-resident."
+   ],
+   [
+    "28",
+    "FUN",
+    "Funciones publicas",
+    "Government service."
+   ],
+   [
+    "(others)",
+    "-",
+    "Restantes conceptos con convenio",
+    "The remaining treaty concepts up to code 33 are printed on the form's hoja-2 instructivo."
+   ]
+  ],
+  "TARIFAS - pagos al exterior (casilla 146)": [
+   [
+    "20.00",
+    "20%",
+    "Tarifa general ET art. 408",
+    "The general rate for employment income and personal services paid to non-residents. THE PAYROLL RATE."
+   ],
+   [
+    "15.00",
+    "15%",
+    "Rendimientos financieros creditos >= 1 ano",
+    "ET art. 408 special rate."
+   ],
+   [
+    "5.00",
+    "5%",
+    "Transporte internacional; intereses APP >= 8 anos",
+    "ET special rates."
+   ],
+   [
+    "33.00",
+    "33%",
+    "Administracion o direccion a casa matriz",
+    "ET art. 124."
+   ],
+   [
+    "1.00",
+    "1%",
+    "Leasing de naves y aerodinos; prima cedida por reaseguros",
+    "ET special rates."
+   ],
+   [
+    "7.00",
+    "7%",
+    "Profesores extranjeros",
+    "Contracts of up to four months with ICFES-approved institutions."
+   ],
+   [
+    "(treaty)",
+    "-",
+    "Tarifa del convenio",
+    "For CON CONVENIO rows the rate comes from the applicable double-tax treaty and may be lower than 20%, or nil. Mercans applies treaty relief ONLY on written client instruction supported by a residence certificate."
+   ]
+  ],
+  "PAISES CON CONVENIO VIGENTE (casilla 144, treaty rows)": [
+   [
+    "ES / CL / CH",
+    "-",
+    "Espana, Chile, Suiza",
+    "Treaties in force."
+   ],
+   [
+    "CA / MX / KR",
+    "-",
+    "Canada, Mexico, Corea del Sur",
+    "Treaties in force."
+   ],
+   [
+    "PT / IN / CZ",
+    "-",
+    "Portugal, India, Republica Checa",
+    "Treaties in force."
+   ],
+   [
+    "GB / FR / IT / JP",
+    "-",
+    "Reino Unido, Francia, Italia, Japon",
+    "Treaties in force."
+   ],
+   [
+    "(CAN)",
+    "-",
+    "Decision 578 de la Comunidad Andina",
+    "Bolivia, Ecuador and Peru, under Andean Community Decision 578 rather than a bilateral treaty."
+   ]
+  ],
+  "CODIGO CONTADOR O REVISOR FISCAL (casilla 982)": [
+   [
+    "1",
+    "CONT",
+    "Contador",
+    "Required where the taxpayer keeps books and gross assets at the preceding year end exceeded 100,000 UVT."
+   ],
+   [
+    "2",
+    "RF",
+    "Revisor fiscal",
+    "Required for joint-stock companies; for companies where the administration does not fall to all partners; where partners excluded from management holding at least 20% of capital so require; for any commercial company whose gross assets at 31 December reach 5,000 SMMLV; and for any whose gross income in the preceding year reaches 3,000 SMMLV."
+   ]
+  ],
+  "CODIGO DE REPRESENTACION (casilla 981)": [
+   [
+    "(RUT casilla 98)",
+    "-",
+    "Tipo de representacion",
+    "Taken from casilla 98 of the RUT. Typical values are legal representative (principal or alternate), agent with power of attorney, liquidator and administrator. The catalogue is maintained by DIAN in the RUT, not on this form."
+   ]
+  ],
+  "DIRECCION SECCIONAL (casilla 12)": [
+   [
+    "(RUT casilla 12)",
+    "-",
+    "Codigo de la direccion seccional",
+    "The DIAN sectional office of the taxpayer's principal domicile, taken from casilla 12 of the RUT. A configuration attribute of the entity; the catalogue is maintained by DIAN."
+   ]
+  ],
+  "ACTIVIDAD ECONOMICA - CIIU (casilla 27)": [
+   [
+    "(CIIU Rev. 4 A.C.)",
+    "-",
+    "Codigo de actividad economica principal",
+    "From casilla 46 of the RUT, per DIAN Resoluciones 000114 of 21 December 2020, 001232 of 16 September 2022 and 000086 of 24 May 2023. The chosen code drives the self-withholding rate auto-filled into casilla 28 under DUR 1625 de 2016 art. 1.2.6.8."
+   ]
+  ],
+  "FILING CALENDAR - by the LAST DIGIT of the NIT": [
+   [
+    "1 to 0",
+    "-",
+    "Del septimo al decimo sexto dia habil del mes siguiente",
+    "DUR 1625 de 2016 art. 1.6.1.13.2.33 as set by Decreto 2229 de 2023. NIT ending 1 files on the 7th business day, ending 2 on the 8th, and so on to ending 0 on the 16th. Contrast PILA, which is keyed to the last TWO digits and runs from the 2nd to the 16th business day."
+   ]
+  ]
+ },
+ "CO-DIAN-004-Formulario220-Spec.xlsx": {
+  "TIPO DE DOCUMENTO (casillas 24 and 79) - the SIX values printed on the form": [
+   [
+    "12",
+    "TI",
+    "Tarjeta de identidad",
+    "Identity card for a person aged 7 to 17."
+   ],
+   [
+    "13",
+    "CC",
+    "Cedula de ciudadania",
+    "National identity card. The great majority of employees."
+   ],
+   [
+    "21",
+    "TE",
+    "Tarjeta de extranjeria",
+    "Foreigner's identity card."
+   ],
+   [
+    "22",
+    "CE",
+    "Cedula de extranjeria",
+    "Foreign resident's identity card."
+   ],
+   [
+    "31",
+    "NIT",
+    "NIT",
+    "Tax identification number, where the beneficiary is an entity."
+   ],
+   [
+    "41",
+    "PA",
+    "Pasaporte",
+    "Passport."
+   ],
+   [
+    "(gap)",
+    "-",
+    "-",
+    "THIS LIST IS NARROWER THAN THE NOMINA ELECTRONICA LIST at Anexo table 5.2.1, which also carries 11 Registro civil, 42 Documento de identificacion extranjero, 47 PEP, 50 NIT de otro pais and 91 NUIP. There is NO code here for a PEP holder and none for a PPT holder (Decreto 216 de 2021) - which is the document the large majority of regularised Venezuelan migrants now hold. Escalated in column T of casilla 24."
+   ]
+  ],
+  "LAS TRES LINEAS DE CESANTIAS (casillas 47, 48, 49)": [
+   [
+    "47",
+    "PAGADA",
+    "Auxilio de cesantia e intereses efectivamente pagados al empleado",
+    "Severance savings and interest ACTUALLY PAID to the employee - the January interest payment, an authorised partial withdrawal, or a termination settlement. Formato 2276 numeral 18."
+   ],
+   [
+    "48",
+    "TRADICIONAL",
+    "Auxilio de cesantia reconocido a trabajadores del regimen tradicional del CST (Cap. VII, Tit. VIII, Parte Primera)",
+    "Severance RECOGNISED under the pre-1991 retroactive regime, for employees hired before 1 January 1991 who did not elect the Ley 50 de 1990 regime. Formato 2276 numeral 20 - NOT 19."
+   ],
+   [
+    "49",
+    "FONDO",
+    "Auxilio de cesantia consignado al fondo de cesantias",
+    "The amount DEPOSITED to the employee's chosen fund by 14 February under Ley 50 de 1990 art. 99. Formato 2276 numeral 19 - NOT 20. Must reconcile to CO-CESANTIAS-006."
+   ],
+   [
+    "(mapping warning)",
+    "-",
+    "-",
+    "The second and third lines are TRANSPOSED between Form 220 and Formato 2276. Map by meaning, never by position."
+   ]
+  ],
+  "UMBRALES UVT 2026 (UVT = COP 52,374, Res. DIAN 000238 de 15 dic 2025)": [
+   [
+    "41 UVT",
+    "2,147,334",
+    "Tope mensual de pagos por alimentacion, art. 387-1",
+    "Monthly meal payments to a third party up to this amount are not income of the employee. The EXCESS goes to casilla 38."
+   ],
+   [
+    "310 UVT",
+    "16,235,940",
+    "Salario mensual maximo para el beneficio de alimentacion",
+    "Where the employee's monthly salary EXCEEDS this, the art. 387-1 exclusion does not apply at all and the WHOLE meal payment goes to casilla 37, not casilla 38."
+   ],
+   [
+    "350 UVT",
+    "18,330,900",
+    "Ingreso laboral promedio para la exencion de cesantias, art. 206 num. 4",
+    "Severance savings and interest are exempt in full where the six-month average labour income in casilla 59 does not exceed this; tapered above it."
+   ],
+   [
+    "1,000 UVT",
+    "52,374,000",
+    "Tope mensual exento de pensiones, art. 206 num. 5",
+    "Employer-paid pension income is taxable only above this monthly amount. Casilla 50."
+   ],
+   [
+    "32 UVT",
+    "1,675,968",
+    "Tope mensual de la deduccion por dependientes, art. 387 par. 2",
+    "The dependants deduction is 10% of gross employment income capped at this monthly amount. Evidenced by casillas 79 to 82."
+   ],
+   [
+    "790 UVT",
+    "41,375,460",
+    "Tope anual de la renta exenta del 25%, art. 206 num. 10",
+    "Annual cap on the 25% exempt income. Mercans apportions at 65.8333 UVT per month - see scope_manifest CO-GAP-05."
+   ],
+   [
+    "1,340 UVT",
+    "70,181,160",
+    "Tope anual conjunto de deducciones y rentas exentas, art. 336",
+    "Annual cap on deductions plus exempt income, alongside the 40% limit. Mercans apportions at 111.6667 UVT per month - see CO-GAP-05."
+   ],
+   [
+    "4,500 UVT",
+    "235,683,000",
+    "Patrimonio bruto - condicion 1 del art. 380",
+    "One of the six conditions under which this certificate substitutes for the income-tax return."
+   ],
+   [
+    "1,400 UVT",
+    "73,323,600",
+    "Ingresos brutos, consumos y consignaciones - condiciones 2, 4, 5 y 6 del art. 380",
+    "The remaining monetary conditions for substitution."
+   ]
+  ],
+  "PARENTESCO - DEPENDIENTE ECONOMICO (casilla 82, ET art. 387 par. 2)": [
+   [
+    "HIJO / HIJA",
+    "-",
+    "Hijos menores de 18 anos",
+    "Children under 18."
+   ],
+   [
+    "HIJO / HIJA",
+    "-",
+    "Hijos entre 18 y 23 anos financiados por el contribuyente en su educacion",
+    "Children aged 18 to 23 whose education the taxpayer finances at a recognised institution."
+   ],
+   [
+    "HIJO / HIJA",
+    "-",
+    "Hijos mayores de 23 anos en situacion de dependencia certificada",
+    "Children over 23 with certified physical or psychological dependency."
+   ],
+   [
+    "CONYUGE / COMPANERO",
+    "-",
+    "Conyuge o companero permanente en situacion de dependencia",
+    "Spouse or permanent partner in a certified state of dependency by absence of income or physical or psychological factors."
+   ],
+   [
+    "PADRE / MADRE / HERMANO",
+    "-",
+    "Padres y hermanos en situacion de dependencia",
+    "Parents and siblings in a certified state of dependency."
+   ]
+  ],
+  "DIVIPOLA (DANE) - casillas 34 and 35": [
+   [
+    "11",
+    "BOG-DPTO",
+    "Bogota D.C. - departamento",
+    "TWO-digit DANE department code. The instructivo directs the use of the DANE 'Codigo de departamentos' tables."
+   ],
+   [
+    "001",
+    "BOG-MPIO",
+    "Bogota D.C. - ciudad/municipio",
+    "THREE-digit DANE municipality code. Like PILA and unlike the nomina electronica, Form 220 splits the code across two casillas."
+   ]
+  ],
+  "CONCEPTS THAT ARE CERTIFIED BUT NOT WITHHELD AS EMPLOYMENT INCOME": [
+   [
+    "Casilla 38",
+    "-",
+    "Exceso de alimentacion sobre 41 UVT",
+    "Taxable income of the employee, withheld as EMPLOYMENT income."
+   ],
+   [
+    "Casilla 47",
+    "-",
+    "Cesantias e intereses pagados",
+    "Certified here, but EXCLUDED from the monthly withholding base under both Procedure 1 and Procedure 2 because of the ET art. 206 num. 4 exemption and its taper."
+   ],
+   [
+    "Casilla 50",
+    "-",
+    "Pensiones",
+    "Taxable only above 1,000 UVT per month; below that, certified at zero."
+   ]
+  ]
+ },
+ "CO-DIAN-005-Formato2276-Spec.xlsx": {
+  "ENTIDAD INFORMANTE (numeral 1) - Res. 227 art. 1.3.7.1.1 par. 3, verbatim": [
+   [
+    "1",
+    "GEN",
+    "Informante general",
+    "THE VALUE FOR AN ORDINARY EMPLOYER. Par. 4: 'cuando el empleador reporte pagos o abonos en cuenta por concepto de rentas de trabajo y de pensiones, la casilla Entidad Informante se debe diligenciar con el concepto 1 - Informante general', and numerals 35 and 36 are left blank."
+   ],
+   [
+    "2",
+    "FID",
+    "Fiduciarias",
+    "Where the work income is paid out of trust assets. Requires numeral 35 (identificacion del fideicomiso); numeral 36 stays blank."
+   ],
+   [
+    "3",
+    "MAND",
+    "Mandatario y/o Administrador delegado",
+    "Requires numeral 36 (contract participants); numeral 35 stays blank."
+   ],
+   [
+    "4",
+    "CONS",
+    "Consorcio y/o Union Temporal",
+    "Requires numeral 36."
+   ],
+   [
+    "5",
+    "HIDRO",
+    "Exploracion y Explotacion de hidrocarburos, gases y minerales",
+    "Requires numeral 36."
+   ],
+   [
+    "6",
+    "JV",
+    "Joint Venture",
+    "Requires numeral 36."
+   ],
+   [
+    "7",
+    "CP",
+    "Gestor en Cuentas en Participacion",
+    "Requires numeral 36."
+   ],
+   [
+    "8",
+    "COOP-PUB",
+    "Convenios de cooperacion con entidades publicas",
+    "Requires numeral 36."
+   ]
+  ],
+  "LAS TRES LINEAS DE CESANTIAS (numerals 18, 19, 20) - ORDER DIFFERS FROM FORM 220": [
+   [
+    "N18",
+    "PAGADA",
+    "Cesantias e intereses efectivamente pagadas al empleado",
+    "Amounts ACTUALLY PAID to the employee. Formulario 220 casilla 47. Same position in both."
+   ],
+   [
+    "N19",
+    "FONDO",
+    "Cesantias consignadas al fondo de cesantias",
+    "Deposited to the fund by 14 February under Ley 50 de 1990 art. 99. FORMULARIO 220 CASILLA 49 - NOT 48."
+   ],
+   [
+    "N20",
+    "TRADICIONAL",
+    "Auxilio de cesantias del regimen tradicional del CST",
+    "Pre-1991 retroactive regime. FORMULARIO 220 CASILLA 48 - NOT 49."
+   ],
+   [
+    "(mapping warning)",
+    "-",
+    "-",
+    "THE SECOND AND THIRD LINES ARE TRANSPOSED between the two artefacts. A positional mapping - 47 to 18, 48 to 19, 49 to 20 - swaps the fund deposit and the traditional-regime amount. Map by MEANING."
+   ]
+  ],
+  "UMBRALES UVT 2026 (UVT = COP 52,374, Res. DIAN 000238 de 15 dic 2025)": [
+   [
+    "41 UVT",
+    "2,147,334",
+    "Tope mensual de alimentacion, art. 387-1",
+    "Meal payments to a third party up to this monthly amount are NOT income of the employee. They go to numeral 32 as INFORMATIVE and stay outside the gross total in numeral 22. The excess goes to numeral 8 as taxable income."
+   ],
+   [
+    "310 UVT",
+    "16,235,940",
+    "Salario mensual maximo para el beneficio de alimentacion",
+    "Where the employee's monthly salary EXCEEDS this, the art. 387-1 exclusion does not apply at all: the whole meal payment falls to numeral 7 and BOTH numeral 8 and numeral 32 stay nil."
+   ],
+   [
+    "350 UVT",
+    "18,330,900",
+    "Ingreso laboral promedio para la exencion de cesantias, art. 206 num. 4",
+    "Severance and interest are exempt in full where the six-month average in numeral 33 does not exceed this; tapered above."
+   ],
+   [
+    "1,000 UVT",
+    "52,374,000",
+    "Tope mensual exento de pensiones, art. 206 num. 5",
+    "Employer-paid pension income is taxable only above this monthly amount. Numeral 21."
+   ],
+   [
+    "32 UVT",
+    "1,675,968",
+    "Tope mensual de la deduccion por dependientes, art. 387 par. 2",
+    "The dependants deduction is 10% of gross employment income capped at this monthly amount. The dependant is identified in numeral 34."
+   ]
+  ],
+  "TIPO DE DOCUMENTO (numerals 2 and 34)": [
+   [
+    "(DIAN catalogue)",
+    "-",
+    "Tipo de documento de identificacion",
+    "The document-type codes are fixed by the especificaciones tecnicas, not by Res. 227. DERIVED - confirm the exact list before configuring. Note that the three artefacts in this pipeline use THREE different document-type catalogues: the nomina electronica uses Anexo table 5.2.1 (11, 12, 13, 21, 22, 31, 41, 42, 47, 50, 91), Formulario 220 prints a six-value list (12, 13, 21, 22, 31, 41), and PILA uses two-letter codes (CC, CE, TI, PA, CD, SC, PE, RC). Build a mapping table; never copy between them."
+   ]
+  ],
+  "DIVIPOLA (DANE) - numeral 4": [
+   [
+    "11 / 001",
+    "BOG",
+    "Bogota D.C. - departamento y municipio",
+    "The beneficiary's location. NOT the same question as the nomina electronica place of work (NIE051 / NIE052) or the Formulario 220 place where the withholding was practised (casillas 34 / 35) - three artefacts, three different geographic questions about the same person."
+   ]
+  ],
+  "CALENDARIO DE LA EXOGENA - Res. 227 art. 1.3.9.1.3": [
+   [
+    "GC last digit 1",
+    "-",
+    "Decimo septimo dia habil del mes de abril",
+    "Grandes Contribuyentes."
+   ],
+   [
+    "GC last digit 2",
+    "-",
+    "Decimo octavo dia habil del mes de abril",
+    "Grandes Contribuyentes."
+   ],
+   [
+    "GC last digits 3-0",
+    "-",
+    "Primer a octavo dia habil del mes de mayo",
+    "Grandes Contribuyentes: 3 = 1st business day of May, then one business day per digit through 0 = 8th business day of May."
+   ],
+   [
+    "PJ/PN 01-05",
+    "-",
+    "Noveno dia habil del mes de mayo",
+    "Personas juridicas y naturales, by the LAST TWO digits of the NIT."
+   ],
+   [
+    "PJ/PN 06-55",
+    "-",
+    "Decimo a decimo noveno dia habil del mes de mayo",
+    "One business day per five-number band."
+   ],
+   [
+    "PJ/PN 56-00",
+    "-",
+    "Primer a noveno dia habil del mes de junio",
+    "The bands continue into June: 56-60 = 1st business day of June through 96-00 = 9th business day of June."
+   ],
+   [
+    "(par. 1)",
+    "-",
+    "Calidad al momento de informar",
+    "The Gran Contribuyente, legal-person or natural-person status used is the one held AT THE MOMENT OF FILING, not at the reported year end."
+   ]
+  ],
+  "FORMATO Y VERSION": [
+   [
+    "2276 / 4",
+    "T3.45",
+    "Informacion de rentas de trabajo y pensiones, version 4",
+    "Listed in the formatos-y-especificaciones-tecnicas table at Res. 227 art. 1.3.10.1 as entry T3.45. A version mismatch is rejected at upload."
+   ],
+   [
+    "5247 / -",
+    "-",
+    "Formato para apoyos economicos administrados por terceros",
+    "NOT a payroll filing. Educational support ADMINISTERED BY A THIRD PARTY is reported there under concepto 5102 instead of at numeral 16 here (Res. 227 par. 7)."
+   ]
+  ],
+  "NUMERALS THAT ARE NOT PAYROLL FIELDS": [
+   [
+    "N30 / N31",
+    "-",
+    "IVA mayor valor del costo o gasto / Retencion de IVA",
+    "Colombian employment income carries no VAT. Relevant only where the beneficiary is a VAT-responsible contractor paid under the ET art. 383 table. Owned by the client's tax function."
+   ],
+   [
+    "N35 / N36",
+    "-",
+    "Fideicomiso / participante en contrato",
+    "Res. 227 par. 4: for an ordinary employer reporting under concepto 1 they 'no se deben diligenciar'. Mutually exclusive with each other."
+   ]
+  ]
+ },
+ "CO-PILA-003-AportesSeguridadSocial-Spec.xlsx": {
+  "CLASE DE APORTANTE (A1-007)": [
+   [
+    "A",
+    "200+",
+    "Aportante con 200 o mas cotizantes",
+    "Counted across ALL branches and dependencies, not per branch."
+   ],
+   [
+    "B",
+    "<200",
+    "Aportante con menos de 200 cotizantes",
+    "Counted across all branches. The default for most corporate employers."
+   ],
+   [
+    "C",
+    "MIPYME",
+    "Aportante Mipyme que se acoge a Ley 590 de 2000",
+    "Fewer than 200 contributors AND eligible for the SENA, ICBF and CCF parafiscal discounts of Ley 590 de 2000 and Decreto 525 de 2009. The operador must verify MONTHLY that the employer appears in the file DIAN sends the Ministry under Decreto 525 art. 6, checking the fechinst date - so the class cannot simply be asserted by the employer."
+   ],
+   [
+    "D",
+    "LEY 1429",
+    "Aportante beneficiario de la Ley de Formalizacion y Generacion de Empleo",
+    "Beneficiary of Ley 1429 de 2010 under Decreto 1074 de 2015 art. 2.2.2.42.1. Requires the commercial-registry date in A1-031, which must fall between 29 December 2010 and 31 December 2014."
+   ]
+  ],
+  "NATURALEZA JURIDICA (A1-008)": [
+   [
+    "1",
+    "PUB",
+    "Publica",
+    "Public entity."
+   ],
+   [
+    "2",
+    "PRIV",
+    "Privada",
+    "Private entity - the in-scope population."
+   ],
+   [
+    "3",
+    "MIX",
+    "Mixta",
+    "Mixed-capital entity."
+   ],
+   [
+    "4",
+    "MULTI",
+    "Organismos multilaterales",
+    "Multilateral organisation."
+   ],
+   [
+    "5",
+    "EXT",
+    "Entidades de derecho publico no sometidas a la legislacion colombiana",
+    "Public-law entity not subject to Colombian law - typically a foreign mission."
+   ]
+  ],
+  "TIPO PERSONA (A1-009) and TIPO DOCUMENTO APORTANTE (A1-002, T2R1-005)": [
+   [
+    "J",
+    "JUR",
+    "Juridica",
+    "Legal person. Makes A1-004 (DV) and the whole legal-representative block A1-018 to A1-024 mandatory."
+   ],
+   [
+    "N",
+    "NAT",
+    "Natural",
+    "Natural person. Narrows the valid document types to CC, CE, TI, PA, CD, PE and SC - NI is not available."
+   ],
+   [
+    "NI",
+    "NI",
+    "Numero de identificacion tributaria",
+    "The document type of a corporate employer."
+   ],
+   [
+    "CC",
+    "CC",
+    "Cedula de ciudadania",
+    "Numeric only."
+   ],
+   [
+    "CE",
+    "CE",
+    "Cedula de extranjeria",
+    "Numeric only."
+   ],
+   [
+    "TI",
+    "TI",
+    "Tarjeta de identidad",
+    "Numeric only."
+   ],
+   [
+    "PA",
+    "PA",
+    "Pasaporte",
+    "ALPHANUMERIC permitted."
+   ],
+   [
+    "CD",
+    "CD",
+    "Carne diplomatico",
+    "ALPHANUMERIC permitted."
+   ],
+   [
+    "SC",
+    "SC",
+    "Salvoconducto de permanencia",
+    "Numeric only."
+   ],
+   [
+    "PE",
+    "PE",
+    "Permiso Especial de Permanencia",
+    "Numeric only."
+   ],
+   [
+    "RC",
+    "RC",
+    "Registro civil",
+    "Available in the CONTRIBUTOR list (T2R2-003) but not in the employer list."
+   ]
+  ],
+  "TIPO DOCUMENTO REPRESENTANTE LEGAL (A1-020) - only four values": [
+   [
+    "CC",
+    "CC",
+    "Cedula de ciudadania",
+    "Numeric."
+   ],
+   [
+    "CE",
+    "CE",
+    "Cedula de extranjeria",
+    "Numeric."
+   ],
+   [
+    "PA",
+    "PA",
+    "Pasaporte",
+    "Alphanumeric permitted."
+   ],
+   [
+    "CD",
+    "CD",
+    "Carne diplomatico",
+    "Alphanumeric permitted."
+   ],
+   [
+    "(narrower)",
+    "-",
+    "-",
+    "NI, TI, SC, PE and RC are NOT available for a legal representative, although several of them are available for the employer itself."
+   ]
+  ],
+  "FORMA DE PRESENTACION (A1-010, T2R1-011)": [
+   [
+    "U",
+    "UNICO",
+    "Unico",
+    "A single consolidated planilla. Branch code and name must be BLANK."
+   ],
+   [
+    "S",
+    "SUC",
+    "Sucursal",
+    "One planilla per branch. Branch code and name become required."
+   ]
+  ],
+  "TIPO DE ACCION (A1-026)": [
+   [
+    "1",
+    "CONC",
+    "Concordato",
+    "Insolvency arrangement."
+   ],
+   [
+    "2",
+    "REEST",
+    "Reestructuracion",
+    "Restructuring."
+   ],
+   [
+    "3",
+    "LIQ",
+    "Liquidacion",
+    "Liquidation."
+   ],
+   [
+    "4",
+    "CESE",
+    "Cese de actividades",
+    "Cessation of activities. Where populated, A1-027 fixes the date from which the employer is no longer obliged to contribute."
+   ]
+  ],
+  "TIPO DE APORTANTE (A1-030, T2R1-021) - must be equal in both records": [
+   [
+    "1",
+    "EMPL",
+    "Empleador",
+    "The in-scope value for private corporate payroll."
+   ],
+   [
+    "2",
+    "IND",
+    "Independiente",
+    "Independent worker - DESCOPED (planilla types I and Y)."
+   ],
+   [
+    "3",
+    "PUB-ESP",
+    "Entidades o universidades publicas de regimenes especial y de exception",
+    "Public sector."
+   ],
+   [
+    "4",
+    "AGREM",
+    "Agremiaciones, asociaciones o congregaciones religiosas",
+    "-"
+   ],
+   [
+    "5",
+    "COOP",
+    "Cooperativas y precooperativas de trabajo asociado",
+    "-"
+   ],
+   [
+    "6",
+    "DIPL",
+    "Misiones diplomaticas, consulares o de organismos multilaterales",
+    "-"
+   ],
+   [
+    "7",
+    "HOG",
+    "Organizaciones del Programa de Hogares de Bienestar",
+    "-"
+   ],
+   [
+    "8",
+    "CONC",
+    "Pagador de concejales y ediles",
+    "-"
+   ],
+   [
+    "9",
+    "SIND",
+    "Pagador de aportes contrato sindical",
+    "-"
+   ],
+   [
+    "10",
+    "REINC",
+    "Pagador programa de reincorporacion",
+    "-"
+   ],
+   [
+    "11",
+    "MAG",
+    "Pagador aportes parafiscales del Magisterio",
+    "-"
+   ],
+   [
+    "12",
+    "HUM",
+    "Pagador prestacion humanitaria",
+    "-"
+   ]
+  ],
+  "MODALIDAD DE LA PLANILLA (T2R1-002)": [
+   [
+    "1",
+    "ELEC",
+    "Electronica",
+    "Prepared and paid over the internet on the operador's site. Also the value to use where Decreto 780 de 2016 art. 3.2.3.9 par. 2 exceptionally permits assisted PAYMENT - the modality still reads electronica, and the operador reports those employers separately through SISPRO structure PUB019EXPE."
+   ],
+   [
+    "2",
+    "ASIST",
+    "Asistida",
+    "The employer telephones the operador's call centre, which keys or digitises the information."
+   ]
+  ],
+  "TIPO DE PLANILLA (T2R1-008)": [
+   [
+    "E",
+    "EMPL",
+    "Planilla empleados",
+    "THE IN-SCOPE VALUE. Used for contributor types 1, 12, 18, 19, 20, 21, 22, 30, 31, 32, 40, 51, 54 and others."
+   ],
+   [
+    "A",
+    "ING",
+    "Planilla cotizantes con novedad de ingreso",
+    "New joiners settled separately."
+   ],
+   [
+    "M",
+    "MORA",
+    "Planilla mora",
+    "Late payment. The operador computes interest on arrears."
+   ],
+   [
+    "N",
+    "CORR",
+    "Planilla correcciones",
+    "Correction of an earlier planilla. Requires the associated planilla number and date in T2R1-009 and T2R1-010, and the operador must settle interest on arrears except for salary retroactives and timely termination novedades."
+   ],
+   [
+    "S",
+    "DOM",
+    "Planilla empleados de servicio domestico",
+    "Domestic service."
+   ],
+   [
+    "I",
+    "IND",
+    "Planilla independientes",
+    "DESCOPED - independent workers contribute on 40% of fees, not salary, and the payer is not an employer."
+   ],
+   [
+    "Y",
+    "IND-EMP",
+    "Planilla independientes empresas",
+    "DESCOPED - the contratante paying for service contractors."
+   ],
+   [
+    "H",
+    "MAD",
+    "Planilla madres sustitutas",
+    "Substitute mothers."
+   ],
+   [
+    "T",
+    "SGP",
+    "Planilla entidad beneficiaria del Sistema General de Participaciones",
+    "DESCOPED - public sector only (contributor type 47)."
+   ],
+   [
+    "F",
+    "SGP-PAT",
+    "Planilla pago aporte patronal faltante SGP",
+    "DESCOPED - public sector only."
+   ],
+   [
+    "J",
+    "JUD",
+    "Planilla pago seguridad social en cumplimiento de sentencia judicial",
+    "Court-ordered settlement of salary factors omitted from the original liquidation."
+   ],
+   [
+    "X",
+    "LIQ",
+    "Planilla para el pago empresa liquidada",
+    "Liquidated company."
+   ],
+   [
+    "U",
+    "UGPP",
+    "Planilla de uso UGPP para pago por terceros",
+    "UGPP third-party payment; T2R1-009 carries the judicial deposit title number."
+   ],
+   [
+    "K",
+    "EST",
+    "Planilla estudiantes",
+    "Students."
+   ],
+   [
+    "O",
+    "UGPP-OBL",
+    "Planilla obligaciones determinadas por la UGPP",
+    "UGPP-determined liabilities; T2R1-009 carries the planilla of the original payment."
+   ]
+  ],
+  "TIPO COTIZANTE (T2R2-005) - the PILA list, WIDER than the nomina electronica list": [
+   [
+    "1",
+    "DEP",
+    "Dependiente",
+    "Standard employee. Maps to nomina electronica TipoTrabajador 01."
+   ],
+   [
+    "2",
+    "DOM",
+    "Servicio domestico",
+    "Maps to 02."
+   ],
+   [
+    "3",
+    "IND",
+    "Independiente",
+    "NO nomina electronica equivalent - descoped population."
+   ],
+   [
+    "4",
+    "MAD",
+    "Madre sustituta",
+    "Maps to 04 (Madre comunitaria) with care."
+   ],
+   [
+    "12",
+    "APR-L",
+    "Aprendices en etapa lectiva",
+    "Maps to 12."
+   ],
+   [
+    "16",
+    "AGREM",
+    "Independiente agremiado o asociado",
+    "NO nomina electronica equivalent."
+   ],
+   [
+    "18",
+    "FUN",
+    "Funcionarios publicos sin tope maximo en el IBC",
+    "Maps to 18."
+   ],
+   [
+    "19",
+    "APR-P",
+    "Aprendices en etapa productiva",
+    "Maps to 19."
+   ],
+   [
+    "20",
+    "EST-789",
+    "Estudiantes (Regimen especial - Ley 789/2002)",
+    "NO nomina electronica equivalent."
+   ],
+   [
+    "21",
+    "EST-PG",
+    "Estudiantes de postgrado en salud",
+    "Maps to 21."
+   ],
+   [
+    "22",
+    "PROF",
+    "Profesor de establecimiento particular",
+    "Maps to 22."
+   ],
+   [
+    "23",
+    "EST-RL",
+    "Estudiantes aporte solo riesgos laborales",
+    "Maps to 23."
+   ],
+   [
+    "30",
+    "DEP-ESP",
+    "Dependiente entidades o universidades publicas de regimenes especial y de excepcion",
+    "Maps to 30."
+   ],
+   [
+    "31",
+    "COOP",
+    "Cooperados o precooperativas de trabajo asociado",
+    "Maps to 31. The only type for which the nomina electronica Compensacion elements apply."
+   ],
+   [
+    "32",
+    "DIPL",
+    "Cotizante de carrera diplomatica o consular extranjera o de organismo multilateral",
+    "NO nomina electronica equivalent."
+   ],
+   [
+    "33",
+    "FSP",
+    "Beneficiario del Fondo de Solidaridad Pensional",
+    "NO equivalent."
+   ],
+   [
+    "34 / 35 / 36",
+    "CONC",
+    "Concejales y ediles",
+    "NO equivalent."
+   ],
+   [
+    "40",
+    "UPC",
+    "Beneficiario UPC Adicional",
+    "NO equivalent. EXCLUDED from the header contributor count in T2R1-019, and its DIVIPOLA work-location fields must be blank."
+   ],
+   [
+    "42",
+    "IND-SAL",
+    "Cotizante independiente pago solo salud",
+    "NO equivalent."
+   ],
+   [
+    "43",
+    "PEN-3RO",
+    "Cotizante a pensiones con pago por tercero",
+    "NO equivalent."
+   ],
+   [
+    "44 / 45",
+    "EMERG",
+    "Cotizante dependiente de empleo de emergencia",
+    "NO equivalent."
+   ],
+   [
+    "47",
+    "SGP",
+    "Trabajador dependiente de entidad beneficiaria del SGP",
+    "Maps to 47. Public sector - planilla types T and F are descoped."
+   ],
+   [
+    "51",
+    "PARC",
+    "Trabajador de tiempo parcial",
+    "Maps to 51. Uses the hours-worked field T2R2-096 instead of the 1-SMMLV floor."
+   ],
+   [
+    "52",
+    "CES",
+    "Beneficiario del mecanismo de proteccion al cesante",
+    "NO equivalent."
+   ],
+   [
+    "53 / 55",
+    "PART",
+    "Afiliado participe / participe-dependiente",
+    "NO equivalent."
+   ],
+   [
+    "54",
+    "PREP",
+    "Prepensionado de entidad en liquidacion",
+    "Maps to 54."
+   ],
+   [
+    "56",
+    "PREP-V",
+    "Prepensionado con aporte voluntario a salud",
+    "Maps to 56."
+   ],
+   [
+    "57",
+    "IND-RL",
+    "Independiente voluntario al Sistema de Riesgos Laborales",
+    "NO equivalent."
+   ],
+   [
+    "58",
+    "EST-PUB",
+    "Estudiantes de practicas laborales en el sector publico",
+    "Maps to 58."
+   ],
+   [
+    "59",
+    "IND-PS",
+    "Independiente con contrato de prestacion de servicios superior a 1 mes",
+    "NO equivalent - descoped population."
+   ],
+   [
+    "60 / 61 / 62 / 63",
+    "OTROS",
+    "Edil no beneficiario FSP / reincorporacion / Magisterio / prestacion humanitaria",
+    "NO nomina electronica equivalent."
+   ],
+   [
+    "(mapping warning)",
+    "-",
+    "-",
+    "The nomina electronica TipoTrabajador table 5.5.3 carries only SIXTEEN values. Copying a PILA code straight into the XML will fail DIAN validation for every code marked 'NO equivalent' above. Build an explicit mapping table."
+   ]
+  ],
+  "SUBTIPO COTIZANTE (T2R2-006)": [
+   [
+    "0",
+    "NA",
+    "Cuando no aplique ningun subtipo",
+    "The default."
+   ],
+   [
+    "1",
+    "PEN-DEP",
+    "Dependiente pensionado por vejez, jubilacion o invalidez activo",
+    "The only value with a nomina electronica equivalent (SubTipoTrabajador 01)."
+   ],
+   [
+    "2",
+    "PEN-IND",
+    "Independiente pensionado activo",
+    "-"
+   ],
+   [
+    "3",
+    "EDAD",
+    "Cotizante no obligado a cotizacion a pensiones por edad",
+    "-"
+   ],
+   [
+    "4",
+    "REQ",
+    "Cotizante con requisitos cumplidos para pension",
+    "-"
+   ],
+   [
+    "5",
+    "IND-SUST",
+    "Cotizante con indemnizacion sustitutiva o devolucion de saldos reconocida",
+    "-"
+   ],
+   [
+    "6",
+    "EXCEP",
+    "Cotizante de regimen exceptuado de pensiones",
+    "-"
+   ],
+   [
+    "9",
+    "MESADA",
+    "Pensionado con mesada igual o superior a 25 SMLMV",
+    "-"
+   ],
+   [
+    "10",
+    "EXT-VOL",
+    "Residente en el exterior afiliado voluntario",
+    "-"
+   ],
+   [
+    "11 / 12",
+    "TAXI",
+    "Conductores de servicio publico individual de pasajeros en vehiculos taxi",
+    "12 is additionally not obliged to contribute to pension."
+   ],
+   [
+    "(hard rule)",
+    "-",
+    "-",
+    "Where the subtipo is 1, 2, 3, 4, 5, 6, 9 or 12, campo T2R2-046 (pension contribution rate) MUST be 0. The annex states this expressly."
+   ]
+  ],
+  "NOVEDADES (T2R2-015 to T2R2-030) - permitted values": [
+   [
+    "ING",
+    "blank / R / X / C",
+    "Ingreso",
+    "Hire. Makes T2R2-080 mandatory."
+   ],
+   [
+    "RET",
+    "blank / P / R / X / C",
+    "Retiro",
+    "Termination. Makes T2R2-081 mandatory."
+   ],
+   [
+    "TDE / TAE",
+    "blank / X",
+    "Traslado desde / a otra EPS o EOC",
+    "Health-insurer transfer. TAE makes T2R2-034 mandatory."
+   ],
+   [
+    "TDP / TAP",
+    "blank / X",
+    "Traslado desde / a otra administradora de pensiones",
+    "Pension-fund transfer. TAP makes T2R2-032 mandatory."
+   ],
+   [
+    "VSP",
+    "blank / X",
+    "Variacion permanente de salario",
+    "Makes T2R2-082 mandatory."
+   ],
+   [
+    "Correcciones",
+    "blank / A / C",
+    "Correcciones",
+    "A adds a contributor omitted from the original planilla; C corrects one already reported. Only meaningful on planilla type N."
+   ],
+   [
+    "VST",
+    "blank / X",
+    "Variacion transitoria del salario",
+    "A one-off base variation."
+   ],
+   [
+    "SLN",
+    "blank / X / C",
+    "Suspension temporal del contrato o licencia no remunerada",
+    "Makes T2R2-083 and T2R2-084 mandatory. Value C plus a PUBLIC-law employer is one of only two cases in which the health rate T2R2-054 may be reported as zero."
+   ],
+   [
+    "IGE",
+    "blank / X",
+    "Incapacidad temporal por enfermedad general",
+    "Makes T2R2-085, T2R2-086 and the authorisation fields relevant."
+   ],
+   [
+    "LMA",
+    "blank / X",
+    "Licencia de maternidad o paternidad",
+    "Makes T2R2-087, T2R2-088 and the authorisation fields relevant."
+   ],
+   [
+    "VAC-LR",
+    "X / L / blank",
+    "Vacaciones / Licencia remunerada",
+    "A THREE-VALUE flag: X = vacaciones, L = licencia remunerada. They map to two DIFFERENT nomina electronica blocks, so the value carries information and must not be normalised."
+   ],
+   [
+    "AVP",
+    "blank / X",
+    "Aporte voluntario",
+    "Makes T2R2-048 and T2R2-049 relevant."
+   ],
+   [
+    "VCT",
+    "blank / X",
+    "Variacion centros de trabajo",
+    "Makes T2R2-091 and T2R2-092 mandatory and may change the occupational-risk rate."
+   ],
+   [
+    "IRL",
+    "00 to 30",
+    "Dias de incapacidad por accidente de trabajo o enfermedad laboral",
+    "NOT a flag - a DAY COUNT. Makes T2R2-093 and T2R2-094 mandatory when non-zero."
+   ]
+  ],
+  "EXONERACION ART. 114-1 E.T. (A1-033 and T2R2-076)": [
+   [
+    "S",
+    "SI",
+    "Exonerado",
+    "The employer (A1-033) or the individual contributor (T2R2-076) is exonerated from EMPLOYER health 8.5%, SENA 2% and ICBF 3%. Introduced by Ley 1607 de 2012 and confirmed by Ley 1819 de 2016 art. 65."
+   ],
+   [
+    "N",
+    "NO",
+    "No exonerado",
+    "Full employer contributions due. MANDATORY value where the health base (T2R2-043) reaches 10 SMMLV = COP 17,509,050 in 2026, and where a natural-person employer employs two or more workers and the base reaches 10 SMMLV."
+   ],
+   [
+    "(never exonerated)",
+    "-",
+    "Pension, riesgos laborales y CCF",
+    "The art. 114-1 exoneration does NOT touch pension 12%, occupational risk, or the family compensation fund 4%. Only the Ley 1429 de 2010 art. 5 regime (A1-034) gives relief on the CCF."
+   ]
+  ],
+  "TARIFAS 2026": [
+   [
+    "16.0000%",
+    "Pension",
+    "Cotizacion total a pensiones",
+    "Employer 12% + employee 4%. Ley 100 art. 20 as substituted by Ley 797 de 2003 art. 7. Base floor 1 SMMLV = COP 1,750,905; ceiling 25 SMMLV = COP 43,772,625."
+   ],
+   [
+    "12.5000%",
+    "Salud",
+    "Cotizacion total a salud",
+    "Employer 8.5% + employee 4%. Where the exoneration applies, the rate REPORTED in T2R2-054 is the employee rate alone, 4.0000% (annex s.2.1.2.3.21)."
+   ],
+   [
+    "1.0000%",
+    "FSP solidaridad",
+    "Fondo de solidaridad pensional - subcuenta de solidaridad",
+    "Employee-borne, from a base of 4 SMMLV = COP 7,003,620."
+   ],
+   [
+    "0.2000% - 1.0000%",
+    "FSP subsistencia",
+    "Subcuenta de subsistencia",
+    "Employee-borne, banded, from a base of 16 SMMLV = COP 28,014,480."
+   ],
+   [
+    "0.3480% - 8.7000%",
+    "Riesgos laborales",
+    "Cotizacion a riesgos laborales",
+    "Employer-borne in full. By risk class of the WORK CENTRE."
+   ],
+   [
+    "4.0000%",
+    "CCF",
+    "Caja de compensacion familiar",
+    "Employer-borne. NEVER exonerated under art. 114-1."
+   ],
+   [
+    "2.0000%",
+    "SENA",
+    "Servicio Nacional de Aprendizaje",
+    "Employer-borne on the PARAFISCAL base (campo 95). Exonerated under art. 114-1."
+   ],
+   [
+    "3.0000%",
+    "ICBF",
+    "Instituto Colombiano de Bienestar Familiar",
+    "Employer-borne on the parafiscal base. Exonerated under art. 114-1."
+   ]
+  ],
+  "CLASES DE RIESGO LABORAL (T2R2-078) - Decreto 1772 de 1994 art. 13": [
+   [
+    "I",
+    "0.522%",
+    "Riesgo minimo",
+    "Initial rate 0.522%; range 0.348% to 0.696%. Offices, financial services, commerce."
+   ],
+   [
+    "II",
+    "1.044%",
+    "Riesgo bajo",
+    "Initial rate 1.044%; range 0.435% to 1.653%. Light manufacturing, textiles."
+   ],
+   [
+    "III",
+    "2.436%",
+    "Riesgo medio",
+    "Initial rate 2.436%; range 0.783% to 4.089%. Heavier manufacturing, food processing."
+   ],
+   [
+    "IV",
+    "4.350%",
+    "Riesgo alto",
+    "Initial rate 4.350%. RECORDED DEFECT: Decreto 1072 de 2015 art. 2.2.4.3.5 prints the class IV initial rate inconsistently with the Decreto 1772 de 1994 art. 13 table. Use the Decreto 1772 values."
+   ],
+   [
+    "V",
+    "6.960%",
+    "Riesgo maximo",
+    "Initial rate 6.960%; maximum 8.7%."
+   ],
+   [
+    "(work centre)",
+    "-",
+    "-",
+    "The class attaches to the WORK CENTRE, not to the employer (Decreto 1072 de 2015 art. 2.2.4.2.5.6). A company with two work centres legitimately carries two classes; a person performing several occupations contributes at the HIGHEST class."
+   ]
+  ],
+  "BANDAS DEL FONDO DE SOLIDARIDAD PENSIONAL (T2R2-051, T2R2-052)": [
+   [
+    "4 to 16 SMMLV",
+    "1.0% / 0%",
+    "Solo solidaridad",
+    "COP 7,003,620 to 28,014,480."
+   ],
+   [
+    "16 to 17 SMMLV",
+    "1.0% / 0.2%",
+    "Solidaridad + subsistencia",
+    "Total 1.2%."
+   ],
+   [
+    "17 to 18 SMMLV",
+    "1.0% / 0.4%",
+    "Solidaridad + subsistencia",
+    "Total 1.4%."
+   ],
+   [
+    "18 to 19 SMMLV",
+    "1.0% / 0.6%",
+    "Solidaridad + subsistencia",
+    "Total 1.6%."
+   ],
+   [
+    "19 to 20 SMMLV",
+    "1.0% / 0.8%",
+    "Solidaridad + subsistencia",
+    "Total 1.8%."
+   ],
+   [
+    "above 20 SMMLV",
+    "1.0% / 1.0%",
+    "Solidaridad + subsistencia",
+    "Total 2.0%, to the 25-SMMLV ceiling."
+   ]
+  ],
+  "DIVIPOLA (DANE) - A1-012 / A1-013 / T2R2-009 / T2R2-010": [
+   [
+    "11",
+    "BOG-DPTO",
+    "Bogota D.C. - departamento",
+    "TWO-digit department code."
+   ],
+   [
+    "001",
+    "BOG-MPIO",
+    "Bogota D.C. - municipio",
+    "THREE-digit municipality suffix. PILA carries the department and the municipality in SEPARATE fields, whereas the nomina electronica carries the five-digit combined code (11001). Concatenate to convert."
+   ],
+   [
+    "(catalogue)",
+    "-",
+    "Division Politica y Administrativa - DIVIPOLA",
+    "Issued by DANE. The operador validates every code against it. Blank where the 'Colombiano en el exterior' flag is marked or the contributor type is 40."
+   ]
+  ],
+  "CIIU REV. 4 A.C. (A1-014)": [
+   [
+    "(4 digits)",
+    "-",
+    "Codigo DANE de la actividad economica",
+    "CIIU revision 4 adapted for Colombia, DANE Resolucion 66 de 2012 or its successor. The SAME classification drives the DIAN self-withholding rate at Formulario 350 casilla 27."
+   ]
+  ],
+  "OPERADORES DE INFORMACION (A1-028, T2R1-022)": [
+   [
+    "(2 digits)",
+    "-",
+    "Codigo del operador de informacion",
+    "Assigned by the operador's own system. Operadores are private entities licensed by the Ministerio de Salud y Proteccion Social. The employer chooses one commercially; the code is therefore client-specific and must be obtained at implementation, not configured from a national catalogue."
+   ]
+  ],
+  "ADMINISTRADORAS (ARL / EPS / AFP / CCF) - 6-position codes": [
+   [
+    "(6 positions)",
+    "-",
+    "Codigos de administradoras",
+    "T2R1-014 (employer ARL), T2R2-031 / 032 (AFP), T2R2-033 / 034 (EPS), T2R2-035 (CCF) and T2R2-077 (employee ARL) are all SIX positions. The catalogue is maintained by the Ministry and distributed through the operadores de informacion; the placeholders used in the worked example (AFP001, EPS001, CCF001, ARL001) are illustrative only and MUST be replaced with the real codes obtained from the client's operador."
+   ]
+  ]
+ }
+}

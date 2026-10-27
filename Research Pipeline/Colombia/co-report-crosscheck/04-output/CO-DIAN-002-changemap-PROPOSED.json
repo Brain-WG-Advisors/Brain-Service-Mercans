@@ -1,0 +1,395 @@
+{
+ "spec": "CO-DIAN-002",
+ "spec_file": "01-specs/CO-DIAN-002-Formulario350-Spec.xlsx",
+ "sheet": "Formulario 350 Spec",
+ "header_row": 2,
+ "edits": [
+  {
+   "row": 22,
+   "field_name": "Base - work income (natural persons)",
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "current": "THE PRINCIPAL PAYROLL CASILLA ON THE BASE SIDE. The instruction guide defines it as 'los payments gravables (base sujeta a withholding) efectuados a natural persons por concept de salaries, commissions, prestaciones sociales, travel allowances, representation expenses, fees, emolumentos eclesiasticos, compensation received por el trabajo cooperative associate, payments en especie, payments en acciones y, en general, las compensation for personal services'. NOTE that it is the DEPURATED taxable base, not the gross: for a resident it is the ET art. 388 base after non-constitutive income, art. 387 deductions and the 25% exempt income; for a NON-RESIDENT taxed under art. 408 the base is the GROSS, because art. 408 admits no depuration. Note also that it sweeps in fees paid to natural persons under the art. 383 table, which are not employment income - payroll supplies only the employment component.",
+   "proposed": "Sum, over every employee paid in the month (all payroll runs of the entity, not one run), of the DEPURATED monthly withholding base of ET art. 388 for residents: gross work income (basic or integral salary plus all other taxable income) LESS mandatory employee contributions to EPS, AFP and the Solidarity/Subsistence fund (non-constitutive income), LESS the total tax relief, where total tax relief = AFC/AVC contributions + voluntary pension contributions + dependants deduction (10% of gross income, max 32 UVT) + prepaid medicine + housing-loan interest + 25% exempt income (max 790 UVT annual / 12), capped at the lower of 40% of (gross income less mandatory contributions) and 1,340 UVT annual / 12. In the client's Base of Withholding this is column U 'WITHOLDING TAX BASIS' (not column W). [DECISION PENDING - see Query to RA] Employees taxed under ET art. 408 as non-residents (client Tax Procedure 3, rate 20%): their base is the GROSS work income (Base of Withholding column G 'Income Total'), not column U; confirm whether they are declared here or in casillas 109/110 via sheet 2. Also sweeps in fees paid to natural persons under the art. 383 table, which payroll does not supply. Rounding: keep per-employee bases in whole pesos; round only the monthly aggregate to the nearest 1,000.",
+   "reason": "Evidence-backed clarification of the depuration actually computed (AFC/APV and the 40% / 1,340 UVT cap are missing from the current text), of the source column (U, not W) and of monthly aggregation across runs. The non-resident routing sentence is flagged DECISION PENDING, not decided.",
+   "evidence": "Base of Withholding: U = G - H - S on 256/261 employees; S = min(I+J+L+M+N+P, R = 40% x (G-H), 5,848,430) on 261/261; V = U x D on 96/103 Procedure-2 employees."
+  },
+  {
+   "row": 22,
+   "field_name": "Base - work income (natural persons)",
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "current": "Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.",
+   "proposed": "Whole pesos per employee; round only the aggregated monthly casilla total to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.",
+   "reason": "Client per-employee values are whole pesos and the run total is whole pesos; the spec should say the 1,000 rounding is applied once to the aggregate, not per employee.",
+   "evidence": "Base of Withholding columns U-Y contain no decimals and no per-employee 1,000 rounding (only 20 of 261 U values are multiples of 1,000)."
+  },
+  {
+   "row": 22,
+   "field_name": "Base - work income (natural persons)",
+   "column_letter": "T",
+   "column_header": "Query to RA",
+   "current": null,
+   "proposed": "Base of Withholding (Sep-2026) shows 7 employees with Tax Procedure 3 withheld at exactly 20% of gross Income Total (ET art. 408 pattern), while the client's base column U holds a depurated value for them (e.g. gross 245,443,528 vs U 237,618,312). (1) Is the casilla 77 base for these employees the GROSS (as this row states) and (2) are non-resident employees paid in Colombia declared in 77/93 or in 109-112 via sheet 2 (rows 31-34)? (3) Confirm that the base declared is the depurated base paired with the withholding deducted (client column U) and not the 'without contribution' base (column W).",
+   "reason": "Spec states both routes for non-resident employees; client evidence shows a third practice (depurated U summed for everyone). Needs an official-source answer before any rule change.",
+   "evidence": "Base of Withholding columns D, G, U, V, W; Master Data 'Tax Procedure 1'."
+  },
+  {
+   "row": 23,
+   "field_name": "Withholding - work income (natural persons)",
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "current": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. The month's total withholding at source on work income paid to natural persons. Must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130.",
+   "proposed": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to natural persons in the calendar month, across EVERY payroll run of the entity in that month (regular, off-cycle and termination runs), in whole pesos, then rounded once to the nearest 1,000. Sources in the client's payroll: WT 2552 'Income Tax (employee)' (Deductions), plus, for tax-equalised employees where 2552 is booked as a net-zero non-cash item, WT 21330 'Personal Income Tax Withholding (Theoretical)' - together they reconcile to the Base of Withholding column V 'WITHOLDING TAX WITH CONTRIBUTION'. Do NOT use column X 'WITHOLDING TAX WITHOUT CONTRIBUTION'. [DECISION PENDING - see Query to RA] (a) whether CONTINGENT WITHHOLDING (column Y, = X - V, arising from AFC/voluntary-pension contributions) is excluded from this casilla; (b) whether withholding booked on WT 21129 (terminations), 25832 (stock-award vesting), 25833 and 25834 (IC local / hypothetical foreign) enters here in the month it is practised; (c) whether withholding on employees taxed under ET art. 408 (Tax Procedure 3) is reported here or in casillas 111/112. Must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document of the same month. One of the casillas summed into casilla 130.",
+   "reason": "Developer needs the WT sources, the column to use (V), the all-runs-of-the-month rule and the open treatment of contingent/theoretical/other withholding WTs.",
+   "evidence": "G2N 2552 = V for 255/261 employees; 2552 + 21330 = GRAND TOTAL V (1,468,500,598) exactly; Y = X - V on 20/20; Accumulated 2552 Sep has 144,635,503 for 97 IDs outside the run; other withholding WTs 21129, 25832, 25833, 25834 in other months."
+  },
+  {
+   "row": 23,
+   "field_name": "Withholding - work income (natural persons)",
+   "column_letter": "P",
+   "column_header": "Rounding",
+   "current": "Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.",
+   "proposed": "Whole pesos per employee; round only the aggregated monthly casilla total to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return.",
+   "reason": "Same as row 22.",
+   "evidence": "Base of Withholding column V and GRAND TOTAL 1468500598 are whole pesos, not rounded per employee."
+  },
+  {
+   "row": 23,
+   "field_name": "Withholding - work income (natural persons)",
+   "column_letter": "T",
+   "column_header": "Query to RA",
+   "current": null,
+   "proposed": "(1) Contingent withholding (client Base of Withholding column Y = withholding 'without contribution' minus withholding 'with contribution', 20 employees with AFC/APV, Sep total 14,300,634) is not deducted in payroll: confirm it is excluded from casilla 93. (2) For tax-equalised employees the withholding is booked on WT 21330 'Personal Income Tax Withholding (Theoretical)' and 2552 nets to zero: confirm the amount declared is the computed withholding (column V). (3) Confirm that withholding on WTs 21129 (terminations), 25832 (stock-award vesting), 25833 (IC local country) and 25834 (hypothetical, IC foreign country) is declared in casilla 93 of the month practised.",
+   "reason": "Open treatment questions raised by the client data; not decided here.",
+   "evidence": "Base of Withholding columns V, X, Y; G2N WT 2552 / 21330; Accumulated WT 21129, 25832, 25833, 25834."
+  },
+  {
+   "row": 24,
+   "field_name": "Base - pension income (natural persons)",
+   "column_letter": "T",
+   "column_header": "Query to RA",
+   "current": null,
+   "proposed": "The client pays WT 62151 'Retirement Payment - PRV-6795' directly to 13 retirees (Sep-2026; 6.7M-14.6M COP, all below 1,000 UVT) and withholds income tax on WT 21140 by applying the ET art. 383 table to 75% of the payment (e.g. 6,716,577 -> 11,762). Under the rule in this row only the excess over 1,000 UVT is taxable. Are these payments pensions under ET art. 206 num. 5 (casillas 78/94, and then no withholding would arise below 1,000 UVT) or work income (casillas 77/93)? The retirees sit outside the regular payroll run, so the Form 350 must aggregate their pay group either way.",
+   "reason": "Client practice contradicts the spec rule; requires RA answer with official source.",
+   "evidence": "Accumulated Report WT 62151, 21140, 58001 (UVT 52374), column 01/09/2026."
+  },
+  {
+   "row": 25,
+   "field_name": "Withholding - pension income (natural persons)",
+   "column_letter": "T",
+   "column_header": "Query to RA",
+   "current": null,
+   "proposed": "The client pays WT 62151 'Retirement Payment - PRV-6795' directly to 13 retirees (Sep-2026; 6.7M-14.6M COP, all below 1,000 UVT) and withholds income tax on WT 21140 by applying the ET art. 383 table to 75% of the payment (e.g. 6,716,577 -> 11,762). Under the rule in this row only the excess over 1,000 UVT is taxable. Are these payments pensions under ET art. 206 num. 5 (casillas 78/94, and then no withholding would arise below 1,000 UVT) or work income (casillas 77/93)? The retirees sit outside the regular payroll run, so the Form 350 must aggregate their pay group either way.",
+   "reason": "Same as row 24.",
+   "evidence": "Accumulated Report WT 21140 monthly totals 4,328,951 - 7,410,011."
+  },
+  {
+   "row": 39,
+   "field_name": "Recipient country",
+   "column_letter": "M",
+   "column_header": "Field Explanation",
+   "current": "Country receiving the payment, with its country code. Colombia's treaty network in force includes Spain, Chile, Switzerland, Canada, Mexico, South Korea, Portugal, India, the Czech Republic, the United Kingdom, France, Italy and Japan, plus Andean Community Decision 578.",
+   "proposed": "Country of TAX RESIDENCE of the non-resident payee (for a treaty claim, the country on the residence certificate), as an upper-case ISO 3166-1 alpha-2 code. Do not derive it from Nationality. If the HR address country (Master Data 'Country') is used as a fallback it must be normalised to upper case (client data holds 'co', 'cr'). Where 'Treaty status' (casilla 141) = CON CONVENIO the country must be one with a treaty in force. Colombia's treaty network in force includes Spain, Chile, Switzerland, Canada, Mexico, South Korea, Portugal, India, the Czech Republic, the United Kingdom, France, Italy and Japan, plus Andean Community Decision 578.",
+   "reason": "Spec does not name the source attribute; client data shows Nationality and address Country name different countries for 15 employees and Country is held in mixed case.",
+   "evidence": "Master Data columns AQ 'Country' (CO, co, CR, cr, CA, DO, CH, MX) and AH 'Nationality'."
+  }
+ ],
+ "status_by_field": [
+  {
+   "row": 4,
+   "field_name": "Tax year",
+   "status": "keep"
+  },
+  {
+   "row": 5,
+   "field_name": "Period",
+   "status": "keep"
+  },
+  {
+   "row": 6,
+   "field_name": "Form number",
+   "status": "keep"
+  },
+  {
+   "row": 7,
+   "field_name": "Employer NIT",
+   "status": "keep"
+  },
+  {
+   "row": 8,
+   "field_name": "NIT verification digit",
+   "status": "keep"
+  },
+  {
+   "row": 9,
+   "field_name": "First surname",
+   "status": "keep"
+  },
+  {
+   "row": 10,
+   "field_name": "Second surname",
+   "status": "keep"
+  },
+  {
+   "row": 11,
+   "field_name": "First name",
+   "status": "keep"
+  },
+  {
+   "row": 12,
+   "field_name": "Other names",
+   "status": "keep"
+  },
+  {
+   "row": 13,
+   "field_name": "Corporate name",
+   "status": "keep"
+  },
+  {
+   "row": 14,
+   "field_name": "Sectional office code",
+   "status": "keep"
+  },
+  {
+   "row": 16,
+   "field_name": "Correction code",
+   "status": "keep"
+  },
+  {
+   "row": 17,
+   "field_name": "Previous form number",
+   "status": "keep"
+  },
+  {
+   "row": 19,
+   "field_name": "Self-withholding activity code (art. 114-1 exonerated legal persons)",
+   "status": "review"
+  },
+  {
+   "row": 20,
+   "field_name": "Self-withholding rate",
+   "status": "keep"
+  },
+  {
+   "row": 22,
+   "field_name": "Base - work income (natural persons)",
+   "status": "review"
+  },
+  {
+   "row": 23,
+   "field_name": "Withholding - work income (natural persons)",
+   "status": "change"
+  },
+  {
+   "row": 24,
+   "field_name": "Base - pension income (natural persons)",
+   "status": "review"
+  },
+  {
+   "row": 25,
+   "field_name": "Withholding - pension income (natural persons)",
+   "status": "review"
+  },
+  {
+   "row": 27,
+   "field_name": "Base - payments abroad, no treaty (legal persons)",
+   "status": "keep"
+  },
+  {
+   "row": 28,
+   "field_name": "Withholding - payments abroad, no treaty (legal persons)",
+   "status": "keep"
+  },
+  {
+   "row": 29,
+   "field_name": "Base - payments abroad, treaty (legal persons)",
+   "status": "keep"
+  },
+  {
+   "row": 30,
+   "field_name": "Withholding - payments abroad, treaty (legal persons)",
+   "status": "keep"
+  },
+  {
+   "row": 31,
+   "field_name": "Base - payments abroad, no treaty (NATURAL persons)",
+   "status": "review"
+  },
+  {
+   "row": 32,
+   "field_name": "Withholding - payments abroad, no treaty (NATURAL persons)",
+   "status": "review"
+  },
+  {
+   "row": 33,
+   "field_name": "Base - payments abroad, treaty (NATURAL persons)",
+   "status": "review"
+  },
+  {
+   "row": 34,
+   "field_name": "Withholding - payments abroad, treaty (NATURAL persons)",
+   "status": "review"
+  },
+  {
+   "row": 36,
+   "field_name": "Treaty status",
+   "status": "keep"
+  },
+  {
+   "row": 37,
+   "field_name": "Payment concept",
+   "status": "keep"
+  },
+  {
+   "row": 38,
+   "field_name": "Person type",
+   "status": "keep"
+  },
+  {
+   "row": 39,
+   "field_name": "Recipient country",
+   "status": "change"
+  },
+  {
+   "row": 40,
+   "field_name": "Payments or credits",
+   "status": "keep"
+  },
+  {
+   "row": 41,
+   "field_name": "Rate",
+   "status": "keep"
+  },
+  {
+   "row": 42,
+   "field_name": "Withholding value",
+   "status": "keep"
+  },
+  {
+   "row": 43,
+   "field_name": "Total base - no treaty, legal persons",
+   "status": "keep"
+  },
+  {
+   "row": 44,
+   "field_name": "Total base - no treaty, natural persons",
+   "status": "keep"
+  },
+  {
+   "row": 45,
+   "field_name": "Total withholding - no treaty, legal persons",
+   "status": "keep"
+  },
+  {
+   "row": 46,
+   "field_name": "Total withholding - no treaty, natural persons",
+   "status": "keep"
+  },
+  {
+   "row": 47,
+   "field_name": "Total base - treaty, legal persons",
+   "status": "keep"
+  },
+  {
+   "row": 48,
+   "field_name": "Total base - treaty, natural persons",
+   "status": "keep"
+  },
+  {
+   "row": 49,
+   "field_name": "Total withholding - treaty, legal persons",
+   "status": "keep"
+  },
+  {
+   "row": 50,
+   "field_name": "Total withholding - treaty, natural persons",
+   "status": "keep"
+  },
+  {
+   "row": 52,
+   "field_name": "Bases and withholdings on legal persons",
+   "status": "keep"
+  },
+  {
+   "row": 53,
+   "field_name": "Bases and withholdings on natural persons, non-employment concepts",
+   "status": "keep"
+  },
+  {
+   "row": 54,
+   "field_name": "Self-withholding blocks",
+   "status": "keep"
+  },
+  {
+   "row": 55,
+   "field_name": "VAT and stamp-duty withholding",
+   "status": "keep"
+  },
+  {
+   "row": 57,
+   "field_name": "Less excess or undue withholding",
+   "status": "keep"
+  },
+  {
+   "row": 58,
+   "field_name": "Total income-tax withholding",
+   "status": "keep"
+  },
+  {
+   "row": 59,
+   "field_name": "Total withholding",
+   "status": "keep"
+  },
+  {
+   "row": 60,
+   "field_name": "Penalties",
+   "status": "keep"
+  },
+  {
+   "row": 61,
+   "field_name": "Total withholding plus penalties",
+   "status": "keep"
+  },
+  {
+   "row": 62,
+   "field_name": "Signatory identification",
+   "status": "keep"
+  },
+  {
+   "row": 63,
+   "field_name": "Signatory verification digit",
+   "status": "keep"
+  },
+  {
+   "row": 64,
+   "field_name": "Total payment",
+   "status": "keep"
+  },
+  {
+   "row": 65,
+   "field_name": "Representation code",
+   "status": "keep"
+  },
+  {
+   "row": 66,
+   "field_name": "Accountant or statutory auditor code",
+   "status": "keep"
+  },
+  {
+   "row": 67,
+   "field_name": "Professional card number",
+   "status": "keep"
+  },
+  {
+   "row": 68,
+   "field_name": "With qualifications",
+   "status": "keep"
+  },
+  {
+   "row": 69,
+   "field_name": "Collecting-entity stamp",
+   "status": "keep"
+  }
+ ]
+}

@@ -1,0 +1,975 @@
+{
+ "round": 3,
+ "evidence_files": [
+  "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+  "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+  "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+  "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+  "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - 16oct.xlsx",
+  "03-client-reports-masked/round3/1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30 (1) - 16oct.xlsx",
+  "03-client-reports-masked/round2/Monthly_fixed.xlsx",
+  "03-client-reports-masked/round2/Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+  "03-client-reports-masked/Accumulated Report.xlsx",
+  "03-client-reports-masked/1764_Master_Data_Report_202609.xlsx",
+  "03-client-reports-masked/Severance Massive Calculation Structure September 2026.xlsx (checked: neither leaver present; 283 ordinary / 88 integral rows)"
+ ],
+ "leavers": [
+  {
+   "file": "Liquidacion termination 1 - 16oct.xlsx",
+   "termination_month_evidence": "Liquidacion!C14 'Fecha de Retiro' = 2026-08-31 (August 2026). Liquidacion!C13 'Fecha de Ingreso' = 2003-08-11 and C15 'Total dias Trabajados' = 8301 (30-day convention from 2003); Accruals!C4 'Hire Date' = 17-01-2023 with G4 'Days worked' = 1304 (from 2023) and D4 'Effective Leaving Date' blank; October G2N E13 'Hire Date' = 17-01-2023, F13 'Effective Leaving Date' blank. Integral salary (WT 62140, 62,165,842): no cesantias, interest or prima lines; only 62116 'VACACIONES DEFINITIVAS' 47.75 days = 98,947,299 (Liquidacion!G35/J35).",
+   "settlement_run_evidence": "Paid in the October run: 'Gross to net PMI 2026-10-01-2026-10-31' B7 Payroll id REF-P203-119, generated 2026-10-06, pay group CO - Monthly, row 13: J13 62116 = 98,947,299, P13 2552 = 37,622,092, R13 Total Deductions 37,693,954, S13 Net Pay 61,253,345 = Liquidacion!J46 'NETO A PAGAR' 61,253,344.98. The employee is absent from both September runs (REF-P201-090 Monthly, 261 employees; REF-P201-184, 454 employees) and from the September Master Data. Withholding: Liquidacion!E43 base 155,254,118 (Net Mes - Salario!F29 'Base2'); Net Mes!F34 53,897,608 = art. 383 tax on the August pay plus the vacation payout, minus F40 16,275,516 (the August 2552) = F48 37,622,092.02."
+  },
+  {
+   "file": "Liquidacion termination 2 - 16oct.xlsx",
+   "termination_month_evidence": "Liquidacion!C14 'Fecha de Retiro' = 2026-09-15 (September 2026); C13 'Fecha de Ingreso' = 2018-06-06 = Accruals!C4 'Hire Date' 06-06-2018 = Master Data 'Hire Date' / 'Original Hire Date' / 'Adjusted Service Date' (all 2018-06-06); C15 'Total dias Trabajados' = 2980. September Master Data: Employment Status 'A', Employee Group 1 / Subgroup 1A, Pay Group MC, a 'Severance Fund Name' is populated although the employee is on integral salary. Integral salary (WT 62140, 40,813,175): no cesantias / interest / prima lines (Liquidacion!J16 'Base Cesantias' 0, J17 'Base Prima Legal' 0) although E24 'DIAS CESANTIAS' = 255 and C24 'DIAS PRIMA DE SERVICIOS' = 75 are computed.",
+   "settlement_run_evidence": "Termination month (September): the regular Monthly run REF-P201-090 (generated 2026-09-16) paid 30 'Days Worked', full 62140 40,813,175, 2552 8,808,879 and full contributions (2554 1,142,769 = 4% of 28,569,222.5, 70% of the integral salary); the September electronic payroll document (Monthly_fixed, ENC block of this employee) carries no FechaRetiro, ITE 30 days / 40,813,175.00, SVA 8,808,879.00. Settlement paid in the October run REF-P203-119 row 14: J14 62116 = 42,398,087 (31.165 days), K14 62181 'Severance/Layoff Payment- Non CLA' = 200,453,880 (= Liquidacion!J39 '63124 - INDEMNIZACION'), L14 62700 = 5,618,550, P14 2552 = 48,095,372 = Liquidacion!J47 2552 18,027,371.65 + J46 21129 'PERSONAL INCOME TAX WITHHOLDING- TERMINATIONS' 30,068,000 (20% of E46 150,340,410 = 200,453,880 less 25%), Q14 27010 30,075,660, S14 Net Pay 169,967,485 = Liquidacion!J50 169,967,485.35. H14 'Days Worked' 0, G14 'Salary Assigned' 40,813,175, AA14 'Social Security Bases' 0, AB14/AC14 employer contributions 0."
+  }
+ ],
+ "specs": {
+  "CO-CESANTIAS-006": {
+   "fields": [
+    {
+     "id": "E08",
+     "name": "Seed-from-last-PILA-return indicator (row 11)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "E24/J24, F16/J16, rows 35-38",
+       "example_masked": "DIAS CESANTIAS 240, Base Cesantias 0, no cesantias line; only 62116"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "E24/J24, F16/J16, rows 35-40",
+       "example_masked": "DIAS CESANTIAS 255, Base Cesantias 0, no cesantias line"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "J-L (entitlement columns)",
+       "example_masked": "62116, 62181, 62700 only; no 62110/62117/25827/65805"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "F-T (a 2024 / Jan-2025 accumulation of a different, ordinary-salary employee)",
+       "example_masked": "62110 Apr/Jul/Oct 2024 (3,145,491 / 2,675,198 / 2,625,435) paired with 62117 in the same months (94,365 / 160,512 / 446,435); 62127 Jan 2025 696,944"
+      }
+     ],
+     "finding": "Both round-3 leavers are integral-salary employees (WT 62140): the settlement computes the cesantias days but carries no cesantias, interest or prima payment and no fund deposit, which is the Step 0 exclusion (1) of the Population Rules and the last sentence of this cell. The direct-payment path for an ordinary-salary leaver (62110 / 62117 in the settlement) is NOT evidenced in round 3: no ordinary-salary leaver was supplied. The settlement run is the month after the termination month for both leavers (August and September terminations paid in the October run), consistent with 'in the termination month or the month after'. The file-1 'Acumulados' sheet (not the leaver: a 2024 accumulation of another, ordinary-salary employee pasted as a worked example) shows 62110 always paired with 62117 in the same month, which matches the wage-type pairing stated here and in T14 / E92.",
+     "proposed_explanation": null,
+     "official_source": "Ley 50 de 1990 art. 99 num. 4; CST art. 132 num. 2"
+    },
+    {
+     "id": "T09",
+     "name": "Severance-savings fund code (row 25)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/1764_Master_Data_Report_202609.xlsx",
+       "sheet": "Master Data",
+       "column": "'Severance Fund Name' of the September-2026 leaver",
+       "example_masked": "populated (NAME token) for an integral-salary employee"
+      }
+     ],
+     "finding": "The integral-salary leaver carries a 'Severance Fund Name' in Master Data: evidence for the cell's warning that fund presence must not be used to select the population.",
+     "proposed_explanation": null,
+     "official_source": "Law 50 of 1990 art. 99 num. 3; CST art. 132 num. 2"
+    },
+    {
+     "id": "T10",
+     "name": "Number of days worked (row 26)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "J22-J24",
+       "example_masked": "2026-01-01 to 2026-08-31 = 240 days"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "J22-J24",
+       "example_masked": "2026-01-01 to 2026-09-15 = 255 days"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "68029 row (2024 example)",
+       "example_masked": "30 per month, 360 at December"
+      }
+     ],
+     "finding": "The client counts the cesantias days on the 30-day commercial convention from 1 January to the termination date (240 = 8 x 30; 255 = 8 x 30 + 15), the convention this cell and Population Rules Step 1 prescribe. The counter 68029 reaches 360 at December in the 2024 example, as stated.",
+     "proposed_explanation": null,
+     "official_source": "CST art. 249; Population Rules Step 1"
+    },
+    {
+     "id": "T12",
+     "name": "Basic salary reported in the last month (row 28)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "63807 row (2024 example)",
+       "example_masked": "December 2024 = 11,907,122, constant across months with 62100 varying"
+      }
+     ],
+     "finding": "Wage type 63807 'Basic Salary Base Amount' exists in the client's accumulations as the full contractual monthly salary, as this cell states. Not evidenced for the two leavers (integral salary, no record).",
+     "proposed_explanation": null,
+     "official_source": null
+    },
+    {
+     "id": "T14",
+     "name": "Value of the severance savings deposited (row 30)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "68040 / 68029 / 62110 / 68028 / 63814 / 64999 rows (2024 example)",
+       "example_masked": "68040 Dec-2024 14,253,993 x 360/360 - 62110 8,446,124 = 5,807,869 = 68028 Dec-2024 = |63814| Jan-2025 (-5,807,869); 64999 Dec-2024 28,878,430 is not the balance"
+      }
+     ],
+     "finding": "The reconciliation written in this cell and in T10 (68028 = 68040 x 68029/360 less 62110; |63814| January = the consolidated balance; 64999 is NOT the balance) is reproduced to the peso by the client's 2024 accumulation in file 1. The leaver rule (no record for an employee paid in the final settlement) is consistent with the two integral-salary leavers, who have no T14 record at all under Step 0 exclusion (1); the ordinary-salary leaver case remains not evidenced in round 3.",
+     "proposed_explanation": null,
+     "official_source": "CST arts. 249, 253, 254; Ley 50 de 1990 art. 99"
+    },
+    {
+     "id": "IN01",
+     "name": "31 December severance-savings balance (row 45)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "63814 / 68028 rows (2024 example)",
+       "example_masked": "63814 Jan-2025 = -5,807,869; 68028 Dec-2024 = 5,807,869"
+      }
+     ],
+     "finding": "Source and sign convention evidenced exactly (negative = liability).",
+     "proposed_explanation": null,
+     "official_source": "Law 52 of 1975 art. 1"
+    },
+    {
+     "id": "IN02",
+     "name": "Annual interest at 12% (row 46)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "62127 row (2024 example)",
+       "example_masked": "Jan-2025 696,944 = round(12% x 5,807,869 x 360/360) = 696,944.28"
+      }
+     ],
+     "finding": "The January payment of WT 62127 equals the formula of this cell to the peso. For a leaver the interest is paid with the cesantias through 62117 (file-1 example: 62117 in the same months as 62110).",
+     "proposed_explanation": null,
+     "official_source": "Law 52 of 1975 art. 1"
+    },
+    {
+     "id": "T20",
+     "name": "Employee hire date (row 37)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C13 / C15 / C29",
+       "example_masked": "Fecha de Ingreso 2003-08-11; 8301 days; 345.83 total vacation days accrued from 2003"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Accruals",
+       "column": "C4 / G4",
+       "example_masked": "Hire Date 17-01-2023; Days worked 1304"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "E13",
+       "example_masked": "Hire Date 17-01-2023"
+      }
+     ],
+     "finding": "For leaver 1 the client's settlement uses 2003-08-11 as 'Fecha de Ingreso' (seniority, vacation accrual and the 8,301 days of service) while the HR 'Hire Date' is 17-01-2023: the client treats the relationship as continuous since 2003 although a new 'Hire Date' exists. This is the open point T20 / NIE002 / Form 220 casilla 30 (transfer executed as termination + new contract versus continuity); it is NOT re-opened here - the evidence is added to it. Leaver 2's three dates coincide (2018-06-06).",
+     "proposed_explanation": null,
+     "official_source": "Population Rules Step 2 (current-contract hire date)"
+    },
+    {
+     "id": "E90-E93",
+     "name": "Deposit confirmation and direct-payment discharge (rows 49-52)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "all columns",
+       "example_masked": "no 25827 / 65805 / 62110 / 62126"
+      }
+     ],
+     "finding": "No fund confirmation data in round 3. E92's wage-type mapping (62110 in-year, 62126 in January) is consistent with the file-1 2024 example (62110 in April/July/October); the leaver case under Step 0 exclusion (2) is not evidenced because both leavers are integral-salary.",
+     "proposed_explanation": null,
+     "official_source": null
+    },
+    {
+     "id": "Population Rules Step 0",
+     "name": "Exclusion (1) integral salary, (2) leavers (Population Rules!C4)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "F16/J16",
+       "example_masked": "Base Cesantias 0 for WT 62140"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "F16/J16",
+       "example_masked": "Base Cesantias 0 for WT 62140"
+      }
+     ],
+     "finding": "Exclusion (1) evidenced on both leavers; exclusion (2) not evidenced for an ordinary-salary leaver in round 3.",
+     "proposed_explanation": null,
+     "official_source": "CST art. 132 num. 2; Ley 50 de 1990 art. 99 num. 4"
+    }
+   ]
+  },
+  "CO-DIAN-004": {
+   "fields": [
+    {
+     "id": "36",
+     "name": "Salary payments (row 27)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "62140 - Integral Salary- 0423",
+       "example_masked": "40,813,175 (leaver 2, September)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Naturaleza conceptos",
+       "column": "Renglon CIR for 62140",
+       "example_masked": "36"
+      }
+     ],
+     "finding": "Integral salary certified in full in casilla 36; the client's own wage-type table assigns 62140 to its salary line.",
+     "proposed_explanation": null,
+     "official_source": "Instruction guide Res. 000022/2024; CST art. 127"
+    },
+    {
+     "id": "42",
+     "name": "Statutory benefit payments (row 33)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "J (62116 - Vacation Terminations)",
+       "example_masked": "98,947,299 / 42,398,087"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Naturaleza conceptos",
+       "column": "Renglon CIR",
+       "example_masked": "62116 -> N/A (unassigned); 79401 -> 41 (prestaciones line of the older layout); 79403 -> 36; 62137 -> 36; 62150 -> 36"
+      }
+     ],
+     "finding": "The vacation paid on termination (62116) is evidenced on both settlements and is certified here under the spec. The client's wage-type table ('Naturaleza conceptos', column 'Renglon CIR', an older Form 220 numbering: 41 prestaciones, 42 viaticos, 45 otros pagos, 47 pensiones, 49 salud, 50 pension, 53 FVOL, 54 AFC, 56 retencion) leaves 62116 unassigned and sends 79403 'Vacations Compensated In cash', 62137 and 62150 to its salary line. The spec's rule stands (the instruction guide lists vacaciones among prestaciones sociales); recorded as a client question, no change.",
+     "proposed_explanation": null,
+     "official_source": "Instruction guide Res. 000022/2024, casilla 42 (prestaciones sociales: prima, vacaciones)"
+    },
+    {
+     "id": "46",
+     "name": "Other payments (row 37)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "L (62700 - School Allowance-6839) / K (62181)",
+       "example_masked": "5,618,550 / 200,453,880"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Naturaleza conceptos",
+       "column": "Renglon CIR",
+       "example_masked": "62700 -> 45 (otros pagos of the older layout); 62115 -> 45; 62181 -> N/A; 62180 -> 45"
+      }
+     ],
+     "finding": "62700 and 62115 are routed by the client to its 'otros pagos' line, as the spec does (by meaning). The dismissal indemnity 62181 is unassigned in the client's table; the spec routes it through the WTC class (casilla 46 where other work income). Client to confirm the line used for the indemnity in prior certificates.",
+     "proposed_explanation": null,
+     "official_source": "Instruction guide Res. 000022/2024, casilla 46"
+    },
+    {
+     "id": "47",
+     "name": "Severance savings and interest paid to the employee (row 38)",
+     "verdict": "Explanation to improve",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "rows 35-38",
+       "example_masked": "no 62110 / 62117 line (integral salary)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "rows 35-40",
+       "example_masked": "no 62110 / 62117 line (integral salary)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "62110 / 62117 / 62127 rows (2024 example of another, ordinary-salary employee)",
+       "example_masked": "62110 and 62117 in the same months (Apr/Jul/Oct 2024); 62127 in Jan 2025"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Naturaleza conceptos",
+       "column": "Renglon CIR",
+       "example_masked": "62110, 62117, 62126, 62127 -> N/A; the client's '47' holds 62153 Additional Retirement Pension (pensiones in the older layout)"
+      }
+     ],
+     "finding": "The wage types named here are the ones the client pays: 62110 is always accompanied by 62117 in the month of the payment (file-1 example), and 62127 is the January interest. The two round-3 settlements certify nothing here because both leavers are integral-salary employees (CST art. 132 num. 2), a case the cell does not state. The client's table assigns no Form 220 line to 62110 / 62117 / 62126 / 62127 at all - client to confirm how cesantias paid directly were certified in prior years.",
+     "proposed_explanation": "Append to the current text: ' An integral-salary employee (WT 62140 Integral Salary) accrues no cesantias and no interest on them (CST art. 132 num. 2): nothing is certified here for such an employee, including on termination; the integral salary itself is certified in full in casilla 36. Interest accompanies every direct payment of cesantias: WT 62117 is paid in the same month as WT 62110 (termination or partial settlement, Ley 52 de 1975 art. 1), not only in January.'",
+     "official_source": "CST art. 132 num. 2; Ley 52 de 1975 art. 1; instruction guide Res. 000022/2024"
+    },
+    {
+     "id": "49",
+     "name": "Severance savings deposited to the fund (row 40)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "all columns",
+       "example_masked": "no 25827 / 65805"
+      }
+     ],
+     "finding": "No deposit wage type in the round-3 files (the leavers are integral-salary; the file-1 2024 example has no 25827 column).",
+     "proposed_explanation": null,
+     "official_source": null
+    },
+    {
+     "id": "60",
+     "name": "Withholding on labour and pension income (row 52)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "B46/C46/E46/J46 and B47/E47/J47",
+       "example_masked": "21129 at 20% on 150,340,410 = 30,068,000; 2552 on 84,088,075 = 18,027,371.65"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "P (2552 - Income Tax (employee))",
+       "example_masked": "48,095,372 = 18,027,371.65 + 30,068,000 (one column carries both)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Naturaleza conceptos",
+       "column": "Renglon CIR",
+       "example_masked": "2552 and 21129 -> 56 (retencion line of the older layout)"
+      }
+     ],
+     "finding": "2552 plus 21129 is exactly what the client certifies (both to its withholding line). 21129 is the ET art. 401-3 withholding on the dismissal indemnity (20% for income above 204 UVT; the client's file carries the threshold 204 x 52,374 = 10,684,296 in 'Acumulados- Prestaciones'!G29). Implementation note, no change: in the client's G2N the column '2552 - Income Tax (employee)' already contains the 21129 amount, so the engine must count the termination withholding once. Observation for the lead: the 25% exempt applied by the client to the indemnity (50,113,470 = 25% of 200,453,880) exceeds 790 UVT (41,375,460 in 2026); RA to confirm whether the ET art. 206 num. 10 annual cap applies to the indemnity withholding.",
+     "proposed_explanation": null,
+     "official_source": "ET art. 401-3; ET art. 206 num. 10; instruction guide Res. 000022/2024"
+    },
+    {
+     "id": "31",
+     "name": "Period certified - to (row 21)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/1764_Master_Data_Report_202609.xlsx",
+       "sheet": "Master Data",
+       "column": "column list",
+       "example_masked": "no termination-date column; 'Employment Status' only"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "F (Effective Leaving Date)",
+       "example_masked": "blank for both leavers on the settlement run"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Accruals",
+       "column": "D4 (Effective Leaving Date)",
+       "example_masked": "blank"
+      }
+     ],
+     "finding": "The termination date exists only in the manual settlement form (Liquidacion!C14 'Fecha de Retiro'); no system report evidences it (Master Data has no termination-date field; the G2N 'Effective Leaving Date' is blank even on the settlement run). New client question: which HR / payroll field holds the termination date for the engine (Contract.End_Date)?",
+     "proposed_explanation": null,
+     "official_source": null
+    },
+    {
+     "id": "30",
+     "name": "Period certified - from (row 20)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C13",
+       "example_masked": "Fecha de Ingreso 2003-08-11"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "E13",
+       "example_masked": "Hire Date 17-01-2023"
+      }
+     ],
+     "finding": "Same evidence as CO-CESANTIAS-006 T20: the client's settlement uses the 2003 date while 'Hire Date' is 2023. Already open (casilla 30 query); evidence added, not re-opened.",
+     "proposed_explanation": null,
+     "official_source": null
+    }
+   ]
+  },
+  "CO-PILA-003": {
+   "fields": [
+    {
+     "id": "T2R2-016",
+     "name": "RET - termination (row 79)",
+     "verdict": "Explanation to improve",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C14",
+       "example_masked": "2026-08-31 (last calendar day: 30 days under the AT2 example table)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C14",
+       "example_masked": "2026-09-15"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "Days Worked / 2554 / 64991 for leaver 2",
+       "example_masked": "30 / 1,142,769 / 28,569,223 (full September)"
+      },
+      {
+       "file": "03-client-reports-masked/Accumulated Report.xlsx",
+       "sheet": "Accumulated Report",
+       "column": "63953 'Total SSI days' Sep-2026 for leaver 2",
+       "example_masked": "30"
+      },
+      {
+       "file": "03-client-reports-masked/round2/Monthly_fixed.xlsx",
+       "sheet": "Nomina",
+       "column": "ENC block of leaver 2, ITE",
+       "example_masked": "no FechaRetiro; 30 days"
+      }
+     ],
+     "finding": "The cell is thin: it gives neither the admitted values (AT2 campo 16: X all systems, P pension only; R, C, T restricted to independent contributor types) nor the day rule (campos 36-39 may be below 30 only with an ING or RET event; a termination on the last calendar day reports 30) nor the source of the date. Client data: the 15-September leaver was paid 30 days with full contributions in the September run and the September electronic payroll document carries no FechaRetiro, i.e. the termination was processed after the regular cycle closed and settled in a separate October run; the September PILA itself is not evidenced (client to confirm whether it carried RET with 15 days or 30 days, and whether a correction return N was filed). Internal inconsistency: G79, Field Options D139 and Population Rules C12 say campo 81 'becomes mandatory' when RET is marked, while G156 (campo 81 itself) correctly quotes AT2 ('Es un campo opcional cuando se reporte la novedad de retiro').",
+     "proposed_explanation": "See CO-PILA-003-changemap-r3-PROPOSED.json (M79, G79, Field Options!D139).",
+     "official_source": "AT2 (Res. 2388/2016 Anexo Tecnico 2) §2.1.2.3.8 campo 16, §2.1.2.3.11-2.1.2.3.13 campos 36-38, §2.1.2.2 and campo 81 of the Registro tipo 2 layout; day-count example table (quoted from the AT2 v27 text of 25-03-2025; the spec cites v30 of 24-07-2026 - wording to be confirmed unchanged before applying)"
+    },
+    {
+     "id": "T2R2-081",
+     "name": "Termination date (row 156)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/1764_Master_Data_Report_202609.xlsx",
+       "sheet": "Master Data",
+       "column": "column list",
+       "example_masked": "no termination-date column"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "F (Effective Leaving Date)",
+       "example_masked": "blank on the settlement run"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C14",
+       "example_masked": "2026-09-15 (manual form)"
+      }
+     ],
+     "finding": "The field's rule (optional when RET is reported, valid date inside the settled period) matches AT2 campo 81. Its source Contract.End_Date has no evidenced system field: the termination date appears only in the manual settlement form. Client question (new, shared with NIE003 and Form 220 casilla 31).",
+     "proposed_explanation": null,
+     "official_source": "AT2 Registro tipo 2 campo 81"
+    },
+    {
+     "id": "T2R2-036..039",
+     "name": "Days contributed to pension / health / ARL / CCF (rows 101-104)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "Days Worked, 2554, 2556, 2560, 25110 for leaver 2",
+       "example_masked": "30 days and full September contributions for a 15-Sep termination"
+      },
+      {
+       "file": "03-client-reports-masked/Accumulated Report.xlsx",
+       "sheet": "Accumulated Report",
+       "column": "63953 Sep-2026 for leaver 2",
+       "example_masked": "30"
+      }
+     ],
+     "finding": "The rule (days to the termination date; fewer than 30 only with ING/RET) is the AT2 rule. The client's September run contributed 30 days for a 15-September leaver - client practice (late processing), not a different reading of the law; the spec rule stands. For leaver 1 (termination 31 August) 30 days in August is correct (AT2 example: retiro on the last day of the month = 30). No change; client question on the September PILA of leaver 2.",
+     "proposed_explanation": null,
+     "official_source": "AT2 §2.1.2.3.11-13; AT2 day-count example table"
+    },
+    {
+     "id": "T2R2-042 / 043 / 044 / 045 / 095",
+     "name": "IBC pension / health / ARL / CCF / other parafiscals in the termination month (rows 108-112)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "AA (Social Security Bases), AB/AC (Employer Contributions)",
+       "example_masked": "0 / 0 for both leavers on a run that pays 62116, 62181, 62700 only"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Naturaleza conceptos",
+       "column": "column 'SS'",
+       "example_masked": "62116 and 79403 = 'Parafiscales'; 62181 = N/A; 62700 = 1393; 62110/62117 = N/A"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "64991 for leaver 2",
+       "example_masked": "28,569,223 = 70% of the integral salary"
+      }
+     ],
+     "finding": "The spec's own sources already keep the final-settlement concepts out of the IBC: rows 108-109 build the base from salary-constituting pay only ((a) 70% for an integral salary) plus the Ley 1393 excess (b); NIE115 (CO-DIAN-001) states that compensated vacation is NOT part of the contribution base; PILA Population Rules C19 keeps the 40% add-back out of the statutory-benefit base. Vacation paid in cash (62116 / 79403), the dismissal indemnity (62180 / 62181) and cesantias (62110 / 62117) are not salary (CST art. 128; CST art. 64; CST art. 249) and the October settlement run confirms the client computes no base on them. Two points remain: (1) the client's table flags 62116 and 79403 as 'Parafiscales' (campo 95 base) while the October run shows zero employer contributions - client to explain; (2) whether termination payments enter the Ley 1393 de 2010 art. 30 40% test is an RA query (UGPP Acuerdo 1035 de 2015 numerals 2-3 were annulled by the Consejo de Estado on 17 Sep 2020), added to the appendix queries T2R2-042 / T2R2-044; no spec change from two employees.",
+     "proposed_explanation": null,
+     "official_source": "CST arts. 64, 128, 249; Ley 1393 de 2010 art. 30; Ley 21 de 1982 art. 17; spec rows 108-109, NIE115, Population Rules C19"
+    },
+    {
+     "id": "T2R2-041",
+     "name": "All-inclusive salary flag (row 107)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "62140 / 64991 for leaver 2",
+       "example_masked": "40,813,175 / 28,569,223"
+      }
+     ],
+     "finding": "Both leavers are paid WT 62140 and contribute on 70% of it (2554 = 4% x 28,569,222.5), as the cell states.",
+     "proposed_explanation": null,
+     "official_source": "CST art. 132 num. 2"
+    }
+   ]
+  },
+  "CO-DIAN-001": {
+   "fields": [
+    {
+     "id": "NIE003",
+     "name": "Termination date FechaRetiro (row 79)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round2/Monthly_fixed.xlsx",
+       "sheet": "Nomina",
+       "column": "ENC block of leaver 2 (period 2026-09-01 - 2026-09-30)",
+       "example_masked": "FechaIngreso 2018-06-06, no FechaRetiro, ITE 30 days, SVA 8,808,879"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "run REF-P203-119",
+       "example_masked": "settlement elements paid in October for an August and a September termination"
+      },
+      {
+       "file": "03-client-reports-masked/1764_Master_Data_Report_202609.xlsx",
+       "sheet": "Master Data",
+       "column": "column list",
+       "example_masked": "no termination-date field"
+      }
+     ],
+     "finding": "Client practice: the final settlement is a separate run in the month after the termination month, and the September electronic payroll document of the 15-September leaver carries no FechaRetiro. Under the spec, G79 ('populated only on the document for the month in which the employment relationship ends') and M79 ('its presence signals the final settlement document') describe a single document, whereas NIE004 / NIE005 admit a FechaRetiro BEFORE the settlement window - the case of the October settlement document under the payment-date rule (Res. 000013/2021 art. 3). RA to state which document(s) carry FechaRetiro when the settlement is paid in a later month (both, or the termination-month document only) before the wording is aligned; the source field for the date is also a client question (no system field evidenced). No change proposed (listed in not_applied).",
+     "proposed_explanation": null,
+     "official_source": "Res. DIAN 000013 de 2021 art. 3; Technical Annex FechaRetiro / FechaLiquidacionInicio"
+    },
+    {
+     "id": "NIE069",
+     "name": "Days worked DiasTrabajados (row 85)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "Days Worked for leaver 2",
+       "example_masked": "30"
+      },
+      {
+       "file": "03-client-reports-masked/round2/Monthly_fixed.xlsx",
+       "sheet": "Nomina",
+       "column": "ITE of leaver 2",
+       "example_masked": "30"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "H (Days Worked)",
+       "example_masked": "0 / 0 on the settlement run"
+      }
+     ],
+     "finding": "The spec rule ('a mid-month leaver reduces it to the days of the relationship in the period') is contradicted by the client's September data (30 days for a 15-September leaver), explained by late processing; the settlement run carries 0 days. Open point NIE069 (counter) is not re-opened; the evidence and a client question (termination processed after the cycle: is the September document corrected?) are added.",
+     "proposed_explanation": null,
+     "official_source": "Technical Annex DiasTrabajados"
+    },
+    {
+     "id": "NIE070 / NIE062",
+     "name": "SueldoTrabajado (row 86) / Sueldo (row 68)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "62140 for leaver 2",
+       "example_masked": "40,813,175 in the regular run"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "G (Salary Assigned) / M (Gross Salary)",
+       "example_masked": "0 / 98,947,299 for leaver 1; 40,813,175 / 248,470,517 for leaver 2"
+      }
+     ],
+     "finding": "Salary of the termination month is paid in the regular run (full month, see NIE069); the settlement run carries no salary, so SueldoTrabajado is not on the settlement document. 'Salary Assigned' is 0 for leaver 1 on the settlement run: evidence for the open point NIE062 (Sueldo on a settlement document of a leaver not in the active master), not re-opened.",
+     "proposed_explanation": null,
+     "official_source": null
+    },
+    {
+     "id": "NIE115",
+     "name": "VacacionesCompensadas - Cantidad (row 131)",
+     "verdict": "Format mismatch",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "G35 (CANTIDAD) / C31",
+       "example_masked": "47.75 days"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "G35 / C31",
+       "example_masked": "31.165 days"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Accruals",
+       "column": "O4 (Balance Days Vacations)",
+       "example_masked": "47.75"
+      }
+     ],
+     "finding": "The client's compensated vacation days on termination are fractional (47.75 and 31.165, valued at salary/30 x days) while the spec formats this element as integer days. RA to confirm the Cantidad data type in the DIAN technical annex / XSD and the rounding rule; client to confirm how the current provider reports fractional days. No change until confirmed.",
+     "proposed_explanation": null,
+     "official_source": "DIAN Technical Annex NE (VacacionesCompensadas / Cantidad) - to be verified"
+    },
+    {
+     "id": "NIE116",
+     "name": "VacacionesCompensadas - Pago (row 132)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "J (62116)",
+       "example_masked": "98,947,299 / 42,398,087"
+      },
+      {
+       "file": "03-client-reports-masked/round2/Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+       "sheet": "Mapping",
+       "column": "62116 / 79403 rows",
+       "example_masked": "62116 -> EOT_3 (OtroConcepto NS, 'ADD (PMC)'); 79403 -> EVA_2 (VacacionesCompensadas)"
+      }
+     ],
+     "finding": "62116 is evidenced as the termination vacation payout (days x salary / 30). The client's mapping table still routes 62116 to OtroConcepto while 79403 goes to VacacionesCompensadas: this is the open point NIE116; evidence added, not re-opened.",
+     "proposed_explanation": null,
+     "official_source": "Technical Annex VacacionesCompensadas"
+    },
+    {
+     "id": "NIE117 / NIE118",
+     "name": "Primas - Cantidad / Pago (rows 133-134)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C22-C24",
+       "example_masked": "prima period 2026-07-01 to 2026-09-15 = 75 days, base 0 (integral)"
+      },
+      {
+       "file": "03-client-reports-masked/Accumulated Report.xlsx",
+       "sheet": "Accumulated Report",
+       "column": "63811 Sep-2026 for leaver 2",
+       "example_masked": "90"
+      }
+     ],
+     "finding": "No prima is paid to the integral-salary leavers. Evidence for the open point NIE117: the settlement computes 75 days to the termination date while the counter 63811 shows 90 for September.",
+     "proposed_explanation": null,
+     "official_source": "CST art. 306; CST art. 132 num. 2"
+    },
+    {
+     "id": "NIE120 / NIE121 / NIE122",
+     "name": "Cesantias - Pago / Porcentaje / PagoIntereses (rows 136-138)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round2/Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+       "sheet": "Mapping",
+       "column": "rows 62110, 62182, 62126, 65805, 62117, 62127, 25827",
+       "example_masked": "62110 / 62182 / 62126 / 65805 -> ECE_1 (Pago); 62117 / 62127 -> ECE_3 (PagoIntereses); 25827 -> SOT_1 (deduction side)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Acumulados",
+       "column": "62110 / 62117 / 62127 rows (2024 example)",
+       "example_masked": "62110 paired with 62117 in the same months; 62127 in January"
+      }
+     ],
+     "finding": "No cesantias element on the two settlements (integral salary). The client's wage-type to element mapping coincides with the spec's sources for all three elements, including the deposit 65805 on the earning side with 25827 on the deduction side. Verdict on the amounts: not evidenced; on the mapping: aligned.",
+     "proposed_explanation": null,
+     "official_source": "CST art. 249; Ley 52 de 1975 art. 1"
+    },
+    {
+     "id": "NIE159",
+     "name": "BonifRetiro (row 179)",
+     "verdict": "Not evidenced",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round2/Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+       "sheet": "Mapping",
+       "column": "62203 row",
+       "example_masked": "62203 -> EVO_4 (BonifRetiro)"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "all columns",
+       "example_masked": "no 62203 / retirement bonus"
+      }
+     ],
+     "finding": "No bonificacion por retiro on either settlement. The client's mapping places 62203 in BonifRetiro, consistent with the spec's conditional (WTC class).",
+     "proposed_explanation": null,
+     "official_source": null
+    },
+    {
+     "id": "NIE160",
+     "name": "Indemnizacion (row 180)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "K (62181 - Severance/Layoff Payment- Non CLA)",
+       "example_masked": "200,453,880"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "B39/C39/J39 and B46/C46/E46/J46",
+       "example_masked": "'63124 - INDEMNIZACION' base 46,555,828.75 (salary + average IC), 129.17 days = 200,453,880; '21129 - PERSONAL INCOME TAX WITHHOLDING- TERMINATIONS' 20% on 150,340,410 = 30,068,000"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Acumulados- Prestaciones",
+       "column": "T21-X26, A29-H33",
+       "example_masked": "20 + 109.17 days, valor dia 1,551,860.96; 'Base indemizaciones' 10,684,296 (= 204 UVT); Renta 25% 50,113,470; Base gravable 150,340,410; valor rete 30,068,000"
+      },
+      {
+       "file": "03-client-reports-masked/round2/Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+       "sheet": "Mapping",
+       "column": "62181 / 62180 rows",
+       "example_masked": "-> EVO_5 (Indemnizacion)"
+      }
+     ],
+     "finding": "The wage type (62181) and the element are right and the client maps 62180 / 62181 to Indemnizacion. The tax sentence of the cell is wrong in law: the dismissal indemnity does not enter the ordinary monthly ET art. 383 / 388 base; it is withheld separately under ET art. 401-3 at 20% where the employee earns more than 204 UVT (no withholding below), after the 25% exempt income - exactly what the client practises through WT 21129. The settlement form labels the line with code 63124 (a day-counter wage type in the client's table) while the run carries 62181: a form label, not a mapping.",
+     "proposed_explanation": "Replace the first paragraph of M180 with: 'Indemnity for dismissal without just cause (CST art. 64), reported at its gross amount. It is NOT merged into the ET art. 383 / art. 388 monthly withholding base: it is withheld separately under ET art. 401-3 at the flat 20% where the employee's monthly income exceeds 204 UVT (COP 10,684,296 in 2026) and is not withheld below that threshold, after the 25% exempt labour income of ET art. 206 num. 10 within its statutory limit; only the statutory-minimum indemnities of ET art. 206 nums. 1-3 are exempt, and then only up to the legal minimum (art. 206 par. 1). The withholding so practised is WT 21129 'Personal Income Tax Withholding-Terminations' and is reported in RetencionFuente (NIE177) together with WT 2552.' Second paragraph (Source) unchanged.",
+     "official_source": "ET art. 401-3 (Ley 788 de 2002 art. 92); ET art. 206 nums. 1-3, 10 and par. 1; CST art. 64"
+    },
+    {
+     "id": "NIE177",
+     "name": "RetencionFuente (row 191)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "P (2552)",
+       "example_masked": "37,622,092 / 48,095,372 (the latter = 2552 18,027,371.65 + 21129 30,068,000)"
+      },
+      {
+       "file": "03-client-reports-masked/round2/Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+       "sheet": "Mapping",
+       "column": "2552 / 21129 rows",
+       "example_masked": "both -> SVA_2 (RetencionFuente)"
+      },
+      {
+       "file": "03-client-reports-masked/round2/Monthly_fixed.xlsx",
+       "sheet": "Nomina",
+       "column": "SVA of leaver 2 (September)",
+       "example_masked": "8,808,879.00 = September 2552"
+      }
+     ],
+     "finding": "21129 is withholding actually practised (ET art. 401-3) and the client reports it in RetencionFuente with 2552, as the cell states. Evidence for the open point NIE177 (which WTs are real withholding): 21129 confirmed by the client's practice; not re-opened. Note: the client's G2N shows one column '2552' carrying both amounts.",
+     "proposed_explanation": null,
+     "official_source": "ET art. 401-3; ET art. 383"
+    },
+    {
+     "id": "NIE006 / NIE002",
+     "name": "TiempoLaborado (row 82) / FechaIngreso (row 78)",
+     "verdict": "Conflict",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "C13 / C15",
+       "example_masked": "2003-08-11 / 8301 days"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Accruals",
+       "column": "C4 / G4",
+       "example_masked": "17-01-2023 / 1304 days to 31-08-2026"
+      }
+     ],
+     "finding": "Two service counts coexist for leaver 1: the settlement counts from 2003 (seniority recognised) and the Accruals report from the 2023 'Hire Date'. This is the open point NIE002 (which date for rehired / transferred employees); evidence added, not re-opened.",
+     "proposed_explanation": null,
+     "official_source": null
+    }
+   ]
+  },
+  "CO-DIAN-002": {
+   "fields": [
+    {
+     "id": "93",
+     "name": "Withholding - work income (row 23)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "2552 for leaver 2 (run REF-P201-090, September)",
+       "example_masked": "8,808,879"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx",
+       "sheet": "Gross to net PMI",
+       "column": "P (2552), rows 13-15 (run REF-P203-119, October)",
+       "example_masked": "37,622,092 (leaver 1) + 48,095,372 (leaver 2, of which 21129 30,068,000) = 85,717,464 grand total"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Net Mes - Salario",
+       "column": "F34 / F40 / F48",
+       "example_masked": "53,897,608 - 16,275,516 (August 2552) = 37,622,092.02"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Net Mes - Salario",
+       "column": "F39 / F40 / F41",
+       "example_masked": "26,836,250.65 - 8,808,879 (September 2552) = 18,027,371.65"
+      }
+     ],
+     "finding": "Reconciliation for the lead: leaver 1 (termination 31 Aug 2026): regular withholding of August 16,275,516 (Accumulated Report 01/08/2026) in the August run; settlement withholding 37,622,092.02 deducted in the OCTOBER run REF-P203-119, computed by re-running the art. 383 table on the August pay plus the vacation payout and deducting the August withholding. Leaver 2 (termination 15 Sep 2026): regular withholding of September 8,808,879 in run REF-P201-090 (September casilla 93); settlement withholding 48,095,371.65 (2552 18,027,371.65 computed on the September pay plus the settlement, less the September 2552; plus 21129 30,068,000 on the indemnity) deducted in the OCTOBER run. Under the rule 'all runs of the month' the October casilla 93 carries 85,717,464 from REF-P203-119 in addition to the October regular runs. The rule is not changed.",
+     "proposed_explanation": null,
+     "official_source": "ET arts. 383, 401-3, 577"
+    },
+    {
+     "id": "77",
+     "name": "Base - work income (row 22)",
+     "verdict": "Aligned",
+     "report_evidence": [
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 1 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "E43",
+       "example_masked": "155,254,118"
+      },
+      {
+       "file": "03-client-reports-masked/round3/Liquidacion termination 2 - 16oct.xlsx",
+       "sheet": "Liquidacion",
+       "column": "E47 / E46",
+       "example_masked": "84,088,075 (art. 383 base) / 150,340,410 (art. 401-3 base of the indemnity)"
+      }
+     ],
+     "finding": "The settlement bases are depurated bases (25% exempt and contributions deducted, AFC 3,800,000 taken into account for leaver 2 in Net Mes!F24), consistent with the casilla-77 definition; the art. 401-3 base of the indemnity is a separate base of the same casilla (work income). No change.",
+     "proposed_explanation": null,
+     "official_source": "ET art. 388"
+    },
+    {
+     "id": "78 / 94",
+     "name": "Pension income base / withholding (rows 24-25)",
+     "verdict": "Not evidenced",
+     "report_evidence": [],
+     "finding": "No pension income in the round-3 termination files.",
+     "proposed_explanation": null,
+     "official_source": null
+    }
+   ]
+  }
+ },
+ "october_g2n": {
+  "confirmed": [
+   "Termination settlements are run under their own payroll id: REF-P203-119 (generated 2026-10-06, pay group CO - Monthly, 2 employees), distinct from the September runs REF-P201-090 (Monthly) and REF-P201-184 - supports Form 350 row 23 ('accumulate by the payroll engine's run key', 'termination and settlement runs alike').",
+   "Wage types 62116 'Vacation Terminations' (both leavers) and 62181 'Severance/Layoff Payment- Non CLA' (leaver 2) are present as columns - supports CO-DIAN-004 casillas 42 / 46, CO-DIAN-001 NIE116 / NIE160, CO-DIAN-002 row 23 (62116 named).",
+   "2552 present on both rows and, for leaver 2, equal to the settlement's 2552 + 21129 - supports CO-DIAN-004 casilla 60 and CO-DIAN-001 NIE177 (21129 is withholding actually practised and reported with 2552).",
+   "'Days Worked' 0 and no salary wage type on the settlement run - supports NIE070 (no SueldoTrabajado on a settlement-only document) and the statement that the termination-month salary is paid in the regular run.",
+   "'Social Security Bases' 0 and 'Employer Contributions' 0 on a run paying vacation in cash, the indemnity and a non-salary allowance only - supports PILA rows 108-112 (IBC built from salary-constituting pay) and NIE115 (compensated vacation outside the contribution base).",
+   "Net Pay equals the settlement form's 'NETO A PAGAR' for both leavers, with the informative pairs (65814/21563, 65815/21802, 65817/25837) outside 'Total Deductions' - supports the NIE193 / NIE195 pairing and NIE189 (ComprobanteTotal = cash net)."
+  ],
+  "contradicted": [
+   "'Effective Leaving Date' is blank for both leavers even on the settlement run (and in the Accruals sheet): the G2N does not evidence the termination date; only the manual settlement form does. No spec maps this column, but Contract.End_Date (PILA T2R2-081, NIE003, Form 220 casilla 31) has no evidenced source field - client question.",
+   "'Days Worked' = 30 in the September run for the 15-September leaver (NIE069 rule 'a mid-month leaver reduces it'): client practice of settling after the regular cycle; spec rule kept.",
+   "'Salary Assigned' = 0 for leaver 1 on the settlement run (NIE062 'never below 1 SMMLV'): evidence for the open point NIE062.",
+   "The G2N has no separate column for WT 21129: the '2552 - Income Tax (employee)' column carries the termination withholding too (48,095,372 = 18,027,371.65 + 30,068,000). Spec statements that 21129 'coexists with 2552' remain true at wage-type level; the engine must not add 21129 twice when reading a G2N-style total."
+  ]
+ },
+ "summary": {
+  "leavers": "Two integral-salary leavers (WT 62140): termination 2026-08-31 (file 1) and 2026-09-15 (file 2); both settlements paid in the October run REF-P203-119; no cesantias, interest, prima or fund deposit on either (CST art. 132 num. 2); vacation in cash 62116 on both; indemnity 62181 (200,453,880, 129.17 days, ET art. 401-3 withholding 30,068,000 as WT 21129) on file 2.",
+  "verdicts": {
+   "CO-CESANTIAS-006": "leaver direct-payment rule NOT evidenced (no ordinary-salary leaver); integral exclusion, 30-day convention, 63814/68028/62127 reconciliations evidenced (file-1 2024 example); no change map",
+   "CO-DIAN-004": "casilla 47 explanation to improve (integral-salary sentence; 62117 paid with 62110); casilla 42 conflict with the client's wage-type table (spec stands); casilla 60 aligned (2552 + 21129); casilla 31 source not evidenced",
+   "CO-PILA-003": "RET row 79 explanation to improve (AT2 campo 16 values, day rule, date source; G79 / Field Options D139 say campo 81 mandatory while G156 and AT2 say optional); campos 36-39 conflict with client's 30-day September for a 15-Sep leaver (client practice); IBC rows aligned; RA query on the Ley 1393 40% test for termination payments",
+   "CO-DIAN-001": "NIE160 conflict in law (indemnity withheld under ET art. 401-3, not in the monthly base) - change proposed; NIE115 format (fractional days) to confirm; NIE003 / NIE069 conflicts with the client's two-run practice (RA / client questions, no change); NIE116, NIE117, NIE062, NIE002, NIE177 evidence added to existing open points",
+   "CO-DIAN-002": "casilla 93 aligned; September and October amounts reconciled per leaver and per run; no change"
+  },
+  "change_maps": [
+   "CO-DIAN-001-changemap-r3-PROPOSED.json (M180)",
+   "CO-DIAN-004-changemap-r3-PROPOSED.json (M38)",
+   "CO-PILA-003-changemap-r3-PROPOSED.json (M79, G79, Field Options!D139)"
+  ],
+  "new_client_questions": [
+   "Which HR / payroll field holds the termination date (Master Data has none; G2N 'Effective Leaving Date' blank on the settlement run)?",
+   "September 2026 PILA and electronic payroll of the 15-September leaver: 30 days without RET / FechaRetiro - was a correction filed, and is the full-month September salary recovered anywhere?",
+   "Form 220: which line did the client use for cesantias paid directly (62110 / 62117 / 62126 / 62127 are unassigned in its wage-type table) and for the dismissal indemnity 62181 (unassigned)?",
+   "Vacation days on termination are fractional (47.75 / 31.165): how does the current provider report VacacionesCompensadas/Cantidad?",
+   "62116 and 79403 are flagged 'Parafiscales' in the client's wage-type table, yet the October settlement run shows zero employer contributions - which is right?",
+   "Settlement 1 working sheet computes a 'Prima de vacaciones en liquidacion de contrato' of 133.7 days / 277,052,436 that is paid neither in the settlement nor in the October run - was it paid elsewhere?"
+  ],
+  "new_ra_queries": [
+   "Do final-settlement payments (vacation in cash, dismissal indemnity, cesantias and interest, prima) enter the Ley 1393 de 2010 art. 30 40% test, given the annulment of UGPP Acuerdo 1035 de 2015 numerals 2-3 (Consejo de Estado, 17 Sep 2020)?",
+   "Does the ET art. 206 num. 10 790-UVT annual cap apply to the 25% exempt income taken on a dismissal indemnity before the ET art. 401-3 20% withholding (the client took 25% uncapped: 50,113,470)?",
+   "Electronic payroll: when the final settlement is paid in a separate run in the month after the termination, which document(s) carry FechaRetiro, and what DiasTrabajados does a settlement-only document carry?",
+   "Confirm the AT2 v30 wording of campo 16 (values X / P / R / C / T) and campo 81 ('campo opcional cuando se reporte la novedad de retiro') before applying the PILA change map (quotes taken from the AT2 v27 text of 25-03-2025)."
+  ],
+  "pii_check": "No real name, ID, account, e-mail, phone or address seen in the masked files read (identity cells are tokens or digit-substituted; free text reads MASKED_TEXT)."
+ }
+}

@@ -1,0 +1,517 @@
+# FILE: CO-DIAN-002-Formulario350-Spec.xlsx
+SHEETS: Version Control || Report Matrix || Payroll Scope Summary || Formulario 350 Spec || File Structure || Field Options || Population Rules || Example Analysis || Sample File
+
+
+=== SHEET: Version Control (dims A1:B18, max_row 18, max_col 2) ===
+
+R1| STATUTORY REPORT SPECIFICATION - VERSION CONTROL
+~
+R3| Document ID | CO-DIAN-002
+R4| Filing ID (scope_manifest) | CO-DIAN-F350-MONTHLY-002
+R5| Report Name (EN) | Monthly Withholding Tax Return - Form 350
+R6| Report Name (Local ES) | Formulario 350 - Declaracion de retenciones en la fuente
+R7| Country | Colombia (CO)
+R8| Currency | COP (Colombian peso). The peso has a centavo in law but it is not used in practice; only the nomina electronica XML carries 2 decimals. See column P of the Spec sheet for the applicable rounding convention.
+R9| Authority | Direccion de Impuestos y Aduanas Nacionales (DIAN)
+R10| Legal Basis | Resolucion DIAN 000031 de 29 de febrero de 2024 (form prescribed, in force from 1 August 2024), compiled at art. 1.2.2.26 de la Resolucion DIAN 000227 de 23 de septiembre de 2025; ET arts. 365, 368, 383, 385, 386, 387, 387-1, 388, 401, 408-415, 437-2, 577, 580-1, 606; DUR 1625 de 2016 arts. 1.2.6.6, 1.2.6.8, 1.6.1.13.2.33 (as set by Decreto 2229 de 2023); Ley 2010 de 2019 art. 42; Ley 2277 de 2022 art. 8; DIAN Concepto 011108 de 29 de junio de 2026.
+R11| Standard | Spain 9-Sheet Statutory Report Spec Standard v2.4 (with v2.7 channel verification and v2.8 resident/non-resident controls)
+R12| Source Status | PRIMARY. Formulario_350_01082024.pdf - the prescribed form design (hoja 1 and hoja 2) plus the complete four-page instructivo and the hoja-2 annex instructivo. Extracted to _txt/form350.txt. Casilla numbers are read off the form, never derived. Res. DIAN 000031 de 2024 and the compiling Res. 000227 de 2025 art. 1.2.2.26 are also held locally.
+R13| Fiscal Parameters 2026 | UVT = COP 52,374 (Res. DIAN 000238 of 15 Dec 2025); SMMLV = COP 1,750,905; transport allowance = COP 249,095; contribution-base ceiling = 25 SMMLV = COP 43,772,625; contribution-base floor = 1 SMMLV = COP 1,750,905.
+~
+R15| CHANGE LOG
+R16| Version \| Effective Date \| Status | Change Description \| Updated By
+R17| v1.0 \| 2026-09-04 \| Issued | Initial v2.4 build of the Spec from scope_manifest.json authority_filings.in_scope and CCG Module 10.1. 9-sheet Spain standard; 21-column field sheet. Submission channel verified per v2.7 STEP 3.5 and recorded in the Report Matrix. Column E 'Payroll Field (Y/N)' reflects the master-data-only classification (calculated amounts, totals, period values, config rates, system and constant fields = N; identity / contract / company master data = Y), to be reconciled with the 05-Data-Dictionary when built. \| Mercans Compliance
+R18| v1.1 \| 2026-09-07 \| Issued | DD<->SPEC ALIGNMENT PATCH (mandatory pre-audit step). Reconciled this Spec against 05-data-dictionary/CO-DD-001-v1.0.xlsx across the six alignment checks. (1) OPTION MAPPERS: every Sheet 6 code table compared code by code with the DD Country Option Mappers sheet and each divergence resolved against the authoritative source - DIAN Anexo Tecnico Res. 000013 de 2021 tables 5.2.1, 5.5.3 and 5.5.4, PILA Anexo Tecnico 2 version 09, and the published cesantias layouts. (2) COLUMN E 'Payroll Field (Y/N)': Contract.Contractual_Salary is an AMOUNT and is routed to the Wage Type Catalogue, not the Data Dictionary, so NIE062, T2R2-040 and T12 now read N and the spec build and the DD build are back in lock-step; calculated amounts that carried an 'Employee.' System Mapping prefix are retagged 'Payroll.'. (3) MANDATORY / CONDITIONAL: every Mandatory=C row verified to carry a conditional reason, and every Data Dictionary cross-reference into this Spec re-derived from the System Mapping join so the C16 reference is bidirectional and correct. The v2.4 C16 rule was then applied in the second, spec-internal direction that the first pass of this stage had not tested - where a Mandatory=C row's conditional reason names another field on the SAME artefact, that field must reference it back. All 563 fields were swept, accepting an ID range such as 'NIE206-NIE209' or 'T2R2-036 to T2R2-039' as a valid reverse reference; the 45 B-side fields left with no reverse reference at all (18 on CO-DIAN-001, 27 on CO-PILA-003) were given one, in the conditional reason where the field is itself conditional and in the explanation where it is unconditional, so that a Mandatory=Y row never acquires a conditional reason. (4) OPTION-VALUE COMPLETENESS: every column O reference now resolves to a Sheet 6 section; two missing PILA code tables and the Formato 2276 document-type table were built. (5) COMPOSITE KEYS documented with sub-field position, length, source and persistence. (6) CODE-PREFIX PATTERNS recorded in column J. Full record: 07-qa-crosscheck/CO-ALIGNMENT-PATCH.md. \| Mercans Compliance
+
+
+=== SHEET: Report Matrix (dims A1:J29, max_row 29, max_col 10) ===
+
+R1| REPORT MATRIX - MONTHLY WITHHOLDING TAX RETURN - FORM 350
+R2| Report ID | Report Name (EN) | Report Name (Local ES) | Authority | Frequency | Due Date Rule | Submission Method | File Format | Legal Basis | Accuracy Assessment
+R3| CO-DIAN-002 | Monthly Withholding Tax Return - Form 350 | Formulario 350 - Declaracion de retenciones en la fuente | Direccion de Impuestos y Aduanas Nacionales (DIAN) | Monthly. NOT required for a period in which no operation subject to withholding occurred (ET art. 606 par. 2). | Between the 7th and the 16th BUSINESS DAY of the month following the period, by the LAST DIGIT of the employer NIT (DUR 1625 de 2016 art. 1.6.1.13.2.33 as set by Decreto 2229 de 2023). A return filed without full payment produces NO legal effect (ET art. 580-1). | PORTAL ROUND-TRIP. Prepared and filed through the DIAN Servicios Informaticos Electronicos (Muisca), www.dian.gov.co, signed with the Instrumento de Firma Electronica (IFE). Res. DIAN 000227 de 2025 art. 1.2.2.26 par. 1 makes electronic filing compulsory and states that DIAN 'pondra a disposicion el Formulario numero 350 en forma virtual en la pagina web'. | Online portal form (Servicio Informatico de Diligenciamiento), 155 casillas over two hojas plus the 980-997 reserved signature block. NOT an XML or file-upload submission: there is no published XSD or import layout for Form 350. Amounts in whole pesos rounded to the nearest 1,000 (ET art. 577). | Resolucion DIAN 000031 de 29 de febrero de 2024 (form prescribed, in force from 1 August 2024), compiled at art. 1.2.2.26 de la Resolucion DIAN 000227 de 23 de septiembre de 2025; ET arts. 365, 368, 383, 385, 386, 387, 387-1, 388, 401, 408-415, 437-2, 577, 580-1, 606; DUR 1625 de 2016 arts. 1.2.6.6, 1.2.6.8, 1.6.1.13.2.33 (as set by Decreto 2229 de 2023); Ley 2010 de 2019 art. 42; Ley 2277 de 2022 art. 8; DIAN Concepto 011108 de 29 de junio de 2026. | 92% (PRIMARY SOURCE for the form itself). Every casilla number, label and arithmetic rule is read off the official form design and instructivo at 00-official-sources/pdfs/Formulario_350_01082024.pdf, including the full casilla-130 summation and the hoja-2 annex mechanics. The 8% reservation is: (a) DIAN publishes no import schema for Form 350, so the mapping from payroll into the portal is a keying or robotic-process step whose exact screen behaviour is client-specific; (b) Res. 000227 de 2025 art. 1.2.2.26 par. 3 cites a hoja-2 'Casilla 91 Concepto de pago' and option codes that do not exist on the currently prescribed form (the concepto de pago is casilla 142) - an unresolved conflict in the official sources, escalated in column T; (c) the boundary between casilla 77/93 (rentas de trabajo) and casilla 79/95 (honorarios to natural persons) for a natural person taxed under the art. 383 table is a client-specific classification decision. It would rise to 98% with a DIAN clarification on point (b) and a client-agreed classification boundary on point (c).
+~
+R5| SUBMISSION CHANNEL VERIFICATION (v2.7 STEP 3.5)
+R6| - Channel: online_form \| Portal: DIAN Servicios Informaticos Electronicos (Muisca), www.dian.gov.co \| Source: Res. DIAN 000227 de 2025 art. 1.2.2.26 par. 1 and the form's own instructivo, which repeatedly refers to 'el SI de Diligenciamiento' computing casillas automatically \| CONFIRMED.
+R7| - This is a PORTAL ROUND-TRIP, not machine-to-machine. Do not model it on the nomina electronica: DIAN publishes no XSD, no cahier des charges and no import template for Form 350. The engine's deliverable is a reconciled casilla-value set, not a file.
+R8| - The DIAN service computes several casillas itself - 55, 56, 57, 58, 109, 110, 111, 112 from the hoja-2 annex; 130, 134, 136 and 138 as totals; 147 as 145 x 146; and 28 from 27. Payroll must not attempt to supply those.
+R9| - Signature is by the Instrumento de Firma Electronica (IFE) authorised by DIAN - an authenticated portal credential, not an X.509 document signature as in the nomina electronica.
+R10| - The tax portal is NOT the social-security channel. PILA is filed through a licensed private operador de informacion and never touches Muisca.
+~
+R12| INTEGRATION TYPE AND DIRECTION
+R13| - integration_type = OUTBOUND (scope_manifest CO-OUT-F350). There is no inbound file: the portal returns an on-screen acknowledgement and a form number (casilla 4), which the engine should capture for the audit trail and for any later corrective return (casilla 26).
+R14| - product_mapping_required = true. The engine must accumulate withholding BY COUNTERPARTY TYPE - natural person versus legal person - and, within natural persons, must separate resident employment income (casillas 77 / 93) from payments to non-residents (the hoja-2 annex). The 2024 redesign introduced that separation; the pre-2024 form did not have it.
+R15| - Payroll owns four casillas directly - 77, 93 and, for non-residents, the hoja-2 rows that roll into 109 / 111 or 110 / 112 - plus casilla 129 where a prior over-withholding is reversed. Everything else on the form comes from accounts payable or the tax function.
+~
+R17| RESIDENT / NON-RESIDENT TREATMENT (v2.8 control B1)
+R18| - RESIDENT employees are reported on HOJA 1: the depurated ET art. 388 base in casilla 77 and the withholding under the art. 383 progressive table in casilla 93.
+R19| - NON-RESIDENT employees are reported on HOJA 2 and roll up to casillas 109 / 111 (no treaty) or 110 / 112 (treaty). The base in casilla 145 is the GROSS payment, because ET art. 408 admits no depuration, and the rate in casilla 146 is 20%.
+R20| - The hoja-2 concepto de pago (casilla 142) for a non-resident employee is concepto 5, 'Prestaciones de servicios y compensacion por servicios personales', for a non-treaty country, and concepto 24, 'Rentas de trabajo', for a treaty country. Concepto 24's own definition on the form is 'rentas de trabajo de cualquier naturaleza EN RELACION CON UN EMPLEO a favor de personas naturales no residentes' - it is unambiguously the employee concept.
+R21| - The same employee therefore MOVES BETWEEN SHEETS during the year when residence is acquired: hoja 2 while non-resident, hoja 1 from the payment following the date the 183-day test is met. The switch is prospective only; the earlier months are not restated (DIAN Concepto 011108 of 29 June 2026).
+R22| - Directors' fees to a non-resident go to concepto 25 (Honorarios de directores) and employer-paid pensions to concepto 27 (Pensiones) - neither is the employee concept, and mis-selecting them changes the treaty article applied.
+~
+R24| RELATED FILINGS / CROSS-REFERENCES
+R25| - Casilla 93 must reconcile to the sum of RetencionFuente (NIE177) across every nomina electronica document for the same month - CO-DIAN-001 - after the nearest-1,000 rounding.
+R26| - Casilla 27 (art. 114-1 exonerated self-withholder) rests on the SAME exoneration test as PILA archivo tipo 1 field 33 and Registro Tipo 2 field 76 - CO-PILA-003.
+R27| - The twelve monthly casilla-93 figures do NOT produce Formulario 220. Colombia imposes no employer year-end reconciliation; Formulario 220 (CO-DIAN-004) is a SEPARATE per-employee obligation built from the annual accumulation, not from the monthly returns.
+R28| - Casilla 77 is an AGGREGATE base; the per-employee detail behind it is reported annually in Formato 2276 (CO-DIAN-005), which is why the two cannot be derived from one another.
+R29| - Formulario 350 aggregates every withholding the employer makes, including on supplier payments and VAT. Payroll is one contributor among several; the return is owned by the client's tax function.
+
+
+=== SHEET: Payroll Scope Summary (dims A1:C45, max_row 45, max_col 3) ===
+
+R1| PAYROLL SCOPE SUMMARY - MONTHLY WITHHOLDING TAX RETURN - FORM 350
+R2| SCENARIO | REPORT? | NOTES / REASONING
+~
+R4| Indefinite-term employee (contrato a termino indefinido) | YES | The core private-sector population. CST art. 47; Ley 2466 de 2025 art. 5.
+R5| Fixed-term employee (contrato a termino fijo, max 4 years) | YES | Identical reporting treatment to an indefinite-term contract. CST art. 46; Ley 2466 de 2025 art. 6.
+R6| Specific-work or task employee (contrato por obra o labor) | YES | An employment contract; CST art. 46. Nomina electronica TipoContrato = 3 (Obra o Labor).
+R7| Occasional / accidental / transitory worker (< 1 month, non-core activity) | YES | Still an employee under CST art. 6. Reported on every filing; the PILA planilla type and the day counts differ, not the obligation.
+R8| Part-time employee | YES | Colombia has no separate part-time regime. Reported normally; the PILA contribution base is floored at 1 SMMLV (COP 1,750,905) except for the worker type 51 partial-time regime.
+R9| All-inclusive salary employee (salario integral, >= 13 SMMLV) | YES | CST art. 132 num. 2. Reported with the integral-salary flag set; the contribution base is 70% of the integral salary, and the nomina electronica carries SalarioIntegral = true.
+R10| Apprentice (contrato de aprendizaje) | YES | Ley 2466 de 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decreto 0223 of 5 March 2026. Nomina electronica TipoContrato = 4; PILA worker type 12 (lectiva) or 19 (productiva).
+R11| Intern / practical placement (practicas o pasantias) | YES | Nomina electronica TipoContrato = 5. Reported where remunerated.
+R12| Teleworkers and remote workers | YES | Ley 1221 de 2008 as amended by Ley 2466 de 2025 arts. 52-54. No reporting difference; the nomina electronica carries a dedicated Teletrabajo devengado element (NIE158).
+R13| Resident foreign national under a Colombian contract | YES | Full reporting. Withheld under the ET art. 383 progressive table once tax residence is acquired.
+R14| NON-RESIDENT foreign national under a Colombian contract | YES | IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concepto 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix.
+R15| Employed old-age pensioner in active service | YES | PILA worker sub-type 01; no pension contribution (PILA pension rate field = 0), health and the levies still apply.
+R16| Executive director / statutory legal representative holding an employment contract | YES | Reported as an ordinary employee where an employment contract exists.
+R17| Independent contractor (contrato de prestacion de servicios) | NO | Not an employee. The contractor self-files PILA on 40% of fees (planilla types I / Y, descoped) and is reported by the payer in the third-party information return, not in this employer filing. Withholding on their fees does pass through Formulario 350, but under a different casilla.
+R18| Public-sector employee (contributor type 47, SGP-funded entity) | NO | Public-sector only; PILA planilla types T and F are descoped in scope_manifest.
+R19| Non-executive director paid honorarios only (junta directiva) | NO | Not employment income. Reported by the payer as honorarios, not as rentas de trabajo of an employee.
+R20| Pensioner whose pension is paid by a fund, not by the employer | NO | The paying fund is the withholding agent and the reporting party, not the employer.
+~
+R22| Depurated taxable base of resident employees | YES | Casilla 77. The ET art. 388 base after non-constitutive income, art. 387 deductions and the 25% exempt income - NOT the gross.
+R23| Withholding on resident employees | YES | Casilla 93. The art. 383 progressive table result, approximated to the nearest 1,000.
+R24| Gross payments to non-resident employees | YES | Hoja 2 casilla 145, rolling up to casilla 109 or 110. The GROSS, because art. 408 admits no depuration.
+R25| Withholding on non-resident employees | YES | Hoja 2 casilla 147, rolling up to casilla 111 or 112. The flat 20% of art. 408, or the treaty rate.
+R26| Employer-paid pension income above 1,000 UVT | YES | Casillas 78 / 94, where the employer itself pays a pension.
+R27| Reversal of excess or undue withholding | YES | Casilla 129, where an employee's withholding is corrected downward in a later month.
+R28| Employer social-security contributions | NO | Not a withholding. Reported on PILA. Formulario 350 is a TAX return only.
+R29| Employee social-security contributions | NO | Not a withholding by the employer in the ET sense. They reduce the casilla-77 base as non-constitutive income, but are never declared as a retencion.
+R30| Payments in the 0% band of the art. 383 table | PARTIAL | The payment IS included in the casilla-77 base; the withholding in casilla 93 is simply nil for that employee. Do not exclude the base.
+R31| Withholding on supplier and contractor payments | NO | Present on the form (casillas 29-54, 79-92, 95-108) but not produced by payroll. Owned by the client's accounts-payable function.
+R32| VAT and stamp-duty withholding | NO | Casillas 131-135. Owned by the client's tax function.
+~
+R34| Reported on the accrual (causacion) date | NO | Every Colombian payroll filing is keyed to the PAYMENT or credit-in-account date, not to the accrual date. A December salary paid in January falls in the January filing.
+R35| Reported on the payment or credit-in-account date | YES | The universal Colombian rule - pago o abono en cuenta. Applies to the nomina electronica (Res. DIAN 000013 de 2021 art. 3), to Formulario 350, to Formulario 220 and to Formato 2276.
+R36| A semi-monthly payroll produces two filings a month | NO | It does not. The nomina electronica is expressly ONE monthly document per employee 'irrespective of whether the obliged party makes payments in different or shorter periods' (art. 3). PILA and Formulario 350 are likewise monthly.
+R37| Nil period still filed | VARIES | Formulario 350: NOT required where no operation subject to withholding occurred in the period (ET art. 606 par. 2). Nomina electronica: no document where there was no payment. PILA: a planilla is still required while the employment relationship subsists.
+R38| Corrections handled by re-filing the whole period | VARIES | Nomina electronica: NO - a dedicated adjustment note (NominaIndividualDeAjuste, Reemplazar or Eliminar) referencing the original CUNE. Formulario 350: yes, a corrective return. PILA: a planilla type N (correcciones) or M (mora).
+~
+R40| A month in which no withholding was practised | NO | ET art. 606 par. 2: the return is NOT obligatory for a period with no operation subject to withholding. This is unusual among Colombian filings - the nomina electronica and PILA do not have an equivalent exemption.
+R41| Employee whose withholding is nil because the base is in the 0% band | YES | The BASE still goes in casilla 77. Only the withholding is nil.
+R42| Employee who acquires tax residence mid-year | YES | Reported on hoja 2 for the months before residence and on hoja 1 from the payment following the date the 183-day test is met. Prospective only - the earlier months are never restated.
+R43| Non-resident whose work is performed entirely outside Colombia | NO | Foreign-source income, not taxable in Colombia, no withholding and nothing to declare (DIAN Oficio 28380 of 2019).
+R44| Filing the return without paying it | NO | ET art. 580-1: a withholding return filed without full payment produces NO legal effect, with no administrative act required. Casilla 980 must equal casilla 138.
+R45| Correcting a filed return | YES | By a corrective return carrying casilla 25 (correction code) and casilla 26 (the form number being corrected). The minimum penalty is 10 UVT of the year the ORIGINAL return was filed.
+
+
+=== SHEET: Formulario 350 Spec (dims A1:U69, max_row 69, max_col 21) ===
+
+R1| Monthly Withholding Tax Return - Form 350 - Formulario 350 - Declaracion de retenciones en la fuente
+R2| Field Name (EN) | Field Name (Local ES) | Record Type | Field Position | Payroll Field (Y/N) | Mandatory (Y/N/C) | Conditional Reason | Position (in file) | Length | Format | Example | System Mapping | Explanation | Relevant for Payroll (Y/N) | Option Values | Rounding | Negative (Y/N) | Value Type | Frequency | Query to RA | RA Comments
+~
+R4| Tax year | Ano | Datos del declarante | 1 | N | Y |  | Hoja 1, casilla 1 | 4 | N (AAAA) | 2026 | PayPeriod.Year | Calendar year of the period being declared. The form is prescribed for periods from 1 August 2024 onward (Res. DIAN 000031 de 2024 art. 3). | Y | - | Not an amount - no rounding. | N | Date | Monthly |  | Pending RA review
+R5| Period | Periodo | Datos del declarante | 3 | N | Y |  | Hoja 1, casilla 3 | 2 | N (01-12) | 03 | PayPeriod.Month | Calendar month being declared, 01 to 12. Formulario 350 is a MONTHLY return; there is no quarterly or annual variant for withholding agents. | Y | -> Sheet 6: Periodo | Not an amount - no rounding. | N | Code | Monthly |  | Pending RA review
+R6| Form number | Numero de formulario | Datos del declarante | 4 | N | Y |  | Hoja 1, casilla 4 | 13 | N | 1120500123456 | System.DIAN_Form_Number | Assigned by the DIAN electronic filing service, not by the declarant - the form prints 'Espacio reservado para la DIAN' against it. It becomes the reference quoted in casilla 26 of any later corrective return. | N | - | Not an amount - no rounding. | N | Identifier | Monthly |  | Pending RA review
+R7| Employer NIT | Numero de Identificacion Tributaria (NIT) | Datos del declarante | 5 | Y | Y |  | Hoja 1, casilla 5 | Var | N (no dots, no hyphens) | 900123456 | Company.NIT | Tax identification number of the withholding agent, taken from casilla 5 of the RUT. The last digit of this number determines the filing deadline (7th to 16th business day of the following month). Join key to the nomina electronica (NIE033) and to PILA. | Y | - | Not an amount - no rounding. | N | Identifier | Monthly |  | Pending RA review
+R8| NIT verification digit | DV | Datos del declarante | 6 | Y | Y |  | Hoja 1, casilla 6 | 1 | N | 7 | Company.NIT_DV | DIAN check digit of the NIT, from casilla 6 of the RUT. | Y | - | Not an amount - no rounding. | N | Identifier | Monthly |  | Pending RA review
+R9| First surname | Primer apellido | Datos del declarante | 7 | Y | C | Populated only where the withholding agent is a NATURAL person. Mutually exclusive with 'Corporate name' (casilla 11): a legal person populates 11 and leaves 7 to 10 blank, and a natural person does the reverse. | Hoja 1, casilla 7 | Var | A | - | Company.First_Surname | First surname of a natural-person withholding agent, from casilla 31 of the RUT. Auto-filled by the DIAN service from the RUT. | Y | - | Not an amount - no rounding. | N | Text | Monthly |  | Pending RA review
+R10| Second surname | Segundo apellido | Datos del declarante | 8 | Y | C | Populated only for a natural-person withholding agent. Mutually exclusive with 'Corporate name' (casilla 11). | Hoja 1, casilla 8 | Var | A | - | Company.Second_Surname | Second surname of a natural-person withholding agent, from casilla 32 of the RUT. | Y | - | Not an amount - no rounding. | N | Text | Monthly |  | Pending RA review
+R11| First name | Primer nombre | Datos del declarante | 9 | Y | C | Populated only for a natural-person withholding agent. Mutually exclusive with 'Corporate name' (casilla 11). | Hoja 1, casilla 9 | Var | A | - | Company.First_Name | First given name of a natural-person withholding agent, from casilla 33 of the RUT. | Y | - | Not an amount - no rounding. | N | Text | Monthly |  | Pending RA review
+R12| Other names | Otros nombres | Datos del declarante | 10 | Y | C | Populated only for a natural-person withholding agent. Mutually exclusive with 'Corporate name' (casilla 11). | Hoja 1, casilla 10 | Var | A | - | Company.Other_Names | Remaining given names of a natural-person withholding agent, from casilla 34 of the RUT. | Y | - | Not an amount - no rounding. | N | Text | Monthly |  | Pending RA review
+R13| Corporate name | Razon social | Datos del declarante | 11 | Y | C | Populated only where the withholding agent is a LEGAL person. Mutually exclusive with the natural-person name casillas 7, 8, 9 and 10. | Hoja 1, casilla 11 | Var | A | MERCANS COLOMBIA S.A.S. | Company.Legal_Name | Corporate name, auto-filled by the DIAN service from casilla 35 of the RUT. The instructivo says expressly that it 'se diligencia automaticamente' - do not attempt to override it. | Y | - | Not an amount - no rounding. | N | Text | Monthly |  | Pending RA review
+R14| Sectional office code | Cod. Direccion seccional | Datos del declarante | 12 | Y | Y |  | Hoja 1, casilla 12 | 2 | N (code) | 32 | Company.DIAN_Seccional_Code | Code of the DIAN sectional office of the taxpayer's principal domicile, from casilla 12 of the RUT. A configuration attribute of the entity, not a period value. | Y | -> Sheet 6: Direccion seccional | Not an amount - no rounding. | N | Code | Constant |  | Pending RA review
+~
+R16| Correction code | Cod. (correccion) | Correccion | 25 | N | C | Populated ONLY where this return corrects an earlier one. Bidirectional pair with 'Previous form number' (casilla 26): where 25 is populated 26 must be populated, and vice versa. Both blank on an initial return. | Hoja 1, casilla 25 | 1 | N (code) | - | Mercans.Correction_Type | Set by the DIAN service: 1 = correction of the taxpayer's own return; 2 = correction of a DIAN-generated correction under Ley 962 de 2005 art. 43; 3 = correction prompted by an administrative act. | N | -> Sheet 6: Codigo de correccion | Not an amount - no rounding. | N | Code | Per event |  | Pending RA review
+R17| Previous form number | Numero de formulario anterior | Correccion | 26 | N | C | Populated ONLY on a corrective return. Bidirectional pair with 'Correction code' (casilla 25). Carries the casilla-4 number of the return being corrected. | Hoja 1, casilla 26 | 13 | N | - | Mercans.Prior_Form_Number | The casilla 4 form number of the return, or of the administrative act, being corrected. This is the link that lets DIAN supersede the earlier filing rather than treat this one as a duplicate. | N | - | Not an amount - no rounding. | N | Identifier | Per event |  | Pending RA review
+~
+R19| Self-withholding activity code (art. 114-1 exonerated legal persons) | Autorretenedores Personas Juridicas exonerados de aportes (Art. 114-1 E.T.) - Actividad economica principal | Autorretencion | 27 | Y | C | Fillable EXCLUSIVELY by legal persons that are exonerated from employer contributions under ET art. 114-1. Bidirectional pair with 'Self-withholding rate' (casilla 28), which the DIAN service derives automatically once 27 is chosen. | Hoja 1, casilla 27 | 4 | N (CIIU code) | 6920 | Company.CIIU_Code | Principal economic-activity code from casilla 46 of the RUT, chosen from the codes in DIAN Resoluciones 000114 of 21 December 2020, 001232 of 16 September 2022 and 000086 of 24 May 2023. THE SAME ART. 114-1 EXONERATION that drives this casilla also drives PILA archivo tipo 1 field 33 and Registro Tipo 2 field 76 - the employer that is exonerated from employer health, SENA and ICBF for employees under 10 SMMLV is the employer that self-withholds here. | Y | -> Sheet 6: Actividad economica (CIIU) | Not an amount - no rounding. | N | Code | Constant |  | Pending RA review
+R20| Self-withholding rate | Tarifa | Autorretencion | 28 | N | C | Derived automatically by the DIAN service from 'Self-withholding activity code' (casilla 27); cannot be keyed independently. Bidirectional pair with casilla 27. | Hoja 1, casilla 28 | Var | N (percentage) | 0.40 | Mercans.Self_Withholding_Rate | The self-withholding rate for the chosen activity, applied to ALL payments received. Set by DUR 1625 de 2016 art. 1.2.6.8. Not a payroll figure - it applies to the employer's own income, not to its employees. | N | - | Rate as printed by the DIAN service. | N | Rate | Constant |  | Pending RA review
+~
+R22| Base - work income (natural persons) | Rentas de trabajo - base sujeta a retencion | Retenciones renta - personas naturales | 77 | N | Y |  | Hoja 1, casilla 77 | 12 | N (whole pesos, nearest 1,000) | 8190000 | SUM(Payroll.Taxable_Base_Art388) | THE PRINCIPAL PAYROLL CASILLA ON THE BASE SIDE. The instructivo defines it as 'los pagos gravables (base sujeta a retencion) efectuados a personas naturales por concepto de salarios, comisiones, prestaciones sociales, viaticos, gastos de representacion, honorarios, emolumentos eclesiasticos, compensaciones recibidas por el trabajo asociado cooperativo, pagos en especie, pagos en acciones y, en general, las compensaciones por servicios personales'. NOTE that it is the DEPURATED taxable base, not the gross: for a resident it is the ET art. 388 base after non-constitutive income, art. 387 deductions and the 25% exempt income; for a NON-RESIDENT taxed under art. 408 the base is the GROSS, because art. 408 admits no depuration. Note also that it sweeps in honorarios paid to natural persons under the art. 383 table, which are not employment income - payroll supplies only the employment component. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R23| Withholding - work income (natural persons) | Rentas de trabajo - retenciones a titulo de renta | Retenciones renta - personas naturales | 93 | N | Y |  | Hoja 1, casilla 93 | 12 | N (whole pesos, nearest 1,000) | 617000 | SUM(Payroll.Income_Tax_Withheld) | THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. The month's total retencion en la fuente on work income paid to natural persons. Must reconcile to the sum of RetencionFuente (NIE177) across every nomina electronica document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R24| Base - pension income (natural persons) | Rentas de pensiones - base sujeta a retencion | Retenciones renta - personas naturales | 78 | N | C | Populated only where the EMPLOYER itself pays a pension. Bidirectional pair with 'Withholding - pension income' (casilla 94): a base without a withholding, or the reverse, is an inconsistency. Blank for an ordinary corporate payroll, where pensions are paid by a fund. | Hoja 1, casilla 78 | 12 | N (whole pesos, nearest 1,000) | - | SUM(Payroll.Pension_Taxable_Base) | The monthly pension payment EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for retirement, invalidity, old-age, survivor and occupational-risk pensions and for substitute indemnities and returns of pension savings. Only the excess over 1,000 UVT is taxable, so the casilla is nil for the overwhelming majority of pensions. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R25| Withholding - pension income (natural persons) | Rentas de pensiones - retenciones | Retenciones renta - personas naturales | 94 | N | C | Populated only where the employer pays a pension. Bidirectional pair with 'Base - pension income' (casilla 78). | Hoja 1, casilla 94 | 12 | N (whole pesos, nearest 1,000) | - | SUM(Payroll.Pension_Tax_Withheld) | Withholding on the taxable excess of employer-paid pension income. Summed into casilla 130. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+~
+R27| Base - payments abroad, no treaty (legal persons) | Pagos o abonos en cuenta al exterior a paises sin convenio - base | Pagos exterior - personas juridicas | 55 | N | C | Auto-derived by the DIAN service from the hoja 2 annex: it is the sum of the casilla 145 values where casilla 141 = SIN CONVENIO and casilla 143 = Persona juridica. Bidirectional pair with 'Withholding - payments abroad, no treaty (legal persons)' (casilla 57) and with hoja 2 total casilla 148. | Hoja 1, casilla 55 | 12 | N (whole pesos, nearest 1,000) | - | (derived from hoja 2 casilla 148) | Base of payments to foreign ENTITIES without a Colombian domicile, in countries with no double-tax treaty. Not a payroll casilla - a foreign entity is not an employee - but shown here because it shares the hoja 2 annex with the non-resident EMPLOYEE casillas. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R28| Withholding - payments abroad, no treaty (legal persons) | Pagos o abonos en cuenta al exterior a paises sin convenio - retenciones | Pagos exterior - personas juridicas | 57 | N | C | Auto-derived from hoja 2 total casilla 150. Bidirectional pair with casilla 55. | Hoja 1, casilla 57 | 12 | N (whole pesos, nearest 1,000) | - | (derived from hoja 2 casilla 150) | Withholding on payments to foreign entities in non-treaty countries. Summed into casilla 130. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R29| Base - payments abroad, treaty (legal persons) | Pagos o abonos en cuenta al exterior a paises con convenio vigente - base | Pagos exterior - personas juridicas | 56 | N | C | Auto-derived from hoja 2 total casilla 152. Bidirectional pair with casilla 58. | Hoja 1, casilla 56 | 12 | N (whole pesos, nearest 1,000) | - | (derived from hoja 2 casilla 152) | Base of payments to foreign entities in countries with a double-tax treaty in force. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R30| Withholding - payments abroad, treaty (legal persons) | Pagos o abonos en cuenta al exterior a paises con convenio vigente - retenciones | Pagos exterior - personas juridicas | 58 | N | C | Auto-derived from hoja 2 total casilla 154. Bidirectional pair with casilla 56. | Hoja 1, casilla 58 | 12 | N (whole pesos, nearest 1,000) | - | (derived from hoja 2 casilla 154) | Withholding on payments to foreign entities in treaty countries. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R31| Base - payments abroad, no treaty (NATURAL persons) | Pagos o abonos en cuenta al exterior a paises sin convenio - base - personas naturales | Pagos exterior - personas naturales | 109 | N | C | THE NON-RESIDENT EMPLOYEE BASE CASILLA where the employee's country has no treaty. Auto-derived by the DIAN service from hoja 2 total casilla 149 - the sum of casilla 145 where casilla 141 = SIN CONVENIO and casilla 143 = Persona natural. Bidirectional pair with 'Withholding - payments abroad, no treaty (natural persons)' (casilla 111). | Hoja 1, casilla 109 | 12 | N (whole pesos, nearest 1,000) | - | SUM(Payroll.NonResident_Gross) WHERE treaty = none | Gross payments to non-resident natural persons in non-treaty countries. For an employee this is the GROSS salary - ET art. 408 admits no depuration - reported through hoja 2 concepto de pago 5, 'Prestaciones de servicios y compensacion por servicios personales'. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R32| Withholding - payments abroad, no treaty (NATURAL persons) | Pagos o abonos en cuenta al exterior a paises sin convenio - retenciones - personas naturales | Pagos exterior - personas naturales | 111 | N | C | Auto-derived from hoja 2 total casilla 151. Bidirectional pair with casilla 109. | Hoja 1, casilla 111 | 12 | N (whole pesos, nearest 1,000) | - | SUM(Payroll.NonResident_Withholding) WHERE treaty = none | Withholding on those payments - the flat 20% of ET art. 408 for employment income. Summed into casilla 130. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R33| Base - payments abroad, treaty (NATURAL persons) | Pagos o abonos en cuenta al exterior a paises con convenio vigente - base - personas naturales | Pagos exterior - personas naturales | 110 | N | C | THE NON-RESIDENT EMPLOYEE BASE CASILLA where a double-tax treaty applies. Auto-derived from hoja 2 total casilla 153. Bidirectional pair with 'Withholding - payments abroad, treaty (natural persons)' (casilla 112). | Hoja 1, casilla 110 | 12 | N (whole pesos, nearest 1,000) | - | SUM(Payroll.NonResident_Gross) WHERE treaty = yes | Gross payments to non-resident natural persons in treaty countries, reported through hoja 2 concepto de pago 24, 'Rentas de trabajo' - the concept whose own definition is 'rentas de trabajo de cualquier naturaleza en relacion con un empleo a favor de personas naturales no residentes'. This is the exact place a non-resident EMPLOYEE with treaty cover is reported. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R34| Withholding - payments abroad, treaty (NATURAL persons) | Pagos o abonos en cuenta al exterior a paises con convenio vigente - retenciones - personas naturales | Pagos exterior - personas naturales | 112 | N | C | Auto-derived from hoja 2 total casilla 155. Bidirectional pair with casilla 110. | Hoja 1, casilla 112 | 12 | N (whole pesos, nearest 1,000) | - | SUM(Payroll.NonResident_Withholding) WHERE treaty = yes | Withholding after treaty relief. Where the treaty assigns taxing rights to the residence state the rate may be reduced to nil. Mercans applies treaty relief ONLY on written client instruction supported by a residence certificate. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+~
+R36| Treaty status | A paises con o sin convenio | Hoja 2 - anexo | 141 | Y | C | One row per payment concept, country and person type. Drives which concepto list applies in casilla 142 and which of the four totals (148, 149, 152, 153) the row feeds. Bidirectional with casilla 142 and casilla 143. | Hoja 2, casilla 141 | Var | Selection | CON CONVENIO | Employee.Treaty_Country_Code | Drop-down: SIN CONVENIO or CON CONVENIO. Choosing CON CONVENIO switches casilla 142 to the treaty concept list (19 to 33) and requires the applicable double-tax treaty to be consulted for the rate. | Y | -> Sheet 6: Convenio | Not an amount - no rounding. | N | Code | Per record |  | Pending RA review
+R37| Payment concept | Concepto de pago | Hoja 2 - anexo | 142 | N | C | The list offered depends on 'Treaty status' (casilla 141): concepts 1-18 for SIN CONVENIO, 19-33 for CON CONVENIO. Bidirectional pair with casilla 141. | Hoja 2, casilla 142 | 2 | N (code) | 24 | Mercans.Foreign_Payment_Concept | For a NON-RESIDENT EMPLOYEE the two relevant concepts are: SIN CONVENIO concepto 5, 'Prestaciones de servicios y compensacion por servicios personales'; CON CONVENIO concepto 24, 'Rentas de trabajo' - expressly 'rentas de trabajo de cualquier naturaleza en relacion con un empleo'. Concepto 25 covers directors' fees and concepto 27 pensions. NOTE the documentation conflict recorded in the RA query column. | Y | -> Sheet 6: Concepto de pago (hoja 2) | Not an amount - no rounding. | N | Code | Per record | SOURCE CONFLICT, escalate. Res. DIAN 000227 de 2025 art. 1.2.2.26 par. 3 refers to 'la Casilla 91 - Concepto de pago de la hoja dos' and to options '01. Enajenacion de activos fijos y otras retenciones' and '14. Otras rentas'. On the currently prescribed form the hoja-2 concepto de pago is CASILLA 142, and its option 14 is 'Servicios de transporte internacional' - option 1 is 'Intereses'. The compilation resolution appears to cite a superseded form. Confirm the correct casilla and option codes for reporting significant economic presence (ET art. 20-3) with the RA. | Pending RA review
+R38| Person type | Tipo de persona | Hoja 2 - anexo | 143 | N | C | Determines whether the row feeds the legal-person totals (148 / 150 / 152 / 154) or the natural-person totals (149 / 151 / 153 / 155). Bidirectional with casillas 141 and 142. This column is NEW in the 2024 form. | Hoja 2, casilla 143 | Var | Selection | Persona natural | Mercans.Counterparty_Type | Persona juridica or Persona natural. A non-resident EMPLOYEE is always Persona natural; this is the field that separates employee withholding from supplier withholding in the annex. | Y | -> Sheet 6: Tipo de persona | Not an amount - no rounding. | N | Code | Per record |  | Pending RA review
+R39| Recipient country | Pais | Hoja 2 - anexo | 144 | Y | C | Required on every annex row. Where 'Treaty status' (casilla 141) = CON CONVENIO the country must be one with a treaty in force. | Hoja 2, casilla 144 | Var | Country code | ES | Employee.Treaty_Country_Code | Country receiving the payment, with its country code. Colombia's treaty network in force includes Spain, Chile, Switzerland, Canada, Mexico, South Korea, Portugal, India, the Czech Republic, the United Kingdom, France, Italy and Japan, plus Andean Community Decision 578. | Y | -> Sheet 6: Paises con convenio | Not an amount - no rounding. | N | Code | Per record |  | Pending RA review
+R40| Payments or credits | Pagos o abonos en cuenta | Hoja 2 - anexo | 145 | N | C | Required on every annex row. Together with 'Rate' (casilla 146) it produces 'Withholding value' (casilla 147) automatically. | Hoja 2, casilla 145 | 12 | N (whole pesos, nearest 1,000) | 12000000 | Payroll.NonResident_Gross | GROSS amount paid or credited to the non-resident. For an employee this is the whole salary - ET art. 408 taxes the gross, with no deduction of the mandatory social-security contributions. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Per record |  | Pending RA review
+R41| Rate | Tarifa (%) | Hoja 2 - anexo | 146 | N | C | Required on every annex row. Determined by ET art. 408 for non-treaty payments, or by the applicable treaty article for treaty payments. Bidirectional pair with casilla 141: the treaty status determines which rate source applies. | Hoja 2, casilla 146 | Var | N (percentage) | 20.00 | Mercans.NonResident_Rate | 20% is the general ET art. 408 rate for employment income and personal services. Special rates in the instructivo include 15% for long-term foreign credits, 5% for international transport and for APP-financing interest, 33% for head-office management charges, 1% for aircraft leasing and reinsurance premiums, and 7% for foreign professors on contracts of up to four months. | Y | -> Sheet 6: Tarifas pagos al exterior | Rate as a percentage. | N | Rate | Per record |  | Pending RA review
+R42| Withholding value | Valor retencion | Hoja 2 - anexo | 147 | N | C | Computed automatically by the DIAN service as casilla 145 x casilla 146. Not keyed. Bidirectional with casillas 145 and 146. | Hoja 2, casilla 147 | 12 | N (whole pesos, nearest 1,000) | 2400000 | Payroll.NonResident_Withholding | The instructivo states expressly that 'el SI de Diligenciamiento calcula automaticamente los valores de las retenciones multiplicando el valor registrado en la casilla 145 por la tarifa registrada en la casilla 146'. Payroll supplies 145 and 146; it must NOT attempt to key 147. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Per record |  | Pending RA review
+R43| Total base - no treaty, legal persons | Pagos al exterior paises sin convenio persona juridica | Hoja 2 - totales | 148 | N | C | Auto-summed where casilla 141 = SIN CONVENIO and casilla 143 = Persona juridica. Feeds hoja 1 casilla 55. | Hoja 2, casilla 148 | 12 | N (whole pesos, nearest 1,000) | - | (system total) | Sum of casilla 145 across the matching annex rows. Carried up to hoja 1 casilla 55. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R44| Total base - no treaty, natural persons | Pagos al exterior paises sin convenio persona natural | Hoja 2 - totales | 149 | N | C | Auto-summed where casilla 141 = SIN CONVENIO and casilla 143 = Persona natural. Feeds hoja 1 casilla 109. | Hoja 2, casilla 149 | 12 | N (whole pesos, nearest 1,000) | - | (system total) | Sum of casilla 145 across the matching annex rows. This is where a non-resident employee in a non-treaty country lands. Carried up to hoja 1 casilla 109. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R45| Total withholding - no treaty, legal persons | Valor retencion sin convenio persona juridica | Hoja 2 - totales | 150 | N | C | Auto-summed; feeds hoja 1 casilla 57. | Hoja 2, casilla 150 | 12 | N (whole pesos, nearest 1,000) | - | (system total) | Sum of casilla 147 across the matching annex rows. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R46| Total withholding - no treaty, natural persons | Valor retencion sin convenio persona natural | Hoja 2 - totales | 151 | N | C | Auto-summed; feeds hoja 1 casilla 111. | Hoja 2, casilla 151 | 12 | N (whole pesos, nearest 1,000) | - | (system total) | Sum of casilla 147 across the matching annex rows - the non-resident employee withholding in non-treaty countries. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R47| Total base - treaty, legal persons | Pagos al exterior paises con convenio persona juridica | Hoja 2 - totales | 152 | N | C | Auto-summed; feeds hoja 1 casilla 56. | Hoja 2, casilla 152 | 12 | N (whole pesos, nearest 1,000) | - | (system total) | Sum of casilla 145 across the matching annex rows. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R48| Total base - treaty, natural persons | Pagos al exterior paises con convenio persona natural | Hoja 2 - totales | 153 | N | C | Auto-summed; feeds hoja 1 casilla 110. | Hoja 2, casilla 153 | 12 | N (whole pesos, nearest 1,000) | 12000000 | (system total) | Sum of casilla 145 across the matching annex rows - where a non-resident employee covered by a treaty lands, under concepto de pago 24. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R49| Total withholding - treaty, legal persons | Valor retencion con convenio persona juridica | Hoja 2 - totales | 154 | N | C | Auto-summed; feeds hoja 1 casilla 58. | Hoja 2, casilla 154 | 12 | N (whole pesos, nearest 1,000) | - | (system total) | Sum of casilla 147 across the matching annex rows. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R50| Total withholding - treaty, natural persons | Retenciones sobre pagos al exterior paises con convenio persona natural | Hoja 2 - totales | 155 | N | C | Auto-summed; feeds hoja 1 casilla 112. | Hoja 2, casilla 155 | 12 | N (whole pesos, nearest 1,000) | 2400000 | (system total) | Sum of casilla 147 across the matching annex rows - the non-resident employee withholding after treaty relief. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+~
+R52| Bases and withholdings on legal persons | Bases y retenciones a personas juridicas | Retenciones renta - personas juridicas | 29-54 | N | C | Populated by the client's accounts-payable function where the corresponding payment was made. Payroll contributes nothing. | Hoja 1, casillas 29 to 54 | 12 | N (whole pesos, nearest 1,000) | - | (client accounts payable) | Fourteen concept pairs for payments to legal persons - honorarios (29 / 42), comisiones (30 / 43), servicios (31 / 44), rendimientos financieros (32 / 45), arrendamientos (33 / 46), regalias (34 / 47), dividendos (35 / 48), compras (36 / 49), tarjetas (37 / 50), contratos de construccion (38 / 51), loterias (39 / 52), hidrocarburos (40 / 53) and otros pagos (41 / 54). Not produced by payroll. Present on the form because Formulario 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the client's accounts-payable or tax function; payroll contributes nothing to this casilla. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R53| Bases and withholdings on natural persons, non-employment concepts | Bases y retenciones a personas naturales - conceptos no laborales | Retenciones renta - personas naturales | 79-92 / 95-108 | N | C | Populated by accounts payable. Payroll contributes only casillas 77 / 93 and, where applicable, 78 / 94. | Hoja 1, casillas 79 to 92 and 95 to 108 | 12 | N (whole pesos, nearest 1,000) | - | (client accounts payable) | The same concept grid repeated for natural persons - honorarios (79 / 95), comisiones (80 / 96), servicios (81 / 97), and so on to otros pagos (92 / 108), plus enajenacion de activos fijos (89 / 105) which exists only in the natural-person column. Honorarios paid to a natural person under the art. 383 table can straddle 77 / 93 and 79 / 95; the boundary is a client decision, documented in the Population Rules. Not produced by payroll. Present on the form because Formulario 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the client's accounts-payable or tax function; payroll contributes nothing to this casilla. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R54| Self-withholding blocks | Autorretenciones | Autorretenciones | 59-76 / 113-128 | N | C | Populated where the employer is an authorised self-withholding agent. Casilla 59 / 68 is the art. 114-1 self-withholding driven by casillas 27 and 28. | Hoja 1, casillas 59 to 76 and 113 to 128 | 12 | N (whole pesos, nearest 1,000) | - | (client tax function) | Self-withholding on the employer's OWN income - ventas, honorarios, comisiones, servicios, rendimientos financieros, mining exports and otros conceptos, for legal persons (59-76) and natural persons (113-128). Not produced by payroll. Present on the form because Formulario 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the client's accounts-payable or tax function; payroll contributes nothing to this casilla. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R55| VAT and stamp-duty withholding | Retenciones IVA y timbre nacional | Otros impuestos | 131-135 | N | C | Populated by the client's tax function. Casilla 132 is the withholding on services supplied by non-residents or non-domiciled persons. | Hoja 1, casillas 131 to 135 | 12 | N (whole pesos, nearest 1,000) | - | (client tax function) | 131 VAT withheld from VAT-responsible suppliers; 132 VAT withheld on services from non-residents; 133 excess or undue VAT withholding reversed; 134 total VAT withholding (131 + 132 - 133); 135 national stamp-duty withholding. Not produced by payroll. Present on the form because Formulario 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the client's accounts-payable or tax function; payroll contributes nothing to this casilla. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+~
+R57| Less excess or undue withholding | Menos retenciones practicadas en exceso o indebidas | Totales | 129 | N | C | Populated where withholding was practised in excess or in error, or on transactions annulled, rescinded or resolved. Subtracted in casilla 130. | Hoja 1, casilla 129 | 12 | N (whole pesos, nearest 1,000) | - | Payroll.Withholding_Reversal | Amounts over-withheld or wrongly withheld, and reversals of withholding on cancelled transactions. Where the month's withholding is insufficient to absorb the credit, the instructivo permits carrying it to the immediately following periods. Payroll DOES feed this casilla where an employee's withholding is corrected downward in a later month. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R58| Total income-tax withholding | Total retenciones renta y complementario | Totales | 130 | N | Y |  | Hoja 1, casilla 130 | 12 | N (whole pesos, nearest 1,000) | 617000 | (system total) | The instructivo prints the arithmetic in full: the sum of casillas 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 57, 58, 68, 69, 70, 71, 72, 73, 74, 75, 76, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 111, 112, 121, 122, 123, 124, 125, 126, 127 and 128, LESS casilla 129. Payroll's contribution enters through 93, 94, 111 and 112. | Y | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R59| Total withholding | Total retenciones | Totales | 136 | N | Y |  | Hoja 1, casilla 136 | 12 | N (whole pesos, nearest 1,000) | 617000 | (system total) | Casilla 130 (income tax) plus casilla 134 (VAT) plus casilla 135 (stamp duty). | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R60| Penalties | Sanciones | Totales | 137 | N | C | Populated where a penalty arises on this filing - late filing or correction. Feeds casilla 138. | Hoja 1, casilla 137 | 12 | N (whole pesos, nearest 1,000) | - | Mercans.Penalty_Amount | Total penalties arising from this return. The instructivo warns that the penalty declared cannot be less than the minimum penalty of 10 UVT (COP 523,740 in 2026) for late filing, and that for a corrective return the minimum is 10 UVT of the year in which the ORIGINAL return was filed. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Per event |  | Pending RA review
+R61| Total withholding plus penalties | Total retenciones mas sanciones | Totales | 138 | N | Y |  | Hoja 1, casilla 138 | 12 | N (whole pesos, nearest 1,000) | 617000 | (system total) | Casilla 136 plus casilla 137. This is the amount that must be PAID IN FULL: a withholding return filed without full payment produces NO legal effect, with no administrative act needed to say so (ET art. 580-1, quoted in the instructivo). | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R62| Signatory identification | No. Identificacion signatario | Firmas | 139 | Y | Y |  | Hoja 1, casilla 139 | Var | N | 79123456 | Company.Legal_Rep_ID | NIT assigned by DIAN to the person signing the return - the legal representative or an authorised agent. | Y | - | Not an amount - no rounding. | N | Identifier | Monthly |  | Pending RA review
+R63| Signatory verification digit | DV signatario | Firmas | 140 | Y | Y |  | Hoja 1, casilla 140 | 1 | N | 3 | Company.Legal_Rep_ID_DV | Verification digit of the signatory's NIT. | Y | - | Not an amount - no rounding. | N | Identifier | Monthly |  | Pending RA review
+R64| Total payment | Pago total | Firmas | 980 | N | Y |  | Hoja 1, casilla 980 | 12 | N (whole pesos) | 617000 | Mercans.Payment_Amount | The amount actually paid with the return. Reserved-range casilla. Must equal casilla 138 for the return to have legal effect. | N | - | Whole pesos, then rounded to the nearest 1,000 (ET art. 577) - applies to every money casilla of the return. | N | Amount | Monthly |  | Pending RA review
+R65| Representation code | Cod. Representacion | Firmas | 981 | N | Y |  | Hoja 1, casilla 981 | 2 | N (code) | 01 | Mercans.Representation_Code | Type of representation of the person signing for the declarant, taken from casilla 98 of the RUT. | N | -> Sheet 6: Codigo de representacion | Not an amount - no rounding. | N | Code | Monthly |  | Pending RA review
+R66| Accountant or statutory auditor code | Codigo Contador o Revisor Fiscal | Firmas | 982 | N | C | Populated where the return must be signed by an accountant or a statutory auditor. Bidirectional set with 'Professional card number' (casilla 983) and 'With qualifications' (casilla 994): where 982 is populated, 983 is mandatory and 994 becomes available. | Hoja 1, casilla 982 | 1 | N (code) | 2 | Mercans.Accountant_Type | 1 = Contador, 2 = Revisor fiscal. The instructivo sets the thresholds: an accountant must sign where the taxpayer keeps books and gross assets at the preceding year end exceeded 100,000 UVT; a statutory auditor must sign for joint-stock companies, for companies whose gross assets reach 5,000 SMMLV, and for companies whose gross income reaches 3,000 SMMLV. | N | -> Sheet 6: Contador o revisor fiscal | Not an amount - no rounding. | N | Code | Monthly |  | Pending RA review
+R67| Professional card number | No. Tarjeta profesional | Firmas | 983 | N | C | Mandatory where 'Accountant or statutory auditor code' (casilla 982) is populated; blank otherwise. Bidirectional pair with casilla 982. | Hoja 1, casilla 983 | Var | AN - prefix pattern ^[0-9]{1,6}-T$: the numeric registration followed by a hyphen and the literal suffix T (for Contador). Store the printed value including the -T suffix; do not strip it, because the Junta quotes the card with it | 123456-T | Mercans.Accountant_Card_Number | Professional card number issued by the Junta Central de Contadores. The -T suffix is part of the identifier, not a separator. | N | - | Not an amount - no rounding. | N | Identifier | Monthly |  | Pending RA review
+R68| With qualifications | Con salvedades | Firmas | 994 | N | C | Available only where 'Accountant or statutory auditor code' (casilla 982) is populated. Bidirectional pair with casilla 982. | Hoja 1, casilla 994 | 1 | Flag (x) | - | Mercans.Signed_With_Qualifications | Marked with an x where the accountant or statutory auditor signs with qualifications. | N | - | Not an amount - no rounding. | N | Flag | Monthly |  | Pending RA review
+R69| Collecting-entity stamp | Espacio exclusivo para el sello de la entidad recaudadora | Firmas | 997 | N | N |  | Hoja 1, casilla 997 | - | Display-only | - | (not an input) | DISPLAY-ONLY. Reserved for the collecting bank's stamp on a paper receipt. It is not a data field, is not keyed and is not transmitted; it exists on the printed representation only. | N | - | Not an amount - no rounding. | N | Text | Monthly |  | Pending RA review
+
+
+=== SHEET: File Structure (dims A1:B41, max_row 41, max_col 2) ===
+
+R1| FILE STRUCTURE AND TECHNICAL SPECIFICATIONS
+~
+R3| Channel | online_form. Data is keyed, or robotically entered, directly into the DIAN Servicios Informaticos Electronicos (Muisca) form at www.dian.gov.co.
+R4| Why this is NOT XML | DIAN publishes NO XSD, NO cahier des charges and NO import template for Formulario 350. Res. DIAN 000227 de 2025 art. 1.2.2.26 par. 1 says only that filers must use 'los Servicios Informaticos dispuestos por la entidad, utilizando el Instrumento de Firma Electronica (IFE)', and that DIAN 'pondra a disposicion el Formulario numero 350 en forma virtual en la pagina web'. Contrast the nomina electronica, which has a published XSD and a SOAP contract.
+R5| Authentication | Instrumento de Firma Electronica (IFE) authorised by DIAN - an authenticated portal credential. NOT an X.509 document signature.
+R6| Consequence for the model below | The structure below is a LOGICAL MODEL - the field list and hierarchy of the return - NOT the wire or submission format. There is no wire format to document.
+R7| Payment | The return must be paid IN FULL. ET art. 580-1: a withholding return filed without full payment produces no legal effect, with no administrative act needed to declare it so. Casilla 980 must equal casilla 138.
+~
+R9| Block 1 - Datos del declarante | 1 Ano \| 3 Periodo \| 4 Numero de formulario (DIAN-assigned) \| 5 NIT \| 6 DV \| 7-10 apellidos y nombres (natural person) \| 11 Razon social (legal person) \| 12 Cod. Direccion seccional
+R10| Block 2 - Correccion | 25 Cod. correccion \| 26 Numero de formulario anterior. Both blank on an initial return; both populated on a corrective one.
+R11| Block 3 - Autorretencion art. 114-1 | 27 Actividad economica principal (CIIU) \| 28 Tarifa (derived by the portal from 27)
+R12| Block 4 - Renta, personas juridicas | Bases 29-41 paired with retenciones 42-54, by concept: honorarios, comisiones, servicios, rendimientos financieros, arrendamientos, regalias, dividendos, compras, tarjetas, contratos de construccion, loterias, hidrocarburos, otros pagos.
+R13| Block 5 - Pagos al exterior, personas juridicas | 55 base sin convenio \| 56 base con convenio \| 57 retencion sin convenio \| 58 retencion con convenio. All four are DERIVED by the portal from the hoja-2 annex.
+R14| Block 6 - Autorretenciones, personas juridicas | 59 base art. 114-1 \| 60-67 bases by concept \| 68 retencion art. 114-1 \| 69-76 retenciones by concept.
+R15| Block 7 - Renta, personas naturales  <-- PAYROLL | 77 base rentas de trabajo  <-- PAYROLL \| 78 base rentas de pensiones \| 79-92 bases by other concept \|\| 93 retencion rentas de trabajo  <-- PAYROLL \| 94 retencion rentas de pensiones \| 95-108 retenciones by other concept. Note that 89 / 105 (enajenacion de activos fijos y actividades de transito) exist only in the natural-person column.
+R16| Block 8 - Pagos al exterior, personas naturales  <-- PAYROLL (non-resident) | 109 base sin convenio \| 110 base con convenio \| 111 retencion sin convenio \| 112 retencion con convenio. All four DERIVED by the portal from the hoja-2 annex.
+R17| Block 9 - Autorretenciones, personas naturales | 113-120 bases \| 121-128 retenciones.
+R18| Block 10 - Totales renta | 129 menos retenciones en exceso o indebidas \| 130 total retenciones renta y complementario.
+R19| Block 11 - Otros impuestos | 131 IVA a responsables \| 132 IVA por servicios a no residentes \| 133 menos IVA en exceso \| 134 total IVA \| 135 timbre nacional.
+R20| Block 12 - Total | 136 total retenciones \| 137 sanciones \| 138 total retenciones mas sanciones.
+R21| Block 13 - Firmas | 139 NIT signatario \| 140 DV signatario \| 980 pago total \| 981 cod. representacion \| 982 codigo contador o revisor fiscal \| 983 no. tarjeta profesional \| 994 con salvedades \| 997 sello entidad recaudadora (DISPLAY-ONLY, not an input).
+~
+R23| Repeating annex row (45 rows on the printed form) | 141 A paises con o sin convenio \| 142 Concepto de pago \| 143 Tipo de persona \| 144 Pais + Cod. \| 145 Pagos o abonos en cuenta \| 146 Tarifa (%) \| 147 Valor retencion (computed as 145 x 146)
+R24| Annex totals | 148 sin convenio persona juridica (base)   -> hoja 1 casilla 55
+R25|  | 149 sin convenio persona natural (base)    -> hoja 1 casilla 109  <-- NON-RESIDENT EMPLOYEE
+R26|  | 150 sin convenio persona juridica (ret.)   -> hoja 1 casilla 57
+R27|  | 151 sin convenio persona natural (ret.)    -> hoja 1 casilla 111  <-- NON-RESIDENT EMPLOYEE
+R28|  | 152 con convenio persona juridica (base)   -> hoja 1 casilla 56
+R29|  | 153 con convenio persona natural (base)    -> hoja 1 casilla 110  <-- NON-RESIDENT EMPLOYEE
+R30|  | 154 con convenio persona juridica (ret.)   -> hoja 1 casilla 58
+R31|  | 155 con convenio persona natural (ret.)    -> hoja 1 casilla 112  <-- NON-RESIDENT EMPLOYEE
+~
+R33| Casilla 130 | 42 + 43 + 44 + 45 + 46 + 47 + 48 + 49 + 50 + 51 + 52 + 53 + 54 + 57 + 58 + 68 + 69 + 70 + 71 + 72 + 73 + 74 + 75 + 76 + 93 + 94 + 95 + 96 + 97 + 98 + 99 + 100 + 101 + 102 + 103 + 104 + 105 + 106 + 107 + 108 + 111 + 112 + 121 + 122 + 123 + 124 + 125 + 126 + 127 + 128, MINUS 129.
+R34| Casilla 134 | 131 + 132, MINUS 133.
+R35| Casilla 136 | 130 + 134 + 135.
+R36| Casilla 138 | 136 + 137.
+R37| Casilla 147 | 145 x 146, computed by the portal.
+R38| Casilla 28 | Derived by the portal from the CIIU code chosen in casilla 27.
+~
+R40| Rounding | Whole pesos, then to the NEAREST 1,000 (ET art. 577). This is the third of the three Colombian conventions and must never be blended with the nomina electronica (2 decimals, round-half-to-even) or with PILA (round UP to the next 100).
+R41| Minimum penalty | 10 UVT = COP 523,740 for 2026. For a corrective return the minimum is 10 UVT of the year in which the ORIGINAL return was filed, not of the current year.
+
+
+=== SHEET: Field Options (dims A1:D72, max_row 72, max_col 4) ===
+
+R1| FIELD OPTIONS - CODE TABLES
+R2| Code | Abbrev | Local (ES) | EN Description
+~
+R4| 01 | ENE | Enero | January. The return is always monthly for a withholding agent.
+R5| 02 | FEB | Febrero | February.
+R6| 03 | MAR | Marzo | March - the period used in the worked example.
+R7| 04 - 12 | ABR - DIC | Abril a Diciembre | The remaining months.
+~
+R9| 1 | PRIV | Correccion a la declaracion privada | The taxpayer corrects its own return.
+R10| 2 | 962 | Correccion a la correccion generada por la DIAN | Correction of a DIAN-generated correction under Ley 962 de 2005 art. 43.
+R11| 3 | ACTO | Correccion provocada por acto administrativo | Correction prompted by an administrative act.
+~
+R13| PJ | PJ | Persona juridica | Foreign entity without a Colombian domicile. Rolls into casillas 148 / 150 / 152 / 154.
+R14| PN | PN | Persona natural | Non-resident natural person, including a NON-RESIDENT EMPLOYEE. Rolls into casillas 149 / 151 / 153 / 155.
+~
+R16| SIN CONVENIO | SC | Paises sin convenio | No double-tax treaty in force. Concepto de pago list 1 to 18. Rates from ET arts. 408-415.
+R17| CON CONVENIO | CC | Paises con convenio vigente | A double-tax treaty is in force. Concepto de pago list 19 to 33. The rate must be taken from the applicable treaty.
+~
+R19| 1 | INT | Intereses | Interest on credits of any nature.
+R20| 2 | DIV | Dividendos y participaciones | Dividends, ET art. 407.
+R21| 3 | RF-1A | Rendimientos financieros - creditos exterior >= 1 ano | Financial yields on foreign credits of one year or more, and leasing finance costs. 15%.
+R22| 4 | REG | Regalias y explotacion de intangibles | Royalties, industrial and intellectual property, films, software, know-how.
+R23| 5 | SERV-PER | Prestaciones de servicios y compensacion por servicios personales | THE NON-RESIDENT EMPLOYEE CONCEPT for a country with NO treaty. Remuneration of services in favour of non-resident natural persons and foreign entities. Rate 20% under ET art. 408.
+R24| 6 | SERV-TEC | Servicios tecnicos, de asistencia tecnica y consultoria | Technical services, technical assistance and consultancy, including from abroad.
+R25| 7 | COM | Comisiones | Commissions.
+R26| 8 | HON | Honorarios | Professional fees.
+R27| 9 | ARR | Arrendamientos | Rental of movable and immovable property.
+R28| 10 | LEAS | Contratos de leasing sobre naves, helicopteros y/o aerodinos | 1%.
+R29| 11 | REAS | Prima cedida por reaseguros | 1%.
+R30| 12 | RF-8A | Rendimientos financieros - creditos APP >= 8 anos | 5%, APP infrastructure.
+R31| 13 | CASA | Administracion o direccion a la casa matriz | 33%, ET art. 124.
+R32| 14 | TRANS | Servicios de transporte internacional | 5%.
+R33| 15 | PES | Venta y/o servicios por Presencia Economica Significativa - PES | ET art. 20-3.
+R34| 16 | JNC | Jurisdicciones no cooperantes o de baja o nula imposicion | General corporate income-tax rate.
+R35| 17 | PROF-EXT | Pagos a profesores extranjeros | 7%, foreign professors on ICFES-approved contracts of up to four months.
+R36| 18 | OTROS | Otros conceptos | Any other beneficially owned income not listed above.
+~
+R38| 19 | INM | Rentas inmobiliarias | Income from immovable property situated in Colombia.
+R39| 20 | DIV-CC | Dividendos y participaciones | Dividends under the treaty dividend article.
+R40| 21 | INT-CC | Intereses | Interest under the treaty interest article.
+R41| 23 | GC | Ganancias de capital | Gains on the disposal of Colombian immovable property.
+R42| 24 | RT | Rentas de trabajo | THE NON-RESIDENT EMPLOYEE CONCEPT for a treaty country. The form's own definition is 'rentas de trabajo de cualquier naturaleza EN RELACION CON UN EMPLEO a favor de personas naturales no residentes o sucesiones iliquidas de personas naturales que no eran residentes en Colombia'.
+R43| 25 | HON-DIR | Honorarios de directores | Directors' fees and similar payments to a member of a board or equivalent organ. NOT the employee concept.
+R44| 26 | ART | Artistas y deportistas | Entertainers and sportspersons.
+R45| 27 | PEN | Pensiones | Pensions and similar remuneration. Use where the EMPLOYER pays the pension to a non-resident.
+R46| 28 | FUN | Funciones publicas | Government service.
+R47| (others) | - | Restantes conceptos con convenio | The remaining treaty concepts up to code 33 are printed on the form's hoja-2 instructivo.
+~
+R49| 20.00 | 20% | Tarifa general ET art. 408 | The general rate for employment income and personal services paid to non-residents. THE PAYROLL RATE.
+R50| 15.00 | 15% | Rendimientos financieros creditos >= 1 ano | ET art. 408 special rate.
+R51| 5.00 | 5% | Transporte internacional; intereses APP >= 8 anos | ET special rates.
+R52| 33.00 | 33% | Administracion o direccion a casa matriz | ET art. 124.
+R53| 1.00 | 1% | Leasing de naves y aerodinos; prima cedida por reaseguros | ET special rates.
+R54| 7.00 | 7% | Profesores extranjeros | Contracts of up to four months with ICFES-approved institutions.
+R55| (treaty) | - | Tarifa del convenio | For CON CONVENIO rows the rate comes from the applicable double-tax treaty and may be lower than 20%, or nil. Mercans applies treaty relief ONLY on written client instruction supported by a residence certificate.
+~
+R57| ES / CL / CH | - | Espana, Chile, Suiza | Treaties in force.
+R58| CA / MX / KR | - | Canada, Mexico, Corea del Sur | Treaties in force.
+R59| PT / IN / CZ | - | Portugal, India, Republica Checa | Treaties in force.
+R60| GB / FR / IT / JP | - | Reino Unido, Francia, Italia, Japon | Treaties in force.
+R61| (CAN) | - | Decision 578 de la Comunidad Andina | Bolivia, Ecuador and Peru, under Andean Community Decision 578 rather than a bilateral treaty.
+~
+R63| 1 | CONT | Contador | Required where the taxpayer keeps books and gross assets at the preceding year end exceeded 100,000 UVT.
+R64| 2 | RF | Revisor fiscal | Required for joint-stock companies; for companies where the administration does not fall to all partners; where partners excluded from management holding at least 20% of capital so require; for any commercial company whose gross assets at 31 December reach 5,000 SMMLV; and for any whose gross income in the preceding year reaches 3,000 SMMLV.
+~
+R66| (RUT casilla 98) | - | Tipo de representacion | Taken from casilla 98 of the RUT. Typical values are legal representative (principal or alternate), agent with power of attorney, liquidator and administrator. The catalogue is maintained by DIAN in the RUT, not on this form.
+~
+R68| (RUT casilla 12) | - | Codigo de la direccion seccional | The DIAN sectional office of the taxpayer's principal domicile, taken from casilla 12 of the RUT. A configuration attribute of the entity; the catalogue is maintained by DIAN.
+~
+R70| (CIIU Rev. 4 A.C.) | - | Codigo de actividad economica principal | From casilla 46 of the RUT, per DIAN Resoluciones 000114 of 21 December 2020, 001232 of 16 September 2022 and 000086 of 24 May 2023. The chosen code drives the self-withholding rate auto-filled into casilla 28 under DUR 1625 de 2016 art. 1.2.6.8.
+~
+R72| 1 to 0 | - | Del septimo al decimo sexto dia habil del mes siguiente | DUR 1625 de 2016 art. 1.6.1.13.2.33 as set by Decreto 2229 de 2023. NIT ending 1 files on the 7th business day, ending 2 on the 8th, and so on to ending 0 on the 16th. Contrast PILA, which is keyed to the last TWO digits and runs from the 2nd to the 16th business day.
+
+
+=== SHEET: Population Rules (dims A1:D29, max_row 29, max_col 4) ===
+
+R1| POPULATION RULES - HOW TO FILL EACH FIELD FROM PAYROLL
+R2| Field Name | Source System | Population Logic | Edge Cases
+~
+R4| Casilla 77 - base rentas de trabajo | Payroll engine (tax) | Accumulate, across every employee paid in the month, the taxable base actually used to compute the withholding. For a RESIDENT this is the ET art. 388 DEPURATED base - gross taxable payments less non-constitutive income (mandatory health, pension and solidarity-fund contributions), less the art. 387 deductions elected in writing by the employee, less the 25% exempt income of art. 206 num. 10, subject to the 40% and 1,340-UVT caps. Do NOT report the gross. Round the accumulated total to the nearest 1,000 (ET art. 577), once, at the end - never round each employee and then sum. | The casilla also sweeps in honorarios, servicios and comisiones paid to NATURAL persons that are withheld under the art. 383 table (ET art. 383 par. 2, added by Ley 2277 de 2022 art. 8). Payroll supplies only the EMPLOYMENT component; the boundary with casilla 79 / 95 is a client-specific classification that must be agreed and documented at implementation.
+R5| Casilla 93 - retencion rentas de trabajo | Payroll engine (tax) | Accumulate the retencion en la fuente actually withheld on work income from natural persons in the month. Each employee's withholding is itself already approximated to the nearest 1,000 under ET art. 868; accumulate those approximated figures and then apply the art. 577 nearest-1,000 rounding to the total. Reconcile the result to the sum of RetencionFuente (NIE177) across every nomina electronica document for the same month BEFORE filing. | An employee whose depurated base falls in the 0% band contributes zero here but still contributes their base to casilla 77. Excluding the base is a common and material error.
+R6| Casillas 78 / 94 - rentas de pensiones | Payroll engine (tax) | Populate only where the EMPLOYER itself pays a pension. Report the monthly amount EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, and the withholding on that excess. Where the pension is paid by a pension fund, the fund is the withholding agent and nothing is reported here. | Colombia has no employer year-end reconciliation, so an error here is corrected only by a corrective return, not by a December true-up.
+R7| Casilla 12 - direccion seccional | Company master data | Copy the code from casilla 12 of the entity's RUT. It is a static configuration attribute; it does not change with the period and must not be re-derived monthly. | A branch structure does not change this casilla - the return is filed for the principal domicile of the legal entity.
+~
+R9| Nil period | Engine (control) | Where NO operation subject to withholding occurred in the month, DO NOT file. ET art. 606 par. 2 makes the return non-obligatory for such a period. This is unusual: the nomina electronica and PILA have no equivalent exemption, so a month with employees but no withholding still produces those two filings while producing no Form 350. | Filing an all-zero return is not an error, but it creates a record that must then be corrected if a late payment is discovered. Prefer not filing where the exemption genuinely applies, and document the decision.
+R10| Payment must accompany the return | Engine (control) | Casilla 980 (pago total) must equal casilla 138 (total retenciones mas sanciones). ET art. 580-1: a withholding return filed WITHOUT full payment produces NO legal effect, and no administrative act is needed to say so. Until the taxpayer files again WITH payment, the original filing is treated as never made. | This is the single most expensive procedural trap on this return: a filed-but-unpaid return accrues late-filing penalties as though nothing had been filed.
+R11| Do not key the portal-derived casillas | Engine (control) | The DIAN service derives casillas 28 (from 27), 55, 56, 57, 58, 109, 110, 111 and 112 (from the hoja-2 annex totals 148 to 155), 130, 134, 136, 138 and 147 (145 x 146). Supply only the inputs. Attempting to key a derived casilla either fails or, worse, creates an inconsistency the portal silently overwrites. | For the non-resident block this means payroll supplies hoja-2 ROWS - casillas 141 to 146 - and never the hoja-1 casillas 109 to 112.
+R12| Counterparty-type separation | Engine (accumulation) | The 2024 form separates withholding on NATURAL persons from withholding on LEGAL persons across the whole grid. The engine must therefore accumulate withholding by counterparty type from the transaction level, not classify it at reporting time. The pre-2024 form did not require this and a migrated accumulation will not carry the flag. | Payroll is inherently natural-person only, so its own accumulation is unambiguous. The risk lies in a shared withholding ledger where supplier and employee withholding are commingled.
+~
+R14| All money casillas | Engine (formatting) | Whole pesos, then rounded to the NEAREST 1,000 under ET art. 577. Apply the rounding ONCE, to the accumulated casilla value, not to each contributing record. No decimals, no thousand separators in the transmitted value. | Rounding each employee to the nearest 1,000 and then summing produces a total that can differ from the correctly rounded aggregate by several thousand pesos across a large population.
+R15| Three conventions must not be blended | Engine (formatting) | The SAME withholding appears as three different numbers across the Colombian artefacts: nearest-1,000 here; two decimals round-half-to-even in the nomina electronica; and irrelevant in PILA, which carries contributions not tax. Store the unrounded figure once and apply each convention at output. | The reconciliation between casilla 93 and SUM(NIE177) must therefore be performed on the UNROUNDED values with a tolerance, not on the rounded ones.
+R16| Minimum penalty | Engine (control) | Where casilla 137 is populated, the amount cannot be below 10 UVT. For 2026 that is 10 x 52,374 = COP 523,740. For a CORRECTIVE return the minimum is 10 UVT of the year in which the ORIGINAL return was filed, not of the current year. | A correction of a 2024 return filed in 2026 uses the 2024 UVT for the minimum penalty. Store the original filing year with the correction.
+~
+R18| Non-resident employees - hoja 2 rows | Payroll engine (tax) | For each non-resident employee, create one hoja-2 row per country and treaty status. Set casilla 141 to SIN CONVENIO or CON CONVENIO; casilla 142 to concepto 5 (Prestaciones de servicios y compensacion por servicios personales) for non-treaty countries or concepto 24 (Rentas de trabajo) for treaty countries; casilla 143 to Persona natural; casilla 144 to the country of residence; casilla 145 to the GROSS payment - not a depurated base, because ET art. 408 admits no depuration; and casilla 146 to 20.00, or to the treaty rate. The portal computes casilla 147 and the four totals. | Rows for the same country, concept and person type may be aggregated. Do NOT aggregate across treaty statuses or across concepts - the rate and the treaty article differ. Directors' fees belong in concepto 25 and employer-paid pensions in concepto 27, never in 24.
+R19| Residence switch mid-year | Payroll engine (tax) | Carry a residence flag with an effective date on the employee record and re-evaluate it every period against ET art. 10 - presence exceeding 183 calendar days, continuous or not, in any 365-day period. Until the test is met, report the employee on hoja 2 at the flat 20%. From the payment FOLLOWING the date the test is met, report on hoja 1 casillas 77 and 93 under the art. 383 table. Never restate the earlier months. | DIAN Concepto 011108 of 29 June 2026 expressly rejects withholding under art. 383 from day one in anticipation of future residence, even on a contract exceeding 183 days. Withholding is determined at the moment of each payment on the status then held. There is no payroll true-up; the employee reconciles on their own return.
+R20| Work performed entirely abroad | Payroll engine (tax) | Where a NON-RESIDENT performs the work entirely outside Colombia, the income is foreign-source and there is NO Colombian withholding and nothing to report on this return - neither hoja 1 nor hoja 2. Where a RESIDENT performs work abroad, the income IS taxable on the worldwide basis and goes to casillas 77 and 93 as normal. | The distinguishing evidence is the place-of-work country carried on the nomina electronica (NIE050). Keep the two records consistent: a document showing LugarTrabajoPais other than CO for a non-resident should produce no Form 350 line.
+R21| Casilla 129 - reversing an over-withholding | Payroll engine | Where an employee's withholding is corrected downward in a later month - a retroactive change to the art. 387 deductions, a cancelled payment, or an arithmetic error - report the reversal in casilla 129 of the month in which the correction is made, rather than correcting the earlier return. Where the month's withholding is insufficient to absorb the credit, the instructivo permits carrying it to the immediately following periods. | Casilla 129 also carries reintegros of non-transferable withholding attributable to a resident natural-person beneficiary or a resident foreign investor under DUR 1625 de 2016 art. 1.2.4.37 - not a payroll case, but the same casilla.
+R22| Casilla 27 and the art. 114-1 exoneration | Company configuration | Populate casilla 27 only where the employer is a LEGAL person exonerated from employer contributions under ET art. 114-1. The SAME exoneration test - employees earning less than 10 SMMLV (COP 17,509,050 in 2026) - drives PILA archivo tipo 1 field 33 and PILA Registro Tipo 2 field 76. Configure the test ONCE and consume it in both places. | The exoneration is tested MONTHLY and PER EMPLOYEE for PILA purposes, but the self-withholding activity code here is an entity-level, static attribute. Do not conflate the two granularities.
+~
+R24| Casilla 25 and casilla 26 | Engine (validation) | Both blank on an initial return; both populated on a corrective one. Casilla 26 must carry the casilla-4 form number of the return being corrected. | A corrective return with casilla 26 blank is treated as a new initial return and produces a duplicate filing for the period.
+R25| Casillas 7-10 versus casilla 11 | Engine (validation) | A LEGAL person populates casilla 11 and leaves 7 to 10 blank; a NATURAL person does the reverse. The DIAN service auto-fills whichever applies from the RUT. | Both blocks populated is a RUT inconsistency, not a form error - resolve it in the RUT.
+R26| Casilla 27 and casilla 28 | Engine (validation) | Casilla 28 is derived from casilla 27 by the portal. Supply 27 only. | A hard-coded rate in 28 will be overwritten and may mask a wrong CIIU code in 27.
+R27| Casillas 982, 983 and 994 | Engine (validation) | Where casilla 982 is populated, casilla 983 (professional card number) is mandatory and casilla 994 (with qualifications) becomes available. Where 982 is blank, 983 and 994 must be blank. | An unsigned return that required an accountant's or auditor's signature is defective.
+R28| Casilla 138 and casilla 980 | Engine (validation) | They must be equal. Block submission where they are not. | ET art. 580-1 makes an underpaid return legally ineffective. This is a hard stop, not a warning.
+R29| Cross-report reconciliation | Engine (reconciliation) | Before filing, assert: SUM(NIE177) over all nomina electronica documents for the month, unrounded, equals the unrounded accumulation behind casilla 93, within a tolerance of one peso per employee. Assert also that the employee count behind casilla 77 equals the number of validated nomina electronica documents for the month. | A mismatch almost always means either an employee was paid without a nomina electronica document, or a document was rejected and not re-transmitted. Both are deductibility failures, not just reporting failures.
+
+
+=== SHEET: Example Analysis (dims A1:D40, max_row 40, max_col 4) ===
+
+R1| EXAMPLE ANALYSIS - SAMPLE RECORD PARSED FIELD BY FIELD
+R2| Raw Value | Field Name | Interpretation | Notes
+~
+R4| (scenario) | Employer | MERCANS COLOMBIA S.A.S., NIT 900123456-7, one employee paid in the month, no supplier withholding, no VAT withholding, no self-withholding. | Deliberately reduced to the payroll contribution so the casilla arithmetic is legible. A real return aggregates every withholding the employer makes.
+R5| (scenario) | Employee | Juan Carlos Perez Gomez, cedula 1020304050, salary COP 12,000,000, tax RESIDENT. | The same employee as the nomina electronica worked example, so the reconciliation can be followed across the two workbooks.
+~
+R7| 2026 | Casilla 1 - Ano | Tax year 2026. | -
+R8| 03 | Casilla 3 - Periodo | March. | The return is due between the 7th and 16th business day of April 2026, by the last digit of the NIT. NIT 900123456 ends in 6, so the 12th business day of April.
+R9| 1120500123456 | Casilla 4 - Numero de formulario | Assigned by DIAN, not by the declarant. | Capture and store it: a later corrective return quotes it in casilla 26.
+R10| 900123456 / 7 | Casillas 5 / 6 - NIT / DV | Employer tax number and check digit. | The same NIT as nomina electronica NIE033 / NIE034 and as PILA archivo tipo 1 fields 3 and 4.
+R11| MERCANS COLOMBIA S.A.S. | Casilla 11 - Razon social | Legal person, so casillas 7 to 10 stay blank. | Auto-filled by the DIAN service from RUT casilla 35.
+R12| 32 | Casilla 12 - Cod. Direccion seccional | Bogota sectional office. | Static configuration from RUT casilla 12.
+~
+R14| 8190000 | Casilla 77 - Base rentas de trabajo | The ET art. 388 DEPURATED base: gross 12,000,000, less non-constitutive contributions 1,080,000 (health 480,000 + pension 480,000 + solidarity fund 120,000) = 10,920,000, less 25% exempt income 2,730,000 = 8,190,000. Already a multiple of 1,000. | NOT the gross. Reporting 12,000,000 here would overstate the base by 46% and would not tie to the withholding in casilla 93.
+R15| 617000 | Casilla 93 - Retencion rentas de trabajo | 8,190,000 / 52,374 = 156.375 UVT; band 150-360 UVT at 28%: (156.375 - 150) x 0.28 + 10 = 11.785 UVT; x 52,374 = COP 617,232; approximated to the nearest 1,000 under ET art. 868 = COP 617,000. | Must equal SUM(NIE177) across the month's nomina electronica documents. Here there is one document carrying exactly 617,000.00.
+R16| (blank) | Casillas 78 / 94 - Rentas de pensiones | The employer pays no pension, so both are blank. | They would be populated only for the excess over 1,000 UVT (COP 52,374,000 per month) of an employer-paid pension.
+~
+R18| CON CONVENIO | Casilla 141 - Convenio | Had the same employee been a non-resident Spanish national before acquiring residence, and Spain has a treaty in force with Colombia. | SIN CONVENIO would switch casilla 142 to the 1-18 concept list.
+R19| 24 | Casilla 142 - Concepto de pago | Rentas de trabajo - 'rentas de trabajo de cualquier naturaleza en relacion con un empleo a favor de personas naturales no residentes'. | For a non-treaty country the equivalent is concepto 5, Prestaciones de servicios y compensacion por servicios personales. Directors' fees would be 25, pensions 27.
+R20| Persona natural | Casilla 143 - Tipo de persona | An employee is always a natural person. | This is the field that routes the row into totals 153 / 155 rather than 152 / 154. New in the 2024 form.
+R21| ES | Casilla 144 - Pais | Spain. | Must be a treaty country where casilla 141 = CON CONVENIO.
+R22| 12000000 | Casilla 145 - Pagos o abonos en cuenta | The GROSS salary. ET art. 408 admits no depuration - no deduction of the mandatory contributions, no exempt income. | Contrast casilla 77 for the resident, which carries the depurated 8,190,000. The non-resident base is 46% higher for the same salary.
+R23| 20.00 | Casilla 146 - Tarifa | The general ET art. 408 rate. | Where the treaty assigns taxing rights to the residence state the rate may be reduced or nil - but Mercans applies treaty relief only on written client instruction with a residence certificate.
+R24| 2400000 | Casilla 147 - Valor retencion | Computed by the portal as 12,000,000 x 20% = 2,400,000. | Payroll supplies 145 and 146 only. Nearly four times the resident's 617,000 for the same salary - the single clearest illustration of why the residence flag matters.
+R25| 12000000 -> 2400000 | Casillas 153 -> 110 and 155 -> 112 | The annex totals for treaty natural persons roll up to hoja 1 casillas 110 (base) and 112 (withholding). | Payroll never keys 110 or 112 directly.
+~
+R27| (blank) | Casilla 129 - Menos retenciones en exceso | No reversal in this month. | Would be populated where an earlier month's withholding is corrected downward.
+R28| 617000 | Casilla 130 - Total retenciones renta | The published summation reduces, in this single-employee example, to casilla 93 alone. | In a real return this aggregates forty-two casillas less casilla 129.
+R29| 617000 | Casilla 136 - Total retenciones | 130 + 134 (VAT, nil) + 135 (stamp duty, nil). | -
+R30| (blank) | Casilla 137 - Sanciones | Filed on time, so no penalty. | If late, the minimum is 10 UVT = COP 523,740 for 2026 - which would nearly double this return's liability.
+R31| 617000 | Casilla 138 - Total retenciones mas sanciones | 136 + 137. | This is the amount that must be paid.
+R32| 617000 | Casilla 980 - Pago total | Paid in full with the return. | MUST equal casilla 138. ET art. 580-1: a return filed without full payment produces NO legal effect. This is the most expensive procedural trap on the form.
+~
+R34| 79123456 / 3 | Casillas 139 / 140 - Signatory NIT and DV | The legal representative signing the return. | -
+R35| 01 | Casilla 981 - Cod. Representacion | Legal representative, from RUT casilla 98. | -
+R36| 2 / 123456-T | Casillas 982 / 983 - Revisor fiscal and card number | Signed by the statutory auditor. | Required for a joint-stock company, or where gross assets reach 5,000 SMMLV or gross income reaches 3,000 SMMLV. Casilla 983 is mandatory once 982 is populated.
+~
+R38| 617000 |  | Casilla 93 must equal the sum of RetencionFuente across the month's validated nomina electronica documents. | Reconcile on the UNROUNDED values with a per-employee tolerance, because the two artefacts round differently.
+R39| 1 employee |  | One employee paid, one document. | A mismatch means either an employee was paid without a document, or a document was rejected and never re-transmitted - both are tax-deductibility failures.
+R40| (not derivable) | -> Formulario 220 | The twelve monthly returns do NOT produce Formulario 220. | Colombia imposes no employer year-end reconciliation. Formulario 220 is a separate per-employee obligation built from the annual accumulation (CO-DIAN-004).
+
+
+=== SHEET: Sample File (dims A1:A136, max_row 136, max_col 1) ===
+
+R1| SAMPLE FILE - VERIFIED CHANNEL STATEMENT AND COMPLETED-FORM RENDERING
+~
+~
+R4| WHY THERE IS NO SAMPLE FILE
+~
+R6| Formulario 350 is submitted as an ONLINE PORTAL FORM through the DIAN Servicios
+R7| Informaticos Electronicos (Muisca) at www.dian.gov.co, signed with the
+R8| Instrumento de Firma Electronica (IFE).
+~
+R10| DIAN publishes NO XSD, NO cahier des charges and NO import template for this
+R11| form. Res. DIAN 000227 de 2025 art. 1.2.2.26 par. 1 states only that filers must
+R12| use "los Servicios Informaticos dispuestos por la entidad, utilizando el
+R13| Instrumento de Firma Electronica (IFE)", and that DIAN "pondra a disposicion el
+R14| Formulario numero 350 en forma virtual en la pagina web www.dian.gov.co para su
+R15| diligenciamiento y presentacion".
+~
+R17| Fabricating an XML or CSV sample for this filing would therefore be inventing a
+R18| format that does not exist. What follows instead is a COMPLETED-FORM RENDERING -
+R19| the casilla-value set the engine must deliver to the portal operator or to the
+R20| robotic-process step that keys it. This is the actual deliverable.
+~
+R22| Casillas marked [PORTAL] are computed by the DIAN service and must NOT be keyed.
+~
+R24| -------------------------------------------------------------------------------
+R25| HOJA 1 - DECLARACION DE RETENCIONES EN LA FUENTE
+R26| Periodo: marzo de 2026        Vence: 12th business day of April 2026 (NIT ends 6)
+R27| -------------------------------------------------------------------------------
+R28| 1  Ano ................................................. 2026
+R29| 3  Periodo ............................................. 03
+R30| 4  Numero de formulario ................................ [PORTAL] 1120500123456
+R31| 5  Numero de Identificacion Tributaria (NIT) ........... 900123456
+R32| 6  DV .................................................. 7
+R33| 7  Primer apellido ..................................... (blank - legal person)
+R34| 8  Segundo apellido .................................... (blank - legal person)
+R35| 9  Primer nombre ....................................... (blank - legal person)
+R36| 10  Otros nombres ....................................... (blank - legal person)
+R37| 11  Razon social ........................................ MERCANS COLOMBIA S.A.S.
+R38| 12  Cod. Direccion seccional ............................ 32
+~
+R40| 25  Cod. (correccion) ................................... (blank - initial return)
+R41| 26  Numero de formulario anterior ....................... (blank - initial return)
+~
+R43| 27  Autorretenedores PJ exonerados art. 114-1 - CIIU .... (blank - not a self-withholder)
+R44| 28  Tarifa .............................................. [PORTAL] (blank)
+~
+R46| --- A titulo de impuesto sobre la renta y complementario ---
+R47| Base sujeta a retencion sobre pagos a PERSONAS JURIDICAS
+R48| 29-41  Honorarios ... Otros pagos ....................... 0
+R49| Retencion a titulo de renta a PERSONAS JURIDICAS
+R50| 42-54  Honorarios ... Otros pagos ....................... 0
+R51| 55  Base pagos al exterior sin convenio (PJ) ............ [PORTAL] 0
+R52| 56  Base pagos al exterior con convenio (PJ) ............ [PORTAL] 0
+R53| 57  Retencion pagos al exterior sin convenio (PJ) ....... [PORTAL] 0
+R54| 58  Retencion pagos al exterior con convenio (PJ) ....... [PORTAL] 0
+R55| 59-76  Autorretenciones personas juridicas .............. 0
+~
+R57| Base sujeta a retencion sobre pagos a PERSONAS NATURALES
+R58| 77  Rentas de trabajo ................................... 8.190.000   <== PAYROLL
+R59| 78  Rentas de pensiones ................................. 0
+R60| 79-92  Honorarios ... Otros pagos ....................... 0
+R61| Retencion a titulo de renta a PERSONAS NATURALES
+R62| 93  Rentas de trabajo ................................... 617.000     <== PAYROLL
+R63| 94  Rentas de pensiones ................................. 0
+R64| 95-108  Honorarios ... Otros pagos ...................... 0
+R65| 109  Base pagos al exterior sin convenio (PN) ............ [PORTAL] 0
+R66| 110  Base pagos al exterior con convenio (PN) ............ [PORTAL] 0
+R67| 111  Retencion pagos al exterior sin convenio (PN) ....... [PORTAL] 0
+R68| 112  Retencion pagos al exterior con convenio (PN) ....... [PORTAL] 0
+R69| 113-128  Autorretenciones personas naturales ............. 0
+~
+R71| 129  Menos retenciones practicadas en exceso o indebidas . 0
+R72| 130  Total retenciones renta y complementario ............ [PORTAL] 617.000
+~
+R74| 131  Retencion IVA a responsables ........................ 0
+R75| 132  Retencion IVA servicios a no residentes ............. 0
+R76| 133  Menos retenciones IVA en exceso ..................... 0
+R77| 134  Total retenciones IVA ............................... [PORTAL] 0
+R78| 135  Retenciones impuesto de timbre nacional ............. 0
+~
+R80| 136  Total retenciones ................................... [PORTAL] 617.000
+R81| 137  Sanciones ........................................... 0
+R82| 138  Total retenciones mas sanciones ..................... [PORTAL] 617.000
+~
+R84| 139  No. Identificacion signatario ....................... 79123456
+R85| 140  DV .................................................. 3
+R86| 980  Pago total .......................................... 617.000
+R87| 981  Cod. Representacion ................................. 01
+R88| 982  Codigo Contador o Revisor Fiscal .................... 2
+R89| 983  No. Tarjeta profesional ............................. 123456-T
+R90| 994  Con salvedades ...................................... (unmarked)
+R91| 997  Sello de la entidad recaudadora ..................... [DISPLAY-ONLY]
+~
+R93| -------------------------------------------------------------------------------
+R94| HOJA 2 - ANEXO DE PAGOS AL EXTERIOR (non-resident variant)
+R95| Shown for the SAME employee treated as a NON-RESIDENT before acquiring residence
+R96| -------------------------------------------------------------------------------
+R97| Row 141 Convenio    142 Concepto  143 Tipo persona  144 Pais  145 Pagos      146 Tarifa  147 Retencion
+R98| --- --------------  ------------  ----------------  --------  ------------   ----------  -------------
+R99| 1  CON CONVENIO    24            Persona natural   ES        12.000.000     20,00       [PORTAL] 2.400.000
+~
+R101| Concepto 24 = "Rentas de trabajo": rentas de trabajo de cualquier naturaleza
+R102| EN RELACION CON UN EMPLEO a favor de personas naturales no residentes.
+R103| For a NON-treaty country the concept would be 5, "Prestaciones de servicios
+R104| y compensacion por servicios personales".
+~
+R106| 148  Pagos al exterior sin convenio persona juridica ..... [PORTAL] 0    -> hoja 1 casilla 55
+R107| 149  Pagos al exterior sin convenio persona natural ...... [PORTAL] 0    -> hoja 1 casilla 109
+R108| 150  Retencion sin convenio persona juridica ............. [PORTAL] 0    -> hoja 1 casilla 57
+R109| 151  Retencion sin convenio persona natural .............. [PORTAL] 0    -> hoja 1 casilla 111
+R110| 152  Pagos al exterior con convenio persona juridica ..... [PORTAL] 0    -> hoja 1 casilla 56
+R111| 153  Pagos al exterior con convenio persona natural ...... [PORTAL] 12.000.000  -> hoja 1 casilla 110
+R112| 154  Retencion con convenio persona juridica ............. [PORTAL] 0    -> hoja 1 casilla 58
+R113| 155  Retencion con convenio persona natural .............. [PORTAL] 2.400.000   -> hoja 1 casilla 112
+~
+R115| -------------------------------------------------------------------------------
+R116| CONTRAST THAT MATTERS (v2.8 control B1)
+R117| -------------------------------------------------------------------------------
+R118| Same employee, same COP 12,000,000 salary, same month:
+~
+R120| RESIDENT      base  8.190.000 (depurated, ET art. 388)   withholding    617.000
+R121| NON-RESIDENT  base 12.000.000 (GROSS, ET art. 408)       withholding  2.400.000
+~
+R123| The non-resident withholding is 3.9 times the resident figure, and it is reported
+R124| on a DIFFERENT SHEET of the same return. An employee who acquires residence
+R125| mid-year moves from hoja 2 to hoja 1 PROSPECTIVELY, from the payment following
+R126| the date the 183-day test is met. The earlier months are never restated
+R127| (DIAN Concepto 011108 of 29 June 2026).
+~
+R129| -------------------------------------------------------------------------------
+R130| FORMAT TO CONFIRM AGAINST A REAL FILING
+R131| -------------------------------------------------------------------------------
+R132| The casilla numbers, labels and arithmetic above are read directly off the
+R133| official form design and instructivo. What CANNOT be verified from public
+R134| sources is the portal's screen-level behaviour - field ordering, mandatory-field
+R135| prompts and any bulk-entry facility DIAN may offer to large filers. Confirm the
+R136| keying or robotic-process path against a real filing during implementation.

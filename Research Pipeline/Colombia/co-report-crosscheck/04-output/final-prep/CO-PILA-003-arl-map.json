@@ -1,0 +1,27 @@
+{
+ "spec": "CO-PILA-003",
+ "final": "05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx",
+ "source": "04-output/final-prep/ARL-verification.json",
+ "edits": [
+  {
+   "sheet": "PILA Spec",
+   "cell": "M110",
+   "items": [
+    "34-ARL",
+    "verifier-fix"
+   ],
+   "current": "Contribution base for occupational risk. Same floor and ceiling. Vacation and paid-leave (VAC-LR) days do not reduce the ARL day count (T2R2-038) because they are paid; maternity or paternity leave days (LMA = X) carry no occupational-risk contribution (Decreto 1072 de 2015 art. 2.2.4.2.1.6).",
+   "proposed": "Contribution base for occupational risk. Same floor and ceiling. Vacation and paid-leave (VAC-LR) days are reported on their own detail record (AT2 v30 §2.1.2.2 b) with the number of days of the change event in the ARL day count (T2R2-038); the days of all records add up to 30 (AT2 v30 §2.1.2.3.13). No occupational-risk contribution is due for enjoyed vacation (VAC-LR = X) (Decreto 1072 de 2015 art. 2.2.4.2.1.6 numeral 1.3; Consejo de Estado, Sección Cuarta, exp. 25958 of 2022); remunerated leave (VAC-LR = L) remains contributory; maternity or paternity leave days (LMA = X) carry no occupational-risk contribution (Decreto 1072 de 2015 art. 2.2.4.2.1.6)."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C5",
+   "items": [
+    "34-ARL",
+    "verifier-fix"
+   ],
+   "current": "Maintain a contributory-day counter PER SUBSYSTEM on the 30-day commercial month. Start at 30 (or the proportion from a mid-month hire or to a mid-month leave), then apply the change events: SLN and lawful strike reduce all four; IGE and IRL follow the subsystem-specific rules; vacation and remunerated leave do not reduce them at all because they are paid.",
+   "proposed": "Maintain a contributory-day counter PER SUBSYSTEM on the 30-day commercial month. Start at 30 (or the proportion from a mid-month hire or to a mid-month leave), then apply the change events: SLN and lawful strike reduce all four; IGE and IRL follow the subsystem-specific rules; vacation and remunerated leave do not reduce the day counters (AT2 v30 §2.1.2.3.11 to §2.1.2.3.13), although no occupational-risk contribution is due for enjoyed vacation days (Decreto 1072 de 2015 art. 2.2.4.2.1.6 numeral 1.3; Consejo de Estado, Sección Cuarta, exp. 25958 of 2022)."
+  }
+ ]
+}

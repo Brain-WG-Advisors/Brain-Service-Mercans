@@ -1,0 +1,506 @@
+{
+ "spec": "CO-DIAN-001",
+ "round": 2,
+ "checked": [
+  {
+   "id_or_column": "NIE013 Generation country (row 26)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Re-parsed 261 ENC blocks: column M = CO 255, CR 2, CA 1, DO 1, CH 1, MX 1; N/O = 05/05001 on 261. The 6 non-CO codes equal Master Data 'Country' (home address) and REC column K on 261/261. All 6 are the expatriates paid WT 65821. The proposed M26 paragraph and T26 query are supported."
+  },
+  {
+   "id_or_column": "NIE213 Employer other names (row 45)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "EMI column F = column B (corporate name) on 261/261. Columns C-E are empty and G-L carry NIT, DV, CO, 05, 05001 and the address, which fits the XSD Empleador attribute order. So F = @OtrosNombres is a sound positional inference. Routing it to a query only (T45) is right."
+  },
+  {
+   "id_or_column": "NIE041 Worker type (row 53)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "20 interns with WT 62149 > 0 in the monthly G2N: REC B/P = 19/4 for 6 and 01/2 for 14. EVO C (ApoyoSost) is filled on 20/20. All other employees are 01/2 (REC B 01 = 255, 19 = 6). Evidence is enough for a query; the 15 Oct mapping rule is not re-opened. Drafting note: the append-only M53 keeps the 15 Oct sentence 'the client holds no worker-type code', which the new paragraph contradicts (see the change-map entry below)."
+  },
+  {
+   "id_or_column": "NIE044 Employee document type (row 56)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "REC E = 13 for 246 and 21 for 15. All 15 employees with Master Data 'Indentity Card for Foreigners' filled are coded 21, against the draft's 22. DECISION (15 Oct, 22): the evidence is NOT strong enough to re-open it, only to add the query. It shows client practice, not the legal rule, and the column name ('identity card for foreigners' = cedula de extranjeria) supports 22. TEXT CORRECTION REQUIRED in T56 and the finding: 'taking Citizenship Card ID first whenever several columns are filled' is wrong for the document TYPE. The one employee holding Citizenship Card ID AND the foreigners' card (same number) is coded 21, so the type follows the foreigners' card. The 13s are the 234 CC-only cases plus 12 with CC + National ID and/or Identity Card."
+  },
+  {
+   "id_or_column": "NIE050 Place of work - country (row 62)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "REC K = Master Data 'Country' (home) on 261/261. The 6 non-CO values belong to the 6 expatriates, whose REC L/M = 05/05001. This confirms the risk the 15 Oct text excludes; the rule does not change."
+  },
+  {
+   "id_or_column": "NIE051 Place of work - department (row 63)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "REC L = 05 on 261/261. Master Data 'Work location': Bogota 166, Medellin 57, Cali 18, Barranquilla 7, 9 other cities 11, blank 2. All counts reproduced."
+  },
+  {
+   "id_or_column": "NIE052 Place of work - municipality (row 64)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "REC M = 05001 on 261/261, whatever the work location (same evidence as NIE051)."
+  },
+  {
+   "id_or_column": "NIE053 Place of work - address (row 65)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "There are 260 distinct ADDRESS tokens for 261 documents. Stronger evidence than the cross-check's inference: the REC N token equals the Master Data 'Address Line 1' (home address) token on 261/261. Suggest replacing '(inference from the masked file)' in M65 with 'equal to Master Data Address Line 1 (home address) for 261 of 261 on the masked copies'."
+  },
+  {
+   "id_or_column": "NIE056 All-inclusive salary flag (row 66)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "88 employees have WT 62140 > 0: REC O true 45, false 43 (overall 45 true / 216 false). Both groups have Salary Assigned of at least 22,761,765 (13 SMMLV). No Master Data column explains the split (Regime, Group, Subgroup, Grade, Contract type, Tax procedure, Work schedule all mixed). WT 2554 = 2.8% of 62140 for 62 of 88 by my count (cross-check: 63), which does not affect the finding. The WT-based 15 Oct rule stays."
+  },
+  {
+   "id_or_column": "NIE065 Payment method (row 72)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "PAG C = 47 on 261/261. The 4 Master Data 'Cash' employees all carry 47, one with bank, type and account. DECISION (15 Oct, Bank 42/45, Cash 10): NOT strong enough to re-open; query only. 47 is a valid table code, so the bank code stays a client confirmation. Fact missing from the finding and T72: the 4 'Cash' employees are 4 of the 6 expatriates with ComprobanteTotal 0.00 and G2N Net Pay 0, and none is in the bank file. No cash payment happened, so the 'Cash contradicts the bidirectional rule' point is weak. The real open question is which Metodo a zero-net document carries. Add this to T72."
+  },
+  {
+   "id_or_column": "NIE203 Payment date (row 76)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "FEP B = 2026-09-22 on 261/261 (one FechaPago per document). The ConsolidadoCCT note in row 1, column D, is quoted correctly. It is a single free-text note, not tied to an identified payment. DECISION (NIE029/NIE194/NIE203, every run of the month reported): NOT strong enough to re-open; query only (T76), as proposed."
+  },
+  {
+   "id_or_column": "NIE006 Time worked (row 82)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "ENC G = calendar days from ENC C (= Hire Date) to 2026-09-30, both days included, on 261/261, as an integer. For hire 2001-01-01 the 360-day construction gives 9270, against the client's 9404. Rule and format both differ; RA query T82 is appropriate."
+  },
+  {
+   "id_or_column": "NIE116 Vacation compensated in cash - amount (row 132)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "EVA C = WT 79403 on the 4 paid documents; a 5th EVA record carries 30 / 0.00 and should be noted as a zero-value element. Mapping sheet: 62116 -> EOT_3 confirmed. 62116 is absent from Sep-2026, so the conflict is mapping-only, as stated."
+  },
+  {
+   "id_or_column": "NIE157 Apprentice maintenance support (row 177)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "EVO C = 2,300,000.00 = WT 62149 on 20/20. ITE B/C = 30 / 0.00, REC Q 0.00, ITS/SPE 0 / 0.00 and EVO E/F 0.00 on all 20. Coding is 19/4 for 6 and 01/2 for 14. Drafting note: the retained 15 Oct sentence 'needs the client's contract and worker-type data, not held today' is now partly superseded."
+  },
+  {
+   "id_or_column": "NIE167 Solidarity fund (row 187)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "SSP C = |WT 2553| on 225/225 SSP records; positions B, D and E are empty on all. WT 2553 = 1% of the pension base (2556/4) for 181 employees and 1.2-2% for the rest, so the whole FSP (solidarity + subsistence) sits in DeduccionSP. The 15 Oct split (Ley 797 art. 8) stays; query only."
+  },
+  {
+   "id_or_column": "NIE168 Solidarity fund (row 188)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "SSP C = |WT 2553| on 225/225 SSP records; positions B, D and E are empty on all. WT 2553 = 1% of the pension base (2556/4) for 181 employees and 1.2-2% for the rest, so the whole FSP (solidarity + subsistence) sits in DeduccionSP. The 15 Oct split (Ley 797 art. 8) stays; query only."
+  },
+  {
+   "id_or_column": "NIE169 Solidarity fund (row 189)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "SSP C = |WT 2553| on 225/225 SSP records; positions B, D and E are empty on all. WT 2553 = 1% of the pension base (2556/4) for 181 employees and 1.2-2% for the rest, so the whole FSP (solidarity + subsistence) sits in DeduccionSP. The 15 Oct split (Ley 797 art. 8) stays; query only."
+  },
+  {
+   "id_or_column": "NIE170 Solidarity fund (row 190)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "SSP C = |WT 2553| on 225/225 SSP records; positions B, D and E are empty on all. WT 2553 = 1% of the pension base (2556/4) for 181 employees and 1.2-2% for the rest, so the whole FSP (solidarity + subsistence) sits in DeduccionSP. The 15 Oct split (Ley 797 art. 8) stays; query only."
+  },
+  {
+   "id_or_column": "NIE182 Complementary health plan (row 206)",
+   "original_verdict": "Conflict",
+   "result": "needs Wallisson",
+   "reason": "Data confirmed: 21611 'Private Health Insurance - Colsanitas' (53) + 21612 'Private Health Insurance - Sura' (82) = 135 documents. Both are in OtraDeduccion (Mapping SOT_3, also 21610), and PlanComplementarios is never used. Whether this is a Conflict depends on a classification the data cannot settle. DECIDE: are WTs 21610-21612 'planes complementarios / medicina prepagada' (then the client is wrong and the verdict stays Conflict) or private health insurance with no dedicated element (then OtraDeduccion is correct and NIE182 is Not evidenced)? The proposed T206 query is fine either way."
+  },
+  {
+   "id_or_column": "NIE187 Total accrued (row 212)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "DevengadosTotal differs from the sum of the Devengados positions on 259/261 and equals G2N Gross Salary on 254. The 7 gaps are Gross minus 65821 (6 expatriates) and Gross minus 67090 (1). Every element tie-out with the client Mapping reproduced; only EOT_3 (65821 / 1910 / 67010 / 62216) and EAX_2 (62310) fail."
+  },
+  {
+   "id_or_column": "NIE188 Total deducted (row 213)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "DeduccionesTotal = |G2N Total Deductions| on 261/261 and equals the sum of the Deducciones positions (ITS, SPE, SSP, SOT B-D, SVA B/C/D/F/J, SIN, SLI) on only 3/261."
+  },
+  {
+   "id_or_column": "NIE189 Total payable (row 214)",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Verdict confirmed: ComprobanteTotal = G2N Net Pay on 227. It is Net Pay + |21215| on 34/34 and 0.00 on 6 expatriates (DevengadosTotal < DeduccionesTotal, all with 65821). TOT E differs from C - D on 40 = 34 + 6. The bank file Net Pay = G2N Net Pay on 255/255, including all 34 WT 21215 employees, so the client's TOT E matches the cash net on only 221/255. TEXT CORRECTION REQUIRED in M214: see the 'TOT_03' entry."
+  },
+  {
+   "id_or_column": "NIE022 Version literal (row 9)",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "ENC Q = 'V1.0: Documento Soporte de Pago de Nómina Electrónica' on 261/261. Draft K9, Field Options C9, Example Analysis A7 and Sample File A93 hold the unaccented literal (the 'current' values match the draft cells). The 4 proposed edits are correct."
+  },
+  {
+   "id_or_column": "NIE067 Account type (row 74)",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "PAG E = '02' on 258/258 records with bank data. The T74 query is appropriate."
+  },
+  {
+   "id_or_column": "NIE082 Night overtime hour - percentage (row 99)",
+   "original_verdict": "Format mismatch",
+   "result": "overturned",
+   "reason": "Correct verdict: Not evidenced. The only evidence is one stray text cell (Validacion netos row 269, column M, 'EHE^HEN^^^3^1,8^233809,00') below the 261 data rows. Monthly_fixed has no EHE segment at all (no overtime in Sep-2026). The provider layout of that string is undocumented, so reading '1,8' as Porcentaje is a guess; 1.8 is not even the HEN factor (1.75). T99 states as fact that 'the client's electronic payroll input carries the HEN Porcentaje as 1,8'. Drop T99, or reword it as a question about that stray line."
+  },
+  {
+   "id_or_column": "NIE164 Pension contribution - rate (row 185)",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "SPE B = '4' on 241 and '0' on 20 interns, which is shorter than the draft's Field Length 4-6. xsd:decimal accepts it. Keeping it in not_applied with no change is right."
+  },
+  {
+   "id_or_column": "NIE045 Employee document number (row 57)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Number = Master Data 'Citizenship Card ID' on 246/246 type-13 documents. Minor correction for M57: of the 15 type-21 documents, 14 take the number from the foreigners' card only. The 15th holds CC and the foreigners' card with the same number (coded 21, see NIE044). The 3 that differ on the masked copies equal G2N 'National ID' on 3/3, so this is most likely a masking artefact and not a different source; say so instead of 'check on raw data' only."
+  },
+  {
+   "id_or_column": "NIE047 Employee second surname (row 59)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "REC H empty for exactly the 144 employees with blank Master Data 'Second Last Name'. Token match on 261/261."
+  },
+  {
+   "id_or_column": "NIE061 Contract type (row 67)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "REC P = 2 on 255 and 4 on 6. 14 of the 20 WT 62149 interns are 2. Master Data contract type is WM for all."
+  },
+  {
+   "id_or_column": "NIE062 Contractual salary (row 68)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "REC Q = Salary Assigned on 239/261: 238 exact plus 1 at 29010096.50 vs 29010097 (a 0.50 rounding residue; mention it). Exceptions: 20 interns at 0.00, and 2 integral employees at exactly 2x (WT 62140 below Salary Assigned). Equals Master Data 'Basic Salary' on 237; the 2 with Basic Salary 0 are integral."
+  },
+  {
+   "id_or_column": "NIE002 Hire date (row 78)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ENC C = Hire Date on 261/261. It differs from Original Hire Date for 40 and from Adjusted Service Date for 21 (after normalising DD-MM-YYYY)."
+  },
+  {
+   "id_or_column": "NIE069 Days worked (row 85)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ITE B = G2N 'Days Worked' on 261/261, and Days Worked + Days On Leave = 30 on 261/261. Days Worked is consistent with SueldoTrabajado (ITE C = Salary Assigned x Days Worked / 30 on 238/241 salaried documents). There were no Sep-2026 hires or leavers. DECISION (15 Oct: 30 minus Leave Absence days unless the client names a counter): the evidence IS strong enough to re-open it, and the proposed replacement of M85 is supported. The 15 Oct text already left room for a client counter. The decided fallback would also be wrong: Leave Absence 'Days' are business days and include compensated vacation (79003) and prior-month dates, so 30 - LA days disagrees with G2N 'Days On Leave' for 28 of the 50 employees on leave (e.g. 07-09 to 30-09: LA 18 vs G2N 24 calendar days). Add that sentence as the reason. Re-opening still needs Wallisson's approval."
+  },
+  {
+   "id_or_column": "NIE070 Salary paid for the period (row 86)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ITE C = 62100 + 62140 on 261/261 (ITE_2 tie 241, plus 20 interns at 0.00). Mapping ITE_2 also lists 62101, 62141 and 65820."
+  },
+  {
+   "id_or_column": "NIE071 Transport allowance (row 87)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping 62520 -> ETR_1 (= Transporte/@AuxilioTransporte, 1-based) and 62523 -> EAX_2. WT 62523 is paid to 74 employees, all reported in AuxilioNS. No ETR B in the file."
+  },
+  {
+   "id_or_column": "NIE072 Travel and accommodation allowance - salary (row 88)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ETR C = 62805-62808 on 7/7 (5 / 6 / 6 / 5 recipients, about 15.3M). Mapping ETR_2 also lists 62809, 62810, 62820 and 62821. No ETR D."
+  },
+  {
+   "id_or_column": "NIE118 Service bonus - amount (salary) (row 134)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping EPR_2 = 62211 and 62831. No EPR segment in Sep-2026. Query-only treatment is appropriate."
+  },
+  {
+   "id_or_column": "NIE119 Service bonus - amount (non-salary) (row 135)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping EBN_1 = 62118, 62228, 62208, 62209, 62210, 62150, 65838. Only 62150 was paid (35). 62204 is absent from the Mapping."
+  },
+  {
+   "id_or_column": "NIE120 Severance savings - amount (row 136)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ECE B = WT 62110 on 2/2. Mapping ECE_1 = 62110, 62182, 62126, 65805; ECE_3 = 62117, 62127."
+  },
+  {
+   "id_or_column": "NIE121 Severance savings - interest rate (row 137)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ECE C = 9.00 on both. PagoIntereses / Pago = 16.0% and 8.0%. The M137 rewording (12% constant, reported rate pro-rated) is consistent with the existing 'pro rata' sentence. The 9/12 reading is labelled as an inference."
+  },
+  {
+   "id_or_column": "NIE122 Severance savings - interest amount (row 138)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ECE D = WT 62117 on 2/2. Mapping ECE_3 = 62117 and 62127."
+  },
+  {
+   "id_or_column": "NIE131 Maternity / paternity leave - amount (row 148)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping ELI_4 = 79406 and 79407. No ELI in Sep-2026."
+  },
+  {
+   "id_or_column": "NIE135 Paid leave - amount (row 152)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping ELR_4 = 79418, 79405, 79420, 79414, 79419. No ELR in Sep-2026."
+  },
+  {
+   "id_or_column": "NIE139 Bonus - salary (row 160)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "EBN B = 62150 on 35/35. 12 EBN records carry no amount. 62202 is paid to 6 expatriates, in Gross but in no element and not in the Mapping. Minor: the 62202 total is about 411.0M, not 410.0M; this appears only in the finding, not in the proposed text."
+  },
+  {
+   "id_or_column": "NIE140 Bonus - non-salary (row 161)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "EBN C = the 10 WTs listed, on 14/14 (Mapping EBN_2 tie 14/14). The Mapping lists 26 EBN_2 WTs in total, i.e. 16 more."
+  },
+  {
+   "id_or_column": "NIE141 Allowance - salary (row 162)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "EAX B = 62225 (74) + 62133 (6), tie 74/74."
+  },
+  {
+   "id_or_column": "NIE142 Allowance - non-salary (row 163)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "EAX C ties to the Mapping EAX_2 on 237/238. The 17 WTs used are exactly those listed. The single failure is 62310 (17.5M) left out, with its offset 21310 also left out of SOT_3."
+  },
+  {
+   "id_or_column": "NIE146 Other concept - description (row 164)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "EOT labels: 'Paquete de expatriación Expats HOST' x6 (65821, 845.9M), 'Pago Pr?stamo Sin Inter?s' x1 (67090, 10.0M), and stock-award labels x25 at 0.00 on 21 documents. The replacement characters are present in the masked copy. 1910, 67010 and 62216 are not in the file. Mapping 62203 -> EVO_4."
+  },
+  {
+   "id_or_column": "NIE148 Other concept - non-salary (row 166)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "All EOT amounts are in column D (ConceptoNS); 25 zero lines."
+  },
+  {
+   "id_or_column": "NIE154 Meal payment - non-salary (row 172)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "EBO E = WT 65818 on 211/211. The Mapping lists 65813 (not 65818), so a pure Mapping rebuild fails on all 211. Offset 21115 is in SOT_3 (211)."
+  },
+  {
+   "id_or_column": "NIE193 Third-party payment (accrued) (row 174)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ECO C ties to 65802 + 65809 on 178/178 (65809: 1 employee). Offset split confirmed: SOT_1 holds 21613, 21802, 25837, 21110; SOT_3 holds 21563, 21111, 21310, 21320."
+  },
+  {
+   "id_or_column": "NIE194 Advance (accrued) (row 175)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping ECO_3 = 61200, 61100, 61101, 61150. 62838 is absent. No ECO D in the file."
+  },
+  {
+   "id_or_column": "NIE159 Retirement bonus (row 179)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping 62203 -> EVO_4 (= column E, BonifRetiro under the table's 1-based numbering). EVO E = 0.00 on the 20 intern documents."
+  },
+  {
+   "id_or_column": "NIE161 Health contribution - rate (row 183)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "ITS B = 4 on 241 and 0 (with 0.00) on 20; ITS_2 tie 241/241."
+  },
+  {
+   "id_or_column": "NIE177 Income tax withheld (row 191)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SVA C ties on 230/230 (2552 on 224 + 21330 on 6). Mapping SVA_2 list confirmed, including 25834."
+  },
+  {
+   "id_or_column": "NIE198 Voluntary pension contribution (row 193)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SVA B ties on 28/28 (25812 x17, 25813 x7, 25823 x3, 25814, 25815). Mapping SVA_1 includes 21210-21212, 21141, 25810 and 25819-25822."
+  },
+  {
+   "id_or_column": "NIE179 AFC savings account contribution (row 194)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SVA D ties on 36/36 (25800, 25801, 25802, 25803, 25805, 25806). The Mapping list is as stated."
+  },
+  {
+   "id_or_column": "NIE171 Union dues (row 195)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SIN B = 1.50 on 74/74. SIN C = 1.5% of SueldoTrabajado (within rounding) on 53/74. The others differ because the base includes vacation pay. Drafting note: the retained 15 Oct sentence 'The rate is not in the payroll output' is now contradicted by the appended paragraph."
+  },
+  {
+   "id_or_column": "NIE172 Union dues - amount (row 196)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SIN C = sum of the SIN_2 WTs (21550 + 21680 + one sectional WT) on 74/74; one Sindicato per employee."
+  },
+  {
+   "id_or_column": "NIE176 Payroll loan - amount (row 200)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SLI ties on 17 documents / 18 records (one employee with two). Descriptions are 'Prestamo de Libranza <bank>'."
+  },
+  {
+   "id_or_column": "NIE195 Third-party payment (deduction) (row 201)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SOT B ties to the Mapping SOT_1 on 235/235. WTs used: 25837, 21613, 21192, 21193, 21110, 21802, 21123, 25817, 21116, 21615."
+  },
+  {
+   "id_or_column": "NIE196 Advance recovery (deduction) (row 202)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SOT C = |21215| on 34/34. The Validacion netos 'Legalizacion anticipos' column and the client note 'OK DIF X VACACIONES ANTICIPO DLEGALZIADO EN NOMIA' support 'vacation advance legalised in payroll'."
+  },
+  {
+   "id_or_column": "NIE197 Other deduction (row 203)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SOT D ties to the Mapping SOT_3 on 247/248 (the failure is 21310, see NIE142). The 12 WTs and counts are reproduced exactly (21115 211, 21127 93, 21612 82, 21563 82, 21611 53, 21117 14, 1204 6, 21320 6, 21126 4, 21821 3, 21111 2, 21310 1)."
+  },
+  {
+   "id_or_column": "NIE180 Cooperative deduction (row 204)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Mapping SVA_4 = 21616-21618 only. Foncoltabaco WTs are in SOT_1 (21116, 21122, 21123, 21124, 21192, 21193) and SOT_3 (21117)."
+  },
+  {
+   "id_or_column": "NIE181 Judicial or tax attachment (row 205)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "SVA F ties to 21125 on 1/1. Mapping SVA_5 = 21125, 21200, 21190."
+  },
+  {
+   "id_or_column": "NIE125 (row 142) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EIN D = 17 / 2+3 / 2. Employer-paid and EPS-paid portions are separate EIN records (2 + 3 days, type 1)."
+  },
+  {
+   "id_or_column": "NIE010 (row 22) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "ENC J = 'EC' on 261/261, matches ^[A-Z]{1,4}$; ENC L = J + K on 261/261."
+  },
+  {
+   "id_or_column": "NIE202 (row 11) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "ENC S = 102 on 261/261."
+  },
+  {
+   "id_or_column": "NIE033 (row 46) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EMI G = 9-digit NIT, with the DV separate in EMI H, constant on 261/261."
+  },
+  {
+   "id_or_column": "NIE211 (row 43) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EMI D empty on 261/261 (legal-person employer)."
+  },
+  {
+   "id_or_column": "NIE210 (row 42) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EMI C empty on 261/261."
+  },
+  {
+   "id_or_column": "NIE011 (row 23) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "ENC K: 10 digits, 261 unique values."
+  },
+  {
+   "id_or_column": "NIE009 (row 21) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "ENC I = REC R on 261/261, and found in the G2N 'Cod Employee' on 261/261."
+  },
+  {
+   "id_or_column": "NIE008 (row 83) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "ENC H = ENC U (FechaGen) on 261/261."
+  },
+  {
+   "id_or_column": "NIE030 (row 17) [Aligned sample, random.seed(42), random.sample(aligned_in_file_order, 10)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "ENC X = COP on 261/261."
+  },
+  {
+   "id_or_column": "Reconciliation: REC salary (column Q) vs G2N Salary Assigned",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "239/261: 238 exact + 1 at a 0.50 residue. 20 interns at 0.00, 2 integral employees at 2x."
+  },
+  {
+   "id_or_column": "Reconciliation: ITE C = WT 62100 + 62140",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "261/261."
+  },
+  {
+   "id_or_column": "Reconciliation: meal EBO E = WT 65818",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "211/211. The client Mapping still lists 65813."
+  },
+  {
+   "id_or_column": "Reconciliation: totals NIE187-NIE189",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "Earned differs from the element sum on 259/261 and deducted on 258/261. Net differs from earned - deducted on 40/261: 34 explained by WT 21215 (net = G2N Net Pay + |21215| on 34/34) and 6 expatriates forced to 0.00."
+  },
+  {
+   "id_or_column": "TOT position order and Mapping label 'TOT_03' for WT 26998 (NIE189, 15 Oct decision)",
+   "original_verdict": "Reconciliation / control check",
+   "result": "overturned",
+   "reason": "Order claim confirmed: TOT B empty (Redondeo), C = DevengadosTotal, D = DeduccionesTotal, E = ComprobanteTotal on 261/261 (XSD order). The explanation that the label 'TOT_03' is 'zero-based' is NOT supported. Every other entry of the client Mapping is 1-based (ITE_2 = col C, SOT_1/2/3 = B/C/D, EBO_4 = E, SVA_9 = J, SIN_2 = C, all tied to the data), so 'TOT_03' would point to DeduccionesTotal. The label is simply inconsistent with the file and is not evidence of order. Correct M214 to: 'the client's WT-table label TOT_03 for WT 26998 does not match the 1-based numbering of that table (it would point to DeduccionesTotal) and does not drive the file, which carries the net in the fourth TOT position'. DECISION (15 Oct NIE189 rule: ComprobanteTotal = cash net = bank Net Pay): NOT re-opened; the new data supports it (bank Net Pay = G2N Net Pay 255/255, including the 34 WT 21215 employees). Only the retained parenthetical '(Accumulated WT 26998 Net salary (notional) carries the same figure)' is now inexact: 26998 = G2N/bank net for 224/259 and = the client's ComprobanteTotal for 240/259 (24 of the 34 WT 21215 cases). Edit or remove that parenthetical instead of appending a paragraph that contradicts it."
+  },
+  {
+   "id_or_column": "CUNE (ENC column T)",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "Empty on 261/261 (position between TipoXML and FechaGen). Not evidenced is correct."
+  },
+  {
+   "id_or_column": "Change map: 'current' vs DRAFT cells",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "All 86 edits: 'current' equals the DRAFT cell text exactly (openpyxl, sheets Nomina Electronica Spec / Field Options / Example Analysis / Sample File). Only M85 (NIE069) and M137 (NIE121) modify retained text; all other M/T edits are append-only."
+  },
+  {
+   "id_or_column": "PII: masked ID / NAME tokens in proposed text",
+   "original_verdict": "Reconciliation / control check",
+   "result": "confirmed",
+   "reason": "No NAME_n, ADDRESS_n, ENTID/SHORTID/POSTAL token, masked e-mail or 1900-01-01 appears in any proposed / vc_sentence / version_control / not_applied text. None of the 1,254 REC identity values of Monthly_fixed or the 1,043 G2N identity values (columns A-D) appears in the change map or cross-check. The only 6+ digit number in the proposals is '000013' (Resolution number)."
+  },
+  {
+   "id_or_column": "Change map: append-only edits leave superseded 15 Oct sentences",
+   "original_verdict": "Reconciliation / control check",
+   "result": "needs Wallisson",
+   "reason": "M53 (NIE041 'the client holds no worker-type code'), M177 (NIE157 'not held today'), M195 (NIE171 'The rate is not in the payroll output') and M214 (NIE189 '26998 carries the same figure') keep 15 Oct statements that the appended CLIENT NE FILE paragraph contradicts. DECIDE: (a) accept append-only (the decided text is untouched, and the reader must reconcile the two), or (b) let the round-2 edit also correct those factual sentences, while the decided rules stay as they are. Recommended: (b) for M214, because there the retained sentence is a factual statement, not a rule."
+  }
+ ],
+ "agreement_rate": 0.973,
+ "agreement_basis": "72 confirmed of 74 verdict items (22 Conflict + 4 Format mismatch + 38 Explanation to improve + 10 Aligned sample); overturned 1 (NIE082), needs Wallisson 1 (NIE182). Control checks listed separately: 9, of which 7 confirmed, 1 overturned (TOT_03 'zero-based' explanation), 1 needs Wallisson. Verdicts are confirmed even where the proposed text needs a correction; text corrections are flagged 'TEXT CORRECTION REQUIRED' (NIE044 T56, NIE189 M214) or as minor (NIE045, NIE053, NIE062, NIE065 T72, NIE069 reason)."
+}

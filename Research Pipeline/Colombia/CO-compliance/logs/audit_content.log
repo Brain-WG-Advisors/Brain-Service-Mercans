@@ -1,0 +1,32 @@
+Done. **Colombia v2.4 → READY_FOR_HANDOVER** (was BLOCKED).
+
+`~/mercans-pipeline/CO-compliance/07-qa-crosscheck/handover_status.md`
+
+## What happened
+
+| | PASS | MANUAL | FAIL | Overall |
+|---|---|---|---|---|
+| Original | 12 | 3 | 3 | BLOCKED |
+| After fixes | **16** | **2** | **0** | **READY_FOR_HANDOVER** |
+
+**All three FAILs were audit-harness matcher defects, not artifact defects.** The CO copy of the harness still carried the pre-v2.6 code.
+
+- **C12** = known bug **F25**, now 6th country. Merged title banner on row 1, real 21-column header on row 2 → row 2 scores 13/16 on all six specs. On CO this escalated to FAIL (not just MANUAL) because `thin_count > 2`.
+- **C20** = known bug **F24**, 6th country. All six `spec_file` links were already in `scope_manifest.json` and all resolve on disk.
+- **C29** = new **F27**. 29 hits, every one the Spanish word `todo`/`Todo` in quoted statute (CST art. 129 ×25, Law 1221/2008, Law 11/1984). Zero uppercase `TODO`. C29 re-opened the exact hole C8 had already closed, by adding `IGNORECASE` on top of the word boundary — the Chile precedent recurring.
+- **C33** = new **F28**. All 158 "local-language passages" were English prose. The non-Latin test is a punctuation *blocklist*, so nine math/typographic characters tripped it: `→ − § ≤ · ≥ ± Σ ≈`. Worse, the code `continue`s after a non-Latin hit, so the actual Spanish test was silently skipped on exactly those strings. Run separately: **0 hits across 7,292 strings.** No translation was warranted — C33 was inviting the fixer to "translate" English.
+
+## One genuine defect, found because of the noise
+
+Module 8 used the bare Spanish noun *auxilio* in an English sentence, first use, no introduction — a real B10 breach the mechanical check couldn't see. Fixed to "the cash sickness benefit (*auxilio monetario*)", verified verbatim against CST art. 227 in the source PDF, and logged as CCG Version Control row **1.0 rev B**.
+
+## Fixed in the harness, not just overridden
+
+Following the TN/CI/CG precedent: C12 (3-row header scan), C20 (honours `spec_file`), C29 (case-sensitive `TODO`), C33 (Unicode general-category test), C27 (normalised matching — closes the widening the CG entry recommended). C33 was regression-tested both directions: Cyrillic, Arabic, Japanese and Greek prose are still flagged; `Liquidación`, `São Paulo`, `Köln` read clean. Backup and patch scripts are in the country dir. F27/F28 appended to the shared failure log.
+
+Two things to flag for you:
+
+1. **The fixes live only in the CO copy.** F24/F25 have now recurred on six consecutive countries — worth promoting to `shared/` before country seven.
+2. **`08-skill/` is empty** — the Colombia compliance skill hasn't been built. That's a separate stage, outside this gate, but I noted it so it isn't mistaken for a missing handover artifact.
+
+The two retained MANUALs (C25, C27) are dispositioned with evidence rather than fixed — C25 because the DIAN sample is a documented reconstruction that a human should sign off on (29/29 element names verified traceable to the official annex), C27 because auto-accepting the `Payroll.*` namespace would weaken the check for future countries.

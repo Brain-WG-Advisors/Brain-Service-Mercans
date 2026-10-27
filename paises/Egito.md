@@ -41,7 +41,7 @@
 
 **Lacunas abertas / não confirmado** (candidatos a ticket ou nova pesquisa)
 - §3.1 quais componentes do seguro social o UHI substitui (72%); §3.2 lista de governadorias do UHI (78%).
-- §3.3 levy do Training Fund: operação (40%); §3.4 Martyrs' Fund no setor privado (80%).
+- §3.3 levy do Training Fund: operação (40%); §3.4 Martyrs' Fund no setor privado (80%) — **resolvido em 2026-10-22: vale para o setor privado** (ver Correções ligadas).
 - §3.5 feriados públicos (35%); §3.6 seguro social de estrangeiros (65%); §3.8 tributação de indenização por demissão ilícita (50%).
 - §3.9 prazos de retenção de registros (35%); §3.10 portaria posterior a set/2025 sobre conteúdo do payslip (50%); §3.11 host de produção da API (60%, só pré-produção publicado).
 - §3.7 pareamento código-rótulo DTE/DAE/NAD (75% nas linhas marcadas); §4.1 ausência de mudança no art. 8 em 2025/2026 (93%).
@@ -73,13 +73,17 @@
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-22 | Ericsson ME (planilha "Compliance feedback list", pedido da Manju por chat) | WT 1026/1027 adiantamentos, 1043 aviso prévio, 1125 LTA | Respondido na planilha com fonte primária (Lei 91/2005 arts. 9, 12; Decreto 991/2005 art. 11(3); Lei 148/2019 art. 1(8); ETA FAQ v4; Lei 4/2021). Rascunho: `rascunhos/2026-10-22-ericsson-me-respostas-LB-JO-EG.md` | Não |
 
 ## Pendências
-- [ ]
+- [x] Corrigir a skill `payroll-compliance-egypt` (`01-ccg.md` §8.2 e linha 54; SKILL.md escopo; `07-qa-report.md` §3.4): Fundo dos Mártires vale para o setor privado (2026-10-22). **Feito em 2026-10-22:** v2 publicada para a organização no claude.ai (também RPT-06 e DD); pacote em `Research Pipeline/Egypt/2026-10-22-skill-fundo-martires/`.
+- [ ] Ler o art. 53 do Regulamento 2437/2021 (bdl excluídos ≤ 30% do salário de contribuição): citado, não conferido pessoalmente. PDF em `raw/docs/oficiais/EG/2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf`.
+- [ ] Lei 11/2026 (art. 111 da Lei 148/2019, segundo a imprensa): sem texto oficial obtido.
+- [ ] Circular MoF 14/2021: só há cópia em host não oficial (aliateck); buscar cópia oficial.
 
 ## Correções ligadas
-- _(links para entradas de [[correcoes]])_
+- 2026-10-22: Fundo dos Mártires no setor privado ([[correcoes]]).
 
 ## Fontes
 - skill payroll-compliance-egypt (lida em 2026-10-02)
+- Fontes oficiais baixadas em 2026-10-22: `raw/docs/oficiais/EG/` (índice em `2026-10-22-fontes.md`). Lei 91/2005: 21 leis de alteração (lista da ETA), nenhuma muda arts. 9 e 12; art. 11 revogado pela Lei 30/2023 art. 8. Lei 148/2019: alterada pelas Leis 25/2020, 18/2023, 8/2024, nenhuma no art. 1(8).

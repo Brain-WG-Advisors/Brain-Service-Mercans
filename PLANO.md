@@ -82,7 +82,7 @@ Nenhuma fonte é extraída sem a **lista completa do período** em `inventarios/
 | 0.4 | A integração do GitHub está liberada nos Projetos do claude.ai? | Usuário | ✅ **não disponível** (2026-10-22): o pacote do Projeto entra por **upload** (`publicar/AAAA-MM-DD/`) |
 | 0.5 | Extensão Claude in Chrome instalada e logada; `/chrome` conecta no Claude Code | Usuário | ✅ extensão instalada (2026-10-22). A conexão é confirmada na primeira sessão de F3 |
 | 0.6 | Nome da variável do token do YouTrack no `.env` (só o nome) | Usuário | ✅ `YOUTRACK_TOKEN` (2026-10-22), que é o padrão do script |
-| 0.7 | Onde estão o pipeline e as saídas das execuções | Usuário | ✅ (2026-10-22) Os scripts estão "dentro do Claude" (skills `mercans-pipeline-methodology`/`mercans-compliance-workflow`) e no Drive. O pipeline roda numa máquina e grava localmente (`~/mercans-pipeline/<CC>-compliance/01-ccg … 07-qa-crosscheck`); depois o resultado é **enviado à mão para o Drive**. Nesta máquina há só execuções de teste (YY, ZZ, 2026-09-11) e um pacote antigo v2.4 em Downloads; a versão atual (v2.9) e as saídas reais ficam na outra máquina. **F6 = cenário 2 (Drive) para o que já foi enviado + cenário 3 (cópia da outra máquina) para o que não foi.** |
+| 0.7 | Onde estão o pipeline e as saídas das execuções | Usuário | ✅ (2026-10-22) Os scripts estão "dentro do Claude" (skills `mercans-pipeline-methodology`/`mercans-compliance-workflow`) e no Drive. O pipeline roda numa máquina e grava localmente (`~/mercans-pipeline/<CC>-compliance/01-ccg … 07-qa-crosscheck`); depois o resultado é **enviado à mão para o Drive**. Nesta máquina há só execuções de teste (YY, ZZ, 2026-09-11) e um pacote antigo v2.4 em Downloads; a versão atual (v2.9) e as saídas reais ficam na outra máquina. **F6 = cenário 2 (Drive) para o que já foi enviado + cenário 3 (cópia da outra máquina) para o que não foi.** **Atualizada em 2026-10-27 (migração):** o brain agora está na máquina do pipeline, então o **cenário 3 é local**: `C:\Users\instituto\mercans-pipeline`, script `mercans_pipeline_v2_12.sh` (não mais v2.9), saídas reais de BE, CO e FR em `<CC>-compliance/`, failure log F1–F74. Leitura direta do disco, sem pen drive. O cenário 2 continua para conferir máquina × Drive (as versões vigentes da Colômbia estão no Drive e no brain, não no pipeline). Inventário em [inventarios/pipeline.md](inventarios/pipeline.md). |
 | 0.8 | Metas (§7) | Usuário | ✅ padrão: as metas propostas no §7 (2026-10-22; ajustáveis) |
 | 0.9 | Escopo de países | Usuário | ✅ padrão: os 49 países com hub; país novo entra quando aparecer em ticket ou no monday (2026-10-22; ajustável) |
 | 0.10 | O board de alertas `18227732675` parou em 2026-06-06. Existe um mais novo? | Usuário | ✅ não: o acompanhamento de alertas parou em 2026-06-06 (2026-10-22). Lacuna registrada no §13 |
@@ -117,7 +117,7 @@ Prompts: [prompts/publicacao.md](prompts/publicacao.md) + [prompts/projeto-claud
 | F3 | Chats do claude.ai | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F3 | A medir | `raw/chats/conversas/` | — |
 | F4 | Reuniões | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F4 | A medir | `raw/reunioes/` (fora do git) | — |
 | F5 | Drive | [prompts/coleta-chrome.md](prompts/coleta-chrome.md) §F5 (alvos do F1) | A medir | `raw/drive/` (fora do git) | — |
-| F6 | Pipeline | [prompts/extracao-pipeline.md](prompts/extracao-pipeline.md) (3 cenários, conforme a 0.7) | — | `raw/pipeline/` | 0.7 |
+| F6 | Pipeline | [prompts/extracao-pipeline.md](prompts/extracao-pipeline.md) (cenário 3 local + 2 para conferência, conforme a 0.7) | [inventarios/pipeline.md](inventarios/pipeline.md) | `raw/pipeline/` | 0.7 ✅ |
 
 **Ciclo de cada fonte:**
 1. Inventário.
@@ -195,7 +195,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | 3. F3 Chats | 2026-12-11 |
 | 3. F4 Reuniões | 2026-12-18 |
 | 3. F5 Drive | 2027-01-15 (recesso de fim de ano considerado) |
-| 3. F6 Pipeline | depende da 0.7 |
+| 3. F6 Pipeline | 0.7 resolvida em 2026-10-27; inventário feito, falta aprovar o Passo 1 |
 | 4. Consolidação final | 2027-01-20 |
 | 5. Medição final + relatório | 2027-01-27 |
 
@@ -257,7 +257,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 | 3. F3 Chats | ⏳ | 0/? | — | 6–10 / | — | Depois da F2 |
 | 3. F4 Reuniões | ⏳ | 0/? | — | 4–8 / | — | Depois da F3 |
 | 3. F5 Drive | ⏳ | 0/? | — | 4–6 / | — | Depois da F4 (alvos vêm do F1) |
-| 3. F6 Pipeline | ⏳ | — | — | — | — | Depende da 0.7 |
+| 3. F6 Pipeline | 🔄 inventário | 0/4 | — | — | 2026-10-27 | Usuário aprovar o inventário (Passo 1) |
 | 4. Consolidação | ⏳ | — | — | 3 / | — | — |
 | 5. Medição final | ⏳ | — | — | 5–6 / | — | — |
 | 6. Rotina | ⏳ | — | — | 20 min/sem | — | — |
@@ -265,7 +265,7 @@ Prompt: [prompts/rotina.md](prompts/rotina.md) (semanal e mensal)
 **Já feito (base):** estrutura e regras (2026-10-01); carga de 3 projetos do Claude + 58 tickets → 49 hubs e 67 correções (2026-10-02); fichas de 38 skills (2026-10-02); revisão de 2026-10-05 (37 propostas, 33 perguntas); repositório git privado (2026-10-08); modelo v2 com prompts de todas as fases e estrutura dos boards do monday (2026-10-19); modelo v3 com governança, MVP, medição em três camadas e capacidade, (2026-10-20); prompts das Fases 4, 5 e 6 e da F6 e modelo de relatório (2026-10-21); Fase 0 concluída, sem termo formal porque a empresa já autoriza (2026-10-22) → **todas as fases têm prompt**.
 
 ## 13. Pendências fora do roteiro
-- **Saídas do pipeline só na máquina local até alguém enviar ao Drive** (0.7): risco de o Drive ficar com uma versão mais velha do que a gerada, ou de saídas se perderem. Na F6, cruzar as versões da máquina × Drive × monday; avaliar um passo fixo "enviar ao Drive" no fim de cada execução.
+- **Saídas do pipeline só na máquina local até alguém enviar ao Drive** (0.7): risco de o Drive ficar com uma versão mais velha do que a gerada, ou de saídas se perderem. Na F6, cruzar as versões da máquina × Drive × monday; avaliar um passo fixo "enviar ao Drive" no fim de cada execução. **2026-10-27:** confirmado na Colômbia (pipeline com CCG v1.2/WTC v1.4/DD v1.0; vigentes no Drive e no brain: v1.4/v1.6/v1.3). O repo `~/mercans-pipeline` não tem remote (única cópia).
 - **Alertas legislativos sem acompanhamento desde 2026-06-06** (0.10): o único board parou. A F1 coleta os 42 itens existentes, e a lacuna de jun–out precisa de um processo novo (proposta depois da F1: rotina de alertas por país, com o pipeline/Stage 1 como motor, ver a pendência abaixo).
 - **Third-party payroll software** (critério do checklist CT-4321) e **alertas legislativos**: viram itens de qualidade em [[research-pipeline]]/[[design]] depois do F1. Perguntas: qual software, em que etapa, qual saída.
 - **Cadeia para frente** (o board Artifacts usa as fases Research → Design → Development → Deployment): uma linha em [[research-pipeline]] e o limite em [[fronteiras]].

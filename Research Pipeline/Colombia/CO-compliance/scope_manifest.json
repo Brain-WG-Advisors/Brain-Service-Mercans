@@ -1,0 +1,531 @@
+{
+  "_comment": "Produced by Agent 1 (CCG). Every downstream agent reads this and rejects out-of-scope items. Colombia CO, fiscal year 2026.",
+  "country": "Colombia",
+  "code": "CO",
+  "country_code": "CO",
+  "currency": "COP",
+  "year": "2026",
+  "generated": "2026-09-03T00:00:00Z",
+  "scope_version": "1.0",
+  "scope_decided_by": "Mercans Compliance Regulations Team",
+  "scope_decided_on": "2026-09-03",
+  "source_document": "CO-CCG-001 v1.0",
+  "employment_types": {
+    "in_scope": [
+      "Indefinite-term employment contract (contrato a termino indefinido) - CST art. 47, Law 2466/2025 art. 5",
+      "Fixed-term employment contract, maximum 4 years (contrato a termino fijo) - CST art. 46, Law 2466/2025 art. 6",
+      "Specific work or task contract (contrato por obra o labor determinada) - CST art. 46",
+      "Occasional, accidental or transitory work contract - CST art. 6",
+      "Apprenticeship contract (contrato de aprendizaje) - special fixed-term LABOUR contract, CST art. 81 as substituted by Law 2466/2025 art. 21 and regulated by Decreto 0223 of 5 March 2026",
+      "Internship / practical placement (practicas o pasantias) - nomina electronica contract type 5",
+      "Part-time employees (no separate Colombian regime; contribution base floored at 1 minimum wage)",
+      "All-inclusive salary employees (salario integral, >= 13 minimum wages) - CST art. 132 num. 2",
+      "Employees on telework and remote work (Law 1221/2008 as amended by Law 2466/2025 arts. 52-54)",
+      "Resident foreign national employees under a Colombian contract",
+      "NON-RESIDENT foreign national employees under a Colombian contract (withheld at the flat 20% of ET art. 408 until tax residence is acquired - DIAN Concepto 011108 of 29 June 2026)",
+      "Employed old-age pensioners in active service (worker sub-type 01, no pension contribution)",
+      "Executive directors and statutory legal representatives holding an employment contract"
+    ],
+    "out_of_scope": [
+      "Public servants / servidores publicos (nomina electronica worker types 18, 30, 47, 58)",
+      "Military and national police special regimes",
+      "Independent workers and service contractors (trabajadores independientes / contrato de prestacion de servicios) - contribution base is 40% of fees, PILA planilla types I and Y",
+      "Non-executive directors receiving attendance fees only (corporate mandate, not employment; independent-worker contribution on 40% of the fee, Law 1955/2019 art. 244)",
+      "Domestic workers (worker type 02) and family drivers - private sector but outside standard corporate payroll",
+      "Community mothers / madres comunitarias (worker type 04) and substitute mothers (PILA planilla H)",
+      "Medical interns under CST art. 81A (remuneration paid by the health-system resource administrator, not the employer)",
+      "Digital delivery-platform workers - Law 2466/2025 arts. 24-30 do not enter into force until 12 months after the Government completes the implementing regulation (art. 67)",
+      "Self-insured categories and voluntary occupational-risk affiliates (Decree 1563/2016)",
+      "Social Protection Floor contributors (PILA planilla B) and Solidarity Contribution contributors (planilla D)",
+      "Students under the Law 789/2002 special regime (PILA planilla K)"
+    ],
+    "rationale": "Mercans Colombia scope is private-sector employment under the Substantive Labour Code (Decreto 2663 de 1950), for which the employer runs a full gross-to-net with health, pension, solidarity pension fund, occupational risk and the three payroll levies, plus wage withholding tax. Public-sector, military and police regimes carry different worker-type codes, different contribution rates (ESAP 0.5%, Ministry of Education 1%, congressional and investigative-police special pension rates) and different filings (PILA planilla types T and F), and are excluded. Independent workers and fee-only directors are excluded because the contribution base is 40% of fees rather than salary and the employer is not the contributor. Apprentices ARE in scope because Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract governed by the Labour Code, with full statutory benefits in the practical and dual phases - a material 2026 change from the previous non-labour arrangement. Non-resident employees are explicitly IN scope: the flat 20% withholding of ET art. 408 and the prospective switch to the ET art. 383 table on acquisition of residence is a real, common expatriate case and a blocking engine requirement.",
+    "inbound_data_contract": "The engine must receive, per employee: worker type and sub-type, contract type, all-inclusive-salary flag, high-risk-pension flag, active-pensioner flag, telework mode, apprenticeship phase (classroom / practical / dual), tax-residence flag WITH an effective date, and a presence-day accumulator over any rolling 365-day window."
+  },
+  "authority_filings": {
+    "in_scope": [
+      {
+        "filing_id": "CO-DIAN-NE-MONTHLY-001",
+        "name": "Documento Soporte de Pago de Nomina Electronica (Electronic Payroll Support Document)",
+        "authority": "DIAN - Direccion de Impuestos y Aduanas Nacionales",
+        "frequency": "monthly",
+        "format": "XML",
+        "integration_type": "both",
+        "product_mapping_required": true,
+        "spec_file": "CO-DIAN-001-NominaElectronica-Spec.xlsx",
+        "legal_basis": "Resolucion DIAN 000013 de 11 Feb 2021 arts. 1, 2, 3, 5, 8; Anexo Tecnico v1.0; XSD v1.0.6",
+        "deadline": "Within the first 10 days of the month following the payment or credit",
+        "channel": "Machine-to-machine SOAP 1.2, operation SendNominaSync, base64 of a ZIP containing the XML, max 500 KB, UTF-8, XAdES-EPES signature with an X.509 certificate from an ONAC-accredited certification authority",
+        "rationale": "Genuine M2M with a synchronous ApplicationResponse the engine must parse. Without a validated document the employer loses the tax deductibility of the payroll cost. Mapping required for every wage type, because the XML separates salary from non-salary at ELEMENT level with paired S/NS element names."
+      },
+      {
+        "filing_id": "CO-DIAN-F350-MONTHLY-002",
+        "name": "Formulario 350 - Declaracion mensual de retenciones en la fuente",
+        "authority": "DIAN",
+        "frequency": "monthly",
+        "format": "XLSX",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "spec_file": "CO-DIAN-002-Formulario350-Spec.xlsx",
+        "legal_basis": "Resolucion DIAN 000031 de 29 Feb 2024 (in force from 1 Aug 2024); DUR 1625 de 2016 art. 1.6.1.13.2.33 as set by Decreto 2229 de 2023; ET art. 577 (round to the nearest 1,000)",
+        "deadline": "7th to 16th business day of the following month, by the LAST DIGIT of the employer NIT",
+        "channel": "Portal round-trip through the DIAN electronic filing service (Muisca)",
+        "rationale": "Aggregates all withholdings of the month. The 2024 form separates withholdings on natural persons from those on legal persons, so the engine must accumulate withholding by counterparty type."
+      },
+      {
+        "filing_id": "CO-PILA-MONTHLY-003",
+        "name": "Planilla Integrada de Liquidacion de Aportes (PILA) - social security and payroll levies",
+        "authority": "Ministerio de Salud y Proteccion Social, filed through a licensed private operador de informacion",
+        "frequency": "monthly",
+        "format": "TXT",
+        "integration_type": "both",
+        "product_mapping_required": true,
+        "spec_file": "CO-PILA-003-AportesSeguridadSocial-Spec.xlsx",
+        "legal_basis": "Resolucion MSPS 2388 de 2016 and Anexo Tecnico 2; Decreto 780 de 2016 arts. 3.2.1.5, 3.2.2.1, 3.2.3.9 as substituted by Decreto 1990 de 2016 arts. 1 and 2",
+        "deadline": "2nd to 16th business day of the following month, by the LAST TWO DIGITS of the employer NIT",
+        "channel": "Portal round-trip through a licensed private operador de informacion. The employer NEVER transacts directly with the government for social security.",
+        "format_detail": "Fixed-width flat file. Archivo Tipo 1 (employer data) = 34 fields, 567 positions. Archivo Tipo 2 Registro Tipo 1 (header) = 22 fields, 359 positions. Registro Tipo 2 (per-contributor settlement) fields identified by name and purpose; byte-exact positions NOT confirmed this pass - see the descoping note in known_gaps.",
+        "rationale": "Carries health, pension, solidarity pension fund, occupational risk and the three payroll levies, per contributor, with per-subsystem bases and day counts and the novedad (change-event) codes. Rounding is UP: contribution base to the peso, each contribution to the next multiple of 100."
+      },
+      {
+        "filing_id": "CO-DIAN-F220-ANNUAL-004",
+        "name": "Formulario 220 - Certificado de Ingresos y Retenciones por rentas de trabajo",
+        "authority": "DIAN (issued by the employer to each employee)",
+        "frequency": "annual",
+        "format": "XLSX",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "spec_file": "CO-DIAN-004-Formulario220-Spec.xlsx",
+        "legal_basis": "ET arts. 378, 379, 380; DUR 1625 de 2016 art. 1.6.1.13.2.40; form prescribed by Resolucion DIAN 000022 de 20 Feb 2024",
+        "deadline": "Last business day of March following the fiscal year",
+        "channel": "Issued to the employee; retained by the employer",
+        "rationale": "SEPARATE annual employer obligation, NOT derived from the 12 monthly Form 350 filings (F21 check). Requires per-employee annual totals by concept plus, for non-filing employees, the employee's own declarations under ET art. 380."
+      },
+      {
+        "filing_id": "CO-DIAN-EXO2276-ANNUAL-005",
+        "name": "Informacion exogena - Formato 2276 version 4, rentas de trabajo y de pensiones",
+        "authority": "DIAN",
+        "frequency": "annual",
+        "format": "XML",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "spec_file": "CO-DIAN-005-Formato2276-Spec.xlsx",
+        "legal_basis": "Resolucion DIAN 000227 de 23 Sep 2025 arts. 1.3.7.1.1 and 1.3.9.1",
+        "deadline": "May-June following the fiscal year, by the employer NIT",
+        "channel": "Portal round-trip through the DIAN informacion exogena service",
+        "rationale": "SEPARATE annual filing with its own field list, its own validation and its own deadline. NOT derivable from the monthly filings. Requires three separate cesantias lines (paid to the employee / deposited to the fund / pre-1991 regime), the meal-payment split at the 41-UVT threshold, the rolling 6-month average labour income, and each dependant's identity document."
+      },
+      {
+        "filing_id": "CO-CESANTIAS-DEPOSIT-ANNUAL-006",
+        "name": "Consignacion anual de cesantias al fondo elegido por el trabajador",
+        "authority": "Fondos de Cesantias (private severance-savings funds)",
+        "frequency": "annual",
+        "format": "Fixed-width TXT (20 fields / 258 positions) or XLS 97-2003 (16 columns A-P), both without a header row; CSV is also accepted by SOI. NOT XML - no XSD exists. Layout VERIFIED from the published Simple S.A. 'Manual Cesantias' ss. 3.1-3.2.",
+        "integration_type": "both",
+        "product_mapping_required": true,
+        "spec_file": "CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx",
+        "legal_basis": "Ley 50 de 1990 art. 99 nums. 1-3; Ley 2466 de 2025 art. 64 (two new paragraphs to Ley 50 art. 99: the 8.33% monthly advance and the 1% monthly interest); CST arts. 249, 250, 253, 254, 310; CST art. 57 par. 4 as added by Ley 2466 de 2025 art. 15; Ley 52 de 1975 art. 1; Decreto 1072 de 2015 arts. 2.2.1.3.1, 2.2.1.3.4, 2.2.1.3.5 and 2.2.1.3.13; CST art. 488 as substituted by Ley 2466 de 2025 art. 62; Decreto 1469 de 2025 (SMMLV 1,750,905 and transport allowance 249,095)",
+        "deadline": "Before 15 February of the year following the 31 December liquidation, so the last compliant day is 14 February (Ley 50 de 1990 art. 99 num. 3; the MinTrabajo draft decree states mora runs from 15 February). Where 14 February falls on a non-business day Colombian practice moves it to the next business day - for accrual year 2025 the shift from Saturday 14 to Monday 16 February 2026 was uniformly reported in the press - but no MinTrabajo concepto was located, so the shift is TO CONFIRM and must not be relied on. For accrual year 2026 the last day is Sunday 14 February 2027: deposit by Friday 12 February 2027.",
+        "channel": "Operador de informacion portal, TWO channels: online_form (Planilla En Linea) or file_upload (Envio de Archivo Unificado de Cesantias). VERIFIED independently in the published manuals of ACH Colombia S.A. (SOI, www.nuevosoi.com.co, instructivo DDS-DES-INS-008 v2) and Simple S.A. (www.pagosimple.com). Not machine-to-machine: no XSD, no SOAP, no signature, no certificate. The channel returns a planilla number, a comprobante PDF and post-payment reports; the fund itself issues the deposit certificate.",
+        "rationale": "Late deposit costs ONE DAY'S SALARY PER DAY OF DELAY, per employee, uncapped - the single most expensive Colombian year-end failure. Law 2466 of 2025 art. 64 additionally permits a monthly 8.33% advance deposit and monthly payment of the 1% interest by written agreement, which the engine must support as a configurable option.",
+        "source_status": "PRIMARY for the law and PRIMARY for a published field layout. No longer DERIVED - see the CO-CESANTIAS-006 entries in resolved_in_this_pass."
+      }
+    ],
+    "out_of_scope": [
+      {
+        "filing_id": "CO-MINTRABAJO-DISCAPACIDAD-REPORT",
+        "name": "Reporte de contratos con personas con discapacidad al Ministerio del Trabajo (within 15 days of signature) and the associated hiring quota",
+        "descoping_reason": "HR-scope - requires data beyond payroll system. Requires MinSalud disability certification, permanent-headcount census by 100-employee tranche and quota compliance tracking (Ley 2466 de 2025 art. 15). More than 50% of the fields originate in the HRMS, not in payroll.",
+        "client_impact": "Refer to HRMS team",
+        "product_mapping_required": false
+      },
+      {
+        "filing_id": "CO-SENA-CUOTA-APRENDICES",
+        "name": "Cuota de aprendices (apprentice quota determination) and its monetisation",
+        "descoping_reason": "HR-scope - requires data beyond payroll system. The quota is fixed by SENA on the employer's headcount by occupation and training programme; monetisation is a treasury payment, not a payroll deduction (Ley 789 de 2002 art. 34 as substituted by Ley 2466 de 2025 art. 23). Payroll produces the apprentice's maintenance support and contributions, which ARE in scope through CO-PILA-MONTHLY-003 and CO-DIAN-NE-MONTHLY-001.",
+        "client_impact": "Refer to HRMS team; the client retains the SENA quota relationship",
+        "product_mapping_required": false
+      },
+      {
+        "filing_id": "CO-RUAF-NOVEDADES",
+        "name": "RUAF-ND vital-events registry notifications (births, deaths, disability determinations)",
+        "descoping_reason": "HR-scope - requires data beyond payroll system. Reported by health providers and by the employer's HR function; sourced from civil-registry documents, not from payroll.",
+        "client_impact": "Refer to HRMS team",
+        "product_mapping_required": false
+      },
+      {
+        "filing_id": "CO-PILA-PLANILLA-T-F",
+        "name": "PILA planilla types T and F (Sistema General de Participaciones beneficiary entities and the missing employer contribution for them)",
+        "descoping_reason": "Employment type out of scope - public-sector only (contributor type 47). Not applicable to private-sector corporate payroll.",
+        "client_impact": "None - not applicable to in-scope employment types",
+        "product_mapping_required": false
+      },
+      {
+        "filing_id": "CO-PILA-PLANILLA-I-Y",
+        "name": "PILA planilla types I and Y (independent workers, and the contratante paying for service contractors)",
+        "descoping_reason": "Employment type out of scope - independent workers and service contractors. The contribution base is 40% of fees, not salary, and the payer is not an employer.",
+        "client_impact": "Where the client engages service contractors, the client or a separate contractor-payments process retains the obligation",
+        "product_mapping_required": false
+      },
+      {
+        "filing_id": "CO-ICA-RETENCION",
+        "name": "Retencion de Industria y Comercio (municipal turnover-tax withholding)",
+        "descoping_reason": "Not a payroll filing - a municipal business-turnover tax withheld on supplier payments, with no employment-income component.",
+        "client_impact": "Refer to the client's accounts-payable and tax function",
+        "product_mapping_required": false
+      },
+      {
+        "filing_id": "CO-DIAN-F110-RENTA",
+        "name": "Employee annual income-tax return (declaracion de renta persona natural)",
+        "descoping_reason": "Employee obligation, not an employer filing. Colombia imposes NO employer year-end tax reconciliation; the employee reconciles the withholdings on their own return.",
+        "client_impact": "None - the employer's duty ends with Formulario 220",
+        "product_mapping_required": false
+      }
+    ]
+  },
+  "wage_type_categories": {
+    "in_scope": [
+      "Basic salary (salario basico), fixed and variable",
+      "All-inclusive salary (salario integral) - contribution and payroll-levy bases at 70%",
+      "Auxilio de transporte (statutory transport allowance) - COP 249,095 for 2026, non-salary, IN the statutory-benefit base, OUT of the contribution base",
+      "Auxilio de conectividad (connectivity allowance for teleworkers) - COP 249,095, in place of the transport allowance",
+      "Overtime - day (+25%) and night (+75%)",
+      "Night premium (recargo nocturno) +35%, window 19:00-06:00 from 25 Dec 2025",
+      "Obligatory rest-day / holiday premium - 80% to 30 Jun 2026, 90% from 1 Jul 2026, 100% from 1 Jul 2027",
+      "Paid weekly rest day and paid public holidays",
+      "Commissions and sales percentages",
+      "Habitual bonuses (salary) and occasional gratuities (non-salary)",
+      "Extra-statutory bonuses under a written CST art. 128 non-salary pact (clamped at 40% by Ley 1393/2010 art. 30)",
+      "Salary in kind (salario en especie) - capped at 50% of total salary, 30% at the minimum wage",
+      "Prima de servicios (statutory service bonus) - 30 days per year, half by 30 June and half by 20 December",
+      "Cesantias (severance savings) - one month's salary per year of service",
+      "Intereses a las cesantias - 12% per year",
+      "Vacaciones (annual leave) - 15 working days; paid rest, so IN the contribution and payroll-levy bases",
+      "Compensacion en dinero de vacaciones - up to half, on the employee's prior written request",
+      "Dotacion (work clothing and footwear) - three deliveries per year for employees up to 2 minimum wages",
+      "Incapacidad por enfermedad general - employer days 1-2, EPS from day 3 (66.67% to day 90, 50% days 91-180)",
+      "Incapacidad de origen laboral - ARL from the day after the event, 100% of the contribution base",
+      "Licencia de maternidad (18 weeks) and licencia de paternidad (2 weeks), paid by the EPS",
+      "Licencia parental compartida and flexible parental leave",
+      "Statutory paid leave under CST art. 57 num. 6 - voting, transitory office, grave domestic calamity, union commissions, medical appointments, school obligations, judicial summonses, bicycle-commuting rest day",
+      "Licencia de luto (bereavement) - 5 working days",
+      "Apoyo de sostenimiento del aprendiz - 75% / 100% of the minimum wage by phase",
+      "Indemnizacion por despido sin justa causa (CST art. 64) - tiered by salary and seniority",
+      "Indemnizacion moratoria (CST art. 65) and the cesantias non-deposit and unpaid-interest penalties",
+      "Pagos de alimentacion a terceros (ET art. 387-1) - not income up to 41 UVT/month where salary <= 310 UVT",
+      "Employer-paid prepaid health / supplementary health plans",
+      "Employer contributions to voluntary pension funds and to the individual pension account",
+      "Equity and share-incentive awards - taxable at exercise or vesting on the spread",
+      "Employee deductions: health 4%, pension 4%, Fondo de Solidaridad Pensional 1% + 0.2-1.0%, retencion en la fuente",
+      "Post-tax deductions: union dues, cooperative and savings-fund dues, disciplinary sanctions, Contribucion Solidaria a la Educacion Superior (Contribucion Sabes), libranza payroll lending, employer loans and advances, court-ordered garnishments"
+    ],
+    "out_of_scope": [
+      "Independent-contractor fees and honorarios de junta directiva paid to non-employees",
+      "Public-sector allowances: prima especial, prima de costo de vida, and ET art. 206 nums. 6-9 exemptions (military, judiciary, diplomatic, public university staff)",
+      "Pension payments made by the pension administrator (not by the employer)",
+      "Bono pensional (pension bond on transfer between regimes)",
+      "Subsidio familiar paid by the Caja de Compensacion Familiar to the employee (a fund benefit, not an employer payment)",
+      "Medical-intern remuneration paid by ADRES under CST art. 81A",
+      "Digital delivery-platform earnings (Ley 2466/2025 arts. 24-30, not yet in force)",
+      "Value-added tax withholding, industry and commerce tax withholding, stamp duty, financial-transactions tax"
+    ],
+    "special_rules": [
+      "THREE SEPARATE BASES, never interchangeable: (a) IBC for health, pension, occupational risk and the solidarity fund - floor 1 SMMLV, CEILING 25 SMMLV = COP 43,772,625, 70% for salario integral; (b) payroll-levy base for CCF/SENA/ICBF = Ley 21 de 1982 art. 17 'nomina mensual de salarios' INCLUDING paid rest days, with NO CEILING AT ALL; (c) withholding base = the ET art. 388 depurated figure.",
+      "THE 40% CLAMP (Ley 1393 de 2010 art. 30): non-salary payments may not exceed 40% of total remuneration for Ley 100 arts. 18 and 204 purposes. The excess is forced BACK INTO the IBC while remaining non-salary for the statutory benefits. Two divergent bases, permanently.",
+      "THE EXONERATION CLIFF (ET art. 114-1): employer health 8.5%, SENA 2% and ICBF 3% are exonerated for employees earning STRICTLY LESS THAN 10 SMMLV (COP 17,509,050). CCF 4% and pension 12% are NEVER exonerated. Tested PER EMPLOYEE, PER MONTH, on what the employee devenga. At exactly 10 SMMLV the exoneration is LOST, costing the employer approximately COP 2,363,800 per month.",
+      "THE 25% RENTA EXENTA IS COMPUTED LAST (ET art. 206 num. 10), on the figure net of non-taxable income, art. 387 deductions and other exempt income. Then the combined 40% and 1,340-UVT caps apply. The 72-UVT-per-dependant deduction sits OUTSIDE those caps (ET art. 336 num. 3).",
+      "THREE ROUNDING REGIMES IN ONE PAYROLL MONTH: PILA rounds UP (IBC to the peso, each contribution to the next multiple of 100 - Decreto 1990 de 2016 art. 1); the nomina electronica XML uses ROUND-HALF-TO-EVEN with a +/-2.00 tolerance and an explicit Redondeo element; DIAN return forms round to the NEAREST 1,000 (ET art. 577). Never unify them.",
+      "TWO MID-2026 CUT-OVERS, TWO WEEKS APART: the rest-day premium steps 80% -> 90% on 1 JULY 2026 (CST art. 179 par. transitorio, Ley 2466/2025 art. 14); the 42-hour week and the 210 hourly divisor start on 15 JULY 2026 (Ley 2101/2021 art. 3, MinTrabajo Circular Externa 101 de 22-09-2025). The legacy divisor of 240 is obsolete.",
+      "VACACIONES ARE NOT A PRESTACION SOCIAL. They are paid rest, so they ENTER the IBC and the payroll-levy base; their own base excludes overtime and rest-day work ONLY (CST art. 192), so the night premium and commissions stay in; the auxilio de transporte is NOT in the vacation base; and salario integral does NOT absorb them (CST art. 132 num. 2).",
+      "NON-RESIDENT WITHHOLDING IS A FLAT 20% ON GROSS (ET art. 408), with no depuration and no exemptions, until tax residence under ET art. 10 is acquired; then the ET art. 383 table applies PROSPECTIVELY from the following payment. DIAN Concepto 011108 of 29 June 2026 (confirming Concepto 1789 int. 14595 of 2025) rejected applying art. 383 from day one in anticipation of residence. Where the service is performed entirely outside Colombia by a non-resident, the income is foreign-source and there is NO withholding (DIAN Oficio 28380 de 2019)."
+    ]
+  },
+  "option_mapper_scope": {
+    "_comment": "For each option mapper, the codes that ARE in scope. Out-of-scope codes must be excluded from ALL artifacts.",
+    "personal_id_type": [
+      "12 - Tarjeta de identidad (authorised minors 15-17)",
+      "13 - Cedula de ciudadania (default for Colombian nationals 18+)",
+      "21 - Tarjeta de extranjeria (foreign minors)",
+      "22 - Cedula de extranjeria (resident foreign nationals)",
+      "31 - NIT (rare; where the beneficiary is a legal person)",
+      "41 - Pasaporte (non-resident foreign nationals)",
+      "42 - Documento de identificacion extranjero",
+      "47 - PEP, Permiso Especial de Permanencia",
+      "50 - NIT de otro pais",
+      "91 - NUIP (employee use only; not present in the RUT database)"
+    ],
+    "insurance_type": [
+      "Salud (health) - EE 4% / ER 8.5%, IBC capped at 25 SMMLV, ER exonerable below 10 SMMLV",
+      "Pension - EE 4% / ER 12%, IBC capped at 25 SMMLV, never exonerable",
+      "Fondo de Solidaridad Pensional, subcuenta de solidaridad - EE 1% from 4 SMMLV",
+      "Fondo de Solidaridad Pensional, subcuenta de subsistencia - EE 0.2%-1.0% from 16 SMMLV",
+      "Riesgos Laborales (occupational risk) - ER only, class I-V, initial rates 0.522% / 1.044% / 2.436% / 4.350% / 6.960%, global bounds 0.348%-8.7%",
+      "Caja de Compensacion Familiar - ER 4%, payroll-levy base, no ceiling, NEVER exonerable",
+      "SENA - ER 2%, payroll-levy base, no ceiling, exonerable below 10 SMMLV",
+      "ICBF - ER 3%, payroll-levy base, no ceiling, exonerable below 10 SMMLV"
+    ],
+    "contract_type": [
+      "1 - Termino fijo (maximum 4 years, Ley 2466/2025 art. 6)",
+      "2 - Termino indefinido (the default vinculation, Ley 2466/2025 art. 5)",
+      "3 - Obra o labor determinada",
+      "4 - Aprendizaje (special fixed-term labour contract, Ley 2466/2025 art. 21)",
+      "5 - Practicas o pasantias"
+    ],
+    "correction_codes": [
+      "Planilla E - Empleados (regular payment for dependent contributors)",
+      "Planilla A - Cotizante con novedad de ingreso (omitted hires within the same month, no late interest)",
+      "Planilla N - Correcciones (correction of IBC, rate, contributor type/sub-type or omitted novedades, in paired A/C record groups; sum of C bases and days must be >= sum of A)",
+      "Planilla M - Mora (periods with total absence of payment, before March 2014)",
+      "Planilla J - Cumplimiento de sentencia judicial (reinstatement, contrato realidad, reliquidations)",
+      "Planilla X - Empresa liquidada"
+    ],
+    "benefit_type": [
+      "ING - Ingreso (hire)",
+      "RET - Retiro (termination)",
+      "TDE / TAE - Traslado desde / hacia EPS",
+      "TDP / TAP - Traslado desde / hacia AFP",
+      "VSP / VST - Variacion permanente / transitoria de salario",
+      "SLN - Suspension o licencia no remunerada (health moves to 8.5% or 0%, pension to 12% or 16%, payroll levies to 0%)",
+      "IGE - Incapacidad general",
+      "LMA - Licencia de maternidad o paternidad",
+      "VAC / LR - Vacaciones o licencia remunerada",
+      "IRL - Incapacidad por accidente o enfermedad laboral",
+      "AVP - Aporte voluntario a pension",
+      "VCT - Variacion de centro de trabajo (may change the occupational-risk class)"
+    ]
+  },
+  "integrations": {
+    "outbound": [
+      {
+        "id": "CO-OUT-NE-SOAP",
+        "to": "DIAN Validation Service (catalogo-vpfe.dian.gov.co)",
+        "format": "SOAP 1.2 / base64 ZIP containing XML",
+        "notes": "Operation SendNominaSync. Max 500 KB. UTF-8 only. XAdES-EPES signature, ClaimedRole in {thirdparty, supplier}, X.509 from an ONAC-accredited CA. Genuine machine-to-machine."
+      },
+      {
+        "id": "CO-OUT-F350",
+        "to": "DIAN Muisca electronic filing portal",
+        "format": "Portal form",
+        "notes": "Monthly. Values rounded to the nearest 1,000 (ET art. 577). Withholdings on natural persons and legal persons declared separately."
+      },
+      {
+        "id": "CO-OUT-PILA",
+        "to": "Licensed operador de informacion PILA",
+        "format": "TXT fixed-width",
+        "notes": "Archivo Tipo 1 (34 fields, 567 positions) and Archivo Tipo 2 (header 22 fields, 359 positions, plus a Registro Tipo 2 per contributor). Rounding UP throughout."
+      },
+      {
+        "id": "CO-OUT-F220",
+        "to": "The employee (retained by the employer)",
+        "format": "Prescribed form, whole pesos",
+        "notes": "Annual, by the last business day of March."
+      },
+      {
+        "id": "CO-OUT-2276",
+        "to": "DIAN informacion exogena service",
+        "format": "XML",
+        "notes": "Annual, May-June by NIT. Requires three separate cesantias lines and the meal-payment split."
+      },
+      {
+        "id": "CO-OUT-CESANTIAS",
+        "to": "Fondos de Cesantias",
+        "format": "CSV or fund portal",
+        "notes": "Annual, by 14 February. Optional monthly 8.33% advance deposit under Ley 2466/2025 art. 64."
+      },
+      {
+        "id": "CO-OUT-BANKFILE",
+        "to": "The client's paying bank",
+        "format": "Bank-specific fixed-width or delimited",
+        "notes": "Colombia does NOT use IBAN. Domestic account numbers are numeric, of bank-specific length (commonly 10-17 digits), with no national check-digit standard. The bank-entity code catalogue must be obtained per client - owned upstream by the client's bank."
+      },
+      {
+        "id": "CO-OUT-PAYSLIP",
+        "to": "The employee",
+        "format": "PDF",
+        "notes": "Representacion grafica. PERMISSIVE under Resolucion DIAN 000013 de 2021 art. 24, but if issued it must carry the 13 art. 5 items plus a QR of at least 2 cm on EVERY page. Spanish and COP are mandatory (art. 26)."
+      }
+    ],
+    "inbound": [
+      {
+        "id": "CO-IN-NE-APPRESPONSE",
+        "from": "DIAN Validation Service",
+        "format": "base64 XML (ApplicationResponse)",
+        "notes": "MANDATORY. Synchronous in the same SOAP call. The engine must PARSE it, store the validation status and the CUNE, and retry or correct rejections. A payroll cost is tax-deductible only where the document is validated.",
+        "product_mapping_required": true,
+        "product_mapping_rationale": "true - validation status and CUNE are stored fields; tax-deductibility of the payroll cost is gated on them.",
+        "spec_coverage": "COVERED INSIDE CO-DIAN-001-NominaElectronica-Spec.xlsx. The ApplicationResponse is synchronous in the same SOAP call as the outbound document, so it belongs to that Spec's own file structure and is modelled there rather than as a separate workbook."
+      },
+      {
+        "id": "CO-IN-PILA-SETTLEMENT",
+        "from": "Licensed operador de informacion PILA",
+        "format": "Operator-specific file or portal output",
+        "notes": "Reconcile settled contributions against the engine's computation; capture the planilla number and payment date; detect rejected contributor records.",
+        "product_mapping_required": true,
+        "product_mapping_rationale": "true - planilla number, payment date and per-contributor rejection flags are stored reconciliation fields.",
+        "spec_coverage": "COVERED INSIDE CO-PILA-003-AportesSeguridadSocial-Spec.xlsx. The settlement output is the return leg of the same planilla and is modelled with the outbound record."
+      },
+      {
+        "id": "CO-IN-EPS-ARL-BENEFIT",
+        "from": "EPS (health insurer) and ARL (occupational-risk insurer)",
+        "format": "Portal output or file",
+        "notes": "The amount and period of the sickness, maternity, paternity or occupational-injury benefit actually recognised. Colombian employers universally ADVANCE these benefits through payroll and recover from the institution, so the engine must model a benefit line PAID to the employee but RECEIVABLE from the institution.",
+        "product_mapping_required": true,
+        "product_mapping_rationale": "true - modelled as a benefit wage-type line (paid to employee, receivable from institution).",
+        "spec_coverage": "NO SEPARATE SPEC - deliberate, and the reason is that there is nothing to specify at field level. The amount and period of a recognised sickness, maternity, paternity or occupational-injury benefit is retrieved from each EPS's or ARL's own portal, and there are dozens of EPS and several ARL, each with its own screen or export and NO published file format, schema or column layout from any of them - and no government-published one either, because the recognition is an act of the insurer, not of an authority. A 9-sheet Spec written without a source would be a fabricated layout and a C25 failure. The SUBSTANCE is nonetheless carried in the pipeline: the benefit is modelled as a wage-type line paid to the employee and receivable from the institution (see 02-wtc and CCG Modules 5 and 8), and the employer-borne first two days of general-illness incapacity are tracked at CO-GAP-03. REVISIT if a client standardises on one EPS/ARL and can supply that institution's export layout."
+      },
+      {
+        "id": "CO-IN-CESANTIAS-CONFIRMATION",
+        "from": "Fondos de Cesantias",
+        "format": "Fund-specific file or portal output",
+        "notes": "Deposit confirmation evidencing compliance with the 14 February deadline.",
+        "product_mapping_required": true,
+        "product_mapping_rationale": "true - deposit-by-14-Feb compliance is tracked as a per-employee/per-year status field.",
+        "spec_coverage": "COVERED INSIDE CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx, Spec fields E10, E11, E90, E91 and E93 (planilla number, control total, payment date, per-employee deposit-compliance status, fund certificate reference), with the channel documented on Sheets 5 and 9."
+      },
+      {
+        "id": "CO-IN-LIBRANZA-SCHEDULE",
+        "from": "Payroll lenders (entidades operadoras de libranza)",
+        "format": "Lender-specific file",
+        "notes": "Instalment schedule under Ley 1527 de 2012. The aggregate of libranza deductions must leave the employee at least 50% of net salary. Owned upstream by the lender.",
+        "product_mapping_required": true,
+        "product_mapping_rationale": "true - instalment amounts are a deduction wage-type; the 50%-of-net floor is an engine validation rule.",
+        "spec_coverage": "NO SEPARATE SPEC - deliberate, and out of STEP 3's scope on two independent grounds. First, it is not a government-to-employer flow at all: the counterparty is a private payroll lender (entidad operadora de libranza) under Ley 1527 de 2012, and scope_manifest already records the flow as owned upstream by the lender. Second, the format is lender-specific with no published schema. The two things the ENGINE must do are specified elsewhere: carry the instalment as a deduction wage type (02-wtc), and enforce the Ley 1527 floor that the aggregate of libranza deductions must leave the employee at least 50% of net salary as an engine validation rule (CCG Module 7)."
+      }
+    ],
+    "both": [
+      {
+        "id": "CO-BOTH-NE",
+        "with": "DIAN",
+        "format": "SOAP 1.2 request + synchronous base64 ApplicationResponse",
+        "notes": "Outbound transmission and inbound validation response in a single M2M exchange."
+      },
+      {
+        "id": "CO-BOTH-PILA",
+        "with": "Licensed operador de informacion PILA",
+        "format": "TXT out, settlement response in",
+        "notes": "Outbound settlement file and inbound settlement/payment confirmation."
+      },
+      {
+        "id": "CO-BOTH-CESANTIAS",
+        "with": "Fondos de Cesantias",
+        "format": "CSV out, confirmation in",
+        "notes": "Outbound deposit file and inbound deposit confirmation."
+      }
+    ],
+    "_note": "Inbound files where HRB must parse/act = product_mapping_required=true. Never default inbound=not-in-scope. CO-IN-NE-APPRESPONSE in particular is a HARD dependency, not a receipt."
+  },
+  "known_gaps": [
+    {
+      "id": "CO-GAP-01",
+      "item": "PILA Registro Tipo 2 (per-contributor settlement record) byte-exact field positions",
+      "status": "Field names and purposes captured from Resolucion MSPS 2388 de 2016 Anexo Tecnico 2; the complete field-by-field position/length table was NOT extracted this pass. Archivo Tipo 1 (34 fields, 567 positions) and Archivo Tipo 2 Registro Tipo 1 (22 fields, 359 positions) ARE byte-exact.",
+      "action": "Extract the Registro Tipo 2 table from the primary source and from the chosen operador de informacion's technical guide before any productive PILA layout is configured."
+    },
+    {
+      "id": "CO-GAP-05",
+      "item": "Monthly apportionment of the 790-UVT and 1,340-UVT ANNUAL caps",
+      "status": "Both caps are stated annually while withholding is monthly. Market practice, which Mercans follows, apportions at one twelfth per month (65.8333 and 111.6667 UVT). No regulation prescribes the apportionment expressly.",
+      "action": "Configurable; document the client's election."
+    },
+    {
+      "id": "CO-GAP-06",
+      "item": "No nomina electronica document-type code for the PPT (Permiso por Proteccion Temporal)",
+      "status": "The PPT was created by Decreto 216 de 2021, one month AFTER the Anexo Tecnico v1.0 of 11 February 2021, and is now held by the large majority of regularised Venezuelan migrants. Code 47 (PEP) is its legally superseded predecessor and the only available proxy. The annex is still at version 1.0.",
+      "action": "Use code 47 as the proxy and flag to the client; monitor for an annex update."
+    },
+    {
+      "id": "CO-GAP-07",
+      "item": "XSD type constraints that conflict with real-world data",
+      "status": "Trabajador/@NumeroDocumento is typed xsd:integer, so a passport or foreign ID containing letters cannot be schema-valid (document types 21, 41, 42, 50). Trabajador/@SegundoApellido is use=required, yet many Colombians and virtually all foreign nationals have only one surname. No official workaround is published for either.",
+      "action": "Emit a placeholder for the second surname; escalate the alphanumeric document-number case to DIAN per client."
+    },
+    {
+      "id": "CO-GAP-08",
+      "item": "2026 minimum-wage decree is subject to a pending annulment action on the merits",
+      "status": "Decreto 1469 de 2025 (COP 1,750,905, +23%) was provisionally suspended by the Consejo de Estado on 12 February 2026 in proceeding 11001-03-25-000-2026-00004-00; the Government complied with Decreto 0159 de 19 February 2026 re-fixing the identical amount transitorily; on 9 July 2026 the Consejo de Estado REVOKED the suspension, so Decreto 1469 de 2025 recovered full force and is the operative instrument. The amount COP 1,750,905 has never been in dispute. The merits action remains pending.",
+      "action": "Cite Decreto 1469 de 2025 as operative; re-verify before any 2027 cut-over."
+    },
+    {
+      "id": "CO-GAP-09",
+      "item": "Legal weight of MinTrabajo Circular Externa 101 de 22-09-2025 (the 220 -> 210 hourly divisor)",
+      "status": "The divisor table was read VERBATIM from the primary circular PDF this pass (page 10): 15 Jul 2023 = 235, 15 Jul 2024 = 230, 15 Jul 2025 = 220, 15 Jul 2026 = 210. The sourcing concern from earlier passes is CLOSED. The remaining caveat is that a ministerial circular is administrative doctrine, not statute, and the divisor is judicially untested.",
+      "action": "Configure 220/210 with the 15 July 2026 cut-over; monitor for judicial challenge."
+    },
+    {
+      "id": "CO-GAP-10",
+      "item": "Formulario 350 prescribed form image (Resolucion DIAN 000031 de 2024 annex)",
+      "status": "The deadline table, the rounding rule (ET art. 577) and the natural-person / legal-person split ARE verified. The field-by-field form layout was not retrieved.",
+      "action": "Retrieve the annex before configuring a productive Form 350 layout."
+    },
+    {
+      "id": "CO-GAP-11",
+      "item": "Law 2381 of 2024 pension reform - 2027 change control, NOT a 2026 configuration item",
+      "status": "Law 2381 de 2024 replaces the Ley 100 de 1993 two-regime pension architecture with a pillar system. Its own art. 94 set entry into force at 1 July 2025, but Constitutional Court Auto 841 of 18 June 2025 SUSPENDED that entry into force (sparing only arts. 12 and 76) and ordered the Camara de Representantes to re-run the fourth plenary debate. Judgment C-264 of 25 August 2026 (case D-15989) then upheld art. 94 on the understanding that the validated provisions take effect 1 APRIL 2027, upheld over 80 articles against the procedural challenge, and returned nine provisions to the Camara for a cured debate: art. 11 inciso 4, art. 14, art. 19 literal k, art. 23 paragrafo transitorio, art. 36, art. 63 inciso 2, art. 84 num. 5, art. 92 inciso 1 and art. 93. CONSEQUENCE: every 2026 pay period runs on Ley 100 de 1993 as amended by Ley 797 de 2003. No part of Law 2381 is live for 2026 and none is configured. Documented in CCG Module 5.1 (newest-law check) with the full FY2026-vs-2027 comparison.",
+      "action": "Treat as a 1 April 2027 change-control item, not a 2026 gap. Before the cut-over: (a) re-read art. 19 literal k after the cured Camara debate, since the 2.3-minimum-wage routing between the prima media and individual-savings components sits in a returned provision; (b) re-cut the solidarity-fund deduction from the current 1.0% + 0.2%-1.0% two-account bands to the single five-band 1.5%/1.8%/2.5%/2.8%/3.0% scale of art. 20 nums. 1-5; (c) add a per-employee transition flag for the art. 75 grandfathering at 750 weeks (women) / 900 weeks (men). The 16% total, the 12%/4% split (expressed by art. 20 as 75%/25% of the total) and the 25-minimum-wage ceiling are UNCHANGED, so those need no rework."
+    },
+    {
+      "id": "CO-GAP-12",
+      "item": "Whether every licensed operador de informacion accepts the same 258-position cesantias record",
+      "status": "The layout is published by Simple S.A. and the channel is confirmed independently by ACH Colombia (SOI), but SOI publishes its own column layout only inside the upload screen, behind an authenticated session. Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla were not verified. The Fondo Nacional del Ahorro's employer instructivo, which as a state entity would be the one genuinely official schema for this filing, is no longer retrievable - its published URL (fna.gov.co/empleadores/.../INSTRUCTIVO ARCHIVO PLANO ENTIDADES PRIVADAS.pdf) returns 404 after the FNA site redesign. Also unstated in the source: the code page and the line terminator.",
+      "action": "Confirm the layout against one real accepted filing per client operator before a productive run; retry the FNA instructivo through the redesigned site."
+    },
+    {
+      "id": "CO-GAP-13",
+      "item": "The 8.33% monthly advance deposit of cesantias is not yet operable",
+      "status": "Ley 2466 de 2025 art. 64 par. 1 is IN FORCE and permits it, but routes it through PILA and instructs MinSalud to regulate. As at 4 September 2026 the implementing decree is still a MinTrabajo DRAFT (proyecto amending Decreto 1072 de 2015 arts. 2.2.1.3.1, 2.2.1.3.4, 2.2.1.3.5 and 2.2.1.3.13, held at 00-official-sources/pdfs/proyecto_decreto_cesantias_2026.pdf). That draft would give MinSalud six months from its entry into force to adjust PILA, and then the fondos and operadores a FURTHER six months to build; no PILA tipo de cotizacion for cesantias exists yet. The annual planilla therefore remains the only lawful route. The draft also confirms two rules that survive regardless: the definitive annual consolidation on the average-of-the-year base, and mora running from 15 February.",
+      "action": "Build the fields but keep the feature switched OFF (Spec fields MA01-MA05, all flagged DRAFT). Monitor for the enacted decree AND the MinSalud PILA resolution; when both land, add a contribution type to the CO-PILA-003 Spec."
+    },
+    {
+      "id": "CO-GAP-14",
+      "item": "Ley 2466 de 2025 art. 15 announces two paragraphs but enacts three",
+      "status": "The enacting formula of art. 15 reads 'adicionese ... los paragrafos 2 y 3 del articulo 57 del Codigo Sustantivo del Trabajo', yet the published text prints a Paragrafo 4 - the one making proven direct payment of cesantias discharging. Verified against the local Ley_2466_de_2025.pdf. The substance is not in doubt and the CCG citation (CST art. 57 par. 4, added by Ley 2466 de 2025 art. 15) matches the printed text, but the internal inconsistency should be expected to be raised.",
+      "action": "Cite CST art. 57 par. 4 as added by Ley 2466 de 2025 art. 15 and note the drafting discrepancy where challenged. No engine impact."
+    }
+  ],
+  "resolved_in_this_pass": [
+    "Q-3 / D-4 RESOLVED: the conflict between the nomina electronica Anexo Tecnico section 5.5.5 (which hard-codes the pre-reform dominical percentages 100/75/150/110) and the Ley 2466 de 2025 schedule of 80%/90%/100% is settled by DIAN CONCEPTO 013840 (int. 1568) of 1 October 2025: the annex percentage 'debe leerse en consonancia con la normatividad vigente para cada caso especifico', and the coexistence of differentiated percentages within one month 'no constituye obstaculo alguno' to generation, transmission or validation. The engine reports the REAL statutory percentage.",
+    "Q-5 RESOLVED: apprentices are fully specified. Ley 2466 de 2025 art. 21 (substituting CST art. 81) makes the apprenticeship a SPECIAL FIXED-TERM LABOUR CONTRACT governed by the Labour Code, max 3 years. Apoyo de sostenimiento: dual training 75% SMMLV year 1 and 100% year 2; traditional training 75% in the lectiva phase and 100% in the practical phase; university students never below 100%. Classroom phase: health and occupational risk only, fully employer-paid, as a dependiente. Practical or dual phase: full integral social security plus ALL prestaciones, auxilios and other labour-contract rights. Decreto 0223 de 5 March 2026 art. 2.2.6.3.3.4 par. 2: the IBC must in every case be at least 1 SMMLV. Art. 2.2.6.3.3.6 par. 1: parafiscales are payable in the practical/dual phase, with the ET art. 114-1 exoneration applicable.",
+    "Q-10 SUBSTANTIALLY CLOSED: the PILA file structure is now sourced from Resolucion MSPS 2388 de 2016 Anexo Tecnico 2 - Archivo Tipo 1 (34 fields, 567 positions) and Archivo Tipo 2 Registro Tipo 1 (22 fields, 359 positions) byte-exact, the full planilla-type list (E, Y, A, I, S, M, N, T, F, J, X, U, K, H, O, Q, B, D, Z) and the novedad mnemonics (ING, RET, TDE/TAE, TDP/TAP, VSP/VST, SLN, IGE, LMA, VAC-LR, IRL, AVP, VCT) VERIFIED from a primary source rather than practitioner knowledge. Only Registro Tipo 2 positions remain open - see CO-GAP-01.",
+    "Q-19 SOURCING CLOSED: the 220 -> 210 divisor table was read verbatim from the primary MinTrabajo Circular Externa 101 de 2025 PDF, not from a compilation mirror.",
+    "Q-24 RESOLVED: Ley 2381 de 2024 (pension reform) is NOT in force for any part of fiscal year 2026. The Corte Constitucional, by SENTENCIA C-264 DE 2026 delivered 25 August 2026, declared the great majority of the law exequible on procedural grounds and returned nine points to the Camara de Representantes; it declared art. 94 exequible on the understanding that the upheld provisions ENTER INTO FORCE ON 1 APRIL 2027. The Ley 100 de 1993 architecture (16% total pension, 12%/4% split, Fondo de Solidaridad Pensional, 25-SMMLV ceiling, RPM/RAIS election) governs the whole of 2026.",
+    "NEW FINDING, corrects earlier Colombia material: NON-RESIDENT employees are withheld at the FLAT 20% of ET art. 408, not under the ET art. 383 progressive table, until they acquire tax residence under ET art. 10. DIAN CONCEPTO 011108 of 29 June 2026 (published 3 July 2026), confirming Concepto 1789 int. 14595 of 2025, expressly rejected applying art. 383 from the start of the employment relationship in anticipation of future residence: status is determined 'al momento de cada pago'. Where a non-resident performs the service entirely outside Colombia the income is foreign-source and NO withholding applies (DIAN Oficio 28380 de 2019).",
+    "NEW FINDING: Ley 2466 de 2025 art. 64 ('regimen simple laboral') adds two paragraphs to Ley 50 de 1990 art. 99 permitting (a) monthly advance deposit of 8.33% of the base to the fondo de cesantias, and (b) written agreement to pay the 1% cesantias interest MONTHLY. Both are configurable engine options that smooth the January and February cash-flow spikes.",
+    "DEFECT FOUND IN OFFICIAL GUIDANCE: MinTrabajo Circular Externa 101 de 2025 section 5.1 states 'trabajo suplementario en Domingo y festivos con un recargo del 75% (Art. 179 CST)' - the PRE-REFORM figure - contradicting its own section 4, which correctly sets out the 80% / 90% / 100% phase-in. The section 4 schedule, which tracks the statutory text of CST art. 179 as substituted by Ley 2466 de 2025 art. 14, governs. The 75% reference is a residual error and must NOT be configured.",
+    "CO-CESANTIAS-006 LAYOUT SOURCING CLOSED: scope_manifest previously recorded the annual cesantias deposit as having no published schema ('each fondo publishes its own layout'). It does have one. The Simple S.A. 'Manual Cesantias' (licensed operador de informacion), section 3.2, publishes a byte-exact fixed-width layout of 20 campos in 258 positions with Inicial-Final positions, lengths, types and validations, and section 3.1 publishes the parallel XLS 97-2003 layout of 16 columns A-P; both carry the five-value fondo code table (02 Proteccion, 03 Porvenir, 10 Colfondos, 15 FNA, 19 Skandia) and the document-type table. The positions are arithmetically consistent (2+5+2+16+20+20+20+20+2+3+4+9+4+9+50+2+3+7+50+10 = 258). The CHANNEL is independently confirmed by the ACH Colombia (SOI) instructivo DDS-DES-INS-008 v2. Both PDFs are now in 00-official-sources/pdfs/ and extracted to _txt/. Spec accuracy 88%, against the previous DERIVED assumption.",
+    "CO-CESANTIAS-006 TRANSPORT-ALLOWANCE DEFECT IDENTIFIED IN THE CHANNEL ITSELF: the operator's auto-calculator uses 'Salario basico * (dias trabajados / 360)' and its campo 12 is named 'salario basico', whereas CST art. 253 requires the auxilio de transporte in the base and Ley 2466 de 2025 art. 64 par. 1 says so expressly for the monthly advance. For a 2026 minimum-wage employee the portal computes COP 1,750,905 against a statutory COP 2,000,000 - a COP 249,095 short deposit per employee, penalised as non-deposit at one day's salary per day of delay, uncapped. The engine must always write its own figure into campo 14. Documented at Spec field T14 and on Sheets 5, 7, 8 and 9.",
+    "CO-GAP-02 RESOLVED: the additional employer pension contribution for AltoRiesgoPension is +10 percentage points, stated verbatim in the primary source itself -- Decreto-Ley 2090 de 2003 art. 5: 'El monto de la cotizacion especial para las actividades de alto riesgo es el previsto en la Ley 100 de 1993, mas diez (10) puntos adicionales a cargo del empleador.' Corroborated by the decree's own recitals citing Ley 797 de 2003 art. 17. Employer pension is 22% (12% standard + 10pp) where the flag is set; same IBC, no separate base. The earlier search reached only Resolucion 2388 de 2016 (a PILA reporting instrument, not the rate-setting decree) and inferred the figure rather than citing it directly -- resolved by reading the decree that actually sets the rate.",
+    "CO-GAP-03 RESOLVED: Decreto 780 de 2016 art. 3.2.1.10 par. 1 checked in full -- it allocates payer responsibility only (employer days 1-2, EPS from day 3), never a rate. Two independent Ministry of Health conceptos (202311602174531 de 2024 and 202342302183712 de 2023) fill that silence with 66.66% by direct application of CST art. 227, not by analogy. The Mercans default (66.67%) and the settled administrative doctrine are the same position for the same reason; the citation is added, the configurable default is unchanged.",
+    "CO-GAP-04 RESOLVED: Corte Constitucional Sentencia C-543 de 2007 holds that the monetary sickness benefit may never fall below the minimum legal wage -- the primary source the doctrine was missing. The floor is now a cited rule; the Mercans default (apply the floor) was already correct."
+  ],
+  "known_failure_patterns_to_check": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12",
+    "F13",
+    "F14",
+    "F15",
+    "F16",
+    "F17",
+    "F18",
+    "F19",
+    "F20",
+    "F21",
+    "F22"
+  ],
+  "failure_pattern_notes": {
+    "F18_stale_law": "PREVENTED. Newest applicable law used as primary source throughout: Ley 2466 de 2025 (labour reform, sanctioned 25 June 2025) for working time, night window, overtime limits, rest-day premium, contract types, apprenticeship, prescription and cesantias mechanics; Decreto 0223 de 5 March 2026 for the apprenticeship regulation; Decreto 1469 de 2025 for the 2026 minimum wage; Decreto 1470 de 2025 for the transport allowance; Resolucion DIAN 000238 de 2025 for the tax unit; MinTrabajo Circular 101 de 2025 for the hourly divisor; DIAN Conceptos 013840 de 2025 and 011108 de 2026 for the two live doctrinal points. SUPERSEDED REFERENCES EXPLICITLY FLAGGED: the legacy 240 hourly divisor (obsolete); the pre-reform 21:00 night boundary (superseded 25 Dec 2025); the pre-reform 75% dominical premium (superseded 1 Jul 2025); CST art. 162 literal b) (repealed by Ley 2466/2025 art. 70); the nomina electronica Anexo Tecnico 5.5.5 legacy percentages (read per DIAN Concepto 013840/2025); Decreto 0159 de 2026 (spent after the Consejo de Estado revoked the suspension on 9 July 2026).",
+    "F19_hr_scope": "PREVENTED. Three HR-scope filings descoped with reasons and client impact: the MinTrabajo disability-hiring contract report and quota, the SENA apprentice quota and its monetisation, and RUAF-ND vital-events notifications. All require headcount census, qualification, occupational or certification data sourced outside payroll.",
+    "F20_wtc_tax_codes": "Colombia has no country-specific tax-code legend of the Egypt type. The taxability dimensions the WTC must carry are enumerated in wage_type_categories.special_rules: salary/non-salary, IBC, payroll-levy base, statutory-benefit base, vacation base and taxable. Every wage type must carry a HARD salary/non-salary flag, because the nomina electronica XML separates them at element level with paired S/NS element names.",
+    "F21_filing_mechanics": "RESEARCHED AND DOCUMENTED. Colombian wage taxes and contributions file as SEPARATE submissions to SEPARATE authorities through THREE DIFFERENT CHANNEL POSTURES - not as one consolidated grid: (a) the nomina electronica is genuine MACHINE-TO-MACHINE (SOAP 1.2, XAdES-EPES, synchronous ApplicationResponse); (b) Formulario 350, Formulario 220 and the informacion exogena are PORTAL ROUND-TRIPS with DIAN; (c) PILA is a PORTAL ROUND-TRIP THROUGH A LICENSED PRIVATE OPERADOR DE INFORMACION - the employer never reaches the government directly for social security. The annual filings (Formulario 220, Formato 2276) and the annual cesantias deposit are SEPARATE employer obligations, NOT derived from the monthly filings. Colombia imposes NO employer year-end tax reconciliation and NO annual social-security reconciliation.",
+    "F22_pdf_size": "Source PDF folder for this build is 77 MB across 22 files, held in a SINGLE subfolder (00-official-sources/pdfs). Two files exceed 5 MB and are scanned (Decreto 0223 de 2026 at 17 MB and Resolucion DIAN 000227 de 2025 at 15 MB); both were extracted page-selectively with pdfplumber rather than loaded whole."
+  }
+}

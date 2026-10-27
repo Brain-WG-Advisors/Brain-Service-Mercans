@@ -16,7 +16,7 @@
 - **Escopo:** ano de renda 2026, setor privado, federal, EUR. Fora: diretores de empresa, autônomos, setor público, sobretaxas regionais/municipais, tributação em nível de assessment, Limosa (entregue pelo empregador estrangeiro). Holandês construído; francês (obrigatório, nulidade do documento se faltar) e alemão não construídos. Escalas setoriais (joint committees) são configuração por cliente.
 - **Órgãos:** NSSO/RSZ-ONSS, FPS Finance, Fedris, Febelfin.
 - **Relatórios principais (9 specs):** Dimona, DmfA, DmfA modification, DRS/ASR, FinProf 274, Belcotax 281.10, Fedris work accident, Febelfin SEPA pain.001 (Limosa descartado, só referência). Nenhum foi submetido a portal.
-- **Versões de registro (skill, refresh 2026-09-16):** CCG v1.2, WTC v1.1 (359 linhas), DD v1.4 (92 blocos de mapper / 2.018 códigos), SIR v1.0, QA de 2026-08-17.
+- **Versões de registro (skill, refresh 2026-10-21, linhagem do Drive; pacote em `Research Pipeline/Belgium/2026-10-21-skill-refresh/`; v4 publicada para a organização no claude.ai em 23/10):** CCG v1.0 do Drive (= v1.2 do pipeline + patronal 19,88% de 13/10), WTC v1.3 (1.182 linhas; Global 62/65/79 completas na v1.1; linha 23671 com 19,88% + moderação até 5,12% na v1.2, fonte ONSS 2025/4; +355 códigos da aba All Codes do Global WTC 1.1 na v1.3, escopo só 62/65/79 confirmado pela Suman em 23/10), DD v1.0 do Drive (= v1.4 do pipeline; 92 blocos / 2.018 códigos), specs v1.1 (EN), SIR v1.0, QA de 2026-08-17.
 - **Confiança da skill:** não existe veredito de tier para a Bélgica (anterior à convenção; não citar). QA por artefato: SIR 93%, CCG 86%, WTC 85%, Report Specs 86%, DD 87%, Payslip 86%, scope_manifest 78%. 6 blockers e 11 majors abertos (QA anterior ao refresh de 16/09; vários itens fechados depois, ver `PROPAGATION-LEDGER.md`).
 
 **Armadilhas confirmadas** (SKILL.md "Design clarifications"; todas `(engine)` salvo indicação)
@@ -84,6 +84,7 @@
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
 | — | _(nenhum ticket BE nas fontes)_ | | | |
+| 2026-10-26 | Comentários do Suman Rai no BE-CCG-001-v1.0 (Google Doc `1_CnLM06oKHJ1enwvwBrpVdmHKJ5TAzAarVaYnmHkNjI`, 25–26/10; Mohit pediu a revisão das mudanças BE, CT-4619..4625) | 6 perguntas: estudante isento até 650 h? flexi-job? 7% na escala; "quarterly band table"; redução de 30% (pensão complementar); meses 1–2 provisórios (com o Mohit); divisão ao estourar 650 h no meio do mês/dia | Respondidas no próprio documento (publicadas pelo usuário, 26/10), cada frase com fonte lida no texto original: Bijlage III 2026 (BS 29.12.2025) nr. 12, 25.1, 26, 28, 31, 32, 44, 71; RSZ instruções 2026/3 (bijzondere bijdrage, Studenten, Solidariteitsbijdrage, Werkbonus); circulares 2025/C/55 (§ 6) e 2026/C/4 (§ 11). Estudante: renda tributável, só sem retenção dentro de 650 h; divisão por hora a partir da 651ª (horas do Dimona STU), com exemplo de 40 h a 22 €/h. O comentário das 10:14 é a mesma pergunta (resolvido pelo próprio Suman). Pergunta ao Mohit (mjain) sobre o acerto trimestral no sistema: aguardando. Fontes: `raw/docs/oficiais/BE/2026-10-26-*` | Não (correção do CCG pendente) |
 
 ## Pendências
 - [ ] Divergência hub × skill: o hub lista "falta box 360 no WTC", mas o WTC v1.1 da skill já traz o fiscal work bonus com tax codes duplos 284 e 360 — verificar (skill lida em 2026-10-02)
@@ -93,6 +94,10 @@
 - [ ] Investigar tabelas nr.53/58 e check digit do número RSZ — Wallisson — (chat: mercans-compliance)
 - [ ] Atualizar citações para incluir os decretos e a lei de julho de 2026 — Wallisson — (chat: mercans-compliance)
 - [ ] Cruzar a Form Reference Guide do WTC e o SIR com as 9 specs — Wallisson — (chat: mercans-compliance)
+- [ ] CCG BE (e skill `references/01-ccg.md`, linhas ~1778, 2015, 3333): "the flexi-job wage carries no wage withholding tax at all" está errado; acima do teto, o mesmo empregador retém sobre o excedente (Circ. 2026/C/4 § 11). Corrigir com ok do usuário (janela Pipeline). Ver [[correcoes]] 2026-10-26.
+- [ ] Teto do flexi-job 2026 = 18.440 € (CCG, skill, WTC 21147) sem fonte primária: a circular 2026/C/4 só traz 2025 (18.000; base 8.955 indexada, § 7), e a 2026/C/6 reproduz o art. 178 § 5 WIB 92 dizendo que os valores do art. 38 § 1 29° não são indexados. Confirmar quando houver fonte oficial.
+- [ ] Circ. 2025/C/55, exemplo 2: conta as 650 h da retenção por empregador; o nr. 71 e a RSZ contam no ano (todos os empregadores). Divergência não comunicada.
+- [ ] Aguardando o Mohit (mjain): o sistema faz o acerto trimestral da bijzondere bijdrage (meses 1–2 provisórios)? Comentário no BE-CCG, 26/10.
 - [ ] [INCERTO] resíduos de BE na França: "Description (NL)" e "FR-NSSO / FR-FIN series" no CCG M10 — ver [[Franca]]
 
 ## Correções ligadas

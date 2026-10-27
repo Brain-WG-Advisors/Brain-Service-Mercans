@@ -1,0 +1,25 @@
+Validation complete. Report saved to `~/mercans-pipeline/CO-compliance/07-qa-crosscheck/scope_validation.md` (27.5 KB, 170 decision rows).
+
+## Gate results — all six checks pass
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Valid JSON | PASS — 47,503 bytes, 18 top-level keys |
+| 2 | Required sections present & non-empty | PASS — 17/17 keys |
+| 3 | Filing field completeness + enums | PASS — 6/6 filings, all `integration_type` in enum, all `product_mapping_required` boolean |
+| 4 | Inbound `product_mapping_required` set | PASS — 5/5 set, **all `true`**, no F8 warning |
+| 5 | No code in both in/out for one mapper | PASS — 0 collisions, 0 duplicates |
+| 6 | F1–F15 populated | PASS — F1–F22 present |
+| B1 | Non-resident handling | PASS — not a blocking finding |
+
+**B1 detail:** non-resident foreign nationals are explicitly in scope with ET art. 408 flat 20% on gross (no depuration, no exemptions) until ET art. 10 residence, then the art. 383 table applies *prospectively*. What makes this pass rather than a paper mention is `inbound_data_contract`, which requires a tax-residence flag *with an effective date* plus a rolling-365-day presence-day accumulator — the engine can actually determine when the switch fires.
+
+**Four non-blocking observations** recorded for agents 04/05:
+1. Numeral `47` means PEP in `personal_id_type` (in scope) and public servant in *worker type* (out of scope) — different mappers, so Check 5 holds, but it's an F2 leak surface; the DD must label the columns distinctly.
+2. No `worker_type`/tipo de cotizante mapper is declared even though prose depends on it — 05-DD must source it from the CCG.
+3. Mapper entries are descriptive strings, not uniform `NN - Label` pairs (only 2 of 8 `insurance_type` entries parse as coded).
+4. `known_gaps` carries 11 declared open items with actions — inputs to later gates, not scope defects.
+
+Cross-checks beyond the mechanical gate also came back clean: in-scope planillas E/A/N/M/J/X are disjoint from the descoped T/F/I/Y/B/D/H/K; `contract_type` 4 and 5 both have matching `employment_types.in_scope` entries; and `integrations.both` matches exactly the three filings typed `both`.
+
+PASS

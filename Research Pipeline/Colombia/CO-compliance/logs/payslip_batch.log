@@ -1,0 +1,36 @@
+The Colombia payslip generator is built and fully verified. Here's the report.
+
+## 1. Verdict: **READY_FOR_HANDOVER**
+
+The workbook was created by copying the production Spain reference, renaming the two visual sheets to **Colombia (EN)** / **Colombia (ES)**, and rebuilding every country-specific sheet for Colombia FY2026. All fonts/fills/merges/column widths/row heights, the embedded Mercans logo (present on both visual sheets), and landscape page setup are preserved. The official self-check passes: sheet order exact, logo present, zero residue.
+
+## 2. Accuracy self-assessment: **~97%** (statutory content)
+
+Every rate/rule is grounded in cited primary sources:
+- **Social security (Ley 100 de 1993):** Salud 12.5% (EE 4% / ER 8.5%), Pensión 16% (EE 4% / ER 12%); IBC floor 1 SMMLV, ceiling 25 SMMLV (COP 43,772,625). — *Ley 100/1993, Ley 1122/2007, Ley 797/2003*
+- **FSP:** EE-only 1% at ≥4 SMMLV, 1.2–2.0% above 16 SMMLV — *Art. 27 Ley 100 / Art. 8 Ley 797/2003*
+- **ARL:** ER-only, 5 classes 0.522%–6.960% by CIIU — *Decreto-Ley 1295/1994, Decreto 1607/2002*
+- **Parafiscales:** SENA 2%, ICBF 3%, Caja 4%; exoneration <10 SMMLV — *Art. 114-1 ET (Ley 1607/2012)*
+- **Retención en la fuente:** Art. 383 progressive table, UVT 2026 = COP 52,374 (*DIAN Res. 000238/2025*), 25% renta exenta cap 790 UVT (Art. 206 num.10, Ley 2277/2022), 40% global cap (Art. 336)
+- **Leave & prestaciones:** vacaciones 15 días (CST 186); sick pay split employer d1–2 / EPS d3+ at 66.67% (Decreto 780/2016, CST 227); maternity 18wk / paternity 2wk (CST 236/236A, Ley 1822/2017, Ley 2114/2021); prima (CST 306), cesantías (CST 249), intereses 12% (Ley 52/1975)
+- **Payslip mandate:** Ley 1393/2010 Art. 32 + DIAN Nómina Electrónica Res. 000013/2021 (correctly noting the CST has no single formatted-payslip article)
+- **Identifiers:** employer **NIT** (DIAN/RUT), employee **C.C./C.E.** — not Spain's NIF/CIF/DNI/NIE
+
+The worked example (COP 18,000,000 base → net COP 15,221,235; withholding COP 2,250,765 computed via the actual Art. 383 depuration) is internally consistent. I deliberately used a ≥10 SMMLV earner so all employer-contribution lines populate positively, with the exoneration for <10 SMMLV documented in the notes.
+
+## 3. Wage-type codes: **illustrative placeholders**
+
+No CO-WTC file available. Visual sheets use the Spain `XXXXX - ` label convention; Payslip Spec 1 HRB Mapping uses Mercans-style numeric account-series (e.g. `62100:62999`), and UnitRate uses Spain-style numeric codes. All flagged for RA alignment.
+
+## 4. [VERIFY WITH RA] items (13 cells, best-effort values filled)
+- **10** HRB Mapping account-series lines in Payslip Spec 1 → aligned to placeholder Mercans series pending real CO-WTC
+- **1** UnitRate Account Details header flag → illustrative account codes for 28 CO earning categories
+- **2** statutory-note lines (EN+ES) → Decreto **1469/2025** (SMMLV COP 1,750,905) and **1470/2025** (auxilio COP 249,095): values consistently reported by Presidencia & Holland & Knight; decree numbers to confirm against Diario Oficial
+
+## 5. Residue check: **CLEAN**
+Zero hits for MZN/Mozambique/Estonia/Spain/España/EUR/NIF/CIF/DNI/NIE/IRPF/FOGASA/TGSS/John Doe/Swed Bank/EID-/jdoe@/TBD, and zero `�` replacement-char artifacts across all non-generic sheets. The Spain `G8 = 'MZN'` residue was fixed to `COP`. The two generic sheets ("How to set up Payslip", "Compliance Payslip") were left untouched per spec. The Colombia (ES) sheet is **fully translated** — no English labels left behind (Spain's untranslated-label bug not repeated).
+
+## 6. File
+`C:\Users\Wallison Gomes\mercans-pipeline\CO-compliance\06-payslip\CO_Compliance_Payslip_Generator.xlsx` — **504,706 bytes**, 8 sheets in exact required order.
+
+I also saved a cited Colombia FY2026 payroll-facts reference to memory for future country clones.

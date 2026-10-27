@@ -34,12 +34,20 @@
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
 | 2026-09-28 | HRBS-15253 | Accenture Lithuania (REF-LE-04-359): matriz S/C/M/N de cobertura de cálculo, relatórios (SAM/SAM3SD, GPM313, GPM312), eventos SD e anual; pergunta se existe parameter sheet LT assinado e quem é o dono | Sem resposta nossa; só acknowledgment (Lavanya Balamurugan, Product Support) | Não |
+| 2026-10-23 | HRBS-15253 | Kevin (22–23/10): go-live do cliente em mai/2027, paralelo desde jan/2027; pede call (e-mail repete: cálculo 2026/2027, integração com o portal, formulários) | Call marcada para ter 27/10, 07:00–07:45 Brasília, e **cancelada no mesmo dia** (usuário: precisa ser mais tarde); cancelamento enviado ao Kevin e draftComment apagado. Em 23/10 19:19 UTC respondemos no ticket ao pedido de disponibilidade (ter 27/10, 09:00 Brasília / 19:00 Jacarta); **esperando o Kevin confirmar** (na consulta à agenda dele, aparecia ocupado às 09:00). Para a call: matriz de 64 itens (`rascunhos/2026-10-10-HRBS-15253-matriz-cobertura-Lituania.md`). Valor novo: MMA 2027 = €1.245/mês, €7,61/h a partir de 2027-01-01 (Nutarimas Nr. 509 de 01.07.2026, p. 1; `raw/docs/oficiais/LT/2026-10-23-nutarimas-509-MMA-2027.md`); VDU 2027 ainda em projeto no Seimas (só notícias) | Não |
 
 ## Pendências
 - [ ] Responder a matriz S/C/M/N item a item, com dono e roadmap para M/N — Compliance/Wallisson (assignee) — (HRBS-15253)
 - [ ] Informar se existe parameter sheet LT assinado, quem é o dono e se a Mercans já entregou LT antes — Compliance — (HRBS-15253)
 - [ ] Definir dono de cada item entre Compliance e Implementation/Integration (eventos SD, formatos de banco/GL, quem mantém .ffdata) — Wallisson/Manju — (HRBS-15253)
 - [ ] [INCERTO] o que Manju Shetija atualizou em 2026-09-28 (sem comentário visível) — (HRBS-15253)
+
+## Consolidado da sessão 2026-10-13
+- **Baseline de Compliance (pasta Drive, export 10/10):** CCG 2026 (Payroll Regulation Guide 2026, sem controle de versão/aprovação), Alerta 2026, WTC V3.0, DD V3.0 (jun/jul 2025), specs SAM / GPM313 / GPM312 v1.0, payslip EN/LT. Regulação implantada em 2025-07-16 (release LT-253649).
+- **Valores 2026 (fonte primária, conferidos 2026-10-13):** VDU 2026 = €2.312,15 a partir de 2026-01-01 (Lei XV-632 de 09.12.2025, art. 4) → 36 VDU = €83.237,40; 60 VDU = €138.729. GPM 20% até 36 VDU, 25% de 36 a 60, 32% acima (GPMĮ IX-1007, art. 6(1)). MMA 2026 = €1.153 a partir de 2026-01-01 (Nutarimas Nr. 700 de 16.10.2025, p. 1). NPD = 747 − 0,49 × (renda mensal − MMA), mínimo 0; €1.127 / €1.057 capacidade reduzida (GPMĮ art. 20(2), (3), (6)). Extratos em `raw/docs/oficiais/LT/`.
+- **Correção GPM312 → GPM313:** GPM312 corrigido por declaração completa (sem delta); GPM313 afetados também corrigidos (LT-VMI-002-GPM312 Spec v1.0, Population Rules, regras 63 e 65).
+- **HRBS-15253 (Kevin, Accenture):** call marcada 15/10, 09:00–09:30 (horário do Brasil) — rascunho gravado. Matriz de cobertura (visão de Compliance, 64 itens) em `rascunhos/2026-10-10-HRBS-15253-matriz-cobertura-Lituania.md` para a call.
+- **Pendências de Compliance (lacunas):** WTC/DD V3.0 e Implementation Guide ainda com parâmetros 2025; CCG 2026/Alerta com limiares 36/60 VDU errados (ver [[correcoes]]); sem spec para formulários de evento da Sodra (1-SD, 2-SD, 9-SD, 12-SD, 13-SD, NP-SD, PT); sem parameter sheet 2026; estrutura FFData vigente não obtida; teto da Sodra = 60 VDU sem artigo citado (Lei I-1336).
 
 ## Correções ligadas
 - _(nenhuma)_

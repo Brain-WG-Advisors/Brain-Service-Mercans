@@ -1,0 +1,65 @@
+{
+ "spec": "CO-PILA-003",
+ "round": 3,
+ "edits": [
+  {
+   "sheet": "PILA Spec",
+   "cell": "M79",
+   "row": 79,
+   "column_letter": "M",
+   "field_id": "T2R2-016",
+   "field_name": "RET - termination",
+   "current": "Marks the employee's exit. Pairs with the termination date in campo 81 and reduces the contributory days in campos 36 to 39.",
+   "proposed": "Marks the employee's exit from the systems settled in the return. AT2 v30 §2.1.2.3.8 campo 16 admits X (the contributor withdraws the member from ALL the systems being settled), P (withdrawal from the General Pension System only) and R, C and T, which are restricted to independent contributor types (16, 57, 59; 3, 4, 33, 34, 35, 53) and never apply to a dependent employee: for a dependent employee the value is X in the period in which the termination date falls, blank otherwise. Pairs with the termination date in campo 81 (T2R2-081), which the engine always populates although the annex makes it optional when RET is reported, and reduces the contributory days in campos 36 to 39: fewer than 30 days may be reported only where an ING or RET event exists (§2.1.2.3.11 to 2.1.2.3.13), the days run from the first day of the period to the termination date inclusive, and a termination on the last calendar day of the month reports 30 days (AT2 day-count example table). Where the employee is in an absence event (SLN, IGE, LMA, VAC-LR, IRL) in the same period, the RET line is a separate record with its own IBC (§2.1.2.2). Source: the termination date of the contract (Contract.End_Date), the same date as the final settlement's 'Fecha de Retiro' and electronic payroll FechaRetiro (NIE003). A termination processed after the return of its period was paid is reported for THAT period through a correction return (T2R1-008 = N), not in the period in which the final settlement is paid.",
+   "reason": "The cell gives no admitted values, no day rule and no source of the date. Evidence: settlement 1 'Fecha de Retiro' 2026-08-31 (a last-day termination: 30 days under the AT2 example table), settlement 2 'Fecha de Retiro' 2026-09-15 while the September run (REF-P201-090) paid 30 days with full contributions and the September electronic payroll document carries no FechaRetiro - the termination was processed after the cycle closed and settled in October (REF-P203-119); the termination date exists only in the manual settlement form (Master Data has no termination-date field; G2N 'Effective Leaving Date' blank).",
+   "basis": "AT2 (Res. 2388/2016 Anexo Tecnico 2) §2.1.2.3.8 campo 16; §2.1.2.3.11-2.1.2.3.13 campos 36-38 ('Es permitido reportar menos de 30 dias cuando exista una novedad de ingreso o retiro'); §2.1.2.2 (retiro during an absence event: separate line); Registro tipo 2 campo 81 ('Es un campo opcional cuando se reporte la novedad de retiro ... siempre y cuando la novedad se presente en el periodo que se este liquidando'); AT2 day-count example table (Retiro 29-02 / 30-03 / 31-03 = 30 days); AT2 §2.1.2.1 note on forma de presentacion U (retiro reported 'a traves del tipo de planilla N'). Quoted from the AT2 v27 text (25-03-2025); the spec cites v30 (24-07-2026) - Wallisson to confirm the wording is unchanged before applying."
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "G79",
+   "row": 79,
+   "column_letter": "G",
+   "field_id": "T2R2-016",
+   "field_name": "RET - termination (Conditional Reason)",
+   "current": "Change-event (change event) flag. Populated only in the month the event occurs, and only for the employee it affects. The whole change event block T2R2-015 to T2R2-030 is mutually constraining: the flag drives which of the date fields T2R2-080 to T2R2-097 become mandatory, and it drives the day counts in T2R2-036 to T2R2-039. Permitted values are blank, P, R, X or C. Where marked, 'Termination date' (T2R2-081) becomes mandatory.",
+   "proposed": "Change-event (change event) flag. Populated only in the month the event occurs, and only for the employee it affects. The whole change event block T2R2-015 to T2R2-030 is mutually constraining: the flag drives which of the date fields T2R2-080 to T2R2-097 become mandatory, and it drives the day counts in T2R2-036 to T2R2-039. Permitted values are blank, P, R, X or C. Where marked, the engine populates 'Termination date' (T2R2-081) with the termination date (AT2 v30 campo 81 makes the date optional when RET is reported; the engine's own interlock requires it).",
+   "reason": "Internal inconsistency: G79 says campo 81 'becomes mandatory' while G156 (campo 81) quotes AT2 that the date is optional when RET is reported. The engine may always populate it (an optional field may be filled), but the spec must not state a mandatory rule the annex does not have.",
+   "basis": "AT2 Registro tipo 2 campo 81: 'Es un campo opcional cuando se reporte la novedad de retiro' (v27 text; v30 cited by the spec - to confirm)"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D139",
+   "row": 139,
+   "column_letter": "D",
+   "field_id": "RET",
+   "field_name": "Novedades - permitted values, RET row",
+   "current": "Termination. Makes T2R2-081 mandatory.",
+   "proposed": "Termination. The engine populates T2R2-081 (optional under AT2 v30 campo 81 when RET is reported; required by the engine's interlock).",
+   "reason": "Same inconsistency as G79 (Field Options row says 'Makes T2R2-081 mandatory').",
+   "basis": "AT2 Registro tipo 2 campo 81 (as above)"
+  }
+ ],
+ "not_applied": [
+  {
+   "cell": "Population Rules!C12 (flag to date-pair interlock)",
+   "reason": "The interlock is a Mercans design rule (always populate the date when the flag is marked); it is compatible with the annex once G79 / D139 no longer call the date mandatory. No wording change needed."
+  },
+  {
+   "cell": "G78 / Field Options!D138 (ING: 'Hire date becomes mandatory')",
+   "reason": "Same pattern as RET (AT2 campo 80 is optional except for contributor type 75, as G155 states) but outside the termination scope of round 3; flagged for the lead."
+  },
+  {
+   "cell": "M101-M104 (campos 36-39)",
+   "reason": "The client's 30 days in September for a 15-September leaver is late processing; the AT2 day rule stands and is now written into M79. Client question on the September PILA of that employee."
+  },
+  {
+   "cell": "M108-M112 (IBC rows)",
+   "reason": "Termination payments are already outside the base under the existing wording (salary-constituting pay only); whether they enter the Ley 1393 40% test is an RA query (Acuerdo 1035 de 2015 numerals 2-3 annulled). No rule derived from two employees."
+  },
+  {
+   "cell": "M156 (campo 81)",
+   "reason": "Rule aligned with AT2; the missing system source of the termination date is a client question, not a spec change."
+  }
+ ],
+ "summary": "Three edits: M79 rewritten with the AT2 campo 16 values, the day rule, the date source and the correction-return route; G79 and Field Options!D139 corrected from 'mandatory' to 'populated by the engine, optional under AT2 campo 81'. All three depend on confirming the AT2 v30 wording (quotes come from the v27 text)."
+}

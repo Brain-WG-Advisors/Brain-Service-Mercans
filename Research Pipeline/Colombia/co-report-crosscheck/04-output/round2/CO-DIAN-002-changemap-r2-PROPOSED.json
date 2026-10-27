@@ -1,0 +1,122 @@
+{
+ "spec": "CO-DIAN-002",
+ "round": 2,
+ "status": "PROPOSED - for Wallisson approval; nothing applied",
+ "spec_file": "02-specs-out/CO-DIAN-002-Formulario350-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "spec_sheet": "Formulario 350 Spec",
+ "header_row": 2,
+ "edits": [
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M23",
+   "row": 23,
+   "column_letter": "M",
+   "field_id": "casilla 93",
+   "field_name": "Withholding - work income (natural persons)",
+   "current": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to natural persons in the calendar month, across EVERY payroll run of the entity in that month (not only the regular run), in whole pesos, then rounded once to the nearest 1,000. Sources in the client's payroll: WT 2552 'Income Tax (employee)' (Deductions), plus WT 21330 'Personal Income Tax Withholding (Theoretical)' for the employees whose WT 2552 line is a zero-value Non Cash item and whose deduction is booked on WT 21330 (6 of 261 employees in the Sep-2026 run). Together they reconcile exactly to the Base of Withholding column V 'WITHOLDING TAX WITH CONTRIBUTION' (per employee, 2552 = V for 255 of 261 and 21330 = V for the other 6; run total 1,468,500,598). Do NOT use column X 'WITHOLDING TAX WITHOUT CONTRIBUTION'. The Base of Withholding covers one payroll run only: in Sep-2026 the Accumulated Report holds a further 144,635,503 of WT 2552 for 97 IDs outside that run, so the casilla is built from all runs of the month, not from one report. Do not use the report 'Payroll id' as the run key: the same run carries a different Payroll id in the Base of Withholding and in the G2N / Master Data reports. [DECISION PENDING - see Query to RA] (a) whether CONTINGENT WITHHOLDING (column Y, = X - V, present only for employees with AFC or voluntary-pension contributions and not deducted by any wage type) is excluded from this casilla; (b) whether withholding booked on WT 21129 (Terminations), 25832 (Stock awards vesting), 25833 (IC Local Country) and 25834 (Hypothetical - IC Foreign Country) enters here in the month it is practised; (c) whether withholding on the employees withheld at a flat 20% of gross income (client Tax Procedure 3; inferred from the rate to be the ET art. 408 non-resident withholding - no report labels them non-resident) is reported here or in casillas 111/112. Must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130.",
+   "proposed": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to natural persons in the calendar month, across EVERY payroll run of the entity in that month (not only the regular run), in whole pesos, then rounded once to the nearest 1,000. Sources in the client's payroll: WT 2552 'Income Tax (employee)' (Deductions), plus WT 21330 'Personal Income Tax Withholding (Theoretical)' for the employees whose WT 2552 line is a zero-value Non Cash item and whose deduction is booked on WT 21330 (6 of 261 employees in the Sep-2026 run). Together they reconcile exactly to the Base of Withholding column V 'WITHOLDING TAX WITH CONTRIBUTION' (per employee, 2552 = V for 255 of 261 and 21330 = V for the other 6; run total 1,468,500,598). The same per-employee amount is reported as RetencionFuente (NIE177) in the client's electronic payroll documents of the same pay group (261 of 261 employees; total 1,468,500,598). Do NOT use column X 'WITHOLDING TAX WITHOUT CONTRIBUTION'. The Base of Withholding and the G2N cover one pay group and one payroll run only (G2N title 'Pay Group(s)' = CO - Monthly): in Sep-2026 the Accumulated Report holds a further 144,635,503 of WT 2552 for 97 IDs outside that pay group (93 of them paid WT 61100 'Weekly advance' and WT 62838 'Exceptional Advance'), so the casilla is built from every pay group and every payroll run of the month, not from one report. Do not use the report 'Payroll id' as the run key: the same run carries a different Payroll id in the Base of Withholding and in the G2N / Master Data reports. [DECISION PENDING - see Query to RA] (a) whether CONTINGENT WITHHOLDING (column Y, = X - V, present only for employees with AFC or voluntary-pension contributions and not deducted by any wage type) is excluded from this casilla; (b) whether withholding booked on WT 21129 (Terminations), 25832 (Stock awards vesting), 25833 (IC Local Country) and 25834 (Hypothetical - IC Foreign Country), and on the theoretical-tax WTs 21114 (Theoretical income Tax-5011) and 21619 (Theoretical Income Tax - Ajuste - 5035), enters here in the month it is practised - the client's electronic-payroll mapping already reports all of them as RetencionFuente (NIE177); (c) whether withholding on the employees withheld at a flat 20% of gross income (client Tax Procedure 3; inferred from the rate to be the ET art. 408 non-resident withholding - no report labels them non-resident) is reported here or in casillas 111/112. Must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. Caveat: the client's electronic-payroll mapping also reports the retiree / pensioner withholding WTs 21140 (Personal Income Tax Withholding-Retirees- 6799) and 21155 (Income Tax Pensioner) as RetencionFuente, so if that withholding is declared in casilla 94 the NIE177 reconciliation is against casillas 93 + 94, not casilla 93 alone (see Query to RA). It is one of the forty-two casillas summed into casilla 130.",
+   "reason": "Round 2 adds a third source (NE RetencionFuente = 2552 + 21330 for 261/261), proves the G2N is one pay group / one run (REF-P201-090, 'CO - Monthly'), shows the client's NE mapping feeds NIE177 from theoretical WTs 21114/21619 and retiree WTs 21140/21155 that the draft does not name, which affects the draft's own NIE177 reconciliation rule.",
+   "basis": "round-2 evidence: Gross to net PMI Monthly (title block, BX, CQ), Monthly_fixed SVA position 2 / REC position R, Validado ConsolidadoCCT Mapping; round-1 Accumulated Report Sep-2026",
+   "vc_sentence": "Casilla 93 (row 23) Field Explanation: added the per-employee match with RetencionFuente (NIE177) of the client's electronic payroll, the pay-group scope (every pay group and run of the month), the theoretical-tax WTs 21114 and 21619 in open item (b), and the NIE177 reconciliation caveat for retiree WTs 21140 / 21155; evidence Sep-2026 Gross to net PMI (CO - Monthly), Monthly_fixed NE segment file, client NE Mapping."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "T22",
+   "row": 22,
+   "column_letter": "T",
+   "field_id": "casilla 77",
+   "field_name": "Base - work income (natural persons)",
+   "current": "(1) Non-resident position - open (rows 22 and 31-34): Master Data holds 9 employees with Tax Procedure 1 = 3, 7 of them in the Sep-2026 Base of Withholding; these 7 are withheld at exactly 20% of GROSS Income Total (column G; e.g. 245,443,528 -> 49,088,706), the ET art. 408 pattern (an inference from the rate - no report labels them non-resident), yet the client's base column U holds a DEPURATED value for them (e.g. 237,618,312) and sums it into the run total. Confirm (a) that these employees are non-residents taxed under art. 408, (b) that their base is the GROSS as this row states, and (c) whether they are declared in casillas 77/93 or in casillas 109-112 via sheet 2 (rows 31-34). (2) Confirm that the base declared in casilla 77 is the depurated base paired with the withholding deducted (client column U 'WITHOLDING TAX BASIS', Sep-2026 total 6,263,719,152) and not column W 'WITHOLDING TAX BASIS WITHOUT CONTRIBUTION' (4,000,634,596). (3) The client's depuration also deducts AFC (column I) and APV (column J) contributions and caps the total relief at the lower of 40% of (gross less mandatory contributions) and 1,340 UVT / 12 (5,848,430 at UVT 52,374), which this explanation does not mention: confirm the legal basis (ET art. 126-1, 126-4 and 336) so that the explanation can be completed.",
+   "proposed": "(1) Non-resident position - open (rows 22 and 31-34): Master Data holds 9 employees with Tax Procedure 1 = 3 and all 9 are in the Sep-2026 run (Base of Withholding and G2N). 7 of them carry % Retention 0.2 and are withheld at exactly 20% of GROSS Income Total (column G; e.g. 245,443,528 -> 49,088,706), the ET art. 408 pattern (an inference from the rate - no report labels them non-resident), yet the client's base column U holds a DEPURATED value for them (e.g. 237,618,312) and sums it into the run total. The other 2 carry % Retention 0 and are withheld at about 15.9% and 34.3% of Income Total, so Tax Procedure 3 alone does not identify the 20%-of-gross population. Confirm (a) that these employees are non-residents taxed under art. 408, (b) that their base is the GROSS as this row states, and (c) whether they are declared in casillas 77/93 or in casillas 109-112 via sheet 2 (rows 31-34). (2) Confirm that the base declared in casilla 77 is the depurated base paired with the withholding deducted (client column U 'WITHOLDING TAX BASIS', Sep-2026 total 6,263,719,152) and not column W 'WITHOLDING TAX BASIS WITHOUT CONTRIBUTION' (4,000,634,596). (3) The client's depuration also deducts AFC (column I) and APV (column J) contributions and caps the total relief at the lower of 40% of (gross less mandatory contributions) and 1,340 UVT / 12 (5,848,430 at UVT 52,374), which this explanation does not mention: confirm the legal basis (ET art. 126-1, 126-4 and 336) so that the explanation can be completed.",
+   "reason": "Factual correction of the approved query: all 9 Tax Procedure 3 employees are in the Base of Withholding / G2N (same 261 IDs); 7 at % Retention 0.2 = 20% of gross, 2 at % Retention 0 withheld at 15.9% / 34.3% of gross. Decision 8 is not re-opened; only the facts quoted to RA change.",
+   "basis": "round-1 Base of Withholding columns D/G/U/V + Master Data BE, re-checked against round-2 G2N (same 261 IDs)",
+   "vc_sentence": "Queries to RA updated on casillas 77, 93, 78 and 94 (rows 22-25) with round-2 evidence: corrected Tax Procedure 3 count (all 9 in the run, 7 at 20% of gross), RetencionFuente WT list and NIE177 reconciliation scope, missing Sep-2026 runs, and the client's Form 220 / NE treatment of WT 62151 / 62152 retiree payments; Field Explanations of rows 22, 24 and 25 unchanged (decisions of 15 Oct 2026)."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "T23",
+   "row": 23,
+   "column_letter": "T",
+   "field_id": "casilla 93",
+   "field_name": "Withholding - work income (natural persons)",
+   "current": "(1) Contingent withholding (Base of Withholding column Y = withholding 'without contribution' X minus withholding 'with contribution' V; 20 employees, all with AFC or APV contributions; Sep-2026 total 14,300,634) is not deducted by any wage type: confirm under ET art. 126-1 / 126-4 that it is not declared in casilla 93 or anywhere else on the employer's Form 350. (2) For 6 employees the WT 2552 line is a zero-value Non Cash item and the deduction is booked on WT 21330 'Personal Income Tax Withholding (Theoretical)' (Sep-2026 total 69,301,209): confirm that this amount is declared in casilla 93 as withholding practised. (3) Confirm that withholding booked on WTs 21129 (Terminations), 25832 (Stock awards vesting), 25833 (IC Local Country) and 25834 (Hypothetical - IC Foreign Country) is declared in casilla 93 in the month it is practised. (4) Confirm that the withholding on the 7 employees withheld at a flat 20% of gross (Tax Procedure 3) is declared in casilla 93 and not in casillas 111/112 (see the casilla 77 query).",
+   "proposed": "(1) Contingent withholding (Base of Withholding column Y = withholding 'without contribution' X minus withholding 'with contribution' V; 20 employees, all with AFC or APV contributions; Sep-2026 total 14,300,634) is not deducted by any wage type: confirm under ET art. 126-1 / 126-4 that it is not declared in casilla 93 or anywhere else on the employer's Form 350. (2) For 6 employees the WT 2552 line is a zero-value Non Cash item and the deduction is booked on WT 21330 'Personal Income Tax Withholding (Theoretical)' (Sep-2026 total 69,301,209): confirm that this amount is declared in casilla 93 as withholding practised. (3) Confirm that withholding booked on WTs 21129 (Terminations), 25832 (Stock awards vesting), 25833 (IC Local Country) and 25834 (Hypothetical - IC Foreign Country) is declared in casilla 93 in the month it is practised. (4) Confirm that the withholding on the 7 employees withheld at a flat 20% of gross (Tax Procedure 3; the other 2 Tax Procedure 3 employees are withheld on a different basis) is declared in casilla 93 and not in casillas 111/112 (see the casilla 77 query). (5) The client's electronic-payroll mapping reports as RetencionFuente (NIE177) WTs 2552, 21330, 21114 (Theoretical income Tax-5011), 21619 (Theoretical Income Tax - Ajuste - 5035), 21129, 25832, 25833, 25834 and the retiree / pensioner WTs 21140 and 21155: confirm that the theoretical-tax WTs 21114 and 21619 are withholding practised (casilla 93), and confirm whether casilla 93 must reconcile to NIE177 alone or casillas 93 + 94 together. (6) Provide or confirm the full set of Sep-2026 payroll runs: the Sep-2026 'CO - Monthly' run (G2N and Nomina Electronica) reconciles to 1,468,500,598, but the Accumulated Report shows a further 144,635,503 of WT 2552 for 97 IDs in another pay group (weekly advances WT 61100 / 62838), 5,145,376 of WT 21140 for retirees, and an 'Exceptional Advance' (WT 62838) paid to 2 CO - Monthly employees outside that run.",
+   "reason": "Adds the round-2 NE mapping evidence (WTs reported as RetencionFuente) and the list of Sep-2026 runs still missing for the all-runs test; item (4) aligned with the corrected Procedure-3 facts.",
+   "basis": "round-2 Validado ConsolidadoCCT Mapping; round-2 G2N vs round-1 Accumulated Report Sep-2026",
+   "vc_sentence": "Queries to RA updated on casillas 77, 93, 78 and 94 (rows 22-25) with round-2 evidence: corrected Tax Procedure 3 count (all 9 in the run, 7 at 20% of gross), RetencionFuente WT list and NIE177 reconciliation scope, missing Sep-2026 runs, and the client's Form 220 / NE treatment of WT 62151 / 62152 retiree payments; Field Explanations of rows 22, 24 and 25 unchanged (decisions of 15 Oct 2026)."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "T24",
+   "row": 24,
+   "column_letter": "T",
+   "field_id": "casilla 78",
+   "field_name": "Base - pension income (natural persons)",
+   "current": "The client pays retirees directly through WT 62151 'Retirement Payment - PRV-6795' (Accumulated Report: 16 retirees paid in Sep-2026, range 1,705,545 to 14,561,653; 20 over Oct-2025..Sep-2026) and withholds income tax on WT 21140 'Personal Income Tax Withholding-Retirees- 6799' (13 of the 16 in Sep-2026; monthly totals 4,328,951 to 7,410,011). Every payment is below 1,000 UVT (52,374,000), and the withholding is consistent with the ET art. 383 table applied to a reduced base (25% exemption plus other reliefs; exact for 5 of 16), i.e. the payment is treated like work income, not as an ET art. 206 num. 5 pension. The spec rule stays (decision of 15 Oct 2026). RA to confirm the nature of WT 62151: a pension under ET art. 206 num. 5 (casillas 78/94, no withholding below 1,000 UVT) or work income (casillas 77/93)? The retirees are a separate pay group absent from the Base of Withholding, G2N and Master Data, so the Form 350 must aggregate them either way.",
+   "proposed": "The client pays retirees directly through WT 62151 'Retirement Payment - PRV-6795' (Accumulated Report: 16 retirees paid in Sep-2026, range 1,705,545 to 14,561,653; 20 over Oct-2025..Sep-2026) and withholds income tax on WT 21140 'Personal Income Tax Withholding-Retirees- 6799' (13 of the 16 in Sep-2026; monthly totals 4,328,951 to 7,410,011). Every payment is below 1,000 UVT (52,374,000), and the withholding is consistent with the ET art. 383 table applied to a reduced base (25% exemption plus other reliefs; exact for 5 of 16), i.e. the payment is treated like work income, not as an ET art. 206 num. 5 pension. The spec rule stays (decision of 15 Oct 2026). RA to confirm the nature of WT 62151: a pension under ET art. 206 num. 5 (casillas 78/94, no withholding below 1,000 UVT) or work income (casillas 77/93)? The retirees are a separate pay group absent from the Base of Withholding, G2N and Master Data, so the Form 350 must aggregate them either way. New evidence (Oct 2026, round 2): the client's Form 220 working file for tax year 2025 reports the retirees paid through WT 62151 (19 matched on the personnel number) and through WT 62152 'Retirement Payment - Catleya-6796' (6 matched) with their whole income in casilla 46 'Otros pagos', casilla 50 'Pensiones de jubilacion, vejez o invalidez' = 0 and the withholding in casilla 60; and the client's electronic-payroll mapping reports WTs 62151-62154 as OtrosConceptos and WT 21140 as RetencionFuente. By contrast WT 62154 'Monthly Retired Pension-6798' (453 pensioners in Sep-2026, total 626,485,005, every payment below 1,000 UVT) and WT 62152 (5 in Sep-2026) carry no withholding, which is consistent with this row's rule. The question is therefore specific to WT 62151.",
+   "reason": "New evidence for the open RA question (decision 6 unchanged): the client's own Form 220 puts WT 62151 / 62152 retiree income in casilla 46 'Otros pagos' with casilla 50 = 0, while WT 62154 pensions carry no withholding.",
+   "basis": "round-2 Formulario 220 NOM_U_203 (Campo 46/50/60, 'pern'), Validado ConsolidadoCCT Mapping; round-1 Accumulated Report Sep-2026",
+   "vc_sentence": "Queries to RA updated on casillas 77, 93, 78 and 94 (rows 22-25) with round-2 evidence: corrected Tax Procedure 3 count (all 9 in the run, 7 at 20% of gross), RetencionFuente WT list and NIE177 reconciliation scope, missing Sep-2026 runs, and the client's Form 220 / NE treatment of WT 62151 / 62152 retiree payments; Field Explanations of rows 22, 24 and 25 unchanged (decisions of 15 Oct 2026)."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "T25",
+   "row": 25,
+   "column_letter": "T",
+   "field_id": "casilla 94",
+   "field_name": "Withholding - pension income (natural persons)",
+   "current": "Same point as casilla 78: the client withholds income tax on WT 21140 'Personal Income Tax Withholding-Retirees- 6799' from 13 of the 16 retirees paid through WT 62151 'Retirement Payment - PRV-6795' in Sep-2026 (total 5,145,376; monthly totals Oct-2025..Sep-2026 between 4,328,951 and 7,410,011), although every payment is below 1,000 UVT. The spec rule stays (decision of 15 Oct 2026). RA to confirm the nature of WT 62151 and therefore whether this withholding belongs in casilla 94 or in casilla 93.",
+   "proposed": "Same point as casilla 78: the client withholds income tax on WT 21140 'Personal Income Tax Withholding-Retirees- 6799' from 13 of the 16 retirees paid through WT 62151 'Retirement Payment - PRV-6795' in Sep-2026 (total 5,145,376; monthly totals Oct-2025..Sep-2026 between 4,328,951 and 7,410,011), although every payment is below 1,000 UVT. The spec rule stays (decision of 15 Oct 2026). RA to confirm the nature of WT 62151 and therefore whether this withholding belongs in casilla 94 or in casilla 93. New evidence (Oct 2026, round 2): the client's electronic-payroll mapping reports WT 21140 and WT 21155 'Income Tax Pensioner' as RetencionFuente (NIE177), the element against which casilla 93 is reconciled (row 23); if this withholding is declared in casilla 94, the NIE177 reconciliation must be against casillas 93 + 94.",
+   "reason": "The client reports retiree withholding (21140, 21155) in NIE177, which interacts with the casilla 93 reconciliation rule.",
+   "basis": "round-2 Validado ConsolidadoCCT Mapping",
+   "vc_sentence": "Queries to RA updated on casillas 77, 93, 78 and 94 (rows 22-25) with round-2 evidence: corrected Tax Procedure 3 count (all 9 in the run, 7 at 20% of gross), RetencionFuente WT list and NIE177 reconciliation scope, missing Sep-2026 runs, and the client's Form 220 / NE treatment of WT 62151 / 62152 retiree payments; Field Explanations of rows 22, 24 and 25 unchanged (decisions of 15 Oct 2026)."
+  }
+ ],
+ "mark_corrected_rows": [
+  23
+ ],
+ "version_control": [
+  "Casilla 93 (row 23) Field Explanation: added the per-employee match with RetencionFuente (NIE177) of the client's electronic payroll, the pay-group scope (every pay group and run of the month), the theoretical-tax WTs 21114 and 21619 in open item (b), and the NIE177 reconciliation caveat for retiree WTs 21140 / 21155; evidence Sep-2026 Gross to net PMI (CO - Monthly), Monthly_fixed NE segment file, client NE Mapping.",
+  "Queries to RA updated on casillas 77, 93, 78 and 94 (rows 22-25) with round-2 evidence: corrected Tax Procedure 3 count (all 9 in the run, 7 at 20% of gross), RetencionFuente WT list and NIE177 reconciliation scope, missing Sep-2026 runs, and the client's Form 220 / NE treatment of WT 62151 / 62152 retiree payments; Field Explanations of rows 22, 24 and 25 unchanged (decisions of 15 Oct 2026)."
+ ],
+ "not_applied": [
+  {
+   "row": 22,
+   "field_id": "casilla 77",
+   "why": "No M change: the round-2 G2N has no depurated base column, so nothing new on the base rule; non-resident position remains a query (decision 8). Only the T22 facts are corrected."
+  },
+  {
+   "row": 24,
+   "field_id": "casilla 78",
+   "why": "No M change: spec rule stays (decision 6); new evidence goes to the query only."
+  },
+  {
+   "row": 25,
+   "field_id": "casilla 94",
+   "why": "No M change: spec rule stays (decision 6); new evidence goes to the query only."
+  },
+  {
+   "row": 41,
+   "field_id": "casilla 146",
+   "why": "Note only (crosscheck): WT 52552 is blank for the 20%-of-gross employees, so it cannot feed the sheet-2 rate; no spec change because sheet 2 is not evidenced."
+  },
+  {
+   "row": "7, 8, 13",
+   "field_id": "casillas 5, 6, 11",
+   "why": "Aligned on the NE employer segment; no change needed."
+  },
+  {
+   "row": "-",
+   "field_id": "all-runs evidence",
+   "why": "The 'all runs of the month' total remains unproven: the round-2 G2N is the same single run REF-P201-090. Missing runs listed in the crosscheck (missing_runs_for_all_runs_test); requested from Cinthya, not a spec change."
+  }
+ ],
+ "summary": {
+  "edits_M": 1,
+  "edits_T": 4,
+  "edits_other_columns": 0,
+  "edits_other_sheets": 0,
+  "fields_marked_corrected": 1,
+  "vc_sentences": 2
+ }
+}

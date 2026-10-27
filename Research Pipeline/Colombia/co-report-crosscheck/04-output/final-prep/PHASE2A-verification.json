@@ -1,0 +1,83 @@
+{
+ "verdict": "PASS",
+ "checks": [
+  {
+   "id": "1-current-and-diff",
+   "result": "PASS",
+   "evidence": "openpyxl read of 05-final/CO-DIAN-004-Formulario220-Spec.xlsx 'Formulario 220 Spec'!M52 == map 'current' (exact string equality True). difflib opcodes show changes only inside the sentence 'Wage types 21330 ... and 25834 ... are notional, not withholding practised, and are NOT certified; the same exclusion applies to every wage type that computes a theoretical, hypothetical or contingent withholding.'; all text before and after is byte-identical. One edit only in the map."
+  },
+  {
+   "id": "2-consistency",
+   "result": "PASS (with residual pre-existing inconsistencies, outside this change)",
+   "evidence": "After the change all four statements give the same rule: CO-DIAN-001 M191 '21330 ... is included where it carries the amount actually deducted from the employee and remitted to DIAN; a theoretical, hypothetical or contingent amount is never reported ... the hypothetical-tax WT 25834 is not withholding'; CO-DIAN-002 M23 '21330 ... where it carries the withholding actually deducted from the employee's pay' and 25834 out of scope; Report Matrix A40 '21330 is included only where it carries the withholding actually deducted', 25834 out of scope; Population Rules C5 same. Proposed M52: 21330 certified only where it carries the amount actually deducted and remitted; 25834 not withholding, not certified. CO-DIAN-004 Population Rules C9 and CO-DIAN-005 M37 / C21 / Payroll Scope Summary C32 state only the general rule (actually practised; theoretical/hypothetical/notional/contingent excluded) and do not name 21330/25834 - consistent. Note: the proposal says 'same wording as CO-DIAN-001 M191' - it is the same rule, not identical wording (001 says 'included ... never reported'). Residual inconsistencies found (not introduced by this change): (a) CO-DIAN-004 M52 includes pension withholding WT 21140 / 21155 in casilla 60 yet says the sum of casilla 60 reconciles to twelve months of Form 350 casilla 93 only, while CO-DIAN-002 M23 / C5 send 21140 / 21155 to casilla 94 (and A40/C5 reconcile casilla 93 + 94 to NIE177); the same 'casilla 93' only reconciliation appears in CO-DIAN-005 M37. Should read 'casillas 93 + 94'. (b) CO-DIAN-001 M191 says 25832 and 25833 'are included' unconditionally, while CO-DIAN-002 M23 and CO-DIAN-004 M52 condition them on the WTC withholding-practised attribute (001 does end with 'The withholding attribute of each wage type comes from the WTC', so substantively close). (c) CO-DIAN-001 M191 source list does not name 21140 / 21155 although CO-DIAN-004 M52 reconciles casilla 60 (which includes them) to NIE177. (d) CO-DIAN-002 names 21114 and 21619 as theoretical; 004 does not name them but its general exclusion covers them - no conflict. Other hits (001 Payroll Scope Summary C31 'notional valuation scale', 001 M214 WT 26998 'Net salary (notional)') are unrelated."
+  },
+  {
+   "id": "3-standards",
+   "result": "PASS",
+   "evidence": "WORDS dict loaded from scripts/make_final.py and applied to 'proposed': zero hits. No internal references (CO-GAP, scope_manifest, CCG control, OPEN-POINTS, HANDOFF, Phase): zero hits. T52 and U52 are empty and not in the map. Text is English. 'Witholding' / double space are the literal WT names, kept as in the rest of the spec. Minor style note only: 'no theoretical, hypothetical or contingent amount is certified' now appears twice in the cell (also in sentence 1) - harmless redundancy."
+  },
+  {
+   "id": "4a-form220-casilla60",
+   "result": "PASS",
+   "evidence": "Res. DIAN 000022 de 2024 (Form 220 for tax years 2023 onward; compiled as art. 1.2.2.15 of Res. 227/2025), annex/instructivo, https://normograma.com/documentospdf/PDF/R_DIAN_0022_2024.pdf : '60. Valor de la retención en la fuente por ingresos laborales y de pensiones: escriba en esta casilla el total de las retenciones en la fuente a título del impuesto sobre la renta practicadas al trabajador o pensionado en el período.' The resolution recital cites ET art. 378 as its legal basis (local copy raw/docs/oficiais/CO/2026-10-21-Res-DIAN-0022-2024-guia-220.htm). ET art. 379 lit. h, http://www.secretariasenado.gov.co/senado/basedoc/estatuto_tributario_pr015.html : the certificate contains 'monto de las retenciones practicadas'."
+  },
+  {
+   "id": "4b-proposal-citations",
+   "result": "PARTIAL - ET 378 correct; ET 375 and ET 381 misdescribed",
+   "evidence": "ET art. 378 (http://www.secretariasenado.gov.co/senado/basedoc/estatuto_tributario_pr015.html): 'Los agentes de retención en la fuente deberán expedir anualmente a los asalariados, un Certificado de Ingresos y Retenciones correspondiente al año gravable inmediatamente anterior, según el formato que prescriba la [DIAN]' - supports. ET art. 375 ('EFECTUAR LA RETENCIÓN'): 'Están obligados a efectuar la retención o percepción del tributo, los agentes de retención ...' - it imposes the obligation to withhold, it does NOT say the agent certifies the withholding practised. ET art. 381 ('CERTIFICADOS POR OTROS CONCEPTOS'): 'Cuando se trate de conceptos de retención diferentes de los originados en la relación laboral ...' - it covers non-labour withholding certificates and does not govern Form 220. Neither citation appears in the spec cell (M52 cites only the instruction guide, Res. 000022/2024), so the spec text is unaffected."
+  },
+  {
+   "id": "5-scope",
+   "result": "PASS",
+   "evidence": "The 21330 sentence is conditional ('certified only where it carries the amount actually deducted ... and remitted to DIAN') and leaves the attribute to the WTC, consistent with 'the withholding-practised attribute of each comes from the WTC'; it does not classify the client WT. The 25834 statement ('is not withholding and is not certified') was already in the cell and in CO-DIAN-001 M191 / CO-DIAN-002 M23, A40, C5, and rests on the WT's own name ('Hypothetical'); nothing new is classified and no client WT is mapped to the master WTC."
+  }
+ ],
+ "required_fixes": [],
+ "citation_corrections": [
+  "PHASE2A-WITHHOLDING-2026-10-21.md: replace 'ET art. 375 (the withholding agent certifies the withholding practised)' with ET art. 379 lit. h (the Certificado de Ingresos y Retenciones contains the 'monto de las retenciones practicadas') - art. 375 only imposes the duty to withhold.",
+  "PHASE2A-WITHHOLDING-2026-10-21.md: replace 'ET art. 378 / 381' with 'ET art. 378 / 379'; art. 381 covers certificates for withholding OTHER than labour income and does not govern Form 220."
+ ],
+ "follow_up_outside_this_change": [
+  "CO-DIAN-004 M52 and CO-DIAN-005 M37: casilla 60 includes pension withholding (21140, 21155), which CO-DIAN-002 sends to casilla 94; the population reconciliation should be to Form 350 casillas 93 + 94, not casilla 93 alone. Record in OPEN-POINTS; separate map if approved.",
+  "CO-DIAN-001 M191: align wording on 25832 / 25833 (WTC-conditional, as in -002 and -004) and check whether pension withholding 21140 / 21155 reaches NIE177, since -004 reconciles casilla 60 to NIE177."
+ ],
+ "second_pass": {
+  "date": "2026-10-21",
+  "verdict": "PASS WITH ONE REQUIRED FIX (CO-DIAN-001 M191 source list). The 11 mapped edits are correct as written; add the fix to CO-DIAN-001-phase2a-map.json before applying it.",
+  "checks": [
+   {
+    "id": "1-current-and-diff",
+    "result": "PASS",
+    "evidence": "openpyxl read-only: all 11 'current' strings equal the live cells exactly (004 Report Matrix A40, Formulario 220 Spec M52, Population Rules C29, Example Analysis D27; 005 Report Matrix A40, Formato 2276 Spec M37, Population Rules C31, Example Analysis D27; 001 Report Matrix A39, Nomina Electronica Spec M191, Population Rules C35). difflib opcodes: every reconciliation edit changes only 'casilla 93' -> 'casillas 93 plus 94'. In 001 A39 the edit inserts 'plus casilla 94 (withholdings - pension income)'. 004 M52 also replaces the 21330/25834 sentence exactly as described ('Wage type 21330 ... is certified only where it carries the amount actually deducted from the employee and remitted to DIAN; the hypothetical-tax wage type 25834 ... is not withholding and is not certified.'). The old clause 'the same exclusion applies to every wage type...' is removed; the cell's opening sentence already covers it. 001 M191 also changes 'The other withholding WTs 21129 (terminations), 25832 (stock-award vesting) and 25833 (IC local) are included' -> 'The withholding WT 21129 (terminations) is included, and 25832 (stock-award vesting) and 25833 (IC local) are included where the WTC classifies them as withholding actually deducted from the employee'. One change is not described but is harmless: 005 Example Analysis D27 'form 350' -> 'Form 350' (capitalisation). Nothing else changes."
+   },
+   {
+    "id": "2-reconciliation-target",
+    "result": "PASS",
+    "evidence": "Official Form 350 instructivo, Res. DIAN 000031 of 29 Feb 2024 (https://normograma.com/documentospdf/PDF/R_DIAN_0031_2024.pdf, 'INSTRUCTIVO PARA EL DILIGENCIAMIENTO DE LA DECLARACION DE RETENCION EN LA FUENTE', PDF page 5): '93. Rentas de trabajo: escriba en esta casilla el total de las retenciones en la fuente realizadas en el mes utilizando la tabla a que se refiere el articulo 383 del E.T., por pagos o abonos en cuenta efectuados a personas naturales por concepto de salarios, comisiones, prestaciones sociales, ...' and '94. Rentas de pensiones: escriba en esta casilla el valor retenido por los pagos mensuales que excedieron las mil (1000) UVT conforme a lo senalado en el numeral 5 del articulo 206 del E.T., por concepto de pensiones de jubilacion, invalidez, vejez, de sobrevivientes y sobre riesgos laborales, ...'. Form 220 casilla 60 (Res. DIAN 000022/2024 instructivo, quoted in pass 1): 'retenciones ... practicadas al trabajador o pensionado'. Specs: 004 M52 sources casilla 60 from 2552 + 21129 + 21140 + 21155, and 004 M41 says 'the withholding on pension income (21140 ...) feeds casilla 60'. 005 M37 defines numeral 29 as withholding on 'work or pension income', sourced from 'the separate withholding wage types for terminations, retirees and equity awards'; 005 Payroll Scope Summary C50 gives pensioners a record with numeral 29. NE: Res. DIAN 000013/2021 art. 1 num. 5 (local copy raw/docs/oficiais/CO/2026-10-21-Res-DIAN-0013-2021-normograma.htm): 'Beneficiario del pago: ... las personas naturales vinculadas mediante una relacion laboral o legal y reglamentaria y los pensionados a cargo del empleador'. NIE177 therefore includes withholding on pensions paid by the employer, and the 001 Payroll Scope Summary also says the document supports 'pensions borne by the employer'. CO-DIAN-002: M23 says 'Withholding on the pension income the employer pays itself (WT 21140 ..., WT 21155 ...) is not reported here: it goes to casilla 94'. M25 defines casilla 94 as 21140 + 21155 and states 'Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177)'. The same appears in Report Matrix A40, Payroll Scope Summary C28, Population Rules C5/C6/D15/C29 and Example Analysis D15/C38. 'Casillas 93 plus 94' is therefore the correct population target for casilla 60, numeral 29 and NIE177."
+   },
+   {
+    "id": "3-residual-sweep-six-specs",
+    "result": "ONE DEFECT, TWO MINOR INCONSISTENCIES",
+    "evidence": "Searched every string cell of the six 05-final specs for casilla 93/94, 21330, 25832, 25833, 25834, 21140, 21155, NIE177, RetencionFuente, casilla 60 and numeral 29. CO-PILA-003 and CO-CESANTIAS-006: no hits. Once the maps are applied, no cell reconciles casilla 60, numeral 29 or NIE177 to casilla 93 alone. The remaining references to casilla 93 alone are acceptable: 001 Example Analysis B46 '-> Form 350 casilla 93' (worked example of one employee with no pension), and 002 Report Matrix A34, Payroll Scope Summary C25/C32 and Example Analysis D14/C28, which describe casilla 93 itself. (a) DEFECT - CO-DIAN-001 M191, which is also in the map: after the change the cell reconciles NIE177 to casillas 93 plus 94. Its own definition ('Withholding at source sobre employment income') and source list (2552, 21330, 21129, 25832, 25833) leave out the pension withholding WTs 21140 / 21155. Those WTs feed casilla 94, and NIE177 carries them for pensions paid by the employer (Res. 000013/2021 art. 1 num. 5). Read literally, M191 makes SUM(NIE177) differ from 93 + 94 whenever casilla 94 is not zero. The cell also contains the Spanish word 'sobre' in an English sentence (already there before this change). (b) CO-DIAN-002 M23 says 'Withholding deducted on WT 21129 (Terminations), 25832 ... and 25833 ... enters in the month it is practised ... the wage types named here are the ones so classified', and Population Rules C5 says 'plus the withholding deducted on 21129 ..., 25832 ... and 25833'. Both present 25832 / 25833 as already classified as practised, while 004 M52 and the new 001 M191 make them depend on the WTC attribute. The meaning is compatible ('withholding deducted on'), but the wording differs. Align it in a later map, e.g. drop 'the wage types named here are the ones so classified' and add 'where the WTC classifies them as withholding actually deducted' for 25832 / 25833. (c) CO-DIAN-004 M41 names only 21140 as the pension withholding that feeds casilla 60, while M52 names both 21140 and 21155 (minor omission). The 21330 rule is the same in substance in 001 M191, 002 M23 / A40 / C5 and the new 004 M52. 25834 is 'not withholding / out of scope' in every spec. 005 names none of these WTs and states only the general rule, which is consistent."
+   },
+   {
+    "id": "4-standards",
+    "result": "PASS",
+    "evidence": "Loaded the WORDS dict from scripts/make_final.py and ran it on all 11 proposed texts: zero hits. Internal references (CO-GAP, scope_manifest, CCG control, OPEN-POINTS, HANDOFF, Phase, verif, cross-check): zero hits. Columns T and U are empty on every edited row and are not in the maps. All text is English except 'sobre' in 001 M191, which predates this change (see 3a). No clause repeats inside any proposed cell (checked by splitting on '.' and ';'), and the pass-1 nit about the repeated 'no ... amount is certified' is resolved."
+   },
+   {
+    "id": "5-scope",
+    "result": "PASS",
+    "evidence": "The edits state rules only. 21330 and 25832 / 25833 depend on the WTC withholding-practised attribute. 25834 ('Hypothetical') was already excluded in 001, 002 and 004. No client wage type is classified or mapped to the master WTC, and no new WT is introduced."
+   }
+  ],
+  "required_fixes": [
+   "CO-DIAN-001 'Nomina Electronica Spec'!M191 (extend the existing edit in CO-DIAN-001-phase2a-map.json): replace the opening 'Withholding at source sobre employment income.' with 'Withholding at source on employment income and on the pension income the employer pays itself.'. In the Source paragraph, after 'The withholding WT 21129 (terminations) is included,' add 'the withholding WTs 21140 'Personal Income Tax Withholding-Retirees- 6799' and 21155 'Income Tax Pensioner' on the pensions the employer pays itself are included,'. Basis: Res. DIAN 000013/2021 art. 1 num. 5 (the beneficiary includes 'los pensionados a cargo del empleador') and CO-DIAN-002 M25 (casilla 94 = 21140 + 21155, reconciled with casilla 93 to NIE177). Without this fix, the cell's own sources cannot meet its new 'casillas 93 plus 94' reconciliation."
+  ],
+  "follow_up_outside_this_change": [
+   "CO-DIAN-002 M23 and Population Rules C5: make 25832 / 25833 depend on the WTC, as in 004 M52 and 001 M191 (drop 'the wage types named here are the ones so classified').",
+   "CO-DIAN-004 M41: name 21155 next to 21140 as pension withholding that feeds casilla 60.",
+   "Save the Form 350 instructivo locally as raw/docs/oficiais/CO/2026-10-21-Res-DIAN-0031-2024-form350.pdf; check 2 quotes it. The resolution's body pages are scanned images; the instructivo pages are text."
+  ]
+ }
+}

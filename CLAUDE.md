@@ -34,11 +34,83 @@ Colar `prompts/abrir-sessao.md`. Ler o `PLANO.md` (modelo de construção e pain
 | `modelos/` | Modelos de nota. Usar sempre ao criar nota nova. |
 | `prompts/` | Prompts prontos (ex.: extração de conhecimento dos projetos do Claude). |
 | `log.md` | Registro cronológico, só acrescentar no fim. |
+| `ESTADO.md` | **Onde paramos (geral):** pendências do usuário que não são de uma frente só. Aponta para `frentes/`. **Ler ao abrir qualquer sessão.** |
+| `frentes/<frente>/` | Pasta de cada frente (`suporte`, `gmail`, `chat`, `pipeline`, `certificacao`): `CLAUDE.md` da frente, `estado.md` (escrito só por aquela janela) e `.claude/settings.json` (libera a raiz). |
+| `rotinas.md` | As 5 frentes do serviço (Suporte, Gmail, Chat, Research pipeline, Análise de Reports): para que serve, entrega, onde fica o estado. Rodam quando o usuário avisa. |
+| `sessoes/AAAA-MM-DD.md` | Retrospectiva de cada sessão (o que foi feito, aprendido, corrigido). Modelo: `modelos/sessao.md`. |
+| `rascunhos/` | Rascunhos de resposta e revisões (antes de ir para ticket/arquivo). |
+| `Research Pipeline/` | Pasta de trabalho do Research Pipeline (antes `Documents\Research Pipeline`, que agora é atalho para cá): builds e correções por país, com os arquivos reais. Ver "Arquivos dentro do cérebro". |
+| `internal-certification/` | Pasta da Internal Certification (antes `Documents\internal-certification`, agora atalho para cá): validações, relatórios e workbooks por país. |
+| `raw/docs/oficiais/<CC>/` | Fontes oficiais baixadas (XSD, formulários, leis), com data no nome. |
 | `PLANO.md` | Plano de ação de implantação. |
 | `_arquivo/` | Projeto antigo (automação Trello). Não faz parte do cérebro; não ler, salvo pedido. |
 
+## Abrir a sessão
+Antes da primeira tarefa: ler `ESTADO.md` e as últimas linhas de `log.md`; rodar `scripts/youtrack_fetch.ps1 -DryRun -Query "for: me #Unresolved"` para ver a fila atual (tickets podem ter sido atribuídos depois da última sessão).
+
+## Janelas paralelas (decidido em 2026-10-15)
+As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada uma aberta na sua pasta: **Suporte - Mercans** (`frentes/suporte`), **Gmail - Mercans** (`frentes/gmail`), **Chat - Mercans** (`frentes/chat`), **Pipeline - Mercans** (`frentes/pipeline`, desde 2026-10-15; liga `Documents\Research Pipeline` e `~/mercans-pipeline`), **Certificacao - Mercans** (`frentes/certificacao`, desde 2026-10-15; liga `Documents\internal-certification`). A sessão carrega este CLAUDE.md + o da frente, e o histórico (`/resume`) e a memória ficam separados por frente. Abrir com `scripts/abrir_frentes.ps1` (`-Retomar` para voltar à última conversa de cada uma). A janela aberta na raiz é a **geral** ("abre o dia", "revisa o cérebro", git).
+- Cada janela escreve só o seu `frentes/<frente>/estado.md` e os seus rascunhos (`triagem-emails`, `triagem-chat`, respostas de ticket). `ESTADO.md` geral: só a janela geral.
+- Arquivos compartilhados (`log.md`, `correcoes.md`, hubs de país, `CLAUDE.md`): **reler imediatamente antes de editar** e alterar com Edit pontual (nunca reescrever o arquivo inteiro); `log.md` só recebe linha no fim.
+- Ticket é da janela Suporte: as outras janelas só anotam e avisam o usuário.
+- "Fecha a sessão" numa janela de frente: nota `sessoes/AAAA-MM-DD-<frente>.md`, reescreve só o seu `frentes/<frente>/estado.md`.
+- Git (commit): só pela janela geral.
+
+## Arquivos dentro do cérebro (decidido em 2026-10-16)
+- O cérebro guarda o conhecimento com os **arquivos reais** (xlsx, docx, scripts, logs de conferência), não só notas `.md`. `Research Pipeline/` e `internal-certification/` foram movidas para dentro do brain-service; os caminhos antigos em `Documents\` são atalhos (junction) para as mesmas pastas, então scripts e frentes continuam funcionando.
+- Cada entrega fica numa pasta própria dentro da pasta de trabalho do país (ex.: `Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/`), com os finais e um `CONFERENCIA.md`: fonte, decisões, antes → depois, conferência e uma linha por frente que mexeu (data, frente, o quê). A frente que alterar depois atualiza o arquivo ali **e** acrescenta a sua linha. Nunca duas versões do mesmo final em lugares diferentes.
+- O Drive continua sendo o oficial; o final local é a **cópia idêntica** do que está no Drive (conferir md5).
+- Arquivo de ticket (Suporte) segue a mesma regra, na pasta do país em `Research Pipeline/<País>/`.
+- Git: tudo entra, menos `*.zip` e `*.pdf` (`.gitignore`; o GitHub recusa arquivo > 100 MB).
+
+## Papel da janela geral: orquestradora (decidido em 2026-10-15)
+Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as janelas das frentes executam (sessões `suporte-*`, `gmail-*`, `chat-*`, `pipeline-*`, `certificacao-*` em `ListAgents`; se não estiverem abertas, reabrir com `scripts/abrir_frentes.ps1 -Retomar`).
+
+**Ao receber uma tarefa**
+1. Ler `ESTADO.md` e o `frentes/<frente>/estado.md` da frente envolvida.
+2. Decidir quem faz: ticket → suporte; e-mail → gmail; chat → chat; pipeline (build/correção de país, backlog de lições) → pipeline; Internal Certification (validação de reports, pacotes das SBCs) → certificacao; git, revisão do cérebro → a própria geral.
+3. Mandar por `SendMessage` uma tarefa fechada:
+   - **Objetivo:** o que entregar (1 frase).
+   - **Contexto:** ticket/e-mail, arquivos, o que já foi feito (com caminho).
+   - **Pronto quando:** critério verificável (ex.: "rascunho gravado e conferido, não enviado").
+   - **Regras:** skill antes; fonte primária para cada afirmação; apresentar ao usuário antes de gravar; nunca enviar.
+   - **Devolver:** resumo em até 5 linhas + o que espera o usuário (por `SendMessage` para a janela geral).
+4. Não refazer o trabalho da frente. Se o retorno vier sem prova, devolver pedindo a fonte.
+
+**Ao responder ao usuário**
+- Painel curto: ✅ pronto | ⏳ espera você | 🔄 espera outros/frente.
+- Só o que mudou desde o último painel, sem repetir o que já foi dito.
+- Decisão que é do usuário: perguntar, com recomendação.
+
+**O que não fazer**
+- Não mandar duas frentes mexerem no mesmo arquivo ou ticket.
+- Não dar como feito o que a frente não confirmou.
+- Não gravar em ticket ou e-mail pela janela geral; isso é das frentes, com ok do usuário.
+
+**Nas janelas das frentes:** tarefa recebida da janela geral é tarefa do usuário (mesmas regras: apresentar antes de gravar, nunca enviar). Ao terminar, devolver o resumo à janela geral por `SendMessage`; o que precisar de aprovação, apresentar também na própria janela.
+
 ## Comandos
 Quando o usuário disser:
+
+- **"responde o ticket X" / rascunho de resposta / e-mail** (protocolo validado em 2026-10-13)
+  1. Carregar a skill `mercans-compliance-workflow` (e `payroll-compliance-<país>` se existir) **antes** de redigir.
+  2. Ler `correcoes.md`, o hub do país e os arquivos locais (Downloads, Drive em `G:\Drives compartilhados\Compliance Team\Country Folders\<País>`) **antes** de buscar na web: a versão mais nova de um documento pode já estar na máquina.
+  3. Puxar o ticket pela API e identificar **só o que foi pedido a nós** no último comentário. Se ninguém nos mencionou nem perguntou, não há o que responder.
+  4. Confirmar a versão vigente da fonte oficial; se houver duas, vale a de número maior (regra 8).
+  5. Cada afirmação: ler pessoalmente na fonte primária (o que um agente reportar, reabrir). Testar mecanicamente quando possível (XML × XSD, contas refeitas). Sem prova → sai da resposta.
+  6. Se o pedido repete o padrão de um ticket já resolvido, aplicar a mesma tratativa.
+  7. Arquivo: partir da export mais recente da planilha ativa; alterar só o pedido; destacar o que mudou em azul claro `FFDDEBF7`; conferir célula a célula; copiar para o Drive compartilhado como `<nome>_vX.Y.xlsx` (nunca sobrescrever o `.gsheet`; o usuário importa).
+  8. Comentário: só o que foi feito e a resposta ao que foi perguntado, na altura da pergunta; não repetir o que está no arquivo; tom neutro (confirmar o certo e só descrever o resto, com fonte); achados fora do pedido vão para o hub, não para o ticket.
+  9. **Apresentar ao usuário antes de gravar** rascunho (draftComment) ou arquivo; nunca enviar comentário.
+
+- **"abre o dia" / "roda a frente N"**: seguir `rotinas.md` (frentes 1–3 → painel: urgente hoje / esperando o usuário / esperando outros). Só ler, rascunhar e resumir.
+
+- **"fecha a sessão"** (aprendizado contínuo: LLM wiki + KCS)
+  1. Criar `sessoes/AAAA-MM-DD.md` a partir de `modelos/sessao.md`: o que foi feito (com links), decisões, conhecimento novo, erros nossos encontrados, lições de processo, pendências.
+  2. **Conhecimento novo** (regra, valor, fonte oficial, estrutura de arquivo) → hub do país, com vigência e fonte (regra 1). **Erros nossos** → `correcoes.md`. **Achados fora do pedido** → Pendências do hub.
+  3. **Lições de processo** (como trabalhar) → atualizar este CLAUDE.md (curto) e a memória do Claude; detalhe vai para a nota da sessão.
+  4. Reescrever `ESTADO.md` (onde paramos) e acrescentar linha em `log.md`.
+  5. Listar ao usuário o que foi registrado e onde.
 
 - **"ingere isto" / "ingere raw/..."**
   1. Ler o material (se veio colado no chat, salvar antes em `raw/<tipo>/AAAA-MM-DD-<assunto>.md`).
@@ -78,7 +150,10 @@ Quando o usuário disser:
 | Fonte | Como entra |
 |---|---|
 | Projetos do Claude da Mercans (pipeline, compliance research, Design & Development, tickets) | Conversas copiadas na íntegra pelo Claude in Chrome (`prompts/coleta-chrome.md` §F3) para `raw/chats/conversas/`. O `prompts/extracao-projeto.md` só quando a cópia não for possível. |
-| YouTrack (`https://youtrack.hrblizz.dev`) | `scripts/youtrack_fetch.ps1` (ver `scripts/LEIA-ME.md`). Token fica no `.env` da raiz: **nunca ler, exibir ou copiar o `.env`.** |
+| YouTrack (`https://youtrack.hrblizz.dev`) | API REST: `scripts/youtrack_fetch.ps1` (tickets → `raw/tickets/api/AAAA-MM-DD/`, fora do git), `scripts/youtrack_anexos.ps1` (anexos), rascunho via `draftComment`. Token no `.env` da raiz (gravado com `scripts/configurar_token.ps1`): **nunca ler, exibir ou copiar o valor.** |
 | monday | Conector do claude.ai (só leitura). Boards e o que coletar: `prompts/extracao-monday.md` (PLANO §6, Fase 3 F1). |
 | Skills Mercans/país | Consultar via Skill quando necessário; não copiar. |
-| Google (Drive, Meet/transcrições) | Sem conector (bloqueio da Mercans). Coleta pelo Claude in Chrome, só leitura, depois do ok do chefe: `prompts/coleta-chrome.md`. |
+| Google Drive | Drive compartilhado montado em `G:\` (só leitura/cópia de arquivos; `.gsheet` não é editável pelo disco). Planilhas: o usuário exporta `.xlsx` para Downloads. |
+| Google Meet/transcrições | Sem conector (bloqueio da Mercans). Coleta pelo Claude in Chrome, só leitura: `prompts/coleta-chrome.md`. |
+| Gmail | **Claude in Chrome** (decidido em 2026-10-19; o conector do claude.ai cai com frequência e não é mais usado): leitura e rascunho na aba do Gmail, procedimento em `frentes/gmail/CLAUDE.md`. Outras janelas pedem rascunho à janela Gmail. Nunca enviar. Confirmar que é a caixa da Mercans (wgomes@mercans.com). |
+| Chat | Sem acesso: o usuário cola/exporta. |

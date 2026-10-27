@@ -1,0 +1,133 @@
+{
+ "spec": "CO-DIAN-002",
+ "round": 2,
+ "checked": [
+  {
+   "id_or_column": "Run identity (1): round-2 'Gross to net PMI ... Monthly' vs round-1 Vertical G2N",
+   "original_verdict": "CONFIRMED (run_identity_check)",
+   "result": "confirmed",
+   "reason": "Re-computed. Both titles show Payroll id REF-P201-090, generation date 2026-09-16; the horizontal file adds 'Pay Group(s)' = CO - Monthly and headcount 261. Same 261 employee IDs. 120 WT columns x 261 employees; 6,746 non-zero employee x WT values in the horizontal file, 6,746 non-zero pairs in the vertical file, 0 mismatches in absolute value, 0 values present in only one file; deductions are positive in the horizontal file and negative in the vertical one. The file is one run of one pay group, not all September runs."
+  },
+  {
+   "id_or_column": "WT totals and Base of Withholding (2)",
+   "original_verdict": "CONFIRMED",
+   "result": "confirmed",
+   "reason": "WT 2552 = 1,399,199,389 (non-zero for 224) and WT 21330 = 69,301,209 (non-zero for 6, all with 2552 = 0) in both G2N layouts; sum 1,468,500,598 = Base of Withholding column V GRAND TOTAL. Per employee 2552 + 21330 = V for 261/261 (2552 = V for 255, 21330 = V for 6). The Base of Withholding holds the same 261 IDs under Payroll id REF-P201-065."
+  },
+  {
+   "id_or_column": "NE RetencionFuente (3): Monthly_fixed SVA position 2 vs G2N",
+   "original_verdict": "CONFIRMED",
+   "result": "confirmed",
+   "reason": "261 ENC blocks; REC position R = ENC worker code = a G2N Employee ID for 261/261 (261 unique). SVA position 2 (column C) = 2552 + 21330 for 261/261; total 1,468,500,598; 230 non-zero; of the 31 zero-withholding employees, 27 have no SVA segment and 4 have one with position 2 empty."
+  },
+  {
+   "id_or_column": "Row 4 - Tax year (casilla 1)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "G2N title Period 2026-09-01 - 2026-09-30, and all 261 NE ENC blocks have positions E/F = 2026-09-01 / 2026-09-30. The year 2026 can be derived from them, as the draft says (N AAAA, PayPeriod.Year)."
+  },
+  {
+   "id_or_column": "Row 5 - Period (casilla 3)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "The period is one calendar month in the G2N title and in all 261 ENC blocks, consistent with 'MONTHLY return, 01 to 12'. The finding correctly adds that the file is one pay group and one run, which is a row 23 point, not a period point."
+  },
+  {
+   "id_or_column": "Row 7 - Employer NIT (casilla 5)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EMI position G is a 9-digit number with no dots or hyphens in all 261 blocks, and the check digit is held separately in position H. This matches J 'N (no dots, no hyphens)' and the NIE033 join in M7. It is employer data, not personal data."
+  },
+  {
+   "id_or_column": "Row 8 - NIT verification digit (casilla 6)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EMI position H is one digit, the same in all 261 blocks. Independently re-computed with the DIAN modulus-11 algorithm on the EMI NIT: the result equals position H. Consistent with length 1, N."
+  },
+  {
+   "id_or_column": "Row 13 - Corporate name (casilla 11)",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "EMI positions B and F hold the company name without the internal '1764 - ' prefix shown in the G2N title row 1. M13 says DIAN auto-fills the name from the RUT, so this is consistent."
+  },
+  {
+   "id_or_column": "Row 22 - Base work income (casilla 77) + change map T22",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "The Conflict stays a query (decision 8); there is no M22 edit (not_applied). The T22 factual correction is RIGHT and the round-1 verifier was WRONG. Master Data BE 'Tax Procedure 1' = 3 for 9 employees, and all 9 are in the Base of Withholding and the G2N (both hold the same 261 IDs). 7 have % Retention 0.2 and V = 20.00% of Income Total G. The other 2 have % Retention 0 with V/G = 15.88% and 34.33%. Both IDs the round-1 verifier called 'absent from the Base of Withholding' are in it at rate 0. It appears the round-1 verifier treated '% Retention 0.2' as 'in the run'. This also contradicts the fact '9 in Master Data, 7 in the run' quoted in the 15 Oct apply brief for CO-DIAN-002: Wallisson should know that this approved fact is replaced by data, not re-decided. Minor, finding only (not in any proposed text): of the 6 unlabelled IDs below the G2N GRAND TOTAL (column U, rows 279-284), the one Procedure-1 employee is at 39.5% of the G2N 'Gross Salary' (AZ) but 37.8% of Base of Withholding Income Total G. The other percentages in the finding use G, so the basis is inconsistent. The 5 Procedure-3 IDs in the list (4 at 20%, 1 at 34.3%) are confirmed."
+  },
+  {
+   "id_or_column": "Row 23 - Withholding work income (casilla 93), change map M23",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "The verdict and the 'current' text are confirmed: M23 'current' equals the DRAFT cell exactly. These additions are confirmed: the NE RetencionFuente match (261/261, 1,468,500,598); the one pay group / one run scope; the Mapping sheet sends 21114, 21619, 21129, 25832, 25833 and 25834 to SVA_2. The descriptions 'Theoretical income Tax-5011' and 'Theoretical Income Tax - Ajuste - 5035' are evidenced in the client's ConsolidadoCCT 'Acumulados' sheet; that sheet covers Jun-2023 to May-2024, so it has no Sep-2026 value. CORRECTION TO FOLD IN before approval: the sentence 'a further 144,635,503 of WT 2552 for 97 IDs outside that pay group (93 of them paid WT 61100 ... and WT 62838 ...)' is accurate in numbers but misleading in weight and scope. The 93 advance-paid IDs carry only 42,067,461. The other 4 IDs carry 102,568,042 (71% of the gap) and were paid termination-type WTs: 62116 'Vacation Terminations' (3), 62110 severance cash-out (2), 62203 'Reconciliations PMI additional payment- 541Q' (2), 62115 'Retirement Allowance' (1). They may be CO - Monthly leavers paid in settlement runs, not another pay group. Suggested wording: '...for 97 IDs not in that run (93 paid weekly / exceptional advances WT 61100 / 62838, 42,067,461; 4 paid termination or settlement items such as WT 62116 / 62110 / 62203 / 62115, 102,568,042)'. Replace 'outside that pay group' with 'outside that run'. No masked ID or NAME token in the text."
+  },
+  {
+   "id_or_column": "Row 23 - change map T23 (Query to RA)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "'current' equals the DRAFT cell. Item (4) is consistent with the corrected Procedure-3 facts. Item (5) lists the SVA_2 WTs exactly as in the Mapping sheet (2552, 21330, 21114, 21619, 21129, 25832, 25833, 25834, 21140, 21155). Item (6) figures are confirmed: run 1,468,500,598; 144,635,503 for 97 IDs; 21140 = 5,145,376 (13 IDs); WT 62838 = 5,000,000 + 10,505,430 = 15,505,430 for 2 run employees, with no 62838 column in REF-P201-090. SAME CORRECTION AS M23: '97 IDs in another pay group (weekly advances WT 61100 / 62838)' must become '97 IDs not in that run (93 with weekly / exceptional advances, 42,067,461; 4 with termination or settlement payments, 102,568,042)'. Also, WT 62838 is 'Exceptional Advance', not a weekly advance."
+  },
+  {
+   "id_or_column": "Row 23 - M23 caveat on NIE177 covering retiree WTs 21140 / 21155 (check 7)",
+   "original_verdict": "Explanation to improve (part of M23)",
+   "result": "needs Wallisson",
+   "reason": "The fact is confirmed: the client's Mapping sheet sends 21140 and 21155 (and 2552, 21129, 21330, 21114, 21619, 25832, 25833, 25834) to SVA / SVA_2 = RetencionFuente. The logic is also right: if that withholding is declared in casilla 94, the sum of NIE177 equals casillas 93 + 94. Two points need a decision. (i) The caveat changes the cross-report reconciliation rule of a Field Explanation because of the CLIENT's mapping, which is not a primary source (CLAUDE.md rule 2). The NIE177 content is owned by the CO-DIAN-001 draft, whose row 191 still says NIE177 = withholding on employment income, reconciles to casilla 93, and 'hypothetical WT 25834 is not withholding'. Putting the caveat in CO-DIAN-002 M23 alone would make the two drafts disagree. Meanwhile the M23 phrase 'the client's electronic-payroll mapping already reports all of them as RetencionFuente' lists 25834 next to WTs that CO-DIAN-001 excludes. (ii) Under the 15 Oct pattern (decisions 6 and 9), open points go to column T only. DECIDE: either (a) keep the caveat only in T23 item (5) and T25, and leave M23 at 'Must reconcile to the sum of RetencionFuente (NIE177)...' until RA answers the WT 62151 / pension question; or (b) approve the caveat in M23 AND make the matching change to CO-DIAN-001 row 191 in the same cycle. In both cases, state in M23 that inclusion in the client's mapping is client practice, not confirmation that 25834 / 21114 / 21619 are withholding practised."
+  },
+  {
+   "id_or_column": "Row 24 - Base pension income (casilla 78) + change map T24",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Stays a query: no M24 edit, and the text 'The spec rule stays (decision of 15 Oct 2026)' is retained, so decision 6 is not re-opened. 'current' equals the DRAFT cell. Re-computed on the Form 220 sheet NOM_U_203: only 34 rows are real recipient rows (Campo 24 = 13, tax year 2025-01-01..2025-12-31); the remaining ~617 are template residue. On the 'pern' match to the Accumulated Report, WT 62151: 19 of 20 IDs matched, all with Campo 46 > 0, Campo 50 = 0, no other income casilla, and Campo 60 > 0 for 16 of 19. WT 62152: 6 of 6 matched, Campo 46 > 0, Campo 50 = 0 and Campo 60 = 0 for all 6. No row in the file uses Campo 50. In the Accumulated Report, WT 62154 has 453 IDs in Sep-2026, total 626,485,005, max 22,088,675 (< 1,000 UVT = 52,374,000), and no withholding WT (only flag WT 64552). WT 62152 has 5 IDs in Sep-2026 with no withholding. None of the 62154 pensioners is in the Form 220 file. The Mapping sheet sends 62151-62154 to EOT_3. TWO CORRECTIONS TO FOLD IN: (1) 'with their whole income in casilla 46 ..., casilla 50 = 0 and the withholding in casilla 60' must say the withholding in casilla 60 applies to the WT 62151 retirees (16 of 19); the WT 62152 retirees have casilla 60 = 0. (2) 'The question is therefore specific to WT 62151' is too strong. Only the WITHHOLDING question is specific to 62151. The base-classification question (casilla 78 vs 77) also covers WT 62152, which the client's Form 220 equally puts in 'Otros pagos'. Suggested: 'The withholding question is specific to WT 62151; the classification of WT 62151 and 62152 payments (casilla 78 vs 77) is open for both.'"
+  },
+  {
+   "id_or_column": "Row 25 - Withholding pension income (casilla 94) + change map T25",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Stays a query, with no M25 edit. 'current' equals the DRAFT cell. Re-computed: WT 21140 = 5,145,376 in Sep-2026 for 13 IDs, all among the 16 WT 62151 payees. Mapping: 21140 and 21155 go to SVA_2. 'Income Tax Pensioner' is the client's description of 21155 in the ConsolidadoCCT Acumulados sheet, and 21155 has no value in the round-1 Accumulated Report. The added sentence is conditional and does not change the pension rule (decision 6 intact). Its reconciliation consequence depends on the M23 caveat decision above."
+  },
+  {
+   "id_or_column": "Accumulated Report gap (5): at least 1,618,281,477 vs 1,468,500,598; 97 IDs / 144,635,503; 93 with 61100 / 62838",
+   "original_verdict": "CONFIRMED (missing_runs_for_all_runs_test)",
+   "result": "confirmed",
+   "reason": "Sep-2026 column: 2552 = 1,543,834,892, which equals the G2N for the 261 run IDs 261/261. 97 non-run IDs carry 144,635,503, and all 93 advance-paid IDs carry BOTH 61100 and 62838. 2552 + 21330 69,301,209 + 21140 5,145,376 = 1,618,281,477. The weighting caveat is in the row 23 items above: 102,568,042 of the gap is on 4 IDs with termination or settlement payments. The missing-runs list should therefore also request each Sep-2026 termination / settlement run, which item 4 of missing_runs already does in part."
+  },
+  {
+   "id_or_column": "Form 220 evidence (6): WT 62151 19 matched / 62152 6 matched, casilla 46, casilla 50 = 0; WT 62154 453 pensioners below 1,000 UVT with no withholding",
+   "original_verdict": "CONFIRMED",
+   "result": "confirmed",
+   "reason": "Counts and values reproduced exactly (see row 24). The example 18,429,540 is a Campo 46 value of a WT 62152 retiree. Matching relies on the masked 'pern' column equalling the masked Accumulated Report ID, which is consistent across the masked set: 25 of 26 retiree IDs match."
+  },
+  {
+   "id_or_column": "Spot-check row 41 - Rate (sheet 2, casilla 146)",
+   "original_verdict": "Not evidenced",
+   "result": "confirmed",
+   "reason": "The verdict stands, with no spec text affected. The finding's numbers are wrong and should be corrected if quoted. G2N EF '52552' is filled for 98 employees, not 99, with values 2-31, not 10-31. It equals % Retention x 100 rounded half-up for 96. The 2 that differ are not '.5 rounding' cases: they are employees with % Retention 0 that carry 52552 = 25 and 28. It is blank for all 7 employees at 20% of gross: confirmed."
+  },
+  {
+   "id_or_column": "Spot-check row 39 - Recipient country",
+   "original_verdict": "Not evidenced",
+   "result": "confirmed",
+   "reason": "REC position K counts are reproduced: CO 255, CR 2, CA 1, DO 1, CH 1, MX 1. Department / municipality are 05 / 05001 for all 261. No tax-residence attribute exists in any file. No change was proposed, which is consistent with decision 9 (code standard left with RA)."
+  },
+  {
+   "id_or_column": "Change map 'current' texts (M23, T22, T23, T24, T25)",
+   "original_verdict": "-",
+   "result": "confirmed",
+   "reason": "All 5 'current' values equal the DRAFT workbook cells character for character (sheet 'Formulario 350 Spec', header row 2)."
+  },
+  {
+   "id_or_column": "No 15 Oct decision re-opened",
+   "original_verdict": "-",
+   "result": "confirmed",
+   "reason": "Rows 22, 24 and 25 keep their Field Explanations (decisions 6 and 8). T24 and T25 keep 'The spec rule stays'. The T22 change corrects quoted facts only. The M23 additions extend the already-approved DECISION PENDING item (b). The only open judgement is the M23 caveat (see the needs-Wallisson item). The T22 correction replaces a fact listed in the 15 Oct apply brief ('9 in Master Data, 7 in the run'); that fact was a round-1 verifier error, so this corrects a fact and does not re-open a decision."
+  },
+  {
+   "id_or_column": "No masked ID / NAME token in proposed texts",
+   "original_verdict": "-",
+   "result": "confirmed",
+   "reason": "Scanned every 'proposed', 'reason', 'basis', 'vc_sentence' and version_control string, plus the whole crosscheck JSON. No NAME_/ENTID_/SHORTID_/POSTAL_/ADDRESS_/MASKED_TEXT token appears, and no 6+-digit number matches an employee ID in the G2N or Accumulated Report."
+  }
+ ],
+ "agreement_rate": 0.952
+}

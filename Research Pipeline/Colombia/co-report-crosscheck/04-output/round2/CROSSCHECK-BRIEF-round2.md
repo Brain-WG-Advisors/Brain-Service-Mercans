@@ -1,0 +1,25 @@
+# Round 2 cross-check brief (15 Oct 2026)
+
+Round 2 checks the v1.1 DRAFT specs in `02-specs-out/` (NOT the files in `01-specs/`) against 4 new client files received from Cinthya, masked in `03-client-reports-masked/round2/`. Everything is written under `04-output/round2/`; nothing from round 1 is overwritten.
+
+## Inputs
+- Spec inventories of the drafts: `04-output/round2/specs/<SPEC>.json` (field ids, `_row`, all 21 columns). The draft workbook itself: `02-specs-out/<SPEC>-...-DRAFT-2026-10-15.xlsx`.
+- Round-2 report map: `04-output/round2/report-spec-map.json`; profiles: `04-output/round2/profiles/*.json`; masked workbooks: `03-client-reports-masked/round2/*.xlsx`.
+- Round-1 outputs for comparison (read-only): `04-output/<SPEC>-crosscheck.json`, `04-output/<SPEC>-verification.json`, `04-output/<SPEC>-changemap-APPROVED.json`, round-1 profiles `04-output/profiles/`, round-1 masked reports `03-client-reports-masked/*.xlsx` (Vertical G2N Dynamic, Base of Withholding, Accumulated Report, Master Data).
+
+## Round-2 files
+| File | What it is | Checks |
+|---|---|---|
+| `Formulario 220.xlsx` (from .xlsm, values only) | Client's working Form 220: sheet NOM_U_203 = one row per employee, columns "Campo 24".."Campo 60" = casillas 24-60 (header row 2, ~650 rows); CIR 2024 = single-employee certificate layout (labels over-masked, use NOM_U_203); DATOS = employer data | CO-DIAN-004 field by field (DIRECT) |
+| `Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx` | Monthly gross-to-net, ALL payroll runs of Sep-2026 combined, header row 12, 261 employees, one column per wage type ("62100 - Ordinary Salary" ...), identity columns A-D masked | CO-DIAN-001 (monthly document = all runs) and CO-DIAN-002 (Form 350 sums all runs): compare totals with the round-1 Vertical G2N Dynamic (one run, REF-P201-090) and the round-1 Base of Withholding (one run, REF-P201-065) |
+| `Monthly_fixed.xlsx` | Nómina Electrónica document file in segment form: sheet "Nómina", segment code in column A (ENC, EMI, REC, PAG, FEP, ITE, ITS, SPE, TOT, SOT, EAX, SVA, SSP, EBO, ECO, SIN, EBN, EVC, EOT, EVO, SLI, ETR, EVA, EIN, ECE), 261 ENC blocks. Personal fields in REC rows are tokenised (names, address) or digit-substituted (document, worker code) | CO-DIAN-001 DIRECT: map each segment/position to the NIE fields of the draft; check mandatory elements, formats, totals |
+| `Validado ConsolidadoCCT_ Monthly  sep.xlsx` | The client's validation of the same segments (sheet ConsolidadoCCT, key in column I, validation columns A-H), `Mapping` (WT -> segment/field), `Pivot check` (ID Number x segment totals), `Acumulados` (= round-1 Accumulated Report layout, header row 7, extra columns), `Validacion netos` (per-employee net reconciliation: Acumulados vs Electronic Payroll vs Gross) | CO-DIAN-001: use `Mapping` as the client's wage-type-to-element table; CO-DIAN-002/004/005: `Acumulados` is the same source as round 1 |
+| `E-Payroll_00204909_2026-09-01.txt` | NOT masked, NOT analysed (unmasked flat file; its probe shows the same segments as Monthly_fixed for one employee). Do not open it. | none |
+
+## Rules (same as round 1)
+- Verdict per spec field: Aligned / Explanation to improve / Format mismatch / Conflict / Not evidenced. Judge DATA COVERAGE and MEANING. Where the client and the draft disagree on a statutory rule, record a Conflict and cite the official source the draft relies on; never "fix" the draft to match the client.
+- The drafts already carry the round-1 corrections and Wallisson's decisions of 15 Oct 2026 (see the Version Control sheet of each draft and the approved change map). Do NOT re-open decided points; if the new data contradicts a decided point, say so explicitly as a NEW finding with the evidence.
+- Never invent a column, code, field or mapping. Not in the data = "Not evidenced".
+- Never open `02-client-reports-raw/` or `99-local-only/`. Masking tokens (treat as masked): NAME_n, digit-substituted IDs/accounts, usernnnn@masked.example, 1900-01-01, ENTID_n, SHORTID_n, POSTAL_n, MASKED_TEXT. Bank, EPS, AFP names, WT descriptions, job titles are not personal data. Masked employee IDs must not appear in any proposed spec text.
+- Output: `04-output/round2/<SPEC>-crosscheck-r2.json` with the round-1 schema (`fields[]` with id = `_row`, name, verdict, report_evidence[], finding, proposed_explanation, official_source; `uncovered_report_columns[]`; `summary`), plus `04-output/round2/<SPEC>-changemap-r2-PROPOSED.json` in the APPROVED schema of round 1 (sheet, cell, row, column_letter, field_id, field_name, current = exact current text of the DRAFT cell, proposed, reason, basis, vc_sentence; mark_corrected_rows; version_control; not_applied; summary) holding ONLY changes backed by the new evidence. `current` must be read from the DRAFT workbook in `02-specs-out/`.
+- English everywhere. Do not edit any spec.

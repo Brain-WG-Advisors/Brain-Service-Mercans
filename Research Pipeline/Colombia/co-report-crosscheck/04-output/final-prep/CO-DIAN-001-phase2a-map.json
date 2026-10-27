@@ -1,0 +1,35 @@
+{
+ "spec": "CO-DIAN-001",
+ "final": "05-final/CO-DIAN-001-NominaElectronica-Spec.xlsx",
+ "source": "04-output/PHASE2A-WITHHOLDING-2026-10-21.md",
+ "edits": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "A39",
+   "items": [
+    "2A-withholding"
+   ],
+   "current": "- The monthly sum of RetencionFuente (NIE177) across all employees must reconcile to Form 350 casilla 93 (withholdings - employment income, natural persons) for the same period - CO-DIAN-002.",
+   "proposed": "- The monthly sum of RetencionFuente (NIE177) across all employees must reconcile to Form 350 casilla 93 (withholdings - employment income, natural persons) plus casilla 94 (withholdings - pension income) for the same period - CO-DIAN-002."
+  },
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M191",
+   "items": [
+    "2A-withholding",
+    "2A-pass2-fix"
+   ],
+   "current": "Withholding at source sobre employment income. RESIDENT: the ET art. 383 progressive table (0 / 19 / 28 / 33 / 35 / 37 / 39%) applied to the art. 388 depurated monthly base, under Procedure 1 or Procedure 2. NON-RESIDENT: the flat 20% of ET art. 408 on the gross payment, with no art. 388 depuration, no 25% exempt income, no art. 387 deductions and no tax-free band (DIAN Concept 011108 of 29 June 2026). Cross-report: the sum of this element across all employees for the month must reconcile to Form 350 casilla 93.\n\nSource: WT 2552 'Income Tax (employee)' (Deductions grouping; 0-value rows in the Non Cash grouping are ignored). Only withholding actually practised is reported: WT 21330 'Personal Income Tax Withholding (Theoretical)' is included where it carries the amount actually deducted from the employee and remitted to DIAN; a theoretical, hypothetical or contingent amount is never reported. The other withholding WTs 21129 (terminations), 25832 (stock-award vesting) and 25833 (IC local) are included; the hypothetical-tax WT 25834 is not withholding. The withholding attribute of each wage type comes from the WTC. The monthly sum must reconcile to Form 350 casilla 93.",
+   "proposed": "Withholding at source on employment income and on the pension income the employer pays itself. RESIDENT: the ET art. 383 progressive table (0 / 19 / 28 / 33 / 35 / 37 / 39%) applied to the art. 388 depurated monthly base, under Procedure 1 or Procedure 2. NON-RESIDENT: the flat 20% of ET art. 408 on the gross payment, with no art. 388 depuration, no 25% exempt income, no art. 387 deductions and no tax-free band (DIAN Concept 011108 of 29 June 2026). Cross-report: the sum of this element across all employees for the month must reconcile to Form 350 casillas 93 plus 94.\n\nSource: WT 2552 'Income Tax (employee)' (Deductions grouping; 0-value rows in the Non Cash grouping are ignored). Only withholding actually practised is reported: WT 21330 'Personal Income Tax Withholding (Theoretical)' is included where it carries the amount actually deducted from the employee and remitted to DIAN; a theoretical, hypothetical or contingent amount is never reported. The withholding WT 21129 (terminations) is included, the withholding WTs 21140 'Personal Income Tax Withholding-Retirees- 6799' and 21155 'Income Tax Pensioner' on the pensions the employer pays itself are included, and 25832 (stock-award vesting) and 25833 (IC local) are included where the WTC classifies them as withholding actually deducted from the employee; the hypothetical-tax WT 25834 is not withholding. The withholding attribute of each wage type comes from the WTC. The monthly sum must reconcile to Form 350 casillas 93 plus 94."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C35",
+   "items": [
+    "2A-withholding"
+   ],
+   "current": "Monthly: SUM(NIE177) over all employees must equal Form 350 casilla 93 after the nearest-1,000 rounding. SUM(NIE163), SUM(NIE166) and SUM(NIE168 + NIE170) must equal the PILA totals for health, pension and the solidarity fund, allowing for PILA's round-up-to-100. Annually: the accumulation of each Earnings element must equal the corresponding Form 220 casilla and Format 2276 numeral.",
+   "proposed": "Monthly: SUM(NIE177) over all employees must equal Form 350 casillas 93 plus 94 after the nearest-1,000 rounding. SUM(NIE163), SUM(NIE166) and SUM(NIE168 + NIE170) must equal the PILA totals for health, pension and the solidarity fund, allowing for PILA's round-up-to-100. Annually: the accumulation of each Earnings element must equal the corresponding Form 220 casilla and Format 2276 numeral."
+  }
+ ]
+}

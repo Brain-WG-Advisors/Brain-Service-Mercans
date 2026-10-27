@@ -1,0 +1,115 @@
+{
+ "spec": "CO-CESANTIAS-006",
+ "checked": [
+  {
+   "id_or_column": "E08 (row 11) Seed-from-last-PILA-return indicator",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Re-computed: exactly 10 employees have their last salary (62100/62140) in Oct-Dec 2025; all 10 are ordinary-salary, all 10 received 62110 + 62117 in the termination month (or the month after), and none has a 01/02/2026 25827 payment. The contradiction is inside the spec: the E08 Field Explanation and the Report Matrix bullet 'NOT DERIVABLE FROM THE MONTHLY FILINGS' say a June leaver 'is owed a pro rata deposit', while Population Rules Step 0 selects only employees in service at 31 December and excludes '(2) employees who LEFT during the year, whose severance savings was settled and paid in the final settlement' (its edge case adds 'A leaver included = double payment'). Law 50 of 1990 art. 99 num. 4 (balances not deposited at termination paid directly) supports the Population Rules reading; RA confirmation of the citation is still pending as the cross-check says. The second half (103 integral-salary employees, 0 with 25827) is confirmed. Proposed text is supported; the Report Matrix sentence needs the same correction. One overstatement in the finding: 'employees leaving in Jan-Feb 2026 also had the 2025 balance paid directly (62126/62110)' holds for 51920832 (62126 720,648 in Feb) and 92963225 (62110 5,980,122 in Jan) but NOT for 92256020 - |63814| Jan = 4,413,519, no 25827, no 62126, and the Feb 62110 of 935,967 equals only the 2026 accruals (508,056 + 427,911). That 2025 balance is not evidenced as paid or deposited in this report; worth a client query, but it does not change the verdict."
+  },
+  {
+   "id_or_column": "T09 (row 25) Severance-savings fund code",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Spec N(2) code (02/03/10/15/19); Master Data holds only 'Severance Fund Name' (string, over-masked as NAME_nnnn), 11 distinct non-blank values, 63 blanks. Joining on ID Number = Employee ID: 12 blank-fund employees received a Feb-2026 25827 payment; 64 of the 88 integral-salary employees present in Master Data carry a fund name. All figures reproduced. The phrase 'several spellings per fund are likely' is an inference (masking prevents checking) and should stay hedged."
+  },
+  {
+   "id_or_column": "T16 (row 33) Department code (DANE)",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'Employee Address - Department' is a text cell holding 3-letter abbreviations: 18 distinct values (DC 127, ANT 60, CUN 28, VAC 20, ATL 8, ... incl. ON, VD, JAL) and 3 blanks. No 2-digit DANE code anywhere. Reproduced."
+  },
+  {
+   "id_or_column": "T17 (row 34) Municipality code (DANE)",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'City' is free text with 60 distinct values, including spelling variants of Bogota/Medellin, neighbourhoods (Suba Compartir, Portales del Norte), a department (Cundinamarca) and foreign cities (Burlington, Lausanne, Zapopan- Jalisco). No municipality code. Reproduced."
+  },
+  {
+   "id_or_column": "T18 (row 35) Employee landline telephone",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'Phone number' digit lengths: 12 digits for 237, 10 for 8, 14 for 3, 11 for 2, 7 for 1 (plus 3 junk values of 1-3 digits and 9 blanks); no landline/mobile type. Reproduced. Proposed text is consistent with the existing zero-fill rule."
+  },
+  {
+   "id_or_column": "T20 (row 37) Employee hire date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'Hire Date' and 'Original Hire Date' are text DD-MM-YYYY for all 261; 'Adjusted Service Date' is text YYYY-MM-DD. Verdict and sourcing advice (use 'Hire Date', convert) are supported. COUNT CORRECTION for the proposed text: Hire Date differs from Adjusted Service Date for 21 of 261 (not 19) and from Original Hire Date for 40 of 261 (not 38); the examples quoted (02-04-2025 / 02-07-2019 / 2019-07-02; 01-05-2005 / 1991-12-02) are correct. The same '19' appears in the uncovered-column note for 'Adjusted Service Date'."
+  },
+  {
+   "id_or_column": "Accumulated Report: WT 62110 / 62117 Cash-out of Severance Pay / of Interest",
+   "original_verdict": "Missing in spec",
+   "result": "confirmed",
+   "reason": "110 employees carry 62110 and the same 110 carry 62117 in the 12-month window, including all 10 Q4-2025 leavers. The spec has no row/element for the amount of in-year partial or final direct payments; it appears only conceptually in Population Rules Step 1 (f). Example 27114435: 62110 2,120,000 in Nov-2025, balance 9,051,613 = 68040 11,171,613 - 2,120,000. Note: the deduction can only be reproduced for 174 of 285 balances from this report because Jan-Sep 2025 payments are outside its window."
+  },
+  {
+   "id_or_column": "Accumulated Report: WT 62126 Advance Severance Last Year",
+   "original_verdict": "Missing in spec",
+   "result": "confirmed",
+   "reason": "62126 is non-zero for 54 employees in 01/01/2026 (plus 1 in Feb and 2 in Mar 2026). No spec field or rule covers a direct payment of an already consolidated balance; E92 is all-or-nothing. Whatever RA decides on its lawfulness, the spec must say how it is treated, so the gap is real."
+  },
+  {
+   "id_or_column": "T03 (row 18) Contributor document type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Reproduced: Citizenship Card ID 247, Indentity Card for Foreigners 15, Identity Card 6, National ID 11; 14 employees with more than one ID column, 2 with none; no document-type column. Proposed text keeps the spec's code list and flags the column-to-code mapping for RA - supported."
+  },
+  {
+   "id_or_column": "T10 (row 26) Number of days worked",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Unpaid-leave exclusion is in Population Rules Step 1 but not in the Field Explanation - confirmed. 68029 anomalies reproduced: 34989313 (hire 16-12-2025) shows 0 days but was deposited 333,333; the 10-02-2025 hire (32385108) shows 300 days while the client's own interest 62127 (1,271,688 = 12% x 11,884,930 x 321/360) uses 321, so 68029 is inconsistent with the client's own calculation (same for the 17-02-2025 hire: 300 vs 314). COUNT CORRECTION for the proposed text: 68028 = 68040 x 68029/360 holds for 204 of 284 employees (not 281); 'the rest differing by in-year partial payments' is only partly demonstrable (Jan-Sep 2025 payments are outside the report window) and should be hedged."
+  },
+  {
+   "id_or_column": "T12 (row 28) Basic salary reported in the last month",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Reproduced: employee 27114435 in 01/12/2025 has 63807 = 8,448,432 and 62100 = 7,603,589. Across December 2025, 63807 = 62100 for 190 of 286 employees and 63807 > 62100 for 96 (never lower), consistent with 62100 being the prorated paid amount and 63807 the contractual monthly salary. Pointing T12 to 63807 matches the spec's own edge case ('the December basic is still the contractual monthly salary, not the amount actually earned'). Supported."
+  },
+  {
+   "id_or_column": "T14 (row 30) Value of the severance savings deposited",
+   "original_verdict": "Explanation to improve",
+   "result": "needs Wallisson",
+   "reason": "Key figures reproduced: 25827 Feb + 62126 Jan = |63814| Jan for 280 of 282 employees (the 2 exceptions, 49200024 and 34989313, are late-December hires with no January balance); 236 deposits, 54 January 62126 advances; examples 16,074,021 = 16,000,000 + 74,021 and 9,051,613 = 8,466,400 + 585,213 are correct; 68040 > December 63807 for 202 of 236 depositees. The verdict is right. The judgement call is the proposed rule 'T14 carries the amount actually deposited = consolidated balance minus partial payments already made directly', which codifies the client's January 62126 practice into the spec. Decide: (a) adopt the net-of-62126 rule now, or (b) keep T14 = consolidated balance net only of lawful CST art. 254 partial payments (62110) and hold the 62126 sentence until RA confirms that a January direct payment of an already consolidated balance is lawful - if it is not, the 54 cases are short deposits and the spec must not copy them. Also note the 'liquidation less 62110' equation is reproducible for only 174 of 285 balances with this report's window."
+  },
+  {
+   "id_or_column": "T15 (row 32) Employee residential address",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Address Line 1 filled 261/263, Address Line 2 159/263 (60%); Country non-CO for 6 (CA, CR, cr, DO, CH, MX) and lower-case 'co' for 2. Concatenation and abroad-residence query are supported."
+  },
+  {
+   "id_or_column": "IN01 (row 45) 31 December severance-savings balance",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "|63814| Jan = 25827 + 62126 for 280/282 (as above); 68028 Dec equals |63814| Jan for 238 of 285 ('most but not all' is accurate); 64999 is about twice 68028 in 1,983 cells (of 3,715 non-zero cells by this count; the cross-check said 3,569 - immaterial). Supported."
+  },
+  {
+   "id_or_column": "IN02 (row 46) Annual interest at 12%",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62127 is non-zero for 284 employees in 01/01/2026; 281 of 284 equal round(12% x |63814 Jan| x 68029 Dec / 360) within 1 peso (e.g. 12% x 6,422,811 = 770,737); the 3 exceptions are explained by 68029 errors (32385108, 35067540 use 321/314 days) and one late-2025 hire. 63815 Dec differs from 62127 for 104 employees ('about 100' correct). 4 payments in Feb/Mar 2026: 2 late-December hires (Feb) and 2 employees whose last salary is Mar-2026 (leavers) - as stated. Supported."
+  },
+  {
+   "id_or_column": "E92 (row 51) Direct-payment discharge evidence",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Example reproduced (27114435: balance 9,051,613; 62126 8,466,400; 25827 585,213). The all-or-nothing gap is real and the proposed text routes the lawfulness question to RA. Its sentence 'a partial direct payment ... reduces T14' depends on the T14 decision above and should be aligned with whatever Wallisson decides there."
+  },
+  {
+   "id_or_column": "E11 (row 14) Total value payable [Aligned sample, random.seed(42)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Sum of 25827 in 01/02/2026 = 2,064,808,759 over 236 employees, no non-integer values; 65805 equals 25827 for every employee; neither WT appears in any other period."
+  },
+  {
+   "id_or_column": "E03 (row 6) Accrual year [Aligned sample, random.seed(42)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "25827 appears only in 01/02/2026; example 34209535: 68028 Dec-2025 = 6,422,811 = 25827 Feb-2026 with 68029 = 360. February 2026 deposit therefore relates to accrual year 2025, as the explanation says."
+  }
+ ],
+ "agreement_rate": 0.944,
+ "sampling_note": "Aligned sample: 8 Aligned fields, k = ceil(0.2*8) = 2, python random.seed(42); random.sample(['E03','E11','T04','T05','T06','T07','T08','T19'], 2) -> ['E11','E03']. Not evidenced fields were not in scope."
+}

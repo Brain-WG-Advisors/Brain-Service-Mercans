@@ -1,0 +1,310 @@
+{
+ "round": 2,
+ "date": "2026-10-15",
+ "reports": [
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "NOM_U_203",
+   "role": "direct",
+   "specs": [
+    "CO-DIAN-004",
+    "CO-DIAN-005"
+   ],
+   "evidence": [
+    "Campo 24",
+    "Campo 25",
+    "Campo 26",
+    "Campo 30",
+    "Campo 31",
+    "Campo 32",
+    "Campo 46",
+    "Campo 60"
+   ],
+   "confidence": "medium",
+   "rationale": "Client's working table of DIAN Form 220 (Certificado de Ingresos y Retenciones): one row per person, header row 2, columns 'Campo 24'..'Campo 60' = casillas 24-60 of the current form (casilla numbering confirmed against the CIR 2024 sheet labels: 36 salaries ... 46 'Otros pagos', 50 pensions, 52 total gross, 53-58 contributions, 59 average income, 60 withholding). Casilla 35 appears as 'Textbox113' (05001); note Campo 34 (department code) also holds '05001' rather than a 2-digit department code - format point for the cross-checker; an extra 'Textbox100' column (=1 on every row) has no evidenced meaning. Tax year 2025 (Campo 30 = 2025-01-01, Campo 31 = 2025-12-31, Campo 32 issue date 2026-03-31), place MEDELLIN. Only 34 of 651 numbered rows carry values (values-only copy of an .xlsm). VERIFIED POPULATION: all 34 are PENSIONERS - their personnel numbers ('pern') and documents (Campo 25) all appear in the Acumulados tab of the ConsolidadoCCT file with pensioner wage types (62151-62154 retirement payments, 21154/21155 pensioner AFP/income tax), and none appears among the 261 active employees of the Sep-2026 G2N. For all 34 the whole income is in Campo 46 'Otros pagos' (sum 2,731,679,473), casilla 50 'Pensiones de jubilacion, vejez o invalidez' is 0, casilla 52 'Total ingresos brutos' is 0 and 53-59 are 0; Campo 60 (withholding) is non-zero for 23. This is a potential CONFLICT with the casilla 50 / casilla 52 rules of the draft - for the CO-DIAN-004 cross-checker. Right-hand columns ('pern', 'len', 'check pern', 'putn co', 'cruce con el req', 'VALOR RETENCION A INCLUI', 'DIF') are client control columns. CO-DIAN-005 listed because Formato 2276 carries the same per-beneficiary annual concepts (pensions numeral N21, other payments N17, withholding N29); for 2276 this sheet is cross-reference evidence only. Medium: direct for 220 but evidences only the pensioner population and only casillas 24-35, 46 and 60 with non-zero data.",
+   "hypothesis_check": "Confirmed as direct for CO-DIAN-004 (one row per person, Campo 24..60 = casillas). Refined: the populated rows are pensioners only, tax year 2025, not active employees."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "CIR 2024",
+   "role": "direct",
+   "specs": [
+    "CO-DIAN-004"
+   ],
+   "evidence": [
+    "4. Numero de formulario",
+    "5. Numero de Identificacion Tributaria (NIT)",
+    "24. Tipo de documento",
+    "25. Numero de Identificacion",
+    "Otros pagos (46)",
+    "Total de ingresos brutos (Sume 36 a 51) (52)",
+    "Valor de la retencion en la fuente por rentas de trabajo y pensiones (60)",
+    "Total retencion ano gravable (sume 60 + 74) (75)"
+   ],
+   "confidence": "high",
+   "rationale": "Single-person printable certificate in the official layout: casillas 4-11 (withholding agent; NIT/DV populated), 24-29 (person), 30-35 (period and place; several labels over-masked as NAME_n tokens), 36-52 income concepts with labels, 53-60 contributions/withholding, 61-75 other income received/withheld, 76-78 assets/debts ('Deudas vigentes a 31 de Diciembre de 2024' - year label not updated), 79-82 dependant, the six ET art. 380 certification statements and 'Firma del Trabajador o Pensionado'. The example printed has value only in casilla 46 'Otros pagos' (18,429,540) with casilla 52 = 0, the same pattern as NOM_U_203. Direct layout evidence for every casilla label and order of CO-DIAN-004.",
+   "hypothesis_check": "Confirmed (single-employee certificate layout; labels partly over-masked, values to be read from NOM_U_203)."
+  },
+  {
+   "file": "Formulario 220.xlsx",
+   "sheet": "DATOS",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-004"
+   ],
+   "evidence": [
+    "Informacion Empleador:",
+    "Numero Identificacion Trib:",
+    "Codigo Verificacion:",
+    "Razon Social:"
+   ],
+   "confidence": "medium",
+   "rationale": "Parameter block of the workbook: employer NIT, verification digit and corporate name (masked) feeding casillas 5, 6 and 11 of Form 220. Title still reads 'Certificado de Ingresos y Retenciones por Rentas de Trabajo y de Pensiones - Ano gravable 2019' (template leftover). Source for the withholding-agent block only.",
+   "hypothesis_check": "Confirmed (employer data)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-001",
+    "CO-PILA-003",
+    "CO-DIAN-002"
+   ],
+   "evidence": [
+    "Cod Employee",
+    "Hire Date",
+    "Days Worked",
+    "62100 - Ordinary Salary- 0003",
+    "62140 - Integral Salary- 0423",
+    "2552 - Income Tax (employee)",
+    "Gross Salary",
+    "64990 - Social security base"
+   ],
+   "confidence": "high",
+   "rationale": "Horizontal gross-to-net, one row per employee (261 + GRAND TOTAL, header row 12), one column per wage type, then Gross Salary, deductions (EPS 2554, AFP 2556, FSP 2553, income tax 2552, AFC 25800-25806, FVOL 2581x/25823, union fees, loans), Total Deductions, Net Pay, non-cash informative WTs, SS/parafiscal bases (64990-64996, 63011) and employer contributions (2560 ARL, 2564 EPS, 2567 AFP, 25110 CCF, 25111 ICBF, 25112 SENA). HYPOTHESIS OVERTURNED on 'all runs combined': the title block reads Payroll id REF-P201-090, report generation date 2026-09-16 - the SAME payroll id and date as the round-1 Vertical G2N Dynamic - and a cell-by-cell check shows all 31,320 employee x wage-type values equal the round-1 Vertical G2N (gross equal for 260 of 261 employees). It is therefore the same single run in horizontal layout, not a consolidation of all September runs; it cannot evidence the 'all runs' total of Form 350 or of the monthly NE document. Its Gross Salary / Total Deductions / Net Pay are the reference the client uses in 'Validacion netos' (columns K/L/M = these values). Source for CO-DIAN-001 devengados/deducciones, CO-PILA-003 bases and employer contributions, and CO-DIAN-002 (2552 withheld per employee; no depurated base). Extra client columns: '52552', '64993 formula'.",
+   "hypothesis_check": "Partly overturned: source for CO-DIAN-001/CO-DIAN-002 confirmed (and CO-PILA-003 added), but it is NOT a combination of all September runs - it is payroll REF-P201-090, identical to the round-1 Vertical G2N."
+  },
+  {
+   "file": "Monthly_fixed.xlsx",
+   "sheet": "Nómina",
+   "role": "direct",
+   "specs": [
+    "CO-DIAN-001"
+   ],
+   "evidence": [
+    "ENC",
+    "REC",
+    "PAG",
+    "ITE",
+    "ITS",
+    "SPE",
+    "SVA",
+    "TOT"
+   ],
+   "confidence": "high",
+   "rationale": "Segment file of the Nomina Electronica individual document (DIAN Documento Soporte de Pago de Nomina Electronica, 'V1.0' literal, TipoXML 102, Ambiente 1, PeriodoNomina 5, COP): 3,963 rows, 261 ENC blocks = the 261 employees of the G2N (all REC worker codes found in the G2N; hire dates and days worked match 261/261). Segment code in column A, then positional fields in B..X (no header row; the profile's 'headers' are the first ENC record). Settlement period 2026-09-01..2026-09-30, generation 2026-09-24, payment date (FEP) 2026-09-22. Field order inside each segment follows the NIE XSD order (see segment_codes). This is direct evidence of the NIE fields the client populates, their formats (dates yyyy-mm-dd, amounts with 2 decimals, codes 01/00/13/47/02) and of empty fields (FechaRetiro, CUNE slot, Redondeo). CAVEAT: masking digit-substituted some AMOUNTS - REC 'Sueldo' never equals the G2N 'Salary Assigned' (0/261), ITE salary equals the masked Sueldo token in 206/261 blocks, TOT values do not reconcile with the segment amounts and 52 'DeduccionesTotal' values carry a leading zero; ENC Consecutivo (col K) no longer matches the number suffix in col L. Use the file for structure/format/coverage; take amounts from the G2N.",
+   "hypothesis_check": "Confirmed: segment-based NE document file, 261 ENC blocks, DIRECT evidence for CO-DIAN-001."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "ConsolidadoCCT",
+   "role": "direct",
+   "specs": [
+    "CO-DIAN-001"
+   ],
+   "evidence": [
+    "SEG",
+    "Validar",
+    "Concatenate",
+    "Acumulados",
+    "Electronic Payroll",
+    "Diference",
+    "Observaciones"
+   ],
+   "confidence": "high",
+   "rationale": "The client's validation copy of the same NE segment file: columns I..AF hold exactly the Monthly_fixed records (3,963 rows; identical content row by row except that column Z repeats the worker code on every row as a lookup helper). Columns A-H are validation: A segment, B 'Validar' (Yes for amount segments, Not for ENC/EMI/REC/PAG/FEP), C employee (masked), D 'Observaciones', E 'Concatenate' (code+segment key), F 'Acumulados' (segment total from the Acumulados tab), G 'Electronic Payroll', H 'Diference'. In this values-only copy G is 0 and several helper cells are #REF!, so the cached validation results are not usable, but the method (each Yes-segment of each employee must equal the sum of its mapped wage types) is evidenced. Free-text notes: an off-cycle payment stays in the accumulators but is correctly not reported in the e-payroll; WT 21803 should map to SOT_1 not SOT_3. Same masking caveat on amounts as Monthly_fixed. PII: see alerts (column E).",
+   "hypothesis_check": "Confirmed: same segments with validation columns A-H, key in column I; DIRECT for CO-DIAN-001."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Mapping",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-001"
+   ],
+   "evidence": [
+    "WT",
+    "Seg",
+    "Field",
+    "Type",
+    "HRB"
+   ],
+   "confidence": "high",
+   "rationale": "The client's wage-type to NE segment/field table (~257 WTs): e.g. 62100/62140 -> ITE_2, 62133/62225 -> EAX_1, 62523 and allowances -> EAX_2, 2554 -> ITS_2, 2556 -> SPE_2, 2553 -> SSP_2, 2552 and theoretical/IC taxes -> SVA_2, FVOL -> SVA_1, AFC -> SVA_3, garnishments -> SVA_5, housing/interest-free loan fees -> SVA_9, bank loans -> SLI_2, union fees -> SIN_2, Foncoltabaco/associations -> SOT_1, 21215 -> SOT_2, health insurance/other -> SOT_3, 62211 -> EPR_2, 62110/62126/62182/65805 -> ECE_1, 62117/62127 -> ECE_3, sick leave -> EIN_5, maternity/paternity -> ELI_4, paid leaves -> ELR_4, 79401 -> EVC_4, 79403 -> EVA_2, bonuses -> EBN_1/EBN_2, stock, pensions (62151-62155), 65821 expatriation package -> EOT_3, 26998 Net salary (notional) -> TOT_03. 'HRB' column carries change status (Ok / Add / Remove for SOT_3 / ADD (PMC)) and dated notes (2022). Primary evidence for the System Mapping column of CO-DIAN-001 (statutory classification salary/non-salary must still be checked against the law, not taken from this table).",
+   "hypothesis_check": "Confirmed (WT -> segment/field table)."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Validacion netos",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-001"
+   ],
+   "evidence": [
+    "SEG",
+    "Empleado",
+    "Acumulados",
+    "Electronic Payroll",
+    "Diference",
+    "Gross devengos",
+    "Gross descuentos",
+    "Gross neto"
+   ],
+   "confidence": "medium",
+   "rationale": "Per-employee (261) reconciliation of the TOT segment: Acumulados vs Electronic Payroll vs G2N (columns K/L/M equal G2N Gross Salary / Total Deductions / Net Pay), with differences and explanations: '65821 - Expatriation Package for Inbounds' shown on the voucher but not summed in devengados, '62202 Ocassional Bonus Grossed Up', '25830 Salary paid in Foreign Countries', REINTEGRO, EVO, 'Legalizacion anticipos' (advance legalisation). Also shows raw caret-delimited NE lines (e.g. an 'EHE^HEN^...' overtime record, 'ITE^30^...'), confirming the TXT format behind the segments. Source for the total rules NIE187-NIE189 and for edge cases; medium because it is a control sheet with partly broken formulas.",
+   "hypothesis_check": "Confirmed (per-employee net reconciliation)."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Acumulados",
+   "role": "source",
+   "specs": [
+    "CO-DIAN-001",
+    "CO-DIAN-004",
+    "CO-DIAN-005",
+    "CO-DIAN-002",
+    "CO-CESANTIAS-006"
+   ],
+   "evidence": [
+    "ID Number",
+    "EE Citizenship Card ID",
+    "WT Code",
+    "WT Description",
+    "01/06/2023",
+    "Total",
+    "Seg",
+    "CONCATE"
+   ],
+   "confidence": "low",
+   "rationale": "Same layout as the round-1 Accumulated Report (header row 7: ID Number, Employee Name, EE Citizenship Card ID, Beneficiary National Id/Name, WT Code, WT Description, Salary Payment Indicator, 12 monthly columns, Total) plus client columns: 'Value' (WT), 'Seg' and field (e.g. SVA / SVA_2, looked up from Mapping), 'check concatenar', 'valor anticio', 'VALOR QUE TENIA EL ACUMULADO EN 26103', 'CONCATE', 'CRUCE', 'VALOR REAL'. It applies the Mapping to every employee x WT, so it evidences the WT -> NE field assignment in use. HOWEVER the monthly columns are 01/06/2023..01/05/2024 (title block 'Report generation date: JUNE'), it holds 1,230 IDs (incl. 646 with pensioner WTs) and only 181 of them are among the 261 Sep-2026 employees: it is not the Sep-2026 accumulation and its amounts cannot be compared with the Sep-2026 files without client confirmation. For CO-DIAN-004/005/002/CESANTIAS it repeats the round-1 Accumulated Report role (WTs 2552, 2553/2554/2556, AFC, FVOL, 62110/62117/65805 severance) but for a different window. Low confidence because of the period mismatch. PII: see alerts (columns Z and AD).",
+   "hypothesis_check": "Partly confirmed: same layout as round-1 Accumulated Report with extra columns to the right; NOT the same period (Jun-2023..May-2024, not Oct-2025..Sep-2026)."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Pivot check ",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "ID Number",
+    "Seg",
+    "Total"
+   ],
+   "confidence": "high",
+   "rationale": "Pivot of the Acumulados tab: employee (masked) x ID Number x segment code -> total (10,167 rows, 1,231 IDs = the Acumulados population). Intermediate control feeding column F of ConsolidadoCCT; no field a spec needs beyond what Mapping/Acumulados already show.",
+   "hypothesis_check": "Confirmed (ID Number x segment totals)."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Sheet1",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "Empleado",
+    "OJO PENDING ADD THE PAY ELLEMT NEW 25828 IN SOT",
+    "could you please add the pay element 79419 - Jury/ Elector Leave payout ... ELR / ELR_4"
+   ],
+   "confidence": "high",
+   "rationale": "Work list of 19 employees with three amount columns and to-do notes asking to add WT 25828 to SOT and WT 79419 to ELR/ELR_4. Mapping maintenance notes (already reflected in the Mapping sheet), not report content.",
+   "hypothesis_check": "New sheet (not in the brief): client-only."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Sheet2",
+   "role": "client-only",
+   "specs": [],
+   "evidence": [
+    "SUM(RANGE('21116 ... 1204')) formula fragment",
+    "21116",
+    "21122",
+    "21123",
+    "total"
+   ],
+   "confidence": "high",
+   "rationale": "Scratch sheet: the list of SOT wage types used in a formula (same list as the Acumulados title block) with a few amounts; MASKED_TEXT cells. No report content.",
+   "hypothesis_check": "New sheet (not in the brief): client-only."
+  },
+  {
+   "file": "E-Payroll_00204909_2026-09-01.txt",
+   "sheet": "(flat file)",
+   "role": "pending",
+   "specs": [
+    "CO-DIAN-001"
+   ],
+   "evidence": [],
+   "confidence": "low",
+   "rationale": "Not analysed (unmasked flat file; structure matches the Nomina Electronica segments of Monthly_fixed for one employee). Per the probe: 15 lines with 2-letter segment codes EN, EM, RE, PA, FE, IT, EA, EB, EC, IT, SP, SS, SO, SV, TO - consistent with one ENC block of Monthly_fixed (ENC, EMI, REC, PAG, FEP, ITE, EAX, EBO, ECO, ITS, SPE, SSP, SOT, SVA, TOT). Not opened. Must be masked before any analysis.",
+   "hypothesis_check": "Recorded as instructed; not opened."
+  }
+ ],
+ "specs_without_evidence": [],
+ "specs_without_direct_report": [
+  {
+   "spec": "CO-DIAN-002",
+   "note": "No Form 350 working report in round 2. The G2N gives 2552 withheld per employee for payroll REF-P201-090 only (same single run as round 1); no depurated base and no all-runs total."
+  },
+  {
+   "spec": "CO-DIAN-005",
+   "note": "No Formato 2276 file. Only the pensioner Form 220 rows (same concepts per beneficiary) and the Jun-2023..May-2024 Acumulados tab."
+  },
+  {
+   "spec": "CO-PILA-003",
+   "note": "No PILA planilla; G2N social-security bases (64990-64996, 63011) and employer contributions are source only."
+  },
+  {
+   "spec": "CO-CESANTIAS-006",
+   "note": "Weakest coverage: only severance WTs (62110/62117 cash-outs in the G2N; 65805/25827 Payment Severance Funds in an Acumulados tab of a different period). No fund consignment data."
+  }
+ ],
+ "alerts": [
+  "PII (ID) - STOP condition under CLAUDE.md rule 1, flagged for Wallisson: in 'Validado ConsolidadoCCT_ Monthly  sep.xlsx' the concatenated key columns appear to carry UNMASKED employee numbers: sheet ConsolidadoCCT column E ('Concatenate' = number+segment), sheet 'Validacion netos' column E ('Concatenate'), sheet Acumulados columns Z ('check concatenar' = WT+number) and AD ('CONCATE' = segment+number). Evidence: the embedded 8-digit number never equals the masked worker code / ID Number in the same row (column Z of ConsolidadoCCT; column A of Acumulados: 0 of 19,535 rows equal), and the first ConsolidadoCCT block's key prefix equals the number in the raw E-Payroll file name. The same values are reproduced in 04-output/round2/profiles/Validado ConsolidadoCCT_ Monthly  sep.json (examples_masked). Values are not quoted here. Recommend re-masking these columns before the cross-checkers use the file.",
+  "Masking side effect (not PII): in Monthly_fixed and ConsolidadoCCT some AMOUNTS were digit-substituted (REC Sueldo, ITE salary when equal to Sueldo, TOT totals; ENC Consecutivo). Use these files for structure, codes and formats; take amounts from the G2N.",
+  "G2N 'Monthly' is payroll REF-P201-090 (identical to round-1 Vertical G2N), not a consolidation of all September runs - the planned 'all runs' comparison for CO-DIAN-001/CO-DIAN-002 is not possible with it.",
+  "Formulario 220 populated rows are 34 pensioners (tax year 2025) with all income in casilla 46 'Otros pagos' and casillas 50/52 = 0 - candidate CONFLICT for the CO-DIAN-004 cross-checker.",
+  "Acumulados tab covers Jun-2023..May-2024 and 1,230 IDs (181 overlap with Sep-2026 employees) - not the Sep-2026 accumulation.",
+  "pii-check false positive: Monthly_fixed column D and ConsolidadoCCT column L 'name-like' values are bank names (PAG segment); 'CR 50 No.5 - 115' in the EMI segment is the employer's address."
+ ],
+ "segment_codes": {
+  "_note": "Meaning inferred from (a) the Mapping sheet (WT -> segment_position), (b) WT descriptions in the Acumulados tab, (c) the positional content of Monthly_fixed, and (d) the element order of the DIAN NIE XSD as listed in the CO-DIAN-001 v1.1 draft. Items marked 'inferred' rest on position order only.",
+  "ENC": "Document header: B literal 'NominaIndividual'; C FechaIngreso (NIE002); D FechaRetiro (NIE003, empty); E/F FechaLiquidacionInicio/Fin (NIE004/005); G TiempoLaborado in days (NIE006); H FechaGen of period (NIE008); I CodigoTrabajador (NIE009); J Prefijo 'EC' (NIE010); K Consecutivo (NIE011); L Numero = prefix+consecutive (NIE012); M/N/O generation country/department/municipality (NIE013-015); P Idioma 'es' (NIE016); Q Version literal (NIE022); R Ambiente '1' (NIE023); S TipoXML '102' (NIE202); T empty (CUNE slot - inferred, CUNE computed by the provider); U FechaGen (NIE026); V HoraGen (NIE027); W PeriodoNomina '5' monthly (NIE029); X TipoMoneda 'COP' (NIE030).",
+  "EMI": "Employer (Empleador): corporate name, NIT, DV, country, department, municipality, address (NIE032-NIE038); natural-person name slots empty; column F repeats the corporate name (position meaning not evidenced).",
+  "REC": "Employee (Trabajador): TipoTrabajador '01', SubTipoTrabajador '00', AltoRiesgoPension, TipoDocumento '13', NumeroDocumento, surnames/names, place of work country/department/municipality/address, SalarioIntegral true/false, TipoContrato, Sueldo, CodigoTrabajador (NIE041-NIE063).",
+  "PAG": "Payment (Pago): Forma '1', Metodo '47', Banco (name), TipoCuenta, NumeroCuenta (NIE064-NIE068).",
+  "FEP": "FechasPagos/FechaPago (NIE203).",
+  "ITE": "Devengados/Basico: ITE_1 DiasTrabajados (NIE069), ITE_2 SueldoTrabajado (NIE070) - WT 62100, 62101, 62140, 62141, 65820.",
+  "ETR": "Devengados/Transporte: ETR_1 AuxilioTransporte (NIE071, WT 62520), ETR_2 ViaticoManuAlojS (NIE072, per diems 62805-62809, 62810, 62820, 62821), ETR_3 ViaticoManuAlojNS (NIE073, no WT mapped).",
+  "EVC": "Vacaciones/VacacionesComunes: EVC_4 Pago (NIE112) - WT 79401 Annual leave payout.",
+  "EVA": "Vacaciones/VacacionesCompensadas: EVA_2 Pago (NIE116) - WT 79403 Vacations compensated in cash.",
+  "ECE": "Cesantias: ECE_1 Pago (NIE120) - 62110, 62126, 62182, 65805; ECE_3 PagoIntereses (NIE122) - 62117, 62127.",
+  "EIN": "Incapacidades/Incapacidad: EIN_5 Pago (NIE127) - 79408, 79411, 79412, 79413.",
+  "EBN": "Bonificaciones: EBN_1 BonificacionS (NIE139) - 62150 Vacation bonus, 62208-62210, 62118, 62228, 65838; EBN_2 BonificacionNS (NIE140) - awards, allowances, 62229, 62122 etc.",
+  "EAX": "Auxilios: EAX_1 AuxilioS (NIE141) - 62133, 62225; EAX_2 AuxilioNS (NIE142) - 62523 transport CLA, 62700, 62221, health/life insurance informative WTs etc.",
+  "EOT": "OtrosConceptos: EOT_3 ConceptoNS (NIE148) - stock awards, retirement/pension payments 62151-62155, 62216, 65821 expatriation package, loans paid 67010/67040/67090, 1910 etc.",
+  "EVO": "Single-value earnings (inferred from XSD order Dotacion/ApoyoSost/Teletrabajo/BonifRetiro/Indemnizacion): EVO_2 ApoyoSost (NIE157) - 62148/62149 Internship pay; EVO_4 BonifRetiro (NIE159) - 62203; EVO_5 Indemnizacion (NIE160) - 62180/62181.",
+  "EBO": "BonoEPCTVs: EBO_4 PagoAlimentacionNS (NIE154) - 65813 Meal allowance inf.",
+  "ECO": "Comisiones/PagosTerceros/Anticipos group (inferred from XSD order): ECO_2 PagoTercero accrued (NIE193) - 65802 Foncoltabaco company contribution, 65809 optical; ECO_3 Anticipo accrued (NIE194) - 61100 Weekly advance, 61101, 61150, 61200.",
+  "ELI": "Licencias/LicenciaMP: ELI_4 Pago (NIE131) - 79406 maternity, 79407 paternity (mapped; no rows in Sep-2026).",
+  "ELR": "Licencias/LicenciaR: ELR_4 Pago (NIE135) - 79405, 79414, 79418, 79419, 79420 (mapped; no rows in Sep-2026).",
+  "EPR": "Primas: EPR_2 Pago (NIE118) - 62211 Service legal bonus (mapped; no rows in Sep-2026).",
+  "EHE": "Overtime/surcharge segment (e.g. 'EHE^HEN^...' line quoted in Validacion netos) - not present in Monthly_fixed.",
+  "ITS": "Deducciones/Salud: ITS_1 Porcentaje '4' (NIE161), ITS_2 Deduccion (NIE163) - 2554 and pensioner EPS WTs.",
+  "SPE": "Deducciones/FondoPension: SPE_1 Porcentaje '4' (NIE164), SPE_2 Deduccion (NIE166) - 2556, 21144, 21154.",
+  "SSP": "Deducciones/FondoSP: SSP_2 DeduccionSP (NIE168) - 2553 and pensioner FSP WTs; subsistence positions not populated in Sep-2026.",
+  "SIN": "Deducciones/Sindicatos: SIN_2 Deduccion (NIE172) - union fees 21550-21680, 21152, 21218.",
+  "SLI": "Deducciones/Libranzas: SLI_2 Deduccion (NIE176) - 21119-21121 bank loans.",
+  "SOT": "Deducciones PagosTerceros/Anticipos/OtrasDeducciones (XSD order): SOT_1 PagoTercero (NIE195) - Foncoltabaco, pensioner associations, funeral, 21803; SOT_2 Anticipo (NIE196) - 21215 Legalization salary payment; SOT_3 OtraDeduccion (NIE197) - private health insurance, expat deductions, 1204, 21821.",
+  "SVA": "Single-value deductions in XSD order: SVA_1 PensionVoluntaria (NIE198), SVA_2 RetencionFuente (NIE177) - 2552 and other tax WTs, SVA_3 AFC (NIE179), SVA_4 Cooperativa (NIE180) - 21617, SVA_5 EmbargoFiscal (NIE181) - garnishments, SVA_9 Deuda (NIE185) - housing/interest-free loan fees.",
+  "TOT": "Document totals: positions 2/3/4 populated (Redondeo NIE186 empty). By XSD order these are DevengadosTotal (NIE187), DeduccionesTotal (NIE188), ComprobanteTotal (NIE189); but the Mapping assigns WT 26998 'Net salary (notional)' to TOT_03, so the position order must be confirmed (masked amounts do not allow a numeric check).",
+  "EN..TO (E-Payroll .txt)": "Two-letter variant of the same segments in the unmasked flat file (not opened)."
+ }
+}

@@ -77,6 +77,17 @@
 |---|---|---|---|---|
 | | | | | |
 
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Norway`
+
+| Pacote | Período | Pass / Finding / NT | Recibo | Situação |
+|---|---|---|---|---|
+| Henkel Norway AS (917472890) | set/26 | 34 / 9 / 4 | Sim (A-melding GODKJENT) | Fechado 2026-10-14 |
+
+- Decisão 2026-10-14: sem skattekort no pacote, testa-se a consistência do trekk com os parâmetros do contracheque.
+- Trekk 6/6 exato pelas trekktabeller 2026; AGA 14,1% ok.
+- **High:** contribuição sindical fora da base do forskuddstrekk e sem fradrag "fagforeningskontingent" na A-melding (Skattebetalingsloven §5-9(1)(b)) → ação A-01 para implementation.
+
 ## Pendências
 - [ ]
 

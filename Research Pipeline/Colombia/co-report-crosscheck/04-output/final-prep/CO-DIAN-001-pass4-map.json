@@ -1,0 +1,29 @@
+{
+ "spec": "CO-DIAN-001",
+ "final": "05-final/CO-DIAN-001-NominaElectronica-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Nomina Electronica Spec",
+   "cell": "M56",
+   "field_id": "NIE044",
+   "current": "Annex table 5.2.1: 11 Record civil, 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Passport, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais, 91 NUIP (employee only). Codes 21 and 22 are both valid: 22 is reported where the employee holds a cedula de extranjeria and 21 where the employee holds a tarjeta de extranjeria; the code follows the document the employee holds, as recorded in the document-type field. There is NO code for the PPT (Temporary protection permit, Decree 216 of 2021), created one month after this annex; a PPT holder is reported under 47 (PEP), the residence-permit code of the table, a configurable value of the document-type mapping.\n\nSource: the HR master stores no table 5.2.1 code; it holds one field per document type ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). Derive the code from the field that is filled: 'Citizenship Card ID' -> 13; 'Indentity Card for Foreigners' -> 22 where the document recorded in it is a cedula de extranjeria and 21 where it is a tarjeta de extranjeria (the document-type attribute of that document distinguishes the two). The codes for 'Identity Card' and 'National ID', and the precedence applied where more than one document field is filled, are maintained in the same document-type mapping table, so that exactly one document type is reported and the same document drives NIE044 and NIE045.",
+   "proposed": "Annex table 5.2.1: 11 Record civil, 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Passport, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais, 91 NUIP (employee only). Codes 21 and 22 are both valid: 22 is reported where the employee holds a cedula de extranjeria and 21 where the employee holds a tarjeta de extranjeria; the code follows the document the employee holds, as recorded in the document-type field. A holder of a PEP (Permiso Especial de Permanencia) is reported with code 47, the PEP code of annex table 5.2.1. The table has no code for the PPT (Permiso por Protección Temporal, Decree 216 of 2021, created after the annex): a PPT holder is reported with code 47, the residence-permit code of the table, and the PPT number in NumeroDocumento (NIE045).\n\nSource: the HR master stores no table 5.2.1 code; it holds one field per document type ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). Derive the code from the field that is filled: 'Citizenship Card ID' -> 13; 'Indentity Card for Foreigners' -> 22 where the document recorded in it is a cedula de extranjeria and 21 where it is a tarjeta de extranjeria (the document-type attribute of that document distinguishes the two). The codes for 'Identity Card' and 'National ID', and the precedence applied where more than one document field is filled, are maintained in the same document-type mapping table, so that exactly one document type is reported and the same document drives NIE044 and NIE045.",
+   "rule": "PEP/PPT per annex table 5.2.1"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C49",
+   "current": "Reported. Annex table 5.2.1 has no code for the PPT (Decree 216 of 2021 post-dates the annex); a PPT holder is reported under code 47 (PEP), the residence-permit code of the table, with the PPT number in NumeroDocumento. The code is a configurable value of the document-type mapping (see NIE044).",
+   "proposed": "Reported. Annex table 5.2.1 has no code for the PPT (Decree 216 of 2021 post-dates the annex); a PPT holder is reported with code 47, the residence-permit code of the table, and the PPT number in NumeroDocumento; a PEP holder is reported with code 47, the PEP code of the table (see NIE044).",
+   "rule": "PEP/PPT"
+  },
+  {
+   "sheet": "Field Options",
+   "cell": "D19",
+   "current": "Special residence permit. There is NO code for the PPT (Temporary protection permit, Decree 216 of 2021, created one month after this annex), which the large majority of regularised Venezuelan migrants now hold; a PPT holder is reported under code 47, a configurable value of the document-type mapping (see NIE044).",
+   "proposed": "Special residence permit. There is NO code for the PPT (Temporary protection permit, Decree 216 of 2021, created one month after this annex), which the large majority of regularised Venezuelan migrants now hold; a PPT holder is reported with code 47, the residence-permit code of the table, and the PPT number in NumeroDocumento (see NIE044).",
+   "rule": "PEP/PPT"
+  }
+ ],
+ "moved_to_open_points": []
+}

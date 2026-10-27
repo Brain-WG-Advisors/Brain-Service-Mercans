@@ -23,7 +23,7 @@ cd C:\Users\instituto\Documents\brain-service
 # Primeiro: só lista IDs e títulos, não grava nada
 .\scripts\youtrack_fetch.ps1 -DryRun
 
-# Depois: baixa de verdade (padrão: tickets "for: me" atualizados desde 2026-01-01)
+# Depois: baixa de verdade (padrão: tickets atribuídos, abertos ou comentados por mim, atualizados desde 2026-01-01)
 .\scripts\youtrack_fetch.ps1
 
 # Atualização semanal: use a data da última execução

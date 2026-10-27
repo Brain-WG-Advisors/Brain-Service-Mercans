@@ -1,0 +1,3609 @@
+{
+ "spec": "CO-DIAN-001",
+ "round": 2,
+ "spec_file": "02-specs-out/CO-DIAN-001-NominaElectronica-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "sheet": "Nomina Electronica Spec",
+ "header_row": 2,
+ "reports_checked": [
+  {
+   "file": "Monthly_fixed.xlsx",
+   "sheet": "Nómina",
+   "role": "direct"
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "ConsolidadoCCT / Mapping / Validacion netos",
+   "role": "direct / source"
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "role": "source (amounts)"
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "role": "round-1 source (identity, document columns)"
+  },
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "role": "round-1 source (WT 26998)"
+  }
+ ],
+ "method_note": "261 ENC blocks of Monthly_fixed parsed by position (column letter = XSD attribute order) and joined to the G2N Monthly on the worker code (261/261). Every amount position was rebuilt from the G2N wage types using the client's own Mapping sheet: ITE_2, ITS_2, SPE_2, SSP_2, SVA_*, SOT_*, EAX_*, EBN_*, EVC_4, EVA_2, ECE_*, EIN_5, EVO_*, ETR_2, SLI_2, SIN_2 tie for every document; EBO_4 ties to WT 65818 (not in the Mapping, which lists 65813); EOT_3 differs only by WTs 1910 / 67010 / 62216 that are mapped but not reported. Amounts are intact in the v2 masking (TOT = G2N Gross / Total Deductions / Net for the regular cases). PII: the ConsolidadoCCT / Validacion netos key columns flagged in the round-2 report map now carry masked worker codes (3,441 of 3,441 eight-digit keys are masked tokens); no identifier is quoted here. Not used: Acumulados (different period), E-Payroll .txt (not masked).",
+ "fields": [
+  {
+   "id": 4,
+   "name": "UBL extensions container",
+   "xml_element": "UBLExtensions",
+   "field_position": "NIE001",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 5,
+   "name": "Digital signature",
+   "xml_element": "ds:Signature",
+   "field_position": "NIE001 (child)",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 6,
+   "name": "QR code string",
+   "xml_element": "CodigoQR",
+   "field_position": "NIE021",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 7,
+   "name": "Schema location attribute",
+   "xml_element": "SchemaLocation",
+   "field_position": "(root attribute)",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 9,
+   "name": "Version literal",
+   "xml_element": "Version",
+   "field_position": "NIE022",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column Q",
+     "example_masked": "V1.0: Documento Soporte de Pago de Nómina Electrónica"
+    }
+   ],
+   "finding": "The client's document carries the literal WITH accents ('Nómina Electrónica') on 261 of 261 documents. The draft's Field Explanation says 'accents included', but the Example (K9) and the Field Options / Example Analysis / Sample File copies print it WITHOUT accents ('Nomina Electronica'). A developer copying the example would emit a literal that validation rule NIE022 rejects.",
+   "proposed_explanation": "Example (K9) and the literal copies in Field Options C9, Example Analysis A7 and Sample File A93: 'V1.0: Documento Soporte de Pago de Nómina Electrónica'. Field Explanation unchanged.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element Version (NIE022): exact literal \"V1.0: Documento Soporte de Pago de Nómina Electrónica\"."
+  },
+  {
+   "id": 10,
+   "name": "Environment",
+   "xml_element": "Ambiente",
+   "field_position": "NIE023",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column R",
+     "example_masked": "1"
+    }
+   ],
+   "finding": "Ambiente = 1 (production) on all 261 documents, as table 5.1.1.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 11,
+   "name": "XML document type",
+   "xml_element": "TipoXML",
+   "field_position": "NIE202",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column S",
+     "example_masked": "102"
+    }
+   ],
+   "finding": "TipoXML = 102 (NominaIndividual) on all 261 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 12,
+   "name": "CUNE - unique payroll document code",
+   "xml_element": "CUNE - Codigo Unico de Nomina Electronica",
+   "field_position": "NIE024",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column T",
+     "example_masked": "(empty on 261 of 261)"
+    }
+   ],
+   "finding": "The ENC record has an empty position (column T, between TipoXML and FechaGen) that matches the CUNE slot by XSD order; it is empty on all 261 documents because the CUNE is computed downstream by the provider/signing step. No client value to check; the spec correctly sources it from System.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 13,
+   "name": "CUNE algorithm literal",
+   "xml_element": "EncripCUNE",
+   "field_position": "NIE025",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 14,
+   "name": "Generation date",
+   "xml_element": "FechaGen",
+   "field_position": "NIE026",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column U",
+     "example_masked": "2026-09-24"
+    }
+   ],
+   "finding": "FechaGen AAAA-MM-DD, 2026-09-24 on all 261 documents (after the payment date 2026-09-22 and within the art. 8 deadline).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 15,
+   "name": "Generation time",
+   "xml_element": "HoraGen",
+   "field_position": "NIE027",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column V",
+     "example_masked": "16:33:58-05:00"
+    }
+   ],
+   "finding": "HoraGen with the -05:00 offset, 14 characters, on all 261 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 16,
+   "name": "Payroll period frequency",
+   "xml_element": "PeriodoNomina",
+   "field_position": "NIE029",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column W",
+     "example_masked": "5"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "title block Pay Group(s)",
+     "example_masked": "CO - Monthly"
+    }
+   ],
+   "finding": "PeriodoNomina = 5 on all 261 documents of the monthly pay group, consistent with the pay-group rule of the draft. The second (weekly-advance) population is not in this file, so the open query on its pay cycle is unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 17,
+   "name": "Currency",
+   "xml_element": "TipoMoneda",
+   "field_position": "NIE030",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column X",
+     "example_masked": "COP"
+    }
+   ],
+   "finding": "TipoMoneda = COP on all 261 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 18,
+   "name": "Exchange rate",
+   "xml_element": "TRM",
+   "field_position": "NIE200",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "TRM never present (all documents in COP), consistent with the draft.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 19,
+   "name": "Free-text notes",
+   "xml_element": "Notas",
+   "field_position": "NIE031",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No Notas in the client's document.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 21,
+   "name": "Employee code (in numbering block)",
+   "xml_element": "CodigoTrabajador",
+   "field_position": "NIE009",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column I",
+     "example_masked": "(digit-substituted worker code)"
+    }
+   ],
+   "finding": "CodigoTrabajador in the numbering block equals the REC worker code (NIE063) on 261 of 261 documents and matches the G2N 'Cod Employee' for all 261.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 22,
+   "name": "Numbering prefix",
+   "xml_element": "Prefijo",
+   "field_position": "NIE010",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column J",
+     "example_masked": "EC"
+    }
+   ],
+   "finding": "Prefix 'EC' on all documents: uppercase alphabetic, 2 characters, matches ^[A-Z]{1,4}$.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 23,
+   "name": "Consecutive number",
+   "xml_element": "Consecutivo",
+   "field_position": "NIE011",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column K",
+     "example_masked": "(10-digit consecutive)"
+    }
+   ],
+   "finding": "Consecutivo is a 10-digit number, unique across the 261 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 24,
+   "name": "Document number",
+   "xml_element": "Numero",
+   "field_position": "NIE012",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column L",
+     "example_masked": "EC + 10 digits"
+    }
+   ],
+   "finding": "Numero = Prefijo + Consecutivo with no separator on 261 of 261 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 26,
+   "name": "Generation country",
+   "xml_element": "Pais",
+   "field_position": "NIE013",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column M",
+     "example_masked": "CO (255) / CR, CA, DO, CH, MX (6)"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column N/O",
+     "example_masked": "05 / 05001 on all 261"
+    }
+   ],
+   "finding": "The client's document sets the GENERATION country from the employee's home-address country: 255 documents CO, 6 documents CR (2), CA, DO, CH, MX, while the generation department/municipality are 05 / 05001 (the employer's Medellin) on all 261. The draft defines NIE013 as the country where the document is generated; the same 6 foreign codes appear in LugarTrabajoPais (NIE050), so the client copies the home country into both.",
+   "proposed_explanation": "Country in which the document was generated. Table 5.4.1. Almost always CO; it may legitimately differ where a shared service centre generates outside Colombia, which does not change the obligation.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document sets this country from the employee's home-address country - CO on 255 documents, CR / CA / DO / CH / MX on 6 - while NIE014 / NIE015 are 05 / 05001 on all 261. Do not replicate: the place of generation is the employer's, so the country follows the generation site (CO for PMI unless a non-Colombian generation site is confirmed).",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element Pais of LugarGeneracionXML (NIE013): country of generation of the document (table 5.4.1)."
+  },
+  {
+   "id": 27,
+   "name": "Generation department",
+   "xml_element": "DepartamentoEstado",
+   "field_position": "NIE014",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column N",
+     "example_masked": "05"
+    }
+   ],
+   "finding": "Generation department 05 on all documents; equals the first two digits of NIE015.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 28,
+   "name": "Generation municipality",
+   "xml_element": "MunicipioCiudad",
+   "field_position": "NIE015",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column O",
+     "example_masked": "05001"
+    }
+   ],
+   "finding": "Generation municipality 05001 (Medellin), 5-digit DIVIPOLA, on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 29,
+   "name": "Document language",
+   "xml_element": "Idioma",
+   "field_position": "NIE016",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column P",
+     "example_masked": "es"
+    }
+   ],
+   "finding": "Idioma 'es' on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 31,
+   "name": "Provider corporate name",
+   "xml_element": "RazonSocial",
+   "field_position": "NIE205",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 32,
+   "name": "Provider first surname",
+   "xml_element": "PrimerApellido",
+   "field_position": "NIE206",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 33,
+   "name": "Provider second surname",
+   "xml_element": "SegundoApellido",
+   "field_position": "NIE207",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 34,
+   "name": "Provider first name",
+   "xml_element": "PrimerNombre",
+   "field_position": "NIE208",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 35,
+   "name": "Provider other names",
+   "xml_element": "OtrosNombres",
+   "field_position": "NIE209",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 36,
+   "name": "Provider NIT",
+   "xml_element": "NIT",
+   "field_position": "NIE017",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 37,
+   "name": "Provider NIT verification digit",
+   "xml_element": "DV",
+   "field_position": "NIE018",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 38,
+   "name": "Software identifier",
+   "xml_element": "SoftwareID",
+   "field_position": "NIE019",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 39,
+   "name": "Software security code",
+   "xml_element": "SoftwareSC",
+   "field_position": "NIE020",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "System/DIAN-generated element; the client's segment file (Monthly_fixed) is the provider input and does not carry it. Expected: the client never fills it.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 41,
+   "name": "Employer corporate name",
+   "xml_element": "RazonSocial",
+   "field_position": "NIE032",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column B",
+     "example_masked": "Compañía Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "Employer corporate name populated on all 261 documents (legal-person employer).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 42,
+   "name": "Employer first surname",
+   "xml_element": "PrimerApellido",
+   "field_position": "NIE210",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column C-E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "Empty on all 261 documents, correct for a legal-person employer as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 43,
+   "name": "Employer second surname",
+   "xml_element": "SegundoApellido",
+   "field_position": "NIE211",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column C-E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "Empty on all 261 documents, correct for a legal-person employer as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 44,
+   "name": "Employer first name",
+   "xml_element": "PrimerNombre",
+   "field_position": "NIE212",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column C-E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "Empty on all 261 documents, correct for a legal-person employer as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 45,
+   "name": "Employer other names",
+   "xml_element": "OtrosNombres",
+   "field_position": "NIE213",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column F",
+     "example_masked": "Compañía Colombiana de Tabaco SAS (repeated)"
+    }
+   ],
+   "finding": "Column F of the EMI record repeats the corporate name on all 261 documents. Every other segment of the file follows the XSD attribute order exactly (verified on REC, TOT, SVA, ECE, EIN), and by that order column F is Empleador/@OtrosNombres, which the draft reserves for a natural-person employer. Positional inference only: the provider's layout for EMI is not documented, so the client/provider must confirm.",
+   "proposed_explanation": null,
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, Empleador attributes (NIE032, NIE210-NIE213): name attributes only for a natural-person employer."
+  },
+  {
+   "id": 46,
+   "name": "Employer NIT",
+   "xml_element": "NIT",
+   "field_position": "NIE033",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column G",
+     "example_masked": "(employer NIT, 9 digits)"
+    }
+   ],
+   "finding": "NIT without dots, hyphens or DV on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 47,
+   "name": "Employer NIT verification digit",
+   "xml_element": "DV",
+   "field_position": "NIE034",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column H",
+     "example_masked": "8"
+    }
+   ],
+   "finding": "DV in its own position.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 48,
+   "name": "Employer country",
+   "xml_element": "Pais",
+   "field_position": "NIE035",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column I",
+     "example_masked": "CO"
+    }
+   ],
+   "finding": "Employer country CO.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 49,
+   "name": "Employer department",
+   "xml_element": "DepartamentoEstado",
+   "field_position": "NIE036",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column J",
+     "example_masked": "05"
+    }
+   ],
+   "finding": "Employer department 05.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 50,
+   "name": "Employer municipality",
+   "xml_element": "MunicipioCiudad",
+   "field_position": "NIE037",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column K",
+     "example_masked": "05001"
+    }
+   ],
+   "finding": "Employer municipality 05001; first two digits equal NIE036.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 51,
+   "name": "Employer address",
+   "xml_element": "Direccion",
+   "field_position": "NIE038",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, column L",
+     "example_masked": "CR 50 No.5 - 115"
+    }
+   ],
+   "finding": "Employer address as free text (employer data, not personal).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 53,
+   "name": "Worker type",
+   "xml_element": "TipoTrabajador",
+   "field_position": "NIE041",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column B",
+     "example_masked": "01 (255) / 19 (6)"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVO segment, column C",
+     "example_masked": "2300000.00 (ApoyoSost, 20 documents)"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column P",
+     "example_masked": "2 (255) / 4 (6)"
+    }
+   ],
+   "finding": "NEW EVIDENCE vs the 15 Oct text ('the client holds no worker-type code'): the client's document carries a code - 19 (aprendiz SENA etapa productiva) for 6 of the 20 interns paid WT 62149 and 01 for the other 14 interns and for all other employees. All 20 interns carry ApoyoSost (NIE157), so 14 documents break the draft's bidirectional rule (NIE157 present -> worker type 12 or 19). The 6 coded 19 answer part of the open 12-vs-19 query; the 14 coded 01 are a contradiction the client must explain.",
+   "proposed_explanation": "Annex table 5.5.3 - a SIXTEEN-value list (01, 02, 04, 12, 18, 19, 21, 22, 23, 30, 31, 47, 51, 54, 56, 58). It is a SUBSET of the PILA tipo contributor list, which has far more values, so the engine must map, not copy: PILA codes with no DIAN equivalent (for example 03 independiente, 16, 20, 32-45, 52, 53, 55, 57, 59-63) are not valid here. Bidirectional pair with 'Apprentice maintenance support' (NIE157): where NIE157 is present this field must be worker type 12 or 19 (aprendiz).\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client holds no worker-type code. Derive it from a client-approved mapping of Master Data 'Employee Group Code' / 'Employee Subgroup Code' (e.g. Group 6 / Subgroup E2 = the INKOMPASS interns paid WT 62149, also flagged by Accumulated WT 64116 'Apprentice formula' = 1); all other populations default to 01 only after the client confirms the mapping. The 12 vs 19 split for apprentices is not in the data and must be supplied by the client.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document reports TipoTrabajador 19 for 6 of the 20 interns paid WT 62149 (with TipoContrato 4) and 01 for the other 14 (with TipoContrato 2), although all 20 carry ApoyoSost (NIE157); all other employees are 01. The current file therefore breaks the bidirectional rule above on 14 documents and cannot be used as the mapping source for the interns.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, table 5.5.3 (TipoTrabajador) and element ApoyoSost (NIE157) for apprentices, as relied on by the draft."
+  },
+  {
+   "id": 54,
+   "name": "Worker sub-type",
+   "xml_element": "SubTipoTrabajador",
+   "field_position": "NIE042",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column C",
+     "example_masked": "00 (261)"
+    }
+   ],
+   "finding": "SubTipoTrabajador 00 on all 261 documents, including the 2 employees with a Master Data 'Pensioner Effective Date' (who also keep FondoPension 4%). Consistent with the 15 Oct decision (rule stays, query open); no new contradiction.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 55,
+   "name": "High-risk pension flag",
+   "xml_element": "AltoRiesgoPension",
+   "field_position": "NIE043",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column D",
+     "example_masked": "false (261)"
+    }
+   ],
+   "finding": "Literal 'false' on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 56,
+   "name": "Employee document type",
+   "xml_element": "TipoDocumento",
+   "field_position": "NIE044",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column E",
+     "example_masked": "13 (246) / 21 (15)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AO 'Indentity Card for Foreigners'",
+     "example_masked": "(digit-substituted)"
+    }
+   ],
+   "finding": "NEW FINDING contradicting the 15 Oct text: the client reports TipoDocumento 21 (Tarjeta de extranjeria) for all 15 employees whose document is Master Data 'Indentity Card for Foreigners', while the draft maps that column to 22 (Cedula de extranjeria). The other 246 are 13. The file also evidences the precedence the draft asks for: 'Citizenship Card ID' is used whenever filled (incl. the 11 who also hold 'National ID' and the 2 who also hold 'Identity Card'), otherwise the foreigners' card. Which code is right depends on the document actually held; the decided mapping must not be built before the client confirms.",
+   "proposed_explanation": null,
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, table 5.2.1 (21 Tarjeta de extranjeria, 22 Cedula de extranjeria)."
+  },
+  {
+   "id": 57,
+   "name": "Employee document number",
+   "xml_element": "NumeroDocumento",
+   "field_position": "NIE045",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column F",
+     "example_masked": "(digit-substituted, 6-10 digits)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AP 'Citizenship Card ID' / AO 'Indentity Card for Foreigners'",
+     "example_masked": "(digit-substituted)"
+    }
+   ],
+   "finding": "The client's NumeroDocumento equals Master Data 'Citizenship Card ID' for all 246 documents of type 13 and 'Indentity Card for Foreigners' for 12 of the 15 type-21 documents; 3 of the 15 differ on the masked copies (to be checked on raw data). The precedence the draft asks the client for is observable in the current file and should be written down for the developer.",
+   "proposed_explanation": "Identity document number without dots or hyphens. It is input [8] to the CUNE and the join key to Form 220 and Format 2276. CO-GAP-07 - KNOWN SCHEMA DEFECT: the XSD types this attribute as xsd:integer, so a passport or foreign identity document containing letters (document types 21, 41, 42, 50) cannot be schema-valid. DIAN has published no workaround; escalate per client.\n\nCLIENT DATA (PMI masked reports, Sep-2026): take the number from the same Master Data column that set NIE044 (AP 'Citizenship Card ID', AO 'Indentity Card for Foreigners', AN 'Identity Card', AM 'National ID'). Do not use G2N 'National ID' alone: it is blank for the 14 foreign employees, whose only document is the foreigners' card (where filled it equals Master Data 'Citizenship Card ID' for 247 of 247). Strip dots and hyphens. Check on the raw data whether document numbers in ANY of these columns carry leading zeros (masked values start with 0 in both the citizenship-card and the foreigners'-card columns), which xsd:integer drops and which would then not match the CUNE input [8].\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document takes the number from Master Data 'Citizenship Card ID' whenever it is filled (also for employees who additionally hold 'National ID' or 'Identity Card'), otherwise from 'Indentity Card for Foreigners' (15 employees). On the masked copies 12 of those 15 equal the Master Data value and 3 differ - check on the raw data before relying on that column.",
+   "official_source": null
+  },
+  {
+   "id": 58,
+   "name": "Employee first surname",
+   "xml_element": "PrimerApellido",
+   "field_position": "NIE046",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column G",
+     "example_masked": "NAME_n (= Master Data Last Name token)"
+    }
+   ],
+   "finding": "Equals Master Data 'Last Name' on 261 of 261 (masked tokens).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 59,
+   "name": "Employee second surname",
+   "xml_element": "SegundoApellido",
+   "field_position": "NIE047",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column H",
+     "example_masked": "(empty on 144) / NAME_n"
+    }
+   ],
+   "finding": "The client's document leaves SegundoApellido EMPTY for exactly the 144 employees with a blank Master Data 'Second Last Name' and fills it from that column for the other 117 (token match 261/261). No placeholder is used today. Evidence for the open CO-GAP-07 decision; whether DIAN accepted the empty attribute is not evidenced.",
+   "proposed_explanation": "Second surname. CO-GAP-07 - KNOWN SCHEMA DEFECT: this attribute is use=required, yet many Colombians and virtually all foreign nationals have only one surname. Mercans emits a placeholder; no official workaround is published.\n\nCLIENT DATA (PMI masked reports, Sep-2026): source = Master Data 'Second Last Name', which is blank for 144 of 261 employees in Sep-2026. The client's placeholder decision (CO-GAP-07) therefore applies to most documents and must be settled before go-live; the placeholder must never be copied back into the HR master.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document leaves SegundoApellido empty for exactly the 144 employees with a blank Master Data 'Second Last Name' and fills it from that column for the other 117; no placeholder is used today. Whether DIAN accepted the empty attribute is not evidenced.",
+   "official_source": null
+  },
+  {
+   "id": 60,
+   "name": "Employee first name",
+   "xml_element": "PrimerNombre",
+   "field_position": "NIE048",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column I",
+     "example_masked": "NAME_n (= Master Data First Name)"
+    }
+   ],
+   "finding": "Equals Master Data 'First Name' on 261 of 261.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 61,
+   "name": "Employee other names",
+   "xml_element": "OtrosNombres",
+   "field_position": "NIE049",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column J",
+     "example_masked": "NAME_n or empty (= Master Data Middle Name)"
+    }
+   ],
+   "finding": "Equals Master Data 'Middle Name' on 261 of 261; optional, empty where blank.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 62,
+   "name": "Place of work - country",
+   "xml_element": "LugarTrabajoPais",
+   "field_position": "NIE050",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column K",
+     "example_masked": "CO (255) / CR, CA, DO, CH, MX (6)"
+    }
+   ],
+   "finding": "The client's document does exactly what the 15 Oct text forbids: LugarTrabajoPais carries the home-address country (CR 2, CA, DO, CH, MX) for 6 employees whose work department/municipality in the same record are 05 / 05001. The new data confirms the risk recorded in the draft (no change to the decided rule); the client file must not be used as the source.",
+   "proposed_explanation": "Country where the work is performed. Materially important for tax: employment income of a NON-RESIDENT for work performed entirely OUTSIDE Colombia is foreign-source and not subject to Colombian withholding (DIAN Official letter 28380 of 2019), whereas a resident is taxed on worldwide income.\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client holds no work-country field. Do NOT use Master Data 'Country' (home-address country, mixed case, includes CA/CR/DO/CH/MX). Derive the country from the work location (Master Data 'Work location' - all Colombian cities in Sep-2026) or from a client-confirmed default CO.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document does exactly what is excluded above - LugarTrabajoPais carries the home-address country for 6 employees (CR 2, CA 1, DO 1, CH 1, MX 1; CO 255) while their work department / municipality in the same record are 05 / 05001. Do not replicate.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element LugarTrabajoPais (NIE050): country of the place of work."
+  },
+  {
+   "id": 63,
+   "name": "Place of work - department",
+   "xml_element": "LugarTrabajoDepartamentoEstado",
+   "field_position": "NIE051",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column L",
+     "example_masked": "05 (261)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "'Work location'",
+     "example_masked": "Bogota 166 / Medellin 57 / Cali 18 / Barranquilla 7 / 9 other cities 11 / blank 2"
+    }
+   ],
+   "finding": "The client reports department 05 (Antioquia) as place of work for all 261 employees, although Master Data 'Work location' places 166 in Bogota, 18 in Cali, 7 in Barranquilla and 13 more in 9 other cities (57 Medellin, 2 blank). The client uses the employer's location, which contradicts the draft's rule (department of the place of work, reconciling to PILA Tipo 2 field 9).",
+   "proposed_explanation": "DIVIPOLA department of the place of work. Should reconcile to PILA Record Tipo 2 field 9 (department code de la ubicacion laboral) for the same employee and month.\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client has no DIVIPOLA code for the place of work. Master Data 'Employee Address - Department' is the HOME department as letter codes (DC, ANT, CUN ...) and must not be used. Build the code from a client-approved translation table 'Work location' -> DIVIPOLA (12 locations in Sep-2026: Bogota, Medellin, Cali, Barranquilla, Manizales, Cartagena, Pereira, Armenia, Santa Marta, Yopal, Bucaramanga, Tunja); positions 1-2 of that 5-digit code give this field.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document reports 05 / 05001 (Medellin, the employer's location) as place of work for all 261 employees, although Master Data 'Work location' places 166 in Bogota, 18 in Cali, 7 in Barranquilla, 13 in nine other cities, 57 in Medellin and 2 blank. Do not replicate; this field follows the place of work and must reconcile to PILA.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element LugarTrabajoDepartamentoEstado (NIE051)."
+  },
+  {
+   "id": 64,
+   "name": "Place of work - municipality",
+   "xml_element": "LugarTrabajoMunicipioCiudad",
+   "field_position": "NIE052",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column M",
+     "example_masked": "05001 (261)"
+    }
+   ],
+   "finding": "Same as NIE051: 05001 (Medellin) for all 261 employees regardless of Master Data 'Work location'.",
+   "proposed_explanation": "COMPOSITE KEY - positions 1-2 = department (= NIE051), positions 3-5 = municipality. Reconciles to PILA Record Tipo 2 field 10.\n\nCLIENT DATA (PMI masked reports, Sep-2026): source = Master Data 'Work location' (identical to 'Personal Subarea'), free-text city names, 12 values, 2 blanks in Sep-2026. Translate through a client-approved table city -> 5-digit DIVIPOLA code (e.g. Bogota -> 11001 as in the annex example); a blank work location must block the document, not default.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document reports 05 / 05001 (Medellin, the employer's location) as place of work for all 261 employees, although Master Data 'Work location' places 166 in Bogota, 18 in Cali, 7 in Barranquilla, 13 in nine other cities, 57 in Medellin and 2 blank. Do not replicate; this field follows the place of work and must reconcile to PILA.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element LugarTrabajoMunicipioCiudad (NIE052)."
+  },
+  {
+   "id": 65,
+   "name": "Place of work - address",
+   "xml_element": "LugarTrabajoDireccion",
+   "field_position": "NIE053",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column N",
+     "example_masked": "ADDRESS_n (260 distinct tokens for 261 employees)"
+    }
+   ],
+   "finding": "The address is a per-employee value (260 distinct masked tokens for 261 employees, while there are 12 work locations), so the client appears to report the employee's own (home) address as LugarTrabajoDireccion. Inference from the masked tokens; the raw source must be confirmed.",
+   "proposed_explanation": "Street address of the place of work. For a teleworker this is the agreed remote workplace, not the employer's registered office.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document fills this attribute with a per-employee address (260 distinct masked values for 261 employees, against 12 work locations), i.e. apparently the employee's home address (inference from the masked file). No work-site address field exists in the client reports; a client-approved address per work location is needed.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element LugarTrabajoDireccion (NIE053): address of the place of work."
+  },
+  {
+   "id": 66,
+   "name": "All-inclusive salary flag",
+   "xml_element": "SalarioIntegral",
+   "field_position": "NIE056",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column O",
+     "example_masked": "true (45) / false (216)"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "62140 - Integral Salary- 0423",
+     "example_masked": "> 0 for 88 employees"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ITS segment, column C",
+     "example_masked": "2554 = 2.8% of 62140 for integral employees"
+    }
+   ],
+   "finding": "NEW FINDING: the client flags SalarioIntegral = true for only 45 of the 88 employees paid WT 62140 'Integral Salary' and false for the other 43; both groups have the same salary range and their health/pension deductions are computed on 70% of the salary (WT 2554 = 2.8% of 62140 for 63 of 88, the rest affected by leave), i.e. both are treated as integral in social security. The 15 Oct WT-based rule (true for 62140) is consistent with the client's contribution calculation; the client's current flag is not. No change to the rule; client to explain.",
+   "proposed_explanation": "Whether the employee is on an all-inclusive salary under CST art. 132 num. 2 (minimum 13 SMMLV = COP 22,761,765 in 2026, of which 70% is salary and 30% is the prestacional factor). Where true, the contribution base is 70% of the integral salary and no separate prima, cesantias or interest accrues - which changes what may legitimately appear in the Devengados block.\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client has no flag field. Set true where the employee's salary wage type is 62140 'Integral Salary- 0423' (Accumulated also has 62141 'Arrears-Integral Salary'); false where it is 62100 'Ordinary Salary- 0003'. In Sep-2026: 88 integral, 153 ordinary, 20 interns (62149, neither).\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document sets SalarioIntegral = true for only 45 of the 88 employees paid WT 62140 and false for the other 43, although both groups have health and pension deductions computed on 70% of the salary (WT 2554 = 2.8% of WT 62140). The current flag is inconsistent with the client's own contribution calculation: keep the WT-based rule above and do not copy the file.",
+   "official_source": "CST art. 132 num. 2 (integral salary; 70% contribution base) and DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element SalarioIntegral (NIE056)."
+  },
+  {
+   "id": 67,
+   "name": "Contract type",
+   "xml_element": "TipoContrato",
+   "field_position": "NIE061",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column P",
+     "example_masked": "2 (255) / 4 (6)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "'Employment Contract Type'",
+     "example_masked": "WM (all)"
+    }
+   ],
+   "finding": "NEW EVIDENCE vs the 15 Oct text ('until then this mandatory field cannot be filled'): the client's document carries TipoContrato 2 (indefinite) for 255 employees and 4 (aprendizaje) for 6 interns, so the client holds a source outside the Master Data report. 14 of the 20 interns paid WT 62149 are coded 2 (see NIE041 / NIE157).",
+   "proposed_explanation": "Annex table 5.5.2: 1 Fixed term, 2 Indefinite term, 3 Obra o Labor, 4 Aprendizaje, 5 Practicas o Pasantias. Law 2466 of 2025 art. 21 recast the apprenticeship as a labour contract, so code 4 now denotes a genuine employment relationship. Bidirectional pair with 'Apprentice maintenance support' (NIE157): where NIE157 is present this field must be contract type 4 (aprendizaje).\n\nCLIENT DATA (PMI masked reports, Sep-2026): Master Data 'Employment Contract Type' holds 'WM' for all 261 employees, including the 20 interns (Group 6 / Subgroup E2) paid WT 62149. It does not carry the term of the contract. A client-supplied source for the table 5.5.2 code is required (fixed / indefinite / obra o labor / aprendizaje / practicas); until then this mandatory field cannot be filled.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document does carry a code - 2 (indefinite term) for 255 employees and 4 (aprendizaje) for 6 interns; the other 14 interns paid WT 62149 are coded 2. A client source therefore exists outside the Master Data report: obtain it, and correct the 14 interns before use (see NIE041 / NIE157).",
+   "official_source": null
+  },
+  {
+   "id": 68,
+   "name": "Contractual salary",
+   "xml_element": "Sueldo",
+   "field_position": "NIE062",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column Q",
+     "example_masked": "24715285.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Salary Assigned",
+     "example_masked": "24715285"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "'Basic Salary'",
+     "example_masked": "0 for 2 integral employees"
+    }
+   ],
+   "finding": "Key check requested: the REC salary (column Q) equals G2N 'Salary Assigned' for 239 of 261 documents, not 20 (the amounts are intact in the v2 masking; compare as numbers, '24715285.00' vs 24715285). It equals Master Data 'Basic Salary' for 237 - the 2 integral employees with Basic Salary 0 are reported with their Salary Assigned, so the client's source is the G2N 'Salary Assigned'. The 22 exceptions: the 20 interns are reported with Sueldo 0.00 (Salary Assigned 2,300,000 = their WT 62149 support), and 2 integral employees are reported with exactly twice their Salary Assigned (their WT 62140 paid in the month is lower than Salary Assigned). The draft says Sueldo is never below 1 SMMLV for a full-time employee and does not say what an apprentice document carries.",
+   "proposed_explanation": "SCOPE ROUTING (v1.1 alignment patch): the amount is owned by the Wage Type Catalogue, not the Data Dictionary - the pipeline scope rule routes 'Base Salary / Basic Salary amounts -> WTC, NOT DD'. The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary correctly holds no Contractual Salary field. The CONTRACTUAL monthly salary, not the amount actually paid for the period. It stays constant across a month with unpaid leave or a mid-month hire, whereas SueldoTrabajado (NIE070) moves. Never below 1 SMMLV (COP 1,750,905 in 2026) for a full-time employee.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): Sueldo = G2N 'Salary Assigned' for 239 of 261 documents, including the 2 integral employees whose Master Data 'Basic Salary' is 0, so the client's source is the pay-run 'Salary Assigned', not Master Data. Exceptions: the 20 interns paid WT 62149 are reported with Sueldo 0.00 (Salary Assigned 2,300,000, reported as ApoyoSost), and 2 integral employees are reported with exactly twice their Salary Assigned. Compare as numbers (the file prints 2 decimals).",
+   "official_source": null
+  },
+  {
+   "id": 69,
+   "name": "Employee internal code",
+   "xml_element": "CodigoTrabajador",
+   "field_position": "NIE063",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column R",
+     "example_masked": "(digit-substituted worker code)"
+    }
+   ],
+   "finding": "Equals ENC column I (NIE009) on 261 of 261.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 71,
+   "name": "Payment form",
+   "xml_element": "Forma",
+   "field_position": "NIE064",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "PAG segment, column B",
+     "example_masked": "1"
+    }
+   ],
+   "finding": "Forma 1 on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 72,
+   "name": "Payment method",
+   "xml_element": "Metodo",
+   "field_position": "NIE065",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "PAG segment, column C",
+     "example_masked": "47 (261)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "'Pay Method'",
+     "example_masked": "Cash (4)"
+    }
+   ],
+   "finding": "NEW FINDING: the client reports Metodo 47 (Transferencia Debito Bancaria) for all 261 employees, including the 4 Master Data 'Cash' employees; for one of them bank name, account type and account number are still emitted. The draft (15 Oct) maps Bank -> 42 or 45 and Cash -> 10 with bank details suppressed. 47 is a valid code of the table, so the bank-code choice is a client confirmation; the Cash case contradicts the draft's bidirectional rule.",
+   "proposed_explanation": null,
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, table 5.3.3.2 (medios de pago) and elements Metodo / Banco / TipoCuenta / NumeroCuenta (NIE065-NIE068)."
+  },
+  {
+   "id": 73,
+   "name": "Bank",
+   "xml_element": "Banco",
+   "field_position": "NIE066",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "PAG segment, column D",
+     "example_masked": "BANCOLOMBIA S.A."
+    }
+   ],
+   "finding": "Free-text bank name on 258 documents; empty on 3 cash documents (one cash employee still carries bank data - see NIE065).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 74,
+   "name": "Account type",
+   "xml_element": "TipoCuenta",
+   "field_position": "NIE067",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "PAG segment, column E",
+     "example_masked": "02 (258)"
+    }
+   ],
+   "finding": "The client transmits the Master Data code '02' as TipoCuenta, not the standardised text the draft requires (AHORROS / CORRIENTE). Confirms the round-1 format finding with the live file; whether DIAN accepted '02' (free text in the annex) is not evidenced.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 75,
+   "name": "Account number",
+   "xml_element": "NumeroCuenta",
+   "field_position": "NIE068",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "PAG segment, column F",
+     "example_masked": "(digit-substituted)"
+    }
+   ],
+   "finding": "Account number populated for 258 bank-paid documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 76,
+   "name": "Payment date",
+   "xml_element": "FechaPago",
+   "field_position": "NIE203",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "FEP segment, column B",
+     "example_masked": "2026-09-22"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "ConsolidadoCCT",
+     "column": "D Observaciones",
+     "example_masked": "'ok dif correspondiente al pago del offcycle queda en acumulado pero esta ok que no se reporte en E payroll'"
+    }
+   ],
+   "finding": "Each document carries one FechaPago (2026-09-22, the monthly run). The client's validation note states that an off-cycle payment of the month stays in the accumulators but is deliberately NOT reported in the electronic payroll. The draft (NIE029 / NIE203 / NIE194) requires every payment of the month, with its own FechaPago, in the single monthly document. Single note, one employee; the payment is not identified.",
+   "proposed_explanation": null,
+   "official_source": "Resolucion 000013 de 2021 art. 3 (one monthly support document covering the payments of the month), as cited by the draft for NIE029 / NIE203."
+  },
+  {
+   "id": 78,
+   "name": "Hire date",
+   "xml_element": "FechaIngreso",
+   "field_position": "NIE002",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column C",
+     "example_masked": "2001-01-01"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Hire Date",
+     "example_masked": "01-01-2001"
+    }
+   ],
+   "finding": "The client's FechaIngreso equals 'Hire Date' (Master Data = G2N) on 261 of 261 documents; it differs from 'Original Hire Date' for 40 and from 'Adjusted Service Date' for 21. This is the client's current answer to the open query; the query stays for the rehired/transferred employees.",
+   "proposed_explanation": "Date the employee joined the employer. Constant across every document for that relationship; it drives TiempoLaborado (NIE006), the cesantias accrual and the seniority-based severance calculation.\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client holds three dates - Master Data 'Hire Date' (= G2N 'Hire Date'), 'Original Hire Date' and 'Adjusted Service Date' - which differ for 40 / 21 employees (rehires and transfers). The client must confirm which one is the start of the current employment relationship for DIAN purposes; use the same date for NIE006. Master Data and Leave Absence Report print dates as DD-MM-YYYY; convert to AAAA-MM-DD.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): FechaIngreso = 'Hire Date' (Master Data = G2N) on 261 of 261 documents, not 'Original Hire Date' (differs for 40) or 'Adjusted Service Date' (differs for 21). This is the client's current practice; the query below stays open for the rehired / transferred employees.",
+   "official_source": null
+  },
+  {
+   "id": 79,
+   "name": "Termination date",
+   "xml_element": "FechaRetiro",
+   "field_position": "NIE003",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column D",
+     "example_masked": "(empty, 261)"
+    }
+   ],
+   "finding": "Empty on all documents; no leaver in the run (G2N 'Effective Leaving Date' blank for all 261).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 80,
+   "name": "Settlement period start",
+   "xml_element": "FechaLiquidacionInicio",
+   "field_position": "NIE004",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column E",
+     "example_masked": "2026-09-01"
+    }
+   ],
+   "finding": "First day of the month on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 81,
+   "name": "Settlement period end",
+   "xml_element": "FechaLiquidacionFin",
+   "field_position": "NIE005",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column F",
+     "example_masked": "2026-09-30"
+    }
+   ],
+   "finding": "Last day of the month on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 82,
+   "name": "Time worked",
+   "xml_element": "TiempoLaborado",
+   "field_position": "NIE006",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column G",
+     "example_masked": "9404 (hire 2001-01-01)"
+    }
+   ],
+   "finding": "The client computes TiempoLaborado as CALENDAR days from 'Hire Date' to the settlement end, both included, as an integer without decimals (261 of 261; e.g. hire 2001-01-01 -> 9404). The draft requires the commercial-year construction of annex s.8.3.1 (360-day year, 30-day month) with 2 decimals, which gives about 9270.00 for the same employee. Format (integer vs decimal 2) and rule both differ.",
+   "proposed_explanation": "COMPOSITE VALUE - construction rule. Cumulative service with the employer expressed in DAYS on the Colombian commercial-year convention fixed by Technical Annex s.8.3.1: 1 year = 360 days, 1 month = 30 days. The annex's own worked example is 5 years + 3 months + 18 days = (5 x 360) + (3 x 30) + 18 = 1908.00. Sub-fields: [years x 360] + [months x 30] + [odd days]. PERSISTENCE: recomputed every month from FechaIngreso (NIE002) to the settlement end; it is cumulative service, NOT days worked in the period (that is DiasTrabajados, NIE069).\n\nCLIENT DATA (PMI masked reports, Sep-2026): compute from the date confirmed for NIE002 (Hire Date vs Original Hire Date vs Adjusted Service Date - they differ for up to 40 employees); never mix two dates between NIE002 and this field.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's current document computes TiempoLaborado as calendar days from 'Hire Date' to the settlement end, both included, as an integer without decimals (261 of 261; e.g. hire 2001-01-01 -> 9404, where the construction above gives about 9270.00). Do not replicate.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element TiempoLaborado (NIE006) and s.8.3.1 construction rule, as cited by the draft."
+  },
+  {
+   "id": 83,
+   "name": "Generation date (period block)",
+   "xml_element": "FechaGen",
+   "field_position": "NIE008",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC segment, column H",
+     "example_masked": "2026-09-24"
+    }
+   ],
+   "finding": "Equals NIE026 on all documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 85,
+   "name": "Days worked",
+   "xml_element": "DiasTrabajados",
+   "field_position": "NIE069",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ITE segment, column B",
+     "example_masked": "30 / 29 / 9"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Days Worked / Days On Leave",
+     "example_masked": "Days Worked + Days On Leave = 30 (261)"
+    }
+   ],
+   "finding": "NEW EVIDENCE contradicting the 15 Oct text ('no client counter gives the days worked net of vacation and leave'): the round-2 monthly G2N has the columns 'Days Worked' and 'Days On Leave'; 'Days Worked' = 30 - 'Days On Leave' for all 261 and equals the client's DiasTrabajados (ITE column B) on 261 of 261 documents (e.g. 13 worked + 17 sick-leave days). The 30-minus-Leave-Absence fallback is no longer needed.",
+   "proposed_explanation": "Days actually worked and paid in the period, on the 30-day commercial month. Distinct from TiempoLaborado (NIE006), which is cumulative service. Reduced by unpaid leave, by suspension and by a mid-month hire or leave.\n\nCLIENT DATA (PMI masked reports, Sep-2026; updated in round 2): source = the monthly G2N column 'Days Worked', which equals 30 minus the G2N column 'Days On Leave' (vacation, incapacity and leave, calendar days) for all 261 employees and is exactly the value the client reports as DiasTrabajados in its current electronic payroll file (261 of 261). The interns paid WT 62149 are reported with 30. Do not use Accumulated WT 63812 (gross month count) or WT 63953 (PILA day count). Unpaid leave or suspension must also reduce 'Days Worked'; no such case in Sep-2026.",
+   "official_source": null
+  },
+  {
+   "id": 86,
+   "name": "Salary paid for the period",
+   "xml_element": "SueldoTrabajado",
+   "field_position": "NIE070",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ITE segment, column C",
+     "example_masked": "24715285.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "62100 / 62140",
+     "example_masked": "24715285 (62140)"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62101, 62141, 65820 -> ITE_2"
+    }
+   ],
+   "finding": "SueldoTrabajado = WT 62100 + WT 62140 on 261 of 261 documents (draft rule confirmed). The 20 interns are emitted with SueldoTrabajado 0.00 and DiasTrabajados 30. The client's WT table also assigns the arrears WTs 62101 / 62141 and WT 65820 to this element - the client's answer to the open arrears query, to be confirmed.",
+   "proposed_explanation": "The basic salary actually earned for the days worked. Moves with DiasTrabajados; contrast Sueldo (NIE062), which is the static contractual figure. This is the single largest input to the ET art. 388 depurated withholding base and to the PILA contribution base.\n\nCLIENT DATA (PMI masked reports, Sep-2026): sum WT 62100 'Ordinary Salary- 0003' and WT 62140 'Integral Salary- 0423'. Vacation days are excluded by the client (paid in 79401 -> NIE112). Salary arrears 62101 'Arrears - Ordinary salary' and 62141 'Arrears-Integral Salary' (Accumulated) need a client decision: in this element or as a separate concept. WT 62149 (intern support) does not belong here (-> NIE157).\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): SueldoTrabajado = WT 62100 + WT 62140 on 261 of 261 documents; the 20 interns are reported with SueldoTrabajado 0.00 and DiasTrabajados 30 (their support goes to ApoyoSost). CLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): the arrears WTs 62101 / 62141 and WT 65820 (description not in the masked files) are also assigned to this element - the client's current practice on the arrears query below.",
+   "official_source": null
+  },
+  {
+   "id": 87,
+   "name": "Transport allowance",
+   "xml_element": "AuxilioTransporte",
+   "field_position": "NIE071",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62520 -> ETR_1; 62523 -> EAX_2"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EAX segment, column C",
+     "example_masked": "(includes 62523 for 74 employees)"
+    }
+   ],
+   "finding": "No AuxilioTransporte in the Sep-2026 file (no employee at or below 2 SMMLV). The client's WT table names the statutory transport WT 62520 (-> AuxilioTransporte), which the draft does not name, and assigns 62523 to AuxilioNS: the current file reports 62523 as non-salary for all 74 recipients - evidence for the decision-4 query, not a decision.",
+   "proposed_explanation": "The statutory transport allowance, COP 249,095 per month in 2026. It is NOT salary for contribution purposes but IS included in the base of cesantias, prima and the severance indemnity (CST art. 7 of Ley 1 de 1963) - one of the sharpest base differences in Colombian payroll.\n\nDECISION (15 Oct 2026) and CLIENT DATA (PMI masked reports, Sep-2026): this element carries ONLY the statutory allowance of employees earning up to 2 SMMLV (Ley 15 de 1959). The client's WT 62523 'Transportation Allowance CLA- 2008' (249,095; paid to 74 employees in Sep-2026, all with a salary above 2 SMMLV) is a collective-agreement allowance and is NOT reported here: it goes to Auxilios - AuxilioS (NIE141) or AuxilioNS (NIE142) according to the salary character agreed in the collective agreement, which is pending the client's confirmation. In Sep-2026 no employee at or below 2 SMMLV receives WT 62523 (the only employees at or below the threshold are the 20 interns paid WT 62149).\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): the client assigns WT 62520 to AuxilioTransporte (no recipient in the Sep-2026 run) and WT 62523 to AuxilioNS; the current electronic payroll file reports 62523 as AuxilioNS for all 74 recipients.",
+   "official_source": null
+  },
+  {
+   "id": 88,
+   "name": "Travel and accommodation allowance - salary",
+   "xml_element": "ViaticoManuAlojS",
+   "field_position": "NIE072",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ETR segment, column C",
+     "example_masked": "4549860.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "62805-62808",
+     "example_masked": "Hotel / Breakfast / Lunch / Dinner per diem"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62805-62810, 62820, 62821 -> ETR_2"
+    }
+   ],
+   "finding": "The client reports its per-diem WTs 62805 'Hotel per diem', 62806 'Breakfast', 62807 'Lunch', 62808 'Dinner' (7 employees, 15.4M) - and per its WT table 62809, 62810, 62820, 62821 - in ViaticoManuAlojS (salary). The draft does not name any WT and does not say how permanent (salary) and accidental (non-salary) per diems are told apart; the client never uses NIE073.",
+   "proposed_explanation": "Permanent travel, meal and accommodation allowances that constitute salary and therefore enter the contribution base and the withholding base.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports its per-diem WTs 62805 'Hotel per diem', 62806 'Breakfast per diem', 62807 'Lunch per diem' and 62808 'Dinner per diem' (7 employees in Sep-2026) - and per its WT table 62809, 62810, 62820, 62821 - in ViaticoManuAlojS; ViaticoManuAlojNS (NIE073) is never used. Each WT must be classified as permanent (salary, here) or accidental (non-salary, NIE073) under CST art. 130 before it is mapped.",
+   "official_source": null
+  },
+  {
+   "id": 89,
+   "name": "Travel and accommodation allowance - non-salary",
+   "xml_element": "ViaticoManuAlojNS",
+   "field_position": "NIE073",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "ETR_3 row with no WT"
+    }
+   ],
+   "finding": "Never populated; the client's WT table has an ETR_3 row with no wage type. See NIE072 for the classification query.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 91,
+   "name": "Day overtime hour - start time",
+   "xml_element": "Hora Extra Diurna - Hora de inicio",
+   "field_position": "NIE074",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 92,
+   "name": "Day overtime hour - end time",
+   "xml_element": "Hora Extra Diurna - Hora de finalizacion",
+   "field_position": "NIE075",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 93,
+   "name": "Day overtime hour - quantity",
+   "xml_element": "Hora Extra Diurna - Cantidad",
+   "field_position": "NIE076",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 94,
+   "name": "Day overtime hour - percentage",
+   "xml_element": "Hora Extra Diurna - Porcentaje",
+   "field_position": "NIE077",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 95,
+   "name": "Day overtime hour - amount",
+   "xml_element": "Hora Extra Diurna - Pago",
+   "field_position": "NIE078",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 96,
+   "name": "Night overtime hour - start time",
+   "xml_element": "Hora Extra Nocturna - Hora de inicio",
+   "field_position": "NIE079",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 97,
+   "name": "Night overtime hour - end time",
+   "xml_element": "Hora Extra Nocturna - Hora de finalizacion",
+   "field_position": "NIE080",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 98,
+   "name": "Night overtime hour - quantity",
+   "xml_element": "Hora Extra Nocturna - Cantidad",
+   "field_position": "NIE081",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validacion netos",
+     "column": "column M (free text)",
+     "example_masked": "'EHE^HEN^^^3^1,8^233809,00'"
+    }
+   ],
+   "finding": "One raw overtime line quoted in the client's validation sheet shows Cantidad 3 (integer hours) for HEN. No EHE record in the Sep-2026 segment file. Low evidence base.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 99,
+   "name": "Night overtime hour - percentage",
+   "xml_element": "Hora Extra Nocturna - Porcentaje",
+   "field_position": "NIE082",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validacion netos",
+     "column": "column M (free text)",
+     "example_masked": "'EHE^HEN^^^3^1,8^233809,00'"
+    }
+   ],
+   "finding": "In the only overtime line evidenced, the position of Porcentaje holds '1,8' - a multiplication factor with a comma decimal - where the draft and table 5.5.5 require the percentage 75.00 for HEN. Single line from a control sheet (low confidence); confirm whether the provider converts it.",
+   "proposed_explanation": null,
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, table 5.5.5 (HEN 75.00)."
+  },
+  {
+   "id": 100,
+   "name": "Night overtime hour - amount",
+   "xml_element": "Hora Extra Nocturna - Pago",
+   "field_position": "NIE083",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validacion netos",
+     "column": "column M (free text)",
+     "example_masked": "'...^233809,00'"
+    }
+   ],
+   "finding": "Amount present for the HEN block; note the client's flat input uses a comma decimal ('233809,00') while the segment file uses a dot - the XML must use a dot.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 101,
+   "name": "Night-work surcharge hour - start time",
+   "xml_element": "Hora Recargo Nocturno - Hora de inicio",
+   "field_position": "NIE084",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 102,
+   "name": "Night-work surcharge hour - end time",
+   "xml_element": "Hora Recargo Nocturno - Hora de finalizacion",
+   "field_position": "NIE085",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 103,
+   "name": "Night-work surcharge hour - quantity",
+   "xml_element": "Hora Recargo Nocturno - Cantidad",
+   "field_position": "NIE086",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 104,
+   "name": "Night-work surcharge hour - percentage",
+   "xml_element": "Hora Recargo Nocturno - Porcentaje",
+   "field_position": "NIE087",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 105,
+   "name": "Night-work surcharge hour - amount",
+   "xml_element": "Hora Recargo Nocturno - Pago",
+   "field_position": "NIE088",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 106,
+   "name": "Day overtime hour, Sunday / public holiday - start time",
+   "xml_element": "Hora Extra Diurna Dominical y Festivos - Hora de inicio",
+   "field_position": "NIE089",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 107,
+   "name": "Day overtime hour, Sunday / public holiday - end time",
+   "xml_element": "Hora Extra Diurna Dominical y Festivos - Hora de finalizacion",
+   "field_position": "NIE090",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 108,
+   "name": "Day overtime hour, Sunday / public holiday - quantity",
+   "xml_element": "Hora Extra Diurna Dominical y Festivos - Cantidad",
+   "field_position": "NIE091",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 109,
+   "name": "Day overtime hour, Sunday / public holiday - percentage",
+   "xml_element": "Hora Extra Diurna Dominical y Festivos - Porcentaje",
+   "field_position": "NIE092",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 110,
+   "name": "Day overtime hour, Sunday / public holiday - amount",
+   "xml_element": "Hora Extra Diurna Dominical y Festivos - Pago",
+   "field_position": "NIE093",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 111,
+   "name": "Day surcharge hour, Sunday / public holiday - start time",
+   "xml_element": "Hora Recargo Diurno Dominical y Festivos - Hora de inicio",
+   "field_position": "NIE094",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 112,
+   "name": "Day surcharge hour, Sunday / public holiday - end time",
+   "xml_element": "Hora Recargo Diurno Dominical y Festivos - Hora de finalizacion",
+   "field_position": "NIE095",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 113,
+   "name": "Day surcharge hour, Sunday / public holiday - quantity",
+   "xml_element": "Hora Recargo Diurno Dominical y Festivos - Cantidad",
+   "field_position": "NIE096",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 114,
+   "name": "Day surcharge hour, Sunday / public holiday - percentage",
+   "xml_element": "Hora Recargo Diurno Dominical y Festivos - Porcentaje",
+   "field_position": "NIE097",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 115,
+   "name": "Day surcharge hour, Sunday / public holiday - amount",
+   "xml_element": "Hora Recargo Diurno Dominical y Festivos - Pago",
+   "field_position": "NIE098",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 116,
+   "name": "Night overtime hour, Sunday / public holiday - start time",
+   "xml_element": "Hora Extra Nocturna Dominical y Festivos - Hora de inicio",
+   "field_position": "NIE099",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 117,
+   "name": "Night overtime hour, Sunday / public holiday - end time",
+   "xml_element": "Hora Extra Nocturna Dominical y Festivos - Hora de finalizacion",
+   "field_position": "NIE100",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 118,
+   "name": "Night overtime hour, Sunday / public holiday - quantity",
+   "xml_element": "Hora Extra Nocturna Dominical y Festivos - Cantidad",
+   "field_position": "NIE101",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 119,
+   "name": "Night overtime hour, Sunday / public holiday - percentage",
+   "xml_element": "Hora Extra Nocturna Dominical y Festivos - Porcentaje",
+   "field_position": "NIE102",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 120,
+   "name": "Night overtime hour, Sunday / public holiday - amount",
+   "xml_element": "Hora Extra Nocturna Dominical y Festivos - Pago",
+   "field_position": "NIE103",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 121,
+   "name": "Night surcharge hour, Sunday / public holiday - start time",
+   "xml_element": "Hora Recargo Nocturno Dominical y Festivos - Hora de inicio",
+   "field_position": "NIE104",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 122,
+   "name": "Night surcharge hour, Sunday / public holiday - end time",
+   "xml_element": "Hora Recargo Nocturno Dominical y Festivos - Hora de finalizacion",
+   "field_position": "NIE105",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 123,
+   "name": "Night surcharge hour, Sunday / public holiday - quantity",
+   "xml_element": "Hora Recargo Nocturno Dominical y Festivos - Cantidad",
+   "field_position": "NIE106",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 124,
+   "name": "Night surcharge hour, Sunday / public holiday - percentage",
+   "xml_element": "Hora Recargo Nocturno Dominical y Festivos - Porcentaje",
+   "field_position": "NIE107",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 125,
+   "name": "Night surcharge hour, Sunday / public holiday - amount",
+   "xml_element": "Hora Recargo Nocturno Dominical y Festivos - Pago",
+   "field_position": "NIE108",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 127,
+   "name": "Vacation taken - start date",
+   "xml_element": "VacacionesComunes - FechaInicio",
+   "field_position": "NIE109",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVC segment, column B",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "The client's document leaves FechaInicio empty (optional in the XSD); the round-1 source (Leave Absence Report) still stands.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 128,
+   "name": "Vacation taken - end date",
+   "xml_element": "VacacionesComunes - FechaFin",
+   "field_position": "NIE110",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVC segment, column C",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "The client's document leaves FechaFin empty (optional); round-1 source still stands.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 129,
+   "name": "Vacation taken - days",
+   "xml_element": "VacacionesComunes - Cantidad",
+   "field_position": "NIE111",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVC segment, column D",
+     "example_masked": "4 / 10 / 15"
+    }
+   ],
+   "finding": "Vacation days per document (48 employees); the counts are working days (DiasTrabajados + vacation days <> 30), consistent with CST art. 186 as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 130,
+   "name": "Vacation taken - amount",
+   "xml_element": "VacacionesComunes - Pago",
+   "field_position": "NIE112",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVC segment, column E",
+     "example_masked": "4675000.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "79401 - Annual leave payout",
+     "example_masked": "4675000"
+    }
+   ],
+   "finding": "VacacionesComunes Pago = WT 79401 on 48 of 48 documents (draft rule confirmed); WT 62150 is reported separately (BonificacionS).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 131,
+   "name": "Vacation compensated in cash - days",
+   "xml_element": "VacacionesCompensadas - Cantidad",
+   "field_position": "NIE115",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVA segment, column B",
+     "example_masked": "1 / 4 / 7 / 30"
+    }
+   ],
+   "finding": "Days present on 5 documents. One document carries 30 days with Pago 0.00 (no WT 79403 in the month) - a zero-amount element the client emits.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 132,
+   "name": "Vacation compensated in cash - amount",
+   "xml_element": "VacacionesCompensadas - Pago",
+   "field_position": "NIE116",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVA segment, column C",
+     "example_masked": "454987.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "79403 - Vacations Compensated In cash",
+     "example_masked": "454987"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62116 -> EOT_3"
+    }
+   ],
+   "finding": "Pago = WT 79403 on 4 of 4 paid documents (draft confirmed for 79403). NEW FINDING: the client's WT table assigns WT 62116 'Vacation Terminations' to OtroConcepto (EOT_3), whereas the draft (15 Oct) reports it here on a termination document. No 62116 in the Sep-2026 run, so the conflict is in the mapping only.",
+   "proposed_explanation": null,
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, VacacionesCompensadas (NIE115-NIE116): vacation paid in cash instead of enjoyed (CST art. 189 on termination)."
+  },
+  {
+   "id": 133,
+   "name": "Service bonus - days",
+   "xml_element": "Primas - Cantidad",
+   "field_position": "NIE117",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No Primas record in the Sep-2026 file.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 134,
+   "name": "Service bonus - amount (salary)",
+   "xml_element": "Primas - Pago",
+   "field_position": "NIE118",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62211, 62831 -> EPR_2"
+    }
+   ],
+   "finding": "No Primas in Sep-2026. The client's WT table assigns WT 62831 (description not in the masked files) to Primas - Pago together with 62211, while the draft says 62211 only.",
+   "proposed_explanation": "No Field Explanation change proposed; the evidence goes to a Query to RA (column T) in the round-2 change map.",
+   "official_source": null
+  },
+  {
+   "id": 135,
+   "name": "Service bonus - amount (non-salary)",
+   "xml_element": "Primas - PagoNS",
+   "field_position": "NIE119",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62208, 62209, 62210, 62150, 62118, 62228, 65838 -> EBN_1"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EBN segment, column B",
+     "example_masked": "(62150 for 35 employees)"
+    }
+   ],
+   "finding": "Evidence for the open query: the client reports the extralegal 62208 / 62209 / 62210 (and 62150, 62118, 62228, 65838) as BonificacionS (salary), not Primas PagoNS. 62204 is not in the client's WT table.",
+   "proposed_explanation": "Non-salary portion of a bonus. Counts toward the 40% non-salary clamp of Ley 1393 de 2010 art. 30 for contribution purposes.\n\nCLIENT DATA (PMI masked reports): candidate WTs = extralegal 62208 'March Bonus', 62209 'Christmas Bonus/ December', 62210 'August Bonus' (and 62204 'Collective Labor Agreement Signed Bonus'). Populate this element only for those the client confirms as non-salary extralegal primas under a written CST art. 128 agreement; salary ones go to NIE139.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table) and CLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports 62208, 62209, 62210 (and 62150 'Vacation Bonus', 62118, 62228, 65838) in BonificacionS (NIE139), not in Primas; in Sep-2026 only 62150 was paid (35 employees). This is the client's current classification, pending the confirmation below; 62204 is not in the client's table.",
+   "official_source": null
+  },
+  {
+   "id": 136,
+   "name": "Severance savings - amount",
+   "xml_element": "Cesantias - Pago",
+   "field_position": "NIE120",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ECE segment, column B",
+     "example_masked": "9000000.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "62110 - Cash-out of Severance Pay",
+     "example_masked": "9000000"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62110, 62126, 62182, 65805 -> ECE_1"
+    }
+   ],
+   "finding": "Cesantias Pago = WT 62110 on 2 of 2 documents. The client's WT table also assigns 62182 and the informative fund payment WT 65805 'Payment Severance Funds Inf.' to this element - the client's current practice on the open consignment query.",
+   "proposed_explanation": "Severance savings (auxilio de cesantia, CST art. 249 / Law 50 of 1990 art. 99): one month's salary per year of service. EXCLUDED from the monthly withholding base under both procedures because of the ET art. 206 num. 4 exemption and its taper. Cross-report: this is the figure that must reconcile to Form 220 casillas 47-49 and to Format 2276 numerals 18-20.\n\nCLIENT DATA (PMI masked reports): direct payments = WT 62110 'Cash-out of Severance Pay' and WT 62126 'Advance Severance Last Year'. The annual consignment to the severance funds appears only as informative WT 25827 / 65805 'Payment Severance Funds Inf.' (236 employees, Feb-2026). The spec must state, with the DIAN source, whether that consignment is reported in this element and in which month's document.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): the client reports WT 62110 here (2 employees in Sep-2026) and also assigns 62126, 62182 and the informative fund-payment WT 65805 'Payment Severance Funds Inf.' to Cesantias Pago; 62117 / 62127 go to PagoIntereses. The client therefore reports the annual fund consignment in this element today; the query below on the DIAN source stays.",
+   "official_source": null
+  },
+  {
+   "id": 137,
+   "name": "Severance savings - interest rate",
+   "xml_element": "Cesantias - Porcentaje",
+   "field_position": "NIE121",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ECE segment, column C",
+     "example_masked": "9.00"
+    }
+   ],
+   "finding": "The client emits Porcentaje 9.00 on both September cesantias documents = 12% x 9/12 (1 Jan - 30 Sep; inference). The rate is pro rata to the period, so 'a CONFIGURATION constant' is misleading: the 12% is the constant, the reported rate is computed. The interest amounts (WT 62117) are 16.0% and 8.0% of the Pago on the same documents, so Pago x Porcentaje is not a usable check.",
+   "proposed_explanation": "The statutory interest rate on severance savings: 12% per annum, or pro rata for a partial year (Ley 52 de 1975 art. 1). The 12% annual rate is a configuration constant; the value reported is pro-rated to the period the interest covers.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): Porcentaje 9.00 on both September cesantias documents, i.e. 12% x 9/12 for 1 January - 30 September (inference). The interest amounts reported (WT 62117) are 16.0% and 8.0% of the Pago on the same documents, so Pago x Porcentaje does not reproduce PagoIntereses and must not be used as a validation without the client's interest base.",
+   "official_source": null
+  },
+  {
+   "id": 138,
+   "name": "Severance savings - interest amount",
+   "xml_element": "Cesantias - PagoIntereses",
+   "field_position": "NIE122",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ECE segment, column D",
+     "example_masked": "1440000.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "62117 - Cash-out of Interest Severance Pay",
+     "example_masked": "1440000"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62117, 62127 -> ECE_3"
+    }
+   ],
+   "finding": "PagoIntereses = WT 62117 on 2 of 2 documents; the draft names no client WT.",
+   "proposed_explanation": "Interest on severance savings, payable TO THE EMPLOYEE during January for the balance at the preceding 31 December. Ley 2466 de 2025 art. 64 additionally permits monthly payment of the 1% by written agreement, which the engine must support as a configurable option.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): source = WT 62117 'Cash-out of Interest Severance Pay' (2 employees in Sep-2026) and WT 62127.",
+   "official_source": null
+  },
+  {
+   "id": 140,
+   "name": "Incapacity - start date",
+   "xml_element": "Incapacidad - FechaInicio",
+   "field_position": "NIE123",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EIN segment, column B",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "FechaInicio left empty by the client (optional); round-1 source stands.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 141,
+   "name": "Incapacity - end date",
+   "xml_element": "Incapacidad - FechaFin",
+   "field_position": "NIE124",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EIN segment, column C",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "FechaFin left empty by the client (optional); round-1 source stands.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 142,
+   "name": "Incapacity - days",
+   "xml_element": "Incapacidad - Cantidad",
+   "field_position": "NIE125",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EIN segment, column D",
+     "example_masked": "17 / 2 / 3"
+    }
+   ],
+   "finding": "Days per incapacity element; employer-paid and EPS-paid portions are separate elements (2 + 3 days for one employee), as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 143,
+   "name": "Incapacity - type",
+   "xml_element": "Incapacidad - Tipo",
+   "field_position": "NIE126",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EIN segment, column E",
+     "example_masked": "1"
+    }
+   ],
+   "finding": "Type 1 (Comun) on all 4 elements, derived from WTs 79408 / 79411 as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 144,
+   "name": "Incapacity - amount",
+   "xml_element": "Incapacidad - Pago",
+   "field_position": "NIE127",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EIN segment, column F",
+     "example_masked": "3275136.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "79408 / 79411",
+     "example_masked": "3275136 / 4912704"
+    }
+   ],
+   "finding": "Pago = WT 79408 / 79411 per element on 3 of 3 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 145,
+   "name": "Maternity / paternity leave - start date",
+   "xml_element": "LicenciaMP - FechaInicio",
+   "field_position": "NIE128",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 146,
+   "name": "Maternity / paternity leave - end date",
+   "xml_element": "LicenciaMP - FechaFin",
+   "field_position": "NIE129",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 147,
+   "name": "Maternity / paternity leave - days",
+   "xml_element": "LicenciaMP - Cantidad",
+   "field_position": "NIE130",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 148,
+   "name": "Maternity / paternity leave - amount",
+   "xml_element": "LicenciaMP - Pago",
+   "field_position": "NIE131",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "79406, 79407 -> ELI_4"
+    }
+   ],
+   "finding": "No LicenciaMP in Sep-2026; the client's WT table assigns payouts 79406 (maternity) and 79407 (paternity) to Pago, which the draft's explanation of the amount does not name.",
+   "proposed_explanation": "Amount paid. Advanced by the employer and recovered from the EPS.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): payout WTs 79406 'Maternity' and 79407 'Paternity' feed this element (none paid in Sep-2026).",
+   "official_source": null
+  },
+  {
+   "id": 149,
+   "name": "Paid leave - start date",
+   "xml_element": "LicenciaR - FechaInicio",
+   "field_position": "NIE132",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 150,
+   "name": "Paid leave - end date",
+   "xml_element": "LicenciaR - FechaFin",
+   "field_position": "NIE133",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 151,
+   "name": "Paid leave - days",
+   "xml_element": "LicenciaR - Cantidad",
+   "field_position": "NIE134",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 152,
+   "name": "Paid leave - amount",
+   "xml_element": "LicenciaR - Pago",
+   "field_position": "NIE135",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "79405, 79414, 79418, 79419, 79420 -> ELR_4"
+    }
+   ],
+   "finding": "No LicenciaR in Sep-2026; the client's WT table assigns payouts 79405, 79414, 79418, 79419, 79420 to Pago; the draft names none.",
+   "proposed_explanation": "Money value of the remunerated leave. Fully in the contribution base and the withholding base.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): payout WTs 79405, 79414, 79418, 79419 'Jury/ Elector Leave payout' and 79420 feed this element (none paid in Sep-2026).",
+   "official_source": null
+  },
+  {
+   "id": 153,
+   "name": "Unpaid leave - start date",
+   "xml_element": "LicenciaNR - FechaInicio",
+   "field_position": "NIE136",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 154,
+   "name": "Unpaid leave - end date",
+   "xml_element": "LicenciaNR - FechaFin",
+   "field_position": "NIE137",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 155,
+   "name": "Unpaid leave - days",
+   "xml_element": "LicenciaNR - Cantidad",
+   "field_position": "NIE138",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 156,
+   "name": "Legal strike - start date",
+   "xml_element": "HuelgaLegal - FechaInicio",
+   "field_position": "NIE143",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 157,
+   "name": "Legal strike - end date",
+   "xml_element": "HuelgaLegal - FechaFin",
+   "field_position": "NIE144",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 158,
+   "name": "Legal strike - days",
+   "xml_element": "HuelgaLegal - Cantidad",
+   "field_position": "NIE145",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 160,
+   "name": "Bonus - salary",
+   "xml_element": "BonificacionS",
+   "field_position": "NIE139",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EBN segment, column B",
+     "example_masked": "(62150 Vacation Bonus, 35 documents)"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62150, 62208-62210, 62118, 62228, 65838 -> EBN_1"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "62202 - Ocassional Bonus Grossed Up-1378",
+     "example_masked": "6 employees, 410.0M"
+    }
+   ],
+   "finding": "The draft names no client WT. The client reports 62150 (35 employees) and per its table 62208-62210, 62118, 62228, 65838 here. WT 62202 'Ocassional Bonus Grossed Up' (6 expatriates, 410.0M) is in the G2N gross and in the client's DevengadosTotal but in no element of the file and not in the WT table. The file also emits 12 empty Bonificacion records (no amount, no WT with a value).",
+   "proposed_explanation": "Discretionary or contractual bonus that constitutes salary. Fully in the contribution base and in the withholding base.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table) and CLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports in BonificacionS WT 62150 'Vacation Bonus' (35 employees in Sep-2026) and, per its table, 62208, 62209, 62210, 62118, 62228, 65838. WT 62202 'Ocassional Bonus Grossed Up' (6 expatriate employees in Sep-2026) is in the G2N gross and in the client's DevengadosTotal but in no element of the current file and not in the client's table: classify it (BonificacionS or NS) before build. The current file also emits 12 Bonificacion records with no amount; a record with no amount is not emitted.",
+   "official_source": null
+  },
+  {
+   "id": 161,
+   "name": "Bonus - non-salary",
+   "xml_element": "BonificacionNS",
+   "field_position": "NIE140",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EBN segment, column C",
+     "example_masked": "16255303.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62201, 62135, 62229, 62122, 62226, 62590, 62132, 62144, 62500, 62206 ... -> EBN_2"
+    }
+   ],
+   "finding": "The draft names no client WT. The client reports 10 WTs here in Sep-2026 (14 employees) and lists 16 more in its WT table.",
+   "proposed_explanation": "Non-salary bonus. Excluded from the contribution base, but counts toward the 40% non-salary clamp of Ley 1393 de 2010 art. 30 - the excess over 40% of total remuneration is added back into the contribution base.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table) and CLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports in BonificacionNS 62201 'Ocassional Bonus', 62135 'ABCD Award', 62229 'Years of Service Bonus', 62122 'GM Cost of Living Adjust.', 62226 'GM Utilities Allowance', 62590 'Marriage Allowance', 62132 'Relocation Allowance Expat', 62144 'Reunification Allowance', 62500 'Loss Comp. Car Allowance', 62206 'Home Leave Allowance' (14 employees in Sep-2026) and, per its table, 62400, 62219, 62121, 62646, 62591, 62213, 62504, 62146, 62227, 62147, 62120, 62220, 62111, 62124, 62119, 62560. The non-salary character of each is the client's classification and must be confirmed (CST arts. 127-128).",
+   "official_source": null
+  },
+  {
+   "id": 162,
+   "name": "Allowance - salary",
+   "xml_element": "AuxilioS",
+   "field_position": "NIE141",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EAX segment, column B",
+     "example_masked": "152717.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62133, 62225 -> EAX_1"
+    }
+   ],
+   "finding": "The client reports WT 62225 'Salary Attendance Bonus-Monthly' (74) and WT 62133 'Variable -1301' (6) in AuxilioS. The draft names no client WT; 'Variable' looks like variable pay rather than an allowance.",
+   "proposed_explanation": "Employer allowance that constitutes salary (for example a fixed, habitual connectivity or housing allowance not agreed as non-salary).\n\nDECISION (15 Oct 2026): the client's collective-agreement transport allowance WT 62523 'Transportation Allowance CLA- 2008', paid to employees earning above 2 SMMLV, is reported here where the convention gives it salary character (it is not AuxilioTransporte, NIE071, which is limited to 2 SMMLV under Ley 15 de 1959). The salary character of WT 62523 is pending the client's confirmation (see the query on NIE071).\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports in AuxilioS WT 62225 'Salary Attendance Bonus-Monthly' (74 employees) and WT 62133 'Variable -1301' (6 employees). 'Variable' looks like variable pay rather than an allowance; see the query.",
+   "official_source": null
+  },
+  {
+   "id": 163,
+   "name": "Allowance - non-salary",
+   "xml_element": "AuxilioNS",
+   "field_position": "NIE142",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EAX segment, column C",
+     "example_masked": "3461568.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62523, 62207, 65814, 65815, 65817, 65837 ... -> EAX_2"
+    }
+   ],
+   "finding": "The client reports 17 WTs in AuxilioNS, including 62523 (decision-4 query) and the informative insurance / gym / optical / expat benefits that the draft (NIE193) lists as PagoTercero candidates; negative 62540 reversals are netted inside the element (2 documents). In one document WT 62310 'Expat allowance' and its offset 21310 (17.5M) are left out of both sides.",
+   "proposed_explanation": "Employer allowance expressly agreed as non-salary. Counts toward the 40% clamp.\n\nDECISION (15 Oct 2026): the client's collective-agreement transport allowance WT 62523 'Transportation Allowance CLA- 2008', paid to employees earning above 2 SMMLV, is reported here where the convention agrees it as non-salary (it is not AuxilioTransporte, NIE071, which is limited to 2 SMMLV under Ley 15 de 1959). The salary character of WT 62523 is pending the client's confirmation (see the query on NIE071).\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports in AuxilioNS WT 62523 (74 employees), 62207 'Attendance Bonus' (74), 62811 'Health Allowance', 62540 'Housing Allowance Domestic Relocation' (negative reversals netted inside the element), 62700 'School Allowance', 62221 'Hardship Premium', 62430 'L2L Rent Allowance', 62131 'Scholarship', 65808 'Aid Refractive Surgery', and the informative third-party benefits 65817 / 65837 (life insurance), 65814 / 65815 (private health insurance), 65811 (gym), 65839 (optical), 62320 / 62310 (expat leasing / allowance), which NIE193 lists as PagoTercero candidates. The element for the informative benefits is an open decision (see NIE193).",
+   "official_source": null
+  },
+  {
+   "id": 164,
+   "name": "Other concept - description",
+   "xml_element": "OtroConcepto - DescripcionConcepto",
+   "field_position": "NIE146",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EOT segment, column B",
+     "example_masked": "'Paquete de expatriación Expats HOST' / 'Stock awards (Vesting) - Informativo-1004' / 'Pago Pr�stamo Sin Inter�s'"
+    }
+   ],
+   "finding": "Evidence for the open query: the client reports WT 65821 as OtroConcepto with a client-written Spanish label (6 employees, 845.9M), WT 67090 as 'Pago Préstamo Sin Interés' (10.0M) and stock-award labels with 0.00 (25 lines on 21 documents). WTs 1910, 67010 (mapped to EOT_3) and the negative 62216 are not in the file. The masked copy shows replacement characters in the description (encoding). The client's WT table assigns 62203 to BonifRetiro, not here.",
+   "proposed_explanation": "Free-text label of a concept that has no dedicated element. Mandatory (1-1) inside the block: an amount without a description is not admissible. Bidirectional set with 'Other concept - salary' (NIE147) and 'Other concept - non-salary' (NIE148): at least one of the two amounts must be present wherever this description is populated.\n\nCLIENT DATA (PMI masked reports): candidate client WTs with no dedicated element include 65821 'Expatriation Package for Inbounds', 1910 'Previous periods receivables' and 62203 'Reconciliations PMI additionall payment'. Use the client WT description as DescripcionConcepto. Each must be confirmed by the client and classified S or NS at WT configuration before use.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): WT 65821 is reported as OtroConcepto with the client-written label 'Paquete de expatriación Expats HOST' and ConceptoNS (6 employees); WT 67090 as 'Pago Préstamo Sin Interés' (1 employee); stock-award labels appear with 0.00 (25 lines on 21 documents). WTs 1910 and 67010 (assigned to OtroConcepto in the client's WT table) and the negative 62216 are not in the file. DescripcionConcepto must be UTF-8 (the masked copy shows replacement characters for the accented letters). The client's WT table assigns 62203 to BonifRetiro (NIE159), not here.",
+   "official_source": null
+  },
+  {
+   "id": 165,
+   "name": "Other concept - salary",
+   "xml_element": "OtroConcepto - ConceptoS",
+   "field_position": "NIE147",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "ConceptoS never populated; all OtroConcepto amounts are non-salary in the client file.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 166,
+   "name": "Other concept - non-salary",
+   "xml_element": "OtroConcepto - ConceptoNS",
+   "field_position": "NIE148",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EOT segment, column D",
+     "example_masked": "509181224.00 / 0.00"
+    }
+   ],
+   "finding": "All OtroConcepto amounts are ConceptoNS; 25 zero-amount lines are emitted for stock-award WTs with no value in the month.",
+   "proposed_explanation": "Non-salary amount of the described concept.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): every OtroConcepto amount is ConceptoNS; 25 zero-amount lines are emitted for stock-award WTs with no value in the month. Whether zero-amount concepts are suppressed is a Mercans design decision.",
+   "official_source": null
+  },
+  {
+   "id": 167,
+   "name": "Ordinary cooperative compensation",
+   "xml_element": "Compensacion - CompensacionO",
+   "field_position": "NIE149",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 168,
+   "name": "Extraordinary cooperative compensation",
+   "xml_element": "Compensacion - CompensacionE",
+   "field_position": "NIE150",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 169,
+   "name": "Voucher / card payment - salary",
+   "xml_element": "BonoEPCTV - PagoS",
+   "field_position": "NIE151",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 170,
+   "name": "Voucher / card payment - non-salary",
+   "xml_element": "BonoEPCTV - PagoNS",
+   "field_position": "NIE152",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 171,
+   "name": "Meal payment - salary",
+   "xml_element": "BonoEPCTV - PagoAlimentacionS",
+   "field_position": "NIE153",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Never populated; the client reports the meal benefit as non-salary (NIE154).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 172,
+   "name": "Meal payment - non-salary",
+   "xml_element": "BonoEPCTV - PagoAlimentacionNS",
+   "field_position": "NIE154",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EBO segment, column E",
+     "example_masked": "484000.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "65818 - Meal Allowance Inf.-2079",
+     "example_masked": "484000"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "65813 -> EBO_4 (65818 not listed)"
+    }
+   ],
+   "finding": "Evidence for the open query: the client reports WT 65818 in PagoAlimentacionNS for 211 of 211 recipients (its WT table still lists the older code 65813) and its offset 21115 in OtraDeduccion (SOT_3), not in PagoTercero as the draft proposes.",
+   "proposed_explanation": "Non-salary meal payments through a third party.\n\nCLIENT DATA (PMI masked reports, Sep-2026): source = WT 65818 'Meal Allowance Inf.-2079' (G2N grouping 'Non Cash Earnings/Deductions', 211 employees including the 20 interns, up to 4,488,000). The client offsets it with WT 21115 'Meal Allowance Inf. Deduction' of the same amount; if this earning is reported in the XML, the offset must be reported on the deduction side (NIE195) so that ComprobanteTotal still equals the cash net paid. Whether the amount is reported here (NIE153, salary) or in NIE154 (non-salary) follows the salary character agreed for WT 65818 (CST arts. 127-128), which the client must confirm; the 41 UVT / 310 UVT test of ET art. 387-1 does NOT decide S vs NS - the engine tracks it separately for the withholding base and for Format 2276 numerals 32 / 8.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client reports WT 65818 in PagoAlimentacionNS for 211 of 211 recipients (its WT table still lists the older code 65813) and the offset WT 21115 in OtraDeduccion (NIE197), not in PagoTercero (NIE195). Current client practice, pending the confirmation below.",
+   "official_source": null
+  },
+  {
+   "id": 173,
+   "name": "Commission",
+   "xml_element": "Comision",
+   "field_position": "NIE155",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No record of this element in the Sep-2026 segment file, the client's WT table or the validation sheets.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 174,
+   "name": "Third-party payment (accrued)",
+   "xml_element": "PagoTercero",
+   "field_position": "NIE193",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ECO segment, column C",
+     "example_masked": "370729.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "65802 - Foncoltabaco - Aporte Empresa DB",
+     "example_masked": "370729"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "65802, 65809 -> ECO_2"
+    }
+   ],
+   "finding": "The client's current PagoTercero (accrued) holds only 65802 (178) and 65809 (1); the other informative benefits the draft lists here are reported in AuxilioNS, and their offsets are split between PagoTercero and OtraDeduccion. The draft's candidate list differs from the client's practice.",
+   "proposed_explanation": "Payments made to third parties that are income of the employee. Repeating (0-N).\n\nCLIENT DATA (PMI masked reports, Sep-2026): candidate WTs = informative 'Inf.' earnings in G2N grouping 'Non Cash Earnings/Deductions': 65814/65815/65801/65831 (private health), 65817/65837 (life insurance), 65811 (gym), 65809/65839 (optical), 65812 (text books), 62310/62320 (expat allowance/leasing), 65802 (Foncoltabaco employer contribution). Each has an equal offsetting 'Inf. deduction' (21563, 21802, 21801, 25837, 21110, 21111, 21213, 21310, 21320, 21613) to report in NIE195; in Sep-2026 every pair ties exactly. Exclude employer social-security costs and bases in the same grouping (2560, 2564, 2567, 25110-25112, 63011, 64990-64996). Also exclude WT 67090 'Loan without interests Payment Inf.' (same grouping, no non-cash offset): it funds the cash deduction 21215 and is a loan, not a third-party benefit (see NIE185 / NIE189).\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's PagoTercero (accrued) holds only WT 65802 'Foncoltabaco - Aporte Empresa DB' (178 employees) and WT 65809 'Optical Allowance Inf' (1). The insurance, gym, optical-CLA and expat informative WTs listed above are reported in AuxilioNS (NIE142), and their offsets are split between PagoTercero (21613, 21802, 25837, 21110) and OtraDeduccion (21563, 21111, 21310, 21320). In one document WT 62310 and its offset 21310 are left out. Whichever element is chosen, the earning and its offset must be reported consistently.",
+   "official_source": null
+  },
+  {
+   "id": 175,
+   "name": "Advance (accrued)",
+   "xml_element": "Anticipo",
+   "field_position": "NIE194",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "61100, 61101, 61150, 61200 -> ECO_3"
+    }
+   ],
+   "finding": "No accrued Anticipo in the Sep-2026 file. The client's WT table assigns 61100, 61101, 61150, 61200 to Anticipo; the draft names 61100 and 62838 (62838 is not in the client table).",
+   "proposed_explanation": "Salary advance paid to the employee. Repeating (0-N).\n\nCLIENT DATA (PMI masked reports): advances are paid in runs other than the monthly G2N - Accumulated WT 61100 'Weekly advance' and WT 62838 'Exceptional Advance'. Include every payroll run of the month (with its own FechaPago, NIE203), not only the monthly G2N. The recovery is expected in WT 21215 'Legalization Salary Payment' (-> NIE196), but only 5 of the 34 employees with 21215 in Sep-2026 had a 61100/62838 advance in the two previous months, so the client must confirm the link per case (see NIE196).\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): the client assigns 61100, 61101, 61150 and 61200 to Anticipo (accrued); 62838 is not in its table. None appears in the Sep-2026 file, which carries only the monthly run (see NIE203).",
+   "official_source": null
+  },
+  {
+   "id": 176,
+   "name": "Work clothing",
+   "xml_element": "Dotacion",
+   "field_position": "NIE156",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Dotacion never populated.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 177,
+   "name": "Apprentice maintenance support",
+   "xml_element": "ApoyoSost",
+   "field_position": "NIE157",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVO segment, column C",
+     "example_masked": "2300000.00 (20)"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment, column B/P",
+     "example_masked": "19/4 (6), 01/2 (14)"
+    }
+   ],
+   "finding": "ApoyoSost = WT 62149 on 20 of 20 intern documents (draft source confirmed). But only 6 of the 20 carry TipoTrabajador 19 / TipoContrato 4; 14 carry 01 / 2, which breaks the draft's bidirectional rule (NIE157 present -> NIE041 12/19 and NIE061 4). The same documents carry SueldoTrabajado 0.00, Sueldo 0.00, Salud / FondoPension 0 / 0.00 and BonifRetiro / Indemnizacion 0.00.",
+   "proposed_explanation": "Maintenance stipend paid to an apprentice. Law 2466 of 2025 art. 21 recast the apprenticeship as a labour contract, so from 2026 the support is remuneration of an employee, not a training stipend, and is regulated by Decree 0223 of 5 March 2026.\n\nCLIENT DATA (PMI masked reports, Sep-2026): source = WT 62149 'Internship Pay - Sustainability Support- INKOMPASS - 0424' (20 employees, 2,300,000 each; Master Data Group 6 / Subgroup E2; Accumulated WT 64116 'Apprentice formula' = 1). The bidirectional check with NIE061 = 4 and NIE041 = 12/19 needs the client's contract and worker-type data, not held today (Master Data contract type 'WM' for all).\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): ApoyoSost = WT 62149 on 20 of 20 intern documents, with SueldoTrabajado 0.00, Sueldo 0.00, Salud and FondoPension 0 / 0.00, and BonifRetiro / Indemnizacion emitted as 0.00. Only 6 of the 20 are coded TipoTrabajador 19 / TipoContrato 4; 14 are coded 01 / 2, so the current file breaks the bidirectional check on 14 documents.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element ApoyoSost (NIE157) with tables 5.5.3 / 5.5.2, as relied on by the draft; Ley 2466 de 2025 art. 21."
+  },
+  {
+   "id": 178,
+   "name": "Telework allowance",
+   "xml_element": "Teletrabajo",
+   "field_position": "NIE158",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Teletrabajo never populated.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 179,
+   "name": "Retirement bonus",
+   "xml_element": "BonifRetiro",
+   "field_position": "NIE159",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVO segment, column E",
+     "example_masked": "0.00 (20)"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62203 -> EVO_4"
+    }
+   ],
+   "finding": "The client's WT table assigns WT 62203 'Reconciliations PMI additionall payment' to BonifRetiro, while the draft (NIE146) lists 62203 as an OtroConcepto candidate; the description does not evidence a retirement bonus. The current file emits BonifRetiro 0.00 on all 20 intern documents.",
+   "proposed_explanation": "Ex gratia or negotiated bonus paid on departure. Fully taxable employment income; it enters the ordinary monthly withholding base.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table) and CLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client assigns WT 62203 'Reconciliations PMI additionall payment' to BonifRetiro (NIE146 lists it as an OtroConcepto candidate; the description does not evidence a retirement bonus). The current file emits BonifRetiro 0.00 on all 20 intern documents; whether zero-amount elements are suppressed is a Mercans design decision.",
+   "official_source": null
+  },
+  {
+   "id": 180,
+   "name": "Dismissal indemnity",
+   "xml_element": "Indemnizacion",
+   "field_position": "NIE160",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EVO segment, column F",
+     "example_masked": "0.00 (20)"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "62180, 62181 -> EVO_5"
+    }
+   ],
+   "finding": "The client's WT table assigns 62180 / 62181 to Indemnizacion, exactly as the draft. No payment in Sep-2026; the file emits Indemnizacion 0.00 on the 20 intern documents (zero-amount element).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 181,
+   "name": "Reimbursement (accrued)",
+   "xml_element": "Reintegro",
+   "field_position": "NIE201",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validacion netos",
+     "column": "Q/T",
+     "example_masked": "'REINTEGRO'"
+    }
+   ],
+   "finding": "The client's validation sheet mentions 'REINTEGRO' as a reconciling item but no WT or element is evidenced.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 183,
+   "name": "Health contribution - rate",
+   "xml_element": "Salud - Porcentaje",
+   "field_position": "NIE161",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ITS segment, column B",
+     "example_masked": "4 (241) / 0 (20)"
+    }
+   ],
+   "finding": "Porcentaje 4 on 241 documents and 0 with Deduccion 0.00 on the 20 intern documents (no employee contribution). The draft gives only the 4.00% rule and does not say what a document without an employee contribution carries.",
+   "proposed_explanation": "Employee health contribution rate: 4.00% of the contribution base (Ley 100 de 1993 art. 204 as amended). The employer's 8.5% is NOT an employee deduction and must never appear here.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): Porcentaje 4 on 241 documents and 0 with Deduccion 0.00 on the 20 intern documents, which carry no employee contribution. What Salud and FondoPension carry for a worker without employee contribution is not stated above; see the query.",
+   "official_source": null
+  },
+  {
+   "id": 184,
+   "name": "Health contribution - amount",
+   "xml_element": "Salud - Deduccion",
+   "field_position": "NIE163",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ITS segment, column C",
+     "example_masked": "692028.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2554",
+     "example_masked": "692028"
+    }
+   ],
+   "finding": "Salud Deduccion = WT 2554 on 261 of 261 documents (0.00 for interns).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 185,
+   "name": "Pension contribution - rate",
+   "xml_element": "FondoPension - Porcentaje",
+   "field_position": "NIE164",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SPE segment, column B",
+     "example_masked": "4 / 0"
+    }
+   ],
+   "finding": "The client emits '4' (and '0' for interns), 1 character, where the draft's Field Length is 4-6 (e.g. 4.00). xsd:decimal accepts '4', so the spec length is stricter than the client's live value. The 2 employees with 'Pensioner Effective Date' carry 4 (decision 7 unchanged).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 186,
+   "name": "Pension contribution - amount",
+   "xml_element": "FondoPension - Deduccion",
+   "field_position": "NIE166",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SPE segment, column C",
+     "example_masked": "692028.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2556",
+     "example_masked": "692028"
+    }
+   ],
+   "finding": "FondoPension Deduccion = WT 2556 on 261 of 261 documents.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 187,
+   "name": "Solidarity fund - solidarity rate",
+   "xml_element": "FondoSP - Porcentaje",
+   "field_position": "NIE167",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column C",
+     "example_masked": "173007.00 (225)"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2553 - Solidarity Pension Fund",
+     "example_masked": "173007"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column B/D/E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "The client reports the whole WT 2553 (1% of the base for most employees, i.e. solidarity + subsistence) in DeduccionSP, with no Porcentaje and no PorcentajeSub / DeduccionSub, on 225 documents. The draft (15 Oct) requires the split: 0.50% solidarity in DeduccionSP and the rest in DeduccionSub. The current file reports the subsistence half as solidarity.",
+   "proposed_explanation": null,
+   "official_source": "Ley 100 de 1993 art. 27 as amended by Ley 797 de 2003 art. 8; DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, FondoSP (NIE167-NIE170)."
+  },
+  {
+   "id": 188,
+   "name": "Solidarity fund - solidarity amount",
+   "xml_element": "FondoSP - DeduccionSP",
+   "field_position": "NIE168",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column C",
+     "example_masked": "173007.00 (225)"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2553 - Solidarity Pension Fund",
+     "example_masked": "173007"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column B/D/E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "The client reports the whole WT 2553 (1% of the base for most employees, i.e. solidarity + subsistence) in DeduccionSP, with no Porcentaje and no PorcentajeSub / DeduccionSub, on 225 documents. The draft (15 Oct) requires the split: 0.50% solidarity in DeduccionSP and the rest in DeduccionSub. The current file reports the subsistence half as solidarity.",
+   "proposed_explanation": null,
+   "official_source": "Ley 100 de 1993 art. 27 as amended by Ley 797 de 2003 art. 8; DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, FondoSP (NIE167-NIE170)."
+  },
+  {
+   "id": 189,
+   "name": "Solidarity fund - subsistence rate",
+   "xml_element": "FondoSP - PorcentajeSub",
+   "field_position": "NIE169",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column C",
+     "example_masked": "173007.00 (225)"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2553 - Solidarity Pension Fund",
+     "example_masked": "173007"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column B/D/E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "The client reports the whole WT 2553 (1% of the base for most employees, i.e. solidarity + subsistence) in DeduccionSP, with no Porcentaje and no PorcentajeSub / DeduccionSub, on 225 documents. The draft (15 Oct) requires the split: 0.50% solidarity in DeduccionSP and the rest in DeduccionSub. The current file reports the subsistence half as solidarity.",
+   "proposed_explanation": null,
+   "official_source": "Ley 100 de 1993 art. 27 as amended by Ley 797 de 2003 art. 8; DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, FondoSP (NIE167-NIE170)."
+  },
+  {
+   "id": 190,
+   "name": "Solidarity fund - subsistence amount",
+   "xml_element": "FondoSP - DeduccionSub",
+   "field_position": "NIE170",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column C",
+     "example_masked": "173007.00 (225)"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2553 - Solidarity Pension Fund",
+     "example_masked": "173007"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SSP segment, column B/D/E",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "The client reports the whole WT 2553 (1% of the base for most employees, i.e. solidarity + subsistence) in DeduccionSP, with no Porcentaje and no PorcentajeSub / DeduccionSub, on 225 documents. The draft (15 Oct) requires the split: 0.50% solidarity in DeduccionSP and the rest in DeduccionSub. The current file reports the subsistence half as solidarity.",
+   "proposed_explanation": null,
+   "official_source": "Ley 100 de 1993 art. 27 as amended by Ley 797 de 2003 art. 8; DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, FondoSP (NIE167-NIE170)."
+  },
+  {
+   "id": 191,
+   "name": "Income tax withheld",
+   "xml_element": "RetencionFuente",
+   "field_position": "NIE177",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SVA segment, column C",
+     "example_masked": "5402993.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "2552 / 21330",
+     "example_masked": "5402993 / 6 employees"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "2552, 21129, 21155, 21140, 21619, 21114, 21330, 25832, 25833, 25834 -> SVA_2"
+    }
+   ],
+   "finding": "RetencionFuente = WT 2552 (224) and WT 21330 'Theoretical' (all 6) in the current file. The client's WT table also assigns 21129, 21155, 21140, 21619, 21114, 25832, 25833 and the hypothetical 25834 (which the draft excludes) to this element - evidence for the open query.",
+   "proposed_explanation": "No Field Explanation change proposed; the evidence goes to a Query to RA (column T) in the round-2 change map.",
+   "official_source": null
+  },
+  {
+   "id": 193,
+   "name": "Voluntary pension contribution",
+   "xml_element": "PensionVoluntaria",
+   "field_position": "NIE198",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SVA segment, column B",
+     "example_masked": "2500000.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "25811-25815, 25823, 21141, 25810, 25819-25822, 21210-21212 -> SVA_1"
+    }
+   ],
+   "finding": "PensionVoluntaria = FVOL WTs on 28 of 28 documents. The client's WT table also assigns 'Plan Institucional PROTECCION' 21210 / 21211 / 21212 and 21141, 25810, 25819-25822 here - the client's answer on 21210 / 21211.",
+   "proposed_explanation": "Voluntary contribution to a pension fund. Reduces the withholding base within the ET art. 336 40% / 1,340 UVT annual limit. Cross-report: Form 220 casillas 55-56 and Format 2276 numerals 25-26 split RAIS voluntary contributions from voluntary pension-fund contributions, so the engine must carry the two separately even though the XML has one element.\n\nCLIENT DATA (PMI masked reports, Sep-2026): sum the FVOL WTs 25811 Porvenir, 25812 Proteccion, 25813 Skandia, 25814 Metlife, 25815 Dafuturo, 25823 Colfondos (equals Base of Withholding 'Contribution APV'). The client's WTs do not distinguish RAIS voluntary contributions (2276 numeral 25) from voluntary pension funds (numeral 26); all are voluntary-fund ('FVOL') contributions. Client to classify 'Plan Institucional PROTECCION' deductions 21210/21211.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): the client also assigns 'Plan Institucional PROTECCION' 21210 / 21211 / 21212 and WTs 21141, 25810, 25819-25822 to PensionVoluntaria (client's current answer on 21210 / 21211). In Sep-2026: 25812, 25813, 25823, 25815, 25814 (28 documents).",
+   "official_source": null
+  },
+  {
+   "id": 194,
+   "name": "AFC savings account contribution",
+   "xml_element": "AFC",
+   "field_position": "NIE179",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SVA segment, column D",
+     "example_masked": "1500000.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "25800-25809, 21142, 21143 -> SVA_3"
+    }
+   ],
+   "finding": "AFC = WTs 25800, 25801, 25802, 25803, 25805, 25806 on 36 of 36 documents; the draft names no client WT.",
+   "proposed_explanation": "Long-term construction-savings contribution. Shares the ET art. 336 40% / 1,340 UVT cap with voluntary pension contributions. Cross-report: Form 220 casilla 57, Format 2276 numeral 27.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): source = AFC WTs 25800 AV Villas, 25801 Banco Bogota, 25802 Bancolombia, 25803 Davivienda, 25805 BBVA, 25806 Colpatria (36 documents in Sep-2026) and, per the client table, 25804, 25807-25809, 21142, 21143.",
+   "official_source": null
+  },
+  {
+   "id": 195,
+   "name": "Union dues",
+   "xml_element": "Sindicato - Porcentaje",
+   "field_position": "NIE171",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SIN segment, column B",
+     "example_masked": "1.50 (74)"
+    }
+   ],
+   "finding": "NEW EVIDENCE vs the 15 Oct text ('the rate is not in the payroll output ... never one merged amount with a single rate'): the client emits ONE Sindicato per unionised employee with Porcentaje 1.50 and the sum of the three union WTs; the sum is 1.50% of SueldoTrabajado for 53 of 74 employees.",
+   "proposed_explanation": "Percentage rate of the union subscription, set by the union's statutes.\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client stores amounts only (WTs 21550 CUT, 21680 national, and one sectional WT 21552 / 21560 / 21562 / 21670); each of the 74 unionised employees pays exactly 3 of them. The rate is not in the payroll output: it must be configured per union WT (from the union's statutes) and reported per union.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client emits ONE Sindicato per unionised employee (74) with Porcentaje 1.50 and Deduccion = the sum of the three union WTs; that sum equals 1.50% of SueldoTrabajado for 53 of 74 employees. This differs from the per-union-WT repetition proposed above; Mercans to decide between per-union elements (rates from the statutes) and the client's single combined element.",
+   "official_source": null
+  },
+  {
+   "id": 196,
+   "name": "Union dues - amount",
+   "xml_element": "Sindicato - Deduccion",
+   "field_position": "NIE172",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SIN segment, column C",
+     "example_masked": "137445.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "21550 / 21680 / 21552-21670",
+     "example_masked": "3 WTs per member"
+    }
+   ],
+   "finding": "Deduccion = sum of 21550 + 21680 + one sectional WT on 74 of 74 documents, one Sindicato element per employee (not one per union WT as the draft proposes).",
+   "proposed_explanation": "Money value of the union subscription withheld. Requires the employee's written authorisation (CST art. 400).\n\nCLIENT DATA (PMI masked reports, Sep-2026): union-fee WTs 21550, 21552, 21560, 21562, 21670, 21680 (and possibly 21803). 74 employees pay exactly 3 union WTs in the same month (CUT + national + one sectional), which look like tiers of one subscription (inference): emit one Sindicato (rate + amount) per union WT if XSD v1.0.6 allows repetition under Sindicatos (to be confirmed), never one merged amount with a single rate.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): Deduccion = 21550 + 21680 + one sectional WT, one Sindicato per employee (74 of 74), with Porcentaje 1.50 (see NIE171).",
+   "official_source": null
+  },
+  {
+   "id": 197,
+   "name": "Public sanction",
+   "xml_element": "Sancion - SancionPublic",
+   "field_position": "NIE173",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Never populated.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 198,
+   "name": "Private sanction",
+   "xml_element": "Sancion - SancionPriv",
+   "field_position": "NIE174",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Never populated.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 199,
+   "name": "Payroll loan - description",
+   "xml_element": "Libranza - Descripcion",
+   "field_position": "NIE175",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SLI segment, column B",
+     "example_masked": "Prestamo de Libranza Bancolombia"
+    }
+   ],
+   "finding": "Description 'Prestamo de Libranza <bank>' per loan, one element per loan (one employee has two), as the draft states.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 200,
+   "name": "Payroll loan - amount",
+   "xml_element": "Libranza - Deduccion",
+   "field_position": "NIE176",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SLI segment, column C",
+     "example_masked": "1185478.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "21119, 21120, 21121 -> SLI_2"
+    }
+   ],
+   "finding": "Deduccion = WT 21119 BBVA / 21120 Occidente / 21121 Bancolombia on 17 of 17 documents; the draft names no client WT.",
+   "proposed_explanation": "Instalment withheld under a libranza authorisation (Ley 1527 de 2012). ENGINE RULE: the aggregate of all libranza deductions must leave the employee at least 50% of net salary - a validation the XML does not perform.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): one Libranza per loan WT - 21119 'Loan BBVA', 21120 'Loan Banco Occidente', 21121 'Loan Bancolombia' (17 documents; one employee with two) - with Descripcion 'Prestamo de Libranza <bank>'.",
+   "official_source": null
+  },
+  {
+   "id": 201,
+   "name": "Third-party payment (deduction)",
+   "xml_element": "PagoTercero",
+   "field_position": "NIE195",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SOT segment, column B",
+     "example_masked": "1973756.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "21192, 21193, 21123, 21116, 21613, 21802, 25837, 21110, 25817, 21615 ... -> SOT_1"
+    }
+   ],
+   "finding": "The client's PagoTercero (deduction) holds the offsets 21613, 21802, 25837, 21110 AND the Foncoltabaco employee-fund deductions, 25817 and 21615 (235 documents); the draft limits it to informative offsets and sends Foncoltabaco to Cooperativa (NIE180).",
+   "proposed_explanation": "Amounts withheld for payment to third parties. Repeating (0-N).\n\nCLIENT DATA (PMI masked reports, Sep-2026): candidate WTs = informative offsetting deductions 21115, 21563, 21802, 21801, 25837, 21110, 21111, 21213, 21310, 21320, 21613, each equal to its paired 'Inf.' earning. Report them only together with their earning (NIE193 / NIE154) so that ComprobanteTotal still equals the net paid to the bank.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's PagoTercero (deduction) holds the offsets 21613, 21802, 25837, 21110 and also the Foncoltabaco employee-fund deductions 21192, 21193, 21123, 21116, plus 25817 'Dividendo por Colombia Contribution' and 21615 'San Vicente Funeral' (235 documents); its WT table adds 21122, 21124, 21118, 21147-21153, 21801, 21803, 25827-25829, 26103. Foncoltabaco is therefore a third-party payment in the current file, not a Cooperativa (see NIE180).",
+   "official_source": null
+  },
+  {
+   "id": 202,
+   "name": "Advance recovery (deduction)",
+   "xml_element": "Anticipo",
+   "field_position": "NIE196",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SOT segment, column C",
+     "example_masked": "1442315.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "21215 - Legalization Salary Payment",
+     "example_masked": "34 employees, 196.7M"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validacion netos",
+     "column": "U Legalizacion anticipos",
+     "example_masked": "1442315"
+    }
+   ],
+   "finding": "The client reports every WT 21215 line in Anticipo (34 of 34) and excludes it from ComprobanteTotal (see NIE189); its validation sheet labels the difference 'Legalizacion anticipos' (a vacation advance legalised in payroll, per the client note).",
+   "proposed_explanation": "Recovery of a salary advance. Repeating (0-N).\n\nCLIENT DATA (PMI masked reports, Sep-2026): candidate source = WT 21215 'Legalization Salary Payment'. The client must say what each 21215 line legalises (advance recovery, off-cycle payment or loan refinancing): in Sep-2026 only 5 of the 34 employees with 21215 had a 61100/62838 advance in the two previous months, and one 21215 is matched by the non-cash WT 67090 'Loan without interests Payment Inf.' (an advance converted into an interest-free loan). Only where it recovers an advance does it go to NIE196. Keep it separate from employer-loan repayments (27010 / 27011 / 27040 -> NIE185); the shared WTC code CO-DED-PRESTAMO must be split.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): every WT 21215 line is reported in Anticipo (34 of 34 employees) and is NOT subtracted from ComprobanteTotal (see NIE189); the client's validation sheet labels the difference 'Legalizacion anticipos' (a vacation advance legalised in payroll, per the client's note).",
+   "official_source": null
+  },
+  {
+   "id": 203,
+   "name": "Other deduction",
+   "xml_element": "OtraDeduccion",
+   "field_position": "NIE197",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SOT segment, column D",
+     "example_masked": "699100.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "21115, 21127, 21611, 21612, 21563, 21117, 1204, 21126, 21821, 21310, 21320 ... -> SOT_3"
+    }
+   ],
+   "finding": "The client reports 12 WTs in OtraDeduccion in Sep-2026 (248 documents), including the meal offset 21115, private health insurance 21611 / 21612 (see NIE182), Foncoltabaco E.M.I 21117 and the expatriate 1204 / 21126 - the client's answer to the open classification.",
+   "proposed_explanation": "Catch-all deduction element. Use sparingly: DIAN expects concepts that have a dedicated element to use that element.\n\nCLIENT DATA (PMI masked reports, Sep-2026): candidate WTs with no dedicated element: 21127 'Sport Deduction/Payment', 25817 'Dividendo por Colombia Contribution', 21615 'San Vicente Funeral', 21821 'Other Accounts Payable', and expatriate items 1204 'Previous periods obligations' and 21126 'Payment Expatriates Through PMS'. Client to confirm for each whether it is OtraDeduccion, a third-party payment (NIE195) or excluded.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): the client's OtraDeduccion holds 21115 (meal offset, 211 documents), 21127 'Sport Deduction/Payment' (93), 21612 / 21611 private health insurance Sura / Colsanitas (82 / 53; see NIE182), the informative offsets 21563, 21111, 21310, 21320, 21117 'Foncoltabaco E.M.I' (14), 1204 (6), 21126 (4) and 21821 (3); its WT table adds 21610, 21213, 21113, 25824, 25825, 25830, 21128.",
+   "official_source": null
+  },
+  {
+   "id": 204,
+   "name": "Cooperative deduction",
+   "xml_element": "Cooperativa",
+   "field_position": "NIE180",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "21616, 21617, 21618 -> SVA_4; Foncoltabaco -> SOT_1 / SOT_3"
+    }
+   ],
+   "finding": "Cooperativa never populated in Sep-2026. The client's WT table assigns only 21616-21618 here and reports Foncoltabaco in PagoTercero / OtraDeduccion, contradicting the draft's candidate list (Foncoltabaco -> Cooperativa, pending confirmation).",
+   "proposed_explanation": "Contribution or repayment withheld for an employee cooperative.\n\nCLIENT DATA (PMI masked reports, Sep-2026): candidate WTs = Foncoltabaco 21192 (Aporte Legal), 21193 (Aporte Voluntario), 21123 (Free Destination), 21116 (Vivienda), 21117 (E.M.I), 21122, 21124, and cooperative 21617 'Coop John F. Kennedy'. 140 employees have more than one in a month: sum them into the single amount. Client to confirm that employee-fund (Foncoltabaco) deductions are reported here.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): the client assigns only 21616, 21617, 21618 to Cooperativa (none in Sep-2026) and reports the Foncoltabaco deductions in PagoTercero (21192, 21193, 21123, 21116, 21122, 21124) and OtraDeduccion (21117). The candidate list above therefore differs from the client's current practice.",
+   "official_source": null
+  },
+  {
+   "id": 205,
+   "name": "Judicial or tax attachment",
+   "xml_element": "EmbargoFiscal",
+   "field_position": "NIE181",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SVA segment, column F",
+     "example_masked": "1523330.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "21125, 21190, 21200 -> SVA_5"
+    }
+   ],
+   "finding": "EmbargoFiscal = WT 21125 'Court Garnishment Fee Excluding Minimum Salary (SMMLV)' on 1 document; the draft names no client WT.",
+   "proposed_explanation": "Attachment of salary. Colombian salary is unattachable up to the minimum wage, and only 20% of the excess is attachable, except for maintenance debts and cooperative debts (CST arts. 154-156) - an engine rule, not an XML rule.\n\nCLIENT WT TABLE (round 2: client wage type -> electronic payroll element table): source = WT 21125 'Court Garnishment Fee Excluding Minimum Salary (SMMLV)' (1 employee in Sep-2026) and WTs 21190, 21200.",
+   "official_source": null
+  },
+  {
+   "id": 206,
+   "name": "Complementary health plan",
+   "xml_element": "PlanComplementarios",
+   "field_position": "NIE182",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SOT segment, column D",
+     "example_masked": "(includes 21611 / 21612)"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "21611 / 21612 - Private Health Insurance",
+     "example_masked": "135 documents"
+    }
+   ],
+   "finding": "PlanComplementarios is never populated. The client reports its employee deductions for private health insurance 21611 (Colsanitas) and 21612 (Sura) - and 21610 per its WT table - in OtraDeduccion on 135 documents. The draft defines this element as the prepaid / complementary health-plan premium withheld and states that concepts with a dedicated element must use it (NIE197).",
+   "proposed_explanation": null,
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, element PlanComplementarios (NIE182); ET art. 387 (prepaid health)."
+  },
+  {
+   "id": 207,
+   "name": "Education deduction",
+   "xml_element": "Educacion",
+   "field_position": "NIE183",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Never populated.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 208,
+   "name": "Reimbursement (deduction)",
+   "xml_element": "Reintegro",
+   "field_position": "NIE184",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Never populated.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 209,
+   "name": "Debt",
+   "xml_element": "Deuda",
+   "field_position": "NIE185",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SVA segment, column J",
+     "example_masked": "810086.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "27010, 27011, 27040, 27090, 27019 -> SVA_9"
+    }
+   ],
+   "finding": "Deuda = WTs 27010 / 27011 / 27040 on 47 of 47 documents, as the draft states (the client table adds 27090 and 27019, not paid in Sep-2026).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 211,
+   "name": "Rounding residual",
+   "xml_element": "Redondeo",
+   "field_position": "NIE186",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "TOT segment, column B",
+     "example_masked": "(empty)"
+    }
+   ],
+   "finding": "Redondeo empty on all documents (optional).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 212,
+   "name": "Total accrued",
+   "xml_element": "DevengadosTotal",
+   "field_position": "NIE187",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "TOT segment, column C",
+     "example_masked": "27335285.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Gross Salary",
+     "example_masked": "27335285"
+    }
+   ],
+   "finding": "The client's DevengadosTotal = G2N 'Gross Salary' for 254 of 261 (minus WT 65821 for the 6 expatriates, minus WT 67090 for 1). It does NOT equal the sum of the Devengados elements of the same document for 259 of 261: the informative earnings reported in AuxilioNS / PagoTercero / PagoAlimentacionNS are left out of the total, while 62202, 1910, 67010 and the negative 62216 are in the total but in no element; 65821 is in an element but not in the total. The draft's rule is the sum of the elements.",
+   "proposed_explanation": "Sum of every element in the Devengados block. Item 6 and item 8 of the art. 5 mandatory content. Input [4] to the CUNE, where it must be TRUNCATED to two decimals - truncated, not rounded, a distinction that catches many implementations. Bidirectional set with 'Rounding residual' (NIE186), which is present only where round-half-to-even rounding of the individual concepts leaves this total differing from the sum of its parts.\n\nCLIENT DATA (PMI masked reports, Sep-2026): the client's G2N groups WTs as 'Entitlements', 'Deductions' and 'Non Cash Earnings/Deductions'. Total = all 'Entitlements' WTs mapped to Devengados elements, plus only those informative 'Non Cash' earnings explicitly mapped (NIE193 / NIE154); employer contributions and bases in the Non Cash grouping are never included. Negative Entitlement lines occur (e.g. 62216 -3,319,075; 62540 -971,899) and no element accepts a negative: the rule (net against the same concept, or report as a deduction) must be defined before build.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): DevengadosTotal = G2N 'Gross Salary' for 254 of 261 (minus WT 65821 for 6 expatriates, minus WT 67090 for 1), which is NOT the sum of the Devengados elements of the same document for 259 of 261: the informative earnings reported in AuxilioNS / PagoTercero / PagoAlimentacionNS are left out of the total, WTs 62202, 1910, 67010 and the negative 62216 are in the total but in no element, and 65821 is in an element but not in the total. Do not replicate: the total is the sum of the elements reported.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, DevengadosTotal (NIE187) = sum of the Devengados elements; Res. 000013 de 2021 art. 5."
+  },
+  {
+   "id": 213,
+   "name": "Total deducted",
+   "xml_element": "DeduccionesTotal",
+   "field_position": "NIE188",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "TOT segment, column D",
+     "example_masked": "7936615.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Total Deductions",
+     "example_masked": "7936615"
+    }
+   ],
+   "finding": "The client's DeduccionesTotal = G2N 'Total Deductions' on 261 of 261 documents, which excludes the informative offsets reported in PagoTercero / OtraDeduccion; it equals the sum of the Deducciones elements on only 3 documents. The draft's rule is the sum of the elements.",
+   "proposed_explanation": "Sum of every element in the Deductions block. Item 7 of the art. 5 mandatory content. Input [5] to the CUNE, truncated to two decimals. Bidirectional set with 'Rounding residual' (NIE186), which is present only where round-half-to-even rounding of the individual concepts leaves this total differing from the sum of its parts.\n\nCLIENT DATA (PMI masked reports, Sep-2026): total = absolute value of all G2N 'Deductions' WTs mapped to Deducciones elements, plus only the offsetting informative deductions explicitly mapped (NIE195). The client stores deductions as negative amounts; convert the sign. Ignore 0-value rows of 2552/2553 in the Non Cash grouping.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): DeduccionesTotal = G2N 'Total Deductions' on 261 of 261 documents, which excludes the informative offsets reported in PagoTercero / OtraDeduccion; it equals the sum of the Deducciones elements on only 3 documents. Do not replicate.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, DeduccionesTotal (NIE188) = sum of the Deducciones elements."
+  },
+  {
+   "id": 214,
+   "name": "Total payable",
+   "xml_element": "ComprobanteTotal",
+   "field_position": "NIE189",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "TOT segment, column E",
+     "example_masked": "19398670.00"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Net Pay",
+     "example_masked": "19398670"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "26998 Net salary (notional) -> TOT_03"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Validacion netos",
+     "column": "S Gross neto / U Legalizacion anticipos",
+     "example_masked": "8266393 / 1442315"
+    }
+   ],
+   "finding": "ComprobanteTotal = G2N 'Net Pay' for 227 documents, but G2N 'Net Pay' + WT 21215 for all 34 employees with a 21215 'Legalization Salary Payment' (the Anticipo deduction is not subtracted), and 0.00 for the 6 expatriates whose DevengadosTotal < DeduccionesTotal. ComprobanteTotal <> DevengadosTotal - DeduccionesTotal on 40 of 261 documents. TOT position order: positions B-E are Redondeo (empty), DevengadosTotal, DeduccionesTotal, ComprobanteTotal (XSD order) - the net is in the 4th position, so the client's WT-table label 'TOT_03' for WT 26998 is zero-based and does not contradict the order. Client WT 26998 (Accumulated, Sep-2026) equals the client's ComprobanteTotal for 240 of 259, so the round-1 statement that 26998 'carries the same figure' as the bank net is not exact for the 21215 employees.",
+   "proposed_explanation": "DevengadosTotal minus DeduccionesTotal, adjusted for the Rounding residual. Item 8 of the art. 5 mandatory content. Input [6] to the CUNE, truncated to two decimals. Bidirectional set with 'Rounding residual' (NIE186), which is present only where round-half-to-even rounding of the individual concepts leaves this total differing from the sum of its parts.\n\nCLIENT DATA (PMI masked reports, Sep-2026): must reconcile to the cash net paid: ComprobanteTotal = Entitlements + Deductions + any non-cash item that funds a cash deduction (in Sep-2026, WT 67090 'Loan without interests Payment Inf.' offsetting WT 21215), which ties to the client's Bank Payments 'Net Pay' for 255 of 255 employees (Accumulated WT 26998 'Net salary (notional)' carries the same figure). No employee had a negative net in Sep-2026. WT 1910 'Previous periods receivables' (2 cash-paid employees, net 0 in G2N) and WT 1204 'Previous periods obligations' are carry-forward items that need the client decision listed under NIE146 / NIE197.\n\nCLIENT NE FILE (round 2: client electronic payroll segment file, Sep-2026): ComprobanteTotal = G2N 'Net Pay' for 227 documents, but 'Net Pay' + WT 21215 for all 34 employees with a 21215 line (the Anticipo deduction is not subtracted) and 0.00 for the 6 expatriates whose DevengadosTotal is below DeduccionesTotal; it differs from DevengadosTotal - DeduccionesTotal on 40 of 261 documents. Position order: the TOT record carries Redondeo (empty), DevengadosTotal, DeduccionesTotal, ComprobanteTotal in XSD order; the client's WT-table label 'TOT_03' for WT 26998 'Net salary (notional)' is zero-based and does not change that order. Accumulated WT 26998 equals the client's ComprobanteTotal (not the bank net) for the 21215 employees in most cases, so it is not the reconciliation source.",
+   "official_source": "DIAN Resolucion 000013 de 2021, Anexo Tecnico Nomina Electronica v1.0 and XSD v1.0.6, ComprobanteTotal (NIE189) = DevengadosTotal - DeduccionesTotal (+/- Redondeo)."
+  },
+  {
+   "id": 216,
+   "name": "Contractual change flag",
+   "xml_element": "Novedad",
+   "field_position": "NIE199",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No change event in the client's document.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 217,
+   "name": "Referenced CUNE",
+   "xml_element": "CUNENov",
+   "field_position": "NIE204",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No change event in the client's document.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 219,
+   "name": "Adjustment note type",
+   "xml_element": "TipoNota",
+   "field_position": "NIAE214",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No adjustment note in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 220,
+   "name": "Adjustment note - replaced block",
+   "xml_element": "Reemplazar",
+   "field_position": "NIAE001-NIAE213",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No adjustment note in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 221,
+   "name": "Adjustment note - cancelled block",
+   "xml_element": "Eliminar",
+   "field_position": "NIAE236, NIAE237 et seq.",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No adjustment note in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 223,
+   "name": "Validation response envelope",
+   "xml_element": "SendNominaSyncResponse",
+   "field_position": "INB-01",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No DIAN response in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 224,
+   "name": "Application response (base64)",
+   "xml_element": "ApplicationResponse",
+   "field_position": "INB-02",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No DIAN response in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 225,
+   "name": "Validation status",
+   "xml_element": "Estado de validacion",
+   "field_position": "INB-03",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No DIAN response in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 226,
+   "name": "Rejection rule codes",
+   "xml_element": "Codigos de regla de rechazo",
+   "field_position": "INB-04",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No DIAN response in the masked reports.",
+   "proposed_explanation": null,
+   "official_source": null
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "Monthly_fixed.xlsx",
+   "sheet": "Nómina",
+   "column": "A (segment code)",
+   "classification": "Client-specific",
+   "note": "Record codes of the provider's flat input (ENC, EMI, REC ...); structure of the file, not XML content."
+  },
+  {
+   "file": "Monthly_fixed.xlsx",
+   "sheet": "Nómina",
+   "column": "ENC column B ('NominaIndividual')",
+   "classification": "Client-specific",
+   "note": "Root element name of the individual document; implied by TipoXML 102 (NIE202), no separate field needed."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "ConsolidadoCCT",
+   "column": "A-H (SEG, Validar, Empleado, Observaciones, Concatenate, Acumulados, Electronic Payroll, Diference) and Z (helper)",
+   "classification": "Client-specific",
+   "note": "Client validation of each segment against the accumulators; cached values unusable in the values-only copy. Method evidence only."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Mapping",
+   "column": "WT, Seg, Field, Type, HRB",
+   "classification": "Client-specific",
+   "note": "Client's wage-type -> segment/field configuration table; used here as evidence for System Mapping / Field Explanation. Not report content."
+  },
+  {
+   "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+   "sheet": "Validacion netos",
+   "column": "Acumulados / Electronic Payroll / Diference / Gross devengos / Gross descuentos / Gross neto / Legalizacion anticipos",
+   "classification": "Client-specific",
+   "note": "Per-employee net reconciliation; evidences the ComprobanteTotal = net + 21215 practice (NIE189 Conflict)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "64990-64996, 63011, 2560, 2564, 2567, 25110-25112, Total Employer Contributions, Employer Liability, 52552, 64993 formula",
+   "classification": "Client-specific",
+   "note": "Social-security bases and employer contributions: PILA content (CO-PILA-003), never part of the electronic payroll document."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "Balance Credit/With Balance Wage Type",
+   "classification": "Client-specific",
+   "note": "Empty control column."
+  }
+ ],
+ "summary": {
+  "Aligned": 49,
+  "Explanation to improve": 38,
+  "Format mismatch": 4,
+  "Conflict": 22,
+  "Not evidenced": 91,
+  "total_fields": 204,
+  "Missing in spec (uncovered columns)": 0,
+  "Client-specific (uncovered columns)": 7
+ }
+}

@@ -1,0 +1,254 @@
+﻿Statutory Change Alert: Egypt Payroll (Effective January 1, 2026)
+1. Executive Summary: The Convergence of Reform
+1.1. Strategic Overview for Product & Engineering Teams
+1. Changes in Social Security minimum and maximum wage ceiling (already covered in last update)
+2. The Emergency Benefit Fund now follows a decoupled trajectory with significantly lower caps. 
+3. The Training Fund undergoes a complete paradigm shift from a finance-based profit levy to a payroll-based headcount levy with its own unique floor and ceiling logic.
+4. Furthermore, the Universal Health Insurance system introduces Phase 2 locations for deductions under this Act
+1.2. Critical Impact Matrix (2025 vs. 2026)
+The following matrix identifies the high-priority variables that require immediate modification in the payroll calculation engine. These changes are "blockers" for compliance certification.
+
+
+Component
+	Logic Parameter
+	2025 Legacy Value
+	2026 New Value
+	Implementation Priority
+	Authority Source
+	Social Insurance (already covered)
+	Minimum Insurable Wage
+	EGP 2,300 / month
+	EGP 2,700 / month
+	Critical (Blocker)
+[a]	
+1
+	Social Insurance
+(already covered)
+	Maximum Insurable Wage
+	EGP 14,500 / month
+	EGP 16,700 / month
+	Critical (Blocker)
+[b]	
+1
+	Emergency Fund
+	Min Salary Basis
+	EGP 2,300 (Linked)
+	EGP 440 (Decoupled)
+	High (Risk)
+	3
+	Emergency Fund
+	Max Salary Basis
+	EGP 14,500 (Linked)
+	EGP 2,720 (Decoupled)
+	High (Risk)
+	3
+	Training Fund (announced in May 2025)
+	Calculation Formula
+	1% of Net Profit
+	0.25% of Min SI Wage
+	Critical (New Logic)
+	5
+	Training Fund (announced in May 2025)
+	Constraints
+	> 10 Employees
+	> 30 Employees
+	Medium
+	5
+	Training Fund
+	Per-Employee Cap
+	None
+	Min EGP 10 / Max EGP 30
+	Critical (New Logic)
+	5
+	UHI
+	Geographic Scope
+	Phase 1 Governorates
+	Phase 1 + Phase 2
+	High (Geo-logic)
+	6
+	Increment
+	Mandatory Raise
+	Discretionary
+	3% of Insurable Wage
+	Critical (New Logic)
+	5
+	
+
+2. Social Insurance: The Core Engine Update (Covered in last update)
+2.1. The 2026 Insurable Wage Parameters
+Effective January 1, 2026, the National Organization for Social Insurance (NOSI) enforces new floors and ceilings.:
+* Minimum Insurable Wage (SI_MIN): EGP 2,700 per month.
+* Maximum Insurable Wage (SI_MAX): EGP 16,700 per month.
+2.2. Contribution Rates and Classifications
+2.3.1. Standard Employees
+For the vast majority of the workforce, the contribution structure is as follows:
+* Employee Share: 11% of the Insurable Wage.2
+* Employer Share: 18.75% of the Insurable Wage 2
+2.3.2. Managers and Board Directors [c][d][e]
+A critical "edge case" logic exists for company directors and managers whose names appear in the Commercial Register.
+* Logic: These individuals are insured as "Employers" rather than "Employees."
+* Rate: A flat 21% employer contribution.2
+* Base: Crucially, this rate is applied to the Maximum Insurable Wage (EGP 16,700), regardless of their actual drawing. Even if a board member takes a nominal salary of EGP 5,000, their social insurance liability is calculated on EGP 16,700.
+2.4. Handling Salary Components (Basic vs. Variable)
+Add Basic + Recurring Allowances + Overtime + Commissions to determine the "Total Insurable Wage" before comparing it against the SI_MIN and SI_MAX limits.
+3. Emergency Benefit Fund: The Decoupling Risk[f]
+3.1. 2026 EBF Parameters
+The Emergency Benefit Fund is an employer-only contribution designed to aid workers in distressed companies. For 2026, the parameters are:
+* Basis: Basic Salary Only.
+* Contribution Rate: 1%.4
+* Minimum Basic Wage Cap: EGP 440.3
+* Maximum Basic Wage Cap: EGP 2,720.3
+* Applicability Threshold: Companies with > 30 Employees.
+4. The New Labor Law No. 14 of 2025[g][h]
+The enactment of Labor Law No. 14 of 2025, which replaces the 2003 legislation, introduces profound changes to payroll logic. While the law was published in May 2025 and effective September 2025, the 2026 fiscal year is the first full year where these rules apply comprehensively, particularly the new annual Training Fund cycle.
+4.1. Training Fund: A Complete Paradigm Shift
+The most technically complex update for 2026 is the Training Fund. Under the old law (Law 12/2003), this was a finance-driven calculation: 1% of the company's annual Net Profit. This meant it was often handled outside the payroll engine, typically by the Finance team during audit.
+The New Labor Law moves this squarely into the Payroll Domain. It transforms the levy from a profit tax to a payroll headcount tax.5
+4.1.1. The New Formula (Effective Jan 1, 2026)
+* Trigger: Employers with > 30 Employees.5 (Old law was > 10 employees).
+* Basis: The National Minimum Social Insurance Wage (SI_MIN).
+   * Note: It is calculated on the statutory minimum (EGP 2,700), NOT the employee's actual salary.
+* Rate: 0.25% of the Basis.
+* Constraints:
+   * Minimum Floor: EGP 10.00 per employee.
+   * Maximum Ceiling: EGP 30.00 per employee.
+* Exemption: Employers who provide robust internal training programs may apply for an exemption, but the payroll system must accrue the liability by default until the exemption is granted.8
+4.1.2. Logic Walkthrough for 2026
+Let's calculate the liability for a single employee in 2026:
+1. Get Basis: SI_MIN = EGP 2,700.1
+2. Apply Rate: 2,700 * 0.0025 = 6.75 EGP.
+3. Apply Floor: Max(6.75, 10.00) = 10.00 EGP.
+4. Apply Ceiling: Min(10.00, 30.00) = 10.00 EGP.
+Result: The contribution for 2026 is EGP 10.00 per employee
+4.2.  Employer termination of definite term contracts:
+Under the New Labour Law, employees are entitled to a gratuity equal to one month's salary for each year of service to be paid if the employer ends a definite term employment contract pre-maturely.
+4.3 Leave Entitlement Updates
+The New Labor Law alters leave logic, impacting "paid days" calculations and potential termination payouts.
+* Annual Leave: Employees will be entitled to 15 workdays of employer-paid leave in the first year of service (currently eligible only after six months of work, pro rata based on 21 workdays); individuals with disabilities will be entitled to 45 days of paid leave per year
+* Sick Leave: The new structure provides more generous terms. Employees are entitled to 100% of pay for the first 3 months of sick leave (previously lower), then 85% for the next 6 months, and 75% for the final 3 months.12
+* Maternity Leave: Increased from 90 days to 120 days (4 months).11
+   * Eligibility: Can be taken up to 3 times (previously 2)
+* Paternity Leave: A new entitlement of 1 day of paid leave for fathers upon the birth of a child.11
+5. Universal Health Insurance (UHI): Geographic Expansion[i]
+5.1. Phase 2 Rollout
+The UHI system is a mandatory health coverage scheme replacing the old system incrementally. Deductions are triggered based on the location of the employee. For Jan 1, 2026, the system expands into Phase 2 Governorates.6
+Governorate Status Table (2026):
+Phase
+	Status in 2026
+	Governorates
+	Action Required
+	Phase 1
+	Active
+	Port Said, Luxor, Ismailia, Suez, South Sinai, Aswan
+	Continue Deductions
+	Phase 2
+	Active (New)
+	Minya, Matrouh, Damietta, Kafr El-Sheikh, North Sinai
+	Start Deductions Jan 1
+	Rest of Egypt
+	Inactive
+	Cairo, Giza, Alexandria, Qalyubia, etc.
+	No Deduction
+	Note: Alexandria is mentioned in snippets as being "studied" or potentially added, but Phase 2 explicitly lists the five governorates above. Developers should enable a "soft switch" for Alexandria in case of a last-minute decree.
+5.2. Deduction Logic & Rates
+Once an employee is identified as being in an active zone (based on Work Location or SI Office Location), the following rates apply:
+* Employee Share: 1% of Total Insurable Wage.
+* Employer Share: 3% of Total Insurable Wage.
+* Basis: Unlike SI (capped at 16,700), the UHI Law technically applies to the total income. However, usually, it aligns with the SI base for administrative simplicity. Critical check: Snippet 18 mentions "maximum annual calculation base for establishing health insurance... will enter into force 1 Jan 2026." This suggests UHI might have its own cap or align formally with the SI Cap. Recommendation: Apply the deduction on the Total Insurable Wage up to the SI Max (16,700) unless specific executive regulations specify a higher ceiling for UHI. Most implementations utilize the SI Cap.
+5.3. Dependent Coverage Logic
+Employees are liable for dependents if they are the sole breadwinner:
+* Non-working Spouse: 3% deduction.
+* Children: 1% per child.
+* Payroll Implication: This is often a direct payment by the individual to the UHI Authority, but some employers facilitate it. The software should support an Optional_UHI_Dependents_Deduction field, but it should not be mandatory unless the employer policy dictates.
+6. Taxation: Personal Exemption & Martyrs Fund
+6.1. Personal Exemption Thresholds
+For the 2026 tax year, the calculation of the "Personal Exemption" (the amount deducted from taxable income before applying tax brackets) is as follows:
+* Standard Employee: EGP 20,000 per year.15
+   * Note: Some snippets mention 15k rising to 20k. Snippet 15 confirms 20k is the current standard.
+* Disabled Employee: EGP 30,000 per year.3
+   * Logic: Disabled persons receive a 50% uplift on the standard exemption (20,000 * 1.5 = 30,000).[j]
+6.2. Martyrs Fund (Solidarity Levy)
+The "Martyrs and Victims Fund" levy remains a mandatory deduction.
+* Rate: 0.0005 (0.05% or "Five Ten-Thousandths").16
+* Basis: Gross Salary (Total Monthly Income).
+* Placement: This is deducted from the Net Pay. It is a "Net-to-Net" reduction or a post-tax deduction depending on interpretation, but standard practice in Egypt is to calculate it on the Gross and deduct it as a separate line item.[k]
+* Example: Gross Salary EGP 50,000. Levy = 50,000 * 0.0005 = 25.00 EGP.
+7. Payroll Engine Impact Simulation
+To visualize the cumulative effect of these changes, the following simulation breaks down the 2026 payroll calculation for a high-income employee situated in a newly active Phase 2 governorate.
+Scenario:
+* Employee: Senior Engineer.
+* Location: Damietta (UHI Phase 2).
+* Gross Salary: EGP 20,000 per month (Basic: 10,000, Variable: 10,000).
+* Marital Status: Single.
+
+
+Analysis of Simulation:
+1. SI Deduction: The salary (20k) exceeds the cap (16.7k). Deduction is 16,700 * 11% = 1,837.
+   * 2025 Comparison: In 2025, the cap was 14.5k, so deduction was 1,595. The employee pays EGP 242 more in SI this year.
+2. UHI Deduction: Because Damietta is now active, the employee pays 16,700 * 1% = 167.
+   * 2025 Comparison: EGP 0.
+3. Net Impact: The combined effect of the SI cap increase and UHI activation significantly reduces take-home pay compared to 2025. Communications to employees should clearly attribute this to "Statutory Compliance Updates."
+9. Comprehensive Test Strategy (QA/UAT)
+The following test scenarios are mandatory for the "Egypt 2026 Compliance Release."
+9.1. Test Case A: The "Floor" Employee
+* Inputs: Basic Salary EGP 2,000. Location: Cairo.
+* Logic: Salary < SI Min (2,700).
+* Expected Outputs:
+   * SI Base: 2,700 (Deemed).
+   * SI Employee Deduction: 2,700 * 11% = 297.
+   * SI Employer Deduction: 2,700 * 18.75% = 506.25.
+   * EBF Deduction: 2,000 * 1% = 20 (Uses actual basic, as it's > EBF Min 440).
+   * Training Fund: 10 (Floor).
+9.2. Test Case B: The "Split Cap" Executive
+* Inputs: Basic Salary EGP 25,000. Location: Minya (Phase 2).
+* Logic: Salary > SI Max (16,700) AND Salary > EBF Max (2,720).
+* Expected Outputs:
+   * SI Base: 16,700.
+   * SI Employee Deduction: 16,700 * 11% = 1,837.
+   * EBF Deduction: 27.20 (Capped at 2,720 * 1%). CRITICAL CHECK: Ensure system does not calculate 167.00.
+   * UHI Deduction: 167.00 (1% of SI Max).
+   * Training Fund: 10 (Floor).
+9.3. Test Case C: The "Profit-to-Payroll" Transition (Training Fund)
+* Inputs: Company with 50 employees.
+* Logic: Run payroll for Jan 2026.
+* Expected Output: Total Training Fund Liability = 50 * 10 = 500 EGP.
+* Negative Test: Verify that the system does not prompt for "Net Profit" or attempt to calculate 1% of any profit figure.
+9.4. Test Case D: The "3% Increment" Audit
+* Inputs: Employee Salary in Jan 2025 = 10,000. Salary in Jan 2026 = 10,200.
+* Logic: Increase is 200. Required 3% of 10,000 = 300.
+* Expected Output: System flags a "Compliance Warning: Increment below statutory minimum (3%)."
+Works cited
+1. Egypt: Minimum and Maximum Insurable Wage Limits Increase for Social Insurance from 2026 - Mercans, accessed December 24, 2025, https://mercans.com/resources/statutory-alerts/egypt-minimum-and-maximum-insurable-wage-limits-increase-for-social-insurance-from-2026/
+2. Egypt - Individual - Other taxes - PwC Tax Summaries, accessed December 24, 2025, https://taxsummaries.pwc.com/egypt/individual/other-taxes
+3. Egypt Payroll & Tax Compliance - Ramco Systems, accessed December 24, 2025, https://www.ramco.com/payce/payroll-compliance-egypt
+4. CRS News Flash 18 December 2025 - EGYPT & ESWATINI - Statutory Contribution changes for 2026, accessed December 24, 2025, https://www.crs.co.za/crs-news-flash-18-december-2025-egypt-eswatini-statutory-contribution-changes-for-2026/
+5. Egypt enacts new labor law affecting employers from 1 September 2025 | EY - Global, accessed December 24, 2025, https://www.ey.com/en_gl/technical/tax-alerts/egypt-enacts-new-labor-law-with-changes-affecting-employers-beginning-1-september-2025
+6. Presidential directives to accelerate implementation of Universal Health Insurance System in governorates, accessed December 24, 2025, https://sis.gov.eg/en/media-center/news/presidential-directives-to-accelerate-implementation-of-universal-health-insurance-system-in-governorates/
+7. Egypt's universal health insurance to launch in Aswan on 1 July - Ahram Online, accessed December 24, 2025, https://english.ahram.org.eg/NewsContent/1/1236/545862/Egypt/Health/Egypt%E2%80%99s-universal-health-insurance-to-launch-in-As.aspx
+8. Egypt: New Labor Law entering into force in September 2025 - WTW, accessed December 24, 2025, https://www.wtwco.com/en-my/insights/2025/05/egypt-new-labor-law-entering-into-force-in-september-2025
+9. New Labour Law issued in Egypt - Clyde & Co, accessed December 24, 2025, https://www.clydeco.com/en/insights/2025/05/egypt-new-labour-law
+10. New Labour Law No. 14 of 2025 - - Soliman, Hashish & Partners, accessed December 24, 2025, https://www.shandpartners.com/insights/firm-news/new-labour-law-no-14-of-2025/
+11. Egypt: New Labor Law entering into force in September 2025 - WTW, accessed December 24, 2025, https://www.wtwco.com/en-hr/insights/2025/05/egypt-new-labor-law-entering-into-force-in-september-2025
+12. Egypt's Labor Laws Just Changed: 6 Compliance Areas Employers Should Review Now, accessed December 24, 2025, https://www.fisherphillips.com/en/news-insights/egypt-labor-laws-are-about-to-change.html
+13. Egypt adopts comprehensive new labor law | Lockton, accessed December 24, 2025, https://global.lockton.com/us/en/news-insights/egypt-adopts-comprehensive-new-labor-law
+14. Egypt's Prime Minister orders faster health insurance rollout and new mining investment push - Dailynewsegypt, accessed December 24, 2025, https://www.dailynewsegypt.com/2025/12/22/egypts-prime-minister-orders-faster-health-insurance-rollout-and-new-mining-investment-push/
+15. Egypt - Individual - Taxes on personal income - Worldwide Tax Summaries Online, accessed December 24, 2025, https://taxsummaries.pwc.com/egypt/individual/taxes-on-personal-income
+16. Egypt Payroll Estimates 2025 - Remoly, accessed December 24, 2025, https://remoly.net/blog-detail/910
+17. Egypt Establishes Martyrs & Victims Tax Fund - Eurofast, accessed December 24, 2025, https://eurofast.eu/egypt-establishes-martyrs-victims-tax-fund/
+18. Tax changes introduced by the 2nd fiscal-budgetary package | EY - Global, accessed December 24, 2025, https://www.ey.com/en_ro/technical/tax-alerts/ey-tax-alert-22-december-2025
+[a]Already Completed.
+[b]Already Completed.
+[c]@mjain@mercans.com do we have a separate logic for Social Insurance contribution @21% for specific employees
+_Assigned to mjain@mercans.com_
+[d]No such logic is there.
+[e]Can we check once with Nabil on this as well. If this logic is required in the product
+[f]@mshetija@mercans.com This is also not there in product.
+_Assigned to mshetija@mercans.com_
+[g]This update was announced in May 2025 and was effective from September 2025. Please confirm if we have the update in the product @mjain@mercans.com
+_Assigned to mjain@mercans.com_
+[h]@mshetija@mercans.com It is not there in product.
+[i]@mjain@mercans.com do we have this contribution in our product?
+_Assigned to mjain@mercans.com_
+[j]@mshetija@mercans.com There is no update here. For 2025, Exemptions are same i.e., 20,000.00 for standard employee and 30,000.00 for disabled employe.
+_Assigned to mshetija@mercans.com_
+[k]No Change here as well.

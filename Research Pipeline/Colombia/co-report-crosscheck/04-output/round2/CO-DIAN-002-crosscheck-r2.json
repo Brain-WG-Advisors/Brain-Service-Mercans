@@ -1,0 +1,1781 @@
+{
+ "spec": "CO-DIAN-002",
+ "round": 2,
+ "date": "2026-10-15",
+ "draft": "02-specs-out/CO-DIAN-002-Formulario350-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "evidence_files": [
+  "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+  "Monthly_fixed.xlsx",
+  "Validado ConsolidadoCCT_ Monthly  sep.xlsx (Mapping only)",
+  "Formulario 220.xlsx (NOM_U_203, pensioner rows only)",
+  "round-1 for comparison: 1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx (round 1), Accumulated Report.xlsx (round 1), Vertical G2N Dynamic 2026-09-01 - 2026-09-30.xlsx (round 1), 1764_Master_Data_Report_202609.xlsx (round 1)"
+ ],
+ "run_identity_check": {
+  "claim": "The round-2 'Gross to net PMI ... Monthly' is the same single run as the round-1 Vertical G2N, not all September runs combined.",
+  "result": "CONFIRMED",
+  "payroll_id": "REF-P201-090 in both (title row 7); Base of Withholding shows REF-P201-065 for the same 261 IDs",
+  "pay_group": "CO - Monthly (title row 2; not shown in the vertical G2N)",
+  "generation_date": "2026-09-16 in both",
+  "headcount": "261 in both; identical employee ID sets; identical to the Base of Withholding and Master Data populations",
+  "cell_check": "120 WT columns x 261 employees = 31,320 cells; 6,746 non-zero pairs, all equal in absolute value; 0 values present in only one file; sign convention differs (deductions positive in the horizontal file)",
+  "wt_2552_total": "1,399,199,389 (horizontal) = 1,399,199,389 (vertical)",
+  "wt_21330_total": "69,301,209 = 69,301,209 (6 employees, whose 2552 is 0)",
+  "vs_base_of_withholding_V": "2552 + 21330 = 1,468,500,598 = column V GRAND TOTAL; per employee 261/261",
+  "vs_NE_SVA_2": "RetencionFuente (SVA position 2) = 2552 + 21330 for 261/261 employees; total 1,468,500,598; REC worker code = G2N Employee ID 261/261",
+  "vs_accumulated_sep": "Accumulated Report Sep-2026 WT 2552 for the 261 IDs = G2N 2552 for 261/261; total Sep-2026 WT 2552 = 1,543,834,892 (97 other IDs: 144,635,503)"
+ },
+ "missing_runs_for_all_runs_test": [
+  "G2N (horizontal or vertical) and Base of Withholding of every OTHER pay group of entity 1764 with payments in Sep-2026, in particular the pay group of the 97 IDs that carry WT 2552 in the Sep-2026 Accumulated Report but are not in 'CO - Monthly' (144,635,503 of WT 2552; 93 of them paid WT 61100 'Weekly advance' and 62838 'Exceptional Advance' - i.e. each weekly advance run of September and the run that settles the month).",
+  "The retirees' payroll run(s) of Sep-2026 (WT 62151 'Retirement Payment - PRV-6795' 16 IDs, 62152 'Retirement Payment - Catleya-6796' 5 IDs, 62154 'Monthly Retired Pension-6798' 453 IDs; withholding WT 21140 = 5,145,376).",
+  "Any off-cycle run of Sep-2026 for 'CO - Monthly': the Accumulated Report shows WT 62838 'Exceptional Advance' for 2 CO - Monthly employees (15,505,430) that is not in REF-P201-090, and employer contributions (2560, 2564, 2567, 25110-25112) differ from the run for most of the 261.",
+  "Termination / settlement runs of Sep-2026: WT 21129 'Personal Income Tax Withholding-Terminations- 541T' has no Sep-2026 value (only Jan-2026, 63,130,000); 2 of the 97 IDs were paid WT 62203 'Reconciliations PMI additional payment- 541Q' (with 2552 withheld) and 1 WT 62115 'Retirement Allowance' - confirm in which run(s) and provide them, or confirm none.",
+  "A list of all Sep-2026 payroll runs of entity 1764 (Payroll id, pay group, payment date, headcount) and an explanation of why the same run shows REF-P201-065 in the Base of Withholding and REF-P201-090 in the G2N / Master Data.",
+  "The Nomina Electronica files of the other pay groups (to test the NIE177 reconciliation for the whole month) and, ideally, the Form 350 actually filed for Sep-2026 (or the client's Form 350 working paper) as the only DIRECT evidence for casillas 77/78/93/94."
+ ],
+ "fields": [
+  {
+   "id": 4,
+   "name": "Tax year",
+   "casilla": "Hoja 1, casilla 1",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Title block 'Period' (row 8)",
+     "example_masked": "2026-09-01 - 2026-09-30"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "ENC positions E/F (FechaLiquidacionInicio/Fin)",
+     "example_masked": "2026-09-01 / 2026-09-30"
+    }
+   ],
+   "finding": "Round-2 G2N and NE documents are produced per calendar month; year 2026 derivable. Unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 5,
+   "name": "Period",
+   "casilla": "Hoja 1, casilla 3",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Title block 'Pay Group(s)' (row 2), 'Payroll id' (row 7), 'Period' (row 8)",
+     "example_masked": "CO - Monthly; REF-P201-090; 2026-09-01 - 2026-09-30"
+    }
+   ],
+   "finding": "Monthly period confirmed. NEW: the horizontal G2N title names the pay group ('Pay Group(s)' = CO - Monthly) and the run (Payroll id REF-P201-090, generated 2026-09-16, headcount 261). It is the same single run as the round-1 Vertical G2N, not a consolidation of all September runs, so the period is right but the file still covers only one pay group / one run of the month (see row 23).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 6,
+   "name": "Form number",
+   "casilla": "Hoja 1, casilla 4",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 7,
+   "name": "Employer NIT",
+   "casilla": "Hoja 1, casilla 5",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, position G (NIT of the employer)",
+     "example_masked": "9-digit number, no dots or hyphens (employer data, not personal)"
+    }
+   ],
+   "finding": "NEW evidence: the client's Nomina Electronica employer segment (EMI) carries the company NIT as a plain 9-digit number without dots or hyphens and the check digit in a separate position, matching the format of casilla 5 ('N (no dots, no hyphens)') and the join to NIE033 the explanation describes.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 8,
+   "name": "NIT verification digit",
+   "casilla": "Hoja 1, casilla 6",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, position H (DV)",
+     "example_masked": "single digit, held separately from the NIT"
+    }
+   ],
+   "finding": "NEW evidence: the NE employer segment holds the verification digit as a separate single digit, consistent with casilla 6 (length 1, N).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 9,
+   "name": "First surname",
+   "casilla": "Hoja 1, casilla 7",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 10,
+   "name": "Second surname",
+   "casilla": "Hoja 1, casilla 8",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 11,
+   "name": "First name",
+   "casilla": "Hoja 1, casilla 9",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 12,
+   "name": "Other names",
+   "casilla": "Hoja 1, casilla 10",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 13,
+   "name": "Corporate name",
+   "casilla": "Hoja 1, casilla 11",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Title block 'Organization' (row 1)",
+     "example_masked": "1764 - Compañía Colombiana de Tabaco SAS"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "EMI segment, position B (RazonSocial)",
+     "example_masked": "Compañía Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "Confirmed. NEW: the NE employer segment carries the corporate name WITHOUT the internal '1764 - ' entity prefix seen in report title blocks, which is the form that matches the RUT. Casilla 11 is auto-filled by DIAN from the RUT anyway.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 14,
+   "name": "Sectional office code",
+   "casilla": "Hoja 1, casilla 12",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 16,
+   "name": "Correction code",
+   "casilla": "Hoja 1, casilla 25",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 17,
+   "name": "Previous form number",
+   "casilla": "Hoja 1, casilla 26",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 19,
+   "name": "Self-withholding activity code (art. 114-1 exonerated legal persons)",
+   "casilla": "Hoja 1, casilla 27",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No CIIU code in any round-2 file. Round-1 indirect evidence (employer EPS/ICBF/SENA absent below 10 SMMLV) is reproduced unchanged in the horizontal G2N (same run, columns DY 2564, EB 25111, EC 25112).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 20,
+   "name": "Self-withholding rate",
+   "casilla": "Hoja 1, casilla 28",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 22,
+   "name": "Base - work income (natural persons)",
+   "casilla": "Hoja 1, casilla 77",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "(no column) - the horizontal G2N has no depurated withholding base; nearest columns are AZ Gross Salary and DQ-DW social-security bases",
+     "example_masked": "Gross Salary GRAND TOTAL 7,954,541,237 (not a tax base)"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx (round 1)",
+     "sheet": "Base of Withholding",
+     "column": "D % Retention / G Income Total / U WITHOLDING TAX BASIS / V",
+     "example_masked": "Procedure-3 employees: 7 with 0.2 (V = 20% of G); 2 with 0 (V = 15.9% and 34.3% of G)"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx (round 1)",
+     "sheet": "Master Data Report",
+     "column": "BE - Tax Procedure 1",
+     "example_masked": "3 (9 employees, all 9 in the run)"
+    }
+   ],
+   "finding": "Round-1 Conflict (non-resident 20%-of-gross employees with a depurated base in column U) stands and stays a query (decision 8). The round-2 G2N carries NO depurated base column (WT columns only, plus social-security bases 64990-64996 and an unlabelled client column '64993 formula' that matches no Base of Withholding column), so casilla 77 can still only be evidenced from the round-1 Base of Withholding (column U, 6,263,719,152) and for one run only. NEW FACTUAL CORRECTION to the Query to RA text (T22): it says 'Master Data holds 9 employees with Tax Procedure 1 = 3, 7 of them in the Sep-2026 Base of Withholding'. Re-checked: ALL 9 Procedure-3 employees are in the Base of Withholding and in the G2N (the Base of Withholding and G2N hold the same 261 IDs). 7 carry % Retention 0.2 and are withheld at exactly 20% of Income Total G; the other 2 carry % Retention 0 and are withheld at about 15.9% and 34.3% of Income Total, i.e. not on the art. 408 pattern. So 'Tax Procedure 3' alone does not identify the 20%-of-gross population. The round-1 verifier's statement that 2 Procedure-3 employees were absent from the Base of Withholding is not reproduced by the data. NEW (client-specific): below the G2N GRAND TOTAL the client lists 6 employee IDs in column U (rows 279-284) without a label: 5 are Procedure-3 employees (4 of the 20% group and 1 of the 2 others) and 1 is a Procedure-1 employee withheld at 39.5% of gross; the purpose of the list is not stated.",
+   "proposed_explanation": null,
+   "official_source": "ET art. 408 and art. 388 (as cited in the spec row 22 Field Explanation)"
+  },
+  {
+   "id": 23,
+   "name": "Withholding - work income (natural persons)",
+   "casilla": "Hoja 1, casilla 93",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "BX - 2552 - Income Tax (employee)",
+     "example_masked": "5402993 (employee); GRAND TOTAL 1399199389; non-zero for 224 of 261"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "CQ - 21330 - Personal Income Tax Withholding (Theoretical)",
+     "example_masked": "GRAND TOTAL 69301209; non-zero for 6 employees, whose 2552 cell is 0"
+    },
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "Title block 'Payroll id' / 'Report generation date' / 'Total headcount'",
+     "example_masked": "REF-P201-090 / 2026-09-16 / 261"
+    },
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "SVA segment, position 2 (column C) = RetencionFuente NIE177; worker code REC position R",
+     "example_masked": "5402993.00; total over 261 ENC blocks 1468500598.00"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT / Seg / Field",
+     "example_masked": "2552, 21330, 21114, 21619, 21129, 21140, 21155, 25832, 25833, 25834 -> SVA / SVA_2"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx (round 1)",
+     "sheet": "Base of Withholding",
+     "column": "V - WITHOLDING TAX WITH CONTRIBUTION",
+     "example_masked": "GRAND TOTAL 1468500598"
+    },
+    {
+     "file": "Accumulated Report.xlsx (round 1)",
+     "sheet": "Accumulated Report",
+     "column": "WT 2552 / 61100 / 62838 / 21140, column 01/09/2026",
+     "example_masked": "2552 Sep total 1543834892 (144635503 for 97 IDs outside CO - Monthly); 61100 277152725; 62838 203447215; 21140 5145376"
+    }
+   ],
+   "finding": "(1) CLAIM VERIFIED - the round-2 'Monthly' G2N is NOT a combination of all September runs. Title block: Pay Group(s) 'CO - Monthly', Payroll id REF-P201-090, generation date 2026-09-16, headcount 261 - identical to the round-1 Vertical G2N. Same 261 employee IDs; 120 wage-type columns x 261 employees = 31,320 cells; all 6,746 non-zero employee x WT values equal the round-1 vertical amounts in absolute value, with no value present in one file and absent in the other (only the sign convention differs: deductions are positive in the horizontal layout, negative in the vertical one). WT 2552 = 1,399,199,389 and WT 21330 = 69,301,209 in both; 2552 + 21330 = 1,468,500,598 = round-1 Base of Withholding GRAND TOTAL of column V, and per employee 2552 + 21330 = V for 261 of 261 (the 6 WT 21330 employees have 2552 = 0). The Base of Withholding title shows Payroll id REF-P201-065 for the same 261 IDs, confirming the existing instruction not to use 'Payroll id' as the run key. (2) THIRD SOURCE - Nomina Electronica: in Monthly_fixed every ENC block's REC worker code (column R) equals the ENC worker code and a G2N Employee ID (261/261); SVA position 2 (RetencionFuente, NIE177) equals 2552 + 21330 for 261 of 261 employees (230 non-zero; of the 31 zero-withholding employees 27 have no SVA segment and 4 have an SVA segment with position 2 empty); total 1,468,500,598. Match rate 100%: G2N, Base of Withholding column V and NE RetencionFuente agree employee by employee for this pay group. (3) WHAT THE FILE DOES NOT PROVE: the 'all runs of the month' total. For the 261 CO - Monthly employees the round-1 Accumulated Report Sep-2026 WT 2552 equals the G2N for 261 of 261, so for this pay group the run seems to hold the whole month's 2552; the gap is in OTHER populations: 97 IDs outside CO - Monthly with 144,635,503 of WT 2552 (93 of them paid WT 61100 'Weekly advance' and 62838 'Exceptional Advance'; 2 paid WT 62203 'Reconciliations PMI additional payment- 541Q'; 1 paid WT 62115 'Retirement Allowance'), the retirees' withholding on WT 21140 (5,145,376), and 2 CO - Monthly employees paid WT 62838 'Exceptional Advance' (15,505,430) outside REF-P201-090. The evidenced September withholding on work and retiree income is therefore at least 1,618,281,477 (2552 1,543,834,892 + 21330 69,301,209 + 21140 5,145,376) against 1,468,500,598 in the single run. (4) NEW for the Field Explanation: the client's NE Mapping sends to RetencionFuente (SVA_2) not only 2552 and 21330 but also 21114 'Theoretical income Tax-5011', 21619 'Theoretical Income Tax - Ajuste - 5035', 21129, 25832, 25833, 25834 and the retiree/pensioner WTs 21140 'Personal Income Tax Withholding-Retirees- 6799' and 21155 'Income Tax Pensioner'. The draft says casilla 93 must reconcile to the sum of NIE177; with the client's mapping that holds only if retiree withholding is also in casilla 93, or if the reconciliation is against casillas 93 + 94. The draft does not say this, and the DECISION PENDING item (b) does not list 21114 / 21619. (5) No column for 21129, 25832, 25833, 25834, 21140 or 21155 exists in the round-2 G2N (none was paid in this run).",
+   "proposed_explanation": "See change map M23 (adds the NE RetencionFuente match, the pay-group scope, theoretical WTs 21114/21619 in item (b), and the NIE177 reconciliation caveat for retiree WTs 21140/21155).",
+   "official_source": "Res. DIAN 000013 de 2021 (NIE177 RetencionFuente) and the Form 350 instruction guide (casilla 93), as cited in the draft row 23"
+  },
+  {
+   "id": 24,
+   "name": "Base - pension income (natural persons)",
+   "casilla": "Hoja 1, casilla 78",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "Campo 46 'Otros pagos' / Campo 50 / Campo 60, matched on column 'pern'",
+     "example_masked": "tax year 2025: 19 WT-62151 retirees and 6 WT-62152 retirees with all income in Campo 46 (e.g. 18429540), Campo 50 = 0"
+    },
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT 62151 / 62152 / 62153 / 62154",
+     "example_masked": "EOT / EOT_3, HRB ADD (PMC)"
+    },
+    {
+     "file": "Accumulated Report.xlsx (round 1)",
+     "sheet": "Accumulated Report",
+     "column": "WT 62154 / 62152 / 62151, column 01/09/2026",
+     "example_masked": "62154: 453 IDs, 626485005, max 22088675, no withholding WT; 62152: 5 IDs, no withholding; 62151: 16 IDs"
+    }
+   ],
+   "finding": "Round-1 Conflict stays a query (decision 6: spec rule stays). WT 62151 / 21140 are NOT present in the round-2 G2N (CO - Monthly pay group only). NEW EVIDENCE for the RA query: (a) the client's Form 220 working file (tax year 2025) reports the retirees paid through WT 62151 (19 matched on the masked personnel number) and WT 62152 'Retirement Payment - Catleya-6796' (6 matched) with their whole income in casilla 46 'Otros pagos', casilla 50 'Pensiones de jubilacion, vejez o invalidez' = 0 and the withholding in casilla 60 - the client consistently treats these payments as non-pension work income; (b) the client's NE Mapping sends 62151-62154 to OtrosConceptos (EOT_3) and WT 21140 to RetencionFuente (SVA_2); (c) by contrast WT 62154 'Monthly Retired Pension-6798' (453 pensioners in Sep-2026, 626,485,005, every payment below 1,000 UVT) and WT 62152 (5 in Sep-2026) carry no withholding at all, which is consistent with this row's rule (nil below 1,000 UVT). So the conflict is specific to WT 62151.",
+   "proposed_explanation": null,
+   "official_source": "ET art. 206 num. 5 (cited in the draft row 24); Form 220 casillas 46/50 per Res. DIAN of the Form 220 (CO-DIAN-004)"
+  },
+  {
+   "id": 25,
+   "name": "Withholding - pension income (natural persons)",
+   "casilla": "Hoja 1, casilla 94",
+   "verdict": "Conflict",
+   "report_evidence": [
+    {
+     "file": "Validado ConsolidadoCCT_ Monthly  sep.xlsx",
+     "sheet": "Mapping",
+     "column": "WT 21140 / 21155",
+     "example_masked": "SVA / SVA_2"
+    },
+    {
+     "file": "Accumulated Report.xlsx (round 1)",
+     "sheet": "Accumulated Report",
+     "column": "WT 21140, column 01/09/2026",
+     "example_masked": "Sep total 5145376 (13 retirees)"
+    },
+    {
+     "file": "Formulario 220.xlsx",
+     "sheet": "NOM_U_203",
+     "column": "Campo 60",
+     "example_masked": "withholding reported for the WT-62151 retirees (e.g. 12426492 annual)"
+    }
+   ],
+   "finding": "Round-1 Conflict stays a query (decision 6). NEW: the client's NE Mapping also maps WT 21155 'Income Tax Pensioner' (no Sep-2026 value) and WT 21140 to RetencionFuente (NIE177), the element the draft uses to reconcile casilla 93. If this withholding is declared in casilla 94 the NIE177 reconciliation of row 23 breaks unless it is run against casillas 93 + 94. Neither WT appears in the round-2 G2N.",
+   "proposed_explanation": null,
+   "official_source": "ET art. 206 num. 5 (cited in the draft row 25)"
+  },
+  {
+   "id": 27,
+   "name": "Base - payments abroad, no treaty (legal persons)",
+   "casilla": "Hoja 1, casilla 55",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 28,
+   "name": "Withholding - payments abroad, no treaty (legal persons)",
+   "casilla": "Hoja 1, casilla 57",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 29,
+   "name": "Base - payments abroad, treaty (legal persons)",
+   "casilla": "Hoja 1, casilla 56",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 30,
+   "name": "Withholding - payments abroad, treaty (legal persons)",
+   "casilla": "Hoja 1, casilla 58",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 31,
+   "name": "Base - payments abroad, no treaty (NATURAL persons)",
+   "casilla": "Hoja 1, casilla 109",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 32,
+   "name": "Withholding - payments abroad, no treaty (NATURAL persons)",
+   "casilla": "Hoja 1, casilla 111",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 33,
+   "name": "Base - payments abroad, treaty (NATURAL persons)",
+   "casilla": "Hoja 1, casilla 110",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 34,
+   "name": "Withholding - payments abroad, treaty (NATURAL persons)",
+   "casilla": "Hoja 1, casilla 112",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 36,
+   "name": "Treaty status",
+   "casilla": "Hoja 2, casilla 141",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 37,
+   "name": "Payment concept",
+   "casilla": "Hoja 2, casilla 142",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 38,
+   "name": "Person type",
+   "casilla": "Hoja 2, casilla 143",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 39,
+   "name": "Recipient country",
+   "casilla": "Hoja 2, casilla 144",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Monthly_fixed.xlsx",
+     "sheet": "Nómina",
+     "column": "REC segment position K (LugarTrabajoPais)",
+     "example_masked": "CO, CR, CA, DO, CH, MX"
+    }
+   ],
+   "finding": "No round-2 file carries a tax-residence country. The NE REC segment position K (LugarTrabajoPais) holds upper-case ISO alpha-2 codes (CO 255, CR 2, CA 1, DO 1, CH 1, MX 1) while department/municipality are 05/05001 for all 261, so it is the HR address country already normalised to upper case (round 1 found 'co'/'cr' in Master Data), not the place of work and not tax residence. This supports the v1.1 instruction to normalise the address country if used as a fallback; it does not settle the DIAN code standard (still with RA). No change proposed.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 40,
+   "name": "Payments or credits",
+   "casilla": "Hoja 2, casilla 145",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 41,
+   "name": "Rate",
+   "casilla": "Hoja 2, casilla 146",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+     "sheet": "Gross to net PMI",
+     "column": "EF - 52552 (client column, no description)",
+     "example_masked": "23 (integer percentage); blank for 162 of 261"
+    }
+   ],
+   "finding": "No sheet-2 annex in any file. NEW note for the developer: the round-2 G2N carries WT 52552 'Income Tax % (employee)' as an integer percentage (values 10-31) for 99 employees; it equals the Base of Withholding '% Retention' x 100 for 97 of them (2 rounding at .5) and is BLANK for the 7 employees withheld at 20% of gross, so the 20% non-resident rate of casilla 146 cannot be taken from WT 52552.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 42,
+   "name": "Withholding value",
+   "casilla": "Hoja 2, casilla 147",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 43,
+   "name": "Total base - no treaty, legal persons",
+   "casilla": "Hoja 2, casilla 148",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 44,
+   "name": "Total base - no treaty, natural persons",
+   "casilla": "Hoja 2, casilla 149",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 45,
+   "name": "Total withholding - no treaty, legal persons",
+   "casilla": "Hoja 2, casilla 150",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 46,
+   "name": "Total withholding - no treaty, natural persons",
+   "casilla": "Hoja 2, casilla 151",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 47,
+   "name": "Total base - treaty, legal persons",
+   "casilla": "Hoja 2, casilla 152",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 48,
+   "name": "Total base - treaty, natural persons",
+   "casilla": "Hoja 2, casilla 153",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 49,
+   "name": "Total withholding - treaty, legal persons",
+   "casilla": "Hoja 2, casilla 154",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 50,
+   "name": "Total withholding - treaty, natural persons",
+   "casilla": "Hoja 2, casilla 155",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 52,
+   "name": "Bases and withholdings on legal persons",
+   "casilla": "Hoja 1, casillas 29 to 54",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 53,
+   "name": "Bases and withholdings on natural persons, non-employment concepts",
+   "casilla": "Hoja 1, casillas 79 to 92 and 95 to 108",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 54,
+   "name": "Self-withholding blocks",
+   "casilla": "Hoja 1, casillas 59 to 76 and 113 to 128",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 55,
+   "name": "VAT and stamp-duty withholding",
+   "casilla": "Hoja 1, casillas 131 to 135",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 57,
+   "name": "Less excess or undue withholding",
+   "casilla": "Hoja 1, casilla 129",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged. The client's NE Mapping lists WT 21619 'Theoretical Income Tax - Ajuste - 5035' under RetencionFuente; whether it carries downward corrections that would feed casilla 129 is not evidenced (no Sep-2026 value).",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 58,
+   "name": "Total income-tax withholding",
+   "casilla": "Hoja 1, casilla 130",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 59,
+   "name": "Total withholding",
+   "casilla": "Hoja 1, casilla 136",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 60,
+   "name": "Penalties",
+   "casilla": "Hoja 1, casilla 137",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 61,
+   "name": "Total withholding plus penalties",
+   "casilla": "Hoja 1, casilla 138",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 62,
+   "name": "Signatory identification",
+   "casilla": "Hoja 1, casilla 139",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 63,
+   "name": "Signatory verification digit",
+   "casilla": "Hoja 1, casilla 140",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 64,
+   "name": "Total payment",
+   "casilla": "Hoja 1, casilla 980",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 65,
+   "name": "Representation code",
+   "casilla": "Hoja 1, casilla 981",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 66,
+   "name": "Accountant or statutory auditor code",
+   "casilla": "Hoja 1, casilla 982",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 67,
+   "name": "Professional card number",
+   "casilla": "Hoja 1, casilla 983",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 68,
+   "name": "With qualifications",
+   "casilla": "Hoja 1, casilla 994",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  },
+  {
+   "id": 69,
+   "name": "Collecting-entity stamp",
+   "casilla": "Hoja 1, casilla 997",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No mapped round-2 file carries this data (horizontal G2N, Nomina Electronica segment file, ConsolidadoCCT validation workbook, Form 220 working file). Round-1 verdict 'Not evidenced' unchanged.",
+   "proposed_explanation": null,
+   "official_source": null
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "A - Cod Employee",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "B - Employee name",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "C - National ID",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "D - Bank Account",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "E - Hire Date",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "F - Effective Leaving Date",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "G - Salary Assigned",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "H - Days Worked",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "I - Days On Leave",
+   "classification": "Client-specific",
+   "note": "Employee identification / attendance attribute; Form 350 is an aggregate return with no employee rows."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "J - 62144 - Reunification Allowance-5465",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "K - 62100 - Ordinary Salary- 0003",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "L - 62110 - Cash-out of Severance Pay - Social Benefits -541S",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "M - 62117 - Cash-out of Interest Severance Pay - Social Benefits-541R",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "N - 62122 - GM Cost of Living Adjust.-5510",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "O - 62131 - Scholarship-6861",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "P - 62132 - Relocation Allowance Expat-2004",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "Q - 62133 - Variable -1301",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "R - 62135 - ABCD Award-3003",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "S - 62138 - Dividend payment (stock awards) -1003",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "T - 62140 - Integral Salary- 0423",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "U - 62149 - Internship Pay - Sustainability Support- INKOMPASS - 0424",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "V - 62150 - Vacation Bonus",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "W - 62201 - Ocassional Bonus-1029",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "X - 62202 - Ocassional Bonus Grossed Up-1378",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "Y - 62206 - Home Leave Allowance-5050",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "Z - 62207 - Attendance Bonus",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AA - 62216 - Housing Contribution-5005",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AB - 62221 - Hardship Premium-5004",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AC - 62225 - Salary Attendance Bonus-Monthly",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AD - 62226 - GM Utilities Allowance-5514",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AE - 62229 - Years of Service Bonus - ( Seniority Bonus)- NON CLA",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AF - 62430 - L2L Rent Allowance-2400",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AG - 62500 - Loss Comp. Car Allowance-5014",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AH - 62523 - Transportation Allowance  CLA- 2008",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AI - 62540 - Housing Allowance Domestic Relocation-2087",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AJ - 62590 - Marriage Allowance-6801",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AK - 62700 - School Allowance-6839",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AL - 62805 - Hotel per diem",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AM - 62806 - Breakfast per diem",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AN - 62807 - Lunch per diem",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AO - 62808 - Dinner per diem",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AP - 62811 - Health Allowance-6473",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AQ - 65808 - Aid Refractive Surgery",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AR - 67090 - Loan without interests Payment Inf.",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AS - 67010 - Housing Loan Payment",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AT - 79401 - Annual leave payout",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AU - 79403 - Vacations Compensated In cash",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AV - 79408 - Sick Leave - Employer Paid First Days (2 days) payout",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AW - 79411 - Sick Leave - Healthcare Insurance Reimbursed payout",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AX - 1910 - Previous periods receivables",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AY - 65821 - Expatriation Package for Inbounds",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "AZ - Gross Salary",
+   "classification": "Client-specific",
+   "note": "Run gross of the pay group (GRAND TOTAL 7,954,541,237); not the Form 350 base (casilla 77 is the depurated base; the art. 408 gross base of the 20% employees is Base of Withholding column G, not this total)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BA - 25823 - Pension Voluntaria colfondos (FVOL)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BB - 21116 - Foncoltabaco Vivienda- 6781",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BC - 21117 - Foncoltabaco E.M.I- 6778",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BD - 21119 - Loan BBVA-40GD",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BE - 21120 - Loan Banco Occidente-40GE",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BF - 21121 - Loan Bancolombia-40GF",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BG - 21123 - Foncol Free Destination-6774",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BH - 21125 - Court Garnishment Fee Excluding Minimum Salary (SMMLV)",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BI - 21126 - Payment Expatriates Through PMS-5528",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BJ - 21127 - Sport Deduction/Payment-6803",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BK - 21192 - Foncoltabaco - Aporte Legal - 6776",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BL - 21215 - Legalization Salary Payment",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BM - 21193 - Foncoltabaco - Aporte Voluntario - 6775",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BN - 21550 - Trade Union Fees - CUT",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BO - 21552 - Trade Union Fees - Directiva Seccional - Medellin",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BP - 21560 - Trade Union Fees - Directiva Seccional - Barranquilla",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BQ - 21562 - Trade Union Fees - Directiva Seccional - Bogota Ventas",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BR - 21612 - Private Health Insurance - Sura- 6529",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BS - 21611 - Private Health Insurance - Colsanitas- 6527",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BT - 21615 - San Vicente Funeral-6976",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BU - 21670 - Trade Union Fees - Directiva Seccional - San Gil",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BV - 21680 - Trade Union Fees - Directiva Nacional - Cuotas",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BW - 21821 - Other Accounts Payable- 40GC",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BY - 2553 - Solidarity Pension Fund",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "BZ - 2554 - Medical Plan - Healthcare Insurance (EPS ) Employee",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CA - 2556 - Pension Plan Mandatory - AFP Employee",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CB - 1204 - Previous periods obligations (employee)",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CC - 25800 - AFC AV Villas (AFC)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CD - 25801 - AFC Banco Bogota (AFC)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CE - 25802 - AFC Bancolombia (AFC)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CF - 25803 - AFC Davivienda",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CG - 25805 - AFC Banco BBVA",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CH - 25806 - AFC Colpatria",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CI - 25812 - Pension Voluntaria Proteccion (FVOL)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CJ - 25813 - Pension Voluntaria Skandia (FVOL)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CK - 25814 - Pensiones Voluntarias Metlife (FVOL)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CL - 25815 - Dafuturo (FVOL)",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CM - 25817 - Dividendo por Colombia Contribution",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CN - 27010 - Housing Loan Fee",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CO - 27011 - Housing Interest Loan Fee",
+   "classification": "Client-specific",
+   "note": "Withholding-base depuration input (mandatory contributions, AFC, voluntary pension or housing interest); feeds the casilla 77 base via the depuration but is not itself a Form 350 casilla. Same role as the round-1 Base of Withholding columns H-N."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CP - 27040 - Loan without interests Fee",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CR - Total Deductions",
+   "classification": "Client-specific",
+   "note": "Run total / net pay control; not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CS - Net Pay",
+   "classification": "Client-specific",
+   "note": "Run total / net pay control; not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CT - 62310 - Expat allowance 5526",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CU - 62320 - Leasing Expat Allowance Inf-5524",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CV - 65802 - Foncoltabaco  - Aporte Empresa DB",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CW - 65800 - Stock awards (Vesting) - Informative-1004",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CX - 65809 - Optical Allowance Inf",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CY - 65811 - Gym Allowance Inf.-6969",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "CZ - 65812 - Text Books Allowance - Inf-6971",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DA - 65814 - Private Health Insurance - Sura Inf- 6531",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DB - 65815 - Private Health Insurance - Colsanitas Inf.- 6528",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DC - 65818 - Meal Allowance Inf.-2079",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DD - 21110 - Gym Allowance Inf. deduction",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DE - 21111 - Optical Allowance Inf. deduction",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DF - 21115 - Meal Allowance Inf. Deduction-2644",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DG - 21613 - Foncoltabaco - Company Fee CR",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DH - 21310 - Expat allowance deduction",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DI - 21320 - Leasing Expat Allowance Inf Deduction",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DJ - 21563 - Private Health Insurance - Sura Inf Deduction",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DK - 21802 - Private Health Insurance - Colsanitas Inf.",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DL - 65839 - Optical Allowance Inf - CLA",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DM - 65837 - Life Insurance-Inf - CLA",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DN - 25837 - Life Insurance-Inf Deduction",
+   "classification": "Client-specific",
+   "note": "Deduction wage type with no income-tax meaning (loans, union fees, funds, insurance, garnishment, other); not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DO - 65817 - Life Insurance-Inf- Non CLA",
+   "classification": "Client-specific",
+   "note": "Earning (entitlement or non-cash informative) wage type; enters the gross / depurated base upstream; no direct Form 350 casilla."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DP - Balance Credit/With Balance Wage Type",
+   "classification": "Client-specific",
+   "note": "Run total / net pay control; not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DQ - 64990 - Social security base",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DR - 64991 - Parafiscals Base actual",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DS - 64992 - Social Security Base (calculation)",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DT - 64994 - Gross earnings base",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DU - 64995 - Non-SSI excess",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DV - 63011 - SS carry-forward 1",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DW - 64996 - SS Leave Base",
+   "classification": "Client-specific",
+   "note": "Social-security / parafiscal base; PILA (CO-PILA-003), not Form 350."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DX - 2560 - Professional Labor Risks (ARL) - Employer",
+   "classification": "Client-specific",
+   "note": "Employer contribution; PILA. Not a Form 350 casilla (2564/25111/25112 absence below 10 SMMLV is only indirect evidence for casilla 27, row 19)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DY - 2564 - Medical Plan - Healthcare Insurance (EPS ) Employeer",
+   "classification": "Client-specific",
+   "note": "Employer contribution; PILA. Not a Form 350 casilla (2564/25111/25112 absence below 10 SMMLV is only indirect evidence for casilla 27, row 19)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "DZ - 2567 - Pension Plan Mandatory - AFP Employer",
+   "classification": "Client-specific",
+   "note": "Employer contribution; PILA. Not a Form 350 casilla (2564/25111/25112 absence below 10 SMMLV is only indirect evidence for casilla 27, row 19)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "EA - 25110 - Family Compensation Fund (CCF)",
+   "classification": "Client-specific",
+   "note": "Employer contribution; PILA. Not a Form 350 casilla (2564/25111/25112 absence below 10 SMMLV is only indirect evidence for casilla 27, row 19)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "EB - 25111 - Colombian Family Welfare Institute (ICBF)",
+   "classification": "Client-specific",
+   "note": "Employer contribution; PILA. Not a Form 350 casilla (2564/25111/25112 absence below 10 SMMLV is only indirect evidence for casilla 27, row 19)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "EC - 25112 - National Learning Service (SENA)",
+   "classification": "Client-specific",
+   "note": "Employer contribution; PILA. Not a Form 350 casilla (2564/25111/25112 absence below 10 SMMLV is only indirect evidence for casilla 27, row 19)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "ED - Total Employer Contributions",
+   "classification": "Client-specific",
+   "note": "Run total / net pay control; not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "EE - Employer Liability",
+   "classification": "Client-specific",
+   "note": "Run total / net pay control; not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "EF - 52552",
+   "classification": "Client-specific",
+   "note": "Client column = WT 52552 'Income Tax % (employee)', integer percentage for 99 employees, blank for the 20%-of-gross employees; computation driver, not a casilla (see row 41)."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "EG - 64993 formula",
+   "classification": "Client-specific",
+   "note": "Client formula column (253 non-zero, total 1,424,286,811); matches no Base of Withholding column; meaning not evidenced; not a Form 350 item."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "U (rows 279-284, below the report) - unlabelled list of 6 employee IDs",
+   "classification": "Client-specific",
+   "note": "Client note list without header: 5 Tax-Procedure-3 employees and 1 Procedure-1 employee withheld at 39.5% of gross. Purpose not stated; see row 22."
+  },
+  {
+   "file": "Gross to net PMI 2026-09-01-2026-09-30 - Monthly.xlsx",
+   "sheet": "Gross to net PMI",
+   "column": "Title block 'Pay Group(s)' (row 2)",
+   "classification": "Client-specific",
+   "note": "'CO - Monthly'. Not a casilla, but it is the scope marker the developer needs: Form 350 must add every pay group of the entity (row 23)."
+  },
+  {
+   "file": "Monthly_fixed.xlsx",
+   "sheet": "Nómina",
+   "column": "All segments/positions other than SVA position 2 (and EMI NIT/DV/name)",
+   "classification": "Client-specific",
+   "note": "Nomina Electronica content checked under CO-DIAN-001; no Form 350 casilla behind it."
+  }
+ ],
+ "summary": {
+  "Aligned": 5,
+  "Explanation to improve": 1,
+  "Format mismatch": 0,
+  "Conflict": 3,
+  "Not evidenced": 50,
+  "total_fields": 59,
+  "section_separator_rows_excluded": [
+   3,
+   15,
+   18,
+   21,
+   26,
+   35,
+   51,
+   56
+  ],
+  "round1": {
+   "Aligned": 3,
+   "Explanation to improve": 2,
+   "Format mismatch": 0,
+   "Conflict": 3,
+   "Not evidenced": 51
+  }
+ }
+}

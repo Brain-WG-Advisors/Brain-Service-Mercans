@@ -1,0 +1,178 @@
+{
+ "spec": "CO-DIAN-002",
+ "final": "05-final/CO-DIAN-002-Formulario350-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "A30",
+   "field_id": null,
+   "rule": "3",
+   "current": "- integration_type = OUTBOUND (scope_manifest CO-OUT-F350). There is no inbound file: the portal returns an on-screen acknowledgement and a form number (casilla 4), which the engine should capture for the audit trail and for any later corrective return (casilla 26).",
+   "proposed": "- Integration: outbound only - the engine delivers the reconciled casilla-value set to the DIAN portal. There is no inbound file: the portal returns an on-screen acknowledgement and a form number (casilla 4), which the engine should capture for the audit trail and for any later corrective return (casilla 26)."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A31",
+   "field_id": null,
+   "rule": "3",
+   "current": "- product_mapping_required = true. The engine must accumulate withholding BY COUNTERPARTY TYPE - natural person versus legal person - and, within natural persons, must separate resident employment income (casillas 77 / 93) from payments to non-residents (the sheet-2 annex). The 2024 redesign introduced that separation; the pre-2024 form did not have it.",
+   "proposed": "- Product mapping is required: the engine must accumulate withholding BY COUNTERPARTY TYPE - natural person versus legal person - and, within natural persons, must separate resident employment income (casillas 77 / 93) from payments to non-residents (the sheet-2 annex). The 2024 redesign introduced that separation; the pre-2024 form did not have it."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C20",
+   "field_id": null,
+   "rule": "3",
+   "current": "Public-sector only; PILA return types T and F are descoped in scope_manifest.",
+   "proposed": "Public-sector employees are outside the scope of this specification; the public-sector PILA return types T and F are not produced."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "B21",
+   "field_id": null,
+   "rule": "2",
+   "current": "",
+   "proposed": "NO"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C21",
+   "field_id": null,
+   "rule": "2",
+   "current": "",
+   "proposed": "Not an employee where no employment contract exists: directors' fees are not employment income and are not produced by payroll. The withholding on them is declared by the employer's accounts-payable or tax function - in the natural-person fees casillas (79 / 95, or 77 / 93 where the fee is withheld under the ET art. 383 table, art. 383 para. 2) for a resident director and under sheet-2 concept 25 (Honorarios de directores) for a non-resident director - never as payroll employment income. A director holding an employment contract is reported as an ordinary employee (see 'Executive director / statutory legal representative holding an employment contract')."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "B33",
+   "field_id": null,
+   "rule": "2",
+   "current": "",
+   "proposed": "NO"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C33",
+   "field_id": null,
+   "rule": "2",
+   "current": "",
+   "proposed": "Casillas 29-54 (legal persons) and 79-108 (natural persons). Not produced by payroll: populated by the employer's accounts-payable or tax function. Form 350 aggregates every withholding the employer makes; payroll contributes only casillas 77 / 93, casillas 78 / 94 where the employer pays pensions itself, the sheet-2 rows for non-resident employees and casilla 129 where a prior over-withholding is reversed."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "B39",
+   "field_id": null,
+   "rule": "2",
+   "current": "",
+   "proposed": "NO"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C39",
+   "field_id": null,
+   "rule": "2",
+   "current": "",
+   "proposed": "A period with no operation subject to withholding is not filed: ET art. 606 para. 2 makes the return non-obligatory for such a period (Population Rules, 'Nil period'). The electronic payroll and PILA have no equivalent exemption, so a month with employees but no withholding still produces those two filings and no Form 350."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "A1",
+   "field_id": null,
+   "rule": "2",
+   "current": "Monthly Withholding Tax Return - Form 350 - Form 350 - Withholding-at-source return",
+   "proposed": "Monthly Withholding Tax Return - Form 350 - Withholding-at-source return"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "B10",
+   "field_id": null,
+   "rule": "2",
+   "current": "Monthly Withholding Tax Return - Form 350 - Form 350 - Withholding-at-source return",
+   "proposed": "Monthly Withholding Tax Return - Form 350 - Withholding-at-source return"
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M23",
+   "field_id": "93",
+   "rule": "1b",
+   "current": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to RESIDENT natural persons in the calendar month, across EVERY pay group and EVERY payroll run of the entity in that month - regular, weekly or exceptional-advance, termination and settlement runs alike - in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Source: wage type 2552 'Income Tax (employee)' (Deductions), plus wage type 21330 'Personal Income Tax Withholding (Theoretical)' where it carries the withholding actually deducted from the employee's pay (the case in which the WT 2552 line is a zero-value Non Cash item). The amount is the withholding actually deducted from the employee's pay, computed with the employee's AFC and voluntary-pension contributions (ET arts. 126-1 and 126-4) taken into account; never the figure computed without those contributions. Contingent withholding (ET arts. 126-1 / 126-4) - the difference between the withholding computed without and with those contributions - is practised by the AFC or voluntary-pension fund when the savings are withdrawn before the permanence requirement is met; it is not practised by the employer and does not enter this return, and the wage types that carry a theoretical or hypothetical amount never deducted - 21114 'Theoretical income Tax-5011', 21619 'Theoretical Income Tax - Ajuste - 5035' and 25834 'Hypothetical Witholding Tax  - IC Foreign Country' - are out of scope: a theoretical or hypothetical amount is not withholding actually practised. WT 2552 withholding deducted in advance runs (WT 61100 'Weekly advance', WT 62838 'Exceptional Advance') and in termination or settlement runs (WT 62116, 62110, 62203, 62115) enters in the month it is practised, whatever the run. Withholding deducted on WT 21129 (Terminations), 25832 (Stock awards vesting) and 25833 (IC Local Country) enters in the month it is practised. The wage-type to casilla-93 mapping table is a configuration parameter supplied at implementation. Withholding on the pension income the employer pays itself (WT 21140 'Personal Income Tax Withholding-Retirees- 6799', WT 21155 'Income Tax Pensioner') is not reported here: it goes to casilla 94, with its base in casilla 78. Withholding at the flat 20% of ET art. 408 on a NON-RESIDENT foreign natural person is not reported here: it is supplied as sheet-2 rows (casillas 141-146) in the 'Pagos al exterior' section, with the sheet-2 payment concept and country, on the nominal (gross) value and with no depuration, and rolls into casillas 111 / 112; the employee's tax-residence flag, not the withholding rate or the tax-procedure code, decides the section. Accumulate by the payroll engine's run key (pay group and run), not by a report-level identifier. Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130.",
+   "proposed": "THE PRINCIPAL PAYROLL CASILLA ON THE WITHHOLDING SIDE. Sum of the income-tax withholding at source actually practised on work income paid to RESIDENT natural persons in the calendar month, across EVERY pay group and EVERY payroll run of the entity in that month - regular, weekly or exceptional-advance, termination and settlement runs alike - in whole pesos, then rounded once to the nearest 1,000 (ET art. 577). Source: wage type 2552 'Income Tax (employee)' (Deductions), plus wage type 21330 'Personal Income Tax Withholding (Theoretical)' where it carries the withholding actually deducted from the employee's pay (the case in which the WT 2552 line is a zero-value Non Cash item). The amount is the withholding actually deducted from the employee's pay, computed with the employee's AFC and voluntary-pension contributions (ET arts. 126-1 and 126-4) taken into account; never the figure computed without those contributions. Contingent withholding (ET arts. 126-1 / 126-4) - the difference between the withholding computed without and with those contributions - is practised by the AFC or voluntary-pension fund when the savings are withdrawn before the permanence requirement is met; it is not practised by the employer and does not enter this return, and the wage types that carry a theoretical or hypothetical amount never deducted - 21114 'Theoretical income Tax-5011', 21619 'Theoretical Income Tax - Ajuste - 5035' and 25834 'Hypothetical Witholding Tax  - IC Foreign Country' - are out of scope: a theoretical or hypothetical amount is not withholding actually practised. WT 2552 withholding deducted in advance runs (WT 61100 'Weekly advance', WT 62838 'Exceptional Advance') and in termination or settlement runs (WT 62116, 62110, 62203, 62115) enters in the month it is practised, whatever the run. Withholding deducted on WT 21129 (Terminations), 25832 (Stock awards vesting) and 25833 (IC Local Country) enters in the month it is practised. Whether a wage type carries withholding actually practised, and therefore feeds casilla 93, follows from the withholding classification of each wage type, which comes from the Wage Type Catalogue (WTC) attribute; the wage types named here are the ones so classified. Withholding on the pension income the employer pays itself (WT 21140 'Personal Income Tax Withholding-Retirees- 6799', WT 21155 'Income Tax Pensioner') is not reported here: it goes to casilla 94, with its base in casilla 78. Withholding at the flat 20% of ET art. 408 on a NON-RESIDENT foreign natural person is not reported here: it is supplied as sheet-2 rows (casillas 141-146) in the 'Pagos al exterior' section, with the sheet-2 payment concept and country, on the nominal (gross) value and with no depuration, and rolls into casillas 111 / 112; the employee's tax-residence flag, not the withholding rate or the tax-procedure code, decides the section. Accumulate by the payroll engine's run key (pay group and run), not by a report-level identifier. Casilla 93 plus casilla 94 must reconcile to the sum of RetencionFuente (NIE177) across every electronic payroll document for the same month, after the nearest-1,000 rounding. It is one of the forty-two casillas summed into casilla 130."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M24",
+   "field_id": "78",
+   "rule": "1b",
+   "current": "Taxable base of the pension income the employer pays itself: the part of the monthly pension EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for retirement, invalidity, old-age, survivor and occupational-risk pensions and for substitute indemnities and returns of pension savings. Only the excess over 1,000 UVT is taxable, so the casilla is nil for a pension at or below that amount. It is the base on which the casilla-94 withholding (WT 21140, WT 21155) is computed; the pension wage types behind it are those classified as pension income in the wage-type classification table. Pension income is not part of casilla 77, and a pension paid by a fund is reported by the fund, not here.",
+   "proposed": "Taxable base of the pension income the employer pays itself: the part of the monthly pension EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for retirement, invalidity, old-age, survivor and occupational-risk pensions and for substitute indemnities and returns of pension savings. Only the excess over 1,000 UVT is taxable, so the casilla is nil for a pension at or below that amount. It is the base on which the casilla-94 withholding (WT 21140, WT 21155) is computed; the pension wage types behind it are those classified as pension income, and the pension-income classification of each wage type (casilla 78 rather than casilla 77) comes from the Wage Type Catalogue (WTC) attribute. Pension income is not part of casilla 77, and a pension paid by a fund is reported by the fund, not here."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C6",
+   "field_id": null,
+   "rule": "1b",
+   "current": "Populate where the EMPLOYER itself pays pensions (the retirees' pay group). Casilla 78: the monthly amount EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for the wage types classified as pension income in the wage-type classification table. Casilla 94: the withholding actually practised on that excess - wage type 21140 'Personal Income Tax Withholding-Retirees- 6799' and wage type 21155 'Income Tax Pensioner'. Neither amount enters casillas 77 / 93. Where the pension is paid by a pension fund, the fund is the withholding agent and nothing is reported here.",
+   "proposed": "Populate where the EMPLOYER itself pays pensions (the retirees' pay group). Casilla 78: the monthly amount EXCEEDING 1,000 UVT (COP 52,374,000 in 2026) under ET art. 206 num. 5, for the wage types classified as pension income; the pension-income classification of each wage type (casilla 78 rather than casilla 77) comes from the Wage Type Catalogue (WTC) attribute. Casilla 94: the withholding actually practised on that excess - wage type 21140 'Personal Income Tax Withholding-Retirees- 6799' and wage type 21155 'Income Tax Pensioner'. Neither amount enters casillas 77 / 93. Where the pension is paid by a pension fund, the fund is the withholding agent and nothing is reported here."
+  },
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M53",
+   "field_id": "79-92 / 95-108",
+   "rule": "1c",
+   "current": "The same concept grid repeated for natural persons - fees (79 / 95), commissions (80 / 96), services (81 / 97), and so on to other payments (92 / 108), plus enajenacion de activos fijos (89 / 105) which exists only in the natural-person column. Fees paid to a natural person under the art. 383 table can straddle 77 / 93 and 79 / 95; the boundary is a classification parameter agreed and documented at implementation (see Population Rules). Not produced by payroll. Present on the form because Form 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the employer's accounts-payable or tax function; payroll contributes nothing to this casilla.",
+   "proposed": "The same concept grid repeated for natural persons - fees (79 / 95), commissions (80 / 96), services (81 / 97), and so on to other payments (92 / 108), plus enajenacion de activos fijos (89 / 105) which exists only in the natural-person column. Fees paid to a natural person and withheld under the ET art. 383 table are swept into casillas 77 / 93 (ET art. 383 para. 2; see Population Rules); payroll supplies only the employment component of 77 / 93, and the fee component, like casillas 79 / 95, is supplied by the employer's accounts-payable or tax function. Not produced by payroll. Present on the form because Form 350 aggregates EVERY withholding the employer makes, not only payroll withholding. Populated by the employer's accounts-payable or tax function; payroll contributes nothing to this casilla."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D4",
+   "field_id": null,
+   "rule": "1c",
+   "current": "The casilla also sweeps in fees, services and commissions paid to NATURAL persons that are withheld under the art. 383 table (ET art. 383 para. 2, added by Law 2277 of 2022 art. 8). Payroll supplies only the EMPLOYMENT component; the boundary with casilla 79 / 95 is a classification parameter agreed and documented at implementation.",
+   "proposed": "The casilla also sweeps in fees, services and commissions paid to NATURAL persons that are withheld under the art. 383 table (ET art. 383 para. 2, added by Law 2277 of 2022 art. 8). Payroll supplies only the EMPLOYMENT component; the fee, service and commission component is supplied by the employer's accounts-payable or tax function, which also owns casillas 79 / 95."
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A135",
+   "field_id": null,
+   "rule": "1a",
+   "current": "is not published by DIAN. The keying or robotic-process path is a configuration",
+   "proposed": "is not published by DIAN. The engine's deliverable is the reconciled casilla-value set"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A136",
+   "field_id": null,
+   "rule": "1a",
+   "current": "point set at implementation against the live portal.",
+   "proposed": "(Report Matrix); the keying or robotic-process path is a portal-integration configuration, not a file format."
+  }
+ ],
+ "moved_to_open_points": [
+  {
+   "sheet": "Formulario 350 Spec",
+   "cell": "M53",
+   "field_id": "79-92 / 95-108",
+   "owner": "RA",
+   "question": "For fees paid to resident natural persons, which fees are declared in casillas 77 / 93 (withheld under the ET art. 383 table, art. 383 para. 2 as amended by Law 2277 of 2022 art. 8) and which in casillas 79 / 95 (withheld at the ET art. 392 rates), under the 2024 Form 350 instruction guide?"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "D4",
+   "field_id": "Casilla 77 - base employment income",
+   "owner": "RA",
+   "question": "For fees paid to resident natural persons, which fees are declared in casillas 77 / 93 (withheld under the ET art. 383 table, art. 383 para. 2 as amended by Law 2277 of 2022 art. 8) and which in casillas 79 / 95 (withheld at the ET art. 392 rates), under the 2024 Form 350 instruction guide?"
+  }
+ ],
+ "summary": {
+  "cells": 18,
+  "by_sheet": {
+   "Report Matrix": 2,
+   "Payroll Scope Summary": 7,
+   "Formulario 350 Spec": 4,
+   "Version Control": 1,
+   "Population Rules": 2,
+   "Sample File": 2
+  },
+  "moved": 2
+ }
+}

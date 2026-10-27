@@ -1,0 +1,1423 @@
+{
+ "spec": "CO-DIAN-005",
+ "fields": [
+  {
+   "id": 4,
+   "name": "Reporting entity concept",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "Title row 'Organization'",
+     "example_masked": "1764 - Compania Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "No mapped report carries the reporting-entity concept code. The only entity data is the organisation name in the title rows (an SAS employer), which is consistent with the spec's constant value 1 (Informante general) but is not evidence of the code itself.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 5,
+   "name": "Beneficiary document type and identification number",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AM National ID",
+     "example_masked": "1423211232"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AN Identity Card",
+     "example_masked": "80020815"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AO Indentity Card for Foreigners",
+     "example_masked": "0244621"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AP Citizenship Card ID",
+     "example_masked": "57630918"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "C EE Citizenship Card ID",
+     "example_masked": "5124583130"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "D Beneficiary National Id",
+     "example_masked": "0244621"
+    }
+   ],
+   "finding": "The field is right, but the client data does not hold a document-type code: Master Data has one column per document type (AM National ID, AN Identity Card, AO Indentity Card for Foreigners, AP Citizenship Card ID). Of 263 Master Data rows, 234 have only AP, 13 only AO, 13 have two or three of these columns filled (e.g. AM+AP on 8 rows) and 2 have none, so a priority rule is needed. Master Data covers only the 263 current payroll people: of 1,038 persons in the Accumulated Report, 491 are pensioners (WT 62154 Monthly Retired Pension) and 286 are other people (mostly leavers) who are in neither Master Data nor Base of Withholding; for them the only identity is Accumulated C 'EE Citizenship Card ID' (no type). Accumulated D 'Beneficiary National Id' is filled for 345 persons (330 of them pensioners) and differs from C for 334 of them, i.e. a payee other than the employee/pensioner exists for some payments; the spec does not say whose identity numeral 2 carries in that case. Values are text with leading zeros (e.g. '0244621'), so the AN typing is correct. Option Values is '-' although the spec's Field Options sheet already holds the DIAN document-type catalogue for numerals 2 and 34.",
+   "proposed_explanation": "COMPOSITE FIELD as drafted in the resolution - numeral 2 names BOTH the document type and the number in a single numeral, and the technical specification splits them into two columns. Sub-field 1 = the DIAN identity-document type code from the 'Tipo de documento (numerals 2 and 34)' table on the Field Options sheet; sub-field 2 = the identification number without dots or hyphens, kept as text so leading zeros survive. SOURCE AT PMI: the client master data has no type-code field - it stores the number in one column per document type (Citizenship Card ID, Indentity Card for Foreigners, Identity Card, National ID). The engine must hold an explicit Employee.Document_Type, derived once from the populated column through a client-confirmed mapping, with a priority rule where more than one column is filled. POPULATION: the record is required for EVERY person paid in the tax year, including leavers and employer-paid pensioners who are not in the current master-data snapshot - their document type and number must be retained after termination. Where a payment is made to a payee other than the employee (the client's accumulators carry a separate 'Beneficiary National Id', mostly on pension payments), the identity reported is that of the beneficiary of the payment - to be confirmed with RA. PERSISTENCE: this pair is the join key across every Colombian artefact for the employee - electronic payroll NIE044 / NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24 and 25.",
+   "official_source": "Spec's own Field Options sheet (DIAN catalogue derived from Anexo tecnico Nomina Electronica table 5.2.1); DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 2"
+  },
+  {
+   "id": 6,
+   "name": "Beneficiary surnames and names",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "B First Name",
+     "example_masked": "NAME_0001"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "C Middle Name",
+     "example_masked": "NAME_0008"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "D Last Name",
+     "example_masked": "NAME_0002"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "E Second Last Name",
+     "example_masked": "NAME_0010"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "B Employee Name",
+     "example_masked": "NAME_1492"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "E Beneficiary Name",
+     "example_masked": "NAME_0918"
+    }
+   ],
+   "finding": "The four sub-fields exist in Master Data but in given-name-first order (B First Name, C Middle Name, D Last Name, E Second Last Name); E is blank on 56% and C on 70% of rows. The spec order is surnames first, so the explanation should state the column-to-sub-field mapping. For pensioners and leavers (777 of 1,038 persons in the Accumulated Report) the only name is a single combined Accumulated B 'Employee Name' / E 'Beneficiary Name', which cannot be split reliably.",
+   "proposed_explanation": "COMPOSITE FIELD. The resolution names one numeral; the technical specification splits it into four columns - first surname, second surname, first given name, other given names - in the same order as every other DIAN artefact. Sub-field order matters: DIAN matches on the surname columns. SOURCE AT PMI: first surname = master-data Last Name; second surname = Second Last Name (blank allowed); first given name = First Name; other given names = Middle Name (blank allowed). Do NOT use the formatted full name. The four name parts must be retained for leavers and for employer-paid pensioners, who are not in the current master-data snapshot.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 3"
+  },
+  {
+   "id": 7,
+   "name": "Beneficiary location",
+   "verdict": "Format mismatch",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AV Employee Address - Department",
+     "example_masked": "CUN"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AR City",
+     "example_masked": "Bogota"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AQ Country",
+     "example_masked": "CO"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AU Postal Code",
+     "example_masked": "MASKED_POSTAL"
+    }
+   ],
+   "finding": "Spec format is N (DIVIPOLA) 2 + 3 digits (e.g. 11 / 001). The client holds the department as a letter code (AV: DC 127, ANT 60, CUN 28, VAC 20, ATL 8, ... plus foreign region codes ON, VD, JAL) and the municipality as free text (AR: 60 distinct spellings, e.g. 'Bogota', 'Bogota D.C.', 'BOGOTA', 'bogota', 'Santafe de Bogota D.C.', 'Suba Compartir', 'Cundinamarca'). No DANE code exists in any mapped report. Seven Master Data persons have a foreign address (AQ Country CA, CR/cr, DO, CH, MX) for which no DIVIPOLA code exists; the spec does not say what to report. Pensioners and leavers have no address at all in the mapped reports.",
+   "proposed_explanation": "COMPOSITE FIELD - department (2 digits) and municipality (3 digits) of the beneficiary, on the DANE DIVIPOLA catalogue. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE AT PMI: the client stores a letter department code and a free-text city, so the system must hold the beneficiary's DIVIPOLA department and municipality codes as master data (or convert through a maintained mapping table validated against DIVIPOLA); free text must never be sent. The value for a beneficiary whose address is outside Colombia must be confirmed against the Formato 2276 v4 technical specification (RA). Location must be retained for leavers and employer-paid pensioners.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 4; DANE DIVIPOLA"
+  },
+  {
+   "id": 9,
+   "name": "Salary payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62100 Ordinary Salary- 0003"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62140 Integral Salary- 0423"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "E Monthly Basic Salary and Integral Salary",
+     "example_masked": "24715285"
+    }
+   ],
+   "finding": "Salary is evidenced: BW E equals Accumulated 62100+62140 for September on 261 of 262 rows. The client flags salary items with Accumulated H 'Salary Payment Indicator' = X on 2,866 rows: 62100, 62101, 62113, 62116, 62118, 62133, 62140, 62141, 62150 Vacation Bonus, 62208/62209/62210 bonuses, 62225, 62228, 62805-62808 per diems, 62841/62842/62845 overtime and the 794xx leave payouts. That flag also covers items the spec routes elsewhere (vacation pay to numeral 12, per diems to numeral 13), so the explanation must say numeral 5 is fed by a wage-type-to-numeral classification, not by the salary flag, and that no amount may enter two numerals. Integral salary (62140, 103 rows) is reported in full here (the 70% factor applies only to social-security bases). Accumulated Report monthly columns I..T are 01/01/2026..01/09/2026 then 01/10/2025..01/12/2025 (a rolling Oct-2025..Sep-2026 window) and column U 'Total' equals the sum of all 12 months on every one of 86,610 rows, although the title row reads 'Report generation date 01-01-2026 - 2026-09-30'. U 'Total' therefore cannot be used as an annual 2276 amount.",
+   "proposed_explanation": "Annual salary payments to the employee: ordinary and integral salary (100% of the integral salary - the 70% factor applies only to contribution bases), salary arrears, overtime and surcharges, and other remuneration that constitutes salary under CST art. 127 and is not reported in a more specific numeral. Fed by an explicit wage-type-to-numeral classification table, NOT by the payroll 'salary' indicator: at PMI that indicator also marks vacation pay and per diems, which belong to numerals 12 and 13. Each wage type feeds exactly one numeral. Accumulated on the PAYMENT date for 1 January to 31 December of the tax year; rolling or non-calendar accumulators must not be used. Maps to Form 220 casilla 36 and must equal it for the same employee and year.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 5; CST art. 127"
+  },
+  {
+   "id": 10,
+   "name": "Ecclesiastical emolument payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No ecclesiastical-emolument wage type in the Accumulated catalogue (423 wage types); normal for a corporate employer.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 11,
+   "name": "Payments made with vouchers, cheques, cards or vales",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65818 Meal Allowance Inf.-2079"
+    }
+   ],
+   "finding": "No wage type is labelled as a voucher, card or cheque payment. The client has many in-kind 'Inf.' (informative) wage types paid to third parties (meal 65818, private health 65814/65815/65831, gym 65811, optical 65809/65839, life insurance 65817/65837, text books 65812); whether any of them is paid through vouchers or cards is not shown, so their routing to numeral 7 vs 17 (or 8/32 for meals) cannot be decided from the reports.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 12,
+   "name": "Excess meal payments over 41 UVT (ET art. 387-1)",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65818 Meal Allowance Inf.-2079"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21115 Meal Allowance Inf. Deduction-2644"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58001 UVT = 52374 (2026 months)"
+    }
+   ],
+   "finding": "The client pays a meal allowance in kind (65818 'Meal Allowance Inf.', offset by deduction 21115) to 447 persons; monthly amounts range from 293,314 to 4,488,000 and 10 person-months exceed 41 UVT (2,147,334). WT 58001 UVT = 52,374 in 2026 (49,799 in 2025), confirming the spec's thresholds. 91 meal recipients have a monthly salary (62100/62140) above 310 UVT (16,235,940), so the whole-payment rule matters for this client. The explanation does not tell the developer which wage type feeds the split or that the 41-UVT and 310-UVT tests are monthly per employee using the UVT of the payment year. Whether 65818 is a payment to a third-party food supplier (the art. 387-1 condition) must be confirmed with the client.",
+   "proposed_explanation": "The EXCESS over 41 UVT per month (COP 2,147,334 in 2026) of employer payments to third parties for the employee's or their family's meals. Taxable income of the employee. BIDIRECTIONAL PAIR WITH NUMERAL 32, which carries the amount UP TO 41 UVT and is informative only - the same underlying payment is split across two numerals at the 41-UVT line. The split is computed MONTH BY MONTH per employee with the UVT of the payment year, and only where that month's salary does not exceed 310 UVT (COP 16,235,940 in 2026); where it does, the whole month's payment goes to numeral 7 and both numerals 8 and 32 stay nil for that month. Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' in the wage-type classification (at PMI the candidate is 'Meal Allowance Inf.' - client to confirm that it is paid to a food supplier).",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 8 and para. 1; ET art. 387-1"
+  },
+  {
+   "id": 13,
+   "name": "Fee payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No non-employment fees wage type in the Accumulated catalogue; the mapped reports cover employees and employer-paid pensioners only. Commissions paid under the employment contract would be salary (numeral 5); none is labelled as such either.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 14,
+   "name": "Service payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No non-employment services wage type in the Accumulated catalogue; the mapped reports cover employees and employer-paid pensioners only. Commissions paid under the employment contract would be salary (numeral 5); none is labelled as such either.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 15,
+   "name": "Commission payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No non-employment commissions wage type in the Accumulated catalogue; the mapped reports cover employees and employer-paid pensioners only. Commissions paid under the employment contract would be salary (numeral 5); none is labelled as such either.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 16,
+   "name": "Statutory benefit payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62211 Service Legal Bonus - Social Benefits"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62150 Vacation Bonus"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "79401 Annual leave payout"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "79403 Vacations Compensated In cash"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62116 Vacation Terminations"
+    }
+   ],
+   "finding": "Statutory benefits are evidenced: 62211 Service Legal Bonus (paid mainly in 12/2025 and 06/2026), vacation pay 79401 Annual leave payout, 79403 Vacations Compensated In cash, 62116 Vacation Terminations, and 62150 Vacation Bonus. 79401, 62116 and 62150 carry Salary Payment Indicator X, so without an explicit rule they would also be picked up as salary (numeral 5). The client also has extralegal bonuses (62208 March, 62209 Christmas, 62210 August, 62228/62229 seniority) - the explanation does not say whether extralegal bonuses belong here or in numeral 5/17. No work-clothing wage type exists. The explanation names the concepts but not the classification that feeds them.",
+   "proposed_explanation": "Statutory benefits OTHER THAN severance and its interest, which have their own three numerals (18, 19, 20): legal service bonus (prima de servicios), vacation pay (enjoyed, compensated in cash, or paid on termination) and work clothing. Fed by the wage-type-to-numeral classification; a wage type classified here must be excluded from numeral 5 even where it is flagged as salary in payroll (at PMI vacation pay and the vacation bonus carry the salary flag). Whether extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) are reported here or in numeral 5 / 17 must be fixed per wage type and confirmed with RA. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 42.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 12"
+  },
+  {
+   "id": 17,
+   "name": "Per diem payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62805 Hotel per diem"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62807 Lunch per diem"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "H Salary Payment Indicator",
+     "example_masked": "X"
+    }
+   ],
+   "finding": "Per diems are evidenced: 62805 Hotel, 62806 Breakfast, 62807 Lunch, 62808 Dinner per diem (213 rows, paid every month). All four carry Salary Payment Indicator X, i.e. the client classes them as salary, while the spec reports per diems in numeral 13. The explanation does not say whether salary-type (permanent) per diems stay in numeral 13 or move to numeral 5, nor which wage types feed it.",
+   "proposed_explanation": "Per diems for transport, subsistence and accommodation away from the habitual workplace, fed by the per-diem wage types in the wage-type-to-numeral classification (at PMI: hotel, breakfast, lunch and dinner per diem). These wage types carry the payroll salary flag at PMI; the routing of salary-type (permanent) per diems - numeral 13 or numeral 5 - must be confirmed with RA, and each amount reported in one numeral only. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 43.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 13; CST art. 130"
+  },
+  {
+   "id": 18,
+   "name": "Representation expense payments",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No representation-expense wage type in the Accumulated catalogue.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 19,
+   "name": "Cooperative associated-work compensation",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No associated-work cooperative population; Master Data J Employment Contract Type is 'WM' for all rows.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 20,
+   "name": "Non-reimbursable educational support financed with public funds",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62131 Scholarship-6861"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62700 School Allowance-6839"
+    }
+   ],
+   "finding": "No wage type is identified as State / public-fund educational support. The client's 62131 Scholarship and 62700 School Allowance are employer-funded benefits and must NOT be mapped here (they are candidates for numeral 17).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 21,
+   "name": "Other payments",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62523 Transportation Allowance CLA- 2008"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62207 Attendance Bonus"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65800 Stock awards (Vesting) - Informative-1004"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65821 Expatriation Package for Inbounds"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62181 Severance/Layoff Payment- Non CLA"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "F Others Income",
+     "example_masked": "3945568"
+    }
+   ],
+   "finding": "The client pays a large set of non-salary work income with no dedicated numeral: allowances (62523 transportation, 62590 marriage, 62591 child birth, 62700 school, 62131 scholarship, 62112 burial, 62114 optical, 62811 health, 62540 housing relocation, 62310/62320 expat), non-salary bonuses (62207, 62204, 62224, 62229, 62135, 62202, 62203), stock awards and dividends (65800, 62138, 25828), foreign-paid compensation (25830, 65838), expatriation package (65821), in-kind 'Inf.' benefits paid to third parties (658xx) and termination indemnities (62180/62181). Some are informative/notional entries offset by deductions (e.g. 65818/21115, 65811/21110). The explanation does not say that numeral 17 is fed by the classification table, nor how informative in-kind and foreign-paid items are treated, nor which items are NOT income (e.g. 62838 Exceptional Advance, 61100 Weekly advance, 62832 Expense reimbursement).",
+   "proposed_explanation": "Work-income payments with no dedicated numeral (non-salary allowances and bonuses, payments in kind to third parties for the employee's benefit, equity-based compensation, termination indemnities and similar), fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary; in-kind and informative wage types (paid to third parties or abroad) must be explicitly classified - at PMI the 'Inf.' and foreign-paid wage types need a decision per wage type, confirmed with RA. Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 17 and para. 6"
+  },
+  {
+   "id": 23,
+   "name": "Severance and interest actually paid to the employee",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62110 Cash-out of Severance Pay - Social Benefits -541S"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62117 Cash-out of Interest Severance Pay - Social Benefits-541R"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62126 Advance Severance Last Year"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62127 Advance Interest Severance Pay"
+    }
+   ],
+   "finding": "Evidenced and consistent with the explanation: severance interest paid in January (62127, 284 rows in 01/2026), severance paid directly (62126, 54 rows in 01/2026) and termination cash-outs of severance and interest (62110/62117, spread over the year). These match the spec's 'January interest payment, partial withdrawal or termination settlement' and its WTC mapping CO-CESANTIAS + CO-INTERESES-CESANTIAS. Only the calendar-year cut (not the rolling window) needs care - see the tax-year field.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 24,
+   "name": "Severance deposited to the severance fund",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25827 Payment Severance Funds Inf."
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65805 Payment Severance Funds Inf."
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "I 01/02/2026",
+     "example_masked": "value present on 236 rows, no other month"
+    }
+   ],
+   "finding": "Evidenced: the fund deposit is booked once a year, in 01/02/2026 only (236 rows, WT 25827 and its mirror 65805 with identical totals 2,064,808,759). The deposit made in February 2026 relates to severance accrued in 2025. The explanation says 'deposited by 14 February' but does not tell the developer in which tax year's return a February deposit is reported (year of deposit vs year of accrual), and the mirror wage types create a double-count risk.",
+   "proposed_explanation": "THE SECOND OF THREE. The amount DEPOSITED to the employee's chosen fund under Law 50 of 1990 art. 99 (deadline 14 February of the following year). Source: the severance-fund payment wage type (at PMI 'Payment Severance Funds Inf.' - take ONE of the two mirror wage types, never both). The tax year in which a February deposit is reported (year of deposit or year the severance accrued) must be stated - RA to confirm the governing rule before build. MAPS TO FORM 220 CASILLA 49 - NOT casilla 48. The second and third severance lines are TRANSPOSED between the two artefacts, and a positional mapping swaps them.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 19; Law 50 of 1990 art. 99 (rule for tax-year attribution to be confirmed by RA)"
+  },
+  {
+   "id": 25,
+   "name": "Severance recognised under the traditional CST regime",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Y Regime",
+     "example_masked": "AReg"
+    }
+   ],
+   "finding": "No traditional-regime severance amount or flag is evidenced. Master Data Y 'Regime' = 'AReg' on 8 rows, but all 8 have hire dates between 18-11-2025 and 01-05-2026, so it cannot be the pre-1991 traditional-regime flag and must not be mapped here.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 27,
+   "name": "Retirement, old-age or invalidity pensions",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62154 Monthly Retired  Pension-6798"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62153 Additional Retirement Pension"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62151 Retirement Payment - PRV-6795"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21140 Personal Income Tax Withholding-Retirees- 6799"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Z Pensioner Effective Date",
+     "example_masked": "2025-11-18"
+    }
+   ],
+   "finding": "The spec says this numeral is 'Nil for ordinary corporate payroll', and the Payroll Scope Summary has only a NO row for fund-paid pensions. The client data contradicts that assumption for PMI: the employer pays pensions directly to 491 pensioners (62154 Monthly Retired Pension, every month; 62153 Additional Retirement Pension, 485 persons), plus 62151/62152 Retirement Payment, withholds tax on them (21140 Withholding-Retirees) and deducts pensioner health (21645/21646/21647) and solidarity (21643). Pensioners are in neither Master Data nor Base of Withholding. The numeral itself is right; the explanation must tell the developer this population exists and which wage types feed it. The 1,000-UVT monthly test (52,374,000) matches WT 58001 UVT 52,374.",
+   "proposed_explanation": "Pension income paid BY THE EMPLOYER (retirement, old-age or invalidity). Populated for every employer-paid pensioner: at PMI the employer pays company pensions directly (monthly pension and additional pension wage types), so this numeral is NOT nil for this client and the pensioner population (not present in the employee master data) must be included in the file. Fed by the pension wage types in the wage-type-to-numeral classification; whether lump-sum retirement payments and pension-related compensations belong here or in numeral 17 must be confirmed per wage type with RA. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Where a fund pays the pension, the fund is the withholding agent and reporting party and nothing is reported here.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 21; ET art. 206 num. 5"
+  },
+  {
+   "id": 28,
+   "name": "Total gross income from work or pension payments",
+   "verdict": "Aligned",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "G Income Total",
+     "example_masked": "28660853"
+    }
+   ],
+   "finding": "Derived field; the System Mapping (SUM numerals 5 to 21) and the exclusion of numeral 32 are explicit. BW G 'Income Total' (= E + F on all 262 rows) is a monthly withholding-basis gross, not this total, and must not be used as its source.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 30,
+   "name": "Mandatory health contributions borne by the employee",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2554 Medical Plan - Healthcare Insurance (EPS ) Employee"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21645 Medical Plan - Healthcare Insurance (EPS ) - Pensioner"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "H Obligatory Contributions to EPS , AFP  Solidarity and Subsistence",
+     "example_masked": "1557063"
+    }
+   ],
+   "finding": "Evidenced by WT 2554 (employee EPS). Base of Withholding H combines EPS + AFP + FSP in one column (H = 2554 + 2556 + 2553 for September on 261 of 262 rows), so H cannot feed this numeral alone. Pensioner health contributions deducted from employer-paid pensions (21645/21646/21647, 515 rows) exist and the explanation does not say whether they are included.",
+   "proposed_explanation": "The beneficiary's own mandatory health contributions actually deducted in the tax year, by payment date. Source: the employee EPS contribution wage type (at PMI WT 2554), taken from the contribution wage type itself - never from a combined EPS+AFP+FSP total. Whether health contributions deducted from employer-paid pensions (at PMI the pensioner EPS wage types) are reported here for pensioner records must be confirmed with RA. Maps to Form 220 casilla 53 and must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 23"
+  },
+  {
+   "id": 31,
+   "name": "Mandatory pension and solidarity-fund contributions borne by the employee",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2556 Pension Plan Mandatory - AFP Employee"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2553 Solidarity Pension Fund"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21643 Solidarity Pension Fund-Pensioner"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "H Obligatory Contributions to EPS , AFP  Solidarity and Subsistence",
+     "example_masked": "1557063"
+    }
+   ],
+   "finding": "Evidenced by WT 2556 (AFP employee) and 2553 (solidarity fund, which in BW H's label covers solidarity AND subsistence). The rule (sum pension + FSP only here) matches. BW H also includes EPS so it cannot be used. The explanation does not name the source wage types and does not say whether the pensioner solidarity deduction (21643) is included.",
+   "proposed_explanation": "Pension AND the solidarity-fund surcharge (both the solidarity and the subsistence sub-accounts) in ONE numeral, exactly as Form 220 casilla 54 combines them. Source: the employee AFP contribution wage type plus the FSP wage type (at PMI WT 2556 + WT 2553), never a combined EPS+AFP+FSP figure. Whether the solidarity deduction on employer-paid pensions is reported here must be confirmed with RA. The electronic payroll and PILA both keep pension and FSP separate, so the engine must sum only at this point.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 24"
+  },
+  {
+   "id": 32,
+   "name": "Voluntary contributions to the individual-account regime (RAIS)",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25812 Pension Voluntaria Proteccion (FVOL)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25820 Plan Institucional PROTECCION - IC Bonus Long Term"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "J Contribution  APV",
+     "example_masked": "2500000"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Q FVOL Account Number",
+     "example_masked": "21534173"
+    }
+   ],
+   "finding": "The client holds voluntary pension contributions in WT 25811-25815 and 25823 '(FVOL)' (Porvenir, Proteccion, Skandia, Metlife, Dafuturo, Colfondos) and in institutional plans 25820/25821 and 21210/21211 (Proteccion). BW J 'Contribution APV' equals the FVOL wage types for September on 261 of 262 rows. Neither the wage-type names nor BW J say whether a contribution is a voluntary RAIS contribution (ET art. 55, numeral 25) or a voluntary pension fund contribution (ET art. 126-1, numeral 26) - the providers named run both. The spec already says the distinction must be carried on the wage type; the explanation should name the attribute and the PMI wage types that need it.",
+   "proposed_explanation": "Voluntary contributions to the mandatory individual-account regime (RAIS) under ET art. 55. DISTINCT from numeral 26. Source: voluntary-pension deduction wage types carrying the configuration attribute 'RAIS voluntary (art. 55)'. At PMI the voluntary pension deductions (the '(FVOL)' provider wage types and the institutional-plan wage types) and the APV total in the withholding working report do not carry this distinction - the client must classify each wage type before build. Maps to Form 220 casilla 55.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 25; ET art. 55"
+  },
+  {
+   "id": 33,
+   "name": "Voluntary contributions to voluntary pension funds",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25812 Pension Voluntaria Proteccion (FVOL)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25820 Plan Institucional PROTECCION - IC Bonus Long Term"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "J Contribution  APV",
+     "example_masked": "2500000"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "Q FVOL Account Number",
+     "example_masked": "21534173"
+    }
+   ],
+   "finding": "The client holds voluntary pension contributions in WT 25811-25815 and 25823 '(FVOL)' (Porvenir, Proteccion, Skandia, Metlife, Dafuturo, Colfondos) and in institutional plans 25820/25821 and 21210/21211 (Proteccion). BW J 'Contribution APV' equals the FVOL wage types for September on 261 of 262 rows. Neither the wage-type names nor BW J say whether a contribution is a voluntary RAIS contribution (ET art. 55, numeral 25) or a voluntary pension fund contribution (ET art. 126-1, numeral 26) - the providers named run both. The spec already says the distinction must be carried on the wage type; the explanation should name the attribute and the PMI wage types that need it.",
+   "proposed_explanation": "Voluntary contributions to voluntary pension funds under ET art. 126-1. Source: voluntary-pension deduction wage types carrying the configuration attribute 'voluntary pension fund (art. 126-1)'. At PMI the candidates are the '(FVOL)' provider wage types and the institutional-plan wage types; employer contributions to institutional plans and employee contributions must be told apart, and each wage type classified by the client before build. Maps to Form 220 casilla 56.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 26; ET art. 126-1"
+  },
+  {
+   "id": 34,
+   "name": "AFC account contributions",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "25802 AFC Bancolombia (AFC)"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "I Contribution  AFC",
+     "example_masked": "6500000"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "62839 Reimbursement AFC"
+    },
+    {
+     "file": "1764_Master_Data_Report_202609.xlsx",
+     "sheet": "Master Data Report",
+     "column": "AA AFC Account Number",
+     "example_masked": "03434119411"
+    }
+   ],
+   "finding": "Evidenced: AFC deductions per bank in WT 25800-25808 (55 rows); BW I equals them for September on 260 of 262 rows (one exception where I = 2,661,343 against 25803 = 4,300,000, plus the grand-total row). The client also has 62839 'Reimbursement AFC' (2 rows) and the explanation does not say whether reimbursements reduce the amount. CARGA_MASIVA_AFC has no employee rows and is not a source.",
+   "proposed_explanation": "Ahorro para el Fomento de la Construccion: the employee's AFC contributions withheld through payroll in the tax year, by payment date. Source: the AFC deduction wage types (at PMI one wage type per bank, 'AFC <bank>'), summed across banks. Treatment of AFC reimbursements / reversals (at PMI 'Reimbursement AFC') must be confirmed with RA. Maps to Form 220 casilla 57 and to electronic payroll NIE179.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 27"
+  },
+  {
+   "id": 35,
+   "name": "AVC account contributions",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21193 Foncoltabaco - Aporte Voluntario - 6775"
+    }
+   ],
+   "finding": "No AVC / Fondo Nacional del Ahorro wage type. The Foncoltabaco deductions (21192 Aporte Legal, 21193 Aporte Voluntario, 21124 Aporte Especial) are contributions to the employees' fund, not AVC, and must not be mapped here.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 37,
+   "name": "Withholding on work or pension income",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "2552 Income Tax (employee)"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "V WITHOLDING TAX WITH CONTRIBUTION",
+     "example_masked": "5402993"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "X WITHOLDING TAX WITHOUT CONTRIBUTION",
+     "example_masked": "5402993"
+    },
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "Y CONTINGENT WITHHOLDING",
+     "example_masked": "17024"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21330 Personal Income Tax Withholding (Theoretical)"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21140 Personal Income Tax Withholding-Retirees- 6799"
+    }
+   ],
+   "finding": "Withholding is evidenced in several places. For September, BW V 'WITH CONTRIBUTION' equals WT 2552 on 255 of 262 rows; BW X 'WITHOUT CONTRIBUTION' equals 2552 on only 201 rows (V = X on 204 rows). The 6 remaining employees (integral salary) have 2552 = 0 and their V equals WT 21330 'Personal Income Tax Withholding (Theoretical)'. Other withholding wage types exist: 21129 Withholding-Terminations, 21140 Withholding-Retirees (pensioners), 25832 Withholding Tax on Stock awards, 25833 Withholding Tax IC Local Country, 25834 Hypothetical Withholding Tax IC Foreign Country, plus BW Y CONTINGENT WITHHOLDING. The explanation does not say which wage types make up 'Income_Tax_Withheld'. Which BW column (V or X) reflects the withholding actually practised, and whether 'Theoretical'/'Hypothetical' (tax-equalisation) amounts and contingent withholding are included, is a client/RA decision - recorded, not decided here.",
+   "proposed_explanation": "THE PRINCIPAL WITHHOLDING NUMERAL: the income-tax withholding actually practised on the beneficiary's work or pension income in the tax year, by payment date. For a RESIDENT it is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Source: every wage type that records withholding actually practised and remitted (at PMI the candidates are the employee income-tax wage type and the separate withholding wage types for terminations, retirees and equity awards). Notional, theoretical or hypothetical tax-equalisation amounts are included ONLY if they were actually withheld and declared on Form 350 - each wage type to be confirmed with the client and RA. Maps to Form 220 casilla 60, and the sum across the population reconciles to twelve months of Form 350 casilla 93.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 29; ET arts. 383, 388, 408"
+  },
+  {
+   "id": 38,
+   "name": "VAT as a higher cost or expense",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No VAT data in the mapped reports; expected - the spec assigns it to the client's tax function.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 39,
+   "name": "VAT withholding",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No VAT withholding data in the mapped reports; expected - the spec assigns it to the client's tax function.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 41,
+   "name": "Monthly meal payments up to 41 UVT",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "65818 Meal Allowance Inf.-2079"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "21115 Meal Allowance Inf. Deduction-2644"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58001 UVT = 52374 (2026 months)"
+    }
+   ],
+   "finding": "The client pays a meal allowance in kind (65818 'Meal Allowance Inf.', offset by deduction 21115) to 447 persons; monthly amounts range from 293,314 to 4,488,000 and 10 person-months exceed 41 UVT (2,147,334). WT 58001 UVT = 52,374 in 2026 (49,799 in 2025), confirming the spec's thresholds. 91 meal recipients have a monthly salary (62100/62140) above 310 UVT (16,235,940), so the whole-payment rule matters for this client. The explanation does not tell the developer which wage type feeds the split or that the 41-UVT and 310-UVT tests are monthly per employee using the UVT of the payment year. Whether 65818 is a payment to a third-party food supplier (the art. 387-1 condition) must be confirmed with the client.",
+   "proposed_explanation": "INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8, which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026). Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' (at PMI the candidate is 'Meal Allowance Inf.' - client to confirm it is paid to a food supplier).",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 numeral 32 and para. 1; ET art. 387-1"
+  },
+  {
+   "id": 42,
+   "name": "Average labour income of the last six months",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "63806 Basic Salary Avarage YTD"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "68042 Cash Out Avarage"
+    }
+   ],
+   "finding": "No accumulator is labelled as the ET art. 206 num. 4 six-month average labour income. The client's averages (63806 Basic Salary Average YTD, 68042 Cash Out Average, 68099 'Avegare Val', 64108-64520 monthly 'Avg Concepts') serve other calculations and must not be assumed to be this value. Numerals 18/19 are populated for this client, so this field will be required.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 43,
+   "name": "Economic dependant document type and identification number",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "L Dependents Exemption",
+     "example_masked": "1675968"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "F WT Code / G WT Description",
+     "example_masked": "58892 Dependents Exepmtion"
+    }
+   ],
+   "finding": "No dependant identity data in any mapped report. The dependants deduction IS claimed (BW L > 0 for 30 employees in September; WT 58892 on 49 rows; maximum 1,675,968 = 32 UVT), so numeral 34 will have to be populated, but the document type and number of the dependant are not held in the reports analysed.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 44,
+   "name": "Trust identification",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No trust data; expected - blank for an ordinary employer under concept 1.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 45,
+   "name": "Contract participant document type and identification number",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "No collaboration-contract data; expected - blank for an ordinary employer under concept 1.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 47,
+   "name": "Informant NIT",
+   "verdict": "Not evidenced",
+   "report_evidence": [
+    {
+     "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+     "sheet": "Base of Withholding",
+     "column": "Title row 'Organization'",
+     "example_masked": "1764 - Compania Colombiana de Tabaco SAS"
+    }
+   ],
+   "finding": "No NIT in the title rows or columns of the mapped reports (only the organisation name).",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 48,
+   "name": "Taxpayer category",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Taxpayer category (Gran Contribuyente / legal entity) is not shown in any mapped report.",
+   "proposed_explanation": "",
+   "official_source": ""
+  },
+  {
+   "id": 49,
+   "name": "Tax year reported",
+   "verdict": "Explanation to improve",
+   "report_evidence": [
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "I..T monthly headers",
+     "example_masked": "01/01/2026 ... 01/09/2026, 01/10/2025 ... 01/12/2025"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "U Total",
+     "example_masked": "18179572"
+    },
+    {
+     "file": "Accumulated Report.xlsx",
+     "sheet": "Accumulated Report",
+     "column": "Title row 'Report generation date'",
+     "example_masked": "01-01-2026 - 2026-09-30"
+    }
+   ],
+   "finding": "Accumulated Report monthly columns I..T are 01/01/2026..01/09/2026 then 01/10/2025..01/12/2025 (a rolling Oct-2025..Sep-2026 window) and column U 'Total' equals the sum of all 12 months on every one of 86,610 rows, although the title row reads 'Report generation date 01-01-2026 - 2026-09-30'. U 'Total' therefore cannot be used as an annual 2276 amount. The spec's Population Rules sheet already says to accumulate each concept for the whole tax year on the PAYMENT date, but neither this field nor the amount fields say so; a developer reusing the client's accumulator would mix Oct-Dec of the prior year into the return.",
+   "proposed_explanation": "The fiscal year whose payments are reported (AAAA). Every amount numeral (5 to 33) is the sum of payments or credits in account made between 1 January and 31 December of this year, by PAYMENT date - never a rolling twelve-month window or an accumulator spanning two calendar years. Filed in May or June of the FOLLOWING calendar year.",
+   "official_source": "DIAN Resolution 000227 of 2025 (as cited by the spec), art. 1.3.7.1.1 (calendar tax year); spec Population Rules sheet 'Numerals 5 to 21'"
+  },
+  {
+   "id": 50,
+   "name": "Format and version",
+   "verdict": "Not evidenced",
+   "report_evidence": [],
+   "finding": "Format/version is a filing constant; not in client reports.",
+   "proposed_explanation": "",
+   "official_source": ""
+  }
+ ],
+ "uncovered_report_columns": [
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "column": "A ID Number",
+   "classification": "Client-specific",
+   "note": "Internal employee number (8-9 digits); join key to Master Data A and Base of Withholding A, not reported."
+  },
+  {
+   "file": "Accumulated Report.xlsx",
+   "sheet": "Accumulated Report",
+   "column": "U Total",
+   "classification": "Client-specific",
+   "note": "Sum of a rolling Oct-2025..Sep-2026 window; not a calendar tax-year total and cannot feed any numeral."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "A ID Number",
+   "classification": "Client-specific",
+   "note": "Internal employee number; join key only."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "C Entity Name",
+   "classification": "Client-specific",
+   "note": "Payroll entity name (single value); not a 2276 field."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "D % Retention ",
+   "classification": "Client-specific",
+   "note": "Procedure 2 withholding rate; monthly withholding calculation input, no 2276 numeral."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "K BASE 1",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "O BASE 2",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "Q BASES 3",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "R 40% limit",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "S TOTAL TAX RELIEF",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "T LIMIT APPLIED",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "U WITHOLDING TAX BASIS",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "W WITHOLDING TAX BASIS WITHOUT CONTRIBUTION",
+   "classification": "Client-specific",
+   "note": "Intermediate step of the monthly ET art. 388 depuration (statutory for the withholding calculation / Form 350 in CO-DIAN-002), but Format 2276 has no numeral for it."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "L Dependents Exemption",
+   "classification": "Client-specific",
+   "note": "Amount of the art. 387 dependants deduction. 2276 reports only the dependant's identity (numeral 34), not the amount; the amount belongs to the withholding calculation / Form 220."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "M Decrease Prepaid Medicine",
+   "classification": "Client-specific",
+   "note": "Prepaid-medicine deduction amount; withholding calculation input, no 2276 numeral."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "N Decrease in Housing Interest",
+   "classification": "Client-specific",
+   "note": "Housing-interest deduction amount; withholding calculation input, no 2276 numeral."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "P EXEMPTED INCOME 25%",
+   "classification": "Client-specific",
+   "note": "ET art. 206 num. 10 exempt income; withholding calculation, no 2276 numeral."
+  },
+  {
+   "file": "1764_PMI_Base of Withholding 2026-09-01 - 2026-09-30.xlsx",
+   "sheet": "Base of Withholding",
+   "column": "Y CONTINGENT WITHHOLDING",
+   "classification": "Client-specific",
+   "note": "Contingent withholding amount (22 distinct values); its relationship to numeral 29 must be confirmed - see numeral 29 finding."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "A Employee ID",
+   "classification": "Client-specific",
+   "note": "Internal employee number; join key only."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "F Formatted Full Name",
+   "classification": "Client-specific",
+   "note": "Formatted full name; not used (numeral 3 needs the four separate name parts)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "G Hire Date",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "H Original Hire Date",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "I Business/Job Title",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "J Employment Contract Type",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "K Department/Division",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "L Primary Cost Center",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "M Enterprise ID",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "N Grade",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "O Manager ID",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "P Employee Professional Risk Class (ARL)",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Q FVOL Account Number",
+   "classification": "Client-specific",
+   "note": "FVOL account number; operational (numeral 26 uses amounts, not accounts)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "R Employment Status",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "S Pay Group Code",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "T Personal Area",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "U Personal Subarea",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "V Employee Group Code",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "W Employee Subgroup Code",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "X Adjusted Service Date",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Y Regime",
+   "classification": "Client-specific",
+   "note": "'AReg' on 8 recent hires; NOT the pre-1991 traditional-regime flag (see numeral 20)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "Z Pensioner Effective Date",
+   "classification": "Client-specific",
+   "note": "Pensioner effective date for 2 active employees; operational."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AA AFC Account Number",
+   "classification": "Client-specific",
+   "note": "AFC account number; operational (numeral 27 uses amounts)."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AB Severance Fund Name",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AC Pension Fund (AFP) Name",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AD EPS Provider Name",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AE Sub Function",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AF Business/Job Title ES",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AG Work location",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AH Nationality",
+   "classification": "Client-specific",
+   "note": "Nationality; may help derive the document type but 2276 has no nationality or residence field."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AI Gender",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AJ Birth Date",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AK Primary Email Address",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AL Phone number",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AS Address Line 1",
+   "classification": "Client-specific",
+   "note": "Address line; 2276 numeral 4 needs only department and municipality codes."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AT Address Line 2",
+   "classification": "Client-specific",
+   "note": "Address line; 2276 numeral 4 needs only department and municipality codes."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AU Postal Code",
+   "classification": "Client-specific",
+   "note": "Postal code; not a 2276 field."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AW Pay Method",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AX Bank Account Type",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AY Bank Name",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "AZ Exact Beneficiary Name (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BA Bank SWIFT (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BB Bank Account Currency (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BC Bank Account Number (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BD Bank Name (Primary Bank Account)",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BE Tax Procedure 1",
+   "classification": "Client-specific",
+   "note": "Tax procedure (1/2/3); withholding calculation input, no 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BF Work Schedule",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BG Marital Status",
+   "classification": "Client-specific",
+   "note": "HR / payroll operational data with no Format 2276 numeral."
+  },
+  {
+   "file": "1764_Master_Data_Report_202609.xlsx",
+   "sheet": "Master Data Report",
+   "column": "BH Basic Salary",
+   "classification": "Client-specific",
+   "note": "Basic salary rate; amounts in 2276 come from paid wage types."
+  }
+ ],
+ "summary": {
+  "Aligned": 2,
+  "Explanation to improve": 17,
+  "Format mismatch": 1,
+  "Conflict": 0,
+  "Not evidenced": 20
+ }
+}

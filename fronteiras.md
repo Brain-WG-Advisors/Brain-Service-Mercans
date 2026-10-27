@@ -38,6 +38,7 @@
 | Aprovação de designs feitos por IA | Seniors de design, human-in-the-loop (chat: design-dev-kb) | Design entregue para revisão |
 | IP e docs internos do engine; liberação de IP para IA | Andre (chat: design-dev-kb) | — |
 | Country settings | Só o compliance team; integration team sem acesso (chat: design-dev-kb) | — |
+| Tickets de Singapura (ex.: HRBS-15679, variâncias de CPF AW em run de cliente) | Não é responsabilidade nossa (decisão do usuário, 2026-10-14); Support/Compliance Product (Mohit) | Nada a responder |
 | Workflow de aprovação de declarações (HU) | Fronteira HRB x engine não definida [INCERTO] (chat: design-dev-kb) | — |
 | Contradições de pesquisa | Dono da pesquisa (Wallisson), não a BA (chat: design-dev-kb) | Contradição resolvida no artefato |
 | Gaps bloqueantes no guia | Dev abre gap query, compliance responde (chat: design-dev-kb) | Resposta ao gap |

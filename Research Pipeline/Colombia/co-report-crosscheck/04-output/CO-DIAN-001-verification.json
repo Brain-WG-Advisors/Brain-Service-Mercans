@@ -1,0 +1,444 @@
+{
+ "spec": "CO-DIAN-001",
+ "checked": [
+  {
+   "id_or_column": "row 87 NIE071 Transport allowance",
+   "original_verdict": "Conflict",
+   "result": "confirmed",
+   "reason": "Re-computed: WT 62523 'Transportation Allowance CLA- 2008' paid to 74 employees (73 x 249,095; 1 x 498,190); G2N Salary Assigned of all 74 is 4,550,000-12,815,137, all above 2 SMMLV (3,501,810). The spec's Conditional Reason (Ley 15 de 1959) restricts AuxilioTransporte to <= 2 SMMLV, so the client label/payment contradicts the element rule as written; Conflict with the RA query is correct. Extra fact for the query: the only employees at or below 2 SMMLV are the 20 Group 6/E2 interns (2,300,000) and none of them receives WT 62523."
+  },
+  {
+   "id_or_column": "row 185 NIE164 Pension contribution - rate",
+   "original_verdict": "Conflict",
+   "result": "needs Wallisson",
+   "reason": "Facts partly confirmed: the 2 employees with 'Pensioner Effective Date' do pay WT 2556 (4%) and WT 2553 in Sep-2026, and the employer pays 12% (WT 2567). Two corrections: (1) for 89447129 the 4% is on WT 64994 'Gross earnings base' 17,541,271, not on 12,606,941 (701,651/12,606,941 = 5.57%); (2) for BOTH employees the 'Pensioner Effective Date' equals their Hire Date and Adjusted Service Date (18-11-2025 / 02-12-2025), both are Regime 'AReg', and their 2556 deductions start in their first payroll month. That pattern suggests the date is not an old-age-pension recognition date, so there is no evidence the client is contradicting the 0.00 rule. Wallisson to decide: keep this as a Conflict (RA query to client on what the date means), or downgrade to 'Not evidenced' with the same data query. Recommended: downgrade, keep the query."
+  },
+  {
+   "id_or_column": "row 63 NIE051 Place of work - department",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Master Data has no work-place department; 'Employee Address - Department' is the HOME department in letter codes (DC 127, ANT 60, CUN 28, VAC 20 ... plus non-Colombian VD, ON, JAL; 1 blank). Spec needs 2-digit DIVIPOLA of the place of work. Format and meaning both differ; translation table via 'Work location' is the right fix."
+  },
+  {
+   "id_or_column": "row 64 NIE052 Place of work - municipality",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'Work location' is free-text city name, 12 distinct values, 2 blanks, identical to 'Personal Subarea' for all 261. Spec needs 5-digit DIVIPOLA. Confirmed."
+  },
+  {
+   "id_or_column": "row 67 NIE061 Contract type",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'Employment Contract Type' = 'WM' for all 261 employees including the 20 Group 6/E2 interns; spec needs table 5.5.2 code 1-5. Confirmed."
+  },
+  {
+   "id_or_column": "row 74 NIE067 Account type",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "'Bank Account Type' = '02' for all 258 employees with bank data (3 blank); spec Format A text (AHORROS/CORRIENTE). Bank Payments 'Type Account' = 'Transferencia-Cuenta Ahorro' for all 255 paid employees, and account number and bank name match Master Data 255/255, which supports 02 = savings. Confirmed."
+  },
+  {
+   "id_or_column": "row 127 NIE109 Vacation taken - start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. Example 14-09-2026 for WT 79001 confirmed. August-dated rows (30591217: 27-08..28-08; 45680439: 31-08) were paid in Sep-2026 (Accumulated 79401 Aug = 0, Sep > 0), so reporting them in the September document with their real dates is right."
+  },
+  {
+   "id_or_column": "row 128 NIE110 Vacation taken - end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. Same evidence as NIE109."
+  },
+  {
+   "id_or_column": "row 140 NIE123 Incapacity - start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. Sick-leave example confirmed: 31309721 has 79008 08-09-2026..09-09-2026 and 79011 10-09-2026..12-09-2026 as separate rows."
+  },
+  {
+   "id_or_column": "row 141 NIE124 Incapacity - end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. Same evidence as NIE123."
+  },
+  {
+   "id_or_column": "row 145 NIE128 Maternity / paternity leave - start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. WT 79006 row 01-09-2026..30-09-2026 confirmed (that employee is not in the monthly G2N). Note: Accumulated also has 79007 'Paternity Leave Payment' (79407 payout), which the proposed text should name alongside 79006."
+  },
+  {
+   "id_or_column": "row 146 NIE129 Maternity / paternity leave - end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. Same as NIE128; add 79007 Paternity."
+  },
+  {
+   "id_or_column": "row 149 NIE132 Paid leave - start date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. WT 79018 'Paid Leave' row 01-09-2026..26-09-2026 confirmed. Note: Accumulated also has 79014 'Bereavement Leave' and 79019 'Jury/ Elector Leave', which are also LicenciaR and should be named in the proposed text."
+  },
+  {
+   "id_or_column": "row 150 NIE133 Paid leave - end date",
+   "original_verdict": "Format mismatch",
+   "result": "confirmed",
+   "reason": "Leave Absence Report 'Date From'/'Date To' are text in DD-MM-YYYY (97 of 97 rows are strings); spec Format is AAAA-MM-DD. Mismatch real; conversion is trivial. Same as NIE132; add 79014 / 79019."
+  },
+  {
+   "id_or_column": "row 16 NIE029 Payroll period frequency",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Verdict and proposed text right; one fact in the text needs correction. Master Data/G2N cover 'CO - Monthly' only. WT 61100 'Weekly advance' is paid in every month INCLUDING Sep-2026 (126 recipients, none in the monthly G2N), but 29 of the 173 recipients over 12 months ARE in the Sep monthly G2N (they received 61100 in earlier months, e.g. 89447129, 86074609). Replace '173 employees outside the monthly G2N' with '126 employees in Sep-2026, none in the monthly G2N; 29 others moved to the monthly payroll during the year'. The Leave Absence Report also lists 28 employees not in the monthly G2N, which supports a second population."
+  },
+  {
+   "id_or_column": "row 53 NIE041 Worker type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 20 employees paid WT 62149 (2,300,000 each), all Employee Group 6 / Subgroup E2, all contract 'WM', none with WT 2554/2556 deductions (their only lines are 62149, 65818, 21115); Accumulated WT 64116 'Apprentice formula' = 1 for all 20 in Sep-2026. Proposed text supported."
+  },
+  {
+   "id_or_column": "row 54 NIE042 Worker sub-type",
+   "original_verdict": "Explanation to improve",
+   "result": "needs Wallisson",
+   "reason": "The proposed rule 'Pensioner Effective Date populated -> 01' is not safe: for both employees the date equals the Hire Date and Adjusted Service Date and both still pay 4% pension and 12% employer pension (see NIE164). Wallisson to decide whether the proposed text should instead say 'default 00; use 01 only for employees the client confirms as recognised old-age pensioners (source to be provided by the client)', and not use 'Pensioner Effective Date' as the driver until the client explains it."
+  },
+  {
+   "id_or_column": "row 56 NIE044 Employee document type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Document-column combinations re-computed exactly as stated (CC only 234; Foreigners card only 13; National ID + CC 8; National ID + Identity Card + CC 3; Identity Card + Foreigners 1; Identity Card + CC 1; Identity Card + Foreigners + CC 1). Proposed text supported."
+  },
+  {
+   "id_or_column": "row 57 NIE045 Employee document number",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: G2N 'National ID' blank for 14 employees, all non-Colombian nationals (Ecuador, Venezuela, Peru, Costa Rica, Canada, Uruguay, Honduras) whose document is in Master Data 'Indentity Card for Foreigners' (6-7 digits); where filled, G2N 'National ID' equals Master Data 'Citizenship Card ID' 247/247. Note: masked CC values in G2N also start with 0 (e.g. 0356602831), so the leading-zero check should cover all document columns, not only the foreigners' card."
+  },
+  {
+   "id_or_column": "row 59 NIE047 Employee second surname",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 'Second Last Name' blank for 144 of 261 (55%). Supported."
+  },
+  {
+   "id_or_column": "row 62 NIE050 Place of work - country",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Master Data 'Country' values CO 253, co 2, CA, CR, cr, DO, CH, MX (1 each); all 'Work location' values are Colombian cities. Supported."
+  },
+  {
+   "id_or_column": "row 66 NIE056 All-inclusive salary flag",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 62140 for 88 employees, 62100 for 153, 62149 for 20. For integral employees 64990 equals the full 62140 amount and WT 2556 = 2.8% of it for 64 of 88 (4% x 70%). Supported."
+  },
+  {
+   "id_or_column": "row 72 NIE065 Payment method",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Pay Method Bank 257 / Cash 4; one Cash employee (67169834) still has account type 02 and Banco Colpatria; bank file labels payments 'Transferencia-Cuenta Ahorro'. Supported."
+  },
+  {
+   "id_or_column": "row 78 NIE002 Hire date",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Original Hire Date differs from Hire Date for 40 employees, Adjusted Service Date for 21; the example (Hire 02-04-2025, Original 02-07-2019, Adjusted 2019-07-02) exists. Supported."
+  },
+  {
+   "id_or_column": "row 82 NIE006 Time worked",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Depends on NIE002; example confirmed. Supported."
+  },
+  {
+   "id_or_column": "row 85 NIE069 Days worked",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict 'Explanation to improve' stands, but the proposed text is internally inconsistent with the data: Accumulated WT 63812 'Worked Days Current Month Without Leaves' is 30 for all 48 employees paid vacation (79401) in Sep-2026 and for the sick-leave employees (only 3 employees show other values: 60, 60, 44, which look like duplicated rows). So 63812 is NOT reduced by vacation days and cannot be 'the days paid under NIE070'. Correct text: no client counter gives worked days net of vacation/leave; compute 30 minus the Leave Absence Report days of the month (or have the client name a counter), and note that 63812 is the gross month count. Client to confirm."
+  },
+  {
+   "id_or_column": "row 86 NIE070 Salary paid for the period",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 41 of 153 ordinary employees and 10 of 88 integral employees have 62100/62140 below Salary Assigned; 40 and 8 of them have 79401, and salary + 79401 = Salary Assigned for 40 and 6. Arrears 62101 (202 employees) and 62141 (3) confirmed. Supported."
+  },
+  {
+   "id_or_column": "row 125 NIE108 Night surcharge hour, Sunday / public holiday - amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "WT 62845 'Night, Sunday or holiday surcharge' paid to 13 employees (Jan, Feb, Mar, May 2026; none in Sep). Label ambiguity real. Supported."
+  },
+  {
+   "id_or_column": "row 130 NIE112 Vacation taken - amount",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict stands, but the proposed text 'amount per episode = Leave Absence Report Amount for WT 79001' is wrong for multi-episode employees: in all 8 employees with more than one 79001 row the 'Amount' value is REPEATED on every row (e.g. 13091406: 3 rows of 1,154,840 vs G2N 79401 1,924,734; 45680439: 2 rows of 11,398,127 vs 12,537,940). The column only equals G2N 79401 for single-row employees (45 of 48). Correct text: per-employee amount = G2N WT 79401; per-episode Pago must be split by days (or supplied by the engine), not read from the Leave Absence 'Amount'. The 62150 exclusion is right (35 employees in Sep; 286, not 287, over 12 months)."
+  },
+  {
+   "id_or_column": "row 132 NIE116 Vacation compensated in cash - amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "79403 in G2N for 4 employees (239,820-1,578,316) and equal to Leave Absence 79003 for all 4; 62116 'Vacation Terminations' 52 employees over 12 months. Supported."
+  },
+  {
+   "id_or_column": "row 133 NIE117 Service bonus - days",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict stands, but the proposed text treats 42961 and 63811 as one source with values 199/210/178. They are different counters: 63811 'Worked Days In Semester' resets in July and is 90 at Sep-2026 for 243 of 261 (calendar semester days), while 42961 (same description) does not reset in July and shows 186-210 in Sep-2026. The example values belong to 42961 only. Correct text: candidate = 63811 (semester counter, resets 1 Jan / 1 Jul); 42961 is a different count that the client must explain; the client must confirm which one (if either) is net of unpaid leave."
+  },
+  {
+   "id_or_column": "row 134 NIE118 Service bonus - amount (salary)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62211 317 employees; 62208 289, 62209 286, 62210 279 over 12 months. Supported."
+  },
+  {
+   "id_or_column": "row 135 NIE119 Service bonus - amount (non-salary)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62208/62209/62210/62204 present (62204: 197 employees, Apr-May 2026); salary character not in any report. Supported."
+  },
+  {
+   "id_or_column": "row 136 NIE120 Severance savings - amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62110 for 2 employees (9,000,000 / 9,170,000); 62126 57 employees Jan-Mar 2026; 25827 and 65805 236 employees, Feb-2026 only. Supported; deferring the fund-consignment question to the DIAN source is correct."
+  },
+  {
+   "id_or_column": "row 143 NIE126 Incapacity - type",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Only 79008/79011 sick-leave WTs exist; no ARL/occupational incapacity WT in the Accumulated Report WT list. Supported."
+  },
+  {
+   "id_or_column": "row 144 NIE127 Incapacity - amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: the 4 sick-leave rows of employees in the monthly payroll (31309721 79008 + 79011; 25911561 79008; 80550256 79011) are all paid at exactly 100% of Basic Salary/30 per day, and each equals its G2N payout (79408/79411). Note the evidence base is small (3 employees) and the 5 other sick/maternity rows belong to employees not in the monthly G2N. Given the repeated-Amount defect found for 79001 (see NIE112), add 'check that the Leave Absence Amount is per row' to the text."
+  },
+  {
+   "id_or_column": "row 164 NIE146 Other concept - description",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "65821 6 employees 845,882,579; 1910 2 employees 312,532,953; 62132 45,000,000; 62203 21 employees (not in Sep). Supported."
+  },
+  {
+   "id_or_column": "row 171 NIE153 Meal payment - salary",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Data confirmed (65818 = 21115 = 141,042,000, 211 employees incl. the 20 interns, max 4,488,000). But the proposed text ends 'Apply the 41 UVT / 310 UVT split of ET art. 387-1' in the SALARY element, which reads as if 41 UVT decides S vs NS. The spec's own Conditional Reason says the 41 UVT split is kept ALSO, for Format 2276 numerals 32/8 - it is a tax split, not the salary character. Correct text: S vs NS follows the agreed salary character of WT 65818 (CST arts. 127-128); the engine separately tracks the 41 UVT / 310 UVT split for Format 2276 and the withholding base."
+  },
+  {
+   "id_or_column": "row 172 NIE154 Meal payment - non-salary",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Same correction as NIE153: the 41 UVT / 310 UVT test of ET art. 387-1 decides taxable income (and the 2276 split), not whether the meal payment is S or NS in the XML."
+  },
+  {
+   "id_or_column": "row 174 NIE193 Third-party payment (accrued)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: each 'Inf.' earning ties exactly to its offset in Sep-2026 (65814/21563 61,455,560; 65815/21802 37,983,160; 65817+65837/25837 33,327,489; 65811/21110 7,726,719; 65809+65839/21111 3,816,200; 62320/21320 153,612,202; 62310/21310 17,500,000; 65802/21613 48,677,210). One exception the text should name: WT 67090 'Loan without interests Payment Inf.' (10,000,000, employee 30723308) sits in the Non Cash grouping with NO non-cash offset - it funds a cash deduction (21215) and is a loan, not a third-party benefit."
+  },
+  {
+   "id_or_column": "row 175 NIE194 Advance (accrued)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62838 Sep-2026 values 10,505,430 / 5,000,000 confirmed for 2 monthly employees with no 62838 line in G2N; 61100 paid in other runs. Supported; see NIE196 for the recovery link."
+  },
+  {
+   "id_or_column": "row 177 NIE157 Apprentice maintenance support",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "WT 62149 2,300,000 x 20, Group 6/E2, contract 'WM', 64116 = 1. Supported."
+  },
+  {
+   "id_or_column": "row 180 NIE160 Dismissal indemnity",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "62180 1 employee (Jul-2026); 62181 3 employees (Apr-May 2026); 63125 is a days counter. Supported."
+  },
+  {
+   "id_or_column": "row 187 NIE167 Solidarity fund - solidarity rate",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: WT 2553 for 224 employees; 2553/64990 = 1.00% for 93, 0.70% for 41 integral (1% x 70%), others 0.75%-3.33%. Split rule (solidarity 0.5%, subsistence remainder incl. 16-20+ SMMLV increments) matches Ley 797 art. 8. Note: 7 employees exceed the 2% legal maximum against 64990 (2.22%-3.33%), so 2553 includes something beyond the month's base (arrears/other base) and 'the two amounts must add back to 2553' will need a tolerance or a base check."
+  },
+  {
+   "id_or_column": "row 188 NIE168 Solidarity fund - solidarity amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: WT 2553 for 224 employees; 2553/64990 = 1.00% for 93, 0.70% for 41 integral (1% x 70%), others 0.75%-3.33%. Split rule (solidarity 0.5%, subsistence remainder incl. 16-20+ SMMLV increments) matches Ley 797 art. 8. Note: 7 employees exceed the 2% legal maximum against 64990 (2.22%-3.33%), so 2553 includes something beyond the month's base (arrears/other base) and 'the two amounts must add back to 2553' will need a tolerance or a base check."
+  },
+  {
+   "id_or_column": "row 189 NIE169 Solidarity fund - subsistence rate",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: WT 2553 for 224 employees; 2553/64990 = 1.00% for 93, 0.70% for 41 integral (1% x 70%), others 0.75%-3.33%. Split rule (solidarity 0.5%, subsistence remainder incl. 16-20+ SMMLV increments) matches Ley 797 art. 8. Note: 7 employees exceed the 2% legal maximum against 64990 (2.22%-3.33%), so 2553 includes something beyond the month's base (arrears/other base) and 'the two amounts must add back to 2553' will need a tolerance or a base check."
+  },
+  {
+   "id_or_column": "row 190 NIE170 Solidarity fund - subsistence amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: WT 2553 for 224 employees; 2553/64990 = 1.00% for 93, 0.70% for 41 integral (1% x 70%), others 0.75%-3.33%. Split rule (solidarity 0.5%, subsistence remainder incl. 16-20+ SMMLV increments) matches Ley 797 art. 8. Note: 7 employees exceed the 2% legal maximum against 64990 (2.22%-3.33%), so 2553 includes something beyond the month's base (arrears/other base) and 'the two amounts must add back to 2553' will need a tolerance or a base check."
+  },
+  {
+   "id_or_column": "row 191 NIE177 Income tax withheld",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Re-computed: 2552 in Deductions for 224 employees; Base of Withholding 'WITHOLDING TAX WITH CONTRIBUTION' = G2N 2552 for 255/261; the other 6 have 21330 (Deductions) equal to that column. Correction: only 5 of the 6 are Employment Status 'D'; 51350775 is 'A'. Added fact: 'CONTINGENT WITHHOLDING' equals 'WITHOUT CONTRIBUTION' minus 'WITH CONTRIBUTION' for all 20 employees, all of whom have AFC/APV - i.e. the contingent withholding of ET art. 126-1/126-4 that applies only on early withdrawal, not tax withheld this month. Proposed text otherwise supported."
+  },
+  {
+   "id_or_column": "row 193 NIE198 Voluntary pension contribution",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Sum of FVOL WTs (25812/25813/25814/25815/25823 in Sep; 25811 in the year) equals Base of Withholding 'Contribution APV' for 261/261; 21210 (3) and 21211 (1) are 'Plan Institucional PROTECCION'. Supported."
+  },
+  {
+   "id_or_column": "row 195 NIE171 Union dues",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Verdict and text right; numbers in the finding need correction: all 74 union members pay EXACTLY 3 union WTs (CUT 21550 ~0.07-0.08%, national 21680 ~0.43%, one sectional at 1.00%: 21562 for 58 employees (not 40), 21552 11, 21560 3, 21670 1)."
+  },
+  {
+   "id_or_column": "row 196 NIE172 Union dues - amount",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Supported with a correction: 74 employees pay exactly 3 union WTs (CUT + national + one sectional), not '2-3'. The three look like tiers of one union subscription; the 'one Sindicato per WT' instruction remains subject to the XSD repetition check the text already mentions."
+  },
+  {
+   "id_or_column": "row 201 NIE195 Third-party payment (deduction)",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Offsets re-computed and equal to their earnings (see NIE193). Supported."
+  },
+  {
+   "id_or_column": "row 202 NIE196 Advance recovery (deduction)",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict stands, but the proposed text states as fact that 21215 'Legalization Salary Payment' is the 'recovery of advances 61100 / 62838'. Only 5 of the 34 employees with 21215 in Sep-2026 (-196,711,940) had a 62838/61100 advance in Jul-Aug 2026; the other 29 have none in any report. For 30723308 the 10,000,000 recovery is matched by non-cash WT 67090 'Loan without interests Payment Inf.' (advance converted into an interest-free loan). Correct text: 'candidate = WT 21215; the client must say what each 21215 legalises (advance, off-cycle payment, or loan refinancing); only where it recovers an advance does it go to NIE196'."
+  },
+  {
+   "id_or_column": "row 203 NIE197 Other deduction",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "21127 93 employees (-50,000 each); 1204 6 employees -1,027,283,337; 21126 4 employees -413,242,384. Supported."
+  },
+  {
+   "id_or_column": "row 204 NIE180 Cooperative deduction",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Foncoltabaco WTs: 21192 178, 21193 125, 21123 38, 21117 14, 21116 3; 140 of 179 employees have more than one. Supported."
+  },
+  {
+   "id_or_column": "row 209 NIE185 Debt",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "27010/27011 44 employees, 27010 total -34,934,580; 27040 3; 67010 3 employees 50-120M, total 290,000,000. Supported. Add: the non-cash WT 67090 'Loan without interests Payment Inf.' (10,000,000) is another loan disbursement (repaid via 27040) and needs the same decision."
+  },
+  {
+   "id_or_column": "row 212 NIE187 Total accrued",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Three negative Entitlement lines confirmed (62216 -3,319,075; 62540 -971,899 and -35,725). Non Cash grouping mixes informative benefits with bases/employer costs. Supported."
+  },
+  {
+   "id_or_column": "row 213 NIE188 Total deducted",
+   "original_verdict": "Explanation to improve",
+   "result": "confirmed",
+   "reason": "Deductions are negative in G2N; 0-value 2552 (9 rows) and 2553 (1 row) sit in the Non Cash grouping. Supported."
+  },
+  {
+   "id_or_column": "row 214 NIE189 Total payable",
+   "original_verdict": "Explanation to improve",
+   "result": "overturned",
+   "reason": "Verdict stands; the text's 'negative net' claim is wrong. Re-computed: Bank Net Pay = Entitlements + Deductions for 254/255; the exception (30723308) is the same employee whose E+D is -2,861,302, but the bank paid +7,138,698 and Accumulated 26998 = -7,138,698. The difference is exactly non-cash WT 67090 (10,000,000) offsetting cash deduction 21215 (-10,000,000). So nobody had a negative net, and 1204/1910 are not involved for this employee. Correct text: 'ComprobanteTotal must equal the cash net paid = Entitlements + Deductions + any non-cash item that funds a cash deduction (WT 67090) - reconciles 255/255 with Bank Payments Net Pay'. Separately, 1910 (2 employees, cash-paid, net 0 in G2N) and 1204 need the client decision already listed under NIE146/NIE197."
+  },
+  {
+   "id_or_column": "row 21 NIE009 Employee code (in numbering block) [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Employee ID is 8 characters for all rows and is the common key in G2N, Master Data, Base of Withholding and Accumulated."
+  },
+  {
+   "id_or_column": "row 60 NIE048 Employee first name [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "'First Name' populated for 261/261."
+  },
+  {
+   "id_or_column": "row 61 NIE049 Employee other names [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "'Middle Name' blank for 69% (181/261), consistent with 0-1."
+  },
+  {
+   "id_or_column": "row 68 NIE062 Contractual salary [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "overturned",
+   "reason": "Not identical in every case: G2N 'Salary Assigned' differs from Master Data 'Basic Salary' for 4 of 261 integral employees - 10537110 and 57025853 have Basic Salary 0 in Master Data (G2N 45,000,000 / 41,842,905), and 30591217 and 45680439 have G2N Salary Assigned exactly 2x Basic Salary (78,969,034 vs 39,484,517; 68,388,764 vs 34,194,382). Correct verdict: Explanation to improve - name one source (Master Data 'Basic Salary' as contractual) and add a validation that it is non-zero and matches G2N; client to explain the 4 cases."
+  },
+  {
+   "id_or_column": "row 69 NIE063 Employee internal code [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Same Employee ID as NIE009; consistent."
+  },
+  {
+   "id_or_column": "row 88 NIE072 Travel and accommodation allowance - salary [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "62805-62808 per diem WTs exist (43-60 employees over 12 months, 5-6 in Sep); S/NS is a WT configuration flag as the spec says."
+  },
+  {
+   "id_or_column": "row 89 NIE073 Travel and accommodation allowance - non-salary [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "Same evidence as NIE072."
+  },
+  {
+   "id_or_column": "row 105 NIE088 Night-work surcharge hour - amount [random sample: random.seed(42); random.sample(aligned,8)]",
+   "original_verdict": "Aligned",
+   "result": "confirmed",
+   "reason": "62842 'Surcharge for ordinary night hours' paid to 12 employees over 12 months; amount only."
+  },
+  {
+   "id_or_column": "Master Data Report: R Employment Status",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Not an NE field. Correct the note: 5 employees are 'D' (not 6); the 6th employee with WT 21330 (51350775) is 'A'. None of the 5 has an Effective Leaving Date in G2N; the client should say what 'D' means (it may define who is on a shadow payroll and whether an NE document is due)."
+  },
+  {
+   "id_or_column": "Master Data Report: Y Regime",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "'AReg' for 8 recent hires/rehires (Nov-2025 to May-2026), including the 2 'Pensioner Effective Date' employees and the 4 cash-paid ones; no NE element depends on it. Worth asking the client what it means (see NIE164)."
+  },
+  {
+   "id_or_column": "Master Data Report: BF Work Schedule",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Codes 3407 (243) / 3308 (18); no NE element; could inform the hourly divisor for overtime but carries no statutory NE value."
+  },
+  {
+   "id_or_column": "Base of Withholding: Y CONTINGENT WITHHOLDING",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Equals 'WITHOUT CONTRIBUTION' minus 'WITH CONTRIBUTION' for all 20 employees, all with AFC/APV: it is the contingent withholding of ET art. 126-1/126-4, not tax withheld this month, so it should not enter RetencionFuente. Client-specific for NE is right; the note can say so."
+  },
+  {
+   "id_or_column": "Leave Absence Report: I Hours",
+   "original_verdict": "Client-specific",
+   "result": "confirmed",
+   "reason": "Empty for all 97 rows; NE leave elements use days."
+  },
+  {
+   "id_or_column": "report-spec-map: 1764_PMI_Bank_Payments_Report_202609.xlsx role for CO-DIAN-001",
+   "original_verdict": "client-only (no spec); used by the cross-check only as corroboration",
+   "result": "overturned",
+   "reason": "Should be reclassified as a 'source' for CO-DIAN-001 (reconciliation source, not the build source). It is the only client report with (a) the cash net actually paid per employee - it reconciles to ComprobanteTotal (NIE189) for 255/255 once non-cash WT 67090 is included - and (b) the account type in words ('Transferencia-Cuenta Ahorro', all 255), which is the only evidence for translating Master Data code 02 (NIE067) and for the payment method (NIE065). Account number and bank name match Master Data 255/255, so NIE066/NIE068 still come from Master Data. The 6 employees absent from it are the 4 Cash and 2 zero-net employees."
+  }
+ ],
+ "agreement_rate": 0.849
+}

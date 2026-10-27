@@ -1,0 +1,52 @@
+{
+ "verdict": "PASS_WITH_MINOR_FIX",
+ "checked": 122,
+ "sampled_against_source": 76,
+ "issues": [
+  {
+   "spec": "CO-CESANTIAS-006",
+   "cell": "File Structure!B26",
+   "problem": "Restored label is not the official field name. Simple S.A. layout campo 12 is 'Salario basico reportado en el ultimo mes' (pagosimple_cesantias.txt, campo 12 115-123), not 'Salario basico del ultimo mes'.",
+   "exact_new_text": " 12      9  115  123   N      Salario basico reportado en el ultimo mes (December of the year)"
+  },
+  {
+   "spec": "CO-CESANTIAS-006",
+   "cell": "Population Rules!A8",
+   "problem": "Same label as B26, not word-for-word official (campo 12 'Salario basico reportado en el ultimo mes').",
+   "exact_new_text": "T12 Salario basico reportado en el ultimo mes"
+  },
+  {
+   "spec": "CO-CESANTIAS-006",
+   "cell": "Example Analysis!B19",
+   "problem": "Same label as B26, not word-for-word official.",
+   "exact_new_text": "T12 Salario basico reportado en el ultimo mes (115-123)"
+  },
+  {
+   "spec": "CO-PILA-003",
+   "cell": "File Structure!B37",
+   "problem": "Field 7 label restored whole but not official: AT2 v30 p. 86 Registro tipo 2 campo 7 is 'Extranjero no obligado a cotizar a pensiones'. The other labels in the cell are short forms of the official names, with no English left.",
+   "exact_new_text": "1 Tipo de registro = 02 (1-2) | 2 Secuencia (3-7) | 3 Tipo documento (8-9) | 4 Numero identificacion (10-25) | 5 Tipo cotizante (26-27) | 6 Subtipo (28-29) | 7 Extranjero no obligado a cotizar a pensiones (30) | 8 Colombiano en el exterior (31) | 9 Departamento laboral (32-33) | 10 Municipio laboral (34-36) | 11-14 Apellidos y nombres (37-136)"
+  },
+  {
+   "spec": "CO-PILA-003",
+   "cell": "File Structure!B28",
+   "problem": "Field 32 label is not official: AT2 v30 p. 15, Archivo tipo 1 campo 32 is 'Codigo del departamento' (fields 33 and 34 are kept as visible abbreviations of 'Aportante exonerado de pago de aporte a salud, SENA e ICBF' and 'Aportante que se acoge a los beneficios del articulo 5 de la Ley 1429 de 2010...').",
+   "exact_new_text": "31 Fecha matricula mercantil (554-563) | 32 Codigo del departamento (564-565) | 33 APORTANTE EXONERADO SALUD/SENA/ICBF (566) | 34 Beneficios art. 5 Ley 1429 para CCF (567)"
+  },
+  {
+   "spec": "CO-DIAN-001",
+   "cell": "Nomina Electronica Spec!O56",
+   "problem": "Low severity. The pointer names a heading that does not match: the Field Options heading of the same workbook is 'TIPO DE DOCUMENTO DE IDENTIFICACION (ANEXO TABLE 5.2.1, NIE44)', and the NE anexo field is 'Tipo de documento de identificacion'. The other three pointers (O53, O54, O67) match the anexo tables 5.5.3, 5.5.4 and 5.5.2 exactly.",
+   "exact_new_text": "-> Sheet 6: Tipo de Documento de Identificacion (table 5.2.1)"
+  }
+ ],
+ "notes": [
+  "Check 1: all 122 'current' values equal 05-final exactly (openpyxl, read_only).",
+  "Check 3 (#9): every Res. 13 -> Res. 227 replacement follows the map (3->1.5.3.2.2, 5->1.5.3.3.1, 8->1.5.3.4.1.1, 24->1.5.3.8.3, 26->1.5.3.8.5). Item numbers were checked against res227.txt art. 1.5.3.3.1: NIT = item 2 (M46), beneficiary surname = item 3 (M58), medio de pago = item 10 (M71/M72), devengados = item 6 (M212), deducidos = item 7 (M213), valor total diferencia = item 8 (M214), and 13 items in total (Report Matrix A43). Deleting the item-11 references in M48/M51 and item 5 in M76 is correct, because item 11 is 'Fecha y hora de generacion' and item 5 is the consecutive number.",
+  "Check 4 (#10): M110 now ends at 'remains contributory.'; nothing else changed. Decreto 1072 art. 2.2.4.2.1.6 lists 1.2/1.3/1.4/1.6 only and has no LMA rule.",
+  "Check 5 (#20): M93 confirmed. Ley 776/2002 art. 3, in the C-543/2007 transcription, says 100% of the salario base de cotizacion 'desde el dia siguiente el que ocurrio el accidente', and for an occupational disease 'desde el dia siguiente de iniciada la incapacidad'. M131 confirmed: the 1072 art. 2.2.4.3.5 table gives min/initial values only and cites Decreto 1772 art. 13; 8.7% is the class V maximum of that table; art. 2.2.4.3.7 and 2.2.4.3.9 are quoted verbatim. M145: the 1% is consistent with the SENA-published Ley 21 art. 11 num. 4 and with MinEducacion's own collection page ('aporte a escuelas industriales e institutos tecnicos (1% del valor de la nomina mensual)', mineducacion.gov.co/1621/article-205246.html). The FuncionPublica rendering of num. 3 (Ley 812 art. 87, 1/2% Escuelas Industriales) drops the ESAP numeral and looks like a transcription defect. The field is public-sector only (AT2 v30 s.2.1.2.3.37), so 1% can stay. M138/M140-M144, M88, M152, M160, M188, M190 (Ley 797 art. 8: num. 1 lit. a, num. 2 lits. a-b), M183 (AT3 campo 63) and PILA-003 C22 (AT3 s.1.2.4) were all checked against the local official texts.",
+  "PILA-007 C18/A35: AT3 v15 Tabla 5 R02 pp. 102-103 shows no column-1 X for types 7 and 22, and X for 4, 11, 12, 14, 20 and 21.",
+  "Check 6: no new process words or internal references were introduced. 'not only from 16 SMMLV' was removed from M190. Ley 2466 quotes match once ley2466.txt is read as latin-1.",
+  "Outside scope, unchanged: PILA-003 M68 (and DIAN-001 Field Options) say 'Twelve-value list', but AT2 v30 lists 11 values (0-6, 9-12)."
+ ]
+}

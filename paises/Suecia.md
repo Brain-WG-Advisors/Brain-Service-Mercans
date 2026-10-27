@@ -78,6 +78,17 @@
 |---|---|---|---|---|
 | | | | | |
 
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Sweden`
+
+| Pacote | Período | Pass / Finding / NT | Recibo | Situação |
+|---|---|---|---|---|
+| One Identity Sweden AB (559400-9267) | set/26 | 19 / 6 / 6 | Não | Validado 2026-10-14 com ressalva |
+
+- O zip veio da pasta "Quest Software"; o Kvittens e o master são da **Quest Software AB (556602-0433)**, não da One Identity → recibo, master e banco = Not tested (C-04).
+- AGI válida no XSD 1.1, amarra G2N/GL/contracheques; arbetsgivaravgift 31,42% ok.
+- **High:** payout de férias acumuladas retido pela tabela mensal, não por engångsbelopp (SFL 11 kap. 17 §) → A-04, aguarda decisão D-02.
+
 ## Pendências
 - [ ]
 

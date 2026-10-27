@@ -10,6 +10,7 @@
 | **1. Repositório git** | GitHub/GitLab (conta ou org) | `git clone` (só leitura) para `Documents\mercans-pipeline\`, fora do brain; depois `git pull` na rotina | `raw/pipeline/<Pais>/<AAAA-MM-DD>/` (cópia só dos relatórios) |
 | **2. Drive** | Pasta do país no Drive "Compliance Team" | Claude in Chrome (regras de [coleta-chrome.md](coleta-chrome.md)) | `raw/drive/<Pais>/pipeline/` (fora do git) |
 | **3. Outra máquina** | Disco local (ex.: `DESKTOP-TKRQLF7`) | O usuário copia a pasta de saída de cada execução para um pen drive ou pasta compartilhada; o Claude lê a cópia | `raw/pipeline/<Pais>/<AAAA-MM-DD>/` |
+| **3 local (vigente desde 2026-10-27)** | `C:\Users\instituto\mercans-pipeline\<CC>-compliance\` nesta máquina | O Claude lê direto do disco, só leitura (não mover, editar nem apagar nada lá) | `raw/pipeline/<Pais>/<AAAA-MM-DD>/` |
 
 Antes do Passo 1, registrar o cenário em `inventarios/pipeline.md`.
 

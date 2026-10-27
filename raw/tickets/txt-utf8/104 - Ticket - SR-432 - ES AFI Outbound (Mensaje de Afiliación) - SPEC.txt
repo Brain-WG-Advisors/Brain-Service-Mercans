@@ -1,0 +1,198 @@
+10/8/26, 12:50 PM    ES: AFI Outbound (Mensaje de Afiliación) - SPEC : SR-432
+
+Created by Wallisson dos Santos Gomes 24 days ago                                     Visible to issue readers  3
+Updated by Lily Li about 7 hours ago
+
+ES: AFI Outbound (Mensaje de Afiliación) - SPEC
+
+         Project            State                Priority                                    Assignee
+
+SR Statutory         O Open              M Major                                            Wallisson
+       Reports                                                                              dos Santos
+                            Spent time  Due Date                                            Gomes
+         Phase
+                           ?            29 Jan 2027                                          Country
+       Developmen
+ D t Phase -                Research             Developer                            E ES
+                            Analyst
+       Developer                         B Brenet                                            Redesign of
+                     W Wallisson               Õispuu
+         Business          Gomes                                                      ? old country
+                                                                                            No
+ L Analyst
+       Lily Li
+
+Boards
+  Statutory Report…
+
+Spain AFI - Outbound (Mensaje de Afiliación) - SPEC
+Attachments 2 Hidden files 2
+
+LL Lily Li Commented 18 days ago (edited)
+        @Wallisson dos Santos Gomes Almost all fields in Column A in the sheet "AFI Spec" are in
+        Spanish, not English. Pls update into English field names. Thanks
+
+https://youtrack.hrblizz.dev/issue/SR-432/ES-AFI-Outbound-Mensaje-de-Afiliacion-SPEC                               1/5
+10/8/26, 12:50 PM           ES: AFI Outbound (Mensaje de Afiliación) - SPEC : SR-432
+
+Also, Field Explanation column is in Spanish. Update into English.
+
+Show more
+
+Wallisson dos Santos Gomes  Commented 18 days ago
+@Lily Li fixed.
+
+LL Lily Li Commented 16 days ago (edited)
+        @Wallisson dos Santos Gomes Pls check queries in column V of AFI Spec.
+
+Wallisson dos Santos Gomes  Commented 16 days ago
+@Lily Li Done
+
+LL Lily Li Commented 15 days ago
+        @Wallisson dos Santos Gomes Pls check queries in column V in red.
+
+        Thanks
+
+Wallisson dos Santos Gomes Commented 15 days ago
+@Lily Li Done! All queries in column V are answered in column W (updated answers in
+green). The DD is updated too (Version Control 4.6), with the new fields and option
+mappers. Both files attached.
+
+Heads-up: some earlier answers changed, and they're listed in the spec's Version Control
+
+1.2. The main one is rows 173-174: DAM.2150-2170 only applies to Special System 32, so it
+
+https://youtrack.hrblizz.dev/issue/SR-432/ES-AFI-Outbound-Mensaje-de-Afiliacion-SPEC       2/5
+10/8/26, 12:50 PM           ES: AFI Outbound (Mensaje de Afiliación) - SPEC : SR-432
+
+isn't the part-time coefficient we discussed in the meeting.
+
+LL Lily Li Commented 13 days ago
+
+@Wallisson dos Santos Gomes As Gulnaaz requested, pls validate your AFI outbound spec
+Projects / Statutory Reports / Issues / SR-432  As… Enter sear…                       1 of 4
+against A3 sample.
+
+Thanks
+
+Wallisson dos Santos Gomes  Commented 13 days ago
+@Lily Li
+
+Validated against A3 sample (A26S0003.AFI). Pension entity field (pos. 40-44): confirmed,
+43/43 records. Reserved field (2420): position fixed, 18-21/len4 → 18-23/len6 (TGSS
+manual typo). Updated spec.
+
+LL Lily Li Commented 10 days ago
+        @Wallisson dos Santos Gomes Now in DD, there're 77 new fields in total. These 77 new
+        fields are for sure to be created?
+
+Wallisson dos Santos Gomes Commented 10 days ago (edited)
+@Lily Li Not all of them. They're all real TGSS AFI fields, but most only apply to specific
+situations. Checking against the A3 sample from KGS:
+
+12 are needed now for regular hires, terminations and contract changes: rows 155, 156,
+157, 159, 165, 166, 168, 169, 170, 174, 221 and 224.
+7 don't need to be created: they carry the same value for every worker (N, or S for row
+231) and can be set as constants in the report. Rows 176, 183, 184, 185, 187, 192 and 231.
+58 don't need to be created for now: they only apply to specific situations (subcontracting,
+sick leave, internships, concentrated part-time, etc.) and would only be needed if a client
+has one of those cases.
+
+I remain at your disposal.
+
+LL Lily Li Commented 9 days ago (edited)
+        @Wallisson dos Santos Gomes Pls confirm column U, highlighted in dark green.
+
+        Also, as lots of fields have been removed from DD, the RA comment column still references
+        those deleted fields. And, the option mappers of those deleted fields are still shown in DD.
+
+        Also, regarding it's zeros or blank, I refer to the Example column. In some of your
+        comments, you mention leave blank, but the Example column shows 0.
+
+        Let's close the mapping over the call today.
+
+Wallisson dos Santos Gomes Commented 9 days ago
+@Lily Li done. Both files are attached: the spec (Version Control 1.4) and the DD (Version
+Control 29-Set-26). Changes are highlighted in light blue in the spec and in green in the
+DD.
+
+     Column U (dark green): all 76 cells are answered in column W.
+
+     Deleted fields: columns W and L no longer reference them. The 58 removed fields are
+     marked "Not needed for now", and the 7 constants are marked "hardcode N" (S for row
+     148). The OTD, DBA, DSC, DJD and PIT segments are left out of the file for now.
+
+     Option mappers: the ones left from the deleted fields are removed from the DD. T-12
+     stays because it converts the nationality to the TGSS numeric code (FR = 250).
+
+https://youtrack.hrblizz.dev/issue/SR-432/ES-AFI-Outbound-Mensaje-de-Afiliacion-SPEC                  3/5
+10/8/26, 12:50 PM                                                     ES: AFI Outbound (Mensaje de Afiliación) - SPEC : SR-432
+
+                   Zeros vs blank: the answers now follow the TGSS rule (numeric fields = zeros, text
+                   fields = spaces) and match the Example column. This corrected rows 18-23, 259 and
+                   285.
+
+                   One change to my previous comment: the Collective Agreement Code is back in the
+                   DD, so 13 fields are needed, not 12. TGSS has required it on every registration since
+                   November 2018 (Boletín Noticias RED 5/2018).
+
+                   Also fixed: dates use YYYYMMDD (column M said DDMMYYYY), Employer Field is N for
+                   the worker segments, and the baja deadline is 6 days (RD 643/2026).
+
+Rows 145, 148, 158, 165, 166, 170 and 176: column U still maps to fields the DD marks as
+not to be created. Column W gives the fixed value for each.
+
+LL Lily Li Commented 9 days ago
+        Mapping done
+
+LL Lily Li Commented 9 days ago
+        @Katrin Rudi Pls assign to the developer. Thanks
+
+        Drew Õispuu Commented 7 days ago
+        @Lily Li To test with real events, the new DD fields must exist and be filled on the test
+        entity. They are not there yet: tgss_affiliation_action, tgss_affiliation_action_date,
+        untaken_holiday_end_date, saa_period_start_date, saa_period_end_date, saa_indicator,
+        additional_affiliation_situation_type, worker_identification_document_type,
+        pension_plan_managing_entity and collective_agreement_code.
+
+        Please confirm these assumptions, as the spec does not state them:
+
+          1. DOM and LDD (address) only on MA; ODL on every action except MB; FCT on ASA /
+             MSA / ESA and on MB when the untaken holiday end date is filled.
+
+          2. DAM contract start date only on MA and MC (the production sample has zeros on MB
+             and ASA).
+
+          3. FAB Worker Collective (pos 30-32, 3 digits) is mapped to the 14-digit collective
+             agreement code; I assume this is a spec error and it should be zeros.
+
+          4. File name and ETI control reference: 'A' + period end yyMMdd + '0', for example
+             A2602280.AFI. The system cannot produce a running sequence number like the
+             sample (A26S0003).
+
+LL Lily Li Commented about 7 hours ago (edited)
+        @Wallisson dos Santos Gomes Pls check queries raised by Brenet:
+
+        Please confirm these assumptions, as the spec does not state them:
+
+          1. DOM and LDD (address) only on MA; ODL on every action except MB; FCT on ASA /
+             MSA / ESA and on MB when the untaken holiday end date is filled.
+
+          2. DAM contract start date only on MA and MC (the production sample has zeros on MB
+             and ASA).
+
+          3. FAB Worker Collective (pos 30-32, 3 digits) is mapped to the 14-digit collective
+             agreement code; I assume this is a spec error and it should be zeros. (Lily: Here I think
+             14-digit collective agreement code in DD is wrong because it's only 3 digits in the
+             spec. Also, pls check if the worker collective option mapper should be added to
+             $hr.collective_agreement_code in DD)
+
+https://youtrack.hrblizz.dev/issue/SR-432/ES-AFI-Outbound-Mensaje-de-Afiliacion-SPEC                                            4/5
+10/8/26, 12:50 PM  ES: AFI Outbound (Mensaje de Afiliación) - SPEC : SR-432
+
+                   4. File name and ETI control reference: 'A' + period end yyMMdd + '0', for example
+                      A2602280.AFI. The system cannot produce a running sequence number like the
+                      sample (A26S0003).
+
+https://youtrack.hrblizz.dev/issue/SR-432/ES-AFI-Outbound-Mensaje-de-Afiliacion-SPEC                   5/5
+

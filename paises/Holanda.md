@@ -70,6 +70,7 @@
 | Item | Valor | A partir de | Até | Fonte |
 |---|---|---|---|---|
 | Norma salarial do 30% ruling (teste anual) | EUR 48.013 (anual, sem a allowance) | 2026 | | Belastingdienst (HRBS-10545) |
+| Correção de aangifte de ano anterior | Depois do prazo do último período do ano: losse correctie (correctiebericht separado) por período, com software/tabelas do ano corrigido; erro achado pela empresa: enviar em até 8 semanas; Belastingdienst emite naheffingsaanslag ou teruggaaf pela diferença; belastingrente se a correção sair depois de 31/03 do ano seguinte. Corrigíveis em 2026: 2021–2025. Pagamento retroativo de 2025 feito agora não é correção: é salário de 2026 (loon-over só dentro do mesmo ano) | Handboek 2026 (versão março/2026) | | Handboek Loonheffingen 2026, §14.2.4 (pp. 248–249), §14.4 e 14.4.2 (pp. 251–252), §14.5.1 (p. 253), §9.2 (p. 176). PDF em raw/docs/oficiais/NL/ |
 | 30%-regeling no prazo cheio de 60 meses | cai para 27% | 2027-01-01 | | Belastingplan 2025 (chat: mercans-compliance); confirmado: skill `01-ccg.md` Handboek §19.4.7 (30% em 2025 e 2026, 27% desde 2027; exceção: quem iniciou até 2023-12-31 mantém 30%) |
 | Samenvoegbepaling | vigente | 2027-01-01 | | ⚠️ sem fonte |
 | Betalingskenmerk | 16 dígitos, módulo 11, ainda obrigatório; não implementar clieop03 (substituído pelo SEPA em 2014) | 2026 | | Belastingdienst (HRBS-9646) |
@@ -94,6 +95,20 @@
 | ~2026-07 | HRBS-1534 | 30% ruling: por que gym allowance e dedução pré-tax de pensão ficaram fora (Omnicom/Excerpta Medica) | Só salary sacrifice reduz a base | Sim, como proposta (redline em NL-CCG-001 §7.1.4 pelo drift-sync) |
 | antes de 2026-08 | HRBS-10545 | 30% ruling: teste anual EUR 48.013; leave-relief manual | Respondido; NL-CCG reconstruída | Sim |
 | antes de 2026-08 | HRBS-9646 | Betalingskenmerk | Módulo 11 de 16 dígitos obrigatório; não usar clieop03 | Não |
+
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Netherlands`
+
+| Pacote | Período | Pass / Finding / NT | Recibo | Situação |
+|---|---|---|---|---|
+| Quest Software B.V. | set/26 | 60 / 9 / 5 | Não | Validação v1.2; Audit Report v1.1 emitido 14/10, v1.2 (correção Whk) e relatório interno v1.0 em 16/10 |
+| Sherwin Williams (Valspar B.V.) | set/26 | 48 / 18 / 5 | Não (recibo de outro LH) | Validação completa v1.1 |
+| Excerpta Medica B.V. | set/26 | 60 / 5 / 5 | Não | Validação v1.2 e Audit Report v1.1 (correção Whk, 16/10) |
+
+- 2026-10-14: systematiek **loon-over** (decisão do usuário); outbound = Audit Report no modelo Mammoet, documentos ausentes como limitação de escopo (D-04).
+- Achados principais: imposto do empregado em idade AOW (Excerpta e Sherwin, High), horas declaradas 176 × 173 (Medium), arquivo SEPA "Kantar" malformado (Quest), taxa Whk Quest 1,45% = taxa do setor 42 para pequeno empregador (Tabel 10; a v1.1 citava 1,25% da linha errada, corrigido em 16/10 — ver [[correcoes]]); falta só o porte no mededeling (Observation). Base: Handboek Loonheffingen 2026.
+- 2026-10-16: feedback da Manju (relatório da Quest era para uso externo; quer versão interna com lacunas autoexplicativas e números reconciliados) → `NL_Quest_2026-09_Internal_Validation_Report_v1.0.docx` em `02 Validation` (cadeia bruto→líquido→bases→imposto/prêmios→TotTeBet→banco/GL, 11 cartões de lacuna). Quest: Audit Report v1.2 + workbook v1.2; Excerpta: Audit Report v1.1 + workbook v1.2 (correção Whk).
+- Falta: recibo Digipoort dos 3 (o Athul diz que não guardam confirmação da Belastingdienst; o pacote da Sherwin traz uma). Cobranças C-14/15/16 em rascunho.
 
 ## Pendências
 - [ ] Decidir se `netherland-ssc-pdf` é statutory; se for, fornecer spec com % 2026 validados; se não, devolver ao Reports (Shaik Jani Sharif) — Wallisson — (HRBS-14675)

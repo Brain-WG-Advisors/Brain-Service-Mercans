@@ -67,6 +67,7 @@
 | Limiar de solidariedade na regulação do design | 500.000 (valor em fórmula, não é dividido); a versão anualizada 6.000.000 estava errada | 2026-08-28 | — | FR-pack (chat: design-dev-kb) |
 | TUS | 7,5% do Taxable Total (só empregador; remessa 5,475% CNSS + 2,025% DGID) | 2026-01-01 (split obrigatório; FY2026) | — | LF 2026 (loi n°42-2025) (confirmado: skill, SKILL.md esclarecimento 3); declarado pelo solicitante no HRBS-14054 |
 | Car allowance líquido garantido (política do cliente) | 500.000 / 625.000 / 750.000 por grade (moeda [INCERTO], provavelmente XAF) | — | — | política do cliente (HRBS-14054) |
+| TOL (taxe d'occupation des locaux à usage d'habitation), assalariados | 1.000 FCFA/mês retidos na fonte pelo empregador, como adiantamento do imposto anual; regularização pelo empregado até 20/04 (casados no mesmo imóvel, centro-ville, etc.). Tarifa anual habitação: centro-ville 60.000 / periferia 12.000 FCFA | 2015-01-01 (LF 2015) | — | Loi 34-2013 (LF 2014) art. 14, redação da Loi 48-2014 (LF 2015) art. 8: JO éd. spéc. n°1-2015 p. 17; tarifa: Loi 34-2013 art. 13 a), JO éd. spéc. n°5-2013 p. 22. PDFs em raw/docs/oficiais/CG/. Nenhuma LF 2016–2026 encontrada altera o valor (LF 2020, 2021 e 2023 não verificadas) |
 
 ## Decisões
 - 2026-08-27: o item "CAMU Health Insurance (Employee)" do cliente (~0,5% dos ganhos regulares) é a CAMU solidarité (0,5% acima de 500.000 XAF), não a CAMU empregado 2,27%; são dois fluxos distintos segundo a autoridade CAMU — Wallisson (HRBS-13841)
@@ -92,6 +93,11 @@
 - [ ] Roteamento da solidarité: DGID × Décret 2024-131 — Compliance (chat: mercans-compliance)
 - [ ] Design CG: perguntas Q1–Q11 ao Mohit (atomização, mapper, `_period` × cauda, nº de matrizes, Tax Group, `_$$`, bandas 2,4/9,6, registro 58xxx, `.99`, FLOOR, rubrica) — Wallisson → Mohit; incluir o relief "No Child" no CCG CG — RA (chat: design-dev-kb)
 - [ ] Atualizar Congo no Monday — Wallisson (chat: compliance-research)
+- [ ] Taxa regional/départementale: o CGI consolidado do finances.gouv.cg (edição ~2002–2003) traz no art. 327 b o précompte do empregador no salário de janeiro; a LF 2015 trocou "taxe régionale" por "taxe départementale ou communale" no art. 250 e a LF 2017 tirou a taxe régionale do art. 407. Nenhuma lei encontrada revoga ou mantém os arts. 321–327. Os "2.000 FCFA anuais pagos pelo contribuinte" do comentário de 09/10 (HRBS-14055) não têm fonte primária (só PwC: departmental tax XAF 2.000). Falta: CGI 2025/2026 consolidado da DGID; lista TPPE da DGID (citada em 09/10, não localizada). (2026-10-13)
+
+## Consolidado da sessão 2026-10-13
+- **Fontes primárias conferidas** (PDFs em `raw/docs/oficiais/CG/`): CAMU 4,55% ER / 2,27% EE (Décret 2024-133, art. 2); CAMU paga **direto à CAMU** em até 5 dias após o fim do mês, com declaração nominativa 10 dias antes do vencimento (Décret 2024-131, arts. 15–16); TUS 7,5% a cargo do empregador (loi 8-2012, art. 6), dividida 73% CNSS / 27% Estado a partir de 2026 (LF 2026, loi 42-2025, art. 47, p. 23); DAS (DAS1/2/3) "dans le courant du mois de janvier" (CGI art. 176), DAS3 pela LF 2026 art. 116 I e Arrêté 1560 de 10/07/2026; solidarité 0,5% acima de 500.000 XAF (LFR 2021, loi 37-2021, art. 42); língua oficial francês (Constituição 2015, art. 4). Erros da skill registrados em [[correcoes]].
+- **HRBS-12110** (Report Matrix): nada a responder em 13/10 — a pergunta original foi respondida em 13/08 e não há pedido novo a nós. Revisão completa da matriz em `rascunhos/2026-10-09-HRBS-12110-revisao-matriz-Congo.md`. Em 20/10 (14:25 UTC), depois do "still need" do Daniel (07/10), perguntamos o que ele precisa (matriz nova, um dos 5 pontos de 13/08 ou outro tema); aguardando resposta.
 
 ## Correções ligadas
 - [[correcoes]]: design CG (clean-room) com limiar de solidariedade anualizado 6.000.000, divisor fixo 12, `_monthly` ausente, wildcards faltando, 58204 como flag bilateral; corrigido conforme FR-pack (2026-08-28).

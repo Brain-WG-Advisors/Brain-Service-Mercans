@@ -1,0 +1,606 @@
+{
+ "spec": "CO-DIAN-005",
+ "round": 3,
+ "source_workbook": "05-final/CO-DIAN-005-Formato2276-Spec.xlsx",
+ "edits": [
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I4",
+   "row": 4,
+   "column_letter": "I",
+   "field_id": "N01",
+   "field_name": "Reporting entity concept",
+   "current": "1",
+   "proposed": "2",
+   "reason": "Annex attribute entinfo is int 2 (XSD pattern [0-9]{1,2}); the spec says 1. The valid codes remain 1 to 8.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute entinfo"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I5",
+   "row": 5,
+   "column_letter": "I",
+   "field_id": "N02",
+   "field_name": "Beneficiary document type and identification number",
+   "current": "2 + 16",
+   "proposed": "2 + 20",
+   "reason": "Annex: tdocb int 2, nitb string 20 (XSD maxLength 20). The spec allows 16 characters, which would truncate a longer identifier.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes tdocb, nitb"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I7",
+   "row": 7,
+   "column_letter": "I",
+   "field_id": "N04",
+   "field_name": "Beneficiary location",
+   "current": "Var (address) + 2 + 3 + Var (country)",
+   "proposed": "200 (address) + 2 + 3 + 4 (country code)",
+   "reason": "Annex fixes the lengths: dir string 200, dpto int 2, mun int 3, pais int 4.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes dir, dpto, mun, pais"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "K7",
+   "row": 7,
+   "column_letter": "K",
+   "field_id": "N04",
+   "field_name": "Beneficiary location",
+   "current": "address / 11 / 001 / Colombia",
+   "proposed": "address / 11 / 001 / 169",
+   "reason": "The country is a numeric code (annex pais int 4, \"de acuerdo con los definidos por resolución\"), never a name; 169 is the code Colombia carries on every record of the client's file.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pais; client file column K = 169 on 1035 of 1035 rows"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M7",
+   "row": 7,
+   "column_letter": "M",
+   "field_id": "N04",
+   "field_name": "Beneficiary location",
+   "current": "COMPOSITE FIELD - the beneficiary's location block of the Formato 2276 v4 technical specification (Anexo T3.45 of Res. 000227/2025): address, department (2 digits) and municipality (3 digits) on the DANE DIVIPOLA catalogue, and country. COUNTRY IS ALWAYS MANDATORY. Address, department and municipality are mandatory only where the country of residence is Colombia; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty. The country here is the country of the beneficiary's address, not a tax-residence marker. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data, with the address and the country taken from the same employee address record; where the master data holds a letter department code and a free-text city, the codes are obtained through the DIVIPOLA mapping table, maintained as a configuration table that maps each master-data department letter code and city name to its DANE department (2 digits) and municipality (3 digits) code, every entry validated against the DIVIPOLA catalogue. Free text must never be sent in the department, municipality or country sub-fields. Location is retained for leavers and held for employer-paid pensioners.",
+   "proposed": "COMPOSITE FIELD - the beneficiary's location block of the Formato 2276 v4 technical specification (Anexo T3.45 of Res. 000227/2025): address, department (2 digits) and municipality (3 digits) on the DANE DIVIPOLA catalogue, and country. COUNTRY IS ALWAYS MANDATORY. Address, department and municipality are mandatory only where the country of residence is Colombia; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty. The country here is the country of the beneficiary's address, not a tax-residence marker. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data, with the address and the country taken from the same employee address record; where the master data holds a letter department code and a free-text city, the codes are obtained through the DIVIPOLA mapping table, maintained as a configuration table that maps each master-data department letter code and city name to its DANE department (2 digits) and municipality (3 digits) code, every entry validated against the DIVIPOLA catalogue. Free text must never be sent in the department, municipality or country sub-fields. Location is retained for leavers and held for employer-paid pensioners. The country is sent as the numeric code of the DIAN country table (attribute pais, int 4, 'de acuerdo con los definidos por resolución'), never as a name; Colombia is code 169, the value the client's own file carries on every record. Department and municipality are sent with their leading zeros (attributes dpto int 2 and mun int 3, 'debe incluir los ceros a la izquierda').",
+   "reason": "The explanation never says the country is a code nor that the DANE codes keep their leading zeros; both are annex rules and both are visible in the client's file (K = 169, I = 05, J = 001).",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes dpto, mun, pais"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I9",
+   "row": 9,
+   "column_letter": "I",
+   "field_id": "N05",
+   "field_name": "Salary payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I10",
+   "row": 10,
+   "column_letter": "I",
+   "field_id": "N06",
+   "field_name": "Ecclesiastical emolument payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I11",
+   "row": 11,
+   "column_letter": "I",
+   "field_id": "N07",
+   "field_name": "Payments made with vouchers, cheques, cards or vales",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I12",
+   "row": 12,
+   "column_letter": "I",
+   "field_id": "N08",
+   "field_name": "Excess meal payments over 41 UVT",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I13",
+   "row": 13,
+   "column_letter": "I",
+   "field_id": "N09",
+   "field_name": "Fee payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I14",
+   "row": 14,
+   "column_letter": "I",
+   "field_id": "N10",
+   "field_name": "Service payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I15",
+   "row": 15,
+   "column_letter": "I",
+   "field_id": "N11",
+   "field_name": "Commission payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I16",
+   "row": 16,
+   "column_letter": "I",
+   "field_id": "N12",
+   "field_name": "Statutory benefit payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I17",
+   "row": 17,
+   "column_letter": "I",
+   "field_id": "N13",
+   "field_name": "Per diem payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I18",
+   "row": 18,
+   "column_letter": "I",
+   "field_id": "N14",
+   "field_name": "Representation expense payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I19",
+   "row": 19,
+   "column_letter": "I",
+   "field_id": "N15",
+   "field_name": "Cooperative associated-work compensation",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I20",
+   "row": 20,
+   "column_letter": "I",
+   "field_id": "N16",
+   "field_name": "Non-reimbursable educational support",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I21",
+   "row": 21,
+   "column_letter": "I",
+   "field_id": "N17",
+   "field_name": "Other payments",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I23",
+   "row": 23,
+   "column_letter": "I",
+   "field_id": "N18",
+   "field_name": "Severance and interest actually paid",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I24",
+   "row": 24,
+   "column_letter": "I",
+   "field_id": "N19",
+   "field_name": "Severance deposited to the fund",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I25",
+   "row": 25,
+   "column_letter": "I",
+   "field_id": "N20",
+   "field_name": "Severance traditional CST regime",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I27",
+   "row": 27,
+   "column_letter": "I",
+   "field_id": "N21",
+   "field_name": "Pensions",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I28",
+   "row": 28,
+   "column_letter": "I",
+   "field_id": "N22",
+   "field_name": "Total gross income",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I30",
+   "row": 30,
+   "column_letter": "I",
+   "field_id": "N23",
+   "field_name": "Mandatory health contributions",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I31",
+   "row": 31,
+   "column_letter": "I",
+   "field_id": "N24",
+   "field_name": "Mandatory pension and solidarity contributions",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I32",
+   "row": 32,
+   "column_letter": "I",
+   "field_id": "N25",
+   "field_name": "Voluntary RAIS",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I33",
+   "row": 33,
+   "column_letter": "I",
+   "field_id": "N26",
+   "field_name": "Voluntary pension funds",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I34",
+   "row": 34,
+   "column_letter": "I",
+   "field_id": "N27",
+   "field_name": "AFC",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I35",
+   "row": 35,
+   "column_letter": "I",
+   "field_id": "N28",
+   "field_name": "AVC",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I37",
+   "row": 37,
+   "column_letter": "I",
+   "field_id": "N29",
+   "field_name": "Withholding",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I38",
+   "row": 38,
+   "column_letter": "I",
+   "field_id": "N30",
+   "field_name": "VAT higher cost",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I39",
+   "row": 39,
+   "column_letter": "I",
+   "field_id": "N31",
+   "field_name": "VAT withholding",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I41",
+   "row": 41,
+   "column_letter": "I",
+   "field_id": "N32",
+   "field_name": "Meal payments up to 41 UVT",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I42",
+   "row": 42,
+   "column_letter": "I",
+   "field_id": "N33",
+   "field_name": "Average labour income last six months",
+   "current": "14",
+   "proposed": "18",
+   "reason": "Every amount attribute of the annex is long 18 (XSD pattern [0-9]{1,18}); the spec says 14. 14 digits is enough for any real amount, but the declared length must follow the schema.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) amount attributes (long 18)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I43",
+   "row": 43,
+   "column_letter": "I",
+   "field_id": "N34",
+   "field_name": "Economic dependant document type and identification number",
+   "current": "2 + 16",
+   "proposed": "2 + 20",
+   "reason": "Annex: tdocde int 2, nitde string 20.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes tdocde, nitde"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I44",
+   "row": 44,
+   "column_letter": "I",
+   "field_id": "N35",
+   "field_name": "Trust identification",
+   "current": "Var",
+   "proposed": "14",
+   "reason": "Annex: identfc string 14 (XSD pattern [0-9]{0,14}).",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute identfc"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "J44",
+   "row": 44,
+   "column_letter": "J",
+   "field_id": "N35",
+   "field_name": "Trust identification",
+   "current": "AN",
+   "proposed": "N (digits only; annex attribute identfc, XSD pattern [0-9]{0,14})",
+   "reason": "The annex says the value is \"positivo, entero\" and the XSD admits digits only; the spec says AN.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute identfc"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "I45",
+   "row": 45,
+   "column_letter": "I",
+   "field_id": "N36",
+   "field_name": "Contract participant document type and identification number",
+   "current": "2 + 16",
+   "proposed": "2 + 20",
+   "reason": "Annex: tdocpcc int 2, nitpcc string 20.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attributes tdocpcc, nitpcc"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M49",
+   "row": 49,
+   "column_letter": "M",
+   "field_id": "ENV-03",
+   "field_name": "Tax year reported",
+   "current": "The fiscal year whose payments are reported (AAAA). Every amount numeral (5 to 33) is the sum of payments or credits in account made between 1 January and 31 December of this year, by PAYMENT date - never a rolling twelve-month window or an accumulator spanning two calendar years. Filed in May or June of the FOLLOWING calendar year.",
+   "proposed": "The fiscal year whose payments are reported (AAAA). Every amount numeral (5 to 33) is the sum of payments or credits in account made between 1 January and 31 December of this year, by PAYMENT date - never a rolling twelve-month window or an accumulator spanning two calendar years. Filed in May or June of the FOLLOWING calendar year. In the XML header (element Cab, Anexo T3.45) the tax year is carried by FecInicial and FecFinal - the first and last day of the tax year reported, format AAAA-MM-DD - while the header attribute Ano is the YEAR OF SENDING (año de envío, the same aaaa as in the file name), not the tax year: for the 2026 return filed in 2027, Ano = 2027, FecInicial = 2026-01-01 and FecFinal = 2026-12-31.",
+   "reason": "The spec maps the tax year to a single AAAA value; the annex carries the sending year in Ano and the tax year as a date range. Without this a developer may write the tax year into Ano.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.1 (Ano, FecInicial, FecFinal)"
+  },
+  {
+   "sheet": "File Structure",
+   "cell": "B9",
+   "row": 9,
+   "column_letter": "B",
+   "field_id": "Envelope",
+   "field_name": "Envelope",
+   "current": "Informant NIT | Taxpayer category (Gran Taxpayer / legal entity / natural person) | Tax year | Format 2276 version 4",
+   "proposed": "Informant NIT | Taxpayer category (Gran Taxpayer / legal entity / natural person) | Tax year | Format 2276 version 4. In the XML the header element Cab carries, all mandatory (Anexo T3.45 section 2.1): Ano (year of sending, AAAA), CodCpt (1 = insertion, 2 = replacement), Formato (2276), Version (4), NumEnvio (consecutive number of the sending within the year, up to 8 digits), FecEnvio (AAAA-MM-DDTHH:MM:SS), FecInicial and FecFinal (first and last day of the tax year reported, AAAA-MM-DD), ValorTotal (control total - defined by the annex as the sum of the attribute tdocb across the records) and CantReg (number of rentra records in the file, at most 5,000). The informant NIT and the taxpayer category are not header attributes: they come from the portal session and drive the deadline.",
+   "reason": "The logical envelope omits the physical header attributes the annex makes mandatory; the client's Excel has none of them, so the developer has no other source.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) section 2.1"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C29",
+   "row": 29,
+   "column_letter": "C",
+   "field_id": "N33",
+   "field_name": "Numerals 18, 19, 20 and 33 travel together",
+   "current": "Where any of numerals 18, 19 or 20 is non-zero, numeral 33 should be populated, because ET art. 206 num. 4 applies. Where all three are zero, numeral 33 should be blank.",
+   "proposed": "Where any of numerals 18, 19 or 20 is non-zero, numeral 33 should be populated, because ET art. 206 num. 4 applies. Where all three are zero, numeral 33 is sent as ZERO - the attribute vilap is always present ('Siempre debe diligenciarse') and par. 2 requires zero, never blank.",
+   "reason": "The cell says \"should be blank\"; the annex makes vilap mandatory and par. 2 requires 0 where there is no value. The client's file writes 0 (correctly) on 684 records.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute vilap; Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 par. 2"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A50",
+   "row": 50,
+   "column_letter": "A",
+   "field_id": "-",
+   "field_name": "New row: employer-paid pensioner",
+   "current": null,
+   "proposed": "Pensioner whose pension is paid by the EMPLOYER through payroll (company pension)",
+   "reason": "The sheet has a NO row for fund-paid pensioners (A22) and no YES row for the employer-paid pensioner, although the N21 Field Explanation describes that population and the client's file is 49% pensioner records (512 of 1035). Proposed as an appended row; Wallisson may move it into the WHO GETS REPORTED block.",
+   "basis": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 21; Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute peju; client file: 512 records with numeral 21 > 0"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "B50",
+   "row": 50,
+   "column_letter": "B",
+   "field_id": "-",
+   "field_name": "New row: employer-paid pensioner",
+   "current": null,
+   "proposed": "YES",
+   "reason": "See A50.",
+   "basis": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numeral 21"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C50",
+   "row": 50,
+   "column_letter": "C",
+   "field_id": "-",
+   "field_name": "New row: employer-paid pensioner",
+   "current": null,
+   "proposed": "One record per pensioner, identified with the recipient's own document (a survivor or substitute pension in the name of the person who receives it). Numeral 21 (element peju) carries the pension payments of the year - the monthly mesadas and the additional mesadas; numeral 23 (element apos) the health contribution deducted from the pension; numeral 24 (element apof) a solidarity-fund deduction where it applies; numeral 17 (element potro) any payment to the pensioner that is not the pension itself (e.g. a health-plan offset compensation); numeral 29 the withholding actually practised, which is nil where the pension does not exceed 1,000 UVT a month (ET art. 206 num. 5). Res. 227 art. 1.3.7.1.1 numerals 17, 21, 23, 24 and 29.",
+   "reason": "See A50. The content restates what the N21, N23 and N17 Field Explanations already say, so the scope sheet and the spec sheet agree.",
+   "basis": "Res. DIAN 000227/2025 (Resolución Única, compiling Res. 162/2023 art. 51 as amended by Res. 188/2024 art. 8) art. 1.3.7.1.1 numerals 17, 21, 23, 24, 29; ET art. 206 num. 5"
+  },
+  {
+   "sheet": "Sample File",
+   "cell": "A46",
+   "row": 46,
+   "column_letter": "A",
+   "field_id": "N04",
+   "field_name": "Beneficiary location",
+   "current": "  N04  Ubicacion del beneficiario .............. 11 / 001  (Bogota D.C.; pais Colombia - direccion, dpto. and municipio populated)",
+   "proposed": "  N04  Ubicacion del beneficiario .............. 11 / 001 / 169  (Bogota D.C.; pais 169 = Colombia - direccion, dpto. and municipio populated)",
+   "reason": "Shows the country as the numeric code the annex requires.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pais"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "A10",
+   "row": 10,
+   "column_letter": "A",
+   "field_id": "N04",
+   "field_name": "Beneficiary location",
+   "current": "11 / 001",
+   "proposed": "11 / 001 / 169",
+   "reason": "Same as Sample File A46: the country is a numeric code.",
+   "basis": "Anexo T3.45 of Res. 000227/2025 (Especificaciones Técnicas Formato 2276 v4, Diario Oficial 53.254 of 25 Sep 2025) attribute pais"
+  }
+ ],
+ "not_applied": [
+  {
+   "item": "Thousand rounding of every amount (100% of non-zero values end in 000, all 15 populated amount columns)",
+   "reason": "Client practice; the annex prescribes a positive integer in pesos ('entero, sin puntos ni comas', values 'según lo reportado por el informante') and no rounding. The spec's Rounding column already matches the annex. Recorded as a Conflict finding on each populated amount row."
+  },
+  {
+   "item": "Meal allowance (WT 65818, 447 persons) reported entirely in numeral 7 (column N); numerals 8 (O) and 32 (AM) zero on every record",
+   "reason": "Contrary to Res. 227 numerals 8 and 32, par. 1 and par. 6, and ET art. 387-1, which the spec follows (monthly fork at 310 UVT and 41 UVT). Not replicated; question to the client (voucher/card payment? why no split?)."
+  },
+  {
+   "item": "Numeral 33 populated on 52 records without severance paid/deposited and zero on 5 records with severance",
+   "reason": "Contrary to the resolution's 'Únicamente para trabajadores que aplique el numeral 4 artículo 206 E.T.'; the spec's rule stays."
+  },
+  {
+   "item": "50 pensioner records without first name (column F blank; 47 also without other names)",
+   "reason": "Annex: pno 'Siempre debe diligenciarse' (XSD required, minLength 1) - the records would fail validation. Client data to be completed; spec unchanged."
+  },
+  {
+   "item": "Column AM header 'Pagos por Alimentación mayor a 41 UVT'",
+   "reason": "Labelling error in the client's working file; the annex attribute is 'Pagos por alimentación mensuales hasta 41 UVT'. Spec unchanged."
+  },
+  {
+   "item": "31 records with department 25 and municipality 001 (DIVIPOLA 25001 = Agua de Dios)",
+   "reason": "Looks like a default municipality where only the department is known; question to the client. The spec already requires DIVIPOLA-validated codes."
+  },
+  {
+   "item": "Numeric 0 written in the optional attributes AO-AS (dependant, fideicomiso, contract participant)",
+   "reason": "In the XML these attributes are optional ('si se conoce') and are omitted/empty when unknown; '0' is not a document-type code. Caution for the client's XML generation; the spec already says blank."
+  },
+  {
+   "item": "All voluntary pension contributions reported in numeral 26 (column AG), none in numeral 25 (AF)",
+   "reason": "Shows the client's current classification but is not proof of the ET art. 55 / art. 126-1 attribute; open point N25 of 16 Oct stays with the client."
+  },
+  {
+   "item": "Totals row (row 1037) and the Excel layout",
+   "reason": "Working artefact; the XML has CantReg / ValorTotal in the header instead."
+  },
+  {
+   "item": "Withholding reconciliation to the Accumulated Report (WT 2552 + 21140 Jan-Sep 2026 = 14,976,325,854 vs column AJ 13,926,475,000)",
+   "reason": "Different years (file = tax year 2025); no spec change. The 5 persons whose 2025 withholding is below their Oct-Dec 2025 withholding go to the client as a question."
+  },
+  {
+   "item": "Round-1 question whether the file is a 2026 year-to-date extract",
+   "reason": "It is not: pension = 14 x December-2025 mesada, EPS offset = 12 x December 2025, same record order as the client's 2025 Form 220 file. The 2026 return must be built from Jan-Dec 2026 payment-date accumulators as the spec says."
+  }
+ ],
+ "summary": "46 proposed cell edits, all supported by Anexo T3.45 of Res. 000227/2025 (Formato 2276 v4) or art. 1.3.7.1.1: field lengths aligned to the annex (amount attributes 18, identification numbers 20, fideicomiso 14, entinfo 2), the country sub-field documented as a numeric code (169 = Colombia), the XML header (Ano = year of sending; FecInicial/FecFinal = tax year) added to ENV-03 and File Structure, numeral 33 'blank' corrected to 'zero', and an employer-paid pensioner YES row for the Payroll Scope Summary. No Field Explanation rule was changed to follow the client's file; the client's deviations (thousand rounding, meal allowance in numeral 7, numeral 33 population, missing first names) are listed under not_applied."
+}

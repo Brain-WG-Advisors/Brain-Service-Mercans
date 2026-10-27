@@ -1,0 +1,36 @@
+{
+ "spec": "CO-PILA-003",
+ "final": "05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx",
+ "source": "04-output/RA-ANSWERS-VACATION-IBC-2026-10-22.md",
+ "edits": [
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C27",
+   "items": [
+    "4-5",
+    "pass2-fix"
+   ],
+   "current": "In the CCF base (campo 45, T2R2-045) and in the PARAFISCAL base (campo 95, T2R2-095): Ley 21 de 1982 art. 17 defines one monthly salary payroll for the Subsidio Familiar (CCF), SENA, ESAP and Escuelas Industriales e Institutos Técnicos, which includes the payments 'verificados por descansos remunerados de ley y convencionales o contractuales'.",
+   "proposed": "In the CCF base (campo 45, T2R2-045) and in the PARAFISCAL base (campo 95, T2R2-095): Ley 21 de 1982 art. 17 defines one monthly salary payroll for the Subsidio Familiar (CCF), SENA, ESAP and Escuelas Industriales e Institutos Técnicos, which includes the payments 'verificados por descansos remunerados de ley y convencionales o contractuales'. Paid rest days include vacation enjoyed and vacation paid in cash, during employment or on termination (Consejo de Estado, Sala de Consulta, concept 2027 of 2010-10-04). The ICBF base is the same payroll (Ley 89 de 1988 art. 1 par. 1)."
+  },
+  {
+   "sheet": "PILA Spec",
+   "cell": "M111",
+   "items": [
+    "4-5",
+    "pass2-fix"
+   ],
+   "current": "Contribution base for the family compensation fund: the monthly salary payroll of the employee (Ley 21 de 1982 art. 17). Same floor (1 SMMLV = COP 1,750,905 in 2026) as the other three bases, but NO 25-SMMLV ceiling - the ceiling applies to the pension, health and occupational-risk IBC only. Bidirectional pair with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary (Ley 789 de 2002 art. 49). Source: the CCF base computed by the payroll engine under this rule (wage type 64991 'Parafiscals Base actual', uncapped, is the base on which the CCF 4%, wage type 25110 Family Compensation Fund, is computed). Campo 45 (this field) and campo 95 (T2R2-095) are two separate bases and may legitimately differ: campo 45 is the base for the CCF contribution (AT2 v30 campo 65 = campo 45 x campo 64) and campo 95 the base for SENA, ICBF, ESAP and MEN (campos 67, 69, 71 and 73). Ley 21 de 1982 art. 17 defines the monthly salary payroll for the CCF and SENA alike and includes paid rest days ('descansos remunerados de ley y convencionales o contractuales'), so paid rest days enter both campo 45 and campo 95. The engine stores and reports them independently, never deriving one from the other.",
+   "proposed": "Contribution base for the family compensation fund: the monthly salary payroll of the employee (Ley 21 de 1982 art. 17). Same floor (1 SMMLV = COP 1,750,905 in 2026) as the other three bases, but NO 25-SMMLV ceiling - the ceiling applies to the pension, health and occupational-risk IBC only. Bidirectional pair with 'All-inclusive salary flag' (T2R2-041), which where marked sets this base to 70% of the all-inclusive salary (Ley 789 de 2002 art. 49). Source: the CCF base computed by the payroll engine under this rule (wage type 64991 'Parafiscals Base actual', uncapped, is the base on which the CCF 4%, wage type 25110 Family Compensation Fund, is computed). Campo 45 (this field) and campo 95 (T2R2-095) are two separate bases and may legitimately differ: campo 45 is the base for the CCF contribution (AT2 v30 campo 65 = campo 45 x campo 64) and campo 95 the base for SENA, ICBF, ESAP and MEN (campos 67, 69, 71 and 73). Ley 21 de 1982 art. 17 defines the monthly salary payroll for the CCF and SENA alike and includes paid rest days ('descansos remunerados de ley y convencionales o contractuales'), so paid rest days enter both campo 45 and campo 95 - including vacation paid in cash, during employment or on termination (Consejo de Estado, Sala de Consulta, concept 2027 of 2010), which by contrast does NOT enter the pension, health and occupational-risk IBC (Consejo de Estado, Sección Cuarta, exp. 26941 of 2024; unification ruling exp. 25185 of 2021, rule 1). The engine stores and reports them independently, never deriving one from the other."
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C4",
+   "items": [
+    "4-5"
+   ],
+   "current": "Compute and STORE five separate bases per employee per month. Three are the IBC for pension, health and occupational risk: total salary-constituting payments, plus the excess over the 40% non-salary clamp of Ley 1393 de 2010 art. 30, floored at 1 SMMLV (COP 1,750,905) and capped at 25 SMMLV (COP 43,772,625). The fourth is the IBC CCF of campo 45: the monthly salary payroll of Ley 21 de 1982 art. 17, which INCLUDES paid rest days (70% of the integral salary, Ley 789 de 2002 art. 49), floored at 1 SMMLV and NOT capped at 25 SMMLV. The fifth is the PARAFISCAL base of campo 95, defined by the same Ley 21 de 1982 art. 17: it INCLUDES paid rest days and it is UNCAPPED. Never populate all five from one variable.",
+   "proposed": "Compute and STORE five separate bases per employee per month. Three are the IBC for pension, health and occupational risk: total salary-constituting payments, plus the excess over the 40% non-salary clamp of Ley 1393 de 2010 art. 30, floored at 1 SMMLV (COP 1,750,905) and capped at 25 SMMLV (COP 43,772,625). Vacation paid in cash (during employment or on termination) is NOT a salary-constituting payment and is excluded from these three IBCs (Consejo de Estado, Sección Cuarta, exp. 26941 of 2024; unification ruling exp. 25185 of 2021, rule 1); for enjoyed vacation days, health and pension are contributed on the IBC of the month before the vacation starts (DUR 780 de 2016 art. 3.2.5.1; Consejo de Estado, Sección Cuarta, exp. 25958 of 2022). The fourth is the IBC CCF of campo 45: the monthly salary payroll of Ley 21 de 1982 art. 17, which INCLUDES paid rest days (70% of the integral salary, Ley 789 de 2002 art. 49), floored at 1 SMMLV and NOT capped at 25 SMMLV. The fifth is the PARAFISCAL base of campo 95, defined by the same Ley 21 de 1982 art. 17: it INCLUDES paid rest days and it is UNCAPPED. Never populate all five from one variable."
+  }
+ ]
+}

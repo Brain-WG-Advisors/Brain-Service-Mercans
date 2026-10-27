@@ -1,0 +1,74 @@
+{
+  "verifier": "independent (did not author the dv-maps)",
+  "date": "2026-10-21",
+  "verdict": "PASS WITH ONE REQUIRED ADDITION - all 26 mapped edits are correct; one occurrence missed in CO-PILA-003 Sample File A63",
+  "checks": {
+    "1_algorithm": {
+      "result": "PASS (mechanical) / official text with the weight table NOT located",
+      "recomputed": {
+        "900123456": {"weighted_sum": 586, "mod11": 3, "dv": 8},
+        "901234567": {"weighted_sum": 697, "mod11": 4, "dv": 7},
+        "79123456": {"weighted_sum": 737, "mod11": 0, "dv": 0}
+      },
+      "official_anchor": "DIAN's own NIT 800.197.268-4, published on dian.gov.co (e.g. https://www.dian.gov.co/tramitesservicios/Tramites_Impuestos/RUT/Paginas/default.aspx) and normograma.dian.gov.co: the same algorithm gives sum 733, mod 11 = 7, DV = 11-7 = 4, which matches the official DV.",
+      "official_references_without_formula": "DIAN Oficio 909585 (063) of 2021, https://normograma.dian.gov.co/dian/compilacion/docs/oficio_dian_909585_2021.htm: says the DV is part of the electronic-invoicing technical validation and cites Orden Administrativa 001 de 2005 and Anexo Tecnico FE v1.8, but does not set out the weights.",
+      "secondary_sources_with_weights": [
+        "https://actualicese.com/rutas/books/guia-de-referencia-contable-y-tributaria-2025/page/calculadora-del-digito-de-verificacion",
+        "https://siemprealdia.co/colombia/impuestos/digito-de-verificacion-del-nit/",
+        "https://arthurdejong.org/git/python-stdnum/tree/stdnum/co/nit.py"
+      ],
+      "secondary_quote": "Take the NIT digits from right to left and multiply them by 3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71; sum; remainder mod 11: if 0 or 1 that is the DV, otherwise DV = 11 - remainder (siemprealdia.co, paraphrase of the Spanish text)",
+      "note": "A dian.gov.co/gov.co page that states the weight vector itself was not found in this session. The map 'source' line should not present the algorithm as quoted from a DIAN publication. Under the rule 'no proof, leave it out', the correction stands on the mechanical match with DIAN's own published NIT/DV, not on a quoted DIAN text."
+    },
+    "2_edits_vs_live": {
+      "result": "PASS",
+      "detail": "26/26 'current' equal the live cell exactly; every live cell is a string (str), and the proposed values are strings too. NIT-to-DV binding confirmed from adjacent rows: CO-DIAN-001 K36 = 901234567 so K37 -> 7; K46 = 900123456 so K47 -> 8; CO-DIAN-002 K62 = 79123456 so K63 -> 0 (A34 and Sample A85 -> 0); all others relate to 900123456 -> 8. Each DV edit changes exactly one character at the DV position. Length is unchanged for every fixed-width/aligned line (CO-PILA-003 A33 128=128, the DV char at index 125 = pos 219; CO-DIAN-002 A32/A85 and CO-DIAN-004 A29 60=60; CO-DIAN-001 A86 22=22, A107 19=19). The only length changes are CO-CESANTIAS-006 K4 (15->14) and Sample File A42 (36->35): both remove the appended '7' and neither is fixed-width (A42 is a free-text envelope line, 'keyed in the portal (NOT in the file)', not a record under the position ruler)."
+    },
+    "3_completeness": {
+      "result": "FAIL - 1 missed",
+      "missed": [
+        {
+          "spec": "CO-PILA-003",
+          "sheet": "Sample File",
+          "cell": "A63",
+          "why": "Archivo Tipo 2 Registro Tipo 1 header, positions 221-330. Position 226 = T2R1-007 'Digito de verificacion aportante' (PILA Spec H45 'Pos 226-226', which the map already changes to 8 in K45). The character at string index 22 (index 17 = pos 221) is '7'. Example Analysis D7 says A1-002/003/004 are echoed byte for byte into T2R1-005/006/007, so the sample record now contradicts K45, A33 and A43.",
+          "current": "  pos  221-330  |     7E0000000000          U                                                  ARL0012026-032026-04000012345620|",
+          "proposed": "  pos  221-330  |     8E0000000000          U                                                  ARL0012026-032026-04000012345620|",
+          "length": "128 = 128"
+        }
+      ],
+      "cleared": [
+        "CO-DIAN-001 CUNE: Example Analysis C44 inputs use 900123456 with no DV; Sample File A96 CUNE and A88 SoftwareSC have no DV input (Annex s.8.1.1.1 / Population Rules C6-D6: NitNE without the DV). No change needed.",
+        "CO-PILA-003 A35 / A52 / K21-K22: '0' is the legal representative's DV, ALWAYS zero under the annex. Correct as it stands.",
+        "CO-PILA-003 A62 (T2R1 pos 111-220) holds only NI + 900123456; no DV in that segment.",
+        "CO-DIAN-002 A31/A84, CO-DIAN-004 A28, CO-DIAN-005 K47 and Sample A32, CO-DIAN-001 K36/K46/A16, CO-PILA-003 K6/K21/K44/A42: NIT only, no DV.",
+        "No other '-7', '/ 7', DV=\"3\" or '9001234567' strings found in any sheet of the six finals."
+      ]
+    },
+    "4_cesantias_K4_A42": {
+      "result": "PASS",
+      "evidence": "CO-CESANTIAS-006 'Consignacion Cesantias Spec' M4: 'Composite Key: sub-field 1 = document type (NI for a legal person); sub-field 2 = the NIT without the check digit, without dots and without hyphens.' 'NI / 900123456' (K4) and 'NI 900123456' (Sample File A42) are therefore right; the old '9001234567' had the DV appended."
+    },
+    "5_words": {
+      "result": "PASS",
+      "detail": "The 24 WORDS patterns from scripts/make_final.py ran over every proposed value in the six dv-maps: 0 hits."
+    }
+  },
+  "required_fixes": [
+    {
+      "spec": "CO-PILA-003",
+      "map": "04-output/final-prep/CO-PILA-003-dv-map.json",
+      "add_edit": {
+        "sheet": "Sample File",
+        "cell": "A63",
+        "items": ["DV"],
+        "current": "  pos  221-330  |     7E0000000000          U                                                  ARL0012026-032026-04000012345620|",
+        "proposed": "  pos  221-330  |     8E0000000000          U                                                  ARL0012026-032026-04000012345620|"
+      }
+    },
+    {
+      "scope": "all six dv-maps (source line, advisory)",
+      "fix": "Do not cite the weight vector as quoted from a DIAN publication. Cite it as the standard DIAN mod-11 algorithm, checked against DIAN's own published NIT 800.197.268-4."
+    }
+  ]
+}

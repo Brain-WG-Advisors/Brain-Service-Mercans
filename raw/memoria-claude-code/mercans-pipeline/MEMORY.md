@@ -1,0 +1,4 @@
+- [Revisar cada artefato contra os templates do shared/](verify-every-artifact-against-shared-templates.md) — nada avança de stage sem passar pelos C-checks e pelo Definition of Done
+- [Implantação do pipeline no Windows](mercans-pipeline-windows-deployment.md) — o que já está aqui, o que falta, e por que o commit "Snapshot" não é backup
+- [Payslip: 5 abas do briefing vs. 8 do contrato PSL](payslip-5-sheet-vs-8-sheet-contract.md) — divergência resolvida no BE adotando as 8; validador hoje passa, FAIL agora é defeito real
+- [Programa de melhoria do pipeline](pipeline-improvement-programme.md) — fase atual, decisões D1–D6 do gate da Fase 0, onde está o log

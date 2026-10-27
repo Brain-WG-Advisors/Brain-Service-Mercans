@@ -1,0 +1,50 @@
+{
+  "spec": "CO-DIAN-001",
+  "final": "05-final/CO-DIAN-001-NominaElectronica-Spec.xlsx",
+  "edits": [
+    {
+      "sheet": "Nomina Electronica Spec",
+      "cell": "M56",
+      "field_id": "NIE044",
+      "rule": "NE-1",
+      "current": "Annex table 5.2.1: 11 Record civil, 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Foreign resident ID card, 31 NIT, 41 Passport, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais, 91 NUIP (employee only). NOTE CO-GAP-06: there is NO code for the PPT (Temporary protection permit, Decree 216 of 2021), created one month after this annex; 47 (PEP) is the only available proxy.\n\nSource: the HR master stores no document-type code; it holds one field per document type ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). Derive the code from the field that is filled: 'Citizenship Card ID' -> 13, 'Identity Card for Foreigners' -> 22. The codes for 'Identity Card' and 'National ID', and the precedence rule applied where more than one document field is filled, are configuration parameters supplied at implementation, so that exactly one document type is reported and the same document drives NIE044 and NIE045.",
+      "proposed": "Annex table 5.2.1: 11 Record civil, 12 Minor ID card, 13 Citizenship ID card, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Passport, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais, 91 NUIP (employee only). Codes 21 and 22 are both valid: 22 is reported where the employee holds a cedula de extranjeria and 21 where the employee holds a tarjeta de extranjeria; the code follows the document the employee holds, as recorded in the document-type field. NOTE CO-GAP-06: there is NO code for the PPT (Temporary protection permit, Decree 216 of 2021), created one month after this annex; 47 (PEP) is the only available proxy.\n\nSource: the HR master stores no table 5.2.1 code; it holds one field per document type ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). Derive the code from the field that is filled: 'Citizenship Card ID' -> 13; 'Indentity Card for Foreigners' -> 22 where the document recorded in it is a cedula de extranjeria and 21 where it is a tarjeta de extranjeria (the document-type attribute of that document distinguishes the two). The codes for 'Identity Card' and 'National ID', and the precedence rule applied where more than one document field is filled, are configuration parameters supplied at implementation, so that exactly one document type is reported and the same document drives NIE044 and NIE045."
+    },
+    {
+      "sheet": "Nomina Electronica Spec",
+      "cell": "M57",
+      "field_id": "NIE045",
+      "rule": "NE-1",
+      "current": "Identity document number without dots or hyphens. It is input [8] to the CUNE and the join key to Form 220 and Format 2276. CO-GAP-07 - KNOWN SCHEMA DEFECT: the XSD types this attribute as xsd:integer, so a passport or foreign identity document containing letters (document types 21, 41, 42, 50) cannot be schema-valid. DIAN has published no workaround; the handling of such documents is set at implementation under CO-GAP-07.\n\nSource: the same HR master document field that set NIE044 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). The pay-run field 'National ID' is not used on its own: it is blank for employees whose only document is the foreigners' card. Strip dots and hyphens. A document number that carries leading zeros must be emitted exactly as held in the HR master and used in the same form as CUNE input [8]; xsd:integer typing drops leading zeros, so such numbers fall under CO-GAP-07.",
+      "proposed": "Identity document number without dots or hyphens. It is input [8] to the CUNE and the join key to Form 220 and Format 2276. CO-GAP-07 - KNOWN SCHEMA DEFECT: the XSD types this attribute as xsd:integer, so a passport or foreign identity document containing letters (document types 21, 41, 42, 50) cannot be schema-valid. DIAN has published no workaround; the handling of such documents is set at implementation under CO-GAP-07.\n\nSource: the same HR master document field that set NIE044 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'). The pay-run field 'National ID' is not used on its own: it is blank for employees whose only document is the foreigners' card (cedula de extranjeria, code 22, or tarjeta de extranjeria, code 21). Strip dots and hyphens. A document number that carries leading zeros must be emitted exactly as held in the HR master and used in the same form as CUNE input [8]; xsd:integer typing drops leading zeros, so such numbers fall under CO-GAP-07."
+    },
+    {
+      "sheet": "Field Options",
+      "cell": "D14",
+      "field_id": "NIE044 (table 5.2.1 code 21)",
+      "rule": "NE-1",
+      "current": "Foreigner's identity card.",
+      "proposed": "Foreigner's identity card. Reported where the document recorded in the HR master field 'Indentity Card for Foreigners' is a tarjeta de extranjeria (NIE044 = 21)."
+    },
+    {
+      "sheet": "Field Options",
+      "cell": "D15",
+      "field_id": "NIE044 (table 5.2.1 code 22)",
+      "rule": "NE-1",
+      "current": "Foreign resident's identity card.",
+      "proposed": "Foreign resident's identity card. Reported where the document recorded in the HR master field 'Indentity Card for Foreigners' is a cedula de extranjeria (NIE044 = 22)."
+    }
+  ],
+  "resolved_rule_to_be_set": [],
+  "still_open": [
+    "Nomina Electronica Spec!M56 (NIE044): the table 5.2.1 codes for the HR master fields 'Identity Card' and 'National ID', and the precedence rule where more than one document field is filled, stay configuration parameters supplied at implementation - the rule fixes only the 13 / 22 / 21 mapping.",
+    "Nomina Electronica Spec!M57 (NIE045): CO-GAP-07 (xsd:integer typing of NumeroDocumento for alphanumeric document numbers and leading zeros) stays set at implementation - the rule does not address it."
+  ],
+  "summary": {
+    "cells": 4,
+    "by_sheet": {
+      "Nomina Electronica Spec": 2,
+      "Field Options": 2
+    }
+  }
+}

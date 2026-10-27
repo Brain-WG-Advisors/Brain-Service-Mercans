@@ -84,6 +84,17 @@
 |---|---|---|---|---|
 | — | _(nenhum ticket GB nas fontes)_ | | | |
 
+## Internal Certification (Análise de Reports)
+> Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/United Kingdom`
+
+| Pacote | Período | Pass / Finding / NT | Recibo | Situação |
+|---|---|---|---|---|
+| McDermott UK | set/26 | 50 / 4 / 17 | ACKs HMRC FPS/EPS recebidos 09/10 (IRmarks batem) | Validado |
+
+- F-01: senha do Government Gateway em texto aberto nos arquivos do pacote (decisão do usuário sobre como tratar).
+- Master recebido 09/10 tem 73 empregados × 69 no FPS/G2N: não conferido.
+- 2º cliente (Christina Surpogi): opcional.
+
 ## Pendências
 - [ ] Divergência hub × skill: Valores-chave registra LEL default 542 (e "vs GBP 125 semanal"); a skill traz LEL £129/semana (£559/mês, £6.708/ano) em 2026-27 — verificar (skill lida em 2026-10-02)
 - [ ] Divergência hub × skill: Valores-chave diz "17 letras NI"; a skill descreve 16 category letters de NIC — verificar (skill lida em 2026-10-02)

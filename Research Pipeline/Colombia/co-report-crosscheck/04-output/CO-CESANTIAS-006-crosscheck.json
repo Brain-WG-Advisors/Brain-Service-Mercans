@@ -1,0 +1,1208 @@
+{
+  "spec": "CO-CESANTIAS-006",
+  "spec_file": "01-specs/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx",
+  "sheet": "Consignacion Cesantias Spec",
+  "reports_checked": [
+    "Accumulated Report.xlsx (source)",
+    "1764_Master_Data_Report_202609.xlsx (source)"
+  ],
+  "fields": [
+    {
+      "id": 4,
+      "name": "Contributor document type and number",
+      "field_position": "E01",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it. The reports show only the organisation label '1764 - Compañía Colombiana de Tabaco SAS' in the title block, no NIT.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 5,
+      "name": "Service to be settled",
+      "field_position": "E02",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 6,
+      "name": "Accrual year of the severance savings",
+      "field_position": "E03",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/02/2026 (WT 25827 Payment Severance Funds Inf.)",
+          "example_masked": "6422811"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 68028 Balance Cesantias)",
+          "example_masked": "6422811"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 68029 Days worked current year (Without Leaves))",
+          "example_masked": "360"
+        }
+      ],
+      "finding": "The client data confirms the annual accrual-year logic: the fund payment WT 25827/65805 appears ONLY in the 01/02/2026 period (236 employees) and equals the balance consolidated at December 2025 (e.g. masked employee 34209535: 68028 at 01/12/2025 = 6,422,811 = 25827 at 01/02/2026). A return paid in February 2026 therefore carries accrual year 2025, exactly as the explanation says.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 7,
+      "name": "Affiliation type of the return",
+      "field_position": "E04",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 8,
+      "name": "Payment method",
+      "field_position": "E05",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 9,
+      "name": "Return short name",
+      "field_position": "E06",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 10,
+      "name": "Single-fund-for-all indicator and selected fund",
+      "field_position": "E07",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Severance Fund Name",
+          "example_masked": "NAME_0005"
+        }
+      ],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it. Indirect support only: Master Data 'Severance Fund Name' holds 11 distinct (over-masked) values across employees, so the fund is per employee and the answer N is consistent with the client data.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 11,
+      "name": "Seed-from-last-PILA-return indicator",
+      "field_position": "E08",
+      "verdict": "Conflict",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/10/2025 (WT 62110 Cash-out of Severance Pay - Social Benefits -541S)",
+          "example_masked": "6299283"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/02/2026 (WT 25827 Payment Severance Funds Inf.)",
+          "example_masked": "0"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/01/2026..01/09/2026 (WT 62140 Integral Salary- 0423)",
+          "example_masked": "34750000"
+        }
+      ],
+      "finding": "The Field Explanation (and the same sentence in the Report Matrix, 'NOT DERIVABLE FROM THE MONTHLY FILINGS') states that 'leavers who left in June ... are still owed a pro rata deposit'. The client data shows the opposite: all 10 employees whose last salary was in Oct-Dec 2025 received their severance and interest directly via WT 62110/62117 in the termination month and none received a February-2026 fund payment (25827); employees leaving in Jan-Feb 2026 also had the 2025 balance paid directly (62126/62110) instead of deposited. The spec's OWN Population Rules sheet (Step 0, exclusion 2: 'employees who LEFT during the year, whose severance savings was settled and paid in the final settlement') agrees with the client, so the conflict is internal to the spec. The second half of the sentence is confirmed: 103 integral-salary employees (62140) carry no 25827 payment. Not decided here: RA/Wallisson to confirm against the official source and correct the E08 explanation and the Report Matrix sentence.",
+      "proposed_explanation": "Simple S.A. offers to build the severance savings return from the contributor list of the last PILA return paid for the chosen year. Convenient and dangerous: the PILA population is the population that was PAID in a month, which is not the population ENTITLED to a severance savings deposit for the year - leavers who left during the accrual year are absent from the December PILA and must NOT be deposited (their severance savings are paid directly in the final settlement - see Population Rules Step 0 exclusion (2)), while all-inclusive salary employees are present in PILA but owed nothing. The engine must generate the population itself and set this to N.",
+      "official_source": "Law 50 of 1990 art. 99 num. 4 (balances not yet deposited at termination are paid directly to the worker) - official source to be confirmed by RA; spec Population Rules sheet Step 0 exclusion (2); CST art. 132 num. 2 (integral salary) as cited by the spec."
+    },
+    {
+      "id": 12,
+      "name": "Asofondos name-validation auto-adjust answer",
+      "field_position": "E09",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 13,
+      "name": "Return number assigned by the operator",
+      "field_position": "E10",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Return-envelope value keyed in, or returned by, the operator portal. No mapped client report (Accumulated Report, Master Data Report) carries it. The Accumulated Report records the payment only as a monthly payroll amount; no return number.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 14,
+      "name": "Total value payable in the return",
+      "field_position": "E11",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/02/2026 (WT 25827 Payment Severance Funds Inf.)",
+          "example_masked": "sum over 236 employees = 2064808759"
+        }
+      ],
+      "finding": "The control total the spec describes is reproducible from client data: the sum of WT 25827 (and its twin 65805) in the 01/02/2026 period is COP 2,064,808,759 over 236 employees, whole pesos (no non-integer values). This is the figure E11 must reconcile to; the operator-returned value itself is not in any report.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 16,
+      "name": "Record type",
+      "field_position": "T01",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "File-mechanics constant ('02'); no client report carries the operator file.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 17,
+      "name": "Sequence number",
+      "field_position": "T02",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "File-mechanics sequence; no client report carries the operator file.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 18,
+      "name": "Contributor document type",
+      "field_position": "T03",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Citizenship Card ID",
+          "example_masked": "57630918"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Indentity Card for Foreigners",
+          "example_masked": "0244621"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "National ID",
+          "example_masked": "1423211232"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Identity Card",
+          "example_masked": "80020815"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "EE Citizenship Card ID",
+          "example_masked": "SHORTID_nnnn / 5124583130"
+        }
+      ],
+      "finding": "The field and code list are right, but the client holds no document-type code: only one column per document. The explanation must tell the developer that the type is a separate master-data attribute and how the client's columns map to it; 14 employees have more than one ID column filled.",
+      "proposed_explanation": "ALPHABETIC two-character code, validated against the list printed in the layout: CC, CE, TI, PA, CD, SC, PE - and, in the XLS variant of the SAME manual, also PT (Permiso temporal). THIS IS NOT THE PILA CODE SET: PILA Record Tipo 2 campo 3 uses the same two-letter mnemonics but a different admitted list, and Form 220 / Format 2276 use DIAN NUMERIC document-type codes. The engine must hold one document type and three mappers. Note the SOI-documented length trap: where the document is a Special permanence permit the NUMBER (T04) must be exactly 15 digits. CLIENT DATA (PMI Master Data Report, Sep-2026): there is NO document-type column. The identity number sits in four separate columns - 'Citizenship Card ID' (247 of 263 employees), 'Indentity Card for Foreigners' (15), 'Identity Card' (6) and 'National ID' (11) - and the Accumulated Report carries only 'EE Citizenship Card ID'. 14 employees have two or three of these columns filled and 2 have none, so the type cannot be inferred reliably from which column is populated: hold Employee.Document_Type as its own master-data attribute and map it to the severance-savings code. Column-to-code mapping to be confirmed with RA: 'Citizenship Card ID' -> CC; 'Indentity Card for Foreigners' -> CE; 'Identity Card' and 'National ID' -> not determinable from the client data.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 19,
+      "name": "Contributor identification number",
+      "field_position": "T04",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Citizenship Card ID",
+          "example_masked": "57630918"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Indentity Card for Foreigners",
+          "example_masked": "0244621"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "EE Citizenship Card ID",
+          "example_masked": "5124583130"
+        }
+      ],
+      "finding": "Client numbers are plain digit strings (7, 8 or 10 digits; foreigner IDs keep leading zeros as text, e.g. '0244621'), with no dots or hyphens; max length 12 in the Accumulated Report, within 16. The strip-and-zero-fill rule in the explanation covers them.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 20,
+      "name": "First surname",
+      "field_position": "T05",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Last Name",
+          "example_masked": "NAME_0002"
+        }
+      ],
+      "finding": "Master Data 'Last Name' (filled for 261/263) carries the first surname; split-name structure matches the spec. Length cannot be checked because names are masked.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 21,
+      "name": "Second surname",
+      "field_position": "T06",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Second Last Name",
+          "example_masked": "NAME_0010"
+        }
+      ],
+      "finding": "Master Data 'Second Last Name' blank for 56% of employees, consistent with the conditional/space-fill rule.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 22,
+      "name": "First name",
+      "field_position": "T07",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "First Name",
+          "example_masked": "NAME_0001"
+        }
+      ],
+      "finding": "Master Data 'First Name' (filled for 261/263) carries the first given name.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 23,
+      "name": "Second name",
+      "field_position": "T08",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Middle Name",
+          "example_masked": "NAME_0008"
+        }
+      ],
+      "finding": "Master Data 'Middle Name' blank for 70% of employees, consistent with the conditional/space-fill rule.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 25,
+      "name": "Severance-savings fund code of the affiliate",
+      "field_position": "T09",
+      "verdict": "Format mismatch",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Severance Fund Name",
+          "example_masked": "NAME_0005 (over-masked name; blank for 63 employees)"
+        }
+      ],
+      "finding": "Spec requires a numeric 2-digit fund code N(2) (02/03/10/15/19); the client holds only a free-text fund name (masked, 11 distinct values) and no code. 63 blanks, 12 of them among employees actually paid to a fund in Feb-2026.",
+      "proposed_explanation": "Campo mandatory, validated against the funds registered in the operator's system. The published layout admits exactly FIVE values and prints them: 02 Proteccion, 03 Porvenir, 10 Colfondos, 15 Fondo Nacional del Ahorro (FNA), 19 Old Mutual (antes Skandia). STALE LABEL, LIVE CODE: code 19's printed label is out of date - the entity trades as Skandia again (Skandia Pension fund administrator y Severance savings S.A., authorised by the Financial Superintendence in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024). Send the CODE, not the name. The fund is the EMPLOYEE'S choice under Law 50 of 1990 art. 99 num. 3 and is master data on the employee, not a company default. CLIENT DATA: the Master Data Report holds only a fund NAME ('Severance Fund Name'), no 2-digit operator code, so a name-to-code mapping table is required (11 distinct name values were found against the 5 codes of the layout, i.e. several spellings per fund are likely). The fund is blank for 63 of 263 employees, including 12 employees who received a February-2026 fund payment (25827) - per Population Rules an empty fund must be escalated, never defaulted. 64 integral-salary employees also carry a fund name, so fund presence must not be used to select the population.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T); Law 50 of 1990 art. 99 num. 3 (as cited by the spec)."
+    },
+    {
+      "id": 26,
+      "name": "Number of days worked",
+      "field_position": "T10",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 68029 Days worked current year (Without Leaves))",
+          "example_masked": "360 / 147 / 0"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 68040 ces base)",
+          "example_masked": "6422811"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Hire Date",
+          "example_masked": "16-12-2025"
+        }
+      ],
+      "finding": "The 360-day rule is confirmed (full-year employees show 360 in December; partial years 1-359). The Field Explanation omits the exclusion of unpaid leave/suspension that the Population Rules sheet states, and does not name the payroll source; the client's counter 68029 has anomalies (0 days for a 16-12-2025 hire who was deposited; 300 vs 321 days for a 10-02-2025 hire).",
+      "proposed_explanation": "Mandatory. Admits values from 1 to 360 - a 360-DAY COMMERCIAL YEAR, not 365. A full year of service is 360, and every partial year is the actual days of service counted on the commercial convention (each month 30 days). Include the days of paid leave and of employer-paid or institution-paid incapacity, which count as service. The 3-position field cannot carry more than one year, which is the layout's way of saying that this filing is strictly one accrual year per record. SOURCE AND EXCLUSIONS: per Population Rules Step 1, count the accrual-year days of service on the 30-day convention from the later of 1 January and the current-contract hire date to the earlier of 31 December and the leaving date, EXCLUDING unpaid leave and suspensions. In the client payroll the equivalent counter is wage type 68029 'Days worked current year (Without Leaves)' in the December period (360 for a full year; the December balance 68028 equals 'ces base' 68040 x 68029 / 360 for 204 of 281 employees, the rest differing by in-year partial payments). Use 68029 only as a reconciliation check, not as the source: it shows 0 for late-December hires who were nevertheless deposited (hire 16-12-2025, deposit for 15 days) and differs from the commercial count from the hire date for some early-2025 hires (300 vs 321).",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 27,
+      "name": "Zero filler before the salary field",
+      "field_position": "T11",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Constant zero filler of the fixed-width file; no client report carries the operator file.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 28,
+      "name": "Basic salary reported in the last month",
+      "field_position": "T12",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 63807 Basic Salary Base Amount)",
+          "example_masked": "8448432"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 62100 Ordinary Salary- 0003)",
+          "example_masked": "7603589"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Basic Salary",
+          "example_masked": "24715285"
+        }
+      ],
+      "finding": "Field and rule are right (December contractual basic, not the statutory base). The client payroll has two candidate values for 'December basic salary': 63807 (contractual, constant) and 62100 (prorated amount paid). The explanation should point the developer to the contractual figure.",
+      "proposed_explanation": "SCOPE ROUTING (v1.1 alignment patch): the amount is owned by the Wage Type Catalogue, not the Data Dictionary - the pipeline scope rule routes 'Base Salary / Basic Salary amounts -> WTC, NOT DD'. The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary correctly holds no Contractual Salary field. Mandatory. Nine integers, no decimals, no commas, no points, not less than zero. The layout is explicit about WHICH salary: 'el ultimo basic salary reportado en el mes de diciembre del ano accrued de severance savings'. THIS IS THE OPERATOR'S REPORTING FIELD, NOT THE STATUTORY BASE. CST art. 253 fixes the statutory base as the last monthly salary provided it has not varied in the last three months, otherwise the average of the last year of service (or of the whole period if shorter), INCLUDING the transport allowance. The field name says 'basico' and the operator's calculator uses it alone - see the trap documented at T14. Report the December basic here and compute T14 yourself. SOURCE IN THE CLIENT PAYROLL: wage type 63807 'Basic Salary Base Amount' in the December period of the accrual year (the full contractual monthly salary). Do NOT use 62100 'Ordinary Salary' (the amount actually paid in the month, prorated for absences): e.g. December 2025, masked employee 27114435, 62100 = 7,603,589 while 63807 = 8,448,432. The Master Data 'Basic Salary' column is a snapshot of the report month and is valid for T12 only when the report is run for December.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T); CST art. 253 (as cited by the spec)."
+    },
+    {
+      "id": 29,
+      "name": "Zero filler before the severance-savings value",
+      "field_position": "T13",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Constant zero filler of the fixed-width file; no client report carries the operator file.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 30,
+      "name": "Value of the severance savings deposited",
+      "field_position": "T14",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/02/2026 (WT 25827 Payment Severance Funds Inf.)",
+          "example_masked": "74021"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/01/2026 (WT 62126 Advance Severance Last Year)",
+          "example_masked": "16000000"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/01/2026 (WT 63814 Severance Balance (Current Month))",
+          "example_masked": "-16074021"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/11/2025 (WT 62110 Cash-out of Severance Pay - Social Benefits -541S)",
+          "example_masked": "2120000"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 68040 ces base)",
+          "example_masked": "11171613"
+        }
+      ],
+      "finding": "Client deposits are whole pesos and reconcile exactly to a consolidated balance (280/282). The Field Explanation describes T14 as the annual liquidation (System Mapping 'Cesantias_Annual_Liquidation') and never mentions that lawful partial payments are deducted - that rule exists only in Population Rules step (f). The client deducts both in-year cash-outs (62110) and January direct advances (62126) before depositing. The developer needs the deposit = net amount rule, the payroll sources, and an RA answer on whether a January direct payment of an already-consolidated balance is a lawful partial payment.",
+      "proposed_explanation": "Mandatory, nine integers. TWO RULES AND ONE TRAP. Rule one, the floor: 'el value minimo del collection debe ser de un (1) dia de un (1) SMLMV del ano accrued' - for accrual year 2026 one day of the SMMLV of COP 1,750,905 is COP 58,363.50, so a record below that is rejected. Rule two, the override: the layout's own formula is basic salary * (dias worked / 360) BUT 'en este campo el contributor puede especificar un value diferente y no se haran calculos automaticos de este value'. THE TRAP: the operator's formula omits the TRANSPORT ALLOWANCE, which CST art. 253 requires in the base. For an employee on the 2026 minimum wage the operator would compute 1,750,905 while the statute requires (1,750,905 + 249,095) = 2,000,000 - a shortfall of COP 249,095 that is a SHORT DEPOSIT, penalised at one day's salary for every day of delay under Law 50 of 1990 art. 99 num. 3, uncapped. ALWAYS write the engine's own figure into this field and never rely on the portal calculator. Where the monthly advance regime of MA01 is in use, this field carries the CONSOLIDATED annual figure and only the difference computed at MA05 is actually deposited in February. WHAT IS DEPOSITED - NET OF PARTIAL PAYMENTS (client evidence, Accumulated Report): the February payroll carries 25827/65805 'Payment Severance Funds Inf.' (236 employees, 01/02/2026 only). For 280 of 282 employees with a deposit or advance, 25827 (Feb) + 62126 'Advance Severance Last Year' (Jan) = the absolute value of 63814 'Severance Balance (Current Month)' in January, i.e. the consolidated 31 December balance. That balance is the annual liquidation ('ces base' 68040 x days / 360) LESS partial payments made directly to the employee during the year (62110 'Cash-out of Severance Pay', e.g. 2,120,000 in Nov-2025), as Population Rules step (f) requires. In addition 54 employees were paid part of the consolidated balance directly in January via 62126 and only the remainder was deposited (e.g. balance 16,074,021: 16,000,000 via 62126, 74,021 via 25827). T14 therefore carries the amount actually deposited = consolidated 31 December balance minus partial payments already made directly; keep the gross liquidation as a separate engine value. Where the remainder falls below the one-day SMMLV floor the record would be rejected - RA to confirm the treatment. The client base 68040 exceeds the December basic salary for most employees (variable pay averaged under CST art. 253), which confirms that T14 must not be left to the operator's basic-salary formula.",
+      "official_source": "Law 50 of 1990 art. 99 num. 3; CST arts. 249, 253 and 254 (as cited by the spec in the field and in Population Rules)."
+    },
+    {
+      "id": 32,
+      "name": "Employee residential address",
+      "field_position": "T15",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Address Line 1",
+          "example_masked": "ADDRESS_0001"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Address Line 2",
+          "example_masked": "ADDRESS_0004"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Country",
+          "example_masked": "CA"
+        }
+      ],
+      "finding": "Residential address is available but split in two lines; the explanation does not say to combine them and is silent on residents abroad (6 employees with non-CO country). Length cannot be checked because addresses are masked.",
+      "proposed_explanation": "The employee's residential address, 50 positions, left-aligned and space-filled. This is the AFFILIATE'S address for the fund's own statutory communications with its member, which is why the layout asks for the residence and not the work address - contrast electronic payroll and PILA, which carry the WORK municipality. Do not send the work address; the fund will post the member's statements to it. Composite Key: the affiliate's domicile is carried across THREE fields that must describe one place - T15 the free-text street address, T16 the two-digit DANE department and T17 the three-digit DANE municipality. Within T15 itself, Colombian addresses decompose as via type (CALLE / CARRERA / DIAGONAL / TRANSVERSAL), via number, the NO separator, the cross-via number, the hyphen, the door number and any complement (APTO / TORRE / INT). Abbreviate by a documented rule where the whole exceeds 50 positions - never cut mid-token, because the fund cannot repair a truncated address. CLIENT DATA: the Master Data Report holds the residential address in 'Address Line 1' (filled for 261/263) and 'Address Line 2' (filled for about 60%); concatenate Line 1 + space + Line 2 before applying the 50-position rule. The 'Country' column is not CO for 6 employees (CA, CR, DO, CH, MX) and is lower-case 'co' for 2: define what is sent in T15-T17 for an affiliate whose residence is abroad (RA to confirm). Do not use 'Work location' or 'Personal Subarea', which are work places.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 33,
+      "name": "Department code (DANE)",
+      "field_position": "T16",
+      "verdict": "Format mismatch",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Employee Address - Department",
+          "example_masked": "DC / ANT / CUN / ON"
+        }
+      ],
+      "finding": "Spec requires N(2) DANE department code; the client holds alphabetic 3-letter abbreviations (max length 3) including foreign provinces.",
+      "proposed_explanation": "Two positions, per the DANE list. The DANE divipola code is hierarchical: the two-digit department prefix plus the three-digit municipality suffix form the five-digit municipality code (11 + 001 = 11001, Bogota D.C.). Composite Key: T16 and T17 must be written as the two halves of ONE divipola code, never picked from two different lists. CLIENT DATA: the Master Data column 'Employee Address - Department' holds a 3-letter alphabetic abbreviation (DC, ANT, CUN, VAC, ATL, CAL, QUI, RIS, NAR, NSA, MAG, TOL, BOL, SAN, BOY - 18 distinct values, including non-Colombian ON, VD, JAL), not the 2-digit DANE code. Either capture the DANE code in master data or maintain an abbreviation -> DANE department table; foreign provinces have no DANE code.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 34,
+      "name": "Municipality code (DANE)",
+      "field_position": "T17",
+      "verdict": "Format mismatch",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "City",
+          "example_masked": "Bogotá / BOGOTA / Suba Compartir"
+        }
+      ],
+      "finding": "Spec requires N(3) DANE municipality suffix; the client holds only free-text city names (60 distinct values, many duplicates by spelling).",
+      "proposed_explanation": "Three positions, per the DANE list, and it is the SUFFIX only - not the five-digit code. Writing the full 11001 into a three-position field truncates to 110 and silently relocates the affiliate. Composite Key: see T16. CLIENT DATA: no municipality code exists. The Master Data 'City' column is free text with several spellings for the same municipality (Bogota / Bogotá / BOGOTA / bogota / Bogota D.C. / Santafé de Bogotá D.C.; Medellin / medellín / MEDELLIN), some values are neighbourhoods or a department rather than a municipality (Suba Compartir, Portales del Norte, Cundinamarca) and some are foreign cities (Burlington, Lausanne). Capture the DANE divipola municipality code as a coded master-data field; free-text matching is not reliable.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 35,
+      "name": "Employee landline telephone",
+      "field_position": "T18",
+      "verdict": "Format mismatch",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Phone number",
+          "example_masked": "960833702456"
+        }
+      ],
+      "finding": "Spec field is N(7) landline; client numbers are 12-14 digits (digit-substituted mask preserves length) in a single untyped column. The existing zero-fill rule applies, but the developer needs to know the source column carries no type and almost no 7-digit values.",
+      "proposed_explanation": "'Solo admite 7 numeros' - exactly seven digits, so the field cannot carry a mobile number (10 digits in Colombia) nor a number written with the area code. Where only a mobile is held, the field must be zero- or space-filled rather than truncated; a truncated mobile is a wrong-number record on the fund's affiliate file. CLIENT DATA: the Master Data 'Phone number' column holds one undifferentiated number per employee with no landline/mobile type: 12 digits for 237 of 263 employees (also 10, 11 and 14 digits; only 1 value has 7 digits), consistent with a country-code-prefixed mobile. Unless a separate landline is captured, this field will be zero-filled for almost the whole population; never derive it by truncating the stored number. RA to confirm how a landline held in the current national numbering format is reduced to the 7 positions.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 36,
+      "name": "Employee e-mail address",
+      "field_position": "T19",
+      "verdict": "Aligned",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Primary Email Address",
+          "example_masked": "user0001@masked.example"
+        }
+      ],
+      "finding": "Master Data 'Primary Email Address' filled for 261/263, max length 23 masked (within 50). Whether it is a corporate or personal mailbox cannot be checked after masking; the spec does not require either.",
+      "proposed_explanation": "",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 37,
+      "name": "Employee hire date",
+      "field_position": "T20",
+      "verdict": "Format mismatch",
+      "report_evidence": [
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Hire Date",
+          "example_masked": "16-03-2004"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Original Hire Date",
+          "example_masked": "02-07-2019"
+        },
+        {
+          "file": "1764_Master_Data_Report_202609.xlsx",
+          "sheet": "Master Data Report",
+          "column": "Adjusted Service Date",
+          "example_masked": "2004-03-16"
+        }
+      ],
+      "finding": "Spec requires AAAA-MM-DD; the client's hire date column is DD-MM-YYYY (only 'Adjusted Service Date' is ISO, and it is a different, seniority date for 19 employees). Conversion and the choice among three dates must be explicit.",
+      "proposed_explanation": "Format AAAA-MM-DD, ten positions INCLUDING the two hyphens - note that the published layout types this field N while its content is not purely numeric, so a strict numeric writer would emit 20190301 and shift nothing (the field is last) but would still fail the format validation. Composite Key: positions 249-252 year, 253 hyphen, 254-255 month, 256 hyphen, 257-258 day. THIS IS THE HIRE DATE OF THE CONTRACT, NOT THE START OF THE ACCRUAL PERIOD: for an employee hired in 2019 and reported for accrual year 2026 the value is still 2019-03-01, while T10 carries 360 days. Sending the 1 January of the accrual year here is a common defect and it corrupts the fund's seniority record. CLIENT DATA: the Master Data Report holds three dates - 'Hire Date' and 'Original Hire Date' in DD-MM-YYYY and 'Adjusted Service Date' in YYYY-MM-DD. 'Hire Date' differs from 'Adjusted Service Date' for 19 of 261 employees and from 'Original Hire Date' for 38 (e.g. Hire Date 02-04-2025, Original Hire Date 02-07-2019, Adjusted Service Date 2019-07-02; or Hire Date 01-05-2005 with Adjusted Service Date 1991-12-02). Per Population Rules ('for a rehired employee, use the hire date of the CURRENT contract'), source T20 from 'Hire Date' and convert DD-MM-YYYY to AAAA-MM-DD; do not use 'Adjusted Service Date' (a recognised-seniority date). RA to confirm which date the fund expects for intra-group transfers.",
+      "official_source": "Simple S.A. 'Manual Cesantias' s. 3.2 published layout (as cited in spec column T)"
+    },
+    {
+      "id": 39,
+      "name": "Written agreement for the monthly advance deposit",
+      "field_position": "MA01",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "WT 25827 Payment Severance Funds Inf. (all months)",
+          "example_masked": "non-zero only in 01/02/2026"
+        }
+      ],
+      "finding": "Monthly advance regime (draft norm, not in force). No client evidence of monthly deposits: the fund payment 25827 appears only in February. Consistent with the spec's instruction to keep the feature switched off.",
+      "proposed_explanation": "",
+      "official_source": "MinTrabajo draft decree amending Decree 1072 of 2015 / Law 2466 of 2025 art. 64 (as cited in spec)"
+    },
+    {
+      "id": 40,
+      "name": "Monthly advance base",
+      "field_position": "MA02",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "WT 25827 Payment Severance Funds Inf. (all months)",
+          "example_masked": "non-zero only in 01/02/2026"
+        }
+      ],
+      "finding": "Monthly advance regime (draft norm, not in force). No client evidence of monthly deposits: the fund payment 25827 appears only in February. Consistent with the spec's instruction to keep the feature switched off.",
+      "proposed_explanation": "",
+      "official_source": "MinTrabajo draft decree amending Decree 1072 of 2015 / Law 2466 of 2025 art. 64 (as cited in spec)"
+    },
+    {
+      "id": 41,
+      "name": "Monthly advance amount at 8.33%",
+      "field_position": "MA03",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "WT 25827 Payment Severance Funds Inf. (all months)",
+          "example_masked": "non-zero only in 01/02/2026"
+        }
+      ],
+      "finding": "Monthly advance regime (draft norm, not in force). No client evidence of monthly deposits: the fund payment 25827 appears only in February. Consistent with the spec's instruction to keep the feature switched off.",
+      "proposed_explanation": "",
+      "official_source": "MinTrabajo draft decree amending Decree 1072 of 2015 / Law 2466 of 2025 art. 64 (as cited in spec)"
+    },
+    {
+      "id": 42,
+      "name": "PILA contribution type for the cesantias advance",
+      "field_position": "MA04",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "WT 25827 Payment Severance Funds Inf. (all months)",
+          "example_masked": "non-zero only in 01/02/2026"
+        }
+      ],
+      "finding": "Monthly advance regime (draft norm, not in force). No client evidence of monthly deposits: the fund payment 25827 appears only in February. Consistent with the spec's instruction to keep the feature switched off.",
+      "proposed_explanation": "",
+      "official_source": "MinTrabajo draft decree amending Decree 1072 of 2015 / Law 2466 of 2025 art. 64 (as cited in spec)"
+    },
+    {
+      "id": 43,
+      "name": "Year-end consolidation adjustment",
+      "field_position": "MA05",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "WT 25827 Payment Severance Funds Inf. (all months)",
+          "example_masked": "non-zero only in 01/02/2026"
+        }
+      ],
+      "finding": "Monthly advance regime (draft norm, not in force). No client evidence of monthly deposits: the fund payment 25827 appears only in February. Consistent with the spec's instruction to keep the feature switched off.",
+      "proposed_explanation": "",
+      "official_source": "MinTrabajo draft decree amending Decree 1072 of 2015 / Law 2466 of 2025 art. 64 (as cited in spec)"
+    },
+    {
+      "id": 45,
+      "name": "31 December severance-savings balance",
+      "field_position": "IN01",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/01/2026 (WT 63814 Severance Balance (Current Month))",
+          "example_masked": "-6422811"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 68028 Balance Cesantias)",
+          "example_masked": "6422811"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 64999 Total Balance Cesantias)",
+          "example_masked": "12845622"
+        }
+      ],
+      "finding": "The balance exists in the client payroll but under several similar wage types; only -63814 in January reconciles to what is deposited and to the interest paid. The explanation should name the source and warn against 64999.",
+      "proposed_explanation": "The balance in the employee's favour at 31 December, or at the date of definitive withdrawal or partial settlement. It is the base of the Law 52 of 1975 art. 1 interest. Deliberately shown on this Spec as a NOT-APPLICABLE row: it is not a field of the severance savings return, but it is computed from the same liquidation and the two are routinely confused. SOURCE IN THE CLIENT PAYROLL: the consolidated 31 December balance appears as the absolute value of wage type 63814 'Severance Balance (Current Month)' in the January period of the following year (negative sign = liability); it equals the February deposit 25827 plus any January direct advance 62126 for 280 of 282 employees and is already net of in-year partial payments (62110). The December value of 68028 'Balance Cesantias' matches it in most but not all cases, and 64999 'Total Balance Cesantias' is NOT this balance (it is about twice 68028 in many cells).",
+      "official_source": "Law 52 of 1975 art. 1 (as cited by the spec)."
+    },
+    {
+      "id": 46,
+      "name": "Annual interest on severance savings at 12%",
+      "field_position": "IN02",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/01/2026 (WT 62127 Advance Interest Severance Pay)",
+          "example_masked": "770737"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/12/2025 (WT 63815 Interests Balance (Current Month))",
+          "example_masked": "770737 / 1340594"
+        }
+      ],
+      "finding": "Client practice matches the spec (12%, paid to the employee in January, not to the fund). The explanation does not name the payroll element; the client has two candidates (62127 paid, 63815 accrued) that differ for about 100 employees. 4 payments occur in Feb/Mar 2026.",
+      "proposed_explanation": "12% per annum on the IN01 balance, pro-rated on days over 360. PAID TO THE EMPLOYEE DIRECTLY, IN THE MONTH OF JANUARY of the following year - not to the fund, and not in February. The two obligations have different payees, different deadlines and different penalties: failure to deposit the principal costs one day's salary per day of delay, whereas failure to pay the interest costs an indemnity equal to the interest owed, ONCE ONLY (Law 52 of 1975 art. 1). The draft decree would add a further precision at art. 4: the interest is 'entregado directamente al employee dentro del mes siguiente a la fecha de liquidacion del auxilio de cesantia'. No interest on interest may be liquidated. SOURCE IN THE CLIENT PAYROLL: paid in the January payroll as wage type 62127 'Advance Interest Severance Pay' (284 employees in 01/01/2026); for 281 of 284 it equals 12% x IN01 x days / 360 (e.g. 12% x 6,422,811 = 770,737). Do not use 63815 'Interests Balance (Current Month)' at December as the payable amount: it is computed on the liquidation before partial payments and differs from the amount paid for about 100 employees. A few payments fall in February/March (late-December hires and leavers), which this rule would flag as late.",
+      "official_source": "Law 52 of 1975 art. 1; Decree 1072 of 2015 arts. 2.2.1.3.4 and 2.2.1.3.5 (as cited by the spec)."
+    },
+    {
+      "id": 47,
+      "name": "Monthly interest option at 1%",
+      "field_position": "IN03",
+      "verdict": "Not evidenced",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "WT 62127 Advance Interest Severance Pay (all months)",
+          "example_masked": "non-zero only in 01/01, 01/02, 01/03/2026"
+        }
+      ],
+      "finding": "No monthly 1% interest is evidenced; interest is paid once a year in January.",
+      "proposed_explanation": "",
+      "official_source": "Law 2466 of 2025 art. 64 para. 2 (as cited by the spec)."
+    },
+    {
+      "id": 49,
+      "name": "Return payment date",
+      "field_position": "E90",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Inbound payment date; the Accumulated Report only shows the payroll period (01/02/2026) of the fund payment, not the date paid.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 50,
+      "name": "Deposit compliance status per employee",
+      "field_position": "E91",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Inbound/derived compliance status; not in any client report.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    },
+    {
+      "id": 51,
+      "name": "Direct-payment discharge evidence",
+      "field_position": "E92",
+      "verdict": "Explanation to improve",
+      "report_evidence": [
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/01/2026 (WT 62126 Advance Severance Last Year)",
+          "example_masked": "8466400"
+        },
+        {
+          "file": "Accumulated Report.xlsx",
+          "sheet": "Accumulated Report",
+          "column": "01/02/2026 (WT 25827 Payment Severance Funds Inf.)",
+          "example_masked": "585213"
+        }
+      ],
+      "finding": "The flag is all-or-nothing; the client shows partial direct payments followed by a reduced deposit (e.g. 9,051,613 balance: 8,466,400 paid directly in January, 585,213 deposited). The explanation does not say how partial direct payments are handled.",
+      "proposed_explanation": "CST art. 57 para. 4, added by Law 2466 of 2025 art. 15, verbatim: 'Cuando el employer acredite de manera fehaciente el payment directo al employee del value correspondiente a las severance savings, dicho payment se considerara liberatorio de la obligacion, y no procedera sancion por no consignacion, salvo que se demuestre que el payment no se realizo en condiciones de libertad y que no fue utilizado en fines autorizados por la Law. No obstante, la afiliacion a Severance-savings fund es mandatory.' Three limits the engine must respect: the discharge needs FEHACIENTE evidence, it is rebuttable on the freedom-and-purpose test, and it does NOT remove the duty to affiliate the employee to a fund. A DRAFTING NOTE on the citation: art. 15's enacting formula announces only 'los paragrafos 2 y 3' of CST art. 57, yet the published text prints a Paragrafo 4 and this is it - so cite CST art. 57 para. 4 as added by Law 2466 of 2025 art. 15, and expect the discrepancy to be raised. CLIENT PRACTICE - PARTIAL DIRECT PAYMENT: the client pays PART of the consolidated balance directly to the employee (62110 cash-out during the year; 62126 'Advance Severance Last Year' in January for 54 employees) and deposits only the remainder (25827). This flag covers a FULL discharge only; a partial direct payment does not set E92 = Y - it reduces T14 and the record is still produced. RA to confirm whether a January direct payment of an already consolidated balance is a lawful partial payment or a CST art. 57 para. 4 direct payment.",
+      "official_source": "CST art. 57 para. 4 as added by Law 2466 of 2025 art. 15 (as cited by the spec)."
+    },
+    {
+      "id": 52,
+      "name": "Fund deposit certificate",
+      "field_position": "E93",
+      "verdict": "Not evidenced",
+      "report_evidence": [],
+      "finding": "Inbound fund certificate; not in any client report.",
+      "proposed_explanation": "",
+      "official_source": "ACH Colombia (SOI) instruction guide DDS-DES-INS-008 v2 (as cited in spec column T)"
+    }
+  ],
+  "uncovered_report_columns": [
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "ID Number",
+      "classification": "Client-specific",
+      "note": "Internal employee number; join key to Master Data 'Employee ID' (261 of 263 match). Not a filing field."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "Employee Name",
+      "classification": "Client-specific",
+      "note": "Full name in one string; the filing uses the split names from Master Data."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "Beneficiary National Id",
+      "classification": "Client-specific",
+      "note": "Third-party beneficiary of a payment (garnishments etc.); not cesantias data."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "Beneficiary Name",
+      "classification": "Client-specific",
+      "note": "Third-party beneficiary name; not cesantias data."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "Salary Payment Indicator",
+      "classification": "Client-specific",
+      "note": "Internal flag (X), 3% filled."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "Total",
+      "classification": "Client-specific",
+      "note": "Rolling 12-month total Oct-2025..Sep-2026; does not correspond to an accrual year, so it cannot feed any field."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 62110 / 62117 Cash-out of Severance Pay / of Interest Severance Pay",
+      "classification": "Missing in spec",
+      "note": "Partial or final cesantias and interest paid directly to the employee (110 employees, incl. all Q4-2025 leavers). Needed to derive T14 (deducted from the deposit) and to evidence the leaver exclusion; the spec mentions the deduction only in Population Rules step (f) and has no field/element for the amount."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 62126 Advance Severance Last Year",
+      "classification": "Missing in spec",
+      "note": "Part of the consolidated prior-year balance paid directly to the employee in January (54 employees) before the February deposit; reduces T14. No spec field or rule covers a direct payment of an already consolidated balance (E92 is all-or-nothing)."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 22110 / 22112 / 42110 / 42112 / 64402 Provision Severance / Interest - accrual",
+      "classification": "Client-specific",
+      "note": "Monthly accounting provisions; not filed."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 42917 / 42918 / 42921 / 42923 / 63809 / 63810 previous-month severance and interest balances",
+      "classification": "Client-specific",
+      "note": "Intermediate ledger balances used by the payroll calculation."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 64998 Cesantias Base",
+      "classification": "Client-specific",
+      "note": "Not the liquidation base: present for all 103 integral-salary employees and several times the monthly salary (e.g. 22,451,132 vs salary 5,360,000). The base that reconciles to the deposit is 68040 'ces base'."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 64999 Total Balance Cesantias",
+      "classification": "Client-specific",
+      "note": "Does not reconcile to the deposit; about twice 68028 in 1,983 of 3,569 non-zero cells. Meaning to be confirmed with the client."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 64200 Severance Int accrued amt / 63815 Interests Balance (Current Month)",
+      "classification": "Client-specific",
+      "note": "Accrued interest ledger; the payable interest is 62127 (see IN02)."
+    },
+    {
+      "file": "Accumulated Report.xlsx",
+      "sheet": "Accumulated Report",
+      "column": "WT 42964 / 63806 / 63808 / 68042 / 68032 salary averages and comparisons",
+      "classification": "Client-specific",
+      "note": "Intermediate values for the CST art. 253 base calculation; the result is 68040."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Employee ID",
+      "classification": "Client-specific",
+      "note": "Internal employee number / join key."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Formatted Full Name",
+      "classification": "Client-specific",
+      "note": "Display name; filing uses split names."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Original Hire Date",
+      "classification": "Client-specific",
+      "note": "Alternative date; T20 must use 'Hire Date' (current contract) - see T20."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Business/Job Title",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Employment Contract Type",
+      "classification": "Client-specific",
+      "note": "Single value 'WM'; does not distinguish integral vs ordinary salary, which drives the population (integral salary is visible only through WT 62140)."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Department/Division",
+      "classification": "Client-specific",
+      "note": "Organisational unit, not the address department."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Primary Cost Center",
+      "classification": "Client-specific",
+      "note": "Accounting."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Enterprise ID",
+      "classification": "Client-specific",
+      "note": "Internal ID (masked ENTID)."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Grade",
+      "classification": "Client-specific",
+      "note": "HR."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Manager ID",
+      "classification": "Client-specific",
+      "note": "HR."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Employee Professional Risk Class (ARL)",
+      "classification": "Client-specific",
+      "note": "Statutory for CO-PILA-003, not for this filing."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "FVOL Account Number",
+      "classification": "Client-specific",
+      "note": "Statutory for the withholding specs, not for this filing."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Employment Status",
+      "classification": "Client-specific",
+      "note": "A/D flag; useful as a population pre-filter but the filing has no field for it."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Pay Group Code",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Personal Area",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Personal Subarea",
+      "classification": "Client-specific",
+      "note": "Work place; must not feed T15-T17."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Employee Group Code",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Employee Subgroup Code",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Adjusted Service Date",
+      "classification": "Client-specific",
+      "note": "Recognised-seniority date; differs from Hire Date for 19 employees; not the T20 value."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Regime",
+      "classification": "Client-specific",
+      "note": "Value 'AReg' on 8 employees, all hired Nov-2025 to May-2026; not the pre-1991 retroactive cesantias regime. Meaning to be confirmed with the client."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Pensioner Effective Date",
+      "classification": "Client-specific",
+      "note": "Relevant to PILA/withholding specs."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "AFC Account Number",
+      "classification": "Client-specific",
+      "note": "Relevant to withholding specs."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Pension Fund (AFP) Name",
+      "classification": "Client-specific",
+      "note": "Relevant to PILA; not the severance fund."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "EPS Provider Name",
+      "classification": "Client-specific",
+      "note": "Relevant to PILA."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Sub Function",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Business/Job Title ES",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Work location",
+      "classification": "Client-specific",
+      "note": "Work place; must not feed T15-T17."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Nationality",
+      "classification": "Client-specific",
+      "note": "Not a filing field (residence/nationality do not change the record)."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Gender",
+      "classification": "Client-specific",
+      "note": "Not a filing field."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Birth Date",
+      "classification": "Client-specific",
+      "note": "Not a filing field (masked 1900-01-01)."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Postal Code",
+      "classification": "Client-specific",
+      "note": "The layout has no postal code."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Pay Method",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Bank Account Type",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Bank Name",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Exact Beneficiary Name (Primary Bank Account)",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Bank SWIFT (Primary Bank Account)",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Bank Account Currency (Primary Bank Account)",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Bank Account Number (Primary Bank Account)",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Bank Name (Primary Bank Account)",
+      "classification": "Client-specific",
+      "note": "Salary payment data."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Tax Procedure 1",
+      "classification": "Client-specific",
+      "note": "Withholding specs."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Work Schedule",
+      "classification": "Client-specific",
+      "note": "Operational."
+    },
+    {
+      "file": "1764_Master_Data_Report_202609.xlsx",
+      "sheet": "Master Data Report",
+      "column": "Marital Status",
+      "classification": "Client-specific",
+      "note": "Not a filing field."
+    },
+    {
+      "file": "Severance Massive Calculation Structure September 2026.xlsx",
+      "sheet": "Severance Massive Calculation S",
+      "column": "all columns (BASE / DIAS / VALOR INDEMNIZACION ...)",
+      "classification": "Client-specific",
+      "note": "Dismissal-indemnity simulation for the whole headcount, not cesantias; classified client-only and not used as evidence for this spec."
+    }
+  ],
+  "summary": {
+    "Aligned": 8,
+    "Explanation to improve": 8,
+    "Format mismatch": 5,
+    "Conflict": 1,
+    "Not evidenced": 21
+  }
+}

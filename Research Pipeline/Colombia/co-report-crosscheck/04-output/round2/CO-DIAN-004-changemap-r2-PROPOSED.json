@@ -1,0 +1,229 @@
+{
+ "spec": "CO-DIAN-004",
+ "round": 2,
+ "spec_file": "02-specs-out/CO-DIAN-004-Formulario220-Spec-v1_1-DRAFT-2026-10-15.xlsx",
+ "spec_sheet": "Formulario 220 Spec",
+ "header_row": 2,
+ "edits": [
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M5",
+   "row": 5,
+   "column_letter": "M",
+   "field_id": "casilla 5",
+   "field_name": "Employer NIT",
+   "current": "NIT of the withholding agent as it appears in casilla 5 of the RUT, WITHOUT the verification digit. The instruction guide is emphatic: 'En ningun caso escriba puntos, guiones o letras'.",
+   "proposed": "NIT of the withholding agent as it appears in casilla 5 of the RUT, WITHOUT the verification digit. The instruction guide is emphatic: 'En ningun caso escriba puntos, guiones o letras'. ONE WITHHOLDING AGENT PER CERTIFICATE RUN: the client keeps the employer block as a single parameter set (NIT as digits only, verification digit in a separate cell, razon social) and runs more than one payroll organisation - '1764 - Compañía Colombiana de Tabaco SAS' and '1724 - PHILIP MORRIS COLOMBIA SA' (the organisation in which the retirement-payment payees certified for tax year 2025 are booked). Company.NIT, Company.NIT_DV and Company.Legal_Name must be taken from the legal entity that made the payments and practised the withholding for each payee, and certificates must be generated per withholding agent.",
+   "reason": "The certified population sits in payroll organisation 1724, the employees in 1764; the draft does not say how the withholding agent is chosen.",
+   "basis": "Formulario 220.xlsx DATOS E8:E10; Validado ConsolidadoCCT Acumulados B1; G2N title block (1764)",
+   "vc_sentence": "Casilla 5 Employer NIT: Field Explanation now states that certificates are generated per withholding agent and that the employer block is taken from the legal entity that paid and withheld, since the client runs the organisations 1764 and 1724."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M14",
+   "row": 14,
+   "column_letter": "M",
+   "field_id": "casilla 25",
+   "field_name": "Employee identification number",
+   "current": "Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number column of the employee master that matches casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'). In the client's Accumulated Report the column 'EE Citizenship Card ID' carries the document number for 248 of 261 employees and is blank for most holders of a foreigner's card (13 blanks, all foreigner-card holders); it is not a complete source. Do NOT use the column 'ID Number' of the Accumulated Report or of the Base of Withholding: it is the internal employee number (equal to Master Data 'Employee ID' for 261 of 261 employees), not an identity document; both reports also end with footer rows ('GRAND TOTAL'; 'Confidential' in Master Data) that must be excluded. COVERAGE GAP: the Accumulated Report has 1,038 payees, of whom 777 (491 pension payees of 62154 and 286 others, 132 of them paid 62100 Ordinary Salary in September 2026) have no row in the employee master data report, so a document-number source is missing for them. For pension rows the client also records a separate payee ('Beneficiary National Id'), whose meaning (substitute pensioner or third-party payee) is not confirmed; see casilla 50.",
+   "proposed": "Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number column of the employee master that matches casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'). In the client's Accumulated Report the column 'EE Citizenship Card ID' carries the document number for 248 of 261 employees and is blank for most holders of a foreigner's card (13 blanks, all foreigner-card holders); it is not a complete source. Do NOT use the column 'ID Number' of the Accumulated Report or of the Base of Withholding: it is the internal employee number (equal to Master Data 'Employee ID' for 261 of 261 employees), not an identity document; both reports also end with footer rows ('GRAND TOTAL'; 'Confidential' in Master Data) that must be excluded. COVERAGE GAP: the Accumulated Report has 1,038 payees, of whom 777 (491 pension payees of 62154 and 286 others, 132 of them paid 62100 Ordinary Salary in September 2026) have no row in the employee master data report, so a document-number source is missing for them. For pension rows the client also records a separate payee ('Beneficiary National Id'), whose meaning (substitute pensioner or third-party payee) is not confirmed; see casilla 50. CLIENT EVIDENCE (tax-year-2025 Form 220 working table): for the 34 retirement-payment payees certified (wage types 62151 / 62152, none in the employee master), casilla 25 equals the Accumulated Report column 'EE Citizenship Card ID' in 34 of 34 cases and never the 'Beneficiary National Id'; casillas 26-29 carry split names, which the Accumulated Report does not hold, so the client keeps an identity source for non-employee payees that has not been received and must be named (see Query to RA).",
+   "reason": "New evidence that the client certifies non-employee payees using the Accumulated 'EE Citizenship Card ID' (34/34) and holds split names from a source not received.",
+   "basis": "Formulario 220.xlsx NOM_U_203 C-G vs Acumulados C (34/34)",
+   "vc_sentence": "Casilla 25 Employee identification number: Field Explanation now records that the client certifies retirement-payment payees with the Accumulated Report 'EE Citizenship Card ID' (34 of 34) and holds their split names in a source not yet received."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M23",
+   "row": 23,
+   "column_letter": "M",
+   "field_id": "casilla 33",
+   "field_name": "Place where the withholding was made",
+   "current": "City or municipality where the withholding was practised - not necessarily the employer's registered domicile, and not necessarily the employee's place of work.",
+   "proposed": "City or municipality where the withholding was practised - not necessarily the employer's registered domicile, and not necessarily the employee's place of work. It is a withholding-agent parameter, not an employee attribute: the client prints one value, 'MEDELLIN' (upper case, no accents), on every row of its tax-year-2025 Form 220 table, together with the DIVIPOLA code 05001 in casillas 34-35. Output the municipality NAME that corresponds to the DANE code of casillas 34 and 35, so that the three casillas always describe the same place.",
+   "reason": "Round 1 had no evidence; the client file shows one constant agent-level place (MEDELLIN) paired with 05001.",
+   "basis": "Formulario 220.xlsx NOM_U_203 K (651/651 'MEDELLIN')",
+   "vc_sentence": "Casilla 33 Place where the withholding was made: Field Explanation now defines it as a withholding-agent parameter whose name must match the DANE code of casillas 34-35 (client: MEDELLIN / 05001)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M24",
+   "row": 24,
+   "column_letter": "M",
+   "field_id": "casilla 34",
+   "field_name": "Department code",
+   "current": "DANE department code of the place in casilla 33. The instruction guide directs the use of the DANE 'Department codes' tables.",
+   "proposed": "DANE department code of the place in casilla 33: the FIRST TWO digits of the five-digit DIVIPOLA municipality code. The instruction guide directs the use of the DANE 'Department codes' tables. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 table holds the full five-digit code '05001' (Medellin, Antioquia) both in the casilla-34 column and in the casilla-35 column. Hold the five-digit DIVIPOLA code of the place of withholding once and split it - casilla 34 = '05', casilla 35 = '001' - never output five digits in either casilla.",
+   "reason": "Client stores the five-digit DIVIPOLA code in the two-digit casilla; the split rule must be explicit.",
+   "basis": "Formulario 220.xlsx NOM_U_203 L and M ('05001' on 651/651)",
+   "vc_sentence": "Casilla 34 Department code: Field Explanation now derives the code as the first two digits of the five-digit DIVIPOLA code and records that the client holds '05001' in both casillas 34 and 35."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M25",
+   "row": 25,
+   "column_letter": "M",
+   "field_id": "casilla 35",
+   "field_name": "City or municipality code",
+   "current": "DANE municipality code of the place in casilla 33. Like PILA and unlike the electronic payroll, Form 220 splits the DIVIPOLA code across two casillas.",
+   "proposed": "DANE municipality code of the place in casilla 33: the LAST THREE digits of the five-digit DIVIPOLA code (e.g. '001' for 05001 Medellin). Like PILA and unlike the electronic payroll, Form 220 splits the DIVIPOLA code across two casillas. CLIENT EVIDENCE: the client's table carries the full code '05001' in this position as well as in casilla 34; see casilla 34 for the split rule.",
+   "reason": "Client carries '05001' in the casilla-35 position; the three-digit rule must be explicit.",
+   "basis": "Formulario 220.xlsx NOM_U_203 M 'Textbox113'",
+   "vc_sentence": "Casilla 35 City or municipality code: Field Explanation now derives the code as the last three digits of the five-digit DIVIPOLA code (e.g. 001 for 05001)."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M37",
+   "row": 37,
+   "column_letter": "M",
+   "field_id": "casilla 46",
+   "field_name": "Other payments",
+   "current": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. CLIENT EVIDENCE - earning wage types with no evident dedicated casilla, each needing an RA placement decision (casilla 36, 42, 46 or not certified): 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout. The engine must hold an explicit wage-type-to-casilla table; no earning wage type may be left unassigned.",
+   "proposed": "Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. CLIENT EVIDENCE - earning wage types with no evident dedicated casilla, each needing an RA placement decision (casilla 36, 42, 46 or not certified): 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 65803 Plan Institucional PROTECCION - Payment- 6785, 65804 Plan Institucional PROTECCION - IC Bonus, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout. The engine must hold an explicit wage-type-to-casilla table; no earning wage type may be left unassigned. CLIENT PRACTICE (tax-year-2025 Form 220 working table): the client certifies the whole income of its 34 retirement-payment payees (62151 Retirement Payment - PRV-6795 and 62152 Retirement Payment - Catleya-6796) in casilla 46, with casilla 50 = 0. This conflicts with the casilla-50 treatment if the RA classifies these wage types as pension income - see the Query to RA of casilla 50. Do not adopt either placement until the RA answers.",
+   "reason": "Client certifies 62151 / 62152 in casilla 46; recorded as a conflict with the casilla-50 candidate treatment, no rule written.",
+   "basis": "Formulario 220.xlsx NOM_U_203 Y (34/34 non-zero), AC = 0; Acumulados WTs",
+   "vc_sentence": "Casilla 46 Other payments: Field Explanation now records that the client certifies the retirement payments 62151 / 62152 in casilla 46 and that the placement waits for the RA answer on casilla 50."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M41",
+   "row": 41,
+   "column_letter": "M",
+   "field_id": "casilla 50",
+   "field_name": "Retirement, old-age or invalidity pensions",
+   "current": "Pension income paid BY THE EMPLOYER. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. THIS CLIENT IS A PENSION PAYER: its accumulations carry 62154 Monthly Retired  Pension-6798 (491 pension payees, about COP 600-660 million a month), 62153 Additional Retirement Pension (paid in December and June), 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the RA must confirm which of these are pension income for this casilla. Pension payees are NOT in the client's employee master data report, so their identification (casillas 24-29) needs a pensioner master source. On 330 of the 491 pension rows of 62154 the client records a 'Beneficiary National Id' different from the pensioner's own document (and on 328 rows a 'Beneficiary Name' different from the employee name), i.e. a different payee (substitute pensioner or third-party payee - to be confirmed); the same columns are also filled for employees, where they match the bank-payment beneficiary, so their meaning on pension rows is not confirmed. The RA and the client must confirm to whom the certificate is issued. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54.",
+   "proposed": "Pension income paid BY THE EMPLOYER. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. THIS CLIENT IS A PENSION PAYER: its accumulations carry 62154 Monthly Retired  Pension-6798 (491 pension payees, about COP 600-660 million a month), 62153 Additional Retirement Pension (paid in December and June), 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the RA must confirm which of these are pension income for this casilla. Pension payees are NOT in the client's employee master data report, so their identification (casillas 24-29) needs a pensioner master source. On 330 of the 491 pension rows of 62154 the client records a 'Beneficiary National Id' different from the pensioner's own document (and on 328 rows a 'Beneficiary Name' different from the employee name), i.e. a different payee (substitute pensioner or third-party payee - to be confirmed); the same columns are also filled for employees, where they match the bank-payment beneficiary, so their meaning on pension rows is not confirmed. The RA and the client must confirm to whom the certificate is issued. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54. CLIENT PRACTICE (tax-year-2025 Form 220 working table): the 34 payees certified are all recipients of 62151 (26) or 62152 (8), none of 62154 and none in the September 2026 employee population; the client reports casilla 50 = 0 and the whole amount in casilla 46 'Otros pagos'. Withholding (casilla 60) is non-zero for 23 of them, 22 of whom carry 21140 Personal Income Tax Withholding-Retirees in the accumulations. The client's casilla for the 62154 monthly pensioners is not evidenced.",
+   "reason": "Client practice contradicts the candidate casilla-50 treatment of 62151 / 62152; the monthly pensioners are not evidenced.",
+   "basis": "Formulario 220.xlsx NOM_U_203 AC/Y/AM; Acumulados 62151/62152/21140/62154",
+   "vc_sentence": "Casilla 50 Retirement, old-age or invalidity pensions: Field Explanation now records the client's tax-year-2025 practice (62151 / 62152 payees certified in casilla 46 with casilla 50 = 0) and that its treatment of the 62154 monthly pensioners is not evidenced; query extended."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "T41",
+   "row": 41,
+   "column_letter": "T",
+   "field_id": "casilla 50",
+   "field_name": "Retirement, old-age or invalidity pensions",
+   "current": "The client pays pensions directly (62154, 491 payees). Confirm (a) which retirement wage types are pension income for casilla 50 (62154, 62153, 62151, 62152, 62115, 62830, 62155); note that 21140 Personal Income Tax Withholding-Retirees sits on 17 payees, all recipients of 62151 Retirement Payment - PRV and none of 62154. Confirm (b), with BAU / the client, what a 'Beneficiary National Id' / 'Beneficiary Name' different from the pensioner means on a pension row (330 of 491 rows of 62154): a substitute pensioner (sustitucion pensional), in which case the certificate is issued to the beneficiary and casillas 24-29 need a pensioner-identity rule, or a third-party payee / bank-account holder, in which case the certificate stays with the pensioner and the columns are client-specific; for the 261 employees the same columns match the bank-payment beneficiary name in 257 cases.",
+   "proposed": "The client pays pensions directly (62154, 491 payees). Confirm (a) which retirement wage types are pension income for casilla 50 (62154, 62153, 62151, 62152, 62115, 62830, 62155); note that 21140 Personal Income Tax Withholding-Retirees sits on 17 payees, all recipients of 62151 Retirement Payment - PRV and none of 62154. Confirm (b), with BAU / the client, what a 'Beneficiary National Id' / 'Beneficiary Name' different from the pensioner means on a pension row (330 of 491 rows of 62154): a substitute pensioner (sustitucion pensional), in which case the certificate is issued to the beneficiary and casillas 24-29 need a pensioner-identity rule, or a third-party payee / bank-account holder, in which case the certificate stays with the pensioner and the columns are client-specific; for the 261 employees the same columns match the bank-payment beneficiary name in 257 cases.\n(c) The client's tax-year-2025 Form 220 certifies the recipients of 62151 Retirement Payment - PRV and 62152 Retirement Payment - Catleya in casilla 46 'Otros pagos' with casilla 50 = 0. Confirm whether these payments are pension income (casilla 50, ET art. 206 num. 5) or other work-income payments (casilla 46), what 'PRV' and 'Catleya' designate, and in which casilla the client certifies the 62154 Monthly Retired Pension payees.",
+   "reason": "The RA must decide the conflict; the draft must not follow the client without it.",
+   "basis": "Formulario 220.xlsx NOM_U_203",
+   "vc_sentence": "(covered by the casilla 50 sentence)"
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M43",
+   "row": 43,
+   "column_letter": "M",
+   "field_id": "casilla 52",
+   "field_name": "Total gross income",
+   "current": "The form prints the arithmetic on its face: 'Sume 36 a 51'. Sixteen casillas, summed. This is GROSS income, before the contributions and deductions in casillas 53 to 58.",
+   "proposed": "The form prints the arithmetic on its face: 'Sume 36 a 51'. Sixteen casillas, summed. This is GROSS income, before the contributions and deductions in casillas 53 to 58. CLIENT EVIDENCE: the client's tax-year-2025 Form 220 table and printed certificate show casilla 52 = 0 on all 34 certified rows although casilla 46 is non-zero on every one of them. Always compute casilla 52 from casillas 36 to 51 as printed on the form, never copy a total from a client source, and block issue where casilla 52 differs from that sum.",
+   "reason": "Client total = 0 while casilla 46 > 0 on all rows: the explanation must require computation and validation.",
+   "basis": "Formulario 220.xlsx NOM_U_203 AE vs Y; CIR 2024 AV29/AV35",
+   "vc_sentence": "Casilla 52 Total gross income: Field Explanation now requires the engine to compute casilla 52 from casillas 36-51 and to block issue on a mismatch, since the client's certificates show casilla 52 = 0 with casilla 46 non-zero."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M67",
+   "row": 67,
+   "column_letter": "M",
+   "field_id": "casilla 78",
+   "field_name": "Debts outstanding at 31 December",
+   "current": "Total debts outstanding at 31 December. Employee-supplied.",
+   "proposed": "Total debts outstanding at 31 December. Employee-supplied. The printed label carries the year of the balance ('Deudas vigentes a 31 de diciembre de' + tax year): print the tax year certified, never a fixed year - the client's tax-year-2025 template still prints 2024.",
+   "reason": "The printed label carries a year and the client template prints a stale one.",
+   "basis": "Formulario 220.xlsx CIR 2024 A60",
+   "vc_sentence": "Casilla 78 Debts outstanding at 31 December: Field Explanation now requires the printed label to carry the tax year certified."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "H75",
+   "row": 75,
+   "column_letter": "H",
+   "field_id": "signature line",
+   "field_name": "Payer or withholding agent name",
+   "current": "Printed signature line",
+   "proposed": "Line after casilla 60, before the 'Datos a cargo del trabajador o pensionado' section",
+   "reason": "Client certificate (official layout) prints the label directly after casilla 60, not on a signature line.",
+   "basis": "Formulario 220.xlsx CIR 2024 A45",
+   "vc_sentence": "Payer or withholding agent name: position corrected to the line after casilla 60, as on the printed form; Field Explanation wording aligned."
+  },
+  {
+   "sheet": "Formulario 220 Spec",
+   "cell": "M75",
+   "row": 75,
+   "column_letter": "M",
+   "field_id": "signature line",
+   "field_name": "Payer or withholding agent name",
+   "current": "Name of the payer or withholding agent above the issuing signature - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), not the payroll organisation label with the company-code prefix ('1764 - ...') shown in the client reports' title block. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN.",
+   "proposed": "Name of the payer or withholding agent printed on the line that follows casilla 60, before the 'Datos a cargo del trabajador o pensionado' section - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), not the payroll organisation label with the company-code prefix ('1764 - ...') shown in the client reports' title block. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN.",
+   "reason": "Position wording aligned with the printed layout; the 15 Oct source decision unchanged.",
+   "basis": "Formulario 220.xlsx CIR 2024 A45",
+   "vc_sentence": "(covered by the H75 sentence)"
+  }
+ ],
+ "mark_corrected_rows": [
+  5,
+  14,
+  23,
+  24,
+  25,
+  37,
+  41,
+  43,
+  67,
+  75
+ ],
+ "version_control": [
+  "Casilla 5 Employer NIT: Field Explanation now states that certificates are generated per withholding agent and that the employer block is taken from the legal entity that paid and withheld, since the client runs the organisations 1764 and 1724.",
+  "Casilla 25 Employee identification number: Field Explanation now records that the client certifies retirement-payment payees with the Accumulated Report 'EE Citizenship Card ID' (34 of 34) and holds their split names in a source not yet received.",
+  "Casilla 33 Place where the withholding was made: Field Explanation now defines it as a withholding-agent parameter whose name must match the DANE code of casillas 34-35 (client: MEDELLIN / 05001).",
+  "Casilla 34 Department code: Field Explanation now derives the code as the first two digits of the five-digit DIVIPOLA code and records that the client holds '05001' in both casillas 34 and 35.",
+  "Casilla 35 City or municipality code: Field Explanation now derives the code as the last three digits of the five-digit DIVIPOLA code (e.g. 001 for 05001).",
+  "Casilla 46 Other payments: Field Explanation now records that the client certifies the retirement payments 62151 / 62152 in casilla 46 and that the placement waits for the RA answer on casilla 50.",
+  "Casilla 50 Retirement, old-age or invalidity pensions: Field Explanation now records the client's tax-year-2025 practice (62151 / 62152 payees certified in casilla 46 with casilla 50 = 0) and that its treatment of the 62154 monthly pensioners is not evidenced; query extended.",
+  "Casilla 52 Total gross income: Field Explanation now requires the engine to compute casilla 52 from casillas 36-51 and to block issue on a mismatch, since the client's certificates show casilla 52 = 0 with casilla 46 non-zero.",
+  "Casilla 78 Debts outstanding at 31 December: Field Explanation now requires the printed label to carry the tax year certified.",
+  "Payer or withholding agent name: position corrected to the line after casilla 60, as on the printed form; Field Explanation wording aligned."
+ ],
+ "not_applied": [
+  {
+   "row": 4,
+   "field_id": "casilla 4",
+   "field_name": "Certificate number",
+   "why": "DECISION for Wallisson: the client numbers certificates with a plain integer consecutive (printed casilla 4 = 34 = table row); the draft's series 'AAAA-nnnnnn' contradicts its own Format 'N'. Choose: keep the Mercans series and change Format (J4) to AN, or adopt a numeric consecutive. No edit until decided."
+  },
+  {
+   "row": 52,
+   "field_id": "casilla 60 (and all amount casillas)",
+   "field_name": "Rounding",
+   "why": "DECISION / RA: the client certifies whole pesos without the nearest-1,000 approximation (0 of 23 withholding values and 2 of 34 casilla-46 values are multiples of 1,000). The draft's Rounding column cites the instruction guide; confirm the passage before changing either side. No edit."
+  },
+  {
+   "row": 41,
+   "field_id": "casilla 50",
+   "field_name": "Field Options D38",
+   "why": "Draft-internal wording 'Taxable only above 1,000 UVT per month; below that, certified at zero' can be read as casilla 50 = 0 below the threshold, which matches the client's zero but not the casilla-52 'GROSS income' definition. Clarify after the RA answers query (c); not edited in this map."
+  },
+  {
+   "row": 23,
+   "field_id": "casilla 33",
+   "field_name": "System Mapping",
+   "why": "L23 'Company.City_Code' maps a name casilla to a code; a mapping rename is a design choice for Mohit's team, not evidenced by the client file. Flagged only."
+  },
+  {
+   "row": 62,
+   "field_id": "casilla 74",
+   "field_name": "Total other income withheld",
+   "why": "Client template label 'Sume 63 a 68' is a client defect; the draft ('Sume 68 a 73') stands. No edit."
+  }
+ ],
+ "summary": {
+  "edits_M": 10,
+  "edits_T": 1,
+  "edits_other_columns": 1,
+  "edits_other_sheets": 0,
+  "fields_marked_corrected": 10,
+  "vc_sentences": 10
+ }
+}

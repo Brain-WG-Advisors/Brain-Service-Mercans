@@ -1,0 +1,30 @@
+Report saved to `~/mercans-pipeline/CO-compliance/07-qa-crosscheck/CO-QA-REPORT.md`.
+
+## Colombia QA cross-check — 94/100, NEEDS PATCHES
+
+**0 CRITICAL · 3 MAJOR · 12 MINOR**
+
+| Check | Score |
+|---|---|
+| 1. CCG ↔ WTC | 67/67 matched (100%); 65/67 exact treatment |
+| 2. CCG Module 2 ↔ DD | 43/44 (98%) |
+| 3. CCG Module 10 ↔ Specs | 6/6 in-scope (100%), 1 descoped |
+| 4. DD ↔ Specs (4-bucket) | **94/94 DD-bucket fields = 100%** |
+| 5. Global WTC coverage | **300/300 included, 0 excluded = 100%** |
+| 6. Scope discipline | PASS |
+| 7. Spec format | 6/6 fully compliant |
+| 8. v2.4 standards | 4/5 artifacts clean |
+| 9. C13/C16/C17/C20 | C16 100% · C17 pass · C20 pass · C13 partial |
+
+**Two things I verified rather than assumed:**
+- The payslip's withholding **re-derives exactly**: base 14,024,045 = 267.76732 UVT → 0.28×(267.767−150)+10 = 42.97485 UVT × 52,374 = **2,250,765**, the exact figure shown. Net 15,221,235 reconciles with YTD ÷ 7.
+- The two mid-2026 cut-overs (rest-day premium 80%→90% on 1 Jul; divisor 220→210 on 15 Jul) are **dual-dated in every affected WTC formula**, including the compounded rest-day overtime codes. No stale fiscal parameters anywhere.
+
+**MAJOR findings** — all wiring/cross-reference, none affects a calculation:
+1. **Payslip wage-type codes are `XXXXX` placeholders** (36 cells across both language sheets) while the WTC has exact codes for all 18 lines.
+2. **Payslip omits CUNE, generation date, payment date, prefix/consecutive and the QR code** — grep of all 8 sheets returns zero hits, yet CCG Module 10.3 itself lists these as mandatory under Res. DIAN 000013 art. 5 + Annex §13.1.
+3. **CCG Module 10's scope note points to `CO-RPT-001…007` and `CO-SIR-001…007`** — CO-RPT-007 is deliberately descoped and no `CO-SIR-00n` entries exist (the register is an index over 4 authorities with one 7-*phase* runbook). Module 10's table also lists CO-RPT-007 with no out-of-scope marker.
+
+Top MINORs: WTC Version Control row 14 is un-cleaned CZ template residue (`v2.0 | 2025-09-09 | Devshree Vyas`, dated before v1.0); PILA doesn't label the `T2R2-003+004` pair as a composite key though Cesantías does for the identical pair; the DD document-type mappers carry four codes the manifest declares out of scope; CCG Module 4.6's table shows two rows as `CB = No` flat, contradicting its own 40%-clamp narrative and the WTC.
+
+Fixing the 3 MAJORs plus MINOR-01 to -05 (~5 hours, two files plus a CCG rebuild) moves this to READY FOR DEV TEAM.

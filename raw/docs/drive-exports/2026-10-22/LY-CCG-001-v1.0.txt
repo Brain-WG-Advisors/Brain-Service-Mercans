@@ -1,0 +1,1194 @@
+﻿Libya
+Country Configuration Guide
+LY-CCG-001 v1.0
+
+
+
+
+Country: Libya (LY)
+Currency: Libyan Dinar (LYD)
+Tax Year: 2026 (calendar year)
+Official language: Arabic
+Mercans Compliance Regulations Team
+Companion calculation workbook: LY_Sample_Calculations_v1.0.xlsx - https://docs.google.com/spreadsheets/d/1upWcpE49h5soawNO2--14vO8-lGZzoEmn6VMpZYLd9s/edit?usp=sharing
+]
+________________
+
+
+Table of Contents
+Table of Contents        2
+Module 1: Foundational Jurisdictional Parameters        8
+1.1 Fiscal, Currency, and Language        8
+1.2 Pay Cycles and Dates        8
+1.3 Extra Pay Period Handling        9
+1.4 Holiday Calendar        10
+1.5 Rounding and Precision Rules        10
+Module 2: Master Data Configuration        11
+2.1 Employer Information        11
+2.2 Employee Information        11
+2.3 Data Management and Retention        12
+Module 3: The Gross-to-Net Calculation Framework        13
+3.1 Gross-to-Net Flow        13
+Module 4: Gross Compensation        16
+4.1 Minimum Wage        16
+4.2 Salary Components        16
+4.3 Proration        18
+4.4 Overtime        18
+4.5 Bonuses        19
+4.6 Wage Classification (Country-Specific)        19
+Module 5: Social Security & Pension Systems        20
+5.1 Contribution Types and Rates        20
+5.2 Calculation Logic and Edge Cases        21
+5.3 Voluntary Contributions & Private Schemes        22
+Module 6: Income Tax Withholding System        24
+6.1 System Overview and Methodology        24
+6.2 Tax Rates and Logic        25
+6.3 Adjustments and Special Cases        26
+Module 7: Deductions, Exemptions & Benefits        28
+7.1 Statutory Tax Reliefs, Deductions, and Exemptions        28
+7.2 Benefits in Kind (BIK)        29
+7.3 Garnishments and Court Orders        30
+Module 8: Statutory Leave Management        31
+8.1 Leave Entitlements        31
+Module 9: Termination & Irregular Payments        34
+9.1 Termination Payments        34
+9.2 Irregular and Retrospective Payments        36
+Module 10: Reporting, Compliance & Finalisation        37
+10.1 Statutory Reporting        37
+10.2 Integrations        38
+10.3 Payslip Requirements        38
+10.4 Other Compliance        39
+10.5 Year-End Processing and Finalisation        39
+Module 11: Advanced Scenarios & Cross-Cutting Logic        40
+11.1 Calculation Logic        40
+11.2 Special Employee Groups & Income        40
+Module 12: Gross-to-Net Worked Examples        42
+12.1 Comprehensive Gross-to-Net Examples        42
+Module 13: Common Business Practices & Non-Statutory Rules        45
+13.1 Off-Cycle, Draws, and Non-Statutory Leave        45        
+
+
+________________
+
+
+Module 1: Foundational Jurisdictional Parameters
+Purpose: To establish the core environmental settings that govern all payroll operations in Libya.
+1.1 Fiscal, Currency, and Language
+What is the statutory tax year?
+The statutory tax year in Libya is the calendar year, running from 1 January to 31 December. This applies to personal income tax and to social security reporting. For the purpose of pro-rating employment-tax calculations over partial periods, the year is treated as 360 days divided into 12 equal months of 30 days.
+Legal basis: Income Tax Law 7/2010, Arts. 22 and 58.
+Can employers adopt an alternate tax year? If yes, under what circumstances and what are the implications?
+For employment payroll, no — the calendar year is mandatory. Income Tax Law 7/2010 Art. 22 permits a taxpayer *whose activity requires a different financial year* to have the Tax Authority Secretary adopt that financial year as the assessment basis, but this concession is directed at business/commercial income where audited accounts justify a non-calendar year. It does not extend to monthly wage withholding, which follows the calendar month and calendar year.
+What is the official currency for payroll processing and reporting? Provide the ISO code.
+The official currency is the Libyan Dinar, ISO code LYD. All payroll processing, withholding, contributions, and statutory reporting are denominated in LYD. The dinar subdivides into 1,000 dirham (millime), so all payroll monetary results, statutory filings and payslip amounts are carried to three decimal places (see 1.5).
+What is the official language for statutory reports and employee payslips?
+The official language for statutory filings and official documents is Arabic. Filings to the Tax Department and the Social Security Fund are in Arabic. Payslips are commonly issued in Arabic; bilingual (Arabic/English) payslips are widely used by international employers, but the Arabic version governs for statutory purposes.
+Legal basis: Income Tax Law 7/2010; Libyan constitutional/administrative practice; Labour Relations Law 12/2010, s. 46 (written particulars to employees).
+1.2 Pay Cycles and Dates
+What are the permissible payroll payment frequencies in the country?
+Payroll in Libya is processed monthly. Monthly pay is the universal cycle for salaried employment; the Labour Relations Law does not prescribe a rigid statutory pay frequency for salaried staff, but for production-share arrangements the employer may pay a monthly cash amount to cover living expenses, reconciled periodically (s. 47). Weekly or fortnightly cycles are not standard practice. Wages are payable at least monthly and within seven days of the end of the entitlement period (Labour Relations Law 12/2010).
+For each frequency, detail the corresponding statutory reporting and payment deadlines for both income tax withholding and social security contributions.
+Filings are separate — income tax and the Social Unity Fund go to the Tax Department; social security goes to the Social Security Fund on a much tighter cycle:
+Obligation
+	Authority
+	Payment/reporting deadline
+	Late penalty
+	Income tax (PIT) withholding
+	Tax Department
+	60 days after month-end, plus a 15-day grace period (≈75 days)
+	1% per month (max 12%)
+	Social Unity Fund (1%)
+	Tax Department (with PIT)
+	With the Tax Department filing
+	Per tax rules
+	Stamp duty (0.5% of net)
+	Tax Department
+	With the Tax Department filing
+	Per tax rules
+	Social security contributions (20.50%)
+	Social Security Fund (SSF)
+	Within 10 days after month-end
+	5% per annum
+	
+
+Describe the statutory rule for handling pay dates that fall on a weekend or public holiday.
+Where a payment or filing deadline falls on the weekly rest day (Friday), the weekend (Friday–Saturday), or an official holiday, the deadline is observed on the next working day. Employers ordinarily bring the pay date forward to the last working day before a weekend/holiday so that employees are paid on time. The statutory late-payment penalties (above) apply only if the substantive deadline is missed on the next available working day.
+What are the common payroll pay dates and cut-off dates for payroll processing?
+The common pay date is towards the end of the calendar month (typically the last few working days). Payroll cut-off (freezing of inputs — new joiners, leavers, overtime, variable pay) is generally around the 20th–25th of the month to allow review, approval, and bank transfer before month-end. Statutory remittances then follow: social security within 10 days after month-end; income tax within the 60 (+15) day window.
+Legal basis: Labour Relations Law 12/2010, s. 47; Income Tax Law 7/2010, Arts. 19–20, 59; Social Security Law 13/1980; PwC Libya tax administration guidance (reviewed 31 May 2026).
+1.3 Extra Pay Period Handling
+Describe the statutory handling and calculation adjustments required for fiscal years containing extra pay periods (e.g., 53 weekly pays).
+Not Applicable — Libya operates a strictly monthly payroll cycle, so a calendar year always contains exactly 12 pay periods. There is no weekly or fortnightly cycle that could produce a 53rd period, and therefore no extra-pay-period adjustment arises.
+Detail the impact on annualized tax calculations and social security contributions.
+Not Applicable — with 12 fixed monthly periods, annualised tax (12 × monthly base) and social security (12 monthly contributions) require no extra-period adjustment.
+If optional adjustment methods are permitted, provide a step-by-step guide.
+Not Applicable — no extra pay periods occur under the monthly cycle, so no optional adjustment methods are defined.
+1.4 Holiday Calendar
+What are the official public holidays?
+The Libyan public holidays for 2026 are set out below. The weekend is Friday–Saturday. Islamic holidays follow the lunar (Hijri) calendar and their Gregorian dates are approximate, subject to moon sighting (expect ±1–2 days).
+Date (2026)
+	Holiday
+	Type
+	17 February
+	17 February Revolution Day
+	Fixed
+	~20–21 March
+	Eid al-Fitr
+	Islamic (approx.)
+	1 May
+	Labour Day
+	Fixed
+	~27–29 May
+	Arafat Day / Eid al-Adha
+	Islamic (approx.)
+	16 June
+	Islamic (Hijri) New Year
+	Islamic (approx.)
+	~25 August
+	Prophet's Birthday (Mawlid)
+	Islamic (approx.)
+	16 September
+	Martyrs' Day
+	Fixed
+	23 October
+	Liberation Day
+	Fixed
+	24 December
+	Independence Day
+	Fixed
+	
+
+Are there any regional, state-specific, or company-specific holidays?
+Public holidays are set at the national level; there are no province/municipality-specific statutory holidays. Company-specific non-statutory days off (e.g., founding anniversaries) may be granted at employer discretion but carry no statutory pay implication. Because of Libya's east/west administrative split, actual observance of certain dates can vary regionally in practice.
+Legal basis: National holiday designations; Labour Relations Law 12/2010, ss. 14, 28 (treatment of official holidays and weekly rest).
+1.5 Rounding and Precision Rules
+What are the statutory or common business practice rules for rounding final net pay and individual calculation components?
+No single statutory rounding rule. Practice: compute each statutory component (SS, SUF, PIT, stamp duty) on the unrounded base and round the final amount per component and the net pay to three decimals (half-up). Intermediate results are not truncated.
+What level of decimal precision is required for statutory reporting?
+Statutory monetary amounts are reported to three decimals in LYD — the dinar subdivides into 1,000 dirham (millime), and client payslips and the statutory report specifications carry three decimals. Percentages are applied at full precision before rounding the resulting amount.
+Legal basis: Common business practice; Income Tax Law 7/2010 and Social Security Law 13/1980 reporting conventions (no explicit statutory rounding provision).
+________________
+
+
+Module 2: Master Data Configuration
+Purpose: To define the mandatory employer and employee information for processing and reporting. This module gives concise field summaries; field-level formats and option mappers are maintained in the Data Dictionary (DD) and are not reproduced here.
+2.1 Employer Information
+What are the different boards or authorities where an employer must register?
+An employer operating in Libya registers with the following authorities:
+Authority
+	Purpose
+	Tax Department (Libyan Tax Authority)
+	Obtain a tax identification number; withhold and remit PIT, Social Unity Fund, stamp duty
+	Social Security Fund (SSF / INAS)
+	Register the entity and employees for social security contributions
+	Employment Office (Ministry of Labour)
+	Notify commencement of the enterprise and workforce details (Labour Law s. 52)
+	Commercial Register / licensing authority
+	Legal establishment and trade licence
+	
+
+What is the configuration/format of registration numbers allotted by each authority?
+The employer holds a tax identification number (Tax Department) and a social security registration number (SSF); the SSF registration number must be recorded and communicated to workers (Labour Law s. 46). Exact digit formats and validation masks are maintained in the Data Dictionary. Registration numbers are national identifiers.
+Are registration numbers allotted at the central level or at the state/township level?
+At the central/national level. The Tax Department and SSF are national bodies; there is no state/township-level allocation.
+Legal basis: Labour Relations Law 12/2010, ss. 46, 52; Income Tax Law 7/2010, Art. 60; Social Security Law 13/1980.
+2.2 Employee Information
+What are the different residential statuses for an individual?
+For payroll purposes the relevant distinctions are Libyan national vs foreign national (expatriate) and resident vs non-resident. Taxation is territorial (Libya-source employment income), so residence does not change the salary tax rate; the distinction matters mainly for foreign-source income exemption (Art. 33(10)), self-remittance where the employer has no Libyan representative (Art. 59), exit-visa tax clearance for non-citizens (Art. 84), and reduced SS rates under reciprocal agreements.
+What employee fields are required for processing payroll and statutory reporting?
+Core fields (detailed formats in the DD): full name, national ID / passport number, tax identification number, SSF registration number, date of birth, gender, marital status and number of dependent children (for the personal exemption), nationality/residency status, job title/grade, hire date, bank account details, salary and component structure, and work-permit reference for foreign workers. The employer must maintain a worker file with these particulars (Labour Law s. 10).
+What is the configuration/format of registration numbers (e.g., tax ID, social security number) allotted to employees?
+Employees are identified by a national ID number (nationals) or passport (foreigners), a tax identification number, and an SSF registration number. Field-level formats/masks are held in the Data Dictionary; see the DD rather than this guide for the authoritative patterns.
+Provide any relevant combo values or sample inputs for each field.
+Combo/option values (e.g., marital status, nationality, contract type) are defined in the DD option-mapper sheets and must remain consistent between the DD and any report specifications. This guide does not duplicate those code lists (see DD).
+What previous employment information must new joiners declare?
+New joiners declare marital/family status for the personal exemption (Art. 36–37) and their SSF registration/history for continuity of insured service. There is no cumulative year-to-date tax carry-in requirement because Libya uses independent monthly withholding (no annual cumulation), so prior-employer pay history is not needed for tax cumulation.
+Legal basis: Labour Relations Law 12/2010, ss. 10, 46; Income Tax Law 7/2010, Arts. 36, 37, 60.
+2.3 Data Management and Retention
+What are the statutory requirements for payroll record retention (e.g., number of years)?
+The Labour Law requires the employer to keep a worker file with pay, leave, bonus and penalty records (s. 10) but does not state a numeric retention period. The Income Tax Law requires books and records to be kept (Art. 92). Libya no longer applies a statute of limitations on tax assessment and collection: Law No. 1 of 2025 (enacted 23 January 2025) repealed the limitation period previously set by Article 25 of Income Tax Law 7/2010 (most recently a 15-year window under Law No. 2 of 2017), so the Tax Authority may assess and pursue unpaid employment taxes indefinitely. Payroll and tax records should therefore be retained on a long-term basis — for the life of the entity and beyond as a prudent minimum — because the underlying liabilities no longer expire.
+Are there specific data privacy laws (like GDPR) that govern the storage and handling of employee payroll data?
+Libya has no comprehensive GDPR-equivalent data-protection statute. Employers should nonetheless apply standard confidentiality and secure-handling practices to employee data, consistent with the worker-file obligations (s. 10) and general confidentiality duties.
+How should historical payroll data (e.g., from a previous provider) be handled for cumulative calculations?
+Because Libya uses independent monthly withholding (no annual tax cumulation for employees), historical in-year pay does not need to be loaded for tax-cumulation purposes. Historical data is relevant for continuity of social-security insured service, year-to-date reporting/reconciliation, and end-of-service indemnity calculations (which use last remuneration and total service). Migrate service-start dates and cumulative service for indemnity accuracy.
+Legal basis: Labour Relations Law 12/2010, s. 10; Income Tax Law 7/2010, Art. 92; Law No. 1 of 2025 (repeal of the tax assessment/collection limitation period).
+________________
+
+
+Module 3: The Gross-to-Net Calculation Framework
+Purpose: To establish the high-level, sequential logic of the payroll calculation for Libya.
+3.1 Gross-to-Net Flow
+Provide a definitive, step-by-step description of the standard Gross-to-Net (G2N) calculation framework
+Libyan payroll follows a fixed monthly sequence. The distinctive feature of the Libyan order of operations is that both the employee social security contribution and the employee Social Solidarity (Social Unity) Fund contribution, together with the personal exemption, are deducted from gross pay *before* income tax is computed — income tax is levied on the residual amount, not on gross. PIT rates "are deducted from gross salary after deducting the social insurance contribution, employee social solidarity fund contribution, and personal exemptions."
+The seven-step monthly flow is as follows.
+Step 1 — Summation of Gross Earnings
+Sum all cash and in-kind employment earnings for the month: basic salary, allowances (representation, transport, etc.), overtime, commissions, bonuses, and benefits in kind. Under Income Tax Law 7/2010 Art. 55(a), all payments "recurrent and non-recurrent, whether cash or in kind" form part of employment income, except the specific statutory exclusions (reimbursed actual work expenses, disciplinary deductions, end-of-service pay, and accrued-leave payout on termination).
+Step 2 — Determination of the Social Security Base
+Social security contributions are computed on the Actual Salary base — basic salary plus allowances and benefits of a stable, fixed and regular nature; temporary, irregular or non-recurrent pay such as overtime, bonuses, commissions and one-off premiums is excluded (Art. 32, Law 13/1980) — subject to the statutory contribution ceiling (see Module 5). The base is not the full gross: variable and non-recurrent components are stripped out before the ceiling is applied.
+Step 3 — Calculation of Employee Social Security and Solidarity Fund Contributions
+* Employee social security contribution — the employee-share percentage of the social security base (see Module 5 for the current rate).
+* Employee Social Solidarity Fund contribution — 1% of monthly gross salary (see Module 6/7).
+Both are withheld from the employee and both reduce the income-tax base in Step 4.
+Step 4 — Determination of Taxable Income
+Taxable income is derived as:
+Line
+	Component
+	Effect
+	A
+	Gross earnings (Step 1)
+	+
+	B
+	Less: employee social security contribution (Step 3)
+	−
+	C
+	Less: employee Social Solidarity Fund contribution (Step 3)
+	−
+	D
+	Less: personal exemption (single / married / per child — Module 6)
+	−
+	=
+	Taxable income
+	= A − B − C − D
+	
+
+Employee social security contributions are deductible against PIT under Income Tax Law 7/2010 Art. 55 (contributions to the retirement/alternate system).
+Step 5 — Calculation of Income Tax Withholding
+Apply the progressive PIT schedule (5% / 10% — Module 6) to the taxable income from Step 4. Income tax is withheld by the employer and remitted to the Tax Authority.
+Step 6 — Application of Post-Tax Deductions
+Apply post-tax items in the following order:
+1. Stamp duty on salary — 0.5% of net salary (Stamp Duty Law 12/2004), withheld and remitted by the employer.
+2. Other post-tax deductions: court-ordered garnishments, salary advances/loans, union dues, and voluntary deductions.
+Step 7 — Finalization of Net Pay
+Net pay = Gross earnings − employee social security − Social Solidarity Fund − income tax − stamp duty − other post-tax deductions. The result is paid to the employee, normally by bank transfer towards month-end.
+Employer On-Costs (Calculated in Parallel)
+Employer on-costs are computed in parallel and do not reduce employee net pay:
+* Employer social security contribution — the employer-share percentage of the social security base (see Module 5).
+* Where applicable, the public treasury contribution is funded by the state (Libyan entities), not by the employer or employee.
+Employer on-costs are remitted together with the withheld employee shares to the Social Security Fund.
+G2N Flow Summary
+#
+	Step
+	Base
+	Result
+	1
+	Gross earnings
+	—
+	Gross
+	2
+	SS base
+	Actual Salary base (capped at ceiling)
+	Insurable earnings
+	3
+	Employee SS + Solidarity Fund
+	Insurable earnings / gross
+	Employee statutory deductions
+	4
+	Taxable income
+	Gross − SS − Solidarity − exemption
+	Tax base
+	5
+	Income tax
+	Tax base
+	PIT withheld
+	6
+	Post-tax deductions
+	Net salary (stamp duty)
+	Post-tax deductions
+	7
+	Net pay
+	—
+	Amount paid to employee
+	‖
+	Employer on-costs (parallel)
+	Insurable earnings
+	Employer remittance
+	
+
+Legal basis: Income Tax Law 7/2010, Arts. 55–58; Social Security Law 13/1980 (as amended by Law 1/2018); Stamp Duty Law 12/2004; Social Solidarity Fund levy. PIT ordering per Libyan Tax Authority guidance (PwC Libya Individual Summary, reviewed 31 May 2026).
+________________
+
+
+Module 4: Gross Compensation
+Purpose: To define all components of gross pay and their calculation rules in Libya.
+4.1 Minimum Wage
+Is there a minimum wage? Who is eligible?
+Yes. Libya has a statutory national minimum monthly wage of LYD 1,000 per month, in force in 2026. It applies to all employed workers, including domestic workers (Labour Law s. 99(6)) and trainees at the last grade (s. 82). The enabling power sits with the General People's Committee / competent authority to set and amend the minimum (s. 20), advised by the Consultative Council for Labour Remuneration (s. 19).
+Is the minimum wage applicable at a national level or does it vary by province/state?
+It is a single national minimum; it does not vary by province or municipality.
+Provide all applicable minimum wage rates.
+Scope
+	Minimum wage
+	Basis
+	National, all sectors
+	LYD 1,000 per month
+	Statutory (in force 2026)
+	
+
+There is no separate youth, regional, or sectoral minimum-wage rate; sectoral collective agreements may set higher floors.
+Does the minimum wage impact any tax or social security calculations?
+Yes. The SSF minimum contribution base is anchored to the national minimum wage: with the minimum wage now LYD 1,000/month, the operational SSF contribution floor is LYD 1,000, so the contribution base for a regular salaried employee is not accepted below LYD 1,000 — a lower actual salary is raised to LYD 1,000 for the SSF calculation[a]. (The historical statutory minimum base under Law 13/1980 was LYD 450 — US SSA country profile — which matched the former minimum wage.) The minimum wage does not change tax rates.
+How are deductions handled if they cannot be made due to minimum wage constraints?
+Statutory deductions (social security, income tax, Social Unity Fund, stamp duty) are computed on gross and take priority. For non-statutory recoveries (loans, disciplinary fines, garnishments), the Labour Law protects the worker: no more than one quarter of remuneration may be attached or deducted for loans/settlements (s. 50), and disciplinary wage deductions are capped (e.g., ≤ five days' wages in a month — s. 117). Where a deduction would breach these limits, it is spread across subsequent periods.
+Legal basis: Labour Relations Law 12/2010, ss. 19, 20, 50, 82, 99(6), 117; statutory minimum wage in force 2026.
+4.2 Salary Components
+What are the mandatory and common salary components?
+The Labour Law distinguishes (s. 5): basic salary (monetary compensation per the salary scale for the post) and salary/remuneration (basic salary *plus* allowances, benefits, incentives, bonuses and other financial increments). Common components are:
+Component
+	Definition
+	Cycle
+	Basic salary
+	Scale pay for the post
+	Monthly
+	Cost-of-living / general allowance
+	Flat or scaled supplement
+	Monthly
+	Housing allowance
+	Accommodation support
+	Monthly
+	Transport allowance
+	Commuting support
+	Monthly
+	Representation allowance
+	For representative roles
+	Monthly
+	Family/child allowance
+	Dependant support
+	Monthly
+	Overtime
+	Extra-hours pay (s. 16)
+	As worked
+	Bonuses/incentives
+	Performance or discretionary
+	Ad hoc/annual
+	
+
+What is the general definition and pay cycle for each component?
+All components are paid on the monthly cycle. Fixed components (basic, allowances) are constant month to month; variable components (overtime, commissions, bonuses) are computed from the period's activity.
+Which components are taxable vs non-taxable and sociable vs non-sociable?[b]
+Under Income Tax Law 7/2010 Art. 55, essentially all cash and in-kind employment payments are taxable and form part of the social security base, except the statutory exclusions:
+Component
+	Taxable (PIT)
+	Sociable (SS base)
+	Basic salary
+	Yes
+	Yes
+	Allowances (housing, transport, representation, COLA)
+	Yes
+	Yes
+	Overtime
+	Yes
+	No
+	Bonuses & commissions — irregular, discretionary or one-off
+	Yes
+	No
+	Bonuses & benefits in kind — fixed and regular / recurring (e.g. 13th/14th-month)
+	Yes
+	Yes
+	Reimbursed actual work expenses
+	No (Art. 55)
+	No
+	Disciplinary deductions
+	Reduce income (Art. 55)
+	No
+	End-of-service indemnity
+	No (Art. 55)
+	No
+	Accrued-leave payout on termination
+	No (Art. 55)
+	No
+	
+
+Are components uniform across the country or do they differ by state/province?
+Components are uniform nationally; there is no provincial variation in classification.
+What is the calculation logic for each salary component?
+Fixed components are contractual monthly amounts. Overtime follows s. 16 (see 4.4). Bonuses follow employer policy. The social security earnings base is the Actual Salary — basic pay plus stable, fixed and regular allowances, capped at the ceiling (variable and non-recurrent pay excluded, Art. 32); the income-tax base is that gross less employee SS, Social Unity Fund, and the personal exemption.[c]
+Which components require employee-declared values and submissions?
+Family/child allowances and the personal tax exemption depend on the employee's declared marital status and number of dependent children (Income Tax Law Art. 36). The employee declares status; a change affects tax only from the following month (Art. 37).
+Deliverable: Primary earnings base for social security — Inclusion/Exclusion analysis[d]
+Included in SS base
+	Excluded from SS base
+	Basic salary
+	Reimbursed actual work expenses (Art. 55)
+	Fixed allowances (housing, transport, representation, COLA)
+	End-of-service indemnity (Art. 55)
+	Fixed & regular bonuses (e.g. 13th/14th-month) and regular benefits in kind (stable, recurring — cash or in kind)
+	Accrued-leave payout on termination (Art. 55)
+	—
+	Disciplinary deductions
+	—
+	Overtime; irregular, discretionary or one-off bonuses; profit-sharing; commissions; one-off premiums and awards; one-off benefits in kind (Art. 32)
+	
+
+The SS base is the Actual Salary (basic salary plus stable, fixed and regular allowances; variable and non-recurrent pay excluded — Art. 32), capped at the SSF ceiling (Module 5).
+4.3 Proration
+Are fixed wages prorated for the number of working days?
+Yes. For mid-period hires and terminations, fixed salary is prorated. The tax law's convention treats the year as 360 days / 12 equal 30-day months (Art. 58), so a 30-day month is the standard divisor.[e]
+Describe the statutory or standard business practice for prorating fixed salary components for mid-period hires and terminations. Provide the proration formula and a worked example.
+Formula:
+```
+Prorated salary = Monthly salary × (days worked ÷ 30)
+```
+Worked example: an employee on LYD 3,000/month starts on the 11th of a 30-day month (works 20 days).
+* Prorated salary = 3,000 × (20 ÷ 30) = LYD 2,000.000.
+* Social security and tax are then computed on the prorated gross of LYD 2,000.000 for that month.
+4.4 Overtime
+Detail the statutory rules for overtime, including eligibility criteria and mandatory rates.
+Standard hours are up to 48 per week and a maximum of 10 hours per day (s. 13). Overtime rates (s. 16):
+Overtime type
+	Rate
+	Cap
+	Work under pressure of work (ordinary overtime)
+	Basic wage + not less than 50% of ordinary wage
+	≤ 3 overtime hours per day
+	Work on the weekly rest day (Friday)
+	Double time per hour worked, or a compensating rest day within 3 days
+	—
+	Work on an official public holiday
+	Double time (200%) per hour worked, or a compensating rest day within 3 days
+	—
+	
+
+Adolescents (16–18) may not work overtime, on rest days, official holidays, or at night (s. 28).
+Explain how overtime is treated for income tax and social security calculations.
+Overtime pay is ordinary taxable employment income (Art. 55) and bears the Social Unity Fund, but is excluded from the social security base as variable/non-recurrent pay (Art. 32, Law 13/1980). It is added to the month’s gross for PIT and the Social Unity Fund; it does not enter the Actual-Salary base on which social security is computed.[f]
+Legal basis: Labour Relations Law 12/2010, ss. 13, 16, 28; Income Tax Law 7/2010, Art. 55.
+4.5 Bonuses
+Is there a statutory requirement to pay bonuses? If so, how are they calculated?
+No. There is no statutory 13th-month salary or mandatory bonus in Libya. Bonuses are discretionary or contractual/collective-agreement based, calculated per employer policy.
+Is there a specific tax treatment for bonuses?
+No special regime. Bonuses are taxed as ordinary employment income in the month received (Arts. 55, 57–58); they are added to the month’s gross and taxed at the 5%/10% schedule (see the bonus worked example in Module 9.2). Bonuses bear the Social Unity Fund but are excluded from the social security base as non-recurrent pay (Art. 32, Law 13/1980).[g]
+Legal basis: Income Tax Law 7/2010, Arts. 55, 57, 58; no statutory bonus in Labour Relations Law 12/2010.
+4.6 Wage Classification (Country-Specific)
+Are there country-specific classifications for wages critical for social security or tax calculations? Provide definitions and a reference table.
+The critical Libyan classification is the distinction between basic salary and total salary/remuneration (s. 5), and the statutory list of items excluded from taxable/sociable pay (Art. 55). Unlike some jurisdictions, Libya does not use hazard-based contribution categories; the same rates apply to all workers.
+Classification
+	Definition
+	Payroll relevance
+	Basic salary
+	Scale pay for the post (s. 5)
+	Reference for indemnity (last remuneration) and scale-linked components
+	Total salary/remuneration
+	Basic + allowances + benefits + incentives (s. 5)
+	Gross earnings; the PIT and Social Unity Fund base
+	Actual Salary (SS base)
+	Basic + stable/fixed/regular allowances (Art. 32)
+	Social-security contribution base (variable/one-off pay excluded)
+	Statutorily excluded pay
+	Reimbursed expenses, disciplinary deductions, end-of-service indemnity, accrued-leave payout (Art. 55)
+	Removed from PIT and SS base
+	Public budget-funded salary
+	Salary of public administrative units funded by the general budget (Art. 33(11))
+	Exempt from PIT
+	
+
+Legal basis: Labour Relations Law 12/2010, s. 5; Income Tax Law 7/2010, Arts. 33(11), 55.
+________________
+
+
+Module 5: Social Security & Pension Systems
+Purpose: To detail the rules for all mandatory social security and pension schemes in Libya.
+5.1 Contribution Types and Rates
+Libya operates a single, unified social security system managed at the national level by the Social Security Fund (SSF / INAS) under Social Security Law No. 13 of 1980 (as amended, notably by Law 1/2018). Social security contributions are payable by all persons working in Libya, including expatriates, and finance retirement/old-age, disability, survivors', work-injury and related benefits.[h] Contributions are computed on the Actual Salary base (Art. 32) and withheld and remitted by the employer.
+List all mandatory social security and pension contributions for both employer and employee.
+There is one consolidated social security contribution (covering pension and the associated benefit branches), split three ways: employee, employer, and a public-treasury top-up (for Libyan entities). The rates were increased effective 1 June 2022 — the earlier employee rate of 3.75% / employer 10.5%–11.25% is superseded and must not be used for 2026 payroll.
+Are contributions managed at a national or sub-national level?
+Nationally. There is no provincial or municipal social security scheme; the SSF administers contributions and benefits countrywide.
+5.1.1 Contribution Basis Definition
+The contribution base is the Actual Salary base (المرتب الفعلي): basic salary plus all remuneration of a stable, fixed and regular nature — including regular allowances, fixed and regular bonuses (for example a contractual 13th/14th-month payment), and benefits provided on a stable, regular basis, whether paid in cash or in kind. Pay that is temporary, irregular, variable or non-recurrent — overtime, discretionary or one-off bonuses, profit-sharing, commissions, one-off premiums and awards — does not form part of the base (Art. 32, Law 13/1980; the SSF contribution-base rule includes bonuses and other financial benefits “provided that they have a stable regular basis, either paid in cash or in kind”). The base is subject to a statutory maximum contribution ceiling and a minimum contribution base.
+Contribution ceiling and floor[i]
+The monthly contribution base[j][k] is capped at LYD 16,000/month, so the employee contribution is capped at LYD 820/month (16,000 × 5.125%) and the employer contribution at LYD 2,296 (Libyan entity) / LYD 2,460 (foreign branch). The minimum contribution base is LYD 1,000/month, applied as the operational SSF floor and anchored to the national minimum wage: a base below LYD 1,000 is raised to LYD 1,000 for a regular salaried employee. 
+Comprehensive contribution rate summary (2026):
+Party
+	Libyan private entity
+	Foreign company / branch
+	Employee
+	5.125%
+	5.125%
+	Employer
+	14.350%
+	15.375%
+	Public treasury (state-funded)[l][m]
+	1.025%
+	—
+	Total
+	20.50%
+	20.50%
+	
+
+Rates do not vary by region, age, or gender. Libya has reciprocal social security agreements with some countries, under which residents of those countries working in Libya may qualify for reduced contribution rates.
+Legal basis: Social Security Law 13/1980, as amended by Law 1/2018; Ministry of Finance rate resolution effective 1 June 2022; SSF Instruction 4/2018 (ceiling on contribution base); PwC WWTS (reviewed 31 May 2026).
+5.2 Calculation Logic and Edge Cases
+What is the step-by-step calculation logic for all types of social security contributions?
+* Step 1 — Determine the Actual Salary base for the month (basic salary plus stable, fixed and regular allowances; exclude overtime, bonuses, commissions and one-off premiums — Art. 32).
+* Step 2 — Apply the contribution base limits: if the base exceeds the SSF ceiling (LYD 16,000/month), use the ceiling; if below the minimum base (LYD 1,000/month), use the minimum base.
+* Step 3 — Employee contribution = base × 5.125% (withheld from the employee).
+* Step 4 — Employer contribution = base × 14.350% (Libyan entity) or 15.375% (foreign branch).
+* Step 5 — Public treasury contribution = base × 1.025% (Libyan entity only; funded by the state, not the employer).
+* Step 6 — Remit the employee + employer shares to the SSF within 10 days after month-end.
+Worked Example — Standard Monthly Payroll
+An employee at a Libyan private entity has an Actual-Salary base of LYD 3,000 (within the LYD 16,000 ceiling).
+* Employee: 3,000 × 5.125% = LYD 153.750 (withheld).
+* Employer: 3,000 × 14.350% = LYD 430.500.
+* Public treasury: 3,000 × 1.025% = LYD 30.750 (state-funded).
+* Total to SSF from the employer (EE + ER) = 153.750 + 430.500 = LYD 584.250.
+Are contributions based on actual or standard salary?
+Contributions are based on actual earnings that form the Actual-Salary base (stable, fixed and regular pay), subject to the ceiling and minimum base. There is no notional/standard-salary scheme for private employees.
+Describe rules for eligibility, joining month, termination month, mid-period hires, mid-period terminations, and mid-period salary changes.
+* Eligibility: all employees from the first day of work; the employer registers the worker with the SSF and records the SSF registration number (Labour Law s. 46).
+* Joining month: contributions are computed on the actual earnings paid for the partial month.
+* Termination month: contributions are computed on the actual earnings for the final partial month.
+* Mid-period hire/termination: prorate the Actual-Salary base by the portion of the month worked, then apply rates to the prorated base.
+* Mid-period salary change: the SSF operates on monthly earnings; where a change takes effect mid-month, contributions follow the actual base earned in that month.
+Do different payment frequencies affect contribution rates or parameters?
+No. Payroll is monthly, so contribution rates and the monthly ceiling/floor apply uniformly. There are no frequency-based variations.
+Detail variations based on employee age or gender.
+There are no contribution-rate variations by age or gender. (Retirement age differs — 65 for men, 60 for women, per Labour Law s. 43 — but the contribution rate is identical.)
+Is there a minimum number of working days required for contributions?
+There is no statutory minimum number of working days to trigger contributions; contributions arise on actual earnings from the first day of insured employment, subject to the minimum contribution base.
+How are contributions calculated for Board of Directors who are also employees?
+Board members who also hold an employment relationship and receive a salary are treated as employees for that salary: contributions are computed on their employment earnings at the standard rates, subject to the ceiling. Pure directors' fees paid to non-employee directors are not employment income for social-security purposes.
+Are year-end adjustments required?
+No annual reconciliation of social security contributions is required for employees; the monthly calculations are final.
+5.3 Voluntary Contributions & Private Schemes
+Can employees and employers make additional voluntary contributions?
+The mandatory SSF scheme does not provide for employee top-up voluntary contributions within payroll. Employers may offer supplementary private pension or savings arrangements outside the statutory scheme.
+Which employee contributions are allowed as pre-tax deductions?
+The employee's mandatory social security contribution (5.125%) is deductible before income tax (Income Tax Law 7/2010, Art. 55 — contributions to the retirement/alternate system). Contributions to an approved alternate retirement scheme are likewise deductible.[n]
+Are there private insurance schemes with employer and employee contributions?
+Employers commonly provide private medical insurance and, for some international employers, supplementary pension/life cover. Where private health cover is provided, employer-paid premiums are treated as employer benefits (see Module 7 for BIK treatment) and health-insurance premiums are among the amounts recognised under Income Tax Law 7/2010 Art. 36.
+What documents or declarations are required from an employee?
+For SSF registration the employee provides identity documents and the SSF insured-registration form; the employer records the SSF registration number in the worker file (Labour Law ss. 10, 46). For any reduced-rate treatment under a reciprocal agreement, evidence of home-country coverage is required.
+Legal basis: Social Security Law 13/1980 (as amended by Law 1/2018); SSF Instruction 4/2018; Income Tax Law 7/2010, Arts. 36, 55; Labour Relations Law 12/2010, ss. 10, 43, 46.
+________________
+
+
+Module 6: Income Tax Withholding System
+Purpose: To define the entire income tax withholding system in Libya.
+Resident vs Non-Resident Treatment Matrix (B1). Libya taxes employment income on a territorial basis — only income from employment/services performed *in* Libya is taxable, for residents and non-residents alike. The rate schedule and exemptions are identical for both; residence does not change the salary tax rate. The matrix below states the treatment of each income type before the detailed prose.
+Income type
+	Resident
+	Non-resident
+[o]	
+Regular salary/wages
+	Taxable on Libya-source income; 5% up to LYD 12,000/yr, 10% above; standard exemptions apply
+	Taxable on Libya-source income; same 5%/10% schedule and exemptions (residence does not alter the rate)
+	Annual/13th-month bonus
+	Taxable as employment income in the month received
+	Taxable as employment income in the month received
+	Severance / end-of-service indemnity
+	Exempt (Art. 55)
+	Exempt (Art. 55)
+	Accrued-leave payout on termination
+	Exempt (Art. 55)
+	Exempt (Art. 55)
+	Equity / share-incentive income
+	Taxable as in-kind employment income (Art. 55) if paid for Libya services; commonly administered off local payroll
+	Taxable if attributable to Libya services; typically out of local payroll scope
+	Labour-service / contractor pay
+	Self-employment income taxed at 15% (Art. 54) — not payroll withholding; out of employee-payroll scope
+	Same; out of employee-payroll scope
+	Benefits in kind
+	Taxable as employment income (Art. 55)
+	Taxable as employment income (Art. 55)
+	
+
+Non-resident specifics: foreign-source income of foreigners residing in Libya is exempt (Art. 33(10)); where a non-resident employer has no representative in Libya, the employee pays the tax directly to the Authority (Art. 59); non-citizens require a tax-clearance certificate before an exit visa (Art. 84).
+6.1 System Overview and Methodology
+Describe the country's income tax withholding system.
+Libya operates an employer withholding (PAYE-style) system for employment income under Income Tax Law No. 7 of 2010. The employer is legally obliged to deduct income tax from employees' income and remit it to the Tax Department, and to submit a list of names, positions, and income of its workers (Arts. 59–60). The monthly declared payroll is effectively a self-assessment. Tax on employment income is calculated monthly on the taxable base after statutory deductions.
+What types of taxes are withheld by the employer?[p]
+The employer withholds and remits: (1) personal income tax on employment income (5%/10%); (2) the Social Unity Fund contribution (1% of gross); (3) stamp duty on salary (0.5% of net); and (4) the employee social security contribution (5.125%, remitted to the SSF). The Jihad Tax is not withheld — it was abolished (Higher Court ruling of 3 February 2025; cancellation effective 14 July 2025) and must not appear in 2026 payroll.
+At what level are tax rates published (central or state)?
+Centrally. Income tax rates are set by national law (Income Tax Law 7/2010); there are no state/provincial income taxes.
+6.1.1 Taxable Income Definition
+Provide the statutory definition of 'Taxable Income'.
+Taxable employment income is the total of work income — salary, allowances, commissions, remuneration, representation allowances, and all cash or in-kind payments, recurrent or non-recurrent, for services performed in Libya (Art. 55) — assessed on the amount collected by the taxpayer over the deduction limit, due on receipt (Art. 57).
+Explain how this base is derived from total gross earnings.
+The taxable base is derived by subtracting, from gross earnings: (a) the employee social security contribution; (b) the employee Social Unity Fund contribution (1%); and (c) the applicable personal exemption. Statutorily excluded items (reimbursed work expenses, disciplinary deductions, end-of-service indemnity, accrued-leave payout) are removed from the base entirely (Art. 55).
+Determining the Correct Tax Treatment (decision guide)
+3. Is the income for services performed in Libya (or paid by a Libyan payer for a Libya-resident's services)? If no → generally not taxable in Libya (territorial). If yes → continue.
+4. Is the employer a public administrative unit funded by the general budget? If yes → salary is exempt (Art. 33(11)). If no → continue.
+5. Is the item a statutory exclusion (severance, accrued-leave payout, reimbursed expense, disciplinary deduction)? If yes → exempt (Art. 55). If no → taxable.
+6. Compute taxable income = gross − employee SS − Social Unity Fund − personal exemption, then apply the 5%/10% schedule.
+Official Tax Calculation Formula[q]
+```
+Taxable income (monthly) = Gross − Employee SS (5.125%) − Social Unity Fund (1%) − Personal exemption
+PIT (monthly) = 5% × min(Taxable income, 1,000) + 10% × max(Taxable income − 1,000, 0)
+```
+(The LYD 1,000 monthly / LYD 12,000 annual threshold is the boundary between the 5% and 10% bands.)
+6.2 Tax Rates and Logic
+What are the latest tax rates by tax type, residential status, and payment frequency?
+Monthly taxable income (LYD)
+	Annual equivalent (LYD)
+	Rate
+	Up to 1,000
+	Up to 12,000
+	5%
+	Above 1,000
+	Above 12,000
+	10%
+	
+
+Rates are identical for residents and non-residents and for all payment frequencies (payroll is monthly).[r]
+How are rates applied for different frequencies?
+Payroll is monthly; the monthly threshold (LYD 1,000) is applied each month. There is no separate weekly/fortnightly banding.
+How does tax applicability and calculation logic differ by residential status?
+The calculation is the same (territorial, 5%/10%, same exemptions). The differences are administrative: non-residents employed by a payer with no Libyan representative self-remit (Art. 59), and non-citizens need tax clearance for an exit visa (Art. 84). Residents' foreign-source income is exempt (Art. 33(10)).
+Provide the tax calculation logic covering joining month, termination month, mid-month joining, mid-month terminations, and mid-month salary revisions.
+* Joining/mid-month join: tax on the actual (prorated) earnings for the partial month; the personal exemption for the month is applied in full in practice[s] (a change in status affects tax only from the following month — Art. 37).
+* Termination/mid-month termination: tax on actual earnings for the final partial month; severance and leave payout are exempt[t].
+* Mid-month salary revision: tax follows the actual gross paid in that month.
+Do tax rates vary by gender or age?
+No. There is no variation by gender or age.
+What is the minimum tax rate applicable?
+The minimum positive rate is 5% (on the first LYD 1,000 of monthly taxable income). Where the personal exemption and statutory deductions reduce taxable income to zero or below, no tax is due.
+6.3 Adjustments and Special Cases
+For annualized tax systems, which salary components must be projected?
+Libya uses independent monthly withholding[u], not cumulative annual projection. Each month is taxed on its own taxable income; there is no requirement to project annual salary or annualise bonuses. Irregular items are taxed in the month received.
+Are year-end tax adjustments required?
+There is no employer year-end PIT reconciliation for employees. Individual taxpayers may file an annual declaration within 90 days after year-end (Art. 38); for standard employees, the monthly withholding is generally final.
+Are there minimum or higher tax requirements if employees fail to submit a tax ID or social security number?
+The Law does not prescribe a penal "no-TIN" higher withholding rate on the employee; instead, employer non-compliance with the withholding/reporting duties carries penalties (failure to deduct/remit → fine ≥ 3× the tax, Art. 76; failure to file lists → fine equal to the tax, Art. 72). The employer must obtain the employee's tax and SSF registration details and cannot avoid withholding for want of them.
+What is the income tax and social security refund procedure?
+Overpaid income tax may be reclaimed from the Tax Department; the taxpayer's right to claim a refund lapses five years from payment (Art. 26). Social security over-remittances are corrected with the SSF. Both are handled by adjustment/claim to the respective authority rather than automatically through payroll.
+Worked Examples
+Standard resident employee (single). Monthly salary LYD 2,000; single (exemption LYD 150/month); Libyan entity.
+* Employee SS = 2,000 × 5.125% = LYD 102.500.
+* Social Unity Fund = 2,000 × 1% = LYD 20.000.
+* Exemption = LYD 150.000.
+* Taxable income = 2,000 − 102.500 − 20.000 − 150.000 = LYD 1,727.500.
+* PIT = 5% × 1,000 + 10% × 727.500 = 50.000 + 72.750 = LYD 122.750.
+Non-resident employee (single, foreign branch). Monthly salary LYD 2,000; same territorial 5%/10% schedule.
+* Employee SS = 2,000 × 5.125% = LYD 102.500.
+* Social Unity Fund = 2,000 × 1% = LYD 20.000.
+* Exemption = LYD 150.000 (single).
+* Taxable income = LYD 1,727.500; PIT = LYD 122.750 (identical to the resident — residence does not change the rate). If the foreign employer has no Libyan representative, the employee self-remits (Art. 59).
+Irregular payment (bonus). See the bonus worked example in Module 9.2 (Step-by-step, LYD 5,000 bonus on top of LYD 3,000 salary → PIT LYD 706.625).
+Legal basis: Income Tax Law 7/2010, Arts. 22, 33(10)–(11), 36, 37, 54, 55, 57, 58, 59, 60, 72, 76, 84; Social Unity Fund levy (1%); EY/PwC 2026 confirmation of rates and Jihad-Tax abolition.
+________________
+
+
+Module 7: Deductions, Exemptions & Benefits
+Purpose: To define rules for all items that adjust income or pay in Libya.
+7.1 Statutory Tax Reliefs, Deductions, and Exemptions
+For each statutory relief/deduction/exemption below: name and definition, eligibility, statutory limits, calculation method, application point, and any declaration requirement.
+1. Personal Exemption (Income Tax Law Art. 36)
+* Definition: a status-based exemption reducing taxable employment income.
+* Eligibility: all resident and non-resident employees; based on declared marital/family status.
+* Statutory limits & amounts:
+Status
+	Per year (LYD)
+	Per month (LYD)
+	Single
+	1,800
+	150
+	Married, no children
+	2,400
+	200
+	Married / widowed / divorced with children
+	2,400 + 300 per child
+	200 + 25 per child
+	
+
+* Calculation method: deduct the monthly exemption from gross (after SS and Social Unity Fund) before applying the 5%/10% schedule.
+* Application point: monthly, before income tax.
+* Declaration: employee declares status and number of dependent children; a change affects tax from the following month (Art. 37); one exemption per tax year, applied to the lower base where there are multiple sources.
+2. Employee Social Security Contribution (Art. 55)
+* Definition: the employee's 5.125% mandatory SSF contribution.
+* Eligibility: all insured employees.
+* Limit: the contribution on earnings up to the SSF ceiling.
+* Calculation/application: deducted from gross before income tax.
+* Declaration: SSF registration number recorded by employer.
+3. Social Unity Fund Contribution (1%)
+* Definition: 1% of monthly gross, employee-borne, collected by the Tax Department for the Social Unity Fund.
+* Calculation/application: deducted from gross before income tax.
+* Declaration: none required from the employee; withheld automatically.
+4. Direct Work Expenses (Art. 55)
+* Definition: amounts received for actual expenses incurred in performing work.
+* Application: excluded from taxable income and from the social security and Social Unity Fund bases (Art. 55) — this is reimbursement of actual, receipted work expenses, not pay. A fixed cash allowance of a similar name (e.g. a flat transport allowance) is by contrast taxable and sociable, and is catalogued separately in the Wage Type Catalogue.
+5. Disciplinary Deductions (Art. 55)
+* Definition: amounts deducted from the worker as disciplinary penalties/fines.
+* Application: reduce taxable income; capped by Labour Law (e.g., ≤ five days' wages per month, s. 117).
+6. Insurance Premiums (Art. 36)
+* Definition: life insurance premiums for the taxpayer's spouse/dependants, general insurance (fire/theft), and health insurance premiums are recognised amounts under Art. 36.
+* Application: recognised before income tax subject to the Art. 36 framework; employee provides evidence of premiums.
+Are salary sacrifice arrangements allowed?
+Libya has no formal salary-sacrifice regime. Because nearly all cash and in-kind pay is taxable/sociable (Art. 55), converting salary into benefits does not generally reduce the tax/SS base. Reimbursed genuine work expenses (Art. 55) are the only routinely excluded item.
+List common types of post-tax deductions and any specific ordering rules or limitations.
+Post-tax deductions and their ordering:
+7. Stamp duty — 0.5% of net salary[v][w], employee-borne, withheld by the employer (Stamp Duty Law 12/2004).
+8. Court-ordered garnishments — alimony has priority (s. 50).
+9. Loan/advance recoveries — limited to one quarter of remuneration, no interest except bank mortgage loans (s. 50).
+10. Union dues / voluntary deductions — by employee authorisation.
+Overall attachment/deduction for loans and settlements may not exceed one quarter of remuneration (s. 50).
+List any income types that are statutorily exempt from income tax.
+Exempt income
+	Basis
+	End-of-service indemnity
+	Art. 55
+	Accrued-leave cash payout on termination
+	Art. 55
+	Reimbursed actual work expenses
+	Art. 55
+	Employer retirement-scheme contributions
+	Art. 56
+	Foreign-source income of residents
+	Art. 33(10)
+	Salaries of general-budget-funded public units
+	Art. 33(11)
+	Basic and retirement pensions
+	Art. 33(12)
+	Scholarship/study income; martyr/disability compensation; life-insurance proceeds
+	Art. 33(4)–(6)
+	
+
+Legal basis: Income Tax Law 7/2010, Arts. 33, 36, 37, 55, 56; Labour Relations Law 12/2010, ss. 50, 117; Stamp Duty Law 12/2004; Social Unity Fund levy.
+7.2 Benefits in Kind (BIK)
+Are non-cash benefits taxed via the standard payroll system, or a separate employer-paid regime?
+Via the standard payroll system. Libya has no separate fringe-benefit-tax (FBT) regime. In-kind benefits are part of taxable employment income under Art. 55 and are taxed in the employee's payroll.
+What is the definition of fringe benefits and how is the taxable amount evaluated?
+Fringe benefits are non-cash payments/benefits provided for services (Art. 55, "benefits … whether cash or in kind"). The taxable amount is the value of the benefit provided (e.g., the cost/market value of housing, a vehicle, or paid personal expenses), added to gross.
+If a separate FBT regime exists, describe it in detail.
+Not Applicable — Libya has no separate FBT regime; benefits are taxed within employee payroll.
+What is the calculation logic for fringe benefit tax?
+Not Applicable as a separate tax. The in-kind value is added to the month’s gross and taxed at the 5%/10% schedule. In-kind benefits are variable/non-recurrent pay and do not form part of the Actual-Salary base, so they are excluded from the social security base (Art. 32).
+Are benefits-in-kind also subject to withholding tax?
+Yes — because they form part of employment income, the employer withholds PIT on the value of taxable in-kind benefits as part of the monthly calculation.
+Which benefits-in-kind must be processed via payroll, and which require declarations?
+Recurring in-kind benefits with a determinable monthly value (company housing, company car for private use, employer-paid personal utilities) are valued and processed via payroll. Employer-paid insurance premiums recognised under Art. 36 and reimbursed genuine work expenses are handled by declaration/evidence rather than as taxable pay.
+Legal basis: Income Tax Law 7/2010, Arts. 36, 55, 56.
+7.3 Garnishments and Court Orders
+What are the rules for processing statutory deductions like child support, court-ordered fines, or tax levies?
+Court-ordered deductions (including alimony/child support and fines) are processed against net pay after statutory deductions. Alimony debts have priority over other attachments (s. 50). Tax levies by the Authority are enforced under the Income Tax Law's collection powers.
+Is there a statutory priority order if an employee has multiple garnishments?
+Yes — alimony/maintenance debts rank first (s. 50). Remaining attachments and loan recoveries share the balance within the overall one-quarter cap.
+Are there protected earnings limits?
+Yes. Remuneration may not be attached by more than one quarter, and the employer may not deduct more than one quarter for loans/settlements (s. 50), preserving at least three quarters of remuneration for the employee. Disciplinary deductions are separately capped (s. 117; and in the public service ss. 160–161).
+Legal basis: Labour Relations Law 12/2010, ss. 50, 117, 160, 161; Income Tax Law 7/2010 collection provisions.
+________________
+
+
+Module 8: Statutory Leave Management
+Purpose: To define the rules for all statutory leave types in Libya.
+8.1 Leave Entitlements
+Libya's statutory leave regime is set by the Labour Relations Law No. 12 of 2010 (which repealed the 1970 Labour Code — Art. 4 of the promulgation). The law operates a dual regime: Part III (contractual/private-sector workers, ss. 67–121) and Part IV (public/statutory service, ss. 122–183). Unless stated otherwise, the values below are the private-sector (Part III) rules, which govern Mercans-processed commercial payroll.
+The tax treatment is uniform and favourable: under Income Tax Law 7/2010, the cash allowance for accumulated leave paid at end of service and end-of-service indemnity are excluded from taxable employment income (Art. 55). Leave paid *during* employment (i.e., paid time off at normal salary) is ordinary taxable/sociable salary.
+For each type of statutory leave, what are the eligibility criteria and accrual methodology?
+The statutory leave types and their entitlements are:
+Leave type
+	Entitlement
+	Eligibility / notes
+	Article
+	Annual leave
+	30 days per year
+	All workers
+	s. 30
+	Annual leave (enhanced)
+	45 days per year
+	Age 50+ or 20+ years of service
+	s. 30
+	Sick leave
+	45 consecutive / 60 non-consecutive days per year; max 3 months per year
+	Accredited medical report; overflow referred to medical committee and Social Security Act
+	s. 33
+	Maternity leave
+	14 weeks paid (16 weeks for multiple birth); ≥6 weeks compulsory postnatal
+	Medical certificate of presumed confinement date
+	s. 25
+	Nursing breaks
+	≥1 hour per day, paid, for 18 months after confinement
+	Working mothers
+	s. 25
+	Widow's leave (iddah)
+	4 months and 10 days, full pay
+	On death of husband
+	s. 34(c)
+	Pilgrimage (Hajj)
+	20 days, full pay
+	Granted once in the entire employment period
+	s. 34(a)
+	Marriage leave
+	2 weeks, full pay
+	Granted once in the entire employment period
+	s. 34(b)
+	Examination leave
+	Duration of the examination period, full pay
+	Enrolled students
+	s. 34(d)
+	Emergency/compassionate leave
+	≤3 days at a time, ≤12 days per year
+	Emergencies where prior authorisation impossible; not carried over; not part of annual leave
+	s. 31
+	Unpaid leave
+	Per implementing regulations
+	Employer discretion
+	s. 35
+	
+
+Accrual methodology. The Law states annual leave as a full-year lump entitlement (30 or 45 days) rather than a per-month accrual; the detailed accrual mechanic is delegated to implementing regulations (promulgation Section 2(2)). Standard business practice is to accrue proportionally over the year (30 ÷ 12 = 2.5 days per completed month, or 45 ÷ 12 = 3.75 days for enhanced entitlement) so that mid-year joiners and leavers receive a pro-rated balance. Workers are entitled to at least 15 days of continuous leave within the annual entitlement (s. 30). For service/leave rounding, a fraction of a month exceeding 15 days counts as a full month (s. 178, public-service rule applied by analogy).
+How are unpaid or partially paid leaves handled? Which wage types are affected?
+Unpaid leave (s. 35) suspends salary for the days concerned; no basic salary, allowances, or variable pay accrue for unpaid days. Sick leave beyond the statutory paid ceiling (3 months/year) becomes unpaid at the employer level and is referred to the Social Security Act for any cash sickness benefit (s. 33).
+Wage types affected by unpaid/partially paid leave:
+* Basic salary — prorated down for unpaid days.
+* Fixed allowances (transport, representation) — prorated per business practice.
+* Variable pay (overtime, commissions) — not earned during leave.
+* Social security base — reduced in proportion to paid earnings (contributions follow actual paid remuneration).
+Are there any mandatory national military service leaves?
+National/military service is not framed as a paid-leave entitlement. It is excluded from the forced-labour prohibition (s. 5 definition). Under s. 11(15), a worker must resume the post within one month of release from national service where the assignment exceeded one year (within one week otherwise); the post is protected during the assignment. Pay during service is not an employer obligation under the Law.
+Are any other kinds of leave paid by government authorities?
+Sickness beyond the employer-paid ceiling is addressed by the Social Security Fund under the Social Security Act (cash sickness/disability benefits — s. 33 cross-reference). Maternity cash benefits, where the employee is a registered insured person, are supported through the social security system, with the SSF providing the maternity cash benefit for up to three months. Payroll execution during a live maternity event: the employer suspends the basic-salary and allowance wage types on the payroll system — processed as unpaid (no salary and no PIT for the period; social security follows actual paid remuneration) — while the employee draws the cash benefit directly from the SSF. Where the employer's own policy is to continue paying full salary, configure a maternity top-up/recovery wage type and reclaim the benefit from the SSF; the statutory default, however, is that the SSF pays. Ordinary annual, Hajj, marriage, examination and emergency leave are employer-paid.
+What are the payout rules for statutory leaves?
+Leave taken during employment is paid at normal salary. On termination, unused annual leave is converted to a cash payout — see below.
+How are unused paid leaves treated upon termination?
+Under s. 32, on termination the worker receives monetary compensation for annual leave not taken for work-related reasons. However, a worker is not entitled to monetary compensation for annual leave not taken voluntarily for more than six months (i.e., voluntary carry-over payout is capped at six months' worth of accrued leave). The payout is calculated on the last salary. Under Income Tax Law 7/2010 Art. 55, this end-of-service leave payout is exempt from income tax.
+Provide the calculation logic for each leave type where applicable.
+Annual-leave payout on termination (worked example). An employee with a monthly salary of LYD 3,000 has 20 unused annual-leave days (all attributable to work-related reasons) at termination.
+* Step 1 — Daily rate = LYD 3,000 ÷ 30 = LYD 100.000 per day.
+* Step 2 — Payout = 20 days × LYD 100.000 = LYD 2,000.000.
+* Step 3 — Tax treatment: exempt from income tax (Art. 55). No PIT withheld on this component.
+Sick-leave pay. Paid at salary for up to 45 consecutive / 60 non-consecutive days (max 3 months) per year (s. 33). The Law does not band sick pay into full-pay/half-pay tiers; the paid period is at salary, and the overflow moves to the Social Security Act.
+How does extended unpaid leave impact social security contributions, tax status, and accrual?
+* Social security: contributions follow actual paid remuneration; during fully unpaid leave no contributions arise for those days, subject to the SSF minimum contribution base where an insured person is retained.
+* Income tax: no taxable salary accrues for unpaid days, so no PIT.
+* Leave/service accrual: unpaid leave periods are generally not counted toward service for leave-accrual and indemnity purposes unless the employer treats them as service; reserve/national-service periods are excluded from leave calculation (s. 171, public-service rule).
+Legal basis: Labour Relations Law 12/2010, ss. 25, 26, 30, 31, 32, 33, 34, 35, 43, 171, 178; Income Tax Law 7/2010, Art. 55 (leave payout exemption); Social Security Law 13/1980 (sickness/maternity cash benefits). 
+________________
+Module 9: Termination & Irregular Payments
+Objective: To detail calculation and tax rules for non-standard payments in Libya.
+9.1 Termination Payments
+What are the different types of termination payments?
+On termination of employment in Libya, the following payments may arise:
+Payment
+	Trigger
+	Basis
+	Tax treatment
+	Length-of-service indemnity (end-of-service gratuity)
+	Termination other than summary dismissal for cause
+	½ month's remuneration per year for years 1–5; 1 month's remuneration per year thereafter (s. 78)
+	Exempt from PIT (Art. 55)
+	Accrued annual-leave payout
+	Any termination
+	Unused annual leave × daily rate (capped for voluntary carry-over > 6 months) (s. 32)
+	Exempt from PIT (Art. 55)
+	Payment in lieu of notice
+	Termination without the 30-day notice
+	Remuneration for the notice period (s. 71)
+	Taxable as ordinary income
+	Death benefit
+	Death in service
+	1 month's wages + wages for the month of death, plus s. 78 indemnity (s. 80)
+	Indemnity exempt; wages taxable
+	Compensation for unjustified termination
+	Court finding of wrongful dismissal
+	Court-determined (s. 76)
+	Compensation; treat as exempt indemnity where it substitutes for statutory indemnity
+	
+
+How do termination rules and calculations differ by residential status and employer type?
+* Employer type: Part III (private/contractual, ss. 67–121) governs commercial employment and is the basis above. Part IV (public/statutory service, ss. 122–183) governs civil servants with different notice and probation rules; public budget-funded salaries are also PIT-exempt (Art. 33(11)).
+* Residential status: The s. 78 indemnity text refers to a "non-national worker," but the official translation flags this as a probable copy-paste artefact from other legislation; in practice the indemnity is applied to eligible workers regardless of nationality. A key eligibility carve-out applies to all: the indemnity is not payable where the worker is a beneficiary of the social security schemes (the SSF pension substitutes for the gratuity). Non-residents are subject to the same PIT exemption on indemnity and leave payout. 
+Detail the calculation and tax withholding rules for unused leave paid out on termination.
+Unused annual leave is paid at the last salary daily rate (monthly salary ÷ 30). Voluntary carry-over beyond six months is not compensated (s. 32). The payout is exempt from income tax under Art. 55 — no PIT is withheld. Social security is not applied to end-of-service leave compensation.[x]
+Describe the rules for statutory severance/redundancy payments.
+Statutory severance is the length-of-service indemnity under s. 78. For economic/operational redundancy (s. 72), the employer must notify the employment office two months in advance and inform the union/employment office at least one month before termination begins (s. 77); the worker receives the s. 78 indemnity (plus s. 76 compensation where the termination is unjustified). The indemnity is forfeited only where the worker resigns without observing the notice period.
+Provide the statutory formula for any tax-free portion.
+The entire end-of-service indemnity is tax-free under Income Tax Law 7/2010 Art. 55 ("end of service remuneration" is excluded from employment tax), as is the accrued-leave cash allowance. There is no monetary cap on the tax-free portion in the statute.
+Formula (s. 78):
+```
+Indemnity = (0.5 × last monthly remuneration × min(service years, 5))
++ (1.0 × last monthly remuneration × max(service years − 5, 0))
+```
+For other Employment Termination Payments (ETPs), provide a reference guide.
+ETP
+	Rule
+	Payment in lieu of notice
+	Remuneration for the 30-day notice period, or the remainder if partial notice given (s. 71). Taxable.
+	Death-in-service benefit
+	1 month's wages + wages for month of death to beneficiaries (s. 80).
+	Ex-employee disciplinary fine
+	≤ 6 × last monthly remuneration, recovered by deducting ≤ ¼ of pension/severance (s. 165).
+	Wrongful-dismissal compensation
+	Court-set, weighing nature of work, damage, service length, custom (s. 76).
+	
+
+Detail the rules for any applicable concessional tax cap.
+Libya does not operate a concessional cap regime for termination payments. Instead it uses a full statutory exemption: end-of-service indemnity and accrued-leave payout are wholly exempt from PIT (Art. 55), with no cap and no concessional rate. Ordinary taxable termination items (e.g., payment in lieu of notice, final-month salary) are taxed at the standard 5%/10% schedule.
+Provide a detailed worked example of a redundancy termination payout.
+An employee earning LYD 4,000/month is made redundant after 8 years of service, with 12 unused annual-leave days (work-related).
+* Step 1 — Indemnity, years 1–5: 0.5 × 4,000 × 5 = LYD 10,000.000.
+* Step 2 — Indemnity, years 6–8 (3 years): 1.0 × 4,000 × 3 = LYD 12,000.000.
+* Step 3 — Total indemnity = LYD 22,000.000 (exempt from PIT — Art. 55).
+* Step 4 — Leave payout: (4,000 ÷ 30) × 12 = 133.333 × 12 = LYD 1,600.000 (exempt from PIT — Art. 55).
+* Step 5 — Final-month salary (assume full month worked) = LYD 4,000.000 — taxed and contributed as ordinary salary.
+* Step 6 — Total tax-free termination payment (indemnity + leave) = LYD 23,600.000; the LYD 4,000 final salary flows through the normal Gross-to-Net.
+9.2 Irregular and Retrospective Payments
+Describe the specific tax calculation method required for irregular payments.
+Irregular payments (bonuses, commissions, one-off allowances, arrears) are part of taxable employment income under Art. 55 ("recurrent and non-recurrent"), and Art. 58 assessment "shall include incidental income received by the taxpayer during this period." In practice they are added to the month's gross, the standard deductions (SS, Social Unity Fund, exemption) are applied, and the 5%/10% schedule is applied to the combined taxable income for that month. There is no separate lump-sum averaging regime.
+How are backdated payments and retrospective salary adjustments handled?
+Backdated pay and retrospective salary increases are taxed and contributed in the month they are paid/received (Art. 57 — tax due on receipt of income), not spread back over the earned periods. The full arrears amount is added to the paying month's gross for both PIT and social security, subject to the SS ceiling for that month.
+For arrears, how are contributions and deductions computed?
+Social security contributions apply only to the sociable portion of the arrears (arrears of Actual-Salary components, not bonuses or one-off pay — Art. 32), computed in the month of payment and capped by the monthly contribution ceiling.
+Provide a worked example of a bonus calculation.
+An employee (married, no children) with a regular monthly salary of LYD 3,000 receives a LYD 5,000 performance bonus in the same month. Employee SS rate 5.125%; monthly exemption LYD 200 (married, no children).
+* Step 1 — Gross for the month = 3,000 + 5,000 = LYD 8,000.000.
+* Step 2 — Employee social security = Actual-Salary base LYD 3,000 × 5.125% = LYD 153.750 (the LYD 5,000 bonus here is a one-off/irregular payment, so it is excluded from the social security base — Art. 32; a fixed and regular bonus, or a regular benefit in kind, would instead be included in the base).
+* Step 3 — Social Unity Fund = 8,000 × 1% = LYD 80.000.
+* Step 4 — Personal exemption = LYD 200.000.
+* Step 5 — Taxable income = 8,000 − 153.750 − 80.000 − 200.000 = LYD 7,566.250.
+* Step 6 — Income tax: 5% on the first LYD 1,000 = 50.000; 10% on the remaining 6,566.250 = 656.625; total PIT = LYD 706.625.
+* Step 7 — Stamp duty = 0.5% of net. Net before stamp = 8,000 − 153.750 − 80.000 − 706.625 = 7,059.625; stamp duty = 7,059.625 × 0.5% = LYD 35.298 (applied per business practice on net salary).
+* Step 8 — Net pay ≈ 7,059.625 − 35.298 = LYD 7,024.327.
+Legal basis: Labour Relations Law 12/2010, ss. 32, 71, 72, 76, 77, 78, 80, 165; Income Tax Law 7/2010, Arts. 33(11), 55, 57, 58; Social Security Law 13/1980 (as amended by Law 1/2018); Stamp Duty Law 12/2004; Social Unity Fund levy.
+________________
+
+
+Module 10: Reporting, Compliance & Finalisation
+Purpose: To define all statutory reporting obligations and final processing rules. This module provides a summary; field-level layouts live in the Report Specifications and are not reproduced here.
+10.1 Statutory Reporting
+Describe the country's primary digital payroll reporting system.
+Libya does not operate a single unified digital payroll-reporting portal comparable to a national e-filing declaration system. Reporting is split between two authorities:
+* Tax Department — the employer submits the monthly declared payroll (names, positions, income — Art. 60), effectively a self-assessment, together with PIT, the Social Unity Fund (1%) and stamp duty.
+* Social Security Fund (SSF) — the employer submits the monthly contribution schedule and remits the 20.50% contribution within 10 days after month-end.
+Filing is done on the authorities' prescribed forms (Arabic). Submissions to the two authorities are separate, not consolidated on a single grid.
+Deliverable: Data Disaggregation Mapping Guide (main reporting categories)
+Reporting category
+	Contents
+	Authority
+	Monthly payroll declaration
+	Employee list, positions, gross income, PIT withheld
+	Tax Department
+	Social Unity Fund schedule
+	1% of gross per employee
+	Tax Department
+	Stamp duty
+	0.5% of net salaries
+	Tax Department
+	Social security contribution schedule
+	Insurable earnings, employee 5.125% + employer 14.35%/15.375%
+	Social Security Fund
+	
+
+List all other mandatory reports, stating the frequency, file format, due date, reporting authority.
+Report
+	Frequency
+	Due date
+	Authority
+	Scope
+	Payroll declaration + PIT
+	Monthly
+	60 days + 15-day grace after month-end
+	Tax Department
+	In scope
+	Social Unity Fund (1%)
+	Monthly
+	With tax filing
+	Tax Department
+	In scope
+	Stamp duty (0.5% net)
+	Monthly
+	With tax filing
+	Tax Department
+	In scope
+	Social security contribution schedule
+	Monthly
+	Within 10 days after month-end
+	Social Security Fund
+	In scope
+	Employer workforce notification (enterprise/workforce details, s. 52)
+	On commencement / on change
+	As required
+	Employment Office
+	HR-scope (headcount/skills data) — see below
+	
+
+File formats are the authorities' prescribed Arabic forms; exact layouts are held in the Report Specifications.
+HR-scope descoping (C1/F19). Any report requiring workforce data beyond the payroll system — headcount by qualification, nationality quotas (e.g., the 75% Libyanization return under s. 51), or skills/manpower statistics filed with the Employment Office — is HR-scope, not payroll-scope. These are descoped from payroll integration and recorded in `scope_manifest.json` under `authority_filings.out_of_scope` with the reason "HR-scope — requires data beyond payroll system" and client impact "Refer to HRMS team."
+What pay elements are required as intermediates from payroll for reporting?
+Gross earnings per employee, employee social security contribution, employer social security contribution, insurable earnings (capped at ceiling), taxable income, PIT withheld, Social Unity Fund (1%), stamp duty (0.5% of net), and net pay.
+Employer stamp duty on remittances (employer cost). Separately from the employee’s 0.5% salary stamp duty, the employer bears a 0.5% stamp duty on the value of the payment bundle it remits to the Tax Department (monthly PIT withheld plus the 1% Social Unity Fund). It does not apply to the SSF contribution, which is remitted separately to the Social Security Fund. This is a corporate transaction fee — an employer cost tracked on the tax payment, not a per-employee payroll deduction — so it does not enter the Gross-to-Net sequence. 
+10.2 Integrations
+Is there any mandatory inbound integration?
+There is no mandatory statutory inbound data feed that the payroll engine must parse from an authority (no government-issued tax-code or rate file pushed to employers). Inbound data is limited to client-provided master data and, where applicable, SSF registration confirmations handled operationally.
+Is there any mandatory outbound integration beyond standard reporting?
+Beyond the monthly Tax Department and SSF submissions and the bank payment file (salary disbursement + statutory remittances), there is no additional mandatory outbound integration. Payment of net salaries and statutory amounts is by bank transfer.
+10.3 Payslip Requirements
+List all mandatory components that must be itemized on an employee payslip.
+A compliant Libyan payslip itemises:
+* Employer name and employee identifying details;
+* Pay period and pay date;
+* Basic salary and each allowance/component;
+* Overtime and any bonuses;
+* Gross earnings;
+* Employee social security contribution (5.125%);
+* Social Unity Fund (1%);
+* Income tax withheld;
+* Stamp duty (0.5% of net);
+* Any other deductions (loans, garnishments);
+* Net pay;
+* Employer social security contribution (for transparency).
+The worker file must also reflect leave taken, bonuses, and penalties (s. 10). Detailed payslip layout is maintained in the Payslip Specification.
+10.4 Other Compliance
+Is payroll software certification mandatory?
+No. Libya does not mandate certification/accreditation of payroll software. Employers remain responsible for accurate calculation, withholding, remittance, and record-keeping.
+10.5 Year-End Processing and Finalisation
+Describe the mandatory year-end finalisation process.
+There is no employer year-end PIT reconciliation for employees (independent monthly withholding). Individual taxpayers may file an annual declaration within 90 days after year-end (Art. 38). Employers close the year by ensuring all 12 monthly declarations and remittances are complete and reconciled.
+What documentation or annual statements must be provided to employees?
+There is no statutory annual tax certificate mandated for employees. Employers customarily provide employees with monthly payslips and, on request, a salary/tax summary; end-of-service documentation is provided on termination.
+Is there a formal process for correcting errors discovered after the fiscal year has been closed?
+Yes. Under-declared or over-declared tax is corrected by amended declaration/claim to the Tax Department. Since Law No. 1 of 2025 repealed the assessment and collection limitation period (formerly Article 25 of Income Tax Law 7/2010), there is no time limit on the authority's right to assess and recover unpaid tax; the taxpayer's own refund claim remains subject to the five-year window (Art. 26). Social security corrections are made with the SSF. Late/short payment attracts the statutory penalties (PIT 1%/month to 12%; SS 5% per annum).
+Legal basis: Income Tax Law 7/2010, Arts. 26, 38, 60; Law No. 1 of 2025 (repeal of the assessment/collection limitation period); Social Security Law 13/1980; Stamp Duty Law 12/2004; Labour Relations Law 12/2010, ss. 10, 51, 52; Social Unity Fund levy.
+________________
+
+
+Module 11: Advanced Scenarios & Cross-Cutting Logic
+Purpose: To capture complex, overarching rules that affect multiple aspects of Libyan payroll.
+11.1 Calculation Logic
+How is the proration and projection logic applied for income tax, social security, exemptions, and deductions?
+* Income tax: independent monthly withholding — no annual projection. Each month is taxed on its own taxable income. For partial months, gross is prorated (× days ÷ 30) and taxed for that month.
+* Social security: computed on the actual monthly Actual-Salary base (stable pay), prorated for partial months, capped at the SSF ceiling (LYD 16,000/month).
+* Exemptions: the monthly personal exemption is applied per month; the tax law pro-rates the annual exemption where the assessment term is less than a full year (Art. 36). A status change affects tax only from the following month (Art. 37).
+* Deductions: the Social Unity Fund (1%) and stamp duty (0.5% net) apply to the actual amounts of the month; loan/garnishment recoveries respect the one-quarter cap (s. 50).
+If tax or contribution rates change mid-pay period, which rates apply?
+Because tax is due on receipt (Art. 57) and contributions are computed monthly, the rate in force for the pay month applies to that month's earnings. A mid-month statutory rate change is applied from the effective date per the amending instrument; in practice the rate in force at the pay date governs the monthly calculation. (For example, the SS employee rate moved from 3.75% to 5.125% effective 1 June 2022 — payroll from that month applied 5.125%.)
+How are tax and social security handled when an employee is paid multiple times in a single pay period?
+All payments within the calendar month are aggregated: social security is computed on the combined monthly gross (capped at the ceiling), and income tax on the combined monthly taxable income. The monthly exemption is applied once. Multiple in-month payments are not each given a fresh threshold/exemption.
+How is payroll calculated if an employee's pay cycle changes mid-year?
+Libya is uniformly monthly, so pay-cycle changes do not normally arise. If a special arrangement changes the period, contributions and tax are computed on the actual earnings for each calendar month, with the monthly threshold and exemption applied per calendar month.
+How is employer-borne tax (a guaranteed net) handled?
+Where the employer promises a fixed net and bears the employee’s PIT, social security, Social Unity Fund and stamp duty, the gross is grossed up so that the net equals the promised amount. For a single employee with taxable income in the 10% band and social security below the ceiling, the closed-form is G = (Target ÷ 0.995 − 0.10E − 50) ÷ 0.844875, where Target is the promised net and E is the monthly personal exemption; re-derive if the taxable income falls in the 5% band, if the SS ceiling is reached, or for a different exemption. The employer-borne statutory amounts remain payable to the authorities in the normal way.
+11.2 Special Employee Groups & Income
+How does taxation and social security differ for part-time employees and Board of Directors?
+* Part-time employees: taxed and contributed on actual earnings; the monthly exemption still applies. The SSF minimum contribution base may bring low part-time earnings up to a floor.
+* Board of Directors: where a director also holds a salaried employment, that salary is taxed and contributed normally. Fees to non-employee directors are not employment income for SS purposes.
+How is taxation handled for employees with multiple employers?
+Each employer withholds on the salary it pays. The personal exemption is granted once per taxpayer per tax year and, where there are multiple sources, is deducted from the lower base (Art. 36). The SSF ceiling applies per person across employment. Employees should declare secondary employment so the exemption is not double-counted.
+What is the treatment of foreign-sourced employment income for residents?
+Foreign-source income of Libyans and foreigners residing in Libya is exempt (Art. 33(10)). Libya taxes only Libya-source employment income; there is no worldwide taxation of residents.
+How do employer stock option plans work and how are they taxed?
+There is no dedicated Libyan equity-compensation regime. Share-incentive income attributable to services performed in Libya is in principle taxable as in-kind employment income (Art. 55) in the period received. In practice, equity plans for Libya employees are typically administered by the parent/plan administrator off local payroll; where a taxable event flows through Libyan payroll, the in-kind value is added to gross and taxed at 5%/10%. (Scope: equity administration is generally owned upstream by the plan administrator — see `scope_manifest.json`.)
+How is payroll handled for employees who transfer between different legal entities mid-year?
+Each entity runs its own payroll for the period the employee is on its books. Because tax uses independent monthly withholding (no cumulation), no year-to-date tax transfer is needed. For social security and end-of-service indemnity, continuous service should be preserved where the transfer is within a group (service continuity affects indemnity accrual and leave entitlement).
+What is the process for an employee who changes citizenship or residency status during the fiscal year?
+Because taxation is territorial with an identical salary rate for residents and non-residents, a change of residency does not change the salary tax rate. A change of status (e.g., marital) affects the exemption from the following month (Art. 37). Foreign-source exemption (Art. 33(10)) continues to apply to any non-Libya-source income.
+Are there specific rules for expatriates or inpatriates?
+Yes — administrative rather than rate-based: expatriates are subject to the same 5%/10% PIT and to social security (unless a reciprocal agreement reduces SS rates); they require work-permit approval (s. 9) and the workforce must remain at least 75% Libyan (s. 51); non-citizens need a tax-clearance certificate before an exit visa (Art. 84); and where a non-resident employer has no Libyan representative, the expatriate employee self-remits the tax (Art. 59).
+Legal basis: Income Tax Law 7/2010, Arts. 33(10), 36, 37, 55, 57, 59, 84; Social Security Law 13/1980; Labour Relations Law 12/2010, ss. 9, 51.
+________________
+
+
+Module 12: Gross-to-Net Worked Examples
+Purpose: To provide a final, comprehensive validation of all researched rules using actual 2026 LYD figures.
+Parameters used throughout (2026): employee social security 5.125%; employer social security 14.350% (Libyan entity) / 15.375% (foreign branch); Social Unity Fund 1% of gross (employee); income tax 5% on the first LYD 1,000/month of taxable income and 10% above; stamp duty 0.5% of net salary; personal exemption single LYD 150/month, married-no-children LYD 200, +LYD 25 per child.
+12.1 Comprehensive Gross-to-Net Examples
+Example 1 — Full-time resident employee on a standard salary
+Single employee, Libyan private entity, gross LYD 2,500/month.
+* Step 1 — Gross = LYD 2,500.000.
+* Step 2 — Employee social security = 2,500 × 5.125% = LYD 128.125.
+* Step 3 — Social Unity Fund = 2,500 × 1% = LYD 25.000.
+* Step 4 — Personal exemption (single) = LYD 150.000.
+* Step 5 — Taxable income = 2,500 − 128.125 − 25.000 − 150.000 = LYD 2,196.875.
+* Step 6 — Income tax = (5% × 1,000) + (10% × 1,196.875) = 50.000 + 119.688 = LYD 169.688.
+* Step 7 — Net before stamp = 2,500 − 128.125 − 25.000 − 169.688 = LYD 2,177.187.
+* Step 8 — Stamp duty = 2,177.187 × 0.5% = LYD 10.886.
+* Step 9 — Net pay = 2,177.187 − 10.886 = LYD 2,166.301.
+* Employer on-cost (parallel) — employer social security = 2,500 × 14.350% = LYD 358.750; treasury 2,500 × 1.025% = LYD 25.625 (state-funded).
+Example 2 — Casual/part-time employee
+Single part-time employee, gross LYD 800/month. Because gross LYD 800 is below the LYD 1,000 SSF minimum contribution base (the operational floor, anchored to the national minimum wage), the SSF contribution base is raised to LYD 1,000 — the employee contribution is computed on 1,000, not 800. The 1% Social Unity Fund and PIT remain on the actual gross of 800.
+* Step 1 — Gross = LYD 800.000.
+* Step 2 — Employee social security = SSF base floored to LYD 1,000 (gross 800 < 1,000 floor) → 1,000 × 5.125% = LYD 51.250.
+* Step 3 — Social Unity Fund = 800 × 1% = LYD 8.000.
+* Step 4 — Personal exemption (single) = LYD 150.000.
+* Step 5 — Taxable income = 800 − 51.250 − 8.000 − 150.000 = LYD 590.750.
+* Step 6 — Income tax = 5% × 590.750 = LYD 29.538 (entirely within the 5% band).
+* Step 7 — Net before stamp = 800 − 51.250 − 8.000 − 29.538 = LYD 711.212.
+* Step 8 — Stamp duty = 711.212 × 0.5% = LYD 3.556.
+* Step 9 — Net pay = 711.212 − 3.556 = LYD 707.656.
+Example 3 — Employee with a pre-tax deduction
+Married employee (no children), gross LYD 4,000/month, contributing LYD 200/month to an approved alternate retirement scheme (deductible before tax under Art. 55).
+* Step 1 — Gross = LYD 4,000.000.
+* Step 2 — Employee social security = 4,000 × 5.125% = LYD 205.000.
+* Step 3 — Approved retirement-scheme contribution (pre-tax) = LYD 200.000.
+* Step 4 — Social Unity Fund = 4,000 × 1% = LYD 40.000.
+* Step 5 — Personal exemption (married, no children) = LYD 200.000.
+* Step 6 — Taxable income = 4,000 − 205.000 − 200.000 − 40.000 − 200.000 = LYD 3,355.000.
+* Step 7 — Income tax = 50.000 + (10% × 2,355.000) = 50.000 + 235.500 = LYD 285.500.
+* Step 8 — Net before stamp = 4,000 − 205.000 − 200.000 − 40.000 − 285.500 = LYD 3,269.500.
+* Step 9 — Stamp duty = 3,269.500 × 0.5% = LYD 16.348.
+* Step 10 — Net pay = 3,269.500 − 16.348 = LYD 3,253.152.
+Example 4 — Employee with a student loan or other special tax obligation
+Libya has no student-loan payroll-deduction regime, so the student-loan scenario is Not Applicable. The equivalent common special obligation is a court-ordered maintenance (alimony) garnishment, which has statutory priority and must respect the one-quarter attachment cap (s. 50). Married employee with 2 children, gross LYD 3,500/month, alimony order LYD 500/month.
+* Step 1 — Gross = LYD 3,500.000.
+* Step 2 — Employee social security = 3,500 × 5.125% = LYD 179.375.
+* Step 3 — Social Unity Fund = 3,500 × 1% = LYD 35.000.
+* Step 4 — Personal exemption (married + 2 children) = 200 + (2 × 25) = LYD 250.000.
+* Step 5 — Taxable income = 3,500 − 179.375 − 35.000 − 250.000 = LYD 3,035.625.
+* Step 6 — Income tax = 50.000 + (10% × 2,035.625) = 50.000 + 203.563 = LYD 253.563.
+* Step 7 — Net before stamp = 3,500 − 179.375 − 35.000 − 253.563 = LYD 3,032.062.
+* Step 8 — Stamp duty = 3,032.062 × 0.5% = LYD 15.160.
+* Step 9 — Net after statutory deductions = 3,032.062 − 15.160 = LYD 3,016.902.
+* Step 10 — Alimony garnishment = LYD 500.000 (within the ¼ cap of LYD 875.000; priority per s. 50).
+* Step 11 — Take-home pay = 3,016.902 − 500.000 = LYD 2,516.902.
+Example 5 — Non-resident/expatriate employee (foreign branch)
+Married expatriate (no children) employed by a foreign branch, gross LYD 8,000/month (assumed within the SSF contribution ceiling).
+* Step 1 — Gross = LYD 8,000.000.
+* Step 2 — Employee social security = 8,000 × 5.125% = LYD 410.000.
+* Step 3 — Social Unity Fund = 8,000 × 1% = LYD 80.000.
+* Step 4 — Personal exemption (married, no children) = LYD 200.000.
+* Step 5 — Taxable income = 8,000 − 410.000 − 80.000 − 200.000 = LYD 7,310.000.
+* Step 6 — Income tax = 50.000 + (10% × 6,310.000) = 50.000 + 631.000 = LYD 681.000 (same territorial 5%/10% schedule as a resident).
+* Step 7 — Net before stamp = 8,000 − 410.000 − 80.000 − 681.000 = LYD 6,829.000.
+* Step 8 — Stamp duty = 6,829.000 × 0.5% = LYD 34.145.
+* Step 9 — Net pay = 6,829.000 − 34.145 = LYD 6,794.855.
+* Employer on-cost (parallel) — foreign-branch employer social security = 8,000 × 15.375% = LYD 1,230.000 (no treasury share for a foreign branch).
+* Note: if the foreign employer has no representative in Libya, the employee self-remits PIT (Art. 59).
+Legal basis: Income Tax Law 7/2010, Arts. 36, 55, 57, 58, 59; Social Security Law 13/1980 (as amended by Law 1/2018); Stamp Duty Law 12/2004; Labour Relations Law 12/2010, s. 50; Social Unity Fund levy.
+________________
+
+
+Module 13: Common Business Practices & Non-Statutory Rules
+Purpose: To capture prevalent, non-statutory conventions in Libyan payroll.
+13.1 Off-Cycle, Draws, and Non-Statutory Leave
+Describe the common practice for off-cycle or ad-hoc payments.
+Off-cycle payments are uncommon because Libya runs a single monthly cycle. When they occur — corrections, late-processed joiners, or one-off approved payments — the common practice is to run a supplementary calculation and fold the amount into the next monthly declaration, applying social security, Social Unity Fund, income tax (aggregated with the month), and stamp duty as for a normal payment. Because tax is due on receipt (Art. 57), the off-cycle amount is taxed in the month it is paid. Terminal pay (final salary, exempt indemnity and leave payout) is commonly paid off-cycle at the point of separation.
+How are non-recoverable draws against future commissions typically handled?
+There is no statutory framework for commission draws. In practice, a draw paid in advance of earned commission is treated as taxable salary when paid (Art. 55/57) and reconciled against subsequently earned commission. Recovery of an over-advanced draw is a loan-type recovery subject to the one-quarter deduction cap and no-interest rule (s. 50). Genuinely non-recoverable draws are simply taxable earnings in the month paid.
+Are there common non-statutory leave types? How are they managed and reported?
+Yes. Beyond the statutory leaves (Module 8), employers commonly grant:
+* Compassionate/bereavement leave beyond the statutory emergency-leave limit (s. 31), as paid discretionary leave;
+* Additional annual leave above the 30/45-day statutory minimum, by contract or collective agreement;
+* Religious observance flexibility (e.g., around Ramadan working hours);
+* Unpaid personal leave (s. 35 framework), managed at employer discretion.
+These are managed through the employer's leave policy and recorded in the worker file (s. 10). Paid non-statutory leave is ordinary taxable/sociable salary; unpaid leave reduces the month's gross (and therefore the SS and tax bases) proportionally. Non-statutory leave is not separately reported to authorities but must be reflected in payroll records and the payslip where it affects pay.
+Legal basis: Labour Relations Law 12/2010, ss. 10, 31, 35, 50; Income Tax Law 7/2010, Arts. 55, 57; common business practice.
+LY-CCG-001 v1.0 | Mercans Compliance Regulations Team | 2026
+[a]For Lily
+[b]For Lily
+[c]For Lily
+[d]For Lily
+[e]For Lily
+[f]For Lily
+[g]For Lily
+[h]For Lily
+[i]For Lily
+[j]@evats@mercans.com Floor and ceiling here prorated on actual working days for new joiner and terminated ee?
+_Assigned to evats@mercans.com_
+[k]@lli@mercans.com Floor and ceiling are not proportioned.
+_Reassigned to lli@mercans.com_
+[l]@evats@mercans.com Is this required to calculate in system? It does not impact net pay or payslip.
+_Assigned to evats@mercans.com_
+[m]@lli@mercans.com not relevant for payroll
+_Reassigned to lli@mercans.com_
+[n]This is pre-tax deduction and post-tax deduction both.
+[o]For Lily
+[p]For Lily
+[q]For Lily
+[r]For Lily
+[s]For Lily
+[t]For Lily
+[u]For Lily
+[v]@evats@mercans.com Is this required to be handle in payroll calculation?
+_Assigned to evats@mercans.com_
+[w]Hi @lli@mercans.com this is confirmed to be required in payroll. This is calculated on net pay and deducted from net pay.
+_Reassigned to lli@mercans.com_
+[x]For Lily

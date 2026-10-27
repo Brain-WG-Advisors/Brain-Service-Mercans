@@ -1,0 +1,147 @@
+{
+ "spec": "CO-DIAN-005",
+ "final": "05-final/CO-DIAN-005-Formato2276-Spec.xlsx",
+ "flagged": [
+  {
+   "sheet": "Report Matrix",
+   "cell": "B16",
+   "field_id": null,
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Rule to be set at implementation: the file extension follows the published DIAN technical specifications for Format 2276 version 4 (Res. 000227 of 2025 art. 1.3.10.1, entry T3.45)."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "B17",
+   "field_id": null,
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Rule to be set at implementation: the character encoding follows the published DIAN technical specifications for Format 2276 version 4 (Res. 000227 of 2025 art. 1.3.10.1, entry T3.45)."
+  },
+  {
+   "sheet": "Report Matrix",
+   "cell": "A29",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "- integration_type = OUTBOUND (scope_manifest CO-OUT-2276). No inbound file: the portal returns an on-screen validation outcome, which the engine should capture for the audit trail."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C20",
+   "field_id": null,
+   "patterns": [
+    "scope_manifest"
+   ],
+   "current": "Public-sector only; PILA return types T and F are descoped in scope_manifest."
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A21",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Non-executive director paid fees only (junta directiva)",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A34",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "VAT as a higher cost and VAT withholding",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "A40",
+   "field_id": null,
+   "patterns": [
+    "PSS empty REPORT?/NOTES"
+   ],
+   "current": "Nil period still filed",
+   "B": null,
+   "C": null
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "A1",
+   "field_id": null,
+   "patterns": [
+    "title dup"
+   ],
+   "current": "Third-party Information Return on Work and Pension Income - Format 2276 version 4 - Format 2276 version 4 - Information on income and withholding on work and pension income (third-party (exogenous) information)"
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M5",
+   "field_id": "N02",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "COMPOSITE FIELD as drafted in the resolution - numeral 2 names BOTH the document type and the number in a single numeral, and the technical specification splits them into two columns. Sub-field 1 = the DIAN identity-document type code from the 'Tipo de documento (numerals 2 and 34)' table on the Field Options sheet; sub-field 2 = the identification number without dots or hyphens, kept as text so leading zeros survive. SOURCE: Employee.Document_Type and Employee.Document_Number in the employee master data. Where the master data holds no type-code field and stores the number in one column per document type (Citizenship Card ID, Identity Card for Foreigners, Identity Card, National ID), the engine holds an explicit Employee.Document_Type derived once from the populated column through a document-type mapping table supplied at implementation, with a priority rule where more than one column is filled. POPULATION: the record is required for EVERY person paid in the tax year, including leavers and employer-paid pensioners who are not active employees in the master data - their document type and number are retained after termination and held for every pensioner. Where a payment is made to a payee other than the employee (payroll field 'Beneficiary National Id', typically on pension payments), the identity reported is that of the beneficiary of the payment. PERSISTENCE: this pair is the join key across every Colombian artefact for the employee - electronic payroll NIE044 / NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24 and 25."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M7",
+   "field_id": "N04",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "COMPOSITE FIELD - the beneficiary's location block of the Formato 2276 v4 technical specification (Anexo T3.45 of Res. 000227/2025): address, department (2 digits) and municipality (3 digits) on the DANE DIVIPOLA catalogue, and country. COUNTRY IS ALWAYS MANDATORY. Address, department and municipality are mandatory only where the country of residence is Colombia; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty. The country here is the country of the beneficiary's address, not a tax-residence marker. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data, with the address and the country taken from the same employee address record; where the master data holds a letter department code and a free-text city, the codes are obtained through a maintained mapping table validated against DIVIPOLA and supplied at implementation. Free text must never be sent in the department, municipality or country sub-fields. Location is retained for leavers and held for employer-paid pensioners."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M21",
+   "field_id": "N17",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Work-income payments with no dedicated numeral (Anexo T3.45 of Res. 000227/2025, element potro): non-habitual, one-off bonuses (a habitual bonus goes to numeral 5, element pasa), non-salary allowances, payments in kind to third parties for the employee's benefit, equity-based compensation, termination indemnities, and one-off payments to a retiree that are not a pension - a retirement gratuity, a pension-related compensation or settlement - while the pension itself goes to numeral 21 (element peju). Fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary. In-kind and informative wage types (paid to third parties or abroad, e.g. the 'Inf.' and foreign-paid wage types) are explicitly classified wage type by wage type in the classification table supplied at implementation. Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M32",
+   "field_id": "N25",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Voluntary contributions to the mandatory individual-account regime (RAIS) under ET art. 55. DISTINCT from numeral 26. Source: voluntary-pension deduction wage types carrying the configuration attribute 'RAIS voluntary (art. 55)'. The attribute is assigned per wage type in the classification table supplied at implementation, across the voluntary-pension deduction wage types - the '(FVOL)' provider wage types 25811-25815 and 25823 and the institutional-plan wage types 25820, 25821, 21210, 21211, 65803 and 65804 - each of which is classified as art. 55 (numeral 25) or art. 126-1 (numeral 26). A combined APV total is never used as the source. Maps to Form 220 casilla 55."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M33",
+   "field_id": "N26",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "Voluntary contributions to voluntary pension funds under ET art. 126-1. Source: voluntary-pension deduction wage types carrying the configuration attribute 'voluntary pension fund (art. 126-1)'. The attribute is assigned per wage type in the classification table supplied at implementation, across the '(FVOL)' provider wage types (25811-25815, 25823) and the institutional-plan wage types (25820, 25821, 21210, 21211, 65803, 65804). Employer contributions to institutional plans are distinguished from employee contributions; the employer- or employee-side nature of each institutional-plan wage type (including the payment / bonus entries 65803 and 65804) is a configuration parameter supplied at implementation. Maps to Form 220 casilla 56."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M34",
+   "field_id": "N27",
+   "patterns": [
+    "rule to be set"
+   ],
+   "current": "Ahorro para el Fomento de la Construccion: the employee's AFC contributions withheld through payroll in the tax year, by payment date. Source: the AFC deduction wage types (one wage type per bank, 'AFC <bank>'), summed across banks. Rule to be set at implementation: the treatment of AFC reimbursement / reversal wage types ('Reimbursement AFC') in the annual accumulation. Maps to Form 220 casilla 57 and to electronic payroll NIE179."
+  },
+  {
+   "sheet": "Formato 2276 Spec",
+   "cell": "M41",
+   "field_id": "N32",
+   "patterns": [
+    "configuration parameter"
+   ],
+   "current": "INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8 (element vaex), which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026); where the salary exceeds 310 UVT the whole payment is reported in numeral 7 (element pabop) and this numeral stays nil (Anexo T3.45 of Res. 000227/2025, element pagahuvt). Source: the meal-allowance-in-kind wage type(s) tagged as 'meal paid to a third party' (e.g. 'Meal Allowance Inf.'); the tag is a configuration parameter supplied at implementation and is applied only to meal payments made to a food supplier."
+  }
+ ]
+}

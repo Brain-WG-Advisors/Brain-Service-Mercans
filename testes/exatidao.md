@@ -324,6 +324,7 @@ O gabarito não foi alterado. Pontos para decidir:
   - T-018 ❌: triplet Threshold/Base/Amount. O hub [[Irlanda]] é ambíguo ("Differential" × "padrão IE: triplet").
   - T-028 ⚠️: base pela FAQ ETA de mar/2026, que não está no pacote.
 - **T-016 ⚠️:** conhece o design v1.1, mas propõe outra estrutura.
+- **Repetição com a skill v3** (T-013, T-016, T-018, T-028): a nota não mudou, mas T-013 (Oficio 036846/2015, ARL), T-018 (leitura "específica do RPN" = Irlanda) e T-028 (FAQ ETA v4 2026) indicam **gabarito a revisar** na fonte primária. Detalhe em CORRECAO.
 - **Ações:**
   - SKILL.md: a correção do cérebro vence a busca web, e o design registrado vem antes de propor outro.
   - Desambiguar o hub da Irlanda (conferir no DevKB).

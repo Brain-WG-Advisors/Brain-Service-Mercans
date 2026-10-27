@@ -73,3 +73,15 @@ Erro conhecido repetido: T-018 (inteiro) e T-013 (parcial, só ARL). As duas anu
 - 2 das 4 falhas (T-018 e T-028) podem ser problema de gabarito ou de pacote, não do modelo: decidir na fonte antes de agir.
 - Pesquisa em conversas anteriores e memória continuaram ativas: as respostas podem ter lido as rodadas 1 e 2 (ex.: T-002 cita "spotted in today's accuracy test"; T-024 cita a correção de 2026-10-27). Medição não é cega.
 - Achados fora do pedido trazidos pelas respostas: WTC ES V4.4 com 79429/79430 ainda em B.03 (T-003); skill CO `02-wtc.md` com licenças isentas (T-013); TFE-001 do Chade com transporte na base (T-017); CCG Canadá Example D com PM = 6 para admissão em julho (T-025); WTC EG-8003 com texto antigo (T-028); skill NL §4.3 / QA U1 com linha deslocada (T-020).
+
+## Repetição com a skill v3 (2026-10-27): T-013, T-016, T-018, T-028
+A skill v3 traz as regras "o cérebro vence a web" e "responder primeiro pelo design registrado". Correção feita pela janela geral.
+
+| # | Nota | O que disse | Leitura |
+|---|---|---|---|
+| T-013 | ❌ (gabarito a revisar) | Comum e maternidade/paternidade/parental: tributáveis (Oficio 27408/2019 e 901191/2020) ✅. ARL: isenta até o mínimo legal (Oficio 036846/2015, que liga o num. 1 ao DL 1295 art. 94 e à Ley 776 art. 3) | Não ignorou a correção: trouxe um Oficio DIAN específico da ARL que a nossa correção não discute. Conferir o 036846/2015 na fonte antes de manter "ARL tributável" |
+| T-016 | ⚠️ | Parte do v1.1 (UTM, 58121/58122/58123, um passo YTM) e mostra com números que o YTM único só é exato com meses iguais; propõe o Art. 46 exato | Respondeu pelo design e depois sugeriu outra coisa. Se o gabarito quiser só o v1.1, fica ⚠️; a crítica parece pertinente (levar ao design) |
+| T-018 | ❌ (gabarito a revisar) | Triplet Threshold/Base/Amount para a Irlanda: "a correção de 02/07 diz que a decomposição era específica do RPN, logo certa para a Irlanda" | O texto da correção sustenta essa leitura (o RPN é irlandês). Conferir no DevKB se o `Differential` vale para a Irlanda |
+| T-028 | ⚠️ (gabarito a revisar) | Sim, empregado, 0,05%. Base: a Circular MoF 14/2021 diz total mensal; a FAQ ETA v4 (mar/2026) diz só as verbas básicas; segue o sistema ETA e avisa a divergência | A fonte nova (FAQ ETA 2026) não está no cérebro. Conferir antes de manter "total mensal" |
+
+**Resultado:** a nota não mudou (24/28), mas 3 das 4 falhas apontam para o gabarito e não para a resposta. As respostas também acharam resíduos nos pacotes das skills: WTC da Colômbia (LicenciaMP isenta) e WTC do Egito (EG-8003 "só setor público").

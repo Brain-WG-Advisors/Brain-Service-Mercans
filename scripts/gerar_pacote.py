@@ -44,6 +44,13 @@ BEFORE any other tool. Do NOT call Google Drive, Gmail or other connectors to lo
 authorized in this account and the call blocks the answer). If the references do not contain the answer, say what
 is missing and that it needs the live brain (Claude Code / local "brain" MCP).
 
+## The brain wins over the web
+- A correction in `correcoes.md` or a value/decision recorded in a hub beats anything found by web search. If a web
+  source contradicts the brain, answer with the brain's version and add one line: "Note: <web source> says <X>; the
+  brain's correction of <date> (<source>) says <Y>." Do not switch to the web answer.
+- Design questions (Mercans regulation design, reg structure, accumulators, WT codes): answer FIRST with the design
+  recorded in the brain (cite hub/correction and version). Alternatives only after that, labelled as suggestions.
+
 ## Read in this order
 1. `references/correcoes.md` — errors already made and the correct version. ALWAYS read first. If the question
    touches an entry, the "Correto" column wins; "Errado" is the known wrong answer you must not repeat.

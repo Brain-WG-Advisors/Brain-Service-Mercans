@@ -1,6 +1,6 @@
 # Onde paramos
 
-> Atualizado em 2026-10-27 (fim da sessão [[sessoes/2026-10-27]]; blocos da Colômbia de 26/10 e demais sem mudança desde 2026-10-20). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-10-27, fim da tarde (sessão [[sessoes/2026-10-27]]; blocos da Colômbia de 26/10 e demais sem mudança desde 2026-10-20). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
 
 ## Rede de conhecimento (Fase R) e teste de exatidão (2026-10-27)
 - **Prioridade:** a rede no Obsidian vem antes (Fase R do [[PLANO]]); a Fase 2 (fumaça e rodada 2 no projeto "Brain Service" do claude.ai) está pausada. O objetivo continua a eficiência da entrega no dia a dia.
@@ -15,6 +15,18 @@
   - ~~religar os 5 conectores do claude.ai~~ ✅ religados em 2026-10-27 pela janela geral (Chrome);
   - push dos commits `a924890`, `afc11c8`, `5110bf5` quando quiser.
 - **Esperando frente Suporte:** conferir o teto SSC da Namíbia (GN 236/2026 × N$99 dito no HRBS-12111), em [[Namibia]] Pendências.
+
+## Eficiência (2026-10-27, tarde) — ver [[sessoes/2026-10-27]]
+- **Pronto:**
+  - properties e painel gerado nos 52 hubs (`paineis/paises.base`);
+  - scripts `contexto_pais`, `atualizar_tickets`, `achar_versao`, `conferir_import`, `onde_estamos` e `medir_eficiencia`;
+  - regras "Respostas eficientes" no [[CLAUDE]];
+  - exatidão no Claude Code: 28/28.
+- **Próxima sessão:** método para integrar o cérebro ao **Claude Desktop** e ao **claude.ai web**, levando o ganho do Claude Code para onde o time trabalha.
+- **Segunda (S45):** `medir_eficiencia.py` → [[testes/eficiencia]].
+- **Esperando o usuário:**
+  - reabrir as frentes (`abrir_frentes.ps1 -Retomar`);
+  - conferir França CCG/WTC v1.1 e Bélgica (hub > Drive).
 
 ## Colômbia PMI — pesquisa concluída (2026-10-26)
 - Encerrada em 26/10: artefatos finais no Drive/Monday (7 specs v1.0, CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1); delta ao design e e-mail de encerramento enviados pelo usuário; registros no chat "Research Pipeline II". Resumo: [[sessoes/2026-10-26]]; planilha [[Research Pipeline/Colombia/co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx|CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx]].

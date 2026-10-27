@@ -26,7 +26,23 @@
    - Regerar e subir toda segunda, junto com o `medir_eficiencia`.
 3. **Depois, se o chat do Desktop for usado no dia a dia (B):** criar o MCP local "brain", só leitura.
 
-## Perguntas ao usuário
+## Decisão e implantação (2026-10-27)
+- **Decisão do usuário:** caminhos 2 (skill + Projeto) e 3 (MCP local), de **uso pessoal**. Pode ficar na conta da Mercans, mas só para ele: skill pessoal, sem provisionar para o time.
+- **2, pronto:**
+  - `scripts/gerar_pacote.py` gera `publicar/skill/brain-service.zip`, a skill pessoal. Ela contém SKILL.md com a ordem de leitura e as regras de resposta, mais `references/`: correções, fronteiras, serviços, 52 hubs e `painel-paises.md`.
+  - Gera também `publicar/AAAA-MM-DD/` (os mesmos 60 arquivos para o Projeto).
+  - Checagem de credenciais embutida.
+  - Pacote de 2026-10-27: cerca de 111 mil palavras, 324 KB.
+- **3, pronto:**
+  - `scripts/mcp_brain.py` (servidor MCP "brain", só leitura). Ferramentas: `contexto_pais`, `achar_versao`, `onde_estamos`, `buscar`, `ler_nota` e `grafo`. Estão bloqueados `.env`, `.git`, `.obsidian`, `publicar/` e o que estiver fora da pasta.
+  - Registrado em `%LOCALAPPDATA%\Claude-Data\claude_pzs8sxrjxfjjc\claude_desktop_config.json` (`mcpServers.brain`, via `uv run --with "mcp<2"`; o mcp 2.x renomeou o FastMCP).
+  - Teste de handshake: as 6 ferramentas responderam.
+- **Falta (usuário):**
+  - fechar o Claude Desktop por completo e reabrir;
+  - subir a skill;
+  - depois, rodada 3 do teste de exatidão no claude.ai, com a skill ligada.
+
+## Perguntas ao usuário (respondidas em 2026-10-27)
 - O time vai usar o cérebro, ou só você? Se for o time, a skill precisa ser provisionada pelo admin da Mercans; as skills `mercans-*` já são provisionadas assim.
 - Pode subir na conta da Mercans, como skill/Projeto, o conteúdo interno do cérebro (hubs, correções, versões)? Os nomes de clientes que já estão nos hubs entram também. Sem isso, o pacote leva só as regras e as fichas, sem os tickets.
 

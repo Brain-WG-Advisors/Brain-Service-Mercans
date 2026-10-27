@@ -37,6 +37,13 @@ Personal knowledge base of the compliance analyst. Notes are in Portuguese; answ
 This is a SNAPSHOT generated on {hoje} from the local brain (Obsidian vault). Ticket states and versions may have
 changed since: say "as of {hoje}" when citing them.
 
+## FIRST: use this skill's files, not connectors
+Everything needed (current artifact versions, WT classifications recorded in corrections, ticket states,
+decisions) is in `references/`. Read `references/correcoes.md`, `references/painel-paises.md` and the country hub
+BEFORE any other tool. Do NOT call Google Drive, Gmail or other connectors to look for artifacts (Drive is not
+authorized in this account and the call blocks the answer). If the references do not contain the answer, say what
+is missing and that it needs the live brain (Claude Code / local "brain" MCP).
+
 ## Read in this order
 1. `references/correcoes.md` — errors already made and the correct version. ALWAYS read first. If the question
    touches an entry, the "Correto" column wins; "Errado" is the known wrong answer you must not repeat.

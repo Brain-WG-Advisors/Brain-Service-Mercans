@@ -111,6 +111,7 @@
 |---|---|---|---|---|---|---|---|---|
 | 2026-10-27 | 1: linha de base | claude.ai fora de projeto, conectores desligados no chat, skills Mercans + busca web + memória + pesquisa em conversas anteriores ativas | A | 20 | 5 (1 instável: T-003) | 5 | **20/30** | 3 perguntas (T-001, T-003, T-024; 4 respostas) + 1 parcial (T-017, só CNPS) |
 | 2026-10-27 | 2: Claude Code + cérebro (livro aberto) | Claude Code (Opus 5.5), 1 resposta por pergunta, 3 agentes; `contexto_pais.py` + hub + correcoes + arquivos locais/Drive; sem web (1 consulta secundária na T-010); skills de país não carregadas; gabarito bloqueado | A | 28 | 0 | 0 | **28/28** (T-001 e T-003 anuladas como na rodada 1; as duas respostas seguem a revisão do gabarito) | nenhum |
+| 2026-10-27 | 3: claude.ai + skill brain-service | claude.ai org Mercans, Opus 5.5 Alto, 1 passada; skill brain-service v2 (pessoal) + skills Mercans; pesquisa de conectores desligada; memória e pesquisa em conversas anteriores ativas | A | 24 | 2 (T-016, T-028) | 2 (T-013, T-018) | **24/28** (T-001/T-003 anuladas) | T-018; T-013 em parte (ARL) |
 
 - T-001 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-001-r1|r1]] · [[testes/rodadas/2026-10-27/T-001-r2|r2]]
 - T-002 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-002-r1|r1]] · [[testes/rodadas/2026-10-27/T-002-r2|r2]]
@@ -314,6 +315,20 @@ O gabarito não foi alterado. Pontos para decidir:
 - **Achados fora do pedido** (registrados nos hubs): spec AFI v2.0-FINAL B55/L55 ainda "Tipo de Riesgo Laboral" ([[Espanha]]); spec 4DF v3.3 B72 rotula 157 como renda de não residente e WTC UA V4.3 com justificativa genérica nas linhas 65808 e 62942 ([[Ucrania]]); CCG UA V1.6 no Drive (hub corrigido). A leitura de versões do Drive não pegava "V1_6": corrigidos Ucrânia CCG, Egito CCG v1.4, Hungria WTC v1.0, Romênia WTC v3.2.
 - **Ações:** `contexto_pais` mostrar a correção inteira quando houver poucas (≤ 10); Conjunto C.
 - Respostas: [[testes/rodadas/2026-10-27-claude-code/T-001|T-001]] · [[testes/rodadas/2026-10-27-claude-code/T-002|T-002]] · [[testes/rodadas/2026-10-27-claude-code/T-003|T-003]] · [[testes/rodadas/2026-10-27-claude-code/T-004|T-004]] · [[testes/rodadas/2026-10-27-claude-code/T-005|T-005]] · [[testes/rodadas/2026-10-27-claude-code/T-006|T-006]] · [[testes/rodadas/2026-10-27-claude-code/T-007|T-007]] · [[testes/rodadas/2026-10-27-claude-code/T-008|T-008]] · [[testes/rodadas/2026-10-27-claude-code/T-009|T-009]] · [[testes/rodadas/2026-10-27-claude-code/T-010|T-010]] · [[testes/rodadas/2026-10-27-claude-code/T-011|T-011]] · [[testes/rodadas/2026-10-27-claude-code/T-012|T-012]] · [[testes/rodadas/2026-10-27-claude-code/T-013|T-013]] · [[testes/rodadas/2026-10-27-claude-code/T-014|T-014]] · [[testes/rodadas/2026-10-27-claude-code/T-015|T-015]] · [[testes/rodadas/2026-10-27-claude-code/T-016|T-016]] · [[testes/rodadas/2026-10-27-claude-code/T-017|T-017]] · [[testes/rodadas/2026-10-27-claude-code/T-018|T-018]] · [[testes/rodadas/2026-10-27-claude-code/T-019|T-019]] · [[testes/rodadas/2026-10-27-claude-code/T-020|T-020]] · [[testes/rodadas/2026-10-27-claude-code/T-021|T-021]] · [[testes/rodadas/2026-10-27-claude-code/T-022|T-022]] · [[testes/rodadas/2026-10-27-claude-code/T-023|T-023]] · [[testes/rodadas/2026-10-27-claude-code/T-024|T-024]] · [[testes/rodadas/2026-10-27-claude-code/T-025|T-025]] · [[testes/rodadas/2026-10-27-claude-code/T-026|T-026]] · [[testes/rodadas/2026-10-27-claude-code/T-027|T-027]] · [[testes/rodadas/2026-10-27-claude-code/T-028|T-028]] · [[testes/rodadas/2026-10-27-claude-code/T-029|T-029]] · [[testes/rodadas/2026-10-27-claude-code/T-030|T-030]]
+
+### Rodada 3: claude.ai + skill brain-service (2026-10-27)
+- **Nota: 24/28 ✅**: rodada 1 no claude.ai, 20/28; rodada 2 no Claude Code, 28/28. Correção em [[testes/rodadas/2026-10-27-claudeai-skill/CORRECAO|CORRECAO]].
+- **Viraram ✅:** T-006, T-022 e T-026 (antes ❌) e T-010, T-017 e T-024 (antes ⚠️). O material interno agora vem na skill.
+- **Pioraram:**
+  - T-013 ❌: na ARL, preferiu ofícios DIAN achados na web à correção do Oficio 27408.
+  - T-018 ❌: triplet Threshold/Base/Amount. O hub [[Irlanda]] é ambíguo ("Differential" × "padrão IE: triplet").
+  - T-028 ⚠️: base pela FAQ ETA de mar/2026, que não está no pacote.
+- **T-016 ⚠️:** conhece o design v1.1, mas propõe outra estrutura.
+- **Ações:**
+  - SKILL.md: a correção do cérebro vence a busca web, e o design registrado vem antes de propor outro.
+  - Desambiguar o hub da Irlanda (conferir no DevKB).
+  - Conferir a FAQ ETA (T-028).
+  - Levar a correção 27408 à skill da Colômbia.
 
 ## Quarentena do Conjunto C (data de corte = data do MVP: AAAA-MM-DD)
 | # | Ticket | Resolvido em | País | Pergunta derivada | Ingerir depois de |

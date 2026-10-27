@@ -6,7 +6,7 @@ etapa_research_data: 2026-08-10
 etapa_design: "aguardando"
 etapa_design_data: 
 etapa_producao: 
-etapa_suporte: "sem tickets abertos; estado não lido: CT-4457"
+etapa_suporte: "1 aberto(s): CT-4457"
 etapa_suporte_data: 2026-10-27
 ccg: 
 ccg_data: 
@@ -20,7 +20,7 @@ sir:
 sir_data: 
 payslip: "v1.0 (Google Sheets)"
 skill: 
-tickets_abertos: 0
+tickets_abertos: 1
 tickets_conferidos_em: 2026-10-27
 atualizado_em: 2026-10-27
 ---
@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | 🔄 | ~2026-08-10 | CT-4457 (CN_China_Compliance Artifacts for development) é o pai; só o Payslip Generator aparece nas fontes. Resto [INCERTO]. |
 | [[design]] | ⏳ | | [INCERTO] sem registro |
 | Produção (outro time) | — | | |
-| [[suporte]] | ✅ | 2026-10-27 | API 27/10: 1 fechado(s): SR-316; estado não lido na API: CT-4457. Antes (~2026-08-10): SR-316 aberto, sem resposta nossa no snapshot |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: CT-4457 Open; 1 fechado(s): SR-316. Antes (~2026-08-10): SR-316 aberto, sem resposta nossa no snapshot |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |

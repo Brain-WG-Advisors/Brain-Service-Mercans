@@ -6,7 +6,7 @@ etapa_research_data: "2026-08"
 etapa_design: "aguardando"
 etapa_design_data: 
 etapa_producao: 
-etapa_suporte: "estado não lido na API: CT-4619"
+etapa_suporte: "1 aberto(s): CT-4619"
 etapa_suporte_data: 2026-10-27
 ccg: "v1.2"
 ccg_data: 2026-09-16
@@ -20,7 +20,7 @@ sir: "v1.0"
 sir_data: 
 payslip: "sem versao declarada (arquivo 2026-09-16)"
 skill: "payroll-compliance-belgium"
-tickets_abertos: 
+tickets_abertos: 1
 tickets_conferidos_em: 2026-10-27
 atualizado_em: 2026-10-27
 ---
@@ -34,7 +34,7 @@ atualizado_em: 2026-10-27
 | [[research-pipeline]] | 🔄 | snapshot 2026-08 | CCG, WTC, SIR e 9 Report Specs existem; correções pendentes "ao fechar todos os estágios do pipeline". Colômbia entra na fila depois da Bélgica. |
 | [[design]] | ⏳ | | [INCERTO] sem design BE registrado; BE serve de precedente de formato (colunas laranja do WTC, navy do net pay) |
 | Produção (outro time) | — | | |
-| [[suporte]] | ⏳ |  | API 27/10: estado não lido na API: CT-4619. Antes (sem data): sem tickets nas fontes |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: CT-4619 Open. Antes (sem data): sem tickets nas fontes |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-belgium`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

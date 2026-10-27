@@ -236,7 +236,7 @@ $countOk = 0; $countNew = 0; $countUpd = 0; $countSame = 0; $countFail = 0
 
 # Nomes de campos "principais" (primeiro encontrado vence)
 $mainFields = @(
-    @{ Label = 'Estado';     Names = @('State', 'Estado') },
+    @{ Label = 'Estado';     Names = @('State', 'Estado', 'Status') },   # projeto CT usa 'Status' (2026-10-27)
     @{ Label = 'Prioridade'; Names = @('Priority', 'Prioridade') },
     @{ Label = 'Tipo';       Names = @('Type', 'Tipo') },
     @{ Label = 'Pais';       Names = @('Country', 'Pais', 'País') },
@@ -267,7 +267,7 @@ foreach ($i in $issues) {
             $val = ''
             foreach ($n in $mf.Names) {
                 $hit = $cf | Where-Object { $_.Name -eq $n } | Select-Object -First 1
-                if ($hit) { $val = $hit.Value; $usedNames[$hit.Name] = $true; break }
+                if ($hit -and $hit.Value -ne '') { $val = $hit.Value; $usedNames[$hit.Name] = $true; break }
             }
             if ($mf.Label -eq 'Estado') { $stateText = $val }
             $metaLines += ("- **{0}:** {1}" -f $mf.Label, $val)

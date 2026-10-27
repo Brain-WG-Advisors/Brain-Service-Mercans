@@ -28,14 +28,14 @@
 | [[Australia]] | 🔄 | 🔄 | 🔄 | [[Australia]] |
 | [[Bahrein]] | ✅ | ⏳ | ⏳ | [[Bahrein]] |
 | [[Belarus]] | ✅ | ⏳ | ⏳ | [[Belarus]] |
-| [[Belgica]] | 🔄 | ⏳ | ⏳ | [[Belgica]] |
+| [[Belgica]] | 🔄 | ⏳ | 🔄 | [[Belgica]] |
 | [[Botsuana]] | ✅ | ✅ | ⏳ | [[Botsuana]] |
 | [[Bulgaria]] | ✅ | ✅ | ⏳ | [[Bulgaria]] |
 | [[Canada]] | ✅ | 🔄 | ⏳ | [[Canada]] |
 | [[Cazaquistao]] | ⏳ | ⏳ | ⏳ | [[Cazaquistao]] |
 | [[Chade]] | ✅ | 🔄 | ⏳ | [[Chade]] |
 | [[Chile]] | ✅ | 🔄 | 🔄 | [[Chile]] |
-| [[China]] | 🔄 | ⏳ | ✅ | [[China]] |
+| [[China]] | 🔄 | ⏳ | 🔄 | [[China]] |
 | [[Chipre]] | ✅ | ⏳ | ⏳ | [[Chipre]] |
 | [[Colombia]] | ✅ | ⏳ | ✅ | [[Colombia]] |
 | [[Congo]] | ✅ | 🔄 | 🔄 | [[Congo]] |

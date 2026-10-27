@@ -6,7 +6,7 @@ etapa_research_data: 2026-09-17
 etapa_design: "em andamento"
 etapa_design_data: 2026-09-29
 etapa_producao: "outro time (Dev/deploy = Drew/Brenet)"
-etapa_suporte: "3 aberto(s): HRBS-14528, HRBS-16407, SR-79; estado não lido: CT-4321"
+etapa_suporte: "4 aberto(s): CT-4321, HRBS-14528, HRBS-16407, SR-79"
 etapa_suporte_data: 2026-10-27
 ccg: "v1.6"
 ccg_data: 2026-09-17
@@ -20,7 +20,7 @@ sir:
 sir_data: 
 payslip: 
 skill: "payroll-compliance-spain"
-tickets_abertos: 3
+tickets_abertos: 4
 tickets_conferidos_em: 2026-10-27
 atualizado_em: 2026-10-27
 ---
@@ -36,7 +36,7 @@ Espanha é o país mais ativo do serviço (chat: mercans-compliance). Contexto: 
 | [[research-pipeline]] | ✅ | CCG v1.6 em 2026-09-17 | CCG v1.0 (jan/2026) → v1.1 (HRBS-10121) → v1.2 (HRBS-10272) → v1.3 → v1.6 (17/09, tracked insertions). WTC e DD em evolução contínua por tickets (ver Artefatos). Pesquisa ainda pedida em tickets (HRBS-14528 SILTRA, HRBS-13757 payslip). |
 | [[design]] | 🔄 | atualizado 2026-09-29 | Regulation Design v2 (CT-A-507) em produção desde jun/2026 com redesign de ~40% (reteste pendente). Specs: SR-79 em produção (~17/09); SR-144 em produção (~08/09); SR-83 deploy ~15/09 (portal ainda com erro); SR-81/82/85/342/365 em Final Review; SR-80 Open (Dev); SR-432 em Product Mapping (BA). |
 | Produção (outro time) | — | | Dev/deploy = Drew/Brenet; ver [[fronteiras]]. |
-| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: HRBS-14528 Open, HRBS-16407 Open, SR-79 In Review; 14 fechado(s): HRBS-10121, HRBS-10272, HRBS-10563, HRBS-12839, HRBS-13757, SR-144, SR-342, SR-365, SR-432, SR-80, SR-81, SR-82, SR-83, SR-85; estado não lido na API: CT-4321. Antes (2026-09-28): HRBS-10563, HRBS-12839, HRBS-13757, HRBS-14528 abertos. SLA de HRBS-10563 estourado, de HRBS-12839 em violação. |
+| [[suporte]] | 🔄 | 2026-10-27 | API 27/10: abertos: CT-4321 Ready for Design, HRBS-14528 Open, HRBS-16407 Open, SR-79 In Review; 14 fechado(s): HRBS-10121, HRBS-10272, HRBS-10563, HRBS-12839, HRBS-13757, SR-144, SR-342, SR-365, SR-432, SR-80, SR-81, SR-82, SR-83, SR-85. Antes (2026-09-28): HRBS-10563, HRBS-12839, HRBS-13757, HRBS-14528 abertos. SLA de HRBS-10563 estourado, de HRBS-12839 em violação. |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-spain`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.

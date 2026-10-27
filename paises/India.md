@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "IN"
+etapa_research: "aguardando"
+etapa_research_data: 
+etapa_design: "em andamento"
+etapa_design_data: 2026-08-20
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: 
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Índia
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]

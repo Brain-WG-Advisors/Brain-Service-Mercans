@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "BW"
+etapa_research: "concluida"
+etapa_research_data: 
+etapa_design: "concluida"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: "v1.0"
+ccg_data: 
+wtc: "v3.0"
+wtc_data: 
+dd: "v3.1"
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-botswana"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Botsuana (Botswana, BW)
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-botswana` · Fronteiras: [[fronteiras]]

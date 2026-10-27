@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "AU"
+etapa_research: "em andamento"
+etapa_research_data: 
+etapa_design: "em andamento"
+etapa_design_data: 2026-06-25
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-australia"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Austrália
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-australia` · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]

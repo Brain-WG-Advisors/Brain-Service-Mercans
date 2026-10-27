@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "ES"
+etapa_research: "concluida"
+etapa_research_data: 2026-09-17
+etapa_design: "em andamento"
+etapa_design_data: 2026-09-29
+etapa_producao: "outro time (Dev/deploy = Drew/Brenet)"
+etapa_suporte: "3 aberto(s): HRBS-14528, HRBS-16407, SR-79; estado não lido: CT-4321"
+etapa_suporte_data: 2026-10-27
+ccg: "v1.6"
+ccg_data: 2026-09-17
+wtc: "v4.7"
+wtc_data: 2026-10-23
+dd: "v5.1"
+dd_data: 2026-10-20
+report_specs: "ES-BASES-001 v2.5; ES-AFI-001 v2.0; ES-AFI-OUT-001 v1.4; ES-CRA-001 v2.3; SEPE CERTIFICA v1.1; M111 v4; ES-M190-001 v3.3; M296 v2.3; SEPE LLAMAMIENTO, ES-CERT-001, ES-FINIQ-001 sem versão"
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-spain"
+tickets_abertos: 3
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Espanha
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-spain`

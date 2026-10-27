@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "CL"
+etapa_research: "concluida"
+etapa_research_data: "2026-05"
+etapa_design: "em andamento"
+etapa_design_data: "2026-06"
+etapa_producao: 
+etapa_suporte: "2 aberto(s): SR-221, SR-232"
+etapa_suporte_data: 2026-10-27
+ccg: "v1.1"
+ccg_data: "2026-05"
+wtc: "v1.0"
+wtc_data: "2026-05"
+dd: "v1.0"
+dd_data: "2026-05"
+report_specs: "CL-DT-001 sem versao; CL-PRV-001 sem versao"
+report_specs_data: 2026-09-15
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-chile"
+tickets_abertos: 2
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Chile
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-chile`

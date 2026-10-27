@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "NA"
+etapa_research: "concluida"
+etapa_research_data: "2026-07"
+etapa_design: "em andamento"
+etapa_design_data: 2026-09-18
+etapa_producao: "outro time (Baker Hughes Namibia em implementação, HRBS-12074)"
+etapa_suporte: "sem tickets abertos"
+etapa_suporte_data: 2026-10-27
+ccg: "sem versão no hub"
+ccg_data: 
+wtc: "sem versão no hub"
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: "sem versão no hub (SSC Form Ten, PAYE 5, ETX)"
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: "configurado, em revisão de Compliance (HRBS-14605); sem versão no hub"
+skill: 
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Namíbia (Namibia)
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Fronteiras: [[fronteiras]]

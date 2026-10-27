@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "BG"
+etapa_research: "concluida"
+etapa_research_data: "2026-08"
+etapa_design: "concluida"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: "sem versão no hub"
+ccg_data: 
+wtc: "v2.2"
+wtc_data: "2026-08"
+dd: "v2.1"
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: 
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Bulgária
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há

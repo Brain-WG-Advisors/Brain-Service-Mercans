@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "CG"
+etapa_research: "concluida"
+etapa_research_data: 2026-06-30
+etapa_design: "em andamento"
+etapa_design_data: 2026-08-28
+etapa_producao: 
+etapa_suporte: "1 aberto(s): HRBS-12110"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: "sem versao citada"
+report_specs_data: 2026-06-30
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-congo"
+tickets_abertos: 1
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # República do Congo (Congo-Brazzaville, CG)
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-congo` · Fronteiras: [[fronteiras]]

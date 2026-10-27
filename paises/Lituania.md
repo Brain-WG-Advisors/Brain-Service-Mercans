@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "LT"
+etapa_research: "aguardando"
+etapa_research_data: 
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: "Accenture Lithuania em Live/BAU"
+etapa_suporte: "1 aberto(s): HRBS-15253"
+etapa_suporte_data: 2026-10-27
+ccg: "sem versão no hub"
+ccg_data: 
+wtc: "v3.0"
+wtc_data: 
+dd: "v3.0"
+dd_data: 
+report_specs: "SAM v1.0; GPM313 v1.0; GPM312 v1.0"
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: 
+tickets_abertos: 1
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Lituânia
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Fronteiras: [[fronteiras]]

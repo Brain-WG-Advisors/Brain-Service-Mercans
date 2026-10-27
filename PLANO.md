@@ -106,6 +106,7 @@ Prompt: [prompts/fase-1-linha-de-base.md](prompts/fase-1-linha-de-base.md)
 2. Revisão do grafo ("revisa o cérebro" com foco em ligações): notas órfãs, links quebrados, conceitos repetidos sem nota própria, hubs sem link para [[correcoes]], notas de `servicos/` e [[fronteiras]].
 3. Seguir a coleta (Fase 3) ligando cada cartão ingerido aos hubs e às notas de serviço.
 4. Uso no trabalho diário: consultar a rede ao responder tickets e e-mails (Claude Code), o que mede a eficiência na entrega.
+5. Estrutura da rede (pesquisa [[revisoes/2026-10-27-pesquisa-ia-payroll|IA em payroll]], 27/10): properties fixas nos hubs + painel gerado (`paineis/paises.base`; piloto Colômbia 27/10), depois ligações com nome (lei → regra → artefato → ticket → correção) e MCP do Graphify.
 
 **Saída:** relatório do grafo com as correções aprovadas; rede usada nas respostas do dia a dia.
 

@@ -1,6 +1,32 @@
+---
+tipo: pais
+codigo: CO
+etapa_research: concluida
+etapa_research_data: 2026-10-26
+etapa_design: aguardando
+etapa_design_data: 2026-10-22
+etapa_producao: outro time (PMI em BAU; transição Instaroll)
+etapa_suporte: sem tickets abertos
+etapa_suporte_data: 2026-10-27
+ccg: v1.4
+ccg_data: 2026-10-26
+wtc: v1.6
+wtc_data: 2026-10-26
+dd: v1.3
+dd_data: 2026-10-26
+report_specs: 7 × v1.0
+report_specs_data: 2026-10-26
+sir: v1.1
+sir_data: 2026-10-21
+payslip: sem versão registrada no hub
+skill: payroll-compliance-colombia
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Colômbia
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-colombia` · Fronteiras: [[fronteiras]]
+> Painel: `paineis/paises.base` (properties acima; piloto de [[revisoes/2026-10-27-pesquisa-ia-payroll|2026-10-27]]) · Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-colombia` · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |
@@ -8,7 +34,7 @@
 | [[research-pipeline]] | ✅ (concluída) | 2026-10-26 | PMI: pesquisa encerrada em 26/10. No Drive (com links no Monday e na CT-4593): 7 specs v1.0 (17 - Statutory Report), CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1. Delta ao design e e-mail de encerramento (thread "PMI Review") enviados pelo Wallisson em 26/10. Ficam com terceiros, sem bloquear: saúde/FSP nas mesadas adicionais e fatos da PILA-007 (cliente/BAU), consulta à DIAN sobre código do pensionado e dias fracionados (decisão da Manju). Kit e trackers: `Research Pipeline/Colombia/co-report-crosscheck/04-output/PENDING-2026-10-21.md`; confirmação: [[Research Pipeline/Colombia/co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx\|CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx]]. Histórico: pesquisa CO "na fila depois da Bélgica" (chat: mercans-compliance); Mohit: CO exige "redesign ou ao menos grande correção de gaps" (~2026-08-29). |
 | [[design]] | ⏳ | 2026-10-22 | PMI: início do design do time do Mohit estimado em 20/11 (e-mail de 22/10, sem confirmação). Antes: Colômbia citada como país sugerido para o próximo design (chat: design-dev-kb). |
 | Produção (outro time) | — | | PMI em produção/BAU; transição para Instaroll em curso (outro time) |
-| [[suporte]] | 🔄 | ~2026-09-03 | 5 tickets PMI sem resposta nossa no snapshot de 2026-09-16 |
+| [[suporte]] | ✅ sem ticket aberto | 2026-10-27 | Os 5 tickets PMI (HRBS-12487, 12491, 12492, 13627, 13692) estão Resolved (API, 27/10). Antes: "5 tickets PMI sem resposta nossa" (snapshot de 2026-09-16) |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-colombia`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.
@@ -123,9 +149,9 @@ Contexto comum: lista "PMI Instaroll Transition Tracker" (ELT); cliente PMI (Com
 
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| ~2026-09-03 | HRBS-12487 | Automação do vacation bonus offcycle acima de 95 UVT (WTs 63123/62837/52552) | Sem resposta nossa; Pending on reporter; gap analysis | Não |
-| ~2026-09-03 | HRBS-12491 | Explicação do cálculo de embargo (itens 21125, 64993) | Sem resposta; Romano perguntou nº de embargos por período, sem retorno | Não |
-| ~2026-09-03 | HRBS-12492 | Regras de contribuição de SS (40% Lei 1393, exonerações, IBC nas férias) | Sem resposta; Pending on reporter | Não |
+| ~2026-09-03 | HRBS-12487 | Automação do vacation bonus offcycle acima de 95 UVT (WTs 63123/62837/52552) | Sem resposta nossa; Pending on reporter; gap analysis · **HRBS-12487 Resolved** (API, 27/10) | Não |
+| ~2026-09-03 | HRBS-12491 | Explicação do cálculo de embargo (itens 21125, 64993) | Sem resposta; Romano perguntou nº de embargos por período, sem retorno · **HRBS-12491 Resolved** (API, 27/10) | Não |
+| ~2026-09-03 | HRBS-12492 | Regras de contribuição de SS (40% Lei 1393, exonerações, IBC nas férias) | Sem resposta; Pending on reporter · **HRBS-12492 Resolved** (API, 27/10) | Não |
 | ~2026-09-03 | HRBS-13627 | Explicação do cálculo de retención en la fuente (2552, 21330) | Sem resposta; Open, resolução estourada (−20d) · **HRBS-13627 Resolved em 2026-09-30** (API, 27/10) | Não |
 | ~2026-09-03 | HRBS-13692 | Provisões de cesantías e intereses (22110, 22112) + relatório de consolidação | Sem resposta; Open, resolução estourada (−19d) · **HRBS-13692 Resolved em 2026-09-30** (API, 27/10) | Não (novo report sem spec) |
 

@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "CN"
+etapa_research: "em andamento"
+etapa_research_data: 2026-08-10
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem tickets abertos; estado não lido: CT-4457"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: "v1.0 (Google Sheets)"
+skill: 
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # China
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]

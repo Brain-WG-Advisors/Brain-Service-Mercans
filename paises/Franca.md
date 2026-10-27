@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "FR"
+etapa_research: "concluida"
+etapa_research_data: 2026-10-09
+etapa_design: "em andamento"
+etapa_design_data: 2026-08-28
+etapa_producao: "outro time (go-live em fevereiro)"
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: "v1.0"
+ccg_data: 2026-10-06
+wtc: "v1.0"
+wtc_data: 2026-10-06
+dd: "v1.0"
+dd_data: 2026-10-06
+report_specs: "15 × v1.0"
+report_specs_data: 2026-10-06
+sir: "v1.0"
+sir_data: 2026-08-27
+payslip: 
+skill: "payroll-compliance-france"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # França
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-france` · Fronteiras: [[fronteiras]]

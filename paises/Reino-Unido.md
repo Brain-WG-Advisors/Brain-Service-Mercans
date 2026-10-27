@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "GB"
+etapa_research: "em andamento"
+etapa_research_data: 2026-06-18
+etapa_design: "em andamento"
+etapa_design_data: 2026-05-27
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: "v3.0"
+dd_data: 2026-05-27
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-unitedkingdom"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Reino Unido
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-unitedkingdom` · Fronteiras: [[fronteiras]]

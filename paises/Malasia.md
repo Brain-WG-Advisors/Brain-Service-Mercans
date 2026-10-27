@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "MY"
+etapa_research: "concluida"
+etapa_research_data: 
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-malaysia"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Malásia
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-malaysia` · Fronteiras: [[fronteiras]]

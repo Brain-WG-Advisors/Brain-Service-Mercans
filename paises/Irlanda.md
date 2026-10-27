@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "IE"
+etapa_research: "concluida"
+etapa_research_data: 
+etapa_design: "concluida"
+etapa_design_data: 2026-06-24
+etapa_producao: "Omnicom em Live/BAU"
+etapa_suporte: "sem tickets abertos"
+etapa_suporte_data: 2026-10-27
+ccg: "sem versão no hub"
+ccg_data: 
+wtc: "v3.6"
+wtc_data: 
+dd: "v3.4"
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-ireland"
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Irlanda
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-ireland`

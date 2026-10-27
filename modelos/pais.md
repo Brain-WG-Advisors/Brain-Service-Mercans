@@ -1,6 +1,32 @@
+---
+tipo: pais
+codigo:
+etapa_research:
+etapa_research_data:
+etapa_design:
+etapa_design_data:
+etapa_producao:
+etapa_suporte:
+etapa_suporte_data:
+ccg:
+ccg_data:
+wtc:
+wtc_data:
+dd:
+dd_data:
+report_specs:
+report_specs_data:
+sir:
+sir_data:
+payslip:
+skill:
+tickets_abertos:
+tickets_conferidos_em:
+atualizado_em:
+---
 # {{País}}
 
-> Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-{{pais}}` · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]
+> Painel: `paineis/paises.base` (properties acima: etapas = concluida | em andamento | aguardando; versão vigente = maior número, regra 8) · Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-{{pais}}` · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]
 
 ## Situação
 | Etapa | Status | Data | Observação |

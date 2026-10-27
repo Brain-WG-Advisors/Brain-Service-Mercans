@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "DZ"
+etapa_research: "aguardando"
+etapa_research_data: 
+etapa_design: "em andamento"
+etapa_design_data: 2026-10-27
+etapa_producao: 
+etapa_suporte: "1 aberto(s): HRBS-3466"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: "Spec DAS v2.1"
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: 
+tickets_abertos: 1
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Argélia
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]

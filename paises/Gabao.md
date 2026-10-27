@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "GA"
+etapa_research: "em andamento"
+etapa_research_data: 2026-09-23
+etapa_design: "aguardando"
+etapa_design_data: 2026-08-25
+etapa_producao: 
+etapa_suporte: "sem tickets abertos"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: "v3.1"
+wtc_data: 2026-09-23
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: "sem versão no hub"
+skill: 
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Gabão (Gabon)
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Fronteiras: [[fronteiras]]

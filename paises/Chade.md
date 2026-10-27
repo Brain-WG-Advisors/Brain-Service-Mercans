@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "TD"
+etapa_research: "concluida"
+etapa_research_data: 2026-06-30
+etapa_design: "em andamento"
+etapa_design_data: 2026-08-25
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: "v1.2"
+ccg_data: 
+wtc: "v1.1"
+wtc_data: 
+dd: "v1.1"
+dd_data: 
+report_specs: "7 report specs (versao nao citada)"
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-chad"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Chade (Chad, TD)
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-chad` · Fronteiras: [[fronteiras]]

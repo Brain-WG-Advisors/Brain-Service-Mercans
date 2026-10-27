@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "NL"
+etapa_research: "concluida"
+etapa_research_data: 
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: "Omnicom em Live/BAU"
+etapa_suporte: "2 aberto(s): HRBS-14394, HRBS-14675"
+etapa_suporte_data: 2026-10-27
+ccg: "sem versão no hub"
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-netherlands"
+tickets_abertos: 2
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Holanda
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-netherlands` · Fronteiras: [[fronteiras]]

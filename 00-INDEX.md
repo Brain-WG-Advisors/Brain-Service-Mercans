@@ -18,6 +18,8 @@
 - [[uso-de-ia]]: regras da Mercans para uso de IA (treinamento QCRM Q3 2026) e pontos a confirmar
 
 ## Painel de países
+> Painel gerado das properties dos hubs (Obsidian Bases, piloto Colômbia 27/10): ![[paineis/paises.base]] · Pesquisa que o originou: [[revisoes/2026-10-27-pesquisa-ia-payroll|IA e redes neurais em payroll]]
+
 | País | Research | Design | Suporte | Hub |
 |---|---|---|---|---|
 | [[Africa-do-Sul]] | ✅ | ⏳ | ⏳ | [[Africa-do-Sul]] |
@@ -35,7 +37,7 @@
 | [[Chile]] | ✅ | 🔄 | 🔄 | [[Chile]] |
 | [[China]] | 🔄 | ⏳ | 🔄 | [[China]] |
 | [[Chipre]] | ✅ | ⏳ | ⏳ | [[Chipre]] |
-| [[Colombia]] | ✅ | ⏳ | 🔄 | [[Colombia]] |
+| [[Colombia]] | ✅ | ⏳ | ✅ | [[Colombia]] |
 | [[Congo]] | ✅ | 🔄 | 🔄 | [[Congo]] |
 | [[Costa-do-Marfim]] | ✅ | 🔄 | 🔄 | [[Costa-do-Marfim]] |
 | [[Costa-Rica]] | ✅ | ⏳ | ⏳ | [[Costa-Rica]] |

@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "TW"
+etapa_research: "aguardando"
+etapa_research_data: 
+etapa_design: "em andamento"
+etapa_design_data: 2026-10-27
+etapa_producao: 
+etapa_suporte: "6 aberto(s): SR-105, SR-106, SR-107, SR-108, SR-109, SR-110"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: "SR-105/106/107 v1.1; SR-108 v1.2; SR-110 v1.3"
+report_specs_data: 2026-10-27
+sir: 
+sir_data: 
+payslip: "v1.2"
+skill: 
+tickets_abertos: 6
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Taiwan
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: não há · Correções: [[correcoes]] · Fronteiras: [[fronteiras]]

@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "DK"
+etapa_research: "concluida"
+etapa_research_data: 2026-08-22
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem tickets abertos"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-denmark"
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Dinamarca
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-denmark` · Fronteiras: [[fronteiras]]

@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "BE"
+etapa_research: "em andamento"
+etapa_research_data: "2026-08"
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem tickets abertos; estado não lido: CT-4619"
+etapa_suporte_data: 2026-10-27
+ccg: "v1.2"
+ccg_data: 2026-09-16
+wtc: "v1.3"
+wtc_data: 
+dd: "v1.4"
+dd_data: 2026-09-16
+report_specs: "9 specs; todas Draft (Dimona/DmfA/DmfA Mod/DRS/Fedris v1.3; Finprof/Belcotax/Febelfin v1.2; Limosa v1.3 descoped)"
+report_specs_data: 
+sir: "v1.0"
+sir_data: 
+payslip: "sem versao declarada (arquivo 2026-09-16)"
+skill: "payroll-compliance-belgium"
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Bélgica
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-belgium` · Fronteiras: [[fronteiras]]

@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "SE"
+etapa_research: "concluida"
+etapa_research_data: 2026-08-24
+etapa_design: "aguardando"
+etapa_design_data: 
+etapa_producao: 
+etapa_suporte: "sem ticket no hub"
+etapa_suporte_data: 
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: 
+report_specs_data: 
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-sweden"
+tickets_abertos: 
+tickets_conferidos_em: 
+atualizado_em: 2026-10-27
+---
 # Suécia
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-sweden` · Fronteiras: [[fronteiras]]

@@ -1,3 +1,29 @@
+---
+tipo: pais
+codigo: "CI"
+etapa_research: "concluida"
+etapa_research_data: 2026-08-12
+etapa_design: "em andamento"
+etapa_design_data: 2026-08-25
+etapa_producao: 
+etapa_suporte: "sem tickets abertos"
+etapa_suporte_data: 2026-10-27
+ccg: 
+ccg_data: 
+wtc: 
+wtc_data: 
+dd: 
+dd_data: 
+report_specs: "7 specs (CI-CNPS-001/002/003, CI-DGI-001/002/003/004), sem versao"
+report_specs_data: 2026-08-12
+sir: 
+sir_data: 
+payslip: 
+skill: "payroll-compliance-cotedivoire"
+tickets_abertos: 0
+tickets_conferidos_em: 2026-10-27
+atualizado_em: 2026-10-27
+---
 # Costa do Marfim (Côte d'Ivoire, CI)
 
 > Hub do país. Índice: [[00-INDEX]] · Skill: `payroll-compliance-cotedivoire` · Fronteiras: [[fronteiras]]

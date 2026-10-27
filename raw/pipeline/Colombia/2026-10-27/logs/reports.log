@@ -1,0 +1,35 @@
+Stage 04 for Colombia is complete. All 6 in-scope filings now have specs.
+
+## What I did
+
+**Resume check first.** Five specs (DIAN-001/002/004/005, PILA-003) were already built with matching generators — I did not touch them. Only **CO-CESANTIAS-DEPOSIT-ANNUAL-006** was missing.
+
+**Built `CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx`** — 9 sheets, 43 field rows × 21 columns, 7 grey section headers, full row colour coding. Generators: `co_r6_cesantias.py` + `co_r6_sheets.py` (the latter carries a `__main__` build entry point, which the other five modules lack).
+
+## The material finding: this filing is not DERIVED
+
+`scope_manifest` recorded it as having no published schema ("each fondo publishes its own layout"). It does have one. I found and downloaded:
+
+- **Simple S.A. "Manual Cesantías"** (licensed *operador de información*) — a byte-exact **20-campo / 258-position fixed-width layout** with Inicial-Final positions, lengths, types and validations, plus the parallel 16-column XLS layout and the five-value fondo code table. Positions verified arithmetically (sum = 258 exactly, no gaps/overlaps); the Sheet-9 sample is *generated* from that table with a 258-character assertion rather than hand-typed.
+- **ACH Colombia (SOI) instructivo DDS-DES-INS-008 v2** — independently confirms the channel (online form *or* file upload, `.txt`/`.csv`, ≤1 MB uncompressed) and the Asofondos name-validation round-trip.
+- **MinTrabajo draft decree** amending Decreto 1072/2015 — the operational rules for the Ley 2466 art. 64 monthly advance.
+
+Accuracy stated honestly at 88%. Channel recorded as portal, **never XML** — no XSD exists.
+
+## Three things worth your attention
+
+1. **The channel's own calculator is legally wrong.** Its formula is `salario básico × días/360`, but CST art. 253 requires the *auxilio de transporte* in the base. For a 2026 minimum-wage employee the portal computes COP 1,750,905 against a statutory COP 2,000,000 — a COP 249,095 short deposit per employee, penalised at one day's salary per day of delay, uncapped. Documented at field T14 and across Sheets 5/7/8/9.
+2. **The 8.33% monthly advance is not operable.** The statute is in force but routes through PILA; the implementing decree is still a draft, and even once published it gives MinSalud 6 months to adjust PILA plus the funds/operators a further 6 months. Fields built (MA01–MA05), all flagged DRAFT and switched off.
+3. **The 2027 deadline.** Ley 50/1990 art. 99 num. 3 gives 14 February as the last day; 14 Feb 2027 is a Sunday. The press-reported next-business-day shift has no MinTrabajo concepto behind it, so the spec says deposit by Friday 12 February 2027 rather than relying on it.
+
+## Two harness false positives fixed, not overridden
+
+Both were the ones already logged for TN/OM/CI: **C12** read only `max_row=1`, which in the Spain 9-sheet format is the merged title banner — every conforming spec scored 0/16; it now scans the first 5 rows. **C20** tested whether `filing_id` appears in the spec *filename*, which can never match the mandated naming — it now honours the manifest's own `spec_file` key. Audit is now all PASS except `C25 MANUAL` (pre-existing DIAN-001 XML sample) and `C27 SKIP` (05-DD not built yet).
+
+## What I deliberately did not build
+
+Two of five inbound integrations got no separate 9-sheet spec: **CO-IN-EPS-ARL-BENEFIT** (dozens of EPS/ARL, no published format from any of them or from government — a spec would be a fabricated layout and a C25 failure) and **CO-IN-LIBRANZA-SCHEDULE** (private lender, not a government→employer flow, and the manifest itself records it as owned upstream). Both decisions are now written into `integrations.inbound[].spec_coverage` so the choice isn't silent. If you want those built anyway, say so — but I'd need a real institution export layout first.
+
+Manifest also updated: cesantías entry's format/channel/deadline/legal basis corrected, 2 entries added to `resolved_in_this_pass`, and 3 new gaps (CO-GAP-12/13/14 — note 09–11 already existed).
+
+Sources: [Simple S.A. Manual de Cesantías](https://pagosimple.com/wp-content/uploads/2022/09/Manual-de-Cesantias.pdf) · [SOI instructivo planilla Cesantías](https://www.soi.com.co/documents/1174804/1186114/INSTRUCTIVO%20PARA%20ELABORACIO%CC%81N%20DE%20PLANILLA%20CESANTI%CC%81AS_v2.pdf/a0462148-9a63-0462-64e9-2418feb2875c) · [MinTrabajo proyecto de decreto](https://acmineria.com.co/wp-content/uploads/2026/05/Proyecto-de-Decreto-Auxilio-de-Cesantias.pdf) · [Gerencie — plazo para consignar](https://www.gerencie.com/plazo-para-consignar-las-cesantias.html) · [El Tiempo — 2026 deadline](https://www.eltiempo.com/economia/finanzas-personales/en-2026-cambia-la-fecha-maxima-que-tienen-las-empresas-para-consignar-las-cesantias-de-sus-trabajadores-por-que-y-cual-es-el-nuevo-plazo-3527202) · [La República — Skandia rebrand](https://www.larepublica.co/finanzas/con-la-compra-de-cmig-international-old-mutual-volvera-a-llamarse-skandia-2611331)

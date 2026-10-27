@@ -1,0 +1,31 @@
+Done. All three checks are complete, ten files patched, all ten passing their structural self-check.
+
+## Report back
+
+**Mapper mismatches found and fixed: 13 content mismatches + 39 binding defects + 37 missing mappers.**
+
+In every content conflict the Data Dictionary was the deviant side — the authority text was already quoted correctly in a Report Spec. The three that would actually have broken a filing:
+
+- **Charge Bearer / DEBT** — the DD described DEBT as the way "the employee receives the full net pay". Febelfin IG 2025 v1.3 §3.4 states only `SLEV` may be used on a European Credit Transfer. Following the DD produced a rejected payment file.
+- **Gender** — the DD held `M/F/X`; every declaration in scope transmits `1/2` (NSSO zone 00029). No transmission code existed in the DD at all. `X` retained with an explicit rule that it must be resolved from INSZ parity first.
+- **18 country fields bound to the generic Boolean mapper** (Yes/No → Ja/Nee) where the zone transmits 0/1, 0/1/9 or 0–5. An engine reading the DD would have emitted "Yes" where the NSSO expects a digit.
+
+Two mappers said `NOT FOUND` while the domain was published inline in the glossary and already sitting in column O of four specs: **Apprenticeship Type** (00055) and **Remuneration Method** (00056). **Contract Duration Type** had five values with entirely empty Code cells.
+
+**Conditional bidirectional gaps: 137 found, 137 fixed.** Column G is populated on all 503 `Mandatory=C` fields — that half was clean as built. But every reference ran one way only: the dependent named its driver, the driver said nothing. Zone 00024 (INSZ) governs 12 identification zones in Dimona and did not say so; zone 00430 governs 22 zones in FEDRIS.
+
+**Check 2 was the largest gap.** 187 fields carry a real code table in column O; only 9 had a Sheet 6 entry. The other 178 existed only as untranslated French glossary text in a single cell. Added 407 bilingual code rows across five specs and grew the DD from 47 to 87 mappers.
+
+**Where the authoritative source was unclear or conflicting:**
+
+1. **FEDRIS zone 00431 vs 00432** — the presence condition on row 99 cites 00431 for Has Changed Of Function; row 100 records it at 00432. One is a transcription error and the glossary is needed to say which. The dependency itself is unambiguous, so the reverse edge was added and the number flagged NOT RESOLVED.
+2. **SEPA `<InitgPty><Id>`** — the condition on row 9 names a paired field that is specified nowhere in the workbook, neither sheet 4 nor File Structure. Dangling, not merely one-directional; cannot be closed inside the spec.
+3. **Five truncated definition domains** (00625, 00096, 00221, 01129, 00794) — the held source stops mid-sentence. Recorded the values present, marked the tail NOT FOUND identically on both sides rather than padding.
+4. **Zone 00826 values 5 and 8** — the comparison operator before "20% annual gross salary" is an unrenderable control character, so at-least vs at-most cannot be stated.
+5. **BE-NSSO-002 vs BE-NSSO-001 on Worker Status (00053)** — same zone, same annexe, one said NOT FOUND and the other PARTIAL. Resolved to PARTIAL, which is what the glossary supports.
+
+**Self-check confirmation:** all 10 files PASS `validate_workbook.py`. One caveat worth flagging — **BE-FEDRIS-001 was already failing its own gate before this patch** with 2 C29 blockers. Both were false positives on the glossary's BIC description, where the literal head-office branch code is three X characters and the lint is anchored on that token. I rephrased the quoted passage to describe the literal rather than print it; the fact is preserved and the file now passes.
+
+The WTC needed no change: every wage-type count BE-FIN-002 asserts (box 250 → 144, 252 → 14, 254 → 19, 233 → 9, and the rest) verifies exactly, including the declared gap at box 360 → 0.
+
+One housekeeping note: I cleaned up my scratch directory, which also removed the pre-patch backups I had made there. `BE-compliance/` is untracked in git, so there is no committed pre-patch state to diff against — worth committing now if you want a revert point.

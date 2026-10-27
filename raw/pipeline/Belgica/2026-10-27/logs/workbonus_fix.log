@@ -1,0 +1,34 @@
+Done. Both fixes applied and independently verified.
+
+## Backups
+`BE_Compliance_Payslip_Generator.xlsx.bak-before-workbonus-fix` and `BE-WTC-001-v1.0.xlsx.bak-before-workbonus-fix` — both created before any edit, neither deleted. I also backed up the four generator sources I patched.
+
+## Which dated row applies
+The specimen's pay period is **01/07/2026 – 31/07/2026** (`C8`), so the **1 July 2026** row governs — not September. Worker is white-collar (`C22`). Parameters: component B 2,300.62 / 171.99 / 0.2699 / zero at 2,937.93; component A 2,937.93 / 127.54 / 0.3196 / zero at 3,336.98.
+
+## Fix 1 — Payslip
+`J40` on both language sheets is now `=-M82`, driven by a labelled helper annex in **columns L:N, rows 64–84** — outside the `A1:J120` print area, so the printed payslip is unchanged. I chose helper cells over a one-liner so every parameter stays an auditable cell. Also corrected the row-40 and step-3 labels, the `A110` statutory note on both sheets, and `Payslip Spec!E105`, which stated the same wrong rule in prose.
+
+## Fix 2 — WTC
+All four cells rewritten with the two-component structure and the full five-row dated 2026 ladder, plus the blue-collar ×1.08 relation, the dovetail, and the annual cap with its NOT FOUND marker after 1 July. `Tax Credit!B6` now also records the downstream consequence: the fiscal work bonus is 33.14% of component A and 52.54% of component B, so understating one understated the other.
+
+## Net pay: unchanged at EUR 2,377.51
+Both the old and the new formula return **0.00** at S = 3,500.00, so this specimen's figure never moved — the old formula happened to be right *here* and wrong across the whole band. Confirmed by evaluating the pre-fix backup as well as the fixed file. What the defect actually cost, white-collar:
+
+| S | old | new (R_B + R_A) | error |
+|---|---|---|---|
+| 2,500.00 | 127.54 | 118.18 + 127.54 = 245.72 | **−118.18** |
+| 2,800.00 | 127.54 | 37.21 + 127.54 = 164.75 | −37.21 |
+| 3,000.00 | 127.54 | 0 + 107.70 = 107.70 | **+19.84** |
+| 3,336.98 | 127.54 | 0 | **+127.54** |
+
+## Verification
+- Parameters read back **out of the .docx**, not from what I wrote. The dovetail (B's zero = A's full-amount limit) and the ×1.08 blue-collar relation hold in **all 5 dated rows**, for both maxima and coefficients.
+- The engine reproduces Module 5.1.1's own closed examples exactly: **E4 = 164.75**, **E6 = 218.73**, **E2 = 299.53 FTE → 179.72** prorated.
+- The workbook's **stored formula strings** were parsed back out and evaluated end-to-end rather than reimplemented, so a wrong cell reference would have surfaced.
+- `VERDICT PASS (blocker=0 major=0 minor=0)` for both PSL and WTC — unchanged from the baseline I took before editing.
+
+## Two things beyond the literal ask, both flagged
+I patched the **generators**, because the old text lived in `be_wtc_data_part1/part7.py`, `build_be_wtc.py` and `_build_payslip.py` — a rebuild would have silently reverted both fixes, the failure mode the tax-engine pass established a rule against. The WTC splices were done by tokenising the source and substituting literals built from the corrected workbook cells, so nothing was retyped; all four reconstruct byte-for-byte.
+
+Worth knowing: **`_build_payslip.py` was already stale** before I touched it — its language note differs from the shipped `A109`, and a post-build patcher `_fix_regression_psl.py` already exists, so build-then-patch is the real payslip workflow. I made it not-wrong but did not attempt a full resync; that's a separate item. Logged in `CCG_CONTENT_REVIEW.md` along with everything above.

@@ -1,0 +1,41 @@
+All four artifacts reconciled, verified, validators green. Here's the report.
+
+## Statutory determination — re-verified, not assumed
+
+I re-verified your determination against primary sources before writing it into anything, and found the corpus's **legal basis was mis-cited**. Correct basis:
+
+*Programmawet/Loi-programme (I) van/du 27 december/décembre 2006*, Title IV Ch. VIII — **art. 137** (scope), **art. 139** (the notification, placed on the posting employer), **art. 141** (duties of the end-user/principal), **art. 155** (posted self-employed), MB/BS 28 Dec 2006, executed by the **RD of 20 March 2007**. Confirmed on the NSSO's own *Working in Belgium*/Limosa portal ("*your client is under the obligation to notify the Belgian authorities*" only if proof can't be presented), socialsecurity.be and Securex — all three agree on both limbs.
+
+## The four fixes
+
+**Fix 1 — `scope_manifest.json` → v1.3.** Both descopings kept (they were the correct position) with rationale consolidated onto the primary sources, plus a second independent ground: the posted population isn't on Belgian payroll, so the engine holds none of the source data. **IN-17 `BE-IN-LIMOSA-RECEIPT` removed** (19 → 18 inbound, mirroring outbound's own 18-of-19).
+
+*Reasoning for removal over narrowing* — it's factual, not editorial: the portal returns the Limosa-1 to the **foreign declarant**, so an inbound entry asserts a data flow into this product that does not exist. Narrowing was rejected on two further grounds recorded in `_inbound_note`: the art. 141 duty is *outbound* (a report to NSSO), so an inbound entry misfiles it; and it's already registered twice in `out_of_scope`. A third register of the same duty under the wrong direction adds contradiction surface, not information.
+
+**Fix 2 — SIR.** OUT-08: live standard flow → **descoped, exception-only**; direction `Both` → outbound-and-exception-only. `product_mapping_required` stays `false` but the *reason* was wrong — "false because it's a master-data extract" conceded that the engine builds the declaration. It doesn't. IN-17 reclassified as not an inbound flow of this product. §2.3 count restated 11 → **10 live + 1 descoped + 8 none**; §2.4 gains a full Limosa row; §3.3/3.4/6.1 no longer imply a Belgian-side credential or deadline.
+
+*IDs retained deliberately* — the selfcheck asserts contiguous `OUT-01..OUT-19`/`IN-01..IN-19`; deleting OUT-08 would force renumbering 11 flows across every artifact citing a flow id, to express a scope decision a reclassified row expresses exactly.
+
+**Fix 3 — CCG.** The defect was precise: a bare "Limosa declaration" row inside a table headed *"List all other **mandatory** reports"*, every other row of which **is** the Belgian employer's obligation. Now reads *mandatory for the FOREIGN posting employer, NOT for the Belgian payroll client*, with a four-point note separating who files it, why it isn't a payroll matter, the narrow art. 141 duty, and where the determination lives. Modules 2.2 and 11.2 likewise.
+
+**Fix 4 — Report Spec → v1.3.** Descoped, not deleted. Determination banner at Report Matrix row 2; **Payroll Scope Summary's WHAT PAYROLL OWNS block corrected YES → NO on all three claims** (assignment/identity data, storing the Limosa-1, tracking A1 validity), each carrying why it changed. Column B relabelled *COVERED BY THE LIMOSA OBLIGATION?* so a YES can't read as "in scope". Sheets 4–9 untouched — they remain the honest record that no technical spec was ever published.
+
+## Second defect found while reconciling
+
+The CCG **and** the Report Spec both cited the **Law of 11 February 2013** as Limosa's legal basis. That's the Directive 2009/52/EC transposition on sanctions against employers of *illegally staying third-country nationals* — a different instrument, different population. Corrected in both, with the correction recorded on the page. Found by checking the citation rather than trusting it.
+
+## Verification
+
+- **`_qa/scope/verify_limosa_agreement.py` — 66 assertions, 0 failures.** Reads the delivered `.docx`/`.xlsx` **binaries**, not the markdown they're built from.
+- `scope_manifest.json` — **valid JSON**, re-parsed.
+- `selfcheck_be_sir.py` — **0 failures** after rebuild.
+- `validate_workbook.py --artifact RSPEC` — **PASS (0/0/0)** on the Limosa spec and on **all nine** BE Report Specs.
+- C29 lint clean on the rebuilt CCG.
+- **14 backups**, all `.bak-before-limosa-descope`, all retained.
+
+Also closed `BE-SCOPE-014`/`L-14` in `BE-QA-REPORT.md` — leaving the audit record saying "open, escalated" would itself have been a residual contradiction — and logged the pass as §1C of `PROPAGATION-LEDGER.md`.
+
+Two things I did **not** do, and they're your call:
+
+1. **`BE-DD-001` carries Limosa-driven fields** (Declarant Type/Identification/Contact Details, A1 reference, posting dates, nature of services, plus mapper rows) built to populate the now-descoped filing. None asserts the Belgian client files the declaration, so nothing contradicts the ruling outright — but those fields exist only to feed a descoped spec. You scoped this to four artifacts, so I registered the exposure in the manifest's `still_open`, in `L-14`, and in the ledger rather than expanding scope. What's owed is a keep-as-documented vs descope-with-the-filing decision.
+2. **`selfcheck_be_wtc.py` fails** on "ORANGE populated" (10 cells) — pre-existing, not from this pass: `git status` shows `02-wtc/` unmodified and the workbook's mtime predates the session.

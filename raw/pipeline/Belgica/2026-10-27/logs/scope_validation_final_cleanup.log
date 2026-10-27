@@ -1,0 +1,124 @@
+Done. Full report below.
+
+---
+
+## (a) STEP 1 — verified counts, by programmatic `len()` on the raw arrays
+
+I counted the array elements directly from `BE-compliance/scope_manifest.json`. **Neither "9 in / 9 out" nor "8 in / 9 out" was assumed** — here is the raw enumeration.
+
+**`authority_filings.in_scope` — COUNT = 9**
+
+| # | filing_id |
+|---|---|
+| 1 | BE-NSSO-DIMONA-001 |
+| 2 | BE-NSSO-DMFA-002 |
+| 3 | BE-FIN-BV-003 |
+| 4 | BE-FIN-28110-004 |
+| 5 | BE-FIN-32510-005 |
+| 6 | BE-NSSO-ASR-006 |
+| 7 | BE-EMP-INDACC-007 |
+| 8 | BE-PAY-PAYSLIP-008 |
+| 9 | BE-INS-WACC-010 |
+
+**`authority_filings.out_of_scope` — COUNT = 9**
+
+| # | filing_id |
+|---|---|
+| 1 | BE-NBB-SOCBAL-011 |
+| 2 | BE-FPS-DIVERSITY-012 |
+| 3 | BE-PREV-OHS-013 |
+| 4 | BE-SIG-DB2P-014 |
+| 5 | BE-FIN-28120-015 |
+| 6 | BE-FPS-WORKRULES-016 |
+| 7 | BE-REG-PERMIT-017 |
+| 8 | BE-NSSO-LIMOSA-009 |
+| 9 | BE-NSSO-LIMOSA-L1-VERIFY |
+
+**Verified count: 9 in / 9 out.** The previously-stated "10 in / 7 out" was stale on both sides: LIMOSA-009 moved across (−1 in, +1 out) and LIMOSA-L1-VERIFY was added (+1 out).
+
+I also re-counted every other figure in that same sentence, and **all of them are correct** as written: `employment_types` 10 in / 6 out / rationale ✓, `wage_type_categories` 31 in / 7 out / 10 special_rules ✓, `option_mapper_scope` 10 mappers (11 keys minus `_comment`) / 44 codes ✓, `integrations` 12 outbound / 12 inbound / 3 both ✓. Only the `authority_filings` pair needed changing.
+
+**Inbound `product_mapping_required` count (for §1 check 4):** 12 inbound entries — **12 `true`, 0 `false`, 0 null/missing**. `BE-IN-GARNISHMENT-ORDER` is now `true` and is the only inbound entry carrying a `rationale` field.
+
+---
+
+## (b) STEP 2 — W3 quoted in full, verbatim
+
+W3 has **never had a STATUS line added** — unlike W1 and W2, which both open with a bold `**STATUS: RESOLVED**`. Its body is unchanged from the original validation run. Here it is complete, exactly as the file reads:
+
+> ### W3 - WACC-010 is a milder instance of the same pattern
+>
+> `BE-INS-WACC-010` is in_scope with `pmr=false`, while `wage_type_categories.out_of_scope` lists "Work accident benefit paid by the private insurer". The in-scope reading is defensible - payroll supplies the wage data underpinning the benefit - but the boundary should be stated explicitly (payroll produces the wage declaration; the insurer owns the accident declaration) so Stage 4 does not attempt a full spec.
+
+**Action taken on W3: none.** Corroborated three ways:
+
+1. **No STATUS line** in the W3 block (W1 and W2 each have one).
+2. **Required Action 3** in §5 reads `State the WACC-010 boundary explicitly (payroll = wage data; insurer = declaration) | CCG | Stage 4` — no `DONE`/`PARTLY DONE` marker, unlike Actions 1 and 2 which carry timestamps.
+3. **The manifest still matches the finding.** `BE-INS-WACC-010` remains in `authority_filings.in_scope` with `product_mapping_required: false`, and its `rationale` reads *"Filed on the insurer's own portal. Payroll supplies the wage data used for the benefit calculation but does not own the declaration."* — the explicit boundary statement W3 asks for has not been added.
+
+**W3 is OPEN**, deferred to Stage 4. Note it is genuinely a *deferral*, not an oversight: W3 never asked for a manifest change, only that the boundary be stated before Stage 4 attempts a spec.
+
+---
+
+## (c) STEP 3 — the four updated items, before → after
+
+**1. §1 check 2 — counts (line 20)**
+
+- Before: ``…`authority_filings` (10 in / 7 out), …``
+- After: ``…`authority_filings` (9 in / 9 out), …``
+
+**2. §1 check 4 — true/false count (line 22)**
+
+- Before: `| 4 | Every inbound integration has product_mapping_required set | **PASS w/ WARN** | 12/12 set. 1 is `false` -> **W1 (F8 risk)**, see below. |`
+- After: `| 4 | Every inbound integration has product_mapping_required set | **PASS** | 12/12 set. All 12 are now `true`; the single `false` (BE-IN-GARNISHMENT-ORDER) was corrected on 12 August 2026 - see **W1, RESOLVED**. |`
+
+**3. §2 B7 — LIMOSA-009 row (line 61)**
+
+- Before: `| LIMOSA-009 kept in_scope with product_mapping_required=false | Listed as a statutory filing; no product mapping built | Posting (foreign) employer, via the Limosa web channel | None | **Y** | See **W2** - classification is inconsistent with the A1 population being out of scope. |`
+- After: `| LIMOSA-009 descoped to `out_of_scope` (reclassified 12 August 2026) | - | Posting (foreign) employer, via the Limosa web channel - Loi-programme du 27 decembre 2006, arts. 137 et seq. | None | **N** | **W2 RESOLVED.** Not a Belgian entity obligation; the posted-worker (A1) population is already out of employment scope and the engine holds none of the source data. Entry carries `descoping_reason` + `client_impact`. The Belgian host entity's own art. 141 L-1 verification duty is recorded separately as descoped entry BE-NSSO-LIMOSA-L1-VERIFY. |`
+
+**4. §2 B7 — Garnishment-order row (line 63)**
+
+- Before: `| Garnishment order inbound with product_mapping_required=false | Wage garnishment / assignment (Judicial Code Art. 1409) IS an in-scope wage type | Court, bailiff or administration | BE-IN-GARNISHMENT-ORDER (CSV) - **contract not specified** | **Y** | See **W1** - this is the F8 warning. |`
+- After: `| Garnishment order inbound corrected to product_mapping_required=true (12 August 2026) | Wage garnishment / assignment (Judicial Code Art. 1409) IS an in-scope wage type, and the Art. 1409 attachable-portion calculation is mapped into the engine | Court, bailiff or administration | BE-IN-GARNISHMENT-ORDER (CSV) - flag and rationale now set; **field-level contract still not specified** | **Y** | **W1 RESOLVED** (F8 flag corrected). Residual open for Stage 3: the Art. 1409 band input fields. |`
+
+**5. Header verdict (line 9)**
+
+- Before: `## VERDICT: PASS (with 5 warnings carried forward)`
+- After: `## VERDICT: PASS - of the 5 warnings raised, W1 and W2 are RESOLVED; W3, W4 and W5 remain OPEN`
+
+**6. Closing line (line 184)**
+
+- Before: `**Result:** PASS - proceed to Stage 2 (WTC), carrying W1-W5.`
+- After: `**Result:** PASS - proceed to Stage 2 (WTC). **W1 RESOLVED** (pmr flipped to `true` with rationale; field-level contract residual open for Stage 3) and **W2 RESOLVED** (LIMOSA-009 descoped, art. 141 F15 gap closed) in `scope_manifest.json` on 12 August 2026. **W3 OPEN** (WACC-010 boundary not yet stated; Required Action 3, Stage 4), **W4 OPEN** (Required Action 4, Stage 4 / C23) and **W5 OPEN** (Required Action 5, Stage 2) are carried forward.`
+
+Each replacement was asserted to match exactly once in the file before being applied, so no unintended text was caught.
+
+---
+
+## (d) mtime verification
+
+Snapshot taken across `BE-compliance/` (46 files) and `shared/` (20 files) immediately before editing, then re-walked after. **Exactly one file changed:**
+
+```
+CHANGED SINCE SNAPSHOT: 2026-08-12 14:45:15  BE-compliance\07-qa-crosscheck\scope_validation.md
+```
+
+Guarded files, all mtimes unmoved:
+
+| File | mtime (unchanged) |
+|---|---|
+| `BE-compliance/scope_manifest.json` | 2026-08-12 14:24:11 |
+| `BE-compliance/BE-COVERAGE.md` | 2026-08-12 12:01:50 |
+| `shared/scope_manifest_template.json` | 2026-08-12 14:07:57 |
+| all 13 `01-ccg/modules/*.md` | 11:05–11:58, untouched |
+
+`git status --porcelain` is unchanged from session start (`?? BE-compliance/`, `?? mercans_pipeline_v2_9.sh`, `?? shared/`) — these trees are still untracked, so git shows no per-file diff; the mtime walk is the operative evidence.
+
+---
+
+## Two things to flag
+
+**One judgment call inside item 2.** Fixing only the evidence cell would have left `**PASS w/ WARN**` in check 4's Result column pointing at a warning that no longer exists. I changed it to `**PASS**`. That is one cell beyond the literal string you named — revert it if you want the Result column frozen.
+
+**One stale count I did *not* touch, per your instruction.** §1 **check 3** (line 21) still reads *"10/10 filings carry filing_id, authority, frequency, format, integration_type, product_mapping_required"*. With LIMOSA-009 descoped, the true figure is **9/9**. I verified the underlying claim independently and it still holds — all 9 in-scope filings carry all 6 required fields, every `integration_type` is in {inbound, outbound, both}, and every `product_mapping_required` is a real boolean — so the check's **PASS verdict is correct**; only the "10/10" numeral is stale. It was outside the three-item list, so I left it. Say the word and it's a one-line fix.

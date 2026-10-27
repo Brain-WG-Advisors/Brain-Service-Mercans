@@ -1,0 +1,63 @@
+The Belgium Data Dictionary is built and verified.
+
+**`~/mercans-pipeline/BE-compliance/05-data-dictionary/BE-DD-001-v1.0.xlsx`** — 570 KB, 8 sheets, built by loading `shared/CZ_Data_Dictionary_V2_0.xlsx` and clearing its data rows. No new `Workbook()`.
+
+## Gate results
+
+| Check | Result |
+|---|---|
+| `validate_workbook.py --artifact DD` | **PASS** (0 blocker / 0 major / 0 minor) |
+| Sheet order, count, names | identical to CZ template |
+| Column widths, freeze panes, row heights | byte-identical per sheet (incl. `ID Information`→`E1`, `Currency Codes`→`A5`) |
+| Embedded images (Mercans logo) | preserved, 1 each on Version Control + Introduction |
+| ISO reference sheets 7 & 8 | untouched (268 / 249 data rows) |
+| Blue/orange discipline | 0 orange cells populated |
+| C29 residual-marker lint | 0 hits |
+| WTC leakage (DD name vs 355 wage-type names) | 0 collisions |
+
+## Total DD field count: 292
+
+- **ID Information** — 26 (9 employee ID, 17 legal entity ID)
+- **Country Fields** — 266 (211 employee, 55 legal entity)
+- **Country Option Mappers** — 47 mappers, 156 value rows
+- M 80 / CM 194 / O 18. One name appears twice by design — *Joint Committee Number*, once as employer registration data and once at occupation level, because Dimona and DmfA carry it per occupation and a change of committee opens a new occupation line.
+
+## Cross-check against all 9 report specs — complete, not sampled
+
+Sheet 4 of every spec read in full: **1,191 rows, 610 distinct field names, 0 unclassified.**
+
+| Report Spec | DD | TX | CALC | SYS | DD-bucket present? |
+|---|---|---|---|---|---|
+| FEBELFIN-001 SEPA Credit Transfer | 12 | 1 | 1 | 12 | 12 Y / 0 N |
+| FEDRIS-001 Work Accident | 79 | 76 | 8 | 16 | 79 Y / 0 N |
+| FIN-001 Finprof 274 | 4 | 4 | 3 | 14 | 4 Y / 0 N |
+| FIN-002 Belcotax 281.10 | 37 | 20 | 85 | 6 | 36 Y / 1 N |
+| NSSO-001 Dimona | 59 | 5 | 0 | 13 | 58 Y / 1 N |
+| NSSO-002 DmfA | 153 | 20 | 49 | 15 | 125 Y / 28 N |
+| NSSO-003 DmfA Modification | 153 | 20 | 49 | 15 | 125 Y / 28 N |
+| NSSO-004 DRS | 149 | 32 | 27 | 27 | 145 Y / 4 N |
+| NSSO-005 Limosa | 26 | 0 | 0 | 1 | 26 Y / 0 N |
+| **Total** | **672** | **178** | **222** | **119** | **610 Y / 62 N** |
+
+The full row-level table (1,191 rows, one per spec field, with sheet, row, bucket, Y/N and the DD field it resolves to) is at `05-data-dictionary/DD-CROSSCHECK-TABLE.md`.
+
+**Every DD-bucket field is present, with one class of exception.** All 62 "N" rows are the *same* exclusion, applied consistently: **public-sector-only blocks**, which the mandatory private-sector filter removes. They are the DmfA/DRS blocks 90005, 90172, 90411, 90412, 90413 and the NOSSLPA blocks 90187/90196/90168 — Scale Salary, Additional Scale Salary, Occupation Data (public service), Second Pillar (public sector), Dismissed Statutory Worker, plus `NOSSLPA Registration Nbr` and Belcotax box 290. The specs themselves mark every one of these "Not populated — out of scope". There is no other omission.
+
+The cross-check made me **add 52 fields** the first pass had missed: the universal identity/address block that every Belgian declaration carries (surname, first name, DOB, street, house number, postal code, municipality, address country), the target-group reduction parameters the DmfA leaves as "requires the Stage 4 Data Dictionary" (replaced/applicant INSZ, certificate origin, working time before/after the reduction), the remaining SWT/RCC selectors, the sectoral fields (flying staff class, ship id, staff code, activity sub-sector), and the FEDRIS insurance/mutuality/tariff data.
+
+## Private-sector filter as applied
+
+Excluded from the Dimona Worker Type mapper: **PMP** (parliamentary or government mandate) and **T17** (Article 17 public television) as non-private-sector, plus **A17, QUA, STX** (closed by the glossary) and **TEA** (obsolete). Kept: ALT, BCW, DWD, EXT, FLX, IVT, O17, RTA, S17, STG, STU, SWO, TRI, OTH. Company directors are retained in the Worker Status mapper with the note that they are presumed self-employed, contribute to an RSVZ/INASTI social insurance fund, are not declared in the DmfA and are reported on 281.20 — that is the "which SS funds apply" note you asked for.
+
+Where an authority code table genuinely isn't held (NSSO Annexes 2, 3, 4, 6, 21, 34; the FPS Employment joint committee register; NIS country codes; the NIHDI health-fund register; the FPS Finance district/office register) the mapper block carries a `NOT FOUND - requires …` row naming the instrument, using the same convention as the report specs. No codes were invented.
+
+## Fields I was unsure how to classify
+
+1. **`Hour Remun` / `Hour Remun In Thousandth Of Euro` (DmfA)** → CALC, excluded. The contractual hourly rate is arguably master data, but the DmfA zone is the *declared* hourly wage derived from the payroll result, and an hourly rate is a wage-type-level concept that belongs in BE-WTC-001. Reverse this if the dev team wants a contractual rate on the employee record.
+2. **`First Month C 32 A Nbr` / `Next Month C 32 A Nbr` (Dimona, JC 124)** → TX. These are sectoral C3.2A control card numbers issued *per month of the Dimona period*, so they behave transactionally, but they arrive from a sector fund like master data. Weakest classification in the set.
+3. **Take-on balances** — `Departure Holiday Pay Settled by the Previous Employer`, `Garnishment Outstanding Balance`, `Student Quota Hours Already Used`, `Months of Service in the Holiday Service Year`. These are amounts, which the scope rule excludes, but they are implementation load values without which the calculation is wrong, and the CZ template sets precedent by carrying cumulative fields. Included, each labelled "implementation take-on value" in Additional Notes.
+4. **`Voluntary Additional Withholding Requested`** → DD. An amount, but an employee election in writing rather than a calculated figure.
+5. **Provider configuration** — `Secretariat Code`, `Membership`, `New Member`, `Recognised Social Secretariat — name` → SYS, excluded. These are Mercans' own configuration, not client master data. Move them in if the platform expects them on the legal entity.
+6. **5 zones named `NOT FOUND - no XML label published for this zone`** (FEDRIS blocks 90024/90027/90038, DRS block 90029) → SYS, flagged unclassifiable. The authority publishes no label, so their content cannot be determined from its own publication. Recorded as an open item for the NSSO-annexe pass, not a DD gap.
+
+One incidental observation outside DD scope: `BE-NSSO-003-DmfAModification-Spec.xlsx` Sheet 4 is field-identical to BE-NSSO-002 (same 237 fields, same order), and its block 90169 is still labelled `DMFA ORIGINAL — DECLARATION TYPE CONTAINER` rather than the modification container. Worth a look in a later spec pass.

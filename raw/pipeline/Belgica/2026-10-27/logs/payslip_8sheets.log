@@ -1,0 +1,38 @@
+Done. The Belgium payslip is now an 8-sheet artifact and passes `--artifact PSL`.
+
+## Final 8 sheet names, in order
+
+| # | Sheet | Origin |
+|---|-------|--------|
+| 1 | **How to set up Payslip** | copied from Mozambique |
+| 2 | **Compliance Payslip** | copied from Mozambique |
+| 3 | Belgium (EN) | untouched |
+| 4 | Belgium (NL) | untouched |
+| 5 | Payslip Spec | untouched |
+| 6 | **Field Option** | copied from Mozambique |
+| 7 | Population Range | untouched |
+| 8 | Unit Rate Details | untouched |
+
+The order is not a guess — it's the documented Stage 7 contract in `mercans-artifact-toolkit/SKILL.md:63`. Worth knowing: the validator's PSL contract (`validate_workbook.py:114-127`) has no `sheet_count` and no `sheets_by_position`, so it enforces *presence*, not order. I used the SKILL.md order anyway since that's the documented standard. All three sheets came from Mozambique — Tunisia has none of them.
+
+## Validator result
+
+**Before:** FAIL — 3 blockers, one per missing sheet (`How to set up Payslip`, `Compliance Payslip`, `Field Option`).
+**After:** `VERDICT PASS (blocker=0 major=0 minor=0)`, exit 0.
+
+The C29 residual-marker lint stayed clean on the imported sheets: their `XXXXX` template placeholders don't match the `\bXXX\b` word boundary. Their `Total Gross` / `Total Deductions` / `Net Pay` rows already carry formulas, so C26 passes too.
+
+## The 5 original sheets are unchanged
+
+Two independent confirmations:
+
+- `_verify_payslip.py` → **TOTAL FAILURES: 0** (both language tabs, all 29 figures, YTD block, leave balances, net-pay box).
+- A cell-by-cell diff against a pristine pre-change copy → **0 diffs** across all 5 sheets, comparing value, formula, `_style`, number format, merged ranges, freeze panes, column/row dimensions, images and gridlines. 305 cells / 55 formulas per language tab, all identical.
+
+I de-risked this first rather than assuming it: I measured an openpyxl load/save round-trip on the original file and got 0 diffs before writing anything, which is what made the openpyxl approach safe here (both workbooks contain embedded images, so a lossy round-trip was a real risk).
+
+## Country-specific retouches — 4 cells only
+
+`Compliance Payslip!G8` MZN→EUR (the currency the CONCATENATE totals append), `Compliance Payslip!C9` MZN→Belgium (the `Country` field value), `Field Option!B2` MZN→EUR, `Field Option!C2` Mozambican Metical→Euro. Everything else was copied as-is, including the 109 and 87 merged ranges, 3 embedded images and the `showGridLines=False` payslip look. `How to set up Payslip` contained no Mozambique-specific text (its examples use Estonia), so it was copied verbatim.
+
+Each retouch is guarded by an expected-old-value assertion in the script, so a future reference change fails loudly instead of silently overwriting. The script is saved at `BE-compliance/06-payslip/_add_missing_sheets.py` and is re-runnable; it refuses to overwrite an existing sheet of the same name.

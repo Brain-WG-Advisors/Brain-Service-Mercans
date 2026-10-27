@@ -1,0 +1,31 @@
+The France Data Dictionary is built and verified.
+
+**Delivered:** `FR-compliance/05-data-dictionary/FR-DD-001-v1.0.xlsx` (590 KB), built by loading the CZ V2.0 template and repopulating it — sheet order, fills, column widths and the `E1` freeze pane are byte-identical to the template.
+
+| Sheet | Content |
+|---|---|
+| ID Information | 25 rows (5 employee + 20 employer identifiers) |
+| Country Fields | 164 rows (122 employee + 42 legal entity) |
+| Country Option Mappers | 54 mappers / 303 codes |
+| Version Control | country set to France, Czech revision row cleared |
+| Introduction, Instructions | generic, unchanged (neither contains a country name) |
+| Currency / Country Codes | untouched |
+
+**What I found on arrival:** four content modules (`fr_dd_data_id`, `_fields_ee`, `_fields_le`, `_mappers`) already on disk from an earlier DD agent in this pipeline run. I verified them rather than rewrote them, then wrote the missing build script (`build_fr_dd.py`).
+
+**Verification results:**
+- All 303 option codes validate against NEODeS CT2026.1.2 — **zero invented codes**. The 5 mappers with no DSN enumeration (Personal Identifier Type, Nationality Band, Tax Residence Status, Wage Attachment Type, Health Cover Exemption Reason) trace to the CCG and to form S6200 (Cerfa 14463).
+- Column discipline exact: all 20 orange columns empty, all blue columns populated.
+- Referential integrity exact: 54 mappers referenced, 54 defined, no orphans either way.
+- Scope sweep for banned content (base salary, gross/net, rates, ceilings, authority-generated, per-payrun): **0 hits**. No Czech residue, no residual markers, zip integrity clean.
+- Codes stored as text — 197 leading-zero codes preserved.
+
+**Two judgment calls you should know about:**
+
+1. I **added column G "Notes"** to the mappers sheet. The CZ template has no Notes column there, but C14 requires conditional-mapper constraints to be recorded. The build appends each referencing CM field's pre-condition verbatim, so it can't drift from the field imposing it — 29 mappers carry one. I enriched the French "Local Name" column for all 287 codes that lacked one, looked up verbatim from NEODeS.
+
+2. **One open scope item, flagged not decided:** the specs classify 30 employee share-scheme rubriques (S89 — actionnariat salarié: award date, vesting date, share count, unit value) as master-data *Input*, and none are in the DD. I left them out because they're per-award event data and the amount-bearing members are excluded by the mandate outright — but `scope_manifest.json` doesn't explicitly descope them, so that's your call. Details in `FR-DD-001-build-log.md`. The other 118 uncited rubriques I reviewed and confirmed correctly excluded (58 are DSN "Changement" mirror blocks; the rest transactional or authority-generated).
+
+The régime-général filter in the mappers is aggressive by design — it traces to `shared/FR_regime_scope_note.txt`, your 26 Aug lock, which is why MSA, RATP, ENIM, CNBF, CRPCEN, CAVIMAC and CNIEG/CAMIEG codes are stripped from the scheme-code mappers.
+
+**Operational warning, unrelated to the artifact:** three `mercans_pipeline_v2_9.sh France FR EUR 2026 French` processes are running concurrently (PIDs 464 and 5692 from 13:33, and 8056 started at 13:47). Overlapping runs will race on later stages writing the same files — the DD modules I found were themselves written by an agent from an earlier overlapping run. Worth killing the duplicates before stage 5.

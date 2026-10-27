@@ -1,0 +1,25 @@
+Report written to `FR-compliance/07-qa-crosscheck/FR-QA-REPORT.md` (prior version preserved as `.bak-20260828-124820`).
+
+## Verdict: NEEDS PATCHES — 87/100, 0 CRITICAL, 3 MAJOR, 3 MINOR
+
+I ran every check mechanically against the delivered binaries rather than trusting the build logs or the existing 12:21 report.
+
+**What holds up exactly.** The structural contracts are met to the letter, and I verified the build's own falsifiable claims rather than accepting them:
+- Global WTC: **300/300**, in baseline order at rows 2–301, **zero** exclusions — re-derived position by position.
+- CCG: 13 module titles byte-identical to the template; **136/136** template questions + **13/13** Deliverables = the 149 H3 headings. Nothing missing, nothing invented.
+- All 15 specs: 9 sheets in order, an **identical** 21-column Sheet 4 header, correct `FF4472C4` white-bold header, full row colouring.
+- C16 conditional documentation: **100%** both directions (700/700 spec rows, 125/125 DD fields).
+
+**The three MAJORs.**
+
+**F-1** is the big one. 264 spec rows across 12 workbooks assert `NO DD COUNTERPART although this row is marked payroll master data`. I adjudicated all 264 against the DD: **≥156 have a DD counterpart**, ~25 are calculated amounts that aren't DD candidates at all, and more are CNIEG/ENIM/FINESS rubriques the build already descoped in writing — and already has a correct label for, which it uses 100 times in the same files. All 17 gaps in the work-accident spec and the 1 in CARSAT are false. Worse, `FR-LIM-001` records **199** rows where the artifacts carry **264**, and nominates *employee e-mail address* as its one "genuine omission" — the DD defines `E-mail Address`. A join was run on the NEODeS rubrique against six filings that aren't NEODeS filings, and its non-result was written in as a finding, then escalated to a scope question.
+
+**F-2** — of the CCG's four statutory flat-value BIK categories, meals (EUR 5.50/meal) and communication tools (10% of purchase price) have **no wage type**. Accommodation and vehicle do. Meal *vouchers* and meal *allowances* exist but are different items under different legal bases. These are contributory and reach the DSN, not just the payslip.
+
+**F-3** — the posted-worker/SIPSI declaration sits in Module 10's "**In scope**" table while the manifest and Module 11 descope it, and it's absent from *both* halves of the filing register.
+
+Two things worth flagging about the process. First, three of my own intermediate results were wrong and I corrected them before reporting — a literal CCG↔WTC match that under-read coverage at 31%, six Module 2 concepts I initially scored missing that are present in the option mappers, and an initial 952 "no DD counterpart" reading that collapsed to 264 once justified exclusions were separated. The report says so.
+
+Second, on the brief's "green net-pay" requirement: France doesn't do it — but neither does the delivered Belgium payslip nor the Tunisia reference, both navy. I've logged that as a question for the standard owner rather than a France defect, because patching France alone would break it against the only signed-off precedent.
+
+No finding needs new research, and none touches a rate, threshold or legal basis.

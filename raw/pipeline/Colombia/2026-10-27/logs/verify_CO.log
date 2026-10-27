@@ -1,0 +1,25 @@
+Report written. Here's the summary of my independent audit:
+
+## Colombia (CO) Payslip — Verification Result
+
+**Verdict: PASS WITH NOTES · 0 critical issues**
+
+I extracted every rate, ceiling, threshold, wage, citation and the worked example from both `Colombia (EN)` and `Colombia (ES)` plus the four spec sheets, then reverified each against FY2026 primary sources.
+
+**Everything MATCHED:**
+- **SMMLV 2026** COP 1,750,905 and **auxilio de transporte** COP 249,095 ✔
+- **UVT 2026** COP 52,374 (Res. DIAN 000238/2025) ✔
+- **Retención en la fuente** — progressive Art. 383 table 0/19/28/33/35/37/39%, threshold > 95 UVT (COP 4,975,530) ✔
+- **Salud** 12.5% (EE 4% + ER 8.5%), **Pensión** 16% (EE 4% + ER 12%) ✔
+- **FSP** correctly employee-only, 1% from ≥ 4 SMMLV ✔
+- **IBC** floor 1 / ceiling 25 SMMLV = 43,772,625 ✔
+- **ARL** employer-only, Class I 0.522% (and II–V) ✔
+- **Parafiscales** SENA 2 / ICBF 3 / Caja 4, plus Art. 114-1 exoneration ✔
+- Prestaciones, leave, maternity/paternity, IDs (NIT/RUT, C.C./C.E.), disclosure duty (Ley 1393/2010) ✔
+- Worked example reconciles to the peso: net pay COP 15,221,235; the hardcoded retención (2,250,765) matches my Art. 383 recompute.
+
+**The one substantive note** — resolving the payslip's own `[VERIFY WITH RA]` flag: the minimum-wage amount is correct, but the cited **Decreto 1469 de 2025 was provisionally suspended by the Consejo de Estado on 12 Feb 2026** and replaced by **Decreto 0159 de 2026** (same COP 1,750,905). Recommended edit: update the citation to Decreto 0159 de 2026. The auxilio decree (1470/2025) was **not** affected and is correct.
+
+**Structural:** 8 sheets in correct order, Mercans logo present, ES sheet genuinely translated, no Spain/Mozambique residue. Wage-type codes are `XXXXX -` placeholders (expected, flag for later patching).
+
+VERDICT: PASS WITH NOTES | CRITICAL: 0 | All FY2026 rates/values/splits correct; only fix is the minimum-wage decree citation (1469/2025 suspended → now Decreto 0159 de 2026, same amount).

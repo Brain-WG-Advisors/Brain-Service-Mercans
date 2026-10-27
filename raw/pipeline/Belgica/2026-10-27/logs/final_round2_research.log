@@ -1,0 +1,56 @@
+All five items are closed. Report below.
+
+## What changed, by finding
+
+**BE-X10-007 — CCG Module 4 GMMI date contradiction · FIXED**
+The *Social work bonus* bullet claimed the limits "moved with" the GMMI on 1 April and 1 August, then dated the moves 1 July and 1 September. Rewritten to Module 5.1.1 without re-deriving anything:
+
+- before: *"When the GMMI moved on 1 April and 1 August 2026, the work bonus limits moved with it — from a lower wage limit of EUR 2,880.32 (from 1 April 2026) to EUR 2,937.93 (from 1 July 2026), with the upper limit reaching EUR 3,403.62 from 1 September 2026."*
+- after: the GMMI steps 1 Jan / 1 Apr / 1 Aug; the work bonus set steps **five times — 1 Jan, 1 Mar, 1 Apr, 1 Jul, 1 Sep — with no 1 August row**; the 1 Mar and 1 Sep steps index the *upper* limit on the social-benefit calendar, not the GMMI. Full-amount limits 2,833.36 / 2,880.32 / 2,937.93; zero points 3,271.48 / 3,336.98 / 3,403.62. Every figure asserted against 5.1.1's tables.
+
+**BE-X10-008 — unnumbered Royal Decrees · FIXED, and the finding understated it**
+
+The unnumbered citation is now numbered. But the instrument standing next to it was **wrong**: *Programme Law of 24 December 2002, Article 353bis* sits in Title IV, Ch. 7, Section 3bis and governs continuation of the **employer-side target-group reduction** on restructuring (inserted by art. 200, Law of 22 December 2008, in force 1 Jan 2009). It has nothing to do with the employee's contribution. The real chain, from primary sources:
+
+- **Law of 20 December 1999, Article 2** — the enabling provision
+- **RD of 17 January 2000** (BS 28 Jan 2000, numac 2000022082) — carries the formula and parameters
+- **RD of 27 March 2023** (BS 12 Apr 2023, err. 21 Apr 2023, i.f. 1 Jul 2023) — inserted the very-low-wage threshold
+- **RD of 5 March 2024** (BS 18 Mar 2024, i.f. 1 Apr 2024) — split it into the two components 5.1.1 uses, each maximum a % of the GMMI
+
+No 2026 instrument sets the 2026 figures; none exists in the Gazette. **The 2026 table was independently confirmed as a side effect:** the NSSO 2026/2 werkbonus page reproduces the 1 April row exactly (2,255.50 / 168.62 / 182.11 / 2,880.32 / 125.04 / 135.04 / 3,336.98, cap 3,523.92), and the Jan/Mar rows reconcile against the decrees' own 5.71%, 7.70% and 131.5328% of the GMMI.
+
+**Propagated** to WTC `F303` and payslip `Belgium (EN)/(NL)!L84` and `!A110` (5 cells), plus the 4 generator scripts, with generator text asserted `==` workbook cell. Leaving those would have been F29 exactly.
+
+**BE-X10-011 — WTC join key unused · FIXED**
+78 cells across 4 specs now carry the Mercans Code alongside the name (never instead of). Codes machine-derived from the catalogue; tax-code groups enumerated where ≤19 members; tax code 250 (144 rows) states the join rule and says the list wasn't written out. Counts verified: 233→9, 234→4, 252→14, 254→19, 285→5, 305→3, 308→4, 317→6. The stale note that justified the defect ("Mercans Code column is empty for all 355 rows") was identical in **all nine** specs — superseded in all nine, including the five that changed 0 cells, where the note says so and says it was measured.
+
+**BE-X10-015 — 13 unnamed rows · FIXED, and this was never a source gap**
+All 13 XML labels **are** published in the held sources. The parser read `(Label XML:…)` only on the line after the zone header; these titles wrap. 64 cells repaired across 4 specs (the finding reached only 2). Nothing registered in `known_limitations` because nothing remains unknown. The script **re-extracts from the NSSO text at run time** and aborts if any zone fails, so it can't drift. English names are the mechanical label split — the corpus's dominant convention (164/173 FEDRIS, 209/228 DRS) and exactly what DmfA already carried for the same five zones.
+
+**BE-X10-016 — 148 bulk-filled cells · FIXED**
+148 rows, **148 distinct queries**, mean 617 chars. Grouping approach, stated: nothing invented — every query is anchored in something the workbook or its source already records as unresolved (12 length+description NOT FOUND; 136 length from the zone-RANGE table per the workbook's own Report Matrix J27; 27 free-text rows where gap G14 bites; 34 PRESENCE DRIVER rows; 8 sports boxes; 2 withdrawn zones; the control total's unpublished algorithm). G15 retained once, on the Control Total row.
+
+**Also fixed (in-family, found during X10-011):** DmfA Mod `Population Rules!E4` said the GMMI moves on "1 January, 1 April, 1 July and 1 August" — same conflation as X10-007.
+
+## Verification
+
+- `validate_workbook.py`: **PASS (0/0/0)** on all 9 specs, WTC, payslip, and DD as a regression check
+- `selfcheck_be_wtc.py`: identical to pre-edit baseline — same single pre-existing `ORANGE populated` assertion, no new failure
+- `verify_specs.py`: **11 errors before, 11 after**, same distribution file-by-file — established by running it against the pre-edit backups, not assumed
+- CCG docx proved a pure function of `modules/` (rebuild from pre-edit modules reproduces the delivered text across all 2,471 paragraphs) before regenerating
+- All three fix scripts idempotent: second run changes 0 cells
+- WTC/payslip edited **inside the zip** — both carry media/comment parts openpyxl would drop
+- **31 backups taken, all retained**
+
+## Two tooling defects — proved pre-existing against untouched backups, not patched
+
+- `_verify_payslip.py` raises `NameError: IFERROR` and cannot complete (identical on the backup)
+- `verify_specs.py` C6 demands the phrase "does not exist" in Version Control — correct pre-Stage-4, stale now; it produces 8 of the 11 errors
+
+Patching a checker in the same pass as the artifacts it checks would destroy the only independent signal that the pass was clean.
+
+## Not closed, and stated rather than buried
+
+`BE-X10-006` (post-1-July work bonus annual cap) is still genuinely NOT FOUND — the Q3 2026 NSSO edition isn't available and it must not be extrapolated. The DmfA Mod declaration-type container block is a **real** source gap (unlike X10-015's) and is **not** in `known_limitations` — registered as owed. NSSO change-log fragments remain in Field Explanation (column M) on five zones — same extraction defect, but a descriptive column, so left rather than absorbed.
+
+Recorded in `scope_manifest.json` v1.9 and `PROPAGATION-LEDGER.md` §1G (10 rows, each with a verdict).

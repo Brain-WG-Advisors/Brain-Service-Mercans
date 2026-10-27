@@ -1,0 +1,87 @@
+Done. All gates pass.
+
+## Removal — 6 fields, all 6 confirmed
+
+Each was re-read in the delivered workbook before deletion. **Deleted as rows, not blanked**; Country Fields **253 → 247** (total DD fields 278 → 272):
+
+| field | LIM id | was row |
+|---|---|---|
+| Place of Work in Belgium | LIM-032 | 106 |
+| Nature of the Posted Services | LIM-033 | 107 |
+| Posted Worker Working Time Schedule | LIM-034 | 108 |
+| Belgian Client Name | LIM-040 | 250 |
+| Belgian Client Enterprise Number | LIM-041 | 251 |
+| Belgian Client Address | LIM-042 | 252 |
+
+Rows located **by name, never by the row numbers from the prior pass**, deleted bottom-up. Header shift (212 → 209) verified intact; the blank row at the section boundary confirmed pre-existing by diffing the backup.
+
+## The one judgement worth reading
+
+**`Belgian Client Enterprise Number` also cited `Source: CCG Module 2.2`** — exactly the pattern that saved `A1 Certificate Held Indicator` last pass. Your read of the *descriptions* was right; the **Additional Notes** column told a different story for this one row, so I checked it instead of sweeping it along.
+
+Module 2.2 cites the enterprise number only in its **sample-inputs table**, for the generic `0nnn.nnn.nnn` format every Belgian enterprise number shares — it justifies the field's format cell and names **no consumer**. A format citation is not a consumer, so it goes; the A1 indicator's Module 5.1 citation was substantive and it stayed. Recorded in all four records, because the two rows look identical to a grep and are opposite on the merits.
+
+## Verification
+
+| Check | Result |
+|---|---|
+| `validate_workbook.py --artifact DD` | **PASS** (blocker=0 major=0 minor=0) |
+| `verify_be_dd.py` (C1–C6) | **PASS** — 0 unclassified, **0 DD-bucket fields missing**; DD split 598/74 → **592/80**, matching the 6 exactly |
+| `verify_limosa_agreement.py` | **66 passes, 0 failures** |
+| 6 names repo-wide | **Zero live references** — remaining hits are the removal records, the spec-side keys now marked descoped, and regenerable dumps |
+| **4 kept fields** | **BYTE-IDENTICAL to the backup** across all 33 columns, all 5 occurrences (incl. the `Posted Worker Indicator` mapper block) |
+| Formatting | **0 drift** — 8 rows either side of both deletion points fingerprinted across 22 columns |
+| Generators vs workbook | 158 + 44 + 45 = **247**, exact match, no duplicates |
+| Backup | taken **before any inspection**, **retained** |
+
+## Propagation
+
+Generators fixed (3 + 3 definitions deleted); their stale *"status is still owed"* comments replaced with the ruling. `dd_crosscheck_map.py`: 6 keys reclassified under a **separate `LIM2` string** rather than folded into `LIM`, so the record shows which pass retired which key (12 + 6 = 18) — `MISSING FROM THE DD` is **0**. Exclusivity re-verified **against the 9 live spec workbooks, not the cached dump**, because *Nature of the Services* and *Working Time Schedule* are generic enough to plausibly appear in DmfA or Dimona; each occurs in exactly one file. Limosa Report Spec clean. Manifest → v1.5, QA report `BE-SCOPE-014`/`L-14`, ledger section 1E.
+
+## This does not close every Limosa loose end — one remains
+
+**The DD side is closed, measured not asserted:** all 8 DD fields still carrying a `BE-NSSO-005` reference have a documented non-Limosa consumer. **Zero Limosa-only fields remain in the DD.**
+
+**`BE-WTC-001` is still open.** Wage type **BE-054** ends its narrative with *"Posted workers into Belgium also require a Limosa declaration before starting."* — unqualified as to who files, the same defect class the 1C pass fixed in CCG Module 10.1. Legally true and it doesn't assert the Belgian client files, so it doesn't contradict the ruling — imprecise rather than wrong.
+
+I did not fix it. It needs a WTC backup, rebuild and `selfcheck_be_wtc.py` run on an artifact whose selfcheck **already fails** on a pre-existing *ORANGE populated* — its own pass, not a drive-by edit at the end of a DD pass. That's the same discipline the first pass used when it found these 6 fields and registered them rather than expanding scope; it's what produced this pass, so I applied it again. Registered in `L-14`, manifest `still_open`, and ledger 1E.6.
+es*, *Working Time Schedule* — are generic
+   enough to plausibly appear in DmfA or Dimona, so a dump was not good enough. Each occurs in
+   exactly one file: `BE-NSSO-005-Limosa-Spec.xlsx`. No live flow narrowed.
+4. **DD `Version Control` D14** — records the removal and explicitly **supersedes its own earlier
+   sentence** listing these 6 as retained-and-still-owed. That sentence is left standing rather than
+   rewritten, so the sequence of decisions stays auditable.
+5. **`scope_manifest.json` → v1.5, `BE-QA-REPORT.md` (`BE-SCOPE-014`, `L-14`), `PROPAGATION-LEDGER.md`
+   (new section 1E, rows 1E.1–1E.6, plus the §1C framing paragraph)** — every place that said the
+   status was owed now states the ruling; earlier wording struck, not deleted.
+6. **Limosa Report Spec is clean** — cites `BE-DD-001` in only 3 cells, all version/cross-check
+   remarks, none naming a DD field. Properly marked DESCOPED. `Country Option Mappers` untouched and
+   correctly so: no mapper block was exclusive to a removed field.
+
+## Does this close every remaining Limosa loose end? No — one remains, and it is not in the DD
+
+**The DD side is closed, and that was measured rather than asserted:** 8 DD fields still carry a
+`BE-NSSO-005` reference and **every one has a documented non-Limosa consumer** — Nationality
+(BE-NSSO-001), Country of Residence / First Name / Date of Birth (BE-FIN-002, BE-NSSO-001), BIS
+Number (CCG Module 2.2), plus the three deliberate keeps. **Zero Limosa-only fields remain in
+BE-DD-001.** The first pass's list of 9 retained fields is resolved: 3 kept on the merits, 6 removed.
+
+**Still open — `BE-WTC-001`.** Wage type **BE-054** (*Flag — A1 certificate / applicable social
+security legislation*) ends its narrative with *"Posted workers into Belgium also require a Limosa
+declaration before starting."* — **unqualified as to who files it**, the same defect class the 1C
+pass fixed in CCG Module 10.1. `selfcheck_be_wtc.py` also anchors on the token *Limosa*. The sentence
+is legally true and does not assert that the Belgian payroll client files, so it does not contradict
+the ruling; it is imprecise rather than wrong.
+
+**Deliberately not fixed here.** This pass was scoped to the DD, its generators, its cross-check and
+the records. Rewording a WTC wage-type narrative needs a backup, a workbook rebuild and a
+`selfcheck_be_wtc.py` run on an artifact whose selfcheck **already fails** on a pre-existing *ORANGE
+populated* (10 cells) — its own pass, not a drive-by edit appended to a DD pass. This is the same
+discipline the first pass applied when it found these 6 fields and registered them for a ruling
+instead of expanding its own scope; that discipline is what produced this pass, so it is applied
+again rather than abandoned once it became inconvenient. Registered in `L-14`, the manifest v1.5
+`still_open` and ledger row 1E.6.
+
+Not done, declared, unchanged: `build_be_dd.py` still writes `v1.0` and v1.0 Version Control content,
+so it does not reproduce the delivered v1.1 and was **not** run — the workbook was edited surgically.
+That drift is pre-existing.

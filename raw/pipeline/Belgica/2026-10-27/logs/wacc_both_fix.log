@@ -1,0 +1,40 @@
+Done. `BE-BOTH-WACC` is in, and W3 is closed.
+
+## Before / after
+
+**`integrations.both` — 4 entries → 5.** New entry, appended last (which is both filing_id and sir_flow_id order, since OUT-07 follows OUT-05):
+
+```json
+{
+  "id": "BE-BOTH-WACC",
+  "with": "The employer's work accident insurer, and Fedris",
+  "format": "XML as a DRS work accident scenario, application code AOAT in batch; or the online service on the social security portal; or the insurer's own channel, whose format is insurer-specific and not published",
+  "product_mapping_required": true
+}
+```
+
+Every value was copied and machine-asserted before the write, not eyeballed:
+- `with` — asserted equal on `BE-OUT-WACC`'s `to` **and** `BE-IN-WACC-RESPONSE`'s `from` ✓
+- `format` — asserted equal to OUT-07's string **and** to filing `BE-INS-WACC-010`'s own `format` ✓
+- `product_mapping_required` — asserted `true` on both legs and the filing ✓
+
+**One judgement worth flagging:** the two legs don't offer a single string to copy. IN-16 words the same DRS AOAT channel differently (*"XML through the DRS channel, application code AOAT, over SFTP or FTP; …"*). I took the outbound wording because a `both` entry names the filing, and the filing's own `format` field is the outbound one. Recorded as a choice in the note, not presented as the only option.
+
+**`_both_note`** — leg mapping extended with `BE-BOTH-WACC = BE-OUT-WACC (OUT-07) + BE-IN-WACC-RESPONSE (IN-16)`; the closing paragraph rewritten from *"deliberately left open … recorded for a decision, not absorbed"* to the closure, citing your pipeline-wide-practice ruling. Counts re-measured at this version rather than carried forward: outbound 18, inbound 18, distinct total **36 — unchanged**, since the array is a view. Manifest bumped 1.7 → 1.8 with a revision-history entry.
+
+**`scope_validation.md` — W3 OPEN → RESOLVED** in all five places: verdict line, section-2 boundary table row, the W3 section, Required Action 3, and the closing validated-by line. W4 and W5 untouched, still open.
+
+Two things I corrected rather than copied through:
+- That file's W3 row and section still described WACC-010 as `pmr=false` on the insurer's own portal — untrue since v1.2 (BE-X10-001). Its 12 August *"VERIFIED SUFFICIENT AS-IS"* status quoted the since-superseded rationale text, so the premise it rested on had lapsed. Marked superseded in place and labelled as a correction.
+- Required Action 3's own phrasing (*"insurer = declaration"*) is what your ruling overturns — the declaration is Mercans-owned. Noted explicitly instead of tacitly closing an action whose wording contradicts the outcome.
+- The boundary doesn't disturb `wage_type_categories.out_of_scope`: the benefit *paid by* the insurer stays out as a wage type; the declaration reporting the wage basis is an integration. Different objects — stated so a later reader doesn't read it as a contradiction.
+
+## JSON validity
+
+Strict UTF-8 decode OK, 0 × U+FFFD, `json.loads` OK, 22 top-level keys. All 5 `both` entries share one key/type signature: `id:str, with:str, format:str, product_mapping_required:bool` — no extra key, no `rationale` field the siblings lack. Filings declaring `integration_type: "both"` = 5, view entries = 5, now in agreement.
+
+## Backup
+
+Fresh: `scope_manifest.json.bak-2026-08-17-before-be-both-wacc` (118,207 bytes, md5-matched to the pre-edit file). The older `.bak-before-both-wacc` from the interrupted earlier attempt was left untouched, not reused or overwritten. Also backed up `07-qa-crosscheck/scope_validation.md.bak-2026-08-17-before-be-both-wacc`. Nothing deleted.
+
+One incidental catch: my first write emitted LF while the repo file is CRLF (835 lines). Restored to CRLF and re-verified — the diff is 13 insertions / 2 deletions, not a whole-file churn.

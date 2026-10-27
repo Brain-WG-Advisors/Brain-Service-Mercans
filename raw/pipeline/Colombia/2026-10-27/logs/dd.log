@@ -1,0 +1,28 @@
+Done. `CO-DD-001-v1.0.xlsx` is built and validated.
+
+## Output
+`~/mercans-pipeline/CO-compliance/05-data-dictionary/`
+- **`CO-DD-001-v1.0.xlsx`** — the deliverable
+- `CO-DD-001-classification.md` — DD/TX/CALC/SYS classification of all 416 distinct spec System Mappings
+- `build_co_dd.py` + 4 data modules, `make_classification.py`, `_validate_co_dd.py`
+
+## Contents
+CZ V2.0 template loaded and repopulated — 8 sheets in original order, blue/orange header fills, column widths and both ISO reference sheets preserved byte-identical.
+
+| Sheet | Content |
+|---|---|
+| ID Information | 7 employee + 10 legal-entity identifiers |
+| Country Fields | 60 employee + 38 legal-entity fields |
+| Country Option Mappers | 34 mappers, 156 codes, each with a Constraint/Notes block (C14) |
+
+Field set derived from the six in-scope specs via `build_co_specs._DD_MASTER_MAPPINGS`, extended with the calculation-driving CCG Module 2.2 groups that never surface on a filing (working time, withholding procedure, pension regime, concurrent employer, non-salary pact, work modality).
+
+**Validator: 13/13 PASS** — sheet order, ISO sheets, orange columns empty, blue columns populated, data/field-type domains, every CM field has a pre-condition, mapper completeness and resolution, no amounts/parameters leaked in, every DD-bucket spec mapping traceable.
+
+## Three things worth your attention
+
+1. **One deliberate lock-step deviation.** The specs flag `Contract.Contractual_Salary` (and its December variant) as Payroll Field = Y, but CLAUDE.md routes base salary to the WTC. I excluded it and recorded it in Version Control and the classification file. These are the only two divergences — everything else is in lock-step.
+
+2. **A real CCG internal contradiction.** Module 2.2 states a non-resident employee under a Colombian contract is withheld on the same progressive art. 383 table; Module 6.2's matrix and `scope_manifest` say flat 20% under ET art. 408 (DIAN Concepto 011108 of 29 Jun 2026). I built the Tax Residence Status field on Module 6.2 and flagged the conflict in the field's notes as an escalation. It needs fixing in the CCG, which is outside this task.
+
+3. **Private-sector filter as named exclusions, not silent omission.** Each mapper's Notes enumerates the excluded codes and why — worker types 02/04/18/30/31/47/58, legal nature 1/3/4/5, aportante types 2–12, planilla types S/I/Y/T/F/H/K/U/O, Formato 2276 informant types 2–8 — so the dev team rejects them at validation rather than quietly accepting them.

@@ -1,0 +1,27 @@
+All 26 verification assertions pass. Patch complete.
+
+## What I found and fixed
+
+I joined the DD to the 15 specs on the **NEODeS rubrique** (the DD records one in `Additional Notes` for 162 of its 189 fields), giving a real key to compare 1,428 spec field rows and 3,501 option rows against 54 mappers / 303 codes.
+
+**Real defects fixed:**
+
+- **All 15 specs had a Dutch column header** — `Description (NL)` in a France build, a Belgium-template residue. The column contains French. → `Description (FR)`.
+- **The régime-général code filter was invisible in the specs.** The DD drops 122 codes across 14 mappers as out of scope; the specs carried them completely unmarked. Version Control claimed such codes were "coloured as excluded" — true of Sheet 4 rubriques (100 red rows), **false of Sheet 6 codes**. → 247 option rows now marked and filled with the same red the spec already used.
+- **Three DD exclusions were silent**, breaching the module's own stated rule that every exclusion is named: Contract Nature 32 and 60, Scheme code 80. → named with legal grounds.
+- **1,357 fields still said `[provisional - pending FR-DD-001]`** and every spec said the DD was `NOT AVAILABLE, PENDING STAGE 4` — the DD has existed since 27 Aug. → 403 resolved to a named DD sheet+row, the other 952 marked reconciled *with the reason* they have no counterpart.
+- **Zero of 172 long identifier fields documented composite structure**, though the DD documents it. → 58 rows given sub-field position/length/source/persistence for NIR, NTT, SIRET, SIREN and the cancelled-declaration id; prefix grammars (`RU**`, `RET*`, `P{YY}V{NN}`) added to 10 rows.
+
+**Checks that passed with no change needed:** 650/650 shared code-pairs matched exactly on value *and* French local name; all 700 conditional fields had reasons; C16 bidirectionality closed with 0 one-way references; 0 dangling or orphan option tables.
+
+**Two judgment calls worth your attention:**
+
+**CHECK 2 — I changed nothing, deliberately.** Applying the rule literally flags 243 rows. But the build defines column E in `_lib/fr_norm.py` as *"whether PAYROLL must act on the value, not whether payroll populates it"* — not a master-data flag — and the distinction the check protects already exists on every row in column N (573 `payroll master data` vs 219 `produced by the payroll calculation`). Flipping 243 rows would have destroyed a working distinction. Recorded in the log instead.
+
+**199 spec rows marked "payroll master data" have no DD counterpart** (148 rubriques). Mostly change-history echoes (57) and the share-scheme block already flagged in the DD build log (30), but ~1 looks like a genuine omission (employee e-mail address). Closing it means adding up to 148 fields to the DD — a Stage-4 scope decision, not an alignment edit, so I registered it rather than inventing scope.
+
+I also left Version Control rows 19–20 untouched: they still say `FR-WTC-001` and `FR-SIR-001` are unavailable, and both artifacts now exist on disk (the SIR under a *different id* than the row asserts). Those statements are stale, but I aligned against the DD only — rewriting them would claim an alignment I didn't perform. Flagged for a WTC/SIR pass.
+
+The DD needed **zip-level XML surgery** rather than openpyxl: it carries images, cell comments and 13 table parts that a round-trip would have silently dropped. Verified all 25 survive. The specs had no such parts, so openpyxl was safe there.
+
+Verification proves the patch was surgical: **0 drifts** across every identifier, label, length, example and flag cell; no option code added or removed; row counts identical. Backups and hashes in `07-qa-crosscheck/_align/backup/`.

@@ -1,0 +1,60 @@
+All five fixes applied and verified. Report follows.
+
+## BE-SCOPE-016 — `both` double-counted, no `BE-BOTH-BV`
+
+**Before:** `both` = `[BE-BOTH-DIMONA, BE-BOTH-DMFA, BE-BOTH-BELCOTAX]`, no note.
+**After:** `both` = `[BE-BOTH-DIMONA, BE-BOTH-DMFA, BE-BOTH-BV, BE-BOTH-BELCOTAX]` (inserted in `filing_id` order, same 4-field shape as its siblings so the array stays homogeneous), plus a new `integrations._both_note`.
+
+Two judgement calls you should know about:
+
+- **The report's "24 real flows expressed as 27" is stale.** Those arrays have grown since the regression review ran — `outbound` and `inbound` are now 18 each. I wrote the *currently measured* total (36 distinct flows, `both` adds zero) and stamped it with the version it was measured at, rather than copying a number forward that was already wrong.
+- **A fifth `both` filing exists that the finding didn't name, and I did not fix it.** `authority_filings.in_scope` now has five entries with `integration_type: both` — the four the report lists plus `BE-INS-WACC-010`, whose legs `BE-OUT-WACC` and `BE-IN-WACC-RESPONSE` both exist. `BE-BOTH-WACC` would have been a one-line copy of the BV fix, but `scope_validation.md` carries **W3, "WACC-010 boundary not yet stated"** as an open required action — whether that round-trip is a Mercans-owned flow or an insurer-owned leg pair is precisely what W3 exists to settle. Adding it would have pre-empted an owner ruling. It's registered in `_both_note` and in `still_open` for a decision. **This needs your call.**
+
+## BE-SCOPE-017 — out_of_scope ordering
+
+**Before:** `011, 012, 013, 014, 015, 016, 017, 009, LIMOSA-L1-VERIFY, 005`
+**After:** `005, 009, LIMOSA-L1-VERIFY, 011, 012, 013, 014, 015, 016, 017`
+
+`BE-NSSO-LIMOSA-L1-VERIFY` has no sequence number; I sorted it immediately after `BE-NSSO-LIMOSA-009`, the filing it was derived from, rather than pushing it to an end. Verified as a pure permutation — entry set is identical before and after, no content edited.
+
+## BE-SCOPE-018 — failure-pattern list reconciled
+
+**Before:** bare `["F1"…"F22"]` alongside a 6-entry `additional_failure_patterns_checked` in `"F23 - description (outcome)"` form.
+**After:** one array, `F1`–`F28`, in the `"Fn - description"` shape that `shared/scope_manifest_template.json` defines for this key. F1–F22 descriptions are the canonical section headings of `shared/country_failure_log.md`, copied not paraphrased; F23–F28 carried over verbatim (asserted byte-equal). `additional_failure_patterns_checked` deleted as a non-template duplicate.
+
+**I did not invent outcomes for F1–F22.** No per-pattern outcome exists on record anywhere in this build — the sweep evidence lives as located findings keyed by finding id with the pattern as an attribute. The added `_known_failure_patterns_note` says so plainly, so a description-only list can't be misread as a completed sweep.
+
+One conflict worth flagging: `_prompts/ccg.md:201` prescribes the **bare** code list. I followed the shared template over the prompt — the prompt shows an illustrative value, the template is the contract. Consequence below.
+
+## BE-SCOPE-019 — duplicate `code` key
+
+**Before:** `"code": "BE"` and `"country_code": "BE"`. **After:** `code` removed.
+
+Asserted equal before deleting rather than assuming, and searched the repo for a consumer: there is none. The only `["code"]` reads in the tree are `_qa/scope/verify_scope_fix.py:154,157`, which index option-mapper *value* dicts — different key, different level, unaffected.
+
+## BE-SCOPE-020 — garnishment maintenance exception
+
+**Before** (excerpt): "…the engine must apply the Judicial Code Art. 1409 net-wage bands to determine the attachable portion and compute the correct withholding amount." — word "maintenance" absent.
+
+**After:** that sentence retained, followed by the exception — that the debt type on the order decides whether the bands apply at all; that for mapper code 3 (*Maintenance or child support debt / Onderhoudsvordering*) the wage is attachable without any limit, the bands do not apply, and the debt ranks ahead of all other creditors; and that applying Art. 1409 unconditionally would under-withhold on every maintenance order.
+
+Wording sourced from what the build already carries — `be_dd_data_le.py:833` for the mapper text, `BE-WTC-001` wage type BE-015 for the EUR 2,100.00 worked example. **No new statutory citation invented:** the article that disapplies the Art. 1409 limits for maintenance claims is cited nowhere in this repository, so I did not assert one.
+
+## Verification
+
+**JSON validity:** re-parsed after the write by an independent process — valid, 22 top-level keys. Key order preserved via `object_pairs_hook`; round-trip re-read asserted equal to what was written.
+
+**Structural diff vs the pre-edit backup:** 16 keys byte-identical; exactly 5 changed (`scope_version`, `authority_filings`, `integrations`, `known_failure_patterns_to_check`, `_revision_history`); 2 removed and 1 added, all intentional. `authority_filings.in_scope` untouched, `integrations.outbound` untouched, `out_of_scope` set-equal, inbound ids identical with `BE-IN-GARNISHMENT-ORDER` the only changed entry.
+
+**Backup:** confirmed genuine before trusting it — `scope_manifest.json.bak-before-final-round1` was MD5-identical to the working file *and* the file matched git HEAD, so it was a true pre-edit copy. Not recreated.
+
+**DD / Payslip untouched.** `git diff --stat` shows the same 5 files as at session start — the pre-existing X10 changes, unchanged. Stronger proof: `find -newer` against my script returns exactly two files, `scope_manifest.json` and the log. DD/Payslip mtimes are 18:19–18:22; this pass ran at 20:09.
+
+Bookkeeping: bumped to `scope_version` 1.7 with a v1.7 `_revision_history` entry in this file's established style, recording the WACC judgement and the sourcing constraints.
+
+## Two follow-ups this pass created but did not fix
+
+Both left alone because you scoped this to `scope_manifest.json` alone; both recorded in `still_open`:
+
+1. `07-qa-crosscheck/scope_validation.md` **row 6 is now stale** — it asserts the failure-pattern key is "in the exact bare-code form specified by `_prompts/ccg.md:201`", which stopped being true at v1.7. Needs the F27 downstream re-sync.
+2. `BE-QA-REPORT.md` section 5 still shows BE-SCOPE-016 through 020 as **OPEN**.

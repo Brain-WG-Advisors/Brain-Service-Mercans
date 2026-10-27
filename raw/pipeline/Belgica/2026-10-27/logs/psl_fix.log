@@ -1,0 +1,68 @@
+All three fixes are applied and verified.
+
+## Fix 1 — BE-PSL-001 (blocker): Payslip Spec rebuilt
+
+**5 sections / 37 data rows → 15 sections / 126 data rows.** The sheet now has one section per rendered block on `Belgium (EN)`/`(NL)`, in render order:
+
+| # | Section (row) | Rows | Status |
+|---|---|---:|---|
+| 1 | Header Details / Kopgegevens (2) | 7 | +1 (Statutory Basis Subtitle) |
+| 2 | Employer Fields / Gegevens van de werkgever (12) | 12 | +5 |
+| 3 | Employee Fields / Gegevens van de werknemer (27) | 14 | +6 |
+| 4 | **Working Time Fields / Arbeidstijd** (44) | 8 | new |
+| 5 | Earnings Fields / Loonbestanddelen (55) | 8 | unchanged |
+| 6 | Deductions Fields / Inhoudingen (66) | 8 | unchanged |
+| 7 | **Net Pay / Nettoloon** (77) | 2 | new |
+| 8 | **Non-Cash Entitlements / Voordelen in natura en cheques** (82) | 6 | new |
+| 9 | **Employer Contributions and Total Cost** (91) | 7 | new |
+| 10 | **Withholding Tax Calculation Basis** (101) | 18 | new — one row per step 1–18 |
+| 11 | **Year-to-Date Cumulative Figures** (122) | 9 | new |
+| 12 | **Leave Balances / Verlofsaldi** (134) | 9 | new |
+| 13 | **Payment Details / Betalingsgegevens** (146) | 6 | new |
+| 14 | **Statutory Notes / Wettelijke vermeldingen** (155) | 9 | new |
+| 15 | **Footer Details / Voetgegevens** (167) | 3 | new |
+
+Newly mapped inside the two previously-partial sections: VAT Number, NACE Activity Code, Withholding Tax Registration Number, Work Accident Policy, Payslip Language Regime; Date of Birth, Department, DmfA Worker Code, Seniority, Contract Type, Bank Account (IBAN).
+
+Structure follows Tunisia where it genuinely applies (Net Pay, Employer Contribution, Banking Details, Footer Details) and adds the four Belgium-only blocks Tunisia has no analogue for. Content is grounded, not copied: every `$…custom.*` token in a new row matches a real **BE-DD-001** field name (`NSSO Worker Code`, `Mean Weekly Working Hours`, `Holiday Entitlement in Days`, `Wage Payment Method`, `Employee Bank Account IBAN`, `Language Regime of Personnel Documents`, …) and every code cited resolves to a populated Mercans Code in **BE-WTC-001** (23671, BE-012, 62160, 62901, 62660, 62870, BE-006).
+
+Format matches the existing sheet exactly — navy `FF1F3864` banners with white bold Calibri 10, teal `FF4BACC6` / orange `FFF79646` column headers, `FFF2F2F2` alternate banding, thin `FFBFBFBF` borders, same 4-column layout and column widths. **The 37 pre-existing rows were read out of the workbook and re-emitted programmatically rather than retyped — verified 37/37 preserved verbatim.**
+
+## Fix 2 — BE-PSL-002: stated rule corrected
+
+`Belgium (EN)!B82` + `!A112` and `Belgium (NL)!B82` + `!A112`. `A112` now carries the full six-band table from BE-CCG-001 Table 40 and states that the band is selected on the wage of the quarter actually paid — so a quarter carrying double holiday pay or the end-of-year premium falls in a higher band, which is why the quarterly amounts in the YTD block differ. `B82` names which band this specimen's quarter falls in. **No formula and no figure changed** (asserted in the script; `I82`, `I92` and all 55 formula cells untouched).
+
+## Fix 3 — BE-PSL-004: language gap completed
+
+`Belgium (EN)!A109` and `Belgium (NL)!A109` now name all three regions: Dutch delivered, French a mandatory second deliverable, German an explicit unbuilt seam — matching `scope_manifest.json!known_limitations` on which is which. Side effect: this removed the word "pending", so the widened marker sweep now returns **0 hits on all six BE-authored sheets** (was 1).
+
+## Verification
+
+```
+VERDICT   PASS  (blocker=0 major=0 minor=0)     exit 0
+SHEETS    (8) [How to set up Payslip, Compliance Payslip, Belgium (EN),
+               Belgium (NL), Payslip Spec, Field Option, Population Range,
+               Unit Rate Details]
+```
+```
+ BE_Compliance_Payslip_Generator.xlsx | Bin 231420 -> 242208 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+```
+
+Cell-by-cell diff of all 8 sheets against the backup:
+
+- `Belgium (EN)` — **3** value diffs: `B82`, `A109`, `A112`. All prose. Nothing else.
+- `Belgium (NL)` — **3** value diffs: `B82`, `A109`, `A112`. All prose. Nothing else.
+- `Payslip Spec` — 585 diffs (the rebuild).
+- `How to set up Payslip`, `Compliance Payslip`, `Field Option`, `Population Range`, `Unit Rate Details` — **0 diffs each**.
+
+EN/NL formula parity still exact: 55 formula cells, **0 divergences**. **0 error cells** across all 8 sheets.
+
+**Backup exists and was not deleted:** `BE-compliance/06-payslip/BE_Compliance_Payslip_Generator.xlsx.bak-before-regression-fix`, 231,420 bytes (the pre-fix size), untracked in git.
+
+## Out of scope, still open
+
+- **BE-PSL-003** — the three pre-existing broken `$x.custom.*` tokens (`D19` joint_committee, `D28` working_time_regime, `D30` withholding_scale, now at rows 20/33/39) were left as found. My new *Payslip Language Regime* row does bind DD field `Language Regime of Personnel Documents`, which closes the secondary half of that finding incidentally.
+- **BE-PSL-005** (untranslated English at `Belgium (NL)!C16` and `!A119`), **BE-PSL-006**, **BE-PSL-008** — untouched.
+
+The build script is at `BE-compliance/06-payslip/_fix_regression_psl.py` (untracked) if you want the pass to be re-runnable or auditable.

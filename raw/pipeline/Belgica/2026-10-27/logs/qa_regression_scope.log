@@ -1,0 +1,39 @@
+The SCOPE audit is complete. Both outputs are written and nothing was applied.
+
+## Verdict: FAIL — 4 blockers, 11 majors, 5 minors
+
+| Pass | Result |
+|---|---|
+| P1 structure | PASS (4 minors) — all template keys present; the suspected `filing_id` 009 gap is **refuted** (009 sits in `out_of_scope`) |
+| P2 source fidelity | FAIL — but **not on figures**: all 40 numeric literals reconcile against the fixed artifacts with zero contradictions. Fails on one *filing* refuted by a primary source on disk |
+| P3 failure patterns | FAIL — F2, F15, F21, F24, F27 |
+| P4 buildability | FAIL — `option_mapper_scope` is the weakest block in the file |
+| P5 propagation | FAIL — the headline |
+
+## Your direct question: was the manifest sound as SIR ground truth?
+
+**Sound where the SIR audit leaned on it; not sound as a completeness baseline.**
+
+- **BE-SIR-003 stands.** `integrations.inbound[11]` BE-IN-GARNISHMENT-ORDER is correct — corroborated by the DD's Garnishment/Wage Assignment mapper, CCG Module 7.3, and the SIR's own 15-day clock. That blocker rested on a true premise. One qualification: the rationale omits the maintenance-claim exception the DD records ("attachable without any limit").
+- **BE-SIR-002 stands, but was never a manifest check** — it derived from the SIR's own preamble rule. Just as well: the manifest is missing the same seven return legs and still is.
+- **BE-SIR-007 confirmed and strengthened.** 27/27 integration entries carry `product_mapping_required: true` (27, not 24 — the SIR count excluded the 3-entry `both` array), with exactly one rationale in the whole block. The manifest is the side to fix.
+- **BE-SIR-008 confirmed and upgraded to blocker**, on evidence the SIR review didn't have: FPS Finance's own brochure on disk states the 325 statements are derived from the 281 data and never submitted.
+
+## Blockers
+
+1. **BE-SCOPE-001** (F27) — the SIR was rebuilt today at 08:07 to 19 inbound flows; the manifest still says 12. Seven SIR inbound legs have no manifest entry, five of them `pmr: true`. The SIR now cites the manifest as its source for IN-13 while running five days ahead of it.
+2. **BE-SCOPE-002** (F21) — BE-FIN-32510-005 locks the 325.10 as a separate annual XML filing that FPS Finance derives and never receives. SIR §4.5 and BE-FIN-002 v1.2 already agree; manifest and CCG do not.
+3. **BE-SCOPE-003** (F2) — `out_of_scope` descopes stock-option gains at exercise, but BE-WTC-001!B300 (code 62993) builds it as a live taxable Earning. The block's "must be excluded from ALL artifacts" comment turns that mismatch into a deletion order.
+4. **BE-SCOPE-004** (F1) — `contract_type` locks values belonging to the DD's *Contract Duration Type*; the DD mapper actually named `Contract Type` is `{0 Full time, 1 Part time}`. Resolving by name strips Full/Part time. Four of the six locked values carry `Code = NOT FOUND`.
+
+## Majors, condensed
+
+Three of ten mappers are template boilerplate whose values exist nowhere in the corpus, and Gender + SEPA Charge Bearer — the two the Stage 8 patch fixed — are absent entirely (**005**). `known_limitations[0]`'s "no official source PDFs" is false against 42 files including 12 authority PDFs (**006**), its rate-dependency precondition was crossed days ago in 150+ cells (**007**), and the register gained nothing in five days while 27 SIR gaps and 17 DD NOT FOUNDs opened (**008**). F23/F25/F26 still describe Stage 4 as pending (**009**). Today's social-work-bonus rewrite — two-component degressive, annual caps, 33.14%/52.54% — reached zero of the manifest (**010**). Seven direction/`pmr` conflicts against today's SIR, SIR winning all seven (**011**). Checkinatwork and electronic payslip delivery appear neither in nor out of scope (**012**). Three statutory BIKs locked in scope twice over with zero WTC wage types — no sibling review caught this (**013**). Limosa is now a four-way split (**014**). `source_artifact` still pins v1.0 through four rewrites (**015**).
+
+## Two things worth your attention beyond the findings
+
+**Structural root cause:** `mercans_pipeline_v2_9.sh` contains no C-check that validates `scope_manifest.json` against any artifact. That is why this is the only BE deliverable with no `.bak` and no rectification round — nothing was ever pointed at it. It's simultaneously the best-designed file in the set: its `scope_decisions` control-B7 block doesn't exist in `shared/scope_manifest_template.json` and should be promoted there.
+
+**A self-correction the auditor flagged:** its first docx extractor deduplicated merged cells and made `325.10` appear absent from the CCG when it's present five times. Caught before a finding was written; the dump was rebuilt and every crosswalk re-run. No verdict changed, but it would have produced a false finding against a correct artifact.
+
+Outputs: `BE-compliance/_qa/REGRESSION-BE-SCOPE.json`, `BE-compliance/_qa/REGRESSION-BE-SCOPE-narrative.md`, scripts under `BE-compliance/_qa/scope/`.

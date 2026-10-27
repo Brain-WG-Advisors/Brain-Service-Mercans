@@ -1,0 +1,29 @@
+The Colombia compliance skill is complete.
+
+## What I found
+
+The prompt warned that a prior attempt "produced no output file at all." That was wrong — the prior attempt had already written **all seven `references/*.md` files** (2.6 MB total) and only ran out of budget before writing SKILL.md. So I verified the existing references rather than re-deriving them.
+
+## Verification (not assumed — checked)
+
+| File | Size | Completeness check |
+|---|---|---|
+| `01-ccg.md` | 463 KB | All 13 modules + 38 H2 subsections present |
+| `02-wtc.md` | 836 KB | **402 wage-type blocks = 300 global + 102 `CO-`** — exact match to source |
+| `03-sir.md` | 139 KB | 4 authorities + full DIAN-NE runbook P1–P7 + interlinkages + effort |
+| `04-reports-spec.md` | 847 KB | 6 specs × 9 sheets = 54 sheet sections, all field rows |
+| `05-data-dictionary.md` | 158 KB | All 8 CZ V2.0 sheets, 115 fields, mappers, ISO lists |
+| `06-payslip.md` | 51 KB | Res. DIAN 000013 art. 5 items, EN/ES label pairs, formulas |
+| `07-qa-report.md` | 120 KB | QA report + `CO-GAP-01…14` + alignment patch + handover |
+
+No truncation. One apparent red flag — an identical housing-allowance explanation repeated across ~20 consecutive blocks — traced to the source artifact genuinely repeating it across the `62400`/`62401`/`62402` housing code family, not a rendering bug. (A `grep -i TODO` hit was the Spanish word *todo*.)
+
+## What I wrote
+
+`08-skill/co-compliance/SKILL.md` — 7,596 bytes, a thin router: YAML front-matter, a routing table mapping 12 topics to files, the six-filing summary, an 8-point "How to answer", and scope limits. All seven reference paths resolve.
+
+## One correction to the generator prompt
+
+It carries Francophone-Africa template residue: it instructs "preserve local-language terminology (**French** for Colombia)" and "point to the authority (**DGI** for tax, **CNPS** for social security)". None of that applies. I wrote the correct Colombian equivalents — **Spanish** terminology, and **DIAN** (tax, nómina electrónica, exógena) / **MinSalud + UGPP** (social security, PILA) / **MinTrabajo** (labour entitlements) / **fondos de cesantías**. Flagging it since the same template will likely be reused for the next country.
+
+The skill carries stage-07's verdict forward: 94/100, 0 critical, 3 MAJOR, 12 MINOR — all three MAJORs are wiring/cross-reference defects, not calculation errors.

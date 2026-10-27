@@ -1,0 +1,66 @@
+Done. NETENT-DSN runbook set is complete and **BUILD-READY**.
+
+## One thing to flag first
+
+The agent definition you pointed me at — `.claude/agents/si-runbook-research.md` — **does not exist**, and neither does `shared/si_scope_check.py`. This is the same gap your own `integration-landscape.json` already records ("shared/si-runbook was never deployed"). So **I defined the P1–P7 decomposition myself** rather than reading it from a spec; it's documented in `_phase-index.md`. The post-run scope check couldn't execute. If a canonical phase structure exists elsewhere, mine may need remapping.
+
+## Step 0-auto — acquisition
+
+13.8 MB downloaded to `integration-sources/netent-dsn/`, all HTTP 200, SHA-256 recorded in `_source-manifest.md`. The jackpot was inside the API archive: **`DSN_Guide-implementation-API_v6-8_2026-07-06.pdf`** (105 pp) — complete endpoint tables, auth contract, HTTP semantics, polling rules, retention, supervision, return-format annex — plus 18 more artefacts and GIP-MDS's official Java reference client from GitHub.
+
+No login, no certificates, no CAPTCHAs, and **no live service endpoint was contacted** — every host in P3 was transcribed from the PDF, never resolved.
+
+## Deliverables
+
+All 10 files in `03-statutory-integrations/NETENT-DSN/`, links verified. Scoped to NETENT-DSN only; URSSAF-DPAE and DGFIP-EDI appear solely in `INTERLINKAGES.md`.
+
+## Three findings that shape the build
+
+1. **The AEE is not acceptance.** Deposit returns HTTP 200 + an AEE even when the file is structurally wrong. Acceptance is the certificat de conformité (code 11). Closing a filing on the AEE is how a French payroll misses a deadline showing green.
+2. **Only unitary deposit is supported** (one `S20` block) — and violating it fails *asynchronously*, days later, after the deadline. The pre-flight assertion in P6 §6.3 is the only real defence.
+3. **The inbound leg is statutorily mandatory.** The DGFiP withholding rate reaches payroll *only* as CRM 94; there is no rate API. No return leg = tax failure at scale.
+
+Also: there's no OAuth2 — the API reuses the portal credential triplet with the password in clear in the body. The concentrateur model avoids per-client credential custody, which is why I recommended it.
+
+## Open items — 4 `[[NEEDS-ARTEFACT]]` + 1 UNVERIFIED
+
+All genuinely login-gated. The notable one: the **NEOReS/harmonised XSD+XSL schema pack** is named in the guide by *filename only*, with no public URL. It's a build-time parser-validation dependency, not a design blocker. I also marked the formal conformance gate **UNVERIFIED** rather than asserting it doesn't exist.
+
+No WSDL exists — this is REST, not SOAP. That's a property of the channel, not a gap.
+
+**Effort: 59 person-days, 12–16 weeks elapsed.** The schedule is dominated by the GIP-MDS charte approval, a human gate with **no published SLA** — I've labelled my 2–8 week figure an assumption, not a sourced fact, since it's the largest risk in the estimate.
+, marked not-to-build.
+
+OPEN ITEMS — 4 [[NEEDS-ARTEFACT]] + 1 UNVERIFIED, all justified as login-gated:
+  1. Charte concentrateur (signable PDF)            — espace dedie behind account
+  2. EDITEUR/PRODUCTION registration form           — page behind login
+  3. NEOReS + harmonised-format XSD/XSL schema pack — named in guide sec.1.2 by
+     FILENAME ONLY, no public URL; documentation area behind declarant login
+  4. cnam-contrat-api-pj-ij-v1.0.yml                — absent from public archive
+  5. UNVERIFIED: whether a formal conformance/certification gate exists beyond
+     charte approval + environment registration. Not established from public
+     pages. Explicitly NOT a claim of absence.
+  None blocks structural design. Item 3 is a build-time (parser-validation)
+  dependency; the rest are enrolment-time.
+
+  No WSDL exists for this authority — the interface is REST, not SOAP. Its absence
+  is a property of the channel, not an acquisition gap.
+
+KEY FINDINGS CARRIED INTO THE RUNBOOK
+  - 10 in-scope filings ride this single integration.
+  - The AEE is NOT acceptance; the certificat de conformite (code 11) is. A
+    structurally invalid file still returns HTTP 200 + AEE.
+  - Only unitary deposit (one S20 block) is supported, and violating it fails
+    ASYNCHRONOUSLY — after the deadline.
+  - The inbound leg is statutorily mandatory: the DGFiP withholding rate reaches
+    payroll only as CRM 94. No rate API exists.
+  - CRM 34 (AT/MP) must be DERIVED, not posted verbatim, for reduced-rate cases.
+  - Returns are purged at 3 months and not archived — the audit trail is a
+    Mercans-side obligation.
+  - No OAuth2. The API reuses the portal credential triplet with the password sent
+    in clear in the body (TLS only). The concentrateur model avoids per-client
+    credential custody and is the recommended design.
+
+EFFORT: 59 person-days engineering; 12-16 weeks elapsed, gated by the GIP-MDS
+  charte approval (human gate, NO published SLA — flagged as the largest schedule
+  risk and explicitly labelled an assumption, not a sourced fact).

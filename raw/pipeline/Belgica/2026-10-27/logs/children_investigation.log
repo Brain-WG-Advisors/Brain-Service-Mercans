@@ -1,0 +1,15 @@
+Report written to `BE-compliance/07-qa-crosscheck/CHILDREN_SUPPLEMENT_INVESTIGATION.md`. No file in `01-ccg/` or `02-wtc/` was touched.
+
+**I found the definitive source.** The residual gap that blocked `ALLOWANCE_INVESTIGATION.md` — the Staatsblad's Annex III being image-embedded — is closed: Securex publishes the coordinated annex as a machine-readable PDF (`Bijlage-III-KB-WIB-2026.pdf`, headed *"Bijlage bij het Koninklijk besluit van 11 december 2025"*). I read it directly rather than relying on secondary sources.
+
+**Task 1 — the mechanism is the real defect.** Annex III does **not** use allowance supplements for children. Nr. 38 grants a **flat euro reduction of the annual basisbelasting**, under a column literally headed *"VERMINDERING VAN DE BASISBELASTING"*. The allowance appears exactly once, at nr. 32, for the basic amount only. So the CCG collapses two distinct statutory steps into one, and no substitution of numbers into `26.75% × (allowance + supplement)` can fix it.
+
+Your hypothesis about a percentage-based step was right, but for a different income type: nr. 55 applies a **percentage** reduction (7.5/20/35/55/75%) with income ceilings to *exceptional* remuneration — bonuses, double holiday pay. That mechanism appears to be missing from the CCG entirely.
+
+**Task 2 — correct figures:** 1 child **624**, 2 **1,656**, 3 **4,404**, up to 8 **21,996**, then +3,864 per child. The withholding rounding convention here isn't §4.1's round-down-to-10 — every row is an **exact multiple of 12**, because nr. 42 divides by 12 to get the monthly amount. That holds in the 2023 edition too, so it's a drafting rule, and it's a third distinct convention supporting the predecessor's separate-instruments thesis.
+
+**Task 3 — EUR 2,030 is a genuine mis-sourcing, not coincidence,** but it only explains one figure. It matches art. 131's disabled-taxpayer supplement exactly and sits one row below the allowance in the same table. However, an internal-ratio test rules out 5,230 and 11,720 being any year's art. 132 table (CCG ratios 1 : 2.576 : 5.773 vs the official 1 : 2.409 : 5.371, which is shape-invariant under indexation). The triple didn't come from one table — so this is a rewrite, not a year-refresh.
+
+**One thing you should look at before scoping the fix.** `ALLOWANCE_INVESTIGATION.md` §2.2 concluded the brackets 16,720/29,510/51,070 were correct and "must not be touched". That's right for the art. 130 *assessment* statement — but the CCG also uses those numbers in the *withholding* formula, and Annex III nr. 31 sets its own scale at **16,710 / 29,500 / 51,050** (same round-down convention; all three published constants recompute exactly). That affects every worked example, including the childless ones previously treated as needing only an allowance change. I've flagged it as its own ticket rather than resolving it — it's outside this investigation and needs a full recomputation sweep.
+
+Recomputed the two child-affected examples: m06 §6.1 two children **709.71 → 688.70**, m12 E4 **298.01 → 291.62**. E4's final net stays at 1,772.91 — the delta lands entirely in the 100%-attachable band again.

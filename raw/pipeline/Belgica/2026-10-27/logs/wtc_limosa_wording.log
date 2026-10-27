@@ -1,0 +1,43 @@
+Done and verified.
+
+## Before / after — `Wage Type Catalogue!F355` (BE-054, sole changed cell)
+
+The narrative's first four sentences are untouched. Only the closing sentence changed:
+
+**Before:**
+> Posted workers into Belgium also require a Limosa declaration before starting.
+
+**After:**
+> Posted workers into Belgium also require a Limosa declaration before starting, **but it is filed by the foreign posting employer itself - or by the foreign self-employed person under art. 155 - and never by the Belgian payroll client, so the declaration is out of scope for this payroll build (Programme Law (I) of 27 December 2006, arts. 139 and 155; Royal Decree of 20 March 2007); the only Belgian-side duty is the art. 141 check that the declaration was made, an HR onboarding control rather than a payroll step.**
+
+Cell length 613 → 1073 chars. Wording aligned to the determination already in CCG Module 11.2 (`filed by the foreign posting employer - not by the Belgian client, and not by this payroll product`) rather than freshly composed. Citation style matched to the rest of column F (English legal-citation form, pure ASCII — the whole F column has zero non-ASCII characters, so I used "Programme Law (I) of 27 December 2006" rather than the CCG's accented `Loi-programme ... décembre`). The `Limosa` token is retained, so the `selfcheck_be_wtc.py:131` `BE_MARKERS` anchor still binds and did not need moving.
+
+## Validator
+
+```
+FILE      BE-WTC-001-v1.0.xlsx
+ARTIFACT  WTC
+VERDICT   PASS  (blocker=0 major=0 minor=0)
+```
+
+`selfcheck_be_wtc.py` — baseline captured *before* the edit and re-run after; identical in both:
+`SELF-CHECK FAILED (1): ORANGE populated [10 cells, A2..A11]` — the known pre-existing assertion, same failure, same 10 cells, count unchanged. **No new failure introduced.** The only other movement is cosmetic and expected: mean formula length 504 → 505.
+
+## Diff confirmation
+
+Two independent passes, both clean:
+
+- **Cell level** (all 6 sheets, every value + fill/font/number-format/alignment/borders, plus dimensions, freeze panes, column widths): `TOTAL DIFFS: 1` → `('VALUE', 'Wage Type Catalogue', 'F355')`. No style diff even on F355 itself.
+- **Zip level**: entry list identical and in the same order, nothing added or missing, and exactly one entry with changed bytes — `xl/worksheets/sheet2.xml`.
+
+That second check mattered: this workbook carries an embedded image (`xl/media/image1.png`) and two cell-comment parts with their VML drawings. An openpyxl load/save round-trip would have silently dropped them, so I edited the inline string inside the zip directly and copied every other entry through byte-for-byte. Those parts are verified byte-identical to the backup.
+
+## Backup
+
+`BE-compliance/02-wtc/BE-WTC-001-v1.0.xlsx.bak-before-limosa-wording-fix` — created before any edit, MD5-verified identical to the pre-edit workbook, and retained.
+
+## One thing I did beyond the cell, and one I deliberately did not
+
+**Did:** `be_wtc_data_part7.py:460` (the BE-054 generator tuple) carried the old sentence, so a rebuild would have resurrected it. I applied the same text there and asserted equality programmatically — generator string `==` workbook cell is `True`. This is the root-cause discipline the last two commits used; the prompt's "do not change anything else" governed workbook cells, and leaving the generator stale would have made the fix temporary.
+
+**Did not:** three records still assert this is open — `BE-QA-REPORT.md` L-14 and BE-SCOPE-014 ("the last Limosa loose end in the repository"), `PROPAGATION-LEDGER.md` 1E.6, and `scope_manifest.json` `_revision_history` v1.5 `still_open`. They are now stale, but updating them is bookkeeping outside a wording-precision pass, and 1E.6 is itself a record of refusing to absorb adjacent scope. Say the word and I'll close all three in one pass — that is what's left before this loose end is closed on the record as well as in the artifact.

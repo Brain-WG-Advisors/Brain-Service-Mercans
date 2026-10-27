@@ -1,0 +1,43 @@
+Done. The note landed in **CCG Module 6.1**, immediately after the Step 1–11 withholding formula block and immediately before the first worked example — i.e. at the point where step G's EUR 11,170 is introduced.
+
+## Exact text added (two paragraphs, verbatim)
+
+> **Two tax-free allowance figures are in circulation for income year 2026 — EUR 11,170 and EUR 11,550 — and only EUR 11,170 belongs in this calculation.** They are amounts of two different instruments, governing two different stages of the same tax. EUR 11,170 is the **withholding** allowance of Annex III nr. 32, and it is the amount step G applies to the monthly *bedrijfsvoorheffing*. EUR 11,550 is the **assessment** allowance of Article 131 ITC 92 as amended by the Law of 15 July 2026 reforming the personal income tax (Belgian Official Gazette 29 July 2026), which the tax authority applies to the employee's annual tax return for assessment year 2027. That law raised the non-indexed Article 131 amount from EUR 4,785 to EUR 4,945; indexed at the assessment year 2027 coefficient of 2.3356 it gives 11,549.53, published as EUR 11,550 in the indexation notice of 12 August 2026. Annex III is a separate instrument, amended by its own Royal Decree; it has not been amended on this point and still carries the pre-reform indexed amount rounded down to the lower multiple of ten, EUR 11,170. The EUR 10 gap between the two conventions is systematic: assessment amounts are rounded to the nearest ten, Annex III amounts down to the lower ten.
+>
+> **The withholding therefore runs on EUR 11,170, because that is the rule in force for withholding.** Putting EUR 11,550 into step G would describe a computation that no Belgian payroll engine is lawfully performing, and would under-withhold. Nothing is lost to the employee: withholding is an advance payment credited against the final liability, so the higher Article 131 allowance is applied in full when income year 2026 is assessed in 2027, and the excess withheld is refunded on assessment. The difference is a cash-flow timing difference, not a compliance exposure, and no payroll true-up is required — there is no amended withholding rule to recompute against. A Royal Decree amending Annex III is expected; if it is issued with retroactive effect to 1 January 2026, the corrected amount is to be absorbed prospectively in the next available payroll run and reconciled at assessment, not by reissuing earlier payslips.
+
+Sourced from `ALLOWANCE_INVESTIGATION.md` §3.2 ("What the CCG should say"), §4.1, §4.2 and rec. 3 — including the §3.2 point that a backdated Annex III decree is absorbed prospectively, not by reissuing payslips. The §4.3 projection (11,540) was deliberately **not** carried in; neither was 11,180, which the register marks as a defect wherever it appears. Terminology follows house style (`bedrijfsvoorheffing`; "précompte professionnel" appears nowhere in the corpus, so it was dropped from my first draft).
+
+## Mirroring — .md ↔ .docx
+
+- `01-ccg/modules/m06_tax.md:159` and `:161`. Diff vs backup: **4 lines added, 0 deleted, 0 modified**; CRLF endings preserved (399 CRLF, 0 bare LF — my first attempt LF-normalised the file and was thrown away and redone from the backup).
+- `BE-CCG-001-v1.0.docx`: patched surgically with the builder's own `add_runs`, per the standing instruction in `TAX_ENGINE_FIX_APPLIED.md` §7 not to regenerate the delivered document. Text diff over all paragraphs + table cells: **2 added, 0 deleted** (2494 → 2496). Zip-level: **18 entries, identical and in order, exactly one with changed bytes — `word/document.xml`**.
+- Both docx paragraphs compare **string-equal** to the .md text with markdown markers stripped. Style `Normal`, inheriting Arial 11 like every other body paragraph; bold/italic runs render as in the .md.
+- Stronger check: a full rebuild from the current modules into a scratch file is now **text-identical to the live .docx — zero differences**. The four pre-existing desyncs recorded in `TAX_ENGINE_FIX_APPLIED.md` §7 have since been closed by later passes (item (b), the 30%/35% inbound figure, now reads 35% in the .md), so md↔docx parity is total.
+- Also mirrored: `08-skill/payroll-compliance-belgium/references/01-ccg.md`, which is a line-for-line dump of the CCG and would otherwise have gone stale from my edit. 4 lines inserted, both verified `==` the corresponding .docx paragraphs, and the 24 nav-index entries below the insertion point bumped by +4 — all **52 nav entries re-validated against their target lines, 0 mismatches** (0 before, 0 after). This is beyond the literal ask; I did it because my change caused the drift.
+
+## 11,550 present, and nothing else moved
+
+- `11,550` in the CCG docx: **0 → 4**, all four inside the new note.
+- `11,170`: 16 → 21 (+5, all in the note). `2,987.98`: **15 → 15, unchanged**.
+- Numeric-token diff across the entire document: **numbers removed = none**. Every added token belongs to the note (`4,785`, `4,945`, `2.3356`, `11,549.53`, dates, `11,550`, `11,170`). No worked example, no table cell, no step figure touched.
+- C29 residual-marker lint on the patched docx: **clean**.
+- `verify_workbonus_fix.py`: all OK. `verify_nr58_fix.py`: 3 failures — **pre-existing, not from this pass**; the three figures it wants (`18,588.53`, `28,685.12`, `3,881.31`) are absent from the baseline docx text captured *before* my edit too, so that verifier is stale against later passes.
+
+## Register update
+
+`00-official-sources/legal-basis-register.csv` — backed up, then exactly **5 cells** changed (structure intact, 64 rows × 20 cols):
+
+| Row | Change |
+|---|---|
+| BE-PIT-005 (11,550 assessment allowance) | `consumed_by` `SKILL` → `CCG/m06_tax;SKILL` |
+| BE-PIT-009 (Law of 15 July 2026) | `consumed_by` empty → `CCG/m06_tax`; its "NOT CITED IN ANY DELIVERED ARTIFACT" remark replaced with a CLOSED note, adding that only the first step 4,785 → 4,945 is stated in the CCG, not the 2028–2031 steps |
+| BE-PIT-008 (coefficient 2.3356) | `consumed_by` empty → `CCG/m06_tax`; remark downgraded to **PARTIALLY CLOSED** — the CCG now states the caliber deriving 11,550, but still not the one behind 16,720 / 29,510 / 51,070 or 6,070, and no artifact states the two-caliber split |
+
+BE-PIT-004 already carried `CCG/m06_tax`; BE-PIT-006 (11,180) deliberately untouched, since the note does not mention it.
+
+## Backups retained (none deleted)
+
+`01-ccg/BE-CCG-001-v1.0.docx.bak-before-allowance-distinction` · `01-ccg/modules/m06_tax.md.bak-before-allowance-distinction` · `00-official-sources/legal-basis-register.csv.bak-before-allowance-distinction` · `08-skill/.../references/01-ccg.md.bak-before-allowance-distinction`. Working files under `_pipeline/_allowance_work/` (shared note text, before/after text dumps, scratch rebuild, diff).
+
+**Not done, flagged:** no `PROPAGATION-LEDGER.md` row was added — it wasn't in the ask and the ledger has other edits in flight from your current pass. Say the word and I'll append one.

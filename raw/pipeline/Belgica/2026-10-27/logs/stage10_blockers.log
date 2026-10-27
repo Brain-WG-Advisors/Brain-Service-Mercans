@@ -1,0 +1,49 @@
+All three blockers are fixed and verified. Report:
+
+## BE-X10-001 — outbound crosswalk
+
+**Before:** `integrations.outbound` = 12 entries, no `sir_flow_id` on any, array out of flow-id order (OUT-12/OUT-13 inverted).
+**After:** 18 entries, `sir_flow_id` on all 18, sorted, zero duplicates, zero unmatched.
+
+Six flows transferred from the SIR verbatim (OUT-03 DmfA modification, OUT-07 work accident, OUT-16 electronic payslip, OUT-17 social balance sheet extract, OUT-18 Checkinatwork, OUT-19 DB2P/Sigedis) — each with `to`, `format` and a `rationale` copied from SIR §2.1/§2.2, not re-derived. Verified by re-reading **the SIR .docx**, not `sections/s02_outbound.md`: 19 flows found, 18 present, 16 of 18 `product_mapping_required` values now match the SIR verbatim; 18 phrase-level spot checks of the copied content all trace to SIR cells.
+
+**OUT-08 Limosa deliberately not added.** 18, not 19, and `_outbound_note` says why: BE-SCOPE-014/L-14 is escalated to a human, and adding OUT-08 would have registered Limosa in scope by side effect. Noted in the style of the existing IN-17/IN-19 inline notes.
+
+**Reconciliation, both blocks now agree:**
+- `BE-INS-WACC-010`: `outbound`/`false` → **`both`/`true`**, authority/format/rationale rewritten, old values preserved in a `_reconciled` block. Resolved toward the three artifacts that already agreed (SIR OUT-07, IN-16 in this same file, the delivered FEDRIS spec).
+- `BE-PAY-PAYSLIP-008`: crosswalked to OUT-16; the XLSX-vs-PDF format difference explained as content-spec vs delivery format rather than left as an apparent conflict.
+- OUT-17/OUT-19 added as inventory entries that explicitly do **not** reverse `BE-NBB-SOCBAL-011` / `BE-SIG-DB2P-014`.
+- Three now-stale "not closed by this pass" notes on IN-16, IN-17, IN-19 rewritten.
+- `scope_version` 1.1 → 1.2 with a `_revision_history` entry. Left open and flagged inline: OUT-10/OUT-11 flags (BE-SCOPE-011), Checkinatwork's missing `filing_id` (narrowed BE-SCOPE-012).
+
+## BE-X10-004 — DD false certification
+
+**Before:** D14 claimed 35 markers registered in `known_limitations`; workbook held 36, register held 7 entries and none about a code table.
+**After:** the claim is machine-verifiably true — D14 states **36**, and a recount of the workbook returns **36** (18 in Code, 18 in English Description, 19 rows, 16 mapper blocks, all on `Country Option Mappers`; a 37th hit is D14's own self-reference). `known_limitations` 7 → **10**:
+
+1. Consolidated code-table entry naming `BE-DD-001-v1.1.xlsx!Country Option Mappers` as the per-marker register of record, listing all 16 blocks and what closes each (L-10).
+2. RSZ/NSSO employer-number check-digit rule — remainder vs complement unspecified, with the FinProf complement-vs-remainder precedent named (§6.1, L-06).
+3. Post-1-July-2026 work-bonus cap (§6.2, L-05). All six downstream cells re-read this pass, not trusted from the report: WTC `F303`/`C25`/`B6` and PSL `Belgium (EN)!N83` / `(NL)!N83` all carry 3,466.44 / 3,523.92 + `NOT FOUND` (`NIET GEVONDEN` in Dutch).
+
+The old false sentence is **not** reproduced verbatim in D14 — deliberately, so it cannot be lifted back out.
+
+## BE-X10-022 — CO2 multiplier: primary source FOUND
+
+**Article 34, 1° of the Law of 25 November 2021** organising the fiscal and social greening of mobility (Belgian Official Gazette 3 December 2021, numac 2021033910), completing **Article 38, §3quater, 3° of the Law of 29 June 1981**, quoted verbatim: *"multipliée par un facteur de 2,25 à partir du 1er juillet 2023, par un facteur de 2,75 à partir du 1er janvier 2025, par un facteur de 4,00 à partir du 1er janvier 2026 et par un facteur de 5,50 à partir du 1er janvier 2027"* — corroborated by NSSO administrative instructions 2026/2 (special contributions, company vehicles), which reproduce the same four factors and dates. `CONFIRMED` and all four vendor names are gone.
+
+The x4 figure was right; its sourcing was not. Two things the tier-B version got wrong or omitted, now in both artifacts: **the multiplier applies to the calculated contribution only, never to the minimum** (the law raises the minimum separately, to a non-indexed EUR 25.99 from 2026 — which independently matches the CCG's existing indexed EUR 42.34 and index 1.6291 = 185.85/114.08), and the "previously-stated 2.75" was not an error but the **2025** value. 5.50 from 2027, which the CCG had flagged as unverified, is confirmed by the same article.
+
+**One thing the QA report got wrong, found by not trusting it.** §3 and §8 state the value and vendor names appear "in the CCG and nowhere else in the corpus." A corpus re-sweep found **WTC `Wage Type Catalogue!F59`** carrying `"4 for 2026 (CONFIRMED via Agoria/Cellule Mobilite/Van Mossel/Dynamik HR)"` — the same defect in the artifact that builds the levy as a wage type. Fixed with the same citation, plus a `Version Control` remark row. Post-fix sweep: zero vendor names in any live artifact; the four remaining occurrences are QA/review records of the finding itself. Re-verified as genuinely selector-only (order date, no value): DD `Country Fields!G167`, DmfA spec `Field Options!C36` and `Population Rules!D14`, SIR gap G22.
+
+## Verification
+
+- **JSON valid**: strict `json.loads` OK, 69,337 bytes, 23 top-level keys, 0 replacement chars.
+- **Validators, all PASS (blocker=0 major=0 minor=0)**: `validate_workbook.py --artifact DD / WTC / PSL`; DD verifier (291 fields, 1191 spec rows classified, 0 unclassified, 0 orange populated, 0 C29 markers); `selfcheck_be_sir.py` 0 failures; CCG widened C29 lint over paragraphs **and** tables = 0.
+- **CCG rebuild proven reproducible before editing** (byte-identical text, 2464 lines, 0 diffs), then rebuilt: 147 tables / 1235 paragraphs / 210 headings unchanged; accents, `§` and `°` confirmed by codepoint.
+- **Two pre-existing failures, unrelated and unchanged by my edits**: WTC selfcheck `ORANGE populated` on column A (the join key, populated by design), and `diff_wtc_baseline` `BASELINE VIOLATED` — proven identical before/after on side-by-side copies (KEPT 300 / MISSING 0 / RENAMED 299), and the report §8 already cleared the rename against the CZ precedent. Also noted: `05-data-dictionary/verify_be_dd.py` still hardcodes `BE-DD-001-v1.0.xlsx` and crashes — a leftover of the v1.1 rename; I ran it via a temp copy and left the script untouched.
+
+## Backups — all kept
+
+`scope_manifest.json.bak-before-x10-001` · `BE-DD-001-v1.1.xlsx.bak-before-x10-004` · `BE-CCG-001-v1.0.docx.bak-before-x10-022` · `modules/m07_deductions.md.bak-before-x10-022` · `BE-WTC-001-v1.0.xlsx.bak-before-x10-022` · `PROPAGATION-LEDGER.md.bak-before-x10-fix` · `handover_status.md.bak-before-x10-fix`. The last three were taken from `git show HEAD:` and byte-verified against the committed originals. Scratch files were removed; no backup deleted.
+
+Also updated, per the ledger's own §4 standing rule: `PROPAGATION-LEDGER.md` §1B (6 rows, same-day, each naming the file the fix landed in) and a dated note on `handover_status.md` §4.6 so its routing list no longer says BE-X10-022 is unresearched. What stays open is stated in both: BE-SCOPE-011's OUT-10/OUT-11 flags, Checkinatwork's missing filing decision, Limosa (human ruling), and the three underlying unresolved facts L-05/L-06/L-10 — registered now, but not closed.

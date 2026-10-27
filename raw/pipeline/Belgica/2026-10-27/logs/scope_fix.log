@@ -1,0 +1,70 @@
+The diff is confined to exactly the five intended cells — 147 tables and 1,235 paragraphs unchanged, with the one addition being a new *row* in the Module 10.1 derivation table.
+
+---
+
+# Report — BE scope_manifest, 4 blockers fixed
+
+## Backup confirmed
+`BE-compliance/scope_manifest.json.bak-before-regression-fix` — 29,197 bytes, retained, and verified to still hold the pre-fix state (`inbound = 12`). Not deleted. I also took `01-ccg/BE-CCG-001-v1.0.docx.bak-before-32510-fix` before touching the CCG.
+
+## Valid JSON confirmed
+Re-parsed after every write: **valid UTF-8 JSON**, 47,418 bytes, 23 top-level keys, LF endings preserved, no BOM introduced. `scope_version` 1.0 → **1.1**, `scope_last_updated` 2026-08-17, plus a `_revision_history` array recording what this pass closed *and* what it left open.
+
+**All 38 verification checks pass**, each re-run against the current on-disk artifact rather than the audit's description.
+
+## Fix 1 — BE-SCOPE-001, stale inbound count
+
+Re-derived from the SIR as it stands now: still **19 inbound legs**, and the pmr distribution matches the audit exactly.
+
+| | Before | After |
+|---|---|---|
+| `integrations.inbound` | 12 | **19** |
+| Crosswalk to SIR flow ids | none | `sir_flow_id` on all 19 |
+| Unmatched SIR legs | 7 | **0** |
+
+Added, copied from the SIR (not re-derived): **IN-03** DmfA PID/DMNO, **IN-14** SEPA Payment Status Report, **IN-15** DRS/ASR response, **IN-16** work-accident acknowledgement, **IN-17** Limosa-1 receipt, **IN-18** pension accepted-premium, **IN-19** Checkinatwork response. Five carry `true` (IN-03/14/15/16/18), two `false` (IN-17/19) — matching the SIR cell-for-cell.
+
+**One correction to the brief:** it says to match "IN-13 through IN-19", but IN-13 was already present as `BE-IN-GARNISHMENT-ORDER`. The seven genuinely missing are **IN-03 plus IN-14–IN-19**, which is what the audit's own finding text lists and what I added.
+
+## Fix 2 — BE-SCOPE-002, the 325.10
+
+Verified against the primary source still on disk. FPS Finance's brochure: *"alleen de fiches 281 moeten worden ingediend. De opgaven 325 worden door de FOD Financiën uit de gegevens van de fiches 281 afgeleid."* The brochure's own XML layout settles it further — **`<Opgave32510>` is a wrapper element containing `<Fiche28110>`**, inside the single 281 submission. There was never a second file.
+
+`BE-FIN-32510-005` moved from `authority_filings.in_scope[4]` (9→8) to `out_of_scope` (9→10), quoting the brochure and naming what the engine actually owes: zone 2.029 and the `<Opgave32510>` wrapper. Filing count still 18; sequence 001–017 still complete. The superseded rationale is retained under `_superseded`.
+
+**The CCG was within reach and is fixed.** I first proved the modules are the real source — rebuilding from `modules/m*.md` reproduced the delivered `.docx` *identically* (284,986 chars, 147 tables, 1,235 paras) — then edited the markdown and rebuilt. All five cells corrected; zero residual "file the 325.10" instructions.
+
+## Fix 3 — BE-SCOPE-003, stock options: research finding
+
+**Both scenarios legitimately occur, and the discriminator is not plan type — it is whether the beneficiary accepted the offer in writing within 60 days.** The WTC is right; the manifest was wrong.
+
+- **Accepted in writing within 60 days** → the option falls inside the Law of 26 March 1999 and is taxed **at grant** (deemed the 60th day after the offer) on a flat valuation: 18% of the underlying share value, 9% if the plan meets the Law's conditions, +1pp (0.5pp) per year beyond a 5-year exercise period. The exercise gain is not taxed again as professional income.
+- **Not accepted in writing within 60 days** → the offer is **deemed refused**, the 1999 Law does not apply, and the benefit is taxed **at exercise on the actual gain** as ordinary employment income at progressive rates. This is the Minister of Finance's own administrative position, treated as an acquisition of shares at a discount.
+
+So the manifest's `out_of_scope[6]` was drawn too wide. It was *correct* about the 1999-Law path and about capital gains on later disposal, but it also swept in the deemed-refused case, which genuinely is a payroll event — exactly what WTC B300 (code 62993) builds. Combined with the block's delete-everything comment, an obedient agent would have deleted a correctly built, correctly taxed wage type.
+
+The 1999 Law is **still in force for 2026** — no repeal. What changed on 1 January 2026 is the new capital gains tax on financial instruments, which can add a burden on later *disposal* and is assessed outside payroll. WTC B301 already notes this correctly.
+
+Applied: `out_of_scope[6]` narrowed to disposal gains plus the already-taxed-at-grant exercise gain, with the narrowing explained; a new `in_scope` line naming code 62993; a new `special_rule` stating the 60-day test and both regimes (including warrants, and RSUs taxed at delivery under ITC 92 art. 36); `benefit_type` 9 → 12 values so the mapper lock and the wage-type lock agree.
+
+## Fix 4 — BE-SCOPE-004, contract_type mismatch
+
+The manifest's six values are the DD's **Contract Duration Type** block (rows 52–57), in that exact order. The DD's block actually *named* "Contract Type" (rows 48–49) is `{0 Full time, 1 Part time}`, and DmfA spec Field Options rows 18–19 confirm that is the NSSO's own zone 00050 domain.
+
+Corroborating evidence the audit didn't cite: **DD row 57 itself carries a back-reference to "scope_manifest.json option_mapper_scope.contract_type"** — the DD inherited the manifest's misnaming, which proves the manifest's key was resolved into the Duration block.
+
+| | Before | After |
+|---|---|---|
+| `contract_type` | 6 duration values, 4 with no code | `{0 Full time, 1 Part time}`, bound to DD 48:49 + zone 00050 |
+| `contract_duration_type` | absent | 6 values bound to DD 52:57, codes `0`, `1`, `NOT FOUND`×4 |
+
+Codes are copied from the DD verbatim — **the four `NOT FOUND` values are carried as `NOT FOUND`, not invented**, and flagged in an `_open_item` recording that NSSO zone 00885 publishes only 0 and 1 and the NSSO must resolve which covers each variant. The old key name is preserved in a `_was` field so the DD's existing reference still resolves.
+
+The `_comment` is reworded. Note that my first attempt *quoted* the old imperative verbatim while explaining it — my own verification caught that a grep-driven agent could still lift it out, so the second pass describes the old wording instead of reproducing it. The dangerous string now appears nowhere in the file.
+
+## Two things I deliberately did not do
+
+- **`product_mapping_required` on IN-04, IN-06, IN-07** still says `true` where the SIR says `false`. These are three of the five conflicts logged as **BE-SCOPE-011 — a major, not in this brief.** I left them at their pre-fix values rather than half-closing that finding, and the verification asserts they were not silently flipped. They are recorded in a new `integrations._inbound_note`, along with the fact that the outbound array is still uncrosswalked.
+- **DD row 57's back-reference** to `option_mapper_scope.contract_type` now points at the full-time/part-time mapper and should be repointed to `contract_duration_type`. My rename created this; it is a one-cell text fix in a different artifact, so I flagged it in the manifest's `_was` field rather than editing the DD unasked. **This is the one loose end from my changes.**
+
+The 11 majors and 5 minors remain open and are enumerated in `_revision_history[1].still_open`, so the next reader can see the manifest is now current on four counts and still stale on the rest.

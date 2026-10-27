@@ -1,0 +1,28 @@
+The Colombia CCG build is complete. A prior pass (3 Sep) had produced the 13-module body; this pass verified it against every mandatory control, fixed the real defects, and closed one substantive research gap.
+
+## Report back
+
+**H3 heading count: 160** (self-check threshold 90; C11 template coverage 96/96 = 100%). 14 H1 (Version Control + 13 modules, unmerged and in order), 38 H2, 248 tables.
+
+**"Not Applicable" answers — 3, all genuine:**
+- *Are non-cash benefits taxed via a separate employer-paid regime?* — no fringe-benefits tax regime exists in Colombia; BIK is taxed to the employee through payroll.
+- *Calculation logic for fringe benefit tax* — no FBT exists.
+- *Concessional tax cap on termination payments* — Colombia has none.
+
+**scope_manifest.json:** `C:\Users\Wallison Gomes\mercans-pipeline\CO-compliance\scope_manifest.json` — valid, all S3 field names correct (`descoping_reason` present on all 7 descoped filings, `inbound` is an array of objects, `product_mapping_required` boolean on all 6 in-scope filings, F1–F22 listed). F19 handled: three HR-scope reports descoped with the exact required reason.
+
+**Final docx:** `CO-compliance\01-ccg\CO-CCG-001-v1.0.docx`, 278.5 KB.
+
+## What I changed
+
+**1. B10 English-only violation (real defect).** 85 quoted statutory passages were in Spanish — whole sentences, bullets and table cells, which B10 forbids. I translated all 85 into English, keeping the article citation as the traceability anchor and statutory terms of art in parentheses on first use. Mapping saved as `01-ccg/b10_translations.py`. Residual Spanish-sentence scan of the built docx: **0**.
+
+**2. Law 2381 of 2024 was missed entirely (C2/F18).** Its PDF was sitting in the sources folder, cited nowhere. It is *not* operative for FY2026, so no rate was wrong — but the omission was undocumented. Verified chain: art. 94 self-set 1 July 2025 → Constitutional Court **Auto 841 of 18 June 2025** suspended entry into force (sparing arts. 12 and 76) → **Judgment C-264 of 25 August 2026** upheld ~80 articles and deferred them to **1 April 2027**, returning nine to the Chamber. Added a newest-law check at Module 5.1 with the FY2026-vs-2027 delta, plus `CO-GAP-11` in the manifest. The one employee-facing 2027 change is the solidarity-fund surcharge (1–2% today → five bands 1.5/1.8/2.5/2.8/3.0%); the 16% total, 12%/4% split and 25-SMMLV ceiling are unchanged.
+
+**3. Two audit-harness bugs, fixed in the harness rather than overridden.** `C29` matched `\bTODO\b` case-insensitively, so the Spanish word *todo* in quoted statute produced a phantom FAIL — C8's own docstring warns about exactly this. `C33`'s allowlist omitted `§ · … → ± ≥ Σ ×`, flagging ~160 already-English sentences as "non-latin-script" and burying the 3 real Spanish hits. Both now behave correctly (validated against English-with-symbols and against Arabic/Cyrillic/Greek/CJK/Hebrew samples).
+
+Also verified against primary sources: SMMLV 1,750,905 (Decree 1469/2025), UVT 52,374 (DIAN Res. 000238/2025), 42-hour week from 15 July 2026 (Law 2101/2021 art. 3), all 15 source PDFs cited, B1 matrix complete on all six required income types with non-resident filled, B2 caliber declaration reconciled, B4 cross-module citations agree.
+
+**Audit: 15 PASS, 1 MANUAL, 1 FAIL.** The FAIL is **C20**, which requires a matching spec `.xlsx` in `04-reports-spec/` for each in-scope filing — that directory is empty because report specs are pipeline stage 04, not stage 01. Same cause as C12 (`0/0 specs`, MANUAL) and C27 (SKIP). So the overall verdict reads BLOCKED, but nothing in the CCG deliverable is outstanding; C20 will clear when stage 04 runs. I did not touch the other five countries' copies of the harness, which carry the same two bugs — say the word if you want that propagated.
+
+Sources for the pension-reform status: [Forbes Colombia](https://forbes.co/economia-y-finanzas/reforma-pensional-entrara-en-vigencia-en-abril-de-2027-pero-varios-articulos-volveran-a-la-camara), [Ámbito Jurídico](https://www.ambitojuridico.com/noticias/laboral/corte-constitucional-declaro-exequible-mayoria-de-la-reforma-pensional), [Infobae](https://www.infobae.com/colombia/2026/08/26/las-claves-de-la-reforma-pensional-tras-decision-de-la-corte-cuando-entrara-en-vigencia-y-de-que-tratan-los-articulos-devueltos-al-congreso/), [Asofondos on Auto 841](https://asofondos.org.co/comunicados/corte-constitucional-suspende-entrada-vigencia-reforma-pensional/), [Ley 2381 de 2024 — Función Pública](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=246356).

@@ -1,0 +1,17 @@
+All counts verify exactly against the source table. Done.
+
+## What I delivered
+
+**Step 0-auto acquisition — nothing blocked.** 26 public artefacts into `FR-compliance/integration-sources/dgfip-edi/`, all anonymous HTTPS, no login/certificate/CAPTCHA, and no contact with any live endpoint (`poseidon2.impots.gouv.fr`, PassTrans). **No `[[NEEDS-ARTEFACT]]` marker is carried anywhere.**
+
+**The find that changes the build:** impots.gouv.fr's EDI-Paiement page is frozen at the **2022** campaign, but the live palier is **millésime 2026**. The current material is published through **EDIFICAS** — publicly, but not from the page you'd naturally start at. I pulled the 2026 autotest structure tables (`paye26d.edi` / `paye26f.edi`), which are the authoritative field tables. A build scoped from DGFiP's own page alone would be four paliers stale and would emit fields DGFiP has removed.
+
+That let me make P4 **2026-current rather than reconstructed**, and it closes the landscape's own open question FR-SI-Q5. Verified directly against the table: 2501 has **3** fields (the `AD/MOA` suppression persists), 2502 has **76** (CITS block gone; no `EL` in the totals column), P-IDENTIF has **15**.
+
+**Full P1–P7 + INTERLINKAGES + effort-estimates + _phase-index**, all BUILD-READY, in `03-statutory-integrations/DGFIP-EDI/`. Scoped to DGFIP-EDI only; NETENT-DSN and URSSAF-DPAE appear solely in INTERLINKAGES.
+
+**Three things worth your attention:**
+
+1. **Access may not be available at all.** Accreditation ends with a face-to-face appointment in France, handing over a USB key, and the dossier requires a K-BIS. That may mean a French legal entity. It's a phone call to the regional DRFiP correspondent, and it should happen **before** committing the 74 days — I've made it question Q2 and recommended taking the Model A/Model B/portal decision explicitly at portfolio level rather than by default.
+2. **A genuine deadline conflict I did not resolve.** Volume III-C says the 2502-SD due date is *"toujours le 31 janvier"*; impots.gouv.fr taxpayer guidance says 15 January for annual filers. Both are DGFiP publications. I flagged it rather than picking one.
+3. **Corrections to dossier records.** `scope_manifest.json` has `FR-DGFIP-003` as XML/outbound — it's EDIFACT and both directions. The landscape says the 2502-SD rides EDI-TDFC — both forms ride EDI-Paiement. I recorded these in P1 §1.7 and INTERLINKAGES §5 but **did not edit the landscape or scope manifest**, since that wasn't in scope; FR-SI-Q5 is still marked open in the JSON itself if you want it closed there.

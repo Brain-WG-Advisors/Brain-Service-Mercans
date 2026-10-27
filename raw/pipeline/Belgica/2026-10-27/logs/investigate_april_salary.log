@@ -1,0 +1,20 @@
+Report written to `BE-compliance/07-qa-crosscheck/APRIL_SALARY_INVESTIGATION.md`. No artifact was modified.
+
+**Resolved: 1,003.36 is wrong. The correct value is 1,035.58.**
+
+I built a Decimal engine for Module 6.1.1's method and validated it to the cent against the CCG's own 4,000-gross example (826.30, with every intermediate line matching) — so the engine is this CCG's method, not an independent reimplementation.
+
+**Step 1 — stale 2025 params: ruled out decisively, on direction.** Sourced the real IY2025 figures (bands 16,310/28,790/49,820, allowance 10,900, cap 5,930). Every one of them moves withholding *up*, not down: 2025 → 1,056.13, 2024 → 1,081.14, 2023 → 1,112.67. The target sits *below* the 2026 result. No historical Belgian parameter vintage can produce it. This also kills H3/H4/H5 as a family — they only seemed to help because each substituted a figure *larger* than the real one, which is the opposite of a genuine stale-year error.
+
+**Step 2 — no final-pay-period rule exists.** The system is non-cumulative and per-payment, so there's no year-to-date state to true up at exit. The CCG says so itself, and states the mirror case explicitly for joining months ("No catch-up is performed later"). Securex's Annex III–keyed reference describes one uniform method with no final-month variant. Caveat stated in the report: the FPS Finance Annex III PDF wouldn't parse, so this rests on structural + practitioner sources, not a primary quotation.
+
+**Step 3 — 648,000 combinations, and the grid found nothing.** It returned 6 exact hits, but that's the trap: measuring output density, the grid puts **~15.4 combinations per exact cent** in that region by chance. Six is *below* noise. Every single-parameter reverse solve requires a value existing in no year (allowance 12,625.38, cap 6,872.99, SS rate 14.5571%).
+
+**Step 4 — no copy-paste origin.** Inventoried all nine other withholding results in the CCG. Nothing near 4,500 gross, nothing near 1,003; nearest is 1,075.52 (non-resident scale III, structurally different).
+
+Two things worth your attention:
+
+- **The fix is four edits, not one.** The error is propagated arithmetically — the net (2,908.49) and the Step 8 totals both derive from it consistently. Corrected totals: WH 24,233.95, Net 23,039.70. Plus the DOCX.
+- **A judgement call is embedded here.** The company car benefit arguably belongs in the April *tax* base (Module 6 says benefits in kind are divided by 12 and added monthly), which would give 1,155.96 instead. I recommend 1,035.58 as the minimal defensible correction — the row's own Gross column says 4,500.00 — but flagged it so you decide deliberately rather than by default.
+
+I can explain the correct value with full confidence; I could not reconstruct where 1,003.36 came from, and didn't invent a story for it.

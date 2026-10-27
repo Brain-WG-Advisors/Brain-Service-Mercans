@@ -1,0 +1,87 @@
+Done. Both L-items are closed.
+
+## Column set — a decision, not the fallback
+
+The brief offered a 9-column shape *"if none specifies a CSV shape exactly."* One does: `compliance-source-hunter` §3.3 fixes **exactly 20 columns in order**, and `shared/schemas/README.md` points at it. The fallback was conditional, so I used the real contract. Same doctrine names Belgium as the country that *"produced no register at all"* — it now has one.
+
+## L-01 — `00-official-sources/legal-basis-register.csv`
+
+**63 rows × 20 columns.** Domains: income_tax 17 · social_security 13 · statutory_reporting 10 · benefits_in_kind 8 · live_legal_change 3 · labour_code 3 · indexation 2 · payslip_statute 2 · termination 2 · collective_agreements 1 · leave 1 · deductions_garnishments 1. Tier A.1 33 / A.2 27 / A.3 1 / B 2.
+
+Every item you named is in, plus: the three allowance figures are **three separate rows** so the two wrong ones are rejectable by id (`BE-PIT-006` = 11,180, `status=superseded`, `effective_from` = "never in force"); the 13.92 factor is deliberately **tier B** with "MERCANS CONVENTION, NOT A STATUTORY FIGURE" in its name — a tier-B row carrying a number is exactly the flag it should raise on every P2.
+
+**`consumed_by` was measured, not guessed.** All eight artifacts were dumped to text and each row carries regex probes matched against them: **384 tokens over 28 units** (CCG 194, WTC 46, RSPEC 32, SKILL 29, SCOPE 28, PSL 24, DD 18, SIR 13).
+
+I then audited the measurement rather than trusting it, and **nine false-positive consumers came out**: `6/7` was matching `96/71/EC` (Posting of Workers Directive), bare `92%` was matching `24.92%`, `498` was matching Moldova's ISO currency code, `509` was matching reorganisation code lists `501…512`, and `one-fifth` was matching the one-fifth *time credit*, not the Article 23 cap.
+
+**Two rows measure empty, and that is the finding:** the Law of 15 July 2026 and coefficient 2.3356 are cited in **no delivered artifact** (zero hits for seven distinct search terms). 11,550 and 11,180 appear only in `SKILL.md` — so `ALLOWANCE_INVESTIGATION.md` §3.2's instruction that the CCG state the 11,170-withholding / 11,550-assessment split **never landed in the CCG**. Carried at §1I.3, declared not fixed — that's an artifact content change, outside this pass.
+
+## L-04 — ledger reframing
+
+§0 now says the register **is** the checklist going forward and a missing consumer line is a **defect, not a limitation**; §1–§1H **stay as written, explicitly not reissued**, historically accurate for what was checked at the time. §1B.5's "fourth argument for the register" records that its own missed edge is now `BE-SSC-014`, whose `consumed_by` names the WTC. §3.6 restated to "every load-bearing figure still outside the register."
+
+## The 5 spot-checks — delivered binaries, opened directly
+
+| | Claim | Result |
+|---|---|---|
+| 1 | `BE-PIT-004` 11,170 → 2,987.98 | CCG 16 hits · WTC 3 cells · PSL 4 cells. **Negative: 11,180 = 0 in CCG, 0 in WTC** |
+| 2 | `BE-PIT-016` nr. 58 not nr. 53 | CCG 12 × "nr. 58" + 5 × 38.96 · WTC 2 cells |
+| 3 | `BE-SSC-004` 1 Jul component A | CCG 9 × 2,937.93, 1 × coefficient 0.3196 · PSL 5 cells |
+| 4 | `BE-SSC-014` CO2 4.00 + numac | `Wage Type Catalogue`!F59 read directly — carries both |
+| 5 | `BE-RPT-002` SFTP port 8022 | SIR 3 hits. **Negative: 0 in CCG, WTC, PSL** — matching `consumed_by = SIR` |
+
+CSV mechanics: 20 columns on 100% of rows, header byte-equal in order, ids unique and format-valid, `verification_method` one of the three G-SPOT tokens on every row, DictReader round-trip non-ragged.
+
+**Backups:** 3 taken, MD5-verified, all retained. The CSV is new. Ledger round-trip was proved byte-identical before editing (mixed endings: 265 CRLF + 45 LF) — diff is exactly 4 hunks.
+
+**Also updated** (not in the brief, but leaving it stale would have been F29): `BE-QA-REPORT.md` §7 rows L-01/L-04 marked CLOSED, and the SKILL's self-declared verbatim copy asserted verbatim *before* editing, regenerated, re-asserted after.
+
+**Observed, not fixed:** §7 rows L-02 and L-03 still read as open although the previous pass built both. Pre-existing staleness; not mine to certify.
+
+## What this register does not cover
+
+A retrofit of ~60 load-bearing figures — 63 rows against a 3 MB+ corpus holding thousands of values. Breadth over exhaustiveness, chosen deliberately. **No artifact literal was given a `register_id`**, so traceability runs register → artifact via `consumed_by`, not artifact → register via an inline id. Nothing was researched; no artifact figure changed. The country is still not closed — the six blockers and eleven majors of §§3–4 are untouched, and §1I.3 adds one CARRIED item.
+is not this pass's work to certify.
+
+MANDATORY VERIFICATION
+  CSV: 20 columns on 100% of 63 rows · header byte-equal to the contract in order ·
+  ids unique and all BE-[A-Z]{3}-[0-9]{3} · verification_method one of the three
+  G-SPOT methods on every row · tier and status inside their enums · DictReader
+  round-trip non-ragged · every consumed_by token a real artifact unit.
+
+  5 spot-checks against the DELIVERED BINARIES (docx/xlsx opened directly):
+   1 BE-PIT-004  11,170 -> 2,987.98: CCG docx 16 hits, WTC 3 cells (incl.
+                 'Tax Credit'!B10), PSL 4 cells (incl. 'Belgium (EN)'!B78).
+                 NEGATIVE CHECK: 11,180 appears 0 times in CCG and 0 in WTC.
+   2 BE-PIT-016  nr. 58 routing: CCG docx 12 'nr. 58' + 5 '38.96'; WTC 2 cells.
+   3 BE-SSC-004  component A 1 Jul 2026: CCG 9 hits on 2,937.93 and 1 on the
+                 coefficient 0.3196; PSL 5 cells on 127.54 / 2,937.93.
+   4 BE-SSC-014  CO2 4.00 + numac 2021033910: read WTC 'Wage Type Catalogue'!F59
+                 directly — carries both; CCG docx carries the numac twice.
+   5 BE-RPT-002  SFTP port 8022: SIR docx 3 hits + 11 'Chaman' + 4 '4096'.
+                 NEGATIVE CHECK: 8022 appears 0 times in CCG, WTC and PSL, which is
+                 what the register's consumed_by = SIR claims.
+
+BACKUPS — taken, MD5-verified, ALL RETAINED
+  PROPAGATION-LEDGER.md.bak-before-partB-l01-l04
+  07-qa-crosscheck/BE-QA-REPORT.md.bak-before-partB-l01-l04
+  08-skill/payroll-compliance-belgium/references/07-qa-report.md.bak-before-partB-l01-l04
+  (legal-basis-register.csv is new — no prior version to back up.)
+
+WHAT THIS REGISTER DOES NOT COVER
+  It is a retrofit of ~60 load-bearing figures, not an inventory: 63 rows against a
+  3 MB+ corpus holding thousands of values. No existing artifact literal was given a
+  register_id, so traceability runs register -> artifact via consumed_by, not
+  artifact -> register via an inline id. Breadth was chosen over exhaustiveness
+  deliberately and the residue is declared at PROPAGATION-LEDGER §3.6.
+  No figure was researched. No delivered artifact figure was changed.
+  The country is still not closed: the six blockers and eleven majors of
+  BE-QA-REPORT.md §§3–4 are untouched, and §1I.3 adds one CARRIED item.
+
+SCRIPTS (retained)
+  _pipeline/_l01_work/extract_corpus.py   corpus -> text dumps
+  _pipeline/_l01_work/build_register.py   row data + measured consumed_by -> CSV
+  _pipeline/_l01_work/audit_probes.py     which probe matched which unit, with line
+  _pipeline/_l01_work/spotcheck.py        the 5 spot-checks against the binaries
+  _apply_partB_l01_l04.py                 the ledger reframing
+  _apply_partB_l01_l04_qareport.py        the §7 closures + verbatim skill copy

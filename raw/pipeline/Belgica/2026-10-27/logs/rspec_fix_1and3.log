@@ -1,0 +1,46 @@
+Both fixes landed and are verified.
+
+## `git diff --stat BE-compliance/04-reports-spec/`
+
+```
+ BE-FEBELFIN-001-SEPACreditTransfer-Spec.xlsx   | Bin 49041 -> 49127 bytes
+ BE-FEDRIS-001-WorkAccident-Spec.xlsx           | Bin 92828 -> 93686 bytes
+ BE-FIN-001-Finprof274-Spec.xlsx                | Bin 42759 -> 42829 bytes
+ BE-FIN-002-Belcotax28110-Spec.xlsx             | Bin 72900 -> 72978 bytes
+ BE-NSSO-001-Dimona-Spec.xlsx                   | Bin 59144 -> 59289 bytes
+ BE-NSSO-002-DmfA-Spec.xlsx                     | Bin 130676 -> 131845 bytes
+ BE-NSSO-003-DmfAModification-Spec.xlsx         | Bin 114504 -> 115597 bytes
+ BE-NSSO-004-DRS-Spec.xlsx                      | Bin 116716 -> 117918 bytes
+ BE-NSSO-005-Limosa-Spec.xlsx                   | Bin 37875 -> 37961 bytes
+ 9 files changed
+```
+
+## Fix 1 — System Mapping cells filled: **318**
+
+| Spec | Filled | Left NOT FOUND |
+|---|---|---|
+| FEDRIS WorkAccident | 63 | 90 |
+| DmfA | 82 | 40 |
+| DmfA Modification | 82 | 40 |
+| DRS | 91 | 50 |
+| **Total** | **318** | **220** |
+
+Baseline reconciled exactly: 153+122+122+141 = 538 NOT FOUND cells; 318 filled + 220 left = 538.
+
+Matching was stricter than name-only — every one of the 538 cells was matched by crosscheck row number **and** its field name verified against column A: 538/538 exact, zero mismatches, zero missing rows. The 318 filled are precisely the `In DD? = Y` rows; the 220 left are TX/CALC/SYS plus 6 `DD/N`, untouched. All 138 distinct DD field names were resolved against a live index of the DD workbook (291 fields) before writing — nothing invented, and the run asserts on any unresolvable or ambiguous name.
+
+Format follows the existing house style for artifact cross-references (`BE-WTC-001 — 'name'.`):
+`BE-DD-001-v1.1 — 'Belgian Postal Code' (Country Fields).`
+
+## Fix 3 — version references: **62 cells** updated to v1.1
+9 Version Control changelog cells + 53 Field Options cells (Dimona 2, DmfA 31, DRS 20). None were filesystem paths — no `.xlsx` extension in any of them, so nothing points at a missing file. The DD file on disk is still named `BE-DD-001-v1.0.xlsx` while its Version Control says v1.1; I left the filename alone since it wasn't in scope, but you may want to rename it for consistency.
+
+## Two things I changed beyond the literal ask
+Both because Fix 1 made existing text false — flagging them so you can revert if you disagree:
+
+1. **The build-order remark** in all 9 specs said *"Stage 4, the Belgium Data Dictionary, does not exist yet. No DD cross-check step was performed and none is claimed."* Sitting next to 318 DD-cited cells, that's self-contradictory. Rewritten per file to state the DD now exists at v1.1, the cross-check is recorded in `DD-CROSSCHECK-TABLE.md`, and why the remaining N zones stay NOT FOUND. The WTC/`Mercans Code` caveat is preserved verbatim — I did not touch `BE-WTC-001-v1.0` references, as that's your separate task.
+2. **A v1.2 changelog row** added to each spec (row 15, dated 2026-08-16) recording both fixes with per-file counts — a 318-cell content change with no version record is what the QA gate flags.
+
+Note the v1.2 changelog text deliberately contains the string `BE-DD-001-v1.0` ("21 references to BE-DD-001-v1.0 updated to…"), since a changelog has to name what it changed from. That's the only remaining v1.0 occurrence in each file — I confirmed cell-by-cell that no *live* pointer is still at v1.0.
+
+Structural integrity checked: no charts, drawings, data validations or conditional formatting exist in these workbooks, so the openpyxl round-trip is lossless. I tested `insert_rows` first and found it shifts values but leaves merged ranges behind — it would have misaligned the whole REMARKS block by one row — so I wrote into the already-empty row 15 instead and asserted merge ranges intact afterward.

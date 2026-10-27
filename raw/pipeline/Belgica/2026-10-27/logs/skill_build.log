@@ -1,0 +1,45 @@
+The skill is built and verified. Here's the report.
+
+## File tree created
+
+```
+BE-compliance/08-skill/payroll-compliance-belgium/
+├── SKILL.md                                26,711 bytes    356 lines
+└── references/
+    ├── 01-ccg.md                          315,130 bytes  3,706 lines
+    ├── 02-wtc.md                          325,488 bytes    838 lines
+    ├── 03-sir.md                          134,253 bytes    938 lines
+    ├── 04-reports-spec.md               2,042,250 bytes  5,425 lines
+    ├── 05-data-dictionary.md              222,125 bytes  1,399 lines
+    ├── 06-payslip.md                       95,607 bytes    637 lines
+    └── 07-qa-report.md                     59,725 bytes    570 lines
+```
+3.1 MB total. Frontmatter parses; the two keys are `name` and `description` (1,078 chars, single line). Body sections are exactly the five specified, plus the design-clarifications block.
+
+Supporting files: `_prompts/skillbuild/{docx2md,xlsx2md,addnav}.py` (the deterministic converters, kept as provenance) and `logs/skill_build.log` (per-file source hash, mtime, and the three deviations).
+
+## Current-artifact confirmation
+
+Stronger than an mtime check: I re-ran the converters against the artifacts on disk and diffed against the delivered references. **All 7 reproduce line-for-line** (`07-qa-report.md` embeds `BE-QA-REPORT.md` byte-for-byte under a 2-line header). Re-verified a second time after repairing a converter. No `.bak-*` copy was read — the CCG alone has 22 backups beside it and none was touched. Sources: CCG 22:58, WTC 22:59, SIR 14:37, DD **v1.1** 18:19, Payslip 23:02, QA report 16:35, all 9 specs 23:07–23:18 on 2026-08-17.
+
+## Spot-checks (read from the .docx/.xlsx binaries, not my markdown or my draft)
+
+| # | Claim | Result |
+|---|---|---|
+| 1 | Allowance is 11,170, not 11,180/11,550 | **PASS** — `11,170`×16, `2,987.98`×15, `11,180`×0, `11,550`×0; Annex III nr. 32 cited |
+| 2 | Withholding ceilings 16,710/29,500/51,050 ≠ assessment 16,720/29,510/51,070 | **PASS** — both pairs present, distinctly; "not derivable … by any rounding rule" in text |
+| 3 | Car age coefficient 88% for months 25–36 | **PASS** — band row reads `25 to 36  88%`; worked example applies `100% − (6 x 2)`; floor 70% |
+| 4 | CO2 multiplier 4.00, law-sourced, calculated-only | **PASS** — French law text quoted, numac 2021033910, "minimum contribution is not multiplied"; **WTC F59 no longer says `CONFIRMED`; 0 tier-B vendor names anywhere in the corpus** |
+| 5 | Work-bonus chain 1999/2000/2023/2024, not art. 353bis | **PASS** — all 5 instruments cited; `353bis` survives only in the correction-of-record; all 5 propagated cells (WTC F303, PSL EN/NL L84+A110) carry the chain |
+
+Three extras: nr.58/nr.62/nr.53 routing with the EUR 5,766.20 delta (**PASS**); the three household tables with EUR 15.45 confined to Table 2 (**PASS**); and WTC column A = `Mercans Code`, populated for **355/355** rows with every tax-code count in item 19 reconciling exactly (250→144, 233→9, 234→4, 252→14, 254→19, 285→5, 305→3, 308→4, 317→6).
+
+## Three things I decided differently than the prompt specified
+
+1. **Integration counts.** "19 inbound/19 outbound" is the *SIR register*; `scope_manifest.json` deliberately holds **18 + 18** after the Limosa descope of OUT-08/IN-17, and its own `_outbound_note` says so in capitals. The description states both figures rather than asserting 19 in scope.
+2. **`BE-X10-022`.** The QA report §3 lists the CO2 multiplier as an open blocker; the fix landed *after* the report was written. I verified this by reading the cells, not the report — item 6 states the discrepancy and tells the reader to read the cell.
+3. **Nav index.** `04-reports-spec.md` is 2 MB; the 9 mandated workbooks genuinely contain that much (1.86 M chars of cell content, nothing trimmed). Each large reference now opens with line pointers, verified to resolve. Content below is untouched.
+
+One thing I left alone: `08-skill/be-compliance/references/` is an empty skeleton from 12 August. Deleting it is your call.
+ predating this
+stage. Left in place; removing it is a housekeeping call for the owner.

@@ -1,0 +1,25 @@
+Done. The France skill is complete and verified.
+
+## What I found
+
+`08-skill/` already existed from a mechanical build at 12:28. Rather than assume it was good, I ran a content-level audit (`_skillbuild/audit_refs.py`) that requires **every non-empty source cell and paragraph to appear in its reference file**. Six of seven passed clean. One did not:
+
+**`07-qa-report.md` was stale** — built at 12:28 from the QA report that was superseded at 12:50. It carried the old verdict (92/100, 4 MAJOR `M-1..M-4`, 2 MINOR) while the delivered `FR-QA-REPORT.md` now says **87/100, 0 CRITICAL, 3 MAJOR `F-1..F-3`, 3 MINOR `m-1..m-3``. 351 lines of the current report were missing.
+
+**`SKILL.md`'s findings block was stale in the same way** — it instructed readers to carry findings that no longer exist, including an `M-2` claiming "65 spec rows" where the current audit measures **264**, and an `M-3` that the new report folds into `F-1`.
+
+## What I did
+
+- Corrected the hardcoded verdict in `_skillbuild/make_all.py:build_qa()` and rebuilt `07-qa-report.md` (2,291 lines). Audit now reports **TOTAL MISSING: 0** across all seven files — 78,531 units checked.
+- Rewrote SKILL.md's findings section to the current `F-1`/`F-2`/`F-3` + `m-1`/`m-2`/`m-3` set. `F-1` now carries the operative warning: the `NO DD COUNTERPART` annotation on 264 spec rows is substantially false, so the agent must check `05-data-dictionary.md` rather than repeat it.
+- Verified the seven **navigation indexes** point at real headings — 523 index rows, 0 mismatches — so the `offset`/`limit` guidance actually works.
+- Spot-checked SKILL.md's factual claims against the CCG. All verbatim, including the useful guardrail at `01-ccg.md:797`: monthly SMIC is hourly × 35 × 52 ÷ 12 = **EUR 1,867.02**, not × 151.67 (= 1,867.06).
+
+SKILL.md is **11,110 bytes**, routes to all seven files with no unrouted file and no broken path.
+
+## Two deviations from the prompt, both deliberate
+
+1. The prompt's Step 3.4 names **"DGI for tax, CNPS for social security"** and **"SMIG, CNPS ceiling"** — those are placeholders from a different country's template. SKILL.md uses the French authorities and terms: **DGFiP**, **URSSAF**, **net-entreprises.fr**, **SMIC**, **PASS**. Applying the instruction literally would have made the skill wrong.
+2. The prompt expects the SIR at `FR-SIR-001-*.docx`; the delivered file is `FR-SIR-INDEX-001-v1.0.docx`, plus 30 runbook markdown files across three authorities. All are folded into `03-sir.md`.
+
+One thing worth your attention: every artifact on disk is **v1.0**, but the DD's own Version Control row and all 15 specs cite **v1.1** (finding `m-2`). No v1.1 file exists, so "read the highest version present" and "read the version the artifacts cite" resolve to different things. I read what is on disk and carried `m-2` into the skill, but that filename should be settled before this is uploaded.

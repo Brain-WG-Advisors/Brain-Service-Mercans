@@ -1,0 +1,53 @@
+Done. All three specs PASS, and the record is closed.
+
+## First, two corrections to the brief
+
+**The finding is not in `BE-QA-REPORT.md`.** It's in `scope_manifest.json` v1.9 `_revision_history` `still_open[2]` and `PROPAGATION-LEDGER.md` §1G.10. The QA report's §8 extraction method note is about *docx* dedup, a different thing.
+
+**FEDRIS was never involved.** The record says "DRS and the two DmfA specs," and a sweep of all nine specs for the marker family confirms it: FEDRIS carries none.
+
+## The 5 zones — block 90005 *Cotisation travailleur statutaire licencié*
+
+15 cells total (5 zones × 3 specs): DRS rows 170–174, DmfA rows 230–234, DmfA Mod rows 230–234.
+
+| Zone | Field | M chars before → after |
+|---|---|---|
+| 00071 | Gross Ref Remun Amount | 698 → 682 (756 → 740 on Mod) |
+| 00072 | Gross Ref Remun Contribution Amount | 614 → 577 |
+| 00073 | Ref Nbr Days | 169 → 132 |
+| 00127 | Subjection Starting Date | 143 → 106 |
+| 00129 | Subjection Ending Date | 283 → 246 |
+
+**What was removed, in every case:** `"Domaine de définition"est modifié:` — nothing else. In the glossary that's a *section header* announcing the DOMAINE DE DEFINITION section was amended at edition 2026/2. The parser read DESCRIPTION up to the next ALL-CAPS keyword and swallowed the marker line. Same parser, same marker family, same five zones as BE-X10-015 — which stripped `"Présence"est modifiée:` and `"Code anomalie..."est modifié:` out of Field Length and Format.
+
+## Two judgement calls worth your attention
+
+**I kept the `Jusqu'à 2026/1 inclus:` / `À partir de 2026/2:` split.** It reads like an edition note, but it's the NSSO's own published DESCRIPTION text, not an extraction artefact — and it's load-bearing: on 00071 the *computation itself* changes between editions (last activity salary transposed to full-time → monthly reference × months × coefficient). Deleting it would have destroyed genuine explanation.
+
+**Nothing was relocated because nothing needed to be.** The marker's referent — the definition-domain body — is already carried in full in column O (Option Values), untouched. The one fact the marker itself carried (that these five domains were amended at edition 2026/2, published 01/06/2026) went into a new REMARKS row on each workbook's Version Control sheet.
+
+**Zone 00071 detail:** it ran to 718 chars with the marker, so the builder's 700-char cap fired *inside* the marker, leaving `... " Domaine de...`. That's why a naive grep for `est modifi` finds only 4 of 5 zones — the fifth hides behind its own truncation. Removing the marker leaves 682 chars and the ellipsis goes with it; the genuine text was complete at 682 all along.
+
+## Verification
+
+- `validate_workbook.py --artifact RSPEC`: **PASS (blocker=0 major=0 minor=0)** on all three.
+- **No content lost, proved per cell:** the AFTER text is a character-for-character *prefix* of BEFORE, the only dropped substring is the marker, and every cell now ends on a complete sentence. 15/15.
+- **Pure-function proof:** before writing, each cell was proved equal to the value derived from the *unmodified* source — 15/15 OK, 0 diverged. Every replacement was re-derived through the builders' own `clean()`, never hand-typed.
+- **Cell diff, all 9 sheets × 3 workbooks: TOTAL 21** — the 15 M values + 6 new Version Control cells. Column O unchanged, no style drift.
+- `verify_specs.py`: **11 errors before, 11 after**, same distribution, established by running it against the untouched backups.
+- Apply script **idempotent** (second run: 0 changes).
+
+## Root-caused
+
+The pollution was in the parsed sources, so a rebuild would have resurrected it. Fixed in `dmfa_glossary.json` (feeds both DmfA specs) and `_extract/NSSO_DRS-AMI-scenario1_2026-2_FR_zones.json` (feeds DRS) — semantic diff exactly 5 fields each, files shrank by exactly 200 bytes, no reformatting.
+
+## Backups — all retained, none deleted
+
+`*.bak-before-changelog-fragments` on all seven touched files. The three workbooks are MD5-verified against the pre-edit state (`32112c48…`, `0a037dc8…`, `a2a1942c…`), plus the two source JSONs, `scope_manifest.json` and `PROPAGATION-LEDGER.md`.
+
+## Two things I found and did *not* fix
+
+1. **`BE-NSSO-001-Dimona-Spec.xlsx!T55`** (zone 01231) carries a different swallowed fragment — an annex change-log in column T, ending in the doubled-character PDF artefact `AANN22002266--11--FFRR55..ppddff...`. Same family, different spec/column/zone, outside the five zones.
+2. **BE-X10-015 was never root-caused upstream.** Its 64 cells were patched into the workbooks by `_apply_x10_015_names.py`, but the JSONs still carry markers in `name_fr` ×5, `format` ×6, `length` ×1 (DmfA) and `name_fr` ×5, `format` ×5, `length` ×2 (DRS). **A rebuild without re-running that patch script would resurrect BE-X10-015.** I left it alone because fixing it would change cells that finding has already certified — that needs its own pass against its own record.
+
+Both are registered in `scope_manifest.json` v2.2 `still_open` and ledger §1K.5 rather than left silent. I also closed the record: manifest v2.1 → v2.2 (semantic diff: 2 — the version bump and one appended revision; v1.9's `still_open` left as written) and ledger §1K added (22 lines, purely additive).

@@ -1,0 +1,32 @@
+All three records now agree, and the artifact backs them up.
+
+## Confirmation: Limosa is closed in all three
+
+| Record | Was | Now |
+|---|---|---|
+| `BE-QA-REPORT.md` `BE-SCOPE-014` | "The only Limosa loose end left in the repository is the `BE-WTC-001` half" | struck; **closed in full**, with the F355 before/after, the root-cause fix and the full verification set |
+| `BE-QA-REPORT.md` `L-14` | "STILL OPEN, the last Limosa loose end in the repository" | struck; **closed in full**, cross-referenced to ledger 1F and manifest v1.6 |
+| `PROPAGATION-LEDGER.md` 1E.6 | "**OPEN** — NOT CLOSED BY THIS PASS" | struck; **RESOLVED**, and it got the separate pass the row said it needed |
+| `scope_manifest.json` v1.5 `still_open` | "STILL OPEN, AND NOW THE ONLY LIMOSA LOOSE END LEFT" | text left standing as the historical record with a `_superseded_by` key beside it — the JSON analogue of a strike, and how v1.3 handled the entries it overtook |
+
+House convention followed in each: strikethrough in the markdown, nothing deleted; `_superseded_by` in the JSON. Three further stale copies of the same claim were in the ledger (§1C narrative L100, row 1E.5) — struck too, since leaving them would have made the file disagree with itself.
+
+Two additions the edits made necessary: a new ledger **§1F** recording the wording fix and its verification (1E.6 now points at it), and manifest **v1.6**, with the top-level `scope_version` bumped 1.5 → 1.6.
+
+All three now carry the same closure statement: **Limosa fully resolved across all five artifacts** — `scope_manifest.json`, `BE-SIR-001`, `BE-CCG-001`, `BE-NSSO-005-Limosa-Spec.xlsx`, `BE-DD-001-v1.1.xlsx` — **plus the WTC wording-precision fix**, on *Programme Law (I) of 27 December 2006*, Title IV Ch. VIII, **arts. 137 / 139 / 141 / 155**, MB/BS 28 Dec 2006, executed by the RD of 20 March 2007.
+
+## Backups
+
+All three taken before any edit, MD5-verified identical to the originals, and **retained**:
+
+- `BE-compliance/07-qa-crosscheck/BE-QA-REPORT.md.bak-before-limosa-bookkeeping-close` (54,152 b)
+- `BE-compliance/PROPAGATION-LEDGER.md.bak-before-limosa-bookkeeping-close` (46,557 b)
+- `BE-compliance/scope_manifest.json.bak-before-limosa-bookkeeping-close` (98,161 b)
+
+`scope_manifest.json` re-parses cleanly after editing; all ledger table rows still have 6 columns; strikethrough markers balanced on every edited line.
+
+## One correction, and it's the reason I checked
+
+I verified the fix against the workbook rather than trusting the log, and one number in the log is wrong: the log says F355 went **613 → 1,073** characters. The *before* figure is right; the *after* is **1,049**, wrong by 24. Re-measured three ways on the delivered workbook — raw `F355` element text with tags stripped, the same with XML entities decoded, and `openpyxl`'s cell value — all three agree on 1,049.
+
+I recorded 1,049 in all three files with the discrepancy noted, rather than propagating the log's figure. Everything else in the log re-checked clean: the qualified wording is in the delivered workbook (`art. 155`, `art. 141`, the 2006 law and the retained `Limosa` token all present), and `be_wtc_data_part7.py` carries the same clause with no trace of the old bare sentence, so a rebuild won't resurrect it. The discrepancy is cosmetic — it changes no claim about who files the declaration.

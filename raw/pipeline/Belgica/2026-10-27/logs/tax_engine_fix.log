@@ -1,0 +1,13 @@
+Done. All four confirmed changes are applied across the five `.md` modules, the `.docx` and the `.xlsx`, with the diff report at `BE-compliance/07-qa-crosscheck/TAX_ENGINE_FIX_APPLIED.md`.
+
+**Verification result:** I built an independent Decimal engine (Annex III nr. 12 cent-rounding at every step) and validated it *first* by reproducing every pre-fix CCG figure exactly from the CCG's own inputs on the old parameters. It then reproduced the "FULL fix" column of `BRACKET_INVESTIGATION.md` §5.2/§5.3 and both figures in `CHILDREN_SUPPLEMENT_INVESTIGATION.md` §5.2 **line for line — no discrepancy anywhere**. Closing self-check against the edited files: 59 figures, 0 missing.
+
+**Two things you need to decide on:**
+
+1. **Module 9's severance rate is not what the brief assumes.** The brief says the nr. 58 table at 38.96% is "already confirmed correct" and to hold it fixed. `m09_termination.md:206` still reads **nr. 53 at 53.50%, EUR 21,216.78**. `CCG_CONTENT_REVIEW.md` verified 53.50% as correct; `BRACKET_INVESTIGATION.md` §6(a) contradicts it and files nr. 58/38.96% as its own separate high-priority ticket, not one of your four. Since switching it is a fifth change worth EUR 5,766.20, **I left it at 53.50%** and recomputed only the April-salary line from items 1–3 (totals now 24,354.73 / 22,918.92). §2 of the report has both outcomes side by side — it's a five-line edit if you want it.
+
+2. **m12 line 192 is 3,881.31, not the 4,034.78 the bracket investigation lists.** That's not a disagreement: 4,034.78 is correct for items 1–3 alone, but item 4 (x12 → x13.92) moves Example 5's holiday pay into the 47.44% band, which none of the three investigations scoped. Same applies to m08. Flagged explicitly in §3.12.
+
+Two things beyond the stated file list, both small and both deliberate: I also fixed `be_wtc_data_part7.py`, `build_be_wtc.py` and `_prompts/wtc.md`, because the next WTC rebuild would have silently regenerated the wrong allowance and child figures from them (`CHILDREN_SUPPLEMENT_INVESTIGATION.md` §5.1 flags exactly this). And I published the full nr. 38 table (1–8 children plus the >8 rule) rather than just 624/1,656/4,404, per the brief's pointer to "the full table".
+
+Not applied, and listed in §5: the legal-basis citation refresh, and the 11,170-vs-11,550 two-figure explanation — both are new content rather than one of the four numeric changes.

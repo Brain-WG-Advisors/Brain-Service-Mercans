@@ -1,0 +1,83 @@
+Both fixes were genuinely needed and are applied. Both files remain valid JSON.
+
+## (a) BE-IN-GARNISHMENT-ORDER — before and after
+
+**BEFORE** (`BE-compliance/scope_manifest.json`, under `integrations.inbound`, line 440–445):
+```json
+      {
+        "id": "BE-IN-GARNISHMENT-ORDER",
+        "from": "Court, bailiff or administration",
+        "format": "CSV",
+        "product_mapping_required": false
+      }
+```
+
+**AFTER**:
+```json
+      {
+        "id": "BE-IN-GARNISHMENT-ORDER",
+        "from": "Court, bailiff or administration",
+        "format": "CSV",
+        "product_mapping_required": true,
+        "rationale": "The inbound garnishment order supplies the attachable-portion calculation inputs that the payroll engine must map: the order identifies the debt type and creditor, and the engine must apply the Judicial Code Art. 1409 net-wage bands to determine the attachable portion and compute the correct withholding amount. This is a genuine product touchpoint — the Art. 1409 band calculation cannot be performed without the order being mapped into the engine, and it feeds the matching outbound leg BE-OUT-GARNISHMENT to the bailiff or creditor. Contrast with LIMOSA and work-accident-insurer entries, which are filed entirely outside the payroll engine and therefore require no product mapping."
+      }
+```
+
+Corroborating evidence found in the same file, unchanged: the matching outbound leg at line 355 already carried `product_mapping_required: true` —
+```json
+      {
+        "id": "BE-OUT-GARNISHMENT",
+        "to": "Bailiff or creditor",
+        "format": "CSV",
+        "product_mapping_required": true
+      }
+```
+so the inbound `false` was inconsistent with its own outbound counterpart.
+
+## (b) shared/scope_manifest_template.json — did it actually need the fix?
+
+**Yes.** The template genuinely still said `"reason"`.
+
+Found (line 29–32, inside `authority_filings.out_of_scope`):
+```json
+    "out_of_scope": [
+      {
+        "filing_id": "",
+        "reason": ""
+      }
+```
+
+Confirmed against the two authoritative consumers, read directly:
+
+- `mercans_pipeline_v2_9.sh:619` area — the Stage-3 prompt explicitly instructs the opposite of what the template modelled:
+  > `CRITICAL — use the EXACT field names from the template (S3 fix):`
+  > `- For descoped filings: use \`"descoping_reason"\` (NOT "reason")`
+
+  That comment is self-contradictory as written: it tells the model to copy the template exactly *and* to use a key the template did not contain.
+
+- `mercans_pipeline_v2_9.sh:2219` — auditor check C20 keys on `descoping_reason` and would FAIL any manifest built literally from the old template:
+  ```python
+  missing_reasons = [f.get('filing_id', '') for f in out_scope if not f.get('descoping_reason')]
+  ```
+
+**BEFORE**: `        "reason": ""`
+**AFTER**:  `        "descoping_reason": ""`
+
+`grep '"reason"'` on the template now returns nothing — that was the file's only occurrence, so no other key was affected.
+
+## (c) mtime verification — exactly two files changed
+
+| mtime | file | status |
+|---|---|---|
+| 2026-08-12 **14:07:57** | `shared/scope_manifest_template.json` | **changed by me** |
+| 2026-08-12 **14:07:53** | `BE-compliance/scope_manifest.json` | **changed by me** |
+| 2026-08-12 14:07:24 | `BE-compliance/logs/scope_fix_w1_template.log` | pre-existing, untouched |
+| 2026-08-12 14:02:31 | `BE-compliance/07-qa-crosscheck/scope_validation.md` | **untouched** ✓ |
+| 2026-08-12 12:01:50 | `BE-compliance/BE-COVERAGE.md` | **untouched** ✓ |
+| 2026-08-12 12:01:39 | `shared/CCG-Playbook-Learnings.md` | untouched ✓ (rest of `shared/`) |
+| 2026-08-12 11:58:37 and older | all 13 CCG modules `m01`–`m13` | **untouched** ✓ |
+| 2026-08-12 10:49:19 | `mercans_pipeline_v2_9.sh` | **untouched** ✓ (read only) |
+
+Nothing else in the tree has an mtime later than 14:07:24, which predates both edits. `git status --porcelain` is unchanged (`?? BE-compliance/`, `?? mercans_pipeline_v2_9.sh`, `?? shared/`) — these trees were already untracked, so no new or deleted paths appeared. No backup files were created.
+
+One read-only observation, no action taken: `BE-compliance/scope_manifest.json` already uses `descoping_reason` in all 7 of its descoped entries and zero bare `"reason"` keys — so Belgium's own manifest was already correct against C20, and the template fix protects the *next* country, exactly as scoped.

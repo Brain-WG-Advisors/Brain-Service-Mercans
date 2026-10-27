@@ -1,0 +1,25 @@
+Done. `FR-SIR-INDEX-001-v1.0.docx` is written (37,699 bytes), alongside the generator `build_fr_sir_index.py` that produces it from the JSON.
+
+**What's in it**
+
+Landscape A4, Mercans house format (Arial, 14pt H1, footer `FR-SIR-INDEX-001 v1.0 | Mercans Compliance Regulations Team | 2026`):
+
+- Title + a provenance line stating source schema, generation date, and the summary counts (5 assessed, 3 system-to-system, 2 portal-only, 3 channels).
+- A 6-column table, one row per authority, all five in JSON order:
+
+| Authority | Integration | Channel | Directions | Runbook |
+|---|---|---|---|---|
+| NETENT-DSN | Yes | REST API (API DSN) | out, in | `03-statutory-integrations/NETENT-DSN/` |
+| URSSAF-DPAE | Yes | REST API (API DPAE) | out, in | `03-statutory-integrations/URSSAF-DPAE/` |
+| DGFIP-EDI | Yes | EDIFACT via accredited partenaire EDI | out | `03-statutory-integrations/DGFIP-EDI/` |
+| CNAM-DIRECT | No | net-entreprises.fr portal only | out, in | Not applicable |
+| CDC-SOLTEA | No | soltea.gouv.fr portal only | out | Not applicable |
+
+- Closing paragraph: runbooks are produced only for `Integration = Yes` authorities at `03-statutory-integrations/<AUTH_CODE>/`; the manual/portal authorities need none.
+
+**Two judgment calls, flagged rather than buried:**
+
+1. **Landscape orientation** — the six requested columns don't fit legibly in the portrait layout BE-SIR-001 uses. If house style requires portrait, say so and I'll drop the full channel prose to `channel_type` codes to fit.
+2. **Null dev portals** — CNAM-DIRECT and CDC-SOLTEA have `dev_portal: null`. I rendered that as "None published — no machine-to-machine developer documentation exists" rather than a blank cell, so absence reads as a finding rather than an omission. The closing paragraph likewise notes that excluding these two from runbooks is a statement about the *channel*, not about the obligation — their filings (FR-CPAM-002/003, FR-CDC-001) stay in scope.
+
+The index reflects only what the landscape file asserts; I didn't verify its portal URLs or channel claims against the authorities, and the JSON itself marks DGFIP-EDI as `confidence: medium` and carries 5 unresolved `open_questions` — neither of which this index surfaces, since you scoped it to the columns above. Worth knowing before it's treated as settled.

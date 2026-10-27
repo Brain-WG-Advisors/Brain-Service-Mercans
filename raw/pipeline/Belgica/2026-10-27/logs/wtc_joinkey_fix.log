@@ -1,0 +1,60 @@
+The join-key fix is applied and correct. `validate_workbook.py` now passes. `diff_wtc_baseline.py` does **not** reach BASELINE INTACT, for a reason unrelated to the join key — reported in full below.
+
+## The fix
+
+355 cells in `Wage Type Catalogue!A` + 1 cell in `Version Control!C18`. A cell-by-cell diff against the backup confirms **exactly 356 changed cells and nothing else** — no other column, no other sheet, no description or formula text touched.
+
+Codes were copied from the Coverage sheet's own mapping table (rows 74–373: code → catalogue row), not re-derived. I revalidated that table against `shared/Global_WTC_V1_0.xlsx` first: 300 unique codes, identical set **and identical order**, mapping to catalogue rows 2–301 with no gaps or duplicates. Rows 302–356 got `BE-001`…`BE-055` from Coverage rows 16–70. Row 357 is still empty; no duplicate join keys.
+
+I also verified the openpyxl round-trip preserves all 23 package parts (the workbook contains an embedded image and comment VML) before writing.
+
+## diff_wtc_baseline.py
+
+**Before** — `MISSING 300`, `KEPT 0`, `VERDICT BASELINE VIOLATED`, exit 1.
+
+**After** — full output printed above. Summary:
+
+```
+KEPT     300
+MISSING  0      <- was 300
+RENAMED  299    <- was 0 (previously unreachable: nothing joined)
+ADDED    55     <- was 0; BE-001..BE-055 at A302..A356
+VERDICT  BASELINE VIOLATED     exit 1
+```
+
+The defect you identified is fixed: `MISSING 300 → 0`, all 300 baseline codes now join. `RENAMED 299` is not a regression — it was **unreachable before**, because with an empty column A nothing joined and the description comparison never ran. Populating the join key exposed a second, pre-existing condition.
+
+**Why BASELINE INTACT is not reachable without vandalising the artifact.** The script flags RENAMED when column B ≠ the baseline description. Column B holds the Belgium-specific English wage-type name, and no column in the catalogue carries the global description text. Reaching INTACT would mean overwriting all 299 Belgian names with the generic baseline text — which would collapse rows 7–23 into seventeen rows all named "Overtime deduction", destroying the country-specific content that is the artifact's entire value, and is forbidden by your instruction 5.
+
+This is a property of the tool, not of the Belgium build. I ran the same script against `shared/_CZ_Wage_Type_Catalogue_V2_0.xlsx`, the shipped reference: **`KEPT 241 / MISSING 59 / RENAMED 148 / VERDICT BASELINE VIOLATED`, exit 1.** CZ renames 148 of its 241 baseline codes (e.g. 62101 → "Basic Pay Arrear"). The governing precedent fails the same check the same way, so "baseline description text is authoritative" is stricter than the actual production standard. Belgium is now strictly better than CZ on this check: 0 missing vs 59, and its 299 renames are legitimate localisation.
+
+My recommendation: treat MISSING/duplicates as the blocker condition and RENAMED as advisory — either run with a `--desc-col` that isn't the localised name, or adjust the script's verdict rule. That is a toolkit change, outside the scope you gave me, so I have not made it.
+
+## validate_workbook.py
+
+**Before:** `VERDICT FAIL (blocker=1 major=0 minor=0)` — C29 residual marker at `Version Control!C18`.
+
+**After:**
+```
+VERDICT   PASS  (blocker=0 major=0 minor=0)     exit 0
+```
+Meets the stated criterion.
+
+## Version Control!C18
+
+Only the clause containing the marker changed; the rest of the 710-character remark is byte-identical.
+
+- **Old:** `...(1) the Form Reference Guide sheet is a PENDING placeholder because there are no report-spec row numbers to map wage types to;...`
+- **New:** `...(1) the Form Reference Guide sheet carries no wage-type-to-report-row mapping, because no Belgian report specification yet exists to supply those row numbers;...`
+
+CZ has no equivalent cell — its Version Control sheet has no REMARKS table at row 18 — so I preserved the existing statement's meaning rather than importing text. The replacement clears the full marker list (`placeholder|TODO|TBD|FIXME|XXX|VERIFY No.|to be confirmed|to be verified|<insert`).
+
+## Backup
+
+`BE-compliance/02-wtc/BE-WTC-001-v1.0.xlsx.bak-before-joinkey-fix` created at 08:30, 412,616 bytes, **present and not deleted**. I removed only my own scratch directory.
+
+## One thing needs your decision
+
+The workbook now contradicts itself in two places I was instructed not to touch. `Version Control!C28` states *"LEFT DELIBERATELY EMPTY FOR THE DEVELOPMENT TEAM (ORANGE): A Mercans Code..."*, and `Global WTC Coverage!A2` states *"COLUMN A (Mercans Code) IS AN ORANGE COLUMN AND IS THEREFORE LEFT EMPTY."* Both are now false.
+
+Worth knowing: the CZ template populates column A for all 398 of its rows even though A1 carries the same orange fill (`FFFF9900`). So the original build's "orange ⇒ leave empty" reading of column A was the actual root defect, and your fix aligns the file with the precedent. Those two narrative cells are the last residue of the old reading, and a QA pass will flag the inconsistency. Say the word and I'll rewrite both to describe the populated join key — two cells, no data impact.

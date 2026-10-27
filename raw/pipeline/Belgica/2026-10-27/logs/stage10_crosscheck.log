@@ -1,0 +1,30 @@
+Stage 10 is complete. **`report_only` held — zero tracked artifacts modified.**
+
+## Verdict: Belgium is NOT closed — 6 blockers, 11 majors, 5 minors
+
+**Deliverables:** `07-qa-crosscheck/BE-QA-REPORT.md` · `handover_status.md` · `PROPAGATION-LEDGER.md` · `_qa/REGRESSION-BE-XCHECK-r1.json` · F29–F31 + L7–L9 appended to `shared/`
+
+### The good news first, because it's most of the story
+Of the 22 blockers the seven sweeps raised, **17 are verified closed against the artifact on disk, not against a log.** I also had to **retract a prior finding**: round 1's "WTC baseline overwritten" is not a defect — 300 of 300 codes are present in baseline order, and the description rewrite is what the CZ precedent does too (it rewrites 61% of its own).
+
+### One correction to your premise
+You said every artifact "had its blockers fixed today." **`BE-CCG-003` was not touched** — the CO2 multiplier still rests on four tier-B sources (an industry federation, a mobility cell, **a car dealer group**, a payroll consultancy) with the word `CONFIRMED` next to it. C30 is unconditional, so it's a live blocker (`BE-X10-022`) and the CCG band is 86%, not 88%. It *is* correctly contained — the value appears in no other artifact; four downstream artifacts reference it by order date instead.
+
+### The pattern that ties four findings together → new **F29**
+**A fix applied in one direction and certified as complete.** The v1.1 manifest fix crosswalked inbound 12→19 and never opened outbound — still 12 against the SIR's 19, **short by exactly seven flows, three of which have a delivered v1.2 Report Spec on disk.** Same shape in three more places, including a DD Version Control cell certifying 35 gap markers "registered in scope_manifest known_limitations" when there are 36 and the register holds none.
+
+### Your six named items
+| | Status |
+|---|---|
+| still_open (11+5) | **13 open, 3 partially closed** — verified item by item, not assumed |
+| BE-DD-002/005/006/007 | 002 partially (318 landed ✓, 220 cells contradict their own changelog); 005 half (a **fifth** take-on field was missed); 006, 007 **closed** |
+| WTC box 360 | **Confirmed blocker.** The Belcotax spec names it in 4 cells and asks for it at the stage gate. This is that gate. |
+| RSZ check digit | **Genuinely unresolved, not defective.** C32 passes; what's missing is the digit span and complement-vs-remainder — and the corpus warns elsewhere that getting that wrong yields a valid, unpayable file |
+| July 2026 decrees | **Confirmed gap** — legal basis cites unnumbered "Royal Decrees"; the corpus cites the 30 May 2026 Programme Law and 11 Dec 2025 RD by number elsewhere |
+| DD row 57 | **Confirmed** — `F57` points at `contract_type`, now a different mapper |
+
+### Two things nobody had
+- **CCG Module 4** says the work-bonus limits moved with the GMMI "on 1 April and 1 August" then dates the moves 1 July and 1 September. Its own table has no August row, and row selection is "by the pay month."
+- **C29 covers 4 of 7 artifacts** and reads `.paragraphs` only, so Word tables are invisible. A deterministic PASS is achievable over **892 unresolved-gap markers**. And **C18** — the one check specified to validate the manifest against the specs — is a prompt bullet that has never run.
+
+**Cheapest fixes first:** BE-X10-003 (five cells), -009 (find-and-replace; correct text already sits in the cell above), -005 (three cells). Route -022, -007, -008 to the source hunter, not the builder. Limosa needs your ruling.

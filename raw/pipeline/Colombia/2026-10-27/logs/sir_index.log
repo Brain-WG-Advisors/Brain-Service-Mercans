@@ -1,0 +1,17 @@
+Written: `CO-compliance/03-statutory-integrations/CO-SIR-INDEX-001-v1.0.docx` (41 KB, A4 landscape, house style — Arial, `1F3A5F` headings, `Light Grid Accent 1` tables).
+
+**Contents**
+
+- Cover block (jurisdiction, scope anchor, source file, discovery verdict `HAS_INTEGRATIONS`) + Version Control table.
+- **§1 Authority Index** — 6-column table, one row per authority (all 4 in the JSON): Authority · Integration · Channel · Direction(s) · Developer portal · Runbook location. Each Authority cell also carries the legal name and the filings it carries.
+
+| Authority | Integration | Channel | Direction(s) | Runbook |
+|---|---|---|---|---|
+| DIAN-NE | **YES** | M2M SOAP 1.2, `SendNominaSync` on `WcfDianCustomerServices`, signed UBL 2.1 in ZIP, X.509/ONAC | Outbound + Inbound (one sync call) | `03-statutory-integrations/DIAN-NE/` |
+| DIAN-MUISCA | NO | Portal round-trip, Muisca web form / exogena XML upload under personal IFE | Outbound only | n/a — manual |
+| PILA-OI | NO | Portal round-trip via licensed *operador de informacion*, fixed-width Tipo 1/Tipo 2 upload | Outbound + Inbound | n/a — manual |
+| FONDOS-CESANTIAS | NO | Portal round-trip via operador (Planilla En Linea or file upload) | Outbound + Inbound | n/a — manual |
+
+- **§2 Configuration Runbooks** — the requested paragraph: runbooks are produced only for `integration=true` (DIAN-NE alone); the three manual authorities have no connection to configure, their layouts live in 04-reports-spec, and the absence of a runbook is a recorded scoping decision rather than an omission.
+
+Two judgment calls worth flagging: PILA's `dev_portal` in the JSON points at ARUS/SuAporte's `portal-apis/`, which the discovery pass explicitly refused to score as an integration — I rendered the cell as "None published by the authority" with footnote (a) carrying the caveat verbatim, so the column can't be misread as a build surface. And the builder (`build_co_sir_index.py`, kept alongside) asserts each row's integration flag, runbook location, and direction set against the JSON, so a re-run fails loudly if the landscape changes underneath it.

@@ -1,0 +1,31 @@
+Done. `FR-compliance/03-statutory-integrations/integration-landscape.json` is written and validates.
+
+## Verdict: `HAS_INTEGRATIONS`
+
+France is not a manual jurisdiction. Three of five receiving channels are genuinely system-to-system, and they carry 13 of the 15 in-scope filings.
+
+| Code | Authority | Integration | Channel |
+|---|---|---|---|
+| `NETENT-DSN` | GIP-MDS / net-entreprises.fr | **true** | REST **API DSN** (M2M) — deposit + all CRM returns |
+| `URSSAF-DPAE` | URSSAF (pre-hire declaration) | **true** | REST **API DPAE** (M2M), `depot.dpae-edi.urssaf.fr` |
+| `DGFIP-EDI` | DGFiP (taxe sur les salaires) | **true** | EDIFACT via **accredited partenaire EDI** |
+| `CNAM-DIRECT` | CPAM (DAT, BPIJ) | false | net-entreprises portal only |
+| `CDC-SOLTEA` | Caisse des Dépôts (SOLTéA) | false | web portal only |
+
+**The structural finding:** France's landscape is *channel*-concentrated, not authority-concentrated. One deposit point serves URSSAF, CNAV, CPAM, AGIRC-ARRCO, France Travail, DGFiP, CARSAT and Agefiph through one file and one API. I keyed entries to the body that owns the channel and named every served authority in `receiving_bodies` — modelling one entry per authority would have generated six near-identical DSN runbooks and overstated the build as six integrations.
+
+**Where I refused to inflate the verdict:**
+- The **DAT** has a "mode EDI", but it is a browser file upload, not unattended M2M → `integration: false`. Calling it an API would misstate the run cost.
+- The **BPIJ** is available in XML — machine-*readable* but not machine-*retrievable*. net-entreprises has promised API retrieval "from 2021"; the KB article, last updated 2025-03-23, still says in progress. Recorded as not delivered, with a revisit trigger.
+- **SOLTéA** has a CSV import, but only for bulk SIRET administration inside the browser session, not for the allocation. No API exists.
+- **DGFiP** is marked `true` but at `confidence: medium` — the channel is real and compulsory, but DGFiP accepts files *only* from partners it has itself accredited. That gate is commercial, not technical, and it's the largest unknown in the file (`FR-SI-Q3`).
+
+**Two things you should know:**
+
+1. **The agent definition doesn't exist.** `.claude/agents/si-discovery.md` is absent — `shared/si-runbook/` was never deployed, so `si_scope_check.py` and the runbook agent are missing too. I could not read the field set from it. I wrote to the schema the v2.9 pipeline actually *consumes* (`mercans_pipeline_v2_9.sh:1535-1592` reads `verdict`, `authorities[].code`, `authorities[].integration`; the index prompt at 1563-1569 adds channel/directions/dev_portal). Those six fields carry exactly those names and types. I recorded this in a `schema_note` so nobody later mistakes it for a validated schema. This is the same gap the BE QA flagged as `BE-SIR-018` — Belgium's landscape file was never produced either.
+
+2. **I verified the pipeline's own extractor against the file**: it yields 3 clean `CODE|Name` rows, and all 15 in-scope `filing_id`s from the manifest are covered with zero orphans and zero invented filings.
+
+Five open questions are registered (`FR-SI-Q1`..`Q5`) and four limitations stated plainly — including three published documents I could not retrieve from this environment (URSSAF's DPAE functioning PDF reset the connection, `telechargement.dpae-edi.urssaf.fr` refused it, and the SOLTéA guide is an image-only PDF). Their URLs are recorded; those are retrieval failures, not evidence of absence. No runbooks written, no live endpoints touched, no authentication attempted.
+
+Sources: [API DSN](https://www.net-entreprises.fr/declaration/api-dsn/) · [API DSN M2M presentation](https://net-entreprises.custhelp.com/app/answers/detail/a_id/346/) · [NEODeS CT2026.1.2](https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf) · [NEOReS CT2026.1.0](https://www.net-entreprises.fr/media/documentation/neores/dsn-cahier-technique-neores-2026.1.0.pdf) · [Comptes rendus métiers DSN](https://www.net-entreprises.fr/declaration/comptes-rendus-metiers-dsn/) · [Taux AT/MP en API](https://www.net-entreprises.fr/taux-at-mp-en-api/) · [API DPAE on data.gouv.fr](https://www.data.gouv.fr/dataservices/api-declaration-prealable-a-lembauche) · [URSSAF DPAE](https://www.urssaf.fr/accueil/employeur/embaucher-gerer-salaries/embaucher/declaration-prealable-embauche.html) · [DAT EFI vs EDI](https://net-entreprises.custhelp.com/app/answers/detail_dsn/a_id/1785/) · [BPIJ](https://net-entreprises.custhelp.com/app/answers/detail_dsn/a_id/3034/) · [Taxe sur les salaires](https://www.impots.gouv.fr/professionnel/questions/comment-declarer-et-payer-ma-taxe-sur-les-salaires-ts) · [Partenaires EDI](https://www.impots.gouv.fr/partenaires-edi-0) · [Obligations des partenaires EDI](https://www.impots.gouv.fr/les-obligations-des-partenaires-edi) · [SOLTéA employeurs](https://www.soltea.gouv.fr/espace-public/soltea-plateforme-employeurs-solde-taxe-apprentissage)

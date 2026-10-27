@@ -1,0 +1,43 @@
+Both items are closed and verified. One of them was bigger than its record said, and the pass surfaced something bigger than either.
+
+## Item 1 — annex change-log fragment, column T
+
+The brief named one cell. A sweep of all nine specs, every sheet, every cell, found **three**:
+
+| Cell | Zone | Before → After |
+|---|---|---|
+| `Dimona Spec!T55` | 01231 | 348 → 92 chars |
+| `DmfA Spec!T221` | 01252 | 356 → 238 chars |
+| `DmfA Modification Spec!T221` | 01252 | 356 → 238 chars |
+
+The two extras are the identical parser bug in the identical column (`DMFA-Annexe numéro1` + `AANN22002244--11--FFRR11..ppddff`). I fixed them rather than leave a known twin behind a "final" pass, and root-caused all three in `dimona_glossary.json` / `dmfa_glossary.json`.
+
+**Content-loss proof, per cell:** the after-text is a character-for-character *prefix* of the before-text; the only dropped substring is the annex block; every published anomaly code survives.
+
+**Relocation decided on the merits, not by reflex.** The Dimona fragment carried a real fact — Annexe 5 *Liste des codes pays* was amended at edition 2026/2, published 01/06/2026 — and that annex is genuinely consumed here (cited by Option Values on zones 00035, 00119, 00169, 00523), so it moved to a Version Control REMARKS row. The DmfA fragment announced Annexe 1 *Codes communes – Code INS*, which **no** DmfA cell cites (they cite annexe 23), and carried no amendment claim at all. There was nothing worth relocating, so I invented nothing and recorded the removal instead.
+
+## Item 2 — BE-X10-015 root cause, zero drift
+
+29 source fields corrected, **not one delivered cell written by this part**. Your counts were exact; the sweep also found 3 polluted `block_xml` fields no record had named — dead data (only `build_06`/`build_07` read `zone['block_xml']`; DmfA uses its `blocks` table), cleaned as hygiene. `name_fr` was re-derived from the held PDFs by the same extraction the original patch used — 10/10 reproduced the delivered cells before anything was written.
+
+**The zero-drift proof.** Builders write in-place, so I ran all nine in an isolated sandbox before *and* after the fix. BE-X10-015's cell set was defined mechanically — every cell whose *rebuild* value carried a marker — giving **37 cells** (DmfA 12, DmfA Mod 12, DRS 13).
+
+- **37/37 delivered values UNCHANGED** vs pre-pass backups
+- **37/37 now reproduced exactly by a rebuild**
+- Total drift **3203 → 3172**, reconciling exactly as −37 markers +6 new VC cells
+- **6 of 9 workbooks byte-identical**, including `BE-NSSO-004-DRS-Spec.xlsx`, the one most implicated
+- The 3 that moved moved by **9 cells total**; style/fill/font/width/freeze drift outside the new rows: **0**
+
+## Verification
+
+`validate_workbook.py --artifact RSPEC` — **PASS (blocker=0 major=0 minor=0)** on all four NSSO specs. `verify_specs.py` — 11 errors before, 11 after, and the two outputs are `diff`-identical line for line (run against a reconstructed pre-pass tree, not compared by count). Apply script idempotent. JSON diff: 29 changed leaves, zero keys added/removed, serialization proved to round-trip byte-identically first. Final sweep of 9 workbooks + 5 sources: **zero residue**.
+
+Backups: 8 files, `*.bak-before-final2-residuals`, MD5-verified, all retained.
+
+## This does not close the dossier — and the reason is new
+
+While proving Item 2 I had to measure what a clean rebuild produces, and **the builders no longer reproduce the delivered workbooks at all: 3172 differing cells across all nine specs.** BE-X10-015 was not a lone un-root-caused patch — the premise this pass started from — it was one of roughly fifteen (Stage 8 alignment, DD v1.1 rename, Mercans code write-back, `_apply_x10_011_joinkey`, `_apply_x10_016_queries`, `_apply_limosa_descope`, the VC rows themselves).
+
+Nothing on disk is *wrong* because of this — the drift is builder-behind-workbook, never workbook-behind-source. But the build is not reproducible, and the guarantee you asked me to establish for BE-X10-015 does not hold for the country. It's the F29 class of debt, now measured rather than suspected. I registered it as `scope_manifest.json` v2.3 `still_open[0]` and ledger **1L.5** — declared, not resolved. It's a Part-C pipeline-tooling job, not a Belgium content job, and deliberately not a drive-by.
+
+So: **the NSSO extraction-defect family is closed clean** — both items, plus two cells nobody had found, with zero residue upstream or down. **The dossier is not**, and 1L.5 is the reason.

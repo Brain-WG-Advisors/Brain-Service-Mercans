@@ -1,0 +1,165 @@
+Both fixes are in and verified. Backup retained and pristine (md5 matches pre-fix original).
+
+## Exact diff to the script
+
+**451 lines added, 46 removed, 6 regions**, LF endings preserved. Every removed line is accounted for (old `c29` body + 2 edited text lines + 4 old runner lines) — nothing else touched. `bash -n` OK, generated Python compiles, patch is idempotent.
+
+| Region | Change |
+|---|---|
+| line 8 | +10 header changelog (v2.10 T-01/T-02) |
+| 2011 | stage-9 banner `C1-C28` → `C1-C33` (was already stale) |
+| 2020 | docstring `33 checks` → `34 checks` |
+| 2153 | **+194 new `def c18()`** |
+| 2417–2460 → 2621–2858 | **`def c29()` rewritten** |
+| 2801–2808 → 3199–3213 | runner registers `c18`; accepts an optional 5th tuple element (`evidence`). 4-tuple returns unaffected |
+
+**T-01:** scan targets 4→7 (adds SIR, payslip, scope_manifest.json); docx now read paragraphs **+ recursive table cells**; manifest walked to each string leaf so hits report a JSON path, not a file-header snippet. Also closed a silent-PASS hole — v2.9's bare `except: pass` meant a missing `python-docx` produced PASS; unreadable targets now yield MANUAL.
+
+**T-02:** C18 implemented as five sub-rules (C18.1 no specs, C18.2 broken declared link, C18.3 spec for a descoped filing, C18.4 manifest self-consistency → FAIL; C18.5 undeclared link → MANUAL with candidates).
+
+## Regression against Belgium
+
+`BLOCKED → BLOCKED`; PASS 14 / MANUAL 2 / FAIL 1 → PASS 14 / MANUAL 3 / FAIL 1. **Changed verdicts among pre-existing checks: none. Changed `items[]`: none. Changed `detail`: C29 only** (intended). `overall` stays BLOCKED for the same pre-existing C20 reason, not a new one. C29 = PASS across 7 types / 15 files with 580 gap markers reported, 22 sanctioned X-placeholders, 0 scan errors. Zero false failures on the honest NOT FOUND corpus.
+
+I also ran a 17-case fixture suite (mutate one thing, run old vs new), because a check that never fails is worthless. All behaved as designed; **9 v2.9 blind spots now fail correctly** — CCG table-cell TODO, SIR FIXME, payslip TBD, live-sheet XXXXX, manifest TBD, 5 bare WTC PENDING, RESEARCH-GAP, and four C18 defect shapes.
+
+## NOT FOUND design reasoning
+
+Three tiers, each grounded in measurement rather than assumption:
+
+- **HARD → FAIL** (TODO/TBD/FIXME/`[placeholder]`/…). Uppercase word markers are now **case-sensitive**: v2.9 passed `re.IGNORECASE` to every pattern, so `\bTODO\b` matched the ordinary Spanish word "todo" — failure pattern F-C8, fixed in C8 at v2.4 and silently reintroduced in C29 at v2.8. Fixture-proven: on "paga a todo evento", old C29 **falsely failed**, new passes.
+- **BARE-VALUE → FAIL only when the marker is the entire cell value** (PENDING, PLACEHOLDER, TBC). The real defect is a cell whose whole value is `PENDING` — 5 such cells exist in 9 WTC backups, exactly the QA report's count. All 18 *live* PENDING hits are prose *reporting* that a column elsewhere read PENDING. Anchoring catches all 5 real defects and none of the 18 prose mentions. This is why I didn't make PENDING an unanchored hard FAIL as literally specified: doing so would have blocked Belgium on 18 honest sentences.
+- **GAP → counted, never FAIL** (NOT FOUND, NOT AVAILABLE), surfaced in the detail string and `evidence.gap_markers`. Failing on these would make honest gap-marking impossible and push a builder toward fabrication. **RESEARCH-GAP is deliberately HARD, not GAP**: NOT FOUND is a *closed* finding, RESEARCH-GAP is an *open* request that must not ship.
+
+On `XXX`: the carve-out was **partly deliberate and still holds** — `XXXXX` is mandated at script lines ~1688, ~1783, ~1859. A blanket `X{3,}` FAIL would have produced 22 false failures on BE. So I narrowed rather than removed it: sanctioned in the two payslip master sheets, in `(XXXXX:XXXXX)` code-ranges, and inside authority reference masks (`FI.XXXX.123456…`); hard everywhere else.
+
+Two things worth your attention: **C18 abstains rather than guesses.** There is no field linking a filing to its spec, and `filing_id` doesn't track spec filenames (`BE-FIN-BV-003`→Finprof274; `BE-NSSO-ASR-006`→DRS, the same declaration in the other language). I prototyped heuristics and measured them producing confident *wrong* matches, so undeclared links return MANUAL with candidates. Populating `spec_file` on the 8 entries converts every C18.5 into a deterministic C18.2.
+
+And one correction to the QA report: it states the CCG's NOT FOUND is inside a table — measured, it's in a **paragraph** (1 hit in 1253 paragraphs, 0 in 3561 cells). The table-cell gap was in the SIR (30 in cells vs 3 in paragraphs). Its other counts also don't fully reproduce (477 spec NOT FOUND vs 848 reported; 0 WTC PENDING, since resolved). Details and five follow-ups — including that `BE-compliance/_audit_v24_mechanical.py` is still the old generated copy, which I deliberately did **not** overwrite since it's a Belgium deliverable — are in `BE-compliance/logs/partC_tooling.log`.
+ syntax
+  (line ~1783). A blanket X{3,} FAIL would have produced 22 false failures on BE
+  (18 payslip master cells + 4 SIR authority reference masks such as
+  FI.XXXX.123456.20120213.00001.R.1.1).
+  So an X-run is SANCTIONED in those two payslip sheets, in a code-range, and
+  inside a reference mask (adjacent to a digit or dot), and is a HARD hit anywhere
+  else. Measured on BE: 22 sanctioned, 0 hard. Fixture-proven to fire on an
+  un-substituted XXXXX left in the localised "Belgium (EN)" sheet.
+
+T-02 - C18 IMPLEMENTED AS CODE
+------------------------------
+Was prompt-bullet text at script line ~901 only; never executed. Now def c18().
+
+Why it does not guess: authority_filings entries carry NO field naming the spec
+that realises them, and filing_id does not track spec filenames -
+  BE-FIN-BV-003   is realised by BE-FIN-001-Finprof274-Spec.xlsx
+  BE-NSSO-ASR-006 is realised by BE-NSSO-004-DRS-Spec.xlsx
+                  (ASR and DRS are the Dutch and French names of one declaration)
+Heuristics were prototyped and MEASURED on BE and produce confident WRONG
+matches (token "NSSO" matches all 5 NSSO specs; "003" matches DmfAModification;
+"FIN" matches FEBELFIN). An audit check that guesses is worse than one that
+abstains, so C18 splits into sub-rules that cannot be wrong:
+
+  C18.1 in_scope non-empty but zero Spec files on disk            -> FAIL
+  C18.2 a filing DECLARES a spec_file and the file is absent      -> FAIL
+  C18.3 a Spec matches only out_of_scope filings AND does not
+        declare itself descoped                                   -> FAIL
+  C18.4 filing_id duplicated, or in both scope lists              -> FAIL
+  C18.5 a filing declares no spec link at all                     -> MANUAL,
+        listing unverified candidates so a human closes it cheaply
+
+Token discrimination is data-driven, not a hardcoded per-country stop-list: a
+token matching >=3 spec filenames is an authority/agency label and is dropped;
+one matching 1-2 is kept (two is the normal shape of an obligation plus its
+correction channel, e.g. DmfA + DmfAModification).
+
+Accepted link fields: spec_file, spec_files, report_spec, report_specs, spec,
+realized_by. Populating spec_file on each in_scope entry converts every C18.5
+into C18.2 and makes C18 fully deterministic - that is the recommended follow-up.
+
+REGRESSION RESULT - BE, ACTUAL CURRENT ARTIFACTS
+------------------------------------------------
+                 OLD v2.9                      NEW v2.10
+overall          BLOCKED                       BLOCKED
+summary          PASS 14 MANUAL 2 FAIL 1       PASS 14 MANUAL 3 FAIL 1
+
+Per-check verdicts, old -> new:
+  C1 PASS->PASS   C8 PASS->PASS   C11 PASS->PASS  C12 PASS->PASS
+  C18 (absent)->MANUAL  [new]
+  C20 FAIL->FAIL (pre-existing, unrelated)      C21 PASS->PASS  C22 PASS->PASS
+  C23 PASS->PASS  C24 PASS->PASS  C25 MANUAL->MANUAL  C26 PASS->PASS
+  C27 SKIP->SKIP  C28 PASS->PASS  C29 PASS->PASS  C30 PASS->PASS
+  C31 PASS->PASS  C32 PASS->PASS  C33 MANUAL->MANUAL
+
+CHANGED VERDICTS AMONG PRE-EXISTING CHECKS: NONE.
+CHANGED items[] AMONG PRE-EXISTING CHECKS:   NONE.
+CHANGED detail AMONG PRE-EXISTING CHECKS:    C29 only (intended - rewritten).
+No false failure on BE's 580 honest gap markers. overall stays BLOCKED for the
+same pre-existing reason (C20), not for any new one.
+
+C29 on BE : PASS - "no residual hard markers in any of the 7 artifact types
+            scanned; 580 deliberate gap marker(s) reported not failed"
+            evidence: 7 types, 15 files, gap_marker_total 580,
+            sanctioned_x_placeholders 22, scan_errors []
+C18 on BE : MANUAL - 9 Spec files on disk; 0/8 in-scope filings declare a spec
+            link, so 8 are C18.5. Candidates now precise:
+              BE-NSSO-DIMONA-001 -> BE-NSSO-001-Dimona-Spec.xlsx
+              BE-NSSO-DMFA-002   -> BE-NSSO-002-DmfA-Spec.xlsx,
+                                    BE-NSSO-003-DmfAModification-Spec.xlsx
+              BE-FIN-28110-004   -> BE-FIN-002-Belcotax28110-Spec.xlsx
+              BE-PAY-PAYSLIP-008 -> BE_Compliance_Payslip_Generator.xlsx
+                                    (non-spec artifact)
+              BE-FIN-BV-003, BE-NSSO-ASR-006, BE-EMP-INDACC-007,
+              BE-INS-WACC-010    -> no filename-token candidate, stated honestly
+            informational (NOT a failure):
+              C18.3 BE-NSSO-005-Limosa-Spec.xlsx serves out-of-scope
+              BE-NSSO-LIMOSA-009 / BE-NSSO-LIMOSA-L1-VERIFY and IS marked
+              descoped -> retained record, correctly not a defect.
+
+TEETH SUITE - 17 fixture cases, all behaved as designed
+-------------------------------------------------------
+Each case copies BE's real artifacts to a throwaway pipeline root, mutates one
+thing, runs OLD and NEW. "BLIND" = v2.9 passed a real defect.
+  control unmutated                     C29 PASS  / C18 MANUAL
+  CCG TABLE cell TODO                   old PASS -> new FAIL   BLIND
+  CCG paragraph TODO                    old FAIL -> new FAIL
+  lowercase "todo evento" (F-C8)        old FAIL -> new PASS   false positive fixed
+  SIR table FIXME                       old PASS -> new FAIL   BLIND
+  payslip TBD (localised sheet)         old PASS -> new FAIL   BLIND
+  payslip live-sheet XXXXX              old PASS -> new FAIL   BLIND
+  scope_manifest TBD                    old PASS -> new FAIL   BLIND
+    -> located as .authority_filings.in_scope[0](BE-NSSO-DIMONA-001).rationale
+  WTC 5 bare PENDING cells              old PASS -> new FAIL   BLIND
+  spec prose PENDING (must not fail)    old PASS -> new PASS
+  10 extra NOT FOUND (must not fail)    old PASS -> new PASS
+  RESEARCH-GAP in CCG table             old PASS -> new FAIL   BLIND
+  C18 broken spec_file link             absent   -> new FAIL   BLIND
+  C18 all 8 links declared+existing     absent   -> new PASS
+  C18 04-reports-spec emptied           absent   -> new FAIL   BLIND
+  C18 duplicate + both-lists filing_id  absent   -> new FAIL   BLIND
+  C18 descope wording stripped          absent   -> new FAIL   BLIND
+
+OPEN / FOLLOW-UP (not done, out of Part C scope)
+------------------------------------------------
+1. BE-compliance/_audit_v24_mechanical.py is byte-identical to the OLD v2.9
+   heredoc (verified). It is a pure generated file with zero local edits, so a BE
+   regression sweep run against that copy still uses the old blind spots. Refresh
+   when convenient; deliberately NOT overwritten here because it is a Belgium
+   deliverable and Part C was scoped to the shared script.
+2. The QA report's counts do not all reproduce against BE as it stands today:
+   report says 848 NOT FOUND in specs / 36 DD / 1 CCG / 2 payslip and 5 PENDING
+   in the WTC; measured now 477 / 37 / 1 / 1 and 0 PENDING. The 5 WTC PENDING are
+   present in 9 WTC backups, so they were real and have since been resolved
+   (Form Reference Guide now reads "CROSSWALK MAINTAINED ELSEWHERE - not
+   pending"). Counting method for the spec figure was not reproduced.
+3. Stale meta-commentary: the specs' Version Control cells still assert that the
+   SIR Section 2.3 column and the WTC Form Reference Guide "read PENDING". Both
+   now read otherwise. 18 cells of stale prose, not a build defect.
+4. C9 (WTC tax-code check) is still absent from the script entirely, as the QA
+   report notes. Not in Part C scope.
+5. Populate spec_file on the 8 in_scope filings to turn C18 from MANUAL into a
+   fully deterministic PASS/FAIL.
+
+Verification harness retained at _tmp_T01T02/ (patch.py, new_c18.py, new_c29.py,
+old_audit.py, generated_audit.py, teeth_suite.py, out_old.json, out_new.json,
+script.diff). Disposable.
+================================================================================

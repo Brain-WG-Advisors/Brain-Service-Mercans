@@ -1,0 +1,24 @@
+Both outputs are written. Nothing was applied — no artifact edited, no `.bak`, no `shared/` append.
+
+## Verdict: FAIL — 2 blockers, 4 majors, 4 minors
+
+| Pass | Verdict |
+|---|---|
+| P1 Structure | PASS + 2 minors |
+| P2 Source fidelity | PASS (rebased as C32 — weak surface) |
+| P3 Failure patterns | **FAIL** |
+| P4 Buildability | **FAIL** |
+| P5 Propagation | **FAIL** |
+
+**Blocker 1 — `BE-RSPEC-002`.** 538 column-L cells still say `NOT FOUND - mapping not yet decided; requires the Stage 4 Data Dictionary` (FEDRIS 153, DRS 141, DmfA 122, DmfA Mod 122). 318 are rows `DD-CROSSCHECK-TABLE.md` already answers. `DD_REVIEW.md` line 35 records `BE-DD-002` as "addressed in the fix pass" — that is wrong, and it's the finding worth acting on first: `git status` on `04-reports-spec/` is empty and the last commit touching those files is `f670bfa` (14 Aug). The 16 Aug fix pass never opened a spec file.
+
+**Blocker 2 — `BE-RSPEC-003`.** The 90169 label is still at `BE-NSSO-003!DmfA Modification Spec!A12`. Confirmed, and it's bigger than recorded: **all 32 section headers** in the modification spec are byte-identical to the DmfA original, so the one header that must differ — the declaration-type container — was never differentiated. An implementer would submit a modification inside `<DmfAOriginal>`.
+
+Majors: the repaired WTC join key is used by zero specs (168 name references, 0 code references); 61 `BE-DD-001-v1.0` pointers vs the DD's self-declared 1.1; 13 field rows whose *name* is `NOT FOUND`; 148 of 166 Belcotax Query-to-RA rows bulk-filled with one sentence.
+
+Two things I want to flag about how this ran:
+
+- **The delegated auditor stalled** at the 600s watchdog, same as the two earlier attempts, having got no further than the count I'd already taken. I ran the five passes directly rather than relaunching it. Worth knowing before the next artifact: for this codebase the open-ended agent invocation is not converging, and scripted passes are.
+- **Two of my own working hypotheses were wrong and got corrected before they reached findings.** I expected `BE-NSSO-003` to be a bulk duplicate — the row diff says 12% identity, not 90%, so the finding narrowed to the header spine. And I nearly graded Limosa's 27 `NOT FOUND` rows and the encoding gaps as a G-CLEAN blocker until I confirmed `BE-SIR-001` carries a real gap register with G1/G14/G15/G25 and the right authority contacts. Both are recorded in the narrative.
+
+The one correction I'd suggest outside the report: `DD_REVIEW.md` line 35 should stop saying `BE-DD-002` was addressed. Say the word and I'll fix that line — it's the only thing here that actively misleads the next reader.

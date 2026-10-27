@@ -1,0 +1,26 @@
+Report saved to `BE-compliance/07-qa-crosscheck/scope_validation.md`.
+
+## Check results
+
+| # | Check | Result |
+|---|-------|--------|
+| 1 | Valid JSON | PASS — clean UTF-8, no BOM, 21 top-level keys |
+| 2 | All sections present/non-empty | PASS — 10/6 employment types, 10/7 filings, 31/7/10 wage types, 10 mappers, 12/12/3 integrations |
+| 3 | In-scope filings have 6 required fields | PASS — 10/10, all `integration_type` valid, all `product_mapping_required` real booleans |
+| 4 | Inbound `product_mapping_required` set | PASS w/ WARN — 12/12 set, one `false` |
+| 5 | No in/out code collision per mapper | PASS — 0 exact and 0 near-duplicates; no cross-section leaks |
+| 6 | F1-F15 populated | PASS — F1-F22 present, plus F23-F28 with disposition notes |
+
+**B1 (non-resident) satisfied:** non-resident employees are in scope, `withholding_scale` carries Scale III, and the Art. 245 fixed 7% levy is correctly excluded as assessment-level with the CJEU *Chefquet* C-119/24 basis recorded.
+
+## Two things worth your attention
+
+**The template is wrong, not the manifest.** `shared/scope_manifest_template.json` still specifies `reason` for descoped filings. Pipeline v2.9 mandates `descoping_reason` (`mercans_pipeline_v2_9.sh:619`) and auditor C20 keys on it (line 2219). The manifest follows v2.9 correctly — the shared template needs refreshing before the next country, or you'll validate BG/whatever comes next against a stale schema.
+
+**W1 is the one to fix.** `BE-IN-GARNISHMENT-ORDER` has `product_mapping_required=false`, but wage garnishment under Judicial Code Art. 1409 is an in-scope wage type, there's a matching `BE-OUT-GARNISHMENT` outbound leg, and unlike LIMOSA-009 and WACC-010 this entry carries no rationale justifying the `false`. The manifest's own `_note` forbids exactly this. Your spec says WARN not FAIL here, so it doesn't block — but the Art. 1409 attachable-portion bands can't be computed without product mapping. Flip it before Stage 3.
+
+Also carried forward: LIMOSA-009 is in `in_scope` while its A1-posted-worker population is in `employment_types.out_of_scope` (W2); no primary-source schemas exist yet, which will trip auditor C23 at Stage 4 (W4); and the Annex III notional surcharge is asserted at 7% in `special_rules[7]` while `known_limitations[6]` flags it as unconfirmed (W5) — resolve that before any WTC rate depends on it.
+
+Full B7 decision table (15 rows, with REVERSIBLE and BASIS derived per decision) and the 7-item action list are in the report.
+
+PASS: all six checks satisfied and B1 non-resident handling present; 5 non-blocking warnings recorded for Stages 2-4.

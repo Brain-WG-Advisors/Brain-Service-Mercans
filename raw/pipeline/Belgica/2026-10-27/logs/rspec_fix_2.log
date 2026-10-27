@@ -1,0 +1,45 @@
+BE-RSPEC-003 is fixed.
+
+## What I researched
+
+`NSSO_DmfA_glossary_2026-2_FR.txt` p.632 defines block 90169 explicitly:
+
+> `DmfAOriginal` — *"Elément racine du message XML permettant de faire des déclarations **originales**."*
+
+That is the root of an **original** declaration and of nothing else. `NSSO_SFTP_manuel_utilisateur_v14_FR.txt` §8.1 confirms these are two distinct messages: `DMFA` = original DmfA declaration, `DMWA` = *"pour une modification de DmfA"*, `DMRQ` = consultation. So a modification necessarily has a different root element — but **no source held in `00-official-sources/` publishes its block number or XML label.** The held glossary edition covers original declarations only; the modification structure requires the DmfA XSD from the NSSO TechLib. I did not guess it. This is consistent with what sheet 9 (`Sample File`) of this same workbook already said at build time — it left the container as a NOT-FOUND comment rather than emitting `<DmfAOriginal>`.
+
+## Header I changed — 1 of 32
+
+`DmfA Modification Spec!A12`
+
+- **was:** `═══ BLOCK 90169 — DMFA ORIGINAL — DECLARATION TYPE CONTAINER — <DmfAOriginal> cardinality [1..1] ═══`
+- **now:** `═══ DECLARATION TYPE CONTAINER — MODIFICATION — block number and XML label NOT FOUND, requires the DmfA XSD from the NSSO TechLib. It is NOT <DmfAOriginal> (block 90169), which the glossary 2026/2 defines as the root element for ORIGINAL declarations only — cardinality [1..1] ═══`
+
+## Headers I left — 31 of 32
+
+Deliberately, not by omission. A DmfA correction **restates the corrected quarter in full** (the workbook's own `WHAT THE CORRECTION MUST RESTATE` block, from CCG 10.5) — every worker block, occupation line, service, remuneration, contribution and deduction of the original reappears in the modification with the same block number, same XML label, same zones, same cardinality. Blocks 90007→90413 carry no declaration-type semantics. Two worth naming:
+
+- **90059 `<Form>`** — shared block. What differs is the *value* of zone 00110 (`0=Original`, `1=Modification`), which the workbook already handles at field level (row 6 + sheet 6), not in the header.
+- **90082 `<Reference>`** — the glossary's own description states a referenced form may be *"une déclaration DmfA originale, **une déclaration de modification DmfA**, une DRS…"*, i.e. shared by design.
+
+Only 90169 encoded "this is an original."
+
+## Consistency fix (flagging — slightly beyond the literal ask)
+
+`File Structure!A23:A24` asserted the modification uses *"the same 32 functional blocks … the same XML labels"* as BE-NSSO-002 — which would have directly contradicted the new A12. I narrowed it to "identical below the root" and stated the root exception. Revert if you'd rather keep the fix to a single cell.
+
+## Verification
+
+```
+git diff --stat BE-compliance/04-reports-spec/BE-NSSO-003-DmfAModification-Spec.xlsx
+ .../BE-NSSO-003-DmfAModification-Spec.xlsx | Bin 114504 -> 115812 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+```
+
+```
+VERDICT   PASS  (blocker=0 major=0 minor=0)
+```
+
+Header comparison 002 vs 003 now reads **31 shared, 1 original-only, 1 modification-only** (was 32/0/0). A cell-by-cell diff against `.bak-before-regression-fix` shows exactly 92 changed cells: the 89 from the already-verified fixes 1 and 3 (Version Control 1.2 row, 82 System Mapping write-backs) plus my 3. No System Mapping cell and no version reference was touched.
+
+Two side notes: I patched the delivered `.xlsx` in place via `_prompts/patch_rspec003_headers.py` rather than rebuilding, so fixes 1 and 3 were never at risk; and I applied the same override to `build_03_dmfa_mod.py` (which had been inheriting build_02's section spine wholesale — the root cause) so a future rebuild won't regress it. I did **not** add a Version Control changelog row for this fix, since you told me to leave version references alone — say the word if you want one.

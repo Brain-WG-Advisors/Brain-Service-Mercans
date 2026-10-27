@@ -1,0 +1,28 @@
+Done. Full P1–P7 deliverable set built for **CO / DIAN-NE**, status **BUILD-READY, zero artefact gaps**.
+
+## Step 0-auto — artefact acquisition
+
+Downloaded 23 files / 20.4 MB into `integration-sources/dian-ne/`, all public, no login, no certificate, no CAPTCHA, live service operations never invoked. SHA-256 recorded in `SHA256SUMS.txt`.
+
+The 5.5 MB *Caja de Herramientas* toolkit, both WSDLs (prod + habilitación, HTTP 200), the 269-page Anexo Técnico, both payroll XSDs v1.0.6, the UBL/XAdES schema set, sample XMLs, and Resolución 000013/2021. I also closed the version question: probing `V1-1`/`V1.1`/`V1-2`/`V1-0-1` returned 404 on all four — **V1.0 is the only published version**. No `[[NEEDS-ARTEFACT]]` markers anywhere.
+
+## Three findings that change how this gets built
+
+**1. DIAN's CUNE worked example does not reproduce.** I ran a 1,344-variant search — 7 hour formats, 4 document-number formats, padded PIN/`Ambiente`, parenthesised and newline-terminated strings, three encodings, five hash algorithms. Nothing matches the published value. The formula is sound; the example is wrong (the annex even cites `sha1-online.com` as its reference tool for a SHA-384 value). It's the natural unit-test fixture, so this would have burned a day or more.
+
+**2. No signed reference instance exists.** The toolkit's "Ejemplificaciones" XMLs are skeletons — every string `"A"`, every date `9999-12-31`, `<ext:UBLExtensions>` empty with no signature. So the XAdES profile has no offline oracle either. Two of three cryptographic controls can only be proven in habilitación, which is why P6 is scoped as a convergence loop rather than a certification gate.
+
+**3. The auth model is documented two incompatible ways.** The Anexo says mutual TLS; the WSDL policy says `RequireClientCertificate="false"` with the X.509 as a message-level endorsing token, thumbprint-referenced. I've resolved it to the WSDL and given the corroboration, but flagged it for empirical confirmation — same certificate serves either, so testing both is cheap.
+
+Also worth knowing: **rule 90 makes transmission non-idempotent** (one document number per worker, ever), which drives the retry, concurrency and correction design more than anything else.
+
+## Deliverables
+
+`_phase-index.md`, `P1`–`P7`, `INTERLINKAGES.md`, `effort-estimates.md` (~13,000 words). Scoped to DIAN-NE only; the other three authorities appear as cross-references in INTERLINKAGES. All internal cross-references verified to resolve.
+
+Effort: **~79 person-days likely** (49 low / 129 high), the variance sitting almost entirely in habilitación convergence.
+
+Two things to flag:
+
+- **`shared/si-runbook/` is not installed** in this checkout — neither the agent definition you pointed me at nor `si_scope_check.py` exists, and no prior country has a P1–P7 set to copy. I reconstructed the phase model from stage 6 of `mercans_pipeline_v2_9.sh` and documented that provenance in `_phase-index.md`. If the module is later installed with different phase boundaries, the content maps across but files need renaming and the scope check should be re-run.
+- **The engineering effort is DIAN-NE; the operational risk is not.** FONDOS-CESANTIAS needs zero integration work but carries an uncapped one-day's-salary-per-day-per-employee penalty on a manual annual deadline. I've called that out in INTERLINKAGES §5 so a reader doesn't conflate the two.

@@ -1,0 +1,134 @@
+{
+  "before": {
+    "019": {
+      "code": "BE",
+      "country_code": "BE"
+    },
+    "017": [
+      "BE-NBB-SOCBAL-011",
+      "BE-FPS-DIVERSITY-012",
+      "BE-PREV-OHS-013",
+      "BE-SIG-DB2P-014",
+      "BE-FIN-28120-015",
+      "BE-FPS-WORKRULES-016",
+      "BE-REG-PERMIT-017",
+      "BE-NSSO-LIMOSA-009",
+      "BE-NSSO-LIMOSA-L1-VERIFY",
+      "BE-FIN-32510-005"
+    ],
+    "016": {
+      "both": [
+        "BE-BOTH-DIMONA",
+        "BE-BOTH-DMFA",
+        "BE-BOTH-BELCOTAX"
+      ],
+      "counts": {
+        "outbound": 18,
+        "inbound": 18,
+        "both": 3
+      },
+      "_both_note": "<absent>"
+    },
+    "020": "The inbound garnishment order supplies the attachable-portion calculation inputs that the payroll engine must map: the order identifies the debt type and creditor, and the engine must apply the Judicial Code Art. 1409 net-wage bands to determine the attachable portion and compute the correct withholding amount. This is a genuine product touchpoint — the Art. 1409 band calculation cannot be performed without the order being mapped into the engine, and it feeds the matching outbound leg BE-OUT-GARNISHMENT to the bailiff or creditor. Contrast with LIMOSA and work-accident-insurer entries, which are filed entirely outside the payroll engine and therefore require no product mapping.",
+    "018": {
+      "known_failure_patterns_to_check": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F21",
+        "F22"
+      ],
+      "additional_failure_patterns_checked": [
+        "F23 - pre-flight PDF size check sums recursively (not triggered: no source PDFs present)",
+        "F24 - stale scope/mandate document (BE-COVERAGE.md re-read against this manifest on 12 Aug 2026)",
+        "F25 - Report-Specs-built-before-DD naming drift (to be re-checked at Stage 4)",
+        "F26 - calculated/transactional value misclassified into the DD (to be enforced at Stage 4)",
+        "F27 - downstream artifact not re-synced after a source correction",
+        "F28 - skill file references going stale after source edits"
+      ]
+    }
+  },
+  "after": {
+    "019": {
+      "code": "<removed>",
+      "country_code": "BE"
+    },
+    "017": [
+      "BE-FIN-32510-005",
+      "BE-NSSO-LIMOSA-009",
+      "BE-NSSO-LIMOSA-L1-VERIFY",
+      "BE-NBB-SOCBAL-011",
+      "BE-FPS-DIVERSITY-012",
+      "BE-PREV-OHS-013",
+      "BE-SIG-DB2P-014",
+      "BE-FIN-28120-015",
+      "BE-FPS-WORKRULES-016",
+      "BE-REG-PERMIT-017"
+    ],
+    "016": {
+      "both": [
+        "BE-BOTH-DIMONA",
+        "BE-BOTH-DMFA",
+        "BE-BOTH-BV",
+        "BE-BOTH-BELCOTAX"
+      ],
+      "counts": {
+        "outbound": 18,
+        "inbound": 18,
+        "both": 4
+      },
+      "_both_note": "<added, 2261 chars>"
+    },
+    "020": "The inbound garnishment order supplies the attachable-portion calculation inputs that the payroll engine must map: the order identifies the debt type and creditor, and the engine must apply the Judicial Code Art. 1409 net-wage bands to determine the attachable portion and compute the correct withholding amount. THE DEBT TYPE ON THE ORDER IS NOT MERELY DESCRIPTIVE: IT DECIDES WHETHER THE Art. 1409 BANDS APPLY AT ALL. Where the order is for a maintenance or child support debt - mapper code 3 of the garnishment/assignment type mapper in BE-DD-001-v1.1.xlsx, 'Maintenance or child support debt' / 'Onderhoudsvordering' - the wage is attachable WITHOUT ANY LIMIT, the protected bands do not apply, and the debt ranks ahead of all other creditors, so the engine must take the whole net rather than a banded portion (BE-WTC-001 wage type BE-015; CCG worked example: EUR 304.20 attachable on EUR 2,100.00 net for an ordinary consumer debt, the full EUR 2,100.00 for a maintenance debt). An implementation that applied Art. 1409 unconditionally would under-withhold on every maintenance order, which is why the exception is stated here and not left to the DD alone. This is a genuine product touchpoint — the Art. 1409 band calculation cannot be performed without the order being mapped into the engine, and it feeds the matching outbound leg BE-OUT-GARNISHMENT to the bailiff or creditor. Contrast with LIMOSA and work-accident-insurer entries, which are filed entirely outside the payroll engine and therefore require no product mapping.",
+    "018": {
+      "known_failure_patterns_to_check": [
+        "F1 - Option mapper mismatch (DD <-> Report Specs)",
+        "F2 - Out-of-scope codes leaked",
+        "F3 - Field classification errors",
+        "F4 - Wrong file format",
+        "F5 - Population Rules thin",
+        "F6 - Open queries unanswered",
+        "F7 - WTC wage type tax codes wrong",
+        "F8 - Inbound integration scoped out incorrectly",
+        "F9 - Thin spec column schema",
+        "F10 - Missing sub-forms",
+        "F11 - Display-only rows treated as XML input",
+        "F12 - Composite key construction undocumented",
+        "F13 - Mutual exclusion rules undocumented",
+        "F14 - Code prefix inconsistency with official source",
+        "F15 - Removed artifact without descoping decision",
+        "F16 - Stage 3 silent failure under default token limit",
+        "F17 - Global token override bloats Stage 1 input",
+        "F18 - Stale law references in CCG",
+        "F19 - HR-scope report included in payroll handover",
+        "F20 - WTC gaps and invalid tax codes",
+        "F21 - Filing mechanics misunderstood: monthly/quarterly/annual",
+        "F22 - 32MB input limit silently exceeded by oversized source PDFs",
+        "F23 - pre-flight PDF size check sums recursively (not triggered: no source PDFs present)",
+        "F24 - stale scope/mandate document (BE-COVERAGE.md re-read against this manifest on 12 Aug 2026)",
+        "F25 - Report-Specs-built-before-DD naming drift (to be re-checked at Stage 4)",
+        "F26 - calculated/transactional value misclassified into the DD (to be enforced at Stage 4)",
+        "F27 - downstream artifact not re-synced after a source correction",
+        "F28 - skill file references going stale after source edits"
+      ],
+      "additional_failure_patterns_checked": "<removed>"
+    }
+  }
+}

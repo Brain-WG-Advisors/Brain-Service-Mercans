@@ -1,0 +1,75 @@
+Both fixes applied. `scope_manifest.json` is valid JSON.
+
+## Legal research (FIX 2) — what I independently confirmed
+
+The prompt's generic "Loi-programme du 27 décembre 2006, arts. 137 et seq." framing is correct but imprecise. The host-entity duty has a **specific article**: **art. 141**. The Justel official text returns it verbatim:
+
+> "Toute personne auprès de laquelle ou pour laquelle des activités sont exercées doit vérifier que la déclaration préalable visée à l'article 139 a été effectuée et doit pouvoir produire l'accusé de réception de cette déclaration."
+
+Corroborated on three points beyond the statute text:
+- **Art. 155** is the parallel provision for posted *self-employed* persons; the **Arrêté royal du 20 mars 2007** executes both ("la déclaration visée aux articles 141 et 155 de la loi-programme précitée du 27 décembre 2006 contient les données suivantes").
+- The ONSS administrative instructions confirm the operative duty: *"Le client belge doit, avant l'occupation directe ou en sous-traitance de travailleurs salariés, vérifier si une déclaration a bien été effectuée les concernant"*, and where the L-1 cannot be produced must file the **"absence de formulaire L-1"** declaration to the ONSS.
+- Sanction is **level 3** under the Code pénal social (vs level 4 under CPS art. 182 for the declarant's own failure). I did **not** confirm the CPS article number for the end-user leg, so I cited only the level, not an article.
+
+---
+
+## FINAL VERIFICATION
+
+### (a) BE-NSSO-LIMOSA-009 — before and after
+
+**BEFORE** (in `authority_filings.in_scope`, lines 111–120):
+```json
+      {
+        "filing_id": "BE-NSSO-LIMOSA-009",
+        "authority": "National Social Security Office",
+        "frequency": "per posting, before the posted worker starts",
+        "format": "CSV",
+        "integration_type": "outbound",
+        "product_mapping_required": false,
+        "rationale": "Declaration for inbound posted workers. Filed through the Limosa web channel by the posting (foreign) employer; the Belgian payroll engine does not hold the source data for the posting employer."
+      },
+```
+
+**AFTER** (in `authority_filings.out_of_scope`):
+```json
+      {
+        "filing_id": "BE-NSSO-LIMOSA-009",
+        "authority": "National Social Security Office (Limosa declaration)",
+        "descoping_reason": "Filed by the foreign posting employer under Loi-programme du 27 décembre 2006, arts. 137 et seq. — not a Belgian entity obligation. The posted-worker population is already excluded from employment_types (A1-certificate holders). The Belgian payroll engine holds none of the source data needed.",
+        "client_impact": "No client action from the Belgian payroll product. The posting (foreign) employer files the Limosa declaration through www.limosa.be before the posting starts."
+      },
+```
+`in_scope` is now 9 entries (001–008, 010); `out_of_scope` is 9 (011–017, then LIMOSA-009 and L1-VERIFY).
+
+### (b) integrations references — none
+
+**No `integrations.inbound` or `integrations.outbound` entry references `BE-NSSO-LIMOSA-009`.** Machine count of the filing_id across the whole `integrations` object: **0**. The single case-insensitive hit for the word "LIMOSA" in `integrations` is inside the *prose rationale* of `BE-IN-GARNISHMENT-ORDER` ("Contrast with LIMOSA and work-accident-insurer entries, which are filed entirely outside the payroll engine…") — a comparative remark, not a reference to the filing, and it remains accurate now that LIMOSA-009 is out of scope. Nothing removed there.
+
+### (c) New BE-NSSO-LIMOSA-L1-VERIFY entry, in full
+
+```json
+      {
+        "filing_id": "BE-NSSO-LIMOSA-L1-VERIFY",
+        "authority": "National Social Security Office (RSZ/ONSS) — recipient of the Limosa \"absence de formulaire L-1\" report; enforced by the Belgian social inspection services under the Code pénal social",
+        "descoping_reason": "HR-scope — the host entity's duty to verify a posted worker's Limosa-1 (L-1) acknowledgement of receipt and to report non-compliance is an onboarding/immigration-compliance check, not a payroll computation; it requires no payroll data and produces no payroll output. Legal basis independently confirmed: Loi-programme (I) du 27 décembre 2006, art. 141 (MB 28 décembre 2006) — \"Toute personne auprès de laquelle ou pour laquelle des activités sont exercées doit vérifier que la déclaration préalable visée à l'article 139 a été effectuée et doit pouvoir produire l'accusé de réception de cette déclaration\" — with art. 155 the parallel provision for posted self-employed persons, both executed by the Arrêté royal du 20 mars 2007. Where the L-1 cannot be produced, the Belgian user must report the identification data electronically to the NSSO; failure carries a level 3 sanction under the Code pénal social.",
+        "client_impact": "Refer to HRMS/onboarding team. This is a verification and reporting duty, not a filing the payroll product produces."
+      }
+```
+The `authority` field resolves your `[confirm: …]` placeholder: the **report goes to the ONSS**; the Labour Inspectorate/social inspection services are the *enforcement* arm, not the recipient — so both are named in their correct roles.
+
+### (d) mtime — only scope_manifest.json changed
+
+```
+2026-08-12 14:24:11  ./BE-compliance/scope_manifest.json   <- this task
+2026-08-12 14:20:29  ./BE-compliance/logs/scope_fix_w2_limosa.log
+2026-08-12 14:20:28  ./BE-compliance/_prompts/scope_fix_w2_limosa.md
+2026-08-12 14:08:33  ./BE-compliance/logs/scope_fix_w1_template.log
+2026-08-12 14:07:57  ./shared/scope_manifest_template.json
+2026-08-12 14:02:31  ./BE-compliance/07-qa-crosscheck/scope_validation.md
+2026-08-12 12:01:50  ./BE-compliance/BE-COVERAGE.md
+```
+`scope_manifest.json` is the sole file with an mtime after the task start (14:20:29, when the prompt file was written). `BE-COVERAGE.md`, `07-qa-crosscheck/scope_validation.md`, `shared/`, and all CCG modules are untouched. The full diff is exactly the two hunks shown above — nothing else in the manifest moved. A pre-edit copy is at `/tmp/scope_manifest.before.json`.
+
+One note for Stage 3: `07-qa-crosscheck/scope_validation.md` still lists W2 as open and its remediation table row 2 still says "Reclassify LIMOSA-009…". You told me not to touch that file, so I left it — but it now contradicts the manifest and will need closing out.
+
+Sources: [ejustice Justel — Loi-programme (I) 27.12.2006](https://www.ejustice.just.fgov.be/eli/loi/2006/12/27/2006021362/justel) · [ONSS administrative instructions — Obligations du client belge](https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/limosa/belgianuserobligations.html) · [Justel — AR 20.03.2007 (exécution, arts. 141 et 155)](https://www.ejustice.just.fgov.be/cgi_loi/change_lg_2.pl?language=fr&nm=2007022443&la=F) · [Securex — Limosa, inspection sociale et droit pénal social](https://www.securex.be/fr/lex4you/employeur/themes/inspection-sociale-et-sanctions/inspection-sociale-et-droit-penal-social-federal/limosa) · [socialsecurity.be — Déclaration obligatoire Limosa](https://www.socialsecurity.be/site_fr/employer/applics/meldingsplicht/index.htm)

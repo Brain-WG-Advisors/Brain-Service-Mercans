@@ -1,0 +1,41 @@
+Done. **URSSAF-DPAE runbook set delivered, BUILD-READY.**
+
+One thing up front: **`.claude/agents/si-runbook-research.md` does not exist** — not in the repo, not in `~/.claude/agents/`. I worked from the task spec in your prompt plus the existing `NETENT-DSN/` set as the structural precedent (same P1–P7 + INTERLINKAGES + effort-estimates + `_phase-index` shape, same tagging and honesty conventions). If the agent file has additional requirements, tell me and I'll reconcile.
+
+## Step 0-auto — acquisition
+
+**12 artefacts downloaded, hashed, manifested** into `FR-compliance/integration-sources/urssaf-dpae/` (2.7 MB), plus plain-text extracts. The landscape file only had two candidate URLs and one of them 404'd on its stated host; deep search recovered considerably more:
+
+| Found | What it gave |
+|---|---|
+| **NAT/5492** *Guide d'implémentation de l'API* v1.1 | The API contract — endpoint table, `/deposer-dsn/1.0/`, return-availability matrix, retention |
+| **NAT/6804** *Principes de fonctionnement* (Sept 2025) | Flow cinematics, 4 control layers, **every error code** |
+| **NAT/5493** *Questions/Réponses* (Oct 2023) | Enrolment procedure, service codes 25/98, literal call scenario, 100 MB limit, test mode, 4 return scenarios |
+| **Format 120 dessin d'enregistrement** v5.4 + v5.3 | The complete 990-byte record layout |
+| `sst_dpae` open data (409 rows) | Live `C_MT_DCL` reference table |
+| + SST lists, Cerfa 14738*01, 2 URSSAF pages | |
+
+Plus Code du travail R.1221-1 → D.1221-19 read from Legifrance, and the net-entreprises KB confirming the DSN-DPAE merge is **postponed to January 2027**.
+
+**Acquisition compliance:** no login, no account, no certificate, no CAPTCHA. No live service endpoint called — every endpoint in P2/P3 was read out of the PDFs. One disclosure, recorded in full in the manifest and the index: `telechargement.dpae-edi.urssaf.fr` was probed once with a bare `GET /` *before* I'd read the endpoint table (the landscape described it as a documentation site); the TCP connection never established and no HTTP request was transmitted.
+
+## The four findings that shape the build
+
+1. **HTTP 200 is not a filing.** Acceptance is four asynchronous gates deep — the hire is declared when the AR (code 41) carries a populated `R_DOSSIER`.
+2. **No correction model and no test environment.** A registered DPAE can't be amended (re-send → code 98), and testing happens on *production* distinguished only by `C_VERSION=TST`. Quality is enforced in the pre-flight gate or not at all.
+3. **Enrolment does not carry over from the DSN** — the FAQ says so in as many words. Separate email registration to `api-dpae@acoss.fr`.
+4. **The deadline can't be caught up**, and there's no monthly cycle to announce a silent stoppage.
+
+## Verification
+
+- Record layout verified programmatically: **54 rows contiguous, no gaps or overlaps, ends at 989, +LF = 990, minus the 77-byte header = 912 = `N_LG_MESS`** — all three invariants the source states, tying out exactly.
+- All 10 index links resolve; no residual markers; internal §-refs check clean.
+- One source table (the return-availability matrix) needed `-lineprinter` extraction to resolve merged cells; the method is stated inline in P5 §5.1.
+
+## Open items — 12, only 2 block go-live
+
+`[[NEEDS-ARTEFACT]]`: the `C_URSSAF` table (host unreachable from here), the BIS "Doc v1.3" format, `dsn_bilans_v01r06.xsd` (login-gated — **bundle with the NETENT-DSN request, one artefact serves both**), `DUE_Upload.xsd` (irrelevant since we build the flat variant). Nine of the twelve close with one well-composed enrolment email; two more close on the first test run.
+
+**Effort: 50 person-days standalone, 37.5 after NETENT-DSN** — the transport half is genuinely reusable because NAT/5492 delegates the machine-mode interface to the DSN guide.
+
+**One correction recorded against `scope_manifest.json`:** it lists `FR-URSSAF-001` as filed "via net-entreprises.fr" in "XML". The API deposit point is URSSAF's own `depot.dpae-edi.urssaf.fr` (net-entreprises' NetDPAE is a *portal* alternative), and the payload is TXT format 120 **or** XML. Filing, authority, frequency and direction unchanged — I did not edit the manifest, only recorded it at P1 §1.7 and INTERLINKAGES §5.

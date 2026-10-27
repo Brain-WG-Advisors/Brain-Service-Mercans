@@ -1,0 +1,21 @@
+All seven files are at v1.1 and the patch log is written. 
+
+## Summary
+
+A prior run of this stage had completed most of the work (its own verifier reported 22/22 PASS, and all seven files were already bumped to v1.1). Rather than re-apply those fixes, I verified each check against current file content and then **swept the places where that verifier only sampled** — which is where the remaining defects were hiding.
+
+**Confirmed already aligned** (no rework): Check 1 across all 36 DD mappers vs every Sheet 6 section, Check 2 across all 563 fields (0 misclassifications), Check 4 (all 138 pointers resolve), Check 5.
+
+**Four genuine defects found and fixed:**
+
+1. **Wrong option mapper on a DD field** (Check 1, the most consequential). `Principal Contributor Document Type` (PILA T2R2-074) pointed at `Employer Document Type` while its own format and notes both said it takes the PILA *contributor* catalogue. The two lists differ in exactly two places — the employer list carries `NI` and lacks `RC` — so the wrong mapper admitted a corporate NIT as a principal contributor's document type and rejected a *registro civil*, precisely the beneficiary case the field exists for. This also silently explained a **failing DD validator check (C11 orphan mapper)** that the prior pass left behind; the DD validator now passes 13/13.
+
+2. **C16 enforced in only one direction** (Check 3). The rule is symmetric, but the prior verifier tested only DD-note → spec-ID. Sweeping the spec-internal direction over all 563 fields — accepting ID ranges as valid reverse references — left **45 fields unreciprocated** (18 NE, 27 PILA). All 45 now carry substantive reverse references; 350 pairs, 0 unreciprocated.
+
+3. **T2R2-077 (ARL of the member)** missing its prefix pattern (Check 6) — missed because the prior verifier checked a hardcoded list of eight fields rather than sweeping.
+
+4. **DD/spec format divergence** on all 7 administradora fields: the specs stated the six-position pattern, the DD said only `A(6)`.
+
+Two things I deliberately did **not** change, both recorded in the log: the `Worker Sub-Type` and `PILA Novedad` mapper "divergences" are correct as they stand (documented scope subset; spec groups rows where the DD splits them atomically), and 12 CESANTIAS `Mandatory=Y` rows carry C16 back-references in column G — a convention inconsistency with my column-M choice, but deliberate prior-pass text that the audit doesn't check.
+
+All fixes went into the **generator sources**, not the workbooks, so a rebuild reproduces the aligned state. I also added `verify_c16_prefix.py`, which sweeps rather than samples, so these two blind spots can't reopen. Mechanical audit: 14 PASS / 2 MANUAL / 2 FAIL — the two FAILs are the known `06-payslip` sheet-name false positives, outside this stage. Note the harness needs `CL_AUDIT_CODE=CO`; without it `CODE` defaults to `XX` and every path check spuriously reports missing files.

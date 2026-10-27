@@ -1,0 +1,32 @@
+Sweep complete. Both deliverables are written, and I independently re-verified the highest-stakes claims rather than relaying them.
+
+## Verdict: FAIL — 5 blocker / 5 major / 10 minor (20 findings)
+
+| Pass | Verdict |
+|---|---|
+| P1 structure | PASS with 4 minors — 9/9 sections landed; IN-01…12, OUT-01…19, G1…27 contiguous |
+| P2 source fidelity | FAIL |
+| P3 failure patterns | FAIL — F27 ×22, F8 ×8 flows, F19 on Limosa; C29 lint clean |
+| P4 buildability | FAIL — the .docx is not reproducible from `sections/` |
+| P5 propagation | FAIL — no crosswalk to `scope_manifest.json` in either direction |
+
+## What I verified myself
+
+**BE-SIR-005 (blocker) — the 497/498 fix went to the wrong side.** I re-counted the primary source directly: `NSSO_Annexe30_codes_anomalies_2024-1_FR.txt` yields **498** distinct codes, min 001, max 536, **38** unused. The shipped .docx says 498 and is correct. But `sections/s05_errors.md:42-43` says "497 distinct codes" / "39 numbers unused", and `selfcheck_be_sir.py:120` still asserts `"497 distinct codes"`. So the self-check is red *against the right answer*, and any rebuild from `sections/` silently regresses 498 → 497. This one should be fixed before anything else touches the SIR.
+
+**BE-SIR-004 (blocker) — wrong FinProf period code shipped.** Docx line: "`1215` for the fourth-quarter advance". `s04_tech.md:106` already carries the correction — `1011` is the Q4 advance, `1012` is Q4, `1215` is the 15-day December filing — and states in terms that "`1215` is **not** the fourth-quarter advance". The docx never picked it up, and omits `1011` entirely. This is P4's abstract "not reproducible from sections/" finding with a concrete wrong statement attached.
+
+**BE-SIR-003 (blocker, F8) — confirmed.** `scope_manifest.json` inbound[11] is `BE-IN-GARNISHMENT-ORDER` (from "Court, bailiff or administration"). In the SIR, garnishment appears only as OUT-12, whose Direction cell reads "Both (the employer must file a declaration of garnishee)" — but the declaration of garnishee is itself employer→creditor, i.e. a *second outbound* leg. The actual inbound leg, receiving the order, is registered nowhere: not in §1, not descoped in §2.4, not gapped in §8. That is the Spain SR-80 shape.
+
+**BE-SIR-001 (blocker, F27) — confirmed verbatim.** The SIR still states "BE-compliance/04-reports-spec/ **is empty at the time of writing**". Nine specs have existed since 14 Aug and were re-issued today. `PENDING` occurs 22 times in the document.
+
+**The house-style rule held.** `BE-DD` appears **0** times in the SIR — so today's DD churn couldn't reach it. That is the Stage 6 doctrine working as designed, and it's the reason this artifact needed no DD-driven edits.
+
+## Two corrections to the agent's report
+
+- It said the specs re-pointed **61** DD citations to `BE-DD-001-v1.1`. The pre-fix backups hold 62 `v1.0` refs and 0 `v1.1`; the live files now hold **398** `v1.1` refs. The count is understated, though the point it was making stands.
+- That understatement hides something out of scope but worth your attention: **only `BE-DD-001-v1.0.xlsx` exists on disk.** All 398 references across the nine specs point at a `v1.1` that was never produced. RSPEC was closed today, so this is a live loose end in an artifact already signed off — not a SIR defect, but it needs a decision.
+
+Nothing was applied. The SIR is untouched at 92,389 bytes / 14 Aug 00:44; `git status` shows only the two new `_qa` outputs, the agent's evidence dir `_qa/sir/`, and the pre-existing untracked files.
+
+Files: `BE-compliance/_qa/REGRESSION-BE-SIR.json` · `BE-compliance/_qa/REGRESSION-BE-SIR-narrative.md`

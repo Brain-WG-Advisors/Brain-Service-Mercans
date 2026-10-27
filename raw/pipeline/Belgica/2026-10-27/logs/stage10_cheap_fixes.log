@@ -1,0 +1,50 @@
+Done. All three findings fixed, plus WTC box 360, with everything verified.
+
+## WTC filename
+
+`02-wtc/BE-WTC-001-v1.0.xlsx` — **still v1.0**, as you suspected. I checked rather than assumed; only the DD carries v1.1.
+
+## Fixes applied
+
+**BE-X10-003 — WTC tells its reader two delivered artefacts don't exist** (6 cells)
+
+`Form Reference Guide!A2:E2` were five `PENDING` cells, `E2` claiming Stage 3 and Stage 4 "have not been built for Belgium yet". The report allowed either populating the sheet or declaring the crosswalk lives in the specs' column L. I took the second — the first is the BE-X10-011 job (195 spec references that resolve to no wage-type code), which is out of scope here. I kept the sheet rather than deleting it, because the WTC structural contract requires it. Each cell now answers its own header: where the wage types are, which forms they reach, that the row-level crosswalk is maintained in column L of the nine specs, that the DD fields are in BE-DD-001-v1.1, and that both stages were delivered 14 Aug and re-issued 16 Aug. Dates re-read from the artefacts' own Version Control rows, not from the report.
+
+`Version Control!C18` moved to past tense. I deliberately did **not** claim the DD alignment cross-check is now done — it isn't. C18 still states it as **STILL OPEN**, and notes that the DD's own changelog records a patch taken from the *other* direction, which is not a substitute.
+
+**BE-X10-005 — contract-type collision** (7 cells)
+
+`Payslip Spec` D40 → `$employee.custom.contract_duration_type`; E40 now cites *Contract Duration Type* and warns against the full-time/part-time field; `Belgium (EN)!A24` → "Contract Duration Type"; `Belgium (NL)!A24` → "Type overeenkomst (duur)"; DD `Country Option Mappers!F57` back-reference re-pointed to `option_mapper_scope.contract_duration_type`.
+
+Beyond the report's letter, I also moved **B40/C40** (the spec's own field name, still reading "Contract Type"). Without that the spec would have declared one label and the render another — the same F1 defect on a different pair of cells.
+
+**BE-X10-009 — 220 stale column-L cells** (220 + 8)
+
+All 220 now read `No DD field by design: transactional, calculated or system-generated.` Zero live stale cells remain. I also amended each `Version Control!D15` clause — it said "*N* cells deliberately left NOT FOUND", which described cells that no longer read NOT FOUND, so the contradiction would merely have inverted. Each spec gained an appended REMARKS row quoting the old string verbatim. Rows were **appended, never inserted**: the REMARKS blocks carry C:F merges that `insert_rows` does not move, and inserting would have shifted every coordinate the QA corpus cites.
+
+**BE-X10-002 — WTC box 360**
+
+`Wage Type Catalogue!G304` = `284; 360`.
+
+I checked for a dual-destination precedent: **there is none** — 0 of 355 rows had a multi-token Tax Code. So, per your instruction, judgment, stated: dual-code rather than split, because the fiscal work bonus is one relief (derived entirely from the social work bonus, no employee declaration, capped as *one* annual EUR 765), and the brochure itself presents it as one heading "Werkbonus" with sub-items a) and b). Splitting would also have renumbered rows below 304. Separator convention is now written into `Version Control!C24`, with a full remark at C29.
+
+I verified the fact against the **primary source, not the spec**: both FPS Finance brochures on disk (IY2024 and IY2025) give `33,14% … 284 … 2.115` and `52,54% … 360 … 2.210`, tags `<f10_2115_bonus/>` and `<f10_2210_workbonus5254/>`. I then re-derived all 24 codes the catalogue now uses against the IY2025 zone table — 24 of 24 match.
+
+I propagated to the Belcotax spec (10 cells). The report scoped BE-X10-002 to the WTC, but four Belcotax cells asserted "no BE-WTC-001 wage type carries 360" and its counts said 23 — leaving those would have created exactly the one-directional fix the report names as pattern **F29**. No field-level data changed: D127/H127/I127/J127 are untouched.
+
+## Validators
+
+- **validate_workbook.py** — all 8 files PASS, and identical before vs after (my first run of this comparison was wrong: I passed `.bak-…` paths, and openpyxl picks its reader by extension, so every BEFORE run failed to *load* rather than failing a check).
+- **verify_be_dd.py** — PASS. It hardcodes `BE-DD-001-v1.0.xlsx`, dead since the 16 Aug rename; I redirected it for the run without editing it.
+- **verify_specs.py** — 8 FAIL / 1 PASS, **byte-identical before and after**. Its C6 demands the Version Control text still say the DD "does not exist"; the 16 Aug pass correctly removed that. Pre-existing, and it fails on four files I never touched.
+- **_verify_payslip.py** — crashes with `NameError: IFERROR` in its own formula evaluator, identically before and after. Pre-existing.
+- **selfcheck_be_wtc.py** — this one my fix *did* break: it asserted the `PENDING` placeholder must be present. I inverted that assertion (backed up first) so a rebuild can't regress the sheet, per the BE-SIR-005 precedent. It now reports one failure, the pre-existing `ORANGE populated` — a stale assertion from before the 15 Aug join-key fix, and the QA report has already adjudicated that population as correct.
+- **50/50 independent re-verification checks pass**, recomputed from disk and from the brochures. Corpus markers: **903 → 681, delta −222**, reconciling term by term (220 spec cells, −4 for the new remark cells that quote the old string as audit trail, +5 WTC PENDING, +1 Belcotax L127).
+
+## Backups
+
+Nine created, all `.bak-before-stage10-fix`, all hash-verified byte-identical to their sources before editing, **none deleted** (99 `.bak*` files remain in the tree). Scripts and evidence in `BE-compliance/_qa/x11/`.
+
+Untouched as instructed: BE-X10-022, -007, -008, and everything Limosa.
+
+One thing worth flagging: BE-X10-009's re-wording asserts these 220 fields genuinely have no DD counterpart. I did **not** re-derive that — it's declared unchecked edge 3.1 in the QA report, and I recorded it as still open in each spec's new remark rather than letting the new wording imply it had been checked.

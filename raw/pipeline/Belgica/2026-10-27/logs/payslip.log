@@ -1,0 +1,55 @@
+Delivered to `BE-compliance/06-payslip/BE_Compliance_Payslip_Generator.xlsx`.
+
+## Sheet names and order
+1. `Belgium (EN)` 2. `Belgium (NL)` 3. `Payslip Spec` 4. `Unit Rate Details` 5. `Population Range` — exactly the five required, in order.
+
+## Logo
+**Yes** — the embedded Mercans image survived on both language sheets (`images=1` each). Both were built by reusing Mozambique's `Mozambique (EN)` / `Mozambique (PT)` sheets in place rather than creating new ones, so the image part, the A1:A6 anchor merge and the Arial 6pt/10pt convention carried over.
+
+## Sample employee gross-to-net
+Jan Peeters, white-collar, PC 200, single/no dependants, full-time 38h, Berchem (Antwerpen) — profile chosen to mirror **CCG Module 12.1 Example 1** so the payslip reconciles line-for-line with the CCG's own worked example. July 2026: 22 working days, 21 worked + 1 public holiday (21 July, a Tuesday).
+
+| Step | Calculation | EUR |
+|---|---|---|
+| 62100 Basic salary | 3,500.00 / 22 × 21 | 3,340.91 |
+| 62964 Public holiday pay | 3,500.00 / 22 × 1 | 159.09 |
+| **Gross (NSSO + taxable base)** | | **3,500.00** |
+| 21900 Employee NSSO | 3,500.00 × 13.07% | −457.45 |
+| BE-002 Social work bonus | ref. wage 3,500.00 > limit 3,403.62 | 0.00 |
+| Taxable base | | 3,042.55 |
+| Annualised ×12 | | 36,510.60 |
+| Lump-sum prof. expenses | 30% = 10,953.18, capped | −6,070.00 |
+| Annual net taxable | | 30,440.60 |
+| Slice 1 | 16,710.00 × 26.75% | 4,469.93 |
+| Slice 2 | 12,790.00 × 42.80% | 5,474.12 |
+| Slice 3 | 940.60 × 48.15% | 452.90 |
+| Annual tax before reductions | | 10,396.95 |
+| Tax-free allowance reduction | 11,170.00 × 26.75% | −2,987.98 |
+| Annual withholding | | 7,408.97 |
+| BE-004 Monthly withholding | / 12 | −617.41 |
+| BE-001 Special SS contribution | Q wage 10,500.00 → 30.99 + 1.10% × 3,929.46 = 74.21/qtr | −24.74 |
+| BE-011 Meal voucher employee part | 21 × 1.09 | −22.89 |
+| **Net paid** | | **2,377.51** |
+
+Employer cost 5,195.03 (875.00 NSSO + 187.11 voucher employer part + 268.33 double-holiday provision + 291.67 end-of-year provision + 72.92 contributions on that provision).
+
+## Independent recomputation
+Two checks, neither reading the build script: a minimal formula evaluator walks the workbook's own `ROUND/MIN/MAX/SUM/IF` graph, and a separate routine recomputes the Belgian 2026 gross-to-net from the CCG parameters in plain Python. Both were compared against the CCG's published Example 1 figures. **43 comparisons per sheet, both sheets, 0 failures** (`_verify_payslip.py`). The evaluator also caught two real bugs before delivery: an off-by-one in the mid-block tax references and a malformed YTD reference.
+
+Note: no Excel or LibreOffice is installed here, so openpyxl wrote formulas without cached results. I set `fullCalcOnLoad`, so Excel/LibreOffice recalculates the whole workbook on first open.
+
+## Row counts
+| Sheet | Data rows |
+|---|---|
+| Belgium (EN) | 95 (120 incl. spacing), 55 formulas |
+| Belgium (NL) | 95, 55 formulas |
+| Payslip Spec | 37 field rows across 5 navy sections |
+| Unit Rate Details | 34 earning codes |
+| Population Range | 16 worker situations |
+
+Payslip Spec is 2 over your 25–35 target: I gave every field rendered on the payslip a spec row rather than leave two undocumented. Say the word and I'll cut `Currency` and `Employee Code` to land at 35.
+
+## One conflict to flag
+`validate_workbook.py --artifact PSL` returns **FAIL with 3 blockers**, all of them the same thing: the toolkit's measured payslip contract is **8 sheets**, adding `How to set up Payslip`, the language-neutral `Compliance Payslip` master, and `Field Option` — and the skill names the absence of those three as the documented root cause of incomplete payslips in past builds. Your brief says 5 sheets, mandatory, in that order, so I built 5. **major=0, minor=0** — the C29 residual-marker lint, the cached-error scan and the totals-are-formulas check all pass. Adding the three sheets is about 30 minutes if you want the validator green; I didn't do it because it would contradict an explicit instruction.
+
+Provenance kept alongside the artifact as `_build_payslip.py` and `_verify_payslip.py`, matching the existing `_audit_v24_mechanical.py` convention.

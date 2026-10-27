@@ -1,0 +1,34 @@
+The Belgium Wage Type Catalogue is built and verified.
+
+**File:** `~/mercans-pipeline/BE-compliance/02-wtc/BE-WTC-001-v1.0.xlsx` (411 KB, opens cleanly)
+
+## Row count and global coverage
+
+**355 wage types** — catalogue rows 2–356.
+
+All **300** Global WTC V1.0 Pay Element Codes are present, in baseline order, at rows 2–301 (row = baseline position + 1). Verified programmatically two ways: no code missing, none duplicated, order identical to the baseline; and every Coverage-sheet row pointer re-read against the catalogue to confirm it lands on the right wage type.
+
+Because column A (Mercans Code) is ORANGE and therefore left empty, traceability is carried by the **Global WTC Coverage** sheet, which maps all 300 baseline codes → catalogue row → Belgium wage type name. That's a consequence of the no-orange rule worth flagging to you.
+
+## Belgium-specific additions
+
+**55** (rows 302–356, referenced BE-001…BE-055). Includes everything on your list — special SS contribution, CO2 solidarity contribution (carried at global slot 23672), Wijninckx 12.5%, flexi-job 28%, student 2.71%/5.42%, CBA 90 solidarity, mobility budget pillars 1–3, garnishment/assignment/maintenance lines, personal and employer pension items, non-competition, outplacement, notice indemnity — plus the withholding machinery (Annex III ordinary/exceptional/double-holiday tables, work bonus, overtime reliefs), the 108% blue-collar uplift, the quarterly-wage carrier, and six flags (blue/white-collar, joint committee, DmfA worker code, scale I/II/III, language regime, A1, proration method).
+
+The repeated generic global slots were used to carry real Belgian variants rather than duplicated — e.g. the 30 "Overtime" slots became the 50%/100%/20% supplements, voluntary overtime's 240 exempt + 120 supplemented tranches, the 66.81%/57.75% relief bases, and the horeca/construction ceilings.
+
+## Items I flagged rather than guessed
+
+1. **Special SS contribution reform** — the CCG itself marks the phase-in percentages and abolition year as unverified. BE-001 carries the full 2026 band table plus an explicit warning; no reduced percentage configured.
+2. **Non-competition levy (BE-039) and Decava levies (BE-040)** — the CCG establishes that a specific levy applies but never states the rate. Mechanism recorded, rate left to be sourced.
+3. **Mobility allowance / cash-for-car (BE-023)** — contested legislative history; carried with its 281.10 zone and a verify-before-use note.
+4. **Tax Code column provenance** — 281.10 box codes came from the Belcotax brochure in `00-official-sources/`, which is the **income-year-2024** edition (the newest in the source set). Codes are stable year-on-year, but this needs revalidation against the IY2026 brochure before driving a real filing. Recorded in Version Control, not presented as verified.
+5. **Sectoral parameters** — end-of-year premium, eco vouchers, minimum scales, index dates are per joint committee and can't be fixed centrally; those rows say so.
+
+## Two decisions you should sanity-check
+
+- **Column D conflict.** You asked for the special-SS/CO2 notes in column D (Explanation), but D is ORANGE and the self-check required no orange column be populated. I put those notes in column F (Formula) — BLUE, and explicitly meant for plain text with 2026 rates — and left D empty. Q/R are used exactly as the CZ template defines them, unmodified. Documented in Version Control.
+- **Language.** Column C is Dutch, per your documented default. Version Control states plainly that a **French column is a mandatory second deliverable and is not yet built**, and warns against deploying for a Wallonia-seated or Brussels employer until it exists.
+
+Version Control also records the out-of-order build and that **no DD alignment cross-check was performed**, and the Form Reference Guide exists as a header + single PENDING row as specified.
+
+Build is reproducible: `build_be_wtc.py` + seven data modules + `selfcheck_be_wtc.py` are in the same folder.

@@ -1,0 +1,20 @@
+Done. Both deliverables are written; nothing was applied.
+
+**`_qa/REGRESSION-BE-CCG.json`** and **`_qa/REGRESSION-BE-CCG-narrative.md`** — verdict **FAIL**, 3 blockers / 5 majors / 6 minors. Working scripts left in `_qa/ccg/`.
+
+**The headline:** the tax engine is correct — 70 arithmetic derivations, 68 reconcile to the cent. What fails is buildability, exactly the lens you flagged.
+
+**Pattern (a) — complete-looking, unbuildable — 3 instances:**
+- **Social work bonus**: parameter table with lower limit, upper limit and maximum, and *no formula* for the band between them. Module 5.2's stated rule ("below the upper limit") would grant the full €127.54 at €3,300; the three worked examples grant it only below the *lower* limit. Jan–Jun 2026 parameters absent entirely; fiscal work bonus percentage never stated.
+- **Special social security contribution**: one immaculate six-band table that never says whose it is, plus two household situations compressed into one sentence containing one band boundary and "the same formula applies" — where the candidate antecedents differ by €12.33. The downstream WTC labels its copy "INDIVIDUALLY ASSESSED EMPLOYEE"; the CCG that supplied it doesn't.
+- **Pre-2014 notice indemnity**: "computed under the old rules applicable to their status" — the old rules appear nowhere.
+
+**Pattern (b) — stated rule ≠ numbers — 2 instances:**
+- Company car age coefficient: rule says −6pp per elapsed year, cell says "two elapsed years," value applied is 94% (= one year). Should be 88%; propagates through eight figures in Module 12 Example 5.
+- Module 9 redundancy example: 1,303.95 × 53.50% = 697.61, table says 697.42, and the Totals were built on it.
+
+**Resolved rather than found:** the 11,170-vs-11,180 conflict three prior sweeps carried forward. The CCG carries *both* scales, correctly separated — Table 53 is the assessment scale (16,720/29,510/51,070, exactly L4's figures), Table 54 the Annex III withholding scale. They're different quantities. **The correction belongs to `shared/CCG-Playbook-Learnings.md` L4**, which as written would teach the next country build to use assessment brackets for payroll withholding.
+
+**P5 failures:** Fedris appears zero times in the CCG despite being a named authority on one of the nine Report Specs (which also silently corrects the CCG's deadline); `scope_manifest` LIM7 is violated in both directions; the CCG carries one scope tag in 41,046 words while the manifest descopes 9 filings.
+
+**Two things worth flagging separately.** The modules→docx edge is *perfect* in both directions (684/684 sentences) — the only clean propagation edge in BE besides PSL→WTC. And my first extraction was broken: `id()` on lxml proxies dropped cells, and Table 52 came back as a 3-cell stub. I nearly reported the Module 6 worked example as an empty shell. Re-keyed on `getpath()` it's a complete, correct 15-row derivation — and the fix independently reproduces round 1's 41,046-word count. The prior session's `_qa/scratch/ccg_ctx.json` has the same defect; I didn't use it.

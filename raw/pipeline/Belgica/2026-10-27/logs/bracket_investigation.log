@@ -1,0 +1,30 @@
+Report saved to `BE-compliance/07-qa-crosscheck/BRACKET_INVESTIGATION.md`. Nothing in `01-ccg/` or `02-wtc/` was touched.
+
+## What I found
+
+**Task 1 — confirmed from the annex text.** Annex III nr. 31 sets its own base scale, all four bands:
+
+| Band | Rate |
+|---|---|
+| 0.01 – 16,710 | 26.75% |
+| 16,710.01 – 29,500 | 4,469.93 + 42.80% |
+| 29,500.01 – 51,050 | 9,944.05 + 48.15% |
+| above 51,050 | 20,320.38 + 53.50% |
+
+The three published constants recompute exactly from those ceilings and only those, and SYNOVA confirms them independently of Securex — which closes the residual gap the children investigation left open.
+
+**Task 2 — the rates are genuinely Annex III's**, verbatim in nr. 31. They are *not* the assessment rates (25/40/45/50%); they're those uplifted by exactly ×1.07. So the CCG has the rates right and the ceilings wrong. The single sentence carrying the defect is `m06_tax.md:181` — "the same slices at 26.75%…" — and it can't be fixed by substitution.
+
+One caution worth more than the fix itself: **no rounding rule derives these ceilings.** The round-down convention from `ALLOWANCE_INVESTIGATION.md` §4.1 reproduces 29,500 but gives 16,720 and 51,060 — wrong twice. A pattern estimate would have failed.
+
+**Task 3 — both negative.** Module 8's holiday-pay table and Module 5's special SS contribution bands are correct, verbatim. Module 8's thresholds *are* the Annex III nr. 53 thresholds, and the CCG even reads the right column of a two-column table (Module 8 takes *vakantiegeld*, Module 4 takes *andere vergoedingen*). Module 5 isn't in Annex III at all — it's an NSSO levy with its own fixed bands, matching the 2026/2 instructions to the cent.
+
+**Scope.** Nine examples change across Modules 6, 9 and 12 — including m06 Example 2 (scale III), which neither predecessor reached, since nr. 108 routes non-residents through the same nr. 31 scale. m12 E2 is insulated. Brackets alone move the monthly withholding +0.13 to +0.18; with the two prior fixes the target is +0.36 to +0.40 for childless cases and −6.39 / −21.01 where children are involved. §5.2 gives current / brackets-only / full-fix per line, with slice-level detail.
+
+## The bigger thing I hit on the way
+
+Module 9 withholds the notice indemnity from the **wrong Annex III table** — nr. 53 at 53.50% instead of nr. 58 at 38.96%. Annex III nr. 53 excludes *opzeggingsvergoedingen* in its opening words and nr. 62 routes them to nrs. 58–60; Securex confirms the 18-band table. That's **EUR 5,766.20 over-withheld on one worked example**, and it dissolves the client-facing narrative at `m09:227` which currently presents a 27% over-withholding as normal Belgian practice. Flagged, not resolved — it needs its own pass, and it may extend to arrears across Modules 4, 9 and 11.
+
+Two smaller adjacent items: the 13.92 reference factor is applied inconsistently (`m08`/`m12` use ×12, `m06`/`m09` use ×13.92 — worth ~EUR 150 per example), and three pre-existing one-cent errors in the CCG's own F totals.
+
+The recomputation model reproduces every current CCG figure exactly — including m09's 1,155.96, whose base isn't documented in the module — which is what gives me confidence in the corrected ones.

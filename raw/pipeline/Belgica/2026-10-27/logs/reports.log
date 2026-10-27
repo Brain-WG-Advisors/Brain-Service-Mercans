@@ -1,0 +1,31 @@
+Nine specs built in `BE-compliance/04-reports-spec/`. All verify clean against the shared 9-sheet standard.
+
+## Reports built, mapped to SIR OUT-xx
+
+| File | OUT-xx | Sheet 4 field rows | Primary field-level source |
+|---|---|---|---|
+| BE-NSSO-001-Dimona-Spec.xlsx | OUT-01 | 77 | NSSO Dimona glossary 2026/2, 57 zones |
+| BE-NSSO-002-DmfA-Spec.xlsx | OUT-02 | 237 | NSSO DmfA glossary 2026/2, 213 zones |
+| BE-NSSO-003-DmfAModification-Spec.xlsx | OUT-03 | 237 | Same glossary + DMWA correction semantics |
+| BE-FIN-001-Finprof274-Spec.xlsx | OUT-04 | 25 | FPS Finance SS274EUR-XML file description |
+| BE-FIN-002-Belcotax28110-Spec.xlsx | OUT-05 | 148 | Belcotax brochure IY2025 v3.0, 119 XML tags |
+| BE-NSSO-004-DRS-Spec.xlsx | OUT-06 | 235 | DRS ZIMA sc.1 (134 zones) + WECH sc.3 (67 zones) |
+| BE-FEDRIS-001-WorkAccident-Spec.xlsx | OUT-07 | 179 | DRS FAT sc.1 glossary, 174 zones |
+| BE-NSSO-005-Limosa-Spec.xlsx | OUT-08 | 27 | **No technical source exists** — all DERIVED |
+| BE-FEBELFIN-001-SEPACreditTransfer-Spec.xlsx | OUT-09 (+10, +11) | 26 | Febelfin pain.001.001.09 IG 2025 v1.3 |
+
+## Outbound integrations with no spec, and why
+
+OUT-10/OUT-11 are the same `pain.001.001.09` message as OUT-09 — different creditor, category purpose and structured communication — so they are record-type variants inside BE-FEBELFIN-001, not separate layouts. The other eight have no file to specify: **OUT-12** garnishment ("no electronic statutory format found", SIR gap G21); **OUT-13** vouchers and **OUT-14** pension premium (no public technical specification, gaps G23/G24); **OUT-15** GL posting (contractual, no statutory format); **OUT-16** electronic payslip (no statutory file format — content belongs to Stage 7); **OUT-17** social balance sheet (XBRL filed by the client's accountant); **OUT-18** Checkinatwork (presence event, SIR product mapping `false`); **OUT-19** DB2P (filed by the pension institution). Full reasoning in `_work/SCOPE-DECISION.md`.
+
+## Confirmation
+
+`verify_specs.py` checks all nine for the 9 sheets in order, Sheet 4 at exactly 21 columns A–U with the mandatory headers and `FF4472C4` white-bold header, every data row carrying one of the five mandatory fills, YES/NO green/red on Sheet 3, the DD-pending note and OUT-xx cross-reference in Version Control, ≥100 characters of logic per population rule, and no `F=C` without a column G reason. **All 9 pass.** The WTC and SIR were not opened for writing.
+
+## Items flagged rather than guessed
+
+The largest single gap is that the DmfA defines its most consequential coded fields by reference to **NSSO Annexes 2, 3, 4, 7, 8, 21 and 28** — worker codes, contribution types, deduction codes, remuneration codes, service codes — and none is in `00-official-sources`. A developer can build the DmfA file structure from BE-NSSO-002 but cannot populate the code values. The Field Options sheet carries only the codes CCG Module 10.1 itself documents, attributed to the CCG, with the rest marked NOT FOUND. Also flagged: the Finprof source is dated **26 September 2011** (SIR gap G13 — its currency for IY2026 is unresolved), and its 2026 period-code series was not projected forward from the 2011 rotation table, so OUT-11's payment reference cannot be completed; Limosa carries **81 DERIVED markers and no sample file**, deliberately.
+
+Two findings worth raising at the stage gate. First, `FPS-Finance_BV_codenummers_aard_inkomsten.pdf` is **mislabelled** — its content is the *roerende voorheffing* (form 273) code table, not bedrijfsvoorheffing income natures; those codes must never reach `RevenuNature`. Second, cross-checking the 281.10 box codes against the WTC reconciled all 23 codes the catalogue uses, but **box 360** (work bonus, 52.54% credit) exists on the fiche and no BE-WTC-001 wage type carries it.
+
+One correction to the brief's premise: CCG Module 1.1 documents no default language — it fixes language by region of the employer's seat of operation and forbids bilingual documents. Dutch was used for consistency with the WTC and the position is stated in each Version Control sheet. Relatedly, the NSSO glossaries held are the **French** editions, so column B on the five NSSO specs carries official French labels rather than Dutch; translating them would have invented official identifiers.

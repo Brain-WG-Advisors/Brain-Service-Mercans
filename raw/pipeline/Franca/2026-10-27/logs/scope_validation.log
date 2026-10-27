@@ -1,0 +1,32 @@
+Report written to `FR-compliance/07-qa-crosscheck/scope_validation.md` (627 lines).
+
+## Result
+
+All six checks pass against `scope_version 1.1`, and B1 clears.
+
+| Check | Result |
+|---|---|
+| 1 — valid JSON | PASS |
+| 2 — sections present/non-empty | PASS (14/14 paths) |
+| 3 — filing field completeness | PASS (15/15; enums valid, `product_mapping_required` boolean throughout) |
+| 4 — inbound `product_mapping_required` | PASS (8/8 set, all `true` → **no F8 WARN**) |
+| 5 — in/out-of-scope collision | PASS (0 collisions) |
+| 6 — F1–F15 populated | PASS (F1–F22 present) |
+| B1 — non-resident handling | PASS — no blocking finding |
+
+**B1 detail:** non-residents are an in-scope employment type, so B1 applied. The manifest declares the population, the Art. 182 A mechanism with its bands and overseas variant, and explicitly descopes the two adjacent regimes (182 B, 197 A). Per-income-type treatment exists downstream in CCG `m06_tax.md` §6.0 — a resident/non-resident matrix covering salary, severance, equity, contractor pay and benefits in kind — and the two residence-conditional covered income types (Art. 155 B impatriation, Art. 81 A expatriation) carry their residence conditions in `m11_advanced.md`. Nothing covered is left without non-resident treatment.
+
+**One thing worth your attention:** a prior `scope_validation.md` existed, dated 27 Aug 11:11 — but it validated **scope_version 1.0**, and the manifest was amended to v1.1 at 17:48 the same day. The prior PASS did not cover the file on disk. I preserved it as `scope_validation.md.bak-20260901-105500` and re-ran everything.
+
+Checking whether that amendment closed the prior gate's findings: **two are still open.**
+
+- **C-01** — `L137-13`/`L137-14` appear **0 times** in the manifest. The 30% employer contribution is a DSN-declared obligation (CCG `m11_advanced.md:150`) that exists only as a subordinate clause inside the *out-of-scope* free-shares row, with no in-scope wage type to attach to. F3 shape.
+- **C-02** — `182 A ter` appears **0 times**. CCG `m06_tax.md` §6.0 says it "must be modelled separately"; the manifest never closes the instruction. The prior report reserved id `FR-DGFIP-006` for this — v1.1 consumed that id for PASRAU instead, so a fresh id is needed.
+
+Neither fails a check and neither bites B1 (both attach to a *descoped* income type), so they are WARN, not blocking. Three further warnings raised here: W1 (F1–F17 are bare tokens with no description anywhere in the file), W2 (`product_mapping_required` absent on the 12 outbound integrations), W3 (A1 posted-worker value sits in an in-scope mapper while the population is descoped — correct as designed, but unannotated).
+
+I also verified beyond the gate: all 15 `spec_file` paths resolve on disk, and filing↔integration cross-references show 0 mismatches on both `integration_type` and `product_mapping_required`.
+
+The B7 register is at the end of the report — 152 rows, 119 in-scope / 33 out, each with the IN-SCOPE | OWNED-UPSTREAM | INBOUND-DATA-CONTRACT | REVERSIBLE | BASIS columns.
+
+PASS

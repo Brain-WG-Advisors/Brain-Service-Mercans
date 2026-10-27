@@ -1,0 +1,31 @@
+## Stage 1 (CCG) — complete
+
+I did **not** regenerate from scratch. A complete France CCG already existed from 27 Aug, and this repo has a documented failure mode where from-scratch rebuilds silently discard prior fixes (your last commit records exactly that: ~15 fixes at risk across 9 specs). So I measured the existing build against the template and the v2.8/v2.6 controls first, then made one targeted fix.
+
+**Audit result — the build was already sound:**
+
+| Control | Result |
+|---|---|
+| C11 template coverage | **136/136 = 100%** (all questions, not just the 95% bar) |
+| H3 count | **149** (bar is 90+) |
+| B1 resident/non-resident matrix | Pass — explicit two-column matrix at M6 §6.0, incl. the CGI 182 B contractor case correctly flagged as accounts-payable, not payroll |
+| B2 one-caliber wage rule | Pass — M5 names the caliber (average wage per head, CSS Art. D242-17) and proves it: 4,005 × 12 = 48,060. PASS figures agree across M1/M3/M4/M5 with 8× and 4× multiples consistent |
+| B10 English-only prose | Pass — 0 flagged blocks across modules *and* the built docx tables |
+| S3 scope manifest | Pass — `descoping_reason`, boolean `product_mapping_required`, `inbound` as array-of-objects, F1–F22 all present, 5 HR-scope filings correctly descoped per C1 |
+
+**The one real defect I found and fixed (v2.6 + B7):**
+
+Your 26 Aug locked scope decision on the régimes spéciaux had landed in `scope_manifest.json` but **never reached the CCG** — zero mentions of RATP/ENIM/CNBF/CRPCEN/CAVIMAC/CNIEG across all 13 modules. The manifest asserted these were *"Acknowledged as existing in the CCG"*, which was false. I resolved it in the correct direction — making the CCG match the locked decision rather than weakening the manifest — by adding to M5 §5.1: the one-line acknowledgement v2.6 asks for, plus a B7 table recording what's in, what's owned upstream (scheme affiliation is settled by client and fund at hiring, not derived by the engine), the inbound data contract (a scheme-affiliation indicator that must be **rejected at input**, not processed under general-scheme rates), and the reversal path. Added CSS Art. L711-1 to the legal basis.
+
+Change is contained: tables 202→203, paragraphs 1221→1224, H3 unchanged at 149, coverage still 100%, B10 still 0.
+
+**Report-back:**
+- H3 count: **149**
+- "Not Applicable": **1** — M12, student-loan deduction, on the ground that France has no payroll-deducted student loan repayment
+- `scope_manifest.json`: confirmed at `FR-compliance/scope_manifest.json` (62,284 bytes, S3-valid; unchanged — my edit made the CCG match it)
+- Final docx: `FR-compliance/01-ccg/FR-CCG-001-v1.0.docx`, **209,483 bytes**
+
+**Two things worth your attention:**
+
+1. **`FR-compliance/` is entirely untracked in git** — the whole France build has never been committed. Given the repo history around lost work, I'd commit before Stage 2 runs. I haven't committed anything, since you didn't ask.
+2. Minor: I verified the generator reproduces the delivered docx (identical byte size and 149/202/1221 counts pre- and post-rebuild), but I overwrote the original before running a cell-level diff, so that reproducibility evidence is count-and-size level, not cell-by-cell. Reruns differ only in the docx core-properties timestamp.

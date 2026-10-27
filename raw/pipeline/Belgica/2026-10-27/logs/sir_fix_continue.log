@@ -1,0 +1,38 @@
+Done. All five blockers are closed and the delivered document now contains every fix.
+
+## What was already done (by the interrupted run)
+
+**BE-SIR-005 — 497/498 sync: complete.** Confirmed as stated; not touched.
+
+**BE-SIR-001 — stale "Report Specs empty": complete in the section files.** `s00_control.md` build-order rewritten to past tense, `s02_outbound.md` §2.3 fully resolved (nine real filenames across OUT-01…OUT-11, with BE-FEBELFIN-001 correctly serving three variants, and explicit "No Report Spec — <reason>" for OUT-12…OUT-19), `s08_gaps.md` G27 closed and §8.4 bullet 4 rewritten.
+
+**BE-SIR-002 — the blocker missing from the earlier summary** (7 outbound rows marked *Both* with no inbound leg): complete in the section files. IN-14…IN-19 registered in both §1.1 and §1.2, OUT-06/07/08/09/14/18 now name their leg by ID, and OUT-12's direction corrected to **Outbound** on the correct reasoning — the declaration of garnishee is a second *outbound* duty, not a return leg. `s03_auth.md` was propagated to match.
+
+**BE-SIR-003 — garnishment inbound leg: complete in the section files.** IN-13 registered in §1.1 and §1.2, cross-referenced to `BE-IN-GARNISHMENT-ORDER`, with the manifest's "CSV" correctly recorded as a per-client import convention rather than a statutory format.
+
+## What still needed completing
+
+**BE-SIR-004 — FinProf period codes.** `s04_tech.md:106` and `s06_sla.md:37-38` were already correct (1011 = Q4 advance, 1012 = Q4, 1215 = 15-day December filing only, with the explicit "1215 is **not** the fourth-quarter advance" warning). The defect was purely the unbuilt docx — fixed by the rebuild.
+
+**Two stale items the interrupted run never reached — both would have re-broken the fixes:**
+
+1. `build_sir_docx.py:265` hard-coded the PENDING placeholder onto **cover page paragraph 8**. It is not in `sections/`, so a naive rebuild would have regenerated the false claim BE-SIR-001 exists to remove. Replaced with the resolved Stage-3 statement.
+2. `selfcheck_be_sir.py` still enforced the *pre-fix* contract: `len(ins) == 12` (now 19) and a whole block requiring the PENDING text on ≥19 rows. The gate would have gone red against the corrected artifact — the BE-SIR-005 booby-trap in reverse. Replaced with checks of the new contract: 19 contiguous IN ids, every OUT row carrying a resolved report-spec answer, the placeholder absent, all nine filenames present, and a new **direction-discipline check** that fails if any row marked *both* omits its `IN-nn` leg. Added anchors on the FinProf sentences so BE-SIR-004 cannot silently regress.
+
+I also cross-referenced IN-14 from §5.5, where the Payment Status Report was described but previously unregistered.
+
+## Verification
+
+`build_sir_docx.py` → 9 sections, 10 H1 / 42 H2 / 17 H3 / 50 tables, 92,389 → 98,795 bytes. `selfcheck_be_sir.py` → **65 checks, 0 failures** (was 46/47).
+
+Re-read of the rebuilt `.docx` directly:
+
+| Blocker | State in delivered docx |
+|---|---|
+| BE-SIR-001 | `PENDING` **0** occurrences; "is empty at the time of writing" 0; old §8.4 bullet 0; all nine filenames present and all nine exist in `04-reports-spec/` |
+| BE-SIR-002 | OUT-12 direction = "Outbound — and deliberately not both…"; no *both* row lacks an IN id |
+| BE-SIR-003 | IN-13 and `BE-IN-GARNISHMENT-ORDER` both present |
+| BE-SIR-004 | §4.4 now reads `1011` advance / `1012` fourth quarter / `1215` 15-day December filing, plus the warning sentence; the wrong string "1215 for the fourth-quarter advance" is **gone**; §6.1.1 carries 1011-vs-1012 |
+| BE-SIR-005 | "497" **0** occurrences; "498 distinct codes" 1; "38 numbers unused" 1 |
+
+Backups left untouched. The remaining audit findings (BE-SIR-006 through 013 — majors and minors, including the Limosa scope disagreement and the python-docx metadata) were out of scope here and are unaddressed.

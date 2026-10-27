@@ -1,0 +1,47 @@
+Done. Everything verified.
+
+## Group 1 — the four closures
+
+| Item | Status recorded | What closed it |
+|---|---|---|
+| **L-12** | CLOSED | BE-X10-015/016. Recorded precisely as **not a source gap** — all 13 XML labels were already in `00-official-sources/spec-sources/`; the markers came from a parser reading the label only on the line *after* the zone header, so wrapped titles were missed. 64 cells repaired, unnamed field rows now 0. |
+| **L-14** | CLOSED — confirmed, nothing reopened | Re-verified across all 8 places the manifest mentions it; every one already said closed. |
+| **L-17** | CLOSED | `payroll-compliance-belgium` under `08-skill/`, built against DD v1.1 / specs v1.2 — the condition §7 attached. |
+| **L-10** | **PARTIALLY closed — "registered, not solved"** | Stated in those terms in both records: no code list obtained, no marker replaced, **count on disk still exactly 36**, and the QA row now says it "must not be read as closed". |
+
+## Group 1 — the eight registrations
+
+All eight are now named in `known_limitations` with what would close it, each stating explicitly that documentation research cannot close it. **I researched none of them.**
+
+The finding that wasn't in the brief: **L-07, L-08, L-09, L-11 and L-15 were not in `known_limitations` at all** — zero occurrences before this pass. Only L-05 and L-06 were properly registered (confirmed unchanged); L-16 was there in substance but unnumbered and with no closing condition, and now carries both.
+
+Two corrections of record I made rather than inherited: the v1.9 revision entry cited the work-bonus cap as **L-13** when §7 assigns it **L-05** (the manifest already said L-05 elsewhere, so the records contradicted each other); and the ledger's `ORANGE populated (10 cells, A2..A11)` was a truncated message read as a count — the real figure was 355.
+
+## Group 3
+
+**L-18:** `git add shared/` — **0 tracked files before, 32 after**, all staged `A`, nothing untracked left. Playbook, failure log (F1–F29) and portal registry now have version history. **Staged, not committed** — I didn't commit, since that wasn't the instruction.
+
+**L-13:** three wage types at rows 357–359, all `Earning` / tax code `250` / `Recurring` / within the NSSO wage concept (`Yes Yes No Yes Yes`) — the profile the catalogue already gives housing/heating/electricity BiK, deliberately *not* the company car's.
+
+- **BE-056 free meals** — RD/ITC 92 **art. 18 §3, 6°** fixes the amounts (EUR 0.55 breakfast / 1.09 main meal / 0.84 evening meal per day), **8°** makes them the basis for meals supplied free. Amounts are **not indexed**. NSSO adopts identical figures.
+- **BE-057 PC / tablet / internet / mobile / subscription** — **art. 18 §3, 10°** as substituted by the **RD of 2 November 2017** (BS 13 Nov 2017, numac 2017013902), in force 1 Jan 2018: EUR 72 PC, 36 tablet, 36 mobile phone, 60 internet, 48 subscription per year. Amounts add per *item*, internet counted once per employee. NSSO adopts identical figures.
+- **BE-058 interest-free / low-interest loan** — **art. 18 §3, 1°**. **Residual gap, stated as `NOT FOUND`:** the IY2026 reference rates are fixed only by the following February's Royal Decree (IY2025 came by RD of 8 Feb 2026, BS 17 Feb 2026), so they aren't expected before Feb 2027. The row carries the IY2025 rates labelled **PROVISIONAL** (3.00% fixed-rate mortgage; 0.26%/0.52% monthly charge fixed-term non-mortgage; 5.57% no determined term) and instructs a recomputation. It also records that **the NSSO does not follow these rates at all** — actual value against a market-conform rate, and no benefit where the loan is a short modest advance.
+
+281.10 codes were read off the primary source already on disk (Belcotax brochure item 6b): `E` voeding, `H` PC, `I` internet, `J` tablet/mobile, `K` subscription, `A` lening — not inferred.
+
+## Verification
+
+- `validate_workbook.py --artifact WTC` → **PASS (blocker=0 major=0 minor=0)**
+- Edited **inside the zip**: exactly 2 parts changed, **21 byte-identical**; image and both comment/VML pairs each verified byte-for-byte
+- Cell diff across all 6 sheets: **TOTAL DIFFS: 36** — every pre-edit value empty, no drift on any existing row; style parity with row 356 asserted A–T
+- Generator↔workbook: the apply script *imports* the tuples from `be_wtc_data_part7.py`, and **36/36 cells asserted `==`** afterwards. A rebuild can't drop them.
+- `selfcheck_be_wtc.py`: **1 failure, the pre-existing `ORANGE populated`** on column A only (355→358, moved solely by the new rows). No new failure. Its hardcoded 355 was raised to 358 with the reason inline.
+- Three records **agree on all 4 closures + 8 registrations** (verified programmatically, table above)
+- Skill's `references/07-qa-report.md` declares itself a verbatim copy — asserted verbatim *before* editing, regenerated, re-verified byte-identical. Leaving it stale would have been F29 in the pass right after F29 was written.
+- All backups retained, none deleted.
+
+One near-miss worth flagging: while sourcing the meal figures, an NSSO page reported the 2026 max employer meal-voucher contribution as EUR 6.91 (8.91 only from 2027) — which would have made ~20 cells across CCG/WTC/payslip wrong. I verified against four independent 2026 sources before touching anything: **the corpus is right**, the full EUR 2 rise landed in one step on 1 Jan 2026. Nothing changed.
+
+Not in scope and not closed: the six blockers and eleven majors of §3–§4, and L-01–L-04. **The country is still not closed.**
+
+Sources: [FPS Finance – voordelen van alle aard](https://fin.belgium.be/nl/particulieren/belastingaangifte/inkomsten/voordelen-van-alle-aard) · [RD 2 Nov 2017 (etaamb)](https://etaamb.openjustice.be/nl/koninklijk-besluit-van-02-november-2017_n2017013902.html) · [Art. 18 KB/WIB 92 (fiscosearch)](https://fiscosearch.be/article/bab36f66-3f98-4fe0-a620-c75d9ad28824) · [NSSO instructions – voordelen in natura](https://www.socialsecurity.be/employer/instructions/dmfa/nl/latest/instructions/salary/particularcases/advantages_in_kind.html) · [Attentia – loan reference rates IY2025](https://www.attentia.be/nl/nieuws/renteloze-lening-of-lening-tegen-verminderde-rentevoet-in-inkomstenjaar-2025/) · [Securex – renteloze lening bedragen](https://www.securex.be/nl/lex4you/werkgever/actuele-bedragen/fiscale-bedragen/hoeveel-bedraagt-dit-voordeel) · [Securex – RSZ soepel voor lening aan werknemers](https://www.securex.be/nl/lex4you/werkgever/nieuws/rsz-soepel-voor-lening-aan-werknemers) · [Acerta – maaltijdcheques 2026](https://www.acerta.be/nl/inspiratie/verhoging-van-de-maaltijdcheques-veelgestelde-vragen)

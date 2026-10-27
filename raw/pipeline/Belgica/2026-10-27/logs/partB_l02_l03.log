@@ -1,0 +1,55 @@
+Done. Everything requested is applied and verified.
+
+## L-03 — the tier decision
+
+**Belgium is T3 overall.** Per-domain, over all 13 canonical domains:
+
+| Verdict | Domains |
+|---|---|
+| **T4-shaped** | `statutory_reporting` |
+| **T3** | `labour_code`, `income_tax`, `social_security`, `payslip_statute`, `leave`, `termination`, `benefits_in_kind`, `indexation`, `live_legal_change` |
+| **T2** | `deductions_garnishments`, `payroll_data_protection` |
+| **data-problem** | `collective_agreements` |
+
+**Reasoning** (the full 4,274-char wording is in all three files; this is the shape of it):
+
+- **Not T4.** The discriminator is what the *employer* operates. Income tax: regions and municipalities set their own percentages, but neither is applied at source — the employer computes one withholding under ITC 92 arts. 270–275 from one rate set (Annex III, replaced for IY2026 by the RD of 11 December 2025) and remits to one authority. Social security: NSSO sets, collects and administers nationally on one base (Law of 27 June 1969 arts. 14 and 23; RD of 28 November 1969); the target-group reductions regionalised by the sixth state reform change the *amount* inside the same DmfA to the same authority. Blue-collar holiday pay is the same shape — financed by the 108% uplift inside the ordinary NSSO contribution, paid out by the holiday fund on DmfA data.
+- **This was not invented.** `BE-COVERAGE.md` §2 already answered "Quebec-style wrinkle? — **NO**" on 2026-08-12, owner-signed, with the Canada/non-Québec precedent. The pass states that determination in the tier vocabulary.
+- **One correction of record.** The QA report §1 reads the evidence as supporting **T4** for statutory reporting. On the discriminator as written it supports **T4-shaped**: the second independent calculation is real — the 281.10 is *not* derived from the twelve monthly withholding returns — but its authority is a second *federal* one, not sub-national. Evidence measured, not asserted: 8 in-scope filings across NSSO / two FPS Finance channels on different cycles / Fedris+insurer / paying institutions; 36 distinct integration flows (18+18, against OUT-01…19 and IN-01…19 in the SIR whose two Limosa legs are descoped); a 498-code NSSO anomaly model.
+- `collective_agreements` = **data-problem** for the reason the CCG itself states (m04 §122): the variability axis is the joint committee, not geography, and the binding scales/index dates aren't published as a machine-readable national table — which is why the JC code list is still stuck at L-10.
+- `payslip_statute` stays T3: three languages with nullity as the sanction multiplies the *deliverable*, not the calculation.
+
+## Verification
+
+**Schema validation — PASS, three ways.**
+```
+shared/schemas/validate_contract.py build-manifest → ok / PASS (1 file), exit 0
+independent Draft202012Validator            → 0 errors
+validator --examples self-test              → PASS (4 files)   [proves the toolchain isn't passing vacuously]
+```
+Also checked live: all 16 `shared_refs` paths, all 6 `source_partitioning` folders and all 8 artifact paths resolve on disk.
+
+**Identical wording — byte-identical, same SHA-256, read back off disk** (the docx paragraph extracted from the *delivered* `.docx`, not the markdown source):
+```
+build-manifest.json  tier.rationale   len 4274  fd5a6da3fb8342d6...
+scope_manifest.json  tier.rationale   len 4274  fd5a6da3fb8342d6...
+BE-CCG-001-v1.0.docx Module 1.6       len 4274  fd5a6da3fb8342d6...
+ALL THREE BYTE-IDENTICAL: True
+```
+The wording is pure ASCII and carries no markdown inline syntax — deliberately, so it survives a JSON string, a second JSON string and a Word paragraph unaltered. There is one source (`TIER_WORDING` in the apply script); all three writers consume it, and the verifier reads all three back.
+
+**Backups — taken before any edit, MD5-verified, retained** (`.bak-before-partB-l02-l03`): `scope_manifest.json`, `m01_foundational.md`, `BE-CCG-001-v1.0.docx`. Backups still match the pre-edit MD5s; 176 backups now retained across the dossier, none deleted.
+
+**Regression:** scope_manifest round-trip still byte-identical (2-space/CRLF/no trailing newline); one key added (`tier`), zero removed, `known_limitations` untouched at 17. CCG docx diff vs. backup: **21 lines added, 0 removed** — purely additive. C1 13/13 modules, C8 zero residual markers, C11 96/96 (100%).
+
+## Notes on the retrofit
+
+- The CCG rebuild is safe by measurement, not assumption: I first proved a rebuild of the *delivered* docx was byte-identical part-for-part (all 18 zip parts) before editing, so the module source is the true source and a future rebuild can't resurrect the old text.
+- `mandate_status: sealed`, sealed on 2026-08-12. Not a fabricated seal — BE has no `MANDATE.md`, but `scope_manifest.json` names `BE-COVERAGE.md` as its `mandate_document`, and that file carries the owner, the date, the scope, the sub-national answer and a changelog. What's genuinely absent is the *machinery*, not the answers; that's stated in `_mandate_note`.
+- **Every artifact is `built`, not one is `qa_pass`** — deliberate. All eight exist and were regression-audited, but the QA report's Stage 10 verdict is "the country is NOT closed" with 6 blockers open, so none meets this schema's definition of `qa_pass`. `built` understates the review they've had; it's the only truthful value on the one canonical ladder.
+- 16 `NOT AVAILABLE - RETROFIT` markers, rather than invented history: no per-artifact build logs, no `_research/`, no `legal-basis-register.csv`, no `MANDATE.md`, no `SKELETON-MANIFEST.md`. **L-02 is only half-closed** and the manifest says so: the build-manifest half is done; `_research/` and the build-log half are not.
+- Two accuracy corrections against the prompt/report, both recorded in the file rather than rounded off: 8 in-scope filings, not nine; and Report Specs are v1.2 for eight of nine — `BE-NSSO-005-Limosa-Spec` is at v1.3/Descoped.
+
+## Left open, flagged not done
+
+`BE-QA-REPORT.md` §1 still says *"`_pipeline/build-manifest.json → tier` — **Directory does not exist**"* and its §7 L-02/L-03 rows still read as open. Those statements are now false on disk. I didn't touch it because your prompt scoped the wording to three places and the report's own closing condition names exactly those three — but prior passes in this repo do append closure notes to that file (`_apply_partB_qareport.py`), so it's the consistent next step. Same for the skill's mirror `08-skill/payroll-compliance-belgium/references/01-ccg.md`, which predates the new Module 1.6.

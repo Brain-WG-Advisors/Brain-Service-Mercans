@@ -1,0 +1,13 @@
+PSL sweep complete. Both files written: `_qa/REGRESSION-BE-PSL.json` and `_qa/REGRESSION-BE-PSL-narrative.md`. Nothing applied.
+
+**Verdict: FAIL** — 1 blocker, 4 major, 3 minor. P1/P2/P3 pass; P4 and P5 fail.
+
+**Your A109 question — not a finding as marked, but re-scoping it produced one.** The lint hit is the ordinary word "pending" inside the prose *"a documented pending deliverable"*. The word doing the work is *documented*, and it checks out in two artifacts that aren't the payslip: `scope_manifest.json!known_limitations[5]` and `BE-WTC-001!Version Control!B19`. That's the inverse of BE-DD-003 — the limitation was named first and the payslip points at it. But reading A109 against those sources showed the manifest names **two** language gaps (DE and FR) and A109 propagated only FR. Belgium has three language regions; A109 covers two. That's BE-PSL-004, major.
+
+**The blocker (BE-PSL-001):** the payslip computes correctly but cannot be built. The `Payslip Spec` sheet — the HRP mapping the engine is configured from — stops after 5 sections. The payslip renders 15 blocks. 176 of 305 cells (58%) have no mapping: working time, employer cost, all 18 withholding steps, YTD, leave balances, banking. The Tunisia precedent carries 9 sections including the four BE omits. This survived every prior check because `validate_workbook.py` and `_verify_payslip.py` both examine the payslip *sheets* and neither opens the spec sheet — the verification went where the numbers were, and the numbers were right.
+
+**One near-miss worth flagging:** YTD `I92` hardcodes `74.21+134.45+24.74`, and the payslip's own stated one-band rule can't produce 134.45. It looked fabricated. It isn't — Q2's base is 13,720 (includes the May double holiday pay), landing in a different CCG band: 118.83 + 1.10%×1,420 = 134.45 exactly. So BE-PSL-002 is that the payslip states a one-band rule and silently applies a six-band table — an implementer building from the stated basis gets Q2 and Q4 wrong for most white-collar staff.
+
+Two traps that caught other BE artifacts did **not** fire here: F27 (all 13 codes still resolve to the repaired WTC despite the payslip never being re-opened) and F28 (it cites `BE-DD-001` unversioned, so the rename that breaks 61 report-spec citations leaves it untouched). PSL→WTC is the only clean code-level propagation edge in the whole dossier — 34/34 resolved, against the report specs' 0 of 168.
+
+One note on your saved memory `payslip-5-sheet-vs-8-sheet-contract`: it describes the validator failing with 3 blockers. That state is historical — the three sheets were added in round 2 and I reproduced `validate_workbook.py --artifact PSL` as a genuine PASS (blocker=0). Worth updating or deleting when convenient.

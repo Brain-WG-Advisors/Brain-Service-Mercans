@@ -1,0 +1,117 @@
+Done. Only W1, W2, and their two remediation rows were touched.
+
+## FINAL VERIFICATION
+
+### Updated W1 — verbatim
+
+````markdown
+### W1 - F8 risk: inbound garnishment order marked product_mapping_required=false (HIGHEST PRIORITY)
+
+**STATUS: RESOLVED** - fixed directly in `scope_manifest.json` on 12 August 2026, 14:08. The finding below is retained as the audit record; the manifest no longer matches it.
+
+**What was done.** `BE-IN-GARNISHMENT-ORDER.product_mapping_required` was flipped `false` -> `true`, and the `rationale` field the entry previously lacked was added, stating the Judicial Code Art. 1409 attachable-portion touchpoint that makes this a genuine product mapping. Current state of the entry:
+
+```json
+{
+  "id": "BE-IN-GARNISHMENT-ORDER",
+  "from": "Court, bailiff or administration",
+  "format": "CSV",
+  "product_mapping_required": true,
+  "rationale": "The inbound garnishment order supplies the attachable-portion calculation inputs that the payroll engine must map: the order identifies the debt type and creditor, and the engine must apply the Judicial Code Art. 1409 net-wage bands to determine the attachable portion and compute the correct withholding amount. This is a genuine product touchpoint — the Art. 1409 band calculation cannot be performed without the order being mapped into the engine, and it feeds the matching outbound leg BE-OUT-GARNISHMENT to the bailiff or creditor. Contrast with LIMOSA and work-accident-insurer entries, which are filed entirely outside the payroll engine and therefore require no product mapping."
+}
+```
+
+**Residual (not closed by this fix).** The field-level data contract for the inbound CSV - the Art. 1409 band inputs the engine consumes - is still unspecified: the entry carries `format: "CSV"` but no field list. That half of Required Action 1 remains open for Stage 3.
+
+**Original finding (retained for the audit trail):**
+
+```json
+{ "id": "BE-IN-GARNISHMENT-ORDER", "from": "Court, bailiff or administration",
+  "format": "CSV", "product_mapping_required": false }
+```
+
+This was the one inbound integration with `pmr=false`, and the least defensible of the three `false` values in the manifest:
+
+- `wage_type_categories.in_scope` includes **"Wage garnishment and wage assignment (Judicial Code Article 1409)"** - payroll demonstrably parses and acts on this order.
+- `integrations.outbound` includes `BE-OUT-GARNISHMENT` - there is an outbound leg, so the inbound leg is what triggers it.
+- Unlike LIMOSA-009 and WACC-010, this entry carried **no `rationale` field** justifying the `false`.
+- The manifest's own `_note` states: *"Inbound files where HRB must parse/act = product_mapping_required=true. Never default inbound=not-in-scope."*
+
+This is textbook F8 (inbound integration wrongly excluded from product mapping). The instruction set specifies WARN rather than FAIL for this condition, so it did not block the gate. Art. 1409 attachable-portion bands drive a real calculation; without product mapping the seizure ceiling cannot be computed.
+````
+
+### Updated W2 — verbatim
+
+````markdown
+### W2 - LIMOSA-009 classification contradicts the employment-type scope
+
+**STATUS: RESOLVED** - fixed directly in `scope_manifest.json` on 12 August 2026, 14:24. The finding below is retained as the audit record.
+
+**What was done.** `BE-NSSO-LIMOSA-009` was moved out of `authority_filings.in_scope` into `authority_filings.out_of_scope`, carrying the `descoping_reason` + `client_impact` pair the v2.9 schema requires. The legal attribution is now stated on the entry: the Limosa declaration is the foreign posting employer's obligation under the Loi-programme du 27 décembre 2006, arts. 137 et seq., not the Belgian entity's. Current entry:
+
+```json
+{
+  "filing_id": "BE-NSSO-LIMOSA-009",
+  "authority": "National Social Security Office (Limosa declaration)",
+  "descoping_reason": "Filed by the foreign posting employer under Loi-programme du 27 décembre 2006, arts. 137 et seq. — not a Belgian entity obligation. The posted-worker population is already excluded from employment_types (A1-certificate holders). The Belgian payroll engine holds none of the source data needed.",
+  "client_impact": "No client action from the Belgian payroll product. The posting (foreign) employer files the Limosa declaration through www.limosa.be before the posting starts."
+}
+```
+
+**A second, previously undocumented gap surfaced by the same research - also now closed.** Verifying the arts. 137 et seq. attribution showed that the *same* law places a separate and distinct duty on the Belgian host entity. Under art. 141, any person for whom or at whose premises activities are performed must verify that the prior declaration under art. 139 was made and must be able to produce the L-1 acknowledgement of receipt; where the L-1 cannot be produced, the Belgian user must report the worker's identification data electronically to the NSSO. Failure carries a level 3 sanction under the Code pénal social. Art. 155 is the parallel provision for posted self-employed persons; both are executed by the Arrêté royal du 20 mars 2007.
+
+That duty was represented **nowhere** in the manifest - not in-scope, not descoped, not mentioned. This is the exact **F15** pattern (*"Removed artifact without descoping decision"*): a real country obligation with no decision record, so scope drifts silently and C20 has nothing to key on. It is worth noting that descoping LIMOSA-009 on its own would have *created* the F15 condition rather than avoided it - removing the last trace of Limosa from the manifest would have left the host entity's own duty invisible.
+
+It is now recorded as a new `authority_filings.out_of_scope` entry, `BE-NSSO-LIMOSA-L1-VERIFY`, descoped as HR-scope with reason and client impact:
+
+```json
+{
+  "filing_id": "BE-NSSO-LIMOSA-L1-VERIFY",
+  "authority": "National Social Security Office (RSZ/ONSS) — recipient of the Limosa \"absence de formulaire L-1\" report; enforced by the Belgian social inspection services under the Code pénal social",
+  "descoping_reason": "HR-scope — the host entity's duty to verify a posted worker's Limosa-1 (L-1) acknowledgement of receipt and to report non-compliance is an onboarding/immigration-compliance check, not a payroll computation; it requires no payroll data and produces no payroll output. Legal basis independently confirmed: Loi-programme (I) du 27 décembre 2006, art. 141 (MB 28 décembre 2006) — \"Toute personne auprès de laquelle ou pour laquelle des activités sont exercées doit vérifier que la déclaration préalable visée à l'article 139 a été effectuée et doit pouvoir produire l'accusé de réception de cette déclaration\" — with art. 155 the parallel provision for posted self-employed persons, both executed by the Arrêté royal du 20 mars 2007. Where the L-1 cannot be produced, the Belgian user must report the identification data electronically to the NSSO; failure carries a level 3 sanction under the Code pénal social.",
+  "client_impact": "Refer to HRMS/onboarding team. This is a verification and reporting duty, not a filing the payroll product produces."
+}
+```
+
+**Original finding (retained for the audit trail):**
+
+`BE-NSSO-LIMOSA-009` sat in `authority_filings.in_scope`, but:
+
+- its population (workers posted to Belgium under an A1 certificate) is explicitly in `employment_types.out_of_scope`; and
+- its own rationale said *"Filed through the Limosa web channel by the posting (foreign) employer; the Belgian payroll engine does not hold the source data."*
+
+An entry that is owned upstream, whose population is out of scope, and which carries `pmr=false` is functionally descoped while being counted as in-scope coverage. Downstream agents read `authority_filings.in_scope` to decide what to build; C20 would later flag it as "in-scope without spec".
+````
+
+### Remediation rows (§5, rows 1–2 only)
+
+```
+| 1 | **PARTLY DONE 2026-08-12 14:08** - `product_mapping_required` flipped to `true` with a rationale (see W1). **Still open:** specify its field-level contract (Art. 1409 band inputs) | CCG / integrations | Stage 3 |
+| 2 | **DONE 2026-08-12 14:24** - LIMOSA-009 reclassified to `out_of_scope` with `descoping_reason` + `client_impact`; the art. 141 host-entity verification duty it surfaced added as a new descoped entry `BE-NSSO-LIMOSA-L1-VERIFY` (F15 gap closed). No further action | CCG | Closed |
+```
+
+Row 1 is marked **PARTLY DONE**, not DONE: the original action had two clauses, and the field-level Art. 1409 contract is still unspecified in the manifest (the entry has `format: "CSV"` but no field list). The W1 warning itself is RESOLVED as instructed; I flagged the residual rather than reporting the whole row closed.
+
+### W4 and W5 — unchanged
+
+Both verified byte-for-byte against the pre-edit read. W4 still opens `### W4 - F4 risk: formats declared without verified schema citations` … ending `…Annex III 2026 rules text before Stage 4.`; W5 still opens `### W5 - Annex III notional surcharge percentage unconfirmed` … ending `…before any WTC rate, DD field or worked example depends on it.**`. §5 rows 3–7, W3, §1, §2, §4, the header and the verdict line are all untouched — each replacement was applied against a uniqueness-asserted exact-match anchor (4 anchors, each `count == 1`).
+
+### File mtimes
+
+```
+2026-08-12 14:34:13  BE-compliance/07-qa-crosscheck/scope_validation.md   <- only file written
+2026-08-12 14:24:11  BE-compliance/scope_manifest.json                    (unchanged, pre-existing)
+2026-08-12 14:07:57  shared/scope_manifest_template.json                  (unchanged)
+2026-08-12 12:01:50  BE-compliance/BE-COVERAGE.md                         (unchanged)
+2026-08-12 11:27:27  newest 01-ccg/modules/* (m02)                        (unchanged)
+```
+
+Nothing else in `BE-compliance/`, `shared/`, or `mercans_pipeline_v2_9.sh` has an mtime after 14:31:47, and the two files at 14:31:47 (`_prompts/scope_validation_close_out.md`, `logs/scope_validation_close_out.log`) are this task's own prompt and log, written before my first tool call. `git status` is unchanged (all three paths still untracked, no new entries).
+
+Three residual inconsistencies now exist in sections you told me not to touch — flagging, not fixing:
+
+- **§1 check 2** still reads `authority_filings` (10 in / 7 out); it is now 8 in / 9 out.
+- **§1 check 4** still reads "1 is `false` -> W1"; all 12 inbound integrations are now `true`.
+- **§2 B7 table** still carries the "LIMOSA-009 kept in_scope with pmr=false" and "Garnishment order inbound with pmr=false" decision rows, plus the header verdict "PASS (with 5 warnings carried forward)" and the closing "carrying W1-W5".
+
+Say the word and I'll bring those into line in a follow-up pass.

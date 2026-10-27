@@ -1,0 +1,39 @@
+Done. All gates pass.
+
+## Removal — 13 fields, not 14
+
+**Your list named 14 fields but called them 13.** I tested each against the criterion your instruction set (Data Type `CM` *and* a description tying it to the Limosa declaration). **`A1 Certificate Held Indicator` fails it** and was kept:
+
+- It is the only one of the 14 with **no `BE-NSSO-005` reference anywhere in its row** — its note cites CCG Modules 5.1 and 11.2.
+- What it actually determines is **whether Belgian social security contributions are due at all**, which survives the descoping. It is a live payroll input, not a filing feed.
+
+That resolves the count at exactly 13, and it's a substantive keep rather than an arithmetic one. The 4 A1 detail fields that *did* go (reference, issuing institution, validity dates) had this indicator as their precondition — the indicator remains, so nothing dangles.
+
+**Deleted as rows** (not blanked) from Country Fields, **266 → 253**: A1 Certificate Reference, A1 Issuing Institution, A1 Validity Start/End Date, Posting Start/End Date, Limosa Declarant Type/Identification/Contact Details, Foreign Posting Employer Name/Address/Country/Registration Number. Section title and repeated header re-verified intact after the shift.
+
+## Verification
+
+| Check | Result |
+|---|---|
+| `validate_workbook.py --artifact DD` | **PASS** (blocker=0 major=0 minor=0) |
+| `verify_be_dd.py` (C1–C6) | **PASS** — 0 unclassified, **0 DD-bucket fields missing** |
+| `verify_limosa_agreement.py` | **66 passes, 0 failures** |
+| 13 names searched repo-wide | **Zero live references.** In the DD itself, all 13 occurrences are in `Version Control!D14` — the note recording the removal |
+| Backup | `BE-DD-001-v1.1.xlsx.bak-before-limosa-field-removal` created before any edit, **retained** |
+
+## Dangling references found and fixed
+
+1. **`dd_crosscheck_map.py` — the real one.** The Limosa spec's Sheet 4 maps 12 keys onto these DD fields, and check C2 requires every DD-bucket field to exist. Deleting the rows alone would have failed C2 **12 times** and printed 12 `MISSING FROM THE DD` rows in the cross-check table. I verified all 12 keys are exclusive to `BE-NSSO-005` (no other spec carries those names, so no live flow narrowed), then reclassified them as DD-shaped-but-descoped with the reason and citation. Table regenerated.
+2. **`verify_be_dd.py` pointed at `BE-DD-001-v1.0.xlsx`** — a filename gone since the v1.1 rename. The DD's own verifier could not run at all. Path and version labels corrected.
+3. **`be_dd_data_emp.py` / `be_dd_data_le.py`** — the workbook is *generated* from these lists, so editing only the .xlsx left a rebuild able to resurrect all 13 rows silently. Definitions deleted; sources now yield 253, matching the workbook exactly.
+4. **`scope_manifest.json` (v1.4), `BE-QA-REPORT.md` (`BE-SCOPE-014`, `L-14`), `PROPAGATION-LEDGER.md` (new row 1D)** — all three stated these fields exist and a decision was owed. Updated, earlier wording struck rather than deleted per house convention.
+5. **`verify_limosa_agreement.py`** asserted `scope_version == "1.3"` — broke on a legitimate bump. Changed to `>= 1.3`; the adjacent check that pins the v1.3 revision entry is the one that actually matters and still passes.
+
+**The Limosa Report Spec is clean** — it cites no DD field names, only its own; confirmed descoped as expected.
+
+## Two things to flag
+
+- **A claim in the earlier pass was wrong.** Both the ledger and the manifest said there were "matching `Country Option Mapper` rows" to remove. There are none: only one deleted field carried a mapper (`Foreign Posting Employer Country`, on the shared `NIS Country Code` mapper four retained fields still use). Corrected in place; the mapper sheet was correctly left untouched.
+- **Narrowed, not closed.** 9 fields keeping a `BE-NSSO-005` reference were outside your list and are retained. Three look right to keep (*Posted Worker Indicator*, *Multi-State Activity Indicator*, *Belgian Representative of the Foreign Employer* — all have non-Limosa consumers). **Six are Limosa-only on their face and need the same ruling:** *Place of Work in Belgium*, *Nature of the Posted Services*, *Posted Worker Working Time Schedule*, *Belgian Client Name / Enterprise Number / Address*. Registered in all three records rather than left to be rediscovered.
+
+Not done, declared: `build_be_dd.py` still writes `v1.0` and builds v1.0 Version Control content, so it does not reproduce the delivered v1.1 and was **not** run — the workbook was edited surgically. That drift is pre-existing.

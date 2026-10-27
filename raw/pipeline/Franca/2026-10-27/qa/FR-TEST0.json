@@ -1,0 +1,803 @@
+{
+ "schema": "mercans-test0/1.0",
+ "country": "FR",
+ "run_date": "2026-10-09",
+ "package": "FR issued package v1.0 (2026-10-06): FR-CCG-001-v1.0.docx, FR-WTC-001-v1.0.xlsx, FR-DD-001-v1.0.xlsx, FR-*-Spec.xlsx (15)",
+ "sampling": "risk-weighted: 51 assertions across CCG (21), WTC (13), DD (8), RSPEC (9). Items chosen where a wrong value changes pay, tax or a filing: rates, ceilings, thresholds, dates of effect, base rules (PMSS/PASS, SMIC live vs frozen, RGDU parameters, Agirc-Arrco/CEG/CET/Apec, unemployment/AGS 4 PSS, CSG/CRDS 98.25 % to 4 PASS, COTAM 5.50 %, CPF-CDD 1 %, PAS default grids by payment date, CGI 182 A bands, montant net social 2026, net taxable with employer health cover, AT/MP daily benefit), DSN rubric formats and control rules (S21.G00.82.005, 56.002, 58.003, 81.001/004/007), payroll tax and apprenticeship tax bands, DPAE format 120. Risk areas informed by the 2026-10-06 reviews; verdicts not reused - every source fetched on 2026-10-09 and quoted. Artifact excerpts were machine-checked to be verbatim; quotes machine-checked against the fetched text (except the Légifrance KALI quote, read through WebFetch). DSN cahier quotes carry the PDF page in source.page.",
+ "assertions": [
+  {
+   "id": "C01",
+   "artifact": "CCG",
+   "location": "Module 5.2, table T62 (Do different payment frequencies affect contribution rates)",
+   "assertion": "2026 ceiling: Annual EUR 48,060; Quarterly EUR 12,015; Monthly EUR 4,005; Daily EUR 220; Hourly EUR 30 (Annual || EUR 48,060 / Quarterly || EUR 12,015 (three monthly ceilings) / Monthly || EUR 4,005 / Daily || EUR 220 / Hourly, for engagements shorter than five hours || EUR 30)",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Plafonds de la Sécurité sociale 2026",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/plafonds-securite-sociale.html",
+    "quote": "| Année | 48 060€ | | Trimestre | 12 015€ | | Mois | 4 005€ | | Quinzaine | 2 003€ | | Semaine | 924€ | | Jour | 220€ | | Heure | 30€ |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C02",
+   "artifact": "CCG",
+   "location": "Module 4.1, table T27 row 1 (minimum wage rates)",
+   "assertion": "1 January 2026 || EUR 12.02 || EUR 1,823.03",
+   "risk": "high",
+   "source": {
+    "authority": "Service-Public (DILA)",
+    "title": "RGDU : quel est le montant du Smic brut retenu pour 2026 ? (Décret n° 2026-509 du 12 juin 2026)",
+    "url": "https://entreprendre.service-public.gouv.fr/actualites/A18966",
+    "quote": "À cette date, le Smic annuel brut est fixé à 21 876,64€, le Smic mensuel brut à 1 823,03€ et le Smic horaire brut à 12,02€.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "note": "Hourly and monthly figures checked. The annual column of this row (EUR 21,876.36 = 12 x monthly) is not asserted; the source prints 21,876.64, which matches neither 12 x 1,823.03 nor 12.02 x 1,820 = 21,876.40 used in Module 5.2."
+  },
+  {
+   "id": "C03",
+   "artifact": "CCG",
+   "location": "Module 4.1, table T27 row 2 (minimum wage rates)",
+   "assertion": "1 June 2026 || EUR 12.31 || EUR 1,867.02",
+   "risk": "high",
+   "source": {
+    "authority": "Service-Public (DILA)",
+    "title": "Smic (salaire minimum interprofessionnel de croissance) - vérifié le 1er juin 2026",
+    "url": "https://www.service-public.fr/particuliers/vosdroits/F2300",
+    "quote": "| Smic horaire | 12,31€ | 9,74€ | | Smic mensuel | 1 867,02€ | 1 477,93€ |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "note": "Annual column EUR 22,404.24 (12 x monthly) not asserted; Service-Public gives Smic annuel 22 404,20 EUR (12.31 x 1,820). Presentation difference, flagged for awareness."
+  },
+  {
+   "id": "C04",
+   "artifact": "CCG",
+   "location": "Module 4.1, table T28 row 2",
+   "assertion": "Unified degressive general reduction of employer contributions || Frozen at EUR 12.02 for the whole of 2026, by Décret n° 2026-509 of 12 June 2026",
+   "risk": "high",
+   "source": {
+    "authority": "Service-Public (DILA)",
+    "title": "RGDU : quel est le montant du Smic brut retenu pour 2026 ? (Décret n° 2026-509 du 12 juin 2026)",
+    "url": "https://entreprendre.service-public.gouv.fr/actualites/A18966",
+    "quote": "Le décret du 12 juin 2026 indique que, pour l’année 2026, la valeur du Smic retenue est celle fixée au 1 er janvier 2026.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C05",
+   "artifact": "CCG",
+   "location": "Module 5.2, table T59 rows 1-4, 6, 8 (RGDU parameters)",
+   "assertion": "Tmin || 0.0200 / Tdelta, employer paying the housing fund at 0.10 % || 0.3781 / Tdelta, employer paying the housing fund at 0.50 % || 0.3821 / Exponent || 1.75 / Annual reference minimum wage || EUR 21,876.40, being EUR 12.02 × 1,820 hours, frozen for the whole of 2026 / Eligibility threshold || Annual gross pay below 3 × EUR 21,876.40 = EUR 65,629.20",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "La réduction générale des cotisations patronales (RGDU) 2026",
+    "url": "https://www.urssaf.fr/accueil/employeur/beneficier-exonerations/reduction-generale-cotisation.html",
+    "quote": "= 0,0200+ (0,3781 × [(½) × (3 × ((Smic calculé pour un an+ (Smic horaire× nombre d'heures supplémentaires ou complémentaires))÷ rémunération annuelle brute) - 1)]P) [...] = 0,0200+ (0,3821 × [(½) × (3 × ((Smic calculé pour un an+ (Smic horaire× nombre d'heures supplémentaires ou complémentaires))÷ rémunération annuelle brute) - 1)]P) [...] Soit :0,0200+ (0,3821 × [(½) × (2,9293 × 1 867,02÷ 2 000) - 1)]1,75) = 0,3178. [...] à 3 Smic applicable au 1 er janvier 2026",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C06",
+   "artifact": "CCG",
+   "location": "Module 5.1, table T49 rows 12-13 (Agirc-Arrco bands)",
+   "assertion": "12 || Supplementary pension, band 1 || 3.15 % || 4.72 % / 13 || Supplementary pension, band 2 || 8.64 % || 12.95 %",
+   "risk": "high",
+   "source": {
+    "authority": "Agirc-Arrco",
+    "title": "Circulaire Agirc-Arrco 2025-16-SG-DRJ - Paramètres 2026",
+    "url": "https://www.agirc-arrco.fr/storage/CirculaireAgircArrco2025-16sg-drj.pdf",
+    "quote": "7,87 %2 4,72 %2, 3 3,15 %2, 3 21,59 %2 12,95 %2, 3 8,64 %2, 3",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C07",
+   "artifact": "CCG",
+   "location": "Module 5.1, table T49 rows 14-15 (CEG)",
+   "assertion": "14 || General balance contribution, band 1 || 0.86 % || 1.29 % / 15 || General balance contribution, band 2 || 1.08 % || 1.62 %",
+   "risk": "high",
+   "source": {
+    "authority": "Agirc-Arrco",
+    "title": "Circulaire Agirc-Arrco 2025-16-SG-DRJ - Paramètres 2026",
+    "url": "https://www.agirc-arrco.fr/storage/CirculaireAgircArrco2025-16sg-drj.pdf",
+    "quote": "2,15 % 1,29 % 0,86 % 2,70 % 1,62 % 1,08 % Contribution d’équilibre général (CEG)",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C08",
+   "artifact": "CCG",
+   "location": "Module 5.1.1, table T55 row 14 (CET)",
+   "assertion": "Technical balance contribution || Bands 1 + 2, above the ceiling only || 0.14 % || 0.21 % || EUR 32,040",
+   "risk": "high",
+   "source": {
+    "authority": "Agirc-Arrco",
+    "title": "Circulaire Agirc-Arrco 2025-16-SG-DRJ - Paramètres 2026",
+    "url": "https://www.agirc-arrco.fr/storage/CirculaireAgircArrco2025-16sg-drj.pdf",
+    "quote": "0,35 % 0,21 % 0,14 % Tranche 1 (≤ 1 PSS) + Tranche 2 (≥ 1 PSS - ≤ 8 PSS) si le salaire excède la tranche 1",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C09",
+   "artifact": "CCG",
+   "location": "Module 5.1.1, table T55 row 15 (Apec)",
+   "assertion": "Executive employment association || Up to 4 ceilings, managerial grade || 0.024 % || 0.036 % || EUR 16,020",
+   "risk": "high",
+   "source": {
+    "authority": "Agirc-Arrco",
+    "title": "Circulaire Agirc-Arrco 2025-16-SG-DRJ - Paramètres 2026",
+    "url": "https://www.agirc-arrco.fr/storage/CirculaireAgircArrco2025-16sg-drj.pdf",
+    "quote": "1 Ce qui correspond pour 2026 à une limite de 192 240 € par an, soit 16 020 € par mois. [...] Salaires des cadres dans la limite de 4 PSS1 APEC [...] 0,06 % 0,036 % 0,024 %",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C10",
+   "artifact": "CCG",
+   "location": "Module 5.1.1, table T55 rows 17-18 (unemployment insurance, AGS)",
+   "assertion": "Unemployment insurance || 4 ceilings || — || 4.00 % || EUR 16,020 / Wage guarantee scheme || 4 ceilings || — || 0.25 % || EUR 16,020",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Contribution assurance chômage | 4,00% dans la limite de 192 240 € en 2026 | | Cotisation AGS | Dans la limite de 192 240 € en 2026: * 0,25%",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C11",
+   "artifact": "CCG",
+   "location": "Module 5.1.1, table T55 rows 19-21 (CSG / CRDS)",
+   "assertion": "General social contribution, deductible || 98.25 % base || 6.80 % || — || Allowance capped at EUR 192,240 per year / General social contribution, non-deductible || 98.25 % base || 2.40 % || — || Same / Social debt repayment contribution || 98.25 % base || 0.50 % || — || Same",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| CSG imposable | 2,40 % sur 98,25 % du salaire brut dans la limite de 192 240 € en 2026 | | CSG non imposable | 6,80 % sur 98,25 % du salaire brut dans la limite de 192 240 € en 2026 | | CRDS | 0,50 % sur 98,25 % du salaire brut dans la limite de 192 240 € en 2026 |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C12",
+   "artifact": "CCG",
+   "location": "Module 5.1, table T49 rows 1, 3-5, 7-10 (URSSAF general-scheme rates)",
+   "assertion": "1 || Health, maternity, disability, death || — || 13.00 % / 3 || Old-age, capped || 6.90 % || 8.55 % / 4 || Old-age, uncapped || 0.40 % || 2.11 % / 5 || Family allowances || — || 5.25 % / 7 || Autonomy solidarity contribution || — || 0.30 % / 8 || National housing aid fund (fewer than 50 employees) || — || 0.10 % on the capped band / 9 || National housing aid fund (50 employees or more) || — || 0.50 % on total pay / 10 || Social dialogue contribution || — (employer only) || 0.016 %",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Assurance maladie, maternité, invalidité, décès | * Taux réduit à 7% * Taux plein à 13% | | Contribution solidarité autonomie (CSA) | 0,30% | | Assurance vieillesse | 2,11% sur la totalité et 8,55% dans la limite du plafond | | Allocations familiales | * Taux réduit à 3,45% * Taux plein à 5,25% | | Contribution au dialogue social | 0,016% | [...] | Fnal (effectif de moins de 50 salariés) | 0,10% dans la limite du plafond | | Fnal (effectif de 50 salariés et plus) | 0,50% | [...] | Assurance vieillesse | 0,40 % sur la totalité et 6,90 % dans la limite du plafond |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C13",
+   "artifact": "CCG",
+   "location": "Module 3.1 Step 3, paragraph P173 (employees not tax-domiciled in France)",
+   "assertion": "Instead, an employee health insurance contribution (cotisation salariale d’assurance maladie, COTAM) of 5.50 % is due on the contribution base of Social Security Code Article L242-1",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "CSG-CRDS - personnes concernées",
+    "url": "https://www.urssaf.fr/accueil/employeur/cotisations/liste-cotisations/csg-crds.html",
+    "quote": "Les CSG-CRDS ne sont pas dues MAIS une cotisation salariale d’assurance maladie est alors due. Cette cotisation, au taux de 5,50%, est à déclarer à l'aide du code type de personnel (CTP) 206.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C14",
+   "artifact": "CCG",
+   "location": "Module 6.1, paragraph P478 (CPF-CDD)",
+   "assertion": "CPF-CDD contribution (1 %): employers owe 1 % of the social security base of employees on a fixed-term contract (CDD), whatever the headcount",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Contribution CPF-CDD | 1% |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C15",
+   "artifact": "CCG",
+   "location": "Module 6.2, table T77 (default withholding grid from 1 May 2026), all 20 bands",
+   "assertion": "Default withholding grid - metropolitan France, from 1 May 2026: Below EUR 1,635 || 0 % / EUR 1,635 to 1,697.99 || 0.5 % / EUR 2,315 to 2,737.99 || 5.3 % / EUR 25,937 to 55,557.99 || 38 % / EUR 55,558 and above || 43 % (20 bands)",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-BAREME-000037 du 07/04/2026 - Grilles des taux par défaut du PAS",
+    "url": "https://bofip.impots.gouv.fr/bofip/11255-PGP.html/identifiant=BOI-BAREME-000037-20260407",
+    "quote": "Grille des taux par défaut applicables aux contribuables domiciliés en métropole et hors de France à compter du 1 er mai 2026 | Base mensuelle de prélèvement | Taux applicable | | --- | --- | | Inférieure à 1 635 euros | 0 % | [...] | Supérieure ou égale à 2 315 euros et inférieure à 2 738 euros | 5,3 % | [...] | Supérieure ou égale à 25 937 euros et inférieure à 55 558 euros | 38 % | | Supérieure ou égale à 55 558 euros | 43 % |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "note": "All 20 band limits and rates compared one by one with the BOFiP table: identical (artifact upper bounds written as X.99 for 'inférieure à X+1')."
+  },
+  {
+   "id": "C16",
+   "artifact": "CCG",
+   "location": "Module 6.2, paragraphs P588 and P592 with table T76 (2025 grid carried over to 30 April 2026; grid chosen by payment date)",
+   "assertion": "Default withholding grid — metropolitan France, 1 January to 30 April 2026 (the 2025 grid, carried over because the Finance Act for 2026 was enacted on 19 February 2026): Below EUR 1,620 || 0 % ... EUR 55,062 and above || 43 %. The 2026 grid is the 2025 grid revalued by 0.9 %, the same indexation applied to the income tax scale. Both grids must be held simultaneously: the applicable grid is determined by the date the income is paid, so a payment made on 30 April 2026 uses the first grid and one made on 4 May 2026 uses the ",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-IR-PAS-20-20-30-10 - Taux par défaut, situations et modalités d'application (§120)",
+    "url": "https://bofip.impots.gouv.fr/bofip/11252-PGP.html/identifiant=BOI-IR-PAS-20-20-30-10-20180515",
+    "quote": "Enfin, le débiteur de la retenue à la source applique la grille en vigueur à la date du versement. Toutefois, en cas de modification des grilles de taux, il est admis que le débiteur applique les grilles actualisées aux revenus versés à compter du mois qui suit leur date d'entrée en vigueur.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "note": "T76 band values also compared with BOI-BAREME-000037-20250410 (1 620 / 1 683 ... 55 062 EUR): identical."
+  },
+  {
+   "id": "C17",
+   "artifact": "CCG",
+   "location": "Module 6.2, table T78 (CGI Article 182 A scale, income paid in 2026)",
+   "assertion": "Annual || Up to EUR 17,275 || EUR 17,276 to 50,112 || Above EUR 50,112 / Quarterly || Up to EUR 4,319 || EUR 4,320 to 12,528 || Above EUR 12,528 / Monthly || Up to EUR 1,440 || EUR 1,441 to 4,176 || Above EUR 4,176 / Weekly || Up to EUR 332 || EUR 333 to 964 || Above EUR 964 / Daily || Up to EUR 55 || EUR 56 to 161 || Above EUR 161. In the overseas departments the 12 % and 20 % rates fall to 8 % and 14.4 %.",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-BAREME-000043 du 02/04/2026 - Retenue à la source sur salaires des non-résidents (CGI art. 182 A)",
+    "url": "https://bofip.impots.gouv.fr/bofip/13631-PGP.html/identifiant=BOI-BAREME-000043-20260402",
+    "quote": "| 0 % pour la fraction | Inférieure ou égale à 17 275 | Inférieure ou égale à 4 319 | Inférieure ou égale à 1 440 | Inférieure ou égale à 332 | Inférieure ou égale à 55 | [...] | 20 % pour la fraction | Supérieure à 50 112 | Supérieure à 12 528 | Supérieure à 4 176 | Supérieure à 964 | Supérieure à 161 | [...] (1) Les taux de 12 % et 20 % sont réduits à 8 % et 14,4 % dans les départements d’outre-mer (DOM).",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C18",
+   "artifact": "CCG",
+   "location": "Module 3.1 Step 4, paragraphs P175-P176 (montant net social)",
+   "assertion": "The net social amount (montant net social) has been a compulsory payslip line since 1 July 2023 and is transmitted in the DSN. It is a defined statutory quantity, not a derived convenience figure: Net social amount = all remuneration and income paid, including benefits in kind and excluding the employer's financing of the collective guarantees of Social Security Code Article L911-1 (supplementary health, death-and-disability and supplementary pension cover), less all employee social contributions, compulsory and non-compu",
+   "risk": "high",
+   "source": {
+    "authority": "BOSS",
+    "title": "Actualité BOSS novembre 2023 - Mise à jour montant net social",
+    "url": "https://boss.gouv.fr/portail/accueil/actualites-boss-et-rescrits/actualites-boss/2023/novembre/mise-a-jour-montant-net-social.html",
+    "quote": "La définition a été mise à jour. L’ensemble des contributions correspondant à des garanties collectives au sens de l’article L. 911-1 du code de la sécurité sociale est exclu du calcul du montant net social (MNS).",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "note": "The live BOSS rubric (updated 02/10/2026) now lists the employer share as included; BOSS actualité of October 2026 states this applies to revenue due from 1 January 2027 on the basis of a draft decree, which the CCG records in its dated note P178. 2026 assertion therefore stands."
+  },
+  {
+   "id": "C19",
+   "artifact": "CCG",
+   "location": "Module 8.1, paragraph P818 (work accident daily benefit)",
+   "assertion": "Work accident and occupational disease. The daily benefit is 60 % of the daily wage for the first 28 days and 80 % from the 29th, with no waiting day, and the base is not subject to the 1.4 minimum-wage cap that applies to ordinary sickness. The daily wage is one 30.42nd of the pay of the calendar month before the stoppage, and the daily benefit may not exceed the net daily gain, that is the daily wage less a flat rate of 21 % (Social Security Code Articles R433-1, R433-3 and R433-4; Arrêté of 28 March 2013, Article 1). The ceiling bites from the 29th da",
+   "risk": "high",
+   "source": {
+    "authority": "Service-Public (DILA)",
+    "title": "Accident du travail : indemnités journalières pendant l'arrêt de travail",
+    "url": "https://www.service-public.fr/particuliers/vosdroits/F175",
+    "quote": "Ce salaire journalier est calculé en divisant le montant de votre salaire brut perçu le mois précédant le début de l'arrêt maladie par 30,42. [...] Les indemnités journalières correspondent à 60% de votre salaire journalier de référence. [...] Les indemnités journalières correspondent à 80% du salaire journalier de référence pour l'arrêt de travail à partir du 29 ème jour. [...] Le salaire journalier net correspond à 1/30,42 du salaire du mois précédent, diminué d'un taux forfaitaire de 21%. [...] à partir du 1 er jour qui suit l'arrêt du travail, sans délai de carence",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C20",
+   "artifact": "CCG",
+   "location": "Module 6.1.1, table T75 (progressive income tax scale)",
+   "assertion": "Up to EUR 11,600 || 0 % / EUR 11,601 to EUR 29,579 || 11 % / EUR 29,580 to EUR 84,577 || 30 % / EUR 84,578 to EUR 181,917 || 41 % / Above EUR 181,917 || 45 %",
+   "risk": "medium",
+   "source": {
+    "authority": "Service-Public (DILA)",
+    "title": "Quel est le barème de l'impôt sur le revenu ? - vérifié le 15 avril 2026",
+    "url": "https://www.service-public.fr/particuliers/vosdroits/F1419",
+    "quote": "| Jusqu'à 11 600€ | 0% | | De 11 601€ à 29 579€ | 11% | | De 29 580€ à 84 577€ | 30% | | De 84 578€ à 181 917€ | 41% | | Plus de 181 917€ | 45% |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "C21",
+   "artifact": "CCG",
+   "location": "Module 5.1, table T49 row 25 (training and apprenticeship)",
+   "assertion": "25 || Single training and apprenticeship contribution || — || 0.55 % or 1.00 % training, plus 0.68 % apprenticeship tax",
+   "risk": "medium",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Contribution formation professionnelle et taxe d'apprentissage | * Pour une entreprise de moins de 11 salariés:0,55% * Pour une entreprise de 11 salariés et plus:1% | | Contribution CPF-CDD | 1% | | Taxe d'apprentissage | * Part principale à 0,59% * Solde à 0,09% |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W01",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D345 (FR-040 Monthly social security ceiling)",
+   "assertion": "EUR 4,005 per month and EUR 48,060 per year for 2026 (Arrete of 22 December 2025). The annual ceiling is EXACTLY twelve times the monthly ceiling. Other periodicities: quarterly EUR 12,015, daily EUR 220, hourly EUR 30 for engagements short",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Plafonds de la Sécurité sociale 2026",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/plafonds-securite-sociale.html",
+    "quote": "| Année | 48 060€ | | Trimestre | 12 015€ | | Mois | 4 005€ | | Quinzaine | 2 003€ | | Semaine | 924€ | | Jour | 220€ | | Heure | 30€ |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W02",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D329 (FR-024 Unified degressive general reduction)",
+   "assertion": "C = Tmin + Tdelta x [ 0.5 x ( 3 x annual reference minimum wage / annual gross pay - 1 ) ] ^ 1.75, with for 2026: Tmin = 0.0200; Tdelta = 0.3781 where the employer pays the housing fund at 0.10% and 0.3821 at 0.50%; exponent 1.75; maximum coefficient 0.3981 or 0.4021 respectively. ANNUAL REFERENCE MINIMUM WAGE = EUR 21,876.40 (EUR 12.02 x 1,820 hours), FROZEN FOR THE WHOLE OF 2026 by Decret n. 2026-509 of 12 June 2026 - the 1 June minimum wage increase is NOT passed through, so from 1 June an employer pays a higher wage but calculates its relief against ",
+   "risk": "high",
+   "source": {
+    "authority": "Service-Public (DILA)",
+    "title": "RGDU : quel est le montant du Smic brut retenu pour 2026 ? (Décret n° 2026-509 du 12 juin 2026)",
+    "url": "https://entreprendre.service-public.gouv.fr/actualites/A18966",
+    "quote": "T min: 0,0200 (seuil minimal d’exonération de 2%) T delta: 0,3781 (pour les employeurs redevables de la [...] à 0,10%) ou 0,3821 (pour les employeurs redevables de la Fnal à 0,50%) Valeur P: 1,75 [...] Le décret du 12 juin 2026 indique que, pour l’année 2026, la valeur du Smic retenue est celle fixée au 1 er janvier 2026.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W03",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D326 (FR-021 Employer unemployment insurance contribution)",
+   "assertion": "4.00% on gross pay up to FOUR MONTHLY CEILINGS - EUR 16,020 for 2026 (unemployment insurance convention of 15 November 2024). THERE IS NO EMPLOYEE UNEMPLOYMENT CONTRIBUTION: it was abolished on 1 Janu",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Contribution assurance chômage | 4,00% dans la limite de 192 240 € en 2026 |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W04",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D327 (FR-022 AGS)",
+   "assertion": "0.25% on the same four-ceiling base as unemployment insurance - EUR 16,020 per month for 2026. Employer-only. Excluded for a company officer treated as an employee, on the same reasoning as unemployment insurance.",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Cotisation AGS | Dans la limite de 192 240 € en 2026: * 0,25%",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W05",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D328 (FR-023 Apec)",
+   "assertion": "0.036% employer and 0.024% employee on pay up to FOUR MONTHLY CEILINGS (EUR 16,020 per month; EUR 192,240 a year), MANAGERIAL GRADE ONLY",
+   "risk": "high",
+   "source": {
+    "authority": "Agirc-Arrco",
+    "title": "Circulaire Agirc-Arrco 2025-16-SG-DRJ - Paramètres 2026",
+    "url": "https://www.agirc-arrco.fr/storage/CirculaireAgircArrco2025-16sg-drj.pdf",
+    "quote": "1 Ce qui correspond pour 2026 à une limite de 192 240 € par an, soit 16 020 € par mois. [...] Salaires des cadres dans la limite de 4 PSS1 APEC [...] 0,06 % 0,036 % 0,024 %",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W06",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D49 (21645 CET and Apec, DSN codes)",
+   "assertion": "DSN: the CET is declared with the Agirc-Arrco retirement and CEG contributions under code 131; code 132 carries the Apec contribution only.",
+   "risk": "medium",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "131 - Cotisation régime unifié Agirc-Arrco 132 - Cotisation Apec",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W07",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D338 (FR-033 CPF-CDD)",
+   "assertion": "1 % of the social security base of employees on a fixed-term contract (CDD), financing their personal training account, whatever the headcount (Labour Code Article L6331-6, version in force since 1 January 2022). Contribution code '129'.",
+   "risk": "high",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "129 - Contribution dédiée au financement du Compte Personnel de Formation pour les titulaires de CDD (CPF -CDD)",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS",
+   "note": "Rate 1 % also confirmed by URSSAF 'Taux de cotisations - Secteur privé': '| Contribution CPF-CDD | 1% |'."
+  },
+  {
+   "id": "W08",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D380 (FR-079 COTAM)",
+   "assertion": "5.50% employee health insurance contribution (cotisation salariale d'assurance maladie, COTAM) due by an employee who is covered by a compulsory French health insurance scheme but is NOT tax-domiciled in France",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "CSG-CRDS - personnes concernées",
+    "url": "https://www.urssaf.fr/accueil/employeur/cotisations/liste-cotisations/csg-crds.html",
+    "quote": "Les CSG-CRDS ne sont pas dues MAIS une cotisation salariale d’assurance maladie est alors due. Cette cotisation, au taux de 5,50%, est à déclarer à l'aide du code type de personnel (CTP) 206.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W09",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D277 and N277 (62876 Daily benefit for a work accident or occupational disease under subrogation; Subject to Tax = Yes)",
+   "assertion": "The benefit is EXEMPT FROM SOCIAL SECURITY CONTRIBUTIONS but SUBJECT TO CSG AT THE REDUCED 6.20% RATE and to CRDS at 0.50%, and it is TAXABLE ON 50% OF ITS AMOUNT (General Tax Code Article 81, 8°) - unlike ordinary sickness benefits, which are fully taxable.",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-RSA-CHAMP-20-30-20 - Indemnités journalières (maladie, accident, maternité)",
+    "url": "https://bofip.impots.gouv.fr/bofip/5606-PGP.html/identifiant=BOI-RSA-CHAMP-20-30-20-20160302",
+    "quote": "les indemnités journalières versées par les organismes de sécurité sociale et de la Mutualité sociale agricole ou pour leur compte sont soumises à l'impôt sur le revenu suivant les règles applicables aux traitements et salaires, à l'exclusion : [...] - des indemnités, à hauteur de 50 % de leur montant, allouées aux victimes d'accidents du travail ou de maladies professionnelles",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "finding": "",
+   "note": "Re-checked 2026-10-09 against the same source after the artifact text was aligned with it."
+  },
+  {
+   "id": "W10",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D354 (FR-049 Net social amount)",
+   "assertion": "DSN: declared in block S21.G00.58 with type S21.G00.58.003 = '03 - Montant net social' and the amount in S21.G00.58.004",
+   "risk": "high",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Type S21.G00.58.003 ElmtRevenuCalculeNet.Type [...] 03 - Montant net social [...] Montant S21.G00.58.004 ElmtRevenuCalculeNet.Montant Montant du revenu calculé en net.",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W11",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D316 (FR-011 Net taxable amount)",
+   "assertion": "PLUS the employer contribution to the compulsory health cover, PLUS the employer contribution to a death-and-disability scheme ONLY FOR THE PART ABOVE the General Tax Code Article 83 1° quater limit (5% of the annual ceiling plus 2% of pay, capped at 2% of eight annual ceilings)",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-RSA-BASE-30-10-20 du 10/08/2026 - Cotisations dont la déduction est plafonnée",
+    "url": "https://bofip.impots.gouv.fr/bofip/5956-PGP.html/identifiant=BOI-RSA-BASE-30-10-20-20260810",
+    "quote": "Les cotisations à la charge de l’employeur et, le cas échéant, du comité d’entreprise qui correspondent à des garanties portant sur le remboursement ou l’indemnisation de frais de santé (maladie, maternité ou accident) constituent des compléments de rémunération qui sont compris dans la rémunération imposable du salarié [...] égale à la somme des deux éléments suivants: * 5 % du PASS ; * et 2 % de la rémunération annuelle brute [...] * sans que le total ainsi obtenu ne puisse excéder 2 % de huit fois le PASS.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W12",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D314 (FR-009 Non-resident withholding, CGI art. 182 A)",
+   "assertion": "monthly for 2026: 0% up to EUR 1,440, 12% from EUR 1,441 to EUR 4,176, 20% above EUR 4,176; annually EUR 17,275 and EUR 50,112; quarterly EUR 4,319 and EUR 12,528; weekly EUR 332 and EUR 964; daily EUR 55 and EUR 161",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-BAREME-000043 du 02/04/2026 - Retenue à la source sur salaires des non-résidents (CGI art. 182 A)",
+    "url": "https://bofip.impots.gouv.fr/bofip/13631-PGP.html/identifiant=BOI-BAREME-000043-20260402",
+    "quote": "| 0 % pour la fraction | Inférieure ou égale à 17 275 | Inférieure ou égale à 4 319 | Inférieure ou égale à 1 440 | Inférieure ou égale à 332 | Inférieure ou égale à 55 | [...] | 20 % pour la fraction | Supérieure à 50 112 | Supérieure à 12 528 | Supérieure à 4 176 | Supérieure à 964 | Supérieure à 161 |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "W13",
+   "artifact": "WTC",
+   "location": "Wage Type Catalogue!D312 (FR-007 Default withholding grid)",
+   "assertion": "THE APPLICABLE GRID IS DECIDED BY THE DATE THE INCOME IS PAID: a payment made on 30 April uses the first grid and one made on 4 May uses the second, and no retrospective adjustment is made for January to April. TOLERANCE: the payer may apply an updated grid to income paid from the month following its entry into force (BOI-IR-PAS-20-20-30-10 §120).",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "BOI-IR-PAS-20-20-30-10 - Taux par défaut, situations et modalités d'application (§120)",
+    "url": "https://bofip.impots.gouv.fr/bofip/11252-PGP.html/identifiant=BOI-IR-PAS-20-20-30-10-20180515",
+    "quote": "Enfin, le débiteur de la retenue à la source applique la grille en vigueur à la date du versement. Toutefois, en cas de modification des grilles de taux, il est admis que le débiteur applique les grilles actualisées aux revenus versés à compter du mois qui suit leur date d'entrée en vigueur.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "D01",
+   "artifact": "DD",
+   "location": "ID Information!J5 (Employee Social Security Number, NIR)",
+   "assertion": "13 digits: S(1) YY(2) MM(2) DD(2) CCC(3) OOO(3). Corsican birth departments are coded 2A and 2B",
+   "risk": "medium",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Ce numéro est composé de 13 chiffres et d'une clé de 2 chiffres. La clé n'est pas à déclarer dans cette rubrique. [...] Le Nir doit avoir la forme SAAMMDDCCCNNN avec : [...] DD = département de naissance de la personne physique doit être compris entre 01 et 99 ou être égal à 2A ou 2B",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "D02",
+   "artifact": "DD",
+   "location": "ID Information!J13 / J14 / J15 (SIREN, SIRET, NIC)",
+   "assertion": "SIREN: 9 digits, Luhn check; SIRET: 14 digits = SIREN (9) + NIC (5), Luhn check; NIC: 5 digits, last digit is a check digit",
+   "risk": "medium",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Le numéro SIREN est un identifiant de neuf chiffres attribué à chaque unité légale. [...] Le neuvième chiffre est un chiffre de contrôle de validité du numéro. [...] Le Numéro interne de classement (NIC) est composé de 5 chiffres ajoutés au SIREN de l'entreprise pour identifier un établissement.",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS",
+   "note": "Lengths and check digit confirmed; the 'Luhn' algorithm name is not stated in the cahier (it says 'vérification de la clé') and was not asserted."
+  },
+  {
+   "id": "D03",
+   "artifact": "DD",
+   "location": "Country Fields!K32 / W32 (Contract Nature)",
+   "assertion": "Contract Nature: 2-character code; Contract and employment. Apprenticeship and professionalisation contracts are NOT values of this field: an apprentice is declared with the contract nature of the underlying contract, permanent or fixe",
+   "risk": "medium",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Nature du contrat S21.G00.40.007 Contrat.Nature [...] X [2,2] 01 - Contrat de travail à durée indéterminée de droit privé 02 - Contrat de travail à durée déterminée de droit privé 03 - Contrat de mission (contrat de travail temporaire)",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "D04",
+   "artifact": "DD",
+   "location": "Country Fields!K109 (Withholding-at-Source Rate)",
+   "assertion": "Percentage to 2 decimals, for example 7.50",
+   "risk": "medium",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Taux de prélèvement à la source S21.G00.50.006 VersementIndividu.TauxPAS Taux de prélèvement à la source précompté appliqué sur le mois de versement. N [4,5] CSL 00 : [0-9]{1,2}\\.[0-9]{2}",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "D05",
+   "artifact": "DD",
+   "location": "Country Fields!K115 (Contract Termination Reason)",
+   "assertion": "3-character code",
+   "risk": "low",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Motif de la rupture du contrat S21.G00.62.002 ContratFin.Motif Motif qualifiant la rupture du contrat de travail, selon sa nature.",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS",
+   "note": "Field length [3,3] read in the same rubric definition, p. 271-272."
+  },
+  {
+   "id": "D06",
+   "artifact": "DD",
+   "location": "Country Fields!W115 (Contract Termination Reason - notes)",
+   "assertion": "The employer contribution on a mutually agreed termination is 40% for 2026, up from 30%, under the Social Security Financing Act for 2026.",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Les indemnités de rupture conventionnelle",
+    "url": "https://www.urssaf.fr/accueil/employeur/embaucher-gerer-salaries/gerer-fin-relation-travail/rupture-conventionnelle.html",
+    "quote": "Contribution patronale spécifique de 40% [...] En 2026, son taux est passé de 30% à 40%.",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "D07",
+   "artifact": "DD",
+   "location": "Country Fields!K40 (Supplementary Pension Category Status)",
+   "assertion": "2-character code",
+   "risk": "low",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Code statut catégoriel Retraite Complémentaire obligatoire S21.G00.40.003 Contrat.StatutRC [...] X [2,2] 01 - cadre (article 4 et 4bis) 02 - extension cadre pour retraite complémentaire 04 - non cadre",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "D08",
+   "artifact": "DD",
+   "location": "Country Fields!W40 (Supplementary Pension Category Status - notes)",
+   "assertion": "Failure to insure a managerial-grade employee makes the employer liable to the beneficiaries for a sum equal to three times the annual social security ceiling (EUR 144,180 for 2026; national agreement of 17 November 2017)",
+   "risk": "high",
+   "source": {
+    "authority": "Légifrance",
+    "title": "Accord national interprofessionnel du 17 novembre 2017 relatif à la prévoyance des cadres",
+    "url": "https://www.legifrance.gouv.fr/conv_coll/id/KALITEXT000036732007",
+    "quote": "sont tenus de verser aux ayants droit du cadre ou du VRP décédé une somme égale à trois fois le plafond annuel",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "finding": "",
+   "note": "Re-checked 2026-10-09 against the same source after the artifact text was aligned with it."
+  },
+  {
+   "id": "R01",
+   "artifact": "RSPEC",
+   "location": "FR-DSN-001 DSN Mensuelle Spec!G99 (S21.G00.82.005 control rules)",
+   "assertion": "CCH-12: Si la rubrique \"Code de cotisation - S21.G00.82.002\" est renseignée avec la valeur \"024 - Cotisation assise sur le nombre d'heures d'intérim\" ou \"054 - Cotisation assise sur le chiffre d'affaires\", la rubrique \"Référence réglementaire ou contractuelle - S21.G00.82.005\" doit être renseignée avec une valeur comprise entre 01 et 37.",
+   "risk": "high",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "CCH-12 : Si la rubrique \"Code de cotisation - S21.G00.82.002\" est renseignée avec la valeur \"024 - Cotisation assise sur le nombre d'heures d'intérim\" ou \"054 - Cotisation assise sur le chiffre d'affaires\", la rubrique \"Référence réglementaire ou contractuelle - S21.G00.82.005\" doit être renseignée avec une valeur comprise entre 01 et 37. CCH-14 : Si la rubrique \"Code de cotisation - S21.G00.82.002\" est renseignée avec une valeur de code comprise dans la plage 001 à 020, 036 à 040, ou égale à \"046\" ou \"090\"",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "R02",
+   "artifact": "RSPEC",
+   "location": "FR-DSN-001 DSN Mensuelle Spec!G414 / J414 / M414 (S21.G00.56.002 Type d'erreur)",
+   "assertion": "CCH-11: Si la rubrique « Type d’erreur – S21.G00.56.002 » est renseignée avec la valeur « 01 - Rectification sur rémunération nette fiscale » alors les rubriques « Régularisation de la rémunération nette fiscale - S21.G00.56.003 », « Taux déclaré le mois de l’erreur – S21.G00.56.006 » et « Régularisation du montant soumis au PAS - S21.G00.56.010 » sont obligatoires.",
+   "risk": "high",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "CCH-11 : Si la rubrique « Type d’erreur – S21.G00.56.002 » est renseignée avec la valeur « 01 - Rectification sur rémunération nette fiscale » alors les rubriques « Régularisation de la rémunération nette fiscale - S21.G00.56.003 », « Taux déclaré le mois de l’erreur – S21.G00.56.006 » et « Régularisation du montant soumis au PAS - S21.G00.56.010 » sont obligatoires. [...] 01 - Rectification sur rémunération nette fiscale 02 - Rectification sur taux 03 - Cas d’indu avec rémunération nette fiscale du mois courant négative 04 - Rectification sur rémunération nette fiscale sans PAS",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS",
+   "note": "M414 'closed list of 4 values' and J414 'Code X(2-2)' also confirmed against the same page."
+  },
+  {
+   "id": "R03",
+   "artifact": "RSPEC",
+   "location": "FR-DSN-001 DSN Mensuelle Spec!J441 / K441 / M441 (S21.G00.81.001 Code de cotisation)",
+   "assertion": "Code X(3-3) - closed list; example 076   (Cotisation Assurance Vieillesse); Contribution code. A code from a closed list of 165 values published in the norm (reproduced on the Field Options sheet), 3 to 3 characters, carried in the 'Cotisation individuelle' block (S21.G00.81, cardinality {0,*}) at path CotisationIndividuelle.CodeCotisation. Mandatory in declaration nature '01 - DSN Mensuelle'.\n\nNorm definition, CT2026.1.2, quoted verbatim: « Code identifiant la nature de la donnée attendue par l'organisme au titre de la période de rattachement concernée. Modalité de valorisation : - AGIRC-ARRCO : \"105\" (pour régularisation des périodes antérieures à 2025), \"106\", \"109\", \"110\", \"111\", \"112\", \"113\", \"131\", \"132\", \"915\" - Caisses de congés payés (CIBTP) : \"110\", \"112\",",
+   "risk": "high",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "- AGIRC-ARRCO : \"105\" (pour régularisation des périodes antérieures à 2025), \"106\", \"109\", \"110\", \"111\", \"112\", \"113\", \"131\", \"132\", \"915\" [...] 076 - Cotisation Assurance Vieillesse",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "R04",
+   "artifact": "RSPEC",
+   "location": "FR-DSN-001 DSN Mensuelle Spec!I447 / J447 (S21.G00.81.007 Taux de cotisation)",
+   "assertion": "N(4-7)  regex: [0]?([0-9]{1,2}\\.[0-9]{2,3}|100\\.000|100\\.00)",
+   "risk": "medium",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "Taux de cotisation S21.G00.81.007 CotisationIndividuelle.TauxCotisation [...] N [4,7] CSL 00 : [0]?([0-9]{1,2}\\.[0-9]{2,3}|100\\.000|100\\.00)",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "R05",
+   "artifact": "RSPEC",
+   "location": "FR-DSN-001 DSN Mensuelle Spec!G444 (S21.G00.81.004 control rule CCH-12)",
+   "assertion": "CCH-12: Si la rubrique \"Code de cotisation - S21.G00.81.001\" est renseignée avec la valeur \"105 - Montant de cotisation Régime Unifié Agirc-Arrco, y compris Apec\", \"131 - Cotisation régime unifié Agirc-Arrco\" ou \"132 - Cotisations Apec\", alors la rubrique \"Montant de cotisation - S21.G00.81.004\" doit être renseignée.",
+   "risk": "high",
+   "source": {
+    "authority": "GIP-MDS / net-entreprises",
+    "title": "Cahier technique DSN CT2026.1.2 (2025-12-24)",
+    "url": "https://www.net-entreprises.fr/media/documentation/dsn-cahier-technique-2026.1.pdf",
+    "quote": "CCH-12 : Si la rubrique \"Code de cotisation - S21.G00.81.001\" est renseignée avec la valeur \"105 - Montant de cotisation Régime Unifié Agirc-Arrco, y compris Apec\", \"131 - Cotisation régime unifié Agirc-Arrco\" ou \"132 - Cotisations Apec\", alors la rubrique \"Montant de cotisation - S21.G00.81.004\" doit être renseignée.",
+    "consulted_on": "2026-10-09",
+    "page": null
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "R06",
+   "artifact": "RSPEC",
+   "location": "FR-URSSAF-004 Report Matrix!B8 (apprenticeship tax rates)",
+   "assertion": "A tax on payroll, hypothecated to apprenticeship funding. Total 0.68 % of payroll (CT L6241-1-1 II), split 0.59 % principal (collected monthly) and 0.09 % balance (this annual declaration, CTP 995). Alsace-Moselle establishments: 0.44 %, ALL monthly (CTP 993) - NO solde.",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Taux de cotisations - Secteur privé",
+    "url": "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html",
+    "quote": "| Taxe d'apprentissage | * Part principale à 0,59% * Solde à 0,09% | | Taxe d'apprentissage spécifique aux établissements situés dans les départements du Haut-Rhin, Bas-Rhin et de la Moselle | * Part principale à 0,44% * Solde - Néant |",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS",
+   "note": "CTP codes 992/993/995 in the same cell were not asserted."
+  },
+  {
+   "id": "R07",
+   "artifact": "RSPEC",
+   "location": "FR-DGFIP-003 Taxe Sur Les Salaires Spec!M15 (band thresholds 2026)",
+   "assertion": "The band of each individual's gross remuneration above EUR 9,229 a year (EUR 769 a month, EUR 2,307 a quarter) and not exceeding EUR 18,423 a year (EUR 1,535 a month, EUR 4,606 a quarter), for remuneration paid from 1 January 2026.",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "Notice 2501-NOT-SD 2026 - Taxe sur les salaires",
+    "url": "https://www.impots.gouv.fr/sites/default/files/formulaires/2501-sd/2026/2501-sd_5272.pdf",
+    "quote": "Le 1er taux majoré (4,25 %) est calculé sur la fraction de ces rémunérations dépassant 9 229 € à l'année soit mensuellement 769 € et n'excédant pas 18 423 € soit mensuellement 1 535 € [...] Le 1er taux majoré (4,25%) est calculé sur la fraction de ces rémunérations dépassant 2 307 € (soit 9 229 € à l'année) et n'excédant pas 4 606 €",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "R08",
+   "artifact": "RSPEC",
+   "location": "FR-DGFIP-003 Taxe Sur Les Salaires Spec!M21 / M22 (additional rates)",
+   "assertion": "Line 02 multiplied by 4.25 % - the ADDITIONAL rate on the first band, printed on form 2502 / Line 03 multiplied by 9.35 % - the ADDITIONAL rate on the second band, printed on form 2502-SD as « 08 A2 x 9,35 % »; with the 4.25 % of line 06 the band bears 13.60 % in total (CGI art. 231 par. 2 bi",
+   "risk": "high",
+   "source": {
+    "authority": "DGFiP",
+    "title": "Notice 2501-NOT-SD 2026 - Taxe sur les salaires",
+    "url": "https://www.impots.gouv.fr/sites/default/files/formulaires/2501-sd/2026/2501-sd_5272.pdf",
+    "quote": "Le 2ème taux majoré (9,35 %) est calculé sur la fraction de ces rémunérations dépassant 18 423 € soit mensuellement 1 535 € [...] 1 er salarié Base taux normal 1 000 € x 4,25% = 42,50 €",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "PASS"
+  },
+  {
+   "id": "R09",
+   "artifact": "RSPEC",
+   "location": "FR-URSSAF-001 Report Matrix!H27 (DPAE file format)",
+   "assertion": "Format 120 flat text: 990 bytes per record including LF, ISO-8859-1, 24 real fields (SIR URSSAF-DPAE P4); the FR_DUE_Upload XML variant exists but its XSD is not published. Returns 10 (AEE / avis de rejet), 11 (certificat de conformité / bilan), 20 (BIS) and 41 (AR).",
+   "risk": "high",
+   "source": {
+    "authority": "URSSAF",
+    "title": "Transmission de la DPAE par CFT : Format 120 - Dessin d'enregistrement v5.4",
+    "url": "https://www2.due.urssaf.fr/static_declarant/cft/v5.4_FormatDPAE_CFT.pdf",
+    "quote": "",
+    "consulted_on": "2026-10-09"
+   },
+   "result": "UNVERIFIED",
+   "note": "The format-120 dessin d'enregistrement (www2.due.urssaf.fr) could not be reached in this session (connection reset via curl, WebFetch and proxy). The URSSAF API DPAE implementation guide (https://www.urssaf.fr/files/live/sites/urssaffr/files/outils-documentation/guides/Guide-API-DPAE-Impl.pdf, read today) confirms only that flat and XML DPAE formats are accepted and lists return codes 10/11/20/41; it does not give the record length or field count. Not guessed."
+  }
+ ]
+}

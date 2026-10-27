@@ -10,7 +10,7 @@ etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
 ccg: v1.0
 ccg_data: 
-wtc: 
+wtc: v1.0
 wtc_data: 
 dd: v1.0
 dd_data: 
@@ -24,6 +24,7 @@ tickets_abertos:
 tickets_conferidos_em: 
 payslip_data: 
 versoes_fonte: "nome do arquivo no Drive (Country Folders/Hungary), lido em 2026-10-27; sem data de versão"
+obs_versoes: "WTC vazio→v1.0 (HU-WTC-001-v1_0.gsheet; versão com sublinhado, 2ª leitura do Drive)"
 atualizado_em: 2026-10-27
 ---
 # Hungria

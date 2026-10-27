@@ -8,7 +8,7 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: v1.1
+ccg: v1.4
 ccg_data: 
 wtc: v1.0
 wtc_data: 
@@ -23,6 +23,7 @@ skill: "payroll-compliance-egypt"
 tickets_abertos: 
 tickets_conferidos_em: 
 versoes_fonte: "nome do arquivo no Drive (Country Folders/Egypt), lido em 2026-10-27; sem data de versão"
+obs_versoes: "CCG v1.1→v1.4 (EG-CCG-001-v1_4-statutory-leave-country-standard.docx; versão com sublinhado, 2ª leitura do Drive)"
 atualizado_em: 2026-10-27
 ---
 # Egito

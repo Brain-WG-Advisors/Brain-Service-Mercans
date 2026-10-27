@@ -10,7 +10,7 @@ etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
 ccg: v2.3
 ccg_data: 
-wtc: 
+wtc: v3.2
 wtc_data: 
 dd: v3.2
 dd_data: 
@@ -24,6 +24,7 @@ tickets_abertos:
 tickets_conferidos_em: 
 payslip_data: 
 versoes_fonte: "nome do arquivo no Drive (Country Folders/Romania), lido em 2026-10-27; sem data de versão"
+obs_versoes: "WTC vazio→v3.2 (RO-WTC-V3_2.gsheet; versão com sublinhado, 2ª leitura do Drive)"
 atualizado_em: 2026-10-27
 ---
 # Romênia

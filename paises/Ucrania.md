@@ -8,8 +8,8 @@ etapa_design_data: 2026-09-28
 etapa_producao: 
 etapa_suporte: "5 aberto(s): HRBS-14255, HRBS-15216, SR-161, SR-414, SR-415"
 etapa_suporte_data: 2026-10-27
-ccg: "V1.5"
-ccg_data: 2026-09-21
+ccg: v1.6
+ccg_data: 
 wtc: "V4.4"
 wtc_data: 2026-10-26
 dd: v4.3
@@ -23,7 +23,7 @@ skill:
 tickets_abertos: 5
 tickets_conferidos_em: 2026-10-27
 versoes_fonte: "nome do arquivo no Drive (Country Folders/Ukraine), lido em 2026-10-27; sem data de versão"
-obs_versoes: "DD V3.10→v4.3 (Ukraine_Data_Dictionary_V4.3.gsheet)"
+obs_versoes: "DD V3.10→v4.3 (Ukraine_Data_Dictionary_V4.3.gsheet); CCG V1.5→v1.6 (Ukraine_Country_Configuration_Guide_FY2026-V1_6.gdoc; versão com sublinhado, 2ª leitura do Drive)"
 atualizado_em: 2026-10-27
 ---
 # Ucrânia
@@ -173,6 +173,8 @@ Conteúdo estatutário geral: não há skill de país. Abaixo, só o discutido e
 - [[internal-certification/Ukraine/Altium - 2026-09/02 Validation/summary_EN|summary_EN]]: Altium - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
 
 ## Pendências
+- [ ] Spec 4DF v3.3 (Drive), Option Mappers B72: código 157 rotulado "Дохід нерезидента (загальний) / Non-resident income — general"; 157 é renda paga a FOP (PKU 177.8). Gross Income E339 (62942 → 157) correto. Achado no teste de exatidão de 2026-10-27 ([[testes/exatidao]])
+- [ ] WTC UA V4.3: texto de justificativa genérico nas linhas 65808 (Life Insurance BIK) e 62942 ("no ESV charged / 126 or 118") contradiz as flags (65808 ESV = Yes; 62942 PIT/Military/ESV = No, 4DF 157). Achado no teste de exatidão de 2026-10-27 ([[testes/exatidao]])
 - [x] DD V4.3 (2026-10-20, SR-415): importada (gsheet 09:55) e comentário enviado (12:56 UTC). Campos novos `derzhstat_region_code`, `derzhstat_district_code`, `statistical_district_code` (Country Fields 86–88). Conferência em `Research Pipeline/Ukraine/2026-10-20-SR-415-DD-V4.3/CONFERENCIA.md`
 - [ ] DD UA, Country Fields O85 (C_STI_ORIG), fora do pedido: o texto "= C_REG × 100 + C_RAJ…" virou fórmula no Google Sheets e aparece `#ERROR!` (V4.2 e V4.3). Corrigir na próxima versão — Wallisson
 - [ ] SPR_SSCU (diretório de órgãos do Держстат): só existe publicada a versão de 2016 (`spr_sscu_2016.ZIP`), anterior à reforma distrital de 2020; os campos C_REG/C_RAJ do Держстат na DD V4.3 não têm lista de valores. Confirmar com cliente/Держстат os códigos atuais quando houver caso real — nós

@@ -45,7 +45,7 @@ Source: Senado, http://www.secretariasenado.gov.co/senado/basedoc/ley_0100_1993_
   > "A partir del año 2022, se aplicará la siguiente tabla: [Mesada pensional en SMLMV / Cotización mensual en salud] 1 SMLMV 4% · >1 SMLMV y hasta 2 SMLMV 10% · >2 SMLMV y hasta 5 SMLMV 12% · >5 SMLMV y hasta 8 SMLMV 12% · >8 SMLMV 12%"
 - **Inciso added by Ley 2294/2023 art. 78** (D.O. 52.400 of 19-05-2023). The editor notes the four-year life of development plans.
   > "El aporte a salud a cargo de los pensionados que devengan entre 2 y 3 salarios mínimos se reducirá del 12% al 10%, el cual regirá a partir de la vigencia de 2024 previa reglamentación del Gobierno Nacional [...]"
-- Colpensiones (official, https://www.colpensiones.gov.co/publicaciones/4994/...) says it applied the 10% for the 2-3 SMMLV band from January 2024 under Ley 2294 art. 78 and Res. MSPS 1271/2023. **Side finding, not asked:** the AT3 v15 tariff table (p. 113, "1 de enero de 2022 en adelante") still shows only "4% 10% 12%", with no separate 2-3 SMMLV row. The band boundaries the operator applies should be checked against Res. 1271/2023 (local copy: `raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-PILA-pensionados.pdf`).
+- Colpensiones (official, https://www.colpensiones.gov.co/publicaciones/4994/...) says it applied the 10% for the 2-3 SMMLV band from January 2024 under Ley 2294 art. 78 and Res. MSPS 1271/2023. **Side finding, not asked:** the AT3 v15 tariff table (p. 113, "1 de enero de 2022 en adelante") still shows only "4% 10% 12%", with no separate 2-3 SMMLV row. The band boundaries the operator applies should be checked against Res. 1271/2023 (local copy: [[raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-PILA-pensionados.pdf|2026-10-21-Res-MSPS-1271-2023-PILA-pensionados.pdf]]).
 - **No later law amending art. 204 was found on Senado.** The page's notes stop at Ley 2294/2023.
 
 **The statute does not mention mesadas adicionales.** The operative words are "cotización mensual" and "la respectiva mesada pensional", and parágrafo 5 uses the band "Mesada pensional ... / Cotización mensual en salud".
@@ -90,7 +90,7 @@ Caveat: AT3 v15 already reflects Ley 2381/2024 (the "Sistema de Protección Soci
 
 ### Q1-F5. PILA AT3 v15 and the mesada adicional
 
-Local copy: `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf` (AT3 v15, 24-07-2026, 133 pp.). I extracted the text with pypdf and searched for `adicional|junio|diciembre|prima|trece|catorce`. **Every "adicional" hit is "UPC adicional"** or "aporte adicional" to the FSP (p. 60). None concerns the mesadas adicionales.
+Local copy: [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf|2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf]] (AT3 v15, 24-07-2026, 133 pp.). I extracted the text with pypdf and searched for `adicional|junio|diciembre|prima|trece|catorce`. **Every "adicional" hit is "UPC adicional"** or "aporte adicional" to the FSP (p. 60). None concerns the mesadas adicionales.
 
 - **p. 64, 2.2.2.27 Campo 58:**
   > "Este campo corresponde al valor de la mesada pensional reconocida, puede ser reportado por un valor mayor a veinticinco (25) salarios mínimos [...] y será tomado como base para el cálculo de los aportes al Fondo de Solidaridad Pensional [...] y para los aportes a caja de compensación familiar."
@@ -114,7 +114,7 @@ Local copy: `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensi
 
 ### Q2-F1. What the spec says (read with openpyxl, read_only)
 
-File: `Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx`.
+File: [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx|CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx]].
 
 - **Consignacion Cesantias Spec, A38:M43.** A38 header: "monthly advance deposit - ley 2466 de 2025 art. 64 par. 1 (not yet operable)". Rows MA01-MA05 (agreement flag, base, 8.33% amount, PILA contribution type, year-end adjustment). Each M cell ends: "The MinTrabajo draft decree amending Decree 1072 of 2015 (proyecto_decreto_cesantias_2026.pdf) is not in force. Build the field and keep the feature switched OFF until the decree is published AND the MinSalud PILA regulation exists."
 - **File Structure, B64:B66:** the advance is routed to PILA, not to this file. B65 says the decree is a draft and gives the 6 + 6 month lead time. B66 covers the annual consolidation and the 14 February deadline.
@@ -129,7 +129,7 @@ The Senado page shows no "reglamentado por" note on art. 64.
 
 ### Q2-F3. Status of the decree and of the PILA regulation (as of 2026-10-23)
 
-1. **The draft text** (local: `Research Pipeline/Colombia/CO-compliance/00-official-sources/pdfs/proyecto_decreto_cesantias_2026.pdf`, text in `_txt/proyecto_decreto_cesantias.txt`) is headed "DECRETO NÚMERO DE 2026 ( )", with no number and no date. It modifies arts. 2.2.1.3.1, 2.2.1.3.4, 2.2.1.3.5 and 2.2.1.3.13 of Decreto 1072/2015. Art. 1 par. 2:
+1. **The draft text** (local: [[Research Pipeline/Colombia/CO-compliance/00-official-sources/pdfs/proyecto_decreto_cesantias_2026.pdf|proyecto_decreto_cesantias_2026.pdf]], text in `_txt/proyecto_decreto_cesantias.txt`) is headed "DECRETO NÚMERO DE 2026 ( )", with no number and no date. It modifies arts. 2.2.1.3.1, 2.2.1.3.4, 2.2.1.3.5 and 2.2.1.3.13 of Decreto 1072/2015. Art. 1 par. 2:
    > "El Ministerio de Salud y Protección Social realizará los ajustes a la PILA en un plazo máximo de seis (6) meses contados a partir de la entrada en vigencia del presente decreto. Por su parte, las administradoras de fondos de cesantías y los operadores de información dispondrán de un término igual de seis (6) meses contados a partir de la entrada en vigencia de dicha reglamentación [...]"
 
    Art. 5: "El presente decreto rige a partir de su publicación".
@@ -139,7 +139,7 @@ The Senado page shows no "reglamentado por" note on art. 64.
    - The phrases "mensual anticipada" and "2466" do not appear.
    - **So the draft's parágrafos are not in the DUR.**
 3. **Consultation trail.** These are press and professional-body sources, used as leads. The INCP (8-07-2026) says comments ran to 22-07-2026 on SUCOP (https://www.sucop.gov.co/entidades/mintrabajo/Normativa?IDNorma=29338). El Espectador (3-07-2026) says: "El proyecto permanecerá publicado para recibir observaciones antes de que el Gobierno decida si expide el decreto definitivo." An earlier version was published in May 2026 (cerlatam "proyecto de decreto 07-may-26"). Searches for a signed decree from August to October 2026 returned only the draft.
-4. **PILA.** AT2 v30 (24-07-2026; local `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf`, 336 pp.) implements Ley 2466 arts. 21, 22, 34(4) and 65 (cotizante types 19, etc.; Res. 611/2026). It has **no cesantías contribution type and no reference to art. 64**: every "cesant" hit is "Mecanismo de Protección al Cesante". It is adopted by Res. 1529/2026, which lists its bases as "Decreto 1426 de 2025, el artículo 1 del Decreto 271 de 2026 y el artículo 13 de la Resolución 611 de 2026". None of these is the cesantías decree.
+4. **PILA.** AT2 v30 (24-07-2026; local [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf|2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf]], 336 pp.) implements Ley 2466 arts. 21, 22, 34(4) and 65 (cotizante types 19, etc.; Res. 611/2026). It has **no cesantías contribution type and no reference to art. 64**: every "cesant" hit is "Mecanismo de Protección al Cesante". It is adopted by Res. 1529/2026, which lists its bases as "Decreto 1426 de 2025, el artículo 1 del Decreto 271 de 2026 y el artículo 13 de la Resolución 611 de 2026". None of these is the cesantías decree.
 
 **Conclusion.** The enabling decree is **still a draft**, and **no MinSalud PILA regulation exists**. The spec's statement is correct, and the block should stay with the feature OFF.
 - Even if the decree were signed tomorrow, PILA could not be ready before about 6 months (MinSalud) plus 6 months (funds and operators).

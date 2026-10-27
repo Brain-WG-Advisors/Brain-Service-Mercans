@@ -38,9 +38,9 @@
 - **Tipo:** versão final
 - **Risco:** alto (versão vigente)
 - **Serviço:** [[research-pipeline]]
-- **O que diz:** o CCG no pipeline é `FR-CCG-001-v1.0.docx`, Version Control `1.0 | 2026-10-06 | Initial version ... Approved`, md5 `a9f16a70bd6957dcab5d5411c26eeab0`, igual ao promovido em 09/10. **O mesmo nome de arquivo já designou três conteúdos**: o de agosto/setembro (arquivado em 06/10, sha `cf8675c1a56cb59a`; é o "CCG v1.0/v1.2/v1.3" dos QAs), o v1.1 (arquivado em 09/10, md5 `7c0e8421…`) e este. Só o md5 distingue.
+- **O que diz:** o CCG no pipeline é [[Research Pipeline/França/CCG/FR-CCG-001-v1.0.docx|FR-CCG-001-v1.0.docx]], Version Control `1.0 | 2026-10-06 | Initial version ... Approved`, md5 `a9f16a70bd6957dcab5d5411c26eeab0`, igual ao promovido em 09/10. **O mesmo nome de arquivo já designou três conteúdos**: o de agosto/setembro (arquivado em 06/10, sha `cf8675c1a56cb59a`; é o "CCG v1.0/v1.2/v1.3" dos QAs), o v1.1 (arquivado em 09/10, md5 `7c0e8421…`) e este. Só o md5 distingue.
 - **Antes (se erro):** hub e monday dizem "v1.0" sem distinguir; monday (CCG – AI, Done) atualizado em 2026-09-15, **anterior** à reemissão: o link pode apontar a linhagem antiga (não verificável aqui).
-- **Causa (se erro):** reuso do nome `FR-CCG-001-v1.0.docx` na reemissão.
+- **Causa (se erro):** reuso do nome [[Research Pipeline/França/CCG/FR-CCG-001-v1.0.docx|FR-CCG-001-v1.0.docx]] na reemissão.
 - **Correto / novo:** CCG vigente = md5 `a9f16a70…` (2026-10-06). Ao citar "CCG v1.0 da França", dizer a data e o md5.
 - **Nível de evidência:** B · **Fonte:** Version Control do CCG + PROMOTION-LOG-2026-10-09
 - **Localização no raw:** `RAW/version-control/FR-CCG-001-v1.0.md` tabela linha 1; `RAW/notas/PROMOTION-LOG-2026-10-09.md` linhas 7–8; `RAW/notas/PROMOTION-LOG-2026-10-06.md` linha 7 (sha cf8675…); `raw/monday/2026-10-27-artifacts-BE-CO-FR.md` linha 19
@@ -55,7 +55,7 @@
 - **Tipo:** versão final
 - **Risco:** alto (versão vigente)
 - **Serviço:** [[research-pipeline]]
-- **O que diz:** WTC vigente `FR-WTC-001-v1.0.xlsx`, Version Control `1.0 | 2026-10-06 | Initial version | Approved | Wallisson Gomes`, título "France (FR) - income year 2026"; arquivo de 2026-10-09; monday (WTC – AI) v1.0, atualizado 2026-09-15.
+- **O que diz:** WTC vigente [[Research Pipeline/França/WTC/FR-WTC-001-v1.0.xlsx|FR-WTC-001-v1.0.xlsx]], Version Control `1.0 | 2026-10-06 | Initial version | Approved | Wallisson Gomes`, título "France (FR) - income year 2026"; arquivo de 2026-10-09; monday (WTC – AI) v1.0, atualizado 2026-09-15.
 - **Antes (se erro):** hub: "Draft no Version Control" (08-27).
 - **Causa (se erro):** o hub descreve o WTC da linhagem anterior; o reemitido está **Approved**.
 - **Correto / novo:** status Approved, 2026-10-06. O md5 coletado diverge do PROMOTION-LOG (ver C04).
@@ -106,7 +106,7 @@
 - **Tipo:** versão final
 - **Risco:** alto (versão vigente; identificador)
 - **Serviço:** [[research-pipeline]]
-- **O que diz:** o arquivo é `FR-SIR-INDEX-001-v1.0.docx` (md5 `889e19c1…`), Version Control `v1.0 | 2026-08-27 | Mercans Compliance Regulations Team | Initial issue.`, mas o arquivo é de **2026-09-29**. O SIR **não aparece em nenhum PROMOTION-LOG** (não foi reemitido). O monday rotula o item "Statutory Integration" como `FR-SIR-001-v1.0` (atualizado 2026-09-29); a varredura do pipeline procurou `FR-SIR-001-v1*.docx` e não achou. As specs reemitidas apontam "FR-SIR-INDEX-001 v1.0 - DELIVERED" e explicam o id. O QA v4 confirma que "FR-SIR-001" existe sob o nome FR-SIR-INDEX-001, com runbooks de 28 arquivos.
+- **O que diz:** o arquivo é [[Research Pipeline/França/SIR/FR-SIR-INDEX-001-v1.0.docx|FR-SIR-INDEX-001-v1.0.docx]] (md5 `889e19c1…`), Version Control `v1.0 | 2026-08-27 | Mercans Compliance Regulations Team | Initial issue.`, mas o arquivo é de **2026-09-29**. O SIR **não aparece em nenhum PROMOTION-LOG** (não foi reemitido). O monday rotula o item "Statutory Integration" como `FR-SIR-001-v1.0` (atualizado 2026-09-29); a varredura do pipeline procurou `FR-SIR-001-v1*.docx` e não achou. As specs reemitidas apontam "FR-SIR-INDEX-001 v1.0 - DELIVERED" e explicam o id. O QA v4 confirma que "FR-SIR-001" existe sob o nome FR-SIR-INDEX-001, com runbooks de 28 arquivos.
 - **Antes (se erro):** monday e a verificação do pipeline usam "FR-SIR-001".
 - **Causa (se erro):** o registro da FR é um índice por autoridade, com id diferente do padrão `{CC}-SIR-001`.
 - **Correto / novo:** id correto `FR-SIR-INDEX-001`; "FR-SIR-001" é o rótulo do monday para o mesmo documento. A data do Version Control (08-27) é anterior à do arquivo (09-29) sem linha nova: [INCERTO] se o conteúdo mudou.

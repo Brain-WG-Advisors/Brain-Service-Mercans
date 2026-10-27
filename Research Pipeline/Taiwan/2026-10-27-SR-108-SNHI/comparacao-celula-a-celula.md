@@ -1,7 +1,7 @@
 # Log de comparação célula a célula: SR-108 SNHI v1.1 → v1.2
 
 Base: `C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW - SNHI report specification.xlsx`
-Nova: `TW - SNHI report specification_v1.2.xlsx`
+Nova: [[Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/TW - SNHI report specification_v1.2.xlsx|TW - SNHI report specification_v1.2.xlsx]]
 Gerado: 2026-10-27 10:57
 
 ## 1. Partes do pacote

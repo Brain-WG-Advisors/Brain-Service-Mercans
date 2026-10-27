@@ -5,12 +5,12 @@ Question: do the gross-to-net files of all payroll runs, the monthly Base of Wit
 ## Files used (masked)
 | Run | File | Pay group | Employees |
 |---|---|---|---|
-| REF-P201-090 (monthly) | round3 `Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx` (content-identical to the round-2 Monthly file except 6 stray cells below the table in column U, absent in the new copy) | CO - Monthly | 261 |
+| REF-P201-090 (monthly) | round3 [[Research Pipeline/Colombia/co-report-crosscheck/03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx\|Gross to net PMI 2026-09-01-2026-09-30 - Monthly (1) - 16oct.xlsx]] (content-identical to the round-2 Monthly file except 6 stray cells below the table in column U, absent in the new copy) | CO - Monthly | 261 |
 | REF-P201-065 (monthly withholding working report) | round3 `...Base of Withholding ... (1) - 16oct.xlsx` (cell-identical to the round-1 file) | monthly | 261 |
 | REF-P201-216 (weekly) | round3 `...Base of Withholding ... - Weekly (1) - 16oct.xlsx` | weekly | 132 (93 with withholding > 0) |
-| REF-P201-184 (pensioners) | round3 `Gross to net PMI 2026-09-01-2026-09-30 - 16oct.xlsx` | CO - Pensionaries | 454 |
-| REF-P203-119 (October termination run) | round3 `Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx` | CO - Monthly | 2 |
-| Year-to-date accumulations | round1 `Accumulated Report.xlsx`, column 01/09/2026 | all | 1,038 ids |
+| REF-P201-184 (pensioners) | round3 [[Research Pipeline/Colombia/co-report-crosscheck/03-client-reports-masked/round3/Gross to net PMI 2026-09-01-2026-09-30 - 16oct.xlsx\|Gross to net PMI 2026-09-01-2026-09-30 - 16oct.xlsx]] | CO - Pensionaries | 454 |
+| REF-P203-119 (October termination run) | round3 [[Research Pipeline/Colombia/co-report-crosscheck/03-client-reports-masked/round3/Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx\|Gross to net PMI 2026-10-01-2026-10-31 - 16oct.xlsx]] | CO - Monthly | 2 |
+| Year-to-date accumulations | round1 [[Research Pipeline/Colombia/co-report-crosscheck/03-client-reports-masked/Accumulated Report.xlsx\|Accumulated Report.xlsx]], column 01/09/2026 | all | 1,038 ids |
 
 The three populations (monthly 261, weekly 132, pensioners 454) do not overlap.
 

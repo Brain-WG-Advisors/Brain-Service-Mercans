@@ -53,7 +53,7 @@
 | FK570 | Specifikationsnummer | IU specification number 1–9999999999 | IU | |
 | FK820–FK827 | Franvaro… | Absence record (FP/TFP), date, %, hours | FU | |
 
-- Control rules: `agi/Bilaga_Kontroller_1.1.18.1.xlsx` (ba_ = processing, S_ = within form, B_ = across forms, R_ = reasonableness). B_006: FK487 must equal Skatteverket's computed IK587. B_007: FK497 must equal IK597. "Mindre beräkningsdifferens accepteras" (minor differences accepted; the tolerance is not quantified). [S05]
+- Control rules: [[internal-certification/references/Sweden/2026/agi/Bilaga_Kontroller_1.1.18.1.xlsx|Bilaga_Kontroller_1.1.18.1.xlsx]] (ba_ = processing, S_ = within form, B_ = across forms, R_ = reasonableness). B_006: FK487 must equal Skatteverket's computed IK587. B_007: FK497 must equal IK597. "Mindre beräkningsdifferens accepteras" (minor differences accepted; the tolerance is not quantified). [S05]
 - Calculation of FK487 [S01 §12.6.1; S07]:
   1. Sum the contribution-liable pay per IU (AeIU). Öre from the fuel benefit are dropped.
   2. Sum per employer and period into a basis per rate: IK420 (full 31.42 %, Alder_1), IK422 (10.21 %, Alder_2 = born 1938–1958), IK423 (0 %, born ≤1937), IK7001 (youth, born 2003–2007, the first 25 000 kr per person and month, from 202604). For a person with several IUs, the pay is summed across all of them before splitting at 25 000.

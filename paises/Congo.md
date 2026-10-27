@@ -9,7 +9,7 @@
 | [[research-pipeline]] | ✅ | 2026-06-30 | Pesquisa concluída (Wallisson); skill file entregue e atualizado (chat: compliance-research; mercans-compliance) |
 | [[design]] | 🔄 | 2026-08-28 | Regulation Design clean-room comparado com CT-A-590: 77%, cobertura funcional 26/26; perguntas Q1–Q11 ao Mohit abertas (chat: design-dev-kb) |
 | Produção (outro time) | — | | |
-| [[suporte]] | 🔄 | 2026-09-02 | Baker Hughes Congo: 12110, 12472, 13841, 14054, 14055 (vários sem resposta) |
+| [[suporte]] | 🔄 | 2026-10-27 | Baker Hughes Congo: 12472, 13841, 14054, 14055 Resolved; só o HRBS-12110 (Report Matrix) segue In Progress (consulta à API em 2026-10-27). Ver [[Namibia#Cliente Baker Hughes (África)]] |
 
 ## Ficha do país (da skill)
 > Resumo do que mais importa para o serviço. Fonte: skill `payroll-compliance-congo`, lida em 2026-10-02. Valores exatos e tabelas: ler a skill. Se divergir, vale a skill.
@@ -77,19 +77,26 @@
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| ~2026-09-02 | HRBS-14054 | TUS subestimado: car allowance sem gross-up no G2N do cliente; pergunta se o gross-up entra na base do TUS | Open, sem resposta nossa (erro é do G2N do cliente, segundo o autor) | Não |
-| 2026-09-02 | HRBS-14055 | Occupancy tax e Region tax são regulatórios? | Open, sem resposta no snapshot | Não |
-| ~2026-08-31 | HRBS-13841 | CAMU não consta na WTC de compliance | Wallisson (27/08): item do cliente = CAMU solidarité 0,5% acima de 500.000; follow-up (31/08) sobre os 4,55%/2,27% sem resposta; Pending on reporter | Não [INCERTO se a solidarité entra na WTC] |
-| ~2026-08-10 | HRBS-12472 | Payslips Congo e Gabão: estado civil, nº de filhos, nº de partes | Gabão respondido (ver [[Gabao]]); Congo atribuído ao Wallisson, sem resposta | Não |
-| ~2026-07-21 | HRBS-12110 | Revisão da Report Matrix do Congo (Baker Hughes) | Open, só repasse ao Wallisson; SLA negativo | Não |
+| ~2026-09-02 | HRBS-14054 | TUS subestimado: car allowance sem gross-up no G2N do cliente; pergunta se o gross-up entra na base do TUS | Resolved 2026-09-08 com nossa resposta de 02/09: o gross-up entra na base do TUS (7,5% do bruto total, sem deduções; Loi n°42-2025, LF 2026) | Não |
+| 2026-09-02 | HRBS-14055 | Occupancy tax e Region tax são regulatórios? | Resolved 2026-10-12. Nossa posição em 09/10: TOL estatutário (1.000 FCFA/mês, código 2540); CSC não estatutário (2541); CAMU 2554/2564 estatutária mas fora do piloto para óleo e gás; solidarité 0,5% (2513) segue; taxa regional não é retida na folha. WTC v3.1 e CCG v1.1 atualizados no Drive. Mohit: códigos configurados e publicados em 12/10 | Sim (WTC v3.1, CCG v1.1) |
+| ~2026-08-31 | HRBS-13841 | CAMU não consta na WTC de compliance | Wallisson (27/08): item do cliente = CAMU solidarité 0,5% acima de 500.000; follow-up (31/08) sobre os 4,55%/2,27% sem resposta no ticket; Resolved 2026-08-31. A pergunta foi respondida depois no HRBS-14055 (09/10: CAMU fora do piloto para óleo e gás) | Não [INCERTO se a solidarité entra na WTC] |
+| ~2026-08-10 | HRBS-12472 | Payslips Congo e Gabão: estado civil, nº de filhos, nº de partes | Resolved 2026-08-12. Gabão respondido pela Manju (ver [[Gabao]]); Congo respondido por nós em 11/08: mostrar estado civil e nº de partes (já no campo Situation Familiale/Quotient); nº de filhos não é exigido | Não |
+| ~2026-07-21 | HRBS-12110 | Revisão da Report Matrix do Congo (Baker Hughes) | **In Progress** (2026-10-27). Respondido em 13/08; o cliente escreveu "still need" em 07/10; nossa pergunta de 20/10 sobre o que ele precisa agora, sem resposta | Não |
+
+- Rascunhos de comentário HRBS-12110: [[rascunhos/2026-10-11-youtrack-drafts/HRBS-12110|11/10]] · [[rascunhos/2026-10-11-youtrack-drafts/v1-sem-skill/HRBS-12110|11/10 v1-sem-skill]] · [[rascunhos/2026-10-11-youtrack-drafts/v2-skill-sem-verificacao/HRBS-12110|11/10 v2-skill-sem-verificacao]] · [[rascunhos/2026-10-19-youtrack-drafts/HRBS-12110|19/10]] · [[rascunhos/2026-10-20-youtrack-drafts/HRBS-12110|20/10]]
+- [[rascunhos/2026-10-05-HRBS-12472|2026-10-05-HRBS-12472]]: Rascunho de resposta HRBS-12472: payslip do Congo (e Gabão) com estado civil, filhos e partes (quociente familiar), com fontes da skill
+- [[rascunhos/2026-10-05-HRBS-13841|2026-10-05-HRBS-13841]]: Rascunho follow-up HRBS-13841: se 4,55%/2,27% empregador/empregado é estatutário no Congo
+- [[rascunhos/2026-10-05-HRBS-14054|2026-10-05-HRBS-14054]]: Rascunho HRBS-14054: gross up do car allowance dentro do Unique Tax (imposto único) do Congo
+- [[rascunhos/2026-10-09-HRBS-12110-revisao-matriz-Congo|2026-10-09-HRBS-12110-revisao-matriz-Congo]]: Revisão completa da Reporting Matrix do Congo (HRBS-12110): CNSS, DGID, DAS FY2026
+- [[rascunhos/2026-10-13-verificacao-Congo-HRBS-12110|2026-10-13-verificacao-Congo-HRBS-12110]]: Verificação em fonte primária (Journal officiel, CNSS) das afirmações do rascunho HRBS-12110 do Congo
 
 ## Pendências
-- [ ] Responder se 4,55%/2,27% da CAMU são estatutários e por que o cliente não os aplica (o G2N do HRB tem) — Wallisson (HRBS-13841)
+- [x] 4,55%/2,27% da CAMU: estatutários, mas Baker Hughes (óleo e gás) está fora do piloto; respondido no HRBS-14055 em 2026-10-09
 - [ ] Decidir se a CAMU solidarité 0,5% entra na WTC de compliance — Compliance [INCERTO] (HRBS-13841)
-- [ ] Responder se o gross-up do car allowance entra na base do TUS — Wallisson (HRBS-14054)
-- [ ] Responder se occupancy tax e Region tax são regulatórios — Wallisson (HRBS-14055)
-- [ ] Revisar a Report Matrix e dizer se pode ir ao cliente — Wallisson (HRBS-12110)
-- [ ] Confirmar campos do payslip do Congo (estado civil, nº de filhos, nº de partes) — Wallisson (HRBS-12472)
+- [x] Gross-up do car allowance na base do TUS: respondido em 2026-09-02 (HRBS-14054)
+- [x] Occupancy tax e Region tax: respondido em 2026-10-09; códigos publicados em 2026-10-12 (HRBS-14055)
+- [ ] Report Matrix (HRBS-12110): respondida em 13/08; aguardando o cliente dizer o que precisa agora (nossa pergunta de 2026-10-20) — Wallisson
+- [x] Campos do payslip do Congo: respondido em 2026-08-11 (HRBS-12472)
 - [ ] Roteamento da solidarité: DGID × Décret 2024-131 — Compliance (chat: mercans-compliance)
 - [ ] Design CG: perguntas Q1–Q11 ao Mohit (atomização, mapper, `_period` × cauda, nº de matrizes, Tax Group, `_$$`, bandas 2,4/9,6, registro 58xxx, `.99`, FLOOR, rubrica) — Wallisson → Mohit; incluir o relief "No Child" no CCG CG — RA (chat: design-dev-kb)
 - [ ] Atualizar Congo no Monday — Wallisson (chat: compliance-research)

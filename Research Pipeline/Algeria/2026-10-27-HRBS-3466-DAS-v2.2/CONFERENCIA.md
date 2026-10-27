@@ -5,21 +5,21 @@
 ## Arquivos
 | Arquivo | md5 | O que é |
 |---|---|---|
-| `DZ-CNAS-DAS-CountryStandard-Spec_v2.2.xlsx` | `3c22c5ebd960ed9d259072bfff5f41b8` | Spec v2.2 (12 abas da v2.1 + aba nova "Henkel Configuration") |
+| [[Research Pipeline/Algeria/2026-10-27-HRBS-3466-DAS-v2.2/DZ-CNAS-DAS-CountryStandard-Spec_v2.2.xlsx\|DZ-CNAS-DAS-CountryStandard-Spec_v2.2.xlsx]] | `3c22c5ebd960ed9d259072bfff5f41b8` | Spec v2.2 (12 abas da v2.1 + aba nova "Henkel Configuration") |
 | `build_v2_2.py` | ver `md5sum` | Gera a v2.2 por cirurgia XML. Uso: `python -I build_v2_2.py <v2.1.xlsx> <v2.2.xlsx>` |
 | `compare_v21_v22.py` | ver `md5sum` | Compara v2.1 × v2.2 célula a célula e valida o XML |
 | `changes_manifest.json` | — | As 135 células alteradas/novas, cada uma com o ID da mudança (C1..C11), antes e depois |
 | `conferencia-v2.2-log.txt` | — | Saída da comparação: todas as diferenças, contagens e varreduras |
 
-**Base:** `raw/docs/drive-exports/2026-10-23/DZ-CNAS-DAS-CountryStandard-Spec_v2.1.xlsx` (md5 `5e4d67e1c2a4a6bc660972647d5e2a11`), export do `.gsheet` do Drive (`12- Country Report Codes\DAS file\`).
-**DD:** `G:\...\Algeria\02- DD\DZ-DD-001-v1.1.xlsx`, copiado para `raw/docs/drive-exports/2026-10-27/DZ-DD-001-v1.1.xlsx` (md5 `37d2ea88e2ba99d216a8ebd3579d7be5`, idêntico ao do Drive). Observação: a aba Version Control desse arquivo só registra a linha 1.0, embora o nome do arquivo seja v1.1.
+**Base:** [[raw/docs/drive-exports/2026-10-23/DZ-CNAS-DAS-CountryStandard-Spec_v2.1.xlsx|DZ-CNAS-DAS-CountryStandard-Spec_v2.1.xlsx]] (md5 `5e4d67e1c2a4a6bc660972647d5e2a11`), export do `.gsheet` do Drive (`12- Country Report Codes\DAS file\`).
+**DD:** [[raw/docs/drive-exports/2026-10-27/DZ-DD-001-v1.1.xlsx|DZ-DD-001-v1.1.xlsx]], copiado para [[raw/docs/drive-exports/2026-10-27/DZ-DD-001-v1.1.xlsx|DZ-DD-001-v1.1.xlsx]] (md5 `37d2ea88e2ba99d216a8ebd3579d7be5`, idêntico ao do Drive). Observação: a aba Version Control desse arquivo só registra a linha 1.0, embora o nome do arquivo seja v1.1.
 
 ## Fontes (relidas por mim em 2026-10-27)
 | Fonte | Onde | O que sustenta |
 |---|---|---|
-| CNAS, *Guide de Télédéclaration* (SHA-256 `1b37da0c1fa6cef0…`) | `raw/docs/oficiais/DZ/2026-10-23-CNAS-guide-teledeclaration.pdf` | p.14: o EMS considera movimento "tout changement du numéro employeur dont le salarié est rattaché". p.35–36: nome `D20E/D20S` + "Numéro du Cotisant sur 10 positions", e a tabela de campos. p.36: M/J/H, Observation "dans la mesure du possible", centimes, "aucun cas avoir de séparateur de rubriques". p.41–42: "Numéro cotisant (employeur) erroné", "Nombre de mois/jours incorrect". |
-| Loi n° 83-14 du 2 juillet 1983, JORADP n° 28 (escaneada; li a imagem das p.21–22 do arquivo, p.1217–1218 do JO) | `raw/docs/oficiais/DZ/2026-10-23-JORADP-1983-028-Loi-83-14.pdf` | Art. 14: "dans les trente (30) jours qui suivent la fin de chaque année civile … par trimestre". O art. 16 original dizia 10 % + 2 % por mês. |
-| Loi n° 04-17 du 10 novembre 2004, JORADP n° 72 de 13/11/2004 | `raw/docs/oficiais/DZ/2026-10-23-JORADP-2004-072-Loi-04-17.pdf` | Art. 11 (novo art. 16): "pénalité égale à 15 % du montant des cotisations dues … majorée de 5 % par mois de retard". Art. 12 (art. 16 bis): "mille dinars (1.000 DA) par travailleur et/ou inexactitude". |
+| CNAS, *Guide de Télédéclaration* (SHA-256 `1b37da0c1fa6cef0…`) | [[raw/docs/oficiais/DZ/2026-10-23-CNAS-guide-teledeclaration.pdf\|2026-10-23-CNAS-guide-teledeclaration.pdf]] | p.14: o EMS considera movimento "tout changement du numéro employeur dont le salarié est rattaché". p.35–36: nome `D20E/D20S` + "Numéro du Cotisant sur 10 positions", e a tabela de campos. p.36: M/J/H, Observation "dans la mesure du possible", centimes, "aucun cas avoir de séparateur de rubriques". p.41–42: "Numéro cotisant (employeur) erroné", "Nombre de mois/jours incorrect". |
+| Loi n° 83-14 du 2 juillet 1983, JORADP n° 28 (escaneada; li a imagem das p.21–22 do arquivo, p.1217–1218 do JO) | [[raw/docs/oficiais/DZ/2026-10-23-JORADP-1983-028-Loi-83-14.pdf\|2026-10-23-JORADP-1983-028-Loi-83-14.pdf]] | Art. 14: "dans les trente (30) jours qui suivent la fin de chaque année civile … par trimestre". O art. 16 original dizia 10 % + 2 % por mês. |
+| Loi n° 04-17 du 10 novembre 2004, JORADP n° 72 de 13/11/2004 | [[raw/docs/oficiais/DZ/2026-10-23-JORADP-2004-072-Loi-04-17.pdf\|2026-10-23-JORADP-2004-072-Loi-04-17.pdf]] | Art. 11 (novo art. 16): "pénalité égale à 15 % du montant des cotisations dues … majorée de 5 % par mois de retard". Art. 12 (art. 16 bis): "mille dinars (1.000 DA) par travailleur et/ou inexactitude". |
 | DAS 2024 aceita da Henkel (anexos do ticket) | `raw/tickets/api/anexos/HRBS-3466/` | Nº `1638091858` no nome e no campo 1 (entête e os 80 registros); endereço do entête em Dely Ibrahim; unidade `J` nos 4 trimestres dos 80 registros. Conferi isso por script, sem extrair dado pessoal. |
 | DZ-DD-001-v1.1 | ver acima | Nomes reais: `Employer.CNASNumber`, `Employer.CNASCentre`, `Employer.LegalName`, `Employer.Address` (sede), `Employee.SSNumber`, `Employee.JobTitle`. Não existem: denominação, endereço do estabelecimento, vínculo empregado → estabelecimento, frequência de pagamento/unidade DAS. |
 
@@ -74,12 +74,12 @@
 - `changes_r2.json`: antes da rodada 2 → depois.
 - `changes_manifest.json`: consolidado v2.1 → final.
 
-**Arquivo final:** `DZ-CNAS-DAS-CountryStandard-Spec_v2.2.xlsx`, md5 `88273b04328d37734e77292c525ca06c`. Substitui o `3c22c5eb…` da rodada 1.
+**Arquivo final:** [[Research Pipeline/Algeria/2026-10-27-HRBS-3466-DAS-v2.2/DZ-CNAS-DAS-CountryStandard-Spec_v2.2.xlsx|DZ-CNAS-DAS-CountryStandard-Spec_v2.2.xlsx]], md5 `88273b04328d37734e77292c525ca06c`. Substitui o `3c22c5eb…` da rodada 1.
 
 | # | Células | Antes (r1) → depois |
 |---|---|---|
 | 2 | DAS Spec L6, L20 | `DD: Payroll.ReferenceYear` → "Run parameter (reference year, CCYY) - not a DD field" |
-| 3 | DAS Spec L4, L7, L9, L10, L19, L22, L23, L24, L25, L39, L40, L41 (12) | `DD: X.Y` → `DD: X.Y - Field Name '<nome real>' (DZ-DD-001-v1.1, <aba>)`. Os nomes reais são: Employer CNAS Contributor Number, Employer CNAS Paying Centre e Employee CNAS Social Security Number (aba ID Information); Employer Legal Name, Employer Head-Office Address, Surname, First Name, Date of Birth, Date of Hire, Date of Termination e Job Title / Occupation (aba Country Fields). Conferi os nomes no `raw/docs/drive-exports/2026-10-27/DZ-DD-001-v1.1.xlsx`. |
+| 3 | DAS Spec L4, L7, L9, L10, L19, L22, L23, L24, L25, L39, L40, L41 (12) | `DD: X.Y` → `DD: X.Y - Field Name '<nome real>' (DZ-DD-001-v1.1, <aba>)`. Os nomes reais são: Employer CNAS Contributor Number, Employer CNAS Paying Centre e Employee CNAS Social Security Number (aba ID Information); Employer Legal Name, Employer Head-Office Address, Surname, First Name, Date of Birth, Date of Hire, Date of Termination e Job Title / Occupation (aba Country Fields). Conferi os nomes no [[raw/docs/drive-exports/2026-10-27/DZ-DD-001-v1.1.xlsx\|DZ-DD-001-v1.1.xlsx]]. |
 | 4 | DAS Spec L26, L29, L32, L35; M27, M30, M33, M36 (8) | Saíram "e.g. Henkel", a convenção 90 e os WTs de ausência. Ficou a regra genérica: J = DIAS 0–92, com a convenção de dias do cliente e as ausências registradas no anexo do cliente; unidade = parâmetro do cliente. A convenção e os WTs continuam na aba Henkel (B11). L28/L31/L34/L37 (WT 64551, "to be confirmed by Development") **ficaram**: é regra do país, sem nome de cliente, como o coordenador permitiu. Resultado: nenhuma célula fora da aba Henkel cita "Henkel", salvo Version Control B5/D15 (o aviso do anexo e o registro da versão). |
 | 5 | Evidence Register D9; Field Options F7, F8, F9 | "Unit derived from pay frequency" / "Use when pay frequency is …" → "Selected through the client-level DAS unit parameter", com a referência ao guia p.36 de cada código. |
 | 6 | Report Matrix B28 | "… the M/J/H unit rule, the deadline and … taken verbatim from the guide" → o prazo saiu da lista do guia, e a frase nova diz que a fonte é a Loi 83-14 art. 14 (30 dias; ⚠️ 31/01 não confirmado). O resto do texto ficou igual. |
@@ -105,3 +105,6 @@
 |---|---|---|
 | 2026-10-27 | Suporte (agente construtor) | Gerou a v2.2 (Draft) a partir da v2.1 com as 11 mudanças C1–C11 e a aba Henkel Configuration. Conferência célula a célula: 135 diferenças, todas no manifesto. Local; nada foi para o Drive/YouTrack. |
 | 2026-10-27 | Suporte (agente construtor), rodada 2 | Corrigiu os achados #2–#10 da revisão independente (38 células). v2.1 × final: 154 diferenças, todas no manifesto, 0 falhas. Novo md5 `88273b04…`. #11 anotado para o DD v1.2. |
+
+## Arquivos da entrega
+- [[Research Pipeline/Algeria/2026-10-27-HRBS-3466-DAS-v2.2/REVISAO-independente|REVISAO-independente]]: Revisão independente (FAIL) da spec DAS v2.2 do HRBS-3466: diff próprio de 131 células, 1 BLOCKER, 3 MAJOR, 9 MINOR.

@@ -8,7 +8,7 @@
 | [[research-pipeline]] | ✅ | ~2026-07 [INCERTO] | CCG, WTC e Report Specs (SSC Form Ten, PAYE 5, ETX) existem segundo os tickets; versões não citadas; sem skill. Chats citam a Namíbia só de passagem ("toques leves") |
 | [[design]] | 🔄 | 2026-09-18 | Relatórios (Monthly PAYE Return, G2N, SSC Contribution Return) em configuração, previstos até 2026-09-25, depois revisão de Compliance; Payslip configurado, em revisão de Compliance (HRBS-14605) |
 | Produção (outro time) | — | | Entidade Baker Hughes Namibia em implementação (HRBS-12074, fora do nosso escopo) |
-| [[suporte]] | 🔄 | 2026-09-24 | 7 tickets da Baker Hughes; 6 sem resposta de Compliance; SLA negativo |
+| [[suporte]] | ✅ | 2026-10-27 | Os 6 tickets da Baker Hughes Namibia estão Resolved (consulta à API em 2026-10-27; o status anterior, "6 sem resposta", vinha da carga de 2026-10-02 e estava desatualizado). Ver [[#Cliente Baker Hughes (África)]] |
 
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |
@@ -46,25 +46,33 @@ Valores do cliente/implementação estão marcados ⚠️ sem fonte. As linhas S
 Todos de Baker Hughes (Baker Hughes Namibia), pedidos por Daniel Kelvin Balogun.
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| ~2026-09-24 | HRBS-14605 | Confirmação de configuração dos relatórios estatutários | Open. Em desenvolvimento (Katrin Rudi, até 25/09); sem VET Levy nem IT12E; sem resposta do Wallisson sobre SSC | Não |
-| 2026-08-24 | HRBS-13602 | WT 2551 não reduz a base do Payroll Tax (2552) | Open. Mohit: não é pré-imposto; reatribuído ao Wallisson, sem resposta. Cliente cita outros problemas (anualização, faixas desatualizadas) | Não |
-| ~2026-07-30 | HRBS-12483 | Pension flag dos códigos 62100, 62146–62149, 62961 (Compliance = Yes, cliente = No) | Open, sem resposta; só "Kindly check this" ao Wallisson | Não |
-| ~2026-07-28 | HRBS-12072 | Mais pay elements (duas combinações de flags) | SLA Exempt; resposta parcial de Mohit; falta confirmação do Wallisson | Não |
-| ~2026-07-26 | HRBS-12101 | Samples dos relatórios SSC Form Ten, PAYE 5, ETX | Open, sem resposta (SLA estourado) | Não |
-| ~2026-07-22 | HRBS-12111 | Revisão da Report Matrix da Namíbia | Open, só acknowledgement; SLA negativo | Não |
+| ~2026-09-24 | HRBS-14605 | Confirmação de configuração dos relatórios estatutários | Resolved 2026-10-08: fechado pelo suporte (Pradeep) por falta de resposta do cliente. A confirmação de SSC e a revisão dos relatórios não aconteceram no ticket | Não |
+| 2026-08-24 | HRBS-13602 | WT 2551 não reduz a base do Payroll Tax (2552) | Resolved 2026-08-24. Mohit: não é pré-imposto; nossa confirmação em 24/08 (fonte: NamRA, "Tax on Individuals", Allowable Deductions). Cliente citou outros problemas (anualização, faixas desatualizadas) | Não |
+| ~2026-07-30 | HRBS-12483 | Pension flag dos códigos 62100, 62146–62149, 62961 (Compliance = Yes, cliente = No) | Resolved 2026-09-16 (Mohit fechou sem resposta do cliente). Nossa resposta de 04/08: o WTC de compliance fica como está; Baker Hughes configura pelo WTC do próprio fundo (No nesses códigos); 62961 já é "No (Typically)". Pedimos confirmação de que os valores vieram do administrador do fundo — sem resposta | Não |
+| ~2026-07-28 | HRBS-12072 | Mais pay elements (duas combinações de flags) | Resolved 2026-08-10: fechado pelo suporte por falta de resposta do cliente | Não |
+| ~2026-07-26 | HRBS-12101 | Samples dos relatórios SSC Form Ten, PAYE 5, ETX | Resolved 2026-08-12 com nossa resposta: ETX tem sample (Template Version 2 da NamRA); SSC Form 10 é ação no portal mySSC, sem arquivo; PAYE 5 não é fornecido pela NamRA, é gerado pelo empregador | Não |
+| ~2026-07-22 | HRBS-12111 | Revisão da Report Matrix da Namíbia | Resolved 2026-08-10 com nossa revisão e arquivo corrigido: ETX adicionado; SSC corrigida para N$99 (GN 8461) nos códigos 2551/2550; PAYE em 2552; Taxable Total 58008; moeda NAD. ⚠️ Ver Pendências: o teto usado (N$99) pode já estar superado pela GN 236/2026 | Sim (Report Matrix do cliente) |
+
+- [[rascunhos/2026-10-08-pesquisa-NA-SSC-PAYE|2026-10-08-pesquisa-NA-SSC-PAYE]]: Pesquisa HRBS-13602: contribuição SSC (WT 2551) como dedução pré-PAYE na Namíbia
 
 ## Pendências
-- [ ] HRBS-13602: base legal encontrada (2551 não é pré-imposto). Falta: revisar e enviar o rascunho em inglês (`rascunhos/2026-10-08-pesquisa-NA-SSC-PAYE.md`); conferir se o WTC de compliance marca 2551 como redutor da base (se sim, é erro nosso → [[correcoes]]) — Wallisson
+- [x] HRBS-13602: respondido em 2026-08-24 (2551 não é pré-imposto; fonte NamRA). Ticket Resolved. Ainda vale conferir se o WTC de compliance marca 2551 como redutor da base (se sim, é erro nosso → [[correcoes]]) — Wallisson
 - [ ] Identificar os tickets citados de "metodologia de anualização" e "constante de faixas desatualizada" — Compliance [INCERTO] (HRBS-13602)
-- [ ] Decidir se 62100, 62146–62149, 62961 são pensionáveis — Wallisson (HRBS-12483)
-- [ ] Confirmar se a combinação Tax=Yes / SSNC=Yes / Pension=No existe — Wallisson (HRBS-12072)
-- [ ] Fornecer samples de SSC Form Ten, PAYE 5 e ETX — Compliance/Wallisson (HRBS-12101)
-- [ ] Revisar a Report Matrix, principalmente os relatórios estatutários — Wallisson/Manju (HRBS-12111)
+- [x] Decidir se 62100, 62146–62149, 62961 são pensionáveis: respondido em 2026-08-04 (configurar pelo WTC do fundo do cliente); ticket fechado em 2026-09-16 (HRBS-12483)
+- [ ] Confirmar se a combinação Tax=Yes / SSNC=Yes / Pension=No existe — ticket HRBS-12072 fechado em 2026-08-10 sem essa confirmação; reabrir só se o cliente voltar
+- [x] Samples de SSC Form Ten, PAYE 5 e ETX: respondido em 2026-08-12 (HRBS-12101)
+- [x] Revisar a Report Matrix: feito em 2026-08-10 (HRBS-12111)
+- [ ] **Possível erro nosso (HRBS-12111):** a revisão de 10/08 fixou a SSC em N$99 (teto NAD 11.000, GN 8461), mas a GN 236/2026 (GG 8975, publicada em 2026-07-15) já elevava o teto para NAD 12.500 / N$112,50 a partir de 2026-03-01 (ou 2026-09-01, ver [INCERTO] em Valores-chave). Conferir na fonte primária e, se confirmado, registrar em [[correcoes]] e avisar o cliente — Wallisson
 - [ ] Confirmar taxa e teto da SSC aplicados — Compliance (HRBS-14605). Fonte oficial já registrada em Valores-chave; falta só decidir a data do teto NAD 12.500 (2026-03-01 no Gazette × 2026-09-01 segundo fontes secundárias)
 - [ ] Revisão de Compliance dos relatórios (após 25/09) e do payslip — Compliance (HRBS-14605)
 - [ ] Decidir sobre VET Levy Return, IT12E e IT14E, que não existem — Mohit/Compliance (HRBS-14605)
-- [ ] Fila sem resposta e com SLA negativo: HRBS-12072, 12101, 12110 (Congo, ver [[Congo]]), 12111, 12483 (e 14055, Congo) — Wallisson
+- [x] Fila sem resposta e com SLA negativo (HRBS-12072, 12101, 12111, 12483; Congo 12110 e 14055): conferido em 2026-10-27, todos Resolved exceto o HRBS-12110 do Congo (In Progress). Ver [[#Cliente Baker Hughes (África)]]
 
+## Cliente Baker Hughes (África)
+Mesmo cliente e mesmo solicitante na Namíbia e no [[Congo]] (entidades em implementação, "Legal Entity Phase: Implementation"). Estado conferido na API em 2026-10-27 (`raw/tickets/api/2026-10-27/`):
+- Namíbia: HRBS-12072, 12101, 12111, 12483, 13602, 14605: todos Resolved.
+- Congo: HRBS-12472, 13841, 14054, 14055: Resolved; **HRBS-12110 (Report Matrix do Congo): In Progress**, nossa pergunta de 2026-10-20 ao cliente sobre o que ele precisa agora, sem resposta.
+- Padrão: as duas Report Matrix foram abertas na mesma semana (21–22/07); vários tickets foram fechados pelo suporte por falta de resposta do cliente, não por solução confirmada.
 ## Correções ligadas
 - _(nenhuma correção confirmada; a divergência sobre o WT 2551 entre cliente e CCG segue aberta, ver Pendências)_ — ver [[correcoes]]
 

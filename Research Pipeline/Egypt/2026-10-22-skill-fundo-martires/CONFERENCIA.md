@@ -8,8 +8,8 @@ Janela Gmail (pedido do usuário), a partir da resposta à planilha Ericsson ME 
 - Conferida contra a v1 do claude.ai (`skill_012xb8yUhTvPATGGHefDvyfu`) em 22/10: o SHA-256 dos 8 arquivos (texto bruto, linhas em branco normalizadas) é igual ao da base.
 
 ## Fontes (lidas pessoalmente, pelas imagens das páginas; o texto do PDF sai ilegível)
-- Lei 4/2021 art. 1 (novo art. 8 da Lei 16/2018), Gazette nº 8 bis (هـ) de 03/03/2021, pp. 5–6; em vigor no dia seguinte à publicação: `raw/docs/oficiais/EG/2026-10-22-lei-4-2021-fundo-martires-gazette.pdf`. O art. 8(1) desconta 5/10.000 do salário dos empregados dos entes públicos **e dos empregados de pessoas jurídicas privadas regidas pela Lei do Trabalho**, exceto trabalho irregular ou por dia; a entidade paga o salário já com o desconto e o MoF arrecada.
-- Circular Geral MoF 14/2021 (10/05/2021): o item 3 repete o artigo e define o salário como "إجمالي الراتب الشهري" (salário mensal total). A parte "ثانيا" 2 trata dos demais entes: a ETA emite as instruções e repassa mensalmente até o dia 10 do mês seguinte. Inclui ainda o كتاب دوري 119/2021 (contas do Fundo). Cópia de host secundário (aliateck.com): `raw/docs/oficiais/EG/2026-10-22-mof-circular-14-2021-e-kitab-dawri-119-2021-fundo-martires.pdf`.
+- Lei 4/2021 art. 1 (novo art. 8 da Lei 16/2018), Gazette nº 8 bis (هـ) de 03/03/2021, pp. 5–6; em vigor no dia seguinte à publicação: [[raw/docs/oficiais/EG/2026-10-22-lei-4-2021-fundo-martires-gazette.pdf|2026-10-22-lei-4-2021-fundo-martires-gazette.pdf]]. O art. 8(1) desconta 5/10.000 do salário dos empregados dos entes públicos **e dos empregados de pessoas jurídicas privadas regidas pela Lei do Trabalho**, exceto trabalho irregular ou por dia; a entidade paga o salário já com o desconto e o MoF arrecada.
+- Circular Geral MoF 14/2021 (10/05/2021): o item 3 repete o artigo e define o salário como "إجمالي الراتب الشهري" (salário mensal total). A parte "ثانيا" 2 trata dos demais entes: a ETA emite as instruções e repassa mensalmente até o dia 10 do mês seguinte. Inclui ainda o كتاب دوري 119/2021 (contas do Fundo). Cópia de host secundário (aliateck.com): [[raw/docs/oficiais/EG/2026-10-22-mof-circular-14-2021-e-kitab-dawri-119-2021-fundo-martires.pdf|2026-10-22-mof-circular-14-2021-e-kitab-dawri-119-2021-fundo-martires.pdf]].
 - ETA Payroll FAQ v4, Q110 (já citada na skill): calcula sobre as remunerações básicas, para todos os trabalhadores exceto o diarista egípcio.
 
 ## Alterações (só Fundo dos Mártires; script `aplicar_correcao.py`; diff em `diff.txt`)
@@ -33,3 +33,6 @@ Sem mudança: `03-sir.md` (já trata o fundo como claim no Core, sem restrição
 ## Frentes
 - 2026-10-22 · Pipeline · cópia corrigida e diff preparados.
 - 2026-10-22 · Pipeline · com o ok do usuário: Substituir com `payroll-compliance-egypt.zip` (md5 `016165835f20d15902f32f47dffe67ed`) → v2; hash dos 5 arquivos alterados conferido no claude.ai; **publicada para a organização** com nota de versão. Pendência do hub marcada, `correcoes.md` e `log.md` atualizados.
+
+## Arquivos da entrega
+- Mapa dos arquivos desta pasta: [[Research Pipeline/Egypt/2026-10-22-skill-fundo-martires/MAPA|mapa]]

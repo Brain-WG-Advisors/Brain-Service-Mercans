@@ -90,7 +90,7 @@ Escopo:
   - as duas sobras da Field Options C foram corrigidas em 19/10 por decisão do usuário (ver Histórico).
 
 ## Planilha de revisão
-`rascunhos/2026-10-19-BE-specs-v1.0-vs-v1.1.xlsx`, refeita a partir dos xlsx 1.0 e 1.1 final:
+[[rascunhos/2026-10-19-BE-specs-v1.0-vs-v1.1.xlsx|2026-10-19-BE-specs-v1.0-vs-v1.1.xlsx]], refeita a partir dos xlsx 1.0 e 1.1 final:
 - 4.185 linhas (todas as células alteradas, inclusive Version Control);
 - 0 em amarelo: as 37 escolhas de termo foram revisadas e aprovadas pela janela geral/usuário em 19/10, com 2 ajustes (ver Histórico).
 

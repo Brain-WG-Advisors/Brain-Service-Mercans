@@ -59,6 +59,8 @@
 | Accuracy Score | v2 | 2026-08-14 | CI_Accuracy_Score_v2.md | ≈85% (v1.0 contra os 18 regs do dev) (chat: design-dev-kb) |
 | Spec CT-A-620 (CI: Specifications) + CT-A-621 Taxable Gross, CT-A-622 Gross, CT-A-623 Tax Table | — | ~2026-08-07 (sub-artigos 2026-08-05) | YouTrack KB | Autoria Mohit Jain; spec de configuração do produto |
 
+- [[rascunhos/2026-10-16-skill-cotedivoire/payroll-compliance-cotedivoire/SKILL|SKILL]]: Rascunho da skill payroll-compliance-cotedivoire (ITS, CNPS, FDFP, calendário) para 2026
+
 ## Valores-chave (com vigência)
 | Item | Valor | A partir de | Até | Fonte |
 |---|---|---|---|---|
@@ -95,23 +97,26 @@
 - 2026-09-23: parecer corrigido: o enquadramento é o regime des prestataires de services pétroliers (sem ITS na folha se a entidade estiver inscrita; CNPS/CMU devidos); pede ao cliente a Déclaration du Prestataire de service trimestral (BIC Pétrole/Gaz) e prova de nacionalidade estrangeira — Wallisson (HRBS-14996; chat: mercans-compliance)
 - ~2026-09-25: nacionalidade estrangeira confirmada (succursale D1020 de empresa estrangeira); regime confirmado para 2025 pela carta DGI nº 0984/MFB/DGI/DGE de 19/08/2025; confirmação do flag para 2026 só com a declaração IFPGAZ 2026 — Wallisson (HRBS-14996)
 - ~2026-09-28: cliente firme no processo de isenção e escalou ao Marko; pediu versão detalhada em inglês, "sem resposta de IA", e se os documentos são exigidos todo ano — Sivaranjani Subbarayula (HRBS-14996)
+- [[rascunhos/2026-10-21-task-mohit-CI-teto-CNPS|2026-10-21-task-mohit-CI-teto-CNPS]]: Task para o Mohit: mudanças do teto CNPS PF/AM/AT-MP na Costa do Marfim (não criada)
 
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| 2026-09-28 | HRBS-14996 | "Single Tax Regime" e isenção de ITS (Baker Hughes EHO Ltd); tetos CNPS; defeitos do GTN REF-P201-861 | Pending on reporter. 3 respostas do Wallisson (22, 23, 25/09); flag de isenção NÃO criado; aguarda doc pendente e IFPGAZ 2026; cliente escalou ao Marko | Não (flag não criado; defeitos do GTN a abrir em tickets separados) |
-| 2026-09-16 | HRBS-14714 | Aplicabilidade do ITS na folha da Baker Hughes CI (Live/BAU) | Open, sem resposta no snapshot; tratado na prática no HRBS-14996 [INCERTO se vinculados] | Não |
+| 2026-09-28 | HRBS-14996 | "Single Tax Regime" e isenção de ITS (Baker Hughes EHO Ltd); tetos CNPS; defeitos do GTN REF-P201-861 | Pending on reporter. 3 respostas do Wallisson (22, 23, 25/09); flag de isenção NÃO criado; aguarda doc pendente e IFPGAZ 2026; cliente escalou ao Marko · **HRBS-14996 Resolved em 2026-09-29** (API, 27/10) | Não (flag não criado; defeitos do GTN a abrir em tickets separados) |
+| 2026-09-16 | HRBS-14714 | Aplicabilidade do ITS na folha da Baker Hughes CI (Live/BAU) | Open, sem resposta no snapshot; tratado na prática no HRBS-14996 [INCERTO se vinculados] · **HRBS-14714 Resolved em 2026-09-21**; **HRBS-14996 Resolved em 2026-09-29** (API, 27/10) | Não |
 | ~2026-08-14 | CT-A-620 | Spec CI (artigo KB, não é ticket) | Spec de configuração do Mohit; tabela quebrada na extração de texto, mas lida do PDF original em 2026-10-05 (ver Valores-chave) | — |
 
+- [[rascunhos/2026-10-16-chat-sivaranjani-CI|2026-10-16-chat-sivaranjani-CI]]: Rascunho de chat à Sivaranjani sobre o teto (ceiling) CNPS da Costa do Marfim
+
 ## Pendências
-- [ ] Divergência hub × skill: o hub (parecer de 23/09, HRBS-14996) enquadra o cliente no regime des prestataires de services pétroliers (sem ITS na folha), mas a skill não menciona esse regime e diz que o ITS é retido sobre o bruto total de todos os empregados — verificar (skill lida em 2026-10-02)
+- [ ] Divergência hub × skill: o hub (parecer de 23/09, HRBS-14996) enquadra o cliente no regime des prestataires de services pétroliers (sem ITS na folha), mas a skill não menciona esse regime e diz que o ITS é retido sobre o bruto total de todos os empregados — verificar (skill lida em 2026-10-02) _(ticket fechado: HRBS-14996 Resolved em 2026-09-29 (API, 27/10); conferir se a pendência ainda vale)_
 - [ ] Divergência hub × skill: o hub registra "previdência privada, cap 320.000 anual (CCG)"; a skill só tem o abatimento de 320.000 para pensionistas (§3.3) e nada sobre cap de previdência privada de empregado ativo — verificar se são regras distintas (skill lida em 2026-10-02)
 - [x] Divergência hub × skill sobre a vigência dos tetos/SMIG: resolvida em 2026-10-16. Vigência 2023-01-01, e o teto de PF/AM/AT-MP é 75.000, não 70.000 (communiqué CNPS de 11/01/2023)
-- [ ] Documento que ainda falta no cliente + declaração IFPGAZ 2026 para confirmar o flag de 2026 — cliente (HRBS-14996)
-- [ ] Resposta detalhada em inglês, sem "cara de IA"; responder se os documentos são exigidos todo ano — Wallisson (HRBS-14996)
-- [ ] Abrir tickets separados dos defeitos do GTN REF-P201-861 (pensão CNPS lançada e estornada em 2517/2556 e 2537/2566; acima do teto de pensão; rótulos 2531, 2538, 2560, 2569 "EIS"; falta linha CE 9,2%; bases de transporte e moradia) — Wallisson [INCERTO se já abertos] (HRBS-14996)
-- [ ] Transporte: parametrizar por localidade; exclusão de moradia exige base legal do cliente — Dev/config (HRBS-14996)
-- [ ] Resposta formal no HRBS-14714 (ou vincular ao 14996) — Wallisson (HRBS-14714)
+- [ ] Documento que ainda falta no cliente + declaração IFPGAZ 2026 para confirmar o flag de 2026 — cliente (HRBS-14996) _(ticket fechado: HRBS-14996 Resolved em 2026-09-29 (API, 27/10); conferir se a pendência ainda vale)_
+- [ ] Resposta detalhada em inglês, sem "cara de IA"; responder se os documentos são exigidos todo ano — Wallisson (HRBS-14996) _(ticket fechado: HRBS-14996 Resolved em 2026-09-29 (API, 27/10); conferir se a pendência ainda vale)_
+- [ ] Abrir tickets separados dos defeitos do GTN REF-P201-861 (pensão CNPS lançada e estornada em 2517/2556 e 2537/2566; acima do teto de pensão; rótulos 2531, 2538, 2560, 2569 "EIS"; falta linha CE 9,2%; bases de transporte e moradia) — Wallisson [INCERTO se já abertos] (HRBS-14996) _(ticket fechado: HRBS-14996 Resolved em 2026-09-29 (API, 27/10); conferir se a pendência ainda vale)_
+- [ ] Transporte: parametrizar por localidade; exclusão de moradia exige base legal do cliente — Dev/config (HRBS-14996) _(ticket fechado: HRBS-14996 Resolved em 2026-09-29 (API, 27/10); conferir se a pendência ainda vale)_
+- [ ] Resposta formal no HRBS-14714 (ou vincular ao 14996) — Wallisson (HRBS-14714) _(ticket fechado: HRBS-14714 Resolved em 2026-09-21 (API, 27/10); conferir se a pendência ainda vale)_
 - [ ] Confirmar se o forfait petrolífero cobre também CN 1,2%, TA 0,4%, TFPC 1,2% e CE (corpo do art. 1068 bis ilegível); confirmar inscrição da entidade no regime; baixar o Formulaire Unique da DGI — Wallisson (chat: mercans-compliance)
 - [ ] Refatorar a skill para thin-router — Wallisson (chat: mercans-compliance)
 - [x] Conferir se o 9,20% (Worker Type = 1) da spec CT-A-620 é a linha CE que falta no GTN: confirmado no PDF original que o 9,20% é a CE do expatriado (reg. 4111, `58215 = 1`), 1,20% = CN; falta apenas ligar ao GTN do cliente (2026-10-05) (CT-A-620; HRBS-14996)
@@ -125,6 +130,7 @@
 
 ## Entregas (conferências)
 - 2026-10-16 · — · Teto CNPS PF/AM/AT-MP 70 000 → 75 000 XOF/mês (cópia idêntica em entregas/Costa-do-Marfim/): [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CONFERENCIA|conferência]]
+- 2026-10-16 · — · Conjunto final entregue (difere da pasta de trabalho: CCG v1.3 e CNPS-001 v1.4 com md5 diferentes; inclui a skill cotedivoire): [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - [[correcoes]]: 2026-09-23, parecer HRBS-14996 de 22/09 ("ITS é devido") substituído pelo regime pétrolier.

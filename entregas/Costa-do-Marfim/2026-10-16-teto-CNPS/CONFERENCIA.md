@@ -1,16 +1,16 @@
 # CI — teto CNPS PF / AM / AT-MP: 70 000 → 75 000 XOF/mês (2026-10-16)
 
-**Fonte:** communiqué CNPS de 11/01/2023 (`brain-service/raw/docs/oficiais/CI/2026-10-15-CNPS-communique-nouveau-plafond-2023.pdf`): a partir de 2023-01-01, teto mensal de AM / PF / AT-MP = 75 000; aposentadoria = 3 375 000; piso = 75 000. Base legal: Loi 99-477 art. 23. Derivados: 900 000/ano; 225 000/trimestre; PF 5% = 3 750; AM 0,75% = 562,50 → **563** nos exemplos (CCG §1.5, arredondamento ao franco); AT-MP 3% = 2 250.
+**Fonte:** communiqué CNPS de 11/01/2023 ([[raw/docs/oficiais/CI/2026-10-15-CNPS-communique-nouveau-plafond-2023.pdf|2026-10-15-CNPS-communique-nouveau-plafond-2023.pdf]]): a partir de 2023-01-01, teto mensal de AM / PF / AT-MP = 75 000; aposentadoria = 3 375 000; piso = 75 000. Base legal: Loi 99-477 art. 23. Derivados: 900 000/ano; 225 000/trimestre; PF 5% = 3 750; AM 0,75% = 562,50 → **563** nos exemplos (CCG §1.5, arredondamento ao franco); AT-MP 3% = 2 250.
 
 **Decisões do usuário (16/10):** base do CCG = v1.1 (1); CCG v1.3, DISA v1.5, WTC v1.3, CNPS-001 v1.4, Design v1.2; AM = 563; "3 231/day" → "225 000/quarter"; WTC: corrigir também a aba ativa "Wage Type Catalogue V1".
 
 ## Arquivos
 | Arquivo novo | Base (export do Drive em 16/10, 09:14–09:15) | Alterações |
 |---|---|---|
-| `CI-WTC-001-v1.3.xlsx` | `CI-WTC-001-v1.1 (1).xlsx` (VC até 1.2) | 22 células: 17 do teto + 5 da linha 1.3 no VC |
-| `CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx` | `…-Spec (1).xlsx` (VC até v1.3) | 43 células: 41 do teto/exemplos + 2 no VC |
-| `CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx` | `…-Spec (1).xlsx` (VC até v1.3) | 10 células: 8 do teto/exemplos + 2 no VC (v1.4 não usada: rascunho local de 18/08 nunca publicado) |
-| `CI-CCG-001-v1.3.docx` | `CI-CCG-001-v1.1 (1).docx` | 102 trechos (1 capa, 56 menções ao teto, 21 valores de PF/AM/AT, 24 totais refeitos) |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-WTC-001-v1.3.xlsx\|CI-WTC-001-v1.3.xlsx]] | `CI-WTC-001-v1.1 (1).xlsx` (VC até 1.2) | 22 células: 17 do teto + 5 da linha 1.3 no VC |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx\|CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx]] | `…-Spec (1).xlsx` (VC até v1.3) | 43 células: 41 do teto/exemplos + 2 no VC |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx\|CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx]] | `…-Spec (1).xlsx` (VC até v1.3) | 10 células: 8 do teto/exemplos + 2 no VC (v1.4 não usada: rascunho local de 18/08 nunca publicado) |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-CCG-001-v1.3.docx\|CI-CCG-001-v1.3.docx]] | `CI-CCG-001-v1.1 (1).docx` | 102 trechos (1 capa, 56 menções ao teto, 21 valores de PF/AM/AT, 24 totais refeitos) |
 | `CI_Regulation_Design_v1_2.md` | `CI_Regulation_Design_v1_1.md` | 6 linhas (1, 89, 128, 220 ×2, 301, 423) + nota de changelog v1.2 |
 
 Destaque: células xlsx com fill `FFDDEBF7`; trechos do docx com sombreamento `DDEBF7` (102 runs). O `.md` não tem cor: a lista está em `conferencia/logdesign.txt`.
@@ -50,12 +50,16 @@ Teto da aposentadoria 3 375 000 / 40 500 000; piso 75 000; "525 000" da tabela d
 ## Arquivos finais (esta pasta)
 | Arquivo | Versão | md5 | Importar para (Drive, Côte d'Ivoire) | Origem da cópia / conferência |
 |---|---|---|---|---|
-| `CI-WTC-001-v1.3.xlsx` | 1.3 | `5ba6675bdbfa23d9145f2abd967c4193` | `03 - WTC/CI-WTC-001-v1.3.gsheet` | Pasta de trabalho da Pipeline; idêntico ao .xlsx copiado no Drive às 10:06 (cmp) e ao que a Gmail usou (`ci_fix/fin`) |
-| `CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx` | v1.4 | `ee2e1bb90c5bca2022c109bf6cc9cc15` | `17 - Statutory Reports/CI-CNPS-001-MonthlySocialContributions-Spec.gsheet` | Final da Gmail (`ci_fix/fin`), md5 igual ao informado pela Gmail |
-| `CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx` | v1.5 | `35e6f0661782d709fa169a19dd052b48` | `17 - Statutory Reports/CI-CNPS-002-DISAAnnualSalaries-Spec.gsheet` | Pasta de trabalho da Pipeline = `ci_fix/fin` (sem mudança da Gmail) |
-| `CI-CCG-001-v1.3.docx` | v1.3 | `48ed5eb32e82170651b933ec0d2e4197` | `05 - Payroll Regulation Guide/CI-CCG-001-v1.3.gdoc` | Final da Gmail (`ci_fix/fin`), md5 igual ao informado pela Gmail |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-WTC-001-v1.3.xlsx\|CI-WTC-001-v1.3.xlsx]] | 1.3 | `5ba6675bdbfa23d9145f2abd967c4193` | `03 - WTC/CI-WTC-001-v1.3.gsheet` | Pasta de trabalho da Pipeline; idêntico ao .xlsx copiado no Drive às 10:06 (cmp) e ao que a Gmail usou (`ci_fix/fin`) |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx\|CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx]] | v1.4 | `ee2e1bb90c5bca2022c109bf6cc9cc15` | `17 - Statutory Reports/CI-CNPS-001-MonthlySocialContributions-Spec.gsheet` | Final da Gmail (`ci_fix/fin`), md5 igual ao informado pela Gmail |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx\|CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx]] | v1.5 | `35e6f0661782d709fa169a19dd052b48` | `17 - Statutory Reports/CI-CNPS-002-DISAAnnualSalaries-Spec.gsheet` | Pasta de trabalho da Pipeline = `ci_fix/fin` (sem mudança da Gmail) |
+| [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI-CCG-001-v1.3.docx\|CI-CCG-001-v1.3.docx]] | v1.3 | `48ed5eb32e82170651b933ec0d2e4197` | `05 - Payroll Regulation Guide/CI-CCG-001-v1.3.gdoc` | Final da Gmail (`ci_fix/fin`), md5 igual ao informado pela Gmail |
 | `CI_Regulation_Design_v1_2.md` | v1.2 | `7509f28411929ae36ea484057fe18f67` | `07 - Design/CI_Regulation_Design_v1_2.md` (já é o arquivo) | Copiado do Drive; md5 igual ao Drive |
 | `payroll-compliance-cotedivoire.skill` | — | `77ced967d8d0f60943cf6fbef3c4f39e` | `18 -  Skill Files/payroll-compliance-cotedivoire.skill` (já é o arquivo) | Copiado do Drive; md5 igual ao Drive |
 | `payroll-compliance-cotedivoire-SKILL.md` | — | `888bff6ce7d84949b0cfb46f61766d5b` | `18 -  Skill Files/payroll-compliance-cotedivoire-SKILL.md` (já é o arquivo) | Copiado do Drive; md5 igual ao Drive |
 
 **Limite da conferência:** depois da importação (17:02–17:06), o Drive só guarda os quatro artefatos como Google Docs/Sheets (`.gdoc`/`.gsheet` são atalhos de 188 bytes). Não dá para tirar o md5 deles pelo disco. Por isso, o md5 dos quatro foi conferido contra os arquivos dos quais a importação partiu, não contra o Drive. Para provar que o conteúdo importado é igual, é preciso exportar o .gsheet/.gdoc de novo e comparar célula a célula.
+
+## Arquivos da entrega
+- [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/CI_Regulation_Design_v1_2|CI_Regulation_Design_v1_2]]: Cópia do Design v1.2 (idêntico ao de Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS).
+- [[entregas/Costa-do-Marfim/2026-10-16-teto-CNPS/payroll-compliance-cotedivoire-SKILL|payroll-compliance-cotedivoire-SKILL]]: SKILL.md payroll-compliance-cotedivoire (ITS, CNPS, FDFP, 2026) em cópia final.

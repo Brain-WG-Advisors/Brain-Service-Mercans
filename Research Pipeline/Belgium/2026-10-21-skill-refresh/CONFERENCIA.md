@@ -7,9 +7,9 @@ Pedido: usuário (21/10), depois da WTC v1.1. Pedido original da Suman: "uploade
 - Fontes novas (todas do Drive, em `fontes/`):
   | Artefato | Arquivo | md5 |
   |---|---|---|
-  | CCG | `BE-CCG-001-v1.0_export-2026-10-21.docx` (export do `.gdoc` pelo Chrome, com ok do usuário) | `fdccaeb0350614ab371d3bbd335c0929` |
-  | WTC | `BE-WTC-001-v1.1.xlsx` (= Drive), depois `BE-WTC-001-v1.2.xlsx` (= Drive, v3 da skill) | `40597553aa126f026574c41cc18bcf56` / `407411a16d27f98e04698782a9c76b72` |
-  | DD | `BE-DD-001-v1.0_export-2026-10-16.xlsx` (o `.gsheet` não muda desde 17/09) | `9e29fca8066ad1c93b25cdcc8944cfd3` |
+  | CCG | [[Research Pipeline/Belgium/2026-10-21-skill-refresh/fontes/BE-CCG-001-v1.0_export-2026-10-21.docx\|BE-CCG-001-v1.0_export-2026-10-21.docx]] (export do `.gdoc` pelo Chrome, com ok do usuário) | `fdccaeb0350614ab371d3bbd335c0929` |
+  | WTC | [[Research Pipeline/Belgium/2026-10-21-skill-refresh/fontes/BE-WTC-001-v1.1.xlsx\|BE-WTC-001-v1.1.xlsx]] (= Drive), depois [[Research Pipeline/Belgium/2026-10-21-skill-refresh/fontes/BE-WTC-001-v1.2.xlsx\|BE-WTC-001-v1.2.xlsx]] (= Drive, v3 da skill) | `40597553aa126f026574c41cc18bcf56` / `407411a16d27f98e04698782a9c76b72` |
+  | DD | [[Research Pipeline/Belgium/2026-10-21-skill-refresh/fontes/BE-DD-001-v1.0_export-2026-10-16.xlsx\|BE-DD-001-v1.0_export-2026-10-16.xlsx]] (o `.gsheet` não muda desde 17/09) | `9e29fca8066ad1c93b25cdcc8944cfd3` |
   | Report Specs | 9 × `*_v1.1.xlsx` copiados de `12- Country Report Codes` | ver `fontes/specs/` |
 
 ## O que foi conferido antes
@@ -58,8 +58,11 @@ Pedido: usuário (21/10), depois da WTC v1.1. Pedido original da Suman: "uploade
 
 ## v4 (2026-10-23, com ok do usuário: "ok, republica a skill com a v1.3")
 - Suman confirmou no DM (23/10, 1h20): só as séries 62, 65 e 79. A aba All Codes do Global WTC 1.1, reconferida em 23/10 (depois da edição da Lily Li), continua com 489/142/413 = 1.044 códigos nessas séries, soma 68.848.684 = códigos da v1.3 menos 65880–65899.
-- `fontes/BE-WTC-001-v1.3.xlsx` (md5 `def7afa421b56337aa3b306591f369de` = Drive). `regen_refs.py` passa a ler a v1.3. Regenerados os 4 arquivos: 01, 04 e 05 idênticos aos da v3 (`diff -rq` contra `_v3/`); só o `02-wtc.md` difere.
+- [[Research Pipeline/Belgium/2026-10-21-skill-refresh/fontes/BE-WTC-001-v1.3.xlsx|BE-WTC-001-v1.3.xlsx]] (md5 `def7afa421b56337aa3b306591f369de` = Drive). `regen_refs.py` passa a ler a v1.3. Regenerados os 4 arquivos: 01, 04 e 05 idênticos aos da v3 (`diff -rq` contra `_v3/`); só o `02-wtc.md` difere.
 - `SKILL.md`: descrição (frontmatter) → "v1.3, 1,182 rows"; tabela Version of record → WTC v1.3 (1.182 linhas); bullet novo da v1.3 (355 linhas 829–1183: 62 = 1, 65 = 14, 79 = 340, contados no xlsx); residuais e roteamento → v1.3, slots 361–1183.
 - Zip: 8 arquivos; md5 `b33e42482f9873bd61db2565900468c3`.
 - claude.ai: Substituir → v4; no claude.ai, conferido o texto do SKILL.md (v1.3, 1.182 linhas, 340) e do 02-wtc.md (título v1.3, 79240, 79999); Publicar para organização com nota de versão; tela: "Publicado v4 — v4 está ativa para sua organização".
 - 2026-10-23 · Pipeline · skill v4 publicada para a organização.
+
+## Arquivos da entrega
+- Mapa dos arquivos desta pasta: [[Research Pipeline/Belgium/2026-10-21-skill-refresh/MAPA|mapa]]

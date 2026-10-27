@@ -19,6 +19,8 @@
 - **Resposta direta e humana**, sem estrutura robótica, com corte de tamanho; em inglês nos tickets. Feedback do solicitante em 2026-09-28: mais detalhada, em inglês, "sem aparência de IA" (tickets: AF; chat: mercans-compliance).
 - Quando falta arquivo nomeado para fechar o ticket, pedir explicitamente (chat: mercans-compliance).
 - Gap de produto declarado como gap (não mapeamento chutado) quando não há wage type no WTC (tickets: ES-A).
+- [[rascunhos/2026-10-14-respostas-fila|2026-10-14-respostas-fila]]: Rascunhos de resposta da fila de 14/10 (SR-432 ES etc.) com fontes primárias de UA e ES
+- [[rascunhos/2026-10-15-respostas-fila|2026-10-15-respostas-fila]]: Rascunhos de resposta de 15/10 (SR-162 D5 etc.) com a prova ao lado de cada afirmação
 
 ## Como sabemos que ficou certo (qualidade)
 - Posição estatutária confirmada em **fonte primária** e **declarada com nível de confiança**; resolver só o que foi pedido ("verificar" não é "corrigir"); achados próprios só se críticos de compliance e fora do texto do ticket (chat: mercans-compliance).
@@ -28,12 +30,15 @@
 - Um só arquivo de spec: atualizar o arquivo linkado na descrição do ticket e registrar a versão no Version Control (tickets: ES-A).
 - Destaques por cor na planilha: laranja = corrigido; verde = novo/atualizado; rosa/magenta/roxo = queries da BA (tickets: ES-A). Estilo da coluna de resposta nas specs: inglês, veredito primeiro, uma linha, sem `$` paths (decisão 2026-09-23) (chat: mercans-compliance).
 - Resposta que muda artefato: registrar no Version Control e no hub do país (ciclo KCS abaixo).
+- [[rascunhos/2026-10-16-auditoria-tickets|2026-10-16-auditoria-tickets]]: Auditoria independente (janela Certificação) dos rascunhos de ticket: afirmações, fonte primária, cobertura
 
 ## Ciclo KCS (registro no fluxo)
 1. Fechou ticket → "fechei o ticket X"
 2. Entra no hub do país
 3. Se revelou erro → [[correcoes]]
 4. Se mudou artefato → versão atualizada no hub
+- [[rascunhos/2026-10-20-resposta-muhammad-monday-escrita|2026-10-20-resposta-muhammad-monday-escrita]]: Resposta ao Muhammad sobre escrita negada no board Monday (permissões owners)
+- [[rascunhos/2026-10-26-muhammad-status-automacao-tickets|2026-10-26-muhammad-status-automacao-tickets]]: Resposta ao Muhammad sobre status da automação de tickets (tracked changes, ID no comentário)
 
 ## Padrões recorrentes de ticket
 - **Spec com dezenas de queries da BA:** Fichero de Bases (SR-79), AFI (SR-80/SR-432: 78 queries em uma coluna, 76 em outra), CRA (SR-81), M190 (SR-83). Respostas em lote, spec única consolidada, validação com amostra A3 como etapa padrão (tickets: ES-A, ES-B; chat: mercans-compliance).
@@ -52,6 +57,8 @@
 - **Fronteira com Reports (NL):** Reports só mexe em Custom Reports com spec; perguntam a Compliance se o report é statutory (tickets: OUT).
 - **Ticket fora do lugar:** HRBS-13860 (Naersa, Irlanda) caiu no grupo errado, é L2/integração e não compliance (tickets: AF).
 - **Em aberto (OD-13):** HRBS- de Compliance Support edita artefato direto ou escala para CT-? Exemplo-base: HRBS-11078 (chat: mercans-compliance).
+- [[rascunhos/2026-10-05-fila-tickets|2026-10-05-fila-tickets]]: Fila de tickets sem resposta nossa (snapshots até 29/09), montada a partir dos hubs de país
+- [[rascunhos/2026-10-15-perguntas-fila|2026-10-15-perguntas-fila]]: Perguntas em aberto da fila YouTrack em 15/10 (último pedido feito a nós por ticket)
 
 ## Países
 [[Africa-do-Sul]] · [[Alemanha]] · [[Australia]] · [[Bahrein]] · [[Belarus]] · [[Belgica]] · [[Botsuana]] · [[Bulgaria]] · [[Canada]] · [[Chade]] · [[Chile]] · [[China]] · [[Chipre]] · [[Colombia]] · [[Congo]] · [[Costa-Rica]] · [[Costa-do-Marfim]] · [[Dinamarca]] · [[Egito]] · [[Espanha]] · [[Estonia]] · [[Filipinas]] · [[Finlandia]] · [[Franca]] · [[Gabao]] · [[Guine-Equatorial]] · [[Holanda]] · [[Hungria]] · [[India]] · [[Indonesia]] · [[Irlanda]] · [[Kuwait]] · [[Libano]] · [[Lituania]] · [[Malasia]] · [[Marrocos]] · [[Mocambique]] · [[Namibia]] · [[Noruega]] · [[Portugal]] · [[RD-Congo]] · [[Reino-Unido]] · [[Romenia]] · [[Singapura]] · [[Suecia]] · [[Tailandia]] · [[Tchequia]] · [[Ucrania]] · [[Vietna]]

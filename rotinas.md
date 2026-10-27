@@ -11,6 +11,8 @@
 | 3 | **Chat** (Mercans) | Idem, para as conversas do time (usuário cola/exporta) | Mesma lista curta | `frentes/chat/estado.md` + `rascunhos/AAAA-MM-DD-triagem-chat*.md` |
 
 Cada frente 1–5 tem a sua janela do Claude Code, aberta na sua pasta `frentes/<frente>/` (abrir com `scripts/abrir_frentes.ps1`). Regras de convivência: [[CLAUDE]] → "Janelas paralelas".
+- [[rascunhos/2026-10-16-triagem-emails|2026-10-16-triagem-emails]]: Triagem de e-mails de 16/10 pela janela Gmail (Chrome, só leitura)
+- [[rascunhos/2026-10-19-triagem-emails|2026-10-19-triagem-emails]]: Triagem de e-mails de 19/10 (ceiling Costa do Marfim etc.)
 
 ## De fundo (sem horário, mas não pode cair no esquecimento)
 

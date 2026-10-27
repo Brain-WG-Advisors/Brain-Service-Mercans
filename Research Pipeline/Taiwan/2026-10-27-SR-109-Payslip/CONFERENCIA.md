@@ -9,8 +9,8 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs." Pontos herdado
 ## Arquivos
 | Arquivo | md5 |
 |---|---|
-| Base: `raw/docs/drive-exports/2026-10-27/TW Payslip Specification.xlsx` (export de hoje, igual à de 23/10) | `1cbe1e44477b982032520e3d7c26efdc` |
-| Final: `TW Payslip Specification_v1.2.xlsx` (esta pasta), após a rodada 2 | `ba8c27add3ee9680738db2008f3985a1` (rodada 1: `d198bd28f8c0910e47572e42c47b0c1a`) |
+| Base: [[raw/docs/drive-exports/2026-10-27/TW Payslip Specification.xlsx\|TW Payslip Specification.xlsx]] (export de hoje, igual à de 23/10) | `1cbe1e44477b982032520e3d7c26efdc` |
+| Final: [[Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/TW Payslip Specification_v1.2.xlsx\|TW Payslip Specification_v1.2.xlsx]] (esta pasta), após a rodada 2 | `ba8c27add3ee9680738db2008f3985a1` (rodada 1: `d198bd28f8c0910e47572e42c47b0c1a`) |
 | `scripts/build_v12.py` | gera a v1.2 por cirurgia XML + zip (partes não alteradas byte a byte) |
 | `scripts/compare_v12.py` → `comparacao-celula-a-celula.md` | conferência célula a célula + validação do pacote |
 | `scripts/changes.json` | lista das 125 células escritas |
@@ -22,9 +22,9 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs." Pontos herdado
 |---|---|---|---|
 | P1 | Labor Standards Act (勞動基準法), MOL | `raw/docs/oficiais/TW/2026-10-23-payslip-LSA-labor-standards-act-mol.html` | art. 23 (明細 com o pagamento; 工資清冊 5 anos), art. 24 (dia útil +1/3 até 2 h, +2/3 nas 2 h seguintes; 休息日 1⅓ até 2 h, 1⅔ depois), art. 32-1, art. 38, art. 39 (休假 trabalhado = dobro), art. 40, art. 79 (multa NT$20.000–1.000.000) |
 | P2 | LSA Enforcement Rules (施行細則), MOL | `raw/docs/oficiais/TW/2026-10-23-payslip-LSA-enforcement-rules-mol.html` | art. 14-1: (1) 勞雇雙方議定之工資總額, (2) 工資各項目之給付金額, (3) deduções, (4) 實際發給之金額; §2 papel/eletrônico/acessível e imprimível |
-| P3 | MOL 參考例 (anexo do ticket) | `raw/tickets/api/anexos/SR-109/20250807-0604 - 8. Pay slip勞動基準法第23條第1項-工資各項目計算方式明細-之參考例 (1).pdf` | modelos 1–3 (rótulos zh-TW, 倍率/時數, 約定薪資結構), notas 3–4 (休息日 >8 h 2⅔; 休假日 ≤8 h +1 dia, >8 h +1/3 e +2/3), nota 7 (modelo adaptável) |
-| I1 | DD V3.3 | `raw/docs/drive-exports/2026-10-23/Taiwan Data Dictionary V3.3.xlsx` | `id_card_number` (ID Information, ordinal 8, rótulo 證件號碼); Country Fields sem endereço da entidade (só `$legal_entity_hr.post_code`), sem salário acordado, sem data de pagamento |
-| I2 | WTC V2.8 | `raw/docs/drive-exports/2026-10-23/Taiwan WTC V2.8.xlsx` | PEs 62110/62111, 62120–62122, 62130–62132 (nomes com multiplicador); todos "Lump Sum", sem fórmula |
+| P3 | MOL 參考例 (anexo do ticket) | [[raw/tickets/api/anexos/SR-109/20250807-0604 - 8. Pay slip勞動基準法第23條第1項-工資各項目計算方式明細-之參考例 (1).pdf\|20250807-0604 - 8. Pay slip勞動基準法第23條第1項-工資各項目計算方式明細-之參考例 (1).pdf]] | modelos 1–3 (rótulos zh-TW, 倍率/時數, 約定薪資結構), notas 3–4 (休息日 >8 h 2⅔; 休假日 ≤8 h +1 dia, >8 h +1/3 e +2/3), nota 7 (modelo adaptável) |
+| I1 | DD V3.3 | [[raw/docs/drive-exports/2026-10-23/Taiwan Data Dictionary V3.3.xlsx\|Taiwan Data Dictionary V3.3.xlsx]] | `id_card_number` (ID Information, ordinal 8, rótulo 證件號碼); Country Fields sem endereço da entidade (só `$legal_entity_hr.post_code`), sem salário acordado, sem data de pagamento |
+| I2 | WTC V2.8 | [[raw/docs/drive-exports/2026-10-23/Taiwan WTC V2.8.xlsx\|Taiwan WTC V2.8.xlsx]] | PEs 62110/62111, 62120–62122, 62130–62132 (nomes com multiplicador); todos "Lump Sum", sem fórmula |
 | I3 | Outras specs TW (export 2026-10-27) | Tax Report, SNHI, SI Join/Salary/Termination | usam `$hr.id_card_number`; SI Termination usa `$hr.passport_number` para não residentes |
 
 ## Decisões (o que entrou na v1.2, rodada 1; o que mudou está em "Rodada 2")
@@ -81,7 +81,7 @@ O build parte de novo da base, com `scripts/build_v12.py` ajustado; a rodada 1 f
 
 | # | Célula | Correção | Fonte conferida por mim |
 |---|---|---|---|
-| 1 | Spec!Q6, Q15, Q51 | Variáveis core propostas, com a marca "proposed (as in Mercans reference payslips) — confirm variable name with Mohit/BA". Endereço: `CONCAT($legal_entity_address.1.address_line_1;…;postal_code)`. Data: `$payroll.payment_date` (Tunísia) **ou** `$entry.payroll_payment_date` (Moçambique), as duas citadas porque divergem. Moeda: `$primary_employee_bank_account.account_currency` | `frentes/pipeline/mercans-pipeline/shared/REFERENCE_Payslip_Tunisia.xlsx` (md5 5f10c16f…), Payslip Spec!D10, D12, D62; `REFERENCE_Payslip_Mozambique.xlsx` (md5 3511b05a…), Payslip Spec 1!D11, D13, D64 |
+| 1 | Spec!Q6, Q15, Q51 | Variáveis core propostas, com a marca "proposed (as in Mercans reference payslips) — confirm variable name with Mohit/BA". Endereço: `CONCAT($legal_entity_address.1.address_line_1;…;postal_code)`. Data: `$payroll.payment_date` (Tunísia) **ou** `$entry.payroll_payment_date` (Moçambique), as duas citadas porque divergem. Moeda: `$primary_employee_bank_account.account_currency` | [[frentes/pipeline/mercans-pipeline/shared/REFERENCE_Payslip_Tunisia.xlsx\|REFERENCE_Payslip_Tunisia.xlsx]] (md5 5f10c16f…), Payslip Spec!D10, D12, D62; `REFERENCE_Payslip_Mozambique.xlsx` (md5 3511b05a…), Payslip Spec 1!D11, D13, D64 |
 | 2 | Spec!T22, T37 | Deixa de afirmar Net = Gross − Deductions. Registra que 65500:65859 inclui nocionais (65508/65509 Car, 65609 Phone, 65659 Meal "(Notional)", categoria Earning) e acrescenta "TO BE CONFIRMED BY MOHIT/BA: exclude notional benefits from Total Gross or show them separately". Q22 não foi mudado | WTC V2.8, aba WTC (os 4 são os únicos "Notional" em 65500:65859) |
 | 3 | Spec!U14 | 到（離）職日期 | P3, modelo 3 (cabeçalho "到（離）職日期") |
 | 4 | Spec!H16 | Amostra fictícia 3210 (igual ao I19), sem TBC | — |
@@ -97,3 +97,9 @@ O build parte de novo da base, com `scripts/build_v12.py` ajustado; a rodada 1 f
 |---|---|---|
 | 2026-10-27 | Suporte (construtor C) | v1.2 gerada da export de 27/10 (md5 1cbe1e44…); 125 células em azul-claro; Report Matrix nova; colunas RA e zh-TW; conferência célula a célula sem diferença fora do escopo; comentário EN rascunhado, nada postado |
 | 2026-10-27 | Suporte (construtor C), rodada 2 | 8 correções da revisão independente (29 células); md5 ba8c27ad…; diff r1×r2 e base×r2 sem diferença fora do escopo; comentário atualizado |
+
+## Arquivos da entrega
+- [[Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/REVISAO-independente|REVISAO-independente]]: Revisão independente da Payslip spec v1.2 Taiwan: FAIL rodada 1, 2 MAJOR, 125 células alteradas.
+- [[Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/comentario|comentario]]: Rascunho de comentário (EN, não postado, rodada 2) sobre overtime por tipo de dia e linhas novas do payslip.
+- [[Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/comparacao-celula-a-celula|comparacao-celula-a-celula]]: Conferência célula a célula da Payslip spec base x v1.2 (rodada 1).
+- [[Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/comparacao-rodada2|comparacao-rodada2]]: Diff célula a célula da v1.2 rodada 1 x rodada 2 (Version Control e correções).

@@ -1,12 +1,12 @@
 # CO-PILA-007 - PILA of the pension payer (Anexo Técnico 3) - build notes, 2026-10-21
 
-Internal file (not for development). Companion to `CO-PILA-007-AportesPensionados-Spec.xlsx` (same folder). Built by `build_co_pila_007.py`; the sample records are also in `sample-records.txt` (482 / 285 / 519 / 519 characters).
+Internal file (not for development). Companion to [[Research Pipeline/Colombia/co-report-crosscheck/04-output/new-spec/CO-PILA-007-AportesPensionados-Spec.xlsx|CO-PILA-007-AportesPensionados-Spec.xlsx]] (same folder). Built by `build_co_pila_007.py`; the sample records are also in `sample-records.txt` (482 / 285 / 519 / 519 characters).
 
 ## 1. Sources per section
 
 | Section of the workbook | Source (read on 2026-10-21) |
 |---|---|
-| Field table (all 108 rows), positions, lengths, types, validations, code lists | Res. MSPS 2388/2016 **Anexo Técnico 3 v15, 24-07-2026** - `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf` (md5 cf0bf837e8027e85cbfe4276b0d676ba per the RA) |
+| Field table (all 108 rows), positions, lengths, types, validations, code lists | Res. MSPS 2388/2016 **Anexo Técnico 3 v15, 24-07-2026** - [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf\|2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf]] (md5 cf0bf837e8027e85cbfe4276b0d676ba per the RA) |
 | Health rate bands (T2R2-048, Field Options, Population Rules) | Ley 100/1993 art. 204 par. 5 incl. inciso of Ley 2294/2023 art. 78 - `raw/docs/oficiais/CO/2026-10-21-Ley-100-1993-FuncionPublica.html`; Res. MSPS 1271/2023 art. 1 (AT1 table "A partir del año 2024") - `raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-colpensiones.htm` |
 | Rounding (Rounding column, File Structure, Population Rules) | Decreto 780/2016 art. 3.2.1.5 (text of Decreto 1990/2016 art. 1) - `raw/docs/oficiais/CO/2026-10-13-Decreto-780-2016-FuncionPublica.html` |
 | IBC = mesada (T2R2-039) | Decreto 780/2016 art. 2.2.1.1.2.1 (same local file) |
@@ -15,7 +15,7 @@ Internal file (not for development). Companion to `CO-PILA-007-AportesPensionado
 | Scope (pensioners vs employees vs retirees), WT codes | `04-output/RA-PENSIONERS-PILA-2026-10-21.md`; `HANDOFF-2026-10-21.md` (BAU answers Q1, Q19); WT names from `04-output/*` (62154 'Monthly Retired Pension-6798'; 21645-21647 'Medical Plan - Healthcare Insurance (EPS) - Pensioner'; 21643 / 21648 / 21644 'Solidarity Pension Fund-Pensioner') |
 | FSP 1% / 2% above 10 / 20 SMLMV (T2R2-036, 047; Field Options; Population Rules) | Ley 797/2003 art. 8 (new Ley 100 art. 27 num. 2 lit. d) - `raw/docs/oficiais/CO/2026-10-21-Ley-797-2003-SecretariaSenado.html` (Secretaría del Senado, md5 6083dab7a899235d457dba46fa50eef7), saved and read in round 2 |
 | Electronic payroll cross-reference (Report Matrix) | Res. DIAN 000227/2025 art. 1.5.3.2.3, as quoted in the RA (not reopened here) |
-| Layout and styles | Structural precedent `05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx` (styles copied cell by cell, no content) |
+| Layout and styles | Structural precedent [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx\|CO-PILA-003-AportesSeguridadSocial-Spec.xlsx]] (styles copied cell by cell, no content) |
 | SMLMV 2026 = 1,750,905 (worked example only) | Decreto 0159 de 2026 (transitional), as recorded in `paises/Colombia.md`; decree not reopened here |
 
 ## 2. AT3 v15 pages used

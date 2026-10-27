@@ -3,13 +3,13 @@
 Date: 2026-10-21. Author: Compliance researcher (RA). Method: primary official sources only. Each quote was read in the source itself. Secondary sites were used only to find documents and are not cited.
 
 Sources downloaded today (all in `raw/docs/oficiais/CO/`):
-- `2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf`: Res. 2388/2016 Anexo Técnico 2, consolidated, **"CÓDIGO: AT2 VERSIÓN: 30 FECHA: 24-07-2026"** (last act listed: Res. 1529 de 2026). Source URL: https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/OT/anexo-tecnico2-cotizantes.pdf
-- `2026-10-21-UGPP-Empleadores-IBC-2021.pdf`: UGPP, "Ingreso base de cotización - Empleadores". Source URL: https://www.ugpp.gov.co/sites/default/files/Parafiscales/Empleadores-IBC-2021.pdf
+- [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf|2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf]]: Res. 2388/2016 Anexo Técnico 2, consolidated, **"CÓDIGO: AT2 VERSIÓN: 30 FECHA: 24-07-2026"** (last act listed: Res. 1529 de 2026). Source URL: https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/OT/anexo-tecnico2-cotizantes.pdf
+- [[raw/docs/oficiais/CO/2026-10-21-UGPP-Empleadores-IBC-2021.pdf|2026-10-21-UGPP-Empleadores-IBC-2021.pdf]]: UGPP, "Ingreso base de cotización - Empleadores". Source URL: https://www.ugpp.gov.co/sites/default/files/Parafiscales/Empleadores-IBC-2021.pdf
 - `2026-10-21-Ley-1393-2010-SecretariaSenado.html`, `2026-10-21-Ley-789-2002-SecretariaSenado.html`, `2026-10-21-CST-pr006-SecretariaSenado.html` (secretariasenado.gov.co)
-- `2026-10-21-UGPP-Res-205-2024-modifica-Res-1702-2021.pdf`: checked and **not relevant**. It covers the standards for collecting overdue contributions (cobro de cartera morosa), not IBC parameters.
+- [[raw/docs/oficiais/CO/2026-10-21-UGPP-Res-205-2024-modifica-Res-1702-2021.pdf|2026-10-21-UGPP-Res-205-2024-modifica-Res-1702-2021.pdf]]: checked and **not relevant**. It covers the standards for collecting overdue contributions (cobro de cartera morosa), not IBC parameters.
 
 Sources already on the machine:
-- Res. MSPS 467/2025 (`2026-10-13-Res-MSPS-467-2025-PILA.pdf`)
+- Res. MSPS 467/2025 ([[raw/docs/oficiais/CO/2026-10-13-Res-MSPS-467-2025-PILA.pdf|2026-10-13-Res-MSPS-467-2025-PILA.pdf]])
 - Ley 21/1982 (`2026-10-13-Ley-21-1982-SENA.htm`, SENA compilation)
 - Ley 100/1993 (`2026-10-21-Ley-100-1993-FuncionPublica.html`)
 - DUR 780/2016 and DUR 1072/2015 (FunciónPública copies)
@@ -98,7 +98,7 @@ Anexo Técnico Documento Soporte de Pago de Nómina Electrónica, Versión 1.0 (
 
 - **Sources:**
   - XSD: `Research Pipeline/Colombia/CO-compliance/integration-sources/dian-ne/caja/Caja-de-Herramientas-Nomina-Electronica-V1-0/XSD/NominaIndividualElectronicaXSDV1.0.6.xsd` and `...DeAjusteElectronicaXSDV1.0.6.xsd`. These come from DIAN's Caja de Herramientas: https://www.dian.gov.co/impuestos/factura-electronica/Documents/Caja-de-Herramientas-Nomina-Electronica-V1-0.zip
-  - Annex: `.../Anexo Tecnico/Anexo Tecnico Documento Soporte de Pago de Nómina Electrónica - V1.0.pdf` (text in `.../dian-ne/_txt/anexo-tecnico-v1.0.txt`).
+  - Annex: [[Research Pipeline/Colombia/CO-compliance/integration-sources/dian-ne/caja/Caja-de-Herramientas-Nomina-Electronica-V1-0/Anexo Tecnico/Anexo Tecnico Documento Soporte de Pago de Nómina Electrónica - V1.0.pdf|Anexo Tecnico Documento Soporte de Pago de Nómina Electrónica - V1.0.pdf]] (text in `.../dian-ne/_txt/anexo-tecnico-v1.0.txt`).
   - The local snapshot of DIAN's technical-documentation page links only Res. 000013/2021 + annex and Caja V1.0. No later XSD version was found on the machine.
 - **Confidence:** **High.** The XSD type was read directly and confirmed by the validation test.
 - **Not located:** any DIAN rule on **how to report a fractional day count** (rounding or truncation). Only a DIAN statement (concepto / FAQ / annex note) would settle that. Without one, the only thing that can be stated is that the value must be a whole number.
@@ -123,7 +123,7 @@ UGPP, "Ingreso base de cotización - Empleadores" (2021):
 - The statute includes "descansos remunerados de Ley". The UGPP, the authority that audits these contributions, reads that phrase as **expressly covering vacation compensated in cash and vacation paid on contract liquidation**.
 - Art. 17 names Subsidio Familiar (CCF) and SENA. The ICBF base is the "nómina mensual de salarios" of Ley 89/1988 art. 1, which was **not downloaded** in this round. The UGPP document groups ICBF in the same IBC PARAF.
 
-- **Sources:** Ley 21/1982 art. 17 (`raw/docs/oficiais/CO/2026-10-13-Ley-21-1982-SENA.htm`); UGPP PDF (URL above; local copy `2026-10-21-UGPP-Empleadores-IBC-2021.pdf`).
+- **Sources:** Ley 21/1982 art. 17 (`raw/docs/oficiais/CO/2026-10-13-Ley-21-1982-SENA.htm`); UGPP PDF (URL above; local copy [[raw/docs/oficiais/CO/2026-10-21-UGPP-Empleadores-IBC-2021.pdf|2026-10-21-UGPP-Empleadores-IBC-2021.pdf]]).
 - **Confidence:** **Medium-High.** The statute is clear about "descansos remunerados", and the UGPP's official reading names compensated vacation explicitly. That UGPP document is official guidance, not a resolution. ICBF: Medium, pending Ley 89/1988 art. 1.
 
 ### (a) Health and pension: **NOT LOCATED as an express primary rule.** The official signals point to exclusion.

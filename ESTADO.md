@@ -3,7 +3,7 @@
 > Atualizado em 2026-10-26 (fim da sessão [[sessoes/2026-10-26]]; demais blocos sem mudança desde 2026-10-20). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
 
 ## Colômbia PMI — pesquisa concluída (2026-10-26)
-- Encerrada em 26/10: artefatos finais no Drive/Monday (7 specs v1.0, CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1); delta ao design e e-mail de encerramento enviados pelo usuário; registros no chat "Research Pipeline II". Resumo: [[sessoes/2026-10-26]]; planilha `co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx`.
+- Encerrada em 26/10: artefatos finais no Drive/Monday (7 specs v1.0, CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1); delta ao design e e-mail de encerramento enviados pelo usuário; registros no chat "Research Pipeline II". Resumo: [[sessoes/2026-10-26]]; planilha [[Research Pipeline/Colombia/co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx|CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx]].
 - YouTrack CT-4593/SR-470: o usuário decidiu não editar (27/10, janela Suporte); levantamento em `rascunhos/2026-10-26-youtrack-links-CO.md`.
 - Depois: timeline do Andy quando o Mohit confirmar datas; skill `payroll-compliance-colombia` (#17). Com terceiros, sem bloquear: #54/#55 (cliente/BAU), #41/#51 (Manju/DIAN); dúvidas do design nas colunas T/U = suporte.
 

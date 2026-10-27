@@ -3,7 +3,7 @@
 **O que é:** a Fase 2C do plano Colômbia (`co-report-crosscheck/HANDOFF-2026-10-21.md` §8), na parte do WTC. **Ainda não está no Drive**: só sobe com o ok do usuário (Fase 4).
 
 ## Base
-- `base/CO-WTC-001-v1-gsheet-export-2026-10-21.xlsx`: export do Google Sheet `CO-WTC-001-v1` do Drive, feito em 21/10 com o ok do usuário. md5 40d176082821752ee9f15afb0e0c8afc.
+- [[Research Pipeline/Colombia/2026-10-21-alinhamento-WTC/base/CO-WTC-001-v1-gsheet-export-2026-10-21.xlsx|CO-WTC-001-v1-gsheet-export-2026-10-21.xlsx]]: export do Google Sheet `CO-WTC-001-v1` do Drive, feito em 21/10 com o ok do usuário. md5 40d176082821752ee9f15afb0e0c8afc.
 - O Sheet tinha edições de 20/10 que não estão no xlsx v1.4 de 13/10 e não ganharam linha no Version Control. Exemplo: as linhas 6 e 37 trocaram os atributos de salário de "NA" para "Salary / Yes / No". **O autor não foi identificado.** A v1.5 parte do Sheet, então mantém essas edições.
 
 ## Antes → depois (só colunas nossas: Y, Z e as abas de apoio)

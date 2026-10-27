@@ -21,6 +21,11 @@ Hub criado em 2026-10-27 (Fase R, revisão do grafo) a partir da Internal Certif
 |---|---|---|
 | out/2026 | ✅ Validado · Audit Report 19/10 (qualified) | 200.00 recebido em 19/10. ИПН ok (faixa 15%). F-06 High: a folha de outubro foi declarada como 3º mês do 3T. GL não existe (1C ZUP). C-18 em rascunho (confirmar o mês). Fonte: [[frentes/certificacao/estado]] |
 
+- [[internal-certification/Kazakhstan/Mastercard - 2026-10/02 Validation/followups|followups]]: Mastercard - 2026-10: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Kazakhstan/Mastercard - 2026-10/02 Validation/intake|intake]]: Mastercard - 2026-10: intake do pacote: entidade, período e inventário do recebido
+- [[internal-certification/Kazakhstan/Mastercard - 2026-10/02 Validation/resumo_PT|resumo_PT]]: Mastercard - 2026-10: resumo em português dos achados da validação
+- [[internal-certification/Kazakhstan/Mastercard - 2026-10/02 Validation/summary_EN|summary_EN]]: Mastercard - 2026-10: resumo em inglês dos achados da validação (versão para o cliente)
+
 ## Pendências
 - [ ] C-18: confirmar o mês (F-06), conforme o estado da frente Certificação.
 

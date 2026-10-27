@@ -1,7 +1,7 @@
 # Comparação célula a célula
 
 - Base: `C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW - SI Termination specification.xlsx`
-- Nova: `TW - SI Termination specification v1.1.xlsx`
+- Nova: [[Research Pipeline/Taiwan/2026-10-27-SR-105-106-107-3in1/TW - SI Termination specification v1.1.xlsx|TW - SI Termination specification v1.1.xlsx]]
 
 - Células com diferença: **94** (declaradas: 94; sem efeito: 0)
 - Abas removidas: nenhuma

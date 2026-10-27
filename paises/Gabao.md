@@ -48,9 +48,9 @@
 - [ ] Confirmar na plataforma os números de código novos da v3.1 — Compliance (chat: mercans-compliance)
 - [ ] Confirmar o tratamento pós-imposto de 21640–21645 — Compliance (chat: mercans-compliance)
 - [ ] WTC do cliente (Google Sheet) não estava legível; Drive precisa de re-auth — (chat: mercans-compliance)
-- [ ] Justificativa do cliente para incluir nº de filhos no payslip — cliente (HRBS-12472)
+- [ ] Justificativa do cliente para incluir nº de filhos no payslip — cliente (HRBS-12472) _(ticket fechado: HRBS-12472 Resolved em 2026-08-12 (API, 27/10); conferir se a pendência ainda vale)_
 - [ ] Design do Gabão — Manju (chat: design-dev-kb)
-- [ ] Observação: o ticket HRBS-14996 (CI) tem colunas "CNAMGS" e "FNH" no registro do cliente da CI, que são órgãos gaboneses; ver [[Costa-do-Marfim]]
+- [ ] Observação: o ticket HRBS-14996 (CI) tem colunas "CNAMGS" e "FNH" no registro do cliente da CI, que são órgãos gaboneses; ver [[Costa-do-Marfim]] _(ticket fechado: HRBS-14996 Resolved em 2026-09-29 (API, 27/10); conferir se a pendência ainda vale)_
 
 ## Correções ligadas
 - [[correcoes]]: WTC Gabão v3.0 sem o bloco de deduções Global 21100–21900 e de ER 23640–23673 (59 códigos), filtro salvo na coluna A e VC sem linha 3.1; corrigido na v3.1 DRAFT (2026-09-23).

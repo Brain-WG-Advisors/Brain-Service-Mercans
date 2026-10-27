@@ -8,21 +8,21 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs", incluindo as 3
 ## Arquivos
 | Arquivo | O que é |
 |---|---|
-| `Taiwan Tax Report Spec_v1.3.xlsx` | Spec v1.3 (md5 `32cd0a803dd3ca530d693727df11e572`, rodada 2; rodada 1 era `50a250e8…`) |
+| [[Research Pipeline/Taiwan/2026-10-27-SR-110-TaxReport/Taiwan Tax Report Spec_v1.3.xlsx\|Taiwan Tax Report Spec_v1.3.xlsx]] | Spec v1.3 (md5 `32cd0a803dd3ca530d693727df11e572`, rodada 2; rodada 1 era `50a250e8…`) |
 | `edits_v1_3.py` | As células alteradas (rodada 1 + bloco `R2` da rodada 2), valor e se quebra linha |
 | `build_v1_3.py` | Geração por XML + zip: só `styles.xml` (fill `FFDDEBF7` e 21 xf acrescentados no fim) e `sheet1/2/3.xml` mudam; as outras 26 partes copiadas byte a byte |
 | `verify_v1_3.py` → `comparacao_celula_a_celula.txt` | Comparação base × v1.3: partes do zip, XML com as células editadas mascaradas, célula a célula em todas as abas (valor, fill, fonte, borda, formato, alinhamento, proteção), mesclagens e validações |
 | `validacao_toolkit.txt` / `validacao_toolkit_rodada2.txt` | `mercans-artifact-toolkit/scripts/validate_workbook.py` na base e na v1.3 (rodadas 1 e 2) |
 | `REVISAO-independente.md` | Revisão independente da rodada 1 (achados 1–9) |
 
-Base: `raw/docs/drive-exports/2026-10-27/Taiwan Tax Report Spec.xlsx` (md5 `8b19384f…`; conteúdo célula a célula igual ao export de 23/10). Para refazer: `python -I -X utf8 build_v1_3.py <base> <saída>` e `python -I -X utf8 verify_v1_3.py <base> <saída> <log>`.
+Base: [[raw/docs/drive-exports/2026-10-27/Taiwan Tax Report Spec.xlsx|Taiwan Tax Report Spec.xlsx]] (md5 `8b19384f…`; conteúdo célula a célula igual ao export de 23/10). Para refazer: `python -I -X utf8 build_v1_3.py <base> <saída>` e `python -I -X utf8 verify_v1_3.py <base> <saída> <log>`.
 
 ## Fontes
 | # | Fonte | Arquivo local |
 |---|---|---|
-| T1 | MOF/財政資訊中心, **綜合所得稅資料電子申報作業要點, 114年12月修正** (公告 2025-12-10; aplica-se à renda de 114 = 2025, declarada em jan/2026). **Versão mais nova encontrada** (página FIA: https://www.fia.gov.tw/singlehtml/3?cntId=22c32144f9ee4c6d8d6c8b9739e77a7a). Cap. 2, seção 1, pp. 1–24 da seção (PDF pp. 9–32) | `raw/docs/oficiais/TW/2026-10-27-綜合所得稅資料電子申報作業要點_1141210.pdf` (md5 `150a9c87…`) |
-| T1-112 | Edição 112 (a que a spec citava), para comparar | `raw/docs/oficiais/TW/2026-10-27-112年度綜所稅資料電子申報作業要點(公告)_1121211.pdf` |
-| T2 | MOF, 各類所得扣免繳憑單網路申報操作實務 (pp. 4–5 nome do arquivo; pp. 40–46 fluxos IMX) | `raw/docs/oficiais/TW/2026-10-27-各類所得扣免繳憑單網路申報操作實務.pdf` |
+| T1 | MOF/財政資訊中心, **綜合所得稅資料電子申報作業要點, 114年12月修正** (公告 2025-12-10; aplica-se à renda de 114 = 2025, declarada em jan/2026). **Versão mais nova encontrada** (página FIA: https://www.fia.gov.tw/singlehtml/3?cntId=22c32144f9ee4c6d8d6c8b9739e77a7a). Cap. 2, seção 1, pp. 1–24 da seção (PDF pp. 9–32) | [[raw/docs/oficiais/TW/2026-10-27-綜合所得稅資料電子申報作業要點_1141210.pdf\|2026-10-27-綜合所得稅資料電子申報作業要點_1141210.pdf]] (md5 `150a9c87…`) |
+| T1-112 | Edição 112 (a que a spec citava), para comparar | [[raw/docs/oficiais/TW/2026-10-27-112年度綜所稅資料電子申報作業要點(公告)_1121211.pdf\|2026-10-27-112年度綜所稅資料電子申報作業要點(公告)_1121211.pdf]] |
+| T2 | MOF, 各類所得扣免繳憑單網路申報操作實務 (pp. 4–5 nome do arquivo; pp. 40–46 fluxos IMX) | [[raw/docs/oficiais/TW/2026-10-27-各類所得扣免繳憑單網路申報操作實務.pdf\|2026-10-27-各類所得扣免繳憑單網路申報操作實務.pdf]] |
 | T3 | Income Tax Act art. 92 (MOF law-out) | `raw/docs/oficiais/TW/2026-10-23-taxreport-income-tax-act-mof-lawout.html` |
 | Int. | WTC V2.8, DD V3.3 (exports de 23/10) | `raw/docs/drive-exports/2026-10-23/` |
 
@@ -123,3 +123,7 @@ Cada item relido no 要點 1141210 (texto extraído; páginas do PDF). Rodada 1 
 |---|---|---|
 | 2026-10-27 | Suporte (construtor D) | v1.3 gerada (48 células, 要點 114), comparação célula a célula PASS, comentario.md em rascunho; nada enviado nem copiado para o Drive |
 | 2026-10-27 | Suporte (construtor D, rodada 2) | achados 1–9 da revisão independente corrigidos (22 células; total 60), comparação PASS, md5 `32cd0a80…`; comentario.md atualizado; nada enviado |
+
+## Arquivos da entrega
+- [[Research Pipeline/Taiwan/2026-10-27-SR-110-TaxReport/REVISAO-independente|REVISAO-independente]]: Revisão independente da Tax Report spec v1.3 Taiwan: FAIL rodada 1, 3 MAJOR, fonte MOF 1141210 conferida.
+- [[Research Pipeline/Taiwan/2026-10-27-SR-110-TaxReport/comentario|comentario]]: Rascunho de comentário (EN, não postado) sobre a spec v1.3 e os 3 pontos do Mohit.

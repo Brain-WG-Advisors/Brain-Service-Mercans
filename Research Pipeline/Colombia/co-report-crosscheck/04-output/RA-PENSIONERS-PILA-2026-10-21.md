@@ -6,17 +6,17 @@
 ## Sources used
 | # | Source | Version / date | Where |
 |---|---|---|---|
-| S1 | MinSalud, Anexo Técnico 3 "Aportes a Seguridad Social de Pensionados" (Res. 2388/2016) | **AT3 v15, 24-07-2026**, 133 pp. | `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf` (md5 cf0bf837e8027e85cbfe4276b0d676ba). Downloaded from https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/OT/anexo-tecnico3-pensionados.pdf |
-| S2 | MinSalud, Anexo Técnico 2 "Aportes a Seguridad Social de Activos" | AT2 v30, 24-07-2026 | `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf` |
+| S1 | MinSalud, Anexo Técnico 3 "Aportes a Seguridad Social de Pensionados" (Res. 2388/2016) | **AT3 v15, 24-07-2026**, 133 pp. | [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf\|2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf]] (md5 cf0bf837e8027e85cbfe4276b0d676ba). Downloaded from https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/OT/anexo-tecnico3-pensionados.pdf |
+| S2 | MinSalud, Anexo Técnico 2 "Aportes a Seguridad Social de Activos" | AT2 v30, 24-07-2026 | [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf\|2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf]] |
 | S3 | Res. MSPS 2388/2016, art. 1 (as amended by Res. 728/2023) | compiled text | https://normativa.colpensiones.gov.co/compilacion/docs/resolucion_minsaludps_2388_2016.htm |
 | S4 | Res. MSPS 1271/2023 (14 Aug 2023), which amends AT1, AT2 and AT3 | DO 52.488 | `raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-colpensiones.htm` |
 | S5 | Ley 100/1993, arts. 143, 157, 204 par. 5, 280 | FuncionPublica | `raw/docs/oficiais/CO/2026-10-21-Ley-100-1993-FuncionPublica.html` |
 | S6 | Decreto 780/2016 (DUR Salud), arts. 2.1.9.7, 2.2.1.1.2.1, 3.2.1.1, 3.2.2.1, 3.2.3.9 | FuncionPublica | `raw/docs/oficiais/CO/2026-10-13-Decreto-780-2016-FuncionPublica.html` |
 | S7 | Ley 797/2003, art. 8 (new Ley 100 art. 27) | Secretaría del Senado | http://www.secretariasenado.gov.co/senado/basedoc/ley_0797_2003.html |
-| S8 | Res. DIAN 000227/2025, art. 1.5.3.2.3 | p. 246 | `frentes/pipeline/mercans-pipeline/CO-compliance/00-official-sources/pdfs/Resolución 000227 de 23-09-2025.pdf` (md5 819beb815d965ddbc679a6f6a8374910) |
+| S8 | Res. DIAN 000227/2025, art. 1.5.3.2.3 | p. 246 | [[frentes/pipeline/mercans-pipeline/CO-compliance/00-official-sources/pdfs/Resolución 000227 de 23-09-2025.pdf\|Resolución 000227 de 23-09-2025.pdf]] (md5 819beb815d965ddbc679a6f6a8374910) |
 | S9 | Mercans spec CO-PILA-003 (read-only) and CO-DIAN-001 | kit 05-final | `Research Pipeline/Colombia/co-report-crosscheck/05-final/` |
 
-Housekeeping: `raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-PILA-pensionados.pdf` is **not a PDF**. It is a saved UGPP "Página no encontrada" (404) HTML page. Use the `.htm` file (S4). Nothing in `raw/` was changed.
+Housekeeping: [[raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-PILA-pensionados.pdf|2026-10-21-Res-MSPS-1271-2023-PILA-pensionados.pdf]] is **not a PDF**. It is a saved UGPP "Página no encontrada" (404) HTML page. Use the `.htm` file (S4). Nothing in `raw/` was changed.
 
 ---
 
@@ -50,7 +50,7 @@ Housekeeping: `raw/docs/oficiais/CO/2026-10-21-Res-MSPS-1271-2023-PILA-pensionad
 
 ## Q2. Which file / planilla, which version, structure and key fields?
 
-**Verdict: OBLIGATED. The file is Res. 2388/2016 Anexo Técnico 3, AT3 v15 dated 24-07-2026** (S1). It was downloaded to `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf`.
+**Verdict: OBLIGATED. The file is Res. 2388/2016 Anexo Técnico 3, AT3 v15 dated 24-07-2026** (S1). It was downloaded to [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf|2026-10-21-MinSalud-Anexo-Tecnico-3-PILA-pensionados.pdf]].
 
 The latest amending acts on the cover (pp. 1-2) are Res. 1271/2023, 221/2024, 467/2025 and 1529/2026. The latest implementation item, ch. 5 §5.32 (p. 133), applies to payments from 1 Oct 2026 (identification-number validations).
 

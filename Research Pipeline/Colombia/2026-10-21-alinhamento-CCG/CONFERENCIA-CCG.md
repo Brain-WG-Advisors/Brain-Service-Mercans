@@ -1,6 +1,6 @@
 # CO-CCG-001 v1.3 - conferência (21 Oct 2026)
 
-Base: `base/CO-CCG-001_v1.2-gdoc-export-2026-10-21.docx` (md5 b051912c340f3246c078ca9ed65c0e4b). Result: `CO-CCG-001-v1.3.docx` (round 3, md5 abd9e2595675df3ea8e96cca4d21e4cb; round 2 was b52beb6beeb4e59e5adee3b8db84c6f1; round 1 was 856176ec86858c73358f8810202d3886). Local only: nothing uploaded, Drive not touched.
+Base: [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/base/CO-CCG-001_v1.2-gdoc-export-2026-10-21.docx|CO-CCG-001_v1.2-gdoc-export-2026-10-21.docx]] (md5 b051912c340f3246c078ca9ed65c0e4b). Result: [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/CO-CCG-001-v1.3.docx|CO-CCG-001-v1.3.docx]] (round 3, md5 abd9e2595675df3ea8e96cca4d21e4cb; round 2 was b52beb6beeb4e59e5adee3b8db84c6f1; round 1 was 856176ec86858c73358f8810202d3886). Local only: nothing uploaded, Drive not touched.
 Method: word/document.xml edited directly with lxml (unzip -> edit -> rezip); footer1.xml edited only for the version string; the other 17 zip entries copied byte for byte (checked). New or changed `w:t` carry `xml:space="preserve"`; edited text keeps the formatting of the run it sits in. Paragraph numbers below = index of `w:p` in the base document.xml (same as `para` in suggestions-raw.json). Scripts in the session scratchpad (`ccg13/build13.py`, `pack.py`, `verify.py`).
 
 ## Counts
@@ -299,3 +299,8 @@ Base = round-2 v1.3 (md5 b52beb6beeb4e59e5adee3b8db84c6f1). Only word/document.x
 | 2026-10-21 | geral (Colômbia) | Copiado para o Drive com o ok do usuário; md5 da cópia idêntico |
 
 | 2026-10-22 | geral (Colômbia) | Convertido em Google Doc novo CO-CCG-001_v1.3 (Save as Google Docs); export txt = docx local (Res. 227 x34, Res. 13 x2 só no VC, exemplos corrigidos, 0 marcas de revisão); o Doc v1.2 continua na pasta |
+
+## Arquivos da entrega
+- [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/OPEN-ITEMS|OPEN-ITEMS]]: Itens que ficaram abertos na CCG v1.3 (módulo, item, o que fecha); nada inventado para fechar lacuna.
+- [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/REJECTED-S86-S87|REJECTED-S86-S87]]: Sugestões S86 e S87 rejeitadas (texto literal) na linha do bônus do Módulo 13 da CCG v1.2.
+- [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/SUGGESTIONS-DECISIONS-2026-10-22|SUGGESTIONS-DECISIONS-2026-10-22]]: Decisão e motivo por sugestão (93 alterações da CCG v1.2, lotes A-D) com fonte nos vereditos.

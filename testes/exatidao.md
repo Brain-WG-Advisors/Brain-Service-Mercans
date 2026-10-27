@@ -110,6 +110,37 @@
 |---|---|---|---|---|---|---|---|---|
 | 2026-10-27 | 1: linha de base | claude.ai fora de projeto, conectores desligados no chat, skills Mercans + busca web + memória + pesquisa em conversas anteriores ativas | A | 20 | 5 (1 instável: T-003) | 5 | **20/30** | 3 perguntas (T-001, T-003, T-024; 4 respostas) + 1 parcial (T-017, só CNPS) |
 
+- T-001 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-001-r1|r1]] · [[testes/rodadas/2026-10-27/T-001-r2|r2]]
+- T-002 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-002-r1|r1]] · [[testes/rodadas/2026-10-27/T-002-r2|r2]]
+- T-003 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-003-r1|r1]] · [[testes/rodadas/2026-10-27/T-003-r2|r2]]
+- T-004 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-004-r1|r1]] · [[testes/rodadas/2026-10-27/T-004-r2|r2]]
+- T-005 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-005-r1|r1]] · [[testes/rodadas/2026-10-27/T-005-r2|r2]]
+- T-006 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-006-r1|r1]] · [[testes/rodadas/2026-10-27/T-006-r2|r2]]
+- T-007 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-007-r1|r1]] · [[testes/rodadas/2026-10-27/T-007-r2|r2]]
+- T-008 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-008-r1|r1]] · [[testes/rodadas/2026-10-27/T-008-r2|r2]]
+- T-009 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-009-r1|r1]] · [[testes/rodadas/2026-10-27/T-009-r2|r2]]
+- T-010 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-010-r1|r1]] · [[testes/rodadas/2026-10-27/T-010-r2|r2]]
+- T-011 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-011-r1|r1]] · [[testes/rodadas/2026-10-27/T-011-r2|r2]]
+- T-012 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-012-r1|r1]] · [[testes/rodadas/2026-10-27/T-012-r2|r2]]
+- T-013 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-013-r1|r1]] · [[testes/rodadas/2026-10-27/T-013-r2|r2]]
+- T-014 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-014-r1|r1]] · [[testes/rodadas/2026-10-27/T-014-r2|r2]]
+- T-015 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-015-r1|r1]] · [[testes/rodadas/2026-10-27/T-015-r2|r2]]
+- T-016 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-016-r1|r1]] · [[testes/rodadas/2026-10-27/T-016-r2|r2]]
+- T-017 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-017-r1|r1]] · [[testes/rodadas/2026-10-27/T-017-r2|r2]]
+- T-018 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-018-r1|r1]] · [[testes/rodadas/2026-10-27/T-018-r2|r2]]
+- T-019 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-019-r1|r1]] · [[testes/rodadas/2026-10-27/T-019-r2|r2]]
+- T-020 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-020-r1|r1]] · [[testes/rodadas/2026-10-27/T-020-r2|r2]]
+- T-021 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-021-r1|r1]] · [[testes/rodadas/2026-10-27/T-021-r2|r2]]
+- T-022 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-022-r1|r1]] · [[testes/rodadas/2026-10-27/T-022-r2|r2]]
+- T-023 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-023-r1|r1]] · [[testes/rodadas/2026-10-27/T-023-r2|r2]]
+- T-024 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-024-r1|r1]] · [[testes/rodadas/2026-10-27/T-024-r2|r2]]
+- T-025 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-025-r1|r1]] · [[testes/rodadas/2026-10-27/T-025-r2|r2]]
+- T-026 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-026-r1|r1]] · [[testes/rodadas/2026-10-27/T-026-r2|r2]]
+- T-027 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-027-r1|r1]] · [[testes/rodadas/2026-10-27/T-027-r2|r2]]
+- T-028 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-028-r1|r1]] · [[testes/rodadas/2026-10-27/T-028-r2|r2]]
+- T-029 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-029-r1|r1]] · [[testes/rodadas/2026-10-27/T-029-r2|r2]]
+- T-030 (rodada 1, 2026-10-27): [[testes/rodadas/2026-10-27/T-030-r1|r1]] · [[testes/rodadas/2026-10-27/T-030-r2|r2]]
+
 ## Resultado por pergunta
 | # | Rodada 1 | Rodada 2 | Causa do ❌/⚠️ (falta no brain / falta na skill / erro do modelo / gabarito) | Ação · dono · data |
 |---|---|---|---|---|

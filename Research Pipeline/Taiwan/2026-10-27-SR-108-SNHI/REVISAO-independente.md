@@ -1,6 +1,6 @@
 # Revisão independente: SR-108 TW SNHI spec v1.2 (rodada 1, 2026-10-27)
 
-**Veredito: FAIL (rodada 1).** As correções são pequenas: 1 BLOCKER de forma e 2 MAJOR de conteúdo. O resto foi conferido e está correto. Arquivo revisado: `TW - SNHI report specification_v1.2.xlsx` (md5 `ec6d02d6…`), contra a base de 27/10 (md5 `143efdc6…`). Apenas leitura: nada foi editado.
+**Veredito: FAIL (rodada 1).** As correções são pequenas: 1 BLOCKER de forma e 2 MAJOR de conteúdo. O resto foi conferido e está correto. Arquivo revisado: [[Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/TW - SNHI report specification_v1.2.xlsx|TW - SNHI report specification_v1.2.xlsx]] (md5 `ec6d02d6…`), contra a base de 27/10 (md5 `143efdc6…`). Apenas leitura: nada foi editado.
 
 | # | Aba!célula | Problema | Fonte | Correção | Sev. |
 |---|---|---|---|---|---|

@@ -75,9 +75,11 @@
 |---|---|---|---|---|
 | 2026-10-22 | Ericsson ME (planilha "Compliance feedback list", pedido da Manju por chat) | WT 1026/1027 adiantamentos, 1043 aviso prévio, 1125 LTA | Respondido na planilha com fonte primária (Lei 91/2005 arts. 9, 12; Decreto 991/2005 art. 11(3); Lei 148/2019 art. 1(8); ETA FAQ v4; Lei 4/2021). Rascunho: `rascunhos/2026-10-22-ericsson-me-respostas-LB-JO-EG.md` | Não |
 
+- [[rascunhos/2026-10-22-ericsson-me-respostas-LB-JO-EG|2026-10-22-ericsson-me-respostas-LB-JO-EG]]: Respostas Compliance Ericsson ME para Líbano, Jordânia e Egito (7 linhas)
+
 ## Pendências
 - [x] Corrigir a skill `payroll-compliance-egypt` (`01-ccg.md` §8.2 e linha 54; SKILL.md escopo; `07-qa-report.md` §3.4): Fundo dos Mártires vale para o setor privado (2026-10-22). **Feito em 2026-10-22:** v2 publicada para a organização no claude.ai (também RPT-06 e DD); pacote em `Research Pipeline/Egypt/2026-10-22-skill-fundo-martires/`.
-- [ ] Ler o art. 53 do Regulamento 2437/2021 (bdl excluídos ≤ 30% do salário de contribuição): citado, não conferido pessoalmente. PDF em `raw/docs/oficiais/EG/2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf`.
+- [ ] Ler o art. 53 do Regulamento 2437/2021 (bdl excluídos ≤ 30% do salário de contribuição): citado, não conferido pessoalmente. PDF em [[raw/docs/oficiais/EG/2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf|2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf]].
 - [ ] Lei 11/2026 (art. 111 da Lei 148/2019, segundo a imprensa): sem texto oficial obtido.
 - [ ] Circular MoF 14/2021: só há cópia em host não oficial (aliateck); buscar cópia oficial.
 

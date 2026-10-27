@@ -82,6 +82,9 @@
 | 2026-10-15 | HRBS-15410 (STG, parallel run) | 1% (ferietillæg) na rescisão | Sem novo acúmulo de 1% no mês da saída (regulações 9208041/9208061 com EQUALS($58299;0)); 1% só para dias gozados ainda não suplementados; fórmulas 62220/64552/64992 conforme WTC 4.1 (Resolved; não foi nosso) | CCG V2.3.8 (exemplos ajustados em 22/10, ver abaixo) |
 | 2026-10-22 | CCG V2.3.8 — 3 comentários da Ruchi (Holiday Pay na rescisão) | Assumido a pedido da Manju (Enaakshi fora até segunda) | 3 respostas publicadas pelo usuário; 2 sugestões no CCG (modo Sugestão): Cenário C passo 7 sem 1% no mês da saída; exemplo da Versão 2 com 10 dias gozados (provisão proporcional, DKK 24.804,49 + 1% DKK 2.275,64). Rascunho e fontes: `rascunhos/2026-10-22-dk-ccg-comentarios-ruchi-holiday-pay.md` | Sugestões abertas: aceitar só depois da confirmação da Ruchi (pedida no chat 22/10 18:28) |
 
+- [[rascunhos/2026-10-22-dk-ccg-comentarios-ruchi-holiday-pay|2026-10-22-dk-ccg-comentarios-ruchi-holiday-pay]]: Comentários da Ruchi no CCG V2.3.8 da Dinamarca sobre Holiday Pay na rescisão
+- [[rascunhos/2026-10-23-dk-ruchi-split-ferieaar-6102|2026-10-23-dk-ruchi-split-ferieaar-6102]]: Dinamarca: separar saldo por ano de férias na rescisão, Record 6102 / CCG 9.2
+
 ## Internal Certification (Análise de Reports)
 > Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Denmark`
 
@@ -93,6 +96,14 @@
 - AM-bidrag 8%, A-skat e ATP: 24/24; totais do eIndkomst batem campo a campo com a Afstemning do SKAT.
 - **High (KGS):** seguro-saúde do empregador não tributado e fora do campo 0026 (a Sherwin tributa) → A-02.
 - **Medium (Sherwin):** indenização no campo 0069 pelo líquido, não bruto → A-03. Base do Store Bededag/ferietillæg diverge entre os dois clientes → decisão D-03.
+- [[internal-certification/Denmark/KGS Fire & Security Denmark - 2026-09/02 Validation/followups|followups]]: KGS Fire & Security Denmark - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Denmark/KGS Fire & Security Denmark - 2026-09/02 Validation/intake|intake]]: KGS Fire & Security Denmark - 2026-09: intake do pacote: entidade, período e inventário do recebido
+- [[internal-certification/Denmark/KGS Fire & Security Denmark - 2026-09/02 Validation/resumo_PT|resumo_PT]]: KGS Fire & Security Denmark - 2026-09: resumo em português dos achados da validação
+- [[internal-certification/Denmark/KGS Fire & Security Denmark - 2026-09/02 Validation/summary_EN|summary_EN]]: KGS Fire & Security Denmark - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
+- [[internal-certification/Denmark/Sherwin Williams Denmark - 2026-09/02 Validation/followups|followups]]: Sherwin Williams Denmark - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Denmark/Sherwin Williams Denmark - 2026-09/02 Validation/intake|intake]]: Sherwin Williams Denmark - 2026-09: intake do pacote: entidade, período e inventário do recebido
+- [[internal-certification/Denmark/Sherwin Williams Denmark - 2026-09/02 Validation/resumo_PT|resumo_PT]]: Sherwin Williams Denmark - 2026-09: resumo em português dos achados da validação
+- [[internal-certification/Denmark/Sherwin Williams Denmark - 2026-09/02 Validation/summary_EN|summary_EN]]: Sherwin Williams Denmark - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
 
 ## Pendências
 - [ ] CCG V2.3.8: aceitar as 2 sugestões de 22/10 depois do ok da Ruchi (pedido no chat STG: Denmark, 22/10 18:28; sem resposta até o fim do dia). Se ela pedir ajuste, mudar a sugestão antes. — Wallisson
@@ -103,3 +114,5 @@
 
 ## Fontes
 - skill payroll-compliance-denmark (lida em 2026-10-02)
+- [[internal-certification/references/Denmark/2026/facts|facts]]: Fatos estatutários compactos 2026 extraídos das fontes oficiais, usados na validação
+- [[internal-certification/references/Denmark/2026/sources|sources]]: Registro das fontes oficiais 2026 (editor, versão, data de leitura, hash) usadas na validação

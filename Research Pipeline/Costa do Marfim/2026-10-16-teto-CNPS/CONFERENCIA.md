@@ -1,16 +1,16 @@
 # CI — teto CNPS PF / AM / AT-MP: 70 000 → 75 000 XOF/mês (2026-10-16)
 
-**Fonte:** communiqué CNPS de 11/01/2023 (`brain-service/raw/docs/oficiais/CI/2026-10-15-CNPS-communique-nouveau-plafond-2023.pdf`): a partir de 2023-01-01, teto mensal de AM / PF / AT-MP = 75 000; aposentadoria = 3 375 000; piso = 75 000. Base legal: Loi 99-477 art. 23. Derivados: 900 000/ano; 225 000/trimestre; PF 5% = 3 750; AM 0,75% = 562,50 → **563** nos exemplos (CCG §1.5, arredondamento ao franco); AT-MP 3% = 2 250.
+**Fonte:** communiqué CNPS de 11/01/2023 ([[raw/docs/oficiais/CI/2026-10-15-CNPS-communique-nouveau-plafond-2023.pdf|2026-10-15-CNPS-communique-nouveau-plafond-2023.pdf]]): a partir de 2023-01-01, teto mensal de AM / PF / AT-MP = 75 000; aposentadoria = 3 375 000; piso = 75 000. Base legal: Loi 99-477 art. 23. Derivados: 900 000/ano; 225 000/trimestre; PF 5% = 3 750; AM 0,75% = 562,50 → **563** nos exemplos (CCG §1.5, arredondamento ao franco); AT-MP 3% = 2 250.
 
 **Decisões do usuário (16/10):** base do CCG = v1.1 (1); CCG v1.3, DISA v1.5, WTC v1.3, CNPS-001 v1.4, Design v1.2; AM = 563; "3 231/day" → "225 000/quarter"; WTC: corrigir também a aba ativa "Wage Type Catalogue V1".
 
 ## Arquivos
 | Arquivo novo | Base (export do Drive em 16/10, 09:14–09:15) | Alterações |
 |---|---|---|
-| `CI-WTC-001-v1.3.xlsx` | `CI-WTC-001-v1.1 (1).xlsx` (VC até 1.2) | 22 células: 17 do teto + 5 da linha 1.3 no VC |
-| `CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx` | `…-Spec (1).xlsx` (VC até v1.3) | 43 células: 41 do teto/exemplos + 2 no VC |
-| `CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx` | `…-Spec (1).xlsx` (VC até v1.3) | 10 células: 8 do teto/exemplos + 2 no VC (v1.4 não usada: rascunho local de 18/08 nunca publicado) |
-| `CI-CCG-001-v1.3.docx` | `CI-CCG-001-v1.1 (1).docx` | 102 trechos (1 capa, 56 menções ao teto, 21 valores de PF/AM/AT, 24 totais refeitos) |
+| [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CI-WTC-001-v1.3.xlsx\|CI-WTC-001-v1.3.xlsx]] | `CI-WTC-001-v1.1 (1).xlsx` (VC até 1.2) | 22 células: 17 do teto + 5 da linha 1.3 no VC |
+| [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx\|CI-CNPS-001-MonthlySocialContributions-Spec_v1.4.xlsx]] | `…-Spec (1).xlsx` (VC até v1.3) | 43 células: 41 do teto/exemplos + 2 no VC |
+| [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx\|CI-CNPS-002-DISAAnnualSalaries-Spec_v1.5.xlsx]] | `…-Spec (1).xlsx` (VC até v1.3) | 10 células: 8 do teto/exemplos + 2 no VC (v1.4 não usada: rascunho local de 18/08 nunca publicado) |
+| [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CI-CCG-001-v1.3.docx\|CI-CCG-001-v1.3.docx]] | `CI-CCG-001-v1.1 (1).docx` | 102 trechos (1 capa, 56 menções ao teto, 21 valores de PF/AM/AT, 24 totais refeitos) |
 | `CI_Regulation_Design_v1_2.md` | `CI_Regulation_Design_v1_1.md` | 6 linhas (1, 89, 128, 220 ×2, 301, 423) + nota de changelog v1.2 |
 
 Destaque: células xlsx com fill `FFDDEBF7`; trechos do docx com sombreamento `DDEBF7` (102 runs). O `.md` não tem cor: a lista está em `conferencia/logdesign.txt`.
@@ -38,3 +38,7 @@ Teto da aposentadoria 3 375 000 / 40 500 000; piso 75 000; "525 000" da tabela d
 - Exemplo DASC da DISA (Sample File A35–A37): base de PF/AM/AT de 240 000 000 para 45 empregados (máximo possível 40 500 000).
 - `ci.json` (Drive 07 - Design), regulation ordinal 61: piso e teto = 840 000 (produção/dev; CT-A-620).
 - `CI-CNPS-002…_v1.4.xlsx` local (18/08): bloco do esquema DASC no Form Alignment que não está no Drive.
+
+## Arquivos da entrega
+- [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/CI_Regulation_Design_v1_2|CI_Regulation_Design_v1_2]]: Clean-room Regulation Design v1.2 da Côte d'Ivoire (IDs 9384, XOF, 2026), idêntico ao final em entregas/.
+- [[Research Pipeline/Costa do Marfim/2026-10-16-teto-CNPS/LEIA-ME-FINAIS|LEIA-ME-FINAIS]]: Aviso: finais estão em entregas/Costa-do-Marfim; CCG v1.3 e CNPS-001 v1.4 daqui são anteriores à troca de fonte (não usar).

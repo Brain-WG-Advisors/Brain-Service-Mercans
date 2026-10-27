@@ -17,7 +17,7 @@ As skills `payroll-compliance-<país>`, que são o produto do Research Pipeline,
 
 **Período do trabalho.** Pedidos às SBCs em 07-10-2026. A Ucrânia e o Reino Unido foram validados entre 07 e 09-10, a Holanda e a rodada NO/DK/SE/KZ em 14-10, e a planilha de acompanhamento foi gerada em 14-10 às 20:15. Os períodos de folha cobertos vão de agosto a outubro de 2026.
 
-**Status por pacote** (`Acompanhamento_Internal_Certification.xlsx`, aba Painel)
+**Status por pacote** ([[internal-certification/Acompanhamento_Internal_Certification.xlsx|Acompanhamento_Internal_Certification.xlsx]], aba Painel)
 
 | Pacote | Report | Pass | Finding | Not tested | Cobertura* | Recibo prova aceite? | Situação |
 |---|---|---|---|---|---|---|---|

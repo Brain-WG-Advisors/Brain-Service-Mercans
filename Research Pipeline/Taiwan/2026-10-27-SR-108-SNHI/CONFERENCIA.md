@@ -8,8 +8,8 @@ Mohit, 15/09/2026: "Spec Review only and fill the gaps in specs." Só isso: revi
 ## Arquivos
 | Arquivo | md5 | O que é |
 |---|---|---|
-| `raw/docs/drive-exports/2026-10-27/TW - SNHI report specification.xlsx` | `143efdc6d4da4f8696fd2bd6aa2f7730` | Base (export de hoje). Valores idênticos aos da export de 23/10 (0 diferenças célula a célula; o zip muda só por ser outra exportação) |
-| `TW - SNHI report specification_v1.2.xlsx` | `abbcd1d7ec1dfae4290ecb327d7e0538` | v1.2 (Draft) após a rodada 2, com células alteradas/novas em azul-claro `FFDDEBF7` (o md5 da rodada 1 era `ec6d02d6…`, já substituído) |
+| [[raw/docs/drive-exports/2026-10-27/TW - SNHI report specification.xlsx\|TW - SNHI report specification.xlsx]] | `143efdc6d4da4f8696fd2bd6aa2f7730` | Base (export de hoje). Valores idênticos aos da export de 23/10 (0 diferenças célula a célula; o zip muda só por ser outra exportação) |
+| [[Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/TW - SNHI report specification_v1.2.xlsx\|TW - SNHI report specification_v1.2.xlsx]] | `abbcd1d7ec1dfae4290ecb327d7e0538` | v1.2 (Draft) após a rodada 2, com células alteradas/novas em azul-claro `FFDDEBF7` (o md5 da rodada 1 era `ec6d02d6…`, já substituído) |
 | `scripts/edits_v12.py` | | Lista fechada das células: rodada 1 (49) + `ROUND2` (21, sendo 13 substituídas e 8 novas) = 57 (valor + fonte de cada uma) |
 | `rodada2-diff.log` | | Rodada 1 → rodada 2: 21 diferenças = 21 esperadas |
 | `scripts/build_v12.py` | | Cirurgia XML + zip: só `sheet1/2/3.xml` e `styles.xml` reescritos; as outras 25 partes saem com os mesmos bytes |
@@ -23,7 +23,7 @@ Pasta `raw/docs/oficiais/TW/`.
 |---|---|---|
 | F1 | NHI Act art. 31 (`2026-10-23-nhi-act-L0060001-moj-wayback.txt`) | §1(1) bônus "全年累計逾當月投保金額四倍部分"; retenção no pagamento, recolhimento até o fim do mês seguinte |
 | F2 | Supplementary Premium Regulations (`...-L0060027-moj-wayback.txt`) | art. 2 (data de pagamento = efetiva/transferência/remessa); art. 3(1) bônus = 年終獎金、節金、紅利 fora do insured amount; art. 4 bônus acima de 4× "全數計收"; art. 6 acumulado de 1º/jan até o pagamento, leaver = 4× o insured amount da saída; art. 10 anual até 31/01 (05/02 se 3+ feriados seguidos), ou junto com o recolhimento por meio eletrônico, o que dispensa a anual |
-| F3 | Formato TXT tipo 62 (Drive `raw/docs/drive-exports/2026-10-23/SR-108-SNHI-doc-txt-bonus.txt`; posições conferidas também no PDF `2026-10-23-SNHI-nhia-bonus-62-detail-file-format-txt.pdf` via pdftotext) | todas as posições/tipos; ROC yyymm/yyymmdd; "不可為負值"; seção 三 campos 4–6 = contagem/soma das linhas de detalhe; nota 2 (C: esquerda + espaços à direita); nota 3 (ASCII e BIG5); nota 4 (93–101 投保單位代號 C 9; 102–107 投保金額 N 6; 108–117 acumulado N 10) |
+| F3 | Formato TXT tipo 62 (Drive `raw/docs/drive-exports/2026-10-23/SR-108-SNHI-doc-txt-bonus.txt`; posições conferidas também no PDF [[raw/docs/oficiais/TW/2026-10-23-SNHI-nhia-bonus-62-detail-file-format-txt.pdf\|2026-10-23-SNHI-nhia-bonus-62-detail-file-format-txt.pdf]] via pdftotext) | todas as posições/tipos; ROC yyymm/yyymmdd; "不可為負值"; seção 三 campos 4–6 = contagem/soma das linhas de detalhe; nota 2 (C: esquerda + espaços à direita); nota 3 (ASCII e BIG5); nota 4 (93–101 投保單位代號 C 9; 102–107 投保金額 N 6; 108–117 acumulado N 10) |
 | F4 | Formato CSV tipo 62 (PDF, lido com pypdf) | 申報編號: padrão "1"; "2", "3"… para o mesmo beneficiário, mesma data e mesmo tipo; ou numeração própria alfanumérica até 30, sem repetição |
 | F5 | Resumo NHIA 115 (PDF) | código 62; 按月申報 网路/媒體 junto com o recolhimento; 年度申報 até 31/01; código 61 (empregador) "不需申報明細"; 2,11% |
 | F6 | Introdução NHIA (PDF) | 2,11% desde 110/1/1 (2021-01-01) |
@@ -119,3 +119,8 @@ Por aba: Version Control 5 · Report Matrix 11 · Spec(TXT) 33 · Testing 0 · O
 |---|---|---|
 | 2026-10-27 | Suporte (construtor B) | v1.2 gerada (49 células em azul), comparação célula a célula PASS, 7 TBC para Mohit/BA, CONFERENCIA e comentário EN em rascunho; nada enviado nem copiado para o Drive |
 | 2026-10-27 | Suporte (construtor B), rodada 2 | Achados 1–8 da revisão independente: 21 células (13 substituídas, 8 novas: I33, K18, K21, K24, K25, K39 e mais as reescritas), TBC saíram do mapeamento e foram para a coluna K, I20 segue a regra do TXT, PREPAD no UBN e no código NHI, ROC em I6/I7/I8; comparação PASS, gate PASS; nada enviado |
+
+## Arquivos da entrega
+- [[Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/REVISAO-independente|REVISAO-independente]]: Revisão independente da spec SNHI v1.2 (bônus, tipo 62): FAIL rodada 1, 1 BLOCKER de forma e 2 MAJOR.
+- [[Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/comentario|comentario]]: Rascunho de comentário (EN, não postado) sobre a spec SNHI v1.2 com 3 perguntas em aberto.
+- [[Research Pipeline/Taiwan/2026-10-27-SR-108-SNHI/comparacao-celula-a-celula|comparacao-celula-a-celula]]: Log célula a célula SR-108 SNHI v1.1 para v1.2 e partes do pacote alteradas.

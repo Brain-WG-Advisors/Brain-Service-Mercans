@@ -13,7 +13,7 @@
 ## Arquivos
 | Arquivo | Base | Alterações |
 |---|---|---|
-| `Singapore Wage Type Catalogue V4.3.xlsx` (md5 `96b5e1b492fc013cbb8bc0db7edf6361`) | `raw/docs/drive-exports/2026-10-27/SG_WTC_ativo.xlsx` (export do arquivo ativo no Monday, id `1faPACgj…`; md5 `f2b8554c…`; conteúdo igual ao export de 23/10) | 8 células |
+| [[Research Pipeline/Singapore/2026-10-27-HRBS-16029-62866-CPF/Singapore Wage Type Catalogue V4.3.xlsx\|Singapore Wage Type Catalogue V4.3.xlsx]] (md5 `96b5e1b492fc013cbb8bc0db7edf6361`) | [[raw/docs/drive-exports/2026-10-27/SG_WTC_ativo.xlsx\|SG_WTC_ativo.xlsx]] (export do arquivo ativo no Monday, id `1faPACgj…`; md5 `f2b8554c…`; conteúdo igual ao export de 23/10) | 8 células |
 
 Script: `aplicar_wtc.py` (XML + cópia byte a byte das demais partes). Log: `conferencia-wtc-log.txt`.
 
@@ -28,7 +28,7 @@ Script: `aplicar_wtc.py` (XML + cópia byte a byte das demais partes). Log: `con
 2. Comparação célula a célula (valor, preenchimento, fonte, borda, formato): exatamente as 8 células acima; todas em azul-claro `FFDDEBF7`.
 
 ## Pendências
-- Drive (`03 - WTC`, Singapore) como `Singapore Wage Type Catalogue V4.3.xlsx`: só com ordem do usuário; trocar `[link]` no comentário.
+- Drive (`03 - WTC`, Singapore) como [[Research Pipeline/Singapore/2026-10-27-HRBS-16029-62866-CPF/Singapore Wage Type Catalogue V4.3.xlsx|Singapore Wage Type Catalogue V4.3.xlsx]]: só com ordem do usuário; trocar `[link]` no comentário.
 - V4.2 ainda "Under Review" (Mohit/Ruchi): confirmar antes de soltar a V4.3.
 - Composição da base 58534 (SDL Base) na engine: não verificada.
 

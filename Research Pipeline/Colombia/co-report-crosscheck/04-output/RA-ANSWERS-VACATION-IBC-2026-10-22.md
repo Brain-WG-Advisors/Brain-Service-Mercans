@@ -9,15 +9,15 @@ Builds on `RA-ANSWERS-2026-10-21.md` (Q17), which left Q17(a) health/pension as 
 ### Downloaded today (`raw/docs/oficiais/CO/`)
 | File | What it is | Original URL |
 |---|---|---|
-| `2026-10-22-Ley-89-1988-ICBF.pdf` | Ley 89 de 1988, ICBF official copy (with notas de vigencia) | https://www.icbf.gov.co/sites/default/files/ley_89_de_1988.pdf |
+| [[raw/docs/oficiais/CO/2026-10-22-Ley-89-1988-ICBF.pdf\|2026-10-22-Ley-89-1988-ICBF.pdf]] | Ley 89 de 1988, ICBF official copy (with notas de vigencia) | https://www.icbf.gov.co/sites/default/files/ley_89_de_1988.pdf |
 | `2026-10-22-CE-SalaConsulta-2027-2010-vacaciones-compensadas-FuncionPublica.html` | Consejo de Estado, Sala de Consulta y Servicio Civil, concepto 2027 of 2010-10-04 (rad. 11001-03-06-000-2010-00090-00), "VACACIONES COMPENSADAS – BASE PARA LIQUIDACIÓN DE APORTES PARAFISCALES" | https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=65552 |
 | `2026-10-22-CE-S4-25958-2022-CRC-normograma.htm` | CE Sección Cuarta, 2022-09-08, rad. 25000-23-37-000-2017-01025-01 (25958), Multidimensionales SAS v. UGPP | https://normograma.crcom.gov.co/crc/compilacion/docs/25000-23-37-000-2017-01025-01(25958)_20220908.htm |
 | `2026-10-22-CE-S4-26941-2024-DIAN-normograma.htm` | CE Sección Cuarta, 2024-04-04, rad. 25000-23-37-000-2017-00244-01 (26941), Isvi Ltda. v. UGPP | https://normograma.dian.gov.co/dian/compilacion/docs/25000-23-37-000-2017-00244-01(26941)_20240404.htm |
 | `2026-10-22-CE-S4-26984-2024-SENA-normograma.htm` | CE Sección Cuarta, 2024-06-06, rad. 25000-23-37-000-2018-00385-01 (26984) v. UGPP | https://normograma.sena.edu.co/compilacion/docs/25000-23-37-000-2018-00385-01(26984)_20240606.htm |
 | `2026-10-22-CE-S4-26592-2023-SENA-normograma.htm` | CE Sección Cuarta, 2023-07-06, rad. 25000-23-37-000-2018-00624-01 (26592), EAAB v. UGPP (quotes Decreto 1158/1994 art. 1) | https://normograma.sena.edu.co/compilacion/docs/25000-23-37-000-2018-00624-01(26592)_20230706.htm |
-| `2026-10-22-CE-S4-SU-25185-2021-ficha.pdf` | CE ficha of the sentencia de unificación of 2021-12-09, exp. 25185 (art. 30 Ley 1393). Same file (same md5) as `2026-10-22-CE-SU-25185-2021-FichaProvidencia.pdf`, saved by another window today | https://www.consejodeestado.gov.co/wp-content/uploads/sun/FichaProvidencia_T133035033485231473.pdf |
-| `2026-10-22-CE-S4-24724-2022-SU-ficha.pdf` | CE ficha of the sentencia de unificación of 2022-03-24, exp. 24724 (cooperatives; context only) | https://www.consejodeestado.gov.co/wp-content/uploads/sun/FichaProvidencia_T133035031276373791.pdf |
-| `2026-10-22-UGPP-ABC-Empleadores-2025.pdf` | UGPP, "ABC empleadores" 2025 (7 pp.), official guidance | https://www.ugpp.gov.co/wp-content/uploads/2025/02/ABC_empleadores2025.pdf |
+| [[raw/docs/oficiais/CO/2026-10-22-CE-S4-SU-25185-2021-ficha.pdf\|2026-10-22-CE-S4-SU-25185-2021-ficha.pdf]] | CE ficha of the sentencia de unificación of 2021-12-09, exp. 25185 (art. 30 Ley 1393). Same file (same md5) as [[raw/docs/oficiais/CO/2026-10-22-CE-SU-25185-2021-FichaProvidencia.pdf\|2026-10-22-CE-SU-25185-2021-FichaProvidencia.pdf]], saved by another window today | https://www.consejodeestado.gov.co/wp-content/uploads/sun/FichaProvidencia_T133035033485231473.pdf |
+| [[raw/docs/oficiais/CO/2026-10-22-CE-S4-24724-2022-SU-ficha.pdf\|2026-10-22-CE-S4-24724-2022-SU-ficha.pdf]] | CE ficha of the sentencia de unificación of 2022-03-24, exp. 24724 (cooperatives; context only) | https://www.consejodeestado.gov.co/wp-content/uploads/sun/FichaProvidencia_T133035031276373791.pdf |
+| [[raw/docs/oficiais/CO/2026-10-22-UGPP-ABC-Empleadores-2025.pdf\|2026-10-22-UGPP-ABC-Empleadores-2025.pdf]] | UGPP, "ABC empleadores" 2025 (7 pp.), official guidance | https://www.ugpp.gov.co/wp-content/uploads/2025/02/ABC_empleadores2025.pdf |
 
 The Consejo de Estado rulings come from official government normogramas (CRC, DIAN, SENA), which reproduce the signed text. The original SAMAI copies could not be fetched: consejodeestado.gov.co/documentos/boletines returned 404 for these radicados.
 
@@ -28,7 +28,7 @@ The Consejo de Estado rulings come from official government normogramas (CRC, DI
 - DUR 780/2016: `2026-10-13-Decreto-780-2016-FuncionPublica.html`
 - CST arts. 127–128: `2026-10-22-CST-pr004-SecretariaSenado.html` (saved by another window today)
 - CST arts. 189 and 192: `2026-10-21-CST-pr006-SecretariaSenado.html`
-- UGPP employers' IBC guide: `2026-10-21-UGPP-Empleadores-IBC-2021.pdf`
+- UGPP employers' IBC guide: [[raw/docs/oficiais/CO/2026-10-21-UGPP-Empleadores-IBC-2021.pdf|2026-10-21-UGPP-Empleadores-IBC-2021.pdf]]
 
 ### Not reachable or not read in this round
 - secretariasenado.gov.co and normograma.supersalud.gov.co: no connection from this machine. The jurinfo.jep.gov.co TLS handshake failed.
@@ -195,8 +195,8 @@ The verdict does not depend on these documents. They would raise the confidence 
 ## Effect on the specs
 
 Files: `05-final/`, read-only with openpyxl on 2026-10-22, **not edited**.
-- `CO-PILA-003-AportesSeguridadSocial-Spec.xlsx`: md5 f949abeb7a5a6e514d0913a648bfbfd4
-- `CO-DIAN-001-NominaElectronica-Spec.xlsx`: md5 5da7287b49451cac8b958b33279ee5eb
+- [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx|CO-PILA-003-AportesSeguridadSocial-Spec.xlsx]]: md5 f949abeb7a5a6e514d0913a648bfbfd4
+- [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-DIAN-001-NominaElectronica-Spec.xlsx|CO-DIAN-001-NominaElectronica-Spec.xlsx]]: md5 5da7287b49451cac8b958b33279ee5eb
 
 ### CO-PILA-003 - consistent; recommended clarification only
 The texts were updated after the 2026-10-21 report. Paid rest days are now in **both** campo 45 (CCF) and campo 95, which closes yesterday's CCF difference.

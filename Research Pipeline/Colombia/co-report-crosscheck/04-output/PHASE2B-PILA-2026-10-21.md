@@ -1,11 +1,11 @@
 # Phase 2b - CO-PILA-003 (campo 45 / campo 95; planilla N limits)
 
-Date: 2026-10-21. Status: PROPOSED map, not applied. Map: `04-output/final-prep/CO-PILA-003-phase2b-map.json` (11 edits, `current` read live from `05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx`; every `proposed` checked against `WORDS` in `scripts/make_final.py`, zero hits; no T/U cell, no Version Control cell).
+Date: 2026-10-21. Status: PROPOSED map, not applied. Map: `04-output/final-prep/CO-PILA-003-phase2b-map.json` (11 edits, `current` read live from [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx|CO-PILA-003-AportesSeguridadSocial-Spec.xlsx]]; every `proposed` checked against `WORDS` in `scripts/make_final.py`, zero hits; no T/U cell, no Version Control cell).
 
 Sources read for this note (all local, page numbers are the PDF page numbers printed in the footer):
-- `raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf`: AT2 version 30, 24-07-2026.
+- [[raw/docs/oficiais/CO/2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf|2026-10-21-MinSalud-Anexo-Tecnico-2-PILA-consolidado.pdf]]: AT2 version 30, 24-07-2026.
 - `raw/docs/oficiais/CO/2026-10-21-Ley-21-1982-FuncionPublica.html`: **downloaded today** from https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=4827. The Secretaría del Senado URLs `ley_0021_1982.html` and `ley_21_1982.html` return 404. The text matches the SENA copy `2026-10-13-Ley-21-1982-SENA.htm`.
-- `raw/docs/oficiais/CO/2026-10-21-UGPP-Empleadores-IBC-2021.pdf`, p.23. Used only for the point marked NOT LOCATED in A.3.
+- [[raw/docs/oficiais/CO/2026-10-21-UGPP-Empleadores-IBC-2021.pdf|2026-10-21-UGPP-Empleadores-IBC-2021.pdf]], p.23. Used only for the point marked NOT LOCATED in A.3.
 - Circular 009/2011 was **not opened** and is not cited in any proposed text.
 
 ---

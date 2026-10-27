@@ -97,6 +97,9 @@
 | antes de 2026-08 | HRBS-10545 | 30% ruling: teste anual EUR 48.013; leave-relief manual | Respondido; NL-CCG reconstruída | Sim |
 | antes de 2026-08 | HRBS-9646 | Betalingskenmerk | Módulo 11 de 16 dígitos obrigatório; não usar clieop03 | Não |
 
+- Rascunhos de comentário HRBS-14394: [[rascunhos/2026-10-15-youtrack-drafts/HRBS-14394|15/10]] · [[rascunhos/2026-10-15-youtrack-drafts/v1/HRBS-14394|15/10 v1]] · [[rascunhos/2026-10-16-youtrack-drafts/HRBS-14394|16/10]] · [[rascunhos/2026-10-27-youtrack-drafts/HRBS-14394|27/10]]
+- [[rascunhos/2026-10-05-HRBS-14675|2026-10-05-HRBS-14675]]: Rascunho HRBS-14675: relatório netherland-ssc-pdf com % de SSI antigos; atualizar para 2026
+
 ## Internal Certification (Análise de Reports)
 > Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/Netherlands`
 
@@ -108,8 +111,23 @@
 
 - 2026-10-14: systematiek **loon-over** (decisão do usuário); outbound = Audit Report no modelo Mammoet, documentos ausentes como limitação de escopo (D-04).
 - Achados principais: imposto do empregado em idade AOW (Excerpta e Sherwin, High), horas declaradas 176 × 173 (Medium), arquivo SEPA "Kantar" malformado (Quest), taxa Whk Quest 1,45% = taxa do setor 42 para pequeno empregador (Tabel 10; a v1.1 citava 1,25% da linha errada, corrigido em 16/10 — ver [[correcoes]]); falta só o porte no mededeling (Observation). Base: Handboek Loonheffingen 2026.
-- 2026-10-16: feedback da Manju (relatório da Quest era para uso externo; quer versão interna com lacunas autoexplicativas e números reconciliados) → `NL_Quest_2026-09_Internal_Validation_Report_v1.0.docx` em `02 Validation` (cadeia bruto→líquido→bases→imposto/prêmios→TotTeBet→banco/GL, 11 cartões de lacuna). Quest: Audit Report v1.2 + workbook v1.2; Excerpta: Audit Report v1.1 + workbook v1.2 (correção Whk).
+- 2026-10-16: feedback da Manju (relatório da Quest era para uso externo; quer versão interna com lacunas autoexplicativas e números reconciliados) → [[internal-certification/Netherlands/Quest Software - 2026-09/02 Validation/NL_Quest_2026-09_Internal_Validation_Report_v1.0.docx|NL_Quest_2026-09_Internal_Validation_Report_v1.0.docx]] em `02 Validation` (cadeia bruto→líquido→bases→imposto/prêmios→TotTeBet→banco/GL, 11 cartões de lacuna). Quest: Audit Report v1.2 + workbook v1.2; Excerpta: Audit Report v1.1 + workbook v1.2 (correção Whk).
 - Falta: recibo Digipoort dos 3 (o Athul diz que não guardam confirmação da Belastingdienst; o pacote da Sherwin traz uma). Cobranças C-14/15/16 em rascunho.
+- [[rascunhos/2026-10-20-DESCANSO-gate-pre-marko|2026-10-20-DESCANSO-gate-pre-marko]]: Assunto pausado: gate pré-Marko para parar o ciclo de erros nas entregas Mammoet NL
+- [[rascunhos/2026-10-20-feedback-manju-montage-P09|2026-10-20-feedback-manju-montage-P09]]: Feedback à Manju sobre Montage P09 V12 (SUPERADO: FND-01/02/05/06 retirados)
+- [[rascunhos/2026-10-20-mensagem-manju-P10|2026-10-20-mensagem-manju-P10]]: Mensagem à Manju com o relatório forense do P10 (Montage V7)
+- [[rascunhos/2026-10-20-mensagem-manju-P11|2026-10-20-mensagem-manju-P11]]: Mensagem à Manju com o relatório forense do P11 (Montage V4) e dois pontos a confirmar
+- [[rascunhos/2026-10-20-mensagem-manju-final-deliverables-P09-P13|2026-10-20-mensagem-manju-final-deliverables-P09-P13]]: Mensagem à Manju sobre Final deliverables P09-P13 (substituir, criar P12/P13)
+- [[rascunhos/2026-10-20-mensagem-marko-final-deliverables|2026-10-20-mensagem-marko-final-deliverables]]: Mensagem ao Marko com as entregas finais Montage P09-P13 (após ok da Manju)
+- [[rascunhos/2026-10-20-pedido-automation-P12-P13|2026-10-20-pedido-automation-P12-P13]]: Pedido/registro ao chat AUTOMATION para P12 e P13 (Montage)
+- [[rascunhos/2026-10-21-entrega-V3-P12-P13-manju-marko|2026-10-21-entrega-V3-P12-P13-manju-marko]]: Entrega Montage P12/P13 V3 + nota v1.2 a Manju e Marko
+- [[rascunhos/2026-10-21-marko-entrega-P09-P13-itens-nao-alterados|2026-10-21-marko-entrega-P09-P13-itens-nao-alterados]]: Entrega ao Marko com a lógica dos itens não alterados (OB-5), nota v1.3
+- [[rascunhos/2026-10-21-montage-entrega-drafts-por-destinatario|2026-10-21-montage-entrega-drafts-por-destinatario]]: Drafts da entrega Montage P09-P13 organizados por destinatário
+- [[rascunhos/2026-10-21-pedido-automation-EM01-P09-P13|2026-10-21-pedido-automation-EM01-P09-P13]]: Pedido ao AUTOMATION: aplicar a regra EM-01 do Marko em P09-P13
+- [[internal-certification/Netherlands/Excerpta Medica - 2026-09/02 Validation/followups|followups]]: Excerpta Medica - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Netherlands/Mammoet Montage - P13-2025/2026-10-21-V3/CONFERENCIA|CONFERENCIA]]: CONFERENCIA da entrega V3 Mammoet P12/P13 2025: correções EH/EM do relatório v3.0, fontes e antes/depois
+- [[internal-certification/Netherlands/Quest Software - 2026-09/02 Validation/followups|followups]]: Quest Software - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Netherlands/Sherwin Williams - 2026-09/02 Validation/followups|followups]]: Sherwin Williams - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
 
 ## Pendências
 - [ ] Decidir se `netherland-ssc-pdf` é statutory; se for, fornecer spec com % 2026 validados; se não, devolver ao Reports (Shaik Jani Sharif) — Wallisson — (HRBS-14675)
@@ -119,7 +137,7 @@
 - [ ] HRBS-14394: confirmar com o Mohit se o 52999 traz o mesmo teto por período (alternativa não incluída na resposta por falta de prova); leitura de regulations NL no backoffice dá 403 para nós — Wallisson
 - [ ] Tickets do Statutory Alert 2027 prontos para colar — Wallisson — (chat: mercans-compliance)
 - [ ] Redline §7.1.4 do NL-CCG-001: aceitar/rejeitar — humano (Wallisson) — (chat: compliance-research) [INCERTO]
-- [ ] [INCERTO] O chat mercans-compliance lista "HRBS-10563 / Holanda / Modelo BCCC/BCCP"; o ticket HRBS-10563 é da Espanha (ver [[Espanha]], quando criado). Provável erro de rótulo no chat.
+- [ ] [INCERTO] O chat mercans-compliance lista "HRBS-10563 / Holanda / Modelo BCCC/BCCP"; o ticket HRBS-10563 é da Espanha (ver [[Espanha]], quando criado). Provável erro de rótulo no chat. _(ticket fechado: HRBS-10563 Resolved em 2026-10-13 (API, 27/10); conferir se a pendência ainda vale)_
 - [ ] [INCERTO] Prompt NL de Client Manual com inconsistências (58202, permanent_disability, start_date vs begin_date, ordinais duplicados) — (chat: design-dev-kb)
 
 ## Entregas (conferências)
@@ -147,3 +165,7 @@
 - raw/chats/2026-10-01-mercans-compliance.md
 - raw/chats/2026-10-01-mercans-design-dev-kb.md
 - skill payroll-compliance-netherlands (lida em 2026-10-02)
+- [[internal-certification/Netherlands/_tool/skill-references/2025/bijzondere-beloning-2025|bijzondere-beloning-2025]]: Referência oficial 2025 transcrita da Belastingdienst usada pela ferramenta de validação NL: bijzondere-beloning
+- [[internal-certification/Netherlands/_tool/skill-references/2025/codes-2025|codes-2025]]: Referência oficial 2025 transcrita da Belastingdienst usada pela ferramenta de validação NL: codes
+- [[internal-certification/Netherlands/_tool/skill-references/2025/controls-2025|controls-2025]]: Referência oficial 2025 transcrita da Belastingdienst usada pela ferramenta de validação NL: controls
+- [[internal-certification/Netherlands/_tool/skill-references/2025/rates-2025|rates-2025]]: Referência oficial 2025 transcrita da Belastingdienst usada pela ferramenta de validação NL: rates

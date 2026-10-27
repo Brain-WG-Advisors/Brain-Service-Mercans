@@ -3,12 +3,12 @@
 **Pedido:** HRBS-15790 (Mustafa): piso 3.200 / teto 19.300 / EE 11,5% / ER 19,25% a partir de 01/01/2027. Análise: `rascunhos/2026-10-23-shruti/HRBS-15790-egito-SI-2027.md`.
 
 **Fonte:**
-- Lei 148/2019, art. 19, último parágrafo (+1% a cada 7 anos desde 01/01/2020, meio a meio, total máx. 26%): `raw/docs/oficiais/EG/2026-10-22-lei-148-2019-seguro-social-nosi.pdf`, p. 25.
-- Regulamento Executivo (Decreto PM 2437/2021), art. 53 (piso/teto +15% ao ano por 7 anos, arredondando para cima até a centena) e art. 57 (aumento no ramo de velhice): `raw/docs/oficiais/EG/2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf`, p. 46 e 48.
+- Lei 148/2019, art. 19, último parágrafo (+1% a cada 7 anos desde 01/01/2020, meio a meio, total máx. 26%): [[raw/docs/oficiais/EG/2026-10-22-lei-148-2019-seguro-social-nosi.pdf|2026-10-22-lei-148-2019-seguro-social-nosi.pdf]], p. 25.
+- Regulamento Executivo (Decreto PM 2437/2021), art. 53 (piso/teto +15% ao ano por 7 anos, arredondando para cima até a centena) e art. 57 (aumento no ramo de velhice): [[raw/docs/oficiais/EG/2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf|2026-10-22-decreto-pm-2437-2021-regulamento-lei-148-gazette.pdf]], p. 46 e 48.
 - NOSI, 30/11/2025 (valores de 2026): `raw/docs/oficiais/EG/2026-10-23-nosi-noticia-2025-11-30-piso-teto-2026.html`.
 
 **Decisões do usuário (25/10):**
-- Arquivo ativo = o linkado no Monday (board Compliance Artifacts, grupo "Egypt (AI)"). CCG: item "Country Research Guide" → `EG-CCG-001-v1_4-statutory-leave-country-standard.docx` (Docs id `1HDiBMTMRrSxScRZDmmCaS25wzVC7-q_M`). WTC/DD: item "EGPYT WTC - DEVELOPMENT" (Phase 3, Mohit) → `EG_WTC_and_Taxability_Matrix` (id `198zMBqHg7A3E2mmxE8jTtcRbXsuM0I63Iyh-45_aAzY`).
+- Arquivo ativo = o linkado no Monday (board Compliance Artifacts, grupo "Egypt (AI)"). CCG: item "Country Research Guide" → [[raw/docs/drive-exports/2026-10-25/EG-CCG-001-v1_4-statutory-leave-country-standard.docx|EG-CCG-001-v1_4-statutory-leave-country-standard.docx]] (Docs id `1HDiBMTMRrSxScRZDmmCaS25wzVC7-q_M`). WTC/DD: item "EGPYT WTC - DEVELOPMENT" (Phase 3, Mohit) → `EG_WTC_and_Taxability_Matrix` (id `198zMBqHg7A3E2mmxE8jTtcRbXsuM0I63Iyh-45_aAzY`).
 - Atualizar só o CCG; a Matrix é do Mohit (espelha a configuração) e não é editada: as mudanças vão descritas no comentário.
 - Numeração: CCG v1.5. Valores de 2026 mantidos, 2027 acrescentado com vigência.
 - Ordem: arquivos → comentário com pergunta ao Mohit sobre a task → task só se ele pedir.
@@ -16,8 +16,8 @@
 ## Arquivos
 | Arquivo novo | Base | Alterações |
 |---|---|---|
-| `EG-CCG-001-v1.5.docx` (md5 `81bd396bd20ae97f474fb250ebd2e877`) | `raw/docs/drive-exports/2026-10-25/EG-CCG-001-v1_4-statutory-leave-country-standard.docx` (cópia do Drive, md5 `507fea21f97a0649c4026479780eadfb`; capa interna "v1.1") | 56 parágrafos + rodapé |
-| `EG_WTC_and_Taxability_Matrix.xlsx` | — | **não alterado** (do Mohit); export de 25/10 em `raw/docs/drive-exports/2026-10-25/` (md5 `fa37ff0f974788105e672fc4101ec7e7`) |
+| [[Research Pipeline/Egypt/2026-10-25-HRBS-15790-SI-2027/EG-CCG-001-v1.5.docx\|EG-CCG-001-v1.5.docx]] (md5 `81bd396bd20ae97f474fb250ebd2e877`) | [[raw/docs/drive-exports/2026-10-25/EG-CCG-001-v1_4-statutory-leave-country-standard.docx\|EG-CCG-001-v1_4-statutory-leave-country-standard.docx]] (cópia do Drive, md5 `507fea21f97a0649c4026479780eadfb`; capa interna "v1.1") | 56 parágrafos + rodapé |
+| [[raw/docs/drive-exports/2026-10-25/EG_WTC_and_Taxability_Matrix.xlsx\|EG_WTC_and_Taxability_Matrix.xlsx]] | — | **não alterado** (do Mohit); export de 25/10 em `raw/docs/drive-exports/2026-10-25/` (md5 `fa37ff0f974788105e672fc4101ec7e7`) |
 
 Script: `aplicar_ccg.py` (cada edição declara o trecho antigo; aborta se não aparecer exatamente 1 vez). Log completo antes → depois: `conferencia-ccg-log.txt`. Destaque: sombreamento `DDEBF7` nos 56 runs alterados.
 

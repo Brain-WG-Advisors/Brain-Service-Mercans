@@ -87,6 +87,8 @@
 |---|---|---|---|---|
 | 2026-10-22 | Ericsson ME (planilha "Compliance feedback list", pedido da Manju por chat) | WT 1026/1027 adiantamentos, 1043 aviso prévio, 1041 indenização, 1042 gratuity, 1044 licença | Respondido na planilha com fonte primária (NSSF Code art. 68(1), 68(3), 51(1)(a); DL 144/1959 arts. 46, 49). Nenhuma norma NSSF exclui esses pagamentos da base; nota anterior "severance outside NSSF" retirada. Rascunho: `rascunhos/2026-10-22-ericsson-me-respostas-LB-JO-EG.md` | Não |
 
+- [[rascunhos/2026-10-22-ericsson-me-respostas-LB-JO-EG|2026-10-22-ericsson-me-respostas-LB-JO-EG]]: Respostas Compliance Ericsson ME para Líbano, Jordânia e Egito (7 linhas)
+
 ## Pendências
 - [ ] Ericsson ME, coluna Detail v1.7: "advance = neither taxable nor insurable" e "severance outside NSSF" sem fonte primária (o art. 68(1) não exclui nenhum dos dois). Vale também para a Jordânia (adiantamento; sem hub). Achado de 2026-10-22, fora do pedido.
 

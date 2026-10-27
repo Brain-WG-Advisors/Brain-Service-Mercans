@@ -15,7 +15,7 @@
 
 ### F1 — Pensioners are in scope (CONFIRMED, primary)
 
-Res. DIAN 000227 de 23-09-2025, "Resolución Única en Materia Tributaria, Aduanera y Cambiaria". Local copy: `frentes/pipeline/mercans-pipeline/CO-compliance/00-official-sources/pdfs/Resolución 000227 de 23-09-2025.pdf`. Page numbers below are the printed "PÁGINA N DE 449".
+Res. DIAN 000227 de 23-09-2025, "Resolución Única en Materia Tributaria, Aduanera y Cambiaria". Local copy: [[frentes/pipeline/mercans-pipeline/CO-compliance/00-official-sources/pdfs/Resolución 000227 de 23-09-2025.pdf|Resolución 000227 de 23-09-2025.pdf]]. Page numbers below are the printed "PÁGINA N DE 449".
 
 | Article | Page | Quote |
 |---|---|---|
@@ -39,7 +39,7 @@ DIAN doctrine repeats the scope and adds nothing technical:
 
 ### F2 — Anexo v1.0 has no pensioner code in TipoTrabajador or TipoContrato (CONFIRMED, primary)
 
-Anexo Técnico Documento Soporte de Pago de Nómina Electrónica – Versión 1.0 (Res. 000013 de 11-02-2021). Local copy: `.../00-official-sources/pdfs/AnexoTecnico-NominaElectronica-V1.0.pdf`.
+Anexo Técnico Documento Soporte de Pago de Nómina Electrónica – Versión 1.0 (Res. 000013 de 11-02-2021). Local copy: [[Research Pipeline/Colombia/CO-compliance/00-official-sources/pdfs/AnexoTecnico-NominaElectronica-V1.0.pdf|AnexoTecnico-NominaElectronica-V1.0.pdf]].
 
 - **p. 179, 5.5.2 TipoContrato:** "1 Termino Fijo / 2 Término Indefinido / 3 Obra o Labor / 4 Aprendizaje / 5 Prácticas o Pasantías". No pension code.
 - **p. 179, 5.5.3 TipoTrabajador:** codes 01, 02, 04, 12, 18, 19, 21, 22, 23, 30, 31, 47, 51, 54 ("Pre pensionado de entidad en liquidación."), 56 ("Pre pensionado con aporte voluntario a salud") and 58. None of them covers a retiree receiving an employer-paid pension.

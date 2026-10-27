@@ -20,7 +20,7 @@
 - **Tipo:** versão final
 - **Risco:** normal
 - **Serviço:** [[research-pipeline]]
-- **O que diz:** o pipeline guarda dois arquivos. `CO-CCG-001-v1.1.docx` (2026-09-24) tem Version Control só com a linha 1.0 (3-set-2026, build inicial, 13 módulos). `CO-CCG-001-v1.2.docx` (2026-10-13) tem 1.0 e 1.1 (5-out-2026, FSP corrigido, Law 100 art. 27 / Law 797 art. 8) e uma linha em branco; **não tem linha 1.2**. Portanto o "v1.1" do nome do arquivo de 24/09 não é o "1.1" do Version Control (que é da linhagem do Drive, 5/10), e o "v1.2" do pipeline não está registrado no próprio arquivo. A vigente é a **v1.4** (Google Doc, 26/10); o monday mostra só o rótulo "CCG" (atualizado 2026-10-26), sem número.
+- **O que diz:** o pipeline guarda dois arquivos. [[Research Pipeline/Colombia/CO-compliance/01-ccg/CO-CCG-001-v1.1.docx|CO-CCG-001-v1.1.docx]] (2026-09-24) tem Version Control só com a linha 1.0 (3-set-2026, build inicial, 13 módulos). [[frentes/pipeline/mercans-pipeline/CO-compliance/01-ccg/CO-CCG-001-v1.2.docx|CO-CCG-001-v1.2.docx]] (2026-10-13) tem 1.0 e 1.1 (5-out-2026, FSP corrigido, Law 100 art. 27 / Law 797 art. 8) e uma linha em branco; **não tem linha 1.2**. Portanto o "v1.1" do nome do arquivo de 24/09 não é o "1.1" do Version Control (que é da linhagem do Drive, 5/10), e o "v1.2" do pipeline não está registrado no próprio arquivo. A vigente é a **v1.4** (Google Doc, 26/10); o monday mostra só o rótulo "CCG" (atualizado 2026-10-26), sem número.
 - **Antes (se erro):** —
 - **Causa (se erro):** nome de arquivo e Version Control seguem numerações diferentes (pipeline × Drive).
 - **Correto / novo:** vigente = CCG v1.4 a partir de 2026-10-26 (hub). Histórico para o hub: 1.0 (pipeline, 3-set); 1.1 (Drive, 5-out); arquivo "v1.2" (pipeline, 13-out, sem linha no VC); v1.3 (21-out); v1.4 (26-out).
@@ -37,12 +37,12 @@
 - **Tipo:** versão final
 - **Risco:** normal
 - **Serviço:** [[research-pipeline]]
-- **O que diz:** duas linhagens de Version Control. (a) Pipeline `CO-WTC-001-v1.1.xlsx` (mtime 2026-09-24, md5 c120b884…): linhas 1 (2026-09-04, Released, 300 códigos globais + 102 da Colômbia), 2 (09-18, "Corrected": resíduo do template tcheco, MINOR-01), 3 (09-18, HRBS-12487: linha 317 prima de férias extralegal), 4 (09-18, MINOR-01/MINOR-09). (b) Pipeline `CO-WTC-001-v1.4.xlsx` (13/10, md5 69a9904d…), da linhagem do Drive: 1 (2026-09-24, Approved), 1.2 (5/10, Draft), 1.3 (5/10, Approved), 1.4 (13/10, Draft). A linhagem do Drive **reinicia** em "1.0 | 2026-09-24" e não herda as linhas 2–4 do pipeline. No arquivo vigente v1.6 (lido por mim), 1.0 e 1.3 estão "Approved" e 1.2, 1.4, 1.5 e 1.6 estão "Draft": a vigência de 1.4–1.6 vem do Drive/hub, não do status do Version Control.
+- **O que diz:** duas linhagens de Version Control. (a) Pipeline [[Research Pipeline/Colombia/CO-compliance/02-wtc/CO-WTC-001-v1.1.xlsx|CO-WTC-001-v1.1.xlsx]] (mtime 2026-09-24, md5 c120b884…): linhas 1 (2026-09-04, Released, 300 códigos globais + 102 da Colômbia), 2 (09-18, "Corrected": resíduo do template tcheco, MINOR-01), 3 (09-18, HRBS-12487: linha 317 prima de férias extralegal), 4 (09-18, MINOR-01/MINOR-09). (b) Pipeline [[frentes/pipeline/mercans-pipeline/CO-compliance/02-wtc/CO-WTC-001-v1.4.xlsx|CO-WTC-001-v1.4.xlsx]] (13/10, md5 69a9904d…), da linhagem do Drive: 1 (2026-09-24, Approved), 1.2 (5/10, Draft), 1.3 (5/10, Approved), 1.4 (13/10, Draft). A linhagem do Drive **reinicia** em "1.0 | 2026-09-24" e não herda as linhas 2–4 do pipeline. No arquivo vigente v1.6 (lido por mim), 1.0 e 1.3 estão "Approved" e 1.2, 1.4, 1.5 e 1.6 estão "Draft": a vigência de 1.4–1.6 vem do Drive/hub, não do status do Version Control.
 - **Antes (se erro):** —
 - **Causa (se erro):** —
 - **Correto / novo:** vigente = WTC v1.6 a partir de 2026-10-26 (hub). A v1.4 do pipeline e a "v1.1" são histórico. Monday: rótulo "WTC" (item grafado "Wage Type Catelogue"), sem número, Done 2026-10-26.
 - **Nível de evidência:** B · **Fonte:** Version Control dos 2 arquivos + `MANIFEST.md` + hub
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/CO-WTC-001-v1.1.md` (aba Version Control, linhas 1–4); `.../CO-WTC-001-v1.4.md` (linhas 1, 1.2, 1.3, 1.4, coluna Status); `.../MANIFEST.md`; `raw/monday/2026-10-27-artifacts-BE-CO-FR.md` item Wage Type Catelogue. Verificação adicional: `Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx`, aba Version Control; `ls` de `G:\...\03 - WTC` (ainda há `CO-WTC-001-v1.xlsx` de 05/10 e `CO-WTC-001_v1.4.xlsx` de 13/10 na raiz ao lado do `_v1.6.gsheet`).
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/CO-WTC-001-v1.1.md` (aba Version Control, linhas 1–4); `.../CO-WTC-001-v1.4.md` (linhas 1, 1.2, 1.3, 1.4, coluna Status); `.../MANIFEST.md`; `raw/monday/2026-10-27-artifacts-BE-CO-FR.md` item Wage Type Catelogue. Verificação adicional: [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx|CO-WTC-001-v1.6.xlsx]], aba Version Control; `ls` de `G:\...\03 - WTC` (ainda há `CO-WTC-001-v1.xlsx` de 05/10 e `CO-WTC-001_v1.4.xlsx` de 13/10 na raiz ao lado do `_v1.6.gsheet`).
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Artefatos entregues: histórico de versões e o aviso de status "Draft" no Version Control das versões vigentes)
 - **Pergunta para o teste (Conjunto B)?** não
@@ -71,12 +71,12 @@
 - **Tipo:** versão final
 - **Risco:** normal
 - **Serviço:** [[research-pipeline]]
-- **O que diz:** pipeline: `CO-SIR-INDEX-001-v1.0.docx` (mtime 2026-09-29, md5 f6923730…), Version Control "v1.0 | 2026-09-04 | Initial issue". No Drive e no monday o documento vigente tem outro nome: **`CO-SIR-001-v1.1`** (Google Doc, 21/10, Res. 13/2021 → 227/2025 aplicada; monday atualizado 2026-10-22). O QA do pipeline disse que **não existe** "CO-SIR-001…007"; o nome "CO-SIR-001" é o rótulo atual do Drive. Hoje convivem os dois nomes.
+- **O que diz:** pipeline: [[Research Pipeline/Colombia/CO-compliance/03-statutory-integrations/CO-SIR-INDEX-001-v1.0.docx|CO-SIR-INDEX-001-v1.0.docx]] (mtime 2026-09-29, md5 f6923730…), Version Control "v1.0 | 2026-09-04 | Initial issue". No Drive e no monday o documento vigente tem outro nome: **`CO-SIR-001-v1.1`** (Google Doc, 21/10, Res. 13/2021 → 227/2025 aplicada; monday atualizado 2026-10-22). O QA do pipeline disse que **não existe** "CO-SIR-001…007"; o nome "CO-SIR-001" é o rótulo atual do Drive. Hoje convivem os dois nomes.
 - **Antes (se erro):** —
 - **Causa (se erro):** renomeação no Drive sem registro no pipeline.
 - **Correto / novo:** vigente = SIR v1.1 (Google Doc `CO-SIR-001-v1.1`, a partir de 2026-10-21); `CO-SIR-INDEX-001-v1.0` = histórico/base.
 - **Nível de evidência:** B · **Fonte:** Version Control + monday + Drive (listagem)
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/CO-SIR-INDEX-001-v1.0.md` (tabela de 2 linhas); `raw/monday/2026-10-27-artifacts-BE-CO-FR.md` seção Colombia, item Statutory Integration (rótulo CO-SIR-001-v1.1); `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` MAJOR-03 (linhas 394–399). Verificação adicional: `ls` de `G:\...\19 - Staturory Integration` (contém `CO-SIR-001-v1.1.gdoc` 21/10 e `CO-SIR-INDEX-001-v1.0.docx` 29/09); `Research Pipeline/Colombia/co-report-crosscheck/04-output/SIR-RES227-2026-10-21.md`.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/CO-SIR-INDEX-001-v1.0.md` (tabela de 2 linhas); `raw/monday/2026-10-27-artifacts-BE-CO-FR.md` seção Colombia, item Statutory Integration (rótulo CO-SIR-001-v1.1); `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` MAJOR-03 (linhas 394–399). Verificação adicional: `ls` de `G:\...\19 - Staturory Integration` (contém `CO-SIR-001-v1.1.gdoc` 21/10 e [[Research Pipeline/Colombia/CO-compliance/03-statutory-integrations/CO-SIR-INDEX-001-v1.0.docx|CO-SIR-INDEX-001-v1.0.docx]] 29/09); `Research Pipeline/Colombia/co-report-crosscheck/04-output/SIR-RES227-2026-10-21.md`.
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Artefatos entregues: linha nova do SIR com os dois nomes)
 - **Pergunta para o teste (Conjunto B)?** não
@@ -127,7 +127,7 @@
 - **Causa (se erro):** —
 - **Correto / novo:** versão = Version Control (1.0); sufixo v1.4 do nome sem registro.
 - **Nível de evidência:** B · **Fonte:** Version Control + `MANIFEST.md` + hub
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/CO-DIAN-004-Formulario220-Spec-v1.4.md` (1 linha); `.../MANIFEST.md`; `raw/pipeline/Colombia/2026-10-27/qa/CO-ALIGNMENT-PATCH.md` linhas 130–138 (Check 5). Verificação adicional: `Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-DIAN-004-Formulario220-Spec.xlsx`, aba "Formulario 220 Spec", linha 4.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/CO-DIAN-004-Formulario220-Spec-v1.4.md` (1 linha); `.../MANIFEST.md`; `raw/pipeline/Colombia/2026-10-27/qa/CO-ALIGNMENT-PATCH.md` linhas 130–138 (Check 5). Verificação adicional: [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-DIAN-004-Formulario220-Spec.xlsx|CO-DIAN-004-Formulario220-Spec.xlsx]], aba "Formulario 220 Spec", linha 4.
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Artefatos entregues)
 - **Pergunta para o teste (Conjunto B)?** não
@@ -190,12 +190,12 @@
 - **Tipo:** versão final
 - **Risco:** alto (versão vigente de um artefato que não está no hub)
 - **Serviço:** [[research-pipeline]] / [[design]]
-- **O que diz:** o `MANIFEST.md` lista `CO_Compliance_Payslip_Generator-v1.1.xlsx` (2026-09-18, md5 32ded04f…) e marca **"VC encontrado: não"**: a planilha **não tem Version Control**. No pipeline existem dois arquivos: `CO_Compliance_Payslip_Generator.xlsx` (md5 e82f51ee…, o que o QA de 7-set revisou, com 54 células "XXXXX") e `…-v1.1-DRAFT.xlsx` (md5 32ded04f…). Verifiquei que o arquivo do Drive `18 - Payslip\CO_Compliance_Payslip_Generator.xlsx` (2026-09-24) tem **o mesmo md5 32ded04f…** da v1.1-DRAFT. Ou seja, o que está no Drive é o "v1.1 DRAFT" sem Version Control; o `.gsheet` da mesma pasta é de 14/07. O monday não tem item de Payslip para a Colômbia.
+- **O que diz:** o `MANIFEST.md` lista [[frentes/pipeline/mercans-pipeline/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator-v1.1.xlsx|CO_Compliance_Payslip_Generator-v1.1.xlsx]] (2026-09-18, md5 32ded04f…) e marca **"VC encontrado: não"**: a planilha **não tem Version Control**. No pipeline existem dois arquivos: [[Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator.xlsx|CO_Compliance_Payslip_Generator.xlsx]] (md5 e82f51ee…, o que o QA de 7-set revisou, com 54 células "XXXXX") e `…-v1.1-DRAFT.xlsx` (md5 32ded04f…). Verifiquei que o arquivo do Drive [[Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator.xlsx|CO_Compliance_Payslip_Generator.xlsx]] (2026-09-24) tem **o mesmo md5 32ded04f…** da v1.1-DRAFT. Ou seja, o que está no Drive é o "v1.1 DRAFT" sem Version Control; o `.gsheet` da mesma pasta é de 14/07. O monday não tem item de Payslip para a Colômbia.
 - **Antes (se erro):** —
 - **Causa (se erro):** o Payslip Generator é copiado do modelo da Espanha, que não leva aba de Version Control.
 - **Correto / novo:** registrar no hub: Payslip Generator CO = v1.1 DRAFT (2026-09-18 no pipeline; Drive 2026-09-24, md5 32ded04f…), sem Version Control; não achei registro de trabalho posterior a 24/09 no hub, no `log.md` nem no `ESTADO.md`.
 - **Nível de evidência:** B · **Fonte:** `MANIFEST.md` + comparação de md5 feita nesta extração
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/MANIFEST.md` (última linha, "VC encontrado: não"); `raw/pipeline/Colombia/2026-10-27/MANIFEST-coleta.md` (pasta payslip não listada; só QA/logs). Verificação adicional (só leitura): `md5sum` de `G:\Drives compartilhados\Compliance Team\Country Folders\Colombia\18 - Payslip\CO_Compliance_Payslip_Generator.xlsx` = `Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator-v1.1-DRAFT.xlsx`.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/version-control/MANIFEST.md` (última linha, "VC encontrado: não"); `raw/pipeline/Colombia/2026-10-27/MANIFEST-coleta.md` (pasta payslip não listada; só QA/logs). Verificação adicional (só leitura): `md5sum` de [[Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator.xlsx|CO_Compliance_Payslip_Generator.xlsx]] = [[Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator-v1.1-DRAFT.xlsx|CO_Compliance_Payslip_Generator-v1.1-DRAFT.xlsx]].
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Artefatos entregues: linha nova) + pergunta à frente pipeline se o Drive é o final
 - **Pergunta para o teste (Conjunto B)?** sim → "Existe Payslip Generator da Colômbia? Qual versão e onde?"
@@ -229,7 +229,7 @@
 - **Causa (se erro):** o Payslip nasceu como clone do modelo da Espanha, sem arquivo WTC da Colômbia disponível ("No CO-WTC file available", códigos ilustrativos) e sem os itens do art. 5.
 - **Correto / novo:** na v1.1 DRAFT, `Colombia (EN)` traz códigos reais do WTC (ex.: CO-SALARIO-BASICO, CO-DED-SALUD, CO-RETENCION-FUENTE, CO-ER-SALUD, CO-PROV-CESANTIAS), CUNE (A11), Generation Date (A12), QR Code Reference (A13) e "Prefix / Consecutive" (G11); a provisão de férias passou a `=ROUND((H26+H28+H29)*0.0417,0)` (sem horas extras nem auxílio de transporte) e a provisão da prima (H56) usa `SUM(H26:H30)`. **Resíduo:** 18 células "XXXXX" nas duas abas genéricas ("How to set up Payslip", "Compliance Payslip") e o texto "[VERIFY WITH RA – illustrative placeholder]" com séries de contas ilustrativas em "Payslip Spec" (D33–D58) e "Unit Rate Details" (G2). Não conferi data/período de pagamento na aba EN.
 - **Nível de evidência:** B · **Fonte:** CO-QA-REPORT MAJOR-01/02, MINOR-05 + leitura direta do xlsx do Drive (nesta extração)
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` MAJOR-01 (linhas 322–338), MAJOR-02 (342–378), MINOR-05 (452–459); `raw/pipeline/Colombia/2026-10-27/logs/payslip_batch.log` itens 3 e 4 ("Wage-type codes: illustrative placeholders"; "[VERIFY WITH RA] items"). Verificação adicional: `G:\...\Colombia\18 - Payslip\CO_Compliance_Payslip_Generator.xlsx` (openpyxl, só leitura), `Colombia (EN)` A11–A13, A26–A57, H56–H57.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` MAJOR-01 (linhas 322–338), MAJOR-02 (342–378), MINOR-05 (452–459); `raw/pipeline/Colombia/2026-10-27/logs/payslip_batch.log` itens 3 e 4 ("Wage-type codes: illustrative placeholders"; "[VERIFY WITH RA] items"). Verificação adicional: [[Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator.xlsx|CO_Compliance_Payslip_Generator.xlsx]] (openpyxl, só leitura), `Colombia (EN)` A11–A13, A26–A57, H56–H57.
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Artefatos entregues, linha do Payslip) e [[correcoes]] só se a frente pipeline confirmar que o QA pedia estes ajustes
 - **Pergunta para o teste (Conjunto B)?** não
@@ -263,7 +263,7 @@
 - **Causa (se erro):** o QA validou o CCG contra o WTC v1.0 e o WTC mudou depois (SU 25185), sem propagar para a tabela do CCG.
 - **Correto / novo:** gratificação ocasional (não pactada) fica fora da trava e fora do IBC, como no WTC v1.6 linha 318; plano de saúde pactado entra na trava. A tabela 4.6 do CCG v1.4 precisa seguir o WTC. Fontes a registrar como A: SU 25185/2021 regra 3 e UGPP ABC Empleadores 2025 p. 5 (já citadas em [[correcoes]] 2026-10-26).
 - **Nível de evidência:** B (arquivos) · A pendente de leitura nesta extração · **Fonte:** CO-QA-REPORT MINOR-04; WTC v1.6 linha 318; CCG v1.4 tabela 4.6
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` MINOR-04 (linhas 441–450); `raw/pipeline/Colombia/2026-10-27/version-control/CO-WTC-001-v1.4.md` linha 1.2 (linha 318 reclassificada). Verificação adicional: `Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx` (aba Wage Type Catalogue, linhas 318 e 348) e `.../CO-CCG-001-v1.4.docx` (tabelas do Módulo 4.6, linhas "Occasional gratuity" e "Employer-paid prepaid health premium").
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` MINOR-04 (linhas 441–450); `raw/pipeline/Colombia/2026-10-27/version-control/CO-WTC-001-v1.4.md` linha 1.2 (linha 318 reclassificada). Verificação adicional: [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx|CO-WTC-001-v1.6.xlsx]] (aba Wage Type Catalogue, linhas 318 e 348) e [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-CCG-001-v1.4.docx|CO-CCG-001-v1.4.docx]] (tabelas do Módulo 4.6, linhas "Occasional gratuity" e "Employer-paid prepaid health premium").
 - **Quem decidiu / pediu:** —
 - **Destino:** [[correcoes]] (complemento de 2026-10-26) + pedir à frente pipeline para alinhar o CCG v1.4 ao WTC v1.6
 - **Pergunta para o teste (Conjunto B)?** sim → "A gratificação ocasional (mera liberalidad) entra na trava de 40% da Ley 1393 art. 30?" (não; fora do IBC e fora da trava, WTC v1.6 linha 318)
@@ -331,7 +331,7 @@
 - **Causa (se erro):** a correção de 21/10 cobriu CCG, WTC, DD e SIR, não o Payslip nem a ficha.
 - **Correto / novo:** citar "Res. DIAN 000227 de 2025 (compila a Res. 13/2021)". O mapa artigo a artigo está em `SIR-RES227-2026-10-21.md`; os arts. 5 e 24 da Res. 13 não aparecem na tabela de correspondência lida, então o número exato na 227 fica a confirmar.
 - **Nível de evidência:** A (Res. 227/2025, via mapa do normograma já feito pela frente) · **Fonte:** `SIR-RES227-2026-10-21.md`; Payslip do Drive A78
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-PAYSLIP-VERIFICATION.md` linha 67 (disclosure duty) e 181; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 346–350 (art. 5 e art. 24 da Res. 13). Verificação adicional: `G:\...\18 - Payslip\CO_Compliance_Payslip_Generator.xlsx`, `Colombia (EN)` A78; `Research Pipeline/Colombia/co-report-crosscheck/04-output/SIR-RES227-2026-10-21.md`.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-PAYSLIP-VERIFICATION.md` linha 67 (disclosure duty) e 181; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 346–350 (art. 5 e art. 24 da Res. 13). Verificação adicional: [[Research Pipeline/Colombia/CO-compliance/06-payslip/CO_Compliance_Payslip_Generator.xlsx|CO_Compliance_Payslip_Generator.xlsx]], `Colombia (EN)` A78; `Research Pipeline/Colombia/co-report-crosscheck/04-output/SIR-RES227-2026-10-21.md`.
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Pendências: Payslip) e ficha (artigo 14) se a skill instalada for atualizada
 - **Pergunta para o teste (Conjunto B)?** não
@@ -347,7 +347,7 @@
 - **Antes (se erro):** `scope_manifest.json` e skill do pipeline com o adiantamento como funcionalidade configurável.
 - **Causa (se erro):** base numa minuta de decreto do MinTrabajo (fonte não vinculante).
 - **Correto / novo:** par. 1 não operável até o decreto e o PILA; par. 2 (juros mensais) é lei vigente e só exige acordo escrito (Ley 50/1990 art. 99 par. 2, já lido em 22/10). Não usar o `scope_manifest` nem a skill do pipeline como referência sobre este ponto.
-- **Nível de evidência:** B (pipeline) × A (Ley 50/1990 art. 99, já arquivada em `raw/docs/oficiais/CO/2026-10-22-Ley-50-1990-FuncionPublica.pdf`) · **Fonte:** scope_validation + reports.log
+- **Nível de evidência:** B (pipeline) × A (Ley 50/1990 art. 99, já arquivada em [[raw/docs/oficiais/CO/2026-10-22-Ley-50-1990-FuncionPublica.pdf|2026-10-22-Ley-50-1990-FuncionPublica.pdf]]) · **Fonte:** scope_validation + reports.log
 - **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/scope_validation.md` linha 249 (OUT CO-OUT-CESANTIAS); `raw/pipeline/Colombia/2026-10-27/logs/reports.log` "Three things worth your attention", item 2. Verificação adicional: `Research Pipeline/Colombia/CO-compliance/scope_manifest.json` (7 ocorrências de "advance"); `Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CONFERENCIA.md` seção "23/10".
 - **Quem decidiu / pediu:** opção (b) do usuário em 2026-10-23 (já registrada em [[correcoes]])
 - **Destino:** [[correcoes]] (complemento: artefatos derivados não atualizados) e frente pipeline (atualizar `scope_manifest`)
@@ -365,7 +365,7 @@
 - **Causa (se erro):** a verificação do Payslip (12-jul) é anterior ao auto (9-jul, divulgado em 17-jul); a ficha vem de pesquisa de 27-ago, mas ainda trata o 1469 como suspenso.
 - **Correto / novo:** **conflito sem resolução** (B × B; mais recente: CCG v1.4, 26/10, mas apoiado em notícia, não no auto). Manter só o valor; para citar o instrumento, ler o auto do Conselho de Estado de 9-jul-2026 (processo 11001-03-25-000-2026-00004-00) e o Decreto 0159 de 19-fev-2026. Registrar no hub as duas versões até lá.
 - **Nível de evidência:** B × B (A não lido) · **Fonte:** CO-QA-REPORT §6; CO-PAYSLIP-VERIFICATION; CCG v1.4 Módulo 4; Payslip A83
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-PAYSLIP-VERIFICATION.md` linhas 18–23, 31–32 e 101–109; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 604–607. Verificação adicional: `Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-CCG-001-v1.4.docx` (parágrafo "The legal instrument for 2026 requires a specific note" e a lista "Legal basis"); `G:\...\18 - Payslip\...xlsx`, `Colombia (EN)` A83.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-PAYSLIP-VERIFICATION.md` linhas 18–23, 31–32 e 101–109; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 604–607. Verificação adicional: [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-CCG-001-v1.4.docx|CO-CCG-001-v1.4.docx]] (parágrafo "The legal instrument for 2026 requires a specific note" e a lista "Legal basis"); `G:\...\18 - Payslip\...xlsx`, `Colombia (EN)` A83.
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Pendências + §Valores-chave: SMMLV) e skill `payroll-compliance-colombia` (armadilha 1)
 - **Pergunta para o teste (Conjunto B)?** sim → "Qual decreto fixa o SMMLV 2026 da Colômbia?" (valor 1.750.905 certo; instrumento a confirmar)
@@ -382,7 +382,7 @@
 - **Causa (se erro):** módulos escritos em momentos diferentes; o QA conferiu a regra no escopo, não a consistência interna do CCG.
 - **Correto / novo:** 20% sobre o bruto, até a residência, pela fonte abaixo; corrigir o Módulo 2.2 do CCG. Antes de promover, ler o Conceito 011108/2026 e o ET art. 408 (só citados, não lidos nesta extração; o art. 408 trata de pagamentos a não residentes e a aplicação a salário de contrato local é o que o Conceito deve confirmar).
 - **Nível de evidência:** B citando A (ET arts. 10 e 408; DIAN Conceito 011108 de 2026-06-29) · **Fonte:** scope_validation B1 + QA Check 5 + dd.log
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/scope_validation.md` linhas 21, 75–80, 102 e 192; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 224–225 e 484–491 (MINOR-09); `raw/pipeline/Colombia/2026-10-27/logs/dd.log` "Three things worth your attention", item 2. Verificação adicional: `Research Pipeline/Colombia/CO-compliance/01-ccg/modules/m06_tax.md` linhas 8–25 (Módulo 6.2) e `…/2026-10-22-auditoria-lote1/CO-CCG-001-v1.4.docx` (parágrafo "The same progressive art. 383 table…").
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/scope_validation.md` linhas 21, 75–80, 102 e 192; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 224–225 e 484–491 (MINOR-09); `raw/pipeline/Colombia/2026-10-27/logs/dd.log` "Three things worth your attention", item 2. Verificação adicional: `Research Pipeline/Colombia/CO-compliance/01-ccg/modules/m06_tax.md` linhas 8–25 (Módulo 6.2) e [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-CCG-001-v1.4.docx|CO-CCG-001-v1.4.docx]] (parágrafo "The same progressive art. 383 table…").
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Valores-chave, linha "Expat / não residente", com fonte e vigência a partir de 2026) + frente pipeline (corrigir CCG Módulo 2.2)
 - **Pergunta para o teste (Conjunto B)?** sim → "Como se retém imposto de renda de um empregado estrangeiro não residente na Colômbia?" (20% sobre o bruto até a residência; tabela 383 só depois)
@@ -433,7 +433,7 @@
 - **Causa (se erro):** sem fonte A para a tarifa e para o piso.
 - **Correto / novo:** a tarifa de 66,67% e o piso seguem como **default configurável**, sem fonte A; o piso tem apoio na Sentencia C-543 citada no CCG v1.3 (não lida aqui). Ao responder, dizer que a norma não fixa a taxa dos dias 1–2.
 - **Nível de evidência:** B · **Fonte:** handover_status; WTC v1.6 aba Employer Sick Pay
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/handover_status.md` linhas 366–369 (Next steps, item 3); `raw/pipeline/Colombia/2026-10-27/qa/scope_validation.md` linha 157 (incapacidade, "66.67%"). Verificação adicional: `Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx`, aba "Employer Sick Pay", linhas 30–41.
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/handover_status.md` linhas 366–369 (Next steps, item 3); `raw/pipeline/Colombia/2026-10-27/qa/scope_validation.md` linha 157 (incapacidade, "66.67%"). Verificação adicional: [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx|CO-WTC-001-v1.6.xlsx]], aba "Employer Sick Pay", linhas 30–41.
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Pendências: Q-6/Q-7, com o estado de 26/10) e frente pipeline (alinhar WTC e CCG sobre o piso)
 - **Pergunta para o teste (Conjunto B)?** sim → "Qual a taxa que o empregador paga nos 2 primeiros dias de incapacidade por doença geral?" (a norma não fixa; default 66,67% configurável)
@@ -518,7 +518,7 @@
 - **Causa (se erro):** faixa de códigos da Colômbia não atribuída.
 - **Correto / novo:** sem faixa atribuída: não afirmar o código numérico de nenhuma linha `CO-`; perguntar à Config/Product quando sair a faixa.
 - **Nível de evidência:** B · **Fonte:** CO-QA-REPORT §4 (DERIVED flag)
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 554–557. Verificação adicional: `Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx` (coluna A da aba Wage Type Catalogue; aba Global WTC Coverage linha 15).
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linhas 554–557. Verificação adicional: [[Research Pipeline/Colombia/2026-10-22-auditoria-lote1/CO-WTC-001-v1.6.xlsx|CO-WTC-001-v1.6.xlsx]] (coluna A da aba Wage Type Catalogue; aba Global WTC Coverage linha 15).
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Pendências) e [[fronteiras]] (Config atribui a faixa)
 - **Pergunta para o teste (Conjunto B)?** não
@@ -535,7 +535,7 @@
 - **Causa (se erro):** citação do art. 253 sem leitura do texto no raw; fonte da regra pode ser outra norma (decreto/lei do auxílio).
 - **Correto / novo:** regra operacional (incluir o auxílio na base) está nos artefatos; a **fonte legal exata** é pendência. Não repetir "art. 253 exige" em ticket sem ler o artigo.
 - **Nível de evidência:** B · **Fonte:** reports.log; spec CO-CESANTIAS-006 (final)
-- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/logs/reports.log` "Three things worth your attention", item 1; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linha 622 (bug da calculadora do operador); `raw/pipeline/Colombia/2026-10-27/qa/CO-PAYSLIP-VERIFICATION.md` linha 36 (auxílio fora do IBC). Verificação adicional: `Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx` (Population Rules linha 7; Field Options linhas 48–49).
+- **Localização no raw:** `raw/pipeline/Colombia/2026-10-27/logs/reports.log` "Three things worth your attention", item 1; `raw/pipeline/Colombia/2026-10-27/qa/CO-QA-REPORT.md` linha 622 (bug da calculadora do operador); `raw/pipeline/Colombia/2026-10-27/qa/CO-PAYSLIP-VERIFICATION.md` linha 36 (auxílio fora do IBC). Verificação adicional: [[Research Pipeline/Colombia/co-report-crosscheck/05-final/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx|CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx]] (Population Rules linha 7; Field Options linhas 48–49).
 - **Quem decidiu / pediu:** —
 - **Destino:** hub (§Ficha, Q-21: nota de divergência) e skill
 - **Pergunta para o teste (Conjunto B)?** sim → "A base das cesantías inclui o auxílio de transporte?" (sim; fonte legal exata a confirmar)

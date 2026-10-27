@@ -91,7 +91,7 @@
 | ⚠️ data? | HRBS-8606 | PIFSS | [INCERTO] conteúdo não registrado no chat mercans-compliance | n/a |
 
 ## Pendências
-- [ ] Recuperar o conteúdo do HRBS-8606 (PIFSS) no YouTrack — Wallisson — (chat: mercans-compliance) [INCERTO]
+- [ ] Recuperar o conteúdo do HRBS-8606 (PIFSS) no YouTrack — Wallisson — (chat: mercans-compliance) [INCERTO] _(ticket fechado: HRBS-8606 Resolved em 2026-06-12 (API, 27/10); conferir se a pendência ainda vale)_
 
 ## Correções ligadas
 - _(nenhuma)_

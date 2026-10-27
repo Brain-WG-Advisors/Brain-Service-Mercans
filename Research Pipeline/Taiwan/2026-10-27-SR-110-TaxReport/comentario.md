@@ -1,6 +1,6 @@
 # SR-110: rascunho de comentário (EN). NÃO postado
 
-> Para o usuário revisar. Anexo só depois do ok: `Taiwan Tax Report Spec_v1.3.xlsx` (changed cells in light blue).
+> Para o usuário revisar. Anexo só depois do ok: [[Research Pipeline/Taiwan/2026-10-27-SR-110-TaxReport/Taiwan Tax Report Spec_v1.3.xlsx|Taiwan Tax Report Spec_v1.3.xlsx]] (changed cells in light blue).
 
 ---
 

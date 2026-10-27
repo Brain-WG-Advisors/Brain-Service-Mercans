@@ -87,6 +87,10 @@
 - Decisão 2026-10-14: sem skattekort no pacote, testa-se a consistência do trekk com os parâmetros do contracheque.
 - Trekk 6/6 exato pelas trekktabeller 2026; AGA 14,1% ok.
 - **High:** contribuição sindical fora da base do forskuddstrekk e sem fradrag "fagforeningskontingent" na A-melding (Skattebetalingsloven §5-9(1)(b)) → ação A-01 para implementation.
+- [[internal-certification/Norway/Henkel Norway - 2026-09/02 Validation/followups|followups]]: Henkel Norway - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Norway/Henkel Norway - 2026-09/02 Validation/intake|intake]]: Henkel Norway - 2026-09: intake do pacote: entidade, período e inventário do recebido
+- [[internal-certification/Norway/Henkel Norway - 2026-09/02 Validation/resumo_PT|resumo_PT]]: Henkel Norway - 2026-09: resumo em português dos achados da validação
+- [[internal-certification/Norway/Henkel Norway - 2026-09/02 Validation/summary_EN|summary_EN]]: Henkel Norway - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
 
 ## Pendências
 - [ ]
@@ -96,3 +100,5 @@
 
 ## Fontes
 - skill payroll-compliance-norway (lida em 2026-10-02)
+- [[internal-certification/references/Norway/2026/facts|facts]]: Fatos estatutários compactos 2026 extraídos das fontes oficiais, usados na validação
+- [[internal-certification/references/Norway/2026/sources|sources]]: Registro das fontes oficiais 2026 (editor, versão, data de leitura, hash) usadas na validação

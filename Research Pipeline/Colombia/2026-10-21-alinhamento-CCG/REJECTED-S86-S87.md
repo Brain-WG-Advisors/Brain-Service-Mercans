@@ -1,6 +1,6 @@
 # CO-CCG-001 - rejected suggestions S86 and S87 (verbatim)
 
-Source: Drive Google Doc CO-CCG-001_v1.2, export of 21 Oct 2026 (`base/CO-CCG-001_v1.2-gdoc-export-2026-10-21.docx`), Module 13 "Other prevalent non-statutory practices worth recording", row on the bonus. Tracked insertions by author "Claude". Both rejected (verdicts in `suggestions-verdicts-A.json`): they review one client's automation spec and client wage types, which is ticket / hub material, not CCG content. Not in CO-CCG-001 v1.3. Destination: `paises/Colombia.md` (ticket record HRBS-12487).
+Source: Drive Google Doc CO-CCG-001_v1.2, export of 21 Oct 2026 ([[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/base/CO-CCG-001_v1.2-gdoc-export-2026-10-21.docx|CO-CCG-001_v1.2-gdoc-export-2026-10-21.docx]]), Module 13 "Other prevalent non-statutory practices worth recording", row on the bonus. Tracked insertions by author "Claude". Both rejected (verdicts in `suggestions-verdicts-A.json`): they review one client's automation spec and client wage types, which is ticket / hub material, not CCG content. Not in CO-CCG-001 v1.3. Destination: `paises/Colombia.md` (ticket record HRBS-12487).
 
 ## S86 (inserted 2026-09-18, author Claude)
 

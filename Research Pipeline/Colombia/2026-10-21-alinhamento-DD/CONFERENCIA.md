@@ -3,7 +3,7 @@
 **O que é:** a Fase 2C do plano Colômbia (`co-report-crosscheck/HANDOFF-2026-10-21.md` §8), na parte do DD. **Ainda não está no Drive**: só sobe com o ok do usuário (Fase 4).
 
 ## Base
-- `base/CO-DD-001-v1.1-Drive-2026-10-05.xlsx` = cópia de `G:\...\Colombia\02- DD\CO-DD-001-v1.xlsx` (md5 af2fc9a05b2fccbd7b24d64242ad3723). O Version Control vai até a 1.1 (Draft).
+- [[Research Pipeline/Colombia/2026-10-21-alinhamento-DD/base/CO-DD-001-v1.1-Drive-2026-10-05.xlsx|CO-DD-001-v1.1-Drive-2026-10-05.xlsx]] = cópia de `G:\...\Colombia\02- DD\CO-DD-001-v1.xlsx` (md5 af2fc9a05b2fccbd7b24d64242ad3723). O Version Control vai até a 1.1 (Draft).
 - O Google Sheet `CO-DD-001-v1` do Drive também foi modificado em 05/10, com o mesmo Version Control. Não há edição mais nova.
 
 ## Fontes

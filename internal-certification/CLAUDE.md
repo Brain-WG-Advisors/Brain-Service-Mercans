@@ -50,8 +50,8 @@ Email sent 07-Oct 14:23 to all 9 SBCs, cc Manju Shetija and Marko Taylor. Indivi
 | Ireland | none | — | No Primary SBC on the board |
 
 Nataliia's files seen on Chat (check the chat for the full list): September 2026 `Altium_Balance_09-2026_UKR.xls`,
-`Altium_Balance_09-2026_GTN.xlsx`; August 2026 `Application_PF_08.xls`, `Altium_Balance_08-2026_GTN_2.xlsx`,
-`Altium_Balance_08-2026_Termination.xls`, `Altium_Balance_08-2026_UKR_2.xlsx`, `Altium_Unified PIT and SSC report…`,
+[[internal-certification/Ukraine/Altium - 2026-09/01 Received/Altium_Balance_09-2026_GTN.xlsx|Altium_Balance_09-2026_GTN.xlsx]]; August 2026 `Application_PF_08.xls`, [[internal-certification/Ukraine/Altium - 2026-08/01 Received/Altium_Balance_08-2026_GTN_2.xlsx|Altium_Balance_08-2026_GTN_2.xlsx]],
+`Altium_Balance_08-2026_Termination.xls`, [[internal-certification/Ukraine/Altium - 2026-08/01 Received/Altium_Balance_08-2026_UKR_2.xlsx|Altium_Balance_08-2026_UKR_2.xlsx]], `Altium_Unified PIT and SSC report…`,
 `Altium_1PV_monthly_08_2026.zip`, `Altium_payslips_08.zip`. She said the September tax report is not prepared yet,
 so the August set is the complete one. The Ukrainian G2N is in Ukrainian on purpose (printed and kept for 5 years).
 

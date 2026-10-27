@@ -1,6 +1,6 @@
 # Matriz Modelo 145 × Data Dictionary Espanha (V5.0)
 
-> Caso STG Spain — ESS "Employee Tax Relief Declaration". Frente Pipeline, 2026-10-19. Aprovado pelo usuário antes de gravar. Atualizada para o DD **V5.0** final (`Spain_Data_Dictionary_V5.0.xlsx`, md5 9f83bb035ed615d5fe0131a8105d57ac); a primeira versão comparava com a V4.9.
+> Caso STG Spain — ESS "Employee Tax Relief Declaration". Frente Pipeline, 2026-10-19. Aprovado pelo usuário antes de gravar. Atualizada para o DD **V5.0** final ([[Research Pipeline/Spain/2026-10-19-modelo145-x-DD/Spain_Data_Dictionary_V5.0.xlsx|Spain_Data_Dictionary_V5.0.xlsx]], md5 9f83bb035ed615d5fe0131a8105d57ac); a primeira versão comparava com a V4.9.
 > Critério: um campo do 145 só entra no DD se a fonte oficial provar que é insumo do cálculo da retenção de IRPF ou de um report estatutário (não espelhar o formulário).
 
 **Base legal geral:** RIRPF art. 88.1 — a comunicação (Modelo 145) cobre "la situación personal y familiar que influye en el importe excepcionado de retener, en la determinación del tipo de retención o en las regularizaciones de éste". Art. 88.2: sem a comunicação, o pagador retém sem considerar a circunstância.
@@ -8,7 +8,7 @@
 **Resultado (DD V5.0):** 24 linhas do 145 → **22 necessárias, todas cobertas** (14 já existiam na V4.9 + **8 incluídas na V5.0**) e **2 não necessárias como campo**; 0 a confirmar.
 
 **Siglas de fonte** (arquivos em `raw/docs/oficiais/ES/`, baixados em 2026-10-19):
-- **Alg** = AEAT, *Algoritmo de cálculo del tipo de retención IRPF 2026 (a partir de 10 de septiembre)* — `2026-10-19-AEAT-Algoritmo-Retenciones-2026-10sept.pdf` (páginas do PDF).
+- **Alg** = AEAT, *Algoritmo de cálculo del tipo de retención IRPF 2026 (a partir de 10 de septiembre)* — [[raw/docs/oficiais/ES/2026-10-19-AEAT-Algoritmo-Retenciones-2026-10sept.pdf|2026-10-19-AEAT-Algoritmo-Retenciones-2026-10sept.pdf]] (páginas do PDF).
 - **XSD** = AEAT, `AEATRetenciones2026.xsd` (serviço de cálculo de retenções 2026).
 - **190** = AEAT, *Diseños de registro Modelo 190 (2025)*, inclui Orden HAC/1431/2025 — registro tipo 2 (perceptor), posições.
 - **RIRPF** = RD 439/2007, consolidado BOE (últ. atualização 07/10/2026). **LIRPF** = Lei 35/2006, consolidada BOE (últ. atualização 07/10/2026).

@@ -5,8 +5,8 @@ Chat STG (20/10, 11:41): a cliente pede que a tela do ESS siga o Modelo 145: lis
 O usuário delegou as decisões com base na fonte oficial (20/10).
 
 ## Entradas
-- Base: `../2026-10-19-modelo145-x-DD/Spain_Data_Dictionary_V5.0.xlsx` (md5 9f83bb035ed615d5fe0131a8105d57ac), a mesma copiada ao Drive e importada como `Spain_Data_Dictionary_V5.0.gsheet` em 20/10 às 09:45. As exports `Downloads\Spain_Data_Dictionary_V5_0*.xlsx` são de 14/09 (outra linhagem) e não foram usadas.
-- Fontes (`raw/docs/oficiais/ES/`): Modelo 145 (`2026-10-19-modelo145.pdf`), algoritmo AEAT 2026 (validações 4, 5, 8, 15, 17), `AEATRetenciones2026.xsd` (Descendiente maxOccurs=16; ordem Nacimiento, Adopcion, ComputadoEntero, Discapacidad; Ascendiente: Nacimiento, Convivencia, Discapacidad), desenho do 190 (pos. 167, códigos 0–3), LIRPF art. 58.1 e art. 60 (consolidada BOE).
+- Base: [[Research Pipeline/Spain/2026-10-19-modelo145-x-DD/Spain_Data_Dictionary_V5.0.xlsx|Spain_Data_Dictionary_V5.0.xlsx]] (md5 9f83bb035ed615d5fe0131a8105d57ac), a mesma copiada ao Drive e importada como `Spain_Data_Dictionary_V5.0.gsheet` em 20/10 às 09:45. As exports `Downloads\Spain_Data_Dictionary_V5_0*.xlsx` são de 14/09 (outra linhagem) e não foram usadas.
+- Fontes (`raw/docs/oficiais/ES/`): Modelo 145 ([[raw/docs/oficiais/ES/2026-10-19-modelo145.pdf|2026-10-19-modelo145.pdf]]), algoritmo AEAT 2026 (validações 4, 5, 8, 15, 17), `AEATRetenciones2026.xsd` (Descendiente maxOccurs=16; ordem Nacimiento, Adopcion, ComputadoEntero, Discapacidad; Ascendiente: Nacimiento, Convivencia, Discapacidad), desenho do 190 (pos. 167, códigos 0–3), LIRPF art. 58.1 e art. 60 (consolidada BOE).
 
 ## Decisões (com fonte)
 | Ponto do cliente | Decisão | Fonte |
@@ -24,7 +24,7 @@ O usuário delegou as decisões com base na fonte oficial (20/10).
 - `dd_v50_para_v51.py`: edição por XML, partes não tocadas copiadas byte a byte; células alteradas em **laranja claro FFFCE4D6** (as adições da V5.0 continuam em amarelo FFFFF2CC).
 - `conferencia_v50_v51.py` (todas as 9 abas, valor e formato de cada célula): Country Fields 158 células alteradas, Country Option Mappers 14, Filteration for SaaS 16, Version Control +1 linha (5.1); demais abas 0. **0 problemas**: toda célula alterada está em laranja; nenhuma célula mudou de formato ou cor sem mudar de valor. Mesclagens iguais (67/67, 60/60, 2/2); zip íntegro.
 - Ordinais: Employee Information 13 campos (1–14, o 8 vago como antes), Descendants 80 únicos (1–80), Ascendants 8 únicos (1–8).
-- Final: `Spain_Data_Dictionary_V5.1.xlsx`, md5 **7c9f595333c96c028ed1a4c043d28d30**. Copiado ao Drive em `Spain\02 - DD\` com md5 idêntico (20/10, ok do usuário); antes, conferido pelo Chrome que a V5.0.gsheet não teve edição depois da importação (modificada 09:45). O usuário importa.
+- Final: [[Research Pipeline/Spain/2026-10-20-modelo145-ESS-STG/Spain_Data_Dictionary_V5.1.xlsx|Spain_Data_Dictionary_V5.1.xlsx]], md5 **7c9f595333c96c028ed1a4c043d28d30**. Copiado ao Drive em `Spain\02 - DD\` com md5 idêntico (20/10, ok do usuário); antes, conferido pelo Chrome que a V5.0.gsheet não teve edição depois da importação (modificada 09:45). O usuário importa.
 
 ## Achado fora do pedido
 - A aba oculta "Filteration for SaaS" não tem os 71 campos incluídos na V5.0 (só vai até Child 4 e não tem os campos novos de Employee Information/Ascendants). Não corrigido: o uso dessa aba não está documentado. Pergunta para a Lily.

@@ -88,6 +88,10 @@
 - O zip veio da pasta "Quest Software"; o Kvittens e o master são da **Quest Software AB (556602-0433)**, não da One Identity → recibo, master e banco = Not tested (C-04).
 - AGI válida no XSD 1.1, amarra G2N/GL/contracheques; arbetsgivaravgift 31,42% ok.
 - **High:** payout de férias acumuladas retido pela tabela mensal, não por engångsbelopp (SFL 11 kap. 17 §) → A-04, aguarda decisão D-02.
+- [[internal-certification/Sweden/Quest Software - 2026-09/02 Validation/followups|followups]]: Quest Software - 2026-09: rascunhos de follow-ups (não enviados) com pedidos de documentos/dados pendentes ao cliente
+- [[internal-certification/Sweden/Quest Software - 2026-09/02 Validation/intake|intake]]: Quest Software - 2026-09: intake do pacote: entidade, período e inventário do recebido
+- [[internal-certification/Sweden/Quest Software - 2026-09/02 Validation/resumo_PT|resumo_PT]]: Quest Software - 2026-09: resumo em português dos achados da validação
+- [[internal-certification/Sweden/Quest Software - 2026-09/02 Validation/summary_EN|summary_EN]]: Quest Software - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
 
 ## Pendências
 - [ ]
@@ -97,3 +101,5 @@
 
 ## Fontes
 - skill payroll-compliance-sweden (lida em 2026-10-02)
+- [[internal-certification/references/Sweden/2026/facts|facts]]: Fatos estatutários compactos 2026 extraídos das fontes oficiais, usados na validação
+- [[internal-certification/references/Sweden/2026/sources|sources]]: Registro das fontes oficiais 2026 (editor, versão, data de leitura, hash) usadas na validação

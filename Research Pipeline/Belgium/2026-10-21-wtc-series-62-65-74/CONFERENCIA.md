@@ -4,7 +4,7 @@ Pedido: Suman (09/10, cobrado em 21/10), via janela Chat. Prazo BE: dia 30. Liga
 
 ## Base (regra 8 / base-linhagem-drive)
 - Drive: `Belgium › 03 - WTC › BE-WTC-001-v1.0.gsheet` (exports em Downloads de 09/10 e 16/10).
-- Pipeline: `~/mercans-pipeline/BE-compliance/02-wtc/BE-WTC-001-v1.1.xlsx` (16/09).
+- Pipeline: [[Research Pipeline/Belgium/2026-10-21-wtc-series-62-65-74/BE-WTC-001-v1.1.xlsx|BE-WTC-001-v1.1.xlsx]] (16/09).
 - **Aba Wage Type Catalogue idêntica** nas três (359 linhas, 0 diferenças célula a célula, A–T). Só o Version Control difere.
 - Base usada: **export do Drive de 16/10** (`Downloads\BE-export-2026-10-16\BE-WTC-001-v1.0 (1).xlsx`, md5 `ed2446ae7699b7d318ef9b2edb989791`).
 

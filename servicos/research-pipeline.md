@@ -27,6 +27,9 @@ O pipeline tem 11 estágios (CCG, Scope Lock-In, Report Specs, DD, WTC, SIR, Pay
 - **Versionamento:** `{CC}-{TYPE}-{SEQ}-v{MAJOR}.{MINOR}[-DRAFT-{TICKET}-{AAAA-MM-DD}].ext`. Na aprovação, tirar o bloco DRAFT e arquivar a final anterior em `Archived/`; deve haver exatamente uma final vigente por artefato. Toda edição atualiza o Version Control (uma frase por edição). **Version Control (decidido em 2026-10-15):** uma linha por versão, número em sequência (x.y, nunca repetir o mesmo número em entregas diferentes), data como data (`d-mmm-yy`, não texto), descrição de no máximo 2 linhas no formato "ticket: o que mudou (onde)"; justificativa e fonte vão no ticket e no hub, não no VC. O nome da planilha acompanha a maior versão (ex.: DD ES renomeado V4.0 → V4.9). Nas specs AFI da Espanha o nome do arquivo ficou fixo e a versão evolui só no VC (chat: mercans-compliance).
 - **Drive "Compliance Team":** pasta por país com subpastas 01–16 (CCG em `05 - Payroll Regulation Guide`, WTC em `03 - WTC`, DD em `02 - DD`, Report Specs em `12 - Country Report Codes`) (chat: mercans-compliance).
 - **Status "Submitted for design"** no Monday marca o que passou da pesquisa para o [[design]] (decisão 2026-06-30, Manju) (chat: compliance-research).
+- [[Research Pipeline/CLAUDE|CLAUDE]]: Instrução da pasta Research Pipeline: liga ao brain-service, aponta janela Pipeline, estado e lições.
+- [[rascunhos/2026-10-17-anuncio-pipeline-v2.12|2026-10-17-anuncio-pipeline-v2.12]]: Rascunho de aviso ao time sobre pipeline v2.12 (superado pelo e-mail de 19/10)
+- [[rascunhos/2026-10-19-email-pipeline-v2.12|2026-10-19-email-pipeline-v2.12]]: E-mail final ao time sobre skills v2.12 (3 zips, INSTALL, CHANGELOG)
 
 ## Como sabemos que ficou certo (qualidade)
 - **Fonte primária alcançada diretamente**; duas fontes secundárias concordando não bastam; esquema/taxa/template copiado de outro artefato não é fonte primária. Piso de 95% de precisão (a reunião de 30/06 falava em ~90% hoje) (chat: mercans-compliance; chat: compliance-research).
@@ -37,6 +40,7 @@ O pipeline tem 11 estágios (CCG, Scope Lock-In, Report Specs, DD, WTC, SIR, Pay
 - **Confiança declarada** antes de enviar; "tem certeza?" / "100%?" = reverificar do zero (chat: mercans-compliance).
 - **Humano no loop:** a automação nunca edita artefato vivo; gera tracked change/rascunho e preserva o original (chat: compliance-research).
 - Método completo nas skills `mercans-pipeline-methodology` e `mercans-compliance-workflow`.
+- [[rascunhos/2026-10-18-comparacao-skills-claude-ai-v2.12|2026-10-18-comparacao-skills-claude-ai-v2.12]]: Comparação das skills Mercans no claude.ai x pacote v2.12
 
 ## O que já deu errado
 Erros de **processo** (erros de valor/artefato por país ficam em [[correcoes]]):

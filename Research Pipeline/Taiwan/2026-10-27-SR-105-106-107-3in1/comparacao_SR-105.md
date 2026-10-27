@@ -1,7 +1,7 @@
 # Comparação célula a célula
 
 - Base: `C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW - SI electronic filing Salary Adjustment specification.xlsx`
-- Nova: `TW - SI electronic filing Salary Adjustment specification v1.1.xlsx`
+- Nova: [[Research Pipeline/Taiwan/2026-10-27-SR-105-106-107-3in1/TW - SI electronic filing Salary Adjustment specification v1.1.xlsx|TW - SI electronic filing Salary Adjustment specification v1.1.xlsx]]
 
 - Células com diferença: **88** (declaradas: 88; sem efeito: 0)
 - Abas removidas: nenhuma

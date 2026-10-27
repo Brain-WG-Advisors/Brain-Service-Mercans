@@ -1,7 +1,7 @@
 # Conferência célula a célula: TW Payslip Specification base (export 2026-10-27) × v1.2
 
 - Base: `C:/Users/instituto/Documents/brain-service/raw/docs/drive-exports/2026-10-27/TW Payslip Specification.xlsx` md5 1cbe1e44477b982032520e3d7c26efdc
-- v1.2: `TW Payslip Specification_v1.2.xlsx` md5 ba8c27add3ee9680738db2008f3985a1
+- v1.2: [[Research Pipeline/Taiwan/2026-10-27-SR-109-Payslip/TW Payslip Specification_v1.2.xlsx|TW Payslip Specification_v1.2.xlsx]] md5 ba8c27add3ee9680738db2008f3985a1
 
 ## 1. Pacote (zip)
 - Partes só na v1.2: ['xl/worksheets/sheet4.xml']; só na base: []

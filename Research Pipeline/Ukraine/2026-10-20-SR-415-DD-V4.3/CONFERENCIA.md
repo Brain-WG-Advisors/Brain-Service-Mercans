@@ -2,7 +2,7 @@
 
 **Pedido:** Lily Li, SR-415, 19/10 07:44 UTC. Linhas 38, 39 e 45 da spec UA-1PV-002 (C_REG, C_RAJ, RAY): "if not, pls create new field".
 **Base:** `Downloads/Ukraine_Data_Dictionary_V4.2 (1).xlsx` (export de 16/10 11:28; a V4.2 é a maior versão no Drive `Ukraine/02- DD`).
-**Final:** `Ukraine_Data_Dictionary_V4.3.xlsx` (md5 `29c35655edb77d3c7d010d6357946e89`). Gerado por `build_dd_v43.py` (cirurgia de XML; só `sheet1.xml` e `sheet5.xml` mudam, as outras partes são copiadas byte a byte).
+**Final:** [[Research Pipeline/Ukraine/2026-10-20-SR-415-DD-V4.3/Ukraine_Data_Dictionary_V4.3.xlsx|Ukraine_Data_Dictionary_V4.3.xlsx]] (md5 `29c35655edb77d3c7d010d6357946e89`). Gerado por `build_dd_v43.py` (cirurgia de XML; só `sheet1.xml` e `sheet5.xml` mudam, as outras partes são copiadas byte a byte).
 
 ## Antes → depois
 | Aba | Linha | Mudança |

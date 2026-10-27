@@ -8,20 +8,22 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: 
+ccg: v1.1
 ccg_data: 
-wtc: 
+wtc: v3.0
 wtc_data: 
-dd: 
+dd: v3.0
 dd_data: 
 report_specs: 
 report_specs_data: 
 sir: 
 sir_data: 
-payslip: 
+payslip: v1.0
 skill: "payroll-compliance-drcongo"
 tickets_abertos: 
 tickets_conferidos_em: 
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Democratic Republic of Congo), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # RD Congo

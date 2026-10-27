@@ -8,10 +8,10 @@ etapa_design_data: 2026-08-28
 etapa_producao: "outro time (go-live em fevereiro)"
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: "v1.0"
-ccg_data: 2026-10-06
-wtc: "v1.0"
-wtc_data: 2026-10-06
+ccg: v1.1
+ccg_data: 
+wtc: v1.1
+wtc_data: 
 dd: "v1.0"
 dd_data: 2026-10-06
 report_specs: "15 × v1.0"
@@ -22,6 +22,8 @@ payslip:
 skill: "payroll-compliance-france"
 tickets_abertos: 
 tickets_conferidos_em: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/France), lido em 2026-10-27; sem data de versão"
+obs_versoes: "CCG v1.0→v1.1 (FR-CCG-001-v1.1.gdoc); WTC v1.0→v1.1 (FR-WTC-001-v1.1.gsheet); CONFERIR: pacote FR reemitido em 06/10 com numeração reiniciada"
 atualizado_em: 2026-10-27
 ---
 # França

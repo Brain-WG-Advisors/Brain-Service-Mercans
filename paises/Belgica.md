@@ -22,6 +22,8 @@ payslip: "sem versao declarada (arquivo 2026-09-16)"
 skill: "payroll-compliance-belgium"
 tickets_abertos: 1
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Belgium), lido em 2026-10-27; sem data de versão"
+obs_versoes: "CCG: hub v1.2 > Drive v1.1 (BE-CCG-001-v1.1.gdoc); mantido o hub; DD: hub v1.4 > Drive v1.1 (BE-DD-001-v1.1.xlsx); mantido o hub"
 atualizado_em: 2026-10-27
 ---
 # Bélgica

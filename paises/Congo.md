@@ -8,11 +8,11 @@ etapa_design_data: 2026-08-28
 etapa_producao: 
 etapa_suporte: "1 aberto(s): HRBS-12110"
 etapa_suporte_data: 2026-10-27
-ccg: 
+ccg: v1.1
 ccg_data: 
-wtc: 
+wtc: v3.0
 wtc_data: 
-dd: 
+dd: v3.0
 dd_data: 
 report_specs: "sem versao citada"
 report_specs_data: 2026-06-30
@@ -22,6 +22,7 @@ payslip:
 skill: "payroll-compliance-congo"
 tickets_abertos: 1
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Republic of Congo), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # República do Congo (Congo-Brazzaville, CG)

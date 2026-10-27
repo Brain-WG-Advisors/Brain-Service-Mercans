@@ -8,20 +8,23 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: "sem versão no hub"
+ccg: v1.0
 ccg_data: 
 wtc: "v2.2"
 wtc_data: "2026-08"
-dd: "v2.1"
+dd: v2.2
 dd_data: 
 report_specs: 
 report_specs_data: 
-sir: 
+sir: v1.0
 sir_data: 
-payslip: 
+payslip: v1.0
 skill: 
 tickets_abertos: 
 tickets_conferidos_em: 
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Bulgaria), lido em 2026-10-27; sem data de versão"
+obs_versoes: "DD v2.1→v2.2 (BG_Data_Dictionary_V2.2.gsheet)"
 atualizado_em: 2026-10-27
 ---
 # Bulgária

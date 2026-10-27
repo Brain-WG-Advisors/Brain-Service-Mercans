@@ -12,8 +12,8 @@ ccg: "V1.5"
 ccg_data: 2026-09-21
 wtc: "V4.4"
 wtc_data: 2026-10-26
-dd: "V3.10"
-dd_data: 2026-09-25
+dd: v4.3
+dd_data: 
 report_specs: "D5 v3; D6 v3; D1, 4DF, 1-PV, UA-INTREP sem versão no hub"
 report_specs_data: 2026-08-20
 sir: 
@@ -22,6 +22,8 @@ payslip: "sem versão no hub"
 skill: 
 tickets_abertos: 5
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Ukraine), lido em 2026-10-27; sem data de versão"
+obs_versoes: "DD V3.10→v4.3 (Ukraine_Data_Dictionary_V4.3.gsheet)"
 atualizado_em: 2026-10-27
 ---
 # Ucrânia

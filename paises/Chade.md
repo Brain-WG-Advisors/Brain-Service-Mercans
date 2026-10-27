@@ -10,18 +10,20 @@ etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
 ccg: "v1.2"
 ccg_data: 
-wtc: "v1.1"
+wtc: v3.0
 wtc_data: 
-dd: "v1.1"
+dd: v3.0
 dd_data: 
 report_specs: "7 report specs (versao nao citada)"
 report_specs_data: 
-sir: 
+sir: v1.0
 sir_data: 
 payslip: 
 skill: "payroll-compliance-chad"
 tickets_abertos: 
 tickets_conferidos_em: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Chad), lido em 2026-10-27; sem data de versão"
+obs_versoes: "WTC v1.1→v3.0 (CHAD - WTC_V3.0.gsheet); DD v1.1→v3.0 (CHAD - DD - V3.0.gsheet)"
 atualizado_em: 2026-10-27
 ---
 # Chade (Chad, TD)

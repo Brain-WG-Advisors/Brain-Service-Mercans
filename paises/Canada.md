@@ -8,20 +8,21 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: 
+ccg: v1.5
 ccg_data: 
-wtc: 
+wtc: v1.1
 wtc_data: 
-dd: 
+dd: v1.2
 dd_data: 
 report_specs: 
 report_specs_data: 
-sir: 
+sir: v1.0
 sir_data: 
 payslip: 
 skill: "payroll-compliance-canada"
 tickets_abertos: 
 tickets_conferidos_em: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Canada), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Canadá

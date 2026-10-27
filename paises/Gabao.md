@@ -8,20 +8,21 @@ etapa_design_data: 2026-08-25
 etapa_producao: 
 etapa_suporte: "sem tickets abertos"
 etapa_suporte_data: 2026-10-27
-ccg: 
+ccg: v1.0
 ccg_data: 
 wtc: "v3.1"
 wtc_data: 2026-09-23
-dd: 
+dd: v3.0
 dd_data: 
 report_specs: 
 report_specs_data: 
-sir: 
+sir: v1.0
 sir_data: 
 payslip: "sem versão no hub"
 skill: 
 tickets_abertos: 0
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Gabon), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Gabão (Gabon)

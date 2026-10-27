@@ -8,11 +8,11 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: 
+ccg: v1.1
 ccg_data: 
-wtc: 
+wtc: v4.1
 wtc_data: 
-dd: 
+dd: v3.9
 dd_data: 
 report_specs: 
 report_specs_data: 
@@ -22,6 +22,7 @@ payslip:
 skill: "payroll-compliance-malaysia"
 tickets_abertos: 
 tickets_conferidos_em: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Malaysia), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Malásia

@@ -10,9 +10,9 @@ etapa_suporte: "sem tickets abertos"
 etapa_suporte_data: 2026-10-27
 ccg: "sem versão no hub"
 ccg_data: 
-wtc: "sem versão no hub"
+wtc: v2.5
 wtc_data: 
-dd: 
+dd: v2.1
 dd_data: 
 report_specs: "sem versão no hub (SSC Form Ten, PAYE 5, ETX)"
 report_specs_data: 
@@ -22,6 +22,7 @@ payslip: "configurado, em revisão de Compliance (HRBS-14605); sem versão no hu
 skill: 
 tickets_abertos: 0
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Namibia), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Namíbia (Namibia)

@@ -18,10 +18,12 @@ report_specs:
 report_specs_data: 
 sir: 
 sir_data: 
-payslip: 
+payslip: v1.1
 skill: "payroll-compliance-sweden"
 tickets_abertos: 
 tickets_conferidos_em: 
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Sweden), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Suécia

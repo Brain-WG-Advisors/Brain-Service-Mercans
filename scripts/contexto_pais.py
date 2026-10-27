@@ -105,6 +105,10 @@ def main():
         v = p.get(k, '')
         d = p.get(k + '_data', '')
         out.append('- %s: %s%s' % (rot, v or 'não registrado no hub', (' (%s)' % d) if d else ''))
+    if p.get('versoes_fonte'):
+        out.append('- Fonte das versões: ' + p['versoes_fonte'])
+    if p.get('obs_versoes'):
+        out.append('- ⚠️ ' + p['obs_versoes'])
 
     sup = secao(t, 'Suporte')
     ids = sorted(set(re.findall(r'\b(HRBS-\d+|SR-\d+|CT-\d+)\b', sup)))

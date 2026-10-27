@@ -8,11 +8,11 @@ etapa_design_data:
 etapa_producao: "Omnicom em Live/BAU"
 etapa_suporte: "2 aberto(s): HRBS-14394, HRBS-14675"
 etapa_suporte_data: 2026-10-27
-ccg: "sem versão no hub"
+ccg: v1.1
 ccg_data: 
-wtc: 
+wtc: v3.3
 wtc_data: 
-dd: 
+dd: v1.0
 dd_data: 
 report_specs: 
 report_specs_data: 
@@ -22,6 +22,7 @@ payslip:
 skill: "payroll-compliance-netherlands"
 tickets_abertos: 2
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Netherlands), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Holanda

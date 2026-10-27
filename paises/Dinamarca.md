@@ -8,20 +8,22 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem tickets abertos"
 etapa_suporte_data: 2026-10-27
-ccg: 
+ccg: v2.3
 ccg_data: 
-wtc: 
+wtc: v4.2
 wtc_data: 
-dd: 
+dd: v3.6
 dd_data: 
 report_specs: 
 report_specs_data: 
 sir: 
 sir_data: 
-payslip: 
+payslip: v1.1
 skill: "payroll-compliance-denmark"
 tickets_abertos: 0
 tickets_conferidos_em: 2026-10-27
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Denmark), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Dinamarca

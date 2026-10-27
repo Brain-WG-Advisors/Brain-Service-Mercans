@@ -16,12 +16,13 @@ dd:
 dd_data: 
 report_specs: 
 report_specs_data: 
-sir: 
+sir: v1.1
 sir_data: 
 payslip: 
 skill: "payroll-compliance-germany"
 tickets_abertos: 
 tickets_conferidos_em: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Germany), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Alemanha

@@ -8,20 +8,22 @@ etapa_design_data: 2026-10-27
 etapa_producao: 
 etapa_suporte: "1 aberto(s): HRBS-3466"
 etapa_suporte_data: 2026-10-27
-ccg: 
+ccg: v1.0
 ccg_data: 
-wtc: 
+wtc: v1.0
 wtc_data: 
-dd: 
+dd: v1.1
 dd_data: 
 report_specs: "Spec DAS v2.1"
 report_specs_data: 
-sir: 
+sir: v1.0
 sir_data: 
-payslip: 
+payslip: v1.2
 skill: 
 tickets_abertos: 1
 tickets_conferidos_em: 2026-10-27
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Algeria), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Argélia

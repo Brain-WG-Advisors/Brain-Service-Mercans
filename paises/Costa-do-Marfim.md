@@ -8,20 +8,21 @@ etapa_design_data: 2026-08-25
 etapa_producao: 
 etapa_suporte: "sem tickets abertos"
 etapa_suporte_data: 2026-10-27
-ccg: 
+ccg: v1.3
 ccg_data: 
-wtc: 
+wtc: v1.3
 wtc_data: 
-dd: 
+dd: v6.0
 dd_data: 
 report_specs: "7 specs (CI-CNPS-001/002/003, CI-DGI-001/002/003/004), sem versao"
 report_specs_data: 2026-08-12
-sir: 
+sir: v1.0
 sir_data: 
 payslip: 
 skill: "payroll-compliance-cotedivoire"
 tickets_abertos: 0
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Côte d'Ivoire), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Costa do Marfim (Côte d'Ivoire, CI)

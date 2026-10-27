@@ -8,20 +8,22 @@ etapa_design_data:
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: 
+ccg: v1.1
 ccg_data: 
-wtc: 
+wtc: v1.1
 wtc_data: 
-dd: 
+dd: v1.2
 dd_data: 
 report_specs: 
 report_specs_data: 
-sir: 
+sir: v1.1
 sir_data: 
-payslip: 
+payslip: v1.1
 skill: "payroll-compliance-bahrain"
 tickets_abertos: 
 tickets_conferidos_em: 
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Bahrain), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Bahrein

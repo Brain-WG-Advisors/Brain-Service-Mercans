@@ -8,20 +8,23 @@ etapa_design_data: "2026-06"
 etapa_producao: 
 etapa_suporte: "2 aberto(s): SR-221, SR-232"
 etapa_suporte_data: 2026-10-27
-ccg: "v1.1"
-ccg_data: "2026-05"
-wtc: "v1.0"
-wtc_data: "2026-05"
-dd: "v1.0"
-dd_data: "2026-05"
+ccg: v1.2
+ccg_data: 
+wtc: v1.1
+wtc_data: 
+dd: v1.1
+dd_data: 
 report_specs: "CL-DT-001 sem versao; CL-PRV-001 sem versao"
 report_specs_data: 2026-09-15
-sir: 
+sir: v1.0
 sir_data: 
-payslip: 
+payslip: v1.0
 skill: "payroll-compliance-chile"
 tickets_abertos: 2
 tickets_conferidos_em: 2026-10-27
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Chile), lido em 2026-10-27; sem data de versão"
+obs_versoes: "CCG v1.1→v1.2 (CL-CCG-001-v1.2.gdoc); WTC v1.0→v1.1 (CL_Wage_Type_Catalogue_V1.1.gsheet); DD v1.0→v1.1 (CL_Data_Dictionary_V1.1.gsheet)"
 atualizado_em: 2026-10-27
 ---
 # Chile

@@ -10,9 +10,9 @@ etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
 ccg: 
 ccg_data: 
-wtc: 
+wtc: v2.8
 wtc_data: 
-dd: 
+dd: v2.5
 dd_data: 
 report_specs: 
 report_specs_data: 
@@ -22,6 +22,7 @@ payslip:
 skill: 
 tickets_abertos: 
 tickets_conferidos_em: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Thailand), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Tailândia

@@ -8,20 +8,22 @@ etapa_design_data: 2026-06-25
 etapa_producao: 
 etapa_suporte: "sem ticket no hub"
 etapa_suporte_data: 
-ccg: 
+ccg: v1.0
 ccg_data: 
 wtc: 
 wtc_data: 
-dd: 
+dd: v1.0
 dd_data: 
 report_specs: "sem versão no hub"
 report_specs_data: 2026-06-25
-sir: "sem versão no hub"
-sir_data: 2026-06-30
-payslip: 
+sir: v1.0
+sir_data: 
+payslip: v2.0
 skill: 
 tickets_abertos: 
 tickets_conferidos_em: 
+payslip_data: 
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Hungary), lido em 2026-10-27; sem data de versão"
 atualizado_em: 2026-10-27
 ---
 # Hungria

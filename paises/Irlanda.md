@@ -10,7 +10,7 @@ etapa_suporte: "sem tickets abertos"
 etapa_suporte_data: 2026-10-27
 ccg: "sem versão no hub"
 ccg_data: 
-wtc: "v3.6"
+wtc: v3.9
 wtc_data: 
 dd: "v3.4"
 dd_data: 
@@ -22,6 +22,8 @@ payslip:
 skill: "payroll-compliance-ireland"
 tickets_abertos: 0
 tickets_conferidos_em: 2026-10-27
+versoes_fonte: "nome do arquivo no Drive (Country Folders/Ireland), lido em 2026-10-27; sem data de versão"
+obs_versoes: "WTC v3.6→v3.9 (Ireland Wage Type Catalogue V3.9.gsheet)"
 atualizado_em: 2026-10-27
 ---
 # Irlanda

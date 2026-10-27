@@ -21,9 +21,25 @@ AREAS = [
     ('Bélgica / França', '#2ed1c4', ['bélgica', 'belgica', 'belgium', 'frança', 'franca', 'france']),
     ('África (Baker Hughes, CI, Congo…)', '#7bd88f', ['baker', 'congo', 'namíbia', 'namibia', 'costa do marfim', 'gabão', 'gabao', 'argélia', 'argelia', 'egito', 'egypt', 'cnps', 'chade', 'moçambique', 'marrocos', 'botsuana']),
     ('Outros países', '#c7a27a', ['hub ', 'hubs ', 'lituânia', 'lituania', 'dinamarca', 'noruega', 'suécia', 'reino unido', 'irlanda', 'chile', 'hungria', 'portugal', 'tchéquia', 'singapura', 'líbano', 'cazaquist', 'ericsson', 'canadá']),
-    ('Suporte, tickets e triagens', '#e879f9', ['ticket', 'suporte', 'triage', 'fila', 'rascunho', 'hrbs']),
+    ('Vários países (filas e triagens)', '#e879f9', ['ticket', 'suporte', 'triage', 'fila', 'rascunho', 'hrbs']),
     ('Processo, regras e método', '#8fa3bf', []),
 ]
+
+# Tipos de conhecimento (cor padrão, igual para todo país): (nome, cor, palavras-chave)
+KINDS = [
+    ('Correções e erros', '#ff5d5d', ['correç', 'correc', 'erro', 'auditoria', 'achados', 'defeito', 'falha', 'backlog', 'gaps', 'lacunas', 'marcadores']),
+    ('Internal Certification', '#ffa94d', ['certific', 'mammoet', 'montage', 'validaç', 'validac', 'análise de reports', ' ic ', 'marko']),
+    ('Suporte e tickets', '#e879f9', ['ticket', 'hrbs', 'sr-', 'rascunho', 'triage', 'fila', 'suporte', 'resposta', 'chat', 'ericsson']),
+    ('Artefatos (CCG, WTC, DD, specs, skill)', '#4dabf7', ['ccg', 'wtc', ' dd', 'skill', 'spec', 'pipeline', 'conferênc', 'entrega', 'versões', 'pacote', 'payslip', 'report', 'modelo 145', 'pila', 'dian', 'j05', '1-pv', 'cnps', 'snhi', 'das ']),
+    ('Processo, regras e método', '#b0bccd', ['plano', 'regra', 'índice', 'indice', 'log', 'serviços', 'fronteiras', 'lições', 'modelo', 'inventár', 'teste', 'claude.md', 'estado', 'revis', 'frente']),
+    ('Hub do país (visão geral)', '#63e6be', []),
+]
+
+def pick_kind(text):
+    for i, (_, _, kws) in enumerate(KINDS[:-1]):
+        if any(k in text for k in kws):
+            return i
+    return len(KINDS) - 1
 
 comm = {}
 by_comm = collections.defaultdict(list)
@@ -48,7 +64,7 @@ def pick_area(text):
             return i
     return None
 
-names, area_of = {}, {}
+names, area_of, kind_of = {}, {}, {}
 for c, ns in by_comm.items():
     nm = next((n.get('community_name') for n in ns if n.get('community_name')), None)
     names[c] = nm or max(ns, key=lambda n: deg[n['id']]).get('label', str(c))
@@ -56,6 +72,7 @@ for c, ns in by_comm.items():
     if a is None:
         a = pick_area(norm(' '.join(n.get('label', '') for n in sorted(ns, key=lambda n: -deg[n['id']])[:5])))
     area_of[c] = len(AREAS) - 1 if a is None else a
+    kind_of[c] = pick_kind(norm(names[c] + ' ' + ' '.join(n.get('label', '') for n in sorted(ns, key=lambda n: -deg[n['id']])[:3])))
 
 inter = collections.Counter()
 for e in links:
@@ -69,7 +86,7 @@ for c in order:
     ns = sorted(by_comm[c], key=lambda n: -deg[n['id']])
     files = collections.Counter(n.get('source_file') or '' for n in ns)
     communities.append({
-        'id': c, 'name': names[c], 'size': len(ns), 'area': area_of[c],
+        'id': c, 'name': names[c], 'size': len(ns), 'area': area_of[c], 'kind': kind_of[c],
         'top': [n.get('label', n['id']) for n in ns[:8]],
         'files': [f for f, _ in files.most_common(6) if f],
     })
@@ -83,7 +100,8 @@ plinks = [{'source': e['source'], 'target': e['target'], 'rel': e.get('relation'
 areas = [{'name': a[0], 'color': a[1],
           'count': sum(1 for c in communities if c['area'] == i)} for i, a in enumerate(AREAS)]
 
-data = json.dumps({'areas': areas, 'communities': communities, 'clinks': clinks,
+kinds = [{'name': k[0], 'color': k[1], 'count': sum(1 for c in communities if c['kind'] == i)} for i, k in enumerate(KINDS)]
+data = json.dumps({'kinds': kinds, 'areas': areas, 'communities': communities, 'clinks': clinks,
                    'concepts': concepts, 'plinks': plinks}, ensure_ascii=False)
 
 PAGE = r"""<!doctype html>
@@ -121,6 +139,7 @@ button:hover{border-color:var(--accent)}
 .lb{position:absolute;transform:translate(-50%,-150%);white-space:nowrap;color:#fff;font-size:13px;font-weight:600;
   padding:2px 7px;border-radius:6px;background:rgba(8,12,22,.72);border:1px solid rgba(255,255,255,.08);text-shadow:0 1px 2px #000}
 .lb.small{font-size:11.5px;font-weight:500}
+.lb.area{font-size:17px;font-weight:700;letter-spacing:.3px;background:rgba(8,12,22,.35);border-width:0 0 2px 0;border-radius:0;transform:translate(-50%,-50%);opacity:.92}
 @media (max-width:700px){#legend{display:none}#side{top:auto;bottom:14px;max-height:40%}}
 </style></head><body>
 <div id="g"></div>
@@ -142,6 +161,11 @@ const el = id => document.getElementById(id);
 const C = new Map(D.communities.map(c => [c.id, c]));
 const conceptsBy = new Map(); D.concepts.forEach(n => { if(!conceptsBy.has(n.c)) conceptsBy.set(n.c, []); conceptsBy.get(n.c).push(n); });
 const areaColor = i => D.areas[i].color;
+const kindColor = i => D.kinds[i].color;
+/* posição fixa por área: processo no centro, demais num círculo */
+const NA = D.areas.length, R0 = 420;
+const anchor = i => i === NA - 1 ? {x: 0, y: 0, z: 0} : {x: R0 * Math.cos(2 * Math.PI * i / (NA - 1) - Math.PI / 2), y: -R0 * Math.sin(2 * Math.PI * i / (NA - 1) - Math.PI / 2), z: 0};
+function areaForce(){ let ns = []; const f = alpha => { if(level !== 'comm') return; for(const n of ns){ const a = anchor(n.area); n.vx += (a.x - n.x) * 0.09 * alpha; n.vy += (a.y - n.y) * 0.09 * alpha; n.vz += (a.z - n.z) * 0.12 * alpha; } }; f.initialize = x => { ns = x; }; return f; }
 const side = el('side'), crumb = el('crumb'), back = el('back');
 let level = 'comm', current = null, hidden = new Set(), fitted = false;
 
@@ -149,7 +173,7 @@ const G = ForceGraph3D({controlType: 'orbit'})(el('g'))
   .backgroundColor('rgba(0,0,0,0)')
   .showNavInfo(false)
   .nodeResolution(24)
-  .nodeRelSize(5)
+  .nodeRelSize(7)
   .nodeOpacity(0.96)
   .linkOpacity(0.35)
   .cooldownTime(7000)
@@ -164,28 +188,31 @@ function fitCore(ms){
   G.cameraPosition({x: c.x, y: c.y, z: c.z + span * 1.7}, c, ms || 900);
 }
 const fitSoon = () => { fitted = true; setTimeout(() => fitCore(900), 2500); setTimeout(() => fitCore(1200), 6500); };
-G.d3Force('charge').strength(-180);
-G.d3Force('link').distance(60);
+G.d3Force('charge').strength(-60);
+
+G.d3Force('link').distance(40).strength(0.02);
 
 /* rótulos HTML que acompanham as esferas */
 const LB = el('labels'); let lbItems = [];
-function setLabels(items){ LB.innerHTML = ''; lbItems = items.map(it => { const d = document.createElement('div'); d.className = 'lb' + (it.small ? ' small' : ''); d.textContent = it.text; LB.appendChild(d); return {d, id: it.id}; }); }
+function setLabels(items){ LB.innerHTML = ''; lbItems = items.map(it => { const d = document.createElement('div'); d.className = 'lb' + (it.small ? ' small' : '') + (it.pos ? ' area' : ''); d.textContent = it.text; if(it.color) d.style.borderColor = it.color; LB.appendChild(d); return {d, id: it.id, pos: it.pos}; }); }
 (function tick(){
   const byId = new Map(G.graphData().nodes.map(n => [n.id, n])); const W = innerWidth, H = innerHeight; const placed = [];
-  for(const it of lbItems){ const n = byId.get(it.id);
-    if(!n || n.x === undefined || (level === 'comm' && hidden.has(n.area))){ it.d.style.display = 'none'; continue; }
+  for(const it of lbItems){ const n = it.pos || byId.get(it.id);
+    if(!n || n.x === undefined || (!it.pos && level === 'comm' && hidden.has(n.kind))){ it.d.style.display = 'none'; continue; }
     const p = G.graph2ScreenCoords(n.x, n.y, n.z);
     if(p.x < 0 || p.y < 0 || p.x > W || p.y > H || placed.some(q => Math.abs(q.x - p.x) < 120 && Math.abs(q.y - p.y) < 22)){ it.d.style.display = 'none'; continue; }
-    placed.push(p); it.d.style.display = ''; it.d.style.left = p.x + 'px'; it.d.style.top = p.y + 'px'; }
+    if(!it.pos) placed.push(p); it.d.style.display = ''; it.d.style.left = p.x + 'px'; it.d.style.top = p.y + 'px'; }
   requestAnimationFrame(tick);
 })();
 
 /* legenda */
 const areaOf = x => (typeof x === 'object' ? x.area : (C.get(x) || {}).area);
-function applyHidden(){ if(level === 'comm') G.nodeVisibility(n => !hidden.has(n.area)).linkVisibility(l => !hidden.has(areaOf(l.source)) && !hidden.has(areaOf(l.target))); }
+const kindOf = x => (typeof x === 'object' ? x.kind : (C.get(x) || {}).kind);
+function applyHidden(){ if(level === 'comm') G.nodeVisibility(n => !hidden.has(n.kind)).linkVisibility(l => !hidden.has(kindOf(l.source)) && !hidden.has(kindOf(l.target))); }
 function drawLegend(){
-  el('legend').innerHTML = '<div style="cursor:default;color:var(--muted)">Cores = área · clique para mostrar/ocultar</div>' +
-    D.areas.map((a, i) => a.count ? '<div data-i="' + i + '" class="' + (hidden.has(i) ? 'off' : '') + '"><i style="background:' + a.color + ';color:' + a.color + '"></i><span>' + esc(a.name) + ' <b>' + a.count + '</b></span></div>' : '').join('');
+  el('legend').innerHTML = '<div style="cursor:default;color:var(--muted)">Cor = tipo de conhecimento (igual em todo país) · clique para mostrar/ocultar</div>' +
+    D.kinds.map((a, i) => a.count ? '<div data-i="' + i + '" class="' + (hidden.has(i) ? 'off' : '') + '"><i style="background:' + a.color + ';color:' + a.color + '"></i><span>' + esc(a.name) + ' <b>' + a.count + '</b></span></div>' : '').join('') +
+    '<div style="cursor:default;color:var(--muted);margin-top:4px">Posição = área: cada país tem um lugar fixo; processo e regras no centro</div>';
   el('legend').querySelectorAll('div[data-i]').forEach(d => d.onclick = () => { const i = +d.dataset.i; hidden.has(i) ? hidden.delete(i) : hidden.add(i); drawLegend(); applyHidden(); });
 }
 
@@ -197,23 +224,27 @@ function showCommunities(focusId){
   const linked = new Set(); D.clinks.forEach(l => { linked.add(l.source); linked.add(l.target); });
   const vis = D.communities.filter(c => linked.has(c.id));
   crumb.textContent = vis.length + ' grupos ligados (' + (D.communities.length - vis.length) + ' isolados, só pela busca) · ' + D.concepts.length + ' conceitos';
-  G.graphData({ nodes: vis.map(c => ({...c})), links: D.clinks.map(l => ({...l})) })
-    .nodeLabel(n => '<b>' + esc(n.name) + '</b><br>' + n.size + ' conceitos · ' + esc(D.areas[n.area].name))
+  const perArea = new Map(), nodesL1 = vis.map(c => ({...c}));
+  nodesL1.forEach(n => { const k = perArea.get(n.area) || 0; perArea.set(n.area, k + 1);
+    const a = anchor(n.area), ang = k * 2.39996, r = 26 * Math.sqrt(k);
+    n.fx = a.x + r * Math.cos(ang); n.fy = a.y + r * Math.sin(ang); n.fz = (n.kind - (D.kinds.length - 1) / 2) * 45; });
+  G.graphData({ nodes: nodesL1, links: D.clinks.map(l => ({...l})) })
+    .nodeLabel(n => '<b>' + esc(n.name) + '</b><br>' + esc(D.kinds[n.kind].name) + ' · ' + esc(D.areas[n.area].name) + ' · ' + n.size + ' conceitos')
     .nodeVal(n => 1 + n.size * 0.5)
-    .nodeColor(n => areaColor(n.area))
+    .nodeColor(n => kindColor(n.kind))
     .linkWidth(l => 0.4 + 3.2 * Math.sqrt(l.w / maxw))
-    .linkColor(() => 'rgba(170,195,230,0.55)')
+    .linkColor(() => 'rgba(150,175,215,0.22)')
     .onNodeClick(n => openCommunity(n.id))
     .onNodeHover(n => { el('g').style.cursor = n ? 'pointer' : null; if(n) infoCommunity(n); });
   applyHidden();
-  setLabels(vis.slice(0, 30).map(c => ({id: c.id, text: c.name, small: c.size < 25})));
+  setLabels(D.areas.map((a, i) => ({pos: {...anchor(i), y: anchor(i).y + (i === NA - 1 ? 0 : (anchor(i).y >= 0 ? 70 : -70))}, text: i === NA - 1 ? 'Processo, regras e método' : a.name, color: a.color})).concat(vis.slice(0, 6).map(c => ({id: c.id, text: c.name, small: true}))));
   side.style.display = 'none';
   if(focusId != null) setTimeout(() => focusOn(focusId, 260), 600); else fitSoon();
 }
 
 function infoCommunity(c){
   side.style.display = 'block';
-  side.innerHTML = '<h2>' + esc(c.name) + '</h2><div class="m"><span style="color:' + areaColor(c.area) + '">●</span> ' + esc(D.areas[c.area].name) + ' · ' + c.size + ' conceitos · clique para abrir</div>' +
+  side.innerHTML = '<h2>' + esc(c.name) + '</h2><div class="m"><span style="color:' + kindColor(c.kind) + '">●</span> ' + esc(D.kinds[c.kind].name) + ' · área: ' + esc(D.areas[c.area].name) + ' · ' + c.size + ' conceitos · clique para abrir</div>' +
     '<b>Conceitos principais</b><ul>' + c.top.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' +
     (c.files.length ? '<b>Notas de origem</b><ul>' + c.files.map(f => '<li class="m">' + esc(f) + '</li>').join('') + '</ul>' : '');
 }
@@ -225,7 +256,7 @@ function openCommunity(id, focusConcept){
   crumb.textContent = c.name + ' · ' + c.size + ' conceitos';
   const ns = conceptsBy.get(id) || [], ids = new Set(ns.map(n => n.id));
   const ls = D.plinks.filter(l => ids.has(l.source) && ids.has(l.target));
-  const col = areaColor(c.area);
+  const col = kindColor(c.kind);
   G.graphData({ nodes: ns.map(n => ({...n})), links: ls.map(l => ({...l})) })
     .nodeLabel(n => '<b>' + esc(n.label) + '</b><br><span style="color:#9fb0c6">' + esc(n.file) + '</span>')
     .nodeVal(n => 1.5 + n.deg * 0.9)

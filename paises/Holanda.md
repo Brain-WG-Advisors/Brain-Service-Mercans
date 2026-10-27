@@ -137,7 +137,7 @@
 - [ ] HRBS-14394: confirmar com o Mohit se o 52999 traz o mesmo teto por período (alternativa não incluída na resposta por falta de prova); leitura de regulations NL no backoffice dá 403 para nós — Wallisson
 - [ ] Tickets do Statutory Alert 2027 prontos para colar — Wallisson — (chat: mercans-compliance)
 - [ ] Redline §7.1.4 do NL-CCG-001: aceitar/rejeitar — humano (Wallisson) — (chat: compliance-research) [INCERTO]
-- [ ] [INCERTO] O chat mercans-compliance lista "HRBS-10563 / Holanda / Modelo BCCC/BCCP"; o ticket HRBS-10563 é da Espanha (ver [[Espanha]], quando criado). Provável erro de rótulo no chat. _(ticket fechado: HRBS-10563 Resolved em 2026-10-13 (API, 27/10); conferir se a pendência ainda vale)_
+- [x] O chat mercans-compliance lista "HRBS-10563 / Holanda / Modelo BCCC/BCCP"; confirmado em 2026-10-27 pelo ticket (campo País = Spain) que HRBS-10563 é da Espanha (ver [[Espanha]]); rótulo 'Holanda' no chat era erro. — _fechada em 27/10 (HRBS-10563): O ticket HRBS-10563 tem Pais = Spain (título 'Wage Type Configurations, Taxability Matrix, and Statutory Leave Logic Gaps'; menciona BCC/BCCP; Resolved 13/10/2026 por Lily Li). Confirma que o rótulo 'Holanda' no chat é erro._
 - [ ] [INCERTO] Prompt NL de Client Manual com inconsistências (58202, permanent_disability, start_date vs begin_date, ordinais duplicados) — (chat: design-dev-kb)
 
 ## Entregas (conferências)

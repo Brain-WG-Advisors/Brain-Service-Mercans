@@ -29,8 +29,8 @@
 | ~2026-08-10 | SR-316 | CN_Payslip: Lily Li (~2026-08-04) pediu converter o payslip CN para o formato Compliance; Enaakshi Vats (Research Analyst) pediu ajuda ao Wallisson | Sem resposta registrada; Open, fase Specification; subtarefa de CT-4457 · **SR-316 Done em 2026-10-14** (API, 27/10) | Pendente |
 
 ## Pendências
-- [ ] Converter o Payslip Generator CN v1.0 para o formato Compliance — Wallisson/Enaakshi Vats — (SR-316) _(ticket fechado: SR-316 Done em 2026-10-14 (API, 27/10); conferir se a pendência ainda vale)_
-- [ ] Confirmar estado do SR-316 após 2026-08-10 (Due 2026-08-31) — Wallisson — (SR-316) [INCERTO] _(ticket fechado: SR-316 Done em 2026-10-14 (API, 27/10); conferir se a pendência ainda vale)_
+- [x] Converter o Payslip Generator CN v1.0 para o formato Compliance — concluído (SR-316 Done em 2026-10-14; aprovado por Lily Li, desenvolvido por Michael Mukosi John) — Wallisson/Enaakshi Vats — _fechada em 27/10 (SR-316): Lily Li (SR-316, Done 14/10/2026): payslip CN no formato Compliance confirmado em 21/08 (Lily/Enaakshi); desenvolvido por Michael Mukosi John (cn-payslip-en/zh, 12/10), testado ok em acceptance por Lily em 14/10; ajuste de sinais…_
+- [x] Confirmar estado do SR-316 após 2026-08-10 — SR-316 Done em 2026-10-14 (Lily Li, teste ok em acceptance) — Wallisson — _fechada em 27/10 (SR-316): SR-316 Done em 14/10/2026: Lily Li confirmou 'Testing ok in acceptance' em 14/10; ajustes finais feitos em 26/10 (Michael Mukosi John). Estado após 10/08 está documentado no ticket._
 
 ## Correções ligadas
 - _(nenhuma)_

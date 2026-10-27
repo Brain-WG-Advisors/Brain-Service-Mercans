@@ -91,7 +91,7 @@
 | ⚠️ data? | HRBS-8606 | PIFSS | [INCERTO] conteúdo não registrado no chat mercans-compliance | n/a |
 
 ## Pendências
-- [ ] Recuperar o conteúdo do HRBS-8606 (PIFSS) no YouTrack — Wallisson — (chat: mercans-compliance) [INCERTO] _(ticket fechado: HRBS-8606 Resolved em 2026-06-12 (API, 27/10); conferir se a pendência ainda vale)_
+- [x] Recuperar o conteúdo do HRBS-8606 (PIFSS) no YouTrack — recuperado: base de SS ignorava o WT 64974 após aumento/promoção (fórmula 64974 corrigida; excesso Feb–Apr/2026 por ajuste manual; PIFSS corrigido pelo cliente; parte ER no HRBS-8233); fechado por Pradeep Duraisamy em 2026-06-12 — _fechada em 27/10 (HRBS-8606): Conteúdo recuperado do ticket (Resolved 12/06/2026): cálculo de SS não usava o WT 64974 (base de SS) após aumento/promoção, ~30 funcionários em 4 entidades; Wallisson (05/06) orientou ajuste manual positivo (21900 não serve) e…_
 
 ## Correções ligadas
 - _(nenhuma)_

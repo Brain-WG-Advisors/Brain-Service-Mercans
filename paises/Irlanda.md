@@ -96,7 +96,7 @@
 - Sem Primary SBC no board; definir com Manju/Marko (C-13). Report principal a confirmar: PSR + RPN.
 
 ## Pendências
-- [ ] Classes PRSI incorretas em Clavis e OMG: corrigir e resubmeter no mesmo dia — L2 (Romano Fusana); Compliance só se a causa for regra estatutária — (HRBS-13860) [INCERTO se há ação nossa] _(ticket fechado: HRBS-13860 Resolved em 2026-10-05 (API, 27/10); conferir se a pendência ainda vale)_
+- [ ] Classes PRSI em leavers (HRBS-13860): correção manual feita no employee card em 31/08 (Romano Fusana); a correção permanente do motor (leaver/closing herda a classe PRSI do último período ativo, em vez de J0/branco; 45 leavers A1 enviados como J0) não está confirmada no ticket (Resolved 05/10 sem comentário final) — verificar com L2/Dev; override 'PRSI Class Subclass' existe (oculto para Omnicom) _(reescrita em 27/10 a partir do HRBS-13860)_
 - [ ] Advance Holiday Pay sem campo no DD v3.4 — a definir — (chat: design-dev-kb)
 - [ ] `$hr.state_pension_contributory` na 58202 — a definir — (chat: design-dev-kb)
 - [ ] Aplicar os learnings para chegar a 85–90% de acurácia no design — Wallisson — (chat: design-dev-kb)

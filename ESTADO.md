@@ -1,6 +1,6 @@
 # Onde paramos
 
-> Atualizado em 2026-10-28 (sessão [[sessoes/2026-10-28]]; demais blocos sem mudança desde 2026-10-27). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-10-28, fim do dia (sessão [[sessoes/2026-10-28]], partes 1 e 2; demais blocos sem mudança desde 2026-10-27). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
 
 ## Hoje (2026-10-28) — ver [[sessoes/2026-10-28]]
 - **Pronto:**
@@ -25,7 +25,9 @@
   - **Junto, do mesmo pedido:** plano do projeto de automação (status enviado em 28/10, cerca de 60%).
   - **Dono:** Vinícius executa (call de 27/10, secundário depois de Lituânia e Espanha). Sem início registrado.
   - **Decisão do usuário (28/10):** o projeto fica na frente **Certificação**. Transcrições e nota mandadas à janela em 28/10. Plano, decisões e execução ficam com ela e com o usuário, na janela dela. A janela geral não acompanha; o estado fica em `frentes/certificacao/estado.md`.
-- **Lituânia:** validação das correções do SIR e das specs com o BAU (Kevin) mandada à janela Gmail em 28/10 (rascunho, não enviado).
+- **Lituânia:** validação das alterações de 27/10 com o BAU (Kevin) é decisão do usuário (nenhum pedido de terceiros nas transcrições); e-mail parado na janela Gmail e assunto passado à **Pipeline** (28/10). Usuário: descartar o Compose vazio (Para: Kevin) na janela Gmail.
+- **Cinthya / "New test entity PMI":** resposta de escopo enviada pelo usuário em 28/10 ([[Colombia]] Decisões; [[fronteiras]]).
+- **Obsidian:** 1 nota solta (validação da Pipeline em andamento, `Research Pipeline/Lithuania/2026-10-28-validacao/`).
 - **Esperando outros:** Heidy (BAU) com o WT de cada faixa de saúde, tipo de pensão, tipo 5/6 e a confirmação de junho pela PMI ([[Colombia]] Pendências).
 
 ## Rede de conhecimento (Fase R) e teste de exatidão (2026-10-27)

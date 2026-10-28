@@ -43,6 +43,31 @@
 - Decisões D-01 (abrir zip AZ), D-02 (SE, SFL 11:17), D-03 (DK, Store Bededag).
 - Regra (16/10): só validar e emitir Audit Report dos pacotes completos; não revisar workbooks depois de validado. KZ, UA set/26, AZ ficam fora até chegar o report principal.
 
+## Projeto do Marko: fluxo das entregas (registrado em 28/10, separado da certificação acima)
+> Recebido da janela geral em 28/10. **Não contatar ninguém.** Plano v0.1 em rascunho (28/10), esperando a aprovação do usuário: [[internal-certification/_projetos/fluxo-entregas-marko/PLANO_fluxo_entregas_v0.1|PLANO_fluxo_entregas_v0.1]] (fases 0–3, NO como piloto, lista de países, datas propostas: fase 0 até 30/10, piloto até 06/11).
+> Nota completa: [[revisoes/2026-10-28-pedido-marko-fluxo-entregas]]. Fontes lidas em 28/10: weekly 27/10 (04:31–13:59), call com o Vinícius 27/10 (59:38–1:06:14 e 1:32:49–1:33:24), weekly 07/10, call com a Manju 09/10, bi-weekly 21/10, Espanha 27/10 (22:18–24:58).
+
+- **O pedido:** para cada país em produção, levantar como cada entrega ao governo é feita **hoje** (o sistema gera ou é feita à mão, por qual canal, com ou sem terceiro, se é corrigida antes do envio) e como **deveria** ser (o sistema gera, a Mercans é registrada como agente, o arquivo vai por XML/API com a assinatura do cliente). Depois, listar o que falta e montar um plano com datas para o Marko.
+  - Não é a validação das specs. A Manju disse em 27/10 10:08: "that is different than what I'm asking now".
+  - O modelo é o documento da Manju para o Vietnã e o Taiwan.
+- **Entregas:**
+  - primeiro, o plano com o status e a data de fim por país;
+  - no fim, um relatório com um gráfico por país, mostrando o que o sistema gera, o que é manual e o que falta.
+- **Ordem:**
+  - começar pela Europa;
+  - medir o tempo com 1 país antes de prometer datas (regra de 07/10).
+- **Quem faz:** o Vinícius executa, como tarefa secundária depois de Lituânia e Espanha. A Manju faz os países dela e os da Shruti.
+- **Onde encontra a certificação em andamento:**
+  - **Países:** a lista Europa de 07/10 (DK, RO, FI, MT, HU, LV, DE, CH, FR, IE, NL, ES) tem 4 países em comum com os 12 da certificação: DK, FI, IE e NL. Os outros países europeus da certificação (NO, SE, UK, EE) também estão em produção.
+  - **Contatos do BAU:** são os mesmos de cada país (Umesh, Srikanth, Malika, Nataliia, Marju...). Por isso, perguntar uma vez só por país.
+  - **Arquivos:** os `01 Received` já têm os arquivos enviados e os recibos (A-melding, FPS/EPS com IRmark, DPS, 200.00 na KGD). Isso cobre o item 5 da nota ("validação dos arquivos finais").
+  - **Como é hoje, já visto nos pacotes:** no KZ a folha roda no 1C ZUP local, fora do HRBLIZZ, e o 200.00 é entregue pelo portal da KGD.
+- **Pendente de confirmar com a Manju (§8 da nota):**
+  - a lista de países e a ordem (os 9–10 do BAU master de cada um, ou os ~60 em produção);
+  - o documento do Vietnã e do Taiwan, para usar como modelo;
+  - se existe prazo do Marko, ou se propomos o prazo depois de medir 1 país;
+  - um contato único com o BAU por país para a certificação e para este projeto.
+
 ## Onde ficou cada coisa
 - Sessão VS Code (07–14/10, `8ae80473…`): validações NO/DK/SE/KZ, painel, Holanda completa + Audit Report.
 - Sessão Claude Desktop (08–09/10): coleta inicial no Chat/Gmail, validações UK/UA, 8 cobranças em rascunho (7 Chat + 1 Gmail Olga).

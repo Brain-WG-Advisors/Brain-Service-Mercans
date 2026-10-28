@@ -23,6 +23,7 @@
 | Operação em SILTRA, testes em A3/portais | Operação/implementação (Gulnaaz) e cliente (tickets: ES-A, ES-B) | Spec validada contra amostra A3 |
 | Submissão em portal (AEAT, e-impots, e-CNPS) | Cliente; integração outbound-dominante: HRBLIZZ gera o arquivo, o cliente submete (chat: mercans-compliance) | Arquivo/spec do filing |
 | Configuração de entidade e dados de implementação (ex.: HRBS-12074) | Implementação (tickets: AF) | Resposta estatutária |
+| Se uma entidade/cliente novo muda a configuração, e quando abrir a entidade (ex.: "New test entity PMI", Cinthya/Nabil, 28/10) | Implementação / Config, com o Development (Mohit) para a parametrização | Só a configuração padrão do país no nível da lei (CCG, WTC master, DD, specs, SIR). Decisão do usuário em 2026-10-28: dizer isso de forma explícita e não opinar sobre a entidade |
 | Arquivos criptografados do cliente (OLE2 do Chade), itens de sistema/dados/SOP fora da CCG | Implementação/Operações (Govind Thakur) (chat: mercans-compliance) | CCG e artefatos |
 | Dados e decisões do cliente (ordem judicial, arrears, classificação de expat/não residente, split tributável/não tributável de previdência, leave-relief do 30% ruling NL, variante de gross-up, qualificação de stock options) | Cliente / empregador (tickets: OUT, UA; chat: mercans-compliance) | Posição legal e opções |
 | Posição fiscal específica do cliente (isenção, regime) | Cliente (documentos) e autoridade (DGI) (tickets: AF) | Lista do que falta (convention, agrément, ruling, declaração) |

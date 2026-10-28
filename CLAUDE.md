@@ -213,6 +213,6 @@ Quando o usuário disser:
 | monday | Conector do claude.ai (só leitura). Boards e o que coletar: `prompts/extracao-monday.md` (PLANO §6, Fase 3 F1). |
 | Skills Mercans/país | Consultar via Skill quando necessário; não copiar. |
 | Google Drive | Drive compartilhado montado em `G:\` (só leitura/cópia de arquivos; `.gsheet` não é editável pelo disco). Planilhas: o usuário exporta `.xlsx` para Downloads. |
-| Google Meet/transcrições | Sem conector (bloqueio da Mercans). Coleta pelo Claude in Chrome, só leitura: `prompts/coleta-chrome.md`. |
+| Google Meet/transcrições | Sem conector (bloqueio da Mercans). Coleta pelo Claude in Chrome, só leitura: `prompts/coleta-chrome.md`. **Toda transcrição de reunião entra no cérebro** (decidido em 2026-10-28): procurar em Downloads (Tactiq `.txt`, Gemini "Notes by Gemini" `.docx`), copiar para `raw/reunioes/AAAA-MM-DD-<assunto>.<ext>` (docx + `.txt` extraído), deduplicar por conteúdo e ingerir (cartões → hubs/pendências). |
 | Gmail | **Claude in Chrome** (decidido em 2026-10-19; o conector do claude.ai cai com frequência e não é mais usado): leitura e rascunho na aba do Gmail, procedimento em `frentes/gmail/CLAUDE.md`. Outras janelas pedem rascunho à janela Gmail. Nunca enviar. Confirmar que é a caixa da Mercans (wgomes@mercans.com). |
 | Chat | Sem acesso: o usuário cola/exporta. |

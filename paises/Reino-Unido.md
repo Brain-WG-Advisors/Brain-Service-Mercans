@@ -108,7 +108,9 @@ atualizado_em: 2026-10-27
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
-| — | _(nenhum ticket GB nas fontes)_ | | | |
+| 2026-10-28 | HRBS-16010 (McDermott UK, Live/BAU) | PGL1 do DPS importado (09/09) sem gravar dados do Postgraduate Loan; SL1 ok. Era da Shruti; Manju pediu ajuda (DM 28/10), atribuído a wgomes | Diagnóstico: o XSD do HMRC para PGL1 (PostgraduateLoanStart-v1-0, outgoing schemas v2.93) não tem PlanType (só SL1 tem); XML de teste com PlanType é rejeitado pelo XSD. Mapeamento do Mohit (DPS Inbound Mapping, linhas 32–33): PGL1 → 58226 início, valor 1 por padrão; PGL2 → 58226 fim. Configuração de integração que espera Plan Type no PGL1 diverge. Rascunho: `rascunhos/2026-10-28-youtrack-drafts/HRBS-16010.md` (não gravado). Fonte: `raw/docs/oficiais/GB/2026-10-28-HMRC-DPS/` | Não |
+
+- Rascunho de comentário HRBS-16010 (PGL1 sem Plan Type no XSD do HMRC): [[rascunhos/2026-10-28-youtrack-drafts/HRBS-16010|28/10]]
 
 ## Internal Certification (Análise de Reports)
 > Frente 5: `frentes/certificacao/estado.md` · Método: [[analise-reports]] · Pasta: `internal-certification/United Kingdom`
@@ -127,6 +129,7 @@ atualizado_em: 2026-10-27
 - [ ] DD GB: LEL (542 vs GBP 125), Fuel Code (mapper A/D/F), campo "ID", "Maintained By", tax code 2026/27, v3 vs v31 — a definir — (chat: design-dev-kb)
 - [ ] DD GB: Tax Basis default W1/M1 com exemplo Cumulative; mapper "Boolean" faltando; dropdowns prometidos no Cover e ausentes; campo "Password" — a corrigir — (chat: design-dev-kb)
 - [ ] Desenvolver artigo Directors' NI no pipeline — Wallisson — (chat: design-dev-kb)
+- [ ] DPS Inbound Mapping (Mohit), linha 30: SL1 PlanType mapeia só 1, 2 e 4; o XSD do HMRC (StudentLoanStart-v2-3, outgoing schemas v2.93) também tem 05 (Plan Type 5). Fora do pedido do HRBS-16010; avaliar com o Mohit — (achado 28/10)
 
 ## Correções ligadas
 - [[correcoes]]: DD GB com defaults de auto-enrolment invertidos (EE 3 / ER 5); correto EE 5% / ER 3% (demais itens a confirmar)

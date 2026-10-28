@@ -38,6 +38,7 @@
 3. Se revelou erro → [[correcoes]]
 4. Se mudou artefato → versão atualizada no hub
 - [[rascunhos/2026-10-20-resposta-muhammad-monday-escrita|2026-10-20-resposta-muhammad-monday-escrita]]: Resposta ao Muhammad sobre escrita negada no board Monday (permissões owners)
+- [[rascunhos/2026-10-27-pacote-automacao-samuel/PACOTE-SAMUEL|Pacote de status das automações (27/10)]]: base do e-mail de status ao Marko (enviado 28/10, ~60%): linha do tempo, lacunas, estado por etapa.
 - [[rascunhos/2026-10-26-muhammad-status-automacao-tickets|2026-10-26-muhammad-status-automacao-tickets]]: Resposta ao Muhammad sobre status da automação de tickets (tracked changes, ID no comentário)
 
 ## Padrões recorrentes de ticket

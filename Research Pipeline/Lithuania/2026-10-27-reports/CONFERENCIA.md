@@ -51,9 +51,14 @@ Arquivos: `LT-VMI-001-GPM313-Spec_v1.1.xlsx` (52 células alteradas) e `LT-VMI-0
 - XSD do FFData (a VMI e a Sodra só publicam o MXFD).
 - Regras e códigos de erro da spec do SAM além dos campos (ex.: códigos C23xx, PT).
 
+## Pesquisas (packs)
+- [[Research Pipeline/Lithuania/2026-10-27-reports/research/VMI-GPM313-GPM312-research|VMI GPM313/GPM312]]: fontes oficiais 2026 com citação por ponto; base das specs v1.1.
+- [[Research Pipeline/Lithuania/2026-10-27-reports/research/Sodra-SAM-research|Sodra SAM]]: ⚠️ **substituído, não usar como fonte**: só achou a ordem V-243 na redação de 2015; a SAM foi conferida pela leitura direta no navegador (seção Fontes acima).
+
 ## Frentes que mexeram
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-10-27 | pipeline | Research dos 3 reports e comparação com as specs v1.0 do Drive; nada alterado no Drive |
 | 2026-10-27 | pipeline | Drive: specs GPM313/GPM312 `_v1.1.xlsx` em 18 - Statutory Reports (import nas planilhas após aval); md5 conferido |
 | 2026-10-28 | pipeline | Drive: cópias `_v1.1.xlsx` das specs apagadas a pedido do usuário; ficam só as `.gsheet` oficiais (v1.1 importada) |
+| 2026-10-28 | geral | Links das notas para o grafo do Obsidian (seções/pesquisas/arquivos principais); conteúdo não alterado |

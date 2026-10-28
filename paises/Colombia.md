@@ -82,6 +82,8 @@ atualizado_em: 2026-10-27
 | Parafiscales | CCF 4%, SENA 2%, ICBF 3% | 2026 | Ley 21/1982; Ley 89/1988 |
 | Dominical/festivo | 80% até 2026-06-30; 90% desde 2026-07-01 | 2026-07-01 | CST art. 179 par. trans.; Ley 2466 art. 14 |
 
+- **Skill recompilada (28/10, não instalada no claude.ai):** [[Research Pipeline/Colombia/2026-10-28-skill/CONFERENCIA|conferência]] · [[Research Pipeline/Colombia/2026-10-28-skill/payroll-compliance-colombia/SKILL|SKILL.md]] · situação de cada ponto em aberto em 28/10: [[Research Pipeline/Colombia/2026-10-28-skill/payroll-compliance-colombia/references/07-qa-report|07-qa-report, seção 0]]. Esta ficha foi lida da skill antiga; atualizar quando a nova for instalada.
+
 ## Artefatos entregues
 | Artefato | Versão | Data | Arquivo/local | Observação |
 |---|---|---|---|---|
@@ -145,6 +147,8 @@ atualizado_em: 2026-10-27
 - 2026-10-22: decisões do PENDING (recomendações aceitas): manter o layout das specs (#30); saúde dos pensionados só no CCG, sem linha nova no WTC, avisar a Config (#36); código da NE para pensionados fica aberto, consulta à DIAN é decisão da Manju (#41); linha 12 do plano (relatórios de bônus e juros) fechada: regras legais cobertas nos artefatos, relatórios são operacionais (fora do escopo de 15/10) — Wallisson
 - 2026-10-27: incapacidade ARL **tributável** (não isenta pelo ET 206 num. 1). Conflito doutrinário conferido: o Oficio DIAN 036846/2015 (29/12/2015) a tratava como isenta; vale o Oficio 27408/2019 item 7.1, posterior e expresso sobre "accidentes de trabajo". Ao responder, citar os dois e seguir 2019 ([[correcoes]]; teste T-013 em [[testes/exatidao]])
 - 2026-10-28: resposta à Heidy (PMI Review), mesadas adicionais: configuração "sem saúde" se sustenta em dezembro (Ley 43/1984 art. 5); em junho nenhuma norma isenta (CE 3/2/2005 anulou a regra de 2002 que proibia descontos em junho), pedir que a BAU confirme com a PMI; FSP só anotado (dezembro em tensão com a Ley 43). E-mail enviado em 28/10. Decisão #36 mantida (saúde do pensionado só no CCG). Pesquisa: [[revisoes/2026-10-28-CO-mesadas-adicionais-saude-fsp|mesadas adicionais 28/10]] — Wallisson
+- 2026-10-28: Cinthya (chat), sobre o e-mail "New test entity PMI": perguntou como os WTs serão parametrizados e se mudam antes de abrir a entidade nova (pedido do Nabil). Resposta enviada pelo usuário no chat: Compliance responde pela configuração estatutária padrão do país (regras + WTC master v1.6); o específico da entidade, incluindo se ela muda a configuração e a parametrização, fica fora do nosso escopo; contatos: Mohit (Development) e Nabil. Fronteira registrada em [[fronteiras]] — Wallisson
+- 2026-10-17/18 (rodada 3 do cross-check, conferido nos arquivos de setembro/2026 do cliente, mascarados): Formulario 350 **casilla 93 soma toda retenção praticada no mês**, em todos os grupos de pagamento e todas as execuções (mensal, semanal, liquidação/off-cycle), incluindo o WT 21330 quando carrega retenção efetivamente descontada; a retenção de uma liquidação entra no mês em que é praticada. Spec CO-DIAN-002 mantida — [[Research Pipeline/Colombia/co-report-crosscheck/04-output/round3/CO-DIAN-002-reconciliation-r3|reconciliação r3]]
 - [[rascunhos/2026-10-13-CO-v1.2-proposta|2026-10-13-CO-v1.2-proposta]]: Proposta de correção Colômbia (CO-WTC-001 v1.2 + CCG + escopo): incapacidades etc., com fontes oficiais
 - [[rascunhos/2026-10-15-CO-SIR-001-Res227-sugestoes|2026-10-15-CO-SIR-001-Res227-sugestoes]]: Sugestões para o CO-SIR-001: trocar citação da Res. DIAN 13/2021 pela Resolución Única 227/2025
 

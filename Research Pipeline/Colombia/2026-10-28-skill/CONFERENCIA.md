@@ -75,6 +75,11 @@ Total novo: ~2,2 MB (antes ~307 kB). O `04-reports-spec.md` sozinho tem ~1,09 MB
 
 Correspondência de IDs de relatório: CO-RPT-001 → CO-DIAN-001; -002 → CO-DIAN-002; -003 → CO-PILA-003; -004 → CO-DIAN-004; -005 → CO-DIAN-005; -006 → CO-CESANTIAS-006; -007 → fora do escopo (C29); CO-PILA-007 novo.
 
+## Arquivos principais
+- [[Research Pipeline/Colombia/2026-10-28-skill/payroll-compliance-colombia/SKILL|SKILL.md]]: roteador da skill recompilada (não instalada no claude.ai).
+- [[Research Pipeline/Colombia/2026-10-28-skill/payroll-compliance-colombia/references/07-qa-report|07-qa-report]]: seção 0 = situação de cada ponto em aberto em 28/10 contra os artefatos vigentes.
+- Os outros arquivos de `references/` (01–06) ficam fora do cofre do Obsidian: são cópia dos artefatos (regra 4 do CLAUDE.md).
+
 ## 4. Pendências mantidas abertas (não apresentadas como resolvidas)
 
 | Item do hub | Onde aparece na skill | Tratamento |
@@ -110,3 +115,4 @@ Correspondência de IDs de relatório: CO-RPT-001 → CO-DIAN-001; -002 → CO-D
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-10-28 | pipeline | Skill recompilada a partir de CCG v1.4, WTC v1.6, DD v1.3, 7 Report Specs v1.0 (CO-PILA-007 nova) e SIR v1.1 (Res. 13/2021 → 227/2025); pendências C19/C21/C24/C26 mantidas abertas; 4 achados fora do pedido para o hub |
+| 2026-10-28 | geral | Links das notas para o grafo do Obsidian (seções/pesquisas/arquivos principais); conteúdo não alterado |

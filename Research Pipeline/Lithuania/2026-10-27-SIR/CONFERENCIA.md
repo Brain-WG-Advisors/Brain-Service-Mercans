@@ -38,6 +38,18 @@ Hub: [[Lituania]] · Reports: [[Research Pipeline/Lithuania/2026-10-27-reports/C
 - XSD do FFData; ambientes de teste; canal de máquina dos avisos da VMI.
 - Se o DataService aceita o NP-SD2; data de entrega da VMI (transmissão × confirmação); confirmação por operador estrangeiro depois de 1º/09/2026.
 
+## Seções do documento (fonte do LT-SIR-001-v1.0)
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s00_control|s00_control]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s01_inbound|s01_inbound]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s02_outbound|s02_outbound]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s03_auth|s03_auth]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s04_tech|s04_tech]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s05_errors|s05_errors]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s06_sla|s06_sla]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s07_sources|s07_sources]]
+- [[Research Pipeline/Lithuania/2026-10-27-SIR/sections/s08_gaps|s08_gaps]]
+- A seção 8 (lacunas G1–G12) está nas Pendências do hub [[Lituania]].
+
 ## Frentes que mexeram
 | Data | Frente | O quê |
 |---|---|---|
@@ -45,3 +57,4 @@ Hub: [[Lituania]] · Reports: [[Research Pipeline/Lithuania/2026-10-27-reports/C
 | 2026-10-27 | pipeline | Drive: LT-SIR-001-v1.0.docx em 19 - Statutory Integrations (pasta nova); md5 conferido |
 | 2026-10-27 | pipeline | SIR refeito no formato do BE-SIR-001 (gerador `build_sir_docx_lt.py`, cópia do build_sir_docx.py da Bélgica; seções em `sections/s00–s08`): mesmo conteúdo e fontes S1–S9, reorganizado em registro inbound/outbound, autenticação, técnico, erros, prazos, fontes e lacunas (G1–G12). Lint C29 limpo. Drive 19: docx substituído no mesmo arquivo/link (md5 1261f547…). `build_lt_sir.py` antigo fica só como histórico |
 | 2026-10-28 | pipeline | Entregue: task SR-479 criada (modelo SR-469/470, link do SIR Google Doc 1GTMgEM1…) e e-mail a Mohit + Katrin (Configuration) enviado pelo usuário |
+| 2026-10-28 | geral | Links das notas para o grafo do Obsidian (seções/pesquisas/arquivos principais); conteúdo não alterado |

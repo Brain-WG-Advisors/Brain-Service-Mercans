@@ -1,0 +1,77 @@
+# VAL-SAM — validação independente da spec LT-SODRA-003 (SAM) v1.0
+
+- **Artefato:** `Research Pipeline/Lithuania/2026-10-27-reports/specs-drive/LT-SODRA-003-SAM-Spec.xlsx` (v1.0, 2026-08-21; md5 `b6a8074989c7be3948e1a6f43db39d64`). Somente leitura: nada foi alterado.
+- **Revisor:** compliance-qa-auditor (independente; não construiu a spec nem a CONFERENCIA). Data: 2026-10-28.
+- **Alegação verificada:** a [[Research Pipeline/Lithuania/2026-10-27-reports/CONFERENCIA|CONFERENCIA de 27/10]] diz "67 campos lógicos idênticos ao sam-v07.mxfd; Diferenças: nenhuma; SAM está pronto".
+- **Hub:** [[Lituania]]
+
+## Veredito
+
+**FAIL (3 BLOCKER, 5 MAJOR, 6 MINOR). Confiança nos achados: 90 %.**
+
+A camada de **campos** confere 100 %: 67 de 67 nomes XML, tipos e tamanhos batem com o MXFD. A camada de **formato do arquivo** está errada em três pontos que fazem o arquivo gerado pelo Development ser rejeitado: o envelope FFData, o separador decimal e o valor das marcas. A Sodra publica um documento oficial que resolve esses três pontos: *SAM formos duomenų struktūros aprašas (versija 07)*, na redação V-624/2018. A spec diz que esse documento "NÃO está entre as fontes" e o trata como "o maior item em aberto". O documento está no Drive da Mercans, na pasta do país:
+`Lithuania/12- Country Report Codes/SODRA - Social Security/SAM specifications - Lithuanian.pdf` (12 p.; cópia local em `Documents/youtrack_tickets/drive/2026-10-10-Lithuania/...`, md5 `1db02c71a74cc0bed1b5c5f2cd01d53b`).
+Na mesma pasta há um FFData real do SAM v07, gerado pelo ABBYY eFormFiller: `SAM-V07 SAMPLE (1).ffdata` (2024-12, dados anonimizados).
+Por isso, a conclusão "Diferenças: nenhuma / SAM pronto" da CONFERENCIA **não se sustenta**: ela comparou só os nomes dos campos.
+
+Fontes usadas nesta validação (todas lidas por ferramenta, nesta sessão):
+- **[DSA]** = *SAM formos duomenų struktūros aprašas (versija 07)*, PDF oficial da Sodra (cabeçalho "PATVIRTINTA … V-243 … (V-624 redakcija)"), texto extraído com pypdf.
+- **[MXFD-L]** = `SAM-v07.mxfd` local (Drive, `Archieved/Social security report specs/2-SD-v09(1)/sam/`, md5 `7356515f…`). É o mesmo FormDefId `{963BF380-…}`, mas o FormDef é de **2018-12-20**, uma versão anterior à vigente de 2021-12-22 descrita no extrato. Os nomes, tipos e tamanhos foram comparados contra ele. A lista de ReasonCode do arquivo local tem só 01–08, então para esse ponto vale o extrato do MXFD vigente.
+- **[EXT]** = `raw/docs/oficiais/LT/2026-10-27-Sodra-SAM/2026-10-27-sodra-SAM-v07-instrucao-e-MXFD_extrato.md` (instrução, pontos 48–56, e MXFD vigente).
+- **[FFD]** = `SAM-V07 SAMPLE (1).ffdata` (Drive, `SODRA - Social Security/`, md5 `59d62cc2…`).
+- **[TAR]** = `2026-10-27-I-1336-art10-9_e_XV-632-art3_extrato.md`, `2026-10-27-I-1336-art10-7-8_MMA_extrato.md`, `XV-632-…_extrato.txt`, `2026-10-27-sodra-tarifas-2026-PSD-fundos_extrato.md`.
+
+## Achados
+
+| ID | Local (sheet!célula) | A spec diz | A fonte diz (local exato) | Sev. |
+|---|---|---|---|---|
+| S1 | `Sample File!B4:B76` (todo o XML); `File Structure!C2` ("envelope… reconstructed") | Envelope `<FFData Version="1"><Form FormCode="SAM" FormVersion="07"><InsurerName>…</InsurerName>…`: um elemento por campo, com FormCode/FormVersion como atributos de `<Form>`; o anexo SAM3SD vira um segundo `<Form>`. | [DSA] §2 e §3 (p. 1–9): `FFData > Form(FormDefId="{963BF380-47C3-4B69-A7F7-1B4593572CFE}") > DocumentPages > Group Name="Forma" > ListPages > ListPage` + `Pages Count > Page PageDefName/PageNumber > Fields Count > Field Name="…"`. Um único `<Form>`; cada página é `<Page>`; FormCode/FormVersion são `<Field>`. §2.9: "Fields rinkinyje turi būti **visi laukeliai**" (todos os campos, mesmo vazios; Count 27/63/48). [FFD] tem exatamente essa forma. | **BLOCKER** |
+| S2 | `SAM Spec!J20,J21,J25,J26,J45:J49,J68:J72` (formato "Decimal, … 2 dp") e todos os exemplos em K (ex.: `K45`="3000.00", `K46`="39.58"); `Sample File!B20,B21,B25,B26,B44:B46,B49,B50,B67:B69,B73,B74` | Decimal com **ponto** (`18000.00`, `39.58`). | [DSA] §2.10 (p. 6): "Skaičius — Sveikas skaičius arba dešimtainis su **lietuvišku dešimtainių dalių skirtuku (,)**". [MXFD-L] `<DecimalSeparator>,</DecimalSeparator>` em InsIncomeSum_1, TaxRate_1 e demais. [FFD]: `728,00`, `21,27`, `63,70`. Deve ser vírgula: `3000,00`, `21,27`. | **BLOCKER** |
+| S3 | `SAM Spec!J13,J17,J22` ("Checkmark (x)"), `O13,O17,O22`="x", `K17`="x"; `Field Options!B28:B29`="x"; `Sample File!B16` (`<RevisedDocument/>`), `B17`, `B22` (`x`) | Marca preenchida com "x"; marca vazia como elemento vazio. | [DSA] §2.10 (p. 6): "Žyma — „0“ (nepažymėta) arba „1“ (pažymėta)". Exemplo oficial (p. 7): `RevisedDocument>0`, `Appendixes2>0`. [FFD]: `Appendixes2`=1, `Appendixes3`=0, `RevisedDocument`=0. Deve ser 1/0. | **BLOCKER** |
+| S4 | `SAM Spec!J12,O12,K12` e `J15,O15` ("MM (01-12)", lista "01;…;12", exemplo "07"); `Field Options!B12:B23`; `Sample File!B15` (`07`); `Example Analysis!A7` | Mês com zero à esquerda, de 01 a 12. | [MXFD-L] CycleMonth/RevisedCycleMonth: `DataType="Decimal"`, `DecimalPlaces 0`, `MinValue 1`, `MaxValue 12`. [EXT]: "CycleMonth (2; 1–12)". [DSA] p. 10: "Skaičius 2". É um número, então julho = `7`. É o mesmo defeito já corrigido na GPM313 v1.1 ("mês sem zero"). | MAJOR |
+| S5 | `SAM Spec!F8,F9,F37,F38` (Mandatory=Y), `L8,L9` ("Generated by the submission builder"); `Population Rules!C2` (propagar DocDate/DocNumber por C2335/C2336) | DocDate e DocNumber são obrigatórios e gerados pelo integrador. | [DSA] §5–§7 (p. 9–11), para DocDate e DocNumber nas 3 páginas: "Elektroninėje pranešimo formoje šis atributas **nepildomas**" (não se preenche na forma eletrônica). O exemplo oficial traz DocDate com a data de geração e DocNumber vazio. Esperado: F=N (ou C) com essa citação; a regra de propagação vale só se a Sodra aceitar o campo preenchido. | MAJOR |
+| S6 | `SAM Spec!K46`=39.58, `M46`; `Example Analysis!A12:C13`; `Sample File!B45` | Taxa ilustrativa de 39,58 %. A12 = 1.187,40. | Com as parcelas de 2026, nenhuma combinação chega a 39,58: [TAR] XV-632 art. 3(4) 12,52 (8,72+1,99+1,81) + PSD 6,98 (I-1343 art. 17(2)) + desemprego 1,31/2,03 (art. 3(1)) + acidentes 0,14–1,4 (art. 3(3)) + GF 0,16 + ILDIF 0,16 (página de tarifas da Sodra). Mínimo 21,27 (prazo indeterminado, grupo I), máximo 26,25 (com +3 % do 2º pilar). [FFD] usa `21,27`. Esperado: 21,27 (SAM3SD) e A12 = 3000 × 21,27 % = 638,10, com P7/P8 refeitos. | MAJOR |
+| S7 | `SAM Spec!T46,T69`; `Field Options!E30`; `Report Matrix!J2` (residual 3) | Taxas de P3 "não enumeradas"; ficam como Query to RA ("employer plus employee or one side only?"). | As taxas de 2026 estão publicadas em [TAR] XV-632 art. 3. [EXT] (estrutura MXFD): só há "tarifa total" e contribuição total por segurado, sem separar empregado e empregador (ponto 55.5: "tarifa total aplicada ao segurado"). Esperado: tabela de P3 em 2026 por categoria (indeterminado/determinado × grupo de acidentes I–IV, ± 3 % do 2º pilar) com register_id. A query sobre "one side only" pode ser fechada como "total". Encaminhar ao source-hunter só o que faltar: base legal do GF/ILDIF e a composição do código 06 e dos códigos 09/10. | MAJOR |
+| S8 | `Population Rules!C7,D7` (tripla A11/P3/A12); `SAM Spec!M47` (identidade A12 = A11 × P3, C2344) | Identidade estrita A12 = A11 × P3 linha a linha. Nada sobre teto anual nem sobre a base mínima. | [TAR] I-1336 art. 10(9): acima de 60 VDU por ano (2026: 60 × 2.312,15 = **€138.729**), aplica-se taxa de 0 % (exceto PSD). Assim A12 ≠ A11 × P3 no mês em que o teto é atingido. I-1336 art. 10(7)–(8): abaixo do MMA, o empregador paga as contribuições sobre a diferença até o MMA (5 exceções). A spec não diz como esses dois casos aparecem em A11/P3/A12. Esperado: casos-limite na Population Rules e query/pesquisa sobre o preenchimento oficial (source-hunter). | MAJOR |
+| S9 | `Version Control!E2`; `Report Matrix!J2` ("Structural accuracy 93 %", "data-structure version 03 NOT FOUND", "FFData envelope… not in the folder"); `Population Rules!C13` ("single largest open item"); `Sample File!B2` ("no sample FFData file exists") | Afirmação negativa: não existe descrição da estrutura nem FFData de exemplo. | Os dois existem no Drive da pasta do país (ver Veredito). Com S1–S3, os 93 % de acurácia estrutural estão superestimados. Esperado: citar a [DSA] como fonte A.2, reconstruir o Sample File a partir dela e recalcular a acurácia. | MAJOR (já contado em S1–S3 como causa; aqui é a correção do texto) |
+| S10 | `SAM Spec!K18`=3, `K19`=128, `K21`=152064.00, `K27`=3; `Example Analysis!A9:D10` | 128 segurados em 3 folhas (P23=3). P20.5 = 152.064,00. | Conta refeita: 128 / 6 linhas = **22** folhas; 128 × 1.187,40 = **151.987,20** (384.000 × 39,58 % = 151.987,20). O exemplo falharia em C2349. A própria `Example Analysis!D10` admite a incoerência. | MINOR |
+| S11 | `SAM Spec!K40`, `Sample File!B39` (39001010101); `SAM Spec!K59`, `Sample File!B60` (47712120987) | Códigos pessoais de exemplo. | Dígito de controle (algoritmo mod 11 lituano, recalculado): 3900101010**9** (a spec tem 1) e 4771212098**8** (a spec tem 7). Os dois são inválidos (C36). Além disso, o 1º dígito 4 indica mulher, e o nome do exemplo é "Petras" (masculino). | MINOR |
+| S12 | `SAM Spec!I32,I51,I74`=10 | FormVersion com 10 posições. | [DSA] §5–§7: FormVersion "Tekstas **2**" (FormCode, 10). O MXFD tem CellsInRowCount=10, que é layout. Esperado: 2, com a nota sobre o MXFD. | MINOR |
+| S13 | `Population Rules!C13` | "point **1488** gives SODRA five working days to respond". | A ordem V-243 não tem ponto 1488 (a redação de 2015 local vai até ~103 nos PT). Provável erro de digitação. Não verificável sem o texto consolidado (o e-TAR e a sodra.lt bloqueiam script). Esperado: o número correto do ponto, ou retirar a frase. | MINOR |
+| S14 | `Report Matrix!G2` ("secure electronic signature"); `Population Rules!C13`; `File Structure!C2` | Canal EDAS; nada sobre o web service. | `2026-10-27-sodra-EDAS-DataService_extrato.md`: assinatura "saugiu **kvalifikuotu** elektroniniu parašu"; envio automático pelo web service DataService (SOAP 1.2/MTOM, `https://draudejai.sodra.lt/edas-external/services/DataService`, `uploadEdasDraft`/`sendSignedDocument`), FFDATA "**UTF-8 without BOM**" (p. 8). Esperado: incluir canal, codificação sem BOM e assinatura qualificada. | MINOR |
+| S15 | `SAM Spec!T7` (query sobre box 7); `SAM Spec!M7` | Box 7 com conteúdo ambíguo (e-mail × endereço); a query fica aberta. | [DSA] §5 p. 9: `InsurerAddress` = "Draudėjo **el. pašto adresas**". A query pode ser fechada como e-mail, com essa citação. | MINOR |
+| S16 | `Sample File!B71`; `SAM Spec!K65` | ReasonText "MB vadovo pagal civiline sutarti gautos pajamos" (sem diacríticos). | O texto lituano correto é "civilinę sutartį". A própria spec (`M44`, `M63`) exige preservar os diacríticos. | MINOR |
+
+Encaminhamento: S1–S6, S9–S16 → artifact-builder (a fonte já existe e está registrável). S7 (parte não publicada) e S8 → compliance-source-hunter.
+
+## Verificado e aprovado (com evidência)
+
+1. **67 campos lógicos, nomes e tamanhos:** script `cmp.py` (spec col. H/I × [MXFD-L] FieldDataDef/CellsInRowCount) deu 67/67 OK, nenhum a mais e nenhum a menos. O total confere com [DSA] §5–§7 (SAM 27; SAM3SD 9×6+9 = 63; SAM3SDP 13×3+9 = 48). A alegação de campos da CONFERENCIA está **confirmada**.
+2. **Linhas por folha:** SAM3SD = 6 (IDX 1–6, [DSA] p. 11) e SAM3SDP = 3 (IDX 1–3, [DSA] p. 12) conferem com `File Structure!B6,B8` e `SAM Spec!H39,H58`.
+3. **ReasonCode 01–10, sem 99:** `Field Options!B2:B11` confere com [EXT] p. 51.2 (01 compensação a ex-servidores … 10 cargos eletivos sem PSD), com a descrição de cada código. Text(2) e 65 posições para ReasonText conferem com [DSA] p. 11.
+4. **Prazo:** dia 15 do mês seguinte (`Report Matrix!F2`) confere com [EXT] p. 52 e com a página do SAM ("iki kito mėnesio 15 d.").
+5. **Exclusões de A11:** SAM3SD sem esporte/artista, direitos autorais e tantiemas/conselhos (`SAM Spec!M45`) confere com [EXT] p. 55. SAM3SDP só sem esporte/artista/autoral (`M68`) confere com [EXT] p. 56.
+6. **P3:** SAM3SD = tarifa total no início do mês (`M46`) confere com [EXT] p. 55. SAM3SDP = tarifa do período (`M69`) confere com [EXT] p. 56.
+7. **Exclusão dos 2-SD** no SAM3SD (p. 51.1), **dispensa** do p. 49, **anexos** do p. 48 e **grade P20/P21/P23** do p. 54: os textos da spec conferem com [EXT].
+8. **Aritmética dos exemplos que fecham:** 3000 × 39,58 % = 1.187,40; 6 × 3000 = 18.000; 6 × 1.187,40 = 7.124,40; 1500 × 21,27 % = 319,05; P23 = 1+1 = 2 no Sample File. Todas fecham, mas a taxa 39,58 é inválida (S6).
+9. **Valores de 2025:** nenhum valor de 2025 na spec. Os anos que aparecem (2024-12-19, 2021-12-31 etc.) são datas de alteração da norma, legítimas. Não há valor velho, mas também não há nenhum valor de 2026 (S7).
+10. **Lint de marcadores (C29):** nenhum `placeholder/TODO/TBD/FIXME/VERIFY No./to be confirmed/to be verified`. Os acertos "XXX" são falsos positivos de "C1xxx" (`Field Options!A35`, `Population Rules!D13`). Nenhuma célula de erro e nenhuma fórmula.
+11. **validate_workbook.py --artifact RSPEC:** `VERDICT PASS (blocker=0 major=0 minor=0)`. São 9 folhas na ordem do padrão Spain e 21 colunas A–U em `SAM Spec`. Esse validador mede só a estrutura e não pega S1–S16.
+12. **Códigos GPM312 citados** (44, 51, 52, 60, 61 em `M45`; 89 em `Field Options!E7`): os significados conferem com a spec GPM312 v1.1 (referência interna, não fonte primária).
+
+## Não verificável nesta sessão
+
+- Numeração fina dos pontos da V-243 consolidada vigente: 56.1–56.10, 86.6–86.8, 91.3.1, 249/250, 88, 84.1, 50 (16.9–16.12…). O extrato [EXT] não traz subnúmeros e a redação local de 2015 tem numeração diferente (ex.: P7 = 56.7 em 2015). sodra.lt e e-TAR responderam 403 a script e a WebFetch (testado em 28/10). **NOT VERIFIED.**
+- A exigência do ponto 52 de PT com o código 01 em entrega atrasada (`Report Matrix!F2`): não está no extrato. **NOT VERIFIED.**
+- O catálogo de erros SAM-erros.pdf (C2317…C2358) e o SAM-form.pdf citados na Version Control não estão no disco. **NOT VERIFIED.**
+- O MXFD vigente (FormDef 2021-12-22): só o extrato. A comparação campo a campo usou o MXFD de 2018 com o mesmo FormDefId; a lista 01–10 vem do extrato.
+- A composição de P3 para os códigos 06/09/10 do SAM3SDP (o 21,27 do exemplo do SAM3SDP é plausível só para empregado comum).
+- Como o SAM reflete o teto de 60 VDU e a base mínima do MMA (S8).
+- O nome oficial atual da autoridade em `Report Matrix!D2` ("… prie Socialinės apsaugos ir darbo ministerijos").
+
+## Bloco de prova
+
+- **Pedido → resposta:** (1) campo a campo: 67/67 OK nos nomes, tipos e tamanhos; formato com S2–S5 e S12. (2) Regras e valores: prazo, A11, P3, motivos e linhas OK; taxas de 2026 ausentes (S7); teto e MMA ausentes (S8); exemplo de taxa impossível (S6); nenhum valor de 2025. (3) Consistência interna: S10, S11, S16; Sample File inválido (S1–S3). (4) Lint: limpo. (5) validate_workbook: PASS.
+- **Fontes:** [DSA] p. 1–12 (PDF oficial da Sodra no Drive); [MXFD-L] FieldDataDef; [FFD]; [EXT] p. 48–56; [TAR] I-1336 art. 10(7)–(9), XV-632 art. 3–4, I-1343 art. 17(2).
+- **Teste mecânico:** diff spec × MXFD por script (67/67); dígito de controle do código pessoal recalculado; contas 128/6, 128 × 1.187,40, 3000 × 21,27 %, 60 × 2.312,15; soma das parcelas de taxa 2026 (mín. 21,27, máx. 26,25); md5 dos arquivos citados.
+- **Confiança:** 90 %. Os 10 % restantes: a numeração dos pontos da V-243 vigente e o MXFD de 2021 (só extrato) não foram lidos no original.

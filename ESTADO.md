@@ -13,6 +13,19 @@
   - validar os 2 lotes F6 (bloco abaixo);
   - mandar à frente Pipeline: instalar a skill `payroll-compliance-colombia` recompilada (pedido do Ram; pronta em `Research Pipeline/Colombia/2026-10-28-skill/`), corrigir no WTC da Colômbia a licença maternidade/paternidade ainda isenta e o EG-8003 do Egito ("public sector only");
   - decidir se a regra das mesadas entra no CCG v1.4 (Colômbia ativa → ticket ao Development).
+- **Instrução vigente (28/10):** toda transcrição de reunião vai para o cérebro. A cópia fica em `raw/reunioes/AAAA-MM-DD-<assunto>.<ext>` (`.docx` do Gemini com um `.txt` extraído ao lado) e o conteúdo é ingerido: cartões em `extracoes/`, depois hubs e pendências. A procura é em Downloads. Em 28/10 entraram 27 reuniões novas (25/06 a 22/10).
+  - **Pendente:** extrair os cartões dessas 27 + `2026-10-27-research-team-weekly` e `2026-10-27-spain-transition-to-HRB` (nunca ingeridas).
+- **Projeto do Marko, mapa das entregas estatutárias**. Explicação completa: [[revisoes/2026-10-28-pedido-marko-fluxo-entregas]] (pedido do Marko, repassado pela Manju; reuniões [[raw/reunioes/2026-10-27-research-team-weekly.txt|weekly 27/10]] 04:31–13:59 e [[raw/reunioes/2026-10-27-call-wallisson-lituania-espanha.txt|call com o Vinícius 27/10]] 59:38–01:06:14):
+  - escopo: toda entrega ao governo de cada país em produção, e não só as specs. O passo a passo vem com o que o sistema faz, o que o cliente faz e o que a autoridade faz;
+  - meta: tudo sai do sistema e é transmitido de forma automática (registro da Mercans como agente, XML, API), sem passo manual nem terceiro;
+  - processo atual: pedido ao BAU de cada país (board "BAU master clients") só para entender. O manual não é base; o que vale é a nossa pesquisa do jeito certo, comparada com o que acontece hoje;
+  - começar pela Europa; o modelo é o Vietnã da Manju;
+  - entregar ao Marko um plano com status e datas, e no fim um relatório com gráfico por país.
+  - **Junto, do mesmo pedido:** compliance calendar no ambiente de produção, uns 60 países, 1 a 2 por semana, prioridade aos que têm clientes ativos (BAU master list).
+  - **Junto, do mesmo pedido:** plano do projeto de automação (status enviado em 28/10, cerca de 60%).
+  - **Dono:** Vinícius executa (call de 27/10, secundário depois de Lituânia e Espanha). Sem início registrado.
+  - **Decisão do usuário (28/10):** o projeto fica na frente **Certificação**. Transcrições e nota mandadas à janela em 28/10. Plano, decisões e execução ficam com ela e com o usuário, na janela dela. A janela geral não acompanha; o estado fica em `frentes/certificacao/estado.md`.
+- **Lituânia:** validação das correções do SIR e das specs com o BAU (Kevin) mandada à janela Gmail em 28/10 (rascunho, não enviado).
 - **Esperando outros:** Heidy (BAU) com o WT de cada faixa de saúde, tipo de pensão, tipo 5/6 e a confirmação de junho pela PMI ([[Colombia]] Pendências).
 
 ## Rede de conhecimento (Fase R) e teste de exatidão (2026-10-27)

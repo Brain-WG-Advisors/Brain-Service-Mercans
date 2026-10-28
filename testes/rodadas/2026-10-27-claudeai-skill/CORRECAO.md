@@ -85,3 +85,12 @@ A skill v3 traz as regras "o cérebro vence a web" e "responder primeiro pelo de
 | T-028 | ⚠️ (gabarito a revisar) | Sim, empregado, 0,05%. Base: a Circular MoF 14/2021 diz total mensal; a FAQ ETA v4 (mar/2026) diz só as verbas básicas; segue o sistema ETA e avisa a divergência | A fonte nova (FAQ ETA 2026) não está no cérebro. Conferir antes de manter "total mensal" |
 
 **Resultado:** a nota não mudou (24/28), mas 3 das 4 falhas apontam para o gabarito e não para a resposta. As respostas também acharam resíduos nos pacotes das skills: WTC da Colômbia (LicenciaMP isenta) e WTC do Egito (EG-8003 "só setor público").
+
+## Revisão do gabarito (2026-10-27, fonte primária)
+| # | Antes | Depois | Por quê |
+|---|---|---|---|
+| T-013 | ❌ | ❌ (mantido) | O Oficio 036846/2015 (ARL isenta) é anterior ao 27408/2019, que nega a isenção para "accidentes de trabajo" (item 7.1). Conflito agora registrado no cérebro |
+| T-018 | ❌ | ✅ | O triplet é o padrão IE (RPN); o `Differential` é a regra dos países sem RPN (chat design-dev-kb 06-24/07-02, nível B) |
+| T-028 | ⚠️ | ✅ | A base "só verbas básicas" (FAQ ETA v4 Q110) com a divergência informada é o que a nossa skill do Egito v2 manda |
+
+**Nota revista: 26/28 ✅** · 1 ⚠️ (T-016) · 1 ❌ (T-013). Rodada 2 (Claude Code) revista para 26/28: T-018 ❌ e T-028 ⚠️. Ver [[testes/exatidao]].

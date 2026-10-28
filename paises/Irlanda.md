@@ -108,8 +108,8 @@ atualizado_em: 2026-10-27
 
 ## Decisões
 - 2026-06-30: Chad e Ireland como baseline das sessões de gap-filling de acurácia — Manju (chat: compliance-research)
-- 2026-07-02: decompor imposto progressivo em Threshold/Base/Amount era específico do RPN; usar uma reg `Differential` (Learning #2 corrigido) — Mohit/cross-training (chat: design-dev-kb)
-- Padrão de design IE: taxas via RPN em 52/53xxx; triplet; regs Paid; reconciliação no ordinal 0 e no fim (chat: design-dev-kb)
+- 2026-07-02: Learning #2 (decompor o imposto progressivo em Threshold/Base/Amount) revogado **como regra geral**: a decomposição é do padrão IE, porque as taxas vêm da Revenue via RPN. País sem RPN usa uma reg `Differential` com faixas — Mohit/cross-training (chat: design-dev-kb). Redação revista em 2026-10-27 (teste T-018, [[testes/exatidao]]); ⚠️ conferir no DevKB oficial
+- Padrão de design IE (vale para a Irlanda): taxas via RPN em 52/53xxx; triplet Threshold/Base/Amount; regs Paid; reconciliação no ordinal 0 e no fim (chat: design-dev-kb)
 - Fronteira: taxas PAYE/USC vêm da Revenue via RPN (fora do engine) (chat: design-dev-kb; ver [[fronteiras]])
 
 ## Suporte (tickets)

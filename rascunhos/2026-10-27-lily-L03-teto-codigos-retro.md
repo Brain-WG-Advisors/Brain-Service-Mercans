@@ -1,17 +1,17 @@
 # Rascunho — resposta à Lily (27/10/2026 10:36), "Fwd: Spain Migration Progress 22nd July 6.40 pm IST"
 
-Status: **gravado como rascunho no Gmail (Reply all), não enviado; ajustado em 27/10 (sem a frase do 509; ponto 1 sem o BNR 7/2024; ponto 4 cita o erro C9837 do Manual SLD).** Fontes: `raw/docs/oficiais/ES/2026-10-27-fontes-L03-teto-codigos-retro.md`.
+Status: **gravado como rascunho no Gmail (Reply all), não enviado; ajustado em 27/10 (sem a frase do 509; ponto 1 sem o BNR 7/2024; ponto 4 cita o erro C9837 do Manual SLD).** **28/10: a versão enviada (27/10 19:42 BRT, citada pela Lily em 28/10) saiu sem os 2 ajustes (509 com pec 35; art. 16.2.c).** Fontes: `raw/docs/oficiais/ES/2026-10-27-fontes-L03-teto-codigos-retro.md`.
 
 ---
 
 Hi Lily,
 
 Two corrections to my earlier replies first:
-- 701 is not used here. It applies only to multiple employment with exclusions or the Artists scheme (TGSS SLD technical manual, 14/09/2026, code table). The codes are 500 and 601.
+- 701 is not used here. It applies only to multiple employment with exclusions or the Artists scheme (TGSS SLD technical manual, 14/09/2026, code table). The codes are 500 (509 instead when the tramo has peculiaridad 35) and 601.
 - L03 does not always carry the full increment. Each month is declared "conforme a los topes, bases y tipos y demás condiciones vigentes en los meses a que correspondan los salarios" (RD 2064/1995, art. 16.2.c). So 500/601 only go up to that month's maximum base, and the rest goes to 497–499.
 
 Your queries:
-1. Our payroll calculates the bases. The company reports each month's bases in the L03, including 497–499 (RD 2064/1995, art. 72 bis.2). The employee share must be deducted on the payslip that pays the amount, as it cannot be deducted later (LGSS art. 142.2).
+1. Our payroll calculates the bases. The company reports each month's bases in the L03 (RD 2064/1995, art. 16.2.c), including 497–499 (art. 72 bis.2). The employee share must be deducted on the payslip that pays the amount, as it cannot be deducted later (LGSS art. 142.2).
 2. Scenario 2 (January 2025, already at the 4,909.50 maximum): the L03 carries only 498 = 364.25 and 499 = 469.08, with no 500/601 (Noticias RED 7/2024, point 4). Your 497/498/499 figures are correct.
 3. Scenario 3 (February 2026): the L03 carries 500 = 301.20, 601 = 301.20, 497 = 510.12 and 498 = 188.68. 601 has the same 5,101.20 cap as 500 (Orden PJC/297/2026, arts. 1.2 and 2.1). The other 11 months work the same way, each against its own base and maximum (4,909.50 in 2025, Orden PJC/178/2025).
 4. 497–499 go in the first tramo only (TGSS SLD technical manual, error C9837) and only for periods from 2025 onwards (Noticias RED 1/2025).

@@ -3,16 +3,27 @@
 > Escrito **só pela janela "Chat - Mercans"**. Criado em 2026-10-15. Reescrever a cada "fecha a sessão" desta janela.
 
 ## Última triagem
-- 2026-10-22: menções do dia lidas no Google Chat pelo Claude in Chrome → `raw/chats/2026-10-22-mencoes-do-dia.md`. Sessão: `sessoes/2026-10-22-chat.md`.
+- 2026-10-28: hoje e ontem sem resposta → `rascunhos/2026-10-28-triagem-chat.md`; respostas `rascunhos/2026-10-28-respostas-chat.md`. Sessão: `sessoes/2026-10-28-chat.md`.
 
-## Esperando outros
-- **Ruchi (Dinamarca):** confirmar as 2 sugestões no CCG V2.3.8 (pedido no chat STG: Denmark, 22/10 18:28). Com o ok dela e do usuário, aceitar as sugestões no navegador (✓ em cada card). Se ela pedir ajuste, mudar a sugestão antes. Respostas e fontes: `rascunhos/2026-10-22-dk-ccg-comentarios-ruchi-holiday-pay.md`.
-- **Marko:** feedback sobre P09–P13 (entregue em 21/10 16:23). A Manju já foi informada (22/10).
+## Instruções vigentes
+- Tudo desta frente se resolve nesta janela (não delegar à Gmail) — usuário, 28/10.
+- Rascunhos de resposta ficam no próprio Google Chat/Gmail (compositor), nunca enviados; ler o que já está no compositor antes de colar.
+- Status de automações: só testes, sem go-live/datas inventadas; percentual só o informado pelo usuário.
 
 ## Esperando o usuário
-- Timestamps das DatTdAanm de P09, P10 e P13 nos entregáveis (data no fim do período) × pasta 2109: não decidido.
-- Bélgica: a Suman pediu o Global WTC 1.1 completo como base (frente Pipeline).
-- DK: 4,8% por dia de férias pago é convenção do CCG, não da lei (§ 15 stk. 3) → avaliar com a Enaakshi (volta segunda, 26/10).
+- Skill da Colômbia recompilada (`Research Pipeline/Colombia/2026-10-28-skill/`): revisar, subir no claude.ai e avisar o Ram.
+- Formulário de acesso ao 3CX preenchido (falta Submit); rascunho ao Romano no Gmail (07–19 BRT = 15:30–03:30 IST).
+- Ruchi: 3 valores em "Holiday Pay Upon Termination" (Drive, 23/10).
+
+## Esperando outros
+- Muhammad (out sick 28/10): resultado dos 3 tickets reais (HRBS-14331, 14055, 11806).
+- Marko: retorno do e-mail de status (enviado 28/10, cc Muhammad e Manju).
+- Nihita: alíquota 2552/2572 (Espanha).
+- Romano (volta 29/10): fuso da faixa on-call 17–21.
+- Ruchi (Dinamarca): sugestões no CCG V2.3.8 — Enaakshi resolveu 15 sugestões em 28/10.
+
+## Tickets (janela Suporte)
+- HRBS-16573 (DK Holiday Pay Termination, atribuído ao usuário), HRBS-16601 (SG CPF AW, sem responsável).
 
 ## Acesso
-- Google Chat pelo Claude in Chrome (leitura). Nunca enviar: o usuário envia.
+- Google Chat e Gmail pelo Claude in Chrome. Nunca enviar: o usuário envia.

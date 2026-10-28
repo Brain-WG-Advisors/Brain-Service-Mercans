@@ -20,4 +20,4 @@
 SL781-2023 (Corte Suprema, rad. 89614): aberta no Ariel em 28/10, só o trecho final visível (ordem à Colpensiones/UGPP para certificar pagamentos de mesadas de um pensionado falecido); nada sobre saúde nas mesadas adicionais; PDF não baixado por decisão do usuário (não relevante); íntegra do CE 3/2/2005 (3166-02) e CE 9/9/2004 (4560-02); conceptos UGPP/MinSalud/Colpensiones específicos. 100% só com consulta formal do cliente à UGPP ou MinSalud.
 
 ## Uso
-Resposta à Heidy (rascunho no Gmail, janela Gmail, não enviado): dezembro sem saúde se sustenta (Ley 43 art. 5); junho: pedir que revisem com o jurídico; FSP também nas adicionais.
+Resposta à Heidy, enviada pelo usuário em 28/10: dezembro sem saúde se sustenta (Ley 43 art. 5); junho sem isenção legal (CE 3/2/2005), a BAU confirma com a PMI; FSP só anotado. A versão anterior, que devolvia a pergunta ao jurídico do cliente, foi descartada ([[correcoes]], 2026-10-28). Sessão: [[sessoes/2026-10-28]].

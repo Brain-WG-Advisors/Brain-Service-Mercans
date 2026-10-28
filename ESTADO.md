@@ -1,6 +1,19 @@
 # Onde paramos
 
-> Atualizado em 2026-10-27, fim da tarde (sessão [[sessoes/2026-10-27]]; blocos da Colômbia de 26/10 e demais sem mudança desde 2026-10-20). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-10-28 (sessão [[sessoes/2026-10-28]]; demais blocos sem mudança desde 2026-10-27). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+
+## Hoje (2026-10-28) — ver [[sessoes/2026-10-28]]
+- **Pronto:**
+  - resposta à Heidy (Colômbia, PMI Review) enviada pelo usuário; nota [[revisoes/2026-10-28-CO-mesadas-adicionais-saude-fsp]];
+  - skill brain-service de 28/10 no claude.ai (conferida);
+  - tudo enviado ao GitHub (`main` = `origin/main`).
+- **Esperando o usuário:**
+  - ok para apagar o CSV "Columbia Regulation Plan  - Plan .csv" (Downloads) e o Google Doc 1akwVTqv (conversão da Lituânia com erro);
+  - reiniciar o Claude Desktop (MCP "brain");
+  - validar os 2 lotes F6 (bloco abaixo);
+  - mandar à frente Pipeline: instalar a skill `payroll-compliance-colombia` recompilada (pedido do Ram; pronta em `Research Pipeline/Colombia/2026-10-28-skill/`), corrigir no WTC da Colômbia a licença maternidade/paternidade ainda isenta e o EG-8003 do Egito ("public sector only");
+  - decidir se a regra das mesadas entra no CCG v1.4 (Colômbia ativa → ticket ao Development).
+- **Esperando outros:** Heidy (BAU) com o WT de cada faixa de saúde, tipo de pensão, tipo 5/6 e a confirmação de junho pela PMI ([[Colombia]] Pendências).
 
 ## Rede de conhecimento (Fase R) e teste de exatidão (2026-10-27)
 - **Prioridade:** a rede no Obsidian vem antes (Fase R do [[PLANO]]); a Fase 2 (fumaça e rodada 2 no projeto "Brain Service" do claude.ai) está pausada. O objetivo continua a eficiência da entrega no dia a dia.
@@ -13,7 +26,7 @@
 - **Tickets dos hubs:** conferidos na API em 27/10. Antes de agir sobre ticket citado em hub, conferir o estado na API.
 - **Esperando o usuário:**
   - ~~religar os 5 conectores do claude.ai~~ ✅ religados em 2026-10-27 pela janela geral (Chrome);
-  - push dos commits `a924890`, `afc11c8`, `5110bf5` quando quiser.
+  - ~~push dos commits `a924890`, `afc11c8`, `5110bf5`~~ ✅ enviados (conferido em 28/10).
 - **Esperando frente Suporte:** conferir o teto SSC da Namíbia (GN 236/2026 × N$99 dito no HRBS-12111), em [[Namibia]] Pendências.
 
 ## Eficiência (2026-10-27, tarde) — ver [[sessoes/2026-10-27]]
@@ -31,7 +44,7 @@
 ## Colômbia PMI — pesquisa concluída (2026-10-26)
 - Encerrada em 26/10: artefatos finais no Drive/Monday (7 specs v1.0, CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1); delta ao design e e-mail de encerramento enviados pelo usuário; registros no chat "Research Pipeline II". Resumo: [[sessoes/2026-10-26]]; planilha [[Research Pipeline/Colombia/co-report-crosscheck/04-output/CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx|CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx]].
 - YouTrack CT-4593/SR-470: o usuário decidiu não editar (27/10, janela Suporte); levantamento em `rascunhos/2026-10-26-youtrack-links-CO.md`.
-- Depois: timeline do Andy quando o Mohit confirmar datas; skill `payroll-compliance-colombia` (#17). Com terceiros, sem bloquear: #54/#55 (cliente/BAU), #41/#51 (Manju/DIAN); dúvidas do design nas colunas T/U = suporte.
+- Depois: timeline do Andy quando o Mohit confirmar datas; skill `payroll-compliance-colombia` (#17). Com terceiros, sem bloquear: #54/#55 (cliente/BAU; #55 respondido à Heidy em 28/10, aguarda retorno), #41/#51 (Manju/DIAN); dúvidas do design nas colunas T/U = suporte.
 
 ## Esperando o usuário (2026-10-20)
 - #13037 (TI, Manette): ok para responder "VPN instalada; pasta = link de 13/10 ao Merlin (https://drive.google.com/drive/folders/1BArVL5SGDH1NbkLa0DJ-SR1sqnRz6Uo6); expiração 20/11/2026" → rascunho pela frente Chat. Apuração em `raw/chats/2026-10-20-manette-ti-vpn-pasta.md`.

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://vmi.lt/EDSUploadFile.wsdl" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://vmi.lt/EDSUploadFile.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://vmi.lt/EDSUploadFile.wsdl">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="SubmitFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="File" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PersonCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitFileResult" type="tns:SubmitFileResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SubmitFileResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CheckFileState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckFileStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckFileStateResult" type="tns:CheckFileStateResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CheckFileStateResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileStateData" type="tns:FileStateDataResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeclatationStateData" type="tns:DeclarationDataResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FileStateDataResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserConfirmedName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserConfirmedCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileConfirmStateCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileStateName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileStateDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DeclarationDataResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DeclarationStateName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeclarationStateCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeclatationStateDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeclarationActualityStateName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeclarationActualityStateCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SubmitFileSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitFile" />
+  </wsdl:message>
+  <wsdl:message name="SubmitFileSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckFileStateSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckFileState" />
+  </wsdl:message>
+  <wsdl:message name="CheckFileStateSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckFileStateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EDSWebServiceUploadFileSoap">
+    <wsdl:operation name="SubmitFile">
+      <wsdl:input message="tns:SubmitFileSoapIn" />
+      <wsdl:output message="tns:SubmitFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileState">
+      <wsdl:input message="tns:CheckFileStateSoapIn" />
+      <wsdl:output message="tns:CheckFileStateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EDSWebServiceUploadFileSoap" type="tns:EDSWebServiceUploadFileSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitFile">
+      <soap:operation soapAction="http://vmi.lt/EDSUploadFile.wsdl/SubmitFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileState">
+      <soap:operation soapAction="http://vmi.lt/EDSUploadFile.wsdl/CheckFileState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EDSWebServiceUploadFileSoap12" type="tns:EDSWebServiceUploadFileSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitFile">
+      <soap12:operation soapAction="http://vmi.lt/EDSUploadFile.wsdl/SubmitFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileState">
+      <soap12:operation soapAction="http://vmi.lt/EDSUploadFile.wsdl/CheckFileState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EDSWebServiceUploadFile">
+    <wsdl:port name="EDSWebServiceUploadFileSoap" binding="tns:EDSWebServiceUploadFileSoap">
+      <soap:address location="http://deklaravimas.vmi.lt/EDSWebServiceUploadFile/EDSWebServiceUploadFile.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EDSWebServiceUploadFileSoap12" binding="tns:EDSWebServiceUploadFileSoap12">
+      <soap12:address location="http://deklaravimas.vmi.lt/EDSWebServiceUploadFile/EDSWebServiceUploadFile.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -2,6 +2,9 @@
 
 > Escrito **só pela janela "Pipeline - Mercans"**. Criado em 2026-10-15 a partir de [[revisoes/2026-10-15-licoes-aprendidas/00-LICOES-CONSOLIDADAS]]. Reescrever a cada "fecha a sessão" desta janela.
 
+## Instruções vigentes
+- 2026-10-27 (usuário): **Specs** → importar a versão nova no `.gsheet` atual da spec. **WTC, CCG e DD** → criar uma versão nova (arquivo Google novo com o número da versão), atualizar o link no ticket e atualizar no monday.
+
 ## Pipeline vigente (atualizado em 2026-10-17)
 - Script `~/mercans-pipeline/mercans_pipeline_v2_9.sh`, agora com **cabeçalho v2.12**. Failure log: F1–F57 (F51, F52, F54, F55 e F58–F66 continuam propostas) e F67–F74. Checks: C1–C73, com lacunas (C51, C52, C54, C55, C58–C68, C72 sem uso). Contratos 1.4.0.
 - A v2.12 fecha as lacunas P0–P2 da matriz FR (`revisoes/2026-10-17-matriz-cobertura-FR-pipeline.md`). Cobertura: 5/25/33 → **18/38/7** (Total/Parcial/Nenhuma). Detalhe em `~/mercans-pipeline/IMPROVEMENT_LOG.md` (entrada de 2026-10-17).
@@ -30,6 +33,8 @@
 | Costa do Marfim | `Costa do Marfim/2026-10-16-teto-CNPS/` | Teto CNPS PF/AM/AT-MP 70 000 → 75 000 (16/10): WTC v1.3, CNPS-001 v1.4, CNPS-002 v1.5, CCG v1.3, Design v1.2 copiados para o Drive (`CONFERENCIA.md`). **Usuário importa** no Drive |
 
 ## Em andamento
+- **Lituânia (27–28/10): entrega da call concluída e publicada** (CT-4285, SR-419/420/421, SR-479, e-mail Mohit+Katrin, HRBS-15253) — [[sessoes/2026-10-28-pipeline]]. Abertos no hub: licenças (11/11), formulários SD, 2027.
+- **Skill CO recompilada (28/10)** em `Research Pipeline/Colombia/2026-10-28-skill/` — **espera o usuário** revisar e instalar no claude.ai; avisar a janela Chat (pedido do Ram).
 - WTC BE séries 62/65/"74" contra o Global WTC (pedido da Suman, prazo BE dia 30; 21/10): D1–D4 aprovadas ("ok nas 4"). BE-WTC-001-v1.1.xlsx gerado e conferido (+468 linhas, 361–828, azul; validate PASS), em `Research Pipeline/Belgium/2026-10-21-wtc-series-62-65-74/`. Global 1.2 conferida (idêntica nas 3 séries). Copiado para o Drive `Belgium › 03 - WTC` em 21/10 (md5 ok). Usuário importou a **v1.2** no `.gsheet` (conferido em 21/10 pelo Chrome: VC 1.0/1.1/1.2, linha 23671 com 19,88%, 768 códigos numéricos de 6201 a 79499 = arquivo local) e avisou a Suman. Skill BE atualizada em 21/10 (`Research Pipeline/Belgium/2026-10-21-skill-refresh/payroll-compliance-belgium.zip`, linhagem do Drive, descrição em 863 caracteres). Substituída (v2) e **publicada para a organização** no claude.ai em 21/10. 22/10: Suman confirmou "74" = 79 e pediu a aba All Codes do Global 1.1 → **WTC v1.3 local** (+355 códigos, linhas 829–1183, conferida). v1.3 no Drive em 22/10 (md5 ok). v1.3 importada no `.gsheet` em 22/10 (conferida). Mensagem enviada pelo usuário; 23/10 Suman: "Only 62,65 and 79" → v1.3 é a final. **Skill BE v4 publicada** para a organização em 23/10 citando a v1.3. Frente WTC/skill BE concluída. WTC v1.2 (linha 23671 → 19,88% + moderação até 5,12%, fonte ONSS) copiada para o Drive em 21/10 (md5 ok) e skill **v3 publicada** para a organização.
 - Auditoria de idioma BE (14 arquivos, 16/10): relatório pronto em `rascunhos/2026-10-16-BE-auditoria-idioma.md` (3 159 violações em DD + 5 specs NSSO/FEDRIS; 1 001 duvidosas). **Esperando o usuário:** 6 decisões listadas no fim do relatório; nenhuma correção feita.
 

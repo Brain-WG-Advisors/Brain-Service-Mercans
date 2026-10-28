@@ -144,7 +144,7 @@ Quando o usuário disser:
 
 - **"chegou resposta de X" / mensagem colada de alguém:** saída fixa, sem preâmbulo:
   - o que X pediu;
-  - o que é nosso (o resto vai para [[fronteiras]]);
+  - o que é nosso (o resto vai para [[fronteiras]]); pergunta estatutária é nossa: responder com posição, fonte e confiança, e devolver ao cliente/BAU só a escolha num ponto não pacificado (decidido em 2026-10-28);
   - o que mudou desde a nossa última mensagem;
   - rascunho da resposta (formato da regra 3 de "Respostas eficientes") + bloco de prova;
   - onde registrar (hub, ticket, estado da frente).

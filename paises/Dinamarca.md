@@ -134,7 +134,7 @@ atualizado_em: 2026-10-27
 - [[internal-certification/Denmark/Sherwin Williams Denmark - 2026-09/02 Validation/summary_EN|summary_EN]]: Sherwin Williams Denmark - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
 
 ## Pendências
-- [ ] CCG V2.3.8: aceitar as 2 sugestões de 22/10 depois do ok da Ruchi (pedido no chat STG: Denmark, 22/10 18:28; sem resposta até o fim do dia). Se ela pedir ajuste, mudar a sugestão antes. — Wallisson
+- [x] (28/10: Enaakshi aceitou as sugestões no CCG V2.3.8 — notificação do Docs de 28/10 02:56, "15 resolved"; [[2026-10-28-triagem-emails]]) CCG V2.3.8: aceitar as 2 sugestões de 22/10 depois do ok da Ruchi (pedido no chat STG: Denmark, 22/10 18:28; sem resposta até o fim do dia). Se ela pedir ajuste, mudar a sugestão antes. — Wallisson
 - [ ] CCG usa 4,8% do salário mensal por dia de férias **pago**; a lei só fixa 4,8% para dia **sem** pagamento (Ferieloven § 15 stk. 3). Não citado à Ruchi; avaliar com a Enaakshi. — Wallisson
 
 ## Correções ligadas

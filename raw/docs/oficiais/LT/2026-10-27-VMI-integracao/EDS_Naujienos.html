@@ -1,0 +1,802 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta name="author" content="Alna Software, UAB" /><meta name="generator" content="EDS" /><meta name="robots" content="index, follow" /><meta name="revisit-after" content="1 days" /><meta http-equiv="X-UA-Compatible" content="IE=9" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta name="msapplication-starturl" content="http://wmi.deklaravimas.vmi.lt" /><meta name="msapplication-name" content="EDS" /><meta name="msapplication-tooltip" content="EDS" /><meta name="msapplication-navbutton-color" content="#4AA02C" /><meta name="msapplication-task" content="name=Atsisiųsti fromą; action-uri=https://deklaravimas.vmi.lt/lt/Atsisiusti_forma_pildymui.aspx; icon-uri=https://deklaravimas.vmi.lt/images/favicon.ico" /><meta name="msapplication-task" content="name=Naudojantiems el. parašą; action-uri=https://deklaravimas.vmi.lt/lt/Naudojantiems_el_parasa/Deklaruoti_sertifikata.aspx; icon-uri=https://deklaravimas.vmi.lt/images/favicon.ico" /><meta name="msapplication-task" content="name=Neįgaliesiems; action-uri=https://deklaravimas.vmi.lt/lt/Naudojantiems_el_parasa/parsisiusti_el_parasu_pasirasyta_dokumenta.aspx; icon-uri=https://deklaravimas.vmi.lt/images/favicon.ico" /><meta name="msapplication-task" content="name=Prisijungti; action-uri=https://deklaravimas.vmi.lt/lt/Pradinis_Prisijungimo_puslapis/prisijungimasperisorinessistemas.aspx; icon-uri=https://deklaravimas.vmi.lt/images/favicon.ico" /><link id="ctl00_ctl00_Favicon" rel="SHORTCUT ICON" href="../../Images/favicon.ico" /><script type="text/javascript" src="../../JS/jQuery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../../JS/jQuery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../JS/jQuery/jquery_query-2_1_7.js"></script>
+<script type="text/javascript" src="../../JS/swfobject-1.1.js"></script>
+<script type="text/javascript" src="../../JS/SecurityScripts-1.2.js"></script>
+<script type="text/javascript" src="../../JS/jquery-portal-1.3.js"></script>
+
+    
+    <style type="text/css">
+        #PageContent #MiddleContent
+        {
+            width: 100%;
+        }
+        #PageContent #RightContent
+        {
+            padding-left: 5px;
+        }
+    </style>
+
+<link href="../../CSS/MainLayout-1.1.css" rel="stylesheet" type="text/css" /><link href="../../CSS/SiteLayout-1.3.css" rel="stylesheet" type="text/css" /><link href="../../CSS/WebPartStyles-1.6.1.css" rel="stylesheet" type="text/css" /><link href="../../CSS/PortalControlStyles-1.9.css" rel="stylesheet" type="text/css" /><link href="../../CSS/Signature.css" rel="stylesheet" type="text/css" /><link href="../../CSS/InputControls-1.1.css" rel="stylesheet" type="text/css" /><link href="../../CSS/jquery-ui/jquery-ui-1.7.2.portal.css" rel="stylesheet" type="text/css" /><link href="../../CSS/jquery-ui/jquery-ui-1.7.2.portal.customization.css" rel="stylesheet" type="text/css" /><link href="../../JS/jQuery/uploadify/uploadify.css" rel="stylesheet" type="text/css" /><!--[if lt IE 7]><link id="ctl00_ctl00_ie6Workaround" href="../../CSS/ie6-1.1.css" type="text/css" rel="stylesheet" /><![endif]--><link id="ctl00_ctl00_PrintStyle" href="../../CSS/Print-1.1.css" rel="stylesheet" media="print" type="text/css" /><title>
+	Naujienos - EDS
+</title><meta name="description" content="Visos naujienos" /><meta name="language" content="lt" /><style type="text/css">
+	.ctl00_ctl00_CmsSitePH_GlobalMenu_Menu_0 { background-color:white;visibility:hidden;display:none;position:absolute;left:0px;top:0px; }
+	.ctl00_ctl00_CmsSitePH_GlobalMenu_Menu_1 { text-decoration:none; }
+	.ctl00_ctl00_CmsSitePH_GlobalMenu_Menu_2 {  }
+	.ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftWebPartZone_0 { border-color:Black;border-width:1px;border-style:Solid; }
+	.ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftWebPartZone_1 {  }
+	.ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftWebPartZone_2 {  }
+	.ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_MainContentPlaceHolder_PageWebPartZone_0 { border-color:Black;border-width:1px;border-style:Solid; }
+	.ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_MainContentPlaceHolder_PageWebPartZone_1 {  }
+	.ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_MainContentPlaceHolder_PageWebPartZone_2 {  }
+
+</style></head>
+<body class="PortalBody PortalContent">
+    <form method="post" action="./NaujienosVISI.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__WPPS" id="__WPPS" value="s" />
+<input type="hidden" name="ctl00_ctl00_ScriptManager_HiddenField" id="ctl00_ctl00_ScriptManager_HiddenField" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=bdWUFELFME3eZurNvLXTtWcKdlDz54_qUWTWDkmTeHLhv_UFLQjuWBFk0PE1VRs89jvb2LkhQ3KVwBKMYQpMCrRAYHQ1&amp;t=639190941332169432" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=856L_wOk_EKqAerV3sKAINbJ5LEtUGCuhjboOHpivrfzjatlfNhlfxgz9uPo2QRqZcOTYrFZcLadB3PFg6VrJdAh1hAWcgZiLk2cdfzyx9iBS_qzyvUah9DRsuaRdS61a6P8193z77u6in70UyR_7aPxo7DAwAgd4N_WbyX0R8sf6Q7y0&amp;t=6d98035a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=A3dWSrMLBeZ_UKqA0nFFAuQHwg88gEkyGt2d-0uuL86Uj0JHDaAIYbdjCmxUA081Y09fG5bSxwvoHkryjY-l_aLg1IkxVv_Y6fsxKsWLX4wlNZWJoeXoEIko38PR3wKRUL3OVmIcaMjJw5SoKmS6aP2sXWB0imDh01YQ2xaOmvhmCXuN0&amp;t=6d98035a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=A2KLt-OkMiD8ITAY_E1-3TzlgCQ-eR1ft21nrqZkQUSRC1fT9s_ieDF_4XJ96fwjIyzAZgJIfawl1Nv4P4X5DGSVd_ETIc7PcuVSCXtC04Jl_sTHViVJaWsbh6-X8FQ_m5Elj2LzYAHOy62LFPS36bBFS92ncdqQe7fGc7g3VWCpt0Bl0&amp;t=6d98035a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=q10LFZLEVvfczETvRzLVG1gVhzDIn5HdxtkGr6dSrRbYKIRFQIZwKPpdmlUDbSqpvrVqBDzNLxdY-UFxZcwHINRLOuMflKISIGjrb5DzEFqCsvIH3jb8YlvZb-RIAG0ky3_PRS7TpiwZCUTJtUXJaqJj3wMMJDVzxwV40vH5t50frZyZ0&amp;t=6d98035a" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function ShowHide(elementId){   var element = document.getElementById(elementId);   if (element)    {                   if (element.style.display == 'none') { element.style.display = 'block'; } else { element.style.display = 'none'; }   }            }function ShowProgressBar() { var behavior = Sys.Application.findComponent('ctl00_ctl00_ProgressDivRequestVisible');behavior.ShowProgressBar();}//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=u0Y3ZvY-3X0YQXLHzl7YUb71IDMGxU8ZR-hEkCQCp4yS4Z4ZT6PcRWIXQ_sq-pZ-2y5DuAXNFiotkvRb7_Jbf81nJ3eC9uFhflVQKYV6J-lBQCCJ0u2e1WfFjtmQJ-TJxXsIIdgEHw_qztWFGzEsfAajKwVZZ_IR5wpR6a1SyefYhJF1nkDdT2ShzQj-XOr7Up_8etwcefgzNrXMM5BakYo21OY286ARclxPLeYdwuJEfzwtP4MJ2HNgLIvQfLrDrkORFmpZJruzkLXNSSQq0KWO9Cbwv3zW13_9PH6-3szkhkEX8yqz3oJXW7fG_ANBaeeNBFjlmUSUfisLcAXZZ4puWsPyYnVBxpq7f_T9LPjRkRCNbVWmhTqaEU1XBkcm_UPv_T_1J-A3EYlxpZmRhrTwj9if_7CKxwDZzW1zGuZXOPSnkXqIq6dkEguMCk4Oo2hnpZr_quqjMPY92LJe3C48Ff9rlmrHhb-JP42emopeKAXZ1JY9aYj7iyzYIuqalAfGtmdFpobewgIj3fbcCxy45C9Kvr-tV09d18jNp7LcjvXrB9G5vttZQZWfazEqB6bZ52zXMybgUiB-zTvEfJqtKlVIIOGRUC3hT6bUwG6MvkDnh3SA-MmMsSLxKN3u3TWVYebTauKQXZegvgfVv9UaZR842aOT05y_hfmid4qIyXUilQ6CYHAI1d9CTgAaJvwQXBWy87W6garxgGsi2vWknp2HREY35LElrGdIhKPDtyDcZA_8_H5pqmYUzWIrYW7zyiMGZKFBY2Y8OFajD1QbBGA1" type="text/javascript"></script>
+<script src="/lt/Naujienos/NaujienosVISI.aspx?_TSM_HiddenField_=ctl00_ctl00_ScriptManager_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.0.30930.28736%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3alt%3ab0eefc76-0092-471b-ab62-f3ddc8240d71%3a411fea1c%3a865923e8%3a77c58d20%3a91bd373d%3a14b56adc%3a596d588c%3a8e72a662%3aacd642d2%3a269a19ae" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=XiMlNCf44LPz6soiGlglhv6sk-xxFk_VhUhxwzm39R8GEgrqmCz16O1kIWYlNI4aTTSuiDbj9xHJqd1LWf0dj4_3iFwKSIgjIfNcT7iCuRRk9haEmJ36EUnwt7zDJA_-iezREnYiYhcFjjLhYoONrS2qs0MR71h18XwL7Z4EIVlZpEdobjJCHNQrRBhE0ei00LvDYY-qjetsLsanedC8ehtUkE41&amp;t=6d98035a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=ZShxuqgb76S8dmIqggNrRmemY9V1QJc8tYGN7-SKfkxQ6JsceppqrYVwlaGWxPPKknX8JfINyo3GmA4V_QKkjkT0mMrY_RAKBsH8PwCe6NDrkAq8GKxUrz47lbRuDzf4uRKv6ru-GUpgcqcTMzA0ekNcm5xxWRG2zzO6Lzb7AxQbZQrs0&amp;t=6d98035a" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="15EE2E3F" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="6sG3EDVpObuTVGGy9Gw92a5NdB6sW2Gl7frdI9o2vW86aqFTU7/P3UPj1m7bwZ5QRsUPh6GEhkEf8VTP3QvL47ApVOvPHyxNqUrjIBivMHnEH+lo6ctqOPF0RAffQmAZWgAccToClnn54135VHsQN3HLyiCfkNDA+an4HqelTLzI8aml229g4wH0bIu9/EymTyGoOxWswU6+K8/pMMhVoZ2Pv1KcP+oMtcP/yZ5hFB2zhuYhL1/UTNwJURLCwxArJj/xaNvpL9FpAE/9ev+UaecOg9nWUjrEb70AUTT1B3V6IBkRFFSzKtvz+e1YNrll2/fYI8DjgzVUoLiYYqWJqZkqkVUDAJ4s9HZztuODKlmFlD62OXW/I4cDEAsm1kWbcPPW+nwza2oHenugDJ+Q0bs7rf5SILU93EqgsuxNs/rqxIYapSFMOWnNO286dF2WckXfifFqIaZ9zDwlIclmgAjo0Awxm8GeTrOyjYE3ssOivAC9rgsduH3IqB7f2AMfJ/qDBoDW8rbGBTOjvwT1YhbKQ1Str7zTNsotvTFPUGtencJ4L8ZJ2dAARZf5fzF8b2oIwnYYXDN1xLbQRtihpP5zvcYUzTrDP2mTbMiAN0KtNDmeXr6OMlrymRYtzAWi9Ur3zhJDphqKzXSwDVOER8ihFv70B6DaGVk/WjMNYVSiwPuybOVXJrQRkUfFWx0T7NsBvDhmMD9OGgiLDBJ9Fi2ebScJof7U8cbqoMxJMVCInbNY2XjQ18zlDzgji9zWJ2/MNWeul41RXQ7gxZXNMl5tAFCBQtbvOIFKxFCTHdX/wYzRROrKuz9nJVyXGkyD3Ft1vDvYBsOOEtEwc6pTRedDQ2yZVqoMlv4GPoPGm8fjxwYujNSJsgCBGkJ1ydpgTL2qp5p5XGJoTtDiHrp9WaAt4GwPaDHlpc7E1hUhQKx9DOPd7Q331stEnl08VQFTs3mvkAkXYES/e9X6OnBJOy/Z7brxtkLPhl5l9xF00CG5O62CqrnW/NwBRQhEN95mrsHUVqIA/1XPl6njWGjBmr1ob7s2tcQIrEaWJqZ81dO4x5saqWQMBVhxC3amwZBc3Dubp/kd+/XBHVUrI3w7rSqqn04i13spF3SHtrdX7ZLB/kzxli1wn2Qsjs7zaXOG+tTt2V0iBre9exlzUN1LU6l671Q8ueNPB+TjJrLYxHrjieDjtrGWX28CFotR8pOe6pmvI4DXaPpm2Ogv5huSKJIoG55GUPbWFr+kQlYLPglfvSiZBajWFfhXFf8hKJT8fbuR4+lvQadcegrdnZDTDOHzSwz/U7LaYrpJMtEMbfNAnsO5x294p2LIX/ikLTSnn8Oe2Iro8hL9sjhaXOpEkFAF/4LBRNcMqV1ijWvHKWWxqC6Z+H7fTJeBjzJ10hbbdvdVjUmFL4Rcn1ilQRfMKvNx2Qg=" />
+</div>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager', 'aspnetForm', ['tctl00$ctl00$ManagerUP','','tctl00$ctl00$UP','','tctl00$ctl00$CmsSitePH$LoginCredidentials$CredentialsUP','','tctl00$ctl00$ctl30','','tctl00$ctl00$MPV_985410823$UP','','tctl00$ctl00$MPV_1397701229$UP','','tctl00$ctl00$CmsSitePH$GlobalMenu$MenuUpdatePanel','','tctl00$ctl00$CmsSitePH$SubMenu$MenuUp','','tctl00$ctl00$CmsSitePH$TaxPayerLoginCredidentials$CredentialsUP','','tctl00$ctl00$MPV__2092583455$UP','','tctl00$ctl00$MPV__344367673$UP','','tctl00$ctl00$CmsSitePH$PageContentPlaceHolder$LeftContentUP','','tctl00$ctl00$CmsSitePH$PageContentPlaceHolder$LeftContentPlaceHolder$LeftMenu$MenuUp','','tctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl04','','tctl00$ctl00$MPV_985410823$InfoForJS_UpdatePanel','','tctl00$ctl00$MPV_1397701229$InfoForJS_UpdatePanel','','tctl00$ctl00$MPV__2092583455$InfoForJS_UpdatePanel','','tctl00$ctl00$MPV__344367673$InfoForJS_UpdatePanel',''], [], [], 90, 'ctl00$ctl00');
+//]]>
+</script>
+
+    <table class="PopupManager" cellspacing="0" cellpadding="0" role="presentation" border="0" style="border-collapse:collapse;">
+	<tr>
+		<td><div id="ctl00_ctl00_ctl30">
+			<div id="ctl00_ctl00_MPV_985410823_ContentPanel" class="modal_content-portal" style="display:none;">
+				<div class="OuterPanel">
+					<div id="ctl00_ctl00_MPV_985410823_UP">
+						<div class="ConfirmationControl-portal">
+							<div class="Border">
+								<div class="Title">
+									<input type="image" name="ctl00$ctl00$MPV_985410823$CloseImage" id="ctl00_ctl00_MPV_985410823_CloseImage" class="Close" src="../../Images/Icons/popup-close-button.PNG" style="border-width:0px;" />Patvirtinkite
+								</div><div class="MessagePanel">
+									<span>Peržiūrėkite ir pakeiskite / patvirtinkite kontaktus atstovaujamo asmens kontekste</span>
+								</div><div class="Buttons">
+									<table class="CenterWraper" cellspacing="0" border="0" style="border-collapse:collapse;">
+										<tr>
+											<td><a role="button" id="ctl00_ctl00_MPV_985410823_OKButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV_985410823$OKButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Tęsti</span></span></span></span></a><a role="button" id="ctl00_ctl00_MPV_985410823_CancelButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV_985410823$CancelButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Ne</span></span></span></span></a></td>
+										</tr>
+									</table><div class="clear">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><input type="submit" name="ctl00$ctl00$MPV_985410823$DummyButton" value="" id="ctl00_ctl00_MPV_985410823_DummyButton" style="display:none;" /><div id="ctl00_ctl00_MPV_985410823_InfoForJS_Panel" style="display:none;">
+				<div id="ctl00_ctl00_MPV_985410823_InfoForJS_UpdatePanel">
+
+				</div>
+			</div><div id="ctl00_ctl00_MPV_1397701229_ContentPanel" class="modal_content-portal" style="display:none;">
+				<div class="OuterPanel">
+					<div id="ctl00_ctl00_MPV_1397701229_UP">
+						<div class="ConfirmationControl-portal">
+							<div class="Border">
+								<div class="Title">
+									<input type="image" name="ctl00$ctl00$MPV_1397701229$CloseImage" id="ctl00_ctl00_MPV_1397701229_CloseImage" class="Close" src="../../Images/Icons/popup-close-button.PNG" style="border-width:0px;" />Patvirtinkite
+								</div><div class="MessagePanel">
+									<span>Peržiūrėkite ir jeigu reikia atnaujinkite kontaktinius duomenis. Kontaktiniai duomenys bus keičiami nukreipiant į Mano VMI.</span>
+								</div><div class="Buttons">
+									<table class="CenterWraper" cellspacing="0" border="0" style="border-collapse:collapse;">
+										<tr>
+											<td><a role="button" id="ctl00_ctl00_MPV_1397701229_OKButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV_1397701229$OKButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Tęsti</span></span></span></span></a><a role="button" id="ctl00_ctl00_MPV_1397701229_CancelButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV_1397701229$CancelButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Ne</span></span></span></span></a></td>
+										</tr>
+									</table><div class="clear">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><input type="submit" name="ctl00$ctl00$MPV_1397701229$DummyButton" value="" id="ctl00_ctl00_MPV_1397701229_DummyButton" style="display:none;" /><div id="ctl00_ctl00_MPV_1397701229_InfoForJS_Panel" style="display:none;">
+				<div id="ctl00_ctl00_MPV_1397701229_InfoForJS_UpdatePanel">
+
+				</div>
+			</div><div id="ctl00_ctl00_MPV__2092583455_ContentPanel" class="modal_content-portal" style="display:none;">
+				<div class="OuterPanel">
+					<div id="ctl00_ctl00_MPV__2092583455_UP">
+						<div class="ConfirmationControl-portal">
+							<div class="Border">
+								<div class="Title">
+									<input type="image" name="ctl00$ctl00$MPV__2092583455$CloseImage" id="ctl00_ctl00_MPV__2092583455_CloseImage" class="Close" src="../../Images/Icons/popup-close-button.PNG" style="border-width:0px;" />Patvirtinkite
+								</div><div class="MessagePanel">
+									<span>Peržiūrėkite ir pakeiskite / patvirtinkite kontaktus atstovaujamo asmens kontekste</span>
+								</div><div class="Buttons">
+									<table class="CenterWraper" cellspacing="0" border="0" style="border-collapse:collapse;">
+										<tr>
+											<td><a role="button" id="ctl00_ctl00_MPV__2092583455_OKButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV__2092583455$OKButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Tęsti</span></span></span></span></a><a role="button" id="ctl00_ctl00_MPV__2092583455_CancelButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV__2092583455$CancelButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Ne</span></span></span></span></a></td>
+										</tr>
+									</table><div class="clear">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><input type="submit" name="ctl00$ctl00$MPV__2092583455$DummyButton" value="" id="ctl00_ctl00_MPV__2092583455_DummyButton" style="display:none;" /><div id="ctl00_ctl00_MPV__2092583455_InfoForJS_Panel" style="display:none;">
+				<div id="ctl00_ctl00_MPV__2092583455_InfoForJS_UpdatePanel">
+
+				</div>
+			</div><div id="ctl00_ctl00_MPV__344367673_ContentPanel" class="modal_content-portal" style="display:none;">
+				<div class="OuterPanel">
+					<div id="ctl00_ctl00_MPV__344367673_UP">
+						<div class="ConfirmationControl-portal">
+							<div class="Border">
+								<div class="Title">
+									<input type="image" name="ctl00$ctl00$MPV__344367673$CloseImage" id="ctl00_ctl00_MPV__344367673_CloseImage" class="Close" src="../../Images/Icons/popup-close-button.PNG" style="border-width:0px;" />Patvirtinkite
+								</div><div class="MessagePanel">
+									<span>Peržiūrėkite ir jeigu reikia atnaujinkite kontaktinius duomenis. Kontaktiniai duomenys bus keičiami nukreipiant į Mano VMI.</span>
+								</div><div class="Buttons">
+									<table class="CenterWraper" cellspacing="0" border="0" style="border-collapse:collapse;">
+										<tr>
+											<td><a role="button" id="ctl00_ctl00_MPV__344367673_OKButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV__344367673$OKButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Tęsti</span></span></span></span></a><a role="button" id="ctl00_ctl00_MPV__344367673_CancelButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$MPV__344367673$CancelButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Ne</span></span></span></span></a></td>
+										</tr>
+									</table><div class="clear">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><input type="submit" name="ctl00$ctl00$MPV__344367673$DummyButton" value="" id="ctl00_ctl00_MPV__344367673_DummyButton" style="display:none;" /><div id="ctl00_ctl00_MPV__344367673_InfoForJS_Panel" style="display:none;">
+				<div id="ctl00_ctl00_MPV__344367673_InfoForJS_UpdatePanel">
+
+				</div>
+			</div>
+		</div></td>
+	</tr>
+</table>
+    
+    <div style="display: none;">
+        <div id="ctl00_ctl00_ManagerUP">
+	
+                <div id="ctl00_ctl00_wpManager">
+
+	</div>
+            
+</div>
+    </div>
+     
+    <div id="ctl00_ctl00_UP">
+	
+            
+    <div id="PageZone">
+        <div class="PrintOnly">
+            <img id="ctl00_ctl00_CmsSitePH_PrintLogo" src="../../Images/EDS/Logo_Print.gif" alt="Logo" style="border-width:0px;" />
+        </div>
+        <div id="PageHeader" class="NotPrintable">
+            <div id="LogoBlock" class="NotPrintable">
+                <a href="../../Default.aspx" id="ctl00_ctl00_CmsSitePH_HomeLink" class="Logo"><span id="Logo"></span></a>
+            </div>
+            <div id="LoginBlock" class="NotPrintable">
+                <table cellpadding="0" cellspacing="0" role="presentation">
+                    <tr>
+                        <td id="Line1">
+                            <span id="TermsOfUse">
+                                
+                            </span>
+                            <span id="Structure">
+                                <a id="ctl00_ctl00_CmsSitePH_SiteMapLink_SiteMap" href="../Apie_formu_teikima/Apie/SvetainesStruktura.aspx">STRUKTŪRA</a>
+                            </span>
+                            <span id="Languages">
+                                
+        
+        <a id="ctl00_ctl00_CmsSitePH_LangSelection_Languages_ctl00_LangLink" title="lietuvių" class="selected" href="javascript:__doPostBack(&#39;ctl00$ctl00$CmsSitePH$LangSelection$Languages$ctl00$LangLink&#39;,&#39;&#39;)">LT</a>
+    &nbsp;
+        
+        <a id="ctl00_ctl00_CmsSitePH_LangSelection_Languages_ctl02_LangLink" title="english" href="javascript:__doPostBack(&#39;ctl00$ctl00$CmsSitePH$LangSelection$Languages$ctl02$LangLink&#39;,&#39;&#39;)">EN</a>
+    
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="Line2">
+                            <div id="ctl00_ctl00_CmsSitePH_LoginCredidentials_CredentialsUP">
+		
+        <div id="ctl00_ctl00_CmsSitePH_LoginCredidentials_UserInfo" class="User">
+			
+            <span id="ctl00_ctl00_CmsSitePH_LoginCredidentials_UserLabel" class="UserLabel">Naudotojas:</span>
+            <span id="ctl00_ctl00_CmsSitePH_LoginCredidentials_UserName" class="UserName">NEPRISIJUNGĘS</span>
+            <span class="LogOff">
+                <a href="/Auth/LogOffManagement.aspx" id="ctl00_ctl00_CmsSitePH_LoginCredidentials_LogOffBtn" target="_top">Prisijungti</a>
+            </span>
+        
+		</div>
+        
+        
+    
+	</div>
+
+
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div id="MainToolbar" class="NotPrintable">
+            <div id="GlobalMenuBlock">
+                <div id="AccessibilityBlock" class="NotPrintable">
+                    <span id="Accessibility">
+                        <a id="ctl00_ctl00_CmsSitePH_AccessibilityButton" href="javascript:__doPostBack(&#39;ctl00$ctl00$CmsSitePH$AccessibilityButton&#39;,&#39;&#39;)">NEĮGALIESIEMS</a></span>
+                </div>
+                <div id="GlobalMenu">
+                    <div id="ctl00_ctl00_CmsSitePH_GlobalMenu_MenuUpdatePanel">
+		
+        
+
+		<div class="AspNet-Menu-Horizontal headerMainLinks" id="ctl00_ctl00_CmsSitePH_GlobalMenu_Menu">
+				<ul class="AspNet-Menu">
+					<li class="  AspNet-Menu-Selected level0">
+
+							<div class="BgrTop"><div class="BgrBottom AspNet-Menu-Leaf"><a href="NaujienosVISI.aspx?menu=1" class="AspNet-Menu-Link  AspNet-Menu-Selected level0 lines1">
+								Naujienos</a></div></div>
+					</li>
+					<li class=" level0">
+
+							<div class="BgrTop"><div class="BgrBottom AspNet-Menu-Leaf"><a href="../Formu_sarasas.aspx?menu=1" class="AspNet-Menu-Link level0 lines1">
+								Formų sąrašas</a></div></div>
+					</li>
+					<li class=" level0">
+
+							<div class="BgrTop"><div class="BgrBottom AspNet-Menu-Leaf"><a href="../Apie_formu_teikima/Apie_formu_teikima_1/PradineInformacija.aspx?menu=1" class="AspNet-Menu-Link level0 lines1">
+								Apie formų teikimą</a></div></div>
+					</li>
+				</ul>
+
+		</div>    
+    
+	</div>
+
+
+                </div>
+            </div>
+            <div id="SubMenuBlock">
+                <div id="SubMenu">
+                    <div id="ctl00_ctl00_CmsSitePH_SubMenu_MenuUp">
+		
+        
+        
+		<div class="AspNet-Menu-Horizontal submenuLinks" id="ctl00_ctl00_CmsSitePH_SubMenu_Menu">
+
+		</div>
+    
+	</div>
+
+                </div>
+                <div id="TaxPayerBlock">
+                    <div class="LoginCredidentials">
+                        <div id="ctl00_ctl00_CmsSitePH_TaxPayerLoginCredidentials_CredentialsUP">
+		
+        
+        
+        
+    
+	</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="WhiteSeparator" style="clear: both;">
+        </div>
+        
+            <table id="PageContent" cellspacing="0" cellpadding="0" border="0" role="presentation">
+                <tr class="NotPrintable">
+                    <td style="background-color: White;">
+                    </td>
+                    <td colspan="2" id="Breadcrumb">
+                        
+                            <span id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_BreadcrumbPlaceHolder_BreadCrumb1_SiteMapPath1"><a href="#ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_BreadcrumbPlaceHolder_BreadCrumb1_SiteMapPath1_SkipLink"><img alt="Skip Navigation Links" src="/WebResource.axd?d=iBdrreQtpcfiMEEdHfbdtY9p0MDFzuwCSgdZ0FDbCf_z-fUc8qfHH9jhWldOIQacdpUJsvJW8UQrk2n4Ffh0TfuomrY1&amp;t=639190941332169432" width="0" height="0" style="border-width:0px;" /></a><a id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_BreadcrumbPlaceHolder_BreadCrumb1_SiteMapPath1_SkipLink"></a></span>
+
+
+                            
+                            
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td id="LeftContent" class="NotPrintable" valign="top">
+                        <div id="LeftContentContainer">
+                            <div id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentUP">
+		
+                                    
+                                        <div id="MainNavigation">
+                                            <div id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftMenu_MenuUp">
+			
+        
+        
+			<div class="AspNet-Menu-Vertical " id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftMenu_Menu">
+
+			</div>
+    
+		</div>
+
+                                        </div>
+                                        <div id="MainNavigationEnding">
+                                            <div class="Left">
+                                                <div class="Right">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="LeftWebPartZone">
+                                            <table cellspacing="0" cellpadding="0" border="0" id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftWebPartZone" class="WebPartZone LeftWebPartZone" role="presentation" style="width:100%;">
+			<tr>
+				<td style="height:100%;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;height:100%;">
+					<tr>
+						<td><div class="WebPartContainer ">
+							<div class="WebPartTop">
+								<div class="Left">
+									<div class="Right">
+
+									</div>
+								</div>
+							</div><table class="PartChromeStyle ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_LeftContentPlaceHolder_LeftWebPartZone_1" cellspacing="0" cellpadding="2" border="0" style="width:100%;">
+								<tr>
+									<td class="PartStyle" style="padding:5px;"><div id="ctl00_ctl00_wpManager_wp1926354406_wp1139376390_ImmagePickerPlaceholder">
+
+									</div>
+<div>
+    <a href="https://www.vmi.lt/mvmi/" target="_blank"><img id="ctl00_ctl00_wpManager_wp1926354406_wp1139376390_BannerImage" src="../../Controls/WebParts/CMSDownloadHandler.ashx?imagekey=d071b248-af87-417e-9651-f67125566da2&amp;amp;refreshtimekey=638260460593718394&amp;amp;fileextensionkey=png" style="height:55px;width:155px;border-width:0px;" /></a>
+</div></td>
+								</tr>
+							</table><div class="WebPartBottom">
+								<div class="Left">
+									<div class="Right">
+
+									</div>
+								</div>
+							</div>
+						</div></td>
+					</tr><tr>
+						<td style="padding:0;height:100%;"></td>
+					</tr>
+				</table></td>
+			</tr>
+		</table>
+                                        </div>
+                                    
+                                
+	</div>
+                        </div>
+                    </td>
+                    <td id="MiddleContent" valign="top">
+                        <div class="MainContentTop ContentTop">
+                            <div class="Left">
+                                <div class="Right">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="MainContent" class="ContentZone">
+                            <input type="hidden" name="ContentZoneLabel" class="ContentZoneLabel" value="Pagrindinė zona" />
+                            
+
+                            
+
+                            
+
+<noscript>
+    <div style="padding: 10px;">
+        <div class="errors-portal">
+            <div class="error-portal">
+                <span id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_DisabledJavascriptInfoCtrl_ErrorMessageLabel">Svetainės naršymui būtinas Javascript palaikymas. Jį įjungti galite naršyklės nustatymuose.</span>            
+            </div>
+        </div>
+    </div>
+</noscript>
+                            
+                            
+                            <div class="MainTitle">
+                                
+    <h1>Naujienos</h1>
+    
+
+                            </div>
+                            
+            <table cellspacing="0" cellpadding="0" border="0" id="ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_MainContentPlaceHolder_PageWebPartZone" class="WebPartZone " role="presentation" style="width:100%;">
+		<tr>
+			<td style="height:100%;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;height:100%;">
+				<tr>
+					<td><div class="WebPartContainer ">
+						<div class="WebPartTop">
+							<div class="Left">
+								<div class="Right">
+
+								</div>
+							</div>
+						</div><table class="PartChromeStyle ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_MainContentPlaceHolder_PageWebPartZone_1" cellspacing="0" cellpadding="2" border="0" style="width:100%;">
+							<tr>
+								<td class="PartStyle" style="padding:5px;">
+        
+        <div class="HtmlWebPart"><ul>
+    <li>Norėdami perskaityti naujieną turite paspausti ant naujienos pavadinimo.</li>
+</ul></div>
+    </td>
+							</tr>
+						</table><div class="WebPartBottom">
+							<div class="Left">
+								<div class="Right">
+
+								</div>
+							</div>
+						</div>
+					</div></td>
+				</tr><tr>
+					<td><div class="WebPartContainer ">
+						<div class="WebPartTop">
+							<div class="Left">
+								<div class="Right">
+
+								</div>
+							</div>
+						</div><table class="PartChromeStyle ctl00_ctl00_CmsSitePH_PageContentPlaceHolder_MainContentPlaceHolder_PageWebPartZone_1" cellspacing="0" cellpadding="2" border="0" style="width:100%;">
+							<tr>
+								<td class="PartStyle" style="padding:5px;"><div  id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel"><div id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl04">
+									<div>
+										
+        <div class="filter_main-portal">
+											<div id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header" class="filter_header-portal">
+												<span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_showImage" class="FilterShowImage" onclick="DisplayFilter(&#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_showImage&#39;, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_hideImage&#39;, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03&#39;, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_stateField&#39;);" style="display:none;">&nbsp;&nbsp;&nbsp;</span><span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_hideImage" class="FilterHideImage" onclick="DisplayFilter(&#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_showImage&#39;, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_hideImage&#39;, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03&#39;, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_stateField&#39;);" style="display:;">&nbsp;&nbsp;&nbsp;</span><input type="hidden" name="ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$Header$stateField" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_Header_stateField" value="true" /><span class="FilterCaption">Filtras</span>
+											</div><div id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03" class="filter_content-portal" onkeypress="javascript:return FireDefaultButton(event, &#39;ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_FilterButtonCtrl&#39;)" style="display:block;">
+												
+        <table cellspacing="0" role="presentation" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_InputForm1" class="InputForm">
+													
+                
+                <tr class="InputForm">
+														<td class="container_caption"><label for="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_NewsTargetPicker" class="ContainerLabel">Fizinis/Juridinis:</label></td><td class="container_content">
+                        <select name="ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$ctl03$NewsTargetPicker" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_NewsTargetPicker" class="DropDown">
+															<option value="Juridical">Juridiniai asmenys</option>
+															<option value="Physical">Fiziniai asmenys</option>
+															<option selected="selected" value="All">Visi</option>
+
+														</select>
+                    </td>
+													</tr>                        
+                
+                <tr class="InputForm">
+														<td class="container_caption"><span class="ContainerLabel">Galiojimas:</span></td><td class="container_content">
+                        <select name="ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$ctl03$NewsActualityStatePicker" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_NewsActualityStatePicker" class="DropDown">
+															<option selected="selected" value="All">Visos</option>
+															<option value="Actual">Galiojančios</option>
+															<option value="Archived">Archyvinės</option>
+
+														</select>
+                    </td>
+													</tr>                        
+            
+												</table>
+        
+        
+<table class="InputForm" cellspacing="0" role="presentation">
+													<tr>
+														<td class="container_caption"><label for="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_FormClassificationBlockCtrl_FormNameTextField" class="ContainerLabel">Formos pavadinimas:</label></td><td class="container_content">
+        <input name="ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$ctl03$FormClassificationBlockCtrl$FormNameTextField" type="text" maxlength="15" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_FormClassificationBlockCtrl_FormNameTextField" title="Nurodykite formos pavadinimą" class="TextBox" /><br />
+        
+    </td>
+													</tr>
+												</table>
+
+
+
+
+
+
+        <table class="InputForm" cellspacing="0" role="presentation">
+													<tr>
+														<td class="container_caption"><label for="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_FormClassificationBlockCtrl_ClassifierRepeater_ctl00_ClDropDown" class="ContainerLabel">Mokestis:</label></td><td class="container_content">
+                <select name="ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$ctl03$FormClassificationBlockCtrl$ClassifierRepeater$ctl00$ClDropDown" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_FormClassificationBlockCtrl_ClassifierRepeater_ctl00_ClDropDown" class="DropDown">
+															<option selected="selected" value=""></option>
+															<option value="e5ce5efa-ec75-4166-8fc5-df8403338028">Gyventojų pajamų mokestis</option>
+															<option value="77c3c0c7-b75c-4150-9763-95e5e2af6282">Pridėtinės vertės mokestis</option>
+															<option value="031999a5-7e28-415e-a1b9-0b089faae7fe">Pelno mokestis</option>
+															<option value="a3eb79f5-7257-4d8b-88d2-e7c22d1b2c5f">Nekilnojamojo turto mokestis</option>
+															<option value="463cadd8-aa33-47c1-b827-42174cd6ead0">Teršimo/gamtos išteklių mokesčiai</option>
+															<option value="8e4b680c-b0e9-4049-92be-4a041c17836b">Akcizai</option>
+															<option value="3f8e298e-61c2-413b-ab90-108fef193010">Kita</option>
+
+														</select>
+            </td>
+													</tr>
+												</table>
+    
+
+        
+        <div class="button_wrapper-portal"><div class="button_wrapper-portal-inner">
+                <a role="button" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_FilterButtonCtrl" class="PortalButton Edit" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$ctl03$FilterButtonCtrl&quot;, &quot;&quot;, true, &quot;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl&quot;, &quot;&quot;, false, true))"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Filtruoti</span></span></span></span></a>
+                <a role="button" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_NewsListFP_ctl03_ClearFilterButton" class="PortalButton Edit" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListFilterCtrl$NewsListFP$ctl03$ClearFilterButton&#39;,&#39;&#39;)"><span class="Main"><span class="Right"><span class="Left"><span class="Icon">Pradinis sąrašas</span></span></span></span></a>
+            <div style="clear:both;"></div></div><div style="clear: both;"></div></div>
+    
+											</div>
+										</div>
+<span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListFilterCtrl_VSH"></span>
+        <span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_SkinHelperCtrl"></span>
+
+<div>
+											<table class="data_table-portal" cellspacing="0" border="0" id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl" style="border-collapse:collapse;">
+												<tr class="PagerTopRow">
+													<td colspan="2"><div class="Pager">
+														<table border="0">
+															<tr>
+																<td><span>1</span></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$2&#39;)">2</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$3&#39;)">3</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$4&#39;)">4</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$5&#39;)">5</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$6&#39;)">6</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$7&#39;)">7</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$8&#39;)">8</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$9&#39;)">9</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$10&#39;)">10</a></td><td><a href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl&#39;,&#39;Page$11&#39;)">...</a></td>
+															</tr>
+														</table>
+													</div><div class="PageCount">
+														<span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl01_GridViewTotalCount">Rodomi pirmi 400 įrašai</span>
+													</div><div class="PagerSize">
+														<span class="page_size_textbefore-portal">Rodyti po</span><span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl01_PZC10" class="PagerSizeActiveButton">10</span><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl01_PZC25" class="PagerSizeButton" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl01$PZC25&#39;,&#39;&#39;)">25</a><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl01_PZC50" class="PagerSizeButton" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl01$PZC50&#39;,&#39;&#39;)">50</a><span class="page_size_textafter-portal"></span>
+													</div></td>
+												</tr><tr>
+													<th aria-sort="descending" scope="col" style="width:60px;"><div class="data_table_header-portal">
+														<table role="presentation" class="header_table-portal">
+															<tr>
+																<td><a title="Keisti rūšiavimą" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl02$ctl08&#39;,&#39;&#39;)">Data</a></td>
+																<td style="width:1%;"><a title="Surūšiuota mažėjančiai" class=" sort_desc" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl02$ctl09&#39;,&#39;&#39;)">&nbsp;</a></td>
+															</tr>
+														</table>
+
+													</div></th><th scope="col"><div class="data_table_header-portal">
+														<table role="presentation" class="header_table-portal">
+															<tr>
+																<td><a title="Keisti rūšiavimą" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl02$ctl24&#39;,&#39;&#39;)">Naujienos pavadinimas</a></td>
+															</tr>
+														</table>
+
+													</div></th>
+												</tr><tr class="odd">
+													<td style="width:60px;white-space:nowrap;">2026-09-02</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl03_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=d78088ad-7cb5-4383-97ca-9dc055f9be8b">Dėl pateikto dokumento duomenų anuliavimo</a>
+            </td>
+												</tr><tr class="even">
+													<td style="width:60px;white-space:nowrap;">2026-08-28</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl04_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=ddddde08-141e-4c0e-bf00-42a71699a862">Informacija dėl PVM deklaracijų duomenų ir prievolių</a>
+            </td>
+												</tr><tr class="odd">
+													<td style="width:60px;white-space:nowrap;">2026-08-27</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl05_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=62128439-6212-47d3-8abf-18cc30aa4617">Dėl prisijungimo prie EDS</a>
+            </td>
+												</tr><tr class="even">
+													<td style="width:60px;white-space:nowrap;">2026-08-26</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl06_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=cf1e9364-4ad8-49dd-8489-45208874bbc0">Informacija dėl PVM deklaracijų duomenų ir prievolių</a>
+            </td>
+												</tr><tr class="odd">
+													<td style="width:60px;white-space:nowrap;">2026-07-15</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl07_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=fb006571-ee57-4b15-bcaa-491ddb255535">Atnaujinta PVM101 deklaracijos forma</a>
+            </td>
+												</tr><tr class="even">
+													<td style="width:60px;white-space:nowrap;">2026-06-11</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl08_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=ec423d4d-ca4c-4da5-a540-f0d29d4f4239">Dėl PVM101 deklaracijų</a>
+            </td>
+												</tr><tr class="odd">
+													<td style="width:60px;white-space:nowrap;">2026-05-28</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl09_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=bea09d96-77dd-46d1-9474-a2eaca84d281">Dėl PLN204A formos pildymo</a>
+            </td>
+												</tr><tr class="even">
+													<td style="width:60px;white-space:nowrap;">2026-05-28</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl10_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=1338f771-4d00-425e-bbb8-925ba078e45a">Dėl PLN204N formos pildymo</a>
+            </td>
+												</tr><tr class="odd">
+													<td style="width:60px;white-space:nowrap;">2026-05-05</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl11_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=fc1b47b0-6fa3-4f31-a122-ac10bc3fcb20">Dėl GPM311 trikio</a>
+            </td>
+												</tr><tr class="even">
+													<td style="width:60px;white-space:nowrap;">2026-04-15</td><td>
+                <a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl12_NewsTitleHyperLink" href="../Korteles/Naujienos_kortele/Naujienos_kortele.aspx?newsitemid=bafcd926-661b-4962-a872-81e253c39e0e">Dėl pateiktų deklaracijų apdorojimo vėlavimo</a>
+            </td>
+												</tr><tr class="PagerBottomRow">
+													<td colspan="2"><div class="Pager">
+														<table cellspacing="0" role="presentation" border="0" style="border-collapse:collapse;">
+															<tr>
+																<td><span class="PagerLabel">Puslapiai:</span></td><td class="PageNavigator"><a title="Ankstesnis sąrašo puslapis" class="Disabled" aria-disabled="true" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$ctl18&#39;,&#39;&#39;)">&laquo;</a></td><td class="Selected"><span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB0">1</span></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB1" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB1&#39;,&#39;&#39;)">2</a></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB2" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB2&#39;,&#39;&#39;)">3</a></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB3" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB3&#39;,&#39;&#39;)">4</a></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB4" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB4&#39;,&#39;&#39;)">5</a></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB5" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB5&#39;,&#39;&#39;)">6</a></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB6" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB6&#39;,&#39;&#39;)">7</a></td><td class="Disabled"><span id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB7">...</span></td><td><a id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_GridViewCtrl_ctl14_PB39" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$PB39&#39;,&#39;&#39;)">40</a></td><td class="PageNavigator"><a title="Kitas sąrašo puslapis" href="javascript:__doPostBack(&#39;ctl00$ctl00$wpManager$wp1917912322$wp1769767504$ListFilterPanel$ctl07$ListCtrl$GridViewCtrl$ctl14$ctl19&#39;,&#39;&#39;)">&raquo;</a></td>
+															</tr>
+														</table>
+													</div></td>
+												</tr>
+											</table>
+										</div>
+
+<div class="AllNewsLink">
+    <div id="ctl00_ctl00_wpManager_wp1917912322_wp1769767504_ListFilterPanel_ctl07_ListCtrl_AllNewsPanel" class="FloatDirectionRight">
+											
+        
+    
+										</div>
+</div>
+
+
+
+   
+									</div>
+								</div></div></td>
+							</tr>
+						</table><div class="WebPartBottom">
+							<div class="Left">
+								<div class="Right">
+
+								</div>
+							</div>
+						</div>
+					</div></td>
+				</tr><tr>
+					<td style="padding:0;height:100%;"></td>
+				</tr>
+			</table></td>
+		</tr>
+	</table>
+
+                            <br />
+                            
+                        </div>
+                        <div id="MiddleContentExpander">
+                        </div>
+                    </td>
+                    <td id="RightContent" class="NotPrintable" valign="top">
+                        <div id="RightContentZone" class="RightWebPartZone ContentZone">
+                            <input type="hidden" name="ContentZoneLabel" class="ContentZoneLabel" value="Dešinė zona" />
+                            
+                            
+                        </div>
+                    </td>
+                </tr>
+                <tr class="NotPrintable">
+                    <td>
+                    </td>
+                    <td class="MainContentBottom ContentBottom">
+                        <div class="Left">
+                            <div class="Right">
+                            </div>
+                        </div>
+                    </td>
+                    <td class="RightContentBottom">
+                    </td>
+                </tr>
+            </table>
+        
+        
+        <div class="homeArea footerArea NotPrintable">
+            <table style="width: 100%" role="presentation">
+                <tr>
+                    <td>
+                        <div class="FooterLinks">
+                            <a href="../../lt/EDS_apatines_nuorodos/Apie_EDS.aspx">Apie EDS</a>
+<a href="https://www.vmi.lt/evmi/nuotolines-paslaugos" target="_blank" >Kontaktai</a>
+<a href="../../lt/EDS_apatines_nuorodos/D_U_K.aspx">D.U.K.</a>
+<a href="https://www.vmi.lt/" target="_blank" >VMI svetainė</a>
+<a href="https://www.vmi.lt/mvmi/" title="Mano VMI">Mano VMI</a>
+<a href="https://www.facebook.com/Valstybinemokesciuinspekcija" target="_blank" >VMI<img height="13px" width="13px" class="HtmlEditorImageFloatUndefinedCssClass" alt="" src="CMSDownloadHandler.ashx?imagekey=7a799d2f-ca29-4418-ab99-f6225958cbf4" /></a> <a id="ctl00_ctl00_CmsSitePH_RssHyperLink" class="RssText" href="../news.ashx?rssfeedlist=true"></a>
+                        </div>
+                        <div class="Copyright">
+                            &copy;2010. Valstybinė mokesčių inspekcija prie Lietuvos Respublikos finansų ministerijos
+                        </div>
+                        <div class="Version">
+                            Versija 3.0.0.145
+                        </div>
+                    </td>
+                    <td style="width: 1%">
+                        <img class="EU_logo" src="../../Images/EDS/EU_Logo.gif" alt="EU Logo" style="border-width:0px;" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="PrintFooter" class="PrintOnly">
+            Duomenys yra konfidencialūs.
+        </div>
+    </div>
+    <div id="ctl00_ctl00_CmsSitePH_cookieMessage" class="cookie-message" role="presentation">
+        <div class="cookie-message-center">
+            <div class="CoockieButtonComment">Informuojame, kad siekdami užtikrinti tinkamą šios svetainės veikimą, naudojame techninius slapukus.<br>Daugiau informacijos <a target="_blank" rel="noopener noreferrer" href="https://www.vmi.lt/evmi/documents/20142/621668/Slapuku+politika+2025+m.pdf/9e739374-9579-5723-69c0-263b092bc5eb?t=1744955817558">Slapukų politika</a>. </div>
+            <div class="CoockieButtonBlock">
+                <input type="submit" name="ctl00$ctl00$CmsSitePH$CoockieButton" value="Supratau " id="ctl00_ctl00_CmsSitePH_CoockieButton" />
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+        
+</div>
+
+  
+    <div id="ctl00_ctl00_ProgressDiv" class="ProgressIcon">
+        <img src="../../Images/EDS/ajax-loader-portal.gif" id="ctl00_ctl00_ProgressImg" alt="Vykdomas užklausimas į serverį" />
+    </div>
+    
+    
+    <!--[if lt IE 7]>
+    <div id='IE6modal_background-portal' class='IE6modal_background-portal NotPrintable' style='display: none'>&nbsp;</div>
+    <![endif]-->
+    
+        
+    
+    
+    <div><input id="ctl00_ctl00_AccessibilityModeHiddenField" type="hidden" name="AccessibilityMode" value="False"></input></div><div><input id="ctl00_ctl00_TaxPayerHiddenField" type="hidden" name="TaxPayer" value=""></input></div>
+
+<script type="text/javascript">
+//<![CDATA[
+RegisterChecks();(function() {var fn = function() {$get('ctl00_ctl00_ScriptManager_HiddenField').value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='Žiniatinklio dalis bus pašalinta iš puslapio. Norėdami tęsti pašalinimą spauskite OK. Norėdami palikti žiniatinklio dalį puslapyje, spauskite Cancel.';Sys.Application.add_init(function() {
+    $create(ASW.Core.WebControls.ModalPopups.CustomModalPopup.CustomModalPopupBehavior, {"ActivationInfoControlID":"ControlActivatedOnStartup","BackgroundCssClass":"modal_background-portal","OkControlID":"ctl00_ctl00_MPV_985410823_DummyButton","PopupControlID":"ctl00_ctl00_MPV_985410823_ContentPanel","dynamicServicePath":"/lt/Naujienos/NaujienosVISI.aspx","id":"ModalPopupExtenderBehaviorctl00$ctl00$MPV_985410823"}, null, null, $get("ctl00_ctl00_MPV_985410823_DummyButton"));
+});
+Sys.Application.add_init(function() {
+    $create(ASW.Core.WebControls.ModalPopups.CustomModalPopup.CustomModalPopupBehavior, {"ActivationInfoControlID":"ControlActivatedOnStartup","BackgroundCssClass":"modal_background-portal","OkControlID":"ctl00_ctl00_MPV_1397701229_DummyButton","PopupControlID":"ctl00_ctl00_MPV_1397701229_ContentPanel","dynamicServicePath":"/lt/Naujienos/NaujienosVISI.aspx","id":"ModalPopupExtenderBehaviorctl00$ctl00$MPV_1397701229"}, null, null, $get("ctl00_ctl00_MPV_1397701229_DummyButton"));
+});
+Sys.Application.add_init(function() {
+    $create(ASW.Core.WebControls.ModalPopups.CustomModalPopup.CustomModalPopupBehavior, {"ActivationInfoControlID":"ControlActivatedOnStartup","BackgroundCssClass":"modal_background-portal","OkControlID":"ctl00_ctl00_MPV__2092583455_DummyButton","PopupControlID":"ctl00_ctl00_MPV__2092583455_ContentPanel","dynamicServicePath":"/lt/Naujienos/NaujienosVISI.aspx","id":"ModalPopupExtenderBehaviorctl00$ctl00$MPV__2092583455"}, null, null, $get("ctl00_ctl00_MPV__2092583455_DummyButton"));
+});
+Sys.Application.add_init(function() {
+    $create(ASW.Core.WebControls.ModalPopups.CustomModalPopup.CustomModalPopupBehavior, {"ActivationInfoControlID":"ControlActivatedOnStartup","BackgroundCssClass":"modal_background-portal","OkControlID":"ctl00_ctl00_MPV__344367673_DummyButton","PopupControlID":"ctl00_ctl00_MPV__344367673_ContentPanel","dynamicServicePath":"/lt/Naujienos/NaujienosVISI.aspx","id":"ModalPopupExtenderBehaviorctl00$ctl00$MPV__344367673"}, null, null, $get("ctl00_ctl00_MPV__344367673_DummyButton"));
+});
+Sys.Application.add_init(function() {
+    $create(ASW.RequestVisibleBehavior, {"id":"ctl00_ctl00_ProgressDivRequestVisible"}, null, null, $get("ctl00_ctl00_ProgressDiv"));
+});
+//]]>
+</script>
+</form>
+
+    
+    
+    
+
+</body>
+</html>

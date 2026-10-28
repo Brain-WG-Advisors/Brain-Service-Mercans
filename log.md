@@ -467,3 +467,5 @@
 2026-10-28 | pipeline/Colombia | Skill payroll-compliance-colombia recompilada (CCG v1.4, WTC v1.6, DD v1.3, SIR v1.1, 7 specs v1.0) em Research Pipeline/Colombia/2026-10-28-skill/ com CONFERENCIA; C19/C21/C24/C26 mantidos abertos; não instalada.
 2026-10-28 | pipeline | Fecha a sessão: sessoes/2026-10-28-pipeline.md; frentes/pipeline/estado.md atualizado.
 2026-10-28 | geral/Colombia | Usuário enviou a resposta à Heidy (PMI Review). Hub Colombia: pendência fechada, nova pendência aguardando BAU (WT por faixa, tipo de pensão, tipo 5/6, confirmação de junho pela PMI), decisão de 28/10 ajustada; correcoes.md: linha 2026-10-28 (pergunta estatutária devolvida à BAU).
+- 2026-10-28 | chat | E-mail ao Marko: acrescentado 'Overall, we are at about 60% complete.' (percentual informado pelo usuário, dito na reunião de hoje). Rascunho conferido: texto, imagem e Cc (Muhammad, Manju). Não enviado.
+2026-10-28 | geral | Skill brain-service (pacote de 28/10: 60 arquivos, 332 KB) subida pelo usuário no claude.ai; conferido pelo Chrome: 'Generated 2026-10-28', ativa, sem versão duplicada.

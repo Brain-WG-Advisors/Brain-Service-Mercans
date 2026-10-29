@@ -1,26 +1,27 @@
 # Estado — Frente 1: Suporte (YouTrack)
 
-> Escrito **só pela janela "Suporte - Mercans"**. Atualizado em 2026-10-16 (fim da tarde). Triagem: [[rascunhos/2026-10-16-triagem-tickets]]; respostas: [[rascunhos/2026-10-16-respostas-fila]]; textos gravados: `rascunhos/2026-10-16-youtrack-drafts/`.
+> Escrito **só pela janela "Suporte - Mercans"**. Atualizado em 2026-10-28 (fim do dia). Sessão: [[sessoes/2026-10-28-suporte]]. Textos: `rascunhos/2026-10-28-youtrack-drafts/`.
 
-## Tickets atribuídos (`for: me #Unresolved`, 16/10 19:40: 1 — HRBS-12110)
+## Instruções vigentes
+- 28/10: cada ticket fica com o seu dono. O que é nosso fica atribuído a wgomes; o que é de outra pessoa vai para ela (Holiday Pay DK → Enaakshi; tickets da Shruti → skamble).
+- 28/10: antes de reatribuir, reler Assignee, Support Group e activity na API; depois, conferir que gravou.
+- 28/10: os 10 da Shruti (SR-105 a 110, HRBS-3466, 15941, 16029, 15790) voltaram para skamble; o trabalho local fica em `rascunhos/2026-10-23-shruti/`, pronto para quando a Manju pedir.
+- Ok de outra janela não vale para gravar aqui: pedir ao usuário nesta janela.
+- Ao regravar rascunho que o usuário vai publicar: pedir para recarregar a página do ticket antes.
 
+## Tickets atribuídos (`for: me #Unresolved`, 28/10 19:30 UTC)
 | Ticket | País | Estado | Próximo passo |
 |---|---|---|---|
-| SR-414 | Ucrânia | **Enviado** 16/10 17:20 UTC: Spec 1-PV mensal v5.3 importada (linhas 17–30, lilás FFE4DFEC) | Aguardar a Lily |
-| SR-415 | Ucrânia | **Enviado** 20/10 12:56 UTC: resposta às linhas 38–46; DD V4.3 importada (campos Держстат C_REG/C_RAJ e RAY, linhas 86–88) | Aguardar a Lily |
-| SR-160 | Ucrânia | **Enviado** 16/10 18:46 UTC: D1 Spec v3.4 importada (G23/G24 → Y; linhas 20 e 23; amostra sem G18 e com G24; lilás) | Aguardar a Lily |
-| HRBS-15216 | Ucrânia | **Enviado** 16/10 19:39 UTC (o de 28/09 era informativo); saiu da fila | Nenhum |
-| HRBS-12110 | Congo | Respondido em 13/08 (matriz não pronta); "still need" do Daniel (07/10). **Enviado** 20/10 14:25 UTC: pergunta o que ele precisa, com 3 opções (`rascunhos/2026-10-20-youtrack-drafts/HRBS-12110.md`) | Aguardar o Daniel |
+| HRBS-13704 | Reino Unido (STG, Implementation) | Pending on reporter. Publicado 19:21 + complemento 19:25 UTC (campos Seconded/EEA/EPM6 + código de imposto) | Aguardar o skondam |
+| HRBS-16010 | Reino Unido (McDermott, Live) | Pending on Internal team. Publicado 18:04 UTC (PGL1 sem PlanType; regra do Mohit) | Aguardar o Josh; avisar a Manju em 1 linha |
+| HRBS-15253 | Lituânia (Accenture) | Pending on Internal team. Publicado 03:20 UTC (retorno da call) | Aguardar o Kevin |
 
-## Fora da fila, com rascunho gravado (não enviado)
-| Ticket | País | Rascunho | Próximo passo |
-|---|---|---|---|
-| HRBS-14528 | Espanha | Comentário de 28/09 era descritivo; call desnecessária (511 chars) | Usuário: enviar |
-| HRBS-14394 | Holanda | **Enviado** 27/10 11:40 UTC: pedido ao @mjain para atualizar o 52990 para os valores 2026 (rascunho de 16/10 substituído) | Aguardar o Mohit |
-| SR-163 | Ucrânia | schemaLocation J0510611.xsd; C_REG/C_RAJ/C_STI_ORIG obrigatórios (463 chars) | Usuário: enviar |
-
-Sem pendência nossa: HRBS-14996 (CI, último comentário 29/09), SR-161 (Lily↔Dev), SR-162 Done, SR-432 em acceptance.
-
-Registrado hoje: [[correcoes]] (coluna 21 do D1), [[Ucrania]] (pendências: OBL/RAY no 1-ПВ mensal, indentação dos templates, templates do Dev), [[log]].
-
-Trabalho separado (não é resposta de ticket): auditoria das specs 1-ПВ em `rascunhos/2026-10-16-auditoria-1PV/`; pendência no hub [[Ucrania]].
+## Fora da fila, acompanhar
+| Ticket | País | Situação |
+|---|---|---|
+| HRBS-16407 | Espanha (STG, Live, assignee lli) | 29/10: resposta aos 4 comentários publicada (3.054 car.). CCG v1.7 no Drive (Google Doc 1kkDXufX…) + monday; link da v1.7 + pergunta à Lily publicados 13:34 UTC (302 car.; usuário tirou "and who should it go to?"; "Developmen" corrigido para "Development", conferido na API, 303 car.). Aguardar a Lily → ticket ao Dev (rascunho `ticket-dev.md`); convenio da STG → WTC V4.8 só se incluir antiguidade. E-mails à Lily (509/701) enviados pelo usuário (janela Gmail, 29/10). Hub [[Espanha]] |
+| HRBS-16487 | Holanda | Publicado 19:22 UTC; com o Mohit (férias 29/10) |
+| HRBS-14394 | Holanda | Pedido ao Mohit em 27/10; aguardando |
+| HRBS-16573 | Dinamarca | Com Asad Ansari (Configuration); não é nosso. Análise arquivada em `rascunhos/2026-10-28-tickets-novos/` |
+| SR-414, SR-415, SR-160, HRBS-12110 | Ucrânia/Congo | Enviados em 16–20/10; aguardando Lily/Daniel |
+| HRBS-14528, SR-163 | Espanha/Ucrânia | Rascunhos de 16/10 gravados, não enviados (usuário) |

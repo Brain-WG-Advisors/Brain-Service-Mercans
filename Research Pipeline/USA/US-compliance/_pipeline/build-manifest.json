@@ -1,0 +1,1835 @@
+{
+  "schema_version": "1.4.0",
+  "country": "United States of America",
+  "code": "US",
+  "currency": "USD",
+  "_reporting_currency": "USD (same as the payroll currency)",
+  "currency_minor_units": 2,
+  "rounding": {
+    "payment": "0.01",
+    "accounting": "0.01",
+    "_note": "USD has 2 minor units (ISO 4217 exponent, not a legal finding). No coarser payment unit assumed. Whole-dollar rounding (optional on federal returns; possibly mandatory in some state withholding computations) is pending US-MQ-02 and US-MQ-20..70; 'rule' omitted until cited."
+  },
+  "year": 2026,
+  "_year_note": "Income/payroll year 2026; next_year 2027 (refresh when the 2027 IRS Revenue Procedure, SSA wage base, Pub. 15-T 2027 and state 2027 tables publish). Calendar-year basis pending US-MQ-01.",
+  "_next_year": 2027,
+  "_tax_year_is_calendar_year": "pending_research (US-MQ-01)",
+  "_scope": {
+    "employers": "private-sector employers",
+    "workers": "common-law employees; independent contractors / Form 1099-NEC OUT OF SCOPE (owner instruction 2026-10-29); special populations pending US-MQ-12",
+    "filing_channel": "Statutory filings (federal and state) are submitted through a THIRD-PARTY filing provider; NO ADP integration (owner, biweekly 2026-10-21). SIR scope = provider handoff, not direct authority submission. Authorisation instruments pending US-MQ-09.",
+    "decided_by": "owner via orchestrator invocation",
+    "decided_on": "2026-10-29"
+  },
+  "tier": {
+    "overall": "T4",
+    "by_domain": {
+      "federal_income_tax": "T2",
+      "fica_social_security_medicare": "T2",
+      "futa": "T3",
+      "state_income_tax": "T4",
+      "local_income_tax": "T4",
+      "state_unemployment_insurance": "T4",
+      "sdi_tdi_pfml": "T4-shaped",
+      "workers_compensation": "data-problem",
+      "multistate": "T4",
+      "labour_code": "T3",
+      "payslip_statute": "T3",
+      "statutory_reporting": "T4",
+      "leave": "T3",
+      "termination": "T3",
+      "benefits_in_kind": "T2",
+      "deductions_garnishments": "T3",
+      "collective_agreements": "T1",
+      "indexation": "T3",
+      "payroll_data_protection": "T2",
+      "live_legal_change": "T3"
+    },
+    "rationale": "Overall T4 (provisional: citations pending US-MQ-04, US-MQ-10 and US-MQ-20..70). Employer-operation test: T4 requires a second independent calculation AND a separate remittance/return to a second authority. The employer computes federal income-tax withholding, FICA and FUTA for the IRS (Forms 941/940, W-2), and in every state that taxes wages computes a SEPARATE state withholding under that state's own tables/certificate and remits it to the state revenue department on a state return; state unemployment insurance is likewise a separate calculation on a separate quarterly report to a state agency. Nothing is absorbed into the federal deduction (contrast Switzerland, StHG Art. 36a Abs. 1, where one deduction discharges all levels). This is the Quebec pattern repeated for up to 51 jurisdictions, plus a local layer (city/county/school district) that is T4 where remitted separately and T3 where piggybacked on the state return. Consequence: the federal core and each jurisdiction are declared and scoped as parallel layers, and the multistate domain routes each employee to one or more of them. No US instrument is on disk yet; the candidate instruments to confirm are IRC chapter 24 (federal withholding), chapters 21/23 (FICA/FUTA) and each state's withholding and UI statutes.",
+    "_by_domain_reasons": {
+      "federal_income_tax": "One authority (IRS), progressive tables, one certificate (W-4); NRA and supplemental regimes sit inside one calculation.",
+      "fica_social_security_medicare": "Federal, uniform rates, one authority; wage base indexed (US-MQ-06).",
+      "futa": "Federal return, but the effective rate depends on the state UI credit and credit-reduction states: a cross-layer dependency (US-MQ-04).",
+      "state_income_tax": "Second independent calculation plus a separate return to a second authority (state DoR) in every wage-taxing state; T1 ('none') in states without wage tax, which states pending per jurisdiction.",
+      "local_income_tax": "T4 where a locality/collector receives a separate return; T3 where piggybacked on the state return. Mixed per state, pending US-MQ-20..70.",
+      "state_unemployment_insurance": "Separate state agency, separate quarterly wage report and remittance; employer experience rate is per-employer master data.",
+      "sdi_tdi_pfml": "T4 where a separate agency/return exists, T3 where filed with UI, data-problem where funded through a private insurer. Does not uniformly meet the discriminator.",
+      "workers_compensation": "Mostly insurer premiums outside payroll; payroll-deducted only in some state-fund states. Variability axis is the insurer/state fund, not a statutory rate table (US-MQ-05).",
+      "multistate": "Routing layer that selects which T4 jurisdictions apply per employee (work state, residence state, reciprocity, convenience rule, SUI localization), US-MQ-10.",
+      "labour_code": "Federal floor (FLSA) plus state wage-payment rules; one calculation, state-keyed fields.",
+      "payslip_statute": "No federal pay-statement mandate assumed; state-by-state content rules (US-MQ-03).",
+      "statutory_reporting": "Federal 941/940/W-2 plus per-state withholding, reconciliation, UI and local returns; submitted via third-party provider (US-MQ-09).",
+      "leave": "State and local paid-sick-leave rules, state/locality-keyed.",
+      "termination": "State final-pay deadlines, state-keyed.",
+      "benefits_in_kind": "Federal fringe rules; state conformity is data.",
+      "deductions_garnishments": "Federal CCPA limits plus state variations.",
+      "collective_agreements": "Provisional: no sector extension mechanism assumed, pending US-MQ-07.",
+      "indexation": "Annual federal Revenue Procedure + SSA wage base + state wage-base indexation (US-MQ-06 and per state).",
+      "payroll_data_protection": "SSN handling rules, mostly uniform.",
+      "live_legal_change": "53 parameter sets (federal + multistate + 51) change every year."
+    },
+    "_sub_national_key": {
+      "levels": [
+        "state (50 + DC)",
+        "county",
+        "municipality",
+        "school district / PSD code"
+      ],
+      "master_data_keys": [
+        "work_location_jurisdiction (state + locality down to school district / PSD)",
+        "residence_jurisdiction (state + locality down to school district)",
+        "sui_state (result of the localization test, US-MQ-10)"
+      ],
+      "note": "Checked below the state tier: several local wage taxes are residence-based or school-district-based, so a state-only key cannot express them. Work and residence are separate keys because the multistate rules diverge on them."
+    },
+    "_jurisdictions": [
+      "FED",
+      "MULTI",
+      "AK",
+      "AL",
+      "AR",
+      "AZ",
+      "CA",
+      "CO",
+      "CT",
+      "DC",
+      "DE",
+      "FL",
+      "GA",
+      "HI",
+      "IA",
+      "ID",
+      "IL",
+      "IN",
+      "KS",
+      "KY",
+      "LA",
+      "MA",
+      "MD",
+      "ME",
+      "MI",
+      "MN",
+      "MO",
+      "MS",
+      "MT",
+      "NC",
+      "ND",
+      "NE",
+      "NH",
+      "NJ",
+      "NM",
+      "NV",
+      "NY",
+      "OH",
+      "OK",
+      "OR",
+      "PA",
+      "RI",
+      "SC",
+      "SD",
+      "TN",
+      "TX",
+      "UT",
+      "VA",
+      "VT",
+      "WA",
+      "WI",
+      "WV",
+      "WY"
+    ],
+    "_fanout": {
+      "description": "Step 5 fans out one compliance-source-hunter per jurisdiction unit: FED, MULTI and one per state/DC. Each writes only into 00-official-sources/ccg-sources/{JUR}/.",
+      "units": [
+        {
+          "jurisdiction": "FED",
+          "mandate_questions": [
+            "US-MQ-01",
+            "US-MQ-02",
+            "US-MQ-03",
+            "US-MQ-04",
+            "US-MQ-05",
+            "US-MQ-06",
+            "US-MQ-07",
+            "US-MQ-08",
+            "US-MQ-09",
+            "US-MQ-11",
+            "US-MQ-12"
+          ]
+        },
+        {
+          "jurisdiction": "MULTI",
+          "mandate_questions": [
+            "US-MQ-10"
+          ]
+        },
+        {
+          "jurisdiction": "AK",
+          "name": "Alaska",
+          "mandate_questions": [
+            "US-MQ-20"
+          ]
+        },
+        {
+          "jurisdiction": "AL",
+          "name": "Alabama",
+          "mandate_questions": [
+            "US-MQ-21"
+          ]
+        },
+        {
+          "jurisdiction": "AR",
+          "name": "Arkansas",
+          "mandate_questions": [
+            "US-MQ-22"
+          ]
+        },
+        {
+          "jurisdiction": "AZ",
+          "name": "Arizona",
+          "mandate_questions": [
+            "US-MQ-23"
+          ]
+        },
+        {
+          "jurisdiction": "CA",
+          "name": "California",
+          "mandate_questions": [
+            "US-MQ-24"
+          ]
+        },
+        {
+          "jurisdiction": "CO",
+          "name": "Colorado",
+          "mandate_questions": [
+            "US-MQ-25"
+          ]
+        },
+        {
+          "jurisdiction": "CT",
+          "name": "Connecticut",
+          "mandate_questions": [
+            "US-MQ-26"
+          ]
+        },
+        {
+          "jurisdiction": "DC",
+          "name": "District of Columbia",
+          "mandate_questions": [
+            "US-MQ-27"
+          ]
+        },
+        {
+          "jurisdiction": "DE",
+          "name": "Delaware",
+          "mandate_questions": [
+            "US-MQ-28"
+          ]
+        },
+        {
+          "jurisdiction": "FL",
+          "name": "Florida",
+          "mandate_questions": [
+            "US-MQ-29"
+          ]
+        },
+        {
+          "jurisdiction": "GA",
+          "name": "Georgia",
+          "mandate_questions": [
+            "US-MQ-30"
+          ]
+        },
+        {
+          "jurisdiction": "HI",
+          "name": "Hawaii",
+          "mandate_questions": [
+            "US-MQ-31"
+          ]
+        },
+        {
+          "jurisdiction": "IA",
+          "name": "Iowa",
+          "mandate_questions": [
+            "US-MQ-32"
+          ]
+        },
+        {
+          "jurisdiction": "ID",
+          "name": "Idaho",
+          "mandate_questions": [
+            "US-MQ-33"
+          ]
+        },
+        {
+          "jurisdiction": "IL",
+          "name": "Illinois",
+          "mandate_questions": [
+            "US-MQ-34"
+          ]
+        },
+        {
+          "jurisdiction": "IN",
+          "name": "Indiana",
+          "mandate_questions": [
+            "US-MQ-35"
+          ]
+        },
+        {
+          "jurisdiction": "KS",
+          "name": "Kansas",
+          "mandate_questions": [
+            "US-MQ-36"
+          ]
+        },
+        {
+          "jurisdiction": "KY",
+          "name": "Kentucky",
+          "mandate_questions": [
+            "US-MQ-37"
+          ]
+        },
+        {
+          "jurisdiction": "LA",
+          "name": "Louisiana",
+          "mandate_questions": [
+            "US-MQ-38"
+          ]
+        },
+        {
+          "jurisdiction": "MA",
+          "name": "Massachusetts",
+          "mandate_questions": [
+            "US-MQ-39"
+          ]
+        },
+        {
+          "jurisdiction": "MD",
+          "name": "Maryland",
+          "mandate_questions": [
+            "US-MQ-40"
+          ]
+        },
+        {
+          "jurisdiction": "ME",
+          "name": "Maine",
+          "mandate_questions": [
+            "US-MQ-41"
+          ]
+        },
+        {
+          "jurisdiction": "MI",
+          "name": "Michigan",
+          "mandate_questions": [
+            "US-MQ-42"
+          ]
+        },
+        {
+          "jurisdiction": "MN",
+          "name": "Minnesota",
+          "mandate_questions": [
+            "US-MQ-43"
+          ]
+        },
+        {
+          "jurisdiction": "MO",
+          "name": "Missouri",
+          "mandate_questions": [
+            "US-MQ-44"
+          ]
+        },
+        {
+          "jurisdiction": "MS",
+          "name": "Mississippi",
+          "mandate_questions": [
+            "US-MQ-45"
+          ]
+        },
+        {
+          "jurisdiction": "MT",
+          "name": "Montana",
+          "mandate_questions": [
+            "US-MQ-46"
+          ]
+        },
+        {
+          "jurisdiction": "NC",
+          "name": "North Carolina",
+          "mandate_questions": [
+            "US-MQ-47"
+          ]
+        },
+        {
+          "jurisdiction": "ND",
+          "name": "North Dakota",
+          "mandate_questions": [
+            "US-MQ-48"
+          ]
+        },
+        {
+          "jurisdiction": "NE",
+          "name": "Nebraska",
+          "mandate_questions": [
+            "US-MQ-49"
+          ]
+        },
+        {
+          "jurisdiction": "NH",
+          "name": "New Hampshire",
+          "mandate_questions": [
+            "US-MQ-50"
+          ]
+        },
+        {
+          "jurisdiction": "NJ",
+          "name": "New Jersey",
+          "mandate_questions": [
+            "US-MQ-51"
+          ]
+        },
+        {
+          "jurisdiction": "NM",
+          "name": "New Mexico",
+          "mandate_questions": [
+            "US-MQ-52"
+          ]
+        },
+        {
+          "jurisdiction": "NV",
+          "name": "Nevada",
+          "mandate_questions": [
+            "US-MQ-53"
+          ]
+        },
+        {
+          "jurisdiction": "NY",
+          "name": "New York",
+          "mandate_questions": [
+            "US-MQ-54"
+          ]
+        },
+        {
+          "jurisdiction": "OH",
+          "name": "Ohio",
+          "mandate_questions": [
+            "US-MQ-55"
+          ]
+        },
+        {
+          "jurisdiction": "OK",
+          "name": "Oklahoma",
+          "mandate_questions": [
+            "US-MQ-56"
+          ]
+        },
+        {
+          "jurisdiction": "OR",
+          "name": "Oregon",
+          "mandate_questions": [
+            "US-MQ-57"
+          ]
+        },
+        {
+          "jurisdiction": "PA",
+          "name": "Pennsylvania",
+          "mandate_questions": [
+            "US-MQ-58"
+          ]
+        },
+        {
+          "jurisdiction": "RI",
+          "name": "Rhode Island",
+          "mandate_questions": [
+            "US-MQ-59"
+          ]
+        },
+        {
+          "jurisdiction": "SC",
+          "name": "South Carolina",
+          "mandate_questions": [
+            "US-MQ-60"
+          ]
+        },
+        {
+          "jurisdiction": "SD",
+          "name": "South Dakota",
+          "mandate_questions": [
+            "US-MQ-61"
+          ]
+        },
+        {
+          "jurisdiction": "TN",
+          "name": "Tennessee",
+          "mandate_questions": [
+            "US-MQ-62"
+          ]
+        },
+        {
+          "jurisdiction": "TX",
+          "name": "Texas",
+          "mandate_questions": [
+            "US-MQ-63"
+          ]
+        },
+        {
+          "jurisdiction": "UT",
+          "name": "Utah",
+          "mandate_questions": [
+            "US-MQ-64"
+          ]
+        },
+        {
+          "jurisdiction": "VA",
+          "name": "Virginia",
+          "mandate_questions": [
+            "US-MQ-65"
+          ]
+        },
+        {
+          "jurisdiction": "VT",
+          "name": "Vermont",
+          "mandate_questions": [
+            "US-MQ-66"
+          ]
+        },
+        {
+          "jurisdiction": "WA",
+          "name": "Washington",
+          "mandate_questions": [
+            "US-MQ-67"
+          ]
+        },
+        {
+          "jurisdiction": "WI",
+          "name": "Wisconsin",
+          "mandate_questions": [
+            "US-MQ-68"
+          ]
+        },
+        {
+          "jurisdiction": "WV",
+          "name": "West Virginia",
+          "mandate_questions": [
+            "US-MQ-69"
+          ]
+        },
+        {
+          "jurisdiction": "WY",
+          "name": "Wyoming",
+          "mandate_questions": [
+            "US-MQ-70"
+          ]
+        }
+      ],
+      "owner_questions": [
+        "US-MQ-11",
+        "US-MQ-13",
+        "US-MQ-14"
+      ]
+    }
+  },
+  "languages": {
+    "official": [
+      "en"
+    ],
+    "payslip_rule": "PENDING US-MQ-03: what fixes the language of the employee pay statement (federal and per state) is not yet cited; no answer assumed. 'No statute fixes it' is a candidate outcome.",
+    "authority_facing_rule": "PENDING US-MQ-03: language of IRS/SSA/state filings; kept separate from payslip_rule on purpose.",
+    "first_build": "en",
+    "seams": [
+      "es"
+    ],
+    "_official_note": "'en' is a working assumption for the first build, not a cited finding; any official-language designation (federal or state, incl. a second official language in a state) is pending US-MQ-03.",
+    "_bilingual_documents_permitted": "pending_research (US-MQ-03)",
+    "_first_build_basis": "English is the language of every authority form named on disk; employment-share and sanction axes to be confirmed under US-MQ-03.",
+    "_seams_note": "es rank 2 as a DOCUMENTED SEAM (not mandatory-later) pending US-MQ-03: some states may require pay-rate notices in the employee's primary language; if a state attaches a sanction, the seam is promoted to mandatory-later. No other language ranked yet."
+  },
+  "mandate_status": "pending_research",
+  "_mandate_path": "00-official-sources/MANDATE.md",
+  "pending_research": [
+    {
+      "id": "US-MQ-01",
+      "question": "Which instruments fix the period of federal employment-tax reporting (Form W-2 / 941 / 940) and of state wage-withholding reconciliation, and may an employer with a non-calendar fiscal year report employment taxes on that fiscal year instead of the calendar year?",
+      "domain": "statutory_reporting",
+      "why_it_matters": "Sets YEAR=2026 (next_year 2027) for every artifact and every jurisdiction annex.",
+      "blocking": [
+        "CCG",
+        "SCOPE",
+        "RSPEC",
+        "DD",
+        "WTC",
+        "SIR",
+        "PSL",
+        "SKILL"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q1",
+      "_title": "Tax year"
+    },
+    {
+      "id": "US-MQ-02",
+      "question": "Which instrument requires federal employment-tax returns and W-2s to be stated in USD, and what rounding rules apply (a) inside the federal withholding computation (Pub. 15-T methods: rounding of wages or withholding to whole dollars?) and (b) on returns (optional whole-dollar rounding on Forms 941/940/W-2)? Is there any rule fixing a payment unit coarser than USD 0.01?",
+      "domain": "statutory_reporting",
+      "why_it_matters": "rounding.payment / rounding.accounting / rounding.rule; WTC and payslip number formats.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "PSL",
+        "RSPEC",
+        "DD"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q2",
+      "_title": "Currency, minor units and rounding"
+    },
+    {
+      "id": "US-MQ-03",
+      "question": "Is there a federal or state instrument designating an official language that binds employer documents, and which instrument (if any) fixes the language of (a) the employee pay statement / wage statement and (b) authority-facing filings (IRS, SSA, state DoR, state UI agency)? Which states require wage or pay-rate notices in the employee's primary language, and are bilingual documents permitted? If no statute fixes payslip language, state the non-statutory constraint that governs instead.",
+      "domain": "payslip_statute",
+      "why_it_matters": "languages.payslip_rule / authority_facing_rule / seams (es candidate); PSL language tabs.",
+      "blocking": [
+        "CCG",
+        "PSL",
+        "DD"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q3",
+      "_title": "Official languages and what fixes document language (G-LANG)"
+    },
+    {
+      "id": "US-MQ-04",
+      "question": "Confirm with citations that (a) federal income-tax withholding, FICA and FUTA are computed and remitted to the IRS on federal returns (941/944, 940), and (b) state income-tax withholding and state unemployment insurance are separate calculations remitted to separate state authorities on separate returns, i.e. no state tax is absorbed into the federal deduction. Does the FUTA credit for state UI contributions (and credit-reduction states) create a calculation dependency between the federal and state layers?",
+      "domain": "income_tax",
+      "why_it_matters": "tier.overall=T4 (provisional until answered); fan-out design of the whole build.",
+      "blocking": [
+        "CCG",
+        "SCOPE",
+        "RSPEC",
+        "DD",
+        "WTC",
+        "SIR",
+        "PSL",
+        "SKILL"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q4",
+      "_title": "Sub-national wrinkle: confirm the T4 discriminator"
+    },
+    {
+      "id": "US-MQ-05",
+      "question": "Which payroll-adjacent obligations sit outside federal income tax/FICA/FUTA and must be flagged in or out of scope: state disability (SDI/TDI), paid family and medical leave (PFML) contributions, long-term-care payroll premiums, transit / workforce-training / job-development levies, workers' compensation employee deductions where a state fund collects through payroll, new-hire reporting, child-support income-withholding orders (federal IWO form, CCPA limits)? Give the federal anchor for each and the list of states where each exists.",
+      "domain": "social_security",
+      "why_it_matters": "Every OUT-OF-SCOPE tag agent 3 writes reconciles against this list.",
+      "blocking": [
+        "CCG",
+        "SCOPE",
+        "WTC",
+        "DD"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q5",
+      "_title": "Devolved payroll-adjacent domains (federal list)"
+    },
+    {
+      "id": "US-MQ-06",
+      "question": "Name each federal indexation mechanism that moves 2026/2027 payroll parameters, with the index, its caliber, the trigger and the step: (a) income-tax brackets / standard deduction (which CPI variant, which annual Revenue Procedure); (b) the Social Security contribution and benefit base (which wage index, which SSA announcement); (c) other indexed federal payroll limits (retirement deferrals, HSA, fringe exclusions).",
+      "domain": "indexation",
+      "why_it_matters": "Agent 2 G-DERIVE proofs; 2027 next_year refresh.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q6",
+      "_title": "Indexation (federal)"
+    },
+    {
+      "id": "US-MQ-07",
+      "question": "Does any US instrument extend a collective agreement's pay terms to non-signatory employers in a sector, or do CBAs bind only the certified bargaining unit? Are federal/state prevailing-wage regimes (public-works contracts) in scope for a private-sector payroll build? Which sectors, if any, are in scope?",
+      "domain": "collective_agreements",
+      "why_it_matters": "collective_agreements tier and CCG m11 scope.",
+      "blocking": [
+        "CCG",
+        "SCOPE"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q7",
+      "_title": "Collective agreements"
+    },
+    {
+      "id": "US-MQ-08",
+      "question": "Which official engine or official worked examples will serve as the oracle for federal withholding (worked examples in IRS Pub. 15-T, or an IRS calculator), and is there an official per-state equivalent (state DoR withholding calculator or worked examples) for each jurisdiction?",
+      "domain": "income_tax",
+      "why_it_matters": "oracle block (Stage 2 check 7, Stage 9b).",
+      "blocking": [
+        "CCG",
+        "SCOPE"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Oracle",
+      "_title": "Oracle for Stage 9b"
+    },
+    {
+      "id": "US-MQ-09",
+      "question": "Scope fact (owner, biweekly 2026-10-21): statutory filings go through a THIRD-PARTY filing provider; no ADP integration. Research: which instruments authorise a third party to file and deposit federal employment taxes for the employer (reporting-agent authorisation, Form 8655 and its Revenue Procedure), what liability stays with the employer, and what is each state's equivalent authorisation (POA / agent form) for withholding and UI filings? Owner: which provider, and what input format does it accept?",
+      "domain": "statutory_reporting",
+      "why_it_matters": "SIR scope: Mercans produces provider input files, not authority submissions.",
+      "blocking": [
+        "SIR",
+        "RSPEC",
+        "SCOPE"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Scope fact",
+      "_title": "Third-party filing provider (SIR)"
+    },
+    {
+      "id": "US-MQ-10",
+      "question": "For employees who live in one state and work in another (or in several): what decides (a) which state's income tax is withheld (work-state sourcing vs residence), (b) reciprocity agreements (which state pairs), (c) resident credit for tax paid to the work state and whether the employer must withhold the difference, (d) convenience-of-the-employer rules (which states), (e) day/dollar thresholds before nonresident withholding starts (which states, what threshold), (f) the SUI localization tests (localized / base of operations / direction and control / residence) and the reciprocal coverage election? Is there any federal statute limiting state taxation of mobile employees?",
+      "domain": "income_tax",
+      "why_it_matters": "multistate design and DD master-data keys (work_location_jurisdiction, residence_jurisdiction, sui_state).",
+      "blocking": [
+        "CCG",
+        "DD",
+        "WTC",
+        "SCOPE"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Q4",
+      "_title": "Multi-state domain"
+    },
+    {
+      "id": "US-MQ-11",
+      "question": "Owner question: for checks C34-C36, C48, C50, C57 and C71, is there a machine-readable norm (eCFR / state codes), an authority validator (SSA AccuWage for EFW2, IRS MeF schemas for 94x), an identifier plugin (SSN/ITIN/EIN/state account numbers) and a code table (W-2 Box 12/14, state codes) for each jurisdiction? For each missing item, will the owner provide the support or record a validation_exemptions entry (reason, official URL, decided_on)?",
+      "domain": "live_legal_change",
+      "why_it_matters": "Without it C34-C36, C48, C50, C57, C71 fail at Stage 9.",
+      "blocking": [
+        "RSPEC",
+        "DD",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "F68",
+      "_title": "Validation exemptions (owner)"
+    },
+    {
+      "id": "US-MQ-12",
+      "question": "Owner scope decision recorded 2026-10-29: private-sector employers, common-law employees; independent contractors / Form 1099-NEC out of scope. Research: which special populations must the federal layer still treat distinctly (nonresident aliens, household employees, agricultural employees on Form 943, clergy, statutory employees, student FICA exemption, employees abroad), and which are in or out for this build?",
+      "domain": "labour_code",
+      "why_it_matters": "SCOPE employment_types and the L10 special-population matrix.",
+      "blocking": [
+        "SCOPE",
+        "CCG",
+        "WTC"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Scope",
+      "_title": "Employee population in scope"
+    },
+    {
+      "id": "US-MQ-13",
+      "question": "Owner question: which states have active or committed clients (Yoyo / BAU master list), so the 51 jurisdiction fan-outs can be ordered? Unanswered as of the 2026-09-29 weekly and the 2026-10-21 biweekly.",
+      "domain": "live_legal_change",
+      "why_it_matters": "Build order of the 51 jurisdiction annexes.",
+      "blocking": [
+        "CCG"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Scope",
+      "_title": "Jurisdiction priority (owner)"
+    },
+    {
+      "id": "US-MQ-14",
+      "question": "Owner question: one US package (federal core + multistate module + one annex per jurisdiction, Canada precedent) or one package per state? The T4 verdict requires every parallel layer to be declared and staffed; it does not by itself fix the packaging.",
+      "domain": "statutory_reporting",
+      "why_it_matters": "artifacts[].units and package layout.",
+      "blocking": [
+        "CCG",
+        "SCOPE",
+        "RSPEC",
+        "DD",
+        "WTC",
+        "SIR",
+        "PSL",
+        "SKILL"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_mandate_question": "Scope",
+      "_title": "Package shape (owner)"
+    },
+    {
+      "id": "US-MQ-20",
+      "question": "For Alaska (AK), with citations and effective dates for 2026 (and 2027 if published): (1) does Alaska tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit AK: tiers the Alaska layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Alaska.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "AK",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-21",
+      "question": "For Alabama (AL), with citations and effective dates for 2026 (and 2027 if published): (1) does Alabama tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit AL: tiers the Alabama layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Alabama.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "AL",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-22",
+      "question": "For Arkansas (AR), with citations and effective dates for 2026 (and 2027 if published): (1) does Arkansas tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit AR: tiers the Arkansas layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Arkansas.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "AR",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-23",
+      "question": "For Arizona (AZ), with citations and effective dates for 2026 (and 2027 if published): (1) does Arizona tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit AZ: tiers the Arizona layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Arizona.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "AZ",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-24",
+      "question": "For California (CA), with citations and effective dates for 2026 (and 2027 if published): (1) does California tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit CA: tiers the California layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for California.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "CA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-25",
+      "question": "For Colorado (CO), with citations and effective dates for 2026 (and 2027 if published): (1) does Colorado tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit CO: tiers the Colorado layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Colorado.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "CO",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-26",
+      "question": "For Connecticut (CT), with citations and effective dates for 2026 (and 2027 if published): (1) does Connecticut tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit CT: tiers the Connecticut layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Connecticut.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "CT",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-27",
+      "question": "For District of Columbia (DC), with citations and effective dates for 2026 (and 2027 if published): (1) does District of Columbia tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit DC: tiers the District of Columbia layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for District of Columbia.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "DC",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-28",
+      "question": "For Delaware (DE), with citations and effective dates for 2026 (and 2027 if published): (1) does Delaware tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit DE: tiers the Delaware layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Delaware.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "DE",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-29",
+      "question": "For Florida (FL), with citations and effective dates for 2026 (and 2027 if published): (1) does Florida tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit FL: tiers the Florida layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Florida.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "FL",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-30",
+      "question": "For Georgia (GA), with citations and effective dates for 2026 (and 2027 if published): (1) does Georgia tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit GA: tiers the Georgia layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Georgia.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "GA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-31",
+      "question": "For Hawaii (HI), with citations and effective dates for 2026 (and 2027 if published): (1) does Hawaii tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit HI: tiers the Hawaii layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Hawaii.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "HI",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-32",
+      "question": "For Iowa (IA), with citations and effective dates for 2026 (and 2027 if published): (1) does Iowa tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit IA: tiers the Iowa layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Iowa.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "IA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-33",
+      "question": "For Idaho (ID), with citations and effective dates for 2026 (and 2027 if published): (1) does Idaho tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit ID: tiers the Idaho layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Idaho.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "ID",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-34",
+      "question": "For Illinois (IL), with citations and effective dates for 2026 (and 2027 if published): (1) does Illinois tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit IL: tiers the Illinois layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Illinois.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "IL",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-35",
+      "question": "For Indiana (IN), with citations and effective dates for 2026 (and 2027 if published): (1) does Indiana tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit IN: tiers the Indiana layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Indiana.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "IN",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-36",
+      "question": "For Kansas (KS), with citations and effective dates for 2026 (and 2027 if published): (1) does Kansas tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit KS: tiers the Kansas layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Kansas.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "KS",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-37",
+      "question": "For Kentucky (KY), with citations and effective dates for 2026 (and 2027 if published): (1) does Kentucky tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit KY: tiers the Kentucky layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Kentucky.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "KY",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-38",
+      "question": "For Louisiana (LA), with citations and effective dates for 2026 (and 2027 if published): (1) does Louisiana tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit LA: tiers the Louisiana layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Louisiana.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "LA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-39",
+      "question": "For Massachusetts (MA), with citations and effective dates for 2026 (and 2027 if published): (1) does Massachusetts tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MA: tiers the Massachusetts layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Massachusetts.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-40",
+      "question": "For Maryland (MD), with citations and effective dates for 2026 (and 2027 if published): (1) does Maryland tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MD: tiers the Maryland layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Maryland.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MD",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-41",
+      "question": "For Maine (ME), with citations and effective dates for 2026 (and 2027 if published): (1) does Maine tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit ME: tiers the Maine layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Maine.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "ME",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-42",
+      "question": "For Michigan (MI), with citations and effective dates for 2026 (and 2027 if published): (1) does Michigan tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MI: tiers the Michigan layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Michigan.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MI",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-43",
+      "question": "For Minnesota (MN), with citations and effective dates for 2026 (and 2027 if published): (1) does Minnesota tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MN: tiers the Minnesota layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Minnesota.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MN",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-44",
+      "question": "For Missouri (MO), with citations and effective dates for 2026 (and 2027 if published): (1) does Missouri tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MO: tiers the Missouri layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Missouri.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MO",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-45",
+      "question": "For Mississippi (MS), with citations and effective dates for 2026 (and 2027 if published): (1) does Mississippi tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MS: tiers the Mississippi layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Mississippi.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MS",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-46",
+      "question": "For Montana (MT), with citations and effective dates for 2026 (and 2027 if published): (1) does Montana tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit MT: tiers the Montana layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Montana.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "MT",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-47",
+      "question": "For North Carolina (NC), with citations and effective dates for 2026 (and 2027 if published): (1) does North Carolina tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NC: tiers the North Carolina layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for North Carolina.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NC",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-48",
+      "question": "For North Dakota (ND), with citations and effective dates for 2026 (and 2027 if published): (1) does North Dakota tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit ND: tiers the North Dakota layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for North Dakota.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "ND",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-49",
+      "question": "For Nebraska (NE), with citations and effective dates for 2026 (and 2027 if published): (1) does Nebraska tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NE: tiers the Nebraska layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Nebraska.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NE",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-50",
+      "question": "For New Hampshire (NH), with citations and effective dates for 2026 (and 2027 if published): (1) does New Hampshire tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NH: tiers the New Hampshire layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for New Hampshire.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NH",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-51",
+      "question": "For New Jersey (NJ), with citations and effective dates for 2026 (and 2027 if published): (1) does New Jersey tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NJ: tiers the New Jersey layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for New Jersey.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NJ",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-52",
+      "question": "For New Mexico (NM), with citations and effective dates for 2026 (and 2027 if published): (1) does New Mexico tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NM: tiers the New Mexico layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for New Mexico.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NM",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-53",
+      "question": "For Nevada (NV), with citations and effective dates for 2026 (and 2027 if published): (1) does Nevada tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NV: tiers the Nevada layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Nevada.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NV",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-54",
+      "question": "For New York (NY), with citations and effective dates for 2026 (and 2027 if published): (1) does New York tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit NY: tiers the New York layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for New York.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "NY",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-55",
+      "question": "For Ohio (OH), with citations and effective dates for 2026 (and 2027 if published): (1) does Ohio tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit OH: tiers the Ohio layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Ohio.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "OH",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-56",
+      "question": "For Oklahoma (OK), with citations and effective dates for 2026 (and 2027 if published): (1) does Oklahoma tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit OK: tiers the Oklahoma layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Oklahoma.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "OK",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-57",
+      "question": "For Oregon (OR), with citations and effective dates for 2026 (and 2027 if published): (1) does Oregon tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit OR: tiers the Oregon layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Oregon.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "OR",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-58",
+      "question": "For Pennsylvania (PA), with citations and effective dates for 2026 (and 2027 if published): (1) does Pennsylvania tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit PA: tiers the Pennsylvania layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Pennsylvania.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "PA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-59",
+      "question": "For Rhode Island (RI), with citations and effective dates for 2026 (and 2027 if published): (1) does Rhode Island tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit RI: tiers the Rhode Island layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Rhode Island.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "RI",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-60",
+      "question": "For South Carolina (SC), with citations and effective dates for 2026 (and 2027 if published): (1) does South Carolina tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit SC: tiers the South Carolina layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for South Carolina.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "SC",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-61",
+      "question": "For South Dakota (SD), with citations and effective dates for 2026 (and 2027 if published): (1) does South Dakota tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit SD: tiers the South Dakota layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for South Dakota.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "SD",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-62",
+      "question": "For Tennessee (TN), with citations and effective dates for 2026 (and 2027 if published): (1) does Tennessee tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit TN: tiers the Tennessee layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Tennessee.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "TN",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-63",
+      "question": "For Texas (TX), with citations and effective dates for 2026 (and 2027 if published): (1) does Texas tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit TX: tiers the Texas layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Texas.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "TX",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-64",
+      "question": "For Utah (UT), with citations and effective dates for 2026 (and 2027 if published): (1) does Utah tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit UT: tiers the Utah layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Utah.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "UT",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-65",
+      "question": "For Virginia (VA), with citations and effective dates for 2026 (and 2027 if published): (1) does Virginia tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit VA: tiers the Virginia layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Virginia.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "VA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-66",
+      "question": "For Vermont (VT), with citations and effective dates for 2026 (and 2027 if published): (1) does Vermont tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit VT: tiers the Vermont layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Vermont.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "VT",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-67",
+      "question": "For Washington (WA), with citations and effective dates for 2026 (and 2027 if published): (1) does Washington tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit WA: tiers the Washington layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Washington.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "WA",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-68",
+      "question": "For Wisconsin (WI), with citations and effective dates for 2026 (and 2027 if published): (1) does Wisconsin tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit WI: tiers the Wisconsin layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Wisconsin.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "WI",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-69",
+      "question": "For West Virginia (WV), with citations and effective dates for 2026 (and 2027 if published): (1) does West Virginia tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit WV: tiers the West Virginia layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for West Virginia.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "WV",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    },
+    {
+      "id": "US-MQ-70",
+      "question": "For Wyoming (WY), with citations and effective dates for 2026 (and 2027 if published): (1) does Wyoming tax wage income and require employer withholding: method (tables/formula/flat/percent-of-federal), own withholding certificate or federal W-4, supplemental rate, rounding rule, authority, withholding return and deposit/reconciliation schedule? (2) local wage taxes (city/county/school district/PSD): which exist, residence- or work-based, who administers, piggybacked on the state return or remitted separately? (3) state unemployment insurance: agency, taxable wage base and how it is indexed, new-employer rate, any employee contribution, quarterly wage report? (4) SDI/TDI, PFML, long-term-care, transit, workforce or other payroll levies: employee/employer split, ceiling, return? (5) multistate: reciprocity agreements, resident credit, convenience-of-employer rule, nonresident day/dollar threshold? (6) pay-statement content and any primary-language notice rule; state prevailing-wage regime; third-party/POA filing authorisation; official withholding calculator or worked examples (oracle)?",
+      "domain": "income_tax",
+      "why_it_matters": "Jurisdiction fan-out unit WY: tiers the Wyoming layer (income tax / local / SUI / SDI-PFML / multistate) and answers Q4-Q7 for Wyoming.",
+      "blocking": [
+        "CCG",
+        "WTC",
+        "DD",
+        "RSPEC",
+        "SIR"
+      ],
+      "status": "open",
+      "answer_register_id": null,
+      "_jurisdiction": "WY",
+      "_mandate_question": "Q4-Q7 per jurisdiction"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "CCG",
+      "stage": 1,
+      "path": "01-ccg/",
+      "status": "scaffolded",
+      "units": [
+        "m01_foundational",
+        "m02_master_data",
+        "m03_gross_to_net",
+        "m04_compensation",
+        "m05_social_security",
+        "m06_tax",
+        "m07_deductions",
+        "m08_leave",
+        "m09_termination",
+        "m10_reporting",
+        "m11_advanced",
+        "m12_worked_examples",
+        "m13_practices",
+        "coverage",
+        "annex_FED",
+        "annex_MULTI",
+        "annex_AK",
+        "annex_AL",
+        "annex_AR",
+        "annex_AZ",
+        "annex_CA",
+        "annex_CO",
+        "annex_CT",
+        "annex_DC",
+        "annex_DE",
+        "annex_FL",
+        "annex_GA",
+        "annex_HI",
+        "annex_IA",
+        "annex_ID",
+        "annex_IL",
+        "annex_IN",
+        "annex_KS",
+        "annex_KY",
+        "annex_LA",
+        "annex_MA",
+        "annex_MD",
+        "annex_ME",
+        "annex_MI",
+        "annex_MN",
+        "annex_MO",
+        "annex_MS",
+        "annex_MT",
+        "annex_NC",
+        "annex_ND",
+        "annex_NE",
+        "annex_NH",
+        "annex_NJ",
+        "annex_NM",
+        "annex_NV",
+        "annex_NY",
+        "annex_OH",
+        "annex_OK",
+        "annex_OR",
+        "annex_PA",
+        "annex_RI",
+        "annex_SC",
+        "annex_SD",
+        "annex_TN",
+        "annex_TX",
+        "annex_UT",
+        "annex_VA",
+        "annex_VT",
+        "annex_WA",
+        "annex_WI",
+        "annex_WV",
+        "annex_WY"
+      ]
+    },
+    {
+      "id": "SCOPE",
+      "stage": 2,
+      "path": "scope_manifest.json",
+      "status": "scaffolded",
+      "units": [
+        "scope_manifest"
+      ]
+    },
+    {
+      "id": "RSPEC",
+      "stage": 3,
+      "path": "04-reports-spec/",
+      "status": "scaffolded",
+      "units": []
+    },
+    {
+      "id": "DD",
+      "stage": 4,
+      "path": "05-data-dictionary/",
+      "status": "scaffolded",
+      "units": [
+        "8_sheets"
+      ]
+    },
+    {
+      "id": "WTC",
+      "stage": 5,
+      "path": "02-wtc/",
+      "status": "scaffolded",
+      "units": [
+        "global_baseline",
+        "country_specific"
+      ]
+    },
+    {
+      "id": "SIR",
+      "stage": 6,
+      "path": "03-statutory-integrations/",
+      "status": "scaffolded",
+      "units": [
+        "third_party_provider_handoff"
+      ]
+    },
+    {
+      "id": "PSL",
+      "stage": 7,
+      "path": "06-payslip/",
+      "status": "scaffolded",
+      "units": [
+        "8_sheets"
+      ]
+    },
+    {
+      "id": "SKILL",
+      "stage": 11,
+      "path": "../skills-build/payroll-compliance-united-states/",
+      "status": "scaffolded",
+      "units": [
+        "SKILL.md",
+        "references"
+      ]
+    }
+  ],
+  "_design_artifact": {
+    "id": "DESIGN",
+    "stage": 12,
+    "path": "09-design/",
+    "status": "scaffolded",
+    "units": [
+      "regulation_design"
+    ],
+    "_why_here": "schema 1.4.0 caps artifacts[].stage at 11, so a DESIGN entry with stage 12 fails validation; parked here until the schema admits stage 12."
+  },
+  "_skills_build_note": "skills-build/ sibling NOT created: the invocation restricted writes to BASE. Expected location: C:/Users/instituto/Documents/brain-service/Research Pipeline/USA/skills-build/payroll-compliance-united-states/ (create at stage 11).",
+  "shared_refs": {
+    "qa_methodology": "~/mercans-pipeline/shared/QA_METHODOLOGY_BAKE_IN.md",
+    "playbook": "~/mercans-pipeline/shared/CCG-Playbook-Learnings.md",
+    "failure_log": "~/mercans-pipeline/shared/country_failure_log.md",
+    "audit": "~/mercans-pipeline/shared/PRESUBMISSION_AUDIT.md",
+    "portal_registry": "~/mercans-pipeline/shared/country_portal_registry.md",
+    "templates_guide": "~/mercans-pipeline/shared/SHARED_TEMPLATES_GUIDE_v2_1.md",
+    "ccg_questions": "~/mercans-pipeline/shared/CCG_TEMPLATE_QUESTIONS.md",
+    "scope_template": "~/mercans-pipeline/shared/scope_manifest_template.json",
+    "global_wtc": "~/mercans-pipeline/shared/Global_WTC_V1_0.xlsx",
+    "schemas": "~/mercans-pipeline/shared/schemas/",
+    "design_template": "~/mercans-pipeline/shared/design-template/",
+    "validation_suite_template": "~/mercans-pipeline/shared/validation-suite-template/"
+  },
+  "_shared_refs_note": "BASE is overridden to C:/Users/instituto/Documents/brain-service/Research Pipeline/USA/US-compliance; shared/ is read-only from ~/mercans-pipeline.",
+  "source_partitioning": {
+    "stage_1": "00-official-sources/ccg-sources",
+    "stage_3": "00-official-sources/spec-sources",
+    "stage_4": "00-official-sources/dd-sources",
+    "stage_5": "00-official-sources/wtc-sources",
+    "stage_6": "integration-sources",
+    "stage_7": "00-official-sources/sample-files",
+    "_stage_1_fanout": "00-official-sources/ccg-sources/{JUR}, JUR in FED, MULTI and the 51 USPS codes; each fan-out unit reads only its own subfolder.",
+    "_limit_bytes": "33554432",
+    "_measured_bytes": "stage_1=0 stage_3=0 stage_4=0 stage_5=0 stage_6=0 stage_7=0 (all empty at scaffold, 2026-10-29)",
+    "_note": "F22/F23: the pre-flight sums recursively. Measure the folder the stage reads. One file, one subfolder. With 53 jurisdiction units the whole ccg-sources tree will exceed 32 MB, so stage 1 MUST read per jurisdiction subfolder. Agent 2 returns measured bytes in _research/partitioning-update.json."
+  },
+  "package": {
+    "version": "1.0",
+    "issue_date": "2027-03-31",
+    "issued_by": "Wallisson Gomes",
+    "_note": "issue_date is a planning placeholder; the owner has not set a date."
+  },
+  "_oracle_pending": "oracle omitted until US-MQ-08 is answered (none on disk). Candidate to verify: IRS Pub. 15-T 2026 worked examples (official_examples). Stage 2 / 9b cannot run until filled at seal.",
+  "generated_by": "compliance-scaffolder",
+  "generated_on": "2026-10-29",
+  "changelog": [
+    {
+      "date": "2026-10-29",
+      "change": "First emission: skeleton created; tier T4 provisional; 65 mandate questions open (US-MQ-01..14, US-MQ-20..70); mandate_status pending_research.",
+      "by": "compliance-scaffolder"
+    }
+  ]
+}

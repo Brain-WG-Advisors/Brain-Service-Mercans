@@ -57,6 +57,7 @@ As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada u
 - Ticket é da janela Suporte: as outras janelas só anotam e avisam o usuário.
 - "Fecha a sessão" numa janela de frente: nota `sessoes/AAAA-MM-DD-<frente>.md`, reescreve só o seu `frentes/<frente>/estado.md`.
 - Git (commit): só pela janela geral.
+- **Frentes de projeto (2026-10-29):** **Chade** (`frentes/chade`, design do Dev no HRBlizz de teste × nosso design), **EUA** (`frentes/eua`, research por estado, 50 + DC) e **Validação CO** (`frentes/validacaoco`, validação da research da Colômbia no modelo da França). Abrir com `scripts/abrir_frentes.ps1 -Frentes Chade,EUA,ValidacaoCO`.
 
 ## Arquivos dentro do cérebro (decidido em 2026-10-16)
 - O cérebro guarda o conhecimento com os **arquivos reais** (xlsx, docx, scripts, logs de conferência), não só notas `.md`. `Research Pipeline/` e `internal-certification/` foram movidas para dentro do brain-service; os caminhos antigos em `Documents\` são atalhos (junction) para as mesmas pastas, então scripts e frentes continuam funcionando.
@@ -72,6 +73,7 @@ As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada u
 - Graphify:
   - O grafo da camada de conhecimento fica em `graphify-out/`, fora do git. O escopo está em `.graphifyignore`, sem cópias de skill nem saídas do pipeline.
   - Para perguntas sobre o cérebro, começar por `graphify query`.
+  - Para material longo (reuniões, leis, tickets, chats, extrações): `python scripts/buscar.py "<termos>" [--fonte reunioes|oficiais|tickets|chats|extracoes]` devolve arquivo:linha + trecho; abrir só o trecho citado. Local, sem rede; reuniões e tickets em inglês → buscar em inglês (decidido em 2026-10-28).
   - Depois de mudar notas, rodar `graphify update .` e reler com agentes só as notas alteradas.
 - Script que altera notas em lote:
   - não toca cópias de skill, saídas do pipeline, rascunhos nem os `estado.md` das frentes;
@@ -91,6 +93,8 @@ Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as jane
    - **Regras:** skill antes; fonte primária para cada afirmação; apresentar ao usuário antes de gravar; nunca enviar.
    - **Devolver:** resumo em até 5 linhas + o que espera o usuário (por `SendMessage` para a janela geral).
 4. Não refazer o trabalho da frente. Se o retorno vier sem prova, devolver pedindo a fonte.
+
+**Painel das frentes (2026-10-29):** a cada retorno de frente, atualizar em `paineis/entregas.json` o cartão da frente **em linguagem de leigo** (situação, "o que está acontecendo" em 1–2 frases, "o que você precisa fazer" em no máximo 2–3 itens curtos, sem siglas sem tradução), acrescentar a entrega ao histórico e rodar `python scripts/painel_frentes.py`. O usuário acompanha em `paineis/frentes.html`; no chat, só o resumo curto. Usuário pediu simplicidade: se não der para entender em segundos, simplificar.
 
 **Ao responder ao usuário**
 - Painel curto: ✅ pronto | ⏳ espera você | 🔄 espera outros/frente.

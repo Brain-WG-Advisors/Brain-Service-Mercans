@@ -51,3 +51,21 @@ Sem resposta: Manette/TI (só avisar quando o celular pedir aprovação de admin
 - 28/10: Romano (3CX, On-Call Contact Directory) respondido pela frente Chat (informado pelo usuário); rascunho desta janela não usado.
 - 28/10 ~11h30: Heidy — 3 fontes conferidas nesta janela: Ley 43/1984 art. 5 (Función Pública i=287) ok; CE-SUJ-024-21 ok (sentença 03/02/2005 anulou o trecho do Decreto 1073/2002 que proibia descontos na mesada de junho, art. 142 Ley 100); conceito 12310-0322-04 (FSP nas mesadas) não localizado e contrariado pela Ley 43 art. 5 em dezembro → removido. Parágrafo trocado (ok do usuário), salvo e conferido após recarregar. Não enviado.
 - 28/10 ~12h: rascunho da Heidy com corpo novo (texto da janela brain-service, ok do usuário nesta janela; Q16 com a frase original de 26/10): Q16 fica como em 26/10; pede WT por faixa de saúde; mesadas com Ley 43 art. 5 (dez.) e CE 03/02/2005 (jun.), 'confirm the June setting with PMI'; pede tipo de pensão e tipo 5/6. Salvo e conferido após recarregar. Não enviado.
+
+## Marko Taylor (28/10 ~14h, pedido do usuário: "analise os emails de Marko")
+Busca `from:marko newer_than:14d`, 2 conversas, as duas de hoje, lidas inteiras.
+| # | Assunto | O que é | Ação |
+|---|---|---|---|
+| 10 | Fwd: Release LH2027 v1.6 is gepubliceerd (14:53, para o grupo Compliance) | Encaminha, sem comentário, o aviso do Belastingdienst/ODB: release definitiva da Loonheffingen Aangifte 2027 v1.6, com Cao-lijst 01-2027, Opmerkingen BD 01-2027 e Coderingenlandennatsector 1-1-2027; os Rekenvoorschriften (Prinsjesdag) seguem provisórios | Só saber: insumo para o alerta de 2027 da Holanda. Registrado em [[Holanda]] Pendências |
+| 11 | Compliance automations: testing status (14:59, para o usuário, Cc Manju) | "Thank you for the update." em resposta ao status das automações (cerca de 60%) que o usuário mandou às 11:31 | Nada a responder |
+- 28/10 ~14h30: rascunho vazio para o Kevin (só o destinatário e a assinatura, aberto por engano antes do 'Não vamos escrever nada no email!') descartado com ok do usuário. Drafts vazio.
+
+## 29/10 — Lily (509/701), rascunho
+- 29/10 ~10h: Reply all no fio 'Fwd: Spain Migration Progress' (resposta ao e-mail da Lily de 00:05): 701 muda; 509 = CC só empresarial (pago directo, nascimento, risco, alta sem retribuição); IT pago delegado no 500; pergunta quais elementos 79418…79432 são pago directo. Fontes: Manual SLD 14/09/2026; BNR 7/2024, 3/2023, 7/2023; RD 2064/1995 art. 68.6; LGSS 142.1; AFI v9.7. Ok do usuário nesta janela; salvo e conferido após recarregar. Não enviado. Chat STG Espanha lido (seguro-saúde, sem 509/701).
+- 29/10 ~10h30: Lily 'Re: Spain BIK for Gross-Up' (aviso, sem pergunta; atribui a lógica do km a nós): rascunho Reply all (ok do usuário nesta janela), 58120 = km × menor entre taxa e 0,26. Conferido em Drafts pela busca. Não enviado.
+- 29/10 ~11h: os dois rascunhos (L03 e BIK) trocados pelas versões curtas (ok do usuário nesta janela); conferidos após recarregar. Não enviados.
+- 29/10 ~11h30: L03 — acrescentada a frase do ticket de alteração ao Development (como no CCG v1.7 do HRBS-16407), ok do usuário; conferido após recarregar. Não enviado.
+- 29/10 ~12h: rascunho do L03 trocado (ok do usuário): 500/509 sem mudança na fórmula (a regra da v2.3/v2.4 já é pago directo); 701/702/703 só pluriemprego; 704/801/901 não são códigos; 'I've corrected ES-BASES-001 (v3.2)'. Conferido após recarregar. Não enviado — enviar só depois do import da v3.2.
+- 29/10 ~12h30: v3.2 importada (Replace) e conferida; rascunho do L03 pode ser enviado.
+- 29/10 ~13h: v3.3 importada e conferida; L03 reescrito (509 só 79429/79430/79432; 79418–79424 → 500 + 563); BIK + Orden HFP/792/2023. Ambos conferidos após recarregar. Não enviados.
+- 29/10: L03 e BIK enviados pelo usuário.

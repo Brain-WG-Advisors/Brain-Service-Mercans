@@ -1,12 +1,31 @@
 # Onde paramos
 
-> Atualizado em 2026-10-28, fim do dia (sessão [[sessoes/2026-10-28]], partes 1 e 2; demais blocos sem mudança desde 2026-10-27). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-10-29, fim do dia (sessão [[sessoes/2026-10-29]]; blocos de 28/10 e anteriores sem mudança). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+
+## 2026-10-29 — 5 demandas em paralelo (usuário) — acompanhar em `paineis/frentes.html`
+- **Janelas no Maestri:** Chade, EUA, Validação CO (novas), Certificação, Process Lithuania (= Pipeline). O usuário trata direto com cada uma; a geral atualiza o painel a cada retorno. `frentes/lituania` sem uso (fora do git; apagar com ok).
+- **Ferramentas novas:** `scripts/buscar.py` (busca local por trecho) e `scripts/painel_frentes.py` (painel).
+| # | Demanda | Frente | Escopo decidido pelo usuário |
+|---|---|---|---|
+| 1 | Teste do design do Chade no HRBlizz (teste) | **Chade** (nova) | Design do Dev × nosso design; login do usuário, Chrome só leitura |
+| 2 | Research EUA | **EUA** (nova) | Uma research por estado, 50 + DC (origem: weekly 29/09, biweekly Marko 21/10) |
+| 3 | Internal Certification | Certificação | Seguir as análises e, no fim, propor melhorias |
+| 4 | Lituânia | Pipeline (no Maestri: "Process Lithuania"; a pasta `frentes/lituania` criada por engano não é usada) | Validação de 28/10 reprovou SAM v1.0, GPM313/312 v1.1 e SIR v1.0 → corrigir localmente (ok do usuário, 29/10), revalidar, depois Drive/tickets (novo ok) e só então o pedido ao Kevin (HRBS-15253, iniciativa nossa) |
+| 5 | Validar a research da Colômbia | **Validação CO** (nova) | Mesmo método da França (oráculo + suíte + redlines) |
+
+**Escopo esclarecido pelo usuário (29/10, mandado a cada frente):**
+1. Chade: achar no claude.ai (Chrome) a última conversa sobre o design + contexto do cérebro → pacote de contexto para o chat que vai tratar o projeto; HRBlizz de teste depois.
+2. EUA: iniciar a Research Pipeline com o que está no MD da frente Pipeline (sem usar a janela Pipeline), cobrindo todos os estados (variação de lei estado a estado).
+3. Certificação: destino já definido pelo Marko; entregar o caminho mais rápido e eficiente do 0 ao 100% + o relatório + melhorias.
+4. Lituânia: mesmo processo de validação com o BAU feito na Colômbia, para specs e SIR, meta de 0 erros (depois das correções locais).
+5. Colômbia: validar cada artefato com simulações, como na França, meta de 100% de acertos.
 
 ## Hoje (2026-10-28) — ver [[sessoes/2026-10-28]]
 - **Pronto:**
   - resposta à Heidy (Colômbia, PMI Review) enviada pelo usuário; nota [[revisoes/2026-10-28-CO-mesadas-adicionais-saude-fsp]];
   - skill brain-service de 28/10 no claude.ai (conferida);
   - tudo enviado ao GitHub (`main` = `origin/main`).
+  - busca local por trecho `scripts/buscar.py` (reuniões, leis, tickets, chats, extrações; sem rede), ainda sem commit.
 - **Esperando o usuário:**
   - ok para apagar o CSV "Columbia Regulation Plan  - Plan .csv" (Downloads) e o Google Doc 1akwVTqv (conversão da Lituânia com erro);
   - reiniciar o Claude Desktop (MCP "brain");

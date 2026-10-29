@@ -1,0 +1,5 @@
+@nkeer @lli Payments made less often than monthly are prorated over the 12 months of the Social Security base (LGSS art. 147.1), so the monthly accrual is the annual amount of the extras divided by 12. What each extra includes is set by the collective agreement or the contract, not by law (ET arts. 31 and 26.3).
+
+The accrual formula already covers seniority: 58140/64556 use 64440, and seniority (62182) is part of 64440. As Lily noted, the 219.10 is not in the G2N for EE 1001483, so the 363.53 (2,181.21 / 6) comes from the missing seniority input, not from the formula. With it loaded, the same formula gives 2,400.31 / 6 = 400.05.
+
+In the WTC, the extra pay itself has a different base: only 62100 Basic Salary is flagged "Accumulates to Extra Pay" (62182 Seniority is not), while the accrual uses 64440. If STG's agreement or contract includes seniority in each extra, as in ADP's calculation, 62182 should also accumulate to the extra pay. Could you confirm which collective agreement or contract clause STG applies to the extras?

@@ -26,7 +26,8 @@
 | — | Rússia | — | — | — | ⏳ Sem contato | C-12: Olga apresentada pela Sadaf (09/10); pedido em rascunho no Gmail desde 09/10, envio não confirmado |
 
 **Notas**
-1. **UK — divergência no painel:** o painel diz "Falta recibo", mas os ACKs do HMRC (FPS e EPS de set/26, recebidos 29/09) foram colados pelo Srikanth no Chat em 09/10 e arquivados em `United Kingdom/McDermott UK - 2026-09/01 Received/HMRC_acknowledgements_FPS_EPS_202609 (from Chat).txt`; os IRmarks batem com os arquivos validados. Atualizar o painel e o workbook UK (recibo → Pass) na próxima sessão desta frente.
+0. **29/10:** painel atualizado (células em azul; backup no scratchpad da sessão). UK e KZ: recibo = Sim e situação conforme os Audit Reports. Entraram na aba Achados KZ F-06, UK RF-02, MD-01 e MD-02. KZ F-01 foi descartado (correto). C-09 concluída; C-05 parcial; C-17 e C-18 acrescentadas. Propostas de melhoria (rascunho): [[internal-certification/_melhorias/2026-10-29-propostas-melhoria|propostas 29/10]].
+1. **UK — divergência no painel (resolvida em 29/10 no painel; o workbook de 07/10 não foi revisado, pela regra de 16/10):** o painel dizia "Falta recibo", mas os ACKs do HMRC (FPS e EPS de set/26, recebidos 29/09) foram colados pelo Srikanth no Chat em 09/10 e arquivados em `United Kingdom/McDermott UK - 2026-09/01 Received/HMRC_acknowledgements_FPS_EPS_202609 (from Chat).txt`; os IRmarks batem com os arquivos validados. Atualizar o painel e o workbook UK (recibo → Pass) na próxima sessão desta frente.
 2. **Ucrânia ago/26:** recibo da DPS do J0500111 (aceito 21/09/2026) já está no pacote; o que falta é o recibo do 1-PV.
 
 ## Ações para implementation (painel, aba Ações)
@@ -44,9 +45,16 @@
 - Regra (16/10): só validar e emitir Audit Report dos pacotes completos; não revisar workbooks depois de validado. KZ, UA set/26, AZ ficam fora até chegar o report principal.
 
 ## Projeto do Marko: fluxo das entregas (registrado em 28/10, separado da certificação acima)
-> Recebido da janela geral em 28/10. **Não contatar ninguém.** Plano v0.1 em rascunho (28/10), esperando a aprovação do usuário: [[internal-certification/_projetos/fluxo-entregas-marko/PLANO_fluxo_entregas_v0.1|PLANO_fluxo_entregas_v0.1]] (fases 0–3, NO como piloto, lista de países, datas propostas: fase 0 até 30/10, piloto até 06/11).
+> Recebido da janela geral em 28/10. **Não contatar ninguém.** **Plano de ação vigente: [[internal-certification/_projetos/fluxo-entregas-marko/PLANO_fluxo_entregas_v0.2|v0.2]]** (28/10), com 10 ações, onda única ao BAU em 29–30/10, respostas até 04/11 e plano por país em 09/11. A v0.1 fica como histórico (matriz, exemplo da NO, lista de países).
 > Nota completa: [[revisoes/2026-10-28-pedido-marko-fluxo-entregas]]. Fontes lidas em 28/10: weekly 27/10 (04:31–13:59), call com o Vinícius 27/10 (59:38–1:06:14 e 1:32:49–1:33:24), weekly 07/10, call com a Manju 09/10, bi-weekly 21/10, Espanha 27/10 (22:18–24:58).
 
+- **Decisões do usuário (28/10):**
+  - **ele mesmo envia** as mensagens à Manju e aos times;
+  - o mapa de contatos já existe no monday (BAU Master Client List), então não precisa montar outro;
+  - perguntas curtas, só as necessárias;
+  - uma mensagem por pessoa, em uma onda só;
+  - o fluxo inclui todos os times (BAU, implementação/Config, Dev).
+- **Instrução vigente (29/10):** não acionar a Manju agora. Primeiro fazemos o caminho com os nossos 12 países. No fim, apresentamos a ela o método e o resultado.
 - **O pedido:** para cada país em produção, levantar como cada entrega ao governo é feita **hoje** (o sistema gera ou é feita à mão, por qual canal, com ou sem terceiro, se é corrigida antes do envio) e como **deveria** ser (o sistema gera, a Mercans é registrada como agente, o arquivo vai por XML/API com a assinatura do cliente). Depois, listar o que falta e montar um plano com datas para o Marko.
   - Não é a validação das specs. A Manju disse em 27/10 10:08: "that is different than what I'm asking now".
   - O modelo é o documento da Manju para o Vietnã e o Taiwan.

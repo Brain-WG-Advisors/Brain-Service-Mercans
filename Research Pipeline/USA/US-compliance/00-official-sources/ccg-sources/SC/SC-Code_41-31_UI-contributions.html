@@ -1,0 +1,909 @@
+﻿
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
+	<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta name="robots" content="noimageindex">
+	    <meta charset="iso-8859-1">
+	    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+	    	    <title>Code of Laws - Title 41 - Chapter 31- - LABOR AND EMPLOYMENT</title>
+	    <link rel="SHORTCUT ICON" href="/images/stateflagsmall.ico" />
+		<link rel="icon" href="/images/stateflagsmall.ico" type="image/ico" />
+		<link rel="SHORTCUT ICON" href="/images/South-Carolina-Flag2.ico" />
+
+		<link type="text/css" rel="stylesheet" href="/css/main.css" media="all" />
+				
+		<!--[if lte IE 7]>
+		<link type="text/css" rel="stylesheet" href="/css/ie7main.css" media="all" />
+		<![endif]-->
+		<!--[if gte IE 7]>
+		<link type="text/css" rel="stylesheet" href="/css/iemain.css" media="all" />
+		<![endif]-->
+		<link type="text/css" rel="stylesheet" href="/css/print.css" media="print" />
+		<link type="text/css" rel="stylesheet" href="/css/supplement.css" media="screen" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/zipsearch.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/vote.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/contact.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/navwrap.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/linkbar.css" media="screen" />-->
+	
+		<!--<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>-->
+		<script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+				<script type="text/javascript" src="/js/main_linux.js"></script>
+		
+
+		
+
+
+
+		<!--<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/utils.js"></script>
+		<script type="text/javascript" src="/js/date.js"></script>
+		<script type="text/javascript" src="/js/lightbox.js"></script>
+		<script type="text/javascript" src="/js/legislation.js"></script>
+		<script type="text/javascript" src="/js/logon_lits.js"></script>
+		<script type="text/javascript" src="/js/message.js"></script>
+		<script type="text/javascript" src="/js/comm_meeting.js"></script>-->
+		<script type="text/vbscript" src="/vbs/comm_meeting.vbs"></script>
+		<!--<script type="text/javascript" src="/js/regs.js"></script>-->
+				
+	   	<script type="text/javascript">
+	    //document.onclick = function () { document.getElementById('transbox').style.display= 'none' };
+	    	var xmlhttp=false;
+			xmlhttp = create_xml_object();
+	
+			function getElement(ele)
+			{
+				var theobj = false;
+				if(typeof ele == 'string')
+					theobj = (document.getElementById)?document.getElementById(ele):document.all[ele];
+				else
+					theobj = ele;
+			
+				return theobj;
+			}
+		
+			function checkreader(friendlyalert)
+			{
+			 	/*friendlyalert=friendlyalert||false;
+			 	
+			 	var browser_info = perform_acrobat_detection();
+				if (!browser_info.acrobat)
+				{
+				 	loadadobebox('adobebox', '/adobe.php');
+					return false;
+				}
+				else if (friendlyalert)
+				{
+			 		alert(friendlyalert);
+				}*/
+				return true;
+			}
+				
+			function loadadobebox(boxname, url)
+			{
+				var response = false;
+	
+				doRequest(xmlhttp, "GET", url, false, null, null);
+				if (xmlhttp.status == 200)
+				{
+		         	response = xmlhttp.responseText;
+				}
+	
+				if(response)
+				{
+			 		var ele = document.getElementById(boxname);
+				 	if (ele)
+				 	{
+				 		ele.style.visibility = 'hidden';
+		 				ele.style.display = 'block';
+	
+		 				positionElement(ele, 'center', 'center', true);
+	
+						ele.innerHTML = response;
+					    ele.style.visibility = 'visible';
+					    ele.style.display = 'block';
+	//				    ele.scrollIntoView(true);
+					}
+				}
+				return response;
+			}
+	
+	
+			function init()
+			{
+		 		var ld=document.getElementById("loading");
+				if(ld)
+				{
+					ld.style.display = 'none';
+				}
+			}
+			
+			function openmore()
+			{
+			 	var id = document.getElementById('quicksearch');
+			 	if (id)
+			 	{
+				 	var pos = findPos(id);
+				 	id.style.zIndex = 10;
+		//		 	id.style.left = pos[0]+'px';
+		//		  	id.style.top = pos[1]+'px';
+				  	id.style.height = '295px';
+				  	id.style.position = 'absolute';
+				  	id.style.backgroundColor = '#f7f4ec';
+				  	var id2 = document.getElementById('searchmore');
+				  	if (id2)
+				  	{
+				  	 	id2.style.display = 'none';
+				  	}
+				  	var id3 = document.getElementById('contactlegislatordiv');
+				  	if (id3)
+				  	{
+				  	 	id3.style.display = 'none';
+				  	}
+				}
+			}
+		
+			function closemore()
+			{
+			 	var id = document.getElementById('quicksearch');
+			 	if (id)
+			 	{
+				  	id.style.height = '135px';
+				  	id.style.position = '';
+				  	id.style.backgroundColor = 'transparent';
+				  	var id2 = document.getElementById('searchmore');
+				  	if (id2)
+				  	{
+				  	 	id2.style.display = 'block';
+				  	}
+				  	var id3 = document.getElementById('contactlegislatordiv');
+				  	if (id3)
+				  	{
+				  	 	id3.style.display = '';
+				  	}
+				}		 	
+			}
+		
+		<!-- This script and many more are available free online at -->
+		<!-- The JavaScript Source!! http://javascript.internet.com -->
+		
+		<!-- Begin
+		function right(e) {
+		var msg = "Use of this image is strictly prohibited unless express written permission is given to the user by South Carolina Legislative Services Agency.";
+		if (navigator.appName == 'Netscape' && e.which == 3) {
+		alert(msg);
+		return false;
+		stopEvent(e);
+		}
+		if (navigator.appName == 'Microsoft Internet Explorer' && event.button==2) {
+		alert(msg);
+		return false;
+			stopEvent(event);
+		}
+		else return true;
+		}
+		
+	function trap() 
+	{
+		if(document.images)
+		{
+			for(i=0;i<document.images.length;i++)
+			{
+				if(document.images[i].className == 'allowcontextmenu')
+				{
+					// this should have no scripting
+				}
+				else
+				{
+				 	document.images[i].onmousedown = right;
+					document.images[i].oncontextmenu = function(){ return false; };
+					//document.images[i].onmouseup = right;
+				}
+			}
+		}
+	}
+
+	function findfwtext(texttofind) 
+	{
+	 	var fwtextele = document.getElementById('fwtext');
+		if(fwtextele)
+		{
+			fwtextele.value = texttofind;
+		}
+	}	
+		// End -->
+		</script>
+
+		<!-- ADDED FOR V4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LJY6FMNQKH"></script>
+
+
+<script type="text/javascript">
+
+//ADDED FOR V4
+//Google tag (gtag.js) 
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LJY6FMNQKH');
+
+ 
+ /* COMMENTING OUT UPGRADING TO V4 -A
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36207109-1']);
+  _gaq.push(['_setDomainName', 'scstatehouse.gov']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+  
+      $(document).ready(function(){
+        // COMMENTING THIS OUT NO LONGER BEING ACTIVELY USED TO MONITOR FOR TRAFFIC TO SPECIFIC LINKS - A
+        /*
+          var anchors = $('div#contentsection a');
+
+          //console.log('anchors...'+anchors.length);
+          if(anchors.length > 0){
+            //console.log('setting up event handler...');
+            anchors.click(function(){
+              var a = $(this).attr('href');
+              if(_gaq && (a.substr(-3) == 'htm' || a.substr(-4) == 'html' || a.substr(-3) == 'doc' || a.substr(-4) == 'docx' || a.substr(-3) == 'pdf' || a.substr(-3) == 'xls' || a.substr(-4) == 'xlsx')) {
+                //console.log(a);
+                _gaq.push(['_trackPageview', $(this).attr('href')]);
+              }
+              
+              var aText = $(this).text().toLowerCase();
+              if (a.indexOf('getfile.php') > -1 && aText === 'word'){
+                    _gaq.push(['_trackEvent', 'Word Doc', 'Download', ('from page: ' + document.location + ' - href: ' + a)]);
+              }
+
+            });
+          }
+          */
+      });
+
+</script>
+	</head>
+	
+		
+	<body class="home"  onload="init(); trap();">
+	<noscript>Your browser does not support JavaScript!  This page will not render correctly.</noscript> 
+
+
+	
+	<div id="adobebox" style="position:absolute; width:400px; height:150px; border:2px solid #555555; background-color:#cccccc; display:none;"></div>
+	<div id="container" >	
+				<div id="header" class="nodisplay" style="text-align:center; height:100px;" >
+									<img id="headerimg" class="nodisplay" alt="South Carolina Legislature" title="South Carolina Legislature" src="/images/header8.png" />
+								
+							<!--	<div class="award"><span style="color:#831224; font-weight:bold; font-size:1.5em;">*</span> Recipient of<br>the Notable State Documents Award<br>by the<br>South Carolina<br>State Library.</div>-->
+				
+				
+			</div>
+			<div class="printdisplay"><img border="0" src="/images/titleprint.jpg" alt="South Carolina Legislature" title="South Carolina Legislature" alt="South Carolina Legislature" title="South Carolina State Legislature" /><br /><hr /><br /></div>
+	
+			<div id="pagebody" >
+	
+	
+<!--<div id="topmessage">
+<br style="display:block; margin-top:10px;">
+Searches and data queries will be unavailable beginning Friday, August 19, 2016, from 8:00 PM until Saturday, August 20th at 8:00 AM<br>due to scheduled maintenance.</div>-->
+				<!-- Prompt IE 8/7/6 users to upgrade to a newer browser. -->
+				<!--[if lte IE 8]>
+				<div class="oldframe">In order to improve your experience using this website, please <a href="http://browsehappy.com/">upgrade your browser</a>.</div>
+				<![endif]-->
+			
+			
+			
+			<div id="menu" class="nodisplay">
+				<ul class="nodisplay">
+				<li><a href="/index.php">Home</a></li>
+<li><a href="/senate.php">Senate</a></li>
+<li><a href="/house.php">House</a></li>
+<li><a href="/committeeinfo.php">Committee&nbsp;Postings&nbsp;and&nbsp;Reports</a></li>
+<li><a href="/council.php">Legislative Council</a></li>
+<li><a href="/citizens.php">Citizens&#39; Interest</a></li>
+<li><a href="/publications.php">Publications</a></li>
+		    	</ul>
+			</div>
+			<div id="search" class="nodisplay" style="height: 28px;"><div class="nodisplay" style="float:right; margin:6px 20px 0px 0;">
+							<!--<a style="color:#f7f4ec; height:15px;" href="#" onClick="rsswindow();"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>-->
+<!--				<a style="color:#f7f4ec; height:15px;" href="/splashpage/splashpage.html"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a> -->
+				<a style="color:#f7f4ec; height:15px;" href="/onlineservices/index.php"><img border="0" src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>
+			<!--	<a style="color:#f7f4ec; height:15px;" href="/maintenance_portal.php"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>-->
+						</div></div>
+			
+	
+					<div id="sidebar" class="nodisplay">
+	<div id="vidlinks" style="height: 50px;">
+						<!--<img src="/images/videobutton12d.png">-->
+											<ul id="vidsidemenu">
+	<li id="vidinnermenu" style="font-size:16px; margin: 0 0 5px 0;">Chamber Video</li>
+<li id="sbroadcast" style="float: left; width:50%;">
+<a id="liveS" style="width: 100%; text-decoration:underline;" href="javascript:void(0);" onClick="live_stream('S', false, false, '0')">Senate</a><br><a id="liveaudioS" style="margin:-3px 0 0 0; text-decoration:underline; width: 100%; font-size: 8px;" href="javascript:void(0);" onClick="live_stream('S', false, false, '1');">(Audio Only)</a>
+</li>
+<li id="hbroadcast" style="float: left; width:50%;">
+<a id="liveH" style="width: 100%; text-decoration:underline;" href="javascript:void(0);" onClick="live_stream('H', false, false, '0')">House</a><br><a id="liveaudioH" style="margin:-3px 0 0 0; text-decoration:underline; width: 100%; font-size: 8px;" href="javascript:void(0);" onClick="live_stream('H', false, false, '1');">(Audio Only)</a>
+</li>
+						</ul>
+					</div>
+					<div id="commvidlinks"><a href="/video/schedule.php">Video&nbsp;Schedule</a><a style="border-top:1px solid #fff; padding-top:12px;" href="/video/archives.php">Video Archives</a></div>
+										<div id="sidemenu">
+						<ul id="innermenu">
+		
+							<li><a href="/howdoi.php">How do I...</a></li>
+										
+							
+								<li class="nolink" onMouseOver="var ele=document.getElementById('sidesearch'); if(ele){ele.style.display='block'; document.sidesearchform.searchtext.focus();}" onMouseOut="var ele=document.getElementById('sidesearch'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">Quick Search</div>
+								<div id="sidesearch" class="sidesubmenu">
+									<form id="sidesearchform" name="sidesearchform" method="POST" action="/search.php">
+									<input type="hidden" name="search" value="side" />
+									<div class="topelement"><label for="searchtext"><span class="label">Search for:</span></label><input id="searchtext" name="searchtext" type="text"/><a id="searchlink2" href="javascript:void(0);" onClick="document.sidesearchform.submit();"><img id="searchicon" src="/images/searchbutton.png" alt="Search" title="Search"/></a></div>
+			<!--						<div><input type="checkbox" id="searchchoice_all" name="searchchoice_all" value="all" /><label for="searchchoice_all">All</label></div>-->
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_fullsite" name="category" value="FULLSITE" /><label for="searchchoice_fullsite">&nbsp;Full Site Search</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_billnumber" name="category" value="BILL" /><label for="searchchoice_billnumber">&nbsp;Bill Number</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_legislation" name="category" value="LEGISLATION" CHECKED /><label for="searchchoice_legislation">&nbsp;Legislation</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_budget" name="category" value="BUDGET" /><label for="searchchoice_budget">&nbsp;Budget</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_codeoflaws" name="category" value="CODEOFLAWS" /><label for="searchchoice_codeoflaws">&nbsp;Code of Laws</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_codeofregs" name="category" value="CODEOFREGS" /><label for="searchchoice_codeofregs">&nbsp;Code of Regulations</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_constitution" name="category" value="CONSTITUTION" /><label for="searchchoice_constitution">&nbsp;Constitution</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_housejournals" name="category" value="HOUSEJOURNALS" /><label for="searchchoice_housejournals">&nbsp;House Journals</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_senatejournals" name="category" value="SENATEJOURNALS" /><label for="searchchoice_senatejournals">&nbsp;Senate Journals</label></div>
+									<div class="bottomelement" style="padding-left:20px;"><input type="radio" id="searchchoice_billsummary" name="category" value="SUMMARY" /><label for="searchchoice_billsummary">&nbsp;LSA Bill Summary</label></div>
+								</form>
+									
+								</div>
+							</li>
+							<li><a href="/legislatorssearch.php">Find Your Legislators</a></li>
+							<li id="contactLegislatorLink"><a href="/email.php?chamber=B">Contact Your Legislator</a></li>
+									
+							<li><a href="/legislation.php">Legislation</a></li>
+							<li><a href="/listtracking/main.php" target="LTS">Track Legislation</a></li>
+							<li><a href="/multicriteria2/search.php" target="MCS">Multi-Criteria Search</a></li>
+									<!--<li><a href="#" onclick="multisearchwindow('INTROBOTH');">Multi-Criteria Search</a></li>-->
+									<!--<li><a href="#" onclick="multisearchwindow('INTROMANUAL');">Multi-Criteria Search</a></li>-->
+									<li><a href="/research.php">Research</a></li>
+	
+								<li class="nolink" onMouseOver="var ele=document.getElementById('law'); if(ele){ele.style.display='block';}" onMouseOut="var ele=document.getElementById('law'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">South Carolina Law</div> 
+								<div id="law" class="sidesubmenu">
+									<div class="sidediv topelement"><a href="/newlaws.php">Ratifications &amp; Acts</a></div>
+									<div class="sidediv"><a href="/code/statmast.php">Code of Laws</a></div>
+									<div class="sidediv"><a href="/coderegs/statmast.php">Code of Regulations</a></div>
+									<div class="sidediv"><a href="/scconstitution/scconst.php">Constitution</a></div>
+									<div class="sidediv bottomelement"><a href="/state_register.php">State Register</a></div>
+								</div>
+							</li>
+										<li class="nolink" onMouseOver="var ele=document.getElementById('manual'); if(ele){ele.style.display='block';}" onMouseOut="var ele=document.getElementById('manual'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">Legislative Manual</div>
+								<div id="manual" class="sidesubmenu">
+								
+<!--									<div class="sidediv topelement"><a href="https://web.sc.gov/LSAShoppingcart/Default.aspx" target="_blank">Purchase Manual</a></div>-->
+								
+<!--									<div class="sidediv topelement"><a href="https://secure.scstatehouse.gov/cgi-bin/webstore.exe" target="_blank">Purchase Manual</a></div>-->
+									<div class="sidediv topelement"><a href="javascript:#" onClick="alert('We are sorry, but we are unable to process online transactions at this time.\n\nIf you would still like to make a purchase, please contact us directly at (803) 212-4490 during normal business hours (8:30am - 5:00pm EST).');">Purchase Manual</a></div>
+									<div class="sidediv bottomelement"><a href="/man26/manual26.php">View Manual Online</a></div>
+								</div>
+							</li>
+							<li><a href="http://www.studentconnection.scstatehouse.gov">Student Connection</a></li>
+							<li><a href="/visit.php">Visiting the State House</a></li>
+							<li><a href="/archives.php">Archives</a></li>
+							<li><a href="http://www.sc.gov/Agency-Listing" target="_blank">State Agency Websites</a></li>
+							<!--<li><a href="/stateagencysites.php">State Agency Websites</a></li>-->
+							<li><a href="/citizensinterestpage/media.php">Media Links</a></li>
+				 		</ul>
+			    	</div>
+	
+					<div id="side_ad">
+						<A href="http://www.sc.gov/" target="_blank"><img border=0 src="/images/scgov3.jpg" alt="SC.gov" title="SC.gov" /></a>
+													<A href="http://www.statelibrary.sc.gov" target="_blank"><img border=0 src="/images/scsl_logo_rgb_web.png" alt="StateLibrary.SC.gov" title="StateLibrary.SC.gov" /></a>
+											</div>	    	
+			</div>
+
+	
+	<script type="text/javascript"> 
+		if ( '' === '1'){
+		 	
+			var link = document.getElementById('contactLegislatorLink');
+			if (link != 'undefined' && link != null){
+				link.style.display = 'none'; 
+				link.style.visibility = 'hidden';
+			}
+		}
+		if ( '' === '1'){
+		 	setTimeout(function(){
+				var link2 = document.getElementById('sendMsgLink');
+				if (link2 != 'undefined' && link2 != null){
+					link2.style.display = 'none'; 
+					link2.style.visibility = 'hidden';
+				};
+			}, 20);
+			
+		}  
+	</script>
+<div class="mainwidepanel">
+
+				<div id="breadcrumbs">
+						South Carolina Law &gt; <a href="/code/statmast.php">Code of Laws</a> &gt; <a href="/code/title41.php">Title 41</a>
+				</div>
+
+					<h2 class="barheader">South Carolina Code of Laws<br />
+									Unannotated<br />
+					</h2>
+
+				<div id="contentsection">
+<div style="font-weight: bold; text-align: center;">Title 41 - LABOR AND EMPLOYMENT</div>
+<br />
+
+<div style="text-align: center;">CHAPTER 31</div>
+<div style="text-align: center;">Contributions and Payments to the Unemployment Trust Fund</div><br />
+<div style="text-align: center;">ARTICLE 1</div>
+<div style="text-align: center;">Rates of Contributions</div><br />
+<span style="font-weight: bold;"> SECTION 41-31-5.</span> Definitions.<br /><br />
+	As used in this chapter:<br /><br />
+	(1) &quot;Benefit ratio&quot; means:<br /><br />
+	(a) for the period of January 1, 2011, through December 31, 2013, the number calculated by dividing the sum of all benefits charged to an employer during the forty calendar quarters immediately preceding the calculation date by the sum of the employer&#39;s taxable payroll for the same period. If fewer than forty but more than one calendar quarter of data are available, the data from those available calendar quarters shall be used in the calculation. The benefit ratio must be calculated annually using data for quarters filed through June thirtieth of the current year to the sixth decimal place;<br /><br />
+	(b) from January 1, 2014, through tax year 2026, the number calculated by dividing the sum of all benefits charged to an employer during the twelve calendar quarters immediately preceding the calculation date by the sum of the employer&#39;s taxable payroll for the same period. If fewer than twelve but more than one calendar quarters of data are available, the data from those available calendar quarters shall be used in the calculation. The benefit ratio must be calculated annually using data for quarters filed through June thirtieth of the current year to the sixth decimal place;<br /><br />
+	(c) For tax year 2027, the number calculated by dividing the sum of all benefits charged to an employer during the sixteen calendar quarters immediately preceding the calculation date by the sum of the employer&#39;s taxable payroll for the same period. If fewer than sixteen but more than one calendar quarters of data are available, then the data from those available calendar quarters shall be used in the calculation. The benefit ratio must be calculated annually using data for quarters filed through June thirtieth of the current year to the sixth decimal place;<br /><br />
+	(d) Beginning in tax year 2028, the number calculated by dividing the sum of all benefits charged to an employer during the twenty calendar quarters immediately preceding the calculation date by the sum of the employer&#39;s taxable payroll for the same period. If fewer than twenty but more than one calendar quarters of data are available, then the data from those available calendar quarters shall be used in the calculation. The benefit ratio must be calculated annually using data for quarters filed through June thirtieth of the current year to the sixth decimal place; and<br /><br />
+	(e) Notwithstanding the provisions contained in items (a) through (d), an employer who is in rate class one in tax year 2026 remains subject to the calculation contained in item (b) until the employer no longer qualifies for rate class one, at which time the employer shall be subject to the calculation in item (c) or (d), as appropriate.<br /><br />
+	(2) &quot;Department&quot; means the Department of Employment and Workforce.<br /><br />
+	(3) &quot;Statewide average required rate&quot; means the amount of income projected to be needed by the unemployment insurance trust fund for the upcoming calendar year divided by the estimated taxable wages over the same period rounded to the sixth decimal place.<br /><br />
+	(4) &quot;Statewide average interest surcharge&quot; means the amount of income projected to be needed to pay interest on outstanding federal advances during the upcoming calendar year divided by the estimated taxable wages for the upcoming calendar year.<br /><br />
+HISTORY: 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 1, eff June 14, 2011; 2026 Act No. 243 (S.688), SECTION 1, eff July 1, 2026.<br /><br />
+Effect of Amendment<br /><br />
+	The 2011 amendment in subsection (1)(a) substituted &quot;sum&quot; for &quot;average&quot;, &quot;sum of the employer&#39;s&quot; for &quot;employer&#39;s average&quot;, and &quot;for&quot; for &quot;during&quot; in the first sentence, substituted &quot;one calendar quarter&quot; for &quot;four calendar quarters&quot; in the second sentence, and substituted &quot;using data for quarters filed through June thirtieth of the current year&quot; for &quot;on July first&quot; in the third sentence; and in subsection (B) in the first sentence substituted &quot;sum&quot; for &quot;average&quot;, &quot;sum of the employer&#39;s&quot; for &quot;employer&#39;s average&quot;, and &quot;for&quot; for &quot;during&quot;, in the second sentence substituted &quot;one calendar quarters&quot; for &quot;four calendar quarters&quot;, and in the third sentence substituted &quot;using data for quarters filed through June thirtieth of the current year&quot; for &quot;on July first&quot;.<br /><br />
+	2026 Act No. 243, SECTION 1, in (1)(b), inserted &quot;through tax year 2026,&quot;; and added (1)(c) to (1)(e).<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-10.</span> General rate of contribution.<br /><br />
+	Each employer shall pay contributions equal to the tax rate assigned to rate class twenty except as may be otherwise provided in Chapters 27 through 41 of this title. The department must promulgate regulations regarding the methodology by which the allowed prepayment amounts will be calculated and the manner in which they will be credited to the employer&#39;s account.<br /><br />
+HISTORY: 1962 Code SECTION 68-171; 1952 Code SECTION 68-171; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1955 (49) 480; 1986 Act No. 362, SECTION 2, eff April 3, 1986; 1999 Act No. 37, SECTION 2, eff June 1, 1999; 2010 Act No. 146, SECTION 9, eff March 30, 2010; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 3, SECTION 9, eff March 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment changed the rate of contributions from &quot;two and seven-tenths per cent&quot; to &quot;five and four-tenths percent&quot; and made grammatical changes.<br /><br />
+	The 1999 amendment designated the former section as subsection (A), and added subsection (B).<br /><br />
+	The first 2010 amendment in subsection (A) added the last two sentences relating to prepayment.<br /><br />
+	The second 2010 amendment deleted subsection identifier (A) and subsection (B), and omitted the text added by 2010 Act No. 146 to subsection (A).<br /><br />
+	The 2011 amendment substituted &quot;the tax rate assigned to rate class twenty&quot; for &quot;five and four-tenths percent of wages paid by him during each year&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-20.</span> Employers&#39; accounts.<br /><br />
+	(A) The department shall maintain a separate account for each employer and shall accurately record the data used to determine an employer&#39;s experience for the purpose of rate assignments. Nothing in Chapters 27 through 41 of this title shall be construed to grant any employer or individual in his service prior claims or rights to the amounts paid by him into the fund either on his behalf or on behalf of such individuals. Benefits paid to an eligible individual shall be charged, in the amounts provided in Chapters 27 through 41 of this title, against the accounts of his most recent employer. No employer shall be deemed as the most recent employer for the purpose of this section unless the eligible person to whom benefits are paid earned wages in the employ of the employer equal to at least eight times the weekly benefit amount of the eligible claimant.<br /><br />
+	(B) Any two or more qualified employers in the same or a related trade, occupation, profession, or enterprise, or having a common financial interest may apply to the department to establish a joint account or to merge their several individual accounts in a joint account. The department shall promulgate regulations for the establishment, maintenance, and dissolution of joint accounts. A joint account shall be maintained as if it constituted a single employer&#39;s account.<br /><br />
+	(C) The department shall promulgate regulations concerning the manner in which benefits shall be charged against the accounts of several employers for whom an individual performed employment at the same time. However, in the event benefits paid to an individual are based on wages paid by one or more employers who were liable for payments in lieu of contributions and on wages paid by one or more employers who were liable for payment of contributions, the amount in benefits charged to the account of the most recent employer shall not exceed the amount of benefits which would have been paid solely by reason of the base period wages paid by employers who were liable for payment of contributions.<br /><br />
+	(D) Nothing in this article shall be construed to limit benefits payable pursuant to Chapter 35 of this title.<br /><br />
+HISTORY: 1962 Code SECTION 68-172; 1952 Code SECTION 68-172; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1949 (46) 582; 1950 (46) 2014; 1971 (57) 950, 993; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 2, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment added the subsection identifiers, substituted &quot;department&quot; for &quot;Commission&quot; throughout, in first sentence of subsection (C) substituted a reference to regulations for rules, and made nonsubstantive changes.<br /><br />
+	The 2011 amendment in subsection (A) substituted &quot;accurately record the data used to determine an employer&#39;s experience for the purpose of rate assignments&quot; for &quot;credit the account of each with all the contributions paid on his behalf, but&quot; in the first sentence.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-30.</span> Classification of employers.<br /><br />
+	The department annually shall classify employers in accordance with their actual experience of the total taxable wages reported and with respect to benefits charged against their accounts to set contribution rates that reflect the employer&#39;s experience. The department shall determine the contribution rate of each employer in accordance with the requirements of Sections 41-31-20 to 41-31-70.<br /><br />
+HISTORY: 1962 Code SECTION 68-173; 1952 Code SECTION 68-173; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 3, SECTION 10, eff March 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+	The 2011 amendment substituted &quot;of the total taxable wages reported and&quot; for &quot;in the payment of contributions on their own behalf and&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-40.</span> Base rate computation periods.<br /><br />
+	Each employer&#39;s base rate for the twelve months commencing January first of any calendar year is determined in accordance with Section 41-31-50 on the basis of his record up through June thirtieth of the preceding calendar year, but no employer&#39;s base rate is less than the rate applicable for rate class twelve until there have been twelve consecutive months of coverage after first becoming liable for contributions under Chapters 27 through 41 of this title. Each employer who completes twelve consecutive calendar months of coverage after first becoming liable for contributions during the current calendar year shall have a base rate computed on the basis of his record up through the next occurring June thirtieth, with that base rate being effective for the next calendar year beginning in January.<br /><br />
+HISTORY: 1962 Code SECTION 68-174; 1952 Code SECTION 68-174; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1950 (46) 2013; 1955 (49) 480; 1986 Act No. 362, SECTION 3, eff April 3, 1986; 1999 Act No. 37, SECTION 3, eff June 1, 1999; 2002 Act No. 306, SECTION 4, eff June 5, 2002; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 3, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment made grammatical changes and lowered the minimum rate applicable to employers until there have been 24 consecutive months of coverage after initial liability for contributions.<br /><br />
+	The 1999 amendment changed &quot;rate&quot; to &quot;base rate&quot; throughout.<br /><br />
+	The 2002 amendment rewrote the section.<br /><br />
+	The 2010 amendment in the first sentence substituted &quot;the rate applicable for rate class thirteen&quot; for &quot;two and sixty-four hundredths percent&quot;, and deleted &quot;under the chapters&quot; after &quot;contributions&quot; in the second sentence.<br /><br />
+	The 2011 amendment in the first sentence substituted &quot;through June thirtieth&quot; for &quot;to July first&quot; and &quot;class twelve&quot; for &quot;class thirteen&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-45.</span> Unemployment trust fund; income calculations; solvency surcharge; debt status estimates.<br /><br />
+	(A) For the purposes of this section:<br /><br />
+	(1) &quot;Income needed to pay benefits&quot; means the estimate of benefits payable in a given calendar year less the estimate of interest to be earned by the unemployment insurance trust fund for that calendar year.<br /><br />
+	(2) &quot;Fund solvency target&quot; is defined as the value computed as the product of 0.08 and:<br /><br />
+	(a) the size of the South Carolina labor force as determined annually by the U.S. Bureau of Labor Statistics;<br /><br />
+	(b) the maximum weekly benefit amount set by the department in accordance with Section 41-35-40; and<br /><br />
+	(c) the maximum number of weeks of unemployment benefits available in accordance with Section 41-35-50.<br /><br />
+	(3) &quot;Trust fund reserve&quot; excludes distributions from the federal government pursuant to 42 U.S.C. 1103, commonly referred to as the Reed Act.<br /><br />
+	(4) &quot;Solvency surcharge&quot; is a surcharge imposed on contributory employers in each year the unemployment trust fund is solvent but the trust fund reserve does not meet the fund solvency target.<br /><br />
+	(5) &quot;Fiscal year&quot; begins on July first of each year and ends on June thirtieth of the succeeding year.<br /><br />
+	(6) &quot;Tax year&quot; begins on January first of each year and ends on December thirty-first of each year.<br /><br />
+	(7) &quot;Cap&quot; is the maximum projected amount of revenue to be generated in a single year and is the greater amount of either:<br /><br />
+	(a) the actual benefits paid in the prior fiscal year; or<br /><br />
+	(b) the projected benefits for the next tax year.<br /><br />
+	(8) &quot;Actual tax collections&quot; excludes all penalties, interests, contingency surcharges, and recording fees.<br /><br />
+	(B) Each year the department must calculate the income necessary to pay benefits and reach the fund solvency target for the unemployment trust fund. The department determines the total income needed as follows:<br /><br />
+	(1) Projected benefits will be determined for the next tax year with annual historical data as well as unemployment rate projections provided by the Congressional Budget Office.<br /><br />
+	(2) A solvency surcharge shall be in effect for each tax year the trust fund reserve is less than the fund solvency target, as of June thirtieth. The aggregate amount of the solvency surcharge will be determined for each tax year to be the amount calculated to return the unemployment trust fund to the fund solvency target within five years subject to:<br /><br />
+	(a) When actual benefits paid in the prior fiscal year are greater than the actual tax collections received in the prior fiscal year, then the cap is triggered. Once triggered, then:<br /><br />
+	(i) If projected benefits for the next tax year are less than the actual benefits paid in the prior fiscal year, then the solvency surcharge shall be the difference between the actual benefits paid in the prior fiscal year and the projected benefits.<br /><br />
+	(ii) If projected benefits for the next tax year are greater than the actual benefits paid in the prior fiscal year, then no additional solvency surcharge will be added for the next tax year.<br /><br />
+	(b) After the cap has been triggered, once actual benefits paid in the prior fiscal year were less than actual tax collections in the prior fiscal year, then tax rates for the next tax year will be set based on returning the unemployment trust fund to the fund solvency target within the next five years.<br /><br />
+	(3) If the balance of the unemployment trust fund, as of the end of the most recently completed fiscal year, is greater than the fund solvency target, then the department may use the surplus amount to reduce taxes in the next tax year.<br /><br />
+	(4) Notwithstanding the provisions of item (2), once the fund solvency target has been met, in subsequent tax years, if the unemployment trust fund balance does not meet the fund solvency target as of the end of the most recently completed fiscal year, then the solvency surcharge shall be set as follows:<br /><br />
+<table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+  <tr>
+    <th style="padding: 4px 8px; text-align: left;">Percentage the unemployment trust fund balance is below the fund adequacy target</th>
+    <th style="padding: 4px 8px; text-align: left;">Rebuilding period</th>
+  </tr>
+  <tr>
+    <td style="padding: 4px 8px; text-align: left;">More than 0.0000%, but less than 2.5000%</td>
+    <td style="padding: 4px 8px; text-align: left;">One year</td>
+  </tr>
+  <tr>
+    <td style="padding: 4px 8px; text-align: left;">2.5000% or more, but less than 5.0000%</td>
+    <td style="padding: 4px 8px; text-align: left;">Two years</td>
+  </tr>
+  <tr>
+    <td style="padding: 4px 8px; text-align: left;">5.0000% or more, but less than 7.5000%</td>
+    <td style="padding: 4px 8px; text-align: left;">Three years</td>
+  </tr>
+  <tr>
+    <td style="padding: 4px 8px; text-align: left;">7.5000% or more</td>
+    <td style="padding: 4px 8px; text-align: left;">Four years</td>
+  </tr>
+</table>
+<br />
+	(C) For each calendar year during which the state Unemployment Insurance Trust Fund is in debt status, the department must estimate the amount of income necessary to pay benefits for that year, the amount of income necessary to avoid automatic FUTA credit reductions, and an amount of income necessary to repay all outstanding federal loans within five years. Additional estimates of interest costs shall be determined concurrently.<br /><br />
+	(1) Estimates of the revenue needed to pay benefits will be based on Congressional Budget Office projections for the subsequent calendar year&#39;s total unemployment rate. This total unemployment rate will be adjusted for South Carolina based on the historic relationship between the unemployment rate in South Carolina and the national unemployment rate calculated from 1980 to present.<br /><br />
+	(2) The historic relationship, calculated from 1980 to present, between the total unemployment rate and the insured unemployment rate in South Carolina will be used to adjust the projected total unemployment rate to the rate of insured unemployment.<br /><br />
+	(3) Estimates of forecasted benefits will be based upon the prior three year average of the annual number of weeks compensated multiplied by an estimate of the average weekly benefit for the next year.<br /><br />
+	(4) Estimates of amounts to pay to avoid FUTA credit reductions and amount of repayments on the loan will be projected through consultation with officials at the US Department of Labor.<br /><br />
+HISTORY: 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2026 Act No. 243 (S.688), SECTION 2, eff July 1, 2026.<br /><br />
+Effect of Amendment<br /><br />
+	2026 Act No. 243, SECTION 2, rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-50.</span> Determination of tax rates.<br /><br />
+	Each employer eligible for a rate computation shall have his tax rate determined in the following manner:<br /><br />
+	(1)(a)(i) Annually the department must calculate a contribution rate for each employer qualified for an experience rating. The contribution rate must correspond to the rate calculated for the employer&#39;s benefit ratio class.<br /><br />
+	(ii) To determine an employer&#39;s benefit ratio rank, the department must list all employers by increasing benefit ratios, from the lowest benefit ratio to the highest benefit ratio. The list must be divided into classes ranked one through twenty. Each class must contain approximately five percent of the total taxable wages, excluding employers with less than twelve months of accomplished liability, employers with outstanding tax liens, delinquent tax class employers, and employers who reimburse the department in lieu of contributions, paid in covered employment during the four completed calendar quarters immediately preceding the computation date. Each employer must be placed in the class that corresponds with the employer&#39;s benefit ratio.<br /><br />
+	(iii) If an employer&#39;s taxable wages qualify the employer for two separate classes, the employer shall be afforded the class assigned the lower contribution rate. Employers with identical benefit ratios shall be assigned to the same class.<br /><br />
+	(b) The income needed to pay benefits for the calendar year plus any applicable income needed to reach the solvency target must be divided by the estimated taxable wages for the calendar year. The result rounded to the next higher one-hundredth of one percent is the average required rate needed to pay benefits and achieve solvency targets.<br /><br />
+	(c) The rate for class twenty will be set such that the entire schedule raises the income required to pay benefits for the year, as well as the income necessary to move the trust fund toward the solvency target, subject to the structure provided in this chapter. However, the rate for class twenty must be at least five and four-tenths percent.<br /><br />
+	(2)(a) If the calculated rate necessary for benefit rate class twenty exceeds five and four-tenths percent, then the rate for each preceding benefit rate class shall be equal to ninety percent of the rate calculated for the succeeding class, except that rate class twelve shall be set at one-fourth the rate calculated for class twenty, provided that the rate for class one shall be zero.<br /><br />
+	(b)(i) If the computed rate necessary for class twenty is less than five and four-tenths percent, then the rate for class twenty shall be set at five and four-tenths percent.<br /><br />
+	(ii) The rate for rate class twelve shall be calculated by multiplying the average tax rate computed in item (1)(b) by twenty, subtracting five and four-tenths percent, and dividing by nineteen.<br /><br />
+	(iii) The contribution rate for rate classes eleven through one shall be equal to ninety percent of the rate for the succeeding class, provided that the rate for class one shall be zero.<br /><br />
+	(iv) The contribution rate for class thirteen shall be equal to one hundred twenty percent of the rate calculated for rate class twelve.<br /><br />
+	(v) The contribution rate for rate class nineteen shall be set at an amount that allows for average contributions, beginning with class eighteen and ending with class fourteen, that are equal to ninety percent of the preceding class.<br /><br />
+	(3) For calendar year 2011 and any subsequent calendar year, voluntary payments are not permitted for the purpose of obtaining a lower rate of required contributions.<br /><br />
+	(4) For tax year 2011, no employer shall have a base tax rate higher than the base tax rate for rate class twelve if during the applicable rate computation period, as defined in Section 41-31-5, the employer has been credited with more in tax contributions than have been charged to that employer&#39;s account for benefits.<br /><br />
+HISTORY: 1962 Code SECTION 68-175; 1952 Code SECTION 68-175; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1942 (42) 1691; 1944 (43) 1426; 1947 (45) 532; 1948 (45) 1764; 1955 (49) 480; 1961 (52) 162; 1973 (58) 412; 1984 Act No. 406, SECTION 3; 1985 Act No. 154, SECTION 2; 1986 Act No. 362, SECTION 4, eff April 3, 1986; 1999 Act No. 37, SECTION 4, eff June 1, 1999; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTIONS 4, 15, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+	The 2011 amendment in the first undesignated paragraph substituted &quot;tax rate&quot; for &quot;base rate&quot;; in subsection (1)(a)(i) inserted &quot;the&quot; before &quot;rate calculated&quot; in the second sentence; in subsection (1)(a)(ii) substituted &quot;employers with less than twelve months of accomplished liability, employers with outstanding tax liens, delinquent tax class employers, and employers who reimburse the department in lieu of contributions&quot; for &quot;reimbursable employment wage&quot; in the third sentence; in subsection (2)(b)(ii) substituted &quot;item&quot; for &quot;subsection&quot;; added subsection (3) relating to calendar year 2011; and added subsection (4) relating to tax year 2011.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-52.</span> Benefits for seasonal workers.<br /><br />
+	Effective with claims filed on or after January 1, 2012:<br /><br />
+	(1) A seasonal pursuit is one which, because of seasonal conditions making it impracticable or impossible to do otherwise, customarily carries on production operations only within a regularly recurring active period or periods of less than an aggregate of thirty-six weeks in a calendar year. No pursuit shall be considered seasonal until the department makes a determination that the pursuit is seasonal. However, any successor to a seasonal pursuit shall be deemed seasonal unless the successor requests cancellation of the seasonal pursuit status within one hundred twenty days after the acquisition. This provision shall not be applicable to pending cases nor retroactive in effect.<br /><br />
+	(2) Upon application by a pursuit for seasonal pursuit status, the department shall determine or redetermine whether the pursuit is seasonal and, if seasonal, the pursuit&#39;s active period. The department may, on its own motion, redetermine a seasonal pursuit&#39;s active period. An application for a seasonal determination must be made on forms prescribed by the department and must be made at least thirty days prior to the beginning date of the period of production operations for which a determination is requested.<br /><br />
+	(3) Whenever the department has determined or redetermined a pursuit to be seasonal, the pursuit shall be notified immediately, and the notice must contain the beginning and ending dates of the pursuit&#39;s active period or periods. Pursuits determined or redetermined to be a seasonal pursuit shall display notices of its seasonal determination conspicuously on its premises in a sufficient number of places to be available for inspection by its workers. The notices shall be furnished by the department.<br /><br />
+	(4) A seasonal determination must become effective unless an interested party files an application for review within ten days of the beginning date of the first period of production operations to which it applies. An application for review shall be an application for a determination of status.<br /><br />
+	(5) All wages paid to a seasonal worker during his base period must be used in determining his weekly benefit amount; provided, however, that all weekly benefit amounts so determined shall be rounded to the nearest lower full dollar amount, if not a full dollar amount.<br /><br />
+	(6)(a) A seasonal worker is eligible to receive benefits based on seasonal wages only for a week of unemployment which occurs, or the greater part of which occurs, within the active period of the seasonal pursuit in which he earned base period wages.<br /><br />
+	(b) A seasonal worker is eligible to receive benefits based on nonseasonal wages for any week of unemployment which occurs during any active period of the seasonal pursuit in which he has earned base period wages; provided he has exhausted benefits based on seasonal wages. The worker is also eligible to receive benefits based on nonseasonal wages for any week of unemployment which occurs during the inactive period or periods of the seasonal pursuit in which he earned base period wages irrespective as to whether he has exhausted benefits based on seasonal wages.<br /><br />
+	(c) The maximum amount of benefits which a seasonal worker is eligible to receive, based on seasonal wages, shall be an amount, adjusted to the nearest multiple of one dollar, determined by multiplying the maximum benefits payable in his benefit year, as provided in Section 41-35-50, by the percentage obtained by dividing the seasonal wages in his base period by all of his base period wages.<br /><br />
+	(d) The maximum amount of benefits which a seasonal worker is eligible to receive based on nonseasonal wages shall be an amount, adjusted to the nearest multiple of one dollar, determined by multiplying the maximum benefits payable in his benefit year, as provided in Section 41-35-50, by the percentage obtained by dividing the nonseasonal wages in his base period by all of his base period wages.<br /><br />
+	(e) In no case is a seasonal worker eligible to receive a total amount of benefits in a benefit year in excess of the maximum benefits payable for such benefit year, as provided in Section 41-35-50.<br /><br />
+	(7)(a) All benefits paid to a seasonal worker based on seasonal wages shall be charged, as prescribed in Section 41-31-20, against the account of his base period employer who paid him such seasonal wages, and for the purpose of this paragraph such seasonal wages shall be deemed to constitute all of his base period wages.<br /><br />
+	(b) All benefits paid to a seasonal worker based on nonseasonal wages shall be charged, as prescribed in Section 41-31-20, against the account of his base period employer who paid him such nonseasonal wages, and for the purpose of this paragraph such nonseasonal wages shall be deemed to constitute all of his base period wages.<br /><br />
+	(8) The benefits payable to any otherwise eligible individual shall be calculated in accordance with this section for any benefit year which is established on or after the beginning date of a seasonal determination applying to a pursuit by which such individual was employed during the base period applicable to such benefit year, as if such determination had been effective in such base period.<br /><br />
+	(9) Nothing in this section shall be construed to limit the right of any individual whose claim for benefits is determined in accordance herewith to appeal from such determination as provided in Section 41-35-660.<br /><br />
+	(10) As used in this section:<br /><br />
+	(a) &quot;Pursuit&quot; means an employer or branch of an employer.<br /><br />
+	(b) &quot;Branch of an employer&quot; means a part of an employer&#39;s activities which is carried on or is capable of being carried on as a separate enterprise.<br /><br />
+	(c) &quot;Production operations&quot; means all the activities of a pursuit which are primarily related to the production of its characteristic goods or services.<br /><br />
+	(d) &quot;Active period or periods&quot; of a seasonal pursuit means the longest regularly recurring period or periods within which production operations of the pursuit are customarily carried on.<br /><br />
+	(e) &quot;Seasonal wages&quot; means the wages earned in a seasonal pursuit within its active period or periods. The department may prescribe by regulation the manner in which seasonal wages shall be reported.<br /><br />
+	(f) &quot;Seasonal worker&quot; means a worker at least twenty- five percent of whose base period wages are seasonal wages.<br /><br />
+	(g) &quot;Interested party&quot; means any individual affected by a seasonal determination.<br /><br />
+	(h) &quot;Inactive period or periods&quot; of a seasonal pursuit means that part of a calendar year which is not included in the active period or periods of such pursuit.<br /><br />
+	(i) &quot;Nonseasonal wages&quot; means the wages earned in a seasonal pursuit within the inactive period or periods of such pursuit, or wages earned at any time in a nonseasonal pursuit.<br /><br />
+	(j) &quot;Wages&quot; means remuneration for employment.&quot;<br /><br />
+HISTORY: 2011 Act No. 63, SECTION 16, eff June 14, 2011.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-55.</span> Additional surcharges when fund insolvent; rates; deposit in special account.<br /><br />
+	(A) In any calendar year in which the State Unemployment Insurance Trust Fund is insolvent, the State shall impose additional surcharges on all contributory employers to pay interest on the outstanding debt. The estimated amount of interest to be paid in the upcoming year will be divided by the estimated taxable payroll for the calendar year. The result rounded to the next higher one-hundredth of one percent is the statewide average surcharge.<br /><br />
+	(B) The rate for class twenty will be set so that the entire schedule raises the income required to pay interest surcharges for the year, subject to the structure defined in subsection (A). The rate for each preceding benefit rate class shall be equal to ninety percent of the rate calculated for the succeeding class, except that the rate class twelve shall be set at one-fourth the rate calculated for rate class twenty.<br /><br />
+	(C) These funds shall be deposited in a special account as provided in Section 41-33-810.<br /><br />
+HISTORY: 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 3, SECTION 11, eff March 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2011 amendment in subsection (A), in the first sentence, inserted &quot;contributory&quot; before &quot;employers; and added subsection (C) relating to deposit into a special account.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-60.</span> Delinquent unemployment compensation tax penalty.<br /><br />
+	(A) If on the computation date upon which an employer&#39;s tax rate is to be computed as provided in Section 41-31-40 there is a delinquent report, the tax class twenty rate must be assigned to the employer until the next computation date or until all outstanding tax reports have been filed.<br /><br />
+	(B)(1) No employer is permitted to pay his unemployment compensation tax at a reduced tax rate class for any quarter when a tax execution issued prior to January 1, 2027, in accordance with Section 41-31-390 with respect to delinquent unemployment compensation tax for a previous quarter is unpaid and outstanding against the employer.<br /><br />
+	(2) For any quarter when a tax execution issued on or after January 1, 2027, in accordance with Section 41-31-390 with respect to delinquent unemployment compensation tax for a previous quarter is unpaid and outstanding against the employer, an employer must pay his unemployment compensation tax at an increased rate of contribution that is the sum of two percent plus the employer&#39;s rate as otherwise determined pursuant to this chapter.<br /><br />
+	(3) When an employer has an outstanding tax execution issued on or after January 1, 2027, and a tax execution issued prior to January 1, 2027, also remains outstanding, the tax class twenty rate must be assigned to the employer until such time as all outstanding tax executions issued prior to January 1, 2027, have been paid.<br /><br />
+	(C) An employer with an outstanding tax execution who has a department-approved installment payment agreement shall be permitted to pay its unemployment compensation tax at the annual rate as determined pursuant to this chapter. However, any such employer&#39;s tax rate shall immediately revert to the applicable increased rate if the employer fails to make any one of the succeeding deferred payments or fails to submit any succeeding wage report and payment in a timely manner as required by the department-approved installment payment agreement.<br /><br />
+HISTORY: 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 5, eff June 14, 2011; 2022 Act No. 229 (S.1090), SECTION 2, eff June 17, 2022; 2024 Act No. 136 (H.3992), SECTION 1, eff May 13, 2024; 2026 Act No. 243 (S.688), SECTION 3, eff July 1, 2026.<br /><br />
+Effect of Amendment<br /><br />
+	The 2011 amendment rewrote the section.<br /><br />
+	2022 Act No. 229, SECTION 2, in (A), substituted &quot;until the next computation date or until all outstanding tax reports have been filed&quot; for &quot;for the period to which the computation applies&quot;.<br /><br />
+	2024 Act No. 136, SECTION 1, in (B), inserted the third and fourth sentences.<br /><br />
+	2026 Act No. 243, SECTION 3, rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-70.</span> Account shall not be terminated on account of suspension of business for service in armed forces.<br /><br />
+	If the department finds that an employer ceased to render employment solely due to the closing of the business because of the entrance of one or more of the owners, officers, partners, or the majority stockholders into the Armed Forces of the United States, or any of its allies, or of the United Nations after January 1, 1951, such employer&#39;s account shall not be terminated; and, if the business is resumed and employment rendered within two years after the discharge or release from active duty in the armed forces of the person or persons, the employer&#39;s experience shall be deemed to have been continuous throughout that period. The benefit ratio of the employer shall be the amount calculated pursuant to Section 41-31-5, including benefits paid to any individual during the period the employer was in the armed forces. This provision shall not be construed to authorize cash refunds and any adjustments required hereunder only shall be by credit certificate.<br /><br />
+HISTORY: 1962 Code SECTION 68-175.2; 1952 (47) 1889; 1955 (49) 480; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 6, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; in the first sentence, and rewrote the second sentence.<br /><br />
+	The 2011 amendment in the second sentence deleted &quot;, divided by his average annual payroll for the most recent year during the whole of which the employer has been in business and has rendered employment&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-80.</span> Omitted by 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Editor&#39;s Note<br /><br />
+	Former SECTION 41-31-80 was entitled &quot;Statewide reserve ratio; increase in rates when ratio is less than three and one-half percent&quot; and was derived from 1962 Code SECTION 68-176; 1952 Code SECTION 68-176; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1955 (49) 480; 1957 (50) 580; 1961 (52) 162, 453; 1966 (54) 2640; 1972 (57) 2187; 1973 (58) 412. 1981 Act No. 108 SECTION 6; 1986 Act No. 362, SECTION 6; 1999 Act No. 37, SECTION 6.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-90.</span> Effect of change of corporate name.<br /><br />
+	In the event of a change of name by a corporation, without any change of ownership interest, the department may provide that the experience rating of the old corporation be continued by the new corporation.<br /><br />
+HISTORY: 1962 Code SECTION 68-177; 1952 Code SECTION 68-177; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;the department&quot; for &quot;&quot;therein, the Commission&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-100.</span> Successor by purchase, merger of entire business as employer; notice.<br /><br />
+	Any person or other legal entity who acquires by purchase, merger, consolidation, devise, inheritance or other means substantially all of the business of any employer and continues the acquired business, shall be deemed to be a successor to the predecessor from whom the business was acquired for the purpose of this article and, if not already an employer prior to the acquisition, shall become an employer on the date of the acquisition and shall succeed to the employment benefit experience record of the predecessor. The department shall prescribe by regulation the notice to be given of the acquisition. For the purposes of Chapters 27 through 41 of this title the term &quot;substantially all&quot; means ninety-five percent or more of the business as determined by the department in a particular case.<br /><br />
+HISTORY: 1962 Code SECTION 68-178; 1952 Code SECTION 68-178; 1942 (42) 1691; 1943 (43) 318; 1944 (43) 1296; 1966 (54) 2640; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; in the second and third sentences, and made nonsubstantive changes.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-110.</span> Computation of base rates applicable to successors.<br /><br />
+	(A) Whenever any person or other legal entity has in any manner succeeded to or has acquired substantially all or a distinct and severable portion of the business of another, as provided in Sections 41-31-100 and 41-31-120, the base rates of contributions are computed as follows:<br /><br />
+	(1) If the successor is not already an employer at the time of the acquisition, the base rate of contributions applicable to the predecessor employer with respect to the period immediately preceding the date of acquisition, if there is only one predecessor employer, shall apply to the successor employer for the remainder of the calendar year.<br /><br />
+	(2) If the successor is not already an employer at the time of the acquisition and there is more than one transferring employer with a different base rate, the successor employer is assigned the base rate of that transferring employer who has the highest base rate.<br /><br />
+	(3) If the successor is already an employer at the time of the acquisition, the base rate of contributions applicable at the time of the acquisition to the successor employer shall continue to be the applicable base rate.<br /><br />
+	(B) For the purposes of items (1), (2), and (3) in subsection (A), the base rate as assigned continues in effect for the remainder of the calendar year and until the time the combined employment benefit experience record meets the requirements as provided in Section 41-31-40.<br /><br />
+HISTORY: 1962 Code SECTION 68-179; 1952 Code SECTION 68-179; 1942 (42) 1691; 1943 (43) 318; 1944 (43) 1296; 1966 (54) 2640; 1981 Act No. 108 SECTION 7; 1986 Act No. 361, SECTION 2, eff April 3, 1986; 1999 Act No. 37, SECTION 7, eff June 1, 1999; 2002 Act No. 306, SECTION 6, eff June 5, 2002; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment made grammatical changes in this section; substituted &quot;for the remainder of the calendar year&quot; for &quot;until the next computation date&quot; and added the provision relative to computation of the rate for the subsequent calendar year in item (a); and, in the last paragraph, substituted &quot;for the remainder of the calendar year&quot; for &quot;until the next computation date under SECTION 41-31-50&quot;, added provisions relative to computation of the rate for the subsequent calendar year, and added &quot;and at such time as provided in SECTION 41-31-40&quot;.<br /><br />
+	The 1999 amendment substituted &quot;base rate&quot; for &quot;rate&quot; throughout, and made other minor changes.<br /><br />
+	The 2002 amendment, in paragraph (a), deleted the last sentence which formerly read, &quot;The base rate for the subsequent calendar year is computed based upon the employment benefit experience record of the predecessor or upon the combined employment benefit experience record of the predecessor and the successor, if applicable, as of June thirtieth of the year in which the acquisition occurred.&quot;; in paragraphs (b) and (c), substituted &quot;for the remainder of the year&quot; for &quot;until the end of the quarter in which the succession occurs&quot;; and rewrote the last undesignated paragraph.<br /><br />
+	The 2010 amendment added the subsection (A) and (B) identifiers; changed the paragraph (a), (b), and (c) identifiers to (1), (2), and (3); in subsection (A)(2) deleted at the end text relating to the applicability of the base rate for the remainder of the year; and in subsection (A)(2) substituted &quot;base rate.&quot; for &quot;for the remainder of the year.&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-120.</span> Successor by merger, purchase of part of established business.<br /><br />
+	In the event that any person acquires by purchase, merger, consolidation, devise, inheritance or otherwise, a distinct, severable, identifiable and segregable part of the business of an employer and continues the acquired part of the business of the predecessor, the successor shall succeed to that portion of the employment benefit experience record of the predecessor which is attributable solely to the portion of the business which was acquired, except that a succession to the benefit experience attributable to an identifiable portion of the business of the predecessor shall not occur unless the successor is an employer at the time of the acquisition or becomes an employer within the quarter in which the succession occurs; provided, that no partial transfer of any employment benefit experience record shall be made unless a request is entered by both the predecessor and the successor employer. The department shall prescribe by regulation a period within which notification of the acquisition shall be given and the method by which the experience to be transferred shall be computed.<br /><br />
+HISTORY: 1962 Code SECTION 68-181; 1952 Code SECTION 68-181; 1950 (46) 2183; 1966 (54) 2640; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;benefit experience&quot; for &quot;reserve account&quot; in the first sentence, substituted &quot;department&quot; for &quot;Commission&quot; in the second sentence, and made non substantive changes.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-125.</span> Assignment of employment benefit record upon acquisition or reorganization of existing employment unit.<br /><br />
+	(A) Notwithstanding the provisions of Sections 41-31-100 and 41-31-120, an employing unit must be assigned all or a portion of the employment benefit record of an existing employing unit when there is an acquisition or change in the form or organization of an existing business enterprise, or severable portion of an existing business enterprise, and there is a continuity of control of the business enterprise. The employing unit must be assigned the same rate as the predecessor, or the predecessor who has the highest base rate if there is more than one predecessor employing unit with different base rates.<br /><br />
+	(1) For purposes of this section control of the business enterprise may occur by means of ownership of the organization conducting the business enterprise, ownership of assets necessary to conduct the business enterprise, security arrangements or lease arrangements covering assets necessary to conduct the business enterprise, including workers, or a contract when the ownership, stated arrangements, or contract provide for or allow direction of the internal affairs or conduct of the business enterprise.<br /><br />
+	(2) For purposes of this section continuity of control exists if one or more persons, entities, or other organizations controlling the business enterprise remain in control of the business enterprise after an acquisition or change in form or there is a transfer to persons within the first degree of kinship to the transferors. Evidence of continuity of control includes, but is not limited to, changes of an individual proprietorship to a corporation, partnership, limited liability company, association, or estate; a partnership to an individual proprietorship, corporation, limited liability company, association, estate, or the addition, deletion, or change of partners; a limited liability company to an individual proprietorship, partnership, corporation, association, estate, or to another limited liability company; a corporation to an individual proprietorship, partnership, limited liability company, association, estate, or to another corporation or from any form to another form.<br /><br />
+	(B) An employing unit must not be assigned any portion of the employment benefit record of an existing employing unit upon the acquisition of that established business or of an identifiable and segregable part of that established business if:<br /><br />
+	(1) the acquiring person was not otherwise an employer at the time of the acquisition;<br /><br />
+	(2) the person has no substantial commonality of interest, including ownership or management, in the business acquired; and<br /><br />
+	(3) the department finds that the person acquired the business or an identifiable and segregable part of the business solely or primarily for the purpose of obtaining a lower rate of contributions.<br /><br />
+	(C) If the experience rating account of the predecessor is equal to or exceeds tax class thirteen, the experience rating account of the predecessor employer in any event must be transferred to the successor employer in accordance with the provisions of Section 41-31-140.<br /><br />
+	(D)(1) An employing unit that knowingly attempts to violate the provisions of this section must be assessed a penalty in an amount equal to the greater of one thousand dollars or ten percent of the tax determined by the department to be due for each report that is submitted in violation of this section. For the purposes of this section, the terms &quot;knowingly&quot; or &quot;knowing&quot; mean having actual knowledge of or acting with deliberate ignorance of or reckless disregard for the prohibition in this section. This penalty may be recovered in the manner provided in Article 3 of this chapter for the collection of other penalties. Officers and directors of the enterprise comprising the employing unit are individually liable for the penalties assessed pursuant to this subsection.<br /><br />
+	(2) A contribution tax return preparer who violates this section or provides advice to an employing unit that results in a knowing violation of the provisions of this section is liable for a penalty of not less than one thousand dollars nor more than ten thousand dollars for each report submitted in violation of this section. This penalty may be recovered by the department in an appropriate civil action in any court of competent jurisdiction.<br /><br />
+	(3) As used in this section, a &quot;contribution tax return preparer&quot; is a person who prepares for compensation, or who employs one or more persons to prepare for compensation, any contribution and wage report or report of change in the status of an employing unit required by this chapter or any claim for credit for a tax imposed by this chapter. For purposes of this definition, the completion of a substantial portion of a report is treated as the preparation of the entire report. The term does not include a person merely because the person furnishes typing, reproducing, or other mechanical assistance, prepares a report of the employer, or an officer or employee of the employer, by whom the person is regularly and continuously employed, prepares as a fiduciary a report for any person, or represents a taxpayer in a hearing regarding an issue arising under this chapter.<br /><br />
+	(E) The department shall establish procedures to identify the transfer or acquisition of a business for purposes of this section.<br /><br />
+HISTORY: 2004 Act No. 245, SECTION 1, eff May 24, 2004; 2005 Act No. 50, SECTIONS 2.A, 2.B, eff May 3, 2005; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 7, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment in subsection (A) substituted &quot;of an existing business enterprise&quot; for &quot;thereof&quot;; in subsection (B) substituted &quot;that established business&quot; for &quot;thereof&quot;; in subsection (B)(3) substituted &quot;of the business&quot; for &quot;thereof&quot;; in subsection (C) deleted &quot;in any event&quot; following &quot;predecessor employer&quot;; substituted &quot;department&quot; for &quot;commission&quot; throughout; and made nonsubstantive changes.<br /><br />
+	The 2011 amendment rewrote subsection (C).<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-130.</span> Refunds not authorized; adjustments made by deductions from future payments.<br /><br />
+	Nothing in Sections 41-31-110 and 41-31-120 shall be construed to authorize or require the refund of any sums lawfully paid into the unemployment compensation trust fund or to authorize or require sums lawfully paid into the unemployment compensation trust fund for any purpose other than to pay unemployment compensation benefits. But the department may make the necessary adjustments in conformity with the provisions of this law by deductions of future contribution payments as though such payments or assessments had been made erroneously by any person coming within the provisions of said sections.<br /><br />
+HISTORY: 1962 Code SECTION 68-185; 1952 Code 68-185; 1950 (46) 2183; 1966 (54) 2640; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;authorize or require sums lawfully paid into the unemployment compensation trust fund for any purpose other than &quot; for &quot;use otherwise any of such sums except&quot; in the first sentence, and substituted &quot;department&quot; for &quot;Commission&quot; in the second sentence.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-140.</span> Transfer of experience rating account.<br /><br />
+	(A) For the purposes of this section and for tax years 2010 and prior, &quot;debit balance&quot; means the excess of total benefits charged over total contributions made.<br /><br />
+	(B) For acquisitions that occur in tax years 2010 and prior, no transfer of experience rating accounts, in whole or in part, is permitted under the provisions of Sections 41-31-100 through 41-31-130 unless all unemployment compensation taxes based on wages paid by the transferring employer prior to the date of the transfer are paid by the transferring employer when due or assumed by the acquiring employer within sixty days from the date he is notified by the department that the transfer cannot be allowed because of unpaid unemployment compensation taxes. If the experience rating account of the predecessor employer contains a debit balance, the experience rating account of the predecessor employer in any event must be transferred to the successor employer in accordance with the provisions of Sections 41-31-100 and 41-31-120.<br /><br />
+	(C) Effective for acquisitions occurring in tax years 2011 and later, no transfer of benefit charges or taxable wages, in whole or in part, is permitted pursuant to the provisions of Sections 41-31-100 through 41-31-130 unless all unemployment compensation taxes based on wages paid by the transferring employer prior to the date of transfer are paid by the transferring employer when due or assumed by the acquiring employer within sixty days from the date he is notified by the department that the transfer cannot be allowed because of unpaid unemployment compensation taxes or outstanding contribution reports. If the predecessor employer has an acquisition year tax class of thirteen or higher, the experience of the predecessor employer in any event must be transferred to the successor employer in accordance with the provisions of Sections 41-31-100 and 41-31-120.<br /><br />
+HISTORY: 1962 Code SECTION 68-185.1; 1952 (47) 1891; 1966 (54) 2640; 1986 Act No. 361, SECTION 3, eff April 3, 1986; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 8, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment made grammatical changes and added the provision relative to the time within which unemployment compensation taxes must be assumed by the acquiring employer.<br /><br />
+	The 2010 amendment added subsection (A) relating to the definition of &quot;debit balance&quot;; added subsection identifier (B); and in subsection (B) substituted &quot;department&quot; for &quot;Commission&quot; in the first sentence, and in the second sentence deleted the parenthetical definition of &quot;debit balance&quot;.<br /><br />
+	The 2011 amendment in subsection (A) inserted &quot;and for tax years 2010 and prior&quot;, in subsection (B) substituted &quot;For acquisitions that occur in tax years 2010 and prior, no&quot; for &quot;No&quot;, and added subsection (C) relating to acquisitions occurring in tax years 2011 and later.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-150.</span> Treatment of fractions of a cent.<br /><br />
+	In the payment of any contributions or any departmental administrative contingency assessment a fractional part of a cent must be disregarded unless it amounts to one-half cent or more, in which case it must be increased by one cent.<br /><br />
+HISTORY: 1962 Code SECTION 68-186; 1952 Code SECTION 68-186; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1986 Act No. 362, SECTION 7, eff April 3, 1986; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment added &quot;or employment security administrative contingency assessment&quot; and made grammatical changes.<br /><br />
+	The 2010 amendment substituted &quot;any departmental&quot; for &quot;employment security&quot; and &quot;by&quot; for &quot;to&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-160.</span> Contribution and wage reports.<br /><br />
+	The department shall not require contribution and wage reports more frequently than quarterly. Effective with the quarter ending March 31, 2024, every employer with ten or more employees and every individual or organization that, as an agent, reports wages on a total of ten or more employees on behalf of one or more subject employers, shall file that portion of the &quot;Employer Quarterly Contribution and Wage Reports&quot; containing the employee&#39;s social security number, name, Standard Occupational Classification (SOC) code, total number of hours worked, and total wages electronically, in a format approved by the department. The department may waive the requirement to file electronically if a hardship is shown. In determining whether a hardship has been shown, the department shall take into account, among other relevant factors, the ability of the employer to comply with the filing requirement at a reasonable cost.<br /><br />
+HISTORY: 1962 Code SECTION 68-187; 1952 Code SECTION 68-187; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 2002 Act No. 306, SECTION 7, eff June 5, 2002; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2023 Act No. 67 (H.3726), SECTION 3, eff May 19, 2023.<br /><br />
+Editor&#39;s Note<br /><br />
+	2023 Act No. 67, SECTION 1, provides as follows:<br /><br />
+	&quot;SECTION 1. This act may be cited as the &#39;Statewide Education and Workforce Development Act&#39;.&quot;<br /><br />
+Effect of Amendment<br /><br />
+	The 2002 amendment rewrote the section.<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;commission&quot; throughout.<br /><br />
+	2023 Act No. 67, SECTION 3, rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-170.</span> Report to employer on status of account; protests.<br /><br />
+	The department annually shall report to any employer the status of his account showing his total charges against it for benefits paid during the annual period and his benefit ratio as calculated pursuant to Section 41-31-5, as applicable. No employer may contest any charge against his account or the status of his account unless he makes protest within thirty days after such report has been mailed by the department.<br /><br />
+HISTORY: 1962 Code SECTION 68-188; 1952 Code SECTION 68-188; 1942 Code SECTION 7035-87;1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1966 (54) 2640; 1975 (59) 330; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+<div style="text-align: center;">ARTICLE 3</div>
+<div style="text-align: center;">Payment and Collection of Contributions</div><br />
+<span style="font-weight: bold;"> SECTION 41-31-310.</span> Time contributions accrue and become payable; contributions shall not be deducted from wages; limitation on collection actions.<br /><br />
+	Contributions shall accrue and become payable by each employer for each calendar year in which he is subject to Chapters 27 through 41 of this title with respect to wages for employment. Contributions shall become due and be paid by each employer to the department for the fund in accordance with regulations promulgated by the department and shall not be deducted, in whole or in part, from the wages of the employer&#39;s employees. However, no determination and assessment of contributions, interest, or penalties shall be made, and no action for the collection of contributions, interest, and penalties shall be instituted more than four years after the last day of the month immediately following the calendar quarter for which the contributions, interest, or penalties were payable. This limitation period contained in this section does not apply to employers that wilfully fail to timely file a contribution report with the department, that knowingly make false statements to the department in a contribution report, or that intentionally fail to disclose a material fact to the department concerning a contribution report.<br /><br />
+HISTORY: 1962 Code SECTION 68-201; 1952 Code SECTION 68-201; 1942 Code SECTION 7035-87; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1966 (54) 2640; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-320.</span> Examination of reports and computation of contribution; notice of excess due.<br /><br />
+	As soon as practicable after a contribution report is filed, the department shall examine it and compute the contribution due. If the amount computed is greater than the amount previously paid, the difference shall be paid to the department within ten days after notice of the amount is mailed by the department.<br /><br />
+HISTORY: 1962 Code SECTION 68-202; 1952 Code SECTION 68-202; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369;2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-330.</span> Imposition of penalty.<br /><br />
+	(A)(1) If the department finds that an additional contribution is due, that the report was made in good faith, that the understatement of the contribution is not deliberate, then no penalty shall be added because of the understatement. However, except for the time period contained in item (2), the amount of the deficiency shall bear interest at the rate of one percent for each month or fraction of a month that it remains unpaid.<br /><br />
+	(2) For calendar year 2011, retroactive to January 1, 2011, for months January through June thirtieth of that year, the amount of deficiency that arises under the circumstances provided in item (1) shall bear interest at the rate of 0.25 percent for each month or fraction of a month that it remains unpaid. However, if the department finds that the understatement is due to the circumstances provided in subsection (B) or (C) then the employer is not entitled to the 0.25 percent interest rate.<br /><br />
+	(B) If the department finds that the understatement is due to negligence on the part of the employer, but without intent to defraud, there shall be added to the amount of the deficiency, in addition to interest calculated in the manner provided in subsection (A), a ten percent penalty.<br /><br />
+	(C) If the department finds that the understatement is false or fraudulent, with intent to evade the payment of the contribution due, there shall be added to the amount of the deficiency, in addition to interest calculated in the manner provided in subsection (A), a one hundred percent penalty.<br /><br />
+HISTORY: 1962 Code SECTION 68-203; 1952 Code SECTION 68-203; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 19, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+	The 2011 amendment rewrote subsection (A) by adding the subsection identifiers and adding subsection (A)(2) relating to calendar year 2011.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-340.</span> Department to give notice of improper reports; determination of contribution when employer fails to file proper report.<br /><br />
+	The department must give notice to an employing unit that has failed to make reports required pursuant to Chapters 27 through 41 of this title, or has filed incorrect or insufficient reports. If the employing unit refuses or neglects to file a proper report within fifteen days after notice has been mailed to it, the department shall determine the amount of the wages payable for employment by the employing unit for the period for which the report is required. The determination must be based upon the department&#39;s best information and belief. The department must then determine the amount of contribution due, if any, computing it at double the rate which would otherwise apply. The department may allow further time, not to exceed an additional fifteen days, for filing the proper report after notice is mailed.<br /><br />
+HISTORY: 1962 Code SECTION 68-204; 1952 Code SECTION 68-204; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-350.</span> Penalty for failure to file report.<br /><br />
+	An employer that fails to file a report concerning wages or contributions pursuant to Chapters 27 through 41 of this title within fifteen days from the date upon which the department mailed a demand for the report, the department shall assess the employer a penalty of ten percent of the contributions due but no less than twenty-five dollars in addition to the contributions payable with respect to the report.<br /><br />
+HISTORY: 1962 Code SECTION 68-204.1; 1969 (56) 268; 1985 Act No. 154, SECTION 4; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2026 Act No. 243 (S.688), SECTION 4, eff July 1, 2026.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+	2026 Act No. 243, SECTION 4, deleted &quot;nor more than one thousand&quot; following &quot;no less than twenty-five&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-360.</span> Adjustments and refunds.<br /><br />
+	(A) If, not later than four years after the date on which any contributions or interest or employment security administrative contingency assessments became due, an employer who has paid the contributions or interest or employment security administrative contingency assessments shall make application for an adjustment in connection with subsequent contribution or employment security administrative contingency assessment payments or for a refund because the adjustment cannot be made and the department shall determine that the contributions or interest or employment security administrative contingency assessments or any portion was erroneously collected, the department shall make an adjustment, without interest, in connection with subsequent contribution or employment security administrative contingency assessment payments by him or, if the adjustment cannot be made, shall refund the amount from the fund. For like cause and within the same period an adjustment or refund may be made on the department&#39;s own initiative.<br /><br />
+	(B) A refund or adjustment must be made in any case where the department finds that contributions or interest or employment security administrative contingency assessments were erroneously paid by an employing unit to this State upon wages earned by individuals in employment in another state. The refund or adjustment must be made upon satisfactory proof to the department that the payment of the contributions or interest or employment security administrative contingency assessments have been made to the other state.<br /><br />
+HISTORY: 1962 Code SECTION 68-205; 1952 Code SECTION 68-205; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1957 (50) 580; 1966 (54) 2640; 1986 Act No. 362, SECTION 8, eff April 3, 1986; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment added references to employment security administrative contingency assessments and made grammatical changes.<br /><br />
+	The 2010 amendment added the subsection identifiers and substituted &quot;department&quot; for &quot;commission&quot; throughout.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-370.</span> Interest on unpaid contributions.<br /><br />
+	(A) Contributions unpaid on the date on which they are due and payable, as prescribed by the department, shall bear interest at the rate of one percent for each month or fraction for which they remain unpaid but contributions as have accrued prior to the establishment of an employer&#39;s liability shall bear interest at the rate of one-half of one percent a month or fraction of a month, to the date on which liability is established, unless it is found by the department that the delay in the establishment of liability resulted from wilful negligence of the employer, and shall bear interest at the rate of one percent a month or fraction for which they remain unpaid thereafter.<br /><br />
+	(B) If any employer&#39;s amount of contributions which are due and payable, as prescribed by the department, are unpaid ten days following the date on which an assessment or debit memorandum was issued, a penalty of ten percent of the amount of contributions due and payable must be paid in addition to any other interest or penalty which may be applicable.<br /><br />
+	(C) The department may, for good cause, extend the time for the filing of reports and the payment of contributions. Any person to whom the extension is granted shall pay in addition to the contribution due, interest at the rate of one percent per month or fraction of a month from the due date of the contribution to the date of payment.<br /><br />
+HISTORY: 1962 Code SECTION 68-206; 1952 Code SECTION 68-206; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1957 (50) 580; 1985 Act No. 154, SECTION 5; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2026 Act No. 243 (S.688), SECTION 5, eff July 1, 2026.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;commission&quot; throughout, substituted &quot;of a month&quot; for &quot;thereof&quot; in subsection (A), and made nonsubstantive changes.<br /><br />
+	2026 Act No. 243, SECTION 5, in (B), deleted &quot;, not to exceed one thousand dollars,&quot; following &quot;due and payable&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-380.</span> Lien for contributions, interest, penalties, and costs.<br /><br />
+	The contributions, interest, penalties, departmental administrative contingency assessments, and costs prescribed in this chapter are considered taxes owing the State by the persons against whom they are charged, and are a lien upon the real property or chattels of the person by whom the contributions are due, only after the warrant described in Section 41-31-390 is indexed as prescribed in Section 41-31-400.<br /><br />
+HISTORY: 1962 Code SECTION 68-207; 1952 Code SECTION 68-207; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1942 (42) 1648; 1963 (53) 228; 1966 (54) 2640; 1986 Act No. 362, SECTION 9, eff April 3, 1986; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment added &quot;employment security administrative contingency assessments,&quot; and made grammatical changes.<br /><br />
+	The 2010 amendment substituted &quot;departmental&quot; for &quot;employment security&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-390.</span> Issuance of warrant of execution for collection.<br /><br />
+	(A) If an employer defaults in any payment of contributions, interest, penalties, or departmental administrative contingency assessments, the department shall notify the employer of the amount of contributions, interest, penalties, or departmental administrative contingency assessments due. If the amount is not paid within ten days after notice to the employer, the department shall issue a warrant of execution, directed to its authorized representative, commanding the representative to levy upon and sell the real and personal property of the employer found within that county for the payment of the amount, with interest, the cost of executing the warrant, and any reasonable costs incurred in collecting these amounts, to return the warrant to the department and to pay it the money collected.<br /><br />
+	(B) The department may contract with a collection agency or the Department of Revenue for the purpose of collecting delinquent payments of contributions, interest, penalties, departmental administrative contingency assessments, and any other reasonable costs authorized by subsection (A).<br /><br />
+	(C) The department shall promulgate regulations to carry out the provisions of this section.<br /><br />
+HISTORY: 1962 Code SECTION 68-208; 1952 Code SECTION 68-208; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1942 (42) 1648; 1986 Act No. 362, SECTION 10, eff April 3, 1986; 1994 Act No. 300, SECTION 1, eff March 1, 1994; 1999 Act No. 73, SECTION 1, eff June 11, 1999; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment added provisions making this section applicable to defaults in payments of penalties and employment security administrative contingency assessments and made grammatical changes.<br /><br />
+	The 1994 amendment revised subsection (A) and added (B), so as to authorized the sheriff or tax collector to collect any costs incurred in collecting employment security contributions and authorized the sheriff or tax collector to contract with a collection agency to collect all costs and amounts.<br /><br />
+	The 1999 amendment, in subsections (A) and (B), changed references to the sheriff or tax collector to references to the commission or its authorized representative; and added subsection (C).<br /><br />
+	The 2010 amendment substituted &quot;departmental&quot; for &quot;employment security&quot; and &quot;department&quot; for &quot;commission&quot; throughout.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-400.</span> Procedure under execution.<br /><br />
+	(A) The department, or its authorized representative, shall file a copy of the execution with the clerk of court of the county or counties of the State in which the employer does business. The clerk of court shall enter in his abstract of judgments the name of the employer identified in the warrant and in the proper columns the amount of the contributions, interest, penalties, and departmental administrative contingency assessments and costs for which the warrant is issued along with the date and hour when the copy is filed. The clerk of court also shall index the warrant upon the index of judgments. The department, or its authorized representative, shall proceed upon the warrant in all respects and with like effect and in the same manner prescribed by law in respect to executions issued against property upon judgments of a court of record and is entitled to the same fees for service in executing the warrant to be collected in the same manner.<br /><br />
+	(B) The powers now or hereafter conferred upon the Department of Revenue by Title 12 for the collection of unpaid income taxes are incorporated by reference and are conferred upon the department and its authorized representative for the collection of unpaid contributions, interest, penalties, and departmental administrative assessments and costs, mutatis mutandis.<br /><br />
+	(C) The department shall promulgate regulations to carry out the provisions of this section.<br /><br />
+HISTORY: 1962 Code SECTION 68-209; 1952 Code SECTION 68-209; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 1942 (42) 1648; 1986 Act No. 362, SECTION 11, eff April 3, 1986; 1999 Act No. 73, SECTION 2, eff June 11, 1999; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 1986 amendment added references to penalties and employment security administrative contingency assessments and made grammatical changes.<br /><br />
+	The 1999 amendment designated the former text as (A), changed references to the sheriff or tax collector to references to the commission or its authorized representative, and made minor language changes; and added (B), conferring powers upon the commission and its authorized representative, and (C), providing for regulations.<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-410.</span> Fees.<br /><br />
+	Any clerk of court or register of deeds, as the case may be, or county treasurer shall be entitled to the fees provided in Section 14-19-100 for filing, enrolling, and satisfying a tax warrant or execution issued by the department.<br /><br />
+HISTORY: 1962 Code SECTION 68-210; 1952 Code SECTION 68-210; 1949 (46) 382; 1955 (49) 519; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; and made nonsubstantive changes.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-420.</span> Priorities under legal dissolution or distribution.<br /><br />
+	Subsequent to any distribution of an employer&#39;s assets pursuant to a court order, including any receivership, assignment for the benefits of creditors, adjudicated insolvency, composition or similar proceeding, contributions then or thereafter due shall be paid in full on the same basis as all other tax claims but on a parity with claims for wages of not more than two hundred fifty dollars to each claimant earned within six months of the commencement of the proceeding. Subsequent to an employer&#39;s adjudication in bankruptcy or judicially confirmed extension proposal or composition under the Federal Bankruptcy Act, contributions then or thereafter due shall be entitled to such priority as is provided in that act.<br /><br />
+HISTORY: 1962 Code SECTION 68-211; 1952 Code SECTION 68-211; 1942 Code SECTION 7035-94; 1936 (39) 1716; 1939 (41) 487; 1941 (42) 369; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;Subsequent to any&quot; for &quot;In the event of any&quot; in the first and second sentences, and in the first sentence, substituted &quot;a court order,&quot; for &quot;an order of any court under the laws of this State,&quot;, and made nonsubstantive changes.<br /><br />
+<div style="text-align: center;">ARTICLE 5</div>
+<div style="text-align: center;">Financing Benefits Paid to Employees of Nonprofit Organizations</div><br />
+<span style="font-weight: bold;"> SECTION 41-31-600.</span> Definition of &quot;nonprofit organization&quot;.<br /><br />
+	For the purposes of this article, &quot;nonprofit organization&quot; means an organization, or group of organizations, described in Section 501(c)(3) of the United States Internal Revenue Code that is exempt from income taxes under Section 501(a) of that code.<br /><br />
+HISTORY: 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-610.</span> Application of article.<br /><br />
+	Benefits paid to employees of nonprofit organizations shall be financed in accordance with the provisions of this article.<br /><br />
+HISTORY: 1962 Code SECTION 68-220; 1971 (57) 950; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment deleted the second sentence which read: &quot;For the purpose of this section and SECTIONS41-31-670, a &quot;nonprofit organization&quot; is an organization (or group of organizations) described in SECTION 501 (c) (3) of the U.S. Internal Revenue Code which is exempt from income tax under SECTION 501 (a) of such Code.&quot;<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-620.</span> Election to make payments in lieu of contributions.<br /><br />
+	Any nonprofit organization which, pursuant to item (6) of Section 41-27-210, is, or becomes, subject to Chapters 27 through 41 of this title after December 31, 1971, shall pay contributions under provisions of Section 41-31-10 unless it elects, in accordance with this section, to pay the department for the unemployment fund an amount equal to the amount of regular benefits and one-half the extended benefits paid for any reason, including, but not limited to, payments made as a result of a determination, or payments erroneously or incorrectly paid, or paid as a result of a determination of eligibility or partial eligibility which is subsequently reversed for any reason, if the payments or any portion of the payments were made as a result of wages earned in the employ of the nonprofit organization. After January 1, 1979, the State or any political subdivision or any instrumentality of the political subdivision as defined in subitem (b) of item (2) of Section 41-27-230 is required to reimburse the amount of regular benefits and all extended benefits paid for any reason, including, but not limited to, payments made as a result of a determination, or payments erroneously or incorrectly paid, or paid as a result of a determination of eligibility or partial eligibility which is subsequently reversed for any reason, if the payments or any portion of the payments were made as a result of wages earned in its employ during the effective period of the elections.<br /><br />
+	(1) Any nonprofit organization which is, or becomes, subject to Chapters 27 through 41 of this title on January 1, 1972, may elect to become liable for payments in lieu of contributions for a period of not less than two calendar years beginning with January 1, 1972, provided, it files with the department a written notice of its election within the thirty-day period immediately following that date.<br /><br />
+	(2) Any nonprofit organization which becomes subject to Chapters 27 through 41 of this title after January 1, 1972, may elect to become liable for payments in lieu of contributions for a period of not less than two calendar years beginning with the date on which the subjectivity begins by filing a written notice of its election with the department not later than thirty days immediately following the date of the determination of the subjectivity.<br /><br />
+	(3) Any nonprofit organization which makes an election in accordance with item (1) or item (2) of this section will continue to be liable for payments in lieu of contributions until it files with the department a written notice terminating its election not later than thirty days prior to the beginning of the calendar year for which the termination is first effective.<br /><br />
+	(4) Any nonprofit organization which has been paying contributions under Chapters 27 through 41 of this title for a period subsequent to January 1, 1972, may change to a reimbursable basis by filing with the department not later than thirty days prior to the beginning of any calendar year a written notice of election to become liable for payments in lieu of contributions. The election is not terminable by the organization for that and the next calendar year.<br /><br />
+	(5) The department may for good cause extend the period within which a notice of election, or a notice of termination, must be filed and may permit an election to be retroactive but not any earlier than with respect to benefits paid after December 31, 1969.<br /><br />
+	(6) The department, in accordance with the regulations as may be prescribed, shall notify each nonprofit organization of any determination made with respect to its status as an employer and of the effective date of any election which it makes and of any termination of the election. The determinations are subject to reconsideration, appeal, and review in accordance with the provisions of item (5) of Section 41-31-630.<br /><br />
+HISTORY: 1962 Code SECTION 68-221; 1971 (57) 950; 1977 Act No. 161, SECTION 17; 1981 Act No. 108, SECTION 8; 1984 Act No. 385, SECTION 1; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; throughout.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-630.</span> Method of making payments; appeal from department&#39;s determination of amount due; interest and penalties.<br /><br />
+	Payments in lieu of contributions shall be made in accordance with the provisions of subsections (1) and (2) of this section.<br /><br />
+	(1) At the end of each calendar quarter the department shall bill each nonprofit organization (or group of such organizations) which has elected to make payments in lieu of contributions for an amount equal to the full amount of regular benefits plus one-half of the amount of extended benefits paid during such quarter, and effective January 1, 1979, with respect to the State or any political subdivision or any instrumentality thereof as defined in Section 41-27-230(2)(b) the full amount of regular and extended benefits attributable to services performed in its employ.<br /><br />
+	(2) Each nonprofit organization that has elected payment of benefits in lieu of contributions shall further elect for the same period to make such payments in accordance with one of the following two methods:<br /><br />
+	(a) payment of any bill rendered under subsection (1) of this section in accordance with subsection (3) of this section; or<br /><br />
+	(b) payment of two percent of the quarterly taxable payroll of the nonprofit organization to the department within thirty days after the close of each such calendar quarter. The department shall apply such funds to the payment of bills rendered to the nonprofit organization under subsection (1) of this section. At the end of each calendar year, the department shall determine whether the total of payments for such year made by the nonprofit organization is less than, or in excess of, the total amount of regular benefits plus one-half of the amount of extended benefits paid to individuals during such calendar year, and effective January 1, 1979, with respect to the State or any political subdivision or any instrumentality thereof as defined in Section 41-27-230(2)(b) the full amount of all regular and extended benefits paid to individuals during such calendar year based on wages attributable to service in its employment. Each nonprofit organization whose total payments for such year are less than the amount so determined shall be liable for payment of the unpaid balance to the fund in accordance with subsection (3) of this section. If the total payments exceed the amount so determined for the calendar year, all or a part of the excess may, at the discretion of the department, be refunded from the fund or retained in the fund as part of the payments which may be required for the next calendar year.<br /><br />
+	(3) Payment of any bill rendered under either subsection (2)(a) or subsection (2)(b) of this section shall be made not later than thirty days after such bill is mailed to the last known address of the nonprofit organization or is otherwise delivered to it, unless there has been an application for review and redetermination in accordance with subsection (5) of this section.<br /><br />
+	(4) Payments made by any nonprofit organization under the provisions of this section shall not be deducted or deductible, in whole or in part, from the remuneration of individuals in the employ of the organization.<br /><br />
+	(5) The amount due specified in any bill from the department shall be conclusive on the organization unless, not later than fifteen days after the bill was mailed to its last known address or otherwise delivered to it, the organization files an application for redetermination by the department setting forth the grounds for the application. After affording the organization a reasonable opportunity for a fair hearing consonant with the provisions of Section 41-35-720, the department shall by its decision make findings of fact and conclusion of law and upon the basis thereof affirm, modify, or reverse its original ruling with respect to the amount originally specified in the bill. Within fifteen days after the date upon which the decision is issued the organization may procure judicial review of the decision by commencing an action in the court of common pleas in any county in which the organization has a place of business against the department for the review of its decision. In such action a petition, which need not be verified, but which shall state the grounds upon which a review is sought, shall be served upon a member of the department or upon a person as the department shall designate. With its answer the department shall certify and file with the court all evidence and a transcript of all testimony taken in the matter together with its findings of fact and decision therein. In any judicial proceeding under this section the decision of the court shall be based upon the evidence introduced and the testimony received at the hearing before the department. An appeal may be taken from the decision of the court of common pleas in the manner provided by the South Carolina Appellate Court Rules. A petition for judicial review shall act as a supersedeas or stay of any action by the department directed toward the collection of the amount involved in the controversy or the imposition of any penalty or forfeiture by reason of the nonpayment thereof.<br /><br />
+	(6) Past due payments of amounts in lieu of contributions shall be subject to the same interest and penalties that, pursuant to Section 41-31-370, apply to past due contributions.<br /><br />
+	(7) All of the provisions of Section 41-31-360, applicable to the adjustment or refund of contributions and interest paid or collected, and not inconsistent with the provisions of this section, shall be applicable to payments in lieu of contributions and interest erroneously paid by a nonprofit organization.<br /><br />
+	(8) All of the remedies, powers, and means available to the department under the provisions of Sections 41-31-380, 41-31-390, 41-31-400, 41-31-410, and 41-31-420 to enforce the payment of contributions, interest, penalties, and costs are applicable to the enforcement of payments in lieu of contributions and interest due under the provisions of this section, and for the purposes of this item the term &quot;contributions&quot; which appears in any such sections means &quot;payment in lieu of contributions&quot; in all particulars.<br /><br />
+	(9) In the event any governmental entity which is a covered employer under the terms of this chapter and Article 5, Chapter 35 becomes delinquent in payments due under this chapter and Article 5, Chapter 35, upon due notice, and upon certification of the delinquency by the department to the State Treasurer or any other department or agency of the State holding funds that may be payable to the delinquent governmental entity, the amount of such delinquency shall be deducted from any such funds in the hands of the State Treasurer or other department or agency and paid to the department in satisfaction of such delinquency. This remedy shall be in addition to any other collection remedies in this chapter and Article 5, Chapter 35 or otherwise provided by law.<br /><br />
+HISTORY: 1962 Code SECTION 68-222; 1971 (57) 950; 1973 (58) 248; 1977 Act No. 161, SECTIONS 18, 19; 1999 Act No. 55, SECTION 42; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; and &quot;subsection&quot; for &quot;paragraph&quot; throughout, and in subsection (9) substituted &quot;department&quot; for &quot;South Carolina Employment Security Commission&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-640.</span> Security to insure payments.<br /><br />
+	The department in its discretion may adopt regulations requiring any nonprofit organization or group of organizations described in Section 41-31-660(3) which does not possess title to real property and improvements valued in excess of two million dollars to post a surety bond, money deposit, securities, or other security as the department may require to insure the payments in lieu of the contributions required under such election.<br /><br />
+	(1) The amount of the surety bond, money deposit, securities, or other security required by this subsection shall bear such relationship as the department shall determine to the organization&#39;s total wages paid for employment as defined in Section 41-27-380 for the four calendar quarters immediately preceding the effective date of the election, the renewal date in the case of a bond, or the biennial anniversary of the effective date of election in the case of a deposit of money, whichever date shall be most recent and applicable. If the nonprofit organization did not pay wages in each of such four calendar quarters, the amount of the surety bond, cash deposit, securities, or other security shall be as determined by the department.<br /><br />
+	(2) Any bond deposited under this subsection shall be in force for a period of not less than two calendar years and shall be renewed with the approval of the department, at such times as the department may prescribe, but not less frequently than at two-year intervals as long as the organization continues to be liable for payments in lieu of contributions. The department shall require adjustments to be made in a previously filed bond as it deems appropriate. If the bond is to be increased, the adjusted bond shall be filed by the organization within thirty days of the date of notice of the required adjustment was mailed or otherwise delivered to it. Failure by any organization covered by such bond to pay the full amount of payments in lieu of contributions when due, together with any applicable interest and penalties provided for in Section 41-31-630(6), shall render the surety liable on such bond to the extent of the bond, as though the surety was such organization.<br /><br />
+	(3) Any deposit of money in accordance with this subsection shall be retained by the department in an escrow account until liability under the election is terminated, at which time it shall be returned to the organization, less any deductions as hereinafter provided. The department may deduct from the money deposited under this subsection by a nonprofit organization to the extent necessary to satisfy any due and unpaid payments in lieu of contributions and any applicable interest and penalties provided for in Section 41-31-630(6). The department shall require the organization within fifteen days following any deduction from a money deposit under the provisions of this subsection to deposit sufficient additional money to make whole the organization&#39;s deposit at the prior level. The department may, at any time, review the adequacy of the deposit made by any organization. If, as a result of such review, it determines that an adjustment is necessary, it shall require the organization to make an additional deposit within fifteen days of written notice of its determination or shall return to the organization such portion of the deposit as it no longer considers necessary, whichever action is appropriate.<br /><br />
+HISTORY: 1962 Code SECTION 68-223; 1971 (57) 950; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; throughout, and substituted &quot;subsection&quot; for &quot;paragraph&quot; or &quot;subparagraph&quot; throughout.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-650.</span> Failure to post security.<br /><br />
+	If any nonprofit organization fails to file a bond or make a deposit, or to file a bond in an increased amount or to increase or make whole the amount of a previously made deposit, as provided under this section, the department may terminate such organization&#39;s election to make payments in lieu of contributions and such termination shall continue for not less than two calendar years beginning with the quarter in which such termination becomes effective; provided, that the department may extend for good cause the applicable filing, deposit, or adjustment period by not more than thirty days.<br /><br />
+HISTORY: 1962 Code SECTION 68-224; 1971 (57) 950; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; throughout.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-660.</span> Amount of payments; group accounts.<br /><br />
+	Each employer that is liable for payment in lieu of contributions shall pay the department for the fund an amount equal to the amount of regular benefits and one-half the extended benefits paid that are attributable to service in the employ of such employer except that after January 1, 1979, the State or any political subdivision or any instrumentality thereof as defined in Section 41-27-230(2)(b) shall be required to reimburse the full amount of regular and extended benefits attributable to service in its employment. If benefits paid to an individual are based on wages paid by more than one employer and one or more of such employers are liable for payments in lieu of contributions, the amount payable to the fund by each employer that is liable for such payments shall be determined in accordance with the provisions of subsection (1) or (2).<br /><br />
+	(1) If the benefits paid to an individual are based both on base period wages paid by one or more employers that are liable for contributions and on base period wages paid by one or more employers that are liable for payments in lieu of contributions, the amount payable by each employer that is liable for payments in lieu of contributions shall bear the same ratio to the sum of the amounts payable by such employers as the total base period wages paid to the individual by each employer that is liable for payments in lieu of contributions bear to the total base period wages paid to the individual by all such employers.<br /><br />
+	(2) If benefits paid to an individual are based on wages paid by two or more employers that are liable for payments in lieu of contributions, the amount of benefits payable by each such employer shall be an amount which bears the same ratio to the total benefits paid to the individual as the total base period wages paid to the individual by such employer bear to the total base period wages paid to the individual by all of his base period employer.<br /><br />
+	(3) Two or more employers that have been liable for payments in lieu of contributions, in accordance with the provisions of Section 41-31-620 may file a joint application to the department for the establishment of a group account for the purpose of sharing the cost of benefits paid that are attributable to service in the employ of such employers. Each such application shall identify and authorize a group representative to act as the group&#39;s agent for the purpose of this section. Upon its approval of the application, the department shall establish a group account for such employers effective as of the beginning of the calendar quarter in which it receives the application and shall notify the group&#39;s representative of the effective date of the account. Such account shall remain in effect for not less than two calendar years and thereafter until terminated at the discretion of the department or upon application by the group. Upon establishment of the account, each member of the group shall be liable for payments in lieu of contributions with respect to each calendar quarter in the amount that bears the same ratio to the total benefits paid in such quarter that are attributable to service performed in the employ of all members of the group as the total wages paid for service in employment by such member in such quarter bear to the total wages paid during such quarter for service performed in the employ of all members of the group. The department shall prescribe such regulations as it deems necessary with respect to applications for establishment, maintenance, and termination of group accounts that are authorized by this subsection, for addition of new members to, and withdrawal of active members from such accounts, and for the determination of the amounts that are payable under this subsection by members of the group and the time and manner of such payments.<br /><br />
+HISTORY: 1962 Code SECTION 68-225; 1971 (57) 950; 1977 Act No. 161, SECTION 20; 1981 Act No. 108, SECTION 9; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;department&quot; for &quot;Commission&quot; throughout, and &quot;subsection&quot; for &quot;paragraph&quot; or &quot;subparagraph&quot; throughout.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-670.</span> Special provisions for organizations that made regular contributions prior to January 1, 1969.<br /><br />
+	(A) Any nonprofit organization that prior to January 1, 1969, paid contributions required by Section 41-31-10 and, pursuant to Section 41-31-620, elects within thirty days after January 1, 1972, to make payments in lieu of contributions, is not required to make any such payment on account of any regular or extended benefits paid, on the basis of wages paid by the organization to individuals for weeks of unemployment which begin on or after the effective date of the election until the total amount of the benefits equals the amount of the positive balance in the experience rating account of the organization.<br /><br />
+	(B) Any nonprofit organization which has elected to become liable for payments in lieu of contributions under the provisions of Sections 41-31-620 and 41-31-630 and thereafter terminates the election shall become an employer liable for the payments of contributions upon the effective date of the termination but no such employer&#39;s tax rate thereafter may be less than tax rate class twelve until there have been twenty-four consecutive calendar months of coverage. Upon termination of the election to reimburse the department in lieu of contributions, if the employer was previously an employer liable for contributions, the previously established contributory account will be reopened.<br /><br />
+HISTORY: 1962 Code SECTION 68-226; 1971 (57) 950; 1973 (58) 248; 1986 Act No. 362, SECTION 12; 1999 Act No. 37, SECTION 8; 2010 Act No. 234, SECTION 1, eff January 1, 2011; 2011 Act No. 63, SECTION 9, eff June 14, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment changed the paragraph identifiers from (1) and (2) to (A) and (B).<br /><br />
+	The 2011 amendment rewrote subsection (B).<br /><br />
+<div style="text-align: center;">ARTICLE 7</div>
+<div style="text-align: center;">Financing Benefits Paid to Employees of Governmental Entities</div><br />
+<span style="font-weight: bold;"> SECTION 41-31-810.</span> Application of Article 5.<br /><br />
+	Benefits paid to employees of a governmental entity as provided for by Sections 41-27-210(5), 41-27-230(2), and 41-35-10, shall be financed to the same extent, in similar manner, and by like procedure as is set out in Article 5 of this chapter with respect to the financing of benefits paid to employees of nonprofit organizations, except that the provisions of Section 41-31-640 shall not be applicable thereto, and except that for the purposes of Section 41-31-670 no governmental entity as defined in Section 41-27-230(2) may use any credit balance in its experience rating account for payment, credit, set off, or reduction of reimbursement of any amount of regular or extended benefits attributable to service in its employment.<br /><br />
+HISTORY: 1962 Code SECTION 68-230; 1971 (57) 950; 1977 Act No. 161, SECTION 21; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment made no apparent change to this section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-820.</span> Deposit and review of premiums collected from state agencies; transfers from general fund to cover claims.<br /><br />
+	(A) Unemployment compensation premiums collected from state agencies will be deposited into a separate account and used to pay unemployment compensation benefits to eligible employees of the State. Premiums will be based on experience ratings provided by private consultants and the Department of Administration or the State Fiscal Accountability Authority. The Unemployment Compensation Funds&#39; contribution level must be reviewed no less than biennially to ensure that premiums are commensurate with the cost of operating the Unemployment Compensation Fund. All interest earned on this account must be retained by the Unemployment Compensation Fund and used to offset costs.<br /><br />
+	(B) Notwithstanding the amounts annually appropriated as &quot;Unemployment Compensation Insurance&quot; to cover unemployment benefit claims paid to employees of the state government who are entitled under federal law, the State Treasurer and the Comptroller General, are hereby authorized and directed to pay from the general fund of the State to the department funds necessary to cover actual benefit claims paid during the current fiscal year which exceed the amounts paid in for this purpose by the various agencies, departments, and institutions subject to unemployment compensation claims. The department must certify quarterly to the State Fiscal Accountability Authority and the Department of Administration the state&#39;s liability for such benefit claims actually paid to claimants who were employees of the State of South Carolina and entitled under federal law. The amount so certified must be remitted to the department.<br /><br />
+HISTORY: 2002 Act No. 356, SECTION 1, Pt IX.J; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment in subsection (B) substituted &quot;department funds necessary&quot; for &quot;South Carolina Employment Security Commission such funds as are necessary&quot; in the first sentence; and substituted &quot;department&quot; for &quot;Employment Security Commission&quot; in the second and third sentences.<br /><br />
+<div style="text-align: center;">ARTICLE 9</div>
+<div style="text-align: center;">Payment and Collection of Departmental Administrative Contingency Assessments</div><br />
+<span style="font-weight: bold;"> SECTION 41-31-910.</span> General provisions.<br /><br />
+	Departmental administrative contingency assessments must accrue and become payable by each employer who is subject to the assessments as defined in Section 41-27-410 for each calendar year in which he is subject to Chapters 27 through 41 of this title with respect to wages for employment. The assessments are due and payable by each subject employer to the department for the departmental administrative contingency fund and are not deductible, in whole or in part, from the wages of individuals in the employer&#39;s employ. No determination and assessments may be instituted more than four years after the last day of the month immediately following the calendar quarter for which the assessments were payable. The limitation period contained in this section does not apply to an employer that wilfully fails to file a departmental contingency assessment report pursuant to this section or pursuant to regulations promulgated by the department, or has knowingly made a false statement or has intentionally failed to disclose a material fact on a departmental contingency assessment report.<br /><br />
+HISTORY: 1986 Laws Act No. 362, SECTION 13; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment rewrote the section.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-920.</span> Inclusion of assessments in quarterly contribution report.<br /><br />
+	Departmental administrative contingency assessments must be reported on the employer&#39;s quarterly contribution report according to the same rules as the department may prescribe for contributions.<br /><br />
+HISTORY: 1986 Laws Act No. 362, SECTION 13; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;departmental&quot; for &quot;employment security&quot; and &quot;department&quot; for &quot;commission&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-31-930.</span> Penalty for late payment.<br /><br />
+	If any employer&#39;s amount of the departmental administrative contingency assessment which is due and payable, as prescribed by the department, is unpaid ten days following the date on which an assessment or debit memorandum has been issued, a penalty of ten dollars may be assessed.<br /><br />
+HISTORY: 1986 Laws Act No. 362, SECTION 13; 2010 Act No. 234, SECTION 1, eff January 1, 2011.<br /><br />
+Effect of Amendment<br /><br />
+	The 2010 amendment substituted &quot;departmental&quot; for &quot;employment security&quot;, substituted &quot;department&quot; for &quot;commission&quot;, and deleted &quot;therefor&quot; after &quot;has been issued&quot;.<br /><br />
+
+</div>
+
+
+					</div>		 <!-- mainwidepanel -->
+					
+				</div>		 <!-- pagebody -->
+				
+				<div id="footer" class="nodisplay" style="height: 30px;" onContextMenu="return false;">
+			<div id="footerdiv" style="margin:0;">
+				South Carolina Legislative Services Agency * 223 Blatt Building * 1105 Pendleton Street * Columbia, SC 29201<!-- * 803-212-4420--><br>
+				
+								<a href="/disclaimer.php">Disclaimer</a> * <a href="/policies.php">Policies</a> * <a href="/credits.php">Photo Credits</a> * <a href="/contact.php">Contact Us</a>
+							</div>
+		</div>
+		<div id="printfooter" class="printdisplay serifNormal" align=center style="font-size: 8pt;">
+			<br>
+			<br>
+			<hr>
+			Legislative Services Agency
+			<br>
+			h t t p : / / w w w . s c s t a t e h o u s e . g o v
+		</div>
+	
+		</div>	<!-- container or main in mobile page-->
+</body>
+</html>
+

@@ -43,3 +43,16 @@ Depois de baixar, use "ingere raw/tickets/api/..." para levar o conteúdo ao cé
 
 
 > Cada execução grava em `raw/tickets/api/AAAA-MM-DD/` (pasta nova por dia; `raw/` é imutável). O índice acumulado fica em `scripts/youtrack_indice.md`.
+
+## buscar.py
+
+Busca local por trecho no material longo (RAG local, 2026-10-28): `raw/reunioes`, `raw/docs/oficiais`, `raw/tickets/api` (só `.md`, coleta mais nova de cada ticket, sem anexos), `raw/chats` e `extracoes/`. Nunca entra `02-client-reports-raw/`, `99-local-only/` nem `.env`.
+
+```powershell
+python scripts/buscar.py "Lithuania BAU validate SIR" --fonte reunioes -n 5
+python scripts/buscar.py "Marko automatic submission government filing"
+python scripts/buscar.py "termos" --reindexar   # refaz o índice do zero
+```
+- BM25 em Python puro, sem rede e sem modelo. O índice fica em `.busca/` (fora do git); a 1ª execução leva cerca de 1 min, depois cerca de 2 s (só reindexa arquivo novo ou alterado).
+- Devolve `arquivo:linha` + trecho (no máximo 2 por arquivo). O bloco de prova continua exigindo abrir a fonte citada.
+- Reuniões e tickets estão quase todos em inglês: buscar com os termos em inglês.

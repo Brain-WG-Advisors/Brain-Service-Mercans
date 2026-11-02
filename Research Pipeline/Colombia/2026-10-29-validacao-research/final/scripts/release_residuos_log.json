@@ -1,0 +1,38 @@
+[
+ {
+  "artifact": "CCG",
+  "where": "paragraph",
+  "before": "25% × 3,469,095 = 867,273.75; within the monthly cap",
+  "after": "25% × 3,469,095 = 867,273.75; within the 790-unit annual cap (COP 41,375,460), tracked year-to-date"
+ },
+ {
+  "artifact": "CCG",
+  "where": "paragraph",
+  "before": "30 October 2026",
+  "after": "2 November 2026"
+ },
+ {
+  "artifact": "DD",
+  "where": "ID Information!H7",
+  "before": "Partial list. Bank name, account type and account number are populated only for account-crediting payment methods (Anexo Tecnico NE v1.0 table 5.3.3.2): 42 (Consignacion bancaria), 45 (Transferencia Credito Bancario), 46 (Transferencia Debito Interbancario), 47 (Transferencia Debito Bancaria) and 98 (CATS: Nequi, Daviplata), and 30 / 31 (Transferencia Credito / Debito) if used; left empty for 10 (Efectivo), 20, 23, 25 and 26 (cheques), 71 (Bonos), 72 (Vales) and ZZZ (Acuerdo mutuo). Cards (48, 49) count as account-based only where the client pays salary to a card linked to an account (an interpretation). The annex makes the three attributes optional (0-1, NIE066-NIE068); requiring all three for account-crediting methods is an engine rule. Must be absent or empty where Payment Method = 10 (cash). The bank / non-bank classification of each code is an interpretation; confirm with DIAN.",
+  "after": "Partial list. Bank name, account type and account number are populated only for account-crediting payment methods of the Payment Method mapper (Anexo Tecnico NE v1.0 table 5.3.3.2): 42 (Consignacion bancaria), 45 (Transferencia Credito Bancario), 47 (Transferencia Debito Bancaria) and 98 (CATS: Nequi, Daviplata); left empty for 10 (Efectivo), 20 (Cheque), 71 (Bonos) and 72 (Vales). Cards (48, 49) count as account-based only where the client pays salary to a card linked to an account (an interpretation). The annex makes the three attributes optional (0-1, NIE066-NIE068); requiring all three for account-crediting methods is an engine rule. Must be absent or empty where Payment Method = 10 (cash). The bank / non-bank classification of each code is an interpretation; confirm with DIAN."
+ },
+ {
+  "artifact": "NE",
+  "where": "Nomina Electronica Spec!G73",
+  "before": "Populated where 'Payment method' (NIE065) is a bank-mediated medium (42, 45, 46, 47, 48, 49 and similar). Must be absent or empty where NIE065 = 10 Efectivo. Bidirectional pair with NIE065 and with 'Account number' (NIE068). Also bidirectional with 'Account type' (NIE067), which is populated in the same cases.",
+  "after": "Populated where 'Payment method' (NIE065) is a bank-mediated medium (42, 45, 47 and 98; 48 and 49 only where the card is linked to a salary account). Must be absent or empty where NIE065 = 10 Efectivo. Bidirectional pair with NIE065 and with 'Account number' (NIE068). Also bidirectional with 'Account type' (NIE067), which is populated in the same cases."
+ },
+ {
+  "artifact": "NE",
+  "where": "Population Rules!C30",
+  "before": "Where the payment method is a bank-mediated medium (42, 45, 46, 47, 48, 49), the bank, account type and account number must all be present. Where it is 10 (Efectivo), all three must be absent.",
+  "after": "Where the payment method is a bank-mediated medium (42, 45, 47 and 98; 48 and 49 only where the card is linked to a salary account), the bank, account type and account number must all be present. Where it is 10 (Efectivo), all three must be absent."
+ },
+ {
+  "artifact": "NE",
+  "where": "Version Control!D15",
+  "before": "Statutory validation, second pass: the 790-UVT and 1,340-UVT caps tracked year-to-date, with no monthly one-twelfth limit (Population Rules, Example Analysis); severance savings and their interest not withheld for non-residents (Population Rules). Released 2026-11-02 — approved by Wallisson Gomes.",
+  "after": "Statutory validation, second pass: the 790-UVT and 1,340-UVT caps tracked year-to-date, with no monthly one-twelfth limit (Population Rules, Example Analysis); severance savings and their interest not withheld for non-residents (Population Rules); bank attributes for the account-crediting payment methods 42, 45, 47 and 98 (Nomina Electronica Spec NIE066, Population Rules). Released 2026-11-02 — approved by Wallisson Gomes."
+ }
+]

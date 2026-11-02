@@ -2,6 +2,8 @@
 
 > Hub [[Lituania]] · Correções locais: `Research Pipeline/Lithuania/2026-10-29-correcoes/` · Validação de 28/10: [[Research Pipeline/Lithuania/2026-10-28-validacao/CONFERENCIA]] · Modelo da Colômbia: [[Research Pipeline/Colombia/co-report-crosscheck/MAPA]] (kit `co-report-crosscheck`, `CONFIRMACAO-PROCESSOS-CO-2026-10-26.xlsx`, `PENDING-2026-10-21.md`) · Rascunho anterior: [[rascunhos/2026-10-28-lituania-validacao-BAU]]
 
+**Correção de 29/10:** o Kevin e o Khoi são da Implementation, não do BAU. A Lituânia ainda não tem BAU no monday. O pedido vai ao líder do BAU da Europa, com cópia ao Kevin, pelo rascunho [[rascunhos/2026-10-29-email-kevin-comunicado-validacao-LT]]. As §2 e §6 abaixo ficam como histórico.
+
 Status: **rascunho para o usuário (29/10). Nada enviado nem gravado em Drive, ticket ou e-mail.** É iniciativa nossa (ninguém pediu), e o texto ao BAU diz "para estarmos alinhados".
 
 ## 1. O que fizemos na Colômbia e como fica na Lituânia

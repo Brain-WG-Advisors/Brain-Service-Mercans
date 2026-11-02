@@ -1,0 +1,2647 @@
+Version Control!B8	Statutory Report Specification
+Version Control!B9	COLOMBIA
+Version Control!B10	Integrated Contribution Settlement Return of the Pension Payer (PILA Pensionados) - pensioners' contributions
+Version Control!B12	Version
+Version Control!C12	Effective Date
+Version Control!D12	Change Description
+Version Control!E12	Status
+Version Control!F12	Updated By
+Version Control!B13	1.0
+Version Control!C13	2026-10-21
+Version Control!D13	Initial version.
+Version Control!E13	Approved
+Version Control!F13	Wallisson Gomes
+Report Matrix!A1	INTEGRATED CONTRIBUTION SETTLEMENT RETURN OF THE PENSION PAYER (PILA PENSIONADOS) — REPORT MATRIX
+Report Matrix!A3	Report ID
+Report Matrix!B3	CO-PILA-007
+Report Matrix!A4	Report Name (EN)
+Report Matrix!B4	Integrated Contribution Settlement Return of the Pension Payer (PILA Pensionados) - pensioners' contributions
+Report Matrix!A5	Report Name (Local)
+Report Matrix!B5	Planilla Integrada de Liquidación de Aportes - Aportes a Seguridad Social de Pensionados (Anexo Técnico 3)
+Report Matrix!A6	Document ID
+Report Matrix!B6	CO-PILA-007
+Report Matrix!A7	Document Title
+Report Matrix!B7	Integrated Contribution Settlement Return of the Pension Payer - Field Specification
+Report Matrix!A8	Country
+Report Matrix!B8	Colombia
+Report Matrix!A9	Authority
+Report Matrix!B9	Ministry of Health and Social Protection (Res. MSPS 2388 de 2016, Anexo Técnico 3), filed THROUGH A LICENSED PRIVATE INFORMATION OPERATOR
+Report Matrix!A10	Report Type
+Report Matrix!B10	Statutory monthly settlement of the social-security contributions of the pensioners whose pension the employer pays directly
+Report Matrix!A11	Tax Type
+Report Matrix!B11	Social security contributions withheld from the mesada: health, Fondo de Solidaridad Pensional and, where they apply, pension and family compensation fund (not an income-tax filing)
+Report Matrix!A12	Relationship
+Report Matrix!B12	Employer as pension payer type 01 (Empleador) to information operator (never directly to government)
+Report Matrix!A13	Frequency
+Report Matrix!B13	Monthly - planilla type P for the monthly contributions; R, L and V for retroactive amounts and reliquidations
+Report Matrix!A14	Submission Deadline
+Report Matrix!B14	By the business day that Decreto 780 de 2016 art. 3.2.2.1 assigns to the last two digits of the payer's NIT (15 bands, 00-07 to 94-99); the article applies to all contributors (aportantes)
+Report Matrix!A15	File Format
+Report Matrix!B15	Two fixed-width flat files: File Type 1 (general data of the pension payer) and File Type 2 (header record type 1 + one detail record type 2 per pensioner and pension type)
+Report Matrix!A16	File Extension
+Report Matrix!B16	Not prescribed by the annex. The file extension is held in the information-operator configuration, as published by the chosen operador.
+Report Matrix!A17	Character Encoding
+Report Matrix!B17	Not prescribed by the annex. The character encoding is held in the information-operator configuration, as published by the chosen operador.
+Report Matrix!A18	Record Types / Sections
+Report Matrix!B18	File Type 1 (27 campos, 482 positions); File Type 2 Record Type 1 Encabezado (18 campos, 285 positions); File Type 2 Record Type 2 Liquidación detallada de aportes (63 campos, 519 positions)
+Report Matrix!A19	Version
+Report Matrix!B19	v1.0
+Report Matrix!A22	DETAILED COMPLIANCE NOTES (Colombia-specific)
+Report Matrix!A23	SUBMISSION CHANNEL
+Report Matrix!A24	- Channel: upload of the two fixed-width files (or keying) on the web site of a licensed information operator chosen by the payer. Source: AT3 v15 ch. 1 s.0, p. 7.
+Report Matrix!A25	- The planilla is self-settled and paid electronically: pension payers with 20 or more pensioners have been bound to the electronic modality since 6 March 2017 (Decreto 780 de 2016 art. 3.2.3.9).
+Report Matrix!A26	- Prerequisite: the payer must appear in the Ministry of Health file 'INFORMACIÓN PAGADORES DE PENSIONES', placed monthly on each operator's secure FTP; a payer that does not appear requests inclusion from the Subdirección de Pensiones y Otras Prestaciones (AT3 v15 §2.1.2.2, p. 16).
+Report Matrix!A27	- The payer updates its File Type 1 registration with the operator in July and January, as a precondition for settling the planilla of that month (AT3 v15 §1.1, pp. 11-12).
+Report Matrix!A28	SCOPE OF THIS REPORT
+Report Matrix!A29	- Covers the pensions the employer pays directly as pension payer type 01, pensioner types 5 and 6, and the pensioner type 9 records of their additional UPC beneficiaries (AT3 v15 ch. 4 §1 table 3, pp. 100-101).
+Report Matrix!A30	- Active employees, including employed pensioners in active service, are reported in the employees' PILA under Anexo Técnico 2 (CO-PILA-003), a different file with a different layout.
+Report Matrix!A31	- Payments that are not a pension (for example an instalment of a retirement bonus) have no record here: every detail record carries a pension type (campo 9) and a mesada (campo 58).
+Report Matrix!A32	CONTRIBUTIONS SETTLED
+Report Matrix!A33	- Health: borne in full by the pensioner (Ley 100 de 1993 art. 143) on the mesada capped at 25 SMLMV; rate by total mesada and contribution period, from January 2024 4% (1 SMLMV) / 10% (more than 1 and up to 3 SMLMV) / 12% (more than 3 SMLMV), earlier periods as in T2R2-048 (Ley 100 de 1993 art. 204 par. 5; Res. MSPS 1271 de 2023 art. 1).
+Report Matrix!A34	- Fondo de Solidaridad Pensional, subsistence subaccount: 1% for a total mesada above 10 and up to 20 SMLMV, 2% above 20 SMLMV, on the mesada (AT3 v15 §2.2.2.2 and §2.2.2.21; Ley 797 de 2003 art. 8).
+Report Matrix!A35	- Pension: only for pension types that contribute (11 and 14 'para compartir', 4; optional 12, 20, 21) per R6 (AT3 v15 ch. 4 §6 table 9, pp. 107-108); R6 also marks 7 and 22, which are not valid for payer type 01 (R02, AT3 v15 pp. 102-103).
+Report Matrix!A36	- Family compensation fund: optional for every pension type (R6, 'O').
+Report Matrix!A37	- No occupational risk, SENA or ICBF in this file.
+Report Matrix!A38	RELATED FILINGS / CROSS-REFERENCES
+Report Matrix!A39	- The pensions paid by the employer and the deductions withheld from them are also reported in the electronic payroll (CO-DIAN-001): Res. DIAN 000227 de 2025 art. 1.5.3.2.3 includes 'pagos a los pensionados a cargo del empleador'.
+Report Matrix!A40	- Totals records types 3 to 7 (pension, FSP subsistence, health, CCF and total payable) and the output files to the administradoras are generated by the information operator, not by the payer (AT3 v15 ch. 2-3, pp. 65-98).
+Payroll Scope Summary!A1	PAYROLL SCOPE SUMMARY - INTEGRATED CONTRIBUTION SETTLEMENT RETURN OF THE PENSION PAYER (PILA PENSIONADOS)
+Payroll Scope Summary!A2	PURPOSE: Tell the developer WHO is reported on the monthly pensioners' planilla of the employer as pension payer, and what happens to a borderline case.
+Payroll Scope Summary!A4	SCENARIO
+Payroll Scope Summary!B4	REPORT?
+Payroll Scope Summary!C4	NOTES / REASONING
+Payroll Scope Summary!A5	═══ WHO GETS REPORTED ═══
+Payroll Scope Summary!A6	Pensioner whose pension the employer pays directly (pension WT 62154)
+Payroll Scope Summary!B6	YES
+Payroll Scope Summary!C6	The employer is pension payer type 01 Empleador: 'empresas públicas o privadas o personas naturales que tienen a su cargo el pago de pensiones de sus trabajadores' (AT3 v15 §1.2.4, p. 13). Pensioners are members of the contributory health regime (Ley 100 de 1993 art. 157) and the pension payer self-settles and pays their contributions through PILA (Decreto 780 de 2016 art. 3.2.3.9; Res. MSPS 2388 de 2016 art. 1, Anexo Técnico 3). Pensioner type 5 or 6 (R01).
+Payroll Scope Summary!A7	Survivor (sustitución) beneficiary of a pension the employer pays
+Payroll Scope Summary!B7	YES
+Payroll Scope Summary!C7	Pension types 2, 3 and 4 are valid for payer type 01 (R02, AT3 v15 pp. 102-103). The causante block (campos 11 to 16) becomes mandatory, and campo 63 carries the total of all beneficiaries (AT3 v15 §2.2.2.3, p. 47; §2.2.2.28, p. 64).
+Payroll Scope Summary!A8	Additional UPC beneficiary of a pensioner
+Payroll Scope Summary!B8	YES
+Payroll Scope Summary!C8	Reported as an extra detail record with pensioner type 9, carrying only the fields listed in AT3 v15 §2.2.2.4 (p. 49). EXCLUDED from the header count (T2R1-014) and the header payroll total (T2R1-015).
+Payroll Scope Summary!A9	Pensioner resident abroad without a family group in Colombia
+Payroll Scope Summary!B9	YES
+Payroll Scope Summary!C9	Reported with campo 18 = X: health rate 0% and health contribution zero for periods after December 2015, EPS may be blank, date of filing abroad mandatory (AT3 v15 §2.2.2.5, p. 49; ch. 4 §9, p. 113). The exemption covers the health contribution only; the FSP contribution above 10 SMLMV still applies (AT3 v15 §2.2.2.21, pp. 61-62).
+Payroll Scope Summary!A10	Pensioner whose mesada is suspended in the month
+Payroll Scope Summary!B10	YES
+Payroll Scope Summary!C10	Reported with SUS = S; days = days of suspension, mesada and IBC zero (AT3 v15 §2.2.2.9, p. 51).
+Payroll Scope Summary!A11	Active employee, including an employed pensioner in active service
+Payroll Scope Summary!B11	NO
+Payroll Scope Summary!C11	Reported in the employees' PILA under Anexo Técnico 2 (CO-PILA-003), which is 'Aportes a Seguridad Social de Activos' (Res. MSPS 2388 de 2016 art. 1).
+Payroll Scope Summary!A12	Former employee paid a retirement bonus in instalments
+Payroll Scope Summary!B12	NO
+Payroll Scope Summary!C12	Not a pension: no pension type (campo 9) and no mesada (campo 58) exist for it, and the person is not an active contributor of Anexo Técnico 2. A payment that is in fact a periodic jubilación or convencional pension paid by the employer is reported here, with pension type 10 or 13.
+Payroll Scope Summary!A13	Pensioner whose pension is paid by a pension fund or administradora
+Payroll Scope Summary!B13	NO
+Payroll Scope Summary!C13	Reported by that administradora as pension payer type 02 (AT3 v15 §1.2.4, p. 13), not by the employer.
+Payroll Scope Summary!A14	═══ AMOUNTS AND CONCEPTS REPORTED ═══
+Payroll Scope Summary!A15	Mesada (pension WT 62154)
+Payroll Scope Summary!B15	YES
+Payroll Scope Summary!C15	Campo 58, uncapped, and campo 63 (total mesada). The header payroll total T2R1-015 is the sum of campo 58 (AT3 v15 pp. 15, 38-39).
+Payroll Scope Summary!A16	Health contribution of the pensioner (WT 21645 / 21646 / 21647)
+Payroll Scope Summary!B16	YES
+Payroll Scope Summary!C16	Campo 49 = campo 48 x campo 39. Rate on the total mesada, for contribution periods from January 2024: 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1); earlier periods as in T2R2-048. Base = mesada capped at 25 SMLMV (AT3 v15 §2.2.2.13, p. 52).
+Payroll Scope Summary!A17	Fondo de Solidaridad Pensional on mesadas above 10 SMLMV (WT 21643 / 21648 / 21644)
+Payroll Scope Summary!B17	YES
+Payroll Scope Summary!C17	Campo 47: 1% above 10 and up to 20 SMLMV, 2% above 20 SMLMV, on campo 58 (AT3 v15 §2.2.2.21, pp. 61-62; Ley 797 de 2003 art. 8). Days in campo 36.
+Payroll Scope Summary!A18	Pension contribution
+Payroll Scope Summary!B18	VARIES
+Payroll Scope Summary!C18	Only for the pension types R6 marks X (4, 7, 11, 14, 22) or O (12, 20, 21); of the X types, 7 and 22 are not valid for payer type 01 (R02, AT3 v15 pp. 102-103), so for this employer the contributing types are 4, 11 and 14, and optionally 12, 20 and 21. Jubilación (10) and Convencional (13) carry no pension contribution: campos 30, 35, 40 and 41 stay blank or zero (AT3 v15 ch. 4 §6 table 9, pp. 107-108).
+Payroll Scope Summary!A19	Family compensation fund (CCF)
+Payroll Scope Summary!B19	VARIES
+Payroll Scope Summary!C19	Optional for every pension type (R6 'O'). Where the pensioner contributes, campos 34, 38, 51 and 52 are populated: campo 52 = campo 51 x campo 58 (AT3 v15 §2.2.2.26, p. 63).
+Payroll Scope Summary!A20	Income tax withholding on the pension
+Payroll Scope Summary!B20	NO
+Payroll Scope Summary!C20	This is a contribution settlement, not a tax return. Withholding goes on Form 350.
+Payroll Scope Summary!A21	═══ TIMING AND RELATIONSHIP ═══
+Payroll Scope Summary!A22	Monthly planilla
+Payroll Scope Summary!B22	YES
+Payroll Scope Summary!C22	Planilla type P is the main planilla for the monthly contributions of the pensioners (AT3 v15 §2.1.2.2, p. 16).
+Payroll Scope Summary!A23	Retroactive pension or reliquidation of the mesada
+Payroll Scope Summary!B23	YES
+Payroll Scope Summary!C23	Separate planillas: R (retroactive), L (reliquidation of periods before January 2020), V (reliquidation from January 2020, A and C records) (AT3 v15 §2.1.2.2, pp. 17-20).
+Payroll Scope Summary!A24	Payer not listed in the Ministry file 'INFORMACIÓN PAGADORES DE PENSIONES'
+Payroll Scope Summary!B24	NO
+Payroll Scope Summary!C24	Planilla types P, R, L and V require the listing. The payer first requests inclusion from the Ministry's Subdirección de Pensiones y Otras Prestaciones (AT3 v15 §2.1.2.2, pp. 16-20).
+PILA Pensioners Spec!A1	Integrated Contribution Settlement Return of the Pension Payer (PILA Pensionados) - pensioners' contributions
+PILA Pensioners Spec!A2	Field Name (EN)
+PILA Pensioners Spec!B2	Field Name (Local ES)
+PILA Pensioners Spec!C2	Record Type / Section
+PILA Pensioners Spec!D2	Field Position
+PILA Pensioners Spec!E2	Payroll Field (Y/N)
+PILA Pensioners Spec!F2	Mandatory (Y/N/C)
+PILA Pensioners Spec!G2	Conditional Reason
+PILA Pensioners Spec!H2	Position (Start-End)
+PILA Pensioners Spec!I2	Field Length
+PILA Pensioners Spec!J2	Format
+PILA Pensioners Spec!K2	Example
+PILA Pensioners Spec!L2	System Mapping
+PILA Pensioners Spec!M2	Field Explanation
+PILA Pensioners Spec!N2	Relevant for Payroll (Y/N)
+PILA Pensioners Spec!O2	Option Values
+PILA Pensioners Spec!P2	Rounding
+PILA Pensioners Spec!Q2	Negative (Y/N)
+PILA Pensioners Spec!R2	Value Type
+PILA Pensioners Spec!S2	Reporting Frequency
+PILA Pensioners Spec!T2	Query to RA
+PILA Pensioners Spec!U2	RA Comments
+PILA Pensioners Spec!A3	═══ FILE TYPE 1 - GENERAL DATA OF THE PENSION PAYER (27 campos, 482 posiciones) ═══
+PILA Pensioners Spec!A4	Pension payer name or corporate name
+PILA Pensioners Spec!B4	Nombre o razón social del pagador de pensiones
+PILA Pensioners Spec!C4	File Type 1 - Pension payer
+PILA Pensioners Spec!D4	A1-001
+PILA Pensioners Spec!E4	Y
+PILA Pensioners Spec!F4	Y
+PILA Pensioners Spec!H4	Pos 1-150
+PILA Pensioners Spec!I4	150
+PILA Pensioners Spec!J4	A(150) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K4	MERCANS COLOMBIA S.A.S.
+PILA Pensioners Spec!L4	Payer.Legal_Name
+PILA Pensioners Spec!M4	Registered name of the pension payer, supplied by the payer. Echoed byte for byte into the header record (T2R1-003: 'El registrado en el campo 1 del archivo tipo 1'). Source: AT3 v15 §1.1 campo 1, p. 7; §2.1.1 campo 3, p. 14.
+PILA Pensioners Spec!N4	Y
+PILA Pensioners Spec!O4	-
+PILA Pensioners Spec!P4	Not an amount - no rounding.
+PILA Pensioners Spec!Q4	N
+PILA Pensioners Spec!R4	Text
+PILA Pensioners Spec!S4	Monthly
+PILA Pensioners Spec!A5	Pension payer document type
+PILA Pensioners Spec!B5	Tipo documento del pagador de pensiones
+PILA Pensioners Spec!C5	File Type 1 - Pension payer
+PILA Pensioners Spec!D5	A1-002
+PILA Pensioners Spec!E5	Y
+PILA Pensioners Spec!F5	Y
+PILA Pensioners Spec!H5	Pos 151-152
+PILA Pensioners Spec!I5	2
+PILA Pensioners Spec!J5	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K5	NI
+PILA Pensioners Spec!L5	Payer.Document_Type
+PILA Pensioners Spec!M5	Closed list: NI (Número de Identificación Tributaria), CC, CE, PA, CD. A legal-person payer reports NI. Echoed into T2R1-004. Source: AT3 v15 §1.1 campo 2, p. 7.
+PILA Pensioners Spec!N5	Y
+PILA Pensioners Spec!O5	-> Field Options: Document type of the pension payer
+PILA Pensioners Spec!P5	Not an amount - no rounding.
+PILA Pensioners Spec!Q5	N
+PILA Pensioners Spec!R5	Code
+PILA Pensioners Spec!S5	Monthly
+PILA Pensioners Spec!A6	Pension payer identification number
+PILA Pensioners Spec!B6	Número de identificación del pagador de pensiones
+PILA Pensioners Spec!C6	File Type 1 - Pension payer
+PILA Pensioners Spec!D6	A1-003
+PILA Pensioners Spec!E6	Y
+PILA Pensioners Spec!F6	Y
+PILA Pensioners Spec!H6	Pos 153-168
+PILA Pensioners Spec!I6	16
+PILA Pensioners Spec!J6	A(16) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K6	900123456
+PILA Pensioners Spec!L6	Payer.Document_Number
+PILA Pensioners Spec!M6	The payer's identification number. The information operator validates that it contains only letters A-Z and digits 0-9. Alphanumeric only for PA (up to 16) and CD (up to 11); digits only for CC (up to 10), NI (up to 9) and CE (up to 7). The NIT check digit is reported separately in A1-004. Echoed into T2R1-005. This validation applies to payments made from 1 October 2026 (pension contribution period September 2026). Source: AT3 v15 §1.1 campo 3, pp. 7-8; ch. 5 §5.32, pp. 132-133.
+PILA Pensioners Spec!N6	Y
+PILA Pensioners Spec!O6	-
+PILA Pensioners Spec!P6	Not an amount - no rounding.
+PILA Pensioners Spec!Q6	N
+PILA Pensioners Spec!R6	Identifier
+PILA Pensioners Spec!S6	Monthly
+PILA Pensioners Spec!A7	Verification digit
+PILA Pensioners Spec!B7	Dígito de verificación
+PILA Pensioners Spec!C7	File Type 1 - Pension payer
+PILA Pensioners Spec!D7	A1-004
+PILA Pensioners Spec!E7	Y
+PILA Pensioners Spec!F7	C
+PILA Pensioners Spec!G7	MANDATORY where 'Person type' (A1-009) = J (Jurídica); ZERO in every other case.
+PILA Pensioners Spec!H7	Pos 169-169
+PILA Pensioners Spec!I7	1
+PILA Pensioners Spec!J7	N(1) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K7	8
+PILA Pensioners Spec!L7	Payer.NIT_DV
+PILA Pensioners Spec!M7	Check digit of the payer's NIT, validated by the information operator under the rules defined by DIAN. Echoed into T2R1-006. Source: AT3 v15 §1.1 campo 4, p. 8.
+PILA Pensioners Spec!N7	Y
+PILA Pensioners Spec!O7	-
+PILA Pensioners Spec!P7	Not an amount - no rounding.
+PILA Pensioners Spec!Q7	N
+PILA Pensioners Spec!R7	Identifier
+PILA Pensioners Spec!S7	Monthly
+PILA Pensioners Spec!A8	Branch or dependency code
+PILA Pensioners Spec!B8	Código de la sucursal o dependencia
+PILA Pensioners Spec!C8	File Type 1 - Pension payer
+PILA Pensioners Spec!D8	A1-005
+PILA Pensioners Spec!E8	Y
+PILA Pensioners Spec!F8	C
+PILA Pensioners Spec!G8	MANDATORY where 'Form of presentation' (A1-010) = S (Sucursal).
+PILA Pensioners Spec!H8	Pos 170-179
+PILA Pensioners Spec!I8	10
+PILA Pensioners Spec!J8	A(10) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L8	Payer.Branch_Code
+PILA Pensioners Spec!M8	Code of the branch or dependency that files. Echoed into T2R1-008. Source: AT3 v15 §1.1 campo 5, p. 8.
+PILA Pensioners Spec!N8	Y
+PILA Pensioners Spec!O8	-
+PILA Pensioners Spec!P8	Not an amount - no rounding.
+PILA Pensioners Spec!Q8	N
+PILA Pensioners Spec!R8	Code
+PILA Pensioners Spec!S8	Monthly
+PILA Pensioners Spec!A9	Branch or dependency name
+PILA Pensioners Spec!B9	Nombre de la sucursal o dependencia
+PILA Pensioners Spec!C9	File Type 1 - Pension payer
+PILA Pensioners Spec!D9	A1-006
+PILA Pensioners Spec!E9	Y
+PILA Pensioners Spec!F9	C
+PILA Pensioners Spec!G9	MANDATORY where A1-010 = S. Where the branch has no name, its code is written here.
+PILA Pensioners Spec!H9	Pos 180-219
+PILA Pensioners Spec!I9	40
+PILA Pensioners Spec!J9	A(40) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L9	Payer.Branch_Name
+PILA Pensioners Spec!M9	Name of the branch or dependency. Where the branch has no name, the payer writes its code. Echoed into T2R1-009. Source: AT3 v15 §1.1 campo 6, p. 8.
+PILA Pensioners Spec!N9	Y
+PILA Pensioners Spec!O9	-
+PILA Pensioners Spec!P9	Not an amount - no rounding.
+PILA Pensioners Spec!Q9	N
+PILA Pensioners Spec!R9	Text
+PILA Pensioners Spec!S9	Monthly
+PILA Pensioners Spec!A10	Pension payer class
+PILA Pensioners Spec!B10	Clase de pagador de pensiones
+PILA Pensioners Spec!C10	File Type 1 - Pension payer
+PILA Pensioners Spec!D10	A1-007
+PILA Pensioners Spec!E10	Y
+PILA Pensioners Spec!F10	Y
+PILA Pensioners Spec!H10	Pos 220-220
+PILA Pensioners Spec!I10	1
+PILA Pensioners Spec!J10	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K10	B
+PILA Pensioners Spec!L10	Payer.Pension_Payer_Class
+PILA Pensioners Spec!M10	A = pension payer with 200 or more pensioners; B = pension payer with fewer than 200 pensioners; I = Independiente (the payer is a natural person). The count takes in all pensioners of all branches or dependencies. Source: AT3 v15 §1.1 campo 7, pp. 8-9; §1.2.1, p. 12.
+PILA Pensioners Spec!N10	Y
+PILA Pensioners Spec!O10	-> Field Options: Pension payer class
+PILA Pensioners Spec!P10	Not an amount - no rounding.
+PILA Pensioners Spec!Q10	N
+PILA Pensioners Spec!R10	Code
+PILA Pensioners Spec!S10	Monthly
+PILA Pensioners Spec!A11	Legal nature
+PILA Pensioners Spec!B11	Naturaleza jurídica
+PILA Pensioners Spec!C11	File Type 1 - Pension payer
+PILA Pensioners Spec!D11	A1-008
+PILA Pensioners Spec!E11	Y
+PILA Pensioners Spec!F11	Y
+PILA Pensioners Spec!H11	Pos 221-221
+PILA Pensioners Spec!I11	1
+PILA Pensioners Spec!J11	N(1) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K11	2
+PILA Pensioners Spec!L11	Payer.Legal_Nature
+PILA Pensioners Spec!M11	1 Pública (legal person of public law); 2 Privada (natural or legal person of private law); 3 Mixta (sociedades de economía mixta, Ley 489 de 1998 art. 97). Source: AT3 v15 §1.1 campo 8, p. 9; §1.2.2, p. 12.
+PILA Pensioners Spec!N11	Y
+PILA Pensioners Spec!O11	-> Field Options: Legal nature
+PILA Pensioners Spec!P11	Not an amount - no rounding.
+PILA Pensioners Spec!Q11	N
+PILA Pensioners Spec!R11	Code
+PILA Pensioners Spec!S11	Monthly
+PILA Pensioners Spec!A12	Person type
+PILA Pensioners Spec!B12	Tipo persona
+PILA Pensioners Spec!C12	File Type 1 - Pension payer
+PILA Pensioners Spec!D12	A1-009
+PILA Pensioners Spec!E12	Y
+PILA Pensioners Spec!F12	Y
+PILA Pensioners Spec!H12	Pos 222-222
+PILA Pensioners Spec!I12	1
+PILA Pensioners Spec!J12	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K12	J
+PILA Pensioners Spec!L12	Payer.Person_Type
+PILA Pensioners Spec!M12	N Natural or J Jurídica. Where J, the verification digit (A1-004), the legal representative's identification number (A1-018) and document type (A1-020) are mandatory. Source: AT3 v15 §1.1 campo 9, p. 9; §1.2.3, p. 12.
+PILA Pensioners Spec!N12	Y
+PILA Pensioners Spec!O12	-> Field Options: Person type
+PILA Pensioners Spec!P12	Not an amount - no rounding.
+PILA Pensioners Spec!Q12	N
+PILA Pensioners Spec!R12	Code
+PILA Pensioners Spec!S12	Monthly
+PILA Pensioners Spec!A13	Form of presentation
+PILA Pensioners Spec!B13	Forma de presentación
+PILA Pensioners Spec!C13	File Type 1 - Pension payer
+PILA Pensioners Spec!D13	A1-010
+PILA Pensioners Spec!E13	Y
+PILA Pensioners Spec!F13	Y
+PILA Pensioners Spec!H13	Pos 223-223
+PILA Pensioners Spec!I13	1
+PILA Pensioners Spec!J13	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K13	U
+PILA Pensioners Spec!L13	Payer.Presentation_Form
+PILA Pensioners Spec!M13	Validated against the list U Único / S Sucursal. S makes the branch code and name (A1-005, A1-006) mandatory. Echoed into T2R1-007. Source: AT3 v15 §1.1 campo 10, p. 9.
+PILA Pensioners Spec!N13	Y
+PILA Pensioners Spec!O13	-> Field Options: Form of presentation
+PILA Pensioners Spec!P13	Not an amount - no rounding.
+PILA Pensioners Spec!Q13	N
+PILA Pensioners Spec!R13	Code
+PILA Pensioners Spec!S13	Monthly
+PILA Pensioners Spec!A14	Correspondence address
+PILA Pensioners Spec!B14	Dirección correspondencia
+PILA Pensioners Spec!C14	File Type 1 - Pension payer
+PILA Pensioners Spec!D14	A1-011
+PILA Pensioners Spec!E14	Y
+PILA Pensioners Spec!F14	Y
+PILA Pensioners Spec!H14	Pos 224-263
+PILA Pensioners Spec!I14	40
+PILA Pensioners Spec!J14	A(40) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K14	CALLE 100 7 33
+PILA Pensioners Spec!L14	Payer.Address
+PILA Pensioners Spec!M14	Correspondence address of the payer, supplied by the payer. Source: AT3 v15 §1.1 campo 11, p. 9.
+PILA Pensioners Spec!N14	Y
+PILA Pensioners Spec!O14	-
+PILA Pensioners Spec!P14	Not an amount - no rounding.
+PILA Pensioners Spec!Q14	N
+PILA Pensioners Spec!R14	Text
+PILA Pensioners Spec!S14	Monthly
+PILA Pensioners Spec!A15	City or municipality code
+PILA Pensioners Spec!B15	Código ciudad o municipio
+PILA Pensioners Spec!C15	File Type 1 - Pension payer
+PILA Pensioners Spec!D15	A1-012
+PILA Pensioners Spec!E15	Y
+PILA Pensioners Spec!F15	Y
+PILA Pensioners Spec!H15	Pos 264-266
+PILA Pensioners Spec!I15	3
+PILA Pensioners Spec!J15	A(3) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K15	001
+PILA Pensioners Spec!L15	Payer.Municipality_Code
+PILA Pensioners Spec!M15	Municipality code, validated by the information operator against the DANE DIVIPOLA list. Source: AT3 v15 §1.1 campo 12, p. 9.
+PILA Pensioners Spec!N15	Y
+PILA Pensioners Spec!O15	-
+PILA Pensioners Spec!P15	Not an amount - no rounding.
+PILA Pensioners Spec!Q15	N
+PILA Pensioners Spec!R15	Code
+PILA Pensioners Spec!S15	Monthly
+PILA Pensioners Spec!A16	Department code
+PILA Pensioners Spec!B16	Código departamento
+PILA Pensioners Spec!C16	File Type 1 - Pension payer
+PILA Pensioners Spec!D16	A1-013
+PILA Pensioners Spec!E16	Y
+PILA Pensioners Spec!F16	Y
+PILA Pensioners Spec!H16	Pos 267-268
+PILA Pensioners Spec!I16	2
+PILA Pensioners Spec!J16	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K16	11
+PILA Pensioners Spec!L16	Payer.Department_Code
+PILA Pensioners Spec!M16	Department code, validated by the information operator against the DANE DIVIPOLA list. Source: AT3 v15 §1.1 campo 13, p. 9.
+PILA Pensioners Spec!N16	Y
+PILA Pensioners Spec!O16	-
+PILA Pensioners Spec!P16	Not an amount - no rounding.
+PILA Pensioners Spec!Q16	N
+PILA Pensioners Spec!R16	Code
+PILA Pensioners Spec!S16	Monthly
+PILA Pensioners Spec!A17	DANE economic activity code
+PILA Pensioners Spec!B17	Código DANE de la actividad económica
+PILA Pensioners Spec!C17	File Type 1 - Pension payer
+PILA Pensioners Spec!D17	A1-014
+PILA Pensioners Spec!E17	Y
+PILA Pensioners Spec!F17	Y
+PILA Pensioners Spec!H17	Pos 269-272
+PILA Pensioners Spec!I17	4
+PILA Pensioners Spec!J17	N(4) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K17	6920
+PILA Pensioners Spec!L17	Payer.Economic_Activity_Code
+PILA Pensioners Spec!M17	Economic activity of the payer, validated by the information operator against the CIIU Rev. 4 A.C. table issued by DANE (Resolución 66 de 2012 or the rule that replaces it). Source: AT3 v15 §1.1 campo 14, pp. 9-10.
+PILA Pensioners Spec!N17	Y
+PILA Pensioners Spec!O17	-
+PILA Pensioners Spec!P17	Not an amount - no rounding.
+PILA Pensioners Spec!Q17	N
+PILA Pensioners Spec!R17	Code
+PILA Pensioners Spec!S17	Monthly
+PILA Pensioners Spec!A18	Telephone
+PILA Pensioners Spec!B18	Teléfono
+PILA Pensioners Spec!C18	File Type 1 - Pension payer
+PILA Pensioners Spec!D18	A1-015
+PILA Pensioners Spec!E18	Y
+PILA Pensioners Spec!F18	Y
+PILA Pensioners Spec!H18	Pos 273-282
+PILA Pensioners Spec!I18	10
+PILA Pensioners Spec!J18	N(10) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K18	6017000000
+PILA Pensioners Spec!L18	Payer.Phone
+PILA Pensioners Spec!M18	Telephone number of the payer, supplied by the payer. Source: AT3 v15 §1.1 campo 15, p. 10.
+PILA Pensioners Spec!N18	Y
+PILA Pensioners Spec!O18	-
+PILA Pensioners Spec!P18	Not an amount - no rounding.
+PILA Pensioners Spec!Q18	N
+PILA Pensioners Spec!R18	Identifier
+PILA Pensioners Spec!S18	Monthly
+PILA Pensioners Spec!A19	Fax
+PILA Pensioners Spec!B19	Fax
+PILA Pensioners Spec!C19	File Type 1 - Pension payer
+PILA Pensioners Spec!D19	A1-016
+PILA Pensioners Spec!E19	N
+PILA Pensioners Spec!F19	N
+PILA Pensioners Spec!H19	Pos 283-292
+PILA Pensioners Spec!I19	10
+PILA Pensioners Spec!J19	N(10) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K19	0000000000
+PILA Pensioners Spec!L19	Payer.Fax
+PILA Pensioners Spec!M19	Fax number, optional. As a numeric field it is zero-filled when there is no fax. Source: AT3 v15 §1.1 campo 16, p. 10; ch. 1 s.0, p. 7.
+PILA Pensioners Spec!N19	N
+PILA Pensioners Spec!O19	-
+PILA Pensioners Spec!P19	Not an amount - no rounding.
+PILA Pensioners Spec!Q19	N
+PILA Pensioners Spec!R19	Identifier
+PILA Pensioners Spec!S19	Monthly
+PILA Pensioners Spec!A20	E-mail address
+PILA Pensioners Spec!B20	Dirección de correo electrónico (E-mail)
+PILA Pensioners Spec!C20	File Type 1 - Pension payer
+PILA Pensioners Spec!D20	A1-017
+PILA Pensioners Spec!E20	N
+PILA Pensioners Spec!F20	N
+PILA Pensioners Spec!H20	Pos 293-352
+PILA Pensioners Spec!I20	60
+PILA Pensioners Spec!J20	A(60) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K20	nomina@mercans.com
+PILA Pensioners Spec!L20	Payer.Email
+PILA Pensioners Spec!M20	Optional. User name: letters a-z, digits 0-9, hyphen, underscore, apostrophe and dot; then the character @; domain name of letters a-z and digits 0-9, hyphen allowed but never as first or last character of the domain. Source: AT3 v15 §1.1 campo 17, p. 10.
+PILA Pensioners Spec!N20	N
+PILA Pensioners Spec!O20	-
+PILA Pensioners Spec!P20	Not an amount - no rounding.
+PILA Pensioners Spec!Q20	N
+PILA Pensioners Spec!R20	Text
+PILA Pensioners Spec!S20	Monthly
+PILA Pensioners Spec!A21	Legal representative identification number
+PILA Pensioners Spec!B21	Número de identificación del representante legal
+PILA Pensioners Spec!C21	File Type 1 - Pension payer
+PILA Pensioners Spec!D21	A1-018
+PILA Pensioners Spec!E21	Y
+PILA Pensioners Spec!F21	C
+PILA Pensioners Spec!G21	MANDATORY where A1-009 = J; blank in every other case.
+PILA Pensioners Spec!H21	Pos 353-368
+PILA Pensioners Spec!I21	16
+PILA Pensioners Spec!J21	A(16) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K21	79123456
+PILA Pensioners Spec!L21	Payer.Legal_Rep_Document_Number
+PILA Pensioners Spec!M21	Only letters A-Z and digits 0-9. Alphanumeric only for PA (up to 16) and CD (up to 11); digits only for CC (up to 10) and CE (up to 7). This validation applies to payments made from 1 October 2026. Source: AT3 v15 §1.1 campo 18, pp. 10-11; ch. 5 §5.32, pp. 132-133.
+PILA Pensioners Spec!N21	Y
+PILA Pensioners Spec!O21	-
+PILA Pensioners Spec!P21	Not an amount - no rounding.
+PILA Pensioners Spec!Q21	N
+PILA Pensioners Spec!R21	Identifier
+PILA Pensioners Spec!S21	Monthly
+PILA Pensioners Spec!A22	Legal representative verification digit
+PILA Pensioners Spec!B22	Dígito de verificación representante legal
+PILA Pensioners Spec!C22	File Type 1 - Pension payer
+PILA Pensioners Spec!D22	A1-019
+PILA Pensioners Spec!E22	N
+PILA Pensioners Spec!F22	Y
+PILA Pensioners Spec!H22	Pos 369-369
+PILA Pensioners Spec!I22	1
+PILA Pensioners Spec!J22	N(1) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K22	0
+PILA Pensioners Spec!L22	Constant 0
+PILA Pensioners Spec!M22	Always reported as zero: 'Este campo se deberá reportar en cero'. Source: AT3 v15 §1.1 campo 19, p. 11.
+PILA Pensioners Spec!N22	N
+PILA Pensioners Spec!O22	-
+PILA Pensioners Spec!P22	Not an amount - no rounding.
+PILA Pensioners Spec!Q22	N
+PILA Pensioners Spec!R22	Constant
+PILA Pensioners Spec!S22	Monthly
+PILA Pensioners Spec!A23	Legal representative document type
+PILA Pensioners Spec!B23	Tipo identificación representante legal
+PILA Pensioners Spec!C23	File Type 1 - Pension payer
+PILA Pensioners Spec!D23	A1-020
+PILA Pensioners Spec!E23	Y
+PILA Pensioners Spec!F23	C
+PILA Pensioners Spec!G23	MANDATORY where A1-009 = J; blank in every other case.
+PILA Pensioners Spec!H23	Pos 370-371
+PILA Pensioners Spec!I23	2
+PILA Pensioners Spec!J23	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K23	CC
+PILA Pensioners Spec!L23	Payer.Legal_Rep_Document_Type
+PILA Pensioners Spec!M23	Valid values CC, CE, PA, CD. Source: AT3 v15 §1.1 campo 20, p. 11.
+PILA Pensioners Spec!N23	Y
+PILA Pensioners Spec!O23	-> Field Options: Document type of the legal representative
+PILA Pensioners Spec!P23	Not an amount - no rounding.
+PILA Pensioners Spec!Q23	N
+PILA Pensioners Spec!R23	Code
+PILA Pensioners Spec!S23	Monthly
+PILA Pensioners Spec!A24	Legal representative first surname
+PILA Pensioners Spec!B24	Primer apellido del representante legal
+PILA Pensioners Spec!C24	File Type 1 - Pension payer
+PILA Pensioners Spec!D24	A1-021
+PILA Pensioners Spec!E24	Y
+PILA Pensioners Spec!F24	Y
+PILA Pensioners Spec!H24	Pos 372-391
+PILA Pensioners Spec!I24	20
+PILA Pensioners Spec!J24	A(20) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K24	MUESTRA
+PILA Pensioners Spec!L24	Payer.Legal_Rep_First_Surname
+PILA Pensioners Spec!M24	Mandatory, supplied by the payer. Source: AT3 v15 §1.1 campo 21, p. 11.
+PILA Pensioners Spec!N24	Y
+PILA Pensioners Spec!O24	-
+PILA Pensioners Spec!P24	Not an amount - no rounding.
+PILA Pensioners Spec!Q24	N
+PILA Pensioners Spec!R24	Text
+PILA Pensioners Spec!S24	Monthly
+PILA Pensioners Spec!A25	Legal representative second surname
+PILA Pensioners Spec!B25	Segundo apellido del representante legal
+PILA Pensioners Spec!C25	File Type 1 - Pension payer
+PILA Pensioners Spec!D25	A1-022
+PILA Pensioners Spec!E25	Y
+PILA Pensioners Spec!F25	N
+PILA Pensioners Spec!H25	Pos 392-421
+PILA Pensioners Spec!I25	30
+PILA Pensioners Spec!J25	A(30) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K25	EJEMPLO
+PILA Pensioners Spec!L25	Payer.Legal_Rep_Second_Surname
+PILA Pensioners Spec!M25	Supplied by the payer where it exists. Source: AT3 v15 §1.1 campo 22, p. 11.
+PILA Pensioners Spec!N25	Y
+PILA Pensioners Spec!O25	-
+PILA Pensioners Spec!P25	Not an amount - no rounding.
+PILA Pensioners Spec!Q25	N
+PILA Pensioners Spec!R25	Text
+PILA Pensioners Spec!S25	Monthly
+PILA Pensioners Spec!A26	Legal representative first name
+PILA Pensioners Spec!B26	Primer nombre del representante legal
+PILA Pensioners Spec!C26	File Type 1 - Pension payer
+PILA Pensioners Spec!D26	A1-023
+PILA Pensioners Spec!E26	Y
+PILA Pensioners Spec!F26	Y
+PILA Pensioners Spec!H26	Pos 422-441
+PILA Pensioners Spec!I26	20
+PILA Pensioners Spec!J26	A(20) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K26	ANA
+PILA Pensioners Spec!L26	Payer.Legal_Rep_First_Name
+PILA Pensioners Spec!M26	Mandatory, supplied by the payer. Length 20 from position 422; AT3 prints the final position as 440, and the 20-position length, the start of campo 24 at 442 and the record total of 482 fix the field at 422-441. Source: AT3 v15 §1.1 campo 23, p. 11.
+PILA Pensioners Spec!N26	Y
+PILA Pensioners Spec!O26	-
+PILA Pensioners Spec!P26	Not an amount - no rounding.
+PILA Pensioners Spec!Q26	N
+PILA Pensioners Spec!R26	Text
+PILA Pensioners Spec!S26	Monthly
+PILA Pensioners Spec!A27	Legal representative second name
+PILA Pensioners Spec!B27	Segundo nombre del representante legal
+PILA Pensioners Spec!C27	File Type 1 - Pension payer
+PILA Pensioners Spec!D27	A1-024
+PILA Pensioners Spec!E27	Y
+PILA Pensioners Spec!F27	N
+PILA Pensioners Spec!H27	Pos 442-471
+PILA Pensioners Spec!I27	30
+PILA Pensioners Spec!J27	A(30) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K27	MARIA
+PILA Pensioners Spec!L27	Payer.Legal_Rep_Second_Name
+PILA Pensioners Spec!M27	Supplied by the payer where it exists. Source: AT3 v15 §1.1 campo 24, p. 11.
+PILA Pensioners Spec!N27	Y
+PILA Pensioners Spec!O27	-
+PILA Pensioners Spec!P27	Not an amount - no rounding.
+PILA Pensioners Spec!Q27	N
+PILA Pensioners Spec!R27	Text
+PILA Pensioners Spec!S27	Monthly
+PILA Pensioners Spec!A28	Information operator code
+PILA Pensioners Spec!B28	Código del operador
+PILA Pensioners Spec!C28	File Type 1 - Pension payer
+PILA Pensioners Spec!D28	A1-025
+PILA Pensioners Spec!E28	N
+PILA Pensioners Spec!F28	Y
+PILA Pensioners Spec!G28	Assigned by the information operator's system.
+PILA Pensioners Spec!H28	Pos 472-473
+PILA Pensioners Spec!I28	2
+PILA Pensioners Spec!J28	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K28	00
+PILA Pensioners Spec!L28	System.PILA_Operator_Code
+PILA Pensioners Spec!M28	Assigned by the system of the information operator. Echoed into T2R1-017. Source: AT3 v15 §1.1 campo 25, p. 11; §2.1.1 campo 17, p. 15.
+PILA Pensioners Spec!N28	N
+PILA Pensioners Spec!O28	-
+PILA Pensioners Spec!P28	Not an amount - no rounding.
+PILA Pensioners Spec!Q28	N
+PILA Pensioners Spec!R28	Code
+PILA Pensioners Spec!S28	Monthly
+PILA Pensioners Spec!A29	Payment period
+PILA Pensioners Spec!B29	Período de pago
+PILA Pensioners Spec!C29	File Type 1 - Pension payer
+PILA Pensioners Spec!D29	A1-026
+PILA Pensioners Spec!E29	N
+PILA Pensioners Spec!F29	Y
+PILA Pensioners Spec!G29	Assigned by the information operator's system.
+PILA Pensioners Spec!H29	Pos 474-480
+PILA Pensioners Spec!I29	7
+PILA Pensioners Spec!J29	N(7) - period written as the literal AAAA-MM
+PILA Pensioners Spec!K29	2026-03
+PILA Pensioners Spec!L29	System.PILA_Payment_Period
+PILA Pensioners Spec!M29	Mandatory, assigned by the system, format AAAA-MM. Source: AT3 v15 §1.1 campo 26, p. 11.
+PILA Pensioners Spec!N29	N
+PILA Pensioners Spec!O29	-
+PILA Pensioners Spec!P29	Not an amount - no rounding.
+PILA Pensioners Spec!Q29	N
+PILA Pensioners Spec!R29	Period
+PILA Pensioners Spec!S29	Monthly
+PILA Pensioners Spec!A30	Pension payer type
+PILA Pensioners Spec!B30	Tipo de pagador de pensiones
+PILA Pensioners Spec!C30	File Type 1 - Pension payer
+PILA Pensioners Spec!D30	A1-027
+PILA Pensioners Spec!E30	Y
+PILA Pensioners Spec!F30	Y
+PILA Pensioners Spec!H30	Pos 481-482
+PILA Pensioners Spec!I30	2
+PILA Pensioners Spec!J30	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K30	01
+PILA Pensioners Spec!L30	Payer.Pension_Payer_Type (constant 01 for this report)
+PILA Pensioners Spec!M30	01 Empleador: public or private companies or natural persons that pay the pensions of their workers. This report covers payer type 01 only. With 01, the pensioner type (T2R2-017) may be 5, 6 or 9 (R01) and the pension type (T2R2-009) may be 2, 3, 4, 8, 10, 11, 12, 13, 14, 20 or 21 (R02). Echoed into T2R1-016. Source: AT3 v15 §1.1 campo 27, p. 11; §1.2.4, pp. 12-13; ch. 4 §1 table 3, pp. 100-101; ch. 4 §2 table 5, pp. 102-103.
+PILA Pensioners Spec!N30	Y
+PILA Pensioners Spec!O30	-> Field Options: Pension payer type
+PILA Pensioners Spec!P30	Not an amount - no rounding.
+PILA Pensioners Spec!Q30	N
+PILA Pensioners Spec!R30	Code
+PILA Pensioners Spec!S30	Monthly
+PILA Pensioners Spec!A31	═══ FILE TYPE 2, RECORD TYPE 1 - HEADER (18 campos, 285 posiciones) ═══
+PILA Pensioners Spec!A32	Record type
+PILA Pensioners Spec!B32	Tipo de registro
+PILA Pensioners Spec!C32	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D32	T2R1-001
+PILA Pensioners Spec!E32	N
+PILA Pensioners Spec!F32	Y
+PILA Pensioners Spec!H32	Pos 1-2
+PILA Pensioners Spec!I32	2
+PILA Pensioners Spec!J32	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K32	01
+PILA Pensioners Spec!L32	Constant 01
+PILA Pensioners Spec!M32	Must be 01. Generated by the operator's system when data are keyed on the web; reported by the payer when the data are uploaded as flat files. Only one header per file, and it is the first record. Source: AT3 v15 §2.1, p. 14; §2.1.1 campo 1, p. 14.
+PILA Pensioners Spec!N32	N
+PILA Pensioners Spec!O32	-
+PILA Pensioners Spec!P32	Not an amount - no rounding.
+PILA Pensioners Spec!Q32	N
+PILA Pensioners Spec!R32	Constant
+PILA Pensioners Spec!S32	Monthly
+PILA Pensioners Spec!A33	Sequence
+PILA Pensioners Spec!B33	Secuencia
+PILA Pensioners Spec!C33	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D33	T2R1-002
+PILA Pensioners Spec!E33	N
+PILA Pensioners Spec!F33	Y
+PILA Pensioners Spec!H33	Pos 3-7
+PILA Pensioners Spec!I33	5
+PILA Pensioners Spec!J33	N(5) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K33	00001
+PILA Pensioners Spec!L33	System.PILA_Header_Sequence
+PILA Pensioners Spec!M33	Ascending sequence, starting at 00001 for each pension payer. Reported by the payer when the data are uploaded as flat files. Source: AT3 v15 §2.1.1 campo 2, p. 14.
+PILA Pensioners Spec!N33	N
+PILA Pensioners Spec!O33	-
+PILA Pensioners Spec!P33	Not an amount - no rounding.
+PILA Pensioners Spec!Q33	N
+PILA Pensioners Spec!R33	Counter
+PILA Pensioners Spec!S33	Monthly
+PILA Pensioners Spec!A34	Pension payer name or corporate name
+PILA Pensioners Spec!B34	Nombre o razón social del pagador de pensiones
+PILA Pensioners Spec!C34	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D34	T2R1-003
+PILA Pensioners Spec!E34	Y
+PILA Pensioners Spec!F34	Y
+PILA Pensioners Spec!H34	Pos 8-157
+PILA Pensioners Spec!I34	150
+PILA Pensioners Spec!J34	A(150) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K34	MERCANS COLOMBIA S.A.S.
+PILA Pensioners Spec!L34	Echo of A1-001
+PILA Pensioners Spec!M34	The value of File Type 1 campo 1, byte for byte. Source: AT3 v15 §2.1.1 campo 3, p. 14.
+PILA Pensioners Spec!N34	Y
+PILA Pensioners Spec!O34	-
+PILA Pensioners Spec!P34	Not an amount - no rounding.
+PILA Pensioners Spec!Q34	N
+PILA Pensioners Spec!R34	Text
+PILA Pensioners Spec!S34	Monthly
+PILA Pensioners Spec!A35	Pension payer document type
+PILA Pensioners Spec!B35	Tipo documento del pagador de pensiones
+PILA Pensioners Spec!C35	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D35	T2R1-004
+PILA Pensioners Spec!E35	Y
+PILA Pensioners Spec!F35	Y
+PILA Pensioners Spec!H35	Pos 158-159
+PILA Pensioners Spec!I35	2
+PILA Pensioners Spec!J35	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K35	NI
+PILA Pensioners Spec!L35	Echo of A1-002
+PILA Pensioners Spec!M35	The value of File Type 1 campo 2. Source: AT3 v15 §2.1.1 campo 4, p. 14.
+PILA Pensioners Spec!N35	Y
+PILA Pensioners Spec!O35	-
+PILA Pensioners Spec!P35	Not an amount - no rounding.
+PILA Pensioners Spec!Q35	N
+PILA Pensioners Spec!R35	Code
+PILA Pensioners Spec!S35	Monthly
+PILA Pensioners Spec!A36	Pension payer identification number
+PILA Pensioners Spec!B36	Número de identificación del pagador de pensiones
+PILA Pensioners Spec!C36	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D36	T2R1-005
+PILA Pensioners Spec!E36	Y
+PILA Pensioners Spec!F36	Y
+PILA Pensioners Spec!H36	Pos 160-175
+PILA Pensioners Spec!I36	16
+PILA Pensioners Spec!J36	A(16) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K36	900123456
+PILA Pensioners Spec!L36	Echo of A1-003
+PILA Pensioners Spec!M36	The value of File Type 1 campo 3. Source: AT3 v15 §2.1.1 campo 5, p. 14.
+PILA Pensioners Spec!N36	Y
+PILA Pensioners Spec!O36	-
+PILA Pensioners Spec!P36	Not an amount - no rounding.
+PILA Pensioners Spec!Q36	N
+PILA Pensioners Spec!R36	Identifier
+PILA Pensioners Spec!S36	Monthly
+PILA Pensioners Spec!A37	Verification digit
+PILA Pensioners Spec!B37	Dígito de verificación
+PILA Pensioners Spec!C37	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D37	T2R1-006
+PILA Pensioners Spec!E37	Y
+PILA Pensioners Spec!F37	C
+PILA Pensioners Spec!G37	Follows A1-004: the check digit where A1-009 = J, zero otherwise.
+PILA Pensioners Spec!H37	Pos 176-176
+PILA Pensioners Spec!I37	1
+PILA Pensioners Spec!J37	N(1) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K37	8
+PILA Pensioners Spec!L37	Echo of A1-004
+PILA Pensioners Spec!M37	The value of File Type 1 campo 4. Source: AT3 v15 §2.1.1 campo 6, p. 14.
+PILA Pensioners Spec!N37	Y
+PILA Pensioners Spec!O37	-
+PILA Pensioners Spec!P37	Not an amount - no rounding.
+PILA Pensioners Spec!Q37	N
+PILA Pensioners Spec!R37	Identifier
+PILA Pensioners Spec!S37	Monthly
+PILA Pensioners Spec!A38	Form of presentation
+PILA Pensioners Spec!B38	Forma de presentación
+PILA Pensioners Spec!C38	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D38	T2R1-007
+PILA Pensioners Spec!E38	Y
+PILA Pensioners Spec!F38	Y
+PILA Pensioners Spec!H38	Pos 177-177
+PILA Pensioners Spec!I38	1
+PILA Pensioners Spec!J38	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K38	U
+PILA Pensioners Spec!L38	Echo of A1-010
+PILA Pensioners Spec!M38	The value of File Type 1 campo 10. Source: AT3 v15 §2.1.1 campo 7, p. 14.
+PILA Pensioners Spec!N38	Y
+PILA Pensioners Spec!O38	-
+PILA Pensioners Spec!P38	Not an amount - no rounding.
+PILA Pensioners Spec!Q38	N
+PILA Pensioners Spec!R38	Code
+PILA Pensioners Spec!S38	Monthly
+PILA Pensioners Spec!A39	Branch or dependency code
+PILA Pensioners Spec!B39	Código de la sucursal o de la dependencia
+PILA Pensioners Spec!C39	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D39	T2R1-008
+PILA Pensioners Spec!E39	Y
+PILA Pensioners Spec!F39	C
+PILA Pensioners Spec!G39	Follows A1-005: populated where A1-010 = S.
+PILA Pensioners Spec!H39	Pos 178-187
+PILA Pensioners Spec!I39	10
+PILA Pensioners Spec!J39	A(10) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L39	Echo of A1-005
+PILA Pensioners Spec!M39	The value of File Type 1 campo 5. Source: AT3 v15 §2.1.1 campo 8, p. 14.
+PILA Pensioners Spec!N39	Y
+PILA Pensioners Spec!O39	-
+PILA Pensioners Spec!P39	Not an amount - no rounding.
+PILA Pensioners Spec!Q39	N
+PILA Pensioners Spec!R39	Code
+PILA Pensioners Spec!S39	Monthly
+PILA Pensioners Spec!A40	Branch or dependency name
+PILA Pensioners Spec!B40	Nombre de la sucursal o dependencia
+PILA Pensioners Spec!C40	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D40	T2R1-009
+PILA Pensioners Spec!E40	Y
+PILA Pensioners Spec!F40	C
+PILA Pensioners Spec!G40	Follows A1-006: populated where A1-010 = S.
+PILA Pensioners Spec!H40	Pos 188-227
+PILA Pensioners Spec!I40	40
+PILA Pensioners Spec!J40	A(40) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L40	Echo of A1-006
+PILA Pensioners Spec!M40	The value of File Type 1 campo 6. Source: AT3 v15 §2.1.1 campo 9, p. 15.
+PILA Pensioners Spec!N40	Y
+PILA Pensioners Spec!O40	-
+PILA Pensioners Spec!P40	Not an amount - no rounding.
+PILA Pensioners Spec!Q40	N
+PILA Pensioners Spec!R40	Text
+PILA Pensioners Spec!S40	Monthly
+PILA Pensioners Spec!A41	Payment period for subsystems other than health
+PILA Pensioners Spec!B41	Período de pago para los sistemas diferentes al de salud
+PILA Pensioners Spec!C41	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D41	T2R1-010
+PILA Pensioners Spec!E41	Y
+PILA Pensioners Spec!F41	Y
+PILA Pensioners Spec!H41	Pos 228-234
+PILA Pensioners Spec!I41	7
+PILA Pensioners Spec!J41	A(7) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K41	2026-03
+PILA Pensioners Spec!L41	PayPeriod.Period_Code
+PILA Pensioners Spec!M41	Mandatory, format aaaa-mm, supplied by the pension payer. It is the period to which the pension and family compensation fund contributions relate, according to the obligation to contribute. Source: AT3 v15 §2.1.1 campo 10, p. 15; §2.1.2.1, p. 16.
+PILA Pensioners Spec!N41	Y
+PILA Pensioners Spec!O41	-
+PILA Pensioners Spec!P41	Not an amount - no rounding.
+PILA Pensioners Spec!Q41	N
+PILA Pensioners Spec!R41	Period
+PILA Pensioners Spec!S41	Monthly
+PILA Pensioners Spec!A42	Payment period for the health subsystem
+PILA Pensioners Spec!B42	Período de pago para el sistema de salud
+PILA Pensioners Spec!C42	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D42	T2R1-011
+PILA Pensioners Spec!E42	Y
+PILA Pensioners Spec!F42	Y
+PILA Pensioners Spec!H42	Pos 235-241
+PILA Pensioners Spec!I42	7
+PILA Pensioners Spec!J42	A(7) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K42	2026-03
+PILA Pensioners Spec!L42	PayPeriod.Health_Period_Code
+PILA Pensioners Spec!M42	Mandatory, format aaaa-mm, supplied by the pension payer. Source: AT3 v15 §2.1.1 campo 11, p. 15.
+PILA Pensioners Spec!N42	Y
+PILA Pensioners Spec!O42	-
+PILA Pensioners Spec!P42	Not an amount - no rounding.
+PILA Pensioners Spec!Q42	N
+PILA Pensioners Spec!R42	Period
+PILA Pensioners Spec!S42	Monthly
+PILA Pensioners Spec!A43	Filing number of the integrated settlement form
+PILA Pensioners Spec!B43	Número de radicación o de la planilla integrada de liquidación de aportes
+PILA Pensioners Spec!C43	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D43	T2R1-012
+PILA Pensioners Spec!E43	N
+PILA Pensioners Spec!F43	Y
+PILA Pensioners Spec!G43	Assigned by the information operator's system.
+PILA Pensioners Spec!H43	Pos 242-251
+PILA Pensioners Spec!I43	10
+PILA Pensioners Spec!J43	N(10) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K43	0000000000
+PILA Pensioners Spec!L43	System.PILA_Planilla_Number
+PILA Pensioners Spec!M43	Assigned by the system; unique per information operator. Source: AT3 v15 §2.1.1 campo 12, p. 15.
+PILA Pensioners Spec!N43	N
+PILA Pensioners Spec!O43	-
+PILA Pensioners Spec!P43	Not an amount - no rounding.
+PILA Pensioners Spec!Q43	N
+PILA Pensioners Spec!R43	Identifier
+PILA Pensioners Spec!S43	Monthly
+PILA Pensioners Spec!A44	Payment date
+PILA Pensioners Spec!B44	Fecha de pago (aaaa-mm-dd)
+PILA Pensioners Spec!C44	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D44	T2R1-013
+PILA Pensioners Spec!E44	N
+PILA Pensioners Spec!F44	Y
+PILA Pensioners Spec!G44	Assigned by the information operator's system.
+PILA Pensioners Spec!H44	Pos 252-261
+PILA Pensioners Spec!I44	10
+PILA Pensioners Spec!J44	A(10) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L44	System.PILA_Payment_Date
+PILA Pensioners Spec!M44	Assigned by the system from the date of effective payment, format aaaa-mm-dd. Source: AT3 v15 §2.1.1 campo 13, p. 15.
+PILA Pensioners Spec!N44	N
+PILA Pensioners Spec!O44	-
+PILA Pensioners Spec!P44	Not an amount - no rounding.
+PILA Pensioners Spec!Q44	N
+PILA Pensioners Spec!R44	Date
+PILA Pensioners Spec!S44	Monthly
+PILA Pensioners Spec!A45	Total number of pensioners
+PILA Pensioners Spec!B45	Número total de pensionados
+PILA Pensioners Spec!C45	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D45	T2R1-014
+PILA Pensioners Spec!E45	Y
+PILA Pensioners Spec!F45	Y
+PILA Pensioners Spec!H45	Pos 262-268
+PILA Pensioners Spec!I45	7
+PILA Pensioners Spec!J45	N(7) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K45	0000002
+PILA Pensioners Spec!L45	COUNT(Record Type 2 where T2R2-017 <> 9)
+PILA Pensioners Spec!M45	Mandatory. Must equal the number of pensioners in the Record Type 2 detail, EXCLUDING the records with 9 (additional UPC beneficiary) in campo 17. Source: AT3 v15 §2.1.1 campo 14, p. 15.
+PILA Pensioners Spec!N45	Y
+PILA Pensioners Spec!O45	-
+PILA Pensioners Spec!P45	Not an amount - no rounding.
+PILA Pensioners Spec!Q45	N
+PILA Pensioners Spec!R45	Counter
+PILA Pensioners Spec!S45	Monthly
+PILA Pensioners Spec!A46	Total payroll value
+PILA Pensioners Spec!B46	Valor total de la nómina
+PILA Pensioners Spec!C46	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D46	T2R1-015
+PILA Pensioners Spec!E46	Y
+PILA Pensioners Spec!F46	Y
+PILA Pensioners Spec!H46	Pos 269-280
+PILA Pensioners Spec!I46	12
+PILA Pensioners Spec!J46	N(12) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K46	000025500000
+PILA Pensioners Spec!L46	SUM(T2R2-058 where T2R2-017 <> 9); T2R2-058 is fed by WT 62154 'Monthly Retired Pension-6798'
+PILA Pensioners Spec!M46	Mandatory, supplied by the pension payer: the sum of campo 58 'Valor de mesada pensional' of Record Type 2, EXCLUDING the records with 9 in campo 17. Source: AT3 v15 §2.1.1 campo 15, p. 15.
+PILA Pensioners Spec!N46	Y
+PILA Pensioners Spec!O46	-
+PILA Pensioners Spec!P46	Sum of whole-peso mesadas - no further rounding.
+PILA Pensioners Spec!Q46	N
+PILA Pensioners Spec!R46	Amount
+PILA Pensioners Spec!S46	Monthly
+PILA Pensioners Spec!A47	Pension payer type
+PILA Pensioners Spec!B47	Tipo de pagador de pensiones
+PILA Pensioners Spec!C47	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D47	T2R1-016
+PILA Pensioners Spec!E47	Y
+PILA Pensioners Spec!F47	Y
+PILA Pensioners Spec!H47	Pos 281-282
+PILA Pensioners Spec!I47	2
+PILA Pensioners Spec!J47	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K47	01
+PILA Pensioners Spec!L47	Echo of A1-027
+PILA Pensioners Spec!M47	The value of File Type 1 campo 27 (01 Empleador for this report). Source: AT3 v15 §2.1.1 campo 16, p. 15.
+PILA Pensioners Spec!N47	Y
+PILA Pensioners Spec!O47	-
+PILA Pensioners Spec!P47	Not an amount - no rounding.
+PILA Pensioners Spec!Q47	N
+PILA Pensioners Spec!R47	Code
+PILA Pensioners Spec!S47	Monthly
+PILA Pensioners Spec!A48	Information operator code
+PILA Pensioners Spec!B48	Código del operador de información
+PILA Pensioners Spec!C48	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D48	T2R1-017
+PILA Pensioners Spec!E48	N
+PILA Pensioners Spec!F48	Y
+PILA Pensioners Spec!G48	Assigned by the information operator's system.
+PILA Pensioners Spec!H48	Pos 283-284
+PILA Pensioners Spec!I48	2
+PILA Pensioners Spec!J48	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K48	00
+PILA Pensioners Spec!L48	Echo of A1-025
+PILA Pensioners Spec!M48	The value of File Type 1 campo 25. Source: AT3 v15 §2.1.1 campo 17, p. 15.
+PILA Pensioners Spec!N48	N
+PILA Pensioners Spec!O48	-
+PILA Pensioners Spec!P48	Not an amount - no rounding.
+PILA Pensioners Spec!Q48	N
+PILA Pensioners Spec!R48	Code
+PILA Pensioners Spec!S48	Monthly
+PILA Pensioners Spec!A49	Pensioner planilla type
+PILA Pensioners Spec!B49	Tipo de planilla pensionado
+PILA Pensioners Spec!C49	File Type 2 - Record 1 Header
+PILA Pensioners Spec!D49	T2R1-018
+PILA Pensioners Spec!E49	Y
+PILA Pensioners Spec!F49	Y
+PILA Pensioners Spec!H49	Pos 285-285
+PILA Pensioners Spec!I49	1
+PILA Pensioners Spec!J49	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K49	P
+PILA Pensioners Spec!L49	Mercans.PILA_Pensioner_Planilla_Type
+PILA Pensioners Spec!M49	P Planilla pago normal pagadores de pensiones: the main planilla, used by every type of pension payer for the monthly contributions of the pensioners; periods paid late carry interest on arrears. R Planilla pago retroactivo: contributions not paid while the recognition of a pension was outstanding; where the retroactive pension is recognised for the first time, the health contribution goes to ADRES under code MIN001 (except pensioners of the special health regime). L Planilla pago reliquidación: higher contributions from the reliquidation of the mesada for periods before January 2020; only the adjustment is reported. V Planilla pago reliquidación enero de 2020 en adelante: reliquidation from January 2020, one planilla per reliquidated period, each pensioner reported first in A records (as initially reported) and then in C records (final values), health to MIN001. C: reserved for the entity authorised by the National Government for pensioners of territorial entities; an employer payer does not use it. To use P, R, L or V the payer must appear in the file 'INFORMACIÓN PAGADORES DE PENSIONES' that the Ministry of Health places monthly on the secure FTP of each information operator; a payer that does not appear requests inclusion from the Ministry's Subdirección de Pensiones y Otras Prestaciones. More than one planilla per period is allowed, with interest on arrears where due (Decreto 780 de 2016 arts. 3.2.2.1 to 3.2.2.3). Source: AT3 v15 §2.1.1 campo 18, pp. 15-16; §2.1.2.2, pp. 16-20; ch. 4 §4 table 7, pp. 104-105.
+PILA Pensioners Spec!N49	Y
+PILA Pensioners Spec!O49	-> Field Options: Pensioner planilla type
+PILA Pensioners Spec!P49	Not an amount - no rounding.
+PILA Pensioners Spec!Q49	N
+PILA Pensioners Spec!R49	Code
+PILA Pensioners Spec!S49	Monthly
+PILA Pensioners Spec!A50	═══ FILE TYPE 2, RECORD TYPE 2 - DETAILED SETTLEMENT PER PENSIONER (63 campos, 519 posiciones) ═══
+PILA Pensioners Spec!A51	═══ -- record identity and pensioner identification (campos 1 to 8) -- ═══
+PILA Pensioners Spec!A52	Record type
+PILA Pensioners Spec!B52	Tipo de registro
+PILA Pensioners Spec!C52	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D52	T2R2-001
+PILA Pensioners Spec!E52	N
+PILA Pensioners Spec!F52	Y
+PILA Pensioners Spec!H52	Pos 1-2
+PILA Pensioners Spec!I52	2
+PILA Pensioners Spec!J52	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K52	02
+PILA Pensioners Spec!L52	Constant 02
+PILA Pensioners Spec!M52	Must be 02. At least one record per pensioner, and one record per pension type where a beneficiary holds two types of pension. Source: AT3 v15 §2.2, p. 21; §2.2.1 campo 1, p. 21.
+PILA Pensioners Spec!N52	N
+PILA Pensioners Spec!O52	-
+PILA Pensioners Spec!P52	Not an amount - no rounding.
+PILA Pensioners Spec!Q52	N
+PILA Pensioners Spec!R52	Constant
+PILA Pensioners Spec!S52	Monthly
+PILA Pensioners Spec!A53	Sequence
+PILA Pensioners Spec!B53	Secuencia
+PILA Pensioners Spec!C53	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D53	T2R2-002
+PILA Pensioners Spec!E53	N
+PILA Pensioners Spec!F53	Y
+PILA Pensioners Spec!H53	Pos 3-9
+PILA Pensioners Spec!I53	7
+PILA Pensioners Spec!J53	N(7) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K53	0000001
+PILA Pensioners Spec!L53	System.PILA_Detail_Sequence
+PILA Pensioners Spec!M53	Starts at 0000001 and runs sequentially through the remaining detail records. Reported by the payer when the data are uploaded as flat files. Source: AT3 v15 §2.2.1 campo 2, pp. 21-22.
+PILA Pensioners Spec!N53	N
+PILA Pensioners Spec!O53	-
+PILA Pensioners Spec!P53	Not an amount - no rounding.
+PILA Pensioners Spec!Q53	N
+PILA Pensioners Spec!R53	Counter
+PILA Pensioners Spec!S53	Monthly
+PILA Pensioners Spec!A54	Pensioner first surname
+PILA Pensioners Spec!B54	Primer apellido del pensionado
+PILA Pensioners Spec!C54	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D54	T2R2-003
+PILA Pensioners Spec!E54	Y
+PILA Pensioners Spec!F54	Y
+PILA Pensioners Spec!H54	Pos 10-29
+PILA Pensioners Spec!I54	20
+PILA Pensioners Spec!J54	A(20) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K54	PRUEBA
+PILA Pensioners Spec!L54	Pensioner.First_Surname
+PILA Pensioners Spec!M54	Mandatory. Where the document type and number match the Base de Datos Única de Afiliados (BDUA), the information operator replaces campos 3 to 6 with the BDUA values; where they do not match, the payer's values stand. In a pensioner type 9 record: the surname of the additional UPC beneficiary. Source: AT3 v15 §2.2.1 campo 3, p. 22; §2.2.2.1, pp. 39-40; §2.2.2.4, p. 49.
+PILA Pensioners Spec!N54	Y
+PILA Pensioners Spec!O54	-
+PILA Pensioners Spec!P54	Not an amount - no rounding.
+PILA Pensioners Spec!Q54	N
+PILA Pensioners Spec!R54	Text
+PILA Pensioners Spec!S54	Monthly
+PILA Pensioners Spec!A55	Pensioner second surname
+PILA Pensioners Spec!B55	Segundo apellido del pensionado
+PILA Pensioners Spec!C55	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D55	T2R2-004
+PILA Pensioners Spec!E55	Y
+PILA Pensioners Spec!F55	N
+PILA Pensioners Spec!H55	Pos 30-59
+PILA Pensioners Spec!I55	30
+PILA Pensioners Spec!J55	A(30) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K55	EJEMPLO
+PILA Pensioners Spec!L55	Pensioner.Second_Surname
+PILA Pensioners Spec!M55	Supplied by the payer where it exists; BDUA replacement as for campo 3. Source: AT3 v15 §2.2.1 campo 4, p. 22; §2.2.2.1, pp. 39-40.
+PILA Pensioners Spec!N55	Y
+PILA Pensioners Spec!O55	-
+PILA Pensioners Spec!P55	Not an amount - no rounding.
+PILA Pensioners Spec!Q55	N
+PILA Pensioners Spec!R55	Text
+PILA Pensioners Spec!S55	Monthly
+PILA Pensioners Spec!A56	Pensioner first name
+PILA Pensioners Spec!B56	Primer nombre del pensionado
+PILA Pensioners Spec!C56	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D56	T2R2-005
+PILA Pensioners Spec!E56	Y
+PILA Pensioners Spec!F56	Y
+PILA Pensioners Spec!H56	Pos 60-79
+PILA Pensioners Spec!I56	20
+PILA Pensioners Spec!J56	A(20) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K56	PEDRO
+PILA Pensioners Spec!L56	Pensioner.First_Name
+PILA Pensioners Spec!M56	Mandatory; BDUA replacement as for campo 3. Source: AT3 v15 §2.2.1 campo 5, p. 22; §2.2.2.1, pp. 39-40.
+PILA Pensioners Spec!N56	Y
+PILA Pensioners Spec!O56	-
+PILA Pensioners Spec!P56	Not an amount - no rounding.
+PILA Pensioners Spec!Q56	N
+PILA Pensioners Spec!R56	Text
+PILA Pensioners Spec!S56	Monthly
+PILA Pensioners Spec!A57	Pensioner second name
+PILA Pensioners Spec!B57	Segundo nombre del pensionado
+PILA Pensioners Spec!C57	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D57	T2R2-006
+PILA Pensioners Spec!E57	Y
+PILA Pensioners Spec!F57	N
+PILA Pensioners Spec!H57	Pos 80-109
+PILA Pensioners Spec!I57	30
+PILA Pensioners Spec!J57	A(30) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L57	Pensioner.Second_Name
+PILA Pensioners Spec!M57	Supplied by the payer where it exists; BDUA replacement as for campo 3. Source: AT3 v15 §2.2.1 campo 6, p. 22; §2.2.2.1, pp. 39-40.
+PILA Pensioners Spec!N57	Y
+PILA Pensioners Spec!O57	-
+PILA Pensioners Spec!P57	Not an amount - no rounding.
+PILA Pensioners Spec!Q57	N
+PILA Pensioners Spec!R57	Text
+PILA Pensioners Spec!S57	Monthly
+PILA Pensioners Spec!A58	Pensioner document type
+PILA Pensioners Spec!B58	Tipo documento del pensionado
+PILA Pensioners Spec!C58	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D58	T2R2-007
+PILA Pensioners Spec!E58	Y
+PILA Pensioners Spec!F58	Y
+PILA Pensioners Spec!H58	Pos 110-111
+PILA Pensioners Spec!I58	2
+PILA Pensioners Spec!J58	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K58	CC
+PILA Pensioners Spec!L58	Pensioner.Document_Type
+PILA Pensioners Spec!M58	Valid values CC, CE, TI, RC, PA, CD, PE, PT. PE (Permiso Especial de Permanencia) may not be used for health contribution periods from September 2023 onwards. Source: AT3 v15 §2.2.1 campo 7, p. 22; ch. 5 §5.24, p. 130.
+PILA Pensioners Spec!N58	Y
+PILA Pensioners Spec!O58	-> Field Options: Document type of the pensioner
+PILA Pensioners Spec!P58	Not an amount - no rounding.
+PILA Pensioners Spec!Q58	N
+PILA Pensioners Spec!R58	Code
+PILA Pensioners Spec!S58	Monthly
+PILA Pensioners Spec!A59	Pensioner identification number
+PILA Pensioners Spec!B59	Número de identificación del pensionado
+PILA Pensioners Spec!C59	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D59	T2R2-008
+PILA Pensioners Spec!E59	Y
+PILA Pensioners Spec!F59	Y
+PILA Pensioners Spec!H59	Pos 112-127
+PILA Pensioners Spec!I59	16
+PILA Pensioners Spec!J59	A(16) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K59	1000000001
+PILA Pensioners Spec!L59	Pensioner.Document_Number
+PILA Pensioners Spec!M59	Mandatory. Only letters A-Z and digits 0-9. Alphanumeric only for PA (up to 16) and CD (up to 11); digits only for TI (up to 11), CC (up to 10), RC (up to 11), CE (up to 7), PE (15), PT (up to 8) and PC (PEP-TUTOR, up to 16). The operator validates that the payer's document type and number differ from the pensioner's (pension type 16 foreign pensioners excepted). This validation applies to payments made from 1 October 2026. Source: AT3 v15 §2.2.1 campo 8, pp. 22-23; p. 39; §2.2.2.2 type 16, p. 46; ch. 5 §5.32, pp. 132-133.
+PILA Pensioners Spec!N59	Y
+PILA Pensioners Spec!O59	-
+PILA Pensioners Spec!P59	Not an amount - no rounding.
+PILA Pensioners Spec!Q59	N
+PILA Pensioners Spec!R59	Identifier
+PILA Pensioners Spec!S59	Monthly
+PILA Pensioners Spec!A60	═══ -- pension, pensioner type, causante and residence (campos 9 to 21) -- ═══
+PILA Pensioners Spec!A61	Pension type
+PILA Pensioners Spec!B61	Tipo de pensión
+PILA Pensioners Spec!C61	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D61	T2R2-009
+PILA Pensioners Spec!E61	Y
+PILA Pensioners Spec!F61	Y
+PILA Pensioners Spec!H61	Pos 128-129
+PILA Pensioners Spec!I61	2
+PILA Pensioners Spec!J61	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K61	10
+PILA Pensioners Spec!L61	Pension.Type
+PILA Pensioners Spec!M61	Mandatory. For pension payer type 01 the valid pension types are 2, 3, 4, 8, 10, 11, 12, 13, 14, 20 and 21 (R02). 10 Jubilación: recognised by the employer when the holder reaches the age and the minimum time required. 11 Jubilación para compartir and 14 Convencional para compartir: the employer pays the pension and contributes to the Régimen de Prima Media until the administradora takes over the old-age pension. 13 Convencional: granted by collective agreement, for pensions recognised up to 31 July 2010 (Acto Legislativo 01 de 2005 par. trans. 3). Pension types 20 and 21 carry no maximum or minimum pension validations. For a pensioner type 9 record (additional UPC beneficiary) this field is zero. Valid combinations with the pensioner type are in R03 (10 with 5, 6, 7, 8; 13 with 5, 6). Source: AT3 v15 §2.2.1 campo 9, pp. 23-24; §2.2.2.2, pp. 40-47; ch. 4 §2 table 5, pp. 102-103; ch. 4 §3 table 6, p. 104.
+PILA Pensioners Spec!N61	Y
+PILA Pensioners Spec!O61	-> Field Options: Pension type
+PILA Pensioners Spec!P61	Not an amount - no rounding.
+PILA Pensioners Spec!Q61	N
+PILA Pensioners Spec!R61	Code
+PILA Pensioners Spec!S61	Monthly
+PILA Pensioners Spec!A62	Shared pension
+PILA Pensioners Spec!B62	Pensión compartida
+PILA Pensioners Spec!C62	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D62	T2R2-010
+PILA Pensioners Spec!E62	Y
+PILA Pensioners Spec!F62	Y
+PILA Pensioners Spec!H62	Pos 130-130
+PILA Pensioners Spec!I62	1
+PILA Pensioners Spec!J62	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K62	N
+PILA Pensioners Spec!L62	Pension.Shared_Flag
+PILA Pensioners Spec!M62	S where the pensioner paid by the employer has already obtained recognition of the shared pension from the corresponding administradora or pension payer; N in every other case. Where S and campo 63 exceeds 10 SMLMV, the information operator multiplies campo 58 by the factor for the total mesada and settles the Fondo de Solidaridad Pensional subsistence contribution. Source: AT3 v15 §2.2.1 campo 10, pp. 24-25; §2.2.2.21, p. 62.
+PILA Pensioners Spec!N62	Y
+PILA Pensioners Spec!O62	S / N
+PILA Pensioners Spec!P62	Not an amount - no rounding.
+PILA Pensioners Spec!Q62	N
+PILA Pensioners Spec!R62	Flag
+PILA Pensioners Spec!S62	Monthly
+PILA Pensioners Spec!A63	Causante first surname
+PILA Pensioners Spec!B63	Primer apellido del causante
+PILA Pensioners Spec!C63	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D63	T2R2-011
+PILA Pensioners Spec!E63	Y
+PILA Pensioners Spec!F63	C
+PILA Pensioners Spec!G63	MANDATORY for pension types 2, 3, 4, 5, 6 and 7.
+PILA Pensioners Spec!H63	Pos 131-150
+PILA Pensioners Spec!I63	20
+PILA Pensioners Spec!J63	A(20) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L63	Pension.Causante_First_Surname
+PILA Pensioners Spec!M63	Surname of the person from whom the survivor pension derives. BDUA replacement applies to campos 11 to 14 as for the pensioner's names. Source: AT3 v15 §2.2.1 campo 11, p. 25; §2.2.2.3, p. 47.
+PILA Pensioners Spec!N63	Y
+PILA Pensioners Spec!O63	-
+PILA Pensioners Spec!P63	Not an amount - no rounding.
+PILA Pensioners Spec!Q63	N
+PILA Pensioners Spec!R63	Text
+PILA Pensioners Spec!S63	Monthly
+PILA Pensioners Spec!A64	Causante second surname
+PILA Pensioners Spec!B64	Segundo apellido del causante
+PILA Pensioners Spec!C64	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D64	T2R2-012
+PILA Pensioners Spec!E64	Y
+PILA Pensioners Spec!F64	N
+PILA Pensioners Spec!H64	Pos 151-180
+PILA Pensioners Spec!I64	30
+PILA Pensioners Spec!J64	A(30) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L64	Pension.Causante_Second_Surname
+PILA Pensioners Spec!M64	Supplied by the payer where it exists. Source: AT3 v15 §2.2.1 campo 12, p. 25; §2.2.2.3, p. 47.
+PILA Pensioners Spec!N64	Y
+PILA Pensioners Spec!O64	-
+PILA Pensioners Spec!P64	Not an amount - no rounding.
+PILA Pensioners Spec!Q64	N
+PILA Pensioners Spec!R64	Text
+PILA Pensioners Spec!S64	Monthly
+PILA Pensioners Spec!A65	Causante first name
+PILA Pensioners Spec!B65	Primer nombre del causante
+PILA Pensioners Spec!C65	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D65	T2R2-013
+PILA Pensioners Spec!E65	Y
+PILA Pensioners Spec!F65	C
+PILA Pensioners Spec!G65	MANDATORY for pension types 2, 3, 4, 5, 6 and 7.
+PILA Pensioners Spec!H65	Pos 181-200
+PILA Pensioners Spec!I65	20
+PILA Pensioners Spec!J65	A(20) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L65	Pension.Causante_First_Name
+PILA Pensioners Spec!M65	First name of the causante. Source: AT3 v15 §2.2.1 campo 13, p. 25; §2.2.2.3, p. 47.
+PILA Pensioners Spec!N65	Y
+PILA Pensioners Spec!O65	-
+PILA Pensioners Spec!P65	Not an amount - no rounding.
+PILA Pensioners Spec!Q65	N
+PILA Pensioners Spec!R65	Text
+PILA Pensioners Spec!S65	Monthly
+PILA Pensioners Spec!A66	Causante second name
+PILA Pensioners Spec!B66	Segundo nombre del causante
+PILA Pensioners Spec!C66	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D66	T2R2-014
+PILA Pensioners Spec!E66	Y
+PILA Pensioners Spec!F66	N
+PILA Pensioners Spec!H66	Pos 201-230
+PILA Pensioners Spec!I66	30
+PILA Pensioners Spec!J66	A(30) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L66	Pension.Causante_Second_Name
+PILA Pensioners Spec!M66	Supplied by the payer where it exists. Source: AT3 v15 §2.2.1 campo 14, p. 25; §2.2.2.3, p. 47.
+PILA Pensioners Spec!N66	Y
+PILA Pensioners Spec!O66	-
+PILA Pensioners Spec!P66	Not an amount - no rounding.
+PILA Pensioners Spec!Q66	N
+PILA Pensioners Spec!R66	Text
+PILA Pensioners Spec!S66	Monthly
+PILA Pensioners Spec!A67	Causante document type
+PILA Pensioners Spec!B67	Tipo de identificación del causante de la pensión
+PILA Pensioners Spec!C67	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D67	T2R2-015
+PILA Pensioners Spec!E67	Y
+PILA Pensioners Spec!F67	C
+PILA Pensioners Spec!G67	Populated where there is a causante (pension types 2 to 7, §2.2.2.3); AT3 marks the field 'Obligatorio'.
+PILA Pensioners Spec!H67	Pos 231-232
+PILA Pensioners Spec!I67	2
+PILA Pensioners Spec!J67	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L67	Pension.Causante_Document_Type
+PILA Pensioners Spec!M67	Valid values CC, CE, TI, RC, PA, CD, PE, PT. Source: AT3 v15 §2.2.1 campo 15, p. 25; §2.2.2.3, p. 47; ch. 5 §5.26, p. 130.
+PILA Pensioners Spec!N67	Y
+PILA Pensioners Spec!O67	-> Field Options: Document type of the pensioner
+PILA Pensioners Spec!P67	Not an amount - no rounding.
+PILA Pensioners Spec!Q67	N
+PILA Pensioners Spec!R67	Code
+PILA Pensioners Spec!S67	Monthly
+PILA Pensioners Spec!A68	Causante identification number
+PILA Pensioners Spec!B68	Número de identificación del causante
+PILA Pensioners Spec!C68	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D68	T2R2-016
+PILA Pensioners Spec!E68	Y
+PILA Pensioners Spec!F68	C
+PILA Pensioners Spec!G68	MANDATORY where there is a causante, for pension types 2, 3, 4, 5, 6 and 7.
+PILA Pensioners Spec!H68	Pos 233-248
+PILA Pensioners Spec!I68	16
+PILA Pensioners Spec!J68	A(16) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L68	Pension.Causante_Document_Number
+PILA Pensioners Spec!M68	Same character and length rules as campo 8 (PA up to 16, CD up to 11, TI up to 11, CC up to 10, RC up to 11, CE up to 7, PE up to 15, PT up to 8, PC up to 16). This validation applies to payments made from 1 October 2026. Source: AT3 v15 §2.2.1 campo 16, pp. 26-27; ch. 5 §5.32, pp. 132-133.
+PILA Pensioners Spec!N68	Y
+PILA Pensioners Spec!O68	-
+PILA Pensioners Spec!P68	Not an amount - no rounding.
+PILA Pensioners Spec!Q68	N
+PILA Pensioners Spec!R68	Identifier
+PILA Pensioners Spec!S68	Monthly
+PILA Pensioners Spec!A69	Pensioner type
+PILA Pensioners Spec!B69	Tipo de pensionado
+PILA Pensioners Spec!C69	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D69	T2R2-017
+PILA Pensioners Spec!E69	Y
+PILA Pensioners Spec!F69	Y
+PILA Pensioners Spec!H69	Pos 249-249
+PILA Pensioners Spec!I69	1
+PILA Pensioners Spec!J69	N(1) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K69	5
+PILA Pensioners Spec!L69	Pensioner.Pensioner_Type
+PILA Pensioners Spec!M69	For pension payer type 01 the valid values are 5, 6 and 9 (R01). 5 Pensionado por el empleador con tope de pensión máxima de 25 SMMLV: the mesada is capped at 25 SMMLV. 6 Pensionado por el empleador sin tope de pensión máxima de 25 SMMLV: the mesada may exceed 25 SMMLV, but the health contribution is made on at most 25 SMLMV. 9 Beneficiario UPC adicional: one additional Record Type 2 per additional UPC beneficiary of a pensioner, carrying campos 3 to 9, 17, 32, 37, 50, 53 and 54 only (campo 9 = 0, campo 37 = 30), every other field blank or zero. For all pensioners the health and pension contribution may never exceed 25 SMMLV. Source: AT3 v15 §2.2.1 campo 17, p. 27; §2.2.2.4, pp. 48-49; ch. 4 §1 table 3, pp. 100-101.
+PILA Pensioners Spec!N69	Y
+PILA Pensioners Spec!O69	-> Field Options: Pensioner type
+PILA Pensioners Spec!P69	Not an amount - no rounding.
+PILA Pensioners Spec!Q69	N
+PILA Pensioners Spec!R69	Code
+PILA Pensioners Spec!S69	Monthly
+PILA Pensioners Spec!A70	Pensioner resident abroad
+PILA Pensioners Spec!B70	Pensionado en el exterior
+PILA Pensioners Spec!C70	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D70	T2R2-018
+PILA Pensioners Spec!E70	Y
+PILA Pensioners Spec!F70	C
+PILA Pensioners Spec!G70	X only where the pensioner resides abroad; blank otherwise. Usable with document types CC, TI, RC, CE and PA.
+PILA Pensioners Spec!H70	Pos 250-250
+PILA Pensioners Spec!I70	1
+PILA Pensioners Spec!J70	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L70	Pensioner.Resident_Abroad_Flag
+PILA Pensioners Spec!M70	Blank or X. With X the pensioner resides abroad and the health contribution is zero for periods after December 2015 (Decreto 780 de 2016 art. 2.1.3.17); the health rate (campo 48) is then 0%, the EPS code (campo 32) may be blank, the health days (campo 37) may be zero and the date of filing abroad (campo 59) is mandatory. A pensioner with a family group in Colombia does not use X and pays the full health percentage. Source: AT3 v15 §2.2.1 campo 18, pp. 27-28; §2.2.2.2, pp. 40-46; §2.2.2.5, p. 49; ch. 4 §9, p. 113.
+PILA Pensioners Spec!N70	Y
+PILA Pensioners Spec!O70	X / blank
+PILA Pensioners Spec!P70	Not an amount - no rounding.
+PILA Pensioners Spec!Q70	N
+PILA Pensioners Spec!R70	Flag
+PILA Pensioners Spec!S70	Monthly
+PILA Pensioners Spec!A71	Department of residence code
+PILA Pensioners Spec!B71	Código del departamento de residencia
+PILA Pensioners Spec!C71	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D71	T2R2-019
+PILA Pensioners Spec!E71	Y
+PILA Pensioners Spec!F71	C
+PILA Pensioners Spec!G71	MANDATORY; blank where campo 18 = X. A pensioner abroad who contributes voluntarily to a CCF carries the department of the CCF coverage.
+PILA Pensioners Spec!H71	Pos 251-252
+PILA Pensioners Spec!I71	2
+PILA Pensioners Spec!J71	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K71	11
+PILA Pensioners Spec!L71	Pensioner.Residence_Department_Code
+PILA Pensioners Spec!M71	DIVIPOLA (DANE) department code, validated by the information operator. Source: AT3 v15 §2.2.1 campo 19, p. 28.
+PILA Pensioners Spec!N71	Y
+PILA Pensioners Spec!O71	-
+PILA Pensioners Spec!P71	Not an amount - no rounding.
+PILA Pensioners Spec!Q71	N
+PILA Pensioners Spec!R71	Code
+PILA Pensioners Spec!S71	Monthly
+PILA Pensioners Spec!A72	Municipality of residence code
+PILA Pensioners Spec!B72	Código del municipio de residencia
+PILA Pensioners Spec!C72	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D72	T2R2-020
+PILA Pensioners Spec!E72	Y
+PILA Pensioners Spec!F72	C
+PILA Pensioners Spec!G72	MANDATORY; blank where campo 18 = X. A pensioner abroad who contributes voluntarily to a CCF carries the municipality of the CCF coverage.
+PILA Pensioners Spec!H72	Pos 253-255
+PILA Pensioners Spec!I72	3
+PILA Pensioners Spec!J72	A(3) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K72	001
+PILA Pensioners Spec!L72	Pensioner.Residence_Municipality_Code
+PILA Pensioners Spec!M72	DIVIPOLA (DANE) municipality code, validated by the information operator. Source: AT3 v15 §2.2.1 campo 20, pp. 28-29.
+PILA Pensioners Spec!N72	Y
+PILA Pensioners Spec!O72	-
+PILA Pensioners Spec!P72	Not an amount - no rounding.
+PILA Pensioners Spec!Q72	N
+PILA Pensioners Spec!R72	Code
+PILA Pensioners Spec!S72	Monthly
+PILA Pensioners Spec!A73	Pension paid abroad
+PILA Pensioners Spec!B73	Pensionado cuyo pago se sitúa en el exterior
+PILA Pensioners Spec!C73	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D73	T2R2-021
+PILA Pensioners Spec!E73	Y
+PILA Pensioners Spec!F73	Y
+PILA Pensioners Spec!H73	Pos 256-256
+PILA Pensioners Spec!I73	1
+PILA Pensioners Spec!J73	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K73	N
+PILA Pensioners Spec!L73	Pensioner.Payment_Abroad_Flag
+PILA Pensioners Spec!M73	S where the payment of the pension is made abroad; N where it is not. Source: AT3 v15 §2.2.1 campo 21, p. 29.
+PILA Pensioners Spec!N73	Y
+PILA Pensioners Spec!O73	S / N
+PILA Pensioners Spec!P73	Not an amount - no rounding.
+PILA Pensioners Spec!Q73	N
+PILA Pensioners Spec!R73	Flag
+PILA Pensioners Spec!S73	Monthly
+PILA Pensioners Spec!A74	═══ -- change events (campos 22 to 29) -- ═══
+PILA Pensioners Spec!A75	ING: entry
+PILA Pensioners Spec!B75	ING: Ingreso
+PILA Pensioners Spec!C75	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D75	T2R2-022
+PILA Pensioners Spec!E75	Y
+PILA Pensioners Spec!F75	C
+PILA Pensioners Spec!G75	Marked only in the period of entry; blank otherwise.
+PILA Pensioners Spec!H75	Pos 257-257
+PILA Pensioners Spec!I75	1
+PILA Pensioners Spec!J75	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L75	Pensioner.Entry_Event
+PILA Pensioners Spec!M75	Blank, X or C. X: the payer enters the pensioner in all subsystems it reports, and the days may be fewer than 30 according to the day of entry. C: entry to the family compensation fund only. The entry date (campo 55) may accompany it. Source: AT3 v15 §2.2.1 campo 22, p. 29; §2.2.2.6, pp. 49-50; ch. 4 §5 table 8, p. 106.
+PILA Pensioners Spec!N75	Y
+PILA Pensioners Spec!O75	X / C / blank
+PILA Pensioners Spec!P75	Not an amount - no rounding.
+PILA Pensioners Spec!Q75	N
+PILA Pensioners Spec!R75	Flag
+PILA Pensioners Spec!S75	Monthly
+PILA Pensioners Spec!A76	RET: withdrawal
+PILA Pensioners Spec!B76	RET: Retiro
+PILA Pensioners Spec!C76	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D76	T2R2-023
+PILA Pensioners Spec!E76	Y
+PILA Pensioners Spec!F76	C
+PILA Pensioners Spec!G76	Marked only in the period of withdrawal; blank otherwise.
+PILA Pensioners Spec!H76	Pos 258-258
+PILA Pensioners Spec!I76	1
+PILA Pensioners Spec!J76	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L76	Pensioner.Withdrawal_Event
+PILA Pensioners Spec!M76	Blank, X, P or C. X: the payer withdraws the pensioner from all subsystems it reports, and the days may be fewer than 30. P: withdrawal from the pension subsystem only, for pension types 4, 7, 11 and 14. C: withdrawal from the family compensation fund only. The withdrawal date (campo 56) may accompany it. Source: AT3 v15 §2.2.1 campo 23, p. 29; §2.2.2.7, p. 50.
+PILA Pensioners Spec!N76	Y
+PILA Pensioners Spec!O76	X / P / C / blank
+PILA Pensioners Spec!P76	Not an amount - no rounding.
+PILA Pensioners Spec!Q76	N
+PILA Pensioners Spec!R76	Flag
+PILA Pensioners Spec!S76	Monthly
+PILA Pensioners Spec!A77	TDE: transfer from another EPS or EOC
+PILA Pensioners Spec!B77	TDE: Traslado desde otra EPS o EOC
+PILA Pensioners Spec!C77	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D77	T2R2-024
+PILA Pensioners Spec!E77	N
+PILA Pensioners Spec!F77	N
+PILA Pensioners Spec!G77	Must be blank.
+PILA Pensioners Spec!H77	Pos 259-259
+PILA Pensioners Spec!I77	1
+PILA Pensioners Spec!J77	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L77	Constant blank
+PILA Pensioners Spec!M77	Must be reported blank. Source: AT3 v15 §2.2.1 campo 24, p. 29.
+PILA Pensioners Spec!N77	N
+PILA Pensioners Spec!O77	-
+PILA Pensioners Spec!P77	Not an amount - no rounding.
+PILA Pensioners Spec!Q77	N
+PILA Pensioners Spec!R77	Flag
+PILA Pensioners Spec!S77	Monthly
+PILA Pensioners Spec!A78	TAE: transfer to another EPS
+PILA Pensioners Spec!B78	TAE: Traslado a otra EPS
+PILA Pensioners Spec!C78	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D78	T2R2-025
+PILA Pensioners Spec!E78	N
+PILA Pensioners Spec!F78	N
+PILA Pensioners Spec!G78	Must be blank.
+PILA Pensioners Spec!H78	Pos 260-260
+PILA Pensioners Spec!I78	1
+PILA Pensioners Spec!J78	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L78	Constant blank
+PILA Pensioners Spec!M78	Must be reported blank. Source: AT3 v15 §2.2.1 campo 25, p. 29.
+PILA Pensioners Spec!N78	N
+PILA Pensioners Spec!O78	-
+PILA Pensioners Spec!P78	Not an amount - no rounding.
+PILA Pensioners Spec!Q78	N
+PILA Pensioners Spec!R78	Flag
+PILA Pensioners Spec!S78	Monthly
+PILA Pensioners Spec!A79	TDP: transfer from another pension administradora
+PILA Pensioners Spec!B79	TDP: Traslado desde otra Administradora de Pensiones
+PILA Pensioners Spec!C79	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D79	T2R2-026
+PILA Pensioners Spec!E79	N
+PILA Pensioners Spec!F79	N
+PILA Pensioners Spec!G79	Must be blank.
+PILA Pensioners Spec!H79	Pos 261-261
+PILA Pensioners Spec!I79	1
+PILA Pensioners Spec!J79	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L79	Constant blank
+PILA Pensioners Spec!M79	Must be reported blank. Source: AT3 v15 §2.2.1 campo 26, p. 29.
+PILA Pensioners Spec!N79	N
+PILA Pensioners Spec!O79	-
+PILA Pensioners Spec!P79	Not an amount - no rounding.
+PILA Pensioners Spec!Q79	N
+PILA Pensioners Spec!R79	Flag
+PILA Pensioners Spec!S79	Monthly
+PILA Pensioners Spec!A80	TAP: transfer to another pension administradora
+PILA Pensioners Spec!B80	TAP: Traslado a otra Administradora de Pensiones
+PILA Pensioners Spec!C80	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D80	T2R2-027
+PILA Pensioners Spec!E80	N
+PILA Pensioners Spec!F80	N
+PILA Pensioners Spec!G80	Must be blank.
+PILA Pensioners Spec!H80	Pos 262-262
+PILA Pensioners Spec!I80	1
+PILA Pensioners Spec!J80	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L80	Constant blank
+PILA Pensioners Spec!M80	Must be reported blank. Source: AT3 v15 §2.2.1 campo 27, p. 29.
+PILA Pensioners Spec!N80	N
+PILA Pensioners Spec!O80	-
+PILA Pensioners Spec!P80	Not an amount - no rounding.
+PILA Pensioners Spec!Q80	N
+PILA Pensioners Spec!R80	Flag
+PILA Pensioners Spec!S80	Monthly
+PILA Pensioners Spec!A81	VSP: permanent variation of the mesada
+PILA Pensioners Spec!B81	VSP: Variación permanente de la mesada pensional
+PILA Pensioners Spec!C81	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D81	T2R2-028
+PILA Pensioners Spec!E81	Y
+PILA Pensioners Spec!F81	C
+PILA Pensioners Spec!G81	X in the period in which the mesada increases; never together with SUS.
+PILA Pensioners Spec!H81	Pos 263-263
+PILA Pensioners Spec!I81	1
+PILA Pensioners Spec!J81	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L81	Pension.Permanent_Variation_Event
+PILA Pensioners Spec!M81	Blank or X. Reported when the mesada increases, except where the suspension event (campo 29) is reported. The start date (campo 57) may accompany it. Source: AT3 v15 §2.2.1 campo 28, p. 29; §2.2.2.8, p. 50.
+PILA Pensioners Spec!N81	Y
+PILA Pensioners Spec!O81	X / blank
+PILA Pensioners Spec!P81	Not an amount - no rounding.
+PILA Pensioners Spec!Q81	N
+PILA Pensioners Spec!R81	Flag
+PILA Pensioners Spec!S81	Monthly
+PILA Pensioners Spec!A82	SUS: suspension
+PILA Pensioners Spec!B82	SUS: Suspensión
+PILA Pensioners Spec!C82	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D82	T2R2-029
+PILA Pensioners Spec!E82	Y
+PILA Pensioners Spec!F82	C
+PILA Pensioners Spec!G82	S only where the mesada is suspended; blank otherwise.
+PILA Pensioners Spec!H82	Pos 264-264
+PILA Pensioners Spec!I82	1
+PILA Pensioners Spec!J82	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L82	Pension.Suspension_Event
+PILA Pensioners Spec!M82	S where a recognised pension is suspended because the beneficiary did not prove in time the condition to keep receiving it, or for any other legal ground (for example a court decision on the right between several spouses or partners, or student children who did not prove their condition). With S the days reported are the days of suspension in the month, and the mesada (campo 58) and the IBC (campo 39) are zero. Dates in campos 60 and 61 may accompany it. Source: AT3 v15 §2.2.1 campo 29, pp. 29-30; §2.2.2.9, pp. 50-51.
+PILA Pensioners Spec!N82	Y
+PILA Pensioners Spec!O82	S / blank
+PILA Pensioners Spec!P82	Not an amount - no rounding.
+PILA Pensioners Spec!Q82	N
+PILA Pensioners Spec!R82	Flag
+PILA Pensioners Spec!S82	Monthly
+PILA Pensioners Spec!A83	═══ -- administradoras (campos 30 to 34) -- ═══
+PILA Pensioners Spec!A84	Pension administradora or ACCAI code
+PILA Pensioners Spec!B84	Código de la Administradora de Pensiones o de la ACCAI a la cual se encuentra vinculado el pensionado cotizante
+PILA Pensioners Spec!C84	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D84	T2R2-030
+PILA Pensioners Spec!E84	Y
+PILA Pensioners Spec!F84	C
+PILA Pensioners Spec!G84	MANDATORY for pension types 4, 7, 11, 14 and 22; OPTIONAL for 12, 20 and 21 where the pensioner contributes voluntarily to pensions; may be blank with SUS.
+PILA Pensioners Spec!H84	Pos 265-270
+PILA Pensioners Spec!I84	6
+PILA Pensioners Spec!J84	A(6) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L84	Pensioner.Pension_Fund_Code
+PILA Pensioners Spec!M84	A valid administradora code. Where the pensioner appears with S in campo 5 of the file 'INFORMACIÓN DE AFILIACIÓN A PENSIONES', the information operator reports the administradora of campo 3 of that file; with N and an IBC above 2.3 SMLMV, the ACCAI of campo 6 of that file (or the payer supplies it where the file has none); with N and an IBC up to 2.3 SMLMV, Colpensiones as administradora of the Componente de Prima Media. Source: AT3 v15 §2.2.1 campo 30, pp. 30-31.
+PILA Pensioners Spec!N84	Y
+PILA Pensioners Spec!O84	-
+PILA Pensioners Spec!P84	Not an amount - no rounding.
+PILA Pensioners Spec!Q84	N
+PILA Pensioners Spec!R84	Code
+PILA Pensioners Spec!S84	Monthly
+PILA Pensioners Spec!A85	Destination pension administradora code
+PILA Pensioners Spec!B85	Código de la Administradora de Pensiones a la cual se traslada el pensionado cotizante
+PILA Pensioners Spec!C85	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D85	T2R2-031
+PILA Pensioners Spec!E85	N
+PILA Pensioners Spec!F85	N
+PILA Pensioners Spec!G85	Must be blank.
+PILA Pensioners Spec!H85	Pos 271-276
+PILA Pensioners Spec!I85	6
+PILA Pensioners Spec!J85	A(6) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L85	Constant blank
+PILA Pensioners Spec!M85	Must be reported blank. Source: AT3 v15 §2.2.1 campo 31, p. 31.
+PILA Pensioners Spec!N85	N
+PILA Pensioners Spec!O85	-
+PILA Pensioners Spec!P85	Not an amount - no rounding.
+PILA Pensioners Spec!Q85	N
+PILA Pensioners Spec!R85	Code
+PILA Pensioners Spec!S85	Monthly
+PILA Pensioners Spec!A86	EPS or EOC code
+PILA Pensioners Spec!B86	Código EPS o EOC a la cual pertenece el afiliado
+PILA Pensioners Spec!C86	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D86	T2R2-032
+PILA Pensioners Spec!E86	Y
+PILA Pensioners Spec!F86	C
+PILA Pensioners Spec!G86	MANDATORY; blank only where campo 18 = X.
+PILA Pensioners Spec!H86	Pos 277-282
+PILA Pensioners Spec!I86	6
+PILA Pensioners Spec!J86	A(6) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!K86	EPS001
+PILA Pensioners Spec!L86	Pensioner.EPS_Code
+PILA Pensioners Spec!M86	A valid EPS code supplied by the payer. In R and L planillas for a retroactive amount paid for the first time, and in A and C records of a V planilla, the code is MIN001 (ADRES), except for pensioners of the special health regime. For a pensioner type 9 record it is the EPS of the additional UPC beneficiary. Source: AT3 v15 §2.2.1 campo 32, p. 31; §2.1.2.2, pp. 17-19; §2.2.2.4, p. 49; ch. 4 §8, p. 109.
+PILA Pensioners Spec!N86	Y
+PILA Pensioners Spec!O86	-
+PILA Pensioners Spec!P86	Not an amount - no rounding.
+PILA Pensioners Spec!Q86	N
+PILA Pensioners Spec!R86	Code
+PILA Pensioners Spec!S86	Monthly
+PILA Pensioners Spec!A87	Destination EPS or EOC code
+PILA Pensioners Spec!B87	Código EPS o EOC a la cual se traslada el afiliado
+PILA Pensioners Spec!C87	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D87	T2R2-033
+PILA Pensioners Spec!E87	N
+PILA Pensioners Spec!F87	N
+PILA Pensioners Spec!G87	Must be blank.
+PILA Pensioners Spec!H87	Pos 283-288
+PILA Pensioners Spec!I87	6
+PILA Pensioners Spec!J87	A(6) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L87	Constant blank
+PILA Pensioners Spec!M87	Must be reported blank. Source: AT3 v15 §2.2.1 campo 33, p. 32.
+PILA Pensioners Spec!N87	N
+PILA Pensioners Spec!O87	-
+PILA Pensioners Spec!P87	Not an amount - no rounding.
+PILA Pensioners Spec!Q87	N
+PILA Pensioners Spec!R87	Code
+PILA Pensioners Spec!S87	Monthly
+PILA Pensioners Spec!A88	CCF code
+PILA Pensioners Spec!B88	Código CCF a la que pertenece el pensionado afiliado
+PILA Pensioners Spec!C88	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D88	T2R2-034
+PILA Pensioners Spec!E88	Y
+PILA Pensioners Spec!F88	C
+PILA Pensioners Spec!G88	Populated only where the pensioner contributes to a family compensation fund (optional subsystem, R6).
+PILA Pensioners Spec!H88	Pos 289-294
+PILA Pensioners Spec!I88	6
+PILA Pensioners Spec!J88	A(6) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L88	Pensioner.CCF_Code
+PILA Pensioners Spec!M88	A valid family compensation fund code. Contribution to a CCF is optional ('O') for every pension type in R6. Source: AT3 v15 §2.2.1 campo 34, p. 32; ch. 4 §6 table 9, pp. 107-108.
+PILA Pensioners Spec!N88	Y
+PILA Pensioners Spec!O88	-
+PILA Pensioners Spec!P88	Not an amount - no rounding.
+PILA Pensioners Spec!Q88	N
+PILA Pensioners Spec!R88	Code
+PILA Pensioners Spec!S88	Monthly
+PILA Pensioners Spec!A89	═══ -- days contributed (campos 35 to 38) -- ═══
+PILA Pensioners Spec!A90	Days contributed to pension
+PILA Pensioners Spec!B90	Número de días cotizados a pensión
+PILA Pensioners Spec!C90	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D90	T2R2-035
+PILA Pensioners Spec!E90	Y
+PILA Pensioners Spec!F90	C
+PILA Pensioners Spec!G90	MANDATORY for pension types 4, 7, 11 and 14; OPTIONAL for 12, 20 and 21 where the pensioner contributes voluntarily to pensions.
+PILA Pensioners Spec!H90	Pos 295-296
+PILA Pensioners Spec!I90	2
+PILA Pensioners Spec!J90	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K90	00
+PILA Pensioners Spec!L90	Pension.Pension_Days
+PILA Pensioners Spec!M90	Values 0 to 30. The days of a pensioner obliged to contribute total 30 whether the month has 28, 30 or 31 days; fewer than 30 only with an entry or withdrawal event. Zero only where the pensioner is not obliged to contribute to pensions. Source: AT3 v15 §2.2.1 campo 35, p. 32; §2.2.2.10, p. 51.
+PILA Pensioners Spec!N90	Y
+PILA Pensioners Spec!O90	-
+PILA Pensioners Spec!P90	Not an amount - no rounding.
+PILA Pensioners Spec!Q90	N
+PILA Pensioners Spec!R90	Days
+PILA Pensioners Spec!S90	Monthly
+PILA Pensioners Spec!A91	Days contributed to the Fondo de Solidaridad Pensional
+PILA Pensioners Spec!B91	Número días cotizados al Fondo de Solidaridad Pensional
+PILA Pensioners Spec!C91	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D91	T2R2-036
+PILA Pensioners Spec!E91	Y
+PILA Pensioners Spec!F91	C
+PILA Pensioners Spec!G91	MANDATORY where the mesada exceeds 10 SMLMV.
+PILA Pensioners Spec!H91	Pos 297-298
+PILA Pensioners Spec!I91	2
+PILA Pensioners Spec!J91	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K91	00
+PILA Pensioners Spec!L91	Pension.FSP_Days
+PILA Pensioners Spec!M91	Values 0 to 30; 30 for a full month whatever its calendar length, fewer only with an entry or withdrawal event. Zero only where the pensioner is not obliged to contribute to the Fondo de Solidaridad Pensional under Ley 797 de 2003. Source: AT3 v15 §2.2.1 campo 36, p. 32; §2.2.2.11, p. 51.
+PILA Pensioners Spec!N91	Y
+PILA Pensioners Spec!O91	-
+PILA Pensioners Spec!P91	Not an amount - no rounding.
+PILA Pensioners Spec!Q91	N
+PILA Pensioners Spec!R91	Days
+PILA Pensioners Spec!S91	Monthly
+PILA Pensioners Spec!A92	Days contributed to health
+PILA Pensioners Spec!B92	Número de días cotizados a salud
+PILA Pensioners Spec!C92	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D92	T2R2-037
+PILA Pensioners Spec!E92	Y
+PILA Pensioners Spec!F92	Y
+PILA Pensioners Spec!H92	Pos 299-300
+PILA Pensioners Spec!I92	2
+PILA Pensioners Spec!J92	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K92	30
+PILA Pensioners Spec!L92	Pension.Health_Days
+PILA Pensioners Spec!M92	Mandatory, values 0 to 30; 30 for a full month whatever its calendar length. Fewer than 30 requires an entry or withdrawal event. Where campo 50 (additional UPC) is above zero the value is 30. Zero only where campo 18 = X. Source: AT3 v15 §2.2.1 campo 37, p. 32; §2.2.2.12, pp. 51-52.
+PILA Pensioners Spec!N92	Y
+PILA Pensioners Spec!O92	-
+PILA Pensioners Spec!P92	Not an amount - no rounding.
+PILA Pensioners Spec!Q92	N
+PILA Pensioners Spec!R92	Days
+PILA Pensioners Spec!S92	Monthly
+PILA Pensioners Spec!A93	Days contributed to the family compensation fund
+PILA Pensioners Spec!B93	Número de días cotizados a Cajas de Compensación
+PILA Pensioners Spec!C93	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D93	T2R2-038
+PILA Pensioners Spec!E93	Y
+PILA Pensioners Spec!F93	C
+PILA Pensioners Spec!G93	MANDATORY where campo 34 (CCF code) is populated.
+PILA Pensioners Spec!H93	Pos 301-302
+PILA Pensioners Spec!I93	2
+PILA Pensioners Spec!J93	N(2) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K93	00
+PILA Pensioners Spec!L93	Pension.CCF_Days
+PILA Pensioners Spec!M93	Values 0 to 30, supplied by the payer. Source: AT3 v15 §2.2.1 campo 38, p. 33.
+PILA Pensioners Spec!N93	Y
+PILA Pensioners Spec!O93	-
+PILA Pensioners Spec!P93	Not an amount - no rounding.
+PILA Pensioners Spec!Q93	N
+PILA Pensioners Spec!R93	Days
+PILA Pensioners Spec!S93	Monthly
+PILA Pensioners Spec!A94	═══ -- contribution base (campo 39) -- ═══
+PILA Pensioners Spec!A95	Contribution base (IBC)
+PILA Pensioners Spec!B95	Ingreso Base de Cotización
+PILA Pensioners Spec!C95	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D95	T2R2-039
+PILA Pensioners Spec!E95	Y
+PILA Pensioners Spec!F95	Y
+PILA Pensioners Spec!H95	Pos 303-311
+PILA Pensioners Spec!I95	9
+PILA Pensioners Spec!J95	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K95	003500000
+PILA Pensioners Spec!L95	MIN(Pension.Monthly_Amount, 25 x SMLMV); Pension.Monthly_Amount fed by WT 62154 'Monthly Retired Pension-6798'
+PILA Pensioners Spec!M95	Mandatory. The value of the mesada (Decreto 780 de 2016 art. 2.2.1.1.2.1: 'Para los pensionados las cotizaciones se calcularán con base en la mesada pensional'). Where the mesada exceeds 25 SMLMV the field carries 25 SMLMV. It is the base of the health contribution, and of the pension contribution for pension types 4, 7, 11 and 14. Minimum by pension type: at least 1 SMLMV for types 1, 8, 9, 10, 12, 13, 15 and 22; may be below 1 SMLMV for types 2 to 7, 11, 14, 16, 20 and 21. Zero for a pensioner type 9 record and for a suspended mesada (campo 29 = S). Source: AT3 v15 §2.2.1 campo 39, p. 33; §2.2.2.13, p. 52; §2.2.2.9, p. 51; ch. 4 §7, pp. 108-109.
+PILA Pensioners Spec!N95	Y
+PILA Pensioners Spec!O95	-
+PILA Pensioners Spec!P95	Rounded UP to the whole peso (Decreto 780 de 2016 art. 3.2.1.5 num. 1, text of Decreto 1990 de 2016 art. 1).
+PILA Pensioners Spec!Q95	N
+PILA Pensioners Spec!R95	Amount
+PILA Pensioners Spec!S95	Monthly
+PILA Pensioners Spec!A96	═══ -- pension settlement (campos 40 to 44) -- ═══
+PILA Pensioners Spec!A97	Pension contribution rate
+PILA Pensioners Spec!B97	Tarifa de aportes a pensión
+PILA Pensioners Spec!C97	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D97	T2R2-040
+PILA Pensioners Spec!E97	Y
+PILA Pensioners Spec!F97	C
+PILA Pensioners Spec!G97	MANDATORY for pension types 4, 7, 11, 14 and 22; OPTIONAL for 12, 20 and 21 where the pensioner contributes voluntarily.
+PILA Pensioners Spec!H97	Pos 312-318
+PILA Pensioners Spec!I97	7
+PILA Pensioners Spec!J97	N(7) - rate; decimal layout per the operator's file-format configuration
+PILA Pensioners Spec!K97	0.00000
+PILA Pensioners Spec!L97	Mercans.Pensioner_Pension_Rate
+PILA Pensioners Spec!M97	The rate legally in force for the period paid. Zero only where the pensioner is not obliged to contribute to pensions (R6: pension contribution X for types 4, 7, 11, 14 and 22, O for 12, 20 and 21, not permitted for the other types). Source: AT3 v15 §2.2.1 campo 40, p. 33; §2.2.2.15, p. 52; ch. 4 §6 table 9, pp. 107-108.
+PILA Pensioners Spec!N97	Y
+PILA Pensioners Spec!O97	-
+PILA Pensioners Spec!P97	Rate - no rounding; the decimal layout is held in the file-format configuration of the chosen information operator.
+PILA Pensioners Spec!Q97	N
+PILA Pensioners Spec!R97	Rate
+PILA Pensioners Spec!S97	Monthly
+PILA Pensioners Spec!A98	Compulsory pension contribution
+PILA Pensioners Spec!B98	Cotización obligatoria a pensiones
+PILA Pensioners Spec!C98	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D98	T2R2-041
+PILA Pensioners Spec!E98	Y
+PILA Pensioners Spec!F98	C
+PILA Pensioners Spec!G98	MANDATORY for pension types 4, 7, 11, 14 and 22; OPTIONAL for 12, 20 and 21 where the pensioner contributes voluntarily.
+PILA Pensioners Spec!H98	Pos 319-327
+PILA Pensioners Spec!I98	9
+PILA Pensioners Spec!J98	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K98	000000000
+PILA Pensioners Spec!L98	Pension.Pension_Contribution
+PILA Pensioners Spec!M98	Campo 40 x campo 39. From the pension contribution period of July 2025 the information operator distributes this amount between the Componente de Prima Media and the Componente Complementario de Ahorro Individual (Ley 2381 de 2024) before payment; the payer reports the whole contribution here. Source: AT3 v15 §2.2.1 campo 41, p. 33; §2.2.2.16, pp. 53-59.
+PILA Pensioners Spec!N98	Y
+PILA Pensioners Spec!O98	-
+PILA Pensioners Spec!P98	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q98	N
+PILA Pensioners Spec!R98	Amount
+PILA Pensioners Spec!S98	Monthly
+PILA Pensioners Spec!A99	Voluntary contribution to the compulsory pension fund
+PILA Pensioners Spec!B99	Cotización voluntaria del afiliado al Fondo de Pensiones Obligatoria
+PILA Pensioners Spec!C99	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D99	T2R2-042
+PILA Pensioners Spec!E99	N
+PILA Pensioners Spec!F99	N
+PILA Pensioners Spec!G99	Optional; individual-savings regime only, pension types 4, 7, 11, 14 and 22 (optional for 12, 20, 21); only where the pensioner is S in campo 5 of 'INFORMACIÓN DE AFILIACIÓN A PENSIONES'.
+PILA Pensioners Spec!H99	Pos 328-336
+PILA Pensioners Spec!I99	9
+PILA Pensioners Spec!J99	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K99	000000000
+PILA Pensioners Spec!L99	Pension.Voluntary_Pension_Contribution
+PILA Pensioners Spec!M99	Zero in the Régimen de Prima Media con Prestación Definida. Source: AT3 v15 §2.2.1 campo 42, pp. 33-34; §2.2.2.17, p. 59.
+PILA Pensioners Spec!N99	Y
+PILA Pensioners Spec!O99	-
+PILA Pensioners Spec!P99	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q99	N
+PILA Pensioners Spec!R99	Amount
+PILA Pensioners Spec!S99	Monthly
+PILA Pensioners Spec!A100	Total contribution
+PILA Pensioners Spec!B100	Total cotización
+PILA Pensioners Spec!C100	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D100	T2R2-043
+PILA Pensioners Spec!E100	Y
+PILA Pensioners Spec!F100	Y
+PILA Pensioners Spec!G100	Calculated by the system.
+PILA Pensioners Spec!H100	Pos 337-345
+PILA Pensioners Spec!I100	9
+PILA Pensioners Spec!J100	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K100	000000000
+PILA Pensioners Spec!L100	Sum of T2R2-041 and T2R2-042
+PILA Pensioners Spec!M100	Calculated by the system: the sum of campos 41 and 42. Source: AT3 v15 §2.2.1 campo 43, p. 34.
+PILA Pensioners Spec!N100	Y
+PILA Pensioners Spec!O100	-
+PILA Pensioners Spec!P100	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q100	N
+PILA Pensioners Spec!R100	Amount
+PILA Pensioners Spec!S100	Monthly
+PILA Pensioners Spec!A101	Value not withheld for voluntary contributions
+PILA Pensioners Spec!B101	Valor no retenido por aportes voluntarios
+PILA Pensioners Spec!C101	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D101	T2R2-044
+PILA Pensioners Spec!E101	N
+PILA Pensioners Spec!F101	N
+PILA Pensioners Spec!G101	Optional for pension types 4, 7, 11 and 14; zero in the Régimen de Prima Media.
+PILA Pensioners Spec!H101	Pos 346-354
+PILA Pensioners Spec!I101	9
+PILA Pensioners Spec!J101	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K101	000000000
+PILA Pensioners Spec!L101	Pension.Voluntary_Not_Withheld
+PILA Pensioners Spec!M101	The difference between the withholding that would have applied without the voluntary contributions to the individual-savings regime and the withholding actually made. Source: AT3 v15 §2.2.1 campo 44, p. 34; §2.2.2.18, p. 59.
+PILA Pensioners Spec!N101	Y
+PILA Pensioners Spec!O101	-
+PILA Pensioners Spec!P101	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q101	N
+PILA Pensioners Spec!R101	Amount
+PILA Pensioners Spec!S101	Monthly
+PILA Pensioners Spec!A102	═══ -- Fondo de Solidaridad Pensional (campos 45 to 47) -- ═══
+PILA Pensioners Spec!A103	FSP contribution - solidarity subaccount
+PILA Pensioners Spec!B103	Aportes a Fondo de solidaridad pensional - Subcuenta de solidaridad
+PILA Pensioners Spec!C103	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D103	T2R2-045
+PILA Pensioners Spec!E103	N
+PILA Pensioners Spec!F103	C
+PILA Pensioners Spec!G103	Applies only to pension types 4, 7, 11, 14 and 22 where campo 63 >= 4 SMLMV (12, 20, 21 where the pensioner contributes voluntarily and campo 63 > 4 SMLMV); zero for every other pension type.
+PILA Pensioners Spec!H103	Pos 355-364
+PILA Pensioners Spec!I103	10
+PILA Pensioners Spec!J103	N(10) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K103	0000000000
+PILA Pensioners Spec!L103	Calculated by the information operator
+PILA Pensioners Spec!M103	Liquidated by the information operator: campo 58 x 0.5% to the solidarity subaccount (Ley 100 de 1993 art. 27). Several lines of the same pensioner and pension type in one planilla are added to test the 4 SMLMV threshold. Source: AT3 v15 §2.2.1 campo 45, p. 34; §2.2.2.19, pp. 59-60.
+PILA Pensioners Spec!N103	Y
+PILA Pensioners Spec!O103	-
+PILA Pensioners Spec!P103	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q103	N
+PILA Pensioners Spec!R103	Amount
+PILA Pensioners Spec!S103	Monthly
+PILA Pensioners Spec!A104	FSP contribution - subsistence subaccount (pension contributors)
+PILA Pensioners Spec!B104	Aportes a Fondo de Solidaridad Pensional - Subcuenta de Subsistencia
+PILA Pensioners Spec!C104	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D104	T2R2-046
+PILA Pensioners Spec!E104	N
+PILA Pensioners Spec!F104	C
+PILA Pensioners Spec!G104	Same scope as campo 45; zero for every other pension type.
+PILA Pensioners Spec!H104	Pos 365-374
+PILA Pensioners Spec!I104	10
+PILA Pensioners Spec!J104	N(10) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K104	0000000000
+PILA Pensioners Spec!L104	Calculated by the information operator
+PILA Pensioners Spec!M104	Liquidated by the information operator: campo 58 x 0.5% to the subsistence subaccount, plus, for pensioner contributors with S in campo 5 of 'INFORMACIÓN DE AFILIACIÓN A PENSIONES', 0.2% to 1.0% for an IBC from 16 SMLMV (Ley 797 de 2003 art. 8) or, with N, 1.0% to 2.5% from 4 SMLMV (Ley 2381 de 2024 art. 20). Source: AT3 v15 §2.2.1 campo 46, pp. 34-35; §2.2.2.20, pp. 60-61.
+PILA Pensioners Spec!N104	Y
+PILA Pensioners Spec!O104	-
+PILA Pensioners Spec!P104	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q104	N
+PILA Pensioners Spec!R104	Amount
+PILA Pensioners Spec!S104	Monthly
+PILA Pensioners Spec!A105	FSP contribution - subsistence subaccount (pensioners above 10 SMLMV)
+PILA Pensioners Spec!B105	Aportes a Fondo de Solidaridad Pensional - Subcuenta de Subsistencia
+PILA Pensioners Spec!C105	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D105	T2R2-047
+PILA Pensioners Spec!E105	Y
+PILA Pensioners Spec!F105	C
+PILA Pensioners Spec!G105	MANDATORY where campo 63 (total mesada) exceeds 10 SMLMV; zero otherwise.
+PILA Pensioners Spec!H105	Pos 375-381
+PILA Pensioners Spec!I105	7
+PILA Pensioners Spec!J105	N(7) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K105	0000000
+PILA Pensioners Spec!L105	Pension.FSP_Pensioner_Contribution; fed by WT 21643 / 21648 / 21644 (attribute per WT from the WTC)
+PILA Pensioners Spec!M105	Pensioners whose mesada exceeds 10 SMLMV and up to 20 SMLMV contribute 1%, and above 20 SMLMV 2%, to the subsistence subaccount (Ley 797 de 2003 art. 8, Ley 100 de 1993 art. 27). Value = campo 58 x the factor that corresponds to campo 63. Where one beneficiary has several pensions in the same planilla, the factor follows the sum of campo 63 and is applied to each campo 58. Supplied by the payer and recalculated by the information operator; paid under code FSP001 - Fondo de Solidaridad Pensional. Source: AT3 v15 §2.2.1 campo 47, p. 35; §2.2.2.2, pp. 40-47; §2.2.2.21, pp. 61-62.
+PILA Pensioners Spec!N105	Y
+PILA Pensioners Spec!O105	-
+PILA Pensioners Spec!P105	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q105	N
+PILA Pensioners Spec!R105	Amount
+PILA Pensioners Spec!S105	Monthly
+PILA Pensioners Spec!A106	═══ -- health settlement (campos 48 to 50) -- ═══
+PILA Pensioners Spec!A107	Health contribution rate
+PILA Pensioners Spec!B107	Tarifa de aportes a Salud
+PILA Pensioners Spec!C107	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D107	T2R2-048
+PILA Pensioners Spec!E107	Y
+PILA Pensioners Spec!F107	Y
+PILA Pensioners Spec!H107	Pos 382-388
+PILA Pensioners Spec!I107	7
+PILA Pensioners Spec!J107	N(7) - rate; decimal layout per the operator's file-format configuration
+PILA Pensioners Spec!K107	0.10000
+PILA Pensioners Spec!L107	Mercans.Pensioner_Health_Rate (band on T2R2-063)
+PILA Pensioners Spec!M107	The rate legally in force for the contribution period paid, selected on the total mesada (campo 63) under Ley 100 de 1993 art. 204 par. 5: periods 2020-2021: 1 SMLMV 8%, more than 1 and up to 2 SMLMV 10%, more than 2 SMLMV 12%; periods 2022-2023: 1 SMLMV 4%, more than 1 and up to 2 SMLMV 10%, more than 2 SMLMV 12%; periods from 2024: 1 SMLMV 4%, more than 1 and up to 3 SMLMV 10%, more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with the inciso added by Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1 nums. 3 to 5, Anexo Técnico 1). The information operator checks the rate against campo 63 for pension types 1 to 16, 20 and 21; in R, L and V planillas it validates the rate in force for the period reported. Zero where the pensioner resides abroad (campo 18 = X). Source: AT3 v15 §2.2.1 campo 48, p. 35; §2.1.2.2, p. 20; §2.2.2.22, pp. 62-63; ch. 4 §9, pp. 109-113.
+PILA Pensioners Spec!N107	Y
+PILA Pensioners Spec!O107	-> Field Options: Health rate of pensioners
+PILA Pensioners Spec!P107	Rate - no rounding; the decimal layout is held in the file-format configuration of the chosen information operator.
+PILA Pensioners Spec!Q107	N
+PILA Pensioners Spec!R107	Rate
+PILA Pensioners Spec!S107	Monthly
+PILA Pensioners Spec!A108	Compulsory health contribution
+PILA Pensioners Spec!B108	Cotización obligatoria a salud
+PILA Pensioners Spec!C108	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D108	T2R2-049
+PILA Pensioners Spec!E108	Y
+PILA Pensioners Spec!F108	Y
+PILA Pensioners Spec!H108	Pos 389-397
+PILA Pensioners Spec!I108	9
+PILA Pensioners Spec!J108	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K108	000350000
+PILA Pensioners Spec!L108	Pension.Health_Contribution; fed by WT 21645 / 21646 / 21647 (attribute per WT from the WTC)
+PILA Pensioners Spec!M108	Campo 48 x campo 39, rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2), also where the IBC is below 1 SMLMV. The contribution is borne in full by the pensioner (Ley 100 de 1993 art. 143) and withheld from the mesada by the payer. Source: AT3 v15 §2.2.1 campo 49, p. 35; §2.2.2.23, p. 63.
+PILA Pensioners Spec!N108	Y
+PILA Pensioners Spec!O108	-
+PILA Pensioners Spec!P108	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q108	N
+PILA Pensioners Spec!R108	Amount
+PILA Pensioners Spec!S108	Monthly
+PILA Pensioners Spec!A109	Additional UPC value
+PILA Pensioners Spec!B109	Valor de la UPC adicional
+PILA Pensioners Spec!C109	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D109	T2R2-050
+PILA Pensioners Spec!E109	Y
+PILA Pensioners Spec!F109	C
+PILA Pensioners Spec!G109	MANDATORY for pensioner type 9; zero in every other case.
+PILA Pensioners Spec!H109	Pos 398-406
+PILA Pensioners Spec!I109	9
+PILA Pensioners Spec!J109	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K109	000000000
+PILA Pensioners Spec!L109	Pensioner.UPC_Additional_Value (BDUA file campo 11)
+PILA Pensioners Spec!M109	The value in campo 11 of the file 'información de la Base de Datos Única de Afiliados - BDUA con destino a los operadores de información'. Source: AT3 v15 §2.2.1 campo 50, p. 35; §2.2.2.24, p. 63.
+PILA Pensioners Spec!N109	Y
+PILA Pensioners Spec!O109	-
+PILA Pensioners Spec!P109	Not an amount - no rounding.
+PILA Pensioners Spec!Q109	N
+PILA Pensioners Spec!R109	Amount
+PILA Pensioners Spec!S109	Monthly
+PILA Pensioners Spec!A110	═══ -- family compensation fund (campos 51 and 52) -- ═══
+PILA Pensioners Spec!A111	CCF contribution rate
+PILA Pensioners Spec!B111	Tarifa de aportes CCF
+PILA Pensioners Spec!C111	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D111	T2R2-051
+PILA Pensioners Spec!E111	Y
+PILA Pensioners Spec!F111	C
+PILA Pensioners Spec!G111	MANDATORY where a CCF is reported (campo 34).
+PILA Pensioners Spec!H111	Pos 407-413
+PILA Pensioners Spec!I111	7
+PILA Pensioners Spec!J111	N(7) - decimal, left-justified, zeros to the right (2.0% = 0.02000)
+PILA Pensioners Spec!K111	0.00000
+PILA Pensioners Spec!L111	Mercans.Pensioner_CCF_Rate
+PILA Pensioners Spec!M111	The rate legally in force for the period paid, written as a decimal, left-justified and completed with zeros to the right: 2.0% is written 0.02000. Source: AT3 v15 §2.2.1 campo 51, p. 35; §2.2.2.25, p. 63.
+PILA Pensioners Spec!N111	Y
+PILA Pensioners Spec!O111	-
+PILA Pensioners Spec!P111	Rate - no rounding; the decimal layout is held in the file-format configuration of the chosen information operator.
+PILA Pensioners Spec!Q111	N
+PILA Pensioners Spec!R111	Rate
+PILA Pensioners Spec!S111	Monthly
+PILA Pensioners Spec!A112	CCF contribution value
+PILA Pensioners Spec!B112	Valor aporte CCF
+PILA Pensioners Spec!C112	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D112	T2R2-052
+PILA Pensioners Spec!E112	Y
+PILA Pensioners Spec!F112	C
+PILA Pensioners Spec!G112	MANDATORY where a CCF is reported (campo 34).
+PILA Pensioners Spec!H112	Pos 414-422
+PILA Pensioners Spec!I112	9
+PILA Pensioners Spec!J112	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K112	000000000
+PILA Pensioners Spec!L112	Pension.CCF_Contribution (no wage type established)
+PILA Pensioners Spec!M112	Campo 51 x campo 58 (the mesada, uncapped). Source: AT3 v15 §2.2.1 campo 52, p. 35; §2.2.2.26, p. 63; §2.2.2.27, p. 64.
+PILA Pensioners Spec!N112	Y
+PILA Pensioners Spec!O112	-
+PILA Pensioners Spec!P112	Rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5 num. 2, text of Decreto 1990 de 2016 art. 1; AT3 v15 requires the rounding rules in force for contributions).
+PILA Pensioners Spec!Q112	N
+PILA Pensioners Spec!R112	Amount
+PILA Pensioners Spec!S112	Monthly
+PILA Pensioners Spec!A113	═══ -- principal contributor of an additional UPC beneficiary (campos 53 and 54) -- ═══
+PILA Pensioners Spec!A114	Principal contributor document type
+PILA Pensioners Spec!B114	Tipo de documento del cotizante principal
+PILA Pensioners Spec!C114	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D114	T2R2-053
+PILA Pensioners Spec!E114	Y
+PILA Pensioners Spec!F114	C
+PILA Pensioners Spec!G114	Reported only in a pensioner type 9 record.
+PILA Pensioners Spec!H114	Pos 423-424
+PILA Pensioners Spec!I114	2
+PILA Pensioners Spec!J114	A(2) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L114	Pensioner.Main_Contributor_Doc_Type
+PILA Pensioners Spec!M114	Values CC, CE, TI, RC, PA, CD, PE (not usable for health periods from September 2023), PT. Source: AT3 v15 §2.2.1 campo 53, p. 36; §2.2.2.4, p. 49.
+PILA Pensioners Spec!N114	Y
+PILA Pensioners Spec!O114	-> Field Options: Document type of the pensioner
+PILA Pensioners Spec!P114	Not an amount - no rounding.
+PILA Pensioners Spec!Q114	N
+PILA Pensioners Spec!R114	Code
+PILA Pensioners Spec!S114	Monthly
+PILA Pensioners Spec!A115	Principal contributor identification number
+PILA Pensioners Spec!B115	Número de identificación del cotizante principal
+PILA Pensioners Spec!C115	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D115	T2R2-054
+PILA Pensioners Spec!E115	Y
+PILA Pensioners Spec!F115	C
+PILA Pensioners Spec!G115	Reported only in a pensioner type 9 record.
+PILA Pensioners Spec!H115	Pos 425-440
+PILA Pensioners Spec!I115	16
+PILA Pensioners Spec!J115	A(16) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L115	Pensioner.Main_Contributor_Doc_Number
+PILA Pensioners Spec!M115	Same character and length rules as campo 8. This validation applies to payments made from 1 October 2026. Source: AT3 v15 §2.2.1 campo 54, pp. 36-37; ch. 5 §5.32, pp. 132-133.
+PILA Pensioners Spec!N115	Y
+PILA Pensioners Spec!O115	-
+PILA Pensioners Spec!P115	Not an amount - no rounding.
+PILA Pensioners Spec!Q115	N
+PILA Pensioners Spec!R115	Identifier
+PILA Pensioners Spec!S115	Monthly
+PILA Pensioners Spec!A116	═══ -- change event dates, mesada and corrections (campos 55 to 63) -- ═══
+PILA Pensioners Spec!A117	Entry date
+PILA Pensioners Spec!B117	Fecha de ingreso
+PILA Pensioners Spec!C117	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D117	T2R2-055
+PILA Pensioners Spec!E117	Y
+PILA Pensioners Spec!F117	C
+PILA Pensioners Spec!G117	Optional with the ING event (campo 22); blank where the event is not reported.
+PILA Pensioners Spec!H117	Pos 441-450
+PILA Pensioners Spec!I117	10
+PILA Pensioners Spec!J117	A(10) - date AAAA-MM-DD
+PILA Pensioners Spec!L117	Pensioner.Entry_Date
+PILA Pensioners Spec!M117	Format AAAA-MM-DD; a valid date within the period being settled. Source: AT3 v15 §2.2.1 campo 55, p. 37.
+PILA Pensioners Spec!N117	Y
+PILA Pensioners Spec!O117	-
+PILA Pensioners Spec!P117	Not an amount - no rounding.
+PILA Pensioners Spec!Q117	N
+PILA Pensioners Spec!R117	Date
+PILA Pensioners Spec!S117	Monthly
+PILA Pensioners Spec!A118	Withdrawal date
+PILA Pensioners Spec!B118	Fecha de retiro
+PILA Pensioners Spec!C118	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D118	T2R2-056
+PILA Pensioners Spec!E118	Y
+PILA Pensioners Spec!F118	C
+PILA Pensioners Spec!G118	Optional with the RET event (campo 23); blank where the event is not reported.
+PILA Pensioners Spec!H118	Pos 451-460
+PILA Pensioners Spec!I118	10
+PILA Pensioners Spec!J118	A(10) - date AAAA-MM-DD
+PILA Pensioners Spec!L118	Pensioner.Withdrawal_Date
+PILA Pensioners Spec!M118	Format AAAA-MM-DD; a valid date within the period being settled. Source: AT3 v15 §2.2.1 campo 56, p. 38.
+PILA Pensioners Spec!N118	Y
+PILA Pensioners Spec!O118	-
+PILA Pensioners Spec!P118	Not an amount - no rounding.
+PILA Pensioners Spec!Q118	N
+PILA Pensioners Spec!R118	Date
+PILA Pensioners Spec!S118	Monthly
+PILA Pensioners Spec!A119	VSP start date
+PILA Pensioners Spec!B119	Fecha inicio VSP
+PILA Pensioners Spec!C119	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D119	T2R2-057
+PILA Pensioners Spec!E119	Y
+PILA Pensioners Spec!F119	C
+PILA Pensioners Spec!G119	Optional with the VSP event (campo 28); blank where the event is not reported.
+PILA Pensioners Spec!H119	Pos 461-470
+PILA Pensioners Spec!I119	10
+PILA Pensioners Spec!J119	A(10) - date AAAA-MM-DD
+PILA Pensioners Spec!L119	Pension.Variation_Start_Date
+PILA Pensioners Spec!M119	Format AAAA-MM-DD; a valid date within the period being settled. Source: AT3 v15 §2.2.1 campo 57, p. 38.
+PILA Pensioners Spec!N119	Y
+PILA Pensioners Spec!O119	-
+PILA Pensioners Spec!P119	Not an amount - no rounding.
+PILA Pensioners Spec!Q119	N
+PILA Pensioners Spec!R119	Date
+PILA Pensioners Spec!S119	Monthly
+PILA Pensioners Spec!A120	Mesada value
+PILA Pensioners Spec!B120	Valor de mesada pensional
+PILA Pensioners Spec!C120	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D120	T2R2-058
+PILA Pensioners Spec!E120	Y
+PILA Pensioners Spec!F120	Y
+PILA Pensioners Spec!H120	Pos 471-479
+PILA Pensioners Spec!I120	9
+PILA Pensioners Spec!J120	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K120	003500000
+PILA Pensioners Spec!L120	Pension.Monthly_Amount; fed by WT 62154 'Monthly Retired Pension-6798'
+PILA Pensioners Spec!M120	Mandatory. The value of the recognised mesada; it may exceed 25 SMLMV. It is the base of the Fondo de Solidaridad Pensional contributions (campos 45, 46 and, where the pension is not shared, 47) and of the family compensation fund contribution (campo 52). Zero for a pensioner type 9 record and for a suspended mesada. Source: AT3 v15 §2.2.1 campo 58, p. 38; §2.2.2.27, p. 64; §2.2.2.9, p. 51.
+PILA Pensioners Spec!N120	Y
+PILA Pensioners Spec!O120	-
+PILA Pensioners Spec!P120	Whole pesos (numeric field without decimals, AT3 v15 ch. 1 s.0, p. 7); the mesada is reported as paid.
+PILA Pensioners Spec!Q120	N
+PILA Pensioners Spec!R120	Amount
+PILA Pensioners Spec!S120	Monthly
+PILA Pensioners Spec!A121	Date of filing abroad
+PILA Pensioners Spec!B121	Fecha radicación en el exterior
+PILA Pensioners Spec!C121	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D121	T2R2-059
+PILA Pensioners Spec!E121	Y
+PILA Pensioners Spec!F121	C
+PILA Pensioners Spec!G121	MANDATORY where campo 18 = X; otherwise optional.
+PILA Pensioners Spec!H121	Pos 480-489
+PILA Pensioners Spec!I121	10
+PILA Pensioners Spec!J121	A(10) - date AAAA-MM-DD
+PILA Pensioners Spec!L121	Pensioner.Foreign_Filing_Date
+PILA Pensioners Spec!M121	Format AAAA-MM-DD. Reported once, when the pensioner has notified the EPS of the end of enrolment because of residence abroad with the family group. Source: AT3 v15 §2.2.1 campo 59, p. 38.
+PILA Pensioners Spec!N121	Y
+PILA Pensioners Spec!O121	-
+PILA Pensioners Spec!P121	Not an amount - no rounding.
+PILA Pensioners Spec!Q121	N
+PILA Pensioners Spec!R121	Date
+PILA Pensioners Spec!S121	Monthly
+PILA Pensioners Spec!A122	Suspension start date
+PILA Pensioners Spec!B122	Fecha inicio de la suspensión
+PILA Pensioners Spec!C122	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D122	T2R2-060
+PILA Pensioners Spec!E122	Y
+PILA Pensioners Spec!F122	C
+PILA Pensioners Spec!G122	Optional where campo 29 = S; blank where the event is not reported.
+PILA Pensioners Spec!H122	Pos 490-499
+PILA Pensioners Spec!I122	10
+PILA Pensioners Spec!J122	A(10) - date AAAA-MM-DD
+PILA Pensioners Spec!L122	Pension.Suspension_Start_Date
+PILA Pensioners Spec!M122	Format AAAA-MM-DD; a valid date within the period being settled. Source: AT3 v15 §2.2.1 campo 60, pp. 38-39.
+PILA Pensioners Spec!N122	Y
+PILA Pensioners Spec!O122	-
+PILA Pensioners Spec!P122	Not an amount - no rounding.
+PILA Pensioners Spec!Q122	N
+PILA Pensioners Spec!R122	Date
+PILA Pensioners Spec!S122	Monthly
+PILA Pensioners Spec!A123	Suspension end date
+PILA Pensioners Spec!B123	Fecha fin de la suspensión
+PILA Pensioners Spec!C123	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D123	T2R2-061
+PILA Pensioners Spec!E123	Y
+PILA Pensioners Spec!F123	C
+PILA Pensioners Spec!G123	Optional where campo 29 = S; blank where the event is not reported.
+PILA Pensioners Spec!H123	Pos 500-509
+PILA Pensioners Spec!I123	10
+PILA Pensioners Spec!J123	A(10) - date AAAA-MM-DD
+PILA Pensioners Spec!L123	Pension.Suspension_End_Date
+PILA Pensioners Spec!M123	Format AAAA-MM-DD; a valid date within the period being settled. Source: AT3 v15 §2.2.1 campo 61, p. 39.
+PILA Pensioners Spec!N123	Y
+PILA Pensioners Spec!O123	-
+PILA Pensioners Spec!P123	Not an amount - no rounding.
+PILA Pensioners Spec!Q123	N
+PILA Pensioners Spec!R123	Date
+PILA Pensioners Spec!S123	Monthly
+PILA Pensioners Spec!A124	Corrections
+PILA Pensioners Spec!B124	Correcciones
+PILA Pensioners Spec!C124	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D124	T2R2-062
+PILA Pensioners Spec!E124	Y
+PILA Pensioners Spec!F124	C
+PILA Pensioners Spec!G124	Blank in planillas other than reliquidation; A or C in a reliquidation planilla.
+PILA Pensioners Spec!H124	Pos 510-510
+PILA Pensioners Spec!I124	1
+PILA Pensioners Spec!J124	A(1) - alphanumeric, left-justified, SPACE-filled to the right
+PILA Pensioners Spec!L124	Mercans.PILA_Correction_Line_Type
+PILA Pensioners Spec!M124	Blank for planillas other than 'L - Reliquidaciones'. A: the initial record. C: the adjusted record with the final value of the mesada, IBC or rate. In a V planilla each pensioner is reported in A records followed by C records, and the contribution settled is the difference C minus A. Source: AT3 v15 §2.2.1 campo 62, p. 39; §2.1.2.2, pp. 19-20.
+PILA Pensioners Spec!N124	Y
+PILA Pensioners Spec!O124	A / C / blank
+PILA Pensioners Spec!P124	Not an amount - no rounding.
+PILA Pensioners Spec!Q124	N
+PILA Pensioners Spec!R124	Code
+PILA Pensioners Spec!S124	Monthly
+PILA Pensioners Spec!A125	Total mesada value
+PILA Pensioners Spec!B125	Valor total de la mesada pensional
+PILA Pensioners Spec!C125	File Type 2 - Record 2 Pensioner detail
+PILA Pensioners Spec!D125	T2R2-063
+PILA Pensioners Spec!E125	Y
+PILA Pensioners Spec!F125	Y
+PILA Pensioners Spec!H125	Pos 511-519
+PILA Pensioners Spec!I125	9
+PILA Pensioners Spec!J125	N(9) - numeric, right-justified, ZERO-filled to the left
+PILA Pensioners Spec!K125	003500000
+PILA Pensioners Spec!L125	Pension.Total_Monthly_Amount (= Pension.Monthly_Amount, WT 62154, where the pension is not shared)
+PILA Pensioners Spec!M125	Mandatory for all pension types. The sum of the shared mesadas, or of the mesadas received in Colombia and in the other paying country, or of the amounts of all beneficiaries of a survivor or substitution pension. The information operator uses it to select the health rate (Ley 100 de 1993 art. 204 par. 5) and the Fondo de Solidaridad Pensional subsistence rate (Ley 100 de 1993 art. 27) for pension types 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16 and 20. For types 1, 8, 10, 13, 16 and 20 not shared, and for types 9, 12, 15 and 21, it equals campo 58. Where fewer than 30 days are reported because of an entry or withdrawal, the operator checks that it is at least the proportion of the SMLMV for the days reported. Source: AT3 v15 §2.2.1 campo 63, p. 39; §2.2.2.28, p. 64.
+PILA Pensioners Spec!N125	Y
+PILA Pensioners Spec!O125	-
+PILA Pensioners Spec!P125	Whole pesos (numeric field without decimals, AT3 v15 ch. 1 s.0, p. 7); the mesada is reported as paid.
+PILA Pensioners Spec!Q125	N
+PILA Pensioners Spec!R125	Amount
+PILA Pensioners Spec!S125	Monthly
+File Structure!A1	FILE STRUCTURE AND TECHNICAL SPECIFICATIONS
+File Structure!A2	═══ SUBMISSION FORMAT ═══
+File Structure!A3	Governing layout
+File Structure!B3	Res. MSPS 2388 de 2016, Anexo Técnico 3 'Aportes a Seguridad Social de Pensionados', version 15 dated 24-07-2026 (cited as AT3 v15), incorporating up to Res. MSPS 1529 de 2026.
+File Structure!A4	Channel
+File Structure!B4	Upload of the two fixed-width flat files into the web portal of a licensed information operator, or keying on the same portal. The pension payer never transacts directly with the government for these contributions.
+File Structure!A5	Electronic modality
+File Structure!B5	Pension payers with 20 or more pensioners self-settle and pay through the electronic planilla (Decreto 780 de 2016 art. 3.2.3.9).
+File Structure!A6	Payer listing
+File Structure!B6	Planilla types P, R, L and V require the payer to appear in the Ministry file 'INFORMACIÓN PAGADORES DE PENSIONES' (AT3 v15 §2.1.2.2, pp. 16-20).
+File Structure!A7	Operator upload wrapper
+File Structure!B7	The two files below follow the official annex position by position. Each operador's upload wrapper and any additional validations it applies are published by the operador and held in the information-operator configuration for the operador the payer has chosen.
+File Structure!A8	═══ FILE FORMAT ═══
+File Structure!A9	File type
+File Structure!B9	Two fixed-width flat text files, one record per line: File Type 1 'Datos generales del pagador de pensiones' and File Type 2 'Información planilla integrada' (AT3 v15 ch. 1 s.0, p. 7).
+File Structure!A10	Numeric fields (tipo N)
+File Structure!B10	Right-justified, ZERO-filled to the left (AT3 v15 ch. 1 s.0, p. 7; §2, p. 13).
+File Structure!A11	Alphanumeric fields (tipo A)
+File Structure!B11	Left-justified, SPACE-filled to the right (AT3 v15 ch. 1 s.0, p. 7; §2, p. 13).
+File Structure!A12	Record lengths
+File Structure!B12	File Type 1 = 482 positions. File Type 2 Record Type 1 = 285 positions. File Type 2 Record Type 2 = 519 positions. All three equal the printed totals of AT3 v15 (pp. 11, 16, 39).
+File Structure!A13	Rounding
+File Structure!B13	The contribution base (IBC, campo 39) is rounded UP to the whole peso and each contribution value is rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5, text of Decreto 1990 de 2016 art. 1). AT3 v15 requires the rounding rules in force in campos 41, 42, 45, 46, 47, 49 and 52 (pp. 53, 59-63).
+File Structure!A14	Rate fields
+File Structure!B14	Campos 40, 48 and 51 are numeric, seven positions. AT3 v15 prints the decimal layout for campo 51: decimal, left-justified, zeros to the right, 2.0% = 0.02000 (p. 63). The layout of every rate field is held in the file-format configuration as published by the chosen information operator.
+File Structure!A15	Registration update
+File Structure!B15	The pension payer updates its File Type 1 data with the information operator in July and January, before settling the planilla of that month; the operator notifies a payer that has not updated at least two months in advance (AT3 v15 pp. 11-12).
+File Structure!A16	═══ RECORD STRUCTURE ═══
+File Structure!A17	File Type 1
+File Structure!B17	Datos generales del pagador de pensiones. 27 campos, positions 1 to 482. ONE record per payer (or per branch where the form of presentation is S). Sent with every payment and reported to the Fondo de Solidaridad Pensional and the administradoras (AT3 v15 §1, p. 7).
+File Structure!A18	File Type 2, Record Type 1
+File Structure!B18	Encabezado. 18 campos, positions 1 to 285. ONE record per planilla, and it is the first record. Identified by record type 01 in positions 1-2 (AT3 v15 §2.1, p. 14).
+File Structure!A19	File Type 2, Record Type 2
+File Structure!B19	Liquidación detallada de aportes. 63 campos, positions 1 to 519. At least ONE record PER PENSIONER, and one record per pension type where a beneficiary holds two types of pension; one extra record per additional UPC beneficiary (pensioner type 9). Identified by record type 02, sequence from 0000001 in positions 3-9 (AT3 v15 §2.2, p. 21; §2.2.2.4, p. 49).
+File Structure!A20	Records Type 3 to 7
+File Structure!B20	TOTALS RECORDS GENERATED BY THE OPERADOR, never sent by the payer: type 3 total pension contributions; type 4 Fondo de Solidaridad Pensional subsistence subaccount; type 5 health; type 6 family compensation funds; type 7 total payable for the period (AT3 v15 ch. 2, pp. 65-72).
+File Structure!A21	═══ SECTION LAYOUT - FILE TYPE 1 (27 CAMPOS, 482 POSICIONES) ═══
+File Structure!A22	Positions
+File Structure!B22	1 Nombre o razón social del pagador de pensiones (1-150) | 2 Tipo documento del pagador de pensiones (151-152) | 3 Número de identificación del pagador de pensiones (153-168) | 4 Dígito de verificación (169) | 5 Código de la sucursal o dependencia (170-179) | 6 Nombre de la sucursal o dependencia (180-219) | 7 Clase de pagador de pensiones (220) | 8 Naturaleza jurídica (221) | 9 Tipo persona (222) | 10 Forma de presentación (223) | 11 Dirección correspondencia (224-263) | 12 Código ciudad o municipio (264-266) | 13 Código departamento (267-268) | 14 Código DANE de la actividad económica (269-272) | 15 Teléfono (273-282) | 16 Fax (283-292) | 17 Dirección de correo electrónico (E-mail) (293-352) | 18 Número de identificación del representante legal (353-368) | 19 Dígito de verificación representante legal (369) | 20 Tipo identificación representante legal (370-371) | 21 Primer apellido del representante legal (372-391) | 22 Segundo apellido del representante legal (392-421) | 23 Primer nombre del representante legal (422-441) | 24 Segundo nombre del representante legal (442-471) | 25 Código del operador (472-473) | 26 Período de pago (474-480) | 27 Tipo de pagador de pensiones (481-482)
+File Structure!A23	═══ SECTION LAYOUT - FILE TYPE 2, RECORD TYPE 1 (18 CAMPOS, 285 POSICIONES) ═══
+File Structure!A24	Positions
+File Structure!B24	1 Tipo de registro (1-2) | 2 Secuencia (3-7) | 3 Nombre o razón social del pagador de pensiones (8-157) | 4 Tipo documento del pagador de pensiones (158-159) | 5 Número de identificación del pagador de pensiones (160-175) | 6 Dígito de verificación (176) | 7 Forma de presentación (177) | 8 Código de la sucursal o de la dependencia (178-187) | 9 Nombre de la sucursal o dependencia (188-227) | 10 Período de pago para los sistemas diferentes al de salud (228-234) | 11 Período de pago para el sistema de salud (235-241) | 12 Número de radicación o de la planilla integrada de liquidación de aportes (242-251) | 13 Fecha de pago (aaaa-mm-dd) (252-261) | 14 Número total de pensionados (262-268) | 15 Valor total de la nómina (269-280) | 16 Tipo de pagador de pensiones (281-282) | 17 Código del operador de información (283-284) | 18 Tipo de planilla pensionado (285)
+File Structure!A25	═══ SECTION LAYOUT - FILE TYPE 2, RECORD TYPE 2 (63 CAMPOS, 519 POSICIONES) ═══
+File Structure!A26	Positions
+File Structure!B26	1 Tipo de registro (1-2) | 2 Secuencia (3-9) | 3 Primer apellido del pensionado (10-29) | 4 Segundo apellido del pensionado (30-59) | 5 Primer nombre del pensionado (60-79) | 6 Segundo nombre del pensionado (80-109) | 7 Tipo documento del pensionado (110-111) | 8 Número de identificación del pensionado (112-127) | 9 Tipo de pensión (128-129) | 10 Pensión compartida (130) | 11 Primer apellido del causante (131-150) | 12 Segundo apellido del causante (151-180) | 13 Primer nombre del causante (181-200) | 14 Segundo nombre del causante (201-230) | 15 Tipo de identificación del causante de la pensión (231-232) | 16 Número de identificación del causante (233-248) | 17 Tipo de pensionado (249) | 18 Pensionado en el exterior (250) | 19 Código del departamento de residencia (251-252) | 20 Código del municipio de residencia (253-255) | 21 Pensionado cuyo pago se sitúa en el exterior (256) | 22 ING: Ingreso (257) | 23 RET: Retiro (258) | 24 TDE: Traslado desde otra EPS o EOC (259) | 25 TAE: Traslado a otra EPS (260) | 26 TDP: Traslado desde otra Administradora de Pensiones (261) | 27 TAP: Traslado a otra Administradora de Pensiones (262) | 28 VSP: Variación permanente de la mesada pensional (263) | 29 SUS: Suspensión (264) | 30 Código de la Administradora de Pensiones o de la ACCAI a la cual se encuentra vinculado el pensionado cotizante (265-270) | 31 Código de la Administradora de Pensiones a la cual se traslada el pensionado cotizante (271-276) | 32 Código EPS o EOC a la cual pertenece el afiliado (277-282) | 33 Código EPS o EOC a la cual se traslada el afiliado (283-288) | 34 Código CCF a la que pertenece el pensionado afiliado (289-294) | 35 Número de días cotizados a pensión (295-296) | 36 Número días cotizados al Fondo de Solidaridad Pensional (297-298) | 37 Número de días cotizados a salud (299-300) | 38 Número de días cotizados a Cajas de Compensación (301-302) | 39 Ingreso Base de Cotización (303-311) | 40 Tarifa de aportes a pensión (312-318) | 41 Cotización obligatoria a pensiones (319-327) | 42 Cotización voluntaria del afiliado al Fondo de Pensiones Obligatoria (328-336) | 43 Total cotización (337-345) | 44 Valor no retenido por aportes voluntarios (346-354) | 45 Aportes a Fondo de solidaridad pensional - Subcuenta de solidaridad (355-364) | 46 Aportes a Fondo de Solidaridad Pensional - Subcuenta de Subsistencia (365-374) | 47 Aportes a Fondo de Solidaridad Pensional - Subcuenta de Subsistencia (375-381) | 48 Tarifa de aportes a Salud (382-388) | 49 Cotización obligatoria a salud (389-397) | 50 Valor de la UPC adicional (398-406) | 51 Tarifa de aportes CCF (407-413) | 52 Valor aporte CCF (414-422) | 53 Tipo de documento del cotizante principal (423-424) | 54 Número de identificación del cotizante principal (425-440) | 55 Fecha de ingreso (441-450) | 56 Fecha de retiro (451-460) | 57 Fecha inicio VSP (461-470) | 58 Valor de mesada pensional (471-479) | 59 Fecha radicación en el exterior (480-489) | 60 Fecha inicio de la suspensión (490-499) | 61 Fecha fin de la suspensión (500-509) | 62 Correcciones (510) | 63 Valor total de la mesada pensional (511-519)
+File Structure!A27	═══ INBOUND - OPERATOR SETTLEMENT ═══
+File Structure!A28	What comes back
+File Structure!B28	The operador assigns the planilla number (T2R1-012) and the payment date (T2R1-013), generates the totals records types 3 to 7, and rejects a planilla that fails the ch. 4 coherence rules (R01 to R6), informing the payer of the error (AT3 v15 ch. 2, pp. 65-72; ch. 4, pp. 99-108).
+Field Options!A1	FIELD OPTIONS - CODE TABLES
+Field Options!A2	Code
+Field Options!B2	Abbrev
+Field Options!C2	Local (ES)
+Field Options!D2	EN Description
+Field Options!A3	═══ DOCUMENT TYPE OF THE PENSION PAYER (A1-002) ═══
+Field Options!A4	NI
+Field Options!B4	NIT
+Field Options!C4	Número de identificación Tributaria
+Field Options!D4	Tax identification number; the value for a legal-person payer.
+Field Options!A5	CC
+Field Options!B5	CC
+Field Options!C5	Cédula de ciudadanía
+Field Options!D5	Citizenship card.
+Field Options!A6	CE
+Field Options!B6	CE
+Field Options!C6	Cédula de extranjería
+Field Options!D6	Foreigner's identity card.
+Field Options!A7	PA
+Field Options!B7	PA
+Field Options!C7	Pasaporte
+Field Options!D7	Passport.
+Field Options!A8	CD
+Field Options!B8	CD
+Field Options!C8	Carné diplomático
+Field Options!D8	Diplomatic card.
+Field Options!A9	═══ PENSION PAYER CLASS (A1-007) ═══
+Field Options!A10	A
+Field Options!B10	200+
+Field Options!C10	Pagador de pensiones con 200 o más pensionados
+Field Options!D10	200 or more pensioners, counted across all branches or dependencies (AT3 v15 §1.2.1, p. 12).
+Field Options!A11	B
+Field Options!B11	<200
+Field Options!C11	Pagador de pensiones con menos de 200 pensionados
+Field Options!D11	Fewer than 200 pensioners, counted across all branches or dependencies.
+Field Options!A12	I
+Field Options!B12	IND
+Field Options!C12	Independiente
+Field Options!D12	The pension payer is a natural person.
+Field Options!A13	═══ LEGAL NATURE (A1-008) ═══
+Field Options!A14	1
+Field Options!B14	PUB
+Field Options!C14	Pública
+Field Options!D14	Legal person of public law.
+Field Options!A15	2
+Field Options!B15	PRIV
+Field Options!C15	Privada
+Field Options!D15	Natural or legal person of private law.
+Field Options!A16	3
+Field Options!B16	MIX
+Field Options!C16	Mixta
+Field Options!D16	Sociedad de economía mixta (Ley 489 de 1998 art. 97).
+Field Options!A17	═══ PERSON TYPE (A1-009) ═══
+Field Options!A18	N
+Field Options!B18	NAT
+Field Options!C18	Natural
+Field Options!D18	Natural person responsible for the contributions of its pensioners.
+Field Options!A19	J
+Field Options!B19	JUR
+Field Options!C19	Jurídica
+Field Options!D19	Legal person responsible for the contributions of its pensioners. Makes A1-004, A1-018 and A1-020 mandatory.
+Field Options!A20	═══ FORM OF PRESENTATION (A1-010) ═══
+Field Options!A21	U
+Field Options!B21	UNI
+Field Options!C21	Único
+Field Options!D21	One planilla for the whole payer; branch code and name blank.
+Field Options!A22	S
+Field Options!B22	SUC
+Field Options!C22	Sucursal
+Field Options!D22	Planilla per branch or dependency; branch code and name mandatory.
+Field Options!A23	═══ DOCUMENT TYPE OF THE LEGAL REPRESENTATIVE (A1-020) ═══
+Field Options!A24	CC
+Field Options!B24	CC
+Field Options!C24	Cédula de ciudadanía
+Field Options!D24	Citizenship card.
+Field Options!A25	CE
+Field Options!B25	CE
+Field Options!C25	Cédula de extranjería
+Field Options!D25	Foreigner's identity card.
+Field Options!A26	PA
+Field Options!B26	PA
+Field Options!C26	Pasaporte
+Field Options!D26	Passport.
+Field Options!A27	CD
+Field Options!B27	CD
+Field Options!C27	Carné diplomático
+Field Options!D27	Diplomatic card.
+Field Options!A28	═══ PENSION PAYER TYPE (A1-027, T2R1-016) ═══
+Field Options!A29	01
+Field Options!B29	EMP
+Field Options!C29	Empleador
+Field Options!D29	Public or private companies or natural persons that pay the pensions of their workers. The type this report covers.
+Field Options!A30	02
+Field Options!B30	ADM
+Field Options!C30	Administrador de pensiones
+Field Options!D30	Administradoras of the Régimen de Prima Media and of the Régimen de Ahorro Individual. Outside this report.
+Field Options!A31	03
+Field Options!B31	PAG
+Field Options!C31	Pagador de pensiones
+Field Options!D31	Entities paying pensions recognised by public-sector entities, or foreign pensioners resident in Colombia under international agreements. Outside this report.
+Field Options!A32	04
+Field Options!B32	REE
+Field Options!C32	Pensiones de entidades de los regímenes especial y de excepción
+Field Options!D32	Entities of the special and exception regimes (Ley 100 de 1993 art. 279; Ley 1643 de 2013). Outside this report.
+Field Options!A33	═══ PENSIONER PLANILLA TYPE (T2R1-018) ═══
+Field Options!A34	P
+Field Options!B34	NORMAL
+Field Options!C34	Planilla pago normal pagadores de pensiones
+Field Options!D34	Main planilla for the monthly contributions. Valid with pensioner types 1 to 9 (R04).
+Field Options!A35	R
+Field Options!B35	RETRO
+Field Options!C35	Planilla pago retroactivo
+Field Options!D35	Retroactive contributions while the recognition of a pension was outstanding. Valid with pensioner types 1 to 8.
+Field Options!A36	L
+Field Options!B36	RELIQ
+Field Options!C36	Planilla pago reliquidación periodos anteriores a enero de 2020
+Field Options!D36	Reliquidation of the mesada for periods before January 2020. Valid with pensioner types 1 to 8.
+Field Options!A37	V
+Field Options!B37	RELIQ20
+Field Options!C37	Planilla pago reliquidación enero de 2020 en adelante
+Field Options!D37	Reliquidation from January 2020, A and C records, one planilla per reliquidated period.
+Field Options!A38	C
+Field Options!B38	TERR
+Field Options!C38	Planilla pago aportes a pensión a cargo de entidades territoriales por un tercero
+Field Options!D38	Only the entity authorised by the National Government; an employer payer does not use it.
+Field Options!A39	═══ DOCUMENT TYPE OF THE PENSIONER (T2R2-007, T2R2-015, T2R2-053) ═══
+Field Options!A40	CC
+Field Options!B40	CC
+Field Options!C40	Cédula de ciudadanía
+Field Options!D40	Citizenship card.
+Field Options!A41	CE
+Field Options!B41	CE
+Field Options!C41	Cédula de extranjería
+Field Options!D41	Foreigner's identity card.
+Field Options!A42	TI
+Field Options!B42	TI
+Field Options!C42	Tarjeta de identidad
+Field Options!D42	Identity card of a minor.
+Field Options!A43	RC
+Field Options!B43	RC
+Field Options!C43	Registro civil
+Field Options!D43	Civil registry.
+Field Options!A44	PA
+Field Options!B44	PA
+Field Options!C44	Pasaporte
+Field Options!D44	Passport.
+Field Options!A45	CD
+Field Options!B45	CD
+Field Options!C45	Carné diplomático
+Field Options!D45	Diplomatic card.
+Field Options!A46	PE
+Field Options!B46	PEP
+Field Options!C46	Permiso Especial de Permanencia
+Field Options!D46	May not be used for health contribution periods from September 2023 onwards.
+Field Options!A47	PT
+Field Options!B47	PPT
+Field Options!C47	Permiso por Protección Temporal
+Field Options!D47	Temporary protection permit.
+Field Options!A48	═══ PENSION TYPE (T2R2-009) - VALID FOR PAYER TYPE 01 (R02) AND SUBSYSTEMS (R6) ═══
+Field Options!A49	2
+Field Options!B49	SVRC
+Field Options!C49	Sobrevivencia vitalicia riesgo común
+Field Options!D49	Life survivor pension, common risk. Health X, pension -, CCF O.
+Field Options!A50	3
+Field Options!B50	STRC
+Field Options!C50	Sobrevivencia temporal riesgo común
+Field Options!D50	Temporary survivor pension, common risk. Health X, pension -, CCF O.
+Field Options!A51	4
+Field Options!B51	STRC30
+Field Options!C51	Sobrevivencia temporal riesgo común. Cónyuge o compañera (o) menor de 30 años sin hijos
+Field Options!D51	Temporary survivor pension of a spouse or partner under 30 without children. Health X, pension X, CCF O.
+Field Options!A52	8
+Field Options!B52	INVRC
+Field Options!C52	Invalidez riesgo común
+Field Options!D52	Disability pension, common risk. Health X, pension -, CCF O.
+Field Options!A53	10
+Field Options!B53	JUB
+Field Options!C53	Jubilación
+Field Options!D53	Retirement pension recognised by the employer. Health X, pension -, CCF O. Pensioner type 5, 6, 7 or 8 (R03).
+Field Options!A54	11
+Field Options!B54	JUBC
+Field Options!C54	Jubilación para compartir
+Field Options!D54	Retirement pension to be shared with the Régimen de Prima Media. Health X, pension X, CCF O.
+Field Options!A55	12
+Field Options!B55	SAN
+Field Options!C55	Sanción
+Field Options!D55	Pension for the employer's omission to affiliate (Ley 100 de 1993 art. 133). Health X, pension O, CCF O.
+Field Options!A56	13
+Field Options!B56	CONV
+Field Options!C56	Convencional
+Field Options!D56	Collective-agreement pension recognised up to 31 July 2010. Health X, pension -, CCF O. Pensioner type 5 or 6 (R03).
+Field Options!A57	14
+Field Options!B57	CONVC
+Field Options!C57	Convencional para compartir
+Field Options!D57	Collective-agreement pension to be shared. Health X, pension X, CCF O.
+Field Options!A58	20
+Field Options!B58	SENT
+Field Options!C58	Sentencia judicial
+Field Options!D58	Granted by a court decision; contributions as the decision states. Health X, pension O, CCF O.
+Field Options!A59	21
+Field Options!B59	CONC
+Field Options!C59	Conciliaciones
+Field Options!D59	Granted by a conciliation. Health X, pension O, CCF O.
+Field Options!A60	═══ PENSIONER TYPE (T2R2-017) - VALID FOR PAYER TYPE 01 (R01) ═══
+Field Options!A61	5
+Field Options!B61	EMP25
+Field Options!C61	Pensionado por el empleador, con tope máximo de pensión de 25 SMLMV
+Field Options!D61	Employer pensioner; mesada capped at 25 SMMLV.
+Field Options!A62	6
+Field Options!B62	EMPSIN
+Field Options!C62	Pensionado por el empleador, sin tope máximo de pensión
+Field Options!D62	Employer pensioner; mesada may exceed 25 SMMLV, health contribution on at most 25 SMLMV.
+Field Options!A63	9
+Field Options!B63	UPC
+Field Options!C63	Beneficiario UPC adicional
+Field Options!D63	Additional UPC beneficiary record; excluded from the header count and payroll total.
+Field Options!A64	═══ HEALTH RATE OF PENSIONERS (T2R2-048), SELECTED ON T2R2-063 ═══
+Field Options!A65	1 SMLMV
+Field Options!B65	4%
+Field Options!C65	Mesada pensional de 1 SMLMV
+Field Options!D65	4% for periods from January 2022 (8% in 2020-2021) (Ley 100 de 1993 art. 204 par. 5; Res. MSPS 1271 de 2023 art. 1 nums. 3 to 5).
+Field Options!A66	> 1 to 3 SMLMV
+Field Options!B66	10%
+Field Options!C66	> 1 SMLMV y hasta 3 SMLMV
+Field Options!D66	10% for periods from January 2024 (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1 num. 5). For periods 2020-2023 the 10% band is more than 1 and up to 2 SMLMV.
+Field Options!A67	> 3 SMLMV
+Field Options!B67	12%
+Field Options!C67	> 3 SMLMV
+Field Options!D67	12% for periods from January 2024 (same sources). For periods 2020-2023 the 12% band starts above 2 SMLMV.
+Field Options!A68	Abroad (campo 18 = X)
+Field Options!B68	0%
+Field Options!C68	Pensionado residente en el exterior
+Field Options!D68	0% for periods after December 2015 (AT3 v15 ch. 4 §9, p. 113).
+Field Options!A69	═══ FONDO DE SOLIDARIDAD PENSIONAL - PENSIONERS (T2R2-047), SELECTED ON T2R2-063 ═══
+Field Options!A70	<= 10 SMLMV
+Field Options!B70	0%
+Field Options!C70	Mesada hasta 10 SMLMV
+Field Options!D70	No contribution; campo 47 zero.
+Field Options!A71	> 10 to 20 SMLMV
+Field Options!B71	1%
+Field Options!C71	Mesada superior a 10 y hasta 20 SMLMV
+Field Options!D71	1% of campo 58 (Ley 797 de 2003 art. 8; AT3 v15 §2.2.2.21).
+Field Options!A72	> 20 SMLMV
+Field Options!B72	2%
+Field Options!C72	Mesada superior a 20 SMLMV
+Field Options!D72	2% of campo 58.
+Field Options!A73	═══ CHANGE EVENTS (T2R2-022, 023, 028, 029, 062) ═══
+Field Options!A74	ING X / C
+Field Options!B74	ING
+Field Options!C74	Ingreso
+Field Options!D74	X entry to all subsystems; C entry to the family compensation fund only.
+Field Options!A75	RET X / P / C
+Field Options!B75	RET
+Field Options!C75	Retiro
+Field Options!D75	X withdrawal from all subsystems; P from pensions only (types 4, 7, 11, 14); C from the CCF only.
+Field Options!A76	VSP X
+Field Options!B76	VSP
+Field Options!C76	Variación permanente de la mesada pensional
+Field Options!D76	Permanent increase of the mesada; not with SUS.
+Field Options!A77	SUS S
+Field Options!B77	SUS
+Field Options!C77	Suspensión
+Field Options!D77	Mesada suspended; mesada and IBC zero, days = days of suspension.
+Field Options!A78	Correcciones A / C
+Field Options!B78	CORR
+Field Options!C78	Correcciones
+Field Options!D78	A initial record, C adjusted record, in reliquidation planillas.
+Population Rules!A1	POPULATION RULES - HOW TO FILL EACH FIELD FROM PAYROLL
+Population Rules!A2	Field Name
+Population Rules!B2	Source System
+Population Rules!C2	Population Logic
+Population Rules!D2	Edge Cases
+Population Rules!A3	═══ WHO IS REPORTED ═══
+Population Rules!A4	Population of Record Type 2
+Population Rules!B4	Payroll engine
+Population Rules!C4	One detail record per pensioner whose pension the employer pays directly (pension WT 62154) and per pension type held, for every month the pension is in force, plus one pensioner type 9 record per additional UPC beneficiary. The employer files as pension payer type 01; the pensioner type is 5 (mesada capped at 25 SMMLV) or 6 (no cap) (AT3 v15 §2.2, p. 21; ch. 4 §1, pp. 99-101).
+Population Rules!D4	Employees, including employed pensioners in active service, go in CO-PILA-003. Instalments of a retirement bonus are not a pension and have no record. A suspended mesada is still reported, with SUS = S.
+Population Rules!A5	Payer listing prerequisite
+Population Rules!B5	Configuration
+Population Rules!C5	Before the first planilla P, R, L or V, the payer must appear in the Ministry file 'INFORMACIÓN PAGADORES DE PENSIONES' (monthly, operator FTP). Where it does not, it requests inclusion from the Subdirección de Pensiones y Otras Prestaciones of the Ministry of Health (AT3 v15 §2.1.2.2, pp. 16-20).
+Population Rules!D5	The listing is held by the Ministry and the operator; the engine records the payer's listing status as configuration and does not produce the planilla without it.
+Population Rules!A6	═══ MANDATORY FIELD RULES ═══
+Population Rules!A7	Mesada and total mesada (T2R2-058, T2R2-063)
+Population Rules!B7	Payroll engine
+Population Rules!C7	Campo 58 = the mesada of the month (WT 62154), uncapped. Campo 63 = the total mesada: equal to campo 58 for a pension that is not shared (types 10 and 13 included); the sum of the shared amounts, of the Colombian and foreign mesadas, or of all survivor beneficiaries otherwise (AT3 v15 §2.2.2.27-28, p. 64).
+Population Rules!D7	Campo 63 drives the health band and the FSP factor; campo 58 is the base of the FSP and CCF amounts. Keep the two separate even where they are equal.
+Population Rules!A8	Contribution base (T2R2-039)
+Population Rules!B8	Payroll engine
+Population Rules!C8	IBC = mesada, capped at 25 SMLMV, rounded UP to the whole peso (AT3 v15 §2.2.2.13, p. 52; Decreto 780 de 2016 arts. 2.2.1.1.2.1 and 3.2.1.5).
+Population Rules!D8	Minimum 1 SMLMV for pension types 10 and 13 (AT3 v15 ch. 4 §7, pp. 108-109). Zero with SUS = S and for pensioner type 9.
+Population Rules!A9	Health rate and contribution (T2R2-048, T2R2-049)
+Population Rules!B9	Payroll engine
+Population Rules!C9	Select the rate on campo 63 for the contribution period: from January 2024 a mesada of 1 SMLMV 4%; more than 1 and up to 3 SMLMV 10%; more than 3 SMLMV 12% (Ley 100 de 1993 art. 204 par. 5 with Ley 2294 de 2023 art. 78; Res. MSPS 1271 de 2023 art. 1); periods 2020-2023 as in T2R2-048. Campo 49 = campo 48 x campo 39, rounded UP to the next multiple of 100. The amount is the sum of the health WTs 21645 / 21646 / 21647 withheld from the mesada.
+Population Rules!D9	Pensioner abroad (campo 18 = X): rate 0% and contribution zero. With fewer than 30 days (ING / RET), the operator checks campo 63 against the proportion of the SMLMV for the days reported (AT3 v15 p. 64).
+Population Rules!A10	Fondo de Solidaridad Pensional (T2R2-036, T2R2-047)
+Population Rules!B10	Payroll engine
+Population Rules!C10	Where campo 63 exceeds 10 SMLMV: campo 47 = campo 58 x 1% (more than 10 and up to 20 SMLMV) or x 2% (more than 20 SMLMV), rounded UP to the next multiple of 100; campo 36 = days (30 for a full month). The amount is the sum of the FSP WTs 21643 / 21648 / 21644 (AT3 v15 §2.2.2.21, pp. 61-62; Ley 797 de 2003 art. 8).
+Population Rules!D10	Several pensions of one beneficiary in the same planilla: the factor follows the sum of campo 63 and applies to each campo 58. Campos 45 and 46 stay zero for pension types 10 and 13; the operator liquidates them only for the contributing types.
+Population Rules!A11	Days (T2R2-035 to T2R2-038)
+Population Rules!B11	Payroll engine
+Population Rules!C11	30 for a full month whatever its calendar length; fewer only with ING or RET. Health days mandatory; pension days only for the contributing pension types; FSP days where the mesada exceeds 10 SMLMV; CCF days where a CCF is reported (AT3 v15 §2.2.2.10-12, pp. 51-52).
+Population Rules!D11	Health days zero only with campo 18 = X; 30 for a pensioner type 9 record.
+Population Rules!A12	═══ CRITICAL VALIDATION RULES ═══
+Population Rules!A13	Header-to-detail consistency
+Population Rules!B13	Engine (validation)
+Population Rules!C13	T2R1-003 to T2R1-009 equal File Type 1 campos 1, 2, 3, 4, 10, 5 and 6; T2R1-016 equals A1-027; T2R1-017 equals A1-025. T2R1-014 = number of pensioners in Record Type 2 excluding pensioner type 9; T2R1-015 = sum of campo 58 excluding pensioner type 9 (AT3 v15 §2.1.1, pp. 14-15).
+Population Rules!D13	The type 9 exclusion applies to both the count and the payroll total.
+Population Rules!A14	Coherence tables R01 to R6
+Population Rules!B14	Engine (validation)
+Population Rules!C14	Before submission check: pensioner type against payer type 01 (5, 6, 9); pension type against payer type 01 (2, 3, 4, 8, 10, 11, 12, 13, 14, 20, 21); pension type against pensioner type (R03); planilla type against pensioner type (R04); change events against pension type (table 8); subsystems against pension type (R6) (AT3 v15 ch. 4 §1-6, pp. 99-108).
+Population Rules!D14	A combination outside these tables makes the operator reject the whole planilla.
+Population Rules!A15	Payer and pensioner identities differ
+Population Rules!B15	Engine (validation)
+Population Rules!C15	The pensioner's document type and number must differ from the payer's (AT3 v15 p. 39).
+Population Rules!D15	The exception for pension type 16 (foreign pensioners under international agreements) does not arise for payer type 01.
+Population Rules!A16	Change event to date interlock
+Population Rules!B16	Engine (validation)
+Population Rules!C16	ING with campo 55, RET with campo 56, VSP with campo 57, SUS with campos 60-61; each date must fall within the period settled. TDE, TAE, TDP, TAP and campos 31 and 33 are always blank (AT3 v15 §2.2.1, pp. 29-39).
+Population Rules!D16	VSP and SUS are not reported together.
+Population Rules!A17	═══ AMOUNT FORMAT RULES ═══
+Population Rules!A18	Rounding is UP
+Population Rules!B18	Engine (formatting)
+Population Rules!C18	IBC rounded UP to the whole peso; each contribution (campos 41, 42, 45, 46, 47, 49, 52) rounded UP to the next multiple of 100 (Decreto 780 de 2016 art. 3.2.1.5, text of Decreto 1990 de 2016 art. 1).
+Population Rules!D18	Reconcile with payroll on unrounded values with a tolerance of 100 pesos per contribution.
+Population Rules!A19	Numeric and alphanumeric justification
+Population Rules!B19	Engine (formatting)
+Population Rules!C19	Numeric fields right-justified and zero-filled; alphanumeric fields left-justified and space-filled (AT3 v15 ch. 1 s.0, p. 7).
+Population Rules!D19	An empty numeric field is a run of zeros, an empty alphanumeric field a run of spaces.
+Example Analysis!A1	EXAMPLE ANALYSIS - SAMPLE RECORDS PARSED FIELD BY FIELD
+Example Analysis!A2	Raw Value
+Example Analysis!B2	Field Name
+Example Analysis!C2	Interpretation
+Example Analysis!D2	Notes
+Example Analysis!A3	═══ WORKED EXAMPLE - MARCH 2026 PLANILLA P, TWO PENSIONERS ═══
+Example Analysis!A4	(scenario)
+Example Analysis!B4	Pension payer
+Example Analysis!C4	MERCANS COLOMBIA S.A.S., NIT 900123456-8, private legal person, pension payer type 01 Empleador, class B (fewer than 200 pensioners), single planilla (U), Bogotá D.C.
+Example Analysis!D4	Synthetic payer and data. SMLMV 2026 = COP 1,750,905 (Decreto 0159 de 2026); 3 SMLMV = 5,252,715; 10 SMLMV = 17,509,050; 20 SMLMV = 35,018,100; 25 SMLMV = 43,772,625.
+Example Analysis!A5	(scenario)
+Example Analysis!B5	Pensioner 1
+Example Analysis!C5	Synthetic pensioner, CC 1000000001, pension type 10 Jubilación, pensioner type 5, mesada COP 3,500,000, full month.
+Example Analysis!D5	Mesada of 2.0 SMLMV: health band more than 1 and up to 3 SMLMV = 10%; no FSP (not above 10 SMLMV).
+Example Analysis!A6	(scenario)
+Example Analysis!B6	Pensioner 2
+Example Analysis!C6	Synthetic pensioner, CC 1000000002, pension type 13 Convencional, pensioner type 5, mesada COP 22,000,000, full month.
+Example Analysis!D6	Mesada of 12.6 SMLMV: health 12% (more than 3 SMLMV); FSP 1% (more than 10 and up to 20 SMLMV); IBC below 25 SMLMV, so no cap.
+Example Analysis!A7	═══ FILE TYPE 1 AND HEADER - KEY FIELDS ═══
+Example Analysis!A8	NI / 900123456 / 8
+Example Analysis!B8	A1-002 / A1-003 / A1-004
+Example Analysis!C8	Payer document type, number and verification digit.
+Example Analysis!D8	The DV is mandatory because A1-009 = J; all three are echoed into T2R1-004 to T2R1-006.
+Example Analysis!A9	B
+Example Analysis!B9	A1-007 - Clase de pagador de pensiones
+Example Analysis!C9	Fewer than 200 pensioners, counted across all branches.
+Example Analysis!D9	A payer with 200 or more pensioners reports A.
+Example Analysis!A10	01
+Example Analysis!B10	A1-027 / T2R1-016 - Tipo de pagador de pensiones
+Example Analysis!C10	Empleador.
+Example Analysis!D10	Restricts the pensioner type to 5, 6, 9 and the pension type to the R02 list.
+Example Analysis!A11	2026-03 / 2026-03
+Example Analysis!B11	T2R1-010 / T2R1-011
+Example Analysis!C11	Period for pension and CCF; period for health.
+Example Analysis!D11	Both supplied by the payer in aaaa-mm format.
+Example Analysis!A12	0000002
+Example Analysis!B12	T2R1-014 - Número total de pensionados
+Example Analysis!C12	Two pensioners.
+Example Analysis!D12	Pensioner type 9 records would be excluded from the count.
+Example Analysis!A13	000025500000
+Example Analysis!B13	T2R1-015 - Valor total de la nómina
+Example Analysis!C13	3,500,000 + 22,000,000 = 25,500,000.
+Example Analysis!D13	Sum of campo 58, excluding pensioner type 9.
+Example Analysis!A14	P
+Example Analysis!B14	T2R1-018 - Tipo de planilla pensionado
+Example Analysis!C14	Monthly planilla.
+Example Analysis!D14	Requires the payer's listing in 'INFORMACIÓN PAGADORES DE PENSIONES'.
+Example Analysis!A15	═══ RECORD TYPE 2 - PENSIONER 2 ═══
+Example Analysis!A16	13 / N / 5
+Example Analysis!B16	T2R2-009 / T2R2-010 / T2R2-017
+Example Analysis!C16	Convencional, not shared, employer pensioner with the 25 SMMLV cap.
+Example Analysis!D16	R03 allows pension type 13 with pensioner types 5 and 6.
+Example Analysis!A17	00 / 30 / 30 / 00
+Example Analysis!B17	T2R2-035 to T2R2-038
+Example Analysis!C17	Days: pension 0, FSP 30, health 30, CCF 0.
+Example Analysis!D17	No pension contribution for type 13 (R6); FSP days because the mesada exceeds 10 SMLMV; no CCF.
+Example Analysis!A18	022000000
+Example Analysis!B18	T2R2-039 - IBC
+Example Analysis!C18	Mesada below 25 SMLMV, so IBC = mesada.
+Example Analysis!D18	Rounded up to the whole peso (already whole).
+Example Analysis!A19	0220000
+Example Analysis!B19	T2R2-047 - FSP subsistencia
+Example Analysis!C19	22,000,000 x 1% = 220,000.
+Example Analysis!D19	Factor chosen on campo 63 (12.6 SMLMV); fed by the FSP WTs 21643 / 21648 / 21644.
+Example Analysis!A20	0.12000 / 002640000
+Example Analysis!B20	T2R2-048 / T2R2-049
+Example Analysis!C20	Health 12% x 22,000,000 = 2,640,000.
+Example Analysis!D20	Already a multiple of 100; fed by the health WTs 21645 / 21646 / 21647.
+Example Analysis!A21	022000000 / 022000000
+Example Analysis!B21	T2R2-058 / T2R2-063
+Example Analysis!C21	Mesada and total mesada.
+Example Analysis!D21	Equal because the pension is not shared.
+Sample File!A1	SAMPLE FILE - FIXED-WIDTH RECORDS GENERATED FROM THE OFFICIAL POSITION TABLE
+Sample File!A3	PROVENANCE NOTE - READ FIRST
+Sample File!A4	═══════════
+Sample File!A5	The records below were GENERATED PROGRAMMATICALLY by placing each value at the
+Sample File!A6	position published in Res. MSPS 2388 de 2016 Anexo Técnico 3 (AT3 version 15,
+Sample File!A7	24-07-2026) and applying the annex's justification rules - numeric fields
+Sample File!A8	right-justified and zero-filled, alphanumeric fields left-justified and space-filled.
+Sample File!A10	The record lengths are EXACT:
+Sample File!A11	    Archivo Tipo 1                   482 characters (annex total: 482)
+Sample File!A12	    Archivo Tipo 2, Registro Tipo 1  285 characters (annex total: 285)
+Sample File!A13	    Archivo Tipo 2, Registro Tipo 2  519 characters (annex total: 519)
+Sample File!A15	All names, identification numbers and amounts are synthetic. EPS001 is an
+Sample File!A16	illustrative administradora code; the real six-position codes are the Ministry
+Sample File!A17	catalogue codes distributed by the chosen operador. Rate fields use the decimal
+Sample File!A18	layout AT3 prints for campo 51 (2.0% = 0.02000); the operator's file-format
+Sample File!A19	configuration governs the layout of each rate field.
+Sample File!A21	-------------------------------------------------------------------------------
+Sample File!A22	1. ARCHIVO TIPO 1 - DATOS GENERALES DEL PAGADOR DE PENSIONES
+Sample File!A23	-------------------------------------------------------------------------------
+Sample File!A24	Record (length 482)
+Sample File!A25	  pos    1-110  |MERCANS COLOMBIA S.A.S.                                                                                       |
+Sample File!A26	  pos  111-220  |                                        NI900123456       8                                                  B|
+Sample File!A27	  pos  221-330  |2JUCALLE 100 7 33                          00111692060170000000000000000nomina@mercans.com                    |
+Sample File!A28	  pos  331-440  |                      79123456        0CCMUESTRA             EJEMPLO                       ANA                |
+Sample File!A29	  pos  441-482  | MARIA                         002026-0301|
+Sample File!A31	-------------------------------------------------------------------------------
+Sample File!A32	2. ARCHIVO TIPO 2, REGISTRO TIPO 1 - ENCABEZADO
+Sample File!A33	-------------------------------------------------------------------------------
+Sample File!A34	Record (length 285)
+Sample File!A35	  pos    1-110  |0100001MERCANS COLOMBIA S.A.S.                                                                                |
+Sample File!A36	  pos  111-220  |                                               NI900123456       8U                                           |
+Sample File!A37	  pos  221-285  |       2026-032026-030000000000          00000020000255000000100P|
+Sample File!A39	-------------------------------------------------------------------------------
+Sample File!A40	3. ARCHIVO TIPO 2, REGISTRO TIPO 2 - LIQUIDACION DETALLADA (one per pensioner)
+Sample File!A41	-------------------------------------------------------------------------------
+Sample File!A42	Pensioner 1 (length 519)
+Sample File!A43	  pos    1-110  |020000001PRUEBA              EJEMPLO                       PEDRO                                             C|
+Sample File!A44	  pos  111-220  |C1000000001      10N                                                                                          |
+Sample File!A45	  pos  221-330  |                            5 11001N                    EPS001            000030000035000000.00000000000000000|
+Sample File!A46	  pos  331-440  |0000000000000000000000000000000000000000000000000000.100000003500000000000000.00000000000000                  |
+Sample File!A47	  pos  441-519  |                              003500000                               003500000|
+Sample File!A49	Pensioner 2 (length 519)
+Sample File!A50	  pos    1-110  |020000002MUESTRA             PRUEBA                        LUISA                                             C|
+Sample File!A51	  pos  111-220  |C1000000002      13N                                                                                          |
+Sample File!A52	  pos  221-330  |                            5 11001N                    EPS001            003030000220000000.00000000000000000|
+Sample File!A53	  pos  331-440  |0000000000000000000000000000000000000000000002200000.120000026400000000000000.00000000000000                  |
+Sample File!A54	  pos  441-519  |                              022000000                               022000000|
+Sample File!A56	  Reading of the key positions (pensioner 2):
+Sample File!A57	    pos 1-2      02    - tipo de registro (detalle)
+Sample File!A58	    pos 3-9      0000002 - secuencia
+Sample File!A59	    pos 110-111  CC    - tipo documento del pensionado
+Sample File!A60	    pos 128-129  13    - tipo de pensión, convencional
+Sample File!A61	    pos 130      N     - pensión no compartida
+Sample File!A62	    pos 249      5     - pensionado por el empleador con tope de 25 SMMLV
+Sample File!A63	    pos 277-282  EPS001 - EPS del pensionado (illustrative code)
+Sample File!A64	    pos 297-300  30 30 - días FSP y días salud
+Sample File!A65	    pos 303-311  022000000 - IBC = mesada (below 25 SMLMV)
+Sample File!A66	    pos 375-381  0220000 - FSP subcuenta de subsistencia, 1% of the mesada
+Sample File!A67	    pos 382-388  0.12000 - tarifa salud 12% (total mesada above 3 SMLMV)
+Sample File!A68	    pos 389-397  002640000 - cotización salud = IBC x tarifa
+Sample File!A69	    pos 471-479  022000000 - valor de la mesada pensional
+Sample File!A70	    pos 511-519  022000000 - valor total de la mesada pensional
+Sample File!A72	-------------------------------------------------------------------------------
+Sample File!A73	4. TOTALS RECORDS - GENERATED BY THE OPERADOR, NOT BY THE PAYER
+Sample File!A74	-------------------------------------------------------------------------------
+Sample File!A75	Registro Tipo 3   Total aportes del periodo para pensiones
+Sample File!A76	Registro Tipo 4   Total aportes al Fondo de Solidaridad Pensional - subcuenta de subsistencia
+Sample File!A77	Registro Tipo 5   Total aportes del periodo a salud
+Sample File!A78	Registro Tipo 6   Total aportes del periodo a cajas de compensación familiar
+Sample File!A79	Registro Tipo 7   Registro total a pagar durante el periodo

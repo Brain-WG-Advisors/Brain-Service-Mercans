@@ -1,0 +1,110 @@
+{
+ "only_base": [],
+ "only_draft": [],
+ "changed_entries": [
+  "xl/styles.xml",
+  "xl/worksheets/sheet1.xml",
+  "xl/worksheets/sheet3.xml",
+  "xl/worksheets/sheet4.xml",
+  "xl/worksheets/sheet7.xml",
+  "xl/worksheets/sheet8.xml"
+ ],
+ "protected_changed": [],
+ "ro_open": "OK",
+ "sheets_base": [
+  "Version Control",
+  "Report Matrix",
+  "Payroll Scope Summary",
+  "Consignacion Cesantias Spec",
+  "File Structure",
+  "Field Options",
+  "Population Rules",
+  "Example Analysis",
+  "Sample File"
+ ],
+ "sheets_draft": [
+  "Version Control",
+  "Report Matrix",
+  "Payroll Scope Summary",
+  "Consignacion Cesantias Spec",
+  "File Structure",
+  "Field Options",
+  "Population Rules",
+  "Example Analysis",
+  "Sample File"
+ ],
+ "cells": [
+  {
+   "sheet": "Version Control",
+   "cell": "B14",
+   "old": null,
+   "new": "1.1",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "C14",
+   "old": null,
+   "new": "2026-10-29",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "D14",
+   "old": null,
+   "new": "Validation corrections (COVAL): F-08 (casillas 48/49), F-09 (Ley 1/1963 art. 7), DD-22 (E07 mapping)",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "E14",
+   "old": null,
+   "new": "DRAFT",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Version Control",
+   "cell": "F14",
+   "old": null,
+   "new": "Mercans Compliance (COVAL)",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Payroll Scope Summary",
+   "cell": "C26",
+   "old": "CST art. 253 includes it in the base. It is NOT a separate field - it is inside T14. The operator's own calculator omits it, which is the single most expensive trap in this filing; see T14.",
+   "new": "Ley 1 de 1963 art. 7 treats the transport allowance as salary for the sole purpose of liquidating prestaciones sociales, so it is in the base (CST art. 253 sets the base). It is NOT a separate field - it is inside T14. The operator's own calculator omits it, which is the single most expensive trap in this filing; see T14.",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Consignacion Cesantias Spec",
+   "cell": "L10",
+   "old": "Mercans.Cesantias_Single_Fund_Flag + Employee.Cesantias_Fund_Code",
+   "new": "Mercans.Cesantias_Single_Fund_Flag + Company.Cesantias_Fund_Code (single-fund return only; overwrites Employee.Cesantias_Fund_Code for every record - see CO-DD-001 Company.Cesantias_Fund_Code)",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Population Rules",
+   "cell": "C7",
+   "old": "Compute, do NOT let the portal compute. (a) Determine the BASE under CST art. 253: the LAST monthly salary if it has not varied in the last three months; otherwise, and for every variable salary, the AVERAGE of the last year of service, or of the whole period served if shorter. (b) ADD THE TRANSPORT ALLOWANCE where it is payable - CST art. 253 requires it and it is payable where the salary does not exceed 2 SMMLV (COP 3,501,810 in 2026). (c) Multiply by days of service over 360. (d) Round to the whole peso - not up to the next 100 as PILA requires, and not to the nearest 1,000 as Form 350 requires. (e) Validate against the floor of one day of one SMMLV (COP 58,363.50 for 2026). (f) Where a lawful partial settlement was made during the year under CST art. 254, deduct it. Write the result into positions 128-136, right-aligned and zero-filled, with '0000' in positions 124-127.",
+   "new": "Compute, do NOT let the portal compute. (a) Determine the BASE under CST art. 253: the LAST monthly salary if it has not varied in the last three months; otherwise, and for every variable salary, the AVERAGE of the last year of service, or of the whole period served if shorter. (b) ADD THE TRANSPORT ALLOWANCE where it is payable - Ley 1 de 1963 art. 7 treats the transport allowance as salary for the sole purpose of liquidating prestaciones sociales, so it enters the CST art. 253 base, and it is payable where the salary does not exceed 2 SMMLV (COP 3,501,810 in 2026). (c) Multiply by days of service over 360. (d) Round to the whole peso - not up to the next 100 as PILA requires, and not to the nearest 1,000 as Form 350 requires. (e) Validate against the floor of one day of one SMMLV (COP 58,363.50 for 2026). (f) Where a lawful partial settlement was made during the year under CST art. 254, deduct it. Write the result into positions 128-136, right-aligned and zero-filled, with '0000' in positions 124-127.",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D29",
+   "old": "Casilla 48 is the amount deposited to the fund and casilla 49 the traditional-regime amount. For this employee, 48 = 2,000,000 and 49 = 0. See the CO-DIAN-004 Spec.",
+   "new": "Casilla 49 is the amount deposited to the fund and casilla 48 the traditional-regime amount. For this employee, 49 = 2,000,000 and 48 = 0. See the CO-DIAN-004 Spec.",
+   "fill": "FFDDEBF7"
+  },
+  {
+   "sheet": "Example Analysis",
+   "cell": "D34",
+   "old": "CST art. 253 requires the transport allowance in the base. Following the portal short-deposits COP 249,095 for this employee, and a short deposit is penalised as non-deposit at one day's salary per day of delay, uncapped. ALWAYS write the engine's figure into T14.",
+   "new": "The transport allowance is part of the cesantias base: Ley 1 de 1963 art. 7 treats the transport allowance as salary for the sole purpose of liquidating prestaciones sociales. Following the portal short-deposits COP 249,095 for this employee, and a short deposit is penalised as non-deposit at one day's salary per day of delay, uncapped. ALWAYS write the engine's figure into T14.",
+   "fill": "FFDDEBF7"
+  }
+ ],
+ "n_changed_cells": 10,
+ "nonblue": []
+}

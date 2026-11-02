@@ -1,9 +1,16 @@
 # Onde paramos
 
-> Atualizado em 2026-10-29, fim do dia (sessão [[sessoes/2026-10-29]]; blocos de 28/10 e anteriores sem mudança). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-11-02 (sessão [[sessoes/2026-11-02]], cobre 30/10–02/11; blocos de 29/10 e anteriores sem mudança). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+
+## Pipeline v2.12 para o time (02/11)
+- ✅ Enviados pelo usuário: e-mail a todos com a pasta do Drive `02. AI Pipelines/pipeline v2.12`; Chat à Manju com os passos da NAV via `si_runbook.sh` (zip v2.12.1) e a pergunta se ainda falta algo.
+- ✅ Corrigido: zip v2.12.1 com os arquivos da etapa 6 (verificador `scripts/conferir_pacote.py`: 0 faltando; avaliação prévia ok). `~/mercans-pipeline` também completo.
+- 🔄 Esperando a Manju responder (rodada da NAV / `nav.log`).
+- ⏳ Usuário: enviar o rascunho de e-mail a todos sobre o v2.12.1 (no fio "Mercans compliance skills updated to v2.12") **depois** da resposta da Manju; ok para tirar o `si-runbook-generator.zip` repetido da pasta; pasta "Pipeline v3.0" (11/09/2026) no Drive — quem criou.
+- ⏳ Usuário: SIR da França e da Colômbia fora do modelo oficial ([[revisoes/2026-11-02-sir-fr-co-x-modelo-oficial]]) — refazer agora ou quando usar; a França está ativa? (regra 9).
 
 ## 2026-10-29 — 5 demandas em paralelo (usuário) — acompanhar em `paineis/frentes.html`
-- **Janelas no Maestri:** Chade, EUA, Validação CO (novas), Certificação, Process Lithuania (= Pipeline). O usuário trata direto com cada uma; a geral atualiza o painel a cada retorno. `frentes/lituania` sem uso (fora do git; apagar com ok).
+- **Janelas no Maestri:** Chade, EUA, Validação CO (novas), Certificação, Process Lithuania (= Pipeline). O usuário trata direto com cada uma; a geral atualiza o painel a cada retorno. `frentes/lituania` apagada em 29/10 (sem uso).
 - **Ferramentas novas:** `scripts/buscar.py` (busca local por trecho) e `scripts/painel_frentes.py` (painel).
 | # | Demanda | Frente | Escopo decidido pelo usuário |
 |---|---|---|---|

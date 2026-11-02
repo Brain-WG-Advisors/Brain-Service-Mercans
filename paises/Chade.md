@@ -89,7 +89,8 @@ atualizado_em: 2026-10-27
 Valores discutidos nos chats; vigência não registrada. Skill traz o conteúdo estatutário completo.
 | Item | Valor | A partir de | Até | Fonte |
 |---|---|---|---|---|
-| Teto de dedução familiar | 5.000 por dependente: afirmado pelo Mohit, sem base legal (é o valor CNPS de CI); Art. 45-4° não tem teto | ⚠️ vigência? | 2026-07-07 (retirado do design) | ⚠️ sem fonte para o 5.000; Art. 45-4° CGI (chat: design-dev-kb) |
+| Teto de dedução familiar | 5.000 por dependente: afirmado pelo Mohit, sem base legal (é o valor CNPS de CI); Art. 45-4° não tem teto | ⚠️ vigência? | 2026-07-07 a 2026-10-30 (retirado do design) | ⚠️ sem fonte para o 5.000; Art. 45-4° CGI (chat: design-dev-kb) |
+| Teto do abono familiar isento (Art. 45-4°) | 5.000 FCFA por filho/mês, abono CNPS imputado nele | a partir de 2026-01-01 (LF 2026; vigência anterior a conferir) | 2026-10-30 | LF 2026 Art. 45-4°, p. 15 (`raw/docs/oficiais/TD/`) — [[correcoes]] |
 | Meal cash (628x) | WTC dizia tributável, CCG não; exceção: 628x tributável | 2026-07-07 | — | resposta ao e-mail Mohit → Wallisson [INCERTO] (chat: design-dev-kb) |
 | Transporte | Isento até 30% da base; o excesso é tributável e sujeito a CNPS (WTC v1.1 tratava como isenção total) | ⚠️ vigência? | — | TD_DevTeam_Critique_PreSubmission (chat: design-dev-kb) |
 | Piso CNPS | Fixo, sem proração; AT/MP só metadado, taxa fixa de 4% | 2026-06-25 | — | RA default; correção M2 (chat: design-dev-kb) |
@@ -111,10 +112,15 @@ Valores discutidos nos chats; vigência não registrada. Skill traz o conteúdo 
 | — | (arquivos criptografados) | 11 arquivos OLE2 da Baker Hughes | Aguardando senha com Govind Thakur | — |
 
 ## Pendências
+- [ ] 2026-11-01: estudo Dev × v4 pela lei (CGI 2026 oficial, dgi.td): v4 certo em 16 de 23 temas resolvidos, Dev em 10. Mudanças recomendadas ao v4 em `Research Pipeline/Chad/2026-10-29-teste-design-hrblizz/2026-10-30-export-ram/LEI-VEREDITOS.md` (seção "O que aprender do design do Dev"). **Atenção:** pela letra do CGI 2026, art. 116 (18%) cobre só art. 2-VI (direitos autorais/licenças) e art. 60 — não salário de não residente (conferido no texto, linhas 4334 e 676 do .txt); a linha "Retenção não residente" da Ficha fica em dúvida até decisão. Sem fonte: CNPS (Lei 7/66, decretos 2009), arredondamento do IRPP. — frente Chade
+- [ ] 2026-10-29: teste do design no HRBlizz de aceite (empresa "Mercans Chad - Compliance Testing", REF-LE-04-422, 0 empregados). System Settings dá erro 526 (SSL) após o SSO. Mensagem enviada à Suman Rai (Google Chat, 29/10): export atual das regs td_2026 + se podemos carregar o nosso design e rodar empregados de teste. 30/10: Suman não respondeu; ela já tinha dito em 21/10 que **o Chade é com o Ram Sakthi** (Dev) → pedido reenviado ao Ram (30/10). Aguardando — Ram. Entrega: `Research Pipeline/Chad/2026-10-29-teste-design-hrblizz/` ([[PACOTE-CONTEXTO]])
+- [ ] Design v4 (rascunho local, 2026-10-29): `Research Pipeline/Chad/2026-10-29-design-v4/` ([[CONFERENCIA]]) — 6 pontos da reunião de 2026-10-16 + contas das 7 Report Specs; 10 cenários iguais ao v3. Falta: ok do usuário para o Drive; teste em motor (conta-teto, retro_, _$$) — Wallisson
+- [ ] Report Specs 005/006/007: PVID EE mapeado em 2550 e PFM em 2551 (par invertido); DGI-001 chama 58552 de "gross" (DAS: "net taxable") — corrigir specs (R13/R14 do v4)
+- [ ] Dev td.json (02/07), reg 171: taxa EE 3,5% lançada em 6020/2550 e ER 7,5% em 2610/2551 — parece troca; conferir na versão de aceite (configuração do Dev)
 - [ ] Divergência hub × skill: o hub (decisão de 2026-07-07) usa a "base TFE/TAFP literal do Art. 189"; a skill (esclarecimento 4) diz que TFE/TAFP seguem a base do IRPP, sem regra própria — verificar (skill lida em 2026-10-02)
 - [ ] Divergência hub × skill: o hub registra meal cash 628x como exceção tributável [INCERTO]; a skill (esclarecimento 6) diz que prime de panier genuína é isenta dentro do limite legal e só vira CNPS-tributável acima dele — verificar (skill lida em 2026-10-02)
 - [ ] Divergência hub × skill: o hub fala em 7 report specs; o QA da skill (2026-05-29) lista 11 specs/filings no escopo (o SKILL.md cita 7 relatórios) — verificar qual é o conjunto final (skill lida em 2026-10-02)
-- [ ] Fonte do teto de 5.000 por dependente; se não houver, remover das regs 9148032/033 — Mohit (chat: design-dev-kb; KT 2026-07-07)
+- [x] 2026-10-30: fonte achada — LF 2026 Art. 45-4° (teto 5.000/filho/mês); v4 precisa voltar o teto. ~~Fonte do teto de 5.000 por dependente;~~ se não houver, remover das regs 9148032/033 — Mohit (chat: design-dev-kb; KT 2026-07-07)
 - [ ] Confirmar a resposta sobre meal cash 628x (tributável) — Compliance [INCERTO] (chat: design-dev-kb)
 - [ ] Teto do Art. 47 na 9148181; severance contra o WTC; frais 15%; regularização anual CNPS (Art. 12); defeito dos "60 anos"; contas a pagar ER — Dev (chat: design-dev-kb)
 - [ ] Posições sobre NR e TFE/TAFP no CCG + pedido de ruling da DGI — Compliance/DGI (chat: design-dev-kb)

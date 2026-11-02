@@ -22,4 +22,4 @@ Esta pasta é a janela **Chade**. Vale tudo do `CLAUDE.md` da raiz do cérebro (
 - Nada vai a ticket, e-mail ou Drive sem ok do usuário nesta janela.
 
 ## O que esta janela escreve
-Só o seu `estado.md`, a pasta da entrega e, com Edit pontual, `paises/Chade.md`, `correcoes.md` e `log.md`. "Fecha a sessão": `sessoes/AAAA-MM-DD-chade.md` + reescrita do `estado.md`. Sem commit. Resumos à janela geral (`brain-service-5b`) por SendMessage.
+Só o seu `estado.md`, a pasta da entrega e, com Edit pontual, `paises/Chade.md`, `correcoes.md` e `log.md`. "Fecha a sessão": `sessoes/AAAA-MM-DD-chade.md` + reescrita do `estado.md`. Sem commit. Não mandar resumo à janela geral (o painel lê cada rodada sozinho); SendMessage à `brain-service-5b` só para pedir commit ou coordenação.

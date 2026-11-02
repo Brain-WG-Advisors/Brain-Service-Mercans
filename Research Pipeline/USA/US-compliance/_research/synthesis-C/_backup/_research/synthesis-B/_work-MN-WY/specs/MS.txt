@@ -1,0 +1,58 @@
+F|labour.minwage.state.exists|false|-|-|-|US-MSS5-010|high|no state law; FLSA 7.25 for covered employers (annex_FED)
+F|labour.minwage.local.preempted|true|-|2013-07-01|-|US-MSS5-009|high|17-1-51 bars local minimum/living wage and local paid-leave mandates
+F|labour.overtime.state_rule|none (FLSA only)|-|-|-|US-MSS5-016|medium|negative rests on DOL table and measure sweep; Code full text not searched
+F|labour.pay_frequency.scope|manufacturers 50+ employing public labor: biweekly or semimonthly; public service corporations: semimonthly|-|-|-|US-MSS5-015|medium|71-1-35 via DOL WHD summary; statute text not read
+F|pit.rate.zero_band.ceiling|10000|USD|2026-01-01|2026-12-31|US-MSS5-001|high|0% on first 10,000 of taxable income
+F|pit.rate.flat|4.0|pct|2026-01-01|2026-12-31|US-MSS5-001|high|above 10,000; 3.75% enacted for 2027 (2025 HB 1) but withholding tables not published
+F|pit.rate.flat|3.75|pct|2027-01-01|-|US-MSS5-001|medium|enacted liability rate; withholding change waits for DOR 2027 tables (not published)
+F|pit.method|AGP=pay x periods; TI=AGP-(EX+STDED); TAX=(TI-10,000) x 4%; PWT=TAX/periods rounded to whole dollar|-|2026-01-01|2026-12-31|US-MSS5-003|high|formula = oracle; tables built at bracket upper bound; formula vs table may differ by 1 USD, both authorised (US-MSS5-004)
+F|pit.std_deduction.single|2300|USD|2026-01-01|-|US-MSS5-003|high|statutory, unchanged since 2000
+F|pit.std_deduction.head_of_family|3400|USD|2026-01-01|-|US-MSS5-003|high|-
+F|pit.std_deduction.married|4600|USD|2026-01-01|-|US-MSS5-003|high|B (married both working) 2,300
+F|pit.exemption.single|6000|USD|2026-01-01|-|US-MSS5-002|high|Form 89-350
+F|pit.exemption.married|12000|USD|2026-01-01|-|US-MSS5-002|high|split in 500 multiples when both employed
+F|pit.exemption.head_of_family|9500|USD|2026-01-01|-|US-MSS5-002|high|-
+F|pit.exemption.dependent|1500|USD|2026-01-01|-|US-MSS5-002|high|also each age-65 or blind exemption
+F|pit.certificate.default|no 89-350: single, zero exemption|-|-|-|US-MSS5-002|high|federal W-4 not accepted
+F|pit.oracle.example_1.withholding|9|USD|2026-01-01|2026-12-31|US-MSS5-003|high|Table A single weekly 450-460, 0 exemption: (460x52-2,300-10,000)x4%/52=8.94 -> 9; 8/8 test rows matched at upper bound
+F|pit.supplemental.method|aggregate; no fixed flat rate (top rate 4% allowed where aggregation over-withholds)|-|2026-01-01|2026-12-31|US-MSS5-002|high|-
+F|pit.nonresident.threshold|none if annual MS earnings below the filing-status standard deduction|-|-|-|US-MSS5-019|high|earnings-ratio split from day 1
+F|pit.resident.other_state_rule|withhold MS on all wages except to the extent another state withholds|-|-|-|US-MSS5-004|high|commuter to no-tax state: MS on all wages; correction to MULTI 2.2
+F|pit.reciprocity.states|none|-|-|-|US-MSS5-019|medium|MULTI matrix
+F|pit.local.exists|false|-|-|-|US-MSP10-001|high|-
+F|ui.wage_base.annual|14000|USD|2011-01-01|-|US-MSS5-011|high|fixed in statute; other-state UC wages count (71-5-353(4))
+F|ui.wage_base.other_state_credit|true|-|-|-|US-MSS5-011|high|-
+F|ui.rate.new_employer.year1|1.00|pct|-|-|US-MSS5-011|high|1.10 year 2, 1.20 from year 3
+F|ui.rate.new_employer.year2|1.10|pct|-|-|US-MSS5-011|high|-
+F|ui.rate.new_employer.year3|1.20|pct|-|-|US-MSS5-011|high|-
+F|ui.rate.experience_max|5.4|pct|-|-|US-MSS5-011|high|range 0.0-5.4
+F|ui.employee.rate|0|pct|-|-|US-MSS5-011|high|may not be deducted from wages
+F|ui.workforce_training.rate|0.20|pct|-|-|US-MS-P5-1-004|low|WET 0.15+OWD 0.01+MS Works 0.04; 2026 application NOT confirmed
+F|payslip.statute.exists|false|-|-|-|US-MSP9L-001|medium|no MS pay-statement statute located (full-text Code search not possible)
+F|records.payroll.retention_years|3|years|-|-|US-MSS5-019|high|DOR
+F|report.wh.monthly_threshold.monthly_avg|300|USD|-|-|US-MSS5-019|high|else quarterly; due 15th of following month
+F|report.wh.efile_threshold|20000|USD|-|-|US-MSS5-019|high|e-file/e-pay mandatory at 20,000 liability in any period
+F|report.w2.due|Jan 31; no extensions|-|-|-|US-MSS5-005|high|EFW2 RS record state code 28; mandatory electronic for 10+ W-2
+F|report.w2.efile_threshold|10|-|-|-|US-MSS5-005|high|-
+F|report.ui.quarterly_due|Apr 30; Jul 31; Oct 31; Jan 31|-|-|-|US-MSS5-012|high|UI-2/UI-3; zero report required
+F|report.new_hire.days|15|days|-|-|US-MSS5-006|high|rehire after 60+ days; DOB, gender, salary, pay frequency, medical-insurance eligibility
+F|leave.paid_sick.statutory|false|-|-|-|US-MSS5-009|high|local mandates preempted
+F|term.w2_after_termination.days|30|days|-|-|US-MSS5-004|high|-
+F|garn.iwo.employer_fee.monthly|2.00|USD|-|-|US-MSS5-008|medium|plus 5.00 administrative fee withheld and sent to SDU; guide dated 2020
+F|garn.iwo.remit_working_days|7|days|-|-|US-MSS5-008|medium|-
+F|garn.iwo.lump_sum.notice_threshold|500|USD|-|-|US-MSS5-008|medium|notify MDHS 45 days before; hold up to 30 days
+F|bik.section125.excluded|true|-|-|-|US-MSS5-004|high|also 127, 129; 401(k)/403(b)/457 deferrals excluded
+F|bik.work_and_save_roth|voluntary employer payroll-deduction Roth IRA (HB 4073)|-|2026-07-01|-|US-MSS5-017|high|auto-enrol with opt-out, escalation to 8%; start by 2028-08-01; post-tax, opt-in employers only
+F|prevailing_wage.exists|false|-|-|-|US-MS-P5-1-001|medium|Davis-Bacon on federal work only
+F|data.breach_notice.exists|true|-|2011-07-01|-|US-MSS5-018|high|-
+U|pit.tables.next_year|2027 withholding tables and formula at 3.75% not published.|DOR withholding page listing Pub 89-700 for 2027 and the "Computer Payroll Accounting - For Periods in 2027" flowchart (re-check December 2026).|n
+U|ui.workforce_training.applies|Whether the 0.20% Workforce Investment and Training contribution applies in 2026 is not confirmed (MDES says "might be applicable").|MDES 2026 rate notice (UI-1/rate letter) or the 71-5-355 trigger text in a post-2023 Code edition.|n
+U|bik.conformity.hsa_transit_gtl|HSA, transit (132(f)) and group-term life MS treatment not confirmed.|Miss. Code 27-7-15 / 27-7-17 current text or MDOR Form 80-100 instructions (2025).|n
+U|garn.consumer.limits|Creditor garnishment 85-3-4 text not read (Lexis-only Code); tier-B lead only.|Official Code text via the Lexis public-access URL in a browser pass.|n
+U|term.final_pay.timing|No MS final-pay statute located; Code full-text search not possible.|Official Code text (Lexis public access) search for final wages.|n
+U|report.w2.spec.next_year|Pub 89-145 for TY2026 (filed January 2027) not yet seen; Rev 10/25 on file.|Pub 89-145 Rev. 10/26.|n
+T|MS has no state minimum wage, no state overtime and preempts local wage/leave mandates [US-MSS5-009/-010].
+T|2027 rate 3.75% is enacted at liability level only; 2026 withholding uses 4.0% formula; no 2027 withholding until DOR publishes tables.
+T|Oracle: MS formula rows (Table A single weekly 450-460 = 9; 8/8 rows); formula vs table can differ by 1 USD - both authorised.
+T|MULTI correction: MS HAS a resident withholding rule (withhold all wages except to the extent another state withholds) - MULTI owner to re-bind.
+U|sdi.exists|The "no SDI/TDI/PFML" statement rests on US-MS-P5-2-006, which is MANUAL (tier-3); no active row carries it.|An A.1/A.2 source (MDES or DOL TDI/PFML state list) registered as active.|n

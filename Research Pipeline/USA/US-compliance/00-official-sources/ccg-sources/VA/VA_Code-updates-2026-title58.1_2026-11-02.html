@@ -1,0 +1,383 @@
+    <!-- #region Login -->
+    <!-- #endregion -->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head id="Head1">
+		    <title>Code of Virginia (2026 Updates)</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<link rel="apple-touch-icon" href="./images/favicon-law16.png" sizes="16x16" />
+		<link rel="apple-touch-icon" href="./images/favicon-law32.png" sizes="32x32" />
+        <script src="/Scripts/session.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/Content/base.css" type="text/css" media="all" />
+		<!--[if lt IE 9 ]><link rel="stylesheet" href="./Content/720_grid.css" type="text/css" /><![endif]-->
+		<link rel="stylesheet" href="/Content/720_grid.css" type="text/css" media="screen and (min-width: 720px)" />
+		<link rel="stylesheet" href="/Content/986_grid.css" type="text/css" media="screen and (min-width: 986px)" />
+		<link rel="stylesheet" href="/Content/1236_grid.css" media="screen and (min-width: 1236px)" />
+		<link rel="stylesheet" href="/Content/font-awesome.min.css" />
+		<link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css' />
+		<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT Serif:r,i,400,700" />
+		
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,300italic,400italic,700italic' rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="/Content/jquery.fancybox.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="/Content/jquery.qtip.min.css" type="text/css" media="all" />
+		
+	
+
+		<style type="text/css">.fancybox-margin {margin-right: 0px;}</style>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F6YYKCXH17"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-F6YYKCXH17');
+        </script>
+        <script src="/Scripts/jquery.min.js" type="text/javascript"></script>
+        <script src="/Scripts/jquery-ui.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $('document').ready(function () {
+                $('#print').attr("aria-label", "Print Button");
+                $('#txtsearch-in').attr("aria-label", "Search within the current selection");
+                
+                $("#mobile-menu-toggle").click(function () {
+                    $("#section-menu").toggleClass("open");
+                    $(".mobile-overlay").toggleClass("open");
+                });
+
+                $(".mobile-overlay").click(function () {
+                    $("#section-menu").removeClass("open");
+                    $(".mobile-overlay").removeClass("open");
+                });
+            });
+        </script>
+        <script>
+            $(function () {
+                var searchList = document.getElementById("searchList");
+                if (!searchList.length) {
+                    return;
+                }
+
+                var path = (window.location.pathname || "").toLowerCase();
+                var selectedValue = "all";
+                document.getElementById("searchList").value = "LAW";
+
+                if (path.includes("/admincode")) {
+                    selectedValue = "admin";
+                    document.getElementById("searchBtn").value = "Administrative_Code";
+                } else if (path.includes("/constitution")) {
+                    selectedValue = "constitution";
+                    document.getElementById("searchBtn").value = "Constitution";
+                } else if (path.includes("/vacode")) {
+                    selectedValue = "code";
+                    document.getElementById("searchBtn").value = "Code_of_Virginia";
+                } else if (path.includes("/charters")) {
+                    selectedValue = "charters";
+                    document.getElementById("searchBtn").value = "Charters";
+                } else if (path.includes("/authorities")) {
+                    selectedValue = "authorities";
+                    document.getElementById("searchBtn").value = "Authorities";
+                } else if (path.includes("/compacts")) {
+                    selectedValue = "compacts";
+                    document.getElementById("searchBtn").value = "Compacts";
+                } else if (path.includes("/uncodifiedacts")) {
+                    selectedValue = "uncodified";
+                    document.getElementById("searchBtn").value = "Uncodified_Acts";
+                }
+
+                searchList.querySelectorAll("option").forEach(function(option) {
+                    option.selected = false;
+                });
+                var selectedOption = searchList.querySelector('option[value="' + selectedValue + '"]');
+                if (selectedOption) {
+                    selectedOption.selected = true;
+                }
+            });
+        </script>
+	</head>
+
+<body>
+    <input aria-hidden="true" type="text" style="width:0;height:0;visibility:hidden;position:absolute;left:0;top:0" /> 
+    <input aria-hidden="true" type="password" style="width:0;height:0;visibility:hidden;position:absolute;left:0;top:0" />
+    <input aria-hidden="true" type="hidden" id="hidSignIn" value="0" />
+    
+    
+    <div class="mobile-overlay"></div>
+    <div class="top-bar"></div>
+    <header>
+        <nav>
+            <div class="lis-links-content full">
+                <ul>
+                    <li><a href="https://virginiageneralassembly.gov/">Virginia General Assembly</a> /</li>
+                    <li><a href="https://help.lis.virginia.gov">LIS Learning Center</a> /</li>
+                    <li><a href="https://lis.virginia.gov/privacy">Privacy Policy</a> /</li>
+                    <li><a href="https://lis.virginia.gov">LIS home</a> /</li>
+                    <li><a href="https://lis.virginia.gov/register-account">Register Account</a> /</li>
+                    <li><a href="https://lis.virginia.gov/login">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="grid-wrapper one-and-three halves">
+        
+			<a href="https://lis.virginia.gov" id="logo-link">
+				<img alt="LIS Logo" src="/images/lis_logo.png" /> 
+			</a>
+		
+        <div class="portal-links">
+            <ul>
+                <li>
+                    <a class="txt-blue" href="https://lis.virginia.gov">Session Information</a>
+                </li>
+                <li>
+                    <a class="txt-dark-blue" href="https://lis.virginia.gov/bill-search">Bills & Resolutions</a>
+                </li>
+                <li>
+                    <a class="txt-green" href="https://budget.lis.virginia.gov/default/2025/1">State Budget</a>
+                </li>
+                <li>
+                    <a class="txt-light-green" href="https://law.lis.virginia.gov/">Virginia Law</a>
+                </li>
+                <li>
+                    <a class="txt-orange" href="https://rga.lis.virginia.gov/">Reports to the General Assembly</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mobile-menu">
+            <i id="mobile-menu-toggle" class="fa fa-bars"></i>
+        </div>
+    </div>
+        
+        
+        <div class="va-law">
+            <div class="grid">
+                <div class="row">
+                    <div class="slot-0-1-2">
+                        <h1><a href="https://law.lis.virginia.gov">Virginia Law</a></h1>
+                    </div>
+                    <div class="slot-3-4-5">
+                        <div class="input-group .search-comp ">
+                            <div class="input-group-btn">
+                                <label for="searchList" class="sr-only">Select Search Type</label>
+                                <select id="searchList" name="searchTypeSelect" class="btn input-sm btn-default dropdown-toggle" aria-label="Select Search Type">
+                                    <option value="all">All</option>
+                                    <option value="code">Code of Virginia</option>
+                                    <option value="admin">Administrative Code</option>
+                                    <option value="constitution">Constitution</option>
+                                    <option value="charters">Charters</option>
+                                    <option value="authorities">Authorities</option>
+                                    <option value="compacts">Compacts</option>
+                                    <option value="uncodified">Uncodified Acts</option>
+                                </select>
+                            </div>
+                            <input aria-label="search input" type="text" id="txtSearch" class="form-control input-sm" placeholder="Search" />
+                            <span class="input-group-btn">
+                                <button aria-label="search button" class="btn btn-sm btn-default" id="searchBtn" type="submit" value="LAW">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="grid">
+            	<!-- #region Variables -->
+	<!-- #endregion -->
+	<!-- #region Highlights -->
+	<!-- #endregion -->
+	<!-- #region Build Pages -->
+	<!-- #endregion -->
+
+
+<body class="flipcol ">
+	<input type="hidden" id="hidST" />
+	<input type="hidden" id="hidToC" value="0" />
+	<input type="hidden" id="hidID" />
+	<input type="hidden" id="hidNote" />
+    <input type="hidden" id="hidPage" value="vacodeupdates" />
+	<div class="grid">
+		<div class="row">
+			<div class="slot-6-7-8">
+				<section id="pageTitle"><!--googleon: index--><h2 class='pg-title'>Code of Virginia</h2><!--googleoff: index--></section>
+				<section class="breadcrumbs" id="breadcrumbs"><p><a href='/vacodeupdates/'>Table of Contents (2026 Updates)</a> &raquo; <span class='breadcrumb-inactive'>Title 58.1. Taxation</span></p></section>
+				<section class="content-header-menu" id="menucontainer">
+					<nav class="content-header-menu-left"><ul><li><a title='Title 57. Religious and Charitable Matters; Cemeteries' href='/vacodeupdates/title57/'><i class='fa fa-long-arrow-left'></i></a> Title <a title='Title 59.1. Trade and Commerce' href='/vacodeupdates/title59.1/'><i class='fa fa-long-arrow-right'></i></a></li></ul></nav>
+					<div class="scroll_top" aria-hidden="true"><i href="#" class="fa fa-arrow-up"></i></div>
+					<nav class="content-header-menu-middle"><li><a id='reportClick' class='reportClick' title='Create a Report' href=''><i class='fa fa-paperclip'></i> Create a Report</a></li><li><a id='A1' onclick='PrintPreview();' title='Print page' href='#'><i class='fa fa-print'></i> Print</a></li></ul></nav>
+							<nav class="content-header-menu-right"><div class='search-in-label'><label for='txtsearch-in'>Search Title</label></div><div class='input-group secondary-search'><input type='text' id='txtsearch-in' class='form-control input-sm' placeholder='keyword'><button class='btn btn-sm btn-default input-group-btn' id='search-in' type=button>Go</button></div><!-- /input-group --></nav>
+
+				</section>
+				<p id="note" class="sidenote"></p>
+				<p class="sidenote alert rptCheckbox"><strong>Creating a Report:</strong> Check the sections you'd like to appear in the report, then use the "Create Report" button at the bottom of the page to generate your report. Once the report is generated you'll then have the option to download it as a pdf, print or email the report.</p>
+				<article id="vacode" class="content">
+					<div id="printStuff"><div id='printHeader'>Code of Virginia<br/>Title 58.1. Taxation</div><div id='printDate'>11/2/2026</div></div>
+					<span id='va_code'><h2><input type='checkbox' id='title58.1' class='rptCheckbox parentCheck' /> Title 58.1. Taxation <span style='font-family:Lato;font-size:1em;color:#757575;'>(2026 Updates)</span></h2><ul class='outline'><li><input type='checkbox' id='chapter0' class='rptCheckbox parentCheck title58-1 ' /> <b>General Provisions of Title 58.1</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 chapter0 ' /> <b>Article 1. In General</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3' class='rptCheckbox title58-1 chapter0 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-3/'>§ 58.1-3</a></dt><dd>Secrecy of information; penalties</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='subtitleI' class='rptCheckbox parentCheck title58-1 ' /> <b>Subtitle I. Taxes Administered by the Department of Taxation</b></li></ul><ul class='outline'><li><input type='checkbox' id='chapter1' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 1. General Provisions</b><ul class='outline'><li></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-105' class='rptCheckbox title58-1 subtitleI chapter1 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-105/'>§ 58.1-105</a></dt><dd>(Effective until July 1, 2027) Offers in compromise; Department may accept; authority and duty of Tax Commissioner</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter2' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 2. Department of Taxation</b><ul class='outline'><li></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-202.3' class='rptCheckbox title58-1 subtitleI chapter2 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-202.3/'>§ 58.1-202.3</a></dt><dd>Fillable tax forms</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter3' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 3. Income Tax</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 1. General Provisions</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-301' class='rptCheckbox title58-1 subtitleI chapter3 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-301/'>§ 58.1-301</a></dt><dd>Conformity to Internal Revenue Code</dd></dl><ul class='outline'><li><input type='checkbox' id='article2' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 2. Individual Income Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-322.03' class='rptCheckbox title58-1 subtitleI chapter3 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-322.03/'>§ 58.1-322.03</a></dt><dd>Virginia taxable income; deductions</dd></dl><ul class='outline'><li><input type='checkbox' id='article3' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 3. Tax Credits for Individuals</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-332' class='rptCheckbox title58-1 subtitleI chapter3 article3 ' /> <a href='/vacodeupdates/title58.1/section58.1-332/'>§ 58.1-332</a></dt><dd>Credits for taxes paid other states</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-339.8' class='rptCheckbox title58-1 subtitleI chapter3 article3 ' /> <a href='/vacodeupdates/title58.1/section58.1-339.8/'>§ 58.1-339.8</a></dt><dd>Income tax credit for low-income taxpayers</dd></dl><ul class='outline'><li><input type='checkbox' id='article4' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 4. Accounting, Returns, Procedures for Individuals</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-341.1' class='rptCheckbox title58-1 subtitleI chapter3 article4 ' /> <a href='/vacodeupdates/title58.1/section58.1-341.1/'>§ 58.1-341.1</a></dt><dd>Returns of individuals; required information</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-344.3' class='rptCheckbox title58-1 subtitleI chapter3 article4 ' /> <a href='/vacodeupdates/title58.1/section58.1-344.3/'>§ 58.1-344.3</a></dt><dd>Voluntary contributions of refunds requirements</dd></dl><ul class='outline'><li><input type='checkbox' id='article9' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 9. Taxation of Partnerships</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-390.3' class='rptCheckbox title58-1 subtitleI chapter3 article9 ' /> <a href='/vacodeupdates/title58.1/section58.1-390.3/'>§ 58.1-390.3</a></dt><dd>Elective income tax on pass-through entities</dd></dl><ul class='outline'><li><input type='checkbox' id='article10' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 10. Taxation of Corporations</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-402' class='rptCheckbox title58-1 subtitleI chapter3 article10 ' /> <a href='/vacodeupdates/title58.1/section58.1-402/'>§ 58.1-402</a></dt><dd>Virginia taxable income</dd></dl><ul class='outline'><li><input type='checkbox' id='article13' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 13. Tax Credits for Corporations</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-439.12:03' class='rptCheckbox title58-1 subtitleI chapter3 article13 ' /> <a href='/vacodeupdates/title58.1/section58.1-439.12:03/'>§ 58.1-439.12:03</a></dt><dd>Motion picture production tax credit</dd></dl><ul class='outline'><li><input type='checkbox' id='article13.4' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 13.4. Virginia Housing Opportunity Tax Credit Act</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-439.29' class='rptCheckbox title58-1 subtitleI chapter3 article13-4 ' /> <a href='/vacodeupdates/title58.1/section58.1-439.29/'>§ 58.1-439.29</a></dt><dd>Definitions</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-439.30' class='rptCheckbox title58-1 subtitleI chapter3 article13-4 ' /> <a href='/vacodeupdates/title58.1/section58.1-439.30/'>§ 58.1-439.30</a></dt><dd>Virginia housing opportunity tax credit</dd></dl><ul class='outline'><li><input type='checkbox' id='article19' class='rptCheckbox parentCheck title58-1 subtitleI chapter3 ' /> <b>Article 19. Estimated Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-492' class='rptCheckbox title58-1 subtitleI chapter3 article19 ' /> <a href='/vacodeupdates/title58.1/section58.1-492/'>§ 58.1-492</a></dt><dd>Failure by individual, trust or estate to pay estimated tax</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter6' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 6. Retail Sales and Use Tax</b><ul class='outline'><li></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-605.1' class='rptCheckbox title58-1 subtitleI chapter6 article19 ' /> <a href='/vacodeupdates/title58.1/section58.1-605.1/'>§ 58.1-605.1</a></dt><dd>Additional local sales tax in certain localities; use of revenues for public transportation, or construction or renovation of schools</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-606.1' class='rptCheckbox title58-1 subtitleI chapter6 article19 ' /> <a href='/vacodeupdates/title58.1/section58.1-606.1/'>§ 58.1-606.1</a></dt><dd>Additional local use tax in certain localities; use of revenues for public transportation, or construction or renovation of schools</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter8' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 8. State Recordation Tax</b><ul class='outline'><li></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-811' class='rptCheckbox title58-1 subtitleI chapter8 article19 ' /> <a href='/vacodeupdates/title58.1/section58.1-811/'>§ 58.1-811</a></dt><dd>(For contingent expiration date, see Acts 2013, c. 766, cl. 14) Exemptions</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-811' class='rptCheckbox title58-1 subtitleI chapter8 article19 ' /> <a href='/vacodeupdates/title58.1/section58.1-811/'>§ 58.1-811</a></dt><dd>(For contingent effective date, see Acts 2013, c. 766, cl. 14) Exemptions</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter10' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 10. Cigarette Tax</b><ul class='outline'><li><input type='checkbox' id='article2.1' class='rptCheckbox parentCheck title58-1 subtitleI chapter10 ' /> <b>Article 2.1. Tobacco Products Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1021.04:1' class='rptCheckbox title58-1 subtitleI chapter10 article2-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-1021.04:1/'>§ 58.1-1021.04:1</a></dt><dd>(Effective until October 1, 2026) Distributor's or remote retail seller's license; penalties</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1021.06' class='rptCheckbox title58-1 subtitleI chapter10 article2-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-1021.06/'>§ 58.1-1021.06</a></dt><dd>(Repealed effective October 1, 2026) Delivery sales of liquid nicotine and nicotine vapor products</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1021.07' class='rptCheckbox title58-1 subtitleI chapter10 article2-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-1021.07/'>§ 58.1-1021.07</a></dt><dd>(Repealed effective October 1, 2026) Retail sales of liquid nicotine and nicotine vapor products; identification and use by minors</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1021.08' class='rptCheckbox title58-1 subtitleI chapter10 article2-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-1021.08/'>§ 58.1-1021.08</a></dt><dd>(Repealed effective October 1, 2026) General requirements for liquid nicotine and nicotine vapor products sales and resale</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1021.09' class='rptCheckbox title58-1 subtitleI chapter10 article2-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-1021.09/'>§ 58.1-1021.09</a></dt><dd>(Repealed effective October 1, 2026) Safety requirements for liquid nicotine and nicotine vapor products</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter17' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 17. Miscellaneous Taxes</b><ul class='outline'><li><input type='checkbox' id='article12' class='rptCheckbox parentCheck title58-1 subtitleI chapter17 ' /> <b>Article 12. Disposable Plastic Bag Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1745' class='rptCheckbox title58-1 subtitleI chapter17 article12 ' /> <a href='/vacodeupdates/title58.1/section58.1-1745/'>§ 58.1-1745</a></dt><dd>Disposable plastic bag tax</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter18' class='rptCheckbox parentCheck title58-1 subtitleI ' /> <b>Chapter 18. Enforcement, Collection, Refund, Remedies and Review of State Taxes</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 subtitleI chapter18 ' /> <b>Article 1. Collection of State Taxes</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1802.1' class='rptCheckbox title58-1 subtitleI chapter18 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-1802.1/'>§ 58.1-1802.1</a></dt><dd>Period of limitations on collection; accrual of interest and penalty</dd></dl><ul class='outline'><li><input type='checkbox' id='article2' class='rptCheckbox parentCheck title58-1 subtitleI chapter18 ' /> <b>Article 2. Corrections of Erroneous Assessments; Refunds</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-1836' class='rptCheckbox title58-1 subtitleI chapter18 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-1836/'>§ 58.1-1836</a></dt><dd>Innocent spouse relief</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='subtitleIII' class='rptCheckbox parentCheck title58-1 ' /> <b>Subtitle III. Local Taxes</b></li></ul><ul class='outline'><li><input type='checkbox' id='chapter32' class='rptCheckbox parentCheck title58-1 subtitleIII ' /> <b>Chapter 32. Real Property Tax</b><ul class='outline'><li><input type='checkbox' id='article3' class='rptCheckbox parentCheck title58-1 subtitleIII chapter32 ' /> <b>Article 3. Other Exemptions, Credits, Partial Abatement, Apportionments, Classifications</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3220' class='rptCheckbox title58-1 subtitleIII chapter32 article3 ' /> <a href='/vacodeupdates/title58.1/section58.1-3220/'>§ 58.1-3220</a></dt><dd>Partial exemption for certain rehabilitated, renovated, or replacement residential structures</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3221.1' class='rptCheckbox title58-1 subtitleIII chapter32 article3 ' /> <a href='/vacodeupdates/title58.1/section58.1-3221.1/'>§ 58.1-3221.1</a></dt><dd>Classification of land and improvements for tax purposes</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3221.7' class='rptCheckbox title58-1 subtitleIII chapter32 article3 ' /> <a href='/vacodeupdates/title58.1/section58.1-3221.7/'>§ 58.1-3221.7</a></dt><dd>Partial exemption for certain rehabilitated, renovated, or replacement underutilized structures for residential use</dd></dl><ul class='outline'><li><input type='checkbox' id='article4' class='rptCheckbox parentCheck title58-1 subtitleIII chapter32 ' /> <b>Article 4. Special Assessment for Land Preservation</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3234.1' class='rptCheckbox title58-1 subtitleIII chapter32 article4 ' /> <a href='/vacodeupdates/title58.1/section58.1-3234.1/'>§ 58.1-3234.1</a></dt><dd>(Effective January 1, 2027) Form of notice for real estate in program</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3242.1' class='rptCheckbox title58-1 subtitleIII chapter32 article4 ' /> <a href='/vacodeupdates/title58.1/section58.1-3242.1/'>§ 58.1-3242.1</a></dt><dd>Forest Sustainability Fund</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter35' class='rptCheckbox parentCheck title58-1 subtitleIII ' /> <b>Chapter 35. Tangible Personal Property, Machinery and Tools and Merchants' Capital</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 subtitleIII chapter35 ' /> <b>Article 1. Tangible Personal Property Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3506' class='rptCheckbox title58-1 subtitleIII chapter35 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-3506/'>§ 58.1-3506</a></dt><dd>Other classifications of tangible personal property for taxation</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter36' class='rptCheckbox parentCheck title58-1 subtitleIII ' /> <b>Chapter 36. Tax Exempt Property</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 subtitleIII chapter36 ' /> <b>Article 1. Exemptions Generally</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3603' class='rptCheckbox title58-1 subtitleIII chapter36 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-3603/'>§ 58.1-3603</a></dt><dd>Exemptions not applicable when building is source of revenue</dd></dl><ul class='outline'><li><input type='checkbox' id='article2' class='rptCheckbox parentCheck title58-1 subtitleIII chapter36 ' /> <b>Article 2. Property Exempted by Classification or Designation</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3607' class='rptCheckbox title58-1 subtitleIII chapter36 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-3607/'>§ 58.1-3607</a></dt><dd>Property exempt from taxation by designation</dd></dl><ul class='outline'><li><input type='checkbox' id='article4.1' class='rptCheckbox parentCheck title58-1 subtitleIII chapter36 ' /> <b>Article 4.1. Property Exempted by Local Classification or Designation on or After January 1, 2003</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3651' class='rptCheckbox title58-1 subtitleIII chapter36 article4-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-3651/'>§ 58.1-3651</a></dt><dd>Property exempt from taxation by classification or designation by ordinance adopted by local governing body on or after January 1, 2003</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter37' class='rptCheckbox parentCheck title58-1 subtitleIII ' /> <b>Chapter 37. License Taxes</b><ul class='outline'><li></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3700' class='rptCheckbox title58-1 subtitleIII chapter37 article4-1 ' /> <a href='/vacodeupdates/title58.1/section58.1-3700/'>§ 58.1-3700</a></dt><dd>License requirement; requiring evidence of payment of business license, business personal property, meals and admissions taxes; license revocation</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter38' class='rptCheckbox parentCheck title58-1 subtitleIII ' /> <b>Chapter 38. Miscellaneous Taxes</b><ul class='outline'><li><input type='checkbox' id='article4' class='rptCheckbox parentCheck title58-1 subtitleIII chapter38 ' /> <b>Article 4. Consumer Utility Taxes</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3814' class='rptCheckbox title58-1 subtitleIII chapter38 article4 ' /> <a href='/vacodeupdates/title58.1/section58.1-3814/'>§ 58.1-3814</a></dt><dd>Water or heat, light, and power companies</dd></dl><ul class='outline'><li><input type='checkbox' id='article5' class='rptCheckbox parentCheck title58-1 subtitleIII chapter38 ' /> <b>Article 5. Admission Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3818' class='rptCheckbox title58-1 subtitleIII chapter38 article5 ' /> <a href='/vacodeupdates/title58.1/section58.1-3818/'>§ 58.1-3818</a></dt><dd>Admissions tax in counties</dd></dl><ul class='outline'><li><input type='checkbox' id='article6' class='rptCheckbox parentCheck title58-1 subtitleIII chapter38 ' /> <b>Article 6. Transient Occupancy Tax</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3825.3' class='rptCheckbox title58-1 subtitleIII chapter38 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-3825.3/'>§ 58.1-3825.3</a></dt><dd>Repealed</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3825.4' class='rptCheckbox title58-1 subtitleIII chapter38 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-3825.4/'>§ 58.1-3825.4</a></dt><dd>Additional transient occupancy tax in Prince George County</dd></dl><ul class='outline'><li><input type='checkbox' id='article14' class='rptCheckbox parentCheck title58-1 subtitleIII chapter38 ' /> <b>Article 14. Local Incentives for Repurposing Underutilized Structures for Residential Use</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3855' class='rptCheckbox title58-1 subtitleIII chapter38 article14 ' /> <a href='/vacodeupdates/title58.1/section58.1-3855/'>§ 58.1-3855</a></dt><dd>Local incentives for repurposing underutilized structures for residential use</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter39' class='rptCheckbox parentCheck title58-1 subtitleIII ' /> <b>Chapter 39. Enforcement, Collection, Refunds, Remedies and Review of Local Taxes</b><ul class='outline'><li><input type='checkbox' id='article2' class='rptCheckbox parentCheck title58-1 subtitleIII chapter39 ' /> <b>Article 2. Collection by Treasurers, Etc</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3916' class='rptCheckbox title58-1 subtitleIII chapter39 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-3916/'>§ 58.1-3916</a></dt><dd>Counties, cities, and towns may provide dates for filing returns and set penalties, interest, etc.</dd></dl><ul class='outline'><li><input type='checkbox' id='article3' class='rptCheckbox parentCheck title58-1 subtitleIII chapter39 ' /> <b>Article 3. Collection by Distress, Suit, Lien, Etc</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3952' class='rptCheckbox title58-1 subtitleIII chapter39 article3 ' /> <a href='/vacodeupdates/title58.1/section58.1-3952/'>§ 58.1-3952</a></dt><dd>Collection out of estate in hands of or debts due by third party; treasurer's liens</dd></dl><ul class='outline'><li><input type='checkbox' id='article4' class='rptCheckbox parentCheck title58-1 subtitleIII chapter39 ' /> <b>Article 4. Sale of Delinquent Tax Lands</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-3970.1' class='rptCheckbox title58-1 subtitleIII chapter39 article4 ' /> <a href='/vacodeupdates/title58.1/section58.1-3970.1/'>§ 58.1-3970.1</a></dt><dd>Appointment of special commissioner to execute title to certain real estate with delinquent taxes or liens to localities</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='subtitleIV' class='rptCheckbox parentCheck title58-1 ' /> <b>Subtitle IV. Other Sources of State Revenue</b></li></ul><ul class='outline'><li><input type='checkbox' id='chapter40' class='rptCheckbox parentCheck title58-1 subtitleIV ' /> <b>Chapter 40. Virginia Lottery Law; Sports Betting</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 subtitleIV chapter40 ' /> <b>Article 1. Powers and Duties of Virginia Lottery Board; Administration of Tickets and Prizes</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4015.1' class='rptCheckbox title58-1 subtitleIV chapter40 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-4015.1/'>§ 58.1-4015.1</a></dt><dd>Voluntary exclusion program</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4029' class='rptCheckbox title58-1 subtitleIV chapter40 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-4029/'>§ 58.1-4029</a></dt><dd>Disclosure of identity of winners by the Department</dd></dl><ul class='outline'><li><input type='checkbox' id='article2' class='rptCheckbox parentCheck title58-1 subtitleIV chapter40 ' /> <b>Article 2. Sports Betting</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4030' class='rptCheckbox title58-1 subtitleIV chapter40 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-4030/'>§ 58.1-4030</a></dt><dd>Definitions</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4031' class='rptCheckbox title58-1 subtitleIV chapter40 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-4031/'>§ 58.1-4031</a></dt><dd>Powers and duties of the Director related to sports betting; reporting</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4034' class='rptCheckbox title58-1 subtitleIV chapter40 article2 ' /> <a href='/vacodeupdates/title58.1/section58.1-4034/'>§ 58.1-4034</a></dt><dd>Duties of permit holders</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter41' class='rptCheckbox parentCheck title58-1 subtitleIV ' /> <b>Chapter 41. Casino Gaming</b><ul class='outline'><li><input type='checkbox' id='article1' class='rptCheckbox parentCheck title58-1 subtitleIV chapter41 ' /> <b>Article 1. General Provisions</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4103' class='rptCheckbox title58-1 subtitleIV chapter41 article1 ' /> <a href='/vacodeupdates/title58.1/section58.1-4103/'>§ 58.1-4103</a></dt><dd>Voluntary exclusion program</dd></dl><ul class='outline'><li><input type='checkbox' id='article6' class='rptCheckbox parentCheck title58-1 subtitleIV chapter41 ' /> <b>Article 6. Service Permits</b></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4118' class='rptCheckbox title58-1 subtitleIV chapter41 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4118/'>§ 58.1-4118</a></dt><dd>Service permit required</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4119' class='rptCheckbox title58-1 subtitleIV chapter41 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4119/'>§ 58.1-4119</a></dt><dd>Application for service permit</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4120' class='rptCheckbox title58-1 subtitleIV chapter41 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4120/'>§ 58.1-4120</a></dt><dd>Consideration of service permit application</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4121' class='rptCheckbox title58-1 subtitleIV chapter41 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4121/'>§ 58.1-4121</a></dt><dd>Suspension or revocation of service permit; civil penalty</dd></dl></li></ul><ul class='outline'><li><input type='checkbox' id='chapter42' class='rptCheckbox parentCheck title58-1 subtitleIV ' /> <b>Chapter 42. Fantasy Contests</b><ul class='outline'><li></li></ul><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4200' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4200/'>§ 58.1-4200</a></dt><dd>Definitions</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4201' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4201/'>§ 58.1-4201</a></dt><dd>Powers and duties of the Board</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4202' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4202/'>§ 58.1-4202</a></dt><dd>Application for a fantasy contest permit; penalty</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4203' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4203/'>§ 58.1-4203</a></dt><dd>Issuance of permit; denial of same</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4204' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4204/'>§ 58.1-4204</a></dt><dd>Independent audit required; submission to Department</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4205' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4205/'>§ 58.1-4205</a></dt><dd>Suspension or revocation of a permit</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4206' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4206/'>§ 58.1-4206</a></dt><dd>Hearing and appeal</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4207' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4207/'>§ 58.1-4207</a></dt><dd>Fees and charges</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4208' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4208/'>§ 58.1-4208</a></dt><dd>Taxation on fantasy contest revenue; allocation of tax revenue; additional fee</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4209' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4209/'>§ 58.1-4209</a></dt><dd>Public inspection of information filed with the Department; charges for production</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4210' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4210/'>§ 58.1-4210</a></dt><dd>Permit not endorsement</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4211' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4211/'>§ 58.1-4211</a></dt><dd>Acquisition of interest in fantasy contest operator</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4212' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4212/'>§ 58.1-4212</a></dt><dd>Civil penalty</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4213' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4213/'>§ 58.1-4213</a></dt><dd>Fantasy contests conducted under this chapter not illegal gambling</dd></dl><dl class='number-descrip-list-outline x-wide'><dt><input type='checkbox' id='58.1-4214' class='rptCheckbox title58-1 subtitleIV chapter42 article6 ' /> <a href='/vacodeupdates/title58.1/section58.1-4214/'>§ 58.1-4214</a></dt><dd>Liability imposed by other laws not decreased</dd></dl></li></ul></span>
+
+
+
+				</article>
+                        <nav class="content-footer-menu"><input style="margin-left:35%;" type='button' class='btn btn-sm btn-primary rptCheckbox' id='singlebutton' value='Create Report' name='singlebutton'> <a class='reportClick rptCheckbox' title='Cancel Report' href=''> Cancel</a><ul class="rptSwap" style="visibility: visible;"><li>&nbsp;</li></ul></nav>
+
+			</div>
+			<div class="slot-9">
+				<nav id="section-menu">
+					<ul class="section-header-menu">
+						<li>
+							<a href="/vacode">Code of Virginia</a>
+						</li>
+						<li class="sub-menu">
+							<a href="/vacodepopularnames">Popular Names</a>
+						</li>
+						<li id="covUpdates" class="sub-menu selected" aria-label="Currently selected page">
+							<a  href='/vacodeupdates/'>2026 Updates</a>
+						</li>
+						<li id='search-box' class="sub-menu">
+							<label class="form-title" for="search-text">Section Look Up</label>
+							<div action='/search' id='search-form' method='get' target='_top'>
+								<input aria-label="Section look up input" title="Section look up input" type="text" id='search-text' name='q' placeholder='ex.  2.2-4007.01' readonly onfocus="if (this.hasAttribute('readonly')) {this.removeAttribute('readonly'); this.blur(); this.focus(); }"/>
+								<button aria-label="Section look up button" title="Section look up button" id='search-button' type='submit'>Go</button>
+							</div>
+						</li>
+						<li>
+							<a href="/admincode">Administrative Code</a>
+						</li>
+						<li>
+							<a href="/constitution">Constitution of Virginia</a>
+						</li>
+						<li>
+							<a href="/charters">Charters</a>
+						</li>
+						<li>
+							<a href="/authorities">Authorities</a>
+						</li>
+						<li>
+							<a href="/compacts">Compacts</a>
+						</li>
+						<li>
+							<a href="/uncodifiedacts">Uncodified Acts</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- / .grid -->
+    <script type="text/javascript">var siteurl = 'https://law.lis.virginia.gov';</script>
+	<script src="/Scripts/jquery.min.js" type="text/javascript"></script>
+	<script src="/Scripts/responsive.js" type="text/javascript"></script>
+	<script src="/Scripts/modernizer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/Scripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/Scripts/jquery.fancybox.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/Scripts/fancybox/jquery.easing-1.3.pack.js" type="text/javascript"></script>
+	<script src="/Scripts/fancybox/jquery.mousewheel-3.0.4.pack.js" type="text/javascript"></script>
+	<script src="/Scripts/jquery.floatThead.min.js" type="text/javascript"></script>
+	<script src="/Scripts/printThisCoV.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.cookie.js" type="text/javascript"></script>
+	<script src="/Scripts/search.js" type="text/javascript"></script>
+	<script src="/Scripts/searchCoV.js" type="text/javascript"></script>
+	<script src="/Scripts/isFontFaceSupported.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.qtip.js" type="text/javascript"></script>
+	
+	<link rel="stylesheet" href="/Content/msgBoxLight.css" />
+	<script src="/Scripts/jquery.msgBox.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/Scripts/tinymce/tinymce.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/Scripts/edit.js" type="text/javascript"></script>
+	<script src="/Scripts/CoVInit.js" type="text/javascript"></script>
+	
+	<script src="/Scripts/report.js" type="text/javascript"></script>
+	<script src="/Scripts/default.js" type="text/javascript"></script>
+	<script src="/Scripts/pdf.js" type="text/javascript"></script>
+</body>
+        </div>
+        
+        
+            <div class="va-law-footer" id="valawfooter">
+                <div class="grid">
+                    <div class="row">
+                        <div class="slot-6 foot-callout">
+                            <h4><i class="fa fa-book"></i> Virginia Law Library</h4>
+                            
+                            <p>The Code of Virginia, Constitution of Virginia, Charters, Authorities, Compacts and Uncodified Acts are available in both PDF and CSV formats. <a aria-label="Virginia Law Library" class="more" href="/law-library"><i class="fa fa-arrow-circle-right"></i></a></p>
+                        </div>
+                        <div class="slot-7 foot-callout">
+                            <h4><i class="fa fa-question-circle"></i> Helpful Resources</h4>
+                            <ul>
+                                <li><a href="http://codecommission.dls.virginia.gov/">Virginia Code Commission</a></li>
+                                <li><a href="http://register.dls.virginia.gov/">Virginia Register of Regulations</a></li>
+                                <li><a href="https://www.archives.gov/exhibits/charters/constitution_transcript.html">U.S. Constitution</a></li>
+                            </ul>
+                        </div>
+                        <div class="slot-8 foot-callout">
+                            <h4 href="/developers"><i class="fa fa-wrench"></i> For Developers</h4>
+                            <p>The Virginia Law website data is available via a web service. <a aria-label="For Developers" class="more" href="/developers"><i class="fa fa-arrow-circle-right"></i></a></p>
+                        </div>
+                        <div class="slot-9 foot-callout">
+                            
+                            
+                            <div style="height: 4px;"></div>
+                            <img id="ga-seal" src="/images/ga_seal_lis.png" alt="virginia general assembly seal" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="footer">
+            <nav class="footer-links" style="line-height: 1.4;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div aria-hidden="true" id='generic_login_div' style="display:none;z-index:9999;padding:10px;" class="corners dropshadow">
+                            <h3>Sign In</h3>
+                            <div class='form-row'>
+                                <label id='lblusername' for='username'>Username:&nbsp; </label>
+                                <input type='text' class="user" name='username' placeholder="Username" id='username' />
+                                <label id="userError"></label>
+                            </div>
+                            <div class='form-row'>
+                                <label id='lblpassword' for='password'>Password:&nbsp; </label>
+                                <input type='password' class="pass" name='password' placeholder="Password" id='password' />
+                                <label id="passError"></label>
+                            </div>
+                            <div class='submit-row'>
+                                <input type='button' id="btnLogin" class="button" value='Login' />
+                                <a onclick='hideLogin()' class="hover">Cancel</a>
+                            </div>
+                        </div>
+                        <div id="dialog-modal" style="display:none;"></div>
+                        <span class="col-xs-12 text-center">
+                            <ul>
+                                <li><a href="https://lis.virginia.gov">LIS Home</a></li>
+                                <li><a id="aLIAB" href="https://lis.virginia.gov/register-account">Lobbyist-in-a-Box</a></li>
+                                <li><a href="https://lis.virginia.gov/privacy">Privacy Policy</a></li>
+                                
+                            </ul>
+                            <p>
+                                © Copyright Commonwealth of Virginia,
+                                <script>document.write(new Date().getFullYear())</script>. All rights reserved. Site developed by the <a href="http://dlas.virginia.gov">Division of Legislative Automated Systems (DLAS)</a>.
+                                <a aria-hidden="true" href="" id="signin" onclick="showLogin();return false;">Sign In</a>
+                                
+                            </p>
+                        </span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+</body>
+</html>
+
+<!--[if lt IE 10 ]><script async src="<%: FriendlyUrl.Href("~/Scripts/placeHolder.js" type="text/javascript"></script><![endif]-->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="~/Scripts/html5shiv.js"></script>
+<script src="~/Scripts/respond.js"></script>
+<![endif]-->
+
+<script src="/Scripts/SwitchMode.js" type="text/javascript"></script>

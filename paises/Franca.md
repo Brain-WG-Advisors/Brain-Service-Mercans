@@ -153,6 +153,7 @@ atualizado_em: 2026-10-27
 | — | _(nenhum ticket FR nas fontes)_ | | | |
 
 ## Pendências
+- [ ] (02/11) SIR fora do modelo oficial: etapa 6 rodou (27/08) sem `si-discovery.md`/`si-runbook-research.md`; NETENT-DSN, URSSAF-DPAE e DGFIP-EDI com P1–P7 improvisado, sem runbooks .docx OUT/IN, landscape sem 3 campos; `si_scope_check` structural = BLOCKED. Conteúdo técnico aproveitável; reorganizar no formato oficial quando a integração for usada (decisão do usuário; perguntar antes se a França está ativa → regra 9). [[revisoes/2026-11-02-sir-fr-co-x-modelo-oficial]]
 - [ ] Corrigir F-1 (264 linhas "NO DD COUNTERPART": refazer join por nome + conceito), F-2 (criar 4 WTs de BIK refeição e NTIC no padrão 62400/62410/62403), F-3 (SIPSI fora do escopo; criar FR-MOL-001) e m-1/m-2 — Build/Wallisson — (chat: design-dev-kb, 07-qa-report) → ver F6-20261027-FR-C11, C12, C13, C14, C15 (2026-10-27): fechados no QA v2 na linhagem anterior; a aplicação ao pacote reemitido não foi verificada
 - [ ] m-3 (verde do net pay) ao standard owner — QA — (chat: design-dev-kb) → ver F6-20261027-FR-C15 (2026-10-27)
 - [ ] Scope W-01..W-03: promover L137-13 (30%) e L137-14 (10%) a in_scope; linha out_of_scope para o 182 A ter; A1 só como flag; rotular F1–F22 e acrescentar F23–F31 — scope owner — [INCERTO] ID sugerido FR-DGFIP-006 já é do PASRAU

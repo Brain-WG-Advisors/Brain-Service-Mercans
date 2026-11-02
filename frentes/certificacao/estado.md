@@ -5,6 +5,25 @@
 **Objetivo:** validar os statutory reports que o HRBLIZZ produz em 12 países, com o pacote real enviado pela Primary SBC (report + recibo, G2N, contracheques, GL, banco, master). Validamos e reportamos; achados vão para implementation/dev.
 **Pasta:** `C:\Users\instituto\Documents\internal-certification` · Método: [[analise-reports]].
 
+## Instruções vigentes
+- **(29/10, usuário via janela geral)** Não mandar resumo à janela geral: o painel `http://127.0.0.1:8765/frentes.html` lê cada fim de rodada. Usar SendMessage à brain-service-5b só para o que só ela faz (commit, coordenação entre frentes).
+
+- **(29/10, usuário) Projeto do Marko:**
+  - **escopo:** todos os países que são nossos (com cliente ativo no BAU Master), não só os 12 da certificação;
+  - **contatos:** quem responde por cada país e o contato do Dev são descobertos por esta janela, sem perguntar ao usuário;
+  - **subagentes:** liberados, sem pedir ok;
+  - **piloto:** a Noruega, completa, antes de abrir os demais;
+  - **formato:** o deck. A Manju não tem modelo próprio e vai seguir o nosso; o guia do Vietnã é referência de estrutura;
+  - **distribuição:** dividir as tarefas entre os agentes com inteligência.
+  - **Gmail (29/10, usuário):** "pare de pedir coisas para aquela janela… analise o email usando o claude in chrome e você mesmo envie". Neste projeto, esta janela lê, confere e **envia** os e-mails ao BAU pelo Claude in Chrome, sem passar pela janela Gmail. O envio é **só quando o usuário pedir**, e a cada e-mail.
+  - **Enviados:** **29/10, Umesh (NO/NL)**, Cc Marko e Manju; prazo 04/11. É o início da medição do tempo de resposta do BAU no piloto NO. Próximo: Marju (EE/FI).
+  - **Fato novo (agenda do usuário, 29/10):** reunião "Ukraine Migration Project Plan – 1C to HRBlizz" em 30/10, 9:30. A UA está migrando do 1C para o HR Blizz, e isso entra no "como é hoje" da Ucrânia.
+  - **Contato (29/10, usuário):**
+    - por enquanto só o BAU (o Primary SBC do BAU Master). O Dev fica de fora;
+    - **sem call**: tudo por escrito;
+    - ~~mensagem nova por pessoa, sem a Manju e o Marko em cópia~~ **(mudou em 29/10, usuário):** por **e-mail**, com **Marko (mtaylor@mercans.com) e Manju (mshetija@mercans.com) em Cc**. Vale para as mensagens ao BAU deste projeto. A instrução de não acionar a Manju fica superada nesse ponto;
+    - base nos transcripts: weekly 27/10 12:15 ("take from BAU team") e a call com o Vinícius em 27/10 (1:03:39–1:05:19).
+
 ## Pacotes
 
 | Pacote | País | Período | Pass / Finding / Not tested | Recibo prova aceite? | Situação | Próximo passo |
@@ -54,6 +73,11 @@
   - perguntas curtas, só as necessárias;
   - uma mensagem por pessoa, em uma onda só;
   - o fluxo inclui todos os times (BAU, implementação/Config, Dev).
+- **Linha de base (29/10): [[internal-certification/_projetos/fluxo-entregas-marko/TAP_fluxo_entregas|TAP]]**, com o formato do guia do Vietnã da Manju, encontrado no Drive (cópia em `raw/drive/2026-10-29-modelo-manju/`). Avanço (29/10, fim do dia):
+  - **NO:** piloto v1.0 no formato S1–S8 (`paises/NO_fluxo_entregas.md`), à espera da aprovação do usuário para virar padrão;
+  - **dados:** 6 agentes rodaram (`dados/`: monday, lista de entregas, evidência de hoje e contato Dev, rota-alvo de UK/DK/SE/NL, de FI/EE/IE e de UA/KZ/RU). AZ ficou sem fonte, porque os sites não abrem;
+  - **mensagens:** `mensagens_v0.2.md` pronta (Dev: Illya; BAU com os contatos do monday). Urgente: EE (TSD sem XML desde 01/10; prazo 10/11) e NO (17/11).
+  - **Próximo:** com o ok do piloto, montar os 11 países no formato.
 - **Instrução vigente (29/10):** não acionar a Manju agora. Primeiro fazemos o caminho com os nossos 12 países. No fim, apresentamos a ela o método e o resultado.
 - **O pedido:** para cada país em produção, levantar como cada entrega ao governo é feita **hoje** (o sistema gera ou é feita à mão, por qual canal, com ou sem terceiro, se é corrigida antes do envio) e como **deveria** ser (o sistema gera, a Mercans é registrada como agente, o arquivo vai por XML/API com a assinatura do cliente). Depois, listar o que falta e montar um plano com datas para o Marko.
   - Não é a validação das specs. A Manju disse em 27/10 10:08: "that is different than what I'm asking now".

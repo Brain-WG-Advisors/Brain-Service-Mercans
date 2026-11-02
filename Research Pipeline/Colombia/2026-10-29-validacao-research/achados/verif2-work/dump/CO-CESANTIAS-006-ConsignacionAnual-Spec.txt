@@ -1,0 +1,1544 @@
+Version Control!B8	Statutory Report Specification
+Version Control!B9	COLOMBIA
+Version Control!B10	Annual Severance-Savings Deposit to the Employee's Chosen Fund - Consignacion anual de cesantias al fondo de cesantias elegido por el trabajador
+Version Control!B12	Version
+Version Control!C12	Effective Date
+Version Control!D12	Change Description
+Version Control!E12	Status
+Version Control!F12	Updated By
+Version Control!B13	1.0
+Version Control!C13	2026-10-16
+Version Control!D13	Initial version.
+Version Control!E13	Approved
+Version Control!F13	Wallisson Gomes
+Report Matrix!A1	ANNUAL SEVERANCE-SAVINGS DEPOSIT TO THE EMPLOYEE'S CHOSEN FUND — REPORT MATRIX
+Report Matrix!A3	Report ID
+Report Matrix!B3	CO-CESANTIAS-006
+Report Matrix!A4	Report Name (EN)
+Report Matrix!B4	Annual Severance-Savings Deposit to the Employee's Chosen Fund
+Report Matrix!A5	Report Name (Local)
+Report Matrix!B5	Consignacion anual de cesantias al fondo de cesantias elegido por el trabajador
+Report Matrix!A6	Document ID
+Report Matrix!B6	CO-CESANTIAS-006
+Report Matrix!A7	Document Title
+Report Matrix!B7	Annual Severance-Savings Deposit to the Employee's Chosen Fund - Field Specification
+Report Matrix!A8	Country
+Report Matrix!B8	Colombia
+Report Matrix!A9	Authority
+Report Matrix!B9	Severance-savings funds (Proteccion, Porvenir, Colfondos, Skandia and the state-owned Fondo Nacional del Ahorro), reached through a licensed information operator -- NOT a government authority
+Report Matrix!A10	Report Type
+Report Matrix!B10	Statutory annual deposit filing to a private fund -- a labour entitlement, not a tax return (no XSD, no fiscal receipt)
+Report Matrix!A11	Tax Type
+Report Matrix!B11	N/A -- cesantias is a CST labour entitlement, not a tax concept (see Resident/Non-Resident section below)
+Report Matrix!A12	Relationship
+Report Matrix!B12	Employer to the employee's chosen Severance-savings fund, via a licensed information operator
+Report Matrix!A13	Frequency
+Report Matrix!B13	Annual - one record per employee per accrual year
+Report Matrix!A14	Submission Deadline
+Report Matrix!B14	BEFORE 15 FEBRUARY of the year following the accrual year
+Report Matrix!A15	File Format
+Report Matrix!B15	Fixed-width TXT, or XLS 97-2003, or CSV (operator-dependent)
+Report Matrix!A16	File Extension
+Report Matrix!B16	.txt / .xls / .csv
+Report Matrix!A17	Character Encoding
+Report Matrix!B17	Not stated in the published instructions. The file is written as ASCII with no accents or special characters and CRLF line endings (see File Structure).
+Report Matrix!A18	Record Types / Sections
+Report Matrix!B18	Outbound record T01-T20 (annual return); Inbound confirmation E10, E11, E90, E91, E93 (CO-IN-SEVERANCE SAVINGS-CONFIRMATION)
+Report Matrix!A19	Version
+Report Matrix!B19	v1.0
+Report Matrix!A22	DETAILED COMPLIANCE NOTES (Colombia-specific)
+Report Matrix!A23	SUBMISSION CHANNEL
+Report Matrix!A24	- Channel: online_form AND file_upload (fixed-width TXT / XLS 97-2003 / CSV) | Portal: a licensed information operator - ACH Colombia S.A. (SOI), www.nuevosoi.com.co, and Simple S.A., www.pagosimple.com; Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla offer the same service | Source: SOI instruction guide DDS-DES-INS-008 v2 and Simple S.A. 'Manual Severance savings' ss. 3.1-3.2 | The 258-position layout is the one published by Simple S.A. and is the only detail layout defined in this Spec; the information operator used is a configuration setting, and this Spec defines no other operator's variant.
+Report Matrix!A25	- THE RECIPIENT IS NOT A GOVERNMENT AUTHORITY. The money goes to a private fondo de cesantias, or to the state-owned FNA, in an individual account in the employee's name. There is no authority portal, no fiscal receipt and no tax-authority validation - which is exactly why no XSD exists and why this filing must never be labelled XML.
+Report Matrix!A26	- THE OPERATOR IS THE SAME KIND OF INTERMEDIARY AS FOR PILA, BUT THE SERVICE IS NOT PILA. Severance savings is a Payment Supplementary to social security Social (PCSS) and is selected as a distinct service inside the operator's portal, with its own return number series and its own period concept - a YEAR, not a month. Simple S.A. notes that the login is the same one used for PILA, which is the source of the frequent error of building a PILA return and expecting the severance savings to be in it.
+Report Matrix!A27	- The DIAN portals play no part in this filing. Form 350, Form 220 and Format 2276 go to DIAN; the severance savings deposit never does. What DIAN sees of severance savings is the reporting of the amounts on Form 220 casillas 48-49 and Format 2276 numerals 19-20, which are separate filings with their own Specs (CO-DIAN-004 and CO-DIAN-005).
+Report Matrix!A28	- File-size and structure constraints from the published instructions: no header row; the data start on the first line or row; all records on one Excel sheet; a file above 1 MB must be compressed before upload (SOI); the fixed-width record is 258 characters and the sequence must start at 00001 and be consecutive.
+Report Matrix!A29	INTEGRATION TYPE AND DIRECTION
+Report Matrix!A30	- Integration: outbound file generation and inbound response handling. OUTBOUND: the annual return, keyed or uploaded. INBOUND: CO-IN-SEVERANCE SAVINGS-CONFIRMATION, the deposit confirmation evidencing compliance with the February deadline. Both directions are modelled on Sheet 4 - the outbound record as T01-T20, the inbound values as E10, E11, E90, E91 and E93.
+Report Matrix!A31	- product_mapping_required = true. The engine must hold the fund code as EMPLOYEE master data (it is the employee's statutory choice, not a company default), the 360-day service count, the CST art. 253 base including the transport allowance, the accrual-year period concept, the per-employee deposit-compliance status and, when the decree is enacted, the monthly-advance regime flag per contract.
+Report Matrix!A32	- NOT DERIVABLE FROM THE MONTHLY FILINGS. The population is not the PILA population: an employee who left during the accrual year is EXCLUDED from the deposit and is paid directly in the final settlement (Ley 50 de 1990 art. 99 num. 4; Population Rules Step 0 exclusion (2)), while an all-inclusive salary employee is present in PILA and owed nothing here. The population must be generated from the Population Rules, never copied from a PILA return. Do not use the operator's seed-from-last-PILA convenience (E08).
+Report Matrix!A33	- THE ONE-TO-MANY TRAP ON THE RETURN. Where the medio de pago is Pago Credito, the operator issues ONE RETURN NUMBER PER FONDO, so the reconciliation store must accept many return numbers for one payroll run (E05, E10).
+Report Matrix!A34	- The engine must also produce two things that are NOT in this file and are commonly conflated with it: the 12% interest paid to the EMPLOYEE in January (IN01-IN03), and the tax figures that appear on Form 220 and Format 2276. Different payees, different deadlines, different penalties.
+Report Matrix!A35	RESIDENT / NON-RESIDENT TREATMENT
+Report Matrix!A36	- RESIDENT AND NON-RESIDENT ARE TREATED IDENTICALLY IN THIS FILING, AND THAT IS THE POINT. Severance savings is a LABOUR entitlement under the CST, not a tax concept, so it attaches to the employment relationship and not to tax residence. A non-resident foreign national employed under a Colombian contract accrues severance savings on the same base, at the same 360-day rate, is deposited to a fund of their own choosing and is reported in this return on exactly the same record as a resident. There is no non-resident variant of the layout and no withholding on the deposit.
+Report Matrix!A37	- WHERE RESIDENCE DOES BITE IS THE TAX TREATMENT, WHICH IS NOT THIS FILING. For a RESIDENT, ET art. 206 num. 4 exempts the severance savings and their interest in full where the average monthly income of the last six months is at or below 350 UVT (COP 18,330,900 in 2026), then tapers 90 / 80 / 60 / 40 / 20 per cent across the 350-410, 410-470, 470-530, 530-590 and 590-650 UVT bands, with nothing exempt above 650 UVT. For a NON-RESIDENT the art. 206 num. 4 exemption is unavailable - it belongs to the resident ID card general - and the payment is taxed at the flat 20% of ET art. 408 on the gross with no art. 388 depuration. Neither outcome changes a single character of the record sent to the fund.
+Report Matrix!A38	- THE DOCUMENT TYPE IS WHERE THE FOREIGN EMPLOYEE ACTUALLY BREAKS. The layout admits CE, PA, CD, SC, PE and (in the XLS variant) PT, and SOI records that a Special permanence permit number must be exactly 15 digits. A regularisation that converts a PEP or PPT into a Foreign resident ID card changes the join key (T03 + T04) that the fund holds, so the change must reach the fund or the following February's deposit lands on an orphan account. See T03 and T04.
+Report Matrix!A39	- A Colombian employee posted abroad but retained on a Colombian contract remains in scope; an employee of a foreign entity with no Colombian employment contract is out of scope entirely, because there is no CST relationship to accrue cesantias on.
+Report Matrix!A40	RELATED FILINGS / CROSS-REFERENCES
+Report Matrix!A41	- CO-DIAN-004 (Form 220) casillas 48 and 49 - the same severance savings figures reported to DIAN for the employee's certificate. They must reconcile to this return.
+Report Matrix!A42	- CO-DIAN-005 (Format 2276 v4) numerals 19 and 20 - the same figures again, and NOTE that numerals 19 and 20 are TRANSPOSED against Form 220 casillas 48 and 49. Map by meaning, per the CO-DIAN-005 Spec.
+Report Matrix!A43	- CO-DIAN-001 (electronic payroll) - carries the severance savings and the interest as earning elements when they are PAID, on the payment-date rule. The XML shows the payment; this return shows the deposit; they are not the same event and can fall in different months.
+Report Matrix!A44	- CCG Module 9 (termination and statutory benefits) for the base, the taper and the indemnity; CCG Module 10.1 report CO-RPT-006 and the consolidated 2026 filing calendar.
+Payroll Scope Summary!A1	PAYROLL SCOPE SUMMARY - ANNUAL SEVERANCE-SAVINGS DEPOSIT TO THE EMPLOYEE'S CHOSEN FUND
+Payroll Scope Summary!A2	PURPOSE: Tell the developer WHO gets reported on the annual cesantias deposit and what happens to a borderline case.
+Payroll Scope Summary!A4	SCENARIO
+Payroll Scope Summary!B4	REPORT?
+Payroll Scope Summary!C4	NOTES / REASONING
+Payroll Scope Summary!A5	═══ WHO GETS REPORTED ═══
+Payroll Scope Summary!A6	Indefinite-term employee (indefinite-term contract)
+Payroll Scope Summary!B6	YES
+Payroll Scope Summary!C6	The core private-sector population. CST art. 47; Ley 2466 de 2025 art. 5.
+Payroll Scope Summary!A7	Fixed-term employee (fixed-term contract, max 4 years)
+Payroll Scope Summary!B7	YES
+Payroll Scope Summary!C7	Identical reporting treatment to an indefinite-term contract. CST art. 46; Ley 2466 de 2025 art. 6.
+Payroll Scope Summary!A8	Specific-work or task employee (contract por obra o labor)
+Payroll Scope Summary!B8	YES
+Payroll Scope Summary!C8	An employment contract; CST art. 46. Electronic payroll TipoContrato = 3 (Obra o Labor).
+Payroll Scope Summary!A9	Occasional / accidental / transitory worker (< 1 month, non-core activity)
+Payroll Scope Summary!B9	YES
+Payroll Scope Summary!C9	Still an employee under CST art. 6. Reported on every filing; the PILA return type and the day counts differ, not the obligation.
+Payroll Scope Summary!A10	Part-time employee
+Payroll Scope Summary!B10	YES
+Payroll Scope Summary!C10	Colombia has no separate part-time regime. Reported normally; the PILA contribution base is floored at 1 SMMLV (COP 1,750,905) except for the worker type 51 partial-time regime.
+Payroll Scope Summary!A11	All-inclusive salary employee (all-inclusive salary, >= 13 SMMLV)
+Payroll Scope Summary!B11	YES
+Payroll Scope Summary!C11	CST art. 132 num. 2. Reported with the integral-salary flag set; the contribution base is 70% of the integral salary, and the electronic payroll carries SalarioIntegral = true.
+Payroll Scope Summary!A12	Apprentice (apprenticeship contract)
+Payroll Scope Summary!B12	YES
+Payroll Scope Summary!C12	Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA tipo cotizante 19 'Aprendices etapa lectiva Ley 2466 de 2025' for the lectiva phase from the health period of August 2025 (code 12 only for earlier periods). For health periods before August 2025, code 19 covers the productive phase; from the health period of August 2025, AT2 v30 names no code for the productive phase (AT2 v30 §2.1.2.3.1 campo 5, types 12 and 19).
+Payroll Scope Summary!A13	Intern / practical placement (practicas o pasantias)
+Payroll Scope Summary!B13	YES
+Payroll Scope Summary!C13	Electronic payroll TipoContrato = 5. Reported where remunerated.
+Payroll Scope Summary!A14	Teleworkers and remote workers
+Payroll Scope Summary!B14	YES
+Payroll Scope Summary!C14	Law 1221 of 2008 as amended by Law 2466 of 2025 arts. 52-54. No reporting difference; the electronic payroll carries a dedicated Teletrabajo earning element (NIE158).
+Payroll Scope Summary!A15	Resident foreign national under a Colombian contract
+Payroll Scope Summary!B15	YES
+Payroll Scope Summary!C15	Full reporting. Withheld under the ET art. 383 progressive table once tax residence is acquired.
+Payroll Scope Summary!A16	NON-RESIDENT foreign national under a Colombian contract
+Payroll Scope Summary!B16	YES
+Payroll Scope Summary!C16	IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix.
+Payroll Scope Summary!A17	Employed old-age pensioner in active service
+Payroll Scope Summary!B17	YES
+Payroll Scope Summary!C17	PILA worker sub-type 01; no pension contribution (PILA pension rate field = 0), health and the levies still apply.
+Payroll Scope Summary!A18	Executive director / statutory legal representative holding an employment contract
+Payroll Scope Summary!B18	YES
+Payroll Scope Summary!C18	Reported as an ordinary employee where an employment contract exists.
+Payroll Scope Summary!A19	Independent contractor (service contract)
+Payroll Scope Summary!B19	NO
+Payroll Scope Summary!C19	Not an employee. The contractor self-files PILA on 40% of fees (return types I / Y, descoped) and is reported by the payer in the third-party information return, not in this employer filing. Withholding on their fees does pass through Form 350, but under a different casilla.
+Payroll Scope Summary!A20	Public-sector employee (contributor type 47, SGP-funded entity)
+Payroll Scope Summary!B20	NO
+Payroll Scope Summary!C20	Public-sector employment is outside the scope of this specification, which covers employees under the CST and Law 50 of 1990 art. 99; the PILA return types T and F that carry public-sector contributors are likewise out of scope.
+Payroll Scope Summary!A21	Non-executive director paid fees only (junta directiva)
+Payroll Scope Summary!B21	NO
+Payroll Scope Summary!C21	Director fees (honorarios de junta directiva) are not paid under an employment contract, and cesantias is a prestacion social of the employment contract (CST art. 249; Law 50 of 1990 art. 99), so no fund affiliation and no return record exist for a fee-only director. Where the same person also holds an employment contract, that contract is reported as an ordinary employee (see the executive director row). The withholding on the fees is a Form 350 matter outside this filing.
+Payroll Scope Summary!A22	Pensioner whose pension is paid by a fund, not by the employer
+Payroll Scope Summary!B22	NO
+Payroll Scope Summary!C22	The paying fund is the withholding agent and the reporting party, not the employer.
+Payroll Scope Summary!A23	═══ AMOUNTS AND CONCEPTS REPORTED ═══
+Payroll Scope Summary!A24	Annual severance-savings liquidation at 31 December
+Payroll Scope Summary!B24	YES
+Payroll Scope Summary!C24	T14. The whole purpose of the filing - one amount per employee per accrual year.
+Payroll Scope Summary!A25	Basic salary of December of the accrual year
+Payroll Scope Summary!B25	YES
+Payroll Scope Summary!C25	T12, as the layout expressly requires: 'Corresponde al ultimo salario basico reportado en el mes de diciembre del ano causado de cesantias'.
+Payroll Scope Summary!A26	Transport allowance inside the liquidation base
+Payroll Scope Summary!B26	YES
+Payroll Scope Summary!C26	CST art. 253 includes it in the base. It is NOT a separate field - it is inside T14. The operator's own calculator omits it, which is the single most expensive trap in this filing; see T14.
+Payroll Scope Summary!A27	Days of service on the 360-day commercial year
+Payroll Scope Summary!B27	YES
+Payroll Scope Summary!C27	T10, 1 to 360. Paid leave and recognised incapacity count as service.
+Payroll Scope Summary!A28	Employee's chosen fund
+Payroll Scope Summary!B28	YES
+Payroll Scope Summary!C28	T09, one of the five codes 02 / 03 / 10 / 15 / 19. The choice is the employee's under Ley 50 de 1990 art. 99 num. 3.
+Payroll Scope Summary!A29	Employee residential address, landline, e-mail
+Payroll Scope Summary!B29	YES
+Payroll Scope Summary!C29	T15 and T18-T19 - the fund needs them to communicate with its own member. Note it is the RESIDENCE, unlike PILA and the electronic payroll which carry the work location.
+Payroll Scope Summary!A30	Contract hire date
+Payroll Scope Summary!B30	YES
+Payroll Scope Summary!C30	T20, and it is the HIRE date, not the start of the accrual period. See T20.
+Payroll Scope Summary!A31	Interest on severance savings at 12%
+Payroll Scope Summary!B31	NO
+Payroll Scope Summary!C31	IN01-IN03. Paid DIRECTLY TO THE EMPLOYEE in January under Ley 52 de 1975 art. 1, never to the fund. Different payee, different deadline, different penalty. Shown on the Spec as not-applicable rows precisely because it is so often conflated with the deposit.
+Payroll Scope Summary!A32	All-inclusive salary employees' severance savings
+Payroll Scope Summary!B32	NO
+Payroll Scope Summary!C32	CST art. 132 num. 2 - the all-inclusive salary ABSORBS the severance savings, so there is no deposit and the employee must not appear in the return at all. They DO appear in PILA, which is why the seed-from-PILA convenience at E08 is dangerous.
+Payroll Scope Summary!A33	Partial withdrawals and advances taken during the year
+Payroll Scope Summary!B33	NO
+Payroll Scope Summary!C33	Not a field of this layout. CST art. 254 prohibits partial payment before termination except for the authorised housing and education purposes; a lawful partial settlement reduces the balance and the interest, and is evidenced separately.
+Payroll Scope Summary!A34	Withholding tax on the severance savings
+Payroll Scope Summary!B34	NO
+Payroll Scope Summary!C34	No withholding is practised on the DEPOSIT. The tax treatment (ET art. 206 num. 4 for a resident, ET art. 408 for a non-resident) is settled when the money is PAID to the employee, and is reported on Form 220 and Format 2276.
+Payroll Scope Summary!A35	Employer social-security contributions
+Payroll Scope Summary!B35	NO
+Payroll Scope Summary!C35	Cesantias is a prestacion social and is NOT part of the contribution base (Ley 1393 de 2010 art. 30 and CST art. 128 govern that boundary). Nothing about it appears in PILA.
+Payroll Scope Summary!A36	A declared record count or control total inside the file
+Payroll Scope Summary!B36	NO
+Payroll Scope Summary!C36	The published layouts carry no header, no trailer, no record count and no control total (Simple S.A. 'Manual Cesantias' s. 3.2; see File Structure). The control is the total payable returned by the operator (E11), which is reconciled against the engine's own sum of T14 before payment, because a truncated upload is not self-detecting.
+Payroll Scope Summary!A37	Pre-1991 retrospective-regime employees
+Payroll Scope Summary!B37	PARTIAL
+Payroll Scope Summary!C37	Employees hired before 1 January 1991 who did not migrate remain on the retrospective annual-adjustment regime, which has NO annual deposit to a fund - the employer holds the liability and settles on termination. They are therefore out of this return, but they ARE reported as a separate line on Form 220 and Format 2276. Hold the regime as master data on the contract.
+Payroll Scope Summary!A38	═══ TIMING AND RELATIONSHIP ═══
+Payroll Scope Summary!A39	Reported on the accrual (causacion) date
+Payroll Scope Summary!B39	NO
+Payroll Scope Summary!C39	Every Colombian payroll filing is keyed to the PAYMENT or credit-in-account date, not to the accrual date. A December salary paid in January falls in the January filing.
+Payroll Scope Summary!A40	Reported on the payment or credit-in-account date
+Payroll Scope Summary!B40	YES
+Payroll Scope Summary!C40	The universal Colombian rule - payment or credit in account. Applies to the electronic payroll (DIAN Resolution 000227 of 2025 art. 1.5.3.2.2), to Form 350, to Form 220 and to Format 2276.
+Payroll Scope Summary!A41	A semi-monthly payroll produces two filings a month
+Payroll Scope Summary!B41	NO
+Payroll Scope Summary!C41	It does not. The electronic payroll is expressly ONE monthly document per employee 'irrespective of whether the obliged party makes payments in different or shorter periods' (Res. DIAN 000227 de 2025 art. 1.5.3.2.2). PILA and Form 350 are likewise monthly.
+Payroll Scope Summary!A42	Nil period still filed
+Payroll Scope Summary!B42	NO
+Payroll Scope Summary!C42	There is no nil return. The deposit is a payment per employee (Law 50 of 1990 art. 99 num. 3), not a declaration: the return consists of one record per employee in service at 31 December whose liquidation is at or above one day of one SMMLV (Population Rules Step 0; File Structure, minimum collection), and the layout has no header or empty-return construct. Where no employee meets the population rule for the accrual year, no return is built and nothing is deposited.
+Payroll Scope Summary!A43	Corrections handled by re-filing the whole period
+Payroll Scope Summary!B43	VARIES
+Payroll Scope Summary!C43	Electronic payroll: NO - a dedicated adjustment note (NominaIndividualDeAjuste, Replace or Delete) referencing the original CUNE. Form 350: yes, a corrective return. PILA: a correction return type N (correcciones) for the period, filed through the same operador as the original return; the C records (correct values) must be equal to or greater than the A records (original values) in IBC and in days, and type N cannot be used for a correction that leads to a refund, which is requested from each administradora outside PILA (AT2 v30 §2.1.1.2.2 campo 8; Disposiciones comunes a la Planilla N). A return paid after its deadline is filed on type E; type M (mora) applies only to periods before health period March 2014 with a total absence of payment (AT2 v30 §2.1.1.2.2 campo 8).
+Payroll Scope Summary!A44	═══ SPECIAL CASES ═══
+Payroll Scope Summary!A45	Employee who left during the accrual year
+Payroll Scope Summary!B45	NO
+Payroll Scope Summary!C45	The severance savings of a leaver are settled IN THE FINAL SETTLEMENT and paid to the employee, not deposited to the fund in the following February. Only employees still in service at 31 December generate a return record. Including a leaver double-pays.
+Payroll Scope Summary!A46	Employee hired during the accrual year
+Payroll Scope Summary!B46	YES
+Payroll Scope Summary!C46	One record, with T10 carrying the actual days of service on the 360-day convention and T20 still carrying the real hire date.
+Payroll Scope Summary!A47	Employee whose liquidation is below one day of the SMMLV
+Payroll Scope Summary!B47	NO
+Payroll Scope Summary!C47	The layout rejects it: 'el valor minimo del recaudo debe ser de un (1) dia de un (1) SMLMV del ano causado' - COP 58,363.50 for accrual year 2026. Such a residue is settled with the employee, not deposited.
+Payroll Scope Summary!A48	Employee paid directly under CST art. 57 par. 4
+Payroll Scope Summary!B48	NO
+Payroll Scope Summary!C48	Where the employer proves direct payment fehacientemente, the payment discharges the obligation and no non-deposit penalty applies - so no return record. BUT affiliation to a fund remains compulsory, and the discharge is rebuttable on the freedom-and-purpose test. See E92.
+Payroll Scope Summary!A49	Construction worker under CST art. 310
+Payroll Scope Summary!B49	YES
+Payroll Scope Summary!C49	A special regime - three days' salary per completed month rather than 30 - but the same return record. Only T14 changes; the layout has no field to disclose the regime.
+Payroll Scope Summary!A50	Apprentice under a apprenticeship contract
+Payroll Scope Summary!B50	YES
+Payroll Scope Summary!C50	Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026, so the ordinary CST prestaciones including severance savings apply to the productive phase.
+Payroll Scope Summary!A51	Employee who changed fund during the year
+Payroll Scope Summary!B51	YES
+Payroll Scope Summary!C51	One record, to the fund the employee has chosen at the time of the deposit. The choice is the employee's and is master data on the employee; a mid-year change must reach payroll before the February run or the deposit goes to the old fund.
+Consignacion Cesantias Spec!A1	Annual Severance-Savings Deposit to the Employee's Chosen Fund - Consignacion anual de cesantias al fondo de cesantias elegido por el trabajador
+Consignacion Cesantias Spec!A2	Field Name (EN)
+Consignacion Cesantias Spec!B2	Field Name (Local ES)
+Consignacion Cesantias Spec!C2	Record Type / Section
+Consignacion Cesantias Spec!D2	Field Position
+Consignacion Cesantias Spec!E2	Payroll Field (Y/N)
+Consignacion Cesantias Spec!F2	Mandatory (Y/N/C)
+Consignacion Cesantias Spec!G2	Conditional Reason
+Consignacion Cesantias Spec!H2	Position (Start-End)
+Consignacion Cesantias Spec!I2	Field Length
+Consignacion Cesantias Spec!J2	Format
+Consignacion Cesantias Spec!K2	Example
+Consignacion Cesantias Spec!L2	System Mapping
+Consignacion Cesantias Spec!M2	Field Explanation
+Consignacion Cesantias Spec!N2	Relevant for Payroll (Y/N)
+Consignacion Cesantias Spec!O2	Option Values
+Consignacion Cesantias Spec!P2	Rounding
+Consignacion Cesantias Spec!Q2	Negative (Y/N)
+Consignacion Cesantias Spec!R2	Value Type
+Consignacion Cesantias Spec!S2	Reporting Frequency
+Consignacion Cesantias Spec!T2	Query to RA
+Consignacion Cesantias Spec!U2	RA Comments
+Consignacion Cesantias Spec!A3	═══ return envelope - keyed in the operator portal, not in the detail file ═══
+Consignacion Cesantias Spec!A4	Contributor document type and number
+Consignacion Cesantias Spec!B4	Tipo y numero de documento del aportante
+Consignacion Cesantias Spec!C4	Payroll-Form Header
+Consignacion Cesantias Spec!D4	E01
+Consignacion Cesantias Spec!E4	Y
+Consignacion Cesantias Spec!F4	Y
+Consignacion Cesantias Spec!H4	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I4	2 + 16
+Consignacion Cesantias Spec!J4	AN
+Consignacion Cesantias Spec!K4	NI / 900123456
+Consignacion Cesantias Spec!L4	Company.Document_Type + Company.Document_Number
+Consignacion Cesantias Spec!M4	COMPOSITE FIELD. The employer authenticates to the information operator with the pair (document type, document number) plus a user document pair and a password; the contributor identity is then taken from the operator's registration record, not re-keyed per return. Composite Key: sub-field 1 = document type (NI for a legal person); sub-field 2 = the NIT without the check digit, without dots and without hyphens. PERSISTENCE: fixed for the life of the legal entity; it must be the SAME NIT used on the PILA return and on Form 350, because Simple S.A. offers to seed the severance savings return from the last PILA return paid for the selected year and the seed matches on this pair.
+Consignacion Cesantias Spec!N4	Y
+Consignacion Cesantias Spec!O4	-
+Consignacion Cesantias Spec!P4	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q4	N
+Consignacion Cesantias Spec!R4	Identifier
+Consignacion Cesantias Spec!S4	Per return
+Consignacion Cesantias Spec!A5	Service to be settled
+Consignacion Cesantias Spec!B5	Servicio a liquidar
+Consignacion Cesantias Spec!C5	Payroll-Form Header
+Consignacion Cesantias Spec!D5	E02
+Consignacion Cesantias Spec!E5	N
+Consignacion Cesantias Spec!F5	Y
+Consignacion Cesantias Spec!H5	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I5	-
+Consignacion Cesantias Spec!J5	AN
+Consignacion Cesantias Spec!K5	Cesantias
+Consignacion Cesantias Spec!L5	Constant
+Consignacion Cesantias Spec!M5	A constant for this filing. The operator portals treat severance savings as one of the Supplementary social-security payments (PCSS) services and it is selected explicitly; selecting the wrong service produces a PILA return, not a severance savings return.
+Consignacion Cesantias Spec!N5	Y
+Consignacion Cesantias Spec!O5	-> Sheet 6: Service PCSS
+Consignacion Cesantias Spec!P5	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q5	N
+Consignacion Cesantias Spec!R5	Code
+Consignacion Cesantias Spec!S5	Per return
+Consignacion Cesantias Spec!A6	Accrual year of the severance savings
+Consignacion Cesantias Spec!B6	Ano causado de cesantias
+Consignacion Cesantias Spec!C6	Payroll-Form Header
+Consignacion Cesantias Spec!D6	E03
+Consignacion Cesantias Spec!E6	N
+Consignacion Cesantias Spec!F6	Y
+Consignacion Cesantias Spec!H6	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I6	4
+Consignacion Cesantias Spec!J6	AAAA (4)
+Consignacion Cesantias Spec!K6	2026
+Consignacion Cesantias Spec!L6	Mercans.Cesantias_Accrual_Year
+Consignacion Cesantias Spec!M6	THE PERIOD OF THIS FILING IS A YEAR, NOT A MONTH. This is the single most important structural difference from every other Colombian payroll filing: the electronic payroll, Form 350 and PILA are monthly and keyed to a payment date, whereas the severance savings return is keyed to the accrual YEAR that closed on 31 December and is paid in the FOLLOWING February. A return built in February 2027 carries ano accrued = 2026.
+Consignacion Cesantias Spec!N6	Y
+Consignacion Cesantias Spec!O6	-
+Consignacion Cesantias Spec!P6	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q6	N
+Consignacion Cesantias Spec!R6	Date
+Consignacion Cesantias Spec!S6	Per return
+Consignacion Cesantias Spec!A7	Affiliation type of the return
+Consignacion Cesantias Spec!B7	Tipo de afiliacion de la planilla
+Consignacion Cesantias Spec!C7	Payroll-Form Header
+Consignacion Cesantias Spec!D7	E04
+Consignacion Cesantias Spec!E7	N
+Consignacion Cesantias Spec!F7	Y
+Consignacion Cesantias Spec!H7	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I7	-
+Consignacion Cesantias Spec!J7	AN
+Consignacion Cesantias Spec!K7	Dependiente
+Consignacion Cesantias Spec!L7	Constant for employer payroll
+Consignacion Cesantias Spec!M7	Three values exist - Agremiado (contributions for associated or unionised independents), Dependiente (contributions arising from an employment contract, payroll-deducted) and Independiente (a natural person contributing for themselves). For an employer filing this return it is ALWAYS Dependiente. The values offered depend on the contributor type under which the employer registered on the platform.
+Consignacion Cesantias Spec!N7	Y
+Consignacion Cesantias Spec!O7	-> Sheet 6: Tipo de afiliacion
+Consignacion Cesantias Spec!P7	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q7	N
+Consignacion Cesantias Spec!R7	Code
+Consignacion Cesantias Spec!S7	Per return
+Consignacion Cesantias Spec!A8	Payment method
+Consignacion Cesantias Spec!B8	Medio de pago
+Consignacion Cesantias Spec!C8	Payroll-Form Header
+Consignacion Cesantias Spec!D8	E05
+Consignacion Cesantias Spec!E8	N
+Consignacion Cesantias Spec!F8	Y
+Consignacion Cesantias Spec!H8	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I8	-
+Consignacion Cesantias Spec!J8	AN
+Consignacion Cesantias Spec!K8	PSE
+Consignacion Cesantias Spec!L8	Mercans.Payment_Channel_Config
+Consignacion Cesantias Spec!M8	Selected before the detail is loaded, because it changes the OUTPUT: SOI records that where the medio de pago is Pago Credito the system issues ONE RETURN NUMBER PER ADMINISTRADORA contained in the settlement, whereas an electronic payment (PSE) yields a single return number. The engine's reconciliation must therefore expect either one or many return numbers back for the same run. See E10.
+Consignacion Cesantias Spec!N8	Y
+Consignacion Cesantias Spec!O8	-> Sheet 6: Medio de pago
+Consignacion Cesantias Spec!P8	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q8	N
+Consignacion Cesantias Spec!R8	Code
+Consignacion Cesantias Spec!S8	Per return
+Consignacion Cesantias Spec!A9	Return short name
+Consignacion Cesantias Spec!B9	Nombre corto planilla
+Consignacion Cesantias Spec!C9	Payroll-Form Header
+Consignacion Cesantias Spec!D9	E06
+Consignacion Cesantias Spec!E9	N
+Consignacion Cesantias Spec!F9	N
+Consignacion Cesantias Spec!H9	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I9	-
+Consignacion Cesantias Spec!J9	AN
+Consignacion Cesantias Spec!K9	CESANTIAS 2026 NOMINA MENSUAL
+Consignacion Cesantias Spec!L9	Mercans.Planilla_Label
+Consignacion Cesantias Spec!M9	Optional free-text label. Both operator manuals mark it optional. Use it to carry the run identifier so that the returned return number can be tied back to the payroll run without relying on the portal's own chronology.
+Consignacion Cesantias Spec!N9	Y
+Consignacion Cesantias Spec!O9	-
+Consignacion Cesantias Spec!P9	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q9	N
+Consignacion Cesantias Spec!R9	Text
+Consignacion Cesantias Spec!S9	Per return
+Consignacion Cesantias Spec!A10	Single-fund-for-all indicator and selected fund
+Consignacion Cesantias Spec!B10	Indicador de fondo unico para todos los empleados y fondo seleccionado
+Consignacion Cesantias Spec!C10	Payroll-Form Header
+Consignacion Cesantias Spec!D10	E07
+Consignacion Cesantias Spec!E10	N
+Consignacion Cesantias Spec!F10	C
+Consignacion Cesantias Spec!G10	If = Y the value of T09 (Codigo del Fondo de Cesantias) is IGNORED for every record and replaced by the single fund selected here. If = N, T09 governs. See T09, whose Conditional Reason back-references this field.
+Consignacion Cesantias Spec!H10	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I10	1
+Consignacion Cesantias Spec!J10	AN
+Consignacion Cesantias Spec!K10	N
+Consignacion Cesantias Spec!L10	Mercans.Cesantias_Single_Fund_Flag + Employee.Cesantias_Fund_Code
+Consignacion Cesantias Spec!M10	CONDITIONAL PAIR. Simple S.A. asks 'Deseas que las cesantias de todos los empleados incluidos en esta planilla sean enviadas a un solo fondo de cesantias?'. Answering YES overwrites the per-employee fund with one value for the whole return. For a real employer the answer is almost always NO, because the fund is the EMPLOYEE'S statutory choice (Law 50 of 1990 art. 99 num. 3: 'en el fondo de cesantia que el mismo elija'). Answering YES to save keystrokes deposits other people's money into the wrong fund and does not discharge the obligation. Set to N and let T09 carry the per-employee value.
+Consignacion Cesantias Spec!N10	Y
+Consignacion Cesantias Spec!O10	-
+Consignacion Cesantias Spec!P10	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q10	N
+Consignacion Cesantias Spec!R10	Flag
+Consignacion Cesantias Spec!S10	Per return
+Consignacion Cesantias Spec!A11	Seed-from-last-PILA-return indicator
+Consignacion Cesantias Spec!B11	Indicador de generacion a partir de la ultima PILA
+Consignacion Cesantias Spec!C11	Payroll-Form Header
+Consignacion Cesantias Spec!D11	E08
+Consignacion Cesantias Spec!E11	N
+Consignacion Cesantias Spec!F11	Y
+Consignacion Cesantias Spec!H11	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I11	1
+Consignacion Cesantias Spec!J11	AN
+Consignacion Cesantias Spec!K11	N
+Consignacion Cesantias Spec!L11	Mercans.Cesantias_Seed_From_PILA_Flag
+Consignacion Cesantias Spec!M11	Simple S.A. offers to build the severance savings return from the contributor list of the last PILA return paid for the chosen year. Convenient and dangerous: the PILA population is the population that was PAID in a month, which is not the population ENTITLED to a severance savings deposit for the year. An employee who left during the accrual year is EXCLUDED from the deposit: the severance savings are paid directly in the final settlement (Ley 50 de 1990 art. 99 num. 4; Population Rules Step 0 exclusion (2)), so a leaver must never be added to the return - a leaver included is a double payment. All-inclusive salary employees are present in PILA but owed nothing, and the other Step 0 exclusions are not visible in a PILA list either. The engine must generate the population itself from the Population Rules and set this to N. Wage-type mapping of the two exclusions: a leaver's severance savings and interest are paid directly through wage types 62110 'Cash-out of Severance Pay' and 62117 'Cash-out of Interest Severance Pay' in the termination month or the month after, and generate no fund deposit (wage type 25827 'Payment Severance Funds Inf.'); an integral-salary employee (wage type 62140 'Integral Salary') generates no 25827 either.
+Consignacion Cesantias Spec!N11	Y
+Consignacion Cesantias Spec!O11	-
+Consignacion Cesantias Spec!P11	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q11	N
+Consignacion Cesantias Spec!R11	Flag
+Consignacion Cesantias Spec!S11	Per return
+Consignacion Cesantias Spec!A12	Asofondos name-validation auto-adjust answer
+Consignacion Cesantias Spec!B12	Respuesta al ajuste automatico de validacion Asofondos
+Consignacion Cesantias Spec!C12	Payroll-Form Header
+Consignacion Cesantias Spec!D12	E09
+Consignacion Cesantias Spec!E12	N
+Consignacion Cesantias Spec!F12	C
+Consignacion Cesantias Spec!G12	Presented only where the validation returns at least one difference. Where the report is empty the question is not asked. Depends on T05, T06, T07 and T08, which are the values validated; each of those back-references this field.
+Consignacion Cesantias Spec!H12	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I12	2
+Consignacion Cesantias Spec!J12	AN
+Consignacion Cesantias Spec!K12	NO
+Consignacion Cesantias Spec!L12	Mercans.Asofondos_Autoadjust_Answer
+Consignacion Cesantias Spec!M12	BOTH operators validate the surnames and names in the return against the affiliate base that ASOFONDOS delivers to the information operators ANNUALLY, and present a downloadable Excel difference report. Answering SI replaces the employer's values with the Asofondos values; answering NO keeps the employer's values. Answer NO and investigate: a mismatch is usually either a genuine misspelling in payroll master data (fix it at source, it will also be wrong on Form 220 and Format 2276) or an affiliate whose fund record is stale. Silently accepting SI hides a master-data defect that recurs every year.
+Consignacion Cesantias Spec!N12	Y
+Consignacion Cesantias Spec!O12	-> Sheet 6: Respuesta a la validacion Asofondos
+Consignacion Cesantias Spec!P12	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q12	N
+Consignacion Cesantias Spec!R12	Flag
+Consignacion Cesantias Spec!S12	Per return
+Consignacion Cesantias Spec!A13	Return number assigned by the operator
+Consignacion Cesantias Spec!B13	Numero de planilla asignado
+Consignacion Cesantias Spec!C13	Payroll-Form Header
+Consignacion Cesantias Spec!D13	E10
+Consignacion Cesantias Spec!E13	N
+Consignacion Cesantias Spec!F13	N
+Consignacion Cesantias Spec!H13	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I13	10
+Consignacion Cesantias Spec!J13	AN
+Consignacion Cesantias Spec!K13	1234567890
+Consignacion Cesantias Spec!L13	Mercans.Cesantias_Planilla_Number (stored on return)
+Consignacion Cesantias Spec!M13	OUTPUT, not input. Assigned when the settlement is finalised and printed on the pre-payment voucher PDF. Store it per run - and note the cardinality trap in E05: with Payment Credito there is one number PER FONDO, so the store must be one-to-many. This number is the key for the later return recovery, the per-fund and per-affiliate reports and the audit trail that evidences compliance with the February deadline.
+Consignacion Cesantias Spec!N13	Y
+Consignacion Cesantias Spec!O13	-
+Consignacion Cesantias Spec!P13	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q13	N
+Consignacion Cesantias Spec!R13	Identifier
+Consignacion Cesantias Spec!S13	Per return
+Consignacion Cesantias Spec!A14	Total value payable in the return
+Consignacion Cesantias Spec!B14	Valor total a pagar de la planilla
+Consignacion Cesantias Spec!C14	Payroll-Form Header
+Consignacion Cesantias Spec!D14	E11
+Consignacion Cesantias Spec!E14	N
+Consignacion Cesantias Spec!F14	N
+Consignacion Cesantias Spec!H14	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I14	-
+Consignacion Cesantias Spec!J14	AN
+Consignacion Cesantias Spec!K14	2000000
+Consignacion Cesantias Spec!L14	Mercans.Cesantias_Planilla_Total (control total)
+Consignacion Cesantias Spec!M14	CONTROL TOTAL. Displayed on the settlement summary and on the voucher. It must equal the sum of T14 across the detail records of the return; where the medio de pago splits the return per fondo, the sum of the per-fondo totals must equal the run total. This is the only arithmetic check the channel gives you - there is no header record in the file carrying a declared total, so a truncated upload is NOT self-detecting. Compare the returned total against the engine's own sum before paying.
+Consignacion Cesantias Spec!N14	Y
+Consignacion Cesantias Spec!O14	-
+Consignacion Cesantias Spec!P14	Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+Consignacion Cesantias Spec!Q14	N
+Consignacion Cesantias Spec!R14	Amount
+Consignacion Cesantias Spec!S14	Per return
+Consignacion Cesantias Spec!A15	═══ detail record - identification(published layout, campos 1 to 8) ═══
+Consignacion Cesantias Spec!A16	Record type
+Consignacion Cesantias Spec!B16	Tipo de registro
+Consignacion Cesantias Spec!C16	Detail Record, Type 02
+Consignacion Cesantias Spec!D16	T01
+Consignacion Cesantias Spec!E16	N
+Consignacion Cesantias Spec!F16	Y
+Consignacion Cesantias Spec!H16	TXT positions 1-2 | XLS column not present
+Consignacion Cesantias Spec!I16	2
+Consignacion Cesantias Spec!J16	N (2) - constant '02'
+Consignacion Cesantias Spec!K16	02
+Consignacion Cesantias Spec!L16	Constant
+Consignacion Cesantias Spec!M16	Campo mandatory, siempre debe ser 02. A CONSTANT, quoted verbatim from the published layout: every detail line of the unified severance savings file is a type-02 record. There is no type-01 header record and no trailer record in this layout - the contributor data and the period live in the portal envelope (E01 to E06), not in the file. Consequence: the file has NO declared record count and NO declared control total, so the engine must reconcile the returned return total (E11) against its own sum.
+Consignacion Cesantias Spec!N16	Y
+Consignacion Cesantias Spec!O16	-
+Consignacion Cesantias Spec!P16	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q16	N
+Consignacion Cesantias Spec!R16	Code
+Consignacion Cesantias Spec!S16	Per employee, per accrual year
+Consignacion Cesantias Spec!A17	Sequence number
+Consignacion Cesantias Spec!B17	Secuencia
+Consignacion Cesantias Spec!C17	Detail Record, Type 02
+Consignacion Cesantias Spec!D17	T02
+Consignacion Cesantias Spec!E17	N
+Consignacion Cesantias Spec!F17	Y
+Consignacion Cesantias Spec!H17	TXT positions 3-7 | XLS column not present
+Consignacion Cesantias Spec!I17	5
+Consignacion Cesantias Spec!J17	N (5) zero-padded, starts at 00001
+Consignacion Cesantias Spec!K17	00001
+Consignacion Cesantias Spec!L17	Mercans.Record_Sequence
+Consignacion Cesantias Spec!M17	Campo mandatory where the data are uploaded as a flat file. Must START AT 00001 and be consecutive for the remaining records. Zero-padded to 5 positions, so the layout admits at most 99,999 employees in one return. Composite Key: positions 1-7 of every line are the record key - positions 1-2 the constant '02' and positions 3-7 the sequence - and the operator's structure validation reads them first, so an off-by-one sequence rejects the whole file before any content is validated.
+Consignacion Cesantias Spec!N17	Y
+Consignacion Cesantias Spec!O17	-
+Consignacion Cesantias Spec!P17	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q17	N
+Consignacion Cesantias Spec!R17	Code
+Consignacion Cesantias Spec!S17	Per employee, per accrual year
+Consignacion Cesantias Spec!A18	Contributor document type
+Consignacion Cesantias Spec!B18	Tipo de documento del cotizante
+Consignacion Cesantias Spec!C18	Detail Record, Type 02
+Consignacion Cesantias Spec!D18	T03
+Consignacion Cesantias Spec!E18	Y
+Consignacion Cesantias Spec!F18	Y
+Consignacion Cesantias Spec!G18	Determines the validation applied to T04 (length, and the PEP 15-digit rule). T04 back-references this field.
+Consignacion Cesantias Spec!H18	TXT positions 8-9 | XLS column A
+Consignacion Cesantias Spec!I18	2
+Consignacion Cesantias Spec!J18	A (2)
+Consignacion Cesantias Spec!K18	CC
+Consignacion Cesantias Spec!L18	Employee.Document_Type
+Consignacion Cesantias Spec!M18	ALPHABETIC two-character code, validated against the list printed in the layout: CC, CE, TI, PA, CD, SC, PE - and, in the XLS variant of the SAME manual, also PT (Permiso temporal). THIS IS NOT THE PILA CODE SET: PILA Record Tipo 2 campo 3 uses the same two-letter mnemonics but a different admitted list, and Form 220 / Format 2276 use DIAN NUMERIC document-type codes. The engine must hold one document type and three mappers. Note the SOI-documented length trap: where the document is a Special permanence permit the NUMBER (T04) must be exactly 15 digits. Source: Employee.Document_Type, held as its own master-data attribute and mapped to the severance-savings code. Where the HR master data has no document-type field and holds the identity number in document-specific fields ('Citizenship Card ID', 'Indentity Card for Foreigners', 'Identity Card', 'National ID'), the document-field to severance-savings-code mapping is maintained as a configuration table: 'Citizenship Card ID' -> CC, 'Indentity Card for Foreigners' -> CE, and 'Identity Card' and 'National ID' each mapped in the same table to the code of the published list for the document that field holds. The type must not be inferred from which identity field is populated, because more than one field, or none, may be filled for an employee.
+Consignacion Cesantias Spec!N18	Y
+Consignacion Cesantias Spec!O18	-> Sheet 6: Tipo de documento (cesantias)
+Consignacion Cesantias Spec!P18	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q18	N
+Consignacion Cesantias Spec!R18	Code
+Consignacion Cesantias Spec!S18	Per employee, per accrual year
+Consignacion Cesantias Spec!A19	Contributor identification number
+Consignacion Cesantias Spec!B19	Numero de identificacion del cotizante
+Consignacion Cesantias Spec!C19	Detail Record, Type 02
+Consignacion Cesantias Spec!D19	T04
+Consignacion Cesantias Spec!E19	Y
+Consignacion Cesantias Spec!F19	Y
+Consignacion Cesantias Spec!G19	Length and content validation depend on T03 (document type); a Special permanence permit must be exactly 15 digits. T03 back-references this field.
+Consignacion Cesantias Spec!H19	TXT positions 10-25 | XLS column B
+Consignacion Cesantias Spec!I19	16
+Consignacion Cesantias Spec!J19	N (16) right-aligned, zero-filled
+Consignacion Cesantias Spec!K19	0000001020304050
+Consignacion Cesantias Spec!L19	Employee.Document_Number
+Consignacion Cesantias Spec!M19	Mandatory. RIGHT-ALIGNED, ZERO-FILLED to 16 positions - this is the only field in the layout with an explicit alignment rule and it is the one most often got wrong, because the XLS variant of the same layout takes the number LEFT-aligned with a 15-character maximum. Composite Key: together with T03 this pair is the join key for the employee across every Colombian artefact - electronic payroll NIE044/NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24/25, Format 2276 numeral 2 - and it is also the key the operator uses to match the Asofondos affiliate base. Strip dots, commas, spaces and hyphens before padding. PERSISTENCE: stable for life except on a document-type change (TI to CC on reaching majority, PEP/PPT to CE on regularisation), which must be notified to the fund, or the deposit lands on an orphan account.
+Consignacion Cesantias Spec!N19	Y
+Consignacion Cesantias Spec!O19	-
+Consignacion Cesantias Spec!P19	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q19	N
+Consignacion Cesantias Spec!R19	Identifier
+Consignacion Cesantias Spec!S19	Per employee, per accrual year
+Consignacion Cesantias Spec!A20	First surname
+Consignacion Cesantias Spec!B20	Primer apellido
+Consignacion Cesantias Spec!C20	Detail Record, Type 02
+Consignacion Cesantias Spec!D20	T05
+Consignacion Cesantias Spec!E20	Y
+Consignacion Cesantias Spec!F20	Y
+Consignacion Cesantias Spec!G20	Validated as a SET with T06, T07 and T08 against the Asofondos base; the answer is given once, in E09, for the whole return. E09 back-references this field.
+Consignacion Cesantias Spec!H20	TXT positions 26-45 | XLS column C
+Consignacion Cesantias Spec!I20	20
+Consignacion Cesantias Spec!J20	A (20)
+Consignacion Cesantias Spec!K20	PEREZ
+Consignacion Cesantias Spec!L20	Employee.First_Surname
+Consignacion Cesantias Spec!M20	Mandatory, supplied by the contributor. Left-aligned, space-filled to 20. Validated against the ASOFONDOS affiliate base (see E09) - a difference does not reject the file but raises a difference report the employer must answer SI or NO to. Strip accents and the special characters the operators reject; do not truncate silently, because a truncated surname produces a mismatch against the fund's record every single year.
+Consignacion Cesantias Spec!N20	Y
+Consignacion Cesantias Spec!O20	-
+Consignacion Cesantias Spec!P20	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q20	N
+Consignacion Cesantias Spec!R20	Text
+Consignacion Cesantias Spec!S20	Per employee, per accrual year
+Consignacion Cesantias Spec!A21	Second surname
+Consignacion Cesantias Spec!B21	Segundo apellido
+Consignacion Cesantias Spec!C21	Detail Record, Type 02
+Consignacion Cesantias Spec!D21	T06
+Consignacion Cesantias Spec!E21	Y
+Consignacion Cesantias Spec!F21	C
+Consignacion Cesantias Spec!G21	Conditional on the person having a second surname; space-filled when absent. Validated as a SET with T05, T07 and T08 against the Asofondos base - see E09, which back-references this field.
+Consignacion Cesantias Spec!H21	TXT positions 46-65 | XLS column D
+Consignacion Cesantias Spec!I21	20
+Consignacion Cesantias Spec!J21	A (20)
+Consignacion Cesantias Spec!K21	GOMEZ
+Consignacion Cesantias Spec!L21	Employee.Second_Surname
+Consignacion Cesantias Spec!M21	Supplied by the contributor; the published layout does NOT mark it mandatory, and the XLS variant states 'Campo Optional - Hasta 20 caracteres'. Space-fill the whole 20 positions where the person has no second surname - do NOT shift the following fields up, because the record is positional and the fund code at 106-107 would then be read out of the name.
+Consignacion Cesantias Spec!N21	Y
+Consignacion Cesantias Spec!O21	-
+Consignacion Cesantias Spec!P21	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q21	N
+Consignacion Cesantias Spec!R21	Text
+Consignacion Cesantias Spec!S21	Per employee, per accrual year
+Consignacion Cesantias Spec!A22	First name
+Consignacion Cesantias Spec!B22	Primer nombre
+Consignacion Cesantias Spec!C22	Detail Record, Type 02
+Consignacion Cesantias Spec!D22	T07
+Consignacion Cesantias Spec!E22	Y
+Consignacion Cesantias Spec!F22	Y
+Consignacion Cesantias Spec!G22	Validated as a SET with T05, T06 and T08 against the Asofondos base - see E09, which back-references this field.
+Consignacion Cesantias Spec!H22	TXT positions 66-85 | XLS column E
+Consignacion Cesantias Spec!I22	20
+Consignacion Cesantias Spec!J22	A (20)
+Consignacion Cesantias Spec!K22	JUAN
+Consignacion Cesantias Spec!L22	Employee.First_Name
+Consignacion Cesantias Spec!M22	Mandatory, supplied by the contributor. Left-aligned, space-filled to 20. Both operators note that names are pre-loaded automatically from the Asofondos base held in their systems and are editable - which means the portal may DISPLAY a name the employer never sent.
+Consignacion Cesantias Spec!N22	Y
+Consignacion Cesantias Spec!O22	-
+Consignacion Cesantias Spec!P22	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q22	N
+Consignacion Cesantias Spec!R22	Text
+Consignacion Cesantias Spec!S22	Per employee, per accrual year
+Consignacion Cesantias Spec!A23	Second name
+Consignacion Cesantias Spec!B23	Segundo nombre
+Consignacion Cesantias Spec!C23	Detail Record, Type 02
+Consignacion Cesantias Spec!D23	T08
+Consignacion Cesantias Spec!E23	Y
+Consignacion Cesantias Spec!F23	C
+Consignacion Cesantias Spec!G23	Conditional on the person having a second name; space-filled when absent. Validated as a SET with T05, T06 and T07 against the Asofondos base - see E09, which back-references this field.
+Consignacion Cesantias Spec!H23	TXT positions 86-105 | XLS column F
+Consignacion Cesantias Spec!I23	20
+Consignacion Cesantias Spec!J23	A (20)
+Consignacion Cesantias Spec!K23	CARLOS
+Consignacion Cesantias Spec!L23	Employee.Other_Names
+Consignacion Cesantias Spec!M23	Supplied by the contributor; not marked mandatory, and the XLS variant states 'Campo Optional'. Maps to the Data-Dictionary Other_Names field, which is the same field that feeds electronic payroll OtrosNombres and Form 220 - keep one source of truth.
+Consignacion Cesantias Spec!N23	Y
+Consignacion Cesantias Spec!O23	-
+Consignacion Cesantias Spec!P23	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q23	N
+Consignacion Cesantias Spec!R23	Text
+Consignacion Cesantias Spec!S23	Per employee, per accrual year
+Consignacion Cesantias Spec!A24	═══ detail record - fund, days and amounts(published layout, campos 9 to 14) ═══
+Consignacion Cesantias Spec!A25	Severance-savings fund code of the affiliate
+Consignacion Cesantias Spec!B25	Codigo del Fondo de Cesantias al que pertenece el afiliado
+Consignacion Cesantias Spec!C25	Detail Record, Type 02
+Consignacion Cesantias Spec!D25	T09
+Consignacion Cesantias Spec!E25	Y
+Consignacion Cesantias Spec!F25	Y
+Consignacion Cesantias Spec!G25	IGNORED where E07 (single-fund indicator) = Y, in which case the return-level fund overwrites this value for every record. E07 back-references this field.
+Consignacion Cesantias Spec!H25	TXT positions 106-107 | XLS column G
+Consignacion Cesantias Spec!I25	2
+Consignacion Cesantias Spec!J25	N (2)
+Consignacion Cesantias Spec!K25	03
+Consignacion Cesantias Spec!L25	Employee.Cesantias_Fund_Code
+Consignacion Cesantias Spec!M25	Campo mandatory, validated against the funds registered in the operator's system. The published layout admits exactly FIVE values and prints them: 02 Proteccion, 03 Porvenir, 10 Colfondos, 15 Fondo Nacional del Ahorro (FNA), 19 Old Mutual (antes Skandia). STALE LABEL, LIVE CODE: code 19's printed label is out of date - the entity trades as Skandia again (Skandia Administradora de Fondos de Pensiones y Cesantias S.A., authorised by the Superintendencia Financiera in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024). Send the CODE, not the name. The fund is the EMPLOYEE'S choice under Law 50 of 1990 art. 99 num. 3 and is master data on the employee, not a company default. Source: Master Data field 'Severance Fund Name', which holds the fund as a NAME and not as the 2-digit operator code; the fund name to code mapping is maintained as a configuration table, with every spelling in use for a fund mapped to one of the five codes. Per Population Rules an empty fund must be escalated, never defaulted. Fund presence must not be used to select the population: an integral-salary employee may also carry a fund name and is still excluded.
+Consignacion Cesantias Spec!N25	Y
+Consignacion Cesantias Spec!O25	-> Sheet 6: Codigo del Fondo de Cesantias
+Consignacion Cesantias Spec!P25	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q25	N
+Consignacion Cesantias Spec!R25	Code
+Consignacion Cesantias Spec!S25	Per employee, per accrual year
+Consignacion Cesantias Spec!A26	Number of days worked
+Consignacion Cesantias Spec!B26	Numero de dias trabajados
+Consignacion Cesantias Spec!C26	Detail Record, Type 02
+Consignacion Cesantias Spec!D26	T10
+Consignacion Cesantias Spec!E26	N
+Consignacion Cesantias Spec!F26	Y
+Consignacion Cesantias Spec!G26	Feeds the auto-calculation of T14 together with T12; the layout's formula is basic salary * (dias worked / 360). T12 and T14 back-reference this field.
+Consignacion Cesantias Spec!H26	TXT positions 108-110 | XLS column H
+Consignacion Cesantias Spec!I26	3
+Consignacion Cesantias Spec!J26	N (3), 1 to 360
+Consignacion Cesantias Spec!K26	360
+Consignacion Cesantias Spec!L26	Mercans.Cesantias_Days
+Consignacion Cesantias Spec!M26	Mandatory. Admits values from 1 to 360 - a 360-DAY COMMERCIAL YEAR, rather than 365. A full year of service is 360, and every partial year is the actual days of service counted on the commercial convention (each month 30 days). Include the days of paid leave and of employer-paid or institution-paid incapacity, which count as service. The 3-position field cannot carry more than one year, which is the layout's way of saying that this filing is strictly one accrual year per record. SOURCE AND EXCLUSIONS: per Population Rules Step 1, count the accrual-year days of service on the 30-day convention from the later of 1 January and the current-contract hire date to the earlier of 31 December and the leaving date, EXCLUDING unpaid leave and suspensions. Wage-type mapping: the payroll counter is wage type 68029 'Days worked current year (Without Leaves)' in the December period (360 for a full year); use it only as a reconciliation check, not as the source, because it does not count a hire made late in December and, for a hire early in the accrual year, can differ from the commercial-year count from the hire date (the interest wage type 62127 uses the commercial count). Reconciliation: the December balance 68028 'Balance Cesantias' equals 'ces base' 68040 x 68029 / 360 where no in-year direct payment (62110 'Cash-out of Severance Pay') was made.
+Consignacion Cesantias Spec!N26	Y
+Consignacion Cesantias Spec!O26	-
+Consignacion Cesantias Spec!P26	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q26	N
+Consignacion Cesantias Spec!R26	Amount
+Consignacion Cesantias Spec!S26	Per employee, per accrual year
+Consignacion Cesantias Spec!A27	Zero filler before the salary field
+Consignacion Cesantias Spec!B27	Espacio con ceros (0)
+Consignacion Cesantias Spec!C27	Detail Record, Type 02
+Consignacion Cesantias Spec!D27	T11
+Consignacion Cesantias Spec!E27	N
+Consignacion Cesantias Spec!F27	Y
+Consignacion Cesantias Spec!G27	Immediately precedes T12 and is part of its 13-position amount frame; T12 back-references this field.
+Consignacion Cesantias Spec!H27	TXT positions 111-114 | XLS column not present
+Consignacion Cesantias Spec!I27	4
+Consignacion Cesantias Spec!J27	N (4) - constant '0000'
+Consignacion Cesantias Spec!K27	0000
+Consignacion Cesantias Spec!L27	Constant
+Consignacion Cesantias Spec!M27	Mandatory - 'Debe contener ceros'. A four-position filler that exists only in the fixed-width variant; the XLS layout has no equivalent column. Read it together with campo 14's note, which explains the intent: 'antes de cada value deben ir 4 espacios (pueden ser rellenos con ceros o en blanco)'. In other words the two amount fields are really 13 positions each, of which the leading 4 must be zeros or blanks. Write ZEROS, not blanks - the campo-11 rule is categorical where the campo-14 note is permissive, and zeros satisfy both.
+Consignacion Cesantias Spec!N27	Y
+Consignacion Cesantias Spec!O27	-
+Consignacion Cesantias Spec!P27	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q27	N
+Consignacion Cesantias Spec!R27	Code
+Consignacion Cesantias Spec!S27	Per employee, per accrual year
+Consignacion Cesantias Spec!A28	Basic salary reported in the last month
+Consignacion Cesantias Spec!B28	Salario basico reportado en el ultimo mes
+Consignacion Cesantias Spec!C28	Detail Record, Type 02
+Consignacion Cesantias Spec!D28	T12
+Consignacion Cesantias Spec!E28	N
+Consignacion Cesantias Spec!F28	Y
+Consignacion Cesantias Spec!G28	Framed by the T11 zero filler and feeds the auto-calculation of T14 with T10. T11 and T14 back-reference this field.
+Consignacion Cesantias Spec!H28	TXT positions 115-123 | XLS column I
+Consignacion Cesantias Spec!I28	9
+Consignacion Cesantias Spec!J28	N (9) whole pesos, zero-filled
+Consignacion Cesantias Spec!K28	001750905
+Consignacion Cesantias Spec!L28	Payroll.Contractual_Salary (December of the accrual year) [WTC: CO-SALARIO-BASICO]
+Consignacion Cesantias Spec!M28	SCOPE: the amount is owned by the Wage Type Catalogue, not the Data Dictionary - the scope rule routes 'Base Salary / Basic Salary amounts -> WTC, NOT DD'. The 'Payroll.' prefix marks it as outside DD master data; it is a standing contract attribute, not a per-run computation. Column E is therefore N and the Data Dictionary holds no Contractual Salary field. Mandatory. Nine integers, no decimals, no commas, no points, not less than zero. The layout is explicit about WHICH salary: 'Corresponde al ultimo salario basico reportado en el mes de diciembre del ano causado de cesantias'. THIS IS THE OPERATOR'S REPORTING FIELD, NOT THE STATUTORY BASE. CST art. 253 fixes the statutory base as the last monthly salary provided it has not varied in the last three months, otherwise the average of the last year of service (or of the whole period if shorter), INCLUDING the transport allowance. The field name says 'basico' and the operator's calculator uses it alone - see the trap documented at T14. Report the December basic here and compute T14 yourself. Source: wage type 63807 'Basic Salary Base Amount' in the December period of the accrual year (the full contractual monthly salary). Do NOT use wage type 62100 'Ordinary Salary', which is the amount actually paid in the month, prorated for absences, and is therefore equal to or lower than 63807, never higher. The Master Data field 'Basic Salary' is a snapshot of the month the report is run and is valid for T12 only when taken for December.
+Consignacion Cesantias Spec!N28	Y
+Consignacion Cesantias Spec!O28	-
+Consignacion Cesantias Spec!P28	Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+Consignacion Cesantias Spec!Q28	N
+Consignacion Cesantias Spec!R28	Amount
+Consignacion Cesantias Spec!S28	Per employee, per accrual year
+Consignacion Cesantias Spec!A29	Zero filler before the severance-savings value
+Consignacion Cesantias Spec!B29	Espacio con ceros (0)
+Consignacion Cesantias Spec!C29	Detail Record, Type 02
+Consignacion Cesantias Spec!D29	T13
+Consignacion Cesantias Spec!E29	N
+Consignacion Cesantias Spec!F29	Y
+Consignacion Cesantias Spec!G29	Immediately precedes T14 and is part of its 13-position amount frame; T14 back-references this field.
+Consignacion Cesantias Spec!H29	TXT positions 124-127 | XLS column not present
+Consignacion Cesantias Spec!I29	4
+Consignacion Cesantias Spec!J29	N (4) - constant '0000'
+Consignacion Cesantias Spec!K29	0000
+Consignacion Cesantias Spec!L29	Constant
+Consignacion Cesantias Spec!M29	Mandatory - 'Debe contener ceros'. The second four-position filler, framing the amount at 128-136 exactly as T11 frames the amount at 115-123. Absent from the XLS layout. Write zeros.
+Consignacion Cesantias Spec!N29	Y
+Consignacion Cesantias Spec!O29	-
+Consignacion Cesantias Spec!P29	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q29	N
+Consignacion Cesantias Spec!R29	Code
+Consignacion Cesantias Spec!S29	Per employee, per accrual year
+Consignacion Cesantias Spec!A30	Value of the severance savings deposited
+Consignacion Cesantias Spec!B30	Valor de las cesantias
+Consignacion Cesantias Spec!C30	Detail Record, Type 02
+Consignacion Cesantias Spec!D30	T14
+Consignacion Cesantias Spec!E30	N
+Consignacion Cesantias Spec!F30	Y
+Consignacion Cesantias Spec!G30	Framed by the T13 zero filler; auto-calculated from T10 and T12 if left blank, which must never be allowed. T10, T12 and T13 back-reference this field.
+Consignacion Cesantias Spec!H30	TXT positions 128-136 | XLS column J
+Consignacion Cesantias Spec!I30	9
+Consignacion Cesantias Spec!J30	N (9) whole pesos, zero-filled
+Consignacion Cesantias Spec!K30	002000000
+Consignacion Cesantias Spec!L30	Mercans.Cesantias_Annual_Liquidation
+Consignacion Cesantias Spec!M30	Mandatory, nine integers. TWO RULES AND ONE TRAP. Rule one, the floor: 'el valor minimo del recaudo debe ser de un (1) dia de un (1) SMLMV del ano causado' - for accrual year 2026 one day of the SMMLV of COP 1,750,905 is COP 58,363.50, so a record below that is rejected. Rule two, the override: the layout's own formula is salario basico * (dias trabajados / 360) BUT 'en este campo el aportante puede especificar un valor diferente y no se haran calculos automaticos de este valor'. THE TRAP: the operator's formula omits the TRANSPORT ALLOWANCE, which CST art. 253 requires in the base. For an employee on the 2026 minimum wage the operator would compute 1,750,905 while the statute requires (1,750,905 + 249,095) = 2,000,000 - a shortfall of COP 249,095 that is a SHORT DEPOSIT, penalised at one day's salary for every day of delay under Law 50 of 1990 art. 99 num. 3, uncapped. ALWAYS write the engine's own figure into this field and never rely on the portal calculator. WHAT IS DEPOSITED - NET OF DIRECT PAYMENTS ALREADY MADE: T14 carries the amount actually deposited for the employee = the consolidated 31 December balance (IN01) LESS the lawful partial payments already made directly to the employee during the accrual year (CST art. 254; Population Rules Step 1 (f)) and LESS any direct payment of that balance made in January to an employee who left before the deposit, which is lawful under Ley 50 de 1990 art. 99 num. 4. An employee who left and was paid in full in the final settlement is not in the return at all (Population Rules Step 0 exclusion (2)). Keep the gross annual liquidation as a separate engine value: System Mapping 'Cesantias_Annual_Liquidation' is the gross figure, T14 is the net deposit. Wage-type mapping: the February fund deposit is wage type 25827 / 65805 'Payment Severance Funds Inf.'. The consolidated 31 December balance is the absolute value of wage type 63814 'Severance Balance (Current Month)' in the January period; it is the annual liquidation ('ces base' 68040 x days / 360) less the in-year direct payments 62110 'Cash-out of Severance Pay' (paired with 62117 'Cash-out of Interest Severance Pay' for the interest). A January direct payment of part of that balance is wage type 62126 'Advance Severance Last Year', and the deposit then carries the remainder: 25827 (February) + 62126 (January) = |63814| (January). The engine does NOT generate a direct payment of the consolidated balance to an employee who remains in service: CST art. 254 prohibits it except for the authorised housing and education purposes, so the only direct payments that reduce T14 for an active employee are those lawful partial payments; any other request to pay the consolidated balance directly to an active employee is rejected, and the balance is deposited in full. A full direct payment with fehaciente evidence is handled through E92. Where the remainder after direct payments falls below the one-day SMMLV floor the channel rejects the record and the residue is settled with the employee (Population Rules Step 0 exclusion (5)). The base 68040 exceeds the December basic salary 63807 wherever variable pay is averaged under CST art. 253, which is why T14 must never be left to the operator's basic-salary formula.
+Consignacion Cesantias Spec!N30	Y
+Consignacion Cesantias Spec!O30	-
+Consignacion Cesantias Spec!P30	Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+Consignacion Cesantias Spec!Q30	N
+Consignacion Cesantias Spec!R30	Amount
+Consignacion Cesantias Spec!S30	Per employee, per accrual year
+Consignacion Cesantias Spec!A31	═══ detail record - affiliate contact data(published layout, campos 15 to 20) ═══
+Consignacion Cesantias Spec!A32	Employee residential address
+Consignacion Cesantias Spec!B32	Direccion de residencia del empleado
+Consignacion Cesantias Spec!C32	Detail Record, Type 02
+Consignacion Cesantias Spec!D32	T15
+Consignacion Cesantias Spec!E32	Y
+Consignacion Cesantias Spec!F32	C
+Consignacion Cesantias Spec!G32	Should be consistent with T16 and T17 (the DANE department and municipality of the same address); those two fields back-reference this one.
+Consignacion Cesantias Spec!H32	TXT positions 137-186 | XLS column K
+Consignacion Cesantias Spec!I32	50
+Consignacion Cesantias Spec!J32	CHAR (50)
+Consignacion Cesantias Spec!K32	CALLE 26 NO 68-35 APTO 502
+Consignacion Cesantias Spec!L32	Employee.Address
+Consignacion Cesantias Spec!M32	The employee's residential address, 50 positions, left-aligned and space-filled. This is the AFFILIATE'S address for the fund's own statutory communications with its member, which is why the layout asks for the residence and not the work address - contrast electronic payroll and PILA, which carry the WORK municipality. Do not send the work address; the fund will post the member's statements to it. Composite Key: the affiliate's domicile is carried across THREE fields that must describe one place - T15 the free-text street address, T16 the two-digit DANE department and T17 the three-digit DANE municipality. Within T15 itself, Colombian addresses decompose as via type (CALLE / CARRERA / DIAGONAL / TRANSVERSAL), via number, the NO separator, the cross-via number, the hyphen, the door number and any complement (APTO / TORRE / INT). Abbreviate by a documented rule where the whole exceeds 50 positions - never cut mid-token, because the fund cannot repair a truncated address. Source: Master Data fields 'Address Line 1' and 'Address Line 2' hold the residential address; concatenate Line 1 + space + Line 2 before applying the 50-position rule. Do not use 'Work location' or 'Personal Subarea', which are work places. A residence abroad (Master Data field 'Country' other than CO) has no DANE department or municipality code.
+Consignacion Cesantias Spec!N32	Y
+Consignacion Cesantias Spec!O32	-
+Consignacion Cesantias Spec!P32	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q32	N
+Consignacion Cesantias Spec!R32	Text
+Consignacion Cesantias Spec!S32	Per employee, per accrual year
+Consignacion Cesantias Spec!A33	Department code (DANE)
+Consignacion Cesantias Spec!B33	Codigo departamento
+Consignacion Cesantias Spec!C33	Detail Record, Type 02
+Consignacion Cesantias Spec!D33	T16
+Consignacion Cesantias Spec!E33	Y
+Consignacion Cesantias Spec!F33	C
+Consignacion Cesantias Spec!G33	Must be the department half of the same DANE divipola code whose municipality half is T17, and must correspond to the address in T15. T15 and T17 back-reference this field.
+Consignacion Cesantias Spec!H33	TXT positions 187-188 | XLS column L
+Consignacion Cesantias Spec!I33	2
+Consignacion Cesantias Spec!J33	N (2)
+Consignacion Cesantias Spec!K33	11
+Consignacion Cesantias Spec!L33	Employee.Department_Code
+Consignacion Cesantias Spec!M33	Two positions, per the DANE list. The DANE divipola code is hierarchical: the two-digit department prefix plus the three-digit municipality suffix form the five-digit municipality code (11 + 001 = 11001, Bogota D.C.). Composite Key: T16 and T17 must be written as the two halves of ONE divipola code, never picked from two different lists. Source: Master Data field 'Employee Address - Department', which holds a 3-letter alphabetic abbreviation (DC, ANT, CUN, VAC, ATL, CAL, QUI, RIS, NAR, NSA, MAG, TOL, BOL, SAN, BOY), not the 2-digit DANE code. The abbreviation to DANE department code mapping is maintained as a configuration table with one entry per abbreviation in use (DC -> 11, ANT -> 05, VAC -> 76, ATL -> 08, per the DANE divipola list - see Field Options). Foreign provinces (abbreviations such as ON, VD, JAL) have no DANE code.
+Consignacion Cesantias Spec!N33	Y
+Consignacion Cesantias Spec!O33	-> Sheet 6: Codigos DANE (referencia)
+Consignacion Cesantias Spec!P33	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q33	N
+Consignacion Cesantias Spec!R33	Code
+Consignacion Cesantias Spec!S33	Per employee, per accrual year
+Consignacion Cesantias Spec!A34	Municipality code (DANE)
+Consignacion Cesantias Spec!B34	Codigo municipio
+Consignacion Cesantias Spec!C34	Detail Record, Type 02
+Consignacion Cesantias Spec!D34	T17
+Consignacion Cesantias Spec!E34	Y
+Consignacion Cesantias Spec!F34	C
+Consignacion Cesantias Spec!G34	Must be the municipality half of the same DANE divipola code whose department half is T16, and must correspond to the address in T15. T15 and T16 back-reference this field.
+Consignacion Cesantias Spec!H34	TXT positions 189-191 | XLS column M
+Consignacion Cesantias Spec!I34	3
+Consignacion Cesantias Spec!J34	N (3)
+Consignacion Cesantias Spec!K34	001
+Consignacion Cesantias Spec!L34	Employee.Municipality_Code
+Consignacion Cesantias Spec!M34	Three positions, per the DANE list, and it is the SUFFIX only - not the five-digit code. Writing the full 11001 into a three-position field truncates to 110 and silently relocates the affiliate. Composite Key: see T16. Source: no municipality code exists in master data. The Master Data field 'City' is free text, with several spellings for the same municipality (Bogota / BOGOTA / Bogota D.C. / Santafe de Bogota D.C.; Medellin / MEDELLIN), values that are a neighbourhood or a department rather than a municipality, and foreign cities. Capture the DANE divipola municipality code as a coded master-data field; free-text matching is not reliable.
+Consignacion Cesantias Spec!N34	Y
+Consignacion Cesantias Spec!O34	-> Sheet 6: Codigos DANE (referencia)
+Consignacion Cesantias Spec!P34	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q34	N
+Consignacion Cesantias Spec!R34	Code
+Consignacion Cesantias Spec!S34	Per employee, per accrual year
+Consignacion Cesantias Spec!A35	Employee landline telephone
+Consignacion Cesantias Spec!B35	Telefono fijo del empleado
+Consignacion Cesantias Spec!C35	Detail Record, Type 02
+Consignacion Cesantias Spec!D35	T18
+Consignacion Cesantias Spec!E35	Y
+Consignacion Cesantias Spec!F35	C
+Consignacion Cesantias Spec!G35	Conditional on a 7-digit landline being held for the employee; filled with spaces or zeros where only a mobile number exists. Paired in the layout with T19 as the affiliate's contact block; T19 back-references this field.
+Consignacion Cesantias Spec!H35	TXT positions 192-198 | XLS column N
+Consignacion Cesantias Spec!I35	7
+Consignacion Cesantias Spec!J35	N (7)
+Consignacion Cesantias Spec!K35	6013456
+Consignacion Cesantias Spec!L35	Employee.Phone
+Consignacion Cesantias Spec!M35	'Solo admite 7 numeros' - exactly seven digits, so the field cannot carry a mobile number (10 digits in Colombia) nor a number written with the area code. Where only a mobile is held, the field must be zero- or space-filled rather than truncated; a truncated mobile is a wrong-number record on the fund's affiliate file. Source: Master Data field 'Phone number', which holds one undifferentiated number per employee with no landline/mobile type, normally a country-code-prefixed mobile of 12 digits. Unless a separate landline is captured, this field is zero-filled; never derive it by truncating the stored number.
+Consignacion Cesantias Spec!N35	Y
+Consignacion Cesantias Spec!O35	-
+Consignacion Cesantias Spec!P35	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q35	N
+Consignacion Cesantias Spec!R35	Text
+Consignacion Cesantias Spec!S35	Per employee, per accrual year
+Consignacion Cesantias Spec!A36	Employee e-mail address
+Consignacion Cesantias Spec!B36	Correo electronico (E-mail) del empleado
+Consignacion Cesantias Spec!C36	Detail Record, Type 02
+Consignacion Cesantias Spec!D36	T19
+Consignacion Cesantias Spec!E36	Y
+Consignacion Cesantias Spec!F36	C
+Consignacion Cesantias Spec!G36	Conditional on an e-mail being held. Paired in the layout with T18 as the affiliate's contact block; T18 back-references this field.
+Consignacion Cesantias Spec!H36	TXT positions 199-248 | XLS column O
+Consignacion Cesantias Spec!I36	50
+Consignacion Cesantias Spec!J36	CHAR (50)
+Consignacion Cesantias Spec!K36	juan.perez@empresa.com.co
+Consignacion Cesantias Spec!L36	Employee.Email
+Consignacion Cesantias Spec!M36	Fifty positions. The layout prints its own validation: letters A-Z, digits 0-9, hyphen, underscore, apostrophe and full stop are admitted in the local part; the @ is the mandatory indicator; the domain may contain only letters, digits and the hyphen, and the hyphen may be neither the first nor the last character of the domain. Composite Key: local-part + '@' + domain; the operator validates the three parts separately, so an address that merely 'looks' valid can still be rejected on the domain rule.
+Consignacion Cesantias Spec!N36	Y
+Consignacion Cesantias Spec!O36	-
+Consignacion Cesantias Spec!P36	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q36	N
+Consignacion Cesantias Spec!R36	Text
+Consignacion Cesantias Spec!S36	Per employee, per accrual year
+Consignacion Cesantias Spec!A37	Employee hire date
+Consignacion Cesantias Spec!B37	Fecha de ingreso del empleado
+Consignacion Cesantias Spec!C37	Detail Record, Type 02
+Consignacion Cesantias Spec!D37	T20
+Consignacion Cesantias Spec!E37	Y
+Consignacion Cesantias Spec!F37	Y
+Consignacion Cesantias Spec!H37	TXT positions 249-258 | XLS column P
+Consignacion Cesantias Spec!I37	10
+Consignacion Cesantias Spec!J37	AAAA-MM-DD (10)
+Consignacion Cesantias Spec!K37	2019-03-01
+Consignacion Cesantias Spec!L37	Contract.Start_Date
+Consignacion Cesantias Spec!M37	Format AAAA-MM-DD, ten positions INCLUDING the two hyphens - note that the published layout types this field N while its content is not purely numeric, so a strict numeric writer would emit 20190301 and shift nothing (the field is last) but would still fail the format validation. Composite Key: positions 249-252 year, 253 hyphen, 254-255 month, 256 hyphen, 257-258 day. THIS IS THE HIRE DATE OF THE CONTRACT, NOT THE START OF THE ACCRUAL PERIOD: for an employee hired in 2019 and reported for accrual year 2026 the value is still 2019-03-01, while T10 carries 360 days. Sending the 1 January of the accrual year here is a common defect and it corrupts the fund's seniority record. Source: Master Data field 'Hire Date' (DD-MM-YYYY, converted to AAAA-MM-DD), which is the hire date of the CURRENT contract per Population Rules ('for a rehired employee, use the hire date of the CURRENT contract'). Do not use 'Adjusted Service Date' (YYYY-MM-DD, a recognised-seniority date) or 'Original Hire Date' (DD-MM-YYYY, the first hire date of a rehired employee), both of which can differ from the current-contract hire date.
+Consignacion Cesantias Spec!N37	Y
+Consignacion Cesantias Spec!O37	-
+Consignacion Cesantias Spec!P37	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q37	N
+Consignacion Cesantias Spec!R37	Date
+Consignacion Cesantias Spec!S37	Per employee, per accrual year
+Consignacion Cesantias Spec!A38	═══ interest on severance savings - paid to the employee, never to the fund ═══
+Consignacion Cesantias Spec!A39	31 December severance-savings balance
+Consignacion Cesantias Spec!B39	Saldo de cesantias al 31 de diciembre
+Consignacion Cesantias Spec!C39	Severance-Savings Interest -- not a file field
+Consignacion Cesantias Spec!D39	IN01
+Consignacion Cesantias Spec!E39	N
+Consignacion Cesantias Spec!F39	N
+Consignacion Cesantias Spec!G39	Not conditional. Feeds IN02 and IN03.
+Consignacion Cesantias Spec!H39	NOT in this filing - engine output, reported to the employee
+Consignacion Cesantias Spec!I39	-
+Consignacion Cesantias Spec!J39	N (whole pesos)
+Consignacion Cesantias Spec!K39	2000000
+Consignacion Cesantias Spec!L39	Mercans.Cesantias_YearEnd_Balance
+Consignacion Cesantias Spec!M39	The balance in the employee's favour at 31 December, or at the date of definitive withdrawal or partial settlement. It is the base of the Law 52 of 1975 art. 1 interest. Deliberately shown on this Spec as a NOT-APPLICABLE row: it is not a field of the severance savings return, but it is computed from the same liquidation and the two are routinely confused. Source: the consolidated 31 December balance is the absolute value of wage type 63814 'Severance Balance (Current Month)' in the January period of the following year (negative sign = liability); it equals the February deposit 25827 plus any January direct advance 62126 and is already net of in-year direct payments (62110). The December value of wage type 68028 'Balance Cesantias' is a reconciliation check, not the source; wage type 64999 'Total Balance Cesantias' is NOT this balance.
+Consignacion Cesantias Spec!N39	Y
+Consignacion Cesantias Spec!O39	-
+Consignacion Cesantias Spec!P39	Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+Consignacion Cesantias Spec!Q39	N
+Consignacion Cesantias Spec!R39	Amount
+Consignacion Cesantias Spec!S39	Per accrual year
+Consignacion Cesantias Spec!A40	Annual interest on severance savings at 12%
+Consignacion Cesantias Spec!B40	Intereses de cesantias del 12% anual
+Consignacion Cesantias Spec!C40	Severance-Savings Interest -- not a file field
+Consignacion Cesantias Spec!D40	IN02
+Consignacion Cesantias Spec!E40	N
+Consignacion Cesantias Spec!F40	N
+Consignacion Cesantias Spec!G40	Not conditional. Computed from IN01. IN03 is the monthly alternative to this field.
+Consignacion Cesantias Spec!H40	NOT in this filing - paid directly to the employee
+Consignacion Cesantias Spec!I40	-
+Consignacion Cesantias Spec!J40	N (whole pesos)
+Consignacion Cesantias Spec!K40	240000
+Consignacion Cesantias Spec!L40	Mercans.Cesantias_Interest_Annual
+Consignacion Cesantias Spec!M40	12% per annum on the IN01 balance, pro-rated on days over 360. PAID TO THE EMPLOYEE DIRECTLY, IN THE MONTH OF JANUARY of the following year - not to the fund, and not in February. The two obligations have different payees, different deadlines and different penalties: failure to deposit the principal costs one day's salary per day of delay, whereas failure to pay the interest costs an indemnity equal to the interest owed, ONCE ONLY (Law 52 of 1975 art. 1). The draft decree would add a further precision at art. 4: the interest 'se entregara directamente al trabajador dentro del mes siguiente a la fecha de liquidacion del auxilio de cesantia'. No interest on interest may be liquidated. Source: paid in the January payroll as wage type 62127 'Advance Interest Severance Pay', equal to round(12% x IN01 x days / 360) to the peso. Do not use wage type 63815 'Interests Balance (Current Month)' at December as the payable amount: it is computed on the liquidation before direct payments and is not the amount paid.
+Consignacion Cesantias Spec!N40	Y
+Consignacion Cesantias Spec!O40	-
+Consignacion Cesantias Spec!P40	Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+Consignacion Cesantias Spec!Q40	N
+Consignacion Cesantias Spec!R40	Amount
+Consignacion Cesantias Spec!S40	Per accrual year
+Consignacion Cesantias Spec!A41	Monthly interest option at 1%
+Consignacion Cesantias Spec!B41	Mensualizacion de intereses del 1%
+Consignacion Cesantias Spec!C41	Severance-Savings Interest -- not a file field
+Consignacion Cesantias Spec!D41	IN03
+Consignacion Cesantias Spec!E41	N
+Consignacion Cesantias Spec!F41	C
+Consignacion Cesantias Spec!G41	Available only where a WRITTEN agreement exists between employer and employee; it replaces the January payment of IN02 with twelve monthly payments. IN02 back-references this field.
+Consignacion Cesantias Spec!H41	NOT in this filing - paid directly to the employee
+Consignacion Cesantias Spec!I41	-
+Consignacion Cesantias Spec!J41	N (whole pesos)
+Consignacion Cesantias Spec!K41	20000
+Consignacion Cesantias Spec!L41	Mercans.Cesantias_Interest_Monthly
+Consignacion Cesantias Spec!M41	Law 2466 of 2025 art. 64 para. 2, verbatim: 'Las partes podran acordar por escrito la mensualizacion de los intereses sobre las cesantias, pagando al trabajador el 1% del salario base de liquidacion compuesto por el salario mensual sumado al auxilio de transporte en los casos en que a este hubiere lugar'. Two engine consequences. First, it needs a written agreement, so the flag is per contract. Second, the base is the monthly salary plus the transport allowance where payable, not the accumulated balance - so the monthly route and the annual route give different figures. The paragraph applies under the written agreement alone: the 1% is paid to the employee, does not go through PILA and needs no further regulation. It sets no payment date of its own.
+Consignacion Cesantias Spec!N41	Y
+Consignacion Cesantias Spec!O41	-
+Consignacion Cesantias Spec!P41	Whole Colombian pesos. No decimals, no thousand separators, no sign. The published layout gives amount fields 9 integer positions, right-aligned and zero-filled, with a 4-position zero filler in front of each. Round the computed liquidation to the peso - do NOT round up to the next 100 as PILA requires (Decree 1990 of 2016 art. 1 governs contributions, not the severance savings deposit), and do NOT round to the nearest 1,000 as Form 350 requires (ET art. 577). Blending the three conventions is the classic Colombian defect.
+Consignacion Cesantias Spec!Q41	N
+Consignacion Cesantias Spec!R41	Amount
+Consignacion Cesantias Spec!S41	Per month
+Consignacion Cesantias Spec!A42	═══ inbound - deposit confirmation and compliance evidence(co-in-cesantias-confirmation) ═══
+Consignacion Cesantias Spec!A43	Return payment date
+Consignacion Cesantias Spec!B43	Fecha de pago de la planilla
+Consignacion Cesantias Spec!C43	Deposit Confirmation, inbound
+Consignacion Cesantias Spec!D43	E90
+Consignacion Cesantias Spec!E43	N
+Consignacion Cesantias Spec!F43	N
+Consignacion Cesantias Spec!H43	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I43	10
+Consignacion Cesantias Spec!J43	AAAA-MM-DD
+Consignacion Cesantias Spec!K43	2027-02-10
+Consignacion Cesantias Spec!L43	Mercans.Cesantias_Payment_Date (stored on return)
+Consignacion Cesantias Spec!M43	INBOUND. The date the return was actually PAID, which is the date that matters for the deadline - not the date the return was built. Both operators separate settlement from payment: the return is liquidated, a pre-payment voucher is issued, and payment then follows by PSE or by credit. A return liquidated on 13 February and paid on 17 February is LATE. Store the payment date, not the liquidation date, as the compliance evidence. Composite Key: AAAA-MM-DD - positions 1-4 the year, 5 the hyphen, 6-7 the month, 8 the hyphen, 9-10 the day; the same 10-character date frame as T20, and the pair (E10 return number, E90 payment date) is the key of the compliance evidence held per accrual year.
+Consignacion Cesantias Spec!N43	Y
+Consignacion Cesantias Spec!O43	-
+Consignacion Cesantias Spec!P43	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q43	N
+Consignacion Cesantias Spec!R43	Date
+Consignacion Cesantias Spec!S43	Per return
+Consignacion Cesantias Spec!A44	Deposit compliance status per employee
+Consignacion Cesantias Spec!B44	Estado de cumplimiento de la consignacion por empleado
+Consignacion Cesantias Spec!C44	Deposit Confirmation, inbound
+Consignacion Cesantias Spec!D44	E91
+Consignacion Cesantias Spec!E44	N
+Consignacion Cesantias Spec!F44	N
+Consignacion Cesantias Spec!H44	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I44	-
+Consignacion Cesantias Spec!J44	AN
+Consignacion Cesantias Spec!K44	ON TIME
+Consignacion Cesantias Spec!L44	Mercans.Cesantias_Deposit_Status
+Consignacion Cesantias Spec!M44	INBOUND / DERIVED. Per employee and per accrual year, one of ON TIME, LATE (with the day count), SHORT (with the shortfall) or DISCHARGED BY DIRECT PAYMENT. This is the field that quantifies the exposure, because the Ley 50 de 1990 art. 99 num. 3 penalty is one day's salary for EACH DAY of delay, PER EMPLOYEE, and uncapped - on 100 minimum-wage employees a fortnight's delay is of the order of COP 81.7 million. Recompute it from E90 against the deadline in the Report Matrix, and hold it for the employee's three-year limitation period (CST art. 488 as substituted by Ley 2466 de 2025 art. 62). Where E92 records a discharge by proven direct payment, set this field to DISCHARGED BY DIRECT PAYMENT instead of deriving it from E90 - see E92.
+Consignacion Cesantias Spec!N44	Y
+Consignacion Cesantias Spec!O44	-> Sheet 6: Estado de cumplimiento
+Consignacion Cesantias Spec!P44	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q44	N
+Consignacion Cesantias Spec!R44	Code
+Consignacion Cesantias Spec!S44	Per return
+Consignacion Cesantias Spec!A45	Direct-payment discharge evidence
+Consignacion Cesantias Spec!B45	Prueba del pago directo liberatorio
+Consignacion Cesantias Spec!C45	Deposit Confirmation, inbound
+Consignacion Cesantias Spec!D45	E92
+Consignacion Cesantias Spec!E45	N
+Consignacion Cesantias Spec!F45	C
+Consignacion Cesantias Spec!G45	Where = Y, no annual detail record is produced for that employee (campos 1 to 20 of the published layout are not written) and E91 is set to DISCHARGED BY DIRECT PAYMENT. E91 back-references this field.
+Consignacion Cesantias Spec!H45	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I45	1
+Consignacion Cesantias Spec!J45	AN
+Consignacion Cesantias Spec!K45	N
+Consignacion Cesantias Spec!L45	Mercans.Cesantias_Direct_Payment_Flag
+Consignacion Cesantias Spec!M45	CST art. 57 para. 4, added by Law 2466 of 2025 art. 15, verbatim: 'Cuando el empleador acredite de manera fehaciente el pago directo al trabajador del valor correspondiente a las cesantias, dicho pago se considerara liberatorio de la obligacion, y no procedera sancion por no consignacion, salvo que se demuestre que el pago no se realizo en condiciones de libertad y que no fue utilizado en fines autorizados por la ley. No obstante, la afiliacion a Fondo de Cesantias es obligatoria.' Three limits the engine must respect: the discharge needs FEHACIENTE evidence, it is rebuttable on the freedom-and-purpose test, and it does NOT remove the duty to affiliate the employee to a fund. A DRAFTING NOTE on the citation: art. 15's enacting formula announces only 'los paragrafos 2 y 3' of CST art. 57, yet the published text prints a Paragrafo 4 and this is it - so cite CST art. 57 para. 4 as added by Law 2466 of 2025 art. 15, and expect the discrepancy to be raised. Wage-type mapping of direct payments: during the year, wage type 62110 'Cash-out of Severance Pay'; in January, wage type 62126 'Advance Severance Last Year'; the fund deposit, wage type 25827, then carries the remainder of the balance. This flag covers a FULL discharge of the deposit obligation by proven direct payment (Population Rules Step 0 exclusion (4)). An employee who left and was paid directly in the final settlement is NOT an E92 case but a Step 0 exclusion (2) under Ley 50 de 1990 art. 99 num. 4, and a January direct payment to an employee who left before the deposit is treated as that lawful payment. A partial direct payment does not set E92 = Y: T14 carries the deposit net of the direct payments already made and the record is still produced. The engine does not generate a direct payment of the consolidated balance to an employee who remains in service except for the housing and education purposes authorised by CST art. 254; such lawful partial payments reduce T14, and any other direct payment to an active employee is rejected. E92 = Y only for a full discharge with fehaciente evidence (see T14).
+Consignacion Cesantias Spec!N45	Y
+Consignacion Cesantias Spec!O45	-
+Consignacion Cesantias Spec!P45	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q45	N
+Consignacion Cesantias Spec!R45	Flag
+Consignacion Cesantias Spec!S45	Per return
+Consignacion Cesantias Spec!A46	Fund deposit certificate
+Consignacion Cesantias Spec!B46	Certificado de consignacion del fondo
+Consignacion Cesantias Spec!C46	Deposit Confirmation, inbound
+Consignacion Cesantias Spec!D46	E93
+Consignacion Cesantias Spec!E46	N
+Consignacion Cesantias Spec!F46	N
+Consignacion Cesantias Spec!H46	Not in the detail file - keyed in the portal / returned by it
+Consignacion Cesantias Spec!I46	-
+Consignacion Cesantias Spec!J46	AN
+Consignacion Cesantias Spec!K46	PDF / Excel
+Consignacion Cesantias Spec!L46	Mercans.Cesantias_Fund_Certificate_Ref
+Consignacion Cesantias Spec!M46	INBOUND. Both operators issue reports after payment - por fondo, por afiliado and a consolidated informe completo, in PDF or Excel - and the fund itself issues the deposit certificate. CCG Module 10 records that the certificate is issued by the FUND but the EMPLOYER must be able to evidence it. Store the reference against E10 and E90; it is the primary evidence in a claim, and the employee's claim period runs three years.
+Consignacion Cesantias Spec!N46	Y
+Consignacion Cesantias Spec!O46	-
+Consignacion Cesantias Spec!P46	Not an amount - no rounding.
+Consignacion Cesantias Spec!Q46	N
+Consignacion Cesantias Spec!R46	Text
+Consignacion Cesantias Spec!S46	Per return
+File Structure!A1	FILE STRUCTURE AND TECHNICAL SPECIFICATIONS
+File Structure!A2	═══ SUBMISSION CHANNEL ═══
+File Structure!A3	Channel
+File Structure!B3	TWO channels, both through a licensed information operator, NOT through a government portal. (A) online_form - 'Planilla En Linea' (SOI) / 'Elaborar planilla' (Simple S.A.), each employee keyed into the operator's form. (B) file_upload - 'Liquidacion Por Archivo' (SOI) / 'Envio de Archivo Unificado de Cesantias' (Simple S.A.). Both channels are documented in both operators' published instructions.
+File Structure!A4	Portals
+File Structure!B4	ACH Colombia S.A. (SOI) - www.nuevosoi.com.co, instruction guide DDS-DES-INS-008 v2. Simple S.A. - www.pagosimple.com, 'Manual Severance savings'. The same service is offered by Aportes en Linea, Asopagos, Enlace Operativo and MiPlanilla, each of which may impose an operator-specific layout. This Spec is written to the SOI channel and the Simple S.A. layouts; the information operator used is a configuration setting, and this Spec defines no other operator's variant.
+File Structure!A5	Authentication
+File Structure!B5	Portal session with (company document type + number), (user document type + number) and a password. Simple S.A. states the credentials are the SAME ones used for PILA. There is NO certificate, NO electronic signature and NO machine-to-machine service - contrast CO-DIAN-001, which has a SOAP contract, a XAdES signature and a synchronous ApplicationResponse.
+File Structure!A6	What comes back
+File Structure!B6	A return number (one per fondo where the medio de pago is Pago Credito), a pre-payment voucher in PDF, and after payment the informe por fondo / por afiliado / completo in PDF or Excel.
+File Structure!A7	NOT XML
+File Structure!B7	No XSD, no cahier des charges and no XML of any kind exists for this filing. The word XML must not appear against CO-CESANTIAS-006. CSV is accepted by SOI as an upload format, but the two layouts published at field level are the fixed-width TXT and the XLS 97-2003, and this Spec is written to those.
+File Structure!A8	═══ LAYOUT A - FIXED-WIDTH TXT, 20 FIELDS IN 258 POSITIONS (PUBLISHED) ═══
+File Structure!A9	Source
+File Structure!B9	Simple S.A. 'Manual Cesantias' s. 3.2 - 'Podras cargar un archivo plano o TXT sin encabezado; los campos deben estar organizados por posiciones'.
+File Structure!A10	Record model
+File Structure!B10	FLAT. One record per employee. Record type is the constant '02' in positions 1-2. There is NO type-01 header record, NO trailer, NO declared record count and NO declared control total - the aportante identity and the accrual year live in the portal envelope (Spec fields E01-E06), not in the file.
+File Structure!A11	Encoding and line ending
+File Structure!B11	Plain text. The instruction guide does not state the code page or the line terminator. Write ASCII with no accents and no special characters (both operators reject them in names) and use CRLF, which is what the Windows-oriented tooling in this space expects.
+File Structure!A12	Size limit
+File Structure!B12	SOI: a file above 1 MB must be COMPRESSED before upload. At 258 bytes plus a terminator per record that is roughly 4,000 employees per uncompressed file.
+File Structure!A13	Sequence
+File Structure!B13	Positions 3-7, starts at 00001, consecutive. Maximum 99,999 records.
+File Structure!B14	Campo  Len  Ini  Fin  Type   Field
+File Structure!B15	  1      2    1    2   N      Tipo de registro                 (constant '02')
+File Structure!B16	  2      5    3    7   N      Secuencia                         (00001, consecutive)
+File Structure!B17	  3      2    8    9   A      Tipo de documento del cotizante  (CC/CE/TI/PA/CD/SC/PE)
+File Structure!B18	  4     16   10   25   N      Numero de identificacion         (right-aligned, 0-filled)
+File Structure!B19	  5     20   26   45   A      First surname                   (mandatory)
+File Structure!B20	  6     20   46   65   A      Second surname
+File Structure!B21	  7     20   66   85   A      First given name                     (mandatory)
+File Structure!B22	  8     20   86  105   A      Segundo nombre
+File Structure!B23	  9      2  106  107   N      Codigo del Fondo de Cesantias     (02/03/10/15/19)
+File Structure!B24	 10      3  108  110   N      Numero de dias worked         (1 to 360)
+File Structure!B25	 11      4  111  114   N      Espacio con ceros                 (must contain zeros)
+File Structure!B26	 12      9  115  123   N      Salario basico reportado en el ultimo mes (December of the year)
+File Structure!B27	 13      4  124  127   N      Espacio con ceros                 (must contain zeros)
+File Structure!B28	 14      9  128  136   N      Valor de las cesantias            (>= 1 day of 1 SMLMV)
+File Structure!B29	 15     50  137  186   CHAR   Residential address
+File Structure!B30	 16      2  187  188   N      Department code (DANE)
+File Structure!B31	 17      3  189  191   N      Municipality code (DANE)
+File Structure!B32	 18      7  192  198   N      Landline                     (exactly 7 digits)
+File Structure!B33	 19     50  199  248   CHAR   E-mail
+File Structure!B34	 20     10  249  258   N      Hire date                  (AAAA-MM-DD)
+File Structure!A35	Arithmetic check
+File Structure!B35	2+5+2+16+20+20+20+20+2+3+4+9+4+9+50+2+3+7+50+10 = 258. Every Inicial-Final pair in the published table is consistent with its stated length and with its neighbours; there are no gaps and no overlaps. The Sample File sheet is generated from the same table with a 258-character length assertion.
+File Structure!A36	The two zero fillers
+File Structure!B36	Campos 11 and 13 exist only in this layout. Read them with the campo-14 note - 'antes de cada valor deben ir 4 espacios (pueden ser rellenos con ceros o en blanco)' - and the intent becomes clear: the two amounts are really 13-position frames whose leading 4 positions must be zeros or blanks. The campo-11 and campo-13 rules say 'Debe contener ceros' without the alternative, so WRITE ZEROS: zeros satisfy both readings, blanks satisfy only one.
+File Structure!A37	═══ LAYOUT B - EXCEL 97-2003 .XLS, 16 COLUMNS A TO P (PUBLISHED) ═══
+File Structure!A38	Source
+File Structure!B38	Simple S.A. 'Manual Cesantias' s. 3.1, with the filled-in example table reproduced in the manual.
+File Structure!A39	Rules
+File Structure!B39	Save as .XLS (MS Excel 97-2003). NO aportante data in the file. NO header row - the contributor data start on the FIRST row. All records on ONE sheet of the workbook.
+File Structure!B40	A  Tipo de identificacion del empleado   (CC/CE/TI/PA/CD/SC/PE/PT - 2 chars)
+File Structure!B41	B  Numero de identificacion             (numeric, max 15, no dots or commas)
+File Structure!B42	C  First surname                       (mandatory, up to 20)
+File Structure!B43	D  Second surname                      (optional, up to 20)
+File Structure!B44	E  First given name                         (mandatory, up to 20)
+File Structure!B45	F  Segundo nombre                        (optional, up to 20)
+File Structure!B46	G  Codigo del Fondo de Cesantias         (02/03/10/15/19)
+File Structure!B47	H  Numero de dias laborados              (1 to 360)
+File Structure!B48	I  Salary base                          (mandatory, max 13, no decimals)
+File Structure!B49	J  Value severance savings                       (mandatory, max 13, no decimals)
+File Structure!B50	K  Employee residential address
+File Structure!B51	L  Department code (DANE)
+File Structure!B52	M  Municipality code (DANE)
+File Structure!B53	N  Employee landline            (7 digits only)
+File Structure!B54	O  Employee e-mail
+File Structure!B55	P  Employee hire date         (AAAA-MM-DD)
+File Structure!A56	THREE DIFFERENCES between the two layouts
+File Structure!B56	(1) The XLS has no record type, no sequence and no zero fillers - so campos 1, 2, 11 and 13 of the TXT layout have no XLS column. (2) The XLS admits PT (Permiso temporal) in column A; the TXT document-type list printed in the same manual stops at PE. Where the workforce includes PPT holders, prefer the XLS route or confirm PT with the operator. (3) The identity number is right-aligned and zero-filled to 16 in the TXT but plain numeric to a 15-character maximum in the XLS. A generator that shares one formatter across both routes will be wrong in one of them.
+File Structure!A57	═══ VALIDATIONS THE CHANNEL PERFORMS (BOTH OPERATORS) ═══
+File Structure!A58	Structure and content
+File Structure!B58	Run on upload. Errors are returned as a downloadable Excel report; the file must be amended and re-uploaded. Nothing is partially accepted.
+File Structure!A59	Asofondos affiliate-base check
+File Structure!B59	Surnames and names are validated against the affiliate base that ASOFONDOS delivers to the information operators ANNUALLY. Differences produce an Excel report and a SI / NO question: SI overwrites the employer's values with the Asofondos values, NO keeps the employer's. Answer NO and fix the master data - see Spec field E09.
+File Structure!A60	Minimum collection
+File Structure!B60	Campo 14 must be at least one day of one SMMLV of the accrual year. For accrual year 2026: 1,750,905 / 30 = COP 58,363.50.
+File Structure!A61	Character rules
+File Structure!B61	No accents and no special characters (both operators list rejected characters); identity numbers without spaces, dots or punctuation; amounts without points, commas, decimals or signs.
+File Structure!A62	What is NOT validated
+File Structure!B62	The channel does NOT check the STATUTORY correctness of campo 14. It accepts any figure at or above the floor. In particular it will accept a liquidation computed WITHOUT the transport allowance, which is a short deposit penalised at one day's salary per day of delay. The only defence is to compute campo 14 in the engine.
+Field Options!A1	FIELD OPTIONS - CODE TABLES
+Field Options!A2	Code
+Field Options!B2	Abbrev
+Field Options!C2	Local (ES)
+Field Options!D2	EN Description
+Field Options!A3	═══ CODIGO DEL FONDO DE CESANTIAS (SPEC FIELD T9 / XLS COLUMN G) - VERBATIM FROM THE PUBLISHED LAYOUT; EXACTLY FIVE VALUES ARE ADMITTED ═══
+Field Options!A4	02
+Field Options!B4	PROTECCION
+Field Options!C4	Fondo de Cesantias Proteccion (Proteccion S.A.)
+Field Options!D4	Private severance-savings fund administered by Proteccion S.A.
+Field Options!A5	03
+Field Options!B5	PORVENIR
+Field Options!C5	Porvenir Cesantias (Porvenir S.A.)
+Field Options!D5	Private severance-savings fund administered by Porvenir S.A., the largest by affiliates.
+Field Options!A6	10
+Field Options!B6	COLFONDOS
+Field Options!C6	Colfondos Cesantias (Colfondos S.A. Pensiones y Cesantias)
+Field Options!D6	Private severance-savings fund administered by Colfondos S.A.
+Field Options!A7	15
+Field Options!B7	FNA
+Field Options!C7	Fondo Nacional del Ahorro (FNA)
+Field Options!D7	The STATE-OWNED fund - an Empresa Industrial y Comercial del Estado. The only public-sector option, and the one whose own employer instruction guide is the single genuinely official schema for this filing.
+Field Options!A8	19
+Field Options!B8	SKANDIA
+Field Options!C8	Old Mutual (antes Skandia) - printed label; the entity trades as Skandia
+Field Options!D8	STALE LABEL, LIVE CODE. The published layout prints 'Old Mutual (Antes Skandia)', but the administrator trades as Skandia again - Skandia Administradora de Fondos de Pensiones y Cesantias S.A., authorised by the Superintendencia Financiera in January 2025 as SKANDIA AFP-ACCAI S.A. under Law 2381 of 2024. Send the CODE 19, never the name.
+Field Options!A9	-
+Field Options!B9	-
+Field Options!C9	Any other value
+Field Options!D9	REJECTED. The layout states the codes are 'validado contra el listado de Fondos de Cesantias registrados en el sistema. Solo son validos' the five above.
+Field Options!A10	═══ TIPO DE DOCUMENTO (SPEC FIELD T3 / XLS COLUMN A) - VERBATIM; NOTE THE TXT AND XLS LISTS DIFFER ═══
+Field Options!A11	CC
+Field Options!B11	CC
+Field Options!C11	Cedula de ciudadania
+Field Options!D11	Colombian national identity card. In both layouts.
+Field Options!A12	CE
+Field Options!B12	CE
+Field Options!C12	Cedula de extranjeria
+Field Options!D12	Foreign resident identity card. In both layouts.
+Field Options!A13	TI
+Field Options!B13	TI
+Field Options!C13	Tarjeta de identidad
+Field Options!D13	Minor's identity card. In both layouts. Converts to CC on majority - a change of the T03+T04 join key that must reach the fund.
+Field Options!A14	PA
+Field Options!B14	PA
+Field Options!C14	Pasaporte
+Field Options!D14	Passport. In both layouts.
+Field Options!A15	CD
+Field Options!B15	CD
+Field Options!C15	Carnet diplomatico
+Field Options!D15	Diplomatic card. In both layouts.
+Field Options!A16	SC
+Field Options!B16	SC
+Field Options!C16	Salvoconducto de permanencia
+Field Options!D16	Safe-conduct of stay. In both layouts.
+Field Options!A17	PE
+Field Options!B17	PE
+Field Options!C17	Permiso especial de permanencia (PEP)
+Field Options!D17	In both layouts. SOI records a hard length rule: where the document is a PEP the NUMBER must be EXACTLY 15 digits.
+Field Options!A18	PT
+Field Options!B18	PT
+Field Options!C18	Permiso temporal (PPT - Permiso por Proteccion Temporal)
+Field Options!D18	PRINTED IN THE XLS LIST ONLY. The fixed-width document-type list in the same manual stops at PE. Where the workforce includes PPT holders (a large Venezuelan-migrant population), prefer the XLS route or confirm PT with the operator before generating fixed-width files.
+Field Options!A19	-
+Field Options!B19	-
+Field Options!C19	Cross-reference warning
+Field Options!D19	THESE ARE NOT THE CODES USED ELSEWHERE. Form 220, Format 2276 and the electronic payroll use DIAN NUMERIC document-type codes (13 = citizenship ID card, and so on) and PILA Record Tipo 2 campo 3 uses a different admitted list. One document type in master data, three mappers out.
+Field Options!A20	═══ SERVICIO PCSS (SPEC FIELD E2) - THE SERVICE SELECTED IN THE OPERATOR PORTAL ═══
+Field Options!A21	CESANTIAS
+Field Options!B21	CES
+Field Options!C21	Cesantias
+Field Options!D21	This filing. A Payment Supplementary to social security Social.
+Field Options!A22	PENSIONES VOLUNTARIAS
+Field Options!B22	PVOL
+Field Options!C22	Pensiones voluntarias
+Field Options!D22	The other PCSS service the same portals offer. NOT this filing and not a statutory employer obligation.
+Field Options!A23	PILA
+Field Options!B23	PILA
+Field Options!C23	Planilla Integrada de Liquidacion de Aportes
+Field Options!D23	A DIFFERENT service in the same portal, with the same login. Monthly, not annual. See CO-PILA-003. Building a PILA return and expecting the severance savings to be inside it is the most common channel error.
+Field Options!A24	═══ TIPO DE AFILIACION DE LA PLANILLA (SPEC FIELD E4) - VERBATIM FROM THE SOI INSTRUCTIVO ═══
+Field Options!A25	DEPENDIENTE
+Field Options!B25	DEP
+Field Options!C25	Dependiente
+Field Options!D25	'Pago de aportes derivados de contrato por nomina'. THE VALUE FOR THIS FILING - always.
+Field Options!A26	AGREMIADO
+Field Options!B26	AGR
+Field Options!C26	Agremiado
+Field Options!D26	'Pago de aportes de independientes asociados o agremiados'. Not an employer filing.
+Field Options!A27	INDEPENDIENTE
+Field Options!B27	IND
+Field Options!C27	Independiente
+Field Options!D27	'Contributions realizados por parte de una natural person para si misma'. Not an employer filing; and note that independent workers have no severance savings entitlement at all - severance savings is a prestacion social of an employment contract.
+Field Options!A28	═══ MEDIO DE PAGO (SPEC FIELD E5) - CHANGES THE CARDINALITY OF THE RETURN ═══
+Field Options!A29	PSE
+Field Options!B29	PSE
+Field Options!C29	Pago por PSE (Proveedor de Servicios Electronicos)
+Field Options!D29	Electronic bank payment. ONE return number for the whole settlement.
+Field Options!A30	PAGO CREDITO
+Field Options!B30	CRE
+Field Options!C30	Pago credito
+Field Options!D30	ONE RETURN NUMBER PER ADMINISTRADORA contained in the settlement (SOI instruction guide, footnote 6). The reconciliation store must therefore be one-to-many. See E05 and E10.
+Field Options!A31	═══ RESPUESTA A LA VALIDACION ASOFONDOS (SPEC FIELD E9) ═══
+Field Options!A32	SI
+Field Options!B32	SI
+Field Options!C32	Si - ajustar automaticamente
+Field Options!D32	The system replaces the employer's names with the values from the Asofondos affiliate base. Convenient and wrong: it hides a master-data defect that will recur every year and that is also wrong on Form 220 and Format 2276.
+Field Options!A33	NO
+Field Options!B33	NO
+Field Options!C33	No - mantener la informacion reportada
+Field Options!D33	Keeps the employer's values. THE CORRECT ANSWER, followed by an investigation of each difference at source.
+Field Options!A34	═══ ESTADO DE CUMPLIMIENTO DE LA CONSIGNACION (SPEC FIELD E91) - MERCANS-DERIVED, NOT A CHANNEL CODE ═══
+Field Options!A35	ON TIME
+Field Options!B35	OK
+Field Options!C35	Consignado en plazo
+Field Options!D35	Payment date (E90) at or before the deadline. No exposure.
+Field Options!A36	LATE
+Field Options!B36	MORA
+Field Options!C36	Consignado en mora
+Field Options!D36	One day's salary per day of delay, per employee, UNCAPPED - Ley 50 de 1990 art. 99 num. 3. Store the day count. The draft decree fixes the first day of mora as 15 February.
+Field Options!A37	SHORT
+Field Options!B37	CORTO
+Field Options!C37	Consignado por menor valor
+Field Options!D37	The deposit was made in time but for less than the statutory liquidation - typically because the transport allowance was omitted from the base (see T14). Treated as non-deposit of the shortfall.
+Field Options!A38	DISCHARGED
+Field Options!B38	PAGO DIRECTO
+Field Options!C38	Liberado por pago directo al trabajador
+Field Options!D38	CST art. 57 para. 4, added by Law 2466 of 2025 art. 15. No return record and no penalty, but the evidence must be fehaciente, the discharge is rebuttable on the freedom-and-purpose test, and fund affiliation remains compulsory.
+Field Options!A39	N/A
+Field Options!B39	NA
+Field Options!C39	No aplica
+Field Options!D39	All-inclusive salary, leaver settled in the final settlement, pre-1991 retrospective regime, or a residue below one day of the SMMLV. See the Payroll Scope Summary.
+Field Options!A40	═══ CODIGOS DANE (SPEC FIELDS T16 AND T17) - REFERENCE ONLY; THE FULL DIVIPOLA LIST IS MASTER DATA ═══
+Field Options!A41	11 / 001
+Field Options!B41	BOG
+Field Options!C41	Bogota, D.C.
+Field Options!D41	Department 11, municipality 001 - divipola 11001. The example used on Sheets 8 and 9.
+Field Options!A42	05 / 001
+Field Options!B42	MED
+Field Options!C42	Medellin (Antioquia)
+Field Options!D42	Department 05, municipality 001 - divipola 05001.
+Field Options!A43	76 / 001
+Field Options!B43	CAL
+Field Options!C43	Cali (Valle del Cauca)
+Field Options!D43	Department 76, municipality 001 - divipola 76001.
+Field Options!A44	08 / 001
+Field Options!B44	BAQ
+Field Options!C44	Barranquilla (Atlantico)
+Field Options!D44	Department 08, municipality 001 - divipola 08001.
+Field Options!A45	-
+Field Options!B45	-
+Field Options!C45	Composite rule
+Field Options!D45	T16 is the two-digit DEPARTMENT prefix and T17 the three-digit MUNICIPALITY suffix of ONE five-digit divipola code. Writing the full 11001 into the three-position T17 truncates to 110 and relocates the affiliate.
+Field Options!A46	═══ FISCAL PARAMETERS THAT DRIVE THIS FILING - ACCRUAL YEAR 2026 ═══
+Field Options!A47	1750905
+Field Options!B47	SMMLV
+Field Options!C47	Salario minimo mensual legal vigente 2026
+Field Options!D47	Decree 1469 of 2025. Sets the minimum-collection validation (one day = COP 58,363.50) and, for a minimum-wage employee, the salary half of the base.
+Field Options!A48	249095
+Field Options!B48	AUX TTE
+Field Options!C48	Auxilio de transporte 2026
+Field Options!D48	Decree 1469 of 2025. PART OF THE SEVERANCE SAVINGS BASE under CST art. 253, payable where the salary does not exceed 2 SMMLV (COP 3,501,810). The operator's calculator omits it - see T14.
+Field Options!A49	2000000
+Field Options!B49	BASE MIN
+Field Options!C49	Base de liquidacion de un trabajador de salario minimo 2026
+Field Options!D49	1,750,905 + 249,095 = exactly COP 2,000,000. A full year at 360 days therefore liquidates to COP 2,000,000, against COP 1,750,905 if the transport allowance is wrongly excluded - a shortfall of COP 249,095 per employee.
+Field Options!A50	52374
+Field Options!B50	UVT
+Field Options!C50	Unidad de Valor Tributario 2026
+Field Options!D50	Res. DIAN 000238 of 15 Dec 2025. Not used in this file, but it fixes the ET art. 206 num. 4 exemption bands (350 UVT = COP 18,330,900) that apply when the money is PAID and reported on Form 220 and Format 2276.
+Field Options!A51	360
+Field Options!B51	ANO COMERCIAL
+Field Options!C51	Ano comercial de 360 dias
+Field Options!D51	The divisor in both the statutory formula and the layout's own calculator. Not 365.
+Population Rules!A1	POPULATION RULES - HOW TO FILL EACH FIELD FROM PAYROLL
+Population Rules!A2	Field Name
+Population Rules!B2	Source System
+Population Rules!C2	Population Logic
+Population Rules!D2	Edge Cases
+Population Rules!A3	═══ STEP 0 - BUILD THE POPULATION (THIS IS WHERE THE FILING IS USUALLY GOT WRONG) ═══
+Population Rules!A4	Population of the return
+Population Rules!B4	Payroll master data + service history
+Population Rules!C4	Select every employee IN SERVICE AT 31 DECEMBER of the accrual year who is on the annual severance savings regime (Law 50 of 1990 art. 99 - all employees hired from 1 January 1991, plus pre-1991 hires who migrated). EXCLUDE, in this order: (1) all-inclusive salary employees, whose severance savings is absorbed by CST art. 132 num. 2; (2) employees who LEFT during the year, whose severance savings was settled and paid in the final settlement; (3) pre-1991 non-migrated employees on the retrospective regime, for whom there is no fund deposit at all; (4) employees discharged by proven direct payment under CST art. 57 para. 4; (5) records whose liquidation falls below one day of one SMMLV, which the channel rejects. Do NOT build the population from the December PILA return, however convenient the portal makes it (E08): PILA is the population PAID in a month, not the population ENTITLED for the year - it contains every all-inclusive salary employee and omits every mid-year leaver.
+Population Rules!D4	A leaver included = double payment, and the money is then in a fund account the ex-employee must claim. A all-inclusive salary employee included = an unrecoverable deposit. A missed employee = one day's salary per day of delay, uncapped, running until it is found.
+Population Rules!A5	Fund per employee
+Population Rules!B5	Employee master data
+Population Rules!C5	Read Employee.Cesantias_Fund_Code. It is the EMPLOYEE'S statutory choice under Law 50 of 1990 art. 99 num. 3 ('en el fondo de cesantia que el mismo elija'), so it is employee master data and never a company default. Where a mid-year change of fund has been notified, use the fund in force at the date of the deposit. Where the field is empty the record cannot be built - escalate, because affiliation is compulsory even where the severance savings is paid directly (CST art. 57 para. 4 in fine). Set E07 to N so that this per-employee value governs.
+Population Rules!D5	An empty fund code is not a payroll defect to be defaulted - it is an unfulfilled affiliation obligation. Answering YES to the portal's single-fund question to get past it deposits other people's money into the wrong fund and does not discharge the obligation.
+Population Rules!A6	═══ STEP 1 - COMPUTE THE BASE AND THE AMOUNT (CST ARTS. 249 AND 253) ═══
+Population Rules!A7	T14 Valor de las cesantias
+Population Rules!B7	Payroll engine - annual liquidation
+Population Rules!C7	Compute, do NOT let the portal compute. (a) Determine the BASE under CST art. 253: the LAST monthly salary if it has not varied in the last three months; otherwise, and for every variable salary, the AVERAGE of the last year of service, or of the whole period served if shorter. (b) ADD THE TRANSPORT ALLOWANCE where it is payable - CST art. 253 requires it and it is payable where the salary does not exceed 2 SMMLV (COP 3,501,810 in 2026). (c) Multiply by days of service over 360. (d) Round to the whole peso - not up to the next 100 as PILA requires, and not to the nearest 1,000 as Form 350 requires. (e) Validate against the floor of one day of one SMMLV (COP 58,363.50 for 2026). (f) Where a lawful partial settlement was made during the year under CST art. 254, deduct it. Write the result into positions 128-136, right-aligned and zero-filled, with '0000' in positions 124-127.
+Population Rules!D7	THE TRAP: the layout's own formula is 'Basic salary * (dias worked / 360)' and campo 12 is named 'basic salary'. Follow the portal and a minimum-wage employee is deposited COP 1,750,905 instead of COP 2,000,000 - a COP 249,095 short deposit per employee, penalised as non-deposit at one day's salary per day of delay. The floor also bites in reverse: a residue below COP 58,363.50 cannot be deposited and must be settled with the employee instead.
+Population Rules!A8	T12 Salario basico reportado en el ultimo mes
+Population Rules!B8	Payroll - December of the accrual year
+Population Rules!C8	Report the DECEMBER basic salary of the accrual year, exactly as the layout specifies ('Corresponde al ultimo salario basico reportado en el mes de diciembre del ano causado de cesantias'), in 9 integer positions, zero-filled, with '0000' in positions 111-114. This is a REPORTING field for the fund's records - it is NOT the statutory base, and the two will legitimately differ for a variable-salary employee whose base is a twelve-month average. Do not reverse-engineer T12 from T14 to make the portal's calculator agree.
+Population Rules!D8	For an employee who was on unpaid leave in December, or who was hired on 20 December, the December basic is still the contractual monthly salary, not the amount actually earned that month. For an employee whose salary changed in November, T12 carries the December figure while the CST art. 253 base is the twelve-month average - so T14 will not equal T12 * T10/360, and that is correct.
+Population Rules!A9	T10 Numero de dias worked
+Population Rules!B9	Payroll - service calendar
+Population Rules!C9	Count the days of service in the accrual year on the 360-day COMMERCIAL convention: each complete month is 30 days, a full year is 360. Include paid leave, paid holidays and recognised incapacity, all of which count as service. Exclude unpaid leave (unpaid leave) and suspension. For an employee in service the whole year write 360, rather than 365 and rather than 366. The field admits 1 to 360 only, so any computation that can produce 361 or more is wrong before it reaches the file.
+Population Rules!D9	A leap year does not change the divisor. An employee hired on 31 January accrues 330 days, rather than 335. Where unpaid leave straddles a month end, count the calendar days of the leave on the 30-day convention and subtract - do not subtract whole months.
+Population Rules!A10	═══ STEP 2 - IDENTIFICATION AND CONTACT FIELDS ═══
+Population Rules!A11	T03 + T04 Tipo y numero de documento
+Population Rules!B11	Employee master data
+Population Rules!C11	Map the document type to the two-letter severance savings code (CC/CE/TI/PA/CD/SC/PE, plus PT in the XLS route only) - this is a DIFFERENT mapper from the DIAN numeric codes used on Form 220 and Format 2276 and from the PILA list. Strip dots, commas, spaces and hyphens from the number, then RIGHT-ALIGN and ZERO-FILL to 16 positions for the fixed-width route, or leave it plain to a 15-character maximum for the XLS route. Where the type is PE the number must be exactly 15 digits.
+Population Rules!D11	A regularisation that converts a PEP or PPT into a Foreign resident ID card changes the join key the fund holds; unless the change reaches the fund, the February deposit lands on an orphan account and the employee cannot see it. A TI holder reaching majority is the same problem. Where the workforce includes PPT holders and the fixed-width route is used, the document-type list printed for that layout has no PT value - confirm with the operator rather than substituting CE.
+Population Rules!A12	T05-T08 Surnames and given names
+Population Rules!B12	Employee master data
+Population Rules!C12	Write the four name components into their own 20-position fields, left-aligned and space-filled: first surname (mandatory), second surname, first given name (mandatory), segundo nombre. Strip accents and every special character the operators reject. Where a component is absent, SPACE-FILL THE WHOLE FIELD - never shift the following fields up, because the record is positional and the fund code at 106-107 would then be read out of the middle of a name. Space-fill rather than truncate; a truncated surname mismatches the Asofondos base every year. Answer NO to the auto-adjust question (E09) and fix differences at source.
+Population Rules!D12	Compound surnames longer than 20 characters have to be truncated somewhere - do it deliberately and record the rule, because the same truncation must be applied consistently year on year or the mismatch report churns. A person with one name and one surname produces two space-filled fields, which is valid. Foreign employees whose passport shows a single name field need a documented split rule; the fund's record follows whatever was first sent.
+Population Rules!A13	T15-T19 Direccion, DANE, telefono, correo
+Population Rules!B13	Employee master data
+Population Rules!C13	Write the RESIDENTIAL address (not the work address - the fund communicates with its member at home), 50 positions space-filled. Split the DANE divipola code into its two-digit department half at 187-188 and its three-digit municipality half at 189-191. The landline field admits EXACTLY seven digits, so a 10-digit mobile cannot go in it; zero- or space-fill instead. The e-mail field is 50 positions and the operator validates the local part, the @ and the domain separately, with the hyphen barred from the first and last position of the domain.
+Population Rules!D13	The single most common defect here is sending the WORK municipality, because that is what PILA and the electronic payroll want; the affiliate then never receives a fund statement. Truncating a mobile number to seven digits produces a wrong-number record on the fund's file, which is worse than an empty one. Addresses longer than 50 characters must be abbreviated by a documented rule, not cut mid-token.
+Population Rules!A14	T20 Hire date
+Population Rules!B14	Contract master data
+Population Rules!C14	Write the CONTRACT HIRE DATE in AAAA-MM-DD, ten positions including the hyphens, at 249-258. For an employee hired in 2019 and reported for accrual year 2026 the value is 2019-03-01 - rather than 2026-01-01, and not the start of the accrual period.
+Population Rules!D14	Sending the accrual-year start corrupts the fund's seniority record, which the fund uses for its own member-benefit rules. For a rehired employee, use the hire date of the CURRENT contract, which is the contract the cesantias accrued under. Note the layout types this field N while the content contains hyphens; a strict numeric writer will emit 8 characters and fail validation even though nothing shifts, because the field is last in the record.
+Population Rules!A15	═══ STEP 3 - ENVELOPE, PAYMENT AND RECONCILIATION ═══
+Population Rules!A16	E01-E06 Return envelope
+Population Rules!B16	Company master data + run parameters
+Population Rules!C16	Authenticate with the company document pair, select the service CESANTIAS (not PILA), enter the ACCRUAL YEAR (not a month), select afiliacion type DEPENDIENTE, select the medio de pago and label the return with the run identifier so the returned return number can be tied back. Answer NO to the seed-from-PILA question and NO to the single-fund question.
+Population Rules!D16	The period concept is the trap: every other Colombian payroll filing is monthly and keyed to a payment date, and this one is keyed to the accrual year that closed on 31 December. A return built in February 2027 carries ano accrued 2026.
+Population Rules!A17	E10-E11, E90 Return values
+Population Rules!B17	Operator portal - inbound
+Population Rules!C17	Store the return number, the total payable and the PAYMENT date. Where the medio de pago is Pago Credito, expect and store MANY return numbers - one per fondo. Reconcile the returned total against the engine's own sum of T14 before paying, because the file carries no header, no trailer, no record count and no declared total, so a truncated upload is not self-detecting. Download and archive the voucher PDF and the per-fondo report.
+Population Rules!D17	Liquidating the return is not paying it. A return liquidated on 13 February and paid on 17 February is LATE - the deadline attaches to the deposit, so the compliance evidence is the payment date, not the liquidation date.
+Population Rules!A18	E91-E93 Compliance status and evidence
+Population Rules!B18	Engine-derived + fund certificate
+Population Rules!C18	Derive the per-employee status (ON TIME / LATE with a day count / SHORT with a shortfall / DISCHARGED BY DIRECT PAYMENT) from E90 against the deadline, and hold it with the fund's deposit certificate reference for at least the employee's three-year limitation period under CST art. 488 as substituted by Ley 2466 de 2025 art. 62. Quantify the exposure: the penalty is one day's salary per day of delay, per employee, uncapped - for 100 minimum-wage employees a fortnight is of the order of COP 81.7 million.
+Population Rules!D18	The certificate is issued by the FUND, but CCG Module 10 records that the EMPLOYER must be able to evidence it - so the reference must be stored employer-side, not left on a portal. A SHORT deposit made on time is not a lesser problem than a late one: the shortfall is treated as non-deposit and accrues the same daily penalty.
+Population Rules!A19	═══ STEP 4 - THE TWO THINGS THAT ARE NOT IN THIS FILE ═══
+Population Rules!A20	IN01-IN03 Interest on severance savings
+Population Rules!B20	Payroll engine - paid to the EMPLOYEE
+Population Rules!C20	Compute 12% per annum on the 31 December balance, pro-rated on days over 360, and PAY IT TO THE EMPLOYEE DIRECTLY DURING JANUARY of the following year - never to the fund and never in February. Liquidate no interest on interest. Where a WRITTEN agreement exists under Ley 2466 de 2025 art. 64 par. 2, pay instead 1% monthly of the monthly base (salary + transport allowance). Evidence the payment - failure costs an indemnity equal to the interest owed, once only, under Ley 52 de 1975 art. 1.
+Population Rules!D20	Two obligations, two payees, two deadlines, two penalties, and they are routinely conflated. Depositing the interest to the fund discharges nothing and leaves the January obligation open. Note also that the monthly 1% option and the annual 12% do NOT arrive at the same figure, because the monthly base is the monthly salary while the annual base is the accumulated balance.
+Population Rules!A21	Tax treatment of the cesantias
+Population Rules!B21	CO-DIAN-004 and CO-DIAN-005, not here
+Population Rules!C21	No withholding is practised on the DEPOSIT. When the money is eventually paid to the employee, a RESIDENT gets the ET art. 206 num. 4 exemption - full below a six-month average of 350 UVT (COP 18,330,900 in 2026), then tapering 90/80/60/40/20 per cent across the 350-410, 410-470, 470-530, 530-590 and 590-650 UVT bands - while a NON-RESIDENT gets no exemption and the flat 20% of ET art. 408 on the gross. The figures are reported on Form 220 casillas 48-49 and Format 2276 numerals 19-20.
+Population Rules!D21	Format 2276 numerals 19 and 20 are TRANSPOSED against Form 220 casillas 48 and 49 - map by MEANING, per the CO-DIAN-005 Spec. Nothing about the tax treatment changes a character of the record sent to the fund, which is why a non-resident's record is identical to a resident's.
+Example Analysis!A1	EXAMPLE ANALYSIS - SAMPLE RECORD PARSED FIELD BY FIELD
+Example Analysis!A2	Raw Value
+Example Analysis!B2	Field Name
+Example Analysis!C2	Interpretation
+Example Analysis!D2	Notes
+Example Analysis!A3	═══ THE SCENARIO ═══
+Example Analysis!A4	-
+Example Analysis!B4	Employee
+Example Analysis!C4	Juan Carlos Perez Gomez, CC 1.020.304.050, hired 1 March 2019, in service the whole of accrual year 2026, resident in Bogota D.C., affiliated to Porvenir.
+Example Analysis!D4	Chosen deliberately: an employee on the 2026 minimum wage, because that is the case in which the transport allowance is payable and the operator's calculator therefore gives the wrong answer.
+Example Analysis!A5	-
+Example Analysis!B5	Pay
+Example Analysis!C5	Basic salary COP 1,750,905 (the 2026 SMMLV), unchanged through the year. Transport allowance COP 249,095, payable because the salary does not exceed 2 SMMLV (COP 3,501,810). CST art. 253 base = 1,750,905 + 249,095 = COP 2,000,000 exactly.
+Example Analysis!D5	Decree 1469 of 2025 sets both figures. The base is exactly two million, which makes the arithmetic below checkable by eye.
+Example Analysis!A6	-
+Example Analysis!B6	Liquidation
+Example Analysis!C6	2,000,000 x 360 / 360 = COP 2,000,000, deposited to Porvenir before 15 February 2027.
+Example Analysis!D6	What the operator's own calculator would have produced: 1,750,905 x 360 / 360 = COP 1,750,905. A shortfall of COP 249,095 - see the trap note at the end of this sheet.
+Example Analysis!A7	═══ THE 258-POSITION RECORD, FIELD BY FIELD ═══
+Example Analysis!A8	02
+Example Analysis!B8	T01 Tipo de registro (1-2)
+Example Analysis!C8	Constant. Every detail line is a type-02 record.
+Example Analysis!D8	There is no header and no trailer, so the file carries no record count and no control total.
+Example Analysis!A9	00001
+Example Analysis!B9	T02 Secuencia (3-7)
+Example Analysis!C9	First record of the return.
+Example Analysis!D9	Must start at 00001 and be consecutive. Positions 1-7 together are the record key the operator's structure validation reads first.
+Example Analysis!A10	CC
+Example Analysis!B10	T03 Tipo de documento (8-9)
+Example Analysis!C10	Citizenship ID card.
+Example Analysis!D10	Two ALPHABETIC characters. Not the DIAN numeric code 13 that the same employee carries on Form 220 casilla 24 and Format 2276 numeral 2.
+Example Analysis!A11	0000001020304050
+Example Analysis!B11	T04 Numero de identificacion (10-25)
+Example Analysis!C11	1020304050, right-aligned and zero-filled to 16 positions.
+Example Analysis!D11	Six leading zeros. In the XLS route the SAME number is written plain as 1020304050 to a 15-character maximum - one formatter cannot serve both routes.
+Example Analysis!A12	PEREZ...............
+Example Analysis!B12	T05 First surname (26-45)
+Example Analysis!C12	PEREZ plus 15 spaces.
+Example Analysis!D12	Left-aligned, space-filled. Dots shown here only to make the padding visible; the real file carries spaces.
+Example Analysis!A13	GOMEZ...............
+Example Analysis!B13	T06 Second surname (46-65)
+Example Analysis!C13	GOMEZ plus 15 spaces.
+Example Analysis!D13	Not marked mandatory. Had the employee no second surname, all 20 positions would be spaces - never omitted, or everything after position 45 shifts.
+Example Analysis!A14	JUAN................
+Example Analysis!B14	T07 Primer nombre (66-85)
+Example Analysis!C14	JUAN plus 16 spaces.
+Example Analysis!D14	Mandatory.
+Example Analysis!A15	CARLOS..............
+Example Analysis!B15	T08 Segundo nombre (86-105)
+Example Analysis!C15	CARLOS plus 14 spaces.
+Example Analysis!D15	Optional. Maps to the Data-Dictionary Other_Names field, shared with the electronic payroll and Form 220.
+Example Analysis!A16	03
+Example Analysis!B16	T09 Codigo del Fondo (106-107)
+Example Analysis!C16	Porvenir - the employee's own choice.
+Example Analysis!D16	Only 02, 03, 10, 15 and 19 are admitted. Had E07 been answered YES, this value would have been overwritten for every employee in the return.
+Example Analysis!A17	360
+Example Analysis!B17	T10 Dias worked (108-110)
+Example Analysis!C17	A full accrual year on the 360-day commercial convention.
+Example Analysis!D17	Not 365, and rather than 366 in a leap year. The field cannot carry more than 360.
+Example Analysis!A18	0000
+Example Analysis!B18	T11 Espacio con ceros (111-114)
+Example Analysis!C18	Zero filler in front of the salary field.
+Example Analysis!D18	'Debe contener ceros'. Absent from the XLS layout.
+Example Analysis!A19	001750905
+Example Analysis!B19	T12 Salario basico reportado en el ultimo mes (115-123)
+Example Analysis!C19	The December 2026 basic salary, COP 1,750,905, zero-filled to 9 positions.
+Example Analysis!D19	A REPORTING field for the fund. It is the basic salary ALONE - the transport allowance does not belong here, only in the base of T14.
+Example Analysis!A20	0000
+Example Analysis!B20	T13 Espacio con ceros (124-127)
+Example Analysis!C20	Zero filler in front of the cesantias value.
+Example Analysis!D20	Same rule as T11. Together the two fillers make each amount a 13-position frame.
+Example Analysis!A21	002000000
+Example Analysis!B21	T14 Valor de las cesantias (128-136)
+Example Analysis!C21	COP 2,000,000 - the CST art. 253 base of 2,000,000 for 360 of 360 days.
+Example Analysis!D21	Above the floor of one day of one SMMLV (COP 58,363.50). Computed by the engine and written in, so no automatic calculation is performed.
+Example Analysis!A22	CALLE 26 NO 68-35 APTO 502
+Example Analysis!B22	T15 Residential address (137-186)
+Example Analysis!C22	The employee's HOME address, space-filled to 50 positions.
+Example Analysis!D22	Not the work address. The fund posts member statements here - contrast PILA and the electronic payroll, which carry the WORK municipality.
+Example Analysis!A23	11
+Example Analysis!B23	T16 Department code (187-188)
+Example Analysis!C23	Bogota D.C.
+Example Analysis!D23	The two-digit half of divipola 11001.
+Example Analysis!A24	001
+Example Analysis!B24	T17 Municipality code (189-191)
+Example Analysis!C24	Bogota D.C.
+Example Analysis!D24	The three-digit half of divipola 11001. Writing 11001 here truncates to 110.
+Example Analysis!A25	6013456
+Example Analysis!B25	T18 Landline (192-198)
+Example Analysis!C25	A seven-digit landline.
+Example Analysis!D25	'Solo admite 7 numeros'. A 10-digit mobile does not fit and must not be truncated.
+Example Analysis!A26	juan.perez@empresa.com.co
+Example Analysis!B26	T19 E-mail (199-248)
+Example Analysis!C26	Local part, @, domain - space-filled to 50 positions.
+Example Analysis!D26	The operator validates the three parts separately; the hyphen may be neither the first nor the last character of the domain.
+Example Analysis!A27	2019-03-01
+Example Analysis!B27	T20 Hire date (249-258)
+Example Analysis!C27	The CONTRACT hire date, 1 March 2019.
+Example Analysis!D27	NOT 2026-01-01. Ten positions including the hyphens, even though the layout types the field N.
+Example Analysis!A28	═══ RECONCILIATION OF THIS RECORD ACROSS THE OTHER COLOMBIAN FILINGS ═══
+Example Analysis!A29	2000000
+Example Analysis!B29	Form 220 casilla 48 / 49
+Example Analysis!C29	The same cesantias figure reported to DIAN on the employee's annual certificate.
+Example Analysis!D29	Casilla 48 is the amount deposited to the fund and casilla 49 the traditional-regime amount. For this employee, 48 = 2,000,000 and 49 = 0. See the CO-DIAN-004 Spec.
+Example Analysis!A30	2000000
+Example Analysis!B30	Format 2276 numerals 19 and 20
+Example Analysis!C30	The same figure again in the information return.
+Example Analysis!D30	AND THEY ARE TRANSPOSED against Form 220 - numeral 19 and numeral 20 do not sit in the same order as casillas 48 and 49. Map by MEANING; a positional mapping swaps them and the error is invisible because both feed the same total. See the CO-DIAN-005 Spec.
+Example Analysis!A31	240000
+Example Analysis!B31	Interest at 12% - IN02
+Example Analysis!C31	2,000,000 x 12% x 360/360 = COP 240,000, paid to the EMPLOYEE in January 2027.
+Example Analysis!D31	Not in this file and not to the fund. Failure to pay costs an indemnity equal to the interest owed, once only (Ley 52 de 1975 art. 1).
+Example Analysis!A32	0
+Example Analysis!B32	PILA
+Example Analysis!C32	Nothing. Cesantias is a prestacion social and is not part of the contribution base.
+Example Analysis!A33	═══ THE FOUR TRAPS IN THIS RECORD ═══
+Example Analysis!A34	249095
+Example Analysis!B34	Trap 1 - the transport allowance
+Example Analysis!C34	The operator's formula is 'Basic salary * (dias worked / 360)' and would have produced COP 1,750,905.
+Example Analysis!D34	CST art. 253 requires the transport allowance in the base. Following the portal short-deposits COP 249,095 for this employee, and a short deposit is penalised as non-deposit at one day's salary per day of delay, uncapped. ALWAYS write the engine's figure into T14.
+Example Analysis!A35	360
+Example Analysis!B35	Trap 2 - the divisor
+Example Analysis!C35	360, rather than 365 or 366.
+Example Analysis!D35	Both the statute and the layout use the commercial year. Using 365 understates every full-year liquidation by about 1.4%, which is again a short deposit.
+Example Analysis!A36	2019-03-01
+Example Analysis!B36	Trap 3 - which date
+Example Analysis!C36	The hire date of the contract, not the start of the accrual year.
+Example Analysis!D36	T20 is the field most often filled with 1 January of the accrual year. It corrupts the fund's seniority record for the member.
+Example Analysis!A37	11 / 001
+Example Analysis!B37	Trap 4 - which address
+Example Analysis!C37	The RESIDENCE, split into the two halves of one DANE divipola code.
+Example Analysis!D37	PILA and the electronic payroll want the WORK municipality; this file wants the home one. Reusing the PILA mapping sends the member's statements to the office.
+Sample File!A1	SAMPLE FILE - PUBLISHED 258-POSITION FIXED-WIDTH LAYOUT - SAMPLE GENERATED FROM THE SIMPLE S.A. SPECIFICATION
+Sample File!A4	════════════════════════════════════════════════════════════════
+Sample File!A5	PROVENANCE - READ THIS BEFORE USING THE SAMPLE
+Sample File!A6	════════════════════════════════════════════════════════════════
+Sample File!A7	This sample is not a neutral model. It is generated
+Sample File!A8	programmatically from the layout published in
+Sample File!A10	  Simple S.A. (licensed operador de informacion), "Manual Cesantias -
+Sample File!A11	  Cesantias Simple - Manual de usuario", section 3.2 "Elaboracion de planillas
+Sample File!A12	  carga de archivo TXT".
+Sample File!A16	Every position, length, type, padding rule and code value below is transcribed
+Sample File!A17	from that table. The sample generator asserts each field's width
+Sample File!A18	and asserts the total record length is exactly 258 characters, so no position
+Sample File!A19	can drift silently.
+Sample File!A21	OPERATOR-SPECIFIC POINTS:
+Sample File!A22	  * The 258-position record is the layout published by Simple S.A. The other
+Sample File!A23	    licensed information operators (Aportes en Linea, Asopagos, Enlace Operativo,
+Sample File!A24	    MiPlanilla) may impose an operator-specific variant; the information operator
+Sample File!A25	    is a configuration setting and this sample defines no other variant. The ACH Colombia (SOI)
+Sample File!A26	    instruction guide documents the channel; SOI publishes its column layout only inside the upload screen.
+Sample File!A27	  * The code page and the line terminator are not stated in the instruction guide;
+Sample File!A28	    the file is written as ASCII with CRLF.
+Sample File!A29	  * The Fondo Nacional del Ahorro publishes its own employer instructivo. FNA is a
+Sample File!A30	    state entity and its layout is the one genuinely official schema for this filing;
+Sample File!A31	    it is not reproduced here.
+Sample File!A33	════════════════════════════════════════════════════════════════
+Sample File!A34	POSITION RULER
+Sample File!A35	════════════════════════════════════════════════════════════════
+Sample File!A36	         1         2         3         4         5         6         7         8         9        10
+Sample File!A37	1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+Sample File!A39	════════════════════════════════════════════════════════════════
+Sample File!A40	SAMPLE PLANILLA - ACCRUAL YEAR 2026, THREE RECORDS
+Sample File!A41	Envelope keyed in the portal (NOT in the file):
+Sample File!A42	  Aportante            NI 900123456
+Sample File!A43	  Servicio             Cesantias
+Sample File!A44	  Ano causado          2026
+Sample File!A45	  Tipo de afiliacion   Dependiente
+Sample File!A46	  Medio de pago        PSE
+Sample File!A47	  Fondo unico          NO  (each employee keeps their own chosen fund)
+Sample File!A48	  Seed from PILA       NO
+Sample File!A49	  Asofondos autoajuste NO
+Sample File!A50	════════════════════════════════════════════════════════════════
+Sample File!A51	0200001CC0000001020304050PEREZ               GOMEZ               JUAN                CARLOS              0336000000017509050000002000000CALLE 26 NO 68-35 APTO 502                        110016013456juan.perez@empresa.com.co                         2019-03-01
+Sample File!A52	0200002CC0000000052987654RAMIREZ                                 ANA                                     0221000000042000000000002450000CARRERA 43A NO 1-50 TORRE 2                       050016045678ana.ramirez@empresa.com.co                        2026-06-01
+Sample File!A53	0200003PE0123456789012345MARQUEZ             SILVA               LUIS                                    1536000000025000000000002749095DIAGONAL 15 NO 100-22                             760016023456luis.marquez@empresa.com.co                       2023-11-02
+Sample File!A55	════════════════════════════════════════════════════════════════
+Sample File!A56	WHAT EACH RECORD DEMONSTRATES
+Sample File!A57	════════════════════════════════════════════════════════════════
+Sample File!A58	RECORD 1 - the ordinary full-year case, and the transport-allowance trap.
+Sample File!A59	  Juan Carlos Perez Gomez, CC 1020304050, Porvenir (03), 360 days.
+Sample File!A60	  December basic 1,750,905 (the 2026 SMMLV) in campo 12.
+Sample File!A61	  Cesantias 2,000,000 in campo 14 = (1,750,905 + 249,095 auxilio de
+Sample File!A62	  transporte) x 360/360, per CST art. 253.
+Sample File!A63	  The portal's own calculator would have written 1,750,905. The COP 249,095
+Sample File!A64	  difference is a SHORT DEPOSIT, penalised at one day's salary per day of
+Sample File!A65	  delay under Ley 50 de 1990 art. 99 num. 3, uncapped, per employee.
+Sample File!A67	RECORD 2 - a mid-year hire, no second surname, no second name, salary above
+Sample File!A68	  2 SMMLV so NO transport allowance in the base.
+Sample File!A69	  Ana Ramirez, CC 52987654, Proteccion (02), hired 1 June 2026.
+Sample File!A70	  210 days of service on the 360-day commercial convention (7 x 30).
+Sample File!A71	  December basic 4,200,000; base excludes the transport allowance because the
+Sample File!A72	  salary exceeds 2 SMMLV (COP 3,501,810).
+Sample File!A73	  4,200,000 x 210/360 = 2,450,000.
+Sample File!A74	  Note positions 46-65 and 86-105: TWENTY SPACES each, not omitted. Omitting
+Sample File!A75	  them would shift the fondo code out of positions 106-107 and every field
+Sample File!A76	  after it.
+Sample File!A78	RECORD 3 - a foreign employee on a Special permanence permit, the
+Sample File!A79	  state-owned fund, and the transport allowance applied correctly.
+Sample File!A80	  Luis Marquez Silva, PE 123456789012345, Fondo Nacional del Ahorro (15).
+Sample File!A81	  December basic 2,500,000, which is below 2 SMMLV, so the auxilio de
+Sample File!A82	  transporte IS payable: base = 2,500,000 + 249,095 = 2,749,095, and
+Sample File!A83	  360/360 gives campo 14 = 2,749,095. Contrast record 1, where the same
+Sample File!A84	  rule was applied, and note that the portal calculator would have written
+Sample File!A85	  2,500,000 here too.
+Sample File!A86	  The PEP number is EXACTLY 15 digits, per the length rule in the SOI
+Sample File!A87	  instruction guide, so positions 10-25 carry one leading zero and then the 15.
+Sample File!A88	  A later regularisation to a Foreign resident ID card CHANGES the join key that
+Sample File!A89	  the fund holds (campos 3 and 4) and must be notified, or the following
+Sample File!A90	  February's deposit lands on an orphan account.
+Sample File!A92	════════════════════════════════════════════════════════════════
+Sample File!A93	FIELD-BY-FIELD DECOMPOSITION OF RECORD 1
+Sample File!A94	════════════════════════════════════════════════════════════════
+Sample File!A95	positions  value                              campo
+Sample File!A96	   1-2     02                                 1  Tipo de registro (constant)
+Sample File!A97	   3-7     00001                              2  Secuencia
+Sample File!A98	   8-9     CC                                 3  Tipo de documento
+Sample File!A99	  10-25    0000001020304050                   4  Numero de identificacion
+Sample File!A100	  26-45    PEREZ + 15 spaces                  5  Primer apellido
+Sample File!A101	  46-65    GOMEZ + 15 spaces                  6  Segundo apellido
+Sample File!A102	  66-85    JUAN + 16 spaces                   7  Primer nombre
+Sample File!A103	  86-105   CARLOS + 14 spaces                 8  Segundo nombre
+Sample File!A104	 106-107   03                                 9  Codigo del Fondo (Porvenir)
+Sample File!A105	 108-110   360                               10  Dias trabajados
+Sample File!A106	 111-114   0000                              11  Espacio con ceros
+Sample File!A107	 115-123   001750905                         12  Salario basico de diciembre
+Sample File!A108	 124-127   0000                              13  Espacio con ceros
+Sample File!A109	 128-136   002000000                         14  Valor de las cesantias
+Sample File!A110	 137-186   CALLE 26 NO 68-35 APTO 502 + 24sp 15  Direccion de residencia
+Sample File!A111	 187-188   11                                16  Codigo departamento (DANE)
+Sample File!A112	 189-191   001                               17  Codigo municipio (DANE)
+Sample File!A113	 192-198   6013456                           18  Telefono fijo
+Sample File!A114	 199-248   juan.perez@empresa.com.co + 25sp  19  Correo electronico
+Sample File!A115	 249-258   2019-03-01                        20  Fecha de ingreso
+Sample File!A117	Length check: 2+5+2+16+20+20+20+20+2+3+4+9+4+9+50+2+3+7+50+10 = 258.
+Sample File!A119	════════════════════════════════════════════════════════════════
+Sample File!A120	THE SAME PLANILLA IN THE XLS 97-2003 ROUTE (16 columns, no header row)
+Sample File!A121	════════════════════════════════════════════════════════════════
+Sample File!A122	A    B                C        D       E     F       G   H    I        J        K                           L   M    N        O                          P
+Sample File!A123	CC   1020304050       PEREZ    GOMEZ   JUAN  CARLOS  03  360  1750905  2000000  CALLE 26 NO 68-35 APTO 502  11  001  6013456  juan.perez@empresa.com.co  2019-03-01
+Sample File!A124	CC   52987654         RAMIREZ          ANA           02  210  4200000  2450000  CARRERA 43A NO 1-50 TORRE 2 05  001  6045678  ana.ramirez@empresa.com.co 2026-06-01
+Sample File!A125	PE   123456789012345  MARQUEZ  SILVA   LUIS          15  360  2500000  2749095  DIAGONAL 15 NO 100-22       76  001  6023456  luis.marquez@empresa.com.co 2023-11-02
+Sample File!A127	Note the three differences from the fixed-width route: there is no record type,
+Sample File!A128	no sequence and no zero filler; the identity number is plain and capped at 15
+Sample File!A129	characters rather than zero-filled to 16; and column A additionally admits PT
+Sample File!A130	(Permiso temporal), which the fixed-width document-type list does not print.
+Sample File!A132	════════════════════════════════════════════════════════════════
+Sample File!A133	WHAT THE CHANNEL RETURNS
+Sample File!A134	════════════════════════════════════════════════════════════════
+Sample File!A135	  Numero de planilla        1234567890
+Sample File!A136	                            (ONE number with PSE; one number PER FONDO where
+Sample File!A137	                            the medio de pago is Pago Credito)
+Sample File!A138	  Valor total a pagar       7,199,095   = 2,000,000 + 2,450,000 + 2,749,095
+Sample File!A139	                            Reconcile this against the engine's own sum. The
+Sample File!A140	                            file has NO header, NO trailer, NO record count and
+Sample File!A141	                            NO declared total, so a truncated upload is not
+Sample File!A142	                            self-detecting.
+Sample File!A143	  Comprobante previo al pago  PDF
+Sample File!A144	  Asofondos name validation   Excel difference report, if any - answer NO to
+Sample File!A145	                              the auto-adjust question and fix master data.
+Sample File!A146	  After payment               Informe por fondo / por afiliado / completo, in
+Sample File!A147	                              PDF or Excel; plus the fund's own deposit
+Sample File!A148	                              certificate, which the EMPLOYER must be able to
+Sample File!A149	                              evidence.
+Sample File!A151	════════════════════════════════════════════════════════════════
+Sample File!A152	DEADLINE FOR THIS SAMPLE
+Sample File!A153	════════════════════════════════════════════════════════════════
+Sample File!A154	Accrual year 2026 liquidates at 31 December 2026 and must be deposited BEFORE
+Sample File!A155	15 FEBRUARY 2027 (Ley 50 de 1990 art. 99 num. 3), so the last compliant day is
+Sample File!A156	Sunday 14 February 2027. Colombian practice moves a deadline falling on a
+Sample File!A157	non-business day to the next business day - for accrual year 2025 the shift
+Sample File!A158	from Saturday 14 February 2026 to Monday 16 February 2026 was reported in the
+Sample File!A159	Colombian press - but no MinTrabajo concept states that rule for this deposit,
+Sample File!A160	and the draft decree fixes mora as running "a partir del 15 de febrero".
+Sample File!A161	DO NOT RELY ON THE SHIFT: pay by Friday 12 February 2027.
+Sample File!A163	The penalty for getting it wrong is ONE DAY'S SALARY FOR EACH DAY OF DELAY,
+Sample File!A164	PER EMPLOYEE, UNCAPPED. For 100 minimum-wage employees a two-week delay is of
+Sample File!A165	the order of COP 81.7 million.

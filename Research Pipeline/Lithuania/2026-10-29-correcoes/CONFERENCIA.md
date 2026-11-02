@@ -2,7 +2,18 @@
 
 > Hub [[Lituania]] · Origem: [[Research Pipeline/Lithuania/2026-10-28-validacao/CONFERENCIA]] · Próximo passo (BAU): [[Research Pipeline/Lithuania/2026-10-29-validacao-BAU/METODO-VALIDACAO-BAU]] · [[correcoes]]
 
-Status: **só local. Não foi para o Drive, para ticket nem para e-mail.** O ok do usuário foi dado em 29/10, nesta janela.
+Status: **no Drive desde 29/10, com ok do usuário dado nesta janela.** Ainda não foi para ticket nem para e-mail.
+- As 3 specs foram importadas com Replace pelo Chrome nos `.gsheet` (`18 - Statutory Reports`):
+  - SAM `1_f4BkM1PeoxLg_NgTuEBGTDoMz4CIMXIQpaprccq4SM`;
+  - GPM313 `1WoyBgcc-LJiTdGDk_zOh40lcQ5PZC67zC5RvpkULbgo`;
+  - GPM312 `1Y02iqrFzs0qiYPaB5Up0_Wugax8DWX39BPhfJ_lgDZQ`.
+- Os 4 xlsx/docx foram copiados também para o Drive, com o md5 igual ao local: `18 - Statutory Reports/*_v1.x.xlsx` e `19 - Statutory Integrations/LT-SIR-001-v1.1.docx`.
+- **Os gids das abas mudaram com o Replace.** Os gids do `PASSE-DE-BASTAO.md` estão obsoletos.
+- **Conferido em 30/10:** CSV exportado de cada aba das 3 planilhas no Drive e comparado linha a linha (hash do conteúdo de cada linha) com o xlsx local.
+  - SAM: 9 abas, 0 diferenças.
+  - GPM313: 9 abas, 0 diferenças.
+  - GPM312: 9 abas, 0 diferenças.
+  - Nenhum `#ERROR!`/`#REF!` (o GPM312 tinha 5 na v1.1).
 
 ## Finais
 | Arquivo | md5 | Base |
@@ -37,3 +48,5 @@ Detalhe célula a célula, com fonte, em `CHANGELOG-SAM-v1.1.md`, `CHANGELOG-GPM
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-10-29 | pipeline (Process Lithuania) | Correções, revalidação independente, ajustes da rodada 2 |
+| 2026-10-29 | pipeline (Process Lithuania) | Drive: cópia dos 4 finais (md5 ok) e import Replace das 3 specs pelo Chrome |
+| 2026-10-30 | pipeline (Process Lithuania) | Conferência Drive × local por CSV: 27 abas iguais, sem erros |

@@ -1,0 +1,370 @@
+       2025
+
+Electronic File Specifications
+              W-2
+
+                                           1
+                        Table of Contents
+
+1. Important & General information         Page 3
+
+2. My Taxes          Page 4
+
+3. Record Format & Record Delimiter     Page 5
+
+4. Required RS record layout      Page 6
+
+5. Required RV record layout      Page 7
+
+6. Splitting Large Files       Page 8
+
+7. Importing W-2 Files via MyTaxes     Page 9
+
+8. Manually Enter W-2's       Page 10
+
+9. Contact Information                     Page 11
+
+10. Waiver Information                     Page 11
+
+                        2
+WV/IT-105
+
+09/2025
+
+                            Important for 2025
+
+     Any employer who uses a payroll service or is required to file a withholding return for 10 or more
+
+        employees must file electronically. Failure to do so will result in an assessment of penalty in the
+        amount of $25 per W2 not filed electronically. (See page 10 for details)
+
+    If there is NO West Virginia withholding tax and the withholding account is closed or nonexistent, DO
+
+         NOT FILE zero dollar reconciliations.
+     WV/IT-103 Year-End Reconciliation and W-2 data is due January 31.
+
+     All files MUST contain the IT-103 in the RV record (see pg. 7)
+              Note! The money fields in the RV record differ from the standard EFW2 format
+                       Use only WHOLE DOLLAR entries (see pg. 7)
+
+     The submission MUST include the RS and RV record (pgs. 6-7)
+              For every RE, there must be a corresponding RV record
+
+                                General Information
+
+     West Virginia Accepts EFW2 Format ONLY! We follow the current Social Security Administration's
+         EFW2 publication located:
+         https://www.ssa.gov/employer/EFW2&EFW2C.htm?_ga=2.256134920.226340051.1603121534-112984
+         5913.1603121534
+
+     ONLY Submit your file ONE time. Duplicate submissions will negatively impact your account and the
+         accounts of those you have submitted for.
+
+     ALL Files submitted to West Virginia MUST be in text (.txt) format, 512 bytes in length per line
+
+     All files MUST have record delimiters.
+
+     W2C must be submitted on paper with an amended WV/IT-103 form. If you are needing to send a
+         corrected file, due to typographical errors or missing information you may do so electronically.
+
+     File size can be no larger than 75,000 records per file. Large files will need to be split. Each file must
+         contain a full set of record types: RA, RE, RW, RS, RT, RV & RF (see page 8 for details)
+
+                                                                         3
+WV/IT-105
+
+09/2025
+
+MyTaxes provides a more secure environment to submit data files and requires less paperwork to process. If
+you are not already registered for MyTaxes, when accessing https://mytaxes.wvtax.gov you will be required to
+complete the following steps:
+
+     Taxpayer Verification - This requires your Federal Tax ID Number, individual taxpayer ID number, social
+         security number or WV tax ID number. (If you are unsure of your WV ID, contact Taxpayer Services at
+         1-800-982-8297)
+
+     You will choose a tax account type, the account number and your zip code.
+     Create Logon Information
+     Add Access to Accounts (Optional)
+     Once registered, you may request access to any or all your tax accounts that are available on MyTaxes.
+
+     ALL OTHER registration questions must contact Taxpayer Services Division at 1-800-982-8297
+
+    If you are a software company or payroll service provider that intends to submit withholding/payroll
+     information returns electronically, you will need to complete the Letter of Intent and submit it to the
+      Research and Development Division. Please email taxloi@wv.gov for access to the Letter of Intent.
+
+                                                                         4
+WV/IT-105
+
+09/2025
+
+                        Record Format
+
+ Fixed File Length of 512 bytes per SSA
+ Character Set must be ASCII
+ Record delimiter must be carriage return and line feed
+ All non-numeric data must be uppercase
+
+                                        Record Delimiter
+
+A Record delimiter must follow each record in the file except for the last record. The record delimiter must
+consist of two characters, carriage return and line feed (CR/LF).
+
+Make sure each record is exactly 512 characters by adding spaces at the end as needed. The carriage return
+and the line feed character must be placed in positions 513 and 514, respectively.
+
+                           * DO NOT Place a record delimiter before the first record
+
+      * DO NOT Place more than one record delimiter i.e., more than one carriage return / line- feed
+
+                                                combination, following a record
+
+                        * DO NOT Place record delimiters after a field within a record.
+
+                        Required Record Sequence
+
+           Code RA   -  Submitter Record                 REQUIRED
+
+           Code RE   -  Employer Record                  REQUIRED
+
+           Code RW  -   Employee Wage Record             REQUIRED
+
+           Code RS   - State Record                      REQUIRED for WV
+
+           Code RT   - Total Record                      REQUIRED
+
+           Code RV   -  Total Record                     REQUIRED for WV
+
+           NOTE: Blank Fill to achieve the correct file length of 512
+
+                                         5
+WV/IT-105
+
+09/2025
+
+Code RS - State Record (Employee Information) * REQUIRED *
+
+Location   Field                      Length     Specification
+1-2 
+3-4        Record Identifier          2         Required. Enter "RS"
+10-18
+           State Code                 2         Required. Enter "54". cannot be "WV"
+19-33
+34-48      Social Security Number     9         Cannot be 000, 111, 999, etc.                           
+49-68
+248-267                                         Must send paper if no SSN assigned
+274-275
+276-286    First Name                 15
+
+           Middle Name or Initial     15
+
+           Last Name                  20
+
+           Employer Account Number    20        Use 9 digit FEIN. Left Justify. No spaces or dashes.
+
+           State Code                 2         Required. Enter "54". cannot be "WV"
+
+           State Taxable Wages        11        Required. Currency. Right Justify, Zero Fill
+
+287-297 State Income Tax Withheld     11        Required. Currency. Right Justify, Zero Fill
+
+298-512  Blank Filled
+
+The carriage return and the line feed character must be placed in positions 513 and 514, respectively.
+
+                                          6
+WV/IT-105
+
+09/2025
+
+Code RV - State Record (WV/IT-103) *REQUIRED*
+
+1-2        Record Identifier                     2 Required. Enter "RV"
+3-4                                              2 Required. Enter "54"
+5-11       State Code                            7 Required. Enter "WVIT103". Omit hyphen.
+12-15                                            4 Required. Enter "2025"
+16-24      Form Identification                   9 Required. Numeric. Omit hyphen.
+25-32                                            8 Required. Numeric. Omit hyphen.
+33-44      Tax Year                              12 Required. Whole Dollars. Right Justify, Zero Fill
+45-56                                            12 Required. Whole Dollars. Right Justify, Zero Fill
+57-68      FEIN                                  12  Required. Whole Dollars. Right Justify, Zero Fill
+69-80                                            12 Required. Whole Dollars. Right Justify, Zero Fill
+81-92      WV 8 digit account number             12 Required. Whole Dollars. Right Justify, Zero Fill
+93-104                                           12  Required. Numeric. Right Justify, Zero Fill
+105-116    First Quarter Tax Due                 12  Required. Whole Dollars. Right Justify, Zero Fill
+117-512                                          395 Zero or Blank Fill.
+           Second Quarter Tax Due   
+
+           Third Quarter Tax Due    
+
+           Fourth Quarter Tax Due   
+
+           TOTAL Tax Due for the year 
+
+           Number Of Tax Statements Transmitted
+
+           Total Tax Withheld       
+
+           Filler                   
+
+The carriage return and the line feed character must be placed in positions 513 and 514, respectively.
+
+ NOTE: The money fields in this RV record differ from the standard EFW2 RS
+                                  record money fields.
+
+                          Round and use whole dollars only!
+
+                                    Ex: $950.75 = 951
+
+                                   DO NOT ENTER 95100
+
+Records and fields not specifically mentioned may be considered optional. It is your responsibility to resubmit
+corrected files in an acceptable format within 45 days. However, the original submission is considered a timely
+filing if it was postmarked by January 31. You must keep a copy, or be able to reconstruct the data, for 5 years
+
+                                                after the due date of the report.
+
+                                                 7
+WV/IT-105
+
+09/2025
+
+Requirements for splitting large files
+
+There is a file submission constraint allowing a maximum of 75,000 RW - Employee Wage Records and 75,000 RS - State
+Wage Records. Therefore, any file resulting in more than either 75,000 RW or 75,000 RS records must be split into
+smaller files. Each of the split files must contain the following required record types and follow the specifications for the
+EFW2 format unless otherwise specified in this West Virginia specification book.
+
+1 RA Record - Submitter Record (required)
+     Must be the first data record on each split file
+
+1 or more RE Record - Employer Record (required)
+     The first RE record must follow the RA record in each split file
+     Following the last RS record for the employer, create an RT and RV record and then either the:
+              o RE Record for the next employer in the split file submission; or
+              o RF record if this is the last report in the split file submission
+
+1 or more RW Record - Employee Wage Record (required)
+     Following each RE record, include the RW and RS records for that RE record
+     There is a file size constraint allowing a maximum of 75,000 RW records per file submission; If you do not split
+         files allowing 75,000 or less RW records per file, your submission will error and not be processed
+
+1 or more RS Record - State Wage Record (required)
+     There is a file size constraint allowing a maximum of 75,000 RS records per file submission; If you do not split
+         files allowing 75,000 or less RS records per file, your submission will error and not be processed
+     The RS Record should follow the related RW Record
+     If there are multiple Wage Records for an employee, include each State Wage Record for the employee
+         immediately after the related RW Record
+
+1 or more RT Record - Total Record (required)
+      1 RT Record must be generated for each RE Record within each split file
+      If you are splitting the file and multiple files include RS records for the same employer, the totals on the RT
+          Record should represent the total for the individual split file submission in which it is contained. This will be a
+          partial total for the employer.
+
+1 or more RV Record - State Total Record (required)
+      The RV Record must be generated for each RE Record within each split file
+      If you are splitting the file and multiple files include RS records for the same employer, the totals on the RV
+          Record should represent the total for the employer across split file submissions. The RV Record represents the
+          WV/IT-103 and will result in duplicate RV Records for the same employer (1 for each split file that contains RS
+          records for that employer). However, the system will file the WV/IT-103 once for each employer, even though
+          multiple RV Records will be received.
+
+1 RF - Final Record (required for split files)
+     Must be the last record on the split file
+     Must appear only once on each split file
+     Must contain the total number of RW records on the split file
+
+                                                                         8
+WV/IT-105
+
+09/2025
+
+                       How do I import a W-2 file?
+
+     Select the Submit W-2 hyperlink (to the right)
+     Select IMPORT button (link for import under checkbox for manual entry option)
+     Select Choose File to locate your W-2 file
+     Choose the file you want to import, Select Open
+     Select the IMPORT button - click only once as large files may take a minute to import. Only one file
+
+         may be imported per submission
+     Once the file is imported, the gray boxes will populate the number of Employers and Employees in the
+
+         file.
+     Click NEXT (lower right) to view your file data on the screens
+     Once you've viewed all the data, the SUBMIT button will be available (lower right)
+     Enter your password and OK
+     You will receive a confirmation number
+
+                  NOTE: If there are errors detected, you will be unable to proceed until they are resolved.
+                           Any corrections needed must be made within the actual file, not on screen.
+
+                                                                         9
+WV/IT-105
+
+09/2025
+
+                           Manually Enter W-2's
+
+                         *** Required Fields are designated by exclamation points with red circles ***
+     Select the Submit W-2 hyperlink (to the right)
+     Select Checkbox to manually input W-2 forms.
+     Tab over to Number of Employees to enter the amount. (Now a mandatory field)
+     Tab to type the 4 digit Tax Year.
+     Click Next (lower right side of screen)
+     Lines will prepopulate depending on the entry made in the Number of Employees from the first screen.
+     Click on the line/link for each employee.
+     A box resembling a W2 will open. Enter employee's social security number.
+     Tab to enter information all REQUIRED fields
+     At the bottom of the W2 is where all WV State Wage and State Income Tax is to be entered.
+     Review your entries to make certain information is correct, then click OK (lower right of box)
+     Repeat this process for each employee.
+     Once you have finished entering all employees click Next at the lower right of the screen.
+     After you click Next, you are taken to the screen to Save as a Draft or to Submit. Please note that saved
+
+         drafts are not valid submissions.
+     If you are ready to submit, click Submit.
+     Enter your password and select OK.
+     You will receive a confirmation number.
+
+                NOTE: You may SAVE at any point during entry and return later to Edit Submission then Submit.
+
+                                                                        10
+WV/IT-105
+
+09/2025
+
+           Penalty and Waiver Information
+
+        Requests for waiver of technical inability to comply can be submitted to TAXWITH@wv.gov.
+
+If you previously received a letter advising you would be penalized and have failed to correct the issue to
+                                     submit electronically, you will be penalized.
+
+                Contact Information
+
+                         Mailing Address:
+                   West Virginia Tax Division
+
+                        TAA/ Withholding
+                           PO Box 3943
+
+                  Charleston, WV 25339-3943
+
+           Courier or Overnight Deliveries (ONLY):
+                   West Virginia Tax Division
+
+                Revenue Center / Withholding
+                       1001 Lee Street East
+
+                  Charleston, WV 25301-1725
+
+                          Email
+
+                    TAXWITH@wv.gov
+
+                                    11
+

@@ -1,0 +1,27 @@
+# Mandate answers P5-W3A-r2 - CT KS LA NV (PASS 4, wave 3, second round, 2026-10-29)
+
+Hunter: compliance-source-hunter. Register: `00-official-sources/_register-shards/mandate-P5-W3A-r2.csv` (12 rows, ids US-<UF>-P5-2-NNN; `supersedes` names the round-1 rows they complete). Method differs from round 1: statute-site sections read in sequence (ksrevisor.gov, legis.la.gov), legislature/research-office reports (OLR, KLRD Tax Facts, DOL Women's Bureau, LA Constitution), agency FAQ pages, employer handbook. Wayback copies saved under `00-official-sources/pdfs/<UF>/` and read locally (PyMuPDF / text); Wayback spacing 10 s, no 429. Chrome: own tab, get_page_text/find only, closed at end. No javascript_tool, no CAPTCHA.
+
+## CT - Connecticut (US-MQ-26) - open parts were 2, 6
+2. ANSWERED (US-CTP52-001, with US-CTP51-004). OLR 2017-R-0237 (2017-12-06): state law lets municipalities levy property tax and narrower taxes, not explicitly income taxes; courts hold municipalities have only expressly conferred powers (Old Colony Gardens 1959; Pepin v. Danbury 1976). So no local wage tax. DRS tax-type index (portal.ct.gov/drs/taxes) is paginated (6 pages), only page 1 read, so it is not used as proof. Confidence M-H (report dated 2017; no later statute change located).
+6. ANSWERED. Pay statement: C.G.S. 31-13a (US-CTP51-005). Prevailing wage: 31-53 (US-CTP51-006). Withholding POA: DRS LGL-001 / LGL-003 (US-CTP51-007). UI third-party agent: Certificate of Representation (combined-cor---final.pdf) plus the TPA linking form (xlsx, 07182022), both to dol.status@ct.gov (US-CTP52-002). Oracle: none; re-derive from TPG-211 and Tables A-E (US-CTWH-001). Confidence H for forms (page read), M-H for the rest as in round 1.
+
+## KS - Kansas (US-MQ-36) - open parts were 2, 4, 6
+2. ABSENCE PROVEN (US-KSP52-004, US-KSP51-004). KLRD Kansas Tax Facts 9th ed. (2023), Table 1, lists every state and local tax by revenue line (FY2020-FY2023): no local income or wage tax. Scope of the document is explicitly "state and local imposed taxes". Confidence M-H (2023 edition; KW-100 consistent).
+4. ABSENCE PROVEN (US-KSP52-004, US-LAP52-002). Same Table 1: the only payroll-based line is Unemployment Comp.; no SDI/TDI/PFML. US DOL Women's Bureau list (March 2024) of TDI/PFML states does not include Kansas. Confidence M-H.
+6. ANSWERED. Pay statement: K.S.A. 44-320(d), itemized statement of 44-319 deductions on employee request for each pay period with deductions (US-KSP52-001); 44-313 to 44-321, 44-323, 44-325 read, no mandatory every-payday statement (44-322, 44-324 not archived). Prevailing wage: none; K.S.A. 44-201 shows "Repealed, L. 1987, ch. 186, s.1" and the DOL page lists Kansas as repealed 1987 (US-KSP52-002). Withholding POA: DO-10 (US-KSP51-005). UI agent: K-CNS-032 employer form, emailed to KDOL.UITAX@KS.GOV (US-KSP52-003). Oracle: none; KW-100 percentage-method tables (US-KSP51-001). Confidence H for the statutes and K-CNS-032; M for the "no every-payday statement" conclusion.
+
+## LA - Louisiana (US-MQ-38) - open parts were 2, 4, 6
+2. ANSWERED (US-LAP52-001). La. Const. art. VII s.4(C): a political subdivision shall not levy a severance, income, inheritance or motor fuel tax. So no parish or municipal wage tax; local levies are sales/use and occupational license taxes (the latter on businesses, not on wages; the LLA audit-guide page names "occupational" taxes). Text read from the Wayback 2026 copy of the Senate page; 2024-2025 constitutional amendment renumbering not checked. Confidence H for the prohibition.
+4. ANSWERED as absence (US-LAP52-002, plus employer-side charges in US-LAP51-005). DOL Women's Bureau (March 2024) lists all state TDI/PFML programs; Louisiana not listed. Employer social charges (Non-Charge, Incumbent Worker Training, Integrity) remain from round 1. Confidence M-H (2024 edition; Louisiana enacted no program located).
+6. ANSWERED except the LA prevailing-wage statute cite. Pay statement: La. R.S. 23 Chapter 6 (631, 633-638 read) requires no itemized statement; 23:632 not read (US-LAP52-003). Withholding POA: R-7006 (US-LAP51-006). UI agent: online POA in LAWATS, no paper form (US-LAP52-005). Prevailing wage: none, repealed 1988 per US DOL (US-LAP52-004; summary-level read, state repeal act not read). Oracle: R-1306 formula (US-LAP51-003). Confidence M-H.
+
+## NV - Nevada (US-MQ-53) - open part was 6
+6. ANSWERED. Pay statement: NRS 608.110 (US-NVP51-003). Prevailing wage: NRS 338.020-338.090 (US-NVP51-004). UI agent: external user designated online in Employer Self Service; the Power of Attorney is "formerly known as" this step; no paper form (US-NVP52-001, handbook 9/2023, 2023 age caveat). Withholding POA and calculator: not applicable, no state wage income tax (round 1, US-NVP51-002). SDI/PFML: not listed in DOL Women's Bureau list (US-LAP52-002, also consumed by US-MQ-53). Confidence M-H (the DETR press release PDF and DETR POA search hit were 403 or snippet-only and were not used).
+
+## PASS 4 (wave 3, round 2) - status after this pass
+CT 1:answered 2:answered 3:answered 4:answered 5:answered 6:answered
+KS 1:answered 2:absence_proven 3:answered 4:absence_proven 5:answered 6:answered
+LA 1:answered 2:answered 3:answered 4:answered 5:answered 6:partial (prevailing-wage repeal read at DOL summary level only; 23:632 not read)
+NV 1:answered 2:n/a 3:answered 4:answered 5:n/a 6:answered
+Gated/unreadable: cga.ct.gov and senate.la.gov hosts do not resolve from this machine (reached via Wayback); dol.ks.gov, DETR press release: 403 (not needed).

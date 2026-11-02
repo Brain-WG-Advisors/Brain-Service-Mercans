@@ -1,0 +1,174 @@
+<title>Pipeline v2.12 Team Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column; a 3-way picker at the top switches the "your path" panel below. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --fg:#17202b; --mute:#5a6675; --line:#d9e0e8;
+  --accent:#1f5fbf; --accent-soft:#e3ecfa; --ok:#1d7a4f; --ok-soft:#e1f2e9; --warn:#a15c00; --warn-soft:#fbefdc;
+  --code-bg:#0f1720; --code-fg:#dce6f2;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e141b; --surface:#16202b; --fg:#e6ebf1; --mute:#9aa7b6; --line:#273444;
+  --accent:#7aa8f0; --accent-soft:#1b2c45; --ok:#5cc495; --ok-soft:#14302a; --warn:#e8a64f; --warn-soft:#33260f;
+  --code-bg:#0a0f14; --code-fg:#dce6f2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e141b; --surface:#16202b; --fg:#e6ebf1; --mute:#9aa7b6; --line:#273444;
+  --accent:#7aa8f0; --accent-soft:#1b2c45; --ok:#5cc495; --ok-soft:#14302a; --warn:#e8a64f; --warn-soft:#33260f;
+  --code-bg:#0a0f14; --code-fg:#dce6f2; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding:0 16px}
+.wrap{max-width:760px;margin:0 auto;padding-block:40px 64px;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,6vw,44px)}
+h2{font-size:24px}
+h3{font-size:18px}
+p{margin:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--mute);max-width:62ch}
+header{display:flex;flex-direction:column;gap:14px}
+section{display:flex;flex-direction:column;gap:16px}
+.picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.picker{grid-template-columns:1fr}}
+.opt{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:16px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);min-width:0}
+.opt:hover{border-color:var(--accent)}
+.opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt b{font-family:var(--display);font-size:17px}
+.opt span{font-size:14px;color:var(--mute)}
+.opt .tag{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:18px}
+.panel h3{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.pill{font:500 12px/1 var(--mono);padding:5px 8px;border-radius:99px;background:var(--ok-soft);color:var(--ok)}
+.pill.opt-pill{background:var(--warn-soft);color:var(--warn)}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:16px}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px}
+ol.steps>li::before{content:counter(s);font:600 14px/32px var(--mono);text-align:center;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent)}
+.step{display:flex;flex-direction:column;gap:8px;min-width:0}
+.code{position:relative;background:var(--code-bg);color:var(--code-fg);border-radius:8px;font:13px/1.55 var(--mono);padding:12px 76px 12px 14px;overflow-x:auto;white-space:pre}
+.copy{position:absolute;top:8px;right:8px;font:500 12px var(--body);color:var(--code-fg);background:transparent;border:1px solid #3a4a5c;border-radius:6px;padding:4px 10px;cursor:pointer}
+.copy:hover{border-color:var(--code-fg)}
+.copy:focus-visible{outline:2px solid var(--accent)}
+.note{font-size:14px;color:var(--mute)}
+code{font:13px var(--mono);background:var(--accent-soft);padding:1px 5px;border-radius:4px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px}
+.flow span{padding:6px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.flow span.gate{background:var(--warn-soft);border-color:transparent;color:var(--warn);font-weight:600}
+.flow i{color:var(--mute);font-style:normal}
+.changes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.changes{grid-template-columns:1fr}}
+.chg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.chg p{font-size:15px;color:var(--mute)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+details+details{margin-top:-8px}
+summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--accent)}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:10px}
+details>div{padding:0 16px 16px;color:var(--mute);font-size:15px;display:flex;flex-direction:column;gap:8px}
+.normal{font:600 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ok);margin-right:8px}
+footer{font-size:14px;color:var(--mute);border-top:1px solid var(--line);padding-top:20px}
+@media (prefers-reduced-motion:no-preference){.panel{animation:in .25s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Mercans compliance · Research pipeline v2.12</div>
+  <h1>Which part of the pipeline do I need?</h1>
+  <p class="lead">Version 2.12 arrives in three parts that look like one. Each serves a different job. Pick yours below and follow only that path.</p>
+</header>
+
+<section aria-label="Choose your path">
+  <div class="picker" role="group">
+    <button class="opt" id="p-chat" data-p="chat" aria-pressed="true"><span class="tag">Chat</span><b>Ask or review</b><span>Answer a question, review an artifact, reply to a ticket.</span></button>
+    <button class="opt" id="p-script" data-p="script" aria-pressed="false"><span class="tag">Git Bash</span><b>Build a country</b><span>The usual way: run the script, it does the 13 stages.</span></button>
+    <button class="opt" id="p-agents" data-p="agents" aria-pressed="false"><span class="tag">Claude Code</span><b>Build with agents</b><span>New and optional: four agents inside a Claude Code session.</span></button>
+  </div>
+
+  <div class="panel" id="panel-chat">
+    <h3>Ask or review in claude.ai <span class="pill">Nothing to install</span></h3>
+    <p>The three skills are now published to the Mercans organisation. They give the chat the method; they do not build a country.</p>
+    <ol class="steps">
+      <li><div class="step"><b>Check the skills are on</b><p>In claude.ai or Claude Desktop go to <b>Customize → Skills</b> and switch on <code>mercans-pipeline-methodology</code>, <code>mercans-compliance-workflow</code> and <code>mercans-artifact-toolkit</code>.</p></div></li>
+      <li><div class="step"><b>Remove old copies</b><p>If you uploaded these skills yourself before, switch your copies off so only the organisation version is active.</p></div></li>
+      <li><div class="step"><b>Turn on code execution</b><p><b>Settings → Capabilities</b>. The toolkit uses it to inspect and validate xlsx and docx files you upload.</p></div></li>
+      <li><div class="step"><b>Test it</b><p>Ask in a new chat:</p><div class="code">What does Stage 9 do in pipeline v2.12, and when may a check be skipped?<button class="copy" type="button">Copy</button></div><p class="note">A correct answer says that missing country support is a FAIL unless an exemption is recorded.</p></div></li>
+    </ol>
+  </div>
+
+  <div class="panel" id="panel-script" hidden>
+    <h3>Build a country in Git Bash <span class="pill">Same as before</span></h3>
+    <p>The script runs in Git Bash and calls Claude Code in the background, stage by stage. It does not need the plugin.</p>
+    <div class="flow" aria-label="Stages"><span>Research</span><i>→</i><span>CCG, specs, DD, WTC, SIR, payslip</span><i>→</i><span class="gate">Stage 9 audit (blocks)</span><i>→</i><span>QA and country skill</span><i>→</i><span>Design</span><i>→</i><span>Release (Stage 13)</span></div>
+    <p class="note">You need: Claude Code logged in with your Claude account, Git Bash, Python 3 with <code>openpyxl python-docx jsonschema</code>, and <b>no</b> <code>ANTHROPIC_API_KEY</code> set.</p>
+    <ol class="steps">
+      <li><div class="step"><b>Unzip the package</b><p>Use a short path such as <code>C:\mercans\v2.12</code>. Do not unzip the skill zips inside <code>chat/</code>.</p></div></li>
+      <li><div class="step"><b>Copy the pipeline folder</b><p>If you already have <code>~/mercans-pipeline</code> from v2.9, rename it first.</p><div class="code">mv ~/mercans-pipeline ~/mercans-pipeline-v2.9   # only if it exists
+cp -r /c/mercans/v2.12/code/mercans-pipeline/pipeline ~/mercans-pipeline
+cd ~/mercans-pipeline<button class="copy" type="button">Copy</button></div></div></li>
+      <li><div class="step"><b>Dry run (builds nothing)</b><div class="code">GENERATE_PROMPTS_ONLY=true bash mercans_pipeline_v2_12.sh "Country" CC CUR 2026 English<button class="copy" type="button">Copy</button></div><p class="note">Look for <code>Claude CLI: ok</code> and <code>All v2.4 reference files present</code>. Then delete the test <code>CC-compliance/</code> folder.</p></div></li>
+      <li><div class="step"><b>Real run</b><div class="code">CLAUDE_CODE_MAX_OUTPUT_TOKENS=64000 nohup bash mercans_pipeline_v2_12.sh "Country" CC CUR 2026 English &gt; CC-v212.log 2&gt;&amp;1 &amp;<button class="copy" type="button">Copy</button></div><p class="note">Resume from a stage with <code>START_STAGE=N</code>. Keep the laptop plugged in and awake: sleep kills the run without an error.</p></div></li>
+    </ol>
+  </div>
+
+  <div class="panel" id="panel-agents" hidden>
+    <h3>Build with agents in Claude Code <span class="pill opt-pill">Optional</span></h3>
+    <p>The plugin does the same job as the script, but as a team of four agents you can follow and steer inside a Claude Code session. Each one hands its work to the next through files.</p>
+    <div class="flow" aria-label="Agents"><span><b>Scaffolder</b> · scope and folders</span><i>→</i><span><b>Source hunter</b> · law from official sources</span><i>→</i><span><b>Builder</b> · writes the artifacts</span><i>→</i><span class="gate">QA auditor · rejects or passes</span></div>
+    <ol class="steps">
+      <li><div class="step"><b>Install the plugin</b><p>In Claude Code, from the unzipped package:</p><div class="code">/plugin marketplace add C:/mercans/v2.12/code
+/plugin install mercans-pipeline@mercans-compliance<button class="copy" type="button">Copy</button></div><p class="note">Restart Claude Code and check with <code>/plugin</code> and <code>/agents</code>.</p></div></li>
+      <li><div class="step"><b>Start a build</b><p>Ask Claude Code to run the <code>country-build</code> skill for your country. It calls the four agents in order and stops at each review gate.</p></div></li>
+    </ol>
+    <p class="note">Use either the script or the agents for a country, not both.</p>
+  </div>
+</section>
+
+<section>
+  <h2>What changed in v2.12</h2>
+  <p class="lead">We checked the France build against the official engine and validator. The 63 errors that were ours became new checks, so the next country cannot repeat them.</p>
+  <div class="changes">
+    <div class="chg"><h3>Nothing is skipped silently</h3><p>If a check cannot run because the country lacks support, Stage 9 now fails. To pass, record an exemption with a reason, an official source link and a date.</p></div>
+    <div class="chg"><h3>One source for every value</h3><p>Every rate or ceiling carries a tag like <code>[[FACT:key=value]]</code>. Fix it once and every artifact follows.</p></div>
+    <div class="chg"><h3>Ten new blocking checks</h3><p>For example: a code the WTC does not have, a tax flag with no legal basis, a payslip missing a statutory line or whose net does not add up, a repealed article.</p></div>
+    <div class="chg"><h3>Errors caught</h3><p>Of the 63 France errors, v2.11 fully caught 5. v2.12 fully catches 18 and partly catches 38 more.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>“It stopped” — is that normal?</h2>
+  <details><summary>The banner says v2.8</summary><div><p><span class="normal">Normal</span>Old label inside the script. The file you run is v2.12.</p></div></details>
+  <details><summary>Dry run ends with STAGE 13 HALTED (C43)</summary><div><p><span class="normal">Normal</span>The dry run builds nothing, so the release stage has nothing to release.</p></div></details>
+  <details><summary>Stage 9 FAIL on C34, C35, C36, C48, C50, C57 or C71</summary><div><p><span class="normal">Expected</span>The country has no support for that check. Add <code>validation_exemptions.&lt;check&gt;</code> (reason, official source URL, decided_on) to <code>_pipeline/build-manifest.json</code>. See <code>CHANGELOG-v2.12.md</code> §1.</p></div></details>
+  <details><summary>ANTHROPIC_API_KEY is set</summary><div><p>Run <code>unset ANTHROPIC_API_KEY</code> and remove it from your environment variables. The script uses your Claude account, not an API key.</p></div></details>
+  <details><summary>claude CLI not found / test failed</summary><div><p>Install Claude Code, open a new Git Bash and run <code>claude</code> once to log in.</p></div></details>
+  <details><summary>Required v2.4 reference file missing</summary><div><p>The pipeline folder was not copied whole. Repeat the copy step.</p></div></details>
+</section>
+
+<footer>Anything else: send Wallisson the last 30 lines of the log. Full detail is in <code>START-HERE.md</code>, <code>INSTALL.md</code> and <code>CHANGELOG-v2.12.md</code> inside the package.</footer>
+</div>
+
+<script>
+const opts=[...document.querySelectorAll(".opt")];
+function show(p){
+  opts.forEach(o=>o.setAttribute("aria-pressed",String(o.dataset.p===p)));
+  ["chat","script","agents"].forEach(k=>{document.getElementById("panel-"+k).hidden=(k!==p)});
+  try{localStorage.setItem("path",p)}catch(e){}
+}
+opts.forEach(o=>o.addEventListener("click",()=>show(o.dataset.p)));
+const h=location.hash.slice(1);
+let start="chat";
+try{start=localStorage.getItem("path")||start}catch(e){}
+if(["chat","script","agents"].includes(h))start=h;
+show(start);
+document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",()=>{
+  const box=b.parentElement, txt=box.firstChild.textContent.trim();
+  const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1500)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(box.firstChild);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected"};
+  try{navigator.clipboard.writeText(txt).then(done,sel)}catch(e){sel()}
+}));
+</script>

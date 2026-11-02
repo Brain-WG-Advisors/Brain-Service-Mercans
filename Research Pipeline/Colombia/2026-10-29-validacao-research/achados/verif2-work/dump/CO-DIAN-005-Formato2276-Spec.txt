@@ -1,0 +1,1554 @@
+Version Control!B8	Statutory Report Specification
+Version Control!B9	COLOMBIA
+Version Control!B10	Third-party Information Return on Work and Pension Income - Format 2276 version 4 - Information on income and withholding on work and pension income (third-party (exogenous) information)
+Version Control!B12	Version
+Version Control!C12	Effective Date
+Version Control!D12	Change Description
+Version Control!E12	Status
+Version Control!F12	Updated By
+Version Control!B13	1.0
+Version Control!C13	2026-10-16
+Version Control!D13	Initial version.
+Version Control!E13	Approved
+Version Control!F13	Wallisson Gomes
+Report Matrix!A1	THIRD-PARTY INFORMATION RETURN ON WORK AND PENSION INCOME - FORMAT 2276 VERSION 4 — REPORT MATRIX
+Report Matrix!A3	Report ID
+Report Matrix!B3	CO-DIAN-005
+Report Matrix!A4	Report Name (EN)
+Report Matrix!B4	Third-party Information Return on Work and Pension Income - Format 2276 version 4
+Report Matrix!A5	Report Name (Local)
+Report Matrix!B5	Formato 2276 version 4 - Informacion de ingresos y retenciones por rentas de trabajo y de pensiones
+Report Matrix!A6	Document ID
+Report Matrix!B6	CO-DIAN-005
+Report Matrix!A7	Document Title
+Report Matrix!B7	Third-party Information Return - Format 2276 v4 - Field Specification
+Report Matrix!A8	Country
+Report Matrix!B8	Colombia
+Report Matrix!A9	Authority
+Report Matrix!B9	National Tax and Customs Directorate (DIAN)
+Report Matrix!A10	Report Type
+Report Matrix!B10	Statutory annual third-party information return (third-party (exogenous) information)
+Report Matrix!A11	Tax Type
+Report Matrix!B11	Third-party income and withholding disclosure
+Report Matrix!A12	Relationship
+Report Matrix!B12	Employer to DIAN
+Report Matrix!A13	Frequency
+Report Matrix!B13	Annual, one record per beneficiary per tax year
+Report Matrix!A14	Submission Deadline
+Report Matrix!B14	May-June of the following year, staggered by NIT (Res. DIAN 000227 de 2025 art. 1.3.9.1.3)
+Report Matrix!A15	File Format
+Report Matrix!B15	XML prepared to the DIAN technical specifications for Format 2276 version 4 and uploaded to the DIAN third-party (exogenous) information service (DIAN Resolution 000227 of 2025 art. 1.3.10.1, entry T3.45).
+Report Matrix!A16	File Extension
+Report Matrix!B16	xml - the file is an XML document named Dmuisca_ccmmmmmvvaaaacccccccc.xml, where cc = 01 for an insertion or 02 for a replacement, mmmmm = the format code 02276, vv = the version 04, aaaa = year of sending (four digits; Anexo T3.45) and cccccccc = the consecutive file number. Each file carries at most 5,000 records; a population above 5,000 beneficiaries is sent in several files distinguished by the consecutive number (DIAN technical specifications for Format 2276 version 4, Res. 000227 of 2025 art. 1.3.10.1, entry T3.45).
+Report Matrix!A17	Character Encoding
+Report Matrix!B17	ISO-8859-1 (DIAN technical specifications for Format 2276 version 4, Res. 000227 of 2025 art. 1.3.10.1, entry T3.45).
+Report Matrix!A18	Record Types / Sections
+Report Matrix!B18	One record per beneficiary carrying numerals 1 to 36 of Res. 000227 of 2025 art. 1.3.7.1.1 in their published order, plus the envelope attributes (informant NIT, taxpayer category, tax year, format and version); the physical record layout follows the published DIAN technical specifications for Format 2276 version 4 (see the File Structure sheet).
+Report Matrix!A19	Version
+Report Matrix!B19	v1.0
+Report Matrix!A22	DETAILED COMPLIANCE NOTES (Colombia-specific)
+Report Matrix!A23	SUBMISSION CHANNEL
+Report Matrix!A24	- Channel: file_upload (XML) into the DIAN third-party (exogenous) information service | Portal: www.dian.gov.co, Electronic Computer Services, with the Electronic Signature Instrument (IFE) | Source: DIAN Resolution 000227 of 2025 arts. 1.3.7.1.1 and 1.3.10.1 | The XML schema is defined by the published technical specifications of Format 2276 version 4.
+Report Matrix!A25	- This is NOT machine-to-machine. Unlike the electronic payroll there is no SOAP service, no document signature and no synchronous ApplicationResponse - the employer uploads a file through an authenticated portal session and reads the outcome on screen.
+Report Matrix!A26	- The word 'XML' is used here because Res. 227 art. 1.3.10.1 lists Format 2276 among the formats with published technical specifications, and the exogena service accepts XML. The resolution itself prescribes no XSD: the element names, ordering and lengths are fixed by the technical specifications of Format 2276 version 4, so every element path in this specification is a logical name marked DERIVED, mapped to the element names of the published technical specifications. The physical file is an XML document in ISO-8859-1 encoding named Dmuisca_ccmmmmmvvaaaacccccccc.xml (cc = 01 insertion / 02 replacement, mmmmm = format 02276, vv = version 04, aaaa = year of sending (four digits; Anexo T3.45), cccccccc = consecutive file number), with at most 5,000 records per file.
+Report Matrix!A27	- The tax portal is not the social-security channel and not the information operator. Format 2276 goes to DIAN; PILA never does.
+Report Matrix!A28	INTEGRATION TYPE AND DIRECTION
+Report Matrix!A29	- Integration: outbound file generation only. No inbound file: the portal returns an on-screen validation outcome, which the engine captures for the audit trail.
+Report Matrix!A30	- product_mapping_required = true. The format needs three separate severance savings lines, the meal-payment split at the 41-UVT threshold across TWO numerals, the rolling six-month average labour income, the RAIS-versus-voluntary-pension split that the electronic payroll cannot make, the AVC amount that has no electronic payroll element at all, and each dependant's identity document. None of these is derivable at year end from annual totals.
+Report Matrix!A31	- NOT DERIVABLE FROM THE MONTHLY FILINGS. It has its own field list, its own validation and its own deadline. It also carries concepts Form 220 does not - numeral 6 (ecclesiastical emoluments), numeral 32 (meal payments up to 41 UVT, informative) and numerals 30, 31, 35 and 36.
+Report Matrix!A32	RESIDENT / NON-RESIDENT TREATMENT
+Report Matrix!A33	- RESIDENT: numeral 29 carries the ET art. 383 progressive-table withholding, and numerals 23 to 28 carry the contributions and voluntary savings that depurated the base.
+Report Matrix!A34	- NON-RESIDENT: numeral 29 carries the FLAT 20% of ET art. 408 on the GROSS. Numerals 23 and 24 still report the contributions actually deducted, but they did NOT reduce the base - art. 408 admits no depuration. Numeral 33 is reported where severance was paid but has no effect, because the art. 206 num. 4 exemption belongs to the resident ID card-general regime.
+Report Matrix!A35	- The format has NO tax-residence field: the country in numeral 4 is the country of the beneficiary's address (Anexo T3.45 of Res. 000227/2025), not a tax-residence marker. Tax residence is therefore invisible to DIAN in this return except through the arithmetic relationship between numerals 22 and 29 - a non-resident's numeral 29 is close to exactly 20% of numeral 22, which is itself a useful internal control.
+Report Matrix!A36	- Res. 227 par. 5 draws a SECOND distinction that is easy to confuse with residence: payments to natural persons receiving work income NOT from an employment relationship are reported HERE where they were withheld under ET art. 383, and in the ordinary payments-and-withholdings formats where they were not. That test is about the WITHHOLDING REGIME, not about residence.
+Report Matrix!A37	- Where a non-resident's work was performed ENTIRELY outside Colombia the income is foreign-source, was not withheld, and is not reported here at all (DIAN Official letter 28380 of 2019).
+Report Matrix!A38	RELATED FILINGS / CROSS-REFERENCES
+Report Matrix!A39	- Numerals 5 to 33 map almost one for one to Form 220 casillas 36 to 60 (CO-DIAN-004) - but THE SECOND AND THIRD SEVERANCE LINES ARE TRANSPOSED: numeral 19 is Form 220 casilla 49 and numeral 20 is casilla 48. Map by meaning, never by position.
+Report Matrix!A40	- Numeral 29 summed across the population reconciles to twelve months of Form 350 casillas 93 plus 94 (CO-DIAN-002), and per employee to twelve months of electronic payroll NIE177 (CO-DIAN-001).
+Report Matrix!A41	- Numerals 23 and 24 reconcile to the employee portions of PILA Record Tipo 2 campos 55, 47, 51 and 52 (CO-PILA-003).
+Report Matrix!A42	- Numeral 19 must reconcile to the deposit made under CO-CESANTIAS-006 in February of the reported year - the deposit is counted in the year it is made (ET art. 27 num. 3; Anexo T3.45 of Res. 000227/2025, element ceco).
+Report Matrix!A43	- Numeral 34 must agree with Form 220 casillas 79 and 80 - DIAN checks a dependant claimed by more than one taxpayer.
+Report Matrix!A44	- Numeral 16 is mutually exclusive with Format 5247 concept 5102 for the same payment (Res. 227 para. 7): employer-paid educational support is reported here, third-party administered support there. Format 5247 is not a payroll filing.
+Report Matrix!A45	- Numerals 30, 31, 35 and 36 are NOT payroll fields - VAT and collaboration-contract identifiers, owned by the employer's tax function outside payroll.
+Payroll Scope Summary!A1	PAYROLL SCOPE SUMMARY - THIRD-PARTY INFORMATION RETURN ON WORK AND PENSION INCOME - FORMAT 2276 VERSION 4
+Payroll Scope Summary!A2	PURPOSE: Tell the developer WHO is reported on Format 2276 and what happens to a borderline case.
+Payroll Scope Summary!A4	SCENARIO
+Payroll Scope Summary!B4	REPORT?
+Payroll Scope Summary!C4	NOTES / REASONING
+Payroll Scope Summary!A5	═══ WHO GETS REPORTED ═══
+Payroll Scope Summary!A6	Indefinite-term employee (indefinite-term contract)
+Payroll Scope Summary!B6	YES
+Payroll Scope Summary!C6	The core private-sector population. CST art. 47; Ley 2466 de 2025 art. 5.
+Payroll Scope Summary!A7	Fixed-term employee (fixed-term contract, max 4 years)
+Payroll Scope Summary!B7	YES
+Payroll Scope Summary!C7	Identical reporting treatment to an indefinite-term contract. CST art. 46; Ley 2466 de 2025 art. 6.
+Payroll Scope Summary!A8	Specific-work or task employee (contract por obra o labor)
+Payroll Scope Summary!B8	YES
+Payroll Scope Summary!C8	An employment contract; CST art. 46. Electronic payroll TipoContrato = 3 (Obra o Labor).
+Payroll Scope Summary!A9	Occasional / accidental / transitory worker (< 1 month, non-core activity)
+Payroll Scope Summary!B9	YES
+Payroll Scope Summary!C9	Still an employee under CST art. 6. Reported on every filing; the PILA return type and the day counts differ, not the obligation.
+Payroll Scope Summary!A10	Part-time employee
+Payroll Scope Summary!B10	YES
+Payroll Scope Summary!C10	Colombia has no separate part-time regime. Reported normally; the PILA contribution base is floored at 1 SMMLV (COP 1,750,905) except for the worker type 51 partial-time regime.
+Payroll Scope Summary!A11	All-inclusive salary employee (all-inclusive salary, >= 13 SMMLV)
+Payroll Scope Summary!B11	YES
+Payroll Scope Summary!C11	CST art. 132 num. 2. Reported with the integral-salary flag set; the contribution base is 70% of the integral salary, and the electronic payroll carries SalarioIntegral = true.
+Payroll Scope Summary!A12	Apprentice (apprenticeship contract)
+Payroll Scope Summary!B12	YES
+Payroll Scope Summary!C12	Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA tipo cotizante 19 'Aprendices etapa lectiva Ley 2466 de 2025' for the lectiva phase from the health period of August 2025 (code 12 only for earlier periods). For health periods before August 2025, code 19 covers the productive phase; from the health period of August 2025, AT2 v30 names no code for the productive phase (AT2 v30 §2.1.2.3.1 campo 5, types 12 and 19).
+Payroll Scope Summary!A13	Intern / practical placement (practicas o pasantias)
+Payroll Scope Summary!B13	YES
+Payroll Scope Summary!C13	Electronic payroll TipoContrato = 5. Reported where remunerated.
+Payroll Scope Summary!A14	Teleworkers and remote workers
+Payroll Scope Summary!B14	YES
+Payroll Scope Summary!C14	Law 1221 of 2008 as amended by Law 2466 of 2025 arts. 52-54. No reporting difference; the electronic payroll carries a dedicated Teletrabajo earning element (NIE158).
+Payroll Scope Summary!A15	Resident foreign national under a Colombian contract
+Payroll Scope Summary!B15	YES
+Payroll Scope Summary!C15	Full reporting. Withheld under the ET art. 383 progressive table once tax residence is acquired.
+Payroll Scope Summary!A16	NON-RESIDENT foreign national under a Colombian contract
+Payroll Scope Summary!B16	YES
+Payroll Scope Summary!C16	IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix.
+Payroll Scope Summary!A17	Employed old-age pensioner in active service
+Payroll Scope Summary!B17	YES
+Payroll Scope Summary!C17	PILA worker sub-type 01; no pension contribution (PILA pension rate field = 0), health and the levies still apply.
+Payroll Scope Summary!A18	Executive director / statutory legal representative holding an employment contract
+Payroll Scope Summary!B18	YES
+Payroll Scope Summary!C18	Reported as an ordinary employee where an employment contract exists.
+Payroll Scope Summary!A19	Independent contractor (service contract)
+Payroll Scope Summary!B19	NO
+Payroll Scope Summary!C19	Not an employee. The contractor self-files PILA on 40% of fees (return types I / Y, descoped) and is reported by the payer in the third-party information return, not in this employer filing. Withholding on their fees does pass through Form 350, but under a different casilla.
+Payroll Scope Summary!A20	Public-sector employee (contributor type 47, SGP-funded entity)
+Payroll Scope Summary!B20	NO
+Payroll Scope Summary!C20	Public-sector only. Public-sector employees are reported through PILA return types T and F, which are outside the scope of this specification.
+Payroll Scope Summary!A21	Non-executive director paid fees only (junta directiva)
+Payroll Scope Summary!B21	NO
+Payroll Scope Summary!C21	Not payroll income. Fees paid to a non-executive director who holds no employment contract are not generated by the payroll engine, and payroll contributes nothing to the record. Res. 227 par. 5 governs their reporting: where the fee was withheld under ET art. 383 it is reported in Format 2276 numeral 9 (fees) by the employer's tax function, outside payroll; where art. 383 did not apply it is reported in the ordinary payments-and-withholdings formats instead (see 'Natural person paid work income OUTSIDE an employment relationship' below).
+Payroll Scope Summary!A22	Pensioner whose pension is paid by a fund, not by the employer
+Payroll Scope Summary!B22	NO
+Payroll Scope Summary!C22	The paying fund is the withholding agent and the reporting party, not the employer.
+Payroll Scope Summary!A23	═══ AMOUNTS AND CONCEPTS REPORTED ═══
+Payroll Scope Summary!A24	Annual salary and work income by concept
+Payroll Scope Summary!B24	YES
+Payroll Scope Summary!C24	Numerals 5 to 17, itemised in thirteen separate concepts.
+Payroll Scope Summary!A25	Ecclesiastical emoluments as a separate concept
+Payroll Scope Summary!B25	YES
+Payroll Scope Summary!C25	Numeral 6 - a concept Form 220 does NOT separate, folding it into casilla 39.
+Payroll Scope Summary!A26	Meal payments up to 41 UVT
+Payroll Scope Summary!B26	YES, but informative only
+Payroll Scope Summary!C26	Numeral 32 (Anexo T3.45 of Res. 000227/2025, element pagahuvt), for an employee whose monthly salary does not exceed 310 UVT. Res. 227 para. 1: 'se considera de caracter informativo'. It does NOT enter the gross total in numeral 22, because it is income of the food supplier, not of the employee. Form 220 has no counterpart casilla.
+Payroll Scope Summary!A27	Meal payments above 41 UVT
+Payroll Scope Summary!B27	YES
+Payroll Scope Summary!C27	Numeral 8 (Anexo T3.45 of Res. 000227/2025, element vaex), as taxable income of the employee, for an employee whose monthly salary does not exceed 310 UVT; where the salary exceeds 310 UVT the whole meal payment is reported in numeral 7 (element pabop).
+Payroll Scope Summary!A28	Severance, split three ways
+Payroll Scope Summary!B28	YES
+Payroll Scope Summary!C28	Numerals 18 (paid to the employee), 19 (deposited to the fund in the reported year - the February deposit belongs to the year of the deposit, ET art. 27 num. 3) and 20 (traditional pre-1991 regime). Note the ordering difference against Form 220.
+Payroll Scope Summary!A29	Employee mandatory contributions
+Payroll Scope Summary!B29	YES
+Payroll Scope Summary!C29	Numerals 23 and 24. Pension and the solidarity fund are COMBINED in numeral 24. On an employer-paid pensioner's record the health and solidarity deductions on the pension are reported in the same two numerals (Anexo T3.45 of Res. 000227/2025, elements apos and apof).
+Payroll Scope Summary!A30	Voluntary savings, split four ways
+Payroll Scope Summary!B30	YES
+Payroll Scope Summary!C30	Numerals 25 (RAIS), 26 (voluntary pension funds), 27 (AFC) and 28 (AVC). The electronic payroll has one element for the first two and none for the fourth.
+Payroll Scope Summary!A31	Rolling six-month average labour income
+Payroll Scope Summary!B31	YES
+Payroll Scope Summary!C31	Numeral 33, but ONLY for employees to whom ET art. 206 num. 4 applies.
+Payroll Scope Summary!A32	Withholding practised
+Payroll Scope Summary!B32	YES
+Payroll Scope Summary!C32	Numeral 29 (Anexo T3.45 of Res. 000227/2025, element vare): the withholding actually practised, resident or non-resident alike; hypothetical or contingent amounts are excluded.
+Payroll Scope Summary!A33	Employer social-security contributions
+Payroll Scope Summary!B33	NO
+Payroll Scope Summary!C33	The return reports the BENEFICIARY's income and the BENEFICIARY's contributions. The employer's cost appears only on PILA.
+Payroll Scope Summary!A34	VAT as a higher cost and VAT withholding
+Payroll Scope Summary!B34	NO
+Payroll Scope Summary!C34	Numerals 30 and 31 are not payroll figures: Colombian employment income carries no VAT. They are relevant only where the beneficiary is a VAT-responsible contractor paid under the ET art. 383 table, are populated by the employer's tax function outside payroll, and are written as zero on every employee record (Res. 227 para. 2).
+Payroll Scope Summary!A35	Trust and collaboration-contract identifiers
+Payroll Scope Summary!B35	NO
+Payroll Scope Summary!C35	Numerals 35 and 36. Res. 227 para. 4: for an ordinary employer reporting under concept 1 they 'no se deben diligenciar'.
+Payroll Scope Summary!A36	═══ TIMING AND RELATIONSHIP ═══
+Payroll Scope Summary!A37	Reported on the accrual (causacion) date
+Payroll Scope Summary!B37	NO
+Payroll Scope Summary!C37	Every Colombian payroll filing is keyed to the PAYMENT or credit-in-account date, not to the accrual date. A December salary paid in January falls in the January filing.
+Payroll Scope Summary!A38	Reported on the payment or credit-in-account date
+Payroll Scope Summary!B38	YES
+Payroll Scope Summary!C38	The universal Colombian rule - payment or credit in account. Applies to the electronic payroll (DIAN Resolution 000227 of 2025 art. 1.5.3.2.2), to Form 350, to Form 220 and to Format 2276.
+Payroll Scope Summary!A39	A semi-monthly payroll produces two filings a month
+Payroll Scope Summary!B39	NO
+Payroll Scope Summary!C39	It does not. The electronic payroll is expressly ONE monthly document per employee 'irrespective of whether the obliged party makes payments in different or shorter periods' (Res. DIAN 000227 de 2025 art. 1.5.3.2.2). PILA and Form 350 are likewise monthly.
+Payroll Scope Summary!A40	Nil period still filed
+Payroll Scope Summary!B40	NO
+Payroll Scope Summary!C40	Format 2276 is annual and carries one record per beneficiary to whom work or pension income was paid or credited in account in the tax year (Res. 227 art. 1.3.7.1.1). A beneficiary whose withholding was nil still gets a record, with zero in every value numeral (par. 2 - see 'Employee whose withholding was nil'). Where no work or pension income was paid or credited in account to any person in the tax year there is no beneficiary and payroll generates no Format 2276 record; the format has no nil record. A monthly nil period does not arise for this return: every amount is an annual accumulation by payment date.
+Payroll Scope Summary!A41	Corrections handled by re-filing the whole period
+Payroll Scope Summary!B41	VARIES
+Payroll Scope Summary!C41	Electronic payroll: NO - a dedicated adjustment note (NominaIndividualDeAjuste, Replace or Delete) referencing the original CUNE. Form 350: yes, a corrective return. PILA: a correction return type N (correcciones) for the period, filed through the same operador as the original return; the C records (correct values) must be equal to or greater than the A records (original values) in IBC and in days, and type N cannot be used for a correction that leads to a refund, which is requested from each administradora outside PILA (AT2 v30 §2.1.1.2.2 campo 8; Disposiciones comunes a la Planilla N). A return paid after its deadline is filed on type E; type M (mora) applies only to periods before health period March 2014 with a total absence of payment (AT2 v30 §2.1.1.2.2 campo 8).
+Payroll Scope Summary!A42	═══ SPECIAL CASES ═══
+Payroll Scope Summary!A43	Employee who left during the year
+Payroll Scope Summary!B43	YES
+Payroll Scope Summary!C43	One record covering the payments actually made in the year. There is no partial-year marker; the amounts simply reflect the shorter period.
+Payroll Scope Summary!A44	Employee whose withholding was nil
+Payroll Scope Summary!B44	YES
+Payroll Scope Summary!C44	A record is still required. Res. 227 para. 2: 'Las casillas de valores son de obligatorio diligenciamiento. En caso de no tener ningun valor, se deben diligenciar con cero (0)'.
+Payroll Scope Summary!A45	Natural person paid work income OUTSIDE an employment relationship
+Payroll Scope Summary!B45	YES
+Payroll Scope Summary!C45	Res. 227 par. 5: reported here WHERE the payment was withheld under ET art. 383. Where art. 383 did not apply, it goes to the ordinary payments-and-withholdings formats instead - not here.
+Payroll Scope Summary!A46	Work income paid out of trust assets
+Payroll Scope Summary!B46	PARTIAL
+Payroll Scope Summary!C46	Reported with numeral 1 = 2 (Fiduciarias) and the trust identified in numeral 35. Not an ordinary corporate payroll case; where it arises, the reporting party is the fiduciaria, not the employer.
+Payroll Scope Summary!A47	Educational support administered by a third party
+Payroll Scope Summary!B47	NO
+Payroll Scope Summary!C47	Res. 227 para. 7 sends it to Format 5247 concept 5102. Only support paid DIRECTLY by the employer goes to numeral 16.
+Payroll Scope Summary!A48	Employee with a dependant claimed under art. 387 par. 2
+Payroll Scope Summary!B48	YES
+Payroll Scope Summary!C48	Numeral 34. Must agree with Form 220 casillas 79 and 80 - this is where DIAN checks a dependant claimed twice.
+Payroll Scope Summary!A49	Employee who acquired residence mid-year
+Payroll Scope Summary!B49	YES
+Payroll Scope Summary!C49	ONE record. Numeral 29 sums the 20% months and the art. 383 months; the format has no field to disclose the split.
+Payroll Scope Summary!A50	Pensioner whose pension is paid by the EMPLOYER through payroll (company pension)
+Payroll Scope Summary!B50	YES
+Payroll Scope Summary!C50	One record per pensioner, identified with the recipient's own document (a survivor or substitute pension in the name of the person who receives it). Numeral 21 (element peju) carries the pension payments of the year - the monthly mesadas and the additional mesadas; numeral 23 (element apos) the health contribution deducted from the pension; numeral 24 (element apof) a solidarity-fund deduction where it applies; numeral 17 (element potro) any payment to the pensioner that is not the pension itself (e.g. a health-plan offset compensation); numeral 29 the withholding actually practised, which is nil where the pension does not exceed 1,000 UVT a month (ET art. 206 num. 5). Res. 227 art. 1.3.7.1.1 numerals 17, 21, 23, 24 and 29.
+Formato 2276 Spec!A1	Third-party Information Return on Work and Pension Income - Format 2276 version 4 - Information on income and withholding on work and pension income (third-party (exogenous) information)
+Formato 2276 Spec!A2	Field Name (EN)
+Formato 2276 Spec!B2	Field Name (Local ES)
+Formato 2276 Spec!C2	Record Type / Section
+Formato 2276 Spec!D2	Field Position
+Formato 2276 Spec!E2	Payroll Field (Y/N)
+Formato 2276 Spec!F2	Mandatory (Y/N/C)
+Formato 2276 Spec!G2	Conditional Reason
+Formato 2276 Spec!H2	Position (Start-End)
+Formato 2276 Spec!I2	Field Length
+Formato 2276 Spec!J2	Format
+Formato 2276 Spec!K2	Example
+Formato 2276 Spec!L2	System Mapping
+Formato 2276 Spec!M2	Field Explanation
+Formato 2276 Spec!N2	Relevant for Payroll (Y/N)
+Formato 2276 Spec!O2	Option Values
+Formato 2276 Spec!P2	Rounding
+Formato 2276 Spec!Q2	Negative (Y/N)
+Formato 2276 Spec!R2	Value Type
+Formato 2276 Spec!S2	Reporting Frequency
+Formato 2276 Spec!T2	Query to RA
+Formato 2276 Spec!U2	RA Comments
+Formato 2276 Spec!A3	═══ reporting entity and beneficiary(numerals 1 to 4) ═══
+Formato 2276 Spec!A4	Reporting entity concept
+Formato 2276 Spec!B4	Entidad informante
+Formato 2276 Spec!C4	Reporting Entity
+Formato 2276 Spec!D4	N01
+Formato 2276 Spec!E4	N
+Formato 2276 Spec!F4	Y
+Formato 2276 Spec!H4	Numeral 1, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I4	2
+Formato 2276 Spec!J4	N (code 1 to 8)
+Formato 2276 Spec!K4	1
+Formato 2276 Spec!L4	Mercans.Informante_Concept
+Formato 2276 Spec!M4	A CODE, not a name. Res. 227 art. 1.3.7.1.1 para. 3 prints the eight-value table: 1 Informante general, 2 Fiduciarias, 3 Mandatario y/o Administrador delegado, 4 Consorcio y/o Union Temporal, 5 Exploracion y Explotacion de hidrocarburos, gases y minerales, 6 Joint Venture, 7 Gestor en Cuentas en Participacion, 8 Convenios de cooperacion con entidades publicas. Par. 4 is categorical for payroll: 'cuando el empleador reporte pagos o abonos en cuenta por concepto de rentas de trabajo y de pensiones, la casilla "Entidad Informante" se debe diligenciar con el concepto "1- Informante general"', and the fideicomiso and contract-participant fields are then NOT filled.
+Formato 2276 Spec!N4	Y
+Formato 2276 Spec!O4	-> Sheet 6: Reporting entity
+Formato 2276 Spec!P4	Not an amount - no rounding.
+Formato 2276 Spec!Q4	N
+Formato 2276 Spec!R4	Code
+Formato 2276 Spec!S4	Annual
+Formato 2276 Spec!A5	Beneficiary document type and identification number
+Formato 2276 Spec!B5	Tipo de documento y numero de identificacion del beneficiario
+Formato 2276 Spec!C5	Beneficiary
+Formato 2276 Spec!D5	N02
+Formato 2276 Spec!E5	Y
+Formato 2276 Spec!F5	Y
+Formato 2276 Spec!H5	Numeral 2, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I5	2 + 20
+Formato 2276 Spec!J5	N (code) + AN (number)
+Formato 2276 Spec!K5	13 / 1020304050
+Formato 2276 Spec!L5	Employee.Document_Type + Employee.Document_Number
+Formato 2276 Spec!M5	COMPOSITE FIELD as drafted in the resolution - numeral 2 names BOTH the document type and the number in a single numeral, and the technical specification splits them into two columns. Sub-field 1 = the DIAN identity-document type code from the 'Tipo de documento (numerals 2 and 34)' table on the Field Options sheet; sub-field 2 = the identification number without dots or hyphens, kept as text so leading zeros survive. SOURCE: Employee.Document_Type and Employee.Document_Number in the employee master data. Where the master data holds no type-code field and stores the number in one column per document type (Citizenship Card ID, Identity Card for Foreigners, Identity Card, National ID), the engine holds an explicit Employee.Document_Type derived once from the populated column through the document-type mapping table, maintained as a configuration table that maps each master-data document column to one DIAN code of the 'Tipo de documento' table and fixes the priority order between the columns where more than one is filled; a document outside the DIAN table cannot be reported under another code. POPULATION: the record is required for EVERY person paid in the tax year, including leavers and employer-paid pensioners who are not active employees in the master data - their document type and number are retained after termination and held for every pensioner. Where a payment is made to a payee other than the employee (payroll field 'Beneficiary National Id', typically on pension payments), the identity reported is that of the beneficiary of the payment: a survivor or substitute pension is reported in a record in the name of the person who receives the pension, with that person's document type and number - the same identity rule as Form 220 casilla 50, issued in the recipient's name. PERSISTENCE: this pair is the join key across every Colombian artefact for the employee - electronic payroll NIE044 / NIE045, PILA Record Tipo 2 campos 3 and 4, Form 220 casillas 24 and 25.
+Formato 2276 Spec!N5	Y
+Formato 2276 Spec!O5	-> Sheet 6: Tipo de documento (numerals 2 and 34)
+Formato 2276 Spec!P5	Not an amount - no rounding.
+Formato 2276 Spec!Q5	N
+Formato 2276 Spec!R5	Identifier
+Formato 2276 Spec!S5	Annual
+Formato 2276 Spec!A6	Beneficiary surnames and names
+Formato 2276 Spec!B6	Apellidos y nombres del beneficiario
+Formato 2276 Spec!C6	Beneficiary
+Formato 2276 Spec!D6	N03
+Formato 2276 Spec!E6	Y
+Formato 2276 Spec!F6	Y
+Formato 2276 Spec!H6	Numeral 3, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I6	60 x 4
+Formato 2276 Spec!J6	A
+Formato 2276 Spec!K6	PEREZ GOMEZ JUAN CARLOS
+Formato 2276 Spec!L6	Employee.First_Surname + Second_Surname + First_Name + Other_Names
+Formato 2276 Spec!M6	COMPOSITE FIELD. The resolution names one numeral; the technical specification splits it into four columns - first surname, second surname, first given name, other given names - in the same order as every other DIAN artefact. Sub-field order matters: DIAN matches on the surname columns. SOURCE: first surname = Master Data field 'Last Name'; second surname = Master Data field 'Second Last Name' (blank allowed); first given name = Master Data field 'First Name'; other given names = Master Data field 'Middle Name' (blank allowed). Do NOT use the formatted full name. The four name parts are retained for leavers and held for employer-paid pensioners, who are not active employees in the master data.
+Formato 2276 Spec!N6	Y
+Formato 2276 Spec!O6	-
+Formato 2276 Spec!P6	Not an amount - no rounding.
+Formato 2276 Spec!Q6	N
+Formato 2276 Spec!R6	Text
+Formato 2276 Spec!S6	Annual
+Formato 2276 Spec!A7	Beneficiary location
+Formato 2276 Spec!B7	Ubicacion del beneficiario
+Formato 2276 Spec!C7	Beneficiary
+Formato 2276 Spec!D7	N04
+Formato 2276 Spec!E7	Y
+Formato 2276 Spec!F7	C
+Formato 2276 Spec!G7	Country is always populated. Address, department and municipality are populated only where the country of residence is Colombia; for a beneficiary located outside Colombia they are left empty (Formato 2276 v4 technical specification, Anexo T3.45 of Res. 000227/2025).
+Formato 2276 Spec!H7	Numeral 4, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I7	200 (address) + 2 + 3 + 4 (country code)
+Formato 2276 Spec!J7	AN (address) + N (DIVIPOLA department and municipality) + N (country code, DIAN country table)
+Formato 2276 Spec!K7	address / 11 / 001 / 169
+Formato 2276 Spec!L7	Employee.Department_Code + Employee.Municipality_Code
+Formato 2276 Spec!M7	COMPOSITE FIELD - the beneficiary's location block of the Formato 2276 v4 technical specification (Anexo T3.45 of Res. 000227/2025): address, department (2 digits) and municipality (3 digits) on the DANE DIVIPOLA catalogue, and country. COUNTRY IS ALWAYS MANDATORY. Address, department and municipality are mandatory only where the country of residence is Colombia; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty. The country here is the country of the beneficiary's address, not a tax-residence marker. Note that this is the BENEFICIARY's location, not the place of work reported in the electronic payroll (NIE051 / NIE052) nor the place where the withholding was practised reported in Form 220 (casillas 34 / 35). Three artefacts, three different geographic questions. SOURCE: Employee.Department_Code and Employee.Municipality_Code, held as DIVIPOLA codes in the employee master data, with the address and the country taken from the same employee address record; where the master data holds a letter department code and a free-text city, the codes are obtained through the DIVIPOLA mapping table, maintained as a configuration table that maps each master-data department letter code and city name to its DANE department (2 digits) and municipality (3 digits) code, every entry validated against the DIVIPOLA catalogue. Free text must never be sent in the department, municipality or country sub-fields. Location is retained for leavers and held for employer-paid pensioners. The country is sent as the numeric code of the DIAN country table (attribute pais, int 4, 'de acuerdo con los definidos por resolución'), never as a name; Colombia is code 169. Department and municipality are sent with their leading zeros (attributes dpto int 2 and mun int 3, 'debe incluir los ceros a la izquierda').
+Formato 2276 Spec!N7	Y
+Formato 2276 Spec!O7	-> Sheet 6: DIVIPOLA (DANE)
+Formato 2276 Spec!P7	Not an amount - no rounding.
+Formato 2276 Spec!Q7	N
+Formato 2276 Spec!R7	Code
+Formato 2276 Spec!S7	Annual
+Formato 2276 Spec!A8	═══ work income paid(numerals 5 to 17) ═══
+Formato 2276 Spec!A9	Salary payments
+Formato 2276 Spec!B9	Pagos por salarios
+Formato 2276 Spec!C9	Values
+Formato 2276 Spec!D9	N05
+Formato 2276 Spec!E9	N
+Formato 2276 Spec!F9	Y
+Formato 2276 Spec!H9	Numeral 5, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I9	18
+Formato 2276 Spec!J9	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K9	144000000
+Formato 2276 Spec!L9	SUM(Payroll.Salary_Payments)
+Formato 2276 Spec!M9	Annual salary payments to the employee: ordinary and integral salary (100% of the integral salary - the 70% factor applies only to contribution bases), salary arrears, overtime and surcharges, habitual bonuses, and other remuneration that constitutes salary under CST art. 127 and is not reported in a more specific numeral. Habitual bonuses - bonuses paid regularly as part of the remuneration, whatever their label - are reported here; a non-habitual, one-off bonus is reported in numeral 17 (Anexo T3.45 of Res. 000227/2025, elements pasa and potro). Payments in kind that constitute salary (CST arts. 127 and 129) are reported here (element pasa); payments in kind that are not salary are reported in numeral 17 (element potro); the salary attribute of each in-kind wage type comes from the Wage Type Catalogue (WTC). Fed by an explicit wage-type-to-numeral classification table, NOT by the payroll 'salary' indicator, which also marks items that belong to other numerals (vacation pay, numeral 12; per diems, numeral 13 - every per diem, including a permanent salary-type per diem, element pavia). Each wage type feeds exactly one numeral. Accumulated on the PAYMENT date for 1 January to 31 December of the tax year; rolling or non-calendar accumulators must not be used. Maps to Form 220 casilla 36, which likewise carries the habitual bonuses, and must equal it for the same employee and year.
+Formato 2276 Spec!N9	Y
+Formato 2276 Spec!O9	-
+Formato 2276 Spec!P9	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q9	N
+Formato 2276 Spec!R9	Amount
+Formato 2276 Spec!S9	Annual
+Formato 2276 Spec!A10	Ecclesiastical emolument payments
+Formato 2276 Spec!B10	Pagos por emolumentos eclesiasticos
+Formato 2276 Spec!C10	Values
+Formato 2276 Spec!D10	N06
+Formato 2276 Spec!E10	N
+Formato 2276 Spec!F10	C
+Formato 2276 Spec!G10	Populated only where the employer paid ecclesiastical emoluments. Distinct from 'Fee payments' (numeral 9) even though Form 220 combines the two.
+Formato 2276 Spec!H10	Numeral 6, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I10	18
+Formato 2276 Spec!J10	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K10	0
+Formato 2276 Spec!L10	SUM(Payroll.Ecclesiastical_Emoluments)
+Formato 2276 Spec!M10	A SEPARATE NUMERAL HERE, with no counterpart casilla on Form 220 (Form 220 folds ecclesiastical emoluments into casilla 39, fees). Payments in money or in kind, direct or indirect, compensating the personal service of a minister of religion, whatever the denomination and whatever the creed.
+Formato 2276 Spec!N10	Y
+Formato 2276 Spec!O10	-
+Formato 2276 Spec!P10	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q10	N
+Formato 2276 Spec!R10	Amount
+Formato 2276 Spec!S10	Annual
+Formato 2276 Spec!A11	Payments made with vouchers, cheques, cards or vales
+Formato 2276 Spec!B11	Pagos realizados con bonos electronicos o de papel de servicio, cheques, tarjetas, vales, etc.
+Formato 2276 Spec!C11	Values
+Formato 2276 Spec!D11	N07
+Formato 2276 Spec!E11	N
+Formato 2276 Spec!F11	C
+Formato 2276 Spec!G11	Populated where such payments were made AND the amount is not already reported under any other numeral (par. 6), and for meal payments to a third party for an employee whose monthly salary exceeds 310 UVT (Anexo T3.45 of Res. 000227/2025, element pabop). Bidirectional exclusion with every other numeral of the format.
+Formato 2276 Spec!H11	Numeral 7, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I11	18
+Formato 2276 Spec!J11	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K11	0
+Formato 2276 Spec!L11	SUM(Payroll.Voucher_Payments)
+Formato 2276 Spec!M11	Payments in vouchers, cheques, cards or vales. Res. 227 art. 1.3.7.1.1 para. 6 imposes a HARD EXCLUSION: 'El valor reportado en el numeral 7, no debe contener la informacion reportada en los demas numerales del Formato 2276'. It is a residual concept, and double-reporting it against numerals 5, 8 or 17 is a validation failure. Meal payments to a third party for an employee whose monthly salary exceeds 310 UVT (COP 16,235,940 in 2026) are reported HERE, because the ET art. 387-1 exclusion does not apply to that employee (Anexo T3.45 of Res. 000227/2025, element pabop); for an employee whose monthly salary does not exceed 310 UVT the same payment is split at 41 UVT between numeral 32 (element pagahuvt) and numeral 8 (element vaex) and nothing comes here. The 310-UVT test is applied month by month.
+Formato 2276 Spec!N11	Y
+Formato 2276 Spec!O11	-
+Formato 2276 Spec!P11	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q11	N
+Formato 2276 Spec!R11	Amount
+Formato 2276 Spec!S11	Annual
+Formato 2276 Spec!A12	Excess meal payments over 41 UVT (ET art. 387-1)
+Formato 2276 Spec!B12	Valor del exceso de los pagos por alimentacion mensuales mayores a 41 UVT, articulo 387-1 E.T.
+Formato 2276 Spec!C12	Values
+Formato 2276 Spec!D12	N08
+Formato 2276 Spec!E12	N
+Formato 2276 Spec!F12	C
+Formato 2276 Spec!G12	Populated only where monthly meal payments to a third party exceed 41 UVT. Bidirectional pair with numeral 32 (the amount up to 41 UVT). The whole benefit is unavailable where the employee's monthly salary exceeds 310 UVT, in which case the payment falls to numeral 7 instead.
+Formato 2276 Spec!H12	Numeral 8, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I12	18
+Formato 2276 Spec!J12	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K12	0
+Formato 2276 Spec!L12	SUM(Payroll.Meal_Excess_41UVT)
+Formato 2276 Spec!M12	The EXCESS over 41 UVT per month (COP 2,147,334 in 2026) of employer payments to third parties for the employee's or their family's meals, for an employee whose monthly salary does not exceed 310 UVT (COP 16,235,940 in 2026) - ET art. 387-1; Anexo T3.45 of Res. 000227/2025, element vaex. Taxable income of the employee. BIDIRECTIONAL PAIR WITH NUMERAL 32 (element pagahuvt), which carries the amount UP TO 41 UVT and is informative only - the same underlying payment is split across two numerals at the 41-UVT line, and the engine must maintain that split monthly. Where the monthly salary exceeds 310 UVT the whole meal payment is reported in numeral 7 (element pabop) and this numeral stays nil for that month.
+Formato 2276 Spec!N12	Y
+Formato 2276 Spec!O12	-> Sheet 6: Umbrales UVT 2026
+Formato 2276 Spec!P12	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q12	N
+Formato 2276 Spec!R12	Amount
+Formato 2276 Spec!S12	Annual
+Formato 2276 Spec!A13	Fee payments
+Formato 2276 Spec!B13	Pagos por honorarios
+Formato 2276 Spec!C13	Values
+Formato 2276 Spec!D13	N09
+Formato 2276 Spec!E13	N
+Formato 2276 Spec!F13	C
+Formato 2276 Spec!G13	Populated where fees were paid AND the payment was withheld under ET art. 383 (art. 383 par. 2, added by Ley 2277 de 2022 art. 8). Where art. 383 did not apply, the payment belongs in a different format, not here.
+Formato 2276 Spec!H13	Numeral 9, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I13	18
+Formato 2276 Spec!J13	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K13	0
+Formato 2276 Spec!L13	SUM(Payroll.Honorarios)
+Formato 2276 Spec!M13	Fees paid to a natural person. Res. 227 para. 5 is the governing rule: payments to natural persons receiving work income NOT arising from an employment, legal or statutory relationship, but subject to withholding under ET art. 383, ARE reported in Format 2276. Where such a payment is NOT subject to art. 383 withholding, it is reported instead in the ordinary payments-and-withholdings formats.
+Formato 2276 Spec!N13	Y
+Formato 2276 Spec!O13	-
+Formato 2276 Spec!P13	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q13	N
+Formato 2276 Spec!R13	Amount
+Formato 2276 Spec!S13	Annual
+Formato 2276 Spec!A14	Service payments
+Formato 2276 Spec!B14	Pagos por servicios
+Formato 2276 Spec!C14	Values
+Formato 2276 Spec!D14	N10
+Formato 2276 Spec!E14	N
+Formato 2276 Spec!F14	C
+Formato 2276 Spec!G14	Populated where services were paid AND withheld under ET art. 383.
+Formato 2276 Spec!H14	Numeral 10, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I14	18
+Formato 2276 Spec!J14	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K14	0
+Formato 2276 Spec!L14	SUM(Payroll.Servicios)
+Formato 2276 Spec!M14	Service payments to a natural person, subject to the same par. 5 test as numeral 9.
+Formato 2276 Spec!N14	Y
+Formato 2276 Spec!O14	-
+Formato 2276 Spec!P14	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q14	N
+Formato 2276 Spec!R14	Amount
+Formato 2276 Spec!S14	Annual
+Formato 2276 Spec!A15	Commission payments
+Formato 2276 Spec!B15	Pagos por comisiones
+Formato 2276 Spec!C15	Values
+Formato 2276 Spec!D15	N11
+Formato 2276 Spec!E15	N
+Formato 2276 Spec!F15	C
+Formato 2276 Spec!G15	Populated where non-employment commissions were paid AND withheld under ET art. 383. Mutually exclusive with numeral 5 for the same amount.
+Formato 2276 Spec!H15	Numeral 11, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I15	18
+Formato 2276 Spec!J15	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K15	0
+Formato 2276 Spec!L15	SUM(Payroll.Comisiones)
+Formato 2276 Spec!M15	Commissions to a natural person, subject to the same par. 5 test. Commissions paid UNDER an employment contract are salary under CST art. 127 and belong in numeral 5.
+Formato 2276 Spec!N15	Y
+Formato 2276 Spec!O15	-
+Formato 2276 Spec!P15	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q15	N
+Formato 2276 Spec!R15	Amount
+Formato 2276 Spec!S15	Annual
+Formato 2276 Spec!A16	Statutory benefit payments
+Formato 2276 Spec!B16	Pagos por prestaciones sociales
+Formato 2276 Spec!C16	Values
+Formato 2276 Spec!D16	N12
+Formato 2276 Spec!E16	N
+Formato 2276 Spec!F16	Y
+Formato 2276 Spec!H16	Numeral 12, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I16	18
+Formato 2276 Spec!J16	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K16	12000000
+Formato 2276 Spec!L16	SUM(Payroll.Prestaciones_Sociales)
+Formato 2276 Spec!M16	Statutory benefits OTHER THAN severance and its interest, which have their own three numerals (18, 19, 20): legal service bonus (prima de servicios), vacation pay (enjoyed, compensated in cash, or paid on termination) and work clothing. Fed by the wage-type-to-numeral classification; a wage type classified here is excluded from numeral 5 even where it carries the salary flag in payroll (e.g. vacation pay). Extralegal bonuses (e.g. vacation bonus, March/Christmas/August bonuses) are not reported here: a bonus paid habitually goes to numeral 5 and a non-habitual, one-off bonus goes to numeral 17 (Anexo T3.45 of Res. 000227/2025, elements pasa and potro); the habitual / non-habitual attribute of each bonus wage type is carried in the classification table. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 42.
+Formato 2276 Spec!N16	Y
+Formato 2276 Spec!O16	-
+Formato 2276 Spec!P16	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q16	N
+Formato 2276 Spec!R16	Amount
+Formato 2276 Spec!S16	Annual
+Formato 2276 Spec!A17	Per diem payments
+Formato 2276 Spec!B17	Pagos por viaticos
+Formato 2276 Spec!C17	Values
+Formato 2276 Spec!D17	N13
+Formato 2276 Spec!E17	N
+Formato 2276 Spec!F17	C
+Formato 2276 Spec!G17	Populated where per diems were paid in the year.
+Formato 2276 Spec!H17	Numeral 13, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I17	18
+Formato 2276 Spec!J17	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K17	0
+Formato 2276 Spec!L17	SUM(Payroll.Viaticos)
+Formato 2276 Spec!M17	Per diems for transport, subsistence and accommodation away from the habitual workplace, fed by the per-diem wage types in the wage-type-to-numeral classification (e.g. hotel, breakfast, lunch and dinner per diem wage types). Every per diem is reported in this numeral (Anexo T3.45 of Res. 000227/2025, element pavia), including permanent, salary-type per diems that carry the payroll salary flag; no per-diem wage type is routed to numeral 5, and each amount is reported in one numeral only. Accumulated on the payment date for the calendar tax year. Maps to Form 220 casilla 43, which likewise carries every per diem.
+Formato 2276 Spec!N17	Y
+Formato 2276 Spec!O17	-
+Formato 2276 Spec!P17	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q17	N
+Formato 2276 Spec!R17	Amount
+Formato 2276 Spec!S17	Annual
+Formato 2276 Spec!A18	Representation expense payments
+Formato 2276 Spec!B18	Pagos por gastos de representacion
+Formato 2276 Spec!C18	Values
+Formato 2276 Spec!D18	N14
+Formato 2276 Spec!E18	N
+Formato 2276 Spec!F18	C
+Formato 2276 Spec!G18	Populated where representation expenses were paid in the year.
+Formato 2276 Spec!H18	Numeral 14, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I18	18
+Formato 2276 Spec!J18	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K18	0
+Formato 2276 Spec!L18	SUM(Payroll.Gastos_Representacion)
+Formato 2276 Spec!M18	Representation expenses. Maps to Form 220 casilla 44.
+Formato 2276 Spec!N18	Y
+Formato 2276 Spec!O18	-
+Formato 2276 Spec!P18	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q18	N
+Formato 2276 Spec!R18	Amount
+Formato 2276 Spec!S18	Annual
+Formato 2276 Spec!A19	Cooperative associated-work compensation
+Formato 2276 Spec!B19	Pagos por compensaciones por el trabajo asociado cooperativo
+Formato 2276 Spec!C19	Values
+Formato 2276 Spec!D19	N15
+Formato 2276 Spec!E19	N
+Formato 2276 Spec!F19	C
+Formato 2276 Spec!G19	Populated only for a member of an associated-work cooperative.
+Formato 2276 Spec!H19	Numeral 15, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I19	18
+Formato 2276 Spec!J19	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K19	0
+Formato 2276 Spec!L19	SUM(Payroll.Coop_Compensation)
+Formato 2276 Spec!M19	Compensation for associated cooperative work. Applies only to a member of an associated-work cooperative - PILA contributor type 31 and electronic payroll TipoTrabajador 31. Maps to Form 220 casilla 45.
+Formato 2276 Spec!N19	Y
+Formato 2276 Spec!O19	-
+Formato 2276 Spec!P19	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q19	N
+Formato 2276 Spec!R19	Amount
+Formato 2276 Spec!S19	Annual
+Formato 2276 Spec!A20	Non-reimbursable educational support financed with public funds
+Formato 2276 Spec!B20	Valor apoyos economicos no reembolsables o condonados, entregados por el Estado o financiados con recursos publicos, para financiar programas educativos
+Formato 2276 Spec!C20	Values
+Formato 2276 Spec!D20	N16
+Formato 2276 Spec!E20	N
+Formato 2276 Spec!F20	C
+Formato 2276 Spec!G20	Populated only where the employer paid the support DIRECTLY. Where a third party administers it, report Format 5247 concept 5102 and leave this numeral nil - the two are mutually exclusive for the same payment.
+Formato 2276 Spec!H20	Numeral 16, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I20	18
+Formato 2276 Spec!J20	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K20	0
+Formato 2276 Spec!L20	SUM(Payroll.Educational_Support)
+Formato 2276 Spec!M20	Non-reimbursable or forgiven educational support from the State or financed with public funds. Res. 227 para. 7 draws the line by WHO ADMINISTERS IT: where the EMPLOYER pays it directly it is reported here; where a THIRD PARTY administers it, it is reported in Format 5247 under concept 5102 instead. Par. 7 was added by Resolution 188 of 2024 art. 8 and, under para. 5 of art. 1.3.9.1.3, first applies to tax year 2025, filed in calendar 2026.
+Formato 2276 Spec!N20	Y
+Formato 2276 Spec!O20	-
+Formato 2276 Spec!P20	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q20	N
+Formato 2276 Spec!R20	Amount
+Formato 2276 Spec!S20	Annual
+Formato 2276 Spec!A21	Other payments
+Formato 2276 Spec!B21	Otros pagos
+Formato 2276 Spec!C21	Values
+Formato 2276 Spec!D21	N17
+Formato 2276 Spec!E21	N
+Formato 2276 Spec!F21	C
+Formato 2276 Spec!G21	Populated where a work-income payment has no dedicated numeral: non-habitual bonuses, one-off payments to a retiree that are not a pension, and the other items listed in the Field Explanation (Anexo T3.45 of Res. 000227/2025, element potro).
+Formato 2276 Spec!H21	Numeral 17, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I21	18
+Formato 2276 Spec!J21	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K21	0
+Formato 2276 Spec!L21	SUM(Payroll.Other_Work_Payments)
+Formato 2276 Spec!M21	Work-income payments with no dedicated numeral (Anexo T3.45 of Res. 000227/2025, element potro): non-habitual, one-off bonuses (a habitual bonus goes to numeral 5, element pasa), non-salary allowances, payments in kind that are not salary - including payments to third parties for the employee's benefit - (a payment in kind that constitutes salary goes to numeral 5, element pasa; the salary attribute of each in-kind wage type comes from the Wage Type Catalogue (WTC)), equity-based compensation, termination indemnities, and payments to a retiree that are not the pension itself, one-off or recurring - a retirement gratuity, a pension-related compensation or settlement, a health-plan offset compensation - while the pension itself goes to numeral 21 (element peju). Numeral 17 is the residual numeral: it carries every work-income payment not reported in a dedicated attribute, the counterpart of Form 220 casilla 46, whether one-off or recurring. Fed by the wage-type-to-numeral classification. Exclude advances, loans, expense reimbursements and other entries that are not income of the beneficiary. Informative wage types paid to third parties (the 'Inf.' wage types) and foreign-paid wage types are classified wage type by wage type on the same attributes: a wage type that is income of the beneficiary is reported in numeral 5 where it carries the salary attribute and here where it does not, whatever the payment channel; a wage type that records no income of the beneficiary (e.g. a reimbursement or an employer-cost informative entry) is excluded; a meal payment to a food supplier follows the numeral 7 / 8 / 32 rule; and the income of a non-resident for work performed entirely outside Colombia is foreign-source and is not reported in this return (DIAN Official letter 28380 of 2019). Accumulated on the payment date for the calendar tax year. Note the interaction with par. 6: numeral 7 must not repeat anything reported here.
+Formato 2276 Spec!N21	Y
+Formato 2276 Spec!O21	-
+Formato 2276 Spec!P21	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q21	N
+Formato 2276 Spec!R21	Amount
+Formato 2276 Spec!S21	Annual
+Formato 2276 Spec!A22	═══ the three severance lines(numerals 18, 19, 20) - order differs from form 220 ═══
+Formato 2276 Spec!A23	Severance and interest actually paid to the employee
+Formato 2276 Spec!B23	Cesantias e intereses de cesantias efectivamente pagadas al empleado
+Formato 2276 Spec!C23	Values
+Formato 2276 Spec!D23	N18
+Formato 2276 Spec!E23	N
+Formato 2276 Spec!F23	Y
+Formato 2276 Spec!H23	Numeral 18, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I23	18
+Formato 2276 Spec!J23	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K23	1440000
+Formato 2276 Spec!L23	Payroll.Cesantias_Paid_To_Employee [WTC: CO-CESANTIAS + CO-INTERESES-CESANTIAS, see CO-DIAN-004 row 38 for the same field]
+Formato 2276 Spec!M23	THE FIRST OF THREE SEVERANCE NUMERALS. Amounts ACTUALLY PAID to the employee - the January interest payment, an authorised partial withdrawal, or a termination settlement. Maps to Form 220 casilla 47.
+Formato 2276 Spec!N23	Y
+Formato 2276 Spec!O23	-> Sheet 6: Las tres lineas de cesantias
+Formato 2276 Spec!P23	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q23	N
+Formato 2276 Spec!R23	Amount
+Formato 2276 Spec!S23	Annual
+Formato 2276 Spec!A24	Severance deposited to the severance fund
+Formato 2276 Spec!B24	Cesantias consignadas al fondo de cesantias
+Formato 2276 Spec!C24	Values
+Formato 2276 Spec!D24	N19
+Formato 2276 Spec!E24	N
+Formato 2276 Spec!F24	C
+Formato 2276 Spec!G24	Populated for an employee under the Ley 50 de 1990 regime. Mutually exclusive with 'Severance under the traditional CST regime' (numeral 20) for the same employee. Must reconcile to the deposit made under CO-CESANTIAS-006 in the reported year - the February deposit belongs to the year of the deposit (ET art. 27 num. 3).
+Formato 2276 Spec!H24	Numeral 19, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I24	18
+Formato 2276 Spec!J24	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K24	12000000
+Formato 2276 Spec!L24	Payroll.Cesantias_Deposited_To_Fund [WTC: CO-PROV-CESANTIAS]
+Formato 2276 Spec!M24	THE SECOND OF THREE. The severance DEPOSITED to the employee's chosen fund under Law 50 of 1990 art. 99, counted in the year in which the deposit is MADE (Anexo T3.45 of Res. 000227/2025, element ceco; ET art. 27 num. 3): the deposit made by 14 February of the reported year, for the severance accrued in the preceding year, belongs to the reported year, and the deposit made in February of the following year belongs to that following year. MAPS TO FORM 220 CASILLA 49, which follows the same deposit-year rule, while numeral 20 maps to casilla 48. The second and third severance lines are TRANSPOSED between the two artefacts, and a positional mapping swaps them.
+Formato 2276 Spec!N24	Y
+Formato 2276 Spec!O24	-> Sheet 6: Las tres lineas de cesantias
+Formato 2276 Spec!P24	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q24	N
+Formato 2276 Spec!R24	Amount
+Formato 2276 Spec!S24	Annual
+Formato 2276 Spec!A25	Severance recognised under the traditional CST regime
+Formato 2276 Spec!B25	Auxilio de cesantias reconocido a trabajadores del regimen tradicional del Codigo Sustantivo del Trabajo, contenido en el Capitulo VII, Titulo VIII Parte Primera
+Formato 2276 Spec!C25	Values
+Formato 2276 Spec!D25	N20
+Formato 2276 Spec!E25	N
+Formato 2276 Spec!F25	C
+Formato 2276 Spec!G25	Populated only for an employee under the pre-1991 traditional regime. Mutually exclusive with 'Severance deposited to the fund' (numeral 19) for the same employee.
+Formato 2276 Spec!H25	Numeral 20, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I25	18
+Formato 2276 Spec!J25	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K25	0
+Formato 2276 Spec!L25	Payroll.Cesantias_Traditional_Regime [No dedicated WTC code -- a regime-eligibility flag, not a wage type; see CO-DIAN-004 row 39]
+Formato 2276 Spec!M25	THE THIRD OF THREE. Severance RECOGNISED under the pre-1991 retroactive regime, for employees hired before 1 January 1991 who did not elect the Law 50 of 1990 regime. MAPS TO FORM 220 CASILLA 48 - NOT casilla 49.
+Formato 2276 Spec!N25	Y
+Formato 2276 Spec!O25	-> Sheet 6: Las tres lineas de cesantias
+Formato 2276 Spec!P25	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q25	N
+Formato 2276 Spec!R25	Amount
+Formato 2276 Spec!S25	Annual
+Formato 2276 Spec!A26	═══ pensions and total(numerals 21, 22) ═══
+Formato 2276 Spec!A27	Retirement, old-age or invalidity pensions
+Formato 2276 Spec!B27	Pensiones de jubilacion, vejez o invalidez
+Formato 2276 Spec!C27	Values
+Formato 2276 Spec!D27	N21
+Formato 2276 Spec!E27	N
+Formato 2276 Spec!F27	C
+Formato 2276 Spec!G27	Populated only where the employer itself paid a pension.
+Formato 2276 Spec!H27	Numeral 21, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I27	18
+Formato 2276 Spec!J27	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K27	0
+Formato 2276 Spec!L27	SUM(Payroll.Pension_Payments)
+Formato 2276 Spec!M27	Pension income paid BY THE EMPLOYER (retirement, old-age or invalidity). Populated for every employer-paid pensioner: where the employer pays company pensions directly through payroll (monthly pension and additional pension wage types), this numeral is populated and the pensioner population, which is not part of the active employee master data, is included in the file. Fed by the pension wage types in the wage-type-to-numeral classification. Only the pension itself - the periodic retirement, old-age or invalidity pension payments - is reported here (Anexo T3.45 of Res. 000227/2025, element peju); a payment to a retiree that is not the pension itself, one-off or recurring (a retirement gratuity, a pension-related compensation or settlement, a health-plan offset compensation), is reported in numeral 17 (element potro). A survivor or substitute pension paid by the employer is reported in the record of the person who receives it, identified in numeral 2 with the recipient's own document type and number - not in a record of the deceased pensioner - the same identity rule as Form 220 casilla 50, issued in the recipient's name. Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Where a fund pays the pension, the fund is the withholding agent and reporting party and nothing is reported here.
+Formato 2276 Spec!N27	Y
+Formato 2276 Spec!O27	-
+Formato 2276 Spec!P27	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q27	N
+Formato 2276 Spec!R27	Amount
+Formato 2276 Spec!S27	Annual
+Formato 2276 Spec!A28	Total gross income from work or pension payments
+Formato 2276 Spec!B28	Total ingresos brutos por pagos de rentas de trabajo o pensiones
+Formato 2276 Spec!C28	Values
+Formato 2276 Spec!D28	N22
+Formato 2276 Spec!E28	N
+Formato 2276 Spec!F28	Y
+Formato 2276 Spec!H28	Numeral 22, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I28	18
+Formato 2276 Spec!J28	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K28	157440000
+Formato 2276 Spec!L28	SUM(numerals 5 to 21)
+Formato 2276 Spec!M28	The gross total. Maps to Form 220 casilla 52 and must equal it for the same employee and year. Note that numeral 32 (meal payments up to 41 UVT) is INFORMATIVE and does NOT enter this total: Res. DIAN 000227 de 2025 art. 1.3.7.1.1 para. 1 makes numeral 32 'de caracter informativo'.
+Formato 2276 Spec!N28	N
+Formato 2276 Spec!O28	-
+Formato 2276 Spec!P28	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q28	N
+Formato 2276 Spec!R28	Amount
+Formato 2276 Spec!S28	Annual
+Formato 2276 Spec!A29	═══ employee contributions and voluntary savings(numerals 23 to 28) ═══
+Formato 2276 Spec!A30	Mandatory health contributions borne by the employee
+Formato 2276 Spec!B30	Aportes obligatorios por salud a cargo del trabajador
+Formato 2276 Spec!C30	Values
+Formato 2276 Spec!D30	N23
+Formato 2276 Spec!E30	N
+Formato 2276 Spec!F30	Y
+Formato 2276 Spec!H30	Numeral 23, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I30	18
+Formato 2276 Spec!J30	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K30	5760000
+Formato 2276 Spec!L30	SUM(Payroll.Health_Employee_Contribution)
+Formato 2276 Spec!M30	The beneficiary's own mandatory health contributions actually deducted in the tax year, by payment date. Source: the employee EPS contribution wage type (WT 2554), taken from the contribution wage type itself - never from a combined EPS+AFP+FSP total. On the record of an employer-paid pensioner, the mandatory health contribution deducted from the pension (the pensioner EPS wage types) is reported here in the same way (Anexo T3.45 of Res. 000227/2025, element apos). Maps to Form 220 casilla 53 and must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55.
+Formato 2276 Spec!N30	Y
+Formato 2276 Spec!O30	-
+Formato 2276 Spec!P30	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q30	N
+Formato 2276 Spec!R30	Amount
+Formato 2276 Spec!S30	Annual
+Formato 2276 Spec!A31	Mandatory pension and solidarity-fund contributions borne by the employee
+Formato 2276 Spec!B31	Aportes obligatorios a fondos de pensiones y solidaridad pensional a cargo del trabajador
+Formato 2276 Spec!C31	Values
+Formato 2276 Spec!D31	N24
+Formato 2276 Spec!E31	N
+Formato 2276 Spec!F31	Y
+Formato 2276 Spec!H31	Numeral 24, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I31	18
+Formato 2276 Spec!J31	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K31	7200000
+Formato 2276 Spec!L31	SUM(Payroll.Pension_Employee + Payroll.FSP)
+Formato 2276 Spec!M31	Pension AND the solidarity-fund surcharge (both the solidarity and the subsistence sub-accounts) in ONE numeral, exactly as Form 220 casilla 54 combines them. Source: the employee AFP contribution wage type plus the FSP wage type (WT 2556 + WT 2553), never a combined EPS+AFP+FSP figure. On the record of an employer-paid pensioner, the solidarity-fund deduction on the pension is reported here (Anexo T3.45 of Res. 000227/2025, element apof). The electronic payroll and PILA both keep pension and FSP separate, so the engine must sum only at this point.
+Formato 2276 Spec!N31	Y
+Formato 2276 Spec!O31	-
+Formato 2276 Spec!P31	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q31	N
+Formato 2276 Spec!R31	Amount
+Formato 2276 Spec!S31	Annual
+Formato 2276 Spec!A32	Voluntary contributions to the individual-account regime (RAIS)
+Formato 2276 Spec!B32	Aportes voluntarios al Regimen de Ahorro Individual con Solidaridad (RAIS)
+Formato 2276 Spec!C32	Values
+Formato 2276 Spec!D32	N25
+Formato 2276 Spec!E32	N
+Formato 2276 Spec!F32	C
+Formato 2276 Spec!G32	Populated where the employee made voluntary RAIS contributions. Distinct from 'Voluntary contributions to voluntary pension funds' (numeral 26) - different legal bases, and the electronic payroll cannot tell them apart (one element, NIE198).
+Formato 2276 Spec!H32	Numeral 25, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I32	18
+Formato 2276 Spec!J32	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K32	0
+Formato 2276 Spec!L32	SUM(Payroll.Voluntary_RAIS)
+Formato 2276 Spec!M32	Voluntary contributions to the mandatory individual-account regime (RAIS) under ET art. 55 and DUR 1625 de 2016 art. 1.2.1.12.9. DISTINCT from numeral 26 (voluntary contributions to a voluntary pension fund, ET art. 126-1). Source: wage type 25819 Voluntary Contribution to Mandatory Pension Plan, the same source as Form 220 casilla 55; the voluntary-fund ('FVOL') wage types 25811-25815 and 25823 feed numeral 26. A combined voluntary-pension total is never used as the source. Maps to Form 220 casilla 55.
+Formato 2276 Spec!N32	Y
+Formato 2276 Spec!O32	-
+Formato 2276 Spec!P32	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q32	N
+Formato 2276 Spec!R32	Amount
+Formato 2276 Spec!S32	Annual
+Formato 2276 Spec!A33	Voluntary contributions to voluntary pension funds
+Formato 2276 Spec!B33	Aportes voluntarios a fondos de pensiones voluntarias
+Formato 2276 Spec!C33	Values
+Formato 2276 Spec!D33	N26
+Formato 2276 Spec!E33	N
+Formato 2276 Spec!F33	C
+Formato 2276 Spec!G33	Populated where the employee made voluntary pension-fund contributions. Distinct from numeral 25.
+Formato 2276 Spec!H33	Numeral 26, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I33	18
+Formato 2276 Spec!J33	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K33	0
+Formato 2276 Spec!L33	SUM(Payroll.Voluntary_Pension_Fund)
+Formato 2276 Spec!M33	Voluntary contributions to voluntary pension funds under ET art. 126-1 and DUR 1625 de 2016 art. 1.2.1.22.41. DISTINCT from numeral 25 (voluntary contributions to the RAIS, ET art. 55). Source: the voluntary-fund ('FVOL') wage types 25811-25815, 25823 and, for retirees, 21141, the same source as Form 220 casilla 56; the institutional-plan wage types (25820, 25821, 21210, 21211, 21212, 65803, 65804) are reported here only for the amount deducted from the employee's labour income in the employee's name, the rule of Form 220 casilla 56 (ET art. 126-1; DUR 1625 de 2016 art. 1.2.1.22.41); employer contributions to institutional plans are distinguished through the employer- / employee-side attribute of each institutional-plan wage type, which comes from the WTC. A combined voluntary-pension total is never used as the source. Maps to Form 220 casilla 56.
+Formato 2276 Spec!N33	Y
+Formato 2276 Spec!O33	-
+Formato 2276 Spec!P33	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q33	N
+Formato 2276 Spec!R33	Amount
+Formato 2276 Spec!S33	Annual
+Formato 2276 Spec!A34	AFC account contributions
+Formato 2276 Spec!B34	Aportes a cuentas AFC
+Formato 2276 Spec!C34	Values
+Formato 2276 Spec!D34	N27
+Formato 2276 Spec!E34	N
+Formato 2276 Spec!F34	C
+Formato 2276 Spec!G34	Populated where AFC deductions were made.
+Formato 2276 Spec!H34	Numeral 27, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I34	18
+Formato 2276 Spec!J34	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K34	0
+Formato 2276 Spec!L34	SUM(Payroll.AFC)
+Formato 2276 Spec!M34	Ahorro para el Fomento de la Construccion: the employee's AFC contributions withheld through payroll in the tax year, by payment date. Source: the AFC deduction wage types (one wage type per bank, 'AFC <bank>'), summed across banks. A reimbursement / reversal wage type ('Reimbursement AFC') reverses an AFC deduction through payroll and is netted against the AFC deductions of the same tax year, so that the numeral carries the net amount actually withheld for the AFC account in the year (ET art. 126-4 counts the sums deposited in the account); the annual net value is reported as a positive integer, zero where the net is nil (Anexo T3.45 of Res. 000227/2025). Maps to Form 220 casilla 57 and to electronic payroll NIE179.
+Formato 2276 Spec!N34	Y
+Formato 2276 Spec!O34	-
+Formato 2276 Spec!P34	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q34	N
+Formato 2276 Spec!R34	Amount
+Formato 2276 Spec!S34	Annual
+Formato 2276 Spec!A35	AVC account contributions
+Formato 2276 Spec!B35	Aportes a cuentas AVC
+Formato 2276 Spec!C35	Values
+Formato 2276 Spec!D35	N28
+Formato 2276 Spec!E35	N
+Formato 2276 Spec!F35	C
+Formato 2276 Spec!G35	Populated where AVC deductions to the FNA were made.
+Formato 2276 Spec!H35	Numeral 28, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I35	18
+Formato 2276 Spec!J35	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K35	0
+Formato 2276 Spec!L35	SUM(Payroll.AVC)
+Formato 2276 Spec!M35	Voluntary savings Contractual with the Fondo Nacional del Ahorro. Maps to Form 220 casilla 58. The electronic payroll has NO dedicated element for AVC - it falls to OtraDeduccion (NIE197) - so the wage type must be tagged to recover the amount here.
+Formato 2276 Spec!N35	Y
+Formato 2276 Spec!O35	-
+Formato 2276 Spec!P35	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q35	N
+Formato 2276 Spec!R35	Amount
+Formato 2276 Spec!S35	Annual
+Formato 2276 Spec!A36	═══ withholding and vat(numerals 29 to 31) ═══
+Formato 2276 Spec!A37	Withholding on work or pension income
+Formato 2276 Spec!B37	Valor de las retenciones en la fuente por pagos de rentas de trabajo o pensiones
+Formato 2276 Spec!C37	Values
+Formato 2276 Spec!D37	N29
+Formato 2276 Spec!E37	N
+Formato 2276 Spec!F37	Y
+Formato 2276 Spec!H37	Numeral 29, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I37	18
+Formato 2276 Spec!J37	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K37	7404000
+Formato 2276 Spec!L37	SUM(Payroll.Income_Tax_Withheld)
+Formato 2276 Spec!M37	THE PRINCIPAL WITHHOLDING NUMERAL: the income-tax withholding ACTUALLY PRACTISED on the beneficiary's work or pension income in the tax year, by payment date (Anexo T3.45 of Res. 000227/2025, element vare). For a RESIDENT it is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Source: every wage type that records withholding actually practised and remitted - the employee income-tax wage type and the separate withholding wage types for terminations, retirees and equity awards. Hypothetical, notional or theoretical amounts are excluded: a tax-equalisation amount enters only to the extent it was actually withheld and declared on Form 350, and the contingent withholding of ET arts. 126-1 and 126-4, which the fund practises on a withdrawal, is never included. Maps to Form 220 casilla 60, likewise the withholding actually practised, and the sum across the population reconciles to twelve months of Form 350 casillas 93 plus 94.
+Formato 2276 Spec!N37	Y
+Formato 2276 Spec!O37	-
+Formato 2276 Spec!P37	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q37	N
+Formato 2276 Spec!R37	Amount
+Formato 2276 Spec!S37	Annual
+Formato 2276 Spec!A38	VAT as a higher cost or expense
+Formato 2276 Spec!B38	Impuesto sobre las Ventas (IVA), mayor valor del costo o gasto
+Formato 2276 Spec!C38	Values
+Formato 2276 Spec!D38	N30
+Formato 2276 Spec!E38	N
+Formato 2276 Spec!F38	C
+Formato 2276 Spec!G38	Populated by the employer's tax function, outside payroll, where non-deductible VAT attached to the payment. Payroll contributes nothing.
+Formato 2276 Spec!H38	Numeral 30, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I38	18
+Formato 2276 Spec!J38	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K38	0
+Formato 2276 Spec!L38	(employer tax function - outside payroll)
+Formato 2276 Spec!M38	Non-deductible VAT treated as a higher cost or expense. Not a payroll figure; present in the format because Format 2276 is a third-party information return covering all art. 383 work income, including payments to contractors.
+Formato 2276 Spec!N38	N
+Formato 2276 Spec!O38	-
+Formato 2276 Spec!P38	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q38	N
+Formato 2276 Spec!R38	Amount
+Formato 2276 Spec!S38	Annual
+Formato 2276 Spec!A39	VAT withholding
+Formato 2276 Spec!B39	Retencion en la fuente a titulo de Impuesto sobre las Ventas (IVA)
+Formato 2276 Spec!C39	Values
+Formato 2276 Spec!D39	N31
+Formato 2276 Spec!E39	N
+Formato 2276 Spec!F39	C
+Formato 2276 Spec!G39	Populated by the employer's tax function, outside payroll, where VAT was withheld from the payment. Payroll contributes nothing.
+Formato 2276 Spec!H39	Numeral 31, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I39	18
+Formato 2276 Spec!J39	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K39	0
+Formato 2276 Spec!L39	(employer tax function - outside payroll)
+Formato 2276 Spec!M39	VAT withheld on the payment. Not a payroll figure - Colombian employment income carries no VAT. Relevant only where the beneficiary is a VAT-responsible contractor paid under the art. 383 table.
+Formato 2276 Spec!N39	N
+Formato 2276 Spec!O39	-
+Formato 2276 Spec!P39	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q39	N
+Formato 2276 Spec!R39	Amount
+Formato 2276 Spec!S39	Annual
+Formato 2276 Spec!A40	═══ informative and special numerals(numerals 32 to 36) ═══
+Formato 2276 Spec!A41	Monthly meal payments up to 41 UVT
+Formato 2276 Spec!B41	Pagos por alimentacion mensuales hasta 41 UVT
+Formato 2276 Spec!C41	Values
+Formato 2276 Spec!D41	N32
+Formato 2276 Spec!E41	N
+Formato 2276 Spec!F41	C
+Formato 2276 Spec!G41	Populated where the employer made meal payments to a third party for an employee whose monthly salary does not exceed 310 UVT. Bidirectional pair with numeral 8 (the excess). Where the salary exceeds 310 UVT the whole payment falls to numeral 7 and BOTH this numeral and numeral 8 stay nil.
+Formato 2276 Spec!H41	Numeral 32, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I41	18
+Formato 2276 Spec!J41	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K41	0
+Formato 2276 Spec!L41	SUM(Payroll.Meal_Payment_Under_41UVT)
+Formato 2276 Spec!M41	INFORMATIVE ONLY. Res. 227 para. 1: the value of numeral 32 is informative and corresponds to ET art. 387-1. It does NOT enter the gross total in numeral 22. BIDIRECTIONAL PAIR WITH NUMERAL 8 (element vaex), which carries the excess above 41 UVT. Form 220 has NO counterpart casilla. Computed MONTH BY MONTH per employee: the meal payment to a third party up to 41 UVT (COP 2,147,334 in 2026), only in months where the employee's salary does not exceed 310 UVT (COP 16,235,940 in 2026); where the salary exceeds 310 UVT the whole payment is reported in numeral 7 (element pabop) and this numeral stays nil (Anexo T3.45 of Res. 000227/2025, element pagahuvt). Source: the meal-allowance-in-kind wage type(s) carrying the 'meal paid to a third party' attribute (e.g. 'Meal Allowance Inf.'); the attribute comes from the Wage Type Catalogue (WTC) and is carried only by meal payments made to a food supplier.
+Formato 2276 Spec!N41	Y
+Formato 2276 Spec!O41	-> Sheet 6: Umbrales UVT 2026
+Formato 2276 Spec!P41	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q41	N
+Formato 2276 Spec!R41	Amount
+Formato 2276 Spec!S41	Annual
+Formato 2276 Spec!A42	Average labour income of the last six months
+Formato 2276 Spec!B42	Valor ingreso laboral promedio de los ultimos seis meses. Unicamente para trabajadores que aplique el numeral 4 articulo 206 E.T.
+Formato 2276 Spec!C42	Values
+Formato 2276 Spec!D42	N33
+Formato 2276 Spec!E42	N
+Formato 2276 Spec!F42	C
+Formato 2276 Spec!G42	Populated ONLY for employees to whom ET art. 206 num. 4 applies - that is, where severance or its interest was paid or deposited. Bidirectional with numerals 18, 19 and 20: a record carrying any of those three should carry this average.
+Formato 2276 Spec!H42	Numeral 33, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I42	18
+Formato 2276 Spec!J42	N (positive integer: whole pesos, no decimals, no sign, no separators; zero when nil)
+Formato 2276 Spec!K42	13120000
+Formato 2276 Spec!L42	Payroll.Rolling_6M_Average_Labour_Income [Calculated: rolling 6-month average -- no dedicated WTC code; see CO-DIAN-004 row 51]
+Formato 2276 Spec!M42	The rolling six-month average that drives the ET art. 206 num. 4 severance exemption and its taper - full exemption where it does not exceed 350 UVT (COP 18,330,900 per month in 2026). The resolution restricts it expressly: 'UNICAMENTE para trabajadores que aplique el numeral 4 articulo 206 E.T.'. The engine must maintain the average YEAR-ROUND; it cannot be reconstructed from annual totals. HOW THE AVERAGE IS TAKEN: the monthly average SALARY ('salario mensual promedio', ET art. 206 num. 4) of six months - on termination or on a withdrawal of severance, the last six months of employment or the six months before the withdrawal; while the employment continues, the six months of the immediately preceding year at the time of the deposit to the fund; for employees outside the Ley 50 de 1990 regime, the six months before the employer recognises the severance (ET art. 27 num. 3) (DIAN Concepto 4443 de 2025).
+Formato 2276 Spec!N42	Y
+Formato 2276 Spec!O42	-> Sheet 6: Umbrales UVT 2026
+Formato 2276 Spec!P42	Positive integer in whole pesos - no decimals, no sign, no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2).
+Formato 2276 Spec!Q42	N
+Formato 2276 Spec!R42	Amount
+Formato 2276 Spec!S42	Annual
+Formato 2276 Spec!A43	Economic dependant document type and identification number
+Formato 2276 Spec!B43	Tipo de documento y numero de identificacion del dependiente economico
+Formato 2276 Spec!C43	Beneficiary
+Formato 2276 Spec!D43	N34
+Formato 2276 Spec!E43	Y
+Formato 2276 Spec!F43	C
+Formato 2276 Spec!G43	Populated only where the employee claimed the ET art. 387 para. 2 dependants deduction during the year. Bidirectional with Form 220 casillas 79 to 82, which carry the same dependant with the addition of the name and relationship.
+Formato 2276 Spec!H43	Numeral 34, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I43	2 + 20
+Formato 2276 Spec!J43	N (code) + AN (number)
+Formato 2276 Spec!K43	13 / 1122334455
+Formato 2276 Spec!L43	Employee.Dependant_Document_Type + Employee.Dependant_Document_Number
+Formato 2276 Spec!M43	COMPOSITE FIELD - document type and number of the economic dependant claimed under ET art. 387 para. 2. Sub-field 1 = document type code; sub-field 2 = the number. THIS IS THE FIELD DIAN USES TO CROSS-CHECK a dependant claimed by more than one taxpayer, which is why it must agree with Form 220 casillas 79 and 80 exactly.
+Formato 2276 Spec!N43	Y
+Formato 2276 Spec!O43	-
+Formato 2276 Spec!P43	Not an amount - no rounding.
+Formato 2276 Spec!Q43	N
+Formato 2276 Spec!R43	Identifier
+Formato 2276 Spec!S43	Annual
+Formato 2276 Spec!A44	Trust identification
+Formato 2276 Spec!B44	Identificacion del fideicomiso
+Formato 2276 Spec!C44	Reporting Entity
+Formato 2276 Spec!D44	N35
+Formato 2276 Spec!E44	N
+Formato 2276 Spec!F44	C
+Formato 2276 Spec!G44	MANDATORY where 'Reporting entity concept' (numeral 1) = 2 (Fiduciarias); MUST BE BLANK where numeral 1 = 1 (Informante general). Mutually exclusive with 'Contract participant document type and identification' (numeral 36). Bidirectional set with numeral 1.
+Formato 2276 Spec!H44	Numeral 35, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I44	14
+Formato 2276 Spec!J44	N (digits only; annex attribute identfc, XSD pattern [0-9]{0,14})
+Formato 2276 Spec!L44	Mercans.Fideicomiso_ID
+Formato 2276 Spec!M44	Populated ONLY where the reporting entity concept (numeral 1) is 2 - Fiduciarias - because the work income was paid out of trust assets. Res. 227 para. 4 directs that for an ordinary employer reporting under concept 1 this field 'no se debe diligenciar'.
+Formato 2276 Spec!N44	N
+Formato 2276 Spec!O44	-
+Formato 2276 Spec!P44	Not an amount - no rounding.
+Formato 2276 Spec!Q44	N
+Formato 2276 Spec!R44	Identifier
+Formato 2276 Spec!S44	Annual
+Formato 2276 Spec!A45	Contract participant document type and identification number
+Formato 2276 Spec!B45	Tipo documento e identificacion del participante en contrato
+Formato 2276 Spec!C45	Reporting Entity
+Formato 2276 Spec!D45	N36
+Formato 2276 Spec!E45	N
+Formato 2276 Spec!F45	C
+Formato 2276 Spec!G45	MANDATORY where 'Reporting entity concept' (numeral 1) is 3, 4, 5, 6, 7 or 8; MUST BE BLANK where numeral 1 = 1 or 2. Mutually exclusive with 'Trust identification' (numeral 35). Bidirectional set with numeral 1.
+Formato 2276 Spec!H45	Numeral 36, art. 1.3.7.1.1 (XML element DERIVED)
+Formato 2276 Spec!I45	2 + 20
+Formato 2276 Spec!J45	N (code) + AN (number)
+Formato 2276 Spec!L45	Mercans.Contract_Participant_ID
+Formato 2276 Spec!M45	COMPOSITE FIELD, populated ONLY where the reporting entity concept (numeral 1) is a collaboration-contract concept - 3 Mandatario, 4 Consorcio o Union Temporal, 5 Exploracion y explotacion, 6 Joint Venture, 7 Gestor en Cuentas en Participacion, 8 Convenios de cooperacion. Res. 227 para. 4 directs that for concept 1 it 'no se debe diligenciar', and that where a collaboration contract IS reported, the trust field (numeral 35) is left blank instead.
+Formato 2276 Spec!N45	N
+Formato 2276 Spec!O45	-
+Formato 2276 Spec!P45	Not an amount - no rounding.
+Formato 2276 Spec!Q45	N
+Formato 2276 Spec!R45	Identifier
+Formato 2276 Spec!S45	Annual
+Formato 2276 Spec!A46	═══ filing control fields(not numerals - envelope and deadline drivers) ═══
+Formato 2276 Spec!A47	Informant NIT
+Formato 2276 Spec!B47	NIT del informante
+Formato 2276 Spec!C47	Envelope
+Formato 2276 Spec!D47	ENV-01
+Formato 2276 Spec!E47	Y
+Formato 2276 Spec!F47	Y
+Formato 2276 Spec!H47	Envelope (DERIVED)
+Formato 2276 Spec!I47	Var
+Formato 2276 Spec!J47	N
+Formato 2276 Spec!K47	900123456
+Formato 2276 Spec!L47	Company.NIT
+Formato 2276 Spec!M47	NIT of the reporting employer. Res. 227 art. 1.3.9.1.3 keys the DEADLINE to it: the LAST digit for a Gran Taxpayer, the LAST TWO digits for a legal or natural person. This is a third deadline rule, different again from Form 350 (last digit, 7th-16th business day) and PILA (last two digits, 2nd-16th business day).
+Formato 2276 Spec!N47	Y
+Formato 2276 Spec!O47	-> Sheet 6: Calendario de la exogena
+Formato 2276 Spec!P47	Not an amount - no rounding.
+Formato 2276 Spec!Q47	N
+Formato 2276 Spec!R47	Identifier
+Formato 2276 Spec!S47	Annual
+Formato 2276 Spec!A48	Taxpayer category
+Formato 2276 Spec!B48	Calidad del informante
+Formato 2276 Spec!C48	Envelope
+Formato 2276 Spec!D48	ENV-02
+Formato 2276 Spec!E48	N
+Formato 2276 Spec!F48	Y
+Formato 2276 Spec!H48	Envelope (DERIVED)
+Formato 2276 Spec!I48	Var
+Formato 2276 Spec!J48	Code
+Formato 2276 Spec!K48	Persona juridica
+Formato 2276 Spec!L48	Mercans.Taxpayer_Category
+Formato 2276 Spec!M48	Gran Taxpayer, persona legal entity or equivalent, or natural person y asimilada. Res. 227 art. 1.3.9.1.3 para. 1 fixes the point at which it is tested: 'de acuerdo con la calidad de Gran Taxpayer, legal entity o natural person QUE SE POSEA EN EL MOMENTO DE INFORMAR' - the status held at the moment of filing, not at the year end being reported.
+Formato 2276 Spec!N48	N
+Formato 2276 Spec!O48	-> Sheet 6: Calendario de la exogena
+Formato 2276 Spec!P48	Not an amount - no rounding.
+Formato 2276 Spec!Q48	N
+Formato 2276 Spec!R48	Code
+Formato 2276 Spec!S48	Annual
+Formato 2276 Spec!A49	Tax year reported
+Formato 2276 Spec!B49	Ano gravable
+Formato 2276 Spec!C49	Envelope
+Formato 2276 Spec!D49	ENV-03
+Formato 2276 Spec!E49	N
+Formato 2276 Spec!F49	Y
+Formato 2276 Spec!H49	Envelope (DERIVED)
+Formato 2276 Spec!I49	4
+Formato 2276 Spec!J49	N (AAAA)
+Formato 2276 Spec!K49	2026
+Formato 2276 Spec!L49	PayPeriod.Year
+Formato 2276 Spec!M49	The fiscal year whose payments are reported (AAAA). Every amount numeral (5 to 33) is the sum of payments or credits in account made between 1 January and 31 December of this year, by PAYMENT date - never a rolling twelve-month window or an accumulator spanning two calendar years. Filed in May or June of the FOLLOWING calendar year. In the XML header (element Cab, Anexo T3.45) the tax year is carried by FecInicial and FecFinal - the first and last day of the tax year reported, format AAAA-MM-DD - while the header attribute Ano is the YEAR OF SENDING (año de envío, the same aaaa as in the file name), not the tax year: for the 2026 return filed in 2027, Ano = 2027, FecInicial = 2026-01-01 and FecFinal = 2026-12-31.
+Formato 2276 Spec!N49	Y
+Formato 2276 Spec!O49	-
+Formato 2276 Spec!P49	Not an amount - no rounding.
+Formato 2276 Spec!Q49	N
+Formato 2276 Spec!R49	Date
+Formato 2276 Spec!S49	Annual
+Formato 2276 Spec!A50	Format and version
+Formato 2276 Spec!B50	Formato y version
+Formato 2276 Spec!C50	Envelope
+Formato 2276 Spec!D50	ENV-04
+Formato 2276 Spec!E50	N
+Formato 2276 Spec!F50	Y
+Formato 2276 Spec!H50	Envelope (DERIVED)
+Formato 2276 Spec!I50	5 + 2
+Formato 2276 Spec!J50	Code
+Formato 2276 Spec!K50	2276 / 4
+Formato 2276 Spec!L50	Mercans.Exogena_Format_Version
+Formato 2276 Spec!M50	A CONSTANT for this filing: Format 2276, version 4, carried in the file name as mmmmm = 02276 and vv = 04 (Dmuisca_ccmmmmmvvaaaacccccccc.xml). Res. 227 art. 1.3.10.1 lists it in the formats-and-technical-specifications table as T3.45. A version mismatch is rejected at upload.
+Formato 2276 Spec!N50	N
+Formato 2276 Spec!O50	-> Sheet 6: Formato y version
+Formato 2276 Spec!P50	Not an amount - no rounding.
+Formato 2276 Spec!Q50	N
+Formato 2276 Spec!R50	Code
+Formato 2276 Spec!S50	Annual
+File Structure!A1	FILE STRUCTURE AND TECHNICAL SPECIFICATIONS
+File Structure!A2	═══ SUBMISSION FORMAT ═══
+File Structure!A3	Channel
+File Structure!B3	file_upload into the DIAN third-party (exogenous) information service at www.dian.gov.co, in an authenticated portal session signed with the Electronic Signature Instrument (IFE).
+File Structure!A4	File format
+File Structure!B4	XML prepared to the DIAN technical specifications for Format 2276 version 4: an XML document in ISO-8859-1 encoding, named Dmuisca_ccmmmmmvvaaaacccccccc.xml (cc = 01 insertion / 02 replacement, mmmmm = format 02276, vv = version 04, aaaa = year of sending (four digits; Anexo T3.45), cccccccc = consecutive file number), with at most 5,000 records per file. DIAN Resolution 000227 of 2025 art. 1.3.10.1 lists the format in its formats-y-especificaciones-tecnicas table as entry T3.45, version 4.
+File Structure!A5	Technical specifications
+File Structure!B5	The technical specifications annex of Format 2276 version 4 fixes the XML ELEMENT NAMES, the field ordering and the column lengths; it is a SEPARATE document from Res. 227, which prescribes WHAT to report, not how the file is shaped. Every element path in this specification is therefore a logical name marked DERIVED. The productive layout is configured from the published technical specifications.
+File Structure!A6	Why this is NOT machine-to-machine
+File Structure!B6	There is no SOAP service, no XAdES document signature and no synchronous ApplicationResponse. Contrast the electronic payroll (CO-DIAN-001), which has all three. Here the employer uploads through an authenticated portal session and reads the outcome on screen.
+File Structure!A7	What the model below is
+File Structure!B7	A NEUTRAL FIELD MODEL - the resolution's own thirty-six numerals in their published order, plus the envelope attributes the deadline depends on. It is a LOGICAL MODEL, not the wire format.
+File Structure!A8	═══ LOGICAL MODEL - ONE RECORD PER BENEFICIARY ═══
+File Structure!A9	Envelope
+File Structure!B9	Informant NIT | Taxpayer category (Gran Taxpayer / legal entity / natural person) | Tax year | Format 2276 version 4. In the XML the header element Cab carries, all mandatory (Anexo T3.45 section 2.1): Ano (year of sending, AAAA), CodCpt (1 = insertion, 2 = replacement), Formato (2276), Version (4), NumEnvio (consecutive number of the sending within the year, up to 8 digits), FecEnvio (AAAA-MM-DDTHH:MM:SS), FecInicial and FecFinal (first and last day of the tax year reported, AAAA-MM-DD), ValorTotal (control total - defined by the annex as the sum of the attribute tdocb across the records) and CantReg (number of rentra records in the file, at most 5,000). The informant NIT and the taxpayer category are not header attributes: they come from the portal session and drive the deadline.
+File Structure!A10	Block 1 - Reporting entity
+File Structure!B10	N01 Entidad informante (code 1 to 8) | N35 Identificacion del fideicomiso (only where N01 = 2) | N36 Tipo documento e identificacion del participante en contrato (only where N01 is 3 to 8)
+File Structure!A11	Block 2 - Beneficiary
+File Structure!B11	N02 Tipo de documento y numero de identificacion | N03 Surnames and given names | N04 Ubicacion (direccion, departamento, municipio y pais - pais always populated; direccion, departamento and municipio only where the country of residence is Colombia, Anexo T3.45 of Res. 000227/2025)
+File Structure!A12	Block 3 - Income
+File Structure!B12	N05 Salaries | N06 Emolumentos eclesiasticos | N07 Bonos, cheques, tarjetas, vales | N08 Exceso alimentacion > 41 UVT | N09 Fees | N10 Services | N11 Commissions | N12 Prestaciones sociales | N13 Travel allowances | N14 Representation expenses | N15 Compensaciones trabajo cooperative associate | N16 Educational financial support | N17 Other payments
+File Structure!A13	Block 4 - Cesantias
+File Structure!B13	N18 Cesantias e intereses de cesantias efectivamente pagadas al empleado | N19 Consignadas al fondo | N20 Regimen tradicional del CST
+File Structure!A14	Block 5 - Pensiones y total
+File Structure!B14	N21 Pensiones de jubilacion, old age or disability | N22 TOTAL GROSS INCOME
+File Structure!A15	Block 6 - Contributions
+File Structure!B15	N23 Compulsory contributions salud | N24 Compulsory pension and solidarity contributions | N25 Voluntary contributions RAIS | N26 Voluntary contributions to pension funds | N27 Contributions AFC | N28 Contributions AVC
+File Structure!A16	Block 7 - Withholdings e IVA
+File Structure!B16	N29 Valor de las retenciones en la fuente por pagos de rentas de trabajo o pensiones | N30 Impuesto sobre las Ventas (IVA), mayor valor del costo o gasto | N31 Retencion en la fuente a titulo de Impuesto sobre las Ventas (IVA)
+File Structure!A17	Block 8 - Informativos y especiales
+File Structure!B17	N32 Alimentacion hasta 41 UVT (INFORMATIVE, outside N22) | N33 Average employment income ultimos 6 meses | N34 Economic dependant
+File Structure!A18	═══ INTERPRETIVE RULES PRINTED IN RES. 227 ART. 1.30.7.1.1 ═══
+File Structure!A19	Paragrafo 1
+File Structure!B19	Numeral 32 (meal payments up to 41 UVT) 'se considera de caracter informativo'. It therefore does NOT enter the gross total in numeral 22.
+File Structure!A20	Paragrafo 2
+File Structure!B20	'Las casillas de valores son de obligatorio diligenciamiento. En caso de no tener ningun valor, se deben diligenciar con cero (0).' Every value field is populated; write ZERO, never blank.
+File Structure!A21	Paragrafo 3
+File Structure!B21	The eight-value Reporting entity code table - reproduced on Sheet 6.
+File Structure!A22	Paragrafo 4
+File Structure!B22	For an ordinary employer the Reporting entity is concept 1 (Informante general), and numerals 35 and 36 are NOT filled. Where the income is paid out of trust assets, concept 2 plus numeral 35 and no numeral 36. Where it is paid under a collaboration contract, the contract concept plus numeral 36 and no numeral 35.
+File Structure!A23	Paragrafo 5
+File Structure!B23	Payments to natural persons receiving work income NOT from an employment, legal or statutory relationship, but withheld under ET art. 383, ARE reported in Format 2276. Where art. 383 withholding did NOT apply, they are reported in the ordinary payments-and-withholdings formats instead.
+File Structure!A24	Paragrafo 6
+File Structure!B24	'El valor reportado en el numeral 7, no debe contener la informacion reportada en los demas numerales del Formato 2276.' Numeral 7 is residual - it must not double-report anything already in another numeral.
+File Structure!A25	Paragrafo 7
+File Structure!B25	Educational support paid DIRECTLY by the employer goes to numeral 16; support administered by a THIRD PARTY goes to Format 5247 concept 5102. Added by Resolution 188 of 2024 art. 8; first applies to tax year 2025, filed in calendar 2026 (art. 1.3.9.1.3 para. 5).
+File Structure!A26	═══ AMOUNT AND ROUNDING CONVENTION ═══
+File Structure!A27	Rounding
+File Structure!B27	Positive integers in whole pesos - no decimals, no sign, no thousand separators - zero-filled where nil (Anexo T3.45 of Res. 000227/2025; art. 1.3.7.1.1 par. 2). This is the fourth Colombian convention encountered across the six filings, alongside the electronic payroll (2 decimals round-half-to-even), PILA (round UP to the next 100) and Form 350 and 220 (nearest 1,000). Store the unrounded value once and apply each convention at output.
+File Structure!A28	Nil values
+File Structure!B28	Write ZERO. Res. 227 para. 2 is explicit, and the technical specification (Anexo T3.45 of Res. 000227/2025) takes positive integer values only. This matches Form 220 and INVERTS the electronic payroll, where an inapplicable element is omitted.
+File Structure!A29	═══ FILING CALENDAR - RES. 227 ART. 1.30.9.1.3 ═══
+File Structure!A30	Grandes Taxpayers
+File Structure!B30	By the LAST digit of the NIT: 1 = 17th business day of April; 2 = 18th business day of April; 3 = 1st business day of May; 4 = 2nd; 5 = 3rd; 6 = 4th; 7 = 5th; 8 = 6th; 9 = 7th; 0 = 8th business day of May.
+File Structure!A31	Legal entities y naturales
+File Structure!B31	By the LAST TWO digits of the NIT, in five-number bands: 01-05 = 9th business day of May, rising one business day per band through 51-55 = 19th business day of May, then 56-60 = 1st business day of June, through 96-00 = 9th business day of June.
+File Structure!A32	Category tested at filing
+File Structure!B32	Art. 1.3.9.1.3 para. 1: the Gran Taxpayer, legal-person or natural-person status is the one held AT THE MOMENT OF FILING, not at the year end being reported.
+File Structure!A33	Three different deadline rules
+File Structure!B33	Form 350 uses the LAST digit and the 7th-16th business day of the following MONTH. PILA uses the LAST TWO digits and the 2nd-16th business day of the following MONTH. This return uses the LAST digit for Grandes Taxpayers and the LAST TWO for everyone else, in MAY or JUNE of the following YEAR. Do not generalise one rule to another filing.
+Field Options!A1	FIELD OPTIONS - CODE TABLES
+Field Options!A2	Code
+Field Options!B2	Abbrev
+Field Options!C2	Local (ES)
+Field Options!D2	EN Description
+Field Options!A3	═══ ENTIDAD INFORMANTE (NUMERAL 1) - RES. 227 ART. 1.3.7.1.1 PAR. 3, VERBATIM ═══
+Field Options!A4	1
+Field Options!B4	GEN
+Field Options!C4	Informante general
+Field Options!D4	THE VALUE FOR AN ORDINARY EMPLOYER. Par. 4: 'cuando el empleador reporte pagos o abonos en cuenta por concepto de rentas de trabajo y de pensiones, la casilla "Entidad Informante" se debe diligenciar con el concepto "1- Informante general"', and numerals 35 and 36 are left blank.
+Field Options!A5	2
+Field Options!B5	FID
+Field Options!C5	Fiduciarias
+Field Options!D5	Where the work income is paid out of trust assets. Requires numeral 35 (identificacion del fideicomiso); numeral 36 stays blank.
+Field Options!A6	3
+Field Options!B6	MAND
+Field Options!C6	Mandatario y/o Administrador delegado
+Field Options!D6	Requires numeral 36 (contract participants); numeral 35 stays blank.
+Field Options!A7	4
+Field Options!B7	CONS
+Field Options!C7	Consorcio y/o Union Temporal
+Field Options!D7	Requires numeral 36.
+Field Options!A8	5
+Field Options!B8	HIDRO
+Field Options!C8	Exploracion y Explotacion de hidrocarburos, gases y minerales
+Field Options!D8	Requires numeral 36.
+Field Options!A9	6
+Field Options!B9	JV
+Field Options!C9	Joint Venture
+Field Options!D9	Requires numeral 36.
+Field Options!A10	7
+Field Options!B10	CP
+Field Options!C10	Gestor en Cuentas en Participacion
+Field Options!D10	Requires numeral 36.
+Field Options!A11	8
+Field Options!B11	COOP-PUB
+Field Options!C11	Convenios de cooperacion con entidades publicas
+Field Options!D11	Requires numeral 36.
+Field Options!A12	═══ LAS TRES LINEAS DE CESANTIAS (NUMERALS 18, 19, 20) - ORDER DIFFERS FROM FORM 220 ═══
+Field Options!A13	N18
+Field Options!B13	PAGADA
+Field Options!C13	Cesantias e intereses efectivamente pagadas al empleado
+Field Options!D13	Amounts ACTUALLY PAID to the employee. Form 220 casilla 47. Same position in both.
+Field Options!A14	N19
+Field Options!B14	FONDO
+Field Options!C14	Cesantias consignadas al fondo de cesantias
+Field Options!D14	Deposited to the fund under Law 50 of 1990 art. 99 and counted in the year the deposit is MADE - the February deposit belongs to the year of the deposit (ET art. 27 num. 3; Anexo T3.45 of Res. 000227/2025, element ceco). FORM 220 CASILLA 49 - NOT 48.
+Field Options!A15	N20
+Field Options!B15	TRADICIONAL
+Field Options!C15	Auxilio de cesantias del regimen tradicional del CST
+Field Options!D15	Pre-1991 retroactive regime. FORM 220 CASILLA 48 - NOT 49.
+Field Options!A16	(mapping warning)
+Field Options!B16	-
+Field Options!C16	-
+Field Options!D16	THE SECOND AND THIRD LINES ARE TRANSPOSED between the two artefacts. A positional mapping - 47 to 18, 48 to 19, 49 to 20 - swaps the fund deposit and the traditional-regime amount. Map by MEANING.
+Field Options!A17	═══ UMBRALES UVT 2026 (UVT = COP 52,374, RES. DIAN 238 DE 15 DIC 2025) ═══
+Field Options!A18	41 UVT
+Field Options!B18	2,147,334
+Field Options!C18	Tope mensual de alimentacion, art. 387-1
+Field Options!D18	Meal payments to a third party up to this monthly amount are NOT income of the employee. They go to numeral 32 as INFORMATIVE and stay outside the gross total in numeral 22. The excess goes to numeral 8 as taxable income.
+Field Options!A19	310 UVT
+Field Options!B19	16,235,940
+Field Options!C19	Salario mensual maximo para el beneficio de alimentacion
+Field Options!D19	Where the employee's monthly salary EXCEEDS this, the art. 387-1 exclusion does not apply at all: the whole meal payment falls to numeral 7 (Anexo T3.45 of Res. 000227/2025, element pabop) and BOTH numeral 8 (element vaex) and numeral 32 (element pagahuvt) stay nil.
+Field Options!A20	350 UVT
+Field Options!B20	18,330,900
+Field Options!C20	Ingreso laboral promedio para la exencion de cesantias, art. 206 num. 4
+Field Options!D20	Severance and interest are exempt in full where the six-month average in numeral 33 does not exceed this; tapered above.
+Field Options!A21	1,000 UVT
+Field Options!B21	52,374,000
+Field Options!C21	Tope mensual exento de pensiones, art. 206 num. 5
+Field Options!D21	Employer-paid pension income is taxable only above this monthly amount. Numeral 21.
+Field Options!A22	32 UVT
+Field Options!B22	1,675,968
+Field Options!C22	Tope mensual de la deduccion por dependientes, art. 387 par. 2
+Field Options!D22	The dependants deduction is 10% of gross employment income capped at this monthly amount. The dependant is identified in numeral 34.
+Field Options!A23	═══ TIPO DE DOCUMENTO (NUMERALS 2 AND 34) - THE DIAN NUMERIC CATALOGUE (ANEXO TECNICO DE LA NOMINA ELECTRONICA, TABLE 5.2.1). RES. 227 DOES NOT PRINT THE LIST; THE ESPECIFICACIONES TECNICAS OF THE EXOGENA REUSE THE DIAN CATALOGUE, SO THE CODES BELOW ARE DERIVED FROM TABLE 5.2.1 AND ARE THE SAME TABLE THE DATA DICTIONARY MAPPER 'EMPLOYEE DOCUMENT TYPE' HOLDS. THE PRODUCTIVE CODE LIST IS TAKEN FROM THE ESPECIFICACIONES TECNICAS OF FORMATO 2276 VERSION 4 AT CONFIGURATION ═══
+Field Options!A24	11
+Field Options!B24	RC
+Field Options!C24	Registro civil
+Field Options!D24	Civil birth registration. Realistic only at numeral 34 (economic dependant), never at numeral 2.
+Field Options!A25	12
+Field Options!B25	TI
+Field Options!C25	Tarjeta de identidad
+Field Options!D25	Identity card for a person aged 7 to 17.
+Field Options!A26	13
+Field Options!B26	CC
+Field Options!C26	Cedula de ciudadania
+Field Options!D26	National identity card. The great majority of beneficiaries and dependants.
+Field Options!A27	21
+Field Options!B27	TE
+Field Options!C27	Tarjeta de extranjeria
+Field Options!D27	Foreigner's identity card.
+Field Options!A28	22
+Field Options!B28	CE
+Field Options!C28	Cedula de extranjeria
+Field Options!D28	Foreign resident's identity card.
+Field Options!A29	31
+Field Options!B29	NIT
+Field Options!C29	NIT
+Field Options!D29	Tax identification number, where the beneficiary is an entity.
+Field Options!A30	41
+Field Options!B30	PA
+Field Options!C30	Pasaporte
+Field Options!D30	Passport.
+Field Options!A31	42
+Field Options!B31	DIE
+Field Options!C31	Documento de identificacion extranjero
+Field Options!D31	Foreign identity document.
+Field Options!A32	47
+Field Options!B32	PEP
+Field Options!C32	PEP - Permiso Especial de Permanencia
+Field Options!D32	Special residence permit. The catalogue has no code for the PPT.
+Field Options!A33	50
+Field Options!B33	NIT-EXT
+Field Options!C33	NIT de otro pais
+Field Options!D33	Foreign tax identification number.
+Field Options!A34	91
+Field Options!B34	NUIP
+Field Options!C34	NUIP
+Field Options!D34	Unique personal identification number; employee only.
+Field Options!A35	(mapping warning)
+Field Options!B35	-
+Field Options!C35	-
+Field Options!D35	THREE artefacts, THREE catalogues. Form 220 prints a SIX-value list (12, 13, 21, 22, 31, 41) and PILA uses two-letter codes (CC, CE, TI, PA, CD, SC, RC, PE). Map by MEANING through the Data Dictionary master value; never copy a code between channels.
+Field Options!A36	═══ DIVIPOLA (DANE) - NUMERAL 4 ═══
+Field Options!A37	11 / 001
+Field Options!B37	BOG
+Field Options!C37	Bogota D.C. - departamento y municipio
+Field Options!D37	The beneficiary's location. NOT the same question as the electronic payroll place of work (NIE051 / NIE052) or the Form 220 place where the withholding was practised (casillas 34 / 35) - three artefacts, three different geographic questions about the same person. In the technical specification (Anexo T3.45 of Res. 000227/2025) the location block carries the address, the department, the municipality and the country: the country is always populated; address, department and municipality only where the country of residence is Colombia.
+Field Options!A38	═══ CALENDARIO DE LA EXOGENA - RES. 227 ART. 1.3.9.1.3 ═══
+Field Options!A39	GC last digit 1
+Field Options!B39	-
+Field Options!C39	Decimo septimo dia habil del mes de abril
+Field Options!D39	Grandes Taxpayers.
+Field Options!A40	GC last digit 2
+Field Options!B40	-
+Field Options!C40	Decimo octavo dia habil del mes de abril
+Field Options!D40	Grandes Taxpayers.
+Field Options!A41	GC last digits 3-0
+Field Options!B41	-
+Field Options!C41	Primer a octavo dia habil del mes de mayo
+Field Options!D41	Grandes Taxpayers: 3 = 1st business day of May, then one business day per digit through 0 = 8th business day of May.
+Field Options!A42	PJ/PN 01-05
+Field Options!B42	-
+Field Options!C42	Noveno dia habil del mes de mayo
+Field Options!D42	Legal entities y naturales, by the LAST TWO digits of the NIT.
+Field Options!A43	PJ/PN 06-55
+Field Options!B43	-
+Field Options!C43	Decimo a decimo noveno dia habil del mes de mayo
+Field Options!D43	One business day per five-number band.
+Field Options!A44	PJ/PN 56-00
+Field Options!B44	-
+Field Options!C44	Primer a noveno dia habil del mes de junio
+Field Options!D44	The bands continue into June: 56-60 = 1st business day of June through 96-00 = 9th business day of June.
+Field Options!A45	(par. 1)
+Field Options!B45	-
+Field Options!C45	Calidad al momento de informar
+Field Options!D45	The Gran Taxpayer, legal-person or natural-person status used is the one held AT THE MOMENT OF FILING, not at the reported year end.
+Field Options!A46	═══ FORMATO Y VERSION ═══
+Field Options!A47	2276 / 4
+Field Options!B47	T3.45
+Field Options!C47	Informacion de rentas de trabajo y pensiones, version 4
+Field Options!D47	Listed in the formats-y-especificaciones-tecnicas table at Res. 227 art. 1.3.10.1 as entry T3.45. A version mismatch is rejected at upload.
+Field Options!A48	5247 / -
+Field Options!B48	-
+Field Options!C48	Formato para apoyos economicos administrados por terceros
+Field Options!D48	NOT a payroll filing. Educational support ADMINISTERED BY A THIRD PARTY is reported there under concept 5102 instead of at numeral 16 here (Res. 227 para. 7).
+Field Options!A49	═══ NUMERALS THAT ARE NOT PAYROLL FIELDS ═══
+Field Options!A50	N30 / N31
+Field Options!B50	-
+Field Options!C50	IVA mayor valor del costo o gasto / Retencion de IVA
+Field Options!D50	Colombian employment income carries no VAT. Relevant only where the beneficiary is a VAT-responsible contractor paid under the ET art. 383 table. Owned by the employer's tax function, outside payroll.
+Field Options!A51	N35 / N36
+Field Options!B51	-
+Field Options!C51	Fideicomiso / participante en contrato
+Field Options!D51	Res. 227 para. 4: for an ordinary employer reporting under concept 1 they 'no se deben diligenciar'. Mutually exclusive with each other.
+Population Rules!A1	POPULATION RULES - HOW TO FILL EACH FIELD FROM PAYROLL
+Population Rules!A2	Field Name
+Population Rules!B2	Source System
+Population Rules!C2	Population Logic
+Population Rules!D2	Edge Cases
+Population Rules!A3	═══ MANDATORY FIELD RULES ═══
+Population Rules!A4	Numeral 1 - Reporting entity
+Population Rules!B4	Configuration
+Population Rules!C4	For an ordinary employer reporting employment and pension income, set the code to 1 - Informante general - and leave numerals 35 and 36 BLANK. Res. 227 para. 4 states this in terms. Depart from concept 1 only where the income was genuinely paid out of trust assets (concept 2, plus numeral 35) or under a collaboration contract (conceptos 3 to 8, plus numeral 36).
+Population Rules!D4	The three cases are mutually exclusive and each drives a different pair of numerals. Getting the concept wrong changes which identifier fields DIAN expects and produces a validation failure rather than a silent misstatement.
+Population Rules!A5	Numerals 5 to 21 - the income concepts
+Population Rules!B5	Payroll engine
+Population Rules!C5	Accumulate each concept separately for the whole tax year on the PAYMENT date. Then apply the two exclusion rules the resolution imposes: para. 6 forbids numeral 7 from repeating anything reported in another numeral, and para. 7 sends third-party-administered educational support to Format 5247 rather than to numeral 16.
+Population Rules!D5	Note two concepts that Form 220 does NOT separate: numeral 6 (ecclesiastical emoluments), which Form 220 folds into casilla 39, and numeral 32 (meal payments up to 41 UVT), for which Form 220 has no casilla at all.
+Population Rules!A6	Numeral 22 - Total gross income
+Population Rules!B6	Engine (computed)
+Population Rules!C6	Sum numerals 5 to 21. DO NOT include numeral 32: para. 1 makes it informative, because meal payments below the threshold are income of the food supplier and not of the employee. Assert that numeral 22 equals Form 220 casilla 52 for the same employee and year.
+Population Rules!D6	Including numeral 32 in the total overstates the employee's gross income and breaks the reconciliation to Form 220 - and it is an easy mistake because every other value numeral does enter the total.
+Population Rules!A7	Numeral 33 - Average employment income
+Population Rules!B7	Payroll engine
+Population Rules!C7	Populate ONLY for employees to whom ET art. 206 num. 4 applies - that is, where severance or its interest was paid or deposited in the year, so that numerals 18, 19 or 20 are non-zero. The resolution says 'UNICAMENTE'. Maintain the rolling six-month average year-round; on a termination use the last six months OF EMPLOYMENT.
+Population Rules!D7	The average cannot be reconstructed from annual totals at year end. Populating it for every employee regardless is also wrong: the resolution restricts it, and an unnecessary value invites an enquiry.
+Population Rules!A8	Numeral 34 - Economic dependant
+Population Rules!B8	Employee master data
+Population Rules!C8	Populate the document type and number of each dependant claimed under ET art. 387 para. 2 during the year. Keep it byte-identical to Form 220 casillas 79 and 80.
+Population Rules!D8	THIS IS THE FIELD DIAN USES TO CROSS-CHECK a dependant claimed by more than one taxpayer - typically both parents claiming the same child. A divergence between this return and the certificate the employee holds produces an enquiry to the employee, not to the employer.
+Population Rules!A9	═══ CRITICAL VALIDATION RULES ═══
+Population Rules!A10	Write zero, never blank
+Population Rules!B10	Engine (formatting)
+Population Rules!C10	Res. 227 para. 2: 'Las casillas de valores son de obligatorio diligenciamiento. En caso de no tener ningun valor, se deben diligenciar con cero (0).' Every value numeral is populated, as a positive integer (Anexo T3.45 of Res. 000227/2025).
+Population Rules!D10	Matches Form 220 and INVERTS the electronic payroll, where an inapplicable element is omitted rather than zero-filled. Two DIAN artefacts, two opposite conventions.
+Population Rules!A11	Numeral 7 must not double-report
+Population Rules!B11	Engine (validation)
+Population Rules!C11	Par. 6 forbids numeral 7 from containing anything reported in another numeral. Before filing, assert that no amount is counted both in numeral 7 and in numerals 5, 8, 12, 17 or elsewhere.
+Population Rules!D11	The risk is real because voucher and card payments can plausibly be classified as salary (numeral 5), as a meal benefit (numerals 8 or 32) or as other payments (numeral 17). Fix the classification on the wage type, once.
+Population Rules!A12	The meal-payment fork
+Population Rules!B12	Payroll engine
+Population Rules!C12	Apply the two ET art. 387-1 tests MONTHLY and in sequence. First: does the employee's monthly salary exceed 310 UVT (COP 16,235,940 in 2026)? If YES, the whole meal payment goes to numeral 7 and both numeral 8 and numeral 32 stay nil for that month. If NO, split the payment at 41 UVT (COP 2,147,334): the part up to the threshold goes to numeral 32 (informative), and the EXCESS goes to numeral 8 (taxable). ET art. 387-1; Anexo T3.45 of Res. 000227/2025, elements pabop, vaex and pagahuvt.
+Population Rules!D12	Three possible destinations for one payment, decided monthly. An employee can fork one way in some months and the other way in others within the same annual record, so the accumulation must be per month and then summed - not decided once on the annual figures.
+Population Rules!A13	Numerals 35 and 36 are mutually exclusive
+Population Rules!B13	Engine (validation)
+Population Rules!C13	Numeral 35 is populated only where numeral 1 = 2; numeral 36 only where numeral 1 is 3 to 8; both blank where numeral 1 = 1. Never both.
+Population Rules!D13	Res. 227 par. 4 spells out each of the three cases explicitly.
+Population Rules!A14	Numerals 19 and 20 are mutually exclusive per employee
+Population Rules!B14	Engine (validation)
+Population Rules!C14	An employee is in the Ley 50 de 1990 fund-deposit regime or in the pre-1991 traditional regime, not both. Assert that at most one of numerals 19 and 20 is non-zero for any beneficiary.
+Population Rules!D14	The only exception is a formal regime election in the transition year - rare enough to warrant an explicit override rather than a silent allowance.
+Population Rules!A15	═══ AMOUNT FORMAT RULES ═══
+Population Rules!A16	Whole pesos, no separators
+Population Rules!B16	Engine (formatting)
+Population Rules!C16	Amounts are positive integers in whole Colombian pesos with no decimals, no sign and no thousand separators; zero when there is no value (Anexo T3.45 of Res. 000227/2025; Res. 227 para. 2). Round once, at the annual accumulation, not per month.
+Population Rules!D16	This is the fourth rounding convention across the six filings. Store the unrounded value once and apply each convention at output; never derive one artefact's figures from another's rounded output.
+Population Rules!A17	Numeral 24 combines two concepts
+Population Rules!B17	Engine (accumulation)
+Population Rules!C17	Numeral 24 carries mandatory PENSION contributions AND the solidarity-fund surcharge in one figure, exactly as Form 220 casilla 54 does. The electronic payroll reports three separate elements and PILA three separate campos.
+Population Rules!D17	Sum them only at this point. Combining them earlier makes the monthly artefacts impossible to produce correctly.
+Population Rules!A18	Numerals 25 and 26 split one electronic payroll element
+Population Rules!B18	Engine (accumulation)
+Population Rules!C18	Numeral 25 is voluntary RAIS contributions under ET art. 55; numeral 26 is voluntary contributions to VOLUNTARY pension funds under ET art. 126-1. The electronic payroll has ONE element for both (PensionVoluntaria, NIE198).
+Population Rules!D18	Carry the distinction on the wage type from configuration. It cannot be recovered from the XML at year end.
+Population Rules!A19	Numeral 28 has no electronic payroll element
+Population Rules!B19	Engine (accumulation)
+Population Rules!C19	AVC contributions to the Fondo Nacional del Ahorro have no dedicated electronic payroll element and fall to OtraDeduccion (NIE197). Tag the wage type so the amount can be recovered here and at Form 220 casilla 58.
+Population Rules!D19	Without the tag the amount is indistinguishable from any other 'other deduction' in the annual accumulation.
+Population Rules!A20	═══ PAYROLL-SPECIFIC POPULATION RULES ═══
+Population Rules!A21	Numeral 29 - RESIDENT
+Population Rules!B21	Payroll engine (tax)
+Population Rules!C21	Accumulate the withholding actually practised under the ET art. 383 progressive table, Procedure 1 or Procedure 2, on the art. 388 depurated base - the withholding actually practised, never a hypothetical or contingent amount (Anexo T3.45 of Res. 000227/2025, element vare). Assert that it equals Form 220 casilla 60 for the same employee and twelve months of electronic payroll NIE177.
+Population Rules!D21	An employee whose depurated base fell in the 0% band all year still gets a record, with numeral 29 at zero and numerals 5 to 22 populated.
+Population Rules!A22	Numeral 29 - NON-RESIDENT
+Population Rules!B22	Payroll engine (tax)
+Population Rules!C22	Accumulate the flat 20% of ET art. 408 applied to the GROSS. Numerals 23 and 24 still report the contributions actually deducted, but they did NOT reduce the base - art. 408 admits no depuration. Numeral 33 is reported where severance was paid but has no effect, because the art. 206 num. 4 exemption belongs to the resident ID card-general regime.
+Population Rules!D22	USEFUL INTERNAL CONTROL: for a pure non-resident record, numeral 29 should be almost exactly 20% of numeral 22. A material divergence means either a residence change during the year or a misclassification. The format has no tax-residence field (the country in numeral 4 is the country of the beneficiary's address), so this arithmetic is the only signal.
+Population Rules!A23	Mid-year residence change
+Population Rules!B23	Payroll engine (tax)
+Population Rules!C23	Produce ONE record. Numeral 29 sums the months withheld at 20% under art. 408 and the months withheld under the art. 383 table. The format has no field to disclose the split.
+Population Rules!D23	Retain the split internally. It also breaks the 20%-of-numeral-22 control above, so document the reason before the control fires.
+Population Rules!A24	Non-employment work income under par. 5
+Population Rules!B24	Payroll engine / accounts payable
+Population Rules!C24	Where the employer pays a natural person work income that does NOT arise from an employment, legal or statutory relationship, report it HERE if it was withheld under ET art. 383 (art. 383 para. 2, added by Law 2277 of 2022 art. 8, using the payments mensualizados method). Where art. 383 withholding did NOT apply, report it in the ordinary payments-and-withholdings formats instead - not here.
+Population Rules!D24	The test is about the WITHHOLDING REGIME, not about residence and not about employment status. It is the most commonly misread paragraph of the article, and it determines which FORMAT the payment appears in, not merely which numeral.
+Population Rules!A25	Work performed entirely abroad by a non-resident
+Population Rules!B25	Payroll engine (tax)
+Population Rules!C25	Foreign-source income, not withheld, and NOT reported in this return at all.
+Population Rules!D25	The corresponding field is the electronic payroll place of work (NIE050). Keep the two consistent: a document showing a non-CO place of work for a non-resident should produce no 2276 record.
+Population Rules!A26	═══ CROSS-FIELD VALIDATIONS ═══
+Population Rules!A27	Numeral 22 arithmetic
+Population Rules!B27	Engine (validation)
+Population Rules!C27	Numeral 22 must equal the sum of numerals 5 to 21, EXCLUDING numeral 32. Assert it, and assert equality with Form 220 casilla 52 for the same employee.
+Population Rules!D27	The exclusion of numeral 32 is the trap. Every other value numeral enters the total.
+Population Rules!A28	Numerals 8 and 32 are a pair
+Population Rules!B28	Engine (validation)
+Population Rules!C28	Where either is non-zero the other is normally non-zero too, because the same underlying payment is split at 41 UVT. The exception is an employee earning over 310 UVT, where both are nil and the payment sits in numeral 7 instead.
+Population Rules!D28	Three-way interlock between numerals 7, 8 and 32, driven by two monthly UVT tests.
+Population Rules!A29	Numerals 18, 19, 20 and 33 travel together
+Population Rules!B29	Engine (validation)
+Population Rules!C29	Where any of numerals 18, 19 or 20 is non-zero, numeral 33 should be populated, because ET art. 206 num. 4 applies. Where all three are zero, numeral 33 is sent as ZERO - the attribute vilap is always present ('Siempre debe diligenciarse') and par. 2 requires zero, never blank.
+Population Rules!D29	The resolution restricts numeral 33 with the word 'unicamente', so populating it unnecessarily is as wrong as omitting it when required.
+Population Rules!A30	Numeral 1 drives numerals 35 and 36
+Population Rules!B30	Engine (validation)
+Population Rules!C30	Concept 1 - both blank. Concept 2 - numeral 35 populated, numeral 36 blank. Conceptos 3 to 8 - numeral 36 populated, numeral 35 blank.
+Population Rules!D30	Implement as a three-branch rule, not as two independent nullable fields.
+Population Rules!A31	Cross-report reconciliation
+Population Rules!B31	Engine (reconciliation)
+Population Rules!C31	Before filing, assert per beneficiary: numeral 22 equals Form 220 casilla 52; numeral 29 equals casilla 60 and twelve months of electronic payroll NIE177; numerals 23 and 24 equal casillas 53 and 54 and the employee portions of PILA campos 55, 47, 51 and 52; numeral 19 equals the deposit made under CO-CESANTIAS-006 in the reported year (ET art. 27 num. 3); numeral 34 equals Form 220 casillas 79 and 80. Across the population, assert that the sum of numeral 29 equals twelve months of Form 350 casillas 93 plus 94.
+Population Rules!D31	MAP THE SEVERANCE LINES BY MEANING: numeral 18 to casilla 47, numeral 19 to casilla 49, numeral 20 to casilla 48. A positional mapping swaps the fund deposit and the traditional-regime amount, and the error is invisible in the totals because both feed numeral 22.
+Example Analysis!A1	EXAMPLE ANALYSIS - SAMPLE RECORD PARSED FIELD BY FIELD
+Example Analysis!A2	Raw Value
+Example Analysis!B2	Field Name
+Example Analysis!C2	Interpretation
+Example Analysis!D2	Notes
+Example Analysis!A3	═══ WORKED EXAMPLE - TAX YEAR 2026 RECORD, FILED IN 2027 ═══
+Example Analysis!A4	(scenario)
+Example Analysis!B4	Informant
+Example Analysis!C4	MERCANS COLOMBIA S.A.S., NIT 900123456-8, legal entity.
+Example Analysis!D4	NIT ends in 56, so under Res. 227 art. 1.3.9.1.3 the record is due on the 1st business day of June 2027.
+Example Analysis!A5	(scenario)
+Example Analysis!B5	Beneficiary
+Example Analysis!C5	Juan Carlos Perez Gomez, CC 1020304050, employed the whole of 2026, salary COP 12,000,000 a month, tax RESIDENT.
+Example Analysis!D5	The same employee and the same annual build-up as the Form 220 workbook, so the two can be reconciled line by line.
+Example Analysis!A6	═══ REPORTING ENTITY AND BENEFICIARY ═══
+Example Analysis!A7	1
+Example Analysis!B7	N01 - Reporting entity
+Example Analysis!C7	Informante general.
+Example Analysis!D7	Res. 227 para. 4 requires concept 1 for an ordinary employer, and numerals 35 and 36 are then left blank.
+Example Analysis!A8	13 / 1020304050
+Example Analysis!B8	N02 - Tipo de documento y numero de identificacion
+Example Analysis!C8	Composite: document-type code plus the number.
+Example Analysis!D8	The join key across every Colombian artefact. Note that the three artefacts use THREE different document-type catalogues - the electronic payroll's numeric table 5.2.1, Form 220's six-value list, and PILA's two-letter codes. Map, never copy.
+Example Analysis!A9	PEREZ / GOMEZ / JUAN / CARLOS
+Example Analysis!B9	N03 - Surnames and given names
+Example Analysis!C9	Composite: four sub-fields in the standard DIAN order.
+Example Analysis!D9	DIAN matches on the surname columns, so the order matters.
+Example Analysis!A10	11 / 001 / 169
+Example Analysis!B10	N04 - Beneficiary location
+Example Analysis!C10	Bogota D.C.; country of residence Colombia, so the address, the department and the municipality are populated together with the country.
+Example Analysis!D10	The BENEFICIARY's location - a different question from the electronic payroll place of work and from the Form 220 place where the withholding was practised. The country is always populated; for a beneficiary located outside Colombia only the country is reported and address, department and municipality are left empty (Anexo T3.45 of Res. 000227/2025).
+Example Analysis!A11	═══ INCOME CONCEPTS ═══
+Example Analysis!A12	144000000
+Example Analysis!B12	N05 - Salary payments
+Example Analysis!C12	Twelve months at COP 12,000,000.
+Example Analysis!D12	Equals Form 220 casilla 36.
+Example Analysis!A13	0
+Example Analysis!B13	N06 - Emolumentos eclesiasticos
+Example Analysis!C13	Not applicable.
+Example Analysis!D13	A SEPARATE numeral here; Form 220 folds ecclesiastical emoluments into casilla 39 (fees). Written as ZERO, per para. 2.
+Example Analysis!A14	0
+Example Analysis!B14	N07 - Bonos, cheques, tarjetas, vales
+Example Analysis!C14	No such payments.
+Example Analysis!D14	Par. 6: this numeral must not repeat anything reported elsewhere in the format. It is residual.
+Example Analysis!A15	0 / 0
+Example Analysis!B15	N08 / N32 - Alimentacion
+Example Analysis!C15	No third-party meal payments, so both the excess (N08) and the informative amount up to 41 UVT (N32) are nil.
+Example Analysis!D15	Had there been meal payments, the monthly fork would apply: salary above 310 UVT sends the whole amount to N07; salary at or below 310 UVT splits it at 41 UVT between N32 (informative) and N08 (taxable).
+Example Analysis!A16	12000000
+Example Analysis!B16	N12 - Prestaciones sociales
+Example Analysis!C16	The statutory service bonus, paid in two instalments by 30 June and 20 December.
+Example Analysis!D16	Excludes severance and its interest, which have their own three numerals. Equals Form 220 casilla 42.
+Example Analysis!A17	═══ THE THREE SEVERANCE NUMERALS - AND THE TRANSPOSITION ═══
+Example Analysis!A18	1440000
+Example Analysis!B18	N18 - Cesantias e intereses de cesantias efectivamente pagadas al empleado
+Example Analysis!C18	The 12% interest on the 31 December 2025 balance, paid in January 2026.
+Example Analysis!D18	Equals Form 220 casilla 47 same position in both artefacts.
+Example Analysis!A19	12000000
+Example Analysis!B19	N19 - Cesantias CONSIGNADAS al fondo
+Example Analysis!C19	COP 12,000,000 - the severance accrued for 2025 and deposited to the fund by 14 February 2026: the deposit made in the reported year.
+Example Analysis!D19	Counted in the year of the deposit (ET art. 27 num. 3; Anexo T3.45 of Res. 000227/2025, element ceco): the severance accrued for 2026 and deposited by 14 February 2027 belongs to the tax-year 2027 record. Equals Form 220 casilla 49, and must reconcile to the deposit made under CO-CESANTIAS-006 in February 2026, where late payment costs one day's salary per day of delay, uncapped.
+Example Analysis!A20	0
+Example Analysis!B20	N20 - Regimen tradicional del CST
+Example Analysis!C20	The employee is under the Ley 50 de 1990 regime, so this is nil.
+Example Analysis!D20	Equals Form 220 casilla 48, not casilla 49 the second and third severance lines are transposed between the two artefacts. a positional mapping swaps them, and the error is invisible in the totals because both feed numeral 22
+Example Analysis!A21	═══ TOTAL AND CONTRIBUTIONS ═══
+Example Analysis!A22	157440000
+Example Analysis!B22	N22 - Total gross income
+Example Analysis!C22	144,000,000 + 12,000,000 + 1,440,000 + 12,000,000 = 157,440,000.
+Example Analysis!D22	Numerals 5 to 21 summed, EXCLUDING numeral 32 - para. 1 makes that informative. Equals Form 220 casilla 52.
+Example Analysis!A23	5760000
+Example Analysis!B23	N23 - Compulsory health contributions
+Example Analysis!C23	Twelve months at COP 480,000.
+Example Analysis!D23	Equals Form 220 casilla 53; reconciles to twelve months of electronic payroll NIE163 and to the employee portion of pila campo 55
+Example Analysis!A24	7200000
+Example Analysis!B24	N24 - Compulsory pension and pension-solidarity contributions
+Example Analysis!C24	Twelve months at COP 600,000 - pension 480,000 plus solidarity 120,000.
+Example Analysis!D24	ONE numeral for TWO concepts, as in Form 220 casilla 54. The electronic payroll keeps them as NIE166 and NIE168; PILA as campos 47 and 51. Sum only here.
+Example Analysis!A25	0 / 0 / 0 / 0
+Example Analysis!B25	N25 / N26 / N27 / N28
+Example Analysis!C25	No voluntary savings.
+Example Analysis!D25	N25 and N26 split what the electronic payroll carries in ONE element (NIE198); N28 (AVC) has no electronic payroll element at all and must be tagged on the wage type.
+Example Analysis!A26	═══ WITHHOLDING AND SPECIAL NUMERALS ═══
+Example Analysis!A27	7404000
+Example Analysis!B27	N29 - Withholdings made
+Example Analysis!C27	The year's withholding actually practised under the ET art. 383 table (element vare).
+Example Analysis!D27	Equals Form 220 casilla 60; reconciles to twelve months of electronic payroll NIE177, and across the population to twelve months of Form 350 casillas 93 plus 94
+Example Analysis!A28	13120000
+Example Analysis!B28	N33 - Average employment income of the last seis meses
+Example Analysis!C28	Populated because severance was paid and deposited, so ET art. 206 num. 4 applies.
+Example Analysis!D28	Below 350 UVT (COP 18,330,900), so the severance in N18 and N19 is exempt in full. The resolution restricts this numeral with the word 'UNICAMENTE' - do not populate it where numerals 18, 19 and 20 are all nil.
+Example Analysis!A29	(blank)
+Example Analysis!B29	N34 - Economic dependant
+Example Analysis!C29	No dependant claimed.
+Example Analysis!D29	Where one is claimed, this must be byte-identical to Form 220 casillas 79 and 80. It is where DIAN checks a dependant claimed by more than one taxpayer.
+Example Analysis!A30	(blank) / (blank)
+Example Analysis!B30	N35 / N36
+Example Analysis!C30	Not applicable under concept 1.
+Example Analysis!D30	Res. 227 para. 4: for an ordinary employer they 'no se deben diligenciar'. They are mutually exclusive with each other.
+Example Analysis!A31	0 / 0
+Example Analysis!B31	N30 / N31 - IVA
+Example Analysis!C31	Not payroll fields.
+Example Analysis!D31	Colombian employment income carries no VAT. Relevant only for a VAT-responsible contractor paid under the art. 383 table; owned by the employer's tax function, outside payroll.
+Example Analysis!A32	═══ NON-RESIDENT CONTRAST ═══
+Example Analysis!A33	157440000 / 31488000
+Example Analysis!B33	N22 / N29 for a NON-RESIDENT
+Example Analysis!C33	The same gross, withheld at the flat 20% of ET art. 408.
+Example Analysis!D33	USEFUL CONTROL: for a pure non-resident record, N29 is almost exactly 20% of N22. Here 31,488,000 / 157,440,000 = 20.00%. A resident's ratio is 4.7%. The format has no tax-residence field (the country in numeral 4 is the country of the beneficiary's address), so this arithmetic is the only signal - and a mid-year residence change breaks it, which is itself worth flagging before the control fires.
+Example Analysis!A34	5760000 / 7200000
+Example Analysis!B34	N23 / N24 for a NON-RESIDENT
+Example Analysis!C34	Unchanged - the contributions were still deducted.
+Example Analysis!D34	But they did NOT reduce the withholding base: art. 408 taxes the gross.
+Example Analysis!A35	13120000
+Example Analysis!B35	N33 for a NON-RESIDENT
+Example Analysis!C35	Reported where severance was paid, but of no effect.
+Example Analysis!D35	The art. 206 num. 4 exemption belongs to the resident ID card-general regime.
+Example Analysis!A36	═══ FILING ═══
+Example Analysis!A37	Persona juridica, NIT ...56
+Example Analysis!B37	Deadline
+Example Analysis!C37	1st business day of June 2027, per Res. 227 art. 1.3.9.1.3.
+Example Analysis!D37	THREE DIFFERENT DEADLINE RULES across the pipeline: Form 350 by the LAST digit, 7th-16th business day of the following MONTH; PILA by the LAST TWO digits, 2nd-16th business day of the following MONTH; this return by the last digit for Grandes Taxpayers and the last two for everyone else, in MAY or JUNE of the following YEAR.
+Example Analysis!A38	(at filing)
+Example Analysis!B38	Capacity of the reporting party
+Example Analysis!C38	Art. 1.3.9.1.3 par. 1: the status held AT THE MOMENT OF FILING governs.
+Example Analysis!D38	An employer that becomes a Gran Taxpayer between the year end and the filing date files on the EARLIER Gran Taxpayer calendar, not the later one.
+Sample File!A1	SAMPLE FILE - CHANNEL STATEMENT AND NEUTRAL RECORD MODEL
+Sample File!A4	WHY THERE IS NO XML SAMPLE
+Sample File!A5	═══════════
+Sample File!A6	Format 2276 version 4 is uploaded as a file to the DIAN third-party (exogenous) information
+Sample File!A7	service, and the exogena service accepts XML. This is established by
+Sample File!A8	DIAN Resolution 000227 of 2025 arts. 1.3.7.1.1 and 1.3.10.1.
+Sample File!A10	What is not published inside the resolution itself is the
+Sample File!A11	TECHNICAL SPECIFICATIONS annex for Format 2276 version 4 - the document that
+Sample File!A12	fixes the XML element names, the field ordering and the column lengths. The
+Sample File!A13	resolution only points to it ("de acuerdo con los parametros establecidos en las
+Sample File!A14	especificaciones tecnicas del Formato 2276 Version 4") and lists it in the
+Sample File!A15	formats table at art. 1.3.10.1 as entry T3.45.
+Sample File!A17	An XML instance is therefore not reproduced here: its element names are
+Sample File!A18	fixed by the technical specifications, not by the resolution.
+Sample File!A20	What follows instead is a NEUTRAL RECORD MODEL: the resolution's own thirty-six
+Sample File!A21	numerals in their published order, populated with the worked example. This is
+Sample File!A22	the content the engine must produce; the wrapper comes from the especificaciones
+Sample File!A23	tecnicas.
+Sample File!A25	PRODUCTIVE LAYOUT: the published especificaciones tecnicas for Format 2276 v4
+Sample File!A26	fix the element name, ordinal position and column length of each numeral
+Sample File!A27	below; the productive layout is configured from them.
+Sample File!A29	-------------------------------------------------------------------------------
+Sample File!A30	ENVELOPE (attributes the deadline and validation depend on)
+Sample File!A31	-------------------------------------------------------------------------------
+Sample File!A32	  Informant NIT ......................... 900123456
+Sample File!A33	  Taxpayer category ..................... Persona juridica
+Sample File!A34	  Tax year reported ..................... 2026
+Sample File!A35	  Format / version ...................... 2276 / 4   (Res. 227 art. 1.3.10.1, T3.45)
+Sample File!A36	  Deadline .............................. 1st business day of June 2027
+Sample File!A37	                                          (NIT ends 56; art. 1.3.9.1.3)
+Sample File!A39	-------------------------------------------------------------------------------
+Sample File!A40	RECORD - ONE PER BENEFICIARY
+Sample File!A41	Res. DIAN 000227 de 2025, art. 1.3.7.1.1, numerals 1 to 36 in published order
+Sample File!A42	-------------------------------------------------------------------------------
+Sample File!A43	  N01  Entidad informante ...................... 1  (Informante general)
+Sample File!A44	  N02  Tipo doc. y numero de identificacion .... 13 / 1020304050
+Sample File!A45	  N03  Apellidos y nombres ..................... PEREZ / GOMEZ / JUAN / CARLOS
+Sample File!A46	  N04  Ubicacion del beneficiario .............. 11 / 001 / 169  (Bogota D.C.; pais 169 = Colombia - direccion, dpto. and municipio populated)
+Sample File!A48	  N05  Pagos por salarios ...................... 144000000
+Sample File!A49	  N06  Pagos por emolumentos eclesiasticos .....         0
+Sample File!A50	  N07  Bonos, cheques, tarjetas, vales, etc. ...         0
+Sample File!A51	  N08  Exceso alimentacion > 41 UVT (art.387-1)          0
+Sample File!A52	  N09  Pagos por honorarios ....................         0
+Sample File!A53	  N10  Pagos por servicios .....................         0
+Sample File!A54	  N11  Pagos por comisiones ....................         0
+Sample File!A55	  N12  Pagos por prestaciones sociales .........  12000000
+Sample File!A56	  N13  Pagos por viaticos ......................         0
+Sample File!A57	  N14  Pagos por gastos de representacion ......         0
+Sample File!A58	  N15  Compensaciones trabajo asociado coop. ...         0
+Sample File!A59	  N16  Apoyos economicos educativos (Estado) ...         0
+Sample File!A60	  N17  Otros pagos .............................         0
+Sample File!A62	  N18  Cesantias e intereses PAGADAS al empleado   1440000    -> F220 casilla 47
+Sample File!A63	  N19  Cesantias CONSIGNADAS al fondo, Feb 2026  12000000    -> F220 casilla 49  (NOT 48)
+Sample File!A64	  N20  Cesantias REGIMEN TRADICIONAL del CST ...         0    -> F220 casilla 48  (NOT 49)
+Sample File!A66	  N21  Pensiones de jubilacion, vejez, invalidez         0
+Sample File!A67	  N22  TOTAL INGRESOS BRUTOS ................... 157440000
+Sample File!A68	       (numerals 5 to 21; numeral 32 is EXCLUDED - par. 1 makes it informative)
+Sample File!A70	  N23  Aportes obligatorios por salud ..........   5760000
+Sample File!A71	  N24  Aportes obligatorios pensiones y FSP ....   7200000
+Sample File!A72	  N25  Aportes voluntarios RAIS ................         0
+Sample File!A73	  N26  Aportes voluntarios fondos de pensiones .         0
+Sample File!A74	  N27  Aportes a cuentas AFC ...................         0
+Sample File!A75	  N28  Aportes a cuentas AVC ...................         0
+Sample File!A77	  N29  RETENCIONES PRACTICADAS .................   7404000
+Sample File!A78	  N30  IVA mayor valor del costo o gasto .......         0   (not a payroll field)
+Sample File!A79	  N31  Retencion de IVA ........................         0   (not a payroll field)
+Sample File!A81	  N32  Alimentacion mensual hasta 41 UVT .......         0   INFORMATIVE - outside N22
+Sample File!A82	  N33  Ingreso laboral promedio ultimos 6 meses  13120000   (only where art.206 num.4 applies)
+Sample File!A83	  N34  Dependiente economico ...................   (blank)   (none claimed)
+Sample File!A84	  N35  Identificacion del fideicomiso ..........   (blank)   (par. 4: blank under concepto 1)
+Sample File!A85	  N36  Participante en contrato ................   (blank)   (par. 4: blank under concepto 1)
+Sample File!A87	-------------------------------------------------------------------------------
+Sample File!A88	NON-RESIDENT VARIANT
+Sample File!A89	-------------------------------------------------------------------------------
+Sample File!A90	The same record for a NON-RESIDENT differs in exactly one numeral - the format
+Sample File!A91	has no tax-residence field (the country in N04 is the country of the address):
+Sample File!A93	  N22  TOTAL INGRESOS BRUTOS ................... 157440000   (unchanged)
+Sample File!A94	  N23  Aportes obligatorios por salud ..........   5760000   (unchanged - still deducted)
+Sample File!A95	  N24  Aportes obligatorios pensiones y FSP ....   7200000   (unchanged - still deducted)
+Sample File!A96	  N29  WITHHOLDINGS MADE .................  31488000   <== 20% of GROSS, ET art. 408
+Sample File!A97	  N33  Ingreso laboral promedio ................  13120000   (reported, no effect)
+Sample File!A99	INTERNAL CONTROL: for a pure non-resident record N29 / N22 = 20.00% exactly.
+Sample File!A100	For this resident it is 4.70%. Because the format carries no residence flag,
+Sample File!A101	that ratio is the only signal available - and a mid-year residence change
+Sample File!A102	legitimately breaks it, so document the reason before the control fires.
+Sample File!A104	The contributions in N23 and N24 are still reported because they were still
+Sample File!A105	deducted, but they did NOT reduce the withholding base: ET art. 408 taxes the
+Sample File!A106	gross with no depuration (DIAN Concept 011108 of 29 June 2026). N33 is reported
+Sample File!A107	where severance was paid but has no effect, because the art. 206 num. 4
+Sample File!A108	exemption belongs to the resident ID card-general regime.
+Sample File!A110	-------------------------------------------------------------------------------
+Sample File!A111	THE FOUR TRAPS IN THIS RECORD
+Sample File!A112	-------------------------------------------------------------------------------
+Sample File!A113	1. N32 is INFORMATIVE and does NOT enter N22 (par. 1). Every other value numeral
+Sample File!A114	   does. Including it overstates gross income and breaks the reconciliation to
+Sample File!A115	   Formulario 220 casilla 52.
+Sample File!A117	2. N19 and N20 are TRANSPOSED against Formulario 220 casillas 48 and 49. Map by
+Sample File!A118	   MEANING. A positional mapping swaps the fund deposit and the traditional-
+Sample File!A119	   regime amount, and the error is invisible in N22 because both feed it.
+Sample File!A121	3. N07 must not double-report anything in another numeral (par. 6). Voucher and
+Sample File!A122	   card payments can plausibly be classified as salary, as a meal benefit or as
+Sample File!A123	   other payments - fix the classification on the wage type, once.
+Sample File!A125	4. N33 is restricted by the word UNICAMENTE to employees to whom ET art. 206
+Sample File!A126	   num. 4 applies. Populating it for everyone is as wrong as omitting it when
+Sample File!A127	   required.

@@ -1,0 +1,597 @@
+﻿
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
+	<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta name="robots" content="noimageindex">
+	    <meta charset="iso-8859-1">
+	    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+	    	    <title>Code of Laws - Title 41 - Chapter 1- - LABOR AND EMPLOYMENT</title>
+	    <link rel="SHORTCUT ICON" href="/images/stateflagsmall.ico" />
+		<link rel="icon" href="/images/stateflagsmall.ico" type="image/ico" />
+		<link rel="SHORTCUT ICON" href="/images/South-Carolina-Flag2.ico" />
+
+		<link type="text/css" rel="stylesheet" href="/css/main.css" media="all" />
+				
+		<!--[if lte IE 7]>
+		<link type="text/css" rel="stylesheet" href="/css/ie7main.css" media="all" />
+		<![endif]-->
+		<!--[if gte IE 7]>
+		<link type="text/css" rel="stylesheet" href="/css/iemain.css" media="all" />
+		<![endif]-->
+		<link type="text/css" rel="stylesheet" href="/css/print.css" media="print" />
+		<link type="text/css" rel="stylesheet" href="/css/supplement.css" media="screen" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/zipsearch.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/vote.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/contact.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/navwrap.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/linkbar.css" media="screen" />-->
+	
+		<!--<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>-->
+		<script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+				<script type="text/javascript" src="/js/main_linux.js"></script>
+		
+
+		
+
+
+
+		<!--<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/utils.js"></script>
+		<script type="text/javascript" src="/js/date.js"></script>
+		<script type="text/javascript" src="/js/lightbox.js"></script>
+		<script type="text/javascript" src="/js/legislation.js"></script>
+		<script type="text/javascript" src="/js/logon_lits.js"></script>
+		<script type="text/javascript" src="/js/message.js"></script>
+		<script type="text/javascript" src="/js/comm_meeting.js"></script>-->
+		<script type="text/vbscript" src="/vbs/comm_meeting.vbs"></script>
+		<!--<script type="text/javascript" src="/js/regs.js"></script>-->
+				
+	   	<script type="text/javascript">
+	    //document.onclick = function () { document.getElementById('transbox').style.display= 'none' };
+	    	var xmlhttp=false;
+			xmlhttp = create_xml_object();
+	
+			function getElement(ele)
+			{
+				var theobj = false;
+				if(typeof ele == 'string')
+					theobj = (document.getElementById)?document.getElementById(ele):document.all[ele];
+				else
+					theobj = ele;
+			
+				return theobj;
+			}
+		
+			function checkreader(friendlyalert)
+			{
+			 	/*friendlyalert=friendlyalert||false;
+			 	
+			 	var browser_info = perform_acrobat_detection();
+				if (!browser_info.acrobat)
+				{
+				 	loadadobebox('adobebox', '/adobe.php');
+					return false;
+				}
+				else if (friendlyalert)
+				{
+			 		alert(friendlyalert);
+				}*/
+				return true;
+			}
+				
+			function loadadobebox(boxname, url)
+			{
+				var response = false;
+	
+				doRequest(xmlhttp, "GET", url, false, null, null);
+				if (xmlhttp.status == 200)
+				{
+		         	response = xmlhttp.responseText;
+				}
+	
+				if(response)
+				{
+			 		var ele = document.getElementById(boxname);
+				 	if (ele)
+				 	{
+				 		ele.style.visibility = 'hidden';
+		 				ele.style.display = 'block';
+	
+		 				positionElement(ele, 'center', 'center', true);
+	
+						ele.innerHTML = response;
+					    ele.style.visibility = 'visible';
+					    ele.style.display = 'block';
+	//				    ele.scrollIntoView(true);
+					}
+				}
+				return response;
+			}
+	
+	
+			function init()
+			{
+		 		var ld=document.getElementById("loading");
+				if(ld)
+				{
+					ld.style.display = 'none';
+				}
+			}
+			
+			function openmore()
+			{
+			 	var id = document.getElementById('quicksearch');
+			 	if (id)
+			 	{
+				 	var pos = findPos(id);
+				 	id.style.zIndex = 10;
+		//		 	id.style.left = pos[0]+'px';
+		//		  	id.style.top = pos[1]+'px';
+				  	id.style.height = '295px';
+				  	id.style.position = 'absolute';
+				  	id.style.backgroundColor = '#f7f4ec';
+				  	var id2 = document.getElementById('searchmore');
+				  	if (id2)
+				  	{
+				  	 	id2.style.display = 'none';
+				  	}
+				  	var id3 = document.getElementById('contactlegislatordiv');
+				  	if (id3)
+				  	{
+				  	 	id3.style.display = 'none';
+				  	}
+				}
+			}
+		
+			function closemore()
+			{
+			 	var id = document.getElementById('quicksearch');
+			 	if (id)
+			 	{
+				  	id.style.height = '135px';
+				  	id.style.position = '';
+				  	id.style.backgroundColor = 'transparent';
+				  	var id2 = document.getElementById('searchmore');
+				  	if (id2)
+				  	{
+				  	 	id2.style.display = 'block';
+				  	}
+				  	var id3 = document.getElementById('contactlegislatordiv');
+				  	if (id3)
+				  	{
+				  	 	id3.style.display = '';
+				  	}
+				}		 	
+			}
+		
+		<!-- This script and many more are available free online at -->
+		<!-- The JavaScript Source!! http://javascript.internet.com -->
+		
+		<!-- Begin
+		function right(e) {
+		var msg = "Use of this image is strictly prohibited unless express written permission is given to the user by South Carolina Legislative Services Agency.";
+		if (navigator.appName == 'Netscape' && e.which == 3) {
+		alert(msg);
+		return false;
+		stopEvent(e);
+		}
+		if (navigator.appName == 'Microsoft Internet Explorer' && event.button==2) {
+		alert(msg);
+		return false;
+			stopEvent(event);
+		}
+		else return true;
+		}
+		
+	function trap() 
+	{
+		if(document.images)
+		{
+			for(i=0;i<document.images.length;i++)
+			{
+				if(document.images[i].className == 'allowcontextmenu')
+				{
+					// this should have no scripting
+				}
+				else
+				{
+				 	document.images[i].onmousedown = right;
+					document.images[i].oncontextmenu = function(){ return false; };
+					//document.images[i].onmouseup = right;
+				}
+			}
+		}
+	}
+
+	function findfwtext(texttofind) 
+	{
+	 	var fwtextele = document.getElementById('fwtext');
+		if(fwtextele)
+		{
+			fwtextele.value = texttofind;
+		}
+	}	
+		// End -->
+		</script>
+
+		<!-- ADDED FOR V4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LJY6FMNQKH"></script>
+
+
+<script type="text/javascript">
+
+//ADDED FOR V4
+//Google tag (gtag.js) 
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LJY6FMNQKH');
+
+ 
+ /* COMMENTING OUT UPGRADING TO V4 -A
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36207109-1']);
+  _gaq.push(['_setDomainName', 'scstatehouse.gov']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+  
+      $(document).ready(function(){
+        // COMMENTING THIS OUT NO LONGER BEING ACTIVELY USED TO MONITOR FOR TRAFFIC TO SPECIFIC LINKS - A
+        /*
+          var anchors = $('div#contentsection a');
+
+          //console.log('anchors...'+anchors.length);
+          if(anchors.length > 0){
+            //console.log('setting up event handler...');
+            anchors.click(function(){
+              var a = $(this).attr('href');
+              if(_gaq && (a.substr(-3) == 'htm' || a.substr(-4) == 'html' || a.substr(-3) == 'doc' || a.substr(-4) == 'docx' || a.substr(-3) == 'pdf' || a.substr(-3) == 'xls' || a.substr(-4) == 'xlsx')) {
+                //console.log(a);
+                _gaq.push(['_trackPageview', $(this).attr('href')]);
+              }
+              
+              var aText = $(this).text().toLowerCase();
+              if (a.indexOf('getfile.php') > -1 && aText === 'word'){
+                    _gaq.push(['_trackEvent', 'Word Doc', 'Download', ('from page: ' + document.location + ' - href: ' + a)]);
+              }
+
+            });
+          }
+          */
+      });
+
+</script>
+	</head>
+	
+		
+	<body class="home"  onload="init(); trap();">
+	<noscript>Your browser does not support JavaScript!  This page will not render correctly.</noscript> 
+
+
+	
+	<div id="adobebox" style="position:absolute; width:400px; height:150px; border:2px solid #555555; background-color:#cccccc; display:none;"></div>
+	<div id="container" >	
+				<div id="header" class="nodisplay" style="text-align:center; height:100px;" >
+									<img id="headerimg" class="nodisplay" alt="South Carolina Legislature" title="South Carolina Legislature" src="/images/header8.png" />
+								
+							<!--	<div class="award"><span style="color:#831224; font-weight:bold; font-size:1.5em;">*</span> Recipient of<br>the Notable State Documents Award<br>by the<br>South Carolina<br>State Library.</div>-->
+				
+				
+			</div>
+			<div class="printdisplay"><img border="0" src="/images/titleprint.jpg" alt="South Carolina Legislature" title="South Carolina Legislature" alt="South Carolina Legislature" title="South Carolina State Legislature" /><br /><hr /><br /></div>
+	
+			<div id="pagebody" >
+	
+	
+<!--<div id="topmessage">
+<br style="display:block; margin-top:10px;">
+Searches and data queries will be unavailable beginning Friday, August 19, 2016, from 8:00 PM until Saturday, August 20th at 8:00 AM<br>due to scheduled maintenance.</div>-->
+				<!-- Prompt IE 8/7/6 users to upgrade to a newer browser. -->
+				<!--[if lte IE 8]>
+				<div class="oldframe">In order to improve your experience using this website, please <a href="http://browsehappy.com/">upgrade your browser</a>.</div>
+				<![endif]-->
+			
+			
+			
+			<div id="menu" class="nodisplay">
+				<ul class="nodisplay">
+				<li><a href="/index.php">Home</a></li>
+<li><a href="/senate.php">Senate</a></li>
+<li><a href="/house.php">House</a></li>
+<li><a href="/committeeinfo.php">Committee&nbsp;Postings&nbsp;and&nbsp;Reports</a></li>
+<li><a href="/council.php">Legislative Council</a></li>
+<li><a href="/citizens.php">Citizens&#39; Interest</a></li>
+<li><a href="/publications.php">Publications</a></li>
+		    	</ul>
+			</div>
+			<div id="search" class="nodisplay" style="height: 28px;"><div class="nodisplay" style="float:right; margin:6px 20px 0px 0;">
+							<!--<a style="color:#f7f4ec; height:15px;" href="#" onClick="rsswindow();"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>-->
+<!--				<a style="color:#f7f4ec; height:15px;" href="/splashpage/splashpage.html"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a> -->
+				<a style="color:#f7f4ec; height:15px;" href="/onlineservices/index.php"><img border="0" src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>
+			<!--	<a style="color:#f7f4ec; height:15px;" href="/maintenance_portal.php"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>-->
+						</div></div>
+			
+	
+					<div id="sidebar" class="nodisplay">
+	<div id="vidlinks" style="height: 50px;">
+						<!--<img src="/images/videobutton12d.png">-->
+											<ul id="vidsidemenu">
+	<li id="vidinnermenu" style="font-size:16px; margin: 0 0 5px 0;">Chamber Video</li>
+<li id="sbroadcast" style="float: left; width:50%;">
+<a id="liveS" style="width: 100%; text-decoration:underline;" href="javascript:void(0);" onClick="live_stream('S', false, false, '0')">Senate</a><br><a id="liveaudioS" style="margin:-3px 0 0 0; text-decoration:underline; width: 100%; font-size: 8px;" href="javascript:void(0);" onClick="live_stream('S', false, false, '1');">(Audio Only)</a>
+</li>
+<li id="hbroadcast" style="float: left; width:50%;">
+<a id="liveH" style="width: 100%; text-decoration:underline;" href="javascript:void(0);" onClick="live_stream('H', false, false, '0')">House</a><br><a id="liveaudioH" style="margin:-3px 0 0 0; text-decoration:underline; width: 100%; font-size: 8px;" href="javascript:void(0);" onClick="live_stream('H', false, false, '1');">(Audio Only)</a>
+</li>
+						</ul>
+					</div>
+					<div id="commvidlinks"><a href="/video/schedule.php">Video&nbsp;Schedule</a><a style="border-top:1px solid #fff; padding-top:12px;" href="/video/archives.php">Video Archives</a></div>
+										<div id="sidemenu">
+						<ul id="innermenu">
+		
+							<li><a href="/howdoi.php">How do I...</a></li>
+										
+							
+								<li class="nolink" onMouseOver="var ele=document.getElementById('sidesearch'); if(ele){ele.style.display='block'; document.sidesearchform.searchtext.focus();}" onMouseOut="var ele=document.getElementById('sidesearch'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">Quick Search</div>
+								<div id="sidesearch" class="sidesubmenu">
+									<form id="sidesearchform" name="sidesearchform" method="POST" action="/search.php">
+									<input type="hidden" name="search" value="side" />
+									<div class="topelement"><label for="searchtext"><span class="label">Search for:</span></label><input id="searchtext" name="searchtext" type="text"/><a id="searchlink2" href="javascript:void(0);" onClick="document.sidesearchform.submit();"><img id="searchicon" src="/images/searchbutton.png" alt="Search" title="Search"/></a></div>
+			<!--						<div><input type="checkbox" id="searchchoice_all" name="searchchoice_all" value="all" /><label for="searchchoice_all">All</label></div>-->
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_fullsite" name="category" value="FULLSITE" /><label for="searchchoice_fullsite">&nbsp;Full Site Search</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_billnumber" name="category" value="BILL" /><label for="searchchoice_billnumber">&nbsp;Bill Number</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_legislation" name="category" value="LEGISLATION" CHECKED /><label for="searchchoice_legislation">&nbsp;Legislation</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_budget" name="category" value="BUDGET" /><label for="searchchoice_budget">&nbsp;Budget</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_codeoflaws" name="category" value="CODEOFLAWS" /><label for="searchchoice_codeoflaws">&nbsp;Code of Laws</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_codeofregs" name="category" value="CODEOFREGS" /><label for="searchchoice_codeofregs">&nbsp;Code of Regulations</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_constitution" name="category" value="CONSTITUTION" /><label for="searchchoice_constitution">&nbsp;Constitution</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_housejournals" name="category" value="HOUSEJOURNALS" /><label for="searchchoice_housejournals">&nbsp;House Journals</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_senatejournals" name="category" value="SENATEJOURNALS" /><label for="searchchoice_senatejournals">&nbsp;Senate Journals</label></div>
+									<div class="bottomelement" style="padding-left:20px;"><input type="radio" id="searchchoice_billsummary" name="category" value="SUMMARY" /><label for="searchchoice_billsummary">&nbsp;LSA Bill Summary</label></div>
+								</form>
+									
+								</div>
+							</li>
+							<li><a href="/legislatorssearch.php">Find Your Legislators</a></li>
+							<li id="contactLegislatorLink"><a href="/email.php?chamber=B">Contact Your Legislator</a></li>
+									
+							<li><a href="/legislation.php">Legislation</a></li>
+							<li><a href="/listtracking/main.php" target="LTS">Track Legislation</a></li>
+							<li><a href="/multicriteria2/search.php" target="MCS">Multi-Criteria Search</a></li>
+									<!--<li><a href="#" onclick="multisearchwindow('INTROBOTH');">Multi-Criteria Search</a></li>-->
+									<!--<li><a href="#" onclick="multisearchwindow('INTROMANUAL');">Multi-Criteria Search</a></li>-->
+									<li><a href="/research.php">Research</a></li>
+	
+								<li class="nolink" onMouseOver="var ele=document.getElementById('law'); if(ele){ele.style.display='block';}" onMouseOut="var ele=document.getElementById('law'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">South Carolina Law</div> 
+								<div id="law" class="sidesubmenu">
+									<div class="sidediv topelement"><a href="/newlaws.php">Ratifications &amp; Acts</a></div>
+									<div class="sidediv"><a href="/code/statmast.php">Code of Laws</a></div>
+									<div class="sidediv"><a href="/coderegs/statmast.php">Code of Regulations</a></div>
+									<div class="sidediv"><a href="/scconstitution/scconst.php">Constitution</a></div>
+									<div class="sidediv bottomelement"><a href="/state_register.php">State Register</a></div>
+								</div>
+							</li>
+										<li class="nolink" onMouseOver="var ele=document.getElementById('manual'); if(ele){ele.style.display='block';}" onMouseOut="var ele=document.getElementById('manual'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">Legislative Manual</div>
+								<div id="manual" class="sidesubmenu">
+								
+<!--									<div class="sidediv topelement"><a href="https://web.sc.gov/LSAShoppingcart/Default.aspx" target="_blank">Purchase Manual</a></div>-->
+								
+<!--									<div class="sidediv topelement"><a href="https://secure.scstatehouse.gov/cgi-bin/webstore.exe" target="_blank">Purchase Manual</a></div>-->
+									<div class="sidediv topelement"><a href="javascript:#" onClick="alert('We are sorry, but we are unable to process online transactions at this time.\n\nIf you would still like to make a purchase, please contact us directly at (803) 212-4490 during normal business hours (8:30am - 5:00pm EST).');">Purchase Manual</a></div>
+									<div class="sidediv bottomelement"><a href="/man26/manual26.php">View Manual Online</a></div>
+								</div>
+							</li>
+							<li><a href="http://www.studentconnection.scstatehouse.gov">Student Connection</a></li>
+							<li><a href="/visit.php">Visiting the State House</a></li>
+							<li><a href="/archives.php">Archives</a></li>
+							<li><a href="http://www.sc.gov/Agency-Listing" target="_blank">State Agency Websites</a></li>
+							<!--<li><a href="/stateagencysites.php">State Agency Websites</a></li>-->
+							<li><a href="/citizensinterestpage/media.php">Media Links</a></li>
+				 		</ul>
+			    	</div>
+	
+					<div id="side_ad">
+						<A href="http://www.sc.gov/" target="_blank"><img border=0 src="/images/scgov3.jpg" alt="SC.gov" title="SC.gov" /></a>
+													<A href="http://www.statelibrary.sc.gov" target="_blank"><img border=0 src="/images/scsl_logo_rgb_web.png" alt="StateLibrary.SC.gov" title="StateLibrary.SC.gov" /></a>
+											</div>	    	
+			</div>
+
+	
+	<script type="text/javascript"> 
+		if ( '' === '1'){
+		 	
+			var link = document.getElementById('contactLegislatorLink');
+			if (link != 'undefined' && link != null){
+				link.style.display = 'none'; 
+				link.style.visibility = 'hidden';
+			}
+		}
+		if ( '' === '1'){
+		 	setTimeout(function(){
+				var link2 = document.getElementById('sendMsgLink');
+				if (link2 != 'undefined' && link2 != null){
+					link2.style.display = 'none'; 
+					link2.style.visibility = 'hidden';
+				};
+			}, 20);
+			
+		}  
+	</script>
+<div class="mainwidepanel">
+
+				<div id="breadcrumbs">
+						South Carolina Law &gt; <a href="/code/statmast.php">Code of Laws</a> &gt; <a href="/code/title41.php">Title 41</a>
+				</div>
+
+					<h2 class="barheader">South Carolina Code of Laws<br />
+									Unannotated<br />
+					</h2>
+
+				<div id="contentsection">
+<div style="font-weight: bold; text-align: center;">Title 41 - LABOR AND EMPLOYMENT</div>
+<br />
+
+<div style="text-align: center;">CHAPTER 1</div>
+<div style="text-align: center;">General Provisions</div><br />
+<span style="font-weight: bold;"> SECTION 41-1-10.</span> Employers shall post certain labor laws.<br /><br />
+	Every employer shall keep posted in a conspicuous place a printed notice stating the provisions of the law relative to the employment of adult persons and children and the regulation of hours and working conditions. The Director of the Department of Labor, Licensing and Regulation or his designee shall furnish the printed form of such notice upon request.<br /><br />
+HISTORY: 1962 Code SECTION 40-451; 1952 Code SECTION 40-451; 1942 Code SECTION 3253-13; 1936 (39) 1615; 1993 Act No. 181, SECTION 959, eff February 1, 1994; 2010 Act No. 137, SECTION 1, eff March 31, 2010.<br /><br />
+Effect of Amendment<br /><br />
+	The 1993 amendment substituted &quot;Director of the Department of Labor, Licensing and Regulation or his designee&quot; for &quot;Commissioner of Labor&quot;.<br /><br />
+	The 2010 amendment deleted &quot;in every room where five or more persons are employed&quot; following &quot;posted in a conspicuous place&quot; in the first sentence.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-15.</span> Establishment of drug prevention program in workplace; confidentiality of information concerning test results.<br /><br />
+	(A) Notwithstanding any other provision of the law, an employer may establish a drug prevention program in the workplace pursuant to Section 38-73-500(B) which shall include:<br /><br />
+	(1) a substance abuse policy statement that balances the employer&#39;s respect for individuals with the need to maintain a safe, productive, and drug-free environment. The intent of the policy shall be to help those who need it while sending a clear message that the illegal use of nonprescription controlled substances or the abuse of alcoholic beverages is incompatible with employment at the specified workplace; and<br /><br />
+	(2) notification to all employees of the drug prevention program and its policies at the time the program is established by the employer or at the time of hiring the employee, whichever is earlier.<br /><br />
+	(B) All information, interviews, reports, statements, memoranda, and test results, written or otherwise, received by the employer through a substance abuse testing program are confidential communications, but may be used or received in evidence, obtained in discovery, or disclosed in any civil or administrative proceeding.<br /><br />
+	(C) Employers, laboratories, medical review officers, insurers, drug or alcohol rehabilitation programs, and employer drug prevention programs, and their agents who receive or have access to information concerning test results shall keep all information confidential. Release of such information under any other circumstance shall be solely pursuant to a written consent form signed voluntarily by the employee tested or his designee unless the release is completed through disclosure by an agency of the State in a civil or administrative proceeding, order of a court of competent jurisdiction, or determination of a professional or occupational licensing board in a related disciplinary proceeding. The consent form must contain at a minimum:<br /><br />
+	(1) the name of the person who is authorized to obtain the information;<br /><br />
+	(2) the purpose of the disclosure;<br /><br />
+	(3) the precise information to be disclosed;<br /><br />
+	(4) the duration of the consent; and<br /><br />
+	(5) the signature of the person authorizing release of the information.<br /><br />
+	(D) Information on test results shall not be released for or used or admissible in any criminal proceeding against the employee.<br /><br />
+HISTORY: 1997 Act No. 92, SECTION 2, eff June 10, 1997.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-20.</span> Unlawful discrimination against union members.<br /><br />
+	Every person who shall discharge or discriminate in the payment of wages against any person because of his membership in a labor organization shall be guilty of a misdemeanor and, upon conviction thereof, shall be fined not less than ten nor more than fifty dollars or be imprisoned not less than ten nor more than thirty days.<br /><br />
+HISTORY: 1962 Code SECTION 40-453; 1952 Code SECTION 40-453; 1942 Code SECTION 3237; 1932 Code SECTION 1299; Cr. C. &#39;22 SECTION 194; Cr. C. &#39;12 SECTION 487; 1909 (26) 15; 1924 (33) 1096; 1934 (38) 1364; 1936 (39) 1615; 1941 (42) 119.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-25.</span> Employee benefits, establishment by political subdivisions prohibited; definitions.<br /><br />
+	(A) For purposes of this section:<br /><br />
+	(1) &quot;Employee benefit&quot; means anything of value that an employee may receive from an employer in addition to wages. This term includes, but is not limited to, any health benefits, disability benefits, death benefits, group accidental death and dismemberment benefits, paid days off for holidays, paid sick leave, paid vacation leave, paid personal necessity leave, retirement benefits, and profit-sharing benefits.<br /><br />
+	(2) &quot;Political subdivision&quot; includes, but is not limited to, a municipality, county, school district, special purpose district, or public service district.<br /><br />
+	(B) A political subdivision of this State may not establish, mandate, or otherwise require an employee benefit.<br /><br />
+	(C) This section does not limit the authority of political subdivisions to establish employee benefits in employment relationships to which they are a party.<br /><br />
+HISTORY: 2017 Act No. 3 (S.218), SECTION 1, eff April 5, 2017.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-30.</span> Terminating authorized worker and replacing with unauthorized alien; wrongful termination action by discharged employee.<br /><br />
+	(A) There is a civil right of action for wrongful termination against an employer who discharges an employee authorized to work in the United States for the purpose of replacing that employee with a person the employer knows or should reasonably know is an unauthorized alien.<br /><br />
+	(B) An aggrieved employee must show all of the following:<br /><br />
+	(a) the replacement occurred within sixty days of the date of the employee&#39;s termination;<br /><br />
+	(b) the replacement worker was an unauthorized alien at the time of the replacement;<br /><br />
+	(c) the employer knew or reasonably should have known of the replacement worker&#39;s status; and<br /><br />
+	(d) the replacement worker filled duties and responsibilities the employee vacated.<br /><br />
+	(C) This section does not create an employment contract for either a public or private employer.<br /><br />
+	(D) An employee who brings a civil suit pursuant to this section is limited to the following recovery:<br /><br />
+	(1) reinstatement to his former position;<br /><br />
+	(2) actual damages; and<br /><br />
+	(3) lost wages.<br /><br />
+	(E) A cause of action does not arise against an employer who submits the necessary identifying information for all employees through the Systematic Alien Verification of Entitlement (SAVE) program, the E-Verify Program or a successor program used for verification of work authorization and operated by the United States Department of Homeland Security.<br /><br />
+	(F) Any cause of action arising pursuant to this section is equitable in nature and must be brought within one year of the date of the alleged violation.<br /><br />
+	(G) For any action brought pursuant to this section, the court may award attorney fees to the prevailing party.<br /><br />
+	(H) The provisions of this section do not apply to a private employer who terminates an employee to comply with the provisions of Chapter 8 of Title 41.<br /><br />
+	(I) This section takes effect ninety days after the effective date of the act.<br /><br />
+HISTORY: 2008 Act No. 280, SECTION 12, eff 90 days after effective date of act (approved June 4, 2008).<br /><br />
+	SECTIONS 41-1-40, 41-1-50. Repealed by 2010 Act No. 137, SECTION 8, eff March 31, 2010.<br /><br />
+Editor&#39;s Note<br /><br />
+	Former SECTION 41-1-40 was entitled &quot;Employers requiring notice from employee quitting work shall post notice of shutdown&quot; and was derived from 1962 Code SECTION 40-455; 1952 Code SECTION 40-455; 1942 Code SECTION 7030-14; 1932 Code SECTION 1318; Cr. C. &#39;22 SECTION 210; 1912 (27) 750.<br /><br />
+	Former SECTION 41-1-50 was entitled &quot;Acceptance of payment from relief fund shall be no bar to action for damages&quot; and was derived from 1962 Code SECTION 40-456; 1952 Code SECTION 40-456; 1942 Code SECTION 7701; 1932 Code SECTION 7701; Civ. C. &#39;22 SECTION 4275; Civ. C. &#39;12 SECTION 2808; 1905 (24) 962.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-60.</span> Certain transactions between carriers or shippers and labor organizations prohibited; penalties.<br /><br />
+	(1) The term &quot;labor organization&quot; means any organization of any kind, or any agency or employee representation committee or plan, in which employees participate and which exists for the purpose, in whole or in part, of dealing with employers concerning grievances, labor disputes, wages, rates of pay, hours of employment, or conditions of work.<br /><br />
+	(2) It shall be unlawful for any carrier or shipper of property, or any association of such carriers or shippers, to agree to pay, or to pay, to or for the benefit of a labor organization, directly or indirectly, any charge by reason of the placing upon, delivery to, or movement by rail, or by a railroad car, of a motor vehicle, trailer, or container which is also capable of being moved or propelled upon the highways.<br /><br />
+	(3) It shall be unlawful for any labor organization to accept or receive from any carrier or shipper of property, or any association of such carriers or shippers, any payment described in item (2) hereof.<br /><br />
+	(4) Any person who agrees to pay, or who does pay, or who agrees to receive, or who does receive, any payment described in item (2) hereof shall be guilty of a misdemeanor and on conviction shall be fined not less than one hundred dollars nor more than one thousand dollars, or imprisoned for a period of not less than thirty days, nor more than one year, in the discretion of the court. Each act of violation, and each day during which such an agreement remains in effect, shall constitute a separate and distinct offense.<br /><br />
+HISTORY: 1962 Code SECTION 40-457; 1962 (52) 1739.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-65.</span> Employers granted immunity from liability for disclosure of information.<br /><br />
+	(A) As used in this section:<br /><br />
+	(1) &quot;Employer&quot; means any person, partnership, for profit or nonprofit corporation, limited liability corporation, the State and its political subdivisions and their agents that employ one or more employees. As used in this definition, &quot;agent&quot; means any former supervisor or the employer&#39;s designee.<br /><br />
+	(2) &quot;Employee&quot; means any person employed by an employer.<br /><br />
+	(3) &quot;Evaluation&quot; means a written employee evaluation which was conducted by the employer and signed by the employee, including any written employee response to the evaluation, before the employee&#39;s separation from the employer and of which the employee, upon written request, shall be given a copy.<br /><br />
+	(4) &quot;Former employee&quot; means an individual who was previously employed by an employer.<br /><br />
+	(5) &quot;Job performance&quot; includes, but is not limited to, attendance, attitude, awards, demotions, duties, effort, evaluations, knowledge, skills, promotions, and disciplinary actions.<br /><br />
+	(6) &quot;Prospective employer&quot; means any employer to which a prospective employee has made application, either oral or written, or forwarded a resume or other correspondence expressing an interest in employment.<br /><br />
+	(7) &quot;Prospective employee&quot; means any person who has made an application either oral or written or has sent a resume or other correspondence to a prospective employer indicating an interest in employment.<br /><br />
+	(B) Unless otherwise provided by law, an employer shall be immune from civil liability for the disclosure of an employee&#39;s or former employee&#39;s dates of employment, pay level, and wage history to a prospective employer.<br /><br />
+	(C) Unless otherwise provided by law, an employer who responds in writing to a written request concerning a current employee or former employee from a prospective employer of that employee shall be immune from civil liability for disclosure of the following information to which an employee or former employee may have access:<br /><br />
+	(1) written employee evaluations;<br /><br />
+	(2) official personnel notices that formally record the reasons for separation;<br /><br />
+	(3) whether the employee was voluntarily or involuntarily released from service and the reason for the separation; and<br /><br />
+	(4) information about job performance.<br /><br />
+	(D) This protection and immunity shall not apply where an employer knowingly or recklessly releases or discloses false information.<br /><br />
+HISTORY: 1996 Act No. 281, SECTION 1, eff May 6, 1996.<br /><br />
+Editor&#39;s Note<br /><br />
+	1996 Act No. 281, SECTION 2, provides:<br /><br />
+	&quot;SECTION 2. The provisions of Section 41-1-65 of the 1976 Code, as added by Section 1 of this act, shall apply to causes of action occurring on or after the effective date of this act.&quot;<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-70.</span> Liability of employer for dismissal or demotion of employee who complies with subpoena or serves on jury.<br /><br />
+	Any employer who dismisses or demotes an employee because the employee complies with a valid subpoena to testify in a court proceeding or administrative proceeding or to serve on a jury of any court is subject to a civil action in the circuit court for damages caused by the dismissal or demotion.<br /><br />
+	Damages for dismissal are limited to no more than one year&#39;s salary or fifty-two weeks of wages based on a forty-hour week in the amount the employee was receiving at the time of receipt of the subpoena.<br /><br />
+	Damages for demotion are limited to the difference for one year between the salary or wages based on a forty-hour week which the employee received before the demotion and the amount he receives after the demotion.<br /><br />
+HISTORY: 1986 Act No. 320, eff February 20, 1986 and retroactive to January 1, 1984 (approved by the Governor on February 20, 1986).<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-80.</span> Prohibition against retaliation based upon employee&#39;s institution of, or participation in, proceedings under Workers&#39; Compensation Law; civil actions.<br /><br />
+	No employer may discharge or demote any employee because the employee has instituted or caused to be instituted, in good faith, any proceeding under the South Carolina Workers&#39; Compensation Law (Title 42 of the 1976 Code), or has testified or is about to testify in any such proceeding.<br /><br />
+	Any employer who violates any provision of this section is liable in a civil action for lost wages suffered by an employee as a result of the violation, and an employee discharged or demoted in violation of this section is entitled to be reinstated to his former position. The burden of proof is upon the employee.<br /><br />
+	Any employer shall have as an affirmative defense to this section the following: wilful or habitual tardiness or absence from work; being disorderly or intoxicated while at work; destruction of any of the employer&#39;s property; failure to meet established employer work standards; malingering; embezzlement or larceny of the employer&#39;s property; violating specific written company policy for which the action is a stated remedy of the violation.<br /><br />
+	The failure of an employer to continue to employ, either in employment or at the employee&#39;s previous level of employment, an employee who receives compensation for total permanent disability, is in no manner to be considered a violation of this section.<br /><br />
+	The statute of limitations for actions under this section is one year.<br /><br />
+HISTORY: 1986 Act No. 451, eff May 26, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-85.</span> Personnel action based on use of tobacco products outside of workplace prohibited.<br /><br />
+	The use of tobacco products outside the workplace must not be the basis of personnel action, including, but not limited to, employment, termination, demotion, or promotion of an employee.<br /><br />
+HISTORY: 1990 Act No. 593, SECTION 2A, eff June 25, 1990.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-90.</span> Requirement of notice that completion of training program does not guarantee employment.<br /><br />
+	Every employer in this State who requires prospective employees to complete a job training program conducted either by the employer or on behalf of the employer by an outside organization prior to consideration for employment shall give each prospective employee before beginning the training program a notice in the form prescribed by Section 41-1-100 if completion of the job training program does not guarantee the prospective employee regular employment on a permanent basis by the employer.<br /><br />
+HISTORY: 1986 Act No. 332, SECTION 1, eff July 1, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-100.</span> Form of notice required by Section 41-1-90.<br /><br />
+	The notice required by Section 41-1-90 shall appear on any printed matter promoting the job training program and on every application for enrollment in the program in substantially the following form: &quot;Notice. Completion of this job training program does not guarantee you regular employment on a permanent basis by the employer who requires you to complete the program.&quot;<br /><br />
+HISTORY: 1986 Act No. 332, SECTION 2, eff July 1, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-110.</span> Conspicuous disclaimer of contract of employment created by handbook, personnel manual, or other document issued by employer.<br /><br />
+	It is the public policy of this State that a handbook, personnel manual, policy, procedure, or other document issued by an employer or its agent after June 30, 2004, shall not create an express or implied contract of employment if it is conspicuously disclaimed. For purposes of this section, a disclaimer in a handbook or personnel manual must be in underlined capital letters on the first page of the document and signed by the employee. For all other documents referenced in this section, the disclaimer must be in underlined capital letters on the first page of the document. Whether or not a disclaimer is conspicuous is a question of law.<br /><br />
+HISTORY: 2004 Act No. 185, SECTION 1, eff March 15, 2004.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-120.</span> Establishing independent contractor status between nonprofit youth sports organization and coach; written agreement; disclosures.<br /><br />
+	(A) Notwithstanding another provision of law, a written agreement between a nonprofit youth sports organization and a coach which specifies that the coach is an independent contractor and not an employee of the nonprofit youth sports organization and also which otherwise satisfies the requirements of this section constitutes conclusive evidence that the relationship between the nonprofit youth sports organization and the coach is that of an independent contractor relationship rather than an employment relationship for the purposes of this section, and that the nonprofit youth sports organization consequently is not obligated to:<br /><br />
+	(1) secure compensation for the coach pursuant to the workers&#39; compensation law; and<br /><br />
+	(2) withhold federal and state income taxes from money paid to the coach for services he provides to the organization pursuant to the contract.<br /><br />
+	(B) A written agreement provided in subsection (A) must contain a conspicuously located disclosure appearing in bold-faced, underlined, or large type. This agreement must be acknowledged by the parties as indicated by their signatures, initials, or other means to evince that the parties have read and understand the disclosure. This disclosure clearly must state that the coach is:<br /><br />
+	(1) an independent contractor and not an employee of the nonprofit youth sports organization for the purposes listed in subsection (A)(1) and (2);<br /><br />
+	(2) not entitled to workers&#39; compensation benefits in connection with his or her contract with the nonprofit youth sports organization; and<br /><br />
+	(3) obligated to pay federal and state income tax on any money paid pursuant to the contract for coaching services, and that as a consequence the nonprofit youth sports organization will not withhold any amounts from the coach for purposes of satisfying the coach&#39;s income tax liability.<br /><br />
+	(C) A written agreement between a nonprofit youth sports organization and a coach formed pursuant to this subsection may not, in and of itself, be construed as conclusive evidence that an independent contractor relationship exists for purposes of required coverage under the state unemployment compensation law or any civil action instituted by a third party.<br /><br />
+	(D) As used in this section, &quot;nonprofit youth sports organization&quot; means an organization that is exempt from federal taxation under Section 501(c)(3) of the Internal Revenue Code of 1986, as amended, and is primarily engaged in conducting organized sports programs for persons under twenty-one years of age.<br /><br />
+HISTORY: 2016 Act No. 155 (H.3576), SECTION 1, eff April 21, 2016.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-1-130.</span> Break time or meal time for employees to express breast milk; definitions; remedies.<br /><br />
+	(A) As used in this section, &quot;employer&quot; means a person or entity that employs one or more employees and includes the State and its political subdivisions.<br /><br />
+	(B) An employer shall provide an employee with reasonable unpaid break time or shall permit an employee to use paid break time or meal time each day to express breast milk. The employer shall make reasonable efforts to provide a room or other location, other than a toilet stall, in close proximity to the work area, where an employee may express milk in privacy. An employer may not discriminate against an employee for choosing to express breast milk in the workplace in compliance with the provisions of this section. The break time must, if possible, run concurrently with any break time already provided to the employee. The employee shall make reasonable efforts to minimize disruption to the employer&#39;s operations. The employer must be held harmless if it makes reasonable efforts to comply with this subsection. This section does not require an employer to provide break time if doing so would create an undue hardship on the operations of the employer. Nothing in this section shall be construed to require an employer to build a room for the primary purpose of expressing breast milk.<br /><br />
+	(C) The procedures for seeking redress for violations of this chapter are provided in Section 1-13-90.<br /><br />
+HISTORY: 2020 Act No. 141 (H.3200), SECTION 3, eff July 25, 2020.<br /><br />
+Editor&#39;s Note<br /><br />
+	2020 Act No. 141, SECTIONS 1, 2, and 4 to 6, provide as follows:<br /><br />
+	&quot;SECTION 1. This act must be known and may be cited as the &#39;South Carolina Lactation Support Act&#39;.&quot;<br /><br />
+	&quot;SECTION 2. It is the intent of the General Assembly, by this act, to promote public health and to support those who wish to express breast milk at work by requiring employers to make reasonable efforts to provide workers with reasonable unpaid break time and space to express milk at work. This act will not require employers to compensate employees for breaks taken to express breast milk unless the employer already provides compensated breaks and does not require employers to create a permanent or dedicated space for use by pumping employees. South Carolina ranks far lower than the national average of breastfed infants. Providing workers reasonable support to express milk on the job is a crucial health measure and will benefit South Carolina&#39;s economy by keeping nursing employees in the workforce.&quot;<br /><br />
+	&quot;SECTION 4. Within thirty days after approval by the Governor of this act, the South Carolina Human Affairs Commission shall post on its website information to educate employers, employees, and employment agencies about their rights and responsibilities under this act. The website must include a phone number for employers to call to receive information about this act and assistance in complying with the provisions of this act, and a link to additional information on this act on the commission&#39;s website.<br /><br />
+	&quot;SECTION 5. Employers have thirty days after the South Carolina Human Affairs Commission posts the required information in SECTION 4 to its website before they must comply with the provisions of this act.<br /><br />
+	&quot;SECTION 6. Nothing in this act may be construed to preempt, limit, diminish, or otherwise affect another provision of federal, state, or local law, or to invalidate or limit the remedies, rights, and procedures of a federal, state, or local law that provides greater or equal protection for an employee affected by pregnancy, childbirth, or a related condition.&quot;<br /><br />
+
+</div>
+
+
+					</div>		 <!-- mainwidepanel -->
+					
+				</div>		 <!-- pagebody -->
+				
+				<div id="footer" class="nodisplay" style="height: 30px;" onContextMenu="return false;">
+			<div id="footerdiv" style="margin:0;">
+				South Carolina Legislative Services Agency * 223 Blatt Building * 1105 Pendleton Street * Columbia, SC 29201<!-- * 803-212-4420--><br>
+				
+								<a href="/disclaimer.php">Disclaimer</a> * <a href="/policies.php">Policies</a> * <a href="/credits.php">Photo Credits</a> * <a href="/contact.php">Contact Us</a>
+							</div>
+		</div>
+		<div id="printfooter" class="printdisplay serifNormal" align=center style="font-size: 8pt;">
+			<br>
+			<br>
+			<hr>
+			Legislative Services Agency
+			<br>
+			h t t p : / / w w w . s c s t a t e h o u s e . g o v
+		</div>
+	
+		</div>	<!-- container or main in mobile page-->
+</body>
+</html>
+

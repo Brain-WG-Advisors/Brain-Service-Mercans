@@ -1,0 +1,1860 @@
+URL: https://www.ctpaidleave.org/-/media/ctpl/english-pdfs-and-docs/remit/file-specification-toolkit/file-specification-toolkit.pdf | read 2026-11-02 in Chrome (linked as FILE SPECIFICATION TOOLKIT (PDF) on https://www.ctpaidleave.org/remit-contributions/batch-process; PDF fetched by curl, text extracted with pypdf)
+
+--- page 1 ---
+ 
+Page | 1 File Specification Toolkit version 2.1.9 
+10/5/26 
+CT Paid Leave 
+File Specification 
+Toolkit  
+--- page 2 ---
+ 
+Page | 2 File Specification Toolkit version 2.1.9 
+10/5/26 
+Table of contents 
+CT Paid Leave File Specification Toolkit ............................................................................................................................ 1 
+Table of contents ................................................................................................................................................................ 2 
+Purpose of this guide ......................................................................................................................................................... 3 
+Latest updates ..................................................................................................................................................................... 3 
+Updated acknowledgement file information ........................................................................................................... 3 
+Clarification of revisioning files ................................................................................................................................... 3 
+Update to return CSV file size maximum specifications ........................................................................................ 3 
+CT Paid Leave file naming convention ........................................................................................................................... 4 
+Naming convention for test files ................................................................................................................................ 4 
+Revisioning File Names .................................................................................................................................................. 5 
+Enrollment file specifications .......................................................................................................................................... 6 
+Enrollment schema graphic .......................................................................................................................................... 6 
+Schema XSD File .............................................................................................................................................................. 6 
+XML Format: Enrollment File ....................................................................................................................................... 6 
+CSV Format: Enrollment File ........................................................................................................................................ 9 
+Enrollment file questions ........................................................................................................................................... 10 
+Return file specifications ................................................................................................................................................ 11 
+Schema XSD File ............................................................................................................................................................ 12 
+XML Format: Return File ............................................................................................................................................. 12 
+CSV Format: Return File .............................................................................................................................................. 18 
+Return file questions ................................................................................................................................................... 19 
+Acknowledgment Files .................................................................................................................................................... 20 
+Acknowledgement Element ....................................................................................................................................... 20 
+ValidEmplyrCount Element ........................................................................................................................................ 20 
+Employer Element ........................................................................................................................................................ 21 
+Correcting Errors .......................................................................................................................................................... 22 
+Schema XSD File ............................................................................................................................................................ 23 
+ACH Credit Record Specifications ................................................................................................................................. 25 
+Penny Tests .................................................................................................................................................................... 25 
+CCD file specification for third-party administrators ........................................................................................... 26 
+CTX file specification for employers ........................................................................................................................ 30 
+NACHA file questions .................................................................................................................................................. 34 
+Error and warning codes ................................................................................................................................................. 35 
+Versioning .......................................................................................................................................................................... 40 
+--- page 3 ---
+ 
+Page | 3 File Specification Toolkit version 2.1.9 
+10/5/26 
+Purpose of this guide 
+This is a technical guide to provide file specification information necessary to create enrollment, return, 
+amended return and NACHA files to be submitted to the CT Paid Leave (CTPL) Authority through batch 
+processing. 
+Important 
+Successful file processing depends on files adhering to the strict file specifications as outlined in this guide. 
+For information on the process to remit using the CT Paid Leave batch process, read the Batch Contribution 
+Process webpage. 
+Latest updates 
+Updated acknowledgement file information 
+When an acknowledgement file communicates that some records within a file are processed successfully 
+and some have errors, only the records with errors should be in the corrected version of the file. Including 
+records that had no errors or had warnings results in duplicate records in the system. 
+The Acknowledgment Files section is updated with: 
+1. Clearer information on how to read the acknowledgement file to understand whether your files were 
+processed. 
+2. Instructions for how to create a new file with just the fixed records when an error is reported in the 
+acknowledgement file. 
+3. Clear guidance that records that did not receive an error should not be included in the corrected file. 
+4. Updated examples of acknowledgement files to show: 
+a. Successful validation for all records 
+b. File level error 
+c. Employer level error and warning 
+Clarification of revisioning files 
+Duplicate files are detected by file name. As such it is important to use the revisioning indicator that is built 
+into the file naming convention when updates are necessary for a file. More information is now provided for 
+when you should revision a file and example file names are provided. 
+Update to return CSV file size maximum specifications 
+Previously the maximum file size was less than 5MB. The new maximum files size for CSV files is both less 
+than 5MB and fewer than 5,000 return records.  
+--- page 4 ---
+ 
+Page | 4 File Specification Toolkit version 2.1.9 
+10/5/26 
+CT Paid Leave file naming convention 
+Each file submitted to the CT Paid Leave Authority is expected to adhere to the following naming pattern. 
+The pattern consists of a series of informational nodes, with each node separated by an underscore. The 
+nodes enable understanding the expected file contents immediately, and the consistency of node 
+sequences allow the files to stay organized within a normal folder structure. Additionally, automated 
+processes depend on the file names, so an inconsistent named file will not be processed. 
+Table 1 - File Naming Pattern 
+Node Content Value Example 
+Unique prefix for CT Paid Leave CTPL CTPL 
+Three-character mnemonic for 
+filetype 
+See Table 2 ENR 
+Nine-character unformatted FEIN Preparer FEIN, typically the FEIN of the 
+third-party administrator. 
+426092234 
+Two-character revision indicator For original files, this value is 00. Increment 
+this value for revisions or resubmissions. 
+00 
+Timestamp, unformatted. If a 
+revision, use the original version 
+timestamp. 
+yyyymmddhhmmss 20210112152238 
+Period as the separator between 
+filename and filetype 
+Standard File Naming Convention . 
+Standard filetype suffix xml, csv xml 
+Table 2 - Defined File Type Mnemonics 
+File Type Mnemonic 
+Enrollment ENR  
+Return RTN  
+Amended Return ART 
+Acknowledgment ACK 
+Payment Invoice INV 
+Example filename of CTPL_ RTN_426092234_00_20210112152238.xml, using sample values from Table 1, 
+indicates this is an XML return file sent to CT Paid Leave by FEIN 42-6092234 on 01/12/2021 @ 3:22:38 PM. 
+Important 
+Files not named according to the file name pattern will not process. 
+Naming convention for test files 
+As a convenience to businesses and employers testing connectivity and file formats, the Authority has 
+enabled a feature to allow files to be processed and validated without updating the backend system. Any 
+--- page 5 ---
+ 
+Page | 5 File Specification Toolkit version 2.1.9 
+10/5/26 
+file ending in _test or _TEST will execute validation steps ONLY and will produce an acknowledgement (.ack) 
+file per the typical flow but will NOT persist values. 
+Example: 
+Rename CTPL_ RTN_426092234_00_20210112152238.xml to  
+CTPL_ RTN_426092234_00_20210112152238_TEST.xml 
+Upload test files to ensure connectivity and that the file matches specifications: 
+• All test files should be remitted with one of the following file endings: 
+o _test.xml 
+o _TEST.xml 
+o _test.csv 
+o _TEST.csv 
+• Test files may be resubmitted as often as needed. 
+• Test files run in validation, but no data is processed into the CT Paid Leave systems. 
+Best Practice 
+Upload test files until you receive no errors in the .ack file Successful file processing depends on files 
+adhering to the strict file specifications as outlined in this guide. 
+Revisioning File Names 
+Each file uploaded to the SFTP server must have a unique file name following the CT Paid Leave naming 
+convention to be processed. When an error is reported in an acknowledgement file, a revision of the file 
+must be made. To properly name the revised file, increase the two-character revision indicator, found after 
+the third underscore, as shown in the example below. 
+• Original File Name:  CTPL_ RTN_426092234_00_20210112152238.xml 
+• First Revision File Name: CTPL_ RTN_426092234_01_20210112152238.xml 
+• Second Revision File Name: CTPL_ RTN_426092234_02_20210112152238.xml 
+Important 
+Use the two-character revision indicator for every new version of a file uploaded, to resolve errors identified 
+in the acknowledgement file.  
+--- page 6 ---
+ 
+Page | 6 File Specification Toolkit version 2.1.9 
+10/5/26 
+Enrollment file specifications 
+Enrollment files are only necessary for third-party administrators (TPAs) using batch processing. They 
+provide key information to CT Paid Leave about which client employers a TPA will be remitting on behalf of. 
+• File Size: Enrollment files must be less than 5 MB. 
+• Batches of Files: If you have a large volume of files, upload them onto the SFTP server in smaller 
+batches and wait until they complete processing before uploading your next batch of files. 
+• Employer nodes will repeat for each employer included in the enrollment file 
+• For active relationships, no ending date (RelEndDate) should be supplied. 
+• Following upload and processing of the enrollment file, an acknowledgement file will be placed in 
+your outbound SFTP folder verifying the success of the submission, or in the case of an unsuccessful 
+submission, error reasons will be provided. 
+While the preferred format for enrollment files is XML, an alternate CSV format can be used by TPAs who 
+are unable to produce XML. See section CSV Format: Enrollment File for more information. 
+Enrollment schema graphic 
+Figure 1 Enrollment Schema Graphic View, Version 2.2 
+ 
+Schema XSD File 
+Download enrollment file schema XSD file 
+XML Format: Enrollment File 
+Enrollment Schema XML Text View 
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Enrollment" 
+xmlns:tns="http://www.example.org/Enrollment" elementFormDefault="qualified"> 
+
+--- page 7 ---
+ 
+Page | 7 File Specification Toolkit version 2.1.9 
+10/5/26 
+ <complexType name="TPA"> 
+ <annotation> 
+  <documentation>Version 2.2  - 02/10/2021 </documentation> 
+ </annotation> 
+ <sequence> 
+  <element name="FEIN" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation>The Federal Employer Identification Number assigned to the TPA company.</documentation> 
+   </annotation></element> 
+  <element name="LegalName" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation>The Registered Legal Name of the TPA Company </documentation> 
+   </annotation></element> 
+  <element name="Address" type="tns:Address"> 
+   <annotation> 
+    <documentation>The Location of the TPA Company.</documentation> 
+   </annotation></element> 
+  <element name="Employer" type="tns:Employer" maxOccurs="unbounded" minOccurs="1"></element> 
+ </sequence> 
+ </complexType> 
+ <complexType name="Address"> 
+  <sequence> 
+   <element name="Street1" type="string"></element> 
+   <element name="Street2" type="string" maxOccurs="1" minOccurs="0"></element> 
+   <element name="Street3" type="string" maxOccurs="1" minOccurs="0"></element> 
+   <element name="City" type="string"></element> 
+   <element name="StateCode" type="string"></element> 
+   <element name="PostalCode" type="string"></element> 
+   <element name="Country" type="string"></element> 
+  </sequence> 
+ </complexType> 
+ <complexType name="Employer"> 
+ <sequence> 
+  <element name="FEIN" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation>The Federal Employer Identification number assigned to the Client Employer</documentation> 
+   </annotation></element> 
+  <element name="StateTaxID" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>State Taxpayer ID should reflect the identifier under which the employer files state taxes with 
+DRS. If you are a PEO/Common Paymaster who currently files tax returns and reports employee wages on behalf of one 
+or more client employers, you are expected to use the registration number(s) (FEIN) of your clients just as you do when 
+reporting to CT DOL. 
+For a business or household employer, it is most often the State Employer Identification Number (EIN). 
+For a sole proprietor, it may be an SSN or an ITIN (Individual Taxpayer Identification Number).</documentation> 
+   </annotation></element> 
+  <element name="LegalName" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation>The Registered Legal Name of the Client Employer </documentation> 
+   </annotation></element> 
+  <element name="Address" type="tns:Address"> 
+   <annotation> 
+    <documentation>The Location of the Client Employer.</documentation> 
+   </annotation></element> 
+  <element name="RelStartDate" type="date"> 
+   <annotation> 
+--- page 8 ---
+ 
+Page | 8 File Specification Toolkit version 2.1.9 
+10/5/26 
+    <documentation>Starting Date of the Relationship between a TPA and a given Client Employer</documentation> 
+   </annotation></element> 
+  <element name="RelEndDate" type="date" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>Ending Date of the Relationship between a TPA and a given Client Employer. 
+       Will be null for active relationships.</documentation> 
+   </annotation></element> 
+ </sequence> 
+ </complexType> 
+ <element name="TPA" type="tns:TPA"></element> 
+</schema> 
+Sample XML File  
+Download sample XML formatted enrollment file 
+Sample XML Template  
+<?xml version="1.0" encoding="UTF-8"?>  
+<tns:TPA xmlns:tns="http://www.example.org/Enrollment" xmlns:xsi="http://www.w3.org/2001/XMLSchemainstance" 
+xsi:schemaLocation="http://www.example.org/Enrollment Enrollment.xsd ">  
+ <tns:FEIN>39-4313328</tns:FEIN>  
+ <tns:LegalName>Third Party Administrator Business Name</tns:LegalName>  
+ <tns:Address>  
+  <tns:Street1>Your Street Address</tns:Street1> 
+  <tns:Street2>Optional Address Info</tns:Street2> 
+  <tns:Street3>Optional Address Info</tns:Street3> 
+  <tns:City>Your City</tns:City> 
+  <tns:StateCode>CT</tns:StateCode> 
+  <tns:PostalCode>06016</tns:PostalCode> 
+  <tns:Country>USA</tns:Country> 
+ </tns:Address> 
+ <tns:Employer> 
+  <tns:FEIN>55-5136907</tns:FEIN> 
+  <tns:StateTaxID>876543200</tns:StateTaxID> 
+  <tns:LegalName>Client Employer's Name</tns:LegalName> 
+  <tns:Address> 
+   <tns:Street1>Their Street Address</tns:Street1> 
+   <tns:Street2>Optional Address Info</tns:Street2> 
+   <tns:Street3>Optional Address Info</tns:Street3> 
+   <tns:City>Their City</tns:City> 
+   <tns:StateCode>CT</tns:StateCode> 
+   <tns:PostalCode>06111</tns:PostalCode> 
+   <tns:Country>USA</tns:Country> 
+  </tns:Address> 
+  <tns:RelStartDate>2021-01-01</tns:RelStartDate> 
+  <tns:RelEndDate></tns:RelEndDate> 
+ </tns:Employer> 
+</tns:TPA> 
+Note 
+Employer nodes will repeat as many times as needed.  
+--- page 9 ---
+ 
+Page | 9 File Specification Toolkit version 2.1.9 
+10/5/26 
+CSV Format: Enrollment File 
+File Layout 
+Adhere to the following when creating CSV files: 
+1. The enrollment file must contain a header record with each named field separated from the next by a 
+comma. 
+2. Strings containing commas must be enclosed in double quotes. All other strings may optionally be 
+enclosed in double quotes. 
+3. For each record in the file, the first nine fields must be the same (TPA information in orange 
+background). 
+4. The record count will equal to the number of Client Employers. 
+5. EmplyrRelEndDate will only have a value when ending a relationship with the specified Employer. 
+The record layout below is shown vertically rather than horizontally for ease of readability. 
+Table 3 - CSV Enrollment File Layout 
+Header Sample Value Datatype 
+TPAFEIN  39-4313328 string 
+TPALegalName Third Party Administrator Business Name string 
+TPAStreet1  219 Windsorville Rd string 
+TPAStreet2  string 
+TPAStreet3   string 
+TPACity  East Windsor string 
+TPAStateCode  CT string 
+TPAPostalCode  06016 string 
+TPACountry  USA string 
+EmplyrFEIN 55-5136907 string 
+EmplyrStateTaxID 876543200 string 
+EmplyrLegalName Client Employer Business Name string 
+EmplyrStreet1 100 Main Street string 
+EmplyrStreet2 Floor 4 string 
+EmplyrStreet3 Suite 401 string 
+EmplyrCity Hartford string 
+EmplyrStateCode CT string 
+EmplyrPostalCode 06760 string 
+EmplyrCountry USA string 
+EmplyrRelStartDate 2020-10-01 date 
+EmplyrRelEndDate  date 
+Sample CSV File 
+Download sample CSV formatted enrollment file 
+--- page 10 ---
+ 
+Page | 10 File Specification Toolkit version 2.1.9 
+10/5/26 
+Enrollment file questions 
+If you have questions about the file specifications, submit a contact us inquiry from and select “File 
+Specification Questions” as the contact reason.  
+--- page 11 ---
+ 
+Page | 11 File Specification Toolkit version 2.1.9 
+10/5/26 
+Return file specifications 
+CT Paid Leave accepts batch return files in two file formats: XML or CSV. Both file formats contain the same 
+information. 
+• File Size:  
+o All Return file formats must be less than 5 MB. 
+o CSV files must contain fewer than 5,000 return records. 
+• Batches of Files: If you have a large volume of files, upload them onto the SFTP server in smaller 
+batches and wait until they complete processing before uploading your next batch of files. 
+• Numeric amount fields on the return file do not contain commas between hundreds and thousands. 
+The acceptable format is 999999.99 or similar. The format 999,999.99 will result in your return not 
+being processed. 
+• Each return must be attributed to a quarter and should not span multiple quarters. 
+Important 
+Do not include employee level records in return and amended return files. 
+In 2024, CT Paid Leave made inclusion of the employee data optional (it had previously been required). 
+Effective July 2025, if employee data is in a return or amended return file, the file is not processed, and an 
+error is reported in the acknowledgement file.  
+--- page 12 ---
+ 
+Page | 12 File Specification Toolkit version 2.1.9 
+10/5/26 
+Schema XSD File 
+Download return file schema XSD file 
+Return Schema Graphic View 
+Figure 2 Return Schema Graphic View, Version 2.5 
+ 
+XML Format: Return File 
+Return Schema XML Text View 
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema xmlns=http://www.w3.org/2001/XMLSchema 
+ targetNamespace=http://www.example.org/Return 
+ xmlns:tns=http://www.example.org/Return 
+ elementFormDefault="qualified"> 
+ <complexType name="Return"> 
+  <annotation> 
+   <documentation> 
+This is the return filed by either a third-party administrator or payroll provider on behalf of one or more client 
+employers, or an employer filing on behalf of themselves. Each employer on the return will have one or more 
+employees. 
+Version 2.5 - 03/20/2024 
+   </documentation> 
+
+--- page 13 ---
+ 
+Page | 13 File Specification Toolkit version 2.1.9 
+10/5/26 
+  </annotation> 
+ <sequence> 
+  <element name="DocumentCount" type="int" maxOccurs="unbounded" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     Total number of Employers referenced in this return. 
+    </documentation> 
+   </annotation></element> 
+  <element name="AmendedReturn" type="boolean" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     The value must be False for return files. 
+    </documentation> 
+   </annotation></element> 
+  <element name="TaxPeriodStartDate" type="date" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     Date format: YYYY-MM-DD 
+    </documentation> 
+   </annotation></element> 
+  <element name="TaxPeriodEndDate" type="date" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     Date format: YYYY-MM-DD 
+    </documentation> 
+   </annotation></element> 
+  <element name="PreparerLegalName" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     The legal name of the business creating and submitting this return file on behalf of the business  
+     which owes the contribution. 
+    </documentation> 
+   </annotation></element> 
+  <element name="PreparerFEIN" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     The Federal EIN for business creating and submitting this return file on behalf of the business  
+     which owes the contribution. FEIN format: ##-####### 
+    </documentation> 
+   </annotation></element> 
+  <element name="SettlementDate" type="dateTime" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     The date and time this return was submitted. Must be unique from any other return file  
+     submitted by the same preparer. Date/Time format: YYYY-MM-DDThh:mm:ss 
+    </documentation> 
+   </annotation></element> 
+  <element name="TotalContributionsDue" type="double" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     The calculated payment amount owed for all employers referenced in this return for their CTPL obligation 
+     Dollar format: ####.## 
+    </documentation> 
+   </annotation></element> 
+  <element name="Employer" type="tns:EmployerInfo" maxOccurs="unbounded" minOccurs="1"></element> 
+ </sequence> 
+ </complexType> 
+--- page 14 ---
+ 
+Page | 14 File Specification Toolkit version 2.1.9 
+10/5/26 
+  <element name="Return" type="tns:Return"></element> 
+ <complexType name="EmployerInfo"> 
+  <annotation> 
+    <documentation>These are Employer Level Attributes</documentation> 
+  </annotation> 
+ <sequence> 
+  <element name="FEIN" type="string" minOccurs="1" maxOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     Federal Employer Identification Number (FEIN) assigned to the employer. FEIN format: ##-####### 
+    </documentation> 
+   </annotation></element> 
+  <element name="EmployerLegalName" type="string" maxOccurs="1" minOccurs="1"></element> 
+  <element name="TaxPayerID" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation> 
+State Taxpayer ID should reflect the identifier under which the employer files state taxes with DRS. If you are a 
+PEO/Common Paymaster who currently files tax returns and reports employee wages on behalf of one or 
+more client employers, you are expected to use the registration number(s) (FEIN) of your clients just as you do 
+when reporting to CT DOL. 
+For a business or household employer, it is most often the State Employer Identification Number (EIN). 
+For a sole proprietor, it may be an SSN or an ITIN (Individual Taxpayer Identification Number). 
+    </documentation> 
+   </annotation></element> 
+  <element name="IndividualName" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>Sole Proprietor Name</documentation> 
+   </annotation></element> 
+  <element name="FName" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>Sole Proprietor First Name</documentation> 
+   </annotation></element> 
+  <element name="MName" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>Sole Proprietor Middle Name</documentation> 
+   </annotation></element> 
+  <element name="LName" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>Sole Proprietor Last Name</documentation> 
+   </annotation></element> 
+  <element name="BusAdrStreet1" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="BusAdrStreet2" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="BusAdrStreet3" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="BusAdrCity" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="BusAdrStateCode" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>State Code must be two alphabetical characters</documentation> 
+   </annotation></element> 
+  <element name="BusAdrPostalCode" type="string" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>Postal Code format: XXXXX or XXXXX-XXXX</documentation> 
+   </annotation></element> 
+  <element name="BusAdrCountry" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="FrgnAdrStreet1" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="FrgnAdrStreet2" type="string" maxOccurs="1" minOccurs="0"></element> 
+--- page 15 ---
+ 
+Page | 15 File Specification Toolkit version 2.1.9 
+10/5/26 
+  <element name="FrgnAdrStreet3" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="FrgnAdrCity" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="FrgnAdrStateCode" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="FrgnAdrPostalCode" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="FrgnAdrCountry" type="string" maxOccurs="1" minOccurs="0"></element> 
+  <element name="TotalWagesThisPeriod" type="double" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+"Total wages" means an employee's salary or hourly wages, vacation pay, holiday pay, tips, commissions, 
+severance pay, etc. including the cash value of any “in-kind” payments. For employees subject to FICA, 
+employers should exclude from the employees' wages any benefits that are excluded for the purposes of 
+calculating the employee's FICA taxable wage. 
+For all employees--both those subject to FICA and those not subject to FICA, the wages subject to 
+contributions are capped at the Social Security benefit and contribution base, meaning that no contributions 
+shall be deducted from any wages earned in excess of that amount. 
+Dollar format: ####.## 
+    </documentation> 
+   </annotation> 
+  </element> 
+  <element name="TotalContributionsDue" type="double" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+The calculated amount owed for this Employer's CTPL obligation. The contribution rate of one-half of one 
+percent (0.5%) applies to an employee’s total wages, up to the Social Security contribution and benefit base. 
+Dollar format: ####.## 
+    </documentation> 
+   </annotation></element> 
+  <element name="ReportingQuarter" type="int" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+The quarter this return should be attributed to.  
+Possible values are 1, 2, 3, 4 
+    </documentation> 
+   </annotation></element> 
+  <element name="ReportingYear" type="int" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+The year this return should be attributed to i.e. 2026 
+    </documentation> 
+   </annotation></element> 
+  <element name="FullQuarter" type="boolean" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+Set value to TRUE if this return represents the full quarter identified by the ReportingQuarter and 
+ReportingYear values. 
+    </documentation> 
+   </annotation></element> 
+  <element name="CTEmployeeCount" type="int" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+Count of CT Employees who are included in the TotalContributionsDue provided for this return. Regardless of 
+what you tell DOL for Unemployment, we are asking for the count of CT Employees who are contributing to 
+CTPL. We acknowledge that the count you provide may be different than the count provided to DOL. 
+    </documentation> 
+--- page 16 ---
+ 
+Page | 16 File Specification Toolkit version 2.1.9 
+10/5/26 
+   </annotation></element> 
+  <element name="CTGrossWages" type="double" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+If you are a “contributing employer” for purposes of the CT Unemployment Insurance program, provide the 
+number you listed on line 1 of Connecticut Department of Labor’s Form Conn UC-2, the Employee Quarterly 
+Earnings Report. 
+If you are not a contributing employer, provide the number you listed in section 1, line 2 of the Connecticut 
+Department of Revenue Services’ Form CT-941, the Connecticut Quarterly Reconciliation of Withholding. 
+Dollar format: ####.## 
+    </documentation> 
+   </annotation></element> 
+  <element name="CTGrossWagesEmployeeCount" type="int" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+The count of CT Employees who are included in the CTGrossWages provided for this return. Regardless of 
+what you tell DOL for Unemployment, we are asking for the number of CT Employees who are contributing to 
+CTPL. 
+We acknowledge that the count you provide may be different than the count provided to DOL. 
+    </documentation> 
+   </annotation></element> 
+  <element name="PaymentAmountTotal" type="double" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+The expected payment for this Invoice. 
+On a full payment, TotalContributionsDue = PaymentAmountTotal. 
+If no payment is expected, the expected value is $0.00. 
+Dollar format: ####.## 
+    </documentation> 
+   </annotation></element> 
+  <element name="IsFinalReturn" type="boolean" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+Set value to TRUE if this is the final return for this Employer because they have ceased operations. 
+    </documentation> 
+   </annotation></element> 
+  <element name="PayCycle" type="string" maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation> 
+     How often Payroll occurs. Values: Weekly, BiWeekly, Semi-monthly, Monthly, Multiple Pay Cycles, Other 
+    </documentation> 
+   </annotation></element> 
+ </sequence> 
+ </complexType> 
+</schema> 
+Note 
+Employer nodes will repeat as many times as needed. 
+--- page 17 ---
+ 
+Page | 17 File Specification Toolkit version 2.1.9 
+10/5/26 
+Sample XML File  
+Download sample XML formatted return file 
+Sample XML Template 
+<?xml version="1.0" encoding="UTF-8"?> 
+<tns:Return xmlns:tns="http://www.example.org/Return" xmlns:xsi="http://www.w3.org/2001/XMLSchema-
+instance" xsi:schemaLocation="http://www.example.org/Return Return.xsd "> 
+ <tns:DocumentCount>1</tns:DocumentCount> 
+ <tns:AmendedReturn>false</tns:AmendedReturn> 
+ <tns:TaxPeriodStartDate>2021-04-01</tns:TaxPeriodStartDate> 
+ <tns:TaxPeriodEndDate>2021-06-30</tns:TaxPeriodEndDate> 
+ <tns:PreparerLegalName>WePay Co.</tns:PreparerLegalName> 
+ <tns:PreparerFEIN>87-7392792</tns:PreparerFEIN> 
+ <tns:SettlementDate>2001-12-31T12:00:00</tns:SettlementDate> 
+ <tns:TotalContributionsDue>72.65</tns:TotalContributionsDue> 
+ <tns:Employer> 
+  <tns:FEIN>98-7654321</tns:FEIN> 
+  <tns:EmployerLegalName>WePay Co.</tns:EmployerLegalName> 
+  <tns:TaxPayerID>tns:TaxPayerID</tns:TaxPayerID> 
+  <tns:IndividualName>tns:IndividualName</tns:IndividualName> 
+  <tns:FName>tns:FName</tns:FName> 
+  <tns:MName>tns:MName</tns:MName> 
+  <tns:LName>tns:LName</tns:LName> 
+  <tns:BusAdrStreet1>436 Oak Street</tns:BusAdrStreet1> 
+  <tns:BusAdrStreet2>tns:BusAdrStreet2</tns:BusAdrStreet2> 
+  <tns:BusAdrStreet3>tns:BusAdrStreet3</tns:BusAdrStreet3> 
+  <tns:BusAdrCity>Putnam</tns:BusAdrCity> 
+  <tns:BusAdrStateCode>CT</tns:BusAdrStateCode> 
+  <tns:BusAdrPostalCode>06260</tns:BusAdrPostalCode> 
+  <tns:BusAdrCountry>USA</tns:BusAdrCountry> 
+  <tns:FrgnAdrStreet1>tns:FrgnAdrStreet1</tns:FrgnAdrStreet1> 
+  <tns:FrgnAdrStreet2>tns:FrgnAdrStreet2</tns:FrgnAdrStreet2> 
+  <tns:FrgnAdrStreet3>tns:FrgnAdrStreet3</tns:FrgnAdrStreet3> 
+  <tns:FrgnAdrCity>tns:FrgnAdrCity</tns:FrgnAdrCity> 
+  <tns:FrgnAdrStateCode>tns:FrgnAdrStateCode</tns:FrgnAdrStateCode> 
+  <tns:FrgnAdrPostalCode>tns:FrgnAdrPostalCode</tns:FrgnAdrPostalCode> 
+  <tns:FrgnAdrCountry>tns:FrgnAdrCountry</tns:FrgnAdrCountry> 
+  <tns:TotalWagesThisPeriod>14530.65</tns:TotalWagesThisPeriod> 
+  <tns:TotalContributionsDue>72.65</tns:TotalContributionsDue> 
+  <tns:ReportingQuarter>2</tns:ReportingQuarter> 
+  <tns:ReportingYear>2021</tns:ReportingYear> 
+  <tns:FullQuarter>true</tns:FullQuarter> 
+  <tns:CTEmployeeCount>5</tns:CTEmployeeCount> 
+  <tns:CTGrossWages>17786.88</tns:CTGrossWages> 
+  <tns:CTGrossWagesEmployeeCount>5</tns:CTGrossWagesEmployeeCount> 
+  <tns:PaymentAmountTotal>62.75</tns:PaymentAmountTotal> 
+  <tns:IsFinalReturn>false</tns:IsFinalReturn> 
+  <tns:PayCycle>Bi-Weekly</tns:PayCycle> 
+ </tns:Employer> 
+</tns:Return> 
+Note 
+Employer nodes will repeat as many times as needed.  
+--- page 18 ---
+ 
+Page | 18 File Specification Toolkit version 2.1.9 
+10/5/26 
+CSV Format: Return File 
+While the preferred format for return files is XML, this alternate CSV format can be used by third-party 
+administrators and employers unable to produce XML return files. 
+File Layout 
+1. The return file must contain a header record with each named field separated from the next by a 
+comma. 
+2. Strings containing commas must be enclosed in double quotes. All other strings may optionally be 
+enclosed in double quotes. 
+3. For each record in the return, the first eight fields must be the same (orange background). 
+Notes about the record layout table 
+1. The record layout is shown vertically rather than horizontally for ease of readability. 
+2. The record layout contains some fields that are not currently being used or are optional. In the 
+sample data, these fields are blank. 
+Table 4 - CSV Return File Record Layout 
+Header Sample Value Datatype 
+DocumentCount 123 integer 
+AmendedReturn FALSE boolean 
+TaxPeriodStartDate 2021-01-01 date 
+TaxPeriodEndDate 2021-03-31 date 
+PreparerLegalName WePay Co string 
+PreparerFEIN 87-7392792 string 
+SettlementDate 2021-04-01T10:00:00 datetime 
+ReturnTotalContributionsDue 193079.93 currency 
+EmployerFEIN 02-4531754 string 
+EmployerLegalName WePay Co string 
+EmployerTaxPayerID 
+ 
+string 
+IndividualName 
+ 
+string 
+FName 
+ 
+string 
+MName 
+ 
+string 
+LName 
+ 
+string 
+BusAdrStreet1 436 OAK string 
+BusAdrStreet2 
+ 
+string 
+BusAdrStreet3 
+ 
+string 
+BusAdrCity Putnam string 
+BusAdrStateCode CT string 
+BusAdrPostalCode 06260 String 
+Format: ##### or #####-####  
+BusAdrCountry USA string 
+FrgnAdrStreet1 
+ 
+string 
+FrgnAdrStreet2 
+ 
+string 
+FrgnAdrStreet3 
+ 
+string 
+--- page 19 ---
+ 
+Page | 19 File Specification Toolkit version 2.1.9 
+10/5/26 
+FrgnAdrCity 
+ 
+string 
+FrgnAdrStateCode 
+ 
+string 
+FrgnAdrPostalCode 
+ 
+string 
+FrgnAdrCountry 
+ 
+string 
+TotalWagesThisPeriod 129974.96 currency 
+TotalContributionsDue 649.87 currency 
+ReportingQuarter 1 integer 
+ReportingYear 2022 string 
+FullQuarter TRUE Boolean 
+CTEmployeeCount 123 integer 
+CTGrossWages 129974.96 currency 
+CTGrossWagesEmployeeCount 123 Integer 
+PaymentAmountTotal 649.87 currency 
+IsFinalReturn FALSE string 
+PayCycle Bi-Weekly string 
+Sample CSV File 
+Download sample CSV formatted return file 
+Return file questions 
+If you have questions about the file specifications, submit a contact us inquiry from and select “File 
+Specification Questions” as the contact reason  
+--- page 20 ---
+ 
+Page | 20 File Specification Toolkit version 2.1.9 
+10/5/26 
+Acknowledgment Files 
+An acknowledgment file is uploaded to the Outbound folder for every enrollment, return and amended 
+return file processed. It is used to communicate status of the submitted file after processing and 
+communicate any processing warnings or errors encountered. 
+Acknowledgement Element 
+• If you receive an ACK file where an error is located in the 
+<tns:Acknowledgement></tns:Acknowledgement> element, the entire file has been rejected. The 
+entire file must be corrected and resubmitted. 
+Example – File level error 
+The following example has a file level error in the Acknowledgment element that prevented the entire file 
+from being processed. 
+<?xml version='1.0' encoding='UTF-8'?> 
+<tns:Acknowldgement xmlns:tns="http://www.example.org/ReturnAck"> 
+ <tns:FileName>CTPL_RTN_650694077_00_20260707104439.txt</tns:FileName> 
+ <tns:Error> 
+  <tns:ErrorNumber>20012008</tns:ErrorNumber> 
+  <tns:ErrorText>Input file type was invalid. Expected XML or CSV</tns:ErrorText> 
+  <tns:ErrorLevel>E</tns:ErrorLevel> 
+ </tns:Error> 
+</tns:Acknowldgement> 
+Action to be taken for File Level Errors  
+Follow instructions for Correcting Errors. 
+ValidEmplyrCount Element 
+• The value in the <tns:ValidEmplyrCount></tns:ValidEmplyrCount> element provides a count of valid 
+employer records that were processed from the file. Compare this number to the number of 
+employer records intended in the file to confirm the counts match. If they do not, then there was an 
+issue with your file. 
+• If the counts do not match you should see an Employer Element with the Status equal to Invalid and 
+an ErrorLevel Element value equal to “E” for each record that was not included in the valid record 
+count. Use the other information provided in the Employer Element and Error Element to identify 
+the records that did not process. 
+• If the counts do not match and there are no Employer Elements with the Status equal to Invalid and 
+an ErrorLevel Element equal to “E”, you may sign in to My Account for Business to view current 
+employer relationships and returns created for each of those employers. Upload a new file for any 
+missed employers. If you are unable to identify the specific records for employers that are missing, 
+submit a Contact Us inquiry, selecting “Help with Contribution Payments/Reporting” as the contact 
+reason. In the How Can We Help You section, request a report of filings and payments for a specific 
+reporting quarter and year. 
+Example – Successful validation 
+The following example is showing that the file processed 2 records successfully by having an empty Error 
+element and a value of 2 for the ValidEmplyrCount element. 
+<?xml version='1.0' encoding='UTF-8'?> 
+<tns:Acknowledgment xmlns:tns=http://www.example.org/ReturnAck> 
+--- page 21 ---
+ 
+Page | 21 File Specification Toolkit version 2.1.9 
+10/5/26 
+ <tns:FileName>CTPL_RTN_999999999_00_20210322134841_test.xml</tns:FileName> 
+ <tns:StartDate>2021-01-01</tns:StartDate> 
+ <tns:EndDate>2021-03-31</tns:EndDate> 
+ <tns:ProcessorFEIN>99-9999999</tns:ProcessorFEIN> 
+ <tns:ProcessorBusinessName>TPA NAME</tns:ProcessorBusinessName> 
+ <tns:Error/> 
+ <tns:ValidEmplyrCount>2</tns:ValidEmplyrCount> 
+ <tns:Employer/> 
+</tns:Acknowledgment> 
+Action to be taken for successful files 
+Download the acknowledgement file for your records 
+Employer Element 
+• The <tns:Employer></tns:Employer> element will contain information that identifies the records 
+reported to have warnings or errors. 
+• If no warning or error is encountered for any employer, the employer element will be empty and 
+represented as a self-closing element that looks like <tns:Employer/> 
+• Information provided in the Employer Element when a warning or error is encountered is: 
+o Employer FEIN – Employer Federal Identification Number value listed in the uploaded file 
+o Employer Business Name – Employer Business Name as listed in the uploaded file 
+o Status – Indicates whether the employer record processed 
+ Valid – Indicates the record processed 
+ Invalid – Indicates the record did not process 
+Error Element 
+• The <tns:Error></tns:Error> element is nested within the Employer Element. It provides  more 
+information about the reported warning or error. 
+o Error Number – Eight-digit number that is assigned to an error. Error and warning codes which 
+can be referenced in section Return Error & Warning Codes. 
+o Error Text – Description of the error or warning 
+o Error Level – Indicates whether the issue identified is an error or a warning 
+ Valid – Indicates the record processed 
+ Invalid – Indicates the record did not process 
+ErrorLevel Element 
+• The <tns:ErrorLevel></tns:ErrorLevel> element is nested within the Error Element. The ErrorLevel 
+element content will inform you whether it is an error or warning that is being reported. The action 
+you must take is different for each. 
+o E = Error, the record was not accepted due to the error listed. Create and submit a new file for 
+just the corrected employer records. 
+o W = Warning, the record was accepted, but the warning will give you information to resolve to 
+prevent this issue on future files. Do not correct and resubmit, this information is only to 
+assist you with correcting future files. 
+Example – Employer level error and warning 
+The following example has two Employer elements, one reporting an error and the other reporting a 
+warning. The ValidEmplyrCount element shows that 1 employer record processed. The record that 
+processed is the one with the warning. 
+--- page 22 ---
+ 
+Page | 22 File Specification Toolkit version 2.1.9 
+10/5/26 
+<?xml version='1.0' encoding='UTF-8'?> 
+<tns:Acknowldgement xmlns:tns="http://www.example.org/ReturnAck"> 
+ <tns:FileName>CTPL_RTN_999999999_00_20260618085857.xml</tns:FileName> 
+ <tns:StartDate>2025-10-01</tns:StartDate> 
+ <tns:EndDate>2025-12-31</tns:EndDate> 
+ <tns:ProcessorFEIN>99-9999999</tns:ProcessorFEIN> 
+ <tns:ProcessorBusinessName>TPA GROUP INC</tns:ProcessorBusinessName> 
+ <tns:Error/> 
+ <tns:ValidEmplyrCount>1</tns:ValidEmplyrCount> 
+ <tns:Employer> 
+  <tns:EmployerFEIN>23-2323232</tns:EmployerFEIN> 
+  <tns:EmployerBusinessName>Company LLC</tns:EmployerBusinessName> 
+  <tns:Status>Invalid</tns:Status> 
+  <tns:Error> 
+   <tns:ErrorNumber>10011031</tns:ErrorNumber> 
+   <tns:ErrorText>CT Gross Wages must be greater than or equal to the Contribution 
+Amount.</tns:ErrorText> 
+   <tns:ErrorLevel>E</tns:ErrorLevel> 
+  </tns:Error> 
+ </tns:Employer> 
+ <tns:Employer> 
+  <tns:EmployerFEIN>12-1212121</tns:EmployerFEIN> 
+  <tns:EmployerBusinessName>Business Co</tns:EmployerBusinessName> 
+  <tns:Status>Valid</tns:Status> 
+  <tns:Error> 
+   <tns:ErrorNumber>10010018</tns:ErrorNumber> 
+   <tns:ErrorText>Address Street is too large, value must be a maximum of 40 characters. CT 
+Paid Leave will truncate characters that exceed 40</tns:ErrorText> 
+   <tns:ErrorLevel>W</tns:ErrorLevel> 
+  </tns:Error> 
+ </tns:Employer> 
+</tns:Acknowldgement> 
+Actions to be taken to record level warnings or errors 
+1. Follow instructions for Correcting Errors 
+2. Use the warning information to correct future files 
+Correcting Errors 
+You need to create a new file with only the corrected records using these steps: 
+1. Save a copy of the original file, increasing the two-character revision indicator in the name. 
+2. Remove all successfully processed records, leaving only the records that were reported as having 
+errors. 
+3. Correct the errors. 
+4. Upload the new file to the Inbound folder on the SFTP site. 
+Important 
+Warnings – Do not resubmit. Please use the information to correct your future files. 
+If your file had warnings, it included mistakes or was incomplete, but we were able to process the data. 
+Errors – You will need to correct the errors and resubmit a file for corrected employer records. 
+If your file had errors, we were unable to process the data. A copy of your original file will be uploaded to 
+the outbound folder with the file extension .error appended to the file name. Create a new file with only the 
+fixed records and resubmit. 
+--- page 23 ---
+ 
+Page | 23 File Specification Toolkit version 2.1.9 
+10/5/26 
+Best Practice 
+Upload test files until you receive no errors in the .ack file Successful file processing depends on files 
+adhering to the strict file specifications as outlined in this guide. 
+Schema XSD File 
+Download acknowledgement file schema XSD file 
+Acknowledgement File Schema Graphic View 
+Figure 3 Acknowledgement Version 0.2.2 
+ 
+Schema XML Text View 
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/ReturnAck" 
+xmlns:tns="http://www.example.org/ReturnAck" elementFormDefault="qualified"> 
+<complexType name="Employer"> 
+ <sequence> 
+  <element name="EmployerFEIN" type="string"></element> 
+  <element name="EmployerBusinessName" type="string"></element> 
+  <element name="Status" type="string" minOccurs="0" maxOccurs="1"> 
+   <annotation> 
+    <documentation> 
+The overall status of the Employer in regard to processing. A status of "Invalid" indicates there were errors 
+associated with this Employer that require addressing. 
+    </documentation> 
+   </annotation></element> 
+  <element name="Error" type="tns:Error" maxOccurs="unbounded" minOccurs="0"> 
+   <annotation> 
+    <documentation> 
+A listing of error messages, including warnings and informational messages encountered during processing. 
+    </documentation> 
+   </annotation></element> 
+ </sequence> 
+</complexType> 
+<complexType name="Error"> 
+ <annotation> 
+
+--- page 24 ---
+ 
+Page | 24 File Specification Toolkit version 2.1.9 
+10/5/26 
+  <documentation> 
+Within a given Employer, 0 to many error conditions may be detected and logged. 
+Procedurally, it is desired to identify all errors within an Employer before rejecting the employer to minimize 
+the number of round trips this data needs to take between the payroll processor and the Authority. If any 
+errors are detected within an Employer, the Employer is rejected but the remainder of the return file (All 
+accepted Employers) can be processed. 
+  </documentation> 
+ </annotation> 
+ <sequence> 
+  <choice maxOccurs="1" minOccurs="1"> 
+   <annotation> 
+    <documentation>The Object this error is associated with.</documentation> 
+   </annotation> 
+   <element name="EmployeeID" type="string"></element> 
+   <element name="EmployerFEIN" type="string"></element> 
+   <element name="ProcessorFEIN" type="string"></element> 
+   <element name="OtherError" type="string"></element> 
+  </choice> 
+  <element name="ErrorNumber" type="string"></element> 
+  <element name="ErrorText" type="string"></element> 
+  <element name="ErrorLevel" type="string"></element> 
+ </sequence> 
+</complexType> 
+<complexType name="Acknowledgment"> 
+ <annotation> 
+  <documentation>Version 0.2.2  - 03/25/2021</documentation> 
+ </annotation> 
+ <sequence> 
+  <element name="FileName" type="string" minOccurs="1" maxOccurs="1"> 
+   <annotation> 
+    <documentation>This is the filename of the return file being acknowledged.</documentation> 
+   </annotation></element> 
+  <element name="StartDate" type="date" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>For Returns, The Start Date of the Reporting Period</documentation> 
+   </annotation></element> 
+  <element name="EndDate" type="date" maxOccurs="1" minOccurs="0"> 
+   <annotation> 
+    <documentation>For Returns, The End Date of the Reporting Period</documentation> 
+   </annotation></element> 
+  <element name="ProcessorFEIN" type="string"></element> 
+  <element name="ProcessorBusinessName" type="string"></element> 
+  <element name="Error" type="tns:Error" maxOccurs="unbounded" minOccurs="0"></element> 
+  <element name="ValidEmplyrCount" type="int"></element> 
+  <element name="ValidEmplyeeCount" type="int"></element> 
+  <element name="Employer" type="tns:Employer" maxOccurs="unbounded" minOccurs="0"></element> 
+ </sequence> 
+</complexType> 
+<element name="Acknowledgment" type="tns:Acknowledgment"></element> 
+<element name="ProcessorFEIN" type="string"></element> 
+</schema>  
+--- page 25 ---
+ 
+Page | 25 File Specification Toolkit version 2.1.9 
+10/5/26 
+ACH Credit Record Specifications 
+Automated Clearing House (ACH) credit entries must be delivered to the Bank of America (BofA) in the 
+National Automated Clearing House Association (NACHA) format. The NACHA format is a national standard. 
+The CT Paid Leave Authority requires the NACHA Header Record 5, Detail Record 6 and Addendum Record 7 
+to be formatted according to the file specifications in this section. 
+Read the field level instructions carefully. Some values in the records will be fixed and are supplied in the 
+“Contents” column of the record layout, while others will vary by submission. 
+Important 
+Adhering to the file specifications is necessary for CT Paid Leave contributions to process successfully. 
+Incorrectly formatted contributions will be returned. 
+Penny Tests 
+The CT Paid Leave Authority (the Authority) suggests sending a penny test prior to remitting your first 
+contribution, following these steps: 
+• Format NACHA file according to the specifications provided in the following sections: 
+o CCD file specification for third-party administrators 
+ NACHA RECORD 5 – Batch Header Record Layout Format 
+ NACHA RECORD 6 – Entry Detail Record Layout Format 
+ NACHA RECORD 7 – Addenda Record Layout Format 
+o CTX file specification for employers 
+ NACHA RECORD 5 – Batch Header Record Layout Format 
+ NACHA RECORD 6 – Entry Detail Record Layout Format 
+ NACHA RECORD 7 – Addenda Record Layout Format  
+• Include the Authority’s banking information in the file, which is:  
+o Bank of America Bank Transit Number: 011900254 
+o The Authority Bank Account Number: 00000385015954138 
+• Indicate a penny deposit to the Authority account. 
+• Follow your normal process for submitting the NACHA file to your banking institution. 
+• To request a refund from your penny test, submit contact us inquiry. Select "Help with Contribution 
+Payments/Reporting" as the contact reason. In the body of your inquiry, specify the date you 
+submitted your penny test. 
+• The Authority will respond to your inquiry through email with confirmation that the penny test was 
+successful or help with how to resolve the issue that prevented the penny from being processed. 
+• The Authority will issue a refund of the penny test back to the issuing bank account within thirty 
+days.  
+--- page 26 ---
+ 
+Page | 26 File Specification Toolkit version 2.1.9 
+10/5/26 
+CCD file specification for third-party administrators 
+Third-party administrators remit NACHA payment transactions identified as CCD on the Batch Header 
+Record. The following sections outline the file specification for the NACHA Header Record 5, Detail Record 6 
+and Addendum Record 7. 
+CCD NACHA RECORD 5 – Batch Header Record Layout Format 
+Field Character 
+Position 
+Size Contents Field Description Field Instructions 
+1 1-1 1 '5' RECORD TYPE CODE This value is always 5 
+2 2-4 3 ‘200’ TRANSACTION CODE This value is always 200 
+3 5-20 16 ‘Preparer Name   
+' 
+PREPARER NAME Identifies the legal name of the 
+company submitting the NACHA 
+payment on behalf of a client 
+employer. This should be the name of 
+the third-party payroll company or tax 
+accountant. 
+4 21-40 20  DISCRETIONARY Refer to NACHA Standards. 
+5 41-50 10 '0123456789' EMPLOYER ACH 
+COMPANY ID 
+ 
+6 51-53 3 ‘CCD’ TRANSACTION 
+MNEMONIC 
+This value will always be CCD 
+7 54-63 10 ‘CTPL CNTRB’ ENTRY DESCRIPTION  This value will always be CTPL CNTRB 
+8 64-69 6 '210331' DESCRIPTIVE DATE Refer to NACHA Standards. 
+9 70-75 6 ‘YYMMDD’ EFFECTIVE ENTRY DATE Refer to NACHA Standards. 
+10 76-78 3 ' ' SETTLEMENT DATE Refer to NACHA Standards. 
+11 79-79 1 ‘1’ ORIGINATOR STATUS  This value is always 1, except for 
+Federal Government Entities. 
+12 80-87 8 ‘05100001’ ORIGINATING DFI 
+IDENTIFICATION 
+This value is always 05100001 
+13 88-94 7   Batch Number Refer to NACHA Standards. 
+Within each batch, there can be more than one pair of Detail Record 6 and Addendum Record 7. If at any 
+time there are two consecutive Detail or Addendum Records within a batch, it will indicate an error 
+condition, and the current record pair will be rejected.  
+--- page 27 ---
+ 
+Page | 27 File Specification Toolkit version 2.1.9 
+10/5/26 
+NACHA RECORD 6 – Entry Detail Record Layout Format 
+Field Character 
+Position 
+Size Contents Field Description Field Instructions 
+1 1-1 1 '6' RECORD TYPE 
+CODE 
+This value is always 6 
+2 2-3 2 ‘22’ TRANSACTION 
+CODE 
+This value is always 22 
+3 4-11 8 '01190025' RECEIVING BANK 
+TRANSIT NUMBER 
+This value is always 01190025 
+4 12-12 1 '4' RECEIVING BANK 
+CHECK DIGIT 
+This value is always 4 
+5 13-29 17 '00000385015954138' RECEIVING BANK 
+ACCOUNT 
+NUMBER 
+This value is always 
+00000385015954138 
+6 30-39 10 '$$$$$$$$cc' AMOUNT The paid leave contribution amount 
+to be posted to The CT Paid Leave 
+Authority’s account. 
+This 10-digit number must be right-
+justified and zero filled to the left. 
+Do not insert a decimal point; the 
+last two digits are assumed to be 
+cents. 
+7 40-54 15 'XXXXXXXXXXXXXXX' TAXPAYER ID 
+NUMBER   
+An alphanumeric field that uniquely 
+identifies the client employer on 
+whose behalf the NACHA payment is 
+being made. This should be the 
+Federal Employer Identification 
+Number (FEIN), left-justified with 
+trailing spaces. 
+8 55-76 22 'TESTCTPLCLIENT' TAXPAYER NAME Identifies the legal name of the client 
+employer on whose behalf the 
+NACHA payment is being made. 
+Note: This is different than the 
+guidance for this field found in 
+standard NACHA specifications. 
+9 77-78 2 ‘  ‘ DISCRETIONARY 
+DATA 
+This field should be filled with spaces 
+since CT Paid Leave is not using it. 
+10 79-79 1 '1' ADDENDA 
+RECORD 
+INDICATOR 
+This value is always 1, as there will be 
+an addendum record with this 
+transaction. 
+11 80-94 15 NUMERIC TRACE NUMBER Number inserted by the 
+originating/sending to trace the 
+transaction through the system in 
+case of error. 
+--- page 28 ---
+ 
+Page | 28 File Specification Toolkit version 2.1.9 
+10/5/26 
+A single Addendum Record 7 will follow each Detail Record 6. The information on Addendum Record 7 is 
+important to provide accurately and completely to ensure the proper accounts are credited with the proper 
+payments.  
+--- page 29 ---
+ 
+Page | 29 File Specification Toolkit version 2.1.9 
+10/5/26 
+CCD NACHA RECORD 7 – Addenda Record Layout Format 
+Field Character 
+Position 
+Size Contents Field Description Field Instructions 
+1 1-1 1 7 RECORD TYPE CODE This value is always 7 
+2 2-3 2 05 ADDENDA TYPE 
+CODE 
+This value is always 05 
+3 4 1 * FIELD SEPARATOR This value is always * 
+4 5-14 10 99-1234567 PAYOR FEIN Federal Employer Identification Number 
+(FEIN) of the business submitting the NACHA 
+payment, either third-party payroll company, 
+tax accountant or employer paying for 
+themselves. 
+The dash is required. 
+5 15 1 * FIELD SEPARATOR This value is always * 
+6 16-25 10 88-1234567 EMPLOYER FEIN FEIN of the employer on whose behalf the 
+NACHA payment is being made. 
+The dash is required. 
+7 26 1 * FIELD SEPARATOR This value is always * 
+8 27-36 10 2021-03-31 QTR END DATE Last day of the quarter this return covers.  
+Formatting must be YYYY-MM-DD 
+9 37 1 * FIELD SEPARATOR This value is always * 
+10 38-48 11 $$$$$$$$$cc TOTAL QTR 
+CONTRIBUTION FOR 
+THIS EMPLOYER 
+Client employer’s quarterly contribution 
+amount.  
+This 11-digit number must be right-justified 
+and zero filled to the left. Do not insert a 
+decimal point; the last two digits are 
+assumed to be cents. 
+11 49 1 * FIELD SEPARATOR This value is always * 
+12 50-60 11 $$$$$$$$$cc TOTAL QTR WAGES 
+FOR EMPLOYER 
+Client employer’s total quarterly wages. 
+This 11-digit number must be right-justified 
+and zero filled to the left. Do not insert a 
+decimal point; the last two digits are 
+assumed to be cents. 
+13 61-83 23   UNUSED  Must be a space 
+14* 84-87 4   SPC ADDENDA 
+SEQUENCE NUMBER 
+Follow ACH and Banking rules and 
+procedures. 
+15* 88-94 7   ENTRY DETAIL 
+SEQUENCE NUMBER 
+Follow ACH and Banking rules and 
+procedures. 
+--- page 30 ---
+ 
+Page | 30 File Specification Toolkit version 2.1.9 
+10/5/26 
+CTX file specification for employers 
+Employers submit transactions identified as CTX on the Batch Header Record. The following sections outline 
+the file specification for the NACHA Header Record 5, Detail Record 6 and Addendum Record 7. 
+CTX NACHA RECORD 5 – Batch Header Record Layout Format 
+Field Character 
+Position 
+Size Contents Field Description Field Instructions 
+1 1-1 1 '5' RECORD TYPE CODE This value is always 5 
+2 2-4 3 ‘200’ TRANSACTION CODE This value is always 200 
+3 5-20 16 ‘Employer Name   
+' 
+EMPLOYER NAME Identifies the legal name of the 
+business submitting the NACHA 
+payment. 
+4 21-40 20  DISCRETIONARY Refer to NACHA Standards. 
+5 41-50 10 '0123456789' EMPLOYER ACH COMPANY 
+ID 
+ 
+6 51-53 3 ‘CTX’ TRANSACTION MNEMONIC This value is always CTX 
+7 54-63 10 ‘CTPL CNTRB’ ENTRY DESCRIPTION  This value is always CTPL CNTRB 
+8 64-69 6 '210331' DESCRIPTIVE DATE Refer to NACHA Standards. 
+9 70-75 6 ‘YYMMDD’ EFFECTIVE ENTRY DATE Refer to NACHA Standards. 
+10 76-78 3 '   ' SETTLEMENT DATE Refer to NACHA Standards. 
+11 79-79 1 ‘1’ ORIGINATOR STATUS  This value is always 1, except for 
+Federal Government Entities. 
+12 80-87 8 ‘05100001’ ORIGINATING DFI 
+IDENTIFICATION 
+This value is always 05100001 
+13 88-94 7   BATCH NUMBER Refer to NACHA Standards. 
+Within each batch, there can be more than one pair of Detail Record 6 and Addendum Record 7. If at any 
+time there are two consecutive Detail or Addendum Records within a batch, it will indicate an error 
+condition, and the current record pair will be rejected.  
+--- page 31 ---
+ 
+Page | 31 File Specification Toolkit version 2.1.9 
+10/5/26 
+CTX NACHA RECORD 6 – Entry Detail Record Layout Format 
+Field Character 
+Position 
+Size Contents Field Description Field Instructions 
+1 1-1 1 '6' RECORD TYPE 
+CODE 
+This value is always 6 
+2 2-3 2 ‘22’ TRANSACTION 
+CODE 
+This value is always 22 
+3 4-11 8 '01190025' RECEIVING BANK 
+TRANSIT NUMBER 
+The value for CT Paid Leave is always 
+01190025 
+4 12-12 1 '4' RECEIVING BANK 
+CHECK DIGIT 
+The value for CT Paid Leave is always 
+4 
+5 13-29 17 '00000385015954138' RECEIVING BANK 
+ACCOUNT NUMBER 
+The value for CT Paid Leave is always 
+00000385015954138 
+6 30-39 10 '$$$$$$$$cc' AMOUNT The paid leave contribution amount 
+to be posted to The CT Paid Leave 
+Authority’s account. 
+This 10-digit number must be right-
+justified and zero filled to the left. 
+Do not insert a decimal point; the 
+last two digits are assumed to be 
+cents. 
+7 40-54 15 'XXXXXXXXXXXXXXX' TAXPAYER ID 
+NUMBER   
+Alphanumeric field uniquely 
+identifies the client employer on 
+whose behalf the NACHA payment is 
+being made.  
+This value should be the Federal 
+Employer Identification Number, 
+left-justified with trailing spaces. 
+8 55-58 4 ‘0001’ NUMBER OF 
+ADDENDUM 
+RECORDS 
+This value is always 0001.  
+There will always be one addendum 
+record per entry detail. 
+9 59-74 16 'CT PAID LEAVE   ' RECIPIENT NAME This value is always CT PAID LEAVE 
+followed by three spaces 
+10 75-76 2 ‘  ‘ RESERVED This field should be filled with spaces 
+since CT Paid Leave is not using it. 
+11 77-78 2 ‘  ‘ DISCRETIONARY 
+DATA 
+This field should be filled with spaces 
+since CT Paid Leave is not using it. 
+12 79-79 1 '1' ADDENDA RECORD 
+INDICATOR 
+This value is always 1. 
+There will be an addendum record 
+with this transaction. 
+13 80-94 15  TRACE NUMBER Number inserted by the 
+originating/sending to trace the 
+transaction through the system in 
+case of error. 
+--- page 32 ---
+ 
+Page | 32 File Specification Toolkit version 2.1.9 
+10/5/26 
+Each detail record must be followed by a single addendum record 7. The information on the addendum 
+record is important to provide accurately and completely to ensure the proper accounts are credited with 
+the proper payments.  
+--- page 33 ---
+ 
+Page | 33 File Specification Toolkit version 2.1.9 
+10/5/26 
+CTX NACHA RECORD 7 – Addenda Record Layout Format 
+Field Character 
+Position 
+Size Contents Field Description Field Instructions 
+1 1-1 1 7 RECORD TYPE CODE This value is always 7 
+2 2-3 2 05 ADDENDA TYPE CODE This value is always 05 
+3 4 1 * FIELD SEPARATOR This value is always * 
+4 5-14 10 99-1234567 EMPLOYER FEIN Federal Employer Identification Number 
+(FEIN) of the employer submitting the 
+NACHA payment. 
+The dash is required. 
+5 15 1 * FIELD SEPARATOR This value is always * 
+6 16-25 10 2021-01-01 PAY PERIOD START 
+DATE 
+First day of the pay period this 
+contribution covers. CT Paid Leave 
+recommends aligning NACHA payments to 
+quarters. 
+Formatting must be YYYY-MM-DD 
+7 26 1 * FIELD SEPARATOR This value is always * 
+8 27-36 10 2021-03-31 PAY PERIOD END DATE Last day of the pay period this contribution 
+covers. CT Paid Leave recommends 
+aligning NACHA payments to quarters. 
+Formatting must be YYYY-MM-DD 
+9 37 1 * FIELD SEPARATOR This value is always * 
+10 38-48 11 $$$$$$$$$cc TOTAL CONTRIBUTION 
+FOR THIS EMPLOYER 
+Employer’s contribution amount for the 
+identified pay period. 
+This 11-digit number must be right justified 
+and zero filled to the left. Do not insert a 
+decimal point; the last two digits are 
+assumed to be cents. 
+11 49 1 * FIELD SEPARATOR This value is always * 
+12 50-60 11 $$$$$$$$$cc TOTAL WAGES FOR 
+THIS EMPLOYER 
+Employer’s wages for the identified pay 
+period. 
+"Total wages" means an employee's salary 
+or hourly wages, vacation pay, holiday pay, 
+tips, commissions, severance pay, etc. 
+including the cash value of any “in-kind” 
+payments. For employees subject to FICA, 
+employers should exclude from the 
+employees' wages any benefits that are 
+excluded for the purposes of calculating 
+the employee's FICA taxable wage. 
+--- page 34 ---
+ 
+Page | 34 File Specification Toolkit version 2.1.9 
+10/5/26 
+For all employees--both those subject to 
+FICA and those not subject to FICA, the 
+wages subject to contributions are capped 
+at the Social Security benefit and 
+contribution base, meaning that no 
+contributions shall be deducted from any 
+wages earned in excess of that amount. 
+This 11-digit number should be right-
+justified and zero filled to the left. Do not 
+insert a decimal point; the last two digits 
+are assumed to be cents. 
+13 61-83 23   UNUSED  Must be a space 
+14* 84-87 4   SPC ADDENDA 
+SEQUENCE NUMBER 
+Follow ACH and Banking rules and 
+procedures. 
+15* 88-94 7   ENTRY DETAIL 
+SEQUENCE NUMBER 
+Follow ACH and Banking rules and 
+procedures. 
+NACHA file questions 
+If you have questions about the file specifications, submit a contact us inquiry from and select “File 
+Specification Questions” as the contact reason. 
+--- page 35 ---
+ 
+Page | 35 File Specification Toolkit version 2.1.9 
+10/5/26 
+Error and warning codes 
+The following error and warning codes are produced when processing external files and may be returned through Acknowledgement XML files. 
+The format of each code in the acknowledgement file is comprised of the 3-digit category code, 2-digit sub-category code, and 2-digit error 
+code. Example: 10010001 corresponds to the first error listed in the table below. Category code: 100, sub-category code: 10, and error code: 001. 
+Error Level 
+• E = Error, the submission was not accepted and will need to be fixed before resubmitting. Instructions for correcting errors. 
+• W = Warning, the submission was accepted, but the warning will give you information to resolve to prevent this in the future. 
+Category 
+Code 
+Error 
+Category 
+Description 
+Sub-
+Category 
+Code 
+Sub-
+Category  
+Description 
+Error 
+Code 
+ErrorText LongDescription Error 
+Level 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+001 FEIN Format Mismatch FEIN format is invalid. Please ensure FEIN is in correct format: ##-####### E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+002 Date Format Mismatch Date format is invalid. Date must use YYYY-MM-DD format. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+003 Data Type Mismatch Cannot match an input value to the expected data type. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+004 Payment Amount Mismatch Employer payment does not match ACH amount. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+013 State Code Format 
+Mismatch 
+State Code format is invalid. Value must be two alphabetical characters. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+14 Postal Code Format 
+Mismatch 
+Postal Code format is invalid. Please ensure Postal Code is in correct format: 
+XXXXX or XXXXX-XXXX 
+W 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+015 Date/Time Format Mismatch Date/Time format is invalid. Date/Time must use YYYY-MM-DDThh:mm:ss 
+format. 
+E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+016 Data Format Mismatch Dollar amount is required 
+Dollar amount is invalid, value contained non-numeric value, amounts must use 
+####.## format. 
+E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+017 Amended Returns Amended Return value is set to TRUE or is invalid in a Return File. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+18 Street Address Size Address Street is too large. Value must be a maximum of 40 characters. 
+CT Paid Leave will truncate characters that exceed 40. 
+W 
+--- page 36 ---
+ 
+Page | 36 File Specification Toolkit version 2.1.9 
+10/5/26 
+100 Data 
+Validation 
+10 Size Errors 19 City Size City value is too large. Value must be a maximum of 25 characters. 
+CT Paid Leave truncates values exceeding 25 characters. 
+W 
+100 Data 
+Validation 
+10 Size Errors 20 State Size State value is too large. Value must be a maximum of 2 characters. 
+CT Paid Leave truncates values exceeding 2 characters. 
+W 
+100 Data 
+Validation 
+10 Size Errors 21 Postal Code Size Postal Code Value is too large. Value must be a maximum of 10 characters. 
+CT Paid Leave truncates values exceeding 10 characters. 
+W 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+22 Pay Cycle Size Pay Cycle value is too large. Value Must be a maximum of 25 characters. 
+CT Paid Leave truncates values exceeding 25 characters. 
+W 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+023 Amended Returns Amended Return value must be set to TRUE for all Amended Returns files. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+026 Data Value Mismatch Data must be a valid positive number. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+027 Data Value Mismatch Reporting Quarter must be a number between 1 and 4. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+031 DateYouFirstHadCTWorkers 
+Format Mismatch 
+DateYouFirstHadCTWorkers field date or format is invalid. Date must use 
+YYYY-MM-DD format. 
+E 
+100 Data 
+Validation 
+10 Size Errors 35 EmplyrContactFName Size EmplyrContactFName value is too large. Value Must be a maximum of 40 
+characters. 
+CT Paid Leave will truncate all characters that exceed 40 characters. 
+W 
+100 Data 
+Validation 
+10 Size Errors 36 Value Exceeds Field Size [Field Name] value is too large. Value Must be a maximum of 80 characters. 
+CT Paid Leave will truncate all characters that exceed 80 characters. 
+W 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+037 Email Format [FieldName] is not a proper email format. E 
+100 Data 
+Validation 
+10 Mismatch 
+Errors 
+038 EmplyrContactRole Data 
+Value Mismatch 
+EmplyrContactRole value provided must be one of the following: 
+• Owner Authorized Company Representative 
+• Benefits Coordinator 
+• Payroll Coordinator 
+• Owner 
+• Partner 
+• Stakeholder 
+• Other 
+• TPA / Tax Accountant 
+E 
+--- page 37 ---
+ 
+Page | 37 File Specification Toolkit version 2.1.9 
+10/5/26 
+100 Data 
+Validation 
+11 Other 
+Validations 
+001 Unable to Amend The original invoice cannot be located or is unable to be amended through 
+batch because it is either for an Online Portal Payment or has already been 
+amended through the Online Payment Portal. Please review the file 
+specifications toolkit or check your filings in the My Account section. To review 
+or amend your filings, sign in to your account at www.ctpaidleave.org and 
+navigate to the My Account for Business portal. 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+002 Unable to Amend We are unable to amend your return filing because your account was non-
+compliant for the same reporting quarter. If you have any questions or need 
+additional support, please submit a support request at 
+https://service.ctpaidleave.org/s/contactus. Select “Help with contribution 
+payments/reporting” as the contact reason when completing the contact form. 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+005 Required Field Missing Missing values in required data field E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+006 Duplicate Data Duplicate record found. Either delete the duplicate record or modify the data 
+to make it unique. 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+07 Field is Null Data field is null. W 
+100 Data 
+Validation 
+11 Other 
+Validations 
+08 Fields will be required 
+starting April 1, 2023 
+Beginning April 1, 2023, the Reporting Quarter, Reporting Year, Full Quarter, 
+CT Employee Count, CT Gross Wages and CT Gross Wages Employee Count 
+fields will be required. Please use this warning to make corrections to your 
+future files only. This record was processed and you do not need to upload it 
+again. 
+W 
+100 Data 
+Validation 
+11 Other 
+Validations 
+023 Tax Period Dates TaxPeriodStartDate cannot be more than 31 days prior to the first day of the 
+quarter identified by the ReportingQuarter and ReportingYear of the return 
+filing. Update either the TaxPeriodStartDate or ReportingQuarter and/or 
+ReportingYear. 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+024 Tax Period Dates TaxPeriodEndDate must be a date within the quarter identified by the 
+ReportingQuarter and ReportingYear of the return filing. Update either the 
+TaxPeriodEndDate or ReportingQuarter and/or ReportingYear. 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+025 Relationship Date Relationship End date is prior to the Relationship Start Date W 
+100 Data 
+Validation 
+11 Other 
+Validations - 
+File Error 
+026 Tax Period Dates TaxPeriodStartDate must be prior to the TaxPeriodEndDate. Correct dates in 
+the file to pass this validation. 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations - 
+File Error 
+027 Tax Period Dates The date span between the TaxPeriodStartDate and the TaxPeriodEndDate 
+cannot exceed 92 days 
+E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+028 ReportingYear ReportingYear must be for the current year or a previous year. E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+030 Total Contributions Due and 
+Total Wages This Period 
+Mismatch 
+For either Total Contributions Due or Total Wages This Period to be $0.00, the 
+other value must also be $0.00. 
+E 
+--- page 38 ---
+ 
+Page | 38 File Specification Toolkit version 2.1.9 
+10/5/26 
+100 Data 
+Validation 
+11 Other 
+Validations 
+031 CT Gross Wages and 
+Contribution Amount 
+Validation 
+CT Gross Wages must be greater than or equal to the Contribution Amount. E 
+100 Data 
+Validation 
+11 Other 
+Validations 
+033 Required Fields Missing Missing required field(s): [dynamically insert each required field that is missing] E 
+200 Processing 
+Error 
+12 Other 
+Validations 
+015 Maximum number of errors 
+exceeded 
+More than 100 errors were encountered while processing. Review your ack file 
+for more detail. 
+E 
+200 Processing 
+Error 
+12 File Errors 008 Incorrect File Type Input file type was invalid. Expected XML or CSV. E 
+200 Processing 
+Error 
+12 File Errors 009 File Errors Unable to read file. Please review the File Specification Toolkit available from 
+https://www.ctpaidleave.org/resources-and-guides. 
+E 
+200 Processing 
+Error 
+12 File Errors 10 Versioning Error Did not process file because newer version was available. W 
+200 Processing 
+Error 
+12 File Errors 011 Unspecified File File did not meet specified naming method or type. E 
+200 Processing 
+Error 
+12 File Errors 040 Invalid XML root element 
+value 
+Invalid XML root element value: <actual value from file>. Please review the File 
+Specification Toolkit available from https://www.ctpaidleave.org/resources-
+and-guides. 
+E 
+200 Processing 
+Error 
+12 File Errors 041 TPA not registered Returns are only accepted from registered Third-Party Administrators or 
+Employers. Follow the instructions on https://www.ctpaidleave.org/Remit-
+Contributions/Batch-Process to register with the CT Paid Leave Authority. 
+E 
+200 Processing 
+Error 
+12 File Errors 042 Exceeds Max File Size File must be less than 5MB to be processed. E 
+200 Processing 
+Error 
+12 File Errors 43 File contains employee data Warning, fix this issue for future files: Employee data should no longer be 
+included in Return or Amended Return Files. Starting July 2025, we will no 
+longer process any Return or Amended Return containing employee data. 
+W 
+200 Processing 
+Error 
+12 File Errors 044 File contains employee data Employee data cannot be included in Return or Amended Return Files. Remove 
+the employee data, update the version number in the file name, and upload the 
+new file for processing. 
+E 
+200 Processing 
+Error 
+12 File Errors 045 Partially or fully refunded 
+returns cannot be amended. 
+This Return cannot be amended via batch because the payment has already 
+been refunded. Either remit a new batch Return for this pay period or sign into 
+the My Account for Business portal at www.ctpaidleave.org to File + Pay the 
+correct amount. 
+E 
+200 Processing 
+Error 
+13 File Location 
+Errors 
+011 Directory Structure File not found in expected SFTP folder. Unable to move file due to directory 
+structure. 
+E 
+--- page 39 ---
+ 
+Page | 39 File Specification Toolkit version 2.1.9 
+10/5/26 
+200 Processing 
+Error 
+13 File Location 
+Errors 
+012 Invalid File Name File name did not meet predefined format, please ensure the naming 
+conditions are met. 
+If the file is a Return file, the error message is: 
+File does not match naming convention for Return Files. Example Return File 
+Name: 'CTPL_RTN_426092234_00_20210112152238' where 426092234 is your 
+FEIN, 00 is your revision number, and 20210112152238 is a date/time stamp. 
+Must be in CSV or XML format. Please review the File Specification Toolkit 
+available from https://www.ctpaidleave.org/resources-and-guides. 
+If the file is an Enrollment File, the error message is: 
+CTPL_ENR_426092234_00_20210112152238' where 426092234 is your FEIN, 
+00 is your revision number, and 20210112152238 is a date/time stamp. Must be 
+in CSV or XML format. Please review the File Specification Toolkit available 
+from https://www.ctpaidleave.org/resources-and-guides. 
+Otherwise, the error message is: 
+Unknown file type or name. File Type must be CSV or XML. For Return files use 
+name format 'CTPL_RTN_426092234_00_20210112152238'. For Enrollment 
+Files use name format 'CTPL_ENR_426092234_00_20210112152238', with your 
+FEIN, revision number, and datetime sta
+mp. Please review the File Specification 
+Toolkit available from https://www.ctpaidleave.org/resources-and-guides. 
+E 
+200 Processing 
+Error 
+14 System 
+Errors 
+039 Connectivity Issues There were connectivity issues when trying to process your file, please upload 
+the file again. 
+E 
+--- page 40 ---
+ 
+Page | 40 File Specification Toolkit version 2.1.9 
+10/5/26 
+Versioning 
+Table 5 - Document Versions 
+Version # Author of Changes Revision Date Reasons/changes made 
+V0.12.1 Tom Loveland 1/14/2021 Added 
+V0.12.2 Tom Loveland 1/14/2021 Column TotalContributionsDue occurred twice. Renamed first instance to ReturnTotalContributionsDue 
+V0.12.3 Katrina Reali-Corso 2/19/2021 Added this new section. 
+V0.13.1 Tom Loveland 2/10/2021 Optionality corrected for several non-required attributes. 
+V1.0.0 Tom Loveland 3/25/2021 Add Error Codes. Multiplicity fix to Ack 
+V1.0.1 Katrina Reali-Corso 4/27/2021 Adjust bank aba# 
+V1.0.2 Tom Loveland 5/18/2021 Improve Content based on 1 Qtr findings 
+V1.0.3 Tom Loveland 5/24/2021 Documentation Only 
+V1.1.0 Stephanie Decker Oct 2022 Updates to the Return File Spec 
+Updates to the NACHA File Spec 
+V1.1.1 Stephanie Decker Nov 2022 Updated Error and Warning long descriptions 
+V1.1.2 Stephanie Decker Dec 2022 Extension to when new fields will be required 
+Corrected CSV return file spec at the TPA level where TotalContributionsDue needs to be 
+ReturnTotalContributionsDue 
+V1.1.3 Stephanie Decker Feb 2022 Corrected spec for Return CSV file format. The field should be “CTGrossWagesEmployeeCount” not 
+“CTGrossWageEmployeeCount” 
+V2.0 Stephanie Decker Aug 2023 Revised to remove process related information that is on the website 
+V2.0.1 Stephanie Decker 2/13/2024 Updated error code 10010013 for State field validation 
+V2.0.2 Stephanie Decker 3/7/2024 Clarification to the description for the error code update 
+V2.1 Stephanie Decker 4/11/2024 Clarification to the State TaxpayerID value in ENR, RTN, and ART 
+Removal of Employee records from RTN and ART 
+Update to include “Multiple Pay Cycles” as a valid option for PayCycle on RTN and ART 
+Updates to max file size and maximum count of records in a single RTN or ART 
+V2.1.1 Stephanie Decker 11/22/2024 Updated return file specifications to clearly state field format requirements for: 
+• FEIN format: ##-####### 
+• Date format: YYYY-MM-DD 
+• Date/Time format: YYYY-MM-DDThh:mm:ss 
+• Dollar format: ####.## 
+• State Code format: State Code must be two alphabetical characters 
+• Postal Code format: Postal Code format: XXXXX or XXXXX-XXXX 
+--- page 41 ---
+ 
+Page | 41 File Specification Toolkit version 2.1.9 
+10/5/26 
+V2.1.2 Stephanie Decker 2/21/2025 Added warning and error codes for return and amended return files containing employee data. 
+V2.1.3 Stephanie Decker 3/19/2025 Added information regarding validation to prevent processing of duplicate files based on file name. 
+Add error message for when amended return files include employee details. 
+Updated to be accessible. 
+V2.1.4 Stephanie Decker 4/17/2025 Added links to enrollment, return and acknowledgement XSD schema files. 
+V2.1.5 Stephanie Decker 6/5/2025 Updated information on the new file validation schedule for employee data and duplicate files. 
+Added Error 100 11 028; ReportingYear must be for the current year or a previous year. 
+Added new error codes: 10011023, 10011024, 10011031, 20012045 
+Updated error code: 10011026 
+V2.1.6 Stephanie Decker 6/17/2025 Updated date of duplicate file warning to September 2025 instead of August 2025. 
+V2.1.7 Stephanie Decker 8/6/2025 Updated links to File Spec Toolkit to correct links to coincide with Release 10.7 updates to fix the error messages. 
+Resolved accessibility issues. 
+V2.1.8 Stephanie Decker 9/9/2025 Add error message for Unable to Amend (100 11 002) 
+Update Return XML spec with maxOccurs="1" minOccurs="1" on required fields where it was missing 
+Update contact reason to select when requesting a refund from a penny test 
+V2.1.9 Stephanie Decker 10/5/2026 Removed old “Latest Updates” 
+Clarify the acknowledgement file section, in particular how to correct errors and not resubmit the entire file. 
+Added new file size max specification for return CSV fies of fewer than 5,000 return records. 
+ 

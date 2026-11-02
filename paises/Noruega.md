@@ -120,7 +120,10 @@ atualizado_em: 2026-10-27
 - [[internal-certification/Norway/Henkel Norway - 2026-09/02 Validation/summary_EN|summary_EN]]: Henkel Norway - 2026-09: resumo em inglês dos achados da validação (versão para o cliente)
 
 ## Pendências
-- [ ]
+- [ ] (02/11) Manju quer só os requisitos de integração da **NAV** (uma autoridade). Caminho passado no Chat: zip v2.12.1 + `si_runbook.sh NO Norway NAV` (sem CCG/escopo); esperando ela rodar e mandar o `nav.log` se parar. Ver [[servicos/research-pipeline]] (etapa 6) — Manju/Wallisson.
+- [ ] (02/11) Ponto estatutário levantado pela Manju (análise do Claude dela), **não conferido**: CCG §8.2 diz que o informe de renda para benefícios parentais, gravidez e filho doente sai do sistema de folha; segundo ela, a NAV hoje só aceita da folha o informe de auxílio-doença. Conferir na fonte da NAV antes de mexer no CCG — ⚠️ sem fonte.
+- [ ] (02/11) Dados de negócio que nenhum pacote supre (para os runbooks da NAV): número da organização norueguesa da Mercans; se já existe cliente Maskinporten ou registro de sistema no Altinn (p. ex. da integração do cartão de imposto da Skatteetaten); onde o HRBlizz guarda os períodos de ausência — Mercans/BAU.
+- [ ] Noruega não está em `shared/si-runbook/si-authorities.yaml` → a conferência de escopo do runbook da NAV não cerca outras autoridades.
 
 ## Correções ligadas
 - _(links para entradas de [[correcoes]])_

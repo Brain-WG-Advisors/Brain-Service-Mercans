@@ -1,0 +1,117 @@
+# CCG annex_LA research pack — Louisiana
+
+Synthesis B, 2026-11-02. Source: `_research/stage5/LA.md` and the active/partial rows of `00-official-sources/legal-basis-register.csv`; no fetching. Facts file: `_research/CCG-annex_LA-facts.json` (validator: PASS). Every value below is a fact object there; key in backticks, register id in brackets.
+
+**Summary.** No state minimum wage (FLSA 7.25); local wage/leave mandates prohibited (23:642). Flat 3.09% withholding (R-1306 1/26): (S - 12,875/N) x 0.0309 or (S - 25,750/N) x 0.0309; no supplemental rate; no local tax (constitutional bar), no reciprocity; Act 382 / LAC 61:I.1923 30-day nonresident mobile-workforce exemption (adopted LR 52:358, 2026-03-20). UI base 7,000, rates 0.09%-6.20%, no employee share. No pay-statement statute. Final pay earlier of next payday or 15 days. Child-support max 50%. Oracle: R-1306 examples 13.98 / 111.54.
+
+## 1 — Employment / labour code
+Overtime: no state statute located (FLSA; medium). Direct deposit/paycard: no consent statute; 23:633 requires only notice of method (LA-OQ-3).
+
+- `la.minwage.state_law.exists` = **False**  (2026-01-01 → open) [A.2, US-LAS5-006, direct artifact inspection, conf high] — FLSA 7.25 for covered employers; no 2027 rate.
+- `la.local_mandates.preempted` = **True**  (2026-01-01 → open) [A.1, US-LAS5-005, direct artifact inspection, conf high] — R.S. 23:642: no local minimum wage or mandatory vacation/sick days.
+- `la.pay_frequency.rule` = **notice at hire of wage, method and frequency; undesignated paydays 1st and 16th; manufacturing/oil-boring/mining 10+ and public-service corporations at least twice monthly; FLSA-exempt outside; fine 25-250/day (23:633)**  (2026-01-01 → open) [A.1, US-LAS5-004, direct artifact inspection, conf high]
+
+## 2 — Income tax (state withholding)
+Certificate R-1300 (L-4); edition not re-fetched (404). 2027 standard deduction unpublished.
+
+- `la.wh.supplemental.method` = withheld like regular wages; no flat supplemental rate (vacation pay likewise) (2026-01-01 → open) [A.3, US-LA-P5-1-002 — legacy id, NOT a fact]
+- `la.pit.rate.flat` = **3.09** percent (2026-01-01 → open) [A.2, US-LAS5-001, quoted from authority page, conf high]
+- `la.wh.method` = **no deduction: W = S x 0.0309; L-4 "1" (single/MFS): (S - 12,875/N) x 0.0309; L-4 "2" (MFJ/QSS/HoH): (S - 25,750/N) x 0.0309; N = 365/52/26/24/12/1; negative term = 0; round to cent**  (2026-01-01 → 2026-12-31) [A.2, US-LAS5-001, quoted from authority page, conf high]
+- `la.wh.std_deduction.single` = **12875** USD (2026-01-01 → 2026-12-31) [A.2, US-LAS5-001, quoted from authority page, conf high] — Indexed by prior-year CPI-U (R.S. 47:294(B)); set by emergency rule LAC 61:I.1501 effective 2026-01-01 (RIB 26-005, 2026-01-12) [US-LAS5-011]; official value may differ slightly once Jan-2026 CPI-U applied. 12,875/12,500 = 1.03 (2025 base tier-B only).
+- `la.wh.std_deduction.joint` = **25750** USD (2026-01-01 → 2026-12-31) [A.2, US-LAS5-001, derived arithmetically, conf high] — = 2 x 12,875.
+- `la.wh.who` = **residents; nonresidents performing services in LA (subject to the 30-day rule); residents working outside LA if not withheld in the other state**  (2026-01-01 → open) [A.2, US-LAS5-003, quoted from authority page, conf high]
+
+## 2b — Non-resident regime and reciprocity
+- `la.nonres.mobile_workforce.days` = **30** days (2026-01-01 → open) [A.1, US-LAS5-002, direct artifact inspection, conf high] — Act 382 (2025) R.S. 47:112.2(A), 47:248 [US-MULTIS5-021]; LAC 61:I.1923 adopted LR 52:358 (2026-03-20): <= 30 days exempt (C.1.a says "less than 30" - statute governs); employee notifies within 10 days from day 31; employer begins withholding and reports on L-1 from the period of the 31st day; exemption lost with other LA-source income; home-state condition repealed. Level withholding. Catch-up of days 1-30 open (LA-OQ-1). Build: per-employee LA workday counter (employer + related entities) and other-LA-income flag.
+
+## 2c — Local wage taxes
+- `la.local_income_tax.exists` = False (2026-01-01 → open) [A.1, US-LA-P5-2-001 — legacy id, NOT a fact] Constitution bars parish/municipal income tax.
+
+## 3 — Social insurance (SUI / SDI / PFML / levies)
+No SDI/TDI/PFML [US-LA-P5-2-002 legacy, DOL WB list]. No employee contribution.
+
+- `la.sui.employer.rate.min` = 0.09 (2026-01-01 → 2026-12-31) [A.2, US-LA-SUI-001 — legacy id, NOT a fact] 2026 LWC rate table: 0.09% at reserve ratio 9.5+ to 6.20%.
+- `la.sui.wage_base` = **7000** USD (2026-01-01 → 2026-12-31) [A.2, US-LAP9V-001, quoted from authority page, conf medium] — 23:1536 mechanism not read (tier-B: 7,700 in 2025).
+- `la.sui.employer.rate.max` = **6.2** percent (2026-01-01 → 2026-12-31) [A.2, US-LAP9V-002, derived arithmetically, conf medium] — Derivation recorded in register row US-LAP9V-002: Total rates up to 6.20%; FUTA creditable factor 0.868421-0.973119 by band. Non-creditable share (IWTP + Integrity social charges) = 1 - factor, about 10.5%-13.2% of the total rate in experience bands (e.g. 2.20% band: 1 - 0.886363 = 11.36%)
+- `la.sui.new_employer.rate` = **average rate of its NAICS industrial classification; experience rating after 24 months**  (2026-01-01 → open) [A.2, US-LAP9V-001, quoted from authority page, conf high] — Social charges (non-charge, IWTP, Integrity) inside the total rate; IWTP and Integrity not FUTA-creditable [US-LAS5-007].
+- `la.agency.name` = **Louisiana Works (replaces Louisiana Workforce Commission); keep laworks.net**  (2026-01-01 → open) [A.1, US-LAS5-004, direct artifact inspection, conf high]
+
+## 4 — Payslip statute
+No itemised pay-statement statute in R.S. 23:631-638 (all read) [US-LAR3-002]; only hire notice of rate/method/frequency [US-LAS5-004]. Retention unread.
+
+
+## 5 — Statutory reporting instruments
+- `la.report.wh.l1` = **L-1 quarterly, electronic (LaTAP/software), zero returns required, due Apr 30 / Jul 31 / Oct 31 / Jan 31; payment quarterly < 500/month average, monthly 500 to < 5,000, semi-monthly >= 5,000**  (2026-01-01 → open) [A.2, US-LAS5-003, quoted from authority page, conf high] — [US-LAS5-008].
+- `la.report.annual.l3` = **L-3 + W-2s due first business day after January 31 (30 days on closure); electronic mandatory at 50+ W-2s via LaWage; no magnetic media/CD; state boxes 16-18**  (2026-01-01 → open) [A.3, US-LAS5-009, quoted from authority page, conf high]
+- `la.report.w2.efile_threshold` = **50** forms (2026-01-01 → open) [A.3, US-LAS5-009, quoted from authority page, conf high]
+- `la.report.sui.quarterly` = **due last day of month after quarter; domestic annual Jan 31; mandatory electronic (LAWATS); DE students earning credit not reported**  (2025-04-01 → open) [A.3, US-LAS5-007, quoted from authority page, conf medium]
+- `la.newhire.report_days` = **20** days (2026-01-01 → open) [A.1, US-LAS5-010, direct artifact inspection, conf high] — DCFS: name, address, SSN, occupation, first day; employer name, address, EIN; rehire incl. return from layoff/furlough/leave (no 60-day threshold in statute); penalty 25 / 500.
+
+## 6 — Leave
+- `la.leave.jury.paid_days` = **1** days (2026-01-01 → open) [A.1, US-LAS5-013, direct artifact inspection, conf high] — R.S. 23:965: one paid day without loss of wages or leave; fines 100-500 / 100-1,000 + reinstatement.
+
+## 7 — Termination and final pay
+- `la.final_pay.rule` = **discharge or resignation: earlier of next regular payday (for the cycle worked) or 15 days; customary place/method or prepaid mail; CBA override; earned eligible vacation is due and cannot be forfeited; commissions/bonuses due if earned (23:631)**  (2026-01-01 → open) [A.1, US-LAR3-002, quoted from authority page, conf high]
+- `la.final_pay.max_days` = **15** days (2026-01-01 → open) [A.1, US-LAR3-002, quoted from authority page, conf high]
+- `la.final_pay.penalty_wages.max_days` = **90** days (2026-01-01 → open) [A.1, US-LAR3-001, quoted from authority page, conf high] — 23:632: lesser of 90 days wages or full wages from demand + fees; good-faith dispute: wages + interest.
+- `la.test_cost_recovery.working_days` = **90** working days (2026-01-01 → open) [A.1, US-LAS5-004, direct artifact inspection, conf high] — 23:634(B): only if pay >= federal MW + 1 and not part-time/seasonal.
+
+## 8 — Benefits in kind / taxable wages
+No LA source read (LDR cafeteria FAQ 404); LA starts from federal AGI (lead). Confidence 30%.
+
+
+## 9 — Deductions and garnishments
+- `la.garn.creditor.exempt_percent` = **75** percent (2026-01-01 → open) [A.1, US-LAS5-012, direct artifact inspection, conf high] — R.S. 13:3881(A)(1)(a): 75% of weekly disposable exempt, never less than 30 x federal MW (CCPA-equivalent); disposable also after retirement/medical/life-insurance deductions and amounts owed to employer.
+- `la.garn.child_support.max_percent` = **50** percent (2026-01-01 → open) [A.1, US-LAS5-012, direct artifact inspection, conf high] — Exemption 50% child support, 60% spousal (stricter than CCPA); mixed/unclear DCFS order = child support.
+- `la.deductions.fines` = **prohibited except wilful/negligent damage or theft of employer funds, capped at actual damage (23:635)**  (2026-01-01 → open) [A.1, US-LAS5-004, direct artifact inspection, conf high]
+
+## 10 — Collective agreements / prevailing wage
+- `la.cba.fringe_as_wages` = **True**  (2026-01-01 → open) [A.1, US-LAS5-015, direct artifact inspection, conf high] — R.S. 23:640: CBA fringe amounts treated as wages for penalty-wage rules. Prevailing wage repealed 1988 [US-LAP6-001].
+
+## 11 — Indexation
+Std deduction CPI-U (R.S. 47:294(B)); SUI base mechanism unread; no MW law.
+
+
+## 12 — Payroll data protection / records
+Not researched (20%).
+
+
+## 13 — Live legal change
+- `la.live.lac_61_i_1923` = **adopted LR 52:358 (2026-03-20), supersedes the NOI (US-MULTIS5-022); level withholding**  (2026-03-20 → open) [A.1, US-LAS5-002, direct artifact inspection, conf high]
+- `la.live.sb133_2025` = **not codified (technical; adds "laborers")**  (2025-01-01 → open) [A.1, US-LAS5-014, direct artifact inspection, conf medium] — [partial row]
+
+## Oracle — worked examples (C37)
+- `la.oracle.r1306.example1.withholding` = **13.98** USD (2026-01-01 → 2026-12-31) [A.2, US-LAS5-001, derived arithmetically, conf high] — (700 - 12,875/52) x 0.0309 = 13.9793 -> 13.98.
+- `la.oracle.r1306.example2.withholding` = **111.54** USD (2026-01-01 → 2026-12-31) [A.2, US-LAS5-001, derived arithmetically, conf high] — (4,600 - 25,750/26) x 0.0309 = 111.5371 -> 111.54.
+
+## Special populations (US-OWN-005)
+- Nonresidents (incl. NRAs working in LA): 30-day mobile-workforce exemption; withhold from period of day 31; lost with other LA-source income [US-MULTIS5-021, US-LAS5-002].
+- Domestic: UI annual filers Jan 31; household withholding FAQ unread [US-LAS5-007].
+- Students: UI DE students earning credit not reported [US-LAS5-007].
+- Minors: Act 61 (2026) employment certificates; no payroll rule [US-LAS5-016].
+- Tipped: federal tip credit only [US-LAS5-006].
+- FLSA-exempt staff outside 23:633; part-time/seasonal excluded from test-cost recovery [US-LAS5-004].
+- Agricultural, clergy, statutory, government: no state rule read (federal assumed, LA-OQ-12). Military spouses: L-4E exists (title only).
+
+## Language seams (US-OWN-006)
+Posters in Spanish available [US-LAP9M-001]; no language clause in 23:631-638 [US-LAL-001, US-LAL-002]; payslip English (US-OWN-006).
+
+## Open questions
+Mirrors `unresolved[]` in the facts file (same keys).
+
+- `la.sui.employer.rate.min` (non-blocking) — Value 0.09 (from 2026-01-01) is carried by register row US-LA-SUI-001 (active, A.2, Louisiana Workforce Commission), but that legacy id fails the facts.schema register_id pattern, so it cannot be emitted as a fact. 2026 LWC rate table: 0.09% at reserve ratio 9.5+ to 6.20%. **Would close it:** Final merge: register an S5-pattern alias row (same url/figure, supersedes US-LA-SUI-001) or re-key US-LA-SUI-001; then emit this key as a fact. No new research needed.
+- `la.wh.supplemental.method` (non-blocking) — Value withheld like regular wages; no flat supplemental rate (vacation pay likewise) (from 2026-01-01) is carried by register row US-LA-P5-1-002 (active, A.3, Louisiana Department of Revenue), but that legacy id fails the facts.schema register_id pattern, so it cannot be emitted as a fact. **Would close it:** Final merge: register an S5-pattern alias row (same url/figure, supersedes US-LA-P5-1-002) or re-key US-LA-P5-1-002; then emit this key as a fact. No new research needed.
+- `la.local_income_tax.exists` (non-blocking) — Value False (from 2026-01-01) is carried by register row US-LA-P5-2-001 (active, A.1, Louisiana State Senate (constitution text)), but that legacy id fails the facts.schema register_id pattern, so it cannot be emitted as a fact. Constitution bars parish/municipal income tax. **Would close it:** Final merge: register an S5-pattern alias row (same url/figure, supersedes US-LA-P5-2-001) or re-key US-LA-P5-2-001; then emit this key as a fact. No new research needed.
+- `la.nonres.mobile_workforce.catch_up` (blocking) — From day 31, whether days 1-30 are withheld as a lump catch-up in the period of the 31st day: MULTI row (Act text) says yes; the regulation only says begin withholding in that period. **Would close it:** Codified R.S. 47:112.2(A) text or an LDR RIB/FAQ on the mobile workforce exemption.
+- `la.report.w2.lawage_format` (non-blocking) — LaWage bulk W-2 file format (EFW2 or LA layout) not read. **Would close it:** LDR LaWage / W-2 electronic filing specification on dam.ldr.la.gov.
+- `la.payment.direct_deposit_consent` (non-blocking) — No consent statute located beyond 23:633 notice. **Would close it:** Louisiana Works wage-payment FAQ.
+- `la.records.retention` (non-blocking) — No LA payroll-record retention rule read. **Would close it:** R.S. 23:1660 and any LDR withholding-record retention rule.
+- `la.report.sui.format` (non-blocking) — UI form name and LAWATS upload format (ICESA?) and a 2026 FAQ copy not read. **Would close it:** Louisiana Works LAWATS file specification.
+- `la.leave.other` (non-blocking) — Voting, military, school conference, bone marrow/organ donation leave not read. **Would close it:** R.S. 23:961-1015 via Wayback.
+- `la.termination.ui_separation_notice` (non-blocking) — LWC Form 1 separation duty not read. **Would close it:** LAC 40:IV or a Louisiana Works employer page.
+- `la.pit.conformity` (blocking) — State treatment of 125, 401(k), HSA, transit, GTL not read (LDR FAQ 403/404). **Would close it:** LDR cafeteria-plan FAQ and R.S. 47:293.
+- `la.garn.iwo_specifics` (non-blocking) — IWO employer fee, priority, SDU remittance not read. **Would close it:** R.S. 46:236.3 / 9:303 and the DCFS employer page.
+- `la.sui.wage_base.mechanism` (non-blocking) — R.S. 23:1536 wage-base mechanism and other-state wage credit not read. **Would close it:** Wayback read of R.S. 23:1536.
+- `la.data_protection.ssn` (non-blocking) — SSN display statutes not researched. **Would close it:** LA SSN display statutes and R.S. 51:3071 et seq. via Wayback.
+- `la.special_populations.other` (non-blocking) — Household withholding, ag/clergy/statutory/government UI coverage (R.S. 23:1472) and L-4E reporting not read. **Would close it:** LDR FAQ pages and R.S. 23:1472.
+- `la.live.acts_2026_sweep` (non-blocking) — Only page 1 (Acts 1-100) of the 2026 Acts list readable (ASP.NET postback). **Would close it:** Remaining 2026 Acts pages via browser pass.

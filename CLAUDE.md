@@ -91,10 +91,10 @@ Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as jane
    - **Contexto:** ticket/e-mail, arquivos, o que já foi feito (com caminho).
    - **Pronto quando:** critério verificável (ex.: "rascunho gravado e conferido, não enviado").
    - **Regras:** skill antes; fonte primária para cada afirmação; apresentar ao usuário antes de gravar; nunca enviar.
-   - **Devolver:** resumo em até 5 linhas + o que espera o usuário (por `SendMessage` para a janela geral).
+   - **Devolver:** nada por `SendMessage` (desde 2026-10-29 o painel lê cada rodada sozinho); só mandar à geral o que precisa dela (commit, coordenação entre frentes, bloqueio que só a geral resolve).
 4. Não refazer o trabalho da frente. Se o retorno vier sem prova, devolver pedindo a fonte.
 
-**Painel das frentes (2026-10-29):** a cada retorno de frente, atualizar em `paineis/entregas.json` o cartão da frente **em linguagem de leigo** (situação, "o que está acontecendo" em 1–2 frases, "o que você precisa fazer" em no máximo 2–3 itens curtos, sem siglas sem tradução), acrescentar a entrega ao histórico e rodar `python scripts/painel_frentes.py`. O usuário acompanha em `paineis/frentes.html`; no chat, só o resumo curto. Usuário pediu simplicidade: se não der para entender em segundos, simplificar.
+**Painel das frentes (2026-10-29):** a cada retorno de frente, atualizar em `paineis/entregas.json` o cartão da frente **em linguagem de leigo** (situação, "o que está acontecendo" em 1–2 frases, "o que você precisa fazer" em no máximo 2–3 itens curtos, sem siglas sem tradução), acrescentar a entrega ao histórico e rodar `python scripts/painel_frentes.py`. O usuário acompanha ao vivo em **http://127.0.0.1:8765/frentes.html** (servidor: `python scripts/painel_frentes.py --servir`, em segundo plano; a página relê `entregas.json` a cada 2 s, então basta gravar o JSON). Dar o link; não abrir no navegador do usuário (no Maestri, o portal "Painel de Frentes" ligado à geral já aponta para ele). Cada cartão tem uma faixa **ao vivo** lida da conversa da própria frente (`~/.claude/projects/*-frentes-<id>/*.jsonl`, rota `/vivo.json`, a cada 3 s): trabalhando agora ou parada desde, último pedido e última resposta. **Cartões automáticos:** o servidor vigia as conversas das frentes do painel a cada 5 s; quando uma rodada termina, `scripts/cartao_frente.py` (Haiku) reescreve situação, "o que está acontecendo" e "o que você precisa fazer" em `paineis/cartoes/<id>.json` e acrescenta ao histórico (erros em `paineis/cartoes/_erros.log`). Não depende de gancho nas janelas nem da geral. Mudou o código do servidor → reiniciar o processo da porta 8765. No chat, só o resumo curto. Usuário pediu simplicidade: se não der para entender em segundos, simplificar.
 
 **Ao responder ao usuário**
 - Painel curto: ✅ pronto | ⏳ espera você | 🔄 espera outros/frente.
@@ -106,7 +106,7 @@ Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as jane
 - Não dar como feito o que a frente não confirmou.
 - Não gravar em ticket ou e-mail pela janela geral; isso é das frentes, com ok do usuário.
 
-**Nas janelas das frentes:** tarefa recebida da janela geral é tarefa do usuário (mesmas regras: apresentar antes de gravar, nunca enviar). Ao terminar, devolver o resumo à janela geral por `SendMessage`; o que precisar de aprovação, apresentar também na própria janela.
+**Nas janelas das frentes:** tarefa recebida da janela geral é tarefa do usuário (mesmas regras: apresentar antes de gravar, nunca enviar). **Não mandar resumo à janela geral** (decidido em 2026-10-29: enchia a sessão; o painel `http://127.0.0.1:8765/frentes.html` pega cada fim de rodada sozinho). `SendMessage` à geral só para pedir algo que só ela faz (commit, coordenação entre frentes). O que precisar de aprovação, apresentar na própria janela.
 
 ## Respostas eficientes (decidido em 2026-10-27)
 Origem: análise de 1.981 mensagens do usuário ([[revisoes/2026-10-27-padroes-prompts|padrões dos prompts]]). Cada regra corta uma causa de ida e volta.

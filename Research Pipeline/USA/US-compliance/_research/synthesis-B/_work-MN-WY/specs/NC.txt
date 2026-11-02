@@ -1,0 +1,62 @@
+F|labour.minwage.state.follows_federal|true|-|-|-|US-NCS5-002|high|higher of 6.15 or FLSA rate (7.25 in 2026, annex_FED); no state indexation
+F|labour.minwage.student_learner.hourly|6.50|USD|2026-01-01|-|US-NCS5-002|derived|90% of 7.25 = 6.525 rounded down to the nickel (Python); full-time students, learners, apprentices, messengers
+F|labour.minwage.local.preempted|true|-|-|-|US-NCS5-001|high|95-25.1(d)
+F|labour.overtime.weekly_threshold_hours|40|hours|-|-|US-NCS5-003|high|no daily OT; FLSA-covered enterprises governed by FLSA
+F|labour.overtime.multiplier|1.5|ratio|-|-|US-NCS5-003|high|-
+F|labour.pay_frequency.allowed|daily; weekly; biweekly; semimonthly; monthly|-|-|-|US-NCS5-005|high|bonuses/commissions as rarely as annually if scheduled
+F|pit.rate.flat|3.99|pct|2026-01-01|-|US-NCS5-011|high|G.S. 105-153.7(a) tax years after 2025
+F|pit.wh.rate|4.09|pct|2026-01-01|2026-12-31|US-NC-001|high|3.99% + 0.1%; nearest whole dollar
+F|pit.std_deduction.single|12750|USD|2026-01-01|-|US-NCS5-010|high|also MFS; married withholding tables use single deduction (US-NC-001)
+F|pit.std_deduction.head_of_household|19125|USD|2026-01-01|-|US-NCS5-010|high|-
+F|pit.std_deduction.mfj|25500|USD|2026-01-01|-|US-NCS5-010|high|-
+F|pit.allowance.amount|2500|USD|2026-01-01|2026-12-31|US-NC-001|high|per year
+F|pit.rounding|nearest whole dollar (NRA add-on rounded up)|-|2026-01-01|2026-12-31|US-NC-001|high|-
+F|pit.nra.addon.weekly|11|USD|2026-01-01|2026-12-31|US-NC-001|high|12,750 x 4.09% / 52 = 10.03 rounded up; capped at 4.09% of wages when annualized <= 12,750
+F|pit.nra.addon.biweekly|21|USD|2026-01-01|2026-12-31|US-NC-001|high|-
+F|pit.nra.addon.semimonthly|22|USD|2026-01-01|2026-12-31|US-NC-001|high|-
+F|pit.nra.addon.monthly|44|USD|2026-01-01|2026-12-31|US-NC-001|high|-
+F|pit.oracle.example_1.withholding|4|USD|2026-01-01|2026-12-31|US-NC-001|high|percentage method 450 weekly single 2 allowances: (450-245.19-96.16) x 0.0409 = 4.44 -> 4; annualized (23,400-17,750) x 0.0409/52 = 4.44 -> 4
+F|pit.oracle.example_2.nra_withholding|21|USD|2026-01-01|2026-12-31|US-NC-001|high|NC-30 NRA example 500 x 4.09% = 20.45 -> 21 (rounded up)
+F|pit.certificate.default|no NC-4: single, zero allowances; federal W-4 not acceptable|-|-|-|US-NC-001|high|exempt certificate expires; withhold from Feb 16 without new NC-4 EZ
+F|pit.supplemental.flat_rate|4.09|pct|2026-01-01|2026-12-31|US-NC-001|high|or aggregate; aggregate mandatory if nothing withheld from regular wages
+F|pit.reciprocity.states|none|-|-|-|US-NC-001|high|-
+F|pit.local.exists|false|-|-|-|US-NCP51-001|high|G.S. 105-247 prohibits
+F|ui.wage_base.annual|34200|USD|2026-01-01|2026-12-31|US-NC-002|high|2025: 32,600; other-state and predecessor wages count (US-NCS5-015)
+F|ui.wage_base.other_state_credit|true|-|-|-|US-NCS5-015|high|-
+F|ui.rate.new_employer|1.000|pct|2026-01-01|2026-12-31|US-NCS5-014|high|-
+F|ui.rate.base|1.9|pct|2026-01-01|2026-12-31|US-NCP9V-001|high|experience rate = base - reserve ratio x 0.68
+F|ui.rate.min|0.06|pct|2026-01-01|2026-12-31|US-NCP9V-001|high|-
+F|ui.rate.experience_max|5.76|pct|2026-01-01|2026-12-31|US-NCP9V-001|high|20% surtax only if trust fund < 1 bn
+F|ui.employee.rate|0|pct|-|-|US-NCS5-014|high|may not be deducted
+F|payslip.content|itemized statement of deductions each pay period with deductions; wage notice at hire|-|-|-|US-NCW1B-003|high|95-25.13; writing, printable e-mail or any keepable form (US-NCS5-024)
+F|records.wage_hour.retention_years|3|years|-|-|US-NCS5-022|high|13 NCAC 12 .0802
+F|records.withholding.retention_years|10|years|-|-|US-NC-001|high|NC-30 s.26
+F|report.wh.quarterly_threshold.monthly_avg|250|USD|-|-|US-NC-001|high|<250 quarterly NC-5; 250-<2,000 monthly by 15th; >=2,000 semiweekly NC-5P + NC-5Q
+F|report.wh.semiweekly_threshold.monthly_avg|2000|USD|-|-|US-NC-001|high|-
+F|report.nc3.due|January 31, electronic (eNC3)|-|-|-|US-NC-001|high|late 50/day max 1,000; wrong format 200
+F|report.efile_spec.version|9-2026 (TY2026, use beginning January 2027)|-|-|-|US-NCS5-028|high|NC-3/W-2 fixed-field .txt
+F|report.ui.quarterly_due|Apr 30; Jul 31; Oct 31; Jan 31|-|-|-|US-NCS5-025|high|NCUI 101 via NCSUITS; electronic mandatory at 10+ wage items
+F|report.new_hire.days|20|days|-|-|US-NCS5-020|high|or twice monthly 12-16 days apart electronically
+F|leave.paid_sick.statutory|false|-|-|-|US-NCS5-001|high|local mandates preempted
+F|term.final_pay|next regular payday (discharge and resignation)|-|-|-|US-NCS5-006|high|bonuses/commissions first payday after calculable
+F|term.vacation.payout|per employer policy; forfeiture only with advance written notice|-|-|-|US-NCS5-008|high|-
+F|term.final_w2.days|30|days|-|-|US-NC-001|high|after final wage payment
+F|bik.conformity.irc_date|2025-07-05|-|2026-01-01|-|US-NCS5-029|high|S.L. 2026-31; withholding follows IRC 3401 (US-NCS5-012)
+F|garn.support.max_rate|40|pct|-|-|US-NCS5-018|high|of monthly disposable earnings; 1 USD fee per pay period
+F|garn.support.employer_fee.per_period|1|USD|-|-|US-NCS5-018|high|-
+F|garn.tax_levy.max_rate|10|pct|-|-|US-NCS5-021|high|G.S. 105-242(b)
+F|prevailing_wage.exists|false|-|-|-|US-NCP51-004|medium|DOL WHD state table
+F|data.ssn.mailing_restricted|true|-|-|-|US-NCS5-016|high|75-62; safe build truncates SSN on mailed stubs
+U|labour.payment_method|NC direct deposit / paycard consent rule not located.|NCDOL wage-payment FAQ or a 13 NCAC 12 rule on payment method.|n
+U|report.w2.file_format|Whether the NC W-2 file in eNC3 is EFW2 or an NC layout; the 9-2026 spec was not downloaded (US-NCS5-027 is a 10-2020 partial lead).|TY2026 "eNC3 W2" spec version 9-2026 from the NCDOR eNC3 file-format page.|n
+U|term.ui_separation_notice|Whether NC employers must hand separating employees a UI-availability notice is not confirmed.|04 NCAC 24A/24B text on the OAH host, or the DES employer handbook.|n
+U|ui.wage_base.derivation|G-DERIVE of 34,200 needs the DES average weekly insured wage at the 2025 computation date.|DES Labor Market Information average-wage publication.|n
+U|ui.registration|NCSUITS registration steps and liability thresholds (incl. domestic/agricultural) not read.|G.S. 96-1(b) text plus the DES registration page.|n
+U|leave.other|Jury-duty, voting and other leave with pay impact not searched.|G.S. 9-32 and related statutes on ncleg.gov.|n
+U|data.breach|G.S. 75-65 breach notice not read.|The statute text.|n
+U|pit.rate.next_year|3.49% for 2027 is projected (revenue trigger), not confirmed; US-NCS5-030 is partial. Not written as a fact.|OSC FY2025-26 final General Fund accounting (August 2026) or the 2027 NC-30 / NCDOR rate notice.|y
+U|garn.iwo.payor_duties|IV-D remittance timing and payor fee (110-136.5 to .8) not extracted.|G.S. 110-136.5 to 110-136.8.|n
+T|Withholding rate 4.09% (= 3.99% statutory + 0.1%) - do not use 3.99% in the WTC.
+T|2027 3.49% is a projection on a revenue trigger - do NOT model until NCDOR publishes the 2027 NC-30.
+T|NRA add-on rounded UP (11/21/22/44) while general rounding is to nearest dollar.
+T|Oracle: NC-30 examples 4 (percentage and annualized, 450 weekly single 2 allowances) and NRA 21 reproduced.

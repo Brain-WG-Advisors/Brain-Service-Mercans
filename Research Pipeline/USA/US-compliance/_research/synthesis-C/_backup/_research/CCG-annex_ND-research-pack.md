@@ -1,0 +1,298 @@
+# CCG research pack - annex_ND (North Dakota)
+
+Synthesis-B worker MN-WY, 2026-11-02. Unit `annex_ND` of the CCG (jurisdiction annex, all 13 domains + special populations).
+Facts file: `_research/CCG-annex_ND-facts.json` (56 facts, 4 pending on the register_id pattern defect, 6 unresolved). Every claim below carries its register_id inline; numbers may be cited in the CCG only through a fact key.
+
+## 0. How to use this pack
+
+- Body sections 1-13 and Special populations are the stage-5 findings (`_research/stage5/ND.md`), carried verbatim because they are already organised by the 13 CCG domains with register ids inline.
+- Federal layer (FIT, FICA, FUTA, W-2/941/940), the multistate rules (reciprocity, sourcing) and the language seams (US-OWN-006: payslip in English; second-language duties attach to notices and posters only) live in annex_FED / annex_MULTI and are not repeated here.
+- Special populations (US-OWN-005): the state-level rules are in the Special populations table below; the country-wide coverage matrix is CCG unit `coverage`.
+- Values are 2026 unless the fact says otherwise. 2027 values appear only where the row carries an enacted or published 2027 figure; projections are never facts.
+
+## 0.1 Synthesis decisions and traps (bind the builder)
+
+- ORACLE: the 2026 booklet Section 2 example is wrong (734/14); use the table/formula (701.51 -> 13). The weekly wage-bracket table (midpoint) gives 14 - document the 1.00 residual.
+- Pay stub content rule EXISTS (NDAC 46-02-07-02(10)) - re-point US-ND-003 / US-MQ-48 part 6 to US-NDS5-007.
+- ND uses the federal W-4 (no state form); supplemental flat 1.50%.
+
+## 0.2 Register status check of the ids cited in the findings
+
+All ids cited in the findings are `active` in the register.
+
+## 0.3 Facts emitted
+
+| key | value | from | to | register_id | conf |
+|---|---|---|---|---|---|
+| `nd.minwage.hourly` | 7.25 USD | 2009-07-24 |  | US-NDS5-006 | high |
+| `nd.local_mandates.preempted` | True | 2009-07-24 |  | US-NDS5-006 | high |
+| `nd.overtime.weekly_threshold_hours` | 40 hours | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.overtime.premium.multiplier` | 1.5 ratio | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.labour.overtime.computer_professional_threshold.hourly` | 27.63 USD | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.labour.meal_period.minutes` | 30 minutes | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.pay_frequency.rule` | at least once each calendar month on regular paydays | 2026-01-01 |  | US-NDS5-005 | high |
+| `nd.payment.method` | cash, check, direct deposit to employee-chosen institution; paycard only at employee election | 2026-01-01 |  | US-NDS5-005 | high |
+| `nd.labour.board_lodging_credit.daily_max` | 18.0 USD | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.labour.tip_credit.max_ratio` | 33 % | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.minwage.tipped.cash_wage` | 4.86 USD | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.wh.certificate` | federal Form W-4 (no state certificate); none on file = single | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.wh.method` | annual percentage method on federal W-4 (tables route under 57-38-59(3)) | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.single.1.ceiling` | 57625 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.single.2.rate` | 1.95 % | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.single.2.ceiling` | 258450 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.single.3.base_tax` | 3916.09 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.single.3.rate` | 2.5 % | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.mfj.1.ceiling` | 57500 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.mfj.2.ceiling` | 168525 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.mfj.3.base_tax` | 2164.99 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.hoh.1.ceiling` | 78475 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.hoh.2.ceiling` | 289675 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.wh.hoh.3.base_tax` | 4118.4 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.allowance.annual.pre2020_w4` | 5050 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.rounding` | nearest whole dollar; under 1.00 need not be withheld | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.wh.supplemental.rate` | 1.5 % | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.oracle.example_1.withholding` | 13 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.pit.oracle.example_2.withholding` | 10 USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 | high |
+| `nd.reciprocity.states` | MN;MT (Form NDW-R, renewed by Feb 28) | 2026-01-01 |  | US-NDS5-002 | high |
+| `nd.pit.nonresident.mobile_workforce.days` | 20 days | 2026-01-01 |  | US-NDS5-004 | high |
+| `nd.pit.agricultural.withholding_required` | False | 2026-01-01 |  | US-NDS5-002 | high |
+| `nd.pit.nra.certificate` | separate W-4 marked North Dakota only - nonresident alien; Single; Exempt not allowed | 2026-01-01 |  | US-NDS5-002 | high |
+| `nd.sui.wage_base` | 46600 USD | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.ui.rate.new_employer.positive` | 1.0 % | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.ui.rate.new_employer.negative` | 6.07 % | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.ui.rate.new_employer.construction` | 9.67 % | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.ui.rate.positive.min` | 0.07 % | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.ui.rate.positive.max` | 1.1 % | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.ui.rate.negative.max` | 9.67 % | 2026-01-01 | 2026-12-31 | US-NDS5-012 | high |
+| `nd.sui.employee.rate` | 0 % | 2026-01-01 |  | US-NDS5-009 | high |
+| `nd.sui.wage_base.other_state_credit` | True | 2026-01-01 |  | US-NDS5-009 | medium |
+| `nd.payslip.items` | check stub or pay voucher each pay period: hours worked, rate, required state/federal deductions, authorized deductions | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.report.form306.due` | Apr 30; Jul 31; Oct 31; Jan 31 (zero returns required) | 2026-01-01 |  | US-NDS5-002 | high |
+| `nd.report.wh.efile_threshold` | 1000 USD | 2026-01-01 |  | US-NDS5-002 | high |
+| `nd.report.form307.due` | Jan 31; W-2 e-file mandatory (EFW2) | 2026-01-01 |  | US-NDS5-002 | high |
+| `nd.newhire.report_days` | 20 days | 2026-01-01 |  | US-NDS5-013 | high |
+| `nd.leave.pto.payout_at_separation` | True | 2012-10-01 |  | US-NDS5-007 | high |
+| `nd.final_pay.rule` | next regular payday (discharge, resignation, suspension) | 2026-01-01 |  | US-NDS5-005 | high |
+| `nd.bik.conformity` | ND taxable income = federal; withholding wages = IRC 3401 | 2026-01-01 |  | US-NDS5-004 | high |
+| `nd.garn.creditor.max_percent` | 25 % | 2026-01-01 |  | US-NDS5-008 | high |
+| `nd.garn.consumer.dependent_reduction.weekly` | 20.0 USD | 2026-01-01 |  | US-NDS5-008 | high |
+| `nd.garn.iwo.employer_fee.monthly` | 3.0 USD | 2026-01-01 |  | US-NDS5-014 | high |
+| `nd.garn.iwo.lump_sum.threshold` | 1000 USD | 2026-01-01 |  | US-NDS5-015 | high |
+| `nd.term.iwo.notice_days` | 7 days | 2026-01-01 |  | US-NDS5-016 | high |
+| `nd.data.breach.ag_threshold` | 250 | 2026-01-01 |  | US-NDS5-017 | high |
+| `nd.local_wage_tax.exists` | False | 2026-01-01 |  | US-ND-P5-2-001 (PENDING id pattern) | high |
+| `nd.sdi_pfml.exists` | False | 2026-01-01 |  | US-ND-P5-2-002 (PENDING id pattern) | high |
+| `nd.leave.sick.state_statute.exists` | False | 2026-01-01 |  | US-ND-P5-2-002 (PENDING id pattern) | medium |
+| `nd.prevailing_wage.exists` | False | 2026-01-01 |  | US-ND-P5-1-003 (PENDING id pattern) | medium |
+
+# Findings by domain (stage 5)
+
+## 1. labour_code
+- **Minimum wage**: 7.25/h from 2009-07-24 (NDCC 34-06-22) [US-NDS5-006, A.1].
+  - No indexation exists and no 2027 change is enacted. The commissioner may set a different rate by rule, and none appears in NDAC 46-02-07, which points back to 34-06-22 [US-NDS5-007].
+- **Local minimum wages**: none. Political subdivisions may not enact a living-wage mandate above the state minimum (34-06-23) [US-NDS5-006].
+- **Overtime** (NDAC 46-02-07-02(4)) [US-NDS5-007]:
+  - 1.5x the regular rate over 40 hours per workweek, computed weekly with no averaging across the pay period.
+  - Paid holidays, PTO and sick time do not count as hours worked.
+  - All jobs held under the same employer are combined.
+  - Taxicab drivers: overtime starts over 50 hours.
+  - Hospitals and residential care may use an 8/80 period by agreement.
+  - Exemptions include EAP (executive, administrative, professional), agriculture, live-in domestic workers, computer professionals paid at least 27.63/h, outside sales, retail commission employees (regular rate above 1.5x the minimum), motor carriers, teachers and highly compensated employees.
+- **Other work conditions**:
+  - Meal period: 30 minutes for shifts over 5 hours when 2 or more employees are on duty; the employee may waive it (02(5)).
+  - Retail employers must give one day of rest in seven (34-06-05.1) [US-NDS5-006].
+- **Pay frequency**: at least once each calendar month, on regular paydays designated in advance (34-14-02) [US-NDS5-005].
+- **Payment method** (34-14-02):
+  - Cash, check, or direct deposit to the financial institution the employee chooses.
+  - Stored-value card only at the employee's election when the employer offers it. The card must be FDIC/NCUA insured and funded in advance.
+- **Board and lodging credit**: up to 18.00/day, with a written voluntary agreement (02(13)).
+- **Uniform purchases**: may not take the wage below the minimum (02(11)) [US-NDS5-007].
+- Confidence: high (A.1, full text read).
+
+## 2. income_tax
+- **Basis**: NDCC 57-38-59(1) sets withholding as a commissioner percentage of federal withholding. 57-38-59(3) lets the commissioner adopt tables instead, and employers must then follow them. The 2026 booklet is that table route [US-NDS5-004, US-NDS5-001].
+  - A search summary claimed that "from 2026-01-01 employers withhold a percentage of federal withholding". That misreads the long-standing 57-38-59(1). The 2026 booklet uses tables, and no 2025/2026 change appears on the OST history or news pages [US-NDS5-018, US-NDS5-019].
+- **Certificate**: the federal Form W-4. There is no state certificate. A new hire with no W-4 is treated as single (Section 2) [US-NDS5-001].
+- **2026 Annual Percentage Method (2020+ W-4)** [US-NDS5-001]. Annual wage = period wage x periods (52/26/24/12/4/2/260).
+
+| Status | 0% up to | 1.95% from - to | Above top |
+|---|---|---|---|
+| Married filing jointly | 57,500 | 57,500 - 168,525 | 2,164.99 + 2.50% over 168,525 |
+| Head of household | 78,475 | 78,475 - 289,675 | 4,118.40 + 2.50% over 289,675 |
+| Single | 57,625 | 57,625 - 258,450 | 3,916.09 + 2.50% over 258,450 |
+
+- **Pre-2020 W-4 (Section 1)** [US-NDS5-001]:
+  - Allowance values: weekly 97, biweekly 194, semimonthly 210, monthly 420, quarterly 1,268, semiannual 2,525, annual 5,050, daily 19.
+  - The single and married annual tables use the same thresholds as above.
+- **G-DERIVE on the booklet** (Python, 2026-11-02):
+  - The bracket constants reproduce: (258,450 - 57,625) x 1.95% = 3,916.09; (168,525 - 57,500) x 1.95% = 2,164.99; (289,675 - 78,475) x 1.95% = 4,118.40.
+  - The Section 1 example reproduces: weekly 1,800, single, 2 allowances: (1,606 - 1,108) x 1.95% = 9.71, rounded to **10**, as printed.
+  - **The Section 2 example does NOT reproduce.** Weekly 1,800, single gives an annual wage of 93,600. The table gives (93,600 - 57,625) x 1.95% = 701.51, and 701.51 / 52 = 13.49, rounded to **13**. The booklet prints 734.00 annual and **14**.
+  - 734 would need a threshold of about 55,960, so the example looks carried over from an earlier year.
+  - The weekly wage-bracket table (midpoint basis) shows 14 for the 1,800-1,825 line, so the exact formula and the bracket table differ by 1.00 at this wage.
+  - Oracle consequence: use the formula and table, not this printed example, for 9b. See Open questions.
+- **Rounding**: the period amount is rounded to the nearest whole dollar, and an amount under 1.00 need not be withheld [US-NDS5-001].
+- **Supplemental wages** (separately paid or identified) [US-NDS5-001]:
+  - Option 1: flat **1.50%**.
+  - Option 2: aggregate with regular wages.
+  - The booklet's supplemental examples ($1,000 -> $15; aggregate $32 - $12 = $20) are consistent.
+- **Who must withhold** [US-NDS5-002, US-NDS5-003]:
+  - Services performed in ND and wages subject to federal withholding.
+  - ND residents working outside ND. Exception: an ND-based employer that is required to withhold the other state's tax.
+  - Wages are IRC 3401 wages.
+- **Exempt from ND withholding** [US-NDS5-002]:
+  - Farmer or rancher agricultural wages.
+  - Enrolled tribal members who live and work on a reservation.
+  - MN and MT residents who give Form NDW-R (renewed by Feb 28; a MN resident must return home at least monthly).
+  - Military spouses with Form NDW-M (renewed by Jan 31).
+  - Interstate carrier nonresidents.
+  - Military pay deductible under 57-38-30.3(2)(g), unless the employee asks for withholding.
+- **Nonresident mobile workforce exclusion** (57-38-59.3) [US-NDS5-004]. It applies when all of these hold:
+  - the nonresident is present 20 days or fewer;
+  - the nonresident has no other ND income;
+  - the home state has a reciprocal exclusion or no income tax.
+  - It does not apply to athletes, entertainers, persons of prominence, construction workers or key employees.
+- **Nonresident aliens** [US-NDS5-002]:
+  - A separate W-4 marked "North Dakota only - nonresident alien", status Single, Exempt not allowed.
+  - A treaty exemption is not recognised unless the treaty covers states.
+- **Severance paid to a nonresident**: taxable in ND by the ratio of past ND service [US-NDS5-002].
+- **Local income taxes**: none [US-ND-P5-2-001].
+- **Reciprocity**: MN and MT [US-MULTI-014, US-ND-P5-1-001].
+- Confidence: high (A.2 booklet read in full, A.1 statute), except the booklet-example defect.
+
+## 3. social_security
+- **SUI 2026** [US-NDS5-012, US-ND-004]:
+  - Taxable wage base **46,600**.
+  - New-employer rate: non-construction 1.00% (positive balance) / 6.07% (negative balance); construction 9.67%.
+  - Experience range: positive schedule 0.07%-1.10%; negative schedule 6.07%-9.67%.
+- **Employee contribution**: none. Contributions may not be deducted from wages (52-04-01) [US-NDS5-009, US-ND-P5-2-003].
+- **Wage-base rule**: 70% of the statewide average annual wage, rounded to the nearest 100, fixed by Oct 1 for the next year, and never below FUTA (52-04-03(3)-(4)) [US-NDS5-009].
+- **Coverage**:
+  - Corporate officers and certain LLC managers are covered. Owners with 25% or more may elect exclusion in January or within 60 days of formation.
+  - Domestic workers are covered at 1,000/quarter.
+  - Agricultural workers are covered at 10+ workers in 20 weeks or 20,000 cash wages/quarter [US-NDS5-011, US-NDS5-010].
+- **SDI/TDI/PFML**: none. 34-01-15.1 bars local mandates [US-ND-P5-2-002].
+- **Other levies**: none on the revenue list [US-NDP9V-001].
+- **Penalties**: interest 1.5%/month; late report penalty 5%/month, minimum 25.00 [US-NDS5-009].
+- Confidence: high.
+
+## 4. payslip_statute
+- **NDAC 46-02-07-02(10)**: every employer must give each pay period a "check stub or pay voucher" showing:
+  - hours worked;
+  - rate of pay;
+  - required state and federal deductions;
+  - authorized deductions.
+  [US-NDS5-007, A.1]
+- Electronic delivery: no rule was found in the rules or statutes read. Retention period: none stated (34-06-07 requires only a register of employees) [US-NDS5-006].
+- Language: no rule [US-NDP9L-001].
+- **This supersedes the "no provision" reading** in US-ND-003 and in the US-MQ-48 part 6 answer.
+- Confidence: high on content; electronic consent and retention open.
+
+## 5. reporting_instruments
+
+| Filing | Rule | register_id |
+|---|---|---|
+| Registration | ND TAP (withholding); UI EASY (Job Service) | US-NDS5-002, -011 |
+| Form 306 withholding return | Quarterly, due Apr 30 / Jul 31 / Oct 31 / Jan 31, filed even with zero wages. Annual option if prior-year withholding < 1,000 with 4 timely quarters (apply before Q1). E-file mandatory if prior-year withholding >= 1,000 or a third-party provider e-files federally. Channel: TAP / ACH debit / ACH credit (Form 301-EF) | US-NDS5-002, -003 |
+| Form 307 annual reconciliation + W-2 | Due Jan 31. Satisfied by e-filing the W-2s; e-filing of Form 307 is required even with zero W-2s. W-2 e-file mandatory since 2022 (57-38-60(12)). Format EFW2 (SSA 42-007), W-2c EFW2C. Channel: TAP upload/key-entry or software web service; test files can be validated in TAP | US-NDS5-002, -003 |
+| UI Employer's Contribution and Wage Report | Quarterly, electronic (UI EASY or Secure FTP); report and payment due by the end of the month after the quarter; excess wages per quarter | US-NDS5-011, -009 |
+| New hire | Within 20 days of the first day of work, to the State Directory of New Hires (HHS Child Support). Fields: name, address, SSN, hire date, health insurance offered; employer name, address, FEIN | US-NDS5-013 |
+| POA | Form 500 (OST); payroll provider designated on the registration form | US-ND-P5-1-002, US-NDS5-002 |
+
+- Channels: Form 306 = `online_form` / `api` (ACH); W-2 = `file_upload` (EFW2); UI report = `file_upload` / `online_form`.
+
+## 6. leave
+- **Paid sick leave**: no state statute in the chapters read (34-01, 34-06, 34-14, NDAC 46-02-07). PFML: none (34-01-15.1) [US-ND-P5-2-002].
+- **PTO**: earned or awarded PTO is wages at separation (NDAC 46-02-07-02(12)) [US-NDS5-007].
+  - Use-it-or-lose-it is allowed with notice.
+  - Forfeiture at separation is not allowed, except under 34-14-09.2 (section 7) [US-NDS5-005].
+- Confidence: 80% (no exhaustive search of Title 34 for other paid-leave mandates, e.g. jury or voting leave pay).
+
+## 7. termination
+- **Final pay** (34-14-03) [US-NDS5-005]:
+  - On discharge, resignation or suspension, wages are due at the next regular payday.
+  - A discharged employee is paid by certified mail to a designated address, or as agreed.
+  - Default penalty: the daily contract wage, for up to 30 days.
+- **PTO payout**: PTO available for use is paid at the regular rate [US-NDS5-007]. On a voluntary quit, a private employer may withhold it only if all three hold:
+  - written notice was given at hire;
+  - service is under one year;
+  - the employee gave less than 5 days' notice.
+  [US-NDS5-005]
+- **Child support**: report a layoff or termination within 7 (business) days for employees with an IWO or NMSN [US-NDS5-016, US-NDS5-014].
+- UI separation notice and state WARN: not found (not searched in depth). See Open questions.
+
+## 8. benefits_in_kind
+- ND taxable income = federal taxable income (57-38-30.3(2)), and ND withholding wages = IRC 3401 wages [US-NDS5-004, US-NDS5-002]. ND follows the federal exclusions (401(k), 125, HSA, transit, group-term life); no state departure was found.
+- The 2025 employer child-care contribution credit is an employer income-tax credit with no payroll effect [US-NDS5-018].
+
+## 9. deductions_garnishments
+- **Wage deductions**: only those required by law or court, advances, or deductions authorised in writing (recurring, or specific non-recurring). Damage, breakage or shortage must be authorised at the time of deduction (34-14-04.1) [US-NDS5-005].
+- **Creditor garnishment** [US-NDS5-008]: the lesser of 25% of disposable earnings or the excess over 40 x the federal minimum wage (**290.00/week**, derived).
+  - It is reduced by **20.00 per week per resident dependent**. The debtor gives the list within 10 days; if not, no dependents are counted.
+- **Support limits**: 50/60%, or 55/65% with arrears.
+- **IWO** [US-NDS5-014]:
+  - Start the first pay period after receipt; remit within 7 business days.
+  - **Employer fee: up to 3.00/month**.
+  - Cap: 50% of disposable income when the full amount cannot be withheld.
+  - E-remittance is mandatory for employers with 25+ employees and more than 4 IWOs.
+- **Lump sums of 1,000 or more** (bonus, commission, leave cash-out) for obligors in arrears: notify Child Support before payment, release one half, and hold the other half for 30 days [US-NDS5-015].
+
+## 10. collective_agreements
+- No state prevailing-wage law [US-ND-P5-1-003, MEDIUM: WebFetch summary of the DOL table; no ND statute was read to confirm absence]. Federal Davis-Bacon applies to federal projects.
+
+## 11. indexation
+- **PIT brackets**: indexed annually by the federal IRC 1(f) cost-of-living adjustment, with rates fixed (57-38-30.3(1)(g)). Published in the annual OST withholding booklet [US-NDS5-004, US-NDS5-001].
+- **UI wage base**: 70% of the statewide average annual wage, set by Oct 1 and published in the Job Service rate schedules [US-NDS5-009, US-NDS5-012].
+  - G-DERIVE is not possible: the statewide average wage is not published in the documents read. 46,600 / 0.70 = 66,571 is the implied average, unverified.
+- **Minimum wage**: not indexed [US-NDS5-006].
+
+## 12. data_protection
+- Breach notice to ND residents, and to the Attorney General when more than 250 people are affected. Name + SSN is personal information (NDCC 51-30) [US-NDS5-017].
+- No pay-statement SSN-truncation rule was found.
+
+## 13. live_legal_change
+- **OST news sweep, 2026-01-01 to 2026-11-02** (latest item 2026-10-08): no withholding or employer-tax change [US-NDS5-019].
+- **2025 session**: the only income-tax item is the employer child-care credit [US-NDS5-018].
+- **2027**:
+  - The withholding booklet is not yet published (guessed URL 404).
+  - The UI 2027 schedule is not yet available (guessed URL HTTP 403).
+  - Minimum wage: no change.
+
+## Special populations
+
+| Population | ND rule | register_id |
+|---|---|---|
+| Domestic / household | Excluded from ND withholding (IRC 3401 excludes domestic service in a private home). UI covered at 1,000/quarter. Live-in domestic workers exempt from overtime. Casual babysitters exempt from minimum wage | US-NDS5-002, -011, -007 |
+| Agricultural | Farmer/rancher wages exempt from ND withholding (57-38-60(10)). UI only at 10+ workers / 20,000 per quarter. Overtime exempt | US-NDS5-002, -011, -007 |
+| Minors | Same minimum wage, no youth subminimum. Vocational students may be licensed at 85% or more of the minimum. Newspaper carriers under 18 and a minor employed by a parent are UI-excluded. Child-labour hours (34-07) not read | US-NDS5-007, -010 |
+| Tipped | Tip credit up to 33% of the minimum wage, so the cash wage is 4.86 at 7.25 (derived). Advance notice and records required. Tip pool by vote of tipped employees | US-NDS5-007 |
+| Clergy / religious | UI excludes ministers, religious orders and church organisations. Withholding follows federal (no state rule beyond federal) | US-NDS5-010, -002 |
+| Students | UI excludes enrolled students (52-01-01(17)). Vocational subminimum 85% | US-NDS5-010, -007 |
+| Nonresident aliens | ND withholding on a separate W-4 (Single, no Exempt). Treaty exemption ignored unless it covers states | US-NDS5-002 |
+| Statutory employees | UI excludes commission-only insurance, real estate and securities agents. Otherwise no state rule beyond federal | US-NDS5-010 |
+| Government employees | Covered by minimum wage and withholding (the state is an "employer"). Comp time per FLSA (34-06-04.1). Trade-time rules (46-02-07-04) | US-NDS5-006, -007, -002 |
+| Military spouses / military pay | NDW-M exemption. No withholding on deductible military pay unless requested | US-NDS5-002, -004 |
+| Tribal members | Exempt when enrolled, living on a reservation and working there | US-NDS5-002 |
+
+## MULTI hand-offs (ND answers)
+- **SUI wage-base credit for wages reported to another state**: yes for the same employer. Taxable wages include "service constituting employment under the employment security law of any other state" (52-04-03(1)) [US-NDS5-009]. Confidence 75%: the statute is read, but no Job Service worked example.
+- **UI localization**: out-of-state residents are reported to ND if their principal place of employment is ND; temporary ND work is reported to the principal state [US-NDS5-011, US-NDS5-010].
+- **PFML/SDI coverage of multistate workers**: not applicable (none in ND).
+- **Paid sick leave reach**: not applicable (no ND statute).
+- **Pay-statement reach to out-of-state work**: NDAC 46-02-07 does not state a territorial rule. Default: it applies to employees employed in ND (34-14-01, "employing any person in this state"). Confidence 60%.
+
+## ACCESS gaps
+- `https://www.jobsnd.com/sites/www/files/documents/jsnd-documents/uitaxrateschedules2027.pdf`: HTTP 403 on 2026-11-02 (probably not published yet; the rates are set after September).
+- `https://www.tax.nd.gov/sites/www/files/documents/forms/individual/2027-iit/2027-income-tax-withholding-rates-booklet.pdf`: 404 on 2026-11-02 (guessed URL; not yet published).
+- `https://www.tax.nd.gov/sites/www/files/documents/forms/business/form-ndw-r.pdf`: HTTP 403 (guessed URL; the form itself was not needed, since the rule is in US-NDS5-002).
+
+## Open questions
+
+Mirrors `unresolved[]` of the facts file (same keys, same wording).
+
+- **nd.meta.register_id_pattern** (blocking): 4 facts rest on active register rows whose ids (US-ND-P5-1-003, US-ND-P5-2-001, US-ND-P5-2-002) do not match the facts-schema register_id pattern ^[A-Z]{2}-[A-Z0-9]{2,12}-[0-9]{3,4}$ (multi-hyphen legacy ids). They are carried in full in _facts_pending_register_id_pattern and are NOT yet consumable facts. What would close it: Orchestrator decision: a PATCH of facts.schema.json loosening the register_id pattern (e.g. ^[A-Z]{2}-[A-Z0-9-]{2,16}-[0-9]{3,4}$), or register alias ids; then run _research/synthesis-B/_work-MN-WY/promote.py to move the pending facts into facts[].
+- **nd.pit.oracle.booklet_defect** (non-blocking): 2026 booklet Section 2 example (weekly 1,800 single: 734 / 14) does not reproduce from the 2026 table (701.51 / 13). What would close it: OST (withhold@nd.gov) confirmation that the example is stale and the table governs, or a corrected booklet.
+- **nd.payslip.electronic_and_retention** (non-blocking): No ND rule found on electronic pay-statement delivery or payroll record retention. What would close it: NDDOLHR wage-and-hour FAQ or NDAC 46-02 recordkeeping provisions.
+- **nd.prevailing_wage.absence** (non-blocking): Absence rests on a WebFetch summary of the DOL table. What would close it: Direct read of the DOL WHD prevailing-wages page or an NDDOLHR statement.
+- **nd.ui.rates.next_year** (non-blocking): 2027 UI wage base/rates and 2027 withholding booklet not published (403/404). What would close it: Job Service 2027 rate schedules and the OST 2027 booklet.
+- **nd.term.ui_notice_warn_child_labour** (non-blocking): UI separation notice, state WARN and child-labour hours (34-07) not researched. What would close it: Job Service Employer's Guide to UI and NDCC 34-07.

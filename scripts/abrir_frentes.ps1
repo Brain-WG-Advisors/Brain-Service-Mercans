@@ -10,7 +10,7 @@
 #   .\scripts\abrir_frentes.ps1 -DryRun              # so mostra o comando
 
 param(
-    [ValidateSet('Suporte', 'Gmail', 'Chat', 'Pipeline', 'Certificacao', 'Chade', 'EUA', 'ValidacaoCO', 'Lituania')]
+    [ValidateSet('Suporte', 'Gmail', 'Chat', 'Pipeline', 'Certificacao', 'Chade', 'EUA', 'ValidacaoCO')]
     [string[]]$Frentes = @('Suporte', 'Gmail', 'Chat', 'Pipeline', 'Certificacao'),
     [switch]$Retomar,
     [switch]$DryRun

@@ -1,0 +1,10 @@
+# Mandate answers G2-W1B - GA (PASS 4, wave 1B, 2026-10-29)
+Shard: `00-official-sources/_register-shards/mandate-G2-W1B.csv` (US-GA-W1B-001..003). Chrome own tab, WebFetch, saved official PDFs read locally.
+
+## GA - US-MQ-30 (parts 2,3,4,5,6 were missing)
+3. SUI 2026 taxable wage base RESOLVED = 9,500. The GDOL Employer Handbook DOL-224 (R-11-24) states the base is 9,500 effective 2013-01-01 (HB 347); the figure 8,500 appears nowhere in the 164-page handbook, and on the GDOL FAQ page 9,500 is in the question text while 8,500 is only in one answer, so the 8,500 is stale page text (US-GA-W1B-001; resolves the open item in US-GA-002). New employer rate 2.7%; the tax is employer-paid and cannot be deducted from wages, so no employee contribution. Caveat: the handbook is edition R-11-24, not a 2026 rate notice; the 2026 experience range and the administrative assessment rate were not read. Confidence: high for 9,500; medium that nothing changed for 2026.
+2. Local wage taxes: the 2026 DOR guide (54 pages, full text) has no local income tax content (US-GA-W1B-002). STATUS: answered by absence in the primary guide (medium-high).
+4. SDI/PFML: NOT LOCATED; neither the DOR guide nor the GDOL handbook mentions a state disability or paid-leave payroll levy. STATUS: open (medium confidence none exists).
+5. Multistate: DOR guide: withhold on residents for services inside or outside Georgia (not when outside Georgia and the other state requires withholding) and on nonresidents for Georgia services; the word reciprocity does not occur (US-GA-W1B-002). Day/dollar thresholds NOT LOCATED. STATUS: partial.
+6. Pay statement: no pay-stub content in the GDOL handbook or DOR guide; no Georgia statute located (absence not proven). Prevailing wage: NOT LOCATED. POA: withholding RD-1061 / RD-1062 / RD-1063 reporting agent, IRS 2848 accepted (US-GA-W1B-003, chrome-read; high); UI: GDOL Power of Attorney form to the Adjudication Unit (US-GA-W1B-001). Calculator: guide percentage-method worked examples (US-GA-001). STATUS: partial (pay-statement statute and prevailing wage open).
+Rounding (part 1 note): zero occurrences of rounding in the DOR guide.

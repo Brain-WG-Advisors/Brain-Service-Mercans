@@ -3,6 +3,12 @@
 > Escrito **só pela janela "Pipeline - Mercans"**. Criado em 2026-10-15 a partir de [[revisoes/2026-10-15-licoes-aprendidas/00-LICOES-CONSOLIDADAS]]. Reescrever a cada "fecha a sessão" desta janela.
 
 ## Instruções vigentes
+- 2026-10-30 (usuário, depois da pausa): Lituânia: fazer a **etapa 1** (itens nossos para subir a nota: pesquisa B11/B3/B5/B6, data do exemplo do GPM313, `sam-v07.mxfd`, campo 5×11) e levar a **etapa 2** (perguntas oficiais à Sodra/VMI) o mais perto possível da conclusão **só com pesquisa**. Continua valendo: nada enviado, nada no Drive.
+- 2026-10-30 (usuário, fim do dia): Lituânia **em pausa para apresentação**. Nada vai para o Drive, para e-mail nem para o Kevin. Depois decidir se fazemos tudo sozinhos ou se precisamos do BAU. As versões SAM v1.2, GPM313 v1.3 e SIR v1.2 ficam só em local.
+- 2026-10-30 (usuário): Lituânia: fazer **tudo o que dá sem o BAU**. No ponto em que só o BAU resolve, deixar pronta a **lista do que o BAU precisa validar**. O Nabil disse que não há consultor de BAU na Lituânia; o assunto vai à ELT de 02/11.
+- 2026-10-29 (usuário): Lituânia: **não anunciar versão nova em ticket** (SR-419/420/421/479) antes da validação do BAU (Nabil/revisor indicado). As versões de 29/10 ficam no Drive como base para essa validação.
+- 2026-10-29 (usuário): Chat, e-mail e Drive só pelo **Claude in Chrome**. Nada de conectores MCP para esses três (Gmail, Google Drive etc.). O resto que tem conector, como o monday, vai pelo conector.
+- 2026-10-29 (usuário, via janela geral): não mandar resumo à janela geral; o painel lê o fim de cada rodada sozinho. SendMessage à brain-service-5b só para pedir o que só ela faz (commit, coordenação entre frentes).
 - 2026-10-27 (usuário): **Specs** → importar a versão nova no `.gsheet` atual da spec. **WTC, CCG e DD** → criar uma versão nova (arquivo Google novo com o número da versão), atualizar o link no ticket e atualizar no monday.
 
 ## Pipeline vigente (atualizado em 2026-10-17)
@@ -33,6 +39,7 @@
 | Costa do Marfim | `Costa do Marfim/2026-10-16-teto-CNPS/` | Teto CNPS PF/AM/AT-MP 70 000 → 75 000 (16/10): WTC v1.3, CNPS-001 v1.4, CNPS-002 v1.5, CCG v1.3, Design v1.2 copiados para o Drive (`CONFERENCIA.md`). **Usuário importa** no Drive |
 
 ## Em andamento
+- **Lituânia, validação (02/11):** feitos a validação dos documentos (28–29/10), a busca do BAU (não há, Nabil 30/10) e a reconferência com fontes vigentes (30/10; SAM v1.2, GPM313 v1.3, SIR v1.2 só local). **Parado em:** decisão da ELT de 02/11 ([[rascunhos/2026-11-02-proposta-ELT-lituania]]). Depois: Drive + tickets → Development programa → teste do Kevin → conferência dos arquivos gerados → portal. Linha do tempo no hub [[Lituania]].
 - **Lituânia — correções da validação de 28/10** ([[Research Pipeline/Lithuania/2026-10-28-validacao/CONFERENCIA]], resumo em `PASSE-DE-BASTAO.md`): SAM v1.1, GPM313/312 v1.2, SIR v1.1 em local + revalidação. 29/10: esta janela é a "Process Lithuania" do Maestri (a `frentes/lituania` não será usada). "Sim" do usuário veio pela janela geral → confirmar aqui antes de gravar.
 - **Lituânia (27–28/10): entrega da call concluída e publicada** (CT-4285, SR-419/420/421, SR-479, e-mail Mohit+Katrin, HRBS-15253) — [[sessoes/2026-10-28-pipeline]]. Abertos no hub: licenças (11/11), formulários SD, 2027.
 - **Skill CO recompilada (28/10)** em `Research Pipeline/Colombia/2026-10-28-skill/` — **espera o usuário** revisar e instalar no claude.ai; avisar a janela Chat (pedido do Ram).

@@ -1,0 +1,90 @@
+{
+ "MD": [
+  "County tax is piggybacked: withhold the state tax and the county-of-residence local tax together and report both on the state return; apply the local table that equals or next exceeds the county rate (`md.wh.method`). Where the county is unknown, use [[FACT:md.local.county_rate.default_unknown=3.3]] percent.",
+  "Nonresidents of reciprocal jurisdictions ([[FACT:md.reciprocity.states=DC, PA, VA, WV]]) are exempt on a valid certificate; other nonresidents pay the state rate plus the special nonresident rate of [[FACT:md.nonres.special_rate=2.25]] percent and no county tax.",
+  "Paid family and medical leave (FAMLI) contributions are not collected in 2026: [[FACT:md.pfml.contributions.start=2027-01-01 (no contribution in 2026)]]. Configure the [[FACT:md.pfml.rate.total=0.9]] percent rate with a 2027-01-01 start only.",
+  "The Social Security number may not appear on the pay statement or any pay notice: [[FACT:md.payslip.ssn.prohibited=True]]. Do not print a truncated number either.",
+  "The pay statement shows the earned sick and safe leave balance each time wages are paid: [[FACT:md.payslip.essl_balance.required=True]]."
+ ],
+ "ME": [
+  "Withholding uses the withholding standard deduction of the 2026 withholding method ([[FACT:me.wh.std_deduction.single=12450]] single, [[FACT:me.wh.std_deduction.married=27750]] married, with phase-out), not the standard deduction used on the individual return.",
+  "The new-employer combined unemployment rate [[FACT:me.sui.new_employer.rate.total=2.54]] percent includes the Unemployment Program Administrative Fund component, whose 2026 rate differs between two authority sources. Treat the combined rate and its split as unconfirmed until the blocking gap in section ME.7 closes.",
+  "A pay statement is required each payday: [[FACT:me.payslip.required=True]].",
+  "There is no local wage tax ([[FACT:me.local_wage_tax.exists=False]]) and no reciprocity agreement.",
+  "Paid family and medical leave contributions are deducted from the employee after tax: [[FACT:me.pfml.employee_deduction.after_tax=True]]; the employee share is reported on Form W-2 under the label [[FACT:me.pfml.w2_box14_label=MEPFML]]."
+ ],
+ "MI": [
+  "The state deduction for qualified tips and overtime (`mi.pit.tips_overtime_deduction`) operates at assessment only, on the individual return. It does not change withholding; do not model it in the payroll calculation.",
+  "City income taxes: Detroit is administered by the state Treasury ([[FACT:mi.local.detroit.rate.resident=2.4]] percent residents, [[FACT:mi.local.detroit.rate.nonresident=1.2]] percent nonresidents). The other self-administered cities file on their own city returns (tier T4). Their uniform-ordinance defaults ([[FACT:mi.local.uniform.resident_rate_default=1.0]] / [[FACT:mi.local.uniform.nonresident_rate_default=0.5]] percent) are defaults, not confirmed city rates; per-city rates are a blocking gap (section MI.6).",
+  "Reciprocity ([[FACT:mi.reciprocity.states=IL, IN, KY, MN, OH, WI (state tax only, not city tax)]]) covers the state tax only; city taxes still apply.",
+  "Prevailing wage follows the state act (`mi.prevailing_wage.certified_payroll`). Never read Michigan prevailing-wage status from the US Department of Labor state table, whose edition predates Michigan's restoration of its law.",
+  "The Social Security number shown on any pay document is limited to [[FACT:mi.payslip.ssn.max_digits=4]] digits."
+ ],
+ "MN": [
+  "Minnesota overtime applies after [[FACT:mn.overtime.weekly_threshold_hours=48]] hours a week; employers covered by the federal Fair Labor Standards Act still pay overtime after the federal weekly threshold (Annex FED). Do not configure the state threshold as the only overtime rule.",
+  "Minnesota does not follow the 2025 federal changes: the federal tips and overtime deductions and the later federal fringe-benefit changes do not reduce Minnesota withholding. The state follows the Internal Revenue Code as of [[FACT:mn.pit.conformity.irc_date=2023-05-01]].",
+  "Paid Leave contributions start in 2026 at [[FACT:mn.pfml.rate.total=0.88]] percent of wages up to [[FACT:mn.pfml.wage_cap.annual=185000]] USD; the employee may bear at most [[FACT:mn.pfml.employee.max_share.rate=0.44]] percent.",
+  "No tip credit is allowed: [[FACT:mn.minwage.tip_credit.allowed=False]].",
+  "The pay statement shows the earned sick and safe time balance: [[FACT:mn.payslip.esst_balance.required=True]]."
+ ],
+ "MO": [
+  "There is no state paid sick leave in 2026 ([[FACT:mo.leave.sick.state_statute.exists=False]]); the earlier ballot measure was repealed. Do not model an accrual.",
+  "The minimum wage [[FACT:mo.minwage.hourly=15.0]] USD has no annual index step ([[FACT:mo.labour.minwage.indexation.active=False]]); only a federal increase can change it.",
+  "Unemployment wages include 401(k) deferrals ([[FACT:mo.sui.wages.401k_included=True]]) and exclude cafeteria-plan salary reductions, which differs from the state income-tax base.",
+  "Local layer (tier T4): the St. Louis and Kansas City earnings taxes ([[FACT:mo.pit.local.st_louis.earnings_tax.rate=1]] and [[FACT:mo.pit.local.kansas_city.earnings_tax.rate=1]] percent) are filed with the cities, separately from the state return.",
+  "A constitutional ballot measure of November 2026 is not enacted law and has no withholding effect for 2026 or 2027."
+ ],
+ "MS": [
+  "Mississippi has no state minimum wage ([[FACT:ms.labour.minwage.state.exists=False]]) and no state overtime rule, and it pre-empts local wage and leave mandates ([[FACT:ms.local_mandates.preempted=True]]); federal rules apply (Annex FED).",
+  "The 2026 withholding rate is [[FACT:ms.pit.rate.flat=4.0]] percent. The [[FACT:ms.pit.rate.flat=3.75]] percent rate from 2027 is enacted for the annual liability only; do not apply it to withholding until the Department of Revenue publishes the 2027 tables.",
+  "Residents are withheld on all wages except to the extent another state withholds (`ms.pit.resident.other_state_rule`).",
+  "The formula and the wage-bracket table are both authorised and can differ by rounding."
+ ],
+ "MT": [
+  "Unemployment wages include cafeteria-plan salary reductions ([[FACT:mt.sui.wages.section125_included=True]]) and 401(k) deferrals ([[FACT:mt.sui.wages.401k_included=True]]), unlike the income-tax base.",
+  "Accrued vacation must be paid at separation: [[FACT:mt.leave.vacation.payout_at_separation=True]].",
+  "Withholding is rounded up to the next whole dollar, not to the nearest dollar (`mt.wh.method`).",
+  "The 2027 minimum wage is not confirmed and is not configured (blocking gap in section MT.3)."
+ ],
+ "NC": [
+  "Withholding uses [[FACT:nc.pit.wh.rate=4.09]] percent, not the statutory rate of [[FACT:nc.pit.rate.flat=3.99]] percent.",
+  "The 2027 rate is not modelled until the Department of Revenue publishes the 2027 withholding method (blocking gap in section NC.4).",
+  "Withholding is rounded to the nearest whole dollar, while the nonresident-alien add-on is rounded up (`nc.pit.rounding`).",
+  "There is no local wage tax ([[FACT:nc.local_wage_tax.exists=False]]) and no reciprocity agreement ([[FACT:nc.reciprocity.states=none]])."
+ ],
+ "ND": [
+  "The worked example in the 2026 withholding booklet does not reproduce from the 2026 table. Use the table and formula; the reference result is [[FACT:nd.pit.oracle.example_1.withholding=13]] USD.",
+  "A pay statement content rule exists (`nd.payslip.items`).",
+  "North Dakota uses the federal Form W-4 (no state certificate, `nd.wh.certificate`); supplemental wages are withheld at [[FACT:nd.wh.supplemental.rate=1.5]] percent."
+ ],
+ "NE": [
+  "The withholding rates of Circular EN ([[FACT:ne.pit.wh.rate.1=2.26]] to [[FACT:ne.pit.wh.rate.6=4.6]] percent) are not the statutory income-tax rates (top statutory rate [[FACT:ne.pit.statutory.top_rate=4.55]] percent in 2026). Configure withholding from Circular EN only; the statutory rates apply at assessment.",
+  "Employers with more than [[FACT:ne.pit.min_withholding.employee_threshold=24]] employees must withhold at least [[FACT:ne.pit.min_withholding.rate=1.5]] percent of taxable wages.",
+  "Paid sick time applies only to employers with at least [[FACT:ne.leave.paid_sick.coverage_min_employees=11]] employees.",
+  "The 2027 minimum wage is not confirmed and is not configured (blocking gap in section NE.3)."
+ ],
+ "NH": [
+  "New Hampshire has no state wage tax ([[FACT:nh.pit.exists=False]]): no withholding, no state certificate and no annual reconciliation (tier T1).",
+  "Final pay on discharge is due within [[FACT:nh.term.final_pay.discharge.hours=72]] hours.",
+  "Wage garnishment on New Hampshire judgments exempts [[FACT:nh.garn.consumer.exempt_multiple_fmw=50]] times the federal minimum wage, [[FACT:nh.garn.consumer.exempt.weekly=362.5]] USD a week.",
+  "Parental medical leave is not configured (non-blocking gap in section NH.10)."
+ ],
+ "NJ": [
+  "Values published for 2027 (minimum wages, unemployment, disability and family-leave rates and wage bases) are listed with a 2027-01-01 start; configure them as dated rows, not as 2026 values.",
+  "The state gross income tax base differs from the federal base: 403(b) and 457 deferrals are taxable ([[FACT:nj.bik.nj.403b_457.taxable=True]]), HSA contributions are not excluded ([[FACT:nj.bik.nj.hsa.excluded=False]]) and dependent-care assistance is taxable ([[FACT:nj.bik.nj.dependent_care_129.taxable=True]]). The unemployment, disability and family-leave base includes 401(k) deferrals ([[FACT:nj.sui.wages.401k_included=True]]) and cafeteria-plan salary reductions ([[FACT:nj.sui.wages.section125_included=True]]).",
+  "The Newark and Jersey City payroll taxes ([[FACT:nj.pit.local.newark.employer_payroll_tax.rate=1]] and [[FACT:nj.pit.local.jersey_city.employer_payroll_tax.rate=1]] percent) are paid by the employer and may not be deducted from employee pay; they are filed with the city (tier T4).",
+  "Quarterly wage reports: build to the stricter Department of Labor rule, with no weekend or holiday extension (`nj.report.wr30.due`)."
+ ],
+ "NM": [
+  "The workers' compensation administration fee has an employee share of [[FACT:nm.wc.admin_fee.employee.quarterly=2.25]] USD a quarter, deducted from pay and reported on Form TRD-41431, next to the employer share of [[FACT:nm.wc.admin_fee.employer.quarterly=2.55]] USD.",
+  "The garnishment floor follows the highest minimum wage that applies at the place of work, times [[FACT:nm.garn.consumer.exempt_multiple_minwage=40]].",
+  "City and county minimum wages (Albuquerque, Santa Fe city, Las Cruces, Bernalillo County) are configured as dated rows; the Santa Fe County rate is a blocking gap (section NM.3).",
+  "The reference withholding result of the 2026 method is [[FACT:nm.pit.oracle.example_1.withholding=41.8]] USD."
+ ],
+ "NV": [
+  "Nevada has no wage tax ([[FACT:nv.pit.exists=False]], tier T1). The Modified Business Tax is an employer tax of [[FACT:nv.mbt.general.rate=1.17]] percent on unemployment-insurance wages above [[FACT:nv.mbt.general.quarterly_threshold=50000]] USD a quarter; the wages on the tax return must equal the gross wages reported for unemployment insurance in the same quarter.",
+  "Daily overtime after [[FACT:nv.overtime.daily_threshold_hours=8]] hours applies only to employees paid less than [[FACT:nv.labour.overtime.daily_ot_wage_ceiling.hourly=18.0]] USD an hour (period from 2026-07-01).",
+  "The 2027 unemployment wage base [[FACT:nv.sui.wage_base=45400]] USD is derived from the agency's published average wage by the statutory rule; confirm it against the 2027 rate notice before use.",
+  "There is no tip credit ([[FACT:nv.minwage.tip_credit.allowed=False]]); do not model the two-tier minimum wage of the statute, which the state constitution overrides."
+ ]
+}

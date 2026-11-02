@@ -1,0 +1,191 @@
+# RUN-JOURNAL — US build (orchestrator)
+
+- 2026-11-02: mandate sealed (seal attempt 6, 65/65, validator PASS). Step 4 human checkpoint skipped: owner authorised an uninterrupted run on 2026-11-01 (Research Pipeline/USA/PLANO-ATE-O-FIM.md; stops only for Drive/sending and scope change).
+- 2026-11-02: Step 5 fan-out by jurisdiction unit per tier._fanout. Common brief `_prompts/stage5-brief.md`. Round A: FED, MULTI + wave 1 (CA, TX, NY, FL, IL, PA, OH, NC, MI, GA). Round B: wave 2. Round C: wave 3. Then one browser pass for ACCESS gaps, then synthesis (packs + facts + coverage).
+
+## Fila: correções ao mandato (scaffolder, em lote após a rodada A)
+- US-MQ-63 TX part 6: Labor Code 62.003 exige demonstrativo de pagamento (só p/ empregados fora da FLSA, 62.151) — US-TXS5-003 contradiz a resposta selada (US-TXR3-001). PSL/CCG não podem dizer "TX sem lei de payslip".
+
+- FED IWO: OMB aprovou 0970-0154 em 2026-08-25 (expira 2029-08-31) — US-FEDS5-028 substitui US-FEDP6-001; ajustar resposta de US-MQ-05 (a) e US-OWN-007 ('renovação pendente' → aprovada).
+- US-MQ-38 LA part 5: Act 382/2025 — isenção de 30 dias para não residentes desde 2026-01-01 (passou de 30 dias, retém todos os dias); regulamento LAC 61:I.1923 só em aviso de intenção. → RESOLVIDO: regra adotada, LR 52:358, vigente 2026-03-20 (US-LAS5-002; substitui US-MULTIS5-022). Aberto: como recuperar os dias 1–30 quando passa do 31º.
+- VA: US-VA-P5-1-004 diz benefícios PFML desde 2028-04-01; VEC FAQ 2026-04-22: contribuições 2028-04-01, benefícios 2028-12-01 (US-VAS5-017).
+- US-MQ-01 bloco moeda / US-IA-001: IA arredonda retenção ao CENTAVO (2026), não ao dólar — US-IAS5-005/-015 substituem a parte de arredondamento.
+- MULTI.md §2.2 errado para MS: MS TEM regra de retenção para residente que trabalha fora (US-MSS5-004/-019) — corrigir na síntese.
+- US-MQ-41 ME part 6 + texto de US-OWN-006: ME TEM lei de contracheque (26 MRSA 665(1)) — US-MES5-006 substitui US-ME-P5-2-006; US-ME-P5-1-004 errado.
+- ME retenção usa dedução padrão própria 12.450/27.750 (não 15.300/30.600 de US-ME-P5-2-001).
+- US-MQ-48 ND part 6 + US-ND-003: ND TEM regra de contracheque (NDAC 46-02-07-02(10)) — US-NDS5-007.
+- US-VT-SUI-001: taxa de 1% para novos empregadores começou em 2004-07-01, não 2026-07-01 (US-VTS5-009); corrigir uso em MANDATE/G6.
+
+## Fila: passada no navegador (ACCESS gaps)
+- TX: twc.texas.gov (HTTP 202 vazio; notícias 2026 para live_legal_change), 40 TAC 815.106/815.107, OAG employer portal. Ver _research/stage5/TX.md.
+
+- OH: tax.ohio.gov municipal rate table / The Finder (taxas municipais 2026); lista completa de school districts 2026.
+- MI: mi-newhire.com (app JS); 23 cidades com imposto próprio (fora Detroit) — taxas/formulários/prazos.
+- CA: salários mínimos municipais (DIR não mantém lista; 1 worker por cidade), fast-food/saúde, DE 9C formato eletrônico, leginfo 403 (usado Wayback).
+- FL: floridajobs.org página do salário mínimo (403).
+- IL: Chicago (FAQ licença remunerada e salário mínimo, 403), Cook County Paid Leave Ordinance.
+- FED: ssa.gov EFW2 2026 (26efw2.pdf) e cbb.html (base 2027 192.300); ACF new-hire.
+- NY: DFS decisão PFL 2027 (403), paidfamilyleave.ny.gov/2026 (403), nyc.gov Protected Time Off + FAQ DCWP 02/2026.
+- MULTI: HHS registro multiestadual e new-hire (HTTP 202 vazio), congress.gov S.1443.
+- PA: pittsburghpa.gov licença remunerada (403), Philadelphia Code 9-4100 amlegal (403), phila.gov licença (404), panewhires.com (DNS).
+- TN: capitol.tn.gov HB1958, PC 617/2026 (tnsosfiles 403), HRC licença-maternidade, DLWD trabalho infantil, mudanças 2026 workers' comp.
+- MN: uimn.org taxas UI 2026 (sem conexão), pl.mn.gov (verificação humana).
+- VA: VEC pool-cost % 2026 (Q2), VEC notícias PFML.
+- AZ: azica.gov salário mínimo + cartazes 2026/2027 (confirmar 15,15/15,65), Flagstaff, des.az.gov UC-018 e aviso de separação, azdor A-4 2026, Pub 701 atual.
+- SC: dew.sc.gov (taxas UI 2026/2027, sobretaxa, SUITS PDF atual), newhire.sc.gov.
+- NJ: lis.njleg (2A:17-56, 34:21-2, 34:11-56a4, 34:11D-2/-3, 43:21-6/-7, nº do capítulo S.B. 4219), pub.njleg P.L.2005 c.226, notícias Tesouro/DOL 2026.
+- MO: labor/dss/dor/sos.mo.gov (403), DSS new-hire, notícias das agências (varredura 2026); renovação dos earnings taxes St. Louis/KC em abril 2026.
+- WI: formulário WT-4 (edição), página de penhora por dívida tributária.
+- WA: paidleave.wa.gov responsabilidades do empregador (403), seattle.gov (TLS), RCW 26.23 versão viva; WAC 192-310-030 e cap. 192-510 (125/401k/HSA nas bases UI/PFML/WA Cares — prioridade).
+- IN: iga.in.gov Código 2026 (tributos, UI, crédito ao consumidor, imposto local), esquema XML WH-1/WH-3, kb.dol.in.gov, página de taxas DWD 2026.
+- CO: cdle.colorado.gov, famli.colorado.gov, sos.state.co.us (regras COMPS/HFWA), childsupport.colorado.gov, denvergov.org (OPT 2026), mínimos 2027 (15,71 / Denver 19,84 só B).
+- LA: revenue.louisiana.gov, laworks.net (403), legis.la.gov (DNS), L-4, FAQ cafeteria plan, Acts 2026 pág. 2+.
+- MD: spec W-2 TY2026 (não publicada), MW507 2026, página do mínimo de Montgomery, FAQ new-hire.
+- AL: Workforce Alabama 2026 shared cost/UC-216; censo de ~26 impostos ocupacionais municipais (Birmingham 1% só C).
+- KY: KRS 405.465, 40 KAR 1:410 (Wayback 404; sem VPN apps.legislature.ky.gov expira); lista de impostos ocupacionais locais; specs RS/KUIP.
+- NV: PDFs do Labor Commissioner (captcha — só leitura humana: AB 307 2026-10-01, boletim 2026-04-24), nome do formulário trimestral UI.
+- AR: arkleg.state.ar.us (TLS; Act 1/2026 texto), guia MyWorkers OCSE (403), Código AR (LexisNexis) 16-66-208, 11-4-401, 9-14-218.
+- MS: Código MS (LexisNexis) 71-1-35, 85-3-4, 71-1-45, 71-1-17..29, 27-7-16, 43-19-46; layout UI-2.
+- NE: guia de retenção 2027 PDF, FAQ licença médica e página do mínimo (DOL NE), aviso do mínimo 2027 (arredondamento de 15,2625).
+- NH: nh.gov (403 sem IP EUA): regras Emp 300 (gc.nh.gov), RSA 275:37-f, NHES new-hire, NHES 0047, status HB 1484/SB 416, confirmação 1,7% novo empregador.
+- UT: le.utah.gov 34-40-104, 59-10-402, 35A-4-303, 35A-4-205, 70C-7-103; tax/jobs/laborcommission.utah.gov (403); vigência Pub 14 (2026-06-01?).
+- ME: maine.gov (403): specs de upload em lote W-2, fonte de alíquota PFML, páginas de mínimo/hora extra, notícias MRS/MDOL 2026.
+- OK: regras OESC OAC 240:10 (prazo OES-3).
+- WV: code.wvlegislature.gov (só IP EUA): 21-5C-2, 21-5-1, 21A-5-5 (2026), 11-21-74, 11-21-12, 48-14; aviso WorkForce WV sobre taxa SB 1053 (7% de salários ou de contribuições?); taxas de serviço de 8 cidades.
+- HI: capitol.hawaii.gov (403): Act 24/2026 SB3125 CD2, HRS 235-2.3, 392-4/392-5, 390-2; Tabela 2 de alíquotas UI.
+- NM: nmlegis.gov/nmonesource (texto atual de leis; pagamento final 50-4-4 só reimpressão 2017), Las Cruces/Bernalillo/Santa Fe County mínimos, FAQ DWS, esquema de envio em lote, specs UI.
+- DC: OTR instruções de retenção (403), instruções W-2 2026, D-4/D-4A ('under review'), lei permanente do FY2027 BSA.
+- AK: akleg.gov (AS 23.20.175/.530, 25.27.062/.075, 36.05.040, 8 AAC 95.030, Administrative Register 2026), planilha do salário médio (base 54.200).
+- MT: *.mt.gov (DNS fora dos EUA): carta do mínimo 2027 (confirmar 11,20), rules.mt.gov, manual de envio eletrônico UI.
+- WY: dws.wyo.gov (403 sem IP EUA): comunicado de taxas UI jan/2026 (mín/máx, novos empregadores, fator de ajuste), formatos do relatório trimestral e new hire.
+- RI: RIGL 28-14-12 (versão 2026-01-01), H 5679/2025, RIGL 44-30-71, 280-RICR-20-55-10, notícias DLT, semanas TCI (6/7/8).
+- ID: tax/labor/legislature.idaho.gov: formulário ID W-4 2026, texto H0544, 72-1349(1), tabela UI 2027.
+- VT: tax.vermont.gov e labor.vermont.gov (403): mínimo 2027, base UI 2027, cronograma de taxas UI desde 2026-07-01, VT Saves, Acts 91/177 de 2026, 21 V.S.A. 471 atual.
+
+## Rodada A — retornos
+- 2026-11-02 TX ✅ 19 linhas (S5-TX.csv). Rota útil: tcss.legis.texas.gov/resources/{CODE}/htm/{CODE}.{ch}.htm.
+- 2026-11-02 NC ✅ 31 linhas (S5-NC.csv), ~88%. Abertos: eNC3/NC-3 spec 9-2026 (fecha RSPEC), alíquota 2027 3,49% só previsão (não modelar), 7 perguntas de leitura simples. 4 páginas 404 (DES NCUI 101, NCDES-524E, cartazes, 13 NCAC 12 .0800).
+- Rodada B (onda 2) começa conforme vagas abrem: NJ, MA primeiro.
+- 2026-11-02 OH ✅ parcial honesto, 23 linhas (S5-OH.csv), ~85%. Imposto estadual 2026 fixo 2,75% acima de 26.050 (HB 96), mas tabela de retenção ainda progressiva; caso-teste 2.000 quinzenal/1 isenção = 45,13. Base municipal = Medicare menos 125 (401k tributável). 11 leituras simples abertas em codes.ohio.gov.
+- Rodada B: + VA.
+- 2026-11-02 MI ✅ 26 linhas (S5-MI.csv), ~88%. Salário mínimo 13,73 (2026) / 15,00 (2027). Atenção: dedução de gorjeta/hora extra (PA 24/2025) é na declaração, NÃO muda retenção (resumo de fornecedor dizia o contrário). Specs MiUI 2026 (4 formatos) no disco p/ RSPEC/SIR. Brief ganhou regra de scratch por JUR.
+- Rodada B: + TN.
+- 2026-11-02 CA ✅ 22 linhas (S5-CA.csv). Mínimo 16,90 (2026) / 17,40 (2027). DE 44 exemplos E/F recalculados = oráculo para build-manifest.oracle. US-MQ-24 parte 6 resíduo fechado (Labor Code 226 no disco). SDI 2027 não publicado.
+- Rodada B: + IN.
+- 2026-11-02 FL ✅ 27 linhas (S5-FL.csv). Mínimo 15,00 desde 2026-09-30 (antes 14,00); 1º reajuste CPI só em 2028-01-01; gorjeta: salário em dinheiro 11,98 (calculado pela fórmula da Constituição). Armadilha: Fla. Stat. 448.110 ainda diz 6,15. RT-6: layout texto v7 + XSD 2026 (9 XSDs, amostra valida) — fecha lacuna de US-FIL-015; E-Verify no 1º RT-6 (25+ empregados) → campo DD/RSPEC.
+- Rodada B: + WA.
+- 2026-11-02 GA ✅ 23 linhas (S5-GA.csv), ~85%. 4,99% (5,19% até 2026-05-11); tabelas recalculadas (21 valores) e exemplo 27,03 = oráculo. 2027 condicional (4,865%, relatório OPB 2026-12-01). UI 9.500; novo 2,70% = 2,64% + 0,06% (taxa adm. termina 2026-12-31). Penhora: piso federal 217,50 prevalece sobre 217,00 do texto estadual. pdfs/GA tem o guia 2026 duplicado.
+- Rodada B: + SC.
+- 2026-11-02 IL ✅ 26 linhas (S5-IL.csv), ~85%. US-ILR3-001 IL-700-T confirmado byte a byte (exemplo 800/sem = 32,13). Chicago 17,05 / Cook 15,40 desde 2026-07-01. Rota ftp.ilga.gov adicionada ao brief.
+- Rodada B: + MN.
+- 2026-11-02 FED ✅ 32 linhas (S5-FED.csv). Pub. 15-T 2026 recalculada. P.L. 119-21: W-2 códigos TP/TT/TA + 14b, W-2 a partir de 2.000, cuidado dependente 7.500, Trump account 2.500. FUTA 2026 CA 5,3% / USVI 4,8% potenciais até 2026-11-10. Linhas US-FED-001..030 sem arquivo local → S5 trazem as cópias.
+- Rodada B: + AZ.
+- 2026-11-02 NY ✅ 23 linhas (S5-NY.csv; 2 MANUAL B). Mínimo 17,00/16,00, sem aumento em 2027 (off-ramp). NYS-50-T-NYS: 3 de 4 exemplos batem; ex. 2 difere 1 centavo (258,51 × 258,50). Incidente: 4 linhas IL entraram no shard NY por colisão no scratchpad — removidas; síntese deve conferir prefixo de id por shard.
+- Rodada B: + WI.
+- 2026-11-02 MULTI ✅ 26 linhas (S5-MULTI.csv), ~85%. Reciprocidade: 30 pares confirmados nos dois lados; AZ unilateral (CA, IN, OR, VA); DC isenta todo não residente. IL: regra de 30 dias úteis (Pub-130 R-02/26). Projetos federais Mobile Workforce não aprovados (não modelar).
+- Rodada B: + MO.
+- 2026-11-02 PA ✅ 22 linhas (S5-PA.csv), ~85%. Hora extra de assalariado não isento = salário/40 (sem FWW). EIT local: maior entre residência e trabalho; LST 52/ano pro rata. Philadelphia 3,735%/3,425% desde 2026-07-01. 401(k) tributável em PA. UC-1609 obrigatório.
+- ✅ RODADA A COMPLETA (12/12): FED, MULTI, CA, TX, NY, FL, IL, PA, OH, NC, MI, GA.
+- Rodada B: + CO.
+- 2026-11-02 MA ✅ 28 linhas (S5-MA.csv), ~85%. mass.gov abriu com curl hoje. Não modelar 4,67% (iniciativa 25-18 fora da cédula, fonte só B). Conflito PFML: Ch. 101/2026 s.45 troca divisão empregado/empregador desde 2026-01-01 × DFML aplica desde 2027-01-01 → decidir na síntese lendo o texto (proposta do worker: seguir DFML, total 0,88% igual). Circular M: tabela × método percentual diferem até 0,02 → motor escolhe um método.
+- Rodada B: + KY.
+- 2026-11-02 TN ✅ 16 linhas (S5-TN.csv), ~85%. Sem imposto estadual; SUI base 7.000, 0,01–10%, novo 2,7%; LB-0489 aviso de separação em 24 h. Nota do orquestrador: o worker leu o centro de ajuda DLWD pela API pública Zendesk porque a página tem desafio Cloudflare — não generalizar essa rota no brief (é contornar verificação de robô); essas leituras ficam para conferência na passada do navegador.
+- Rodada B: + MD.
+- 2026-11-02 MN ✅ 22 linhas (S5-MN.csv), ~88%. Mínimo 11,41 / 11,87 (2027); Minneapolis 16,37 / 17,02. Fórmula DOR 2026 recalculada; oráculo quinzenal 2.000 solteiro 1 = 91,27.
+- Rodada B: + AL (último da onda 2).
+- 2026-11-02 VA ✅ 25 linhas (S5-VA.csv), ~88%. Guia Virginia Tax 10/26 errado sobre dedução padrão 2027 (lei: 9.200/18.400 em 2027) → não modelar 2027 até fórmula oficial. Licença médica remunerada aprovada: 50+ empregados desde 2027-07-01. Mínimo 12,77 / 13,75 / 15,00 (2028). Penhora: 40 × maior mínimo = 510,80/semana.
+- Rodada C (onda 3) começa: + CT.
+- 2026-11-02 AZ ✅ 28 linhas (S5-AZ.csv), ~85%. Novo: contracheque deve mostrar licença médica disponível/usada/paga (23-375(C)). Penhora mais estrita que a federal (10%). Mínimo estadual 15,15/15,65 só derivado (MANUAL, tier C). Tucson 15,45/16,00. Conflito de texto 33-1131(B) 10% × 12-1598.10(F) 25%.
+- Rodada C: + LA.
+- 2026-11-02 SC ✅ 18 linhas (S5-SC.csv), ~90%. Act 110/2026: alíquotas 1,99%/5,21% valem na declaração anual 2026, mas tabelas de retenção SCDOR ainda 0/3/6% → NÃO pôr 1,99/5,21 no motor de retenção 2026. Act 243: UI olha 16 trimestres em 2027, 20 em 2028. UI base 14.000 + 0,06% DACA confirmados em lei.
+- Rodada C: + OR.
+- 2026-11-02 NJ ✅ 25 linhas (S5-NJ.csv), ~90%. Mínimos 2026/2027 (geral 15,92/16,48). Tabelas UI/TDI/FLI 2026 e 2027 completas; bases 2026 reproduzidas da média salarial. 403(b)/457/HSA/dependente tributáveis no NJ; 401(k) e 125 entram na base UI/TDI/FLI. NJ-927: prazo mais estrito. Incidente: 11 linhas NJ caíram no shard VA e foram removidas; conferência de prefixo: OK.
+- Rodada C: + NV.
+- 2026-11-02 MO ✅ 22 linhas (S5-MO.csv), ~88%. H.B. 567/2025: licença médica da Prop A REVOGADA (sem acúmulo em 2026); mínimo 15,00 desde 2026-01-01 sem indexação depois. Fórmula 4282 2026 recalculada (707,81/ano). Dica: Wayback precisa de curl --compressed.
+- Rodada C: + KS.
+- 2026-11-02 WI ✅ 22 linhas (S5-WI.csv). Tabelas de retenção (W-166, 3,54/4,65/5,30/7,65) ≠ faixas do imposto (3,50/4,40/5,30/7,65) → WTC usa só W-166. Oráculo: 7,59 / 14,34 / 22,08. UI base 14.000; penhora 20%.
+- Rodada C: + IA.
+- 2026-11-02 WA ✅ 30 linhas (S5-WA.csv), ~85%. Mínimo 17,13 / 17,73; 8 mínimos locais. PFML 1,13% (2026) / 1,2% (2027), 29,3/70,7; WA Cares 0,58% sem teto. UI base 78.200; relatório trimestral exige horas + código SOC. Workers' comp: desconto do empregado = 50% de 3 componentes. Mínimo-penhora 599,55.
+- Rodada C: + UT.
+- 2026-11-02 IN ✅ 21 linhas (S5-IN.csv), ~80%. VPN caiu ~07:36 (saída BR) — workers em andamento podem ter mais lacunas. Aviso R47/10-26 (só Boone mudou); exemplo recalculado 13,96 + 4,73. 2,90% em 2027. Lei de contracheque IC 22-2-2-8 lida ao pé da letra só alcança quem está fora da lei federal de salário mínimo → mostrar horas/salário/descontos para todos como boa prática. W-2: 31/jan.
+- Pausa no lançamento de novos workers até a VPN voltar.
+- 2026-11-02 CO ✅ 16 linhas (S5-CO.csv). Mínimo 15,16; Denver 19,29; FAMLI 2027 0,86%; hora extra federal (OBBBA) não reduz retenção CO. Contracheque: COMPS Regra 7 acrescenta taxa, horas, gorjetas e créditos.
+- 2026-11-02 LA ✅ 16 linhas (S5-LA.csv). Retenção 3,09% (R-1306 1/26), exemplos 13,98 e 111,54. Benefícios e proteção de dados quase sem cobertura (30%/20%).
+- 2026-11-02 MD ✅ 21 linhas (S5-MD.csv), ~90% (sites MD funcionaram sem VPN). 24 condados 2026 (máx 3,30%); bônus 6,50% + maior condado; SSN proibido em qualquer documento de pagamento; saldo de licença médica a cada pagamento. FAMLI: nada em 2026; 0,9% (0,45/0,45) desde 2027. Arquivo pdfs/MD/MD_LE-3-1304.1_mgaleg_2026-11-01.html contém só 'Okay' → não citar.
+- Retomada com VPN ainda desligada (MD mostrou que vários sites abrem); lacunas vão para o navegador. Rodada C: + OK, AR.
+- 2026-11-02 AL ✅ 21 linhas (S5-AL.csv). Federal retido é deduzido da base estadual → calcular federal antes. Exemplo M-2 semanal 850 = 29,59. UI base 8.000; salários informados a outro estado contam na base AL. New hire em 7 dias. ✅ ONDA 2 COMPLETA.
+- Rodada C: + MS.
+- 2026-11-02 KY ✅ 26 linhas (S5-KY.csv), ~85%. Erro na planilha oficial de fórmula 2026 (35.730 → 35.640; 47 × 47,98). New hire vai à Procuradoria-Geral desde 2025-07-01. Hora extra no 7º dia; pausa paga 10 min/4 h. Lexington 2,25%. UI base 12.000 com crédito de outros estados.
+- Rodada C: + NE.
+- 2026-11-02 CT ✅ 35 linhas (S5-CT.csv). Mínimo 16,94 / 17,48; UI base 27.000 (+ crédito de outros estados); Paid Leave 0,5%. Oráculo IP 2026(1) ex. 8/9/10 = 17,65 / 39,97 / 78,82 (tabelas) × regras TPG-211 diferem até 0,48 → decidir tabela × regra (CT-OQ-1). PA 26-12: 100+ empregados imprimem URL do guia de códigos de pagamento no contracheque desde 2026-10-01. Tabela E: extrair com PyMuPDF.
+- Rodada C: + NH.
+- 2026-11-02 NV ✅ 19 linhas (S5-NV.csv). Sem imposto sobre salário (Constituição). Mínimo 12,00 único. Hora extra diária desde 2026-07-01 para quem ganha < 18,00/h. UI base 43.700 (2026) / 45.400 (2027, recalculada). MBT 1,17% / 1,554% congelado; salários MBT = UI conferidos todo trimestre. 50+ empregados: horas de licença no contracheque.
+- Rodada C: + ME.
+- 2026-11-02 KS ✅ 29 linhas (S5-KS.csv), ~90%. Tabelas KW-100 de 2024 seguem em 2026 (5,2/5,58%); sem corte em 2026/2027 (gatilho SB 269 não atingido). UI base 15.100, novo 1,75%. Atenção: alguns arquivos .html em pdfs/KS são gzip.
+- Rodada C: + HI.
+- 2026-11-02 OR ✅ 28 linhas (S5-OR.csv), ~88%. Mínimo 15,05 → 15,55 (2026-07-01) recalculado pelo CPI. Publicação DOR 2026 se contradiz (teto 8.500 × 8.750; exemplo 1 com erro) → usar 8.750. Transit estadual continua 0,001 (Measure 120 rejeitada). PFA Multnomah: degrau +0,8% em 2027 ou 2028 (páginas divergem). US-MQ-57 parte 5 agora com fonte 2026 (US-ORS5-025). pdfs/OR/ors652 é gzip.
+- Rodada C: + DE.
+- 2026-11-02 IA ✅ 29 linhas (S5-IA.csv), ~90%. Correção: arredondamento ao centavo (6 exemplos recalculados). UI base 20.400 (2026) / 21.100 (2027); salários de outro estado NÃO contam na base IA. W-2 IA: EFW2 com registro 'RV', arquivo SSA é rejeitado; prazo 15/fev. HF 2212 (20,00 cuidadores) não aprovado.
+- Rodada C: + WV.
+- 2026-11-02 AR ✅ 14 linhas (S5-AR.csv), ~75%. Act 1/2026 1ª sessão extraordinária: topo 3,9% → 3,7% desde 2026-01-01 (retenção e declaração); exemplo recalculado 36,50. Segundo método: tabelas de baixa renda AR4EC (sem fórmula publicada). Act 1019/2021 acabou com a regra de conveniência. Mínimo 11,00.
+- Rodada C: + ID.
+- 2026-11-02 MS ✅ 19 linhas (S5-MS.csv), ~85%. 4,0% (2026) → 3,75% (2027) … 3,0% (2030), lei aprovada; tabelas 2027 ainda não publicadas. Fórmula 2026 reproduz 8/8 linhas (diferença tabela×fórmula até 1 USD). UI base 14.000 com crédito de outros estados.
+- Rodada C: + NM.
+- 2026-11-02 NE ✅ 19 linhas (S5-NE.csv), ~85% (sites NE sem DNS sem VPN; tudo via Wayback). LB258: mínimo 15,00 + 1,75%/ano desde 2027 (15,26 só por fonte secundária); jovem 13,50. Licença médica só para 11+ empregados. Tabelas de retenção 2026 (2,26–4,60%) ≠ alíquota legal 4,55% → tabela; 24+ empregados retêm ≥1,5%. SSN: no máximo 4 últimos dígitos.
+- Rodada C: + DC.
+- 2026-11-02 NH ✅ 16 linhas (S5-NH.csv). T1, sem imposto. Mínimo federal; gorjeta 45% (3,27). Pagamento final 72 h na demissão. UI base 14.000 (crédito de outros estados); novo 1,7% derivado. Penhora: protege 362,50/sem.
+- Rodada C: + RI.
+- 2026-11-02 UT ✅ 16 linhas (S5-UT.csv), parcial. 4,45% desde 2026-01-01 (lei Ch. 250/2026); Pub 14 04/26 recalculada com 6 exemplos. UI base 50.700. Pagamento final 24 h na demissão.
+- Rodada C: + SD.
+- 2026-11-02 ME ✅ 28 linhas (S5-ME.csv), ~82%. Mínimo 15,10/15,70; Portland 16,75/17,75/19,00. New hire em 7 dias. Férias acumuladas pagas na saída (exceto ≤10 empregados). UPAF 0,17% × 0,16% (usar 0,17%). 3 exemplos do livreto reproduzidos.
+- Rodada C: + ND.
+- 2026-11-02 OK ✅ 29 linhas (S5-OK.csv), ~90%. 2026 0/2,5/3,5/4,5%; OW-2 reconstruída, exemplo 36,67→37,00. Sem corte em 2027 (1º possível 2028-01-01). UI 25.000 (2026) / 24.400 (2027, publicado). Síntese: conferir as 21 linhas que P9-MERGE reclassificou de B para A.2 (ex. US-OK-P5-2-005, US-OK-P5-1-001) — risco de rótulo inflado.
+- Rodada C: + AK.
+- 2026-11-02 WV ✅ 18 linhas (S5-WV.csv), ~82%. 2,11–4,58% (SB 392, retroativo a 2026-01-01). UI base 9.500 (SB 841); 7,5%+1% = 8,5% construção de fora resolvido; SB 1053 corta 7% + taxa anual (base ambígua). Contracheque: 42 CSR 5 §7.3. New hire 14 dias.
+- Rodada C: + VT, WY (últimos).
+- 2026-11-02 HI ✅ 31 linhas (S5-HI.csv). Mínimo 16,00 (18,00 em 2028). Booklet A 2025 vigente; exemplo 9,58/sem. UI base 64.500. Act 24/2026 muda faixas 2027 (nova faixa 13%) → retenção 2027 indeterminada. Act 35: segue dedução de gorjeta, não a de hora extra. Penhora 5/10/20%.
+- 2026-11-02 DE ✅ 22 linhas (S5-DE.csv), 85–95%. Mínimo 15,00 sem indexação. Alíquotas de 2014 seguem (HB 13 não aprovado); exemplos reproduzidos = oráculo. UI base 14.500 (2026) / 16.500 (2027); 0,2% cobrado à parte desde ago/2026. Paid Leave 0,80% total provado na lei; cobertura pelo local de trabalho principal (não pela localização UI). Penhora 15%.
+- 2026-11-02 ND ✅ 19 linhas (S5-ND.csv). Exemplo do livreto 2026 errado (imprime 734/ano, tabela dá 701,51) → oráculo usa fórmula/tabela. 0/1,95/2,50%; suplementar 1,5%; arredonda ao dólar. UI 46.600. Não residente: 20 dias.
+- 2026-11-02 NM ✅ 16 linhas (S5-NM.csv), ~85%. Mínimo 12,00; Albuquerque 12,00→13,00 (2027); Santa Fe cidade 15,40/17,50. Tabelas 2026 1,5–5,9% reproduzidas. UI base 34.800. Taxa workers' comp 2,55 + 2,25 por trimestre. Novo relatório trimestral TRD-41431 em 2026; W-2 eletrônico até 31/jan.
+- 2026-11-02 DC ✅ 25 linhas (S5-DC.csv), ~85%. Mínimo 17,95 → 18,40 (2026-07-01); gorjeta 10,30 subindo até 75% em 2034. PFL 0,75% só empregador, sem teto. Act 26-416 (emergência, até ~2026-11-11) revoga isenções pessoais → sem método de retenção 2026 publicado (D-4 em revisão). Empregadores com salário de gorjeta devem usar folha terceirizada.
+- 2026-11-02 SD ✅ 20 linhas (S5-SD.csv), ~90%. T1. Mínimo 11,85 / 12,30 (2027, recalculado). UI base 15.000 + crédito de outros estados; Schedule C 2026 e 2027; taxa adm. 0,08%; taxa de investimento 0,55% novo. Página DLR desatualizada (9,5%) — lei prevalece. Penhora 20%.
+- 2026-11-02 AK ✅ 18 linhas (S5-AK.csv), ~88%. Mínimo 14,00 (2026-07-01) / 15,00 (2027-07-01), sem crédito de gorjeta, hora extra diária >8h. UI 54.200; empregado 0,50%. Contracheque: 8 AAC 15.160(h) alterado 2025-09-25 exige licença médica usada e saldo (corrige US-AK-P5-1-004). TQ01C exige código ocupacional + geográfico. 401(k) fora da base UI.
+- 2026-11-02 MT ✅ 25 linhas (S5-MT.csv). Mínimo 10,85 sem crédito de gorjeta (11,20 em 2027 só derivado). UI 47.300 recalculada. Férias acumuladas pagas na saída. Armadilha: 125 e 401(k) tributáveis na base UI. Topo 5,4% em 2027.
+- 2026-11-02 WY ✅ 19 linhas (S5-WY.csv). T1. Mínimo estadual 5,15 (federal 7,25 prevalece). Férias pagas na saída salvo política escrita assinada → flag no DD. UI base 33.800 (2026) / 34.900 (2027).
+- 2026-11-02 RI ✅ 24 linhas (S5-RI.csv), ~85%. 3,75/4,75/5,99%; exemplo 87,57; suplementar 5,99% (US-RI-006 errado). Mínimo 16,00 / 17,00 (2027). UI 30.800/32.300; TDI 1,1% sobre 100.000 só empregado. New hire 14 dias.
+- 2026-11-02 ID ✅ 25 linhas (S5-ID.csv), ~90%. 5,3% fixo; tabelas mudaram em 2026-07-23 (16.100/32.200). UI 58.300; novo 1,000%. Crédito de outro estado só se imposto pago lá. Pensão alimentícia: teto 50%.
+- 2026-11-02 VT ✅ 30 linhas (S5-VT.csv). Mínimo 14,42; UI 15.400; Child Care Contribution 0,44% (até 0,11% do empregado); exemplo GB-1210-2026 = 45,77 (oráculo). New hire 10 dias.
+- ✅ STEP 5 FAN-OUT COMPLETO: 53/53 unidades, shards S5-* com ~1.260 linhas. Próximo: (1) passada no navegador nas lacunas de acesso (precisa VPN); (2) síntese (merge, packs, facts, coverage, correções de mandato via scaffolder).
+- 2026-11-02 Síntese A ✅: registro 2.533 linhas (2.113 ativas; nenhuma B ativa); 61 superseded; 19 linhas P9 voltaram a B/MANUAL (2 páginas dol.gov sem cópia — salvar no navegador); 22 arquivos gzip descomprimidos; 302 URLs + 39 itens em ACCESS-GAPS.md; 518 perguntas abertas. Próximo: scaffolder corrige o mandato; passada no navegador quando houver VPN; síntese B (packs/facts).
+- 2026-11-02 Orquestrador: página DOL WHD prevailing-wages salva (ccg-sources/MULTI, edição 2023-01-01, md5 8bdbe729…); 10 linhas P5 restauradas a A.2 active (GA, NC, IA, UT, MS, LA, OK, AR, PA, OH) + arquivo local nas linhas A.2 que citavam a página. Backup: _research/stage5/_backup/legal-basis-register_pre-DOLPW-restore.csv. featured-paid-leave (WB) dá 404 — linhas continuam MANUAL. Ressalva: lista DOL ainda diz MI sem lei (MI restaurou em 2023) → não usar para MI.
+- 2026-11-02 Síntese B lançada (brief _prompts/synthesis-B-brief.md): 7 workers — CCG módulos+coverage; CCG anexos FED+MULTI; CCG anexos AK–MI; CCG anexos MN–WY; RSPEC+DD; WTC; SIR+PSL. SKILL depois dos artefatos. Em paralelo: scaffolder reselando (5 partes de prevailing wage).
+- 2026-11-02 ✅ Mandato RESELADO (65/65, PASS). 5 partes de prevailing wage respondidas com a página DOL salva (edição 2023; resíduo: sem busca de lei estadual posterior, confiança média-alta). MI nunca lido dessa tabela.
+- 2026-11-02 Síntese B — annex_FED ✅ 281 fatos (PASS), annex_MULTI ✅ 162 fatos (37 retidos por padrão de id). 
+- DECISÃO DO ORQUESTRADOR (técnica, reversível): o padrão de register_id do contrato facts (^[A-Z]{2}-[A-Z0-9]{2,12}-[0-9]{3,4}$) rejeita ids ativos com segmentos extras (US-XX-P5-1-003, US-AZ-WH-003…). Não se mexe no schema (~/mercans-pipeline é só leitura). Depois da síntese B: passo de normalização de ids — o hunter renomeia no registro as linhas ativas fora do padrão (ex.: US-AZ-P5-1-003 → US-AZP51-003), grava o mapa velho→novo em _research/stage5/ID-RENAME-MAP.csv, atualiza os arquivos _research; o scaffolder atualiza MANDATE/manifest; os fatos retidos (_facts_pending_register_id_pattern) entram nos facts.
+- Pendências a rotear: AR transfer-credit (US-ARP9V-001 sem a cláusula); SC limiar de não residente (IRC 151(d) × 1.000); créditos de base UI não respondidos em 15 estados (AZ GA IL IN MA MN NJ NY OH PA TN TX VA WA WI) + abertos em 8.
+- 2026-11-02 Síntese B — PSL ✅ 136 fatos (+29 retidos por padrão de id), SIR ✅ 223 (+70 retidos). Bloqueante SIR: EFW2 TY2026 (ssa.gov 26efw2.pdf 403).
+- 2026-11-02 Orquestrador: EFW2 TY2026 (Pub 42-007) baixado pelo Chrome do usuário (ssa.gov abre no navegador mesmo sem VPN); US-FEDS5-032 gated → active com arquivo local. Bloqueante do SIR fechado.
+- 2026-11-02 Síntese B — WTC ✅ global_baseline 106 fatos + country_specific 712 (PASS); 77 valores retidos por padrão de id; decisão MA PFML: 2026 segue tabela DFML, troca em 2027 (média). 4 bloqueantes: DC método 2026, UT vigência Pub 14, OH tabela municipal, WA base 125/401k. 407 linhas ativas fora do padrão de id → normalização confirmada como próximo passo.
+- 2026-11-02 Passada no navegador lançada (brief _prompts/browser-pass-brief.md): P1 = bloqueantes (DC, UT, OH, WA, FED 2027, NY PFL, WY, MA/CT/VA/NH/MI); P2 = demais estados. Descoberta: ssa.gov e outros 403 abrem no Chrome do usuário mesmo sem VPN.
+- 2026-11-02 Síntese B — RSPEC ✅ 351 fatos (+32 retidos), 49 lacunas (25 bloqueantes = layouts de arquivo não lidos); DD ✅ 88 fatos (+15 retidos). Reconciliação RSPEC×DD: 0 lacunas. EFW2 TY2026 agora active (US-FEDS5-032) → RSPEC deve reler. 132 ids sem effective_from (Stage 9 vai acusar).
+- Próxima passada no navegador (P3, depois de P1/P2): layouts de arquivo bloqueantes — CA DE 9C, AZ UC-018, CO UI, CT PFML toolkit, DE UC-8A, GA TY2026, IA myIowaUI, ID, IL IDR-986, IN XML, KY RS/KUIP, LA LaWage/LAWATS, ME bulk, MN UI, MT handbook, NC 9-2026, NM TAP, OH UI, OK prazo UI, TX 815.107/204.0025, UT DWS, VT W-2, WA PFML/L&I.
+- Pendência de escopo: regra 'contratados / 1099-NEC fora' (dono, 2026-10-29) sem linha US-OWN → scaffolder registra US-OWN-008 no próximo passo de mandato.
+- 2026-11-02 Síntese B — CCG módulos m01–m13 + coverage ✅ (14 arquivos PASS; 106 fatos próprios + 135 chaves citadas dos anexos; coverage 18 linhas answered; 35 exemplos do oráculo em m12). Decisão MA PFML confirmada (DFML; troca em 2027).
+- Para o merge final: WTC `ga.sit.rate` 5,19 sem effective_to → datar até 2026-05-10 e 4,99 desde 2026-05-11; rodar de novo scratch-ccg-core/build.py + finish.py depois dos anexos; WA PFML 1,13 (2026)/1,2 (2027).
+- Normalização de ids: espera os 2 workers de anexos terminarem (eles citam ids antigos); depois roda num passo só sobre registro + todos os facts/packs.
+- 2026-11-02 Síntese B — CCG anexos MN–WY ✅ 28 arquivos PASS; 1.258 fatos + 187 retidos por padrão de id; 267 lacunas (50 bloqueantes, quase todas leituras de navegador). Script de promoção dos retidos: _research/synthesis-B/_work-MN-WY/promote.py.
+- 2026-11-02 Síntese B — CCG anexos AK–MI ✅ 23 PASS; 1.204 fatos; 265 lacunas (27 bloqueantes). ✅ SÍNTESE B COMPLETA (todos os pacotes/facts). Síntese C lançada: normalização de ids (mapa _research/stage5/ID-RENAME-MAP.csv), promoção dos fatos retidos, linhas de período fechado (ID, IN, OH, GA) voltam a active com effective_to, consumed_by, validação de todos os facts.
+- 2026-11-02 Navegador P2 ✅ 18 linhas (S5B-P2.csv). Fechados: AZ mínimo 15,15/15,65 confirmado (cartazes ICA) + Flagstaff 18,35/18,95 + UC-018; CO PAY CALC 2026 + proposta 2027 (15,71, status proposed) + FAMLI 0,88% 2026; TN Q2/Q8; VT base 15.400, VT Saves 2+ empregados (não 5); Pittsburgh licença 2026; Las Cruces; Bernalillo; AR Act 1/2026 texto.
+- Só com VPN EUA (bloqueio por país/WAF duro/timeout): maine.gov, twc.texas.gov, dew.sc.gov, tnsosfiles, capitol.hawaii.gov, revenue.louisiana.gov, laworks.net, chicago.gov, labor.mo.gov, denvergov.org, in.gov, apps.legislature.ky.gov; não tentados (orçamento/rede): MN, MT, NE, RI, ID, AK, WV, NJ, NV, MS, KS/OK/NC/ND/SD/WI/IA/DE/MD restantes.
+- Próximo após Síntese C e P1: merge dos shards S5B-* + atualização dos facts afetados; lacunas restantes viram RESEARCH-GAP / research-request no laço de cada artefato (bloqueantes seguram só o artefato que as consome).
+- 2026-11-02 Navegador P1 ✅ 20 linhas (S5B-P1.csv). Fechados: OH lista de 214 school districts TY2026 + tabela municipal oficial (678 municípios); NY PFL 2027 0,452% / 451,81 e 2026 conferido; NYC Protected Time Off (FAQ 02/2026, 4 itens no contracheque); CT Paid Leave toolkit v2.1.9; WA relatório Paid Leave/WA Cares; MA tabelas A–G; UT sem SDI; MI new-hire (parcial); ACF new-hire.
+- Continuam bloqueantes: DC método 2026 (D-4 em revisão, nada publicado); UT data de vigência Pub 14 e suplementar; WY taxas UI 2026; WA base com deferimentos (leitura média: entram em PFML/WA Cares). Só com IP EUA: jobs.utah.gov, le.utah.gov, vec.virginia.gov, gc.nh.gov, ssa.gov cbb.
+- 2026-11-02 Síntese C ✅ 590 ids renomeados (mapa _research/stage5/ID-RENAME-MAP.csv), 513 fatos promovidos, 4 linhas de período fechado ativas, consumed_by preenchido; 73 facts PASS, 5.117 fatos, 78 bloqueantes (CCG anexos 48, RSPEC 25, WTC 4, SIR 1). Próximo em paralelo: scaffolder aplica o mapa em MANDATE/manifest/SKELETON; hunter funde S5B-P1/P2 + atualiza facts + EFW2 + US-OWN-008.
+- 2026-11-02 Scaffolder ✅ mapa de ids aplicado (MANDATE 1.113, manifest 1.147, SKELETON 12; 0 restantes); selado; PASS. Pendentes leves: TODO US-OWN-008 na linha 22 do MANDATE; part map OH parte 4 desatualizado no manifest (fora das linhas de register_id).
+- 2026-11-02 Síntese D ✅ registro 2.572 linhas (+38 navegador, +US-OWN-008); 25 facts atualizados (PASS); EFW2 TY2026 lido (bloqueantes RSPEC/SIR fechados). Bloqueantes restantes: CCG 42, RSPEC 22, WTC 2 (DC método 2026, UT vigência Pub 14), SIR/DD/PSL 0. Decisão aceita: WA deferimentos entram em PFML/WA Cares (média, não bloqueante). Pendências leves: convenção de chave PFML dividida ({st}.pfml.rate.total × {st}.pfml.total.rate); 12 linhas novas sem effective_from; MANDATE linha 22 citar US-OWN-008.
+- 2026-11-02 ✅ FASE 1 CONCLUÍDA. Orquestrador: artifacts CCG, RSPEC, DD, WTC, SIR, PSL → researched (manifest PASS). Próximo: FASE 2 — build do CCG (fan-out por módulo/anexo) → QA r1.
+- 2026-11-02 FASE 2: build do CCG lançado (brief _prompts/ccg-build-brief.md): 6 builders — m01–m07; m08–m13+coverage; anexos FED/MULTI/AK–CT; DC–MA; MD–NV; NY–WY. Depois: montagem do DOCX → QA r1 (auditor independente).
+- 2026-11-02 CCG build — anexos MD–NV ✅ 14 arquivos em 01-ccg/annexes/, 801/801 fatos ligados, 137 RESEARCH-GAP (6 bloqueantes). CCG-research-request.json criado (já 262 itens com os outros builders).
+- DECISÃO DO ORQUESTRADOR (regra de triagem, para o hunter aplicar depois do build): valor do ano seguinte ainda não publicado pela autoridade (ex.: MT/NE mínimo 2027, NC alíquota 2027) NÃO é bloqueante — vira limitação documentada (`documented_limitation`) com a data esperada de publicação; bloqueante é só o que falta para 2026.
+- Limitação conhecida do checador C46 (~/mercans-pipeline, só leitura): guarda um valor por chave (o último); chaves com vários períodos (ex.: nj.minwage.hourly 2026/2027) dão falso erro. Avisar o auditor: conferir por chave + effective_from; registrar como limitação no relatório de QA, não como defeito do artefato.
+- 2026-11-02 CCG build — anexos DC–MA ✅ 13 arquivos (em 01-ccg/modules/ — os de MD–WY estão em 01-ccg/annexes/ → a montagem lê as duas pastas e depois unifica em 01-ccg/annexes/), 672 fatos ligados, 125 lacunas (15 bloqueantes), 13/14 exemplos reproduzem (IL-700-T ex.1: 8,38 impresso × 8,33 calculado → lacuna nova). C46: 53 falsos erros de período + 17 números de citação legal.

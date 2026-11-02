@@ -1,0 +1,11 @@
+# CCG build brief (stage 1) — US build
+
+Orchestrator, 2026-11-02. BASE = C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance (never write under ~/mercans-pipeline; shared templates/scripts there are read-only).
+
+- Mandate SEALED; artifact CCG status `researched`. Read `_pipeline/build-manifest.json` (CCG units, tier verdict — repeat it verbatim in m01 —, languages, oracle) and `00-official-sources/MANDATE.md` (US-OWN-001..008 decisions; contractor/1099-NEC OUT OF SCOPE).
+- Your inputs for each unit: `_research/CCG-{unit}-research-pack.md` and `_research/CCG-{unit}-facts.json` (core modules m01..m13, coverage; annexes `annex_{JUR}`). Bind every factual claim to a facts key; never research, never invent. A missing fact → `⚠️ RESEARCH-GAP` + append an item to `_research/CCG-research-request.json` (contract `research-request`; create it if absent; one shared file — append, do not overwrite others' items; re-read before writing). Blocking unresolved items in the facts file are written as RESEARCH-GAP in the text, not filled.
+- Use the CCG template and Mercans formatting standard as your agent definition says (load `mercans-artifact-toolkit` for structure rules). One output file per unit under `01-ccg/` (unit sections; the final assembly into the DOCX is a separate step), plus your notes in `_pipeline/CCG-build-log.md` (append a section per unit; re-read before writing — other builders append in parallel).
+- Use the key namespaces as they are in the facts files (e.g. `{st}.sui.wage_base`, `fed.*`, `multi.*`). Note the PFML key split: annexes `{st}.pfml.rate.total`, WTC/m05 `{st}.pfml.total.rate` — cite whichever key exists in the facts file you read.
+- Traps to respect (journal): SC Act 110 rates not in 2026 withholding; WI/NE/KS/OH tables ≠ statutory brackets; MI/AL/GA/IA/HI/DC tips & overtime deductions only at assessment; VA 2027 deduction not modelled; DC 2026 method unpublished (gap); UT Pub 14 effective date unknown (gap); CT tables vs rules open; MA PFML 2026 per DFML, swap 2027; ND booklet example stale (use table); MI never read off the 2023 DOL prevailing-wage table.
+- Use a private scratch subfolder. Do not edit facts files, the register, MANDATE or the manifest.
+- Return: units written (paths), facts keys bound, RESEARCH-GAP count (blocking / non-blocking), research-request items appended.

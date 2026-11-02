@@ -17,4 +17,4 @@ Esta pasta é a janela **EUA**. Vale tudo do `CLAUDE.md` da raiz do cérebro (`.
 - Nada vai a Drive, monday, ticket ou e-mail sem ok do usuário nesta janela.
 
 ## O que esta janela escreve
-Só o seu `estado.md`, `Research Pipeline/USA/` e, com Edit pontual, `paises/EUA.md` (criar a partir de `modelos/` se não existir) e `log.md`. "Fecha a sessão": `sessoes/AAAA-MM-DD-eua.md`. Sem commit. Resumos à janela geral (`brain-service-5b`) por SendMessage.
+Só o seu `estado.md`, `Research Pipeline/USA/` e, com Edit pontual, `paises/EUA.md` (criar a partir de `modelos/` se não existir) e `log.md`. "Fecha a sessão": `sessoes/AAAA-MM-DD-eua.md`. Sem commit. Não mandar resumo à janela geral (o painel lê cada rodada sozinho); SendMessage à `brain-service-5b` só para pedir commit ou coordenação.

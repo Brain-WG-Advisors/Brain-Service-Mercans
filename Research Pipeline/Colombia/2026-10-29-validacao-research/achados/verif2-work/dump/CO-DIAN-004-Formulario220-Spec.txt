@@ -1,0 +1,2005 @@
+Version Control!B8	Statutory Report Specification
+Version Control!B9	COLOMBIA
+Version Control!B10	Annual Certificate of Income and Withholding on Work and Pension Income - Form 220 - Certificate of income and withholding on work and pension income
+Version Control!B12	Version
+Version Control!C12	Effective Date
+Version Control!D12	Change Description
+Version Control!E12	Status
+Version Control!F12	Updated By
+Version Control!B13	1.0
+Version Control!C13	2026-10-16
+Version Control!D13	Initial version.
+Version Control!E13	Approved
+Version Control!F13	Wallisson Gomes
+Report Matrix!A1	ANNUAL CERTIFICATE OF INCOME AND WITHHOLDING ON WORK AND PENSION INCOME - FORM 220 — REPORT MATRIX
+Report Matrix!A3	Report ID
+Report Matrix!B3	CO-DIAN-004
+Report Matrix!A4	Report Name (EN)
+Report Matrix!B4	Annual Certificate of Income and Withholding on Work and Pension Income - Form 220
+Report Matrix!A5	Report Name (Local)
+Report Matrix!B5	Formulario 220 - Certificado de ingresos y retenciones por rentas de trabajo y de pensiones
+Report Matrix!A6	Document ID
+Report Matrix!B6	CO-DIAN-004
+Report Matrix!A7	Document Title
+Report Matrix!B7	Annual Certificate of Income and Withholding - Form 220 - Field Specification
+Report Matrix!A8	Country
+Report Matrix!B8	Colombia
+Report Matrix!A9	Authority
+Report Matrix!B9	DIAN prescribes the form; the EMPLOYER issues it to each employee and retains it -- NOT filed with DIAN
+Report Matrix!A10	Report Type
+Report Matrix!B10	Statutory annual employee certificate (not a return)
+Report Matrix!A11	Tax Type
+Report Matrix!B11	Income-tax withholding certification
+Report Matrix!A12	Relationship
+Report Matrix!B12	Employer to employee (issued and retained, not submitted to DIAN)
+Report Matrix!A13	Frequency
+Report Matrix!B13	Annual, one certificate per employee per tax year
+Report Matrix!A14	Submission Deadline
+Report Matrix!B14	Last business day of March following the fiscal year (DUR 1625 de 2016 art. 1.6.1.13.2.40)
+Report Matrix!A15	File Format
+Report Matrix!B15	Paper or electronic, as agreed with the employee
+Report Matrix!A16	File Extension
+Report Matrix!B16	N/A - nothing is transmitted; the certificate is delivered on paper or electronically as agreed with the employee
+Report Matrix!A17	Character Encoding
+Report Matrix!B17	N/A
+Report Matrix!A18	Record Types / Sections
+Report Matrix!B18	No record types - a logical model of casillas grouped in the form's sections (see File Structure)
+Report Matrix!A19	Version
+Report Matrix!B19	v1.0
+Report Matrix!A22	DETAILED COMPLIANCE NOTES (Colombia-specific)
+Report Matrix!A23	SUBMISSION CHANNEL
+Report Matrix!A24	- Channel: paper or electronic delivery TO THE EMPLOYEE | Portal: none - this artefact is NOT submitted to any authority | Source: ET arts. 378-380 and the form's own instruction guide, which addresses only the issuing of the certificate.
+Report Matrix!A25	- This is the one in-scope Colombian artefact with NO government channel at all. It is issued to the employee and retained by the employer. DIAN sees the same data annually through Format 2276 (CO-DIAN-005), which IS filed - but the two are separate obligations with different field sets and different deadlines.
+Report Matrix!A26	- The certificate SUBSTITUTES for the employee's income-tax return where the six ET art. 380 conditions hold (DUR 1625 de 2016 art. 1.6.1.13.2.7), which is why it carries employee-declared sections that payroll cannot populate.
+Report Matrix!A27	INTEGRATION TYPE AND DIRECTION
+Report Matrix!A28	- Integration: outbound only, to the EMPLOYEE rather than to an authority. There is no inbound leg.
+Report Matrix!A29	- product_mapping_required = true. The certificate needs per-employee ANNUAL totals by concept, three separate severance buckets, the meal-payment split at 41 UVT, the rolling six-month average labour income, and the AVC deduction which has no dedicated electronic payroll element. None of these can be reconstructed at year end from a single annual gross figure.
+Report Matrix!A30	- NOT DERIVABLE FROM THE MONTHLY FILINGS. Colombia imposes NO employer year-end tax reconciliation. This certificate is a SEPARATE annual obligation built from the annual accumulation, and it additionally carries data the employer never sees monthly - the employee's own asset, debt and other-income declarations under ET art. 380.
+Report Matrix!A31	RESIDENT / NON-RESIDENT TREATMENT
+Report Matrix!A32	- RESIDENT: casilla 60 carries the ET art. 383 progressive-table withholding for the year, and casillas 53 to 58 carry the contributions and voluntary savings that depurated the base. The employee may then use the certificate in place of a return under ET art. 380.
+Report Matrix!A33	- NON-RESIDENT: the same certificate is issued, but casilla 60 carries the FLAT 20% of ET art. 408 applied to the GROSS - so casilla 52 (total gross income) and the withholding in casilla 60 stand in a simple 20% relationship, with NO depuration visible. The contributions in casillas 53 and 54 are still reported because they were still deducted, but they did NOT reduce the withholding base.
+Report Matrix!A34	- The art. 206 num. 4 severance exemption in casilla 59 is an exemption of the RESIDENT ID card-general regime. It does NOT attach to a non-resident's flat withholding, so for a non-resident the six-month average is reported for completeness but has no effect on casilla 60.
+Report Matrix!A35	- An employee who ACQUIRES RESIDENCE mid-year receives ONE certificate covering the whole period, with casilla 60 carrying the sum of the 20% months and the art. 383 months. The certificate does not disclose the split; the employee reconciles on their own return. The engine should retain the split internally for audit.
+Report Matrix!A36	- The employee's own annual return - Form 110 - is outside the scope of this specification: the employer's duty ends with this certificate.
+Report Matrix!A37	RELATED FILINGS / CROSS-REFERENCES
+Report Matrix!A38	- Casilla 60 must reconcile to twelve months of electronic payroll RetencionFuente (NIE177) for this employee - CO-DIAN-001.
+Report Matrix!A39	- Casillas 53 and 54 must reconcile to twelve months of electronic payroll NIE163 and NIE166 + NIE168 + NIE170, and to the employee portions of PILA campos 55, 47, 51 and 52 - CO-PILA-003.
+Report Matrix!A40	- The SUM of casilla 60 across all employees must reconcile to twelve months of Form 350 casillas 93 plus 94 - CO-DIAN-002 - but the certificate is NOT derived from those returns.
+Report Matrix!A41	- Casillas 36 to 60 map almost one for one to Format 2276 numerals 5 to 33 - CO-DIAN-005 - but the ORDER OF THE THREE SEVERANCE LINES DIFFERS: Form 220 runs 47 paid / 48 traditional / 49 fund, while Format 2276 runs 18 paid / 19 fund / 20 traditional. A positional copy between the two SWAPS the fund and traditional amounts.
+Report Matrix!A42	- Casilla 49 must reconcile to the amount actually deposited under CO-CESANTIAS-006 by 14 February OF THE TAX YEAR: the February deposit is certified in the year of the deposit (ET art. 27 num. 3).
+Report Matrix!A43	- Casillas 79 to 82 (dependants) map to Format 2276 numeral 34.
+Payroll Scope Summary!A1	PAYROLL SCOPE SUMMARY - ANNUAL CERTIFICATE OF INCOME AND WITHHOLDING ON WORK AND PENSION INCOME - FORM 220
+Payroll Scope Summary!A2	PURPOSE: Tell the developer WHO receives a Form 220 certificate and what happens to a borderline case.
+Payroll Scope Summary!A4	SCENARIO
+Payroll Scope Summary!B4	REPORT?
+Payroll Scope Summary!C4	NOTES / REASONING
+Payroll Scope Summary!A5	═══ WHO GETS REPORTED ═══
+Payroll Scope Summary!A6	Indefinite-term employee (indefinite-term contract)
+Payroll Scope Summary!B6	YES
+Payroll Scope Summary!C6	The core private-sector population. CST art. 47; Ley 2466 de 2025 art. 5.
+Payroll Scope Summary!A7	Fixed-term employee (fixed-term contract, max 4 years)
+Payroll Scope Summary!B7	YES
+Payroll Scope Summary!C7	Identical reporting treatment to an indefinite-term contract. CST art. 46; Ley 2466 de 2025 art. 6.
+Payroll Scope Summary!A8	Specific-work or task employee (contract por obra o labor)
+Payroll Scope Summary!B8	YES
+Payroll Scope Summary!C8	An employment contract; CST art. 46. Electronic payroll TipoContrato = 3 (Obra o Labor).
+Payroll Scope Summary!A9	Occasional / accidental / transitory worker (< 1 month, non-core activity)
+Payroll Scope Summary!B9	YES
+Payroll Scope Summary!C9	Still an employee under CST art. 6. Reported on every filing; the PILA return type and the day counts differ, not the obligation.
+Payroll Scope Summary!A10	Part-time employee
+Payroll Scope Summary!B10	YES
+Payroll Scope Summary!C10	Colombia has no separate part-time regime. Reported normally; the PILA contribution base is floored at 1 SMMLV (COP 1,750,905) except for the worker type 51 partial-time regime.
+Payroll Scope Summary!A11	All-inclusive salary employee (all-inclusive salary, >= 13 SMMLV)
+Payroll Scope Summary!B11	YES
+Payroll Scope Summary!C11	CST art. 132 num. 2. Reported with the integral-salary flag set; the contribution base is 70% of the integral salary, and the electronic payroll carries SalarioIntegral = true.
+Payroll Scope Summary!A12	Apprentice (apprenticeship contract)
+Payroll Scope Summary!B12	YES
+Payroll Scope Summary!C12	Law 2466 of 2025 art. 21 converted the apprenticeship into a special fixed-term LABOUR contract, regulated by Decree 0223 of 5 March 2026. Electronic payroll TipoContrato = 4; PILA tipo cotizante 19 'Aprendices etapa lectiva Ley 2466 de 2025' for the lectiva phase from the health period of August 2025 (code 12 only for earlier periods). For health periods before August 2025, code 19 covers the productive phase; from the health period of August 2025, AT2 v30 names no code for the productive phase (AT2 v30 §2.1.2.3.1 campo 5, types 12 and 19).
+Payroll Scope Summary!A13	Intern / practical placement (practicas o pasantias)
+Payroll Scope Summary!B13	YES
+Payroll Scope Summary!C13	Electronic payroll TipoContrato = 5. Reported where remunerated.
+Payroll Scope Summary!A14	Teleworkers and remote workers
+Payroll Scope Summary!B14	YES
+Payroll Scope Summary!C14	Law 1221 of 2008 as amended by Law 2466 of 2025 arts. 52-54. No reporting difference; the electronic payroll carries a dedicated Teletrabajo earning element (NIE158).
+Payroll Scope Summary!A15	Resident foreign national under a Colombian contract
+Payroll Scope Summary!B15	YES
+Payroll Scope Summary!C15	Full reporting. Withheld under the ET art. 383 progressive table once tax residence is acquired.
+Payroll Scope Summary!A16	NON-RESIDENT foreign national under a Colombian contract
+Payroll Scope Summary!B16	YES
+Payroll Scope Summary!C16	IN SCOPE and frequently mis-configured. Withheld at the flat 20% of ET art. 408 on the GROSS, with no art. 388 depuration, until the 183-day residence test is met (DIAN Concept 011108 of 29 June 2026). See the resident / non-resident block in the Report Matrix.
+Payroll Scope Summary!A17	Employed old-age pensioner in active service
+Payroll Scope Summary!B17	YES
+Payroll Scope Summary!C17	PILA worker sub-type 01; no pension contribution (PILA pension rate field = 0), health and the levies still apply.
+Payroll Scope Summary!A18	Executive director / statutory legal representative holding an employment contract
+Payroll Scope Summary!B18	YES
+Payroll Scope Summary!C18	Reported as an ordinary employee where an employment contract exists.
+Payroll Scope Summary!A19	Independent contractor (service contract)
+Payroll Scope Summary!B19	NO
+Payroll Scope Summary!C19	Not an employee. The contractor self-files PILA on 40% of fees (return types I / Y, descoped) and is reported by the payer in the third-party information return, not in this employer filing. Withholding on their fees does pass through Form 350, but under a different casilla.
+Payroll Scope Summary!A20	Public-sector employee (contributor type 47, SGP-funded entity)
+Payroll Scope Summary!B20	NO
+Payroll Scope Summary!C20	Public-sector only; PILA return types T and F are outside the scope of this specification.
+Payroll Scope Summary!A21	Non-executive director paid fees only (junta directiva)
+Payroll Scope Summary!B21	NO
+Payroll Scope Summary!C21	Not an employee and not paid through payroll. Board fees (honorarios de junta directiva) are not payroll income: they are reported by the tax function outside payroll, as for an independent contractor. The withholding on them passes through Form 350, under a casilla other than the salary casilla.
+Payroll Scope Summary!A22	Pensioner whose pension is paid by a fund, not by the employer
+Payroll Scope Summary!B22	NO
+Payroll Scope Summary!C22	The paying fund is the withholding agent and the reporting party, not the employer. A pension the employer pays directly is certified by the employer on this form, in casilla 50 'Pensiones de jubilacion, vejez o invalidez' (see casilla 50); the pensioner's contributions on that pension are reported on the pensioners' PILA under Anexo Tecnico 3 (CO-PILA-007).
+Payroll Scope Summary!A23	═══ AMOUNTS AND CONCEPTS REPORTED ═══
+Payroll Scope Summary!A24	Annual salary paid
+Payroll Scope Summary!B24	YES
+Payroll Scope Summary!C24	Casilla 36, on the CST art. 127 definition quoted in full in the instruction guide.
+Payroll Scope Summary!A25	Voucher, cheque, card and vale payments
+Payroll Scope Summary!B25	YES
+Payroll Scope Summary!C25	Casilla 37, including meal payments for an employee earning MORE than 310 UVT per month.
+Payroll Scope Summary!A26	Meal payments up to 41 UVT for an employee earning up to 310 UVT
+Payroll Scope Summary!B26	NO
+Payroll Scope Summary!C26	Not income of the employee at all under ET art. 387-1 - income of the food supplier. Only the EXCESS over 41 UVT is reported, in casilla 38.
+Payroll Scope Summary!A27	Statutory benefits other than severance
+Payroll Scope Summary!B27	YES
+Payroll Scope Summary!C27	Casilla 42 - service bonus, vacaciones, work clothing.
+Payroll Scope Summary!A28	Severance savings, split three ways
+Payroll Scope Summary!B28	YES
+Payroll Scope Summary!C28	Casillas 47 (paid to the employee), 48 (traditional pre-1991 regime) and 49 (deposited to the fund in the tax year; the February deposit is certified in the year of the deposit, ET art. 27 num. 3). Three separate buckets that must be maintained year-round.
+Payroll Scope Summary!A29	Per diems and representation expenses
+Payroll Scope Summary!B29	YES
+Payroll Scope Summary!C29	Casillas 43 and 44.
+Payroll Scope Summary!A30	Employee mandatory contributions
+Payroll Scope Summary!B30	YES
+Payroll Scope Summary!C30	Casillas 53 and 54. Note that pension and the solidarity fund are COMBINED in casilla 54, unlike the electronic payroll which separates them.
+Payroll Scope Summary!A31	Voluntary savings - RAIS, voluntary pension, AFC, AVC
+Payroll Scope Summary!B31	YES
+Payroll Scope Summary!C31	Casillas 55 to 58, each separately. The electronic payroll has one element for the first two and none for AVC, so the engine must tag them itself.
+Payroll Scope Summary!A32	Rolling six-month average labour income
+Payroll Scope Summary!B32	YES
+Payroll Scope Summary!C32	Casilla 59: the monthly average salary of six months, with the window set by the event - on termination or withdrawal, the last six months; while the employment continues, the six months of the preceding year at the time of the deposit (ET art. 206 num. 4; DIAN Concepto 4443 de 2025; see casilla 59). Drives the ET art. 206 num. 4 severance exemption and its taper; the salary history must be maintained year-round.
+Payroll Scope Summary!A33	Employer social-security contributions
+Payroll Scope Summary!B33	NO
+Payroll Scope Summary!C33	Not certified. The form carries the employee's income (casillas 36 to 51) and the employee's own mandatory and voluntary contributions (casillas 53 to 58; instruction guide, Res. 000022/2024). The employer's share of health, pension, ARL and parafiscal contributions is neither income of the employee nor a deduction from it and has no casilla on the form; it is reported in PILA (CO-PILA-003).
+Payroll Scope Summary!A34	The employee's other income, assets and debts
+Payroll Scope Summary!B34	NO
+Payroll Scope Summary!C34	Casillas 61 to 78 are supplied BY THE EMPLOYEE, not by payroll. They exist so the certificate can substitute for the income-tax return under ET art. 380.
+Payroll Scope Summary!A35	═══ TIMING AND RELATIONSHIP ═══
+Payroll Scope Summary!A36	Reported on the accrual (causacion) date
+Payroll Scope Summary!B36	NO
+Payroll Scope Summary!C36	Every Colombian payroll filing is keyed to the PAYMENT or credit-in-account date, not to the accrual date. A December salary paid in January falls in the January filing.
+Payroll Scope Summary!A37	Reported on the payment or credit-in-account date
+Payroll Scope Summary!B37	YES
+Payroll Scope Summary!C37	The universal Colombian rule - payment or credit in account. Applies to the electronic payroll (DIAN Resolution 000227 of 2025 art. 1.5.3.2.2), to Form 350, to Form 220 and to Format 2276.
+Payroll Scope Summary!A38	A semi-monthly payroll produces two filings a month
+Payroll Scope Summary!B38	NO
+Payroll Scope Summary!C38	It does not. The electronic payroll is expressly ONE monthly document per employee 'irrespective of whether the obliged party makes payments in different or shorter periods' (Res. DIAN 000227 de 2025 art. 1.5.3.2.2). PILA and Form 350 are likewise monthly.
+Payroll Scope Summary!A39	Nil period still filed
+Payroll Scope Summary!B39	N/A
+Payroll Scope Summary!C39	Form 220 is an annual certificate, not a periodic return, so there is no nil period. One certificate per employee per tax year is issued by the last business day of March following the tax year (DUR 1625 de 2016 art. 1.6.1.13.2.40) whether or not any withholding was practised; casilla 60 is written as zero where nil (see 'Employee whose withholding was nil all year').
+Payroll Scope Summary!A40	Corrections handled by re-filing the whole period
+Payroll Scope Summary!B40	VARIES
+Payroll Scope Summary!C40	Electronic payroll: NO - a dedicated adjustment note (NominaIndividualDeAjuste, Replace or Delete) referencing the original CUNE. Form 350: yes, a corrective return. PILA: a correction return type N (correcciones) for the period, filed through the same operador as the original return; the C records (correct values) must be equal to or greater than the A records (original values) in IBC and in days, and type N cannot be used for a correction that leads to a refund, which is requested from each administradora outside PILA (AT2 v30 §2.1.1.2.2 campo 8; Disposiciones comunes a la Planilla N). A return paid after its deadline is filed on type E; type M (mora) applies only to periods before health period March 2014 with a total absence of payment (AT2 v30 §2.1.1.2.2 campo 8).
+Payroll Scope Summary!A41	═══ SPECIAL CASES ═══
+Payroll Scope Summary!A42	Employee who left during the year
+Payroll Scope Summary!B42	YES
+Payroll Scope Summary!C42	Casillas 30 and 31 carry the actual employment window rather than 1 January to 31 December. The certificate is still issued by the last business day of March.
+Payroll Scope Summary!A43	Employee whose withholding was nil all year
+Payroll Scope Summary!B43	YES
+Payroll Scope Summary!C43	A certificate is still issued. Casilla 60 is ZERO - the instruction guide directs that a casilla with no value be written as zero, not left blank.
+Payroll Scope Summary!A44	Employee who acquired tax residence mid-year
+Payroll Scope Summary!B44	YES
+Payroll Scope Summary!C44	ONE certificate for the whole period. Casilla 60 sums the 20% months and the art. 383 months; the split is not disclosed on the form but must be retained internally.
+Payroll Scope Summary!A45	Employee with a dependant claimed for the art. 387 deduction
+Payroll Scope Summary!B45	YES
+Payroll Scope Summary!C45	Casillas 79 to 82 identify the dependant. The same dependant is reported in Format 2276 numeral 34, where DIAN matches a dependant claimed by more than one taxpayer.
+Payroll Scope Summary!A46	Employee under the pre-1991 traditional severance regime
+Payroll Scope Summary!B46	YES
+Payroll Scope Summary!C46	Casilla 48 rather than casilla 49. A shrinking population - employees hired before 1 January 1991 who did not elect the Ley 50 de 1990 regime.
+Payroll Scope Summary!A47	Employee holding a PEP or PPT
+Payroll Scope Summary!B47	YES
+Payroll Scope Summary!C47	Reported with the admitted document held: 21 Tarjeta de extranjeria, 22 Cedula de extranjeria or 41 Pasaporte, the document types of the form's six-value list that a foreign national holds. A PEP or PPT is not a document type of the form and is not certified under any other code (see casilla 24).
+Payroll Scope Summary!A48	Certificate substituting for the employee's income-tax return
+Payroll Scope Summary!B48	YES
+Payroll Scope Summary!C48	Where all six ET art. 380 conditions hold and the employee signs, the form states that it substitutes 'para todos los efectos legales' for the return.
+Formulario 220 Spec!A1	Annual Certificate of Income and Withholding on Work and Pension Income - Form 220 - Certificate of income and withholding on work and pension income
+Formulario 220 Spec!A2	Field Name (EN)
+Formulario 220 Spec!B2	Field Name (Local ES)
+Formulario 220 Spec!C2	Record Type / Section
+Formulario 220 Spec!D2	Field Position
+Formulario 220 Spec!E2	Payroll Field (Y/N)
+Formulario 220 Spec!F2	Mandatory (Y/N/C)
+Formulario 220 Spec!G2	Conditional Reason
+Formulario 220 Spec!H2	Position (Start-End)
+Formulario 220 Spec!I2	Field Length
+Formulario 220 Spec!J2	Format
+Formulario 220 Spec!K2	Example
+Formulario 220 Spec!L2	System Mapping
+Formulario 220 Spec!M2	Field Explanation
+Formulario 220 Spec!N2	Relevant for Payroll (Y/N)
+Formulario 220 Spec!O2	Option Values
+Formulario 220 Spec!P2	Rounding
+Formulario 220 Spec!Q2	Negative (Y/N)
+Formulario 220 Spec!R2	Value Type
+Formulario 220 Spec!S2	Reporting Frequency
+Formulario 220 Spec!T2	Query to RA
+Formulario 220 Spec!U2	RA Comments
+Formulario 220 Spec!A3	═══ withholding agent(casillas 4-11) ═══
+Formulario 220 Spec!A4	Certificate number
+Formulario 220 Spec!B4	Numero de formulario
+Formulario 220 Spec!C4	Withholding-Agent Information
+Formulario 220 Spec!D4	4
+Formulario 220 Spec!E4	N
+Formulario 220 Spec!F4	Y
+Formulario 220 Spec!H4	Casilla 4
+Formulario 220 Spec!I4	Var
+Formulario 220 Spec!J4	AN
+Formulario 220 Spec!K4	2026-000417
+Formulario 220 Spec!L4	Mercans.Certificate_Number
+Formulario 220 Spec!M4	SHARP CONTRAST WITH FORM 350. The instruction guide (Res. 000022/2024) says this number is 'asignado por la natural person o juridica que expide la certificacion' - the EMPLOYER assigns it, not DIAN. On Form 350 casilla 4 is DIAN-assigned and opaque. The engine must therefore maintain its own certificate numbering series and keep it stable, because the employee quotes it. FORMAT: DIAN prescribes no format for this number and the value is alphanumeric (instruction guide, Res. 000022/2024). COMPOSITE KEY - position breakdown. Because DIAN prescribes NO structure, the series is Mercans-designed and is fixed here so that it is stable and auditable: positions 1-4 = accrual year AAAA, source PayPeriod.Fiscal_Year, the year the income was earned and NOT the year of issue; position 5 = literal hyphen; positions 6-11 = a six-digit zero-filled consecutive, source Mercans.Certificate_Sequence, restarting at 000001 for each accrual year and unique per employer per year. PERSISTENCE: assigned once and NEVER reused, including after a reissue - a replacement certificate takes the NEXT consecutive and cites the superseded number, because ET art. 378 makes the employee's copy the document that proves the withholding and two certificates may not share a number.
+Formulario 220 Spec!N4	Y
+Formulario 220 Spec!O4	-
+Formulario 220 Spec!P4	Not an amount - no rounding.
+Formulario 220 Spec!Q4	N
+Formulario 220 Spec!R4	Identifier
+Formulario 220 Spec!S4	Annual
+Formulario 220 Spec!A5	Employer NIT
+Formulario 220 Spec!B5	Numero de Identificacion Tributaria (NIT)
+Formulario 220 Spec!C5	Withholding-Agent Information
+Formulario 220 Spec!D5	5
+Formulario 220 Spec!E5	Y
+Formulario 220 Spec!F5	Y
+Formulario 220 Spec!H5	Casilla 5
+Formulario 220 Spec!I5	Var
+Formulario 220 Spec!J5	N (no dots, no hyphens, no DV)
+Formulario 220 Spec!K5	900123456
+Formulario 220 Spec!L5	Company.NIT
+Formulario 220 Spec!M5	NIT of the withholding agent as it appears in casilla 5 of the RUT, WITHOUT the verification digit. The instruction guide is emphatic: 'En ningun caso escriba puntos, guiones o letras'.
+Formulario 220 Spec!N5	Y
+Formulario 220 Spec!O5	-
+Formulario 220 Spec!P5	Not an amount - no rounding.
+Formulario 220 Spec!Q5	N
+Formulario 220 Spec!R5	Identifier
+Formulario 220 Spec!S5	Annual
+Formulario 220 Spec!A6	NIT verification digit
+Formulario 220 Spec!B6	DV
+Formulario 220 Spec!C6	Withholding-Agent Information
+Formulario 220 Spec!D6	6
+Formulario 220 Spec!E6	Y
+Formulario 220 Spec!F6	Y
+Formulario 220 Spec!H6	Casilla 6
+Formulario 220 Spec!I6	1
+Formulario 220 Spec!J6	N
+Formulario 220 Spec!K6	8
+Formulario 220 Spec!L6	Company.NIT_DV
+Formulario 220 Spec!M6	Verification digit as it appears in casilla 6 of the RUT.
+Formulario 220 Spec!N6	Y
+Formulario 220 Spec!O6	-
+Formulario 220 Spec!P6	Not an amount - no rounding.
+Formulario 220 Spec!Q6	N
+Formulario 220 Spec!R6	Identifier
+Formulario 220 Spec!S6	Annual
+Formulario 220 Spec!A7	First surname
+Formulario 220 Spec!B7	Primer apellido
+Formulario 220 Spec!C7	Withholding-Agent Information
+Formulario 220 Spec!D7	7
+Formulario 220 Spec!E7	Y
+Formulario 220 Spec!F7	C
+Formulario 220 Spec!G7	Populated only where the withholding agent is a NATURAL person. Mutually exclusive with 'Corporate name' (casilla 11), which the instruction guide says a natural person must NOT fill.
+Formulario 220 Spec!H7	Casilla 7
+Formulario 220 Spec!I7	Var
+Formulario 220 Spec!J7	A
+Formulario 220 Spec!K7	-
+Formulario 220 Spec!L7	Company.First_Surname
+Formulario 220 Spec!M7	First surname of a natural-person agent, matching casilla 31 of the RUT. The instruction guide directs that where it does not match, THE RUT MUST BE UPDATED BEFORE THE CERTIFICATE IS ISSUED - the form does not override the register.
+Formulario 220 Spec!N7	Y
+Formulario 220 Spec!O7	-
+Formulario 220 Spec!P7	Not an amount - no rounding.
+Formulario 220 Spec!Q7	N
+Formulario 220 Spec!R7	Text
+Formulario 220 Spec!S7	Annual
+Formulario 220 Spec!A8	Second surname
+Formulario 220 Spec!B8	Segundo apellido
+Formulario 220 Spec!C8	Withholding-Agent Information
+Formulario 220 Spec!D8	8
+Formulario 220 Spec!E8	Y
+Formulario 220 Spec!F8	C
+Formulario 220 Spec!G8	Populated only for a natural-person agent. Mutually exclusive with 'Corporate name' (casilla 11).
+Formulario 220 Spec!H8	Casilla 8
+Formulario 220 Spec!I8	Var
+Formulario 220 Spec!J8	A
+Formulario 220 Spec!K8	-
+Formulario 220 Spec!L8	Company.Second_Surname
+Formulario 220 Spec!M8	Second surname, matching casilla 32 of the RUT.
+Formulario 220 Spec!N8	Y
+Formulario 220 Spec!O8	-
+Formulario 220 Spec!P8	Not an amount - no rounding.
+Formulario 220 Spec!Q8	N
+Formulario 220 Spec!R8	Text
+Formulario 220 Spec!S8	Annual
+Formulario 220 Spec!A9	First name
+Formulario 220 Spec!B9	Primer nombre
+Formulario 220 Spec!C9	Withholding-Agent Information
+Formulario 220 Spec!D9	9
+Formulario 220 Spec!E9	Y
+Formulario 220 Spec!F9	C
+Formulario 220 Spec!G9	Populated only for a natural-person agent. Mutually exclusive with 'Corporate name' (casilla 11).
+Formulario 220 Spec!H9	Casilla 9
+Formulario 220 Spec!I9	Var
+Formulario 220 Spec!J9	A
+Formulario 220 Spec!K9	-
+Formulario 220 Spec!L9	Company.First_Name
+Formulario 220 Spec!M9	First given name, matching casilla 33 of the RUT.
+Formulario 220 Spec!N9	Y
+Formulario 220 Spec!O9	-
+Formulario 220 Spec!P9	Not an amount - no rounding.
+Formulario 220 Spec!Q9	N
+Formulario 220 Spec!R9	Text
+Formulario 220 Spec!S9	Annual
+Formulario 220 Spec!A10	Other names
+Formulario 220 Spec!B10	Otros nombres
+Formulario 220 Spec!C10	Withholding-Agent Information
+Formulario 220 Spec!D10	10
+Formulario 220 Spec!E10	Y
+Formulario 220 Spec!F10	C
+Formulario 220 Spec!G10	Populated only for a natural-person agent. Mutually exclusive with 'Corporate name' (casilla 11).
+Formulario 220 Spec!H10	Casilla 10
+Formulario 220 Spec!I10	Var
+Formulario 220 Spec!J10	A
+Formulario 220 Spec!K10	-
+Formulario 220 Spec!L10	Company.Other_Names
+Formulario 220 Spec!M10	Remaining given names, matching casilla 34 of the RUT.
+Formulario 220 Spec!N10	Y
+Formulario 220 Spec!O10	-
+Formulario 220 Spec!P10	Not an amount - no rounding.
+Formulario 220 Spec!Q10	N
+Formulario 220 Spec!R10	Text
+Formulario 220 Spec!S10	Annual
+Formulario 220 Spec!A11	Corporate name
+Formulario 220 Spec!B11	Razon social
+Formulario 220 Spec!C11	Withholding-Agent Information
+Formulario 220 Spec!D11	11
+Formulario 220 Spec!E11	Y
+Formulario 220 Spec!F11	C
+Formulario 220 Spec!G11	Populated only where the withholding agent is a LEGAL person or a sociedad de hecho. The instruction guide states that a natural-person issuer 'no debe diligenciar esta casilla'. Mutually exclusive with casillas 7 to 10.
+Formulario 220 Spec!H11	Casilla 11
+Formulario 220 Spec!I11	Var
+Formulario 220 Spec!J11	A
+Formulario 220 Spec!K11	MERCANS COLOMBIA S.A.S.
+Formulario 220 Spec!L11	Company.Legal_Name
+Formulario 220 Spec!M11	Full corporate name (razon social) of the withholding agent, matching casilla 35 of the RUT; source Company.Legal_Name. Populated only for a legal person or sociedad de hecho. Do NOT derive it from a payroll organisation label or company-code description: such labels carry an internal company-code prefix and are not the RUT name. The same value feeds 'Payer or withholding agent name' on the signature line.
+Formulario 220 Spec!N11	Y
+Formulario 220 Spec!O11	-
+Formulario 220 Spec!P11	Not an amount - no rounding.
+Formulario 220 Spec!Q11	N
+Formulario 220 Spec!R11	Text
+Formulario 220 Spec!S11	Annual
+Formulario 220 Spec!A12	═══ employee or pensioner(casillas 24-29) ═══
+Formulario 220 Spec!A13	Employee document type
+Formulario 220 Spec!B13	Tipo de documento
+Formulario 220 Spec!C13	Employee or Pensioner Data
+Formulario 220 Spec!D13	24
+Formulario 220 Spec!E13	Y
+Formulario 220 Spec!F13	Y
+Formulario 220 Spec!H13	Casilla 24
+Formulario 220 Spec!I13	2
+Formulario 220 Spec!J13	N (code)
+Formulario 220 Spec!K13	13
+Formulario 220 Spec!L13	Employee.Document_Type
+Formulario 220 Spec!M13	The instruction guide (Res. 000022/2024) prints a SIX-VALUE list on the form itself, and only those six codes are output: 12 Tarjeta de identidad, 13 Cedula de ciudadania, 21 Tarjeta de extranjeria, 22 Cedula de extranjeria, 31 NIT, 41 Pasaporte. That is NARROWER than the electronic payroll list at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP: a document outside the six-value list (PEP, PPT) is not a document type of this form and is not certified under any other code. A foreign employee is certified with the admitted document held - 21 Tarjeta de extranjeria, 22 Cedula de extranjeria or 41 Pasaporte. SOURCE: the employee master holds one document-number field per document type ('National ID', 'Identity Card', 'Indentity Card for Foreigners', 'Citizenship Card ID') and no document-type field, and more than one of them may be populated for the same employee. The engine stores an explicit Employee.Document_Type for the document actually certified in casilla 25, never inferred from which field is filled. The mapping of the employee master document fields to the Form 220 codes is maintained as a configuration table: 'Citizenship Card ID' -> 13 and 'Indentity Card for Foreigners' -> 22; 'National ID' and 'Identity Card' have no direct Form 220 code.
+Formulario 220 Spec!N13	Y
+Formulario 220 Spec!O13	-> Sheet 6: Tipo de documento (Form 220)
+Formulario 220 Spec!P13	Not an amount - no rounding.
+Formulario 220 Spec!Q13	N
+Formulario 220 Spec!R13	Code
+Formulario 220 Spec!S13	Annual
+Formulario 220 Spec!A14	Employee identification number
+Formulario 220 Spec!B14	Numero de identificacion
+Formulario 220 Spec!C14	Employee or Pensioner Data
+Formulario 220 Spec!D14	25
+Formulario 220 Spec!E14	Y
+Formulario 220 Spec!F14	Y
+Formulario 220 Spec!H14	Casilla 25
+Formulario 220 Spec!I14	Var
+Formulario 220 Spec!J14	N / AN
+Formulario 220 Spec!K14	1020304050
+Formulario 220 Spec!L14	Employee.Document_Number
+Formulario 220 Spec!M14	Identification number exactly as it appears on the identity document of the type in casilla 24, held as text (no dots, hyphens or spaces). Join key to the electronic payroll NIE045, to PILA Record Tipo 2 campo 4 and to Format 2276 numeral 2. SOURCE: the document-number field of the employee master that matches the document type in casilla 24 ('Citizenship Card ID', 'Indentity Card for Foreigners', 'National ID' or 'Identity Card'), selected through Employee.Document_Type. Do NOT use the internal employee number ('Employee ID' / 'ID Number'): it is a payroll key, not an identity document. The casilla is mandatory: a blank document number is rejected as a data error. PAYEES OUTSIDE THE EMPLOYEE MASTER (pension payees and other non-employee payees): casilla 25 and the split names of casillas 26-29 are taken from the identity source maintained for that payee population (the pensioner master), which holds the document type, the document number and the four name parts. Where a pension is paid to a beneficiary other than the pensioner, the certificate is issued in the name of the person who receives the pension, whose document and names are certified here (see casilla 50).
+Formulario 220 Spec!N14	Y
+Formulario 220 Spec!O14	-
+Formulario 220 Spec!P14	Not an amount - no rounding.
+Formulario 220 Spec!Q14	N
+Formulario 220 Spec!R14	Identifier
+Formulario 220 Spec!S14	Annual
+Formulario 220 Spec!A15	Employee first surname
+Formulario 220 Spec!B15	Primer apellido
+Formulario 220 Spec!C15	Employee or Pensioner Data
+Formulario 220 Spec!D15	26
+Formulario 220 Spec!E15	Y
+Formulario 220 Spec!F15	Y
+Formulario 220 Spec!H15	Casilla 26
+Formulario 220 Spec!I15	Var
+Formulario 220 Spec!J15	A
+Formulario 220 Spec!K15	PEREZ
+Formulario 220 Spec!L15	Employee.First_Surname
+Formulario 220 Spec!M15	First surname exactly as on the identity document.
+Formulario 220 Spec!N15	Y
+Formulario 220 Spec!O15	-
+Formulario 220 Spec!P15	Not an amount - no rounding.
+Formulario 220 Spec!Q15	N
+Formulario 220 Spec!R15	Text
+Formulario 220 Spec!S15	Annual
+Formulario 220 Spec!A16	Employee second surname
+Formulario 220 Spec!B16	Segundo apellido
+Formulario 220 Spec!C16	Employee or Pensioner Data
+Formulario 220 Spec!D16	27
+Formulario 220 Spec!E16	Y
+Formulario 220 Spec!F16	N
+Formulario 220 Spec!H16	Casilla 27
+Formulario 220 Spec!I16	Var
+Formulario 220 Spec!J16	A
+Formulario 220 Spec!K16	GOMEZ
+Formulario 220 Spec!L16	Employee.Second_Surname
+Formulario 220 Spec!M16	Second surname. Not mandatory here, in contrast with the electronic payroll where it is use=required.
+Formulario 220 Spec!N16	Y
+Formulario 220 Spec!O16	-
+Formulario 220 Spec!P16	Not an amount - no rounding.
+Formulario 220 Spec!Q16	N
+Formulario 220 Spec!R16	Text
+Formulario 220 Spec!S16	Annual
+Formulario 220 Spec!A17	Employee first name
+Formulario 220 Spec!B17	Primer nombre
+Formulario 220 Spec!C17	Employee or Pensioner Data
+Formulario 220 Spec!D17	28
+Formulario 220 Spec!E17	Y
+Formulario 220 Spec!F17	Y
+Formulario 220 Spec!H17	Casilla 28
+Formulario 220 Spec!I17	Var
+Formulario 220 Spec!J17	A
+Formulario 220 Spec!K17	JUAN
+Formulario 220 Spec!L17	Employee.First_Name
+Formulario 220 Spec!M17	First given name exactly as on the identity document.
+Formulario 220 Spec!N17	Y
+Formulario 220 Spec!O17	-
+Formulario 220 Spec!P17	Not an amount - no rounding.
+Formulario 220 Spec!Q17	N
+Formulario 220 Spec!R17	Text
+Formulario 220 Spec!S17	Annual
+Formulario 220 Spec!A18	Employee other names
+Formulario 220 Spec!B18	Otros nombres
+Formulario 220 Spec!C18	Employee or Pensioner Data
+Formulario 220 Spec!D18	29
+Formulario 220 Spec!E18	Y
+Formulario 220 Spec!F18	N
+Formulario 220 Spec!H18	Casilla 29
+Formulario 220 Spec!I18	Var
+Formulario 220 Spec!J18	A
+Formulario 220 Spec!K18	CARLOS
+Formulario 220 Spec!L18	Employee.Other_Names
+Formulario 220 Spec!M18	Remaining given names.
+Formulario 220 Spec!N18	Y
+Formulario 220 Spec!O18	-
+Formulario 220 Spec!P18	Not an amount - no rounding.
+Formulario 220 Spec!Q18	N
+Formulario 220 Spec!R18	Text
+Formulario 220 Spec!S18	Annual
+Formulario 220 Spec!A19	═══ certification period and place(casillas 30-35) ═══
+Formulario 220 Spec!A20	Period certified - from
+Formulario 220 Spec!B20	Periodo de la certificacion, DE
+Formulario 220 Spec!C20	Period
+Formulario 220 Spec!D20	30
+Formulario 220 Spec!E20	N
+Formulario 220 Spec!F20	Y
+Formulario 220 Spec!H20	Casilla 30
+Formulario 220 Spec!I20	8
+Formulario 220 Spec!J20	AAAA MM DD
+Formulario 220 Spec!K20	2026 01 01
+Formulario 220 Spec!L20	PayPeriod.Year_Start
+Formulario 220 Spec!M20	First day of the certified period, output as AAAA MM DD. Normally 1 January of the tax year, but the start date of the employment relationship where the employee joined during the year. Bidirectional pair with casilla 31. SOURCE: Master Data field 'Hire Date' (format DD-MM-YYYY, converted to AAAA MM DD) - the start of the employment relationship current in the tax year; the source date field is held as a configuration setting of the engine, with 'Hire Date' as its value. 'Original Hire Date' (DD-MM-YYYY) and 'Adjusted Service Date' (YYYY-MM-DD) refer to earlier or adjusted service and do not define the certified period.
+Formulario 220 Spec!N20	Y
+Formulario 220 Spec!O20	-
+Formulario 220 Spec!P20	Not an amount - no rounding.
+Formulario 220 Spec!Q20	N
+Formulario 220 Spec!R20	Date
+Formulario 220 Spec!S20	Annual
+Formulario 220 Spec!A21	Period certified - to
+Formulario 220 Spec!B21	Periodo de la certificacion, A
+Formulario 220 Spec!C21	Period
+Formulario 220 Spec!D21	31
+Formulario 220 Spec!E21	N
+Formulario 220 Spec!F21	Y
+Formulario 220 Spec!H21	Casilla 31
+Formulario 220 Spec!I21	8
+Formulario 220 Spec!J21	AAAA MM DD
+Formulario 220 Spec!K21	2026 12 31
+Formulario 220 Spec!L21	PayPeriod.Year_End, or Contract.End_Date (system 'Termination' record) where the employee left during the year
+Formulario 220 Spec!M21	Last day of the certified period. Normally 31 December, but the termination date where the employee left during the year. Bidirectional pair with casilla 30.
+Formulario 220 Spec!N21	Y
+Formulario 220 Spec!O21	-
+Formulario 220 Spec!P21	Not an amount - no rounding.
+Formulario 220 Spec!Q21	N
+Formulario 220 Spec!R21	Date
+Formulario 220 Spec!S21	Annual
+Formulario 220 Spec!A22	Date of issue
+Formulario 220 Spec!B22	Fecha de expedicion
+Formulario 220 Spec!C22	Period
+Formulario 220 Spec!D22	32
+Formulario 220 Spec!E22	N
+Formulario 220 Spec!F22	Y
+Formulario 220 Spec!H22	Casilla 32
+Formulario 220 Spec!I22	8
+Formulario 220 Spec!J22	AAAA MM DD
+Formulario 220 Spec!K22	2027 03 31
+Formulario 220 Spec!L22	System.Certificate_Issue_Date
+Formulario 220 Spec!M22	Date the certificate is issued, in year-month-day order. Must be on or before the LAST BUSINESS DAY OF MARCH following the fiscal year - the statutory deadline (DUR 1625 de 2016 art. 1.6.1.13.2.40).
+Formulario 220 Spec!N22	N
+Formulario 220 Spec!O22	-
+Formulario 220 Spec!P22	Not an amount - no rounding.
+Formulario 220 Spec!Q22	N
+Formulario 220 Spec!R22	Date
+Formulario 220 Spec!S22	Annual
+Formulario 220 Spec!A23	Place where the withholding was made
+Formulario 220 Spec!B23	Lugar donde se practico la retencion
+Formulario 220 Spec!C23	Period
+Formulario 220 Spec!D23	33
+Formulario 220 Spec!E23	Y
+Formulario 220 Spec!F23	Y
+Formulario 220 Spec!H23	Casilla 33
+Formulario 220 Spec!I23	Var
+Formulario 220 Spec!J23	A
+Formulario 220 Spec!K23	BOGOTA D.C.
+Formulario 220 Spec!L23	Company.City_Code
+Formulario 220 Spec!M23	City or municipality where the withholding was practised (instruction guide, Res. 000022/2024) - not necessarily the employer's registered domicile, and not necessarily the employee's place of work. It is a withholding-agent parameter, held as an employer configuration setting (the five-digit DIVIPOLA code of the place of withholding), not an employee attribute. Output the municipality NAME, in upper case without accents, that corresponds to the DANE code of casillas 34 and 35, so that the three casillas always describe the same place.
+Formulario 220 Spec!N23	Y
+Formulario 220 Spec!O23	-
+Formulario 220 Spec!P23	Not an amount - no rounding.
+Formulario 220 Spec!Q23	N
+Formulario 220 Spec!R23	Text
+Formulario 220 Spec!S23	Annual
+Formulario 220 Spec!A24	Department code
+Formulario 220 Spec!B24	Cod. Dpto.
+Formulario 220 Spec!C24	Period
+Formulario 220 Spec!D24	34
+Formulario 220 Spec!E24	Y
+Formulario 220 Spec!F24	Y
+Formulario 220 Spec!H24	Casilla 34
+Formulario 220 Spec!I24	2
+Formulario 220 Spec!J24	N (DANE)
+Formulario 220 Spec!K24	11
+Formulario 220 Spec!L24	Company.Department_Code
+Formulario 220 Spec!M24	DANE department code of the place in casilla 33: the FIRST TWO digits of the five-digit DIVIPOLA municipality code. The instruction guide (Res. 000022/2024) directs the use of the DANE 'Department codes' tables for casillas 34 and 35: both casillas carry DANE codes. Hold the five-digit DIVIPOLA code of the place of withholding once (e.g. 11001 Bogota D.C.) and split it - casilla 34 = the first two digits ('11'), casilla 35 = the last three ('001') - never output five digits in either casilla.
+Formulario 220 Spec!N24	Y
+Formulario 220 Spec!O24	-> Sheet 6: DIVIPOLA (DANE)
+Formulario 220 Spec!P24	Not an amount - no rounding.
+Formulario 220 Spec!Q24	N
+Formulario 220 Spec!R24	Code
+Formulario 220 Spec!S24	Annual
+Formulario 220 Spec!A25	City or municipality code
+Formulario 220 Spec!B25	Cod. Ciudad/Municipio
+Formulario 220 Spec!C25	Period
+Formulario 220 Spec!D25	35
+Formulario 220 Spec!E25	Y
+Formulario 220 Spec!F25	Y
+Formulario 220 Spec!H25	Casilla 35
+Formulario 220 Spec!I25	3
+Formulario 220 Spec!J25	N (DANE)
+Formulario 220 Spec!K25	001
+Formulario 220 Spec!L25	Company.City_Code
+Formulario 220 Spec!M25	DANE municipality code of the place in casilla 33: the LAST THREE digits of the five-digit DIVIPOLA code (e.g. '001' for 11001 Bogota D.C.). Like PILA and unlike the electronic payroll, Form 220 splits the DIVIPOLA code across two casillas. The five-digit code is held once and split before output - see casilla 34 for the split rule; never output five digits in this casilla.
+Formulario 220 Spec!N25	Y
+Formulario 220 Spec!O25	-> Sheet 6: DIVIPOLA (DANE)
+Formulario 220 Spec!P25	Not an amount - no rounding.
+Formulario 220 Spec!Q25	N
+Formulario 220 Spec!R25	Code
+Formulario 220 Spec!S25	Annual
+Formulario 220 Spec!A26	═══ income concepts(casillas 36-52) ═══
+Formulario 220 Spec!A27	Salary payments
+Formulario 220 Spec!B27	Pagos por salarios
+Formulario 220 Spec!C27	Income Concept
+Formulario 220 Spec!D27	36
+Formulario 220 Spec!E27	N
+Formulario 220 Spec!F27	Y
+Formulario 220 Spec!H27	Casilla 36
+Formulario 220 Spec!I27	12
+Formulario 220 Spec!J27	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K27	144000000
+Formulario 220 Spec!L27	SUM(Payroll.Salary_Payments)
+Formulario 220 Spec!M27	Total salary payments ACTUALLY MADE in the period to a resident natural person whose income derives from an employment or statutory relationship. The instruction guide (Res. 000022/2024) quotes CST art. 127 in full: salary is not only the ordinary fixed or variable remuneration but everything the employee receives in money or in kind as direct consideration for the service - primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. EXCLUSION RULE: do NOT include here any value belonging in casillas 38 to 46. SOURCE: salary wage types 62100 Ordinary Salary, 62101 Arrears - Ordinary salary, 62140 Integral Salary (the full integral salary, including the factor prestacional), 62141 Arrears-Integral Salary, 62118 Incentive Compensation - IC Local Country, 62133 Variable, 62113 Weekend payoff and 62841 / 62842 / 62845 overtime and night, Sunday or holiday surcharges. BONUSES: HABITUAL bonuses are salary and are certified here - 62208 March Bonus, 62209 Christmas Bonus, 62210 August Bonus, 62225 Salary Attendance Bonus-Monthly, 62224 Quarterly Salary Attendance Bonus and 62228 Years of Service Bonus - CLA; NON-HABITUAL bonuses are certified in casilla 46 - 62202 Ocassional Bonus Grossed Up (instruction guide, Res. 000022/2024). 62229 Years of Service Bonus NON CLA is certified here where habitual and in casilla 46 where not; the habitual attribute of that bonus wage type comes from the Wage Type Catalogue (WTC). PAYMENTS IN KIND: an in-kind payment that is salary under CST art. 127 is certified here and an in-kind payment that is not salary is certified in casilla 46; the salary attribute of each in-kind wage type comes from the WTC (meal payments follow the 310 / 41 UVT test of casillas 37-38). LEAVE PAYOUTS 79405-79419 (marriage, maternity, paternity, sick-leave, bereavement, paid and jury leave payouts) and SALARY PAID ABROAD to expatriates (25830 / 65820 Salary paid in Foreign Countries, 65838 Incentive Compensation - IC-1001 Foreign Country) follow the same rule as every other earning: certified here where the WTC classifies the wage type as salary and in casilla 46 where it classifies it as non-salary work income. The wage-type attribute 'Salary Payment Indicator' must NOT be used as the casilla-36 rule on its own: it is also set on vacation pay (79401 Annual leave payout, 62116 Vacation Terminations, 62150 Vacation Bonus), which is certified in casilla 42, and on per diems (62805-62808), which are always certified in casilla 43, and on the leave payouts 79405-79419; and it is absent from the bonus wage types 62229, 62224 and 62202 listed above. The engine holds an explicit wage-type-to-casilla table, maintained as a configuration table from the WTC attributes; every earning wage type is assigned. PERIOD: sum the payments made from 1 January to 31 December of the tax year; never a rolling 12-month total.
+Formulario 220 Spec!N27	Y
+Formulario 220 Spec!O27	-
+Formulario 220 Spec!P27	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q27	N
+Formulario 220 Spec!R27	Amount
+Formulario 220 Spec!S27	Annual
+Formulario 220 Spec!A28	Payments made with vouchers, cheques, cards or vales
+Formulario 220 Spec!B28	Pagos realizados con bonos electronicos o de papel de servicio, cheques, tarjetas, vales, etc.
+Formulario 220 Spec!C28	Income Concept
+Formulario 220 Spec!D28	37
+Formulario 220 Spec!E28	N
+Formulario 220 Spec!F28	Y
+Formulario 220 Spec!H28	Casilla 37
+Formulario 220 Spec!I28	12
+Formulario 220 Spec!J28	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K28	0
+Formulario 220 Spec!L28	SUM(Payroll.Voucher_Payments)
+Formulario 220 Spec!M28	Payments made in electronic or paper service vouchers, cheques, cards or vales - for fuel, school supplies, footwear and clothing, or any other purpose. Deductible for the employer and income for the employee. THREE EXPLICIT NOTES in the instruction guide: (1) INCLUDE meal payments for an employee earning MORE than 310 UVT per month; (2) do NOT include meal payments for an employee earning up to 310 UVT - those go to casilla 38; (3) do NOT include anything already reported in casilla 36. SOURCE: in-kind benefits paid to third parties are booked as informative earning wage types ('Inf.') offset by an equal informative deduction - e.g. 65818 Meal Allowance Inf.-2079 offset by 21115 Meal Allowance Inf. Deduction-2644 - and the same pattern applies to 65811 Gym Allowance Inf.-6969, 65809 / 65839 Optical Allowance Inf, 65812 Text Books Allowance - Inf-6971, 65801 / 65814 / 65815 / 65831 Private Health Insurance Inf and 65817 / 65837 Life Insurance-Inf. The earning side is the certified value; the offsetting deduction wage types are payroll mechanics and are not themselves casilla values. The meal items 65818, 65813 Meal Allowance Inf.-2005 and 65826 Meal Allowance Inf. Apprentice are subject to the 41 UVT / 310 UVT test of casillas 37-38, applied month by month: in a month in which the employee's salary exceeds 310 UVT the whole amount of these meal items is certified here; in a month in which it does not, nothing is certified here and the excess over 41 UVT goes to casilla 38 (instruction guide, Res. 000022/2024; ET art. 387-1). The other in-kind benefit wage types listed above (gym, optical, text books, private health insurance and life insurance) are not subject to the meal test and are not certified here: each is certified in casilla 36 where the WTC classifies the wage type as salary and in casilla 46 where it classifies it as non-salary work income (instruction guide, Res. 000022/2024: casilla 36 covers everything received in kind as direct consideration for the service, casilla 46 the work-income payments with no dedicated casilla); the salary attribute of each in-kind wage type comes from the Wage Type Catalogue (WTC).
+Formulario 220 Spec!N28	Y
+Formulario 220 Spec!O28	-> Sheet 6: Umbrales UVT 2026
+Formulario 220 Spec!P28	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q28	N
+Formulario 220 Spec!R28	Amount
+Formulario 220 Spec!S28	Annual
+Formulario 220 Spec!A29	Excess meal payments over 41 UVT (ET art. 387-1)
+Formulario 220 Spec!B29	Valor del exceso de los pagos por alimentacion mayores a 41 UVT, art. 387-1 E.T.
+Formulario 220 Spec!C29	Income Concept
+Formulario 220 Spec!D29	38
+Formulario 220 Spec!E29	N
+Formulario 220 Spec!F29	C
+Formulario 220 Spec!G29	Populated only where meal payments to a third party exceed 41 UVT in a month AND the employee's salary does not exceed 310 UVT. Bidirectional pair with casilla 37: where the salary exceeds 310 UVT the WHOLE meal payment goes to casilla 37 instead, and casilla 38 stays nil.
+Formulario 220 Spec!H29	Casilla 38
+Formulario 220 Spec!I29	12
+Formulario 220 Spec!J29	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K29	0
+Formulario 220 Spec!L29	SUM(Payroll.Meal_Excess_41UVT)
+Formulario 220 Spec!M29	Where the employer pays a THIRD PARTY for the employee's or their family's meals - a restaurant, own or third-party, or vouchers for food - the payment is deductible for the employer and is NOT income for the employee but for the supplier, PROVIDED the employee's salary does not exceed 310 UVT (COP 16,235,940 per month in 2026). Where the monthly payments exceed 41 UVT (COP 2,147,334 in 2026), THE EXCESS is taxable income of the employee and is withheld as employment income. The instruction guide adds that the rule does not apply to company representation expenses, which remain deductible. Do NOT include amounts already in casilla 36. SOURCE: wage types 65818 Meal Allowance Inf.-2079, 65813 Meal Allowance Inf.-2005 and 65826 Meal Allowance Inf. Apprentice, taken per employee per month. Run the test MONTH BY MONTH per employee: the month's meal payment against 41 UVT and the employee's monthly salary against 310 UVT, using the UVT parameter of the tax year (52,374 for 2026); do NOT read the UVT from wage type 58001 UVT, which is a per-run payroll amount and is multiplied in months with more than one payroll run or a retro run. The casilla is the sum of the monthly excesses over the tax year.
+Formulario 220 Spec!N29	Y
+Formulario 220 Spec!O29	-> Sheet 6: Umbrales UVT 2026
+Formulario 220 Spec!P29	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q29	N
+Formulario 220 Spec!R29	Amount
+Formulario 220 Spec!S29	Annual
+Formulario 220 Spec!A30	Fee payments
+Formulario 220 Spec!B30	Pagos por honorarios
+Formulario 220 Spec!C30	Income Concept
+Formulario 220 Spec!D30	39
+Formulario 220 Spec!E30	N
+Formulario 220 Spec!F30	C
+Formulario 220 Spec!G30	Populated only where the employer paid fees to this natural person. Not employment income; present because Form 220 certifies all work income of ET art. 383, not only employment income.
+Formulario 220 Spec!H30	Casilla 39
+Formulario 220 Spec!I30	12
+Formulario 220 Spec!J30	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K30	0
+Formulario 220 Spec!L30	SUM(Payroll.Honorarios)
+Formulario 220 Spec!M30	Fees paid to natural persons providing services in which the INTELLECTUAL factor predominates over the technical, material, manual or mechanical - typically a professional qualification or substantial expertise in a field. The instruction guide also directs that ECCLESIASTICAL EMOLUMENTS be included here, in money or in kind, direct or indirect, whatever the denomination and whatever the religious orientation.
+Formulario 220 Spec!N30	Y
+Formulario 220 Spec!O30	-
+Formulario 220 Spec!P30	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q30	N
+Formulario 220 Spec!R30	Amount
+Formulario 220 Spec!S30	Annual
+Formulario 220 Spec!A31	Service payments
+Formulario 220 Spec!B31	Pagos por servicios
+Formulario 220 Spec!C31	Income Concept
+Formulario 220 Spec!D31	40
+Formulario 220 Spec!E31	N
+Formulario 220 Spec!F31	C
+Formulario 220 Spec!G31	Populated only where the employer paid such services to this natural person.
+Formulario 220 Spec!H31	Casilla 40
+Formulario 220 Spec!I31	12
+Formulario 220 Spec!J31	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K31	0
+Formulario 220 Spec!L31	SUM(Payroll.Servicios)
+Formulario 220 Spec!M31	Payments for services - any activity, labour or work performed WITHOUT an employment relationship, resulting in an obligation to do, in which the technical and manual predominate over the intellectual.
+Formulario 220 Spec!N31	Y
+Formulario 220 Spec!O31	-
+Formulario 220 Spec!P31	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q31	N
+Formulario 220 Spec!R31	Amount
+Formulario 220 Spec!S31	Annual
+Formulario 220 Spec!A32	Commission payments
+Formulario 220 Spec!B32	Pagos por comisiones
+Formulario 220 Spec!C32	Income Concept
+Formulario 220 Spec!D32	41
+Formulario 220 Spec!E32	N
+Formulario 220 Spec!F32	C
+Formulario 220 Spec!G32	Populated only where the employer paid non-employment commissions to this natural person. Mutually exclusive with casilla 36 for the same amount.
+Formulario 220 Spec!H32	Casilla 41
+Formulario 220 Spec!I32	12
+Formulario 220 Spec!J32	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K32	0
+Formulario 220 Spec!L32	SUM(Payroll.Comisiones)
+Formulario 220 Spec!M32	Commissions - remuneration for acts, operations, dealings, mandates, business or sales carried out in one's own name but for the account of another, whether or not commercial. NOTE: commissions paid UNDER AN EMPLOYMENT CONTRACT are salary under CST art. 127 and belong in casilla 36; this casilla is for non-employment commissions.
+Formulario 220 Spec!N32	Y
+Formulario 220 Spec!O32	-
+Formulario 220 Spec!P32	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q32	N
+Formulario 220 Spec!R32	Amount
+Formulario 220 Spec!S32	Annual
+Formulario 220 Spec!A33	Statutory benefit payments
+Formulario 220 Spec!B33	Pagos por prestaciones sociales
+Formulario 220 Spec!C33	Income Concept
+Formulario 220 Spec!D33	42
+Formulario 220 Spec!E33	N
+Formulario 220 Spec!F33	Y
+Formulario 220 Spec!H33	Casilla 42
+Formulario 220 Spec!I33	12
+Formulario 220 Spec!J33	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K33	12000000
+Formulario 220 Spec!L33	SUM(Payroll.Prestaciones_Sociales)
+Formulario 220 Spec!M33	Statutory benefits OTHER THAN severance savings and the interest on them. The instruction guide (Res. 000022/2024) lists service bonus, vacaciones and work clothing among them, and directs expressly that severance savings paid to the employee go to casilla 47 and severance savings deposited to the fund go elsewhere. The service bonus is certified here: wage type 62211 Service Legal Bonus - Social Benefits. VACATION PAY is certified here: wage types 79401 Annual leave payout, 79403 Vacations Compensated In cash, 62116 Vacation Terminations and 62150 Vacation Bonus, which carry the 'Salary Payment Indicator' attribute and are nonetheless certified here and not in casilla 36, under the casilla-36 exclusion rule. RECORDED DEFECT: the instruction guide for THIS casilla says the deposited severance goes to 'la casilla 48', but the form's own printed label makes casilla 48 the TRADITIONAL-REGIME severance and casilla 49 the amount deposited to the fund. The form layout is authoritative.
+Formulario 220 Spec!N33	Y
+Formulario 220 Spec!O33	-
+Formulario 220 Spec!P33	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q33	N
+Formulario 220 Spec!R33	Amount
+Formulario 220 Spec!S33	Annual
+Formulario 220 Spec!A34	Per diem payments
+Formulario 220 Spec!B34	Pagos por viaticos
+Formulario 220 Spec!C34	Income Concept
+Formulario 220 Spec!D34	43
+Formulario 220 Spec!E34	N
+Formulario 220 Spec!F34	C
+Formulario 220 Spec!G34	Populated where per diems were paid in the period. Related to the electronic payroll paired elements NIE072 / NIE073, which split the same amount by salary character.
+Formulario 220 Spec!H34	Casilla 43
+Formulario 220 Spec!I34	12
+Formulario 220 Spec!J34	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K34	0
+Formulario 220 Spec!L34	SUM(Payroll.Viaticos)
+Formulario 220 Spec!M34	Per diems paid to cover transport, subsistence and accommodation while the employee works away from the habitual place of work. Per diems are ALWAYS certified here, whatever their salary character (instruction guide, Res. 000022/2024). The instruction guide cites Ministry of Labour Concept 23959 of 13 February. Note the split that matters elsewhere: the PERMANENT portion is salary under CST art. 130 and feeds the contribution base, while the accidental portion does not - the electronic payroll carries them as the paired ViaticoManuAlojS / NS elements. SOURCE: wage types 62805 Hotel per diem, 62806 Breakfast per diem, 62807 Lunch per diem and 62808 Dinner per diem. These carry the 'Salary Payment Indicator' attribute; they are nonetheless reported here and not in casilla 36, under the casilla-36 exclusion rule.
+Formulario 220 Spec!N34	Y
+Formulario 220 Spec!O34	-
+Formulario 220 Spec!P34	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q34	N
+Formulario 220 Spec!R34	Amount
+Formulario 220 Spec!S34	Annual
+Formulario 220 Spec!A35	Representation expense payments
+Formulario 220 Spec!B35	Pagos por gastos de representacion
+Formulario 220 Spec!C35	Income Concept
+Formulario 220 Spec!D35	44
+Formulario 220 Spec!E35	N
+Formulario 220 Spec!F35	C
+Formulario 220 Spec!G35	Populated where representation expenses were paid in the period.
+Formulario 220 Spec!H35	Casilla 44
+Formulario 220 Spec!I35	12
+Formulario 220 Spec!J35	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K35	0
+Formulario 220 Spec!L35	SUM(Payroll.Gastos_Representacion)
+Formulario 220 Spec!M35	Representation expenses paid to the employee. The instruction guide notes at casilla 38 that company representation expenses are deductible for the company and fall outside the meal-payment rule of ET art. 387-1.
+Formulario 220 Spec!N35	Y
+Formulario 220 Spec!O35	-
+Formulario 220 Spec!P35	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q35	N
+Formulario 220 Spec!R35	Amount
+Formulario 220 Spec!S35	Annual
+Formulario 220 Spec!A36	Cooperative associated-work compensation
+Formulario 220 Spec!B36	Pagos por compensaciones por el trabajo asociado cooperativo
+Formulario 220 Spec!C36	Income Concept
+Formulario 220 Spec!D36	45
+Formulario 220 Spec!E36	N
+Formulario 220 Spec!F36	C
+Formulario 220 Spec!G36	Populated only for a member of an associated-work cooperative - PILA contributor type 31 and electronic payroll TipoTrabajador 31.
+Formulario 220 Spec!H36	Casilla 45
+Formulario 220 Spec!I36	12
+Formulario 220 Spec!J36	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K36	0
+Formulario 220 Spec!L36	SUM(Payroll.Coop_Compensation)
+Formulario 220 Spec!M36	Compensation for associated cooperative work. Corresponds to the electronic payroll Compensacion elements (NIE149 / NIE150) and applies only to worker type 31.
+Formulario 220 Spec!N36	Y
+Formulario 220 Spec!O36	-
+Formulario 220 Spec!P36	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q36	N
+Formulario 220 Spec!R36	Amount
+Formulario 220 Spec!S36	Annual
+Formulario 220 Spec!A37	Other payments
+Formulario 220 Spec!B37	Otros pagos
+Formulario 220 Spec!C37	Income Concept
+Formulario 220 Spec!D37	46
+Formulario 220 Spec!E37	N
+Formulario 220 Spec!F37	C
+Formulario 220 Spec!G37	Populated where a work-income payment has no dedicated casilla.
+Formulario 220 Spec!H37	Casilla 46
+Formulario 220 Spec!I37	12
+Formulario 220 Spec!J37	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K37	0
+Formulario 220 Spec!L37	SUM(Payroll.Other_Work_Payments)
+Formulario 220 Spec!M37	Work-income payments not falling in any other casilla. Use sparingly: DIAN expects a concept with a dedicated casilla to use that casilla. Certified here (instruction guide, Res. 000022/2024): (a) NON-HABITUAL BONUSES - 62202 Ocassional Bonus Grossed Up; habitual bonuses are salary and go to casilla 36; 62229 Years of Service Bonus NON CLA is certified here where non-habitual and in casilla 36 where habitual, and the habitual attribute of that bonus wage type comes from the Wage Type Catalogue (WTC). (b) PAYMENTS TO RETIREES THAT ARE NOT A PENSION - 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation; the pension itself (62154 Monthly Retired  Pension-6798 and 62153 Additional Retirement Pension) is certified in casilla 50, never here (see casilla 50). (c) PAYMENTS IN KIND THAT ARE NOT SALARY - an in-kind payment that is salary under CST art. 127 is certified in casilla 36 instead; the salary attribute of each in-kind wage type comes from the WTC (meal payments follow the 310 / 41 UVT test of casillas 37-38). (d) EARNINGS WITH NO DEDICATED CASILLA - 62131 Scholarship-6861, 62700 School Allowance-6839, 62590 Marriage Allowance-6801, 62591 Child Birth Allowance-6002, 62112 Family Burial Allowance-6319, 62811 Health Allowance-6473, 62523 Transportation Allowance CLA- 2008, 62540 Housing Allowance Domestic Relocation-2087, 62310 Expat allowance 5526, 62320 Leasing Expat Allowance Inf-5524, 65821 Expatriation Package for Inbounds, 65800 Stock awards (Vesting) - Informative-1004, 62138 Dividend payment (stock awards) -1003, 62180 / 62181 Severance/Layoff Payment (dismissal indemnity) and 62837 Leave payout: each is certified in casilla 36 where the WTC classifies the wage type as salary, in casilla 42 where it classifies it as a statutory benefit (prestacion social), here where it classifies it as other work income, and is not certified on this form where it classifies it as income that is not work income. The engine holds an explicit wage-type-to-casilla table, maintained as a configuration table from the WTC attributes; no earning wage type may be left unassigned.
+Formulario 220 Spec!N37	Y
+Formulario 220 Spec!O37	-
+Formulario 220 Spec!P37	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q37	N
+Formulario 220 Spec!R37	Amount
+Formulario 220 Spec!S37	Annual
+Formulario 220 Spec!A38	Severance savings and interest paid to the employee
+Formulario 220 Spec!B38	Auxilio de cesantia e intereses efectivamente pagados al empleado
+Formulario 220 Spec!C38	Income Concept
+Formulario 220 Spec!D38	47
+Formulario 220 Spec!E38	N
+Formulario 220 Spec!F38	Y
+Formulario 220 Spec!H38	Casilla 47
+Formulario 220 Spec!I38	12
+Formulario 220 Spec!J38	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K38	1440000
+Formulario 220 Spec!L38	Payroll.Cesantias_Paid_To_Employee [WTC: CO-CESANTIAS (severance principal, paid directly only on termination/partial settlement) + CO-INTERESES-CESANTIAS (interest, paid directly each January and with every direct payment of cesantias)]
+Formulario 220 Spec!M38	THE FIRST OF THREE SEVERANCE LINES. Severance savings and the interest on them ACTUALLY PAID to the employee in the period - typically the January interest payment and any authorised partial withdrawal or termination settlement. Excluded from the monthly withholding base under ET art. 206 num. 4 but still certified here. SOURCE: wage types 62110 Cash-out of Severance Pay - Social Benefits -541S and 62117 Cash-out of Interest Severance Pay - Social Benefits-541R (termination and settlement payments), 62126 Advance Severance Last Year (authorised partial payments), 62182 Severance-Pay - Social Benefits and 62127 Advance Interest Severance Pay (the annual interest on severance, paid in January). Provision wage types (22110, 22112, 42110, 42112) and balance wage types (63814, 63815, 64999, 68028) are accruals or balances, not payments, and are not certified here. An employee on integral salary (WT 62140 Integral Salary) accrues no cesantias and no interest for the time on integral salary (CST art. 132 num. 2), so nothing is certified here for that time, including on termination; only cesantias and interest settled for the service before the conversion to integral salary (CST art. 132 num. 4) are certified here. The integral salary itself is certified in full in casilla 36. Interest on cesantias is paid with every direct payment of cesantias - WT 62117 on termination, or within the month following a partial settlement (Ley 52 de 1975 art. 1) - and not only as the January interest of WT 62127.
+Formulario 220 Spec!N38	Y
+Formulario 220 Spec!O38	-> Sheet 6: Las tres lineas de cesantias
+Formulario 220 Spec!P38	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q38	N
+Formulario 220 Spec!R38	Amount
+Formulario 220 Spec!S38	Annual
+Formulario 220 Spec!A39	Severance savings under the traditional CST regime
+Formulario 220 Spec!B39	Auxilio de cesantia reconocido a trabajadores del regimen tradicional del Codigo Sustantivo del Trabajo, contenido en el Capitulo VII, Titulo VIII Parte Primera
+Formulario 220 Spec!C39	Income Concept
+Formulario 220 Spec!D39	48
+Formulario 220 Spec!E39	N
+Formulario 220 Spec!F39	C
+Formulario 220 Spec!G39	Populated only for an employee under the pre-1991 traditional severance regime. Mutually exclusive with 'Severance savings deposited to the fund' (casilla 49) for the same employee: a traditional-regime employee has no annual fund deposit.
+Formulario 220 Spec!H39	Casilla 48
+Formulario 220 Spec!I39	12
+Formulario 220 Spec!J39	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K39	0
+Formulario 220 Spec!L39	Payroll.Cesantias_Traditional_Regime [No dedicated WTC code -- a regime-eligibility flag (traditional CST annual-fund regime), not itself a wage type]
+Formulario 220 Spec!M39	THE SECOND OF THREE SEVERANCE LINES. Severance RECOGNISED - not necessarily paid - to employees remaining under the pre-1991 retroactive regime of CST Chapter VII, Title VIII, Part One, rather than the Ley 50 de 1990 annual-deposit regime. A shrinking but real population: employees hired before 1 January 1991 who did not elect the new regime.
+Formulario 220 Spec!N39	Y
+Formulario 220 Spec!O39	-> Sheet 6: Las tres lineas de cesantias
+Formulario 220 Spec!P39	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q39	N
+Formulario 220 Spec!R39	Amount
+Formulario 220 Spec!S39	Annual
+Formulario 220 Spec!A40	Severance savings deposited to the fund
+Formulario 220 Spec!B40	Auxilio de cesantia consignado al fondo de cesantias
+Formulario 220 Spec!C40	Income Concept
+Formulario 220 Spec!D40	49
+Formulario 220 Spec!E40	N
+Formulario 220 Spec!F40	C
+Formulario 220 Spec!G40	Populated for an employee under the Ley 50 de 1990 regime. Mutually exclusive with 'Severance savings under the traditional CST regime' (casilla 48) for the same employee. Must reconcile to the amount actually deposited under CO-CESANTIAS-006.
+Formulario 220 Spec!H40	Casilla 49
+Formulario 220 Spec!I40	12
+Formulario 220 Spec!J40	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K40	12000000
+Formulario 220 Spec!L40	Payroll.Cesantias_Deposited_To_Fund [WTC: CO-PROV-CESANTIAS, the employer accrual deposited to the chosen fund]
+Formulario 220 Spec!M40	THE THIRD OF THREE SEVERANCE LINES. Severance savings DEPOSITED to the employee's chosen severance fund IN THE TAX YEAR, under Ley 50 de 1990 art. 99. The deposit made by 14 February for the balance at the preceding 31 December belongs to the tax year in which it is deposited, not to the year of accrual: severance income is realised on deposit to the fund (ET art. 27 num. 3; instruction guide, Res. 000022/2024). The certificate for tax year N therefore carries the deposit made by 14 February of year N (balance at 31 December of year N-1); the deposit made by 14 February of year N+1 belongs to the certificate for year N+1. The engine must maintain all three buckets - paid to the employee, traditional regime, deposited to the fund - separately from the outset; they cannot be split retrospectively out of a single cesantias figure. SOURCE: wage type 25827 Payment Severance Funds Inf. (mirrored by 65805 with the same amount - take one, not both), paid in February and certified in the tax year of that payment. The provision wage types 22110 / 42110 are accruals, not the deposit.
+Formulario 220 Spec!N40	Y
+Formulario 220 Spec!O40	-> Sheet 6: Las tres lineas de cesantias
+Formulario 220 Spec!P40	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q40	N
+Formulario 220 Spec!R40	Amount
+Formulario 220 Spec!S40	Annual
+Formulario 220 Spec!A41	Retirement, old-age or invalidity pensions
+Formulario 220 Spec!B41	Pensiones de jubilacion, vejez o invalidez
+Formulario 220 Spec!C41	Income Concept
+Formulario 220 Spec!D41	50
+Formulario 220 Spec!E41	N
+Formulario 220 Spec!F41	C
+Formulario 220 Spec!G41	Populated only where the employer itself pays a pension. Bidirectional with Form 350 casillas 78 and 94, which carry the same population monthly.
+Formulario 220 Spec!H41	Casilla 50
+Formulario 220 Spec!I41	12
+Formulario 220 Spec!J41	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K41	0
+Formulario 220 Spec!L41	SUM(Payroll.Pension_Payments)
+Formulario 220 Spec!M41	Pension income paid BY THE EMPLOYER: pensions of jubilacion, vejez or invalidez (instruction guide, Res. 000022/2024). Taxable only above 1,000 UVT per month (COP 52,374,000 in 2026) under ET art. 206 num. 5. Pensions paid directly by the employer are in scope and are certified here. SOURCE: the pension wage types of the wage-type-to-casilla table: 62154 Monthly Retired  Pension-6798 (the monthly pension) and 62153 Additional Retirement Pension (the additional pension instalments paid in June and December). Payments to retirees that are not a pension are certified in casilla 46, never here: 62151 Retirement Payment - PRV-6795, 62152 Retirement Payment - Catleya-6796, 62115 Retirement Allowance, 62830 Pensioner Allowance-6794 and 62155 Medical Plan - Healthcare Insurance (EPS ) Pensioner- PMI Offset Compensation (see casilla 46). Pension payees are not in the employee master: their identification (casillas 24-29) comes from the pensioner master (see casilla 25). SURVIVOR OR SUBSTITUTE PENSION: where the pension is paid to a beneficiary other than the original pensioner (substitute pensioner or other recipient), the certificate is issued in the name of the person who receives the pension - that person's document type, number and names in casillas 24-29 and the pension received in casilla 50; the same identity rule applies to the Format 2276 record of that payee. Pensioner health and solidarity deductions (21645 / 21646 / 21647, 21643) feed casillas 53 and 54, and the withholding on pension income (21140 Personal Income Tax Withholding-Retirees- 6799 and 21155 Income Tax Pensioner) feeds casilla 60.
+Formulario 220 Spec!N41	Y
+Formulario 220 Spec!O41	-
+Formulario 220 Spec!P41	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q41	N
+Formulario 220 Spec!R41	Amount
+Formulario 220 Spec!S41	Annual
+Formulario 220 Spec!A42	Non-reimbursable educational support financed with public funds
+Formulario 220 Spec!B42	Apoyos economicos educativos financiados con recursos publicos, no reembolsables o condonados
+Formulario 220 Spec!C42	Income Concept
+Formulario 220 Spec!D42	51
+Formulario 220 Spec!E42	N
+Formulario 220 Spec!F42	C
+Formulario 220 Spec!G42	Populated only where non-reimbursable educational support financed with public funds was paid DIRECTLY by the employer. Where administered by a third party it is reported in Format 5247, not here.
+Formulario 220 Spec!H42	Casilla 51
+Formulario 220 Spec!I42	12
+Formulario 220 Spec!J42	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K42	0
+Formulario 220 Spec!L42	SUM(Payroll.Educational_Support)
+Formulario 220 Spec!M42	Non-reimbursable or forgiven educational support delivered or financed by the State. Where the EMPLOYER pays it directly it is reported here and in Format 2276 numeral 16; where a third party administers it, DIAN Resolution 000227 of 2025 art. 1.3.7.1.1 para. 7 sends it to Format 5247 concept 5102 instead.
+Formulario 220 Spec!N42	Y
+Formulario 220 Spec!O42	-
+Formulario 220 Spec!P42	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q42	N
+Formulario 220 Spec!R42	Amount
+Formulario 220 Spec!S42	Annual
+Formulario 220 Spec!A43	Total gross income
+Formulario 220 Spec!B43	Total de ingresos brutos
+Formulario 220 Spec!C43	Income Concept
+Formulario 220 Spec!D43	52
+Formulario 220 Spec!E43	N
+Formulario 220 Spec!F43	Y
+Formulario 220 Spec!H43	Casilla 52
+Formulario 220 Spec!I43	12
+Formulario 220 Spec!J43	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K43	157440000
+Formulario 220 Spec!L43	SUM(casillas 36 to 51)
+Formulario 220 Spec!M43	The form prints the arithmetic on its face: 'Sume 36 a 51'. Sixteen casillas, summed. This is GROSS income, before the contributions and deductions in casillas 53 to 58. The engine always computes casilla 52 from casillas 36 to 51 as printed on the form ('Total de ingresos brutos (Sume 36 a 51)'), never copies a total from any other source, and blocks the certificate where casilla 52 differs from that sum.
+Formulario 220 Spec!N43	N
+Formulario 220 Spec!O43	-
+Formulario 220 Spec!P43	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q43	N
+Formulario 220 Spec!R43	Amount
+Formulario 220 Spec!S43	Annual
+Formulario 220 Spec!A44	═══ employee contributions and withholding(casillas 53-60) ═══
+Formulario 220 Spec!A45	Mandatory health contributions borne by the employee
+Formulario 220 Spec!B45	Aportes obligatorios por salud a cargo del trabajador
+Formulario 220 Spec!C45	Contribution Concept
+Formulario 220 Spec!D45	53
+Formulario 220 Spec!E45	N
+Formulario 220 Spec!F45	Y
+Formulario 220 Spec!H45	Casilla 53
+Formulario 220 Spec!I45	12
+Formulario 220 Spec!J45	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K45	5760000
+Formulario 220 Spec!L45	SUM(Payroll.Health_Employee_Contribution)
+Formulario 220 Spec!M45	The employee's own mandatory health contributions ACTUALLY DEDUCTED in the period. These are ingresos no constitutivos de renta and are what reduces the ET art. 388 depurated base. Must reconcile to twelve months of electronic payroll NIE163 and to the employee portion of PILA Record Tipo 2 campo 55. SOURCE: wage type 2554 Medical Plan - Healthcare Insurance (EPS ) Employee; for pension payees, 21645 / 21646 / 21647 / 21649 Medical Plan - Healthcare Insurance (EPS ) - Pensioner. Do NOT feed this casilla from a combined health + pension + solidarity contributions total (2554 + 2556 + 2553): health is taken on its own. The NIE163 / PILA reconciliation applies to wage type 2554.
+Formulario 220 Spec!N45	Y
+Formulario 220 Spec!O45	-
+Formulario 220 Spec!P45	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q45	N
+Formulario 220 Spec!R45	Amount
+Formulario 220 Spec!S45	Annual
+Formulario 220 Spec!A46	Mandatory pension and solidarity-fund contributions borne by the employee
+Formulario 220 Spec!B46	Aportes obligatorios a fondos de pensiones y solidaridad pensional a cargo del trabajador
+Formulario 220 Spec!C46	Contribution Concept
+Formulario 220 Spec!D46	54
+Formulario 220 Spec!E46	N
+Formulario 220 Spec!F46	Y
+Formulario 220 Spec!H46	Casilla 54
+Formulario 220 Spec!I46	12
+Formulario 220 Spec!J46	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K46	7200000
+Formulario 220 Spec!L46	SUM(Payroll.Pension_Employee + Payroll.FSP)
+Formulario 220 Spec!M46	The employee's mandatory pension contributions AND the solidarity-fund surcharge, TAKEN TOGETHER IN ONE CASILLA. Note the asymmetry with the electronic payroll, which insists on reporting them as separate elements (NIE166 for pension, NIE168 and NIE170 for the two solidarity sub-accounts). The engine must keep them separate internally and sum them only here. SOURCE: 2556 Pension Plan Mandatory - AFP Employee + 2553 Solidarity Pension Fund (+ for pension payees: 21154 Pension Plan Mandatory - AFP- Pensioner, 21643 Solidarity Pension Fund-Pensioner and 21648 Solidarity Pension Fund-Pensioner more than 25SMVL). A combined health + pension + solidarity contributions total cannot split casillas 53 and 54; take the wage types individually.
+Formulario 220 Spec!N46	Y
+Formulario 220 Spec!O46	-
+Formulario 220 Spec!P46	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q46	N
+Formulario 220 Spec!R46	Amount
+Formulario 220 Spec!S46	Annual
+Formulario 220 Spec!A47	Voluntary contributions to the individual-account pension regime (RAIS)
+Formulario 220 Spec!B47	Cotizaciones voluntarias al regimen de ahorro individual con solidaridad - RAIS
+Formulario 220 Spec!C47	Contribution Concept
+Formulario 220 Spec!D47	55
+Formulario 220 Spec!E47	N
+Formulario 220 Spec!F47	C
+Formulario 220 Spec!G47	Populated where the employee made voluntary RAIS contributions. Mutually distinct from 'Voluntary contributions to voluntary pension funds' (casilla 56) - the two have different legal bases and must not be combined.
+Formulario 220 Spec!H47	Casilla 55
+Formulario 220 Spec!I47	12
+Formulario 220 Spec!J47	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K47	0
+Formulario 220 Spec!L47	SUM(Payroll.Voluntary_RAIS)
+Formulario 220 Spec!M47	Voluntary contributions to the RAIS under ET art. 55 and DUR 1625 de 2016 art. 1.2.1.12.9. DISTINCT from voluntary contributions to a VOLUNTARY pension fund, which go to casilla 56. SOURCE: wage type 25819 Voluntary Contribution to Mandatory Pension Plan. The electronic payroll has ONE element (PensionVoluntaria, NIE198) for both, so the engine must carry the distinction itself.
+Formulario 220 Spec!N47	Y
+Formulario 220 Spec!O47	-
+Formulario 220 Spec!P47	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q47	N
+Formulario 220 Spec!R47	Amount
+Formulario 220 Spec!S47	Annual
+Formulario 220 Spec!A48	Voluntary contributions to voluntary pension funds
+Formulario 220 Spec!B48	Aportes voluntarios a fondos de pensiones
+Formulario 220 Spec!C48	Contribution Concept
+Formulario 220 Spec!D48	56
+Formulario 220 Spec!E48	N
+Formulario 220 Spec!F48	C
+Formulario 220 Spec!G48	Populated where the employee made voluntary pension-fund contributions. Distinct from 'Voluntary RAIS contributions' (casilla 55).
+Formulario 220 Spec!H48	Casilla 56
+Formulario 220 Spec!I48	12
+Formulario 220 Spec!J48	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K48	0
+Formulario 220 Spec!L48	SUM(Payroll.Voluntary_Pension_Fund)
+Formulario 220 Spec!M48	Voluntary contributions to voluntary pension funds under ET art. 126-1 and DUR 1625 de 2016 art. 1.2.1.22.41. Shares the ET art. 336 40% / 1,340-UVT annual cap with AFC and AVC. SOURCE: wage types 25811 Pension Voluntaria Porvenir (FVOL), 25812 Pension Voluntaria Proteccion (FVOL), 25813 Pension Voluntaria Skandia (FVOL), 25814 Pensiones Voluntarias Metlife (FVOL), 25815 Dafuturo (FVOL), 25823 Pension Voluntaria colfondos (FVOL) and, for retirees, 21141 Pension Voluntaria Proteccion (FVOL)-Retirees- 6786. Only the amount actually deducted from the employee's labour income in the employee's name is certified (instruction guide, Res. 000022/2024; ET art. 126-1; DUR 1625 de 2016 art. 1.2.1.22.41): a contribution to an institutional pension plan is certified here where it is deducted from the employee's pay, and not where the employer bears it; the employee- / employer-side attribute of each institutional-plan wage type (25820, 25821, 21210, 21211, 21212, 65803, 65804) comes from the Wage Type Catalogue (WTC). Wage type 21193 Foncoltabaco voluntary contribution is a contribution to an employee fund, not to a pension fund, and is not certified here. Because several of these fund managers also run mandatory RAIS accounts, the engine must tag each voluntary contribution as RAIS (casilla 55) or voluntary fund (casilla 56); the tag is carried on the wage type.
+Formulario 220 Spec!N48	Y
+Formulario 220 Spec!O48	-
+Formulario 220 Spec!P48	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q48	N
+Formulario 220 Spec!R48	Amount
+Formulario 220 Spec!S48	Annual
+Formulario 220 Spec!A49	AFC account contributions
+Formulario 220 Spec!B49	Aportes a cuentas AFC
+Formulario 220 Spec!C49	Contribution Concept
+Formulario 220 Spec!D49	57
+Formulario 220 Spec!E49	N
+Formulario 220 Spec!F49	C
+Formulario 220 Spec!G49	Populated where AFC deductions were made.
+Formulario 220 Spec!H49	Casilla 57
+Formulario 220 Spec!I49	12
+Formulario 220 Spec!J49	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K49	0
+Formulario 220 Spec!L49	SUM(Payroll.AFC)
+Formulario 220 Spec!M49	Deductions to Ahorro para el Fomento de la Construccion accounts - programmed housing savings. Corresponds to electronic payroll NIE179. SOURCE: wage types 25800-25808 (AFC AV Villas, Banco Bogota, Bancolombia, Davivienda, Banco ITAU, Banco BBVA, Colpatria, Banco Caja Social, Banco Occidente) and 21142 AFC Bancolombia (AFC)-Retirees for retirees. An AFC refund booked as earning 62839 Reimbursement AFC is netted against the deductions of the tax year.
+Formulario 220 Spec!N49	Y
+Formulario 220 Spec!O49	-
+Formulario 220 Spec!P49	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q49	N
+Formulario 220 Spec!R49	Amount
+Formulario 220 Spec!S49	Annual
+Formulario 220 Spec!A50	AVC account contributions
+Formulario 220 Spec!B50	Aportes a cuentas AVC
+Formulario 220 Spec!C50	Contribution Concept
+Formulario 220 Spec!D50	58
+Formulario 220 Spec!E50	N
+Formulario 220 Spec!F50	C
+Formulario 220 Spec!G50	Populated where AVC deductions to the FNA were made.
+Formulario 220 Spec!H50	Casilla 58
+Formulario 220 Spec!I50	12
+Formulario 220 Spec!J50	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K50	0
+Formulario 220 Spec!L50	SUM(Payroll.AVC)
+Formulario 220 Spec!M50	Deductions to the Fondo Nacional del Ahorro as programmed savings for housing or education. The electronic payroll has no dedicated element for AVC; it falls to OtraDeduccion (NIE197), so the engine must tag it to be able to report it here.
+Formulario 220 Spec!N50	Y
+Formulario 220 Spec!O50	-
+Formulario 220 Spec!P50	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q50	N
+Formulario 220 Spec!R50	Amount
+Formulario 220 Spec!S50	Annual
+Formulario 220 Spec!A51	Average labour income of the last six months
+Formulario 220 Spec!B51	Ingreso laboral promedio de los ultimos seis meses anteriores (numeral 4 art. 206 E.T.)
+Formulario 220 Spec!C51	Contribution Concept
+Formulario 220 Spec!D51	59
+Formulario 220 Spec!E51	N
+Formulario 220 Spec!F51	C
+Formulario 220 Spec!G51	Required only for employees to whom ET art. 206 num. 4 applies - that is, where severance savings or interest were paid or deposited. Bidirectional with casillas 47, 48 and 49: a certificate carrying any of those three should carry this average.
+Formulario 220 Spec!H51	Casilla 59
+Formulario 220 Spec!I51	12
+Formulario 220 Spec!J51	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K51	13120000
+Formulario 220 Spec!L51	Payroll.Rolling_6M_Average_Labour_Income [Calculated: rolling 6-month average of Payroll.Total_Income -- no dedicated WTC code, an engine-computed average]
+Formulario 220 Spec!M51	THE ROLLING SIX-MONTH AVERAGE that drives the ET art. 206 num. 4 severance exemption and its taper. Severance savings and the interest on them are EXEMPT IN FULL where this average does not exceed 350 UVT (COP 18,330,900 per month in 2026), and tapered above it. THE ENGINE MUST MAINTAIN THIS AVERAGE YEAR-ROUND - it cannot be reconstructed at year end from annual totals because it is a moving six-month window, and on a termination it is the average of the last six months OF EMPLOYMENT. HOW THE AVERAGE IS TAKEN: the monthly average SALARY ('salario mensual promedio', ET art. 206 num. 4) of six months - on termination or on a withdrawal of severance, the last six months of employment or the six months before the withdrawal; while the employment continues, the six months of the immediately preceding year at the time of the deposit to the fund; for employees outside the Ley 50 de 1990 regime, the six months before the employer recognises the severance (ET art. 27 num. 3) (DIAN Concepto 4443 de 2025).
+Formulario 220 Spec!N51	Y
+Formulario 220 Spec!O51	-> Sheet 6: Umbrales UVT 2026
+Formulario 220 Spec!P51	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q51	N
+Formulario 220 Spec!R51	Amount
+Formulario 220 Spec!S51	Annual
+Formulario 220 Spec!A52	Withholding on labour and pension income
+Formulario 220 Spec!B52	Valor de la retencion en la fuente por ingresos laborales y de pensiones
+Formulario 220 Spec!C52	Contribution Concept
+Formulario 220 Spec!D52	60
+Formulario 220 Spec!E52	N
+Formulario 220 Spec!F52	Y
+Formulario 220 Spec!H52	Casilla 60
+Formulario 220 Spec!I52	12
+Formulario 220 Spec!J52	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K52	7404000
+Formulario 220 Spec!L52	SUM(Payroll.Income_Tax_Withheld)
+Formulario 220 Spec!M52	THE PRINCIPAL WITHHOLDING CASILLA. Total withholding at source ACTUALLY PRACTISED on this employee's work and pension income during the certified period; no hypothetical, theoretical or contingent amount is certified (instruction guide, Res. 000022/2024). Feeds casilla 75 together with casilla 74. Must reconcile to twelve months of electronic payroll NIE177 for this employee, and the sum of casilla 60 across all employees must reconcile to twelve months of Form 350 casillas 93 plus 94 - allowing for the rounding conventions. SOURCE: the withholding practised is wage type 2552 Income Tax (employee) plus 21129 Personal Income Tax Withholding-Terminations- 541T (a separate deduction on termination payments, which can coexist with 2552 in the same month) and 21140 Personal Income Tax Withholding-Retirees- 6799 and 21155 Income Tax Pensioner. Wage type 21330 Personal Income Tax Withholding (Theoretical) is certified only where it carries the amount actually deducted from the employee and remitted to DIAN; the hypothetical-tax wage type 25834 Hypothetical Witholding Tax  - IC Foreign Country is not withholding and is not certified. Wage types 25832 / 65832 Witholding Tax on Stock awards and 25833 Witholding Tax  - IC Local Country are certified here where the Wage Type Catalogue (WTC) classifies the wage type as withholding actually deducted from the employee's income, and are excluded where it classifies the wage type as theoretical, hypothetical, contingent or informative; the withholding-practised attribute of each comes from the WTC. Only the withholding actually deducted is certified: a comparison result computed without the contribution depuration, and any contingent withholding derived from it, is not part of 2552 and is not certified. Sum January to December of the tax year; never a rolling 12-month total.
+Formulario 220 Spec!N52	Y
+Formulario 220 Spec!O52	-
+Formulario 220 Spec!P52	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q52	N
+Formulario 220 Spec!R52	Amount
+Formulario 220 Spec!S52	Annual
+Formulario 220 Spec!A53	═══ other income of the employee(casillas 61-75) ═══
+Formulario 220 Spec!A54	Rentals - amount received
+Formulario 220 Spec!B54	Arrendamientos - valor recibido
+Formulario 220 Spec!C54	Employee-Borne Data
+Formulario 220 Spec!D54	61
+Formulario 220 Spec!E54	N
+Formulario 220 Spec!F54	C
+Formulario 220 Spec!G54	Supplied BY THE EMPLOYEE where they received such income. Bidirectional pair with 'Rentals - amount withheld' (casilla 68).
+Formulario 220 Spec!H54	Casilla 61
+Formulario 220 Spec!I54	12
+Formulario 220 Spec!J54	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K54	0
+Formulario 220 Spec!L54	(employee declaration)
+Formulario 220 Spec!M54	SECTION HEADED 'DATOS A CARGO DEL TRABAJADOR O PENSIONADO' - data the EMPLOYEE supplies, not payroll. Rental income received by the employee from any source. Paired with casilla 68, the amount withheld on it.
+Formulario 220 Spec!N54	N
+Formulario 220 Spec!O54	-
+Formulario 220 Spec!P54	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q54	N
+Formulario 220 Spec!R54	Amount
+Formulario 220 Spec!S54	Annual
+Formulario 220 Spec!A55	Fees, commissions and services - amount received
+Formulario 220 Spec!B55	Honorarios, comisiones y servicios - valor recibido
+Formulario 220 Spec!C55	Employee-Borne Data
+Formulario 220 Spec!D55	62
+Formulario 220 Spec!E55	N
+Formulario 220 Spec!F55	C
+Formulario 220 Spec!G55	Supplied by the employee. Bidirectional pair with casilla 69.
+Formulario 220 Spec!H55	Casilla 62
+Formulario 220 Spec!I55	12
+Formulario 220 Spec!J55	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K55	0
+Formulario 220 Spec!L55	(employee declaration)
+Formulario 220 Spec!M55	Employee-supplied. Fees, commissions and service income received from OTHER payers. Paired with casilla 69.
+Formulario 220 Spec!N55	N
+Formulario 220 Spec!O55	-
+Formulario 220 Spec!P55	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q55	N
+Formulario 220 Spec!R55	Amount
+Formulario 220 Spec!S55	Annual
+Formulario 220 Spec!A56	Interest and financial yields - amount received
+Formulario 220 Spec!B56	Intereses y rendimientos financieros - valor recibido
+Formulario 220 Spec!C56	Employee-Borne Data
+Formulario 220 Spec!D56	63
+Formulario 220 Spec!E56	N
+Formulario 220 Spec!F56	C
+Formulario 220 Spec!G56	Supplied by the employee. Bidirectional pair with casilla 70.
+Formulario 220 Spec!H56	Casilla 63
+Formulario 220 Spec!I56	12
+Formulario 220 Spec!J56	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K56	0
+Formulario 220 Spec!L56	(employee declaration)
+Formulario 220 Spec!M56	Employee-supplied. Paired with casilla 70.
+Formulario 220 Spec!N56	N
+Formulario 220 Spec!O56	-
+Formulario 220 Spec!P56	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q56	N
+Formulario 220 Spec!R56	Amount
+Formulario 220 Spec!S56	Annual
+Formulario 220 Spec!A57	Disposal of fixed assets - amount received
+Formulario 220 Spec!B57	Enajenacion de activos fijos - valor recibido
+Formulario 220 Spec!C57	Employee-Borne Data
+Formulario 220 Spec!D57	64
+Formulario 220 Spec!E57	N
+Formulario 220 Spec!F57	C
+Formulario 220 Spec!G57	Supplied by the employee. Bidirectional pair with casilla 71.
+Formulario 220 Spec!H57	Casilla 64
+Formulario 220 Spec!I57	12
+Formulario 220 Spec!J57	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K57	0
+Formulario 220 Spec!L57	(employee declaration)
+Formulario 220 Spec!M57	Employee-supplied. Paired with casilla 71.
+Formulario 220 Spec!N57	N
+Formulario 220 Spec!O57	-
+Formulario 220 Spec!P57	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q57	N
+Formulario 220 Spec!R57	Amount
+Formulario 220 Spec!S57	Annual
+Formulario 220 Spec!A58	Lotteries, raffles and betting - amount received
+Formulario 220 Spec!B58	Loterias, rifas, apuestas y similares - valor recibido
+Formulario 220 Spec!C58	Employee-Borne Data
+Formulario 220 Spec!D58	65
+Formulario 220 Spec!E58	N
+Formulario 220 Spec!F58	C
+Formulario 220 Spec!G58	Supplied by the employee. Bidirectional pair with casilla 72.
+Formulario 220 Spec!H58	Casilla 65
+Formulario 220 Spec!I58	12
+Formulario 220 Spec!J58	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K58	0
+Formulario 220 Spec!L58	(employee declaration)
+Formulario 220 Spec!M58	Employee-supplied. Paired with casilla 72.
+Formulario 220 Spec!N58	N
+Formulario 220 Spec!O58	-
+Formulario 220 Spec!P58	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q58	N
+Formulario 220 Spec!R58	Amount
+Formulario 220 Spec!S58	Annual
+Formulario 220 Spec!A59	Other income - amount received
+Formulario 220 Spec!B59	Otros - valor recibido
+Formulario 220 Spec!C59	Employee-Borne Data
+Formulario 220 Spec!D59	66
+Formulario 220 Spec!E59	N
+Formulario 220 Spec!F59	C
+Formulario 220 Spec!G59	Supplied by the employee. Bidirectional pair with casilla 73.
+Formulario 220 Spec!H59	Casilla 66
+Formulario 220 Spec!I59	12
+Formulario 220 Spec!J59	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K59	0
+Formulario 220 Spec!L59	(employee declaration)
+Formulario 220 Spec!M59	Employee-supplied. Paired with casilla 73.
+Formulario 220 Spec!N59	N
+Formulario 220 Spec!O59	-
+Formulario 220 Spec!P59	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q59	N
+Formulario 220 Spec!R59	Amount
+Formulario 220 Spec!S59	Annual
+Formulario 220 Spec!A60	Total other income received
+Formulario 220 Spec!B60	Totales - valor recibido
+Formulario 220 Spec!C60	Employee-Borne Data
+Formulario 220 Spec!D60	67
+Formulario 220 Spec!E60	N
+Formulario 220 Spec!F60	Y
+Formulario 220 Spec!H60	Casilla 67
+Formulario 220 Spec!I60	12
+Formulario 220 Spec!J60	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K60	0
+Formulario 220 Spec!L60	SUM(casillas 61 to 66)
+Formulario 220 Spec!M60	The form prints the arithmetic: 'Sume 61 a 66'.
+Formulario 220 Spec!N60	N
+Formulario 220 Spec!O60	-
+Formulario 220 Spec!P60	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q60	N
+Formulario 220 Spec!R60	Amount
+Formulario 220 Spec!S60	Annual
+Formulario 220 Spec!A61	Other income - amounts withheld (casillas 68 to 73)
+Formulario 220 Spec!B61	Valor retenido - arrendamientos, honorarios, intereses, activos fijos, loterias, otros
+Formulario 220 Spec!C61	Employee-Borne Data
+Formulario 220 Spec!D61	68-73
+Formulario 220 Spec!E61	N
+Formulario 220 Spec!F61	C
+Formulario 220 Spec!G61	Supplied by the employee alongside the corresponding received amount in casillas 61 to 66. A withheld amount without a received amount, or the reverse, is an inconsistency.
+Formulario 220 Spec!H61	Casilla 68-73
+Formulario 220 Spec!I61	12
+Formulario 220 Spec!J61	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K61	0
+Formulario 220 Spec!L61	(employee declaration)
+Formulario 220 Spec!M61	Employee-supplied withholding amounts corresponding one for one to casillas 61 to 66. Each is a bidirectional pair with its received-amount counterpart: 68 with 61, 69 with 62, 70 with 63, 71 with 64, 72 with 65, 73 with 66.
+Formulario 220 Spec!N61	N
+Formulario 220 Spec!O61	-
+Formulario 220 Spec!P61	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q61	N
+Formulario 220 Spec!R61	Amount
+Formulario 220 Spec!S61	Annual
+Formulario 220 Spec!A62	Total other income withheld
+Formulario 220 Spec!B62	Totales - valor retenido
+Formulario 220 Spec!C62	Employee-Borne Data
+Formulario 220 Spec!D62	74
+Formulario 220 Spec!E62	N
+Formulario 220 Spec!F62	Y
+Formulario 220 Spec!H62	Casilla 74
+Formulario 220 Spec!I62	12
+Formulario 220 Spec!J62	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K62	0
+Formulario 220 Spec!L62	SUM(casillas 68 to 73)
+Formulario 220 Spec!M62	The form prints the arithmetic: 'Sume 68 a 73'.
+Formulario 220 Spec!N62	N
+Formulario 220 Spec!O62	-
+Formulario 220 Spec!P62	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q62	N
+Formulario 220 Spec!R62	Amount
+Formulario 220 Spec!S62	Annual
+Formulario 220 Spec!A63	Total withholding for the tax year
+Formulario 220 Spec!B63	Total retenciones ano gravable
+Formulario 220 Spec!C63	Employee-Borne Data
+Formulario 220 Spec!D63	75
+Formulario 220 Spec!E63	N
+Formulario 220 Spec!F63	Y
+Formulario 220 Spec!H63	Casilla 75
+Formulario 220 Spec!I63	12
+Formulario 220 Spec!J63	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K63	7404000
+Formulario 220 Spec!L63	Casilla 60 + casilla 74
+Formulario 220 Spec!M63	The form prints the arithmetic: 'Sume 60 + 74'. It combines the employer's own withholding on work income with the employee-declared withholding on other income. Only casilla 60 comes from payroll.
+Formulario 220 Spec!N63	N
+Formulario 220 Spec!O63	-
+Formulario 220 Spec!P63	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q63	N
+Formulario 220 Spec!R63	Amount
+Formulario 220 Spec!S63	Annual
+Formulario 220 Spec!A64	═══ assets, debts and dependants(casillas 76-82) ═══
+Formulario 220 Spec!A65	Identification of assets held
+Formulario 220 Spec!B65	Identificacion de los bienes poseidos
+Formulario 220 Spec!C65	Employee-Borne Data
+Formulario 220 Spec!D65	76
+Formulario 220 Spec!E65	N
+Formulario 220 Spec!F65	C
+Formulario 220 Spec!G65	Supplied BY THE EMPLOYEE. Bidirectional pair with 'Asset value' (casilla 77): an asset described without a value, or a value without a description, is incomplete. Three rows are printed on the form.
+Formulario 220 Spec!H65	Casilla 76
+Formulario 220 Spec!I65	Var
+Formulario 220 Spec!J65	A
+Formulario 220 Spec!K65	-
+Formulario 220 Spec!L65	(employee declaration)
+Formulario 220 Spec!M65	Free-text description of each asset held at 31 December. Employee-supplied; payroll neither knows nor certifies it. It exists because the certificate SUBSTITUTES for the income-tax return where the employee meets the ET art. 380 conditions.
+Formulario 220 Spec!N65	N
+Formulario 220 Spec!O65	-
+Formulario 220 Spec!P65	Not an amount - no rounding.
+Formulario 220 Spec!Q65	N
+Formulario 220 Spec!R65	Text
+Formulario 220 Spec!S65	Annual
+Formulario 220 Spec!A66	Asset value
+Formulario 220 Spec!B66	Valor patrimonial
+Formulario 220 Spec!C66	Employee-Borne Data
+Formulario 220 Spec!D66	77
+Formulario 220 Spec!E66	N
+Formulario 220 Spec!F66	C
+Formulario 220 Spec!G66	Supplied by the employee. Bidirectional pair with 'Identification of assets held' (casilla 76).
+Formulario 220 Spec!H66	Casilla 77
+Formulario 220 Spec!I66	12
+Formulario 220 Spec!J66	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K66	-
+Formulario 220 Spec!L66	(employee declaration)
+Formulario 220 Spec!M66	Tax value of each asset at 31 December.
+Formulario 220 Spec!N66	N
+Formulario 220 Spec!O66	-
+Formulario 220 Spec!P66	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q66	N
+Formulario 220 Spec!R66	Amount
+Formulario 220 Spec!S66	Annual
+Formulario 220 Spec!A67	Debts outstanding at 31 December
+Formulario 220 Spec!B67	Deudas vigentes a 31 de diciembre
+Formulario 220 Spec!C67	Employee-Borne Data
+Formulario 220 Spec!D67	78
+Formulario 220 Spec!E67	N
+Formulario 220 Spec!F67	C
+Formulario 220 Spec!G67	Supplied by the employee. Related to casillas 76 and 77, which give the asset side of the same net-worth statement.
+Formulario 220 Spec!H67	Casilla 78
+Formulario 220 Spec!I67	12
+Formulario 220 Spec!J67	N (whole pesos, nearest 1,000; zero where nil)
+Formulario 220 Spec!K67	-
+Formulario 220 Spec!L67	(employee declaration)
+Formulario 220 Spec!M67	Total debts outstanding at 31 December. Employee-supplied. The printed label carries the year of the balance ('Deudas vigentes a 31 de diciembre de' + tax year): print the tax year certified, never a fixed year.
+Formulario 220 Spec!N67	N
+Formulario 220 Spec!O67	-
+Formulario 220 Spec!P67	Whole Colombian pesos, approximated to the NEAREST 1,000, exactly as the instruction guide directs. Where a casilla has no value, write ZERO - do not leave it blank.
+Formulario 220 Spec!Q67	N
+Formulario 220 Spec!R67	Amount
+Formulario 220 Spec!S67	Annual
+Formulario 220 Spec!A68	Dependant document type
+Formulario 220 Spec!B68	Tipo documento (dependiente economico)
+Formulario 220 Spec!C68	Economic Dependant Identification
+Formulario 220 Spec!D68	79
+Formulario 220 Spec!E68	Y
+Formulario 220 Spec!F68	C
+Formulario 220 Spec!G68	Populated where the employee claimed the ET art. 387 par. 2 dependants deduction during the period. Bidirectional set with casillas 80, 81 and 82 - all four are populated together or none is.
+Formulario 220 Spec!H68	Casilla 79
+Formulario 220 Spec!I68	2
+Formulario 220 Spec!J68	N (code)
+Formulario 220 Spec!K68	13
+Formulario 220 Spec!L68	Employee.Dependant_Document_Type
+Formulario 220 Spec!M68	Identity document type of the economic dependant, under ET art. 387 par. 2. The dependants deduction is 10% of gross employment income capped at 32 UVT per month (COP 1,675,968 in 2026), so a claimed dependant materially reduces the withholding base and must be substantiated by the dependant data in casillas 79 to 82.
+Formulario 220 Spec!N68	Y
+Formulario 220 Spec!O68	-> Sheet 6: Tipo de documento (Form 220)
+Formulario 220 Spec!P68	Not an amount - no rounding.
+Formulario 220 Spec!Q68	N
+Formulario 220 Spec!R68	Code
+Formulario 220 Spec!S68	Annual
+Formulario 220 Spec!A69	Dependant document number
+Formulario 220 Spec!B69	No. Documento (dependiente economico)
+Formulario 220 Spec!C69	Economic Dependant Identification
+Formulario 220 Spec!D69	80
+Formulario 220 Spec!E69	Y
+Formulario 220 Spec!F69	C
+Formulario 220 Spec!G69	Populated with casillas 79, 81 and 82. Bidirectional set.
+Formulario 220 Spec!H69	Casilla 80
+Formulario 220 Spec!I69	Var
+Formulario 220 Spec!J69	N / AN
+Formulario 220 Spec!K69	1122334455
+Formulario 220 Spec!L69	Employee.Dependant_Document_Number
+Formulario 220 Spec!M69	Identity number of the dependant. Also reported in Format 2276 numeral 34, which is where DIAN matches a dependant claimed by more than one taxpayer.
+Formulario 220 Spec!N69	Y
+Formulario 220 Spec!O69	-
+Formulario 220 Spec!P69	Not an amount - no rounding.
+Formulario 220 Spec!Q69	N
+Formulario 220 Spec!R69	Identifier
+Formulario 220 Spec!S69	Annual
+Formulario 220 Spec!A70	Dependant surnames and names
+Formulario 220 Spec!B70	Apellidos y Nombres (dependiente economico)
+Formulario 220 Spec!C70	Economic Dependant Identification
+Formulario 220 Spec!D70	81
+Formulario 220 Spec!E70	Y
+Formulario 220 Spec!F70	C
+Formulario 220 Spec!G70	Populated with casillas 79, 80 and 82. Bidirectional set.
+Formulario 220 Spec!H70	Casilla 81
+Formulario 220 Spec!I70	Var
+Formulario 220 Spec!J70	A
+Formulario 220 Spec!K70	MARIA PEREZ RUIZ
+Formulario 220 Spec!L70	Employee.Dependant_Name
+Formulario 220 Spec!M70	Full name of the dependant.
+Formulario 220 Spec!N70	Y
+Formulario 220 Spec!O70	-
+Formulario 220 Spec!P70	Not an amount - no rounding.
+Formulario 220 Spec!Q70	N
+Formulario 220 Spec!R70	Text
+Formulario 220 Spec!S70	Annual
+Formulario 220 Spec!A71	Relationship
+Formulario 220 Spec!B71	Parentesco
+Formulario 220 Spec!C71	Economic Dependant Identification
+Formulario 220 Spec!D71	82
+Formulario 220 Spec!E71	Y
+Formulario 220 Spec!F71	C
+Formulario 220 Spec!G71	Populated with casillas 79, 80 and 81. Bidirectional set.
+Formulario 220 Spec!H71	Casilla 82
+Formulario 220 Spec!I71	Var
+Formulario 220 Spec!J71	A
+Formulario 220 Spec!K71	HIJA
+Formulario 220 Spec!L71	Employee.Dependant_Relationship
+Formulario 220 Spec!M71	Relationship of the dependant to the employee. ET art. 387 par. 2 recognises children under 18; children between 18 and 23 in education; children over 23 with a certified physical or psychological dependency; a spouse or partner in a state of dependency for the same reasons; and parents or siblings in a certified state of dependency.
+Formulario 220 Spec!N71	Y
+Formulario 220 Spec!O71	-> Sheet 6: Parentesco (art. 387 para. 2)
+Formulario 220 Spec!P71	Not an amount - no rounding.
+Formulario 220 Spec!Q71	N
+Formulario 220 Spec!R71	Text
+Formulario 220 Spec!S71	Annual
+Formulario 220 Spec!A72	═══ employee certification under et art. 380 - display-only declarations ═══
+Formulario 220 Spec!A73	Employee's six non-filing declarations
+Formulario 220 Spec!B73	Certifico que durante el ano gravable (6 items)
+Formulario 220 Spec!C73	Employee Certification
+Formulario 220 Spec!D73	(unnumbered)
+Formulario 220 Spec!E73	N
+Formulario 220 Spec!F73	C
+Formulario 220 Spec!G73	The employee signs these ONLY where they intend the certificate to substitute for their income-tax return under DUR 1625 de 2016 art. 1.6.1.13.2.7. All six must be true together.
+Formulario 220 Spec!H73	Printed block above the employee's signature
+Formulario 220 Spec!I73	-
+Formulario 220 Spec!J73	Display-only declaration
+Formulario 220 Spec!K73	-
+Formulario 220 Spec!L73	(employee declaration)
+Formulario 220 Spec!M73	DISPLAY-ONLY - not a data field, not populated by payroll, not transmitted. The six declarations are: (1) gross wealth did not exceed 4,500 UVT; (2) gross income was below 1,400 UVT; (3) not a VAT-responsible person at 31 December; (4) credit-card consumption did not exceed 1,400 UVT; (5) total purchases and consumption did not exceed 1,400 UVT; (6) total bank deposits, receipts or financial investments did not exceed 1,400 UVT. Where all six hold, the note on the form states that THIS CERTIFICATE SUBSTITUTES FOR ALL LEGAL PURPOSES for the income-tax return (Formulario 220 prescribed by Res. DIAN 000022 de 2024, block 'Certifico que durante el ano gravable' and the note on the form; DUR 1625 de 2016 art. 1.6.1.13.2.7). THIS IS THE ONLY REASON THE EMPLOYEE-DECLARED SECTIONS EXIST ON THE FORM.
+Formulario 220 Spec!N73	N
+Formulario 220 Spec!O73	-> Sheet 6: Umbrales UVT 2026
+Formulario 220 Spec!P73	Not an amount - no rounding.
+Formulario 220 Spec!Q73	N
+Formulario 220 Spec!R73	Flag
+Formulario 220 Spec!S73	Annual
+Formulario 220 Spec!A74	Employee signature
+Formulario 220 Spec!B74	Firma del Trabajador o Pensionado
+Formulario 220 Spec!C74	Employee Certification
+Formulario 220 Spec!D74	(unnumbered)
+Formulario 220 Spec!E74	N
+Formulario 220 Spec!F74	C
+Formulario 220 Spec!G74	Signed only where the employee makes the six art. 380 declarations. Bidirectional with the declaration block above it.
+Formulario 220 Spec!H74	Printed signature line
+Formulario 220 Spec!I74	-
+Formulario 220 Spec!J74	Display-only
+Formulario 220 Spec!K74	-
+Formulario 220 Spec!L74	(employee)
+Formulario 220 Spec!M74	DISPLAY-ONLY. The employee's signature validating the declarations. Not a payroll field.
+Formulario 220 Spec!N74	N
+Formulario 220 Spec!O74	-
+Formulario 220 Spec!P74	Not an amount - no rounding.
+Formulario 220 Spec!Q74	N
+Formulario 220 Spec!R74	Text
+Formulario 220 Spec!S74	Annual
+Formulario 220 Spec!A75	Payer or withholding agent name
+Formulario 220 Spec!B75	Nombre del pagador o agente retenedor
+Formulario 220 Spec!C75	Withholding-Agent Signature
+Formulario 220 Spec!D75	(unnumbered)
+Formulario 220 Spec!E75	Y
+Formulario 220 Spec!F75	Y
+Formulario 220 Spec!H75	Line after casilla 60, before the 'Datos a cargo del trabajador o pensionado' section
+Formulario 220 Spec!I75	-
+Formulario 220 Spec!J75	Text
+Formulario 220 Spec!K75	MERCANS COLOMBIA S.A.S.
+Formulario 220 Spec!L75	Company.Legal_Name
+Formulario 220 Spec!M75	Name of the payer or withholding agent printed on the line that follows casilla 60, before the 'Datos a cargo del trabajador o pensionado' section - the same value as casilla 11 (RUT casilla 35 legal name, source Company.Legal_Name), never a payroll organisation label with a company-code prefix. The certificate is ISSUED TO THE EMPLOYEE and RETAINED BY THE EMPLOYER - it is not filed with DIAN.
+Formulario 220 Spec!N75	Y
+Formulario 220 Spec!O75	-
+Formulario 220 Spec!P75	Not an amount - no rounding.
+Formulario 220 Spec!Q75	N
+Formulario 220 Spec!R75	Text
+Formulario 220 Spec!S75	Annual
+File Structure!A1	FILE STRUCTURE AND TECHNICAL SPECIFICATIONS
+File Structure!A2	═══ SUBMISSION FORMAT ═══
+File Structure!A3	Channel
+File Structure!B3	Issued TO THE EMPLOYEE, on paper or electronically as agreed, and RETAINED BY THE EMPLOYER. There is NO government channel: Form 220 is a certificate, not a return, and is not submitted to DIAN.
+File Structure!A4	Source
+File Structure!B4	ET arts. 378, 379 and 380; DUR 1625 de 2016 art. 1.6.1.13.2.40 (deadline) and art. 1.6.1.13.2.7 (substitution for the income-tax return); the form's own instruction guide, which addresses only issuing.
+File Structure!A5	Why there is no file format
+File Structure!B5	DIAN prescribes the FORM but not a transmission format, because nothing is transmitted. The structure below is therefore a LOGICAL MODEL - the casilla list and its hierarchy - not a wire format.
+File Structure!A6	Where DIAN does see this data
+File Structure!B6	Annually, through Format 2276 (CO-DIAN-005), which IS filed. The two obligations overlap in content but differ in field set, ordering and deadline, and neither is derived from the other.
+File Structure!A7	Retention
+File Structure!B7	The employer retains the issued certificate as proof of the withholding. Where the employee signs the six ET art. 380 declarations, the certificate substitutes for their income-tax return, so its probative value runs beyond the employer.
+File Structure!A8	═══ LOGICAL MODEL - SECTIONS AND CASILLAS ═══
+File Structure!A9	Header
+File Structure!B9	Form 220 | Ano gravable | 4 Numero de formulario (assigned BY THE EMPLOYER, not by DIAN)
+File Structure!A10	Section 1 - Withholding agent
+File Structure!B10	5 NIT | 6 DV | 7 First surname | 8 Second surname | 9 First given name | 10 Other given names | 11 Company name
+File Structure!A11	Section 2 - Employee or pensioner
+File Structure!B11	24 Tipo de documento | 25 Numero de identificacion | 26 Primer apellido | 27 Segundo apellido | 28 Primer nombre | 29 Otros nombres
+File Structure!A12	Section 3 - Periodo y lugar
+File Structure!B12	30 Periodo DE | 31 Periodo A | 32 Fecha de expedicion | 33 Lugar donde se practico la retencion | 34 Cod. Dpto. | 35 Cod. Ciudad/Municipio
+File Structure!A13	Section 4 - Concepto de los ingresos
+File Structure!B13	36 Pagos por salarios | 37 Pagos realizados con bonos electronicos o de papel de servicio, cheques, tarjetas, vales, etc. | 38 Valor del exceso de los pagos por alimentacion mayores a 41 UVT, art. 387-1 E.T. | 39 Pagos por honorarios | 40 Pagos por servicios | 41 Pagos por comisiones | 42 Pagos por prestaciones sociales | 43 Pagos por viaticos | 44 Pagos por gastos de representacion | 45 Pagos por compensaciones por el trabajo asociado cooperativo | 46 Otros pagos | 47 Auxilio de cesantia e intereses efectivamente pagados al empleado | 48 Auxilio de cesantia reconocido a trabajadores del regimen tradicional del CST, contenido en el Capitulo VII, Titulo VIII Parte Primera | 49 Auxilio de cesantia consignado al fondo de cesantias | 50 Pensiones de jubilacion, vejez o invalidez | 51 Apoyos economicos educativos financiados con recursos publicos, no reembolsables o condonados | 52 Total de ingresos brutos (Sume 36 a 51)
+File Structure!A14	Section 5 - Concepto de los aportes
+File Structure!B14	53 Aportes obligatorios por salud a cargo del trabajador | 54 Aportes obligatorios a fondos de pensiones y solidaridad pensional a cargo del trabajador (combined) | 55 Cotizaciones voluntarias al regimen de ahorro individual con solidaridad - RAIS | 56 Aportes voluntarios a fondos de pensiones | 57 Aportes a cuentas AFC | 58 Aportes a cuentas AVC | 59 Ingreso laboral promedio de los ultimos seis meses anteriores (numeral 4 art. 206 E.T.) | 60 Valor de la retencion en la fuente por ingresos laborales y de pensiones
+File Structure!A15	Section 6 - Datos a cargo del trabajador o pensionado
+File Structure!B15	61-66 Other income, value recibido | 68-73 Other income, value retenido | 67 Total recibido (Sume 61 a 66) | 74 Total retenido (Sume 68 a 73) | 75 TOTAL WITHHOLDINGS ANO GRAVABLE (Sume 60 + 74)
+File Structure!A16	Section 7 - Patrimonio
+File Structure!B16	76 Identificacion de los bienes poseidos (3 rows) | 77 Valor patrimonial | 78 Deudas vigentes a 31 de diciembre
+File Structure!A17	Section 8 - Economic dependant
+File Structure!B17	79 Tipo document | 80 No. Document | 81 Surnames and given names | 82 Parentesco
+File Structure!A18	Section 9 - Certificacion ET art. 380
+File Structure!B18	Six unnumbered declarations plus the employee's signature. DISPLAY-ONLY - not data fields.
+File Structure!A19	Section 10 - Firma
+File Structure!B19	Nombre del payer o withholding agent plus the issuing signature.
+File Structure!A20	═══ ARITHMETIC PRINTED ON THE FORM ═══
+File Structure!A21	Casilla 52
+File Structure!B21	Sume 36 a 51 - sixteen income casillas.
+File Structure!A22	Casilla 67
+File Structure!B22	Sume 61 a 66 - employee-declared other income received.
+File Structure!A23	Casilla 74
+File Structure!B23	Sume 68 a 73 - employee-declared other income withheld.
+File Structure!A24	Casilla 75
+File Structure!B24	Sume 60 + 74 - the employer's withholding plus the employee-declared withholding.
+File Structure!A25	═══ AMOUNT AND ROUNDING CONVENTION ═══
+File Structure!A26	Rounding
+File Structure!B26	The instruction guide (Res. 000022/2024) is explicit: values 'deben ser expresados en pesos colombianos y aproximados al multiplo de mil (1.000) mas cercano'. The SAME convention as Form 350, and NOT the electronic payroll convention of two decimals round-half-to-even.
+File Structure!A27	Nil values
+File Structure!B27	The instruction guide (Res. 000022/2024) directs: 'En el evento en que no haya valor a registrar en alguna casilla escriba cero (0)'. Write ZERO, do not leave blank. This differs from the electronic payroll, where an inapplicable element is OMITTED rather than zero-filled.
+File Structure!A28	RUT consistency
+File Structure!B28	The instruction guide repeats for casillas 7 to 11 that where the value does not match the RUT, THE RUT MUST BE UPDATED BEFORE THE CERTIFICATE IS ISSUED. The certificate does not override the register.
+File Structure!A29	═══ THE THREE SEVERANCE LINES - AND THE ORDERING TRAP ═══
+File Structure!A30	Form 220
+File Structure!B30	47 = paid to the employee | 48 = traditional pre-1991 CST regime | 49 = deposited to the fund
+File Structure!A31	Format 2276
+File Structure!B31	18 = paid to the employee | 19 = deposited to the fund | 20 = traditional pre-1991 CST regime
+File Structure!A32	The trap
+File Structure!B32	THE SECOND AND THIRD LINES ARE TRANSPOSED BETWEEN THE TWO ARTEFACTS. An implementation that maps positionally - 47 to 18, 48 to 19, 49 to 20 - will swap the fund deposit and the traditional-regime amount in the information return. Map by MEANING, never by position.
+File Structure!A33	Recorded defect
+File Structure!B33	The instruction guide for casilla 42 cross-refers severance deposited to the fund to 'la casilla 48'. The form's own printed label puts the fund deposit at casilla 49 and the traditional regime at casilla 48. The form layout is authoritative; the cross-reference is wrong.
+Field Options!A1	FIELD OPTIONS - CODE TABLES
+Field Options!A2	Code
+Field Options!B2	Abbrev
+Field Options!C2	Local (ES)
+Field Options!D2	EN Description
+Field Options!A3	═══ TIPO DE DOCUMENTO (CASILLAS 24 AND 79) - THE SIX VALUES PRINTED ON THE FORM ═══
+Field Options!A4	12
+Field Options!B4	TI
+Field Options!C4	Tarjeta de identidad
+Field Options!D4	Identity card for a person aged 7 to 17.
+Field Options!A5	13
+Field Options!B5	CC
+Field Options!C5	Cedula de ciudadania
+Field Options!D5	National identity card. The great majority of employees.
+Field Options!A6	21
+Field Options!B6	TE
+Field Options!C6	Tarjeta de extranjeria
+Field Options!D6	Foreigner's identity card.
+Field Options!A7	22
+Field Options!B7	CE
+Field Options!C7	Cedula de extranjeria
+Field Options!D7	Foreign resident's identity card.
+Field Options!A8	31
+Field Options!B8	NIT
+Field Options!C8	NIT
+Field Options!D8	Tax identification number, where the beneficiary is an entity.
+Field Options!A9	41
+Field Options!B9	PA
+Field Options!C9	Pasaporte
+Field Options!D9	Passport.
+Field Options!A10	(gap)
+Field Options!B10	-
+Field Options!C10	-
+Field Options!D10	THIS LIST IS NARROWER THAN THE ELECTRONIC PAYROLL LIST at Annex table 5.2.1, which also carries 11 Record civil, 42 Foreign identity document, 47 PEP, 50 NIT de otro pais and 91 NUIP. Only the six values above are output on Form 220. A PEP or a PPT (Decree 216 of 2021) is not a document type of this form and is not certified under any other code: a foreign employee is certified with the admitted document held - 21 Tarjeta de extranjeria, 22 Cedula de extranjeria or 41 Pasaporte (see casilla 24).
+Field Options!A11	═══ LAS TRES LINEAS DE CESANTIAS (CASILLAS 47, 48, 49) ═══
+Field Options!A12	47
+Field Options!B12	PAGADA
+Field Options!C12	Auxilio de cesantia e intereses efectivamente pagados al empleado
+Field Options!D12	Severance savings and interest ACTUALLY PAID to the employee - the January interest payment, an authorised partial withdrawal, or a termination settlement. Format 2276 numeral 18.
+Field Options!A13	48
+Field Options!B13	TRADICIONAL
+Field Options!C13	Auxilio de cesantia reconocido a trabajadores del regimen tradicional del CST (Cap. VII, Tit. VIII, Parte Primera)
+Field Options!D13	Severance RECOGNISED under the pre-1991 retroactive regime, for employees hired before 1 January 1991 who did not elect the Law 50 of 1990 regime. Format 2276 numeral 20 - NOT 19.
+Field Options!A14	49
+Field Options!B14	FONDO
+Field Options!C14	Auxilio de cesantia consignado al fondo de cesantias
+Field Options!D14	The amount DEPOSITED to the employee's chosen fund by 14 February under Law 50 of 1990 art. 99, certified in the tax year of the deposit (ET art. 27 num. 3). Format 2276 numeral 19 - NOT 20. Must reconcile to CO-CESANTIAS-006.
+Field Options!A15	(mapping warning)
+Field Options!B15	-
+Field Options!C15	-
+Field Options!D15	The second and third lines are TRANSPOSED between Form 220 and Format 2276. Map by meaning, never by position.
+Field Options!A16	═══ UMBRALES UVT 2026 (UVT = COP 52,374, RES. DIAN 238 DE 15 DIC 2025) ═══
+Field Options!A17	41 UVT
+Field Options!B17	2,147,334
+Field Options!C17	Tope mensual de pagos por alimentacion, art. 387-1
+Field Options!D17	Monthly meal payments to a third party up to this amount are not income of the employee. The EXCESS goes to casilla 38.
+Field Options!A18	310 UVT
+Field Options!B18	16,235,940
+Field Options!C18	Salario mensual maximo para el beneficio de alimentacion
+Field Options!D18	Where the employee's monthly salary EXCEEDS this, the art. 387-1 exclusion does not apply at all and the WHOLE meal payment goes to casilla 37, not casilla 38.
+Field Options!A19	350 UVT
+Field Options!B19	18,330,900
+Field Options!C19	Ingreso laboral promedio para la exencion de cesantias, art. 206 num. 4
+Field Options!D19	Severance savings and interest are exempt in full where the six-month average labour income in casilla 59 does not exceed this; tapered above it.
+Field Options!A20	1,000 UVT
+Field Options!B20	52,374,000
+Field Options!C20	Tope mensual exento de pensiones, art. 206 num. 5
+Field Options!D20	Employer-paid pension income is taxable only above this monthly amount. Casilla 50.
+Field Options!A21	32 UVT
+Field Options!B21	1,675,968
+Field Options!C21	Tope mensual de la deduccion por dependientes, art. 387 par. 2
+Field Options!D21	The dependants deduction is 10% of gross employment income capped at this monthly amount. The dependant is identified in casillas 79 to 82.
+Field Options!A22	790 UVT
+Field Options!B22	41,375,460
+Field Options!C22	Tope anual de la renta exenta del 25%, art. 206 num. 10
+Field Options!D22	Annual cap on the 25% exempt income. The monthly withholding computation apportions it at 65.8333 UVT per month (790 / 12); the monthly apportionment is a configurable rule of the withholding computation.
+Field Options!A23	1,340 UVT
+Field Options!B23	70,181,160
+Field Options!C23	Tope anual conjunto de deducciones y rentas exentas, art. 336
+Field Options!D23	Annual cap on deductions plus exempt income, alongside the 40% limit. The monthly withholding computation apportions it at 111.6667 UVT per month (1,340 / 12); the monthly apportionment is a configurable rule of the withholding computation.
+Field Options!A24	4,500 UVT
+Field Options!B24	235,683,000
+Field Options!C24	Patrimonio bruto - condicion 1 del art. 380
+Field Options!D24	One of the six conditions under which this certificate substitutes for the income-tax return.
+Field Options!A25	1,400 UVT
+Field Options!B25	73,323,600
+Field Options!C25	Ingresos brutos, consumos y consignaciones - condiciones 2, 4, 5 y 6 del art. 380
+Field Options!D25	The remaining monetary conditions for substitution.
+Field Options!A26	═══ PARENTESCO - DEPENDIENTE ECONOMICO (CASILLA 82, ET ART. 387 PAR. 2). CASILLA 82 ACCEPTS FREE TEXT, SO THE ENGINE EMITS THE LOCAL (ES) WORDING; THE CODE COLUMN IS THE MERCANS-INTERNAL NORMALISATION AND IS THE SAME CODE TABLE AS THE DATA DICTIONARY MAPPER 'DEPENDANT RELATIONSHIP'. THE FIVE LIMBS ARE EXHAUSTIVE. ═══
+Field Options!A27	HIJO-M18
+Field Options!B27	H18
+Field Options!C27	Hijos menores de 18 anos
+Field Options!D27	Children under 18.
+Field Options!A28	HIJO-EST
+Field Options!B28	HED
+Field Options!C28	Hijos entre 18 y 23 anos financiados por el contribuyente en su educacion
+Field Options!D28	Children aged 18 to 23 whose education the taxpayer finances at a recognised institution.
+Field Options!A29	HIJO-DEP
+Field Options!B29	HDP
+Field Options!C29	Hijos mayores de 23 anos en situacion de dependencia certificada
+Field Options!D29	Children over 23 with certified physical or psychological dependency.
+Field Options!A30	CONYUGE
+Field Options!B30	CON
+Field Options!C30	Conyuge o companero permanente en situacion de dependencia
+Field Options!D30	Spouse or permanent partner in a certified state of dependency by absence of income or physical or psychological factors.
+Field Options!A31	ASCEND-HERM
+Field Options!B31	APH
+Field Options!C31	Padres y hermanos en situacion de dependencia
+Field Options!D31	Parents and siblings in a certified state of dependency.
+Field Options!A32	═══ DIVIPOLA (DANE) - CASILLAS 34 AND 35 ═══
+Field Options!A33	11
+Field Options!B33	BOG-DPTO
+Field Options!C33	Bogota D.C. - departamento
+Field Options!D33	TWO-digit DANE department code. The instruction guide directs the use of the DANE 'Department codes' tables.
+Field Options!A34	001
+Field Options!B34	BOG-MPIO
+Field Options!C34	Bogota D.C. - ciudad/municipio
+Field Options!D34	THREE-digit DANE municipality code. Like PILA and unlike the electronic payroll, Form 220 splits the code across two casillas.
+Field Options!A35	═══ CONCEPTS THAT ARE CERTIFIED BUT NOT WITHHELD AS EMPLOYMENT INCOME ═══
+Field Options!A36	Casilla 38
+Field Options!B36	-
+Field Options!C36	Exceso de alimentacion sobre 41 UVT
+Field Options!D36	Taxable income of the employee, withheld as EMPLOYMENT income.
+Field Options!A37	Casilla 47
+Field Options!B37	-
+Field Options!C37	Cesantias e intereses pagados
+Field Options!D37	Certified here, but EXCLUDED from the monthly withholding base under both Procedure 1 and Procedure 2 because of the ET art. 206 num. 4 exemption and its taper.
+Field Options!A38	Casilla 50
+Field Options!B38	-
+Field Options!C38	Pensiones
+Field Options!D38	Taxable only above 1,000 UVT per month; below that, certified at zero.
+Population Rules!A1	POPULATION RULES - HOW TO FILL EACH FIELD FROM PAYROLL
+Population Rules!A2	Field Name
+Population Rules!B2	Source System
+Population Rules!C2	Population Logic
+Population Rules!D2	Edge Cases
+Population Rules!A3	═══ MANDATORY FIELD RULES ═══
+Population Rules!A4	Casilla 4 - Numero de formulario
+Population Rules!B4	Engine sequence
+Population Rules!C4	Assign the certificate number from the ENGINE's own series - the instruction guide says it is 'asignado por la natural person o juridica que expide la certificacion'. Keep the series stable and unique per employee per tax year, because the employee may quote it when filing or when asking for a duplicate. The number is alphanumeric: DIAN prescribes no format for it (instruction guide, Res. 000022/2024).
+Population Rules!D4	SHARP CONTRAST WITH FORM 350, where casilla 4 is DIAN-assigned. Do not reuse the Form 350 numbering logic here.
+Population Rules!A5	Casillas 30 and 31 - Periodo de la certificacion
+Population Rules!B5	Payroll engine
+Population Rules!C5	Set casilla 30 to 1 January or the hire date, whichever is later, and casilla 31 to 31 December or the termination date, whichever is earlier. Write year, month, day in that order, as the instruction guide directs.
+Population Rules!D5	A leaver certificate covers only the employment window. It is still due by the last business day of March following the tax year, not on termination.
+Population Rules!A6	Casilla 36 - Salary payments
+Population Rules!B6	Payroll engine
+Population Rules!C6	Accumulate salary payments ACTUALLY MADE in the period, on the CST art. 127 definition the instruction guide quotes in full - ordinary fixed or variable remuneration plus everything received in money or in kind as direct consideration for the service: primas, sobresueldos, habitual bonuses, overtime, work on mandatory rest days, sales percentages and commissions. Then apply the exclusion rule: remove anything belonging in casillas 38 to 46.
+Population Rules!D6	The exclusion rule is the trap. Commissions under an employment contract are salary and stay in casilla 36; commissions outside an employment relationship go to casilla 41. Habitual bonuses are salary and stay in casilla 36; non-habitual bonuses go to casilla 46. Vacation pay goes to casilla 42. Per diems ALWAYS go to casilla 43, even where the permanent portion is salary for contribution purposes. The certificate's classification and the contribution base's classification are NOT the same.
+Population Rules!A7	Casillas 47, 48 and 49 - the three severance lines
+Population Rules!B7	Payroll engine
+Population Rules!C7	Maintain THREE separate severance buckets from the outset, not one: (47) amounts and interest ACTUALLY PAID to the employee, (48) amounts RECOGNISED under the pre-1991 traditional CST regime, and (49) amounts DEPOSITED to the fund in the tax year - the deposit made by 14 February is certified in the year of the deposit (ET art. 27 num. 3). Casillas 48 and 49 are mutually exclusive for the same employee, because an employee is in one regime or the other.
+Population Rules!D7	They CANNOT be split retrospectively out of a single annual severance savings figure. And when mapping to Format 2276, map by MEANING: 47 to numeral 18, 48 to numeral 20, 49 to numeral 19. The second and third lines are transposed between the two artefacts.
+Population Rules!A8	Casilla 59 - Ingreso laboral promedio de los ultimos seis meses anteriores (numeral 4 art. 206 E.T.)
+Population Rules!B8	Payroll engine
+Population Rules!C8	Maintain the monthly salary history YEAR-ROUND and store it monthly, so that the six-month average can be taken for the event that applies. The average is the monthly average SALARY ('salario mensual promedio', ET art. 206 num. 4) of six months: on termination or on a withdrawal of severance, the last six months of employment or the six months before the withdrawal; while the employment continues, the six months of the immediately preceding year at the time of the deposit to the fund; for employees outside the Ley 50 de 1990 regime, the six months before the employer recognises the severance (ET art. 27 num. 3) (DIAN Concepto 4443 de 2025). The average drives the ET art. 206 num. 4 severance exemption: full exemption where it does not exceed 350 UVT (COP 18,330,900 per month in 2026), tapered above.
+Population Rules!D8	This is the single field on the certificate that cannot be reconstructed at year end. A moving six-month window is not derivable from twelve annual totals, and getting it wrong changes the exemption on the severance, not merely the disclosure.
+Population Rules!A9	Casilla 60 - Valor de la retencion
+Population Rules!B9	Payroll engine (tax)
+Population Rules!C9	Accumulate the retencion en la fuente actually practised on this employee's work and pension income during the certified period. For a RESIDENT this is the ET art. 383 table result under Procedure 1 or 2; for a NON-RESIDENT it is the flat 20% of ET art. 408 on the gross. Where the employee changed residence status mid-year, sum both. Only withholding actually practised is accumulated: theoretical, hypothetical or contingent withholding amounts are excluded (instruction guide, Res. 000022/2024).
+Population Rules!D9	Reconcile to twelve months of electronic payroll NIE177 for this employee BEFORE issuing. A certificate that disagrees with the transmitted documents counts against the employer, because the XML is the tax support for the cost.
+Population Rules!A10	═══ CRITICAL VALIDATION RULES ═══
+Population Rules!A11	Write zero, never blank
+Population Rules!B11	Engine (formatting)
+Population Rules!C11	The instruction guide (Res. 000022/2024) directs: 'En el evento en que no haya valor a registrar en alguna casilla escriba cero (0)'. Every money casilla is populated, with zero where there is nothing.
+Population Rules!D11	This INVERTS the electronic payroll rule, where an inapplicable element is OMITTED rather than zero-filled. Two artefacts, two opposite conventions, from the same authority.
+Population Rules!A12	Round to the nearest 1,000
+Population Rules!B12	Engine (formatting)
+Population Rules!C12	All money casillas are expressed in Colombian pesos and approximated to the nearest 1,000, as the instruction guide (Res. 000022/2024) directs and exactly as on Form 350. Apply the rounding to each casilla value, then check that the printed sums still tie - casilla 52 = sum of 36 to 51, casilla 75 = 60 + 74.
+Population Rules!D12	Rounding sixteen casillas independently can make casilla 52 differ from the rounded sum of the unrounded parts by up to 8,000 pesos. Compute casilla 52 from the ROUNDED casillas so the arithmetic printed on the form holds.
+Population Rules!A13	RUT consistency before issue
+Population Rules!B13	Engine (control)
+Population Rules!C13	Casillas 5 to 11 must match casillas 5, 6, 31, 32, 33, 34 and 35 of the RUT. The instruction guide repeats for each that where they do not match, THE RUT MUST BE UPDATED BEFORE THE CERTIFICATE IS ISSUED.
+Population Rules!D13	Do not let the certificate diverge from the register in order to meet the March deadline - the register governs.
+Population Rules!A14	Casilla 37 versus casilla 38 - the meal-payment fork
+Population Rules!B14	Payroll engine
+Population Rules!C14	Where the employee's monthly salary EXCEEDS 310 UVT (COP 16,235,940 in 2026), the WHOLE meal payment goes to casilla 37 and casilla 38 stays nil. Where it does not exceed 310 UVT, the payment is not income up to 41 UVT (COP 2,147,334) and only the EXCESS goes to casilla 38, with nothing in casilla 37 for that concept.
+Population Rules!D14	Two thresholds, applied in sequence, and the outcome routes the amount to a DIFFERENT casilla. Both tests are MONTHLY, so an employee can fork one way in some months and the other way in others within the same certificate.
+Population Rules!A15	Casilla 48 and casilla 49 are mutually exclusive
+Population Rules!B15	Engine (validation)
+Population Rules!C15	An employee is either in the pre-1991 traditional severance regime or in the Ley 50 de 1990 annual-deposit regime, not both. Assert that at most one of the two is non-zero for any employee.
+Population Rules!D15	The only exception is a transition year in which an employee formally elected the new regime - rare, and worth an explicit override rather than a silent allowance.
+Population Rules!A16	═══ AMOUNT FORMAT RULES ═══
+Population Rules!A17	Casilla 54 combines two concepts
+Population Rules!B17	Engine (accumulation)
+Population Rules!C17	Casilla 54 carries mandatory PENSION contributions AND the solidarity-fund surcharge in ONE figure. The electronic payroll reports them as three separate elements (NIE166, NIE168, NIE170) and PILA as three separate campos (47, 51, 52). Keep them separate internally and sum them only at this casilla.
+Population Rules!D17	Summing them earlier makes the electronic payroll and PILA outputs impossible to produce correctly.
+Population Rules!A18	Casillas 55 and 56 split one electronic payroll element
+Population Rules!B18	Engine (accumulation)
+Population Rules!C18	Casilla 55 is voluntary contributions to the RAIS under ET art. 55; casilla 56 is voluntary contributions to VOLUNTARY pension funds under ET art. 126-1. The electronic payroll has ONE element for both (PensionVoluntaria, NIE198), so the engine must carry the distinction on the wage type.
+Population Rules!D18	Different legal bases, different caps in some scenarios. Combining them here is a misstatement even though the XML cannot tell them apart.
+Population Rules!A19	Casilla 58 has no electronic payroll element
+Population Rules!B19	Engine (accumulation)
+Population Rules!C19	AVC contributions to the Fondo Nacional del Ahorro have no dedicated electronic payroll element and fall to OtraDeduccion (NIE197). Tag the wage type so the amount can be recovered for this casilla and for Format 2276 numeral 28.
+Population Rules!D19	Without the tag the amount is indistinguishable from any other 'other deduction' at year end.
+Population Rules!A20	═══ PAYROLL-SPECIFIC POPULATION RULES ═══
+Population Rules!A21	Non-resident certificate
+Population Rules!B21	Payroll engine (tax)
+Population Rules!C21	Issue the same certificate. Casilla 52 carries the gross and casilla 60 carries 20% of it under ET art. 408 - so the two stand in a simple 20% relationship with no depuration visible. Casillas 53 and 54 still report the contributions actually deducted, even though they did NOT reduce the withholding base for a non-resident.
+Population Rules!D21	Casilla 59 is reported for completeness but has no effect: the ET art. 206 num. 4 severance exemption is an exemption of the RESIDENT ID card-general regime and does not attach to a non-resident's flat withholding.
+Population Rules!A22	Mid-year residence change
+Population Rules!B22	Payroll engine (tax)
+Population Rules!C22	Issue ONE certificate for the whole period. Casilla 60 sums the months withheld at 20% under art. 408 and the months withheld under the art. 383 table. The form has no field to disclose the split.
+Population Rules!D22	Retain the split internally for audit and for any DIAN enquiry. The employee reconciles on their own return; the employer performs no true-up.
+Population Rules!A23	Dependants (casillas 79 to 82)
+Population Rules!B23	Employee master data
+Population Rules!C23	Populate all four casillas together where the employee claimed the ET art. 387 par. 2 dependants deduction during the period. The deduction is 10% of gross employment income capped at 32 UVT per month (COP 1,675,968 in 2026).
+Population Rules!D23	The same dependant is reported in Format 2276 numeral 34, which is where DIAN matches a dependant claimed by more than one taxpayer. Keep the two consistent or the employee receives an enquiry.
+Population Rules!A24	Employee-declared sections (casillas 61 to 78)
+Population Rules!B24	The employee
+Population Rules!C24	Payroll does NOT populate casillas 61 to 78. They are supplied by the employee so that the certificate can substitute for the income-tax return under ET art. 380. Provide the employee with a means to supply them and leave them at zero where the employee does not.
+Population Rules!D24	Issuing the certificate with these sections at zero does not invalidate it - it simply means the employee cannot rely on it as a substitute return and must file.
+Population Rules!A25	═══ CROSS-FIELD VALIDATIONS ═══
+Population Rules!A26	Casilla 52 arithmetic
+Population Rules!B26	Engine (validation)
+Population Rules!C26	Casilla 52 must equal the sum of the ROUNDED casillas 36 to 51. Assert it before issuing.
+Population Rules!D26	Sixteen casillas. A single mis-classified concept both understates one casilla and overstates another while leaving casilla 52 correct - so also reconcile casilla 52 to the annual gross from the electronic payroll.
+Population Rules!A27	Casilla 75 arithmetic
+Population Rules!B27	Engine (validation)
+Population Rules!C27	Casilla 75 must equal casilla 60 plus casilla 74. Where the employee supplies nothing, casilla 74 is zero and casilla 75 equals casilla 60.
+Population Rules!D27	-
+Population Rules!A28	Casillas 79 to 82 populate together
+Population Rules!B28	Engine (validation)
+Population Rules!C28	All four dependant casillas are populated together or none is. A document number without a relationship, or a relationship without a number, is incomplete.
+Population Rules!D28	-
+Population Rules!A29	Cross-report reconciliation
+Population Rules!B29	Engine (reconciliation)
+Population Rules!C29	Before issuing, assert per employee: casilla 60 equals twelve months of electronic payroll NIE177; casilla 53 equals twelve months of NIE163 and the employee portion of PILA campo 55; casilla 54 equals twelve months of NIE166 + NIE168 + NIE170 and the employee portions of PILA campos 47, 51 and 52; casilla 49 equals the amount actually deposited under CO-CESANTIAS-006 in the tax year. Across the population, assert that the sum of casilla 60 equals twelve months of Form 350 casillas 93 plus 94.
+Population Rules!D29	Reconcile on the UNROUNDED values with a tolerance, because the four artefacts round three different ways. A material difference means a payment was made without a electronic payroll document, or a document was rejected and never re-transmitted.
+Example Analysis!A1	EXAMPLE ANALYSIS - SAMPLE RECORD PARSED FIELD BY FIELD
+Example Analysis!A2	Raw Value
+Example Analysis!B2	Field Name
+Example Analysis!C2	Interpretation
+Example Analysis!D2	Notes
+Example Analysis!A3	═══ WORKED EXAMPLE - CERTIFICATE FOR TAX YEAR 2026 ═══
+Example Analysis!A4	(scenario)
+Example Analysis!B4	Employer
+Example Analysis!C4	MERCANS COLOMBIA S.A.S., NIT 900123456-8, Bogota D.C.
+Example Analysis!D4	Same employer as the other five Colombia Spec workbooks.
+Example Analysis!A5	(scenario)
+Example Analysis!B5	Employee
+Example Analysis!C5	Juan Carlos Perez Gomez, CC 1020304050, employed the whole of 2026, salary COP 12,000,000 a month, tax RESIDENT.
+Example Analysis!D5	Twelve months of the March figures used in the electronic payroll and PILA workbooks, plus the annual statutory benefits.
+Example Analysis!A6	(scenario)
+Example Analysis!B6	Annual build-up
+Example Analysis!C6	Salary 12 x 12,000,000 = 144,000,000. Service bonus 12,000,000 (two instalments). Severance savings balance at 31 December 2025 = 12,000,000, deposited to the fund by 14 February 2026 and certified in the 2026 certificate, the year of the deposit (ET art. 27 num. 3). Interest on the 2025 severance savings balance = 1,440,000, paid in January 2026. The severance accrued for 2026 is deposited by 14 February 2027 and belongs to the 2027 certificate.
+Example Analysis!D6	The January interest payment and the February fund deposit both fall in the 2026 certificate because Colombia certifies on the PAYMENT or deposit date, not the accrual date (ET art. 27 num. 3).
+Example Analysis!A7	═══ HEADER AND IDENTIFICATION ═══
+Example Analysis!A8	2026-000417
+Example Analysis!B8	Casilla 4 - Numero de formulario
+Example Analysis!C8	Assigned by the EMPLOYER.
+Example Analysis!D8	Contrast Form 350, where casilla 4 is DIAN-assigned. Keep the series stable - the employee may quote it.
+Example Analysis!A9	900123456 / 8
+Example Analysis!B9	Casillas 5 / 6
+Example Analysis!C9	Employer NIT and verification digit.
+Example Analysis!D9	Without dots, hyphens or letters, as the instruction guide insists.
+Example Analysis!A10	MERCANS COLOMBIA S.A.S.
+Example Analysis!B10	Casilla 11 - Company name
+Example Analysis!C10	Legal person.
+Example Analysis!D10	Casillas 7 to 10 stay blank; the instruction guide says a natural-person issuer must not fill casilla 11.
+Example Analysis!A11	13 / 1020304050
+Example Analysis!B11	Casillas 24 / 25
+Example Analysis!C11	Citizenship ID card.
+Example Analysis!D11	A PEP or PPT holder is certified with the admitted document held - 21 Tarjeta de extranjeria, 22 Cedula de extranjeria or 41 Pasaporte; neither the PEP nor the PPT is a document type of this form, and no other code is output for them (see casilla 24).
+Example Analysis!A12	2026 01 01 / 2026 12 31
+Example Analysis!B12	Casillas 30 / 31
+Example Analysis!C12	Full calendar year certified.
+Example Analysis!D12	A leaver would carry the termination date in casilla 31.
+Example Analysis!A13	2027 03 31
+Example Analysis!B13	Casilla 32 - Fecha de expedicion
+Example Analysis!C13	Issued on the last business day of March 2027.
+Example Analysis!D13	The statutory deadline under DUR 1625 de 2016 art. 1.6.1.13.2.40.
+Example Analysis!A14	═══ INCOME CONCEPTS ═══
+Example Analysis!A15	144.000.000
+Example Analysis!B15	Casilla 36 - Salary payments
+Example Analysis!C15	Twelve months at COP 12,000,000, on the CST art. 127 definition.
+Example Analysis!D15	Excludes anything belonging in casillas 38 to 46 - here, the prima and the cesantias.
+Example Analysis!A16	0
+Example Analysis!B16	Casilla 37 / Casilla 38
+Example Analysis!C16	No voucher or meal payments.
+Example Analysis!D16	Written as ZERO, not left blank: 'escriba cero (0)'. This inverts the electronic payroll convention, where an inapplicable element is omitted.
+Example Analysis!A17	12.000.000
+Example Analysis!B17	Casilla 42 - Pagos por prestaciones sociales
+Example Analysis!C17	The statutory service bonus (service bonus), paid in two instalments by 30 June and 20 December.
+Example Analysis!D17	Excludes severance and its interest, which go to casillas 47 to 49. Vacation pay and work clothing would also sit here.
+Example Analysis!A18	1.440.000
+Example Analysis!B18	Casilla 47 - Auxilio de cesantia e intereses efectivamente pagados al empleado
+Example Analysis!C18	The 12% interest on the 31 December 2025 severance balance, paid to the employee during January 2026.
+Example Analysis!D18	Excluded from the monthly withholding base under ET art. 206 num. 4, but still certified. Maps to Format 2276 numeral 18.
+Example Analysis!A19	0
+Example Analysis!B19	Casilla 48 - Regimen tradicional
+Example Analysis!C19	The employee is under the Ley 50 de 1990 regime.
+Example Analysis!D19	Mutually exclusive with casilla 49. Maps to Format 2276 numeral 20 - NOT numeral 19.
+Example Analysis!A20	12.000.000
+Example Analysis!B20	Casilla 49 - Cesantia consignada al fondo
+Example Analysis!C20	The deposit made by 14 February 2026 for the balance at 31 December 2025, certified in the year of the deposit (ET art. 27 num. 3).
+Example Analysis!D20	Maps to Format 2276 numeral 19 - NOT numeral 20. The second and third severance lines are TRANSPOSED between the two artefacts; map by meaning, never by position. Must reconcile to CO-CESANTIAS-006. The deposit made by 14 February 2027 for the 2026 balance belongs to the 2027 certificate.
+Example Analysis!A21	157.440.000
+Example Analysis!B21	Casilla 52 - Total gross income
+Example Analysis!C21	144,000,000 + 12,000,000 + 1,440,000 + 12,000,000, per the form's own 'Sume 36 a 51'.
+Example Analysis!D21	Compute from the ROUNDED casillas so the printed arithmetic holds.
+Example Analysis!A22	═══ CONTRIBUTIONS AND WITHHOLDING ═══
+Example Analysis!A23	5.760.000
+Example Analysis!B23	Casilla 53 - Compulsory health contributions
+Example Analysis!C23	Twelve months at COP 480,000 - the employee's 4%.
+Example Analysis!D23	Reconciles to twelve months of electronic payroll NIE163 and to the employee portion of PILA campo 55.
+Example Analysis!A24	7.200.000
+Example Analysis!B24	Casilla 54 - Compulsory pension and pension-solidarity contributions
+Example Analysis!C24	Twelve months at COP 480,000 pension plus COP 120,000 solidarity = COP 600,000 a month.
+Example Analysis!D24	ONE casilla for TWO concepts. The electronic payroll keeps them as NIE166 and NIE168, and PILA as campos 47, 51 and 52. Keep them separate internally and sum only here.
+Example Analysis!A25	0
+Example Analysis!B25	Casillas 55 to 58
+Example Analysis!C25	No voluntary savings.
+Example Analysis!D25	Casillas 55 and 56 split what the electronic payroll carries in ONE element (NIE198); casilla 58 (AVC) has no electronic payroll element at all and must be tagged on the wage type.
+Example Analysis!A26	13.120.000
+Example Analysis!B26	Casilla 59 - Average employment income of the last seis meses
+Example Analysis!C26	The rolling six-month average of labour income, driven by the actual monthly payments including the December prima instalment.
+Example Analysis!D26	Below 350 UVT (COP 18,330,900), so the severance in casillas 47 and 49 is EXEMPT IN FULL under ET art. 206 num. 4. This is the field that cannot be reconstructed at year end - maintain it monthly.
+Example Analysis!A27	7.404.000
+Example Analysis!B27	Casilla 60 - Valor de la retencion en la fuente
+Example Analysis!C27	The year's withholding: twelve ordinary months at COP 617,000 = 7,404,000, the prima having been withheld separately under ET art. 385 with its own table read and, on these figures, producing no additional withholding.
+Example Analysis!D27	Must reconcile to twelve months of electronic payroll NIE177 for this employee. The sum across all employees must reconcile to twelve months of Form 350 casillas 93 plus 94.
+Example Analysis!A28	═══ EMPLOYEE-DECLARED SECTIONS ═══
+Example Analysis!A29	0
+Example Analysis!B29	Casillas 61 to 78
+Example Analysis!C29	Not supplied by the employee.
+Example Analysis!D29	Payroll does NOT populate these. They exist so the certificate can substitute for the income-tax return under ET art. 380; left at zero, the employee simply cannot rely on the substitution.
+Example Analysis!A30	7.404.000
+Example Analysis!B30	Casilla 75 - Total withholdings ano gravable
+Example Analysis!C30	Casilla 60 + casilla 74 (nil).
+Example Analysis!D30	-
+Example Analysis!A31	(unsigned)
+Example Analysis!B31	Certificacion ET art. 380
+Example Analysis!C31	Six declarations on gross wealth below 4,500 UVT, gross income and consumption below 1,400 UVT, and non-VAT-responsible status.
+Example Analysis!D31	DISPLAY-ONLY on the form. Where all six hold and the employee signs, the certificate substitutes for the income-tax return 'para todos los efectos legales'.
+Example Analysis!A32	═══ NON-RESIDENT CONTRAST ═══
+Example Analysis!A33	157.440.000 / 31.488.000
+Example Analysis!B33	Casilla 52 / Casilla 60 for a NON-RESIDENT
+Example Analysis!C33	The same gross income, but withheld at the flat 20% of ET art. 408 = COP 31,488,000.
+Example Analysis!D33	Four and a quarter times the resident's COP 7,404,000. Casillas 53 and 54 still report the contributions actually deducted, but they did NOT reduce the base - art. 408 taxes the gross.
+Example Analysis!A34	13.120.000
+Example Analysis!B34	Casilla 59 for a NON-RESIDENT
+Example Analysis!C34	Reported, but of no effect.
+Example Analysis!D34	The ET art. 206 num. 4 severance exemption belongs to the RESIDENT ID card-general regime and does not attach to a non-resident's flat withholding.
+Example Analysis!A35	═══ CROSS-REPORT RECONCILIATION FROM THIS CERTIFICATE ═══
+Example Analysis!A36	7.404.000
+Example Analysis!B36	Equals 12 x electronic payroll NIE177
+Example Analysis!C36	Annual withholding for this employee.
+Example Analysis!D36	Reconcile on unrounded values with a tolerance - the two artefacts round differently.
+Example Analysis!A37	12.000.000
+Example Analysis!B37	Equals CO-CESANTIAS-006 deposit
+Example Analysis!C37	Casilla 49 equals the fund deposit made in the tax year (by 14 February 2026).
+Example Analysis!D37	Late deposit costs ONE DAY'S SALARY PER DAY OF DELAY, per employee, uncapped - so this reconciliation has a direct financial consequence.
+Example Analysis!A38	(map by meaning)
+Example Analysis!B38	-> Format 2276 numerals 18, 19, 20
+Example Analysis!C38	Casilla 47 to numeral 18, casilla 49 to numeral 19, casilla 48 to numeral 20.
+Example Analysis!D38	NOT positional. The second and third severance lines are transposed between the two artefacts.
+Sample File!A1	SAMPLE FILE - CHANNEL STATEMENT AND COMPLETED-CERTIFICATE RENDERING
+Sample File!A4	WHY THERE IS NO SAMPLE FILE
+Sample File!A5	════════════
+Sample File!A6	Form 220 is NOT SUBMITTED TO ANY AUTHORITY. It is a certificate issued to
+Sample File!A7	the employee and retained by the employer (ET arts. 378-380; DUR 1625 de 2016
+Sample File!A8	art. 1.6.1.13.2.40). DIAN prescribes the FORM but no transmission format,
+Sample File!A9	because nothing is transmitted.
+Sample File!A11	There is therefore no wire format, no XSD and no import layout to sample.
+Sample File!A12	Fabricating one would be inventing a format that does not exist. What follows
+Sample File!A13	is a COMPLETED-CERTIFICATE RENDERING: the casilla-value set the engine must
+Sample File!A14	produce, which is the actual deliverable.
+Sample File!A16	Amounts are in Colombian pesos, approximated to the nearest 1,000, with ZERO
+Sample File!A17	written where a casilla has no value - both rules stated expressly in the
+Sample File!A18	instructivo.
+Sample File!A20	-------------------------------------------------------------------------------
+Sample File!A21	FORMULARIO 220 - CERTIFICADO DE INGRESOS Y RETENCIONES
+Sample File!A22	POR RENTAS DE TRABAJO Y DE PENSIONES          Ano gravable: 2026
+Sample File!A23	-------------------------------------------------------------------------------
+Sample File!A24	  4  Numero de formulario ................................ 2026-000417
+Sample File!A25	                                                           (assigned BY THE EMPLOYER)
+Sample File!A27	  Informacion del agente retenedor
+Sample File!A28	  5  Numero de Identificacion Tributaria (NIT) ........... 900123456
+Sample File!A29	  6  DV .................................................. 8
+Sample File!A30	  7  Primer apellido ..................................... (blank - legal person)
+Sample File!A31	  8  Segundo apellido .................................... (blank - legal person)
+Sample File!A32	  9  Primer nombre ....................................... (blank - legal person)
+Sample File!A33	 10  Otros nombres ....................................... (blank - legal person)
+Sample File!A34	 11  Razon social ........................................ MERCANS COLOMBIA S.A.S.
+Sample File!A36	  Datos del trabajador o pensionado
+Sample File!A37	 24  Tipo de documento ................................... 13  (Cedula de ciudadania)
+Sample File!A38	 25  Numero de identificacion ............................ 1020304050
+Sample File!A39	 26  Primer apellido ..................................... PEREZ
+Sample File!A40	 27  Segundo apellido .................................... GOMEZ
+Sample File!A41	 28  Primer nombre ....................................... JUAN
+Sample File!A42	 29  Otros nombres ....................................... CARLOS
+Sample File!A44	  Periodo de la certificacion
+Sample File!A45	 30  DE .................................................. 2026 01 01
+Sample File!A46	 31  A ................................................... 2026 12 31
+Sample File!A47	 32  Fecha de expedicion ................................. 2027 03 31
+Sample File!A48	 33  Lugar donde se practico la retencion ................ BOGOTA D.C.
+Sample File!A49	 34  Cod. Dpto. .......................................... 11
+Sample File!A50	 35  Cod. Ciudad/Municipio ............................... 001
+Sample File!A52	  Concepto de los ingresos                                          Valor
+Sample File!A53	 36  Pagos por salarios .................................. 144.000.000
+Sample File!A54	 37  Pagos con bonos, cheques, tarjetas, vales, etc. .....           0
+Sample File!A55	 38  Exceso de pagos por alimentacion > 41 UVT (art.387-1)           0
+Sample File!A56	 39  Pagos por honorarios ................................           0
+Sample File!A57	 40  Pagos por servicios .................................           0
+Sample File!A58	 41  Pagos por comisiones ................................           0
+Sample File!A59	 42  Pagos por prestaciones sociales .....................  12.000.000
+Sample File!A60	 43  Pagos por viaticos ..................................           0
+Sample File!A61	 44  Pagos por gastos de representacion ..................           0
+Sample File!A62	 45  Compensaciones por trabajo asociado cooperativo .....           0
+Sample File!A63	 46  Otros pagos .........................................           0
+Sample File!A64	 47  Cesantia e intereses PAGADOS AL EMPLEADO ............   1.440.000
+Sample File!A65	 48  Cesantia REGIMEN TRADICIONAL del CST ................           0
+Sample File!A66	 49  Cesantia CONSIGNADA AL FONDO ........................  12.000.000
+Sample File!A67	 50  Pensiones de jubilacion, vejez o invalidez ..........           0
+Sample File!A68	 51  Apoyos economicos educativos con recursos publicos ..           0
+Sample File!A69	 52  TOTAL INGRESOS BRUTOS (Sume 36 a 51) ............... 157.440.000
+Sample File!A71	  Concepto de los aportes                                           Valor
+Sample File!A72	 53  Aportes obligatorios por salud ......................   5.760.000
+Sample File!A73	 54  Aportes obligatorios a pensiones Y SOLIDARIDAD ......   7.200.000
+Sample File!A74	 55  Cotizaciones voluntarias RAIS .......................           0
+Sample File!A75	 56  Aportes voluntarios a fondos de pensiones ...........           0
+Sample File!A76	 57  Aportes a cuentas AFC ...............................           0
+Sample File!A77	 58  Aportes a cuentas AVC ...............................           0
+Sample File!A78	 59  Ingreso laboral promedio ultimos seis meses .........  13.120.000
+Sample File!A79	 60  VALOR DE LA RETENCION EN LA FUENTE ..................   7.404.000
+Sample File!A81	  Datos a cargo del trabajador o pensionado
+Sample File!A82	      Concepto                          Valor recibido   Valor retenido
+Sample File!A83	 61/68  Arrendamientos ......................... 0                 0
+Sample File!A84	 62/69  Honorarios, comisiones y servicios ..... 0                 0
+Sample File!A85	 63/70  Intereses y rendimientos financieros ... 0                 0
+Sample File!A86	 64/71  Enajenacion de activos fijos ........... 0                 0
+Sample File!A87	 65/72  Loterias, rifas, apuestas y similares .. 0                 0
+Sample File!A88	 66/73  Otros .................................. 0                 0
+Sample File!A89	 67/74  TOTALES ................................ 0                 0
+Sample File!A90	 75  TOTAL RETENCIONES ANO GRAVABLE (Sume 60 + 74) ......   7.404.000
+Sample File!A92	  Bienes poseidos a 31 de diciembre
+Sample File!A93	 76  Identificacion de los bienes poseidos ............... (not supplied)
+Sample File!A94	 77  Valor patrimonial ...................................           0
+Sample File!A95	 78  Deudas vigentes a 31 de diciembre ...................           0
+Sample File!A97	  Identificacion del dependiente economico (art. 387 par. 2 E.T.)
+Sample File!A98	 79  Tipo documento ...................................... (none claimed)
+Sample File!A99	 80  No. Documento ....................................... (none claimed)
+Sample File!A100	 81  Apellidos y nombres ................................. (none claimed)
+Sample File!A101	 82  Parentesco .......................................... (none claimed)
+Sample File!A103	  Certifico que durante el ano gravable:                  [DISPLAY-ONLY]
+Sample File!A104	   1. Mi patrimonio bruto no excedio de 4.500 UVT.
+Sample File!A105	   2. Mis ingresos brutos fueron inferiores a 1.400 UVT.
+Sample File!A106	   3. No fui responsable del impuesto sobre las ventas a 31 de diciembre.
+Sample File!A107	   4. Mis consumos mediante tarjeta de credito no excedieron 1.400 UVT.
+Sample File!A108	   5. El total de mis compras y consumos no supero 1.400 UVT.
+Sample File!A109	   6. El total de mis consignaciones, depositos o inversiones no excedio 1.400 UVT.
+Sample File!A110	                                        Firma del Trabajador o Pensionado: ______
+Sample File!A112	  Nombre del pagador o agente retenedor: MERCANS COLOMBIA S.A.S.
+Sample File!A113	                                        Firma: ______
+Sample File!A115	-------------------------------------------------------------------------------
+Sample File!A116	NON-RESIDENT VARIANT
+Sample File!A117	-------------------------------------------------------------------------------
+Sample File!A118	The same certificate for a NON-RESIDENT employee changes exactly one figure:
+Sample File!A120	 52  TOTAL INGRESOS BRUTOS ............................... 157.440.000  (unchanged)
+Sample File!A121	 53  Aportes obligatorios por salud ......................   5.760.000  (unchanged)
+Sample File!A122	 54  Aportes obligatorios a pensiones y solidaridad ......   7.200.000  (unchanged)
+Sample File!A123	 59  Ingreso laboral promedio ultimos seis meses .........  13.120.000  (no effect)
+Sample File!A124	 60  VALOR DE LA RETENCION EN LA FUENTE ..................  31.488.000  <== 20% of GROSS
+Sample File!A126	ET art. 408 taxes the GROSS at a flat 20%: 20% x 157,440,000 = 31,488,000. The
+Sample File!A127	contributions in casillas 53 and 54 are still certified because they were still
+Sample File!A128	deducted - but they did NOT reduce the withholding base. Casilla 59 is reported
+Sample File!A129	for completeness and has no effect, because the art. 206 num. 4 severance
+Sample File!A130	exemption belongs to the resident ID card-general regime.
+Sample File!A132	An employee who ACQUIRES RESIDENCE mid-year receives ONE certificate; casilla 60
+Sample File!A133	sums the 20% months and the art. 383 months, and the form has no field to
+Sample File!A134	disclose the split. Retain the split internally for audit.
+Sample File!A136	-------------------------------------------------------------------------------
+Sample File!A137	MAPPING TO FORMATO 2276 - MAP BY MEANING, NOT BY POSITION
+Sample File!A138	-------------------------------------------------------------------------------
+Sample File!A139	  Form 220 casilla 36  ->  2276 numeral  5   Pagos por salarios
+Sample File!A140	  Form 220 casilla 37  ->  2276 numeral  7   Bonos, cheques, tarjetas, vales
+Sample File!A141	  Form 220 casilla 38  ->  2276 numeral  8   Exceso alimentacion > 41 UVT
+Sample File!A142	  Form 220 casilla 39  ->  2276 numeral  9   Honorarios
+Sample File!A143	  Form 220 casilla 40  ->  2276 numeral 10   Servicios
+Sample File!A144	  Form 220 casilla 41  ->  2276 numeral 11   Comisiones
+Sample File!A145	  Form 220 casilla 42  ->  2276 numeral 12   Prestaciones sociales
+Sample File!A146	  Form 220 casilla 43  ->  2276 numeral 13   Viaticos
+Sample File!A147	  Form 220 casilla 44  ->  2276 numeral 14   Gastos de representacion
+Sample File!A148	  Form 220 casilla 45  ->  2276 numeral 15   Compensaciones trabajo asociado
+Sample File!A149	  Form 220 casilla 46  ->  2276 numeral 17   Otros pagos
+Sample File!A150	  Form 220 casilla 47  ->  2276 numeral 18   Cesantias PAGADAS al empleado
+Sample File!A151	  Form 220 casilla 49  ->  2276 numeral 19   Cesantias CONSIGNADAS al fondo   <== NOT 20
+Sample File!A152	  Form 220 casilla 48  ->  2276 numeral 20   Cesantias REGIMEN TRADICIONAL    <== NOT 19
+Sample File!A153	  Form 220 casilla 50  ->  2276 numeral 21   Pensiones
+Sample File!A154	  Form 220 casilla 51  ->  2276 numeral 16   Apoyos economicos educativos
+Sample File!A155	  Form 220 casilla 52  ->  2276 numeral 22   Total ingresos brutos
+Sample File!A156	  Form 220 casilla 53  ->  2276 numeral 23   Aportes obligatorios salud
+Sample File!A157	  Form 220 casilla 54  ->  2276 numeral 24   Aportes obligatorios pension y FSP
+Sample File!A158	  Form 220 casilla 55  ->  2276 numeral 25   Aportes voluntarios RAIS
+Sample File!A159	  Form 220 casilla 56  ->  2276 numeral 26   Aportes voluntarios fondos pensiones
+Sample File!A160	  Form 220 casilla 57  ->  2276 numeral 27   Aportes AFC
+Sample File!A161	  Form 220 casilla 58  ->  2276 numeral 28   Aportes AVC
+Sample File!A162	  Form 220 casilla 59  ->  2276 numeral 33   Ingreso laboral promedio 6 meses
+Sample File!A163	  Form 220 casilla 60  ->  2276 numeral 29   Retenciones practicadas
+Sample File!A164	  Form 220 casillas 79-82 -> 2276 numeral 34 Dependiente economico
+Sample File!A166	THE TWO HIGHLIGHTED LINES ARE TRANSPOSED. A positional mapping - 47 to 18,
+Sample File!A167	48 to 19, 49 to 20 - swaps the fund deposit and the traditional-regime amount
+Sample File!A168	in the information return. There is also a Form 220 concept with NO 2276
+Sample File!A169	counterpart in this list (the meal payments UP TO 41 UVT, which 2276 reports
+Sample File!A170	separately at numeral 32 as informative and Form 220 does not report at all)
+Sample File!A171	and a 2276 concept with no Form 220 counterpart (numeral 6, emolumentos
+Sample File!A172	eclesiasticos, which Form 220 folds into casilla 39).

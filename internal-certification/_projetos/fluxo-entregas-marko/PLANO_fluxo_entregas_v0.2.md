@@ -27,6 +27,7 @@
   - os hubs e as skills de cada país.
 - **Como:** um documento por país (`paises/<CC>_fluxo_entregas.md`), preenchido direto com o que já temos. Perguntas ao BAU e ao Dev só para o que o arquivo não mostra. 1º país: [[paises/NO_fluxo_entregas|Noruega]] (29/10).
 
+- **Linha de base vigente (29/10): [[TAP_fluxo_entregas]].** Formato = guia do Vietnã da Manju. Este plano e o CAMINHO ficam como histórico.
 - **Caminho do 0 ao 100% (29/10):** [[CAMINHO_0_a_100]]. Hoje estamos em 24% nos 12 países. O caminho tem 4 frentes em paralelo (pesquisa com subagentes, onda BAU/Dev, garimpo com `buscar.py`, gerador do relatório) e marcos até 09/11.
 
 ## Mudança de 29/10 (decisão do usuário)

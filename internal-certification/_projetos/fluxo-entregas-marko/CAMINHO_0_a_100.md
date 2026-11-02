@@ -32,6 +32,21 @@ Cada item vale 1, ½ (só parte das entregas ou sem fonte para tudo) ou 0.
 
 **Leitura:** o item mais atrasado é o I2 ("como deveria ser"), que só depende de nós. O I5 está quase completo nos 7 países com pacote. O I3 e o I4 dependem das respostas do BAU e do Dev.
 
+### 2.1 Conferência contra a fonte (29/10, weekly 27/10, 10:16–13:59, relida)
+- **Certo:**
+  - comparar o certo com o de hoje (12:21);
+  - pesquisa nossa como base e BAU "only for your understanding" (12:21);
+  - sistema × cliente × autoridade, com agente registrado, XML autorizado e assinado pelo cliente e transmitido pela Mercans (10:41–11:30);
+  - plano com status e data de fim (13:08).
+- **Corrigir 1, formato:** a Manju documenta um "step by step guide of the payroll filings" (10:16). O documento da NO está em tabela por ator; falta a sequência numerada de passos de cada entrega. Os próximos países seguem passo a passo.
+- **Corrigir 2, a lista de entregas:** o pedido é "whatever filings we are making" (13:08), ou seja, todas as entregas de payroll. Por isso o I1 sai do CCG, do SIR e da skill de cada país, não dos pacotes da certificação, que mostram só 1 entrega por país.
+- **Corrigir 3, a medida:** o núcleo do pedido é o I2, o I3 e o I4. O I5 (validação) é "no que for possível" (nota, §4.5). Sem o I5, o avanço real do núcleo é de **~10%**:
+  - NO: 50%;
+  - UK, DK, UA e KZ: 17% cada;
+  - SE, NL e os 5 sem pacote: 0%;
+  - conta: (50 + 4 × 17) / 12 = 9,8%.
+- **A confirmar com o usuário:** os "nossos países" são os 12 da certificação. Espanha e Lituânia estão em produção e ficaram de fora.
+
 ## 3. O roteiro mais curto: 4 frentes ao mesmo tempo
 
 | Frente | O que faz | Depende de | Como acelera |

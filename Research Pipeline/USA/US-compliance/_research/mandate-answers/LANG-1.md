@@ -1,0 +1,23 @@
+# LANG-1 — US-MQ-03 (language) and US-MQ-05(c) (transit / workforce levies) — AK AL AR AZ CO CT DE FL GA
+
+Run 2026-10-30. Sources: statute or agency text read in Chrome, or Wayback 2026 copy saved under `00-official-sources/pdfs/<UF>/` and searched locally. Shard: `00-official-sources/_register-shards/mandate-LANG-1.csv` (26 rows, ids `US-<UF>L-NNN`).
+Budget used: about 8-14 page reads per state. Search-engine snippets were used only to find URLs, never as a source.
+
+| state | A (US-MQ-03 language) | B (US-MQ-05 c: transit / workforce levy outside SUI) | register ids | confidence |
+|---|---|---|---|---|
+| AK | no language clause in AS 23.10.068(c), AS 23.10.105, 8 AAC 15.160(h) (122-page pamphlet searched) | no transit levy located; employee STEP 0.10% / vocational 0.25% are credited against employee UI (net nil); SB 217 employer STEP 0.4% from 2027 unread; Tax Division list unreadable | US-AKL-001, -002 | A high; B medium |
+| AL | agency states Alabama has no state wage and hour laws; no language clause (no cited provision exists) | none: only 0.06% Employment Security Enhancement Assessment inside UC; no transit or training levy | US-ALL-001, -002 | A medium-high (paid sick leave statute not separately read); B medium-high |
+| AR | no language clause in 11-4-216/-217/-401 to -405 (2020 compilation); UI poster offered in en/es/vi/lo by agency, no statutory duty read | UI only (Stabilization 0.2%); no transit or training levy on the UI page; DFA list not read | US-ARL-001, -002, -003 | A medium; B low-medium |
+| AZ | rule: A.R.S. 23-375(B) sick-time notice "in English, Spanish, and any language that is deemed appropriate by the commission" (D: model notices likewise). 23-351 and 23-364: no language clause | none found: DES pages show UI tax only; UIOF from 2027 | US-AZL-001, -002, -003 | A high; B medium |
+| CO | rule: C.R.S. 8-13.3-408(2) sick-leave notice and poster in English plus first language of at least 5% of workforce. Sector rules: 8-4-117(1)(b) migratory laborers (language fluent), 8-4-126(4)(f) and 8-4-127 delivery/transport network drivers. 8-4-103 pay statement: none | yes, inside UI: employer Support Surcharge (8-76-102.5(3)(a)(IV): employment support fund, benefit recovery fund, employment and training technology fund) plus Solvency Surcharge when triggered; no transit payroll tax; DOR list not read | US-COL-001, -002, -003, -004 | A high (statute rev. 2023-08 for HFWA; COMPS Order and posters page not read); B medium |
+| CT | rule: Conn. Gen. Stat. 31-57w(b) sick-leave poster "in both English and Spanish" (+ written notice at hire); 31-57g(c)(C) offer "in native language or any other language in which fluent" (Bradley Airport service-contract workers). 31-13a: none | none found; UI (fund solvency 1.0%) and employee CT Paid Leave only; tax-rate and DRS list pages unreadable | US-CTL-001, -002, -003 | A high; B low-medium |
+| DE | rule: 19 Del. C. 3710(c) paid-leave poster in English, Spanish and any first language of at least 5% of workforce (if Department provided). 1108 notice and pay statement: none | yes: Operations and Technology assessment 0.2% (2026), 0.175% from 2027 (3350B, UI administration); training tax (Blue Collar Jobs Program, employer assessed) exists per DOL page but statute, rate and base NOT LOCATED | US-DEL-001, -002, -003, -004 | A high; B: O&T high, training tax rate open |
+| FL | rule: Fla. Stat. 448.109(3)(a) minimum wage poster in English and Spanish. 448.24 labor-pool itemized statement: none; no general pay-statement statute | none: DOR taxes list (to "Severance") has only Reemployment | US-FLL-001, -002, -003 | A high; B medium-high |
+| GA | no language clause in 34-7-2 (read on Justia mirror, tier B); no pay-statement or sick-leave notice statute cited | none located; UI FAQ summariser only, DOR landing page has no list | US-GAL-001, -002 | A medium; B low-medium |
+
+## Not answered or weak (for the owner / next pass)
+- DE training tax: find the statute, rate and wage base (candidate: Blue Collar Jobs Fund; not in 19 Del. C. ch.33 text read).
+- CO: COMPS Order and CDLE posters page not read from primary text (PDF returned as HTML via Wayback); the HFWA 5% rule is statutory and already answers the sick-leave notice.
+- Revenue-agency full tax lists not read for AR, AZ, CO, CT, GA, AK (pages unreadable or not located); B for those states rests on the UI/workforce agency pages. Claim "none" accordingly, not "proven absent".
+- GA statute read on Justia (tier B); an official-host read would lift it to A.1.
+- Two-language rules found are sick-leave or minimum-wage posters, not pay statements: no state in this set requires the payslip itself in another language.

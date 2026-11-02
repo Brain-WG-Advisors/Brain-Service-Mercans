@@ -21,4 +21,4 @@ Esta pasta é a janela **Validação CO**. Vale tudo do `CLAUDE.md` da raiz do c
 ## Regras desta frente
 - Trabalho em `Research Pipeline/Colombia/2026-10-29-validacao-research/` com `CONFERENCIA.md`.
 - Sem dados pessoais. Nada vai a Drive, ticket ou e-mail sem ok do usuário nesta janela.
-- Escreve só o seu `estado.md`, a pasta acima e, com Edit pontual, `paises/Colombia.md`, `correcoes.md` e `log.md`. "Fecha a sessão": `sessoes/AAAA-MM-DD-validacaoco.md`. Sem commit. Resumos à janela geral (`brain-service-5b`) por SendMessage.
+- Escreve só o seu `estado.md`, a pasta acima e, com Edit pontual, `paises/Colombia.md`, `correcoes.md` e `log.md`. "Fecha a sessão": `sessoes/AAAA-MM-DD-validacaoco.md`. Sem commit. Não mandar resumo à janela geral (o painel lê cada rodada sozinho); SendMessage à `brain-service-5b` só para pedir commit ou coordenação.

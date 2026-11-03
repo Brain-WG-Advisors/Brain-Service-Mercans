@@ -1,14 +1,15 @@
 # Annex NJ: New Jersey
 
+
 United States Country Configuration Guide, jurisdiction annex NJ. Tax year 2026; currency USD (two decimal places).
 
-## NJ.0 Scope of this annex
+**Scope of this annex.**
 
-This annex holds the New Jersey layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC are out of scope. The pay statement is issued in English.
+This annex holds the New Jersey layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. The pay statement is issued in English.
 
-In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register (00-official-sources/legal-basis-register.csv), with the authority and address listed in section NJ.20 (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
+In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register, with the authority and address listed in section NJ.S (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
 
-## NJ.1 Jurisdiction layer
+**Jurisdiction layer.**
 
 | Item | Value |
 |---|---|
@@ -17,14 +18,14 @@ In every table, *Valid from* and *Valid to* give the period in which the value a
 
 Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = state withholding with no local layer remitted separately; T4 = a local layer remitted to a separate local authority on its own return.
 
-## NJ.2 Configuration decisions
+**Configuration decisions.**
 
 - Values published for 2027 (minimum wages, unemployment, disability and family-leave rates and wage bases) are listed with a 2027-01-01 start; configure them as dated rows, not as 2026 values.
 - The state gross income tax base differs from the federal base: 403(b) and 457 deferrals are taxable ([[FACT:nj.bik.nj.403b_457.taxable=True]]), HSA contributions are not excluded ([[FACT:nj.bik.nj.hsa.excluded=False]]) and dependent-care assistance is taxable ([[FACT:nj.bik.nj.dependent_care_129.taxable=True]]). The unemployment, disability and family-leave base includes 401(k) deferrals ([[FACT:nj.sui.wages.401k_included=True]]) and cafeteria-plan salary reductions ([[FACT:nj.sui.wages.section125_included=True]]).
 - The Newark and Jersey City payroll taxes ([[FACT:nj.pit.local.newark.employer_payroll_tax.rate=1]] and [[FACT:nj.pit.local.jersey_city.employer_payroll_tax.rate=1]] percent) are paid by the employer and may not be deducted from employee pay; they are filed with the city (tier T4).
 - Quarterly wage reports: build to the stricter Department of Labor rule, with no weekend or holiday extension (`nj.report.wr30.due`).
 
-## NJ.3 Employment and labour code
+## NJ.1 Employment and labour code
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -40,14 +41,14 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nj.minwage.tipped.cash_wage` | [[FACT:nj.minwage.tipped.cash_wage=6.61]] USD | 2027-01-01 | 2027-12-31 | US-NJS5-008 (A.2, NJ Department of Labor and Workforce Development) | [[FACT:nj.minwage.tipped.cash_wage=6.61]] + [[FACT:nj.labour.tip_credit.max.hourly=9.87]] = [[FACT:nj.minwage.hourly=16.48]] |
 | `nj.labour.tip_credit.max.hourly` | [[FACT:nj.labour.tip_credit.max.hourly=9.87]] USD | 2026-01-01 | 2026-12-31 | US-NJS5-009 (A.2, NJ Department of Labor and Workforce Development) | fixed; stays [[FACT:nj.labour.tip_credit.max.hourly=9.87]] in 2027 |
 | `nj.overtime.weekly_threshold_hours` | [[FACT:nj.overtime.weekly_threshold_hours=40]] hours | 2026-01-01 | open | US-NJS5-012 (A.3, NJ Department of Labor and Workforce Development, Wage and Hour Compliance) | 7-day workweek; no daily OT |
-| `nj.overtime.premium.multiplier` | [[FACT:nj.overtime.premium.multiplier=1.5]] ratio | 2026-01-01 | open | US-NJS5-012 (A.3, NJ Department of Labor and Workforce Development, Wage and Hour Compliance) | - |
+| `nj.overtime.premium.multiplier` | [[FACT:nj.overtime.premium.multiplier=1.5]] ratio | 2026-01-01 | open | US-NJS5-025 (A.2, NJ Department of Labor and Workforce Development) | - |
 | `nj.pay_frequency.rule` | [[FACT:nj.pay_frequency.rule=at least twice each calendar month; period ends max 10 working days before payday]] | 1965-01-01 | open | US-NJS5-001 (A.1, NJ Legislature (text as published by NJ DOL Wage and Hour Compliance, Selected NJ State Labor Laws)) | exempt classes may be monthly |
 | `nj.labour.direct_deposit.consent_required` | [[FACT:nj.labour.direct_deposit.consent_required=True]] | 1965-01-01 | open | US-NJS5-001 (A.1, NJ Legislature (text as published by NJ DOL Wage and Hour Compliance, Selected NJ State Labor Laws)) | written uncoerced, revocable; paycard same plus fee disclosure, one free withdrawal, opt-out |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.labour.domestic_workers_rule`): DWBR chapter number and rule adoption status unconfirmed. To close: NJ Register adoption notice.
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.labour.minor_hours`): Minor hour limits not read. To close: DOL youth-employment page (N.J.S.A. 34:2-21.2).
+- Not configured in this release [[GAP:RQ-106]]: DWBR chapter number and rule adoption status unconfirmed.
+- Not configured in this release [[GAP:RQ-107]]: Minor hour limits not read.
 
-## NJ.4 State income tax withholding
+## NJ.2 Income tax withholding
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -56,14 +57,14 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nj.pit.allowance.annual` | [[FACT:nj.pit.allowance.annual=1000]] USD | 2026-01-01 | open | US-NJP51-001 (A.2, NJ Division of Taxation) | weekly 19.20, biweekly 38.40, semimonthly 41.60, monthly 83.30 |
 | `nj.pit.supplemental.method` | [[FACT:nj.pit.supplemental.method=combined with regular wages, or without allowances if separate; no flat rate]] | 2026-01-01 | open | US-NJP51-001 (A.2, NJ Division of Taxation) | accumulated sick/vacation payouts supplemental |
 
-## NJ.5 Non-residents, residents working elsewhere and reciprocity
+## NJ.2b Non-resident regime and reciprocity
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nj.reciprocity.states` | [[FACT:nj.reciprocity.states=PA (Form NJ-165)]] | 2026-01-01 | open | US-NJP51-001 (A.2, NJ Division of Taxation) | does not cover PA local wage taxes; NJ-165 also for military spouses |
 | `nj.pit.resident.other_state_rule` | [[FACT:nj.pit.resident.other_state_rule=withhold all wages; reduce by other state's withholding; none if other state's withholding at least as high]] | 2026-01-01 | open | US-NJP51-001 (A.2, NJ Division of Taxation) | convenience test since TY2023 for residents of states using one |
 
-## NJ.6 Local wage taxes
+## NJ.2c Local wage taxes
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -71,9 +72,9 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nj.pit.local.newark.employer_payroll_tax.rate` | [[FACT:nj.pit.local.newark.employer_payroll_tax.rate=1]] percent | 2026-01-01 | open | US-NJP6-001 (A.2, City of Jersey City (Tax Collector)) | employer-paid; no deduction from pay; quarterly |
 | `nj.pit.local.jersey_city.employer_payroll_tax.rate` | [[FACT:nj.pit.local.jersey_city.employer_payroll_tax.rate=1]] percent | 2026-01-01 | open | US-NJP6-002 (A.2, City of Newark, Division of Tax Abatement and Special Taxes) | employer-paid; quarterly |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.pit.local.sb4219_status`): The chapter number and approval date of S.B. 4219 rest on secondary sources only. To close: njleg bill-search page or the chaptered law text (browser pass).
+- Not configured in this release [[GAP:RQ-108]]: The chapter number and approval date of S.B. 4219 rest on secondary sources only.
 
-## NJ.7 Unemployment insurance, disability and paid-leave contributions, other payroll levies
+## NJ.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -95,26 +96,26 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nj.ui.rate.employer_total.max` | [[FACT:nj.ui.rate.employer_total.max=5.8]] percent | 2026-07-01 | 2027-06-30 | US-NJS5-023 (A.2, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | UI part 0.3825-5.6825 |
 | `nj.ui.saww.caliber` | [[FACT:nj.ui.saww.caliber=1598.66]] USD | 2026-01-01 | 2026-12-31 | US-NJS5-011 (A.2, NJ Department of Labor and Workforce Development) | 2024 SAWW (second preceding year) drives 2026 bases and maxima |
 | `nj.ui.base_week.amount` | [[FACT:nj.ui.base_week.amount=310]] USD | 2026-01-01 | 2026-12-31 | US-NJS5-011 (A.2, NJ Department of Labor and Workforce Development) | 20 x 15.49 rounded up |
-| `nj.ui.base_week.amount` | [[FACT:nj.ui.base_week.amount=319]] USD | 2027-01-01 | open | US-NJS5-011 (A.2, NJ Department of Labor and Workforce Development) | 20 x [[FACT:nj.minwage.hourly=15.92]] rounded up |
+| `nj.ui.base_week.amount` | [[FACT:nj.ui.base_week.amount=319]] USD | 2027-01-01 | open | US-NJS5-010 (A.2, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | 20 x [[FACT:nj.minwage.hourly=15.92]] rounded up |
 | `nj.sui.wages.401k_included` | [[FACT:nj.sui.wages.401k_included=True]] | 2026-01-01 | open | US-NJS5-017 (A.3, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | 401(k) deferrals and cafeteria-plan reductions are included where cash is electable; dependent-care assistance and personal use of a company car are also included. |
 | `nj.sui.wages.section125_included` | [[FACT:nj.sui.wages.section125_included=True]] | 2026-01-01 | open | US-NJS5-017 (A.3, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | - |
 | `nj.ui.in_kind.room_board.weekly` | [[FACT:nj.ui.in_kind.room_board.weekly=301.5]] USD | 2026-01-01 | 2026-12-31 | US-NJS5-010 (A.2, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | only when employer assigns no value; lodging [[FACT:nj.bik.lodging.weekly=129.20]]/week; meals [[FACT:nj.bik.meals.daily=34.50]]/day |
 | `nj.ui.in_kind.room_board.weekly` | [[FACT:nj.ui.in_kind.room_board.weekly=312.3]] USD | 2027-01-01 | open | US-NJS5-010 (A.2, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | lodging 133.90; meals 35.70 |
 | `nj.tdi.max_weekly_benefit` | [[FACT:nj.tdi.max_weekly_benefit=1119]] USD | 2026-01-01 | 2026-12-31 | US-NJS5-010 (A.2, NJ Department of Labor and Workforce Development, Division of Employer Accounts) | 70% x SAWW |
 | `nj.ui.employee.max_annual` | [[FACT:nj.ui.employee.max_annual=190.4]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | 0.425% x [[FACT:nj.sui.wage_base=44,800]] (Treasury M-6025, second authority) |
-| `nj.tdi.employee.max_annual` | [[FACT:nj.tdi.employee.max_annual=325.09]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | 0.19% x [[FACT:nj.tdi_fli.employee.wage_base.annual=171,100]] |
-| `nj.fli.employee.max_annual` | [[FACT:nj.fli.employee.max_annual=393.53]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | 0.23% x [[FACT:nj.tdi_fli.employee.wage_base.annual=171,100]] |
+| `nj.tdi.employee.max_annual` | [[FACT:nj.tdi.employee.max_annual=325.09]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | [[FACT:nj.tdi.employee.rate=0.19]]% x [[FACT:nj.tdi_fli.employee.wage_base.annual=171,100]] |
+| `nj.fli.employee.max_annual` | [[FACT:nj.fli.employee.max_annual=393.53]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | [[FACT:nj.fli.employee.rate=0.23]]% x [[FACT:nj.tdi_fli.employee.wage_base.annual=171,100]] |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.ui.multipliers`): The multiples of the state average weekly wage and the rounding used to set the unemployment, disability and family-leave wage bases were inferred from the published figures, not read in the statute. To close: N.J.S.A. 43:21-7(b)(3) and 43:21-3(c) text.
+- Not configured in this release [[GAP:RQ-109]]: The multiples of the state average weekly wage and the rounding used to set the unemployment, disability and family-leave wage bases were inferred from the published figures, not read in the statute.
 
-## NJ.8 Pay statement
+## NJ.4 Pay statement
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nj.payslip.items` | [[FACT:nj.payslip.items=deductions statement; employers 10+ add gross, net, rate and hours]] | 2026-01-01 | open | US-NJP8-001 (A.2, NJ Department of Labor and Workforce Development, Wage and Hour (nj.gov/labor)) | 34:11-4.6(c); electronic unless employee asks paper |
 | `nj.payslip.full_content.employer_threshold` | [[FACT:nj.payslip.full_content.employer_threshold=10]] | 2026-01-01 | open | US-NJP8-001 (A.2, NJ Department of Labor and Workforce Development, Wage and Hour (nj.gov/labor)) | - |
 
-## NJ.9 Statutory reporting
+## NJ.5 Statutory reporting
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -129,9 +130,9 @@ Rules:
 
 - Local: Newark and Jersey City quarterly employer payroll tax returns. (US-NJP6-001, US-NJS5-013)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.report.due_date_weekend`): NJ-WT next-business-day vs DOL no-extension conflict for NJ-927/WR-30. To close: Written Treasury/DOL statement; build to the stricter DOL rule meanwhile.
+- Not configured in this release [[GAP:RQ-110]]: NJ-WT next-business-day vs DOL no-extension conflict for NJ-927/WR-30.
 
-## NJ.10 Leave
+## NJ.6 Leave
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -142,9 +143,9 @@ Rules:
 
 - Vacation and holiday pay are not required by NJ law; if offered, the policy is enforceable. Jury duty: unpaid time off is protected. (US-NJS5-012)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.leave.esl.termination`): ESL carry-over cap and treatment at termination not read in statute. To close: N.J.S.A. 34:11D-2/-3 or mysickdays.nj.gov FAQ.
+- Not configured in this release [[GAP:RQ-111]]: ESL carry-over cap and treatment at termination not read in statute.
 
-## NJ.11 Termination and final pay
+## NJ.7 Termination and final pay
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -156,10 +157,10 @@ Rules:
 
 - Deductions from final pay for unreturned property: prohibited. (US-NJS5-012)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.term.bc10.electronic_copy`): Whether employers must also send the Department of Labor an electronic copy of Form BC-10 rests on secondary sources only. To close: N.J.S.A. 43:21-6(a) amended text or DOL BC-10 page.
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.term.warn.statute`): NJ WARN statute text and severance payment timing not read. To close: N.J.S.A. 34:21-2 text.
+- Not configured in this release [[GAP:RQ-112]]: Whether employers must also send the Department of Labor an electronic copy of Form BC-10 rests on secondary sources only.
+- Not configured in this release [[GAP:RQ-113]]: NJ WARN statute text and severance payment timing not read.
 
-## NJ.12 Taxable wages and benefits in kind
+## NJ.8 Benefits in kind and taxable wages
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -168,7 +169,7 @@ Rules:
 | `nj.bik.nj.dependent_care_129.taxable` | [[FACT:nj.bik.nj.dependent_care_129.taxable=True]] | 2025-09-01 | open | US-NJS5-006 (A.2, NJ Division of Taxation) | also IRC 137 adoption |
 | `nj.bik.nj.section125.excluded` | [[FACT:nj.bik.nj.section125.excluded=only plans requiring minimum medical/life/LTD purchase or listed cash-option cases]] | 2025-09-01 | open | US-NJS5-006 (A.2, NJ Division of Taxation) | other cafeteria contributions taxable |
 
-## NJ.13 Deductions and garnishments
+## NJ.9 Deductions and garnishments
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -176,33 +177,39 @@ Rules:
 | `nj.garn.consumer.floor.weekly` | [[FACT:nj.garn.consumer.floor.weekly=217.5]] USD | 2022-07-01 | open | US-NJS5-021 (A.2, New Jersey Judiciary (Superior Court Clerk)) | 30 x [[FACT:fed.minwage.hourly=7.25]] |
 | `nj.deduction.political.weekly_max` | [[FACT:nj.deduction.political.weekly_max=5]] USD | 2026-01-01 | open | US-NJS5-004 (A.1, NJ Legislature / NJ DOL (text as published by NJ DOL)) | one committee |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.garn.statute_and_iwo`): 2A:17-56 above-10% orders and NJ child-support IWO fee/priority not read. To close: Statute (browser pass) and CSESP NJ LSP Employer Guide.
+- Not configured in this release [[GAP:RQ-114]]: 2A:17-56 above-10% orders and NJ child-support IWO fee/priority not read.
 
-## NJ.14 Prevailing wage and collective agreements
+## NJ.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nj.prevailing_wage.exists` | [[FACT:nj.prevailing_wage.exists=True]] | 2026-01-01 | open | US-NJP51-007 (A.2, NJ Dept of Labor and Workforce Development) | certified payroll via NJ Wage Hub within 10 days of payment |
 
-## NJ.15 Indexation
+## NJ.11 Indexation
 
 Indexation of each value is stated in the note of the value concerned.
 
-## NJ.16 Payroll data protection and records
+## NJ.12 Payroll data protection and records
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nj.records.wage_hour.retention_years` | [[FACT:nj.records.wage_hour.retention_years=6]] years | 2026-01-01 | open | US-NJS5-022 (A.1, NJ Department of Labor and Workforce Development (text as published, Selected NJ State Labor Laws)) | UI/TDI current + 4 prior years; ESL 5 years |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.data.ssn.pay_statement`): SSN truncation/printing limits on pay statements (C.56:8-164) not obtained. To close: P.L.2005 c.226 text on pub.njleg.gov or the statutes database.
+- Not configured in this release [[GAP:RQ-115]]: SSN truncation/printing limits on pay statements (C.56:8-164) not obtained.
 
-## NJ.17 Legal change in force or enacted
+## NJ.13 Live legal change
 
 No New Jersey rule is configured in this domain; the federal treatment in Annex FED applies.
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.live.bulletin_sweep`): The 2026 bulletin indexes of the Treasury and the Department of Labor returned errors, and the 2027 contribution-rate notice was not seen. To close: Division of Taxation notices index and DOL press index.
+- Not configured in this release [[GAP:RQ-116]]: The 2026 bulletin indexes of the Treasury and the Department of Labor returned errors, and the 2027 contribution-rate notice was not seen.
 
-## NJ.18 Special populations
+## NJ.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## NJ.15 Special populations
 
 - Domestic / household: NJ GIT withheld only where federal withholding applies. (US-NJS5-017, US-NJP51-001, US-NJS5-025)
 - Agricultural: crew-leader rule. (US-NJS5-009, US-NJS5-008, US-NJS5-017)
@@ -213,13 +220,13 @@ No New Jersey rule is configured in this domain; the federal treatment in Annex 
 - Nonresident aliens: No NJ-specific NRA withholding rule found in NJ-WT (contrast NC); Wages of aliens are UI-taxable under a valid SSN. (US-NJP51-001, US-NJS5-017)
 - Statutory employees: No state rule beyond federal found; Home-to-home commission salespersons are exempt from UI. (US-NJS5-017)
 - PA residents, military spouses: No NJ withholding with Form NJ-165 on file. (US-NJP51-001)
-- ⚠️ RESEARCH-GAP (non-blocking, `nj.special_populations.thresholds`): thresholds, amounts or conditions for these populations are stated in the research without a confirmed value record and are not configured from this annex: Domestic / household; Agricultural; Minors; Tipped; Government employees; Long-term care direct care staff; Small/seasonal employers (< 6 employees); ---. To close: one confirmed value per threshold, with its source row.
+- Not configured in this release [[GAP:RQ-117]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic / household; Agricultural; Minors; Tipped; Government employees; Long-term care direct care staff; Small/seasonal employers (< 6 employees); ---.
 
-## NJ.19 Language
+## NJ.16 Language
 
 - The pay statement and all filings are in English (owner decision US-OWN-006).
 
-## NJ.20 Sources
+## NJ.S Sources
 
 | Source | Authority |
 |---|---|
@@ -248,3 +255,4 @@ No New Jersey rule is configured in this domain; the federal treatment in Annex 
 | US-NJS5-022 | NJ Department of Labor and Workforce Development (text as published, Selected NJ State Labor Laws) |
 | US-NJS5-023 | NJ Department of Labor and Workforce Development, Division of Employer Accounts |
 | US-NJS5-024 | NJ Division of Taxation |
+| US-NJS5-025 | NJ Department of Labor and Workforce Development |

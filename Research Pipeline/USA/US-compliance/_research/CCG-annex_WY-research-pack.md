@@ -57,7 +57,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `wy.data.breach.redaction_digits` | 5 | 2026-01-01 |  | US-WYS5-015 | high |
 | `wy.pit.exists` | False | 2026-01-01 |  | US-WYP51-001 (promoted, Synthesis C) | high |
 | `wy.local_wage_tax.exists` | False | 2026-01-01 |  | US-WYP51-001 (promoted, Synthesis C) | high |
-| `wy.ui.rate.statutory_base` | 8.5 % | 2026-01-01 |  | US-WYP52-001 (promoted, Synthesis C) | high |
+| `wy.ui.rate.statutory_base` | 8.5 % | 2026-01-01 |  | US-WYB5-401 (promoted, Synthesis C) | high |
 | `wy.ui.rate.new_employer.floor` | 1 % | 2026-01-01 |  | US-WYP51-002 (promoted, Synthesis C) | high |
 | `wy.sui.employee.rate` | 0 % | 2026-01-01 |  | US-WYP51-002 (promoted, Synthesis C) | high |
 | `wy.sdi_pfml.exists` | False | 2026-01-01 |  | US-WYP51-004 (promoted, Synthesis C) | high |
@@ -117,7 +117,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Employer only.** Contributions "shall not be deducted from employee wages" (27-3-503(a)) [US-WYP51-002]. There is no employee UI contribution.
 - **Rates:**
   - Total rate = base rate + adjustment factors. The base rate is the benefit ratio, or the industry average for employers with under 3 years of experience.
-  - The statutory base rate is 8.5%, which also applies when registration is incomplete [US-WYP52-001].
+  - The statutory base rate is 8.5%, which also applies when registration is incomplete [US-WYB5-401].
   - A new employer pays the prior-year average rate of its industry plus the factors, never less than 1% plus the factors (27-3-503(f)) [US-WYP51-002].
   - Delinquent employers pay +2% [US-WYP9W-001].
   - The maximum is **10%**, re-derived: 8.5% base + the 1.5% cap on factors (a)+(b) = 10.0%. The DWS memo says the same: "statutory maximum tax rate of 10%" [US-WYS5-011, A.2].
@@ -166,7 +166,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - Form: the IRS W-4 or a DWS-approved equivalent.
   - The multistate single-state election is available.
   - Channel: the "Wyoming New Hire Reporting Center", newhire-reporting.com/wy-newhire [US-WYS5-010, A.3, partial]. The portal was unreachable (ACCESS gap).
-- **Registration:** Joint Business Registration in WYUI [US-WYP52-001].
+- **Registration:** Joint Business Registration in WYUI [US-WYB5-401].
 - **Third-party access:** POA form MODES-4444 (7/19) [US-WYR3-001].
 - Confidence: high on deadlines; medium on formats.
 

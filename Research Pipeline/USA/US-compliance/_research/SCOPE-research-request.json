@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.4.0",
+  "artifact": "SCOPE",
+  "unit": "scope_manifest",
+  "requested_by": "artifact-builder",
+  "round": 1,
+  "created_on": "2026-11-02",
+  "requests": [
+    {
+      "id": "RQ-01",
+      "key": "fed.fit.lock_in_letter.rule",
+      "location": "scope_manifest.json!integrations.inbound!entry not written",
+      "question": "Which IRS instrument (regulation section and the IRS employer page or publication) requires an employer to withhold federal income tax under an IRS lock-in letter that fixes an employee's maximum filing status and withholding, from which date after the letter, and may the employee's later Form W-4 override it?",
+      "why_blocking": "QA SCOPE-review-r1 finding 1 lists IRS lock-in letters as an inbound document with product_mapping_required true; no register row or fact supports it, so the inbound entry was not written. Non-blocking for Stage 2: the three sourced inbound documents (IWO, IRS levy, SUI rate notices) carry the F8 decision.",
+      "domain": "income_tax",
+      "acceptable_tier": "A.2",
+      "attempted_by_requester": [
+        "legal-basis-register.csv (2,670 rows) searched for 'lock-in' / 'lock in': no row",
+        "CCG-annex_FED-facts.json and m01-m13 facts: no key",
+        "MANDATE.md: no mention"
+      ],
+      "severity": "minor"
+    }
+  ]
+}

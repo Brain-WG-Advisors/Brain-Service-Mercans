@@ -55,14 +55,16 @@ All ids cited in the findings are `active` in the register.
 | `wa.labour.computer_professional.hourly` | 59.96 USD | 2026-01-01 | 2026-12-31 | US-WAS5-005 | high |
 | `wa.labour.computer_professional.hourly` | 62.06 USD | 2027-01-01 |  | US-WAS5-007 | high |
 | `wa.pay_frequency.rule` | at least monthly; pay day max 10 days after period end for shorter periods | 2026-01-01 |  | US-WAS5-004 | high |
-| `wa.pit.exists` | False | 2028-01-01 |  | US-WAS5-017 | high |
+| `wa.pit.exists` | False | 2026-01-01 | 2027-12-31 | US-WAS5-017 | high |
+| `wa.pit.high_income_tax.rate` | 9.9 % (assessment) | 2028-01-01 |  | US-WAS5-017 | high |
+| `wa.pit.high_income_tax.agi_threshold` | 1000000 USD | 2028-01-01 |  | US-WAS5-017 | high |
 | `wa.sui.wage_base` | 78200 USD | 2026-01-01 | 2026-12-31 | US-WAS5-012 | high |
 | `wa.ui.rate.min_total` | 0.27 % | 2026-01-01 | 2026-12-31 | US-WAS5-012 | high |
 | `wa.ui.rate.max_total` | 6.02 % | 2026-01-01 | 2026-12-31 | US-WAS5-012 | high |
 | `wa.ui.rate.new_employer.rule` | 115% of industry average, floor 1% | 2026-01-01 | 2026-12-31 | US-WAS5-029 | medium |
 | `wa.sui.employee.rate` | 0 % | 2026-01-01 | 2026-12-31 | US-WAS5-012 | high |
 | `wa.pfml.rate.total` | 1.13 % | 2026-01-01 | 2026-12-31 | US-WAS5-011 | high |
-| `wa.pfml.employee.share` | 71.43 % | 2026-01-01 | 2026-12-31 | US-WAS5-011 | high |
+| `wa.pfml.employee.share` | 71.43 % | 2026-01-01 | 2026-12-31 | US-WAB5-002 | high |
 | `wa.pfml.rate.total` | 1.2 % | 2027-01-01 |  | US-WAS5-015 | high |
 | `wa.pfml.employee.share` | 70.7 % | 2027-01-01 |  | US-WAS5-015 | high |
 | `wa.pfml.wage_cap.annual` | 184500 USD | 2026-01-01 | 2026-12-31 | US-WAS5-011 | high |
@@ -404,6 +406,12 @@ Facts added:
 Open questions closed: `wa.report.pfml_ltc.fields`.
 
 Open questions narrowed / added: `wa.ui_pfml_ltc.deferrals` (lines rewritten in the block below).
+
+## QA round 1 corrections (2026-11-02)
+
+- `wa.pit.exists` = False is dated 2026-01-01..2027-12-31 (was effective_from 2028-01-01, inverted). The SB 6346 tax from 2028 is two separate assessment-level facts (`wa.pit.high_income_tax.rate` 9.9%, `wa.pit.high_income_tax.agi_threshold` 1,000,000) [US-WAS5-017, DOR page re-read 2026-11-02].
+- `wa.pfml.employee.share`: 71.43% for 2026 rests on the Paid Leave employer page [A.2, US-WAB5-002] in CCG and WTC alike; 70.7% from 2027-01-01 on the ESD release [A.2, US-WAS5-015].
+- `wa.wc.supplemental_pension.rate` carries unit "USD per hour".
 
 ## Open questions
 

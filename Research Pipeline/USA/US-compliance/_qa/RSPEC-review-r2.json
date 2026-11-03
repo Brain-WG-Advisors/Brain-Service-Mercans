@@ -1,0 +1,344 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "RSPEC",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-03",
+ "_reviewed_file": "04-reports-spec/US-*-Spec.xlsx (20 workbooks), md5 equal to 04-reports-spec/_build/checks/md5_final.txt (20/20 re-hashed); bindings c7ff4161e2edc30bc8b987f6b5d04fc1 (1,557 rows, 590 keys, 327 register rows); RSPEC-facts dbd99f8f19a2245074084cc32b69789e; gaps.json 1da44aab264aa00018a5957ebdf82090; register de5fc2dd131c151724c38e07af4c738f at review start (ad4daaf9f97583458194d701c06ebfb5 after the two fixed_in_place edits); scope_manifest 8c1b7e8a191021db67d3edd8de5fb1ef; build-manifest db384f594904abd9109905fc68792937",
+ "_reviewer": "compliance-qa-auditor (fresh instance; authored no part of RSPEC, facts or register)",
+ "_built_by": "artifact-builder (r2 rebuild + polish) and compliance-source-hunter (agent 2 r1-fix)",
+ "_summary": "Of the 15 round-1 findings, 13 are closed, finding 5 is partly closed and finding 4 is still open for one key (rspec.co.w2_state.format). Structure and hygiene are clean: pre-flight 20/20, C12, C29 0 hits, C42/C43, C44 crosswalk 20/20, C56, C71 0 differences, Excel open 20/20, validate_contract 84 PASS, 0 error cells. C46 period-aware: 1,490 tags, 590 keys, 0 mismatches, 0 missing keys; the 2 non-2026 tags are labelled 2027. All worked examples recompute, and the independent regression diff matches the builder's tables cell for cell (331 + 74). The verdict is FAIL on F44. A clause-level check of form identifiers, channels, due dates and account formats found 19 consumed facts whose cited local copy does not carry the clause; round 1 matched number tokens only, so these passed there. One rule is wrong: the AZ 30-day extension belongs to A1-APR, not A1-R. Four majors: (1) decimal-fraction rates untagged in four federal returns (r1 finding 5 not generalised); (2) State rows print bare scalars with a wrong or missing unit, e.g. 'California: reporting rule: 1.3 employees'; (3) Report Matrix authority/channel/portal regressions from re-pointed citations (the WA L&I authority became the Code Reviser; the PA channel became paper); (4) the C35 exemption reason denies a validator its own source documents (AccuWage Online). Two register hygiene items were fixed in place.",
+ "_r1_findings_status": {
+  "1 (MO 20 days, US-MOS5-008)": "CLOSED: re-pointed to US-MOS5-001. Quote found in 4282_2026 p6 ('Within 20 days of hiring a new employee, please mail a copy of the completed Form MO W-4 to the Missouri Department of Revenue'). SDNH M60 and Report Matrix I51 cite US-MOS5-001; SIR-facts re-pointed too.",
+  "2 (SD/TN/WA/HI no-return basis)": "CLOSED: US-SD-001 ('does not impose a state income tax'), US-TNP51-001 (GEN-34 'no withholding requirements'), US-WAS5-017 ('does not currently have an individual income tax'), US-HIS7-001 (insured / self-insured plans, no State fund). All quotes found verbatim in the local copies.",
+  "3 (5 rows without local copy)": "CLOSED: local copies saved, md5 matching (US-FIL-002, US-FED-015, US-NH-006, US-MOP52-007, US-FIL-007). NY e-file / ACH / 50 USD penalty re-pointed to US-NYS5-010; quotes found. NH rests on a browser transcription of the DRA tax list (absence evidence); accepted.",
+  "4 (27 keys not located)": "26 CLOSED: quotes found; IN RS positions read from the table layout; OH 678 recounted from OHMuniRateTable.csv (678 rows / 678 FIPS in force on 2026-11-01). rspec.co.w2_state.format STILL OPEN (r2 finding 1).",
+  "5 (DERIVED hid percentages)": "PARTLY CLOSED: IRS-003 and IRS-004 K15 re-tagged; DERIVED is now integer-only. The same defect remains as decimal fractions in IRS-001/002/004/008 (r2 finding 3).",
+  "6 (33 one-sentence Field Explanations)": "CLOSED: all 33 cells now have 2-4 sentences covering content, origin, format and edge cases (sampled IRS-002 M9/M10, IRS-003 M9, WC-001 M3, DOR-003 M4, UI-001 M13). The polish completed 74 more. Independent count: 949 field rows; my splitter finds 1 below two sentences (IRS-004 M15, a reference row, acceptable).",
+  "7 (consumed_by 25 rows)": "CLOSED: all 327 bound register rows list RSPEC, except the new row US-WAS7-001 (r2 finding 8, fixed in place).",
+  "8 (12 rows without local copy)": "CLOSED: copies saved, md5 re-checked 12/12.",
+  "9 (IRS-004 M15 citation)": "CLOSED: the 2025 list is followed by [US-FEDS6-009], the DOL potential 2026 figures by [US-FEDS5-009].",
+  "10 (W-2 box map positions)": "CLOSED: cells cite [US-FEDS5-007] and [US-FEDS5-032]; positions verified in the EFW2 copy.",
+  "11 (MA PFML wording)": "CLOSED: M24 now reads 'contribution to DFML; the return channel and mechanics are not configured in this release', the same meaning as scope_manifest in_scope[12]; no channel named.",
+  "12 (DOR-002 RS-017..025 population rules)": "CLOSED: block 'CONDITIONAL FIELD RULES (State-defined RS fields)' in Population Rules A4/B5/B6.",
+  "13 (RSPEC-RQ-15 not in gaps.json)": "CLOSED: all 47 GAP ids cited in the 20 workbooks are in gaps.json.",
+  "14 (bracketed values untaggable)": "CLOSED: both values rephrased and tagged (IRS-006 File Structure A10; LOC-001 C36/M35).",
+  "15 (owner row + C35 reason)": "CLOSED as requested: US-OWN-010 added and the reason narrowed for FL RT / MI MiUI. The same reason has a new defect: r2 finding 6 (AccuWage)."
+ },
+ "_rulings_applied": {
+  "documented_limitations": "accepted as recorded in gaps.json (47 GAP ids, all present). Pittsburgh ET-1 2025 structure (US-PAS6-001, ended 2025-12-31) stays under RSPEC-RQ-12.",
+  "irs_2026_drafts": "accepted: every 941/944/943/940/941-X/1094-C/1095-C cell based on a draft carries the 'Per 2026 draft' notice. The 944/943 date of Feb 10, 2027 and the ACA dates were verified in the held drafts.",
+  "shared_C46_limitation": "accepted: shared C46 FAIL (410 mismatches / 178 unbound across all deliverables, one value per key). The gate is the auditor's period-aware re-implementation on the 20 specs.",
+  "derived_layout_integers": "applied literally: only integers with no '%' and no decimal part (57 coincidences of layout positions / TTOC codes with unrelated fact values accepted). Decimal-fraction rates are NOT derived (finding 3)."
+ },
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P2",
+   "check_id": "C30",
+   "location": {
+    "file": "_research/RSPEC-facts.json (also DD-8_sheets-facts.json, CCG-annex_FED-facts.json)",
+    "sheet_or_section": "facts register_id / verification_method of 19 keys, rendered in 04-reports-spec/US-*-Spec.xlsx",
+    "cell_or_line": "rspec.hi.wh_deposit.schedule: US-DOR-001!Report Matrix!E38, US-DOR-001!State Withholding Spec!M50; rspec.in.wh_return.format: US-DOR-001!Report Matrix!H42, US-DOR-001!State Withholding Spec!M63; rspec.ks.wh_deposit.report: US-DOR-001!Report Matrix!C43, US-DOR-001!Report Matrix!F43, US-DOR-001!State Withholding Spec!M68; rspec.ut.wh_return.form: US-DOR-001!Report Matrix!C71, US-DOR-001!Report Matrix!F71, US-DOR-001!State Withholding Spec!M130; rspec.wv.wh_return.form: US-DOR-001!Report Matrix!C76, US-DOR-001!Report Matrix!F76, US-DOR-001!State Withholding Spec!M138; dd.employer.state_account_ids: US-DOR-001!State Withholding Spec!M4, US-UI-001-!State UI Wage Report Spec!M3; rspec.al.annual_recon.form: US-DOR-002!Report Matrix!C27, US-DOR-002!Report Matrix!F27, US-DOR-002!State Annual Recon W-2 Spec!M29; rspec.az.annual_recon.form: US-DOR-002!Report Matrix!C29, US-DOR-002!Report Matrix!F29, US-DOR-002!State Annual Recon W-2 Spec!M39; rspec.co.w2_state.format: US-DOR-002!Report Matrix!H31, US-DOR-002!State Annual Recon W-2 Spec!M47; rspec.hi.w2_state.due: US-DOR-002!Report Matrix!F36, US-DOR-002!State Annual Recon W-2 Spec!M63; rspec.ks.w2_state.format: US-DOR-002!Report Matrix!H41, US-DOR-002!State Annual Recon W-2 Spec!M87; rspec.ut.w2_state.content: US-DOR-002!State Annual Recon W-2 Spec!M166; fed.reporting_agent.authorization: US-IRS-001!Form 941 Spec!M6; rspec.oh.school_district.returns: US-LOC-001!Report Matrix!C33, US-LOC-001!Report Matrix!F33, US-LOC-001!Local Tax Return Spec!M21; rspec.pa.local.eit_lst: US-LOC-001!Report Matrix!C35, US-LOC-001!Local Tax Return Spec!M29; rspec.dc.ui_qtr.form: US-UI-001-!Report Matrix!C34, US-UI-001-!Report Matrix!F34, US-UI-001-!State UI Wage Report Spec!M52; rspec.ms.ui_qtr.form: US-UI-001-!Report Matrix!C52, US-UI-001-!Report Matrix!F52, US-UI-001-!State UI Wage Report Spec!M114; rspec.nc.ui_qtr.form: US-UI-001-!Report Matrix!C54, US-UI-001-!Report Matrix!F54, US-UI-001-!State UI Wage Report Spec!M120; rspec.ok.ui_qtr.form: US-UI-001-!Report Matrix!C63, US-UI-001-!Report Matrix!F63, US-UI-001-!State UI Wage Report Spec!M146"
+   },
+   "problem": "F44 (100 % re-verification) is not met. 19 consumed facts carry a base-rule clause (form identifier, channel, due date or account format) that is not in the local copy of the register row they cite. Round 1 matched number tokens only, so these passed. This round adds a clause-level check: form identifiers and wording are searched in the cited copy, then every miss is read by hand. Per key: rspec.ut.wh_return.form: US-UTS5-013 (R865-9I) carries the quarterly/monthly/annual rule but not 'TC-941E' or 'e-file only'; both are on US-UTB5-002 (UT_USTC-withholding-overview_browser_2026-11-02.txt: 'Employers use form TC-941E ... All returns must be filed electronically'), whose consumed_by is empty | rspec.ut.w2_state.content: '14-digit Utah withholding account ending WTH' is not in R865-9I (only 'the employer's Utah withholding tax account number'); it is in Pub. 14 (pub-14_wayback-20260713004805.html: 'the 14-digit number ending in WTH') held under US-UTR3-001 / US-UTPIT-002 | dd.employer.state_account_ids: one fact cites only US-UTS5-013 but carries four State examples: UT 14-digit ...WTH (not in R865-9I; in Pub. 14, US-UTR3-001), KS 036-...-01 (K-2MT, US-KSS5-026), MD 8-digit CRN (MD guide, US-MDS5-021), IA 9-digit permit (US-IAS5-017/018); its note names the other rows, its register_id does not | rspec.co.w2_state.format: r1 key still open: the held CDOR XLSX template (US-COS5-013) has no 'Revenue Online' or '.txt'; the .txt upload through Revenue Online is in US-COS5-006 (Wage Withholding Tax Guide: 'upload an electronic file in a .txt format'); 'uploaded in Revenue Online' for the XLSX route is on the instructions web page, not held. Agent 2's _figure_located for this key quotes only the removed DR 1093 clause | rspec.al.annual_recon.form: 'due Jan 31' is not in the Form 10 e-file spec (US-ALS5-006); it is in the withholding booklet US-ALS5-001 ('On or before the last day of January each year ... must file Form A-3') | rspec.az.annual_recon.form: 'A1-R' is not in A.R.S. 43-412 (US-AZS5-022); it is in Pub. 701 (US-AZS5-025). The '30-day extension' clause is wrong for A1-R: finding 2 | fed.reporting_agent.authorization: 'Form 8655 (Rev. Jan 2024)' is not in Rev. Proc. 2012-32 (US-FED-008, local copy IRS_RevProc-2012-32_2026-11-03.pdf); the revision is carried by US-FED-028 / US-FED-009, which have no local copy | rspec.dc.ui_qtr.form: 'UC-30', 'UC-30-H' and 'DOES ESSP' are not in D.C. Code 51-104 (US-DCS5-018) and in no DC local copy on disk | rspec.hi.wh_deposit.schedule: thresholds are on the DOTAX page (US-HIS5-005); 'VP-1' is not. VP-1 is in Booklet A (US-HIS5-004: 'Remit taxes quarterly with Form VP-1') | rspec.ks.w2_state.format: 'KW-2CSV' is not in K-2MT (US-KSS5-026); it is in KW-100 (US-KSS5-001: 'formatted as outlined in the KW-2CSV') | rspec.ks.wh_deposit.report: 'KW-5' is not in K.S.A. 79-3298 (US-KSS5-007); it is named in KW-100 (US-KSS5-001) | rspec.ms.ui_qtr.form: 'UI-3' is not on the MDES due-date page (US-MSS5-012); it is on US-MSS5-014 ('Detail Wage information (Form UI-3)') | rspec.nc.ui_qtr.form: 'NCUI 101' is not on the DES page (US-NCS5-025) and in no NC local copy | rspec.oh.school_district.returns: 'agent WT 8655' is not in the bulk filing guide (US-FIL-012); Ohio Form WT-8655 is on US-OHB5-401 (OH_Tax_employer-withholding_2026-11-02.txt) | rspec.ok.ui_qtr.form: 'OES-3' and 'EZ Tax Express' are not in OES-047 (US-OKS5-020) and in no OK local copy | rspec.pa.local.eit_lst: 'W2-R by Feb 28' is not in the Act 511 text (US-PAS5-017); it is on the DCED page US-PAS5-018 ('On or before the last day of February ... W2-R Annual Reconciliation') | rspec.wv.wh_return.form: 'IT-101A' is not in the IT-101Q form (US-WVS5-014; the '<600 annually' rule is); IT-101A is in TSD-381 (US-WVS5-010) | rspec.in.wh_return.format: 'IDORWTH2016V1.0' is not in the business FAQ (US-INS5-012); it is on the DOR withholding page US-INS5-010 | rspec.hi.w2_state.due: 'Jan 31' is not in Tax Announcement 2025-05 (US-HIS5-006); it is on the DOTAX withholding page US-HIS5-005 ('no later than January 31st')",
+   "expected": "For each key, re-point to the row whose local copy carries the clause, as named above, or add that row as a second register_id. The consumed_by of each new target row must list RSPEC (US-UTB5-002 lists nothing). For clauses found in no local copy (DC UC-30 / UC-30-H / DOES ESSP; NC NCUI 101; OK OES-3 / EZ Tax Express; Form 8655 Rev. 1-2024), save a local copy with md5 and a figure-located quote, or remove the clause from the value. Use the r1 method: _figure_located with page + verbatim quote covering every clause kept in the value. Then the builder rebuilds, and the next auditor re-checks these 19 keys.",
+   "register_id": null,
+   "action": "routed_to_source_hunter",
+   "evidence": "Independent scripts in the QA scratchpad (qa_rspec_r2/f44v.py token check, formid.py identifier check, where.py search of every same-State register copy). PDFs are detected by magic bytes when saved with another extension: the US-NC-001 copy is a PDF named .html, and the DE Wilmington document is a PDF named .bin."
+  },
+  {
+   "pattern": "F18",
+   "severity": "blocker",
+   "pass": "P2",
+   "check_id": "C30",
+   "fact_key": "rspec.az.annual_recon.form",
+   "register_id": "US-AZP52-005",
+   "location": {
+    "file": "04-reports-spec/US-DOR-002-StateAnnualReconciliationW2-Spec.xlsx",
+    "sheet_or_section": "Report Matrix / State Annual Recon W-2 Spec",
+    "cell_or_line": "Report Matrix C29, F29; State Annual Recon W-2 Spec M39"
+   },
+   "problem": "Value 'A1-R with W-2s, due Jan 31 (30-day extension for good cause)'. The only local source with a 30-day extension is the ADOR filing-obligations page (US-AZP52-005, employer-withholding-filing-obligations_wayback.html): 'Employers may apply for a 30-day extension of time to file Arizona Form A1-APR'. A1-APR is the annual payment return, not A1-R. A.R.S. 43-412 (US-AZS5-022, the cited row) says only 'The department may extend the filing deadline on a showing of good cause'. As written, the rule gives A1-R filers a 30-day extension that no source grants.",
+   "expected": "'A1-R with W-2s, due Jan 31 [US-AZS5-025 Pub. 701]; the department may extend the deadline on a showing of good cause [US-AZS5-022]'. Keep the 30-day extension only on A1-APR [US-AZP52-005] if that return is in scope. Rebuild.",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": "F45",
+   "severity": "major",
+   "pass": "P4",
+   "check_id": "C46",
+   "location": {
+    "file": "04-reports-spec/US-IRS-001-Form941-Spec.xlsx",
+    "sheet_or_section": "Form 941 Spec / File Structure",
+    "cell_or_line": "B28-B31, M28-M31; File Structure A16-A19",
+    "_also": "US-IRS-002 Form 944 Spec B19-B22, M19-M22, File Structure A17-A20; US-IRS-004 Form 940 Spec B27-B28, M27-M28, File Structure A22-A23; US-IRS-008 Form 941-X Spec B24, B25, B27, B28, M24, M25, M27, M28, File Structure A18, A19, A21, A22; US-IRS-007 Field Options C6, D6 ('9.5% (indexed)')"
+   },
+   "problem": "r1 finding 5 is only partly closed. The builder re-tagged the percentages of IRS-003 and of IRS-004 K15. The same rates written as decimal fractions are still untagged in 46 line-label cells of four other returns: 'x 0.124', 'x 0.029', 'x 0.009' (941, 944); 'x 0.006', 'x 0.054' (940); 'x 0.124 or 0.062', 'x 0.029 or 0.0145', 'x 0.062', 'x 0.009' (941-X). '9.5% (indexed)' in IRS-007 Field Options C6/D6 is also untagged. The values are correct, but they are fact values outside a [[FACT:]] tag, so a rate change would not reach them. Neither the shared C46 nor spec_lint.py sees them, because both look for rate facts only in percent form. The ruling allows only integers with no '%' and no decimal part.",
+   "expected": "Render these labels the way IRS-003 now does, with us_common.retag_sum: e.g. 'x ([[FACT:fed.fica.oasdi.rate.employee=6.2]]% employee + [[FACT:fed.fica.oasdi.rate.employer=6.2]]% employer)'; FUTA 'x [[FACT:fed.futa.rate.net=0.6]]%' and 'x [[FACT:fed.futa.credit.max=5.4]]%'. Give the 1095-C code 1A text the tagged affordability fact, or drop the 9.5 figure. Extend spec_lint.py so that a decimal fraction equal to a rate fact / 100, or to the sum of two rate facts, counts as unbound. Report the new unbound count.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": "F5",
+   "severity": "major",
+   "pass": "P4",
+   "location": {
+    "file": "04-reports-spec/US-PFML-001-PFMLProgrammeReports-Spec.xlsx",
+    "sheet_or_section": "PFML SDI Report Spec",
+    "cell_or_line": "M9",
+    "_also": "US-WC-001 State Fund WC Spec M8, M9, M12, M15; US-DOR-003 Nevada MBT Spec M9, M10; US-DOR-004 Transit Levy Spec M15, M16; US-LOC-001 Local Tax Return Spec M34; US-LOC-002 City Employer Tax Spec M8, M11, M12, M15; US-LOC-003 Seattle PET SHT Spec M9; US-UI-001 State UI Wage Report Spec M53, M87, M131, M154, M158, M190"
+   },
+   "problem": "State rows that render a single scalar fact through a generic template show the number with a wrong unit, or with no unit or basis, so a developer cannot implement them. Examples: PFML-001 M9 reads 'California: reporting rule: 1.3 employees', but the CA SDI employee rate is 1.3 % of SDI wages. WC-001 M8/M9 present the New Mexico fee amounts as 'filing and deposit frequency rule: 2.55' and '2.25 employees'. DOR-003 M9 'Nevada: reporting rule: 1.17' is a rate with no %, and LOC-003 M9 '5.0' is the Social Housing Tax rate with no %. WC-001 M12 '0.018' and M15 '0.1912' have no 'USD per hour' and no basis. UI-001 M53/M87/M158/M190 give thresholds with no unit (employees? wage items?). All 21 cells were already present in r1 and were missed there. MSENT passes them because the second sentence is boilerplate ('Applied by the payroll when the situation named in the rule occurs.').",
+   "expected": "In us_state.py, write the unit and basis from the fact: rate -> '%' and the base; per-hour amount -> 'USD per hour worked'; fee -> 'USD per employee per quarter'; threshold -> the unit it counts. Choose the row label from the fact kind, so that a fee amount is never a 'frequency rule'. Example: 'California: SDI employee withholding rate [[FACT:ca.sdi.employee.rate=1.3]]% of SDI wages, no wage ceiling [US-CAP7-002]'. Regenerate; C71 must stay at 0 differences.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": "F27",
+   "severity": "major",
+   "pass": "P4",
+   "location": {
+    "file": "04-reports-spec/US-WC-001-StateFundWorkersComp-Spec.xlsx",
+    "sheet_or_section": "Report Matrix",
+    "cell_or_line": "D29, J29",
+    "_also": "US-DOR-002 Report Matrix G61, J61 (PA), G53, J53 (ND), J40 (IN)"
+   },
+   "problem": "These are regressions from the r2 rebuild that the regression guard does not explain. The generator takes Authority, channel and portal from the first cited row, so re-pointing citations changed their meaning. (a) WC-001 D29: the Authority of the Washington State-fund report changed from 'Washington State Department of Labor & Industries' to 'Washington State Legislature (Code Reviser)', and the J29 portal is now the RCW 51.16.140 page. (b) DOR-002 G61/J61 PA: the channel changed from 'file_upload (myPATH)' to 'paper (myPATH)', although the fact makes myPATH mandatory at 10 or more income statements. (c) DOR-002 G53/J53 ND: 'online_form, api (TAP)' was dropped and the 'portal' is now a guideline PDF. (d) DOR-002 J40 IN: the 'portal' is now the EFW2 guide PDF.",
+   "expected": "Take Authority and portal from the filing (scope_manifest / crosswalk, or a per-State portal map), not from the legal-basis row. WC-001 D29 = Washington State Department of Labor & Industries. PA channel = file_upload (myPATH), paper only below 10 statements. ND channel and portal = the r1 values (TAP), unless a source says otherwise. IN portal = INTIME. Add a regression-guard rule: any change in Report Matrix columns D, G or J needs an explicit reason.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": "F68",
+   "severity": "major",
+   "pass": "P1",
+   "location": {
+    "file": "_pipeline/build-manifest.json",
+    "sheet_or_section": "validation_exemptions.C35 (same text in C34, C36)",
+    "cell_or_line": "reason",
+    "_also": "00-official-sources/legal-basis-register.csv row US-OWN-010; 00-official-sources/MANDATE.md line 300 (US-MQ-11)"
+   },
+   "problem": "The reason says 'Federal EFW2 is a fixed-width SSA specification with no published validator schema'. The exemption's own source (26efw2.pdf; local copy FED_SSA_EFW2_TY2026_Pub42-007_2026-11-02.pdf, sec. 6.0, p. 82) documents an authority validator: 'AccuWage Online is a free internet application offered by SSA that enables you to check EFW2 ... and EFW2C ... formatted wage files for format correctness'. It requires a BSO User ID with the Employer Services profile. MANDATE US-MQ-11 also names 'SSA AccuWage for EFW2' and 'IRS MeF schemas for 94x'. The owner's default decision therefore rests on a false premise: the real limitation is credentialed access, not the absence of a validator.",
+   "expected": "Reword the reason: 'SSA AccuWage Online validates EFW2/EFW2C but requires a BSO account (Employer Services profile) that the pipeline does not hold; IRS MeF 94x schemas are distributed only to authorised e-file providers; no national validator for State formats; FL RT XSD and MI MiUI held but not wired'. Update US-OWN-010 to match and have the owner re-confirm. The scaffolder makes the edit, not the auditor. The SKIP may stand once the reason is true.",
+   "register_id": "US-OWN-010",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": {
+    "file": "04-reports-spec/US-SSA-001-FormW2W3-Spec.xlsx",
+    "sheet_or_section": "W-2 EFW2 Spec",
+    "cell_or_line": "M148, M149, M150 and 34 further cells (37 in total, RT/RF/RU total fields)"
+   },
+   "problem": "A template defect is copied into 37 cells: 'Taken from calculated by the file generator: ...'. The source-label slot of the generic origin sentence receives the value 'calculated by the file generator'. The defect was already present in r1 and was missed there.",
+   "expected": "'Calculated by the file generator: sum of the matching employee field over the RE batch.' Fix the origin template in us_w2.py so that a 'calculated' source is not prefixed by 'Taken from'.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": "F27",
+   "severity": "minor",
+   "pass": "P5",
+   "location": {
+    "file": "00-official-sources/legal-basis-register.csv",
+    "sheet_or_section": "column consumed_by",
+    "cell_or_line": "rows US-WAS7-001, US-FED-028, US-INS5-007, US-NY-008, US-FEDR3-005, US-FEDR3-007, US-WVP52-005, US-OWN-005, US-OWN-007, US-OWN-008"
+   },
+   "problem": "US-WAS7-001, a new row from agent 2, is bound by RSPEC (WC-WA-001, DOR-OR-004, WC matrix), but its consumed_by was only 'CCG/annex_WA', although agent 2 said every new target row lists its consumer. Nine further rows are cited in RSPEC cells without listing RSPEC: IRS-003 Report Matrix I27, DOR-001 M10, IRS-001 Payroll Scope Summary C8/C25, LOC-001 M35, and DOR-001/002/003 Payroll Scope Summary.",
+   "expected": "Append ';RSPEC' to consumed_by on the 10 rows. Done by the auditor (fixed_in_place); backup in _pipeline/_backup/register-pre-qa-rspec-r2-2026-11-03/; ledger line written.",
+   "register_id": "US-WAS7-001",
+   "action": "fixed_in_place"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": {
+    "file": "00-official-sources/legal-basis-register.csv",
+    "sheet_or_section": "column local_file",
+    "cell_or_line": "rows US-NCS6-001, US-NCS6-002"
+   },
+   "problem": "local_file held 'path (md5 ...)', so the path did not resolve mechanically. For this reason, the F44 re-check first reported the NC TY2026 NC-3 and RS layouts as missing files.",
+   "expected": "Path only in local_file; md5 in verification_method. Done by the auditor (fixed_in_place); md5 eed9f713... / 3afe908d... re-checked equal to the files.",
+   "register_id": "US-NCS6-001",
+   "action": "fixed_in_place"
+  }
+ ],
+ "checks_run": [
+  "C12",
+  "C28",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C44",
+  "C46",
+  "C56",
+  "C70",
+  "C71"
+ ],
+ "_checks_results": {
+  "preflight_validate_workbook_RSPEC": "PASS 20/20 (0 blocker/major/minor), run by the auditor",
+  "MSENT": "independent splitter: 949 core field rows, 1 below two sentences (IRS-004 M15, a reference row). Boilerplate second sentences are common (e.g. 149x 'The file generator writes it at the positions in column H ...'), and the unit defects of finding 4 hide behind them.",
+  "C12": "PASS (21 columns A-U on every core sheet, via pre-flight)",
+  "C29": "PASS: 0 hits for [placeholder]/TODO/TBD/FIXME/XXX/VERIFY No./to be confirmed/to be verified in all cells of the 20 workbooks",
+  "C30": "tier PASS (345 cited register ids: 318 active, 5 partial, 0 tier B/C; 2 ended rows: US-FEDS6-009, labelled 2025, and US-PAS6-001, under RQ-12). F44 FAIL (findings 1-2).",
+  "C42_C43": "PASS 0 hits / PASS package 1.0 (consistency_checks.py, run by the auditor)",
+  "C44": "shared SKIP (filing ids are descriptions). Crosswalk PASS: the 20 scope_manifest in-scope filing ids equal the crosswalk ids in order; 20 distinct files, all on disk.",
+  "C46_shared": "FAIL 410 / 178 across all deliverables (known one-value-per-key limitation, ruling in force)",
+  "C46_period_aware_auditor": "20 specs: 1,490 tags, 590 keys, 0 mismatches, 0 missing keys, 31 multi-period tags, 2 outside 2026 (NJ base week 319, labelled 'from 2027-01-01' / 'same wages in 2027'). 57 unbound integer layout/code coincidences accepted under the ruling. Decimal-fraction rates are invisible to the check (finding 3).",
+  "C56_C70": "PASS 934 fields / PASS (shared C70 recognises only 7 citations). Auditor citation lint: all 345 register ids resolve; all 47 GAP ids are in gaps.json.",
+  "C71": "PASS 20 files, 0 differences (regen_check.py, run by the auditor)",
+  "C34_C35_C36": "SKIP under validation_exemptions (spec_checks.py, run by the auditor). The C35 reason is factually wrong (finding 6).",
+  "excel_open_check": "PASS 20, 0 not clean (open_check.ps1, run by the auditor)",
+  "validate_contract_all": "PASS 84 files (before this review file)",
+  "error_cells": "0 #REF!/#VALUE!/#N/A/#DIV/0!/#NAME; 0 formulas",
+  "worked_examples": "PASS: all 20 Example Analysis sheets recomputed by hand, and they are unchanged since r1. Results: 941 cap 279.00/220.40; 940 42.00/546.00; NV MBT 1,404.00; OR 823.70/800.00; MCTMT 6,000.00+110.00; ACA 3,585.60/298.80; 941-X 248.00; Wilmington 50.00; Lexington 112.50; Newark/St. Louis/Pittsburgh 2,500/1,250/1,375; SHT 9,000; CA SDI 130.00; SDNH dates incl. KS 20 business days = 2026-03-30; EFW2 cents encodings 00023100000/00018450000/00001143900/00000362850; NJ base weeks 3/2, PA 5; AZ penalty 50/35/200; NM 4.80; OR WBF 9.36.",
+  "regression_vs_r1": "Independent cell diff: r1 -> r2 rebuild = 331 cells; r2 rebuild -> polish = 74 cells, column M only. Per-workbook counts are identical to the build log. No fact key or GAP id was removed; 2 keys were added (rspec.fed.form1042s.wage_codes, rspec.wv.local.service_fee_returns). The semantic regressions in Report Matrix columns D/G/J are not explained (finding 5).",
+  "C48_C49_C50_C53_C57": "not applicable at RSPEC close (WTC / SIR / PSL not built)"
+ },
+ "manual_review_items": [
+  "L3: a word-boundary grep of mercans_pipeline_v2_12.sh finds no deterministic block for C5, C6 or C7 (0 hits). All three were run by hand, below.",
+  "C5 (classification cites an establishing article): Payroll Scope Summary rows cite register or owner rows in all 20 workbooks; owner rows US-OWN-005/007/008 now list RSPEC in consumed_by. PASS.",
+  "C6 (file format vs source): EFW2 RA/RE/RW/RT/RO/RU/RS positions re-checked against Pub. 42-007 TY2026 (box-map positions, record length 512, PIN 319-328, TTOC 490-495). CT ReEmployCT S record re-derived from start + length (2-10, 11-30, 31-42, 43, 44-45, 46-51, 64-77, 143-146, 147-156). IN RS 306-343 read from the guide table. PASS. No real filed sample exists for any return (stated in every File Structure).",
+  "C7 (population-rules depth): DOR-002 RS-017..RS-025 now covered (r1 finding 12 closed); no other conditional field without a rule found.",
+  "F44 method: all 591 fact instances (590 keys) re-checked against the local copy of the register row each one cites. Steps: mechanical token check (numbers, dates in 8 written forms, x100 / x0.01 rate forms), a form-identifier presence check, and hand reading of every miss. PDFs were detected by magic bytes (the US-NC-001 copy is a PDF named .html; DE Wilmington is a PDF named .bin). The ME booklet PDF cannot be read by pdftotext, so its figures were read from its siblings in the same folder, ME-2026-wh-tab-instr_wb_decompressed.pdf and .txt. WebFetch was neither needed nor used: every consumed row now has a local copy.",
+  "Agent 2 figure-located method: CONTESTED for 1 of 37 keys (rspec.co.w2_state.format: the note quotes only the removed clause, and the kept clauses are not in the cited copy); ACCEPTED for 36 (quotes found verbatim or as table layout).",
+  "C21/C27 not applicable at RSPEC close. C27 (Report-Specs x DD, both directions) fires at DD close, against the 'US-DD-001 v1.0' forward references in column L.",
+  "F27 standing rule: the Report Matrix accuracy % changed on several rows this round (e.g. NY, SC, IN, TN, IA 90 -> 80). The SIR is not built, so the same-day re-sync is carried by ledger line 63 (pending SIR build)."
+ ],
+ "numeric_verification": {
+  "facts_total": 591,
+  "facts_verified": 572,
+  "unverified_keys": [
+   "rspec.hi.wh_deposit.schedule",
+   "rspec.in.wh_return.format",
+   "rspec.ks.wh_deposit.report",
+   "rspec.ut.wh_return.form",
+   "rspec.wv.wh_return.form",
+   "dd.employer.state_account_ids",
+   "rspec.al.annual_recon.form",
+   "rspec.az.annual_recon.form",
+   "rspec.co.w2_state.format",
+   "rspec.hi.w2_state.due",
+   "rspec.ks.w2_state.format",
+   "rspec.ut.w2_state.content",
+   "fed.reporting_agent.authorization",
+   "rspec.oh.school_district.returns",
+   "rspec.pa.local.eit_lst",
+   "rspec.dc.ui_qtr.form",
+   "rspec.ms.ui_qtr.form",
+   "rspec.nc.ui_qtr.form",
+   "rspec.ok.ui_qtr.form"
+  ],
+  "method": "Every fact instance bound in _pipeline/RSPEC-bindings.csv (590 keys + 1 period variant, 18 facts files) was re-checked against the local_file of its register row; md5 was re-checked on the 23 rows re-pointed or copied in the r1 fix (23/23 OK). 543 passed the mechanical check outright. 29 more were confirmed by hand: number words ('twenty', 'one-tenth of 1 percent', 'two thousand three hundred ninety-nine'); table layouts; holiday roll-forwards of published dates (GA, ACA, and the 943 / 944 Feb 10 date read in the drafts); derived arithmetic (VA quarterly bands x3, CT start + length, OH 678 recount, FUTA 1.5 + 3.8); and absence evidence for the NH/SD/TN/WA/HI negatives. 19 keys fail at clause level (finding 1; AZ also finding 2). Agent 2's figure-located quotes were read for all 37 r1 keys: 36 accepted, 1 contested."
+ },
+ "cross_checks": [
+  {
+   "name": "Round-1 findings closed (15)",
+   "result": "fail",
+   "note": "13 closed, finding 5 partly closed, finding 4 still open for one key; detail in _r1_findings_status"
+  },
+  {
+   "name": "Scope wording identical (MA PFML; tier verdict)",
+   "result": "pass",
+   "note": "MA PFML wording now matches scope_manifest in_scope[12]; no channel named"
+  },
+  {
+   "name": "Report Specs x DD (C27)",
+   "result": "not_applicable",
+   "note": "fires at DD close"
+  },
+  {
+   "name": "Regression vs r1 build (every change explained)",
+   "result": "fail",
+   "note": "cell counts match the build log, but 5 Report Matrix authority/channel/portal changes are semantic regressions (finding 5)"
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "rspec.ut.wh_return.form",
+   "consumed_by": [
+    "RSPEC/US-DOR-001",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-UTB5-002"
+  },
+  {
+   "fact": "dd.employer.state_account_ids",
+   "consumed_by": [
+    "RSPEC/US-DOR-001",
+    "RSPEC/US-UI-001",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-UTS5-013"
+  },
+  {
+   "fact": "fed.reporting_agent.authorization",
+   "consumed_by": [
+    "RSPEC/US-IRS-001",
+    "CCG/annex_FED",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-FED-008"
+  },
+  {
+   "fact": "rspec.az.annual_recon.form",
+   "consumed_by": [
+    "RSPEC/US-DOR-002",
+    "CCG/annex_AZ",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-AZS5-022"
+  },
+  {
+   "fact": "rspec.co.w2_state.format",
+   "consumed_by": [
+    "RSPEC/US-DOR-002",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-COS5-013"
+  },
+  {
+   "fact": "wa.wc.employee_deduction.rule",
+   "consumed_by": [
+    "RSPEC/US-WC-001",
+    "CCG/annex_WA",
+    "WTC",
+    "DD",
+    "PSL"
+   ],
+   "resynced": false,
+   "register_id": "US-WAS7-001"
+  },
+  {
+   "fact": "sir.mo.new_hire.days",
+   "consumed_by": [
+    "RSPEC/US-SDNH-001",
+    "SIR"
+   ],
+   "resynced": true,
+   "register_id": "US-MOS5-001"
+  },
+  {
+   "fact": "dd.multi.residence_state",
+   "consumed_by": [
+    "RSPEC/US-DOR-001",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-MULTIS5-001"
+  }
+ ],
+ "_ledger": "PROPAGATION-LEDGER.md: 8 lines appended on 2026-11-03 (r1 status, the wa.wc CCG debt, 2 fixed_in_place edits, findings 1-7 pending)",
+ "_next_action": "Round 3 is the LAST round (cap 3); a FAIL there escalates to a human. Source hunter (agent 2): findings 1, 2 and 6 (finding 6: the scaffolder rewrites the C35 reason and the owner re-confirms). Builder, after the facts change: findings 3, 4, 5 and 7; rebuild with build_specs.py --bindings; re-run spec_lint (with the decimal-fraction rule), C46p, C56, C71 and open_check. Then QA RSPEC r3 by a fresh auditor: the 19 keys plus a diff of the routed cells only. DD (stage 4) must not start until RSPEC passes."
+}

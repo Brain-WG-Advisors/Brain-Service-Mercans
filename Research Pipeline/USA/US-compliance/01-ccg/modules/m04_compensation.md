@@ -11,14 +11,14 @@ Yes. The federal minimum wage is USD [[FACT:fed.minwage.hourly=7.25]] an hour [U
 |---|---|---|
 | Tipped employees (more than USD [[FACT:fed.tipped.monthly_tips_threshold=30]] a month in tips) | Cash wage USD [[FACT:fed.tipped.cash_wage.hourly=2.13]]; maximum tip credit USD [[FACT:fed.tipped.tip_credit.max_hourly=5.12]] | [US-FEDS5-019] |
 | Executive, administrative and professional (EAP) exemption | Salary floor USD [[FACT:fed.exempt.salary_floor.weekly=684]] a week (USD [[FACT:fed.exempt.salary_floor.biweekly=1,368]] biweekly, USD [[FACT:fed.exempt.salary_floor.semimonthly=1,482]] semimonthly, USD [[FACT:fed.exempt.salary_floor.monthly=2,964]] monthly) | [US-FEDS5-020] |
-| Apprentices, trainees, learners | No federal apprentice payroll regime; the FLSA minimum applies (sub-minimum only under DOL certificates). States set learner rates, e.g. California [[FACT:ca.minwage.learner.percent=85]]% for the first 160 hours, Washington 14-15 year olds USD [[FACT:wa.labour.minwage.youth_14_15.hourly=14.56]] in 2026 | coverage row `apprentices_and_trainees` [US-FEDS5-029, US-CAS5-006, US-WAS5-006]; [US-CAS5-006]; [US-WAS5-006] |
+| Apprentices, trainees, learners | No federal apprentice payroll regime; the FLSA minimum applies (sub-minimum only under DOL certificates). States set learner rates, e.g. California [[FACT:ca.minwage.learner.percent=85]]% for the first 160 hours, Washington 14-15 year olds USD [[FACT:wa.labour.minwage.youth_14_15.hourly=14.56]] in 2026 | coverage row `apprentices_and_trainees` [US-FEDS5-029, US-CAS5-006, US-WAS5-006]; [US-CAS5-006]; [US-WAS5-007] |
 | Part-time employees | No part-time regime: the minimum wage and the weekly overtime threshold apply per hour and per workweek regardless of schedule | coverage row `part_time` [US-FEDS5-017, US-FEDS5-018, US-FEDS5-012] |
 
 Several State tipped-wage rules differ from the federal one (for example `ak.minwage.tip_credit.allowed` [US-AKS5-001]: no tip credit; `wa.minwage.tip_credit.allowed` [US-WAS5-001]: no tip credit); see annexes.
 
 ### Is the minimum wage applicable at a national level or does it vary by province/state?
 
-Both. The federal rate is a floor and the most protective applicable rate wins: [[FACT:multi.wage_hour.overlay_rule=FLSA does not excuse a higher State/municipal minimum wage, a lower maximum workweek or a stricter child-labour standard: apply the more protective standard of the place where the work is performed]] [US-MULTIS5-008]. The employer pays the highest of the federal, State and local minimum of the place where the work is performed [US-FEDS5-017]. Several cities and counties set their own rates (examples below; California municipal rates are an open item of annex CA, `ca.local_minwage.hourly`).
+Both. The federal rate is a floor and the most protective applicable rate wins: [[FACT:multi.wage_hour.overlay_rule=FLSA does not excuse a higher State/municipal minimum wage, a lower maximum workweek or a stricter child-labour standard: apply the more protective standard of the place where the work is performed]] [US-MULTIS5-008]. The employer pays the highest of the federal, State and local minimum of the place where the work is performed [US-FEDS5-017]. Several cities and counties set their own rates (examples below; California municipal rates are in Annex CA).
 
 ### Provide all applicable minimum wage rates.
 
@@ -40,15 +40,15 @@ All dates are effective dates; a rate change applies to hours worked from the da
 | IA | USD [[FACT:ia.minwage.hourly=7.25]] (from 2008-01-01) | [US-IAS5-001] |
 | ID | USD [[FACT:id.minwage.hourly=7.25]] (from 2009-07-24) | [US-IDS5-001] |
 | IL | USD [[FACT:il.minwage.hourly=15.00]] (from 2025-01-01) | [US-ILS5-001] |
-| IN | USD [[FACT:in.minwage.hourly=7.25]] (from 2009-07-24) | [US-INS5-001] |
+| IN | USD [[FACT:in.minwage.hourly=7.25]] (from 2009-07-24) | [US-FEDS5-017] |
 | KS | USD [[FACT:ks.minwage.hourly=7.25]] (from 2010-01-01) | [US-KSS5-008] |
 | KY | USD [[FACT:ky.minwage.hourly=7.25]] (from 2009-07-01) | [US-KYS5-001] |
 | MA | USD [[FACT:ma.minwage.hourly=15.00]] (from 2023-01-01) | [US-MAS5-001] |
 | MD | USD [[FACT:md.minwage.hourly=15.00]] (from 2024-01-01) | [US-MDS5-005] |
 | ME | USD [[FACT:me.minwage.hourly=15.10]] (from 2026-01-01 to 2026-12-31); USD [[FACT:me.minwage.hourly=15.70]] (from 2027-01-01) | [US-MES5-002] |
-| MI | USD [[FACT:mi.minwage.hourly=12.48]] (from 2025-02-21 to 2025-12-31); USD [[FACT:mi.minwage.hourly=13.73]] (from 2026-01-01 to 2026-12-31); USD [[FACT:mi.minwage.hourly=15.00]] (from 2027-01-01) | [US-MIS5-001] |
+| MI | USD [[FACT:mi.minwage.hourly=13.73]] (from 2026-01-01 to 2026-12-31); USD [[FACT:mi.minwage.hourly=15.00]] (from 2027-01-01) | [US-MIS5-001] |
 | MN | USD [[FACT:mn.minwage.hourly=11.41]] (from 2026-01-01 to 2026-12-31); USD [[FACT:mn.minwage.hourly=11.87]] (from 2027-01-01) | [US-MNS5-002] |
-| MO | USD [[FACT:mo.minwage.hourly=13.75]] (from 2025-01-01 to 2025-12-31); USD [[FACT:mo.minwage.hourly=15.00]] (from 2026-01-01) | [US-MOS5-002] |
+| MO | USD [[FACT:mo.minwage.hourly=15.00]] (from 2026-01-01) | [US-MOS5-002] |
 | MT | USD [[FACT:mt.minwage.hourly=10.85]] (from 2026-01-01 to 2026-12-31) | [US-MTS5-014] |
 | ND | USD [[FACT:nd.minwage.hourly=7.25]] (from 2009-07-24) | [US-NDS5-006] |
 | NE | USD [[FACT:ne.minwage.hourly=15.00]] (from 2026-01-01 to 2026-12-31) | [US-NES5-001] |
@@ -57,11 +57,11 @@ All dates are effective dates; a rate change applies to hours worked from the da
 | NV | USD [[FACT:nv.minwage.hourly=12.00]] (from 2024-07-01) | [US-NVS5-013] |
 | NY | New York City, Long Island, Westchester: USD [[FACT:ny.minwage.nyc_li_westchester.hourly=17.00]] (from 2026-01-01); rest of State: USD [[FACT:ny.minwage.rest.hourly=16.00]] (from 2026-01-01) | [US-NYS5-001] |
 | OH | USD [[FACT:oh.minwage.hourly=11.00]] (from 2026-01-01 to 2026-12-31); USD [[FACT:oh.minwage.hourly=11.40]] (from 2027-01-01 to 2027-12-31) | [US-OHS5-005] |
-| OR | standard (Portland metro and nonurban rates in annex OR): USD [[FACT:or.minwage.standard.hourly=15.55]] (from 2026-07-01 to 2027-06-30) | [US-ORS5-002] |
+| OR | standard (Portland metro and nonurban rates in annex OR): USD [[FACT:or.labour.minwage.standard.hourly=15.05]] (from 2025-07-01 to 2026-06-30); USD [[FACT:or.labour.minwage.standard.hourly=15.55]] (from 2026-07-01 to 2027-06-30) | [US-ORS5-002] |
 | PA | USD [[FACT:pa.minwage.hourly=7.25]] (from 2009-07-24) | [US-PAS5-002] |
-| RI | USD [[FACT:ri.minwage.hourly=15.00]] (from 2025-01-01 to 2025-12-31); USD [[FACT:ri.minwage.hourly=16.00]] (from 2026-01-01 to 2026-12-31); USD [[FACT:ri.minwage.hourly=17.00]] (from 2027-01-01) | [US-RIS5-001] |
+| RI | USD [[FACT:ri.minwage.hourly=16.00]] (from 2026-01-01 to 2026-12-31); USD [[FACT:ri.minwage.hourly=17.00]] (from 2027-01-01) | [US-RIS5-001] |
 | SD | USD [[FACT:sd.minwage.hourly=11.85]] (from 2026-01-01 to 2026-12-31); USD [[FACT:sd.minwage.hourly=12.30]] (from 2027-01-01) | [US-SDS5-003] |
-| TX | State rate: USD [[FACT:tx.minwage.hourly=7.25]] (from 2003-09-01) | [US-TXS5-002] |
+| TX | State rate: USD [[FACT:tx.minwage.hourly=7.25]] (from 2003-09-01) | [US-FEDS5-017] |
 | UT | USD [[FACT:ut.minwage.hourly=7.25]] (from 2009-07-24) | [US-UTS5-011] |
 | VA | USD [[FACT:va.minwage.hourly=12.77]] (from 2026-01-01 to 2026-12-31); USD [[FACT:va.minwage.hourly=13.75]] (from 2027-01-01 to 2027-12-31); USD [[FACT:va.minwage.hourly=15.00]] (from 2028-01-01) | [US-VAS5-001] |
 | VT | USD [[FACT:vt.minwage.hourly=14.42]] (from 2026-01-01 to 2026-12-31) | [US-VTS5-003] |
@@ -82,7 +82,7 @@ Local minimum wages (examples; full lists in the annexes):
 | Howard County, MD | USD [[FACT:md.local_minwage.howard=16]] (from 2026-07-01) | [US-MDS5-015] |
 | Prince George's County, MD | USD [[FACT:md.local_minwage.prince_georges=15.30]] (from 2026-07-01) | [US-MDS5-015] |
 
-⚠️ RESEARCH-GAP (non-blocking): no State minimum-wage fact for AL, GA, LA, MS, NC, NH, OK, SC, TN; whether each has a State rate (relevant to employment outside FLSA coverage) is not established (request key `multi.minwage.remaining_states`)
+Not configured in this release [[GAP:RQ-560]]: No State minimum-wage fact for AL, GA, LA, MS, NC, NH, OK, SC, TN; whether each has a State rate (relevant to employment outside FLSA coverage) is not established.
 
 Coverage of mid-year changes (coverage row `mid_year_rate_change` [US-DCS5-011, US-ORS5-002, US-OHS5-001, US-PAS5-022, US-FEDS5-030]): the District of Columbia, Oregon and Alaska change on 2026-07-01, Florida on 2026-09-30, and the Nevada daily overtime rule on 2026-07-01; each rate is applied by the date the hours were worked.
 
@@ -98,7 +98,7 @@ Not the tax or contribution rates. It feeds three payroll calculations:
 
 ### How are deductions handled if they cannot be made due to minimum wage constraints?
 
-⚠️ RESEARCH-GAP (non-blocking): the FLSA rule on deductions that would reduce pay below the minimum wage (and the State variants) is not in the facts (request key `fed.flsa.deductions_below_minimum_wage`)
+Not configured in this release [[GAP:RQ-561]]: The FLSA rule on deductions that would reduce pay below the minimum wage (and the State variants) is not established from an official source.
 Statutory deductions (taxes, garnishments within their limits) are not limited by the minimum wage; the garnishment protected amounts in Module 7 apply instead.
 
 ## 4.2 Salary Components
@@ -125,14 +125,24 @@ Regular wages are paid on the employer's regular payday under the work State's p
 |---|---|---|---|---|
 | Regular wages, overtime, bonuses, commissions | Taxable | Subject | Subject (wages) | [US-FEDS5-030]; [US-FED-013]; coverage row `overtime` [US-FEDS5-018, US-FEDS5-030, US-CAS5-008] |
 | Severance and pay in lieu of notice | Taxable | Subject | Subject | `fed.severance.is_wages` [US-FEDS5-029] |
-| Tips of USD [[FACT:fed.tips.reporting_threshold_monthly=20]] or more a month | Taxable | Subject | ⚠️ RESEARCH-GAP (non-blocking): FUTA treatment of tips not in the facts (request key `fed.fica.wage_definition.exclusions`) | [US-FEDS5-003] |
-| Group-term life cost above USD [[FACT:fed.bik.group_term_life.excluded_coverage=50,000]] | Taxable, withholding not required | Subject | ⚠️ RESEARCH-GAP (non-blocking): not in the facts (request key `fed.fica.wage_definition.exclusions`) | [US-FEDS5-008] |
-| PFML employee contribution | W-2 wages | W-2 wages | ⚠️ RESEARCH-GAP (non-blocking): not in the facts (request key `fed.fica.wage_definition.exclusions`) | [US-FEDS5-007] |
-| Parking / transit up to USD [[FACT:fed.bik.parking.monthly_exclusion=340]] / USD [[FACT:fed.bik.transit.monthly_exclusion=340]] a month | Excluded up to the limit | ⚠️ RESEARCH-GAP (non-blocking): see request `fed.fica.wage_definition.exclusions` | ⚠️ RESEARCH-GAP (non-blocking): see request `fed.fica.wage_definition.exclusions` | [US-FEDS5-008] |
+| Tips | [[FACT:fed.base.tips.fit=withhold on cash tips of 20 or more in a month (tips under 20 a month and non-cash tips: exempt)]] | [[FACT:fed.base.tips.fica=included for cash tips of 20 or more in a month; excluded under 20 a month]] | [[FACT:fed.base.tips.futa=included for all tips of 20 or more in a month reported in writing to the employer; excluded under 20 a month]] | [US-FEDS5-029]; [US-FEDS5-003] |
+| Group-term life insurance | [[FACT:fed.base.group_term_life.fit=excluded (employer may at its option withhold on the cost of coverage over 50,000)]] | [[FACT:fed.base.group_term_life.fica=excluded up to the cost of 50,000 of coverage; the cost of coverage over 50,000 less employee payments is included (W-2 boxes 1, 3, 5 and box 12 code C)]] | [[FACT:fed.base.group_term_life.futa=excluded]] | [US-FEDS5-008] |
+| PFML employee contribution | W-2 wages | W-2 wages | No FUTA exclusion is configured for the contribution: it is withheld from wages, which stay wages under the general definition | [US-FEDS5-007]; [US-FEDQ1-002] |
+| Transit passes, commuter vehicle and qualified parking | [[FACT:fed.base.transportation.fit=excluded up to 340 a month for commuter highway vehicle and transit passes and 340 a month for qualified parking]] | [[FACT:fed.base.transportation.fica=excluded up to 340 a month for commuter highway vehicle and transit passes and 340 a month for qualified parking]] | [[FACT:fed.base.transportation.futa=excluded up to 340 a month for commuter highway vehicle and transit passes and 340 a month for qualified parking]] | [US-FEDS5-008] |
+| Educational assistance | [[FACT:fed.base.educational_assistance.fit=excluded up to 5,250 a year under a qualifying educational assistance program]] | [[FACT:fed.base.educational_assistance.fica=excluded up to 5,250 a year under a qualifying educational assistance program]] | [[FACT:fed.base.educational_assistance.futa=excluded up to 5,250 a year under a qualifying educational assistance program]] | [US-FEDS5-008] |
+| Dependent-care assistance | [[FACT:fed.base.dependent_care.fit=excluded up to 7,500 a year (3,750 married filing separately)]] | [[FACT:fed.base.dependent_care.fica=excluded up to 7,500 a year (3,750 married filing separately)]] | [[FACT:fed.base.dependent_care.futa=excluded up to 7,500 a year (3,750 married filing separately)]] | [US-FEDS5-008] |
+| Retirement deferrals and Section 125 reductions | See Module 3, Step 2 | See Module 3, Step 2 | See Module 3, Step 2 | [US-FEDS5-029] |
 | Moving expenses, bicycle commuting | No exclusion (eliminated, except moving for Armed Forces / intelligence community) | No exclusion | No exclusion | `fed.bik.moving_and_bicycle.excluded` [US-FEDS5-008] |
-| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | not in the facts | `fed.minister.withholding` [US-FED-030] |
+| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | Not established from an official source [[GAP:RQ-593]] | `fed.minister.withholding` [US-FED-030] |
 
-⚠️ RESEARCH-GAP (non-blocking): the statutory inclusion/exclusion lists of FICA wages (26 U.S.C. 3121(a)), FUTA wages (3306(b)) and income-tax wages (3401(a)) are not carried as facts (request key `fed.fica.wage_definition.exclusions`)
+Statutory wage definitions behind the table:
+
+| Base | Definition and exclusions | Source |
+|---|---|---|
+| All federal employment taxes (general) | [[FACT:fed.wages.general_definition=Wages subject to federal employment taxes generally include all pay given to an employee for services, in cash or other forms (salaries, vacation allowances, bonuses, commissions, taxable fringe benefits), however measured or paid; signing bonuses and payments for cancellation of an employment contract are wages for social security, Medicare, FUTA and income-tax withholding; pay to a former employee for services performed while employed is wages.]] | [US-FEDQ1-002] |
+| FICA wages | [[FACT:fed.fica.wage_definition.exclusions=FICA wages (IRC 3121(a)) are all remuneration for employment, including non-cash remuneration, except among others: (a)(1) pay above the OASDI wage base (OASDI only); (a)(2) sickness, accident, medical and hospitalization plan payments; (a)(5) payments to or from qualified plans (401(a), 403(a), SEP, 403(b) other than salary reduction, governmental 457, SIMPLE other than elective contributions) and (5)(G) section 125 cafeteria-plan benefits that would not be wages outside the plan; (a)(12) non-cash tips and cash tips under 20 a month; (a)(18) 127/129/134 benefits; (a)(19) meals and lodging excludable under 119; (a)(20) 74(c), 108(f)(4), 117 and 132 fringes. 3121(v)(1): 401(k) elective deferrals and 414(h) salary-reduction pickups remain FICA wages.]] | [US-FEDQ3-002] |
+| FUTA wages | [[FACT:fed.futa.wage_definition.exclusions=FUTA wages (IRC 3306(b)) are all remuneration for employment, including non-cash remuneration, except among others: (b)(1) pay above the 7,000 FUTA wage base; (b)(2) sickness, accident, medical plan payments; (b)(5) qualified-plan payments as in 3121(a)(5), incl. (5)(G) section 125 cafeteria-plan benefits; (b)(13) 127/129/134 benefits; (b)(14) meals and lodging under 119; (b)(16) 74(c), 117, 132 fringes; (b)(17) 106(b); (b)(18) 106(d) HSA. 3306(r)(1): 401(k) elective deferrals remain FUTA wages. Tips: only cash tips of 20 or more a month reported in writing are FUTA wages (Pub. 15 p.52).]] | [US-FEDQ3-003] |
+| Income-tax withholding wages | Module 6 §6.1.1 (26 U.S.C. 3401(a)) | Module 6 |
 
 ### Are components uniform across the country or do they differ by state/province?
 
@@ -186,7 +196,7 @@ Configuration choice (non-statutory): the engine offers a working-day or a calen
 prorated_salary = round( period_salary x days_in_service / days_in_period , 2 )   # half-up to the cent
 ```
 
-Worked example (configuration choice, working-day factor; computed by `01-ccg/_examples/build_examples_m01_m07.py`):
+Worked example (configuration choice, working-day factor; computed by the build record):
 
 | Calculation | Result |
 |---|---|
@@ -232,7 +242,7 @@ State overtime deductions also operate at assessment only (never reduce State wi
 | DC | [[FACT:dc.pit.obbba_deductions=disallowed TY2025; allowed as DC deductions from TY2026; operating level assessment only (no withholding change)]] | [US-DCS5-021] |
 | CO | Colorado's worksheet removes the federal qualified-overtime deduction from W-4 Step 4(b) for State withholding | `co.wh.obbba_overtime_deduction.allowed` [US-COS5-012] |
 | CA | `ca.obbba.conforms` [US-CAS5-020]: no State tips or overtime deduction | [US-CAS5-020] |
-| HI | ⚠️ RESEARCH-GAP (non-blocking): the Hawaii treatment of tips and overtime deductions (assessment-only per the build journal) has no fact (request key `hi.pit.tips_overtime_deduction.level`) | |
+| HI | Not configured in this release [[GAP:RQ-563]]: The Hawaii treatment of tips and overtime deductions (assessment-only per the build journal) is not established from an official source. | |
 
 W-2 reporting of overtime and tips: [[FACT:fed.w2.box12.new_codes=TP (cash tips reported to employer); TT (qualified overtime compensation); TA (employer Trump-account contributions)]] [US-FEDS5-007].
 
@@ -240,7 +250,7 @@ W-2 reporting of overtime and tips: [[FACT:fed.w2.box12.new_codes=TP (cash tips 
 
 ### Is there a statutory requirement to pay bonuses? If so, how are they calculated?
 
-⚠️ RESEARCH-GAP (non-blocking): no fact states whether any federal or State statute requires a private employer to pay a bonus (13th-month or similar) (request key `fed.bonus.statutory_obligation`)
+Not configured in this release [[GAP:RQ-564]]: No official source read for this release states whether any federal or State statute requires a private employer to pay a bonus (13th-month or similar)
 
 ### Is there a specific tax treatment for bonuses?
 
@@ -269,7 +279,7 @@ Yes. US payroll classifies each payment along four independent axes; one payment
 | Regular vs supplemental wages | Supplemental = bonuses, commissions, severance and similar; may be withheld at a flat rate | [US-FEDS5-003] |
 | Withholding wages vs FICA wages | A payment can be FICA wages without income-tax withholding being required (group-term life cost above USD [[FACT:fed.bik.group_term_life.excluded_coverage=50,000]] of coverage); a statutory employee's pay is FICA-withheld with no income-tax withholding | [US-FEDS5-008]; `fed.statutory_employee.treatment` [US-FEDR3-005] |
 | Taxable wage base vs total wages | OASDI, FUTA and each SUI/PFML base stop at a cap; Medicare does not | [US-FED-007] |
-| Qualified tips and qualified overtime | Reported separately on the W-2 from tax year 2026: [[FACT:fed.plaw119_21.reporting_penalty_relief=TY2025 only (Notice 2025-62); separate reporting of tips/TTOC/overtime mandatory from TY2026]] | [US-FEDS5-013] |
+| Qualified tips and qualified overtime | Reported separately on the W-2 from tax year 2026, Box 12 codes: [[FACT:fed.w2.box12.new_codes=TP (cash tips reported to employer); TT (qualified overtime compensation); TA (employer Trump-account contributions)]] | [US-FEDS5-007] |
 | State and local wages | Wages allocated to each State and locality; the W-2 carries up to [[FACT:multi.w2.states_per_form=2]] States and localities per form | [US-MULTIS5-011] |
 
 ### Create a reference table classifying common pay components.
@@ -282,8 +292,10 @@ Yes. US payroll classifies each payment along four independent axes; one payment
 | Bonus, commission | Supplemental | Flat or aggregate | Yes | W-2 wages ([US-FEDS5-003]) |
 | Severance | Supplemental | Flat or aggregate | Yes | W-2 wages ([US-FEDS5-029]) |
 | Group-term life cost above the excluded coverage | Imputed | Not required | Yes | ([US-FEDS5-008]) |
-| Employer Trump-account contribution | Employer contribution | Excluded up to USD [[FACT:fed.bik.trump_account.employer_contribution_max=2,500]] from 2026-07-04 | ⚠️ RESEARCH-GAP (non-blocking): see request `fed.fica.wage_definition.exclusions` | Box 12 code TA ([US-FEDS5-030]) |
+| Employer Trump-account contribution | Employer contribution | Excluded up to USD [[FACT:fed.bik.trump_account.employer_contribution_max=2,500]] from 2026-07-04 | Not configured in this release [[GAP:RQ-591]]: FICA and FUTA treatment of the employer contribution is not established from an official source. | Box 12 code TA ([US-FEDS5-030]) |
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 Prevailing-wage overlay: federal construction contracts over USD [[FACT:fed.davis_bacon.contract_threshold=2,000]] carry Davis-Bacon wage rates and weekly certified payroll ([[FACT:fed.davis_bacon.certified_payroll.frequency=weekly, to the contracting agency; prime responsible for subcontractors; optional form WH-347; records 3 years]]; [US-FEDS5-027]). State prevailing-wage laws are in the annexes; never use the federal DOL State list for Michigan.
 
-⚠️ RESEARCH-GAP (non-blocking): DOL WB featured-paid-leave page (19 P9 rows reverted to B/MANUAL) returns 404; the DOL prevailing-wage list still says MI has no law (MI restored 2023). (open item `practice.dol_paid_leave_list` in CCG-m13_practices-facts.json; closes with: Saved copy of the DOL WB paid-leave page; never use the DOL lists for MI.)
+Not configured in this release [[GAP:RQ-541]]: the DOL Women's Bureau paid-leave page could not be read; the DOL prevailing-wage list still says MI has no law (MI restored 2023).

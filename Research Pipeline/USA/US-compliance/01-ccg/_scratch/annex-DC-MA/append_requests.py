@@ -19,7 +19,7 @@ A1 = re.compile(r"(statute|Code|CMR|KAR|IAC|IC |KRS|R\.S\.|HRS|ILCS|K\.S\.A|O\.C
 items = []
 for j in JURS:
     rep = json.load(open(os.path.join(SCR, f"report_{j}.json"), encoding="utf-8"))
-    rel = f"01-ccg/modules/annex_{j}.md"
+    rel = f"01-ccg/annexes/annex_{j}.md"
     lines = open(os.path.join(BASE, rel), encoding="utf-8").read().splitlines()
     gaps = list(rep["gaps"])
     if j == "IL":

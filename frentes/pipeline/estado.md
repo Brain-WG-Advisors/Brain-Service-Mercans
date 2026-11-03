@@ -3,6 +3,8 @@
 > Escrito **só pela janela "Pipeline - Mercans"**. Criado em 2026-10-15 a partir de [[revisoes/2026-10-15-licoes-aprendidas/00-LICOES-CONSOLIDADAS]]. Reescrever a cada "fecha a sessão" desta janela.
 
 ## Instruções vigentes
+- 2026-11-02 (usuário): Lituânia: **não precisamos da validação de ninguém** (BAU/ELT); foi mal-entendido. O que precisamos é que o **Kevin gere os arquivos do sistema** (SAM, GPM313, GPM312) para **nós** validarmos. O Kevin cuida de todo o payroll LT (Chat, 02/11). Substitui a regra de 29/10 de esperar o BAU e a proposta à ELT.
+- 2026-11-02 (usuário): a validação dos arquivos do sistema usa as **versões ativas** (as dos `.gsheet` oficiais, conferidas no Version Control em 02/11): **SAM v1.1, GPM313 v1.2, GPM312 v1.2** (todas de 29/10). As versões de 30/10 (SAM v1.2, GPM313 v1.3, SIR v1.2) ficam locais; não subir ao Drive sem pedido.
 - 2026-10-30 (usuário, depois da pausa): Lituânia: fazer a **etapa 1** (itens nossos para subir a nota: pesquisa B11/B3/B5/B6, data do exemplo do GPM313, `sam-v07.mxfd`, campo 5×11) e levar a **etapa 2** (perguntas oficiais à Sodra/VMI) o mais perto possível da conclusão **só com pesquisa**. Continua valendo: nada enviado, nada no Drive.
 - 2026-10-30 (usuário, fim do dia): Lituânia **em pausa para apresentação**. Nada vai para o Drive, para e-mail nem para o Kevin. Depois decidir se fazemos tudo sozinhos ou se precisamos do BAU. As versões SAM v1.2, GPM313 v1.3 e SIR v1.2 ficam só em local.
 - 2026-10-30 (usuário): Lituânia: fazer **tudo o que dá sem o BAU**. No ponto em que só o BAU resolve, deixar pronta a **lista do que o BAU precisa validar**. O Nabil disse que não há consultor de BAU na Lituânia; o assunto vai à ELT de 02/11.

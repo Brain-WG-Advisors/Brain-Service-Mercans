@@ -51,8 +51,8 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `mt.pit.agricultural.withholding_required` | False | 2026-01-01 |  | US-MTS5-005 | high |
 | `mt.pit.nra.treaty_at_withholding` | False | 2026-01-01 |  | US-MTS5-005 | high |
 | `mt.sui.wage_base` | 45100 USD | 2025-01-01 | 2025-12-31 | US-MTS5-024 | high |
-| `mt.ui.admin_fund_tax.rate` | 0.18 % | 2026-01-01 | 2026-12-31 | US-MTP7-001 | high |
-| `mt.ui.admin_fund_tax.rate_class_1_2` | 0.13 % | 2026-01-01 | 2026-12-31 | US-MTP7-001 | high |
+| `mt.ui.admin_fund_tax.rate` | 0.18 % | 2026-01-01 | 2026-12-31 | US-MTB5-401 | high |
+| `mt.ui.admin_fund_tax.rate_class_1_2` | 0.13 % | 2026-01-01 | 2026-12-31 | US-MTB5-401 | high |
 | `mt.sui.employee.rate` | 0 % | 2026-01-01 |  | US-MTS5-023 | high |
 | `mt.sui.wages.section125_included` | True | 2026-01-01 |  | US-MTS5-023 | high |
 | `mt.sui.wages.401k_included` | True | 2026-01-01 |  | US-MTS5-023 | high |
@@ -163,7 +163,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - Wage base **47,300**.
   - Schedule 1: rates 0.00% to 6.12%, average 0.95%.
   - New employers by industry: 1.00–2.00% (construction 2.00, services 1.10, agriculture/mining 1.30).
-  - **Administrative Fund Tax (AFT):** 0.18%, or 0.13% for eligible classes 1–2 [US-MTP7-001].
+  - **Administrative Fund Tax (AFT):** 0.18%, or 0.13% for eligible classes 1–2 [US-MTB5-401].
   - Penalty rate: 50% higher.
 - **Wage base mechanism** [MCA 39-51-1108, US-MTS5-007, A.1]: the greater of 80% of the average annual wage (rounded to 100) or the FUTA base.
   - **G-DERIVE:** 0.8 × 59,106.64 = 47,285.31 → 47,300 (2026). 0.8 × 56,393.42 = 45,114.74 → 45,100 (2025) [US-MTS5-024].
@@ -173,7 +173,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - **Taxable for UI:** Section 125 cafeteria salary reductions, 401(k) elective deferrals, Section 129 dependent care, corporate officer pay, personal use of a company vehicle, and room and board (minimum 130/week, 3/meal).
   - **Exempt:** employer contributions to qualified plans and employer health/life premiums.
 - **SDI/TDI/PFML:** none. No family-leave or TDI chapter in Title 39 [US-MTP52-002, reused].
-- **Other employer levies:** the AFT only [US-MTP7-001, US-MTP9V-001].
+- **Other employer levies:** the AFT only [US-MTB5-401, US-MTP9V-001].
 - **MULTI hand-off, SUI credit for wages reported to another state: NO.** "Montana does not allow wages paid in other states to be used to determine excess wages" [US-MTS5-025, A.3]. The four-part localization test applies [US-MTS5-025].
 
 ## 4 — payslip_statute

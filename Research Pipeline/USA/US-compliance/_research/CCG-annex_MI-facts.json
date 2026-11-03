@@ -11,20 +11,6 @@
  "facts": [
   {
    "key": "mi.minwage.hourly",
-   "value": 12.48,
-   "currency": "USD",
-   "effective_from": "2025-02-21",
-   "effective_to": "2025-12-31",
-   "register_id": "US-MIS5-001",
-   "tier": "A.1",
-   "verification_method": "direct artifact inspection",
-   "authority": "Michigan Legislature",
-   "url": "https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-337-of-2018.pdf",
-   "confidence": "high",
-   "_domain": "labour_code"
-  },
-  {
-   "key": "mi.minwage.hourly",
    "value": 13.73,
    "currency": "USD",
    "effective_from": "2026-01-01",
@@ -218,11 +204,11 @@
    "unit_of_measure": "percent",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-MIS5-019",
+   "register_id": "US-MIPIT-001",
    "tier": "A.2",
    "verification_method": "direct artifact inspection",
    "authority": "Michigan Department of Treasury",
-   "url": "https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/All-Years/MIW4.pdf",
+   "url": "https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/SUW/TY2026/446_Withholding-Guide_2026.pdf",
    "confidence": "high",
    "note": "Guide 446 Rev. 02-26 [US-MIPIT-001 legacy]; MCL 206.703.",
    "_domain": "income_tax"
@@ -277,11 +263,11 @@
    "unit_of_measure": "percent",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-MIS5-019",
+   "register_id": "US-MIPIT-001",
    "tier": "A.2",
    "verification_method": "direct artifact inspection",
    "authority": "Michigan Department of Treasury",
-   "url": "https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/All-Years/MIW4.pdf",
+   "url": "https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/SUW/TY2026/446_Withholding-Guide_2026.pdf",
    "confidence": "medium",
    "note": "Bonuses/separate payments at 4.25% with no exemption adjustment (Guide 446, legacy US-MIPIT-001).",
    "_domain": "income_tax"
@@ -376,7 +362,7 @@
    "unit_of_measure": "cities",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-MIR3-001",
+   "register_id": "US-MIB5-401",
    "tier": "A.2",
    "verification_method": "quoted from authority page",
    "authority": "Michigan Department of Treasury",
@@ -517,7 +503,7 @@
    "key": "mi.records.retention_years",
    "value": 3,
    "unit_of_measure": "years",
-   "effective_from": "2026-01-01",
+   "effective_from": "1979-01-04",
    "effective_to": null,
    "register_id": "US-MIS5-009",
    "tier": "A.1",
@@ -526,7 +512,8 @@
    "url": "https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-390-of-1978.pdf",
    "confidence": "high",
    "note": "Name, address, birth date, occupation, rate, hours and wages per period, deductions, fringe benefits.",
-   "_domain": "data_protection"
+   "_domain": "data_protection",
+   "_ef_basis": "statute date carried by the PSL fact (QA r1 alias alignment)"
   },
   {
    "key": "mi.payslip.ssn.max_digits",
@@ -866,15 +853,47 @@
    "note": "Rehire = new W-4 required or 60 consecutive days since last employment; terminations reported only if an income withholding notice was in effect; only tribal enterprises on federal tribal land exempt.",
    "_effective_from_basis": "register row carries no effective_from; 2026-01-01 = rule read on 2026-11-02 as in force for the build year",
    "_domain": "reporting_instruments"
+  },
+  {
+   "key": "mi.local.cities.list",
+   "value": "Treasury-administered: Detroit. Self-administered (23): Albion, Battle Creek, Benton Harbor, Big Rapids, East Lansing, Grand Rapids, Flint, Grayling, Hamtramck, Highland Park, Hudson, Ionia, Jackson, Lansing, Lapeer, Muskegon, Muskegon Heights, Pontiac, Port Huron, Portland, Saginaw, Springfield, Walker.",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-MIB5-301",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Michigan Department of Treasury",
+   "url": "https://www.michigan.gov/taxes/citytax/what-cities-impose-an-income-tax",
+   "confidence": "high",
+   "note": "Treasury \"Which cities impose an income tax?\" page (verbatim text), consistent with mi.local.cities.count = 24 (US-MIB5-401, a different Treasury page). The page gives no rates.",
+   "_qa_r1b": "2026-11-02"
+  },
+  {
+   "key": "mi.local.detroit.eservices_from",
+   "value": "2026-11-12",
+   "effective_from": "2026-11-12",
+   "effective_to": null,
+   "register_id": "US-MIB5-301",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Michigan Department of Treasury",
+   "url": "https://www.michigan.gov/taxes/citytax/what-cities-impose-an-income-tax",
+   "confidence": "high",
+   "note": "Detroit city income taxes move to Michigan Treasury eServices on 2026-11-12 (michigan.gov/taxes/citytax, read 2026-11-02).",
+   "_level": "employer reporting and payment",
+   "_qa_r1b": "2026-11-02"
   }
  ],
  "unresolved": [
   {
    "key": "mi.local.cities.rates",
-   "why": "Rates, forms and due dates of the 23 self-administered city income taxes (Albion ... Walker) not read.",
-   "attempted": [],
-   "what_would_close_it": "Each city income-tax withholding instructions for 2026 (city income-tax department pages); parallel fan-out per city.",
-   "blocking": true
+   "why": "The census is closed (24 cities, named in mi.local.cities.list). The per-city rates, withholding forms and due dates of the 23 self-administered cities are on each city's own site; Treasury publishes none of them.",
+   "attempted": [
+    "browser pass P3 2026-11-02 (_research/stage5/browser-pass-P3.md): Treasury city list read (US-MIB5-301), no rates"
+   ],
+   "what_would_close_it": "Each self-administered city's 2026 employer withholding instructions (city income-tax department page): parallel lookups, one per city, ideally limited to the cities in the client footprint.",
+   "blocking": true,
+   "_qa_r1b": "narrowed 2026-11-02"
   },
   {
    "key": "mi.newhire.statute",
@@ -928,5 +947,22 @@
    "blocking": false
   }
  ],
- "_synthesis_d": "Synthesis D 2026-11-02: browser-pass P1/P2 rows (S5B-P1/P2) and EFW2 TY2026 merged; see _research/synthesis-D/SYNTHESIS-D.md"
+ "_synthesis_d": "Synthesis D 2026-11-02: browser-pass P1/P2 rows (S5B-P1/P2) and EFW2 TY2026 merged; see _research/synthesis-D/SYNTHESIS-D.md",
+ "_history": [
+  {
+   "key": "mi.minwage.hourly",
+   "value": 12.48,
+   "currency": "USD",
+   "effective_from": "2025-02-21",
+   "effective_to": "2025-12-31",
+   "register_id": "US-MIS5-001",
+   "tier": "A.1",
+   "verification_method": "direct artifact inspection",
+   "authority": "Michigan Legislature",
+   "url": "https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-337-of-2018.pdf",
+   "confidence": "high",
+   "_domain": "labour_code",
+   "_moved_to_history": "prior-year value (effective_to before 2026-01-01) moved out of the configuration facts on 2026-11-02 (QA r1 C41); history kept here and in the register. FUTA 2025 credit reductions apply to 2025 wages on the 2025 Form 940 filed by 2026-02-02."
+  }
+ ]
 }

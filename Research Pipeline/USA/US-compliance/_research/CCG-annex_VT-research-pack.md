@@ -142,7 +142,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - **Base indexation:** each 1 January by the % increase in the State annual average wage, when the fund is positive and Title XII advances are repaid. The base drops by 2,000 when the rate schedule falls to III or to I [US-VTS5-005]. G-DERIVE not possible: the 1338(g) average wage was not fetched.
   - **Rates (1326):** rate classes 0–20 × schedules I–V. Schedule I runs 0.4–5.4%; schedule V runs 1.3–8.4%. The **rate year starts 1 July** [US-VTS5-006, US-VTSUI-001].
   - **New-employer rate:** **1.0%** (since 2004-07-01). Foreign construction NAICS 236/237/238 pay the industry average. A new employer stays on this rate for at least 2 years [US-VTS5-009].
-  - **Employee contribution:** none, and the tax cannot be withheld [US-VTP51-007].
+  - **Employee contribution:** none located; not a fact: the statement sat on US-VTP51-007, superseded by US-VTS5-009, which does not restate it (open: `vt.sui.employee.rate`).
   - The schedule in force for the 2026-07 rate year was not confirmed (Q4).
 - **SDI/TDI/PFML:** no mandatory program. VT-FMLI is voluntary (The Hartford) [US-VTP51-006].
 - **Employer levies:** **Child Care Contribution** [US-VTS5-030, US-VTP51-004, US-VTP7-001]:

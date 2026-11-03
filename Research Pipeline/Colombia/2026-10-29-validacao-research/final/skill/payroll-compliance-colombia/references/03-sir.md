@@ -1,4 +1,4 @@
-# Colombia Statutory Integrations Register (SIR) - CO-SIR-001 v1.3
+# Colombia Statutory Integrations Register (SIR) - CO-SIR-001 v1.4
 
 The Colombia statutory-integration register: for each authority a payroll engine must interact with, the channel, direction, authentication, technical format, error classes, penalties and deadlines - and whether the channel is machine-to-machine (only the DIAN electronic payroll web service) or a portal / operator round-trip (Form 350, Format 2276, PILA, severance funds).
 
@@ -7,12 +7,14 @@ The Colombia statutory-integration register: for each authority a payroll engine
 
 | Source artifact | Bytes | MD5 |
 |---|---|---|
+| `CO-SIR-001-v1.4-texto-final.md (v1.4 changes)` | 4,621 | `369f71c3bfee9123cf90e8b8119e8780` |
+| `CO-SIR-001-v1.4-export-2026-11-02.txt (Doc export, v1.4)` | 23,470 | `40c4c5492be05be2c57f10f820a3307b` |
 | `CO-SIR-001-v1.3-texto-final.md (v1.3 text, 15 blocks)` | 5,538 | `79b7f2df8bfaf7ec04992b7390ea4736` |
 | `CO-SIR-001-v1.2-texto-final.md (v1.2 text; its version-history line)` | 5,457 | `e8669140302efe07b2ae15f41b585bd2` |
 | `CO-SIR-001 v1.1 Google Doc, text capture of 2026-10-29 (base of v1.2)` | 6,163 | `27e3807ed33a9d8f72c200a70f18474a` |
 | `CO-SIR-INDEX-001-v1.0.docx (authority index)` | 41,172 | `3144b46eff327c56fa5f4c20a355624a` |
 
-CO-SIR-001 exists only as a Google Doc; versions 1.2 (issued 2026-10-30) and 1.3 (issued 2026-11-02) were released as 15 replacement blocks over version 1.1. Part 1 is therefore the v1.1 content (from the read-only text capture, restated in English) with the 15 blocks of the v1.3 text inserted **verbatim**; a block is marked ⟦v1.3⟧ where it changed in v1.3 and ⟦v1.2⟧ where it is unchanged since v1.2. Where Part 1 and Part 2 differ, Part 1 governs. Part 2 is a verbatim conversion of the index docx.
+CO-SIR-001 exists only as a Google Doc; versions 1.2 (issued 2026-10-30) and 1.3 (issued 2026-11-02) were released as 15 replacement blocks over version 1.1; version 1.4 (issued 2026-11-02) changed sections 0, 0.1, 2.1, 2.2, the related deliverables and Appendix A (marked ⟦v1.4⟧). Part 1 is therefore the v1.1 content (from the read-only text capture, restated in English) with the 15 blocks of the v1.3 text inserted **verbatim**; a block is marked ⟦v1.3⟧ where it changed in v1.3 and ⟦v1.2⟧ where it is unchanged since v1.2. Where Part 1 and Part 2 differ, Part 1 governs. Part 2 is a verbatim conversion of the index docx.
 
 
 ## Reading notes (added at compilation, 2026-11-02)
@@ -21,8 +23,8 @@ CO-SIR-001 exists only as a Google Doc; versions 1.2 (issued 2026-10-30) and 1.3
   de 2021 art. 2). Art. 1.5.3.2.3 only defines the obligated parties - do not cite it for deductibility.
 - **Validation rules:** Anexo Técnico NE v1.0 §6 lists **519** rules (437 for the payroll documents); the split is in Part 1 §4.
 - **NE contingency:** transmit within 48 hours counted from the day after the service is restored (art. 1.5.3.5.1.5).
-- **Not in the SIR text:** sections 0 and 2 of the Google Doc still speak of six in-scope filings and do not describe the
-  pensioners flow (CO-PILA-007); this file adds that flow in Part 1 §0 and §2 from the report specs.
+- **Seven in-scope filings** since v1.4: the pensioners' PILA (CO-PILA-007, Anexo Técnico 3) is channel CO-OUT-PILA-002 and
+  applies only where the employer pays pensions directly as pension payer.
 - Detailed NE transport, signature, CUNE and code tables: `04-reports-spec.md` CO-DIAN-001 (File Structure, Field Options).
 
 
@@ -32,34 +34,34 @@ Read with `offset` / `limit` rather than opening the whole file.
 
 | Line | Section |
 |---|---|
-| 49 | Part 1 - CO-SIR-001 v1.3 (Statutory Integration Register) |
-| 51 | &nbsp;&nbsp;&nbsp;&nbsp;Document control |
-| 73 | &nbsp;&nbsp;&nbsp;&nbsp;0. Purpose and scope |
-| 94 | &nbsp;&nbsp;&nbsp;&nbsp;1. Inbound |
-| 100 | &nbsp;&nbsp;&nbsp;&nbsp;2. Outbound |
-| 115 | &nbsp;&nbsp;&nbsp;&nbsp;3. Authentication |
-| 127 | &nbsp;&nbsp;&nbsp;&nbsp;4. Technical specifications |
-| 135 | &nbsp;&nbsp;&nbsp;&nbsp;5. Errors |
-| 144 | &nbsp;&nbsp;&nbsp;&nbsp;6. Deadlines |
-| 156 | &nbsp;&nbsp;&nbsp;&nbsp;Appendix A - sources cited by the SIR |
-| 163 | Part 2 - Authority index (CO-SIR-INDEX-001 v1.0, 2026-09-04) |
+| 51 | Part 1 - CO-SIR-001 v1.4 (Statutory Integration Register) |
+| 53 | &nbsp;&nbsp;&nbsp;&nbsp;Document control |
+| 76 | &nbsp;&nbsp;&nbsp;&nbsp;0. Purpose and scope |
+| 99 | &nbsp;&nbsp;&nbsp;&nbsp;1. Inbound |
+| 105 | &nbsp;&nbsp;&nbsp;&nbsp;2. Outbound |
+| 123 | &nbsp;&nbsp;&nbsp;&nbsp;3. Authentication |
+| 135 | &nbsp;&nbsp;&nbsp;&nbsp;4. Technical specifications |
+| 143 | &nbsp;&nbsp;&nbsp;&nbsp;5. Errors |
+| 152 | &nbsp;&nbsp;&nbsp;&nbsp;6. Deadlines |
+| 164 | &nbsp;&nbsp;&nbsp;&nbsp;Appendix A - sources cited by the SIR |
+| 171 | Part 2 - Authority index (CO-SIR-INDEX-001 v1.0, 2026-09-04) |
 
 ---
 
-## Part 1 - CO-SIR-001 v1.3 (Statutory Integration Register)
+## Part 1 - CO-SIR-001 v1.4 (Statutory Integration Register)
 
 ### Document control
 
 | Field | Value |
 |---|---|
 | Document ID | CO-SIR-001 |
-| Version | v1.3 ⟦v1.3⟧ |
+| Version | v1.4 ⟦v1.4⟧ |
 | Country | Colombia (CO) |
 | Jurisdictions | National - DIAN (tax); Ministerio de Salud y Protección Social via licensed operadores de información (PILA); Fondos de Cesantías via operador |
 | Tax year | 2026 |
 | Currency | COP |
 | Status | Issued |
-| Related deliverables | CO-CCG-001 v1.6 (Module 10); the seven Report Specs (five at v1.2; CO-DIAN-002 and CO-PILA-007, the pensioners PILA flow, at v1.1); CO-DD-001 v1.5; CO Payslip Generator v1.3; DIAN-NE Configuration Runbook (P1–P7) ⟦v1.3⟧ |
+| Related deliverables | CO-CCG-001 v1.7 (Module 10); the seven Report Specs (CO-DIAN-004 at v1.3; CO-DIAN-001, CO-DIAN-005, CO-PILA-003 and CO-CESANTIAS-006 at v1.2; CO-DIAN-002 and CO-PILA-007, the pensioners PILA flow, at v1.1); CO-DD-001 v1.6; CO Payslip Generator v1.3; DIAN-NE Configuration Runbook (P1–P7) ⟦v1.4⟧ |
 
 Version history:
 
@@ -69,12 +71,14 @@ Version history:
 | v1.1 | 2026-10-21 | Citations of Res. DIAN 000013 de 2021 updated to Res. DIAN 000227 de 2025. |
 | v1.2 | 2026-10-30 | Statutory validation against the primary sources: related deliverables and Appendix A updated (CO-CCG-001 v1.5, the seven Report Specs v1.1 including CO-PILA-007, CO-DD-001 v1.4, Payslip Generator v1.2; PILA Technical Annexes 2 v30 and 3 v15 as amended by Resolución MSPS 1529 de 2026); the electronic payroll document as the support for costs and deductions (Res. DIAN 000227 de 2025 art. 1.5.3.2.1); Format 2276 calendar; NE contingency (48 hours from the day after the service is restored); PILA penalties and deadlines; interest on severance savings; severance-fund file formats; NE validation-rule count. ⟦v1.2⟧ |
 | v1.3 | 2026-11-02 | Statutory validation, second pass: NE validation-rule count (Anexo Técnico NE v1.0 §6: 519 rules); related deliverables and Appendix A updated (CO-CCG-001 v1.6, Report Specs v1.2, CO-DD-001 v1.5, Payslip Generator v1.3). ⟦v1.3⟧ |
+| v1.4 | 2026-11-02 | Pensioners' PILA (CO-PILA-007) added to the integration inventory (0.1), outbound register (2.1) and data disaggregation (2.2); in-scope filings corrected from six to seven; internal working-file names removed from section 0 and Appendix A; related deliverables and Appendix A updated (CO-CCG-001 v1.7, CO-DIAN-004 v1.3, CO-DD-001 v1.6). ⟦v1.4⟧ |
 
 ### 0. Purpose and scope
 
 - Discovery verdict **HAS_INTEGRATIONS**: 4 authorities; 1 system-to-system channel. Of the in-scope filings, the electronic payroll
-  document is carried system-to-system; the others are manual (portal or operator upload). The seventh filing, PILA for pensioners
-  paid by the employer (CO-PILA-007), rides on the same operator channel as the employees' PILA.
+  document is carried system-to-system; the others are manual (portal or operator upload). Of the seven in-scope filings, one is
+  carried system-to-system and six are manual or operator-mediated; one of them, the pensioners' PILA (CO-PILA-007, Anexo Técnico 3),
+  applies only where the employer pays pensions directly as pension payer. ⟦v1.4⟧
 - Integration inventory:
 
 | ID | Authority / channel | Direction | Integration |
@@ -83,6 +87,7 @@ Version history:
 | CO-IN-NE-APPRESPONSE | DIAN - ApplicationResponse / GetStatus | Inbound | Yes |
 | CO-OUT-MUISCA-001 | DIAN - Muisca (Form 350) | Outbound | No |
 | CO-OUT-PILA-001 | PILA via operador de información | Outbound | Yes (file generation only) |
+| CO-OUT-PILA-002 | PILA (pensioners) via operador de información | Outbound | Yes (file generation only) ⟦v1.4⟧ |
 | CO-IN-PILA-001 | PILA settlement return | Inbound | No |
 | CO-OUT-CESANTIAS-001 | Fondos de Cesantías via operador | Outbound | Yes (file generation only) |
 | CO-IN-CESANTIAS-CONFIRMATION | Severance-fund confirmation | Inbound | No |
@@ -103,12 +108,15 @@ Version history:
 |---|---|---|---|
 | CO-OUT-NE-001 | CO-DIAN-001 | Monthly | SOAP 1.2; base64 ZIP holding exactly one signed XML; UTF-8; 500 KB maximum |
 | CO-OUT-MUISCA-001 | CO-DIAN-002 | Monthly | Portal entry, no file |
-| CO-OUT-PILA-001 | CO-PILA-003 (employees), CO-PILA-007 (pensioners) | Monthly | Fixed-width TXT (Archivo Tipo 1 + Archivo Tipo 2) |
+| CO-OUT-PILA-001 | CO-PILA-003 | Monthly | Fixed-width TXT (Archivo Tipo 1 + Archivo Tipo 2) |
+| CO-OUT-PILA-002 | CO-PILA-007 (pension payer type 01) | Monthly | Fixed-width TXT (Archivo Tipo 1 + Archivo Tipo 2, Anexo Técnico 3) ⟦v1.4⟧ |
 | CO-OUT-CESANTIAS-001 | CO-CESANTIAS-006 | Annual | Fixed TXT, XLS 97-2003 or CSV, per operator |
 
 Content per channel: NE - per employee: salary, overtime, allowances, bonuses, severance savings and interest, vacation; health,
 pension, solidarity fund, withholding, garnishments, third-party payments · Form 350 - withholding aggregated by concept · PILA -
-IBC by subsystem, days, change events (novedades), health, pension, solidarity fund, ARL, CCF, SENA, ICBF · Cesantías - annual
+IBC by subsystem, days, change events (novedades), health, pension, solidarity fund, ARL, CCF, SENA, ICBF · PILA pensioners - per
+pensioner: pension type, mesada, contribution days, health, solidarity fund and, where they apply, pension and CCF; no occupational
+risk, SENA or ICBF ⟦v1.4⟧ · Cesantías - annual
 liquidation at 31 December, fund, contact, start date · Form 220 - issued to the employee, not filed with DIAN · Format 2276 -
 income and withholding per beneficiary for the year.
 
@@ -155,9 +163,9 @@ income and withholding per beneficiary for the year.
 
 ### Appendix A - sources cited by the SIR
 
-CCG Module 10 (CO-CCG-001 v1.6) ⟦v1.3⟧ · 7 Report Specs (v1.2; CO-DIAN-002 and CO-PILA-007 v1.1; including CO-PILA-007, pensioners PILA flow) ⟦v1.3⟧ · DIAN-NE Configuration Runbook (P1-P7) · Res. DIAN 000227/2025 arts. 1.5.3.1.1 to 1.5.3.9.8 ·
+Scope decision of 3 September 2026 (internal scope record): 4 authorities; 7 in-scope filings (the six original filings plus the pensioners' PILA, CO-PILA-007, added on 21 October 2026), 7 descoped ⟦v1.4⟧ · CCG Module 10 (CO-CCG-001 v1.7) ⟦v1.4⟧ · 7 Report Specs (CO-DIAN-004 v1.3; CO-DIAN-002 and CO-PILA-007 v1.1; the others v1.2; including CO-PILA-007, pensioners PILA flow) ⟦v1.4⟧ · DIAN-NE Configuration Runbook (P1-P7) · Res. DIAN 000227/2025 arts. 1.5.3.1.1 to 1.5.3.9.8 ·
 Anexo Técnico DSPNE v1.0 · XSD v1.0.6 · WSDL · PILA — Resolución 2388 de 2016, Anexo Técnico 2 (v30) and Anexo Técnico 3 (v15), as amended by Resolución MSPS 1529 de 2026 ⟦v1.2⟧ · severance-fund operator manual · operator portal ·
-integration landscape (2026-09-04).
+Integration discovery record of 4 September 2026 (internal working file behind this register). ⟦v1.4⟧
 
 
 ## Part 2 - Authority index (CO-SIR-INDEX-001 v1.0, 2026-09-04)

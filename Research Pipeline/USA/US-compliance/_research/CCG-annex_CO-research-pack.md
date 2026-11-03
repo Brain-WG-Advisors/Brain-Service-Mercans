@@ -7,9 +7,9 @@ Synthesis B, 2026-11-02. Source: `_research/stage5/CO.md` and the active/partial
 **Summary.** State minimum wage 15.16 (2026), Denver 19.29; overtime after 40/week or 12/day. Flat 4.40% withholding (DR 1098 method; DR 0004 optional; OBBBA overtime deduction not allowed for CO withholding). Occupational Privilege Taxes in Denver, Greenwood Village, Glendale (Sheridan tier C). UI chargeable wage limit 30,600 (2026) / 32,100 (2027), new employer 3.05% total; FAMLI 0.88% (2026, split 0.44/0.44) and 0.86% (2027). Wage Act pay statement + COMPS Rule 7 items. Several base figures (DR 1098 method, UI wage limit, FAMLI 2026) sit on legacy-id rows and are listed as non-fact lines pending re-key.
 
 ## 1 — Employment / labour code
-2027 state 15.71 / tipped 12.69 and Denver 19.84, and 2026 Edgewater 18.17 / Boulder 16.82 are tier-B leads only [US-COS5-011 MANUAL]: not facts (CO-OQ-3).
+2027 state 15.71 / tipped 12.69 exists only as a PROPOSED rule (US-COB5-002, provisional): not a fact. Denver 2027 19.84 and Edgewater 2026 18.17 remain tier-B leads only (US-COS5-011 MANUAL): not facts (CO-OQ-3). Boulder City and unincorporated Boulder County are facts [A.2, US-COB5-302 / US-COB5-303].
 
-- `co.minwage.hourly` = **15.16** USD (2026-01-01 → 2026-12-31) [A.2, US-COS5-001, quoted from authority page, conf high] — COMPS Rule 3; highest applicable (local) minimum applies. 2027 15.71 is tier-B only (US-COS5-011 MANUAL), not a fact.
+- `co.minwage.hourly` = **15.16** USD (2026-01-01 → 2026-12-31) [A.2, US-COB5-001, quoted from authority page, conf high] — COMPS Rule 3; highest applicable (local) minimum applies. 2027 15.71 is a PROPOSED rule (US-COB5-002, provisional): not a fact until adopted.
 - `co.minwage.tip_credit.max` = **3.02** USD (2026-01-01 → 2026-12-31) [A.2, US-COS5-001, quoted from authority page, conf high]
 - `co.minwage.tipped.cash_wage` = **12.14** USD (2026-01-01 → 2026-12-31) [A.2, US-COS5-001, derived arithmetically, conf high] — 15.16 - 3.02.
 - `co.minwage.minor_reduction.percent` = **15** percent (2026-01-01 → open) [A.2, US-COS5-001, quoted from authority page, conf high] — Unemancipated minors; not for some local minimum wages.
@@ -45,9 +45,9 @@ OPTs are flat monthly amounts on separate city returns (T4). Sheridan 3+3 rests 
 - `co.local.opt.glendale.employee_monthly` = **5** USD (2026-01-01 → open) [A.2, US-COS5-016, quoted from authority page, conf high] — Employer 5/month; trigger more than 750 in the month.
 - `co.local.opt.glendale.employer_monthly` = **5** USD (2026-01-01 → open) [A.2, US-COS5-016, quoted from authority page, conf high]
 - `co.local.opt.glendale.threshold_monthly` = **750** USD (2026-01-01 → open) [A.2, US-COS5-016, quoted from authority page, conf high]
-- `co.local.opt.denver.employee_monthly` = **5.75** USD (2025-01-01 → open) [A.2, US-COP7-004, quoted from authority page, conf medium] — Earnings >= 500/month; 2025 Tax Guide edition, 2026 edition not read (CO-OQ-5).
-- `co.local.opt.denver.employer_monthly` = **4.0** USD (2025-01-01 → open) [A.2, US-COP7-005, quoted from authority page, conf medium] — 2026 edition not read.
-- `co.local.opt.denver.threshold_monthly` = **500** USD (2025-01-01 → open) [A.2, US-COP7-004, quoted from authority page, conf medium]
+- `co.local.opt.denver.employee_monthly` = **5.75** USD (2025-01-01 → open) [A.2, US-COB5-403, quoted from authority page, conf medium] — Earnings >= 500/month; 2025 Tax Guide edition, 2026 edition not read (CO-OQ-5).
+- `co.local.opt.denver.employer_monthly` = **4.0** USD (2025-01-01 → open) [A.2, US-COB5-404, quoted from authority page, conf medium] — 2026 edition not read.
+- `co.local.opt.denver.threshold_monthly` = **500** USD (2025-01-01 → open) [A.2, US-COB5-403, quoted from authority page, conf medium]
 
 ## 3 — Social insurance (SUI / SDI / PFML / levies)
 Experienced-employer support/solvency surcharges rest on MANUAL rows (US-COL-004, US-COP7-002/003). No employee UI share. FAMLI wage cap follows the SS wage base (FED). Employee may top up FAMLI with PTO.
@@ -55,8 +55,8 @@ Experienced-employer support/solvency surcharges rest on MANUAL rows (US-COL-004
 - `co.sui.wage_base` = 30600 (2026-01-01 → 2026-12-31) [A.2, US-COP51-003 — promoted to fact in Synthesis C] Chargeable wage limit; 32,100 for 2027; employer only.
 - `co.sui.wage_base.next_year` = 32100 (2027-01-01 → open) [A.2, US-COP51-003 — promoted to fact in Synthesis C]
 - `co.sui.new_employer.rate.total` = 3.05 (2026-01-01 → 2026-12-31) [A.2, US-COP51-004 — promoted to fact in Synthesis C] 1.53% + support surcharge 0.17% + solvency 1.35% (non-construction); heavy construction 6.285%; 2027 1.70% combined, no solvency.
-- `co.famli.total.rate` = 0.88 (2026-01-01 → 2026-12-31) [A.2, US-COFAMLI-001 — promoted to fact in Synthesis C] 0.44% employer + 0.44% employee on wages up to the SS wage base (184,500); statutory cap 1.2%.
-- `co.famli.total.rate` = **0.86** percent (2027-01-01 → open) [A.2, US-COS5-008, quoted from authority page, conf high] — 2027 total; split and <10-employee exemption not read on a primary page (US-COP7-001 MANUAL).
+- `co.famli.total.rate` = 0.88 (2026-01-01 → 2026-12-31) [A.2, US-COB5-401 — promoted to fact in Synthesis C] 0.44% employer + 0.44% employee on wages up to the SS wage base (184,500); statutory cap 1.2%.
+- `co.famli.total.rate` = **0.86** percent (2027-01-01 → open) [A.3, US-COB5-301 (was US-COS5-008, same CDLE bulletin; local copy quotes "The 2027 premium rate will be 0.86% of wages"), quoted from authority page, conf high] — 2027 total; split and <10-employee exemption not read on a primary page (US-COP7-001 MANUAL).
 - `co.sui.coverage` = **follows FUTA thresholds: employer 20 weeks / 1,500 quarter; agricultural 10 workers in 20 weeks or 20,000 quarter; domestic 1,000 quarter; excluded commission insurance/real-estate agents, casual labour, part-time for exempt nonprofits, students at own school**  (2023-01-01 → open) [A.2, US-COS5-014, direct artifact inspection, conf medium] — [partial row]
 
 ## 4 — Payslip statute
@@ -95,7 +95,7 @@ UI quarterly wage report format/due date not read (CDLE 403); TPA authorisation 
 - `co.garn.creditor.weekly_floor` = **606.4** USD (2026-01-01 → 2026-12-31) [A.3, US-COS5-009, derived arithmetically, conf high] — 40 x 15.16.
 
 ## 10 — Collective agreements / prevailing wage
-- `co.prevailing_wage.threshold` = 500000 (2026-01-01 → open) [A.2, US-COP52-002 — promoted to fact in Synthesis C] C.R.S. 24-92-201 ff.; weekly pay required.
+- `co.prevailing_wage.threshold` = 500000 (2026-01-01 → open) [A.2, US-COB5-402 — promoted to fact in Synthesis C] C.R.S. 24-92-201 ff.; weekly pay required.
 
 ## 11 — Indexation
 State MW CPI-indexed yearly (PAY CALC Order/COMPS poster); Denver CPI-W H1/H1; EAP threshold yearly; UI limit statutory steps 27,200 -> 30,600 -> 32,100; FAMLI set yearly (cap 1.2%); OPTs fixed.
@@ -144,25 +144,46 @@ Facts changed:
 - `co.minwage.tip_credit.max` (2026-01-01): register_id 'US-COS5-001' → 'US-COB5-001'; tier 'A.2' → 'A.1'; verification_method 'quoted from authority page' → 'second independent authority'; note += '2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).'
 - `co.minwage.tipped.cash_wage` (2026-01-01): register_id 'US-COS5-001' → 'US-COB5-001'; tier 'A.2' → 'A.1'; verification_method 'derived arithmetically' → 'second independent authority'; note += '2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).'
 - `co.exempt.salary.annual_min` (2026-01-01): register_id 'US-COS5-001' → 'US-COB5-001'; tier 'A.2' → 'A.1'; verification_method 'quoted from authority page' → 'second independent authority'; note += '2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).'
-- `co.minwage.hourly` (2026-01-01): note 'COMPS Rule 3; highest applicable (local) minimum applies. 2027 15.71 is tier-B only (US-COS5-011 MANUAL), not a fact. 2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).' → 'COMPS Rule 3; highest applicable (local) minimum applies. 2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001). 2027 15.71 is a PROPOSED rule (US-COB5-002, provisional): not a fact until adopted.'
+- `co.minwage.hourly` (2026-01-01): note 'COMPS Rule 3; highest applicable (local) minimum applies. 2027 15.71 is tier-B only (US-COS5-011 MANUAL), not a fact. 2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).' → 'COMPS Rule 3; highest applicable (local) minimum applies. 2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001). 2027 15.71 is a PROPOSED rule (provisional register row, see unresolved): not a fact until adopted.'
 - `co.minwage.tipped.cash_wage` (2026-01-01): note '15.16 - 3.02. 2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).' → '15.16 - 3.02; now quoted directly in the 2026 PAY CALC Order (12.14). 2026 PAY CALC Order (7 CCR 1103-14, adopted 2025-12-08, Rule 1.2.1) agrees with the CDLE COMPS poster (US-COS5-001).'
 
 Keys renamed (no alias kept; agent 4 must re-bind):
-- `co.famli.rate.total.2026` → `co.famli.total.rate` (fact effective 2026-01-01; year removed from the key, register US-COFAMLI-001)
-- `co.famli.rate.total` → `co.famli.total.rate` (fact effective 2027-01-01, register US-COS5-008). Kept key = the WTC/m05 convention `{st}.pfml.total.rate` / `md.famli.total.rate`; WTC already used `co.famli.total.rate` for both years, so CCG annex and WTC now share one key.
+- `co.famli.rate.total.2026` → `co.famli.total.rate` (fact effective 2026-01-01; year removed from the key, register US-COB5-401)
+- `co.famli.rate.total` → `co.famli.total.rate` (fact effective 2027-01-01, register US-COB5-301 since F44 2026-11-02, was US-COS5-008). Kept key = the WTC/m05 convention `{st}.pfml.total.rate` / `md.famli.total.rate`; WTC already used `co.famli.total.rate` for both years, so CCG annex and WTC now share one key.
 
 Open questions narrowed / added: `co.local_minwage.other_cities`, `co.minwage.hourly.next_year` (lines rewritten in the block below).
 
 Still open, new attempts recorded in `unresolved[].attempted`: `co.famli.split.next_year`.
 
+## QA r1b additions (2026-11-02)
+
+Source: browser pass P3 (`_research/stage5/browser-pass-P3.md`, shard `S5B-P3.csv` merged into the register). Facts file is authoritative; every line below is a fact object with the same key.
+
+**3 - Social insurance: FAMLI 2027 (RQ-490, rate closed).** CDLE FAMLI Business Brief 2026-09-30: 0.86% from 2027-01-01 [A.3 bulletin copy US-COB5-301; the same bulletin is US-COS5-008, A.2]. Split derived from the standing 50% employee cap [US-COB5-003]: 0.86 x 0.5 = 0.43. Residual (non-blocking): A.1 text of the cap.
+
+- `co.famli.employee.rate` = **0.43** percent (2027-01-01 -> open) [A.3, US-COB5-301, derived arithmetically, conf medium] Maximum employee share 2027: 0.86% x 50% = 0.43%. The 0.86% total is on the CDLE bulletin of 2026-09-30; the 50% employee cap is the standing rule on famli.colorado.gov (US-COB5-003, 2026 page) and is not restated in the bulletin.
+- `co.famli.employer.rate` = **0.43** percent (2027-01-01 -> open) [A.3, US-COB5-301, derived arithmetically, conf medium] 0.86% - 0.43% employee share = 0.43%, for employers with 10+ employees that deduct the full employee share. Employers with 9 or fewer employees owe no employer share (co.famli.small_employer.max_employees, open-ended).
+
+**1 - Labour code: Boulder localities (narrows RQ-491).** Boulder County [A.2, US-COB5-302] and City of Boulder Ord. 8664 [A.2, US-COB5-303]; both rows supersede the tier-B lead US-COS5-011 for these two localities only (that row stays MANUAL for Edgewater 2026 and Denver 2027). City 2027 (18.17) is conf medium: the page dates from the 2025 launch.
+
+- `co.local_minwage.boulder_county_unincorporated.hourly` = **16.82** USD (2026-01-01 -> 2026-12-31) [A.2, US-COB5-302, quoted from authority page, conf high] Unincorporated Boulder County (ordinance amended November 2025).
+- `co.local_minwage.boulder_county_unincorporated.hourly` = **17.43** USD (2027-01-01 -> open) [A.2, US-COB5-302, quoted from authority page, conf high]
+- `co.local_minwage.boulder_city.hourly` = **16.82** USD (2026-01-01 -> 2026-12-31) [A.2, US-COB5-303, quoted from authority page, conf high] City of Boulder Ord. 8664 schedule: 15.57 (2025), 16.82 (2026), 18.17 (2027), CPI from 2028.
+- `co.local_minwage.boulder_city.hourly` = **18.17** USD (2027-01-01 -> open) [A.2, US-COB5-303, quoted from authority page, conf medium] From the Ord. 8664 FAQ written for the 2025 launch; no later City amendment found (the County lowered its own 2027 step to 17.43 in Nov 2025). Re-check before 2027-01-01.
+
+
+## QA r3b additions (agent 2, 2026-11-02)
+- `co.sui.new_employer.rate.total` = 1.70% from 2027-01-01 [US-COP51-004]: 0.0153 + 0.0017 + surcharge .00 (solvency surcharge not in effect for 2027). The 2026 value 3.05% is unchanged (effective_to 2026-12-31).
+
 ## Open questions
-Mirrors `unresolved[]` in the facts file (same keys).
+
+Mirrors `unresolved[]` in the facts file (same keys, same wording). Regenerated by QA r1b on 2026-11-02.
 
 - `co.sui.wage_base.other_state_credit` (non-blocking) — C.R.S. 8-76-102 text and CDLE premiums page unreachable (403). **Would close it:** C.R.S. 8-76-102 text, CDLE Employer Handbook, or DOL Significant Provisions of State UI Laws 2026 CO line.
-- `co.famli.split.next_year` (blocking) — 2027 employee/employer split, under-10-employee employer exemption and multistate coverage not read on a primary page (famli.colorado.gov 403). **Would close it:** 7 CCR 2702-3 and C.R.S. 8-13.3-507 via famli.colorado.gov or Colorado Register (browser pass).
+- `co.famli.split.next_year` (non-blocking) — 2027 total 0.86% is published (CDLE bulletin, US-COS5-008 / US-COB5-301) and the 2027 split 0.43/0.43 is derived from the standing 50% employee cap read on the 2026 employer page (US-COB5-003). Not read: an A.1 text of the 50% cap and the small-employer exemption (C.R.S. 8-13.3-507, 7 CCR 2702-3). **Would close it:** C.R.S. 8-13.3-507 or 7 CCR 2702-3 text (Colorado Register / famli.colorado.gov), only to upgrade the split from derived to A.1.
+- `co.local_minwage.other_cities` (blocking) — City of Boulder and unincorporated Boulder County 2026/2027 are now facts (US-COB5-302/-303). Edgewater 2026 (lead 18.17) and Denver 2027 (lead 19.84) still rest only on tier-B leads (US-COS5-011 MANUAL): edgewaterco.com returns Akamai 403 and denvergov.org a WAF block from the Brazil exit. **Would close it:** City of Edgewater minimum wage ordinance/notice for 2026 and the Denver Labor 2027 minimum wage notice, read from a US exit.
 - `co.report.sui.quarterly` (non-blocking) — CDLE MyUI Employer+ wage-report format/due date and CO new-hire specifics not read (CDLE 403; childsupport.colorado.gov timeout). **Would close it:** CDLE MyUI Employer+ wage-report guide and Colorado State Directory of New Hires page.
 - `co.local.opt.denver.current_edition` (non-blocking) — Denver OPT figures come from the 2025 Tax Guide; 2026 edition not read; Sheridan only tier C. **Would close it:** Denver Tax Guide Topic 61 2026 revision and the Sheridan city page.
 - `co.leave.sick.amendments_and_payslip_econsent` (non-blocking) — HFWA amendments 2024-2026 and electronic pay-statement consent unread (CDLE 403). **Would close it:** CDLE current HFWA text and INFO #6/#13 (browser pass).
 - `co.data_protection.statutes` (non-blocking) — 6-1-713/-713.5/-716 and SecureSavings payroll-deduction duties unread (coag.gov 202-empty). **Would close it:** coag.gov data-protection page and the Colorado SecureSavings employer page.
-- `co.local_minwage.other_cities` (blocking) — Edgewater, City of Boulder and Boulder County 2026 rates and the Denver 2027 rate rest on tier-B leads only (US-COS5-011 MANUAL); the PAY CALC Order is not a list of local minimum wages (Rule 2.2). **Would close it:** coloradolaborlaw.gov local minimum wage list or each city/county notice (Edgewater, Boulder, Boulder County) and the Denver Labor 2027 rate notice. *(Synthesis D 2026-11-02)*
-- `co.minwage.hourly.next_year` (non-blocking) — The 2027 state minimum (15.71; tipped 12.69; minors 13.36; EAP 1,151.23/week = 59,864/yr; computer 36.10/h; highly compensated 134,694) exists only as the PROPOSED 2027 PAY CALC Order (US-COB5-002, status provisional; hearing 2026-11-02; rulemaking page shows 'Adopted N/A'). **Would close it:** The adopted 2027 PAY CALC Order (7 CCR 1103-14) posted on the CDLE 'Labor rules proposed and adopted' page. *(Synthesis D 2026-11-02)*
+- `co.minwage.hourly.next_year` (non-blocking) — The 2027 state minimum (15.71; tipped 12.69; minors 13.36; EAP 1,151.23/week = 59,864/yr; computer 36.10/h; highly compensated 134,694) exists only as the PROPOSED 2027 PAY CALC Order (US-COB5-002, status provisional; hearing 2026-11-02; rulemaking page shows 'Adopted N/A'). **Would close it:** The adopted 2027 PAY CALC Order (7 CCR 1103-14) posted on the CDLE 'Labor rules proposed and adopted' page.

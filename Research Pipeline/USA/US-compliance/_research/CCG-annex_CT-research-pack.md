@@ -134,10 +134,37 @@ Facts added:
 
 Open questions closed: `ct.report.pfml.file_spec`.
 
-## Open questions
-Mirrors `unresolved[]` in the facts file (same keys).
+## QA r1b additions (2026-11-02)
 
-- `ct.wh.tables.per_period` (blocking) — DRS withholding tables (IP 2026(1) pp. 31+) not parsed; TPG-211 rules differ from tables by up to 0.48 per period, so the oracle examples are only reproducible from tables. **Would close it:** Builder/owner decides the engine method; if tables, parse IP 2026(1) pp. 31-39 (held PDF md5 a64b2bbb...) and reproduce Ex. 8-10 (17.65 / 39.97 / 78.82).
+Source: the IP 2026(1) PDF already held (`00-official-sources/pdfs/CT/CT_IP-2026-1_2026-11-02.pdf`, md5 a64b2bbb855163fb832396939efc74ef); no new fetch. Facts file is authoritative; every line below is a fact object with the same key.
+
+**2 - Income tax: per-period withholding tables (closes RQ-497).** Register row US-CTB5-401 [A.2]. Pages 31-38 have no text layer: every character is a filled vector path, so `pdftotext` and PyMuPDF `get_text("words")` return only the page footer. Decoding (scripts `_research/qa-r1-fix/scripts/ct_tables_parse.py` and `ct_tables_build.py`, `python -I`): each glyph is labelled by its path-command signature and, independently, by bitmap template match on a 600 dpi render; in the table body the two labels never disagree. Result: 139 wage bands per period x codes A/B/C/D/F (weekly to 1,932; bi-weekly to 3,865; semi-monthly to 4,187; monthly to 8,375; above that DRS says "Refer to TPG-211, Withholding Calculation Rules"). Full table: `_research/qa-r1-fix/ct-tables/CT-2026-withholding-tables.csv`; checks: `ct-tables/verify.json`.
+
+**Checks (G-SPOT, direct artifact inspection).** Bands contiguous from 0 to the per-period maximum in all four periods; every code column non-decreasing; three row groups (weekly 673-701, bi-weekly 3,500-3,538, monthly 5,083-5,250) compared by eye with the rendered page. **Oracle:** Example 8 weekly 700 code F: band 692-701 = 17.65, x 60% = 10.59. Example 9 weekly 1,000 code A: band 990-1,000 = 39.97, x 40% = 15.99. Example 10 bi-weekly 2,300 code B: band 2,269-2,307 = 78.82. All three reproduce exactly; the existing oracle facts go from conf medium to high.
+
+**Fact layout.** One fact per band: `ct.wh.table.<period>.row.<nnn>` with value `greater_than|less_than_or_equal_to|A|B|C|D|F` (layout in `ct.wh.tables.columns`); `ct.wh.table.<period>.max_wages` per period. 556 band facts are not listed here; new non-row facts:
+
+- `ct.oracle.ip2026_1.ex8.withholding` = **17.65** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTS5-011, direct artifact inspection, conf high] IP 2026(1) Ex. 8: code F, 700 weekly (table-based). TPG-211 rules give 17.79 (residual 0.14). QA r1b: reproduced from the parsed weekly table, band 692-701, code F = 17.65 (US-CTB5-401).
+- `ct.oracle.ip2026_1.ex9.withholding` = **39.97** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTS5-011, direct artifact inspection, conf high] Ex. 9: code A, 1,000 weekly (tables). Rules give 39.86 (residual 0.11). QA r1b: reproduced from the parsed weekly table, band 990-1000, code A = 39.97 (US-CTB5-401).
+- `ct.oracle.ip2026_1.ex10.withholding` = **78.82** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTS5-011, direct artifact inspection, conf high] Ex. 10: code B, 2,300 biweekly (tables). Rules give 79.30 (residual 0.48). QA r1b: reproduced from the parsed biweekly table, band 2269-2307, code B = 78.82 (US-CTB5-401).
+- `ct.wh.tables.columns` = **wages_greater_than|wages_less_than_or_equal_to|A|B|C|D|F (USD; withholding code from Form CT-W4; amounts per pay period)** (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Layout of every ct.wh.table.<period>.row.<nnn> value. Lookup: the band with greater_than < taxable wages <= less_than_or_equal_to; take the code column.
+- `ct.oracle.ip2026_1.ex8.withheld_allocated` = **10.59** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Example 8: table amount 17.65 (weekly band 692-701, code F) x 60% CT-W4NA share = 10.59.
+- `ct.oracle.ip2026_1.ex9.week1_allocated` = **15.99** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Example 9: table amount 39.97 (weekly band 990-1000, code A) x 40% of days in CT = 15.99.
+- `ct.wh.table.weekly.max_wages` = **1932** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Wages over this amount: "Refer to TPG-211, Withholding Calculation Rules" (no table row).
+- `ct.wh.table.biweekly.max_wages` = **3865** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Wages over this amount: "Refer to TPG-211, Withholding Calculation Rules" (no table row).
+- `ct.wh.table.semimonthly.max_wages` = **4187** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Wages over this amount: "Refer to TPG-211, Withholding Calculation Rules" (no table row).
+- `ct.wh.table.monthly.max_wages` = **8375** USD (2026-01-01 -> 2026-12-31) [A.2, US-CTB5-401, direct artifact inspection, conf high] Wages over this amount: "Refer to TPG-211, Withholding Calculation Rules" (no table row).
+
+The engine choice between the tables and the TPG-211 rules (CT-OQ-1) is a design decision and is carried as the non-blocking `ct.wh.engine_method`.
+
+
+## QA r3b additions (agent 2, 2026-11-02)
+- TPG-211 (Rev. 12/25) Tables C, D, E transcribed from IP 2026(1) PDF pp.28-30 [US-CTP10-001]: `ct.wh.table_c.{code_a_d,code_b,code_c,code_f}`, `ct.wh.table_d.{code_a_d_f,code_b,code_c}`, `ct.wh.table_e.{code_a,code_b,code_c,code_f}` (code D personal tax credit 0.00). Closes RQ-509.
+
+## Open questions
+
+Mirrors `unresolved[]` in the facts file (same keys, same wording). Regenerated by QA r1b on 2026-11-02.
+
 - `ct.report.sui.optional_fields_layout` (non-blocking) — The 2022 ReEmployCT 276-char layout has no positions for the optional occupation/hours/ZIP data from Q3 2026; ICESA/MMREF bulk options are leads only. **Would close it:** CT DOL bulk-filer file-format page or updated ReEmployCT spec (Employer Tax Accounting Unit, dol.etau@ct.gov).
 - `ct.sui.wage_base.next_year` (non-blocking) — 2027 UI base not published (DOL page 404); 27,900 is a projection only. **Would close it:** CT DOL "Information on Unemployment Tax Rate for Calendar Year 2027" (December).
 - `ct.pit.departures_from_federal` (non-blocking) — Only DRS guide-level conformity checked; chapter 229 modification list not read. **Would close it:** Conn. Gen. Stat. 12-701(a)(20) text.
@@ -145,3 +172,4 @@ Mirrors `unresolved[]` in the facts file (same keys).
 - `ct.garn.employer_fee` (non-blocking) — No employer administrative fee seen in the 52-361a/52-362 text read. **Would close it:** Full read of 52-362 (held file) and 52-361a(j)-(k).
 - `ct.live.public_act_texts` (non-blocking) — PA 26-68 (ss.195, 371-373), PA 26-17, PA 26-15 s.26 known only via OLR summaries (A.3). **Would close it:** Act PDFs on cga.ct.gov via the Wayback route.
 - `ct.payslip.consolidated_text_lag` (non-blocking) — Consolidated 31-13a (2026-10-20 capture) predates PA 26-12 s.38. **Would close it:** Re-verify consolidated 31-13a at next synthesis; cite PA 26-12 until then.
+- `ct.wh.engine_method` (non-blocking) — DRS allows the tables (IP 2026(1) pp. 31-38, now keyed as ct.wh.table.*) or the TPG-211 calculation rules; results differ by up to 0.48 per period and the DRS oracle examples reproduce only from the tables. Which one the engine uses is a design decision, not a research gap. **Would close it:** Owner/design decision (CT-OQ-1): tables (ct.wh.table.*) up to the per-period maximum and TPG-211 above it, or TPG-211 throughout.

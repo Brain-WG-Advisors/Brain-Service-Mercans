@@ -97,4 +97,4 @@
 | Nonresident short-term workers | Day-count safe harbour (Section 2) | US-UTP51-002 |
 
 ## @gaps
-- ut.pit.schedule.effective_date :: Pub 14 Rev. 04/26 does not state from which pay period its base allowances and thresholds apply; a tier-B lead points to a mid-year 2026 change from lower earlier allowances. Calculations for pay periods before the effective date cannot be fixed. :: Tax Commission notice or Pub 14 PDF cover (US IP).
+- ut.pit.schedule.effective_date :: Pub 14 Rev. 04/26 does not state from which pay period its base allowances and thresholds apply; a secondary source points to a mid-year 2026 change from lower earlier allowances. Calculations for pay periods before the effective date cannot be fixed. :: Tax Commission notice or Pub 14 PDF cover (US IP).

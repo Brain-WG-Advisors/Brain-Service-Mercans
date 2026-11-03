@@ -13,9 +13,9 @@ Each example is computed from the statutory parameters listed in this annex and 
 | Bracket 5: 1,750.00 above [[FACT:de.pit.bracket.4.ceiling=20,000]] | 1,750.00 x [[FACT:de.pit.bracket.5.rate=5.2]] % | 91.00 |
 | Annual tax before credit | sum of bracket amounts | 832.00 |
 | Personal credit | 832.00 - 1 x [[FACT:de.wh.personal_credit.per_exemption=110]] | 722.00 |
-| Weekly withholding | 722.00 / 52, half-up to the cent | [[FACT:de.oracle.guide.example1.withholding_weekly=13.88]] |
+| Weekly withholding | 722.00 / 52, half-up to the cent | [[FACT:de.oracle.weekly_25000.withholding=13.88]] |
 
-Computed result = published [[FACT:de.oracle.guide.example1.withholding_weekly=13.88]] (match).
+Computed result = published [[FACT:de.oracle.weekly_25000.withholding=13.88]] (match).
 
 **Example DE-2: supplemental payment 5,000.00 paid separately to an employee earning 500.00 weekly, single, 1 exemption (annualised-with minus annualised-without, per `de.wh.supplemental.method`).**
 
@@ -24,6 +24,6 @@ Computed result = published [[FACT:de.oracle.guide.example1.withholding_weekly=1
 | Annual regular wages | 500.00 x 52 | 26,000.00 |
 | Tax without the bonus | tax on (26,000.00 - [[FACT:de.wh.std_deduction.single=3,250]]) - [[FACT:de.wh.personal_credit.per_exemption=110]] | 774.00 |
 | Tax with the bonus | tax on (26,000.00 + 5,000.00 - [[FACT:de.wh.std_deduction.single=3,250]]) - [[FACT:de.wh.personal_credit.per_exemption=110]] | 1,043.625 |
-| Withholding on the bonus | 1,043.625 - 774.00 = 269.625, half-up to the cent | [[FACT:de.oracle.guide.example2.supplemental=269.63]] |
+| Withholding on the bonus | 1,043.625 - 774.00 = 269.625, half-up to the cent | [[FACT:de.oracle.supplemental.withholding=269.63]] |
 
-Computed result = published [[FACT:de.oracle.guide.example2.supplemental=269.63]] (match).
+Computed result = published [[FACT:de.oracle.supplemental.withholding=269.63]] (match).

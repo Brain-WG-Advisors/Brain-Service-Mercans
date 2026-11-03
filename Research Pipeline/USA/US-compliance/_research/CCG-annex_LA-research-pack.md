@@ -79,7 +79,7 @@ Not researched (20%).
 
 
 ## 13 — Live legal change
-- `la.live.lac_61_i_1923` = **adopted LR 52:358 (2026-03-20), supersedes the NOI (US-MULTIS5-022); level withholding**  (2026-03-20 → open) [A.1, US-LAS5-002, direct artifact inspection, conf high]
+- `la.live.lac_61_i_1923` = **adopted LR 52:358 (2026-03-20), supersedes the NOI (lineage in the register supersedes column of US-LAS5-002); level withholding**  (2026-03-20 → open) [A.1, US-LAS5-002, direct artifact inspection, conf high]
 - `la.live.sb133_2025` = **not codified (technical; adds "laborers")**  (2025-01-01 → open) [A.1, US-LAS5-014, direct artifact inspection, conf medium] — [partial row]
 
 ## Oracle — worked examples (C37)

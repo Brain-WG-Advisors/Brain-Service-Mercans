@@ -47,6 +47,7 @@ Colar `prompts/abrir-sessao.md`. Ler o `PLANO.md` (modelo de construção e pain
 
 ## Abrir a sessão
 Antes da primeira tarefa: ler `ESTADO.md` e as últimas linhas de `log.md`; rodar `scripts/youtrack_fetch.ps1 -DryRun -Query "for: me #Unresolved"` para ver a fila atual (tickets podem ter sido atribuídos depois da última sessão).
+- **Radar de esquecidos:** `python scripts/radar_esquecidos.py` → `paineis/radar.md` (pendências abertas há 7+ dias, por dono e idade; marca as que parecem resolvidas). Rodar ao abrir o dia e trazer ao usuário só as mais velhas dele (decidido em 2026-11-03).
 - **Tickets dos hubs:** `python scripts/atualizar_tickets.py` (estado na API → properties, linha Suporte dos hubs e painel do 00-INDEX). Rodar ao abrir o dia.
 - **Toda task de país começa por** `python scripts/contexto_pais.py <País|código>`: versões vigentes, tickets abertos, correções, pendências e valores sem fonte num passo só. Detalhe exato: abrir o arquivo citado.
 
@@ -73,12 +74,20 @@ As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada u
 - Graphify:
   - O grafo da camada de conhecimento fica em `graphify-out/`, fora do git. O escopo está em `.graphifyignore`, sem cópias de skill nem saídas do pipeline.
   - Para perguntas sobre o cérebro, começar por `graphify query`.
-  - Para material longo (reuniões, leis, tickets, chats, extrações): `python scripts/buscar.py "<termos>" [--fonte reunioes|oficiais|tickets|chats|extracoes]` devolve arquivo:linha + trecho; abrir só o trecho citado. Local, sem rede; reuniões e tickets em inglês → buscar em inglês (decidido em 2026-10-28).
+  - Para material longo (reuniões, leis, tickets, chats, extrações): `python scripts/buscar.py "<termos>" [--fonte reunioes|oficiais|tickets|chats|extracoes|pipeline|certificacao]` devolve arquivo:linha + trecho; abrir só o trecho citado. Local, sem rede; reuniões e tickets em inglês → buscar em inglês (decidido em 2026-10-28).
   - Depois de mudar notas, rodar `graphify update .` e reler com agentes só as notas alteradas.
 - Script que altera notas em lote:
   - não toca cópias de skill, saídas do pipeline, rascunhos nem os `estado.md` das frentes;
   - age só na seção certa.
 - Estado de ticket citado em hub envelhece: conferir na API (`youtrack_fetch.ps1`) antes de agir.
+
+## Memória e grafo em todas as janelas (decidido em 2026-11-03)
+Origem: as frentes tinham 0 memórias (a memória do Claude é por pasta; as 58 lições estavam só na geral) e não achavam o grafo (regra relativa à pasta). Ex.: a janela Chat repetia a resposta do seguro da STG já concluída em 02/11.
+- **Memória única:** o índice abaixo é o mesmo para todas as janelas. Ler o arquivo da lição quando o assunto bater: `C:\Users\instituto\.claude\projects\c--Users-instituto-Documents-brain-service\memory\<arquivo>.md`. Lição nova de uma frente: anotar no `estado.md` da frente; a geral grava na memória no "fecha a sessão".
+@~/.claude/projects/c--Users-instituto-Documents-brain-service/memory/MEMORY.md
+- **Grafo de qualquer pasta:** `graphify query "<pergunta>" --graph C:\Users\instituto\Documents\brain-service\graphify-out\graph.json` (idem `path`/`explain`).
+- **Antes de responder sobre país, cliente ou ticket** (mesmo que "já tratado"): `python C:\Users\instituto\Documents\brain-service\scripts\contexto_pais.py <país>` e reler o `estado.md` da frente. A conclusão vale a do hub/estado mais recente, não a da memória da conversa (conversa compactada perde detalhe).
+- **Conversa nova por dia** nas frentes (não retomar conversas de dias anteriores); o que precisa continuar está no `estado.md` e nos hubs.
 
 ## Papel da janela geral: orquestradora (decidido em 2026-10-15)
 Vale só para a janela aberta na raiz. O usuário passa as tarefas aqui; as janelas das frentes executam (sessões `suporte-*`, `gmail-*`, `chat-*`, `pipeline-*`, `certificacao-*` em `ListAgents`; se não estiverem abertas, reabrir com `scripts/abrir_frentes.ps1 -Retomar`).
@@ -149,6 +158,7 @@ Quando o usuário disser:
 - **"chegou resposta de X" / mensagem colada de alguém:** saída fixa, sem preâmbulo:
   - o que X pediu;
   - o que é nosso (o resto vai para [[fronteiras]]); pergunta estatutária é nossa: responder com posição, fonte e confiança, e devolver ao cliente/BAU só a escolha num ponto não pacificado (decidido em 2026-10-28);
+  - **lei × mercado** (decidido em 2026-11-03, [[servicos/lei-x-mercado]]): separar lei (resultado, fonte primária) × prática de mercado (mecanismo da folha, marcada como prática) × teste (a prática passa da lei?). Dentro da lei = escolha de configuração + efeito; "fora da lei" só se der mais do que a lei;
   - o que mudou desde a nossa última mensagem;
   - rascunho da resposta (formato da regra 3 de "Respostas eficientes") + bloco de prova;
   - onde registrar (hub, ticket, estado da frente).

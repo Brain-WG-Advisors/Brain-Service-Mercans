@@ -74,7 +74,7 @@
   },
   {
    "key": "dd.fed.aca.fte_tracking",
-   "value": "full-time / FTE status per month for ALE determination and 1095-C",
+   "value": "full-time / full-time equivalent employee status per month for ALE determination and 1095-C",
    "effective_from": "2025-01-01",
    "effective_to": null,
    "register_id": "US-FEDS5-012",
@@ -84,26 +84,29 @@
    "url": "https://www.irs.gov/pub/irs-pdf/i109495c.pdf",
    "note": "row partial: TY2026 instructions not yet published; register row status partial",
    "confidence": "low",
-   "_consumers": "rspec.fed.aca"
+   "_consumers": "rspec.fed.aca",
+   "_value_before_triage_a": "full-time / FTE status per month for ALE determination and 1095-C",
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage A): \"FTE\" spelled out in the source wording. US-FEDS5-012 i109495c p1: \"Employers with 50 or more full-time employees (including full-time equivalent employees) in the previous year use Forms 1094-C and 1095-C\"."
   },
   {
    "key": "dd.multi.work_state",
-   "value": "work state per assignment (withholding sourcing; UI localization)",
+   "value": "work state where the service is localized (UI localization of work, UIPL 20-04)",
    "effective_from": "2026-01-01",
    "_effective_from_basis": "register row carries no effective_from or publication_date; build-year start used as in-force-on date (row read in force 2026)",
    "effective_to": null,
    "register_id": "US-MULTIS5-017",
    "tier": "A.2",
-   "verification_method": "second independent authority",
+   "verification_method": "quoted from authority page",
    "authority": "US DOL ETA Office of Unemployment Insurance",
    "url": "https://www.dol.gov/sites/dolgov/files/OPA/Spirit-Airlines-Reminder-to-States-Review-Localization-Work-Guidance-UI.pdf",
    "note": "localization test order: localized / base of operations / direction-control / residence",
    "confidence": "high",
-   "_consumers": "rspec.*.wh_return; rspec.*.ui_qtr"
+   "_consumers": "rspec.*.wh_return; rspec.*.ui_qtr",
+   "_figure_located": "2026-11-03 agent 2 (RSPEC r1 fix): DOL memo p1: \"the Employment and Training Administration's localization of work guidance for reporting wages determines the state ... See Unemployment Insurance Program Letter (UIPL) No. 20-04\""
   },
   {
    "key": "dd.multi.sui_state",
-   "value": "single UI state per employee per period under the localization test; also keys WA PFML",
+   "value": "single UI state per employee per period under the localization test; also keys WA family and medical leave (RCW Title 50A)",
    "effective_from": "2026-01-01",
    "_effective_from_basis": "register row carries no effective_from or publication_date; build-year start used as in-force-on date (row read in force 2026)",
    "effective_to": "2027-06-30",
@@ -113,21 +116,24 @@
    "authority": "Washington State Legislature",
    "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=50A.05.010",
    "confidence": "high",
-   "_consumers": "rspec.*.ui_qtr; pfml"
+   "_consumers": "rspec.*.ui_qtr; pfml",
+   "_value_before_triage_a": "single UI state per employee per period under the localization test; also keys WA PFML",
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage A): \"PFML\" replaced by the statute wording. US-MULTIS5-024 RCW 50A.05.010 (Title 50A, family and medical leave): definition of employment by localization; the held copy says \"family leave\" / \"medical leave\" and never uses the acronym \"PFML\"."
   },
   {
    "key": "dd.multi.residence_state",
-   "value": "residence state (reciprocity, resident credit, transport-worker federal rules)",
+   "value": "residence state (drives resident withholding; interstate transport workers are subject to withholding only by their State of residence under 49 U.S.C. 14503)",
    "effective_from": "1996-01-01",
    "effective_to": null,
    "register_id": "US-MULTIS5-001",
    "tier": "A.1",
-   "verification_method": "direct artifact inspection",
+   "verification_method": "quoted from authority page",
    "authority": "US Congress / GPO",
    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49-subtitleIV-partB-chap145-sec14503.htm",
    "note": "49 USC 14503 motor carriers taxable only by residence state",
    "confidence": "high",
-   "_consumers": "calc:SIT"
+   "_consumers": "calc:SIT",
+   "_figure_located": "2026-11-03 agent 2 (RSPEC r1 fix): 49 U.S.C. 14503(a): pay is not subject to the income tax laws of a State \"other than the State or subdivision thereof of the employee's residence\""
   },
   {
    "key": "dd.multi.transport_worker_type",
@@ -208,11 +214,15 @@
    "url": "https://dam.assets.ohio.gov/image/upload/tax.ohio.gov/ohio_individual/2025_All_School_Districts.pdf",
    "note": "2026 delta in US-OHS5-018",
    "confidence": "high",
-   "_consumers": "rspec.oh.w2_state; rspec.oh.school_district"
+   "_consumers": "rspec.oh.w2_state; rspec.oh.school_district",
+   "_also_register_ids": [
+    "US-OHB5-401"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [W-2] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Total tax withheld must equal W-2s/1099s submitted\" || [SD 101] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Ohio SD 101 Return for School District Income Tax Withheld\" || [141] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Ohio SD 141 Annual Reconciliation of School District Income Tax Withheld\" || [four-digit] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"School districts and the corresponding four-digit codes can be verified using The Finder\" || [9999] US-OHS5-019 2025_All_School_Districts_dam-ohio_2026-11-02.pdf p1: \"Full-year nonresidents of Ohio should enter 9999\""
   },
   {
    "key": "dd.pa.psd_code",
-   "value": "PA PSD code of work location and of residence (format xxxxxx-xx)",
+   "value": "PA PSD code of work location and of residence (looked up with the DCED Address Search Application)",
    "effective_from": "2018-05-04",
    "effective_to": null,
    "register_id": "US-PAS5-017",
@@ -222,7 +232,12 @@
    "url": "https://www.legis.state.pa.us/WU01/LI/LI/US/PDF/1965/0/0511..PDF",
    "note": "home-based employee residence is a worksite (US-PAS5-018)",
    "confidence": "high",
-   "_consumers": "rspec.pa.local.eit_lst"
+   "_consumers": "rspec.pa.local.eit_lst",
+   "_also_register_ids": [
+    "US-PAS5-018"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [PSD] US-PAS5-018 PA-DCED-employer-instructions_2026-11-02.html p1: \"Use the Address Search Application to lookup PSD Codes, EIT Rates and LST Rates\"",
+   "_value_before_triage_b": "PA PSD code of work location and of residence (format xxxxxx-xx)"
   },
   {
    "key": "dd.in.county_residence_jan1",
@@ -986,7 +1001,11 @@
    "authority": "Florida Senate (2026 Florida Statutes)",
    "url": "https://www.flsenate.gov/Laws/Statutes/2026/448.095",
    "confidence": "high",
-   "_consumers": "rspec.fl.ui_qtr"
+   "_consumers": "rspec.fl.ui_qtr",
+   "_also_register_ids": [
+    "US-FLS5-021"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage A): US-FLS5-010 Fla. Stat. 448.095: \"may also make such a certification on its first return each calendar year\". US-FLS5-021 RT-6N instructions p2: \"must certify use of the E-Verify system on the first return or report filed within a calendar year\" (the RT-6 is the return those instructions govern)."
   },
   {
    "key": "dd.fl.ssn_not_itin",
@@ -1155,17 +1174,23 @@
   },
   {
    "key": "dd.employer.state_account_ids",
-   "value": "per-state withholding account / UI account / PFML account ids (e.g. UT 14-digit ...WTH, KS 036-...-01, MD 8-digit CRN, IA 9-digit permit)",
+   "value": "per-state withholding account / UI account / paid-leave account ids (e.g. UT 14-digit number ending in WTH; KS 036#######F##; MD Central Registration Number in RS positions 338-345; IA 9-digit permit number)",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-UTS5-013",
-   "tier": "A.1",
+   "register_id": "US-UTR3-001",
+   "tier": "A.2",
    "verification_method": "quoted from authority page",
-   "authority": "Utah State Tax Commission via adminrules.utah.gov",
-   "url": "https://adminrules.utah.gov/public/rule/R865-9I/Current%20Rules",
-   "note": "KS US-KSS5-026; MD US-MDS5-021; IA US-IAS5-018",
+   "authority": "Utah State Tax Commission",
+   "url": "https://tax.utah.gov/forms-pubs/pub-14/",
+   "note": "UT Pub. 14 [US-UTR3-001]; KS K-2MT [US-KSS5-026]; MD W-2 reporting instructions [US-MDS5-016]; IA DOR [US-IAS5-017]",
    "confidence": "high",
-   "_consumers": "rspec.*"
+   "_consumers": "rspec.*",
+   "_also_register_ids": [
+    "US-KSS5-026",
+    "US-MDS5-016",
+    "US-IAS5-017"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (RSPEC r2 fix), every text element of the value: [form UT 14] US-UTR3-001 pub-14_wayback-20260713004805.html p1: \"split match: mit exemption requests to: Waivers Utah State Tax Commission 210 N 1950 W Salt Lake City, UT 84134-2000 Note: This exemption is for the employer, not the employee. The employee must || Pub 14 | Utah State Tax Commission Pay Taxes Online Services Tax Commission Home Current Forms &\" ; [form KS 036] US-KSS5-026 KDOR_k-2mt_wayback_2026-11-02.pdf p1: \"split match: acronym expanded: K S || . Kansas Withholding Account number for the Employer. Left justify and fill with blanks. (036#######F##) Fill with blanks. Enter the appropriate postal numeric code. (See Appendix F i\" ; [form IA 9] US-UTR3-001 pub-14_wayback-20260713004805.html p1: \"split match: acronym expanded: Information Agencies || dule - Single 1. Utah taxable wages 2. Multiply line 1 by .0445 (4.45%) 3. Base allowance 9 4. Line 1 minus $180 (not less than 0) 5. Multiply line 4 by .013 (1.3%) 6. Line 3 minus\" ; [num 338] US-KSS5-026 KDOR_k-2mt_wayback_2026-11-02.pdf p2: \"Blank Name Contribution to 349-412 413-487 488-512 Positio KPERS, KP&F, n 64 75 25 Judges 338-348 11 Page 2 of 3\" ; [num 345] US-MDS5-016 MD_Comptroller_reporting-w2-instructions_TY2025_2026-11-02.pdf p8: \"\"RS\" record must include the Maryland Central Registration Number (CRN) in positions 338-345. Failure to include your Maryland Central Registration Number (CRN) will result in your d\" ; [word WTH] US-UTR3-001 pub-14_wayback-20260713004805.html p1: \"Number (EIN or SSN). Your Utah withholding account number - the 14-digit number ending in WTH. (If this number won’t fit in the space on your W-2 form, you may leave out the dashes in\""
   },
   {
    "key": "dd.employer.ny_mctmt_zone",
@@ -1212,7 +1237,7 @@
   },
   {
    "key": "dd.oh.municipality_work",
-   "value": "Ohio municipality of work (718.03) and residence; collector (CCA/RITA/city)",
+   "value": "Ohio municipality of work (718.03) and residence; collector: the central collection agency, the regional income tax agency or the municipal tax administrator",
    "effective_from": "2016-09-14",
    "effective_to": null,
    "register_id": "US-OHP52-003",
@@ -1221,7 +1246,9 @@
    "authority": "Ohio General Assembly (codes.ohio.gov)",
    "url": "https://codes.ohio.gov/ohio-revised-code/chapter-718",
    "confidence": "high",
-   "_consumers": "rspec.oh.municipal"
+   "_consumers": "rspec.oh.municipal",
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [central collection agency / regional income tax agency] US-OHP52-003 chapter-718_wayback-20260610221542.html p1: \"The central collection agency or the regional income tax agency or their successors in interest\"",
+   "_value_before_triage_b": "Ohio municipality of work (718.03) and residence; collector (CCA/RITA/city)"
   },
   {
    "key": "dd.md.county_residence",
@@ -1409,7 +1436,7 @@
   },
   {
    "key": "dd.oh.municipal_rate_table",
-   "value": "Ohio municipality of work carried as the 5-digit municipal FIPS used by OHMuniRateTable.csv; rate resolved by FIPS and pay date against begin/end date",
+   "value": "Ohio municipality of work carried as the 5-digit municipal code in the third column of OHMuniRateTable.csv; rate resolved by that code and pay date against begin/end date",
    "effective_from": "2026-01-01",
    "effective_to": null,
    "register_id": "US-OHB5-002",
@@ -1417,7 +1444,9 @@
    "verification_method": "direct artifact inspection",
    "authority": "Ohio Department of Taxation",
    "url": "https://thefinder.tax.ohio.gov/api/file-downloads/content?target=%2Ffinder%2Fapi%2Fv1%2Ftax-rates%2Fdownloads%2FMuni%2FOHMuniRateTable.csv",
-   "confidence": "high"
+   "confidence": "high",
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [5-digit] inspected directly: US-OHB5-002 OH_ODT_Finder_OHMuniRateTable_2026-11-02.csv (no header row) column 3 values are 5 characters, e.g. \"20040101,99991231,00142,ABERDEEN,.01000\" and \"20180101,99991231,01000,AKRON,.02500\"",
+   "_value_before_triage_b": "Ohio municipality of work carried as the 5-digit municipal FIPS used by OHMuniRateTable.csv; rate resolved by FIPS and pay date against begin/end date"
   },
   {
    "key": "dd.ct.pfml.employee_level_data",
@@ -1442,6 +1471,40 @@
    "authority": "Washington Employment Security Department - Paid Family and Medical Leave",
    "url": "https://paidleave.wa.gov/app/uploads/2021/12/Employer-Wage-Reporting-and-Premiums-Toolkit-v25.1-2026.06.26.pdf",
    "confidence": "high"
+  },
+  {
+   "key": "dd.fed.nra.visa_class",
+   "value": "Immigration status for nonresident aliens: visa class (F-1, J-1, M-1, Q-1, other), whether the work carries out the purpose of admission (incl. authorised CPT/OPT), and resident/nonresident alien status; drives the FICA (IRC 3121(b)(19)) and FUTA (IRC 3306(c)(19)) exemption flags.",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-001",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap21-subchapC-sec3121.htm",
+   "confidence": "high",
+   "note": "IRC 3121(b)(19), 3306(c)(19) (US-FEDR2-002); scope per Pub. 515 (2026) pp.53, 55 (US-FEDS5-016).",
+   "_consumers": "calc:FICA/FUTA subject-to flags; W-2 boxes 3-6",
+   "_value_before_triage_a": "Immigration status for nonresident aliens: visa class (F-1, J-1, M-1, Q-1/Q-2, H-1B, L-1, other), whether the work carries out the purpose of admission (incl. authorised CPT/OPT), and resident/nonresident alien status; drives the FICA (IRC 3121(b)(19)) and FUTA (IRC 3306(c)(19)) exemption flags.",
+   "_also_register_ids": [
+    "US-FEDS5-016",
+    "US-FEDR2-002"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage A): US-FEDR2-001 26 USC 3121(b)(19): \"nonimmigrant under subparagraph (F), (J), (M), or (Q) of section 101(a)(15) ... performed to carry out the purpose specified\". US-FEDS5-016 Pub. 515 (2026) p55: \"A nonresident alien temporarily in the United States on an 'F-1,' 'J-1,' 'M-1,' or 'Q-1' visa is not subject to social security and Medicare taxes\"; \"employment performed under Curricular Practical Training (CPT) and Optional Practical Training (OPT)\"; \"This rule also applies to FUTA (unemployment) taxes paid by the employer\". US-FEDR2-002 26 USC 3306 (Chapter 23, Federal Unemployment Tax Act). H-1B, L-1 and Q-2 were removed because no held copy names them."
+  },
+  {
+   "key": "dd.fed.totalization.exemption",
+   "value": "Totalization agreement country and exemption flag (employee covered exclusively by a foreign social security system under a section 233 agreement): exempts employee FICA (IRC 3101(c)) and employer FICA (IRC 3111(c)).",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-003",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap21-subchapA-sec3101.htm",
+   "confidence": "high",
+   "note": "Employer side IRC 3111(c) (US-FEDR2-004). The list of agreements and the certificate-of-coverage procedure are SSA documents not held locally (unresolved fed.fica.totalization.agreements_in_force).",
+   "_consumers": "calc:FICA employee and employer"
   }
  ],
  "unresolved": [
@@ -1462,6 +1525,35 @@
    ],
    "what_would_close_it": "CT DOL file spec edition for Q3 2026",
    "blocking": false
+  },
+  {
+   "key": "dd.pa.psd_code.format",
+   "why": "The phrase 'format xxxxxx-xx' was removed from dd.pa.psd_code: no held copy (Act 511 US-PAS5-017, DCED page US-PAS5-018) prints the PSD code layout.",
+   "attempted": [
+    "US-PAS5-017 Act 511 text",
+    "US-PAS5-018 DCED employer instructions",
+    "all US-PA* local copies searched for 6- or 8-digit code patterns (only the PA DOR 8-digit Account ID found)"
+   ],
+   "what_would_close_it": "the DCED PSD code list (Excel/PDF) or an Address Search Application report showing the PSD code layout"
+  },
+  {
+   "key": "dd.oh.municipal_rate_table.code_identity",
+   "why": "'FIPS' was removed from dd.oh.municipal_rate_table and rspec.oh.municipal.rate_table: the held OHMuniRateTable.csv has no header row and no held ODT copy names the column-3 code as the FIPS place code.",
+   "attempted": [
+    "US-OHB5-002 CSV (inspected directly)",
+    "all US-OH* local copies searched for FIPS (no hit)"
+   ],
+   "what_would_close_it": "the ODT Finder bulk-download file-layout page (tax.ohio.gov/finder) naming the column-3 code"
+  },
+  {
+   "key": "dd.fed.nra.visa_class.examples",
+   "why": "H-1B, L-1 and Q-2 were removed from the example list of dd.fed.nra.visa_class: no held copy (26 USC 3121, 26 USC 3306, Pub. 515 2026) names them; the FICA/FUTA exemptions turn only on F, J, M, Q status.",
+   "attempted": [
+    "US-FEDR2-001 26 USC 3121 (govinfo 2024)",
+    "US-FEDR2-002 26 USC 3306 (govinfo 2024)",
+    "US-FEDS5-016 IRS Pub. 515 (2026) p53-55"
+   ],
+   "what_would_close_it": "IRS Pub. 519 (U.S. Tax Guide for Aliens), section on nonimmigrant visa classes, saved locally and registered, if the DD list should name H-1B/L-1/Q-2 as examples"
   }
  ],
  "_synthesis_d": "Synthesis D 2026-11-02: browser-pass P1/P2 rows (S5B-P1/P2) and EFW2 TY2026 merged; see _research/synthesis-D/SYNTHESIS-D.md"

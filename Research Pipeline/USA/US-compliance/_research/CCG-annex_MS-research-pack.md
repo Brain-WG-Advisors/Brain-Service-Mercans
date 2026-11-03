@@ -146,7 +146,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Workforce Investment and Training contribution:** 0.20% of taxable wages, employer-paid (WET 0.15 + OWD 0.01 + MS Works 0.04) [US-MSL-002, US-MSP51-004].
   - Whether it applies in 2026 is **not confirmed**: the MDES rate page says only that it "might be applicable for the rate year".
 - **Rounding:** fractions under 0.5 cent are dropped; 0.5 cent or more rounds up [US-MSS5-011].
-- **SDI/TDI/PFML/LTC:** none in MS [US-MSP52-006].
+- **SDI/TDI/PFML/LTC:** none located in MS; not a fact: the absence rests only on tier-B MANUAL US-MSP52-006 (open: `ms.sdi_pfml.exists`).
 - **Coverage thresholds:**
   - agricultural labour: covered at 20,000 USD in a quarter, or 10 or more workers in 20 weeks;
   - domestic service: covered at 1,000 USD in a quarter;
@@ -155,7 +155,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - Confidence: 90%. The 2026 status of the workforce levy is open.
 
 ## 4. payslip_statute
-- No MS statute requires a pay statement or itemised deductions (US-OWN-006 limit; US-MSP52-004 is MANUAL B).
+- No MS statute requires a pay statement or itemised deductions: none was located in Title 71 ch. 1, and the 2026 session report shows no act on pay statements [US-OWN-006, US-MSS5-016].
 - Default: the federal rules only. No language rule exists [US-MSP9L-001].
 - Related duties:
   - SSN must appear on the W-2 [US-MSS5-002].
@@ -191,7 +191,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - Agent authorisations: MDES J-9 [US-MSP52-005]; DOR Form 21-002 POA, whose text was not read (US-MSP51-006, MANUAL).
 
 ## 6. leave
-- No state paid sick leave or PFML. Local paid-leave mandates are preempted (17-1-51) [US-MSS5-009, US-MSP52-006].
+- No state paid sick leave or PFML. Local paid-leave mandates are preempted (17-1-51) [US-MSS5-009]. The PFML absence rests only on tier-B MANUAL US-MSP52-006 (open: `ms.sdi_pfml.exists`).
 - Sick pay under a wage-continuation plan is wages for withholding [US-MSS5-002].
 - No other state-mandated paid leave with a payroll impact was found. Voting, jury and military leave were not researched (no pay-impact rule known). Confidence 75%.
 

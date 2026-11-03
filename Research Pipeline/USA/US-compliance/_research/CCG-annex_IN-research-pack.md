@@ -31,10 +31,10 @@ Synthesis B, 2026-11-02. Source: `_research/stage5/IN.md` and the active/partial
 
 ## 2c — Local wage taxes
 - `in.local.lit.county_basis` = **county of residence on Jan 1 (out-of-state residents: county of principal work on Jan 1), fixed for the year; withheld and reported with state tax on WH-1/WH-3/W-2 RS (T3 piggyback); no separate nonresident rate**  (2026-01-01 → open) [A.2, US-INS5-008, direct artifact inspection, conf high]
-- `in.local.lit.rate.boone` = **0.0171** ratio (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Was 0.017 to 2026-09-30 (R46).
-- `in.local.lit.rate.marion` = **0.0202** ratio (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Derivation recorded in register row US-INS5-007: State AGI rate 2026 2.95%. Method: taxable = gross per period - deduction constants (WH-4 line 5 personal exemptions 1,000/yr each incl. 65+/blind; lines 6 and 7 dependent and first-time dependent 1,500/yr each; line 8 adopted child 3,000/yr; constants = annual amount / pay periods: weekly 52, biwee
-- `in.local.lit.rate.min` = **0.005** ratio (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Porter.
-- `in.local.lit.rate.max` = **0.03** ratio (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Randolph. Full 92-county chart in DN#1 R47/10-26 (builder reads the chart).
+- `in.local.lit.rate.boone` = **1.71** percent (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Was 0.017 to 2026-09-30 (R46).
+- `in.local.lit.rate.marion` = **2.02** percent (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Derivation recorded in register row US-INS5-007: State AGI rate 2026 2.95%. Method: taxable = gross per period - deduction constants (WH-4 line 5 personal exemptions 1,000/yr each incl. 65+/blind; lines 6 and 7 dependent and first-time dependent 1,500/yr each; line 8 adopted child 3,000/yr; constants = annual amount / pay periods: weekly 52, biwee
+- `in.local.lit.rate.min` = **0.5** percent (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Porter.
+- `in.local.lit.rate.max` = **3.0** percent (2026-10-01 → open) [A.2, US-INS5-007, derived arithmetically, conf high] — Randolph. Full 92-county chart in DN#1 R47/10-26 (builder reads the chart).
 - `in.local.lit.change_calendar` = **ordinance Jan 1-Aug 31 -> effective Oct 1 same year; Sep 1-Oct 31 -> Jan 1 next year; Nov 1-Dec 31 -> Oct 1 next year**  (2026-01-01 → open) [A.2, US-INS5-008, direct artifact inspection, conf high]
 
 ## 3 — Social insurance (SUI / SDI / PFML / levies)
@@ -119,3 +119,6 @@ Mirrors `unresolved[]` in the facts file (same keys).
 - `in.pit.conformity` (non-blocking) — IRC conformity date and HSA/125/transit departures not read. **Would close it:** IC 6-3-1-11 (2026) or DOR IT-40 2025 instructions, Add-backs.
 - `in.garn.creditor.statute_text` (non-blocking) — IC 37-2-6-4 text, effective date and any employer fee not read. **Would close it:** IC Title 37 Article 2 (2026) via browser pass.
 - `in.leave.other_mandated` (non-blocking) — Jury duty (IC 34-28-4), voting, volunteer firefighter leave not researched. **Would close it:** Those IC sections.
+
+
+QA r1 (2026-11-02): Indiana local LIT rates are stored in percent (2.02 = 2.02%), not as ratios, like every other rate fact.

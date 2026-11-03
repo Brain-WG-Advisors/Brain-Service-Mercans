@@ -21,18 +21,18 @@ what stays open. Read it before giving a value that touches an item in section 5
 
 | Artifact | Version | File | MD5 |
 |---|---|---|---|
-| Country Configuration Guide | CO-CCG-001 v1.6 | `CO-CCG-001-v1.6.docx` | `7c3e6b25143198a9c4d7724c801fd075` |
-| Wage Type Catalogue | CO-WTC-001 v1.8 | `CO-WTC-001-v1.8.xlsx` | `8e05d1c4306a55331c93190af3316747` |
-| Data Dictionary | CO-DD-001 v1.5 | `CO-DD-001-v1.5.xlsx` | `3967d2327e3e43c8668c699af2ba8b85` |
+| Country Configuration Guide | CO-CCG-001 v1.7 | `CO-CCG-001-v1.7.docx` | `a966714cdb7272770cfc7b81f9b7fded` |
+| Wage Type Catalogue | CO-WTC-001 v1.9 | `CO-WTC-001-v1.9.xlsx` | `374f4545d144fd2d424f73604aa03e1a` |
+| Data Dictionary | CO-DD-001 v1.6 | `CO-DD-001-v1.6.xlsx` | `3a017f0efea12d34ff467affd25b8058` |
 | Report Spec - electronic payroll | CO-DIAN-001 v1.2 | `CO-DIAN-001-NominaElectronica-Spec.xlsx` | `7cfd6c3e348a4e902ab9a25287f7f88f` |
 | Report Spec - Form 350 | CO-DIAN-002 v1.1 | `CO-DIAN-002-Formulario350-Spec.xlsx` | `97e1fae0ae350553568ef432d096b1b2` |
 | Report Spec - PILA employees | CO-PILA-003 v1.2 | `CO-PILA-003-AportesSeguridadSocial-Spec.xlsx` | `ecd9b7131696ff7b1edf008fd2edbd7c` |
-| Report Spec - Form 220 | CO-DIAN-004 v1.2 | `CO-DIAN-004-Formulario220-Spec.xlsx` | `ff2f90b8e6e20dd83b17ae64e48cb8f1` |
+| Report Spec - Form 220 | CO-DIAN-004 v1.3 | `CO-DIAN-004-Formulario220-Spec.xlsx` | `52af10ae69042e6a2188731a89ff8198` |
 | Report Spec - Format 2276 | CO-DIAN-005 v1.2 | `CO-DIAN-005-Formato2276-Spec.xlsx` | `5c9c306d8e4aedd4ac5f192902ca385d` |
 | Report Spec - severance-savings deposit | CO-CESANTIAS-006 v1.2 | `CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx` | `08db9ccdcde0ee68c6f24c17bf8aead9` |
 | Report Spec - PILA pensioners | CO-PILA-007 v1.1 | `CO-PILA-007-AportesPensionados-Spec.xlsx` | `eae9a7955d23ddea574503de6b573243` |
 | Payslip Generator | v1.3 | `CO_Compliance_Payslip_Generator.xlsx` | `619c1410c70775c0aa8b09cc0555f99d` |
-| Statutory Integrations Register | CO-SIR-001 v1.3 | Google Doc; v1.3 text `CO-SIR-001-v1.3-texto-final.md` | `79b7f2df8bfaf7ec04992b7390ea4736` |
+| Statutory Integrations Register | CO-SIR-001 v1.4 | Google Doc; v1.4 export `CO-SIR-001-v1.4-export-2026-11-02.txt` | `40c4c5492be05be2c57f10f820a3307b` |
 
 ## 2. How the research was validated
 
@@ -87,19 +87,19 @@ Positions written into the finals, with the source and the confidence of the dec
 | 5 | **Withholding depuration:** the 72 UVT per dependant (ET art. 336 num. 3) belong to the annual return only; the monthly withholding keeps the art. 387 dependants deduction (10%, max 32 UVT) and **keeps the 40% / 1,340 UVT cap**; voluntary contributions to the mandatory RAIS account are non-taxable up to 25% / 2,500 UVT and outside the cap | DIAN Concepto 011383 de 2024 IV.2; DUR 1625 de 2016 art. 1.2.4.1.6 par. 3 (Decreto 2231 de 2023); ET art. 55 | 95% |
 | 6 | **Art. 64 indemnity:** base = art. 127 salary with the variable part (average of the last year), **without** the transport allowance; the year fraction is paid proportionally; the same base selects the < / ≥ 10 SMMLV tier | CST arts. 64, 127; CSJ SL1659-2025 | 85% |
 | 7 | **Rest-day / holiday surcharge:** 80% from 1 July 2025, **90% from 1 July 2026**, 100% from 1 July 2027; hours divisor 220 to 14 July 2026, **210 from 15 July 2026** | CST art. 179 transitional par. (Ley 2466 de 2025 art. 14); Ley 2101 de 2021 art. 3; CST art. 161 | 95% |
-| 8 | **Ministry of Labour Circular 101 de 2025 is revoked** (Resolution 2708 de 2026); the rules rest on the statute (CCG v1.6: rest-day substitution, hourly divisors, piece-rate workers, overtime maxima) | Vigency note of the Circular; Res. MinTrabajo 2708 de 2026 | 90% |
+| 8 | **Ministry of Labour Circular 101 de 2025 is revoked** (Resolution 2708 de 2026); the rules rest on the statute (CCG v1.7: rest-day substitution, hourly divisors, piece-rate workers, overtime maxima) | Vigency note of the Circular; Res. MinTrabajo 2708 de 2026 | 90% |
 | 9 | **Transport allowance** prorated to days worked (249,095 × 21 / 30 = 174,366.50) | Ley 15 de 1959 art. 2; Decreto 1258 de 1959 art. 5 | 95% |
 | 10 | **Vacation paid in cash during employment:** salary ÷ 30 × days (÷ 720 only on termination); out of the IBC and of the benefit base, in the levy base | CST arts. 186, 189; CSJ SL467-2019 | 90% |
 | 11 | **No occupational-risk contribution** on vacation, incapacity, maternity, paternity and parental-leave days | Decreto 1072 de 2015 art. 2.2.4.2.1.6; AT2 v30 field 26 | 92% |
 | 12 | **Occupational-risk class IV maximum 6.960%** (class initial rates 0.522 / 1.044 / 2.436 / 4.350 / 6.960%) | Decreto 1772 de 1994 art. 13 | 98% |
 | 13 | **Electronic payroll carries no negative amount**; individual withholding is not rounded (only the forms round to COP 1,000) | DIAN Concepto 014745 de 2025; DUR 1625 art. 1.6.1.11.11 | 95% |
-| 14 | **Minimum wage instrument:** COP 1,750,905 under Decreto 1469 de 2025 (provisional suspension revoked on 9 July 2026; Decreto 0159 de 2026 spent); transport allowance under Decreto 1470 de 2025 | CCG v1.6 Module 4.1 | 92% |
+| 14 | **Minimum wage instrument:** COP 1,750,905 under Decreto 1469 de 2025 (provisional suspension revoked on 9 July 2026; Decreto 0159 de 2026 left without effect by ordinal 3 of that order); transport allowance under Decreto 1470 de 2025 | CCG v1.7 Module 4.1 | 94% |
 | 15 | **Non-resident:** flat 20% on the gross payment (ET art. 408) until tax residence is acquired; residence over two calendar years starts in the second year | ET arts. 10, 408; DIAN Concepto 011108 de 29 June 2026 | 90% |
 | 16 | **Form 350 correction period** 3 years | ET art. 588 (Ley 2010 de 2019 art. 107) | 98% |
 | 17 | **PILA (CO-PILA-003 / 007):** Res. MSPS 1529 de 2026 applied - worker type 75 (retirement date field 81 mandatory), contributor type 51 (IBC by day bands) and sub-types 3/4/12 (no PA/CD document) | AT2 v30, AT3 v15, Res. MSPS 1529 de 2026 | 90% |
 | 18 | **The 790-UVT cap (25% exempt income) and the 1,340-UVT cap (with the 40% limit) are annual, tracked year-to-date per employee**: each month the exemption is limited to the part of the annual cap not yet used in the year; no monthly limit (790 UVT = COP 41,375,460; 1,340 UVT = COP 70,181,160) | Consejo de Estado S4 rad. 24047 of 28 October 2021 (annulled the monthly equivalent in DUR 1625 art. 1.2.4.1.6 par. 3); Decreto 2231 de 2023 art. 9 ("1.340 UVT anuales"); ET arts. 206 num. 10, 336 num. 3 | 90% |
 | 19 | **The 3,800-UVT cap** (COP 199,021,200) of voluntary pension funds and AFC / AVC accounts is **annual, shared** by the two vehicles with the 30%-of-labour-income limit, and tracked year-to-date | ET arts. 126-1, 126-4; DUR 1625 de 2016 art. 1.2.1.22.43; CE S4 rad. 24047 de 2021 | decided with rule 18 |
-| 20 | **Severance savings and their interest are not subject to withholding at source for any employee**, resident or non-resident; the 20% for non-residents is only a configurable conservative option, off by default (WTC rows 120-122, 321-322) | Ley 100 de 1993 art. 135 par. 3; DUR 1625 art. 1.2.4.1.11; DIAN Oficios 8899 de 2015 and 4358 de 2019 | 80% |
+| 20 | **Severance savings and their interest are not subject to withholding at source for any employee**, resident or non-resident; the 20% for non-residents is only a configurable conservative option, off by default (WTC rows 120-122, 321-322) | Ley 100 de 1993 art. 135 par. 3 (all payers: Corte Constitucional C-397 de 1994); DUR 1625 art. 1.2.4.1.11; DIAN Oficios 8899 de 2015 and 4358 de 2019; DIAN Concepto 577 de 2020 (non-resident return) | 92% |
 | 21 | **Form 220 casilla 59 / Format 2276 six-month average** for the severance-savings exemption: the six months of the year before the deposit, salary only, no service bonus (worked examples: 12,000,000) | Form 220 instructions (Res. DIAN 22 de 2024), casilla 59; DIAN Concepto 1302 de 2019 | 88% |
 | 22 | **Electronic payroll validation rules:** Anexo Técnico NE v1.0 §6 lists 519 rules (437 for the payroll documents) | Anexo Técnico NE v1.0 §6, pp. 182-232 | 90% |
 | 23 | **Electronic payroll element of pacted allowances** (WTC column Y, e.g. rows 255-264): AuxilioNS (NIE142) where non-salary under the pact, otherwise AuxilioS (NIE141); third-party meal payments (row 346) are `Non-Salary - pacted` | Anexo Técnico NE v1.0 pp. 32-39; CST arts. 127, 128 | 92% |
@@ -123,7 +123,7 @@ Items the engine configuration must settle; none changes a statutory value in th
 | 9 | Optional 20% on non-resident severance savings | Medium | No withholding is the rule (rule 20); a client that wants the conservative position may switch on the 20% (ET art. 408) for non-residents - off by default |
 | 10 | 204-UVT test basis | Medium | The indemnity 20% test (ET art. 401-3) is applied to the monthly income; the provision does not define the income measured |
 | 11 | Indemnity variants | Medium | Fixed-term (salaries for the remaining term), specific work, probation (CST arts. 76-80), Ley 789 de 2002 art. 28 transitional table: not in the core indemnity regulation |
-| 12 | `Yes/No` wage types | Medium | 17 withholding rows and 5 social-security rows (R6, R37, R227, R338, R358) of the WTC v1.8 need an exempt / subject split at configuration; the 54 `Non-Salary - pacted` rows are handled by the Ley 1393 excess |
+| 12 | `Yes/No` wage types | Medium | 17 withholding rows and 5 social-security rows (R6, R37, R227, R338, R358) of the WTC v1.9 need an exempt / subject split at configuration; the 54 `Non-Salary - pacted` rows are handled by the Ley 1393 excess |
 | 13 | Solidarity fund under Ley 2381 de 2024 | Medium | New bands from 1 April 2027 (Corte Constitucional C-264 de 2026): effective-date the band table; not a 2026 rule |
 | 14 | High-risk pension | Medium | +10 points employer (26% total, Decreto-Ley 2090 de 2003); confirm the split with the PILA configuration |
 
@@ -131,7 +131,7 @@ Items the engine configuration must settle; none changes a statutory value in th
 
 - **Rest-day percentages in the electronic payroll (`@Porcentaje`, codes 4-7): decided** (post-release review, 30 October 2026).
   Report the statutory percentage, not the annex literal (DIAN Concepto 013840 int. 1568 of 1 October 2025): code 5 = 80 / 90 / 100;
-  codes 4 / 6 / 7 = 105-115-125 / 155-165-175 / 115-125-135 (from 1 July 2025 / 2026 / 2027). CCG v1.6 Module 4.4 and CO-DIAN-001
+  codes 4 / 6 / 7 = 105-115-125 / 155-165-175 / 115-125-135 (from 1 July 2025 / 2026 / 2027). CCG v1.7 Module 4.4 and CO-DIAN-001
   v1.2 Field Options rows 61-65 agree. Not yet round-tripped through the DIAN validator (95%).
 - **Format 2276 XML** element names are DERIVED: the DIAN technical annex / XSD for format 2276 v4 was not obtained.
 - **Mercans codes:** the WTC `CO-` codes are mnemonic; no numeric range assigned. Do not state a numeric code.
@@ -149,8 +149,8 @@ Items the engine configuration must settle; none changes a statutory value in th
 - **Positions at 80% confidence or below** (say so when quoting them):
   - electronic-payroll incapacity type labels 2 "Profesional" / 3 "Laboral" read as occupational disease / accident (75%; the
     annex gives no definition; only a formal DIAN consultation closes it);
-  - all-inclusive salary + Ley 1393 order (80%); severance savings without withholding for non-residents (80%); PILA
-    occupational-risk rate format (80%; confirm with the operador de información).
+  - all-inclusive salary + Ley 1393 order (80%). Raised to 92% on 2 November 2026 (primary sources reread):
+    severance savings without withholding for non-residents; PILA occupational-risk rate format (decimal with a point).
 
 ## 7. Not validated
 

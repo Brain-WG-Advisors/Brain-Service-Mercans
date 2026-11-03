@@ -37,6 +37,11 @@ GAP_CLOSE = {
 }
 _AL_PHASE = "Phase-out steps by gross income are in the source booklet and carry no facts key (gap in AL.2)."
 NOTES = {
+    # QA r3c finding 2: the aligned fed.ein.format note (agent 2, 2026-11-02) quotes Pub. 15 sec. 1; its second
+    # quoted sentence shared a split with a pipeline sentence and was dropped. Quote kept whole, pipeline parts out.
+    ("FED", "fed.ein.format"): ("Pub. 15 (2026) sec. 1 Employer Identification Number (EIN), PDF p.13: 'The EIN is a "
+                                "nine-digit number the IRS issues. The digits are arranged as follows: 00-0000000.' "
+                                "State account-number formats: see Module 2."),
     ("AL", "al.wh.std_deduction.single.max"): _AL_PHASE,
     ("AL", "al.wh.std_deduction.married.max"): _AL_PHASE,
     ("AL", "al.wh.std_deduction.married_separate.max"): _AL_PHASE,
@@ -45,7 +50,7 @@ NOTES = {
     ("AL", "al.wh.dependent.gi_to_50000"): "Per dependent, by the employee's gross-income band (amounts in the next two rows).",
     ("FED", "fed.bik.dependent_care.exclusion"): "Half for married filing separately; raised by P.L. 119-21.",
     ("CT", "ct.tipped.employer_share.hotel_restaurant"): "Fixed employer cash wage; maximum tip credit 2026 {{ct.tipped.max_tip_credit.hotel_restaurant}} (minimum wage {{ct.minwage.hourly@2026-01-01}} less the employer share). Bartenders: employer share {{ct.tipped.employer_share.bartender}}. Other industries and meal credits: in the source. No cannabis tip credit from 2026-10-01 (PA 26-12 s.6).",
-    ("CO", "co.sui.new_employer.rate.total"): "Sum of the base rate, the support surcharge and the solvency surcharge for non-construction employers; heavy-construction and 2027 rates are in the source and carry no facts key.",
+    ("CO", "co.sui.new_employer.rate.total"): "Sum of the base rate, the support surcharge and the solvency surcharge (no solvency surcharge in 2027) for non-construction employers; heavy-construction employers are not covered by this rate.",
     ("CA", "ca.sui.employer.rate.min"): None,
 }
 KEEP_PACK = set()
@@ -117,7 +122,9 @@ def default_section(u, f):
     k = f["key"]
     if ".report" in k or ".efw2" in k or ".newhire" in k:
         return "5"
-    return "13"
+    # round 3b: facts added by agent 2 R3 without a _domain (CA married/HoH bands, AL phase-out) go to the
+    # section of their key prefix instead of 13 (Live legal change)
+    return gap_section(u, k)
 
 
 def gap_section(u, key):

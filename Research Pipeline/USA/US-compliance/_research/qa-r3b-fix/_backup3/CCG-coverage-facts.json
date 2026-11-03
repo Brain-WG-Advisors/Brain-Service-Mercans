@@ -1,0 +1,828 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "coverage",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Federal + multistate cut of the special-population matrix (US-OWN-005: all populations IN). State-specific treatments live in the annexes; each row names the annexes it routes to. Owner decision US-OWN-005 cannot be a source (tier owner, no URL).",
+ "coverage_matrix": {
+  "resident_employee": {
+   "status": "answered",
+   "treatment": "Ordinary employee: FIT per W-4 and Pub. 15-T percentage/wage-bracket method; FICA employee+employer; FUTA and SUI employer-paid (SUI to the localization State); state income tax of the work State and, for residents working elsewhere, the residence State per its own rule (credit, difference withholding or reciprocity).",
+   "effects": {
+    "income_tax": "FIT Pub. 15-T 2026 Worksheet 1A; state withholding per annex",
+    "social_security": "OASDI 6.2%+6.2% to 184,500; Medicare 1.45%+1.45%; Additional Medicare 0.9% over 200,000; FUTA 0.6% net on 7,000; SUI per sui_state",
+    "reporting": "Form 941 quarterly, 940 annual, W-2 by 2027-02-01; state withholding and UI returns"
+   },
+   "ccg_location": "Module 3; Module 5; Module 6",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-001",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15t.pdf",
+     "article": "Worksheet 1A",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-005",
+     "url": "https://www.irs.gov/pub/irs-pdf/i941.pdf",
+     "article": "941 lines 5a-5d",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-007",
+     "url": "https://www.irs.gov/pub/irs-pdf/iw2w3.pdf",
+     "article": "W-2 2026",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-017",
+     "url": "https://www.dol.gov/sites/dolgov/files/OPA/Spirit-Airlines-Reminder-to-States-Review-Localization-Work-Guidance-UI.pdf",
+     "article": "localization test",
+     "covers": [
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.fit.worksheet1a.line1g.mfj",
+    "fed.fica.oasdi.wage_base",
+    "fed.futa.rate.net",
+    "multi.sui.localization_test"
+   ]
+  },
+  "non_resident_employee": {
+   "status": "answered",
+   "treatment": "Two meanings in the US build. (a) Nonresident alien of the US: graduated withholding with the Pub. 15-T NRA add-on (16,100/yr Table 2), W-4 per Notice 1392 (Single, NRA, no exempt), treaty-exempt wages via Form 8233 to Form 1042-S, commercial-traveler exception (<=90 days, <=3,000). (b) Nonresident of a State: work-State withholding subject to reciprocity certificates, day/dollar thresholds (AL/LA/WV 30 days, AZ 60, IL 30 working days), convenience rules (NY, PA, DE, NE; NJ/CT retaliatory) and federal transport/military-spouse limits.",
+   "effects": {
+    "income_tax": "NRA add-on for withholding only; 1042-S for treaty wages; state nonresident sourcing per m06 tables",
+    "social_security": "NRA add-on has no FICA/FUTA effect: FICA computed on actual wages as for residents; for state nonresidents SUI follows the localization test, not residence",
+    "reporting": "W-2 (or 1042-S for treaty-exempt wages, via IRIS); state nonresident withholding on the work-State return; W-2 boxes 15-20 up to two States"
+   },
+   "ccg_location": "Module 6 (NRA, reciprocity, thresholds); Module 11",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-002",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15t.pdf",
+     "article": "NRA adjustment tables 1-2",
+     "covers": [
+      "income_tax",
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-016",
+     "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+     "article": "Pub. 515 pay for personal services",
+     "covers": [
+      "income_tax",
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-017",
+     "url": "https://www.dol.gov/sites/dolgov/files/OPA/Spirit-Airlines-Reminder-to-States-Review-Localization-Work-Guidance-UI.pdf",
+     "article": "localization test",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-MULTI-021",
+     "url": "https://www.revenue.alabama.gov/individual-corporate/30-day-safe-harbor-rule/",
+     "article": "AL 30-day",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-013",
+     "url": "https://www.tax.ny.gov/pdf/memos/income/m06_5i.pdf",
+     "article": "NY convenience",
+     "covers": [
+      "income_tax"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.fit.nra.addon.table2.annual",
+    "fed.fit.nra.commercial_traveler.max_days",
+    "multi.nonresident.la.threshold_days",
+    "multi.convenience.ny.rule"
+   ]
+  },
+  "fixed_term_contract": {
+   "status": "answered",
+   "treatment": "No federal or general state statutory fixed-term regime: employment is at will (SD, TN rows as examples) and a contract for a fixed period is a matter of contract. Payroll treats a fixed-term worker exactly as any employee; expiry of the term is a separation and triggers the work State final-pay rule.",
+   "effects": {
+    "income_tax": "none: same withholding as any employee",
+    "social_security": "none: FICA/FUTA/SUI unchanged; UI benefit eligibility on separation is state law",
+    "reporting": "Separation: state final pay and any state separation notice (e.g. TN LB-0489 within 24h - annex); W-2 as usual"
+   },
+   "ccg_location": "Module 9",
+   "sources": [
+    {
+     "register_id": "US-SDS5-010",
+     "url": "https://dlr.sd.gov/employment_laws/termination.aspx",
+     "article": "at-will; final wages",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-TNS5-012",
+     "url": "https://lwdsupport.tn.gov/hc/en-us/articles/203123940",
+     "article": "employment at will",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-025",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap23-sec2102.htm",
+     "article": "federal final pay",
+     "covers": [
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.final_pay.rule"
+   ]
+  },
+  "part_time": {
+   "status": "answered",
+   "treatment": "No federal part-time payroll regime: the FLSA minimum wage and 40-hour overtime apply per hour/workweek regardless of schedule; part-time hours count toward ACA full-time-equivalent employees (ALE test 50). State paid-sick-leave accrual is per hour worked (annexes).",
+   "effects": {
+    "income_tax": "none: same withholding method; wage-bracket/percentage method by pay period",
+    "social_security": "none: FICA from first dollar; SUI/PFML per State (some States have hours-based coverage)",
+    "reporting": "ACA: FTE count for ALE status (1094-C/1095-C); state UI reports with hours where required (e.g. WA hours + SOC)"
+   },
+   "ccg_location": "Module 4; Module 10",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-017",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap8-sec206.htm",
+     "article": "FLSA 206",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-018",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap8-sec207.htm",
+     "article": "FLSA 207",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-012",
+     "url": "https://www.irs.gov/pub/irs-pdf/i109495c.pdf",
+     "article": "ALE 50 incl. FTE",
+     "covers": [
+      "reporting"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.minwage.hourly",
+    "fed.aca.ale.fte_threshold"
+   ]
+  },
+  "officers_without_employment_contract": {
+   "status": "answered",
+   "treatment": "Corporate officers are employees for payroll: wages subject to FIT withholding, FICA and FUTA; state law includes corporate officers as employees for withholding (OK 68 O.S. 2385.1) and UI coverage (FL 443.1216(1)(a)). Directors fees and partner/sole-proprietor draws are not wages (self-employment, outside payroll). Statutory employees (four IRS categories) are FICA-only.",
+   "effects": {
+    "income_tax": "Officer wages: FIT withholding as any employee (state law includes officers, e.g. OK)",
+    "social_security": "FICA and FUTA on officer wages; SUI covers corporate officers (e.g. FL); some States allow officer exclusions (annexes)",
+    "reporting": "W-2 as any employee; statutory employees W-2 box 13"
+   },
+   "ccg_location": "Module 11",
+   "sources": [
+    {
+     "register_id": "US-OKS5-010",
+     "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os68.rtf",
+     "article": "2385.1 employee incl. corporate officers",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FLS5-005",
+     "url": "https://www.flsenate.gov/Laws/Statutes/2026/443.1216",
+     "article": "443.1216(1)(a)",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDR3-005",
+     "url": "https://www.irs.gov/publications/p15a",
+     "article": "statutory employees",
+     "covers": [
+      "reporting",
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.statutory_employee.treatment"
+   ]
+  },
+  "apprentices_and_trainees": {
+   "status": "answered",
+   "treatment": "No federal apprentice payroll regime: FLSA minimum wage applies (sub-minimum only under DOL certificates). Students: private-school/college students employed by their school are FICA and FUTA exempt; public school FICA exempt unless sec. 218; work-experience full-time students FICA taxable. States set learner rates (CA 85% for first 160 h; WA 14-15 year olds 85%).",
+   "effects": {
+    "income_tax": "FIT withheld as any employee",
+    "social_security": "Student exemptions from FICA/FUTA as listed; state UI student exclusions (annexes)",
+    "reporting": "W-2 as usual"
+   },
+   "ccg_location": "Module 4; Module 11",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-029",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+     "article": "sec. 15 special classes (students)",
+     "covers": [
+      "social_security",
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-CAS5-006",
+     "url": "https://www.dir.ca.gov/dlse/faq_minimumwage.htm",
+     "article": "learners 85%",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-WAS5-006",
+     "url": "https://lni.wa.gov/workers-rights/wages/minimum-wage/",
+     "article": "youth 85%",
+     "covers": [
+      "reporting"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "ca.minwage.hourly"
+   ]
+  },
+  "maternity_paternity_parental": {
+   "status": "answered",
+   "treatment": "No federal paid parental leave for private employers: FMLA gives up to 12 workweeks job-protected leave in 12 months (may be unpaid; employer may require substitution of accrued paid leave). Paid leave comes from state PFML/TDI programmes (e.g. WA PFML 1.13%, MA PFML 0.88%, DC PFL 0.75% employer-only; CA SDI/PFL in the CA annex) - premiums withheld/paid by payroll, benefits paid by the State.",
+   "effects": {
+    "income_tax": "State PFML benefits paid by the State are not employer payroll; employee PFML contributions are W-2 wages (Rev. Rul. 2025-4)",
+    "social_security": "Employee/employer PFML contributions per State programme, capped as the State sets (e.g. MA cap = SS wage base)",
+    "reporting": "State PFML quarterly returns (e.g. MassTaxConnect); W-2 box 14 per State practice"
+   },
+   "ccg_location": "Module 8; Module 5",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-026",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap28-subchapI-sec2612.htm",
+     "article": "29 U.S.C. 2612",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-007",
+     "url": "https://www.irs.gov/pub/irs-pdf/iw2w3.pdf",
+     "article": "PFML W-2 treatment",
+     "covers": [
+      "income_tax",
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-WAS5-015",
+     "url": "https://esd.wa.gov/about-us/news-release/2026/paid-family-medical-leave-premium-rate-increases-12-2027",
+     "article": "WA PFML rate",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-MAS5-012",
+     "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
+     "article": "MA PFML rates",
+     "covers": [
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.fmla.weeks",
+    "wa.pfml.total.rate",
+    "ma.pfml.total.rate"
+   ]
+  },
+  "work_accident_occupational_disease": {
+   "status": "answered",
+   "treatment": "Workers' compensation is state law and generally an insured employer cost outside payroll; payroll touches it where a State levies a per-employee fee or allows an employee deduction (NM Workers' Compensation fee on TRD-41431: employer 2.55 + employee fee per quarter; WA employee share of workers' comp premiums - WA annex). No federal payroll rule.",
+   "effects": {
+    "income_tax": "none at payroll: workers compensation benefits are not employer wages",
+    "social_security": "NM fee per covered employee per quarter (employer and employee parts); WA employee deduction; no federal levy",
+    "reporting": "NM TRD-41431 quarterly (fee + wage report); state annexes"
+   },
+   "ccg_location": "Module 5; Module 7",
+   "sources": [
+    {
+     "register_id": "US-NMR3-001",
+     "url": "https://www.tax.newmexico.gov/businesses/workers-compensation/",
+     "article": "52-5-19 NMSA",
+     "covers": [
+      "social_security",
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-029",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+     "article": "Pub. 15 sec. 15 (no federal WC rule listed)",
+     "covers": [
+      "income_tax"
+     ]
+    }
+   ]
+  },
+  "termination_and_final_pay": {
+   "status": "answered",
+   "treatment": "Federal law does not require immediate final pay; final-pay timing and vacation payout are state law (annexes: e.g. SD next payday, NH 72 h, UT 24 h on discharge; ME/MT/WY payout of accrued vacation). Severance is wages for FIT, FICA and FUTA. WARN: 60 days notice for plant closing/mass layoff - pay in lieu is wages. W-2 for a terminated employee by Jan 31 (earlier on request).",
+   "effects": {
+    "income_tax": "Severance and pay in lieu are supplemental wages (22% optional / aggregate)",
+    "social_security": "Severance subject to FICA and FUTA",
+    "reporting": "W-2 by Jan 31; state separation notices where required"
+   },
+   "ccg_location": "Module 9",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-025",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap23-sec2102.htm",
+     "article": "DOL last paycheck; WARN 2102",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-029",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+     "article": "severance = wages",
+     "covers": [
+      "income_tax",
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FED-016",
+     "url": "https://www.ecfr.gov/current/title-26/part-31/section-31.6051-1",
+     "article": "31.6051-1(a)(1)",
+     "covers": [
+      "reporting"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.warn.notice_days",
+    "fed.severance.is_wages"
+   ]
+  },
+  "mid_month_joiner_and_leaver": {
+   "status": "answered",
+   "treatment": "No proration rule in federal law: withholding is computed on the wages paid in the pay period with the period frequency of Pub. 15-T (annualise x periods); a joiner files W-4 (and state certificate) at hire and is reported to the State Directory of New Hires within 20 days (shorter in many States); a leaver gets final pay under state law. Wage bases (OASDI, FUTA, SUI) run per employer per calendar year from the first payment.",
+   "effects": {
+    "income_tax": "Pub. 15-T per-period method on wages actually paid; no catch-up or proration",
+    "social_security": "Wage bases start at the first payment by this employer in the calendar year; successor employer carry-over for FUTA",
+    "reporting": "New-hire report within 20 days; W-2 for any part-year employee"
+   },
+   "ccg_location": "Module 2; Module 3",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-001",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15t.pdf",
+     "article": "pay-period tables",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-024",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42-chap7-subchapIV-partD-sec653a.htm",
+     "article": "653a(b)",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-009",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap23-sec3306.htm",
+     "article": "3306(b)(1)",
+     "covers": [
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.newhire.deadline_days",
+    "fed.futa.wage_base"
+   ]
+  },
+  "annual_regularisation": {
+   "status": "answered",
+   "treatment": "There is no employer year-end income-tax regularisation: the employee settles at assessment (Form 1040 / state returns). The employer reconciles quarterly 941 to annual W-2/W-3, corrects with 941-X / W-2c, and stops OASDI at the wage base and starts Additional Medicare above 200,000 per employer. Excess OASDI from multiple employers is refunded at assessment, not by the employer.",
+   "effects": {
+    "income_tax": "none at payroll: assessment by the employee; W-4 exempt status renewed yearly",
+    "social_security": "Per-employer annual bases (OASDI 184,500; FUTA 7,000; SUI per State)",
+    "reporting": "W-2/W-3 by 2027-02-01 reconciled to four 941s; 940 annual; state annual reconciliations"
+   },
+   "ccg_location": "Module 10; Module 5",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-007",
+     "url": "https://www.irs.gov/pub/irs-pdf/iw2w3.pdf",
+     "article": "W-2/W-3 2026",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-005",
+     "url": "https://www.irs.gov/pub/irs-pdf/i941.pdf",
+     "article": "Additional Medicare",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-006",
+     "url": "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
+     "article": "W-4 exempt expiry",
+     "covers": [
+      "income_tax"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.w2.due_date",
+    "fed.fica.addl_medicare.withholding_threshold",
+    "fed.w4.exempt.validity"
+   ]
+  },
+  "overtime": {
+   "status": "answered",
+   "treatment": "FLSA: 1.5x the regular rate over 40 hours in a workweek, no federal daily overtime. States add daily overtime (CA 8h/12h and 7th day; AK over 8h; NV for under 18.00/h from 2026-07-01; CO, KY 7th day - annexes). P.L. 119-21 qualified-overtime deduction (premium half) operates at assessment; employer reports W-2 Box 12 TT; FICA unchanged.",
+   "effects": {
+    "income_tax": "Overtime is regular wages for withholding; deduction only via W-4 Step 4(b)",
+    "social_security": "Fully subject to FICA/FUTA/SUI",
+    "reporting": "W-2 Box 12 TT (qualified overtime) from TY2026"
+   },
+   "ccg_location": "Module 4; Module 10",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-018",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap8-sec207.htm",
+     "article": "29 U.S.C. 207(a)(1)",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-030",
+     "url": "https://www.irs.gov/pub/irs-pdf/iw2w3.pdf",
+     "article": "P.L. 119-21",
+     "covers": [
+      "income_tax",
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-CAS5-008",
+     "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=LAB&sectionNum=510",
+     "article": "Lab. Code 510",
+     "covers": [
+      "reporting"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.overtime.premium.multiplier",
+    "ca.overtime.rule",
+    "fed.w2.box12.new_codes"
+   ]
+  },
+  "multiple_employers": {
+   "status": "answered",
+   "treatment": "Each employer withholds and applies wage bases independently: OASDI and FUTA bases are per employer (successor carry-over only on acquisition); Additional Medicare is triggered per employer at 200,000 regardless of total income. The employee coordinates FIT across jobs on W-4 Step 2 (multiple jobs) - Worksheet 1A line 1g is not subtracted when Step 2 is checked.",
+   "effects": {
+    "income_tax": "W-4 Step 2 checkbox changes the schedule (Step-2-checked thresholds) and line 1g",
+    "social_security": "Per-employer OASDI/FUTA/SUI bases; excess OASDI refunded at assessment; common-paymaster rules not researched",
+    "reporting": "Separate W-2 per employer"
+   },
+   "ccg_location": "Module 3; Module 5",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-006",
+     "url": "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
+     "article": "Step 2",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-009",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap23-sec3306.htm",
+     "article": "FUTA per employer",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-005",
+     "url": "https://www.irs.gov/pub/irs-pdf/i941.pdf",
+     "article": "Additional Medicare per employer",
+     "covers": [
+      "social_security",
+      "reporting"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.fit.worksheet1a.line1g.mfj",
+    "fed.futa.wage_base"
+   ]
+  },
+  "local_regimes": {
+   "status": "answered",
+   "treatment": "Local income/payroll taxes exist in a minority of States and are outside state reciprocity: PA EIT (higher of resident or work-municipality rate) and LST; Philadelphia wage tax 3.735%/3.425% from 2026-07-01; OH municipal and school-district taxes (base = Medicare wages less 125); MI city taxes (Detroit 2.4%/1.2%); IN county tax (changes January/October); MD county tax (to 3.30%); KY occupational taxes (Louisville 1.45% incl. TARC); NYC/Yonkers; OR transit levies. Per-locality detail in the annexes.",
+   "effects": {
+    "income_tax": "Local withholding by residence and/or work locality per local rule; W-2 boxes 18-20",
+    "social_security": "Local transit/payroll levies (OR state transit 0.1% employee; NY MCTMT employer) per US-OWN-007 scope",
+    "reporting": "Local returns per locality; W-2 boxes 18-20 up to two localities"
+   },
+   "ccg_location": "Module 6 (local); annexes PA, OH, MI, IN, MD, KY, NY, OR",
+   "sources": [
+    {
+     "register_id": "US-PAS5-022",
+     "url": "https://www.phila.gov/services/payments-assistance-taxes/business-taxes/wage-tax-employers/",
+     "article": "Philadelphia wage tax",
+     "covers": [
+      "income_tax",
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-MIR3-002",
+     "url": "https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/City-Withholding/TY2026/5469_ty2026.pdf",
+     "article": "Detroit 5469",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-INS5-009",
+     "url": "https://www.in.gov/dor/resources/tax-rates-and-reports/rates-fees-and-penalties/",
+     "article": "county rate changes",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-011",
+     "url": "https://www.irs.gov/instructions/iw2w3",
+     "article": "W-2 boxes 15-20",
+     "covers": [
+      "reporting"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "pa.local.philadelphia.resident.rate",
+    "in.county.change_dates",
+    "multi.w2.states_per_form"
+   ]
+  },
+  "employer_type_and_size": {
+   "status": "answered",
+   "treatment": "Size and type thresholds change obligations: ACA ALE at 50 full-time incl. FTEs (1094-C/1095-C, e-file at 10+); deposit schedule by lookback liability (50,000 monthly/semiweekly; 100,000 next-day); household employers (FICA at 3,000, FUTA at 1,000/quarter, Schedule H); agricultural (150/2,500 tests, Form 943); government employers (no FUTA, sec. 218); state size tests (AR minimum wage 4+ employees; MA PFML employer share 25+; NE sick leave 11+; VA paid sick 50+ from 2027-07-01 - annexes).",
+   "effects": {
+    "income_tax": "Household FIT only by agreement; agricultural FIT/FICA from 150/2,500",
+    "social_security": "Household and agricultural thresholds; MA PFML <25 no employer share",
+    "reporting": "ALE 1094-C/1095-C; Form 943/944/Schedule H routes"
+   },
+   "ccg_location": "Module 10; Module 11",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-012",
+     "url": "https://www.irs.gov/pub/irs-pdf/i109495c.pdf",
+     "article": "ALE",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-004",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+     "article": "deposit schedule",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-029",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+     "article": "household/government",
+     "covers": [
+      "income_tax",
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-MAS5-012",
+     "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
+     "article": "MA PFML <25",
+     "covers": [
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.aca.ale.fte_threshold",
+    "fed.deposit.monthly_max_lookback_liability",
+    "fed.household.fica_cash_threshold"
+   ]
+  },
+  "mid_year_rate_change": {
+   "status": "answered",
+   "treatment": "Several 2026 values change mid-year and must be dated per payment date: DC minimum wage 18.40 from 2026-07-01; OR 15.55 from 2026-07-01; AK 14.00 from 2026-07-01; FL 15.00 from 2026-09-30; NV daily-OT rule from 2026-07-01; Philadelphia wage tax from 2026-07-01; OH withholding tables from 2026-08-01; GA 4.99% tables; IN county rates from 2026-10-01; ID tables 2026-07-23; Trump-account exclusion from 2026-07-04.",
+   "effects": {
+    "income_tax": "Withholding tables effective by payment date (OH 2026-08-01, IN county 2026-10-01, ID 2026-07-23)",
+    "social_security": "Rate changes on the effective date (none federal mid-year in 2026)",
+    "reporting": "Quarterly returns split by period; W-2 annual totals"
+   },
+   "ccg_location": "Module 4; Module 6; Module 13",
+   "sources": [
+    {
+     "register_id": "US-DCS5-011",
+     "url": "https://does.dc.gov/sites/default/files/dc/sites/does/publication/attachments/2026%20Minimum%20Wage%20Increase%20Notice.pdf",
+     "article": "32-1003",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-ORS5-002",
+     "url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx",
+     "article": "BOLI 2026-07-01",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-OHS5-001",
+     "url": "https://dam.assets.ohio.gov/image/upload/tax.ohio.gov/employer_withholding/2026%20Withholding%20Tables/WHT_OptionalComputerFormula_2026.pdf",
+     "article": "tables 2026-08-01",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-PAS5-022",
+     "url": "https://www.phila.gov/services/payments-assistance-taxes/business-taxes/wage-tax-employers/",
+     "article": "Philadelphia 2026-07-01",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-030",
+     "url": "https://www.irs.gov/pub/irs-pdf/iw2w3.pdf",
+     "article": "Trump account 2026-07-04",
+     "covers": [
+      "income_tax",
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "dc.minwage.hourly",
+    "or.minwage.standard.hourly",
+    "oh.wh.tables.effective_from",
+    "pa.local.philadelphia.resident.rate"
+   ]
+  },
+  "special_pay_cycles": {
+   "status": "answered",
+   "treatment": "Pub. 15-T supports daily/weekly/biweekly/semimonthly/monthly/quarterly/semiannual/annual periods (annualise then divide). Supplemental pay (bonus, commissions, severance): flat 22% optional or aggregate; 37% mandatory above 1,000,000 per year. State pay-frequency and payday-timing rules (CA Lab. Code 204 semimonthly windows) and state supplemental rates (CA 10.23% bonus / 6.6% other) are annex detail.",
+   "effects": {
+    "income_tax": "Supplemental methods per Pub. 15 sec. 7; state supplemental rates",
+    "social_security": "none: FICA on all wages including supplemental",
+    "reporting": "none specific"
+   },
+   "ccg_location": "Module 3; Module 6",
+   "sources": [
+    {
+     "register_id": "US-FEDS5-003",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+     "article": "sec. 7 supplemental",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-FEDS5-001",
+     "url": "https://www.irs.gov/pub/irs-pdf/p15t.pdf",
+     "article": "periods",
+     "covers": [
+      "income_tax"
+     ]
+    },
+    {
+     "register_id": "US-CAS5-004",
+     "url": "https://edd.ca.gov/siteassets/files/pdf_pub_ctr/de44.pdf",
+     "article": "DE 44 supplemental",
+     "covers": [
+      "income_tax"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.fit.supplemental.flat_rate",
+    "fed.fit.supplemental.mandatory_threshold"
+   ]
+  },
+  "accrual_vs_payment": {
+   "status": "answered",
+   "treatment": "Federal payroll taxes follow the PAYMENT date: FIT, FICA and FUTA apply to wages paid in the calendar year (OASDI base for remuneration paid in 2026; W-2 on calendar-year basis; FUTA 7,000 per employer in the calendar year). Exception to watch: MA PFML rates apply to wages EARNED on/after 1 January. A December-earned/January-paid wage takes the new year rates and bases federally.",
+   "effects": {
+    "income_tax": "Withholding at payment; table year = payment date",
+    "social_security": "Wage bases by payment date; MA PFML by earning date",
+    "reporting": "W-2/941 by payment date"
+   },
+   "ccg_location": "Module 3; Module 5",
+   "sources": [
+    {
+     "register_id": "US-FED-003",
+     "url": "https://www.govinfo.gov/content/pkg/FR-2025-11-03/pdf/2025-19763.pdf",
+     "article": "base for remuneration paid in 2026",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-FED-006",
+     "url": "https://www.irs.gov/instructions/iw2w3",
+     "article": "calendar-year basis",
+     "covers": [
+      "reporting"
+     ]
+    },
+    {
+     "register_id": "US-MULTIS5-009",
+     "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap23-sec3306.htm",
+     "article": "paid in the calendar year",
+     "covers": [
+      "social_security"
+     ]
+    },
+    {
+     "register_id": "US-MAS5-012",
+     "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
+     "article": "wages earned on/after Jan 1",
+     "covers": [
+      "social_security"
+     ]
+    }
+   ],
+   "fact_keys": [
+    "fed.fica.oasdi.wage_base",
+    "fed.tax_year.basis"
+   ]
+  }
+ },
+ "facts": [],
+ "unresolved": [
+  {
+   "key": "fed.common_paymaster.rule",
+   "why": "Common-paymaster relief for related employers (multiple_employers row) was not researched in the FED unit.",
+   "attempted": [],
+   "what_would_close_it": "IRC 3121(s) / Pub. 15-A common paymaster section read into a FED row.",
+   "blocking": false
+  },
+  {
+   "key": "multi.workers_comp.employee_share",
+   "why": "Only NM fee and WA employee deduction are known; other States allowing employee workers-comp deductions not swept.",
+   "attempted": [],
+   "what_would_close_it": "Annex workers confirm per State (WA L&I rates; NM TRD-41431).",
+   "blocking": false
+  }
+ ]
+}

@@ -116,6 +116,8 @@ SCENARIOS = {
               hours=24, periods=52, plabel="weekly", status="single", ytd=0),
     "C": dict(title="High earner crossing the OASDI wage base and the Additional Medicare threshold (semimonthly)",
               wage=20000, periods=24, plabel="semimonthly", status="single", ytd=182000),
+    "E": dict(title="Full-time employee with a 401(k) elective deferral (Texas, biweekly)",
+              wage=3000, deferral=300, periods=26, plabel="biweekly", status="single", ytd=0, state="TX"),
 }
 
 
@@ -172,6 +174,67 @@ def gross_to_net(key, sc, wage, loc):
     return lines
 
 
+def pretax_example():
+    """F44 final (QA r3b major 1, RQ-545 closed): Scenario E = Scenario A plus a 401(k) elective deferral.
+    The FIT / FICA / FUTA treatment is read from fed.base.401k_deferral.{fit,fica,futa} (Pub. 15 (2026) sec. 15)."""
+    sc = SCENARIOS["E"]
+    loc = "m12_worked_examples.md §12.1 An employee with a pre-tax deduction"
+    F.set_loc(loc)
+    wage, dfr = D(sc["wage"]), D(sc["deferral"])
+    t_fit, t_fica, t_futa = (str(V(f"fed.base.401k_deferral.{b}")).lower() for b in ("fit", "fica", "futa"))
+    fit_wage = wage - dfr if t_fit.startswith("excluded") else wage
+    fica_wage = wage - dfr if t_fica.startswith("excluded") else wage
+    futa_wage = wage - dfr if t_futa.startswith("excluded") else wage
+    hE = "Worked example 3: Scenario E, 401(k) elective deferral (biweekly)"
+    RESULTS.setdefault("_headings", {})["E"] = hE
+    L = ["#### " + hE, "",
+         f"**Scenario E: {sc['title']}.** Scenario A (single filer, biweekly salary 3,000.00, first pay of 2026, Texas) "
+         f"with a 401(k) elective deferral of 300.00 per pay. Treatment of the deferral by base: federal income tax withholding "
+         f"wages {T('fed.base.401k_deferral.fit')}; FICA wages {T('fed.base.401k_deferral.fica')}; FUTA wages "
+         f"{T('fed.base.401k_deferral.futa')} {F.REG('fed.base.401k_deferral.fit')}. Rule: "
+         f"{T('fed.retirement.pretax.tax_treatment')} {F.REG('fed.retirement.pretax.tax_treatment')}.", ""]
+    annual_dfr = dfr * sc["periods"]
+    lim = D(V("fed.retirement.401k.elective_deferral_limit"))
+    L += [table(["Line", "Calculation", "Result (USD)"], [
+        ("Deferrals in the year at this rate", f"{m(dfr)} × {sc['periods']}", m(annual_dfr)),
+        ("Within the 402(g) elective deferral limit", f"{m(annual_dfr)} ≤ {T('fed.retirement.401k.elective_deferral_limit')}",
+         "yes" if annual_dfr <= lim else "NO"),
+        ("Federal income tax withholding wages", f"{m(wage)} − {m(dfr)}" if fit_wage != wage else m(wage), m(fit_wage)),
+        ("FICA wages (deferral not excluded)", m(wage) if fica_wage == wage else f"{m(wage)} − {m(dfr)}", m(fica_wage)),
+        ("FUTA wages (deferral not excluded)", m(wage) if futa_wage == wage else f"{m(wage)} − {m(dfr)}", m(futa_wage)),
+    ]), ""]
+    fit_rows, fit = fit_lines(loc, sc["status"], fit_wage, sc["periods"], sc["plabel"])
+    f_rows, ob, ee, med, over, addl = fica_rows(loc, fica_wage, 0)
+    F.set_loc(loc)
+    L += ["**Federal income tax on the reduced wages: Pub. 15-T 2026 Worksheet 1A** " + F.REG("fed.fit.method"), "",
+          table(["Line", "Calculation", "Result (USD)"], fit_rows), "",
+          "**FICA (employee) on the full wages** " + F.REG("fed.fica.oasdi.rate.employee"), "",
+          table(["Line", "Calculation", "Result (USD)"], list(f_rows) + [
+              ("OASDI employee", f"{m(ob)} × {pct('fed.fica.oasdi.rate.employee')}", m(ee)),
+              ("Medicare employee", f"{m(fica_wage)} × {pct('fed.fica.medicare.rate.employee')}", m(med))]), ""]
+    net = wage - dfr - fit - ee - med - addl
+    er_oasdi = c2(ob * D(V("fed.fica.oasdi.rate.employer")) / 100)
+    er_med = c2(fica_wage * D(V("fed.fica.medicare.rate.employer")) / 100)
+    futa_base = min(futa_wage, D(V("fed.futa.wage_base")))
+    futa = c2(futa_base * D(V("fed.futa.rate.net")) / 100)
+    L += ["**Net pay and employer federal cost**", "",
+          table(["Line", "Calculation", "Result (USD)"], [
+              ("Gross pay", "—", m(wage)),
+              ("Total employee deductions", f"{m(dfr)} + {m(fit)} + {m(ee)} + {m(med)}", m(dfr + fit + ee + med + addl)),
+              ("Net pay", f"{m(wage)} − {m(dfr)} − {m(fit)} − {m(ee)} − {m(med)}", m(net)),
+              ("OASDI employer", f"{m(ob)} × {pct('fed.fica.oasdi.rate.employer')}", m(er_oasdi)),
+              ("Medicare employer", f"{m(fica_wage)} × {pct('fed.fica.medicare.rate.employer')}", m(er_med)),
+              ("FUTA base in this pay", f"min({m(futa_wage)}, {T('fed.futa.wage_base')} − 0.00)", m(futa_base)),
+              ("FUTA (net rate after the full state credit)", f"{m(futa_base)} × {pct('fed.futa.rate.net')}", m(futa)),
+          ]), "",
+          "Compared with Scenario A, only the federal income tax changes; OASDI, Medicare and FUTA are computed on the "
+          "same 3,000.00.", ""]
+    RESULTS["E"] = dict(gross=str(m(wage)), deferral=str(m(dfr)), fit=str(fit), oasdi=str(ee), medicare=str(med),
+                        addl_medicare=str(addl), net=str(c2(net)), er_oasdi=str(er_oasdi), er_medicare=str(er_med),
+                        futa=str(futa))
+    return L
+
+
 def supplemental_example(key, loc, amount, ytd, title):
     F.set_loc(loc)
     amount, ytd = D(amount), D(ytd)
@@ -212,14 +275,14 @@ def state_oracles(loc):
     F.set_loc(loc)
     # GA: (wages - std/24 - dependent/24) x 4.99 %   (MFJ one dependent, semimonthly 2,000)
     sd, dep = D(V("ga.wh.std_deduction.mfj")), D(V("ga.wh.dependent_allowance"))
-    rate = D(V("ga.pit.rate.flat", on="2026-06-01"))
+    rate = D(V("ga.wh.rate", on="2026-06-01"))  # round 2: withholding level
     p_sd, p_dep = c2(sd / 24), c2(dep / 24)
     base = D(2000) - p_sd - p_dep
     w = base * rate / 100
     oracle("ga.oracle.mfj_semimonthly.withholding", "GA", "MFJ, one dependent, semimonthly 2,000.00 (from 2026-05-11)", [
         ("Period standard deduction", f"{T('ga.wh.std_deduction.mfj')} ÷ 24", m(p_sd)),
         ("Period dependent allowance (1)", f"{T('ga.wh.dependent_allowance')} ÷ 24", m(p_dep)),
-        ("Withholding", f"(2,000.00 − {m(p_sd)} − {m(p_dep)}) × {T('ga.pit.rate.flat', on='2026-06-01')}%", m(w))], w)
+        ("Withholding", f"(2,000.00 − {m(p_sd)} − {m(p_dep)}) × {T('ga.wh.rate', on='2026-06-01')}%", m(w, 4))], w)
     # LA: (S - std/N) x 3.09 %
     r = D(V("la.pit.rate.flat"))
     s1 = D(V("la.wh.std_deduction.single"))
@@ -238,12 +301,12 @@ def state_oracles(loc):
     # Detroit resident
     ex = D(V("mi.local.detroit.exemption.annual")) / 26
     w = (D(2000) - ex) * D(V("mi.local.detroit.rate.resident")) / 100
-    oracle("mi.oracle.detroit.resident_biweekly_2000.withholding", "MI (Detroit)", "Detroit resident, one exemption, biweekly 2,000.00", [
+    oracle("mi.oracle.detroit.resident_biweekly_2000", "MI (Detroit)", "Detroit resident, one exemption, biweekly 2,000.00", [
         ("Withholding", f"(2,000.00 − {T('mi.local.detroit.exemption.annual')} ÷ 26) × {T('mi.local.detroit.rate.resident')}%", m(w, 4))], w)
     # MN
     ann = D(2000) * 26 - D(V("mn.pit.allowance.amount"))
     tax = D(V("mn.pit.wh.single.2.base_tax")) + (ann - D(V("mn.pit.wh.single.2.floor"))) * D(V("mn.pit.wh.single.2.rate")) / 100
-    oracle("mn.oracle.biweekly_2000_s1.withholding", "MN", "Single, one allowance, biweekly 2,000.00", [
+    oracle("mn.pit.oracle.example_1.withholding", "MN", "Single, one allowance, biweekly 2,000.00", [
         ("Annual taxable wages", f"2,000.00 × 26 − {T('mn.pit.allowance.amount')}", m(ann)),
         ("Annual tax", f"{T('mn.pit.wh.single.2.base_tax')} + ({m(ann)} − {T('mn.pit.wh.single.2.floor')}) × {T('mn.pit.wh.single.2.rate')}%", m(tax)),
         ("Withholding", f"{m(tax)} ÷ 26", m(tax / 26, 4))], tax / 26)
@@ -251,7 +314,7 @@ def state_oracles(loc):
     on = "2026-08-01"
     tw = D(2000) * 26 - D(V("oh.pit.wh.exemption.annual"))
     tax = D(V("oh.pit.wh.base_tax.2", on=on)) + (tw - D(V("oh.pit.wh.break.1", on=on))) * D(V("oh.pit.wh.rate.2", on=on)) / 100
-    oracle("oh.oracle.biweekly_2000_1ex.withholding", "OH", "One exemption, biweekly 2,000.00 (tables from 2026-08-01)", [
+    oracle("oh.pit.oracle.example_1.withholding", "OH", "One exemption, biweekly 2,000.00 (tables from 2026-08-01)", [
         ("Annual taxable wages", f"2,000.00 × 26 − {T('oh.pit.wh.exemption.annual')}", m(tw)),
         ("Annual tax", f"{T('oh.pit.wh.base_tax.2', on=on)} + ({m(tw)} − {T('oh.pit.wh.break.1', on=on)}) × {T('oh.pit.wh.rate.2', on=on)}%", m(tax)),
         ("Withholding", f"{m(tax)} ÷ 26", m(tax / 26, 4))], tax / 26)
@@ -268,7 +331,7 @@ def state_oracles(loc):
     sdd = min(ann * D(V("sc.pit.wh.std_deduction.rate")) / 100, D(V("sc.pit.wh.std_deduction.cap")))
     ti = ann - 3 * D(V("sc.pit.allowance.annual")) - sdd
     tax = ti * D(V("sc.pit.wh.band.3.rate")) / 100 - D(V("sc.pit.wh.band.3.subtract"))
-    oracle("sc.oracle.weekly_750_3al.withholding", "SC", "Three allowances, weekly 750.00 (2026 tables, not Act 110)", [
+    oracle("sc.pit.oracle.example_1.withholding", "SC", "Three allowances, weekly 750.00 (2026 tables, not Act 110)", [
         ("Annual wages", "750.00 × 52", m(ann)),
         ("Standard deduction (rate × wages, capped)", f"min({m(ann)} × {T('sc.pit.wh.std_deduction.rate')}%, {T('sc.pit.wh.std_deduction.cap')})", m(sdd)),
         ("Annual taxable wages", f"{m(ann)} − 3 × {T('sc.pit.allowance.annual')} − {m(sdd)}", m(ti)),
@@ -333,7 +396,7 @@ def state_oracles(loc):
     mid = (ni // 100) * 100 + 50
     t1 = mid * D(V("ar.pit.bracket.4.rate")) / 100 - D(V("ar.pit.bracket.4.subtract"))
     t2 = c0(t1) - 2 * D(V("ar.wh.personal_credit.per_exemption"))
-    oracle("ar.oracle.monthly_2127_2ex.withholding", "AR", "Two exemptions, monthly 2,127.00", [
+    oracle("ar.oracle.example.1.withholding", "AR", "Two exemptions, monthly 2,127.00", [
         ("Annual net taxable income", f"2,127.00 × 12 − {T('ar.wh.std_deduction')}", m(ni)),
         ("Band midpoint (USD 50, per " + T("ar.wh.method") + ")", m(ni), m(mid)),
         ("Annual tax before credits", f"{m(mid)} × {T('ar.pit.bracket.4.rate')}% − {T('ar.pit.bracket.4.subtract')}", m(t1)),
@@ -353,7 +416,7 @@ def m12():
     L += ["# Module 12: Gross-to-Net Worked Examples", "",
           "*Purpose: To provide a final, comprehensive validation of all researched rules.*", "",
           "## 12.1 Comprehensive Gross-to-Net Examples", "",
-          "**Deliverable:** Provide complete, end-to-end Gross-to-Net calculation examples for common scenarios:", "",
+          "### Provide complete, end-to-end Gross-to-Net calculation examples for common scenarios:", "",
           "**How these examples are produced.** Every figure below is computed by "
           "`01-ccg/_examples/build_examples.py` from the facts files; no number is typed by hand. "
           "Amounts are rounded half-up to the cent at each line. The optional whole-dollar rounding that "
@@ -366,7 +429,9 @@ def m12():
     sc = SCENARIOS["A"]
     loc = "m12_worked_examples.md §12.1 A full-time resident employee on a standard salary"
     F.set_loc(loc)
-    L += ["### A full-time resident employee on a standard salary", "",
+    hA = "Worked example 1: Scenario A, full-time resident employee (biweekly)"
+    RESULTS.setdefault("_headings", {})["A"] = hA   # r3 (QA r2 C69): headings the C69 checker counts
+    L += ["### A full-time resident employee on a standard salary", "", "#### " + hA, "",
           f"**Scenario A: {sc['title']}.** Single filer, biweekly salary 3,000.00, first pay of 2026. "
           f"Work and residence State Texas, which levies no wage income tax ({F.B('tx.no_wage_tax', 'no state income tax withholding', 'state withholding applies')}, "
           f"{F.REG('tx.no_wage_tax')}). Employer State unemployment insurance is paid at the employer's assigned Texas rate on the Texas wage base "
@@ -379,7 +444,9 @@ def m12():
     F.set_loc(loc)
     rate = D(V("fed.minwage.hourly"))
     wage = c2(rate * sc["hours"])
-    L += ["### A casual or part-time employee", "",
+    hB = "Worked example 2: Scenario B, part-time employee at the federal minimum wage"
+    RESULTS.setdefault("_headings", {})["B"] = hB
+    L += ["### A casual or part-time employee", "", "#### " + hB, "",
           f"**Scenario B: {sc['title']}.** Single filer, {sc['hours']} hours in the workweek at the federal minimum wage of "
           f"{T('fed.minwage.hourly')} per hour {F.REG('fed.minwage.hourly')}. No overtime: the hours are below the "
           f"{T('fed.overtime.weekly_threshold_hours')}-hour weekly threshold {F.REG('fed.overtime.weekly_threshold_hours')}. "
@@ -399,15 +466,15 @@ def m12():
           f"health FSA salary reduction {T('fed.bik.health_fsa.salary_reduction_cap')} {F.REG('fed.bik.health_fsa.salary_reduction_cap')}. "
           "California taxes 401(k) deferrals for UI and SDI but not for personal income tax "
           f"({T('ca.wages.401k_deferrals')}) {F.REG('ca.wages.401k_deferrals')}.", "",
-          F.gap("the facts files carry no key stating how a 401(k) elective deferral or a section 125 salary reduction "
-                "is treated for federal income tax withholding, OASDI/Medicare and FUTA wages. A computed pre-tax "
-                "gross-to-net example cannot be written without it.", "fed.retirement.401k.wage_treatment"), ""]
+          ]
+    L += pretax_example()
     # student loan / special
     F.set_loc("m12_worked_examples.md §12.1 An employee with a student loan or other special tax obligation")
     L += ["### An employee with a student loan or other special tax obligation", "",
           F.gap("no fact describes a federal or State payroll obligation for student-loan repayment "
                 "(for example an administrative wage garnishment order). The case is not computed.",
                 "fed.student_loan.payroll_obligation"), "",
+          "#### Worked example 4: Supplemental payment above the mandatory threshold", "",
           "**Special tax obligation computed instead: a supplemental payment above the mandatory threshold.** "
           f"Supplemental wages paid to one employee in excess of {T('fed.fit.supplemental.mandatory_threshold')} in the calendar year "
           f"are withheld at the mandatory rate of {T('fed.fit.supplemental.mandatory_rate')}% {F.REG('fed.fit.supplemental.mandatory_rate')}. "
@@ -428,11 +495,14 @@ def m12():
         ("Additional Medicare (wages already above the threshold)", f"{m(bonus)} × {pct('fed.fica.addl_medicare.rate')}", m(addl)),
         ("Net payment", f"{m(bonus)} − {m(fit)} − {m(med)} − {m(addl)}", m(net))]), ""]
     RESULTS["D_mandatory_supplemental"] = dict(fit=str(fit), medicare=str(med), addl=str(addl), net=str(c2(net)))
+    RESULTS.setdefault("_headings", {})["D_mandatory_supplemental"] = "Worked example 4: Supplemental payment above the mandatory threshold"
     # C
     sc = SCENARIOS["C"]
     loc = "m12_worked_examples.md §12.1 Other complex scenarios that are common in the country"
     F.set_loc(loc)
-    L += ["### Other complex scenarios that are common in the country", "",
+    hC = "Worked example 5: Scenario C, OASDI wage base and Additional Medicare threshold (semimonthly)"
+    RESULTS.setdefault("_headings", {})["C"] = hC
+    L += ["### Other complex scenarios that are common in the country", "", "#### " + hC, "",
           f"**Scenario C: {sc['title']}.** Single filer, semimonthly salary 20,000.00, wages already paid in 2026 by this employer "
           "182,000.00. The OASDI contribution is the rate × the lesser of the remaining annual wage base and the pay "
           f"(base {T('fed.fica.oasdi.wage_base', ef='2026-01-01')} for 2026, {F.REG('fed.fica.oasdi.wage_base', ef='2026-01-01')}). "
@@ -481,27 +551,33 @@ def m12():
                      f"must choose one method (Module 13, 13.1) {F.REG('practice.ct.tables_vs_rules')}.")
         if k == "or.oracle.annual_25000.withholding":
             resid = "Worker re-derivation; the published example is mis-computed (" + T("practice.or.federal_cap") + ")."
-        if k == "ia.oracle.example6_monthly_5000_hoh.withholding":
+        if k == "ia.oracle.formula.example6.withholding":
             resid = "The published example has no final figure; worker derivation. Dependent count not keyed."
         if k == "mi.oracle.biweekly_2000_1ex.withholding":
             resid += " The Treasury withholding calculator (official oracle) was not run."
-        if k == "sc.oracle.weekly_750_3al.withholding":
+        if k == "sc.pit.oracle.example_1.withholding":
             resid += " 2026 withholding tables, not the Act 110 return rates (" + T("practice.sc.withholding_rates_2026") + ")."
         rows.append((jur, k.split(".", 2)[2].replace(".withholding", ""), T(k) + F.dated(k), f["register_id"], how, resid))
     L += [table(["Jurisdiction", "Case", "Result (USD)", "Register", "How obtained", "Status / residual"], rows), ""]
-    L += ["**Residuals carried as open items (not facts, not expected results):**", ""]
+    L += ["**Residuals (published examples not reproduced; not expected results):**", ""]
     for uk in ("ny.oracle.nys50t.example2.withholding", "ky.oracle.biweekly_1500.withholding",
                "ut.oracle.pub14.examples.withholding", "dc.oracle.method_2026", "md.oracle.calculator"):
         u = F.UNRESOLVED[uk]
-        L.append(f"- `{uk}`: " + F.gap(_residual_text(uk), uk))
+        L.append(f"- **{uk.split('.')[0].upper()}**: " + F.gap(_residual_text(uk), uk))
     L += [""]
     L += ["### 12.2.2 Re-derivation from keyed facts", "",
           "Each table recomputes one oracle from the keyed rates, deductions and brackets. The scenario inputs "
           "(wages, frequency, filing status, allowances) are those of the published example. Results are shown to "
           "four decimals before rounding. The last column of 12.2.1 records agreement with the oracle fact at the cent "
           "(at the dollar where the State rounds withholding to whole dollars).", ""]
-    for okey, jur, case, rws, comp, wd, ok in ORACLES:
+    for n_ex, (okey, jur, case, rws, comp, wd, ok) in enumerate(ORACLES, start=6):
         F.set_loc(f"m12_worked_examples.md §12.2.2 {jur}")
+        h_ex = f"Worked example {n_ex}: {jur} published example re-derived"
+        RESULTS.setdefault("_headings", {})[okey] = h_ex
+        L += ["#### " + h_ex, ""]
+        if D(m(comp, 4).replace(",", "")) == D(V(okey)):
+            lab, calc, _r = rws[-1]
+            rws = rws[:-1] + [(lab, calc, T(okey))]
         L += [f"**{jur}: {case}** {F.REG(okey)}. Oracle fact {T(okey)}.", "",
               table(["Line", "Calculation", "Result (USD)"], rws), ""]
         RESULTS[okey] = dict(computed=str(m(comp, 4)), fact=str(V(okey)), agrees=ok)
@@ -535,20 +611,21 @@ def m09_examples():
          "Alabama, for example, exempts severance up to "
          f"{T('al.wh.severance.exempt_max')} from its withholding {F.REG('al.wh.severance.exempt_max')}.", ""]
     L += supplemental_example("m09_redundancy", loc, 18000, 60000, "Redundancy severance payout (federal layer)")
-    open(os.path.join(OUT, "m09_redundancy.md"), "w", encoding="utf-8").write("\n".join(L) + "\n")
+    open(os.path.join(OUT, "m09_redundancy.md"), "w", encoding="utf-8").write(F.clean("\n".join(L) + "\n"))
     loc = "m09_termination.md §9.2 bonus worked example"
     F.set_loc(loc)
     L = ["**Scenario.** An annual bonus of 5,000.00 is paid on its own check to an employee with 40,000.00 of 2026 wages. "
          "Supplemental wages identified separately from regular wages may be withheld at the optional flat rate "
          f"{F.REG('fed.fit.supplemental.flat_rate')}. FICA applies in full.", ""]
     L += supplemental_example("m09_bonus", loc, 5000, 40000, "Annual bonus, optional flat-rate method (federal layer)")
-    open(os.path.join(OUT, "m09_bonus.md"), "w", encoding="utf-8").write("\n".join(L) + "\n")
+    open(os.path.join(OUT, "m09_bonus.md"), "w", encoding="utf-8").write(F.clean("\n".join(L) + "\n"))
 
 
 def main():
     m09_examples()
     L = m12()
-    open(os.path.join(MOD, "m12_worked_examples.md"), "w", encoding="utf-8").write("\n".join(L) + "\n")
+    open(os.path.join(MOD, "m12_worked_examples.md"), "w", encoding="utf-8").write(
+        F.CC.finalize("m12_worked_examples.md", F.clean("\n".join(L) + "\n")))
     json.dump(RESULTS, open(os.path.join(OUT, "results.json"), "w", encoding="utf-8"), indent=1)
     json.dump([list(b) for b in F.BINDINGS], open(os.path.join(OUT, "bindings_examples.json"), "w", encoding="utf-8"), indent=0)
     json.dump([list(g) for g in F.GAPS], open(os.path.join(OUT, "gaps_examples.json"), "w", encoding="utf-8"), indent=0)

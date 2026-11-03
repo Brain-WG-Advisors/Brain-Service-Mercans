@@ -1,30 +1,31 @@
 # Annex NM: New Mexico
 
+
 United States Country Configuration Guide, jurisdiction annex NM. Tax year 2026; currency USD (two decimal places).
 
-## NM.0 Scope of this annex
+**Scope of this annex.**
 
-This annex holds the New Mexico layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC are out of scope. The pay statement is issued in English.
+This annex holds the New Mexico layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. The pay statement is issued in English.
 
-In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register (00-official-sources/legal-basis-register.csv), with the authority and address listed in section NM.20 (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
+In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register, with the authority and address listed in section NM.S (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
 
-## NM.1 Jurisdiction layer
+**Jurisdiction layer.**
 
 | Item | Value |
 |---|---|
 | Annex tier | T3 (verified) |
-| Basis | FYI-104 Rev. 11/2025 eff. 2026-01-01, 1.5%-5.9% [US-NMP52-001]; TRD list of all taxes has no local wage tax [US-NMP52-003] |
+| Basis | FYI-104 Rev. 11/2025 eff. 2026-01-01, graduated rates, top [[FACT:nm.pit.wh.rate.top=5.9]]% [US-NMP52-001]; TRD list of all taxes has no local wage tax [US-NMP52-003] |
 
 Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = state withholding with no local layer remitted separately; T4 = a local layer remitted to a separate local authority on its own return.
 
-## NM.2 Configuration decisions
+**Configuration decisions.**
 
 - The workers' compensation administration fee has an employee share of [[FACT:nm.wc.admin_fee.employee.quarterly=2.25]] USD a quarter, deducted from pay and reported on Form TRD-41431, next to the employer share of [[FACT:nm.wc.admin_fee.employer.quarterly=2.55]] USD.
 - The garnishment floor follows the highest minimum wage that applies at the place of work, times [[FACT:nm.garn.consumer.exempt_multiple_minwage=40]].
-- City and county minimum wages (Albuquerque, Santa Fe city, Las Cruces, Bernalillo County) are configured as dated rows; the Santa Fe County rate is a blocking gap (section NM.3).
+- City and county minimum wages (Albuquerque, Santa Fe city, Las Cruces, Bernalillo County) are configured as dated rows; the Santa Fe County rate is a blocking gap (section NM.1).
 - The reference withholding result of the 2026 method is [[FACT:nm.pit.oracle.example_1.withholding=41.8]] USD.
 
-## NM.3 Employment and labour code
+## NM.1 Employment and labour code
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -47,15 +48,19 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nm.labour.minwage.local.las_cruces.tipped.hourly` | [[FACT:nm.labour.minwage.local.las_cruces.tipped.hourly=5.2]] USD | 2026-01-01 | 2026-12-31 | US-NMB5-001 (A.2, City of Las Cruces) |  |
 | `nm.labour.minwage.local.las_cruces.tipped.hourly` | [[FACT:nm.labour.minwage.local.las_cruces.tipped.hourly=5.39]] USD | 2027-01-01 | open | US-NMB5-001 (A.2, City of Las Cruces) |  |
 | `nm.labour.minwage.local.bernalillo_county.hourly` | [[FACT:nm.labour.minwage.local.bernalillo_county.hourly=10.95]] USD | 2026-01-01 | 2026-12-31 | US-NMB5-002 (A.2, Bernalillo County, Planning & Development Services) | Unincorporated Bernalillo County ordinance rate; the State minimum 12.00 is higher and prevails, so no county figure above the State rate applies in 2026. |
+| `nm.labour.minwage.local.santa_fe_county.hourly` | [[FACT:nm.labour.minwage.local.santa_fe_county.hourly=15.0]] USD | 2025-03-01 | 2026-02-28 | US-NMB5-301 (A.2, Santa Fe County, New Mexico) | Unincorporated Santa Fe County living wage (Ord. 2014-1 as amended), previous-rates table. |
+| `nm.labour.minwage.local.santa_fe_county.hourly` | [[FACT:nm.labour.minwage.local.santa_fe_county.hourly=15.4]] USD | 2026-03-01 | open | US-NMB5-301 (A.2, Santa Fe County, New Mexico) | From 2026-03-01 (County news release 2026-02-12); adjusted each March 1 by CPI-W West. [[FACT:nm.labour.minwage.local.santa_fe_county.hourly=15.40]]/15.00 = 1.0267. |
+| `nm.labour.minwage.local.santa_fe_county.tipped_base.hourly` | [[FACT:nm.labour.minwage.local.santa_fe_county.tipped_base.hourly=4.5]] USD | 2025-03-01 | 2026-02-28 | US-NMB5-301 (A.2, Santa Fe County, New Mexico) |  |
+| `nm.labour.minwage.local.santa_fe_county.tipped_base.hourly` | [[FACT:nm.labour.minwage.local.santa_fe_county.tipped_base.hourly=4.62]] USD | 2026-03-01 | open | US-NMB5-301 (A.2, Santa Fe County, New Mexico) | Tipped base = 30% of the living wage: [[FACT:nm.labour.minwage.local.santa_fe_county.hourly=15.40]] x 0.30 = [[FACT:nm.labour.minwage.local.santa_fe_county.tipped_base.hourly=4.62]]; 15.00 x 0.30 = 4.50 (arithmetic check only, ratio not stated on the page). |
 
 Rules:
 
 - Local minimum wages. DWS lists five ordinances: Albuquerque, Bernalillo County, Las Cruces, City of Santa Fe and Santa Fe County. (US-NMS5-005)
 
-- ⚠️ RESEARCH-GAP (blocking, `nm.labour.minwage.local.other`): The Santa Fe County minimum wage for 2026 and 2027 was not read. It is not written and must not be configured. To close: Santa Fe County living wage ordinance notice for 2026 and 2027 (santafecountynm.gov).
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.labour.minwage.state.next_year`): No change to the state minimum wage for 2027 from the 2026 legislative session is confirmed. To close: 2026 session final-bill list on nmlegis.gov or a DWS notice.
+- Not configured in this release [[GAP:RQ-119]]: No change to the state minimum wage for 2027 from the 2026 legislative session is confirmed.
+- Not configured in this release [[GAP:RQ-579]]: The Santa Fe County rate from 2027-03-01 is set by CPI-W West and published in early 2027.
 
-## NM.4 State income tax withholding
+## NM.2 Income tax withholding
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -69,22 +74,22 @@ Rules:
 | `nm.wh.supplemental.rate` | [[FACT:nm.wh.supplemental.rate=5.9]] percent | 2026-01-01 | 2026-12-31 | US-NMP52-001 (A.2, New Mexico Taxation and Revenue Department) | when federal uses flat percentage; Table 8 for separate bonus/overtime |
 | `nm.pit.oracle.example_1.withholding` | [[FACT:nm.pit.oracle.example_1.withholding=41.8]] USD | 2026-01-01 | 2026-12-31 | US-NMP52-001 (A.2, New Mexico Taxation and Revenue Department) | FYI-104 weekly, married, wages 1,000: the bracket base tax plus 4.3% of the 210 excess gives 21.80; adding the 20.00 extra withholding requested by the employee gives [[FACT:nm.pit.oracle.example_1.withholding=41.80]]. |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.pit.tables.next_year`): 2027 FYI-104 not yet visible. To close: TRD withholding-rates page in browser (Nov-Dec 2026).
+- Not configured in this release [[GAP:RQ-120]]: 2027 FYI-104 not yet visible.
 
-## NM.5 Non-residents, residents working elsewhere and reciprocity
+## NM.2b Non-resident regime and reciprocity
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nm.pit.nonresident.days_threshold` | [[FACT:nm.pit.nonresident.days_threshold=15]] days | 2026-01-01 | open | US-NMP52-002 (A.2, New Mexico Taxation and Revenue Department) | no withholding for nonresidents working <=15 days in NM per year |
 | `nm.reciprocity.states` | [[FACT:nm.reciprocity.states=none]] | 2026-01-01 | open | US-NMP52-002 (A.2, New Mexico Taxation and Revenue Department) | resident credit at assessment |
 
-## NM.6 Local wage taxes
+## NM.2c Local wage taxes
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nm.local_wage_tax.exists` | [[FACT:nm.local_wage_tax.exists=False]] | 2026-10-29 | open | US-NMP52-003 (A.2, New Mexico Taxation and Revenue Department) | - |
 
-## NM.7 Unemployment insurance, disability and paid-leave contributions, other payroll levies
+## NM.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -97,20 +102,19 @@ Rules:
 | `nm.wc.admin_fee.employee.quarterly` | [[FACT:nm.wc.admin_fee.employee.quarterly=2.25]] USD | 2025-07-01 | 2028-06-30 | US-NMR3-001 (A.2, NM Taxation and Revenue Department) | payroll deduction; then [[FACT:nm.wc.admin_fee.employee.quarterly=2.38]] |
 | `nm.wc.admin_fee.employee.quarterly` | [[FACT:nm.wc.admin_fee.employee.quarterly=2.38]] USD | 2028-07-01 | 2033-06-30 | US-NMR3-001 (A.2, NM Taxation and Revenue Department) | - |
 | `nm.sdi_pfml.exists` | [[FACT:nm.sdi_pfml.exists=False]] | 2026-01-01 | open | US-NMR3-002 (A.2, NM Department of Workforce Solutions) | no PFML Act enacted |
-| `nm.sui.wage_base` | [[FACT:nm.sui.wage_base=33200]] USD | 2025-01-01 | 2025-12-31 | US-NMP51-001 (A.2, NM Department of Workforce Solutions) | - |
-| `nm.sui.wage_base` | [[FACT:nm.sui.wage_base=34800]] USD | 2026-01-01 | 2026-12-31 | US-NMP51-001 (A.2, NM Department of Workforce Solutions) | 2025: [[FACT:nm.sui.wage_base=33,200]]; 60% of state average earnings rounded up to 100 (not derivable) |
+| `nm.sui.wage_base` | [[FACT:nm.sui.wage_base=34800]] USD | 2026-01-01 | 2026-12-31 | US-NMP51-001 (A.2, NM Department of Workforce Solutions) | 60% of state average earnings rounded up to 100 (not derivable) |
 | `nm.ui.rate.new_employer.min` | [[FACT:nm.ui.rate.new_employer.min=1.0]] percent | 2026-01-01 | 2026-12-31 | US-NMP51-002 (A.2, NM Department of Workforce Solutions) | greater of NAICS average or 1%; 2026 range 1.00-1.28 |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.ui.other_state_credit_exclusions`): SUI other-state wage credit and 51-1-42(F) exclusions not read. To close: NMSA 51-1-11 and 51-1-42 or 11.3.300 NMAC.
+- Not configured in this release [[GAP:RQ-121]]: SUI other-state wage credit and 51-1-42(F) exclusions not read.
 
-## NM.8 Pay statement
+## NM.4 Pay statement
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nm.payslip.items` | [[FACT:nm.payslip.items=employer identity, gross pay, hours worked, total wages and benefits, itemized deductions]] | 2026-01-01 | open | US-NMP8-001 (A.1, New Mexico Legislature (nmlegis.gov)) | 50-4-2(B) each payday |
 | `nm.payslip.sick_leave_summary` | [[FACT:nm.payslip.sick_leave_summary=YTD earned sick leave accrued and used at least quarterly]] | 2022-07-01 | open | US-NMS5-002 (A.1, NM State Records Center and Archives (NMAC) / NM DWS Labor Relations Division) | - |
 
-## NM.9 Statutory reporting
+## NM.5 Statutory reporting
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -125,19 +129,19 @@ Rules:
 - Registration: TRD (ACD-31015, NMBTIN) and the DWS UI Tax & Claims System.
 - POA: ACD-31102; ES-905 or a third-party administrator login. (US-NMP51-004, US-NMP6-001)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.report.w2.due_conflict`): FYI-330 (31 Jan) vs TRD page (last day of Feb). To close: TRD confirmation or NMSA 7-3-10 text.
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.report.tap_schemas`): TRD-41431/TAP bulk schema and TAP W-2 TXT layout not obtained. To close: TAP Help bulk download (login) and TRD-41431 instructions.
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.report.trd41414.thresholds`): Filing-frequency thresholds not stated. To close: 3.3.6 NMAC or TRD registration guide.
+- Not configured in this release [[GAP:RQ-122]]: FYI-330 (31 Jan) vs TRD page (last day of Feb).
+- Not configured in this release [[GAP:RQ-123]]: TRD-41431/TAP bulk schema and TAP W-2 TXT layout not obtained.
+- Not configured in this release [[GAP:RQ-124]]: Filing-frequency thresholds not stated.
 
-## NM.10 Leave
+## NM.6 Leave
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
-| `nm.leave.paid_sick.accrual_ratio_hours_worked` | [[FACT:nm.leave.paid_sick.accrual_ratio_hours_worked=30]] hours | 2022-07-01 | open | US-NMS5-001 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | all employers 1+; or frontload 64 h |
+| `nm.leave.paid_sick.accrual_ratio_hours_worked` | [[FACT:nm.leave.paid_sick.accrual_ratio_hours_worked=30]] hours | 2022-07-01 | open | US-NMS5-002 (A.1, NM State Records Center and Archives (NMAC) / NM DWS Labor Relations Division) | all employers 1+; or frontload 64 h |
 | `nm.leave.paid_sick.annual_cap_hours` | [[FACT:nm.leave.paid_sick.annual_cap_hours=64]] hours | 2022-07-01 | open | US-NMS5-001 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | use cap per 12 months; carryover |
 | `nm.leave.sick.payout_on_separation` | [[FACT:nm.leave.sick.payout_on_separation=False]] | 2022-07-01 | open | US-NMS5-001 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | reinstated on rehire within 12 months |
 
-## NM.11 Termination and final pay
+## NM.7 Termination and final pay
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -145,13 +149,13 @@ Rules:
 | `nm.term.final_pay.quit` | [[FACT:nm.term.final_pay.quit=next regular payday]] | 2026-01-01 | open | US-NMS5-014 (A.3, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | - |
 | `nm.term.vacation.payout` | [[FACT:nm.term.vacation.payout=owed if written policy grants it (vacation pay is wages)]] | 2017-11-14 | open | US-NMS5-003 (A.1, NM State Records Center and Archives (NMAC) / NM DWS Labor Relations Division) | 11.1.4.7(O) NMAC |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.term.final_pay.current_text`): The current text of NMSA 50-4-4 and 50-4-5 was not read; only an older reprint was available. To close: NMSA compilation.
+- Not configured in this release [[GAP:RQ-125]]: The current text of NMSA 50-4-4 and 50-4-5 was not read; only an older reprint was available.
 
-## NM.12 Taxable wages and benefits in kind
+## NM.8 Benefits in kind and taxable wages
 
 No New Mexico rule is configured in this domain; the federal treatment in Annex FED applies.
 
-## NM.13 Deductions and garnishments
+## NM.9 Deductions and garnishments
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -159,32 +163,38 @@ No New Mexico rule is configured in this domain; the federal treatment in Annex 
 | `nm.garn.consumer.exempt.weekly.state` | [[FACT:nm.garn.consumer.exempt.weekly.state=480]] USD | 2023-07-01 | open | US-NMS5-015 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | 40 x 12.00 state minimum (US-NMS5-004) |
 | `nm.garn.support.max_rate` | [[FACT:nm.garn.support.max_rate=50]] percent | 2023-07-01 | open | US-NMS5-015 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | - |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.garn.iwo.employer_fee`): The employer fee for child-support income withholding was not located (the agency site refused access). To close: hca.nm.gov Child Support Services employer page.
+- Not configured in this release [[GAP:RQ-126]]: The employer fee for child-support income withholding was not located (the agency site refused access).
 
-## NM.14 Prevailing wage and collective agreements
+## NM.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nm.prevailing_wage.threshold` | [[FACT:nm.prevailing_wage.threshold=60000]] USD | 2026-01-01 | open | US-NMR3-003 (A.2, US DOL Wage and Hour Division) | public works contracts |
 | `nm.prevailing_wage.certified_payroll` | [[FACT:nm.prevailing_wage.certified_payroll=weekly payrolls submitted every two weeks within 5 working days; kept 4 years]] | 1972-05-31 | open | US-NMS5-009 (A.1, New Mexico Department of Workforce Solutions, Labor Relations Division) | - |
 
-## NM.15 Indexation
+## NM.11 Indexation
 
 Indexation of each value is stated in the note of the value concerned.
 
-## NM.16 Payroll data protection and records
+## NM.12 Payroll data protection and records
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nm.records.sick_leave.retention_months` | [[FACT:nm.records.sick_leave.retention_months=48]] months | 2022-07-01 | open | US-NMS5-002 (A.1, NM State Records Center and Archives (NMAC) / NM DWS Labor Relations Division) | - |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.data.ssn_electronic_paycard`): The Social Security number truncation rule (NMSA 57-12B), consent for electronic pay statements and the paycard rule were not read (the legislature site refused access). To close: NMSA compilation (browser).
+- Not configured in this release [[GAP:RQ-127]]: The Social Security number truncation rule (NMSA 57-12B), consent for electronic pay statements and the paycard rule were not read (the legislature site refused access).
 
-## NM.17 Legal change in force or enacted
+## NM.13 Live legal change
 
 No New Mexico rule is configured in this domain; the federal treatment in Annex FED applies.
 
-## NM.18 Special populations
+## NM.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## NM.15 Special populations
 
 - Domestic/household workers: PIT withholding follows federal (none required where federal withholding is not required). (US-NMS5-004, US-NMS5-016, US-NMP52-001)
 - Agricultural: Board and lodging deductible. (US-NMS5-004, US-NMS5-016, US-NMS5-013)
@@ -194,18 +204,19 @@ No New Mexico rule is configured in this domain; the federal treatment in Annex 
 - Military / military spouses: Active-duty pay is exempt; spouses keeping out-of-state residence are exempt. (US-NMP52-001)
 - Statutory employees: No state rule beyond federal (FYI-104 ties withholding to federal withholding). (US-NMP52-001)
 - Government employees: Excluded from the Healthy Workplaces Act (the state and political subdivisions are not "employers"). (US-NMS5-004, US-NMS5-001)
-- ⚠️ RESEARCH-GAP (non-blocking, `nm.special_populations.thresholds`): thresholds, amounts or conditions for these populations are stated in the research without a confirmed value record and are not configured from this annex: Domestic/household workers; Agricultural; Minors; Tipped; Clergy/religious; Students; Government employees; Commission/piecework salespersons. To close: one confirmed value per threshold, with its source row.
+- Not configured in this release [[GAP:RQ-128]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic/household workers; Agricultural; Minors; Tipped; Clergy/religious; Students; Government employees; Commission/piecework salespersons.
 
-## NM.19 Language
+## NM.16 Language
 
 - The pay statement and all filings are in English (owner decision US-OWN-006).
 
-## NM.20 Sources
+## NM.S Sources
 
 | Source | Authority |
 |---|---|
 | US-NMB5-001 | City of Las Cruces |
 | US-NMB5-002 | Bernalillo County, Planning & Development Services |
+| US-NMB5-301 | Santa Fe County, New Mexico |
 | US-NMP51-001 | NM Department of Workforce Solutions |
 | US-NMP51-002 | NM Department of Workforce Solutions |
 | US-NMP52-001 | New Mexico Taxation and Revenue Department |

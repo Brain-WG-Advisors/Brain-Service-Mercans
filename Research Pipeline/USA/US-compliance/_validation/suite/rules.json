@@ -1,0 +1,564 @@
+{
+ "rules": [
+  {
+   "id": "R-FIT-WS1A",
+   "statement": "Federal income tax: Pub. 15-T 2026 Worksheet 1A, STANDARD schedule, annualise x periods, less line 1g, bracket cumulative tax + excess x rate, / periods, half-up to the cent",
+   "lines": [
+    "fit"
+   ]
+  },
+  {
+   "id": "R-NRA-ADDON",
+   "statement": "Nonresident alien: Table 2 add-on added to the wages for the computation only",
+   "lines": [
+    "fit",
+    "net"
+   ]
+  },
+  {
+   "id": "R-FICA",
+   "statement": "OASDI employee rate x lesser of remaining base and pay; Medicare employee rate x pay",
+   "lines": [
+    "oasdi",
+    "medicare",
+    "net"
+   ]
+  },
+  {
+   "id": "R-FICA-BASE",
+   "statement": "OASDI stops at the annual wage base per employer",
+   "lines": [
+    "oasdi"
+   ]
+  },
+  {
+   "id": "R-ADDL-MEDICARE",
+   "statement": "Additional Medicare on wages above the withholding threshold, employee only",
+   "lines": [
+    "addl_medicare"
+   ]
+  },
+  {
+   "id": "R-FUTA",
+   "statement": "FUTA net rate on the first wage-base dollars per employee per year",
+   "lines": [
+    "futa"
+   ]
+  },
+  {
+   "id": "R-SUPP-FLAT",
+   "statement": "Supplemental wages: optional flat rate",
+   "lines": [
+    "fit",
+    "net"
+   ]
+  },
+  {
+   "id": "R-PRETAX-401K",
+   "statement": "401(k) elective deferral: reduces federal income-tax withholding wages only (fed.base.401k_deferral.fit/fica/futa, Pub. 15 (2026) sec. 15); FICA and FUTA on the full wages",
+   "lines": [
+    "fit",
+    "oasdi",
+    "medicare",
+    "futa",
+    "net"
+   ]
+  },
+  {
+   "id": "R-SUPP-MANDATORY",
+   "statement": "Supplemental wages above the mandatory threshold: mandatory rate",
+   "lines": [
+    "fit",
+    "net"
+   ]
+  },
+  {
+   "id": "R-MINWAGE",
+   "statement": "Gross = hours x FLSA minimum wage",
+   "lines": [
+    "net"
+   ]
+  },
+  {
+   "id": "R-OVERTIME",
+   "statement": "Weekly overtime above the threshold at the premium multiplier",
+   "lines": [
+    "gross"
+   ]
+  },
+  {
+   "id": "R-PRORATION",
+   "statement": "Monthly salary x working days in service / working days in the month (configuration choice)",
+   "lines": [
+    "gross"
+   ]
+  },
+  {
+   "id": "R-CT-TABLE",
+   "statement": "Connecticut: withholding = amount of the CT-W4 code column in the DRS per-period table band (wages greater than the lower bound and not above the upper bound)",
+   "lines": [
+    "withholding"
+   ]
+  },
+  {
+   "id": "R-STATE-ORACLE",
+   "statement": "State withholding re-derived from the facts equals the authority's published example",
+   "lines": [
+    "withholding"
+   ]
+  },
+  {
+   "id": "R-PARAM",
+   "statement": "Rule parameter of a coverage row read from the facts equals the official value",
+   "lines": [
+    "value"
+   ]
+  }
+ ],
+ "test_cases": {
+  "US-M12-A": {
+   "rules": [
+    "R-FIT-WS1A",
+    "R-FICA",
+    "R-FUTA"
+   ],
+   "coverage": [
+    "resident_employee",
+    "officers_without_employment_contract",
+    "CCG:A full-time resident employee on a standard salary",
+    "CCG:Worked example 1: Scenario A, full-time resident employee (biweekly)"
+   ]
+  },
+  "US-M12-B": {
+   "rules": [
+    "R-FIT-WS1A",
+    "R-FICA",
+    "R-FUTA",
+    "R-MINWAGE"
+   ],
+   "coverage": [
+    "part_time",
+    "apprentices_and_trainees",
+    "CCG:A casual or part-time employee",
+    "CCG:Worked example 2: Scenario B, part-time employee at the federal minimum wage"
+   ]
+  },
+  "US-M12-C": {
+   "rules": [
+    "R-FIT-WS1A",
+    "R-FICA-BASE",
+    "R-ADDL-MEDICARE",
+    "R-FUTA"
+   ],
+   "coverage": [
+    "multiple_employers",
+    "special_pay_cycles",
+    "accrual_vs_payment",
+    "annual_regularisation",
+    "CCG:Other complex scenarios that are common in the country",
+    "CCG:Worked example 5: Scenario C, OASDI wage base and Additional Medicare threshold (semimonthly)"
+   ]
+  },
+  "US-M12-D": {
+   "rules": [
+    "R-SUPP-MANDATORY",
+    "R-FICA"
+   ],
+   "coverage": [
+    "CCG:An employee with a student loan or other special tax obligation",
+    "CCG:Worked example 4: Supplemental payment above the mandatory threshold"
+   ]
+  },
+  "US-M12-E": {
+   "rules": [
+    "R-PRETAX-401K",
+    "R-FIT-WS1A",
+    "R-FICA",
+    "R-FUTA"
+   ],
+   "coverage": [
+    "CCG:An employee with a pre-tax deduction",
+    "CCG:Worked example 3: Scenario E, 401(k) elective deferral (biweekly)"
+   ]
+  },
+  "US-M09-RED": {
+   "rules": [
+    "R-SUPP-FLAT",
+    "R-FICA"
+   ],
+   "coverage": [
+    "termination_and_final_pay",
+    "fixed_term_contract",
+    "CCG:Provide a detailed worked example of a redundancy termination payout."
+   ]
+  },
+  "US-M09-BONUS": {
+   "rules": [
+    "R-SUPP-FLAT",
+    "R-FICA"
+   ],
+   "coverage": [
+    "CCG:Provide a worked example of a bonus calculation."
+   ]
+  },
+  "US-M06-EX1": {
+   "rules": [
+    "R-FIT-WS1A",
+    "R-FICA"
+   ],
+   "coverage": [
+    "CCG:Deliverable: Provide detailed worked examples for a standard resident employee, a non-resident employee, and an irregular payment."
+   ]
+  },
+  "US-M06-EX2": {
+   "rules": [
+    "R-FIT-WS1A",
+    "R-NRA-ADDON",
+    "R-FICA"
+   ],
+   "coverage": [
+    "non_resident_employee",
+    "CCG:Deliverable: Provide detailed worked examples for a standard resident employee, a non-resident employee, and an irregular payment."
+   ]
+  },
+  "US-M06-EX3": {
+   "rules": [
+    "R-SUPP-FLAT",
+    "R-FICA"
+   ],
+   "coverage": []
+  },
+  "US-M04-OT": {
+   "rules": [
+    "R-OVERTIME"
+   ],
+   "coverage": [
+    "overtime",
+    "CCG:Explain how overtime is treated for income tax and social security calculations."
+   ]
+  },
+  "US-M04-PRORATION": {
+   "rules": [
+    "R-PRORATION"
+   ],
+   "coverage": [
+    "mid_month_joiner_and_leaver",
+    "CCG:Provide the proration formula and a worked example."
+   ]
+  },
+  "US-ORA-GA-oracle_mfj_semimonthly_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "mid_year_rate_change",
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 6: GA published example re-derived"
+   ]
+  },
+  "US-ORA-LA-oracle_weekly_700_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 7: LA published example re-derived"
+   ]
+  },
+  "US-ORA-LA-oracle_biweekly_4600_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 8: LA published example re-derived"
+   ]
+  },
+  "US-ORA-MI-oracle_biweekly_2000_1ex_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 9: MI published example re-derived"
+   ]
+  },
+  "US-ORA-MI-oracle_detroit_resident_biweekly_2000": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "local_regimes",
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 10: MI (Detroit) published example re-derived"
+   ]
+  },
+  "US-ORA-MN-pit_oracle_example_1_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 11: MN published example re-derived"
+   ]
+  },
+  "US-ORA-OH-pit_oracle_example_1_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 12: OH published example re-derived"
+   ]
+  },
+  "US-ORA-NC-oracle_weekly_450_s2_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 13: NC published example re-derived"
+   ]
+  },
+  "US-ORA-SC-pit_oracle_example_1_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 14: SC published example re-derived"
+   ]
+  },
+  "US-ORA-ID-oracle_biweekly_1212_single_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 15: ID published example re-derived"
+   ]
+  },
+  "US-ORA-KS-oracle_weekly_threshold_single_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 16: KS published example re-derived"
+   ]
+  },
+  "US-ORA-HI-oracle_weekly_500_s3_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 17: HI published example re-derived"
+   ]
+  },
+  "US-ORA-MS-oracle_weekly_460_0ex_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 18: MS published example re-derived"
+   ]
+  },
+  "US-ORA-RI-oracle_weekly_2195_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 19: RI published example re-derived"
+   ]
+  },
+  "US-ORA-CA-oracle_de44_f_monthly_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 20: CA published example re-derived"
+   ]
+  },
+  "US-ORA-AR-oracle_example_1_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:12.2.2 Re-derivation from verified figures",
+    "CCG:Worked example 21: AR published example re-derived"
+   ]
+  },
+  "US-ANX-DE-oracle_supplemental_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex DE DE-2"
+   ]
+  },
+  "US-ANX-DE-oracle_weekly_25000_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex DE DE-1"
+   ]
+  },
+  "US-ANX-GA-oracle_guide_example1_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex GA GA-1"
+   ]
+  },
+  "US-ANX-IA-oracle_formula_example6_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex IA IA-1"
+   ]
+  },
+  "US-ANX-ID-oracle_stc_single_biweekly_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex ID ID-1"
+   ]
+  },
+  "US-ANX-IL-oracle_il700t_example1_automated_method_result": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex IL IL-1 automated"
+   ]
+  },
+  "US-ANX-IL-oracle_weekly_800_withholding": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex IL IL-2"
+   ]
+  },
+  "US-ANX-IN-oracle_dn1_example_county": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex IN IN-1 county"
+   ]
+  },
+  "US-ANX-IN-oracle_dn1_example_state": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex IN IN-1 state"
+   ]
+  },
+  "US-ANX-KY-oracle_formula_biweekly_1500_annual": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex KY KY-2 annual"
+   ]
+  },
+  "US-ANX-KY-oracle_formula_monthly_3270": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Annex KY KY-1"
+   ]
+  },
+  "US-ORA-CT-ex8_f_weekly700_withholding": {
+   "rules": [
+    "R-CT-TABLE"
+   ],
+   "coverage": [
+    "CCG:Annex CT CT.14 example 8"
+   ]
+  },
+  "US-ORA-CT-ip2026_1_ex8_withholding": {
+   "rules": [
+    "R-CT-TABLE"
+   ],
+   "coverage": [
+    "CCG:Annex CT CT.14 example 8"
+   ]
+  },
+  "US-ORA-CT-ex9_a_weekly1000_withholding": {
+   "rules": [
+    "R-CT-TABLE"
+   ],
+   "coverage": [
+    "CCG:Annex CT CT.14 example 9"
+   ]
+  },
+  "US-ORA-CT-ip2026_1_ex9_withholding": {
+   "rules": [
+    "R-CT-TABLE"
+   ],
+   "coverage": [
+    "CCG:Annex CT CT.14 example 9"
+   ]
+  },
+  "US-ORA-CT-ex10_b_biweekly2300_withholding": {
+   "rules": [
+    "R-CT-TABLE"
+   ],
+   "coverage": [
+    "CCG:Annex CT CT.14 example 10"
+   ]
+  },
+  "US-ORA-CT-ip2026_1_ex10_withholding": {
+   "rules": [
+    "R-CT-TABLE"
+   ],
+   "coverage": [
+    "CCG:Annex CT CT.14 example 10"
+   ]
+  },
+  "US-ORA-MI-oracle_state_biweekly_2000_1ex": {
+   "rules": [
+    "R-STATE-ORACLE"
+   ],
+   "coverage": [
+    "CCG:Worked example 9: MI published example re-derived"
+   ]
+  },
+  "US-PAR-PFML-WA": {
+   "rules": [
+    "R-PARAM"
+   ],
+   "coverage": [
+    "maternity_paternity_parental"
+   ]
+  },
+  "US-PAR-WC-WA": {
+   "rules": [
+    "R-PARAM"
+   ],
+   "coverage": [
+    "work_accident_occupational_disease"
+   ]
+  },
+  "US-PAR-HOUSEHOLD": {
+   "rules": [
+    "R-PARAM"
+   ],
+   "coverage": [
+    "employer_type_and_size"
+   ]
+  }
+ }
+}

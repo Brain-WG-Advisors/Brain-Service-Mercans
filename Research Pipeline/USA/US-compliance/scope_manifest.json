@@ -1,75 +1,926 @@
 {
-  "_comment": "Produced by Agent 1 (CCG). Every downstream agent reads this and rejects out-of-scope items.",
-  "country": "",
-  "country_code": "",
-  "year": "",
-  "currency": "",
+  "_comment": "Built by artifact-builder (SCOPE round 3, 2026-11-03) from the sealed MANDATE.md (2026-11-02), _pipeline/build-manifest.json and US-CCG-001 v1.0. Every downstream agent reads this and rejects out-of-scope items.",
+  "country": "United States of America",
+  "country_code": "US",
+  "year": 2026,
+  "currency": "USD",
   "package": {
-    "_note": "v2.11 (C43): the ONE version and issue date of the delivery - every artifact file name, cover, Version Control row and cross-reference carries it.",
+    "_note": "v2.11 (C43): the ONE version and issue date of the delivery - every artifact file name, cover, Version Control row and cross-reference carries it. US: version and issue_date copied from build-manifest.package. issue_date 2027-03-31 is the planning placeholder recorded there (the owner has not set a date); the C43 contract requires an ISO date identical to build-manifest.package, so that value is used.",
     "version": "1.0",
-    "issue_date": "YYYY-MM-DD"
+    "issue_date": "2027-03-31"
   },
   "oracle": {
-    "_note": "v2.11 (Stage 9b, C37): the independent reference the research is regression-tested against - the authority's own calculation engine, or its published official worked examples where no engine exists. Stage 2 Check 7 fails without it.",
-    "type": "engine | official_examples",
-    "name": "",
-    "version": "",
-    "publisher": "",
-    "source_url": "https://...",
+    "_note": "v2.11 (Stage 9b, C37): the independent reference the research is regression-tested against - the authority's own calculation engine, or its published official worked examples where no engine exists. Stage 2 Check 7 fails without it. US: copied from build-manifest.oracle.",
+    "type": "official_examples",
+    "name": "IRS Publication 15-T (2026) wage-bracket and percentage-method tables and worksheets (federal); state worked examples per jurisdiction annex",
+    "version": "2026",
+    "publisher": "Internal Revenue Service",
+    "source_url": "https://www.irs.gov/publications/p15t",
     "suite_dir": "_validation",
-    "notes": ""
+    "notes": "Federal oracle answered (US-MQ-08, 2026-10-29): Pub. 15-T 2026 has no full percentage-method worked example; Stage 9b re-derives from Worksheet 1A + Annual Percentage Method tables and uses the two published examples (NRA 526.90 -> 31; tribal 6,000 -> 584.09) [US-FED-027]. IRS Tax Withholding Estimator is not an oracle [US-FED-021]. State oracles per jurisdiction annex (US-MQ-20..70 part 6).",
+    "_register_ids": [
+      "US-FED-027",
+      "US-FED-001",
+      "US-FED-021"
+    ]
   },
   "scope_version": "1.0",
-  "scope_decided_by": "",
-  "scope_decided_on": "",
-
+  "scope_decided_by": "Owner (Wallisson Gomes): US-OWN-002 (jurisdiction set), US-OWN-003, US-OWN-005, US-OWN-008; build lead under the owner delegation of 2026-11-01: US-OWN-006, US-OWN-007, US-OWN-009 (US-OWN-009 pending owner confirmation)",
+  "scope_decided_on": "2026-11-02",
   "employment_types": {
-    "in_scope": [],
-    "out_of_scope": [],
-    "rationale": ""
-  },
-
-  "authority_filings": {
     "in_scope": [
       {
-        "filing_id": "",
-        "authority": "",
-        "frequency": "",
-        "format": "",
-        "integration_type": "outbound | inbound | both",
-        "product_mapping_required": true
+        "type": "common-law employee of a private-sector employer (ordinary resident employee)",
+        "register_ids": [
+          "US-OWN-008"
+        ]
+      },
+      {
+        "type": "nonresident alien employee (federal layer)",
+        "register_ids": [
+          "US-OWN-005",
+          "US-FEDS5-002",
+          "US-FEDS5-015"
+        ]
+      },
+      {
+        "type": "statutory employee (federal layer)",
+        "register_ids": [
+          "US-OWN-005",
+          "US-FEDR3-005"
+        ]
+      },
+      {
+        "type": "household (domestic) employee (federal layer)",
+        "register_ids": [
+          "US-OWN-005",
+          "US-FEDS5-029"
+        ]
+      },
+      {
+        "type": "agricultural (farm) employee (federal layer)",
+        "register_ids": [
+          "US-OWN-005",
+          "US-FEDR3-006"
+        ]
+      },
+      {
+        "type": "clergy / minister employee (federal layer)",
+        "register_ids": [
+          "US-OWN-005",
+          "US-FED-030"
+        ]
+      },
+      {
+        "type": "US citizen or resident employee working abroad (federal layer)",
+        "register_ids": [
+          "US-OWN-005",
+          "US-FEDR3-007",
+          "US-FED-025"
+        ]
       }
     ],
     "out_of_scope": [
       {
-        "filing_id": "",
-        "descoping_reason": ""
+        "type": "independent contractors and Form 1099-NEC reporting",
+        "reason": "Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008].",
+        "register_ids": [
+          "US-OWN-008"
+        ]
+      },
+      {
+        "type": "State-level rules for special populations (deferred round)",
+        "reason": "State-level rules for special populations are deferred to a later round (US-OWN-005).",
+        "register_ids": [
+          "US-OWN-005"
+        ]
+      },
+      {
+        "type": "public-sector employers",
+        "reason": "Employers in scope are private-sector employers only [US-OWN-008].",
+        "register_ids": [
+          "US-OWN-008"
+        ]
       }
-    ]
+    ],
+    "rationale": "Private-sector employers and their common-law employees. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. All special employee populations are in scope at the federal layer (owner decision US-OWN-005); State-level rules for special populations are deferred to a later round (US-OWN-005).",
+    "_rationale_source": "same words as CCG m01 'Scope of this guide' and m11.3 (ccg_common constants)"
   },
-
+  "authority_filings": {
+    "in_scope": [
+      {
+        "filing_id": "IRS Form 941 (quarterly federal employment tax return)",
+        "authority": "IRS",
+        "frequency": "quarterly; due last day of the month after the quarter",
+        "format": "electronic (e-file through the reporting agent)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-031",
+          "US-FED-008"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1",
+        "note": "US-FEDS5-031 is a 'partial' register row (Pub. 15 2026 + Instructions for Form 940 2025)."
+      },
+      {
+        "filing_id": "IRS Form 944 (annual return instead of 941, only on written IRS notice)",
+        "authority": "IRS",
+        "frequency": "annual",
+        "format": "electronic (e-file through the reporting agent)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-031"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1"
+      },
+      {
+        "filing_id": "IRS Form 943 (agricultural employees)",
+        "authority": "IRS",
+        "frequency": "annual",
+        "format": "electronic (e-file through the reporting agent)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDR3-006",
+          "US-FED-028"
+        ],
+        "ccg_location": "CCG Annex FED.15; m11.3 coverage (agricultural)"
+      },
+      {
+        "filing_id": "IRS Form 940 (FUTA)",
+        "authority": "IRS",
+        "frequency": "annual; due January 31",
+        "format": "electronic (e-file through the reporting agent)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-031",
+          "US-FED-007"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1"
+      },
+      {
+        "filing_id": "Schedule H routing (household employees)",
+        "authority": "IRS",
+        "frequency": "annual (with the household employer's return)",
+        "format": "routing flag only: household-employee wages are reported by the household employer on Schedule H",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-029"
+        ],
+        "ccg_location": "CCG Annex FED.15; m11.3 coverage (household)",
+        "note": "The payroll build flags the employee for Schedule H routing; it does not file the household employer's personal return."
+      },
+      {
+        "filing_id": "SSA Forms W-2 / W-3 (and W-2c corrections)",
+        "authority": "SSA",
+        "frequency": "annual; due 2027-02-01 for tax year 2026",
+        "format": "EFW2 fixed-length records (SSA Pub. 42-007; W-2c in EFW2C, Pub. 42-014) via SSA Business Services Online",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-007",
+          "US-FIL-002",
+          "US-FEDS5-032"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1, 10.5"
+      },
+      {
+        "filing_id": "IRS Form 1042-S (treaty-exempt wages of nonresident aliens)",
+        "authority": "IRS",
+        "frequency": "annual; due 2027-03-15 for tax year 2026",
+        "format": "electronic via IRIS (FIRE retired for tax year 2026)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-016"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1; m07 7.1"
+      },
+      {
+        "filing_id": "IRS Forms 1094-C / 1095-C (ACA, applicable large employers)",
+        "authority": "IRS",
+        "frequency": "annual",
+        "format": "electronic (threshold per Instructions)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-012"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1",
+        "note": "US-FEDS5-012 is a 'partial' register row (2025 instructions; 2026 not yet issued)."
+      },
+      {
+        "filing_id": "IRS Form 941-X (correction of Form 941)",
+        "authority": "IRS",
+        "frequency": "event-driven (after an error is found)",
+        "format": "electronic (e-file through the reporting agent)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-031"
+        ],
+        "ccg_location": "CCG m10 10.5"
+      },
+      {
+        "filing_id": "State income-tax withholding returns and deposits (per State)",
+        "authority": "State Department of Revenue / Taxation (per annex)",
+        "frequency": "per State schedule (annex section 5)",
+        "format": "per State channel (annex section 5 and Report Specifications)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-MULTIS5-017",
+          "US-INS5-007",
+          "US-MDP51-001",
+          "US-NY-008",
+          "US-ORS5-010",
+          "US-NYS5-010",
+          "US-NMS5-012",
+          "US-VTS5-030",
+          "US-NJP51-001"
+        ],
+        "ccg_location": "CCG m10 10.1; each annex section 5",
+        "note": "To every State where withholding applies; States without a wage income tax are stated in annex section 2. IN county, MD county (MW506) and NYC/Yonkers (NYS-45/NYS-1) are piggy-backed on the State withholding return (T3), not separate locality returns [US-INS5-007, US-MDP51-001, US-NY-008]. Combined State returns carry other items on the same return: OR Form OQ (withholding, UI, Paid Leave, Workers' Benefit Fund, TriMet and Lane transit, statewide transit tax) [US-ORS5-010]; NY NYS-45 (withholding, wage reporting, UI) [US-NYS5-010]; NJ NJ-927 / WR-30 (income tax, UI, TDI, FLI) [US-NJP51-001, US-NJS5-017]; NM TRD-41431 (workers' compensation fee and quarterly wage and withholding report) [US-NMS5-012]; VT WHT-436 (Child Care Contribution) [US-VTS5-030]."
+      },
+      {
+        "filing_id": "State annual withholding reconciliation and State W-2 copies (per State)",
+        "authority": "State Department of Revenue / Taxation (per annex)",
+        "frequency": "annual",
+        "format": "per State channel; W-2 boxes 15-20 carry State and local data",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-MULTIS5-011",
+          "US-ORS5-010"
+        ],
+        "ccg_location": "CCG m10 10.1; each annex section 5",
+        "note": "Includes the OR Form OR-WR annual reconciliation with the W-2s [US-ORS5-010]. The State annual returns of household and agricultural employers (e.g. OR Form OA, Form WA / OR-STT-A [US-ORS5-010]) are not in this entry: State-level rules for special populations are deferred to a later round (US-OWN-005); see out_of_scope."
+      },
+      {
+        "filing_id": "State unemployment insurance quarterly contribution and wage report (per State)",
+        "authority": "State workforce / UI agency (per annex)",
+        "frequency": "quarterly (IL also monthly wage reports in months 1 and 2 of each quarter for larger employers)",
+        "format": "per State channel (annex section 5)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-MULTIS5-017",
+          "US-ILS5-017",
+          "US-RIS5-017",
+          "US-WYS5-007",
+          "US-SCS5-007",
+          "US-GAS5-020"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.2; each annex section 5",
+        "note": "Filed to the State of UI coverage only (localization test). The UI return carries the State UI-linked administrative / workforce / solvency levies (US-OWN-007, second limb), except where a levy is billed separately (WV annual fee, billed by WorkForce WV, not on the quarterly UI return [US-WVS5-002]). RI TX-17 is one report for UI, TDI and JDA [US-RIS5-017]; WY UI and workers' compensation are reported jointly [US-WYS5-007]; event-driven UI reports such as the SC UCB-113 mass-separation report [US-SCS5-007] and the GA mass-separation report [US-GAS5-020] are part of this obligation. US-GAS5-020 is a partial register row (GDOL proposed rule; adopted text not read)."
+      },
+      {
+        "filing_id": "State PFML / SDI / LTC programme reports where separate from the State wage return (per State)",
+        "authority": "State programme agency (per annex)",
+        "frequency": "quarterly (per programme)",
+        "format": "per programme channel (annex section 3/5)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDP52-007",
+          "US-WAPFML-001",
+          "US-WALTC-001",
+          "US-WAB5-003",
+          "US-CTS5-022",
+          "US-COS5-008",
+          "US-DES5-013",
+          "US-MES5-024",
+          "US-MDS5-014",
+          "US-MNS5-018",
+          "US-MAS5-012",
+          "US-DCS5-019",
+          "US-VAS5-016",
+          "US-CTB5-001",
+          "US-MULTIS5-024"
+        ],
+        "ccg_location": "CCG m05; annexes WA, CT, CO, DE, ME, MD, MN, MA, DC section 3/5",
+        "note": "Premium State follows the UI localization test unless a State rule differs (routing, CCG Annex MULTI) [US-MULTIS5-024]. Separate programme reports per the MANDATE sdi_tdi_pfml census: WA Paid Leave + WA Cares (one combined report) [US-WAPFML-001, US-WALTC-001, US-WAB5-003], CT Paid Leave (file specification toolkit US-CTB5-001) [US-CTS5-022], CO FAMLI [US-COS5-008], DE Paid Leave [US-DES5-013], ME PFML [US-MES5-024], MD FAMLI from 2027-01-01 (no contribution in 2026) [US-MDS5-014]. Annex section 5 adds MN Paid Leave (quarterly wage detail and premium to DEED) [US-MNS5-018], MA PFML (contribution to DFML; return channel and mechanics are an open non-blocking item of the MA annex) [US-MAS5-012] and DC Paid Family Leave (employer-only, quarterly via ESSP) [US-DCS5-019]. Not separate: CA SDI is filed on the DE 9 / DE 9C State wage return [US-CAP7-002] and OR Paid Leave on Form OQ [US-OR-002] (T3, filed with the State wage return); NJ TDI / FLI go on NJ-927 / WR-30 [US-NJS5-017]; RI TDI goes on the TX-17 UI report [US-RIS5-017]; NY DBL / PFL and HI TDI are insurer-funded with no State report (data-problem) [US-NYB5-401, US-NYB5-402, US-HI-003]. VT has no mandatory SDI / PFML programme [US-VTP51-006]; the VT Child Care Contribution is reported on WHT-436, the withholding return [US-VTS5-030]. VA paid family and medical leave contributions start 2028-04-01 [US-VAS5-016], so there is no VA programme report for 2026."
+      },
+      {
+        "filing_id": "Local income / wage tax returns (per locality)",
+        "authority": "Local taxing authority (per annex)",
+        "frequency": "per locality schedule",
+        "format": "per locality channel (annex section 2c)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-ORS5-004",
+          "US-ORS5-024",
+          "US-OHP52-003",
+          "US-FIL-012",
+          "US-PA-004",
+          "US-PA-006",
+          "US-PAS5-017",
+          "US-PAS5-022",
+          "US-DEP52-001",
+          "US-ALP51-001",
+          "US-ALS5-017",
+          "US-KYP52-002",
+          "US-KYP9W-002",
+          "US-KYS5-024",
+          "US-MIP52-002",
+          "US-MIP51-002",
+          "US-MOP52-007",
+          "US-COP52-001",
+          "US-COS5-015",
+          "US-COS5-016",
+          "US-WVR3-001",
+          "US-WVR3-002"
+        ],
+        "ccg_location": "CCG m06; m10 10.1; annexes AL, CO, DE, KY, MI, MO, NJ, OH, OR, PA, WV section 2c (+ WA Seattle, separate entry)",
+        "note": "Separate locality returns exist in exactly 11 jurisdictions (MANDATE local_income_tax census; CCG m10 10.1): PA EIT / LST quarterly returns and W2-R [US-PA-004, US-PA-006, US-PAS5-017] and Philadelphia wage tax [US-PAS5-022]; OH municipal returns [US-OHP52-003] and school-district returns SD 101 / SD 141 [US-FIL-012]; MI self-administering cities, Detroit Forms 5323 / 5321 [US-MIP52-002, US-MIP51-002]; KY occupational taxes, Louisville and Lexington-Fayette [US-KYP52-002, US-KYP9W-002, US-KYS5-024]; MO Kansas City earnings tax [US-MOP52-007] and St. Louis earnings tax (one W-10 / P-10 return with the St. Louis payroll expense tax, specified under the city employer payroll-tax entry); AL municipal occupational taxes [US-ALP51-001, US-ALS5-017]; CO occupational privilege taxes, Denver, Greenwood Village, Glendale (employee and employer parts on one return) [US-COP52-001, US-COS5-015, US-COS5-016]; DE Wilmington earned income tax [US-DEP52-001]; OR Portland Metro SHS / Multnomah PFA [US-ORS5-004, US-ORS5-024]; WV municipal service fees [US-WVR3-001, US-WVR3-002]; NJ Jersey City / Newark employer payroll tax (specified under the city employer payroll-tax entry only). IN county, MD county and NYC / Yonkers are piggy-backed on the State withholding return (see that entry)."
+      },
+      {
+        "filing_id": "City employer payroll taxes on separate city returns (Jersey City, Newark, St. Louis, Pittsburgh)",
+        "authority": "City tax offices (per annex)",
+        "frequency": "per city schedule (Jersey City and Newark quarterly)",
+        "format": "per city channel (annex section 2c / 5)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-NJP6-001",
+          "US-NJP6-002",
+          "US-MOP52-006",
+          "US-PAB5-401"
+        ],
+        "ccg_location": "CCG m06; annexes NJ, MO, PA section 2c",
+        "note": "Employer-borne taxes on payroll, not withheld: Jersey City and Newark employer payroll taxes, quarterly returns [US-NJP6-001, US-NJP6-002]; St. Louis Forms W-10 / P-10, one quarterly return carrying both the employer payroll expense tax and the earnings tax withheld from employees [US-MOP52-006]; Pittsburgh payroll expense tax [US-PAB5-401]. The Denver, Greenwood Village and Glendale employer OPT is on the OPT return in the local entry above."
+      },
+      {
+        "filing_id": "Seattle Payroll Expense Tax and Social Housing Tax returns (City of Seattle, threshold-conditional employer taxes)",
+        "authority": "City of Seattle (Department of Finance and Administrative Services)",
+        "frequency": "quarterly (2026: Apr 30, Jul 31, Oct 31, Jan 31)",
+        "format": "FileLocal / city return; Taxpayer Authorization Form for payroll processors",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-WAP51-001",
+          "US-WAP7-005",
+          "US-WAP9V-001"
+        ],
+        "ccg_location": "CCG Annex WA.2, WA.5",
+        "note": "Employer business taxes on Seattle payroll expense (SMC 5.38), not withheld from wages; applicability thresholds per US-WAP7-005; Social Housing Tax per US-WAP9V-001."
+      },
+      {
+        "filing_id": "Nevada Modified Business Tax return (Form TAX-F003, general business)",
+        "authority": "Nevada Department of Taxation",
+        "frequency": "quarterly; due last day of the month after the quarter (file even if no tax)",
+        "format": "My Nevada Tax e-file or paper",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-NVS5-010",
+          "US-NVS5-009",
+          "US-NVS5-011",
+          "US-NVP51-002"
+        ],
+        "ccg_location": "CCG Annex NV.3, NV.5",
+        "note": "Employer-borne State payroll tax; from 2026-01-01 MBT wages are compared with the ESD UI wages every quarter [US-NVS5-009]."
+      },
+      {
+        "filing_id": "Employer payroll transit levies (Oregon, New York)",
+        "authority": "Oregon DOR; New York DTF (per annex)",
+        "frequency": "per levy schedule",
+        "format": "per levy channel (annex): OR TriMet and Lane transit on Form OQ; NY MCTMT on MTA-305",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-OWN-007",
+          "US-ORS5-010",
+          "US-NY-003"
+        ],
+        "ccg_location": "CCG m05; annexes OR, NY"
+      },
+      {
+        "filing_id": "State-fund workers' compensation premiums and fees collected through payroll (WA, NM, OR, WY)",
+        "authority": "WA Department of Labor & Industries; NM TRD; OR DOR; WY DWS (per annex)",
+        "frequency": "quarterly (WY monthly, quarterly by permission)",
+        "format": "per State channel (annex section 3/5)",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-WALTC-002",
+          "US-WAS5-019",
+          "US-NMR3-001",
+          "US-NMS5-012",
+          "US-ORS5-010",
+          "US-WYS5-007",
+          "US-WYS5-012"
+        ],
+        "ccg_location": "CCG m05 5.1; m07 7.1; annexes WA, NM, OR, WY section 3",
+        "note": "WA medical-aid and supplemental-pension premiums, employee share deducted [US-WALTC-002, US-WAS5-019]; NM workers' compensation fee on TRD-41431 [US-NMR3-001, US-NMS5-012]; OR Workers' Benefit Fund on Form OQ [US-ORS5-010]; WY monopolistic State fund, joint UI / WC report [US-WYS5-007, US-WYS5-012]. Private insurer premiums elsewhere are outside payroll (MANDATE workers_compensation row: data-problem)."
+      },
+      {
+        "filing_id": "New-hire report (State Directory of New Hires)",
+        "authority": "State Directory of New Hires (per State; HHS designation for multistate)",
+        "frequency": "event-driven; within the federal maximum or the shorter State period (CCG m10 Table 10.1.2)",
+        "format": "W-4 copy or an equivalent form; electronic filers two monthly transmissions",
+        "integration_type": "outbound",
+        "product_mapping_required": true,
+        "channel": "outbound via the third-party filing provider hand-off (no ADP integration; owner, biweekly 2026-10-21)",
+        "register_ids": [
+          "US-FEDS5-024",
+          "US-FEDB5-001",
+          "US-MULTIS5-006"
+        ],
+        "ccg_location": "CCG m10 Table 10.1.1, 10.1.2, 10.2"
+      }
+    ],
+    "_in_scope_note": "Per-jurisdiction form names, channels and due dates are in each annex section 5 and in the Report Specifications (Stage 3), which must cover every filing above, with one Report Specification per authority return: Jersey City and Newark payroll-tax returns are specified under the city employer entry; the St. Louis W-10 / P-10 is one return carrying the earnings tax and the payroll expense tax [US-MOP52-006]; the local entry cross-references these. Filing channel: the employer authorises the provider as reporting agent (Form 8655 / Rev. Proc. 2012-32) and keeps the liability [US-FED-008, US-FED-028]; provider choice is outside this build (owner, 2026-10-29).",
+    "out_of_scope": [
+      {
+        "filing_id": "IRS Form 1099-NEC and the Form 1099 series (non-employee compensation)",
+        "descoping_reason": "Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008].",
+        "register_ids": [
+          "US-OWN-008"
+        ]
+      },
+      {
+        "filing_id": "New Hampshire Business Enterprise Tax (BET)",
+        "descoping_reason": "Annual entity-level tax, not a payroll withholding or payroll return item (US-OWN-007).",
+        "register_ids": [
+          "US-OWN-007"
+        ]
+      },
+      {
+        "filing_id": "Puerto Rico TDI and all territory returns (PR, GU, VI, AS, MP)",
+        "descoping_reason": "Territories are outside the jurisdiction set (50 States + DC, owner 2026-10-29); PR TDI listed as out of scope in the MANDATE sdi_tdi_pfml row.",
+        "register_ids": [
+          "US-FEDP52-007"
+        ]
+      },
+      {
+        "filing_id": "Certified payroll reports on public works (federal Davis-Bacon WH-347 / weekly certified payroll; State certified payroll such as California DIR eCPR)",
+        "descoping_reason": "Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.",
+        "register_ids": [
+          "US-OWN-009",
+          "US-FEDS5-027",
+          "US-CAS5-017"
+        ],
+        "note": "US-CAS5-017 partial: eCPR thresholds not stated."
+      },
+      {
+        "filing_id": "Household employer's own return (Form 1040 Schedule H filing itself)",
+        "descoping_reason": "Filed by the household employer with the personal return; the payroll build only routes the wages (in-scope 'Schedule H routing').",
+        "register_ids": [
+          "US-FEDS5-029"
+        ]
+      },
+      {
+        "filing_id": "California DE 542 independent-contractor report (and any State contractor report)",
+        "descoping_reason": "Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008].",
+        "register_ids": [
+          "US-OWN-008",
+          "US-CAS5-002"
+        ]
+      },
+      {
+        "filing_id": "State annual returns of household and agricultural employers (e.g. OR Form OA, Form WA / OR-STT-A)",
+        "descoping_reason": "State-level rules for special populations are deferred to a later round (US-OWN-005).",
+        "register_ids": [
+          "US-OWN-005",
+          "US-ORS5-010"
+        ]
+      }
+    ],
+    "related_obligations_no_return": {
+      "_note": "Builder classification (reversible): obligations in the CCG and RSPEC facts that are not a recurring authority return built from payroll data, so no Report Specification is built for them. They stay in scope for the CCG (documented as rules) and are not excluded from any artifact.",
+      "items": [
+        {
+          "item": "One-time employer account registration (e.g. CA DE 1, AZ JT-1, ID Business Registration)",
+          "why_no_return": "set-up step before the first return; the account numbers are DD master data",
+          "register_ids": [
+            "US-CAS5-002",
+            "US-AZP52-005",
+            "US-IDS5-021"
+          ],
+          "ccg": "annexes section 5"
+        },
+        {
+          "item": "Notices handed to employees (GA DOL-800 separation notice, NJ BC-10, CT UC-21 separation packet, CO DR 0995 credit notice, DC hire notice)",
+          "why_no_return": "delivered to the employee, not filed with an authority",
+          "register_ids": [
+            "US-GAS5-007",
+            "US-NJS5-015",
+            "US-CTS5-031",
+            "US-COS5-006",
+            "US-DCS5-010"
+          ],
+          "ccg": "m09; annexes section 9 / 10"
+        },
+        {
+          "item": "WARN plant-closing / mass-layoff notices (federal 60 days; CA WARN)",
+          "why_no_return": "HR-scope notice to employees and officials (F19), not a payroll return",
+          "register_ids": [
+            "US-FEDS5-025",
+            "US-CAS5-018"
+          ],
+          "ccg": "m09"
+        },
+        {
+          "item": "Responses to UI agency wage-information requests (e.g. IA within 10 days)",
+          "why_no_return": "answer to an agency request from payroll records, not a periodic return",
+          "register_ids": [
+            "US-IAS5-026"
+          ],
+          "ccg": "annex IA section 9"
+        }
+      ]
+    }
+  },
   "wage_type_categories": {
-    "in_scope": [],
-    "out_of_scope": [],
-    "special_rules": []
+    "in_scope": [
+      {
+        "category": "Regular wages (salary, hourly)",
+        "register_ids": [
+          "US-FEDS5-001"
+        ],
+        "ccg": "m04 4.2"
+      },
+      {
+        "category": "Overtime premium (incl. qualified overtime W-2 code TT)",
+        "register_ids": [
+          "US-FEDS5-030",
+          "US-FEDS5-007"
+        ],
+        "ccg": "m04 4.4, 4.6"
+      },
+      {
+        "category": "Tips (cash tips reported; W-2 code TP, box 14b)",
+        "register_ids": [
+          "US-FEDS5-003",
+          "US-FEDS5-007"
+        ],
+        "ccg": "m04 4.2"
+      },
+      {
+        "category": "Supplemental wages: bonus, commission",
+        "register_ids": [
+          "US-FEDS5-003"
+        ],
+        "ccg": "m04 4.5"
+      },
+      {
+        "category": "Severance and termination pay",
+        "register_ids": [
+          "US-FEDS5-029"
+        ],
+        "ccg": "m04 4.6; m09"
+      },
+      {
+        "category": "Imputed income: group-term life above the excluded coverage",
+        "register_ids": [
+          "US-FEDS5-008"
+        ],
+        "ccg": "m07 7.2"
+      },
+      {
+        "category": "Other taxable fringe benefits (vehicle, general valuation rule)",
+        "register_ids": [
+          "US-FEDS5-008"
+        ],
+        "ccg": "m07 7.2"
+      },
+      {
+        "category": "Excluded fringe benefits within limits (HSA, health FSA / section 125, dependent care, educational assistance, parking / transit)",
+        "register_ids": [
+          "US-FEDS5-008",
+          "US-FED-025"
+        ],
+        "ccg": "m07 7.1"
+      },
+      {
+        "category": "Employer Trump-account contribution (W-2 code TA)",
+        "register_ids": [
+          "US-FEDS5-030",
+          "US-FEDS5-007"
+        ],
+        "ccg": "m04 4.6; m07 7.1"
+      },
+      {
+        "category": "Pre-tax elective deferrals (401(k)-type, SIMPLE)",
+        "register_ids": [
+          "US-FED-023"
+        ],
+        "ccg": "m07 7.1"
+      },
+      {
+        "category": "Employee taxes withheld: FIT, OASDI, Medicare, Additional Medicare, State and local income tax",
+        "register_ids": [
+          "US-FEDS5-001",
+          "US-FEDS5-005",
+          "US-MULTIS5-017"
+        ],
+        "ccg": "m05; m06"
+      },
+      {
+        "category": "Employee programme contributions: SDI / TDI / PFML / LTC (WA Cares), employee UI where levied (AK, NJ, PA), WA L&I workers' compensation employee share, OR Workers' Benefit Fund employee half, NM workers' compensation fee employee part, VT Child Care Contribution employee part, OR statewide transit tax, HI prepaid health care employee share",
+        "register_ids": [
+          "US-FEDP52-007",
+          "US-FEDP52-006",
+          "US-WALTC-002",
+          "US-WAS5-019",
+          "US-ORS5-010",
+          "US-NMR3-001",
+          "US-VTS5-030",
+          "US-ORS5-011",
+          "US-HIS5-015"
+        ],
+        "ccg": "m05 5.1; m07 7.1; annexes section 3"
+      },
+      {
+        "category": "Employer contributions: OASDI, Medicare, FUTA, SUI, employer PFML / SDI shares, State UI-linked administrative / workforce / solvency levies (US-OWN-007 second limb), transit levies OR / NY (US-OWN-007 first limb), State-fund workers' compensation employer premiums and fees (WA, NM, OR WBF, WY), VT Child Care Contribution employer part, NV Modified Business Tax, city employer payroll taxes (Jersey City, Newark, Seattle PET / SHT, St. Louis, Pittsburgh, Denver / Greenwood Village / Glendale OPT employer part)",
+        "register_ids": [
+          "US-FEDS5-005",
+          "US-FED-007",
+          "US-MULTIS5-017",
+          "US-OWN-007",
+          "US-ORS5-010",
+          "US-WAS5-019",
+          "US-NMR3-001",
+          "US-WYS5-012",
+          "US-VTS5-030",
+          "US-NVS5-010",
+          "US-NVP51-002",
+          "US-NJP6-001",
+          "US-NJP6-002",
+          "US-WAP51-001",
+          "US-WAP7-005",
+          "US-WAP9V-001",
+          "US-MOP52-006",
+          "US-PAB5-401",
+          "US-COP52-001",
+          "US-COS5-015",
+          "US-COS5-016"
+        ],
+        "ccg": "m05; m06; annexes section 2c / 3"
+      },
+      {
+        "category": "Garnishments: child-support IWO, federal tax levy, creditor garnishment",
+        "register_ids": [
+          "US-MULTIS5-007",
+          "US-FEDS5-014",
+          "US-FEDS5-023"
+        ],
+        "ccg": "m07 7.3"
+      },
+      {
+        "category": "Voluntary after-tax deductions (union dues, loans, charitable)",
+        "register_ids": [
+          "US-FEDS5-023",
+          "US-AZS5-002",
+          "US-COS5-004",
+          "US-CTS5-006",
+          "US-DES5-002",
+          "US-HIS5-009",
+          "US-IAS5-004",
+          "US-ILS5-006",
+          "US-INS5-004",
+          "US-KSS5-016",
+          "US-KYS5-007",
+          "US-MDS5-009",
+          "US-MIS5-008"
+        ],
+        "ccg": "m07 7.1; annexes section 7",
+        "_basis_note": "CCG m07 7.1 states the basis as employer policy and State wage-deduction law (annexes). Register rows: CCPA disposable-earnings limit [US-FEDS5-023]; State wage-deduction authorisation rules read in the AZ, CO, CT, DE, HI, IA, IL, IN, KS, KY, MD and MI annexes. The order of voluntary deductions against garnishments is an open CCG item (RQ-571)."
+      }
+    ],
+    "out_of_scope": [
+      {
+        "category": "Non-employee compensation (contractor payments, Form 1099-NEC)",
+        "register_ids": [
+          "US-OWN-008"
+        ]
+      },
+      {
+        "category": "State-level special-population treatments (deferred round)",
+        "register_ids": [
+          "US-OWN-005"
+        ]
+      }
+    ],
+    "special_rules": [
+      {
+        "rule": "Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.",
+        "register_ids": [
+          "US-OWN-009"
+        ],
+        "ccg": "m04 4.6; m10 10.1, 10.2; Annex FED.10 and every annex section 10"
+      },
+      {
+        "rule": "Treaty-exempt wages of a nonresident alien are reported on Form 1042-S, not W-2 box 1.",
+        "register_ids": [
+          "US-FEDS5-016"
+        ],
+        "ccg": "m07 7.1"
+      },
+      {
+        "rule": "Minister's parsonage allowance: no FIT, social security or Medicare withholding (voluntary FIT agreement allowed); excluded from W-2 box 1.",
+        "register_ids": [
+          "US-FED-030"
+        ],
+        "ccg": "m07 7.1"
+      },
+      {
+        "rule": "Statutory employees: FICA withheld, no FIT withholding; W-2 box 13 checked.",
+        "register_ids": [
+          "US-FEDR3-005"
+        ],
+        "ccg": "m11.3"
+      }
+    ],
+    "_wtc_note": "Re-check against the WTC's real categories and codes at WTC close (Stage 5; QA_METHODOLOGY Stage 2 DoD)."
   },
-
   "option_mapper_scope": {
     "_comment": "For each option mapper, the codes that ARE in scope. Out-of-scope codes must be excluded from ALL artifacts.",
-    "personal_id_type": [],
-    "insurance_type": [],
-    "contract_type": [],
-    "correction_codes": [],
-    "benefit_type": []
+    "personal_id_type": [
+      "SSN",
+      "ITIN (State PFML reports that accept it only: WA Paid Leave / WA Cares, CO FAMLI)"
+    ],
+    "_personal_id_type_basis": "SSN on every federal and State filing [US-FEDS5-024; CCG m02 2.2]; ITIN accepted in WA [US-WAB5-003] and CO FAMLI bulk files from 2026-10-01 [US-COS5-008]. SSN/ITIN structure itself is an open CCG gap (RQ-557).",
+    "insurance_type": [
+      "FICA_OASDI",
+      "FICA_MEDICARE",
+      "FICA_ADDITIONAL_MEDICARE",
+      "FUTA",
+      "SUI",
+      "SDI_TDI",
+      "PFML",
+      "LTC_WA_CARES",
+      "TRANSIT_LEVY_OR",
+      "TRANSIT_LEVY_NY",
+      "STATEWIDE_TRANSIT_TAX_OR",
+      "WORKERS_COMP_EMPLOYEE_SHARE",
+      "WORKERS_COMP_STATE_FUND_EMPLOYER",
+      "WORKERS_COMP_FEE_NM",
+      "CHILD_CARE_CONTRIBUTION_VT",
+      "HI_PREPAID_HEALTH_CARE_EMPLOYEE_SHARE",
+      "STATE_UI_ADMIN_SOLVENCY_LEVY",
+      "STATE_EMPLOYER_PAYROLL_TAX",
+      "CITY_EMPLOYER_PAYROLL_TAX"
+    ],
+    "_insurance_type_basis": {
+      "FICA_OASDI": "US-FEDS5-005",
+      "FICA_MEDICARE": "US-FEDS5-005",
+      "FICA_ADDITIONAL_MEDICARE": "US-FEDS5-005",
+      "FUTA": "US-FED-007",
+      "SUI": "US-MULTIS5-017 (employer; employee UI in AK, NJ, PA per US-FEDP52-006). Rate components carried inside the SUI rate, not a separate item: NH administrative contribution US-NHP7-001, NM reserve factor US-NMS5-008, UT reserve factor, social cost and delinquency surcharge US-UTSUI-001, WY delinquent surcharge US-WYP9W-001 (US-WYP9W-001 partial: 2026 factor values not in statute), MN special assessment (0 % in 2026) US-MNB5-402",
+      "SDI_TDI": "US-FEDP52-007 (TDI: CA, HI, NJ, NY, RI; NY DBL US-NYB5-401)",
+      "PFML": "CCG m05 and annex section 3: US-WAPFML-001, US-CTS5-022, US-COS5-008, US-DES5-013, US-MES5-024, US-MDS5-014, US-MNS5-018, US-MAS5-012, US-DCS5-019, US-OR-002, US-NJS5-010, US-NYB5-402",
+      "LTC_WA_CARES": "US-WALTC-001, US-WAS5-016",
+      "TRANSIT_LEVY_OR": "US-OWN-007 (first limb), US-ORS5-010 (TriMet, Lane)",
+      "TRANSIT_LEVY_NY": "US-OWN-007 (first limb), US-NY-003 (MCTMT)",
+      "STATEWIDE_TRANSIT_TAX_OR": "US-ORS5-011 (employee)",
+      "WORKERS_COMP_EMPLOYEE_SHARE": "US-WALTC-002, US-WAS5-019 (WA L&I); US-ORS5-010 (OR Workers' Benefit Fund, half employee)",
+      "WORKERS_COMP_STATE_FUND_EMPLOYER": "US-WAS5-019 (WA L&I); US-ORS5-010 (OR WBF employer half); US-WYS5-012 (WY State fund)",
+      "WORKERS_COMP_FEE_NM": "US-NMR3-001 (employee and employer parts, per quarter, TRD-41431)",
+      "CHILD_CARE_CONTRIBUTION_VT": "US-VTS5-030 (employee part up to the employee maximum; employer part)",
+      "HI_PREPAID_HEALTH_CARE_EMPLOYEE_SHARE": "US-HIS5-015",
+      "STATE_UI_ADMIN_SOLVENCY_LEVY": "US-OWN-007 (second limb): e.g. MA COVID-19 Recovery Assessment US-MAS5-020, MA EMAC US-MAS5-021, MA Workforce Training Fund US-MAB5-401, GA US-GAS5-013, AR US-ARP9V-002, CA ETT US-CAP7-001, CT US-CTP9V-001, DC US-DCS5-017, DE US-DEL-003, HI US-HIP9V-001, ID US-IDB5-402, IL US-ILS5-015, MN US-MNP52-001 / US-MNB5-401, MS US-MSP51-004, MT US-MTB5-401, NH US-NHP9W-001, SD US-SDS5-002, TX US-TXS5-019, VA US-VAB5-402, AZ US-AZB5-402, AK (inside the employee UI rate) US-AKB5-402 / US-AKB5-403; WV unemployment automation and administration fee from 2026-07-01, an annual employer bill issued by WorkForce WV by March 31, not part of the quarterly UI return (figure open: CCG wv.ui.sb1053_fee) US-WVS5-002",
+      "STATE_EMPLOYER_PAYROLL_TAX": "US-NVS5-010, US-NVP51-002 (NV Modified Business Tax)",
+      "CITY_EMPLOYER_PAYROLL_TAX": "US-NJP6-001, US-NJP6-002 (Jersey City, Newark); US-WAP51-001, US-WAP7-005, US-WAP9V-001 (Seattle PET / SHT); US-MOP52-006 (St. Louis); US-PAB5-401 (Pittsburgh); US-COP52-001, US-COS5-015, US-COS5-016 (Denver, Greenwood Village, Glendale OPT employer part)"
+    },
+    "_insurance_type_note": "Scope labels, not codes: the DD assigns the codes (C27 at DD close). US-OWN-007 scope statement, quoted in full from the register: transit payroll levies OR and NY only (Louisville TARC 0.20% is inside the employee occupational tax, employee-borne); workforce/administrative/solvency levies = the P7 list as corrected by P9-LEVY r1/r2 (incl. MA COVID-19 Recovery Assessment 0.178-2.716% 2026, GA admin assessment 0.06% through 2026-12-31, AR admin assessment 0.1%, DE industry/size assessments from 2027, WY ESF/WDTF factor inside the UI rate); absence read at tier A in 21 of 22 re-checked states; VA pool cost / fund building charge: existence read, 2026 percentage not published -> stage-1 research gap. NH Business Enterprise Tax excluded: annual entity-level tax, not a payroll withholding or payroll return item.",
+    "contract_type": [
+      "ORDINARY_EMPLOYEE",
+      "NONRESIDENT_ALIEN",
+      "STATUTORY_EMPLOYEE",
+      "HOUSEHOLD_EMPLOYEE",
+      "AGRICULTURAL_EMPLOYEE",
+      "CLERGY_MINISTER",
+      "EMPLOYEE_ABROAD"
+    ],
+    "_contract_type_basis": "US-OWN-005 (all populations IN at the federal layer); out: independent contractor [US-OWN-008].",
+    "correction_codes": [
+      "W-2c",
+      "941-X",
+      "STATE_AMENDED_RETURN"
+    ],
+    "_correction_codes_basis": "W-2c in EFW2C [US-FIL-002]; 941-X [US-FEDS5-031]; State amendment routes per annex (e.g. AL UC-10C [US-ALS5-007]) - CCG m10 10.5.",
+    "benefit_type": [
+      "GROUP_TERM_LIFE_EXCESS",
+      "EMPLOYER_VEHICLE",
+      "HSA",
+      "HEALTH_FSA_SECTION125",
+      "DEPENDENT_CARE",
+      "EDUCATIONAL_ASSISTANCE",
+      "QUALIFIED_PARKING_TRANSIT",
+      "TRUMP_ACCOUNT_EMPLOYER",
+      "ELECTIVE_DEFERRAL_401K",
+      "SIMPLE_DEFERRAL"
+    ],
+    "_benefit_type_basis": "US-FEDS5-008 (Pub. 15-B 2026), US-FEDS5-030 (Trump account), US-FED-023 (401(k), SIMPLE) - CCG m07 7.1 / 7.2.",
+    "filing_status_w4": [
+      "SINGLE_OR_MFS",
+      "MFJ_OR_QSS",
+      "HEAD_OF_HOUSEHOLD"
+    ],
+    "_filing_status_w4_basis": "Form W-4 (2026) Step 1(c) [US-FEDS5-006]; CCG m02 2.2."
   },
-
   "integrations": {
-    "outbound": [],
-    "inbound": [],
-    "both": [],
+    "outbound": [
+      {
+        "name": "Statutory filing data hand-off to the third-party filing provider (all in-scope federal, State and local returns, deposits and new-hire reports)",
+        "direction": "outbound",
+        "integration_type": "file hand-off to provider; the provider transmits to each authority",
+        "product_mapping_required": true,
+        "rationale": "true: the payroll product must produce the filing data set in the provider's import layout (field mapping per the Report Specification)",
+        "register_ids": [
+          "US-FED-008",
+          "US-FED-028"
+        ],
+        "ccg": "m10 10.1, 10.2"
+      },
+      {
+        "name": "New-hire reporting (State Directory of New Hires; electronic two monthly transmissions)",
+        "direction": "outbound",
+        "integration_type": "electronic file via the provider",
+        "product_mapping_required": true,
+        "rationale": "true: the federal new-hire data elements come from payroll master data",
+        "register_ids": [
+          "US-FEDS5-024",
+          "US-FEDB5-001"
+        ],
+        "ccg": "m10 10.2"
+      }
+    ],
+    "inbound": [
+      {
+        "name": "Child-support income withholding orders (IWO / e-IWO) from State agencies",
+        "direction": "inbound",
+        "integration_type": "paper or e-IWO document the employer must act on (set up deduction, remit within the State period)",
+        "product_mapping_required": true,
+        "rationale": "true (F8): the order amounts, priority and remittance data must be mapped into deductions",
+        "register_ids": [
+          "US-MULTIS5-007",
+          "US-FEDS5-028",
+          "US-FEDS5-014"
+        ],
+        "ccg": "m07 7.3; m10 10.2"
+      },
+      {
+        "name": "IRS notice of levy on wages (Form 668-W) with the employee's exemption statement",
+        "direction": "inbound",
+        "integration_type": "paper notice the employer must act on (exempt amount per Pub. 1494, rest to the IRS)",
+        "product_mapping_required": true,
+        "rationale": "true (F8): filing status and dependents from the notice drive the exempt amount table",
+        "register_ids": [
+          "US-FEDS5-014"
+        ],
+        "ccg": "m07 7.3; m10 10.2"
+      },
+      {
+        "name": "State UI contribution rate notices (annual employer rate per State, e.g. AZ UC-603, CA DE 2088, AK TR02)",
+        "direction": "inbound",
+        "integration_type": "authority notice (paper or portal) whose rate must be loaded per employer and year",
+        "product_mapping_required": true,
+        "rationale": "true (F8): the employer SUI rate is configuration data loaded from the notice each year",
+        "register_ids": [
+          "US-AZR3-002",
+          "US-CAS5-016",
+          "US-AKP51-006"
+        ],
+        "ccg": "m05; annexes section 3"
+      }
+    ],
+    "both": [
+      {
+        "name": "None identified: every channel is either a hand-off to the provider (outbound) or a document received from an authority (inbound).",
+        "product_mapping_required": false,
+        "register_ids": [
+          "US-FED-008"
+        ]
+      }
+    ],
     "_note": "Inbound files where HRB must parse/act = product_mapping_required=true. Never default inbound=not-in-scope."
   },
-
   "known_failure_patterns_to_check": [
     "F1 - Option mapper alignment DD<->Specs",
     "F2 - Out-of-scope codes leak through",
@@ -78,6 +929,134 @@
     "F5 - Population Rules without scenarios",
     "F6 - Unanswered queries left in specs",
     "F7 - WTC tax codes not verified against tax-code guidance",
-    "F8 - Inbound integrations wrongly excluded from product mapping"
-  ]
+    "F8 - Inbound integrations wrongly excluded from product mapping",
+    "F9 - Thin spec column schema",
+    "F10 - Missing sub-forms",
+    "F11 - Display-only rows treated as XML input",
+    "F12 - Composite key construction undocumented",
+    "F13 - Mutual exclusion rules undocumented",
+    "F14 - Code prefix inconsistency with official source",
+    "F15 - Removed artifact without descoping decision"
+  ],
+  "_scope_decision_dates": {
+    "US-OWN-008 workers/employers": "2026-10-29",
+    "US-OWN-002 jurisdiction set FED + MULTI + 51 (US-MQ-13)": "2026-10-29",
+    "US-OWN-003 single package": "2026-10-29",
+    "US-OWN-005 special populations": "2026-10-30",
+    "US-OWN-006 language": "2026-11-01",
+    "US-OWN-007 payroll levies": "2026-11-01",
+    "US-OWN-009 prevailing wage": "2026-11-02",
+    "mandate sealed": "2026-11-02"
+  },
+  "tier": {
+    "overall": "T4",
+    "by_domain": {
+      "federal_income_tax": "T2",
+      "fica_social_security_medicare": "T2",
+      "futa": "T3",
+      "state_income_tax": "T4",
+      "local_income_tax": "T4",
+      "state_unemployment_insurance": "T4",
+      "sdi_tdi_pfml": "T4-shaped",
+      "workers_compensation": "data-problem",
+      "multistate": "T4",
+      "labour_code": "T3",
+      "payslip_statute": "T3",
+      "statutory_reporting": "T4",
+      "leave": "T3",
+      "termination": "T3",
+      "benefits_in_kind": "T2",
+      "deductions_garnishments": "T3",
+      "collective_agreements": "T1",
+      "indexation": "T3",
+      "payroll_data_protection": "T2",
+      "live_legal_change": "T3",
+      "employer_payroll_levies": "T4-shaped"
+    },
+    "verdict_verbatim": "Overall T4 (discriminator confirmed 2026-10-29 on source-read evidence; per-jurisdiction census completed at seal attempt 3 and re-checked at seal attempts 4, 5 and 6, 2026-10-30 to 2026-11-02; mandate sealed 2026-11-02 with all 65 questions answered; the limbs reopened and closed at seal attempt 6 (US-MQ-26 CT, US-MQ-45 MS, US-MQ-57 OR) bear on no tier; Stage-5 re-check 2026-11-02: superseded citations re-pointed to their S5 successors, census unchanged (new local layers found only inside T4 states: Lexington KY, Greenwood Village and Glendale CO OPT), and the five prevailing-wage limbs reopened that day (US-MQ-30 GA, 32 IA, 45 MS, 47 NC, 64 UT) and closed at the reseal the same day bear on no tier). Employer-operation test: T4 requires a second independent calculation AND a separate remittance/return to a second authority. Federal: 26 U.S.C. 3402(a)(1) obliges every employer to withhold federal income tax under IRS tables and covers federal tax only [US-FED-012]; FICA and FUTA go on federal returns 941/944/940 [US-FED-005, US-FED-007, US-FED-015]. State: a wage-taxing state imposes its own withholding computed on its own basis (e.g. Va. Code 58.1-461 [US-VAPIT-002]) remitted to the state revenue authority on its own returns (Virginia Tax VA-5/VA-6 [US-VAPIT-003]); state UI is a separate state tax base and agency (Fla. Stat. 443.1216 [US-MULTI-001]; SC Code ch. 41-31 [US-SCS5-015]). Nothing is absorbed into the federal deduction (contrast Switzerland, StHG Art. 36a Abs. 1, where one deduction discharges all levels). FUTA is federal but its credit depends on state UI paid and on the state's Title XII loan status (26 U.S.C. 3302(c)(2) [US-FED-014]): a cross-layer dependency, so futa is T3. Inside a state, a local layer is T4 where a locality receives a separate return (City of Portland Metro SHS / Multnomah PFA [US-ORS5-004]; Ohio municipal income tax, ORC 718.03 [US-OHP52-003]; Pennsylvania Act 32 EIT/LST to the local collector [US-PA-004]; Jersey City and Newark employer payroll taxes on quarterly city returns [US-NJP6-001, US-NJP6-002]) and T3 where it is piggybacked on the state return (Maryland county tax on MW506 [US-MDP51-001]; NYC and Yonkers on NYS-45/NYS-1 [US-NY-008]). Consequence: the federal core and each jurisdiction are declared and scoped as parallel layers, and the multistate domain routes each employee to one or more of them. Jurisdiction annexes (re-checked 2026-10-30, seal attempt 5): 9 T1 (no state wage tax; SUI and levies only: AK, FL, NH, NV, SD, TN, TX, WA, WY; WA declares the Seattle payroll expense tax, a threshold-conditional employer tax on a city return [US-WAP51-001], as a T4-shaped element), 31 T3 (state withholding, local layer absent or piggybacked on the state return), 11 T4 (local layer remitted to the locality on its own return: AL occupational taxes [US-ALP51-001], CO Denver OPT [US-COP52-001], DE Wilmington [US-DEP52-001], KY occupational taxes [US-KYP52-002], MI 23 self-administering cities [US-MIP52-002], MO St. Louis/Kansas City [US-MOP52-006], NJ Jersey City/Newark employer payroll taxes filed with the city [US-NJP6-001, US-NJP6-002], OH [US-OHP52-003], OR [US-ORS5-004], PA [US-PA-004], WV municipal service fees withheld and remitted to the city, W. Va. Code 8-13-13 [US-WVR3-001], Charleston [US-WVR3-002]); 0 unclassified; no classification rests on MANUAL/gated evidence.",
+    "_note": "verdict copied verbatim from build-manifest tier.rationale (= MANDATE 'Tier verdict' quote, SKELETON-MANIFEST line 7, CCG m01 'Rationale (verbatim)')."
+  },
+  "jurisdictions": {
+    "in_scope": [
+      "FED",
+      "MULTI",
+      "AK",
+      "AL",
+      "AR",
+      "AZ",
+      "CA",
+      "CO",
+      "CT",
+      "DC",
+      "DE",
+      "FL",
+      "GA",
+      "HI",
+      "IA",
+      "ID",
+      "IL",
+      "IN",
+      "KS",
+      "KY",
+      "LA",
+      "MA",
+      "MD",
+      "ME",
+      "MI",
+      "MN",
+      "MO",
+      "MS",
+      "MT",
+      "NC",
+      "ND",
+      "NE",
+      "NH",
+      "NJ",
+      "NM",
+      "NV",
+      "NY",
+      "OH",
+      "OK",
+      "OR",
+      "PA",
+      "RI",
+      "SC",
+      "SD",
+      "TN",
+      "TX",
+      "UT",
+      "VA",
+      "VT",
+      "WA",
+      "WI",
+      "WV",
+      "WY"
+    ],
+    "in_scope_note": "Common federal layer + multistate routing domain + 50 States and the District of Columbia, all in scope (owner, 2026-10-29; MANDATE 'Scope facts' Structure line; US-MQ-13) [US-OWN-002], one single US package [US-OWN-003]. Matches build-manifest artifacts[CCG].units (53 annexes).",
+    "out_of_scope": [
+      "PR",
+      "GU",
+      "VI",
+      "AS",
+      "MP"
+    ],
+    "out_of_scope_reason": "US territories (Puerto Rico, Guam, U.S. Virgin Islands, American Samoa, Northern Mariana Islands) are outside the owner's jurisdiction set of 2026-10-29 (50 States + DC); MANDATE sdi_tdi_pfml row: Puerto Rico TDI 'out of scope' [US-FEDP52-007]."
+  },
+  "_failure_pattern_decisions": {
+    "F1": "DD option mappers built from option_mapper_scope above; Report Spec option values reconciled both ways at DD close (C27).",
+    "F2": "Out-of-scope codes: 1099-NEC, territory codes (PR, GU, VI, AS, MP), certified-payroll forms and NH BET never appear as in-scope codes in DD, WTC or Specs.",
+    "F3": "Employee vs employer side per WTC crosswalk 'side' (EE / ER / BOTH); employer-only items (FUTA, SUI in most States, transit levies, State UI-linked levies, NV MBT, city employer payroll taxes incl. Seattle PET / SHT) never labelled employee-borne; items with both parts (WA L&I, OR WBF, NM WC fee, VT CCC, PFML) carry both sides.",
+    "F4": "Format per filing taken from the authority's specification (EFW2 Pub. 42-007, State specs) at Stage 3 STEP 3.5; a channel without one stays FIELD MODEL / TO CONFIRM.",
+    "F5": "Population Rules per conditional field of every Spec with scenarios (NRA, household, agricultural, multistate).",
+    "F6": "Open RA queries carried to Report Spec column T and the QA report; none silently dropped.",
+    "F7": "WTC tax codes only from the US legend built at Stage 5 (no foreign codes).",
+    "F8": "All three inbound documents above (IWO / e-IWO, IRS levy Form 668-W, State UI rate notices) carry product_mapping_required = true; IRS lock-in letters pending RQ-01.",
+    "F9": "Report Specs at 21 columns A-U, at least 18 populated (C12).",
+    "F10": "Sub-forms and schedules of every in-scope filing are listed from the authority instructions at Stage 3; none dropped.",
+    "F11": "Display-only / calculated rows classified in Spec column R (C15).",
+    "F12": "Composite identifiers (EFW2 record layouts, State account numbers) broken down in Spec column M (C13).",
+    "F13": "Mutually exclusive items documented (941 vs 944, 941 vs 943, W-2 vs 1042-S for treaty-exempt wages, reciprocity certificate vs work-State withholding) (C16).",
+    "F14": "Form and code prefixes as printed by the authority (e.g. W-2 box 12 TP / TT / TA).",
+    "F15": "Every descoped item above carries its descoping_reason and register id; no artifact dropped without a record."
+  }
 }

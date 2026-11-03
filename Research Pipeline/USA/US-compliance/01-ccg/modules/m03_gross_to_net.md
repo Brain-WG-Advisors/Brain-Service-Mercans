@@ -41,7 +41,21 @@ State conformity differs, so the State base is built separately (examples):
 | NJ | cafeteria-plan (IRC sec.125) reductions are New Jersey unemployment wages where cash is electable | `nj.sui.wages.section125_included` [US-NJS5-017] |
 | AK | deferrals are excluded from Alaska unemployment wages, unlike FUTA | `ak.sui.wages.excludes_401k_deferrals` [US-AKS5-005] |
 
-⚠️ RESEARCH-GAP (non-blocking): the federal treatment of elective deferrals, cafeteria-plan (IRC sec.125) salary reductions and HSA salary reductions for each federal base (income-tax wages, FICA wages, FUTA wages) is not stated in the facts (request key `fed.retirement.pretax.tax_treatment`)
+Federal base reduced by each pre-tax deduction (Pub. 15 (2026) section 15 and Pub. 15-B (2026) Table 2-1):
+
+| Deduction | Federal income-tax wages | FICA wages | FUTA wages | Source |
+|---|---|---|---|---|
+| 401(k) elective deferral | [[FACT:fed.base.401k_deferral.fit=excluded (up to the section 402(g) limit)]] | [[FACT:fed.base.401k_deferral.fica=included]] | [[FACT:fed.base.401k_deferral.futa=included]] | [US-FEDS5-029] |
+| 403(b) salary reduction | [[FACT:fed.base.403b_salary_reduction.fit=excluded (up to the section 402(g) limit)]] | [[FACT:fed.base.403b_salary_reduction.fica=included]] | [[FACT:fed.base.403b_salary_reduction.futa=included]] | [US-FEDS5-029] |
+| 457(b) salary reduction | [[FACT:fed.base.457b_salary_reduction.fit=excluded (up to the section 457(b) limit)]] | [[FACT:fed.base.457b_salary_reduction.fica=included]] | [[FACT:fed.base.457b_salary_reduction.futa=included]] | [US-FEDS5-029] |
+| SIMPLE salary reduction | [[FACT:fed.base.simple_salary_reduction.fit=excluded]] | [[FACT:fed.base.simple_salary_reduction.fica=included]] | [[FACT:fed.base.simple_salary_reduction.futa=included]] | [US-FEDS5-029] |
+| Section 125 cafeteria plan: accident and health premiums | [[FACT:fed.base.section125_health.fit=excluded]] | [[FACT:fed.base.section125_health.fica=excluded]] | [[FACT:fed.base.section125_health.futa=excluded]] | [US-FEDS5-008] |
+| Dependent-care assistance (Section 125 or employer program) | [[FACT:fed.base.dependent_care.fit=excluded up to 7,500 a year (3,750 married filing separately)]] | [[FACT:fed.base.dependent_care.fica=excluded up to 7,500 a year (3,750 married filing separately)]] | [[FACT:fed.base.dependent_care.futa=excluded up to 7,500 a year (3,750 married filing separately)]] | [US-FEDS5-008] |
+| HSA contribution (employer or Section 125 salary reduction) | [[FACT:fed.base.hsa_contribution.fit=excluded for a qualified individual up to the HSA contribution limit (employer or section 125 salary-reduction contributions)]] | [[FACT:fed.base.hsa_contribution.fica=excluded for a qualified individual up to the HSA contribution limit (employer or section 125 salary-reduction contributions)]] | [[FACT:fed.base.hsa_contribution.futa=excluded for a qualified individual up to the HSA contribution limit (employer or section 125 salary-reduction contributions)]] | [US-FEDS5-008] |
+
+Rule: [[FACT:fed.retirement.pretax.tax_treatment=401(k), 403(b) and 457(b) elective deferrals and SIMPLE salary-reduction contributions reduce federal income-tax withholding wages only (within the 402(g) / 457(b) limits); they remain FICA and FUTA wages. Section 125 cafeteria-plan salary reductions for a qualified benefit (accident and health premiums, health FSA, dependent care, HSA) take the treatment of that benefit outside the plan, so they reduce income-tax, FICA and FUTA wages within the benefit limits.]] [US-FEDS5-029]
+
+Cafeteria-plan election: [[FACT:fed.base.section125.rule=Benefit chosen under a section 125 cafeteria plan: if the employee chooses cash or another taxable benefit, it is subject to all employment taxes; if the employee chooses a nontaxable (qualified) benefit, the treatment is the same as if the benefit were provided outside the plan.]] [US-FEDS5-029]
 
 #### Step 3: Determination of Taxable Income
 
@@ -76,7 +90,7 @@ Then State income tax, then local tax. **ORDER** where a State base consumes the
 | State | Dependency | Fact |
 |---|---|---|
 | AL | [[FACT:al.wh.fit_before_sit=Alabama deducts federal income tax withheld from the state base: compute FIT before AL SIT]] | [US-ALS5-001] |
-| OR | Federal tax withheld is subtracted from the Oregon base, capped at USD [[FACT:or.wh.federal_subtraction_cap=8,750]] (phase-out by income); the Department's 2026 publication also prints a lower figure in places: use the cap above (formula pages) | [US-ORS5-009]; `practice.or.federal_cap` [US-ORS5-009] |
+| OR | Federal tax withheld is subtracted from the Oregon base, capped at USD [[FACT:or.pit.federal_tax_subtraction.cap=8,750]] (phase-out by income); the Department's 2026 publication also prints a lower figure in places: use the cap above (formula pages) | [US-ORS5-009]; `practice.or.federal_cap` [US-ORS5-009] |
 
 Resident and nonresident State routing (reciprocity, day thresholds, convenience rules, difference withholding) is applied before the State computation: Module 6 §6.2.
 
@@ -110,7 +124,7 @@ Employer amounts are computed from the same bases in Step 3, in parallel with St
 | FUTA | [[FACT:fed.futa.rate.gross=6]]% less a credit of up to [[FACT:fed.futa.credit.max=5.4]]% = [[FACT:fed.futa.rate.net=0.6]]% net on USD [[FACT:fed.futa.wage_base=7,000]], plus any credit reduction of the wages' State | [US-FED-007] |
 | SUI employer contribution | Experience rate of the `sui_state` on that State's base | annexes |
 | Employer paid-leave shares | Example: District of Columbia paid leave [[FACT:dc.pfml.employer.rate=0.75]]%, employer only, no cap | [US-DCS5-020] |
-| Employer payroll levies | Examples: Nevada Modified Business Tax [[FACT:nv.mbt.general.rate=1.17]]% on quarterly wages above USD [[FACT:nv.mbt.general.quarterly_threshold=50,000]]; Oregon TriMet transit [[FACT:or.transit.trimet.employer.rate=0.8237]]% | [US-NVS5-011]; [US-ORS5-010] |
+| Employer payroll levies | Examples: Nevada Modified Business Tax [[FACT:nv.mbt.general.rate=1.17]]% on quarterly wages above USD [[FACT:nv.mbt.general.quarterly_threshold=50,000]]; Oregon TriMet transit [[FACT:or.transit.trimet.employer.rate=0.8237]]% | [US-NVP51-002]; [US-ORS5-010] |
 | Per-employee fees | Example: New Mexico workers' compensation fee, employer USD [[FACT:nm.wc.admin_fee.employer.quarterly=2.55]] and employee USD [[FACT:nm.wc.admin_fee.employee.quarterly=2.25]] per quarter | [US-NMR3-001] |
 
 ### G2N flow summary and cross-cutting rules

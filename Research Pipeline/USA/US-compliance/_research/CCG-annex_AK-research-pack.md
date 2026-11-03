@@ -42,8 +42,8 @@ G-DERIVE done in Stage 5 (Python) from the Cookbook: reserve rate 811,365,166 / 
 - `ak.sui.employer.rate.class_21` = **5.4** percent (2026-01-01 → 2026-12-31) [A.2, US-AKS5-003, derived arithmetically, conf high] — Derivation recorded in register row US-AKS5-003: 2026 taxable wage base 54,200.00 USD; employee rate 0.50%; employer rate classes 01-20 = 1.00% (total 1.50%), class 21 = 5.40% employer + 0.50% employee = 5.90%; total rate = employer + employee; effective 2026-01-01 through 2026-12-31. 2027 page (2027-experience-rates.html) returned HTTP 404 on 202
 - `ak.sui.new_employer.rate` = **1.0** percent (2026-01-01 → 2026-12-31) [A.2, US-AKS5-004, derived arithmetically, conf high] — Every industry; total with employee share 1.50%.
 - `ak.sui.abcr` = **0.004615** ratio (2026-01-01 → 2026-12-31) [A.2, US-AKS5-006, derived arithmetically, conf high] — ABCR = (131,477,612 / 45,628,865,425) / (10,852,857,547 / 17,381,530,724), DOLWD UI Tax Calculation Cookbook 2026 (updated 2025-12-04). Reproduces every published 2026 rate.
-- `ak.step.rate_within_employee_ui` = **0.1** percent (2026-01-01 → open) [A.2, US-AKP7-001, quoted from authority page, conf high] — Collected inside the employee 0.50% and credited back; net cost nil. No employer STEP tax (SB 217 not enacted).
-- `ak.tvep.rate_within_employee_ui` = **0.25** percent (2026-01-01 → open) [A.2, US-AKP7-002, quoted from authority page, conf high] — Collected inside the employee 0.50%; net cost nil.
+- `ak.step.rate_within_employee_ui` = **0.1** percent (2026-01-01 → open) [A.2, US-AKB5-402, quoted from authority page, conf high] — Collected inside the employee 0.50% and credited back; net cost nil. No employer STEP tax (SB 217 not enacted).
+- `ak.tvep.rate_within_employee_ui` = **0.25** percent (2026-01-01 → open) [A.2, US-AKB5-403, quoted from authority page, conf high] — Collected inside the employee 0.50%; net cost nil.
 - `ak.sdi_pfml.exists` = **False**  (2026-01-01 → open) [A.2, US-AKP9W-001, quoted from authority page, conf high] — No SDI/TDI/PFML/LTC/transit levy. AFLA covers public employers only and is unpaid.
 
 ## 4 — Payslip statute
@@ -85,9 +85,9 @@ Deductions only by written agreement and never below minimum wage/overtime (8 AA
 - `ak.garn.exempt.liquid_assets_monthly` = **1890.0** USD (2026-01-01 → open) [A.1, US-AKS5-017, second independent authority, conf medium]
 
 ## 10 — Collective agreements / prevailing wage
-Title 36 public construction over 25,000 USD: DOLWD prevailing-wage determination (Pamphlet 600) [US-AKP51-005 — legacy id, narrative only: its id fails the facts.schema pattern, so the threshold is not emitted as a fact]. Certified payroll, Notice of Work and Notice of Completion to DOLWD LSS; online/bulk upload optional, paper allowed [US-AKS5-018]. Multiemployer CBA funds may satisfy sick leave (068(e)).
+Title 36 public construction over 25,000 USD: DOLWD prevailing-wage determination (Pamphlet 600) [US-AKB5-401 — legacy id, narrative only: its id fails the facts.schema pattern, so the threshold is not emitted as a fact]. Certified payroll, Notice of Work and Notice of Completion to DOLWD LSS; online/bulk upload optional, paper allowed [US-AKS5-018]. Multiemployer CBA funds may satisfy sick leave (068(e)).
 
-- `ak.prevailing_wage.threshold` = 25000.0 (2026-01-01 → open) [A.1, US-AKP51-005 — promoted to fact in Synthesis C] Title 36 public construction over 25,000 USD.
+- `ak.prevailing_wage.threshold` = 25000.0 (2026-01-01 → open) [A.1, US-AKB5-401 — promoted to fact in Synthesis C] Title 36 public construction over 25,000 USD.
 
 ## 11 — Indexation
 Minimum wage CPI-U Anchorage from 2028-01-01 (no indexed value yet, so no derivation possible); EAP threshold and school-bus rate follow at 2x; UI base 75% of AAW (2027 not published, HTTP 404 on 2026-11-02); garnishment exemptions CPI (AS 09.38.115).

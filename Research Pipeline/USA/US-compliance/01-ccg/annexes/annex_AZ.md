@@ -1,5 +1,6 @@
 # Annex AZ: Arizona
 
+
 This annex sets out the Arizona payroll rules for the 2026 build year. Read with Annex FED (the federal layer every employee carries) and Annex MULTI (which routes an employee to this State by work location, residence or UI localization). Every value is shown with its effective dates and its source (list at the end of the annex). Federal values are not repeated here.
 
 Classification: T3. Separate State withholding and UI; no local wage tax; local minimum wages in Tucson and Flagstaff.
@@ -29,7 +30,7 @@ State minimum wage USD [[FACT:az.minwage.hourly=15.15]] for 2026 and USD [[FACT:
 | Local minimum wage flagstaff tip credit applies | [[FACT:az.local_minwage.flagstaff.tip_credit.applies=False]] | from 2026-01-01 |  | S9 | No tip credit in Flagstaff: tipped employees get the full city minimum wage. |
 | Local minimum wage flagstaff coverage min hours per year | [[FACT:az.local_minwage.flagstaff.coverage_min_hours_per_year=25]] hours | from 2026-01-01 |  | S9 | Individuals who work or are expected to work [[FACT:az.local_minwage.flagstaff.coverage_min_hours_per_year=25]]+ hours in a calendar year within city limits (City Code Title 15, Prop 414). |
 
-⚠️ RESEARCH-GAP (non-blocking): Minimum wage statute 23 362 current: not established by the research. Source that would close it: Current 23-362 text (Prop. 202) via azleg or Westlaw public.
+Not configured in this release [[GAP:RQ-474]]: Minimum wage statute 23 362 current: not established from an official source.
 
 ## AZ.2 Income tax withholding
 
@@ -49,7 +50,7 @@ period_tax = period_federal_FIT_wages x elected_percentage      # W-2 box 1 wage
 | Withholding a4c remit days after quarter | [[FACT:az.wh.a4c.remit_days_after_quarter=15]] days | from 2026-01-01 |  | S11 | A-4C credit-contribution reduction; employee statement within 30 days after year end or [[FACT:az.wh.a4c.remit_days_after_quarter=15]] days after termination. |
 | Withholding exclusions | [[FACT:az.wh.exclusions=nonresident common-carrier employees; domestic service in private home; casual labour; seasonal hand farm labour; nonresidents present < 60 days (not athletes/entertainers); disaster-recovery workers]] | from 2026-01-01 |  | S12 | A.R.S. 43-403. |
 
-⚠️ RESEARCH-GAP (non-blocking): Withholding rounding: not established by the research. Source that would close it: A.A.C. R15-2B-101 on azsos.gov.
+Not configured in this release [[GAP:RQ-471]]: Withholding rounding: not established from an official source.
 
 ## AZ.2b Non-resident regime and reciprocity
 
@@ -62,9 +63,9 @@ Non-residents are withheld after [[FACT:az.nonres.withholding_days_threshold=60]
 | Regular salary | Elected percentage of federal FIT wages | Elected percentage on Arizona wages after the [[FACT:az.nonres.withholding_days_threshold=60]]-day threshold; WEC exemption for residents of the listed States |
 | Annual bonus / supplemental pay | Same elected percentage | Same, on the Arizona portion |
 | Severance | Same elected percentage (federal wage definition) | Same, on the Arizona portion |
-| Equity | Same elected percentage; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Arizona portion |
+| Equity | Same elected percentage; federal classification of equity income in Annex FED (FED.2b) | Same, on the Arizona portion |
 | Benefits in kind | Included where in federal FIT wages | Same, on the Arizona portion |
-| Contractor pay | Out of scope | Out of scope |
+| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
@@ -85,13 +86,13 @@ Employer-only UI ([[FACT:az.sui.employee.rate=0]] % employee) on wages up to the
 |---|---|---|---|---|---|
 | SUI wage base | USD [[FACT:az.sui.wage_base=8,000]] | from 2026-01-01 |  | S14 | Fixed (7,000 before 2023); not indexed. |
 | SUI new employer rate | [[FACT:az.sui.new_employer.rate=2]] % | 2026-01-01 to 2026-12-31 |  | S14 |  |
-| SUI employer rate min | [[FACT:az.sui.employer.rate.min=0.03]] % | 2026-01-01 to 2026-12-31 |  | S15 | 2026 adjusted rates 0.03%-8.36% (UIT-0603A, A.R.S. 23-730). |
+| SUI employer rate min | [[FACT:az.sui.employer.rate.min=0.03]] % | 2026-01-01 to 2026-12-31 |  | S15 | 2026 adjusted rates [[FACT:az.sui.employer.rate.min=0.03]]%-[[FACT:az.sui.employer.rate.max=8.36]]% (UIT-0603A, A.R.S. 23-730). |
 | SUI employer rate max | [[FACT:az.sui.employer.rate.max=8.36]] % | 2026-01-01 to 2026-12-31 |  | S14 |  |
 | SUI employee rate | [[FACT:az.sui.employee.rate=0]] % | from 2026-01-01 |  | S16 | "You cannot take these taxes out of employee pay." |
 | UI operating fund rate of UI liability | [[FACT:az.ui_operating_fund.rate_of_ui_liability=3.15]] % | from 2027-01-01 |  | S17 | Each quarter of 2027 experience-rated employers pay [[FACT:az.ui_operating_fund.rate_of_ui_liability=3.15]] % of UI liability to the UI Operating Fund (NOT 2026). |
 | SDI PFML exists | [[FACT:az.sdi_pfml.exists=False]] | from 2026-01-01 |  | S18 | No SDI/PFML or other levy. |
 
-⚠️ RESEARCH-GAP (non-blocking): UI separation notice and domestic threshold: not established by the research. Source that would close it: A.R.S. 23-613.01 / 23-615 text on azleg.gov or the DES employer handbook section on separation notices.
+Not configured in this release [[GAP:RQ-477]]: UI separation notice and domestic threshold: not established from an official source.
 
 ## AZ.4 Pay statement
 
@@ -113,7 +114,7 @@ Employer-only UI ([[FACT:az.sui.employee.rate=0]] % employee) on wages up to the
 | Report SUI late penalty | [[FACT:az.report.sui.late_penalty=late report: 0.1% of total quarterly wages, minimum 35 USD, maximum 200 USD; interest 1% per month or part month on unpaid tax]] | from 2026-01-01 |  | S25 |  |
 | Report SUI uiof line | [[FACT:az.report.sui.uiof_line=From CY2027 experience-rated employers pay 3.15% of UI liability into the UI Operating Fund; UI liability reduced by the same amount; a new UIOF line on UIT-0018F Section B, TWS and bulk files; only the UI contribution is reportable for FUTA credit on Form 940]] | from 2027-01-01 |  | S26 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Report W-2 Pub. 701 edition: not established by the research. Source that would close it: the ADOR Pub 701 2026 edition
+Not configured in this release [[GAP:RQ-472]]: Report W-2 Pub. 701 edition: not established from an official source.
 
 ## AZ.6 Leave
 
@@ -138,7 +139,7 @@ Employer-only UI ([[FACT:az.sui.employee.rate=0]] % employee) on wages up to the
 |---|---|---|---|---|---|
 | Irc conformity date | [[FACT:az.irc_conformity_date=2026-01-01]] | from 2026-01-01 |  | S29 | 43-105(A); withholding base = federal wages, so federal exclusions flow through. |
 
-⚠️ RESEARCH-GAP (non-blocking): PIT departures from federal: not established by the research. Source that would close it: ADOR Form 140 instructions 2026.
+Not configured in this release [[GAP:RQ-475]]: PIT departures from federal: not established from an official source.
 
 ## AZ.9 Deductions and garnishments
 
@@ -151,25 +152,35 @@ Employer-only UI ([[FACT:az.sui.employee.rate=0]] % employee) on wages up to the
 | Garnishment child support employer fee per payment | USD [[FACT:az.garn.child_support.employer_fee_per_payment=1]] | from 2026-01-01 |  | S32 |  |
 | Garnishment child support employer fee monthly max | USD [[FACT:az.garn.child_support.employer_fee_monthly_max=4]] | from 2026-01-01 |  | S32 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Garnishment creditor statute conflict: not established by the research. Source that would close it: Effective date of the Prop. 209 10% amendment and A.R.S. 25-510 text on azleg.
+Not configured in this release [[GAP:RQ-473]]: Garnishment creditor statute conflict: not established from an official source.
 
 ## AZ.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
 | Prevailing wage state mandate exists | [[FACT:az.prevailing_wage.state_mandate.exists=False]] | from 2026-01-01 |  | S33 | 34-321(B) bars agencies from requiring prevailing wage. |
 
+## AZ.11 Indexation
+
+No rule for this jurisdiction is written under this heading.
+
 ## AZ.12 Payroll data protection and records
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| Records payroll retention years | [[FACT:az.records.payroll.retention_years=4]] years | from 2026-01-01 |  | S2 | 23-364(D): hours each day, wages, sick time paid; employee may inspect and copy. |
+| Records payroll retention years | [[FACT:az.records.payroll.retention_years=4]] years | from 2007-01-01 |  | S2 | 23-364(D): hours each day, wages, sick time paid; employee may inspect and copy. |
 
 ## AZ.13 Live legal change
 
 From 2027: State minimum wage USD [[FACT:az.minwage.hourly=15.65]], Tucson USD [[FACT:az.local_minwage.tucson.hourly=16]], Flagstaff USD [[FACT:az.local_minwage.flagstaff.hourly=18.95]]; UI Operating Fund [[FACT:az.ui_operating_fund.rate_of_ui_liability=3.15]] % of UI liability. Arizona conforms to the Internal Revenue Code as of [[FACT:az.irc_conformity_date=2026-01-01]]. The 2026 agency bulletins are not swept (gap below).
 
-⚠️ RESEARCH-GAP (non-blocking): Live bulletin sweep: not established by the research. Source that would close it: the ADOR news archive and DES employer bulletins for 2026
+Not configured in this release [[GAP:RQ-476]]: Live bulletin sweep: not established from an official source.
+
+## AZ.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
 
 ## AZ.15 Special populations
 
@@ -184,7 +195,7 @@ From 2027: State minimum wage USD [[FACT:az.minwage.hourly=15.65]], Tucson USD [
 - Native Americans working on their own reservation and military spouses: WEC exemption.
 - Non-resident common-carrier, motion-picture and disaster-recovery workers: excluded.
 
-⚠️ RESEARCH-GAP (non-blocking): the coverage thresholds that apply to these populations (quarterly cash-wage and headcount thresholds for UI coverage of domestic, agricultural and non-profit employment) are cited by statute only and carry no facts key; the engine must not hard-code them until they are keyed.
+Not configured in this release [[GAP:RQ-513]]: The coverage thresholds that apply to these populations (quarterly cash-wage and headcount thresholds for UI coverage of domestic, agricultural and non-profit employment) are cited by statute only and are not established as values; the engine must not hard-code them until they are established.
 
 ## AZ.16 Language
 
@@ -204,7 +215,7 @@ The sick-time notice must be in English and Spanish (23-375(B)); minimum-wage an
 | S8 | ICA poster 'The Fair Wages and Healthy Families Act' 2027 (English) | Poster header | Industrial Commission of Arizona |
 | S9 | City of Flagstaff - Minimum Wage page (Office of Labor Standards) | 2026 Minimum Wage; 2027 Minimum Wage; Background | City of Flagstaff |
 | S10 | ADOR Withholding Tax page (live copy 2026-11-02) | page | Arizona Department of Revenue |
-| S11 | A.R.S. 43-401 Withholding tax; rates; election by employee (local copy) | 43-401(A),(B),(E)-(H) | Arizona State Legislature (azleg.gov, A.R.S.) |
+| S11 | A.R.S. 43-401 Withholding tax; rates; election by employee | 43-401(A),(B),(E)-(H) | Arizona State Legislature (azleg.gov, A.R.S.) |
 | S12 | A.R.S. 43-403 Employment excluded from withholding | 43-403(A)-(D) | Arizona State Legislature (azleg.gov, A.R.S.) |
 | S13 | ADOR Pub 10 Summary of Arizona Taxes (Feb 2022) | whole publication (2 pp.) | Arizona Dept of Revenue |
 | S14 | Arizona DES UIT-0603A Unemployment Insurance Tax Rate Chart 2026 | ARS 23-730 adjusted rates | Arizona Department of Economic Security |

@@ -55,11 +55,22 @@ for k in ["ca.wages.401k_deferrals", "pa.bik.pa.401k_403b_457.taxable", "ca.hsa.
              "ak.sui.wages.excludes_401k_deferrals": "deferrals are excluded from Alaska unemployment wages, unlike FUTA"}.get(k)
     A(f"| {k.split('.')[0].upper()} | {Q(k) if label is None else label} | {K(k)} |")
 A("")
-A(GAP("fed.retirement.pretax.tax_treatment",
-      "the federal treatment of elective deferrals, cafeteria-plan (IRC sec.125) salary reductions and HSA salary reductions for each federal base (income-tax wages, FICA wages, FUTA wages) is not stated in the facts",
-      "Under 26 U.S.C. 3121(a)(5), 3121(v), 3306(b)(5), 3306(r), 3401(a)(12) and 125, which federal bases (income-tax withholding wages, FICA wages, FUTA wages) are reduced by (a) 401(k)/403(b)/457(b) elective deferrals, (b) Section 125 cafeteria-plan salary reductions for health premiums, health FSA and dependent care, (c) HSA salary reductions?",
-      "CCG m03 Step 2 cannot state which federal base each pre-tax deduction reduces; WTC Subject-to-X flags for deductions cannot be sourced",
-      "income_tax", tier="A.1", shape="matrix deduction x base: excluded / included, with the section"))
+# round 3b (QA r3 blocker 1, RQ-559 closed by agent 2 R3): federal base reduced by each pre-tax deduction
+A("Federal base reduced by each pre-tax deduction (Pub. 15 (2026) section 15 and Pub. 15-B (2026) Table 2-1):")
+A("")
+A("| Deduction | Federal income-tax wages | FICA wages | FUTA wages | Source |")
+A("|---|---|---|---|---|")
+for _k, _lab in [("401k_deferral", "401(k) elective deferral"), ("403b_salary_reduction", "403(b) salary reduction"),
+                 ("457b_salary_reduction", "457(b) salary reduction"), ("simple_salary_reduction", "SIMPLE salary reduction"),
+                 ("section125_health", "Section 125 cafeteria plan: accident and health premiums"),
+                 ("dependent_care", "Dependent-care assistance (Section 125 or employer program)"),
+                 ("hsa_contribution", "HSA contribution (employer or Section 125 salary reduction)")]:
+    A(f"| {_lab} | {T('fed.base.' + _k + '.fit')} | {T('fed.base.' + _k + '.fica')} | {T('fed.base.' + _k + '.futa')} | {R('fed.base.' + _k + '.fit')} |")
+A("")
+A(f"Rule: {T('fed.retirement.pretax.tax_treatment')} {R('fed.retirement.pretax.tax_treatment')}")
+A("")
+A(f"Cafeteria-plan election: {T('fed.base.section125.rule')} {R('fed.base.section125.rule')}")
+A("")
 
 A(H(4, "Step 3: Determination of Taxable Income"))
 A("Build one taxable base per tax, from the same gross:")
@@ -99,7 +110,7 @@ A("")
 A("| State | Dependency | Fact |")
 A("|---|---|---|")
 A(f"| AL | {Q('al.wh.fit_before_sit')} | {R('al.wh.fit_before_sit')} |")
-A(f"| OR | Federal tax withheld is subtracted from the Oregon base, capped at USD {T('or.wh.federal_subtraction_cap')} (phase-out by income); the Department's 2026 publication also prints a lower figure in places: use the cap above (formula pages) | {R('or.wh.federal_subtraction_cap')}; {K('practice.or.federal_cap')} |")
+A(f"| OR | Federal tax withheld is subtracted from the Oregon base, capped at USD {T('or.pit.federal_tax_subtraction.cap')} (phase-out by income); the Department's 2026 publication also prints a lower figure in places: use the cap above (formula pages) | {R('or.pit.federal_tax_subtraction.cap')}; {K('practice.or.federal_cap')} |")
 A("")
 A("Resident and nonresident State routing (reciprocity, day thresholds, convenience rules, difference withholding) is "
   "applied before the State computation: Module 6 §6.2.")

@@ -12,8 +12,8 @@ DD = f"US-DD-001 v{PKG}"
 A("# Module 2: Master Data Configuration")
 A("*Purpose: To define the mandatory employer and employee information for processing and reporting.*")
 A("")
-A(f"Field-level definitions (data types, formats, option lists, validations) are owned by the Data Dictionary {DD} "
-  "(`05-data-dictionary/`). This module states which master data the law makes necessary and why; it does not "
+A(f"Field-level definitions (data types, formats, option lists, validations) are owned by the Data Dictionary {DD}"
+  ". This module states which master data the law makes necessary and why; it does not "
   "reproduce the field tables.")
 
 # ---------------------------------------------------------------- 2.1
@@ -35,14 +35,24 @@ A(f"| State paid-leave / disability agencies where a programme exists | Contribu
 A(f"| Local tax collectors | Local income or payroll taxes with their own return | {COV('local_regimes')} |")
 A("")
 A(UNR("multi.newhire.registration_channel", "the channel through which a multistate employer registers its designated new-hire State with HHS is not established in the facts"))
+def _ein():
+    """fed.ein.format (Pub. 15 (2026) sec. 1, register US-FEDS5-029). QA r3c: agent 2 aligned the two facts
+    files on one wording and one register row; render that single fact. A divergence now fails the build
+    (no fallback to a stale entry)."""
+    vals = {(str(x["value"]), x["register_id"]) for x in FACTS["fed.ein.format"]}
+    if len(vals) != 1:
+        raise SystemExit(f"fed.ein.format is not aligned across facts files: {sorted(vals)}")
+    return f"{T('fed.ein.format')} [{next(iter(vals))[1]}]"
+
+
 A(H(3, "What is the configuration/format of registration numbers allotted by each authority?"))
 A("The facts name the federal employer identification number (FEIN) as a required new-hire data element "
   f"({K('fed.newhire.fields')}) and state that the employer identification number is never truncated on wage statements "
-  f"{R('fed.ssn.truncation.format')}. Its digit structure, and the structure of State withholding and unemployment "
-  "account numbers, are not in the facts.")
+  f"{R('fed.ssn.truncation.format')}. FEIN format: {_ein()}. The structure of the State withholding and unemployment "
+  "account numbers is not established from an official source (limitation below).")
 A("")
 A(GAP("fed.registration.number_formats",
-      "the format (length, separators, check rules) of the FEIN and of each State withholding and unemployment account number is not in the facts",
+      "the format (length, separators, check rules) of each State withholding and unemployment account number is not in the facts",
       "What is the official format of the federal Employer Identification Number (length, hyphen position) per IRS, and the format of each State's withholding account number and unemployment account number per the issuing agency's specification?",
       "CCG m02 §2.1 registration-number formats empty; DD validation rules for employer identifiers cannot be sourced",
       "statutory_reporting", tier="A.2", shape="per authority: pattern, length, example format, source page"))
@@ -89,7 +99,7 @@ for k in ["ca.cert.default_no_certificate", "ct.cert.default_no_certificate", "n
           "ky.wh.certificate", "id.wh.certificate"]:
     A(f"| {k.split('.')[0].upper()} | {Q(k)} | {R(k)} |")
 A("")
-A("Idaho's certificate fact is the edition dated " + D("id.wh.certificate") + "; the 2026 edition is an open item of annex ID.")
+A("Idaho's certificate fact is the edition dated " + D("id.wh.certificate") + "; the 2026 edition is addressed in Annex ID (ID.2).")
 A("")
 A(f"**Joiners** ({COV('mid_month_joiner_and_leaver')}): the employee files Form W-4 and the State certificate at hire, "
   f"and the employer reports the hire to the State Directory of New Hires within {T('fed.newhire.deadline_days')} days "
@@ -166,9 +176,8 @@ A("|---|---|")
 A(f"| SSN may be truncated to the last four digits on employee W-2 copies only, never on Copy A; the EIN is never truncated | {R('fed.ssn.truncation.format')} |")
 A(f"| Maryland: {Q('md.payslip.ssn.prohibited') if not isinstance(FACTS['md.payslip.ssn.prohibited'][0]['value'], bool) else 'the SSN may not be printed on the wage check, any attachment, direct-deposit notice or card-credit notice'} | {K('md.payslip.ssn.prohibited')} |")
 A("")
-A("State rules on the SSN on pay statements remain open in several States (for example "
-  "`ar.data_protection.ssn_paystub`, `ga.data_protection.ssn_paystub`, `ia.data_protection.ssn_paystub`, "
-  "`il.data_protection.ssn_paystub`, `ky.data_protection.ssn_paystub`; annex open items).")
+A("State rules on the SSN on pay statements are not established for several States (for example Arkansas, Georgia, "
+  "Iowa, Illinois and Kentucky); each is stated in section 12 of the State annex.")
 A("")
 A(GAP("fed.payroll_data_protection.framework",
       "no fact states whether a general federal or State data-protection statute (beyond SSN display rules) governs the storage and handling of employee payroll data",

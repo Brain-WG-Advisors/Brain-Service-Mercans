@@ -17,9 +17,9 @@ Pay weekly or biweekly within 6 days of period end (7 if 7-day week); casual wit
 
 ## 2 — Income tax (state withholding)
 - `ma.wh.supplemental.rule` = 5% while annualized regular + supplemental to date + this payment <= 1,107,750; above, lesser of 9% of payment or 9% of excess plus 5% of remainder; percentage method excludes supplemental (2026-01-01 → open) [A.2, US-MAP51-003 — promoted to fact in Synthesis C] Circular M 2026.
-- `ma.pit.rate` = **5.0** percent (2026-01-01 → open) [A.2, US-MAR3-002, quoted from authority page, conf high] — Plus 4% surtax above 1,107,750 (2026); withholding at combined 9% above threshold. IP 25-18 (4.67% 2027) excluded from ballot per tier-B (SJC-13885) - do not model.
-- `ma.pit.surtax.rate` = **4.0** percent (2026-01-01 → open) [A.2, US-MAR3-002, quoted from authority page, conf high]
-- `ma.pit.surtax.threshold` = **1107750** USD (2026-01-01 → 2026-12-31) [A.2, US-MAR3-002, quoted from authority page, conf high] — Indexed (CPI mechanism not re-read); published in Circular M.
+- `ma.pit.rate` = **5.0** percent (2026-01-01 → open) [A.2, US-MAB5-402, quoted from authority page, conf high] — Plus 4% surtax above 1,107,750 (2026); withholding at combined 9% above threshold. IP 25-18 (4.67% 2027) excluded from ballot per tier-B (SJC-13885) - do not model.
+- `ma.pit.surtax.rate` = **4.0** percent (2026-01-01 → open) [A.2, US-MAB5-402, quoted from authority page, conf high]
+- `ma.pit.surtax.threshold` = **1107750** USD (2026-01-01 → 2026-12-31) [A.2, US-MAB5-402, quoted from authority page, conf high] — Indexed (CPI mechanism not re-read); published in Circular M.
 - `ma.wh.method` = **Circular M wage-bracket tables or percentage method: wages - FICA/Medicare/retirement (max 2,000/yr) - exemption amount for period; x 5%; - HoH / blind reduction**  (2026-01-01 → open) [A.2, US-MAS5-013, quoted from authority page, conf high] — Methods not numerically identical (table vs percentage differ up to 0.02 weekly); engine must use one method consistently [US-MAS5-024].
 - `ma.wh.exemption.weekly` = **19n + 66**  (2026-01-01 → open) [A.2, US-MAS5-013, quoted from authority page, conf high] — Daily 3n+9; biweekly 38n+131; semimonthly 42n+141; monthly 83n+284; annual 1,000n+3,400 (n = exemptions).
 - `ma.wh.exemption.annual` = **1,000n + 3,400**  (2026-01-01 → open) [A.2, US-MAS5-013, quoted from authority page, conf high]
@@ -28,14 +28,14 @@ Pay weekly or biweekly within 6 days of period end (7 if 7-day week); casual wit
 - `ma.wh.blind_reduction.weekly` = **2.12** USD (2026-01-01 → open) [A.2, US-MAS5-013, quoted from authority page, conf high] — Per person; biweekly 4.23, semimonthly 4.58, monthly 9.17, daily 0.30.
 - `ma.wh.certificate` = **M-4: line 1 personal (1, or 2 if 65+), line 2 spouse (4, or 5 if 65+), line 3 dependents, line 5 additional; boxes A HoH, B blind, C spouse blind, D full-time student <= 8,000 (no withholding); none filed = zero exemptions; new M-4 within 10 days on decrease; exemptions only with principal employer**  (2026-01-01 → open) [A.2, US-MAS5-014, direct artifact inspection, conf high] — Edition date not printed in extracted text.
 - `ma.wh.student_box_d.income_max` = **8000** USD (2026-01-01 → open) [A.2, US-MAS5-014, direct artifact inspection, conf high]
-- `ma.wh.supplemental.rate` = **5** percent (2026-01-01 → open) [A.2, US-MAR3-002, quoted from authority page, conf medium] — Circular M [US-MAP51-003 legacy]: 5% while cumulative <= 1,107,750; above, lesser of 9% of payment or 9% of excess + 5% of remainder.
+- `ma.wh.supplemental.rate` = **5** percent (2026-01-01 → open) [A.2, US-MAP51-003 (Circular M 2026 p.13 section G: "If the result of step 4 is $1,107,750 or less, withhold 5%"), quoted from authority page, conf medium] — Circular M [US-MAP51-003 legacy]: 5% while cumulative <= 1,107,750; above, lesser of 9% of payment or 9% of excess + 5% of remainder.
 - `ma.wh.rounding` = **wages may be computed to nearest dollar (830 CMR 62B.2.1(8))**  (2026-06-05 → open) [A.1, US-MAS5-023, direct artifact inspection, conf high]
 
 ## 2b — Non-resident regime and reciprocity
 - `ma.nonres.rules` = **residents on all wages; nonresidents on MA-performed services; nonresident not working in MA not withheld even if paid from MA office; courtesy withholding for residents by out-of-state employers; no reciprocity - credit method: MA amount minus other jurisdiction amount (830 CMR 62B.2.1(9)(b))**  (2026-01-01 → open) [A.2, US-MAS5-013, quoted from authority page, conf high] — No MA withholding where no federal duty (household); MSRRA M-4-MS: do not withhold [US-MAS5-024].
 
 ## 2c — Local wage taxes
-- `ma.local_wage_tax.exists` = **False**  (2026-01-01 → open) [A.2, US-MAR3-002, quoted from authority page, conf high] — No local wage/payroll/income tax [US-MAR3-001, US-MAR3-003].
+- `ma.local_wage_tax.exists` = **False**  (2026-01-01 → open) [A.2, US-MAB5-402, quoted from authority page, conf high] — No local wage/payroll/income tax [US-MAR3-001, US-MAR3-003].
 
 ## 3 — Social insurance (SUI / SDI / PFML / levies)
 No SDI/TDI; PFML the only employee-funded program [US-MAP9W-004]. PFML benefits paid by DFML (optional 5%/10% withholding), not payroll.
@@ -51,7 +51,7 @@ No SDI/TDI; PFML the only employee-funded program [US-MAP9W-004]. PFML benefits 
 - `ma.emac.rate.year4` = **0.12** percent (2026-01-01 → open) [A.2, US-MAS5-021, quoted from authority page, conf high] — EMAC on 15,000 base: years 1-3 exempt; year 4 0.12%; year 5 0.24%; year 6+ 0.34%; fewer than 6 employees in a quarter exempt.
 - `ma.emac.rate.year5` = **0.24** percent (2026-01-01 → open) [A.2, US-MAS5-021, quoted from authority page, conf high]
 - `ma.emac.rate.year6_plus` = **0.34** percent (2026-01-01 → open) [A.2, US-MAS5-021, quoted from authority page, conf high]
-- `ma.wtf.rate` = **0.056** percent (2026-01-01 → open) [A.2, US-MAP7-001, quoted from authority page, conf medium] — c.151A s.14L; 2026 DUA value not confirmed (commissioner may adjust).
+- `ma.wtf.rate` = **0.056** percent (2026-01-01 → open) [A.2, US-MAB5-401, quoted from authority page, conf medium] — c.151A s.14L; 2026 DUA value not confirmed (commissioner may adjust).
 - `ma.pfml.rate.total.25_plus` = **0.88** percent (2026-01-01 → open) [A.2, US-MAS5-012, quoted from authority page, conf high] — Unchanged total in 2027. Cap: SS wage base (c.175M s.6(f)) [US-MAS5-010].
 - `ma.pfml.rate.total.under_25` = **0.46** percent (2026-01-01 → open) [A.2, US-MAS5-012, quoted from authority page, conf high] — No employer share.
 - `ma.pfml.family.rate` = **0.18** percent (2026-01-01 → 2026-12-31) [A.2, US-MAS5-012, quoted from authority page, conf high] — Up to 100% from employee.
@@ -133,13 +133,22 @@ Facts added:
 - `ma.sui.rate_schedule.table` = **45 account-reserve rows x 7 schedules (positive reserve 17.0+ : A 0.56 / B 0.64 / C 0.73 / D 0.83 / E 0.94 / F 1.07 / G 1.21 ... negative reserve 23+ : 8.62 / 9.79 / 11.13 / 12.65 / 14.37 / 16.33 / 18.55); full transcription in the local file of US-MAB5-001** (2015-01-01 → open) [A.2, US-MAB5-001, direct artifact inspection, conf high]
 - `ma.sui.rate_schedule.in_force` = **E** (2026-01-01 → 2026-12-31) [A.2, US-MAB5-001, derived arithmetically, conf high] — G-DERIVE: the 2026 published minimum 0.94% and maximum 14.37% (ma.sui.employer.rate.min/max, US-MAS5-020) coincide only with column E of the schedule table (min row: A 0.56, B 0.64, C 0.73, D 0.83, E 0.94, F 1.07, G 1.21; max row: 8.62, 9.79, 11.13, 12.65, 14.37, 16.33, 18.55).
 
+## QA r1b additions (2026-11-02)
+
+Source: browser pass P3 (`_research/stage5/browser-pass-P3.md`, shard `S5B-P3.csv` merged into the register). Facts file is authoritative; every line below is a fact object with the same key.
+
+**5 - Statutory reporting: W-2 due date (narrows RQ-255; now non-blocking).** 830 CMR 62B.2.1(d) [A.1, US-MAB5-301]: employee statement by January 31 (or 30 days after the last payment), no DOR filing deadline in the regulation. DOR Directive 07-2 (2007) [A.3, US-MAB5-302] is the origin of "Feb 28 paper / Mar 31 electronic", which the Aug 2026 Withholding Tax Guide still echoes; the DOR W-2 page updated 2026-01-30 says January 31 [US-MAS5-015]. Filing by January 31 satisfies every candidate deadline, so `ma.report.w2` (January 31) stands and the conflict no longer blocks the build.
+
+- `ma.report.w2.employee_statement.due` = **Furnish the wage statement to each employee on or before January 31 of the following year, or within 30 days of the last payment if employment ends earlier.** (2026-01-01 -> open) [A.1, US-MAB5-301, quoted from authority page, conf high] LEVEL: employer reporting. 830 CMR 62B.2.1(d) (mass.gov, verbatim Chrome excerpt). The regulation sets no deadline for filing W-2 copies with DOR.
+
 ## Open questions
-Mirrors `unresolved[]` in the facts file (same keys).
+
+Mirrors `unresolved[]` in the facts file (same keys, same wording). Regenerated by QA r1b on 2026-11-02.
 
 - `ma.payment.method_and_estub_consent` (non-blocking) — Direct deposit, paycard and electronic pay-stub consent rules not located. **Would close it:** AG Fair Labor Division wage-payment advisory or 454 CMR 27.00.
 - `ma.wh.certificate.edition` (non-blocking) — M-4 revision date not printed in extracted text. **Would close it:** Form footer or DOR withholding forms list.
 - `ma.report.w2.handbook_edition` (non-blocking) — W-2 e-file handbook served is Rev. 20191219 though reissued yearly. **Would close it:** TY2026 edition from DOR bulk-file support.
-- `ma.report.w2.due_date_conflict` (blocking) — Jan 31 (W-2 page 2026-01-30, handbook) vs last day of March / Feb 28 (Withholding Tax Guide Aug 2026). **Would close it:** DOR Directive/TIR fixing the W-2/M-3 due date (Directives 97-1, 07-2, 09-8).
+- `ma.report.w2.due_date_conflict` (non-blocking) — The Feb 28 (paper) / Mar 31 (electronic) dates come from DOR Directive 07-2 (2007, US-MAB5-302), which the Aug 2026 Withholding Tax Guide still echoes. The newer DOR W-2 page (updated 2026-01-30, US-MAS5-015) says January 31, and 830 CMR 62B.2.1(d) fixes January 31 for the employee statement (US-MAB5-301). No TIR or Directive formally replacing 07-2 was found. Filing by January 31 meets every candidate deadline, so the build can configure January 31 without risk. **Would close it:** A DOR TIR/Directive superseding Directive 07-2, or a DOR confirmation that January 31 applies to W-2 filing with DOR.
 - `ma.report.quarterly_wage_report.single` (non-blocking) — Whether the DUA wage detail report is the only quarterly wage report (DOR guide mentions DOR reports). **Would close it:** DOR "File quarterly wage reports" page.
 - `ma.sui.wtf.current` (non-blocking) — 2026 Workforce Training Fund rate as published by DUA not read. **Would close it:** DUA WTF page or 430 CMR 14.00.
 - `ma.report.pfml.quarterly` (non-blocking) — PFML quarterly return mechanics not read. **Would close it:** DFML page "Wage contributions & reporting for PFML".

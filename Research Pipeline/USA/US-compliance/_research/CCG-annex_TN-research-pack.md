@@ -40,8 +40,8 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `tn.sui.employer.rate.min` | 0.01 % | 2026-01-01 | 2026-12-31 | US-TNS5-003 | high |
 | `tn.sui.employer.rate.max` | 10.0 % | 2026-01-01 | 2026-12-31 | US-TNS5-003 | high |
 | `tn.sui.new_employer.rate` | 2.7 % | 2026-01-01 |  | US-TNS5-004 | high |
-| `tn.sui.employee.rate` | 0 % | 2026-01-01 |  | US-TNR3-003 | high |
-| `tn.sdi_pfml.exists` | False | 2026-01-01 |  | US-TNR3-003 | high |
+| `tn.sui.employee.rate` | 0 % | 2026-01-01 |  | US-TNB5-401 | medium (absence fact: no positive statement; see F44 note) |
+| `tn.sdi_pfml.exists` | False | 2026-01-01 |  | US-TNB5-401 | high |
 | `tn.payslip.statute.exists` | False | 2026-01-01 |  | US-TNS5-001 | medium |
 | `tn.report.ui.quarterly_due` | Apr 30; Jul 31; Oct 31; Jan 31 | 2025-05-27 |  | US-TNS5-005 | high |
 | `tn.newhire.report_days` | 20 days | 2026-01-01 |  | US-TNS5-008 | high |
@@ -64,7 +64,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Minimum wage:** Tennessee has no state minimum wage law. FLSA-covered employers pay the federal USD 7.25/hour (DOL WHD state table, updated 2026-07-01). [US-TNS5-011, A.2, high]
   - No 2027 state rate exists.
   - Local minimum wages are preempted (T.C.A. 7-51-1802). This comes from tier-B/CTAS leads only, so no number is registered. [lead, medium]
-- **Overtime:** no state overtime rule beyond the FLSA. The DLWD wage-regulations index lists no overtime topic. [US-TNS5-001, US-TNR3-001, medium-high]
+- **Overtime:** no state overtime rule beyond the FLSA. The DLWD wage-regulations index lists no overtime topic. [US-TNS5-001, medium-high]
 - **Pay frequency and pay-day timing** (T.C.A. 50-2-103(a)): [US-TNS5-001, A.2, high]
   - Private employers with 5 or more employees must keep regular paydays and pay at least once a month.
   - Monthly payers: wages earned before the 1st are due by the 5th of the next month.
@@ -84,7 +84,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Rate table:** Premium Rate Table 6 applies from 2026-01-01 and 2026-07-01 (in force continuously since 2015-07-01). The Trust Fund balance on June 30 and December 31 decides the table for the next six months (T.C.A. 50-7-403). [US-TNS5-002]
 - **Rate range:** Table 6 runs from 0.01% (reserve ratio 20.0 and over) to 10.00% (most negative reserve ratios). Rates for negative reserve ratios run 5.00–10.00% and are shared across all tables. The PDF layout is column-shifted, so read each cell before mapping a reserve-ratio row. [US-TNS5-003, A.2, high on range, medium on row mapping]
 - **New-employer rate:** 2.7% for all other industries. Manufacturing NAICS sectors 31, 32 and 33 get a sector-based rate from the sector's combined reserve experience. A new employer becomes experience-rated after 36 consecutive months ending December 31, starting the next July 1. [US-TNS5-004, A.3, high]
-- **Employee contribution:** none. [US-TNR3-003]
+- **Employee contribution:** none. [US-TNB5-401]
 - **Liability thresholds:** [US-TNS5-013, A.2, high]
   - FUTA-liable employer with 1 or more TN employee;
   - USD 1,500 in a quarter, or 1 employee in 20 weeks;
@@ -93,10 +93,10 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - agricultural: 10 or more employees in 20 weeks, or USD 20,000 in a quarter;
   - every government unit.
 - **PEO rules:** separate quarterly reports per client (UIT-P account), at the PEO aggregate rate. [US-TNS5-013]
-- **No other payroll levy:** no SDI/TDI, PFML, LTC, transit or workforce levy. [US-TNR3-003, US-TNP52-001]
+- **No other payroll levy:** no SDI/TDI, PFML, LTC, transit or workforce levy. [US-TNB5-401, US-TNP52-001]
 
 ## 4 — payslip_statute
-- No Tennessee statute requires an itemised pay statement. The DLWD Wage Regulations Act index and poster show none. Federal recordkeeping (FLSA) applies. [US-TNR3-001, US-TNP51-003, US-TNS5-001, medium-high; T.C.A. text not read]
+- No Tennessee statute requires an itemised pay statement. The DLWD Wage Regulations Act index and poster show none. Federal recordkeeping (FLSA) applies. [US-TNP51-003, US-TNS5-001, medium-high; T.C.A. text not read]
 - Retention: no state rule located beyond UI records. → Q4.
 
 ## 5 — reporting_instruments

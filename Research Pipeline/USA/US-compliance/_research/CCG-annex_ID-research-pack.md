@@ -28,15 +28,15 @@ Exclusions (44-1504) [US-IDS5-003]: EAP/outside sales; domestic; nonprofit camp 
 - `id.wh.certificate` = **federal W-4 required; Form ID W-4 (EFO00307) strongly encouraged: A Single/HoH, B Married, C Married at single rate; allowances = children 16 or under (+2 HoH)**  (2025-04-28 → open) [A.2, US-IDS5-013, direct artifact inspection, conf medium] — [partial row] Partial row: 2025 edition; 2026 edition not captured (ID-OQ-1).
 
 ## 2b — Non-resident regime and reciprocity
-No reciprocity [US-IDP52-002 legacy]; no local wage tax [US-IDP52-003 legacy]. Interstate carrier staff withheld for state of residence; enrolled tribal members on reservation not withheld.
+No reciprocity [US-IDB5-401 legacy]; no local wage tax [US-IDP52-003 legacy]. Interstate carrier staff withheld for state of residence; enrolled tribal members on reservation not withheld.
 
 - `id.nonres.withholding_threshold` = **1000** USD (2026-01-01 → open) [A.2, US-IDS5-020, direct artifact inspection, conf high] — Withhold once nonresident earns > 1,000 in Idaho in the calendar year; all Idaho wages on W-2; residents working elsewhere: Idaho withholding optional; out-of-state employers withhold for employees physically in Idaho.
 
 ## 3 — Social insurance (SUI / SDI / PFML / levies)
 - `id.sui.new_employer.rate` = 1.0 (2026-01-01 → 2026-12-31) [A.2, US-IDP52-004 — promoted to fact in Synthesis C] 0.970% UI + 0.000% admin + 0.030% workforce development; standard rate >= 6 quarters [US-IDS5-021].
 - `id.sui.employer.rate.range` = positive classes 0.208%-0.694%; deficit classes 1.250%-5.400% (2026-01-01 → 2026-12-31) [A.2, US-IDP52-004 — promoted to fact in Synthesis C]
-- `id.sui.wage_base` = **58300** USD (2026-01-01 → 2026-12-31) [A.2, US-IDP7-001, quoted from authority page, conf medium] — 72-1350: AAW of penultimate year rounded to 100 or FUTA if higher [US-IDS5-014]; not re-derived (2024 AAW not obtained); figure rests on the 2026 rate array (legacy US-IDP52-004).
-- `id.sui.workforce_development.rate` = **0.03** percent (2026-01-01 → 2026-12-31) [A.2, US-IDP7-001, quoted from authority page, conf high] — Inside the UI rate; no other levy.
+- `id.sui.wage_base` = **58300** USD (2026-01-01 → 2026-12-31) [A.2, US-IDB5-402, quoted from authority page, conf medium] — 72-1350: AAW of penultimate year rounded to 100 or FUTA if higher [US-IDS5-014]; not re-derived (2024 AAW not obtained); figure rests on the 2026 rate array (legacy US-IDP52-004).
+- `id.sui.workforce_development.rate` = **0.03** percent (2026-01-01 → 2026-12-31) [A.2, US-IDB5-402, quoted from authority page, conf high] — Inside the UI rate; no other levy.
 - `id.sui.coverage` = **general 1,500/quarter or 20 weeks; agricultural 20,000 cash/quarter or 10 workers on 20 days (H-2A counted, not taxed); domestic 1,000 cash/quarter; government and nonprofits covered; LLC-as-corporation members = officers; officer opt-out before March 31**  (2026-01-01 → open) [A.1, US-IDS5-022, direct artifact inspection, conf high]
 - `id.pfml.exists` = **False**  (2026-01-01 → open) [A.1, US-IDS5-018, direct artifact inspection, conf high] — 2022 H0447 died in committee [US-KYR3-003].
 

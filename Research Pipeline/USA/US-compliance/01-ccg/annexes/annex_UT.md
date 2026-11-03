@@ -1,12 +1,13 @@
-# Annex UT - Utah
+# Annex UT: Utah
+
 
 Jurisdiction annex of the United States Country Configuration Guide (US-CCG-001). Layer classification: **T3 - state withholding; local layer absent or piggybacked on the state return** (build manifest, tier rationale).
 
-The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC are out of scope (MANDATE, US-OWN-001). Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
+The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
 
-Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.json` and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. `RESEARCH-GAP` marks a point the research has not closed; it is not filled with an estimate.
+Every value in this annex is bound to a verified fact and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. A point marked as a research gap has not been closed by the research; it is not filled with an estimate.
 
-## 1. Labour code and pay rules
+## UT.1 Employment and labour code
 
 - **Minimum wage [US-UTS5-011, US-UTS5-010]:** [[FACT:ut.minwage.hourly=7.25]] USD per hour, unchanged since 2009-07-24; Utah Code 34-40-103(2)(b) bars the Labor Commission from setting a rate above the federal minimum. No 2027 change. No local rate can exceed it.
 - **Minors:** at least [[FACT:ut.labour.minwage.minor_first_90_days.hourly=4.25]] USD per hour for an initial period with an employer, then the full minimum (R610-1-3(B)) [US-UTS5-011].
@@ -28,10 +29,10 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `ut.labour.direct_deposit` (non-blocking; research request filed under this key) - Direct-deposit consent rule (34-28-2/-3 current) not read. Closes with: le.utah.gov current version.
-- ⚠️ RESEARCH-GAP: `ut.labour.minwage.exemptions` (non-blocking; research request filed under this key) - 34-40-104 exemptions (agricultural, seasonal, domestic) not read. Closes with: le.utah.gov C34-40-S104.
+- Not configured in this release [[GAP:RQ-347]]: Direct-deposit consent rule (34-28-2/-3 current) not read.
+- Not configured in this release [[GAP:RQ-348]]: 34-40-104 exemptions (agricultural, seasonal, domestic) not read.
 
-## 2. Income tax withholding (state and local)
+## UT.2 Income tax withholding
 
 - **Rate:** flat [[FACT:ut.pit.rate.flat=4.45]] % of state taxable income from 2026-01-01 (Utah Code 59-10-104, Ch. 250 of 2026) [US-UTS5-001].
 - **Withholding method [US-UTPIT-003, US-UTS5-013]:** [[FACT:ut.wh.method=Pub 14 Rev. 04/26: wages x 4.45% minus max(0, base allowance - 1.3% x (wages - threshold)); all lines rounded to whole dollars]]. Certificate: [[FACT:ut.wh.certificate=federal W-4 filing status only (no Utah W-4; allowances ignored)]]; Utah taxable wages are the wages subject to federal withholding (IRC 3401(a)).
@@ -67,7 +68,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | `ut.pit.nonresident.days_safe_harbour` | [[FACT:ut.pit.nonresident.days_safe_harbour=20]] | days | from 2026-01-01 | US-UTS5-013 | no other UT income; home state no-tax or similar exclusion; excludes athletes, entertainers, real-property laborers, key employees |
 | `ut.reciprocity.states` | [[FACT:ut.reciprocity.states=none]] |  | from 2026-01-01 | US-UTS5-013 | MULTI matrix |
 | `ut.local_wage_tax.exists` | [[FACT:ut.local_wage_tax.exists=False]] |  | from 2026-01-01 | US-UTR3-002 | A.3 |
-| `ut.wh.method` | [[FACT:ut.wh.method=Pub 14 Rev. 04/26: wages x 4.45% minus max(0, base allowance - 1.3% x (wages - threshold)); all lines rounded to whole dollars]] |  | from 2026-01-01 | US-UTPIT-003 | effective date of these schedules open (tier-B says pay periods from 2026-06-01; earlier 450/900) |
+| `ut.wh.method` | [[FACT:ut.wh.method=Pub 14 Rev. 04/26: wages x 4.45% minus max(0, base allowance - 1.3% x (wages - threshold)); all lines rounded to whole dollars]] |  | from 2026-01-01 | US-UTPIT-003 | earlier 450/900) |
 | `ut.pit.base_allowance.single.annual` | [[FACT:ut.pit.base_allowance.single.annual=485]] | USD | from 2026-01-01 | US-UTPIT-003 | also HoH; see effective-date question |
 | `ut.pit.base_allowance.married.annual` | [[FACT:ut.pit.base_allowance.married.annual=970]] | USD | from 2026-01-01 | US-UTPIT-003 |  |
 | `ut.pit.phaseout_threshold.single.annual` | [[FACT:ut.pit.phaseout_threshold.single.annual=9348]] | USD | from 2026-01-01 | US-UTPIT-003 |  |
@@ -79,14 +80,23 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | `ut.pit.oracle.example_3.withholding` | [[FACT:ut.pit.oracle.example_3.withholding=18]] | USD | from 2026-01-01 | US-UTPIT-003 | semimonthly married 1,200 |
 | `ut.pit.oracle.example_4.withholding` | [[FACT:ut.pit.oracle.example_4.withholding=347]] | USD | from 2026-01-01 | US-UTPIT-003 | monthly married 7,800 |
 | `ut.pit.oracle.example_5.withholding` | [[FACT:ut.pit.oracle.example_5.withholding=367]] | USD | from 2026-01-01 | US-UTPIT-003 | quarterly single 9,000 |
-| `ut.pit.oracle.example_6.withholding` | [[FACT:ut.pit.oracle.example_6.withholding=5]] | USD | from 2026-01-01 | US-UTPIT-003 | daily married 175 |
+| `ut.pit.oracle.example_6.wages` | [[FACT:ut.pit.oracle.example_6.wages=175]] | USD | from 2026-01-01 | US-UTPIT-003 | Utah taxable wages of the daily, married worked example (input of the withholding row below). |
+| `ut.pit.oracle.example_6.withholding` | [[FACT:ut.pit.oracle.example_6.withholding=5]] | USD | from 2026-01-01 | US-UTPIT-003 | daily married [[FACT:ut.pit.oracle.example_6.wages=175]] |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `ut.pit.schedule.effective_date` (blocking; research request filed under this key) - Pub 14 Rev. 04/26 does not state from which pay period its base allowances and thresholds apply; a tier-B lead points to a mid-year 2026 change from lower earlier allowances. Calculations for pay periods before the effective date cannot be fixed. Closes with: Tax Commission notice or Pub 14 PDF cover (US IP).
-- ⚠️ RESEARCH-GAP: `ut.pit.supplemental` (non-blocking; research request filed under this key) - No Utah supplemental flat rate published; build assumes regular schedules. Closes with: Pub 14 PDF text or Tax Commission answer.
+- Not yet published [[GAP:RQ-343]]: Pub 14 Rev. 04/26 does not state from which pay period its base allowances and thresholds apply; a secondary source points to a mid-year 2026 change from lower earlier allowances. Calculations for pay periods before the effective date cannot be fixed.
+- Not configured in this release [[GAP:RQ-344]]: No Utah supplemental flat rate published; build assumes regular schedules.
 
-## 3. Social insurance and payroll levies
+## UT.2b Non-resident regime and reciprocity
+
+The non-resident and reciprocity rules of this jurisdiction are written in UT.2.
+
+## UT.2c Local wage taxes
+
+The local wage taxes of this jurisdiction, where any exist, are written in UT.2.
+
+## UT.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 - **Unemployment insurance (DWS) [US-UTSUI-001, US-UTS5-005].** 2026 taxable wage base [[FACT:ut.sui.wage_base=50,700]] USD. Overall rate = benefit ratio times the reserve factor ([[FACT:ut.ui.reserve_factor=1.1]] in 2026) plus the social cost ([[FACT:ut.ui.social_cost.rate=0.1]] %); range [[FACT:ut.sui.employer.rate.min=0.1]] % to [[FACT:ut.sui.employer.rate.max=7.1]] %; delinquency surcharge [[FACT:ut.ui.delinquency_surcharge.rate=1]] % if prior-year contributions are unpaid. New employers take the industry's average benefit ratio (no single rate); new out-of-state contractors take the maximum.
 - **UI wages include employee retirement deferrals:** [[FACT:ut.sui.wages.401k_included=True]] [US-UTS5-004]; also meals, lodging, in-kind pay and tips. SUI wages differ from federal taxable wages.
@@ -103,15 +113,15 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | `ut.sui.employer.rate.min` | [[FACT:ut.sui.employer.rate.min=0.1]] | % | 2026-01-01 to 2026-12-31 | US-UTSUI-001 |  |
 | `ut.sui.employer.rate.max` | [[FACT:ut.sui.employer.rate.max=7.1]] | % | 2026-01-01 to 2026-12-31 | US-UTSUI-001 | new out-of-state contractors 7.1; new employers industry average |
 | `ut.ui.delinquency_surcharge.rate` | [[FACT:ut.ui.delinquency_surcharge.rate=1]] | % | 2026-01-01 to 2026-12-31 | US-UTSUI-001 |  |
-| `ut.sui.employee.rate` | [[FACT:ut.sui.employee.rate=0]] | % | from 2026-01-01 | US-UTP52-005 |  |
+| `ut.sui.employee.rate` | [[FACT:ut.sui.employee.rate=0]] | % | from 2026-01-01 | US-UTR3C-001 | Utah Code 35A-4-302(1)(b): UI contributions may not be deducted, in whole or in part, from employees' wages. |
 | `ut.sdi_pfml.exists` | [[FACT:ut.sdi_pfml.exists=False]] |  | from 2026-01-01 | US-UTB5-003 | Agency level: the USTC 'List of All Tax Types' carries Employer Withholding Tax as the only wage-based employer tax; no state disability, paid-leave or local wage tax. A DWS/Labor Commission statement would raise confidence. |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `ut.sui.wage_base.other_state_credit` (non-blocking; research request filed under this key) - SUI credit for other-state wages not proven (35A-4-303 not reached). Closes with: Utah Code 35A-4-208/-303 or DWS Employer Handbook.
-- ⚠️ RESEARCH-GAP: `ut.ui.rates.next_year` (non-blocking; research request filed under this key) - 2027 SUI base and range due mid-November 2026. Closes with: DWS Tax Rates page after 2026-11-15.
+- Not configured in this release [[GAP:RQ-345]]: SUI credit for other-state wages not proven (35A-4-303 not reached).
+- Not configured in this release [[GAP:RQ-346]]: 2027 SUI base and range due mid-November 2026.
 
-## 4. Payslip statute and payroll records
+## UT.4 Pay statement
 
 - **Content (34-28-3(4); R610-3-20) [US-UTP6-001, US-UTS5-012]:** [[FACT:ut.payslip.items=statement of total amount of each deduction each regular payday; construction licensees full statement]]; lawful offsets itemised on a statement or detachable stub. No general content list (hours, rates, gross) for most employers. Electronic statements must be easily accessible and printable at no cost (stated for pay-card employees, R610-3-22(C)).
 - **Retention:** UI wage records [[FACT:ut.records.ui.retention_years=4]] years [US-UTS5-004]; withholding records per Pub 14.
@@ -123,7 +133,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | `ut.payslip.items` | [[FACT:ut.payslip.items=statement of total amount of each deduction each regular payday; construction licensees full statement]] |  | from 2014-05-13 | US-UTP6-001 | 34-28-3(4)-(5); R610-3-20 itemized |
 | `ut.records.ui.retention_years` | [[FACT:ut.records.ui.retention_years=4]] | years | from 2026-01-01 | US-UTS5-004 | withholding records 4 years |
 
-## 5. Statutory reporting
+## UT.5 Statutory reporting
 
 - **Withholding (TC-941E, e-file only) [US-UTPIT-003]:** quarterly return and payment by default; monthly payments once withholding reaches [[FACT:ut.report.tc941e.monthly_payment_threshold=1000]] USD a month; annual filing for Schedule H / Form 944 filers. Federal semiweekly rules do not apply (R865-9I-17).
 - **Annual reconciliation:** [[FACT:ut.report.annual_reconciliation.due=Jan 31 with all W-2s/1099s (electronic)]]; required even with zero activity.
@@ -142,7 +152,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | `ut.report.tc941e.monthly_payment_threshold` | [[FACT:ut.report.tc941e.monthly_payment_threshold=1000]] | USD | from 2026-01-01 | US-UTPIT-003 | monthly payments at >=1,000/month; quarterly returns Apr 30/Jul 31/Oct 31/Jan 31; e-file only |
 | `ut.report.annual_reconciliation.due` | [[FACT:ut.report.annual_reconciliation.due=Jan 31 with all W-2s/1099s (electronic)]] |  | from 2026-01-01 | US-UTPIT-003 |  |
 
-## 6. Leave
+## UT.6 Leave
 
 - **No private-sector paid sick leave statute** (exists: [[FACT:ut.leave.sick.state_statute.exists=False]]); vacation, holiday, sick leave, PTO, severance and bonuses are recoverable wages only if due under an agreement or policy (R610-3-4(B)(1)) [US-UTS5-012]. No PFML. Jury and voting leave not checked.
 
@@ -152,7 +162,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 |---|---|---|---|---|---|
 | `ut.leave.sick.state_statute.exists` | [[FACT:ut.leave.sick.state_statute.exists=False]] |  | from 2012-04-16 | US-UTS5-012 | negative finding |
 
-## 7. Termination
+## UT.7 Termination and final pay
 
 - **Discharge (34-28-5) [US-UTS5-002]:** wages due immediately and paid within [[FACT:ut.term.final_pay.discharge.hours=24]] hours (mail, direct deposit or hand delivery within the deadline); penalty wages continue for a limited period after a written demand.
 - **Resignation:** [[FACT:ut.term.final_pay.resignation=next regular payday]].
@@ -166,21 +176,23 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | `ut.term.final_pay.resignation` | [[FACT:ut.term.final_pay.resignation=next regular payday]] |  | from 2018-05-08 | US-UTS5-002 |  |
 | `ut.term.vacation.payout` | [[FACT:ut.term.vacation.payout=only if due under agreement or policy]] |  | from 2012-04-16 | US-UTS5-012 | R610-3-4(B)(1) |
 
-## 8. Benefits in kind and the taxable base
+## UT.8 Benefits in kind and taxable wages
 
 - **Withholding conformity:** Utah taxable wages are wages subject to federal withholding, so federal exclusions flow through to Utah withholding [US-UTPIT-003, US-UTS5-013].
 - **UI departs:** employee retirement deferrals and in-kind pay are UI wages (Section 3).
 
-## 9. Deductions and garnishments
+## UT.9 Deductions and garnishments
 
 - **Authorisation (R610-3-18) [US-UTS5-012]:** lawful deductions listed, with written authorisation for benefits, dues and financial-institution deductions; no deduction where wages were paid late.
 - **Garnishment:** valid garnishments in proper amounts are honoured; a state variance from the CCPA was not read, so the CCPA limits apply by default (Annex FED). Child support via ORS (e-IWO, EFT) [US-UTS5-016]; fee and timing open (below).
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `ut.garn.limits_and_iwo` (non-blocking; research request filed under this key) - State garnishment limits vs CCPA and ORS IWO fee/timing not read. Closes with: Utah Code 70C-7-103, 62A-11-406; ACF state IWO page.
+- Not configured in this release [[GAP:RQ-349]]: State garnishment limits vs CCPA and ORS IWO fee/timing not read.
 
-## 10. Collective agreements and prevailing wage
+## UT.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 - **No state prevailing-wage law** (exists: [[FACT:ut.prevailing_wage.exists=False]]): repealed in 1981 [US-UTP51-001]. Federal Davis-Bacon only.
 
@@ -190,27 +202,31 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 |---|---|---|---|---|---|
 | `ut.prevailing_wage.exists` | [[FACT:ut.prevailing_wage.exists=False]] |  | from 2023-01-01 | US-UTP51-001 | repealed 1981 |
 
-## 11. Indexation
+## UT.11 Indexation
 
 - **Minimum wage:** not indexed, capped at the federal rate [US-UTS5-010].
 - **SUI wage base:** recomputed every year and published by DWS by mid-November [US-UTS5-006]; the statutory formula was not read, so no derivation is possible; 2027 open (below).
 - **Income-tax schedules:** revised with the law (Pub 14); the rate is statutory.
 
-## 12. Payroll data protection
+## UT.12 Payroll data protection and records
 
 - **W-2** must carry the full SSN (R865-9I-16(A)(5)). No Utah SSN-truncation rule for pay statements found (open point below).
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `ut.data.ssn_truncation` (non-blocking; research request filed under this key) - SSN truncation on pay statements (13-45) not read. Closes with: Utah Code 13-45.
+- Not configured in this release [[GAP:RQ-350]]: SSN truncation on pay statements (13-45) not read.
 
-## 13. Live legal change
+## UT.13 Live legal change
 
 - **Rate cut retroactive to 2026-01-01** (Ch. 250, 2026) [US-UTS5-001].
 - **Pub 14 Rev. 04/26 schedules:** effective date unknown (blocking open point) [US-UTPIT-003].
 - **SUI 2027:** rates and base due mid-November 2026 [US-UTS5-006]. Rules R610-1 and R610-3 continued unchanged on 2026-01-08.
 
-## 14. Special populations
+## UT.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## UT.15 Special populations
 
 | Population | Utah rule | Register id |
 |---|---|---|
@@ -226,16 +242,25 @@ Every value in this annex is bound to a key of `_research/CCG-annex_UT-facts.jso
 | Interstate transport / military spouses | Exempt from Utah withholding (federal W-4 box 4c notes) | US-UTPIT-003 |
 | Nonresident short-term workers | Day-count safe harbour (Section 2) | US-UTP51-002 |
 
-## 15. Sources
+## UT.16 Language
 
-Register ids cited in this annex resolve to `00-official-sources/legal-basis-register.csv`; the URL of each value is in the facts file. Authorities:
+No language rule for employee documents is written for this jurisdiction in this annex.
 
+## UT.S Sources
+
+Register ids cited in this annex resolve to the build record; the URL of each value is in the facts file. Authorities:
+
+- Build lead (Claude) under owner delegation (Wallisson Gomes): US-OWN-006
+- Owner (Wallisson Gomes): US-OWN-008
 - Salt Lake City Corporation (municipal government): US-UTR3-002
-- US Department of Labor, Wage and Hour Division: US-UTP51-001, US-UTS5-007
-- Utah Department of Workforce Services: US-UTP52-005, US-UTS5-004, US-UTS5-005, US-UTSUI-001
+- US Department of Labor, Wage and Hour Division: US-UTP51-001, US-UTS5-007, US-UTS5-008, US-UTS5-009
+- Utah Department of Health and Human Services - Office of Recovery Services: US-UTS5-016
+- Utah Department of Workforce Services: US-UTP52-005, US-UTS5-004, US-UTS5-005, US-UTS5-006, US-UTSUI-001
 - Utah Department of Workforce Services (Unemployment Insurance and New Hire Reporting): US-UTS5-003
+- Utah Department of Workforce Services, Unemployment Insurance: US-UTP6-003
 - Utah Labor Commission (Division of Antidiscrimination and Labor) via Utah Office of Administrative Rules (adminrules.utah.gov): US-UTS5-011
 - Utah Labor Commission via adminrules.utah.gov: US-UTS5-012
-- Utah State Legislature (le.utah.gov): US-UTP6-001, US-UTS5-001, US-UTS5-002
-- Utah State Tax Commission: US-UTB5-003, US-UTPIT-003, US-UTS5-014
+- Utah State Legislature: US-UTR3C-001
+- Utah State Legislature (le.utah.gov): US-UTP6-001, US-UTS5-001, US-UTS5-002, US-UTS5-010
+- Utah State Tax Commission: US-UTB5-003, US-UTP51-002, US-UTP6-002, US-UTPIT-003, US-UTS5-014, US-UTS5-015
 - Utah State Tax Commission via adminrules.utah.gov: US-UTS5-013

@@ -40,7 +40,7 @@ No SDI/TDI/PFML; KRS 304.53 only voluntary group PFL insurance [US-KYR3-001..003
 - `ky.sui.new_employer.rate` = **2.7** percent (2026-01-01 → 2026-12-31) [A.2, US-KY-003, quoted from authority page, conf medium] — 12,000 x 2.7% = 324 max per employee [US-KYS5-019].
 - `ky.sui.employer.rate.min` = **0.3** percent (2026-01-01 → 2026-12-31) [A.2, US-KY-003, quoted from authority page, conf medium] — Schedule A 0.30%-9.00%.
 - `ky.sui.employer.rate.max` = **9.0** percent (2026-01-01 → 2026-12-31) [A.2, US-KY-003, quoted from authority page, conf medium]
-- `ky.sui.scuf.rate` = **0.0115** percent (2027-01-01 → open) [A.2, US-KYP7-001, quoted from authority page, conf high] — Inside the rate (diverted), no extra cost; 0% in 2026 (SB 129).
+- `ky.sui.scuf.rate` = **0.0115** percent (2027-01-01 → open) [A.2, US-KYB5-401, quoted from authority page, conf high] — Inside the rate (diverted), no extra cost; 0% in 2026 (SB 129).
 - `ky.sui.wage_base.other_state_credit` = **True**  (2026-01-01 → open) [A.1, US-KYS5-018, direct artifact inspection, conf high] — KRS 341.030(7)(a).
 - `ky.sui.coverage` = **non-ag 1,500/quarter or 1 in 20 weeks; ag 20,000/quarter or 10 in 20 weeks; domestic 1,000/quarter; 501(c)(3) 4 in 20 weeks; officers covered; proprietor spouse/parent/child < 21 not**  (2026-01-01 → open) [A.2, US-KYS5-019, direct artifact inspection, conf high]
 

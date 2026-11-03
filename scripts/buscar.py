@@ -1,6 +1,6 @@
-"""Busca local por trecho no material longo do cérebro (RAG local, decidido em 2026-10-28).
+﻿"""Busca local por trecho no material longo do cérebro (RAG local, decidido em 2026-10-28).
 
-Uso:  python scripts/buscar.py "<pergunta ou termos>" [-n 8] [--fonte reunioes|oficiais|tickets|chats|extracoes] [--reindexar]
+Uso:  python scripts/buscar.py "<pergunta ou termos>" [-n 8] [--fonte reunioes|oficiais|tickets|chats|extracoes|pipeline|certificacao] [--reindexar]
       ex.: python scripts/buscar.py "Lithuania BAU validation SIR" --fonte reunioes
            python scripts/buscar.py "Marko automatic submission government" -n 10
 
@@ -35,6 +35,9 @@ FONTES = {
     "tickets": ("raw/tickets/api", {".md"}),
     "chats": ("raw/chats", {".txt", ".md"}),
     "extracoes": ("extracoes", {".md"}),
+    # 2026-11-03: research packs, fix logs, QA e designs saíram do grafo (só CONFERENCIA*.md ficou); a busca local cobre o resto
+    "pipeline": ("Research Pipeline", {".md"}),
+    "certificacao": ("internal-certification", {".md"}),
 }
 PROIBIDO = ("02-client-reports-raw", "99-local-only", ".env")
 JANELA, PASSO = 12, 8  # linhas por trecho e avanço (sobreposição de 4)

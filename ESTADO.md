@@ -1,6 +1,13 @@
 # Onde paramos
 
-> Atualizado em 2026-11-02 (sessão [[sessoes/2026-11-02]], cobre 30/10–02/11; blocos de 29/10 e anteriores sem mudança). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+> Atualizado em 2026-11-03 (sessão [[sessoes/2026-11-03]]; blocos de 02/11 e anteriores sem mudança). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
+
+## Parada para migração de conta (03/11) — LER PRIMEIRO
+- **Todas as tarefas paradas** a pedido do usuário para migrar o Claude Code para a **conta corporativa da Mercans**. Estado salvo no git (commit + push de 03/11).
+- **GitHub novo:** `Brain-WG-Advisors/Brain-Service-Mercans` (privado; dona da organização: conta ViniCerqueira, depois passa ao diretor da WG Advisors; `wgomes-adv` é membro com **leitura** — subir para Admin em Settings → Collaborators). Remote local já aponta para lá. Pasta local continua `Documents\brain-service`.
+- **Ao abrir na conta nova, conferir:** (1) memória em `~/.claude/projects/c--Users-instituto-Documents-brain-service/memory/` (é local, deve continuar); (2) skills Mercans (`mercans-compliance-workflow`, `mercans-pipeline-methodology`, `payroll-compliance-*`) vinham da organização da conta antiga — ver se aparecem na conta nova, senão reinstalar/publicar; (3) conectores do claude.ai (monday etc.) e artifacts privados ficam na conta antiga; (4) `gh auth status` (git continua pela conta ViniCerqueira); (5) reabrir as frentes **sem** `-Retomar` (conversa nova; regra de 03/11).
+- **Feito hoje (03/11):** memória única + grafo para todas as janelas (CLAUDE.md); radar de esquecidos (`scripts/radar_esquecidos.py`) + faxina (9 fechadas, 19 decisões do usuário listadas na sessão); lei × mercado ([[servicos/lei-x-mercado]], caso STG seguro 41,67); grafo limpo (26.360 → 2.022 nós) e `buscar.py` com fontes `pipeline`/`certificacao`.
+- **Pendente do usuário:** responder as 19 decisões do radar ([[sessoes/2026-11-03]]); Samuel dos Passos no GitHub (usuário dele); STG: limite com dois empregadores (consulta DGT) e ajuste de fim de ano no motor (Lily); itens de 02/11 abaixo.
 
 ## Pipeline v2.12 para o time (02/11)
 - ✅ Enviados pelo usuário: e-mail a todos com a pasta do Drive `02. AI Pipelines/pipeline v2.12`; Chat à Manju com os passos da NAV via `si_runbook.sh` (zip v2.12.1) e a pergunta se ainda falta algo.
@@ -89,8 +96,8 @@
 
 ## Esperando o usuário (2026-10-20)
 - #13037 (TI, Manette): ok para responder "VPN instalada; pasta = link de 13/10 ao Merlin (https://drive.google.com/drive/folders/1BArVL5SGDH1NbkLa0DJ-SR1sqnRz6Uo6); expiração 20/11/2026" → rascunho pela frente Chat. Apuração em `raw/chats/2026-10-20-manette-ti-vpn-pasta.md`.
-- Enviar: feedback Montage P09 à Manju (`rascunhos/2026-10-20-feedback-manju-montage-P09.md`), Muhammad e Shruti (`rascunhos/2026-10-20-*`).
-- Ruchi (Canadá, K2): bônus pago sozinho e a isenção de $3.500 (T4127), sem resposta.
+- Enviar: feedback Montage P09 à Manju (`rascunhos/2026-10-20-feedback-manju-montage-P09.md`), Muhammad e Shruti (`rascunhos/2026-10-20-*`). _(✅ fechada em 2026-11-03 pelo radar: O feedback do Montage P09 ficou superado: as versões P09 a P13 foram refeitas e entregues e Manju, Muhammad e Shruti já foram tratados depois; prova: log.md:241 (pasta Wallisson - P09-P13), log.md:315 (Manju respondida), log.md:375 (Muhammad), log.md:507 (tickets da Shruti devolvidos))_
+- Ruchi (Canadá, K2): bônus pago sozinho e a isenção de $3.500 (T4127), sem resposta. _(✅ fechada em 2026-11-03 pelo radar: A resposta à Ruchi sobre bônus e isenção no CPP do Canadá foi postada pelo usuário em 21/10; prova: log.md:226 -)_
 
 ## Frentes (desde 2026-10-15, cada uma na sua janela)
 - Suporte (tickets): `frentes/suporte/estado.md`
@@ -107,7 +114,7 @@
 - Padrões F48–F66 para o pipeline (`revisoes/2026-10-09-catalogo-erros-tickets-v2.md`).
 - Levar às skills: erros da skill do Congo e do CCG/Alerta 2026 da Lituânia ([[correcoes]]).
 - Achados fora do pedido nas specs da Ucrânia ([[Ucrania]] → Pendências).
-- **Migração do brain (concluída 2026-10-27):** esta máquina e o GitHub iguais (merge com a outra máquina, pacote do pen drive restaurado, dados de clientes fora do git; branch local `backup/pre-limpeza-2026-10-27` tem dados de clientes: nunca enviar, apagar quando o usuário quiser). Outra máquina: `git pull` antes de mexer.
+- **Migração do brain (concluída 2026-10-27):** esta máquina e o GitHub iguais (merge com a outra máquina, pacote do pen drive restaurado, dados de clientes fora do git; branch local `backup/pre-limpeza-2026-10-27` tem dados de clientes: nunca enviar, apagar quando o usuário quiser). Outra máquina: `git pull` antes de mexer. _(✅ fechada em 2026-11-03 pelo radar: A migração do brain foi concluída em 27/10; resta apenas o branch local de backup, que fica até o usuário mandar apagar; prova: ESTADO.md:110)_
 - **F6 Pipeline (2026-10-27):** 112 cartões (BE 40, CO 32, FR 40) ingeridos nos hubs, 9 entradas em [[correcoes]], `servicos/research-pipeline.md` e [[fronteiras]], tudo "validação humana pendente". **Usuário:** validar 2 lotes (67 risco alto + 5 sorteados) em `extracoes/2026-10-27-pipeline-*.md`. Destaques: hub BE tinha o 697,61/697,42 invertido (corrigido, C25); CO com dois decretos do SMMLV em conflito (C21) e CCG v1.4 contraditório sobre não residente (C22); FR pacote vigente = reemissão v1.0 de 06/10 promovida em 09/10. Pendentes: origem do `CO-compliance/colombia-artifacts-20261026-1016.zip`; `~/mercans-pipeline` sem remote (só ler).
 
 ## Ao abrir a próxima sessão

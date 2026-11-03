@@ -142,3 +142,9 @@ A tabela da seção anterior (resíduos, 10:27) vira histórico.
 | Data | Frente | O quê |
 |---|---|---|
 | 2026-11-02 | validacaoco | Skill regenerada depois do segundo lote de resíduos (01, 04, 07, zip); 02, 03, 05, 06 e SKILL.md iguais |
+
+## Rodada 6 (2026-11-02): finais CCG v1.7, WTC v1.9, DD v1.6, CO-DIAN-004 v1.3, SIR v1.4; publicada no claude.ai
+- **Regeneradas** com `scripts/conv.py` + `scripts/assemble5.py` (cópia do `assemble4.py`; versões e notas de leitura do 01, 02, 04 e 05): 01, 02, 04, 05. **06 saiu byte a byte igual** (o método reproduz). Diferenças contra a versão anterior (cópia em scratchpad `r6/skill-antes/`): só versões, proveniência, notas de leitura e as células/parágrafos da rodada 6 (01: 9 linhas; 02: Y 230–237/253–254/348–350, AB 201–206/214–216, D123/D156/D324/D330, Employer Sick Pay, C16, VC; 04: spec 004 A34/D34, B19, VC; 05: H7, G95, VC).
+- **03-sir.md → v1.4** por `scripts/patch_sir4.py` (mudanças do Doc v1.4 marcadas ⟦v1.4⟧; índice recalculado e conferido). **SKILL.md e 07** por `scripts/patch_router6.py` (versões, md5, cesantías de não residente e tarifa ARL decimal a 92%, incapacidade/licenças fora dos parafiscais, Decreto 0159 "left without effect"; índice do 07 conferido).
+- **Conferência:** `verify4.py` — WTC 8.402 / DD 4.867 / Payslip 927 / specs 1.554 + 5.064 + 2.001 + 2.020 + 1.564 + 4.216 + 2.652 células, 0 faltando; CCG 7.556 parágrafos, 113 sem correspondência literal (sumário e fluxogramas, como antes). Varredura: 0 nome do cliente, COVAL, oracle, DRAFT, rodada, scope_manifest, integration-landscape. Zip md5 `89ca2bf82de7cbb1f5116f159bb4bbd1` (607.634 bytes, 8 arquivos).
+- **claude.ai (ok do usuário, 02/11):** skill `payroll-compliance-colombia` substituída (v2 de 5/10 → v3) e publicada para a organização ("v3 está ativa para sua organização"); o link da CT-4593 (`plugin_01CYD91JsVcjW3PxaoLGCjWi`) abre a v3. Nota de versão com as versões vigentes.

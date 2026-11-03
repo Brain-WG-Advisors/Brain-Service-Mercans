@@ -99,7 +99,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `or.garn.consumer.exempt_rate` | 75 % | 2025-01-01 |  | US-ORS5-017 | high |
 | `or.garn.support.floor.weekly` | 254 USD | 2025-01-01 |  | US-ORS5-017 | high |
 | `or.data.ssn.mail_prohibited` | True | 2026-01-01 |  | US-ORS5-018 | high |
-| `or.prevailing_wage.threshold` | 50000 USD | 2026-01-01 |  | US-ORP51-004 (promoted, Synthesis C) | medium |
+| `or.prevailing_wage.threshold` | 50000 USD | 2026-01-01 |  | US-ORB5-401 (promoted, Synthesis C) | medium |
 
 # Findings by domain (stage 5)
 
@@ -246,7 +246,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Confidence: 92%.**
 
 ## 4. payslip_statute
-- **Content (ORS 652.610(1)(b))** [US-ORP51-003; US-ORS5-026]:
+- **Content (ORS 652.610(1)(b))** [US-ORS5-026; its local file holds the full ORS 652.610 text; items (A)-(K) were first transcribed under the superseded row US-ORP51-003]:
   - (A) payment date; (B) dates of work covered; (C) employee name; (D) employer name and business registry or identification number; (E) employer address and telephone;
   - (F) pay rate(s); (G) pay basis; (H) gross wages; (I) net wages; (J) each deduction, with amount and purpose; (K) allowances claimed toward the minimum wage;
   - (L) for non-exempt employees: regular and overtime rates, hours and pay;
@@ -341,7 +341,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Confidence: 85%.**
 
 ## 10. collective_agreements (prevailing wage)
-- **BOLI prevailing wage** [US-ORP51-004]:
+- **BOLI prevailing wage** [US-ORB5-401]:
   - Covered public works, generally 50,000 or more with public funds.
   - Base plus fringe rates. Certified payroll on form WH-38.
 - **HB 2688:** off-site bespoke fabrication is covered for procurements solicited or contracted **from 2026-07-01** [US-ORS5-022].
@@ -433,6 +433,10 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - `https://www.doj.state.or.us/child-support/for-employers/new-hire-reporting/`: 404 (wrong path). The working page is `/report-new-hires/`.
 - `https://www.oregon.gov/boli/workers/pages/final-paycheck.aspx`: 404. The vacation and final-pay content came from `holiday-and-vacation-pay.aspx` and ORS 652.140.
 - `https://www.oregon.gov/employ/businesses/tax/pages/default.aspx`: 404. The UI rates came from the OED release and ORS 657.
+
+
+## QA r3b additions (agent 2, 2026-11-02)
+- `or.garn.iwo.priority_over_writ` [US-ORS5-017]: an order to withhold income has priority over a writ of garnishment (ORS ch. 18 garnishee response form). RQ-296 stays open for the employer fee.
 
 ## Open questions
 

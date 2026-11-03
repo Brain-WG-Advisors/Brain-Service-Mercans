@@ -1,5 +1,6 @@
 # Annex AK: Alaska
 
+
 This annex sets out the Alaska payroll rules for the 2026 build year. Read with Annex FED (the federal layer every employee carries) and Annex MULTI (which routes an employee to this State by work location, residence or UI localization). Every value is shown with its effective dates and its source (list at the end of the annex). Federal values are not repeated here.
 
 Classification: T1. Alaska has no wage income tax; the State layer is UI, labour standards and reporting.
@@ -22,7 +23,7 @@ Classification: T1. Alaska has no wage income tax; the State layer is UI, labour
 | Pay frequency rule | [[FACT:ak.pay_frequency.rule=monthly or semi-monthly at the employee's election (AS 23.05.140(a))]] | from 2026-01-01 |  | S1 |  |
 | Direct deposit requires voluntary authorisation | [[FACT:ak.direct_deposit.requires_voluntary_authorisation=True]] | from 2026-01-01 |  | S1 | AS 23.10.043: only if the employee voluntarily authorises it, to the bank of the employee's choice. |
 
-⚠️ RESEARCH-GAP (non-blocking): Paycard rule: not established by the research. Source that would close it: A DOLWD Wage and Hour opinion on payroll cards.
+Not configured in this release [[GAP:RQ-451]]: Paycard rule: not established from an official source.
 
 ## AK.2 Income tax withholding
 
@@ -54,18 +55,18 @@ ak_ui_er = min(period_UI_wages, max(0, ak_wage_base - ytd_UI_wages)) x employer_
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
 | SUI wage base | USD [[FACT:ak.sui.wage_base=54,200]] | 2026-01-01 to 2026-12-31 |  | S5 | Same figure printed on TQ01C (2/26). Mechanism 75% of the AK average annual wage; not re-derived. |
-| SUI employee rate | [[FACT:ak.sui.employee.rate=0.5]] % | 2026-01-01 to 2026-12-31 |  | S5 | Employee UI contribution deducted by the employer. Derivation: 0.27 x ABCR = 0.12%, so the [[FACT:ak.sui.employee.rate=0.5]] % floor applies. |
+| SUI employee rate | [[FACT:ak.sui.employee.rate=0.5]] % | 2026-01-01 to 2026-12-31 |  | S5 | Employee UI contribution deducted by the employer. Derivation: the 0.27 x ABCR product is below the floor, so the [[FACT:ak.sui.employee.rate=0.5]] % floor applies. |
 | SUI employer rate classes 01 20 | [[FACT:ak.sui.employer.rate.classes_01_20=1]] % | 2026-01-01 to 2026-12-31 |  | S5 |  |
 | SUI employer rate class 21 | [[FACT:ak.sui.employer.rate.class_21=5.4]] % | 2026-01-01 to 2026-12-31 |  | S5 |  |
-| SUI new employer rate | [[FACT:ak.sui.new_employer.rate=1]] % | 2026-01-01 to 2026-12-31 |  | S6 | Every industry; total with employee share 1.50%. |
+| SUI new employer rate | [[FACT:ak.sui.new_employer.rate=1]] % | 2026-01-01 to 2026-12-31 |  | S6 | Every industry; the employee share ([[FACT:ak.sui.employee.rate=0.5]] %) is withheld on top. |
 | SUI ABCR | [[FACT:ak.sui.abcr=0.004615]] ratio | 2026-01-01 to 2026-12-31 |  | S7 | ABCR = (131,477,612 / 45,628,865,425) / (10,852,857,547 / 17,381,530,724), DOLWD UI Tax Calculation Cookbook 2026 (updated 2025-12-04). Reproduces every published 2026 rate. |
 | STEP rate within employee UI | [[FACT:ak.step.rate_within_employee_ui=0.1]] % | from 2026-01-01 |  | S8 | Collected inside the employee [[FACT:ak.sui.employee.rate=0.5]] % and credited back; net cost nil. No employer STEP tax (SB 217 not enacted). |
 | TVEP rate within employee UI | [[FACT:ak.tvep.rate_within_employee_ui=0.25]] % | from 2026-01-01 |  | S9 | Collected inside the employee [[FACT:ak.sui.employee.rate=0.5]] %; net cost nil. |
 | SDI PFML exists | [[FACT:ak.sdi_pfml.exists=False]] | from 2026-01-01 |  | S3 | No SDI/TDI/PFML/LTC/transit levy. AFLA covers public employers only and is unpaid. |
 
-⚠️ RESEARCH-GAP (non-blocking): SUI wage base derivation: not established by the research. Source that would close it: DOLWD Research and Analysis "Tax Base Calculation worksheet" 2026, or the signed "AK UI Tax Rates 2026 Full Document" (2026-01-21) attached to SB 217 on BASIS.
+Not configured in this release [[GAP:RQ-449]]: SUI wage base derivation: not established from an official source.
 
-⚠️ RESEARCH-GAP (non-blocking): SUI wage base next year: not established by the research. Source that would close it: DOLWD 2027 experience-rates page once published (normally December).
+Not configured in this release [[GAP:RQ-456]]: SUI wage base next year: not established from an official source.
 
 ## AK.4 Pay statement
 
@@ -95,7 +96,7 @@ ak_ui_er = min(period_UI_wages, max(0, ak_wage_base - ytd_UI_wages)) x employer_
 | Leave sick payout on separation | [[FACT:ak.leave.sick.payout_on_separation=False]] | from 2025-07-01 |  | S1 | AS 23.10.068(a)(1). Reinstated on rehire within 6 months. |
 | Leave sick rehire reinstatement months | [[FACT:ak.leave.sick.rehire_reinstatement_months=6]] months | from 2025-07-01 |  | S1 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Leave sick multistate coverage: not established by the research. Source that would close it: A DOLWD LSS interpretation on coverage of employees working partly in Alaska.
+Not configured in this release [[GAP:RQ-454]]: Leave sick multistate coverage: not established from an official source.
 
 ## AK.7 Termination and final pay
 
@@ -104,7 +105,7 @@ ak_ui_er = min(period_UI_wages, max(0, ak_wage_base - ytd_UI_wages)) x employer_
 | Final pay discharge working days | [[FACT:ak.final_pay.discharge.working_days=3]] working days | from 2026-01-01 |  | S1 | AS 23.05.140(b). Resignation: next regular payday at least [[FACT:ak.final_pay.discharge.working_days=3]] days after notice. |
 | Final pay penalty max working days | [[FACT:ak.final_pay.penalty.max_working_days=90]] working days | from 2026-01-01 |  | S1 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Final pay accrued vacation payout: not established by the research. Source that would close it: DOLWD Wage and Hour position (Pamphlet 100 index or W&H FAQ) or Alaska Supreme Court case law on an official host.
+Not configured in this release [[GAP:RQ-450]]: Final pay accrued vacation payout: not established from an official source.
 
 ## AK.8 Benefits in kind and taxable wages
 
@@ -121,15 +122,17 @@ ak_ui_er = min(period_UI_wages, max(0, ak_wage_base - ytd_UI_wages)) x employer_
 | Garnishment exempt weekly household support | USD [[FACT:ak.garn.exempt.weekly_household_support=743]] | from 2026-01-01 |  | S14 |  |
 | Garnishment exempt liquid assets monthly | USD [[FACT:ak.garn.exempt.liquid_assets_monthly=1,890]] | from 2026-01-01 |  | S14 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Garnishment IWO employer fee: not established by the research. Source that would close it: AS 25.27.062 on the Alaska Legislature site, or the CSED ACSESS Business Portal employer guide
+Not configured in this release [[GAP:RQ-452]]: Garnishment IWO employer fee: not established from an official source.
 
 ## AK.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
 | Prevailing wage threshold | USD [[FACT:ak.prevailing_wage.threshold=25,000]] | from 2026-01-01 |  | S15 | Title 36 public construction over [[FACT:ak.prevailing_wage.threshold=25,000]] USD. |
 
-⚠️ RESEARCH-GAP (non-blocking): Prevailing wage certified payroll frequency: not established by the research. Source that would close it: AS 36.05.040 (Alaska Legislature site) and the current Pamphlet 600 at labor.alaska.gov/lss.
+Not configured in this release [[GAP:RQ-453]]: Prevailing wage certified payroll frequency: not established from an official source.
 
 ## AK.11 Indexation
 
@@ -149,7 +152,11 @@ The minimum wage is indexed to the Anchorage CPI-U from 2028 (no indexed value y
 | Live sb217 employer STEP status | [[FACT:ak.live.sb217_employer_step.status=not enacted (in S FIN since 2026-04-15); would operate at UI employer contribution level]] | from 2026-04-15 |  | S16 |  |
 | Live hb161 sick leave status | [[FACT:ak.live.hb161_sick_leave.status=not enacted (referred H L&C 2025-03-28, never moved)]] | from 2025-03-28 |  | S17 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Live bulletin sweep: not established by the research. Source that would close it: the Alaska Administrative Register issues for 2026 and the BASIS passed-legislation list of the 34th Legislature
+Not configured in this release [[GAP:RQ-455]]: Live bulletin sweep: not established from an official source.
+
+## AK.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
 
 ## AK.15 Special populations
 
@@ -166,7 +173,7 @@ The minimum wage is indexed to the Anchorage CPI-U from 2028 (no indexed value y
 - Non-profit employers: UI above the statutory size thresholds, with a reimbursable option.
 - Multistate: UI wage-base credit for other-State wages of transferred employees (AK.2b); sick-leave reach to employees working partly in Alaska is open (AK.6).
 
-⚠️ RESEARCH-GAP (non-blocking): the coverage thresholds that apply to these populations (quarterly cash-wage and headcount thresholds for UI coverage of domestic, agricultural and non-profit employment) are cited by statute only and carry no facts key; the engine must not hard-code them until they are keyed.
+Not configured in this release [[GAP:RQ-510]]: The coverage thresholds that apply to these populations (quarterly cash-wage and headcount thresholds for UI coverage of domestic, agricultural and non-profit employment) are cited by statute only and are not established as values; the engine must not hard-code them until they are established.
 
 ## AK.16 Language
 
@@ -176,12 +183,12 @@ No language clause in the pay-statement rule or the posters: payslip and filings
 
 | Ref | Instrument | Article / section | Authority |
 |---|---|---|---|
-| S1 | Alaska DOLWD Wage and Hour Pamphlet 100 (October 2025): AS 23.05, AS 23.10 (Alaska Wage and Hour Act incl. 2024 Ballot Measure 1), 8 AAC 15 (incl. sick-leave … | AS 23.05.140, 23.05.160, 23.10.040, 23.10.043, 23.10.055, 23.10.060, 23.10.065, 23.10.066-.069, 23.10.070, 23.10.100; 8 AAC 15.105-15.119, 15.125, 15.135, … | Alaska DOLWD Labor Standards and Safety Division |
+| S1 | Alaska DOLWD Wage and Hour Pamphlet 100 (October 2025): AS 23.05, AS 23.10 (Alaska Wage and Hour Act incl. 2024 Ballot Measure 1), 8 AAC 15 (incl. sick-leave … | AS 23.05.140, 23.05.160, 23.10.040, 23.10.043, 23.10.055, 23.10.060, 23.10.065, 23.10.066-.069, 23.10.070, 23.10.100; 8 AAC 15.105-15.119, 15.125, 15.135, 15.160, 15.165, 15.900, 15.907, 15.908 | Alaska DOLWD Labor Standards and Safety Division |
 | S2 | Alaska DOLWD Wage and Hour home page (minimum wage notice) | Alaska minimum wage notice (page last updated 2026-05-01) | Alaska DOLWD Labor Standards and Safety Division |
 | S3 | Alaska DOR Tax Division Tax Types page + Withholding Tax and Employment Security entries | Tax Types (25 items); programs/index.aspx?10003; ?10000 | Alaska Department of Revenue |
 | S4 | Alaska Tax Facts (Office of the State Assessor, DCRA) | whole page | Alaska Dept of Commerce, Community and Regional Affairs |
-| S5 | Alaska Unemployment Insurance Tax Rates for Experienced Employers, 2026 (re-read with local file; same page as US-AKP51-002) | 2026 rating period table; AS 23.20.285 | Alaska DOLWD Employment Security Tax |
-| S6 | Alaska UI Tax Rates for New (Industry) Employers, 2026 (re-read with local file; same page as US-AKP51-001) | Industry rate table 2026 | Alaska DOLWD Employment Security Tax |
+| S5 | Alaska Unemployment Insurance Tax Rates for Experienced Employers, 2026 | 2026 rating period table; AS 23.20.285 | Alaska DOLWD Employment Security Tax |
+| S6 | Alaska UI Tax Rates for New (Industry) Employers, 2026 | Industry rate table 2026 | Alaska DOLWD Employment Security Tax |
 | S7 | Alaska UI Tax Calculation Cookbook, 2026 rates (last update 2025-12-04) | Steps 1-3; AS 23.20.290(c)-(f); AS 23.20.310(7) | Alaska DOLWD Research and Analysis Section |
 | S8 | State Training and Employment Program (STEP) employee contribution | AS 23.15.630; AS 23.20.175 | AK official authority |
 | S9 | Technical and Vocational Education Program (TVEP) employee contribution | AS 23.15.835 | AK official authority |
@@ -189,7 +196,7 @@ No language clause in the pay-statement rule or the posters: payslip and filings
 | S11 | Alaska Employment Security Tax Employer Handbook (taxbook.pdf, PDF modified 2025-05-05) | pp. 6-25 (employer, multistate, TQ01, wage base, employee contribution, records, excluded employment, wages, retirement/125/fringe, rates) | Alaska DOLWD Employment Security Tax |
 | S12 | Alaska ES Tax Multiple Filer and Single Filer CSV Specifications and General Guidelines (rev. 2016-05-17) for online quarterly wage upload | Header record cols 1-11; wage detail cols 1-12 | Alaska DOLWD Employment Security Tax |
 | S13 | Alaska CSSD/CSED New Hire Reporting employer notice (PDF modified 2022-06-02) citing AS 25.27.075 | AS 25.27.075; AS 25.27.075(f) | Alaska Department of Revenue, Child Support Enforcement Division (formerly CSSD) |
-| S14 | AS 09.38.010-.035 Alaska Exemptions Act (exemption of earnings and liquid assets), wayback snapshot 2026-09-17 | AS 09.38.030(a)-(e) | Alaska Legislature |
+| S14 | Alaska Court System form CIV-530 (8/24) Notice of Garnishment and Notice of Right to Exemptions (AS 09.38.030-.065; 8 AAC 95.030; 15 USC 1673) | CIV-530 pp. 1-2 | Alaska Court System |
 | S15 | AS 36.05.005 and 36.05.010 prevailing wage on public construction | AS 36.05.005; 36.05.010 | Alaska Legislature |
 | S16 | Alaska Legislature, 34th Legislature SB 217 'Employer Contributions' (employer STEP contribution) bill status (wayback snapshot 2026-06-08) | Bill detail: current status | Alaska Legislature (BASIS) |
 | S17 | Alaska Legislature, 34th Legislature HB 161 'Paid Sick Leave Exemption' bill status (wayback snapshot 2026-10-15) | Bill detail: current status | Alaska Legislature (BASIS) |

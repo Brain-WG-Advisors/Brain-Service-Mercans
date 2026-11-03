@@ -5,12 +5,14 @@ and the section layout of _research/CCG-annex_{JUR}-research-pack.md.
 Every fact value is written as [[FACT:key=value]]. Pack narrative is carried only after
 pipeline-internal wording is removed; distinctive numbers equal to a fact of the same
 annex are tagged automatically. Unresolved items become in-place RESEARCH-GAP markers.
-Writes 01-ccg/modules/annex_{JUR}.md and a JSON binding report per annex (scratch)."""
+Writes 01-ccg/annexes/annex_{JUR}.md and a JSON binding report per annex (scratch)."""
 import json, os, re, sys, collections
 
 BASE = sys.argv[1]
 JURS = sys.argv[2].split(",")
-OUT = os.path.join(BASE, "01-ccg", "modules")
+OUT = os.path.join(BASE, "01-ccg", "annexes")  # was 01-ccg/modules; moved at CCG assembly 2026-11-02
+sys.path.insert(0, os.path.join(BASE, "01-ccg", "_build", "common"))
+import ccg_common as CC  # noqa: E402  round 2 (QA r1): finalize, annex skeleton, [[GAP:]] tags
 SCR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCR)
 OVR = []
@@ -134,6 +136,8 @@ def clean(t):
     return t.strip()
 
 
+DATE_AFTER = re.compile(r"\s?(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\b")
+DATE_BEFORE = re.compile(r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s$")
 NUM = re.compile(r"(?<![\w.,])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(\s?%)?(?![\w])")
 
 
@@ -142,18 +146,57 @@ def sig(x):
     return len(s)
 
 
-def autotag(text, index, sec, bound):
-    """Tag distinctive numbers equal to a fact value of this annex. index: {(value, is_pct): [(sec, key, raw)]}"""
+CUR_JUR = [""]
+REBIND = []   # QA r3d: every binding that differs from the r3c rule (jur, old key, new key or None, context)
+# QA r3d finding 8: rate components printed in a note that have their own fact key; the zero component is not
+# a 'distinctive' number, so the value matcher never reaches it. Tagged only when the key exists with that value.
+COMPONENT_TAGS = {"id.sui.new_employer.rate": [("0.97000", "% UI", "id.sui.new_employer.ui_component.rate"),
+                                              ("0.00000", "% admin", "id.sui.new_employer.admin_component.rate")]}
+COMPONENT_LOG = []
+
+
+def tag_components(note, row_key, facts):
+    for raw, after, key in COMPONENT_TAGS.get(row_key, []):
+        f = next((x for x in facts if x["key"] == key), None)
+        if f is None or abs(float(f["value"]) - float(raw)) > 1e-12:
+            COMPONENT_LOG.append((row_key, key, "key absent or value differs; number left as written"))
+            continue
+        parts = re.split(r"(\[\[(?:FACT|GAP):[^\]]*\]\])", note)
+        for i in range(0, len(parts), 2):
+            parts[i] = parts[i].replace(raw + after, f"[[FACT:{key}={raw}]]{after}")
+        note = "".join(parts)
+        COMPONENT_LOG.append((row_key, key, "tagged"))
+    return note
+
+
+def _plen(a, b):
+    n = 0
+    for x, y in zip(a.split("."), b.split(".")):
+        if x != y:
+            break
+        n += 1
+    return n
+
+
+def autotag(text, index, sec, bound, anchor=None):
+    """Tag distinctive numbers equal to a fact value of this annex. index: {(value, is_pct): [(sec, key, raw)]}
+    QA r3d finding 1 guard: CC.binding_ok() (same jurisdiction; a place-named key only in a sentence that names
+    the place); among equal-value keys the one sharing the longest key prefix with the row key (anchor) wins."""
     if "[[FACT:" in text:
         parts = re.split(r"(\[\[FACT:[^\]]*\]\])", text)
     else:
         parts = [text]
     out = []
+    offs = 0
     for p in parts:
         if p.startswith("[[FACT:"):
             out.append(p)
+            offs += len(p)
             continue
-        def rep(m):
+        base = offs
+        offs += len(p)
+
+        def rep(m, base=base):
             raw, pct = m.group(1), m.group(2)
             try:
                 n = float(raw.replace(",", ""))
@@ -165,11 +208,25 @@ def autotag(text, index, sec, bound):
                 return m.group(0)
             if pct and sig(n) < 2 and float(n).is_integer():
                 return m.group(0)
+            if not pct and (DATE_AFTER.match(m.string, m.end()) or DATE_BEFORE.search(m.string[max(0, m.start() - 12):m.start()])):
+                return m.group(0)   # QA r2: a day of a date is not a quantity
             cands = index.get((round(n, 6), bool(pct)))
             if not cands:
                 return m.group(0)
             same = [c for c in cands if c[0] == sec]
-            s, key, val = (same or cands)[0]
+            if not same and sig(n) < 3:
+                return m.group(0)   # QA r2 (DE penalty -> PIT ceiling): no cross-section binding of a round number
+            pool = same or cands
+            old = pool[0][1]
+            if anchor and len(pool) > 1:
+                best = max(_plen(c[1], anchor) for c in pool)
+                pool = [c for c in pool if _plen(c[1], anchor) == best]
+            s, key, val = pool[0]
+            if not CC.binding_ok(key, CUR_JUR[0], text, base + m.start(), anchor=anchor):
+                REBIND.append((CUR_JUR[0], old, None, text[max(0, base + m.start() - 60):base + m.end() + 20]))
+                return m.group(0)
+            if key != old:
+                REBIND.append((CUR_JUR[0], old, key, text[max(0, base + m.start() - 60):base + m.end() + 20]))
             t = f"[[FACT:{key}={raw}]]"
             bound.append(key)
             return t + (pct or "")
@@ -212,10 +269,18 @@ def overrides_extra(jur, sid):
 
 
 def esc(t):
-    return str(t).replace("|", "\\|").replace("\n", " ")
+    """QA r3c finding 3: a '|' quoted in a fact note (ID rate array) is written '/', as in the other annex
+    generators. The old '\\|' escape split the DOCX table (the assembler did not honour it) and printed
+    backslashes. Pipes inside [[FACT:]] / [[GAP:]] tags are left alone: the assembler protects them and
+    the tag value is compared with the facts by C46."""
+    parts = re.split(r"(\[\[(?:FACT|GAP):[^\]]*\]\])", str(t))
+    for i in range(0, len(parts), 2):
+        parts[i] = parts[i].replace("\\|", "/").replace("|", "/")
+    return "".join(parts).replace("\n", " ")
 
 
 def build(jur):
+    CUR_JUR[0] = jur
     facts_doc = json.load(open(os.path.join(BASE, "_research", f"CCG-annex_{jur}-facts.json"), encoding="utf-8"))
     name = facts_doc.get("_jurisdiction", jur)
     facts = facts_doc["facts"]
@@ -304,7 +369,7 @@ def build(jur):
                 if note.startswith("Derivation recorded in register row"):
                     note = f"Derivation recorded in register row {f['register_id']}."
                 b = []
-                note = autotag(clean(note), index, sid, b)
+                note = tag_components(autotag(clean(note), index, sid, b, anchor=f["key"]), f["key"], facts)
                 bindings.append((SEC_NAME[sid], f["key"], f["register_id"], "value"))
                 bindings += [(SEC_NAME[sid], k, None, "auto-note") for k in b]
                 L.append(f"| `{f['key']}` | {esc(val)} | {eff} | {basis} | {esc(note)} |")
@@ -334,9 +399,11 @@ def build(jur):
     if os.path.exists(os.path.join(SCR, "examples_" + jur + ".md")):
         ex = open(os.path.join(SCR, "examples_" + jur + ".md"), encoding="utf-8").read().strip()
         text = text.replace(f"## {jur}.14 Worked examples\n", f"## {jur}.14 Worked examples\n\n{ex}\n", 1)
+    text = CC.finalize(f"annex_{jur}.md", CC.normalize_annex(f"annex_{jur}.md", text, CC.MAP_FED_CT))
     open(os.path.join(OUT, f"annex_{jur}.md"), "w", encoding="utf-8").write(text)
     rep = {"jur": jur, "facts": len(facts), "keys": sorted({f['key'] for f in facts}),
            "bindings": bindings, "untagged_values": untagged_values,
+           "r3d_rebind": [r for r in REBIND if r[0] == jur], "r3d_components": COMPONENT_LOG[:],
            "gaps": [{"section": s, "title": SEC_NAME[s], **u} for s, u in gaps]}
     json.dump(rep, open(os.path.join(SCR, f"report_{jur}.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(jur, "facts", len(facts), "gaps", len(gaps), "auto-tags", sum(1 for b in bindings if b[3] != 'value'), "untagged", untagged_values)

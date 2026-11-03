@@ -1,12 +1,13 @@
-# Annex TX - Texas
+# Annex TX: Texas
+
 
 Jurisdiction annex of the United States Country Configuration Guide (US-CCG-001). Layer classification: **T1 - no state wage tax; SUI and levies only** (build manifest, tier rationale).
 
-The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC are out of scope (MANDATE, US-OWN-001). Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
+The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
 
-Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.json` and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. `RESEARCH-GAP` marks a point the research has not closed; it is not filled with an estimate.
+Every value in this annex is bound to a verified fact and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. A point marked as a research gap has not been closed by the research; it is not filled with an estimate.
 
-## 1. Labour code and pay rules
+## TX.1 Employment and labour code
 
 - **Minimum wage (Labor Code 62.051) [US-TXS5-002]:** the state rate is the federal FLSA rate (follows federal: [[FACT:tx.labour.minwage.state.follows_federal=True]]); the figure is in Annex FED. No 2027 change enacted. The state rule overrides local wage ordinances for private employment (62.0515): [[FACT:tx.local_mandates.preempted=True]].
 - **Scope trap:** chapter 62 does not apply to persons covered by the FLSA (62.151); in practice it covers employees outside FLSA coverage. Exemptions in 62.152-62.160.
@@ -28,7 +29,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 | `tx.labour.tip_credit.monthly_tip_threshold` | [[FACT:tx.labour.tip_credit.monthly_tip_threshold=20]] | USD | from 2003-09-01 | US-TXS5-002 | tipped = >20/month (62.052); cash wage per FLSA 3(m) |
 | `tx.labour.child_labour.min_age` | [[FACT:tx.labour.child_labour.min_age=14]] | years | from 2026-01-01 | US-TXS5-006 | 14-15: 8 h/day, 48 h/week |
 
-## 2. Income tax withholding (state and local)
+## TX.2 Income tax withholding
 
 - **No state income tax** (exists: [[FACT:tx.pit.exists=False]]): Const. Art. VIII s.24-a bars a tax on individuals' net incomes; s.24-b (2025) also bars a capital gains tax. No state withholding, W-4, supplemental rate, rounding rule, state W-2 or reciprocity [US-TXS5-001].
 - **No local wage tax** (exists: [[FACT:tx.local_wage_tax.exists=False]]) [US-TXP52-001].
@@ -38,10 +39,18 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `tx.pit.exists` | [[FACT:tx.pit.exists=False]] |  | from 2019-11-05 | US-TXS5-001 | Const. Art. VIII s.24-a; supersedes MANUAL US-TXPIT-001 |
+| `tx.pit.exists` | [[FACT:tx.pit.exists=False]] |  | from 2019-11-05 | US-TXS5-001 | Const. Art. VIII s.24-a. |
 | `tx.local_wage_tax.exists` | [[FACT:tx.local_wage_tax.exists=False]] |  | from 2026-01-01 | US-TXP52-001 |  |
 
-## 3. Social insurance and payroll levies
+## TX.2b Non-resident regime and reciprocity
+
+The non-resident and reciprocity rules of this jurisdiction are written in TX.2.
+
+## TX.2c Local wage taxes
+
+The local wage taxes of this jurisdiction, where any exist, are written in TX.2.
+
+## TX.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 - **Unemployment insurance (TWC) [US-TXS5-007, US-TXSUI-001].** Taxable wage base [[FACT:tx.sui.wage_base=9000]] USD per employee per calendar year, fixed by statute (201.082(1)), not indexed. 2026 rates [[FACT:tx.sui.employer.rate.min=0.32]] % to [[FACT:tx.sui.employer.rate.max=6.32]] %, including the obligation assessment of [[FACT:tx.ui.obligation_assessment.rate=0.01]] % [US-TXS5-019]. New employer [[FACT:tx.sui.new_employer.rate=2.7]] % for the first six calendar quarters (statute: the greater of the major-group rate less a fixed step, or a statutory floor, 204.006); the published rate cannot be re-derived without the major-group rates (open point below) [US-TXS5-008, US-TXS5-019].
 - **Employee contribution:** [[FACT:tx.sui.employee.rate=0]] %; deduction from wages prohibited (204.003) [US-TXS5-008].
@@ -56,7 +65,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 |---|---|---|---|---|---|
 | `tx.sui.wage_base` | [[FACT:tx.sui.wage_base=9000]] | USD | from 2026-01-01 | US-TXS5-007 | 201.082(1), not indexed; second document family US-TXSUI-001 |
 | `tx.ui.obligation_assessment.rate` | [[FACT:tx.ui.obligation_assessment.rate=0.01]] | % | 2026-01-01 to 2026-12-31 | US-TXS5-019 | deficit 0.00 |
-| `tx.sui.new_employer.rate` | [[FACT:tx.sui.new_employer.rate=2.7]] | % | 2026-01-01 to 2026-12-31 | US-TXS5-019 | TWC "generally 2.70%" first six quarters; statute floor 2.6% (US-TXS5-008); not derivable |
+| `tx.sui.new_employer.rate` | [[FACT:tx.sui.new_employer.rate=2.7]] | % | 2026-01-01 to 2026-12-31 | US-TXS5-019 | TWC "generally [[FACT:tx.sui.new_employer.rate=2.70]]%" first six quarters; statute floor 2.6% (US-TXS5-008); not derivable |
 | `tx.ui.etia.rate` | [[FACT:tx.ui.etia.rate=0.1]] | % | from 2026-01-01 | US-TXS5-008 | offset by 0.1-pt replenishment cut; no net increase |
 | `tx.sui.employee.rate` | [[FACT:tx.sui.employee.rate=0]] | % | from 2026-01-01 | US-TXS5-008 | 204.003 |
 | `tx.sdi_pfml.exists` | [[FACT:tx.sdi_pfml.exists=False]] |  | from 2026-01-01 | US-TXR3-003 |  |
@@ -65,13 +74,13 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `tx.ui.rate.new_employer.derivation` (non-blocking; research request filed under this key) - The published new-employer rate cannot be re-derived without the 2026 major-group rates. Closes with: TWC rate notice or "how your 2026 tax rate was calculated" page.
-- ⚠️ RESEARCH-GAP: `tx.ui.wages.401k_section125` (non-blocking; research request filed under this key) - TWC treatment of employee retirement deferrals and cafeteria-plan reductions was not read (201.082 is silent). Closes with: 40 TAC ch. 815 wage definition or TWC guidance.
-- ⚠️ RESEARCH-GAP: `tx.ui.rates.next_year` (non-blocking; research request filed under this key) - 2027 TWC rates not published; sweep not done (twc blocked). Closes with: TWC December 2026 notices (browser pass).
+- Not configured in this release [[GAP:RQ-338]]: The published new-employer rate cannot be re-derived without the 2026 major-group rates.
+- Not configured in this release [[GAP:RQ-339]]: TWC treatment of employee retirement deferrals and cafeteria-plan reductions was not read (201.082 is silent).
+- Not configured in this release [[GAP:RQ-342]]: 2027 TWC rates not published; sweep not done (twc blocked).
 
-## 4. Payslip statute and payroll records
+## TX.4 Pay statement
 
-- **Labor Code 62.003 (earnings statement) exists, for employees outside FLSA coverage only [US-TXS5-003].** At the end of each pay period: [[FACT:tx.payslip.content.non_flsa=signed statement: name, rate, gross, each deduction and purpose, net, hours or units]]; any form, including the check voucher; meals or lodging credited toward the wage stated separately (62.053). For FLSA-covered employees Texas has no statutory content rule (federal records rules apply). Never write "Texas has no pay-statement law" (this corrects the earlier mandate wording, US-MQ-63 part 6).
+- **Labor Code 62.003 (earnings statement) exists, for employees outside FLSA coverage only [US-TXS5-003].** At the end of each pay period: [[FACT:tx.payslip.content.non_flsa=signed statement: name, rate, gross, each deduction and purpose, net, hours or units]]; any form, including the check voucher; meals or lodging credited toward the wage stated separately (62.053). For FLSA-covered employees Texas has no statutory content rule (federal records rules apply). Never write "Texas has no pay-statement law".
 - **Electronic delivery and retention:** no Texas rule in chapters 61 or 62; retention follows FLSA and UI record rules (TWC rule not read, open point below).
 
 **Parameters (payslip statute and payroll records)**
@@ -80,7 +89,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 |---|---|---|---|---|---|
 | `tx.payslip.content.non_flsa` | [[FACT:tx.payslip.content.non_flsa=signed statement: name, rate, gross, each deduction and purpose, net, hours or units]] |  | from 1993-09-01 | US-TXS5-003 | Labor Code 62.003 - ONLY employees outside FLSA coverage (62.151); best practice for others |
 
-## 5. Statutory reporting
+## TX.5 Statutory reporting
 
 - **No withholding return or state W-2.**
 - **Quarterly UI wage report and payment [US-TXSUI-006]:** [[FACT:tx.report.ui.channel=electronic only (Unemployment Tax Services / QuickFile: ICESA, MMREF-1, delimited)]]. Due date and record retention under the TWC rules: open point below.
@@ -92,17 +101,18 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `tx.report.ui.enhanced_fields` | [[FACT:tx.report.ui.enhanced_fields=wage, industry, occupation, FT/PT, county of primary employment, remote-work status]] |  | from 2025-06-01 | US-TXS5-008 | Labor Code 204.0025 (2025); TWC implementation not read |
-| `tx.newhire.report_days` | [[FACT:tx.newhire.report_days=20]] | days | from 2026-01-01 | US-TXS5-012 | OAG; second authority US-TXS5-016 form |
+| `tx.report.ui.enhanced_fields` | [[FACT:tx.report.ui.enhanced_fields=wage, industry, occupation, FT/PT, county of primary employment, remote-work status]] |  | from 2025-06-01 | US-TXS5-008 | Labor Code 204.0025 (2025) lists the data; TWC implementation is a PROPOSED rule only (tx.report.ui.enhanced_fields.status, US-TXB5-301) - not mandatory on 2026-11-02. |
+| `tx.newhire.report_days` | [[FACT:tx.newhire.report_days=20]] | days | from 2026-01-01 | US-TXS5-017 | OAG; second authority US-TXS5-016 form |
 | `tx.report.ui.channel` | [[FACT:tx.report.ui.channel=electronic only (Unemployment Tax Services / QuickFile: ICESA, MMREF-1, delimited)]] |  | from 2026-01-01 | US-TXSUI-006 | due date not read from primary source |
+| `tx.report.ui.enhanced_fields.status` | [[FACT:tx.report.ui.enhanced_fields.status=PROPOSED ONLY: TWC proposed amendment to 40 TAC 815.107 (51 TexReg 5161, 2026-08-07; approved for proposal 2026-07-21, comments to 2026-09-07) would add to the quarterly wage report: wages, industry, occupation field, full/part-time status, county of primary employment, remote-work status (Labor Code 204.0025) and data for the 302.0205 Regional Labor Demand Assessment. Not adopted in the Texas Register adopted-rules issues of 2026-09-25 to 2026-10-30: on 2026-11-02 no field is mandatory and no start quarter is set.]] |  | from 2026-08-07 | US-TXB5-301 | G-RULING: identity 40 TAC 815.107 (proposed), 51 TexReg 5161; status proposal, not adopted; level employer reporting. Configure nothing as mandatory; re-check adopted-rules issues from November 2026. |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `tx.report.ui.due_date_records` (non-blocking; research request filed under this key) - Quarterly UI due date (40 TAC 815.107) and records retention (815.106) not read. Closes with: SOS TAC rule text or TWC employer page (browser pass).
-- ⚠️ RESEARCH-GAP: `tx.report.ui.enhanced_fields_layout` (blocking; research request filed under this key) - Which Labor Code 204.0025 fields are mandatory on the quarterly wage report, and from which quarter, is unknown. Closes with: TWC wage-report file specification or the adopted TWC rule.
-- ⚠️ RESEARCH-GAP: `tx.report.new_hire.contractors` (non-blocking; research request filed under this key) - Independent-contractor reporting to OAG is a tier-B lead only. Closes with: 1 TAC 55.303 or the OAG employer portal page.
+- Not configured in this release [[GAP:RQ-336]]: Quarterly UI due date (40 TAC 815.107) and records retention (815.106) not read.
+- Not configured in this release [[GAP:RQ-340]]: Not established from an official source.
+- Not configured in this release [[GAP:RQ-580]]: The 815.107 amendment is proposed only; adoption date, first mandatory quarter and the TWC file layout are not published (twc.texas.gov layout pages geo-blocked from Brazil).
 
-## 6. Leave
+## TX.6 Leave
 
 - **Paid sick leave:** no state statute (exists: [[FACT:tx.leave.sick.state_statute.exists=False]]); Labor Code 1.005 (H.B. 2127, 2023) preempts city and county leave, benefit and scheduling ordinances for private employers [US-TXS5-005]. No PFML.
 - **Leave pay is wages only if promised in writing** (61.001(7)(B)) [US-TXS5-004].
@@ -117,9 +127,9 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `tx.leave.jury_military` (non-blocking; research request filed under this key) - Jury service and military leave pay rules not fetched. Closes with: CPRC 122.001; Gov. Code 431.005 / 437.204.
+- Not configured in this release [[GAP:RQ-341]]: Jury service and military leave pay rules not read.
 
-## 7. Termination
+## TX.7 Termination and final pay
 
 - **Final pay (61.014) [US-TXS5-004]:** a discharged employee is paid within [[FACT:tx.term.final_pay.discharge.days=6]] calendar days of discharge; any other separation: [[FACT:tx.term.final_pay.other=next regularly scheduled payday]]. Commissions and bonuses follow the agreement (61.015).
 - **Accrued vacation:** [[FACT:tx.term.vacation.payout=only if written policy or agreement promises it]] [US-TXS5-004, US-TXS5-018].
@@ -134,11 +144,11 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 | `tx.term.final_pay.other` | [[FACT:tx.term.final_pay.other=next regularly scheduled payday]] |  | from 2026-01-01 | US-TXS5-004 |  |
 | `tx.term.vacation.payout` | [[FACT:tx.term.vacation.payout=only if written policy or agreement promises it]] |  | from 2026-01-01 | US-TXS5-004 | 61.001(7)(B) |
 
-## 8. Benefits in kind and the taxable base
+## TX.8 Benefits in kind and taxable wages
 
 - **No income tax;** conformity matters only for the UI wage definition (Section 3) [US-TXS5-007].
 
-## 9. Deductions and garnishments
+## TX.9 Deductions and garnishments
 
 - **Wage deductions (61.018):** only by court order, by law, or with written authorisation for a lawful purpose [US-TXS5-004].
 - **Garnishment (Const. Art. XVI s.28; CPRC 63.004) [US-TXS5-009, US-TXS5-010]:** current wages are exempt except for child support and spousal maintenance; creditor wage garnishment available: [[FACT:tx.garn.consumer.available=False]]. Federal tax levies and federal administrative garnishments apply by federal law.
@@ -154,7 +164,9 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 | `tx.garn.iwo.lump_sum.threshold` | [[FACT:tx.garn.iwo.lump_sum.threshold=500]] | USD | from 2026-01-01 | US-TXS5-011 | notify OAG; hold 10 days |
 | `tx.garn.iwo.termination_notice_days` | [[FACT:tx.garn.iwo.termination_notice_days=7]] | days | from 2026-01-01 | US-TXS5-011 |  |
 
-## 10. Collective agreements and prevailing wage
+## TX.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 - **Prevailing wage (Gov. Code ch. 2258) [US-TXR3-002, US-TXS5-015]:** public works; the public body sets the rate (survey or Davis-Bacon); penalty [[FACT:tx.prevailing_wage.penalty.per_worker_day=60]] USD per worker per day; records of name, occupation and per diem wage; no state certified-payroll form.
 
@@ -162,13 +174,13 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `tx.prevailing_wage.penalty.per_worker_day` | [[FACT:tx.prevailing_wage.penalty.per_worker_day=60]] | USD | from 2026-01-01 | US-TXR3-002 | Gov. Code ch. 2258; public body sets rate |
+| `tx.prevailing_wage.penalty.per_worker_day` | [[FACT:tx.prevailing_wage.penalty.per_worker_day=60]] | USD | from 2026-01-01 | US-TXS5-015 | Gov. Code ch. 2258; public body sets rate |
 
-## 11. Indexation
+## TX.11 Indexation
 
 - **Nothing is indexed by state law:** minimum wage follows the FLSA; the UI wage base is statutory; UI rates are recomputed by TWC each year and mailed in December; 2027 rates not yet published (open point below).
 
-## 12. Payroll data protection
+## TX.12 Payroll data protection and records
 
 - **Business and Commerce Code 501.001 [US-TXS5-013]:** no public display of SSNs, no SSN on access cards, no unsecured transmission, no SSN on mailed material unless law requires it ([[FACT:tx.data.ssn.mailed_prohibited=True]]). No pay-statement truncation rule: a mailed paper payslip should not show the full SSN.
 
@@ -178,13 +190,17 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 |---|---|---|---|---|---|
 | `tx.data.ssn.mailed_prohibited` | [[FACT:tx.data.ssn.mailed_prohibited=True]] |  | from 2026-01-01 | US-TXS5-013 | B&C 501.001; mask on paper payslips (our reading) |
 
-## 13. Live legal change
+## TX.13 Live legal change
 
 - **Const. Art. VIII s.24-b (approved 2025-11-04):** capital gains tax ban; no payroll effect [US-TXS5-001].
 - **Labor Code 204.0025:** enhanced wage-filing data; payroll and DD impact depends on TWC implementation (open point below) [US-TXS5-008].
 - **2027 TWC rates** due December 2026; not swept (TWC site blocked).
 
-## 14. Special populations
+## TX.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## TX.15 Special populations
 
 | Population | Texas rule | Register id |
 |---|---|---|
@@ -198,12 +214,22 @@ Every value in this annex is bound to a key of `_research/CCG-annex_TX-facts.jso
 | Statutory employees | UI employment includes certain drivers and salespersons (201.042) | US-TXS5-007 |
 | Government employees | State and political subdivisions are UI employers (201.026); elected officials exempt from chapter 62 | US-TXS5-007, US-TXS5-002 |
 
-## 15. Sources
+## TX.16 Language
 
-Register ids cited in this annex resolve to `00-official-sources/legal-basis-register.csv`; the URL of each value is in the facts file. Authorities:
+No language rule for employee documents is written for this jurisdiction in this annex.
 
+## TX.S Sources
+
+Register ids cited in this annex resolve to the build record; the URL of each value is in the facts file. Authorities:
+
+- Build lead (Claude) under owner delegation (Wallisson Gomes): US-OWN-006
+- Office of the Attorney General of Texas - Child Support Division: US-TXS5-016
+- Owner (Wallisson Gomes): US-OWN-008
 - Texas Comptroller of Public Accounts: US-TXP52-001
+- Texas Legislative Council: US-TXS5-015
 - Texas Legislative Council (tcss.legis.texas.gov official statutes file server): US-TXS5-001
-- Texas Legislative Council (tcss.legis.texas.gov): US-TXS5-002, US-TXS5-003, US-TXS5-004, US-TXS5-005, US-TXS5-006, US-TXS5-007, US-TXS5-008, US-TXS5-009, US-TXS5-011, US-TXS5-012, US-TXS5-013, US-TXS5-014
+- Texas Legislative Council (tcss.legis.texas.gov): US-TXS5-002, US-TXS5-003, US-TXS5-004, US-TXS5-005, US-TXS5-006, US-TXS5-007, US-TXS5-008, US-TXS5-009, US-TXS5-010, US-TXS5-011, US-TXS5-012, US-TXS5-013, US-TXS5-014
 - Texas Legislature (statutes.capitol.texas.gov): US-TXR3-002
-- Texas Workforce Commission: US-TXR3-003, US-TXS5-019, US-TXSUI-001, US-TXSUI-006
+- Texas Secretary of State (Texas Register) / Texas Workforce Commission: US-TXB5-301
+- Texas Workforce Commission: US-TXP52-008, US-TXR3-003, US-TXS5-017, US-TXS5-019, US-TXSUI-001, US-TXSUI-005, US-TXSUI-006
+- Texas Workforce Commission (Office of the Commissioner Representing Employers): US-TXS5-018

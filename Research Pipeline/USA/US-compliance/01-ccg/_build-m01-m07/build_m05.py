@@ -99,15 +99,19 @@ A(f"| Telecommuting | {Q('multi.sui.localization.telecommuting')} | {R('multi.su
 A(f"| Unresolved cases | {Q('multi.sui.reciprocal_coverage_election')} | {R('multi.sui.reciprocal_coverage_election')} |")
 A(f"| Which State's PFML/SDI applies | {Q('multi.pfml.coverage_test.default', on=ON)} | {R('multi.pfml.coverage_test.default', on=ON)} |")
 A("")
-A(UNR("multi.pfml.coverage_test.remaining_states"))
+# round 2: the m05 summary item duplicated the per-State requests of Annex MULTI (MULTI.3); pointer instead of a
+# second marker without its own research request
+A("The PFML/SDI/TDI coverage test of the remaining programmes (California, New Jersey, New York, Massachusetts, "
+  "Colorado, Minnesota, Vermont, Hawaii) is open State by State in Annex MULTI (MULTI.3), where each carries its own "
+  "research marker.")
 
 # ---------------------------------------------------------------- 5.1.1
 A(H(2, "5.1.1 Contribution Basis Definition"))
 A(H(3, "For each mandatory contribution, provide the statutory definition of the earnings base."))
 A("FICA and FUTA are levied on wages **paid** in the calendar year by the employer "
   f"({COV('accrual_vs_payment')}). FUTA counts one base per employer, not per State: {Q('multi.futa.wage_base.scope')} "
-  f"{R('multi.futa.wage_base.scope')}. The inclusion/exclusion list of FICA wages is Module 4 §4.2 (and research request "
-  "`fed.fica.wage_definition.exclusions`). Each State defines its own UI wages; the 2026 taxable wage bases are:")
+  f"{R('multi.futa.wage_base.scope')}. The inclusion/exclusion lists of FICA and FUTA wages are in Module 4 §4.2 "
+  f"{R('fed.fica.wage_definition.exclusions')}. Each State defines its own UI wages; the 2026 taxable wage bases are:")
 A("")
 A("| State | SUI taxable wage base 2026 (USD) | Fact |")
 A("|---|---|---|")
@@ -123,9 +127,10 @@ for j in [x.lower() for x in MAN("tier", "_jurisdictions") if len(x) == 2]:
 A("")
 A("Many States count wages already reported by the same employer to another State's UI in the same year toward their "
   f"own base (for example {K('multi.sui.other_state_wage_credit.ca')}, {K('multi.sui.other_state_wage_credit.fl')}); some "
-  f"do not ({K('multi.sui.other_state_wage_credit.ia')}; {K('multi.sui.other_state_wage_credit.mt')}). Annex MULTI keys each State.")
+  f"do not ({K('multi.sui.other_state_wage_credit.ia')}; {K('mt.sui.wage_base.other_state_credit')}). Annex MULTI keys each State.")
 A("")
-A(UNR("multi.sui.other_state_wage_credit.remaining_states"))
+A("The States whose other-State wage credit is not yet established are listed in Annex MULTI (MULTI.3), each with "
+  "its own research marker.")
 A("")
 A("State UI wage definitions also differ from FICA wages for deferrals and cafeteria-plan reductions (examples: "
   f"{K('nj.sui.wages.401k_included')}; {K('va.sui.wages.401k_included')}; {K('ak.sui.wages.excludes_401k_deferrals')}; "
@@ -145,13 +150,25 @@ A("| Variation | Rule | Fact |")
 A("|---|---|---|")
 A(f"| Ceiling | OASDI USD {T('fed.fica.oasdi.wage_base', on=ON)} (2026); USD {T('fed.fica.oasdi.wage_base', on='2027-06-30')} published for 2027 (medium confidence) | {R('fed.fica.oasdi.wage_base', on=ON)}; {R('fed.fica.oasdi.wage_base', on='2027-06-30')} |")
 A(f"| Tier above a threshold | Additional Medicare above USD {T('fed.fica.addl_medicare.withholding_threshold')} | {R('fed.fica.addl_medicare.withholding_threshold')} |")
-A(f"| Region (FUTA) | Credit reduction for the State of the wages: 2025 final California {T('fed.futa.credit_reduction.ca')}%, U.S. Virgin Islands {T('fed.futa.credit_reduction.vi')}% (register row partial) | {R('fed.futa.credit_reduction.ca')} |")
+# round 2 (QA r1 C41): the 2025 California / Virgin Islands credit reductions are prior-year values
+# (moved to _history by agent 2); the configuration table shows the rule only, the 2026 list is the open item below.
+A(f"| Region (FUTA) | Credit reduction for the State of the wages when the State carries an outstanding Title XII advance; the 2026 credit-reduction States are stated in the limitation below this table [[GAP:RQ-402]] | {R('fed.futa.legal_basis.state_credit')} |")
 A("| Region (State programmes) | SUI, SDI, PFML per State (§5.1) | annexes |")
-A("| Nonresident alien | The NRA withholding add-on has no FICA or FUTA effect: FICA on actual wages, as for residents | " + COV('non_resident_employee') + " |")
+# round 3 (QA r2 C31): FICA/FUTA exemptions of nonresident aliens and totalization, from the facts agent 2 added
+_nra = nra_fica_text()
+if _nra:
+    A("| Nonresident alien | The NRA withholding add-on has no FICA or FUTA effect; FICA and FUTA apply to actual wages unless "
+      "one of these exemptions applies: " + _nra + " | " + COV('non_resident_employee') + " |")
+else:
+    A("| Nonresident alien | The NRA withholding add-on has no FICA or FUTA effect. FICA and FUTA exemptions of nonresident "
+      "aliens (nonimmigrant classes, totalization agreements) are not configured in this release | " + COV('non_resident_employee') + " |")
 A(f"| Age | No age-based rates; age-based exemptions only: household workers under 18 (unless principal occupation), family employment, students (§5.2) | {R('fed.household.fica_cash_threshold')}; {K('fed.family_employment.treatment')} |")
-A("| Gender | No gender-based rate or exemption in the facts | |")
+A("| Gender | No gender-based rate or exemption in the federal or State sources read | |")
 A("")
-A(UNR("fed.futa.credit_reduction.potential_2026"))
+A(f"⚠️ RESEARCH-GAP [[GAPKEY:fed.futa.credit_reduction.ca]] (non-blocking): the 2026 FUTA credit reductions for California "
+  "and the U.S. Virgin Islands become final only if the Title XII advances remain unpaid on 2026-11-10; the potential "
+  "rates and the open items are in Annex FED (FED.3). Closes with: the Department of Labor credit-reduction list "
+  "published after 2026-11-10, or the 2026 Schedule A (Form 940) instructions.")
 A("")
 A("**Massachusetts PFML split (decision recorded).** The employee may bear part of each component; the split changes on "
   f"{D('ma.pfml.split', on='2027-06-30')}:")
@@ -239,7 +256,7 @@ A("")
 A(f"An employer's voluntary payment of the employee's State PFML share is W-2 wages {R('fed.pfml.employee_contribution.is_w2_wages')}.")
 A(H(3, "Which employee contributions are allowed as pre-tax deductions?"))
 A("Elective deferrals, health FSA and HSA salary reductions are salary-reduction arrangements (limits above). Which "
-  "federal base each one reduces is research request `fed.retirement.pretax.tax_treatment` (Module 3, Step 2); State "
+  f"federal base each one reduces is in Module 3, Step 2 {R('fed.retirement.pretax.tax_treatment')}; State "
   f"treatment differs ({K('ca.wages.401k_deferrals')}; {K('pa.bik.pa.401k_403b_457.taxable')}).")
 A(H(3, "Are there private insurance schemes with employer and employee contributions?"))
 A("| Scheme | Rule | Fact |")

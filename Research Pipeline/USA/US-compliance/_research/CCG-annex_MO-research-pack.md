@@ -79,13 +79,13 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `mo.pit.local.st_louis.earnings_tax.rate` | 1 % | 2026-01-01 |  | US-MOP52-006 (promoted, Synthesis C) | medium |
 | `mo.pit.local.st_louis.payroll_expense_tax.rate` | 0.5 % | 2026-01-01 |  | US-MOP52-006 (promoted, Synthesis C) | medium |
 | `mo.pit.local.kansas_city.earnings_tax.rate` | 1 % | 2026-01-01 |  | US-MOP52-006 (promoted, Synthesis C) | medium |
-| `mo.sui.wage_base` | 9000 USD | 2026-01-01 | 2026-12-31 | US-MOP52-005 (promoted, Synthesis C) | high |
-| `mo.sui.wage_base` | 9500 USD | 2025-01-01 | 2025-12-31 | US-MOP52-005 (promoted, Synthesis C) | high |
-| `mo.sui.new_employer.rate` | 2.376 % | 2026-01-01 | 2026-12-31 | US-MOP52-005 (promoted, Synthesis C) | high |
-| `mo.sui.employer.rate.max` | 6.0 % | 2026-01-01 | 2026-12-31 | US-MOP52-005 (promoted, Synthesis C) | high |
+| `mo.sui.wage_base` | 9000 USD | 2026-01-01 | 2026-12-31 | US-MOB5-403 (promoted, Synthesis C) | high |
+| `mo.sui.wage_base` | 9500 USD | 2025-01-01 | 2025-12-31 | US-MOB5-403 (promoted, Synthesis C) | high |
+| `mo.sui.new_employer.rate` | 2.376 % | 2026-01-01 | 2026-12-31 | US-MOB5-403 (promoted, Synthesis C) | high |
+| `mo.sui.employer.rate.max` | 6.0 % | 2026-01-01 | 2026-12-31 | US-MOB5-403 (promoted, Synthesis C) | high |
 | `mo.payslip.deduction_statement` | statement of total deductions at least monthly | 1955-08-28 |  | US-MOP52-002 (promoted, Synthesis C) | high |
-| `mo.records.retention_years` | 3 years | 2006-12-07 |  | US-MOP52-003 (promoted, Synthesis C) | high |
-| `mo.prevailing_wage.threshold` | 75000 USD | 2018-08-28 |  | US-MOP52-001 (promoted, Synthesis C) | high |
+| `mo.records.retention_years` | 3 years | 2006-12-07 |  | US-MOB5-402 (promoted, Synthesis C) | high |
+| `mo.prevailing_wage.threshold` | 75000 USD | 2018-08-28 |  | US-MOB5-401 (promoted, Synthesis C) | high |
 
 # Findings by domain (stage 5)
 
@@ -165,7 +165,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 
 ## 3 — social_security (SUI; no SDI/PFML)
 - **Agency:** DOLIR Division of Employment Security (DES).
-- **2026 wage base: USD 9,000** (2025: 9,500; 2024: 10,000). [US-MOP52-005, A.2; US-MOS5-013, A.3]
+- **2026 wage base: USD 9,000** (2025: 9,500; 2024: 10,000). [US-MOB5-403, A.2; US-MOS5-013, A.3]
   - Mechanism (288.036(2)): based on the 4-quarter average trust-fund balance. At or below 350M the base rises by 1,000; at or above 650M it falls by 500. The floor is 7,000 and the cap 13,000.
   - **G-DERIVE:** 9,500 - 500 = 9,000, which is the >=650M branch. [US-MOS5-012]
   - Caveat: the Revisor flags the displayed H.B. 150 (2015) version of 288.036 as declared unconstitutional (*Pestka v. State*, SC95369, 2016). The DES guide restates the same wage-base rule.
@@ -175,7 +175,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - The automation-fund redirect is at most 0.020%, with no extra tax.
   - Missouri is **not** a FUTA credit-reduction state, and no federal interest assessment is expected for 2026.
 
-  [US-MOP52-005, US-MOP9W-002, already registered]
+  [US-MOB5-403, US-MOP9W-002, already registered]
 - **Employee contribution:** none. No part of the UI tax may be deducted from pay. [US-MOS5-013]
 - **Wages for UI** (288.036(1)):
   - Included: commissions, bonuses, non-cash pay, FUTA-reportable tips, and 401(k) elective deferrals (the DES guide says these are reportable).
@@ -191,7 +191,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 ## 4 — payslip_statute
 - **Required content:** a statement of total deductions at least once a month, with the check or separately (290.080). Breach is a misdemeanour with a fine of USD 50–500. [US-MOP52-002]
 - No itemised pay-statement statute exists in ch. 290 (index read). [US-MOP52-004]
-- **Records:** kept 3 years: name, address, occupation, rate, amount paid each period, and hours per day and per week (290.520). [US-MOP52-003]
+- **Records:** kept 3 years: name, address, occupation, rate, amount paid each period, and hours per day and per week (290.520). [US-MOB5-402]
 - **Electronic delivery:** no rule located.
 - **Language:** none required (290.080). [US-MOL-001]
 - **Multistate reach** (MULTI hand-off): 290.080 binds "corporations" with no territorial test in the text. Default: the work-location rule.
@@ -269,7 +269,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Wage deductions:** allowed for shortages or damage as long as pay stays at or above minimum wage. [US-MOS5-022]
 
 ## 10 — collective_agreements (prevailing wage)
-- RSMo 290.210–290.340 [US-MOP52-001, already registered]:
+- RSMo 290.210–290.340 [US-MOB5-401, already registered]:
   - Prevailing hourly rate on public works.
   - Overtime 1.5x above 10 hours a day or 40 hours a week; 2x on Sundays and holidays.
   - Does not apply to projects of USD 75,000 or less.
@@ -279,7 +279,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Minimum wage:** no longer indexed after 2026 (H.B. 567). [US-MOS5-002]
 - **Income-tax brackets:** CPI-U indexed every year (143.011(5)). DOR publishes the new brackets from October 1 and puts them in Form 4282 (2026 width: 1,348). [US-MOS5-018]
 - **Top rate:** revenue-triggered 0.1-point cuts; up to two more remain (4.6%, then 4.5%). [US-MOS5-018]
-- **SUI wage base:** set by the trust-fund balance (+1,000 / -500), published on the DES tax-rates page. [US-MOS5-012, US-MOP52-005]
+- **SUI wage base:** set by the trust-fund balance (+1,000 / -500), published on the DES tax-rates page. [US-MOS5-012, US-MOB5-403]
 - **New-employer rate:** carries the annual CRA (derived at -12% for 2026).
 
 ## 12 — data_protection

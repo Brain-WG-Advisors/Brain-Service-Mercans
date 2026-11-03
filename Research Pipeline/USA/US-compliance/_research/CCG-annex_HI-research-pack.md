@@ -126,7 +126,7 @@ HRS 487J-2: no public display/mailing of full SSN (employer-employee mail allowe
 
 
 ## 13 — Live legal change
-- `hi.live.act24_2026` = **in force (TA 2026-06, 2026-07-31): TY2027 2nd bracket 3.2 -> 2.5%, 3rd 5.5 -> 5%, new 13% top bracket; level assessment from TY2027 and withholding from 2027-01-01 once the 2027 Booklet A issues**  (2026-07-31 → open) [A.2, US-HIS5-029, quoted from authority page, conf medium] — Act text gated (403) [US-HIS5-030]; HRS 235-51 snapshot superseded in part [US-HIS5-027 partial].
+- `hi.live.act24_2026` = **in force (TA 2026-06, 2026-07-31): TY2027 2nd bracket 3.2 -> 2.5%, 3rd 5.5 -> 5%, new 13% top bracket; level assessment from TY2027 and withholding from 2027-01-01 once the 2027 Booklet A issues**  (2026-07-31 → open) [A.2, US-HIS5-029, quoted from authority page, conf medium] — Act text gated (403; gated row listed in the HI pack); HRS 235-51 snapshot superseded in part [US-HIS5-027 partial].
 
 ## Oracle — worked examples (C37)
 - `hi.oracle.booklet_a.part1.withholding_weekly` = **9.58** USD (2026-01-01 → 2026-12-31) [A.2, US-HIS5-004, derived arithmetically, conf high] — Single, 3 allowances, 500/week: 26,000 - 3,432 - 4,350 = 18,218; 288 + 3,818 x 5.5% = 497.99; /52 = 9.58. Re-derived exactly.

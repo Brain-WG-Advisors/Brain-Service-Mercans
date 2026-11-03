@@ -17,7 +17,6 @@
 
 | Year | Wage base |
 |---|---|
-| 2025 | {{wy.sui.wage_base@2025-01-01}} USD |
 | 2026 | {{wy.sui.wage_base@2026-01-01}} USD |
 | 2027 | {{wy.sui.wage_base@2027-01-01}} USD |
 

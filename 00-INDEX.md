@@ -72,6 +72,7 @@
 | [[Tailandia]] | ⏳ | ⏳ | ✅ | [[Tailandia]] |
 | [[Taiwan]] | ⏳ | 🔄 | 🔄 | [[Taiwan]] |
 | [[Tchequia]] | ✅ | ⏳ | ⏳ | [[Tchequia]] |
+| [[Tunisia]] | ✅ | ⏳ | 🔄 | [[Tunisia]] |
 | [[Ucrania]] | ✅ | 🔄 | 🔄 | [[Ucrania]] |
 | [[Vietna]] | ⏳ | ⏳ | 🔄 | [[Vietna]] |
 

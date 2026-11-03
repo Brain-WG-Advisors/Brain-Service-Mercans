@@ -37,3 +37,4 @@ Onda 1: CA, TX, NY, FL, IL, PA, OH, NC, MI, GA. Onda 2: NJ, MA, VA, TN, IN, WA, 
 - 2026-11-02: ✅ Fase 0 — mandato selado (65/65, validador PASS). Decisões US-OWN-006 (idioma) e US-OWN-007 (taxas) registradas. Início da fase 1.
 - 2026-11-02: Fase 1 — pesquisa dos 53 grupos concluída (~1.260 fontes). Em curso: juntar no registro; depois passada no navegador (precisa VPN) e pacotes de pesquisa por documento.
 - 2026-11-02: ✅ Fase 1 concluída — registro 2.572 fontes; pacotes e facts de todos os documentos (≈5.300 valores, todos validados). Pendências que dependem de publicação (DC método 2026, UT vigência) ou de IP dos EUA ficam como lacuna marcada. Início da fase 2 (CCG).
+- 2026-11-02: ✅ Fase 2 — CCG aprovado (QA r3e PASS; 3 rodadas + 2 correções dirigidas). Início da fase 3 (trava do escopo) e fase 4 (Report Specs, DD, WTC, Integrações, Payslip).

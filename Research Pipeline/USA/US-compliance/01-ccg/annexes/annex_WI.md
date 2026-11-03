@@ -1,12 +1,13 @@
-# Annex WI - Wisconsin
+# Annex WI: Wisconsin
+
 
 Jurisdiction annex of the United States Country Configuration Guide (US-CCG-001). Layer classification: **T3 - state withholding; local layer absent or piggybacked on the state return** (build manifest, tier rationale).
 
-The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC are out of scope (MANDATE, US-OWN-001). Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
+The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
 
-Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.json` and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. `RESEARCH-GAP` marks a point the research has not closed; it is not filled with an estimate.
+Every value in this annex is bound to a verified fact and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. A point marked as a research gap has not been closed by the research; it is not filled with an estimate.
 
-## 1. Labour code and pay rules
+## WI.1 Employment and labour code
 
 - **Minimum wage (Wis. Stat. 104.035) [US-WIS5-001, US-WIS5-002]:** [[FACT:wi.minwage.hourly=7.25]] USD per hour, minors included; opportunity employees (young workers in their first period of employment) [[FACT:wi.labour.minwage.opportunity.hourly=5.90]] USD. No increase scheduled for 2026 or 2027.
 - **Local minimum wage:** barred (104.001(2)): [[FACT:wi.local_mandates.preempted=True]] [US-WIS5-001].
@@ -26,15 +27,15 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.minwage.tipped.cash_wage` | [[FACT:wi.minwage.tipped.cash_wage=2.33]] | USD | from 2009-07-24 | US-WIS5-002 |  |
 | `wi.labour.lodging_credit.weekly` | [[FACT:wi.labour.lodging_credit.weekly=58]] | USD | from 2009-07-24 | US-WIS5-001 | 8.30/day; meals 87/week or 4.15/meal |
 | `wi.overtime.weekly_threshold_hours` | [[FACT:wi.overtime.weekly_threshold_hours=40]] | hours | from 2003-12-01 | US-WIS5-003 | no daily OT; household domestic outside chapter |
-| `wi.overtime.premium.multiplier` | [[FACT:wi.overtime.premium.multiplier=1.5]] | ratio | from 2003-12-01 | US-WIS5-003 |  |
+| `wi.overtime.premium.multiplier` | [[FACT:wi.overtime.premium.multiplier=1.5]] | ratio | from 2003-12-01 | US-WIL-001 |  |
 | `wi.pay_frequency.rule` | [[FACT:wi.pay_frequency.rule=at least monthly, wages to a day max 31 days before payment]] |  | from 2026-01-01 | US-WIS5-004 | 109.03(1); logging/farm quarterly |
 | `wi.labour.direct_deposit.employer_may_require` | [[FACT:wi.labour.direct_deposit.employer_may_require=True]] |  | from 2026-01-01 | US-WIS5-005 | at no cost; stub still due (DWD page A.3) |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wi.labour.paycard` (non-blocking; research request filed under this key) - No WI paycard rule located. Closes with: DWD Labor Standards FAQ on pay cards.
+- Not configured in this release [[GAP:RQ-386]]: No WI paycard rule located.
 
-## 2. Income tax withholding (state and local)
+## WI.2 Income tax withholding
 
 - **Method [US-WIP51-001, US-WIS5-011, US-WIS5-010]:** [[FACT:wi.wh.method=W-166 (1/26) wage-bracket tables or alternate formula]]; any other method needs DOR permission (71.64(1)). DOR Withholding Tax Update 2026-1 states no plan to change the withholding rates for 2026 [US-WIS5-016].
 - **Withholding schedule (W-166) is not the statutory assessment schedule.** The WTC uses W-166 only.
@@ -78,11 +79,11 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.pit.nonresident.de_minimis` | [[FACT:wi.pit.nonresident.de_minimis=1500]] | USD | from 2026-01-01 | US-WIS5-011 | expected WI earnings under 1,500 (catch-up once exceeded) |
 | `wi.reciprocity.states` | [[FACT:wi.reciprocity.states=IL;IN;KY;MI (W-220); MN arrangement]] |  | from 2026-01-01 | US-MULTI-006 |  |
 | `wi.local_wage_tax.exists` | [[FACT:wi.local_wage_tax.exists=False]] |  | from 2026-01-01 | US-WIR3-001 |  |
-| `wi.pit.wh.bracket.1.ceiling` | [[FACT:wi.pit.wh.bracket.1.ceiling=12,760]] | USD | from 2022-01-01 | US-WIP51-001 | 3.54% |
+| `wi.pit.wh.bracket.1.ceiling` | [[FACT:wi.pit.wh.bracket.1.ceiling=12,760]] | USD | from 2022-01-01 | US-WIP51-001 | [[FACT:wi.pit.wh.bracket.1.rate=3.54]]% |
 | `wi.pit.wh.bracket.1.rate` | [[FACT:wi.pit.wh.bracket.1.rate=3.54]] | % | from 2022-01-01 | US-WIP51-001 |  |
-| `wi.pit.wh.bracket.2.ceiling` | [[FACT:wi.pit.wh.bracket.2.ceiling=25,520]] | USD | from 2022-01-01 | US-WIP51-001 | 4.65%; cumulative 451.70 |
+| `wi.pit.wh.bracket.2.ceiling` | [[FACT:wi.pit.wh.bracket.2.ceiling=25,520]] | USD | from 2022-01-01 | US-WIP51-001 | [[FACT:wi.pit.wh.bracket.2.rate=4.65]]%; cumulative 451.70 |
 | `wi.pit.wh.bracket.2.rate` | [[FACT:wi.pit.wh.bracket.2.rate=4.65]] | % | from 2022-01-01 | US-WIP51-001 |  |
-| `wi.pit.wh.bracket.3.ceiling` | [[FACT:wi.pit.wh.bracket.3.ceiling=280,950]] | USD | from 2022-01-01 | US-WIP51-001 | 5.30%; cumulative 1,045.04 |
+| `wi.pit.wh.bracket.3.ceiling` | [[FACT:wi.pit.wh.bracket.3.ceiling=280,950]] | USD | from 2022-01-01 | US-WIP51-001 | [[FACT:wi.pit.wh.bracket.3.rate=5.30]]%; cumulative 1,045.04 |
 | `wi.pit.wh.bracket.3.rate` | [[FACT:wi.pit.wh.bracket.3.rate=5.3]] | % | from 2022-01-01 | US-WIP51-001 |  |
 | `wi.pit.wh.bracket.4.rate` | [[FACT:wi.pit.wh.bracket.4.rate=7.65]] | % | from 2022-01-01 | US-WIP51-001 | cumulative 14,582.83 |
 | `wi.pit.wh.std_deduction.single` | [[FACT:wi.pit.wh.std_deduction.single=6702]] | USD | from 2022-01-01 | US-WIP51-001 | below 17,780; reduced 12% of excess; 0 at 73,630 |
@@ -92,10 +93,18 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wi.pit.wt4.form_edition` (non-blocking; research request filed under this key) - WT-4 edition and line layout unconfirmed (DOR URLs 404). Closes with: DOR Forms page WT-4 (browser pass).
-- ⚠️ RESEARCH-GAP: `wi.pit.statutory.brackets_2026_indexed` (non-blocking; research request filed under this key) - 2026 CPI-indexed assessment brackets not fetched (assessment only). Closes with: DOR 2026 Form 1 instructions (early 2027).
+- Not configured in this release [[GAP:RQ-382]]: Not established from an official source.
+- Not configured in this release [[GAP:RQ-387]]: 2026 CPI-indexed assessment brackets not read (assessment only).
 
-## 3. Social insurance and payroll levies
+## WI.2b Non-resident regime and reciprocity
+
+The non-resident and reciprocity rules of this jurisdiction are written in WI.2.
+
+## WI.2c Local wage taxes
+
+The local wage taxes of this jurisdiction, where any exist, are written in WI.2.
+
+## WI.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 - **Unemployment insurance (DWD) [US-WIS5-014, US-WIS5-019].** Taxable wage base [[FACT:wi.sui.wage_base=14,000]] USD, fixed in statute and not indexed. Rate schedule [[FACT:wi.ui.schedule.in_effect=D]] for 2026 and 2027 (total rate = basic + solvency), up to [[FACT:wi.sui.employer.rate.max=12]] %. New employer [[FACT:wi.ui.rate.new_employer.small=3.05]] % below the large-payroll threshold and [[FACT:wi.ui.rate.new_employer.large=3.25]] % at or above it (construction rates differ), for the first years [US-WIR3-002]. Annual increase cap (108.18(5)).
 - **Employee contribution:** [[FACT:wi.sui.employee.rate=0]] % [US-WIR3-003].
@@ -113,7 +122,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.sui.employee.rate` | [[FACT:wi.sui.employee.rate=0]] | % | from 2026-03-16 | US-WIR3-003 |  |
 | `wi.sdi_pfml.exists` | [[FACT:wi.sdi_pfml.exists=False]] |  | from 2024-03-01 | US-WIR3-004 | WFMLA unpaid (US-WIS5-006) |
 
-## 4. Payslip statute and payroll records
+## WI.4 Pay statement
 
 - **Content (103.457; DWD 272.10) [US-WIP52-001, US-WIS5-002]:** on the paycheck, envelope or accompanying paper: [[FACT:wi.payslip.items=hours worked, rate, amount and reason for each deduction]]; a coding system allowed. Electronic stub allowed if printable free; required even with direct deposit [US-WIS5-005].
 - **Retention:** payroll records at least [[FACT:wi.records.retention_years=3]] years (DWD 272.11, 274.06) [US-WIS5-002, US-WIS5-003]. No payslip language rule [US-WIL-002].
@@ -125,7 +134,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.records.retention_years` | [[FACT:wi.records.retention_years=3]] | years | from 2009-07-24 | US-WIS5-002 | DWD 272.11 |
 | `wi.payslip.items` | [[FACT:wi.payslip.items=hours worked, rate, amount and reason for each deduction]] |  | from 2026-01-01 | US-WIP52-001 | 103.457; DWD 272.10; electronic if printable free |
 
-## 5. Statutory reporting
+## WI.5 Statutory reporting
 
 - **WT-6 withholding deposit report [US-WIS5-011, US-WIS5-016]:** DOR assigns the frequency each November (no published thresholds); zero reports required; electronic only unless waived.
 - **WT-7 annual reconciliation:** due [[FACT:wi.report.wt7.due=January 31 (TY2026: February 1, 2027)]], rejected until all WT-6s are filed.
@@ -143,7 +152,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.report.ui.quarterly_due` | [[FACT:wi.report.ui.quarterly_due=end of month after quarter]] |  | from 2026-03-16 | US-WIS5-013 | electronic at 25+ employees |
 | `wi.newhire.report_days` | [[FACT:wi.newhire.report_days=20]] | days | from 2026-03-16 | US-WIS5-013 | incl. DOB |
 
-## 6. Leave
+## WI.6 Leave
 
 - **Paid sick leave:** no state statute (exists: [[FACT:wi.leave.sick.state_statute.exists=False]]); local mandates preempted (103.10(1m), 103.12) [US-WIS5-006].
 - **Wisconsin FMLA (103.10) [US-WIS5-006]:** employers with [[FACT:wi.leave.wfmla.employer_threshold=50]] or more permanent employees; service tests; unpaid, with substitution of paid leave. Bone marrow and organ donation leave unpaid (103.11). Vacation and holiday pay not mandated [US-WIS5-005].
@@ -155,7 +164,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.leave.sick.state_statute.exists` | [[FACT:wi.leave.sick.state_statute.exists=False]] |  | from 2026-01-01 | US-WIS5-006 | locals preempted |
 | `wi.leave.wfmla.employer_threshold` | [[FACT:wi.leave.wfmla.employer_threshold=50]] |  | from 2026-01-01 | US-WIS5-006 | unpaid; 52 weeks + 1,000 hours |
 
-## 7. Termination
+## WI.7 Termination and final pay
 
 - **Final pay (109.03(2)) [US-WIS5-004]:** [[FACT:wi.final_pay.rule=earlier of next regular payday or 31-day limit (quit and discharge)]]; commission sales agents and fixed-term contracts excepted. Death of an employee: wages payable on demand to the family (109.03(3)).
 - **Accrued vacation:** [[FACT:wi.term.vacation.payout=payable if written policy with no written forfeiture clause]] [US-WIS5-005].
@@ -169,7 +178,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | `wi.term.vacation.payout` | [[FACT:wi.term.vacation.payout=payable if written policy with no written forfeiture clause]] |  | from 2026-01-01 | US-WIS5-005 | DWD page |
 | `wi.term.plant_closing.notice_days` | [[FACT:wi.term.plant_closing.notice_days=60]] | days | from 2026-01-01 | US-WIS5-004 | 109.07, 50+ in WI |
 
-## 8. Benefits in kind and the taxable base
+## WI.8 Benefits in kind and taxable wages
 
 - **Conformity:** Wisconsin generally conforms to the IRC; W-166 defers to Pub 15 and 15-A; HSAs follow federal rules [US-WIS5-011]. Individual IRC conformity paragraph not isolated (open point below).
 - **2026 box-16 differences (Wisconsin wages higher than federal) [US-WIS5-016]:** [[FACT:wi.bik.wi.box16_differences=IRC 112, 127, 128, 129 (above WI exemption), 132 moving/bicycle]].
@@ -184,9 +193,9 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wi.bik.irc_conformity.individual` (non-blocking; research request filed under this key) - Individual IRC conformity paragraph 71.01(6) not isolated. Closes with: 71.01(6) in the on-disk ch. 71 text.
+- Not configured in this release [[GAP:RQ-384]]: Individual IRC conformity paragraph 71.01(6) not isolated.
 
-## 9. Deductions and garnishments
+## WI.9 Deductions and garnishments
 
 - **Deductions for damage, loss or faulty work (103.455):** written authorisation, joint determination or court finding; double damages for violations [US-WIS5-007].
 - **Creditor garnishment (812.34) [US-WIS5-008]:** at most [[FACT:wi.garn.creditor.max_percent=20]] % of disposable earnings (stricter than the CCPA); total exemption below the poverty line or with need-based aid; garnishee fee [[FACT:wi.garn.garnishee_fee=15]] USD plus a small fee per later payment, deducted from the creditor's share.
@@ -203,9 +212,11 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wi.garn.dor_wage_attachment` (non-blocking; research request filed under this key) - DOR wage attachment percentage and priority not read. Closes with: DOR Wage Attachment page and the levy provision it cites.
+- Not configured in this release [[GAP:RQ-383]]: DOR wage attachment percentage and priority not read.
 
-## 10. Collective agreements and prevailing wage
+## WI.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 - **No current prevailing-wage regime** (exists: [[FACT:wi.prevailing_wage.exists=False]]) [US-WIP52-002]; the repealing acts were not read (open point below). CBAs may set a different pay frequency (109.03(1)(a)) [US-WIS5-004].
 
@@ -217,14 +228,14 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wi.prevailing_wage.repeal_act` (non-blocking; research request filed under this key) - Repealing acts (2017 Act 59; 2015 Act 55) not read. Closes with: Act texts on docs.legis.wisconsin.gov.
+- Not configured in this release [[GAP:RQ-385]]: Repealing acts (2017 Act 59; 2015 Act 55) not read.
 
-## 11. Indexation
+## WI.11 Indexation
 
 - **Indexed:** the statutory assessment brackets (CPI-U) from 2026 [US-WIS5-010].
 - **Not indexed:** minimum wage; UI wage base [US-WIS5-014]; the withholding tables (revised by publication only; no change for 2026) [US-WIS5-016].
 
-## 12. Payroll data protection
+## WI.12 Payroll data protection and records
 
 - **Breach notification (134.98) [US-WIS5-018]:** within a reasonable time, at most [[FACT:wi.data.breach.notice_days=45]] days. No statute restricting SSNs on pay statements found; SSN truncation allowed on employee copies of W-2 and 1099 but not on copies filed with DOR [US-WIS5-012, US-WIS5-011]. Personnel file inspection (103.13) [US-WIS5-007].
 
@@ -234,13 +245,17 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 |---|---|---|---|---|---|
 | `wi.data.breach.notice_days` | [[FACT:wi.data.breach.notice_days=45]] | days | from 2026-01-01 | US-WIS5-018 |  |
 
-## 13. Live legal change
+## WI.13 Live legal change
 
 - **DOR Withholding Tax Update 2026-1 (2026-10-30):** no withholding rate change; tax year 2026 due dates; new box-16 differences [US-WIS5-016].
 - **Assessment-level changes** (bracket expansion, retirement subtraction) for tax years after 2024 [US-WIS5-010].
 - **DWD:** Schedule D continues in 2027; mailing ends in 2027; new portal fall 2026 [US-WIS5-020]. 2025 Acts 145 and 144: no withholding or contribution effect [US-WIS5-021].
 
-## 14. Special populations
+## WI.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## WI.15 Special populations
 
 | Population | Wisconsin rule | Register id |
 |---|---|---|
@@ -257,17 +272,28 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WI-facts.jso
 | Pensioners | Withheld only on written request | US-WIS5-016 |
 | Nonresident entertainers | Contract-price withholding unless bonded (WT-11 / WT-12) | US-WIS5-016, US-WIS5-011 |
 
-## 15. Sources
+## WI.16 Language
 
-Register ids cited in this annex resolve to `00-official-sources/legal-basis-register.csv`; the URL of each value is in the facts file. Authorities:
+No language rule for employee documents is written for this jurisdiction in this annex.
 
+## WI.S Sources
+
+Register ids cited in this annex resolve to the build record; the URL of each value is in the facts file. Authorities:
+
+- Build lead (Claude) under owner delegation (Wallisson Gomes): US-OWN-006
+- Owner (Wallisson Gomes): US-OWN-008
+- State of Wisconsin, Office of the Governor: US-WIS5-021
 - US DOL Women's Bureau: US-WIR3-004
+- WI official authority: US-WIP7-001
 - Wisconsin DOR: US-MULTI-006
 - Wisconsin DWD (published by LRB): US-WIS5-002, US-WIS5-003
 - Wisconsin DWD Equal Rights Division: US-WIS5-005
-- Wisconsin DWD Unemployment Insurance Division: US-WIR3-003, US-WIS5-013, US-WIS5-019
-- Wisconsin Department of Revenue: US-WIP51-001, US-WIS5-011, US-WIS5-012, US-WIS5-016
+- Wisconsin DWD Unemployment Insurance Division: US-WIR3-002, US-WIR3-003, US-WIS5-013, US-WIS5-019, US-WIS5-020, US-WIS5-023
+- Wisconsin Department of Revenue: US-WIP51-001, US-WIP52-003, US-WIS5-011, US-WIS5-012, US-WIS5-015, US-WIS5-016
 - Wisconsin Department of Revenue, Division of State and Local Finance: US-WIR3-001
+- Wisconsin Department of Workforce Development: US-WIP51-002
 - Wisconsin Legislature: US-WIP52-002
-- Wisconsin Legislature (LRB): US-WIS5-001, US-WIS5-004, US-WIS5-006, US-WIS5-008, US-WIS5-009, US-WIS5-010, US-WIS5-014, US-WIS5-018
+- Wisconsin Legislature (LRB): US-WIS5-001, US-WIS5-004, US-WIS5-006, US-WIS5-007, US-WIS5-008, US-WIS5-009, US-WIS5-010, US-WIS5-014, US-WIS5-018, US-WIS5-022
+- Wisconsin Legislature (published 10-1-26): US-WIL-001
 - Wisconsin Legislature / DWD: US-WIP52-001
+- Wisconsin Legislature; DWD: US-WIL-002

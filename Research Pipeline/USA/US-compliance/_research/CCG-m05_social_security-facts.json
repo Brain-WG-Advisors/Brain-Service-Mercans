@@ -7,7 +7,7 @@
  "generated_on": "2026-11-02",
  "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
  "_annex_keys_cited": {
-  "fed.fica.oasdi.wage_base": "CCG-annex_FED-facts.json (US-FED-022)",
+  "fed.fica.oasdi.wage_base": "CCG-annex_FED-facts.json (US-FEDB5-401)",
   "fed.fica.oasdi.rate.employer": "CCG-annex_FED-facts.json (US-FEDS5-005)",
   "fed.fica.medicare.rate.employer": "CCG-annex_FED-facts.json (US-FEDS5-005)",
   "fed.fica.addl_medicare.withholding_threshold": "CCG-annex_FED-facts.json (US-FEDS5-005)",
@@ -24,7 +24,7 @@
   "fed.household.fica_cash_threshold": "CCG-annex_FED-facts.json (US-FEDS5-029)",
   "fed.household.futa_quarter_threshold": "CCG-annex_FED-facts.json (US-FEDS5-029)",
   "fed.pfml.employee_contribution.is_w2_wages": "CCG-annex_FED-facts.json (US-FEDS5-007)",
-  "ca.sdi.employee.rate": "CCG-annex_CA-facts.json (US-CAEDD-004)"
+  "ca.sdi.employee.rate": "CCG-annex_CA-facts.json (US-CAP7-002)"
  },
  "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
  "facts": [
@@ -67,7 +67,7 @@
    "authority": "Council of the District of Columbia",
    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/32-541.03",
    "confidence": "high",
-   "note": "Employer only, no wage cap. | effective_from: register row carries no date; value in force on 2026-01-01 per the row"
+   "note": "Employer only, no wage cap. Value in force on 2026-01-01."
   },
   {
    "key": "ma.pfml.total.rate",
@@ -94,7 +94,7 @@
    "authority": "Massachusetts Department of Family and Medical Leave",
    "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
    "confidence": "high",
-   "note": "DECISION (synthesis B, 2026-11-02): payroll follows DFML - 2026 split unchanged, swap from 2027-01-01. Ch. 101/2026 s.45 (US-MAS5-026) makes ss.25-26 apply \"for taxable years beginning on or after January 1, 2026\"; read on the Act text, s.45 is the tax-year commencement clause shared with the c.62/c.63 provisions, while c.175M contributions are set by DFML under s.7(e) per calendar year and the Act (approved 2026-06-12) gives no retroactive re-split mechanism. Employee maximum share is 0.46% under both DFML years. Residual risk recorded as unresolved pfml.ma.split.effective_date."
+   "note": "DECISION (2026-11-02): payroll follows DFML - 2026 split unchanged, swap from 2027-01-01. Ch. 101/2026 s.45 (US-MAS5-026) makes ss.25-26 apply \"for taxable years beginning on or after January 1, 2026\"; read on the Act text, s.45 is the tax-year commencement clause shared with the c.62/c.63 provisions, while c.175M contributions are set by DFML under s.7(e) per calendar year and the Act (approved 2026-06-12) gives no retroactive re-split mechanism. Employee maximum share is 0.46% under both DFML years. Residual risk: the effective date of the split remains open."
   },
   {
    "key": "ma.pfml.split",
@@ -107,6 +107,70 @@
    "authority": "Massachusetts Department of Family and Medical Leave",
    "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
    "confidence": "high"
+  },
+  {
+   "key": "fed.fica.nra.fjmq_exempt",
+   "value": true,
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-001",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap21-subchapC-sec3121.htm",
+   "confidence": "high",
+   "note": "Applies only to pay for services performed to carry out the purpose of the F/J/M/Q admission (IRS Pub. 515 (2026) agrees, incl. authorized CPT/OPT); employee and employer FICA both not due. Level: payroll withholding and employer contribution."
+  },
+  {
+   "key": "fed.fica.nra.fjmq_exempt.scope",
+   "value": "Exempt: pay of a nonresident alien in F-1, J-1, M-1 or Q status for services that carry out the purpose of admission, on or off campus, including authorized Curricular and Optional Practical Training. Not exempt: other employment of the same person (e.g. an unrelated part-time job), and any pay once the person is a resident alien.",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-016",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+   "confidence": "high"
+  },
+  {
+   "key": "fed.futa.nra.fjmq_exempt",
+   "value": true,
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-002",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap23-sec3306.htm",
+   "confidence": "high",
+   "note": "IRC 3306(c)(19) and IRS Pub. 515 (2026): wages of F/J/M/Q nonresident aliens are not subject to FUTA. State UI coverage follows each state statute separately."
+  },
+  {
+   "key": "fed.fica.nra.other_visas.liable",
+   "value": true,
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-016",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+   "confidence": "high",
+   "note": "Nonresident aliens on other nonimmigrant visas (e.g. H-1B, L-1) or in refugee/asylee status are fully liable for social security and Medicare unless a totalization agreement exemption applies."
+  },
+  {
+   "key": "fed.fica.totalization.exemption_rule",
+   "value": "Wages are exempt from employee FICA (IRC 3101(c)) and employer FICA (IRC 3111(c)) while a section 233 Social Security Act agreement is in effect, to the extent the agreement makes them subject exclusively to the foreign social security system.",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-003",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap21-subchapA-sec3101.htm",
+   "confidence": "high",
+   "note": "Employer FICA counterpart: IRC 3111(c) (register US-FEDR2-004). The list of agreements in force and the certificate-of-coverage procedure are SSA documents not held locally (see unresolved)."
   }
  ],
  "unresolved": [
@@ -131,6 +195,16 @@
    "why": "PFML/SDI coverage of multistate workers: annex_MULTI keys CT, DC, DE, MD, ME, OR, RI, WA and a default (localization); CA, NJ, NY, MA, CO, MN, VT not keyed at MULTI level (MULTI-OQ-3).",
    "attempted": [],
    "what_would_close_it": "Each programme coverage definition (annex units).",
+   "blocking": false
+  },
+  {
+   "key": "fed.fica.totalization.agreements_in_force",
+   "why": "The list of totalization agreements in force and the certificate-of-coverage procedure are published by SSA; ssa.gov returns HTTP 403 to curl from a non-US exit (2026-11-02).",
+   "attempted": [
+    "https://www.ssa.gov/international/agreements_overview.html - HTTP 403 (2026-11-02)",
+    "https://www.ssa.gov/international/status.html - HTTP 403 (2026-11-02)"
+   ],
+   "what_would_close_it": "SSA Office of International Programs pages \"U.S. International Social Security Agreements\" (ssa.gov/international/agreements_overview.html) and the certificate-of-coverage page, read from a US exit or a browser pass.",
    "blocking": false
   }
  ]

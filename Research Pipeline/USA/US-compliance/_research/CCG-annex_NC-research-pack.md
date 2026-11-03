@@ -55,7 +55,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `nc.wh.certificate` | no NC-4: single, zero allowances; federal W-4 not acceptable | 2026-01-01 |  | US-NC-001 | high |
 | `nc.wh.supplemental.rate` | 4.09 % | 2026-01-01 | 2026-12-31 | US-NC-001 | high |
 | `nc.reciprocity.states` | none | 2026-01-01 |  | US-NC-001 | high |
-| `nc.sui.wage_base` | 34200 USD | 2026-01-01 | 2026-12-31 | US-NC-002 | high |
+| `nc.sui.wage_base` | 34200 USD | 2026-01-01 | 2026-12-31 | US-NCB5-401 | high |
 | `nc.sui.wage_base.other_state_credit` | True | 2026-01-01 |  | US-NCS5-015 | high |
 | `nc.sui.new_employer.rate` | 1.0 % | 2026-01-01 | 2026-12-31 | US-NCS5-014 | high |
 | `nc.ui.rate.base` | 1.9 % | 2026-01-01 | 2026-12-31 | US-NCP9V-001 | high |
@@ -116,9 +116,9 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - Confidence: 97%.
 
 ## 3. social_security (state layer: SUI, SDI/PFML, levies)
-- **SUI:** employer-paid only. "An employer may not deduct the contributions … from the remuneration" (G.S. 96-9.2(a)) [US-NCS5-014]. The **2026 taxable wage base is 34,200** (2025: 32,600) [US-NC-002, US-NCP9V-001]. The **new-employer rate is 1.000%** [US-NCS5-014, US-NCP9V-001]. Experience rate = base rate − ERRP (reserve ratio × 0.68). The 2026 base rate is 1.9%, applied because the trust fund exceeds 1.25% of insured wages. Range: **0.06%–5.76%** [US-NCS5-014, US-NCP9V-001]. A 20% surtax applies only when the trust fund is below 1 billion USD (G.S. 96-9.7(b)). It is not FUTA-certified [US-NCP9V-001].
+- **SUI:** employer-paid only. "An employer may not deduct the contributions … from the remuneration" (G.S. 96-9.2(a)) [US-NCS5-014]. The **2026 taxable wage base is 34,200** (2025: 32,600) [US-NCB5-401, US-NCP9V-001]. The **new-employer rate is 1.000%** [US-NCS5-014, US-NCP9V-001]. Experience rate = base rate − ERRP (reserve ratio × 0.68). The 2026 base rate is 1.9%, applied because the trust fund exceeds 1.25% of insured wages. Range: **0.06%–5.76%** [US-NCS5-014, US-NCP9V-001]. A 20% surtax applies only when the trust fund is below 1 billion USD (G.S. 96-9.7(b)). It is not FUTA-certified [US-NCP9V-001].
 - **Wage-base indexation:** the base is the greater of the FUTA base or 50% of the average yearly insured wage, rounded to the nearest 100 USD. Wages paid in another state and predecessor wages count toward it [US-NCS5-015]. G-DERIVE could not be closed: DES's published average weekly insured wage was not obtained (Q4).
-- **SDI/TDI/PFML:** none in NC [US-NCP51-005].
+- **SDI/TDI/PFML:** none located in NC. Agency level: the only NCDOR wage-based tax is withholding [US-NCP9V-002]; the programme-level absence rests only on tier-B MANUAL US-NCP51-005, so it is not a fact.
 - **Employer levies:** P7/P9 result reused: none besides SUI [US-NCP9V-001, US-NCP9V-002].
 - Confidence: 92%.
 
@@ -140,13 +140,13 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Annual reconciliation and state W-2:** NC-3 plus the state copies of W-2/1099 are **due January 31**, and electronic filing is mandatory through **eNC3**. A business that closes files by the end of the month after the quarter of closure. Late NC-3: 50 USD a day, capped at 1,000 USD. Wrong format: 200 USD [US-NC-001]. File formats: NC-3 and W-2 are fixed-field .txt; 1099/W-2G/1042-S are .xml. **The TY2026 specs are version 9-2026** ("use beginning January 2027") [US-NCS5-028]. The NC-3 layout PDF on disk is the **10-2020** edition (512-byte records, monthly amounts). It is a structural lead only, not the TY2026 edition [US-NCS5-027, partial]. EFW2 conformity of the NC W-2 file was not confirmed because the spec was not downloaded (Q2).
 - **Quarterly UI wage report:** NCUI 101 through NCSUITS. Due **Apr 30 / Jul 31 / Oct 31 / Jan 31**. Wages are reported by employee name and SSN. Electronic filing is mandatory for **10 or more employee wage items**, with a 25 USD penalty otherwise. A zero report is required while the business is active. Late filing: 5% a month up to 25%. Late payment: 10% [US-NCS5-025].
 - **New hire:** within **20 days** of hire, or twice a month 12–16 days apart if filed electronically. Fields: employee name, address, SSN, first date of services; employer name, address and FEIN (G.S. 110-129.2) [US-NCS5-020].
-- **Third-party and POA:** NCDOR GEN-58 [US-NCW1B-002]; DES POA [US-NCP51-003, US-FIL-013].
+- **Third-party and POA:** NCDOR GEN-58 (withholding) and the DES Power of Attorney (UI) [US-NCP51-003, US-FIL-013].
 - Confidence: 88% (TY2026 file specs not downloaded).
 
 ## 6. leave
 - **Paid sick leave:** there is no state statute, and local mandates on private employers are preempted [US-NCS5-001]. No sick-leave statute was found among the Wage and Hour Act sections read.
 - **Vacation:** optional. If offered, the employer follows its policy. Forfeiture requires prior written notice of the policy [US-NCS5-008, US-NCS5-023].
-- **PFML:** none [US-NCP51-005].
+- **PFML:** none located [US-NCP9V-002, agency level; programme-level absence rests only on tier-B MANUAL US-NCP51-005, not a fact].
 - **Other paid-leave mandates with payroll impact:** none located (jury duty, voting and similar leave were not searched; Q6).
 - Confidence: 80%.
 

@@ -21,7 +21,7 @@
 - **No SDI, TDI, PFML or LTC** (exists: {{tx.sdi_pfml.exists}}) [US-TXR3-003].
 
 ## @payslip
-- **Labor Code 62.003 (earnings statement) exists, for employees outside FLSA coverage only [US-TXS5-003].** At the end of each pay period: {{tx.payslip.content.non_flsa}}; any form, including the check voucher; meals or lodging credited toward the wage stated separately (62.053). For FLSA-covered employees Texas has no statutory content rule (federal records rules apply). Never write "Texas has no pay-statement law" (this corrects the earlier mandate wording, US-MQ-63 part 6).
+- **Labor Code 62.003 (earnings statement) exists, for employees outside FLSA coverage only [US-TXS5-003].** At the end of each pay period: {{tx.payslip.content.non_flsa}}; any form, including the check voucher; meals or lodging credited toward the wage stated separately (62.053). For FLSA-covered employees Texas has no statutory content rule (federal records rules apply). Never write "Texas has no pay-statement law".
 - **Electronic delivery and retention:** no Texas rule in chapters 61 or 62; retention follows FLSA and UI record rules (TWC rule not read, open point below).
 
 ## @reporting

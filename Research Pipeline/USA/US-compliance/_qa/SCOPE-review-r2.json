@@ -1,0 +1,255 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SCOPE",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-02",
+ "_reviewed_file": "scope_manifest.json md5 fa57cd3b930f8d1a97f215f93f52d871 (36,705 bytes), built by _pipeline/scope/build_scope_manifest.py; build log _pipeline/SCOPE-build-log.md",
+ "_reviewer": "compliance-qa-auditor (fresh instance; built no part of the scope manifest, its script, the build-manifest or the CCG)",
+ "_built_by": "artifact-builder (SCOPE build after review r1)",
+ "_ground_truth": "MANDATE.md md5 1f4ffae0d32598294edda20629063cef (sealed 2026-11-02); build-manifest.json md5 04633ca41bd4e7ef2792f3ed34b02ef1; legal-basis-register.csv md5 6766d67ad0ca0f0d06bd4e7769ec5e6d (2,669 rows); US-CCG-001-v1.0.docx md5 2de2b30cb18a0645d22838fdcb37a152",
+ "_summary": "Stage 2 checks 1-8 pass mechanically. C29 is clean. The tier verdict is byte-identical in build-manifest, MANDATE, CCG m01 and here, and the oracle and package equal build-manifest. All 73 cited register ids resolve (70 active, 3 partial, flagged), and the population, contractor and prevailing-wage sentences are identical to the CCG. The r1 empty-template defect is closed. The file still fails on content against the CCG and MANDATE. Two in-scope filings are missing with no descoping record (NV MBT, Seattle PET/SHT: blocker). The local and SDI 'separate return' lists contradict the MANDATE tier census (IN/MD/NY are piggy-backed; CA/OR are on the State return; NY/HI are insurer-funded; VT has no programme). The insurance_type mapper and wage-type categories drop modelled payroll items (WC employee shares and fees, VT CCC, OR STT, the US-OWN-007 levy set, city employer payroll taxes), which the _comment rule would exclude from every artifact. Five minor findings: wording, citations and consumed_by. B7 table in 07-qa-crosscheck/scope_validation.md.",
+ "_ccg_post_pass_change": "CCG post-pass change verified (no new CCG round). dc445c19 -> 2de2b30c: 82 diff blocks, all explained. 56 US-OWN-009 prevailing-wage sentences (55 inserted paragraphs + 1 appended in m10 10.2 P648), 2 US-OWN-005 deferral rewrites (m01 P32, m11.3 P727), 6 contractor rows citing US-OWN-008 (AL/AR/AZ/CA/CO/CT T226/T243/T259/T277/T295/T310 r6), 9 Sources locators completed (FED T190 r14/r15/r34, MULTI T205 r6/r14/r55/r110, AK T219r1, CT T322r11), 2 CT practice-fact cells aligned to the existing CT.2 method decision (m06 T71r8, m13 T165r8), 5 IN note cells now percent fact tags with [US-IN-001] (T439 r3/r4/r5/r7/r9), 2 dangling cross-references removed (MULTI T197r1, MS T586r2). Re-run on the new file: C11 96/96, C29 0, C38 54 recomputed / 0 mismatches, C40 18/18, C42 PASS, C43 PASS, C46 period-aware 0 mismatches and 120 unbound (r3e 118; the 2 new are citation numbers '125' in 'IRC 125/127/129' at MULTI.S T205r14 and '15.160' in '8 AAC 15.160' at AK.S T219r1, not facts), C69 PASS, C70 PASS (7 citations, 0 not in register), C37 PASS, validate_contract --all PASS (80 files), Word open check 1 file / 0 not clean. The shared period-unaware C46 FAIL (380 / 118) is unchanged from r3e (known limitation).",
+ "findings": [
+  {
+   "pattern": "F15",
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "scope_manifest.json!authority_filings.in_scope!entries 0-15 have no NV MBT entry and no Seattle entry (source: _pipeline/scope/build_scope_manifest.py)",
+   "problem": "Two filings that the CCG keeps in scope are missing from authority_filings.in_scope and have no descoping record in authority_filings.out_of_scope. (1) Nevada Modified Business Tax quarterly return, Form TAX-F003 V2026.1. CCG Annex NV.5 T704r2 states nv.report.mbt.due 'last day of month after quarter (file even if no tax)' [US-NVS5-010], and NV.3 T702r7-r10 models the 1.17 % tax. (2) Seattle Payroll Expense Tax and Seattle Social Housing Tax quarterly city returns. The tier verdict (copied verbatim into this file) declares Seattle PET 'a threshold-conditional employer tax on a city return [US-WAP51-001]' as a T4-shaped element, CCG WA.2 P5385 states the same, and build-manifest tier.by_domain.employer_payroll_levies lists it. WA is also absent from the 'Local income / wage tax returns' annex list. The file's own _in_scope_note says the Report Specifications 'must cover every filing above', so Stage 3 would build no spec for either filing. This is a filing dropped without a descoping decision (F15/F21).",
+   "expected": "Add two in_scope entries, through build_scope_manifest.py and never by hand. (a) 'Nevada Modified Business Tax return (Form TAX-F003, general business)', authority Nevada Department of Taxation, frequency 'quarterly; due last day of the month after the quarter (file even if no tax)', format 'My Nevada Tax e-file or paper', integration_type outbound, product_mapping_required true, register_ids [US-NVS5-010], ccg_location 'CCG Annex NV.3, NV.5'. (b) 'Seattle Payroll Expense Tax and Social Housing Tax returns (City of Seattle, threshold-conditional employer taxes)', authority City of Seattle (Department of Finance and Administrative Services), frequency 'quarterly (2026: Apr 30, Jul 31, Oct 31, Jan 31)', format 'FileLocal / city return; Taxpayer Authorization Form for payroll processors', outbound, product_mapping_required true, register_ids [US-WAP51-001, US-WAP7-005, US-WAP9V-001], ccg_location 'CCG Annex WA.2, WA.5'. If the build lead descopes either one, it goes to out_of_scope with a descoping_reason and an owner / US-OWN register id. Then add both to the employer-contribution wage-type category and the insurance_type mapper (finding 3).",
+   "register_id": "US-NVS5-010",
+   "action": "routed_to_builder",
+   "evidence": "WebFetch 2026-11-02: tax.nv.gov TAX-F003 V2026.1 reads 'Line 8 x .0117', 'threshold of $50,000', 'due ... the last day of the month following the applicable quarter'. The seattle.gov payroll-expense-tax page reads 'due quarterly beginning April 30, 2026', thresholds 9,074,409 / 194,452, and requires the 'Taxpayer Authorization Form' from payroll processors. CCG dump (md5 2de2b30c) P5385, T704r2, T702r7."
+  },
+  {
+   "pattern": "F21",
+   "severity": "major",
+   "pass": "P4",
+   "location": "scope_manifest.json!authority_filings.in_scope!ccg_location of entries 'Local income / wage tax returns (per locality)' and 'State SDI / TDI / PFML / long-term-care premium reports where separate'",
+   "problem": "Separate and piggy-backed returns are classified against the MANDATE tier census. (a) The local-returns entry (authority 'Local taxing authority', format 'per locality channel') lists annexes AL, CO, DE, IN, KY, MD, MI, MO, NJ, NY, OH, OR, PA, WV. MANDATE local_income_tax row, the tier verdict and CCG m10 10.1 P619 say a separate local return exists in exactly 11 jurisdictions (PA, OH, MI, KY, MO, AL, CO, DE, OR, WV, NJ). IN county tax, MD county tax (MW506) and NYC/Yonkers (NYS-45/NYS-1) are piggy-backed on the State return: T3, no locality return. (b) The SDI/TDI/PFML 'where separate' entry lists CA, CO, CT, DE, HI, MA, ME, MD, MN, NJ, NY, OR, RI, VT, WA. MANDATE sdi_tdi_pfml row says CA SDI and OR Paid Leave are filed with the State wage return, and NY DBL/PFL and HI TDI are insurer-funded with no State report. CCG VT.3 P5249 says VT has no mandatory SDI/PFML (vt.sdi_pfml.exists=False), and the VT Child Care Contribution goes on WHT-436, the withholding return. The RSPEC builder would build locality specs that do not exist and miss the classification the tier rests on.",
+   "expected": "(a) Local returns ccg_location = 'CCG m06; m10 10.1; annexes AL, CO, DE, KY, MI, MO, NJ, OH, OR, PA, WV section 2c (+ WA, see finding 1)', with a note on the State withholding entry: 'IN county, MD county (MW506) and NYC/Yonkers (NYS-45/NYS-1) are piggy-backed on the State withholding return (T3), not separate locality returns [US-INS5-007, US-MDP51-001, US-NY-008].' (b) SDI/PFML 'where separate' = the MANDATE sdi_tdi_pfml separate set (WA PFML + WA Cares, CT, CO, DE, ME, MD from 2027-01-01), plus any other annex whose section 5 shows a separate programme report (MA DFML, MN Paid Leave, NJ, RI: confirm each from its annex section 5). Note CA SDI and OR Paid Leave as filed on the State wage return and NY/HI as insurer-funded, and remove VT. Wording must match the MANDATE classification.",
+   "register_id": "US-FEDP52-007",
+   "action": "routed_to_builder",
+   "evidence": "MANDATE.md lines 36-38 (local_income_tax, sdi_tdi_pfml rows); CCG dump P619 (m10 10.1), P5249 and P5250 (VT.3)."
+  },
+  {
+   "pattern": "F2",
+   "severity": "major",
+   "pass": "P4",
+   "location": "scope_manifest.json!option_mapper_scope.insurance_type and wage_type_categories.in_scope!entries 'Employee programme contributions' and 'Employer contributions'",
+   "problem": "The insurance_type mapper and the wage-type categories omit payroll items that the CCG models. The file's own _comment says 'Out-of-scope codes must be excluded from ALL artifacts', so the DD and WTC would drop them (F2 in reverse). Missing employee deductions: WA workers' compensation employee share (wa.wc.employee_deduction.rule, CCG m07 7.1 T83r4, WA.3 P5399 [US-WAS5-019]); NM workers' compensation fee, employee 2.25 / employer 2.55 USD per quarter on TRD-41431 (CCG m05 5.1 P287, NM.3 [US-NMR3-001]); OR Workers' Benefit Fund, half employee and half employer, on Form OQ (OR.3 T755r14); VT Child Care Contribution, employee up to 0.11 % (VT.3 P5250 [US-VTS5-030]); OR statewide transit tax (employee, OR.3 P4124). Missing employer levies: the US-OWN-007 set beyond OR/NY transit (State workforce / administrative / solvency levies, e.g. MA COVID-19 Recovery Assessment and EMAC, GA administrative assessment, AR administrative assessment), NV MBT, and the city employer payroll taxes the tier reason lists (Jersey City, Newark, Seattle PET/SHT, St. Louis payroll expense tax, Pittsburgh PET, Denver OPT). US-OWN-007 is represented as 'transit levies OR and NY only'. That wording is only limb 1 of the decision.",
+   "expected": "insurance_type adds scope labels for WORKERS_COMP_EMPLOYEE_SHARE (WA L&I, OR WBF), WORKERS_COMP_FEE_NM, CHILD_CARE_CONTRIBUTION_VT, STATEWIDE_TRANSIT_TAX_OR, STATE_UI_ADMIN_SOLVENCY_LEVY, STATE_EMPLOYER_PAYROLL_TAX (NV MBT) and CITY_EMPLOYER_PAYROLL_TAX (NJ Jersey City/Newark, WA Seattle PET/SHT, MO St. Louis, PA Pittsburgh, CO Denver OPT employer). Each label carries its register basis in _insurance_type_basis, and the wording quotes US-OWN-007 in full (transit levies OR and NY; workforce/administrative/solvency levies per the P7 list; NH BET excluded). wage_type_categories gets the same items under employee and employer contributions. Labels stay scope labels; the DD assigns codes (C27 at DD close).",
+   "register_id": "US-OWN-007",
+   "action": "routed_to_builder",
+   "evidence": "CCG dump P287, T83r4c1, P5399, T689r5-r8, T755r14, P4124, P5250; build-manifest tier.by_domain.employer_payroll_levies; register US-OWN-007 figure_or_rule_carried."
+  },
+  {
+   "pattern": "F8",
+   "severity": "minor",
+   "pass": "P1",
+   "location": "scope_manifest.json!_failure_pattern_decisions!F8",
+   "problem": "Reads 'All four inbound documents above carry product_mapping_required = true', but integrations.inbound holds three entries (IWO / e-IWO, IRS levy 668-W, State UI rate notices). The IRS lock-in letter was not written (RQ-01), and the sentence was left over from the expected content.",
+   "expected": "'All three inbound documents above (IWO / e-IWO, IRS levy Form 668-W, State UI rate notices) carry product_mapping_required = true; IRS lock-in letters pending RQ-01.' Fix in build_scope_manifest.py and rebuild.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": "scope_manifest.json!employment_types.in_scope entries 5 (clergy) and 6 (employees abroad); wage_type_categories.special_rules entry 2 (parsonage)!register_ids",
+   "problem": "The basis rows are mis-pointed. Clergy and the parsonage rule cite US-FEDS5-029 (Pub. 15), whose own text sends ministers to US-FED-030 ('Ministers: US-FED-030'). Employees abroad cite US-FED-025 (Rev. Proc. 2025-32 inflation items, the 911 exclusion amount), not the instrument establishing the employer treatment. MANDATE US-MQ-12 (line 329) cites US-FED-030 (Pub. 15-A sec. 4) for clergy and US-FEDR3-007 (Pub. 54) for employees abroad.",
+   "expected": "clergy register_ids [US-OWN-005, US-FED-030]; parsonage special rule [US-FED-030]; employees abroad [US-OWN-005, US-FEDR3-007] (US-FED-025 may stay as a second id for the 911 amount). Re-verified 2026-11-02: Pub. 15-A (2026) says 'the earnings of a minister aren't subject to federal income, social security, and Medicare tax withholding' and 'Don't include a parsonage allowance'.",
+   "register_id": "US-FED-030",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "00-official-sources/legal-basis-register.csv!row US-OWN-002!figure_or_rule_carried and consumed_by (cited from scope_manifest.json jurisdictions.in_scope_note and _scope_decision_dates)",
+   "problem": "Jurisdiction-set owner question. US-OWN-001 cannot serve as the citation: it records US-MQ-11 (no State excluded from Stage 9b validation), not the scope set. The owner decision 'all 51 jurisdictions are in scope' is in the sealed MANDATE twice: 'Scope facts' Structure line 24, and the US-MQ-13 answer at line 343, whose register_id is US-OWN-002. That is sufficient F24 ground truth for Stage 2, and no new row is needed. The defect is that US-OWN-002's figure_or_rule_carried carries only 'state priority waves' and its consumed_by is 'MANDATE', so the jurisdiction-set limb has no register text and a future change to the set would propagate blind. scope_manifest.json cites MANDATE + US-OWN-003 only.",
+   "expected": "Agent 2 amends US-OWN-002. figure_or_rule_carried becomes 'US-MQ-13: all 51 jurisdictions (50 States + DC) in scope, plus the federal layer and the multistate routing domain (territories not included); build order in three waves per PRIORIDADE-ESTADOS.md'. consumed_by becomes 'MANDATE;SCOPE;CCG/m01_foundational;CCG/annex_MULTI'. Then the builder cites US-OWN-002 (with US-OWN-003) in jurisdictions.in_scope_note and _scope_decision_dates. A separate US-OWN-010 is acceptable only if agent 2 prefers not to widen US-OWN-002.",
+   "register_id": "US-OWN-002",
+   "action": "routed_to_source_hunter",
+   "evidence": "MANDATE.md lines 24, 343, 345; register rows US-OWN-001 (line 427), US-OWN-002 (line 428)."
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": "scope_manifest.json!wage_type_categories.in_scope entry 14 'Voluntary after-tax deductions (union dues, loans, charitable)'!register_ids",
+   "problem": "register_ids is an empty list: an in-scope scope statement with no basis (C5). The ccg pointer says 'employer policy; State wage-deduction law in annexes', and those annex rows exist.",
+   "expected": "Cite the register rows that CCG m07 7.1 and the annex section 7 wage-deduction authorisation rules cite (e.g. US-FEDS5-023 for the CCPA disposable-earnings limit, plus the State wage-deduction rows); or, if the category rests on employer policy alone, say so in a basis note naming CCG m13. An empty list is not accepted.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "00-official-sources/legal-basis-register.csv!column consumed_by!46 rows cited by scope_manifest.json outside the verbatim tier text",
+   "problem": "Of the 50 register ids that scope_manifest.json cites outside the verbatim tier text, 46 lack SCOPE in consumed_by. Only US-OWN-005, US-OWN-007, US-OWN-008 and US-OWN-009 carry it. The 46: US-AKP51-006, US-ALS5-007, US-AZR3-002, US-CAS5-016, US-CAS5-017, US-COS5-008, US-FED-001, US-FED-007, US-FED-008, US-FED-021, US-FED-023, US-FED-025, US-FED-027, US-FED-028, US-FEDB5-001, US-FEDP52-007, US-FEDR3-005, US-FEDR3-006, US-FEDS5-001, -002, -003, -005, -006, -007, -008, -012, -014, -015, -016, -023, -024, -027, -028, -029, -030, -031, -032, US-FIL-002, US-MULTIS5-006, -007, -011, -017, US-OWN-003, US-OWN-006, US-WAB5-003. A change to any of them would not reach the scope manifest.",
+   "expected": "Agent 2 appends ';SCOPE' to consumed_by of each listed row, plus the rows the builder adds for findings 1-3 and 5. Run it as one scripted pass and log one ledger line.",
+   "register_id": "US-OWN-003",
+   "action": "routed_to_source_hunter"
+  }
+ ],
+ "checks_run": [
+  "C5",
+  "C11",
+  "C29",
+  "C37",
+  "C38",
+  "C40",
+  "C42",
+  "C43",
+  "C46",
+  "C69",
+  "C70"
+ ],
+ "_checks_results": {
+  "Stage2_check1_valid_json": "PASS",
+  "Stage2_check2_sections": "PASS",
+  "Stage2_check3_filing_fields": "PASS (16 filings)",
+  "Stage2_check4_inbound_pmr": "PASS (3 inbound, 0 false)",
+  "Stage2_check5_mapper_overlap": "PASS (in-scope lists only; jurisdictions disjoint)",
+  "Stage2_check6_F1_F15": "PASS",
+  "Stage2_check7_oracle": "PASS (equal to build-manifest.oracle except _status)",
+  "Stage2_check8_package": "PASS 1.0 / 2027-03-31",
+  "B1_non_resident": "PASS",
+  "C29_scope_manifest": "PASS (0 markers; 'pending' only in the declared US-OWN-009 owner item)",
+  "register_resolution": "73 ids resolve; 70 active, 3 partial; 0 tier B; US-CCG-001 is the document id",
+  "tier_verbatim": "PASS (build-manifest tier.rationale, MANDATE line 28, CCG m01 P37)",
+  "filing_inventory_vs_CCG_MANDATE": "FAIL (findings 1-2)",
+  "mappers_vs_CCG": "FAIL (finding 3)"
+ },
+ "manual_review_items": [
+  "Stage 2 checks 1-8 and B1/B7 exist only as prompt text in mercans_pipeline_v2_12.sh L992-1036, not as a deterministic block. Re-implemented and run by hand (scratchpad qascope2/s2.py).",
+  "C5 (classification cites the establishing article) is not implemented in any script (L3). Run by hand on every scope statement: 1 statement with an empty basis (finding 7), 3 mis-pointed bases (finding 5).",
+  "C6 (format verified against source): channel-level formats only in this file. W-2 EFW2 / W-2c EFW2C and 1042-S IRIS were checked against the 2026 IRS texts; field-level formats are checked at RSPEC close (C44).",
+  "C7 (population-rules depth) is not applicable to SCOPE and runs at RSPEC close.",
+  "B7 decision table written to 07-qa-crosscheck/scope_validation.md.",
+  "RQ-01 (IRS lock-in letters, _research/SCOPE-research-request.json) is treated as non-blocking. F8 requires that an inbound channel be neither excluded nor mapped false; the three sourced inbound documents meet it, and no doctrine requires an unsourced inbound entry. Open with agent 2.",
+  "Jurisdiction-set owner question decided: US-OWN-001 does not suffice (it is US-MQ-11). MANDATE line 24 plus the US-MQ-13 answer (line 343, register US-OWN-002) suffice for Stage 2. US-OWN-002's text and consumed_by must be widened (finding 6, routed to agent 2); not blocking.",
+  "QA_METHODOLOGY Stage 2 DoD: wage_type_categories / option_mapper_scope are re-checked against the WTC's real codes at WTC close."
+ ],
+ "numeric_verification": {
+  "facts_total": 25,
+  "facts_verified": 17,
+  "unverified_keys": [
+   "scope.inbound.ui_rate_notice.az_uc603 (US-AZR3-002, des.az.gov returned 403)",
+   "scope.inbound.ui_rate_notice.ak_tr02 (US-AKP51-006)",
+   "scope.personal_id.itin.wa_paid_leave (US-WAB5-003)",
+   "scope.inbound.irs_levy.pub1494_rule (US-FEDS5-014)",
+   "scope.filing.form943.agricultural (US-FEDR3-006)",
+   "scope.filing.aca_1094c_1095c (US-FEDS5-012, partial)",
+   "scope.filing.w2c_efw2c (US-FIL-002)",
+   "scope.inbound.iwo.principal_place_rule (US-MULTIS5-007)"
+  ],
+  "method": "WebFetch of the registered URL on 2026-11-02; PDF text extracted with pypdf from the fetched bytes. Verified: W-2 due 2027-02-01, box 12 TA/TP/TT and box 14a/14b (iw2w3 2026); 1042-S via IRIS, FIRE retired, due 2027-03-15, and treaty-exempt compensation on 1042-S (Pub. 515 2026); oracle NRA 300 + 226.90 = 526.90 -> 31 and tribal 6,000 -> 584.09 (Pub. 15-T 2026); new hire 20 days / 2 monthly transmissions 12-16 days apart and the data elements (42 USC 653a); 941 due last day of the month after the quarter and 944 only on written notice (Pub. 15 2026); 940 due rule (2025 Instructions, partial row: 2025 due 2026-02-02, i.e. the Jan 31 rule rolled); statutory employee: no FIT withholding, box 13 (Pub. 15-A 2026); minister: no FIT/SS/Medicare withholding, parsonage excluded (Pub. 15-A 2026); TDI in six jurisdictions incl. PR (DOL Comparison 2023 ch. 8); CO FAMLI ITINs in bulk files from 2026-10-01; CA DE 2088 2027 notices by 2026-12-31; NV MBT TAX-F003 V2026.1 (.0117, 50,000, due last day of month after quarter); Seattle PET quarterly 2026 with 9,074,409 / 194,452 thresholds. The 8 keys listed were not verified this round (FAIL round; they are completed at round 3)."
+ },
+ "cross_checks": [
+  {
+   "name": "SCOPE x MANDATE (sealed) scope facts and tier census",
+   "result": "fail",
+   "note": "Tier verbatim, workers, special populations, jurisdictions, territories and NH BET agree. The local-return and SDI 'separate' lists contradict the local_income_tax and sdi_tdi_pfml rows (finding 2)."
+  },
+  {
+   "name": "SCOPE x build-manifest (tier verbatim, oracle, package, _scope)",
+   "result": "pass",
+   "note": "tier.rationale byte-identical; by_domain equal; oracle equal except _status; package equal; _scope workers/filing_channel wording carried."
+  },
+  {
+   "name": "SCOPE x CCG (filings, populations, prevailing wage, mappers)",
+   "result": "fail",
+   "note": "Populations, contractor and prevailing-wage sentences are identical. NV MBT and Seattle returns are missing (finding 1); WC / VT CCC / levy items are missing from the mappers (finding 3)."
+  },
+  {
+   "name": "CCG post-pass change dc445c19 -> 2de2b30c",
+   "result": "pass",
+   "note": "82 diff blocks, all explained (see _ccg_post_pass_change); C11, C29, C38, C40, C42, C43, C46 period-aware, C69, C70, C37 and Word open all clean."
+  },
+  {
+   "name": "scope_manifest vs WTC real numbers",
+   "result": "not_applicable",
+   "note": "WTC not built; re-open at WTC close."
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "scope.authority_filings.nv_mbt_return",
+   "consumed_by": [
+    "SCOPE",
+    "RSPEC",
+    "SIR",
+    "WTC",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-NVS5-010"
+  },
+  {
+   "fact": "scope.authority_filings.seattle_pet_return",
+   "consumed_by": [
+    "SCOPE",
+    "RSPEC",
+    "SIR",
+    "WTC",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-WAP51-001"
+  },
+  {
+   "fact": "scope.authority_filings.local_returns.jurisdictions",
+   "consumed_by": [
+    "SCOPE",
+    "RSPEC",
+    "SIR",
+    "CCG/m10_reporting"
+   ],
+   "resynced": false,
+   "register_id": "US-OWN-007"
+  },
+  {
+   "fact": "scope.option_mapper.insurance_type",
+   "consumed_by": [
+    "SCOPE",
+    "DD",
+    "WTC",
+    "PSL",
+    "RSPEC"
+   ],
+   "resynced": false,
+   "register_id": "US-OWN-007"
+  },
+  {
+   "fact": "scope.jurisdictions.in_scope",
+   "consumed_by": [
+    "MANDATE",
+    "SCOPE",
+    "CCG/m01_foundational",
+    "CCG/annex_MULTI"
+   ],
+   "resynced": false,
+   "register_id": "US-OWN-002"
+  },
+  {
+   "fact": "ccg.prevailing_wage.flag_sentence",
+   "consumed_by": [
+    "SCOPE",
+    "CCG/m04_compensation",
+    "CCG/m10_reporting",
+    "CCG/annex_FED",
+    "WTC",
+    "DD",
+    "RSPEC"
+   ],
+   "resynced": true,
+   "register_id": "US-OWN-009"
+  }
+ ],
+ "_next_action": "artifact-builder SCOPE round 3: fix findings 1-5 and 7 in build_scope_manifest.py and rebuild. Agent 2 (compliance-source-hunter) fixes findings 6 and 8 in the register first, then the builder re-cites. Auditor round 3 is the last (cap 3); a FAIL there escalates to the owner. RSPEC (Stage 3) must not start before the SCOPE PASS."
+}

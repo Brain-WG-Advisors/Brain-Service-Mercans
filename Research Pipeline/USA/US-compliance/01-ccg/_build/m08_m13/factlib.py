@@ -11,9 +11,12 @@ import glob
 import json
 import os
 import re
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+sys.path.insert(0, os.path.join(HERE, "..", "common"))
+import ccg_common as CC  # noqa: E402  round 2: aliases, [[GAP:]] tags, internal paths, percent tags
 RESEARCH = os.path.join(BASE, "_research")
 
 FACTS = {}          # key -> [entry, ...] (entry carries _file)
@@ -43,6 +46,8 @@ def has(key):
 
 
 def entries(key):
+    if key not in FACTS:
+        key = CC.alias(key)
     if key not in FACTS:
         raise KeyError(f"fact key not in facts files: {key}")
     return FACTS[key]
@@ -134,6 +139,9 @@ def REG(key, **kw):
     """Register id in brackets, recorded as a binding of the claim."""
     if not kw and len({x["register_id"] for x in entries(key)}) == 1:
         e = entries(key)[0]
+    elif not kw:
+        # round 2: a key that gained a dated period (facts re-run) cites the row in force mid build year
+        e = entry(key, on="2026-06-30")
     else:
         e = entry(key, **kw)
     return f"[{e['register_id']}]"
@@ -159,7 +167,7 @@ def dated(key, **kw):
 
 
 GAP_TEXT = {
-    "fed.eo13706.sick_leave.accrual": "the accrual rate and annual cap of paid sick leave for federal contractors under Executive Order 13706 (29 CFR 13.5) are not keyed.",
+    "fed.eo13706.sick_leave.accrual": "the accrual rate and annual cap of paid sick leave for federal contractors under Executive Order 13706 are not keyed.",
     "multi.sick_leave.coverage_threshold": "paid-sick-leave coverage of employees who work only partly in a State is set per State and is not keyed at multistate level.",
     "fed.form940.instructions_current": "the tax-year 2026 instructions for Forms 940 and 1094-C/1095-C are not yet issued; the 2025 editions were read.",
     "multi.newhire.registration_channel": "the HHS channel through which a multistate employer registers its designated new-hire State was not read (the statute, 42 U.S.C. 653a(b)(1)(B), carries the rule).",
@@ -177,7 +185,7 @@ GAP_TEXT = {
 
 def gap(text, key):
     GAPS.append((LOC[0], text, key))
-    return f"⚠️ RESEARCH-GAP: {text}"
+    return f"⚠️ RESEARCH-GAP [[GAPKEY:{key}]]: {text}"
 
 
 STATE_NAMES = {}
@@ -195,3 +203,46 @@ def keys_matching(rx):
 
 def humanize(suffix):
     return suffix.replace("_", " ").replace(".", " / ")
+
+
+_TAGRX = re.compile(r"(\[\[FACT:[^\]]*\]\])")
+_CLEAN = [
+    ("Every figure below is computed by `01-ccg/_examples/build_examples.py` from the facts files; no number is typed by hand.",
+     "Every figure below is computed from the verified rates, bases and constants; no number is typed by hand."),
+    ("derived by the Stage 5 worker", "re-derived from the published method"),
+    ("Worker re-derivation; ", "Re-derivation from the published method; "),
+    ("worker derivation", "re-derivation"),
+    (" keyed in the facts", " established from official sources"),
+    ("from keyed facts", "from verified figures"), ("from the keyed rates", "from the verified rates"),
+    ("are all keyed", "are all verified"), ("not all keyed", "not all verified"),
+    ("Keyed rule", "Verified rule"), ("(keyed States)", "(States with a verified rule)"),
+    ("The facts carry", "The verified sources give"), ("the facts carry", "the verified sources give"),
+    ("in the facts files", "in the verified sources"), ("facts files", "verified sources"),
+    ("is not carried as a fact", "is not established from an official source"),
+    ("held as a fact", "established from an official source"),
+    ("as dated facts", "as dated results"), ("not dated facts", "not dated results"),
+    ("The facts do not key how", "No official source in this build establishes how"),
+    ("main pre-tax plans are facts:", "main pre-tax plans are:"), ("Open practice points (not facts):", "Open practice points:"), ("(not facts, not expected results)", "(not expected results)"),
+    ("Oracle fact ", "Published result "),
+    (", as the key says", ", as the rule says"), ("give a payout key", "give a payout rule"),
+    ("with no paid-sick-leave key in the verified sources", "with no verified paid-sick-leave rule"),
+    ("have no payout key in the verified sources", "have no verified payout rule"),
+    ("with no final-pay key in the verified sources", "with no verified final-pay rule"),
+    ("carry no key stating how", "do not establish how"), ("lists every example established from an official source", "lists every verified example"),
+    ("(owner decision recorded in MANDATE.md)", "(owner decision)"),
+    ("is not keyed", "is not established from an official source"), ("are not keyed", "are not established from an official source"),
+    ("Not keyed", "Not established"), ("not keyed", "not established from an official source"),
+    ("rule is keyed", "rule is established"), ("are keyed", "are established from official sources"),
+    ("is keyed", "is established from an official source"),
+]
+
+
+def clean(text):
+    parts = _TAGRX.split(text)
+    out = []
+    for i, p in enumerate(parts):
+        if i % 2 == 0:
+            for a, b in _CLEAN:
+                p = p.replace(a, b)
+        out.append(p)
+    return "".join(out)

@@ -11,6 +11,8 @@ JURS = {"MD": "Maryland", "ME": "Maine", "MI": "Michigan", "MN": "Minnesota", "M
 if len(sys.argv) > 2:
     JURS = {k: v for k, v in JURS.items() if k in sys.argv[2].split(",")}
 OUTDIR = os.path.join(BASE, "01-ccg", "annexes")
+sys.path.insert(0, os.path.join(BASE, "01-ccg", "_build", "common"))
+import ccg_common as CC  # noqa: E402  round 2 (QA r1): finalize, annex skeleton, [[GAP:]] tags
 SCR = os.path.dirname(os.path.abspath(__file__))
 os.makedirs(OUTDIR, exist_ok=True)
 
@@ -166,6 +168,15 @@ def autotag(text, own_numeric, anchor_key, stats):
                 tier = "federal"
         if cands:
             k = sorted(cands, key=lambda c: (-common_prefix(c, anchor_key), c))[0]
+            # QA r3d finding 1 guard: same jurisdiction as the annex, and a place-named key only in a sentence
+            # naming the place (or on its own row, unless the sentence names another place)
+            jur = anchor_key.split(".")[0]
+            # the federal minimum wage (fed.minwage.hourly, tier 'federal') is this generator's one documented
+            # cross-reference: a State rule that is a multiple of it ('30 x 7.25') quotes the federal value
+            if not CC.binding_ok(k, jur, text, m.start(), allow_federal=(tier == "federal"), anchor=anchor_key):
+                stats.setdefault("r3d_guard_refused", []).append((anchor_key, m.group(0).strip(), k, tier))
+                stats["unbound"].append((anchor_key, m.group(0).strip(), sorted(keys_all)[:3]))
+                continue
             out.append(text[last:m.start(1)])
             out.append(f"[[FACT:{k}={m.group(1)}]]")
             last = m.end(1)
@@ -338,8 +349,7 @@ def build(jur):
     L.append(f"This annex holds the {name} layer only. The federal layer (federal income tax withholding, "
              "Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, "
              "and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, "
-             "reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and "
-             "Form 1099-NEC are out of scope. The pay statement is issued in English.")
+             "reciprocity mechanics) are in Annex MULTI. Neither is repeated here. " + CC.CONTRACTOR_SENTENCE + " The pay statement is issued in English.")
     L.append("")
     L.append("In every table, *Valid from* and *Valid to* give the period in which the value applies "
              "(*open* means no end date has been published), and *Source* is the identifier of the row in the "
@@ -490,6 +500,7 @@ def build(jur):
         L.append(f"| {rid} | {esc(a)} |")
     L.append("")
     text = "\n".join(L)
+    text = CC.finalize(f"annex_{jur}.md", CC.normalize_annex(f"annex_{jur}.md", text, CC.MAP_MD_NV, renumber_refs=True))
     open(os.path.join(OUTDIR, f"annex_{jur}.md"), "w", encoding="utf-8", newline="\n").write(text)
     # line numbers of gaps
     lines = text.split("\n")
@@ -501,7 +512,7 @@ def build(jur):
     return {"jur": jur, "file": rel, "facts": len(facts), "tags": len(TAG.findall(text)),
             "bindings": bindings, "gaps": gap_out, "autotag": stats["autotag"], "unbound": stats["unbound"],
             "dropped_lines": stats["dropped_lines"], "dropped_clauses": stats["dropped_clauses"],
-            "chars": len(text)}
+            "chars": len(text), "r3d_guard_refused": stats.get("r3d_guard_refused", [])}
 
 
 if __name__ == "__main__":

@@ -39,7 +39,13 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `va.pay_frequency.rule` | salaried at least monthly; hourly at least biweekly or twice a month | 2026-07-01 |  | US-VAS5-003 | high |
 | `va.payment.method` | cash, check, direct deposit to designated account, paycard with consent (one free withdrawal) | 2026-07-01 |  | US-VAS5-003 | high |
 | `va.minwage.tipped.cash_wage` | 2.13 USD | 2026-01-01 |  | US-VAS5-015 | high |
-| `va.wh.method` | annualised T = G x P - [8,750 + 930 x E1 + 800 x E2]; 2% to 3,000; 60+3% to 5,000; 120+5% to 17,000; 720+5.75% above; / P | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.wh.method` | Annualise: T = G x P - (standard deduction + 930 x E1 + 800 x E2); annual tax on T by brackets va.pit.bracket.1-4 (2% to 3,000; 60 + 3% to 5,000; 120 + 5% to 17,000; 720 + 5.75% above 17,000); withholding = annual tax / P | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.pit.bracket.1.rate` | 2 percent | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.pit.bracket.2.rate` | 3 percent | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.pit.bracket.3.rate` | 5 percent | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.pit.bracket.2.base_tax` | 60 USD | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.pit.bracket.3.base_tax` | 120 USD | 2025-07-01 |  | US-VAS5-013 | high |
+| `va.pit.bracket.4.base_tax` | 720 USD | 2025-07-01 |  | US-VAS5-013 | high |
 | `va.pit.std_deduction.single` | 8750 USD | 2025-01-01 | 2026-12-31 | US-VAS5-018 | high |
 | `va.pit.std_deduction.married` | 17500 USD | 2025-01-01 | 2026-12-31 | US-VAS5-018 | high |
 | `va.pit.std_deduction.single` | 9200 USD | 2027-01-01 | 2027-12-31 | US-VAS5-018 | high |
@@ -58,7 +64,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `va.sui.new_employer.rate` | 2.5 % | 2026-01-01 |  | US-VAR3-002 | medium |
 | `va.sui.employer.rate.min` | 0.1 % | 2026-01-01 |  | US-VAS5-014 | high |
 | `va.sui.employer.rate.max` | 6.2 % | 2026-01-01 |  | US-VAS5-014 | high |
-| `va.ui.fund_building.rate` | 0.2 % | 2026-01-01 |  | US-VAR3-003 | high |
+| `va.ui.fund_building.rate` | 0.2 % | 2026-01-01 |  | US-VAB5-402 | high |
 | `va.sui.employee.rate` | 0 % | 2026-01-01 |  | US-VAR3-002 | high |
 | `va.sui.wages.section125_included` | False | 2026-01-01 |  | US-VAS5-014 | high |
 | `va.sui.wages.401k_included` | True | 2026-01-01 |  | US-VAS5-014 | high |
@@ -77,7 +83,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `va.garn.iwo.employer_fee.per_remittance` | 5 USD | 2026-01-01 |  | US-VAS5-010 | high |
 | `va.prevailing_wage.threshold` | 250000 USD | 2026-07-01 |  | US-VAS5-019 | high |
 | `va.data.ssn.mailed_visible_prohibited` | True | 2008-07-01 |  | US-VAS5-008 | high |
-| `va.sui.wage_base` | 8000 USD | 2026-01-01 |  | US-VASUI-001 (promoted, Synthesis C) | high |
+| `va.sui.wage_base` | 8000 USD | 2026-01-01 |  | US-VAB5-401 (promoted, Synthesis C) | high |
 
 # Findings by domain (stage 5)
 
@@ -94,7 +100,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 
 ## 2. income_tax
 - **Method:** statute Va. Code 58.1-461 [US-VAPIT-002]; guide 2614086 Rev. 10/26 [US-VAS5-013, US-VAP51-001]. Formula for wages paid after 2025-07-01:
-  - Annualised taxable income: T = G×P − [8,750 + 930×E1 + 800×E2].
+  - Annualised taxable income: T = G×P − (8,750 + 930×E1 + 800×E2).
   - Tax brackets: 2% up to 3,000; 60 + 3% from 3,000 to 5,000; 120 + 5% from 5,000 to 17,000; 720 + 5.75% above 17,000.
   - Per-period tax: W ÷ P.
   - The tables are rounded to the nearest dollar; the formula gives the exact amount.
@@ -121,10 +127,10 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 
 ## 3. social_security
 - **SUI (VEC):**
-  - Wage base **8,000 USD** per employee per year [US-VASUI-001, US-VAS5-014].
+  - Wage base **8,000 USD** per employee per year [US-VAB5-401, US-VAS5-014].
   - New employer 2.5% (60.2-526(B)) "plus add-ons" [US-VAR3-002, US-VAS5-014].
   - Base rates 0.1%–6.2%. Assigned 6.2% for: no taxable payroll in 4 years, out-of-state construction contractors, delinquent employers.
-  - Add-ons: fund-building charge 0.2% when the trust fund is at 50% or less [US-VAR3-003], and a pool cost charge set yearly.
+  - Add-ons: fund-building charge 0.2% when the trust fund is at 50% or less [US-VAB5-402], and a pool cost charge set yearly.
   - No employee contribution [US-VAR3-002].
 - **2026 pool-cost percentage:** NOT obtained at tier A. The only source is a search summary (0.03%, tier B, not used). The same summary says the 2.5% new-employer rate already *includes* the add-ons, which contradicts the VEC FAQ wording "2.5% plus add-ons" (open question Q2).
 - **0.05% budget item:** HB30 2026 Item 359 [US-VAP7-003, existing row].
@@ -207,7 +213,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 
 ## 11. indexation
 - **Minimum wage:** fixed by statute through 2028; CPI-U from 2029, published by DOLI by October 1 [US-VAS5-001].
-- **UI wage base:** fixed at 8,000 in statute, not indexed [US-VASUI-001].
+- **UI wage base:** fixed at 8,000 in statute, not indexed [US-VAB5-401].
 - **PFML:** wage cap tied to the Social Security wage base; the rate is set by 2027-10-01 [US-VAS5-016].
 - **Income tax:** brackets and exemptions are not indexed; the standard deduction is fixed by statute for each year [US-VAS5-018].
 - **Garnishment:** the protected floor moves with the minimum wage [US-VAS5-007].

@@ -1,0 +1,231 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "RSPEC",
+ "requested_by": "artifact-builder",
+ "round": 1,
+ "created_on": "2026-11-03",
+ "_note": "Non-blocking open points of the RSPEC build round 1. Each is written in the workbooks as a neutral 'not configured in this release [[GAP:RSPEC-RQ-nn]]' statement. Please add each id to _research/gaps.json (RSPEC block) when triaged. The 43 limitations already recorded in gaps.json -> RSPEC are cited by their RSPEC-GAP ids and are not repeated here.",
+ "requests": [
+  {
+   "id": "RQ-01",
+   "key": "rspec.fed.form941.line_map",
+   "location": "04-reports-spec/US-IRS-001-Form941-Spec.xlsx!Report Matrix!J27",
+   "question": "What are the line numbers and line labels of the 2026 Form 941 and Form 944 (including the monthly / semiweekly liability detail and Schedule B), per the IRS 2026 forms and instructions?",
+   "why_blocking": "US-IRS-001 / US-IRS-002 name the amounts of the field model but cannot cite the form lines; the provider mapping and the C38 recomputation of a full return depend on it",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "a table line -> label -> amount definition, with register rows for the 2026 forms",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-01]]"
+  },
+  {
+   "id": "RQ-02",
+   "key": "rspec.fed.efw2.ra_rw_rt.layout_ty2026",
+   "location": "04-reports-spec/US-SSA-001-FormW2W3-Spec.xlsx!Report Matrix!J27",
+   "question": "What are the positions, lengths and formats of every field of the RA, RW and RT records, and the code lists of RE Kind of Employer, Employment Code, Tax Jurisdiction Code and Third-Party Sick Pay Indicator, in SSA Publication 42-007 for tax year 2026?",
+   "why_blocking": "US-SSA-001 rows W2-003 and W2-007 to W2-019 have no positions or code lists; the EFW2 file cannot be generated field by field (the held PDF already carries them)",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "one fact per record with 'field start-end' entries and one fact per code list",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-02]]"
+  },
+  {
+   "id": "RQ-03",
+   "key": "rspec.fed.w2.box_map",
+   "location": "04-reports-spec/US-SSA-001-FormW2W3-Spec.xlsx!Report Matrix!J27",
+   "question": "Which Form W-2 box carries each amount (wages, FIT, social security wages and tax, Medicare wages and tax, tips) and what is the Treasury Tipped Occupation Code list, per the 2026 General Instructions for Forms W-2 and W-3?",
+   "why_blocking": "US-SSA-001 rows W2-014 to W2-021 cannot name the box; the option list of box 14b is empty",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "box -> amount table and the code list, with register rows",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-03]]"
+  },
+  {
+   "id": "RQ-04",
+   "key": "rspec.fed.form943.line_map_due",
+   "location": "04-reports-spec/US-IRS-003-Form943-Spec.xlsx!Report Matrix!B11",
+   "question": "What are the lines and the due date of the 2026 Form 943 (agricultural employees), per the IRS 2026 Form 943 and instructions?",
+   "why_blocking": "US-IRS-003 carries no due date and no line map",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "due date + line table with register rows",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-04]]"
+  },
+  {
+   "id": "RQ-05",
+   "key": "rspec.fed.form1042s.wage_codes",
+   "location": "04-reports-spec/US-IRS-006-Form1042S-Spec.xlsx!Report Matrix!J27",
+   "question": "Which income code, exemption code and treaty-article boxes of the 2026 Form 1042-S apply to treaty-exempt wages of nonresident alien employees, per the 2026 Instructions for Form 1042-S?",
+   "why_blocking": "US-IRS-006 row F1042S-006 has no codes",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "code list per box with register rows",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-05]]"
+  },
+  {
+   "id": "RQ-06",
+   "key": "rspec.fed.aca.form1095c.line_codes",
+   "location": "04-reports-spec/US-IRS-007-Forms1094C1095C-Spec.xlsx!Report Matrix!J27",
+   "question": "What are the 2026 Form 1095-C line 14 / 15 / 16 codes and the 1094-C lines, per the 2026 Instructions for Forms 1094-C and 1095-C?",
+   "why_blocking": "US-IRS-007 row ACA-007 has no codes",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "code list per line with register rows",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-06]]"
+  },
+  {
+   "id": "RQ-07",
+   "key": "rspec.fed.form941x.line_map",
+   "location": "04-reports-spec/US-IRS-008-Form941X-Spec.xlsx!Report Matrix!B11",
+   "question": "What are the lines of the 2026 Form 941-X and how does the employer choose between the adjustment process and the claim process, per the IRS 2026 Form 941-X instructions?",
+   "why_blocking": "US-IRS-008 cannot name lines or the process choice",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "line table + process rule with register rows",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-07]]"
+  },
+  {
+   "id": "RQ-08",
+   "key": "rspec.fed.form940.line_map_credit_reduction",
+   "location": "04-reports-spec/US-IRS-004-Form940-Spec.xlsx!Report Matrix!J27",
+   "question": "What are the lines of the 2026 Form 940 and Schedule A, and which States are credit-reduction States for 2026 with which reduction, per the IRS and the U.S. Department of Labor?",
+   "why_blocking": "US-IRS-004 rows F940-006 and F940-009 cannot apply a credit reduction",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "line table + list of States with reduction percentage and effective year",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-08]]"
+  },
+  {
+   "id": "RQ-09",
+   "key": "rspec.fed.schedule_h.employer_statement",
+   "location": "04-reports-spec/US-IRS-005-ScheduleHRouting-Spec.xlsx!Report Matrix!J27",
+   "question": "What annual amounts must be handed to a household employer for Schedule H (FICA wages, FUTA wages, FIT withheld), per IRS Publication 926 (2026)?",
+   "why_blocking": "US-IRS-005 row SCHH-005 has no statement content",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "list of statement amounts with register row",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-09]]"
+  },
+  {
+   "id": "RQ-11",
+   "key": "rspec.wv.local.service_fee_returns",
+   "location": "04-reports-spec/US-LOC-001-LocalIncomeWageTaxReturns-Spec.xlsx!Report Matrix!F36",
+   "question": "Which West Virginia municipalities levy a municipal service fee collected through payroll, and what are the return form, channel and due dates of each, per the municipal ordinances?",
+   "why_blocking": "US-LOC-001 WV section has only the Charleston weekly fee; no return parameters",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "one fact per municipality: fee, return, channel, due date",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-11]]"
+  },
+  {
+   "id": "RQ-12",
+   "key": "rspec.pa.local.pittsburgh_payroll_expense.return",
+   "location": "04-reports-spec/US-LOC-002-CityEmployerPayrollTaxes-Spec.xlsx!Report Matrix!F29",
+   "question": "What are the form, channel and due dates of the City of Pittsburgh payroll expense tax return, per the City of Pittsburgh Department of Finance?",
+   "why_blocking": "US-LOC-002 PA section has the rate only",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "form + channel + due dates with register rows",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-12]]"
+  },
+  {
+   "id": "RQ-13",
+   "key": "rspec.wa.local.seattle.base_thresholds_due",
+   "location": "04-reports-spec/US-LOC-003-SeattlePETSocialHousing-Spec.xlsx!Report Matrix!B11",
+   "question": "What are the 2026 base, thresholds and quarterly due dates of the Seattle Payroll Expense Tax and the Social Housing Tax, per SMC 5.38 and the City of Seattle FAS pages?",
+   "why_blocking": "US-LOC-003 rows SEA-C-001 and SEA-C-002 cannot compute the taxes; due dates absent",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "thresholds (USD) and rates per tier with effective_from, plus due dates",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-13]]"
+  },
+  {
+   "id": "RQ-14",
+   "key": "rspec.ny.mctmt.rates_lines",
+   "location": "04-reports-spec/US-DOR-004-PayrollTransitLevies-Spec.xlsx!Report Matrix!H27",
+   "question": "What are the 2026 MCTMT rates by zone and payroll band and the lines of Form MTA-305, per the NY DTF instructions?",
+   "why_blocking": "US-DOR-004 NY section cannot compute the MCTMT",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "rate table by zone and band with effective_from",
+   "attempted_by_requester": [
+    "_research/RSPEC-facts.json (all 425 facts read)",
+    "_research/RSPEC-research-pack.md",
+    "other _research/*-facts.json files searched by key and value"
+   ],
+   "_deliverable_tag": "[[GAP:RSPEC-RQ-14]]"
+  }
+ ]
+}

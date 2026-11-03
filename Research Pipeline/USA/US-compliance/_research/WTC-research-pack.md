@@ -42,7 +42,7 @@ Both PASS `validate_contract.py facts` (schema 1.4.0). The contract allows `{ART
 
 FUTA credit reductions: **final 2025** CA 1.2%, USVI 4.5%. **Potential 2026** CA 5.3%, USVI 4.8%, final only if the advance is unpaid on 2026-11-10 [US-FEDS5-009, partial]. Do not model 2026 as final.
 
-The oracle is the two Pub. 15-T 2026 examples: NRA 526.90 → 31, and tribal 6,000 → 584.09 [US-FED-027]. Stage 9b re-derives the rest from Worksheet 1A and the Annual Percentage Method tables. The 2027 OASDI base of 192,300 is carried at confidence medium: ssa.gov returned 403 on 2026-11-02 [US-FED-022].
+The oracle is the two Pub. 15-T 2026 examples: NRA 526.90 → 31, and tribal 6,000 → 584.09 [US-FED-027]. Stage 9b re-derives the rest from Worksheet 1A and the Annual Percentage Method tables. The 2027 OASDI base of 192,300 is carried at confidence medium: ssa.gov returned 403 on 2026-11-02 [US-FEDB5-401].
 
 ### Multistate routing (global_baseline, `multi.*`)
 
@@ -300,7 +300,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `fed.fica.oasdi.employee.rate` | 6.2 | percent | 2026-01-01 |  | US-FEDS5-005 (A.2) | high |
 | `fed.fica.oasdi.employer.rate` | 6.2 | percent | 2026-01-01 |  | US-FEDS5-005 (A.2) | high |
 | `fed.fica.oasdi.wage_base` | 184500 | USD | 2026-01-01 |  | US-FEDS5-005 (A.2) | high |
-| `fed.fica.oasdi.wage_base` | 192300 | USD | 2027-01-01 |  | US-FED-022 (A.2) | medium |
+| `fed.fica.oasdi.wage_base` | 192300 | USD | 2027-01-01 |  | US-FEDB5-401 (A.2) | high |
 | `fed.fica.medicare.employee.rate` | 1.45 | percent | 2026-01-01 |  | US-FEDS5-005 (A.2) | high |
 | `fed.fica.medicare.employer.rate` | 1.45 | percent | 2026-01-01 |  | US-FEDS5-005 (A.2) | high |
 | `fed.fica.medicare.wage_base.capped` | no |  | 2026-01-01 |  | US-FEDS5-005 (A.2) | high |
@@ -394,9 +394,9 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `multi.reciprocity.va.partners` | DC,KY(daily commuters),MD,PA,WV |  | 2026-01-01 |  | US-MULTI-004 (A.2) | high |
 | `multi.reciprocity.wi.partners` | IL,IN,KY,MI |  | 2026-01-01 |  | US-MULTI-006 (A.2) | high |
 | `multi.reciprocity.wv.partners` | KY,MD,OH,PA,VA |  | 2026-01-01 |  | US-MULTI-015 (A.2) | high |
-| `multi.reciprocity.az.unilateral` | AZ exempts residents of CA,IN,OR,VA (Form WEC); one-way |  | 2026-01-01 |  | US-MULTI-017 (A.2) | high |
+| `multi.reciprocity.az.unilateral` | AZ exempts residents of CA,IN,OR,VA (Form WEC); one-way |  | 2026-01-01 |  | US-MULTIB5-401 (A.2) | high |
 | `multi.nonresident_threshold.al.rule` | 30 days (multi-state, qualifying home state); day 31+ all AL wages |  | 2026-01-01 |  | US-MULTI-021 (A.2) | high |
-| `multi.nonresident_threshold.az.rule` | 60 days |  | 2026-01-01 |  | US-MULTI-017 (A.2) | high |
+| `multi.nonresident_threshold.az.rule` | 60 days |  | 2026-01-01 |  | US-MULTIB5-401 (A.2) | high |
 | `multi.nonresident_threshold.ct.rule` | 15 days |  | 2026-01-01 |  | US-CTP10-001 (A.2) | high |
 | `multi.nonresident_threshold.il.rule` | more than 30 working days |  | 2026-01-01 |  | US-MULTIS5-023 (A.2) | high |
 | `multi.nonresident_threshold.la.rule` | 30 days from 2026-01-01; from day 31 all days |  | 2026-01-01 |  | US-MULTIS5-021 (A.1) | high |
@@ -411,7 +411,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `multi.no_wage_income_tax.states` | AK,FL,NV,NH,SD,TN,TX,WA,WY |  | 2026-01-01 |  | US-FEDP52-005 (id-format: in unresolved) | - |
 | `multi.reciprocity.mt.partners` | ND |  | 2026-01-01 |  | US-MTP51-004 (id-format: in unresolved) | - |
 | `multi.nonresident_threshold.hi.rule` | 60 days (paid from office outside HI) |  | 2026-01-01 |  | US-HIP51-002 (id-format: in unresolved) | - |
-| `multi.nonresident_threshold.id.rule` | under 1,000 USD |  | 2026-01-01 |  | US-IDP52-002 (id-format: in unresolved) | - |
+| `multi.nonresident_threshold.id.rule` | under 1,000 USD |  | 2026-01-01 |  | US-IDB5-401 (id-format: in unresolved) | - |
 | `multi.nonresident_threshold.me.rule` | more than 12 days AND more than 3,000 USD |  | 2026-01-01 |  | US-MEP52-003 (id-format: in unresolved) | - |
 | `multi.nonresident_threshold.mt.rule` | under 30 days and multi-state |  | 2026-01-01 |  | US-MTP51-003 (id-format: in unresolved) | - |
 | `multi.nonresident_threshold.ne.rule` | more than 7 days |  | 2026-01-01 |  | US-NEP51-002 (id-format: in unresolved) | - |
@@ -503,11 +503,11 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `az.sit.default.rate` | 2.0 | percent | 2026-01-01 |  | US-AZS5-024 (A.2) | high |
 | `az.sit.supplemental` | same elected percentage (no separate rate) |  | 2026-01-01 |  | US-AZS5-020 (A.1) | medium |
 | `az.sit.base` | federal wages (IRC 3401); federal exclusions flow through |  | 2026-01-01 |  | US-AZS5-024 (A.2) | high |
-| `az.sui.wage_base` | 8000 | USD | 2026-01-01 |  | US-AZR3-001 (A.2) | high |
+| `az.sui.wage_base` | 8000 | USD | 2026-01-01 |  | US-AZB5-401 (A.2) | high |
 | `az.sui.new_employer.rate` | 2.0 | percent | 2026-01-01 |  | US-AZR3-002 (A.2) | high |
 | `az.sui.employer.rate.range` | 0.03%-8.36% |  | 2026-01-01 |  | US-AZR3-003 (A.2) | high |
-| `az.sui.employee.applies` | no |  | 2026-01-01 |  | US-AZR3-001 (A.2) | high |
-| `az.sui.operating_fund_diversion.rate` | 3.15 | percent | 2027-01-01 |  | US-AZR3-004 (A.2) | high |
+| `az.sui.employee.applies` | no |  | 2026-01-01 |  | US-AZB5-401 (A.2) | high |
+| `az.sui.operating_fund_diversion.rate` | 3.15 | percent | 2027-01-01 |  | US-AZB5-402 (A.2) | high |
 | `az.local.wage_tax.applies` | no |  | 2026-01-01 |  | US-AZR3-006 (A.2) | high |
 
 ### CA (country_specific)
@@ -553,14 +553,14 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `co.sit.rate` | 4.4 | percent | 2026-01-01 |  | US-COS5-012 (A.2) | high |
 | `co.sit.obbba_overtime.withholding` | not followed: qualified overtime stays subject to CO withholding |  | 2026-01-01 |  | US-COS5-007 (A.2) | high |
 | `co.sit.certificate` | IRS W-4 or optional DR 0004 (rev. 10/29/25) |  | 2026-01-01 |  | US-COS5-012 (A.2) | high |
-| `co.local.denver.opt.employee.monthly` | 5.75 | USD | 2026-01-01 |  | US-COP7-004 (A.2) | medium |
-| `co.local.denver.opt.employer.monthly` | 4.0 | USD | 2026-01-01 |  | US-COP7-005 (A.2) | medium |
+| `co.local.denver.opt.employee.monthly` | 5.75 | USD | 2026-01-01 |  | US-COB5-403 (A.2) | medium |
+| `co.local.denver.opt.employer.monthly` | 4.0 | USD | 2026-01-01 |  | US-COB5-404 (A.2) | medium |
 | `co.local.greenwood_village.opt.employee.monthly` | 2 | USD | 2026-01-01 |  | US-COS5-015 (A.2) | high |
 | `co.local.greenwood_village.opt.employer.monthly` | 2 | USD | 2026-01-01 |  | US-COS5-015 (A.2) | high |
 | `co.local.glendale.opt.employee.monthly` | 5 | USD | 2026-01-01 |  | US-COS5-016 (A.2) | high |
 | `co.local.glendale.opt.employer.monthly` | 5 | USD | 2026-01-01 |  | US-COS5-016 (A.2) | high |
-| `co.famli.total.rate` | 0.86 | percent | 2027-01-01 |  | US-COS5-008 (A.2) | high |
-| `co.famli.total.rate` | 0.88 | percent | 2026-01-01 |  | US-COFAMLI-001 (id-format: in unresolved) | - |
+| `co.famli.total.rate` | 0.86 | percent | 2027-01-01 |  | US-COB5-301 (A.3) | high |
+| `co.famli.total.rate` | 0.88 | percent | 2026-01-01 |  | US-COB5-401 (id-format: in unresolved) | - |
 | `co.sui.wage_base` | 30600 | USD | 2026-01-01 |  | US-COP51-003 (id-format: in unresolved) | - |
 | `co.sui.wage_base` | 32100 | USD | 2027-01-01 |  | US-COP51-003 (id-format: in unresolved) | - |
 | `co.sui.new_employer.total.rate` | 3.05 | percent | 2026-01-01 |  | US-COP51-003 (id-format: in unresolved) | - |
@@ -601,7 +601,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `dc.sui.new_employer.rate` | 2.7 | percent | 2026-01-01 |  | US-DCS5-016 (A.2) | high |
 | `dc.sui.employer.rate.min` | 1.9 | percent | 2026-01-01 |  | US-DCS5-017 (A.1) | high |
 | `dc.sui.employer.rate.max` | 7.4 | percent | 2026-01-01 |  | US-DCS5-017 (A.1) | high |
-| `dc.sui.admin_assessment.rate` | 0.2 | percent | 2026-01-01 |  | US-DCP7-001 (A.2) | high |
+| `dc.sui.admin_assessment.rate` | 0.2 | percent | 2026-01-01 |  | US-DCB5-401 (A.2) | high |
 | `dc.sui.employee.applies` | no |  | 2026-01-01 |  | US-DCS5-017 (A.1) | high |
 | `dc.pfl.employer.rate` | 0.75 | percent | 2026-01-01 |  | US-DCS5-020 (A.1) | high |
 | `dc.pfl.wage_cap.applies` | no |  | 2026-01-01 |  | US-DCS5-020 (A.1) | high |
@@ -625,8 +625,8 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `de.sui.new_employer.rate` | 1.0 | percent | 2026-01-01 |  | US-DES5-022 (A.2) | high |
 | `de.sui.employer.rate.min` | 0.3 | percent | 2026-01-01 |  | US-DES5-022 (A.2) | high |
 | `de.sui.employer.rate.max` | 5.4 | percent | 2026-01-01 |  | US-DES5-022 (A.2) | high |
-| `de.sui.op_tech_assessment.rate` | 0.2 | percent | 2026-01-01 |  | US-DEP7-001 (A.2) | high |
-| `de.sui.op_tech_assessment.rate` | 0.175 | percent | 2027-01-01 |  | US-DEP7-001 (A.2) | high |
+| `de.sui.op_tech_assessment.rate` | 0.2 | percent | 2026-01-01 |  | US-DEB5-401 (A.2) | high |
+| `de.sui.op_tech_assessment.rate` | 0.175 | percent | 2027-01-01 |  | US-DEB5-401 (A.2) | high |
 | `de.pfml.total.rate` | 0.8 | percent | 2026-01-01 |  | US-DES5-012 (A.1) | high |
 | `de.pfml.medical.rate` | 0.4 | percent | 2026-01-01 |  | US-DES5-012 (A.1) | high |
 | `de.pfml.family_caregiving.rate` | 0.08 | percent | 2026-01-01 |  | US-DES5-012 (A.1) | high |
@@ -725,8 +725,8 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `id.sit.supplemental.rate` | 5.3 | percent | 2026-01-01 |  | US-IDS5-008 (A.2) | high |
 | `id.oracle.single_biweekly_1212.result` | 31 | USD | 2026-01-01 |  | US-IDS5-008 (A.2) | high |
 | `id.sit.rounding` | percentage computation rounded to nearest whole dollar |  | 2026-01-01 |  | US-IDS5-008 (A.2) | high |
-| `id.sui.wage_base` | 58300 | USD | 2026-01-01 |  | US-IDP7-001 (A.2) | medium |
-| `id.sui.new_employer.rate` | 1.0 | percent | 2026-01-01 |  | US-IDP7-001 (A.2) | high |
+| `id.sui.wage_base` | 58300 | USD | 2026-01-01 |  | US-IDB5-402 (A.2) | medium |
+| `id.sui.new_employer.rate` | 1.0 | percent | 2026-01-01 |  | US-IDB5-402 (A.2) | high |
 
 ### IL (country_specific)
 
@@ -822,9 +822,9 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 
 | key | value | unit | from | to | register_id | conf |
 |---|---|---|---|---|---|---|
-| `ma.sit.rate` | 5.0 | percent | 2026-01-01 |  | US-MAR3-002 (A.2) | high |
-| `ma.sit.surtax.rate` | 4.0 | percent | 2026-01-01 |  | US-MAR3-002 (A.2) | high |
-| `ma.sit.surtax.threshold` | 1107750 | USD | 2026-01-01 |  | US-MAR3-002 (A.2) | high |
+| `ma.sit.rate` | 5.0 | percent | 2026-01-01 |  | US-MAB5-402 (A.2) | high |
+| `ma.sit.surtax.rate` | 4.0 | percent | 2026-01-01 |  | US-MAB5-402 (A.2) | high |
+| `ma.sit.surtax.threshold` | 1107750 | USD | 2026-01-01 |  | US-MAB5-402 (A.2) | high |
 | `ma.sit.method` | Circular M tables or percentage method: wages - FICA/retirement (max 2,000/yr) - exemption (annual 1,000n + 3,400) x 5% - HoH/blind reduction |  | 2026-01-01 |  | US-MAS5-013 (A.2) | high |
 | `ma.sit.fica_retirement_deduction.annual_max` | 2000 | USD | 2026-01-01 |  | US-MAS5-013 (A.2) | high |
 | `ma.sit.exemption.weekly` | 19n + 66 |  | 2026-01-01 |  | US-MAS5-013 (A.2) | high |
@@ -841,7 +841,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `ma.levy.emac.year4.rate` | 0.12 | percent | 2026-01-01 |  | US-MAS5-021 (A.2) | high |
 | `ma.levy.emac.year5.rate` | 0.24 | percent | 2026-01-01 |  | US-MAS5-021 (A.2) | high |
 | `ma.levy.emac.year6plus.rate` | 0.34 | percent | 2026-01-01 |  | US-MAS5-021 (A.2) | high |
-| `ma.levy.workforce_training.rate` | 0.056 | percent | 2026-01-01 |  | US-MAP7-001 (A.2) | medium |
+| `ma.levy.workforce_training.rate` | 0.056 | percent | 2026-01-01 |  | US-MAB5-401 (A.2) | medium |
 | `ma.pfml.total.rate.25plus` | 0.88 | percent | 2026-01-01 | 2026-12-31 | US-MAS5-012 (A.2) | high |
 | `ma.pfml.family.rate` | 0.18 | percent | 2026-01-01 | 2026-12-31 | US-MAS5-012 (A.2) | high |
 | `ma.pfml.medical.rate` | 0.7 | percent | 2026-01-01 | 2026-12-31 | US-MAS5-012 (A.2) | high |
@@ -893,7 +893,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `md.sui.employer.rate.range` | 0.30-7.50% (Table A); new employers 1.0-2.6% |  | 2026-01-01 |  | US-MDP9V-001 (A.2) | high |
 | `md.famli.total.rate` | 0.9 | percent | 2027-01-01 |  | US-MDS5-014 (A.2) | high |
 | `md.famli.contribution.2026` | no |  | 2026-01-01 | 2026-12-31 | US-MDS5-014 (A.2) | high |
-| `md.sui.wage_base` | 8500 | USD | 2026-01-01 |  | US-MDSUI-001 (id-format: in unresolved) | - |
+| `md.sui.wage_base` | 8500 | USD | 2026-01-01 |  | US-MDB5-402 (id-format: in unresolved) | - |
 
 ### ME (country_specific)
 
@@ -954,7 +954,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `mn.oracle.biweekly_2000_single1.result` | 91.27 | USD | 2026-01-01 |  | US-MNS5-010 (A.2) | high |
 | `mn.sit.conformity` | IRC as amended through 2023-05-01; H.R.1 (2025) withholding changes not adopted |  | 2026-01-01 |  | US-MNS5-010 (A.2) | high |
 | `mn.paid_leave.total.rate` | 0.88 | percent | 2026-01-01 |  | US-MNS5-018 (A.1) | medium |
-| `mn.levy.workforce_development.rate` | 0.1 | percent | 2026-01-01 |  | US-MNP7-001 (A.2) | high |
+| `mn.levy.workforce_development.rate` | 0.1 | percent | 2026-01-01 |  | US-MNB5-401 (A.2) | high |
 | `mn.sui.wage_base` | 44000 | USD | 2026-01-01 |  | US-MNP52-001 (id-format: in unresolved) | - |
 | `mn.sui.base.rate` | 0.4 | percent | 2026-01-01 |  | US-MNP52-001 (id-format: in unresolved) | - |
 | `mn.sui.employer.rate.max` | 8.9 | percent | 2026-01-01 |  | US-MNP52-001 (id-format: in unresolved) | - |
@@ -1015,7 +1015,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `mt.sit.supplemental` | aggregate or flat 5% |  | 2026-01-01 |  | US-MTS5-005 (A.2) | medium |
 | `mt.sit.nra_treaty.level` | assessment (treaty exclusions not applied at withholding); H-2A exempt |  | 2026-01-01 |  | US-MTS5-005 (A.2) | high |
 | `mt.sui.wage_base` | 47300 | USD | 2026-01-01 |  | US-MTS5-024 (A.2) | high |
-| `mt.levy.aft.rate` | 0.18 | percent | 2026-01-01 |  | US-MTP7-001 (A.2) | high |
+| `mt.levy.aft.rate` | 0.18 | percent | 2026-01-01 |  | US-MTB5-401 (A.2) | high |
 | `mt.sui.base.section125` | taxable for UI |  | 2026-01-01 |  | US-MTS5-023 (A.1) | high |
 | `mt.sui.base.401k_deferral` | taxable for UI |  | 2026-01-01 |  | US-MTS5-023 (A.1) | high |
 | `mt.sui.base.dependent_care_129` | taxable for UI |  | 2026-01-01 |  | US-MTS5-023 (A.1) | high |
@@ -1163,8 +1163,8 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `ny.sui.employer.rate.range` | 1.625-9.425% |  | 2026-01-01 |  | US-NYP9V-001 (A.2) | high |
 | `ny.pfl.employee.rate` | 0.432 | percent | 2026-01-01 |  | US-NYP8-001 (A.2) | high |
 | `ny.pfl.employee.annual_max` | 411.91 | USD | 2026-01-01 |  | US-NYP8-001 (A.2) | high |
-| `ny.dbl.employee.rate` | 0.5 | percent | 2026-01-01 |  | US-NY-005 (A.2) | high |
-| `ny.dbl.employee.weekly_max` | 0.6 | USD | 2026-01-01 |  | US-NY-005 (A.2) | high |
+| `ny.dbl.employee.rate` | 0.5 | percent | 2026-01-01 |  | US-NYB5-401 (A.1) | high |
+| `ny.dbl.employee.weekly_max` | 0.6 | USD | 2026-01-01 |  | US-NYB5-401 (A.1) | high |
 | `ny.levy.mctmt` | MCTMT per P7 list |  | 2026-01-01 |  | US-NYP7-001 (A.2) | high |
 | `ny.levy.rsf` | Re-employment Service Fund 0.075% |  | 2026-01-01 |  | US-NYP7-004 (A.2) | high |
 | `ny.base.414h.addback` | NY public employee 414(h) contributions added back |  | 2026-01-01 |  | US-NYS5-019 (A.2) | high |
@@ -1261,7 +1261,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `pa.local.philadelphia.nonresident.rate` | 3.425 | percent | 2026-07-01 |  | US-PAS5-022 (A.2) | high |
 | `pa.local.philadelphia.resident.rate` | 3.74 | percent | 2025-07-01 | 2026-06-30 | US-PAS5-022 (A.2) | high |
 | `pa.local.philadelphia.nonresident.rate` | 3.43 | percent | 2025-07-01 | 2026-06-30 | US-PAS5-022 (A.2) | high |
-| `pa.local.pittsburgh.payroll_expense.rate` | 0.55 | percent | 2026-01-01 |  | US-PAP7-005 (A.2) | high |
+| `pa.local.pittsburgh.payroll_expense.rate` | 0.55 | percent | 2026-01-01 |  | US-PAB5-401 (A.2) | high |
 | `pa.sui.wage_base` | 10000 | USD | 2018-01-01 |  | US-PAS5-019 (A.1) | high |
 | `pa.sui.new_employer.rate` | 3.822 | percent | 2026-01-01 |  | US-PA-009 (A.2) | high |
 | `pa.sui.new_construction.rate` | 10.5924 | percent | 2026-01-01 |  | US-PA-009 (A.2) | high |
@@ -1280,7 +1280,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `ri.sui.wage_base` | 30800 | USD | 2026-01-01 |  | US-RIP9V-001 (A.2) | high |
 | `ri.sui.wage_base.highest_rate` | 32300 | USD | 2026-01-01 |  | US-RIP9V-001 (A.2) | high |
 | `ri.sui.new_employer.rate` | 1.21 | percent | 2026-01-01 |  | US-RIP9V-001 (A.2) | high |
-| `ri.levy.jda.rate` | 0.21 | percent | 2026-01-01 |  | US-RIP7-001 (A.2) | high |
+| `ri.levy.jda.rate` | 0.21 | percent | 2026-01-01 |  | US-RIB5-401 (A.2) | high |
 | `ri.sui.employer.rate.range` | 0.9-9.4% (Schedule F) |  | 2026-01-01 |  | US-RIP9V-001 (A.2) | high |
 | `ri.sui.other_state_credit` | yes |  | 2026-01-01 |  | US-RIS5-013 (A.1) | high |
 | `ri.tdi.employee.rate` | 1.1 | percent | 2026-01-01 |  | US-RIP9V-001 (A.2) | high |
@@ -1373,7 +1373,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | `va.sui.wage_base` | 8000 | USD | 2026-01-01 |  | US-VAS5-014 (A.3) | high |
 | `va.sui.new_employer.rate` | 2.5 | percent | 2026-01-01 |  | US-VAS5-014 (A.3) | high |
 | `va.sui.employer.rate.range` | 0.1-6.2% base rates plus add-ons |  | 2026-01-01 |  | US-VAS5-014 (A.3) | high |
-| `va.sui.fund_building.rate` | 0.2 | percent | 2026-01-01 |  | US-VAR3-003 (A.1) | high |
+| `va.sui.fund_building.rate` | 0.2 | percent | 2026-01-01 |  | US-VAB5-402 (A.1) | high |
 | `va.sui.base.section125` | excluded |  | 2026-01-01 |  | US-VAS5-014 (A.3) | high |
 | `va.sui.base.401k` | included |  | 2026-01-01 |  | US-VAS5-014 (A.3) | high |
 | `va.pfml.contributions.start` | 2028-04-01 (rate fixed by 2027-10-01); none in 2026-2027 |  | 2026-01-01 |  | US-VAS5-017 (A.3) | high |
@@ -1496,7 +1496,7 @@ Still open, new attempts recorded in `unresolved[].attempted`: `co.famli.split.2
 
 ### global_baseline
 
-- `fed.fica.oasdi.wage_base.2027_reverify`: The 2027 OASDI base 192,300 rests on US-FED-022; ssa.gov returned 403 on 2026-11-02 so it was not re-verified this run. What would close it: SSA cbb.html / Fact Sheet 2027 read from a US IP (browser pass), stamping verified_on on US-FED-022.
+- ~~`fed.fica.oasdi.wage_base.2027_reverify`~~ CLOSED 2026-11-02 (agent 2 F44): F44 2026-11-02: verified on the P4 browser copy of SSA cbb.html (US-FEDB5-401, FED/FED_SSA_cbb_browser_2026-11-02.txt l.4): "For earnings in 2027, this base is $192,300."; table row "2027 192,300".
 - `fed.futa.credit_reduction.2026.final`: 2026 credit reductions are potential until the DOL determination of 2026-11-10. What would close it: DOL ETA FUTA credit reduction final list for 2026 (published after 2026-11-10).
 - `fed.fit.2027.tables`: Pub. 15-T 2027 and the 2027 inflation Rev. Proc. not published at 2026-11-02. What would close it: IRS Pub. 15-T (2027) and the 2027 inflation Rev. Proc.
 - `fed.plan.402g.elective_deferral.limit_2027`: 2027 retirement plan limits notice not yet published (only tier-B projections). What would close it: IRS notice for 2027 plan limits (expected Nov 2026).

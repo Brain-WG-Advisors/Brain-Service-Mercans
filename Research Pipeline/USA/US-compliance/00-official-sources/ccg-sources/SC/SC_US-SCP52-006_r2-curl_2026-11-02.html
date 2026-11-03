@@ -1,0 +1,533 @@
+﻿
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
+	<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta name="robots" content="noimageindex">
+	    <meta charset="iso-8859-1">
+	    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+	    	    <title>Code of Laws - Title 41 - Chapter 10- - LABOR AND EMPLOYMENT</title>
+	    <link rel="SHORTCUT ICON" href="/images/stateflagsmall.ico" />
+		<link rel="icon" href="/images/stateflagsmall.ico" type="image/ico" />
+		<link rel="SHORTCUT ICON" href="/images/South-Carolina-Flag2.ico" />
+
+		<link type="text/css" rel="stylesheet" href="/css/main.css" media="all" />
+				
+		<!--[if lte IE 7]>
+		<link type="text/css" rel="stylesheet" href="/css/ie7main.css" media="all" />
+		<![endif]-->
+		<!--[if gte IE 7]>
+		<link type="text/css" rel="stylesheet" href="/css/iemain.css" media="all" />
+		<![endif]-->
+		<link type="text/css" rel="stylesheet" href="/css/print.css" media="print" />
+		<link type="text/css" rel="stylesheet" href="/css/supplement.css" media="screen" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/zipsearch.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/vote.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/contact.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/navwrap.css" media="screen" />
+		<link type="text/css" rel="stylesheet" href="/css/linkbar.css" media="screen" />-->
+	
+		<!--<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>-->
+		<script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+				<script type="text/javascript" src="/js/main_linux.js"></script>
+		
+
+		
+
+
+
+		<!--<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/utils.js"></script>
+		<script type="text/javascript" src="/js/date.js"></script>
+		<script type="text/javascript" src="/js/lightbox.js"></script>
+		<script type="text/javascript" src="/js/legislation.js"></script>
+		<script type="text/javascript" src="/js/logon_lits.js"></script>
+		<script type="text/javascript" src="/js/message.js"></script>
+		<script type="text/javascript" src="/js/comm_meeting.js"></script>-->
+		<script type="text/vbscript" src="/vbs/comm_meeting.vbs"></script>
+		<!--<script type="text/javascript" src="/js/regs.js"></script>-->
+				
+	   	<script type="text/javascript">
+	    //document.onclick = function () { document.getElementById('transbox').style.display= 'none' };
+	    	var xmlhttp=false;
+			xmlhttp = create_xml_object();
+	
+			function getElement(ele)
+			{
+				var theobj = false;
+				if(typeof ele == 'string')
+					theobj = (document.getElementById)?document.getElementById(ele):document.all[ele];
+				else
+					theobj = ele;
+			
+				return theobj;
+			}
+		
+			function checkreader(friendlyalert)
+			{
+			 	/*friendlyalert=friendlyalert||false;
+			 	
+			 	var browser_info = perform_acrobat_detection();
+				if (!browser_info.acrobat)
+				{
+				 	loadadobebox('adobebox', '/adobe.php');
+					return false;
+				}
+				else if (friendlyalert)
+				{
+			 		alert(friendlyalert);
+				}*/
+				return true;
+			}
+				
+			function loadadobebox(boxname, url)
+			{
+				var response = false;
+	
+				doRequest(xmlhttp, "GET", url, false, null, null);
+				if (xmlhttp.status == 200)
+				{
+		         	response = xmlhttp.responseText;
+				}
+	
+				if(response)
+				{
+			 		var ele = document.getElementById(boxname);
+				 	if (ele)
+				 	{
+				 		ele.style.visibility = 'hidden';
+		 				ele.style.display = 'block';
+	
+		 				positionElement(ele, 'center', 'center', true);
+	
+						ele.innerHTML = response;
+					    ele.style.visibility = 'visible';
+					    ele.style.display = 'block';
+	//				    ele.scrollIntoView(true);
+					}
+				}
+				return response;
+			}
+	
+	
+			function init()
+			{
+		 		var ld=document.getElementById("loading");
+				if(ld)
+				{
+					ld.style.display = 'none';
+				}
+			}
+			
+			function openmore()
+			{
+			 	var id = document.getElementById('quicksearch');
+			 	if (id)
+			 	{
+				 	var pos = findPos(id);
+				 	id.style.zIndex = 10;
+		//		 	id.style.left = pos[0]+'px';
+		//		  	id.style.top = pos[1]+'px';
+				  	id.style.height = '295px';
+				  	id.style.position = 'absolute';
+				  	id.style.backgroundColor = '#f7f4ec';
+				  	var id2 = document.getElementById('searchmore');
+				  	if (id2)
+				  	{
+				  	 	id2.style.display = 'none';
+				  	}
+				  	var id3 = document.getElementById('contactlegislatordiv');
+				  	if (id3)
+				  	{
+				  	 	id3.style.display = 'none';
+				  	}
+				}
+			}
+		
+			function closemore()
+			{
+			 	var id = document.getElementById('quicksearch');
+			 	if (id)
+			 	{
+				  	id.style.height = '135px';
+				  	id.style.position = '';
+				  	id.style.backgroundColor = 'transparent';
+				  	var id2 = document.getElementById('searchmore');
+				  	if (id2)
+				  	{
+				  	 	id2.style.display = 'block';
+				  	}
+				  	var id3 = document.getElementById('contactlegislatordiv');
+				  	if (id3)
+				  	{
+				  	 	id3.style.display = '';
+				  	}
+				}		 	
+			}
+		
+		<!-- This script and many more are available free online at -->
+		<!-- The JavaScript Source!! http://javascript.internet.com -->
+		
+		<!-- Begin
+		function right(e) {
+		var msg = "Use of this image is strictly prohibited unless express written permission is given to the user by South Carolina Legislative Services Agency.";
+		if (navigator.appName == 'Netscape' && e.which == 3) {
+		alert(msg);
+		return false;
+		stopEvent(e);
+		}
+		if (navigator.appName == 'Microsoft Internet Explorer' && event.button==2) {
+		alert(msg);
+		return false;
+			stopEvent(event);
+		}
+		else return true;
+		}
+		
+	function trap() 
+	{
+		if(document.images)
+		{
+			for(i=0;i<document.images.length;i++)
+			{
+				if(document.images[i].className == 'allowcontextmenu')
+				{
+					// this should have no scripting
+				}
+				else
+				{
+				 	document.images[i].onmousedown = right;
+					document.images[i].oncontextmenu = function(){ return false; };
+					//document.images[i].onmouseup = right;
+				}
+			}
+		}
+	}
+
+	function findfwtext(texttofind) 
+	{
+	 	var fwtextele = document.getElementById('fwtext');
+		if(fwtextele)
+		{
+			fwtextele.value = texttofind;
+		}
+	}	
+		// End -->
+		</script>
+
+		<!-- ADDED FOR V4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LJY6FMNQKH"></script>
+
+
+<script type="text/javascript">
+
+//ADDED FOR V4
+//Google tag (gtag.js) 
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LJY6FMNQKH');
+
+ 
+ /* COMMENTING OUT UPGRADING TO V4 -A
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36207109-1']);
+  _gaq.push(['_setDomainName', 'scstatehouse.gov']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+  
+      $(document).ready(function(){
+        // COMMENTING THIS OUT NO LONGER BEING ACTIVELY USED TO MONITOR FOR TRAFFIC TO SPECIFIC LINKS - A
+        /*
+          var anchors = $('div#contentsection a');
+
+          //console.log('anchors...'+anchors.length);
+          if(anchors.length > 0){
+            //console.log('setting up event handler...');
+            anchors.click(function(){
+              var a = $(this).attr('href');
+              if(_gaq && (a.substr(-3) == 'htm' || a.substr(-4) == 'html' || a.substr(-3) == 'doc' || a.substr(-4) == 'docx' || a.substr(-3) == 'pdf' || a.substr(-3) == 'xls' || a.substr(-4) == 'xlsx')) {
+                //console.log(a);
+                _gaq.push(['_trackPageview', $(this).attr('href')]);
+              }
+              
+              var aText = $(this).text().toLowerCase();
+              if (a.indexOf('getfile.php') > -1 && aText === 'word'){
+                    _gaq.push(['_trackEvent', 'Word Doc', 'Download', ('from page: ' + document.location + ' - href: ' + a)]);
+              }
+
+            });
+          }
+          */
+      });
+
+</script>
+	</head>
+	
+		
+	<body class="home"  onload="init(); trap();">
+	<noscript>Your browser does not support JavaScript!  This page will not render correctly.</noscript> 
+
+
+	
+	<div id="adobebox" style="position:absolute; width:400px; height:150px; border:2px solid #555555; background-color:#cccccc; display:none;"></div>
+	<div id="container" >	
+				<div id="header" class="nodisplay" style="text-align:center; height:100px;" >
+									<img id="headerimg" class="nodisplay" alt="South Carolina Legislature" title="South Carolina Legislature" src="/images/header8.png" />
+								
+							<!--	<div class="award"><span style="color:#831224; font-weight:bold; font-size:1.5em;">*</span> Recipient of<br>the Notable State Documents Award<br>by the<br>South Carolina<br>State Library.</div>-->
+				
+				
+			</div>
+			<div class="printdisplay"><img border="0" src="/images/titleprint.jpg" alt="South Carolina Legislature" title="South Carolina Legislature" alt="South Carolina Legislature" title="South Carolina State Legislature" /><br /><hr /><br /></div>
+	
+			<div id="pagebody" >
+	
+	
+<!--<div id="topmessage">
+<br style="display:block; margin-top:10px;">
+Searches and data queries will be unavailable beginning Friday, August 19, 2016, from 8:00 PM until Saturday, August 20th at 8:00 AM<br>due to scheduled maintenance.</div>-->
+				<!-- Prompt IE 8/7/6 users to upgrade to a newer browser. -->
+				<!--[if lte IE 8]>
+				<div class="oldframe">In order to improve your experience using this website, please <a href="http://browsehappy.com/">upgrade your browser</a>.</div>
+				<![endif]-->
+			
+			
+			
+			<div id="menu" class="nodisplay">
+				<ul class="nodisplay">
+				<li><a href="/index.php">Home</a></li>
+<li><a href="/senate.php">Senate</a></li>
+<li><a href="/house.php">House</a></li>
+<li><a href="/committeeinfo.php">Committee&nbsp;Postings&nbsp;and&nbsp;Reports</a></li>
+<li><a href="/council.php">Legislative Council</a></li>
+<li><a href="/citizens.php">Citizens&#39; Interest</a></li>
+<li><a href="/publications.php">Publications</a></li>
+		    	</ul>
+			</div>
+			<div id="search" class="nodisplay" style="height: 28px;"><div class="nodisplay" style="float:right; margin:6px 20px 0px 0;">
+							<!--<a style="color:#f7f4ec; height:15px;" href="#" onClick="rsswindow();"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>-->
+<!--				<a style="color:#f7f4ec; height:15px;" href="/splashpage/splashpage.html"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a> -->
+				<a style="color:#f7f4ec; height:15px;" href="/onlineservices/index.php"><img border="0" src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>
+			<!--	<a style="color:#f7f4ec; height:15px;" href="/maintenance_portal.php"><img border=0 src="/images/lock.png" style="vertical-align: middle; width: 15px; height: 15px;">&nbsp;Staff&nbsp;Portal</a>-->
+						</div></div>
+			
+	
+					<div id="sidebar" class="nodisplay">
+	<div id="vidlinks" style="height: 50px;">
+						<!--<img src="/images/videobutton12d.png">-->
+											<ul id="vidsidemenu">
+	<li id="vidinnermenu" style="font-size:16px; margin: 0 0 5px 0;">Chamber Video</li>
+<li id="sbroadcast" style="float: left; width:50%;">
+<a id="liveS" style="width: 100%; text-decoration:underline;" href="javascript:void(0);" onClick="live_stream('S', false, false, '0')">Senate</a><br><a id="liveaudioS" style="margin:-3px 0 0 0; text-decoration:underline; width: 100%; font-size: 8px;" href="javascript:void(0);" onClick="live_stream('S', false, false, '1');">(Audio Only)</a>
+</li>
+<li id="hbroadcast" style="float: left; width:50%;">
+<a id="liveH" style="width: 100%; text-decoration:underline;" href="javascript:void(0);" onClick="live_stream('H', false, false, '0')">House</a><br><a id="liveaudioH" style="margin:-3px 0 0 0; text-decoration:underline; width: 100%; font-size: 8px;" href="javascript:void(0);" onClick="live_stream('H', false, false, '1');">(Audio Only)</a>
+</li>
+						</ul>
+					</div>
+					<div id="commvidlinks"><a href="/video/schedule.php">Video&nbsp;Schedule</a><a style="border-top:1px solid #fff; padding-top:12px;" href="/video/archives.php">Video Archives</a></div>
+										<div id="sidemenu">
+						<ul id="innermenu">
+		
+							<li><a href="/howdoi.php">How do I...</a></li>
+										
+							
+								<li class="nolink" onMouseOver="var ele=document.getElementById('sidesearch'); if(ele){ele.style.display='block'; document.sidesearchform.searchtext.focus();}" onMouseOut="var ele=document.getElementById('sidesearch'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">Quick Search</div>
+								<div id="sidesearch" class="sidesubmenu">
+									<form id="sidesearchform" name="sidesearchform" method="POST" action="/search.php">
+									<input type="hidden" name="search" value="side" />
+									<div class="topelement"><label for="searchtext"><span class="label">Search for:</span></label><input id="searchtext" name="searchtext" type="text"/><a id="searchlink2" href="javascript:void(0);" onClick="document.sidesearchform.submit();"><img id="searchicon" src="/images/searchbutton.png" alt="Search" title="Search"/></a></div>
+			<!--						<div><input type="checkbox" id="searchchoice_all" name="searchchoice_all" value="all" /><label for="searchchoice_all">All</label></div>-->
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_fullsite" name="category" value="FULLSITE" /><label for="searchchoice_fullsite">&nbsp;Full Site Search</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_billnumber" name="category" value="BILL" /><label for="searchchoice_billnumber">&nbsp;Bill Number</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_legislation" name="category" value="LEGISLATION" CHECKED /><label for="searchchoice_legislation">&nbsp;Legislation</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_budget" name="category" value="BUDGET" /><label for="searchchoice_budget">&nbsp;Budget</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_codeoflaws" name="category" value="CODEOFLAWS" /><label for="searchchoice_codeoflaws">&nbsp;Code of Laws</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_codeofregs" name="category" value="CODEOFREGS" /><label for="searchchoice_codeofregs">&nbsp;Code of Regulations</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_constitution" name="category" value="CONSTITUTION" /><label for="searchchoice_constitution">&nbsp;Constitution</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_housejournals" name="category" value="HOUSEJOURNALS" /><label for="searchchoice_housejournals">&nbsp;House Journals</label></div>
+									<div style="padding-left:20px;"><input type="radio" id="searchchoice_senatejournals" name="category" value="SENATEJOURNALS" /><label for="searchchoice_senatejournals">&nbsp;Senate Journals</label></div>
+									<div class="bottomelement" style="padding-left:20px;"><input type="radio" id="searchchoice_billsummary" name="category" value="SUMMARY" /><label for="searchchoice_billsummary">&nbsp;LSA Bill Summary</label></div>
+								</form>
+									
+								</div>
+							</li>
+							<li><a href="/legislatorssearch.php">Find Your Legislators</a></li>
+							<li id="contactLegislatorLink"><a href="/email.php?chamber=B">Contact Your Legislator</a></li>
+									
+							<li><a href="/legislation.php">Legislation</a></li>
+							<li><a href="/listtracking/main.php" target="LTS">Track Legislation</a></li>
+							<li><a href="/multicriteria2/search.php" target="MCS">Multi-Criteria Search</a></li>
+									<!--<li><a href="#" onclick="multisearchwindow('INTROBOTH');">Multi-Criteria Search</a></li>-->
+									<!--<li><a href="#" onclick="multisearchwindow('INTROMANUAL');">Multi-Criteria Search</a></li>-->
+									<li><a href="/research.php">Research</a></li>
+	
+								<li class="nolink" onMouseOver="var ele=document.getElementById('law'); if(ele){ele.style.display='block';}" onMouseOut="var ele=document.getElementById('law'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">South Carolina Law</div> 
+								<div id="law" class="sidesubmenu">
+									<div class="sidediv topelement"><a href="/newlaws.php">Ratifications &amp; Acts</a></div>
+									<div class="sidediv"><a href="/code/statmast.php">Code of Laws</a></div>
+									<div class="sidediv"><a href="/coderegs/statmast.php">Code of Regulations</a></div>
+									<div class="sidediv"><a href="/scconstitution/scconst.php">Constitution</a></div>
+									<div class="sidediv bottomelement"><a href="/state_register.php">State Register</a></div>
+								</div>
+							</li>
+										<li class="nolink" onMouseOver="var ele=document.getElementById('manual'); if(ele){ele.style.display='block';}" onMouseOut="var ele=document.getElementById('manual'); if(ele){ele.style.display='none';}"><div class="nolinkdiv">Legislative Manual</div>
+								<div id="manual" class="sidesubmenu">
+								
+<!--									<div class="sidediv topelement"><a href="https://web.sc.gov/LSAShoppingcart/Default.aspx" target="_blank">Purchase Manual</a></div>-->
+								
+<!--									<div class="sidediv topelement"><a href="https://secure.scstatehouse.gov/cgi-bin/webstore.exe" target="_blank">Purchase Manual</a></div>-->
+									<div class="sidediv topelement"><a href="javascript:#" onClick="alert('We are sorry, but we are unable to process online transactions at this time.\n\nIf you would still like to make a purchase, please contact us directly at (803) 212-4490 during normal business hours (8:30am - 5:00pm EST).');">Purchase Manual</a></div>
+									<div class="sidediv bottomelement"><a href="/man26/manual26.php">View Manual Online</a></div>
+								</div>
+							</li>
+							<li><a href="http://www.studentconnection.scstatehouse.gov">Student Connection</a></li>
+							<li><a href="/visit.php">Visiting the State House</a></li>
+							<li><a href="/archives.php">Archives</a></li>
+							<li><a href="http://www.sc.gov/Agency-Listing" target="_blank">State Agency Websites</a></li>
+							<!--<li><a href="/stateagencysites.php">State Agency Websites</a></li>-->
+							<li><a href="/citizensinterestpage/media.php">Media Links</a></li>
+				 		</ul>
+			    	</div>
+	
+					<div id="side_ad">
+						<A href="http://www.sc.gov/" target="_blank"><img border=0 src="/images/scgov3.jpg" alt="SC.gov" title="SC.gov" /></a>
+													<A href="http://www.statelibrary.sc.gov" target="_blank"><img border=0 src="/images/scsl_logo_rgb_web.png" alt="StateLibrary.SC.gov" title="StateLibrary.SC.gov" /></a>
+											</div>	    	
+			</div>
+
+	
+	<script type="text/javascript"> 
+		if ( '' === '1'){
+		 	
+			var link = document.getElementById('contactLegislatorLink');
+			if (link != 'undefined' && link != null){
+				link.style.display = 'none'; 
+				link.style.visibility = 'hidden';
+			}
+		}
+		if ( '' === '1'){
+		 	setTimeout(function(){
+				var link2 = document.getElementById('sendMsgLink');
+				if (link2 != 'undefined' && link2 != null){
+					link2.style.display = 'none'; 
+					link2.style.visibility = 'hidden';
+				};
+			}, 20);
+			
+		}  
+	</script>
+<div class="mainwidepanel">
+
+				<div id="breadcrumbs">
+						South Carolina Law &gt; <a href="/code/statmast.php">Code of Laws</a> &gt; <a href="/code/title41.php">Title 41</a>
+				</div>
+
+					<h2 class="barheader">South Carolina Code of Laws<br />
+									Unannotated<br />
+					</h2>
+
+				<div id="contentsection">
+<div style="font-weight: bold; text-align: center;">Title 41 - LABOR AND EMPLOYMENT</div>
+<br />
+
+<div style="text-align: center;">CHAPTER 10</div>
+<div style="text-align: center;">Payment of Wages</div><br />
+<span style="font-weight: bold;"> SECTION 41-10-10.</span> Definitions.<br /><br />
+	As used in this chapter:<br /><br />
+	(1) &quot;Employer&quot; means every person, firm, partnership, association, corporation, receiver, or other officer of a court of this State, the State or any political subdivision thereof, and any agent or officer of the above classes employing any person in this State.<br /><br />
+	(2) &quot;Wages&quot; means all amounts at which labor rendered is recompensed, whether the amount is fixed or ascertained on a time, task, piece, or commission basis, or other method of calculating the amount and includes vacation, holiday, and sick leave payments which are due to an employee under any employer policy or employment contract. Funds placed in pension plans or profit sharing plans are not wages subject to this chapter.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1990 Act No. 463, SECTION 1, eff May 7, 1990.<br /><br />
+Effect of Amendment<br /><br />
+	The 1990 amendment deleted in subsection (2) &quot;and severance&quot; following &quot;sick leave&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-20.</span> Applicability of chapter.<br /><br />
+	This chapter applies to all employers in South Carolina except that Section 41-10-30 does not apply to:<br /><br />
+	(1) employers of domestic labor in private homes.<br /><br />
+	(2) employers employing fewer than five employees at all times during the preceding twelve months.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-30.</span> Notification to employees of wages and hours agreed upon; recordkeeping requirements; requirement of itemized statement of gross pay and deductions for each pay period.<br /><br />
+	(A) Every employer shall notify each employee in writing at the time of hiring of the normal hours and wages agreed upon, the time and place of payment, and the deductions which will be made from the wages, including payments to insurance programs. The employer has the option of giving written notification by posting the terms conspicuously at or near the place of work. Any changes in these terms must be made in writing at least seven calendar days before they become effective. This section does not apply to wage increases.<br /><br />
+	(B) Every employer shall keep records of names and addresses of all employees and of wages paid each payday and deductions made for three years.<br /><br />
+	(C) Every employer shall furnish each employee with an itemized statement showing his gross pay and the deductions made from his wages for each pay period.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1990 Act No. 463, SECTION 2, eff May 7, 1990.<br /><br />
+Effect of Amendment<br /><br />
+	The 1990 amendment, in subsection (A), added &quot;normal&quot; before &quot;hours and wages&quot;, and added at the end &quot;This section does not apply to wage increases.&quot;, and added &quot;for three years&quot; at the end of subsection (B).<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-40.</span> Medium of payment; deposit of wages to employee&#39;s credit; prohibition against deductions in absence of written notice; time and place of payment.<br /><br />
+	(A) Every employer in the State shall pay all wages due in lawful United States money or by negotiable warrant or check bearing even date with the payday.<br /><br />
+	(B) An employer may deposit all wages due to the employee&#39;s credit at a financial institution which is doing business in the State and is insured by an agency of the federal government. When an employee&#39;s wages are paid by deposit at a financial institution, he must be furnished a statement of earnings and withholdings. Any wage deposit plan adopted by an employer shall entitle each employee to at least one withdrawal for each deposit, free of any service charge.<br /><br />
+	(C) An employer shall not withhold or divert any portion of an employee&#39;s wages unless the employer is required or permitted to do so by state or federal law or the employer has given written notification to the employee of the amount and terms of the deductions as required by subsection (A) of Section 41-10-30.<br /><br />
+	(D) Every employer in the State shall pay all wages due at the time and place designated as required by subsection (A) of Section 41-10-30.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-50.</span> Payment of wages due discharged employees.<br /><br />
+	When an employer separates an employee from the payroll for any reason, the employer shall pay all wages due to the employee within forty-eight hours of the time of separation or the next regular payday which may not exceed thirty days.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1990 Act No. 463, SECTION 3, eff May 7, 1990.<br /><br />
+Effect of Amendment<br /><br />
+	The 1990 amendment substituted &quot;When&quot; for &quot;Whenever&quot; and deleted at the end &quot;after written notice is given&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-60.</span> Unconditional payment of wages conceded due.<br /><br />
+	In case of a dispute over wages, the employer shall give written notice to the employee of the amount of wages which he concedes to be due and shall pay the amount without condition within the time set by this chapter. Acceptance by the employee of the payment does not constitute a release as to the balance of his claim.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-70.</span> Investigation of alleged violations; resolution of disputes.<br /><br />
+	Upon written complaint of any employee alleging a violation of this chapter, the Director of the Department of Labor, Licensing and Regulation or his designee may institute an investigation of the alleged violation. If the Director of the Department of Labor, Licensing and Regulation or his designee determines that a violation exists, he shall endeavor to resolve all issues by informal methods of mediation and conciliation.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1990 Act No. 463, SECTION 4, eff May 7, 1990; 1993 Act No. 181 SECTION 977, eff February 1, 1994.<br /><br />
+Effect of Amendment<br /><br />
+	The 1990 amendment deleted the &quot;(A)&quot; at the beginning of the former first paragraph and deleted subsection (B) relating to the commissioner&#39;s authority to decide disputes.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-80.</span> Violations and penalties; civil actions by employees; administrative review of civil penalties.<br /><br />
+	(A) Any employer who violates the provisions of Section 41-10-30 must be given a written warning by the Director of the Department of Labor, Licensing and Regulation or his designee for the first offense and must be assessed a civil penalty of not more than one hundred dollars for each subsequent offense.<br /><br />
+	(B) Any employer who violates the provisions of Section 41-10-40 must be assessed a civil penalty of not more than one hundred dollars for each violation. Each failure to pay constitutes a separate offense.<br /><br />
+	(C) In case of any failure to pay wages due to an employee as required by Section 41-10-40 or 41-10-50 the employee may recover in a civil action an amount equal to three times the full amount of the unpaid wages, plus costs and reasonable attorney&#39;s fees as the court may allow. Any civil action for the recovery of wages must be commenced within three years after the wages become due.<br /><br />
+	(D) The Director of the Department of Labor, Licensing and Regulation or his designee shall promulgate regulations to establish a procedure for administrative review of any civil penalty assessed by the Director.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1990 Act No. 463, SECTION 5, eff May 7, 1990; 1993 Act No. 181, SECTION 977, eff February 1, 1994.<br /><br />
+Effect of Amendment<br /><br />
+	The 1990 amendment, in (C), added the provision requiring commencement of action within three years, and deleted (E), relating to criminal penalty for failing to pay wages within ten days after demand.<br /><br />
+	The 1993 amendment, substituted &quot;Director of the Department of Labor, Licensing, and Regulation or his designee&quot; for &quot;Commissioner of Labor&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-90.</span> Actions for collection of penalties; deposit of amounts collected.<br /><br />
+	In each case where a civil penalty assessed under subsection (A) or (B) of Section 41-10-80 is not paid within sixty days the Director of the Department of Labor, Licensing and Regulation or his designee shall bring an action against the assessed employer for collection of the penalty. Any amounts collected must be turned over to the State Treasurer for deposit in the general fund of the State.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1993 Act No. 181, SECTION 977, eff February 1, 1994.<br /><br />
+Effect of Amendment<br /><br />
+	The 1993 amendment substituted &quot;Director of the Department of Labor, Licensing, and Regulation or his designee&quot; for &quot;Commissioner of Labor&quot;.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-100.</span> Prohibition against private agreements that contravene chapter.<br /><br />
+	No provision of this chapter may be contravened or set aside by a private agreement.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986.<br /><br />
+<span style="font-weight: bold;"> SECTION 41-10-110.</span> Right of the Director of the Department of Labor, Licensing and Regulation to enter and to conduct investigation.<br /><br />
+	The Director of the Department of Labor, Licensing and Regulation or his designee, his inspectors, agents, or designees, upon proper presentation of credentials to the owner, manager, or agent of the employer, may enter at reasonable times and have the right to question either publicly or privately any employer, owner, manager, or agent and the employees of the employer and inspect, investigate, reproduce, or photograph time records or payroll records for the purpose of determining that the provisions of this chapter are complied with.<br /><br />
+HISTORY: 1986 Act No. 380, SECTION 1, eff April 21, 1986; 1993 Act No. 181, SECTION 977, eff February 1, 1994.<br /><br />
+Effect of Amendment<br /><br />
+	The 1993 amendment substituted &quot;Director of the Department of Labor, Licensing, and Regulation or his designee&quot; for &quot;Commissioner of Labor&quot;.<br /><br />
+
+</div>
+
+
+					</div>		 <!-- mainwidepanel -->
+					
+				</div>		 <!-- pagebody -->
+				
+				<div id="footer" class="nodisplay" style="height: 30px;" onContextMenu="return false;">
+			<div id="footerdiv" style="margin:0;">
+				South Carolina Legislative Services Agency * 223 Blatt Building * 1105 Pendleton Street * Columbia, SC 29201<!-- * 803-212-4420--><br>
+				
+								<a href="/disclaimer.php">Disclaimer</a> * <a href="/policies.php">Policies</a> * <a href="/credits.php">Photo Credits</a> * <a href="/contact.php">Contact Us</a>
+							</div>
+		</div>
+		<div id="printfooter" class="printdisplay serifNormal" align=center style="font-size: 8pt;">
+			<br>
+			<br>
+			<hr>
+			Legislative Services Agency
+			<br>
+			h t t p : / / w w w . s c s t a t e h o u s e . g o v
+		</div>
+	
+		</div>	<!-- container or main in mobile page-->
+</body>
+</html>
+

@@ -19,8 +19,8 @@
 
 | Period | Resident | Nonresident |
 |---|---|---|
-| 2025-07-01 to 2026-06-30 | {{pa.pit.local.philadelphia.resident.rate@2025-07-01}} % | {{pa.pit.local.philadelphia.nonresident.rate@2025-07-01}} % |
-| from 2026-07-01 | {{pa.pit.local.philadelphia.resident.rate@2026-07-01}} % | {{pa.pit.local.philadelphia.nonresident.rate@2026-07-01}} % |
+| 2025-07-01 to 2026-06-30 | {{pa.local.philadelphia.resident.rate@2025-07-01}} % | {{pa.local.philadelphia.nonresident.rate@2025-07-01}} % |
+| from 2026-07-01 | {{pa.local.philadelphia.resident.rate@2026-07-01}} % | {{pa.local.philadelphia.nonresident.rate@2026-07-01}} % |
 
   Philadelphia: residents pay wherever they work; nonresidents pay on work in the city. Quarterly returns on the Philadelphia Tax Center; no annual reconciliation.
   - **Pittsburgh payroll expense tax** (employer): {{pa.pit.local.pittsburgh.payroll_expense.rate}} % [US-PAP7-005].
@@ -83,7 +83,7 @@
 
 ## @live
 - **Act 55 of 2025 (UC Law, domestic-violence eligibility):** benefit side and employer account charging only; no payroll calculation change [US-PAS5-019].
-- **2026-01-01:** Pittsburgh Paid Sick Days Act amendment [US-PAB5-001].
+- **2026-01-01:** Pittsburgh Paid Sick Days Act: higher accrual and caps [US-PAB5-001].
 - **2026-07-01:** Philadelphia wage tax rates (Section 2) [US-PAS5-022]; further cuts announced but not published.
 - **Minimum-wage bill:** passed by the House, not acted on by the Senate; not enacted (open point below).
 
@@ -101,4 +101,4 @@
 | Government employees | Government bodies withhold PA tax; MWA excludes elected officials and their policy staff; federal service excluded from PA UC | US-PA-001, US-PAS5-001, US-PAS5-019 |
 
 ## @gaps
-- pa.leave.philadelphia.accrual :: The Philadelphia accrual rate rests on a tier-B lead only; the ordinance text was not reached. :: Phila. Code 9-4104 text or phila.gov Office of Worker Protections page.
+- pa.leave.philadelphia.accrual :: The Philadelphia accrual rate rests on a secondary source only; the ordinance text was not reached. :: Phila. Code 9-4104 text or phila.gov Office of Worker Protections page.

@@ -6,8 +6,8 @@ etapa_research_data: "2026-07"
 etapa_design: "em andamento"
 etapa_design_data: 2026-09-18
 etapa_producao: "outro time (Baker Hughes Namibia em implementação, HRBS-12074)"
-etapa_suporte: "sem tickets abertos"
-etapa_suporte_data: 2026-10-27
+etapa_suporte: "1 aberto(s): HRBS-16649"
+etapa_suporte_data: 2026-11-02
 ccg: "sem versão no hub"
 ccg_data: 
 wtc: v2.5
@@ -20,10 +20,10 @@ sir:
 sir_data: 
 payslip: "configurado, em revisão de Compliance (HRBS-14605); sem versão no hub"
 skill: 
-tickets_abertos: 0
+tickets_abertos: 1
 tickets_conferidos_em: 2026-10-27
 versoes_fonte: "nome do arquivo no Drive (Country Folders/Namibia), lido em 2026-10-27; sem data de versão"
-atualizado_em: 2026-10-27
+atualizado_em: 2026-11-02
 ---
 # Namíbia (Namibia)
 
@@ -73,6 +73,7 @@ Valores do cliente/implementação estão marcados ⚠️ sem fonte. As linhas S
 Todos de Baker Hughes (Baker Hughes Namibia), pedidos por Daniel Kelvin Balogun.
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
 |---|---|---|---|---|
+| 2026-11-02 | HRBS-16649 (Baker Hughes Energy Services Namibia, UAT; Live/BAU) | Daniel pede confirmação do método de PAYE do HRB (anualização + true-up YTD) em 6 perguntas: projeção do recorrente e pagamento único, fórmula "anual − retido ÷ meses restantes", admissão no meio do ano, verbas recorrentes/códigos de ajuste, mudança salarial, falta de TIN | Publicado 18:42 UTC (448 car.): Q6 = alíquota máxima sem o certificado de registro (Act 24/1981, Sch. 2 §12(2)); Q1–5 dependem das tabelas de dedução da NamRA e da forma de aplicá-las (§9(1)) → pedimos ao Daniel as tabelas que ele usou. Base lida: s.1 "gross income"; Sch. 2 §§9(1), 10, 12(2), 12A (acerto anual só p/ quem está desde 1/3). namra.org.na fora do ar em 02/11 (API, Chrome e Wayback). Act em `raw/docs/oficiais/NA/`. Pendente: responder Q1–5 com as tabelas | Não |
 | ~2026-09-24 | HRBS-14605 | Confirmação de configuração dos relatórios estatutários | Resolved 2026-10-08: fechado pelo suporte (Pradeep) por falta de resposta do cliente. A confirmação de SSC e a revisão dos relatórios não aconteceram no ticket | Não |
 | 2026-08-24 | HRBS-13602 | WT 2551 não reduz a base do Payroll Tax (2552) | Resolved 2026-08-24. Mohit: não é pré-imposto; nossa confirmação em 24/08 (fonte: NamRA, "Tax on Individuals", Allowable Deductions). Cliente citou outros problemas (anualização, faixas desatualizadas) | Não |
 | ~2026-07-30 | HRBS-12483 | Pension flag dos códigos 62100, 62146–62149, 62961 (Compliance = Yes, cliente = No) | Resolved 2026-09-16 (Mohit fechou sem resposta do cliente). Nossa resposta de 04/08: o WTC de compliance fica como está; Baker Hughes configura pelo WTC do próprio fundo (No nesses códigos); 62961 já é "No (Typically)". Pedimos confirmação de que os valores vieram do administrador do fundo — sem resposta | Não |

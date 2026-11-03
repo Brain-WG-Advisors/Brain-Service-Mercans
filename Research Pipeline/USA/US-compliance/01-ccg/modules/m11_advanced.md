@@ -19,23 +19,23 @@ The rates and tables in force on the **payment date** apply to the whole payment
 
 | Change | Value | Source |
 |---|---|---|
-| Georgia rate | [[FACT:ga.pit.rate.flat=4.99]]% for tax year 2026 ([[FACT:ga.pit.rate.flat=5.19]]% in 2025); law [[FACT:ga.live.hb463.status=in force (signed 2026-05-11, retroactive 2026-01-01); levels withholding + assessment (rate), assessment + reporting (subtractions)]]. Withholding examples dated from 2026-05-11 (Module 12) | [US-GAS5-009] |
+| Georgia income tax | Withholding rate [[FACT:ga.wh.rate=5.19]]% for payments to 2026-05-10, [[FACT:ga.wh.rate=4.99]]% from 2026-05-11; tax year 2026 assessment rate [[FACT:ga.pit.rate.flat=4.99]]% (retroactive to 1 January); law [[FACT:ga.live.hb463.status=in force (signed 2026-05-11, retroactive 2026-01-01); levels withholding + assessment (rate), assessment + reporting (subtractions)]]. Withholding examples dated from 2026-05-11 (Module 12) | [US-GA-001] [US-GAS5-009] |
 | Ohio withholding tables | Effective [[FACT:oh.wh.tables.effective_from=2026-08-01]] | [US-OHS5-001] |
 | Indiana county rates | [[FACT:in.county.change_dates=County rates may change in January and October (DN#1 R47/10-26 from 2026-10-01)]] | [US-INS5-009] |
 | Idaho single zero bracket (biweekly) | [[FACT:id.wh.zero_bracket.single.biweekly=577]] (2025-04-28 to 2026-07-22); [[FACT:id.wh.zero_bracket.single.biweekly=619]] (from 2026-07-23) | [US-IDS5-011] |
 | Philadelphia wage tax (resident / nonresident) | [[FACT:pa.local.philadelphia.resident.rate=3.74]] (2025-07-01 to 2026-06-30); [[FACT:pa.local.philadelphia.resident.rate=3.735]] (from 2026-07-01) / [[FACT:pa.local.philadelphia.nonresident.rate=3.43]] (2025-07-01 to 2026-06-30); [[FACT:pa.local.philadelphia.nonresident.rate=3.425]] (from 2026-07-01) | [US-PAS5-022] |
 | District of Columbia minimum wage | [[FACT:dc.minwage.hourly=17.95]] (2025-07-01 to 2026-06-30); [[FACT:dc.minwage.hourly=18.40]] (from 2026-07-01) | [US-DCS5-011] |
-| Oregon standard minimum wage | [[FACT:or.minwage.standard.hourly=15.55]] (from 2026-07-01) | [US-ORS5-002] |
+| Oregon standard minimum wage | [[FACT:or.labour.minwage.standard.hourly=15.05]] (2025-07-01 to 2026-06-30); [[FACT:or.labour.minwage.standard.hourly=15.55]] (2026-07-01 to 2027-06-30) | [US-ORS5-002] |
 | Trump-account employer contribution exclusion | [[FACT:fed.bik.trump_account.employer_contribution_max=2,500]] (from 2026-07-04) | [US-FEDS5-030] |
 
 ### How are tax and social security handled when an employee is paid multiple times in a single pay period?
 
-- **FIT:** a second payment in the period is a supplemental wage. Either withhold the optional flat [[FACT:fed.fit.supplemental.flat_rate=22]]% on it (if identified separately), or aggregate it with the regular wages of the period and withhold on the total [US-FEDS5-003]. ⚠️ RESEARCH-GAP: the Pub. 15 aggregate procedure for a supplemental payment made after the regular wages of the period (subtract the tax already withheld) is not keyed.
+- **FIT:** a second payment in the period is a supplemental wage. Either withhold the optional flat [[FACT:fed.fit.supplemental.flat_rate=22]]% on it (if identified separately), or aggregate it with the regular wages of the period and withhold on the total [US-FEDS5-003]. Aggregate procedure: [[FACT:fed.fit.supplemental.aggregate_method=Supplemental wages identified separately, income tax withheld from regular wages in the current or preceding year: either flat 22% or aggregate - add the supplemental wages to the concurrently paid regular wages (or, if none, to the regular wages of the current or preceding payroll period), figure the tax as if one regular-period payment, subtract the tax withheld or to be withheld from the regular wages, withhold the remainder; earlier supplemental payments of the same period are aggregated too. No income tax withheld from regular wages in the current or preceding year: aggregate method only. Supplemental wages paid with regular wages without specifying each amount: withhold on the total as one regular payment.]] [US-FEDQ1-002].
 - **FICA and FUTA:** computed payment by payment against the cumulative annual bases. OASDI is the rate × the lesser of the remaining base and the payment. Additional Medicare applies to the part of the cumulative wages above [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] [US-FEDS5-005].
 
 ### How is payroll calculated if an employee's pay cycle changes mid-year?
 
-Each payment uses the pay-period table of its own frequency ([[FACT:fed.fit.pay_periods_per_year=2 / 4 / 12 / 24 / 26 / 52 / 260 (semiannual, quarterly, monthly, semimonthly, biweekly, weekly, daily)]]) [US-FEDS5-001]. Annual wage bases are unaffected because they run on wages paid. ⚠️ RESEARCH-GAP: the IRS rule for a change of payroll period within the year, or for a short transitional period, is not keyed.
+Each payment uses the pay-period table of its own frequency ([[FACT:fed.fit.pay_periods_per_year=2 / 4 / 12 / 24 / 26 / 52 / 260 (semiannual, quarterly, monthly, semimonthly, biweekly, weekly, daily)]]) [US-FEDS5-001]. Annual wage bases are unaffected because they run on wages paid. Not configured in this release [[GAP:RQ-532]]: The IRS rule for a change of payroll period within the year, or for a short transitional period, is not established from an official source.
 
 ## 11.2 Special Employee Groups & Income
 
@@ -46,25 +46,30 @@ Each payment uses the pay-period table of its own frequency ([[FACT:fed.fit.pay_
 
 ### How is taxation handled for employees with multiple employers?
 
-Each employer withholds and applies the wage bases on its own. The OASDI and FUTA bases are per employer. Additional Medicare starts at [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] of wages paid by that employer. Excess OASDI from several employers is refunded at assessment. The employee coordinates FIT through W-4 Step 2. When Step 2 is checked, the Step-2-checked schedule applies and the line 1g amount ([[FACT:fed.fit.worksheet1a.line1g.other=8,600]] / [[FACT:fed.fit.worksheet1a.line1g.mfj=12,900]]) is not subtracted [US-FEDS5-001]. ⚠️ RESEARCH-GAP: common-paymaster relief for related employers (IRC 3121(s)) is not keyed.
+Each employer withholds and applies the wage bases on its own. The OASDI and FUTA bases are per employer. Additional Medicare starts at [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] of wages paid by that employer. Excess OASDI from several employers is refunded at assessment. The employee coordinates FIT through W-4 Step 2. When Step 2 is checked, the Step-2-checked schedule applies and the line 1g amount ([[FACT:fed.fit.worksheet1a.line1g.other=8,600]] / [[FACT:fed.fit.worksheet1a.line1g.mfj=12,900]]) is not subtracted [US-FEDS5-001]. Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief for related employers (IRC 3121(s)) is not established from an official source.
 
 ### What is the treatment of foreign-sourced employment income for residents?
 
 - **Federal:** US citizens and residents are taxed on worldwide wages. For a US citizen working abroad the employer may stop FIT withholding on a Form 673 statement ([[FACT:fed.citizen_abroad.form673=Employer may stop FIT withholding on Form 673 statement (FEIE/housing); citizens only]]) [US-FEDR3-007]. The foreign earned income exclusion for 2026 is [[FACT:fed.feie.amount=132,900]] [US-FED-025]. FICA follows its own coverage rules.
-- **State:** [[FACT:multi.pit.sourcing.general=No general federal rule: each State taxes residents on all wages (credit at assessment for tax paid to the work State) and nonresidents on wages for services performed in the State; federal limits only for transport workers and military spouses. 4 U.S.C. 114 is retirement income only, not wages.]] [US-FEDP51-009].
+- **State:** [[FACT:multi.pit.sourcing.general=No general federal rule: each State taxes residents on all wages (credit at assessment for tax paid to the work State) and nonresidents on wages for services performed in the State; federal limits only for transport workers and military spouses. 4 U.S.C. 114 is retirement income only, not wages.]] [US-MULTIQ1-001].
 
 ### How do employer stock option plans work and how are they taxed?
 
-State example keyed in the facts: California withholds bonuses and stock-option income at [[FACT:ca.wh.supplemental.rate.bonus_stock_options=10.23]]% [US-CAS5-004]. ⚠️ RESEARCH-GAP: the federal treatment of nonstatutory and incentive stock options, ESPP and RSUs (income timing, FIT/FICA/FUTA, W-2 codes) is not keyed.
+- **Federal, resident employee:** [[FACT:fed.equity.withholding_treatment.resident=Resident employee, 2026: (1) Nonstatutory option (NSO): the spread at exercise (FMV - price) is wages - a taxable fringe benefit subject to the supplemental-wage rules (22% optional flat or aggregate; 37% on supplemental wages above 1,000,000), FICA and FUTA wages, timed at the actual exercise (transfer) date; W-2 boxes 1, 3 (to the SS base), 5 and box 12 code V. (2) ISO and ESPP options: no FICA or FUTA at grant, exercise or disposition; no FIT withholding required on a disqualifying disposition or on the ESPP discount at a qualifying disposition, but the ordinary income is W-2 box 1 wages. (3) Restricted stock (actual shares subject to forfeiture): FMV minus amount paid is wages when substantially vested (or at transfer with an 83(b) election). (4) RSU (legally binding right to receive shares in a future year): FICA and FUTA wages at the later of service performance and vesting (special timing rule, 26 CFR 31.3121(v)(2)-1 / 31.3306(r)(2)-1); FIT withholding when the shares are delivered (settlement) as supplemental wages. (5) 83(i) election (private company): FIT deferred up to 5 years and withheld at 37% when included; FICA/FUTA not deferred; W-2 codes GG/HH.]] [US-FEDQ1-001].
+- **Nonstatutory option spread:** reported with W-2 box 12 code [[FACT:fed.equity.nso.w2_code=V]] [US-FEDQ1-001].
+- **ISO and ESPP:** FICA and FUTA do not apply at grant, exercise or disposition, and income-tax withholding is not required on a disqualifying disposition [US-FEDQ1-001].
+- **RSU timing for FICA and FUTA:** [[FACT:fed.equity.rsu.fica_timing=Later of the performance of the services and the date the right is no longer subject to a substantial risk of forfeiture (vesting); FUTA follows the same rule]] [US-FEDQ1-004].
+- **Federal, nonresident alien employee:** [[FACT:fed.equity.withholding_treatment.nonresident=Nonresident alien employee, 2026: equity income is wages subject to graduated withholding as for residents, with the Pub. 15-T NRA add-on, except that no add-on applies when the payment is withheld at the 22% optional or 37% mandatory flat supplemental rate. Only the U.S.-source part is wages for U.S. withholding: compensation attributable to several years is sourced on a time basis (U.S. workdays / total workdays over the period to which it is attributable, facts and circumstances). FICA/FUTA follow the resident rules (NSO spread and RSU at vesting are FICA wages) unless the employee is exempt as an F-1/J-1/M-1/Q nonimmigrant. Reporting on Form W-2; Form 1042-S only for wages exempt under a treaty claimed on Form 8233.]] [US-FEDQ1-006].
+- **State example:** California withholds bonuses and stock-option income at [[FACT:ca.wh.supplemental.rate.bonus_stock_options=10.23]]% [US-CAS5-004].
 
 ### How is payroll handled for employees who transfer between different legal entities mid-year?
 
-Each legal entity (EIN) is a separate employer. Wage bases restart at the new entity, and each entity files its own 941 and W-2. A successor employer that acquires the business may count the predecessor's wages toward the FUTA base [US-FED-007]. ⚠️ RESEARCH-GAP: common-paymaster relief and the OASDI successor rule for related entities are not keyed.
+Each legal entity (EIN) is a separate employer. Wage bases restart at the new entity, and each entity files its own 941 and W-2. A successor employer that acquires the business may count the predecessor's wages toward the FUTA base [US-FED-007]. Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief and the OASDI successor rule for related entities are not established from an official source.
 
 ### What is the process for an employee who changes citizenship or residency status during the fiscal year?
 
 - **State residency change:** from the move date, the new residence State's rules apply to wages paid. Withholding follows the new State routing (residence/work State, reciprocity certificates such as [[FACT:multi.reciprocity.pa.certificate=REV-419]] in Pennsylvania [US-MULTI-007]). The employee files new State certificates. The resident credit for tax paid to another State is generally taken at assessment (e.g. Arizona: [[FACT:multi.resident_credit.az.level=assessment]]) [US-AZWH-003].
-- **Nonresident alien becoming a resident alien:** ⚠️ RESEARCH-GAP: the withholding change when an employee's federal status changes from nonresident alien to resident alien during the year is not keyed.
+- **Nonresident alien becoming a resident alien:** Not configured in this release [[GAP:RQ-535]]: The withholding change when an employee's federal status changes from nonresident alien to resident alien during the year is not established from an official source.
 
 ### Are there specific rules for expatriates or inpatriates?
 
@@ -92,7 +97,7 @@ Each legal entity (EIN) is a separate employer. Wage bases restart at the new en
 | Students | [[FACT:fed.students.treatment=Private school/college students: FIT withheld, FICA and FUTA exempt; public school: FICA exempt unless sec. 218 agreement; work-experience full-time student: FICA taxable]] | [US-FEDS5-029] |
 | Government employees | [[FACT:fed.government_employee.treatment=FIT withheld; no FUTA; FICA with sec. 218 / Medicare-only exceptions]] | [US-FEDS5-029] |
 | Election workers | FICA from [[FACT:fed.election_worker.fica_threshold=2,500]] in the year | [US-FEDS5-003] |
-| Military spouses (State tax) | [[FACT:multi.military_spouse.rule=Spouse's service income not sourced to the duty State; election of the servicemember's residence, the spouse's residence or the permanent duty station (50 U.S.C. 4001); payroll effect: stop work-State withholding on the State certificate]] (2018-12-31 to 2025-12-31); [[FACT:multi.military_spouse.rule=election of servicemember residence, spouse residence or duty station (50 USC 4001)]] (from 2026-01-01) | [US-MULTIS5-005] |
+| Military spouses (State tax) | [[FACT:multi.military_spouse.rule=A military spouse present in a State solely to be with the servicemember under military orders neither loses nor acquires residence or domicile; the spouse's income for services performed in that State is not income for services performed or from sources within that State if the spouse is not a resident of it; for any taxable year the spouse may elect the residence of the servicemember, the spouse's own residence or the permanent duty station (50 U.S.C. 4001(a)(2), (c)). Payroll effect: on the employee's State certificate of nonresidence, stop work-State withholding.]] | [US-MULTIS5-005] |
 
 ### Fringe benefit exclusions (2026)
 
@@ -105,7 +110,7 @@ Each legal entity (EIN) is a separate employer. Wage bases restart at the new en
 | Group-term life insurance | Coverage up to [[FACT:fed.bik.group_term_life.excluded_coverage=50,000]]; the cost of coverage above it is FICA wages | [US-FEDS5-008] |
 | Trump-account employer contribution | Up to [[FACT:fed.bik.trump_account.employer_contribution_max=2,500]] (from 2026-07-04) | [US-FEDS5-030] |
 | Moving expenses and bicycle commuting | Not excluded (taxable wages) | [US-FEDS5-008] |
-| Business mileage reimbursement | ⚠️ RESEARCH-GAP: the 2026 IRS business standard mileage rate is not keyed (it is not printed in Pub. 15-B). | — |
+| Business mileage reimbursement | Not configured in this release [[GAP:RQ-536]]: The 2026 IRS business standard mileage rate is not established from an official source (it is not printed in Pub. 15-B). | — |
 
 ACA affordability percentage for 2026: [[FACT:fed.aca.affordability.rate=9.96]]% [US-FEDS5-011].
 

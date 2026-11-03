@@ -32,10 +32,13 @@
 - 02/11: **design v6** (`Research Pipeline/Chad/2026-11-02-design-v6/`): forma do Dev onde a lei não obriga diferença; QA PASS r3. Corrigiu defeitos de matriz que o v5 também tem (6552%, 6261x, 62651–3, 6561x/6566x na TF/TA). Planilha `2026-11-02-planilha-comparacao/TD_Design_Comparison_v4_v5_v6_vs_Dev.xlsx` (geral 68|65|80%; ponderada pela lei 57|89|89%, Dev 36%). Apresentação de 01/11 está desatualizada (fala do v5).
 - ⏳ Usuário: ok em D1 (transporte fora CNPS), D2 (62867 tributável), A20 (indenização na TF, inverte correcoes 07/07), A34 (operário <35).
 
+- 02/11 16:11 UTC: System Settings (`system.acceptance.k8s.hrblizz.dev`) **continua com erro 526** (Cloudflare Ray ID a5446a128fd42fa2). Backoffice OK (entidade REF-LE-04-422 visível). Pedido ao Ram **enviado 02/11** pelo Google Chat (6 mensagens, com ok do usuário): carregar nossas regras como conjunto separado (tax year de teste) ligado só à entidade de teste + erro 526. Ram respondeu 03/11 02:38: "send the file to Mohit he will load the regulations". ✅ v6 no formato do Dev pronta (9 .md, roundtrip 12/12 + 26/26 idêntico; 6 itens não representáveis na CONFERENCIA, incl. campos DD/entidade e códigos WTC novos que não existem no HRBlizz) — **enviada 03/11 ao Mohit** no chat "Cross Training - Design Creation - Oct 16" (4 mensagens + `TD-Chad-v6-test-set.zip`, md5 51881863…, 9 .md; spec com seção "Prerequisites not yet in the system"), com ok do usuário. 🔄 Aguardando o Mohit carregar. em `Research Pipeline/Chad/2026-11-03-v6-formato-dev/`; envio ao Mohit só com ok do usuário. Ram perguntou também (03/11 04:20) se houve mudança na research da Colômbia: fora desta frente.
+
 ## Fora desta frente
 - O Ram cobrou em 29/10 a atualização da skill da Colômbia (CCG v1.4 etc.). O usuário respondeu "ok". É assunto da janela geral ou da frente que cuida da Colômbia.
 
 ## Instruções vigentes
+- **02/11 (usuário): escrita liberada só na entidade de teste "Mercans Chad - Compliance Testing" (aceite)** — empregados de teste e folha de teste. **Não mexer nas regras td_2026 do Dev**: carga da v6 como conjunto separado só pelo Dev (pedir ao Ram). Fora disso, HRBlizz segue só leitura.
 - **01/11 (usuário): objetivo = estudar o design do Dev × o nosso e absorver o máximo para aprimorar o nosso, feito por nós com IA.** Não precisamos de entidade de teste, formulário (Suman/Jasper), empregados de teste nem correção do 526. Passos 3 (no sistema) e 4 descartados; a simulação local substitui.
 - HRBlizz só leitura, ambiente de teste; nunca digitar senha nem salvar, aprovar ou alterar.
 - Não mandar resumos à brain-service-5b; SendMessage só para commit ou coordenação entre frentes.

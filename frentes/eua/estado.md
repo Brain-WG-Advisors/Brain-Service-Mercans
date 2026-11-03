@@ -75,6 +75,9 @@
 
 - 02/11 ✅ **Fase 0 concluída: mandato SELADO** (selagem 6, 65/65, PASS). `CHECKPOINT-STEP4.md` Tentativa 6. Próximo: fase 1 (pesquisa dos 13 domínios, FED+MULTI → ondas 1/2/3).
 
+- 03/11 ✅ **Fase 2: CCG aprovado** (QA r3e PASS; 2.205/2.205 valores conferidos em cópia local; US-CCG-001-v1.0.docx) e ✅ **Stage 2 SCOPE aprovado** (r3). Próximo: Stage 3 RSPEC. Diário completo: `Research Pipeline/USA/US-compliance/_pipeline/RUN-JOURNAL.md`.
+- Lições desta frente (03/11, para a geral gravar na memória): (1) depois de mudar facts, sempre rodar rebuild_all antes da revisão; (2) correção de nota por chave + effective_from, nunca para todas as datas; (3) marcador de tag não liga número de outra jurisdição; (4) limpador de vocabulário não corta citação legal; (5) sites que dão 403 no curl costumam abrir no Chrome do usuário mesmo sem VPN (ssa.gov, mass.gov); (6) decisão pendente do dono: US-OWN-009 prevailing wage como indicador opcional (aplicado por padrão).
+
 ## Esperando outros
 - **Manette (TI):** pergunta sobre saída EUA (VPN) **enviada** pelo Google Chat em 29/10 com ok do usuário (`raw/chats/2026-10-29-manette-ti-pritunl.md`). Teste do usuário: Pritunl ligada não abre tax.illinois.gov. Plano B: `Research Pipeline/USA/LINKS-PARA-BAIXAR.md` (38 links, 3 ondas).
 

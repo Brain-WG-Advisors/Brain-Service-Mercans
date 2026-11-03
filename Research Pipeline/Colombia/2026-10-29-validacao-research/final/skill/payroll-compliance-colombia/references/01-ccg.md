@@ -1,4 +1,4 @@
-# Colombia Country Configuration Guide (CCG) - CO-CCG-001 v1.6
+# Colombia Country Configuration Guide (CCG) - CO-CCG-001 v1.7
 
 Complete text of the delivered Colombia CCG: all 13 modules, every rate, threshold, cap, treatment table and worked example, with the legal citations as delivered. Fiscal year 2026 (calendar year). Currency COP. Private-sector employees under the Substantive Labour Code (Código Sustantivo del Trabajo).
 
@@ -7,14 +7,14 @@ Complete text of the delivered Colombia CCG: all 13 modules, every rate, thresho
 
 | Source artifact | Bytes | MD5 |
 |---|---|---|
-| `CO-CCG-001-v1.6.docx` | 1,304,200 | `7c3e6b25143198a9c4d7724c801fd075` |
+| `CO-CCG-001-v1.7.docx` | 1,304,632 | `a966714cdb7272770cfc7b81f9b7fded` |
 
 This file is a complete, verbatim conversion of the artifacts above (python-docx / openpyxl, cached cell values; empty columns dropped; the first column `Row` of each table is the Excel row number, so a citation such as "WTC row 156, column Q" can be checked against the workbook). Figures, dates, codes, Spanish terminology and legal citations are reproduced exactly as delivered; nothing is summarised or rounded. The only change: the name of the client whose wage-type labels appear in a few rows is replaced by `[client]`.
 
 
 ## Reading notes (added at compilation, 2026-11-02)
 
-- **Version in force:** CO-CCG-001 **v1.6**, issued **2 November 2026** (Version Control row 1.6 and cover table).
+- **Version in force:** CO-CCG-001 **v1.7**, issued **2 November 2026** (Version Control row 1.7 and cover table; v1.7 changed only text: citations of C-397/1994, DIAN Concepto 577/2020, the 2026 minimum-wage instrument and C-543/2007).
 - **Annual UVT caps:** the 790-UVT cap of the 25% exempt income, the 1,340-UVT cap (with the 40% limit) and the 3,800-UVT cap
   shared by voluntary pension funds and AFC / AVC accounts are **annual and tracked year-to-date** per employee; there is no
   monthly one-twelfth limit (Consejo de Estado S4 rad. 24047 of 28 October 2021; Decree 2231 of 2023). The worked examples
@@ -36,57 +36,57 @@ Read with `offset` / `limit` rather than opening the whole file.
 | Line | Section |
 |---|---|
 | 114 | Version Control |
-| 128 | Module 1: Foundational Jurisdictional Parameters |
-| 132 | &nbsp;&nbsp;&nbsp;&nbsp;1.1 Fiscal, Currency, and Language |
-| 183 | &nbsp;&nbsp;&nbsp;&nbsp;1.2 Pay Cycles and Dates |
-| 302 | &nbsp;&nbsp;&nbsp;&nbsp;1.3 Extra Pay Period Handling |
-| 375 | &nbsp;&nbsp;&nbsp;&nbsp;1.4 Holiday Calendar |
-| 426 | &nbsp;&nbsp;&nbsp;&nbsp;1.5 Rounding and Precision Rules |
-| 488 | Module 2: Master Data Configuration |
-| 494 | &nbsp;&nbsp;&nbsp;&nbsp;2.1 Employer Information |
-| 557 | &nbsp;&nbsp;&nbsp;&nbsp;2.2 Employee Information |
-| 682 | &nbsp;&nbsp;&nbsp;&nbsp;2.3 Data Management and Retention |
-| 787 | Module 3: The Gross-to-Net Calculation Framework |
-| 791 | &nbsp;&nbsp;&nbsp;&nbsp;3.1 Gross-to-Net Flow |
-| 969 | Module 4: Gross Compensation |
-| 973 | &nbsp;&nbsp;&nbsp;&nbsp;4.1 Minimum Wage |
-| 1112 | &nbsp;&nbsp;&nbsp;&nbsp;4.2 Salary Components |
-| 1294 | &nbsp;&nbsp;&nbsp;&nbsp;4.3 Proration |
-| 1408 | &nbsp;&nbsp;&nbsp;&nbsp;4.4 Overtime |
-| 1499 | &nbsp;&nbsp;&nbsp;&nbsp;4.5 Bonuses |
-| 1568 | &nbsp;&nbsp;&nbsp;&nbsp;4.6 Wage Classification (Country-Specific) |
-| 1673 | Module 5: Social Security & Pension Systems |
-| 1691 | &nbsp;&nbsp;&nbsp;&nbsp;5.1 Contribution Types and Rates |
-| 1751 | &nbsp;&nbsp;&nbsp;&nbsp;5.1.1 Contribution Basis Definition |
-| 1865 | &nbsp;&nbsp;&nbsp;&nbsp;5.2 Calculation Logic and Edge Cases |
-| 2060 | &nbsp;&nbsp;&nbsp;&nbsp;5.3 Voluntary Contributions & Private Schemes |
-| 2156 | Module 6: Income Tax Withholding System |
-| 2179 | &nbsp;&nbsp;&nbsp;&nbsp;6.1 System Overview and Methodology |
-| 2235 | &nbsp;&nbsp;&nbsp;&nbsp;6.1.1 Taxable Income Definition |
-| 2417 | &nbsp;&nbsp;&nbsp;&nbsp;6.2 Tax Rates and Logic |
-| 2537 | &nbsp;&nbsp;&nbsp;&nbsp;6.3 Adjustments and Special Cases |
-| 2728 | Module 7: Deductions, Exemptions & Benefits |
-| 2732 | &nbsp;&nbsp;&nbsp;&nbsp;7.1 Statutory Tax Reliefs, Deductions, and Exemptions |
-| 3018 | &nbsp;&nbsp;&nbsp;&nbsp;7.2 Benefits in Kind (BIK) |
-| 3156 | &nbsp;&nbsp;&nbsp;&nbsp;7.3 Garnishments and Court Orders |
-| 3234 | Module 8: Statutory Leave Management |
-| 3238 | &nbsp;&nbsp;&nbsp;&nbsp;8.1 Leave Entitlements |
-| 3488 | Module 9: Termination & Irregular Payments |
-| 3492 | &nbsp;&nbsp;&nbsp;&nbsp;9.1 Termination Payments |
-| 3886 | &nbsp;&nbsp;&nbsp;&nbsp;9.2 Irregular and Retrospective Payments |
-| 4074 | Module 10: Reporting, Compliance & Finalisation |
-| 4080 | &nbsp;&nbsp;&nbsp;&nbsp;10.1 Statutory Reporting |
-| 4229 | &nbsp;&nbsp;&nbsp;&nbsp;10.2 Integrations |
-| 4259 | &nbsp;&nbsp;&nbsp;&nbsp;10.3 Payslip Requirements |
-| 4307 | &nbsp;&nbsp;&nbsp;&nbsp;10.4 Other Compliance |
-| 4337 | &nbsp;&nbsp;&nbsp;&nbsp;10.5 Year-End Processing and Finalisation |
-| 4420 | Module 11: Advanced Scenarios & Cross-Cutting Logic |
-| 4424 | &nbsp;&nbsp;&nbsp;&nbsp;11.1 Calculation Logic |
-| 4547 | &nbsp;&nbsp;&nbsp;&nbsp;11.2 Special Employee Groups & Income |
-| 4721 | Module 12: Gross-to-Net Worked Examples |
-| 4725 | &nbsp;&nbsp;&nbsp;&nbsp;12.1 Comprehensive Gross-to-Net Examples |
-| 5145 | Module 13: Common Business Practices & Non-Statutory Rules |
-| 5151 | &nbsp;&nbsp;&nbsp;&nbsp;13.1 Non-Statutory Conventions |
+| 129 | Module 1: Foundational Jurisdictional Parameters |
+| 133 | &nbsp;&nbsp;&nbsp;&nbsp;1.1 Fiscal, Currency, and Language |
+| 184 | &nbsp;&nbsp;&nbsp;&nbsp;1.2 Pay Cycles and Dates |
+| 303 | &nbsp;&nbsp;&nbsp;&nbsp;1.3 Extra Pay Period Handling |
+| 376 | &nbsp;&nbsp;&nbsp;&nbsp;1.4 Holiday Calendar |
+| 427 | &nbsp;&nbsp;&nbsp;&nbsp;1.5 Rounding and Precision Rules |
+| 489 | Module 2: Master Data Configuration |
+| 495 | &nbsp;&nbsp;&nbsp;&nbsp;2.1 Employer Information |
+| 558 | &nbsp;&nbsp;&nbsp;&nbsp;2.2 Employee Information |
+| 683 | &nbsp;&nbsp;&nbsp;&nbsp;2.3 Data Management and Retention |
+| 788 | Module 3: The Gross-to-Net Calculation Framework |
+| 792 | &nbsp;&nbsp;&nbsp;&nbsp;3.1 Gross-to-Net Flow |
+| 970 | Module 4: Gross Compensation |
+| 974 | &nbsp;&nbsp;&nbsp;&nbsp;4.1 Minimum Wage |
+| 1113 | &nbsp;&nbsp;&nbsp;&nbsp;4.2 Salary Components |
+| 1295 | &nbsp;&nbsp;&nbsp;&nbsp;4.3 Proration |
+| 1409 | &nbsp;&nbsp;&nbsp;&nbsp;4.4 Overtime |
+| 1500 | &nbsp;&nbsp;&nbsp;&nbsp;4.5 Bonuses |
+| 1569 | &nbsp;&nbsp;&nbsp;&nbsp;4.6 Wage Classification (Country-Specific) |
+| 1674 | Module 5: Social Security & Pension Systems |
+| 1692 | &nbsp;&nbsp;&nbsp;&nbsp;5.1 Contribution Types and Rates |
+| 1752 | &nbsp;&nbsp;&nbsp;&nbsp;5.1.1 Contribution Basis Definition |
+| 1866 | &nbsp;&nbsp;&nbsp;&nbsp;5.2 Calculation Logic and Edge Cases |
+| 2061 | &nbsp;&nbsp;&nbsp;&nbsp;5.3 Voluntary Contributions & Private Schemes |
+| 2157 | Module 6: Income Tax Withholding System |
+| 2180 | &nbsp;&nbsp;&nbsp;&nbsp;6.1 System Overview and Methodology |
+| 2236 | &nbsp;&nbsp;&nbsp;&nbsp;6.1.1 Taxable Income Definition |
+| 2418 | &nbsp;&nbsp;&nbsp;&nbsp;6.2 Tax Rates and Logic |
+| 2538 | &nbsp;&nbsp;&nbsp;&nbsp;6.3 Adjustments and Special Cases |
+| 2729 | Module 7: Deductions, Exemptions & Benefits |
+| 2733 | &nbsp;&nbsp;&nbsp;&nbsp;7.1 Statutory Tax Reliefs, Deductions, and Exemptions |
+| 3019 | &nbsp;&nbsp;&nbsp;&nbsp;7.2 Benefits in Kind (BIK) |
+| 3157 | &nbsp;&nbsp;&nbsp;&nbsp;7.3 Garnishments and Court Orders |
+| 3235 | Module 8: Statutory Leave Management |
+| 3239 | &nbsp;&nbsp;&nbsp;&nbsp;8.1 Leave Entitlements |
+| 3489 | Module 9: Termination & Irregular Payments |
+| 3493 | &nbsp;&nbsp;&nbsp;&nbsp;9.1 Termination Payments |
+| 3887 | &nbsp;&nbsp;&nbsp;&nbsp;9.2 Irregular and Retrospective Payments |
+| 4075 | Module 10: Reporting, Compliance & Finalisation |
+| 4081 | &nbsp;&nbsp;&nbsp;&nbsp;10.1 Statutory Reporting |
+| 4230 | &nbsp;&nbsp;&nbsp;&nbsp;10.2 Integrations |
+| 4260 | &nbsp;&nbsp;&nbsp;&nbsp;10.3 Payslip Requirements |
+| 4308 | &nbsp;&nbsp;&nbsp;&nbsp;10.4 Other Compliance |
+| 4338 | &nbsp;&nbsp;&nbsp;&nbsp;10.5 Year-End Processing and Finalisation |
+| 4421 | Module 11: Advanced Scenarios & Cross-Cutting Logic |
+| 4425 | &nbsp;&nbsp;&nbsp;&nbsp;11.1 Calculation Logic |
+| 4548 | &nbsp;&nbsp;&nbsp;&nbsp;11.2 Special Employee Groups & Income |
+| 4722 | Module 12: Gross-to-Net Worked Examples |
+| 4726 | &nbsp;&nbsp;&nbsp;&nbsp;12.1 Comprehensive Gross-to-Net Examples |
+| 5146 | Module 13: Common Business Practices & Non-Statutory Rules |
+| 5152 | &nbsp;&nbsp;&nbsp;&nbsp;13.1 Non-Statutory Conventions |
 
 ---
 
@@ -95,7 +95,7 @@ Colombia
 
 Country Configuration Guide
 
-CO-CCG-001  ·  Version 1.6  ·  Fiscal Year 2026
+CO-CCG-001  ·  Version 1.7  ·  Fiscal Year 2026
 
 | Country | Colombia (CO) |
 |---|---|
@@ -105,7 +105,7 @@ CO-CCG-001  ·  Version 1.6  ·  Fiscal Year 2026
 | Tax unit (UVT) 2026 | COP 52,374 |
 | Scope | Private-sector employees under the Substantive Labour Code |
 | Authorities | DIAN · UGPP · Ministry of Labour · Ministry of Health and Social Protection |
-| Document | CO-CCG-001 v1.6 |
+| Document | CO-CCG-001 v1.7 |
 | Prepared by | Mercans Compliance Regulations Team |
 | Date | 2 November 2026 |
 
@@ -122,6 +122,7 @@ Table of Contents
 | 1.4 | 22 October 2026 | Wallisson Gomes | PILA change events (Module 5 table): vacation - health and pension on the prior-month IBC, no occupational-risk contribution, vacation pay in the CCF / SENA / ICBF base; general-illness incapacity - the incapacity value as the IBC, no occupational-risk contribution. Module 4: total remuneration of the 40% test of Law 1393 of 2010 art. 30 per UGPP ABC Empleadores 2025. |
 | 1.5 | 30 October 2026 | Wallisson Gomes | Statutory validation against an independent recalculation and the primary sources: termination and non-resident withholding; Tax Code art. 114-1 exoneration (monthly salary and health contribution base both below 10 minimum wages; PILA field 76); integral salary contribution base with the Law 1393 excess; 40% test limited to pacted non-salary payments; payroll-levy base without the Law 1393 excess; 72-unit dependant deduction left to the annual return, with the 40% / 1,340-unit cap kept in withholding; occupational-risk class IV maximum 6.960%; Form 350 correction period of 3 years; record-retention, residence and overtime-divisor wording; transport allowance pro rata to days worked; vacation cash compensation; night premium on rest days; pension contribution and 2027 solidarity bands; garnishment priority; public-employer, voluntary-contribution, occupational-incapacity and severance-savings rules; non-resident severance; citations of the revoked Circular 101 of 2025 replaced by the statute. |
 | 1.6 | 2 November 2026 | Wallisson Gomes | Statutory validation, second pass: the 790-unit and 1,340-unit caps and the shared 3,800-unit cap of voluntary pension funds and long-term savings accounts are annual and tracked year-to-date, with no monthly one-twelfth limit (worked examples recalculated with the premise written: retention bonus, performance bonus, all-inclusive salary, voluntary savings); severance savings and their interest are not withheld for any employee (non-resident matrix); citations of the revoked Circular 101 of 2025 replaced by the statute (rest-day substitution, hourly divisors, piece-rate workers, overtime maxima). Released 2026-11-02 — approved by Wallisson Gomes. |
+| 1.7 | 2 November 2026 | Wallisson Gomes | Statutory validation, third pass (text only, no value changes): non-withholding of severance savings and their interest cites Constitutional Court C-397 of 1994 and, for the non-resident return, DIAN Concepto 577 of 2020 (non-resident matrix); the 2026 minimum-wage note states who issued each order and that Decree 0159 of 2026 was left without effect; the minimum-wage floor on incapacity rests on Constitutional Court C-543 of 2007. Released 2026-11-02 — approved by Wallisson Gomes. |
 
 Currency of the content. Every rate, threshold and deadline in this guide was verified against the primary source cited, for fiscal year 2026. Where an item rests on administrative doctrine rather than statute, or where a primary source could not be retrieved, that is stated inline. Two items carry live legal risk and are flagged where they arise: the 2026 minimum-wage decree remains subject to a pending annulment action on the merits (Module 4.1), and the pension reform of Law 2381 of 2024 takes effect on 1 April 2027, outside this guide's fiscal year (Module 5).
 
@@ -991,7 +992,7 @@ Eligibility is universal across the private sector. Labour Code art. 145 defines
 
 There is no lower youth, trainee or probationary minimum wage. Labour Code art. 143, as amended by Law 1496 of 2011, prohibits salary differences by age, gender, sex, nationality, race, religion, political opinion or trade-union activity, and presumes any differential treatment unjustified until the employer demonstrates objective differentiating factors.
 
-The legal instrument for 2026 requires a specific note. The 2026 minimum wage of COP 1,750,905 — a 23% increase over the 2025 figure of COP 1,423,500, a nominal rise of COP 327,405 — was fixed by Decree 1469 of 29 December 2025. That decree was provisionally suspended by the Council of State (Section Two, Subsection A) in annulment proceeding 11001-03-25-000-2026-00004-00 by order of 12 February 2026, and the Government complied by issuing Decree 0159 of 19 February 2026, which re-fixed the identical amount transitorily. On 9 July 2026 the Council of State revoked the provisional suspension — reported 17 July 2026 — on the ground that the interim decree was materially equivalent to the suspended one, so the injunction had neutralised no concrete harm. Decree 1469 of 2025 therefore recovered full force and is the operative instrument as at the date of this guide, with Decree 0159 of 2026 spent.
+The legal instrument for 2026 requires a specific note. The 2026 minimum wage of COP 1,750,905 — a 23% increase over the 2025 figure of COP 1,423,500, a nominal rise of COP 327,405 — was fixed by Decree 1469 of 29 December 2025. That decree was provisionally suspended by order of the reporting councillor of the Council of State, Section Two, of 12 February 2026, in annulment proceeding 11001-03-25-000-2026-00004-00, and the Government complied by issuing Decree 0159 of 19 February 2026, which re-fixed the identical amount transitorily. On 9 July 2026 the Council of State, Section Two, deciding the recurso de súplica, revoked the provisional suspension — reported 17 July 2026 — on the ground that the interim decree was materially equivalent to the suspended one, so the injunction had neutralised no concrete harm. Decree 1469 of 2025 therefore recovered full force and is the operative instrument as at the date of this guide, with Decree 0159 of 2026 left without effect by ordinal 3 of the same order.
 
 The amount COP 1,750,905 has been continuously in force since 1 January 2026 and has never been in dispute — only the instrument supporting it changed. The underlying annulment action on the merits remains pending, so the value stays litigation-exposed and must be re-verified before any 2027 cut-over.
 
@@ -2164,7 +2165,7 @@ Resident / non-resident treatment matrix (control B1). Built before the prose be
 | Regular salary from a Colombian employer, work performed in Colombia | Progressive table, Tax Code art. 383 (0 / 19 / 28 / 33 / 35 / 37 / 39%), applied to the art. 388 depurated monthly base. Method: Procedure 1 or Procedure 2 | Flat 20%, Tax Code art. 408, applied to the gross payment. No art. 388 depuration, no 25% exempt-income deduction, no dependants or other art. 387 deductions, no tax-free band. Confirmed by DIAN Concepto 011108 of 29 June 2026, which upholds Concepto 1789 (int. 14595) of 2025 |
 | Regular salary from a Colombian employer, work performed entirely outside Colombia | Worldwide income — art. 383 progressive table applies | Not taxable in Colombia — foreign-source income. No withholding. DIAN Oficio 28380 of 2019 |
 | Annual / 13th-month bonus (statutory service bonus) | Procedure 1: the statutory minimum bonus is withheld separately on its own read of the art. 383 table (art. 385). Procedure 2: folded into the ordinary monthly base | Flat 20% under art. 408, on the gross bonus. No separate treatment and no separate table read |
-| Severance payments — statutory severance savings and interest | Exempt in full where the average monthly income of the last 6 months ≤ 350 tax units (18,330,900); tapered above (Tax Code art. 206 num. 4). Excluded from the monthly withholding base under both procedures | No withholding. Severance savings and their interest are never subject to withholding (Law 100 of 1993 art. 135 par. 3; Decree 1625 of 2016 art. 1.2.4.1.11; DIAN Oficios 8899 of 2015 and 4358 of 2019); the rule does not distinguish by residence, so the art. 408 flat 20% does not apply to them. Because this income was not withheld under arts. 407–411, the non-resident does not meet the non-filing condition of Tax Code art. 592 num. 2 and settles the tax in their own return (art. 26 depuration, art. 247 rate). Configurable option: a client that wants the conservative position may withhold the art. 408 20% (off by default) |
+| Severance payments — statutory severance savings and interest | Exempt in full where the average monthly income of the last 6 months ≤ 350 tax units (18,330,900); tapered above (Tax Code art. 206 num. 4). Excluded from the monthly withholding base under both procedures | No withholding. Severance savings and their interest are never subject to withholding (Law 100 of 1993 art. 135 par. 3, extended to every payer by Constitutional Court C-397 of 1994; Decree 1625 of 2016 art. 1.2.4.1.11; DIAN Oficios 8899 of 2015 and 4358 of 2019); the rule does not distinguish by residence, so the art. 408 flat 20% does not apply to them. Because this income was not withheld under arts. 407–411, the non-resident does not meet the non-filing condition of Tax Code art. 592 num. 2 and settles the tax in their own return (art. 26 depuration, art. 247 rate). Configurable option: a client that wants the conservative position may withhold the art. 408 20% (off by default) |
 | Dismissal indemnity | Fully taxable employment income, withheld outside the ordinary monthly base: 20% where income exceeds 204 tax units (Tax Code art. 401-3); otherwise the table percentage for the average monthly income, i.e. the sum of the taxable payments of the previous 12 months divided by 12 (Decree 1625 of 2016 art. 1.2.4.1.8). Only the statutory-minimum indemnities of art. 206 nums. 1–3 are exempt, and only up to the legal minimum amount (art. 206 par. 1) | Flat 20% under art. 408 |
 | Equity / share incentives (stock options, restricted shares) | Taxable employment income at exercise or vesting, on the spread between market value and exercise price; enters the ordinary monthly base and the art. 383 table. Subsequent disposal is a separate capital transaction, outside payroll | Flat 20% under art. 408 where the underlying service was performed in Colombia. Where the service was performed abroad, foreign-source and not taxable |
 | Labour-service / contractor pay (non-employment work income) | Art. 383 table applies, using "pagos mensualizados" — total contract value less mandatory health and pension contributions, divided by the months of the contract (art. 383 par. 2, added by Law 2277 of 2022 art. 8) | Flat 20% under art. 408 for services rendered in Colombia. Technical services, technical assistance and consultancy rendered from abroad are also subject to withholding under arts. 24 and 408 |
@@ -3318,7 +3319,7 @@ days of incapacity arising from general illness" to the employer, but does not s
 
 the rate. Labour Code art. 227 sets the cash sickness benefit (auxilio monetario) at two thirds for the first 90 days, and market practice applies 66.67% for days 1–2 on that basis. A minority practice pays 100% for those two days. Mercans default: 66.67%, configurable. Basis: Decree 780 de 2016 art. 3.2.1.10 par. 1 assigns days 1-2 to the employer but states no rate. The Ministry of Health fills that gap by applying Labour Code art. 227 (two thirds) directly: Concepto MinSalud 202311602174531 of 20 October 2023 (request radicado 202342302183712) has the employer pay the first two days at 66.6% of salary; the minimum-wage floor below also applies. The Mercans default (66.67%, configurable) matches this concept.
 
-The minimum-wage floor on incapacity payments. Where 66.67% of the employee's salary falls below the minimum wage, market practice and settled administrative doctrine top the payment up to one minimum wage. Mercans default: apply the floor, configurable. Corte Constitucional Sentencia C-543 de 2007 holds that the monetary sickness benefit (auxilio monetario por enfermedad de origen común) may never fall below the minimum legal wage (resolutive part: the benefit "no podrá ser inferior al salario mínimo legal vigente").
+The minimum-wage floor on incapacity payments. Where 66.67% of the employee's salary falls below the minimum wage, the payment is topped up to one minimum wage, in proportion to the days of incapacity. Corte Constitucional Sentencia C-543 de 2007 holds that the monetary sickness benefit (auxilio monetario por enfermedad de origen común) may never fall below the minimum legal wage (resolutive part: the benefit "no podrá ser inferior al salario mínimo legal vigente"). Mercans applies the floor.
 
 #### Which wage types are affected by unpaid/partially paid leave?
 
@@ -3530,7 +3531,7 @@ By residence status: the labour-law entitlements are identical; only the tax tre
 |---|---|---|
 | Severance savings, interest, service bonus, vacation | Identical — the Labour Code applies to every employee working in Colombia, whatever their nationality or tax residence (Labour Code art. 2) | Identical |
 | Dismissal indemnity | Identical | Identical |
-| Tax on severance savings and interest | Exempt in full where the average monthly income of the last 6 months ≤ 350 tax units (COP 18,330,900); tapered above | No withholding (Law 100 of 1993 art. 135 par. 3; Decree 1625 of 2016 art. 1.2.4.1.11; DIAN Oficios 8899 of 2015 and 4358 of 2019): the rule does not distinguish by residence, so the art. 408 flat 20% does not apply. The non-resident declares the income in their own return (Tax Code arts. 26, 247 and 592 num. 2), where the art. 206 num. 4 exemption is available (an interpretation: art. 206 does not require residence). The 20% is kept only as a configurable conservative option, off by default |
+| Tax on severance savings and interest | Exempt in full where the average monthly income of the last 6 months ≤ 350 tax units (COP 18,330,900); tapered above | No withholding (Law 100 of 1993 art. 135 par. 3, extended to every payer by Constitutional Court C-397 of 1994; Decree 1625 of 2016 art. 1.2.4.1.11; DIAN Oficios 8899 of 2015 and 4358 of 2019): the rule does not distinguish by residence, so the art. 408 flat 20% does not apply. The non-resident declares the income in their own return (Tax Code arts. 26, 247 and 592 num. 2), where the art. 206 num. 4 exemption is available (DIAN Concepto 577 of 2020: a non-resident who must file applies Tax Code art. 26 together with arts. 178 and 235-2, which keeps the art. 206 exemptions). The 20% is kept only as a configurable conservative option, off by default |
 | Tax on the dismissal indemnity | Fully taxable — withheld outside the ordinary monthly base: 20% where income exceeds 204 tax units, otherwise the table percentage for the 12-month average (Decree 1625 of 2016 art. 1.2.4.1.8) | Flat 20% |
 | Tax on accrued vacation and service bonus | Ordinary treatment | Flat 20% |
 | Social security on the settlement | Accrued vacation paid on termination is not in the health, pension and occupational-risk base (Consejo de Estado, Sección Cuarta, exp. 26941 of 4 April 2024; unification ruling exp. 25185 of 9 December 2021, rule 1) but enters the payroll-levy base (Law 21 of 1982 art. 17); the other accrued entitlements and the indemnity are in neither | Identical |

@@ -128,7 +128,7 @@ Valores discutidos nos chats; vigência não registrada. Skill traz o conteúdo 
 - [ ] OI-3 PE plan-social 62182 — Mohit/Andre; OI-11 perímetro dos "appointements"; população diária/horista; status final dos itens C1–L2 [INCERTO] — Compliance (chat: design-dev-kb)
 - [ ] Confirmar a LFI 2026 (Loi 008 de 2025-12-26) — Compliance (chat: design-dev-kb)
 - [ ] BIK base 58105 inclui `65%%%`? comparação diz que sim, pesquisa diz bruto em dinheiro — Compliance [INCERTO] (chat: design-dev-kb)
-- [ ] Novo design do zero — Wallisson (chat: design-dev-kb)
+- [x] Novo design do zero — Wallisson (chat: design-dev-kb) _(✅ fechada em 2026-11-03 pelo radar: O 'novo design do zero' do Chade já foi feito: existem os designs v5 e v6, com revisão independente aprovada; prova: frentes/chade/estado.md:27)_
 - [ ] Senha dos arquivos criptografados da Baker Hughes — Govind Thakur (chat: mercans-compliance)
 - [ ] Atualizar Chad no Monday; alinhar o design na call de quinta — Wallisson (chat: compliance-research)
 

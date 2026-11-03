@@ -1,6 +1,6 @@
 {
  "jur": "IA",
- "facts": 45,
+ "facts": 46,
  "keys": [
   "ia.breach.notice",
   "ia.deductions.rule",
@@ -43,6 +43,7 @@
   "ia.wh.deduction.other",
   "ia.wh.exempt.threshold.mfj_hoh_under65",
   "ia.wh.exempt.threshold.single_under65",
+  "ia.wh.formula.rate",
   "ia.wh.method",
   "ia.wh.rounding",
   "ia.wh.supplemental.rate"
@@ -62,18 +63,6 @@
   ],
   [
    "Summary",
-   "ia.pit.rate.flat",
-   null,
-   "auto"
-  ],
-  [
-   "Summary",
-   "ia.pit.rate.flat",
-   null,
-   "auto"
-  ],
-  [
-   "Summary",
    "ia.sui.wage_base",
    null,
    "auto"
@@ -81,12 +70,6 @@
   [
    "Summary",
    "ia.sui.wage_base",
-   null,
-   "auto"
-  ],
-  [
-   "Summary",
-   "ia.sui.employer.rate.max",
    null,
    "auto"
   ],
@@ -141,7 +124,7 @@
   [
    "State income tax withholding",
    "ia.pit.rate.flat",
-   "US-IAS5-006",
+   "US-IAS5-016",
    "value"
   ],
   [
@@ -197,6 +180,12 @@
    "ia.wh.exempt.threshold.mfj_hoh_under65",
    null,
    "auto-note"
+  ],
+  [
+   "State income tax withholding",
+   "ia.wh.formula.rate",
+   "US-IAS5-005",
+   "value"
   ],
   [
    "State income tax withholding",
@@ -266,7 +255,7 @@
   ],
   [
    "Social insurance (unemployment, disability, paid leave, levies)",
-   "ia.sui.employer.rate.max",
+   "ia.sui.new_employer.construction.rate",
    null,
    "auto-note"
   ],
@@ -398,12 +387,6 @@
   ],
   [
    "Live legal change",
-   "ia.pit.rate.flat",
-   null,
-   "auto"
-  ],
-  [
-   "Live legal change",
    "ia.live.hf2212.status",
    "US-IAS5-028",
    "value"
@@ -421,20 +404,8 @@
    "auto-note"
   ],
   [
-   "Worked examples",
-   "ia.pit.rate.flat",
-   null,
-   "auto-note"
-  ],
-  [
    "Special populations",
    "ia.minwage.hourly",
-   null,
-   "auto"
-  ],
-  [
-   "Special populations",
-   "ia.pit.rate.flat",
    null,
    "auto"
   ],
@@ -445,9 +416,16 @@
    "auto"
   ]
  ],
- "untagged_values": [
-  "ia.wh.method"
+ "untagged_values": [],
+ "r3d_rebind": [
+  [
+   "IA",
+   "ia.sui.employer.rate.max",
+   "ia.sui.new_employer.construction.rate",
+   " 1.000% until 12 chargeable quarters; construction rank 9 = 5.400%."
+  ]
  ],
+ "r3d_components": [],
  "gaps": [
   {
    "section": "1",
@@ -474,6 +452,17 @@
    "why": "CY2027 rate table not yet published.",
    "attempted": [],
    "what_would_close_it": "IWD \"Information on Rate Computations for Private Employers 2027\" or November 2026 rate notices.",
+   "blocking": false
+  },
+  {
+   "section": "3",
+   "title": "Social insurance (unemployment, disability, paid leave, levies)",
+   "key": "ia.pfml.state_program.none",
+   "why": "The statement that Iowa has no state SDI/TDI/PFML programme rests only on the US DOL Women's Bureau summary (US-IAP52-004, tier B); a negative cannot be proved from an Iowa A-tier source on disk. (QA r2 2026-11-02: the number must be removed from the CCG text and carried as a limitation.)",
+   "attempted": [
+    "US DOL Women's Bureau paid-leave page (US-IAP52-004)"
+   ],
+   "what_would_close_it": "An Iowa Workforce Development or Iowa Code statement on paid family/medical or disability leave; otherwise state it as \"no Iowa programme identified\" in the limitation list.",
    "blocking": false
   },
   {

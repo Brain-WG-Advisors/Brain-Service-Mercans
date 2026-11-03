@@ -77,10 +77,10 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `mn.pit.backup_withholding.rate` | 9.85 % | 2026-01-01 | 2026-12-31 | US-MNS5-010 | high |
 | `mn.local_wage_tax.exists` | False | 2026-01-01 |  | US-MNR3-001 | high |
 | `mn.pit.conformity.irc_date` | 2023-05-01 | 2026-01-01 | 2026-12-31 | US-MNS5-010 | high |
-| `mn.pit.oracle.example_1.withholding` | 91.27 USD | 2026-01-01 | 2026-12-31 | US-MNS5-010 | high |
-| `mn.ui.additional_assessment.rate` | 14.0 % | 2026-01-01 | 2026-12-31 | US-MNP7-002 | high |
-| `mn.ui.special_assessment.rate` | 0.0 % | 2026-01-01 | 2026-12-31 | US-MNP7-002 | high |
-| `mn.ui.workforce_fee.rate` | 0.1 % | 2026-01-01 |  | US-MNP7-001 | high |
+| `mn.pit.oracle.example_1.withholding` | 91.27 USD | 2026-01-01 | 2026-12-31 | US-MNS5-010 (derived arithmetically: 52,000-5,300=46,700; 1,782.09+8,690x6.80%=2,373.01; /26) | high |
+| `mn.ui.additional_assessment.rate` | 14.0 % | 2026-01-01 | 2026-12-31 | US-MNB5-402 | high |
+| `mn.ui.special_assessment.rate` | 0.0 % | 2026-01-01 | 2026-12-31 | US-MNB5-402 | high |
+| `mn.ui.workforce_fee.rate` | 0.1 % | 2026-01-01 |  | US-MNB5-401 | high |
 | `mn.pfml.employer_share.min` | 50 % | 2026-01-01 |  | US-MNS5-018 | high |
 | `mn.payslip.frequency` | each pay period, written or electronic | 2026-01-01 |  | US-MNP6-001 | high |
 | `mn.payslip.esst_balance.required` | True | 2024-01-01 |  | US-MNS5-011 | high |
@@ -208,7 +208,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **UI statute read literally** (268.035 subd. 24) [US-MNS5-017, A.1]:
   - The wage base = 60% of the state's average annual wage, rounded to the nearest 1,000.
   - Noncovered employment is listed under special populations below.
-- **Workforce development fee:** 0.10% of taxable wages [US-MNP7-001].
+- **Workforce development fee:** 0.10% of taxable wages [US-MNB5-401].
 - **Minnesota Paid Leave (DEED)**, in force from 2026-01-01:
   - Statute 268B.14 [US-MNS5-018, A.1]:
     - The employer pays at least 50% of the premium; the employee share is a payroll deduction that may not push pay below the minimum wage.

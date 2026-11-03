@@ -25,7 +25,8 @@ INTRO["FED"] = [
     "source (list at the end of the annex).",
     "Classification: federal income tax withholding and FICA are one calculation per employee with one authority "
     "(the IRS); FUTA is federal but its credit depends on the State UI paid and on the State's credit-reduction "
-    "status, so it is a cross-layer dependency. Independent contractors (Form 1099-NEC) are out of scope.",
+    "status, so it is a cross-layer dependency. Independent contractors and Form 1099-NEC reporting are out of scope "
+    "(owner instruction of 2026-10-29) [US-OWN-008].",
 ]
 SECTION_TEXT[("FED", "1")] = [
     "The federal Fair Labor Standards Act sets the floor. The employer pays the highest of the federal, State and "
@@ -66,9 +67,9 @@ SECTION_TEXT[("FED", "2b")] = [
     "| Regular salary | Worksheet 1A, annual percentage method, base = federal income tax wages (FED.2) | Same method; the annual add-on ({{fed.fit.nra.addon.table2.annual|v}}, Table 2; {{fed.fit.nra.addon.table1.annual|v}}, Table 1) is added to the wage base before the computation; W-4 completed per the NRA rule |\n"
     "| Annual bonus / supplemental pay | Optional flat {{fed.fit.supplemental.flat_rate}} % or aggregate; {{fed.fit.supplemental.mandatory_rate}} % above {{fed.fit.supplemental.mandatory_threshold|v}} | Same rates; no add-on on flat-rate supplemental wages |\n"
     "| Severance | Wages ({{fed.severance.is_wages}}); supplemental-wage rules | Same as the non-resident supplemental row |\n"
-    "| Equity (option exercise, share vesting) | ⚠️ RESEARCH-GAP (blocking): the federal classification and withholding treatment of equity income are not in the research | ⚠️ RESEARCH-GAP (blocking): same request |\n"
-    "| Benefits in kind | Taxable fringe benefits are wages; exclusions in FED.8 | Same; treaty exemption only where claimed on Form 8233 |\n"
-    "| Contractor / labour-service pay | Out of scope (Form 1099-NEC, owner decision) | Out of scope |",
+    "| Equity (option exercise, share vesting) | {{fed.equity.withholding_treatment.resident}}; RSU FICA/FUTA timing: {{fed.equity.rsu.fica_timing}} | {{fed.equity.withholding_treatment.nonresident}} |\n"
+    "| Benefits in kind | Taxable fringe benefits are wages; exclusions in FED.8 | {{fed.fit.nra.bik.treatment}} |\n"
+    "| Contractor / labour-service pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",
 ]
 SECTION_TEXT[("FED", "3")] = [
     "**FICA.** Social security (OASDI): employee {{fed.fica.oasdi.rate.employee}} % and employer {{fed.fica.oasdi.rate.employer}} % "
@@ -252,9 +253,18 @@ SECTION_TEXT[("AL", "2")] = [
     "Personal exemption: single {{al.wh.personal_exemption.single|v}}, married {{al.wh.personal_exemption.married|v}}. "
     "Dependent amount by gross income band: {{al.wh.dependent.gi_to_50000|v}}, {{al.wh.dependent.gi_to_100000|v}}, "
     "{{al.wh.dependent.gi_above_100000|v}}.",
-    "⚠️ RESEARCH-GAP (non-blocking): the gross-income steps of the standard-deduction phase-out between the maximum and the "
-    "minimum are in the source booklet but carry no facts key; an engine cannot compute the deduction inside the phase-out "
-    "range until they are keyed (research request raised).",
+    "**Standard-deduction phase-out** (booklet rev. 01/2026 p.6 formula and p.7 schedule): {{al.wh.std_deduction.phaseout_steps}}",
+    "```\n"
+    "if GI <= start_gi:        std = max_deduction\n"
+    "elif GI >= floor_from_gi: std = min_deduction\n"
+    "else:                     std = max_deduction - reduction_per_step x ceil((GI - start_gi) / step_size)\n"
+    "```",
+    "| Status | Maximum | Phase-out starts above GI | Reduction per step | Step size | Minimum deduction | Minimum applies from GI |\n"
+    "|---|---|---|---|---|---|---|\n"
+    "| Single (0/S) | {{al.wh.std_deduction.single.max|v}} | {{al.wh.std_deduction.single.phaseout.start_gi|v}} | {{al.wh.std_deduction.single.phaseout.reduction_per_step|v}} | {{al.wh.std_deduction.single.phaseout.step_size|v}} | {{al.wh.std_deduction.single.min|v}} | {{al.wh.std_deduction.single.phaseout.floor_from_gi|v}} |\n"
+    "| Married filing separately (MS) | {{al.wh.std_deduction.married_separate.max|v}} | {{al.wh.std_deduction.married_separate.phaseout.start_gi|v}} | {{al.wh.std_deduction.married_separate.phaseout.reduction_per_step|v}} | {{al.wh.std_deduction.married_separate.phaseout.step_size|v}} | {{al.wh.std_deduction.married_separate.min|v}} | {{al.wh.std_deduction.married_separate.phaseout.floor_from_gi|v}} |\n"
+    "| Married (M) | {{al.wh.std_deduction.married.max|v}} | {{al.wh.std_deduction.married.phaseout.start_gi|v}} | {{al.wh.std_deduction.married.phaseout.reduction_per_step|v}} | {{al.wh.std_deduction.married.phaseout.step_size|v}} | {{al.wh.std_deduction.married.min|v}} | {{al.wh.std_deduction.married.phaseout.floor_from_gi|v}} |\n"
+    "| Head of family (H) | {{al.wh.std_deduction.head_of_family.max|v}} | {{al.wh.std_deduction.head_of_family.phaseout.start_gi|v}} | {{al.wh.std_deduction.head_of_family.phaseout.reduction_per_step|v}} | {{al.wh.std_deduction.head_of_family.phaseout.step_size|v}} | {{al.wh.std_deduction.head_of_family.min|v}} | {{al.wh.std_deduction.head_of_family.phaseout.floor_from_gi|v}} |",
     "**Supplemental pay:** may be withheld at {{al.wh.supplemental.rate}} %. **Overtime:** the 2026 overtime-premium deduction "
     "(up to {{al.pit.overtime_premium_deduction.max|v}}) operates at **assessment** level only; it changes neither wages nor "
     "withholding (W-2 box 12 code TT is informational). Do not build it as a payroll deduction.",
@@ -269,9 +279,9 @@ SECTION_TEXT[("AL", "2b")] = [
     "| Regular salary | Formula method (AL.2) on all wages, unless the employer withholds for the work State | Formula method on Alabama wages only, after the {{al.nonres.safe_harbor.days}}-day safe harbour where the home State qualifies |\n"
     "| Annual bonus / supplemental pay | {{al.wh.supplemental.rate}} % or the formula on the aggregate | Same, on the Alabama portion |\n"
     "| Severance | Downsizing severance exempt up to {{al.wh.severance.exempt_max|v}} with prior ADOR approval; otherwise supplemental pay | Same, on the Alabama portion |\n"
-    "| Equity | Supplemental-pay treatment; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Alabama portion |\n"
+    "| Equity | Supplemental-pay treatment; federal classification of equity income in Annex FED (FED.2b) | Same, on the Alabama portion |\n"
     "| Benefits in kind | Included in withholding wages; HSA treatment conforms ({{al.hsa.conforms}}); transit and group-term life open (AL.8) | Same, on the Alabama portion |\n"
-    "| Contractor pay | Out of scope | Out of scope |",
+    "| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",  # SCOPE r1 finding 4
 ]
 SECTION_TEXT[("AL", "2c")] = [
     "Municipal and county occupational taxes are withheld by the employer and remitted to the city or county on its own "
@@ -330,9 +340,9 @@ SECTION_TEXT[("AR", "2b")] = [
     "| Regular salary | Formula method (AR.2) on all wages | Formula method on wages for work physically performed in Arkansas, apportioned by Arkansas working days |\n"
     "| Annual bonus / supplemental pay | {{ar.wh.supplemental.rate}} % | {{ar.wh.supplemental.rate}} % on the Arkansas portion |\n"
     "| Severance | ⚠️ RESEARCH-GAP (non-blocking): no Arkansas-specific treatment in the research | Same gap |\n"
-    "| Equity | Supplemental-pay treatment; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Arkansas portion |\n"
+    "| Equity | Supplemental-pay treatment; federal classification of equity income in Annex FED (FED.2b) | Same, on the Arkansas portion |\n"
     "| Benefits in kind | Withholding wages; cafeteria-plan exclusion ({{ar.sui.wages.section125_excluded}} for UI); HSA, transit and group-term life open (AR.8) | Same, on the Arkansas portion |\n"
-    "| Contractor pay | Out of scope | Out of scope |",
+    "| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",  # SCOPE r1 finding 4
 ]
 SECTION_TEXT[("AR", "3")] = [
     "Employer-only UI ({{ar.sui.employee.rate}} % employee) on wages up to the base, plus the administrative assessment. "
@@ -349,7 +359,7 @@ SECTION_TEXT[("AR", "SP")] = [
     "- Government and non-profit: covered by withholding; UI reimbursable option.\n"
     "- Military: active-duty pay exempt (Act 1408 of 2013); spouses file ARW-4MS yearly.\n"
     "- Small employers below {{ar.minwage.employer_size_min}} employees: outside the State minimum-wage act.\n"
-    "- Minors: ⚠️ RESEARCH-GAP (non-blocking): child-labour hour limits not in the research (AR.6).",
+    "- Minors: ⚠️ RESEARCH-GAP [[GAPKEY:ar.leave.mandated_leave]] (non-blocking): child-labour hour limits not in the research (AR.6).",
     SP_GAP,
 ]
 SECTION_TEXT[("AR", "LG")] = ["No language rule for pay records. Payslip and filings in English."]
@@ -376,9 +386,9 @@ SECTION_TEXT[("AZ", "2b")] = [
     "| Regular salary | Elected percentage of federal FIT wages | Elected percentage on Arizona wages after the {{az.nonres.withholding_days_threshold}}-day threshold; WEC exemption for residents of the listed States |\n"
     "| Annual bonus / supplemental pay | Same elected percentage | Same, on the Arizona portion |\n"
     "| Severance | Same elected percentage (federal wage definition) | Same, on the Arizona portion |\n"
-    "| Equity | Same elected percentage; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Arizona portion |\n"
+    "| Equity | Same elected percentage; federal classification of equity income in Annex FED (FED.2b) | Same, on the Arizona portion |\n"
     "| Benefits in kind | Included where in federal FIT wages | Same, on the Arizona portion |\n"
-    "| Contractor pay | Out of scope | Out of scope |",
+    "| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",  # SCOPE r1 finding 4
 ]
 SECTION_TEXT[("AZ", "3")] = [
     "Employer-only UI ({{az.sui.employee.rate}} % employee) on wages up to the base. From 2027 experience-rated employers pay "
@@ -417,11 +427,14 @@ SECTION_TEXT[("CA", "2")] = [
     "annual_tax   = brackets(status)(taxable) - allowance_credit x allowances\n"
     "period_tax   = max(0, annual_tax) / pay_periods\n"
     "```",
-    "Married and head-of-household ceilings are carried as one value each: married {{ca.pit.brackets.married.ceilings}}; "
-    "head of household {{ca.pit.brackets.hoh.ceilings}}. The rate attached to each married band around the "
-    "million-dollar point is read from the DE 44 Method B married table.",
-    "⚠️ RESEARCH-GAP (non-blocking): the married and head-of-household schedules carry their band ceilings as one value "
-    "each and no per-band rate keys; an engine needs per-band rate keys for both schedules (research request raised).",
+    "**Which table applies to which DE 4 status.** {{ca.wh.status_table_map}}",
+    "Bands by status: the single band table in this section is DE 44 (2026) Method B Table 5 (annual), the married band "
+    "table is Table 6 (Married, one income) and the head-of-household band table is Table 7; each gives the rate, the "
+    "ceiling and the tax at the bottom of each band (base). A married employee who checks 'Single or Married (with two or "
+    "more incomes)' is withheld on the single table, never on the married table. The same status mapping selects the "
+    "column of the low-income exemption and standard deduction tables. Married "
+    "ceilings: {{ca.pit.brackets.married.ceilings}}; head of household "
+    "ceilings: {{ca.pit.brackets.hoh.ceilings}}.",
     "**Supplemental pay** paid separately: bonuses and stock options {{ca.wh.supplemental.rate.bonus_stock_options}} %; other "
     "supplemental pay (overtime, commissions, severance, vacation pay) {{ca.wh.supplemental.rate.other}} %. Household employees: "
     "withholding only by agreement ({{ca.wh.household.by_agreement_only}}).",
@@ -438,7 +451,7 @@ SECTION_TEXT[("CA", "2b")] = [
     "| Severance | {{ca.wh.supplemental.rate.other}} % when paid separately, or aggregate | Same, on the California portion |\n"
     "| Equity (stock options) | {{ca.wh.supplemental.rate.bonus_stock_options}} % when paid separately, or aggregate | Same, on the California portion |\n"
     "| Benefits in kind | PIT wages per CA.8 (HSA taxable; group-term life above the excluded coverage reportable, not withheld) | Same, on the California portion |\n"
-    "| Contractor pay | Out of scope | Out of scope |",
+    "| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",  # SCOPE r1 finding 4
 ]
 SECTION_TEXT[("CA", "3")] = [
     "Employer: UI on wages up to {{ca.sui.wage_base|v}} plus the Employment Training Tax ({{ca.ett.rate}} %). Employee: State "
@@ -486,9 +499,9 @@ SECTION_TEXT[("CO", "2b")] = [
     "| Regular salary | Flat-rate method (CO.2) on all wages except where another State requires withholding | Flat-rate method on Colorado-source wages, by days present |\n"
     "| Annual bonus / supplemental pay | No supplemental rate: aggregate with regular wages | Same, on the Colorado portion |\n"
     "| Severance | Aggregate with regular wages (wage base = federal withholding wages) | Same, on the Colorado portion |\n"
-    "| Equity | Aggregate; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Colorado portion |\n"
+    "| Equity | Aggregate; federal classification of equity income in Annex FED (FED.2b) | Same, on the Colorado portion |\n"
     "| Benefits in kind | Federal exclusions flow through (wage-base conformity) | Same, on the Colorado portion |\n"
-    "| Contractor pay | Out of scope | Out of scope |",
+    "| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",  # SCOPE r1 finding 4
 ]
 SECTION_TEXT[("CO", "2c")] = [
     "Occupational privilege taxes are flat monthly amounts, one employee and one employer amount per employee whose "
@@ -537,12 +550,29 @@ SECTION_TEXT[("CT", "2")] = [
     "Table A exemption (maximum) by code: A {{ct.wh.table_a.exemption.a|v}}, B {{ct.wh.table_a.exemption.b|v}}, C "
     "{{ct.wh.table_a.exemption.c|v}}, F {{ct.wh.table_a.exemption.f|v}}. Table B rates {{ct.pit.rates}}; band breaks: codes "
     "A, D, F {{ct.pit.bracket_breaks.a_d_f}}; code B {{ct.pit.bracket_breaks.b}}; code C {{ct.pit.bracket_breaks.c}}. "
-    "⚠️ RESEARCH-GAP (non-blocking): Tables C (phase-out add-back), D (recapture) and E (personal tax credit) of TPG-211 "
-    "carry no facts key; the rules method cannot be computed until they are keyed (research request raised).",
-    "**Method choice (decision record).** The Department of Revenue Services permits either the TPG-211 rules or its "
-    "tables. Its worked examples are table-based, and the rules give results that differ from the tables by up to some "
-    "cents per period. The engine method is an owner decision; whichever is chosen, the per-period tables are not in the "
-    "research (blocking gap below), so the oracle examples cannot be reproduced yet.",
+    "**Tables C, D and E of TPG-211** (2026 Withholding Calculation Rules, printed in IP 2026(1)). Each band reads "
+    "'annualized salary more than the lower bound and less than or equal to the upper bound: amount'. Table C is the "
+    "phase-out add-back of the lowest tax rate (USD), Table D the tax recapture amount (USD) and Table E the personal "
+    "tax credit (a decimal applied as annual_tax x (1 - credit)).",
+    "| TPG-211 table | CT-W4 code | Bands (annualized salary: amount) |\n"
+    "|---|---|---|\n"
+    "| C, phase-out add-back | A, D | {{ct.wh.table_c.code_a_d}} |\n"
+    "| C, phase-out add-back | B | {{ct.wh.table_c.code_b}} |\n"
+    "| C, phase-out add-back | C | {{ct.wh.table_c.code_c}} |\n"
+    "| C, phase-out add-back | F | {{ct.wh.table_c.code_f}} |\n"
+    "| D, recapture | A, D, F | {{ct.wh.table_d.code_a_d_f}} |\n"
+    "| D, recapture | B | {{ct.wh.table_d.code_b}} |\n"
+    "| D, recapture | C | {{ct.wh.table_d.code_c}} |\n"
+    "| E, personal tax credit | A | {{ct.wh.table_e.code_a}} |\n"
+    "| E, personal tax credit | B | {{ct.wh.table_e.code_b}} |\n"
+    "| E, personal tax credit | C | {{ct.wh.table_e.code_c}} |\n"
+    "| E, personal tax credit | F | {{ct.wh.table_e.code_f}} |",
+    "**Method choice (configuration decision, 2026-11-02).** The Department of Revenue Services permits either the "
+    "TPG-211 rules or its tables. The engine uses the DRS per-period withholding tables of IP 2026(1) (weekly, biweekly, "
+    "semimonthly and monthly bands, one row per wage band and CT-W4 code, listed in CT.2 with their source), because the "
+    "Department's worked examples are table-based and the tables reproduce them (CT.14). Wages above the table maximum of "
+    "each period are computed with the TPG-211 rules, as the tables instruct. The TPG-211 rules above are shown as the "
+    "reference method.",
     "Lump-sum pension withholding: {{ct.wh.pension_lump_sum.suspension}}.",
 ]
 SECTION_TEXT[("CT", "2b")] = [
@@ -553,9 +583,9 @@ SECTION_TEXT[("CT", "2b")] = [
     "| Regular salary | Rules or tables (CT.2) on all wages, prorated where another qualifying jurisdiction requires withholding | Rules or tables on Connecticut-service wages (CT-W4NA or records), otherwise all wages; day threshold and convenience rule in Annex MULTI |\n"
     "| Annual bonus / supplemental pay | Aggregate only (no flat rate) | Same, on the Connecticut portion |\n"
     "| Severance | Aggregate (federal wage definition) | Same, on the Connecticut portion |\n"
-    "| Equity | Aggregate; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Connecticut portion |\n"
+    "| Equity | Aggregate; federal classification of equity income in Annex FED (FED.2b) | Same, on the Connecticut portion |\n"
     "| Benefits in kind | Federal wage definition; Connecticut departures open (CT.8) | Same, on the Connecticut portion |\n"
-    "| Contractor pay | Out of scope | Out of scope |",
+    "| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |",  # SCOPE r1 finding 4
 ]
 SECTION_TEXT[("CT", "3")] = [
     "Employer UI on wages up to {{ct.sui.wage_base|v}} plus the fund-solvency rate ({{ct.sui.fund_solvency.rate}} %); no employee "
@@ -570,7 +600,7 @@ SECTION_TEXT[("CT", "11")] = [
 ]
 SECTION_TEXT[("CT", "OR")] = [
     "Oracle values from the Department of Revenue Services informational publication IP 2026(1), examples 8 to 10 "
-    "(table method). They cannot be reproduced until the per-period tables are keyed (CT.2 gap).",
+    "(table method), reproduced from the keyed per-period tables (CT.2).",
 ]
 SECTION_TEXT[("CT", "SP")] = [
     "- Domestic workers: minimum wage and overtime exclude private-home domestic service except where FLSA covers it; UI above the quarterly cash-wage threshold; withholding voluntary (CT-941 HHE, CT-W3 HHE).\n"
@@ -689,7 +719,7 @@ def example_ar(facts, value_cell, tag):
 
 
 def example_ca(facts, value_cell, tag):
-    f_out = _get(facts, "ca.oracle.de44.example_f.withholding_monthly")
+    f_out = _get(facts, "ca.oracle.de44_f.monthly.withholding")
     e_out = _get(facts, "ca.oracle.de44.example_e.withholding_semimonthly")
     suite = _get(facts, "ca.oracle.suite")
     m = re.search(r"annual ([\d,]+) married (\d+) allowances", f_out.get("note", ""))

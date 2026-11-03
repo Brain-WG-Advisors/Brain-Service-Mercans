@@ -1,12 +1,13 @@
-# Annex SD - South Dakota
+# Annex SD: South Dakota
+
 
 Jurisdiction annex of the United States Country Configuration Guide (US-CCG-001). Layer classification: **T1 - no state wage tax; SUI and levies only** (build manifest, tier rationale).
 
-The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC are out of scope (MANDATE, US-OWN-001). Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
+The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
 
-Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.json` and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. `RESEARCH-GAP` marks a point the research has not closed; it is not filled with an estimate.
+Every value in this annex is bound to a verified fact and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. A point marked as a research gap has not been closed by the research; it is not filled with an estimate.
 
-## 1. Labour code and pay rules
+## SD.1 Employment and labour code
 
 - **Minimum wage (SDCL 60-11-3, 60-11-3.2) [US-SDS5-001, US-SDS5-003]:** [[FACT:sd.minwage.hourly=11.85]] USD per hour from 2026-01-01 and [[FACT:sd.minwage.hourly=12.30]] USD from 2027-01-01 (published).
 - **Tipped employees (60-11-3.1) [US-SDS5-001, US-SDS5-003]:** cash wage at least half the minimum wage: [[FACT:sd.minwage.tipped.cash_wage=5.925]] USD in 2026 and [[FACT:sd.minwage.tipped.cash_wage=6.15]] USD in 2027; the employer makes up any shortfall each pay period and keeps a record of all tips.
@@ -29,9 +30,9 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `sd.labour.minwage.local_preemption` (non-blocking; research request filed under this key) - No SD statute preempting local minimum wages located (tier-B claim not borne out). Closes with: SDCL ch. 6-12 home-rule limits or an LRC/AG opinion.
+- Not configured in this release [[GAP:RQ-322]]: Not established from an official source.
 
-## 2. Income tax withholding (state and local)
+## SD.2 Income tax withholding
 
 - **No state income tax and no withholding** (income tax exists: [[FACT:sd.pit.exists=False]]) [US-SD-001]: no state W-4, supplemental rate, rounding rule, state W-2 or reciprocity.
 - **No local income tax** (exists: [[FACT:sd.local_wage_tax.exists=False]]) [US-SDP52-001].
@@ -44,7 +45,15 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 | `sd.pit.exists` | [[FACT:sd.pit.exists=False]] |  | from 2026-01-01 | US-SD-001 | no withholding, W-4, W-2 filing, reciprocity |
 | `sd.local_wage_tax.exists` | [[FACT:sd.local_wage_tax.exists=False]] |  | from 2026-07-01 | US-SDP52-001 |  |
 
-## 3. Social insurance and payroll levies
+## SD.2b Non-resident regime and reciprocity
+
+The non-resident and reciprocity rules of this jurisdiction are written in SD.2.
+
+## SD.2c Local wage taxes
+
+The local wage taxes of this jurisdiction, where any exist, are written in SD.2.
+
+## SD.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 - **Reemployment Assistance (UI), DLR [US-SDS5-002, US-SDS5-018].**
   - Taxable wage base [[FACT:sd.sui.wage_base=15,000]] USD, fixed in statute and not indexed (61-1-46); wages already reported to another state in the year count toward it: [[FACT:sd.sui.wage_base.other_state_credit=True]].
@@ -61,10 +70,10 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 |---|---|---|---|---|---|
 | `sd.sui.wage_base` | [[FACT:sd.sui.wage_base=15,000]] | USD | from 2015-01-01 | US-SDS5-002 | 61-1-46, not indexed; other-state wages count |
 | `sd.sui.wage_base.other_state_credit` | [[FACT:sd.sui.wage_base.other_state_credit=True]] |  | from 2026-01-01 | US-SDS5-002 |  |
-| `sd.ui.rate.new_employer.year1` | [[FACT:sd.ui.rate.new_employer.year1=1.2]] | % | from 2026-01-01 | US-SDS5-002 | then 1.0% while positive balance; construction 6% then 3% |
+| `sd.ui.rate.new_employer.year1` | [[FACT:sd.ui.rate.new_employer.year1=1.2]] | % | from 2026-01-01 | US-SDS5-002 | then [[FACT:sd.ui.rate.new_employer.later=1.0]]% while positive balance; construction 6% then 3% |
 | `sd.ui.rate.new_employer.later` | [[FACT:sd.ui.rate.new_employer.later=1]] | % | from 2026-01-01 | US-SDS5-002 |  |
 | `sd.ui.rate.new_employer.construction.year1` | [[FACT:sd.ui.rate.new_employer.construction.year1=6]] | % | from 2026-01-01 | US-SDS5-002 |  |
-| `sd.ui.schedule.in_effect` | [[FACT:sd.ui.schedule.in_effect=C]] |  | 2026-01-01 to 2026-12-31 | US-SDS5-018 | AHCM >=1.50; rates 0.00-8.52% |
+| `sd.ui.schedule.in_effect` | [[FACT:sd.ui.schedule.in_effect=C]] |  | 2026-01-01 to 2026-12-31 | US-SDS5-018 | AHCM >=1.50; rates 0.00-[[FACT:sd.sui.employer.rate.max=8.52]]% |
 | `sd.sui.employer.rate.max` | [[FACT:sd.sui.employer.rate.max=8.52]] | % | 2026-01-01 to 2026-12-31 | US-SDS5-002 | Schedule C top (row mapping by hand); DLR page 9.5% is stale |
 | `sd.ui.admin_fee.rate` | [[FACT:sd.ui.admin_fee.rate=0.08]] | % | from 2026-01-01 | US-SDS5-002 | all experience-rated employers; not new employers |
 | `sd.ui.investment_fee.new_employer.rate` | [[FACT:sd.ui.investment_fee.new_employer.rate=0.55]] | % | from 2026-01-01 | US-SDS5-002 | rated 0.00-0.53% |
@@ -73,7 +82,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 | `sd.sui.employee.rate` | [[FACT:sd.sui.employee.rate=0]] | % | from 2026-01-01 | US-SDP51-002 | fees may not be deducted |
 | `sd.sdi_pfml.exists` | [[FACT:sd.sdi_pfml.exists=False]] |  | from 2026-01-01 | US-SDP51-002 | no employee SDI/PFML premium in the RA handbook |
 
-## 4. Payslip statute and payroll records
+## SD.4 Pay statement
 
 - **No pay-statement statute** (exists: [[FACT:sd.payslip.statute.exists=False]]) [US-SDS5-001, US-SD-003, US-SDL-001]; federal recordkeeping applies (Annex FED). The RA handbook lists the per-employee records to keep [US-SDP51-002]; the retention period is open (below).
 
@@ -85,9 +94,9 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `sd.records.retention` (non-blocking; research request filed under this key) - RA record retention period not read. Closes with: ARSD 47:06 text.
+- Not configured in this release [[GAP:RQ-324]]: RA record retention period not read.
 
-## 5. Statutory reporting
+## SD.5 Statutory reporting
 
 - **No state withholding return, reconciliation or state W-2.**
 - **Quarterly RA wage report (Form 21) [US-SDS5-013, US-SDS5-014]:** due (received by) [[FACT:sd.report.ui.quarterly_due=Apr 30; Jul 31; Oct 31; Jan 31 (received)]]; zero reports required; online system or file upload; corrections on Form 21C; domestic employers may elect annual filing [US-SDS5-020].
@@ -101,7 +110,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 | `sd.report.ui.quarterly_due` | [[FACT:sd.report.ui.quarterly_due=Apr 30; Jul 31; Oct 31; Jan 31 (received)]] |  | from 2026-01-01 | US-SDS5-013 | Form 21; zero reports; CD layout 85-byte E/S records (US-SDS5-014) |
 | `sd.newhire.report_days` | [[FACT:sd.newhire.report_days=20]] | days | from 2026-01-01 | US-SDS5-007 | 25-7A-3.3 |
 
-## 6. Leave
+## SD.6 Leave
 
 - **No paid sick leave, vacation, holiday or PFML statute** (sick leave statute exists: [[FACT:sd.leave.sick.state_statute.exists=False]]) [US-SDS5-011].
 - **Voting leave (12-3-5) [US-SDS5-008]:** [[FACT:sd.leave.voting.paid_hours=2]] consecutive hours off while the polls are open, with no deduction from wages, unless the employee already has that much off-duty time.
@@ -114,7 +123,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 | `sd.leave.sick.state_statute.exists` | [[FACT:sd.leave.sick.state_statute.exists=False]] |  | from 2026-01-01 | US-SDS5-011 |  |
 | `sd.leave.voting.paid_hours` | [[FACT:sd.leave.voting.paid_hours=2]] | hours | from 2026-01-01 | US-SDS5-008 | no deduction from wages (12-3-5) |
 
-## 7. Termination
+## SD.7 Termination and final pay
 
 - **Final pay (60-11-10, 60-11-11) [US-SDS5-001, US-SDS5-010]:** [[FACT:sd.final_pay.rule=next regular payday (or when property returned)]], on discharge or resignation.
 - **Accrued vacation:** no statutory payout rule; follows the agreement or policy (case law open, below) [US-SDS5-011]. No severance, separation-notice or WARN duty.
@@ -127,13 +136,13 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `sd.term.vacation.case_law` (non-blocking; research request filed under this key) - SD Supreme Court holdings on vested vacation not researched. Closes with: Opinion text on ujs.sd.gov.
+- Not configured in this release [[GAP:RQ-325]]: SD Supreme Court holdings on vested vacation not established from an official source.
 
-## 8. Benefits in kind and the taxable base
+## SD.8 Benefits in kind and taxable wages
 
 - **Income tax:** not applicable. **UI base:** employee deferrals and cafeteria-plan amounts included; employer plan contributions excluded; board, lodging and goods included at cash value [US-SDS5-013].
 
-## 9. Deductions and garnishments
+## SD.9 Deductions and garnishments
 
 - **Wage-deduction authorisation:** no SD statute located; federal limits apply (open point below).
 - **Ordinary garnishment (21-18-51) [US-SDS5-006]:** the lesser of [[FACT:sd.garn.creditor.max_percent=20]] % of weekly disposable earnings, or disposable earnings minus a protected floor of forty times the minimum wage ([[FACT:sd.garn.consumer.floor.weekly=474.00]] USD per week in 2026), reduced by [[FACT:sd.garn.consumer.dependent_reduction.weekly=25]] USD per week for each dependent family member living with the debtor. Stricter than the CCPA. Support orders: CCPA support percentages (21-18-52).
@@ -150,28 +159,30 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `sd.deduction.consent_paycard` (non-blocking; research request filed under this key) - No SD rule on written authorisation for deductions or paycard/direct-deposit consent. Closes with: ARSD 47:04 text or DLR Wage & Hour statement.
+- Not configured in this release [[GAP:RQ-323]]: No SD rule on written authorisation for deductions or paycard/direct-deposit consent.
 
-## 10. Collective agreements and prevailing wage
+## SD.10 Collective agreements and prevailing wage
 
-- **No state prevailing-wage law** (exists: [[FACT:sd.prevailing_wage.exists=False]]) [US-SDP51-003]; federal Davis-Bacon only. The evidence rests on a summariser read (open point below).
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
+
+- **No state prevailing-wage law** (exists: [[FACT:sd.prevailing_wage.exists=False]]) [US-SDP51-003]; federal Davis-Bacon only. The evidence rests on an indirect read of the federal state table (open point below).
 
 **Parameters (collective agreements and prevailing wage)**
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `sd.prevailing_wage.exists` | [[FACT:sd.prevailing_wage.exists=False]] |  | from 2026-01-01 | US-SDP51-003 | DOL table via summariser |
+| `sd.prevailing_wage.exists` | [[FACT:sd.prevailing_wage.exists=False]] |  | from 2026-01-01 | US-SDP51-003 | U.S. DOL state prevailing wage table. |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `sd.prevailing_wage.absence` (non-blocking; research request filed under this key) - US-SDP51-003 rests on a summariser read of the DOL table. Closes with: Direct read of the DOL table or SD statute history.
+- Not configured in this release [[GAP:RQ-327]]: Not established from an official source.
 
-## 11. Indexation
+## SD.11 Indexation
 
 - **Minimum wage:** [[FACT:sd.minwage.indexation=CPI-U Aug/Aug, rounded UP to 5 cents, never decreases; published by 15 Oct]] [US-SDS5-001, US-SDS5-005]. The tipped wage follows automatically.
 - **RA wage base:** not indexed; the rate schedule moves with the fund's high cost multiplier each year (61-5-25).
 
-## 12. Payroll data protection
+## SD.12 Payroll data protection and records
 
 - **Breach notice (22-40-19..26) [US-SDS5-017]:** personal information includes the SSN; notify affected residents within the statutory period and the Attorney General when more than [[FACT:sd.data.breach.ag_threshold=250]] residents are affected. No SSN-truncation rule for pay statements located.
 
@@ -181,17 +192,21 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 |---|---|---|---|---|---|
 | `sd.data.breach.ag_threshold` | [[FACT:sd.data.breach.ag_threshold=250]] |  | from 2018-07-01 | US-SDS5-017 | notify residents within 60 days |
 
-## 13. Live legal change
+## SD.13 Live legal change
 
 - **2026-01-01 (SL 2025 ch 199):** new rate table and administrative fee for rated employers [US-SDS5-002].
 - **SL 2026 ch 205 and ch 204:** investment-fund administration and state apprenticeship agency; payroll-neutral [US-SDS5-002, US-SDS5-001].
-- **2027-01-01:** minimum wage and tipped wage per Section 1 [US-SDS5-003]. The 2027 schedule is in draft minutes only [US-SDS5-019]; the 2026 session-law list was not read (open point below).
+- **2027-01-01:** minimum wage and tipped wage per Section 1 [US-SDS5-003]. The 2027 schedule appears only in unapproved advisory-council minutes [US-SDS5-019]; the 2026 session-law list was not read (open point below).
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `sd.live.session_laws` (non-blocking; research request filed under this key) - LRC 2026 session-law list not read. Closes with: sdlegislature.gov/Session/Laws/ 2026.
+- Not configured in this release [[GAP:RQ-326]]: LRC 2026 session-law list not read.
 
-## 14. Special populations
+## SD.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## SD.15 Special populations
 
 | Population | South Dakota rule | Register id |
 |---|---|---|
@@ -207,13 +222,22 @@ Every value in this annex is bound to a key of `_research/CCG-annex_SD-facts.jso
 | Government employees | State and political subdivisions covered; elected officials, legislators, judges and National Guard excluded | US-SDS5-002 |
 | Seasonal amusement / camps | Excluded from minimum wage and tipped wage under the statutory season test | US-SDS5-001 |
 
-## 15. Sources
+## SD.16 Language
 
-Register ids cited in this annex resolve to `00-official-sources/legal-basis-register.csv`; the URL of each value is in the facts file. Authorities:
+No language rule for employee documents is written for this jurisdiction in this annex.
 
+## SD.S Sources
+
+Register ids cited in this annex resolve to the build record; the URL of each value is in the facts file. Authorities:
+
+- Build lead (Claude) under owner delegation (Wallisson Gomes): US-OWN-006
+- Owner (Wallisson Gomes): US-OWN-008
+- SD Department of Labor and Regulation: US-SDL-001
+- SD Department of Labor and Regulation / Legislature: US-SD-003
 - SD Department of Revenue: US-SDP52-001
-- South Dakota Department of Labor and Regulation: US-SDP51-002, US-SDS5-003, US-SDS5-011, US-SDS5-012, US-SDS5-013
-- South Dakota Department of Labor and Regulation (RA Advisory Council): US-SDS5-018
+- South Dakota Department of Labor and Regulation: US-SDP51-001, US-SDP51-002, US-SDS5-003, US-SDS5-004, US-SDS5-010, US-SDS5-011, US-SDS5-012, US-SDS5-013, US-SDS5-014, US-SDS5-015, US-SDS5-016, US-SDS5-020
+- South Dakota Department of Labor and Regulation (RA Advisory Council): US-SDS5-018, US-SDS5-019
 - South Dakota Department of Revenue: US-SD-001
-- South Dakota Legislature (Legislative Research Council): US-SDS5-001, US-SDS5-002, US-SDS5-006, US-SDS5-007, US-SDS5-008, US-SDS5-017
+- South Dakota Legislature (Legislative Research Council): US-SDS5-001, US-SDS5-002, US-SDS5-006, US-SDS5-007, US-SDS5-008, US-SDS5-009, US-SDS5-017
+- U.S. Bureau of Labor Statistics: US-SDS5-005
 - US Department of Labor Wage and Hour Division: US-SDP51-003

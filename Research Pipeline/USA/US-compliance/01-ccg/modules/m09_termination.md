@@ -10,14 +10,16 @@
 |---|---|---|---|
 | Final regular wages | [[FACT:fed.final_pay.rule=No federal immediate final-pay rule; wages due by the regular payday; timing and vacation payout are state law]]. State timing: Table 9.1.1. | Regular wages | [US-FEDS5-025] |
 | Accrued vacation / PTO | Payable only where State law or the employer's written policy makes it wages due (Module 8, Table 8.1.3) | Wages | Module 8 |
-| Severance pay | Contractual or policy-based. No general federal severance entitlement is keyed. | Wages for FIT, FICA and FUTA (severance is wages) | [US-FEDS5-029] |
+| Severance pay | Contractual or policy-based. No general federal severance entitlement is established from an official source. | Wages for FIT, FICA and FUTA (severance is wages) | [US-FEDS5-029] |
 | Pay in lieu of WARN notice | WARN requires [[FACT:fed.warn.notice_days=60]] days' notice of a plant closing or mass layoff. Pay in lieu of the notice is wages. | Wages | [US-FEDS5-025] |
 | Maine statutory severance | [[FACT:me.severance.mass_layoff=establishments with 100+ employees: one week pay per year of service, within one pay period after last day; 90 days notice]] | Wages | [US-MES5-010] |
 | New Jersey mass-layoff severance | [[FACT:nj.term.warn.severance.weeks_per_year=1]] week of pay per year of service on a covered mass layoff | Wages | [US-NJS5-020] |
 
-**Table 9.1.1: State final-pay timing (keyed States).** Timing runs from the separation. Discharge and resignation differ in many States.
+**Fixed-term contracts.** Employment is at will and a fixed term is a matter of contract; no federal or general State fixed-term regime exists. The expiry of the term is a separation: final wages follow Table 9.1.1, and any State separation notice below applies (Module 11, 11.3; [US-SDS5-010], [US-TNS5-012], [US-FEDS5-025]).
 
-| State | Keyed rule (parameter: value) | Register |
+**Table 9.1.1: State final-pay timing (States with a verified rule).** Timing runs from the separation. Discharge and resignation differ in many States.
+
+| State | Verified rule (parameter: value) | Register |
 |---|---|---|
 | Alaska (AK) | discharge, working days: [[FACT:ak.final_pay.discharge.working_days=3]]; penalty, max working days: [[FACT:ak.final_pay.penalty.max_working_days=90]] | US-AKS5-001 |
 | Arkansas (AR) | discharge: [[FACT:ar.final_pay.discharge=next regular payday; double wages if unpaid within 7 days of that payday]]; double wages after days: [[FACT:ar.final_pay.double_wages_after_days=7]] | US-ARS5-003 |
@@ -68,9 +70,9 @@
 | West Virginia (WV) | rule: [[FACT:wv.final_pay.rule=next regular payday (discharge and resignation)]] | US-WVS5-003 |
 | Wyoming (WY) | rule: [[FACT:wy.final_pay.rule=no later than the usual regular payday]] (from 2026-05-08) | US-WYS5-002 |
 
-States with no final-pay key in the facts files: AL, GA, MS. ⚠️ RESEARCH-GAP: final-pay timing is not keyed for these States; see each jurisdiction annex.
+States with no verified final-pay rule: AL, GA, MS. Not configured in this release [[GAP:RQ-523]]: Final-pay timing is not established from an official source for these States; see each jurisdiction annex.
 
-**State separation notices keyed in the facts:** California [[FACT:ca.separation_notice=CUIC 1089 Notice to Employee as to Change in Relationship + DE 2320 at discharge, layoff or leave; email only with opt-in]] [US-CAS5-018]; Connecticut [[FACT:ct.separation_notice=UC-21 Separation Packet with UC-21A to every separating employee]] [US-CTS5-031]; Georgia [[FACT:ga.separation_notice.dol800=DOL-800 (R-02-24) to every separated worker stating reason, on last day or within 3 days; electronic with e-signature allowed (Oct 2026 rules)]] [US-GAS5-007]; New Jersey [[FACT:nj.term.separation_notice.form=BC-10 at every separation]] [US-NJS5-015]; Tennessee within [[FACT:tn.term.separation_notice.hours=24]] hours [US-TNS5-007].
+**State separation notices established from official sources:** California [[FACT:ca.separation_notice=CUIC 1089 Notice to Employee as to Change in Relationship + DE 2320 at discharge, layoff or leave; email only with opt-in]] [US-CAS5-018]; Connecticut [[FACT:ct.separation_notice=UC-21 Separation Packet with UC-21A to every separating employee]] [US-CTS5-031]; Georgia [[FACT:ga.separation_notice.dol800=DOL-800 (R-02-24) to every separated worker stating reason, on last day or within 3 days; electronic with e-signature allowed (Oct 2026 rules)]] [US-GAS5-007]; New Jersey [[FACT:nj.term.separation_notice.form=BC-10 at every separation]] [US-NJS5-015]; Tennessee within [[FACT:tn.term.separation_notice.hours=24]] hours [US-TNS5-007].
 
 ### How do termination rules and calculations differ by residential status and employer type?
 
@@ -81,12 +83,12 @@ States with no final-pay key in the facts files: AL, GA, MS. ⚠️ RESEARCH-GAP
 ### Detail the calculation and tax withholding rules for unused leave paid out on termination.
 
 - **When it is due:** only where Module 8, Table 8.1.3 makes the balance wages due, and on the final-pay date of Table 9.1.1.
-- **Federal withholding:** where due, the payout is paid with the final wages. ⚠️ RESEARCH-GAP: whether a separately paid vacation payout is a supplemental wage for the federal flat-rate method is not keyed.
+- **Federal withholding:** where due, the payout is paid with the final wages. Classification: [[FACT:fed.vacation_payout.supplemental_status=Vacation pay is withheld on as regular wages; when it is in addition to regular wages for the vacation period (e.g. an annual lump-sum payment for unused vacation leave) it is a supplemental wage payment; vacation pay for longer than the usual payroll period is spread over the pay periods for which it is paid.]] [US-FEDQ1-002]. A lump-sum payout of unused leave is withheld on with the supplemental-wage methods of Module 6 §6.2 (optional flat rate or aggregate).
 - **State example:** Louisiana withholds vacation pay like regular wages, with no flat supplemental rate ([[FACT:la.wh.supplemental.method=withheld like regular wages; no flat supplemental rate (vacation pay likewise)]]) [US-LAP51-002].
 
 ### Describe the rules for statutory severance/redundancy payments.
 
-Federal law sets a notice duty, not a severance entitlement. WARN requires [[FACT:fed.warn.notice_days=60]] days' notice of a covered plant closing or mass layoff [US-FEDS5-025]. Pay in lieu of the notice is wages. Statutory severance keyed in the facts: Maine ([[FACT:me.severance.mass_layoff=establishments with 100+ employees: one week pay per year of service, within one pay period after last day; 90 days notice]]) [US-MES5-010]; New Jersey [[FACT:nj.term.warn.severance.weeks_per_year=1]] week per year of service on a covered mass layoff [US-NJS5-020]. Severance is withheld as supplemental wages (9.2).
+Federal law sets a notice duty, not a severance entitlement. WARN requires [[FACT:fed.warn.notice_days=60]] days' notice of a covered plant closing or mass layoff [US-FEDS5-025]. Pay in lieu of the notice is wages. Statutory severance established from official sources: Maine ([[FACT:me.severance.mass_layoff=establishments with 100+ employees: one week pay per year of service, within one pay period after last day; 90 days notice]]) [US-MES5-010]; New Jersey [[FACT:nj.term.warn.severance.weeks_per_year=1]] week per year of service on a covered mass layoff [US-NJS5-020]. Severance is withheld as supplemental wages (9.2).
 
 ### Provide the statutory formula for any tax-free portion.
 
@@ -107,12 +109,12 @@ FED_taxable     = severance                       # no federal exclusion
 | Final wages, overtime, commissions | Regular method | Yes | Yes | W-2 |
 | Severance / pay in lieu of notice | Supplemental (flat or aggregate) | Yes | Yes | W-2 |
 | Bonus paid at exit | Supplemental (flat or aggregate) | Yes | Yes | W-2 |
-| Accrued vacation payout (where due) | Paid with final wages (regular or supplemental: gap above) | Not keyed (gap above) | Not keyed (gap above) | W-2 |
+| Accrued vacation payout (where due) | Paid with final wages (regular or supplemental: gap above) | Not established (gap above) | Not established (gap above) | W-2 |
 | Treaty-exempt wages of a nonresident alien | Per Form 8233 | Per the nonresident rules | Per the nonresident rules | 1042-S |
 
 ### Detail the rules for any applicable concessional tax cap.
 
-No federal concessional cap applies to termination payments. Supplemental wages paid to one employee above [[FACT:fed.fit.supplemental.mandatory_threshold=1,000,000]] in the calendar year must be withheld at [[FACT:fed.fit.supplemental.mandatory_rate=37]]% [US-FEDS5-003]. This is a mandatory higher rate, not a concession. Alabama's severance exemption ([[FACT:al.wh.severance.exempt_max=50,000]]) is the only State cap keyed in the facts.
+No federal concessional cap applies to termination payments. Supplemental wages paid to one employee above [[FACT:fed.fit.supplemental.mandatory_threshold=1,000,000]] in the calendar year must be withheld at [[FACT:fed.fit.supplemental.mandatory_rate=37]]% [US-FEDS5-003]. This is a mandatory higher rate, not a concession. Alabama's severance exemption ([[FACT:al.wh.severance.exempt_max=50,000]]) is the only State cap established from official sources.
 
 ### Provide a detailed worked example of a redundancy termination payout.
 
@@ -139,7 +141,7 @@ Bonuses, commissions, severance and similar payments are **supplemental wages**.
 2. **Aggregate method:** the supplemental payment is withheld together with regular wages under the regular tables (procedure detail: Module 11.1, gap).
 3. **Mandatory rate:** above [[FACT:fed.fit.supplemental.mandatory_threshold=1,000,000]] of supplemental wages in the year, [[FACT:fed.fit.supplemental.mandatory_rate=37]]% applies to the excess, whatever the W-4.
 
-FICA and FUTA apply as to any wage. **Table 9.2.1** lists the State supplemental rules keyed in the facts.
+FICA and FUTA apply as to any wage. **Table 9.2.1** lists the State supplemental rules established from official sources.
 
 | State | Rule (parameter: value) | Register |
 |---|---|---|
@@ -157,11 +159,11 @@ FICA and FUTA apply as to any wage. **Table 9.2.1** lists the State supplemental
 | Kansas (KS) | rate: [[FACT:ks.wh.supplemental.rate=5]] | US-KSS5-001 |
 | Kentucky (KY) | method: [[FACT:ky.wh.supplemental.method=no separate rate; bonuses and severance through the same formula; film-incentive companies at max 141.020 rate]] | US-KY-001 |
 | Louisiana (LA) | method: [[FACT:la.wh.supplemental.method=withheld like regular wages; no flat supplemental rate (vacation pay likewise)]] | US-LAP51-002 |
-| Massachusetts (MA) | rate: [[FACT:ma.wh.supplemental.rate=5]] | US-MAR3-002 |
+| Massachusetts (MA) | rate: [[FACT:ma.wh.supplemental.rate=5]] | US-MAP51-003 |
 | Massachusetts (MA) | rule: [[FACT:ma.wh.supplemental.rule=5% while annualized regular + supplemental to date + this payment <= 1,107,750; above, lesser of 9% of payment or 9% of excess plus 5% of remainder; percentage method excludes supplemental]] | US-MAP51-003 |
 | Maryland (MD) | lump sum bonus: [[FACT:md.wh.supplemental.lump_sum_bonus=top state rate 6.50% + county top local rate (e.g. 9.80% in 3.30 table; 9.70% in 3.20 table); no flat rate for other supplemental pay; computed in cents (retirement whole dollars)]] | US-MDS5-021 |
 | Maine (ME) | rate: [[FACT:me.wh.supplemental.rate=5]] | US-MES5-011 |
-| Michigan (MI) | rate: [[FACT:mi.wh.supplemental.rate=4.25]] | US-MIS5-019 |
+| Michigan (MI) | rate: [[FACT:mi.wh.supplemental.rate=4.25]] | US-MIPIT-001 |
 | Minnesota (MN) | rate: [[FACT:mn.wh.supplemental.rate=6.25]] | US-MNS5-010 |
 | Missouri (MO) | rate: [[FACT:mo.wh.supplemental.rate=4.7]] | US-MOS5-001 |
 | Mississippi (MS) | method: [[FACT:ms.pit.supplemental.method=aggregate; no fixed flat rate (top rate 4% allowed where aggregation over-withholds)]] | US-MSS5-002 |
@@ -172,8 +174,8 @@ FICA and FUTA apply as to any wage. **Table 9.2.1** lists the State supplemental
 | New Jersey (NJ) | method: [[FACT:nj.pit.supplemental.method=combined with regular wages, or without allowances if separate; no flat rate]] | US-NJP51-001 |
 | New Mexico (NM) | rate: [[FACT:nm.wh.supplemental.rate=5.9]] | US-NMP52-001 |
 | New York (NY) | nys, rate: [[FACT:ny.pit.supplemental.nys.rate=11.7]] | US-NY-001 |
-| Ohio (OH) | rate: [[FACT:oh.wh.supplemental.rate=2.75]] | US-OHS5-017 |
-| Oklahoma (OK) | rate: [[FACT:ok.wh.supplemental.rate=4.5]] | US-OKS5-014 |
+| Ohio (OH) | rate: [[FACT:oh.wh.supplemental.rate=2.75]] | US-OHS5-007 |
+| Oklahoma (OK) | rate: [[FACT:ok.wh.supplemental.rate=4.5]] | US-OK-001 |
 | Oregon (OR) | rate: [[FACT:or.wh.supplemental.rate=8]] | US-ORS5-009 |
 | Rhode Island (RI) | rate: [[FACT:ri.wh.supplemental.rate=5.99]] | US-RIS5-019 |
 | South Carolina (SC) | flat rate, exists: no | US-SCS5-002 |
@@ -183,7 +185,7 @@ FICA and FUTA apply as to any wage. **Table 9.2.1** lists the State supplemental
 
 ### How are backdated payments and retrospective salary adjustments handled?
 
-Federal payroll taxes follow the **payment date**, not the period the pay relates to ([[FACT:fed.tax_year.basis=calendar year (W-2 on calendar-year basis)]]) [US-FED-006]. A retroactive increase paid in 2026 is 2026 wages. It takes the 2026 tables and the 2026 wage bases, even when it relates to 2025. Massachusetts PFML is the exception: its rate follows the wages earned date [US-MAS5-012]. ⚠️ RESEARCH-GAP: the federal classification of back pay and retroactive increases (supplemental or regular wages) is not keyed.
+Federal payroll taxes follow the **payment date**, not the period the pay relates to ([[FACT:fed.tax_year.basis=calendar year (W-2 on calendar-year basis)]]) [US-FED-006]. A retroactive increase paid in 2026 is 2026 wages. It takes the 2026 tables and the 2026 wage bases, even when it relates to 2025. Massachusetts PFML is the exception: its rate follows the wages earned date [US-MAS5-012]. Not configured in this release [[GAP:RQ-525]]: The federal classification of back pay and retroactive increases (supplemental or regular wages) is not established from an official source.
 
 ### For arrears, how are contributions and deductions computed?
 

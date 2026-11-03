@@ -4,7 +4,7 @@
 - **Overtime (ORC 4111.03) [US-OHS5-003].** {{oh.overtime.premium.multiplier}} times the regular rate over {{oh.overtime.weekly_threshold_hours}} hours per workweek, following FLSA exemptions; no daily overtime. Small employers below the poster's gross-receipts test are outside the state overtime duty [US-OHS5-004, US-OHS5-005].
 - **Pay frequency and pay day (ORC 4113.15) [US-OHS5-015, US-OH-004]:** {{oh.pay_frequency.rule}}. Daily or weekly pay is allowed, as is a longer customary or contractual lapse; liquidated damages accrue on wages left unpaid beyond the statutory period.
 - **Method of payment** (direct deposit or paycard consent): no Ohio statute read (open point below).
-- **Records:** name, address, occupation, rate, pay per period, hours per day and week, kept {{oh.records.wage_hour.retention_years}} years [US-OHS5-004].
+- **Records:** name, address, occupation, rate, pay per period, hours per day and week, kept {{oh.records.wage_hour.retention_years}} years [US-OHS5-005].
 
 ## @income_tax
 - **Statutory rate (HB 96, ORC 5747.02(A)(3), effective 2025-09-30) [US-OHS5-007].** From tax year 2026 a flat {{oh.pit.statutory.rate}} % on Ohio taxable income above a zero bracket of {{oh.pit.statutory.zero_bracket}} USD.
@@ -19,7 +19,7 @@
 - **Formula (annualised).** Taxable wages TW = pay x pay periods - {{oh.pit.wh.exemption.annual}} USD x exemptions; tax = base tax of the band + band rate x (TW - lower breakpoint); withholding = tax / pay periods. Edition text: earlier period {{oh.pit.wh.method.period_a}}; from 2026-08-01 {{oh.pit.wh.method.period_b}}. Percentage tables per pay frequency are published with each edition [US-OH-006, US-OH-002].
 - **Oracle:** biweekly pay, one exemption, paid on or after 2026-08-01: withholding {{oh.pit.oracle.example_1.withholding}} USD (table and formula agree) [US-OHS5-001]. Recomputation is in Module 12 and the validation suite.
 - **Rounding:** no rounding instruction in the tables or the formula; whole-dollar rounding (ORC 718.25) is optional on municipal returns only [US-OHP52-002].
-- **Supplemental wages (OAC 5703-7-10, from 2026-01-01):** {{oh.wh.supplemental.rate}} %, the highest statutory rate of the year [US-OHS5-017].
+- **Supplemental wages (OAC 5703-7-10, from 2026-01-01):** withheld at the highest statutory rate of the year, OAC 5703-7-10 [US-OHS5-017]; that rate is {{oh.wh.supplemental.rate}} %, ORC 5747.02(A)(3)(c) [US-OHS5-007].
 - **Certificate:** {{oh.wh.certificate}} [US-OHP52-006].
 - **Exemptions from withholding (5747.06) [US-OHS5-008]:** agricultural labour, domestic service, service in a quarter with cash pay under {{oh.pit.exempt.quarterly_cash_threshold}} USD, foreign government service, newspaper carriers who are minors.
 - **Reciprocity:** no Ohio withholding for residents of {{oh.reciprocity.states}} working in Ohio [US-MULTI-005, US-OHP52-006]; resident credit via IT RC, none for wages from reciprocity states [US-OHP52-004].
@@ -52,7 +52,7 @@
 
 ## @payslip
 - **Content (ORC 4113.14, Pay Stub Protection Act, effective 2025-04-09) [US-OHP51-001, US-OHL-001]:** a written or electronic statement every pay period: {{oh.payslip.items}}. No language clause; the SSN is not required.
-- **Retention:** wage and hour records {{oh.records.wage_hour.retention_years}} years [US-OHS5-004]; withholding records per the ODT Filing Guidelines.
+- **Retention:** wage and hour records {{oh.records.wage_hour.retention_years}} years [US-OHS5-005]; withholding records per the ODT Filing Guidelines.
 
 ## @reporting
 - **State withholding [US-OH-009].** IT 501 payments filed electronically. Frequency by look-back: quarterly up to {{oh.report.it501.quarterly_threshold}} USD; monthly above it; partial-weekly EFT at {{oh.report.it501.partial_weekly_threshold}} USD or more. Annual reconciliation IT 941 due {{oh.report.it941.due}}; W-2 upload through OH|TAX by the same date, with the school district code [US-OHS5-018].
@@ -84,7 +84,7 @@
 ## @indexation
 - **Minimum wage:** {{oh.minwage.indexation}} [US-OHS5-006]. The small-employer threshold uses the same index; the tipped wage is half the minimum wage. The 2026 and 2027 published values follow from the index (derivation in the research pack; values in Section 1).
 - **SUI wage base:** statutory, read as not indexed (open point below).
-- **Withholding tables:** re-issued after a rate change (OAC 5703-7-10) [US-OHS5-017], hence the 2026-08-01 edition.
+- **Withholding tables:** republished after a rate change (OAC 5703-7-10) [US-OHS5-017], hence the 2026-08-01 edition.
 - **Prevailing-wage thresholds:** biennial (4115.034). **School district rates:** annual change list each January [US-OHS5-018].
 
 ## @data
@@ -100,7 +100,7 @@
 ## @special
 | Population | Ohio rule | Register id |
 |---|---|---|
-| Domestic / household | No Ohio withholding on domestic service in a private home (5747.06(A)(2)); babysitters in the employer's home and live-in companions are exempt from the minimum wage | US-OHS5-008, US-OHS5-004 |
+| Domestic / household | No Ohio withholding on domestic service in a private home (5747.06(A)(2)); babysitters in the employer's home and live-in companions are exempt from the minimum wage | US-OHS5-008, US-OHS5-005 |
 | Agricultural | No Ohio withholding on agricultural labour | US-OHS5-008 |
 | Minors | Under 16: federal minimum wage; newspaper carriers who are minors: no withholding; Minor Labor Law (ORC 4109) not read | US-OHS5-005, US-OHS5-008 |
 | Tipped | Cash wage per Section 1; tip credit up to the full minimum | US-OHS5-005, US-OHS5-004 |
@@ -108,9 +108,9 @@
 | Students | No state withholding rule located; UI exclusions in 4141.01(B)(3) not read | - |
 | Nonresident aliens | No state rule beyond federal; Ohio withholds on nonresidents generally | US-OHS5-008 |
 | Statutory employees | No state rule beyond federal located | US-OHS5-022 |
-| Government employees | State and political subdivisions must withhold (5747.06(A)); public employers are outside the 4113.85 definition | US-OHS5-008, US-OHS5-012, US-OHS5-004 |
+| Government employees | State and political subdivisions must withhold (5747.06(A)); public employers are outside the 4113.85 definition | US-OHS5-008, US-OHS5-012, US-OHS5-005 |
 | Reciprocity-state residents | No Ohio withholding (Section 2); nonresident military spouse: no withholding | US-MULTI-005, US-OHP52-006 |
-| Small employers | Below the gross-receipts threshold: federal minimum wage | US-OHS5-005, US-OHS5-004 |
+| Small employers | Below the gross-receipts threshold: federal minimum wage | US-OHS5-005 |
 
 ## @gaps
 - oh.ui.wage_base.indexation :: The SUI wage base is read as statutory and fixed (ORC 4141.01(G)); the text was not read. :: ORC 4141.01(G)(1) text.

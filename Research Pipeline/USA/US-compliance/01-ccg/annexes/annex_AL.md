@@ -1,5 +1,6 @@
 # Annex AL: Alabama
 
+
 This annex sets out the Alabama payroll rules for the 2026 build year. Read with Annex FED (the federal layer every employee carries) and Annex MULTI (which routes an employee to this State by work location, residence or UI localization). Every value is shown with its effective dates and its source (list at the end of the annex). Federal values are not repeated here.
 
 Classification: T4. Besides State withholding, municipal and county occupational taxes are withheld by the employer and remitted to the locality on its own return.
@@ -28,7 +29,20 @@ period_tax    = annual_tax / pay_periods
 
 Standard deduction by status: single maximum USD [[FACT:al.wh.std_deduction.single.max=3,000]], minimum USD [[FACT:al.wh.std_deduction.single.min=2,500]]; married maximum USD [[FACT:al.wh.std_deduction.married.max=8,500]], minimum USD [[FACT:al.wh.std_deduction.married.min=5,000]]; married filing separately maximum USD [[FACT:al.wh.std_deduction.married_separate.max=4,250]]; head of family maximum USD [[FACT:al.wh.std_deduction.head_of_family.max=5,200]]. Personal exemption: single USD [[FACT:al.wh.personal_exemption.single=1,500]], married USD [[FACT:al.wh.personal_exemption.married=3,000]]. Dependent amount by gross income band: USD [[FACT:al.wh.dependent.gi_to_50000=1,000]], USD [[FACT:al.wh.dependent.gi_to_100000=500]], USD [[FACT:al.wh.dependent.gi_above_100000=300]].
 
-⚠️ RESEARCH-GAP (non-blocking): the gross-income steps of the standard-deduction phase-out between the maximum and the minimum are in the source booklet but carry no facts key; an engine cannot compute the deduction inside the phase-out range until they are keyed (research request raised).
+**Standard-deduction phase-out** (booklet rev. 01/2026 p.6 formula and p.7 schedule): [[FACT:al.wh.std_deduction.phaseout_steps=Standard deduction by Alabama-certificate status: 0/S 3,000 up to GI 25,999, less 25 per 500 (or part) above 25,999, 2,500 from 35,500; MS 4,250 up to 12,999, less 88 per 250 above, 2,500 from 17,750; M 8,500 up to 25,999, less 175 per 500 above, 5,000 from 35,500; H 5,200 up to 25,999, less 135 per 500 above, 2,500 from 35,500.]]
+
+```
+if GI <= start_gi:        std = max_deduction
+elif GI >= floor_from_gi: std = min_deduction
+else:                     std = max_deduction - reduction_per_step x ceil((GI - start_gi) / step_size)
+```
+
+| Status | Maximum | Phase-out starts above GI | Reduction per step | Step size | Minimum deduction | Minimum applies from GI |
+|---|---|---|---|---|---|---|
+| Single (0/S) | USD [[FACT:al.wh.std_deduction.single.max=3,000]] | USD [[FACT:al.wh.std_deduction.single.phaseout.start_gi=25,999]] | USD [[FACT:al.wh.std_deduction.single.phaseout.reduction_per_step=25]] | USD [[FACT:al.wh.std_deduction.single.phaseout.step_size=500]] | USD [[FACT:al.wh.std_deduction.single.min=2,500]] | USD [[FACT:al.wh.std_deduction.single.phaseout.floor_from_gi=35,500]] |
+| Married filing separately (MS) | USD [[FACT:al.wh.std_deduction.married_separate.max=4,250]] | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.start_gi=12,999]] | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.reduction_per_step=88]] | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.step_size=250]] | USD [[FACT:al.wh.std_deduction.married_separate.min=2,500]] | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.floor_from_gi=17,750]] |
+| Married (M) | USD [[FACT:al.wh.std_deduction.married.max=8,500]] | USD [[FACT:al.wh.std_deduction.married.phaseout.start_gi=25,999]] | USD [[FACT:al.wh.std_deduction.married.phaseout.reduction_per_step=175]] | USD [[FACT:al.wh.std_deduction.married.phaseout.step_size=500]] | USD [[FACT:al.wh.std_deduction.married.min=5,000]] | USD [[FACT:al.wh.std_deduction.married.phaseout.floor_from_gi=35,500]] |
+| Head of family (H) | USD [[FACT:al.wh.std_deduction.head_of_family.max=5,200]] | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.start_gi=25,999]] | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.reduction_per_step=135]] | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.step_size=500]] | USD [[FACT:al.wh.std_deduction.head_of_family.min=2,500]] | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.floor_from_gi=35,500]] |
 
 **Supplemental pay:** may be withheld at [[FACT:al.wh.supplemental.rate=5]] %. **Overtime:** the 2026 overtime-premium deduction (up to USD [[FACT:al.pit.overtime_premium_deduction.max=1,000]]) operates at **assessment** level only; it changes neither wages nor withholding (W-2 box 12 code TT is informational). Do not build it as a payroll deduction.
 
@@ -58,12 +72,14 @@ Standard deduction by status: single maximum USD [[FACT:al.wh.std_deduction.sing
 |---|---|---|---|---|---|
 | Withholding method | [[FACT:al.wh.method=annualise; subtract standard deduction (phase-out by GI), annualised federal FIT withheld, personal exemption, dependents; apply 2/4/5% brackets; divide by pay periods]] | from 2026-01-01 |  | S3 | Booklet rev. 01/2026 p. 6; Ala. Code 40-18-71/-74. Order FIT before AL SIT. |
 | Withholding federal FIT deductible | [[FACT:al.wh.federal_fit_deductible=True]] | from 2026-01-01 |  | S4 | 40-18-71(a). |
-| Withholding standard deduction single max | USD [[FACT:al.wh.std_deduction.single.max=3,000]] | from 2026-01-01 |  | S3 | Phase-out steps by gross income are in the source booklet and carry no facts key (gap in AL.2). |
+| Withholding standard deduction single max | USD [[FACT:al.wh.std_deduction.single.max=3,000]] | from 2026-01-01 |  | S3 | Phase-out by gross income: see the standard-deduction table in AL.2. |
 | Withholding standard deduction single min | USD [[FACT:al.wh.std_deduction.single.min=2,500]] | from 2026-01-01 |  | S3 |  |
-| Withholding standard deduction married max | USD [[FACT:al.wh.std_deduction.married.max=8,500]] | from 2026-01-01 |  | S3 | Phase-out steps by gross income are in the source booklet and carry no facts key (gap in AL.2). |
+| Withholding standard deduction married max | USD [[FACT:al.wh.std_deduction.married.max=8,500]] | from 2026-01-01 |  | S3 | Phase-out by gross income: see the standard-deduction table in AL.2. |
 | Withholding standard deduction married min | USD [[FACT:al.wh.std_deduction.married.min=5,000]] | from 2026-01-01 |  | S3 |  |
-| Withholding standard deduction married separate max | USD [[FACT:al.wh.std_deduction.married_separate.max=4,250]] | from 2026-01-01 |  | S3 | Phase-out steps by gross income are in the source booklet and carry no facts key (gap in AL.2). |
-| Withholding standard deduction head of family max | USD [[FACT:al.wh.std_deduction.head_of_family.max=5,200]] | from 2026-01-01 |  | S3 | Phase-out steps by gross income are in the source booklet and carry no facts key (gap in AL.2). |
+| Withholding standard deduction married separate max | USD [[FACT:al.wh.std_deduction.married_separate.max=4,250]] | from 2026-01-01 |  | S3 | Phase-out by gross income: see the standard-deduction table in AL.2. |
+| Withholding standard deduction married separate min | USD [[FACT:al.wh.std_deduction.married_separate.min=2,500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, Formula For Computing Alabama Withholding Tax, step 2A (printed page 7): Employee claims 'Married Filing Separately (MS)' exemption: 'GI of $[[FACT:al.wh.std_deduction.married_separate.phaseout.floor_from_gi=17,750]] or more deduct $[[FACT:al.wh.std_deduction.married_separate.min=2,500]]'. Minimum deduction per status: single [[FACT:al.wh.std_deduction.single.min=2,500]] / married filing separately [[FACT:al.wh.std_deduction.married_separate.min=2,500]] / married filing jointly [[FACT:al.wh.std_deduction.married.min=5,000]] / head of family [[FACT:al.wh.std_deduction.head_of_family.min=2,500]]. |
+| Withholding standard deduction head of family max | USD [[FACT:al.wh.std_deduction.head_of_family.max=5,200]] | from 2026-01-01 |  | S3 | Phase-out by gross income: see the standard-deduction table in AL.2. |
+| Withholding standard deduction head of family min | USD [[FACT:al.wh.std_deduction.head_of_family.min=2,500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, Formula For Computing Alabama Withholding Tax, step 2A (printed page 7): Employee claims 'Head of Family (H)' exemption: 'GI of $[[FACT:al.wh.std_deduction.head_of_family.phaseout.floor_from_gi=35,500]] or more deduct $[[FACT:al.wh.std_deduction.head_of_family.min=2,500]]'. Minimum deduction per status: single [[FACT:al.wh.std_deduction.single.min=2,500]] / married filing separately [[FACT:al.wh.std_deduction.married_separate.min=2,500]] / married filing jointly [[FACT:al.wh.std_deduction.married.min=5,000]] / head of family [[FACT:al.wh.std_deduction.head_of_family.min=2,500]]. |
 | Withholding personal exemption single | USD [[FACT:al.wh.personal_exemption.single=1,500]] | from 2026-01-01 |  | S3 | Status 0: no exemption; single and married filing separately: this amount; married and head of family: [[FACT:al.wh.personal_exemption.married=3,000]]. |
 | Withholding personal exemption married | USD [[FACT:al.wh.personal_exemption.married=3,000]] | from 2026-01-01 |  | S3 |  |
 | Withholding dependent gi to 50000 | USD [[FACT:al.wh.dependent.gi_to_50000=1,000]] | from 2026-01-01 |  | S3 | Per dependent, by the employee's gross-income band (amounts in the next two rows). |
@@ -74,6 +90,23 @@ Standard deduction by status: single maximum USD [[FACT:al.wh.std_deduction.sing
 | Withholding certificate inflated penalty | USD [[FACT:al.wh.certificate.inflated_penalty=500]] | from 2025-04-01 |  | S5 |  |
 | Withholding severance exempt max | USD [[FACT:al.wh.severance.exempt_max=50,000]] | from 2026-01-01 |  | S3 | Severance/downsizing pay exempt up to [[FACT:al.wh.severance.exempt_max=50,000]] with prior ADOR approval. |
 | PIT overtime premium deduction max | USD [[FACT:al.pit.overtime_premium_deduction.max=1,000]] | 2026-01-01 to 2028-12-31 |  | S6 | Act 2026-604, operating level ASSESSMENT only: no change to wages, withholding or tax; W-2 box 12 code TT informational; total OT stays in box 16. Prior withholding-level exemption (Acts 2023-421/2024-437) shown as previous by ADOR. |
+| Withholding standard deduction single phaseout start gi | USD [[FACT:al.wh.std_deduction.single.phaseout.start_gi=25,999]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction single phaseout reduction per STEP | USD [[FACT:al.wh.std_deduction.single.phaseout.reduction_per_step=25]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction single phaseout STEP size | USD [[FACT:al.wh.std_deduction.single.phaseout.step_size=500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts ("for each [[FACT:al.wh.std_deduction.single.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.single.phaseout.start_gi=25,999]]") |
+| Withholding standard deduction single phaseout floor from gi | USD [[FACT:al.wh.std_deduction.single.phaseout.floor_from_gi=35,500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts; at GI of [[FACT:al.wh.std_deduction.single.phaseout.floor_from_gi=35,500]] or more the deduction is [[FACT:al.wh.std_deduction.single.min=2,500]]; last stepped value 2,525 |
+| Withholding standard deduction married separate phaseout start gi | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.start_gi=12,999]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction married separate phaseout reduction per STEP | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.reduction_per_step=88]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction married separate phaseout STEP size | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.step_size=250]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts ("for each [[FACT:al.wh.std_deduction.married_separate.phaseout.step_size=250]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.married_separate.phaseout.start_gi=12,999]]") |
+| Withholding standard deduction married separate phaseout floor from gi | USD [[FACT:al.wh.std_deduction.married_separate.phaseout.floor_from_gi=17,750]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts; at GI of [[FACT:al.wh.std_deduction.married_separate.phaseout.floor_from_gi=17,750]] or more the deduction is [[FACT:al.wh.std_deduction.married_separate.min=2,500]]; last stepped value 2,578 |
+| Withholding standard deduction married phaseout start gi | USD [[FACT:al.wh.std_deduction.married.phaseout.start_gi=25,999]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction married phaseout reduction per STEP | USD [[FACT:al.wh.std_deduction.married.phaseout.reduction_per_step=175]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction married phaseout STEP size | USD [[FACT:al.wh.std_deduction.married.phaseout.step_size=500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts ("for each [[FACT:al.wh.std_deduction.married.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.married.phaseout.start_gi=25,999]]") |
+| Withholding standard deduction married phaseout floor from gi | USD [[FACT:al.wh.std_deduction.married.phaseout.floor_from_gi=35,500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts; at GI of [[FACT:al.wh.std_deduction.married.phaseout.floor_from_gi=35,500]] or more the deduction is [[FACT:al.wh.std_deduction.married.min=5,000]]; last stepped value 5,175 |
+| Withholding standard deduction head of family phaseout start gi | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.start_gi=25,999]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction head of family phaseout reduction per STEP | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.reduction_per_step=135]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
+| Withholding standard deduction head of family phaseout STEP size | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.step_size=500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts ("for each [[FACT:al.wh.std_deduction.head_of_family.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.head_of_family.phaseout.start_gi=25,999]]") |
+| Withholding standard deduction head of family phaseout floor from gi | USD [[FACT:al.wh.std_deduction.head_of_family.phaseout.floor_from_gi=35,500]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts; at GI of [[FACT:al.wh.std_deduction.head_of_family.phaseout.floor_from_gi=35,500]] or more the deduction is [[FACT:al.wh.std_deduction.head_of_family.min=2,500]]; last stepped value 2,635 |
+| Withholding standard deduction phaseout steps | [[FACT:al.wh.std_deduction.phaseout_steps=Standard deduction by Alabama-certificate status: 0/S 3,000 up to GI 25,999, less 25 per 500 (or part) above 25,999, 2,500 from 35,500; MS 4,250 up to 12,999, less 88 per 250 above, 2,500 from 17,750; M 8,500 up to 25,999, less 175 per 500 above, 5,000 from 35,500; H 5,200 up to 25,999, less 135 per 500 above, 2,500 from 35,500.]] | from 2026-01-01 |  | S3 | ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A; p.7 Schedule of Standard Deduction Amounts |
 
 ## AL.2b Non-resident regime and reciprocity
 
@@ -86,16 +119,16 @@ No reciprocity agreement ([[FACT:al.reciprocity.exists=False]]). Residents are w
 | Regular salary | Formula method (AL.2) on all wages, unless the employer withholds for the work State | Formula method on Alabama wages only, after the [[FACT:al.nonres.safe_harbor.days=30]]-day safe harbour where the home State qualifies |
 | Annual bonus / supplemental pay | [[FACT:al.wh.supplemental.rate=5]] % or the formula on the aggregate | Same, on the Alabama portion |
 | Severance | Downsizing severance exempt up to USD [[FACT:al.wh.severance.exempt_max=50,000]] with prior ADOR approval; otherwise supplemental pay | Same, on the Alabama portion |
-| Equity | Supplemental-pay treatment; classification of equity income open at federal level (Annex FED, FED.2b) | Same, on the Alabama portion |
+| Equity | Supplemental-pay treatment; federal classification of equity income in Annex FED (FED.2b) | Same, on the Alabama portion |
 | Benefits in kind | Included in withholding wages; HSA treatment conforms ([[FACT:al.hsa.conforms=True]]); transit and group-term life open (AL.8) | Same, on the Alabama portion |
-| Contractor pay | Out of scope | Out of scope |
+| Contractor pay | Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008] | Same |
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
 | Non-resident safe harbor days | [[FACT:al.nonres.safe_harbor.days=30]] days | from 2026-01-01 |  | S7 | Act 2025-334, operating level WITHHOLDING: nonresidents with <=30 AL days working in more than one state whose home state has a similar exclusion or no PIT (list as of 2026-10-01: AK, FL, GA, IL, IN, LA, MT, NV, NH, SD, TN, TX, WA, WV, WY). At 31+ days all AL income of the year taxable. Athletes/entertainers/public figures excluded. |
 | Reciprocity exists | [[FACT:al.reciprocity.exists=False]] | from 2026-01-01 |  | S3 | Booklet lists no agreement. Residents withheld wherever they work except when the employer withholds for the work state; nonresidents only on AL-earned wages. |
 
-⚠️ RESEARCH-GAP (non-blocking): Non-resident safe harbor day counting guidance: not established by the research. Source that would close it: ADOR Rules page / Alabama Administrative Monthly 2026 (810-3-71 amendments).
+Not configured in this release [[GAP:RQ-461]]: Non-resident safe harbor day counting guidance: not established from an official source.
 
 ## AL.2c Local wage taxes
 
@@ -104,9 +137,9 @@ Municipal and county occupational taxes are withheld by the employer and remitte
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
 | Local occupational tax exists | [[FACT:al.local.occupational_tax.exists=True]] | from 2026-01-01 |  | S3 | Municipal/county occupational taxes withheld by the employer, remitted to the city/county; ADOR does not administer them. No state census. |
-| Local leeds rate | [[FACT:al.local.leeds.rate=1]] % | from 2026-01-01 |  | S8 | City of Leeds: [[FACT:al.local.leeds.rate=1]] % of gross earnings, monthly return to Avenu, annual reconciliation, show on pay stub, records 5 years. |
+| Local leeds rate | [[FACT:al.local.leeds.rate=1]] % | from 2026-01-01 |  | S8 | City of Leeds: [[FACT:al.local.leeds.rate=1]] % of gross earnings, monthly return to Avenu, annual reconciliation, show on pay stub, records 5 years. A Birmingham occupational tax rate is not confirmed by an official source. |
 
-⚠️ RESEARCH-GAP (blocking): Local occupational tax census: not established by the research. Source that would close it: the Alabama League of Municipalities occupational-tax list, then each city ordinance or tax page (Birmingham, Auburn, Bessemer, Gadsden, Opelika, Fairfield, Macon County)
+Not yet published [[GAP:RQ-458]]: Local occupational tax census: not established from an official source.
 
 ## AL.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
@@ -116,14 +149,14 @@ Employer-only UI ([[FACT:al.sui.employee.rate=0]] % employee) on wages up to the
 |---|---|---|---|---|---|
 | SUI wage base | USD [[FACT:al.sui.wage_base=8,000]] | from 2026-01-01 |  | S9 | 25-4-16(b)(1), fixed in statute; other-state UC wages count toward it. |
 | SUI new employer rate | [[FACT:al.sui.new_employer.rate=2.7]] % | from 2026-01-01 |  | S10 |  |
-| SUI employer rate min | [[FACT:al.sui.employer.rate.min=0.2]] % | from 2026-01-01 |  | S10 | Range 0.20%-6.80% incl. [[FACT:al.sui.esa.rate=0.06]] % ESA across schedules A-D plus shared cost; 2026 schedule letter/shared cost not located. |
+| SUI employer rate min | [[FACT:al.sui.employer.rate.min=0.2]] % | from 2026-01-01 |  | S10 | Range [[FACT:al.sui.employer.rate.min=0.20]]%-[[FACT:al.sui.employer.rate.max=6.80]]% incl. [[FACT:al.sui.esa.rate=0.06]] % ESA across schedules A-D plus shared cost; 2026 schedule letter/shared cost not located. |
 | SUI employer rate max | [[FACT:al.sui.employer.rate.max=6.8]] % | from 2026-01-01 |  | S10 |  |
 | SUI esa rate | [[FACT:al.sui.esa.rate=0.06]] % | from 2026-01-01 |  | S10 | Employment Security Enhancement Assessment inside the UC rate; no FUTA credit for it. |
 | SUI employee rate | [[FACT:al.sui.employee.rate=0]] % | from 2026-01-01 |  | S11 | No UC tax withheld from employees. |
 | SUI wages cafeteria cash option included | [[FACT:al.sui.wages.cafeteria_cash_option_included=True]] | from 2026-01-01 |  | S10 | Cafeteria plan reductions with a cash option are UC wages (departs from income tax). |
 | SDI PFML exists | [[FACT:al.sdi_pfml.exists=False]] | from 2026-01-01 |  | S10 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): SUI rate schedule current: not established by the research. Source that would close it: Workforce Alabama 2026 tax-rate announcement (Experience Rating Section) or an employer 2026 UC-216 notice from the owner/client.
+Not configured in this release [[GAP:RQ-457]]: SUI rate schedule current: not established from an official source.
 
 ## AL.4 Pay statement
 
@@ -166,7 +199,7 @@ Alabama has no pay-statement statute ([[FACT:al.payslip.state_statute.exists=Fal
 |---|---|---|---|---|---|
 | HSA conforms | [[FACT:al.hsa.conforms=True]] | from 2026-01-01 |  | S15 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): PIT wages transit group term life: not established by the research. Source that would close it: ADOR Admin. Code 810-3-71 or an ADOR fringe-benefit FAQ.
+Not configured in this release [[GAP:RQ-459]]: PIT wages transit group term life: not established from an official source.
 
 ## AL.9 Deductions and garnishments
 
@@ -176,9 +209,11 @@ Alabama has no pay-statement statute ([[FACT:al.payslip.state_statute.exists=Fal
 | Garnishment child support remit business days | [[FACT:al.garn.child_support.remit_business_days=7]] business days | from 2026-01-01 |  | S16 | 30-3-61/-67/-70: IWO priority over garnishments; current before arrears. |
 | Garnishment termination report days | [[FACT:al.garn.termination_report_days=15]] days | from 2026-01-01 |  | S16 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Garnishment IWO employer fee: not established by the research. Source that would close it: Ala. Code 30-3-60 to 30-3-71 in full, or the DHR Child Support employer page
+Not configured in this release [[GAP:RQ-460]]: Garnishment IWO employer fee: not established from an official source.
 
 ## AL.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 No State prevailing-wage law; federal Davis-Bacon only (Annex FED). Ala. Code 25-7-42 bars local labour-peace and project-labour-agreement mandates.
 
@@ -198,7 +233,7 @@ Data Breach Notification Act of 2018 (ch. 8-38). No statute requiring SSN trunca
 | Live act 2026 604 status | [[FACT:al.live.act_2026_604.status=in force 2026-01-01 to 2028-12-31; operating level assessment (W-2 box 12 TT information)]] | 2026-01-01 to 2028-12-31 |  | S6 |  |
 | Live hurricane isaias relief | [[FACT:al.live.hurricane_isaias_relief=individual returns to 2027-02-04; withholding relief case by case (notice 2026-10-15)]] | from 2026-10-15 |  | S17 |  |
 
-⚠️ RESEARCH-GAP (non-blocking): Live overtime withholding exemption end date: not established by the research. Source that would close it: the ADOR page on the overtime pay exemption as amended by Act 2024-437
+Not configured in this release [[GAP:RQ-462]]: Live overtime withholding exemption end date: not established from an official source.
 
 ## AL.14 Authority worked examples (oracle values)
 
@@ -225,7 +260,7 @@ The computed weekly withholding equals the published value. If the employer roun
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
 | Oracle example 1 input | [[FACT:al.oracle.example.1.input=M-2, weekly 850.00, federal withholding 35.19]] | from 2026-01-01 |  | S3 |  |
-| Oracle example 1 withholding | USD [[FACT:al.oracle.example.1.withholding=29.59]] | from 2026-01-01 |  | S3 | Booklet example Recomputed 850x52=44,200; deductions 5,000+1,830 (35.19x52=1,829.88 rounded by booklet)+3,000+2,000=11,830; taxable 32,370; tax 20+200+26,370x5%=1,538.50/yr; /52 = [[FACT:al.oracle.example.1.withholding=29.59]] (30 if rounded to dollar). |
+| Oracle example 1 withholding | USD [[FACT:al.oracle.example.1.withholding=29.59]] | from 2026-01-01 |  | S3 | Booklet example Recomputed: 850 x 52 = 44,200; deductions 5,000 + 1,830 + 3,000 + 2,000 = 11,830 (the booklet rounds 35.19 x 52 = 1,829.88 to 1,830); taxable 44,200 - 11,830 = 32,370; tax 20 + 200 + 1,318.50 = 1,538.50 a year (26,370 x 5% = 1,318.50); /52 = [[FACT:al.oracle.example.1.withholding=29.59]] (30 if rounded to dollar). |
 
 ## AL.15 Special populations
 
@@ -240,7 +275,7 @@ The computed weekly withholding equals the published value. If the employer roun
 - Military spouses: certificate A4-MS.
 - Downsizing severance: exempt up to USD [[FACT:al.wh.severance.exempt_max=50,000]] with ADOR approval.
 
-⚠️ RESEARCH-GAP (non-blocking): the coverage thresholds that apply to these populations (quarterly cash-wage and headcount thresholds for UI coverage of domestic, agricultural and non-profit employment) are cited by statute only and carry no facts key; the engine must not hard-code them until they are keyed.
+Not configured in this release [[GAP:RQ-511]]: The coverage thresholds that apply to these populations (quarterly cash-wage and headcount thresholds for UI coverage of domestic, agricultural and non-profit employment) are cited by statute only and are not established as values; the engine must not hard-code them until they are established.
 
 ## AL.16 Language
 
@@ -260,7 +295,7 @@ English. A Spanish version of the A4 exists (optional seam). Payslip and filings
 | S8 | City of Leeds Employer's Withholding Guide for Occupational Tax | sections 1-9 (3 pp.) | City of Leeds, Alabama (revenue examiner; remittance via Avenu) |
 | S9 | Code of Alabama 1975 Sec. 25-4-16 (wages, 8,000 USD taxable base, other-state employment counted) and Sec. 25-4-54 (experience-rated contributions, shared cost) | 25-4-16(b)(1); 25-4-54(a),(f) | Alabama Legislature (ALISON Code of Alabama) |
 | S10 | Workforce Alabama Employer FAQ (UC liability, new account rate, rate range, quarterly report, wage base, other-state wages, cafeteria plans) | FAQ (Employer Registration & Taxes; Tax Rates; Quarterly Reports & Wages) | Alabama Department of Workforce, Unemployment Compensation |
-| S11 | Alabama UC Employer Handbook (rev. 2021) | ch. 2 Taxes, Contribution and Wage Reports (handbook p. 18); handbook p. 67 No UC taxes paid by employee | Alabama Dept of Labor (now Dept of Workforce) |
+| S11 | Alabama UC Employer Handbook (2020 edition per its cover; the official file name says 'rev_2021') | ch. 2 Taxes, Contribution and Wage Reports (handbook p. 18); handbook p. 67 No UC taxes paid by employee | Alabama Dept of Labor (now Dept of Workforce) |
 | S12 | ADOR Form 10 Specifications for filing Wage and Tax Information electronically (8/24) | W-2 Electronic Filing Specifications | Alabama Department of Revenue |
 | S13 | Workforce Alabama New Hires page | whole page incl. FAQ | Alabama Department of Workforce, New-Hire Unit |
 | S14 | Code of Alabama Sec. 12-16-8 and 12-16-8.1 (jury duty) and 17-1-5 (time off to vote) | 12-16-8(a)-(c); 12-16-8.1; 17-1-5 | Alabama Legislature (ALISON Code of Alabama) |

@@ -1,4 +1,4 @@
-# Colombia Data Dictionary - CO-DD-001 v1.5
+# Colombia Data Dictionary - CO-DD-001 v1.6
 
 All eight sheets of the delivered Colombia Data Dictionary: Version Control, Introduction, Instructions, ID Information, Country Fields, Country Option Mappers and the two ISO reference lists.
 
@@ -7,7 +7,7 @@ All eight sheets of the delivered Colombia Data Dictionary: Version Control, Int
 
 | Source artifact | Bytes | MD5 |
 |---|---|---|
-| `CO-DD-001-v1.5.xlsx` | 364,753 | `3967d2327e3e43c8668c699af2ba8b85` |
+| `CO-DD-001-v1.6.xlsx` | 365,004 | `3a017f0efea12d34ff467affd25b8058` |
 
 This file is a complete, verbatim conversion of the artifacts above (python-docx / openpyxl, cached cell values; empty columns dropped; the first column `Row` of each table is the Excel row number, so a citation such as "WTC row 156, column Q" can be checked against the workbook). Figures, dates, codes, Spanish terminology and legal citations are reproduced exactly as delivered; nothing is summarised or rounded. The only change: the name of the client whose wage-type labels appear in a few rows is replaced by `[client]`.
 
@@ -22,6 +22,7 @@ This file is a complete, verbatim conversion of the artifacts above (python-docx
 - Bank name, account type and account number (ID Information rows 7-9) are populated only for account-crediting payment
   methods of the Payment Method mapper: 42, 45, 47 and 98 (CATS, row 104); cards 48 / 49 only where linked to a salary
   account (an interpretation); left empty for 10, 20, 71 and 72 (Version Control 1.5).
+- Code 46 (Transferencia Debito Interbancario) is account-based like 47 where a client adds it to the mapper (Version Control 1.6).
 
 
 ## Navigation index
@@ -30,14 +31,14 @@ Read with `offset` / `limit` rather than opening the whole file.
 
 | Line | Section |
 |---|---|
-| 45 | Sheet: Version Control |
-| 62 | Sheet: Introduction |
-| 76 | Sheet: Instructions |
-| 98 | Sheet: ID Information |
-| 125 | Sheet: Country Fields |
-| 304 | Sheet: Country Option Mappers |
-| 563 | Sheet: Currency Codes - ISO 4217 |
-| 840 | Sheet: Country Codes - ISO 3166-1 |
+| 46 | Sheet: Version Control |
+| 64 | Sheet: Introduction |
+| 78 | Sheet: Instructions |
+| 100 | Sheet: ID Information |
+| 127 | Sheet: Country Fields |
+| 306 | Sheet: Country Option Mappers |
+| 565 | Sheet: Currency Codes - ISO 4217 |
+| 842 | Sheet: Country Codes - ISO 3166-1 |
 
 ---
 
@@ -55,6 +56,7 @@ Colombia
 | 16 | 1.3 | 2026-10-22 | PILA return types: E for a late payment, M only for periods before health period March 2014 (Country Fields W80, Country Option Mappers F221). Apprentice PILA codes under Ley 2466 de 2025 (Country Option Mappers F60, F65, F66). Severance-savings deposit arrangement: the deposit file carries only the annual detail record (Country Fields I60, W60; Country Option Mappers G151). Non-Salary Pact Flag (Country Fields W37): total remuneration of the 40% test per UGPP ABC Empleadores 2025. | Draft | Wallisson Gomes |
 | 17 | 1.4 | 2026-10-30 | Statutory validation against the primary sources: new fields for subsidised-regime permanence (worker type 75), PILA salary type, special pension rate indicator, work-centre ARL economic activity and the work-centre / risk-class link, housing-loan interest and voluntary-savings certificates, termination cause, and pension payer / pensioner data for CO-PILA-007; apprentice codes under Ley 2466 de 2025; document types and identifier rules aligned with PILA Technical Annex 2 v30; bank payment-method list; mandatory / conditional flags and references aligned with the report specifications v1.1. | Approved | Wallisson Gomes |
 | 18 | 1.5 | 2026-11-02 | Statutory validation, second pass: bank attributes only for account-crediting payment methods (ID Information rows 7-9); payment method 98 (CATS) added to the Payment Method mapper (row 104). Released 2026-11-02 — approved by Wallisson Gomes. | Approved | Wallisson Gomes |
+| 19 | 1.6 | 2026-11-02 | Statutory validation, third pass (text only, no value changes): payment method 46 (Transferencia Debito Interbancario) treated as account-based where a client adds it to the Payment Method mapper (ID Information row 7; Country Option Mappers G95). Released 2026-11-02 — approved by Wallisson Gomes. | Approved | Wallisson Gomes |
 | 26 | Business Analyst |  |  |  |  |
 | 27 | Regulation Analyst |  |  |  |  |
 
@@ -103,7 +105,7 @@ Identification Information
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 5 | Colombia |  | Employee Document Type |  | Tipo de documento de identificación del trabajador | Coded identity-document type of the employee. Colombia issues NO separate social-security number: the document type plus the document number IS the composite key across the electronic payroll XML, the integrated contribution return (PILA), Form 220 and Format 2276. The code system differs by artefact - DIAN filings use the numeric catalogue (13 = citizenship ID card) while PILA and the severance-savings deposit file use the two-letter catalogue (CC). One master value; the engine emits the artefact's own code. | M |  | Text | N(2) DIAN numeric catalogue; emitted as A(2) alpha on PILA and severance savings | Employee Document Type |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Document_Type - CO-DIAN-001 (NIE044, Mandatory=Y), CO-PILA-003 (T2R2-003, Mandatory=Y), CO-DIAN-004 (box 24, Mandatory=Y), CO-DIAN-005 (numeral N02, Mandatory=Y), CO-CESANTIAS-006 (T03, Mandatory=Y). The electronic payroll code list is Technical Annex table 5.2.1. Scope option_mapper_scope.personal_id_type. Validates the length of the document NUMBER - a PEP must be exactly 15 digits (SOI hard rule). CO-GAP-06: no code exists for the PPT (Temporary protection permit, Decree 216 of 2021); code 47 (PEP) is the only available proxy. |
 | 6 | Colombia |  | Employee Document Number |  | Número de identificación del trabajador | Identity-document number of the employee, without dots, hyphens, spaces or a verification digit. Primary per-employee key on every Colombian statutory filing and the social-security identifier. | M |  | Text | Numeric, no separators; no minimum length. Maximum length by document type on the PILA (AT2 v30 p.82): CC 10; TI 11; RC 11; CE 7; SC 8; PT 8; PE exactly 15. Alphanumeric only for passport (41 / PA, up to 16), diplomatic card (CD, up to 11), foreign identity document (42) and foreign tax number (50) |  |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Document_Number - CO-DIAN-001 (NIE045, Mandatory=Y), CO-PILA-003 (T2R2-004, Mandatory=Y), CO-DIAN-004 (box 25, Mandatory=Y), CO-CESANTIAS-006 (T04, Mandatory=Y). Field widths differ by artefact: A(16) space-filled on PILA, N(16) zero-filled on the severance savings deposit file. CO-GAP-07 (SCHEMA TRAP): NIE045 is typed xsd:integer in the electronic payroll XSD, so an alphanumeric passport number cannot be schema-valid. No official workaround published - carry as an open item. |
-| 7 | Colombia |  | Employee Bank Name |  | Banco | Name of the bank holding the employee's salary account. Reported on the electronic payroll support document whenever the payment medium is bank-mediated. | CM | Partial list. Bank name, account type and account number are populated only for account-crediting payment methods of the Payment Method mapper (Anexo Tecnico NE v1.0 table 5.3.3.2): 42 (Consignacion bancaria), 45 (Transferencia Credito Bancario), 47 (Transferencia Debito Bancaria) and 98 (CATS: Nequi, Daviplata); left empty for 10 (Efectivo), 20 (Cheque), 71 (Bonos) and 72 (Vales). Cards (48, 49) count as account-based only where the client pays salary to a card linked to an account (an interpretation). The annex makes the three attributes optional (0-1, NIE066-NIE068); requiring all three for account-crediting methods is an engine rule. Must be absent or empty where Payment Method = 10 (cash). The bank / non-bank classification of each code is an interpretation; confirm with DIAN. | Text | Free text |  |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Bank_Name - CO-DIAN-001 (NIE066, Mandatory=C). Bidirectional set with Payment Method, Bank Account Type and Bank Account Number. |
+| 7 | Colombia |  | Employee Bank Name |  | Banco | Name of the bank holding the employee's salary account. Reported on the electronic payroll support document whenever the payment medium is bank-mediated. | CM | Partial list. Bank name, account type and account number are populated only for account-crediting payment methods of the Payment Method mapper (Anexo Tecnico NE v1.0 table 5.3.3.2): 42 (Consignacion bancaria), 45 (Transferencia Credito Bancario), 47 (Transferencia Debito Bancaria) and 98 (CATS: Nequi, Daviplata), and 46 (Transferencia Debito Interbancario) where a client adds it to the mapper; left empty for 10 (Efectivo), 20 (Cheque), 71 (Bonos) and 72 (Vales). Cards (48, 49) count as account-based only where the client pays salary to a card linked to an account (an interpretation). The annex makes the three attributes optional (0-1, NIE066-NIE068); requiring all three for account-crediting methods is an engine rule. Must be absent or empty where Payment Method = 10 (cash). The bank / non-bank classification of each code is an interpretation; confirm with DIAN. | Text | Free text |  |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Bank_Name - CO-DIAN-001 (NIE066, Mandatory=C). Bidirectional set with Payment Method, Bank Account Type and Bank Account Number. |
 | 8 | Colombia |  | Employee Bank Account Type |  | Tipo de cuenta | Type of the employee's salary bank account - savings or current. Colombia has only these two. | CM | Mandatory together with Employee Bank Name and Employee Bank Account Number where Payment Method is an account-crediting method (see Employee Bank Name). | Text | AHORROS / CORRIENTE | Bank Account Type |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Bank_Account_Type - CO-DIAN-001 (NIE067, Mandatory=C). |
 | 9 | Colombia |  | Employee Bank Account Number |  | Número de cuenta | Employee salary account number. COLOMBIA DOES NOT USE IBAN. Domestic account numbers are numeric, of bank-specific length (commonly 10-17 digits), with no national check-digit standard. | CM | Mandatory together with Employee Bank Name and Employee Bank Account Type where Payment Method is an account-crediting method (see Employee Bank Name). | Text | Numeric, bank-specific length (commonly 10-17 digits). NOT an IBAN. |  |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Bank_Account_Number - CO-DIAN-001 (NIE068, Mandatory=C). CCG Module 2.2 confirms no IBAN and no national check digit - do not apply an IBAN validator. |
 | 10 | Colombia |  | Employee Internal Code |  | Código del trabajador | Employer's own internal employee number. Optional on the electronic payroll support document; used by the employer to reconcile the document to its own personnel records. | O |  | Text | Free text (employer-defined) |  |  |  |  |  |  |  |  |  |  |  | Spec ref: Employee.Internal_Code - CO-DIAN-001 (NIE009 and NIE063, Mandatory=N). Not the document number and not a substitute for it. |
@@ -388,7 +390,7 @@ Country Option Mappers
 | 91 | Option Mapper Description | Code | Abbreviation | Local Name | English Description | Constraint / Notes |
 | 92 | Payment Form | 1 | CONT | Contado | Cash / immediate settlement. The only published value. | Referenced by Payment Form (Mandatory=Y, CO-DIAN-001 NIE064, Technical Annex table 5.3.3.1). The annex publishes a single value. Distinct from Payment Method: 'forma' is the settlement form, 'method' is the medium. |
 | 94 | Option Mapper Description | Code | Abbreviation | Local Name | English Description | Constraint / Notes |
-| 95 | Payment Method | 10 | EFEC | Efectivo | Cash. The bank attributes must be absent. | Referenced by Payment Method (Mandatory=Y, CO-DIAN-001 NIE065, Technical Annex table 5.3.3.2). CONSTRAINT: bidirectional set with the three bank fields - where the value is 10 (cash) the bank name, account type and account number attributes MUST BE ABSENT; for every bank-mediated medium all three are required. The complete UN/EDIFACT 4461 catalogue (codes 1 to 98 and ZZZ) is printed at Annex table 5.3.3.2; the values below are those used in payroll. |
+| 95 | Payment Method | 10 | EFEC | Efectivo | Cash. The bank attributes must be absent. | Referenced by Payment Method (Mandatory=Y, CO-DIAN-001 NIE065, Technical Annex table 5.3.3.2). CONSTRAINT: bidirectional set with the three bank fields - where the value is 10 (cash) the bank name, account type and account number attributes MUST BE ABSENT; for every bank-mediated medium all three are required. The complete UN/EDIFACT 4461 catalogue (codes 1 to 98 and ZZZ) is printed at Annex table 5.3.3.2; the values below are those used in payroll. A client that uses another code of table 5.3.3.2 adds it as a row; 46 (Transferencia Debito Interbancario) is account-based like 47, so the bank attributes are populated. |
 | 96 |  | 20 | CHEQ | Cheque | Cheque. |  |
 | 97 |  | 42 | CONS | Consignación bancaria | Bank deposit. The most common Colombian payroll method. |  |
 | 98 |  | 45 | TCB | Transferencia crédito bancario | Bank credit transfer. |  |

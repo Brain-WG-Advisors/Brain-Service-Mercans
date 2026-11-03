@@ -11,6 +11,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 RES = os.path.join(BASE, "_research")
 OUT = os.path.join(BASE, "01-ccg", "annexes")
+sys.path.insert(0, os.path.join(BASE, "01-ccg", "_build", "common"))
+import ccg_common as CC  # noqa: E402  round 2 (QA r1): finalize, annex skeleton, [[GAP:]] tags
 sys.path.insert(0, HERE)
 import overrides as OV  # noqa: E402
 
@@ -197,12 +199,16 @@ def clean_note(n):
     n = re.sub(r"(Reproduced|Re-derived|re-derived|reproduced|recomputed) in Python[:.]?", "Recomputed", n)
     n = n.replace("in Python", "")
     sents = re.split(r"(?<=[.;])\s+(?=[A-Z(])", n)
-    keep = [x for x in sents if not NOTE_DROP_SENT.search(x)]
+    # QA r3d finding 4: a sentence carrying a legal citation or quoted statute text is dropped only for a
+    # strictly internal phrase, never for a loose word ('register', 'unit', 'facts file')
+    keep = [x for x in sents if not (NOTE_DROP_STRICT.search(x) if CC.LEGAL_CITE_RX.search(x) else NOTE_DROP_SENT.search(x))]
     out = " ".join(keep).strip()
     out = re.sub(r"LEVEL:\s*[^.]*\.?", "", out).strip()
     return out
 
 
+NOTE_DROP_STRICT = re.compile(r"(Stage[- ]?\d|Synthesis|tier[- ]?[ABC]\b|\bMANUAL\b|PENDING|PyMuPDF|pdftotext|never-do|"
+                              r"G-RULING|G-CALIBER|annex_|browser pass|Chrome pass|\bOQ-|fan-out)", re.I)
 DROP_NOTE = re.compile(r"^Derivation recorded in register row")
 PIPE_WORDS = re.compile(r"\b(Stage[- ]?5|Stage 9b?|G-DERIVE|Synthesis [A-D]|in Python|re-derived in Python|"
                         r"Reproduced in Python|facts? file|register row|tier[- ][BC]\b|MANUAL|PENDING|legacy id)", re.I)
@@ -241,10 +247,34 @@ def num_val(s):
         return None
 
 
+# QA r3d finding 8 / finding 1 guard: a filing-status word directly before a number names the key family
+# ("single 2,500 / married filing separately 2,500 / married filing jointly 5,000 / head of family 2,500")
+STATUS_CTX = re.compile(r"(married filing separately|married filing jointly|married separate|head of family|"
+                        r"head of household|single|married)\s*(?:\([A-Z0-9/]{1,4}\))?\s*:?\s*\$?\s*$", re.I)
+STATUS_SEG = {"married filing separately": "married_separate", "married separate": "married_separate",
+              "married filing jointly": "married", "married": "married", "head of family": "head_of_family",
+              "head of household": "head_of_family", "single": "single"}
+CUR_UNIT = [""]
+REBIND = []   # (unit, old choice, new choice, context): every binding that differs from the r3c rule
+
+
+def _prefix_len(a, b):
+    n = 0
+    for x, y in zip(a.split("."), b.split(".")):
+        if x != y:
+            break
+        n += 1
+    return n
+
+
 def autotag(text, facts_by_val, prefer_keys=()):
     """Replace a number in prose by the tag of the unit fact carrying that value, when the
-    match is unique (or when one of prefer_keys carries it). Percent numbers match percent facts."""
+    match is unique (or when one of prefer_keys carries it). Percent numbers match percent facts.
+    QA r3d: (1) a key is bound only when CC.binding_ok() holds (same jurisdiction; a place-named key only in a
+    sentence naming the place); (2) a filing-status word directly before the number selects that status's key;
+    (3) among several equal-value keys, the one sharing the longest key prefix with the row key wins."""
     used = defaultdict(int)
+    jur = CUR_UNIT[0].lower()
 
     def rep(m):
         s, pct = m.group(1), m.group(2)
@@ -254,20 +284,50 @@ def autotag(text, facts_by_val, prefer_keys=()):
         before = text[max(0, m.start() - 22):m.start()]
         if CIT_BEFORE.search(before):
             return m.group(0)
-        cands = facts_by_val.get((round(n, 6), bool(pct)), [])
-        cands = [f for f in cands if f["key"] in prefer_keys or (STRICT_SIG(n, pct) and not f.get("_small"))]
-        if not cands:
+        # QA r2 (C46 wrong binding): a day of a date ("1 Jan", "January 1") is never a quantity
+        if not pct and (DATE_AFTER.match(text, m.end()) or DATE_BEFORE.search(before)):
             return m.group(0)
-        pref = [f for f in cands if f["key"] in prefer_keys]
-        pool = pref or cands
-        keys = list(OrderedDict((f["key"], f) for f in pool).values())
-        if len(keys) > 1 and not pref:
-            # ambiguous: choose in order of appearance for repeated occurrences
-            f = keys[used[(round(n, 6), bool(pct))] % len(keys)]
-            used[(round(n, 6), bool(pct))] += 1
-            AMBIG.append((f["key"], [k["key"] for k in keys], text[:120]))
-        else:
-            f = keys[0]
+        allc = facts_by_val.get((round(n, 6), bool(pct)), [])
+        cands = [f for f in allc if f["key"] in prefer_keys or (STRICT_SIG(n, pct) and not f.get("_small"))]
+        # r3c choice (kept to log every binding the r3d rules change)
+        old = None
+        if cands:
+            pref0 = [f for f in cands if f["key"] in prefer_keys]
+            pool0 = list(OrderedDict((f["key"], f) for f in (pref0 or cands)).values())
+            old = pool0[used[(round(n, 6), bool(pct))] % len(pool0)]["key"] if len(pool0) > 1 and not pref0 else pool0[0]["key"]
+        # r3d: status context
+        sm = STATUS_CTX.search(text[max(0, m.start() - 40):m.start()])
+        f = None
+        if sm and allc:
+            seg = "." + STATUS_SEG[sm.group(1).lower()] + "."
+            st = list(OrderedDict((x["key"], x) for x in allc if seg in "." + x["key"] + ".").values())
+            if len(st) > 1 and prefer_keys:
+                st = [x for x in st if x["key"].rsplit(".", 1)[-1] == prefer_keys[0].rsplit(".", 1)[-1]]
+            if len(st) == 1:
+                f = st[0]
+        if f is None:
+            if not cands:
+                return m.group(0)
+            pref = [x for x in cands if x["key"] in prefer_keys]
+            pool = pref or cands
+            keys = list(OrderedDict((x["key"], x) for x in pool).values())
+            if len(keys) > 1 and not pref:
+                if prefer_keys:
+                    best = max(_prefix_len(k["key"], prefer_keys[0]) for k in keys)
+                    top = [k for k in keys if _prefix_len(k["key"], prefer_keys[0]) == best]
+                else:
+                    top = keys
+                f = top[used[(round(n, 6), bool(pct))] % len(top)]
+                used[(round(n, 6), bool(pct))] += 1
+                AMBIG.append((f["key"], [k["key"] for k in keys], text[:120]))
+            else:
+                f = keys[0]
+        if not CC.binding_ok(f["key"], jur, text, m.start(), anchor=prefer_keys[0] if prefer_keys else None):
+            if old is not None:
+                REBIND.append((CUR_UNIT[0], old, None, text[max(0, m.start() - 60):m.end() + 20]))
+            return m.group(0)
+        if f["key"] != old:
+            REBIND.append((CUR_UNIT[0], old, f["key"], text[max(0, m.start() - 60):m.end() + 20]))
         t = tag(f)
         return t + (" %" if pct else "")
     return re.sub(r"(?<![\w.,/=-])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(\s?%)?(?![\w-]|\.\d|\]\])", rep, text)
@@ -275,6 +335,8 @@ def autotag(text, facts_by_val, prefer_keys=()):
 
 AMBIG = []
 PACKPROSE = []
+DATE_AFTER = re.compile(r"\s?(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\b")
+DATE_BEFORE = re.compile(r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s$")
 
 
 def STRICT_SIG(n, pct):
@@ -312,7 +374,15 @@ def fill(text, facts):
                 uniq.setdefault((x.get("effective_from"), json.dumps(x.get("value"))), x)
             c = list(uniq.values())
         if len(c) > 1 and frm is None:
-            raise KeyError(f"fill: {k} has {len(c)} values, give @effective_from")
+            # round 2: a key that gained a dated period after the hand text was written (facts re-run by
+            # a parallel worker) defaults to the value in force mid build year; give @effective_from to
+            # show another period
+            mid = [x for x in c if (x.get("effective_from") or "0000") <= "2026-06-30" <= (x.get("effective_to") or "9999")]
+            if len(mid) == 1:
+                c = mid
+                print("fill: default period 2026-06-30 for", k)
+            else:
+                raise KeyError(f"fill: {k} has {len(c)} values, give @effective_from")
         HAND.append(k)
         return value_cell(c[0]) if mode else tag(c[0])
     return re.sub(r"\{\{([a-z0-9_.]+)(?:@(\d{4}-\d{2}-\d{2}))?(\|v)?\}\}", rep, text)
@@ -325,6 +395,7 @@ HAND = []
 def build(unit):
     global AMBIG
     AMBIG = []
+    CUR_UNIT[0] = unit
     prefix = unit.lower()
     fj = json.load(open(os.path.join(RES, f"CCG-annex_{unit}-facts.json"), encoding="utf-8"))
     facts = fj["facts"]
@@ -506,7 +577,7 @@ def build(unit):
                             GAPLOC[it["key"]] = blk
                             GAPLINES[(unit, it["key"])] = (sum(x.count("\n") + 1 for x in L) + 1 + 4 + list(rows).index(st), f"{unit}.{num}")
                             cl = OV.gap_close(unit, it["key"]) or clean_close(it.get("what_would_close_it", ""))
-                            parts.append(f"⚠️ RESEARCH-GAP ({blk}): not established. Would close it: {cl}")
+                            parts.append(f"⚠️ RESEARCH-GAP [[GAPKEY:{it['key']}]] ({blk}): not established. Would close it: {cl}")
                     cells.append("<br>".join(parts) if parts else "—")
                 W(f"| {st.upper()} | " + " | ".join(c.replace('|', '/') for c in cells) + f" | {'; '.join(sorted(effs))} | {src_cell(srcs)} |")
             W("")
@@ -556,6 +627,9 @@ def build(unit):
                 if note:
                     note = autotag(note, vidx, prefer_keys=(f["key"],))
                 note = note.replace("|", "/")
+                if f["key"] in CITE_RID and f["register_id"] not in note:
+                    # QA r3c finding 2: the same fact is cited by register id in Module 2; FED.5 names it too
+                    note = (note.rstrip() + f" [{f['register_id']}]").strip()
                 lvl = f.get("_level") or ""
                 W(f"| {label(f['key'], prefix)} | {value_cell(f)} | {eff(f)} | {lvl} | {src_cell({f['register_id']})} | {note} |")
                 bindings.append((f"{unit}.{num} {label(f['key'], prefix)}", f["key"], f["register_id"]))
@@ -584,7 +658,7 @@ def build(unit):
         if rid not in SRC:
             src_cell({rid})
         r = REG.get(rid, {})
-        W(f"| {SRC[rid]} | {autotag(clip(r.get('instrument_name', '')), vidx)} | {clip(r.get('article_or_section', ''))} | {clip(r.get('authority', ''), 80)} |")
+        W(f"| {SRC[rid]} | {autotag(clip(r.get('instrument_name', '')), vidx)} | {clip(r.get('article_or_section', ''), None)} | {clip(r.get('authority', ''), 80)} |")
     W("")
     text = "\n".join(L).rstrip() + "\n"
     present = set(re.findall(r"\[\[FACT:([a-z0-9_.]+)=", text))
@@ -601,6 +675,7 @@ def build(unit):
 
 
 SRC = {}
+CITE_RID = {"fed.ein.format"}  # QA r3c: register id printed next to the fact (C32 alignment with m02)
 
 
 def src_cell(ids):
@@ -615,7 +690,8 @@ def src_cell(ids):
 def clip(s, n=160):
     s = (s or "").replace("|", "/").replace("\n", " ")
     s = re.sub(r"\[\[|\]\]", "", s)
-    return s if len(s) <= n else s[: n - 1].rsplit(" ", 1)[0] + " …"
+    # CCG r3e minor 1: n=None renders the text in full (Sources locators are never truncated)
+    return s if n is None or len(s) <= n else s[: n - 1].rsplit(" ", 1)[0] + " …"
 
 
 GAPLOC = {}
@@ -637,7 +713,7 @@ def gap_line(unit, g):
     GAPLOC[g["key"]] = blk
     topic = OV.gap_topic(unit, g["key"]) or (label(g["key"], unit.lower()) + ": not established by the research")
     close = OV.gap_close(unit, g["key"]) or clean_close(g.get("what_would_close_it", ""))
-    return f"⚠️ RESEARCH-GAP ({blk}): {topic}. Source that would close it: {close}"
+    return f"⚠️ RESEARCH-GAP [[GAPKEY:{g['key']}]] ({blk}): {topic}. Source that would close it: {close}"
 
 
 if __name__ == "__main__":
@@ -647,11 +723,13 @@ if __name__ == "__main__":
         SRC.clear()
         text, bindings, residual, facts, unresolved = build(u)
         path = os.path.join(OUT, f"annex_{u}.md")
+        text = CC.finalize(f"annex_{u}.md", CC.normalize_annex(f"annex_{u}.md", text, CC.MAP_FED_CT))
         open(path, "w", encoding="utf-8", newline="\n").write(text)
         report[u] = {"path": path, "facts": len(facts), "bindings": len(bindings),
                      "keys_bound": len({b[1] for b in bindings}), "keys_in_facts": len({f['key'] for f in facts}),
                      "residual": residual, "ambiguous": AMBIG[:], "gaps": [(g["key"], g.get("blocking")) for g in unresolved],
                      "bindings_list": bindings, "c38": OV.c38(u, facts),
+                     "r3d_rebind": [r for r in REBIND if r[0] == u],
                      "gaplines": {k[1]: v for k, v in GAPLINES.items() if k[0] == u}}
         report_c38 = OV.c38(u, facts)
         for line in report_c38:

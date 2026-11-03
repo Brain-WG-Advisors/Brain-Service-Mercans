@@ -46,7 +46,7 @@ No state minimum wage, overtime, pay-frequency, payment-method or paycard statut
 
 ## 2c — Local wage taxes
 - `al.local.occupational_tax.exists` = **True**  (2026-01-01 → open) [A.2, US-ALS5-001, derived arithmetically, conf high] — Municipal/county occupational taxes withheld by the employer, remitted to the city/county; ADOR does not administer them. No state census (AL-OQ-2).
-- `al.local.leeds.rate` = **1** percent (2026-01-01 → open) [A.2, US-ALS5-017, quoted from authority page, conf high] — City of Leeds: 1% of gross earnings, monthly return to Avenu, annual reconciliation, show on pay stub, records 5 years. Birmingham 1% is tier C (US-ALP7-001 MANUAL) - not a fact.
+- `al.local.leeds.rate` = **1** percent (2026-01-01 → open) [A.2, US-ALS5-017, quoted from authority page, conf high] — City of Leeds: 1% of gross earnings, monthly return to Avenu, annual reconciliation, show on pay stub, records 5 years. Birmingham 1% rests only on a tier-C MANUAL lead (see the AL pack) - not a fact.
 
 ## 3 — Social insurance (SUI / SDI / PFML / levies)
 UC wages include tips and bonuses; room and board at employee option valued (full board 63.00/week; meals 42.00/week or 2.00/meal; lodging 21.00/week or 3.00/day) per handbook rev. 2021 [US-ALR3-001] — admin rule not read, so not emitted as facts. Employer levies: only the 0.06% ESA [US-ALP7-002].
@@ -130,6 +130,19 @@ Data Breach Notification Act 2018 ch. 8-38 [US-ALS5-016, partial: definitions on
 
 ## Language seams (US-OWN-006)
 English; a Spanish A4 exists (optional seam) [US-ALS5-005]; posters [US-ALP9L-001]. Payslip/filings en per US-OWN-006.
+
+## QA round 3 research additions (2026-11-02, agent 2)
+
+**RQ-506 closed — standard-deduction phase-out.** ADOR withholding booklet rev. 01/2026, p.6 Formula step 2A, checked against the p.7 Schedule of Standard Deduction Amounts [US-ALS5-001]. Keys per status (`single`, `married_separate`, `married`, `head_of_family`): `al.wh.std_deduction.<status>.phaseout.start_gi`, `.reduction_per_step`, `.step_size`, `.floor_from_gi`, and the summary `al.wh.std_deduction.phaseout_steps` (also in WTC country_specific).
+- 0/S: 3,000 up to GI 25,999; less 25 for each 500 or part above 25,999; 2,500 from 35,500.
+- MS: 4,250 up to 12,999; less 88 for each 250 or part above 12,999; 2,500 from 17,750.
+- M: 8,500 up to 25,999; less 175 for each 500 or part above 25,999; 5,000 from 35,500.
+- H: 5,200 up to 25,999; less 135 for each 500 or part above 25,999; 2,500 from 35,500.
+Derivation lines: 3,000 - 25 x 19 = 2,525; 4,250 - 88 x 19 = 2,578; 8,500 - 175 x 19 = 5,175; 5,200 - 135 x 19 = 2,635 (last stepped values, each above its floor); schedule spot checks MFJ 26,000-26,499 = 8,325 and MS 13,000-13,249 = 4,162 match.
+
+
+## QA r3b additions (agent 2, 2026-11-02)
+- `al.wh.std_deduction.married_separate.min` = 2,500 and `al.wh.std_deduction.head_of_family.min` = 2,500 [US-ALS5-001], booklet rev. 01/2026 Formula step 2A (PDF p.8). Minimum per status: S 2,500 / MS 2,500 / M 5,000 / H 2,500. Each status has its own `*.phaseout.start_gi` key; married and HoH quotes must bind to `al.wh.std_deduction.married.phaseout.start_gi` / `.head_of_family.phaseout.start_gi`, not the single key.
 
 ## Open questions
 Mirrors `unresolved[]` in the facts file (same keys).

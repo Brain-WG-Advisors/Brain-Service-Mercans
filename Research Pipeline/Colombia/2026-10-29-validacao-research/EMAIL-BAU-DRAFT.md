@@ -6,7 +6,7 @@ Ligado a [[CONFERENCIA]] e [[Colombia]]. Não enviado. Reply all no fio "PMI Rev
 
 Hi Heidy,
 
-We have finished validating the Colombia research against an independent calculation and the September payroll. The updated documents are in the Colombia folder on Drive: CCG v1.6, WTC v1.8, DD v1.5, report specs v1.2 and SIR v1.3.
+We have finished validating the Colombia research against an independent calculation and the September payroll. The updated documents are in the Colombia folder on Drive: CCG v1.6, WTC v1.8, DD v1.5, report specs v1.2 (Form 350 and pensioners PILA at v1.1) and SIR v1.3.
 
 Three changes affect the payroll calculation:
 

@@ -3,7 +3,6 @@
 
 | From | Rate |
 |---|---|
-| 2025-01-01 | {{ri.minwage.hourly@2025-01-01}} USD |
 | 2026-01-01 | {{ri.minwage.hourly@2026-01-01}} USD |
 | 2027-01-01 (enacted, P.L. 2025 ch. 222/223) | {{ri.minwage.hourly@2027-01-01}} USD |
 
@@ -26,9 +25,9 @@
 
   Per-period tables are the annual table divided by the number of periods (published in the booklet).
 - **Exemption allowance:** {{ri.pit.exemption.annual}} USD per year per exemption, falling to zero when annualised wages exceed {{ri.pit.exemption.cliff.annual_wages}} USD (a cliff, not a phase-out) [US-RIS5-019].
-- **Oracle:** booklet worked example (weekly, one exemption): {{ri.pit.oracle.example_1.withholding}} USD, reproduced exactly. Recomputation in Module 12.
+- **Oracle:** booklet worked example (weekly, one exemption): {{ri.oracle.weekly_2195.withholding}} USD, reproduced exactly. Recomputation in Module 12.
 - **Certificate:** {{ri.wh.certificate}} [US-RIS5-019].
-- **Supplemental wages:** flat {{ri.wh.supplemental.rate}} % (booklet instruction 12) or the aggregate method; the older register row giving a different instruction is superseded [US-RIS5-019].
+- **Supplemental wages:** flat {{ri.wh.supplemental.rate}} % (booklet instruction 12) or the aggregate method; [US-RIS5-019].
 - **Rounding:** no rule stated; the tables work to the cent.
 - **Who withholds [US-RIP52-003, US-RIS5-019]:** wages subject to federal withholding where any part is for services in Rhode Island; nonresidents working in Rhode Island; out-of-state employers may withhold for residents as a convenience. Reciprocity: {{ri.reciprocity.states}}; no day or dollar threshold; no convenience-of-employer rule found. Residents claim a credit for tax paid to another state on Schedule II [US-RIP52-002].
 - **Local income taxes:** none (exists: {{ri.local_wage_tax.exists}}) [US-RIP52-001].

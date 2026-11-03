@@ -48,7 +48,7 @@ A(H(3, "Is the minimum wage applicable at a national level or does it vary by pr
 A(f"Both. The federal rate is a floor and the most protective applicable rate wins: {Q('multi.wage_hour.overlay_rule')} "
   f"{R('multi.wage_hour.overlay_rule')}. The employer pays the highest of the federal, State and local minimum of the place "
   f"where the work is performed {R('fed.minwage.hourly')}. Several cities and counties set their own rates (examples below; "
-  "California municipal rates are an open item of annex CA, `ca.local_minwage.hourly`).")
+  "California municipal rates are in Annex CA).")
 A(H(3, "Provide all applicable minimum wage rates."))
 A("All dates are effective dates; a rate change applies to hours worked from the date shown.")
 A("")
@@ -62,7 +62,7 @@ for k in sorted(FACTS):
         MW[p[0]] = k
 MW["fl"] = "fl.minwage.hourly"
 special = {"ny": ["ny.minwage.nyc_li_westchester.hourly", "ny.minwage.rest.hourly"],
-           "or": ["or.minwage.standard.hourly"], "tx": ["tx.minwage.hourly"]}
+           "or": ["or.labour.minwage.standard.hourly"], "tx": ["tx.minwage.hourly"]}
 states = sorted(set(MW) | set(special))
 for st in states:
     if st in special:
@@ -70,10 +70,12 @@ for st in states:
         for k in special[st]:
             lab = {"ny.minwage.nyc_li_westchester.hourly": "New York City, Long Island, Westchester",
                    "ny.minwage.rest.hourly": "rest of State",
-                   "or.minwage.standard.hourly": "standard (Portland metro and nonurban rates in annex OR)",
+                   "or.labour.minwage.standard.hourly": "standard (Portland metro and nonurban rates in annex OR)",
                    "tx.minwage.hourly": "State rate"}[k]
             parts.append(f"{lab}: {dated(k)}")
-        A(f"| {st.upper()} | {'; '.join(parts)} | {R(special[st][0])} |")
+        k0 = special[st][0]
+        first0 = sorted(FACTS[k0], key=lambda x: x.get('effective_from') or '')[0]
+        A(f"| {st.upper()} | {'; '.join(parts)} | {R(k0, on=first0['effective_from'] if len({x.get('effective_from') for x in FACTS[k0]}) > 1 else None)} |")
     else:
         k = MW[st]
         first = sorted(FACTS[k], key=lambda x: x.get('effective_from') or '')[0]
@@ -145,18 +147,26 @@ A("| Component | Federal income tax | FICA (social security and Medicare) | FUTA
 A("|---|---|---|---|---|")
 A(f"| Regular wages, overtime, bonuses, commissions | Taxable | Subject | Subject (wages) | {R('fed.plaw119_21.qualified_overtime.level')}; {R('fed.futa.legal_basis.rate_statute')}; {COV('overtime')} |")
 A(f"| Severance and pay in lieu of notice | Taxable | Subject | Subject | {K('fed.severance.is_wages')} |")
-A(f"| Tips of USD {T('fed.tips.reporting_threshold_monthly')} or more a month | Taxable | Subject | ⚠️ RESEARCH-GAP (non-blocking): FUTA treatment of tips not in the facts (request key `fed.fica.wage_definition.exclusions`) | {R('fed.tips.reporting_threshold_monthly')} |")
-A(f"| Group-term life cost above USD {T('fed.bik.group_term_life.excluded_coverage')} | Taxable, withholding not required | Subject | ⚠️ RESEARCH-GAP (non-blocking): not in the facts (request key `fed.fica.wage_definition.exclusions`) | {R('fed.bik.group_term_life.excluded_coverage')} |")
-A(f"| PFML employee contribution | W-2 wages | W-2 wages | ⚠️ RESEARCH-GAP (non-blocking): not in the facts (request key `fed.fica.wage_definition.exclusions`) | {R('fed.pfml.employee_contribution.is_w2_wages')} |")
-A(f"| Parking / transit up to USD {T('fed.bik.parking.monthly_exclusion')} / USD {T('fed.bik.transit.monthly_exclusion')} a month | Excluded up to the limit | ⚠️ RESEARCH-GAP (non-blocking): see request `fed.fica.wage_definition.exclusions` | ⚠️ RESEARCH-GAP (non-blocking): see request `fed.fica.wage_definition.exclusions` | {R('fed.bik.parking.monthly_exclusion')} |")
+# round 3b (QA r3 blocker 1, RQ-562 closed by agent 2 R3): FIT / FICA / FUTA cells rendered from fed.base.* facts
+A(f"| Tips | {T('fed.base.tips.fit')} | {T('fed.base.tips.fica')} | {T('fed.base.tips.futa')} | {R('fed.base.tips.fica')}; {R('fed.tips.reporting_threshold_monthly')} |")
+A(f"| Group-term life insurance | {T('fed.base.group_term_life.fit')} | {T('fed.base.group_term_life.fica')} | {T('fed.base.group_term_life.futa')} | {R('fed.base.group_term_life.fica')} |")
+A(f"| PFML employee contribution | W-2 wages | W-2 wages | No FUTA exclusion is configured for the contribution: it is withheld from wages, which stay wages under the general definition | {R('fed.pfml.employee_contribution.is_w2_wages')}; {R('fed.wages.general_definition')} |")
+A(f"| Transit passes, commuter vehicle and qualified parking | {T('fed.base.transportation.fit')} | {T('fed.base.transportation.fica')} | {T('fed.base.transportation.futa')} | {R('fed.base.transportation.fica')} |")
+A(f"| Educational assistance | {T('fed.base.educational_assistance.fit')} | {T('fed.base.educational_assistance.fica')} | {T('fed.base.educational_assistance.futa')} | {R('fed.base.educational_assistance.fica')} |")
+A(f"| Dependent-care assistance | {T('fed.base.dependent_care.fit')} | {T('fed.base.dependent_care.fica')} | {T('fed.base.dependent_care.futa')} | {R('fed.base.dependent_care.fica')} |")
+A(f"| Retirement deferrals and Section 125 reductions | See Module 3, Step 2 | See Module 3, Step 2 | See Module 3, Step 2 | {R('fed.retirement.pretax.tax_treatment')} |")
 A(f"| Moving expenses, bicycle commuting | No exclusion (eliminated, except moving for Armed Forces / intelligence community) | No exclusion | No exclusion | {K('fed.bik.moving_and_bicycle.excluded')} |")
-A(f"| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | not in the facts | {K('fed.minister.withholding')} |")
+A(f"| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | Not established from an official source [[GAP:RQ-593]] | {K('fed.minister.withholding')} |")
 A("")
-A(GAP("fed.fica.wage_definition.exclusions",
-      "the statutory inclusion/exclusion lists of FICA wages (26 U.S.C. 3121(a)), FUTA wages (3306(b)) and income-tax wages (3401(a)) are not carried as facts",
-      "What payments do 26 U.S.C. 3121(a), 3306(b) and 3401(a) (and Pub. 15 Table 'Special Rules for Various Types of Services and Payments') include in or exclude from FICA wages, FUTA wages and income-tax withholding wages, for tips, group-term life, PFML contributions, fringe exclusions, dependent care, educational assistance and retirement deferrals?",
-      "CCG m04 §4.2 sociable/non-sociable table has empty FUTA cells; the social-security base deliverable cannot be completed; WTC Subject-to-X flags lack a source",
-      "social_security", tier="A.1", shape="matrix payment type x base: included / excluded / limit, with the Pub. 15 page"))
+A("")
+A("Statutory wage definitions behind the table:")
+A("")
+A("| Base | Definition and exclusions | Source |")
+A("|---|---|---|")
+A(f"| All federal employment taxes (general) | {T('fed.wages.general_definition')} | {R('fed.wages.general_definition')} |")
+A(f"| FICA wages | {T('fed.fica.wage_definition.exclusions')} | {R('fed.fica.wage_definition.exclusions')} |")
+A(f"| FUTA wages | {T('fed.futa.wage_definition.exclusions')} | {R('fed.futa.wage_definition.exclusions')} |")
+A("| Income-tax withholding wages | Module 6 §6.1.1 (26 U.S.C. 3401(a)) | Module 6 |")
 A(H(3, "Are components uniform across the country or do they differ by state/province?"))
 A("Federal classification is uniform. State classification differs, because each State decides its own conformity "
   f"(examples: {K('ca.obbba.conforms')} no State tips or overtime deduction; {K('pa.bik.pa.401k_403b_457.taxable')}; "
@@ -291,7 +301,9 @@ A("|---|---|---|")
 A(f"| Regular vs supplemental wages | Supplemental = bonuses, commissions, severance and similar; may be withheld at a flat rate | {R('fed.fit.supplemental.flat_rate')} |")
 A(f"| Withholding wages vs FICA wages | A payment can be FICA wages without income-tax withholding being required (group-term life cost above USD {T('fed.bik.group_term_life.excluded_coverage')} of coverage); a statutory employee's pay is FICA-withheld with no income-tax withholding | {R('fed.bik.group_term_life.excluded_coverage')}; {K('fed.statutory_employee.treatment')} |")
 A(f"| Taxable wage base vs total wages | OASDI, FUTA and each SUI/PFML base stop at a cap; Medicare does not | {R('fed.futa.wage_base')} |")
-A(f"| Qualified tips and qualified overtime | Reported separately on the W-2 from tax year 2026: {Q('fed.plaw119_21.reporting_penalty_relief')} | {R('fed.plaw119_21.reporting_penalty_relief')} |")
+# round 2 (QA r1 C41): fed.plaw119_21.reporting_penalty_relief is a TY2025-only value (moved to _history);
+# the 2026 reporting rule is carried by the in-force W-2 code fact.
+A(f"| Qualified tips and qualified overtime | Reported separately on the W-2 from tax year 2026, Box 12 codes: {Q('fed.w2.box12.new_codes')} | {R('fed.w2.box12.new_codes')} |")
 A(f"| State and local wages | Wages allocated to each State and locality; the W-2 carries up to {T('multi.w2.states_per_form')} States and localities per form | {R('multi.w2.states_per_form')} |")
 A(H(3, "Create a reference table classifying common pay components."))
 A("| Pay component | Regular / supplemental | Federal income tax | FICA | W-2 reporting |")
@@ -302,7 +314,9 @@ A(f"| Cash tips reported | Regular | Worksheet 1A | Yes | Box 12 code TP; box 14
 A(f"| Bonus, commission | Supplemental | Flat or aggregate | Yes | W-2 wages ({R('fed.fit.supplemental.flat_rate')}) |")
 A(f"| Severance | Supplemental | Flat or aggregate | Yes | W-2 wages ({R('fed.severance.is_wages')}) |")
 A(f"| Group-term life cost above the excluded coverage | Imputed | Not required | Yes | ({R('fed.bik.group_term_life.excluded_coverage')}) |")
-A(f"| Employer Trump-account contribution | Employer contribution | Excluded up to USD {T('fed.bik.trump_account.employer_contribution_max')} from {D('fed.bik.trump_account.employer_contribution_max')} | ⚠️ RESEARCH-GAP (non-blocking): see request `fed.fica.wage_definition.exclusions` | Box 12 code TA ({R('fed.bik.trump_account.employer_contribution_max')}) |")
+A(f"| Employer Trump-account contribution | Employer contribution | Excluded up to USD {T('fed.bik.trump_account.employer_contribution_max')} from {D('fed.bik.trump_account.employer_contribution_max')} | ⚠️ RESEARCH-GAP [[GAPKEY:fed.bik.trump_account.employment_tax_treatment]]: FICA and FUTA treatment of the employer contribution is not established from an official source | Box 12 code TA ({R('fed.bik.trump_account.employer_contribution_max')}) |")
+A("")
+A(CC.PREVAILING_WAGE_SENTENCE)  # SCOPE r1 finding 2 (US-OWN-009)
 A("")
 A("Prevailing-wage overlay: federal construction contracts over USD "
   f"{T('fed.davis_bacon.contract_threshold')} carry Davis-Bacon wage rates and weekly certified payroll "

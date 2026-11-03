@@ -60,20 +60,20 @@ def table(rows):
 def check(j, name, computed, oracle_key, f, on=None):
     o = D(str(f.get(oracle_key, on)))
     ok = computed == o
-    RESULTS.append((j, name, str(computed), str(o), ok))
+    RESULTS.append((j, name, str(computed), str(o), ok, oracle_key))   # r3: oracle key for the C69 suite
     return ok
 
 
 TAGMAP = {
-    "DE": {"13.88": "[[FACT:de.oracle.guide.example1.withholding_weekly=13.88]]", "269.63": "[[FACT:de.oracle.guide.example2.supplemental=269.63]]"},
+    "DE": {"13.88": "[[FACT:de.oracle.weekly_25000.withholding=13.88]]", "269.63": "[[FACT:de.oracle.supplemental.withholding=269.63]]"},
     "GA": {"27.03": "[[FACT:ga.oracle.guide.example1.withholding=27.03]]"},
-    "HI": {"9.58": "[[FACT:hi.oracle.booklet_a.part1.withholding_weekly=9.58]]", "14,400.00": "[[FACT:hi.wh.bracket.single.2.ceiling=14,400]]"},
+    "HI": {"9.58": "[[FACT:hi.oracle.weekly_500_s3.withholding=9.58]]", "14,400.00": "[[FACT:hi.wh.bracket.single.2.ceiling=14,400]]"},
     "IA": {"114.92": "[[FACT:ia.oracle.formula.example6.withholding=114.92]]"},
-    "IL": {"32.13": "[[FACT:il.oracle.il700t.example2.withholding=32.13]]"},
+    "IL": {"32.13": "[[FACT:il.oracle.weekly_800.withholding=32.13]]"},
     "IN": {"13.96": "[[FACT:in.oracle.dn1.example.state=13.96]]", "4.73": "[[FACT:in.oracle.dn1.example.county=4.73]]"},
     "KY": {"104.65": "[[FACT:ky.oracle.formula.monthly_3270=104.65]]", "1,247.40": "[[FACT:ky.oracle.formula.biweekly_1500.annual=1,247.40]]",
            "47.98": "[[FACT:ky.oracle.biweekly_1500.result=47.98]]"},
-    "LA": {"13.98": "[[FACT:la.oracle.r1306.example1.withholding=13.98]]", "111.54": "[[FACT:la.oracle.r1306.example2.withholding=111.54]]"},
+    "LA": {"13.98": "[[FACT:la.oracle.weekly_700.withholding=13.98]]", "111.54": "[[FACT:la.oracle.biweekly_4600.withholding=111.54]]"},
 }
 
 
@@ -131,8 +131,8 @@ L += table([("Annual wages", "example input", m(wages)),
            [("Annual tax before credit", "sum of bracket amounts", m(tax)),
             ("Personal credit", f"{m(tax)} - 1 x {cr_t}", m(net)),
             ("Weekly withholding", f"{m(net)} / 52, half-up to the cent", m(weekly))])
-ok = check("DE", "DE-1", weekly, "de.oracle.guide.example1.withholding_weekly", f)
-L += ["", f"Result {m(weekly)} = published [[FACT:de.oracle.guide.example1.withholding_weekly=13.88]] ({'match' if ok else 'MISMATCH'}).", ""]
+ok = check("DE", "DE-1", weekly, "de.oracle.weekly_25000.withholding", f)
+L += ["", f"Result {m(weekly)} = published [[FACT:de.oracle.weekly_25000.withholding=13.88]] ({'match' if ok else 'MISMATCH'}).", ""]
 
 L += ["**Example DE-2: supplemental payment 5,000.00 paid separately to an employee earning 500.00 weekly, single, 1 exemption (annualised-with minus annualised-without, per `de.wh.supplemental.method`).**", ""]
 reg = D("500") * 52
@@ -146,8 +146,8 @@ L += table([("Annual regular wages", "500.00 x 52", m(reg)),
             ("Tax without the bonus", f"tax on ({m(reg)} - {sd_t}) - {cr_t}", m(a)),
             ("Tax with the bonus", f"tax on ({m(reg)} + 5,000.00 - {sd_t}) - {cr_t}", f"{b:,.3f}"),
             ("Withholding on the bonus", f"{b:,.3f} - {m(a)} = {sup_raw:,.3f}, half-up to the cent", m(sup))])
-ok = check("DE", "DE-2", sup, "de.oracle.guide.example2.supplemental", f)
-L += ["", f"Result {m(sup)} = published [[FACT:de.oracle.guide.example2.supplemental=269.63]] ({'match' if ok else 'MISMATCH'}).", ""]
+ok = check("DE", "DE-2", sup, "de.oracle.supplemental.withholding", f)
+L += ["", f"Result {m(sup)} = published [[FACT:de.oracle.supplemental.withholding=269.63]] ({'match' if ok else 'MISMATCH'}).", ""]
 write("DE", L)
 
 # ---------------------------------------------------------------- GA
@@ -155,7 +155,7 @@ f = F("GA", "2026-06-30")
 L = [INTRO, ""]
 sd_t, sd = f.t("ga.wh.std_deduction.mfj")
 da_t, da = f.t("ga.wh.dependent_allowance")
-r_t, r = f.t("ga.pit.rate.flat", "2026-06-30")
+r_t, r = f.t("ga.wh.rate", "2026-06-30")  # round 2: withholding level (QA r1 C32)
 p_sd = c2(sd / 24)
 p_da = c2(da / 24)
 base = D("2000") - p_sd - p_da
@@ -167,7 +167,7 @@ L += table([("Period standard deduction", f"{sd_t} / 24, rounded to the cent", m
             ("Taxable wages", f"2,000.00 - {m(p_sd)} - 1 x {m(p_da)}", m(base)),
             ("Withholding", f"{m(base)} x {r_t} % = {w_raw:.4f}, half-up to the cent", m(w))])
 ok = check("GA", "GA-1", w, "ga.oracle.guide.example1.withholding", f)
-L += ["", f"Result {m(w)} = published [[FACT:ga.oracle.guide.example1.withholding=27.03]] ({'match' if ok else 'MISMATCH'}). The rate applies from 2026-01-01; employers that kept the prior rate until 2026-05-11 follow the transition described in GA.2.", ""]
+L += ["", f"Result {m(w)} = published [[FACT:ga.oracle.guide.example1.withholding=27.03]] ({'match' if ok else 'MISMATCH'}). The withholding rate used applies to payments from 2026-05-11; payments to 2026-05-10 were withheld at the earlier withholding rate (GA.2).", ""]
 write("GA", L)
 
 # ---------------------------------------------------------------- HI
@@ -191,8 +191,8 @@ L += table([("Annual wages", "500.00 x 52", m(ann)),
             ("Bracket", f"above {c2_t} up to {c3_t}", "bracket 3"),
             ("Annual tax", f"{b3_t} + ({m(taxable)} - {m(c2v)}) x {r3_t} %", m(tax)),
             ("Weekly withholding", f"{m(tax)} / 52, half-up to the cent", m(wk))])
-ok = check("HI", "HI-1", wk, "hi.oracle.booklet_a.part1.withholding_weekly", f)
-L += ["", f"Result {m(wk)} = published [[FACT:hi.oracle.booklet_a.part1.withholding_weekly=9.58]] ({'match' if ok else 'MISMATCH'}).", ""]
+ok = check("HI", "HI-1", wk, "hi.oracle.weekly_500_s3.withholding", f)
+L += ["", f"Result {m(wk)} = published [[FACT:hi.oracle.weekly_500_s3.withholding=9.58]] ({'match' if ok else 'MISMATCH'}).", ""]
 write("HI", L)
 
 # ---------------------------------------------------------------- IA
@@ -253,20 +253,20 @@ L += table([("Annual exemptions", f"2 x {e1_t} + 2 x {e2_t}", m(ex)),
             ("Weekly exemption", f"{m(ex)} / 52, rounded to the cent", m(per)),
             ("Taxable wages", f"800.00 - {m(per)}", m(base)),
             ("Withholding", f"{m(base)} x {r_t} % = {raw:.4f}, half-up to the cent", m(res))])
-ok = check("IL", "IL-2", res, "il.oracle.il700t.example2.withholding", f)
-L += ["", f"Result {m(res)} = published [[FACT:il.oracle.il700t.example2.withholding=32.13]] ({'match' if ok else 'MISMATCH'}).", ""]
+ok = check("IL", "IL-2", res, "il.oracle.weekly_800.withholding", f)
+L += ["", f"Result {m(res)} = published [[FACT:il.oracle.weekly_800.withholding=32.13]] ({'match' if ok else 'MISMATCH'}).", ""]
 ex1, per1, base1, raw1, res1 = il(D("300"), 2, 1)
 o1 = D(str(f.get("il.oracle.il700t.example1.withholding")))
-RESULTS.append(("IL", "IL-1", str(res1), str(o1), res1 == o1))
-L += ["**Example IL-1: weekly wages 300.00, IL-W-4 Line 1 = 2, Line 2 = 1 (IL-700-T example).**", ""]
+RESULTS.append(("IL", "IL-1", str(res1), str(o1), res1 == o1, "il.oracle.il700t.example1.withholding"))
+L += ["**Example IL-1: weekly wages 300.00, IL-W-4 Line 1 = 2, Line 2 = 1 (IL-700-T example 1, automated payroll method; the booklet prints the table-method result).**", ""]
 L += table([("Annual exemptions", f"2 x {e1_t} + 1 x {e2_t}", m(ex1)),
             ("Weekly exemption", f"{m(ex1)} / 52, rounded to the cent", m(per1)),
             ("Taxable wages", f"300.00 - {m(per1)}", m(base1)),
             ("Withholding", f"{m(base1)} x {r_t} % = {raw1:.4f}, half-up to the cent", m(res1))])
-if res1 != o1:
-    L += ["", f"The formula with the 2026 exemption amounts gives {m(res1)}; the IL-700-T prints [[FACT:il.oracle.il700t.example1.withholding=8.38]]. ⚠️ RESEARCH-GAP: the inputs of IL-700-T example 1 do not reproduce its printed result with the 2026 exemption amounts; the example's allowance counts or wage must be re-read before it is used as a test case (open item `il.oracle.il700t.example1.inputs`, non-blocking).", ""]
-else:
-    L += ["", f"Result {m(res1)} = published [[FACT:il.oracle.il700t.example1.withholding=8.38]] (match).", ""]
+o1a = D(str(f.get("il.oracle.il700t.example1.automated_method_result")))
+RESULTS.append(("IL", "IL-1 automated", str(res1), str(o1a), res1 == o1a, "il.oracle.il700t.example1.automated_method_result"))
+assert res1 == o1a, (res1, o1a)
+L += ["", f"Result {m(res1)} = published automated-method result [[FACT:il.oracle.il700t.example1.automated_method_result={m(o1a)}]] (match). The IL-700-T prints [[FACT:il.oracle.il700t.example1.withholding=8.38]] for the same employee because its example uses the wage-bracket table, whose values are computed at the bracket midpoint; both are correct for their method. A payroll engine using the formula reproduces the automated-method result.", ""]
 write("IL", L)
 
 # ---------------------------------------------------------------- IN
@@ -284,9 +284,18 @@ tot = A5 + B3 + B1 + C2
 tx = D("800") - tot
 st_raw = tx * pct(r)
 st = c2(st_raw)
-cty_raw = tx * D("0.01")
+# QA r2 (RQ-575): the example county rate is a fact when agent 2 has keyed it; otherwise it is the
+# example input of DN1, shown with the GAP tag of its open request (never a typed rate without a source)
+_crk = "in.oracle.dn1.example.county_rate"
+if any(x["key"] == _crk for x in f.all):
+    crt_t, crt = f.t(_crk)
+else:
+    _gp = json.load(open(os.path.join(BASE, "_research", "gaps.json"), encoding="utf-8")).get("gaps", [])
+    _g = next((g for g in _gp if g["id"] == "RQ-575" or g.get("key") == _crk), None)
+    crt_t, crt = "1.00" + (f" [[GAP:{_g['id']}]]" if _g else ""), D("1.00")
+cty_raw = tx * pct(crt)
 cty = c2(cty_raw)
-L += ["**Example IN-1: weekly wages 800.00 with deduction constants A5, B3, B1 and C2, county rate 1.00% as used in the Departmental Notice 1 example (payroll from 2026-10-01).**", ""]
+L += [f"**Example IN-1: weekly wages 800.00 with deduction constants A5, B3, B1 and C2, county rate {crt_t}% as used in the Departmental Notice 1 example (payroll from 2026-10-01).**", ""]
 L += table([("Constant A5", f"5 x {pe_t} / 52, two decimals", m(A5)),
             ("Constant B3", f"3 x {de_t} / 52, two decimals", m(B3)),
             ("Constant B1", f"1 x {de_t} / 52, two decimals", m(B1)),
@@ -294,7 +303,7 @@ L += table([("Constant A5", f"5 x {pe_t} / 52, two decimals", m(A5)),
             ("Total constants", f"{m(A5)} + {m(B3)} + {m(B1)} + {m(C2)}", m(tot)),
             ("Taxable wages", f"800.00 - {m(tot)}", m(tx)),
             ("State withholding", f"{m(tx)} x {r_t} % = {st_raw:.4f}, half-up to the cent", m(st)),
-            ("County withholding", f"{m(tx)} x 1.00 % (example county rate) = {cty_raw:.4f}", m(cty))])
+            ("County withholding", f"{m(tx)} x {crt_t} % (example county rate) = {cty_raw:.4f}", m(cty))])
 ok1 = check("IN", "IN-1 state", st, "in.oracle.dn1.example.state", f)
 ok2 = check("IN", "IN-1 county", cty, "in.oracle.dn1.example.county", f)
 L += ["", f"Results {m(st)} = published [[FACT:in.oracle.dn1.example.state=13.96]] ({'match' if ok1 else 'MISMATCH'}); {m(cty)} = published [[FACT:in.oracle.dn1.example.county=4.73]] ({'match' if ok2 else 'MISMATCH'}). The county rate in production is the employee's county rate from the county chart (IN.2c).", ""]
@@ -336,13 +345,13 @@ x2 = (D("4600") - jd / 26) * pct(r)
 L += ["**Example LA-1: L-4 status 1, weekly wages 700.00 (R-1306 formula).**", ""]
 L += table([("Period deduction", f"{s_t} / 52", f"{s / 52:.4f}"),
             ("Withholding", f"(700.00 - {s / 52:.4f}) x {r_t} % = {x1:.4f}, half-up to the cent", m(c2(x1)))])
-ok = check("LA", "LA-1", c2(x1), "la.oracle.r1306.example1.withholding", f)
-L += ["", f"Result {m(c2(x1))} = published [[FACT:la.oracle.r1306.example1.withholding=13.98]] ({'match' if ok else 'MISMATCH'}).", ""]
+ok = check("LA", "LA-1", c2(x1), "la.oracle.weekly_700.withholding", f)
+L += ["", f"Result {m(c2(x1))} = published [[FACT:la.oracle.weekly_700.withholding=13.98]] ({'match' if ok else 'MISMATCH'}).", ""]
 L += ["**Example LA-2: L-4 status 2, biweekly wages 4,600.00 (R-1306 formula).**", ""]
 L += table([("Period deduction", f"{j_t} / 26", f"{jd / 26:.4f}"),
             ("Withholding", f"(4,600.00 - {jd / 26:.4f}) x {r_t} % = {x2:.4f}, half-up to the cent", m(c2(x2)))])
-ok = check("LA", "LA-2", c2(x2), "la.oracle.r1306.example2.withholding", f)
-L += ["", f"Result {m(c2(x2))} = published [[FACT:la.oracle.r1306.example2.withholding=111.54]] ({'match' if ok else 'MISMATCH'}).", ""]
+ok = check("LA", "LA-2", c2(x2), "la.oracle.biweekly_4600.withholding", f)
+L += ["", f"Result {m(c2(x2))} = published [[FACT:la.oracle.biweekly_4600.withholding=111.54]] ({'match' if ok else 'MISMATCH'}).", ""]
 write("LA", L)
 
 for r_ in RESULTS:

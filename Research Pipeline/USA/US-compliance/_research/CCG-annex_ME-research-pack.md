@@ -55,7 +55,7 @@ No SDI/TDI, transit or other levy [US-MEP9V-001, US-OWN-007]. PFML rate rests on
 - `me.pfml.w2_box14_label` = **MEPFML**  (2025-01-01 → open) [A.3, US-MES5-025, direct artifact inspection, conf medium]
 
 ## 4 — Payslip statute
-- `me.payslip.required` = **True**  (2026-01-01 → open) [A.1, US-MES5-006, direct artifact inspection, conf high] — 26 MRSA 665(1): with each payment: pay-period date, hours, total earnings, itemized deductions; same record at time of electronic transfer; electronic only with ready access and free printing. CORRECTS US-MEP51-004 / US-MEP52-006 (superseded).
+- `me.payslip.required` = **True**  (2026-01-01 → open) [A.1, US-MES5-006, direct artifact inspection, conf high] — 26 MRSA 665(1): with each payment: pay-period date, hours, total earnings, itemized deductions; same record at time of electronic transfer; electronic only with ready access and free printing. CORRECTS two earlier superseded ME payslip rows (listed in the ME pack).
 - `me.payslip.items` = **date of the pay period, hours, total earnings, itemized deductions**  (2026-01-01 → open) [A.1, US-MES5-006, direct artifact inspection, conf high]
 
 ## 5 — Statutory reporting instruments

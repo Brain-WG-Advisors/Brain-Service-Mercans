@@ -29,7 +29,7 @@
 | High-income minimum tax | Assessment only | Assessment only |
 
 ## @social
-- **Unemployment insurance (VDOL) [US-VTS5-004, US-VTS5-005, US-VTS5-006, US-VTS5-009].** Taxable wage base {{vt.sui.wage_base@2026-01-01}} USD for 2026 ({{vt.sui.wage_base@2025-01-01}} USD in 2025), indexed to the state annual average wage when the fund conditions are met. Rates by class and schedule; schedule I starts at {{vt.ui.rate.schedule_i.min}} % and schedule V reaches {{vt.ui.rate.schedule_v.max}} %; the rate year starts July 1 (the schedule for the year from 2026-07-01 is open, below). New employer {{vt.sui.new_employer.rate}} % (foreign construction employers take the industry average). Wages already paid for covered employment in another state count toward the base: {{vt.sui.wage_base.other_state_credit}} (1321(b)(2)) [US-VTS5-010]. The no-employee-contribution statement lacks an active register row (open point below).
+- **Unemployment insurance (VDOL) [US-VTS5-004, US-VTS5-005, US-VTS5-006, US-VTS5-009].** Taxable wage base {{vt.sui.wage_base@2026-01-01}} USD for 2026, indexed to the state annual average wage when the fund conditions are met. Rates by class and schedule; schedule I starts at {{vt.ui.rate.schedule_i.min}} % and schedule V reaches {{vt.ui.rate.schedule_v.max}} %; the rate year starts July 1 (the schedule for the year from 2026-07-01 is open, below). New employer {{vt.sui.new_employer.rate}} % (foreign construction employers take the industry average). Wages already paid for covered employment in another state count toward the base: {{vt.sui.wage_base.other_state_credit}} (1321(b)(2)) [US-VTS5-010]. The no-employee-contribution statement lacks an active register row (open point below).
 - **SDI, TDI, PFML:** none mandatory (exists: {{vt.sdi_pfml.exists}}); VT-FMLI is voluntary [US-VTP51-006].
 - **Child Care Contribution [US-VTS5-030, US-VTP51-004, US-VTP7-001]:** {{vt.ccc.total.rate}} % of all IRC 3401 wages subject to Vermont withholding, no cap; the employer may withhold up to {{vt.ccc.employee.max_rate}} % from the employee (less, none, or non-uniform allowed); the employee share goes in W-2 box 14; reported on WHT-436 and paid on the withholding schedule.
 
@@ -93,4 +93,4 @@
 | Commission salespeople | Outside salespersons excluded from minimum wage; commission-only agents excluded from UI | US-VTS5-013, US-VTS5-009 |
 
 ## @gaps
-- vt.ui.wage_base.derivation :: The step from the 2025 base of {{vt.sui.wage_base@2025-01-01}} USD to the 2026 base of {{vt.sui.wage_base@2026-01-01}} USD cannot be re-derived because the state annual average wage (1338(g)) was not fetched. :: VDOL state annual average wage figures.
+- vt.ui.wage_base.derivation :: The 2026 base of {{vt.sui.wage_base@2026-01-01}} USD cannot be re-derived from the prior-year base because the state annual average wage (1338(g)) was not fetched. :: VDOL state annual average wage figures.

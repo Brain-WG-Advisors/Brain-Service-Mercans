@@ -1,4 +1,4 @@
-# Colombia Statutory Report Specifications - seven Report Specs (v1.2; CO-DIAN-002 and CO-PILA-007 v1.1)
+# Colombia Statutory Report Specifications - seven Report Specs (CO-DIAN-004 v1.3; CO-DIAN-002 and CO-PILA-007 v1.1; the others v1.2)
 
 Every sheet of the seven delivered Colombia report specifications (Version Control, Report Matrix, Payroll Scope Summary, the field spec, File Structure, Field Options, Population Rules, Example Analysis, Sample File): electronic payroll, Form 350, PILA employees, Form 220, Format 2276, annual severance-savings deposit and PILA pensioners.
 
@@ -10,7 +10,7 @@ Every sheet of the seven delivered Colombia report specifications (Version Contr
 | `specs/CO-DIAN-001-NominaElectronica-Spec.xlsx (v1.2)` | 248,711 | `7cfd6c3e348a4e902ab9a25287f7f88f` |
 | `specs/CO-DIAN-002-Formulario350-Spec.xlsx (v1.1)` | 202,318 | `97e1fae0ae350553568ef432d096b1b2` |
 | `specs/CO-PILA-003-AportesSeguridadSocial-Spec.xlsx (v1.2)` | 245,409 | `ecd9b7131696ff7b1edf008fd2edbd7c` |
-| `specs/CO-DIAN-004-Formulario220-Spec.xlsx (v1.2)` | 206,576 | `ff2f90b8e6e20dd83b17ae64e48cb8f1` |
+| `specs/CO-DIAN-004-Formulario220-Spec.xlsx (v1.3)` | 206,996 | `52af10ae69042e6a2188731a89ff8198` |
 | `specs/CO-DIAN-005-Formato2276-Spec.xlsx (v1.2)` | 203,983 | `5c9c306d8e4aedd4ac5f192902ca385d` |
 | `specs/CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx (v1.2)` | 213,102 | `08db9ccdcde0ee68c6f24c17bf8aead9` |
 | `specs/CO-PILA-007-AportesPensionados-Spec.xlsx (v1.1)` | 56,759 | `eae9a7955d23ddea574503de6b573243` |
@@ -20,8 +20,8 @@ This file is a complete, verbatim conversion of the artifacts above (python-docx
 
 ## Reading notes (added at compilation, 2026-11-02)
 
-The seven filings (five specs at version 1.2, issued 2026-11-02; CO-DIAN-002 and CO-PILA-007 at version 1.1, issued
-2026-10-30):
+The seven filings (CO-DIAN-004 at version 1.3 and four specs at version 1.2, issued 2026-11-02; CO-DIAN-002 and CO-PILA-007
+at version 1.1, issued 2026-10-30):
 
 | Spec ID | Filing | Authority / channel | Frequency | Deadline |
 |---|---|---|---|---|
@@ -45,6 +45,8 @@ The seven filings (five specs at version 1.2, issued 2026-11-02; CO-DIAN-002 and
   average 12,000,000 in the examples; PILA occupational-risk rate T2R2-061 as a decimal with a point (0.0052200) (CO-PILA-003);
   CO-DIAN-001 NIE066-NIE068 (bank, account type, account number) populated for the account-crediting payment methods 42, 45,
   47 and 98 (48 / 49 only for a card linked to a salary account), the same list as the DD Payment Method mapper.
+- Version 1.3 of CO-DIAN-004 (2026-11-02, text only): the non-withholding of severance savings for non-residents cites
+  Constitutional Court C-397 de 1994 and DIAN Concepto 577 de 2020 (Report Matrix row 34, Example Analysis row 34).
 
 
 ## Navigation index
@@ -53,76 +55,76 @@ Read with `offset` / `limit` rather than opening the whole file.
 
 | Line | Section |
 |---|---|
-| 131 | CO-DIAN-001 - `CO-DIAN-001-NominaElectronica-Spec.xlsx` (version 1.2) |
-| 133 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 146 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 192 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 246 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Nomina Electronica Spec |
-| 478 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 627 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 749 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 790 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 845 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
-| 1023 | CO-DIAN-002 - `CO-DIAN-002-Formulario350-Spec.xlsx` (version 1.1) |
-| 1025 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 1037 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 1084 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 1136 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Formulario 350 Spec |
-| 1211 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 1258 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 1336 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 1371 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 1417 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
-| 1536 | CO-PILA-003 - `CO-PILA-003-AportesSeguridadSocial-Spec.xlsx` (version 1.2) |
-| 1538 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 1551 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 1598 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 1652 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: PILA Spec |
-| 1829 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 1887 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 2081 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 2117 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 2166 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
-| 2302 | CO-DIAN-004 - `CO-DIAN-004-Formulario220-Spec.xlsx` (version 1.2) |
-| 2304 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 2317 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 2363 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 2416 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Formulario 220 Spec |
-| 2497 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 2536 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 2580 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 2615 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 2659 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
-| 2813 | CO-DIAN-005 - `CO-DIAN-005-Formato2276-Spec.xlsx` (version 1.2) |
-| 2815 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 2828 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 2876 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 2931 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Formato 2276 Spec |
-| 2987 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 3026 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 3083 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 3120 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 3164 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
-| 3272 | CO-CESANTIAS-006 - `CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx` (version 1.2) |
-| 3274 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 3287 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 3334 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 3390 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Consignacion Cesantias Spec |
-| 3442 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 3510 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 3567 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 3594 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 3637 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
-| 3786 | CO-PILA-007 - `CO-PILA-007-AportesPensionados-Spec.xlsx` (version 1.1) |
-| 3788 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
-| 3800 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
-| 3843 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
-| 3872 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: PILA Pensioners Spec |
-| 4003 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
-| 4037 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
-| 4121 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
-| 4146 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
-| 4173 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 133 | CO-DIAN-001 - `CO-DIAN-001-NominaElectronica-Spec.xlsx` (version 1.2) |
+| 135 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 148 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 194 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 248 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Nomina Electronica Spec |
+| 480 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 629 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 751 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 792 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 847 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 1025 | CO-DIAN-002 - `CO-DIAN-002-Formulario350-Spec.xlsx` (version 1.1) |
+| 1027 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 1039 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 1086 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 1138 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Formulario 350 Spec |
+| 1213 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 1260 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 1338 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 1373 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 1419 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 1538 | CO-PILA-003 - `CO-PILA-003-AportesSeguridadSocial-Spec.xlsx` (version 1.2) |
+| 1540 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 1553 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 1600 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 1654 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: PILA Spec |
+| 1831 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 1889 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 2083 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 2119 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 2168 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 2304 | CO-DIAN-004 - `CO-DIAN-004-Formulario220-Spec.xlsx` (version 1.3) |
+| 2306 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 2320 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 2366 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 2419 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Formulario 220 Spec |
+| 2500 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 2539 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 2583 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 2618 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 2662 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 2816 | CO-DIAN-005 - `CO-DIAN-005-Formato2276-Spec.xlsx` (version 1.2) |
+| 2818 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 2831 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 2879 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 2934 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Formato 2276 Spec |
+| 2990 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 3029 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 3086 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 3123 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 3167 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 3275 | CO-CESANTIAS-006 - `CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx` (version 1.2) |
+| 3277 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 3290 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 3337 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 3393 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Consignacion Cesantias Spec |
+| 3445 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 3513 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 3570 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 3597 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 3640 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
+| 3789 | CO-PILA-007 - `CO-PILA-007-AportesPensionados-Spec.xlsx` (version 1.1) |
+| 3791 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Version Control |
+| 3803 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Report Matrix |
+| 3846 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Payroll Scope Summary |
+| 3875 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: PILA Pensioners Spec |
+| 4006 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: File Structure |
+| 4040 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Field Options |
+| 4124 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Population Rules |
+| 4149 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Example Analysis |
+| 4176 | &nbsp;&nbsp;&nbsp;&nbsp;Sheet: Sample File |
 
 ---
 
@@ -2299,7 +2301,7 @@ neither produces nor validates them - but the ENGINE MUST PARSE THEM from
 the settlement response in order to reconcile, capture the return number  
 and payment date, and detect rejected contributor records.  
 
-## CO-DIAN-004 - `CO-DIAN-004-Formulario220-Spec.xlsx` (version 1.2)
+## CO-DIAN-004 - `CO-DIAN-004-Formulario220-Spec.xlsx` (version 1.3)
 
 ### Sheet: Version Control
 
@@ -2312,6 +2314,7 @@ Annual Certificate of Income and Withholding on Work and Pension Income - Form 2
 | 13 | 1.0 | 2026-10-16 | Initial version. | Approved | Wallisson Gomes |
 | 14 | 1.1 | 2026-10-30 | Statutory validation of the specification: gross income total 169,440,000 and the non-resident variant (20% = 33,888,000); casilla 59 six-month average 13,000,000 with a note on its composition; annual withholding 12 x 617,232 approximated to the nearest 1,000. | Approved | Wallisson Gomes |
 | 15 | 1.2 | 2026-11-02 | Statutory validation, second pass: casilla 59 six-month average 12,000,000 (the six months of the year before the deposit, salary only); severance savings and their interest not withheld for non-residents (non-resident variant 20% x 156,000,000 = 31,200,000); the 790-UVT and 1,340-UVT caps tracked year-to-date (Field Options). Released 2026-11-02 — approved by Wallisson Gomes. | Approved | Wallisson Gomes |
+| 16 | 1.3 | 2026-11-02 | Statutory validation, third pass (text only, no value changes): legal basis of the non-withholding of severance savings and their interest for non-residents (Corte Constitucional C-397 de 1994; DIAN Concepto 577 de 2020) in the Report Matrix and the Example Analysis. Released 2026-11-02 — approved by Wallisson Gomes. | Approved | Wallisson Gomes |
 
 
 ### Sheet: Report Matrix
@@ -2335,7 +2338,7 @@ ANNUAL CERTIFICATE OF INCOME AND WITHHOLDING ON WORK AND PENSION INCOME - FORM 2
 | 16 | File Extension | N/A - nothing is transmitted; the certificate is delivered on paper or electronically as agreed with the employee |
 | 17 | Character Encoding | N/A |
 | 18 | Record Types / Sections | No record types - a logical model of casillas grouped in the form's sections (see File Structure) |
-| 19 | Version | v1.2 |
+| 19 | Version | v1.3 |
 | 22 | DETAILED COMPLIANCE NOTES (Colombia-specific) |  |
 | 23 | SUBMISSION CHANNEL |  |
 | 24 | - Channel: paper or electronic delivery TO THE EMPLOYEE \| Portal: none - this artefact is NOT submitted to any authority \| Source: ET arts. 378-380 and the form's own instruction guide, which addresses only the issuing of the certificate. |  |
@@ -2348,7 +2351,7 @@ ANNUAL CERTIFICATE OF INCOME AND WITHHOLDING ON WORK AND PENSION INCOME - FORM 2
 | 31 | RESIDENT / NON-RESIDENT TREATMENT |  |
 | 32 | - RESIDENT: casilla 60 carries the ET art. 383 progressive-table withholding for the year, and casillas 53 to 58 carry the contributions and voluntary savings that depurated the base. The employee may then use the certificate in place of a return under ET art. 380. |  |
 | 33 | - NON-RESIDENT: the same certificate is issued, but casilla 60 carries the FLAT 20% of ET art. 408 applied to the GROSS - so casilla 52 (total gross income) and the withholding in casilla 60 stand in a simple 20% relationship, with NO depuration visible. The contributions in casillas 53 and 54 are still reported because they were still deducted, but they did NOT reduce the withholding base. |  |
-| 34 | - Severance savings and their interest (casillas 47 to 49) are never withheld, for residents and non-residents alike (Ley 100 de 1993 art. 135 par. 3; DUR 1625 de 2016 art. 1.2.4.1.11), so the six-month average of casilla 59 has no effect on casilla 60. For a non-resident it is reported for completeness; the art. 206 num. 4 exemption is applied, if at all, in the employee's own return (an interpretation). |  |
+| 34 | - Severance savings and their interest (casillas 47 to 49) are never withheld, for residents and non-residents alike (Ley 100 de 1993 art. 135 par. 3, extended to every payer by Corte Constitucional C-397 de 1994; DUR 1625 de 2016 art. 1.2.4.1.11), so the six-month average of casilla 59 has no effect on casilla 60. For a non-resident it is reported for completeness; the art. 206 num. 4 exemption is applied, if at all, in the employee's own return (DIAN Concepto 577 de 2020: a non-resident who must file applies ET art. 26 together with arts. 178 and 235-2, which keeps the art. 206 exemptions). |  |
 | 35 | - An employee who ACQUIRES RESIDENCE mid-year receives ONE certificate covering the whole period, with casilla 60 carrying the sum of the 20% months and the art. 383 months. The certificate does not disclose the split; the employee reconciles on their own return. The engine should retain the split internally for audit. |  |
 | 36 | - The employee's own annual return - Form 110 - is outside the scope of this specification: the employer's duty ends with this certificate. |  |
 | 37 | RELATED FILINGS / CROSS-REFERENCES |  |
@@ -2649,7 +2652,7 @@ EXAMPLE ANALYSIS - SAMPLE RECORD PARSED FIELD BY FIELD
 | 31 | (unsigned) | Certificacion ET art. 380 | Six declarations on gross wealth below 4,500 UVT, gross income and consumption below 1,400 UVT, and non-VAT-responsible status. | DISPLAY-ONLY on the form. Where all six hold and the employee signs, the certificate substitutes for the income-tax return 'para todos los efectos legales'. |
 | 32 | **═══ NON-RESIDENT CONTRAST ═══** |  |  |  |
 | 33 | 169.440.000 / 31.200.000 | Casilla 52 / Casilla 60 for a NON-RESIDENT | The same gross income; the flat 20% of ET art. 408 applies to all of it except the severance savings and interest of casillas 47 and 49 (never withheld, Ley 100 de 1993 art. 135 par. 3): 20% x 156,000,000 = COP 31,200,000. | About four times (31,200,000 / 7,407,000 = 4.21) the resident's COP 7,407,000. Casillas 53 and 54 still report the contributions actually deducted, but they did NOT reduce the base - art. 408 taxes the gross. |
-| 34 | 12.000.000 | Casilla 59 for a NON-RESIDENT | Reported, but of no effect. | Severance savings and their interest are not withheld for a non-resident either (Ley 100 de 1993 art. 135 par. 3; DUR 1625 de 2016 art. 1.2.4.1.11); the art. 206 num. 4 exemption is applied, if at all, in the employee's own return (an interpretation). |
+| 34 | 12.000.000 | Casilla 59 for a NON-RESIDENT | Reported, but of no effect. | Severance savings and their interest are not withheld for a non-resident either (Ley 100 de 1993 art. 135 par. 3, extended to every payer by Corte Constitucional C-397 de 1994; DUR 1625 de 2016 art. 1.2.4.1.11); the art. 206 num. 4 exemption is applied, if at all, in the employee's own return (DIAN Concepto 577 de 2020: a non-resident who must file applies ET art. 26 together with arts. 178 and 235-2, which keeps the art. 206 exemptions). |
 | 35 | **═══ CROSS-REPORT RECONCILIATION FROM THIS CERTIFICATE ═══** |  |  |  |
 | 36 | 7.407.000 | Equals 12 x electronic payroll NIE177 (7,406,784), approximated to the nearest 1,000 | Annual withholding for this employee. | Reconcile on unrounded values with a tolerance - the two artefacts round differently. |
 | 37 | 12.000.000 | Equals CO-CESANTIAS-006 deposit | Casilla 49 equals the fund deposit made in the tax year (by 14 February 2026). | Late deposit costs ONE DAY'S SALARY PER DAY OF DELAY, per employee, uncapped - so this reconciliation has a direct financial consequence. |

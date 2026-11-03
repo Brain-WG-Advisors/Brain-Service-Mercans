@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.4.0",
+  "artifact": "SCOPE",
+  "round": 1,
+  "verdict": "FAIL",
+  "reviewed_on": "2026-11-02",
+  "_reviewed_file": "scope_manifest.json md5 17ad1d6831925b17d2872ed27163a761 (2,473 bytes, dated 2026-10-29); build-manifest.json scope units md5 efb607e90e7f14d61163504fbe40c1e8 before the r1 fixes, 04633ca41bd4e7ef2792f3ed34b02ef1 after",
+  "_reviewer": "compliance-qa-auditor (fresh instance; built no part of the scope manifest, the build-manifest or the CCG)",
+  "_built_by": "nobody: scope_manifest.json is the unfilled seed copied from shared/scope_manifest_template.json at scaffold time (SKELETON-MANIFEST.md line 32: 'agent 3 fills at stage 2'). The v2.12 script (L803-807) assigns it to the Stage 1 CCG builder, and the US run never produced it.",
+  "_ground_truth": "00-official-sources/MANDATE.md md5 1f4ffae0d32598294edda20629063cef (sealed 2026-11-02); 01-ccg/US-CCG-001-v1.0.docx md5 dc445c19c9ee180f1a48267976267ac8 (qa_pass per _qa/CCG-review-r3e.json, whose own md5 is ace9b5bf17ea05ee3d142cfc49efeb1f; the md5 dc445c19 quoted in the invocation belongs to the CCG docx, not to the review file); legal-basis-register.csv 2,668 rows",
+  "_summary": "scope_manifest.json is semantically identical to shared/scope_manifest_template.json (the JSON diff is empty): every field is empty or a template placeholder. Stage 2 Scope Lock-In therefore FAILS checks 2, 3, 6, 7 and 8. Checks 4 and 5 pass only because there is nothing to check, and there is nothing to lock in. The premise 'verify-only, no builder step' does not hold: the manifest must be built (artifact-builder) from the sealed MANDATE, the build-manifest and the CCG before Stage 2 can pass. Separately from the empty file, the scope sources were checked against each other. The CCG counts are right: 13 modules m01..m13, 53 annexes = FED + MULTI + 51, and C40 has 18/18 rows answered. The tier verdict is byte-identical in build-manifest, MANDATE, SKELETON-MANIFEST and CCG m01, and so are the 21 domain tiers. The contractor / 1099-NEC exclusion [US-OWN-008] reads the same in MANDATE line 22, build-manifest _scope.workers, the CCG front matter, m01 1.0, m06 T57r5, annex FED and 32 annexes (MD..WY). Two build-manifest scope strings were stale against the sealed MANDATE and were fixed in place, and the oracle register ids gained US-FED-027. Still open: three scope-wording drifts (the bare annex rows in AL..CT; the US-OWN-005 deferral missing from CCG m11.3 and m01; the open owner flag on prevailing wage in US-MQ-07) and an under-filled consumed_by on US-OWN-008.",
+  "findings": [
+    {
+      "pattern": "F15",
+      "severity": "blocker",
+      "pass": "P1",
+      "check_id": "C29",
+      "location": "scope_manifest.json!whole file!lines 1-95",
+      "problem": "The file is the unfilled template. country, country_code, year, currency, scope_decided_by and scope_decided_on are ''. package.issue_date is the placeholder 'YYYY-MM-DD'. oracle.type is the placeholder 'engine | official_examples', oracle.name and oracle.publisher are '', and source_url is 'https://...'. employment_types.in_scope, out_of_scope and rationale are empty. authority_filings.in_scope[0] has empty filing_id/authority/frequency/format and integration_type 'outbound | inbound | both'. authority_filings.out_of_scope[0] has empty filing_id/descoping_reason. wage_type_categories, all five option_mapper_scope lists and integrations.outbound/inbound/both are empty. known_failure_patterns_to_check lists only F1-F8. Stage 2 checks: 1 PASS, 2 FAIL, 3 FAIL, 4 and 5 pass only because there is nothing to check, 6 FAIL (F9-F15 missing), 7 FAIL, 8 FAIL. The template placeholders are residual markers (C29). Nothing is locked in, so every downstream stage (RSPEC C18/C44, WTC, DD, SIR) would read an empty scope.",
+      "expected": "artifact-builder builds scope_manifest.json from the sealed MANDATE.md, build-manifest.json and the CCG, and every scope statement carries its register_id. Required content: country 'United States of America', country_code 'US', year 2026, currency 'USD'. package {version '1.0', issue_date '2027-03-31'}, identical to build-manifest.package (planning placeholder as recorded there). oracle copied from build-manifest.oracle (type official_examples, IRS Pub. 15-T 2026, publisher Internal Revenue Service, https://www.irs.gov/publications/p15t, suite_dir _validation, register ids US-FED-027, US-FED-001, US-FED-021). scope_decided_by/on per the owner rows (2026-10-29 US-OWN-008, 2026-10-30 US-OWN-005). employment_types.in_scope = common-law employees of private-sector employers at the federal layer, incl. ordinary, NRA, statutory, household, agricultural, clergy and employees abroad [US-OWN-005]. employment_types.out_of_scope = independent contractors / Form 1099-NEC [US-OWN-008], plus state-level special-population rules (deferred round) [US-OWN-005]. rationale in the same words as CCG m01 1.0 'Scope of this guide'. Jurisdictions in scope = FED + MULTI + 50 States + DC (owner 2026-10-29; single package US-OWN-003). Territories (PR, GU, VI, AS, MP) are out (MANDATE sdi_tdi_pfml row '+PR, out of scope'). authority_filings.in_scope = the federal returns (941/944, 940, 943, Schedule H routing, W-2/W-3 via EFW2, 1042-S for treaty-exempt NRA wages) plus the per-jurisdiction withholding, reconciliation, SUI and local returns and new-hire reports from CCG m10 10.1 and each annex's reporting section. Each in-scope filing has integration_type 'outbound' via the third-party provider hand-off and product_mapping_required true. authority_filings.out_of_scope, each with a descoping_reason: Form 1099-NEC / 1099 series [US-OWN-008], NH Business Enterprise Tax [US-OWN-007], PR TDI. integrations.inbound = documents HRB must act on (IRS lock-in letters, child-support IWO/e-IWO [US-FEDS5-014, US-FEDS5-028], SUI rate notices), each with product_mapping_required true (F8). wage_type_categories and option_mapper_scope from CCG m02/m04/m07 (SSN/ITIN, etc.), re-checked against the WTC once it exists. known_failure_patterns_to_check at least F1-F15. The tier verdict copied verbatim (SKELETON-MANIFEST.md line 9 obligation). Then auditor round 2, which writes 07-qa-crosscheck/scope_validation.md with the B7 decision table.",
+      "register_id": null,
+      "action": "routed_to_builder",
+      "evidence": "Python JSON diff of scope_manifest.json against C:/Users/instituto/mercans-pipeline/shared/scope_manifest_template.json: empty. Stage 2 checks 1-8 re-implemented from mercans_pipeline_v2_12.sh L1008-1036 and run (scratchpad s2.py)."
+    },
+    {
+      "pattern": "F24",
+      "severity": "major",
+      "pass": "P4",
+      "location": "00-official-sources/MANDATE.md!Q7 Collective agreements (US-MQ-07) Answer!line 239",
+      "problem": "The sealed mandate says 'prevailing wage OUT OF SCOPE except as an optional flag for covered public-works contracts (owner to confirm the flag)'. No US-OWN row records that confirmation, and the CCG does not carry the out-of-scope tag. Instead it models prevailing wage as an in-scope overlay with facts: m04 'Prevailing-wage overlay' (Davis-Bacon USD 2,000, weekly certified payroll [US-FEDS5-027]), m10 10.1 (certified payroll on public works, CA eCPR), FED.10 and every annex section 10 (e.g. tn.prevailing_wage.unskilled_laborer.hourly 23.52). The scope of prevailing wage is therefore undecided, and MANDATE and CCG word it differently. Stage 2 cannot lock it.",
+      "expected": "An owner decision row, e.g. US-OWN-009, recorded by the owner or by the build lead under the 2026-11-01 delegation (as for US-OWN-006/007). Example wording: 'Prevailing wage: optional per-employee/contract flag, in scope as an overlay where the flag is set; certified-payroll reports (WH-347, CA eCPR) in/out of scope'. The same words then go into MANDATE US-MQ-07, scope_manifest.json (wage_type_categories.special_rules and authority_filings) and CCG m01/m04/FED.10.",
+      "register_id": "US-FED-019",
+      "action": "routed_to_builder",
+      "evidence": "MANDATE.md line 239; CCG dump lines 619, 1616, 2517-2521, 10465 (python-docx body dump, US-CCG-001-v1.0.docx md5 dc445c19)",
+      "_route_note": "The builder cannot write this until a decision exists: the orchestrator puts the question to the owner or records the build-lead decision, then the builder writes it into scope_manifest.json and the CCG."
+    },
+    {
+      "pattern": "F24",
+      "severity": "major",
+      "pass": "P4",
+      "location": "01-ccg/US-CCG-001-v1.0.docx!Module 11 11.3 Population Coverage Matrix!first paragraph (dump line 1775); also Module 1 1.0 'Scope of this guide' (dump line 38)",
+      "problem": "US-OWN-005 (active) puts all populations IN for the federal layer and defers 'state-level rules for special populations in a separate round after the mandate is sealed'. CCG m11.3 says 'all populations are in scope, owner decision US-OWN-005' with no layer qualifier and no deferral. m01 says 'in scope at the federal layer' but leaves out the deferral. MANDATE US-MQ-12 states the deferral as a scope statement. A reader of m11.3, including the downstream DD/WTC builders, can take state-level special-population treatment as covered.",
+      "expected": "Same words in m01 1.0, m11.3 and scope_manifest.json: 'All special employee populations are in scope at the federal layer (owner decision US-OWN-005); State-level rules for special populations are deferred to a later round (US-OWN-005).'",
+      "register_id": "US-OWN-005",
+      "action": "routed_to_builder"
+    },
+    {
+      "pattern": "F3",
+      "severity": "minor",
+      "pass": "P4",
+      "location": "01-ccg/US-CCG-001-v1.0.docx!Annex AL/AR/AZ/CA/CO/CT scope tables!T226r6, T243r6, T259r6, T277r6, T295r6, T310r6",
+      "problem": "Six annexes state the contractor exclusion as a bare 'Contractor pay | Out of scope', with no register id and no owner attribution. Annex FED, m01, m06 T57r5 and the 32 annexes MD..WY use 'Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]'. Fifteen annexes (MULTI, AK, DC, DE, FL, GA, HI, IA, ID, IL, IN, KS, KY, LA, MA) carry no statement at all. That is acceptable because m01 governs, but the six bare rows are a classification with no basis.",
+      "expected": "T226r6..T310r6 read 'Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]', the wording used everywhere else. Rebuild with regression_guard before run close.",
+      "register_id": "US-OWN-008",
+      "action": "routed_to_builder"
+    },
+    {
+      "pattern": null,
+      "severity": "minor",
+      "pass": "P5",
+      "location": "00-official-sources/legal-basis-register.csv!row US-OWN-008!consumed_by",
+      "problem": "consumed_by leaves out SCOPE and CCG/annex_AL, annex_AR, annex_AZ, annex_CA, annex_CO and annex_CT, which carry the decision (see the previous finding). It also contains a range token 'CCG/annex_NY..WY (17 annexes)' that duplicates the individual annex entries and cannot be parsed as an artifact/unit id. The next change to this decision would therefore propagate blind to six annexes and to the scope manifest.",
+      "expected": "consumed_by = MANDATE;SCOPE;CCG/m01_foundational;CCG/m06_tax;CCG/annex_FED;CCG/annex_AL;CCG/annex_AR;CCG/annex_AZ;CCG/annex_CA;CCG/annex_CO;CCG/annex_CT;CCG/annex_MD ... CCG/annex_WY (one entry per annex, no range token).",
+      "register_id": "US-OWN-008",
+      "action": "routed_to_source_hunter"
+    },
+    {
+      "pattern": null,
+      "severity": "minor",
+      "pass": "P4",
+      "location": "_pipeline/build-manifest.json!_scope!workers, filing_channel (lines 19-20)",
+      "problem": "Both strings were stale against the sealed MANDATE. workers said 'special populations pending US-MQ-12', but US-MQ-12 was answered on 2026-10-30 (US-OWN-005). filing_channel said 'Authorisation instruments pending US-MQ-09', but US-MQ-09 was answered on 2026-10-30 (US-FED-008/028). MANDATE.md lines 22-23 already carried the answered wording.",
+      "expected": "workers: '... [US-OWN-008]; special populations: US-MQ-12 answered (owner, US-OWN-005: all populations IN at the federal layer; state-level special-population rules deferred to a later round)'. filing_channel: '... Authorisation instruments: US-MQ-09 answered 2026-10-30 (Form 8655 / Rev. Proc. 2012-32, employer keeps liability [US-FED-008, US-FED-028]; provider choice outside this build, owner 2026-10-29).' Applied, changelog entry added, and build-manifest re-validated PASS.",
+      "register_id": "US-OWN-005",
+      "action": "fixed_in_place"
+    },
+    {
+      "pattern": null,
+      "severity": "minor",
+      "pass": "P2",
+      "location": "_pipeline/build-manifest.json!oracle!_register_ids",
+      "problem": "oracle._register_ids listed only US-FED-001 and US-FED-021. The oracle answer (MANDATE US-MQ-08) and oracle.notes rest on US-FED-027, the primary row (Pub. 15-T 2026 PDF: NRA 300 + 226.90 = 526.90 -> 31; tribal 6,000 -> 584.09).",
+      "expected": "_register_ids = [US-FED-027, US-FED-001, US-FED-021] (all active; A.2, A.2, A.3). Applied.",
+      "register_id": "US-FED-027",
+      "action": "fixed_in_place"
+    }
+  ],
+  "checks_run": [
+    "C29",
+    "C40",
+    "C42",
+    "C43",
+    "C44"
+  ],
+  "_checks_results": {
+    "Stage2_check1_valid_json": "PASS",
+    "Stage2_check2_sections": "FAIL (7 empty sections)",
+    "Stage2_check3_filing_fields": "FAIL",
+    "Stage2_check4_inbound_pmr": "passes only because there are 0 inbound entries",
+    "Stage2_check5_mapper_overlap": "passes only because all mappers are empty",
+    "Stage2_check6_F1_F15": "FAIL (F9-F15 missing)",
+    "Stage2_check7_oracle": "FAIL in scope_manifest (placeholder); PASS in build-manifest.oracle",
+    "Stage2_check8_package": "FAIL (issue_date 'YYYY-MM-DD')",
+    "C29": "FAIL: template placeholders in scope_manifest.json. MANDATE.md hits only in dated history lines 1596-1597 (the TODO there was already replaced).",
+    "C40": "PASS {'rows': 18, 'answered': 18, 'not_applicable': 0}",
+    "C42": "PASS hits 0",
+    "C43": "PASS package_version 1.0 (checks the version only, not issue_date)",
+    "C44": "SKIP 'no in-scope filing with a spec to compare'. It skipped only because scope_manifest has no filings; re-run at RSPEC close.",
+    "build_manifest_schema": "PASS after the fixes (validate_contract.py build-manifest, jsonschema 4.26.0)"
+  },
+  "manual_review_items": [
+    "Stage 2 checks 1-8 exist only as prompt text in mercans_pipeline_v2_12.sh L992-1036 (a claude -p prompt), not as a deterministic block. Re-implemented by hand this round (scratchpad s2.py); see _checks_results.",
+    "C5 (classification cites the establishing article) is not implemented in the script (L3). Run by hand on the scope statements: 6 annex rows 'Contractor pay | Out of scope' cite nothing (finding 4); every other contractor-scope sentence cites US-OWN-008.",
+    "C6 (file format verified against source) and C7 (population-rules depth) do not apply to SCOPE this round because the manifest has no filings or formats. Run C6 again once scope_manifest.authority_filings[].format is filled.",
+    "B7 decision table (07-qa-crosscheck/scope_validation.md) not written: the manifest has no scope decisions to tabulate. Write it at round 2.",
+    "QA_METHODOLOGY Stage 2 DoD: wage_type_categories / option_mapper_scope against the WTC's real numbers. The WTC is not built (status researched); re-open at WTC close.",
+    "Invocation premise: 'verify-only: no builder step' for Stage 2. The script assigns the manifest to the Stage 1 CCG agent (L803-807) and the US skeleton assigns it to 'agent 3 at stage 2'. Neither happened, so the SCOPE artifact needs a builder step."
+  ],
+  "propagation": [
+    {
+      "fact": "scope.workers.special_populations",
+      "consumed_by": [
+        "SCOPE",
+        "CCG/m01_foundational",
+        "CCG/m11_advanced",
+        "DD",
+        "WTC"
+      ],
+      "resynced": false,
+      "register_id": "US-OWN-005"
+    },
+    {
+      "fact": "scope.workers.contractors_out",
+      "consumed_by": [
+        "SCOPE",
+        "CCG/annex_AL",
+        "CCG/annex_AR",
+        "CCG/annex_AZ",
+        "CCG/annex_CA",
+        "CCG/annex_CO",
+        "CCG/annex_CT",
+        "RSPEC",
+        "SIR"
+      ],
+      "resynced": false,
+      "register_id": "US-OWN-008"
+    },
+    {
+      "fact": "scope.filing_channel.authorisation",
+      "consumed_by": [
+        "SCOPE",
+        "SIR/third_party_provider_handoff",
+        "RSPEC"
+      ],
+      "resynced": false,
+      "register_id": "US-FED-008"
+    },
+    {
+      "fact": "oracle.federal.register_ids",
+      "consumed_by": [
+        "SCOPE",
+        "CCG/m12_worked_examples"
+      ],
+      "resynced": false,
+      "register_id": "US-FED-027"
+    },
+    {
+      "fact": "scope.prevailing_wage.flag",
+      "consumed_by": [
+        "SCOPE",
+        "CCG/m04_compensation",
+        "CCG/m10_reporting",
+        "CCG/annex_FED",
+        "DD",
+        "WTC",
+        "RSPEC"
+      ],
+      "resynced": false,
+      "register_id": "US-FED-019"
+    }
+  ],
+  "cross_checks": [
+    {
+      "name": "CCG structure counts",
+      "result": "pass",
+      "note": "13 Heading-1 modules m01..m13; 53 annexes (FED, MULTI and 51 USPS codes incl. DC) in the docx and in build-manifest artifacts[CCG].units; coverage matrix 18 rows, all answered (C40)."
+    },
+    {
+      "name": "Tier verdict identical (P4.3)",
+      "result": "pass",
+      "note": "build-manifest tier.rationale, the MANDATE '> Overall T4' quote, CCG m01 'Rationale (verbatim)' and SKELETON-MANIFEST are identical (3,373 chars each). The 21 domain tiers in CCG T3 match build-manifest. scope_manifest.json does not carry the verdict yet (finding 1)."
+    },
+    {
+      "name": "Contractor / 1099-NEC exclusion (US-OWN-008) identical",
+      "result": "fail",
+      "note": "Identical in MANDATE L22, build-manifest _scope.workers, the CCG front matter, m01, m06 T57r5, annex FED T175r6 and annexes MD..WY. Bare 'Out of scope' in AL..CT (finding 4); absent from scope_manifest (finding 1)."
+    },
+    {
+      "name": "Owner decisions US-OWN-001..007 vs scope sources",
+      "result": "fail",
+      "note": "001 (no validation_exemptions): consistent, build-manifest has no validation_exemptions. 002 (waves) and 004 (run authorisation): process decisions with no scope text. 003 (single package): build-manifest.package is a single 1.0. 005: deferral missing from CCG m11.3/m01 (finding 3); build-manifest fixed (finding 6). 006 (language): consistent, 71 CCG citations and build-manifest languages en with es seams. 007 (levies): transit OR/NY only and NH BET excluded, consistent in MANDATE and build-manifest; still to be written into scope_manifest out_of_scope."
+    },
+    {
+      "name": "Stage 2 Scope Lock-In (checks 1-8)",
+      "result": "fail",
+      "note": "See _checks_results."
+    },
+    {
+      "name": "scope_manifest wage_type_categories / option_mapper_scope vs WTC",
+      "result": "not_applicable",
+      "note": "WTC not built; fires at WTC close."
+    }
+  ],
+  "numeric_verification": {
+    "facts_total": 0,
+    "facts_verified": 0,
+    "unverified_keys": [],
+    "method": "scope_manifest.json carries no numeric fact (empty template). The three build-manifest edits change no figure. The cited rows US-OWN-005, US-FED-008, US-FED-027 (active, A.2) and US-FED-028 (active, A.3) were confirmed in legal-basis-register.csv. Round 2 must count every number the built manifest carries."
+  },
+  "_next_action": "FAIL round 1. (1) Orchestrator: get the prevailing-wage flag decision (from the owner, or from the build lead under the 2026-11-01 delegation) and register it as an owner row. (2) artifact-builder: build scope_manifest.json per finding 1, with the US-OWN-005 deferral and the prevailing-wage decision in the same words; fix the CCG m01/m11.3 wording (finding 3) and the annex AL..CT rows (finding 4); rebuild with regression_guard. (3) compliance-source-hunter: fill US-OWN-008 consumed_by (finding 5) and add SCOPE to US-OWN-005/007 consumed_by. (4) compliance-qa-auditor: round 2 on SCOPE (Stage 2 checks 1-8, B7 table, P4.3 wording diff). RSPEC must not start until SCOPE passes."
+}

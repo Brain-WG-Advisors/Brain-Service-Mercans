@@ -14,8 +14,11 @@ import glob
 import json
 import os
 import re
+import sys
 
 BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.join(BASE, "01-ccg", "_build", "common"))
+import ccg_common as CC  # noqa: E402  round 2: aliases, [[GAP:]] tags, internal paths, percent tags
 RES = os.path.join(BASE, "_research")
 
 FACTS = {}
@@ -47,12 +50,16 @@ def set_unit(unit):
 
 def _pick(key, on=None):
     if key not in FACTS:
+        key = CC.alias(key)
+    if key not in FACTS:
         raise KeyError(f"fact key not found: {key}")
     fs = FACTS[key]
     # de-duplicate identical value+period copies held in two files (one key, one value)
     uniq = []
     for f in fs:
-        sig = (json.dumps(f["value"], sort_keys=True), f.get("effective_from"), f.get("effective_to"))
+        # round 2: identity = value + effective_from (alias merge left the same fact in two files
+        # with a closed and an open effective_to)
+        sig = (json.dumps(f["value"], sort_keys=True), f.get("effective_from"))
         if sig not in [u[0] for u in uniq]:
             uniq.append((sig, f))
     fs = [u[1] for u in uniq]
@@ -160,7 +167,7 @@ def UNR(key, text=None):
     UNRES_USED.append((STATE["unit"], STATE["loc"], key, blk, u["_file"]))
     label = "blocking" if blk else "non-blocking"
     why = text or u["why"]
-    return f"⚠️ RESEARCH-GAP ({label}): {why} (open item `{key}` in {u['_file']}; closes with: {u['what_would_close_it']})"
+    return f"⚠️ RESEARCH-GAP [[GAPKEY:{key}]] ({label}): {why} (open item `{key}`; closes with: {u['what_would_close_it']})"
 
 
 def GAP(key, text, question, why_blocking, domain, tier="A.2", blocking=False, attempted=None, shape=None,
@@ -178,7 +185,7 @@ def GAP(key, text, question, why_blocking, domain, tier="A.2", blocking=False, a
             break
     else:
         GAPS.append(g)
-    return f"⚠️ RESEARCH-GAP ({label}): {text} (request key `{key}`)"
+    return f"⚠️ RESEARCH-GAP [[GAPKEY:{key}]] ({label}): {text} (request key `{key}`)"
 
 
 def MAN(*path):
@@ -201,6 +208,48 @@ def dump_state(unit, outdir):
 def write_module(unit, text):
     path = os.path.join(BASE, "01-ccg", "modules", f"{unit}.md")
     text = re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
+    text = CC.finalize(f"{unit}.md", text)
     open(path, "w", encoding="utf-8", newline="\n").write(text)
     dump_state(unit, os.path.join(os.path.dirname(__file__), "state"))
     return path
+
+
+# ---------------------------------------------------------------- round 3 (QA r2 C31, NRA FICA)
+_NRA_FICA_RX = re.compile(r"^fed\.(?:fica|futa|ss|social_security)\.(?:.*\.)?(?:nra|nonresident|nonimmigrant|f_j_m_q|exempt_classes|3121b19)(?:\.|$)"
+                          r"|^fed\.(?:fica\.|ss\.|social_security\.)?totali[sz]ation(?:\.|$)")
+
+
+_NRA_BOOL_LABEL = {
+    "fed.fica.nra.fjmq_exempt": "pay of an F-1, J-1, M-1 or Q nonimmigrant exempt from FICA",
+    "fed.futa.nra.fjmq_exempt": "the same pay exempt from FUTA",
+    "fed.fica.nra.other_visas.liable": "nonresident aliens in other visa classes liable to FICA",
+}
+_NRA_ORDER = ["fed.fica.nra.fjmq_exempt", "fed.fica.nra.fjmq_exempt.scope", "fed.futa.nra.fjmq_exempt",
+              "fed.fica.nra.other_visas.liable", "fed.fica.totalization.exemption_rule"]
+
+
+def nra_fica_keys():
+    """Facts that carry the nonresident-alien FICA/FUTA exemptions and the totalization rules
+    (added by agent 2 in round 3: Pub. 515 / IRC 3121(b)(19) / SSA agreements). Empty list when
+    none is keyed yet; the generators then state no exemption value."""
+    ks = [k for k in FACTS if _NRA_FICA_RX.search(k)]
+    return sorted(ks, key=lambda k: (_NRA_ORDER.index(k) if k in _NRA_ORDER else 99, k))
+
+
+def nra_fica_text(sep="; "):
+    """Rendered rule text of every NRA FICA/FUTA exemption and totalization fact, each with its
+    register id; a multi-dated key is rendered with its 2026 value."""
+    out = []
+    for k in nra_fica_keys():
+        fs = FACTS[k]
+        on = "2026-06-30" if len({(f.get("effective_from"), f.get("effective_to")) for f in fs}) > 1 else None
+        try:
+            f = _pick(k, on)
+        except ValueError:
+            continue
+        if isinstance(f["value"], bool):
+            lab = _NRA_BOOL_LABEL.get(k, k.split('.')[-1].replace('_', ' '))
+            out.append(f"{lab}: {'yes' if f['value'] else 'no'} {R(k, on)}")
+        else:
+            out.append(f"{T(k, on)} {R(k, on)}")
+    return sep.join(out)

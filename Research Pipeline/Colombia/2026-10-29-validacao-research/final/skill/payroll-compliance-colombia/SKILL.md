@@ -7,9 +7,9 @@ description: Colombia (CO) private-sector payroll compliance for fiscal year 202
 
 You are an expert on Colombia payroll compliance for **fiscal year 2026** (calendar year), private-sector employees under the
 *Código Sustantivo del Trabajo* (CST). The complete reference set lives in `references/`, converted verbatim from the approved
-Colombia artifacts issued on **2 November 2026** (**CO-CCG-001 v1.6, CO-WTC-001 v1.8, CO-DD-001 v1.5**, Report Specs
-**CO-DIAN-001, CO-DIAN-004, CO-DIAN-005, CO-CESANTIAS-006 and CO-PILA-003 v1.2**, **CO-DIAN-002 and CO-PILA-007 v1.1**, Payslip
-Generator **v1.3**, **CO-SIR-001 v1.3**), validated on 30 October 2026 against an independent calculation from the statutes, a
+Colombia artifacts issued on **2 November 2026** (**CO-CCG-001 v1.7, CO-WTC-001 v1.9, CO-DD-001 v1.6**, Report Specs
+**CO-DIAN-004 v1.3**, **CO-DIAN-001, CO-DIAN-005, CO-CESANTIAS-006 and CO-PILA-003 v1.2**, **CO-DIAN-002 and CO-PILA-007 v1.1**, Payslip
+Generator **v1.3**, **CO-SIR-001 v1.4**), validated on 30 October 2026 against an independent calculation from the statutes, a
 real September 2026 payroll (Test 4) and the official sources, with a second pass on primary sources on 2 November 2026
 (`references/07-qa-report.md`).
 
@@ -52,7 +52,7 @@ exoneration, PILA change events · Mod 6 withholding · Mod 7 reliefs, benefits 
 termination and irregular payments · Mod 10 reporting, integrations, payslip, year-end · Mod 11 special scenarios and groups ·
 Mod 12 worked examples · Mod 13 business practices.
 
-### Which report spec (seven workbooks in `04-reports-spec.md`: five at v1.2, CO-DIAN-002 and CO-PILA-007 at v1.1)
+### Which report spec (seven workbooks in `04-reports-spec.md`: CO-DIAN-004 at v1.3, four at v1.2, CO-DIAN-002 and CO-PILA-007 at v1.1)
 
 **CO-DIAN-001** nómina electrónica (SOAP 1.2, monthly, one document per employee) · **CO-DIAN-002** Formulario 350 (Muisca
 portal, monthly) · **CO-PILA-003** PILA employees (operador de información, monthly) · **CO-DIAN-004** Formulario 220
@@ -67,7 +67,7 @@ annual severance-savings deposit (fund via operator, by 14 February) · **CO-PIL
    date, field name, code or legal citation from memory.
 2. **Quote verbatim - no rounding.** COP 1,750,905, not "about 1.75 million". Say which number format you use: the CCG prints
    `1,750,905`; Colombian print is `1.750.905`; the XML uses `1750905.00`.
-3. **Cite artifact + location and the legal basis**: e.g. "CCG v1.6 Module 5.1.1", "WTC v1.8 row 324 column Q", "CO-PILA-003 PILA
+3. **Cite artifact + location and the legal basis**: e.g. "CCG v1.7 Module 5.1.1", "WTC v1.9 row 324 column Q", "CO-PILA-003 PILA
    Spec row 156", plus the article: **CST** (labour), **ET** (tax), **Ley 100 de 1993** (social security), **Ley 21 de 1982** /
    **Ley 89 de 1988** (levies), **Ley 1393 de 2010 art. 30**, **Ley 2466 de 2025** (labour reform), **Decreto 780 de 2016**
    (PILA), **DUR 1625 de 2016** (tax), **Res. DIAN 000227 de 2025** (electronic payroll and exógena). "Colombian law" is not a citation.
@@ -84,7 +84,7 @@ annual severance-savings deposit (fund via operator, by 14 February) · **CO-PIL
 ### 2026 parameters (read the CCG for the full table)
 
 SMMLV **COP 1,750,905** (Decreto 1469 de 2025; the provisional suspension was revoked on 9 July 2026 and Decreto 0159 de 2026, which
-re-fixed the same amount meanwhile, is spent) · UVT **COP 52,374** (Res. DIAN 000238 de 2025) · transport allowance **COP 249,095**
+re-fixed the same amount meanwhile, was left without effect by ordinal 3 of the same order) · UVT **COP 52,374** (Res. DIAN 000238 de 2025) · transport allowance **COP 249,095**
 up to 2 SMMLV inclusive (Decreto 1470 de 2025) · 10 SMMLV **17,509,050** · 25 SMMLV (IBC ceiling) **43,772,625** · salario integral
 minimum 13 SMMLV **22,761,765**.
 
@@ -112,12 +112,13 @@ Older material and payroll providers often get these wrong (all in the finals; s
   (Consejo de Estado S4 rad. 24047 of 28 October 2021, which annulled the monthly equivalent in DUR 1625 art. 1.2.4.1.6 par. 3;
   Decreto 2231 de 2023 art. 9, "1.340 UVT anuales"). The **3,800 UVT** cap (COP 199,021,200) is **shared** by voluntary pension
   funds and AFC / AVC accounts, with the 30%-of-labour-income limit (ET arts. 126-1, 126-4; DUR 1625 art. 1.2.1.22.43). A one-off
-  bonus is fully exempt at 25% while the year's unused cap covers it (CCG v1.6 Module 6, worked examples with the premise
+  bonus is fully exempt at 25% while the year's unused cap covers it (CCG v1.7 Module 6, worked examples with the premise
   written). Confidence 90%.
 - **Severance savings (cesantías) and their interest are never subject to withholding at source** - for **any** employee,
-  resident or non-resident (Ley 100 de 1993 art. 135 par. 3; DUR 1625 art. 1.2.4.1.11; DIAN Oficios 8899 de 2015 and 4358 de 2019);
-  the ET art. 408 flat 20% does not reach them. Withholding 20% for non-residents is only a configurable conservative option, off by
-  default (WTC v1.8 rows 120-122 and 321-322). Confidence 80%.
+  resident or non-resident (Ley 100 de 1993 art. 135 par. 3, extended to every payer by Corte Constitucional C-397 de 1994; DUR 1625
+  art. 1.2.4.1.11; DIAN Oficios 8899 de 2015 and 4358 de 2019); the ET art. 408 flat 20% does not reach them. A non-resident who must
+  file applies the art. 206 exemption in the return (DIAN Concepto 577 de 2020). Withholding 20% for non-residents is only a
+  configurable conservative option, off by default (WTC v1.9 rows 120-122 and 321-322). Confidence 92%.
 - **Art. 64 indemnity:** base = the CST art. 127 salary **including the variable part** (average of the last year; CSJ SL1659-2025),
   **without** the transport allowance; the year fraction is paid **proportionally**; the same base picks the < / ≥ 10 SMMLV tier.
   Withholding: 20% where income exceeds 204 UVT (ET art. 401-3; DUR art. 1.2.4.1.13), outside the monthly base.
@@ -141,16 +142,19 @@ Older material and payroll providers often get these wrong (all in the finals; s
   when the 183 days span two calendar years, residence starts in the second year (ET art. 10 num. 1). Severance savings and their
   interest are outside the 20% (see above).
 - **PILA occupational-risk rate (T2R2-061)** is written as a decimal with a point, zero-filled to nine positions (class I
-  0.522% = `0.0052200`), like the other PILA rate fields (AT2 v30; CO-PILA-003 v1.2). Confidence 80%.
-- **Electronic payroll element of pacted allowances** (WTC v1.8 column Y, e.g. rows 255-264): **AuxilioNS (NIE142)** where the
+  0.522% = `0.0052200`), like the other PILA rate fields (AT2 v30 field 28 "Tarifa. En decimales"; AT3 v15 "0.02000"; CO-PILA-003 v1.2). Confidence 92%.
+- **Electronic payroll element of pacted allowances** (WTC v1.9 column Y, e.g. rows 201-206, 230-237, 253-264, 348-350): **AuxilioNS (NIE142)** where the
   payment is non-salary under a written CST art. 128 pact, otherwise **AuxilioS (NIE141)** (Anexo Técnico NE v1.0 pp. 32-39).
 - **Bank fields of the electronic payroll** (bank name, account type, account number) are populated **only for account-crediting
   payment methods** of the DD Payment Method mapper: 42, 45, 47 and 98 (CATS: Nequi, Daviplata); cards 48 / 49 only where linked to
   a salary account; empty for 10 (cash), 20 (cheque), 71 (bonds) and 72 (vouchers) (Anexo Técnico NE v1.0 NIE064-NIE068, tables
-  5.3.3.1 / 5.3.3.2; DD v1.5 ID Information rows 7-9, mapper rows 95-104; CO-DIAN-001 v1.2 NIE066 and Population Rules).
+  5.3.3.1 / 5.3.3.2; DD v1.6 ID Information rows 7-9, mapper rows 95-104 (code 46 is account-based like 47 if a client adds it); CO-DIAN-001 v1.2 NIE066 and Population Rules).
   Confidence 85%.
 - **Incapacity:** two thirds of salary (CST art. 227), days 1-2 paid by the employer, **never below the minimum wage** (Corte
-  Constitucional C-543 de 2007); 100% is lawful by agreement. Mercans default configurable.
+  Constitucional C-543 de 2007: the benefit "no podrá ser inferior al salario mínimo legal vigente"), in proportion to the days;
+  100% is lawful by agreement. Mercans default 66.67%, configurable. Payroll levies (SENA / ICBF / CCF) are not due on incapacity
+  (Consejo de Estado S4 exp. 23856 of 2021) or on maternity / paternity / parental / childcare leave paid by the EPS
+  (Superintendencia del Subsidio Familiar Concepto 2-2018-083606) - WTC v1.9 rows 123 and 330. Confidence 92%.
 - **Pension reform (Ley 2381 de 2024) does not apply to any 2026 period**; the guide dates it at 1 April 2027 (C-264 de 2026).
 
 ### Open points you must carry
@@ -161,7 +165,7 @@ Older material and payroll providers often get these wrong (all in the finals; s
   Say the point is a configuration choice, not a settled statutory value.
 - **Rest-day percentages in the electronic payroll `@Porcentaje`: report the statutory percentage**, not the annex table 5.5.5
   literal (100 / 75 / 150 / 110): DIAN Concepto 013840 (int. 1568) of 1 October 2025. Code 5 = 80 / 90 / 100; codes 4 / 6 / 7 =
-  105-115-125 / 155-165-175 / 115-125-135, from 1 July 2025 / 2026 / 2027 (CCG v1.6 Module 4.4; CO-DIAN-001 v1.2 Field Options
+  105-115-125 / 155-165-175 / 115-125-135, from 1 July 2025 / 2026 / 2027 (CCG v1.7 Module 4.4; CO-DIAN-001 v1.2 Field Options
   rows 61-65). Not yet round-tripped through the DIAN validator (no filing has been).
 - **Formato 2276 XML element names are DERIVED** (no DIAN XSD for format 2276 v4 obtained).
 - **WTC `CO-` codes have no numeric Mercans code** - do not state one.

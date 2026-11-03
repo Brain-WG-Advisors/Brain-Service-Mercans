@@ -15,8 +15,9 @@ Overtime: FLSA only (1.5x over 40); no daily OT, no break law [US-GAS5-016, US-G
 - `ga.payment.method` = **money, check, direct deposit with consent, or payroll card (written fee explanation at hire or 30 days before; opt-out; one free access) - full net amount**  (2026-01-01 → open) [A.1, US-GAP9L-001, direct artifact inspection, conf high]
 
 ## 2 — Income tax (state withholding)
-- `ga.pit.rate.flat` = **5.19** percent (2025-01-01 → 2025-12-31) [A.2, US-GA-001, direct artifact inspection, conf high]
-- `ga.pit.rate.flat` = **4.99** percent (2026-01-01 → open) [A.1, US-GAS5-009, second independent authority, conf high] — HB 463 (2026), in force, signed 2026-05-11 retroactive to 2026-01-01; level withholding + assessment. Employers withheld 5.19% until 2026-05-11 and may use 4.99% from 2026-05-11 [US-GA-001]. 2027 steps conditional on OPB triggers (report 2026-12-01).
+- `ga.pit.rate.flat` = **4.99** percent (2026-01-01 -> open) [A.1, US-GAS5-009, second independent authority, conf high] - Statutory rate for taxable year 2026, retroactive to 2026-01-01 (HB 463); the year-end assessment applies 4.99% to all 2026 wages. Withholding level: ga.wh.rate. LEVEL: assessment.
+- `ga.wh.rate` = **5.19** percent (2026-01-01 -> 2026-05-10) [A.2, US-GA-001, quoted from authority page, conf high] - Employers kept withholding 5.19% until HB 463 was signed (2026-05-11). LEVEL: withholding.
+- `ga.wh.rate` = **4.99** percent (2026-05-11 -> open) [A.1, US-GAS5-009, second independent authority, conf high] - Withholding at 4.99% from 2026-05-11 (DOR Employer Guide US-GA-001 states the start date; HB 463 the rate). LEVEL: withholding.
 - `ga.wh.method` = **tax tables (pp. 31-50) or percentage method (Tables E/F): (wages - period standard deduction - dependent allowance x n) x 4.99%; tables use top of band**  (2026-01-01 → open) [A.2, US-GAS5-001, derived arithmetically, conf high] — Per-period values = annual / periods rounded to cent (21 values re-derived in Python); daily = annual/365. Tables and formula "differ slightly".
 - `ga.wh.std_deduction.mfj` = **30000** USD (2026-01-01 → open) [A.2, US-GAS5-001, derived arithmetically, conf high] — Single/HoH 15,000; MFS 15,000; married both working use MFS column.
 - `ga.wh.std_deduction.single` = **15000** USD (2026-01-01 → open) [A.2, US-GAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-GAS5-001: Percentage method: (1) wages less standard deduction per period [annual 30,000 MFJ / 15,000 Single-HoH / 15,000 MFS; weekly 576.92/288.46/288.46; biweekly 1,153.85/576.92; semimonthly 1,250.00/625.00; monthly 2,500.00/1,250.00; quarterly 7,500/3,750; semiannual 15,000/7,500; daily 82.19/41.10]; (2) 
@@ -49,7 +50,7 @@ No Georgia pay-statement content statute: 34-7-2 and the 164-page GDOL handbook 
 - `ga.report.wh.semiweekly_threshold` = **50000** USD (2026-01-01 → open) [A.2, US-GAS5-002, direct artifact inspection, conf high]
 - `ga.report.annual.g1003` = **W-2s and 1099-NEC with GA withholding due 31 Jan (TY2026: 2027-02-01), other 1099s 28 Feb; e-file if federal e-file or EFT; GTC entry, G-1003 Excel/CSV or EFW2 + GA RS (Rev 01/18); 1099s via IRIS XML only; no CF/SF**  (2026-01-01 → open) [A.2, US-GAS5-003, direct artifact inspection, conf high]
 - `ga.report.w2.rs_layout` = **Rev 01/18: 248-267 state employer account; 274-275 state code; 276-286 state wages; 287-297 state tax; 298-307 period end; 331-339 withholding number**  (2018-01-01 → open) [A.2, US-GAS5-011, direct artifact inspection, conf medium] — [partial row] TY2026 layout with GA OT field not yet posted (Q1).
-- `ga.report.sui.dol4n` = **DOL-4N due 30 Apr, 31 Jul, 31 Oct, 31 Jan; electronic for 25+ employees (portal <=100, CSV/Excel 100-15,000, SFTP >15,000); domestic-only annual DOL-4 by 31 Jan; corrections DOL-3C; placeholder SSN 000-00-000n allowed (correct within 30 days)**  (2026-01-01 → open) [A.3, US-GAS5-005, direct artifact inspection, conf high]
+- `ga.report.sui.dol4n` = **DOL-4N due 30 Apr, 31 Jul, 31 Oct, 31 Jan; electronic for 25+ employees (portal <=100, CSV/Excel 100-15,000, SFTP >15,000); domestic-only annual DOL-4 by 31 Jan; corrections DOL-3C; temporary substitute SSN 000-00-000n allowed (correct within 30 days)** (2026-01-01 -> open) [A.3, US-GAS5-005, direct artifact inspection, conf high]
 - `ga.report.sui.efile_threshold_employees` = **25** employees (2026-01-01 → open) [A.3, US-GAS5-005, direct artifact inspection, conf medium] — Proposed all-employer mandate (300-2-2-.02(6)) adoption unconfirmed (Q3).
 - `ga.newhire.report_days` = **10** days (2026-01-01 → open) [A.2, US-GAS5-012, second independent authority, conf high] — O.C.G.A. 19-11-9.2: FEIN (same as UI), employee name/address/SSN/DOB/start date, medical insurance availability, state of hire.
 
@@ -90,7 +91,7 @@ Full SSN required on GDOL records. 10-1-393.8 (no public SSN display) only on a 
 ## 13 — Live legal change
 - `ga.live.hb463.status` = **in force (signed 2026-05-11, retroactive 2026-01-01); levels withholding + assessment (rate), assessment + reporting (subtractions)**  (2026-01-01 → open) [A.1, US-GAS5-009, second independent authority, conf high]
 - `ga.live.hb1157.status` = **introduced, NOT enacted (would repeal local-mandate pre-emption)**  (2026-01-01 → open) [A.1, US-GAS5-017, direct artifact inspection, conf high]
-- `ga.live.gdol_rules_2026` = **proposed 2026-06-15, announced 2026-10-07: placeholder SSN, electronic separation notices, electronic posters, proposed all-employer DOL-4N e-file; adopted text/effective date not read**  (2026-10-07 → open) [A.2, US-GAS5-021, direct artifact inspection, conf medium]
+- `ga.live.gdol_rules_2026` = **proposed 2026-06-15, announced 2026-10-07: temporary substitute SSN, electronic separation notices, electronic posters, proposed all-employer DOL-4N e-file; adopted text/effective date not read** (2026-10-07 -> open) [A.2, US-GAS5-021, direct artifact inspection, conf medium]
 
 ## Oracle — worked examples (C37)
 - `ga.oracle.guide.example1.withholding` = **27.03** USD (2026-01-01 → open) [A.2, US-GAS5-001, derived arithmetically, conf high] — MFJ, semimonthly 2,000, 1 dependent: (2,000 - 1,250 - 208.33) x 0.0499 = 27.029 -> 27.03. Table check: Single weekly band 276-294: (294 - 288.46) x 0.0499 = 0.28 as printed.
@@ -109,6 +110,10 @@ Full SSN required on GDOL records. 10-1-393.8 (no public SSN display) only on a 
 
 ## Language seams (US-OWN-006)
 No language clause in 34-7-2 [US-GAP9L-001, US-GAP9L-003]; payslip English (US-OWN-006).
+
+## QA round 1 corrections (2026-11-02)
+
+One truth for the 2026 rate, split by level (C32): `ga.wh.rate` (withholding) 5.19% 2026-01-01..2026-05-10 [US-GA-001] and 4.99% from 2026-05-11 [US-GAS5-009]; `ga.pit.rate.flat` (assessment) 4.99% for the whole of taxable year 2026, retroactive (HB 463). The 2025 value 5.19% left the configuration facts (`_history` of the facts file). WTC `ga.sit.rate` is renamed `ga.wh.rate` with the same two periods. C29: "placeholder SSN" reworded "temporary substitute SSN" (meaning unchanged).
 
 ## Open questions
 Mirrors `unresolved[]` in the facts file (same keys).

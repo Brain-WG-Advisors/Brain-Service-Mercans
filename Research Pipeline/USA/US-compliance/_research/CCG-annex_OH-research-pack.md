@@ -62,7 +62,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `oh.pit.school_district.basis` | withheld for employees residing in a taxing district | 2026-08-01 |  | US-OH-002 | high |
 | `oh.pit.municipal.basis` | work-location; qualifying wages = Medicare wages less section 125 (401(k) deferrals taxable) | 2025-09-30 |  | US-OHS5-013 | high |
 | `oh.pit.municipal.occasional_entrant_days` | 20 days | 2015-03-23 |  | US-OH-008 | high |
-| `oh.pit.municipal.rate_cap_without_vote` | 1 % | 2026-01-01 |  | US-OHP7-001 | high |
+| `oh.pit.municipal.rate_cap_without_vote` | 1 % | 2026-01-01 |  | US-OHB5-402 | high |
 | `oh.sui.wage_base` | 9000 USD | 2026-01-01 | 2026-12-31 | US-OHS5-002 | high |
 | `oh.sui.new_employer.rate` | 2.85 % | 2026-01-01 | 2026-12-31 | US-OHS5-002 | high |
 | `oh.ui.rate.new_employer.construction` | 5.85 % | 2026-01-01 | 2026-12-31 | US-OHS5-002 | high |
@@ -70,9 +70,9 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `oh.ui.rate.max_total` | 10.25 % | 2026-01-01 | 2026-12-31 | US-OHS5-002 | high |
 | `oh.ui.tcsf.rate` | 0.15 % | 2026-01-01 | 2026-12-31 | US-OHS5-002 | high |
 | `oh.sui.employee.rate` | 0 % | 2026-01-01 | 2026-12-31 | US-OHS5-002 | high |
-| `oh.report.it501.quarterly_threshold` | 2000 USD | 2026-01-01 |  | US-OH-009 | high |
-| `oh.report.it501.partial_weekly_threshold` | 84000 USD | 2026-01-01 |  | US-OH-009 | high |
-| `oh.report.it941.due` | January 31 | 2026-01-01 |  | US-OH-009 | high |
+| `oh.report.it501.quarterly_threshold` | 2000 USD | 2026-01-01 |  | US-OHB5-401 | high |
+| `oh.report.it501.partial_weekly_threshold` | 84000 USD | 2026-01-01 |  | US-OHB5-401 | high |
+| `oh.report.it941.due` | January 31 | 2026-01-01 |  | US-OHB5-401 | high |
 | `oh.report.ui.quarterly_due` | last day of month after quarter | 2014-09-15 |  | US-OHS5-020 | high |
 | `oh.newhire.report_days` | 20 days | 2013-09-29 |  | US-OHS5-009 | high |
 | `oh.leave.sick.state_statute.exists` | False | 2017-03-21 |  | US-OHS5-012 | high |
@@ -130,7 +130,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - Work-location based. The employer withholds qualifying wages x the municipal rate and remits to the municipality or its collector (RITA, CCA) [US-OHP52-003, US-OH-010].
   - 20-day occasional-entrant rule [US-OH-008].
   - The base is Medicare wages less section 125, so 401(k) deferrals are taxable [US-OHS5-013].
-  - Rates may not exceed 1% without voter approval [US-OHP7-001].
+  - Rates may not exceed 1% without voter approval [US-OHB5-402].
   - **No consolidated municipal rate table was obtained** (ACCESS gap).
 - **Confidence:** High for state withholding; Medium for the local layer (no rate table).
 
@@ -142,7 +142,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - delinquency 12.75%; SUTA dumping 12.75%; tax-avoidance penalty 14.75%;
   - employer-only, no employee contribution.
 - **TCSF levy (0.15%):** see US-OHP7-003.
-- **No SDI/TDI/PFML** [US-OHP51-004].
+- **No SDI/TDI/PFML located;** not a fact: the absence rests only on tier-B MANUAL US-OHP51-004 (open: `oh.sdi_pfml.exists`).
 - **No transit or workforce levy on wages** [US-OHL-002].
 - **Not covered:** how the wage base is indexed (ORC 4141.01) was not read. The base has been fixed at 9,000 in recent years, but that is unverified this pass. Open question.
 - **Confidence:** High.
@@ -161,7 +161,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Confidence:** High.
 
 ## 5 reporting_instruments
-- **State withholding** [US-OH-009; Filing Guidelines]:
+- **State withholding** [US-OHB5-401; Filing Guidelines]:
   - IT 501 return, filed electronically through OH|TAX eServices or the Treasurer.
   - Frequency by look-back (12 months ending June 30):
     - up to 2,000 USD: quarterly, due the last day of the month after the quarter;
@@ -180,7 +180,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 
 ## 6 leave
 - **No state paid sick leave law.** ORC 4113.85 makes leave and fringe benefits matters of employer policy or agreement and preempts local mandates for private employers [US-OHS5-012].
-- **No PFML,** so there is no benefit-side payroll interaction [US-OHP51-004].
+- **No PFML located,** so no benefit-side payroll interaction is modelled (absence rests only on tier-B MANUAL US-OHP51-004; open: `oh.sdi_pfml.exists`).
 - **Other leave** (jury duty 2313.19, military 5903.02, voting): not read this pass. Open question.
 - **Confidence:** Medium-High.
 

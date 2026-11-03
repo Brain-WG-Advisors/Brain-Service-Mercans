@@ -72,8 +72,8 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `ny.sui.employee.rate` | 0 % | 2026-01-01 |  | US-NYP9V-001 | high |
 | `ny.pfl.employee.rate` | 0.432 % | 2026-01-01 | 2026-12-31 | US-NYP8-001 | high |
 | `ny.pfl.employee.max_annual` | 411.91 USD | 2026-01-01 | 2026-12-31 | US-NYP8-001 | high |
-| `ny.dbl.employee.rate` | 0.5 % | 2026-01-01 |  | US-NY-010 | high |
-| `ny.dbl.employee.max_weekly` | 0.6 USD | 2026-01-01 |  | US-NY-010 | high |
+| `ny.dbl.employee.rate` | 0.5 % | 2026-01-01 |  | US-NYB5-401 | high |
+| `ny.dbl.employee.max_weekly` | 0.6 USD | 2026-01-01 |  | US-NYB5-401 | high |
 | `ny.payslip.items` | dates of work; names; employer address/phone; rates and basis; gross; deductions; allowances; net; regular and OT rates and hours (non-exempt); piece rates | 2026-01-01 |  | US-NYS5-006 | high |
 | `ny.records.retention_years` | 6 years | 2026-01-01 |  | US-NYS5-006 | high |
 | `ny.report.nys45.due` | Apr 30; Jul 31; Oct 31; Jan 31 | 2026-01-01 |  | US-NYS5-010 | high |
@@ -132,7 +132,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - Table A = Table B + n × Table C, reproduced exactly (200.05, 866.60, 350.00, 36.15).
   - Examples 1, 3 and 4 reproduce exactly: 8.01, 3,576.63, 44.10.
   - **Example 2 does not reproduce:** 165.00 × 0.0753 = 12.4245, which rounds to 12.42, giving **258.50**. The booklet prints 12.43 and **258.51**. This one-cent residual is recorded as an oracle open question.
-- **Supplemental rates.** NYS 11.70%; NYC resident 4.25%; Yonkers resident 1.95975%; Yonkers nonresident 0.50% [US-NY-001, US-NY-011]. Alternatively use the aggregate method [US-NYS5-010].
+- **Supplemental rates.** NYS 11.70%; NYC resident 4.25%; Yonkers resident 1.95975%; Yonkers nonresident 0.50% [US-NY-001, US-NYB5-301, US-NYB5-302 (QA r1b; US-NY-011 superseded)]. Alternatively use the aggregate method [US-NYS5-010].
 - **Rounding.** The tax does not fix a rounding rule. Withhold to the cent per the tables or the formula [US-NYP52-001].
 - **Exempt certificate.** Tax Law 671(a)(3): under 18, over 65, or full-time student under 25 with no prior-year and no expected liability [US-NYS5-010].
 - **Local income taxes.**
@@ -158,7 +158,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - 2026: 0.432% of wages, annual employee maximum 411.91 [US-NYP8-001]. The benefit is 67% of the employee's average weekly wage, capped at 67% of the NYSAWW, for up to 12 weeks [US-NYP8-001 text].
   - Derivation, not an authority figure: 411.91 / 0.00432 = 95,349.54, which implies an NYSAWW of 1,833.64 and a maximum benefit of 1,228.54. Not used as a fact.
   - **2027: lead only.** 0.452%, maximum 451.81 [US-NYS5-022, MANUAL]. The DFS page is blocked to curl.
-- **DBL.** Employee 0.5% of wages, at most 0.60 per week; the employer pays the rest [US-NY-010].
+- **DBL.** Employee 0.5% of wages, at most 0.60 per week; the employer pays the rest [US-NYB5-401].
 - **Employer levies.** MCTMT and RSF, per the P7/P9 list [US-NYP7-001, US-NYP7-004]. Not redone.
 - **Confidence:** High for 2026. Low for 2027 PFL until the DFS page is read.
 
@@ -292,7 +292,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 ## ACCESS gaps (exact URLs; for the orchestrator's browser pass)
 1. `https://www.dfs.ny.gov/apps-and-licensing/health-insurers/pfl-rate-decision-2027-page`: HTTP 403 (curl). `https://web.archive.org/web/2026id_/…pfl-rate-decision-2027-page`: 404. Needed for PFL 2027 rate and cap (US-NYS5-022).
 2. `https://paidfamilyleave.ny.gov/2026`: 403. Wayback 2026id_: 403. Needed for the PFL 2026 maximum weekly benefit as an authority figure.
-3. `https://www.nyc.gov/site/dca/about/paid-sick-leave-law.page`: 403 (wayback copy used). The DCWP FAQ (02/2026) PDF and NYC Admin. Code 20-911 ff. were not reached (US-NYS5-023).
+3. `https://www.nyc.gov/site/dca/about/paid-sick-leave-law.page`: 403 (wayback copy used). The DCWP FAQ (02/2026) PDF is now held [A.3, US-NYB5-003, superseding the lead row US-NYS5-023]; NYC Admin. Code 20-911 ff. was not reached.
 4. `https://dol.ny.gov/overtime-0` and `https://dol.ny.gov/overtime-frequently-asked-questions`: 404 (overtime covered instead by CR 142).
 5. `https://www.tax.ny.gov/pdf/publications/withholding/nys50.pdf`: 404. The guide now exists only as HTML (`/forms/publications/wt/nys50.htm`, used).
 
@@ -314,17 +314,26 @@ Facts added:
 
 Open questions closed: `ny.pfl.employee.rate.next_year`, `ny.pfl.benefit.max_weekly`, `ny.leave.nyc_pto`.
 
+## QA r1b additions (2026-11-02)
+
+Source: browser pass P3 (`_research/stage5/browser-pass-P3.md`, shard `S5B-P3.csv` merged into the register). Facts file is authoritative; every line below is a fact object with the same key.
+
+**2 - Income tax: local supplemental rates (closes RQ-272).** Re-registered from the authority host: NYS-50-T-NYC (1/26) p. 3 [A.2, US-NYB5-301] and NYS-50-T-Y (1/26) p. 3 [A.2, US-NYB5-302], both effective 2026-01-01 to 2026-12-31; they supersede the Wayback-read row US-NY-011. Keys are the WTC keys (`ny.local.*.supplemental.rate`), now emitted in this annex as well, so CCG and WTC share one key per rate. LEVEL: withholding.
+
+- `ny.local.nyc.supplemental.rate` = **4.25** percent (2026-01-01 -> 2026-12-31) [A.2, US-NYB5-301, quoted from authority page, conf high] LEVEL: withholding. NYS-50-T-NYC (1/26) p. 3, method (a); or (b) aggregate with the latest regular wages minus tax already withheld. If no tax was withheld from regular wages, only (b).
+- `ny.local.yonkers.resident.supplemental.rate` = **1.95975** percent (2026-01-01 -> 2026-12-31) [A.2, US-NYB5-302, quoted from authority page, conf high] LEVEL: withholding. NYS-50-T-Y (1/26) p. 3, method (a); or (b) aggregate. If no tax was withheld from regular wages, only (b).
+- `ny.local.yonkers.nonresident.supplemental.rate` = **0.5** percent (2026-01-01 -> 2026-12-31) [A.2, US-NYB5-302, quoted from authority page, conf high] LEVEL: withholding. NYS-50-T-Y (1/26) p. 3, method (a); or (b) aggregate.
+
 ## Open questions
 
-Mirrors `unresolved[]` of the facts file (same keys, same wording).
+Mirrors `unresolved[]` in the facts file (same keys, same wording). Regenerated by QA r1b on 2026-11-02.
 
-- **ny.pit.oracle.example2_residual** (non-blocking): NYS-50-T-NYS Method II Example 2 prints 12.43 / 258.51; half-up gives 12.42 / 258.50. What would close it: DTF statement of the rounding convention or the DTF withholding calculator result for the same case.
-- **ny.sui.wage_base.next_year** (non-blocking): 2027 UI base not yet published. What would close it: DOL UI rate page or NYS-50 2027 edition (December 2026).
-- **ny.garn.consumer.floor_region** (non-blocking): Whether 5231 floor uses the regional 652 rate (510 vs 480/week). What would close it: DOL or court guidance, or the income execution form text.
-- **ny.labour.paycard** (non-blocking): 12 NYCRR Part 192 not read. What would close it: DOL CR 192 copy.
-- **ny.payslip.electronic** (non-blocking): DOL position on electronic wage statements not read. What would close it: DOL wage-statement FAQ.
-- **ny.report.nys45_annual** (non-blocking): Q4 NYS-45 annual reconciliation mechanics not read. What would close it: NYS-45-I instructions (DTF).
-- **ny.bik.nyc_flex125_addback** (non-blocking): NYC flexible benefits 125 addback not read. What would close it: IT-225-I (DTF).
-- **ny.term.ia12_3.timing** (non-blocking): IA 12.3 timing rule not read. What would close it: 12 NYCRR 472.8 text.
-- **ny.garn.state_tax_levy** (non-blocking): DTF income execution for tax warrants not researched. What would close it: Tax Law 692 / CPLR 5231 guidance.
-- **ny.pit.supplemental.local_rates** (blocking): NYC resident 4.25%, Yonkers resident 1.95975% and Yonkers nonresident 0.50% supplemental rates sat on US-NY-011, now superseded by US-NYP52-001 (which carries only the rounding finding); no active row carries the local supplemental rates. What would close it: Re-register the NYS-50-T-NYC (1/26) and NYS-50-T-Y (1/26) supplemental-rate lines as an active A.2 row.
+- `ny.pit.oracle.example2_residual` (non-blocking) — NYS-50-T-NYS Method II Example 2 prints 12.43 / 258.51; half-up gives 12.42 / 258.50. **Would close it:** DTF statement of the rounding convention or the DTF withholding calculator result for the same case.
+- `ny.sui.wage_base.next_year` (non-blocking) — 2027 UI base not yet published. **Would close it:** DOL UI rate page or NYS-50 2027 edition (December 2026).
+- `ny.garn.consumer.floor_region` (non-blocking) — Whether 5231 floor uses the regional 652 rate (510 vs 480/week). **Would close it:** DOL or court guidance, or the income execution form text.
+- `ny.labour.paycard` (non-blocking) — 12 NYCRR Part 192 not read. **Would close it:** DOL CR 192 copy.
+- `ny.payslip.electronic` (non-blocking) — DOL position on electronic wage statements not read. **Would close it:** DOL wage-statement FAQ.
+- `ny.report.nys45_annual` (non-blocking) — Q4 NYS-45 annual reconciliation mechanics not read. **Would close it:** NYS-45-I instructions (DTF).
+- `ny.bik.nyc_flex125_addback` (non-blocking) — NYC flexible benefits 125 addback not read. **Would close it:** IT-225-I (DTF).
+- `ny.term.ia12_3.timing` (non-blocking) — IA 12.3 timing rule not read. **Would close it:** 12 NYCRR 472.8 text.
+- `ny.garn.state_tax_levy` (non-blocking) — DTF income execution for tax warrants not researched. **Would close it:** Tax Law 692 / CPLR 5231 guidance.

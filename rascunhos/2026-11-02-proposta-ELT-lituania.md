@@ -2,7 +2,7 @@
 
 > Hub [[Lituania]] · Resultado: [[Research Pipeline/Lithuania/2026-10-30-fontes-vigentes/RESULTADO-ETAPAS-1-2|RESULTADO-ETAPAS-1-2]] · Lista: [[Research Pipeline/Lithuania/2026-10-29-validacao-BAU/LISTA-PARA-O-BAU|LISTA-PARA-O-BAU]]
 
-**Status (02/11):** rascunho para o usuário levar ou repassar a quem estiver na ELT. Nada enviado.
+**Status (02/11): DESCARTADA** pelo usuário: não precisamos da validação de ninguém; o que falta é o Kevin gerar os arquivos do sistema para nós validarmos. Nada enviado.
 
 ## Texto (inglês)
 **Lithuania – decisions needed to close the statutory validation**

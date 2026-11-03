@@ -1,5 +1,5 @@
 ## @labour
-- **Minimum wage:** no state minimum-wage law (exists: {{tn.labour.minwage.state.exists}}); FLSA-covered employers pay the federal rate (Annex FED) [US-TNS5-011]. Local minimum wages are reported as preempted (T.C.A. 7-51-1802) on tier-B leads only; not modelled as a rule.
+- **Minimum wage:** no state minimum-wage law (exists: {{tn.labour.minwage.state.exists}}); FLSA-covered employers pay the federal rate (Annex FED) [US-TNS5-011]. Local minimum wages are reported as preempted (T.C.A. 7-51-1802) on secondary sources only; not modelled as a rule.
 - **Overtime:** {{tn.labour.overtime.state_rule}} [US-TNS5-001].
 - **Pay frequency and timing (T.C.A. 50-2-103(a)) [US-TNS5-001]:** {{tn.pay_frequency.rule}}, with statutory due dates for wages earned in the first and second half of the month. Piece-work and commission timing from 2026-07-01 (PC 617): open point below.
 - **Meal break (50-2-103(h)):** {{tn.labour.meal_break.minutes}} minutes unpaid for a scheduled run of consecutive hours, unless the business gives ample chance to rest [US-TNS5-001].
@@ -18,7 +18,7 @@
 - **Workers' compensation (benefit side, not payroll) [US-TNB5-001]:** for injuries from 2026-07-01 to 2027-06-30, maximum weekly temporary total disability benefit {{tn.wc.benefit.ttd.weekly_max}} USD, maximum weekly permanent partial disability benefit {{tn.wc.benefit.ppd.weekly_max}} USD, minimum weekly benefit {{tn.wc.benefit.weekly_min}} USD. These are insurer benefits, not payroll deductions.
 
 ## @payslip
-- **No itemised pay-statement statute** (exists: {{tn.payslip.statute.exists}}) [US-TNR3-001, US-TNP51-003, US-TNS5-001]; federal recordkeeping applies. Retention beyond UI records: open point below.
+- **No itemised pay-statement statute** (exists: {{tn.payslip.statute.exists}}) [US-TNP51-003, US-TNS5-001]; federal recordkeeping applies. Retention beyond UI records: open point below.
 
 ## @reporting
 - **No state withholding return or state W-2.**
@@ -55,7 +55,7 @@
 - No SSN-truncation rule for pay statements located on an A-tier source; SSN display rules and the employee-data scope of the Tennessee Information Protection Act are open (below).
 
 ## @live
-- **2026-07-01:** PC 617 piece-work and commission timing (open point below) [US-TNS5-015]. Workers' compensation acts of 2026: {{tn.live.bwc_2026}} [US-TNB5-001].
+- **2026-07-01:** PC 617 piece-work and commission timing (not configured in this release; see the open point below). Workers' compensation acts of 2026: {{tn.live.bwc_2026}} [US-TNB5-001].
 - **2025-05-27:** UI tax system moved to Employer e-Services [US-TNS5-005, US-TNR3-002].
 - **2026 SUI:** no change [US-TNS5-002]. No 2027 enactment located (sweep incomplete).
 

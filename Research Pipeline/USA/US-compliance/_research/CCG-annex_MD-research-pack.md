@@ -43,7 +43,7 @@ Oracle: the Comptroller online withholding calculator and the Central Payroll Bu
 ## 3 — Social insurance (SUI / SDI / PFML / levies)
 No SDI/TDI; no other levy beyond withholding [US-MDP9V-002].
 
-- `md.sui.wage_base` = 8500 (2026-01-01 → open) [A.2, US-MDP51-002 — promoted to fact in Synthesis C] Not indexed; employer-only; other-state credit implied by BEACON field.
+- `md.sui.wage_base` = 8500 (2026-01-01 → open) [A.2, US-MDB5-401 — promoted to fact in Synthesis C] Not indexed; employer-only; other-state credit implied by BEACON field.
 - `md.sui.employer.rate.min` = **0.3** percent (2026-01-01 → 2026-12-31) [A.2, US-MDP9V-001, quoted from authority page, conf high] — Experience 0.30-7.50%; standard 7.50%; foreign construction contractors industry average.
 - `md.sui.employer.rate.max` = **7.5** percent (2026-01-01 → 2026-12-31) [A.2, US-MDP9V-001, quoted from authority page, conf high]
 - `md.sui.new_employer.rate.range` = **1.0% - 2.6%**  (2026-01-01 → 2026-12-31) [A.2, US-MDP9V-001, quoted from authority page, conf high]

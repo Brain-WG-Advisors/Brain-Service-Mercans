@@ -26,20 +26,20 @@ The United States is not one payroll jurisdiction but a stack of parallel layers
 | Tennessee | none levied | from 2021-01-01 | `tn.no_wage_tax` [US-TN-001] |
 | Texas | none levied | from 2019-11-05 | `tx.no_wage_tax` [US-TXS5-001] |
 | Washington | none levied | from 2026-01-01 to 2027-12-31 | `wa.no_wage_tax` [US-WAS5-017] |
-| Florida | ⚠️ RESEARCH-GAP (non-blocking): the facts carry no register row stating the absence of a Florida wage income tax (open item `fl.no_wage_tax` in CCG-m01_foundational-facts.json; closes with: Annex FL fact citing Fla. Const. art. VII s.5 if a row exists, or a new register row in the merge.) | | |
-| Wyoming | ⚠️ RESEARCH-GAP (non-blocking): the facts carry no register row stating the absence of a Wyoming wage income tax (open item `wy.no_wage_tax` in CCG-m01_foundational-facts.json; closes with: Annex WY fact or a register row for the WY DOR statement.) | | |
+| Florida | none levied | from 2026-01-01 | `fl.pit.exists` [US-FL-001] |
+| Wyoming | none levied | from 2026-01-01 | `wy.pit.exists` [US-WYP51-001] |
 
-Washington: the no-wage-tax fact is dated to 2027-12-31. The facts record an enacted tax on individuals with very high adjusted gross income from 2028; it operates at assessment and is not modelled for 2026 payroll [US-WAS5-017].
+Washington: no wage income tax to 2027-12-31 [US-WAS5-017]. An enacted tax of [[FACT:wa.pit.high_income_tax.rate=9.9]]% on individuals with adjusted gross income above USD [[FACT:wa.pit.high_income_tax.agi_threshold=1,000,000]] applies from 2028-01-01; it operates at assessment and is not modelled for payroll [US-WAS5-017].
 
 **Live federal change.** Two Mobile Workforce bills are drafts and must not be modelled: [[FACT:multi.mobile_workforce_bill.senate=S. 1443 (introduced 2025-04-10, Senate Finance): DRAFT, NOT ENACTED - do not model]] [US-MULTIS5-020]; [[FACT:multi.mobile_workforce_bill.house=H.R. 10271 (introduced 2026-09-03, House Judiciary): DRAFT, NOT ENACTED - do not model]] [US-MULTIS5-025].
 
 **Calculation oracle.** [[FACT:fed.oracle.source=IRS Pub. 15-T (2026): only two worked examples (NRA weekly 300 -> 31; tribal 6,000 -> 584.09); Stage 9b re-derives from Worksheet 1A + Annual Percentage Method tables]] [US-FED-027]. [[FACT:fed.oracle.estimator_not_oracle=IRS Tax Withholding Estimator is an employee tool, not an employer withholding engine - not an oracle]] [US-FED-021]. State oracles are listed in Module 12.
 
-**Scope of this guide.** Private-sector employers and their common-law employees. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction recorded in `00-official-sources/MANDATE.md`, scope block). All special employee populations are in scope at the federal layer (owner decision US-OWN-005, MANDATE question US-MQ-12); their treatment is in Module 11.
+**Scope of this guide.** Private-sector employers and their common-law employees. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. All special employee populations are in scope at the federal layer (owner decision US-OWN-005); State-level rules for special populations are deferred to a later round (US-OWN-005). The federal treatment of each population is in Module 11.
 
 ### Tier verdict (build manifest)
 
-Repeated verbatim from `_pipeline/build-manifest.json` → `tier`.
+Repeated verbatim from the build manifest (tier classification).
 
 **Overall:** T4
 
@@ -96,9 +96,9 @@ English. [[FACT:fed.language.official=English designated official language (pres
 
 | Document | Language rule | Basis |
 |---|---|---|
-| Employee pay statement | English | Mandate US-MQ-03, owner decision US-OWN-006 (`build-manifest.json` → `languages.payslip_rule`) |
-| Authority-facing filings (IRS, SSA, State agencies) | English | Mandate US-MQ-03 (`languages.authority_facing_rule`) |
-| Notices and posters in certain States | English plus Spanish or the employee's primary language where a State statute requires it | Mandate US-MQ-03 seams (`languages.seams`); not a payroll-calculation item |
+| Employee pay statement | English | Owner decision US-OWN-006 (payslip language rule) |
+| Authority-facing filings (IRS, SSA, State agencies) | English | Owner decision US-OWN-006 (authority-facing language rule) |
+| Notices and posters in certain States | English plus Spanish or the employee's primary language where a State statute requires it | Owner decision US-OWN-006 (State notice seams); not a payroll-calculation item |
 
 No source read in the mandate census requires the pay statement itself in a language other than English; bilingual documents are permitted (`languages._bilingual_documents_permitted`).
 
@@ -156,7 +156,7 @@ Federal law sets no minimum pay frequency in the facts; the federal withholding 
 | WY | [[FACT:wy.labour.pay_frequency.semimonthly_industries=railroads, mines, refineries, oil and gas, factories, mills, workshops: semimonthly (1-15 by 1st; rest by 15th)]] | [US-WYS5-002] |
 | MT | Prevailing-wage work only: [[FACT:mt.prevailing_wage.pay_frequency=weekly]] | [US-MTS5-011] |
 
-⚠️ RESEARCH-GAP (non-blocking): the facts carry no general pay-frequency rule for AL, FL, MA, MT, NH, PA, SC (Montana only for prevailing-wage work), and no federal statement that federal law sets none (request key `multi.pay_frequency.remaining_states`)
+Not configured in this release [[GAP:RQ-550]]: No official source read for this release gives a general pay-frequency rule for AL, FL, MA, MT, NH, PA, SC (Montana only for prevailing-wage work), and no federal statement that federal law sets none.
 
 ### For each frequency, detail the corresponding statutory reporting and payment deadlines for both income tax withholding and social security contributions.
 
@@ -188,44 +188,56 @@ There is no federal rule in the facts. Where a State statute addresses it, the w
 
 Federal deposit deadlines that fall on a deposit holiday move as stated in `fed.deposit.next_day_threshold` [US-FEDS5-004] (deposit holidays are District of Columbia legal holidays).
 
-⚠️ RESEARCH-GAP (non-blocking): the payday-on-a-non-working-day rule is keyed for DE, ID, MD and ME only; the other States and the federal position are not in the facts (request key `multi.payday.nonworkday_rule`)
+Not configured in this release [[GAP:RQ-551]]: The payday-on-a-non-working-day rule is established for DE, ID, MD and ME only; the other States and the federal position are not established from an official source.
 
 ### What are the common payroll pay dates and cut-off dates for payroll processing?
 
 Statutory windows drive the calendar: several States fix the payday window by statute (for example `ca.pay_frequency.rule` [US-CAS5-009], `oh.pay_frequency.rule` [US-OHS5-015], `mi.pay_frequency.rule` [US-MIS5-005], `nm.pay_frequency.rule` [US-NMP8-001], `tx.pay_frequency.rule` [US-TXS5-004]). The cut-off date is the last day of the pay period allowed by the work-location State's maximum lag (table above).
 
-⚠️ RESEARCH-GAP (non-blocking): common (non-statutory) US pay dates and processing cut-offs by frequency are not in the facts (request key `practice.payroll_calendar.common_dates`)
+Not configured in this release [[GAP:RQ-552]]: Common (non-statutory) US pay dates and processing cut-offs by frequency are not established from an official source.
 
 ## 1.3 Extra Pay Period Handling
 
 ### Describe the statutory handling and calculation adjustments required for fiscal years containing extra pay periods (e.g., 53 weekly pays).
 
-The federal method annualises each payment with the number of pay periods of its frequency ([[FACT:fed.fit.pay_periods_per_year=2 / 4 / 12 / 24 / 26 / 52 / 260 (semiannual, quarterly, monthly, semimonthly, biweekly, weekly, daily)]]; [US-FEDS5-001]). The facts do not state whether a calendar year with 53 weekly paydays (or 27 biweekly paydays) changes that divisor.
+The federal method annualises each payment with the number of pay periods of its frequency ([[FACT:fed.fit.pay_periods_per_year=2 / 4 / 12 / 24 / 26 / 52 / 260 (semiannual, quarterly, monthly, semimonthly, biweekly, weekly, daily)]]; [US-FEDS5-001]). A calendar year with 53 weekly paydays (or 27 biweekly paydays) does not change that divisor:
 
-⚠️ RESEARCH-GAP (non-blocking): no fact states the Pub. 15-T treatment of a year with 53 weekly or 27 biweekly paydays (request key `fed.fit.extra_pay_period.rule`)
+- Rule: [[FACT:fed.fit.extra_pay_period.rule=No IRS rule adjusts withholding for a 27th biweekly or 53rd weekly payday: Pub. 15-T Worksheet 1A annualises each payment with the Table 3 count for the payroll period (weekly 52, biweekly 26), and Pub. 15 sec. 8 requires withholding for the regular payroll period, so the extra payday is withheld as one more ordinary period. FICA and FUTA: wages are counted when paid, against the 2026 annual bases for wages paid in 2026.]] [US-FEDQ1-007].
+- Configuration: keep the pay-period count of the frequency (no 53 / 27 divisor); the extra payday is one more ordinary payroll period for income-tax withholding.
 
 ### Detail the impact on annualized tax calculations and social security contributions.
 
-Social insurance is unaffected in method: the OASDI, FUTA and SUI bases are annual amounts applied to wages **paid** in the calendar year (coverage row `accrual_vs_payment` [US-FED-003, US-FED-006, US-MULTIS5-009, US-MAS5-012]). An extra payday falls in the year in which it is paid and counts toward that year's bases (OASDI USD [[FACT:fed.fica.oasdi.wage_base=184,500]] for 2026; FUTA USD [[FACT:fed.futa.wage_base=7,000]] per employer). For income tax see the research gap above.
+Social insurance is unaffected in method: the OASDI, FUTA and SUI bases are annual amounts applied to wages **paid** in the calendar year (coverage row `accrual_vs_payment` [US-FED-003, US-FED-006, US-MULTIS5-009, US-MAS5-012]). An extra payday falls in the year in which it is paid and counts toward that year's bases (OASDI USD [[FACT:fed.fica.oasdi.wage_base=184,500]] for 2026; FUTA USD [[FACT:fed.futa.wage_base=7,000]] per employer). Income tax: each payday, including the extra one, is withheld as a regular payroll period with the normal annualisation [US-FEDQ1-007]; the year-end assessment on the employee's return settles any difference.
 
 ### If optional adjustment methods are permitted, provide a step-by-step guide.
 
-Not determinable from the facts: depends on `fed.fit.extra_pay_period.rule` (research gap above).
+No optional federal adjustment method exists: the IRS publications provide none for an extra payday [US-FEDQ1-007]. Steps: (1) keep the frequency's pay-period count in Worksheet 1A; (2) withhold the extra payday as an ordinary period; (3) apply FICA and FUTA to the wages paid, against the annual bases of the year of payment. State methods follow the State annex.
 
 ## 1.4 Holiday Calendar
 
 ### What are the official public holidays?
 
-⚠️ RESEARCH-GAP (non-blocking): the 2026 dates of the federal legal public holidays (5 U.S.C. 6103) are not in the facts (request key `fed.holidays.legal_public_2026`)
+Federal legal public holidays: [[FACT:fed.holidays.legal_public=New Year's Day; Birthday of Martin Luther King, Jr.; Washington's Birthday; Memorial Day; Juneteenth National Independence Day; Independence Day; Labor Day; Columbus Day; Veterans Day; Thanksgiving Day; Christmas Day (11 legal public holidays)]] [US-FEDQ1-009]. Federal filing, furnishing and deposit dates roll forward under this rule: [[FACT:fed.deposit.due_date.non_business_day_rule=A filing, furnishing or deposit due date that falls on a Saturday, Sunday or legal holiday moves to the next business day; legal holiday = District of Columbia legal holiday; a statewide holiday never delays a federal deposit; semiweekly depositors get one extra day for each legal holiday in the 3 weekdays after the semiweekly period]] [US-FEDQ1-011].
 
-| Holiday | 2026 date | Deposit holiday |
-|---|---|---|
-| ⚠️ RESEARCH-GAP (non-blocking): see request `fed.holidays.legal_public_2026` | | |
+| Holiday | 2026 observed date | 2027 observed date | Federal deposit / filing holiday |
+|---|---|---|---|
+| New Year's Day | [[FACT:fed.holiday.new_years_day.observed_date=2026-01-01]] [US-FEDQ1-011] | [[FACT:fed.holiday.new_years_day.observed_date=2027-01-01]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Birthday of Martin Luther King, Jr. | [[FACT:fed.holiday.mlk_birthday.observed_date=2026-01-19]] [US-FEDQ1-011] | [[FACT:fed.holiday.mlk_birthday.observed_date=2027-01-18]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Washington's Birthday | [[FACT:fed.holiday.washingtons_birthday.observed_date=2026-02-16]] [US-FEDQ1-011] | [[FACT:fed.holiday.washingtons_birthday.observed_date=2027-02-15]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Memorial Day | [[FACT:fed.holiday.memorial_day.observed_date=2026-05-25]] [US-FEDQ1-011] | [[FACT:fed.holiday.memorial_day.observed_date=2027-05-31]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Juneteenth National Independence Day | [[FACT:fed.holiday.juneteenth.observed_date=2026-06-19]] [US-FEDQ1-011] | [[FACT:fed.holiday.juneteenth.observed_date=2027-06-18]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Independence Day | [[FACT:fed.holiday.independence_day.observed_date=2026-07-03]] [US-FEDQ1-011] | [[FACT:fed.holiday.independence_day.observed_date=2027-07-05]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Labor Day | [[FACT:fed.holiday.labor_day.observed_date=2026-09-07]] [US-FEDQ1-011] | [[FACT:fed.holiday.labor_day.observed_date=2027-09-06]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Columbus Day | [[FACT:fed.holiday.columbus_day.observed_date=2026-10-12]] [US-FEDQ1-011] | [[FACT:fed.holiday.columbus_day.observed_date=2027-10-11]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Veterans Day | [[FACT:fed.holiday.veterans_day.observed_date=2026-11-11]] [US-FEDQ1-011] | [[FACT:fed.holiday.veterans_day.observed_date=2027-11-11]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Thanksgiving Day | [[FACT:fed.holiday.thanksgiving_day.observed_date=2026-11-26]] [US-FEDQ1-011] | [[FACT:fed.holiday.thanksgiving_day.observed_date=2027-11-25]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| Christmas Day | [[FACT:fed.holiday.christmas_day.observed_date=2026-12-25]] [US-FEDQ1-011] | [[FACT:fed.holiday.christmas_day.observed_date=2027-12-24]] [US-FEDQ1-010] | 2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |
+| District of Columbia Emancipation Day (not a 5 U.S.C. 6103 holiday) | [[FACT:fed.holiday.dc_emancipation_day.observed_date=2026-04-16]] [US-FEDQ1-011] | not in the research | 2026: yes (District of Columbia legal holiday) |
 
 ### Are there any regional, state-specific, or company-specific holidays?
 
-⚠️ RESEARCH-GAP (non-blocking): State legal holidays (which affect State deposit due dates and some State payday rules) are not in the facts (request key `multi.holidays.state_2026`)
-Company holidays are employer policy; no federal statute requires paid holidays for private employers in the facts (`fed.paid_leave.private_employers.exists` [US-FEDS5-026]).
+Not configured in this release [[GAP:RQ-555]]: State legal holidays (which affect State deposit due dates and some State payday rules) are not established from an official source.
+Company holidays are employer policy; no federal statute requires paid holidays for private employers (`fed.paid_leave.private_employers.exists` [US-FEDS5-026]).
 
 ## 1.5 Rounding and Precision Rules
 
@@ -254,7 +266,7 @@ Federal: [[FACT:fed.fit.rounding=Optional: wages may be rounded to the nearest d
 
 Build rule: compute every intermediate at full precision and round each statutory amount once, half-up to the cent, unless the jurisdiction's rule above rounds to the dollar; apply the optional federal whole-dollar rounding only if the employer elects it and then consistently.
 
-⚠️ RESEARCH-GAP (non-blocking): Kentucky: the 2026 formula sheet shows a bi-weekly result rounded down to whole dollars, while KRS 141.310(4) rounds only wages; the per-period rounding of the tax is not established (open item `ky.wh.rounding.tax` in CCG-annex_KY-facts.json; closes with: DOR written answer or a corrected 2026/2027 formula sheet.)
+Not configured in this release [[GAP:RQ-226]]: Kentucky: the 2026 formula sheet shows a bi-weekly result rounded down to whole dollars, while KRS 141.310(4) rounds only wages; the per-period rounding of the tax is not established.
 
 ### What level of decimal precision is required for statutory reporting?
 

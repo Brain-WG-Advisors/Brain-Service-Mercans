@@ -1,14 +1,15 @@
 # Annex NH: New Hampshire
 
+
 United States Country Configuration Guide, jurisdiction annex NH. Tax year 2026; currency USD (two decimal places).
 
-## NH.0 Scope of this annex
+**Scope of this annex.**
 
-This annex holds the New Hampshire layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC are out of scope. The pay statement is issued in English.
+This annex holds the New Hampshire layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. The pay statement is issued in English.
 
-In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register (00-official-sources/legal-basis-register.csv), with the authority and address listed in section NH.20 (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
+In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register, with the authority and address listed in section NH.S (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
 
-## NH.1 Jurisdiction layer
+**Jurisdiction layer.**
 
 | Item | Value |
 |---|---|
@@ -17,14 +18,14 @@ In every table, *Valid from* and *Valid to* give the period in which the value a
 
 Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = state withholding with no local layer remitted separately; T4 = a local layer remitted to a separate local authority on its own return.
 
-## NH.2 Configuration decisions
+**Configuration decisions.**
 
 - New Hampshire has no state wage tax ([[FACT:nh.pit.exists=False]]): no withholding, no state certificate and no annual reconciliation (tier T1).
 - Final pay on discharge is due within [[FACT:nh.term.final_pay.discharge.hours=72]] hours.
 - Wage garnishment on New Hampshire judgments exempts [[FACT:nh.garn.consumer.exempt_multiple_fmw=50]] times the federal minimum wage, [[FACT:nh.garn.consumer.exempt.weekly=362.5]] USD a week.
-- Parental medical leave is not configured (non-blocking gap in section NH.10).
+- Parental medical leave is not configured [[GAP:RQ-102]] (see NH.6).
 
-## NH.3 Employment and labour code
+## NH.1 Employment and labour code
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -50,23 +51,23 @@ Rules:
 - Semi-monthly or monthly pay needs the Labor Commissioner's written permission and must still be at least monthly.
 - An employer that uses EFT, direct deposit or cards must also offer payment by check.
 
-## NH.4 State income tax withholding
+## NH.2 Income tax withholding
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nh.pit.exists` | [[FACT:nh.pit.exists=False]] | 2026-01-01 | open | US-NH-006 (A.2, NH Department of Revenue Administration) | no withholding, no state W-4, no reconciliation; I&D tax repealed from 2025-01-01 (US-NH-001) |
 
-## NH.5 Non-residents, residents working elsewhere and reciprocity
+## NH.2b Non-resident regime and reciprocity
 
 No New Hampshire rule is configured in this domain; the federal treatment in Annex FED applies.
 
-## NH.6 Local wage taxes
+## NH.2c Local wage taxes
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nh.local_wage_tax.exists` | [[FACT:nh.local_wage_tax.exists=False]] | 2026-01-01 | open | US-NH-006 (A.2, NH Department of Revenue Administration) | - |
 
-## NH.7 Unemployment insurance, disability and paid-leave contributions, other payroll levies
+## NH.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -74,7 +75,7 @@ No New Hampshire rule is configured in this domain; the federal treatment in Ann
 | `nh.sui.wage_base.other_state_credit` | [[FACT:nh.sui.wage_base.other_state_credit=True]] | 2026-01-01 | open | US-NHS5-007 (A.1, NH General Court) | - |
 | `nh.ui.rate.statutory` | [[FACT:nh.ui.rate.statutory=2.7]] percent | 2026-01-01 | open | US-NHS5-007 (A.1, NH General Court) | subject to experience rating |
 | `nh.ui.fund_balance_reduction.rate` | [[FACT:nh.ui.fund_balance_reduction.rate=1.0]] percent | 2026-01-01 | 2026-12-31 | US-NHP9W-001 (A.2, New Hampshire Employment Security) | Q1-Q4 2026 |
-| `nh.sui.new_employer.rate` | [[FACT:nh.sui.new_employer.rate=1.7]] percent | 2026-01-01 | 2026-12-31 | US-NHP9W-001 (A.2, New Hampshire Employment Security) | 2.7 (statutory, US-NH-005 rule "2.7% minus any FBR") - 1.00 FBR (US-NHP9W-001) = 1.7 |
+| `nh.sui.new_employer.rate` | [[FACT:nh.sui.new_employer.rate=1.7]] percent | 2026-01-01 | 2026-12-31 | US-NHP9W-001 (A.2, New Hampshire Employment Security) | 2.7 (statutory, US-NH-005 rule "[[FACT:nh.ui.rate.statutory=2.7]]% minus any FBR") - 1.00 FBR (US-NHP9W-001) = 1.7 |
 | `nh.ui.inverse_surcharge.rate` | [[FACT:nh.ui.inverse_surcharge.rate=0.5]] percent | 2026-01-01 | 2026-12-31 | US-NHP9W-001 (A.2, New Hampshire Employment Security) | negative-rated employers |
 | `nh.ui.emergency_surcharge.rate` | [[FACT:nh.ui.emergency_surcharge.rate=0.0]] percent | 2026-01-01 | 2026-12-31 | US-NHP9W-001 (A.2, New Hampshire Employment Security) | - |
 | `nh.ui.admin_contribution.range` | [[FACT:nh.ui.admin_contribution.range=0.1-0.4% carved out of the rate]] | 2026-01-01 | open | US-NHP7-001 (A.2, NH official authority) | not added |
@@ -86,10 +87,10 @@ Rules:
 
 - The Granite State Paid Family Leave Plan offers FMLI through the state carrier.
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.ui.rate.new_employer.confirm`): The new-employer rate of [[FACT:nh.sui.new_employer.rate=1.7]] percent is derived from the statutory rate less the fund-balance reduction, not stated on an authority page. To close: NHES Tax Rate Chart footnote or Emp 300 rule (NHES Employer Accounts).
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.ui.wages.elective_deferrals`): The treatment of 401(k) deferrals and cafeteria-plan reductions in New Hampshire unemployment wages is not settled (RSA 282-A:15 is silent). To close: Emp 300 wage-definition rule or an NHES written answer.
+- Not configured in this release [[GAP:RQ-097]]: The new-employer rate of [[FACT:nh.sui.new_employer.rate=1.7]] percent is derived from the statutory rate less the fund-balance reduction, not stated on an authority page.
+- Not configured in this release [[GAP:RQ-098]]: The treatment of 401(k) deferrals and cafeteria-plan reductions in New Hampshire unemployment wages is not settled (RSA 282-A:15 is silent).
 
-## NH.8 Pay statement
+## NH.4 Pay statement
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -104,10 +105,10 @@ Rules:
 - No statute or rule read addresses electronic delivery of the deduction statement.
 - Language: English; no second-language rule for the payslip. (US-NHL-001, US-NHP9L-002)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.payslip.electronic`): Electronic pay statements not addressed in RSA 275:49 IV or Lab 803.03. To close: An NH DOL written opinion or FAQ.
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.payslip.reach`): No territorial clause in RSA 275 for out-of-state work. To close: An NH DOL position.
+- Not configured in this release [[GAP:RQ-099]]: Electronic pay statements not addressed in RSA 275:49 IV or Lab 803.03.
+- Not configured in this release [[GAP:RQ-100]]: No territorial clause in RSA 275 for out-of-state work.
 
-## NH.9 Statutory reporting
+## NH.5 Statutory reporting
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -125,9 +126,9 @@ Rules:
 - Registration and TPA access through NHUIS. (US-NHP8-003, US-NHP9-001)
 - The Unemployment Notice poster is mandatory. (US-NHS5-013)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.report.ui.due_and_penalties`): The quarterly due date, late fee and interest come from the agency's older employer handbook; the current rule Emp 303.02 was not available. To close: Emp 303.02 text via US IP or Chrome.
+- Not configured in this release [[GAP:RQ-101]]: The quarterly due date, late fee and interest come from the agency's older employer handbook; the current rule Emp 303.02 was not available.
 
-## NH.10 Leave
+## NH.6 Leave
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -141,9 +142,9 @@ Rules:
 - No make-up time may be required.
 - Pay impact is limited to handling unpaid absence.
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.leave.parental_medical`): Parental medical leave under RSA 275:37-f rests on a source that cannot be used as a primary source; the statute was not read. To close: gc.nh.gov page read with US IP or Chrome, or 2025 HB 2 chaptered text.
+- Not configured in this release [[GAP:RQ-102]]: Parental medical leave under RSA 275:37-f rests on a source that cannot be used as a primary source; the statute was not read.
 
-## NH.11 Termination and final pay
+## NH.7 Termination and final pay
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -157,11 +158,11 @@ Rules:
 - No UI separation notice to the employee is required by any source read.
 - NHES sends a "Request to Employer for Separation Information" when a claim is filed. (US-NHS5-013)
 
-## NH.12 Taxable wages and benefits in kind
+## NH.8 Benefits in kind and taxable wages
 
 No New Hampshire rule is configured in this domain; the federal treatment in Annex FED applies.
 
-## NH.13 Deductions and garnishments
+## NH.9 Deductions and garnishments
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -178,7 +179,9 @@ Rules:
 - Support withholding has priority over other state process.
 - Lump sums (severance, accumulated sick or vacation pay, bonuses, commissions) can be taken up to the arrears when the obligor is non-compliant.
 
-## NH.14 Prevailing wage and collective agreements
+## NH.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -189,7 +192,7 @@ Rules:
 - Federal Davis-Bacon applies only to federally assisted work.
 - No state certified-payroll duty exists.
 
-## NH.15 Indexation
+## NH.11 Indexation
 
 Rules:
 
@@ -197,7 +200,7 @@ Rules:
 - The minimum wage is pegged to the federal minimum. (US-NHS5-003)
 - Experience rates are set for July–June. (US-NHP9W-002)
 
-## NH.16 Payroll data protection and records
+## NH.12 Payroll data protection and records
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -210,28 +213,32 @@ Rules:
 - Notify affected individuals as soon as possible, and notify the NH Attorney General or the primary regulator.
 - A payroll processor holding the data must notify the data owner immediately.
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.data.privacy_act`): RSA 507-H employee-data exemption not read. To close: RSA 507-H text.
+- Not configured in this release [[GAP:RQ-103]]: RSA 507-H employee-data exemption not read.
 
-## NH.17 Legal change in force or enacted
+## NH.13 Live legal change
 
 No New Hampshire rule is configured in this domain; the federal treatment in Annex FED applies.
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.live.session_bills`): The final status of HB 1484 (minimum wage) and SB 416 (tips) rests on secondary sources only. To close: gc.nh.gov bill status pages (US IP).
+- Not configured in this release [[GAP:RQ-104]]: The final status of HB 1484 (minimum wage) and SB 416 (tips) rests on secondary sources only.
 
-## NH.18 Special populations
+## NH.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## NH.15 Special populations
 
 - Agricultural: Farm labor exempt from the NH minimum wage; under-16 farm work needs no certificate. (US-NHS5-003, US-NHS5-005, US-NHS5-007, US-NHS5-014)
 - Tipped: tip credit with make-up; tips are the employee's property. (US-NHS5-003)
 - Clergy/religious: No wage-tax angle. (US-NHS5-007)
 - Nonresident aliens: No state withholding. (US-NHS5-007)
 - Statutory employees: No NH rule beyond federal. (US-NHS5-005, US-NHS5-007)
-- ⚠️ RESEARCH-GAP (non-blocking, `nh.special_populations.thresholds`): thresholds, amounts or conditions for these populations are stated in the research without a confirmed value record and are not configured from this annex: Domestic/household; Agricultural; Minors; Tipped; Clergy/religious; Students; Nonresident aliens; Statutory employees; Government employees; Family employees. To close: one confirmed value per threshold, with its source row.
+- Not configured in this release [[GAP:RQ-105]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic/household; Agricultural; Minors; Tipped; Clergy/religious; Students; Nonresident aliens; Statutory employees; Government employees; Family employees.
 
-## NH.19 Language
+## NH.16 Language
 
 - The pay statement and all filings are in English (owner decision US-OWN-006).
 
-## NH.20 Sources
+## NH.S Sources
 
 | Source | Authority |
 |---|---|

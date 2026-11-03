@@ -128,7 +128,7 @@ Synthesis B worker (RSPEC + DD), 2026-11-02. Built only from rows of `00-officia
 | New-hire report | multistate_designation | electronic multistate employer may designate one state after notifying HHS |  | US-MULTIS5-006 | `rspec.fed.new_hire.multistate_designation` |
 | Reporting agent | form | Form 8655 | - | US-FED-008 | `rspec.fed.reporting_agent.form` |
 
-**Open for this jurisdiction:** `rspec.fed.efw2.ty2026_spec` (blocking); `rspec.fed.form940.ty2026_instructions` (non-blocking); `rspec.fed.aca.ty2026_due_dates` (non-blocking)
+**Open for this jurisdiction:** `rspec.fed.form940.ty2026_instructions` (non-blocking); `rspec.fed.aca.ty2026_due_dates` (non-blocking)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -317,7 +317,7 @@ Synthesis B worker (RSPEC + DD), 2026-11-02. Built only from rows of `00-officia
 | State withholding return | form | A1-QRT quarterly, even with zero; due last day of month after quarter (+10 days for timely payers) | - | US-AZP52-005 (P) | `rspec.az.wh_return.form` |
 | Registration | form | JT-1 registers ADOR withholding and DES UI | - | US-AZP52-005 (P) | `rspec.az.registration.form` |
 
-**Open for this jurisdiction:** `rspec.az.ui_qtr.form_due_format` (blocking)
+**Open for this jurisdiction:** `rspec.az.ui_qtr.efile_mandate` (non-blocking)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -362,7 +362,7 @@ Synthesis B worker (RSPEC + DD), 2026-11-02. Built only from rows of `00-officia
 | Contractor report (OUT of scope) | form | DE 542 for independent contractors paid/contracted 600+, within 20 days [Contractors / 1099-NEC OUT of scope (owner instruction 2026-10-29, SKELETON-MANIFEST scope line); recorded as scope trap] | - | US-CAS5-002 | `rspec.ca.contractor_report.form` |
 | Third-party authorisation | form | DE 48 | - | US-CAEDD-006 (P) | `rspec.ca.poa.form` |
 
-**Open for this jurisdiction:** `rspec.ca.ui_qtr.de9c_file_spec` (blocking)
+**Open for this jurisdiction:** none (RSPEC pre-build close 2026-11-03)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -400,7 +400,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Third-party authorisation | form | DR 0145 | - | US-COP51-006 (P) | `rspec.co.poa.form` |
 | Local returns | denver_opt | Denver OPT employee 5.75/month withheld when >=500 earned in month; employer 4.00/month; Denver Treasury return |  | US-COP52-001 (P) | `rspec.co.local.denver_opt` |
 
-**Open for this jurisdiction:** `rspec.co.ui_qtr.format_due` (blocking); `rspec.co.new_hire.state_specifics` (non-blocking)
+**Open for this jurisdiction:** `rspec.co.ui_qtr.format_due` (documented limitation); `rspec.co.new_hire.state_specifics` (non-blocking)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -450,7 +450,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | PFML / paid-leave report | channel | CT Paid Leave quarterly return: portal or batch XML/CSV [File Specification Toolkit not downloaded] | xml / file_upload / online_form | US-CTS5-022 | `rspec.ct.pfml_qtr.channel` |
 | New-hire report | deadline_days | 20 [rehire = separated >60 days; CT-W4 copy, DOL website or fax] |  | US-CTS5-019 | `rspec.ct.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.ct.pfml_qtr.file_spec` (blocking); `rspec.ct.ui_qtr.q3_2026_layout` (non-blocking)
+**Open for this jurisdiction:** `rspec.ct.ui_qtr.q3_2026_layout` (non-blocking)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -545,7 +545,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Employee W-2 duty | termination | W-2 within 30 days of last wage payment on termination |  | US-DES5-005 | `rspec.de.w2_employee.termination` |
 | Local returns | wilmington | Wilmington earned income tax 1.25% residents and nonresidents for work in city; returns to Department of Finance |  | US-DEP52-001 (P) | `rspec.de.local.wilmington` |
 
-**Open for this jurisdiction:** `rspec.de.wh_return.indexed_thresholds_2026` (non-blocking); `rspec.de.ui_qtr.file_format` (blocking)
+**Open for this jurisdiction:** `rspec.de.wh_return.indexed_thresholds_2026` (non-blocking); `rspec.de.ui_qtr.file_format` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -663,7 +663,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Quarterly UI wage report | placeholder_ssn | 000-00-000n allowed for missing new-hire SSN; correct within 30 days on DOL-3C |  | US-GAS5-021 | `rspec.ga.ui_qtr.placeholder_ssn` |
 | New-hire report | deadline_days | 10 [fields add DOB, start date, medical-insurance availability, state of hire] |  | US-GAS5-012 | `rspec.ga.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.ga.w2_state.ty2026_layout` (blocking); `rspec.ga.ui_qtr.universal_efile` (non-blocking)
+**Open for this jurisdiction:** `rspec.ga.w2_state.ty2026_layout` (documented limitation); `rspec.ga.ui_qtr.universal_efile` (non-blocking)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -778,7 +778,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | New-hire report | deadline_days | 15 [fields add DOB, dependent health coverage and qualifying date, IWO address; contractors reported] |  | US-IAS5-012 | `rspec.ia.new_hire.deadline_days` |
 | Permit | format | 9-digit withholding permit since 2021-11-15 (older 12-digit) | - | US-IAS5-018 | `rspec.ia.permit.format` |
 
-**Open for this jurisdiction:** `rspec.ia.ui_qtr.wage_detail_layout` (blocking)
+**Open for this jurisdiction:** `rspec.ia.ui_qtr.wage_detail_layout` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -829,7 +829,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | New-hire report | deadline_days | 20 [fields add Idaho UI account number, hire date, multistate flag] |  | US-IDS5-015 | `rspec.id.new_hire.deadline_days` |
 | Registration | form | Idaho Business Registration (IBR), one form for STC and IDOL | - | US-IDS5-021 | `rspec.id.registration.form` |
 
-**Open for this jurisdiction:** `rspec.id.w2_state.state_record_spec` (blocking)
+**Open for this jurisdiction:** `rspec.id.w2_state.state_record_spec` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -878,7 +878,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Monthly UI wage report | rule | monthly wage report months 1 and 2 of each quarter for employers with >=25 employees prior year; name, SSN, wages; MyTax CSV only |  | US-ILS5-017 | `rspec.il.ui_monthly.rule` |
 | New-hire report | deadline_days | 20 [includes rehires and independent contractors; optional IWO address] |  | US-ILS5-018 | `rspec.il.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.il.w2_state.idr986_spec` (blocking)
+**Open for this jurisdiction:** `rspec.il.w2_state.idr986_spec` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -914,7 +914,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Quarterly UI wage report | extra_fields | SOC code (6 digits) and start date per worker |  | US-INS5-014 | `rspec.in.ui_qtr.extra_fields` |
 | New-hire report | deadline_days | 20 [electronic only since 2024-07-01; extra fields job title, SOC, starting compensation, rate-of-pay basis; rehire after 60+ days] |  | US-INS5-016 | `rspec.in.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.in.wh_return.xml_schema` (blocking)
+**Open for this jurisdiction:** `rspec.in.wh_return.xml_schema` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1004,7 +1004,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Local returns | louisville | Louisville OLT: W-1 quarterly; W-1D monthly if >3,000/quarter; W-3 + W-2 data by Feb 28 |  | US-KYP9W-002 | `rspec.ky.local.louisville` |
 | Local returns | lexington | Lexington-Fayette occupational license fee 2.25%, employer return 220-221/222 |  | US-KYS5-024 | `rspec.ky.local.lexington` |
 
-**Open for this jurisdiction:** `rspec.ky.w2_state.rs_spec` (blocking)
+**Open for this jurisdiction:** `rspec.ky.w2_state.rs_spec` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1050,7 +1050,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Quarterly UI wage report | due | last day of month after quarter; domestic annual Jan 31; mandatory electronic (LAWATS) [A.3 snapshot 2025-04; form name and upload format not read] |  | US-LAS5-007 | `rspec.la.ui_qtr.due` |
 | New-hire report | deadline_days | 20 [fields add occupation; no 60-day threshold in statute] |  | US-LAS5-010 | `rspec.la.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.la.w2_state.lawage_format` (blocking)
+**Open for this jurisdiction:** `rspec.la.w2_state.lawage_format` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1194,7 +1194,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | State withholding return | form | 941ME quarterly, last day of month after quarter, electronic mandatory even when nothing to report | - | US-MEP52-002 (P) | `rspec.me.wh_return.form` |
 | Annual reconciliation | applicable | false [no W-3ME after TY2023] |  | US-MEP52-009 (P) | `rspec.me.annual_recon.applicable` |
 
-**Open for this jurisdiction:** `rspec.me.w2_state.bulk_spec` (blocking)
+**Open for this jurisdiction:** `rspec.me.w2_state.bulk_spec` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1237,7 +1237,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Withholding payment | accelerated_threshold | 480000 [prior-year liability 480,000+ = EFT on federal deposit day] |  | US-MIS5-021 | `rspec.mi.wh_payment.accelerated_threshold` |
 | Quarterly UI wage report | due | Jan 25 / Apr 25 / Jul 25 / Oct 25, next business day |  | US-MIS5-020 | `rspec.mi.ui_qtr.due` |
 | Quarterly UI wage report | formats | MiUI four formats: Delimited CSV (2026 spec v3, 2026-04-08), ICESA (v2), EFW2 (v2 2026-04-03, RE/RS 512-byte UIA profile), XML (v1 2026-02-23); MiWAM legacy refused [Specs on disk; inspected] | xml / file_upload | US-MIS5-022 | `rspec.mi.ui_qtr.formats` |
-| New-hire report | channel | Michigan New Hires Operation Center, mi-newhire.com, Form 3281; federal 20 days [MI statute and penalty not located; US-MIS5-026 partial] | - | US-FED-017 | `rspec.mi.new_hire.channel` |
+| New-hire report | channel | Michigan New Hires Operation Center, mi-newhire.com, Form 3281; federal 20 days [MI statute and penalty not located (the earlier partial row is superseded by US-MIB5-001)] | - | US-FED-017 | `rspec.mi.new_hire.channel` |
 | State W-2 filing | format | EFW2 / Pub 1220 upload through MTO for 10+ forms; W-2 always direct to Treasury (CF/SF 1099 only); due Jan 31 | file_upload | US-MIPIT-001 (P) | `rspec.mi.w2_state.format` |
 | Local returns | detroit | Detroit monthly return Form 5323 (15th) and annual reconciliation Form 5321 TY2026 due 2027-02-28; DW-4 certificate |  | US-MIP51-002 (P) | `rspec.mi.local.detroit` |
 
@@ -1284,7 +1284,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | PFML / paid-leave report | form | Paid Leave quarterly wage detail and premium to DEED, electronic | - | US-MNS5-018 | `rspec.mn.pfml_qtr.form` |
 | New-hire report | deadline_days | 20 [rehire after 60+ days; exempt if <2 months and <250/month; private-home domestic excluded] |  | US-MNS5-016 | `rspec.mn.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.mn.ui_qtr.due_format` (blocking)
+**Open for this jurisdiction:** `rspec.mn.ui_qtr.due_format` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1422,7 +1422,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Quarterly UI wage report | due | Apr 30 / Jul 31 / Oct 31 / Jan 31; electronic mandatory from 2025-07-01 via UI eServices [E-Filing Handbook not obtained] |  | US-MTS5-025 | `rspec.mt.ui_qtr.due` |
 | New-hire report | deadline_days | 20 [residential and mailing addresses; optional DOB and dependent health coverage] |  | US-MTS5-012 | `rspec.mt.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.mt.ui_qtr.efiling_handbook` (blocking)
+**Open for this jurisdiction:** `rspec.mt.ui_qtr.efiling_handbook` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1466,7 +1466,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Quarterly UI wage report | form | NCUI 101 via NCSUITS, Apr 30 / Jul 31 / Oct 31 / Jan 31; electronic at 10+ wage items | - | US-NCS5-025 | `rspec.nc.ui_qtr.form` |
 | New-hire report | deadline_days | 20 |  | US-NCS5-020 | `rspec.nc.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.nc.w2_state.ty2026_spec` (blocking)
+**Open for this jurisdiction:** none (RSPEC pre-build close 2026-11-03)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1480,7 +1480,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 - **Annual reconciliation and state W-2:** NC-3 plus the state copies of W-2/1099 are **due January 31**, and electronic filing is mandatory through **eNC3**. A business that closes files by the end of the month after the quarter of closure. Late NC-3: 50 USD a day, capped at 1,000 USD. Wrong format: 200 USD [US-NC-001]. File formats: NC-3 and W-2 are fixed-field .txt; 1099/W-2G/1042-S are .xml. **The TY2026 specs are version 9-2026** ("use beginning January 2027") [US-NCS5-028]. The NC-3 layout PDF on disk is the **10-2020** edition (512-byte records, monthly amounts). It is a structural lead only, not the TY2026 edition [US-NCS5-027, partial]. EFW2 conformity of the NC W-2 file was not confirmed because the spec was not downloaded (Q2).
 - **Quarterly UI wage report:** NCUI 101 through NCSUITS. Due **Apr 30 / Jul 31 / Oct 31 / Jan 31**. Wages are reported by employee name and SSN. Electronic filing is mandatory for **10 or more employee wage items**, with a 25 USD penalty otherwise. A zero report is required while the business is active. Late filing: 5% a month up to 25%. Late payment: 10% [US-NCS5-025].
 - **New hire:** within **20 days** of hire, or twice a month 12–16 days apart if filed electronically. Fields: employee name, address, SSN, first date of services; employer name, address and FEIN (G.S. 110-129.2) [US-NCS5-020].
-- **Third-party and POA:** NCDOR GEN-58 [US-NCW1B-002]; DES POA [US-NCP51-003, US-FIL-013].
+- **Third-party and POA:** NCDOR GEN-58 [US-NCP51-003]; DES POA [US-NCP51-003, US-FIL-013].
 - Confidence: 88% (TY2026 file specs not downloaded).
 
 ## ND - North Dakota
@@ -1633,7 +1633,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | New-hire report | deadline_days | 20 |  | US-NMS5-010 | `rspec.nm.new_hire.deadline_days` |
 | State W-2 filing | due | Jan 31; electronic only from 2026 (TAP TXT or CF/SF code 35) [Conflict: TRD page US-NMS5-013 says end of February; build on FYI-330] |  | US-NMP52-005 (P) | `rspec.nm.w2_state.due` |
 
-**Open for this jurisdiction:** `rspec.nm.tap.bulk_schema` (blocking)
+**Open for this jurisdiction:** `rspec.nm.tap.bulk_schema` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -1734,19 +1734,19 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 
 | Report | Attribute | Value | Channel | register_id | Fact key |
 |---|---|---|---|---|---|
-| State withholding return | form | IT 501 electronic; quarterly <=2,000 lookback; monthly 2,000-84,000 (15 days); partial-weekly >=84,000; next banking day >=100,000 in one period | - | US-OH-009 | `rspec.oh.wh_return.form` |
-| Annual reconciliation | form | IT 941 by Jan 31; W-2/1099 upload (OH|TAX Upload Income Statement) by Jan 31; CD eliminated | file_upload | US-OH-009 | `rspec.oh.annual_recon.form` |
+| State withholding return | form | IT 501 electronic; quarterly <=2,000 lookback; monthly 2,000-84,000 (15 days); partial-weekly >=84,000; next banking day >=100,000 in one period | - | US-OHB5-401 | `rspec.oh.wh_return.form` |
+| Annual reconciliation | form | IT 941 by Jan 31; W-2/1099 upload (OH|TAX Upload Income Statement) by Jan 31; CD eliminated | file_upload | US-OHB5-401 | `rspec.oh.annual_recon.form` |
 | State W-2 filing | school_district_code | W-2 carries four-digit school district code |  | US-OHS5-018 | `rspec.oh.w2_state.school_district_code` |
 | School-district returns | returns | SD 101 periodic and SD 141 annual (Jan 31); bulk FSET XML 4.4; agent WT 8655 |  | US-FIL-012 | `rspec.oh.school_district.returns` |
 | Quarterly UI wage report | fields | total and taxable remuneration; employee name, SSN, wages, number of weeks paid; last day of month after quarter [portal channel/format not read] |  | US-OHS5-020 | `rspec.oh.ui_qtr.fields` |
 | New-hire report | deadline_days | 20 [fields add DOB; contractors also reported] |  | US-OHS5-009 | `rspec.oh.new_hire.deadline_days` |
 | Municipal returns | frequency | monthly (15 days) if prior-year >2,399 or any month of preceding quarter >200, else quarterly; municipality may require semimonthly [returns per municipality/collector; CCA Form CCA-102 (US-OH-010); RITA gated] |  | US-OHP52-003 (P) | `rspec.oh.municipal.frequency` |
 
-**Open for this jurisdiction:** `rspec.oh.ui_qtr.channel_format` (blocking)
+**Open for this jurisdiction:** `rspec.oh.ui_qtr.channel_format` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
-- **State withholding** [US-OH-009; Filing Guidelines]:
+- **State withholding** [US-OHB5-401; Filing Guidelines]:
   - IT 501 return, filed electronically through OH|TAX eServices or the Treasurer.
   - Frequency by look-back (12 months ending June 30):
     - up to 2,000 USD: quarterly, due the last day of the month after the quarter;
@@ -1777,7 +1777,7 @@ All items from [US-CAS5-002, US-CAS5-018, A.2, DE 44 2026] unless another row is
 | Quarterly UI wage report | format | ICESA fixed 275-character ASCII CR/LF; E, S, T required, P optional (TPA); S: name as on SS card in upper case, SSN, total and taxable wages | file_upload | US-OKS5-020 | `rspec.ok.ui_qtr.format` |
 | New-hire report | deadline_days | 20 [resides or works in OK; field state of hire; optional OESC account, salary, DOB, health insurance] |  | US-OKS5-007 | `rspec.ok.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.ok.ui_qtr.due_date` (blocking)
+**Open for this jurisdiction:** `rspec.ok.ui_qtr.due_date` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -2023,7 +2023,7 @@ There are two institutions and two portals [US-RIS5-024].
 | Quarterly UI wage report | channel | electronic only: Unemployment Tax Services or QuickFile in ICESA, MMREF-1 or delimited | file_upload | US-TXSUI-006 (P) | `rspec.tx.ui_qtr.channel` |
 | New-hire report | deadline_days | 20 [OAG; required FEIN, IWO address, SSN, hire date, name, address; optional TWC account, DOB, salary] |  | US-TXS5-012 | `rspec.tx.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.tx.ui_qtr.due_date` (blocking); `rspec.tx.ui_qtr.enhanced_layout` (blocking)
+**Open for this jurisdiction:** `rspec.tx.ui_qtr.enhanced_layout` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -2051,7 +2051,7 @@ There are two institutions and two portals [US-RIS5-024].
 | Quarterly UI wage report | form | Employer Quarterly Wage List and Contribution Report, online only, within 30 days of quarter end; zero reports required [DWS wage file layout not read] | online_form | US-UTS5-004 | `rspec.ut.ui_qtr.form` |
 | New-hire report | deadline_days | 20 [seven mandatory elements; DOB optional] |  | US-UTS5-003 | `rspec.ut.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.ut.ui_qtr.wage_file_layout` (blocking)
+**Open for this jurisdiction:** `rspec.ut.ui_qtr.wage_file_layout` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -2109,7 +2109,7 @@ There are two institutions and two portals [US-RIS5-024].
 | Quarterly UI wage report | due | Apr 30 / Jul 31 / Oct 31 / Jan 31 or next business day, via Employer e-Services, every quarter |  | US-VTS5-009 | `rspec.vt.ui_qtr.due` |
 | New-hire report | deadline_days | 10 [calendar days from first day worked for pay; rehire after 60+ days] |  | US-VTS5-014 | `rspec.vt.new_hire.deadline_days` |
 
-**Open for this jurisdiction:** `rspec.vt.w2_state.format` (blocking)
+**Open for this jurisdiction:** none (RSPEC pre-build close 2026-11-03)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -2150,7 +2150,7 @@ There are two institutions and two portals [US-RIS5-024].
 | Paid Leave + WA Cares report | form | combined Paid Leave + WA Cares quarterly report (wages and hours) on paidleave.wa.gov [field list and deadline rest on older row; portal blocked] | - | US-WAPFML-001 (P) | `rspec.wa.pfml_ltc_qtr.form` |
 | Local returns | seattle | Seattle payroll expense tax (employer, SMC 5.38) and Social Housing Tax; Taxpayer Authorization Form per client |  | US-WAP51-001 (P) | `rspec.wa.local.seattle` |
 
-**Open for this jurisdiction:** `rspec.wa.pfml_ltc_qtr.fields_due` (blocking)
+**Open for this jurisdiction:** `rspec.wa.lni_wc_qtr.report` (documented limitation)
 
 **Stage-5 reporting findings (verbatim, register ids inline).**
 
@@ -2290,7 +2290,7 @@ There are two institutions and two portals [US-RIS5-024].
   - Form: the IRS W-4 or a DWS-approved equivalent.
   - The multistate single-state election is available.
   - Channel: the "Wyoming New Hire Reporting Center", newhire-reporting.com/wy-newhire [US-WYS5-010, A.3, partial]. The portal was unreachable (ACCESS gap).
-- **Registration:** Joint Business Registration in WYUI [US-WYP52-001].
+- **Registration:** Joint Business Registration in WYUI [US-WYB5-401].
 - **Third-party access:** POA form MODES-4444 (7/19) [US-WYR3-001].
 - Confidence: high on deadlines; medium on formats.
 
@@ -2510,54 +2510,194 @@ Open questions narrowed / added: `rspec.wa.lni_wc_qtr.report` (lines rewritten i
 
 Still open, new attempts recorded in `unresolved[].attempted`: `rspec.mi.new_hire.statute`.
 
+## RSPEC pre-build close (2026-11-03, agent 2)
+
+Local-first triage of the 22 blocking items. Four closed with keyed facts, the other 18 recorded as documented limitations (blocking=false) with the URLs tried and what would close them. Mirror: `_research/gaps.json` -> `RSPEC`.
+
+**SCOPE r3 finding 3.** `US-FIL-002` now carries 'EFW2 Publication 42-007 and EFW2C Publication 42-014 for tax year 2026'. 42-014 rests on the SSA page Chrome read (2026-10-29, US-FEDP52-013) and two other authorities naming it: SCDOR [US-SCS5-016] and WI DOR Pub 172 [US-WIS5-015]. The held FED EFW2 TY2026 PDF names the EFW2C correction format but does not print 42-014. `26efw2c.pdf`: curl 403 (2026-11-03), not held, so EFW2C layouts are not here. Fact `fed.efw2c.publication` [US-FIL-002].
+
+**Re-syncs from CCG propagation (PROPAGATION-LEDGER rows 31-36).**
+- `oh.newhire.report_days` = 20 [US-OHS5-014], `ri.report.w2.efile_threshold` = 25 [US-RIS5-018] and `tx.newhire.report_days` = 20 [US-TXS5-017]: the RSPEC value is the same as the CCG value and both cite the same register row (checked key by key); no change.
+- `fed.fica.oasdi.wage_base`: added per period. 2026 = 184,500 [US-FEDS5-005, derived arithmetically: 60,600 x 69,846.57 / 22,935.42 = 184,548.71, rounded to 184,500]; 2027 = 192,300 [US-FEDB5-401, SSA quote]. This is the RW/RS Social Security wage ceiling in EFW2.
+- `ca.sdi.employee.rate`: added per period, 2026 = 1.3 %, 2027 = 1.4 % [US-CAP7-002]. No wage cap; this is the DE 9C/W-2 box 14 CASDI basis.
+
+**Closed with keyed facts.**
+- CA DE 9C file formats: `rspec.ca.ui_qtr.file_formats` [US-FIL-006, DE 8300 Rev. 12 (7-24): CSV, XML, ICESA, MMREF-1 and FSET]. This closes `rspec.ca.ui_qtr.de9c_file_spec`.
+- NC TY2026: `rspec.nc.w2_state.ty2026_rs_layout` [US-NCS6-001] and `rspec.nc.annual_recon.ty2026_nc3_layout` [US-NCS6-002]. Both are Revision Date 09-01-2026 and say 'No changes with tax year 2026'. They supersede the 10-2020 lead US-NCS5-027, which is now superseded. This closes `rspec.nc.w2_state.ty2026_spec`.
+- TX quarterly due date: `rspec.tx.ui_qtr.due` [US-TXS6-002, 40 TAC 815.109(a)] and `rspec.tx.ui_qtr.electronic_media_required` [US-TXS6-001, 815.107(a)(3), (d)]. The report and contributions are due by the last day of the month after the quarter. Confidence is medium: the text was read on the LII reproduction, because the SOS TAC viewer now redirects to an Appian portal. This closes `rspec.tx.ui_qtr.due_date`.
+- VT W-2: `rspec.vt.w2_state.format` [US-VTS6-001]: EFW2 via myVTax with a Vermont RS (state code 50, account WHTXXXXXXXX, Child Care Contribution 338-358). Confidence is medium: the RS table is headed '2025' and has position inconsistencies. This closes `rspec.vt.w2_state.format`.
+- Narrowed: `rspec.ky.ui_qtr.upload_formats` [US-KYS6-001] (KUIP ICESA or CSV) and `rspec.mn.ui_qtr.due` [US-MNS5-015, Minn. Stat. 268.044 subd. 1(a)].
+
+**Correction found.** The earlier closing source for OK, '40 O.S. 3-111', was repealed effective 2016-11-01. 40 O.S. 3-102(A) delegates the due date to OESC rules [US-OKS6-001], so the item now points at OAC 240:10-5.
+
+**Documented limitations (18, blocking=false)** by reason:
+- *access (non-US exit)* (11): `rspec.co.ui_qtr.format_due`, `rspec.id.w2_state.state_record_spec`, `rspec.il.w2_state.idr986_spec`, `rspec.in.wh_return.xml_schema`, `rspec.ky.w2_state.rs_spec`, `rspec.la.w2_state.lawage_format`, `rspec.me.w2_state.bulk_spec`, `rspec.mn.ui_qtr.due_format`, `rspec.mt.ui_qtr.efiling_handbook`, `rspec.ok.ui_qtr.due_date`, `rspec.wa.lni_wc_qtr.report`
+- *behind employer portal login* (5): `rspec.de.ui_qtr.file_format`, `rspec.ia.ui_qtr.wage_detail_layout`, `rspec.nm.tap.bulk_schema`, `rspec.oh.ui_qtr.channel_format`, `rspec.ut.ui_qtr.wage_file_layout`
+- *not yet published (TY2026 spec)* (2): `rspec.ga.w2_state.ty2026_layout`, `rspec.tx.ui_qtr.enhanced_layout`
+
+Shape of the remaining work: the access items are independent per-state lookups from a US network exit (CO, ID, IL, IN, KY, LA, ME, MN, MT, OK, WA) and can be fanned out in parallel. The login items (DE, IA, NM, OH, UT) need the local operations team or a TPA account. The not-yet-published items (GA, TX enhanced) wait for the authority.
+
+## RSPEC-RQ close (2026-11-03, agent 2)
+
+This section answers the inbound `_research/RSPEC-research-request.json` (artifact-builder, round 1, RQ-01 to RQ-14; no RQ-10 was issued). Result: 10 closed and 3 documented limitations, with the part that could be closed keyed in each of the 3. Every source is held locally under `00-official-sources/spec-sources/`, and the md5 of each file is in the `verification_method` of its register row. Mirror: `_research/gaps.json` -> `RSPEC` (ids `RSPEC-RQ-nn`). Where the final 2026 revision is not out yet, the IRS 2026 early-release DRAFTS are used. Those facts carry confidence `medium` and a note to re-verify them at final release.
+
+### US-IRS-001 / US-IRS-002: Forms 941, Schedule B, 944 (RQ-01, closed)
+- `rspec.fed.form941.line_map` [US-FEDS6-001, Form 941 Rev. 3-2026, final]: lines 1-18 by part. Multipliers: 5a/5b x 0.124, 5c x 0.029, 5d x 0.009. Line 16 is the deposit schedule (< 2,500 / monthly Month 1-3 / semiweekly -> Schedule B). Rev. 3-2026 adds direct-deposit refund lines 15c-15e and drops lines 5a(i)/(ii) and the COVID credit lines.
+- `rspec.fed.form941.schedule_b.structure` [US-FEDS6-002, Schedule B Rev. 3-2024, still the current revision].
+- `rspec.fed.form944.line_map`, `rspec.fed.form944.due` [US-FEDS6-003, 2026 draft]: for 2026 the return is due 2027-02-01 (2027-02-10 if deposits were timely). Lines 13a-13l are the monthly liability; semiweekly depositors use Form 945-A.
+
+### US-SSA-001: EFW2 RA/RE/RW/RT (RQ-02, closed)
+- `rspec.fed.efw2.ra.layout`, `.re.layout`, `.rw.layout`, `.rt.layout` [US-FEDS5-032, held Pub. 42-007 TY2026, md5 5cf1352109d305bb6d28b39b1b4a8d7b]: every field as 'start-end name', transcribed from the record grids (sec. 4.5, 4.6, 4.7, 4.10). A script checked that each record runs contiguously from 1 to 512, with no gap or overlap.
+- `rspec.fed.efw2.money_field.format`: numbers only, unsigned, cents with an assumed decimal (59.60 = 00000005960), right-justified and zero-filled. RW money fields are 11 positions; RT totals are 15.
+- Code lists:
+  - `rspec.fed.efw2.re.agent_indicator.codes` (1/2/3);
+  - `.kind_of_employer.codes` (F/S/T/Y/N);
+  - `.employment_code.codes` (A 943, H Schedule H, M 941, Q MQGE 941, X CT-1, F 944, R 941);
+  - `.tax_jurisdiction.codes` (blank/V/G/S/N/P);
+  - `.third_party_sick_pay.codes` (1/0).
+- `rspec.fed.efw2.re.layout` is the full record. The earlier `rspec.fed.efw2.re.layout_ty2026` (partial, same positions) still emits unchanged.
+
+### US-SSA-001: Form W-2 boxes and TTOC (RQ-03, closed)
+- `rspec.fed.w2.box_map` [box text from US-FEDS5-007; EFW2 positions from the US-FEDS5-032 Appendix crosswalk, p.103]: box -> amount -> EFW2 position (box 1 = RW 188-198 ... box 7 = RW 254-264; box 8 = RO 12-22; box 14b = RW 490-495).
+- `rspec.fed.w2.box14b.rule` [US-FEDS5-007]: up to two codes when box 12 code TP is present. If any tips were received in a nonqualifying occupation, '000' must be one of them.
+- `rspec.fed.w2.box14b.ttoc_codes` and `.ttoc_count` = 71 [US-FEDS6-011, IRS list page last reviewed 2026-06-28]. The codes were parsed from the HTML table rows, not inferred from examples (F14): 101-110, 201-211, 301-304, 401-409, 501-510, 601-611, 701-706, 801-810.
+
+### US-IRS-003: Form 943 (RQ-04, closed)
+- `rspec.fed.form943.line_map`, `rspec.fed.form943.due` [US-FEDS6-004, 2026 draft]: lines 1-17m. For 2026 the return is due 2027-02-01, or 2027-02-10 if all deposits were made on time.
+
+### US-IRS-006: Form 1042-S (RQ-05, closed)
+- `rspec.fed.form1042s.wage_codes` [US-FEDS6-005, 2026 Instructions + 2026 form]:
+  - income code 18; box 3 = '3';
+  - 3a = 04 (treaty);
+  - 4a = 16 (excluded nonfinancial payment). Wages are not withholdable payments, and code 15 applies to withholdable payments only;
+  - 13j = 16 and 13k = 23 (individual);
+  - box 5 only when the treaty gives a dollar exemption.
+- Form 1042-S has no treaty-article box; the article goes on Form 8233.
+- Confidence is medium on how the codes are paired, because the instructions have no worked example for wages.
+- Component keys: `...income_code.dependent_personal_services` = 18, `...ch3_exemption_code.treaty` = 04, `...ch4_exemption_code.excluded_nonfinancial` = 16.
+
+### US-IRS-007: Forms 1094-C / 1095-C (RQ-06, closed on the 2026 draft)
+All from US-FEDS6-006:
+- `rspec.fed.aca.form1095c.line14_codes`: 1A-1H and 1J-1U; 1I and 1V-1Z reserved.
+- `.line15_rule`.
+- `.line16_codes`: 2A-2H; 2I reserved.
+- `.line17_rule`.
+- `rspec.fed.aca.form1094c.line_map`: lines 1-65.
+- `rspec.fed.aca.affordability_pct` = 9.96 % (plan years from 2026).
+- `rspec.fed.aca.ty2026_due`: 2027-03-01 paper, 2027-03-31 electronic, furnish by 2027-03-02.
+
+The final 2025 edition stays on US-FEDS5-012 for TY2025 filings. This row does not supersede it.
+
+### US-IRS-008: Form 941-X (RQ-07, closed)
+- `rspec.fed.form941x.line_map`, `.process_rule`, `.deadlines` [US-FEDS6-007, Rev. 4-2026, final].
+- Use the adjustment process (line 1) for any underreported amount, or for an overpayment taken as a credit.
+- Use the claim process (line 2) for refunds of overreported amounts only. It is always required in the last 90 days of the limitation period.
+
+### US-IRS-004: Form 940 and credit reduction (RQ-08, documented limitation for the 2026 list)
+- `rspec.fed.form940.line_map`, `.schedule_a.structure` [US-FEDS6-008, 2026 drafts].
+- The note on the existing `rspec.fed.form940.due` now records the dates for the 2026 return (2027-02-01 / 2027-02-10).
+- `rspec.fed.futa.credit_reduction.states` (2025 final: CA 1.2 %, VI 4.5 %) [US-FEDS6-009, Schedule A 2025 final]. This is a second independent authority to the DOL table (US-FEDS5-009).
+- Open: the final 2026 list. DOL publishes it after 2026-11-10, and the 2026 Schedule A draft shows 0.0XX. Tracked as `rspec.fed.futa.credit_reduction.states_2026`.
+
+### US-IRS-005: Schedule H routing (RQ-09, closed)
+- `rspec.fed.schedule_h.employer_statement` [US-FEDS6-010, Pub. 926 (2026) + Schedule H 2026 draft]. The amounts handed to the household employer:
+  - cash wages subject to social security (line 1; 3,000 test; cap 184,500);
+  - Medicare wages (line 3);
+  - Additional Medicare wages (line 5);
+  - FIT withheld (line 7);
+  - state UI contributions (lines 13-14 / 17);
+  - FUTA cash wages (line 15/20; 1,000-per-quarter test; first 7,000);
+  - the tax amounts (lines 2, 4, 6).
+- `rspec.fed.household.fica_cash_wage_threshold` = 3,000; `.futa_quarter_threshold` = 1,000; `rspec.fed.schedule_h.due` = 2027-04-15.
+
+### US-LOC-001: West Virginia municipal service fees (RQ-11, documented limitation)
+- `rspec.wv.local.charleston.service_fee_return` [US-WVS6-001, Charleston CSF administrative regulations rev. 12/2022]: Form CSF-2 with each quarterly remittance, due within one month after quarter end; 3.00/week [US-WVR3-002].
+- `rspec.wv.local.morgantown.service_fee_return` [US-WVS6-002, city letter, A.3]: 3.00/week, Form MSF-1, due within 30 days after quarter end. For RSPEC, this row replaces the tier-B use of the same letter in US-WVP7-003.
+- `rspec.wv.local.service_fee_returns` summarises the two confirmed cities and the statutory basis (W. Va. Code 8-13-13, US-WVP52-005).
+- Open: Huntington, Wheeling, Parkersburg, Fairmont, Weirton and others, tracked as `rspec.wv.local.other_municipal_service_fees`. These pages return 403/404 to curl and need a Chrome pass. The lookups are independent per city and can run in parallel.
+
+### US-LOC-002: Pittsburgh payroll expense tax (RQ-12, documented limitation for the 2026 form)
+- `rspec.pa.local.pittsburgh_payroll_expense.return` [US-PAS6-001, ET form 2025 via Wayback; US-PAS6-002, Tax Forms page via Wayback 2026-01-14]:
+  - Form ET-1, by calendar quarter, due May 31 / Aug 31 / Nov 30 / Feb 28;
+  - lines 1-8 (x .0055);
+  - filed on paper, USPS postmark as proof;
+  - City ID registration required.
+- The FAQ already held (US-PAB5-401) agrees: a business starting on May 15 files its first return by August 31.
+- Open: the 2026 ET-1 itself (403, no archive copy), tracked as `rspec.pa.local.pittsburgh_payroll_expense.form_2026`.
+
+### US-LOC-003: Seattle PET and Social Housing Tax (RQ-13, closed)
+- `rspec.wa.local.seattle.base_thresholds_due` [US-WAS6-001, OCF page + 2026 form], with numeric keys:
+  - `...pet.prior_year_payroll_threshold` = 9,074,409;
+  - `...pet.employee_comp_threshold` = 194,452;
+  - `...pet.comp_level_2_floor` = 518,538;
+  - `...pet.tier_2_floor` = 129,634,413;
+  - `...pet.tier_3_floor` = 1,296,344,132.
+- PET rates: 0.746/1.811 %, 0.746/2.024 %, 1.492/2.557 %.
+- SHT [US-WAS6-002]: `...sht.rate` = 5 %, `...sht.excess_comp_threshold` = 1,000,000 (not indexed), `...sht.due`.
+- G-DERIVE (Python): 9,074,409 / 8,837,302 = 1.02683; 194,452 / 189,371 = 1.02683; 518,538 / 504,989 = 1.02683; 129,634,413 / 126,247,176 = 1.02683; 1,296,344,132 / 1,262,471,758 = 1.02683. All five thresholds move by the same factor, 1.02683. That is what SMC 5.38.070 predicts (one June-June CPI-U step, rounded to the dollar), so the 2026 figures are internally consistent.
+- seattle.gov answered curl with HTTP 200, so this is not a Chrome-only item.
+
+### US-DOR-004: NY MCTMT (RQ-14, closed)
+- Source: US-NYS6-001, MTA-305-I (1/26), quarters from 2025-07-01.
+- `rspec.ny.mctmt.rates_lines`.
+- `rspec.ny.mctmt.quarterly_threshold` = 312,500.
+- Band ceilings `rspec.ny.mctmt.band.1..3.ceiling`: 375,000 / 437,500 / 2,500,000.
+- Rates `rspec.ny.mctmt.zone1.band.1..4.rate`: 0.055 / 0.115 / 0.60 / 0.895; `zone2`: 0.055 / 0.115 / 0.34 / 0.635.
+- The labels of lines 2c and 5 come from references elsewhere in the instructions. The MTA-305 form PDF returned 404 on every URL tried.
+
+### NJ base week fix
+- `rspec.nj.ui_qtr.base_week_amount`:
+  - the 2026 object (310) now cites US-NJS5-011 (NJDOL press release 2025-12-29), with effective_to 2026-12-31;
+  - a new 2027 object (319, from 2027-01-01) cites US-NJS5-010.
+- Both figures were re-read in the local copies on 2026-11-03.
+
 ## Open questions
 
-Mirrors `unresolved[]` of `RSPEC-facts.json` (same keys, same wording).
+Mirrors `unresolved[]` in `_research/RSPEC-facts.json` (same keys, same wording) as of 2026-11-03 (after the RSPEC-RQ close). Blocking: 0. Documented limitations: 21. Other non-blocking items: 25.
 
-- **rspec.fed.form940.ty2026_instructions** (non-blocking). 2026 Instructions for Form 940 not yet published; row US-FEDS5-031 is partial (2025 edition) Attempted: irs.gov i940 2026 not posted on 2026-11-02. What would close it: IRS Instructions for Form 940 (2026) when posted (normally December)
-- **rspec.fed.aca.ty2026_due_dates** (non-blocking). TY2026 Instructions for Forms 1094-C/1095-C not published; row US-FEDS5-012 partial (TY2025 dates) Attempted: irs.gov i109495c. What would close it: IRS Instructions for Forms 1094-C and 1095-C (2026)
-- **rspec.ca.ui_qtr.de9c_file_spec** (blocking). DE 9C e-file format spec (EDD FSET) not fetched Attempted: stage5 CA open question 5. What would close it: EDD e-Services for Business file-transfer specification for DE 9/DE 9C
-- **rspec.co.ui_qtr.format_due** (blocking). CDLE UI quarterly wage report page returned 403; format and due date open Attempted: cdle.colorado.gov 403. What would close it: CDLE MyUI Employer+ wage report file specification and premium/wage report due-date page
+- **rspec.fed.form940.ty2026_instructions** (non-blocking). [narrowed 2026-11-03] Final 2026 Instructions for Form 940 not yet published; the IRS early-release DRAFT of Form 940, Schedule A and the instructions for 2026 is held (US-FEDS6-008) and carries the line map and due dates (facts rspec.fed.form940.*, confidence medium) Attempted: irs.gov i940 2026 not posted on 2026-11-02; https://www.irs.gov/pub/irs-dft/f940--dft.pdf, i940--dft.pdf, f940sa--dft.pdf HTTP 200 on 2026-11-03 (drafts). What would close it: IRS Instructions for Form 940 (2026) when posted (normally December)
+- **rspec.fed.aca.ty2026_due_dates** (non-blocking). [narrowed 2026-11-03] Final TY2026 Instructions for Forms 1094-C/1095-C not yet published; the IRS early-release DRAFT (US-FEDS6-006) gives 2027-03-01 paper / 2027-03-31 electronic / furnish 2027-03-02 (fact rspec.fed.aca.ty2026_due, confidence medium) Attempted: irs.gov i109495c; https://www.irs.gov/pub/irs-dft/i109495c--dft.pdf HTTP 200 on 2026-11-03 (draft). What would close it: IRS Instructions for Forms 1094-C and 1095-C (2026)
+- **rspec.co.ui_qtr.format_due** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] CDLE UI quarterly wage report page returned 403; format and due date open Attempted: cdle.colorado.gov 403; cdle.colorado.gov/employers HTTP 200 on 2026-11-03 but carries no wage-report format or due-date link; the CDLE UI premium/wage report pages returned 403 (stage 5); local: ccg-sources/CO and pdfs/CO searched (only FAMLI, PAYCALC, DOL-OUI comparison; no UI wage-report spec). What would close it: CDLE MyUI Employer+ wage report file specification and the CDLE premium/wage report due-date page (read from a US exit or by the local operations team)
 - **rspec.co.new_hire.state_specifics** (non-blocking). childsupport.colorado.gov timed out twice; only the federal 20-day default is registered Attempted: childsupport.colorado.gov timeout x2. What would close it: Colorado State Directory of New Hires employer page or C.R.S. 26-13-125.5
 - **rspec.ct.ui_qtr.q3_2026_layout** (non-blocking). 31-225a(j)(1)(B) adds optional occupation, hours, worksite ZIP from Q3 2026 but the only file spec read (2022) has no positions for them Attempted: US-CTS5-032 (2022 spec). What would close it: CT DOL ReEmployCT file format edition carrying the Q3 2026 fields
 - **rspec.de.wh_return.indexed_thresholds_2026** (non-blocking). 2026 indexed frequency thresholds under 30 Del. C. 515 not read (statutory 4,500/25,000; guide figures on a superseded row) Attempted: US-DEP51-003 superseded. What would close it: Delaware Division of Revenue 2026 withholding filing-frequency notice
-- **rspec.de.ui_qtr.file_format** (blocking). UC-8A electronic file format not read Attempted: US-DES5-022 portal only. What would close it: Delaware DUI Online Employer Services Portal wage file specification
-- **rspec.ga.w2_state.ty2026_layout** (blocking). GA Federal Format TY2026 layout (with GA overtime field) and G-1003 template not posted on 2026-11-02; only Rev 01/18 (partial row US-GAS5-011) Attempted: dor.georgia.gov Federal Format page. What would close it: GA DOR Federal Format specification for TY2026
+- **rspec.de.ui_qtr.file_format** (non-blocking). [documented_limitation: behind employer portal login; triaged 2026-11-03] UC-8A electronic file format not read Attempted: US-DES5-022 portal only; curl 2026-11-03 from non-US exit: https://ui.delawareworks.com/ no response (000); local: ccg-sources/DE/dol-ui-employer-faqs, dol-ui-employer-services and pdfs/DE ui-employer-faqs (wayback) searched for ICESA/format/upload: 0 hits. What would close it: Delaware DUI Online Employer Services Portal wage file specification (portal help, available to a registered employer or TPA)
+- **rspec.ga.w2_state.ty2026_layout** (non-blocking). [documented_limitation: not yet published (TY2026 spec); triaged 2026-11-03] GA Federal Format TY2026 layout (with GA overtime field) and G-1003 template not posted on 2026-11-02; only Rev 01/18 (partial row US-GAS5-011) Attempted: dor.georgia.gov Federal Format page; dor.georgia.gov Federal Format page (2026-11-02): only Rev 01/18 posted (US-GAS5-011 partial, local ccg-sources/GA/GA-DOR-Federal_Format_Specs_2026-11-02.pdf). What would close it: GA DOR Federal Format specification for TY2026 (with the GA overtime field) and the G-1003 template, normally posted before the January filing season
 - **rspec.ga.ui_qtr.universal_efile** (non-blocking). June 2026 proposed GDOL rule 300-2-2-.02(6) would make electronic filing mandatory for all employers; adoption unconfirmed (US-GAS5-020 partial) Attempted: GDOL Notice of Intended Action 2026-06-15. What would close it: Adopted GDOL rule text (Secretary of State rules site) with effective date
 - **rspec.hi.w2_state.ef10_layout** (non-blocking). Pub EF-10 EFW2 layout notes not read; UC-B6 bulk file spec not located Attempted: tax.hawaii.gov EF-10; DLIR UC-B6. What would close it: DOTAX Publication EF-10 and DLIR UC-B6 electronic filing specification
-- **rspec.ia.ui_qtr.wage_detail_layout** (blocking). myIowaUI wage-detail upload layout not acquired; IDR W-2 spec page dated 2023-01-09, TY2026 edition not seen Attempted: myIowaUI; revenue.iowa.gov W-2 spec. What would close it: IWD myIowaUI wage file specification and IDR W-2 file specification TY2026
-- **rspec.id.w2_state.state_record_spec** (blocking). Idaho state-specific EFW2 records spec (STC Software Developers page) not fetched Attempted: tax.idaho.gov software developers. What would close it: Idaho STC W-2 electronic filing specification
-- **rspec.il.w2_state.idr986_spec** (blocking). IDR-986 EFW2 Illinois specification not downloaded Attempted: tax.illinois.gov IDR-986. What would close it: IDOR IDR-986 W-2 electronic filing specification
-- **rspec.in.wh_return.xml_schema** (blocking). INTIME XML schema IDORWTH2016V1.0 not downloaded (ACCESS gap); new filers must use XML Attempted: in.gov/dor XML schema link. What would close it: Indiana DOR IDORWTH2016V1.0 schema package
+- **rspec.ia.ui_qtr.wage_detail_layout** (non-blocking). [documented_limitation: behind employer portal login; triaged 2026-11-03] myIowaUI wage-detail upload layout not acquired; IDR W-2 spec page dated 2023-01-09, TY2026 edition not seen Attempted: myIowaUI; revenue.iowa.gov W-2 spec; local: ccg-sources/IA/IWD-UI-employer-handbook_2026-11-02.html searched for ICESA/format/upload: 0 hits; IDR W-2 part is registered (US-IAS5-018, EFW2 + RS, page dated 2023-01-09); a TY2026 IDR edition is not yet published. What would close it: IWD myIowaUI wage file specification (portal help, registered employer/TPA) and IDR W-2 file specification TY2026
+- **rspec.id.w2_state.state_record_spec** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] Idaho state-specific EFW2 records spec (STC Software Developers page) not fetched Attempted: tax.idaho.gov software developers; curl 2026-11-03 from non-US exit: https://tax.idaho.gov/online-services/e-file/e-file-guides/developers/ no response (000); local: ccg-sources/ID/stc-filing-w2-1099_wayback_2026-11-02.html (US-IDS5-010) confirms EFW2 upload in TAP plus Idaho state-specific records but gives no positions. What would close it: Idaho STC W-2 electronic filing specification on the e-file developers page (read from a US exit)
+- **rspec.il.w2_state.idr986_spec** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] IDR-986 EFW2 Illinois specification not downloaded Attempted: tax.illinois.gov IDR-986; curl 2026-11-03 from non-US exit: https://tax.illinois.gov/research/publications/pubs.html no response (000); local: pdfs/IL IDOR Pub-131, IL-941 instructions and ccg-sources/IL searched for EFW2/IDR-986: 0 hits. What would close it: IDOR IDR-986 (Illinois W-2 electronic filing specification), read from a US exit
+- **rspec.in.wh_return.xml_schema** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] INTIME XML schema IDORWTH2016V1.0 not downloaded (ACCESS gap); new filers must use XML Attempted: in.gov/dor XML schema link; curl 2026-11-03 from non-US exit: https://www.in.gov/dor/business-tax/withholding-income-tax/ no response (000); local: ccg-sources/IN/IN_DOR-guide-withholding-intime_wayback_2026-11-02.pdf (US-INS5-013) says 'DOR has XML schemas to service WH-1 and WH-3 filings ... on DOR's Withholding Income Tax webpage'; the XSD package is not held; W-2 via EFW2 with Indiana RS positions is fully specified (US-INS5-011). What would close it: Indiana DOR WH-1/WH-3 XML schema package (IDORWTH2016V1.0) from the DOR Withholding Income Tax page, downloaded from a US exit
 - **rspec.ks.w2_state.ty2026_k2mt** (non-blocking). TY2026 K-2MT edition not located (Rev. 10-25 read) Attempted: ksrevenue.gov K-2MT. What would close it: KDOR K-2MT TY2026
-- **rspec.ky.w2_state.rs_spec** (blocking). Kentucky RS record specification and KUIP upload format not fetched Attempted: revenue.ky.gov; KUIP. What would close it: KY DOR W-2 electronic filing specification and OUI KUIP wage file spec
-- **rspec.la.w2_state.lawage_format** (blocking). LaWage bulk upload format and LA UI form name/upload format not read Attempted: LA-OQ-2; LA-OQ-5. What would close it: LDR LaWage file specification and LWC LAWATS wage file specification
+- **rspec.ky.w2_state.rs_spec** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] Kentucky RS record specification and KUIP upload format not fetched Attempted: revenue.ky.gov; KUIP; curl 2026-11-03 from non-US exit: https://revenue.ky.gov/Business/Withholding-Tax/Pages/default.aspx HTTP 404; local: pdfs/KY/KY-OUI_Employer-Guide_2026 read: KUIP accepts ICESA or CSV upload (now fact rspec.ky.ui_qtr.upload_formats, US-KYS6-001) but no positions; KUIP TPA resources page (wayback 2026-08-14, US-KY-003) holds no layout. What would close it: KY DOR W-2 electronic filing specification (RS record) and the OUI KUIP ICESA/CSV wage file specification
+- **rspec.la.w2_state.lawage_format** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] LaWage bulk upload format and LA UI form name/upload format not read Attempted: LA-OQ-2; LA-OQ-5; curl 2026-11-03 from non-US exit: https://revenue.louisiana.gov/ HTTP 403; local: ccg-sources/LA/LA_LDR_FAQ_L3-W2-electronic (US-LAS5-009: e-file at 50+ W-2s) and pdfs/LA LWC pages hold no file layout. What would close it: LDR LaWage file specification and LWC LAWATS wage file specification (read from a US exit)
 - **rspec.ma.w2_state.handbook_edition** (non-blocking). MA W-2 handbook served is Rev. 20191219 though reissued yearly; deadline conflict guide (Mar 31 / Feb 28) vs W-2 page (Jan 31) Attempted: US-MAS5-013 vs US-MAS5-015/019. What would close it: Current MA DOR W-2 electronic filing handbook and a DOR TIR/guide revision confirming Jan 31
 - **rspec.ma.pfml_qtr.return** (non-blocking). PFML quarterly return page in MassTaxConnect not read (MA Q8); whether DUA wage detail is the single quarterly wage report not confirmed (Q5) Attempted: mass.gov DFML. What would close it: DFML employer contribution/wage reporting guide (MassTaxConnect)
 - **rspec.md.w2_state.ty2026_spec** (non-blocking). MD TY2026 W-2 / MW508 spec not yet posted Attempted: marylandtaxes.gov. What would close it: Comptroller of Maryland TY2026 W-2/1099 electronic filing specification
-- **rspec.me.w2_state.bulk_spec** (blocking). Maine Tax Portal Bulk File Upload Specifications not fetched; EFW2 acceptance open Attempted: maine.gov/revenue. What would close it: MRS Maine Tax Portal Bulk File Upload Specifications
-- **rspec.mi.new_hire.statute** (non-blocking). Michigan new-hire statute and penalty not located; US-MIS5-026 partial Attempted: michigan.gov MDHHS OCS. What would close it: MCL citation (Michigan New Hire Act) read on legislature.mi.gov
-- **rspec.mn.ui_qtr.due_format** (blocking). MN UI quarterly due date and file format not in the section read; W-2 e-file method Fact Sheets 2/2a not fetched Attempted: uimn.org; revenue.state.mn.us fact sheets. What would close it: MN UI employer wage detail instructions and DOR Fact Sheets 2 and 2a
-- **rspec.mt.ui_qtr.efiling_handbook** (blocking). Montana UI Contributions E-Filing Handbook not obtained Attempted: uid.dli.mt.gov. What would close it: Montana UI Contributions E-Filing Handbook
-- **rspec.nc.w2_state.ty2026_spec** (blocking). NC-3/W-2 TY2026 specs version 9-2026 not downloaded; 10-2020 layout is a lead only (partial row US-NCS5-027) Attempted: ncdor.gov eNC3. What would close it: NCDOR NC-3 / W-2 file specifications version 9-2026
+- **rspec.me.w2_state.bulk_spec** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] Maine Tax Portal Bulk File Upload Specifications not fetched; EFW2 acceptance open Attempted: maine.gov/revenue; curl 2026-11-03 from non-US exit: https://www.maine.gov/revenue/ HTTP 403 (CloudFront geo-block); local: ccg-sources/ME and pdfs/ME hold UC-1 instructions and rate pages only. What would close it: MRS Maine Tax Portal Bulk File Upload Specifications (read from a US exit)
+- **rspec.mi.new_hire.statute** (non-blocking). Michigan new-hire statute and penalty not located (the earlier partial row is superseded by US-MIB5-001) Attempted: michigan.gov MDHHS OCS; browser pass P1 2026-11-02 (_research/stage5/browser-pass-P1.md): mi-newhire.com New Hire Requirements & FAQs read (US-MIB5-001): cites 42 USC 653A only, no Michigan statute or penalty. What would close it: MCL citation (Michigan New Hire Act) read on legislature.mi.gov
+- **rspec.mn.ui_qtr.due_format** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] MN UI quarterly due date and file format not in the section read; W-2 e-file method Fact Sheets 2/2a not fetched Attempted: uimn.org; revenue.state.mn.us fact sheets; due date now closed: rspec.mn.ui_qtr.due (Minn. Stat. 268.044 subd. 1(a), US-MNS5-015); curl 2026-11-03 from non-US exit: https://www.uimn.org/employers/employer-account/reports-payments/data-submission/index.jsp no response (000); local: uimn wayback pages list 'Data Submission Methods and File Formats' only as a menu link. What would close it: UIMN 'Data Submission Methods and File Formats' page and MN DOR Fact Sheets 2 and 2a (W-2 e-file), read from a US exit
+- **rspec.mt.ui_qtr.efiling_handbook** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] Montana UI Contributions E-Filing Handbook not obtained Attempted: uid.dli.mt.gov; curl 2026-11-03 from non-US exit: https://uid.dli.mt.gov/ no response (000); e-file mandate and due dates registered (US-MTS5-025, ARM 24.40.1609); local MT-UID Employer Handbook PDF has no text layer. What would close it: Montana UI Contributions E-Filing Handbook (UI eServices for Employers), read from a US exit
 - **rspec.ne.ui_qtr.ftp_spec** (non-blocking). NE UI wage report FTP spec at dol.nebraska.gov/UITax not fetched Attempted: dol.nebraska.gov. What would close it: NDOL UI wage report file specification
 - **rspec.nh.ui_qtr.recheck** (non-blocking). NH figures from the 2016 Handbook not re-checked against Emp 303.02 (rules not archived) Attempted: NHES Emp 300 rules. What would close it: NH Code of Admin Rules Emp 300 current text
-- **rspec.nm.tap.bulk_schema** (blocking). TRD TAP bulk-filing schema (announced mid-January 2026) is inside TAP Help; W-2 TAP TXT layout and DWS UI specs not read (403) Attempted: tap.state.nm.us help; dws.nm.gov 403. What would close it: TRD TAP bulk filing schema and DWS UI wage file specs
+- **rspec.nm.tap.bulk_schema** (non-blocking). [documented_limitation: behind employer portal login; triaged 2026-11-03] TRD TAP bulk-filing schema (announced mid-January 2026) is inside TAP Help; W-2 TAP TXT layout and DWS UI specs not read (403) Attempted: tap.state.nm.us help; dws.nm.gov 403; curl 2026-11-03 from non-US exit: https://dws.nm.gov/ no response (000); local: ccg-sources/NM/NM_TRD_E-file-E-pay-Mandate-2026 (US-NMS5-012) announces the TRD-41431 bulk-filing schema inside TAP Help. What would close it: TRD TAP bulk filing schema for TRD-41431 (TAP Help, available to a TAP login) and DWS UI wage file specs
 - **rspec.nv.ui_qtr.form_name** (non-blocking). Taxation MBT page calls the ESD report NUCS 4072 while ESD lists RPT3795/NEW0098 Attempted: US-NVS5-008; US-NVS5-010. What would close it: Current DETR ESD employer handbook (post-2023) naming the form
 - **rspec.ny.nys45.annual_mechanics** (non-blocking). NYS-45-I Q4 annual reconciliation mechanics not read Attempted: tax.ny.gov NYS-45-I. What would close it: NYS-45-I instructions (current edition)
-- **rspec.oh.ui_qtr.channel_format** (blocking). ODJFS employer filing portal channel/format not read Attempted: jfs.ohio.gov. What would close it: ODJFS Employer Resource Information Center wage file specification
-- **rspec.ok.ui_qtr.due_date** (blocking). OESC page holding the statutory due date returns 404; only tier-B leads say last day of month after quarter Attempted: oesc.ok.gov 404. What would close it: 40 O.S. 3-111 text or OESC employer handbook (A.1/A.2)
+- **rspec.oh.ui_qtr.channel_format** (non-blocking). [documented_limitation: behind employer portal login; triaged 2026-11-03] ODJFS employer filing portal channel/format not read Attempted: jfs.ohio.gov; jfs.ohio.gov home HTTP 200 on 2026-11-03 (no wage-file spec on the public page); local: ccg-sources/OH and pdfs/OH hold ODJFS 2026 rate details only. What would close it: ODJFS Employer Resource Information Center (ERIC) wage file specification, available to a registered employer/TPA
+- **rspec.ok.ui_qtr.due_date** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] OESC page holding the statutory due date returns 404; only tier-B leads say last day of month after quarter Attempted: oesc.ok.gov 404; https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os40.rtf read 2026-11-03 (US-OKS6-001): 40 O.S. 3-102(A) delegates the due date to OESC rules; 3-111 (the earlier closing source) was repealed eff. 2016-11-01; oesc.ok.gov wage-reporting page 404 (2026-11-03); local OES-047 (US-OKS5-020) has the ICESA layout but no due date. What would close it: OAC 240:10-5 (OESC Employer Contributions rules) text on the Oklahoma Administrative Code site, or the OESC employer handbook
 - **rspec.or.local.annual_xml_guide** (non-blocking). Portland Revenue Online annual-reconciliation XML guide not downloaded Attempted: portland.gov revenue. What would close it: City of Portland Revenue Division bulk upload guide (annual reconciliation)
 - **rspec.pa.new_hire.portal** (non-blocking). panewhires.com did not resolve (ACCESS gap) Attempted: panewhires.com DNS failure. What would close it: PA New Hire Reporting Program employer page (browser pass)
 - **rspec.ri.new_hire.statutory_fields** (non-blocking). R.I. Gen. Laws 15-24-5 field list not read (fields from OCSS page lead) Attempted: webserver.rilegislature.gov. What would close it: R.I. Gen. Laws 15-24-5 text
 - **rspec.sc.w2_state.ty2026_rs1** (non-blocking). TY2026 RS-1 edition not yet published (TY2025 at same URL) Attempted: dor.sc.gov RS-1. What would close it: SCDOR RS-1 TY2026
 - **rspec.sd.ui_qtr.upload_format** (non-blocking). DLR comma-delimited upload format not obtained Attempted: dlr.sd.gov. What would close it: SD DLR Reemployment Assistance wage upload specification
-- **rspec.tx.ui_qtr.due_date** (blocking). TWC rule 815.107 text ACCESS-blocked; due date only from tier-B leads (not registered) Attempted: texreg.sos.state.tx.us 815.107. What would close it: 40 TAC 815.107 text (Texas Register / SOS) or TWC employer handbook
-- **rspec.tx.ui_qtr.enhanced_layout** (blocking). TWC implementing layout for Labor Code 204.0025 enhanced wage filings not read; mandatory-from quarter unknown Attempted: twc.texas.gov. What would close it: TWC rule or QuickFile layout implementing 204.0025
-- **rspec.ut.ui_qtr.wage_file_layout** (blocking). DWS quarterly wage file layout not read Attempted: jobs.utah.gov. What would close it: Utah DWS wage file upload specification
-- **rspec.vt.w2_state.format** (blocking). W-2 file format (EFW2 vs state spec) not stated in GB-1210 Attempted: tax.vermont.gov GB-1210. What would close it: VT Department of Taxes W-2 electronic filing specification
+- **rspec.tx.ui_qtr.enhanced_layout** (non-blocking). [documented_limitation: not yet published (TY2026 spec); triaged 2026-11-03] TWC implementing layout for Labor Code 204.0025 enhanced wage filings not read; mandatory-from quarter unknown Attempted: twc.texas.gov; 51 TexReg 5161 (2026-08-07) proposed 815.107 amendment (US-TXB5-301): proposal only, no adoption in the 2026-09-25..10-30 adopted-rules issues; in-force 815.107 read 2026-11-03 (US-TXS6-001) carries no enhanced fields. What would close it: The adopted 40 TAC 815.107 amendment (Texas Register) with its start quarter, and the TWC QuickFile/ICESA layout implementing Labor Code 204.0025
+- **rspec.ut.ui_qtr.wage_file_layout** (non-blocking). [documented_limitation: behind employer portal login; triaged 2026-11-03] DWS quarterly wage file layout not read Attempted: jobs.utah.gov; local: ccg-sources/UT/UT_DWS-QuarterlyReporting_2026-11-02.aspx (US-UTS5-004) shows 'File a Tax Report - Upload a Wage File' inside the employer login only. What would close it: Utah DWS wage file upload specification (employer/TPA login help)
 - **rspec.wv.w2_state.ty2026_it105** (non-blocking). IT-105 2026 edition not yet out; e-file threshold conflict 10 vs stale 25/50 Attempted: tax.wv.gov forms. What would close it: WV Tax Division IT-105 (2026) and current 11-21-74 text
 - **rspec.wy.ui_qtr.file_spec** (non-blocking). WYUI wage file format not read; WY new-hire portal unreachable (US-WYS5-010 partial) Attempted: wyui; newhire-reporting.com/wy-newhire. What would close it: WY DWS WYUI wage file specification
 - **rspec.ar.ui_qtr.efile_threshold** (non-blocking). Stage-5 AR finding states electronic UI filing is mandatory at 250+ employees citing US-ARP9V-001, but the figure is in neither that row nor its local file (DWS Employer Handbook, text-searched 2026-11-02); not written as a value Attempted: US-ARP9V-001 local file DWS-Employer-Handbook_2026-11-01.pdf searched for 250. What would close it: Arkansas DWS Tax21 e-file rule (A.C.A. 11-10-xxx or DWS rule) or employer handbook page stating the threshold
-- `rspec.wa.lni_wc_qtr.report` (blocking) — L&I workers' compensation quarterly report (fields, hours basis, due dates) not obtained; the PFML/WA Cares part of the former rspec.wa.pfml_ltc_qtr.fields_due is closed by US-WAB5-003. **Would close it:** L&I Employer Quarterly Report instructions on lni.wa.gov or WAC 296-17 reporting sections. *(Synthesis D 2026-11-02)*
-- `rspec.az.ui_qtr.efile_mandate` (non-blocking) — UC-018 form, content and due dates are now registered (US-AZB5-004/-005, facts rspec.az.ui_qtr.*); the DES pages read name online filing via TWS and bulk files but state no electronic-filing mandate threshold. **Would close it:** A.A.C. R6-3-1705 (or the DES employer handbook) text on electronic filing of the quarterly report. *(Synthesis D 2026-11-02)*
+- **rspec.wa.lni_wc_qtr.report** (non-blocking). [documented_limitation: access (non-US exit); triaged 2026-11-03] L&I workers' compensation quarterly report (fields, hours basis, due dates) not obtained; the PFML/WA Cares part of the former rspec.wa.pfml_ltc_qtr.fields_due is closed by US-WAB5-003. Attempted: lni.wa.gov (stage 5); browser pass P1 2026-11-02 (_research/stage5/browser-pass-P1.md): not reached (budget); curl 2026-11-03 from non-US exit: https://lni.wa.gov/insurance/premiums/how-to-pay/quarterly-report HTTP 404; local: ccg-sources/WA L&I files are rates and minimum-wage pages only (WA_LNI_wc-rates, 2026RatesByClassCodeFund). What would close it: L&I Employer Quarterly Report instructions on lni.wa.gov (current URL) or WAC 296-17 reporting sections
+- **rspec.az.ui_qtr.efile_mandate** (non-blocking). UC-018 form, content and due dates are now registered (US-AZB5-004/-005, facts rspec.az.ui_qtr.*); the DES pages read name online filing via TWS and bulk files but state no electronic-filing mandate threshold. Attempted: browser pass P2 2026-11-02 (_research/stage5/browser-pass-P2.md): des.az.gov reporting-wages schedule and completing-reports pages read. What would close it: A.A.C. R6-3-1705 (or the DES employer handbook) text on electronic filing of the quarterly report.
+- **rspec.fed.futa.credit_reduction.states_2026** (non-blocking). [documented_limitation: not yet published] DOL announces the final 2026 credit-reduction states after the 2026-11-10 repayment deadline; the 2026 Schedule A draft carries 0.0XX placeholders. Potential (DOL 2026-01-15): CA 5.3% estimate, VI 4.8%. Attempted: oui.doleta.gov/unemploy/futa_credit.asp (US-FEDS5-009, page updated 2026-09-11, held); https://www.irs.gov/pub/irs-dft/f940sa--dft.pdf (2026 draft, placeholders) 2026-11-03. What would close it: DOL ETA final 2026 FUTA credit reduction list (published after 2026-11-10) and the final Schedule A (Form 940) for 2026 (IRS, normally December)
+- **rspec.wv.local.other_municipal_service_fees** (non-blocking). [documented_limitation: access] Huntington, Wheeling, Parkersburg (and Fairmont, Weirton, others) city service fee pages and forms could not be read: wheelingwv.gov 403 (finance page and CSF-2 PDF), parkersburgwv.gov 403, cityofhuntington.com 404; amounts known only from tier-B/C rows (US-WVR3-003, US-WVP7-004) Attempted: https://wheelingwv.gov/finance/ 403 (2026-11-03); https://www.wheelingwv.gov/media/Finance/City%20Service%20Fee/City%20Service%20Fee%20-%20Quarterly%20Remittance%20Form%20CSF-2.pdf 403; https://www.parkersburgwv.gov/departments/finance/city_service_fee.php 403; https://www.cityofhuntington.com/government/finance/city-service-fee 404; web search for WV city service fee official pages 2026-11-03. What would close it: Each city's service-fee ordinance and current return form (Huntington Art. 772, Wheeling Art. 797, Parkersburg, Fairmont, Weirton), read in a browser session (Chrome) or obtained from the city finance offices
+- **rspec.pa.local.pittsburgh_payroll_expense.form_2026** (non-blocking). [documented_limitation: access] The 2026 ET-1 Tax Form is listed on the City of Pittsburgh Tax Forms page but pittsburghpa.gov returns HTTP 403 to curl and the Wayback Machine has no copy; return structure and due dates are taken from the 2025 ET form Attempted: https://www.pittsburghpa.gov/files/assets/city/v/1/finance/documents/tax-forms/2026-et-1-tax-form.pdf 403 (2026-11-03); archive.org availability API: no snapshot; pittsburghpa.gov tax-forms / Tax-Due-Dates pages 403. What would close it: 2026 ET-1 Tax Form PDF read in a browser session (Chrome) from pittsburghpa.gov, or the City Department of Finance (412-255-2525) confirming 2026 due dates

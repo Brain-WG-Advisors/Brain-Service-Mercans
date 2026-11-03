@@ -91,7 +91,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Nonresidents:** nothing to withhold for SD. An SD resident working in a wage-taxing state is withheld for that state (MULTI unit).
 
 ## 3 — social_security (Reemployment Assistance = UI)
-- **Taxable wage base:** USD 15,000 from 2015-01-01. It is fixed in statute, **not indexed** (61-1-46). [US-SDS5-002 A.1; US-SD-002]
+- **Taxable wage base:** USD 15,000 from 2015-01-01. It is fixed in statute, **not indexed** (61-1-46). [US-SDS5-002 A.1]
 - **New employer:** 1.2% in year 1, then 1.0% while the account balance is positive, until the employer is experience-rated. Construction (NAICS 23) pays 6% then 3% (61-5-24). DLR puts the 1.0% / 3.0% in years 2-3. [US-SDS5-002, US-SDS5-020]
 - **Experience-rated employers:** the schedule is set by the average high cost multiplier (AHCM): A below 1.30; B from 1.30 to below 1.50; C at 1.50 or more (61-5-25). The 2026+ table is SL 2025 ch 199 (61-5-25.7):
   - Schedule A: 0.00%–9.39%;
@@ -103,7 +103,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Investment fee:** 0.55% for employers not yet rated. Rated employers pay 0.00%–0.53% by reserve ratio, capped at the 1987 rate for accounts with a positive balance (61-5-29). [US-SDS5-002]
   - Neither fee may be deducted from wages.
 - **Fund-balance surcharge** (61-5-28): 0.1%–1.5% for all employers if the fund falls below USD 11 m at quarter-end. Dormant since 2010. [US-SDS5-002, US-SDS5-020]
-- **Employee contribution:** none. **No SDI, TDI, PFML, LTC or transit levy.** [US-SDP51-002, US-SDP52-002]
+- **Employee contribution:** none. **No SDI, TDI, PFML, LTC or transit levy.** [US-SDP51-002]
 - **Conflict:** the DLR wage-reporting page says "maximum tax rate is 9.5 percent". That is a pre-2026 statement; the statute governs (the top rate is 8.52% under Schedule C, plus fees). [US-SDS5-013]
 - **Liability thresholds:** 1 worker in 20 weeks, or USD 1,500 in a quarter. Domestic: USD 1,000 in a quarter. Agricultural: USD 20,000 in a quarter, or 10 workers in 20 weeks. 501(c)(3): 4 workers in 20 weeks. [US-SDS5-020; 61-1-17, 61-1-19]
 - **Wage definition for UI** [US-SDS5-013]:
@@ -137,7 +137,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - A multistate employer may designate one state.
 
 ## 6 — leave
-- **No paid sick leave, vacation, holiday or PFML statute.** [US-SDS5-011 A.3; US-SDP52-002]
+- **No paid sick leave, vacation, holiday or PFML statute.** [US-SDS5-011 A.3; PFML: US-SDP51-002]
 - **Voting:** 2 consecutive hours off while the polls are open, with **no deduction from wages**, unless the employee already has 2 consecutive off-duty hours. The employer may set the hours (12-3-5). [US-SDS5-008 A.1; WTC: paid time]
 - **Jury duty:** protection from discharge or suspension (16-13-41.1). Pay is at the employer's discretion. [US-SDS5-008, -011]
 - **Military:** National Guard members on state or federal active duty get SCRA protections (ch. 33A-2, keyword read). No state duty to pay military leave was located. [US-SDS5-009, partial]

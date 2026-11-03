@@ -1,14 +1,15 @@
 # Annex ND: North Dakota
 
+
 United States Country Configuration Guide, jurisdiction annex ND. Tax year 2026; currency USD (two decimal places).
 
-## ND.0 Scope of this annex
+**Scope of this annex.**
 
-This annex holds the North Dakota layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC are out of scope. The pay statement is issued in English.
+This annex holds the North Dakota layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. The pay statement is issued in English.
 
-In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register (00-official-sources/legal-basis-register.csv), with the authority and address listed in section ND.20 (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
+In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register, with the authority and address listed in section ND.S (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
 
-## ND.1 Jurisdiction layer
+**Jurisdiction layer.**
 
 | Item | Value |
 |---|---|
@@ -17,13 +18,13 @@ In every table, *Valid from* and *Valid to* give the period in which the value a
 
 Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = state withholding with no local layer remitted separately; T4 = a local layer remitted to a separate local authority on its own return.
 
-## ND.2 Configuration decisions
+**Configuration decisions.**
 
 - The worked example in the 2026 withholding booklet does not reproduce from the 2026 table. Use the table and formula; the reference result is [[FACT:nd.pit.oracle.example_1.withholding=13]] USD.
 - A pay statement content rule exists (`nd.payslip.items`).
 - North Dakota uses the federal Form W-4 (no state certificate, `nd.wh.certificate`); supplemental wages are withheld at [[FACT:nd.wh.supplemental.rate=1.5]] percent.
 
-## ND.3 Employment and labour code
+## ND.1 Employment and labour code
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -37,9 +38,9 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nd.payment.method` | [[FACT:nd.payment.method=cash, check, direct deposit to employee-chosen institution; paycard only at employee election]] | 2026-01-01 | open | US-NDS5-005 (A.1, ND Legislative Council) | - |
 | `nd.labour.board_lodging_credit.daily_max` | [[FACT:nd.labour.board_lodging_credit.daily_max=18.0]] USD | 2012-10-01 | open | US-NDS5-007 (A.1, ND Legislative Council (NDAC; Department of Labor and Human Rights rule)) | written voluntary agreement |
 | `nd.labour.tip_credit.max_ratio` | [[FACT:nd.labour.tip_credit.max_ratio=33]] percent | 2012-10-01 | open | US-NDS5-007 (A.1, ND Legislative Council (NDAC; Department of Labor and Human Rights rule)) | - |
-| `nd.minwage.tipped.cash_wage` | [[FACT:nd.minwage.tipped.cash_wage=4.86]] USD | 2012-10-01 | open | US-NDS5-007 (A.1, ND Legislative Council (NDAC; Department of Labor and Human Rights rule)) | [[FACT:nd.minwage.hourly=7.25]] x (1-0.33) = 4.8575 -> [[FACT:nd.minwage.tipped.cash_wage=4.86]] (derived) |
+| `nd.minwage.tipped.cash_wage` | [[FACT:nd.minwage.tipped.cash_wage=4.86]] USD | 2012-10-01 | open | US-NDS5-007 (A.1, ND Legislative Council (NDAC; Department of Labor and Human Rights rule)) | [[FACT:nd.minwage.hourly=7.25]] x (1 - 0.33) = 4.8575 -> [[FACT:nd.minwage.tipped.cash_wage=4.86]] (NDAC 46-02-07-03: tip credit of thirty-three percent of the minimum wage). |
 
-## ND.4 State income tax withholding
+## ND.2 Income tax withholding
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -59,13 +60,13 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nd.pit.allowance.annual.pre2020_w4` | [[FACT:nd.pit.allowance.annual.pre2020_w4=5050]] USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | weekly 97, biweekly 194, semimonthly 210, monthly 420 |
 | `nd.pit.rounding` | [[FACT:nd.pit.rounding=nearest whole dollar; under 1.00 need not be withheld]] | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | - |
 | `nd.wh.supplemental.rate` | [[FACT:nd.wh.supplemental.rate=1.5]] percent | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | or aggregate |
-| `nd.pit.oracle.example_1.withholding` | [[FACT:nd.pit.oracle.example_1.withholding=13]] USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | weekly 1,800 single (2020+ W-4): (93,600-[[FACT:nd.pit.wh.single.1.ceiling=57,625]]) x 1.95% = 701.51; /52 = 13.49 -> 13. Booklet prints [[FACT:nd.oracle.section2_booklet.withholding=734]]/14 (stale example; do NOT use); weekly bracket table shows 14 (midpoint basis, 1.00 residual) |
-| `nd.pit.oracle.example_2.withholding` | [[FACT:nd.pit.oracle.example_2.withholding=10]] USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | Section 1 weekly 1,800 single 2 allowances: (1,606-1,108) x 1.95% = 9.71 -> 10, as printed |
+| `nd.pit.oracle.example_1.withholding` | [[FACT:nd.pit.oracle.example_1.withholding=13]] USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | weekly 1,800 single (2020+ W-4): (93,600-[[FACT:nd.pit.wh.single.1.ceiling=57,625]]) x [[FACT:nd.pit.wh.single.2.rate=1.95]]% = 701.51; /52 = 13.49 -> 13. Booklet prints [[FACT:nd.oracle.section2_booklet.withholding=734]]/14 (stale example; do NOT use); weekly bracket table shows 14 (midpoint basis, 1.00 residual) |
+| `nd.pit.oracle.example_2.withholding` | [[FACT:nd.pit.oracle.example_2.withholding=10]] USD | 2026-01-01 | 2026-12-31 | US-NDS5-001 (A.2, ND Office of State Tax Commissioner) | Section 1 weekly 1,800 single 2 allowances: (1,606-1,108) x [[FACT:nd.pit.wh.single.2.rate=1.95]]% = 9.71 -> 10, as printed |
 | `nd.pit.agricultural.withholding_required` | [[FACT:nd.pit.agricultural.withholding_required=False]] | 2026-01-01 | open | US-NDS5-002 (A.2, ND Office of State Tax Commissioner) | farmer/rancher wages |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nd.pit.oracle.booklet_defect`): The Section 2 example of the 2026 withholding booklet does not reproduce from the 2026 table; the table and formula result ([[FACT:nd.pit.oracle.example_1.withholding=13]] USD) is used instead, and the defect is not yet confirmed with the authority. To close: OST (withhold@nd.gov) confirmation that the example is stale and the table governs, or a corrected booklet.
+- Not configured in this release [[GAP:RQ-083]]: The Section 2 example of the 2026 withholding booklet does not reproduce from the 2026 table; the table and formula result ([[FACT:nd.pit.oracle.example_1.withholding=13]] USD) is used instead, and the defect is not yet confirmed with the authority.
 
-## ND.5 Non-residents, residents working elsewhere and reciprocity
+## ND.2b Non-resident regime and reciprocity
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -73,13 +74,13 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nd.pit.nonresident.mobile_workforce.days` | [[FACT:nd.pit.nonresident.mobile_workforce.days=20]] days | 2026-01-01 | open | US-NDS5-004 (A.1, ND Legislative Council) | 57-38-59.3; home state reciprocal or no income tax; excludes athletes, entertainers, construction, key employees |
 | `nd.pit.nra.certificate` | [[FACT:nd.pit.nra.certificate=separate W-4 marked North Dakota only - nonresident alien; Single; Exempt not allowed]] | 2026-01-01 | open | US-NDS5-002 (A.2, ND Office of State Tax Commissioner) | treaty ignored unless it covers states |
 
-## ND.6 Local wage taxes
+## ND.2c Local wage taxes
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nd.local_wage_tax.exists` | [[FACT:nd.local_wage_tax.exists=False]] | 2026-01-01 | open | US-NDP52-001 (A.1, ND Legislative Council) | - |
 
-## ND.7 Unemployment insurance, disability and paid-leave contributions, other payroll levies
+## ND.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -94,17 +95,17 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nd.sui.wage_base.other_state_credit` | [[FACT:nd.sui.wage_base.other_state_credit=True]] | 2026-01-01 | open | US-NDS5-009 (A.1, ND Legislative Council) | same employer; 52-04-03(1); no worked example |
 | `nd.sdi_pfml.exists` | [[FACT:nd.sdi_pfml.exists=False]] | 2026-01-01 | open | US-NDP52-002 (A.1, ND Legislative Council) | 34-01-15.1 bars local mandates |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nd.ui.rates.next_year`): The 2027 unemployment wage base and rates and the 2027 withholding booklet are not yet published. To close: Job Service 2027 rate schedules and the OST 2027 booklet.
+- Not configured in this release [[GAP:RQ-084]]: The 2027 unemployment wage base and rates and the 2027 withholding booklet are not yet published.
 
-## ND.8 Pay statement
+## ND.4 Pay statement
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nd.payslip.items` | [[FACT:nd.payslip.items=check stub or pay voucher each pay period: hours worked, rate, required state/federal deductions, authorized deductions]] | 2012-10-01 | open | US-NDS5-007 (A.1, ND Legislative Council (NDAC; Department of Labor and Human Rights rule)) | NDAC 46-02-07-02(10); supersedes the "no provision" reading in US-ND-003 / US-MQ-48 part 6 |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nd.payslip.electronic_and_retention`): No ND rule found on electronic pay-statement delivery or payroll record retention. To close: NDDOLHR wage-and-hour FAQ or NDAC 46-02 recordkeeping provisions.
+- Not configured in this release [[GAP:RQ-085]]: No ND rule found on electronic pay-statement delivery or payroll record retention.
 
-## ND.9 Statutory reporting
+## ND.5 Statutory reporting
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -113,29 +114,29 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nd.report.form307.due` | [[FACT:nd.report.form307.due=Jan 31; W-2 e-file mandatory (EFW2)]] | 2026-01-01 | open | US-NDS5-002 (A.2, ND Office of State Tax Commissioner) | - |
 | `nd.newhire.report_days` | [[FACT:nd.newhire.report_days=20]] days | 2026-01-01 | open | US-NDS5-013 (A.2, ND Department of Health and Human Services (Child Support)) | incl. health insurance offered |
 
-## ND.10 Leave
+## ND.6 Leave
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nd.leave.pto.payout_at_separation` | [[FACT:nd.leave.pto.payout_at_separation=True]] | 2012-10-01 | open | US-NDS5-007 (A.1, ND Legislative Council (NDAC; Department of Labor and Human Rights rule)) | withholdable on quit only with notice at hire + <1 year service + <5 days notice (US-NDS5-005) |
 | `nd.leave.sick.state_statute.exists` | [[FACT:nd.leave.sick.state_statute.exists=False]] | 2026-01-01 | open | US-NDP52-002 (A.1, ND Legislative Council) | - |
 
-## ND.11 Termination and final pay
+## ND.7 Termination and final pay
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nd.final_pay.rule` | [[FACT:nd.final_pay.rule=next regular payday (discharge, resignation, suspension)]] | 2026-01-01 | open | US-NDS5-005 (A.1, ND Legislative Council) | penalty daily wage up to 30 days |
 | `nd.term.iwo.notice_days` | [[FACT:nd.term.iwo.notice_days=7]] days | 2026-01-01 | open | US-NDS5-016 (A.3, ND Department of Health and Human Services (Child Support)) | - |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nd.term.ui_notice_warn_child_labour`): UI separation notice, state WARN and child-labour hours (34-07) not researched. To close: Job Service Employer's Guide to UI and NDCC 34-07.
+- Not configured in this release [[GAP:RQ-086]]: UI separation notice, state WARN and child-labour hours (34-07) not established from an official source.
 
-## ND.12 Taxable wages and benefits in kind
+## ND.8 Benefits in kind and taxable wages
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nd.bik.conformity` | [[FACT:nd.bik.conformity=ND taxable income = federal; withholding wages = IRC 3401]] | 2026-01-01 | open | US-NDS5-004 (A.1, ND Legislative Council) | - |
 
-## ND.13 Deductions and garnishments
+## ND.9 Deductions and garnishments
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -144,23 +145,25 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nd.garn.iwo.employer_fee.monthly` | [[FACT:nd.garn.iwo.employer_fee.monthly=3.0]] USD | 2026-01-01 | open | US-NDS5-014 (A.3, ND Department of Health and Human Services (Child Support)) | remit within 7 business days |
 | `nd.garn.iwo.lump_sum.threshold` | [[FACT:nd.garn.iwo.lump_sum.threshold=1000]] USD | 2026-01-01 | open | US-NDS5-015 (A.3, ND Department of Health and Human Services (Child Support)) | notify Child Support; release half, hold half 30 days |
 
-## ND.14 Prevailing wage and collective agreements
+## ND.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
-| `nd.prevailing_wage.exists` | [[FACT:nd.prevailing_wage.exists=False]] | 2026-01-01 | open | US-NDP51-003 (A.2, US Department of Labor Wage and Hour Division) | summary of DOL table |
+| `nd.prevailing_wage.exists` | [[FACT:nd.prevailing_wage.exists=False]] | 2026-01-01 | open | US-NDP51-003 (A.2, US Department of Labor Wage and Hour Division) | U.S. DOL state prevailing wage table. |
 
 Rules:
 
 - No state prevailing-wage law. Federal Davis-Bacon applies to federal projects. (US-NDP51-003)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `nd.prevailing_wage.absence`): The absence of a state prevailing-wage law rests on a summary of the US Department of Labor state table only. To close: Direct read of the DOL WHD prevailing-wages page or an NDDOLHR statement.
+- Not configured in this release [[GAP:RQ-087]]: The absence of a state prevailing-wage law rests on a summary of the US Department of Labor state table only.
 
-## ND.15 Indexation
+## ND.11 Indexation
 
 Indexation of each value is stated in the note of the value concerned.
 
-## ND.16 Payroll data protection and records
+## ND.12 Payroll data protection and records
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -170,11 +173,15 @@ Rules:
 
 - No pay-statement SSN-truncation rule was found.
 
-## ND.17 Legal change in force or enacted
+## ND.13 Live legal change
 
 No North Dakota rule is configured in this domain; the federal treatment in Annex FED applies.
 
-## ND.18 Special populations
+## ND.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## ND.15 Special populations
 
 - Domestic / household: Casual babysitters exempt from minimum wage. (US-NDS5-002, US-NDS5-011, US-NDS5-007)
 - Agricultural: Overtime exempt. (US-NDS5-002, US-NDS5-011, US-NDS5-007)
@@ -186,13 +193,13 @@ No North Dakota rule is configured in this domain; the federal treatment in Anne
 - Government employees: Covered by minimum wage and withholding (the state is an "employer"). (US-NDS5-006, US-NDS5-007, US-NDS5-002)
 - Military spouses / military pay: NDW-M exemption; No withholding on deductible military pay unless requested. (US-NDS5-002, US-NDS5-004)
 - Tribal members: Exempt when enrolled, living on a reservation and working there. (US-NDS5-002)
-- ⚠️ RESEARCH-GAP (non-blocking, `nd.special_populations.thresholds`): thresholds, amounts or conditions for these populations are stated in the research without a confirmed value record and are not configured from this annex: Domestic / household; Agricultural; Minors; Tipped; Students; Government employees. To close: one confirmed value per threshold, with its source row.
+- Not configured in this release [[GAP:RQ-088]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic / household; Agricultural; Minors; Tipped; Students; Government employees.
 
-## ND.19 Language
+## ND.16 Language
 
 - The pay statement and all filings are in English (owner decision US-OWN-006).
 
-## ND.20 Sources
+## ND.S Sources
 
 | Source | Authority |
 |---|---|

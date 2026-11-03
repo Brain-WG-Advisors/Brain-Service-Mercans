@@ -7,7 +7,7 @@ Synthesis B, 2026-11-02. Source: `_research/stage5/AZ.md` and the active/partial
 **Summary.** Flat-percentage withholding elected on Form A-4 (0.5-3.5%, default 2.0%) on federal wages; no local income tax. State minimum wage CPI-indexed (2026 15.15 / 2027 15.65 are derived from an unconfirmed 2025 base: MANUAL, not facts); Tucson local minimum wage 15.45 / 16.00. Earned paid sick time with mandatory paycheck content (23-375(C)). SUI base 8,000, new employer 2.00%, no employee UI; UI Operating Fund 3.15% of UI liability from 2027. Stricter creditor-garnishment cap (10%).
 
 ## 1 — Employment / labour code
-State minimum wage 2026/2027: the derived 15.15 (2026) and 15.65 (2027) rest on an unconfirmed 2025 base of 14.70 and on the tier-C MANUAL row US-AZS5-028 (ICA page 403). They are NOT facts (see unresolved az.minwage.hourly). The CPI-U steps are facts. Tipped cash wage likewise derived (12.15/12.65) and not emitted. Overtime: no AZ statute located; FLSA applies (medium). Flagstaff local rate unread.
+State minimum wage 2026/2027: 15.15 (2026) and 15.65 (2027), tipped cash wage 12.15/12.65, are facts quoted from the ICA posters [A.2, US-AZB5-001 / US-AZB5-002], which supersede the earlier tier-C derived row US-AZS5-028. The CPI-U steps are facts. Overtime: no AZ statute located; FLSA applies (medium). Flagstaff local rate unread.
 
 - `az.minwage.indexation` = **each 1 January by Aug-over-Aug CPI-U (US city average), increase rounded to nearest 0.05 (A.R.S. 23-363(B))**  (2021-01-01 → open) [A.1, US-AZS5-005, direct artifact inspection, conf high]
 - `az.minwage.tip_credit.max` = **3.0** USD (2021-01-01 → open) [A.1, US-AZS5-005, direct artifact inspection, conf high] — Employer may pay up to 3.00/h below the minimum if tips + wages reach it each week.
@@ -43,8 +43,8 @@ UI exclusions (23-615, 23-617) [US-AZS5-014, US-AZS5-015]: farm labour below 10 
 - `az.sui.new_employer.rate` = **2.0** percent (2026-01-01 → 2026-12-31) [A.2, US-AZP9V-001, direct artifact inspection, conf high]
 - `az.sui.employer.rate.min` = **0.03** percent (2026-01-01 → 2026-12-31) [A.2, US-AZR3-003, quoted from authority page, conf high] — 2026 adjusted rates 0.03%-8.36% (UIT-0603A, A.R.S. 23-730).
 - `az.sui.employer.rate.max` = **8.36** percent (2026-01-01 → 2026-12-31) [A.2, US-AZP9V-001, direct artifact inspection, conf high]
-- `az.sui.employee.rate` = **0** percent (2026-01-01 → open) [A.2, US-AZR3-001, quoted from authority page, conf high] — "You cannot take these taxes out of employee pay."
-- `az.ui_operating_fund.rate_of_ui_liability` = **3.15** percent (2027-01-01 → open) [A.2, US-AZR3-004, quoted from authority page, conf high] — Each quarter of 2027 experience-rated employers pay 3.15% of UI liability to the UI Operating Fund (NOT 2026).
+- `az.sui.employee.rate` = **0** percent (2026-01-01 → open) [A.2, US-AZB5-401, quoted from authority page, conf high] — "You cannot take these taxes out of employee pay."
+- `az.ui_operating_fund.rate_of_ui_liability` = **3.15** percent (2027-01-01 → open) [A.2, US-AZB5-402, quoted from authority page, conf high] — Each quarter of 2027 experience-rated employers pay 3.15% of UI liability to the UI Operating Fund (NOT 2026).
 - `az.sdi_pfml.exists` = **False**  (2026-01-01 → open) [A.2, US-AZR3-005, quoted from authority page, conf high] — No SDI/PFML or other levy [US-AZP9V-001, US-AZP9V-002].
 
 ## 4 — Payslip statute
@@ -113,7 +113,7 @@ Sick-time notice in English and Spanish (23-375(B)) [US-AZL-001]; minimum-wage a
 Source: browser-pass rows S5B-P1 / S5B-P2 merged into `legal-basis-register.csv` and SSA EFW2 TY2026 (US-FEDS5-032) read locally. Every claim below carries its register_id; the facts file is authoritative. Full log: `_research/synthesis-D/SYNTHESIS-D.md`.
 
 Facts added:
-- `az.minwage.hourly` = **15.15** USD (2026-01-01 → 2026-12-31) [A.2, US-AZB5-001, direct artifact inspection, conf high] — ICA 2026 poster. Agrees with the CPI-U chain 14.70 + 2.9162% = 15.1287, rounded to the nearest 0.05 = 15.15 (superseded derivation row US-AZS5-028).
+- `az.minwage.hourly` = **15.15** USD (2026-01-01 → 2026-12-31) [A.2, US-AZB5-001, direct artifact inspection, conf high] — ICA 2026 poster. Agrees with the CPI-U chain 14.70 + 2.9162% = 15.1287, rounded to the nearest 0.05 = 15.15 (the earlier derived row, now superseded by US-AZB5-001).
 - `az.minwage.hourly` = **15.65** USD (2027-01-01 → open) [A.2, US-AZB5-002, direct artifact inspection, conf high] — ICA 2027 poster read in the PDF viewer (PDF title metadata says 2024; printed text 2027 / 15.65). Agrees with 15.15 + 3.3965% = 15.6646 -> 15.65. Not yet linked from the ICA main page on 2026-11-02.
 - `az.minwage.tipped.cash_wage` = **12.15** USD (2026-01-01 → 2026-12-31) [A.2, US-AZB5-001, derived arithmetically, conf high] — 15.15 - 3.00 maximum tip credit (poster: tipped employees may be paid at most 3.00/h less than the minimum wage).
 - `az.minwage.tipped.cash_wage` = **12.65** USD (2027-01-01 → open) [A.2, US-AZB5-002, derived arithmetically, conf high] — 15.65 - 3.00 maximum tip credit (A.R.S. 23-363(C), az.minwage.tip_credit.max).

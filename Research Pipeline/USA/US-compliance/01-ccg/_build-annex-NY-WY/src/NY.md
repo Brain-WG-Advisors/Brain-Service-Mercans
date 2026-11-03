@@ -15,7 +15,7 @@
 - **Withholding schedules are not statutory brackets.** The Method II rate schedules (single and married, with recapture bands) are withholding schedules published in NYS-50-T-NYS; the build uses the publication's tables and formula, never the statutory brackets of Tax Law 601. The WTC references NYS-50-T-NYS only.
 - **Certificate [US-NYS5-010].** {{ny.wh.certificate}}. An exempt certificate is available under Tax Law 671(a)(3) (minors, older employees and full-time students with no liability).
 - **Exemption allowance:** {{ny.pit.exemption.annual}} USD per year per allowance [US-NY-001].
-- **Supplemental wages.** New York State supplemental rate {{ny.pit.supplemental.nys.rate}} %, or the aggregate method [US-NY-001, US-NYS5-010]. The NYC and Yonkers supplemental rates are not stated here (open point below).
+- **Supplemental wages.** New York State supplemental rate {{ny.pit.supplemental.nys.rate}} %, or the aggregate method [US-NY-001, US-NYS5-010]. Local supplemental rates (method (a); or the aggregate method): New York City {{ny.local.nyc.supplemental.rate}} %, Yonkers resident {{ny.local.yonkers.resident.supplemental.rate}} %, Yonkers nonresident {{ny.local.yonkers.nonresident.supplemental.rate}} % [US-NYB5-301, US-NYB5-302].
 - **Rounding:** {{ny.pit.rounding}} [US-NY-001]. Oracle (NYS-50-T-NYS Method II worked examples): example 1 = {{ny.pit.oracle.example_1.withholding}} USD; example 3 = {{ny.pit.oracle.example_3.withholding}} USD; example 4 = {{ny.pit.oracle.example_4.withholding}} USD, all reproduced exactly. Example 2 is printed as {{ny.pit.oracle.example_2.withholding}} USD; half-up rounding gives one cent less (open point below). Recomputation of the examples belongs to Module 12 and the validation suite.
 - **Local income taxes (T3 piggyback) [US-NY-008, US-NYS5-010].** NYC: {{ny.pit.local.nyc.basis}}. Yonkers: resident surcharge, and nonresident earnings tax on work performed in Yonkers; no Yonkers nonresident withholding is needed where Yonkers wages are expected to be {{ny.pit.local.yonkers.nonresident_threshold}} USD or less. The NYC tables did not change for 2026; the NYS and Yonkers tables did [US-NYS5-020].
 - **Resident and nonresident matrix.**
@@ -78,7 +78,7 @@
 - **Exempt thresholds and meal/lodging credits** move with the minimum-wage orders (652(2)) [US-NYS5-011].
 - **UI wage base:** indexed to the state average annual wage [US-NYS5-010]; 2027 value open (Section 3).
 - **PFL:** DFS publishes the rate and cap by September 1 each year [US-NYP8-001].
-- **Withholding tables:** reissued as the law changes; no 2027 change announced [US-NYS5-020].
+- **Withholding tables:** republished as the law changes; no 2027 change announced [US-NYS5-020].
 
 ## @data
 - **Labor Law 203-d [US-NYS5-009]:** public display of SSNs prohibited ({{ny.data.ssn.public_display_prohibited}}); no SSN on badges or time cards; no SSN in unrestricted files. The SSN is not a required pay-statement item. UI information is confidential under UI Law 537 [US-NYS5-010].
@@ -104,7 +104,7 @@
 
 ## @gaps
 - ny.pit.oracle.example2_residual :: NYS-50-T-NYS Method II example 2 is printed as {{ny.pit.oracle.example_2.withholding}} USD; half-up rounding of the intermediate rate product gives one cent less, so the booklet's rounding convention is not established. :: DTF statement of the rounding convention, or the DTF withholding calculator result for the same case.
-- ny.pit.supplemental.local_rates :: The NYC resident, Yonkers resident and Yonkers nonresident supplemental withholding rates have no active register row (the row that carried them is superseded and its successor carries only the rounding finding). No local supplemental rate is stated in this annex. :: Re-register the supplemental-rate lines of NYS-50-T-NYC and NYS-50-T-Y (1/26) as an active A.2 row.
+- ny.pit.supplemental.local_rates :: The NYC resident, Yonkers resident and Yonkers nonresident supplemental withholding rates have no active register row (the source that carried them is no longer current; the current source carries only the rounding finding). No local supplemental rate is stated in this annex. :: Re-register the supplemental-rate lines of NYS-50-T-NYC and NYS-50-T-Y (1/26) as an active A.2 row.
 - ny.term.ia12_3.timing :: The timing rule for the UI separation notice named in `ny.term.ui_notice.form` (12 NYCRR 472.8) was not read. :: Text of 12 NYCRR 472.8.
 - ny.bik.nyc_flex125_addback :: The NYC flexible-benefits (cafeteria plan) addback for NYC employees was not read. :: DTF addback-modification instructions for New York City flexible benefits.
 - ny.garn.consumer.floor_region :: Whether the CPLR 5231 floor uses the regional Labor Law 652 rate or the rest-of-state rate is not established. :: DOL or court guidance, or the income execution form text.

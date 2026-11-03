@@ -21,6 +21,8 @@
 - **Singapura/Austrália e Filipinas/EUA:** ler os e-mails (cartões no Trello, com link).
 
 ## Esperando outros
+- **Espanha, Lily ("Fwd: Spain Migration Progress", 02/11): ENVIADO 18:40 BRT, conferido. Aguardar retorno dela.** Ainda aberto: comentário com o link da CCG v1.8 no HRBS-16407 está só como draft (janela Suporte); CRA v2.5 e WTC V4.9 no Drive como .xlsx, para o ticket ao Dev. Histórico: rascunho pronto no Gmail (rateio 12 meses, RD 2064/1995 23.2.B; 16 descendentes, metade na retenção, RIRPF 84.2.º; cita CCG v1.8 com link). Aguardando a janela Suporte trocar o link da CCG v1.8 no HRBS-16407 e no monday (+ ticket ao Dev). Depois: usuário envia; em "enviei" → registrar no [[Espanha]] e no log. CCG: `Research Pipeline/Spain/2026-11-02-CCG-v1.8-descendentes-indenizacao/CONFERENCIA.md`.
+- **Lituânia, Kevin (02/11):** e-mail enviado pelo usuário (reports no Dev: CT-3703/3704/3705). Avisar o Kevin quando forem publicados.
 - **Espanha, Lily (L03):** 3 respostas enviadas em 28/10 (códigos da L03; regra geral; mesma lógica da L00/L13 do mês, 509 só pec 35, 701 só pluriemprego/Artistas). Aguardar retorno. [[Espanha]].
 - **Lituânia, Yojana/Kevin:** tickets enviados em 28/10 (CT-4285; SR-420/421/419; SR-479); 2027 só após o XVP-1986 (volta ao Seimas em 19/11). [[Lituania]].
 - **Espanha, IRPF A3 × HRB:** e-mail enviado pelo usuário em 27/10 ao Mohamed (Cc Yojana e Lily). Aguardar a composição de 58165 − 58149 e o acumulador do 58163; então: atraso (15%) → HRB certo, conferir retenção; senão, acumulador muda (Lily). Resposta L03 à Lily também enviada em 27/10. Falta só: avisar o Vinícius que a Espanha foi feita (usuário). Registro: [[Espanha]], `rascunhos/2026-10-27-ES-IRPF-A3-x-HRB.md`.

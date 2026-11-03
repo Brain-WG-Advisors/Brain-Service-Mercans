@@ -1,10 +1,15 @@
 # Indice de tickets (YouTrack)
 
-> Gerado por youtrack_fetch.ps1 em 2026-11-02 07:49. Consulta da ultima execucao: `issue id: HRBS-16407`
+> Gerado por youtrack_fetch.ps1 em 2026-11-03 09:26. Consulta da ultima execucao: `issue id: HRBS-16791`
 
 | ID | Titulo | Estado | Atualizado |
 |---|---|---|---|
-| HRBS-16407 | URGENT & CRITICAL : STG: Spain - Gaps Identified in regulation | Pending on reporter | 2026-11-02 10:15 |
+| HRBS-16791 | Namibia's SS contribution | Open | 2026-11-03 10:43 |
+| SR-224 | ES: Payslip | Done | 2026-11-03 08:57 |
+| HRBS-16407 | URGENT & CRITICAL : STG: Spain - Gaps Identified in regulation | Pending on reporter | 2026-11-02 17:30 |
+| CT-3705 | LT - SAM | Open | 2026-11-02 16:57 |
+| CT-3704 | LT - GPM312 | Open | 2026-11-02 16:57 |
+| CT-3703 | LT - GPM313 Report | Open | 2026-11-02 16:57 |
 | HRBS-16418 | Henkel TN tax compliance inquiry | In Progress | 2026-11-02 08:51 |
 | SR-161 | UA: 4DF-001_PersonalTax | Done | 2026-10-30 13:22 |
 | HRBS-15630 | Urgent!! GWM Singapore (REF-P202-936) – Oct 2026 OT Run (Jurong): AW ceiling on CPF uses October salary not yet paid | Resolved | 2026-10-30 07:56 |
@@ -12,10 +17,10 @@
 | HRBS-16010 | INC1969781 - Post Graduate Loan - HMRC Pull File | Pending on Internal team | 2026-10-28 18:40 |
 | HRBS-16568 | Contribution to PF not calculated for Arrears salary | Open | 2026-10-28 17:07 |
 | HRBS-16573 | URGENT: STG: Denmark - Holiday Pay Termination | In Progress | 2026-10-28 12:01 |
-| HRBS-15253 | ACCENTURE LITHUANIA \\\\\\\\\\\\\\\\| Compliance (Calculation & Reporting) Check | Pending on Internal team | 2026-10-28 03:20 |
+| HRBS-15253 | ACCENTURE LITHUANIA \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Compliance (Calculation & Reporting) Check | Pending on Internal team | 2026-10-28 03:20 |
 | SR-419 | LT-SODRA-003-SAM-Spec | Open | 2026-10-28 03:15 |
-| CT-4285 | Lithuania_ Statutory alert Jan 2026 [ACCEPTANCE] | Open | 2026-10-28 03:15 |
 | SR-421 | LT-VMI-002-GPM312-Spec | Open | 2026-10-28 03:15 |
+| CT-4285 | Lithuania_ Statutory alert Jan 2026 [ACCEPTANCE] | Open | 2026-10-28 03:15 |
 | SR-420 | LT-VMI-001-GPM313-Spec | Open | 2026-10-28 03:15 |
 | SR-479 | LT: Lithuania Statutory Integration | Open | 2026-10-28 03:09 |
 | HRBS-16438 | Statutory AI Validation feature failure | In Progress | 2026-10-27 19:00 |
@@ -24,23 +29,23 @@
 | HRBS-14394 | Reopening Ticket HRBS-5499 - Incorrect Display of "Maximum Social Security Base" on Netherlands Payroll Reports | Open | 2026-10-27 11:41 |
 | SR-415 | UA: Form 1-PV Quarterly (Labour Statistics Report) - SPEC | In Review | 2026-10-27 11:16 |
 | SR-414 | UA: Form 1-PV Monthly (Labour Statistics Report) - SPEC | In Review | 2026-10-27 09:55 |
-| HRBS-16468 | Internal Ticket – Latvia (Accenture) \\\\\\\\\\\\\\\\\\\| 2027 Regulatory Readiness, Statutory Reports & Filing API Status | Resolved | 2026-10-26 10:20 |
+| HRBS-16468 | Internal Ticket – Latvia (Accenture) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| 2027 Regulatory Readiness, Statutory Reports & Filing API Status | Resolved | 2026-10-26 10:20 |
 | HRBS-14711 | CR001 Federated Hermes Norway 2026 | Resolved | 2026-10-26 10:11 |
 | HRBS-16026 | Norway NAV Inntektsmelding (sykepenger) — statutory field mapping document required | Open | 2026-10-26 08:14 |
 | SR-316 | CN_Payslip | Done | 2026-10-26 07:12 |
 | CT-4619 | FR_CCG_IJSS ceiling for work accidents and occupational diseases_0.226% of PASS_1 November 2026 | Open | 2026-10-26 05:21 |
 | HRBS-14219 | STG: UK - National ID Number Formatting for Payslip and Statutory Reporting | Pending on reporter | 2026-10-23 07:16 |
-| HRBS-14827 | Norway Tax Card \\\\\\\\\\\\\\\\\\\|Norway Statutory Integration\\\\\\\\\\\\\\\\\\\| New Hire Logic Handling | SLA Exempt | 2026-10-23 07:04 |
-| SR-105 | TW - SI electronic filing Salary Adjustment | Open | 2026-10-22 20:21 |
-| HRBS-3466 | Algeria DAS report creation | SLA Exempt | 2026-10-22 20:21 |
-| SR-109 | TW - Pay slip | In Review | 2026-10-22 20:21 |
-| SR-110 | TW - Tax Report | In Review | 2026-10-22 20:21 |
-| HRBS-15790 | Egypt Social Insurance Regulation Changes – Effective January 2027 | In Progress | 2026-10-22 20:21 |
-| HRBS-16029 | GSK Singapore - SDL Wage | Pending on reporter | 2026-10-22 20:21 |
-| HRBS-15941 | Taiwan childcare subsidy execution and application | In Progress | 2026-10-22 20:21 |
-| SR-108 | TW - SNHI report | In Review | 2026-10-22 20:21 |
+| HRBS-14827 | Norway Tax Card \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|Norway Statutory Integration\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| New Hire Logic Handling | SLA Exempt | 2026-10-23 07:04 |
 | SR-107 | TW - SI electronic filing Joiner | Open | 2026-10-22 20:21 |
+| SR-109 | TW - Pay slip | In Review | 2026-10-22 20:21 |
+| HRBS-3466 | Algeria DAS report creation | SLA Exempt | 2026-10-22 20:21 |
+| HRBS-15790 | Egypt Social Insurance Regulation Changes – Effective January 2027 | In Progress | 2026-10-22 20:21 |
+| SR-110 | TW - Tax Report | In Review | 2026-10-22 20:21 |
+| SR-108 | TW - SNHI report | In Review | 2026-10-22 20:21 |
 | SR-106 | TW - SI electronic filing Termination | Open | 2026-10-22 20:21 |
+| HRBS-16029 | GSK Singapore - SDL Wage | Pending on reporter | 2026-10-22 20:21 |
+| SR-105 | TW - SI electronic filing Salary Adjustment | Open | 2026-10-22 20:21 |
+| HRBS-15941 | Taiwan childcare subsidy execution and application | In Progress | 2026-10-22 20:21 |
 | HRBS-16252 | Baker Yemen – Confirmation required on SS base | Open | 2026-10-22 11:35 |
 | HRBS-14066 | URGENT: reMarkable: Norway - Update formula for 65610 element | Resolved | 2026-10-22 07:50 |
 | SR-79 | ES: Fichero de Bases – Sistema de Liquidación Directa (Social Security) - SPEC | In Review | 2026-10-22 07:21 |
@@ -68,7 +73,7 @@
 | HRBS-13690 | URGENT & CRITICAL: reMarkable: Norway - Need Additional Elements | Pending on reporter | 2026-10-16 12:12 |
 | HRBS-11592 | Henkel Algeria - Issue in Social security base - urgent | Pending on reporter | 2026-10-16 12:11 |
 | HRBS-11474 | No Data is Displaying in Payroll | Pending on Development team | 2026-10-16 12:01 |
-| HRBS-14367 | JP Morgan Bank PGP Key \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Creation of Passbolt UUID for the PGP Encryption key \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Acceptance | Pending on reporter | 2026-10-16 11:52 |
+| HRBS-14367 | JP Morgan Bank PGP Key \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Creation of Passbolt UUID for the PGP Encryption key \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Acceptance | Pending on reporter | 2026-10-16 11:52 |
 | HRBS-16054 | Omnicom Netherland Tier1- Required Notifications and Validations in HRBlizz | In Progress | 2026-10-16 11:27 |
 | HRBS-14706 | Time sheet Employee 55001070 | Pending on reporter | 2026-10-16 11:02 |
 | HRBS-14528 | SILTRA Notifications Integration to HRB | Open | 2026-10-16 10:56 |
@@ -82,34 +87,31 @@
 | HRBS-15975 | GSK TH System setup queries | Resolved | 2026-10-16 06:53 |
 | HRBS-13035 | McDermott PH — Compliance ruling needed: Dec 2026 period paid Jan 2027, reporting year for BIR & contributions | Resolved | 2026-10-16 01:29 |
 | HRBS-14994 | PF Calculation Logic – Confirmation and Action Required | Pending on reporter | 2026-10-15 16:17 |
-| CT-4453 | CI: Regulation Handover Checklist |  | 2026-10-15 14:01 |
-| CT-3704 | LT - GPM312 | Open | 2026-10-15 14:01 |
-| CT-4395 | UA: Wage Type Catelogue |  | 2026-10-15 14:01 |
-| CT-4396 | UA: Data Dictionary |  | 2026-10-15 14:01 |
 | CT-4043 | NO: Integration for Tax card pull | Ready for Development | 2026-10-15 14:01 |
-| CT-4338 | ES: WTC Design & Development Version |  | 2026-10-15 14:01 |
-| CT-4577 | FR: Regulation Handover Checklist |  | 2026-10-15 14:01 |
-| CT-3703 | LT - GPM313 Report | Open | 2026-10-15 14:01 |
-| CT-541 | ZA EO3 UIF Monthly submit report |  | 2026-10-15 14:01 |
-| CT-4130 | NA: Regulation Handover Checklist |  | 2026-10-15 14:01 |
 | CT-4287 | AU: QA Test results validation with RA |  | 2026-10-15 14:01 |
-| CT-4038 | IE: Set-up Integration for Virtusa | Ready for Development | 2026-10-15 14:01 |
+| CT-4453 | CI: Regulation Handover Checklist |  | 2026-10-15 14:01 |
 | CT-4440 | Australia-Update in Super Guarantee (SG)_July 2026 | In Review | 2026-10-15 14:01 |
+| CT-4577 | FR: Regulation Handover Checklist |  | 2026-10-15 14:01 |
+| CT-3829 | NZ - Statutory Integrations | Open | 2026-10-15 14:01 |
+| CT-541 | ZA EO3 UIF Monthly submit report |  | 2026-10-15 14:01 |
+| CT-3529 | DK - Regulation Guide |  | 2026-10-15 14:01 |
+| CT-161 | SG Tax Calculator |  | 2026-10-15 14:01 |
+| CT-4137 | NL: Development of Netherlands Wage Tax Credit Calculations |  | 2026-10-15 14:01 |
 | CT-4356 | UA: Regulation Handover Checklist |  | 2026-10-15 14:01 |
-| CT-1139 | RA Catch-Up on Jan 27, 2025 | Open | 2026-10-15 14:01 |
-| CT-502 | PH - BIR2316 |  | 2026-10-15 14:01 |
-| CT-4081 | ES: Regulation Handover Checklist |  | 2026-10-15 14:01 |
-| CT-4254 | CD: Queries of Research DD/WTC |  | 2026-10-15 14:01 |
+| CT-4396 | UA: Data Dictionary |  | 2026-10-15 14:01 |
+| CT-4395 | UA: Wage Type Catelogue |  | 2026-10-15 14:01 |
+| CT-501 | PH : RF 1 - Employer Remittance Report PDF and Excel |  | 2026-10-15 14:01 |
 | CT-3508 | NZ - API Integration | Open | 2026-10-15 14:01 |
 | CT-3940 | DZ: Configure reports at country level for Algeria |  | 2026-10-15 14:01 |
-| CT-3829 | NZ - Statutory Integrations | Open | 2026-10-15 14:01 |
-| CT-161 | SG Tax Calculator |  | 2026-10-15 14:01 |
-| CT-501 | PH : RF 1 - Employer Remittance Report PDF and Excel |  | 2026-10-15 14:01 |
-| CT-3705 | LT - SAM | Open | 2026-10-15 14:01 |
+| CT-4081 | ES: Regulation Handover Checklist |  | 2026-10-15 14:01 |
 | CT-4346 | ES: DD Design & Development Version |  | 2026-10-15 14:01 |
-| CT-4137 | NL: Development of Netherlands Wage Tax Credit Calculations |  | 2026-10-15 14:01 |
+| CT-4254 | CD: Queries of Research DD/WTC |  | 2026-10-15 14:01 |
 | CT-4457 | CN_China_Compliance Artifacts for development | Open | 2026-10-15 14:01 |
-| CT-3529 | DK - Regulation Guide |  | 2026-10-15 14:01 |
+| CT-4130 | NA: Regulation Handover Checklist |  | 2026-10-15 14:01 |
+| CT-4338 | ES: WTC Design & Development Version |  | 2026-10-15 14:01 |
+| CT-502 | PH - BIR2316 |  | 2026-10-15 14:01 |
+| CT-1139 | RA Catch-Up on Jan 27, 2025 | Open | 2026-10-15 14:01 |
+| CT-4038 | IE: Set-up Integration for Virtusa | Ready for Development | 2026-10-15 14:01 |
 | HRBS-11694 | Henkel TN_New WT Creation | SLA Exempt | 2026-10-15 11:59 |
 | SR-357 | NA: Payslip | Done | 2026-10-15 10:38 |
 | HRBS-15864 | High Priority: McDermott UK – Off-Cycle Payslip and Tax Calculation Issue | Pending on reporter | 2026-10-15 09:42 |
@@ -149,10 +151,10 @@
 | HRBS-6080 | Kindly configure WTC for Egypt for Baker Hughes. | Open | 2026-10-05 14:07 |
 | HRBS-13860 | Naersa file failing again this month | Resolved | 2026-10-05 06:36 |
 | HRBS-12487 | Automation of Vacation Pay Calculation - Offcycle | Resolved | 2026-09-30 12:00 |
-| HRBS-12491 | Explanation of Garnishment Calculation | Resolved | 2026-09-30 12:00 |
-| HRBS-12492 | SSecurity Contribution Rules (Employee & Employer) – Colombia | Resolved | 2026-09-30 12:00 |
-| HRBS-13692 | Accruals Severance Pay and Severance Interest Calculation | Resolved | 2026-09-30 12:00 |
 | HRBS-13627 | Explanation of Income Tax Withholding Calculation | Resolved | 2026-09-30 12:00 |
+| HRBS-12492 | SSecurity Contribution Rules (Employee & Employer) – Colombia | Resolved | 2026-09-30 12:00 |
+| HRBS-12491 | Explanation of Garnishment Calculation | Resolved | 2026-09-30 12:00 |
+| HRBS-13692 | Accruals Severance Pay and Severance Interest Calculation | Resolved | 2026-09-30 12:00 |
 | SR-470 | CO: Colombia Statutory Integration | Open | 2026-09-30 06:59 |
 | SR-468 | FR: France Statutory Integration | Open | 2026-09-30 06:58 |
 | SR-469 | BE: Belgium Statutory Integration | Open | 2026-09-30 06:53 |
@@ -163,7 +165,7 @@
 | HRBS-14649 | High Priority: McDermott UK Lutech Week23_Student Loan Interface Issue – | Resolved | 2026-09-28 08:19 |
 | HRBS-14331 | Ukraine WTC catalog Altium client check | Resolved | 2026-09-28 05:21 |
 | SR-145 | ES: SEPE CERTIFICA (termination) - SPEC | Done | 2026-09-26 07:33 |
-| HRBS-14688 | ACCENTURE LITHUANIA \\\\\\\\\\\\\\\\\\\\\\\\| Creation of Tax Year 2026 | Resolved | 2026-09-25 07:56 |
+| HRBS-14688 | ACCENTURE LITHUANIA \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Creation of Tax Year 2026 | Resolved | 2026-09-25 07:56 |
 | HRBS-14943 | Clarify statutory basis for "OPRAG/FNE Training Levy (1%)" — Gabon (GA) WTC | Resolved | 2026-09-25 06:46 |
 | CT-4580 | BE: Regulation Handover Checklist |  | 2026-09-24 09:38 |
 | SR-155 | LV: Payslip | In Review | 2026-09-24 07:23 |
@@ -269,7 +271,7 @@
 | HRBS-10272 | Spain_Country Fields Missing from Data Dictionary | Resolved | 2026-06-26 10:19 |
 | HRBS-10915 | SPAIN REGULATION_Statutory reports samples | Resolved | 2026-06-24 03:39 |
 | HRBS-9811 | URGENT & CRITICAL: STG: Sweden - Incorrect Skatteverket Report (Statutory submission) | Resolved | 2026-06-22 07:44 |
-| HRBS-7500 | GSK ID \\\\\\\\\\\\\\\\\\\| Urgent Assitance from Compliance for Negative TER Rate | Resolved | 2026-06-17 01:56 |
+| HRBS-7500 | GSK ID \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Urgent Assitance from Compliance for Negative TER Rate | Resolved | 2026-06-17 01:56 |
 | HRBS-6138 | Request for Jordan Social security report | Resolved | 2026-06-15 20:30 |
 | HRBS-7830 | PAC System Limitation – Unable to Load Negative Values for Pay Element 2NHI | Resolved | 2026-06-15 19:52 |
 | HRBS-9831 | Eaton Reports Configuration in PAC | Resolved | 2026-06-15 08:46 |
@@ -279,7 +281,7 @@
 | HRBS-6856 | Translate payslip to French and add to Baker Hughes Tunisia | Resolved | 2026-06-09 09:54 |
 | HRBS-10121 | SPAIN REGULATION_Variable income double-counted in Annual Gross Income (58163) | Resolved | 2026-06-09 01:56 |
 | HRBS-8910 | Required to setup the outbound configuration | Resolved | 2026-06-08 15:32 |
-| HRBS-10431 | Plusgrade \\\\\\\\\\\\\\\\\\\| Pay Element: 62900 – Statutory Gratuity EOS | Resolved | 2026-06-08 11:56 |
+| HRBS-10431 | Plusgrade \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Pay Element: 62900 – Statutory Gratuity EOS | Resolved | 2026-06-08 11:56 |
 | HRBS-7924 | Restrict change of Employee id after the first payroll run is approved | Resolved | 2026-06-08 09:30 |
 | HRBS-9940 | Exxon Mobil_QATAR_PAYELEMENT CONFIGURATION | Resolved | 2026-06-04 09:49 |
 | HRBS-10141 | [REQUEST] Clone Production Configuration (Elements, Data Fields, Integration Mapping, Encryption ID, Reports) from REF-LE-02-743 → REF-LE-02-744 – GSK Singapore GWM Live Run Setup | Resolved | 2026-06-04 07:59 |
@@ -303,7 +305,7 @@
 | HRBS-8167 | Baker OMAN - Unit wage element linked to SS | Resolved | 2026-04-17 10:11 |
 | HRBS-4806 | Change in configuration for a month and restore back next month - OMG Group | Resolved | 2026-04-17 09:23 |
 | HRBS-7664 | Feasibility Request – GSK_VN_CR_C023-Process to override Expat Tax report from EY | Resolved | 2026-04-06 10:45 |
-| HRBS-6577 | GSK ID \\\\\\\\\\\\\\\\\\\| Moving Configuration (Report, Integration, Configuration) | Resolved | 2026-04-03 07:40 |
+| HRBS-6577 | GSK ID \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\| Moving Configuration (Report, Integration, Configuration) | Resolved | 2026-04-03 07:40 |
 | HRBS-7526 | Allium Denmark - E-income file error | Resolved | 2026-04-02 08:17 |
 | HRBS-7637 | Feasibility Analysis: Automated "Amount Recoverable" Element for Negative Net Pay | Resolved | 2026-04-02 08:06 |
 | HRBS-7074 | Regulation field and flag details. | Resolved | 2026-03-31 06:01 |
@@ -342,21 +344,21 @@
 | HRBS-2339 | Incorrect tax amount compared with client payslip | Resolved | 2025-12-30 10:35 |
 | HRBS-1629 | Jordon Maternity Leave regualtion | Resolved | 2025-12-30 10:34 |
 | HRBS-553 | GSK Thailand: Requested To Change Phone Number (Personal information) to Optional | Resolved | 2025-12-29 10:47 |
-| HRBS-222 | FD#50483 - Clarity required on Workers Compensation Expense wage code in Australia | Resolved | 2025-12-29 10:46 |
 | HRBS-841 | Require Complaince SOP for EGYPT | Resolved | 2025-12-29 10:46 |
-| HRBS-118 | Query on workers' compensation payments post terminaton | Resolved | 2025-12-29 10:44 |
-| HRBS-1492 | [Urgent] Please Help to Made PVD Member to Optional | Resolved | 2025-12-29 10:44 |
-| HRBS-835 | Complaince Require SOP for Jordan | Resolved | 2025-12-29 10:44 |
+| HRBS-222 | FD#50483 - Clarity required on Workers Compensation Expense wage code in Australia | Resolved | 2025-12-29 10:46 |
 | HRBS-117 | Query on G2N for Australia region | Resolved | 2025-12-29 10:44 |
+| HRBS-835 | Complaince Require SOP for Jordan | Resolved | 2025-12-29 10:44 |
+| HRBS-1492 | [Urgent] Please Help to Made PVD Member to Optional | Resolved | 2025-12-29 10:44 |
+| HRBS-118 | Query on workers' compensation payments post terminaton | Resolved | 2025-12-29 10:44 |
 | HRBS-1534 | TBWA Neboko Netherlands - Discrepancy in 30% Ruling Calculation – Employee ID 100020000862 | Resolved | 2025-12-29 10:43 |
 | HRBS-1272 | Change the tax table | Resolved | 2025-12-29 10:43 |
-| HRBS-1535 | Clarification Required on Taxable Base Code 58552 Calculation in G2N Description: We would like to raise a query regarding the taxable base code 58552 that appeared in the G2N. The value was calculated using the following formula: Total Taxable Salary × 54 ÷ 12 (rounded down) × 54 = Taxable Base This calculation was shared with the client as part of our payroll simulation. However, the client has responded with comments questioning the approach. Kindly review the client's feedback and advise on the correct | Resolved | 2025-12-29 10:42 |
 | HRBS-1715 | Calculation of Grossup amount on payslip | Resolved | 2025-12-29 10:42 |
-| HRBS-2633 | KGS Configuration  Move to prod | Resolved | 2025-12-29 10:41 |
+| HRBS-1535 | Clarification Required on Taxable Base Code 58552 Calculation in G2N Description: We would like to raise a query regarding the taxable base code 58552 that appeared in the G2N. The value was calculated using the following formula: Total Taxable Salary × 54 ÷ 12 (rounded down) × 54 = Taxable Base This calculation was shared with the client as part of our payroll simulation. However, the client has responded with comments questioning the approach. Kindly review the client's feedback and advise on the correct | Resolved | 2025-12-29 10:42 |
 | HRBS-1763 | SVW values are not matching  on payslips | Resolved | 2025-12-29 10:41 |
 | HRBS-304 | Features request - HRB to PAC payroll requirement - Ticket No  39753 | Resolved | 2025-12-29 10:41 |
-| HRBS-1556 | Address under Personal Information need to be correct Mapping according to SuccessFactor as it is not in sync | Resolved | 2025-12-29 10:41 |
 | HRBS-1311 | Weir Senegal Configuration of Payroll, HRB, Reports | Resolved | 2025-12-29 10:41 |
+| HRBS-2633 | KGS Configuration  Move to prod | Resolved | 2025-12-29 10:41 |
+| HRBS-1556 | Address under Personal Information need to be correct Mapping according to SuccessFactor as it is not in sync | Resolved | 2025-12-29 10:41 |
 | HRBS-1956 | We have received Query from client for EOBI/SSI | Resolved | 2025-12-29 10:39 |
 | HRBS-1958 | Reserach Task for Ticket ID HRBS-1556 | Resolved | 2025-12-22 12:14 |
 | HRBS-2088 | Thailand Statutory Report - TH - TAX PND 91 | Rejected | 2025-12-17 10:46 |

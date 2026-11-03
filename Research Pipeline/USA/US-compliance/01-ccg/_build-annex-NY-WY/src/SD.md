@@ -48,7 +48,7 @@
 - **Child support IWO [US-SDS5-007]:** statutory cap (25-7A-32); first deduction from the first pay after service; remit within the statutory business days; employer fee up to {{sd.garn.iwo.employer_fee.monthly}} USD per month (25-7A-34); current support has priority (25-7A-35).
 
 ## @cba
-- **No state prevailing-wage law** (exists: {{sd.prevailing_wage.exists}}) [US-SDP51-003]; federal Davis-Bacon only. The evidence rests on a summariser read (open point below).
+- **No state prevailing-wage law** (exists: {{sd.prevailing_wage.exists}}) [US-SDP51-003]; federal Davis-Bacon only. The evidence rests on an indirect read of the federal state table (open point below).
 
 ## @indexation
 - **Minimum wage:** {{sd.minwage.indexation}} [US-SDS5-001, US-SDS5-005]. The tipped wage follows automatically.
@@ -60,7 +60,7 @@
 ## @live
 - **2026-01-01 (SL 2025 ch 199):** new rate table and administrative fee for rated employers [US-SDS5-002].
 - **SL 2026 ch 205 and ch 204:** investment-fund administration and state apprenticeship agency; payroll-neutral [US-SDS5-002, US-SDS5-001].
-- **2027-01-01:** minimum wage and tipped wage per Section 1 [US-SDS5-003]. The 2027 schedule is in draft minutes only [US-SDS5-019]; the 2026 session-law list was not read (open point below).
+- **2027-01-01:** minimum wage and tipped wage per Section 1 [US-SDS5-003]. The 2027 schedule appears only in unapproved advisory-council minutes [US-SDS5-019]; the 2026 session-law list was not read (open point below).
 
 ## @special
 | Population | South Dakota rule | Register id |

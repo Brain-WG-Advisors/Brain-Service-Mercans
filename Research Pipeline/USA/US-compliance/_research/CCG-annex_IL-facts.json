@@ -60,11 +60,11 @@
    "currency": "USD",
    "effective_from": "2025-01-01",
    "effective_to": null,
-   "register_id": "US-ILS5-001",
-   "tier": "A.1",
+   "register_id": "US-ILS5-002",
+   "tier": "A.2",
    "verification_method": "second independent authority",
-   "authority": "Illinois General Assembly",
-   "url": "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=2400&ChapterID=68",
+   "authority": "Illinois Department of Labor",
+   "url": "https://labor.illinois.gov/laws-rules/fls/minimum-wage-law.html",
    "confidence": "high",
    "note": "Tip credit up to 40%.",
    "_domain": "labour_code"
@@ -140,7 +140,7 @@
    "authority": "Cook County Commission on Human Rights",
    "url": "https://www.cookcountyil.gov/sites/g/files/ywwepo161/files/documents/2026-07/_Final_Draft_Cook_County_Minimum_Wage_Ordinance_ENG_FAQ_07012026%20.pdf",
    "confidence": "high",
-   "note": "Derivation recorded in register row US-ILS5-009: Suburban Cook County (not Chicago; municipalities with own MW or opted out excluded) from 2026-07-01: non-tipped $15.40/hour (overtime $23.10), tipped $9.25/hour (overtime $16.94 = 23.10 - 40% x 15.40); applies to employees over 18 working at least 2 hours/week in the County; not to under-18 (state ",
+   "note": "Derivation recorded in register row US-ILS5-009: Suburban Cook County (not Chicago; municipalities with own MW or opted out excluded) from 2026-07-01: non-tipped $15.40/hour (overtime $23.10), tipped $9.25/hour (overtime $16.94 = 23.10 - 40% x 15.40); applies to employees over 18 working at least 2 hours/week in the County; not to under-18 (state",
    "_domain": "labour_code"
   },
   {
@@ -364,13 +364,14 @@
    "unit_of_measure": "percent",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-ILS5-015",
-   "tier": "A.2",
+   "register_id": "US-ILR3C-001",
+   "tier": "A.1",
    "verification_method": "quoted from authority page",
-   "authority": "Illinois Department of Employment Security",
-   "url": "https://ides.illinois.gov/content/dam/soi/en/web/ides/ides_forms_and_publications/UI_tax_rates_2026.pdf",
-   "confidence": "medium",
-   "_domain": "social_security"
+   "authority": "Illinois General Assembly",
+   "url": "https://www.ilga.gov/Documents/legislation/ilcs/documents/082004050K1400.htm",
+   "confidence": "high",
+   "_domain": "social_security",
+   "note": "820 ILCS 405/1400: UI contributions shall not be deducted, in whole or in part, from employees' wages."
   },
   {
    "key": "il.payslip.rules",
@@ -685,15 +686,15 @@
    "effective_to": "2026-12-31",
    "register_id": "US-ILR3-001",
    "tier": "A.2",
-   "verification_method": "quoted from authority page",
+   "verification_method": "derived arithmetically",
    "authority": "Illinois Department of Revenue",
    "url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/forms/withholding/documents/currentyear/il-700-t.pdf",
    "confidence": "high",
-   "note": "IL-700-T: 300 weekly, 2 + 1 allowances.",
+   "note": "IL-700-T p.3 table-method example: 300 weekly, 2 Line-1 + 1 Line-2 allowances: weekly table 300-302 row, 2 allowances = 9.33, minus 0.95 per Line-2 allowance = 8.38. The table values are computed at the bracket midpoint (301): (301 - 2 x 2,925/52) x 4.95% = 9.33. The automated payroll method on exactly 300 gives 8.33 (il.oracle.il700t.example1.automated_method_result). Both are correct for their method; the 0.05 residual is the table midpoint, not a booklet defect.",
    "_domain": "oracle"
   },
   {
-   "key": "il.oracle.il700t.example2.withholding",
+   "key": "il.oracle.weekly_800.withholding",
    "value": 32.13,
    "currency": "USD",
    "effective_from": "2026-01-01",
@@ -705,7 +706,8 @@
    "url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/forms/withholding/documents/currentyear/il-700-t.pdf",
    "confidence": "high",
    "note": "800 weekly, 2 + 2 allowances: 7,850/52 = 150.96; 649.04 x .0495 = 32.13.",
-   "_domain": "oracle"
+   "_domain": "oracle",
+   "_renamed_from": "il.oracle.il700t.example2.withholding"
   },
   {
    "key": "il.local_wage_tax.exists",
@@ -734,6 +736,76 @@
    "confidence": "high",
    "note": "PLAWA is an employer-provided benefit, not a premium.",
    "_domain": "social_security"
+  },
+  {
+   "key": "il.oracle.il700t.example1.automated_method_result",
+   "value": 8.33,
+   "currency": "USD",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-ILR3-001",
+   "tier": "A.2",
+   "verification_method": "derived arithmetically",
+   "authority": "Illinois Department of Revenue",
+   "url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/forms/withholding/documents/currentyear/il-700-t.pdf",
+   "confidence": "high",
+   "note": "(300 - (2 x 2,925 + 1 x 1,000)/52) x 4.95% = 168.27 x 4.95% = 8.33 (automated payroll method, IL-700-T p.3).",
+   "_domain": "oracle",
+   "_qa_r1": "added 2026-11-02 (agent 2, QA r1)"
+  },
+  {
+   "key": "il.leave.cook.paid_leave.in_force",
+   "value": "Cook County Paid Leave Ordinance in force from 2023-12-31 (2025-01-01 for park and school districts); does not apply in the City of Chicago (own ordinance); a prior Earned Sick Leave Ordinance opt-out does not carry over.",
+   "effective_from": "2023-12-31",
+   "effective_to": null,
+   "register_id": "US-ILB5-301",
+   "tier": "A.3",
+   "verification_method": "quoted from authority page",
+   "authority": "Cook County Commission on Human Rights",
+   "url": "https://www.cookcountyil.gov/service/paid-leave-ordinance-and-regulations",
+   "confidence": "high",
+   "_qa_r1b": "2026-11-02"
+  },
+  {
+   "key": "il.leave.cook.paid_leave.accrual",
+   "value": "1 hour of paid leave per 40 hours worked, usable for any reason; FLSA-exempt employees deemed to work 40 hours a week; front-loading allowed.",
+   "effective_from": "2023-12-31",
+   "effective_to": null,
+   "register_id": "US-ILB5-301",
+   "tier": "A.3",
+   "verification_method": "quoted from authority page",
+   "authority": "Cook County Commission on Human Rights",
+   "url": "https://www.cookcountyil.gov/service/paid-leave-ordinance-and-regulations",
+   "confidence": "high",
+   "_qa_r1b": "2026-11-02"
+  },
+  {
+   "key": "il.leave.cook.paid_leave.carryover_cap.min_hours",
+   "value": 40,
+   "unit_of_measure": "hours",
+   "effective_from": "2023-12-31",
+   "effective_to": null,
+   "register_id": "US-ILB5-301",
+   "tier": "A.3",
+   "verification_method": "quoted from authority page",
+   "authority": "Cook County Commission on Human Rights",
+   "url": "https://www.cookcountyil.gov/service/paid-leave-ordinance-and-regulations",
+   "confidence": "high",
+   "note": "An employer carry-over cap may not be set below 40 hours.",
+   "_qa_r1b": "2026-11-02"
+  },
+  {
+   "key": "il.leave.cook.paid_leave.payout_at_separation",
+   "value": "Not required, unless the leave is credited to a PTO bank or vacation account; then unused leave is paid within 15 days of separation.",
+   "effective_from": "2023-12-31",
+   "effective_to": null,
+   "register_id": "US-ILB5-301",
+   "tier": "A.3",
+   "verification_method": "quoted from authority page",
+   "authority": "Cook County Commission on Human Rights",
+   "url": "https://www.cookcountyil.gov/service/paid-leave-ordinance-and-regulations",
+   "confidence": "high",
+   "_qa_r1b": "2026-11-02"
   }
  ],
  "unresolved": [
@@ -742,13 +814,6 @@
    "why": "Chicago Paid Leave caps, carryover and separation payout by employer size not read (partial row).",
    "attempted": [],
    "what_would_close_it": "BACP FAQ PDF or OLS Paid Leave rules (browser pass) or MCC 6-130.",
-   "blocking": true
-  },
-  {
-   "key": "il.leave.cook.paid_leave",
-   "why": "Cook County Paid Leave Ordinance not read.",
-   "attempted": [],
-   "what_would_close_it": "Cook County Commission on Human Rights Paid Leave FAQ (cookcountyil.gov).",
    "blocking": true
   },
   {
@@ -806,6 +871,17 @@
    "attempted": [],
    "what_would_close_it": "One sweep of tax.illinois.gov/research/news.html, labor.illinois.gov/news.html, ides.illinois.gov newsroom.",
    "blocking": false
+  },
+  {
+   "key": "il.leave.cook.paid_leave.rules_2025",
+   "why": "The Cook County Paid Leave Substantive and Procedural Rules approved 2025-04-10 are listed on the CCHR page but not read; they may refine the FAQ (corrected 04/2024) details carried in the il.leave.cook.paid_leave.* facts.",
+   "attempted": [
+    "browser pass P3 2026-11-02 (_research/stage5/browser-pass-P3.md): CCHR page and FAQ read (US-ILB5-301)"
+   ],
+   "what_would_close_it": "CCHR Paid Leave Ordinance Rules (approved 2025-04-10) on cookcountyil.gov.",
+   "blocking": false,
+   "_qa_r1b": "2026-11-02"
   }
- ]
+ ],
+ "_history": []
 }

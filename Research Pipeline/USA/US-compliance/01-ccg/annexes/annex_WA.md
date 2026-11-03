@@ -1,12 +1,13 @@
-# Annex WA - Washington
+# Annex WA: Washington
+
 
 Jurisdiction annex of the United States Country Configuration Guide (US-CCG-001). Layer classification: **T1 - no state wage tax; SUI and levies only** (build manifest, tier rationale). The Seattle payroll expense tax, a threshold-conditional employer tax on a city return [US-WAP51-001], is declared as a T4-shaped element.
 
-The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC are out of scope (MANDATE, US-OWN-001). Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
+The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. Payslip language: English; second-language duties attach to notices and posters only (US-OWN-006).
 
-Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.json` and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. `RESEARCH-GAP` marks a point the research has not closed; it is not filled with an estimate.
+Every value in this annex is bound to a verified fact and carries its legal-basis register id. A value that changes during the year is shown with its effective dates. A point marked as a research gap has not been closed by the research; it is not filled with an estimate.
 
-## 1. Labour code and pay rules
+## WA.1 Employment and labour code
 
 - **State minimum wage (RCW 49.46.020) [US-WAS5-001, US-WAS5-006, US-WAS5-007]:** [[FACT:wa.minwage.hourly=17.13]] USD per hour in 2026 and [[FACT:wa.minwage.hourly=17.73]] USD from 2027-01-01. Youth aged 14-15: [[FACT:wa.labour.minwage.youth_14_15.hourly=14.56]] USD in 2026 and [[FACT:wa.labour.minwage.youth_14_15.hourly=15.07]] USD in 2027; 16-17 year olds receive the full rate.
 - **Tip credit:** not allowed ([[FACT:wa.minwage.tip_credit.allowed=False]]); tips and service charges go to the employee in full; automatic service charges must be disclosed (49.46.160) [US-WAS5-001].
@@ -25,7 +26,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 | Renton | [[FACT:wa.labour.minwage.local.renton.large.hourly=21.57]] USD | large employers |
 | Renton | [[FACT:wa.labour.minwage.local.renton.mid.hourly=20.57]] USD, then [[FACT:wa.labour.minwage.local.renton.mid.hourly=21.57]] USD from 2026-07-01 | mid-size employers |
 
-  2027 local rates are not obtained (blocking open point below).
+  2027 local rates are not obtained [[GAP:RQ-371]] (blocking open point below).
 - **Overtime (RCW 49.46.130) [US-WAS5-001]:** [[FACT:wa.overtime.premium.multiplier=1.5]] times the regular rate over [[FACT:wa.overtime.weekly_threshold_hours=40]] hours per week, including agricultural employees since 2024; no daily overtime.
 - **Exempt salary threshold (WAC 296-128-545) [US-WAS5-005, US-WAS5-007]:** 2026: [[FACT:wa.exempt.salary.weekly_min=1,541.70]] USD per week for any employer size. 2027: [[FACT:wa.labour.exempt_salary.large.weekly=1,773.00]] USD per week for larger employers and [[FACT:wa.labour.exempt_salary.small.weekly=1,595.70]] USD for smaller employers. Computer professionals paid hourly: [[FACT:wa.labour.computer_professional.hourly=59.96]] USD (2026) and [[FACT:wa.labour.computer_professional.hourly=62.06]] USD (2027).
 - **Pay frequency (WAC 296-126-023) [US-WAS5-004]:** [[FACT:wa.pay_frequency.rule=at least monthly; pay day max 10 days after period end for shorter periods]]; overtime paid on the regular payday of the period earned; direct deposit available on payday.
@@ -37,7 +38,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 |---|---|---|---|---|---|
 | `wa.minwage.hourly` | [[FACT:wa.minwage.hourly=17.13]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-006 | RCW 49.46.020(2)(b) |
 | `wa.minwage.hourly` | [[FACT:wa.minwage.hourly=17.73]] | USD | from 2027-01-01 | US-WAS5-007 |  |
-| `wa.labour.minwage.youth_14_15.hourly` | [[FACT:wa.labour.minwage.youth_14_15.hourly=14.56]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-006 | 85% of minimum |
+| `wa.labour.minwage.youth_14_15.hourly` | [[FACT:wa.labour.minwage.youth_14_15.hourly=14.56]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-007 | 85% of minimum |
 | `wa.labour.minwage.youth_14_15.hourly` | [[FACT:wa.labour.minwage.youth_14_15.hourly=15.07]] | USD | from 2027-01-01 | US-WAS5-007 |  |
 | `wa.minwage.indexation` | [[FACT:wa.minwage.indexation=CPI-W Aug-Aug, announced Sept 30, effective Jan 1, nearest cent]] |  | from 2021-01-01 | US-WAS5-001 |  |
 | `wa.labour.minwage.local.seattle.hourly` | [[FACT:wa.labour.minwage.local.seattle.hourly=21.30]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-008 | single rate |
@@ -66,10 +67,10 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wa.labour.minwage.local.next_year` (blocking; research request filed under this key) - 2027 local minimum wages not obtained (seattle.gov blocked). Closes with: Each city's 2027 rate notice or the updated L&I local-rates page.
-- ⚠️ RESEARCH-GAP: `wa.labour.paycard` (non-blocking; research request filed under this key) - Direct deposit/paycard consent rule not read. Closes with: L&I policy or RCW search.
+- Not yet published (expected autumn 2026, before 2027-01-01) [[GAP:RQ-371]]: 2027 local minimum wages not obtained (seattle.gov blocked).
+- Not configured in this release [[GAP:RQ-378]]: Direct deposit/paycard consent rule not read.
 
-## 2. Income tax withholding (state and local)
+## WA.2 Income tax withholding
 
 - **No state income tax on wages in 2026 or 2027** (wage tax exists: [[FACT:wa.pit.exists=False]]) [US-WAS5-017]: no withholding, state W-4, supplemental rate, state W-2 or reciprocity. A tax on very high AGI from 2028 (SB 6346) is **assessment-level**; no employer withholding mechanism is stated (open point below).
 - **No local employee wage tax** (exists: [[FACT:wa.pit.local.employee_tax.exists=False]]) [US-WAP51-001]. The Seattle Payroll Expense Tax and the Seattle Social Housing Tax are employer taxes on a city return (T4-shaped element) [US-WAP51-001, US-WAP7-005, US-WAP9V-001].
@@ -79,17 +80,27 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `wa.pit.exists` | [[FACT:wa.pit.exists=False]] |  | from 2028-01-01 | US-WAS5-017 | 2026 and 2027; SB 6346 9.9% on AGI >1M from 2028 is assessment-level |
+| `wa.pit.exists` | [[FACT:wa.pit.exists=False]] |  | 2026-01-01 to 2027-12-31 | US-WAS5-017 | No Washington individual income tax on wages in 2026 or 2027. From 2028-01-01 SB 6346 creates a [[FACT:wa.pit.high_income_tax.rate=9.9]]% tax on AGI over 1,000,000 (see wa.pit.high_income_tax.*), assessment-level. LEVEL: withholding. |
 | `wa.pit.local.employee_tax.exists` | [[FACT:wa.pit.local.employee_tax.exists=False]] |  | from 2026-01-01 | US-WAP51-001 | Seattle PET and Social Housing Tax are employer taxes |
+| `wa.pit.high_income_tax.rate` | [[FACT:wa.pit.high_income_tax.rate=9.9]] | % | from 2028-01-01 | US-WAS5-017 | SB 6346 (2026): individuals and joint filers with AGI over 1,000,000; first returns due April 2029. No employer withholding guidance published as of 2026-11-02. LEVEL: assessment. |
+| `wa.pit.high_income_tax.agi_threshold` | [[FACT:wa.pit.high_income_tax.agi_threshold=1,000,000]] | USD | from 2028-01-01 | US-WAS5-017 | LEVEL: assessment. |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wa.pit.sb6346_text` (non-blocking; research request filed under this key) - SB 6346 text not read to confirm no withholding clause before 2028. Closes with: The session law text.
+- Not configured in this release [[GAP:RQ-375]]: SB 6346 text not read to confirm no withholding clause before 2028.
 
-## 3. Social insurance and payroll levies
+## WA.2b Non-resident regime and reciprocity
+
+The non-resident and reciprocity rules of this jurisdiction are written in WA.2.
+
+## WA.2c Local wage taxes
+
+The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
+
+## WA.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 - **Unemployment insurance (ESD) [US-WAS5-012, US-WAS5-029].** 2026 taxable wage base [[FACT:wa.sui.wage_base=78,200]] USD. Total 2026 rates (experience rate, social cost and administration fund) from [[FACT:wa.ui.rate.min_total=0.27]] % to [[FACT:wa.ui.rate.max_total=6.02]] %. New employers: [[FACT:wa.ui.rate.new_employer.rule=115% of industry average, floor 1%]]. Employee contribution [[FACT:wa.sui.employee.rate=0]] %. UI wages include commissions, bonuses, non-cash pay and reported tips (RCW 50.04.320) [US-WAS5-022].
-- **Paid Family and Medical Leave [US-WAS5-011, US-WAS5-015, US-WAS5-020].** Total premium [[FACT:wa.pfml.rate.total=1.13]] % in 2026, employee share up to [[FACT:wa.pfml.employee.share=71.43]] % of the total; [[FACT:wa.pfml.rate.total=1.2]] % in 2027 (the statutory cap), employee share [[FACT:wa.pfml.employee.share=70.7]] %. Wage cap [[FACT:wa.pfml.wage_cap.annual=184,500]] USD in 2026 (the Social Security wage base). Employers with fewer than [[FACT:wa.pfml.small_employer.threshold=50]] Washington employees owe no employer share but collect the employee share. 2SHB 2345 (effective 2026-06-11, applied from 2027 premiums) reallocates the employee share between the family and medical lines (the 2027 line split is open, below). PFML wages exclude tips (tips included: [[FACT:wa.pfml.wages.tips_included=False]]) [US-WAS5-023]. Penalties and interest on late reports and premiums from [[FACT:wa.pfml.penalties.from=2026-08-01]]; missed premiums cannot be recovered from employees later [US-WAB5-002].
+- **Paid Family and Medical Leave [US-WAS5-011, US-WAS5-015, US-WAS5-020].** Total premium [[FACT:wa.pfml.total.rate=1.13]] % in 2026, employee share up to [[FACT:wa.pfml.employee.share=71.43]] % of the total; [[FACT:wa.pfml.total.rate=1.2]] % in 2027 (the statutory cap), employee share [[FACT:wa.pfml.employee.share=70.7]] %. Wage cap [[FACT:wa.pfml.wage_cap.annual=184,500]] USD in 2026 (the Social Security wage base). Employers with fewer than [[FACT:wa.pfml.small_employer.threshold=50]] Washington employees owe no employer share but collect the employee share. 2SHB 2345 (effective 2026-06-11, applied from 2027 premiums) reallocates the employee share between the family and medical lines (the 2027 line split is open, below). PFML wages exclude tips (tips included: [[FACT:wa.pfml.wages.tips_included=False]]) [US-WAS5-023]. Penalties and interest on late reports and premiums from [[FACT:wa.pfml.penalties.from=2026-08-01]]; missed premiums cannot be recovered from employees later [US-WAB5-002].
 - **WA Cares Fund (long-term care) [US-WAS5-016, US-WAS5-024]:** employee-only premium of [[FACT:wa.ltc.wa_cares.employee.rate=0.58]] % of gross wages, no cap; same gross-wage definition as Paid Leave ([[FACT:wa.cares.base.same_as_pfml=True]]) [US-WAB5-003]. Exemptions include out-of-state residents, active-duty military and spouses, qualifying veterans, approved private-LTC exemptees, and non-immigrant work-visa holders automatically from 2026-01-01 unless they opt in.
 - **Workers' compensation (L&I state fund) [US-WAS5-019, US-WALTC-002]:** hourly premiums per risk class; employee deduction rule [[FACT:wa.wc.employee_deduction.rule=50% x (Stay-at-Work + Medical Aid + Supplemental Pension) per hour per risk class]]; 2026 supplemental pension rate [[FACT:wa.wc.supplemental_pension.rate=0.1912]] USD per hour for all classes. 2027 rates proposed only (open point below).
 - **Retirement deferrals and cafeteria plans** in UI, PFML and WA Cares wages: open (below).
@@ -98,33 +109,33 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `wa.sui.wage_base` | [[FACT:wa.sui.wage_base=78,200]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-012 | 2025: 72,800 |
-| `wa.ui.rate.min_total` | [[FACT:wa.ui.rate.min_total=0.27]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-012 | experience 0.00-5.40 + social cost 0.24-0.72 + EAF 0.02-0.03 |
-| `wa.ui.rate.max_total` | [[FACT:wa.ui.rate.max_total=6.02]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-012 | delinquent up to 8.15 |
+| `wa.sui.wage_base` | [[FACT:wa.sui.wage_base=78,200]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-012 |  |
+| `wa.ui.rate.min_total` | [[FACT:wa.ui.rate.min_total=0.27]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-029 | experience 0.00-5.40 + social cost 0.24-0.72 + EAF 0.02-0.03 |
+| `wa.ui.rate.max_total` | [[FACT:wa.ui.rate.max_total=6.02]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-029 | delinquent up to 8.15 |
 | `wa.ui.rate.new_employer.rule` | [[FACT:wa.ui.rate.new_employer.rule=115% of industry average, floor 1%]] |  | 2026-01-01 to 2026-12-31 | US-WAS5-029 | WAC 192-320-025 |
-| `wa.sui.employee.rate` | [[FACT:wa.sui.employee.rate=0]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-012 |  |
-| `wa.pfml.rate.total` | [[FACT:wa.pfml.rate.total=1.13]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-011 | employee up to 71.43% |
-| `wa.pfml.employee.share` | [[FACT:wa.pfml.employee.share=71.43]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-011 | of total premium |
-| `wa.pfml.rate.total` | [[FACT:wa.pfml.rate.total=1.2]] | % | from 2027-01-01 | US-WAS5-015 |  |
+| `wa.sui.employee.rate` | [[FACT:wa.sui.employee.rate=0]] | % | 2026-01-01 to 2026-12-31 | US-WAR3C-001 | RCW 50.24.010: UI contributions are paid by the employer and shall not be deducted, in whole or in part, from employee remuneration; any such deduction is unlawful. |
+| `wa.pfml.total.rate` | [[FACT:wa.pfml.total.rate=1.13]] | % | 2026-01-01 to 2026-12-31 | US-WAS5-015 | employee up to [[FACT:wa.pfml.employee.share=71.43]]% |
+| `wa.pfml.employee.share` | [[FACT:wa.pfml.employee.share=71.43]] | % | 2026-01-01 to 2026-12-31 | US-WAB5-002 | of total premium |
+| `wa.pfml.total.rate` | [[FACT:wa.pfml.total.rate=1.2]] | % | from 2027-01-01 | US-WAS5-015 |  |
 | `wa.pfml.employee.share` | [[FACT:wa.pfml.employee.share=70.7]] | % | from 2027-01-01 | US-WAS5-015 |  |
-| `wa.pfml.wage_cap.annual` | [[FACT:wa.pfml.wage_cap.annual=184,500]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-011 | = SS wage base |
+| `wa.pfml.wage_cap.annual` | [[FACT:wa.pfml.wage_cap.annual=184,500]] | USD | 2026-01-01 to 2026-12-31 | US-WAB5-002 | = SS wage base |
 | `wa.pfml.small_employer.threshold` | [[FACT:wa.pfml.small_employer.threshold=50]] |  | from 2026-01-01 | US-WAS5-011 | <50 WA employees owe no employer share |
 | `wa.pfml.wages.tips_included` | [[FACT:wa.pfml.wages.tips_included=False]] |  | from 2026-01-01 | US-WAS5-023 | PFML excludes tips; UI includes reported tips (US-WAS5-022) |
 | `wa.ltc.wa_cares.employee.rate` | [[FACT:wa.ltc.wa_cares.employee.rate=0.58]] | % | from 2023-07-01 | US-WAS5-016 | employee-only, no cap; non-immigrant visa holders auto-exempt from 2026-01-01 (US-WAS5-024) |
 | `wa.wc.employee_deduction.rule` | [[FACT:wa.wc.employee_deduction.rule=50% x (Stay-at-Work + Medical Aid + Supplemental Pension) per hour per risk class]] |  | 2026-01-01 to 2026-12-31 | US-WAS5-019 |  |
-| `wa.wc.supplemental_pension.rate` | [[FACT:wa.wc.supplemental_pension.rate=0.1912]] | USD | 2026-01-01 to 2026-12-31 | US-WAS5-019 | per hour, all classes |
+| `wa.wc.supplemental_pension.rate` | [[FACT:wa.wc.supplemental_pension.rate=0.1912]] | USD (USD per hour) | 2026-01-01 to 2026-12-31 | US-WAS5-019 | per hour, all classes |
 | `wa.pfml.penalties.from` | [[FACT:wa.pfml.penalties.from=2026-08-01]] |  | from 2026-08-01 | US-WAB5-002 | Penalties on past-due reports and interest on overdue premiums from this date; missed premiums cannot be collected from employees in later pay periods. |
 | `wa.cares.base.same_as_pfml` | [[FACT:wa.cares.base.same_as_pfml=True]] |  | from 2026-06-26 | US-WAB5-003 | 'Paid Leave and WA Cares use the same definition of gross wages and hours.' |
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wa.ui_pfml_ltc.deferrals` (non-blocking; research request filed under this key) - No WAC section or ESD publication names an exclusion for employee elective deferrals (cafeteria plans, retirement deferrals, HSA) from Paid Leave or WA Cares wages, and the UI text is silent. Closes with: An explicit ESD statement (Paid Leave employer help center or a WAC amendment) and RCW 50.04.320 / ESD UI guidance for UI wages.
-- ⚠️ RESEARCH-GAP: `wa.sui.wage_base.next_year` (non-blocking; research request filed under this key) - 2027 UI wage base not published. Closes with: ESD tax-rate page (December) and RCW 50.24.010.
-- ⚠️ RESEARCH-GAP: `wa.wc.next_year_and_statute` (non-blocking; research request filed under this key) - Final 2027 WC rates and RCW 51.32.073 not read. Closes with: L&I 2027 adopted rates (December) and RCW 51.32.073.
-- ⚠️ RESEARCH-GAP: `wa.ui.exclusions_clergy_students` (non-blocking; research request filed under this key) - UI exclusions for clergy and students (50.44.040) not read. Closes with: RCW 50.44.040.
-- ⚠️ RESEARCH-GAP: `wa.pfml.family_medical_split` (non-blocking; research request filed under this key) - The 2027 family / medical premium line split under 2SHB 2345 is derived only; the ESD split tables were not readable. Closes with: ESD/paidleave.wa.gov premium split tables.
+- Not configured in this release [[GAP:RQ-372]]: No WAC section or ESD publication names an exclusion for employee elective deferrals (cafeteria plans, retirement deferrals, HSA) from Paid Leave or WA Cares wages, and the UI text is silent.
+- Not configured in this release [[GAP:RQ-373]]: 2027 UI wage base not published.
+- Not configured in this release [[GAP:RQ-374]]: Final 2027 WC rates and RCW 51.32.073 not read.
+- Not configured in this release [[GAP:RQ-380]]: UI exclusions for clergy and students (50.44.040) not read.
+- Not configured in this release [[GAP:RQ-381]]: The 2027 family / medical premium line split under 2SHB 2345 is derived only; the ESD split tables were not readable.
 
-## 4. Payslip statute and payroll records
+## WA.4 Pay statement
 
 - **Content (WAC 296-126-040) [US-WAS5-004]:** [[FACT:wa.payslip.items=pay basis (hours/days), rates, gross, all deductions, pay period dates, payment date; separate from paycheck]]. Electronic delivery allowed if the employee can receive and copy the statement on payday.
 - **Paid sick leave balance** at least monthly (accrued, used, available), which may go on the pay statement ([[FACT:wa.payslip.sick_leave_balance.monthly=True]]) (WAC 296-128-755(2)) [US-WAS5-005]. A "WA Cares Fund" paystub label is recommended, not mandatory [US-WAS5-016].
@@ -138,7 +149,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 | `wa.payslip.sick_leave_balance.monthly` | [[FACT:wa.payslip.sick_leave_balance.monthly=True]] |  | from 2026-01-01 | US-WAS5-005 | WAC 296-128-755(2) |
 | `wa.records.esd.retention_years` | [[FACT:wa.records.esd.retention_years=4]] | years | from 2026-01-01 | US-WAS5-030 | L&I 3 years; keep longest |
 
-## 5. Statutory reporting
+## WA.5 Statutory reporting
 
 - **No withholding return or state W-2.** Registration: DOR business licence when first hiring [US-WAS5-013].
 - **UI quarterly tax and wage report (ESD) [US-WAS5-013, US-FIL-016]:** per employee name, SSN, gross pay, hours worked in the quarter and SOC code; due [[FACT:wa.report.ui.quarterly_due=Apr 30; Jul 31; Oct 31; Jan 31]]; nil report required; exempt corporate officers reported separately [US-WAS5-027].
@@ -157,11 +168,11 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 | `wa.report.pfml_ltc.no_payroll_report` | [[FACT:wa.report.pfml_ltc.no_payroll_report=True]] |  | from 2026-06-26 | US-WAB5-003 | File every quarter even with no payroll (8 consecutive quarters unless closure notified). |
 | `wa.report.pfml_ltc.channels` | [[FACT:wa.report.pfml_ltc.channels=Manual entry (up to 50 employees), single CSV file (ESD template), ICESA bulk file for employer agents]] |  | from 2026-06-26 | US-WAB5-003 |  |
 
-## 6. Leave
+## WA.6 Leave
 
 - **Paid sick leave (RCW 49.46.210) [US-WAS5-001, US-WAS5-005]:** accrual at least one hour per [[FACT:wa.leave.paid_sick.accrual_ratio_hours_worked=40]] hours worked; usable after the statutory waiting period; paid at the greater of minimum wage or normal rate; carry-over may be capped; payout at separation: [[FACT:wa.leave.sick.payout_on_separation=False]] (construction workers excepted); reinstated on rehire within the statutory period.
 - **PFML job protection (RCW 50A.35.010) [US-WAS5-028]:** employers with [[FACT:wa.leave.pfml.job_protection.employer_threshold=25]] or more employees in 2026 (lower thresholds in 2027 and 2028), employee tenure test.
-- Seattle Paid Sick and Safe Time not obtained (seattle.gov blocked). No vacation statute.
+- Seattle Paid Sick and Safe Time not obtained [[GAP:RQ-576]] (seattle.gov blocked). No vacation statute.
 
 **Parameters (leave)**
 
@@ -171,7 +182,7 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 | `wa.leave.sick.payout_on_separation` | [[FACT:wa.leave.sick.payout_on_separation=False]] |  | from 2021-01-01 | US-WAS5-001 | except construction workers |
 | `wa.leave.pfml.job_protection.employer_threshold` | [[FACT:wa.leave.pfml.job_protection.employer_threshold=25]] |  | 2026-01-01 to 2026-12-31 | US-WAS5-028 | 15+ in 2027; 8+ from 2028; 180 days tenure |
 
-## 7. Termination
+## WA.7 Termination and final pay
 
 - **Final pay (RCW 49.48.010(2)) [US-WAS5-002]:** [[FACT:wa.final_pay.rule=end of established pay period (discharge and resignation)]]; a CBA may provide otherwise. Final-pay deductions limited (WAC 296-126-025) [US-WAS5-004].
 - **Discharge statement:** within [[FACT:wa.term.discharge_statement.days=21]] days of a written request, the discharge date and reason (WAC 296-126-050(4)) [US-WAS5-004].
@@ -186,14 +197,14 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wa.term.notices` (non-blocking; research request filed under this key) - State mini-WARN and ESD separation-notice rules not read. Closes with: WA mini-WARN statute and RCW 50.20 / WAC 192.
-- ⚠️ RESEARCH-GAP: `wa.term.vacation.payout` (non-blocking; research request filed under this key) - Vacation payout at separation: L&I policy not read. Closes with: L&I ES.B administrative policy.
+- Not configured in this release [[GAP:RQ-376]]: State mini-WARN and ESD separation-notice rules not read.
+- Not configured in this release [[GAP:RQ-377]]: Vacation payout at separation: L&I policy not read.
 
-## 8. Benefits in kind and the taxable base
+## WA.8 Benefits in kind and taxable wages
 
 - **Income tax:** not applicable. **UI and PFML** count all remuneration including non-cash compensation; tips included for UI, excluded for PFML [US-WAS5-022, US-WAS5-023]. Deferral treatment open (Section 3).
 
-## 9. Deductions and garnishments
+## WA.9 Deductions and garnishments
 
 - **Authorisation (RCW 49.48.010(3), 49.52.060) [US-WAS5-002, US-WAS5-003, US-WAS5-004]:** required by law, agreed (express written advance authorisation for 49.52.060 deductions), or for medical care, with no employer profit. Private-employer overpayment recoupment within the WAC limits; public employers capped per period (49.48.200).
 - **Garnishment exemption (RCW 6.27.150) [US-WAS5-009]:** general debts: the greater of [[FACT:wa.garn.general.exempt.weekly=253.75]] USD per week or the CCPA share; consumer debts: the greater of [[FACT:wa.garn.consumer.exempt.weekly=599.55]] USD per week (2026) or [[FACT:wa.garn.consumer.exempt_rate=80]] % of disposable earnings. Private student loans: open point below. Processing fee [[FACT:wa.garn.answer_fee.first=20]] USD for the first answer (6.27.095).
@@ -212,9 +223,11 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 
 **Open research points**
 
-- ⚠️ RESEARCH-GAP: `wa.garn.student_loan_wage_meaning` (non-blocking; research request filed under this key) - Whether "highest minimum wage law in the state" in RCW 6.27.150(3)(a) means the state or a local rate is unresolved. Closes with: Court or AG reading.
+- Not configured in this release [[GAP:RQ-379]]: Whether "highest minimum wage law in the state" in RCW 6.27.150(3)(a) means the state or a local rate is unresolved.
 
-## 10. Collective agreements and prevailing wage
+## WA.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 - **Prevailing wage (RCW 39.12) [US-WAP51-002, US-WAS5-010]:** public works and public building service maintenance contracts; certified payroll: [[FACT:wa.prevailing_wage.certified_payroll=monthly in L&I online system; records 3 years]]. No sector CBA sets statutory payroll minima; CBAs may override the pay interval and final-pay timing.
 
@@ -224,12 +237,12 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 |---|---|---|---|---|---|
 | `wa.prevailing_wage.certified_payroll` | [[FACT:wa.prevailing_wage.certified_payroll=monthly in L&I online system; records 3 years]] |  | from 2026-01-01 | US-WAS5-010 | statement of intent on contracts >10,000 |
 
-## 11. Indexation
+## WA.11 Indexation
 
 - **State minimum wage:** [[FACT:wa.minwage.indexation=CPI-W Aug-Aug, announced Sept 30, effective Jan 1, nearest cent]] [US-WAS5-001]; youth rate, exempt threshold and computer-professional rate are multiples of it; the consumer-debt garnishment exemption moves with it.
 - **Local minimum wages:** each city's ordinance [US-WAS5-008]. **UI wage base:** average wages, published by ESD (2027 open). **PFML cap:** the Social Security wage base; **PFML rate:** formula, capped. **WA Cares:** fixed. **Workers' compensation:** L&I rule each December.
 
-## 12. Payroll data protection
+## WA.12 Payroll data protection and records
 
 - **Breach notification (RCW 19.255.010) [US-WAS5-025]:** notify affected residents within [[FACT:wa.data.breach.notice_days=30]] calendar days of discovery; notify the Attorney General above the statutory count; processors (including payroll providers) notify the data owner immediately. No pay-statement SSN rule found.
 
@@ -239,14 +252,18 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 |---|---|---|---|---|---|
 | `wa.data.breach.notice_days` | [[FACT:wa.data.breach.notice_days=30]] | days | from 2026-01-01 | US-WAS5-025 | AG if >500 residents |
 
-## 13. Live legal change
+## WA.13 Live legal change
 
 - **2026-01-01:** PFML job-protection thresholds; WA Cares visa-holder exemption [US-WAS5-028, US-WAS5-024].
 - **2026-06-11:** 2SHB 2345 (PFML premium allocation, applied from 2027) [US-WAS5-020]. **2026-07-01:** Everett and Renton local steps [US-WAS5-008]. **2026-08-01:** PFML penalties [US-WAB5-002].
 - **2027-01-01:** minimum wage, exempt threshold, youth and computer-professional rates; PFML 2027 rate and split [US-WAS5-007, US-WAS5-015]. **2027-07-01:** Domestic Workers Bill of Rights [US-WAS5-021].
 - **2028-01-01:** SB 6346 high-income tax (assessment) [US-WAS5-017]. Not yet published: 2027 UI wage base, final 2027 workers' compensation rates, 2027 local minimum wages.
 
-## 14. Special populations
+## WA.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## WA.15 Special populations
 
 | Population | Washington rule | Register id |
 |---|---|---|
@@ -263,24 +280,40 @@ Every value in this annex is bound to a key of `_research/CCG-annex_WA-facts.jso
 | Apprentices / learners / workers with disabilities | Sub-minimum wage by special certificate | US-WAS5-001, US-WAS5-005 |
 | Construction workers | Accrued sick leave paid out at separation before eligibility | US-WAS5-001 |
 
-## 15. Sources
+## WA.16 Language
 
-Register ids cited in this annex resolve to `00-official-sources/legal-basis-register.csv`; the URL of each value is in the facts file. Authorities:
+No language rule for employee documents is written for this jurisdiction in this annex.
 
+## WA.S Sources
+
+Register ids cited in this annex resolve to the build record; the URL of each value is in the facts file. Authorities:
+
+- Build lead (Claude) under owner delegation (Wallisson Gomes): US-OWN-006
 - City of Seattle Office of City Finance: US-WAP51-001
-- WA Cares Fund (DSHS / ESD): US-WAS5-016
+- City of Seattle, Office of City Finance: US-WAP9V-001
+- Georgia Department of Labor / GTA: US-FIL-016
+- Owner (Wallisson Gomes): US-OWN-008
+- WA Cares Fund (DSHS / ESD): US-WAS5-016, US-WAS5-024
+- WA official authority: US-WAP7-005
 - Washington Department of Revenue: US-WAS5-017
-- Washington Employment Security Department: US-WAS5-012, US-WAS5-013, US-WAS5-015, US-WAS5-029, US-WAS5-030
+- Washington Employment Security Department: US-FEDP51-016, US-WAS5-012, US-WAS5-013, US-WAS5-014, US-WAS5-015, US-WAS5-027, US-WAS5-029, US-WAS5-030
+- Washington Employment Security Department (Paid Leave): US-WAB5-002
 - Washington Employment Security Department - Paid Family and Medical Leave: US-WAB5-002, US-WAB5-003
-- Washington L&I (Code Reviser), via Wayback snapshot 2026-03-20: US-WAS5-005
-- Washington L&I (Code Reviser), via Wayback snapshot 2026-07-30: US-WAS5-004
+- Washington L&I (Code Reviser): US-WAS5-005
+- Washington L&I (Code Reviser): US-WAS5-004
+- Washington Legislature (Code Reviser): US-WALTC-002
 - Washington State Department of Labor & Industries: US-WAS5-006, US-WAS5-007, US-WAS5-008, US-WAS5-019
-- Washington State Legislature, via Wayback snapshot 2025-05-15: US-WAS5-011
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2025-09-16: US-WAS5-018
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-04-23 (last amended 2025 c 178): US-WAS5-023
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-05-08: US-WAS5-010
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-05-18: US-WAS5-028
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-06-13: US-WAS5-001
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-08-08: US-WAS5-002
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-10-09: US-WAS5-009
-- Washington State Legislature (Code Reviser), via Wayback snapshot 2026-10-25: US-WAS5-025
+- Washington State Legislature: US-WAP51-002, US-WAR3C-001
+- Washington State Legislature (Code Reviser): US-WAS5-011
+- Washington State Legislature (Code Reviser): US-WAS5-018
+- Washington State Legislature (Code Reviser): US-WAS5-022
+- Washington State Legislature (Code Reviser): US-WAS5-023
+- Washington State Legislature (Code Reviser): US-WAS5-010
+- Washington State Legislature (Code Reviser): US-WAS5-003
+- Washington State Legislature (Code Reviser): US-WAS5-028
+- Washington State Legislature (Code Reviser): US-WAS5-001
+- Washington State Legislature (Code Reviser): US-WAS5-002
+- Washington State Legislature (Code Reviser): US-WAS5-009
+- Washington State Legislature (Code Reviser): US-WAS5-025
+- Washington State Legislature: US-WAS5-021
+- Washington State Legislature: US-WAS5-020

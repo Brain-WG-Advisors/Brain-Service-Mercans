@@ -39,14 +39,14 @@ def val(key):
     return TV(key)
 
 
-PROGRAMME = {"sick": "", "paid_sick": "", "paid": "", "esst": "ESST ", "esta": "ESTA ", "essl": "ESSL ",
+PROGRAMME = {"sick": "", "paid_sick": "", "paid": "", "esst": "ESST ", "esta": "ESTA ", "essl": "ESSL ", "esl": "earned sick leave ",
              "earned_paid": "earned paid leave ", "est": "earned sick time ", "plawa": "PLAWA ", "paid_mandate": "",
              "pto": "PTO ", "vacation": "vacation ", "accrued": "accrued leave ", "pittsburgh": "", "chicago": "",
              "nyc_pto": "", "philadelphia": ""}
 LABELS = [
     (r"^accrual(\.hours_worked_per_hour|_ratio_hours_worked)$", "hours worked per hour accrued"),
     (r"^accrual_per_hour_worked$", "hours accrued per hour worked"),
-    (r"^accrual\.(\w+)$", "accrual, \1 employees"),
+    (r"^accrual\.(\w+)$", r"accrual, \1 employees"),
     (r"^accrual_cap_hours$", "accrual cap (hours)"),
     (r"^usage_cap_hours$|^use_cap_hours$", "use cap (hours)"),
     (r"^annual_cap_hours$", "annual cap (hours)"),
@@ -58,10 +58,10 @@ LABELS = [
     (r"^cap_hours\.under_15_fte$", "cap, under 15 FTE employers (hours)"),
     (r"^cap_hours\.15_plus$", "cap, 15+ employees (hours)"),
     (r"^cap_hours\.under_15$", "cap, under 15 employees (hours)"),
-    (r"^cap_hours\.(\w+)$", "cap, \1 employers (hours)"),
-    (r"^annual_cap\.(\w+)_hours$", "annual cap, \1 employers (hours)"),
-    (r"^annual_cap_hours\.(\w+)$", "annual cap, \1 employees (hours)"),
-    (r"^annual_hours\.(\w+)$", "annual hours, \1 employees"),
+    (r"^cap_hours\.(\w+)$", r"cap, \1 employers (hours)"),
+    (r"^annual_cap\.(\w+)_hours$", r"annual cap, \1 employers (hours)"),
+    (r"^annual_cap_hours\.(\w+)$", r"annual cap, \1 employees (hours)"),
+    (r"^annual_hours\.(\w+)$", r"annual hours, \1 employees"),
     (r"^(coverage_min_employees|coverage_threshold_employees|employer_threshold|employer_threshold_paid|paid_employer_threshold)$",
      "employer-size threshold for paid leave (employees)"),
     (r"^small_employer_threshold$", "small-employer threshold (employees)"),
@@ -90,7 +90,10 @@ def nice(label):
         label = ".".join(toks[1:])
     for rx, rep in LABELS:
         if re.match(rx, label):
-            return (pre + re.sub(rx, rep, label)).replace("_", " ")
+            out = (pre + re.sub(rx, rep, label)).replace("_", " ")
+            out = re.sub(r"(\d+) (\d+) employ", r"\1-\2 employ", out)
+            out = re.sub(r"(\d+) ?plus\b", r"\1+", out)
+            return re.sub(r"\bunder(\d+)", r"under \1", out)
     return (pre + label.replace(".", ", ").replace("_", " ")).strip()
 
 
@@ -139,7 +142,7 @@ def m08():
           "per State and not established at multistate level: "
           + F.gap(F.GAP_TEXT["multi.sick_leave.coverage_threshold"], "multi.sick_leave.coverage_threshold"), ""]
     rows, none = [], []
-    sick_rx = r"\.leave\.(sick|paid_sick|paid|esst|esta|essl|earned_paid|est|plawa|paid_mandate)\."
+    sick_rx = r"\.leave\.(sick|paid_sick|paid|esst|esta|essl|esl|earned_paid|est|plawa|paid_mandate)\."
     for st in F.STATES:
         s = st.lower()
         ks = [k for k in F.keys_matching(rf"^{s}\.leave\.") if re.search(sick_rx, k) and "payout" not in k]
@@ -206,8 +209,8 @@ def m08():
         ("Hawaii TDI", "Employer's insured plan", T("hi.tdi.benefit.weekly_max"), REG("hi.tdi.benefit.weekly_max")),
         ("Maryland FAMLI", "State fund; contributions start " + T("md.pfml.contributions.start"), "not keyed", REG("md.pfml.contributions.start")),
         ("Massachusetts PFML", "Department of Family and Medical Leave",
-         T("ma.pfml.max_weekly_benefit", ef="2026-01-01") + " (2026); " + T("ma.pfml.max_weekly_benefit", ef="2027-01-01") + " (from 2027-01-01)",
-         REG("ma.pfml.max_weekly_benefit", ef="2026-01-01")),
+         T("ma.pfml.benefit.weekly_max", ef="2026-01-01") + " (2026); " + T("ma.pfml.benefit.weekly_max", ef="2027-01-01") + " (from 2027-01-01)",
+         REG("ma.pfml.benefit.weekly_max", ef="2026-01-01")),
         ("Maine PFML", "State fund", "not keyed", REG("me.pfml.w2_box14_label")),
         ("Minnesota Paid Leave", "State fund", "not keyed", REG("mn.pfml.rate.total")),
         ("New Jersey TDI / FLI", "State fund or private plan", T("nj.tdi.max_weekly_benefit"), REG("nj.tdi.max_weekly_benefit")),
@@ -297,6 +300,9 @@ def m09():
         ("New Jersey mass-layoff severance", f"{T('nj.term.warn.severance.weeks_per_year')} week of pay per year of service on a covered mass layoff",
          "Wages", REG("nj.term.warn.severance.weeks_per_year")),
     ])
+    L += ["", "**Fixed-term contracts.** Employment is at will and a fixed term is a matter of contract; no federal or general State "
+          "fixed-term regime exists. The expiry of the term is a separation: final wages follow Table 9.1.1, and any State separation "
+          f"notice below applies (Module 11, 11.3; [US-SDS5-010], [US-TNS5-012], {REG('fed.final_pay.rule')})."]
     L += ["", "**Table 9.1.1: State final-pay timing (keyed States).** Timing runs from the separation. Discharge and resignation "
           "differ in many States.", ""]
     rows, none = [], []
@@ -335,8 +341,9 @@ def m09():
     L += ["- **When it is due:** only where Module 8, Table 8.1.3 makes the balance wages due, and on the final-pay date of "
           "Table 9.1.1.",
           "- **Federal withholding:** where due, the payout is paid with the final wages. "
-          + F.gap("whether a separately paid vacation payout is a supplemental wage for the federal flat-rate method is not keyed.",
-                  "fed.vacation_payout.supplemental_status"),
+          + f"Classification: {T('fed.vacation_payout.supplemental_status')} "
+          f"{REG('fed.vacation_payout.supplemental_status')}. A lump-sum payout of unused leave is withheld on with the "
+          "supplemental-wage methods of Module 6 §6.2 (optional flat rate or aggregate).",
           f"- **State example:** Louisiana withholds vacation pay like regular wages, with no flat supplemental rate ({T('la.wh.supplemental.method')}) "
           f"{REG('la.wh.supplemental.method')}."]
 
@@ -455,7 +462,7 @@ def m10():
         ("State and local wages and tax", "Per State and locality of withholding", "—",
          f"W-2 boxes 15-20, up to {T('multi.w2.states_per_form')} States and localities per form", REG("multi.w2.states_per_form")),
         ("State PFML/SDI employee contributions", "Employee premium per programme", "Box 14 (informational)",
-         f"Labels e.g. CA {T('psl.w2.box14.ca_sdi')}; ME {T('psl.w2.box14.me_pfml_label')}", REG("psl.w2.box14.ca_sdi")),
+         f"Labels e.g. CA {T('psl.w2.box14.ca_sdi')}; ME {T('me.pfml.w2_box14_label')}", REG("psl.w2.box14.ca_sdi")),
         ("UI wages per employee", "Gross wages, taxable wages, (some States) hours and occupation", "—",
          "UI quarterly wage report to the State of coverage", REG("multi.ui_wage_report.routing")),
     ])
@@ -473,8 +480,9 @@ def m10():
          f"Electronic filing at {T('fed.aca.efile_threshold')} or more returns", REG("fed.aca.ale.fte_threshold")),
         ("New-hire report", "State Directory of New Hires", f"Within {T('fed.newhire.deadline_days')} days of hire (shorter in many States, Table 10.1.2)",
          T("fed.newhire.form"), REG("fed.newhire.deadline_days")),
-        ("Davis-Bacon certified payroll", "Contracting agency", T("fed.davis_bacon.certified_payroll.frequency"), "Form WH-347 (optional)", REG("fed.davis_bacon.certified_payroll.frequency")),
+        ("Davis-Bacon certified payroll", "Contracting agency", T("fed.davis_bacon.certified_payroll.frequency"), "Paper or electronic to the agency (optional DOL form named in the rule)", REG("fed.davis_bacon.certified_payroll.frequency")),
     ])
+    L += ["", F.CC.PREVAILING_WAGE_SENTENCE]  # SCOPE r1 finding 2 (US-OWN-009)
     L += ["", "Instructions for the tax-year 2026 Forms 940 and 1094-C/1095-C are not yet issued; the 2025 editions were read. "
           + F.gap(F.GAP_TEXT["fed.form940.instructions_current"], "fed.form940.instructions_current"), ""]
     L += ["**Table 10.1.2: State reporting parameters keyed in the facts.** The withholding-return and reconciliation forms "
@@ -519,7 +527,7 @@ def m10():
     L += [f"- **New-hire reporting** ({T('fed.newhire.fields')}) {REG('fed.newhire.fields')}. Electronic filers transmit "
           f"{T('fed.newhire.electronic_interval')} {REG('fed.newhire.electronic_interval')}.",
           f"- **Certified payroll** on public works: federal Davis-Bacon weekly {REG('fed.davis_bacon.certified_payroll.frequency')}; "
-          f"California electronic upload ({T('ca.prevailing_wage.certified_payroll')}) {REG('ca.prevailing_wage.certified_payroll')}.",
+          f"California electronic upload ({T('ca.prevailing_wage.certified_payroll')}) {REG('ca.prevailing_wage.certified_payroll')}. " + F.CC.PREVAILING_WAGE_SENTENCE,  # SCOPE r1 finding 2
           "- All statutory filings go through the third-party filing provider (owner decision). The SIR documents the handoff."]
 
     L += ["", "## 10.3 Payslip Requirements"]
@@ -605,16 +613,19 @@ def m11():
           f"rates and bases {REG('fed.fica.oasdi.wage_base', ef='2026-01-01')}. Exception: Massachusetts PFML applies to wages earned on or after "
           f"1 January {REG('ma.pfml.total.rate')}.", "", "**Mid-year 2026 changes to date by payment date (Table 11.1.1)**", ""]
     L += table(["Change", "Value", "Source"], [
-        ("Georgia rate", T("ga.pit.rate.flat", ef="2026-01-01") + "% for tax year 2026 (" + T("ga.pit.rate.flat", ef="2025-01-01")
-         + "% in 2025); law " + T("ga.live.hb463.status") + ". Withholding examples dated from 2026-05-11 (Module 12)",
-         REG("ga.pit.rate.flat", ef="2026-01-01")),
+        # round 2 (QA r1 C32/C41): GA split by level; the 2025 rate is history and is not shown
+        ("Georgia income tax", "Withholding rate " + T("ga.wh.rate", ef="2026-01-01") + "% for payments to 2026-05-10, "
+         + T("ga.wh.rate", ef="2026-05-11") + "% from 2026-05-11; tax year 2026 assessment rate "
+         + T("ga.pit.rate.flat", ef="2026-01-01") + "% (retroactive to 1 January); law " + T("ga.live.hb463.status")
+         + ". Withholding examples dated from 2026-05-11 (Module 12)",
+         REG("ga.wh.rate", ef="2026-01-01") + " " + REG("ga.wh.rate", ef="2026-05-11")),
         ("Ohio withholding tables", "Effective " + T("oh.wh.tables.effective_from"), REG("oh.wh.tables.effective_from")),
         ("Indiana county rates", T("in.county.change_dates"), REG("in.county.change_dates")),
         ("Idaho single zero bracket (biweekly)", TV("id.wh.zero_bracket.single.biweekly"), REG("id.wh.zero_bracket.single.biweekly", on="2026-08-01")),
         ("Philadelphia wage tax (resident / nonresident)", TV("pa.local.philadelphia.resident.rate") + " / " + TV("pa.local.philadelphia.nonresident.rate"),
          REG("pa.local.philadelphia.resident.rate")),
         ("District of Columbia minimum wage", TV("dc.minwage.hourly"), REG("dc.minwage.hourly", on="2026-08-01")),
-        ("Oregon standard minimum wage", TV("or.minwage.standard.hourly"), REG("or.minwage.standard.hourly", on="2026-08-01")),
+        ("Oregon standard minimum wage", TV("or.labour.minwage.standard.hourly"), REG("or.labour.minwage.standard.hourly", on="2026-08-01")),
         ("Trump-account employer contribution exclusion", T("fed.bik.trump_account.employer_contribution_max") + F.dated("fed.bik.trump_account.employer_contribution_max"),
          REG("fed.bik.trump_account.employer_contribution_max")),
     ])
@@ -622,8 +633,7 @@ def m11():
     L += ["- **FIT:** a second payment in the period is a supplemental wage. Either withhold the optional flat "
           f"{T('fed.fit.supplemental.flat_rate')}% on it (if identified separately), or aggregate it with the regular wages of the period and "
           f"withhold on the total {REG('fed.fit.supplemental.flat_rate')}. "
-          + F.gap("the Pub. 15 aggregate procedure for a supplemental payment made after the regular wages of the period (subtract the tax already withheld) is not keyed.",
-                  "fed.fit.supplemental.aggregate_method"),
+          f"Aggregate procedure: {T('fed.fit.supplemental.aggregate_method')} {REG('fed.fit.supplemental.aggregate_method')}.",
           "- **FICA and FUTA:** computed payment by payment against the cumulative annual bases. OASDI is the rate × the lesser of "
           "the remaining base and the payment. Additional Medicare applies to the part of the cumulative wages above "
           f"{T('fed.fica.addl_medicare.withholding_threshold')} {REG('fed.fica.addl_medicare.withholding_threshold')}."]
@@ -655,10 +665,18 @@ def m11():
           f"earned income exclusion for 2026 is {T('fed.feie.amount')} {REG('fed.feie.amount')}. FICA follows its own coverage rules.",
           f"- **State:** {T('multi.pit.sourcing.general')} {REG('multi.pit.sourcing.general')}."]
     L += H3(M, "11.2", "How do employer stock option plans work and how are they taxed?")
-    L += [f"State example keyed in the facts: California withholds bonuses and stock-option income at {T('ca.wh.supplemental.rate.bonus_stock_options')}% "
-          f"{REG('ca.wh.supplemental.rate.bonus_stock_options')}. "
-          + F.gap("the federal treatment of nonstatutory and incentive stock options, ESPP and RSUs (income timing, FIT/FICA/FUTA, W-2 codes) is not keyed.",
-                  "fed.equity.compensation_treatment")]
+    # round 2: RQ-534 closed by agent 2 (fed.equity.* facts, US-FEDQ1-001/-004/-006)
+    L += [f"- **Federal, resident employee:** {T('fed.equity.withholding_treatment.resident')} {REG('fed.equity.withholding_treatment.resident')}.",
+          f"- **Nonstatutory option spread:** reported with W-2 box 12 code {T('fed.equity.nso.w2_code')} {REG('fed.equity.nso.w2_code')}.",
+          "- **ISO and ESPP:** FICA and FUTA "
+          + F.B('fed.equity.iso_espp.fica_futa_applies', 'apply', 'do not apply')
+          + " at grant, exercise or disposition, and income-tax withholding "
+          + F.B('fed.equity.iso_espp.fit_withholding_required', 'is required', 'is not required')
+          + f" on a disqualifying disposition {REG('fed.equity.iso_espp.fica_futa_applies')}.",
+          f"- **RSU timing for FICA and FUTA:** {T('fed.equity.rsu.fica_timing')} {REG('fed.equity.rsu.fica_timing')}.",
+          f"- **Federal, nonresident alien employee:** {T('fed.equity.withholding_treatment.nonresident')} {REG('fed.equity.withholding_treatment.nonresident')}.",
+          f"- **State example:** California withholds bonuses and stock-option income at {T('ca.wh.supplemental.rate.bonus_stock_options')}% "
+          f"{REG('ca.wh.supplemental.rate.bonus_stock_options')}."]
     L += H3(M, "11.2", "How is payroll handled for employees who transfer between different legal entities mid-year?")
     L += ["Each legal entity (EIN) is a separate employer. Wage bases restart at the new entity, and each entity files its own "
           "941 and W-2. A successor employer that acquires the business may count the predecessor's wages toward the FUTA base "
@@ -697,7 +715,7 @@ def m11():
         ("Students", T("fed.students.treatment"), REG("fed.students.treatment")),
         ("Government employees", T("fed.government_employee.treatment"), REG("fed.government_employee.treatment")),
         ("Election workers", f"FICA from {T('fed.election_worker.fica_threshold')} in the year", REG("fed.election_worker.fica_threshold")),
-        ("Military spouses (State tax)", TV("multi.military_spouse.rule"), REG("multi.military_spouse.rule", ef="2026-01-01")),
+        ("Military spouses (State tax)", T("multi.military_spouse.rule", ef="2018-12-31"), REG("multi.military_spouse.rule", ef="2018-12-31")),
     ])
     L += H3(M, "11.2", "Fringe benefit exclusions (2026)")
     L += table(["Benefit", "Federal exclusion", "Source"], [
@@ -750,6 +768,11 @@ def m13():
     for k in pk:
         rows.append((k.split(".")[1].upper(), T(k) + F.dated(k), F.R(k)))
     L += table(["Jurisdiction", "Practice (value)", "Register"], rows)
+    F.set_loc("m13_practices.md §13.1 Mid-year changes")
+    L += ["", "**Mid-year changes are applied by payment date.** Configure every dated value with its effective date and select it by "
+          "the payment date of the run, never by the period worked (Module 11, Table 11.1.1). Massachusetts PFML is the exception "
+          f"and follows the earning date {REG('ma.pfml.total.rate')}. Examples in 2026: Ohio withholding tables from {T('oh.wh.tables.effective_from')}; "
+          f"District of Columbia minimum wage {TV('dc.minwage.hourly')}; Idaho zero bracket {TV('id.wh.zero_bracket.single.biweekly')}."]
     F.set_loc("m13_practices.md §13.1 Tips and overtime at assessment")
     L += ["", "**Tips and overtime deductions at assessment only (do not reduce withholding).** Federal: "
           f"{T('fed.plaw119_21.tips_overtime.level')} {REG('fed.plaw119_21.tips_overtime.level')}. States keyed in the facts:", ""]
@@ -793,7 +816,7 @@ def coverage():
     bound to a key; numbers without a key are left to the annex named in the row."""
     cv = json.load(open(os.path.join(F.RESEARCH, "CCG-coverage-facts.json"), encoding="utf-8"))["coverage_matrix"]
     L = ["## 11.3 Population Coverage Matrix", "",
-         "One row per population (all populations are in scope, owner decision US-OWN-005). Each row gives the federal and "
+         "One row per population. " + F.CC.POPULATIONS_SENTENCE + " Each row gives the federal and "  # SCOPE r1 finding 3
          "multistate treatment, its effect on income tax, social security and reporting, the module that carries the rule, "
          "and the sources. State-specific treatments are in the annexes named in the row.", ""]
     W = {}
@@ -813,7 +836,7 @@ def coverage():
         f"({T('fed.fit.nra.addon.table2.annual')} per year, Table 2); W-4 per Notice 1392; treaty-exempt wages via Form 8233 on Form 1042-S; "
         f"commercial-traveler exception (at most {T('fed.fit.nra.commercial_traveler.max_days')} days and {T('fed.fit.nra.commercial_traveler.max_pay')}). "
         "(b) **Nonresident of a State:** work-State withholding subject to reciprocity certificates, day or dollar thresholds "
-        f"(e.g. Alabama {T('multi.nonresident.al.threshold_days')} days, Louisiana {T('multi.nonresident.la.threshold_days')}, "
+        f"(e.g. Alabama {T('al.nonres.safe_harbor.days')} days, Louisiana {T('multi.nonresident.la.threshold_days')}, "
         f"West Virginia {T('multi.nonresident.wv.threshold_days')}, Arizona {T('multi.nonresident.az.threshold_days')}, Illinois "
         f"{T('multi.nonresident.il.threshold_days')} working days), convenience rules (New York: {T('multi.convenience.ny.rule')}), "
         "and the federal limits for transport workers and military spouses.",
@@ -923,8 +946,8 @@ def coverage():
         "ALE 1094-C/1095-C; Form 943/944/Schedule H routes")
     W["mid_year_rate_change"] = (
         "Several 2026 values change during the year and are applied by payment date (Module 11, Table 11.1.1): District of Columbia minimum wage "
-        f"({TV('dc.minwage.hourly')}); Oregon ({TV('or.minwage.standard.hourly')}); Ohio withholding tables from {T('oh.wh.tables.effective_from')}; "
-        f"Georgia rate ({T('ga.pit.rate.flat', ef='2026-01-01')}% for tax year 2026, {T('ga.live.hb463.status')}); Indiana county rates; Idaho tables; Philadelphia wage tax; "
+        f"({TV('dc.minwage.hourly')}); Oregon ({TV('or.labour.minwage.standard.hourly')}); Ohio withholding tables from {T('oh.wh.tables.effective_from')}; "
+        f"Georgia withholding rate ({T('ga.wh.rate', ef='2026-01-01')}% to 2026-05-10, {T('ga.wh.rate', ef='2026-05-11')}% from 2026-05-11; assessment rate {T('ga.pit.rate.flat', ef='2026-01-01')}% for tax year 2026, {T('ga.live.hb463.status')}); Indiana county rates; Idaho tables; Philadelphia wage tax; "
         f"Trump-account exclusion{F.dated('fed.bik.trump_account.employer_contribution_max')}.",
         "Withholding tables effective by payment date",
         "Rate changes on the effective date (no federal mid-year change in 2026)",
@@ -949,8 +972,13 @@ def coverage():
         F.set_loc(f"coverage.md §11.3 {key}")
         treat, it, ss, rep = W[key]
         srcs = "; ".join(f"{s['register_id']} ({s['article']})" for s in row["sources"])
-        L += [f"### {key.replace('_', ' ').capitalize()}", "",
-              f"*Status: {row['status']}. Rule carried in: {row['ccg_location']}.*", "",
+        title = {"non_resident_employee": "Non-resident employee", "maternity_paternity_parental": "Maternity, paternity and parental leave",
+                 "work_accident_occupational_disease": "Work accident and occupational disease", "termination_and_final_pay": "Termination and final pay",
+                 "mid_month_joiner_and_leaver": "Mid-month joiner and leaver", "apprentices_and_trainees": "Apprentices and trainees",
+                 "employer_type_and_size": "Employer type and size", "accrual_vs_payment": "Accrual versus payment"}.get(key, key.replace("_", " ").capitalize())
+        where = re.sub(r"(?<![A-Za-z])m(\d\d)_[a-z_]+", lambda mm: f"Module {int(mm.group(1))}", row["ccg_location"])
+        L += [f"### {title}", "",
+              f"*Status: {row['status']}. Rule carried in: {where}.*", "",
               treat, ""]
         L += table(["Effect on", "Treatment"], [("Income tax", it), ("Social security", ss), ("Reporting", rep)])
         L += ["", f"Sources: {srcs}.", ""]
@@ -960,7 +988,8 @@ def coverage():
 
 
 def write(name, lines):
-    open(os.path.join(MOD, name), "w", encoding="utf-8").write("\n".join(lines).rstrip("\n") + "\n")
+    text = F.clean("\n".join(lines).rstrip("\n") + "\n")
+    open(os.path.join(MOD, name), "w", encoding="utf-8").write(F.CC.finalize(name, text))
 
 
 def main():

@@ -1,0 +1,381 @@
+Table of Contents
+Right-click to update the Table of Contents.
+Document Control
+Field
+	Value
+	Document ID
+	CO-SIR-001
+	Version
+	v1.4
+	Country
+	Colombia (CO)
+	Jurisdictions
+	National — DIAN (tax), Ministerio de Salud y Protección Social via licensed operadores de información (PILA), Fondos de Cesantías via operador
+	Tax year
+	2026
+	Currency
+	Colombian Peso (COP)
+	Prepared by
+	Mercans Compliance Regulations Team
+	Status
+	Issued
+	Related deliverables
+	CO-CCG-001 v1.7 (Module 10); the seven Report Specs (CO-DIAN-004 at v1.3; CO-DIAN-001, CO-DIAN-005, CO-PILA-003 and CO-CESANTIAS-006 at v1.2; CO-DIAN-002 and CO-PILA-007, the pensioners PILA flow, at v1.1); CO-DD-001 v1.6; CO Payslip Generator v1.3; DIAN-NE Configuration Runbook (P1–P7)
+	
+
+Version history
+Version
+	Date
+	Author
+	Change
+	v1.0
+	2026-09-04
+	Mercans Compliance Regulations Team
+	Initial issue.
+	v1.1
+	2026-10-21
+	Mercans Compliance Regulations Team
+	Citations of Res. DIAN 000013 de 2021 updated to Res. DIAN 000227 de 2025.
+	v1.2
+	2026-10-30
+	Mercans Compliance Regulations Team
+	Statutory validation against the primary sources: related deliverables and Appendix A updated (CO-CCG-001 v1.5, the seven Report Specs v1.1 including CO-PILA-007, CO-DD-001 v1.4, Payslip Generator v1.2; PILA Technical Annexes 2 v30 and 3 v15 as amended by Resolución MSPS 1529 de 2026); the electronic payroll document as the support for costs and deductions (Res. DIAN 000227 de 2025 art. 1.5.3.2.1); Format 2276 calendar; NE contingency (48 hours from the day after the service is restored); PILA penalties and deadlines; interest on severance savings; severance-fund file formats; NE validation-rule count.
+	v1.3
+	2026-11-02
+	Mercans Compliance Regulations Team
+	Statutory validation, second pass: NE validation-rule count (Anexo Técnico NE v1.0 §6: 519 rules); related deliverables and Appendix A updated (CO-CCG-001 v1.6, Report Specs v1.2, CO-DD-001 v1.5, Payslip Generator v1.3).
+	v1.4
+	2026-11-02
+	Mercans Compliance Regulations Team
+	Pensioners' PILA (CO-PILA-007) added to the integration inventory (0.1), outbound register (2.1) and data disaggregation (2.2); in-scope filings corrected from six to seven; internal working-file names removed from section 0 and Appendix A; related deliverables and Appendix A updated (CO-CCG-001 v1.7, CO-DIAN-004 v1.3, CO-DD-001 v1.6).
+	
+
+0. Purpose, Scope & Audit Compliance
+This register is the single statutory-integration record for Colombia. It states, per authority, whether a machine-to-machine channel exists, how it authenticates, what it carries, how it fails and when it is due. Discovery verdict: HAS_INTEGRATIONS. Of four authorities in the Colombian payroll landscape, one carries a genuine system-to-system channel and three are portal or operator-mediated. Of the seven in-scope filings, one is carried system-to-system and six are manual or operator-mediated; one of them, the pensioners' PILA (CO-PILA-007, Anexo Técnico 3), applies only where the employer pays pensions directly as pension payer.
+0.1 Canonical integration inventory
+Manifest ID
+	System
+	Direction
+	Product mapping req.
+	CO-OUT-NE-001
+	DIAN — Servicio de Validación de Nómina Electrónica
+	OUTBOUND
+	Yes
+	CO-IN-NE-APPRESPONSE
+	DIAN — ApplicationResponse / GetStatus
+	INBOUND
+	Yes
+	CO-OUT-MUISCA-001
+	DIAN — Muisca portal (Form 350)
+	OUTBOUND
+	No — portal, no engine interface
+	CO-OUT-PILA-001
+	PILA via operador de información
+	OUTBOUND
+	Yes — file generation only
+	CO-OUT-PILA-002
+	PILA (pensioners) via operador de información
+	OUTBOUND
+	Yes — file generation only
+	CO-IN-PILA-001
+	PILA — operator settlement return
+	INBOUND
+	No — operator-mediated
+	CO-OUT-CESANTIAS-001
+	Fondos de Cesantías via operador
+	OUTBOUND
+	Yes — file generation only
+	CO-IN-CESANTIAS-CONFIRMATION
+	Fondo de Cesantías — deposit confirmation
+	INBOUND
+	No — operator-mediated
+	
+
+0.2 Direction & product-mapping rule
+Direction is stated from the payroll engine outward: OUTBOUND is a submission by the engine, INBOUND is a response or file the engine must consume. Product mapping is required only where the engine itself builds or reads the payload. A portal round-trip operated by a human is recorded for completeness and marked "No", because there is no interface for the product to map.
+0.3 DERIVED / confidence disclosure
+Every fact in sections 3 to 6 for DIAN-NE is traced to a downloaded artefact: Resolución DIAN 000227 de 2025 (Resolución Única, which compiles Resolución 000013 de 2021), the Anexo Técnico DSPNE v1.0 (269 pp.), the XSD set v1.0.6 and the live WSDL retrieved on 2026-09-04. The three manual authorities are recorded from their published portals and operator documentation; they have no technical specification to cite because none is published. Where the Anexo and the WSDL disagree, the WSDL is treated as authoritative and the conflict is stated in the open (see 3.1).
+1. Inbound Integrations (data pulls from government)
+1.1 Finding: one mandatory inbound leg, and it is a business dependency
+Unlike most jurisdictions, Colombia has an inbound leg that cannot be treated as a receipt. The NE is the supporting document for costs and deductions: Res. DIAN 000227/2025 art. 1.5.3.2.1 (formerly art. 2 of Res. DIAN 000013/2021), ET art. 771-2 inc. 3, ET art. 616-1 par. 6 and DUR art. 1.6.1.4.27; the ApplicationResponse must be retained. A payroll cost never validated by DIAN is not supportable. The ApplicationResponse is therefore evidence the employer must hold, not an acknowledgement it may discard.
+1.2 Inbound register
+ID
+	Authority / System
+	Direction
+	Product mapping req.
+	Status
+	CO-IN-NE-APPRESPONSE
+	DIAN — ApplicationResponse returned by SendNominaSync, plus GetStatus by CUNE
+	INBOUND
+	Yes — the engine must persist and reconcile
+	Mandatory
+	CO-IN-PILA-001
+	Operador de información — settlement return and payment confirmation
+	INBOUND
+	No — retrieved by a human from the operator portal
+	Operational
+	CO-IN-CESANTIAS-CONFIRMATION
+	Fondo de Cesantías — deposit confirmation (records E10, E11, E90, E91, E93)
+	INBOUND
+	No — operator-mediated
+	Operational
+	
+
+2. Outbound Integrations (submissions)
+2.1 Outbound integration register
+ID
+	Authority / System
+	Dir.
+	Product mapping req.
+	Description
+	Related Report Spec
+	Freq.
+	File format / protocol
+	CO-OUT-NE-001
+	DIAN — Servicio de Validación (WcfDianCustomerServices)
+	OUT
+	Yes
+	One signed XML per employee per month, accrual and deduction detail
+	CO-DIAN-001
+	Monthly
+	SOAP 1.2 · base64 ZIP containing exactly one signed XML · UTF-8 · 500 KB
+	CO-OUT-MUISCA-001
+	DIAN — Muisca portal
+	OUT
+	No
+	Form 350 monthly withholding return, prepared and filed in the portal
+	CO-DIAN-002
+	Monthly
+	Portal round-trip — no file interface
+	CO-OUT-PILA-001
+	PILA via licensed operador de información
+	OUT
+	Yes
+	Social security and payroll levies; two fixed-width files
+	CO-PILA-003
+	Monthly
+	Fixed-width TXT (Archivo Tipo 1 + Archivo Tipo 2) uploaded to the operator portal
+	CO-OUT-PILA-002
+	PILA via licensed operador de información, pension payer
+	OUT
+	Yes
+	Contributions withheld from pensions the employer pays directly (pension payer type 01): health, solidarity fund and, where they apply, pension and CCF; one detail record per pensioner and pension type
+	CO-PILA-007
+	Monthly
+	Fixed-width TXT (Archivo Tipo 1 + Archivo Tipo 2, Anexo Técnico 3) uploaded to the operator portal
+	CO-OUT-CESANTIAS-001
+	Fondos de Cesantías via operador
+	OUT
+	Yes
+	Annual severance-savings deposit, one record per employee
+	CO-CESANTIAS-006
+	Annual
+	Fixed-width TXT, or XLS 97-2003, or CSV — operator-dependent
+	
+
+2.2 Data disaggregation — what each channel carries
+Category
+	Reported to
+	Contents
+	Employment income and deductions, per employee
+	DIAN — Nómina Electrónica
+	Basic salary, overtime and surcharges, allowances, bonuses, severance savings and interest, vacation; health, pension, solidarity fund, withholding, garnishments, third-party payments
+	Withholding tax, aggregated
+	DIAN — Form 350
+	Total withholding by concept for the period; no employee detail
+	Social security and payroll levies, per employee
+	PILA (operator)
+	IBC per subsystem, contribution days, change events, health, pension, solidarity fund, occupational risk, CCF, SENA, ICBF
+	Pensioners' contributions, per pensioner
+	PILA pensioners (operator)
+	Pension type, mesada, contribution days, health, solidarity fund and, where they apply, pension and CCF; no occupational risk, SENA or ICBF
+	Severance savings, per employee
+	Fondo de Cesantías (operator)
+	Annual liquidation at 31 December, fund selection, employee contact data, contract start date
+	Annual employee certificate
+	Not transmitted
+	Form 220 is issued to the employee and retained by the employer; it is not filed with DIAN
+	Third-party information return
+	DIAN — exogenous information service
+	Format 2276: income and withholding per beneficiary for the tax year
+	
+
+3. Authentication Requirements
+3.1 DIAN — Nómina Electrónica (the specification conflict, resolved)
+The two published artefacts do not agree, and the choice made here is deliberate. The Anexo Técnico (§9.3, §9.4) describes mutual TLS with client certificates. The live WSDL declares the opposite: sp:HttpsToken RequireClientCertificate="false". Server-authenticated TLS 1.2 is therefore used for transport, and the client identity is carried at message level, not transport level. Where the two disagree the WSDL governs, because it is the contract the service actually enforces.
+Layer
+	Setting
+	Transport
+	HTTPS, TLS 1.2, server-authenticated. No client certificate at transport level.
+	Message security
+	WS-Security 1.0 with the X.509 Certificate Token Profile 1.1; algorithm suite Basic256Sha256Rsa15; strict layout; timestamp included.
+	Addressing
+	WS-Addressing required (wsaw:UsingAddressing). The To header carries the environment endpoint and must be signed.
+	Document signature
+	XAdES-EPES enveloped signature over the XML, with a signature policy identifier. SHA-1 digests are rejected.
+	Certificate
+	Digital certificate from a certifying body accredited under the ONAC regime referenced by the signature policy.
+	Onboarding gate
+	Habilitación in the DIAN portal: register the software or a proveedor tecnológico, obtain SoftwareID and secret PIN, pass the test set. Global rule 92 rejects every document from a non-enabled issuer.
+	Third-party transmission
+	Where Mercans generates or transmits for a client, Res. DIAN 000227 de 2025 art. 1.5.3.8.1 requires the third party to be enabled by DIAN, that capacity registered in the RUT, and both parties to retain the mandate document.
+	
+
+3.2 DIAN — Muisca portal (Form 350)
+Browser session with the Instrumento de Firma Electrónica (IFE). No machine-to-machine credential exists and none is published. The return is prepared and filed in the portal; the payroll engine supplies the figures, not the transmission.
+3.3 PILA — licensed operador de información
+Credentials are issued by the operator, not by the government: each operator (Aportes en Línea, Enlace Operativo, MiPlanilla, Asopagos, SOI and others) runs its own registration and its own portal login. The employer chooses the operator; the credential set, session model and any file-validation service therefore vary per operator and must be confirmed per client before go-live. No authority-published authentication exists.
+3.4 Fondos de Cesantías — operator portal
+Portal login at the chosen operator, with the fund selected per employee. As with PILA, there is no authority-published credential model. One operator, ARUS / Enlace Operativo, markets an "APIS PILA" developer portal; fetched on 2026-09-04 it returned only a welcome shell, with no API catalogue, no endpoints and no authentication description. It is a private commercial offering, not a government channel, and is not relied on here.
+4. Technical Specifications
+Channel
+	Protocol / method
+	File format & encoding
+	Schema / validation
+	Limits & disclosure
+	DIAN — Nómina Electrónica
+	SOAP 1.2, document/literal, WS-Addressing. Operations SendNominaSync (transmit) and GetStatus (query by CUNE). Production https://vpfe.dian.gov.co/WcfDianCustomerServices.svc; habilitación https://vpfe-hab.dian.gov.co/WcfDianCustomerServices.svc
+	base64 of a ZIP containing exactly one signed XML. UTF-8 only.
+	XSD v1.0.6 (NominaIndividualElectronica and NominaIndividualDeAjusteElectronica). Anexo Técnico NE v1.0 §6 lists 519 validation rules: 437 for the payroll documents (NominaIndividual 198 = 189 R + 9 N; NominaIndividualDeAjuste 239 = 219 R + 20 N), 56 for the digital signature (54 R; 2 without a flag), 23 for the connection (21 R + 2 N) and 3 general rules (R). R = rejection, N = notification.
+	500 KB per container. Transmitted one by one per beneficiary — there is no batch operation, so volume equals headcount per month. The service exposes 15 operations; only the two above are in scope and the other 13 are e-invoicing only.
+	DIAN — Muisca (Form 350)
+	Portal round-trip in a browser
+	Not applicable — the return is keyed in the portal
+	Portal-side validation only
+	No file interface. The engine produces the figures; a human files them.
+	PILA — operador de información
+	File upload to the operator portal
+	Two fixed-width TXT files: Archivo Tipo 1 (contributor) and Archivo Tipo 2 (Registro Tipo 1 header, Registro Tipo 2 settlement)
+	The layout is the government-published PILA structure; each operator adds its own pre-validation
+	No authority-published API. The wrapper around the two files and the extra validations are operator-specific and must be confirmed per client.
+	Fondos de Cesantías — operador
+	File upload to the operator portal
+	Severance funds: the file format (TXT 258 positions / XLS / CSV) is each severance fund's own rule; no government schema is published. The annual deposit does not go through the PILA (AT2 v30 has no severance record); Ley 2466/2025 art. 64 par. 1 tasks the Ministry of Health with a PILA rule only for the optional monthly advance deposit, not yet reflected in AT2 v30.
+	Operator validation only
+	Operator-dependent. No government schema is published for the annual deposit file.
+	
+
+5. Error Handling
+5.1 Validation & rejection
+DIAN applies 437 rules to the electronic payroll document: 408 are rejecting (R) and 29 are notifying (N). An N rule does not stop validation; the document is accepted and the warning is logged. An R rule rejects the document, and nothing is filed until it is resolved. Failures fall into seven classes, and they need different owners:
+Class
+	Raised by
+	Typical cause
+	Remediation
+	Container
+	DIAN, before schema
+	Empty or corrupt ZIP, more than one entry, over 500 KB, not UTF-8
+	Fix packaging. No consecutive is consumed if the rejection precedes registration — confirm with GetStatus.
+	Signature
+	DIAN
+	Missing ds:Signature, SHA-1 digest, wrong signature-policy hash, wrong ClaimedRole, expired certificate
+	Fix the signing configuration. This is the highest-likelihood early failure: no signed reference instance is published.
+	Schema
+	DIAN
+	Element order, missing required attribute, wrong datatype
+	Fix the mapper. XSD sequence order is strict — validate locally against v1.0.6 before transmitting.
+	Business (R)
+	DIAN, 408 rules (payroll documents)
+	Invalid code-table value, totals not reconciling, negative value, date inconsistency
+	Fix the source data or the mapping and resubmit under a new consecutive.
+	Business (N)
+	DIAN, 29 rules (payroll documents)
+	Data-quality warnings
+	The document validates. Log and trend.
+	Global rule 90
+	DIAN
+	A document number reused for the same worker
+	Allocate a new consecutive. A number may be transmitted only once per worker.
+	Global rule 92
+	DIAN
+	Issuer not enabled on the platform
+	Habilitación is incomplete. This blocks all traffic, not one document.
+	
+
+5.2 Retry & idempotency
+There is no idempotent retry. Global rule 90 makes the document number single-use per worker, so a blind resend of a registered document is rejected as already processed. The safe sequence is to query GetStatus by CUNE first: if the document registered, do not resend; if it did not, resubmit under a new consecutive. The CUNE, returned as XmlDocumentKey, is the only reliable identity oracle.
+5.3 Correction & reconciliation
+Corrections are made with a nota de ajuste (NominaIndividualDeAjusteElectronica), not by editing the original. The engine must persist the CUNE, the ApplicationResponse and the validation status per employee per period, and reconcile them before the period is closed. ApplicationResponse code 02 is "documento validado por la DIAN"; code 04 is "documento rechazado".
+5.4 Penalties on error / late settlement
+Authority
+	Charge
+	Basis
+	DIAN — Nómina Electrónica
+	A payroll cost not supported by a validated document is not deductible in the income-tax return; the penalty regime for irregularities in supporting documents also applies.
+	NE (not deductible; Res. 227/2025 art. 1.5.3.2.1; ET 771-2, ET 616-1 and 651)
+	DIAN — Form 350
+	Late filing, correction and late-payment interest under the general tax procedure.
+	ET arts. 641, 634
+	PILA
+	Late or under-contribution attracts default interest and UGPP enforcement.
+	PILA (late-payment interest at the income-tax default rate, Ley 100/1993 art. 23; UGPP penalties for omission, late filing and inaccuracy, Ley 1607/2012 art. 179 as modified by Ley 1819/2016 art. 314, num. 3 as modified by Ley 2010/2019 art. 121)
+	Fondos de Cesantías
+	One day of salary for each day of delay, per employee, uncapped.
+	Ley 50 de 1990 art. 99 num. 3
+	
+
+6. SLA and Deadlines
+6.1 Filing / remittance deadlines
+Integration
+	Report Spec
+	Deadline
+	Basis
+	DIAN — Nómina Electrónica
+	CO-DIAN-001
+	Within the first ten days of the month following the payment or credit in account. One document per employee per month irrespective of pay frequency.
+	Res. DIAN 000227 de 2025 arts. 1.5.3.2.2 and 1.5.3.4.1.1
+	DIAN — Form 350
+	CO-DIAN-002
+	7th to 16th business day of the month following the period, by the last digit of the employer NIT.
+	DUR 1625 de 2016 art. 1.6.1.13.2.33
+	PILA
+	CO-PILA-003
+	PILA: from the 2nd to the 16th business day, by the last two digits of the NIT / identity document (00–07 = 2nd … 94–99 = 16th), Decreto 780/2016 art. 3.2.2.1 (as substituted by Decreto 1990/2016 art. 2).
+	Decreto 780 de 2016 art. 3.2.2.1
+	Fondos de Cesantías
+	CO-CESANTIAS-006
+	Before 15 February of the year following the accrual year.
+	Ley 50 de 1990 art. 99 num. 3
+	DIAN — Format 2276
+	CO-DIAN-005
+	Format 2276: May to June of the following year, by NIT (Res. 227/2025 art. 1.3.9.1.3): by the last digit of the NIT for large taxpayers (grandes contribuyentes) and by the last two digits for legal entities (personas jurídicas); exact dates are set in the annual DIAN due-date resolution.
+	Res. DIAN 000227 de 2025 art. 1.3.9.1.3
+	DIAN — Form 220
+	CO-DIAN-004
+	Issued to the employee by the last business day of March following the fiscal year. Not filed with DIAN.
+	DUR 1625 de 2016 art. 1.6.1.13.2.40
+	
+
+6.2 Related employer/employee year-end dates (context)
+Item
+	Date
+	Note
+	Interest on severance savings paid to the employee
+	By 31 January
+	Interest on severance savings (12% a year): paid to the employee in January, or on termination / within the month after a partial severance settlement (Ley 52/1975 art. 1; Decreto 1072/2015 art. 2.2.1.3.4).
+	Severance savings deposited to the fund
+	Before 15 February
+	Late deposit costs one day of salary per day of delay, per employee, uncapped
+	Form 220 certificate issued to the employee
+	Last business day of March
+	Issued and retained by the employer; never filed with DIAN
+	
+
+6.3 Acknowledgement & response-time rules
+The DianResponse carrying the validation outcome returns on the same call, and there is no asynchronous queue to poll for the transmit leg. GetStatus exists for reconciliation, not for waiting. DIAN publishes no response-time SLA for either operation.
+SendNominaSync is synchronous; no published SLA; contingency: transmit within 48 hours counted from the day after the service is restored (Res. 227/2025 art. 1.5.3.5.1.5); keep the supporting documents (soportes) of the payroll document. The engine must therefore hold unsent documents and drain them on recovery, rather than failing the period.
+The three manual authorities publish no acknowledgement SLA. The operator portals return a settlement or deposit confirmation in-session; the timing is the operator's, not the government's.
+Appendix A. Sources
+Scope decision of 3 September 2026 (internal scope record): 4 authorities; 7 in-scope filings (the six original filings plus the pensioners' PILA, CO-PILA-007, added on 21 October 2026), 7 descoped.
+CCG Module 10 (CO-CCG-001 v1.7) — integration findings and the manual-posture risk note.
+7 Report Specs (CO-DIAN-004 v1.3; CO-DIAN-002 and CO-PILA-007 v1.1; the others v1.2; including CO-PILA-007, pensioners PILA flow): CO-DIAN-001-NominaElectronica-Spec.xlsx, CO-DIAN-002-Formulario350-Spec.xlsx, CO-DIAN-004-Formulario220-Spec.xlsx, CO-DIAN-005-Formato2276-Spec.xlsx, CO-PILA-003-AportesSeguridadSocial-Spec.xlsx, CO-CESANTIAS-006-ConsignacionAnual-Spec.xlsx, CO-PILA-007-AportesPensionados-Spec.xlsx.
+Configuration Runbook (03-statutory-integrations/DIAN-NE/): P1 authority and channel profile, P2 connectivity and security, P3 outbound payload, P4 inbound response handling, P5 validation and error handling, P6 test and habilitación, P7 operations; plus INTERLINKAGES.md and effort-estimates.md.
+DIAN — Resolución 000227 de 23 September 2025 (Resolución Única), arts. 1.5.3.1.1 to 1.5.3.9.8, which compiles Resolución 000013 de 2021: the document; obligated parties, periodicity, deadline, habilitación, adjustment notes, retention. Resolución 000013 de 2021 downloaded 2026-09-04.
+DIAN — Anexo Técnico DSPNE Versión 1.0 (269 pp.): field tables, code tables, CUNE, signature policy, web service, 519 validation rules. Downloaded 2026-09-04.
+DIAN — XSD set v1.0.6 (NominaIndividualElectronica, NominaIndividualDeAjusteElectronica) and Caja de Herramientas V1.0 sample instances. Downloaded 2026-09-04.
+DIAN — WcfDianCustomerServices WSDL, production and habilitación: retrieved live 2026-09-04 (HTTP 200, ~61.7 KB, byte-identical apart from the hostname). Authoritative over the Anexo where the two disagree.
+PILA — Resolución 2388 de 2016, Anexo Técnico 2 (v30) and Anexo Técnico 3 (v15), as amended by Resolución MSPS 1529 de 2026: file layout for Archivo Tipo 1 and Archivo Tipo 2.
+Fondos de Cesantías — operator documentation (Simple S.A. severance-savings user manual): TXT, XLS and CSV layouts for the annual deposit.
+ARUS / Enlace Operativo developer portal (suaporte.com.co/portal-apis/): fetched 2026-09-04 and returned only a welcome shell — no API catalogue, no endpoints, no authentication description. Recorded as not usable; it is a private commercial offering, not a government channel.
+Integration discovery record of 4 September 2026 (internal working file behind this register).
+CO-SIR-001 v1.4 | Mercans Compliance Regulations Team | 2026

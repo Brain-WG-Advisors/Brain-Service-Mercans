@@ -37,11 +37,16 @@ for st, name in [("ak", "Alaska"), ("nh", "New Hampshire"), ("nv", "Nevada"), ("
     f0 = FACTS[k][0]
     eff = f"from {f0['effective_from']}" + (f" to {f0['effective_to']}" if f0.get("effective_to") else "")
     A(f"| {name} | none levied | {eff} | {K(k)} |")
-A(f"| Florida | {UNR('fl.no_wage_tax', 'the facts carry no register row stating the absence of a Florida wage income tax')} | | |")
-A(f"| Wyoming | {UNR('wy.no_wage_tax', 'the facts carry no register row stating the absence of a Wyoming wage income tax')} | | |")
+# round 2: the m01 open items fl/wy.no_wage_tax are answered by the annex facts fl.pit.exists / wy.pit.exists
+for name, k in [("Florida", "fl.pit.exists"), ("Wyoming", "wy.pit.exists")]:
+    f0 = FACTS[k][0]
+    assert f0["value"] is False
+    eff = f"from {f0['effective_from']}" + (f" to {f0['effective_to']}" if f0.get("effective_to") else "")
+    A(f"| {name} | none levied | {eff} | {K(k)} |")
 A("")
-A(f"Washington: the no-wage-tax fact is dated to {D('wa.no_wage_tax', which='to')}. The facts record an enacted tax on "
-  f"individuals with very high adjusted gross income from 2028; it operates at assessment and is not modelled for 2026 payroll {R('wa.no_wage_tax')}.")
+A(f"Washington: no wage income tax to {D('wa.no_wage_tax', which='to')} {R('wa.no_wage_tax')}. An enacted tax of "
+  f"{T('wa.pit.high_income_tax.rate')}% on individuals with adjusted gross income above USD {T('wa.pit.high_income_tax.agi_threshold')} "
+  f"applies from {D('wa.pit.high_income_tax.rate')}; it operates at assessment and is not modelled for payroll {R('wa.pit.high_income_tax.rate')}.")
 A("")
 A("**Live federal change.** Two Mobile Workforce bills are drafts and must not be modelled: "
   f"{Q('multi.mobile_workforce_bill.senate')} {R('multi.mobile_workforce_bill.senate')}; "
@@ -51,13 +56,11 @@ A("**Calculation oracle.** "
   f"{Q('fed.oracle.source')} {R('fed.oracle.source')}. "
   f"{Q('fed.oracle.estimator_not_oracle')} {R('fed.oracle.estimator_not_oracle')}. State oracles are listed in Module 12.")
 A("")
-A("**Scope of this guide.** Private-sector employers and their common-law employees. Independent contractors "
-  "and Form 1099-NEC reporting are out of scope (owner instruction recorded in `00-official-sources/MANDATE.md`, "
-  "scope block). All special employee populations are in scope at the federal layer (owner decision US-OWN-005, MANDATE "
-  "question US-MQ-12); their treatment is in Module 11.")
+A("**Scope of this guide.** Private-sector employers and their common-law employees. " + CC.CONTRACTOR_SENTENCE +
+  " " + CC.POPULATIONS_SENTENCE + " The federal treatment of each population is in Module 11.")  # SCOPE r1 finding 3
 
 A(H(3, "Tier verdict (build manifest)"))
-A("Repeated verbatim from `_pipeline/build-manifest.json` → `tier`.")
+A("Repeated verbatim from the build manifest (tier classification).")
 A("")
 A(f"**Overall:** {MAN('tier', 'overall')}")
 A("")
@@ -97,9 +100,9 @@ A(f"English. {Q('fed.language.official')} {R('fed.language.official')}.")
 A("")
 A("| Document | Language rule | Basis |")
 A("|---|---|---|")
-A("| Employee pay statement | English | Mandate US-MQ-03, owner decision US-OWN-006 (`build-manifest.json` → `languages.payslip_rule`) |")
-A("| Authority-facing filings (IRS, SSA, State agencies) | English | Mandate US-MQ-03 (`languages.authority_facing_rule`) |")
-A("| Notices and posters in certain States | English plus Spanish or the employee's primary language where a State statute requires it | Mandate US-MQ-03 seams (`languages.seams`); not a payroll-calculation item |")
+A("| Employee pay statement | English | Owner decision US-OWN-006 (payslip language rule) |")
+A("| Authority-facing filings (IRS, SSA, State agencies) | English | Owner decision US-OWN-006 (authority-facing language rule) |")
+A("| Notices and posters in certain States | English plus Spanish or the employee's primary language where a State statute requires it | Owner decision US-OWN-006 (State notice seams); not a payroll-calculation item |")
 A("")
 A("No source read in the mandate census requires the pay statement itself in a language other than English; "
   "bilingual documents are permitted (`languages._bilingual_documents_permitted`).")
@@ -188,35 +191,48 @@ A(GAP("practice.payroll_calendar.common_dates",
 # ---------------------------------------------------------------- 1.3
 A(H(2, "1.3 Extra Pay Period Handling"))
 A(H(3, "Describe the statutory handling and calculation adjustments required for fiscal years containing extra pay periods (e.g., 53 weekly pays)."))
+# round 2: RQ-553 closed by agent 2 (fed.fit.extra_pay_period.rule, US-FEDQ1-007)
 A("The federal method annualises each payment with the number of pay periods of its frequency "
-  f"({Q('fed.fit.pay_periods_per_year')}; {R('fed.fit.pay_periods_per_year')}). The facts do not state whether a "
-  "calendar year with 53 weekly paydays (or 27 biweekly paydays) changes that divisor.")
+  f"({Q('fed.fit.pay_periods_per_year')}; {R('fed.fit.pay_periods_per_year')}). A calendar year with 53 weekly "
+  "paydays (or 27 biweekly paydays) does not change that divisor:")
 A("")
-A(GAP("fed.fit.extra_pay_period.rule",
-      "no fact states the Pub. 15-T treatment of a year with 53 weekly or 27 biweekly paydays",
-      "Does IRS Pub. 15-T (2026) or Pub. 15 say whether an employer with 53 weekly (or 27 biweekly) paydays in a calendar year keeps 52 (26) as the number of pay periods in Worksheet 1A, line 1b, or may adjust it?",
-      "CCG m01 §1.3 extra-pay-period rule cannot be stated; WTC/engine cannot decide the annualisation divisor",
-      "income_tax", tier="A.2", shape="rule text with Pub. 15-T page"))
+A(f"- Rule: {Q('fed.fit.extra_pay_period.rule')} {R('fed.fit.extra_pay_period.rule')}.")
+A("- Configuration: keep the pay-period count of the frequency (no 53 / 27 divisor); the extra payday is one more "
+  "ordinary payroll period for income-tax withholding.")
 A(H(3, "Detail the impact on annualized tax calculations and social security contributions."))
 A("Social insurance is unaffected in method: the OASDI, FUTA and SUI bases are annual amounts applied to wages "
   f"**paid** in the calendar year ({COV('accrual_vs_payment')}). An extra payday falls in the year in which it is paid "
   f"and counts toward that year's bases (OASDI USD {T('fed.fica.oasdi.wage_base', on='2026-06-30')} for 2026; "
-  f"FUTA USD {T('fed.futa.wage_base')} per employer). For income tax see the research gap above.")
+  f"FUTA USD {T('fed.futa.wage_base')} per employer). Income tax: each payday, including the extra one, is withheld "
+  f"as a regular payroll period with the normal annualisation {R('fed.fit.extra_pay_period.rule')}; the year-end "
+  "assessment on the employee's return settles any difference.")
 A(H(3, "If optional adjustment methods are permitted, provide a step-by-step guide."))
-A("Not determinable from the facts: depends on `fed.fit.extra_pay_period.rule` (research gap above).")
+A("No optional federal adjustment method exists: the IRS publications provide none for an extra payday "
+  f"{R('fed.fit.extra_pay_period.rule')}. Steps: (1) keep the frequency's pay-period count in Worksheet 1A; "
+  "(2) withhold the extra payday as an ordinary period; (3) apply FICA and FUTA to the wages paid, against the annual "
+  "bases of the year of payment. State methods follow the State annex.")
 
 # ---------------------------------------------------------------- 1.4
 A(H(2, "1.4 Holiday Calendar"))
 A(H(3, "What are the official public holidays?"))
-A(GAP("fed.holidays.legal_public_2026",
-      "the 2026 dates of the federal legal public holidays (5 U.S.C. 6103) are not in the facts",
-      "What are the 2026 and 2027 dates of the federal legal public holidays under 5 U.S.C. 6103, and which of them are District of Columbia legal holidays that are federal tax deposit holidays?",
-      "CCG m01 §1.4 date table empty; federal deposit due-date roll-forward cannot be configured",
-      "labour_code", tier="A.1", shape="date table: holiday name, 2026 date, 2027 date"))
+# round 2: RQ-554 closed by agent 2 (fed.holiday.<name>.observed_date 2026 / 2027, fed.holidays.legal_public)
+A(f"Federal legal public holidays: {Q('fed.holidays.legal_public')} {R('fed.holidays.legal_public')}. Federal "
+  f"filing, furnishing and deposit dates roll forward under this rule: {Q('fed.deposit.due_date.non_business_day_rule')} "
+  f"{R('fed.deposit.due_date.non_business_day_rule')}.")
 A("")
-A("| Holiday | 2026 date | Deposit holiday |")
-A("|---|---|---|")
-A("| ⚠️ RESEARCH-GAP (non-blocking): see request `fed.holidays.legal_public_2026` | | |")
+A("| Holiday | 2026 observed date | 2027 observed date | Federal deposit / filing holiday |")
+A("|---|---|---|---|")
+for hk, lab in [("new_years_day", "New Year's Day"), ("mlk_birthday", "Birthday of Martin Luther King, Jr."),
+                ("washingtons_birthday", "Washington's Birthday"), ("memorial_day", "Memorial Day"),
+                ("juneteenth", "Juneteenth National Independence Day"), ("independence_day", "Independence Day"),
+                ("labor_day", "Labor Day"), ("columbus_day", "Columbus Day"), ("veterans_day", "Veterans Day"),
+                ("thanksgiving_day", "Thanksgiving Day"), ("christmas_day", "Christmas Day")]:
+    k = f"fed.holiday.{hk}.observed_date"
+    A(f"| {lab} | {T(k, on='2026-06-30')} {R(k, on='2026-06-30')} | {T(k, on='2027-06-30')} {R(k, on='2027-06-30')} | "
+      "2026: yes (Pub. 15 2026 list); 2027: IRS list not yet published |")
+k = "fed.holiday.dc_emancipation_day.observed_date"
+A(f"| District of Columbia Emancipation Day (not a 5 U.S.C. 6103 holiday) | {T(k)} {R(k)} | not in the research | "
+  "2026: yes (District of Columbia legal holiday) |")
 A(H(3, "Are there any regional, state-specific, or company-specific holidays?"))
 A(GAP("multi.holidays.state_2026",
       "State legal holidays (which affect State deposit due dates and some State payday rules) are not in the facts",

@@ -150,7 +150,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - Delinquency surcharge of 1.0% if contributions for the prior fiscal year are unpaid.
 - **New employer rate:** no single figure. The rate is the two-year average benefit ratio of the employer's industry. New out-of-state contractors get the maximum 7.1% [US-UTSUI-001].
 - **Employee contribution:** none [US-UTP52-005].
-- **SDI, TDI and PFML:** none. Utah is not among the 13 states + DC with PFML programmes [US-UTP52-006].
+- **SDI, TDI and PFML:** none. The USTC tax list carries Employer Withholding Tax as the only wage-based employer tax [A.2, US-UTB5-003; fact `ut.sdi_pfml.exists`].
 - **Other employer levies:** the social-cost component and the delinquency surcharge only [US-UTP7-001/-002, US-UTP9V-001]. Taken from the P7/P9 rows, not redone.
 - **Wage-base credit for wages reported to another state (MULTI-OQ-2):** not proven. The Excess Wages page shows a single-state example only. The taxable-wage definition in Utah Code 35A-4-303 is not archived. See Open questions.
 
@@ -163,7 +163,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Retention:**
   - UI wage records: 4 calendar years [US-UTS5-004].
   - Withholding records: at least 4 years from the due date of the return [Pub 14, US-UTPIT-003].
-- **Language:** no Utah language rule [US-UTL-001].
+- **Language:** no Utah language requirement stated in the required-postings list [US-UTP9L-001]; the statute check (34-28-3) was not read (gated row US-UTL-001), so the statutory absence is not a fact.
 
 ## 5 — reporting_instruments
 - **Withholding registration:** through TAP (TC-69). Having Utah employees without a withholding licence is a class B misdemeanor [Pub 14].
@@ -190,7 +190,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 - **Paid sick leave:** Utah has no private-sector paid sick leave statute. None was found in Title 34 rules R610-1 or R610-3.
   - R610-3-4(B)(1) treats vacation, holiday, sick leave, PTO, severance and bonuses as recoverable wages only "if due under an agreement with the employer or under a policy of the employer" [US-UTS5-012, A.1].
   - Confidence medium-high: this is a negative finding, not a full-title search.
-- **PFML:** none [US-UTP52-006].
+- **PFML:** none [US-UTB5-003; fact `ut.sdi_pfml.exists`].
 - **Other paid leave with pay impact:** none found. Jury duty and voting leave were not checked (budget).
 
 ## 7 — termination

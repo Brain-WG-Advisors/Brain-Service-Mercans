@@ -131,6 +131,10 @@ Facts added:
 
 Open questions narrowed / added: `ar.wh.formula.switch_date` (lines rewritten in the block below).
 
+## QA round 3 research additions (2026-11-02, agent 2)
+
+`ar.report.sui.efile_threshold_employees` (250) was removed from the facts: neither the local DWS Employer Handbook (US-ARP9V-001) nor any other local Arkansas file carries the figure. It is now unresolved (gaps RQ-590).
+
 ## Open questions
 Mirrors `unresolved[]` in the facts file (same keys).
 
@@ -142,3 +146,4 @@ Mirrors `unresolved[]` in the facts file (same keys).
 - `ar.live.bulletin_sweep` (non-blocking) — 2025 Regular and 2026 Fiscal Session acts not swept (arkleg TLS failure). **Would close it:** arkleg Acts index via the orchestrator browser pass.
 - `ar.garn.creditor.exempt_weekly` (non-blocking) — 16-66-208 creditor exemption (first 25/week of net wages of laborers and mechanics) rests only on tier-B MANUAL row US-ARS5-012. **Would close it:** Official Ark. Code 16-66-208 text.
 - `ar.wh.formula.switch_date` (blocking) — DFA documents read do not state the date employers had to switch to the 3.7% formula/tables in 2026 or whether a catch-up was required; only a tier-B lead says 2026-05-29. **Would close it:** DFA withholding release/notice of May 2026 announcing the 3.7% formula start date (the Act itself does not state it). *(Synthesis D 2026-11-02)*
+- `ar.report.sui.efile_threshold_employees` — the 250-employee electronic-filing threshold is not in any local Arkansas file; closes with Ark. Code Ann. 11-10-215 or the DWS employer reporting page (gaps RQ-590).

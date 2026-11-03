@@ -36,7 +36,7 @@
 | 2026 | {{ok.sui.wage_base@2026-01-01}} USD | {{ok.sui.employer.rate.min@2026-01-01}} % to {{ok.sui.employer.rate.max@2026-01-01}} % | {{ok.sui.new_employer.rate}} % | US-OK-002 |
 | 2027 | {{ok.sui.wage_base@2027-01-01}} USD | {{ok.sui.employer.rate.min@2027-01-01}} % to {{ok.sui.employer.rate.max@2027-01-01}} % | same rate, 2026-2027 | US-OKS5-018 |
 
-- **Wage-base mechanism (40 O.S. 1-201(48), 1-223) [US-OKS5-005]:** a percentage of the state average annual wage of the second preceding year, rounded to the nearest hundred dollars; the 2027 caliber is {{ok.ui.average_annual_wage.caliber}} USD [US-OKS5-018]. The 2026 and 2025 bases reproduce only with the pre-amendment percentages (open point below).
+- **Wage-base mechanism (40 O.S. 1-201(48), 1-223) [US-OKS5-005]:** a percentage of the state average annual wage of the second preceding year, rounded to the nearest hundred dollars; the 2027 caliber is {{ok.ui.average_annual_wage.caliber}} USD [US-OKS5-018]. The 2026 and 2025 bases reproduce only with the percentages in force before 2025-11-01 (open point below).
 - **Wages reported to another state count toward the base:** {{ok.sui.wage_base.other_state_credit}} [US-OKS5-005].
 - **UI wages (40 O.S. 1-218) [US-OKS5-006]:** elective retirement deferrals included ({{ok.sui.wages.401k_included}}); cafeteria-plan payments included: {{ok.sui.wages.section125_included}}. UI therefore departs from income tax for deferrals.
 - **No SDI, TDI, PFML, LTC, transit or workforce levy** [US-OKP9V-001, US-OKP9V-002, US-OKS5-026].
@@ -79,7 +79,7 @@
 - **Minimum wage:** follows the federal rate only [US-OKS5-001].
 - **SUI wage base and rate range:** yearly, published by OESC (Section 3) [US-OKS5-005, US-OKS5-018].
 - **PIT brackets, standard deduction, allowance:** not indexed; rates fall only through the revenue trigger (earliest 2028-01-01) [US-OKS5-009, US-OKS5-011, US-OKS5-025].
-- **Withholding tables:** reissued when the law changes (OW-2) [US-OK-001].
+- **Withholding tables:** republished when the law changes (OW-2) [US-OK-001].
 
 ## @data
 - **40 O.S. 173.1 (private employers) [US-OKS5-008]:** no public display of SSNs; no SSN on access cards; no unsecured transmission; no SSN as sole login; no SSN on materials mailed to the employee unless law requires it ({{ok.data.ssn.mailed_materials_prohibited}}). A mailed paper payslip falls under this rule: mask the SSN.

@@ -16,6 +16,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", ".."))
 RES = os.path.join(BASE, "_research")
 OUT = os.path.join(BASE, "01-ccg", "annexes")
+sys.path.insert(0, os.path.join(BASE, "01-ccg", "_build", "common"))
+import ccg_common as CC  # noqa: E402  round 2 (QA r1): finalize, annex skeleton, [[GAP:]] tags
 RQ_FILE = os.path.join(RES, "CCG-research-request.json")
 RQMAP = os.path.join(HERE, "rq-map.json")
 TODAY = "2026-11-02"
@@ -59,7 +61,7 @@ DOMAINS = [
 ]
 SEG2DOM = {
     "labour": "labour", "minwage": "labour", "overtime": "labour", "exempt": "labour", "pay_frequency": "labour",
-    "payment": "labour", "local_mandates": "labour",
+    "payment": "labour", "local_mandates": "labour", "local": "income_tax",  # r2: xx.local.* = local wage taxes
     "wh": "income_tax", "pit": "income_tax", "reciprocity": "income_tax", "local_wage_tax": "income_tax",
     "sui": "social", "ui": "social", "pfl": "social", "dbl": "social", "pfml": "social", "tdi": "social",
     "ui_tdi": "social", "sdi_pfml": "social", "stt": "social", "transit": "social", "wbf": "social",
@@ -76,6 +78,63 @@ TITLE = {d[0]: d[1] for d in DOMAINS}
 
 DROPPED = []
 _FORMS = None
+# F44 final (QA r3b minor UT): oracle scenario inputs (frequency, status, wages) are inputs, not statutory values;
+# keep the note even when a number collides with an unrelated fact value (175 = AL married reduction per step).
+KEEP_NOTE_KEYS = {"ut.pit.oracle.example_6.withholding"}
+# QA r3c finding 2: the new scenario-input fact ut.pit.oracle.example_6.wages carries a note whose source sentence
+# is a local file path (dropped by sanitize) and whose remainder names a key; the cell states what the value is.
+NOTE_OVERRIDE = {"ut.pit.oracle.example_6.wages":
+                 "Utah taxable wages of the daily, married worked example (input of the withholding row below)."}
+
+
+# QA r3d finding 4: the bare HTTP status pattern was '\b40[34]\b', which also matched statute section numbers
+# ('T.C.A. 50-7-402 and 50-7-403') and dropped the quoted clause of the TN note. It now matches only a
+# status code that stands alone (not inside a hyphenated / dotted section number). INTERNAL_STRICT holds the
+# phrases that are pipeline wording in any context; a clause carrying a legal citation or quoted statute
+# text (CC.LEGAL_CITE_RX) is dropped only for those, never for the looser words of INTERNAL.
+INTERNAL = re.compile(r"webfetch|summari[sz]er|verification is weak|wayback|\bMANUAL\b|tier[- ]B\b|synthesis|stage[- ]?5|\bpython\b|\bOQ-|\bQ\d\b|\bcurl\b|HTTP \d{3}|\(40[34]\)|(?<![-.§\w])40[34](?![-\w(]|\.\w)|research pack|register row|\bpartial\b|superseded|G-DERIVE|legacy|browser pass|chrome pass|\bVPN\b|US-MQ-|derived arithmetically|internal conflict|\bpp\.\s?\d|\bFAQ\s?\d", re.I)
+INTERNAL_STRICT = re.compile(r"webfetch|summari[sz]er|wayback|\bMANUAL\b|tier[- ]B\b|synthesis|stage[- ]?5|\bpython\b|\bOQ-|\bcurl\b|HTTP \d{3}|research pack|register row|G-DERIVE|browser pass|chrome pass|\bVPN\b|US-MQ-", re.I)
+
+
+def tag_scenario_inputs(f, note, facts):
+    """QA r3c finding 2: a kept scenario note prints its inputs (UT example 6 'daily married 175'); a number that is
+    the value of a sibling fact of the same scenario (same key prefix, e.g. ut.pit.oracle.example_6.wages) is
+    written as that fact's tag, so no fact value stays untagged (C46)."""
+    prefix = f["key"].rsplit(".", 1)[0] + "."
+    for sib in facts:
+        if sib["key"] == f["key"] or not sib["key"].startswith(prefix):
+            continue
+        v = sib.get("value")
+        if isinstance(v, bool) or not isinstance(v, (int, float)):
+            continue
+        sv = fmt_value(sib)
+        parts = re.split(r"(\[\[(?:FACT|GAP):[^\]]*\]\])", note)
+        for i in range(0, len(parts), 2):
+            parts[i] = re.sub(rf"(?<![\d.,]){re.escape(sv)}(?![\d.,]*\d)", tag(sib), parts[i])
+        note = "".join(parts)
+    return note
+
+
+def sanitize(text, fallback=""):
+    """Drop clauses that carry pipeline-internal wording (C47: no history or process in the deliverable)."""
+    if not text:
+        return text
+    parts = re.split(r"(?<=[;.])\s+", text)
+    keep = [p for p in parts if not (INTERNAL_STRICT if CC.LEGAL_CITE_RX.search(p) else INTERNAL).search(p)]
+    out = " ".join(keep).strip().rstrip(";").strip()
+    return out if out else fallback
+
+
+_REG = None
+
+
+def _register():
+    global _REG
+    if _REG is None:
+        import csv
+        with open(os.path.join(BASE, "00-official-sources", "legal-basis-register.csv"), encoding="utf-8", newline="") as fh:
+            _REG = {r["id"]: r for r in csv.DictReader(fh)}
+    return _REG
 
 
 def note_collides(text):
@@ -185,7 +244,15 @@ def render(st, rqmap, gaps_out, bind_log):
             if len(cands) != 1:
                 raise SystemExit(f"{st}: no unique dated value {k}@{dt}")
         elif len(cands) > 1:
-            raise SystemExit(f"{st}: key {k} has {len(cands)} dated values - use {{{{{k}@date}}}}")
+            # QA r3d (agent 2 split a key into two periods with the SAME value, e.g. OH 4141.23 versions): the
+            # narrative states the value once; it binds to the period in force on 2026-06-30. Different values
+            # still need {{key@date}}.
+            if len({json.dumps(f.get("value")) for f in cands}) == 1:
+                mid = [f for f in cands if (f.get("effective_from") or "0000") <= "2026-06-30" <= (f.get("effective_to") or "9999")]
+                cands = mid or cands[:1]
+                print(f"{st}: {k} has {len(by_key[k])} dated values with one value; narrative bound to {cands[0].get('effective_from')}")
+            else:
+                raise SystemExit(f"{st}: key {k} has {len(cands)} dated values - use {{{{{k}@date}}}}")
         used.add((k, cands[0].get("effective_from")))
         return tag(cands[0])
 
@@ -208,12 +275,12 @@ def render(st, rqmap, gaps_out, bind_log):
     L.append("")
     L.append("The federal layer (federal income tax withholding, FICA, FUTA, Forms W-2, 941 and 940) and the multistate "
              "rules (residence and work-location sourcing, reciprocity mechanics) are in Annex FED and Annex MULTI and are not repeated here. "
-             "Independent contractors and Form 1099-NEC are out of scope (MANDATE, US-OWN-001). Payslip language: English; "
+             + CC.CONTRACTOR_SENTENCE + " Payslip language: English; "
              "second-language duties attach to notices and posters only (US-OWN-006).")
     L.append("")
-    L.append("Every value in this annex is bound to a key of `_research/CCG-annex_" + st + "-facts.json` and carries its "
+    L.append("Every value in this annex is bound to a verified fact and carries its "
              "legal-basis register id. A value that changes during the year is shown with its effective dates. "
-             "`RESEARCH-GAP` marks a point the research has not closed; it is not filled with an estimate.")
+             "A point marked as a research gap has not been closed by the research; it is not filled with an estimate.")
     L.append("")
     if head:
         L.append(ph.sub(sub, head))
@@ -242,9 +309,14 @@ def render(st, rqmap, gaps_out, bind_log):
                 note = f.get("note") or ""
                 if note in ("-", "—"):
                     note = ""
-                if note and note_collides(note):
+                note = sanitize(note)
+                if f["key"] in NOTE_OVERRIDE:
+                    note = NOTE_OVERRIDE[f["key"]]
+                if note and note_collides(note) and f["key"] not in KEEP_NOTE_KEYS:
                     DROPPED.append((st, f["key"], note))
                     note = ""
+                if note and f["key"] in KEEP_NOTE_KEYS:
+                    note = tag_scenario_inputs(f, note, facts)
                 L.append(f"| `{f['key']}` | {tv} | {clean_cell(unit_of(f))} | {period(f)} | {f['register_id']} | {clean_cell(note)} |")
                 bind_log.append((rel, f"§{title.split('.')[0]} parameter table", f["key"], fmt_value(f) if "]" not in fmt_value(f) else "(formula)", f["register_id"], period(f)))
             L.append("")
@@ -258,6 +330,8 @@ def render(st, rqmap, gaps_out, bind_log):
                 gap_count[0 if u.get("blocking") else 1] += 1
                 why = u.get("why", "").strip().replace("\n", " ")
                 close = u.get("what_would_close_it", "").strip().replace("\n", " ")
+                why = sanitize(why, "Not established by the research.")
+                close = sanitize(close, "an authority source (A.1 / A.2) for this point")
                 if u["key"] in gap_over:
                     why, close = gap_over.pop(u["key"])
                     why, close = ph.sub(sub, why), ph.sub(sub, close)
@@ -265,7 +339,14 @@ def render(st, rqmap, gaps_out, bind_log):
                 gaps_out.append({"st": st, "u": u, "location": f"{rel}!{title}!open research points", "domain": enum or "labour_code"})
             L.append("")
     if gap_over:
-        raise SystemExit(f"{st}: gap overrides for unknown keys {list(gap_over)}")
+        # round 2: an override whose key left unresolved[] (gap closed by agent 2 or a parallel worker)
+        # is obsolete, not an error; listed so the src file can be cleaned
+        closed = [k for k in gap_over if any(k == g.get("key") for g in json.load(open(
+            os.path.join(RES, "CCG-research-request.json"), encoding="utf-8"))["requests"])]
+        unknown = [k for k in gap_over if k not in closed]
+        if unknown:
+            raise SystemExit(f"{st}: gap overrides for unknown keys {unknown}")
+        print(f"{st}: obsolete gap overrides (gap no longer open in the facts): {closed}")
     left = re.findall(r"\{\{[^}]*\}\}", "\n".join(L))
     if left:
         raise SystemExit(f"{st}: unresolved placeholders {left}")
@@ -277,8 +358,16 @@ def render(st, rqmap, gaps_out, bind_log):
     auth = {}
     for f in facts:
         auth.setdefault(f.get("authority") or "(not stated)", set()).add(f["register_id"])
+    # F44 final (QA r3b minor OH): a register id cited in the annex text but carried by no fact (e.g. US-OHS5-017
+    # after oh.wh.supplemental.rate was re-pointed) stays in the Sources list, under its register authority.
+    listed = set().union(*auth.values()) if auth else set()
+    for rid in sorted(set(re.findall(r"\bUS-[A-Z0-9]+-\d+\b", chr(10).join(L))) - listed):
+        row = _register().get(rid)
+        if row:
+            auth.setdefault(row.get("authority") or "(not stated)", set()).add(rid)
     for a in sorted(auth):
-        shown = a
+        shown = re.sub(r",?\s*via Wayback.*$", "", a, flags=re.I)
+        shown = sanitize(shown, "(authority named in the register)")
         if note_collides(shown):
             shown = re.sub(r"\s*\(.*?\)", "", shown)
         if note_collides(shown):
@@ -308,6 +397,7 @@ def main():
         allbind += bind
         if not a.dry:
             os.makedirs(OUT, exist_ok=True)
+            txt = CC.finalize(f"annex_{st}.md", CC.normalize_annex(f"annex_{st}.md", txt, CC.MAP_NY_WY))
             open(os.path.join(OUT, f"annex_{st}.md"), "w", encoding="utf-8", newline="\n").write(txt)
         summary.append((st, nf, gc[0], gc[1], len(used)))
     json.dump(allbind, open(os.path.join(HERE, "bindings.json"), "w", encoding="utf-8"), indent=0, ensure_ascii=False)

@@ -20,7 +20,7 @@
 - **Supplemental wages and rounding:** no flat rate; supplemental pay runs through the annual table by the aggregate method (partial source); no rounding rule found (open point below) [US-WVP52-007].
 - **Wages subject to withholding** follow the federal definition, including bonuses, vacation allowances, back pay, tips and retroactive increases [US-WVS5-010].
 - **Residents and nonresidents [US-WVPIT-001, US-WVS5-010, US-WVS5-011]:** residents and nonresidents are withheld, by resident and nonresident employers alike. Exceptions: reciprocity {{wv.reciprocity.states}}; nonresidents whose West Virginia duties last {{wv.pit.nonresident.days_rule}} days or less across several states (not athletes, entertainers or public figures); nonresident Armed Forces members and MSRRA spouses. Allocation by time records or the employee's written statement. Nonresident credit only under a written interstate agreement [US-WVP51-002].
-- **Local:** no local income tax (exists: {{wv.pit.local.income_tax.exists}}) [US-WVR3-001]. Municipal weekly **service fees** (W. Va. Code 8-13-13) are withheld from employees and remitted to the city (T4 layer): Charleston {{wv.pit.local.charleston.service_fee.weekly}} USD per week [US-WVR3-002]. Fees of other cities rest on tier-B leads and are not stated (blocking open point below).
+- **Local:** no local income tax (exists: {{wv.pit.local.income_tax.exists}}) [US-WVR3-001]. Municipal weekly **service fees** (W. Va. Code 8-13-13) are withheld from employees and remitted to the city (T4 layer): Charleston {{wv.pit.local.charleston.service_fee.weekly}} USD per week [US-WVR3-002]. Fees of other cities rest on secondary sources and are not stated (blocking open point below).
 - **Resident and nonresident matrix.**
 
 | Income type | West Virginia resident | Nonresident |
@@ -97,6 +97,6 @@
 
 ## @gaps
 - wv.pit.tables.start_date :: The WV Tax Division does not state from which pay date employers must apply the March 2026 IT-100.2A tables that implement the retroactive SB 392 rate cut. :: WV Tax Division employer notice on SB 392 withholding.
-- wv.pit.local.service_fees :: Municipal service fees of cities other than Charleston rest on tier-B leads only; no fee amount is stated for them. :: Each city's ordinance or finance-office page (parallel lookups).
+- wv.pit.local.service_fees :: Municipal service fees of cities other than Charleston rest on secondary sources only; no fee amount is stated for them. :: Each city's ordinance or finance-office page (parallel lookups).
 - wv.ui.sb1053_fee :: The SB 1053 automation and administration fee is written as a percentage of taxable wages in the statute but designed as a shift of contributions; its base and net effect are unclear, so no fee figure is modelled. :: WorkForce WV employer notice or March 2027 fee invoice instructions.
 - wv.report.efile_threshold.statute :: The current text of W. Va. Code 11-21-74 (an archived copy shows different employee thresholds from the agency documents) was not read. :: Current 11-21-74 text (US exit) or amending session law.

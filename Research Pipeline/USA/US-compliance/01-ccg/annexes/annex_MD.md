@@ -1,14 +1,15 @@
 # Annex MD: Maryland
 
+
 United States Country Configuration Guide, jurisdiction annex MD. Tax year 2026; currency USD (two decimal places).
 
-## MD.0 Scope of this annex
+**Scope of this annex.**
 
-This annex holds the Maryland layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC are out of scope. The pay statement is issued in English.
+This annex holds the Maryland layer only. The federal layer (federal income tax withholding, Social Security and Medicare, federal unemployment tax, Forms W-4, W-2, 941 and 940) is in Annex FED, and the rules for employees who live and work in different jurisdictions (sourcing, resident credits, reciprocity mechanics) are in Annex MULTI. Neither is repeated here. Independent contractors and Form 1099-NEC reporting are out of scope (owner instruction of 2026-10-29) [US-OWN-008]. The pay statement is issued in English.
 
-In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register (00-official-sources/legal-basis-register.csv), with the authority and address listed in section MD.20 (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
+In every table, *Valid from* and *Valid to* give the period in which the value applies (*open* means no end date has been published), and *Source* is the identifier of the row in the legal-basis register, with the authority and address listed in section MD.S (the source address is held in the register row). Items marked as a research gap are not yet confirmed and must not be configured from this annex.
 
-## MD.1 Jurisdiction layer
+**Jurisdiction layer.**
 
 | Item | Value |
 |---|---|
@@ -17,7 +18,7 @@ In every table, *Valid from* and *Valid to* give the period in which the value a
 
 Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = state withholding with no local layer remitted separately; T4 = a local layer remitted to a separate local authority on its own return.
 
-## MD.2 Configuration decisions
+**Configuration decisions.**
 
 - County tax is piggybacked: withhold the state tax and the county-of-residence local tax together and report both on the state return; apply the local table that equals or next exceeds the county rate (`md.wh.method`). Where the county is unknown, use [[FACT:md.local.county_rate.default_unknown=3.3]] percent.
 - Nonresidents of reciprocal jurisdictions ([[FACT:md.reciprocity.states=DC, PA, VA, WV]]) are exempt on a valid certificate; other nonresidents pay the state rate plus the special nonresident rate of [[FACT:md.nonres.special_rate=2.25]] percent and no county tax.
@@ -25,7 +26,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 - The Social Security number may not appear on the pay statement or any pay notice: [[FACT:md.payslip.ssn.prohibited=True]]. Do not print a truncated number either.
 - The pay statement shows the earned sick and safe leave balance each time wages are paid: [[FACT:md.payslip.essl_balance.required=True]].
 
-## MD.3 Employment and labour code
+## MD.1 Employment and labour code
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -41,9 +42,9 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `md.pay_frequency.rule` | [[FACT:md.pay_frequency.rule=at least every 2 weeks or twice a month (EAP less often); nonworkday payday moves to preceding workday]] | 2026-01-01 | open | US-MDS5-008 (A.1, Maryland General Assembly) |  |
 | `md.payment.method` | [[FACT:md.payment.method=cash or check at face value; direct deposit only with authorisation; pay card only with authorisation and fees disclosed in writing in >= 12-point type]] | 2026-01-01 | open | US-MDS5-008 (A.1, Maryland General Assembly) |  |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.local_minwage.ordinances`): The county ordinances were not read (the Montgomery County site returned an error); the county minimum wages above come from the state Department of Labor page only. To close: Montgomery, Howard and Prince George's ordinance/notice pages.
+- Not configured in this release [[GAP:RQ-001]]: The county ordinances were not read (the Montgomery County site returned an error); the county minimum wages above come from the state Department of Labor page only.
 
-## MD.4 State income tax withholding
+## MD.2 Income tax withholding
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -56,22 +57,22 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `md.wh.certificate` | [[FACT:md.wh.certificate=MW507 (MW507M military spouse, MW507P annuity/sick pay); none filed = one exemption; unknown county default 3.30% (state payroll memo)]] | 2026-01-01 | open | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
 | `md.wh.supplemental.lump_sum_bonus` | [[FACT:md.wh.supplemental.lump_sum_bonus=top state rate 6.50% + county top local rate (e.g. 9.80% in 3.30 table; 9.70% in 3.20 table); no flat rate for other supplemental pay; computed in cents (retirement whole dollars)]] | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
 
-## MD.5 Non-residents, residents working elsewhere and reciprocity
+## MD.2b Non-resident regime and reciprocity
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
-| `md.nonres.special_rate` | [[FACT:md.nonres.special_rate=2.25]] percent | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) | Residents of non-reciprocal states: state rate plus the special nonresident rate, no county tax; the flat nonresident rate is 7.0% (lowest table rate plus the special rate). Residents of reciprocal DC/PA/VA/WV are exempt with Form MW507 [US-MULTI-008]; the exemption is lost if the employee keeps a Maryland abode for more than six months and is present 183 days or more (not WV). Maryland residents working in Delaware or another non-reciprocal state: Delaware table with county tax and credit. |
+| `md.nonres.special_rate` | [[FACT:md.nonres.special_rate=2.25]] percent | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) | Residents of non-reciprocal states: state rate plus the special nonresident rate, no county tax; the flat nonresident rate is the lowest table rate plus the special rate. Residents of reciprocal DC/PA/VA/WV are exempt with Form MW507 [US-MULTI-008]; the exemption is lost if the employee keeps a Maryland abode for more than six months and is present 183 days or more (not WV). Maryland residents working in Delaware or another non-reciprocal state: Delaware table with county tax and credit. |
 | `md.reciprocity.states` | [[FACT:md.reciprocity.states=DC, PA, VA, WV]] | 2026-01-01 | open | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
 
-## MD.6 Local wage taxes
+## MD.2c Local wage taxes
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.local.county_rate.default_unknown` | [[FACT:md.local.county_rate.default_unknown=3.3]] percent | 2026-01-01 | 2026-12-31 | US-MDS5-003 (A.2, Comptroller of Maryland (Central Payroll Bureau)) | New county maximum from TY2026. |
-| `md.local.county_rates` | [[FACT:md.local.county_rates=2.25 Worcester (24), out-of-state (25-76); 2.40 Talbot (21); 2.65 Garrett (12); 2.74 Cecil (08); 2.95 Washington (22); 3.03 Carroll (07), Charles (09); 3.06 Harford (13); 3.20 Allegany, Baltimore Co, Baltimore City, Calvert, Caroline, Howard, Montgomery, Prince George's, Queen Anne's, St. Mary's, Somerset, Wicomico; 3.30 Dorchester (10), Kent (15); graduated Anne Arundel (02) and Frederick (11)]] | 2026-01-01 | 2026-12-31 | US-MDS5-003 (A.2, Comptroller of Maryland (Central Payroll Bureau)) | Cross-checked with DLS [US-MDS5-004]; Allegany [[FACT:md.local.county.carroll.rate=3.03]] -> 3.20, Kent 3.20 -> 3.30 vs 2025. |
+| `md.local.county_rates` | [[FACT:md.local.county_rates=2.25 Worcester (24), out-of-state (25-76); 2.40 Talbot (21); 2.65 Garrett (12); 2.74 Cecil (08); 2.95 Washington (22); 3.03 Carroll (07), Charles (09); 3.06 Harford (13); 3.20 Allegany, Baltimore Co, Baltimore City, Calvert, Caroline, Howard, Montgomery, Prince George's, Queen Anne's, St. Mary's, Somerset, Wicomico; 3.30 Dorchester (10), Kent (15); graduated Anne Arundel (02) and Frederick (11)]] | 2026-01-01 | 2026-12-31 | US-MDS5-003 (A.2, Comptroller of Maryland (Central Payroll Bureau)) | Cross-checked with DLS [US-MDS5-004]. Allegany's and Kent's rates changed for 2026; the 2026 values are the ones in this table (Allegany 3.20, Kent 3.30) and in md.live.county_rates_2026 [US-MDS5-004]. |
 | `md.local.anne_arundel.single` | [[FACT:md.local.anne_arundel.single=2.70 to 50,000 / 2.94 to 400,000 / 3.20 over (joint 2.70 to 75,000 / 2.94 to 480,000 / 3.20 over)]] | 2026-01-01 | 2026-12-31 | US-MDS5-003 (A.2, Comptroller of Maryland (Central Payroll Bureau)) |  |
 
-## MD.7 Unemployment insurance, disability and paid-leave contributions, other payroll levies
+## MD.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -79,26 +80,26 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `md.sui.employer.rate.max` | [[FACT:md.sui.employer.rate.max=7.5]] percent | 2026-01-01 | 2026-12-31 | US-MDP9V-001 (A.2, Maryland Department of Labor, Division of Unemployment Insurance) |  |
 | `md.sui.new_employer.rate.range` | [[FACT:md.sui.new_employer.rate.range=1.0% - 2.6%]] | 2026-01-01 | 2026-12-31 | US-MDP9V-001 (A.2, Maryland Department of Labor, Division of Unemployment Insurance) |  |
 | `md.pfml.contributions.start` | [[FACT:md.pfml.contributions.start=2027-01-01 (no contribution in 2026)]] | 2027-01-01 | open | US-MDS5-014 (A.2, Maryland Department of Labor (FAMLI Division)) |  |
-| `md.pfml.rate.total` | [[FACT:md.pfml.rate.total=0.9]] percent | 2027-01-01 | open | US-MDS5-014 (A.2, Maryland Department of Labor (FAMLI Division)) | 0.45 employer + 0.45 employee (employer may withhold up to 50%); wages to SS base; < 15 employees (all locations, one EIN) remit employee share only; cap 1.2%; quarterly with wage-and-hour report, first due 2027-04-30; coverage follows UI localization (LE 8-202) [US-MDS5-019]; benefits from 2028-01-01 up to 1,000/week, 12 weeks. |
+| `md.pfml.rate.total` | [[FACT:md.pfml.rate.total=0.9]] percent | 2027-01-01 | open | US-MDS5-014 (A.2, Maryland Department of Labor (FAMLI Division)) | 0.45 employer + 0.45 employee (employer may withhold up to 50%); wages to SS base; < 15 employees (all locations, one EIN) remit employee share only; statutory rate cap; quarterly with wage-and-hour report, first due 2027-04-30; coverage follows UI localization (LE 8-202) [US-MDS5-019]; benefits from 2028-01-01 up to 1,000/week, 12 weeks. |
 | `md.pfml.employee_share.max_percent` | [[FACT:md.pfml.employee_share.max_percent=50]] percent | 2027-01-01 | open | US-MDS5-014 (A.2, Maryland Department of Labor (FAMLI Division)) |  |
 | `md.pfml.small_employer.threshold` | [[FACT:md.pfml.small_employer.threshold=15]] employees | 2027-01-01 | open | US-MDS5-014 (A.2, Maryland Department of Labor (FAMLI Division)) |  |
-| `md.sui.wage_base` | [[FACT:md.sui.wage_base=8500]] USD | 2026-01-01 | open | US-MDP51-002 (A.2, Maryland Department of Labor, Division of Unemployment Insurance) | Not indexed; employer-only; other-state credit implied by BEACON field. |
+| `md.sui.wage_base` | [[FACT:md.sui.wage_base=8500]] USD | 2026-01-01 | open | US-MDB5-401 (A.2, Maryland Department of Labor, Division of Unemployment Insurance) | Not indexed; employer-only; other-state credit implied by BEACON field. |
 
 Rules:
 
 - No SDI/TDI; no other levy beyond withholding. (US-MDP9V-002)
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.sui.wage_base.other_state_credit`): Implied by the BEACON "Out of State taxable wages" field only; taxable-wages statute not located (LE 8-101, 8-606 read). To close: The LE Title 8 taxable-wage section on mgaleg.
-- ⚠️ RESEARCH-GAP (non-blocking, `md.sui.domestic_coverage`): The domestic-service coverage threshold of Labor and Employment Article Title 8 is not verified. To close: The LE 8-2xx domestic service section.
+- Not configured in this release [[GAP:RQ-002]]: Implied by the BEACON "Out of State taxable wages" field only; taxable-wages statute not located (LE 8-101, 8-606 read).
+- Not configured in this release [[GAP:RQ-003]]: The domestic-service coverage threshold of Labor and Employment Article Title 8 is not verified.
 
-## MD.8 Pay statement
+## MD.4 Pay statement
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.payslip.essl_balance.required` | [[FACT:md.payslip.essl_balance.required=True]] | 2026-01-01 | open | US-MDS5-013 (A.1, Maryland General Assembly) | LE 3-1305(f): available ESSL balance each time wages are paid (online system satisfies). Core LE 3-504 content on row US-MDP51-005. |
 | `md.payslip.items` | [[FACT:md.payslip.items=employer name, address, phone; pay date and period; hours (unless exempt); rates; gross and net; each deduction by name and amount; other bases of pay; written or online (LE 3-504); notice at hire and change one pay period ahead]] | 2026-01-01 | open | US-MDP51-005 (A.1, Maryland General Assembly) |  |
 
-## MD.9 Statutory reporting
+## MD.5 Statutory reporting
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -108,9 +109,9 @@ Rules:
 | `md.report.sui.quarterly` | [[FACT:md.report.sui.quarterly=BEACON within 1 month after quarter end; online, CSV, XML, ICESA or EFW2 (spec 2026-04-20); cents without decimal point; adjustment codes 00-10; 35 per late report; 1.5%/month interest; optional out-of-state taxable wages field]] | 2026-04-20 | open | US-MDS5-017 (A.2, Maryland Department of Labor, Division of Unemployment Insurance) |  |
 | `md.newhire.report_days` | [[FACT:md.newhire.report_days=20]] days | 2026-01-01 | open | US-MDS5-018 (A.1, Maryland General Assembly) | LE 8-626.1: SSN, name, address, hire date, employer name/address, starting wage, employer health insurance offered, FEIN, MD UI account; penalty warning then 20/month (500 conspiracy). |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.report.w2.spec_next_edition`): TY2026 Maryland W-2/MW508 EFW2 spec not posted. To close: "2026 Maryland Employer Reporting of W2s Instructions and Specifications" on marylandcomptroller.gov /tax/instructions/2026/.
+- Not configured in this release [[GAP:RQ-004]]: TY2026 Maryland W-2/MW508 EFW2 spec not posted.
 
-## MD.10 Leave
+## MD.6 Leave
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
@@ -119,62 +120,68 @@ Rules:
 | `md.leave.essl.annual_earn_cap_hours` | [[FACT:md.leave.essl.annual_earn_cap_hours=40]] hours | 2026-01-01 | open | US-MDS5-013 (A.1, Maryland General Assembly) |  |
 | `md.leave.essl.use_cap_hours` | [[FACT:md.leave.essl.use_cap_hours=64]] hours | 2026-01-01 | open | US-MDS5-013 (A.1, Maryland General Assembly) |  |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.leave.essl.multistate_scope`): Whether the 12 h/week threshold and accrual count MD hours only. To close: COMAR 09.12.80 or DOL HWFA FAQ.
-- ⚠️ RESEARCH-GAP (non-blocking, `md.leave.essl.montgomery`): Montgomery County Code ch. 27 Art. XIII (pre-2017 ESSL) not read. To close: County code text on codelibrary.amlegal.com.
+- Not configured in this release [[GAP:RQ-005]]: Whether the 12 h/week threshold and accrual count MD hours only.
+- Not configured in this release [[GAP:RQ-006]]: Montgomery County Code ch. 27 Art. XIII (pre-2017 ESSL) not read.
 
-## MD.11 Termination and final pay
+## MD.7 Termination and final pay
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.final_pay.rule` | [[FACT:md.final_pay.rule=on or before next regular payday, discharge or resignation; accrued vacation payable unless written policy limits payout, employee notified at hire and policy denies it; ESSL not payable]] | 2026-01-01 | open | US-MDS5-010 (A.1, Maryland General Assembly) |  |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.termination.ui_separation_notice`): COMAR 09.32.01 separation notice and Economic Stabilization Act (LE 11-301) not read. To close: Those texts.
+- Not configured in this release [[GAP:RQ-007]]: COMAR 09.32.01 separation notice and Economic Stabilization Act (LE 11-301) not read.
 
-## MD.12 Taxable wages and benefits in kind
+## MD.8 Benefits in kind and taxable wages
 
 No Maryland rule is configured in this domain; the federal treatment in Annex FED applies.
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.pit.conformity`): TG 10-203/204/205 and annual IRC conformity act not read. To close: Those sections.
+- Not configured in this release [[GAP:RQ-008]]: TG 10-203/204/205 and annual IRC conformity act not read.
 
-## MD.13 Deductions and garnishments
+## MD.9 Deductions and garnishments
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.deductions.rule` | [[FACT:md.deductions.rule=only if court-ordered, authorised in writing, allowed by the Commissioner or required by law (LE 3-503)]] | 2026-01-01 | open | US-MDS5-009 (A.1, Maryland General Assembly) |  |
 | `md.garn.creditor.weekly_exempt_floor` | [[FACT:md.garn.creditor.weekly_exempt_floor=450.0]] USD | 2024-01-01 | open | US-MDS5-011 (A.1, Maryland General Assembly) | CL 15-601.1: greater of 75% of disposable or 30 x State MW x weeks = 30 x 15.00; medical insurance deductions also exempt; per pay period. |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.garn.iwo_and_salary_lien`): IWO employer fee/remittance (FL 10-123/10-128) and Comptroller salary lien (TG 13-811) not read. To close: Those sections on mgaleg.
+- Not configured in this release [[GAP:RQ-009]]: IWO employer fee/remittance (FL 10-123/10-128) and Comptroller salary lien (TG 13-811) not read.
 
-## MD.14 Prevailing wage and collective agreements
+## MD.10 Collective agreements and prevailing wage
+
+Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.prevailing_wage.threshold` | [[FACT:md.prevailing_wage.threshold=250000]] USD | 2026-01-01 | open | US-MDS5-012 (A.1, Maryland General Assembly) | Not for Davis-Bacon-funded parts; extends to TIF-bond construction and mechanical systems service contracts above SCA threshold. |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.prevailing_wage.certified_payroll`): SFP 17-220 certified payroll duty not read. To close: SFP 17-220 on mgaleg.
+- Not configured in this release [[GAP:RQ-010]]: SFP 17-220 certified payroll duty not read.
 
-## MD.15 Indexation
+## MD.11 Indexation
 
 Indexation of each value is stated in the note of the value concerned.
 
-## MD.16 Payroll data protection and records
+## MD.12 Payroll data protection and records
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.payslip.ssn.prohibited` | [[FACT:md.payslip.ssn.prohibited=True]] | 2026-01-01 | open | US-MDS5-008 (A.1, Maryland General Assembly) | LE 3-502(d): SSN may not be printed on the wage check, any attachment, direct-deposit notice or card-credit notice; covers governmental units; no truncation safe harbour - treat truncated SSN as barred. |
 | `md.records.withholding.retention_years` | [[FACT:md.records.withholding.retention_years=3]] years | 2026-01-01 | open | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.records.wagehour.retention`): LE 3-424 record period and e-delivery consent not read. To close: LE 3-424 on mgaleg.
+- Not configured in this release [[GAP:RQ-011]]: LE 3-424 record period and e-delivery consent not read.
 
-## MD.17 Legal change in force or enacted
+## MD.13 Live legal change
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `md.live.county_rates_2026` | [[FACT:md.live.county_rates_2026=county maximum 3.30% from TY2026 (Dorchester, Kent 3.30; Allegany 3.20); level withholding]] | 2026-01-01 | open | US-MDS5-004 (A.3, Maryland Department of Legislative Services) |  |
 
-- ⚠️ RESEARCH-GAP (non-blocking, `md.live.brfa2026`): The effect of the 2026 Budget Reconciliation and Financing Act on taxable income and withholding from tax year 2027 rests on a secondary summary only. To close: 2026 BRFA as enacted or a Comptroller 2027 withholding alert.
+- Not configured in this release [[GAP:RQ-012]]: The effect of the 2026 Budget Reconciliation and Financing Act on taxable income and withholding from tax year 2027 rests on a secondary summary only.
 
-## MD.18 Special populations
+## MD.14 Authority worked examples (oracle values)
+
+No authority worked example is reproduced in this annex; recomputed withholding examples are in Module 12.
+
+## MD.15 Special populations
 
 - Domestic: MD withholding not required (private home, college club, fraternity). (US-MDS5-021)
 - Agricultural: withheld when subject to FICA; ESSL excluded. (US-MDS5-021, US-MDS5-020, US-MDS5-006, US-MDS5-013)
@@ -183,17 +190,17 @@ Indexation of each value is stated in the note of the value concerned.
 - NRAs: general nonresident treatment; Nonresident seamen: not withheld in MD port. (US-MDS5-021)
 - Commission workers: insurance producers, real estate, yacht salespersons, direct sellers etc; UI-excluded. (US-MDS5-020)
 - Government: withholding applies; elected officials/legislators/judges/Guard etc; UI-excluded. (US-MDS5-020)
-- ⚠️ RESEARCH-GAP (non-blocking, `md.special_populations.thresholds`): thresholds, amounts or conditions for these populations are stated in the research without a confirmed value record and are not configured from this annex: Domestic; Agricultural; Minors; Tipped; Students; Military spouses. To close: one confirmed value per threshold, with its source row.
+- Not configured in this release [[GAP:RQ-013]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic; Agricultural; Minors; Tipped; Students; Military spouses.
 
-## MD.19 Language
+## MD.16 Language
 
 - The pay statement and all filings are in English (owner decision US-OWN-006).
 
-## MD.20 Sources
+## MD.S Sources
 
 | Source | Authority |
 |---|---|
-| US-MDP51-002 | Maryland Department of Labor, Division of Unemployment Insurance |
+| US-MDB5-401 | Maryland Department of Labor, Division of Unemployment Insurance |
 | US-MDP51-005 | Maryland General Assembly |
 | US-MDP9V-001 | Maryland Department of Labor, Division of Unemployment Insurance |
 | US-MDS5-001 | Maryland General Assembly |

@@ -6,6 +6,8 @@
 **Pasta:** `C:\Users\instituto\Documents\internal-certification` · Método: [[analise-reports]].
 
 ## Instruções vigentes
+- **(02/11, usuário) E-mail, Chat e Suporte por esta frente:** sempre que o pedido envolver e-mail, Chat ou suporte, esta janela usa o Claude in Chrome direto. Não pedir nada à janela/aba Gmail. Rascunho fica em **Rascunhos (draft)** no Gmail; enviar só quando o usuário pedir.
+- **(02/11, usuário) Formato das mensagens a terceiros:** uma pergunta por linha, com opções; tabela para confirmar ou corrigir; ~10 linhas obrigatórias; o resto como opcional. Certificação e projeto do Marko numa mensagem só por pessoa. **Padrão fixo para todos os países:** `internal-certification/_projetos/fluxo-entregas-marko/PADRAO_email_SBC.md` (regras, modelo, checklist, fila). Só entra pergunta com fonte: item "Not provided" do Audit Report final ou Not tested ainda aberto; sem tabela (uma pergunta simples por declaração). **(02/11, usuário) Vale para os 10 contatos, inclusive os rascunhos, de forma flexível.** Padrões assumidos: DK → Deepak com Rakshitha em Cc; AZ/KZ → perguntas do projeto vão à Pari e à Malika.
 - **(29/10, usuário via janela geral)** Não mandar resumo à janela geral: o painel `http://127.0.0.1:8765/frentes.html` lê cada fim de rodada. Usar SendMessage à brain-service-5b só para o que só ela faz (commit, coordenação entre frentes).
 
 - **(29/10, usuário) Projeto do Marko:**

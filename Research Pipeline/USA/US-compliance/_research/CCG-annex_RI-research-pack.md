@@ -63,7 +63,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 | `ri.sui.employer.rate.min` | 0.9 % | 2026-01-01 | 2026-12-31 | US-RIP9V-001 | high |
 | `ri.sui.employer.rate.max` | 9.4 % | 2026-01-01 | 2026-12-31 | US-RIP9V-001 | high |
 | `ri.sui.new_employer.rate` | 1.21 % | 2026-01-01 | 2026-12-31 | US-RIP9V-001 | high |
-| `ri.ui.jda.rate` | 0.21 % | 2026-01-01 | 2026-12-31 | US-RIP7-001 | high |
+| `ri.ui.jda.rate` | 0.21 % | 2026-01-01 | 2026-12-31 | US-RIB5-401 | high |
 | `ri.sui.employee.rate` | 0 % | 2026-01-01 |  | US-RIP9V-001 | high |
 | `ri.sui.wage_base.other_state_credit` | True | 2026-01-01 |  | US-RIS5-013 | high |
 | `ri.tdi.employee.rate` | 1.1 % | 2026-01-01 | 2026-12-31 | US-RIP9V-001 | high |
@@ -152,7 +152,7 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
 ## 3. social_security
 - **UI (DLT Employer Tax Unit)** [US-RIP9V-001]:
   - 2026 taxable wage base **30,800**; 32,300 for employers at the highest rate (reserve ratio of −24.00 or below).
-  - Schedule F: **0.9%–9.4%**, each reduced by 0.21 to offset the employer **Job Development Assessment 0.21%** [US-RIP7-001].
+  - Schedule F: **0.9%–9.4%**, each reduced by 0.21 to offset the employer **Job Development Assessment 0.21%** [US-RIB5-401].
   - New-employer rate **1.21%**, JDA included.
   - No employee UI contribution.
 - **Wage-base indexation** [US-RIS5-014]. 46.5% of the prior-year average annual wage, computed each 30 September and rounded **up** to the next 200. The highest-rate employers pay on that base + 1,500, and 30,800 + 1,500 = 32,300 reconciles.

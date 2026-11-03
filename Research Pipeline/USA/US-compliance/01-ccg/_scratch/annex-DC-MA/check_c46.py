@@ -13,7 +13,7 @@ for k, v in facts_last.items():
         forms.setdefault((round(n, 6), pct), set()).add(k)
 tot = collections.Counter()
 for j in JURS:
-    p = os.path.join(BASE, "01-ccg", "modules", f"annex_{j}.md")
+    p = os.path.join(BASE, "01-ccg", "annexes", f"annex_{j}.md")
     mism, multi, unb, notkey = [], [], [], []
     for i, t in enumerate(open(p, encoding="utf-8").read().splitlines(), 1):
         for m in cc.TAG.finditer(t):

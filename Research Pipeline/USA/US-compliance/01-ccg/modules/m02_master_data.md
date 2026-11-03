@@ -1,7 +1,7 @@
 # Module 2: Master Data Configuration
 *Purpose: To define the mandatory employer and employee information for processing and reporting.*
 
-Field-level definitions (data types, formats, option lists, validations) are owned by the Data Dictionary US-DD-001 v1.0 (`05-data-dictionary/`). This module states which master data the law makes necessary and why; it does not reproduce the field tables.
+Field-level definitions (data types, formats, option lists, validations) are owned by the Data Dictionary US-DD-001 v1.0. This module states which master data the law makes necessary and why; it does not reproduce the field tables.
 
 ## 2.1 Employer Information
 
@@ -19,13 +19,13 @@ An employer registers once at the federal level and then separately in every Sta
 | State paid-leave / disability agencies where a programme exists | Contribution returns (for example the Washington combined Paid Leave and WA Cares quarterly report) | `wa.report.pfml_ltc.due` [US-WAB5-003] |
 | Local tax collectors | Local income or payroll taxes with their own return | coverage row `local_regimes` [US-PAS5-022, US-MIR3-002, US-INS5-009, US-MULTIS5-011] |
 
-⚠️ RESEARCH-GAP (non-blocking): the channel through which a multistate employer registers its designated new-hire State with HHS is not established in the facts (open item `multi.newhire.registration_channel` in CCG-m10_reporting-facts.json; closes with: Browser read of the ACF multistate registration page.)
+Not configured in this release [[GAP:RQ-527]]: The channel through which a multistate employer registers its designated new-hire State with HHS is not established from an official source.
 
 ### What is the configuration/format of registration numbers allotted by each authority?
 
-The facts name the federal employer identification number (FEIN) as a required new-hire data element (`fed.newhire.fields` [US-FEDS5-024]) and state that the employer identification number is never truncated on wage statements [US-FEDS5-022]. Its digit structure, and the structure of State withholding and unemployment account numbers, are not in the facts.
+The facts name the federal employer identification number (FEIN) as a required new-hire data element (`fed.newhire.fields` [US-FEDS5-024]) and state that the employer identification number is never truncated on wage statements [US-FEDS5-022]. FEIN format: [[FACT:fed.ein.format=nine-digit number issued by the IRS, arranged 00-0000000]] [US-FEDS5-029]. The structure of the State withholding and unemployment account numbers is not established from an official source (limitation below).
 
-⚠️ RESEARCH-GAP (non-blocking): the format (length, separators, check rules) of the FEIN and of each State withholding and unemployment account number is not in the facts (request key `fed.registration.number_formats`)
+Not configured in this release [[GAP:RQ-556]]: The format (length, separators, check rules) of each State withholding and unemployment account number is not established from an official source.
 
 ### Are registration numbers allotted at the central level or at the state/township level?
 
@@ -40,10 +40,10 @@ Three independent residence tests apply, and each drives a different layer:
 | Test | Values | Drives | Fact |
 |---|---|---|---|
 | Federal tax residence | Resident (US citizen or resident alien) / nonresident alien (NRA) | Federal withholding method: NRA rules for Form W-4 and the NRA wage add-on (Module 6) | `fed.fit.nra.w4.rule` [US-FEDS5-015]; coverage row `non_resident_employee` [US-FEDS5-002, US-FEDS5-016, US-MULTIS5-017, US-MULTI-021, US-MULTIS5-013] |
-| State of residence vs State of work | Resident of the work State / nonresident of the work State / resident working in another State | Which State withholds on which wages (reciprocity, thresholds, convenience rules: Module 6) | `multi.sit.work_location.rule` [US-MULTIS5-023]; `multi.pit.sourcing.general` [US-FEDP51-009] |
+| State of residence vs State of work | Resident of the work State / nonresident of the work State / resident working in another State | Which State withholds on which wages (reciprocity, thresholds, convenience rules: Module 6) | `multi.sit.work_location.rule` [US-MULTIS5-023]; `multi.pit.sourcing.general` [US-MULTIQ1-001] |
 | Local residence | Resident / nonresident of a taxing locality | Local rate (for example Philadelphia resident [[FACT:pa.local.philadelphia.resident.rate=3.735]]% / nonresident [[FACT:pa.local.philadelphia.nonresident.rate=3.425]]% from 2026-07-01) | [US-PAS5-022] |
 
-State unemployment insurance does **not** follow residence: it follows the localization test, and residence is only its last step ([[FACT:multi.sui.localization_test=One State covers the entire service with one employer, in order: (1) localized (entirely in the State, or out-of-state service incidental: temporary, transitory, isolated); (2) else some service in the base-of-operations State; (3) else some service in the State of direction or control; (4) else some service in the State of residence]] [US-MULTIS5-017]). A military spouse may elect a residence for State withholding: [[FACT:multi.military_spouse.rule=election of servicemember residence, spouse residence or duty station (50 USC 4001)]] [US-MULTIS5-005].
+State unemployment insurance does **not** follow residence: it follows the localization test, and residence is only its last step ([[FACT:multi.sui.localization_test=One State covers the entire service with one employer, in order: (1) localized (entirely in the State, or out-of-state service incidental: temporary, transitory, isolated); (2) else some service in the base-of-operations State; (3) else some service in the State of direction or control; (4) else some service in the State of residence]] [US-MULTIS5-017]). A military spouse may elect a residence for State withholding: [[FACT:multi.military_spouse.rule=A military spouse present in a State solely to be with the servicemember under military orders neither loses nor acquires residence or domicile; the spouse's income for services performed in that State is not income for services performed or from sources within that State if the spouse is not a resident of it; for any taxable year the spouse may elect the residence of the servicemember, the spouse's own residence or the permanent duty station (50 U.S.C. 4001(a)(2), (c)). Payroll effect: on the employee's State certificate of nonresidence, stop work-State withholding.]] [US-MULTIS5-005].
 
 ### What employee fields are required for processing payroll and statutory reporting?
 
@@ -72,7 +72,7 @@ The full field list is in US-DD-001 v1.0. The law makes the following groups nec
 | KY | [[FACT:ky.wh.certificate=K-4 (42A804): no allowances; exemption claims only (no liability; Fort Campbell nonresident; SCRA/MSRRA; reciprocal-state residents)]] | [US-KYS5-013] |
 | ID | [[FACT:id.wh.certificate=federal W-4 required; Form ID W-4 (EFO00307) strongly encouraged: A Single/HoH, B Married, C Married at single rate; allowances = children 16 or under (+2 HoH)]] | [US-IDS5-013] |
 
-Idaho's certificate fact is the edition dated 2025-04-28; the 2026 edition is an open item of annex ID.
+Idaho's certificate fact is the edition dated 2025-04-28; the 2026 edition is addressed in Annex ID (ID.2).
 
 **Joiners** (coverage row `mid_month_joiner_and_leaver` [US-FEDS5-001, US-FEDS5-024, US-MULTIS5-009]): the employee files Form W-4 and the State certificate at hire, and the employer reports the hire to the State Directory of New Hires within [[FACT:fed.newhire.deadline_days=20]] days (shorter in many States, see annexes); electronic filers may instead use [[FACT:fed.newhire.electronic_interval=Electronic/magnetic filers: two monthly transmissions, not less than 12 nor more than 16 days apart]] [US-FEDB5-001]. A multistate employer reporting electronically may use one State: [[FACT:multi.newhire.designated_state=A multistate employer reporting electronically may send all new-hire reports to ONE designated State in which it has employees, after notifying HHS in writing]] [US-MULTIS5-006]. States may fine up to USD [[FACT:fed.newhire.state_penalty.max_per_hire=25]] per unreported hire, or USD [[FACT:fed.newhire.state_penalty.conspiracy.max_per_hire=500]] where the failure results from a conspiracy [US-FEDB5-001]. **Leavers** receive final pay under the work State's rule (Module 9).
 
@@ -80,7 +80,7 @@ Idaho's certificate fact is the edition dated 2025-04-28; the 2026 edition is an
 
 The employee identifier on every federal and State filing is the Social Security number (SSN), named in the new-hire data elements (`fed.newhire.fields` [US-FEDS5-024]). On employee copies of the W-2 it may be shown truncated, with only the last four digits visible (truncated taxpayer identification number); truncation is never allowed on Copy A filed with SSA [US-FEDS5-022]. Washington accepts an SSN or an ITIN on its paid-leave report [US-WAB5-003].
 
-⚠️ RESEARCH-GAP (non-blocking): the SSN and ITIN structure (digit count, separators, invalid ranges) is not in the facts (request key `fed.ssn.format`)
+Not configured in this release [[GAP:RQ-557]]: The SSN and ITIN structure (digit count, separators, invalid ranges) is not established from an official source.
 
 ### Provide any relevant combo values or sample inputs for each field.
 
@@ -108,7 +108,7 @@ Reciprocity certificates (combo value = certificate on file, yes or no), from th
 | MD | [[FACT:multi.reciprocity.md.partners=DC, PA, VA, WV (not for abode in MD > 6 months and 183+ days, except WV)]] | [[FACT:multi.reciprocity.md.certificate=MW507]] | [US-MULTI-008] |
 | MI | [[FACT:multi.reciprocity.mi.partners=IL, IN, KY, MN, OH, WI]] | [[FACT:multi.reciprocity.mi.certificate=per MI Guide 446 (form not named in the row)]] | [US-MULTI-010] |
 | MN | [[FACT:multi.reciprocity.mn.partners=MI, ND (employee returns home at least monthly)]] | [[FACT:multi.reciprocity.mn.certificate=MWR (yearly; copies to MN DOR by Mar 31)]] | [US-MULTI-013] |
-| MT | [[FACT:multi.reciprocity.mt.partners=ND]] | [[FACT:multi.reciprocity.mt.certificate=MW-4 (annual renewal)]] | [US-MTP51-004] |
+| MT | see annex | [[FACT:multi.reciprocity.mt.certificate=MW-4 (annual renewal)]] | [US-MTP51-004] |
 | ND | [[FACT:multi.reciprocity.nd.partners=MN, MT]] | [[FACT:multi.reciprocity.nd.certificate=NDW-R (yearly, by Feb 28 or within 30 days)]] | [US-MULTI-014] |
 | NJ | [[FACT:multi.reciprocity.nj.partners=PA (compensation only)]] | [[FACT:multi.reciprocity.nj.certificate=NJ-165 (PA resident in NJ); REV-419EX (NJ resident with PA employer)]] | [US-MULTI-011] |
 | OH | [[FACT:multi.reciprocity.oh.partners=IN, KY, MI, PA, WV]] | [[FACT:multi.reciprocity.oh.certificate=IT 4 (combined certificate)]] | [US-MULTI-005] |
@@ -116,13 +116,13 @@ Reciprocity certificates (combo value = certificate on file, yes or no), from th
 | VA | [[FACT:multi.reciprocity.va.partners=DC, KY (daily commuters), MD, PA, WV]] | [[FACT:multi.reciprocity.va.certificate=VA certificate (not named in the row; VA annex)]] | [US-MULTI-004] |
 | WI | [[FACT:multi.reciprocity.wi.partners=IL, IN, KY, MI]] | [[FACT:multi.reciprocity.wi.certificate=W-220]] | [US-MULTI-006] |
 | WV | [[FACT:multi.reciprocity.wv.partners=KY, MD, OH, PA, VA]] | [[FACT:multi.reciprocity.wv.certificate=WV/IT-104]] | [US-MULTI-015] |
-| AZ (one-way) | [[FACT:multi.reciprocity.az.unilateral=AZ exempts residents of CA, IN, OR, VA on Form WEC (they can claim the AZ credit); one-way - an AZ resident working in CA is withheld by CA]] | Form WEC | [US-MULTI-017] |
+| AZ (one-way) | [[FACT:multi.reciprocity.az.unilateral=AZ exempts residents of CA, IN, OR, VA on Form WEC (they can claim the AZ credit); one-way - an AZ resident working in CA is withheld by CA]] | Form WEC | [US-MULTIB5-401] |
 
 ### What previous employment information must new joiners declare?
 
 None for federal payroll purposes. Each employer applies the withholding method and the wage bases independently (coverage row `multiple_employers` [US-FEDS5-006, US-MULTIS5-009, US-FEDS5-005]): the OASDI and FUTA bases are per employer, the Additional Medicare threshold of USD [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] is applied per employer, and the employee coordinates income tax across jobs on Form W-4 Step 2 [US-FEDS5-006]. Wages paid by a previous employer in the same year do not count toward this employer's FUTA base, except successor carry-over on an acquisition: [[FACT:multi.futa.wage_base.scope=FUTA 7,000 counts remuneration paid by the employer in the calendar year across all States: one base per employer, not per State; successor carry-over]] [US-MULTIS5-009]. Excess OASDI from several employers is refunded to the employee at assessment, not by payroll (coverage row `annual_regularisation` [US-FEDS5-007, US-FEDS5-005, US-FEDS5-006]).
 
-⚠️ RESEARCH-GAP (non-blocking): Common-paymaster relief for related employers (multiple_employers row) was not researched in the FED unit. (open item `fed.common_paymaster.rule` in CCG-coverage-facts.json; closes with: IRC 3121(s) / Pub. 15-A common paymaster section read into a FED row.)
+Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief for related employers (multiple_employers row) is not established from an official source.
 
 ## 2.3 Data Management and Retention
 
@@ -146,9 +146,9 @@ The facts carry identifier-display rules, not a general data-protection statute:
 | SSN may be truncated to the last four digits on employee W-2 copies only, never on Copy A; the EIN is never truncated | [US-FEDS5-022] |
 | Maryland: the SSN may not be printed on the wage check, any attachment, direct-deposit notice or card-credit notice | `md.payslip.ssn.prohibited` [US-MDS5-008] |
 
-State rules on the SSN on pay statements remain open in several States (for example `ar.data_protection.ssn_paystub`, `ga.data_protection.ssn_paystub`, `ia.data_protection.ssn_paystub`, `il.data_protection.ssn_paystub`, `ky.data_protection.ssn_paystub`; annex open items).
+State rules on the SSN on pay statements are not established for several States (for example Arkansas, Georgia, Iowa, Illinois and Kentucky); each is stated in section 12 of the State annex.
 
-⚠️ RESEARCH-GAP (non-blocking): no fact states whether a general federal or State data-protection statute (beyond SSN display rules) governs the storage and handling of employee payroll data (request key `fed.payroll_data_protection.framework`)
+Not configured in this release [[GAP:RQ-558]]: No official source read for this release states whether a general federal or State data-protection statute (beyond SSN display rules) governs the storage and handling of employee payroll data.
 
 ### How should historical payroll data (e.g., from a previous provider) be handled for cumulative calculations?
 
@@ -160,7 +160,7 @@ Every federal and State base is an annual amount per employer, applied to wages 
 | Medicare wages | Additional Medicare starts above USD [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] paid by this employer | [US-FEDS5-005] |
 | FUTA taxable wages | USD [[FACT:fed.futa.wage_base=7,000]] per employer across all States | `multi.futa.wage_base.scope` [US-MULTIS5-009] |
 | SUI taxable wages per State | State bases; many States credit wages already reported to another State in the same year (for example `multi.sui.other_state_wage_credit.ca` [US-MULTIS5-010]) | `multi.sui.other_state_wage_credit.*` |
-| PFML/SDI taxable wages where capped | For example Washington paid leave capped at USD [[FACT:wa.pfml.wage_cap.annual=184,500]] | [US-WAS5-011] |
+| PFML/SDI taxable wages where capped | For example Washington paid leave capped at USD [[FACT:wa.pfml.wage_cap.annual=184,500]] | [US-WAB5-002] |
 | Supplemental wages paid in the year | Mandatory [[FACT:fed.fit.supplemental.mandatory_rate=37]]% applies above USD [[FACT:fed.fit.supplemental.mandatory_threshold=1,000,000]] in the calendar year | [US-FEDS5-003] |
 | W-2 box totals (federal, State, local) | The W-2 covers the whole calendar year | `fed.tax_year.basis` [US-FED-006] |
 | Retirement deferrals and HSA contributions | Annual limits, for example elective deferrals USD [[FACT:fed.retirement.401k.elective_deferral_limit=24,500]] | [US-FED-023] |

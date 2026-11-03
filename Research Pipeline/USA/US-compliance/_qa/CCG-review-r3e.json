@@ -1,0 +1,281 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-02",
+ "_round_label": "3e",
+ "_naming": "The contract caps round at 3. This file is the mechanical closure confirmation after the r3d fixes (orchestrator option A, _pipeline/RUN-JOURNAL.md). It is written as round 3 with label '3e' and is not a fourth loop.",
+ "_reviewed_file": "01-ccg/US-CCG-001-v1.0.docx md5 dc445c19c9ee180f1a48267976267ac8 (confirmed on disk and on the snapshot used), 742,221 bytes, 928 tables, 5,806 paragraphs. Diffed against the r3d build a4c936f1161f4db448164ba2cf9247a9 (qa3d/snap.docx), both dumped with the same script (qa3e/dump.py).",
+ "_reviewer": "compliance-qa-auditor (fresh instance; built or fixed no part of the artifact)",
+ "_built_by": "artifact-builder ('Rebuild after r3d' + 'Rebuild after r3d tweaks') + compliance-source-hunter (AGENT2-R3d.md, AGENT2-R3d-fix2.md)",
+ "_summary": "All 8 r3d findings are fixed or correctly classified, including the blocker: no Birmingham number is left. F44 stays at 100 %: 2,205/2,205 (2,096 numeric keys + 109 base rules), unverified_keys empty. All mechanical checks pass or match their standing ruling: C11, C29 v2.12, C30 scan, C38, C40, C42, C43, C46 period-aware (0 mismatches, 118 unbound = target), C69, C70, C37, validate_contract --all, table-column lint and Word open. The shared C46 FAIL is the known limitation. The text diff against r3d has 37 hunks; every hunk maps to a logged fix, and there is no regression. Three minor findings are not blocking: a display truncation of the CT locator, ratio-versus-percent wording on the IN R46/R47 notes, and four dangling internal references. They are routed and must be fixed before run close.",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!Annex CT CT.S Sources and Annex MULTI MULTI.S Sources!T322r11c2; T205r6c2",
+   "problem": "The r3d finding 3 fix extended the US-CTP10-001 locator in the register to Tables C/D/E pp.28-30 and Withholding Tables pp.31-38. The Sources renderer cuts the article column at a fixed length. S11 (CT) and S6 (MULTI) therefore read \"... '15-Day Rule for Nonresident Employees' p.8; CT-W4NA …\", and the table locator added for the 556 CT.2 band rows does not show in the deliverable. The register row and the cited document (IP 2026(1)) are correct, so no value is affected. 31 other Sources cells use the same ellipsis convention.",
+   "expected": "The S11 locator shows the table pages, e.g. \"Withholding Tables pp.31-38; Tables C/D/E pp.28-30; Q5; 15-Day Rule p.8; CT-W4NA …\". Either the builder renders the full article_or_section in the Sources tables, or agent 2 puts the table locator first in the US-CTP10-001 article_or_section. Then rebuild.",
+   "register_id": "US-CTP10-001",
+   "action": "routed_to_builder",
+   "fact_key": "ct.wh.table.weekly.row.001"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!Annex IN IN.2c Local wage taxes!T439r4c4 (new in r3d fix); T439r3c4, r5c4, r7c4, r9c4 (pre-existing)",
+   "problem": "The new R47 Boone note reads 'Was 0.017 to 2026-09-30 (R46).' next to a value of 1.71 %. The 0.017 is a ratio, but the row and the key have been in percent since the logged unit change (in.local.lit.rate.*: ratio -> percent, PROPAGATION-LEDGER). The figure is untagged, and it sits in a cell citing US-INS5-007 (R47) although the R46 figure rests on US-IN-001. The four R46 notes print the whole chart as ratios: '(Boone 0.017, Marion 0.0202, Porter 0.005, Randolph 0.03)'. A reader can take 0.017 to mean 0.017 %.",
+   "expected": "T439r4c4: \"DN#1 R47/10-26 county chart, from 2026-10-01 [US-INS5-007]. Was [[FACT:in.local.lit.rate.boone=1.7]] % to 2026-09-30 (R46 [US-IN-001]).\" R46 notes in percent: Boone 1.7 %, Marion 2.02 %, Porter 0.5 %, Randolph 3.0 %. Apply the same wording to the WTC-country_specific copy ('From 0.017').",
+   "register_id": "US-INS5-007",
+   "action": "routed_to_source_hunter",
+   "fact_key": "in.local.lit.rate.boone"
+  },
+  {
+   "pattern": "F6",
+   "severity": "minor",
+   "pass": "P4",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!Annex MULTI MULTI.2b / Annex MS MS.2b / Module 6 6.2 / Module 13 13.1!T197r1c5; T586r2c5; T71r8c1; T165r8c1",
+   "problem": "Dangling internal references in the deliverable. They are pre-existing and the same class as r3d finding 7 and the fix2 'MULTI.md' cleanup, which removed only the 'MULTI.md' form. The text cites sections and ids that do not exist in the CCG. (1) T197r1c5 '(MULTI 2.3)' on the 2026-01-01 object of multi.reciprocity.il.partners; the 2026-02-01 object was cleaned. (2) T586r2c5 'correction to MULTI 2.2': MULTI has MULTI.2 / 2b / 2c and no 2.2, and 'correction to' is pipeline history. (3) T71r8c1 and T165r8c1 practice.ct.tables_vs_rules '... engine must choose one method (CT-OQ-1)': CT-OQ-1 is defined nowhere in the CCG, and the method was decided on 2026-11-02 (CT.2 P1593 / P1596: DRS tables up to each table maximum, TPG-211 rules above). m06 and m13 therefore word the CT method decision differently from CT.2 (G-BUILD scope-wording drift).",
+   "expected": "T197r1c5: 'Bilateral; confirmed on both sides. Local taxes are outside reciprocity.' T586r2c5: 'commuter to no-tax state: MS on all wages' (drop the correction clause). practice.ct.tables_vs_rules: 'DRS permits tables or TPG-211 rules; results differ up to 0.48/period; configured: DRS per-period tables up to each table maximum, TPG-211 rules above (CT.2, configuration decision of 2026-11-02).' Make the edits in the CCG-annex_MULTI, CCG-annex_MS and CCG-m13_practices facts, then rebuild.",
+   "register_id": null,
+   "action": "routed_to_source_hunter",
+   "fact_key": "practice.ct.tables_vs_rules"
+  }
+ ],
+ "checks_run": [
+  "C11",
+  "C29",
+  "C30",
+  "C32",
+  "C37",
+  "C38",
+  "C40",
+  "C42",
+  "C43",
+  "C46",
+  "C69",
+  "C70"
+ ],
+ "_checks_results": {
+  "structure": "PASS: 13 modules + 53 annexes (H1 69), H2 1,049, H3 174, H4 28, 928 tables, TOC field, 1 section, Version Control 1.0 / 2026-11-02 / Draft",
+  "word_open": "PASS: open_check.ps1 on a copy (same md5), 1 file, 0 not clean",
+  "C11": "PASS 96/96 (174 H3)",
+  "C29_v2.12": "PASS 0 hard / 0 bare / 0 X-run; internal paths 0",
+  "C30": "Scan: 0 tagged weak-only; 1 untagged unit (MA RQ-262 'IP 25-18', identifiers, same as r3d); 11 'secondary' + number (unchanged)",
+  "C32": "The FED wage base 184,500 (2026) / 192,300 (2027) is worded per period in T177 r3/r4; C46 period-aware 0 mismatches",
+  "C38": "PASS 928 tables, 54 recomputed, 0 mismatches",
+  "C40": "PASS 18/18",
+  "C42": "PASS 0",
+  "C43": "PASS (package 1.0)",
+  "C46_shared": "FAIL (orchestrator ruling: shared-checker limitation, not period-aware): 7,905 tags, 380 mismatches, 116 unbound",
+  "C46_period_aware": "7,905 tags, 0 keys missing, 0 mismatches, 283 off-year (0 unlabelled), 118 unbound (target 118), binding 0.9853",
+  "C69": "PASS 18 rows, 21 CCG examples",
+  "C70": "PASS 7 citations, 0 not in register, 0 repealed_cited, 0 gap problems",
+  "C37": "PASS (--no-engine)",
+  "validate_contract_all": "PASS (78 files before this file was written; re-run after writing)",
+  "table_column_lint": "PASS: 928 tables, 0 rows off the header cell count, 0 all-empty columns, 0 backslash-pipe cells (ID.3 T409 now 7 rows x 5 columns; OH.3 T729 +1 row)",
+  "pipeline_vocab": "0 hits outside tags for: local copy, local file, re-read with, MULTI.md, .md, F44, webfetch, pdfs/, ccg-sources, transcription:, _browser_, r2-curl, supersedes column, agent 2. The 2 'builder' hits are the IL statutory term 'fund builder'. 'Wayback id_' 39, unchanged (snapshot provenance, not raised). FACT-value 'register': 7 occurrences of the same 5 keys (ruling). Dangling 'MULTI 2.x' / 'CT-OQ-1': see finding 3",
+  "paren_quote_lint_on_changed_lines": "0 unbalanced"
+ },
+ "_r3d_findings_status": {
+  "1 AL.2c Birmingham under the Leeds tag (blocker)": "FIXED. T228r2c5 reads 'A Birmingham occupational tax rate is not confirmed by an official source.': no number, and 1 Leeds tag. The fact note is changed in CCG-annex_AL, and '1%' is removed from the WTC-country_specific unresolved al.local.occupational_tax.list. The builder guard (ccg_common.binding_ok() / place_names()) is logged. 0 Birmingham numbers remain in any facts file.",
+  "2 collapsed per-period notes (major)": "FIXED. FED T177r3c5 (2026) carries the G-DERIVE note, re-computed with Decimal: 60,600 x 69,846.57 / 22,935.42 = 184,548.709 -> 184,500. r4 (2027) carries the SSA 192,300 quote. CO T298r6c5 carries the 2026 split 0.44 + 0.44. CO T298r7c5 carries the 2026 wage-base note: it mentions 32,100 'for 2027' as labelled context, and the row value tag binds 30,600 (2026), so the ruling applies. IN T437r2c4 (2027) carries the DOR quote 2.90. The IN T439 R47 rows (r4/r6/r8/r10) carry R47 notes. NE T200r9c5, MULTI T196r13c5 and PA T768r7c5 are restored. Re-check against _research/qa-r3c-fix/_backup: 0 collapsed pairs over 188 multi-entry keys. The builder did not add the cross-year note check; the period-aware C46 covers it (283 off-year tags, 0 unlabelled). Residual: new finding 2 (IN ratio wording).",
+  "3 CT locator (major)": "FIXED in the register. The US-CTP10-001 article_or_section and figure_or_rule_carried now name Tables C/D/E pp.28-30 and the Withholding Tables pp.31-38, and local_file = the CT_IP-2026-1 PDF. The 556 band keys and the table C/D/E keys stay on S11. In the DOCX the Sources locator is truncated before the new text (new finding 1, minor).",
+  "4 TN.3 truncated note (major)": "FIXED. T820r6c5 is complete, with T.C.A. 50-7-402 and 50-7-403 and the quoted clause; parentheses and quotes are balanced. 'p.27' is not in the note, but the article_or_section of register row US-TNR3C-001 is 'Premiums and Taxes, p.27'. Accepted.",
+  "5 CA SDI register text (minor)": "FIXED. The US-CAP7-002 figure_or_rule_carried quotes 2026 1.3 and 2027 1.4, and the GAP sentence is gone.",
+  "6 OH 4141.23 version (minor)": "FIXED. New row US-OHR3D-001 (A.1, enrolled Sub. S.B. 101; local PDF md5 bb0054d1f94a37c3952df65b6da3850e confirmed). Division (A) was read on PDF p.4: '... and shall not be deducted, in whole or in part, from the remuneration of individuals in the employer's employ.' US-OHR3C-001 is active with effective_to 2026-06-15. oh.sui.employee.rate is split into 01-01..06-15 and 06-16..12-31 (value 0 in both) and rendered at T729r7/r8, with Sources line P3892. C70 PASS. WebFetch of the registered URL on 2026-11-02 returned ECONNREFUSED (out-of-US access), as in r3d. Limitation: the source is the enrolled bill, not the codified page.",
+  "7 'local copy' wording (minor)": "FIXED. 'local copy' 0, 'local file' 0, 're-read with' 0. The 10 Sources cells now hold the instrument names only (diff hunks #3-5, #10-12, #16, #19, #21, #37).",
+  "8 value-bound tags AL / ID (minor)": "FIXED. AL.2 T225 r8/r10 tag single, married, married_separate and head_of_family with their own keys; MFJ 5,000 is now tagged; the HoH GI 35,500 is re-bound to .head_of_family.phaseout.floor_from_gi. ID.3 has 2 new keys on US-IDB5-402, checked against transcription l.17 and the IDOL PDF row 'Standard 1.000% 0.97000% 0.00000% 0.03000%'."
+ },
+ "_diff_audit": "37 hunks, old a4c936f1 vs new dc445c19, both dumped with the same script. Every hunk is explained by a logged fix. MULTI.md removal (fix2): #1, #6, #7. Per-period notes (finding 2): #2 FED, #8 NE, #17-18 CO, #26-30 IN, #35 PA. Vocabulary 'local copy' (finding 7): #3-5, #10-12, #16, #19, #21, #37. CT locator (finding 3): #9, #20, truncated (new finding 1). AL tags (finding 8): #13-14. Birmingham (finding 1): #15. Re-binding by the finding-1 guard: #22 IA construction 5.400 to its own key; #23 ID supplemental 5.3 to id.wh.supplemental.rate. ID components (finding 8): #24-25, 2 new rows. MD 2025 rates removed (fix2): #31. OH split (finding 6): #32-34. TN note (finding 4): #36. Tag multiset 7,894 -> 7,905. New keys: id.sui.new_employer.ui_component.rate and id.sui.new_employer.admin_component.rate. Removed key: md.local.county.carroll.rate, a wrong value-binding on the Allegany 3.03 note; the key is a WTC-country_specific fact and is still in that file. Value-set changes: ia.sui.new_employer.construction.rate is now tagged (5.400), and the MS rule text was reworded with the same meaning. No figure changed. Register diff against _r3d_backup: only US-CAP7-002, US-CTP10-001 and US-OHR3C-001 changed, and US-OHR3D-001 was added (2,667 -> 2,668 rows), as logged.",
+ "manual_review_items": [
+  "C5 (classification cites the establishing article): not implemented (L3). Run by hand on the new OH row: it cites ORC 4141.23(A) as amended by Sub. S.B. 101, PDF p.4. PASS",
+  "C6 (file format vs source PDF): not applicable at CCG close",
+  "C7 (population-rules depth): not implemented (L3). Run by hand on the changed rows: per-period notes restored, 0 collapsed pairs over 188 multi-entry keys. PASS, apart from the wording in finding 2",
+  "C9: fires at WTC close; not run. C21 (payslip 5 vs 8 sheets): not relevant to the CCG",
+  "F24: the r3d fix passes did not change MANDATE.md; no OUT-OF-SCOPE wording in the diff",
+  "F44 method: f44g.py re-run as qa3e/f44h.py on the new dump. Of 2,096 numeric keys, 2,001 matched in the cited file, 42 matched only in another row's file, and 53 did not match. The 41 other-row keys other than oh.sui.employee.rate have value, register_id and dates unchanged against _r3d_backup/facts_before, so the r3d quote proof carries over. oh.sui.employee.rate: the new 2026-06-16 object was read this round (clause on PDF p.4); the 2026-01-01 object is unchanged apart from effective_to. The 53 unmatched keys are the same set as in r3d and are unchanged against both _r3d_backup and _r3e_backup facts_before (manual verification carried over). The 109 base rules are unchanged against both backups. The 2 new ID keys matched mechanically and were also checked against the IDOL PDF row. The FED derivation was re-computed with Decimal",
+  "Rulings applied: documented_limitation items, next-year unpublished values, 'in force as at retrieved_on' notes, shared C46 limitations, the 5 ordinary-English 'register' keys, and labelled 2027 context in 2026 notes (CO T298r6/r7, m06 in.pit.rate: the row value tags bind the 2026 value)",
+  "WebFetch: one verification attempt on the US-OHR3D-001 URL (search-prod.lis.state.oh.us, SB 101 enrolled PDF): ECONNREFUSED. The local copy was used. No research done",
+  "Check-side effect: run_suite.py (C37) writes a results run folder under _validation/results inside BASE",
+  "Schema note: review.schema.json says there is no 'PASS with comments'. The orchestrator's closure rule for this pass is 'PASS if no blocker and unverified_keys empty', and the agent doctrine defines a minor finding as 'fix before run close'. The 3 minor findings are routed with that deadline and are carried in the ledger"
+ ],
+ "propagation": [
+  {
+   "fact": "ca.sdi.employee.rate",
+   "consumed_by": [
+    "CCG/annex_CA",
+    "CCG/m05_social_security",
+    "CCG/m08_leave",
+    "WTC/country_specific"
+   ],
+   "resynced": false,
+   "register_id": "US-CAP7-002",
+   "_note": "Done in the CCG. The WTC-country_specific facts still hold only the 2026 1.3 object; the WTC must add the 2027 1.4 object"
+  },
+  {
+   "fact": "oh.newhire.report_days",
+   "consumed_by": [
+    "CCG/annex_OH",
+    "RSPEC",
+    "SIR",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-OHS5-014",
+   "_note": "RSPEC facts value 20 = CCG. The RSPEC/SIR/DD artifacts must re-read it at their build"
+  },
+  {
+   "fact": "ri.report.w2.efile_threshold",
+   "consumed_by": [
+    "CCG/annex_RI",
+    "RSPEC",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-RIS5-018",
+   "_note": "RSPEC facts value 25 = CCG"
+  },
+  {
+   "fact": "tx.newhire.report_days",
+   "consumed_by": [
+    "CCG/annex_TX",
+    "RSPEC",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-TXS5-017",
+   "_note": "RSPEC facts value 20 = CCG"
+  },
+  {
+   "fact": "al.local.leeds.rate",
+   "consumed_by": [
+    "CCG/annex_AL",
+    "WTC/country_specific",
+    "RSPEC",
+    "SIR"
+   ],
+   "resynced": true,
+   "register_id": "US-ALS5-017",
+   "_note": "Birmingham number removed in the CCG and in the WTC unresolved text; the WTC fact note never carried it"
+  },
+  {
+   "fact": "fed.fica.oasdi.wage_base",
+   "consumed_by": [
+    "CCG/annex_FED",
+    "CCG/m05_social_security",
+    "WTC/global_baseline",
+    "DD",
+    "PSL"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDS5-005",
+   "_note": "CCG per-period notes restored. WTC-global_baseline holds both objects (184,500 / 192,300) with its own notes. The WTC, DD and PSL builders must read the per-period objects"
+  },
+  {
+   "fact": "ct.wh.table.weekly.row.001",
+   "consumed_by": [
+    "CCG/annex_CT",
+    "CCG/annex_MULTI",
+    "CCG/m06_tax",
+    "CCG/m12_worked_examples",
+    "WTC/country_specific",
+    "WTC/global_baseline"
+   ],
+   "resynced": false,
+   "register_id": "US-CTP10-001",
+   "_note": "The register_id stays US-CTP10-001 and its locator was extended; this applies to all 556 band rows and the table C/D/E keys. The WTC must cite the extended locator. CCG display: finding 1"
+  },
+  {
+   "fact": "oh.sui.employee.rate",
+   "consumed_by": [
+    "CCG/annex_OH"
+   ],
+   "resynced": true,
+   "register_id": "US-OHR3D-001",
+   "_note": "Split at 2026-06-16; the value 0 is unchanged. Per consumed_by, only the CCG consumes it"
+  },
+  {
+   "fact": "id.sui.new_employer.ui_component.rate",
+   "consumed_by": [
+    "CCG/annex_ID",
+    "WTC/country_specific"
+   ],
+   "resynced": false,
+   "register_id": "US-IDB5-402",
+   "_note": "New key (with admin_component). US-IDB5-402 consumed_by includes WTC/country_specific; the WTC carries it if it splits the ID new-employer rate"
+  },
+  {
+   "fact": "co.sui.wage_base",
+   "consumed_by": [
+    "CCG/annex_CO",
+    "WTC/country_specific"
+   ],
+   "resynced": true,
+   "register_id": "US-COP51-003",
+   "_note": "Per-period note restored; the WTC facts hold both objects"
+  },
+  {
+   "fact": "in.local.lit.rate.boone",
+   "consumed_by": [
+    "CCG/annex_IN",
+    "WTC/country_specific",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-INS5-007",
+   "_note": "Finding 2: ratio-versus-percent wording in the CCG and WTC notes"
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "r3d findings confirmed fixed or correctly classified",
+   "result": "pass",
+   "note": "8/8; residuals in new minor findings 1 and 2"
+  },
+  {
+   "name": "F44 numeric gate (100 % numeric keys + base rules)",
+   "result": "pass",
+   "note": "2,205/2,205; unverified_keys empty"
+  },
+  {
+   "name": "Old vs new DOCX text diff: every change explained, no regression",
+   "result": "pass",
+   "note": "37 hunks, all mapped to logged fixes"
+  },
+  {
+   "name": "CCG closed: same figure identical everywhere (C32, period-aware)",
+   "result": "pass",
+   "note": "0 mismatches"
+  },
+  {
+   "name": "CCG closed: OUT-OF-SCOPE tags vs current MANDATE.md (F24)",
+   "result": "pass",
+   "note": "no scope wording changed"
+  },
+  {
+   "name": "CCG closed: C40 / C38",
+   "result": "pass",
+   "note": "18/18; 54 recomputed, 0 mismatches"
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 2205,
+  "facts_verified": 2205,
+  "unverified_keys": [],
+  "method": "2,096 numeric keys tagged in the DOCX + 109 base-rule keys. Numeric keys: 2,001 matched mechanically in the cited row's local file (f44h.py). 42 matched only in another row's file. For 41 of them, value, register_id and dates are unchanged since r3d, where each was proven in the cited file by quote. The 42nd, oh.sui.employee.rate, was read this round: the new object's clause on PDF p.4 of US-OHR3D-001 (md5 bb0054d1...). The 53 manual keys are unchanged against _r3d_backup and _r3e_backup facts_before, so their manual verification carries over. The 10 zero employee-UI keys: clauses carried over, and the OH new version was read. The new keys id.sui.new_employer.ui_component.rate and admin_component.rate matched in the transcription and in the IDOL PDF. The FED 184,500 derivation was re-computed. The 109 base rules are unchanged against both backups (verified 109/109 in r3c). Scripts: scratchpad qa3e/f44h.py, dump.py, diff.py, run_checks_qa.py, c30.py.",
+  "_by_category": {
+   "numeric_keys": 2096,
+   "mechanical_in_cited_file": 2001,
+   "other_row_carried_quote_proof": 41,
+   "read_this_round": 1,
+   "manual_carried_unchanged": 53,
+   "base_rule_keys": 109
+  }
+ },
+ "_documented_limitations_accepted": "Per the orchestrator rulings: documented_limitation items in gaps.json, next-year unpublished values, 'in force as at retrieved_on' notes, the shared C46 limitations, the ordinary-English 'register' in 5 fact values, and labelled 2027 context in 2026 notes where the row tag binds the 2026 value (CO 1.70 % / 32,100, IN 2.90 %). OH from 2026-06-16 rests on the enrolled bill, not the codified page.",
+ "_next_action": "PASS: the CCG may close and Stage 2 may start. Before run close, artifact-builder fixes finding 1 (CT Sources locator display) and compliance-source-hunter fixes findings 2 and 3 (IN note units; MULTI/MS/CT dangling references and the CT method wording in m06/m13), followed by one rebuild with regression_guard. Downstream builders (WTC, RSPEC, SIR, DD, PSL) must re-read the propagation[] facts at their build, per PROPAGATION-LEDGER.md."
+}

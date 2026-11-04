@@ -6,6 +6,7 @@
 - 2026-10-29/30: HRBS-16407 (STG Espanha) no chat "STG: Spain - ESS tax card fields discussion" → `sessoes/2026-10-30-chat.md`. Triagem anterior: `rascunhos/2026-10-28-triagem-chat.md`.
 
 ## Instruções vigentes
+- **Change log (Manju, 04/11, regra 10 do CLAUDE.md):** artefato já entregue não ganha documento novo; mantém a versão e registra a mudança no change log. Vale para país novo e existente.
 - Tudo desta frente se resolve nesta janela (não delegar à Gmail) — usuário, 28/10.
 - Rascunhos de resposta ficam no próprio Google Chat/Gmail (compositor), nunca enviados sem ordem explícita; ler o que já está no compositor antes de colar.
 - Mensagens a terceiros: o mais objetivo possível; responder só o perguntado; se já ficou claro antes, só o necessário; uma mensagem consolidada com veredito (quem está certo) e ação (quem faz) — usuário, 29–30/10.

@@ -218,6 +218,7 @@ Quando o usuário disser:
 7. `raw/` é imutável; `log.md` só cresce.
 8. **Versão vigente de artefato = a de maior número de versão** (a planilha/arquivo com a atualização mais recente). Ex.: WTC Espanha V4.4. Quando fontes citarem versões diferentes, registrar a maior como vigente e as outras como histórico. (decidido em 2026-10-05)
 9. **País já ativo → ticket de alteração para o Development.** Antes de qualquer alteração em artefato de um país, perguntar: **o país já está ativo** (em produção)? Se estiver, a alteração exige abrir ticket de alteração para o time de Development (quem leva a mudança para produção, ver [[fronteiras]]); registrar o ticket no hub do país. (decidido em 2026-10-27)
+10. **Entregável já entregue → mesma versão + change log, nunca documento novo.** Depois que um artefato (CCG, WTC, DD, Specs, SIR, Payslip) foi entregue/confirmado ao Development ou ao design, toda mudança, em país novo ou existente, mantém a versão vigente e registra a mudança no change log do próprio artefato (data, o quê, por quê, fonte). Não mandar documento novo nem trocar versões em sequência sem change log. Antes de mudar, avisar quem já está desenhando (Mohit/Ram). Origem: Colômbia confirmada em 22/10 e alterada em 30/10 e 02/11 sem change log → Mohit adiou o prazo para o fim de novembro (Manju, RA Team, 04/11; processo "Annual Statutory Updates 2026 - Tracking, Development and Release Process"). (decidido em 2026-11-04)
 
 ## Fontes de conhecimento
 | Fonte | Como entra |

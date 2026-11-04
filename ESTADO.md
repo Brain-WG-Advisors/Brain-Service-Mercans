@@ -2,6 +2,16 @@
 
 > Atualizado em 2026-11-03 (sessão [[sessoes/2026-11-03]]; blocos de 02/11 e anteriores sem mudança). Reescrever a cada "fecha a sessão". Ler ao abrir a sessão.
 
+## Reuniões de 04/11 (bi-weekly com o Marko + call Dev × Research com Mohit/Ram/Lily)
+Fontes: `raw/reunioes/2026-11-04-research-team-biweekly.txt` e `raw/reunioes/2026-11-04-collaboration-dev-design.txt`. Itens de país nos hubs [[Colombia]], [[Espanha]], [[Ucrania]], [[Franca]].
+- **Change management do Dev:** regra 10 do CLAUDE.md (submeteu = congela; mudança grande = retirar e reenviar, prazo recomeça). Marko pediu para alinhar com o Mohit; call semanal Manju/Mohit criada (Dinamarca na próxima).
+- ⏳ Usuário: **agendar call com Chris, Martin e Marko** (AI pod) — encaixar no roadmap o que falta da automação de tickets (~60–70% feita) e os outros loops (manter skills atualizadas; ~100 países × 2–3 artefatos).
+- ⏳ Usuário: Colômbia, mandar ao Mohit/Ram a lista consolidada das mudanças v1.4 → v1.7 (prometido na call).
+- ⏳ Usuário: França, conectar com a Vanessa Suarez (teste da regulation, CBAs/CLAs).
+- ⏳ Usuário: Ucrânia, comparar a lógica de indexação da Natalia (pasta Ukraine › regulation guide) com o CCG.
+- 🔄 **Teste do design no produto:** o Marko aprovou testar o design feito pelo Claude, começando pelos EUA. O Mohit avisa que acceptance e produção são ambiente vivo, aprovados pelo Andre, e que staging é só dele e dos devs da Estônia. Falta conversar com o Andre (e Marko/Andy). Afeta as frentes EUA e Chade.
+- Para saber (sem ação): Accenture traz Bulgária, Hungria, Turquia, Grécia (tetos EFKA, abandonada 3×) e Marrocos para o roadmap 27/28, ainda sem kickoff. Suíça (Enaakshi) em revisão, alvo esta ou a próxima semana; apoio em italiano: Simone Chiccarelli. Vietnã/Taiwan (Manju): o Marko exige XML gerado pelo sistema, nunca digitação manual.
+
 ## Parada para migração de conta (03/11) — LER PRIMEIRO
 - **Todas as tarefas paradas** a pedido do usuário para migrar o Claude Code para a **conta corporativa da Mercans**. Estado salvo no git (commit + push de 03/11).
 - **GitHub novo:** `Brain-WG-Advisors/Brain-Service-Mercans` (privado; dona da organização: conta ViniCerqueira, depois passa ao diretor da WG Advisors; `wgomes-adv` é membro com **leitura** — subir para Admin em Settings → Collaborators). Remote local já aponta para lá. Pasta local continua `Documents\brain-service`.

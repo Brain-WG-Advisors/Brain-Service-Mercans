@@ -1,0 +1,88 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DESIGN",
+ "round": 3,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "09-design/US_Regulation_Design_v1.0.md",
+ "_reviewed_md5": "729c7cdbf4e51e37d3098b5fa565cb0d",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "_id": "DESIGN-QA3-01",
+   "pattern": "F27",
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "00-official-sources/legal-basis-register.csv",
+    "sheet_or_section": "consumed_by",
+    "cell_or_line": "rows US-GAS5-022, US-MNS5-008, US-MNS5-009, US-NMB5-001, US-NMB5-002, US-NMB5-301, US-NMS5-006, US-NMS5-007, US-NYS5-002, US-ORS5-002, US-WAS5-008"
+   },
+   "problem": "The r2 fix bound 11 new register rows in _pipeline/DESIGN-bindings.csv (the NY, OR and GA minimum-wage rows and the MN, NM and WA local rows), but none of them lists DESIGN in consumed_by. The r2 fix closed only the 51 rows named in QA2-06, so the same F27 gap reopened for the rows added in r3.",
+   "expected": "Append 'DESIGN' to consumed_by on US-GAS5-022;US-MNS5-008;US-MNS5-009;US-NMB5-001;US-NMB5-002;US-NMB5-301;US-NMS5-006;US-NMS5-007;US-NYS5-002;US-ORS5-002;US-WAS5-008, and add one PROPAGATION-LEDGER line. A mechanical re-check (every register_id in DESIGN-bindings.csv has DESIGN in consumed_by) closes it; no design rebuild is needed.",
+   "register_id": "US-NYS5-002",
+   "action": "escalated_to_human"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C45",
+  "C46",
+  "C71"
+ ],
+ "_r2_closure": {
+  "QA2-01": "closed: NY (17.00 / 16.00, US-NYS5-002) and OR (standard 15.05/15.55, Portland 16.30/16.80, nonurban 14.05/14.55, US-ORS5-002) rows, plus GA, MN, NM and WA local rows; region from DD County of primary employment / Work location / Worksite ZIP code (all exist in the DD)",
+  "QA2-02": "closed: wa.wc.supplemental_pension.rate method is per hour",
+  "QA2-03": "closed: 58524 gated by 58403, 58406 and 58409",
+  "QA2-04": "closed: catch_up and futa_catch_up; FUTA liability is any quarter of the current or preceding year",
+  "QA2-05": "closed: 58428 applies to MA PFML only; other programmes use 58420; DESIGN-RQ-09 (Part 6 item 14)",
+  "QA2-06": "closed for the 51 rows; 11 rows added by r3 are open (QA3-01)",
+  "DESIGN-RQ-10": "sector and age minimum wages listed as a named limitation (Part 6 item 15): accepted"
+ },
+ "manual_review_items": [
+  "Federal fallback (AL, LA, MS, NC, NH, OK, SC, TN), checked against the facts: al.minwage.state.exists False [US-ALS5-010]; la.minwage.state_law.exists False [US-LAS5-006]; ms.labour.minwage.state.exists False [US-MSS5-010]; nc/nh/ok.labour.minwage.state.follows_federal True [US-NCS5-002, US-NHS5-003, US-OKS5-001]; sc/tn.*.state.exists False [US-SCS5-012, US-TNS5-011]. No fact gives any of the 8 States a rate above USD 7.25, so the fallback is correct. GA 5.15 [US-GAS5-022] is below federal, and MAX() returns 7.25.",
+  "Strict C45 (independent): 37 flags, 54 gates, 0 gates on undeclared flags or values. The 5 flags with no gate are the source flag 58405, the lookup keys 58415-58417 and the numeric 58422. Shared C45 PASS (54 conditions, 0 dead).",
+  "C71 (independent): build_design.py run 3 times in an isolated copy of its inputs (scratchpad c71/US). All 3 outputs have md5 729c7cdbf4e51e37d3098b5fa565cb0d, identical to the delivered file.",
+  "tag_sync: 0 stale in CCG, SIR, RSPEC, DD, WTC, PSL and DESIGN.",
+  "PROPAGATION-LEDGER: the r1 B15 lines and the r2 batch line are present."
+ ],
+ "numeric_verification": {
+  "facts_total": 533,
+  "facts_verified": 533,
+  "unverified_keys": [],
+  "method": "All 533 distinct tag pairs: 41 tags changed in r3 (NY/OR/GA/MN/NM/WA minimum wage). All 41 were found in their registered local copy, and the low-entropy values were re-read in context: NY 17.00/16.00 (Labor Law 652 text), OR 15.05/15.55/16.30/16.80/14.05/14.55 (BOLI table), NM Albuquerque 12.00/13.00 and Santa Fe 15.40, GA 5.15. The other 492 are unchanged and were verified in r1/r2."
+ },
+ "propagation": [
+  {
+   "fact": "ny.labour.minwage.nyc_li_westchester.hourly",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_NY"
+   ],
+   "resynced": false,
+   "register_id": "US-NYS5-002"
+  },
+  {
+   "fact": "or.labour.minwage.standard.hourly",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_OR"
+   ],
+   "resynced": false,
+   "register_id": "US-ORS5-002"
+  }
+ ],
+ "escalation": {
+  "reason": "Round 3 is the last round, and the one open item is register bookkeeping (11 consumed_by cells), not a design defect. Every design item from r2 is closed and verified. By contract a round-3 FAIL goes to a human rather than to a round 4.",
+  "decision_needed": "Approve the 11-row consumed_by append (source hunter) and accept a mechanical confirmation in place of a fourth review round.",
+  "options": [
+   "A (recommended): source hunter appends DESIGN to the 11 rows and adds a ledger line; the orchestrator confirms with the one-line check (every register_id in DESIGN-bindings.csv has DESIGN in consumed_by); DESIGN is then treated as closed with this review as evidence.",
+   "B: leave DESIGN blocked until a human re-reviews."
+  ]
+ },
+ "_batch_fix_list": [
+  "R3-B1 register (source hunter): add DESIGN to consumed_by on US-GAS5-022;US-MNS5-008;US-MNS5-009;US-NMB5-001;US-NMB5-002;US-NMB5-301;US-NMS5-006;US-NMS5-007;US-NYS5-002;US-ORS5-002;US-WAS5-008; ledger line; confirm with the DESIGN-bindings.csv consumed_by check (QA3-01)"
+ ],
+ "_next_action": "human decision on the escalation (option A recommended)"
+}

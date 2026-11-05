@@ -83,7 +83,13 @@ _FORMS = None
 KEEP_NOTE_KEYS = {"ut.pit.oracle.example_6.withholding"}
 # QA r3c finding 2: the new scenario-input fact ut.pit.oracle.example_6.wages carries a note whose source sentence
 # is a local file path (dropped by sanitize) and whose remainder names a key; the cell states what the value is.
-NOTE_OVERRIDE = {"ut.pit.oracle.example_6.wages":
+NOTE_OVERRIDE = {
+                 "ut.pit.base_allowance.single.annual": "Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]]",
+                 "ut.pit.base_allowance.married.annual": "Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]]",
+                 "ut.pit.phaseout_threshold.single.annual": "Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]]",
+                 "ut.pit.phaseout_threshold.married.annual": "Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]]",
+                 "ut.pit.phaseout.rate": "Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]]",
+                 "ut.pit.oracle.example_6.wages":
                  "Utah taxable wages of the daily, married worked example (input of the withholding row below)."}
 
 
@@ -92,8 +98,8 @@ NOTE_OVERRIDE = {"ut.pit.oracle.example_6.wages":
 # status code that stands alone (not inside a hyphenated / dotted section number). INTERNAL_STRICT holds the
 # phrases that are pipeline wording in any context; a clause carrying a legal citation or quoted statute
 # text (CC.LEGAL_CITE_RX) is dropped only for those, never for the looser words of INTERNAL.
-INTERNAL = re.compile(r"webfetch|summari[sz]er|verification is weak|wayback|\bMANUAL\b|tier[- ]B\b|synthesis|stage[- ]?5|\bpython\b|\bOQ-|\bQ\d\b|\bcurl\b|HTTP \d{3}|\(40[34]\)|(?<![-.§\w])40[34](?![-\w(]|\.\w)|research pack|register row|\bpartial\b|superseded|G-DERIVE|legacy|browser pass|chrome pass|\bVPN\b|US-MQ-|derived arithmetically|internal conflict|\bpp\.\s?\d|\bFAQ\s?\d", re.I)
-INTERNAL_STRICT = re.compile(r"webfetch|summari[sz]er|wayback|\bMANUAL\b|tier[- ]B\b|synthesis|stage[- ]?5|\bpython\b|\bOQ-|\bcurl\b|HTTP \d{3}|research pack|register row|G-DERIVE|browser pass|chrome pass|\bVPN\b|US-MQ-", re.I)
+INTERNAL = re.compile(r"R\d 20\d\d|effective_from|local copy|script shell|(?:returned|HTTP)[^.;]{0,40}\bbytes?\b|webfetch|summari[sz]er|verification is weak|wayback|\bMANUAL\b|tier[- ]B\b|synthesis|stage[- ]?5|\bpython\b|\bOQ-|\bQ\d\b|\bcurl\b|HTTP \d{3}|\(40[34]\)|(?<![-.§\w])40[34](?![-\w(]|\.\w)|research pack|register row|\bpartial\b|superseded|G-DERIVE|legacy|browser pass|chrome pass|\bVPN\b|US-MQ-|derived arithmetically|internal conflict|\bpp\.\s?\d|\bFAQ\s?\d", re.I)
+INTERNAL_STRICT = re.compile(r"R\d 20\d\d|effective_from|local copy|script shell|(?:returned|HTTP)[^.;]{0,40}\bbytes?\b|webfetch|summari[sz]er|wayback|\bMANUAL\b|tier[- ]B\b|synthesis|stage[- ]?5|\bpython\b|\bOQ-|\bcurl\b|HTTP \d{3}|research pack|register row|G-DERIVE|browser pass|chrome pass|\bVPN\b|US-MQ-", re.I)
 
 
 def tag_scenario_inputs(f, note, facts):
@@ -119,6 +125,7 @@ def sanitize(text, fallback=""):
     """Drop clauses that carry pipeline-internal wording (C47: no history or process in the deliverable)."""
     if not text:
         return text
+    text = re.sub(r"\s*\((?:local copy|retrieved)[^)]*\)", "", text)       # a parenthetical retrieval stamp is dropped, the name stays
     parts = re.split(r"(?<=[;.])\s+", text)
     keep = [p for p in parts if not (INTERNAL_STRICT if CC.LEGAL_CITE_RX.search(p) else INTERNAL).search(p)]
     out = " ".join(keep).strip().rstrip(";").strip()

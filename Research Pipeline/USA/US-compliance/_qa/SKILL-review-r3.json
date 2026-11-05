@@ -1,0 +1,63 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SKILL",
+ "round": 3,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "01-ccg/annexes/annex_LA.md!LA.5!line 81 (blank since r2); same in ../skills-build/payroll-compliance-united-states/references/12-states/LA.md line 81",
+   "problem": "New open gap RQ-597 (la.report.sui.form_layout, location annex_LA.md!LA.5) is listed only in 14-known-gaps. It is printed neither in annex_LA nor in LA.md (the r3 CCG diff touches annex_UT only), although 14-known-gaps line 3 states that every gap is printed in the references as 'Not configured in this release (open gap id)'. A reader of LA.md sees the LWC channel with no warning that the form name and upload layout are unknown. The RQ-240 residual pointer in gaps.json still names the W-2 item rspec.la.w2_state.lawage_format.",
+   "expected": "annex_LA LA.5 and LA.md: 'Not configured in this release [[GAP:RQ-597]]: UI quarterly wage report form name and upload layout (LWC online services) not read.' The RQ-240 residual should point to RQ-597. Then rebuild the CCG and skill, run tag_sync, and rewrite SKILL-md5.txt.",
+   "register_id": "US-LAS5-007",
+   "fact_key": "la.report.sui.quarterly",
+   "action": "escalated_to_human"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C32"
+ ],
+ "escalation": {
+  "reason": "Round 3 is the last permitted round. One r2 item is only partly closed: RQ-597 is tracked in 14-known-gaps but not printed in annex_LA or 12-states/LA.md. The auditor is read-only on deliverables, so it cannot fix this in place.",
+  "decision_needed": "Either print RQ-597 in annex_LA and LA.md (CCG + skill rebuild, about 2 lines, then SKILL passes), or accept the gap being listed only in 14-known-gaps as a named limitation of package 1.0.",
+  "options": [
+   "Rebuild with the RQ-597 line printed (recommended; mechanical, no research)",
+   "Accept as a named limitation in the QA report and handover"
+  ]
+ },
+ "cross_checks": [
+  {
+   "name": "UT (r2 finding 1)",
+   "result": "pass",
+   "note": "CCG md5 2568a947e023fd50e856ad1781eaf068. The md and docx diffs against pre-skill-r2-2026-11-04 cover annex_UT only: 5 note cells now read 'Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated'. UT.md matches."
+  },
+  {
+   "name": "LA (r2 finding 2)",
+   "result": "fail",
+   "note": "RQ-597 is open in gaps.json and listed in 14-known-gaps line 757, but not printed in annex_LA or LA.md (finding)."
+  },
+  {
+   "name": "TN / counts",
+   "result": "pass",
+   "note": "R3C-TN-UI-STATUTE = documented_limitation. gaps.json shows 586 open / 125 limitations / 30 closed / 1 check_existing_fact (742), and the counts block, 14-known-gaps line 3 and the build log all agree."
+  },
+  {
+   "name": "tag_sync_check / md5 / sample",
+   "result": "pass",
+   "note": "0 stale tags in all 6 artifacts; SKILL-md5.txt 99/99; value sample 1,557 rows, 0 misses."
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 1557,
+  "facts_verified": 1557,
+  "unverified_keys": [],
+  "method": "Index rows checked against the facts files and the register; no primary re-fetch (403 from this exit)."
+ },
+ "_batch_fix_list": [
+  "Print GAP RQ-597 in annex_LA LA.5 and LA.md; point the RQ-240 residual to RQ-597; rebuild the CCG and skill; tag_sync; md5 list."
+ ]
+}

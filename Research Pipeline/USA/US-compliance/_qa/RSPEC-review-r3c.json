@@ -1,0 +1,37 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "RSPEC",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-03",
+ "_scope": "Re-check defined in RSPEC-review-r3b._next_action: UI-001 Report Matrix G45/J45 and C71 only.",
+ "_reviewer": "compliance-qa-auditor (same fresh instance as r3/r3b; authored no part of RSPEC, facts or register)",
+ "_summary": "The r3b blocker is closed. Diff against the r3b-reviewed build: exactly 2 cells, both in UI-001 Report Matrix. G45 now reads 'online_form'. J45 now reads 'Channel: online_form | Portal: not named in the cited channel sources | Source: https://www.laworks.net/FAQs/FAQ_UI_EmployerTaxes.asp | TO CONFIRM. Accuracy 75% ...'. G45 'online_form' is supported by the cited copy US-LAS5-007 (FAQ_UI_EmployerTaxes_wayback-20250422010607.html): 'Use LWC's online services to file wage reports and pay taxes' and 'Employers reporting 100 or more employees MUST file wage reports online'. J45 no longer names LAWATS, which agrees with column C45 ('LWC online services') and with unresolved rspec.la.ui_qtr.system_name. I accept the builder's exclusion of US-LAP52-005: that copy uses LAWATS only for the TPA/PEO POA upload and SIDES. C71 PASS, 20 files, 0 differences. The 20 workbooks match the refreshed md5_final.txt (20/20). Bindings md5 is e6b0ea7f, unchanged since r3b.",
+ "findings": [],
+ "checks_run": ["C71"],
+ "_checks_results": {
+  "cell_diff_vs_r3b_build": "2 cells: US-UI-001 Report Matrix G45, J45; 0 elsewhere",
+  "G45_support": "PASS: US-LAS5-007 local copy, 'Use LWC's online services to file wage reports'",
+  "C71": "PASS 20 files, 0 differences (regen_check.py, run by the auditor)",
+  "md5": "20/20 equal to the refreshed md5_final.txt; bindings e6b0ea7f",
+  "carried_from_r3b": "F44 591/591 verified; C46 period-aware 0 mismatches; spec_lint 0. The 2 touched cells carry no fact tag, so these results are unaffected."
+ },
+ "manual_review_items": [
+  "Targeted re-check only (G45/J45 + C71). Every other cell was reviewed in r3 or r3b and is unchanged (2-cell diff)."
+ ],
+ "numeric_verification": {
+  "facts_total": 591,
+  "facts_verified": 591,
+  "unverified_keys": [],
+  "method": "Carried from RSPEC-review-r3b (full element re-check of the 591 bound instances). The 2 touched cells contain no fact tag."
+ },
+ "cross_checks": [
+  {"name": "r3b finding 1 (C71 / J45 false citation) closed", "result": "pass", "note": "J45 names no portal; C71 0 differences"},
+  {"name": "Report Specs x DD (C27)", "result": "not_applicable", "note": "fires at DD close"}
+ ],
+ "propagation": [
+  {"fact": "sir.la.ui.wage_report", "consumed_by": ["SIR", "CCG/annex_LA"], "resynced": false, "register_id": "US-LAS5-007", "_note": "RSPEC no longer names LAWATS. The SIR and CCG la.report.sui.quarterly wording stays for the SIR build and the run-close CCG rebuild (LAWATS is not the wage-report channel in any held copy)."}
+ ],
+ "_carried_open_items": "Documented limitations RSPEC-GAP-L-R3-07 and -10. CCG annex_NV nv.mbt.base tag and CCG annex_LA LAWATS wording go to the run-close CCG rebuild. rspec.mn.pfml_qtr.form RSPEC vs SIR wording and the F27 accuracy mirror (ledger line 63) go to the SIR build. Unresolved rspec.la.ui_qtr.system_name stays with agent 2.",
+ "_next_action": "RSPEC may close (orchestrator: status qa_pass). DD (stage 4) may start; C27 (Report Specs x DD, both directions) fires at DD close."
+}

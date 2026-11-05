@@ -1,0 +1,10 @@
+import re
+p = "QA-REPORT.md"; s = open(p, encoding="utf-8").read()
+s = re.sub(r"^- \*\*Verdict \(release check, re-check 5, 2026-11-05\).*$", "- **Verdict (release round 2, 2026-11-05): RELEASED-LOCAL (not uploaded).** REL-1 is fixed: the CCG passes C71 and its md5_final is sealed at 20307cd3. C47 passes with 0 findings on the 26 released files. Section 13.1 has the details. Earlier sections record the previous passes.", s, count=1, flags=re.M)
+s += open("_runclose/section13b.md", encoding="utf-8").read()
+open(p, "w", encoding="utf-8").write(s)
+h = "handover_status.md"; t = open(h, encoding="utf-8").read()
+t = t.replace("# US handover status (2026-11-05, re-check 5: release check)", "# US handover status (2026-11-05, release round 2)")
+t = re.sub(r"^\*\*State: RELEASE CHECK FAILED \(REL-1\).*$", "**State: RELEASED-LOCAL (not uploaded), 2026-11-05.** The package is `10-release/`: 26 files, version 1.0, issue date 2026-11-05. C47 passes with 0 findings. CCG C71 passes, and its md5_final is sealed at 20307cd3. Every gate passes. Nothing goes to the Drive without the owner's approval. QA report section 13.1 has the details. Items still open before production (none blocks the release): re-read T51 UT from a US IP; RC-5; pin `LIMITATION_KEYS`; owner confirmations US-OWN-009, US-OWN-010 and US-OWN-011.", t, count=1, flags=re.M)
+open(h, "w", encoding="utf-8").write(t)
+print("RELEASED-LOCAL" in s[:2500], "RELEASED-LOCAL" in t)

@@ -38,3 +38,12 @@ Onda 1: CA, TX, NY, FL, IL, PA, OH, NC, MI, GA. Onda 2: NJ, MA, VA, TN, IN, WA, 
 - 2026-11-02: Fase 1 — pesquisa dos 53 grupos concluída (~1.260 fontes). Em curso: juntar no registro; depois passada no navegador (precisa VPN) e pacotes de pesquisa por documento.
 - 2026-11-02: ✅ Fase 1 concluída — registro 2.572 fontes; pacotes e facts de todos os documentos (≈5.300 valores, todos validados). Pendências que dependem de publicação (DC método 2026, UT vigência) ou de IP dos EUA ficam como lacuna marcada. Início da fase 2 (CCG).
 - 2026-11-02: ✅ Fase 2 — CCG aprovado (QA r3e PASS; 3 rodadas + 2 correções dirigidas). Início da fase 3 (trava do escopo) e fase 4 (Report Specs, DD, WTC, Integrações, Payslip).
+- 2026-11-03: ✅ Report Specs aprovados (QA r3 + correção pequena, sem mudar número; 591/591 valores conferidos). Início do Data Dictionary.
+- 2026-11-03: ✅ Data Dictionary aprovado (QA r3, 126/126). Início do WTC.
+- 2026-11-04: ✅ WTC aprovado (QA r3, 865/865). Início do SIR.
+- 2026-11-04: ✅ SIR aprovado (QA r3). Início do Payslip; pequena correção no CCG em paralelo.
+- 2026-11-04: ✅ Payslip aprovado (QA r3). Os 7 documentos principais aprovados. Início da skill do país.
+- 2026-11-04: ✅ Skill do país aprovada. 8/8 documentos aprovados. Início do design e da conferência final.
+- 2026-11-04: ✅ Design aprovado. Início da conferência final do pacote.
+- 2026-11-04: Conferência final: tudo aprovado menos C39 (6 sites bloqueados fora dos EUA). Aguardando VPN ou decisão do usuário.
+- 2026-11-05: ✅ Conferência final aprovada. Teste das fontes 55/56 (98,2%) sem exceção (5 sites lidos pela VPN do navegador Opera). ✅ Fase 6: pacote final local em `US-compliance/10-release` (26 arquivos, v1.0, 2026-11-05), revisor: RELEASED-LOCAL. Parado aguardando o ok do usuário para o Drive.

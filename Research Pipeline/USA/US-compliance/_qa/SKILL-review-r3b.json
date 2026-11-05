@@ -1,0 +1,44 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SKILL",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "findings": [],
+ "checks_run": [
+  "C29",
+  "C32"
+ ],
+ "_note": "r3b = targeted re-check of the single r3 item after the owner chose option (a); not a fourth round.",
+ "cross_checks": [
+  {
+   "name": "RQ-597 printed",
+   "result": "pass",
+   "note": "CCG md5 ffa24c2e3089eb58627ace5ca8811acf. The md diff against pre-skill-r3-2026-11-04 is annex_LA only, 1 line (line 81): 'Not configured in this release [[GAP:RQ-597]]: UI quarterly form name and upload layout (US-LAS5-007 names the channel, LWC online services, only).' Skill LA.md line 81 prints the same as '(open gap RQ-597)'. The gaps.json RQ-240 residual now says 'see RQ-597'."
+  },
+  {
+   "name": "Gap convention",
+   "result": "pass",
+   "note": "The CCG uses the tag form [[GAP:RQ-597]], the same as the other 12 gaps in annex_LA. The skill's '(open gap RQ-597)' is the build's standard rendering of that tag (GAPTAG rule in build_skill.py; 14-known-gaps line 3), so both forms are correct in their own artifact and C29 does not apply to them."
+  },
+  {
+   "name": "Builder facts edit (CCG-annex_LA-facts.json)",
+   "result": "pass",
+   "note": "Only unresolved[] entry 1 changed: key la.report.sui.format -> la.report.sui.form_layout, plus why/what_would_close_it reworded to the narrowed residual. facts[], the other 12 unresolved entries and the top-level fields are identical. The words '2026 FAQ copy not read' were dropped from the facts entry but are kept in the gaps.json RQ-597 closure text, so nothing is lost. Separation note: a builder edit to facts should normally go through source-hunter; accepted here because the content is equivalent."
+  },
+  {
+   "name": "tag_sync_check / sample",
+   "result": "pass",
+   "note": "0 stale tags in all 6 artifacts; the r3 sample is unchanged."
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 1557,
+  "facts_verified": 1557,
+  "unverified_keys": [],
+  "method": "Index rows checked against the facts files and the register; no new numbers in this change."
+ },
+ "manual_review_items": [
+  "SKILL-md5.txt re-checked after the LA.md regeneration: 99/99 match."
+ ]
+}

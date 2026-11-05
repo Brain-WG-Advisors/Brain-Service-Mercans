@@ -1,0 +1,74 @@
+## build (exit 0)
+recon rows 235 {('EXAMPLE_LINE', 'MAPPED'): 21, ('EXAMPLE_LINE', 'MAPPED_NO_DD_FIELD'): 12, ('CATALOGUE_LINE', 'MAPPED_NO_DD_FIELD'): 29, ('CATALOGUE_LINE', 'MAPPED'): 131, ('SPEC_FIELD', 'MAPPED_NO_DD_FIELD'): 23, ('SPEC_FIELD', 'MAPPED'): 19} UNMAPPED 0
+bindings 250 requests 28 unmapped 0
+written C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\06-payslip\US_Compliance_Payslip_Generator.xlsx
+
+## C12 / C29 / WORD+PATH / FRAC+PCT+UNIT / C30 / C46 period-aware / GAP (psl_lint) (exit 0)
+{
+ "C29": 0,
+ "WORD": 0,
+ "mismatch": 0,
+ "missing_key": 0,
+ "unbound": 0,
+ "C30": 0,
+ "FRAC": 0,
+ "PCT": 0,
+ "UNIT": 0,
+ "tags": 193,
+ "C12": 0,
+ "GAP": 0,
+ "info": {
+  "sheets": 8,
+  "spec_rows": 42,
+  "unit_rows": 26,
+  "payslip_lines": 160,
+  "states": 51,
+  "tags": 193,
+  "images": {
+   "How to set up Payslip": 1,
+   "Compliance Payslip": 1,
+   "United States (EN)": 1,
+   "United States (ES)": 1
+  },
+  "gap_ids": 28
+ }
+}
+
+## f44_self (exit 0)
+F44 self-check: 160 distinct tags, 0 misses, 0 tags without a local copy
+
+## recon (payslip lines x WTC x DD; PSL facts placed) (exit 0)
+recon rows 235; UNMAPPED 0; payslip lines of the crosswalk missing 0; PSL facts not placed 0
+
+## C71 identical rebuild (exit 0)
+C71: 0 differences
+
+## shared consistency C42 / C43 (whole package) (exit 0)
+C42: PASS  {'hits': 0}
+C43: PASS  {'package_version': '1.0', 'problems': 0}
+
+## shared C46 on the payslip workbook alone (not period-aware: known limit, see build log) (exit 1)
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!B195', 'text': '21100', 'keys': ['ia.sui.wage_base'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!D195', 'text': '21100', 'keys': ['ia.sui.wage_base'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!B317', 'text': '175', 'keys': ['al.wh.std_deduction.married.phaseout.reduction_per_step', 'ut.pit.oracle.example_6.wages'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!D317', 'text': '175', 'keys': ['al.wh.std_deduction.married.phaseout.reduction_per_step', 'ut.pit.oracle.example_6.wages'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!B339', 'text': '214', 'keys': ['oh.pit.school_district.count'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!D339', 'text': '214', 'keys': ['oh.pit.school_district.count'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!B348', 'text': '225', 'keys': ['nv.report.ui.registration_threshold.quarterly'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+  {'file': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'where': 'Field Option!D348', 'text': '225', 'keys': ['nv.report.ui.registration_threshold.quarterly'], 'why': 'fact value not carried by a [[FACT:]] tag'}
+
+## shared content C49 / C57 / C70 (exit 1)
+C49: FAIL  {'wtc': '02-wtc\\US-WTC-001-v1.0.xlsx', 'codes_checked': 294, 'problems': 1}
+      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'table 206 r11c2', 'code': 'KW-100', 'why': "not in the WTC (cited as 'residents working in other states; nonresidents')"}
+C57: PASS  {'payslip': '06-payslip\\US_Compliance_Payslip_Generator.xlsx', 'items': 22, 'problems': 0}
+C70: PASS  {'citations_checked': 7, 'not_in_register': 0, 'repealed_cited': 0, 'gap_problems': 0}
+
+## validate_contract --all (exit 0)
+ok    C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\_qa\WTC-review-r2.json   [review.schema.json]
+ok    C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\_qa\WTC-review-r3.json   [review.schema.json]
+PASS  (100 files)
+
+## Excel open check (exit 0)
+
+
+OPEN CHECK: 1 file(s), 0 not clean

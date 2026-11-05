@@ -3,6 +3,7 @@
 > Escrito só pela janela desta frente. Criado em 2026-10-29 pela janela geral; reescrever a cada "fecha a sessão".
 
 ## Instruções vigentes
+- 03/11 (usuário): retomar e concluir o quanto antes, sem erros e sem gastar todos os tokens da semana → agentes de construção/pesquisa em Sonnet, auditores no padrão; autoverificação de texto antes de cada build; correções em lote único por rodada.
 - 01/11 (usuário): seguir **sem parar até a última etapa** pelo plano `Research Pipeline/USA/PLANO-ATE-O-FIM.md`; paro só para Drive/envio e mudança de escopo.
 
 - Todos os 50 estados + DC (decisão do usuário, 2026-10-29). A variação de lei de estado para estado é o ponto central: cada estado com a sua research sobre a camada federal comum.
@@ -84,3 +85,14 @@
 ## Esperando o usuário
 - Pacote único × por estado (default: único); ano fiscal (default 2026); estados com cliente (Yoyo/BAU).
 - Atualizar `frentes/eua/CLAUDE.md` com o método adotado (está aqui no estado.md; CLAUDE.md só com ok do usuário).
+
+## Checkpoint 2026-11-04 (fim do dia)
+- 9/9 documentos EUA aprovados no QA (CCG, SCOPE, RSPEC, DD, WTC, SIR, PSL, SKILL, DESIGN). Conferência final: tudo PASS menos C39 (Test 0 50/56; 6 sites bloqueados fora dos EUA: IN, NC, KY, UT, TX, OR).
+- Esperando o usuário: (A) VPN EUA + "VPN ligada" para refazer os 6 no Chrome, ou (B) exceção C39 em nome dele (reler os 6 dos EUA antes da produção).
+- Depois: pacote final local (etapa 13); Drive só com ok.
+- Relatório: Research Pipeline/USA/US-compliance/07-qa-crosscheck/QA-REPORT.md (§7, §10, §11). Diário: _pipeline/RUN-JOURNAL.md.
+
+## Checkpoint 2026-11-05: pacote final local pronto
+- Teste das fontes (C39) 55/56 sem exceção; release local em `Research Pipeline/USA/US-compliance/10-release` (26 arquivos, v1.0, emissão 2026-11-05); QA: RELEASED-LOCAL.
+- Espera o usuário: ok para subir ao Drive (`G:\Drives compartilhados\Compliance Team\Country Folders\USA`).
+- Pendências não bloqueantes: reler UT (T51) de IP dos EUA antes de produção; lista FUTA de redução de crédito (~10/11); confirmação formal US-OWN-009/010/011; LIMITATION_KEYS.

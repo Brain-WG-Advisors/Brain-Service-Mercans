@@ -76,7 +76,10 @@ def V(key, **kw):
 
 
 def R(key, **kw):
-    return entry(key, **kw)["register_id"]
+    e = entry(key, **kw)
+    if key.startswith("practice."):        # every register row bound to a practice fact is cited
+        return "; ".join([e["register_id"]] + [x for x in (e.get("_also_register_ids") or []) if x != e["register_id"]])
+    return e["register_id"]
 
 
 def fmt(e):

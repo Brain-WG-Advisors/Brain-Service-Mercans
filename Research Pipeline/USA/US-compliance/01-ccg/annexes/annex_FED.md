@@ -257,7 +257,7 @@ All federal returns are filed by the third-party filing provider (no system inte
 | W-2 box12 new codes | [[FACT:fed.w2.box12.new_codes=TP (cash tips reported to employer); TT (qualified overtime compensation); TA (employer Trump-account contributions)]] | from 2026-01-01 | employer reporting | S27 |  |
 | W-2 box14b | [[FACT:fed.w2.box14b=Box 14 split into 14a Other and 14b Treasury Tipped Occupation Code(s)]] | from 2026-01-01 | employer reporting | S27 |  |
 | ACA ale fte threshold | [[FACT:fed.aca.ale.fte_threshold=50]] employees | from 2025-01-01 |  | S28 | TY2025 instructions (TY2026 edition not yet published). Source edition partially verified. |
-| ACA efile threshold | [[FACT:fed.aca.efile_threshold=10]] returns | from 2025-01-01 |  | S28 | Source edition partially verified. |
+| ACA efile threshold | [[FACT:fed.aca.efile_threshold=10]] returns | from 2025-01-01 |  | S28 | TY2025 rule, re-verify on the 2026 instructions: 'If you are required to file [[FACT:fed.aca.efile_threshold=10]] or more information returns during the year, you must file the forms electronically' (Instructions for Forms 1094-C and 1095-C (2025)). Row stays partial: live i109495c.pdf re-downloaded 2026-11-04 is still the 2025 edition; the 2026 edition is an IRS draft, not citable. |
 | ACA affordability rate | [[FACT:fed.aca.affordability.rate=9.96]] % | 2026-01-01 to 2026-12-31 |  | S29 | Required contribution percentage, plan years beginning in 2026. |
 | Newhire deadline days | [[FACT:fed.newhire.deadline_days=20]] days | from 1997-10-01 |  | S30 | Or, electronic filers, two monthly transmissions 12-16 days apart; state deadlines shorter per state annex. |
 | Newhire fields | [[FACT:fed.newhire.fields=employee name, address, SSN, date services first performed; employer name, address, FEIN]] | from 1997-10-01 |  | S30 |  |
@@ -356,8 +356,8 @@ The federal Consumer Credit Protection Act sets the floor; a State may be strict
 | Levy exempt MFJ 0dep weekly | USD [[FACT:fed.levy.exempt.mfj_0dep.weekly=619.23]] | 2026-01-01 to 2026-12-31 |  | S43 |  |
 | Levy exempt MFJ 0dep monthly | USD [[FACT:fed.levy.exempt.mfj_0dep.monthly=2,683.33]] | 2026-01-01 to 2026-12-31 |  | S43 |  |
 | Levy exempt HoH 0dep weekly | USD [[FACT:fed.levy.exempt.hoh_0dep.weekly=464.42]] | 2026-01-01 to 2026-12-31 |  | S43 |  |
-| IWO priority | [[FACT:fed.iwo.priority=IWO for support ranks before other garnishments, except an IRS levy served before the underlying support order]] | 2026-01-01 to 2026-12-31 |  | S43 | Stated in (Pub. 1494 row) citing the OCSS employer page. |
-| IWO omb expiry | [[FACT:fed.iwo.omb_expiry=2029-08-31]] | 2026-08-25 to 2029-08-31 | employer withholding | S44 | OMB 0970-0154 approved without change 2026-08-25; current form extended one year while states reprogram the revised (gig-worker fields) IWO/e-IWO. |
+| IWO priority | [[FACT:fed.iwo.priority=Withholding for support has priority over any other legal process under state law against the same income (section 466(b)(7) of the Social Security Act); if a federal tax levy is in effect, notify the sender]] | 2026-01-01 to 2026-12-31 |  | S44 | Stated in (Pub. 1494 row) citing the OCSS employer page. |
+| IWO omb expiry | [[FACT:fed.iwo.omb_expiry=2029-08-31]] | 2026-08-25 to 2029-08-31 | employer withholding | S45 | OMB 0970-0154 approved without change 2026-08-25; current form extended one year while states reprogram the revised (gig-worker fields) IWO/e-IWO. |
 
 Not configured in this release [[GAP:RQ-410]]: IWO revised form go live: not established from an official source.
 
@@ -367,16 +367,16 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| Cba scope | [[FACT:fed.cba.scope=A CBA binds the certified bargaining unit only; no sector-wide extension mechanism]] | from 2026-01-01 |  | S45 |  |
-| Davis bacon contract threshold | USD [[FACT:fed.davis_bacon.contract_threshold=2,000]] | from 2026-01-01 |  | S46 | Federal construction contracts over [[FACT:fed.davis_bacon.contract_threshold=2,000]]. |
-| Davis bacon certified payroll frequency | [[FACT:fed.davis_bacon.certified_payroll.frequency=weekly, to the contracting agency; prime responsible for subcontractors; optional form WH-347; records 3 years]] | from 2023-10-23 |  | S47 |  |
+| Cba scope | [[FACT:fed.cba.scope=A CBA binds the certified bargaining unit only; no sector-wide extension mechanism]] | from 2026-01-01 |  | S46 |  |
+| Davis bacon contract threshold | USD [[FACT:fed.davis_bacon.contract_threshold=2,000]] | from 2026-01-01 |  | S47 | Federal construction contracts over [[FACT:fed.davis_bacon.contract_threshold=2,000]]. |
+| Davis bacon certified payroll frequency | [[FACT:fed.davis_bacon.certified_payroll.frequency=weekly, to the contracting agency; prime responsible for subcontractors; optional form WH-347; records 3 years]] | from 2023-10-23 |  | S48 |  |
 
 ## FED.11 Indexation
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| Indexation caliber | [[FACT:fed.indexation.caliber=C-CPI-U (chained CPI-U) under 26 U.S.C. 1(f)(3)]] | from 2026-01-01 |  | S48 | Rev. Proc. 2025-32 applies it for 2026. OASDI base indexed on AWI. FLSA minimum wage, CCPA multiplier and the [[FACT:fed.exempt.salary_floor.weekly=684]] salary floor are NOT indexed. |
-| Indexation OASDI caliber | [[FACT:fed.indexation.oasdi_caliber=National Average Wage Index (AWI), base rounded to a multiple of 300]] | from 2026-01-01 |  | S49 |  |
+| Indexation caliber | [[FACT:fed.indexation.caliber=C-CPI-U (chained CPI-U) under 26 U.S.C. 1(f)(3)]] | from 2026-01-01 |  | S49 | Rev. Proc. 2025-32 applies it for 2026. OASDI base indexed on AWI. FLSA minimum wage, CCPA multiplier and the [[FACT:fed.exempt.salary_floor.weekly=684]] salary floor are NOT indexed. |
+| Indexation OASDI caliber | [[FACT:fed.indexation.oasdi_caliber=National Average Wage Index (AWI), base rounded to a multiple of 300]] | from 2026-01-01 |  | S50 |  |
 
 Not configured in this release [[GAP:RQ-405]]: Indexation next year: not established from an official source.
 
@@ -384,7 +384,7 @@ Not configured in this release [[GAP:RQ-405]]: Indexation next year: not establi
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| SSN truncation format | [[FACT:fed.ssn.truncation.format=TTIN: first five digits of the SSN masked (asterisks or X characters), last four digits shown, e.g. ***-**-1234; allowed on employee W-2 copies only; never on Copy A; EIN never truncated]] | from 2019-07-03 |  | S50 |  |
+| SSN truncation format | [[FACT:fed.ssn.truncation.format=TTIN: first five digits of the SSN masked (asterisks or X characters), last four digits shown, e.g. ***-**-1234; allowed on employee W-2 copies only; never on Copy A; EIN never truncated]] | from 2019-07-03 |  | S51 |  |
 
 ## FED.13 Live legal change
 
@@ -404,10 +404,10 @@ Pub. 15-T 2026 publishes two worked examples, recorded below as oracle values: a
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| Oracle Pub. 15-T NRA example wages | USD [[FACT:fed.oracle.pub15t.nra_example.wages=526.90]] | from 2026-01-01 |  | S51 | Weekly wages 300 + Table 1 add-on [[FACT:fed.fit.nra.addon.table1.weekly=226.90]] = [[FACT:fed.oracle.pub15t.nra_example.wages=526.90]] (Pub. 15-T 2026 example). |
-| Oracle Pub. 15-T NRA example withholding | USD [[FACT:fed.oracle.pub15t.nra_example.withholding=31]] | from 2026-01-01 |  | S51 | Wage-bracket result for [[FACT:fed.oracle.pub15t.nra_example.wages=526.90]] weekly; residual none recorded. |
-| Oracle Pub. 15-T tribal example payment | USD [[FACT:fed.oracle.pub15t.tribal_example.payment=6,000]] | from 2026-01-01 |  | S51 | Tribal monthly gaming payment example. |
-| Oracle Pub. 15-T tribal example withholding | USD [[FACT:fed.oracle.pub15t.tribal_example.withholding=584.09]] | from 2026-01-01 |  | S51 |  |
+| Oracle Pub. 15-T NRA example wages | USD [[FACT:fed.oracle.pub15t.nra_example.wages=526.90]] | from 2026-01-01 |  | S52 | Weekly wages 300 + Table 1 add-on [[FACT:fed.fit.nra.addon.table1.weekly=226.90]] = [[FACT:fed.oracle.pub15t.nra_example.wages=526.90]] (Pub. 15-T 2026 example). |
+| Oracle Pub. 15-T NRA example withholding | USD [[FACT:fed.oracle.pub15t.nra_example.withholding=31]] | from 2026-01-01 |  | S52 | Wage-bracket result for [[FACT:fed.oracle.pub15t.nra_example.wages=526.90]] weekly; residual none recorded. |
+| Oracle Pub. 15-T tribal example payment | USD [[FACT:fed.oracle.pub15t.tribal_example.payment=6,000]] | from 2026-01-01 |  | S52 | Tribal monthly gaming payment example. |
+| Oracle Pub. 15-T tribal example withholding | USD [[FACT:fed.oracle.pub15t.tribal_example.withholding=584.09]] | from 2026-01-01 |  | S52 |  |
 
 ## FED.15 Special populations
 
@@ -417,13 +417,13 @@ All special populations are in scope. Federal rules are below; State rules are i
 |---|---|---|---|---|---|
 | Household FICA cash threshold | USD [[FACT:fed.household.fica_cash_threshold=3,000]] | 2026-01-01 to 2026-12-31 |  | S34 | FICA if cash wages [[FACT:fed.household.fica_cash_threshold=3,000]]+ in 2026 (exempt under 18 unless principal occupation); FIT only by agreement; Schedule H. |
 | Household FUTA quarter threshold | USD [[FACT:fed.household.futa_quarter_threshold=1,000]] | from 2026-01-01 |  | S34 | FUTA if [[FACT:fed.household.futa_quarter_threshold=1,000]]+ cash wages in any quarter of current or prior year. |
-| Agricultural per worker threshold | USD [[FACT:fed.agricultural.per_worker_threshold=150]] | from 2026-01-01 |  | S52 | Cash wages [[FACT:fed.agricultural.per_worker_threshold=150]]+ to a farmworker in a year, or 2,500+ total farm pay, make cash wages subject to FICA and FIT; Form 943. |
-| Agricultural total threshold | USD [[FACT:fed.agricultural.total_threshold=2,500]] | from 2026-01-01 |  | S52 |  |
-| Agricultural FUTA quarter threshold | USD [[FACT:fed.agricultural.futa_quarter_threshold=20,000]] | from 2026-01-01 |  | S52 | Or 10+ farmworkers on some part of a day in 20+ weeks. |
+| Agricultural per worker threshold | USD [[FACT:fed.agricultural.per_worker_threshold=150]] | from 2026-01-01 |  | S53 | Cash wages [[FACT:fed.agricultural.per_worker_threshold=150]]+ to a farmworker in a year, or 2,500+ total farm pay, make cash wages subject to FICA and FIT; Form 943. |
+| Agricultural total threshold | USD [[FACT:fed.agricultural.total_threshold=2,500]] | from 2026-01-01 |  | S53 |  |
+| Agricultural FUTA quarter threshold | USD [[FACT:fed.agricultural.futa_quarter_threshold=20,000]] | from 2026-01-01 |  | S53 | Or 10+ farmworkers on some part of a day in 20+ weeks. |
 | Election worker FICA threshold | USD [[FACT:fed.election_worker.fica_threshold=2,500]] | 2026-01-01 to 2026-12-31 |  | S8 |  |
 | Tips reporting threshold monthly | USD [[FACT:fed.tips.reporting_threshold_monthly=20]] | from 2026-01-01 |  | S8 | Tips of [[FACT:fed.tips.reporting_threshold_monthly=20]]+ in a month are subject to FIT/FICA. |
-| Minister withholding | [[FACT:fed.minister.withholding=No FIT, social security or Medicare withholding (SE tax; voluntary FIT withholding agreement allowed); parsonage allowance excluded from W-2 box 1]] | from 2026-01-01 |  | S53 |  |
-| Statutory employee treatment | [[FACT:fed.statutory_employee.treatment=FICA withheld, no FIT withholding; W-2 box 13 checked; FUTA for drivers and traveling salespersons only]] | from 2026-01-01 |  | S54 |  |
+| Minister withholding | [[FACT:fed.minister.withholding=No FIT, social security or Medicare withholding (SE tax; voluntary FIT withholding agreement allowed); parsonage allowance excluded from W-2 box 1]] | from 2026-01-01 |  | S54 |  |
+| Statutory employee treatment | [[FACT:fed.statutory_employee.treatment=FICA withheld, no FIT withholding; W-2 box 13 checked; FUTA for drivers and traveling salespersons only]] | from 2026-01-01 |  | S55 |  |
 | Family employment treatment | [[FACT:fed.family_employment.treatment=Child under 18 of a sole proprietor/parents-only partnership: FICA exempt, FUTA exempt under 21; spouse: FUTA exempt; parent employed by child: FUTA exempt]] | from 2026-01-01 |  | S34 |  |
 | Students treatment | [[FACT:fed.students.treatment=Private school/college students: FIT withheld, FICA and FUTA exempt; public school: FICA exempt unless sec. 218 agreement; work-experience full-time student: FICA taxable]] | from 2026-01-01 |  | S34 |  |
 | Government employee treatment | [[FACT:fed.government_employee.treatment=FIT withheld; no FUTA; FICA with sec. 218 / Medicare-only exceptions]] | from 2026-01-01 |  | S34 |  |
@@ -460,7 +460,7 @@ English is the only federal official language and places no obligation on privat
 | S22 | 26 U.S.C. 3121(b)(19) FICA employment exclusion - nonresident aliens in F, J, M or Q status (U.S. Code 2024 ed., govinfo) | 3121(b)(19); 3121(b)(C) (service designated as employment under a section 233 SSA agreement) | U.S. Congress (OLRC/GPO, govinfo) |
 | S23 | 26 U.S.C. 3306(c)(19) FUTA employment exclusion - nonresident aliens in F, J, M or Q status (U.S. Code 2024 ed., govinfo) | 3306(c)(19) | U.S. Congress (OLRC/GPO, govinfo) |
 | S24 | 26 U.S.C. 3101(c) Relief from FICA employee tax in cases covered by international (totalization) agreements (U.S. Code 2024 ed., govinfo) | 3101(c) | U.S. Congress (OLRC/GPO, govinfo) |
-| S25 | 29 CFR 516.5 Records to be preserved 3 years (FLSA), eCFR current | 29 CFR 516.5(a)-(c); eCFR current as of retrieval; original promulgation date not printed in the retrieved rendering - effective_from = date verified in force | U.S. DOL (eCFR) |
+| S25 | 29 CFR 516.5 Records to be preserved 3 years (FLSA), eCFR current | 29 CFR 516.5(a)-(c); eCFR current as of retrieval | U.S. DOL (eCFR) |
 | S26 | IRS Publication 15 (2026) sec. 11 Depositing Taxes - lookback, monthly/semiweekly schedule, 100,000 next-day rule, 2026 DC legal holidays | Sec. 11 When To Deposit; Table 2 Semiweekly Deposit Schedule; Legal holiday | IRS |
 | S27 | IRS General Instructions for Forms W-2 and W-3 (2026) - P.L. 119-21 reporting changes, due dates, SSN truncation | What's New; Due date for filing with SSA; Box 12 codes TA/TP/TT; Box 14a/14b; Truncating SSN | IRS |
 | S28 | IRS Instructions for Forms 1094-C and 1095-C (2025, rev. 2025-10-30) - ALE reporting | What's New (alternative furnishing, Notice 2025-15); When to file; Electronic filing 10 or more | IRS |
@@ -479,14 +479,15 @@ English is the only federal official language and places no obligation on privat
 | S41 | Rev. Proc. 2025-32 re-read (payroll-relevant items) | sec.1; 4.09, 4.15, 4.16, 4.27, 4.28, 4.39 | IRS |
 | S42 | 15 U.S.C. 1673 CCPA restriction on garnishment (U.S. Code 2024 ed.) | 15 U.S.C. 1673(a), (b)(2) | U.S. Congress (OLRC/GPO) |
 | S43 | IRS Publication 1494 (2026) Tables for Figuring Amount Exempt from Levy on Wages (Forms 668-W) | Table 1 (Single, MFJ, HoH, MFS by pay period and dependents) | IRS |
-| S44 | OMB/OIRA ICR 202607-0970-002 Income Withholding for Support (IWO), OMB 0970-0154 - OIRA conclusion (reginfo.gov, live page) | ICR 202607-0970-002, OIRA Conclusion | OMB Office of Information and Regulatory Affairs / HHS ACF OCSE |
-| S45 | 29 U.S.C. 159(a) NLRA exclusive representation | 159(a) | US Congress (GovInfo US Code 2024) |
-| S46 | 40 U.S.C. 3142 Davis-Bacon Act prevailing wages | 3142(a); (c)(1) | US Congress (GovInfo US Code 2024) |
-| S47 | 29 CFR 5.5(a)(3) Davis-Bacon contract clauses - payrolls and basic records, weekly certified payroll (eCFR current) | 29 CFR 5.5(a)(3)(i)-(ii) | U.S. DOL (eCFR) |
-| S48 | 26 U.S.C. 1(f)(3)-(4) Cost-of-living adjustment (United States Code, 2024 edition, govinfo) | 26 U.S.C. 1(f)(3)(A)-(C) and 1(f)(4) | US Congress / GPO (govinfo) |
-| S49 | SSA notice: Cost-of-Living Increase and Other Determinations for 2026 (Federal Register 90 FR 49047, Doc. 2025-19763) | OASDI Contribution and Benefit Base - Computation (sec. 230(b) Social Security Act) | Social Security Administration |
-| S50 | 26 CFR 301.6109-4 IRS truncated taxpayer identification numbers (TTIN), eCFR current | 301.6109-4(a), (b)(2), (c) Example; source T.D. 9675 (79 FR 41131, 2014-07-15) as amended by T.D. 9861 (84 FR 31720, 2019-07-03) | Treasury/IRS (eCFR) |
-| S51 | IRS Publication 15-T (2026) worked examples and Worksheet 1A constants | Worksheet 1A lines 1g/1k; NRA example; Indian gaming example | IRS |
-| S52 | IRS Publication 15 (2026) farmwork tests and Form 943; IRS About Pub. 51 (discontinued) | Farmwork $150/$2,500 tests; Form 943; FUTA farmworkers test; about-publication-51 Recent developments | IRS |
-| S53 | IRS Publication 15-A (2026) sec.4 Religious exemptions and special rules for ministers | section 4 | IRS |
-| S54 | IRS Publication 15-A (2026) Employer's Supplemental Tax Guide - statutory employees | Statutory employees (four categories; income tax; reporting) | IRS |
+| S44 | Federal IWO form OMB 0970-0154 (Wayback copy 2026-03-21): printed expiration date | Form header | HHS Administration for Children and Families (OCSE) |
+| S45 | OMB/OIRA ICR 202607-0970-002 Income Withholding for Support (IWO), OMB 0970-0154 - OIRA conclusion (reginfo.gov, live page) | ICR 202607-0970-002, OIRA Conclusion | OMB Office of Information and Regulatory Affairs / HHS ACF OCSE |
+| S46 | 29 U.S.C. 159(a) NLRA exclusive representation | 159(a) | US Congress (GovInfo US Code 2024) |
+| S47 | 40 U.S.C. 3142 Davis-Bacon Act prevailing wages | 3142(a); (c)(1) | US Congress (GovInfo US Code 2024) |
+| S48 | 29 CFR 5.5(a)(3) Davis-Bacon contract clauses - payrolls and basic records, weekly certified payroll (eCFR current) | 29 CFR 5.5(a)(3)(i)-(ii) | U.S. DOL (eCFR) |
+| S49 | 26 U.S.C. 1(f)(3)-(4) Cost-of-living adjustment (United States Code, 2024 edition, govinfo) | 26 U.S.C. 1(f)(3)(A)-(C) and 1(f)(4) | US Congress / GPO (govinfo) |
+| S50 | SSA notice: Cost-of-Living Increase and Other Determinations for 2026 (Federal Register 90 FR 49047, Doc. 2025-19763) | OASDI Contribution and Benefit Base - Computation (sec. 230(b) Social Security Act) | Social Security Administration |
+| S51 | 26 CFR 301.6109-4 IRS truncated taxpayer identification numbers (TTIN), eCFR current | 301.6109-4(a), (b)(2), (c) Example; source T.D. 9675 (79 FR 41131, 2014-07-15) as amended by T.D. 9861 (84 FR 31720, 2019-07-03) | Treasury/IRS (eCFR) |
+| S52 | IRS Publication 15-T (2026) worked examples and Worksheet 1A constants | Worksheet 1A lines 1g/1k; NRA example; Indian gaming example | IRS |
+| S53 | IRS Publication 15 (2026) farmwork tests and Form 943; IRS About Pub. 51 (discontinued) | Farmwork $150/$2,500 tests; Form 943; FUTA farmworkers test; about-publication-51 Recent developments | IRS |
+| S54 | IRS Publication 15-A (2026) sec.4 Religious exemptions and special rules for ministers | section 4 | IRS |
+| S55 | IRS Publication 15-A (2026) Employer's Supplemental Tax Guide - statutory employees | Statutory employees (four categories; income tax; reporting) | IRS |

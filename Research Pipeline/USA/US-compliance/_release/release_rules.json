@@ -1,0 +1,47 @@
+{
+  "_purpose": "US rules for the Release stage (shared/release/release.py) and C47 (shared/release/release_crosscheck.py, run with --config this file). Written 2026-11-05 from the 433 C47 findings on the first 10-release. legit / external_versions exempt domain usage only (IRS early-release draft forms, statutory amendments, corrections on Form W-2c/941-X, external agency spec and toolkit versions). text_rules reword external page/spec dates that the C47 stamp pattern cannot exempt; meaning is kept. See _pipeline/RELEASE-build-log.md.",
+  "text_rules": [
+    ["\\b(page|spec) (?:last )?updated (20\\d\\d-\\d\\d-\\d\\d)", "\\1 dated \\2"],
+    ["\\((?:last )?updated (20\\d\\d-\\d\\d-\\d\\d)", "(dated \\1"],
+    ["tipped-employee definition changed (20\\d\\d-\\d\\d-\\d\\d) \\(HB 185\\)", "tipped-employee definition changed by HB 185 (\\1)"]
+  ],
+  "crosscheck": {
+    "people": [],
+    "finding_ids": [],
+    "legit": [
+      "IRS early-release draft",
+      "per 20\\d\\d draft",
+      "\\(20\\d\\d draft\\)",
+      "Form [0-9]+(?:-[A-Z]+)? for 20\\d\\d \\(draft\\)",
+      "DRAFT, NOT ENACTED",
+      "edition is an IRS draft, not citable",
+      "negotiable check, draft, money order",
+      "draft in House Revenue &(?:amp;)? Finance Committee",
+      "official form draft",
+      "form instructions draft",
+      "corrected on Form (?:W-2c|941-X)",
+      "corrected on a later Form 941",
+      "corrected on the fourth-quarter return",
+      "their own amendment routes",
+      "later amendment not checked",
+      "no later City amendment",
+      "pre-amendment amount",
+      "no 20\\d\\d amendment;",
+      "proposed amendment to 40 TAC 815\\.107",
+      "815\\.107 amendment",
+      "the reissued formula",
+      "deduction amounts reissued each November",
+      "tables reissued as needed",
+      "handbook served is Rev\\. \\d+ though reissued yearly",
+      "Division \\(A\\) is unchanged from the prior version"
+    ],
+    "external_versions": [
+      "File Specification Toolkit (?:v|version )\\d+\\.\\d+\\.\\d+",
+      "Premiums-Toolkit-v\\d+\\.\\d+-20\\d\\d",
+      "FSET v\\d+\\.\\d+",
+      "XML or CSV \\(spec v\\d+\\.\\d+",
+      "TAX-F\\d{3} \\(V20\\d\\d\\.\\d\\)",
+      "carried to version \\d+\\.\\d+ of the Data Dictionary as a change request"
+    ]
+  }
+}

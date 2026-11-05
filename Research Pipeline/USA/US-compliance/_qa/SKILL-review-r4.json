@@ -1,0 +1,60 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SKILL",
+ "round": 3,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_file_round": "r4 = run-close F28 re-check after upstream changes (CCG b9de40ce, DD f65dc9bc) made after SKILL r3b PASS; schema caps round at 3",
+ "_reviewed_file": "../skills-build/payroll-compliance-united-states/ (99 files = _pipeline/SKILL-md5.txt, all match; built 2026-11-04 12:30)",
+ "_reviewer": "compliance-qa-auditor (independent, run close)",
+ "findings": [
+  {
+   "pattern": "F28",
+   "severity": "blocker",
+   "pass": "P5",
+   "location": {
+    "file": "../skills-build/payroll-compliance-united-states/references/01-ccg/m13_practices.md",
+    "sheet_or_section": "13.1 practice table and fact index",
+    "cell_or_line": "lines 23, 30, 31, 34, 84, 88, 94, 96"
+   },
+   "problem": "Skill references still print the superseded practice wording for SC, CT, OH, GA (and NE): e.g. GA '2027 0.125-point step conditional on OPB report of 2026-12-01', CT 'results differ up to 0.48/period', OH 'statute flat 2.75% but withholding tables graduated to 3.4%'. The CCG was rebuilt at 13:29 (md5 b9de40ce) with the re-synced facts; the skill was built at 12:30 from the earlier CCG (ffa24c2e). Same stale lines in references/01-ccg/m06_tax.md (258, 272, 276, 279, 645, 649, 654, 656) and references/13-gotchas.md (23, 28, 86, 90).",
+   "expected": "references/ hold the latest artifact versions verbatim: re-run the skill generator from CCG b9de40ce, then selfcheck/selfcheck_strict and refresh _pipeline/SKILL-md5.txt and references/07-qa-report.md.",
+   "register_id": "US-GAS5-009",
+   "action": "escalated_to_human"
+  },
+  {
+   "pattern": "F28",
+   "severity": "blocker",
+   "pass": "P5",
+   "location": {
+    "file": "../skills-build/payroll-compliance-united-states/references/05-data-dictionary.md",
+    "sheet_or_section": "ID Information",
+    "cell_or_line": "whole file (0 hits for the two new elements)"
+   },
+   "problem": "The DD gained two legal-entity elements after the skill build (DD md5 f65dc9bc, 13:15): 'Supplemental wage withholding method election' and 'State-assigned unemployment insurance rate' (DD-RQ-11). The skill's DD reference has neither, and references/12-states/MA.md lacks ma.pfml.rate.selection_basis.",
+   "expected": "Regenerate references/05-data-dictionary.md and 12-states/MA.md from the current DD and CCG in the same rebuild.",
+   "register_id": "US-MAS5-012",
+   "action": "escalated_to_human"
+  }
+ ],
+ "checks_run": [
+  "C29"
+ ],
+ "_checks_run_other": [
+  "F28",
+  "G-PROP",
+  "G-SPOT"
+ ],
+ "numeric_verification": {
+  "facts_total": 0,
+  "facts_verified": 0,
+  "unverified_keys": [],
+  "method": "No new number in the skill; the defect is staleness against approved artifacts."
+ },
+ "escalation": {
+  "reason": "The SKILL already used its three rounds (r1, r2, r3/r3b PASS). These defects come from upstream changes after its PASS, so a fourth round is not allowed; a mechanical regeneration needs a human go-ahead.",
+  "decision_needed": "Approve one bounded regeneration of the skill from the current CCG/DD (no research, no value change) followed by a targeted F28 check outside the round count, as was done for RSPEC r3b/r3c.",
+  "_recommendation": "Approve. Builder re-runs build_skill.py + selfcheck + selfcheck_strict, refreshes SKILL-md5.txt; auditor checks the diff equals the CCG/DD diff."
+ },
+ "_next_action": "human decision, then artifact-builder skill regeneration and a targeted F28 re-check"
+}

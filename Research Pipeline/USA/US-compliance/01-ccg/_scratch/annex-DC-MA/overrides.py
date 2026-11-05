@@ -59,7 +59,7 @@ CLEAN = [
     (r"\s*via (the orchestrator )?browser pass", ""),
     (r"Owner/builder decision", "Owner decision"),
     (r"DECISION \(brief trap\):", "Decision:"),
-    (r"\bengine must\b", "the payroll calculation must"),
+    (r"(?<!the )\bengine must\b", "the payroll calculation must"), (r"\bthe engine must\b", "the payroll calculation must"),
     (r"\s*\((\d{2})%; ([^)]*)\)", r" (\2)"),
     (r"\s*\((\d{2})%\)", ""),
     (r"Not researched \(\d+%\)\.", "Not researched."),

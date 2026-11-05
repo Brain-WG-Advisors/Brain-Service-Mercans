@@ -1,0 +1,176 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DD",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-03",
+ "_reviewed_file": "05-data-dictionary/US-DD-001-v1.0.xlsx md5 92bf95f3308afb8fc9d2031b366b40ca (equals md5_final.txt)",
+ "_reviewer": "compliance-qa-auditor (independent; built by artifact-builder)",
+ "_summary": "All 15 r1 findings are closed, and both builder decisions are accepted. The cell diff maps only to batch and facts items. F44: 126/126 keys verified, unverified_keys empty. C29 hard 0, C46 period-aware 0 mismatches, C70 PASS, C71 PASS for the DD and the 20 specs, recon UNMAPPED 0 and 0 forward references. Still FAIL on one new major: the batch introduced internal repository paths into 3 mapper cells. 2 minors.",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!F338,F344,F347",
+   "problem": "The batch introduced three cells that print an internal repository path inside a deliverable: F338 '... list in 00-official-sources/code-tables/US-OH-municipal-fips.json', F344 '... full list in 00-official-sources/code-tables/US-IN-county.json', F347 '... both lists in 00-official-sources/code-tables/US-MD-county.json'. The text comes from the new fact values dd.oh.municipal.code_list, dd.in.county_code.list and dd.md.county_code.list. The release package does not carry these files, so a developer cannot open them. They are pipeline work files, not the cited authority sources (US-OHB5-403, US-INS5-007, US-MDS5-003). dd_lint WORD did not catch it.",
+   "expected": "Source hunter: in the three fact values, delete the trailing clause '; full list in 00-official-sources/...json' / '; list in ...' / '; both lists in ...' and leave everything else unchanged. The rest of each value is verified in its copy: IN 01 Adams to 92 Whitley; MD 01 Allegany to 24 Worcester plus the alpha codes; OH Municipal FIPS Code, 18000 COLUMBUS; 678 codes re-counted from the CSV. Builder: regenerate F338, F344 and F347, and add a 'no internal path' pattern (00-official-sources/, _research/, _pipeline/, .json, .py) to the dd_lint WORD check.",
+   "register_id": "US-OHB5-403",
+   "fact_key": "dd.oh.municipal.code_list",
+   "action": "routed_to_source_hunter",
+   "evidence": "openpyxl scan of all cells for internal paths: 3 hits, all in fact tags"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "check_id": "C27",
+   "location": "05-data-dictionary/_build/checks/dd_element_usage.csv!rows 7-8!State employer account State, State employer account programme",
+   "problem": "Direction 2 of the reconciliation now lists 2 elements with used = NO: the two qualifier fields created by the r1 split of ID Information row 13. They are the keys of the account-number group, and the 37 spec rows that consume 'State employer account number' select the number by State and programme. The recon does not credit them.",
+   "expected": "In dd_recon.py, credit each group qualifier with the consumers of 'State employer account number' (group rule), or append ' | State employer account State | State employer account programme' to the column L overlay of those 37 rows. Direction 2 must show 143/143 used.",
+   "register_id": "US-UTR3-001",
+   "fact_key": "dd.employer.state_account_ids",
+   "action": "routed_to_builder",
+   "evidence": "dd_element_usage.csv"
+  },
+  {
+   "pattern": "F26",
+   "severity": "minor",
+   "pass": "P4",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!F107",
+   "problem": "The Kentucky locality-of-work mapper sources its LEX row with the tag dd.ky.locality.lexington = '... occupational license fee of 2.25% on an individual's compensation ...'. That puts a local tax rate, a system constant, into master data, where it will go stale at the next rate change. The DD only needs the locality to exist.",
+   "expected": "Source hunter: add a key with the locality only, e.g. dd.ky.locality.lexington_name = 'Lexington-Fayette Urban County Government occupational license fee' (US-KYS5-024 copy: 'The Lexington-Fayette Urban County Government assesses an occupational license fee'). Builder: cite that key on F107 instead. The rate key stays for the WTC.",
+   "register_id": "US-KYS5-024",
+   "fact_key": "dd.ky.locality.lexington",
+   "action": "routed_to_source_hunter",
+   "evidence": "US-KYS5-024 local copy; openpyxl read of F107"
+  }
+ ],
+ "checks_run": [
+  "C12",
+  "C27",
+  "C29",
+  "C30",
+  "C46",
+  "C70",
+  "C71"
+ ],
+ "_sweeps": [
+  "F6",
+  "F18",
+  "F25",
+  "F26",
+  "F44",
+  "G-BUILD",
+  "G-PROP"
+ ],
+ "_r1_closure": {
+  "1 hours F26": "closed: element deleted; W80 reworded; 9 spec rows re-pointed (see decision 1)",
+  "2 day counts F26": "closed: rows deleted; the Residence State note says day counts are time data",
+  "3 C29 RESEARCH-GAP": "closed: 0 hard hits; 9 cells now read 'Not configured in this release [[GAP:DD-RQ-0n]]' and all ids are in gaps.json (RQ-01 x2, RQ-02 x6, RQ-03 x1)",
+  "4 C27 forward refs": "closed: 194 column-L cells changed; every DD name cited is an exact DD Field Name (checked against the 143 names); 0 '(forward reference)'",
+  "5 UI-001 L10/L13": "closed: both read 'Derived: ...'",
+  "6 nd": "closed: +US-NDS5-002",
+  "7 transport": "closed: +US-MULTIS5-001/002/004",
+  "8 mt": "closed: US-MTS5-005, E299 regenerated; the copy reads 'The Form MW-4 must be filed on TAP'",
+  "9 OH school district": "closed: primary US-OHB5-401 (2026); W96 limitation sentence accepted",
+  "10 account numbers": "closed: split into 3 rows plus the programme mapper (orphan qualifiers: minor finding 2)",
+  "11 (other)": "closed: 'blank'",
+  "12 per-return sentence": "closed: 9 G cells",
+  "13 consumed_by": "closed per R1-FACTS-READY",
+  "14 OHP51-002": "closed: status active; the copy holds 'zero exemptions'",
+  "15 CT re-point": "closed: US-CTP10-001 dropped; the primary copy holds the 'third calendar quarter of 2026' clause"
+ },
+ "_diff_vs_backup": {
+  "DD": "ID Information: 1 row replaced by 3. Country Fields: 3 rows deleted; W changed on 10 rows (facts rewording, W80, W96, Residence State); G changed on 9 rows (finding 12). Mappers: '(other)' -> 'blank' x2; new programme mapper; gap cells reworded; MT, NM, NY, OH and LOU rows (facts); the depositor, IN, MD, OH municipal and UI adjustment blocks bound to new facts. Other 5 sheets: 0 changes. Every change maps to a batch item or a source-hunter fact change.",
+  "RSPEC": "195 cells. 194 are core-sheet column L cells in 17 workbooks: DOR-001 33, SSA-001 43, UI-001 28, DOR-002 22, IRS-007 17, IRS-001 9, IRS-006 6, IRS-008 6, IRS-002 5, PFML-001 5, SDNH-001 5, IRS-004 4, LOC-001 3, IRS-003 3, DOR-004 2, IRS-005 2, WC-001 1. The other one is LOC-001 M3 (reworded dd.ky.locality tag; all 7 tags in M3 equal their facts). No other cell changed. Verified in full as part of this round."
+ },
+ "_builder_decisions": {
+  "mixed_hours_rows": "ACCEPTED. IRS-007 r6, PFML-001 r33 and UI-001 r14, r49, r97, r107, r185 report hours together with genuine DD fields; dropping those DD names would break direction 1. Each row now reads '<exact DD names>; payroll result: hours accumulated from time data (WTC unit of measure)', and the hours-only rows (UI-001 r11, PFML-001 r5) read 'Payroll result: ...'. The F26 intent is met: no hours element is left in the DD.",
+  "C29_X_run_masks": "ACCEPTED as authority format masks, quoted verbatim. 'S-XXXXXX-Y': SSA Pub. 42-007 EFW2 TY2026 4.2.6 (US-FEDS5-032 copy: 'The Employer Signature PIN must follow this exact format: S-XXXXXX-Y ... each X is a digit 0-9'). 'WHTXXXXXXXX': Vermont RS layout (US-VTS6-001 copy: 'Use the account ID (WHT-XXXXXXXX) assigned to you. Be sure to omit the hyphen. Example: WHTXXXXXXXX'). The shared C29 sanctions authority reference masks, but its regex only recognises digit- or dot-adjacent runs, so these letter- or hyphen-adjacent masks will still be listed: a checker limitation, to be carried to run close like the C46 one. QA does not write a validation exemption; recording one is the owner's decision."
+ },
+ "_checks_results": {
+  "C29": "hard list 0 (DD); X-run tier: 1 DD cell (V16) plus 7 RSPEC cells, accepted above",
+  "C46_period_aware_auditor": "198 tags, 126 keys, 0 mismatches, 0 tags without a fact",
+  "C70": "PASS (content_checks --checks C70)",
+  "C71": "DD regen_check_dd PASS (0 differences); specs regen_check PASS (20 files, 0 differences)",
+  "recon": "MAPPED 190, NOT-DD 759, UNMAPPED 0, EXCEPTION 0, forward references 0; direction 2: 141/143 used (minor finding 2)"
+ },
+ "manual_review_items": [
+  "C5, C6, C7: not implemented in v2.12 (L3); r1 hand results unchanged for untouched rows; the 3 new ID rows and the changed rows were re-read by hand.",
+  "Version Control C13 2027-03-31 'Issued': manifest planning date, owner decision (unchanged from r1)."
+ ],
+ "numeric_verification": {
+  "facts_total": 126,
+  "facts_verified": 126,
+  "unverified_keys": [],
+  "method": "Text check of all 198 [[FACT:]] tags (126 keys) against the local copies of register_id + _also_register_ids, re-extracted today, plus a content-word check; misses read in context. The 4 r1 known keys are now supported: ms (US-MSS5-007 'Date of Birth Gender Salary Payment Frequency Medical Insurance Eligibility'), ky (Louisville Metro only; Lexington moved to US-KYS5-024), ny (US-NY-013 'IT-2104.1 ... Certificate of Nonresidence and Allocation of Withholding Tax'), nm (US-NMP52-001 'This duplicate W-4 is not mandatory. It is a convenience for employer and employee'). The 3 r1 new keys: see _r1_closure. New code-list keys: IN, MD, OH and MD adjustment codes found in their copies; depositor names and $50,000 in US-FEDS5-004; 678 OH codes re-derived from the CSV (G-DERIVE). Remaining token misses are glosses (DOB, IWO, ZIP, 5-digit, A-4 2026 in the row URL) or the internal path of finding 1, which is not a source claim. No WebFetch was used."
+ },
+ "cross_checks": [
+  {
+   "name": "Report-Specs x DD, direction 1",
+   "result": "pass",
+   "note": "190 mapped rows, all names exact, 0 forward references; 2 derived rows; hours rows decided above"
+  },
+  {
+   "name": "Report-Specs x DD, direction 2",
+   "result": "fail",
+   "note": "141/143; 2 group qualifiers not credited (minor finding 2)"
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "dd.oh.municipal.code_list",
+   "consumed_by": [
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-OHB5-403",
+   "_note": "finding 1; also dd.in.county_code.list (US-INS5-007) and dd.md.county_code.list (US-MDS5-003)"
+  },
+  {
+   "fact": "dd.ky.locality",
+   "consumed_by": [
+    "DD",
+    "RSPEC/US-LOC-001",
+    "CCG/annex_KY"
+   ],
+   "resynced": true,
+   "register_id": "US-KYP9W-001",
+   "_note": "value reworded this batch; LOC-001 M3 re-synced; check the CCG annex KY wording at run-close rebuild"
+  },
+  {
+   "fact": "dd.employer.state_account_ids",
+   "consumed_by": [
+    "RSPEC/US-DOR-001",
+    "RSPEC/US-DOR-002",
+    "RSPEC/US-UI-001",
+    "RSPEC/US-PFML-001",
+    "RSPEC/US-LOC-001",
+    "RSPEC/US-WC-001"
+   ],
+   "resynced": true,
+   "register_id": "US-UTR3-001",
+   "_note": "column L re-pointed to 'State employer account number'"
+  }
+ ],
+ "_batch_fix_list": [
+  {
+   "owner": "compliance-source-hunter",
+   "items": [
+    "Finding 1: drop the internal-path clause from dd.oh.municipal.code_list, dd.in.county_code.list and dd.md.county_code.list",
+    "Finding 3 (minor): add a Lexington locality-name key without the rate"
+   ]
+  },
+  {
+   "owner": "artifact-builder (DD generator)",
+   "items": [
+    "Regenerate F338, F344, F347 and F107",
+    "Add the internal-path pattern to the dd_lint WORD check",
+    "Finding 2 (minor): credit the group qualifiers in dd_recon",
+    "Re-run dd_lint, C46, C71, recon and md5_final"
+   ]
+  }
+ ],
+ "_next_action": "Source hunter -> DD rebuild (only F107/F338/F344/F347 plus the recon change expected in the diff) -> QA DD r3, a diff-scoped confirmation"
+}

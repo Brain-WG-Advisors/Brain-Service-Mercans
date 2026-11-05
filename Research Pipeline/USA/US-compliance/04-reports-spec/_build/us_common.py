@@ -29,6 +29,7 @@ MANIFEST = json.load(open(os.path.join(BASE, "_pipeline", "build-manifest.json")
 PKG = MANIFEST["package"]["version"]
 ISSUE = dt.datetime.strptime(MANIFEST["package"]["issue_date"], "%Y-%m-%d")
 AUTHOR = MANIFEST["package"]["issued_by"]
+STATUS = "For QA" if "placeholder" in str(MANIFEST["package"].get("_note", "")).lower() else "Issued"   # QA SIR r1 item 18: release sets "Issued"
 YEAR = MANIFEST["year"]
 CODE = MANIFEST["code"]
 DD_REF = f"{CODE}-DD-001 v{PKG}"
@@ -93,6 +94,9 @@ def fact(key, period=None):
     if not cand:
         raise KeyError(f"no fact {key!r} for period {period!r}")
     cand.sort(key=lambda f: (f["_file"] != "RSPEC-facts.json"))
+    if not period and key in CHANGE_DATE_KEYS and len(cand) > 1:
+        # C41: of the periods of the build year the one in force now (the latest effective_from) is written
+        cand.sort(key=lambda f: str(f.get("effective_from") or ""), reverse=True)
     return cand[0]
 
 
@@ -121,7 +125,23 @@ def tag(key, period=None):
     if "]" in str(f["value"]):
         raise ValueError(f"{key}: value contains ']' and cannot be written as a [[FACT:]] tag")
     USED.setdefault(key if not period else f"{key}@{f.get('effective_from')}", set()).add(_CUR[0])
-    return f"[[FACT:{key}={fmt_value(f['value'])}]]"
+    return f"[[FACT:{key}={fmt_value(f['value'])}]]" + change_date(key, f)
+
+
+# C41: a value that changes during the build year is printed with its date wherever it is written
+CHANGE_DATE_KEYS = {"rspec.me.wh_return.form", "sir.nj.withholding.agent_authorization", "sir.dc.withholding.agent_authorization",
+                    "sir.tx.ui.agent_authorization", "rspec.fed.form940.due", "rspec.fed.futa.credit_reduction.states"}
+
+
+def change_date(key, f):
+    if key not in CHANGE_DATE_KEYS:
+        return ""
+    ef, et = str(f.get("effective_from") or ""), str(f.get("effective_to") or "")
+    if ef.startswith(str(YEAR)) and ef[5:] != "01-01":
+        return f" (from {ef})"
+    if et.startswith(str(YEAR)):
+        return f" (until {et})"
+    return ""
 
 
 def note_use(key, period=None):
@@ -356,6 +376,7 @@ PIPELINE_WORDS = re.compile(r"\b(Stage \d|Synthesis|facts file|research pack|reg
                             r"PENDING|browser pass|VPN|fan-out|RESEARCH-GAP|agent 2|builder|_research|_pipeline|"
                             r"build-manifest|scope_manifest|\.json\b|US exit)", re.I)
 
+PATH_RX = re.compile(r"00-official-sources|_research/|_pipeline/|\.json\b|\.py\b|[A-Za-z]:\\")   # internal paths, also inside tag values
 
 def clean(text):
     """Guard on every string written: no residual markers, no pipeline wording."""

@@ -1,0 +1,534 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "WTC",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-03",
+ "_reviewed_file": "02-wtc/US-WTC-001-v1.0.xlsx",
+ "_md5": "cccb5d23ee1aa72a00495a5b5dbff4b7",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "pattern": "F20",
+   "severity": "blocker",
+   "pass": "P2",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!AA2:AA534",
+   "problem": "C48 passed vacuously: _research/WTC-crosswalk.json has reporting_codes=[] on all 533 wage types, while column AA states W-2 box 12 codes on 229 rows (24 distinct codes: A, AA, B, BB, C, D, DD, E, F, FF, G, H, J, K, L, P, Q, S, TA, TP, TT, V, W, Y). WTC-RQ-08 says there is no authority code table, but the IRS General Instructions for Forms W-2 and W-3 (2026), 'Form W-2 Reference Guide for Box 12 Codes' (p. 32), is in the local copy of US-FEDS5-007. The only tables in 00-official-sources/code-tables are the IN/MD county and OH municipal tables. Judgement: 0 codes tested is not acceptable, and the codes must come from the IRS authority table, not from the RSPEC or DD.",
+   "expected": "Source hunter: write 00-official-sources/code-tables/US-W2-box12.json {authority: IRS, source_url: iw2w3 2026, valid_from: 2026-01-01, codes: {w2_box12: [...]}} from US-FEDS5-007 p.32. Builder: set the crosswalk code_table to that file, fill reporting_codes 'w2_box12=<code>' for every AA row, close WTC-RQ-08 in gaps.json and in the research request, and remove the RQ-08 GAP sentence (e.g. US-064). Re-run C48: codes_checked must cover all 229 rows with 0 problems.",
+   "register_id": "US-FEDS5-007",
+   "action": "routed_to_source_hunter",
+   "check_id": "C48",
+   "evidence": "pymupdf text of 00-official-sources/ccg-sources/FED/FED_IRS-iw2w3-2026_2026-11-02.pdf; content_checks C48 codes_checked 0"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P2",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D46",
+   "problem": "The period-aware C46 run on the WTC finds 6 tags that disagree with the current facts: ri.base.401k_125.ui_tdi (D46, D456), la.sit.nonresident.threshold (D391), nj.base.hsa.git (D403), wa.pfml.base.tips (D499) and in.local.county_lit.rule (D516). fed.fit.extra_pay_period.rule was also reworded. The facts were changed at 20:03, after the workbook build at 19:53 (WTC fix R1, R1-FACTS-READY.md), so the build log's 'C46 period-aware 0 mismatches' no longer holds.",
+   "expected": "Regenerate with 02-wtc/_build/build_wtc.py from the current facts (17 R1 keys: confirmed, re-bound or reworded, no number changed). Then re-run C46 period-aware (0 mismatches), C71, wtc_lint and md5_final, and update WTC-build-log.md.",
+   "register_id": "US-RIS5-017",
+   "action": "routed_to_builder",
+   "check_id": "C46",
+   "fact_key": "ri.base.401k_125.ui_tdi"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P2",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D412",
+   "problem": "The Utah SIT row renders ut.sit.method, ut.pit.base_allowance.single/married.annual (485/970), ut.pit.phaseout_threshold.* (9,348/18,696) and ut.pit.phaseout.rate as '(effective from 2026-01-01)'. Register US-UTPIT-003 (Pub 14 Rev. 04/26) has effective_from 2026-04-01, and the same cell's GAP WTC-RQ-42 says the source states no effective date. The figures are dated before the period their register row covers.",
+   "expected": "Source hunter: set effective_from on the ut.pit.base_allowance.*, ut.pit.phaseout* and ut.sit.method facts (WTC-country_specific and CCG-annex_UT) to what US-UTPIT-003 supports, and register the schedule in force before it as a dated row. Builder: render both periods in D412, and put no 2026-01-01 label on the Rev. 04/26 values.",
+   "register_id": "US-UTPIT-003",
+   "action": "routed_to_source_hunter",
+   "fact_key": "ut.pit.base_allowance.single.annual"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Global WTC Coverage!A3",
+   "problem": "The flag convention says that for a deduction row 'No = removed from the base before the tax', so Yes = not removed. The 42 reversal deduction rows (Wage Type Catalogue rows 2-36 and 38-43: 21100-21213, 21150-21152, housing and transport deductions) carry Yes on N/O/Q1-Q5/Y/Z, while their column D says 'it reduces the same bases as the earning'. Under the declared convention the engine would not reduce the base for a reversal. Pre-tax deductions (401(k), row 46: N=No, Q1=Yes) follow the convention, so one Deduction category carries two opposite readings.",
+   "expected": "Amend A3 to define two classes explicitly: (1) a reversal deduction carries the flags of the reversed earning, with Yes = the signed amount reduces that base; (2) for a salary-reduction or pre-tax deduction, No = removed from the base before the tax. State the class in column D (or in Category) of each reversal row.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D346",
+   "problem": "US-045 (qualified overtime premium) binds fed.obbba.tips_deduction.level, whose value is the TIPS text ('employer reports W-2 box 12 TP + 14b'), as the level of the overtime deduction.",
+   "expected": "Bind an overtime fact instead, e.g. fed.obbba.overtime_deduction.level = 'assessment (withholding only via W-4 Step 4(b); employer reports W-2 box 12 TT)' on US-FEDS5-030. The source hunter adds the key if it is missing, then the builder re-binds D346.",
+   "register_id": "US-FEDS5-030",
+   "action": "routed_to_source_hunter",
+   "fact_key": "fed.obbba.tips_deduction.level"
+  },
+  {
+   "pattern": "F20",
+   "severity": "major",
+   "pass": "P3",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!O283",
+   "problem": "62901 (Supplemental basic, 13th/14th month) has Table Tax=Yes and Special Tax=No (P283). The other 31 US-TX-02 supplemental rows have Yes-No/Yes-No (aggregate method or optional flat 22%, US-FEDS5-003).",
+   "expected": "Set O283=Yes-No and P283=Yes-No, and point D283 to anchor 62200.",
+   "register_id": "US-FEDS5-003",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D64",
+   "problem": "The advance rows 62103 (D64), 62403 (D180), 62503 (D204), 62523 (D213) and 62563 (D226) say 'Same tax treatment and flags as anchor ...', yet every flag is NA, G=US-NA, and the cell cites GAP WTC-RQ-02. The text contradicts the flags, and an Earning row with all flags NA pays an untaxed amount.",
+   "expected": "Source hunter: answer WTC-RQ-02 (whether an advance of wages is FIT/FICA/FUTA wages when paid, and how its recovery is treated) from the Pub. 15 / 26 CFR 31.3402 rows already in the register. Builder: until then, delete the 'Same tax treatment and flags as anchor' sentence from these 5 cells.",
+   "register_id": null,
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P1",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!B7",
+   "problem": "diff_wtc_baseline: 202 of the 300 Global descriptions are changed in column B. 196 add suffixes such as ' - type 1'; 6 are rewritten (21640, 21641, 21642, 21645, 21900, 62104). The toolkit holds the baseline description text as authoritative. Codes are intact (300 kept, 0 missing).",
+   "expected": "Put the Global_WTC_V1_0 description verbatim in B for the 300 baseline codes, and move the US disambiguation (type N, 401(k)/403(b)/457(b)/SIMPLE, OASDI) to column C or D. diff_wtc_baseline must then report RENAMED 0.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "check_id": "C12"
+  },
+  {
+   "pattern": "F18",
+   "severity": "major",
+   "pass": "P2",
+   "location": "00-official-sources/legal-basis-register.csv!local_file!US-NC-001",
+   "problem": "The text check of FACT tags against the bound row's local copy fails for 73 keys (listed in numeric_verification.unverified_keys). Examples: the US-NC-001 html has no 4.09 or 2,500 (nc.pit.wh.rate, nc.pit.allowance.amount); the US-KY-003 copy has no 12,000 or 2.7; the US-KSS5-001 copy is a 12 KB Wayback shell without the KW-100 tables; mn.paid_leave.total.rate 0.88 is bound to Minn. Stat. 268B.14, which sets no rate; the US-NJS5-010 page lacks the 0.3825/0.19/0.23 worker rates. 7 rows have no local file: US-AKR3-001, US-DCR3-001, US-ILP52-001, US-MOP7-001, US-MOP7-002, US-AZWH-003, US-TN-001.",
+   "expected": "For each unverified key, either re-capture a local copy that carries the figure or rule, or re-bind the key to a register row whose copy does, and record the quote. A PASS requires 0 unverified keys.",
+   "register_id": "US-NC-001",
+   "action": "routed_to_source_hunter",
+   "evidence": "f44 text check: 1,272 tags / 870 keys against the register local_file texts"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D306",
+   "problem": "US-005 cites only [US-FEDR2-003] for fed.fica.totalization.exemption_rule. PROPAGATION-LEDGER line 80 requires the US-FEDR2-004 citation as well (RSPEC IRS-001 has already been re-issued with it).",
+   "expected": "Cite [US-FEDR2-003, US-FEDR2-004] in D306 and AB306.",
+   "register_id": "US-FEDR2-004",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fica.totalization.exemption_rule"
+  },
+  {
+   "pattern": "F20",
+   "severity": "minor",
+   "pass": "P3",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!T344",
+   "problem": "US-043 (cash tips) has Q4 SUI=Yes and Q5 programmes=Yes, but D344 says the State definition of tips is not configured (WTC-RQ-07), and wa.pfml.base.tips excludes tips from WA PFML wages.",
+   "expected": "Set T344=Yes-No and U344=Yes-No, and name the WA PFML exclusion in D344.",
+   "register_id": "US-WAS5-023",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "00-official-sources/legal-basis-register.csv!consumed_by!US-FEDS5-026",
+   "problem": "10 register rows bound in WTC-bindings.csv do not list WTC in consumed_by: US-AZP9V-001, US-DEL-003, US-FEDS5-026, US-IDP52-004, US-MDB5-401, US-MES5-025, US-NCB5-401, US-TXSUI-001, US-VAB5-401, US-VAR3-002.",
+   "expected": "Append ';WTC' to consumed_by on these 10 rows.",
+   "register_id": "US-FEDS5-026",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "02-wtc/_build/checks/wtc_recon.csv!DD->WTC!Employee primary language",
+   "problem": "The exception reason says 'consumed by the SIR or the notice'. The DD (Country Fields, Employee primary language) says the field feeds the notice template (NY Labor Law 195.1 pay-rate notice, CO paid sick leave notice) and no report. The SIR does not exist yet.",
+   "expected": "Accept the exception: no wage type reads the field. Reword the reason to 'notice template input (NY LL 195.1, CO PSL notice) per DD; not a wage-type input'. Close the WTC side of PROPAGATION-LEDGER line 94 and keep it open for SIR/PSL.",
+   "register_id": "US-NYP9L-001",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "_pipeline/WTC-build-log.md!Precedent inspection!header row",
+   "problem": "The build log says 30 columns; the header has 29 (A-AC). The toolkit's WTC contract (20 columns, A-T) flags this as a BLOCKER, but FR (24 columns) and CO (28 columns) are precedent for expanding Q. Accepted as a documented deviation.",
+   "expected": "Correct the log to '29 columns A-AC' and list the 9 added or expanded columns as a deviation from the 20-column contract.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "check_id": "C12"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P3",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!table 206!r11c2",
+   "problem": "C49 FAIL 1 is a false positive. 'KW-100' is the Kansas withholding guide form id (US-KSS5-001), not a wage-type code. It matches the C49 regex [A-Z]{2}-[0-9]{3} because the WTC code scheme is US-nnn. The WTC is not at fault, and the codes must not be renamed.",
+   "expected": "No artifact change. Either the owner records validation_exemptions.C49 in build-manifest.json (reason, KW-100 source URL, decided_on), or the C49 regex is restricted to the {CODE}- prefix. The auditor does not write the exemption.",
+   "register_id": "US-KSS5-001",
+   "action": "routed_to_builder",
+   "check_id": "C49"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "_research/gaps.json!WTC-RQ-25",
+   "problem": "WTC-RQ-25 (DC 2026 method) and WTC-RQ-42 (UT Pub 14 date) are blocking:false in gaps.json and 'none blocking' in the build log, while the facts flag them as blocking. Judgement: DC does not block the WTC (the catalogue carries no method parameter, and the row and its flags exist); UT does block, through the D412 dating finding. The status must read the same everywhere.",
+   "expected": "Set blocking=true in gaps.json with _wtc_impact: 'none: catalogue carries no method' for RQ-25 and 'D412 dating' for RQ-42. Carry both as named limitations into the QA report and the handover.",
+   "register_id": "US-DCS5-025",
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C9",
+  "C12",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C44",
+  "C46",
+  "C48",
+  "C49",
+  "C50",
+  "C53",
+  "C56",
+  "C70"
+ ],
+ "manual_review_items": [
+  "C9 tax codes: no deterministic check exists in the script (L3), so this was run by hand. Every G value is in the legend (US-TX-01..11, US-NA), and the legend counts equal the row counts. PASS.",
+  "C46 shared: the FAIL is the known checker limitation (it keeps one value per key). Period-aware run on the WTC: 1,272 tags; 46 multi-period keys rendered with dated labels; 6 mismatches, all from the R1 rewording (routed). The 32 'unbound' hits are section or code numbers (125, US-116). Accepted as a limitation once the workbook is regenerated.",
+  "C48: judged not acceptable (see the blocker): the IRS box 12 table is held locally.",
+  "C49: KW-100 false positive (see the finding). No code renaming.",
+  "Builder gaps (75): accepted as documented limitations except WTC-RQ-08 (answered by US-FEDS5-007, so C70 'gap already answered'), WTC-RQ-02 (contradicts its own cells) and WTC-RQ-42 (dated values). DC WTC-RQ-25 does not block the WTC.",
+  "Employee primary language exception: accepted, because the field is not a wage type. The wording fix is routed.",
+  "Tax-law spot-check (Pub. 15/15-T 2026, OBBBA): 401(k)/403(b)/457(b) are excluded for FIT and included for FICA and FUTA; s.125 and HSA are conditional; group-term life is FICA Yes, FUTA No; tips follow the 20 USD/month rule; qualified tips and qualified overtime are deductions at assessment level, with W-2 box 12 TP/TT reporting. 2026 limits: 24,500 / 8,000 / 11,250; HSA 4,400 / 8,750; supplemental 22%, and 37% above 1,000,000. All consistent apart from the findings.",
+  "Code collisions: 533 unique codes. US-nnn cannot collide with the 5-digit Global codes. All 300 Global codes are kept.",
+  "C5/C6/C7: not implemented in the script (L3) and not applicable to the WTC this round. C71 was not re-run: the facts changed after the build, so differences are expected until the workbook is regenerated.",
+  "Version Control effective date 2027-03-31 is the manifest's planning placeholder (issue_date). It applies package-wide; set it at release.",
+  "Not run: re-check of the scope_manifest wage_type_categories against the WTC's real counts (WTC-exists trigger). Do it in r2."
+ ],
+ "propagation": [
+  {
+   "fact": "fed.w2.box12.code_table",
+   "consumed_by": [
+    "WTC",
+    "RSPEC/US-SSA-001",
+    "RSPEC/US-DOR-002"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDS5-007"
+  },
+  {
+   "fact": "ut.pit.base_allowance.single.annual",
+   "consumed_by": [
+    "CCG/annex_UT",
+    "WTC",
+    "DESIGN"
+   ],
+   "resynced": false,
+   "register_id": "US-UTPIT-003"
+  },
+  {
+   "fact": "ri.base.401k_125.ui_tdi",
+   "consumed_by": [
+    "WTC",
+    "CCG/annex_RI"
+   ],
+   "resynced": false,
+   "register_id": "US-RIS5-017",
+   "_note": "Same for the other 16 R1 keys: WTC regeneration, then the CCG run-close rebuild."
+  },
+  {
+   "fact": "fed.fica.totalization.exemption_rule",
+   "consumed_by": [
+    "WTC",
+    "CCG/annex_FED",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDR2-004"
+  },
+  {
+   "fact": "ca.sdi.employee.rate",
+   "consumed_by": [
+    "WTC"
+   ],
+   "resynced": true,
+   "register_id": "US-CAP7-002",
+   "_note": "Ledger line 31: WTC D471 renders 1.3 (2026) and 1.4 (2027)."
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "WTC x tax-code legend (C9)",
+   "result": "pass",
+   "note": "12 codes; counts match the legend"
+  },
+  {
+   "name": "RSPEC -> WTC",
+   "result": "pass",
+   "note": "137 rows mapped; every mapped code exists"
+  },
+  {
+   "name": "WTC -> DD",
+   "result": "pass",
+   "note": "486 links resolve to DD names"
+  },
+  {
+   "name": "DD -> WTC",
+   "result": "pass",
+   "note": "11 mapped; 1 accepted exception (Employee primary language)"
+  },
+  {
+   "name": "WTC x facts (C46 period-aware)",
+   "result": "fail",
+   "note": "6 stale tags after the R1 facts rewording"
+  },
+  {
+   "name": "Global baseline preservation",
+   "result": "fail",
+   "note": "300/300 codes kept; 202 descriptions changed"
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 870,
+  "facts_verified": 780,
+  "unverified_keys": [
+   "ak.local_wage_tax.exists",
+   "al.sui.base.cafeteria_cash_option",
+   "co.sit.method",
+   "co.sit.obbba_overtime.withholding",
+   "ct.pfml.wage_cap",
+   "ct.sit.method_choice.decision",
+   "dc.sit.supplemental",
+   "de.local.wilmington.eit.rate",
+   "de.pfml.rate.total",
+   "fed.ccpa.protected_weekly",
+   "fed.equity.withholding_treatment.resident",
+   "fed.fit.nra.bik.treatment",
+   "fed.iwo.priority",
+   "ga.sui.base.section125",
+   "il.local_wage_tax.exists",
+   "ks.sit.annual_table.married",
+   "ks.sit.annual_table.single",
+   "ks.sit.method",
+   "ks.sit.rounding",
+   "ky.base.exclusions",
+   "ky.sui.new_employer.rate",
+   "ky.sui.wage_base",
+   "ma.conformity.same_year_irc",
+   "ma.pfml.family.rate",
+   "ma.pfml.medical.rate",
+   "ma.pfml.split.decision",
+   "ma.pfml.wage_cap",
+   "ma.sit.method_choice",
+   "ma.sit.supplemental",
+   "ma.sui.rate_schedule.table",
+   "md.sit.state_rates",
+   "me.pfml.total.rate.under15",
+   "mi.local.uniform.nonresident_rate_default",
+   "mn.paid_leave.total.rate",
+   "mo.local.st_louis.earnings.rate",
+   "mo.local.st_louis.payroll_expense.rate",
+   "mo.sit.rate.top",
+   "mo.sui.base.401k_deferral",
+   "mo.sui.base.section125",
+   "ms.levy.workforce_investment_training.rate",
+   "ms.sit.resident_working_out_of_state",
+   "mt.sit.method",
+   "mt.sui.base.401k_deferral",
+   "mt.sui.base.dependent_care_129",
+   "mt.sui.base.section125",
+   "multi.convenience_rule.states",
+   "multi.mobile_workforce_bill.status",
+   "multi.resident_credit.level",
+   "nc.pit.allowance.amount",
+   "nc.pit.wh.rate",
+   "nc.wh.supplemental.rate",
+   "nj.sui.employer.rate.range",
+   "nm.sit.single.annual",
+   "ny.dbl.employee.rate",
+   "ny.dbl.employee.weekly_max",
+   "ny.levy.rsf",
+   "oh.local.school_district.rule",
+   "oh.sit.method",
+   "pa.sui.employee.rate",
+   "rspec.fed.w2.box_map",
+   "sc.sui.wage_base",
+   "sc.ui.daca.rate",
+   "sd.sui.wage_base",
+   "sd.ui.admin_fee.rate",
+   "tn.pit.exists",
+   "ut.sit.withholding_base",
+   "ut.sui.base.401k_deferral",
+   "va.sui.base.401k",
+   "va.ui.fund_building.rate",
+   "wa.sui.employer.rate.range",
+   "wa.ui.rate.new_employer.rule",
+   "wv.sit.exemption.annual",
+   "wv.sit.two_earner_table"
+  ],
+  "method": "Text check of every [[FACT:]] tag (1,272 tags, 870 keys) against the local copy of every register row bound to the key in WTC-bindings.csv. A numeric value passes when each of its numbers appears in the copy (comma, trailing-zero and fraction variants accepted; ISO-date fragments ignored). A rule passes when at least 60% of its content words appear. Booleans and absence claims that have a local copy are accepted on the register's verification_method. No WebFetch: local copies only, per the brief.",
+  "_pending_regeneration_keys": [
+   "al.sit.certificate",
+   "ar.sit.low_income_tables",
+   "id.sit.method",
+   "in.local.county_lit.rule",
+   "la.sit.nonresident.threshold",
+   "nj.sit.method",
+   "nj.base.hsa.git",
+   "ri.base.401k_125.ui_tdi",
+   "sc.sit.method",
+   "va.pfml.contributions.start",
+   "wa.pfml.base.tips",
+   "special_population.wa_cares.niv_exempt",
+   "oh.pit.municipal.rate_table",
+   "co.famli.employee.rate",
+   "co.famli.employer.rate",
+   "fed.equity.rsu.fica_timing",
+   "fed.fit.extra_pay_period.rule"
+  ],
+  "_pending_note": "17 keys were confirmed, re-bound or reworded by the source hunter (R1-FACTS-READY.md; no number changed). The workbook still carries the pre-R1 text, so these keys are re-checked in r2 after regeneration."
+ },
+ "_batch_fix_list": [
+  {
+   "n": 1,
+   "owner": "source_hunter",
+   "severity": "blocker",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!AA2:AA534",
+   "issue": "C48 passed vacuously: _research/WTC-crosswalk.json has reporting_codes=[] on all 533 wage types, while column AA states W-2 box 12 codes on 229 rows (24 distinct codes: A, AA, B, BB, C, D, DD, E, F, FF, G, H, J, K, L, P, Q, S, TA, TP, TT, V, W, Y). WTC-RQ-08 says there is no authority code table, bu",
+   "fix": "Source hunter: write 00-official-sources/code-tables/US-W2-box12.json {authority: IRS, source_url: iw2w3 2026, valid_from: 2026-01-01, codes: {w2_box12: [...]}} from US-FEDS5-007 p.32. Builder: set the crosswalk code_table to that file, fill reporting_codes 'w2_box12=<code>' for every AA row, close WTC-RQ-08 in gaps.json and in the research request, and remove the RQ-08 GAP sentence (e.g. US-064). Re-run C48: codes_checked must cover all 229 rows with 0 problems."
+  },
+  {
+   "n": 2,
+   "owner": "builder",
+   "severity": "blocker",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D46",
+   "issue": "The period-aware C46 run on the WTC finds 6 tags that disagree with the current facts: ri.base.401k_125.ui_tdi (D46, D456), la.sit.nonresident.threshold (D391), nj.base.hsa.git (D403), wa.pfml.base.tips (D499) and in.local.county_lit.rule (D516). fed.fit.extra_pay_period.rule was also reworded. The ",
+   "fix": "Regenerate with 02-wtc/_build/build_wtc.py from the current facts (17 R1 keys: confirmed, re-bound or reworded, no number changed). Then re-run C46 period-aware (0 mismatches), C71, wtc_lint and md5_final, and update WTC-build-log.md."
+  },
+  {
+   "n": 3,
+   "owner": "source_hunter",
+   "severity": "blocker",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D412",
+   "issue": "The Utah SIT row renders ut.sit.method, ut.pit.base_allowance.single/married.annual (485/970), ut.pit.phaseout_threshold.* (9,348/18,696) and ut.pit.phaseout.rate as '(effective from 2026-01-01)'. Register US-UTPIT-003 (Pub 14 Rev. 04/26) has effective_from 2026-04-01, and the same cell's GAP WTC-RQ",
+   "fix": "Source hunter: set effective_from on the ut.pit.base_allowance.*, ut.pit.phaseout* and ut.sit.method facts (WTC-country_specific and CCG-annex_UT) to what US-UTPIT-003 supports, and register the schedule in force before it as a dated row. Builder: render both periods in D412, and put no 2026-01-01 label on the Rev. 04/26 values."
+  },
+  {
+   "n": 4,
+   "owner": "builder",
+   "severity": "major",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Global WTC Coverage!A3",
+   "issue": "The flag convention says that for a deduction row 'No = removed from the base before the tax', so Yes = not removed. The 42 reversal deduction rows (Wage Type Catalogue rows 2-36 and 38-43: 21100-21213, 21150-21152, housing and transport deductions) carry Yes on N/O/Q1-Q5/Y/Z, while their column D s",
+   "fix": "Amend A3 to define two classes explicitly: (1) a reversal deduction carries the flags of the reversed earning, with Yes = the signed amount reduces that base; (2) for a salary-reduction or pre-tax deduction, No = removed from the base before the tax. State the class in column D (or in Category) of each reversal row."
+  },
+  {
+   "n": 5,
+   "owner": "source_hunter",
+   "severity": "major",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D346",
+   "issue": "US-045 (qualified overtime premium) binds fed.obbba.tips_deduction.level, whose value is the TIPS text ('employer reports W-2 box 12 TP + 14b'), as the level of the overtime deduction.",
+   "fix": "Bind an overtime fact instead, e.g. fed.obbba.overtime_deduction.level = 'assessment (withholding only via W-4 Step 4(b); employer reports W-2 box 12 TT)' on US-FEDS5-030. The source hunter adds the key if it is missing, then the builder re-binds D346."
+  },
+  {
+   "n": 6,
+   "owner": "builder",
+   "severity": "major",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!O283",
+   "issue": "62901 (Supplemental basic, 13th/14th month) has Table Tax=Yes and Special Tax=No (P283). The other 31 US-TX-02 supplemental rows have Yes-No/Yes-No (aggregate method or optional flat 22%, US-FEDS5-003).",
+   "fix": "Set O283=Yes-No and P283=Yes-No, and point D283 to anchor 62200."
+  },
+  {
+   "n": 7,
+   "owner": "source_hunter",
+   "severity": "major",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D64",
+   "issue": "The advance rows 62103 (D64), 62403 (D180), 62503 (D204), 62523 (D213) and 62563 (D226) say 'Same tax treatment and flags as anchor ...', yet every flag is NA, G=US-NA, and the cell cites GAP WTC-RQ-02. The text contradicts the flags, and an Earning row with all flags NA pays an untaxed amount.",
+   "fix": "Source hunter: answer WTC-RQ-02 (whether an advance of wages is FIT/FICA/FUTA wages when paid, and how its recovery is treated) from the Pub. 15 / 26 CFR 31.3402 rows already in the register. Builder: until then, delete the 'Same tax treatment and flags as anchor' sentence from these 5 cells."
+  },
+  {
+   "n": 8,
+   "owner": "builder",
+   "severity": "major",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!B7",
+   "issue": "diff_wtc_baseline: 202 of the 300 Global descriptions are changed in column B. 196 add suffixes such as ' - type 1'; 6 are rewritten (21640, 21641, 21642, 21645, 21900, 62104). The toolkit holds the baseline description text as authoritative. Codes are intact (300 kept, 0 missing).",
+   "fix": "Put the Global_WTC_V1_0 description verbatim in B for the 300 baseline codes, and move the US disambiguation (type N, 401(k)/403(b)/457(b)/SIMPLE, OASDI) to column C or D. diff_wtc_baseline must then report RENAMED 0."
+  },
+  {
+   "n": 9,
+   "owner": "source_hunter",
+   "severity": "major",
+   "cell": "00-official-sources/legal-basis-register.csv!local_file!US-NC-001",
+   "issue": "The text check of FACT tags against the bound row's local copy fails for 73 keys (listed in numeric_verification.unverified_keys). Examples: the US-NC-001 html has no 4.09 or 2,500 (nc.pit.wh.rate, nc.pit.allowance.amount); the US-KY-003 copy has no 12,000 or 2.7; the US-KSS5-001 copy is a 12 KB Way",
+   "fix": "For each unverified key, either re-capture a local copy that carries the figure or rule, or re-bind the key to a register row whose copy does, and record the quote. A PASS requires 0 unverified keys."
+  },
+  {
+   "n": 10,
+   "owner": "builder",
+   "severity": "minor",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D306",
+   "issue": "US-005 cites only [US-FEDR2-003] for fed.fica.totalization.exemption_rule. PROPAGATION-LEDGER line 80 requires the US-FEDR2-004 citation as well (RSPEC IRS-001 has already been re-issued with it).",
+   "fix": "Cite [US-FEDR2-003, US-FEDR2-004] in D306 and AB306."
+  },
+  {
+   "n": 11,
+   "owner": "builder",
+   "severity": "minor",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!T344",
+   "issue": "US-043 (cash tips) has Q4 SUI=Yes and Q5 programmes=Yes, but D344 says the State definition of tips is not configured (WTC-RQ-07), and wa.pfml.base.tips excludes tips from WA PFML wages.",
+   "fix": "Set T344=Yes-No and U344=Yes-No, and name the WA PFML exclusion in D344."
+  },
+  {
+   "n": 12,
+   "owner": "source_hunter",
+   "severity": "minor",
+   "cell": "00-official-sources/legal-basis-register.csv!consumed_by!US-FEDS5-026",
+   "issue": "10 register rows bound in WTC-bindings.csv do not list WTC in consumed_by: US-AZP9V-001, US-DEL-003, US-FEDS5-026, US-IDP52-004, US-MDB5-401, US-MES5-025, US-NCB5-401, US-TXSUI-001, US-VAB5-401, US-VAR3-002.",
+   "fix": "Append ';WTC' to consumed_by on these 10 rows."
+  },
+  {
+   "n": 13,
+   "owner": "builder",
+   "severity": "minor",
+   "cell": "02-wtc/_build/checks/wtc_recon.csv!DD->WTC!Employee primary language",
+   "issue": "The exception reason says 'consumed by the SIR or the notice'. The DD (Country Fields, Employee primary language) says the field feeds the notice template (NY Labor Law 195.1 pay-rate notice, CO paid sick leave notice) and no report. The SIR does not exist yet.",
+   "fix": "Accept the exception: no wage type reads the field. Reword the reason to 'notice template input (NY LL 195.1, CO PSL notice) per DD; not a wage-type input'. Close the WTC side of PROPAGATION-LEDGER line 94 and keep it open for SIR/PSL."
+  },
+  {
+   "n": 14,
+   "owner": "builder",
+   "severity": "minor",
+   "cell": "_pipeline/WTC-build-log.md!Precedent inspection!header row",
+   "issue": "The build log says 30 columns; the header has 29 (A-AC). The toolkit's WTC contract (20 columns, A-T) flags this as a BLOCKER, but FR (24 columns) and CO (28 columns) are precedent for expanding Q. Accepted as a documented deviation.",
+   "fix": "Correct the log to '29 columns A-AC' and list the 9 added or expanded columns as a deviation from the 20-column contract."
+  },
+  {
+   "n": 15,
+   "owner": "builder",
+   "severity": "minor",
+   "cell": "01-ccg/US-CCG-001-v1.0.docx!table 206!r11c2",
+   "issue": "C49 FAIL 1 is a false positive. 'KW-100' is the Kansas withholding guide form id (US-KSS5-001), not a wage-type code. It matches the C49 regex [A-Z]{2}-[0-9]{3} because the WTC code scheme is US-nnn. The WTC is not at fault, and the codes must not be renamed.",
+   "fix": "No artifact change. Either the owner records validation_exemptions.C49 in build-manifest.json (reason, KW-100 source URL, decided_on), or the C49 regex is restricted to the {CODE}- prefix. The auditor does not write the exemption."
+  },
+  {
+   "n": 16,
+   "owner": "builder",
+   "severity": "minor",
+   "cell": "_research/gaps.json!WTC-RQ-25",
+   "issue": "WTC-RQ-25 (DC 2026 method) and WTC-RQ-42 (UT Pub 14 date) are blocking:false in gaps.json and 'none blocking' in the build log, while the facts flag them as blocking. Judgement: DC does not block the WTC (the catalogue carries no method parameter, and the row and its flags exist); UT does block, thr",
+   "fix": "Set blocking=true in gaps.json with _wtc_impact: 'none: catalogue carries no method' for RQ-25 and 'D412 dating' for RQ-42. Carry both as named limitations into the QA report and the handover."
+  },
+  {
+   "n": 17,
+   "owner": "builder",
+   "severity": "blocker",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx",
+   "issue": "Order of work",
+   "fix": "Once the source hunter has closed items 1, 3, 5, 7, 9 and 12: regenerate the workbook once, then re-run C46 period-aware, C48, C71, diff_wtc_baseline, wtc_lint, content_checks and md5."
+  }
+ ]
+}

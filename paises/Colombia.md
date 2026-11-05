@@ -239,6 +239,7 @@ Contexto comum: lista "PMI Instaroll Transition Tracker" (ELT); cliente PMI (Com
 - [ ] (02/11) SIR Google Doc v1.3: seções 0 e 2 ainda dizem "six in-scope filings" sem o fluxo de pensionados (CO-PILA-007); seção 0 e Apêndice A citam `scope_manifest.json`/`integration-landscape.json` (arquivos internos). Sem texto aprovado — validacaoco
 ## Entregas (conferências)
 - 2026-10-30 · — · Validação da research (oráculo, folha set/2026, pesquisa oficial, finais CCG v1.5/WTC v1.7/DD v1.4/specs v1.1/Payslip v1.2): [[Research Pipeline/Colombia/2026-10-29-validacao-research/CONFERENCIA|conferência]]
+  - 2026-11-02 · rodada 5 (DRAFT-R5 × finais de 30/10): [[Research Pipeline/Colombia/2026-10-29-validacao-research/revisao/rodada5/CONFERENCIA-R5|conferência R5]] · simulações A-1, tetos anuais pelo acumulado (PASS): [[Research Pipeline/Colombia/2026-10-29-validacao-research/revisao/rodada5/simulations/CONFERENCIA-SIMULACOES-R5|conferência das simulações]]
 - 2026-10-21 · — · CO-CCG-001 v1.3 (alinhamento): [[Research Pipeline/Colombia/2026-10-21-alinhamento-CCG/CONFERENCIA-CCG|conferência]]
 - 2026-10-21 · — · CO-DD-001 v1.2 (alinhamento): [[Research Pipeline/Colombia/2026-10-21-alinhamento-DD/CONFERENCIA|conferência]]
 - 2026-10-21 · — · CO-WTC-001 v1.5 (alinhamento): [[Research Pipeline/Colombia/2026-10-21-alinhamento-WTC/CONFERENCIA|conferência]]

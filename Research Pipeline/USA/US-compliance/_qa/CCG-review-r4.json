@@ -1,0 +1,52 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_file_round": "r4 = targeted re-check of the two CCG defects raised in _qa/SIR-review-r3.json (_other_artifact_findings); schema caps round at 3",
+ "_reviewed_file": "01-ccg/US-CCG-001-v1.0.docx (md5 bbdcf05353a27d28730ff78c1c3403fa)",
+ "_reviewer": "compliance-qa-auditor (independent)",
+ "findings": [],
+ "checks_run": [
+  "C29",
+  "C46",
+  "C70"
+ ],
+ "numeric_verification": {
+  "facts_total": 12,
+  "facts_verified": 12,
+  "unverified_keys": [],
+  "method": "Changed lines carry 12 tags (7 oh.pit.municipal.*.rate, 5 ut.pit.*). Every tag is byte-identical to the copy in _pipeline/_backup/pre-sir-r3-2026-11-04, and the values equal the current facts, which were verified in WTC/CCG QA. No fact value changed in this fix, so F44 has nothing new to verify."
+ },
+ "cross_checks": [
+  {
+   "name": "Diff vs pre-sir-r3 copy (md units and docx text)",
+   "result": "pass",
+   "note": "Only annex_FED (S25), annex_OH (7 rows), annex_UT (t843 r7-r11) and annex_WA (1 bullet) changed; no module changed; docx text diff matches the md diff."
+  },
+  {
+   "name": "Stripped notes keep their meaning and dates",
+   "result": "pass",
+   "note": "UT: 'From 2026-04-01 (Pub. 14 Rev. 04/26). 2026-01-01 to 2026-03-31: Not configured [[GAP:RQ-596]]' keeps both dates. 'also HoH' was dropped from r7, but the UT parameter table header (annex_UT.md line 40) still says 'Single (also head of household)'. OH: each row keeps its 'from' date and US-OHB5-002; the as-of date 2026-11-01 is still in the count_in_force row (line 116). The dropped part was verification metadata that belongs in the register. FED S25: 'eCFR current as of retrieval' kept; the dropped clause explained the register's effective_from basis (pipeline metadata). WA: limitation kept in words, with its gap id."
+  },
+  {
+   "name": "Gap ids follow the CCG convention",
+   "result": "pass",
+   "note": "RQ-595 and RQ-596 follow the bare RQ-n series of CCG gaps (as RQ-282, RQ-590..594). Both are in _research/gaps.json with key, subject, location, what_would_close_it. 6 occurrences in annexes."
+  },
+  {
+   "name": "note_vocab_lint.py",
+   "result": "pass",
+   "note": "Run by QA: 'note vocabulary hits: 0'."
+  },
+  {
+   "name": "SIR changed only in the 2 Form 940 cells",
+   "result": "pass",
+   "note": "SIR text diff vs pre-sir-r3 copy: only T13r2 (Form 940) and T14r4 (US-IRS-004); integration-landscape.json identical."
+  }
+ ],
+ "manual_review_items": [
+  "Carry (cosmetic): annex_UT t843 r7 could restate 'also head of household' in the cell itself; meaning is preserved by the table header."
+ ]
+}

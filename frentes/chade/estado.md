@@ -8,6 +8,14 @@
   - Entrega: `Research Pipeline/Chad/2026-10-29-teste-design-hrblizz/` (PACOTE-CONTEXTO.md, rascunho-msg-suman.md).
 - **Design v4** pronto só no computador: `Research Pipeline/Chad/2026-10-29-design-v4/` (10 cenários = v3, preflight OK). Decisão do usuário (29/10): Drive e teste no motor só depois da resposta do Dev.
 
+- **Weekly 03/11 (Manju, Enaakshi, usuário; `raw/reunioes/2026-11-03-research-team-weekly.txt`, 00:00–09:56) — o que muda para o design:**
+  - Manju: a lógica fica no **payroll engine**; o Dev constrói lá, liga ao HRBlizz e testa no HRBlizz. Para testar, o design tem de estar construído no engine (não basta carregar regras na entidade).
+  - O usuário disse que o Mohit informou que é preciso **aprovação do Andre**.
+  - Proposta da Manju: testar com os **EUA**, não pelo caminho do Mohit. A Manju já fez um design dos EUA (pelo nosso chat) que o Andre subiu no engine para evidência SOC; país nunca começado pelo Mohit. O usuário faz o design dos EUA a partir da pesquisa, sobe no engine e **nós mesmos testamos** ("let's do it ourselves"). Cliente de referência: Remarkable USA (Sadaf cuida dos clientes EOR; pedir os entregáveis para reconciliar a pesquisa).
+  - Aprender a rodar folha: treinamentos gravados, Sadaf (entrada de dados no HRBlizz), BAU, acesso ao back office.
+  - Próximos passos: **04/11** o usuário explica o plano ao Marko na call; depois ao Mohit (call 04/11 18:30 IST); se não alinhar, Manju leva ao Andre na sexta **06/11**.
+  - ⚠️ Conflito: hoje (03/11) já mandamos a v6 do Chade ao Mohit. A Manju prefere não depender do Mohit. Decisão do usuário: manter o pedido do Chade em paralelo ou segurar.
+
 ## Coletado
 - ✅ 30/10: conversa "Mercans payroll knowledge base overview IV" baixada para `raw/chats/conversas/2026-10-16-design-dev-kb-mercans-payroll-kb-overview-IV.md` (ramo atual: 333 mensagens, de 06/09 a 16/10; trecho do design: [263]–[333], linha 12823 em diante). Próximo passo: extrair cartões.
 
@@ -35,6 +43,7 @@
 - 02/11 16:11 UTC: System Settings (`system.acceptance.k8s.hrblizz.dev`) **continua com erro 526** (Cloudflare Ray ID a5446a128fd42fa2). Backoffice OK (entidade REF-LE-04-422 visível). Pedido ao Ram **enviado 02/11** pelo Google Chat (6 mensagens, com ok do usuário): carregar nossas regras como conjunto separado (tax year de teste) ligado só à entidade de teste + erro 526. Ram respondeu 03/11 02:38: "send the file to Mohit he will load the regulations". ✅ v6 no formato do Dev pronta (9 .md, roundtrip 12/12 + 26/26 idêntico; 6 itens não representáveis na CONFERENCIA, incl. campos DD/entidade e códigos WTC novos que não existem no HRBlizz) — **enviada 03/11 ao Mohit** no chat "Cross Training - Design Creation - Oct 16" (4 mensagens + `TD-Chad-v6-test-set.zip`, md5 51881863…, 9 .md; spec com seção "Prerequisites not yet in the system"), com ok do usuário. 🔄 Aguardando o Mohit carregar. em `Research Pipeline/Chad/2026-11-03-v6-formato-dev/`; envio ao Mohit só com ok do usuário. Ram perguntou também (03/11 04:20) se houve mudança na research da Colômbia: fora desta frente.
 
 ## Fora desta frente
+- Weekly 03/11: design e teste dos EUA (base: design da Manju no engine, Andre; Remarkable USA/Sadaf) é da frente EUA; avisar o usuário, não gravar lá.
 - O Ram cobrou em 29/10 a atualização da skill da Colômbia (CCG v1.4 etc.). O usuário respondeu "ok". É assunto da janela geral ou da frente que cuida da Colômbia.
 
 ## Instruções vigentes

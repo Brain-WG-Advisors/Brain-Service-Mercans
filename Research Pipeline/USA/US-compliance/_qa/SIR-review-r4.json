@@ -1,0 +1,39 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SIR",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_file_round": "r4 = run-close targeted re-check of the C41/C70 SIR rebuild",
+ "_reviewer": "compliance-qa-auditor (independent, run-close re-check)",
+ "_reviewed_file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx (22/22 = md5_final). 218 raw changed lines = SIR-RQ ids renumbered +2 (two new requests at the front); with ids masked, 22 changed lines: NJ/DC/TX '(from date)', Form 940 rule -> gap, Ohio school district code -> gap (US-OHS5-019 2025 list now superseded), new DD element row (supplemental method), source-list rows. gaps.json and the skill use the new numbering consistently (SIR-RQ-29 = provider selection).",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "Section 8 DD element table",
+    "cell_or_line": "Ohio school district code"
+   },
+   "problem": "SIR now shows the Ohio code as a gap (SIR-RQ-02) while DD W96 and RSPEC still print the 4-digit/9999 rule with the DD limitation note; consistent in substance, different in form.",
+   "expected": "Keep; at the next SIR build print the DD limitation wording instead of a bare gap so the three artifacts read the same.",
+   "register_id": "US-OHB5-401",
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C46",
+  "C53",
+  "C70"
+ ],
+ "numeric_verification": {
+  "facts_total": 4,
+  "facts_verified": 4,
+  "unverified_keys": [],
+  "method": "NJ/DC/TX authorisation forms and form940.due checked in the registered copies (c41_keys_verify.py)."
+ },
+ "_evidence": "07-qa-crosscheck/_runclose/out/c41_c70_diff.txt; _runclose/c41_keys_verify.py; _runclose/sir_diff2.py"
+}

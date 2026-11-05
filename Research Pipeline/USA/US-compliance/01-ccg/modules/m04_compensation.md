@@ -242,7 +242,7 @@ State overtime deductions also operate at assessment only (never reduce State wi
 | DC | [[FACT:dc.pit.obbba_deductions=disallowed TY2025; allowed as DC deductions from TY2026; operating level assessment only (no withholding change)]] | [US-DCS5-021] |
 | CO | Colorado's worksheet removes the federal qualified-overtime deduction from W-4 Step 4(b) for State withholding | `co.wh.obbba_overtime_deduction.allowed` [US-COS5-012] |
 | CA | `ca.obbba.conforms` [US-CAS5-020]: no State tips or overtime deduction | [US-CAS5-020] |
-| HI | Not configured in this release [[GAP:RQ-563]]: The Hawaii treatment of tips and overtime deductions (assessment-only per the build journal) is not established from an official source. | |
+| HI | Not configured in this release [[GAP:RQ-563]]: The Hawaii treatment of tips and overtime deductions is not established from an official source. | |
 
 W-2 reporting of overtime and tips: [[FACT:fed.w2.box12.new_codes=TP (cash tips reported to employer); TT (qualified overtime compensation); TA (employer Trump-account contributions)]] [US-FEDS5-007].
 

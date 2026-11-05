@@ -96,7 +96,7 @@ Resident and nonresident State routing (reciprocity, day thresholds, convenience
 
 #### Step 6: Application of Post-Tax Deductions
 
-Employee shares of State programmes (unemployment in the States that levy one, disability, paid leave, long-term care), then voluntary after-tax deductions, then garnishments and levies computed on disposable earnings with their protected amounts and priority (Module 7). [[FACT:fed.iwo.priority=IWO for support ranks before other garnishments, except an IRS levy served before the underlying support order]] [US-FEDS5-014].
+Employee shares of State programmes (unemployment in the States that levy one, disability, paid leave, long-term care), then voluntary after-tax deductions, then garnishments and levies computed on disposable earnings with their protected amounts and priority (Module 7). [[FACT:fed.iwo.priority=Withholding for support has priority over any other legal process under state law against the same income (section 466(b)(7) of the Social Security Act); if a federal tax levy is in effect, notify the sender]] [US-FEDP6-002].
 
 Note: the facts classify some State programme shares as after-tax (for example `me.pfml.employee_deduction.after_tax` [US-MES5-025]); the State annex decides per programme.
 

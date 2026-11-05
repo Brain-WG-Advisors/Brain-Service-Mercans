@@ -114,13 +114,13 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | `oh.pit.school_district.earned_income_base.count` | [[FACT:oh.pit.school_district.earned_income_base.count=68]] |  | 2026-01-01 to 2026-12-31 | US-OHB5-001 |  |
 | `oh.pit.municipal.rate_table` | The Finder municipal rate table of the Ohio Department of Taxation (OHMuniRateTable.csv: begin date, end date, municipal FIPS code, name and rate per municipality; rates only, no resident credit and no collector) |  | from 2026-01-01 | US-OHB5-002 |  |
 | `oh.pit.municipal.count_in_force` | [[FACT:oh.pit.municipal.count_in_force=678]] |  | from 2026-11-01 | US-OHB5-002 | Distinct municipal FIPS with begin <= 2026-11-01 <= end in OHMuniRateTable.csv. |
-| `oh.pit.municipal.columbus.rate` | [[FACT:oh.pit.municipal.columbus.rate=2.5]] | % | from 2009-10-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
-| `oh.pit.municipal.cleveland.rate` | [[FACT:oh.pit.municipal.cleveland.rate=2.5]] | % | from 2017-01-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
-| `oh.pit.municipal.cincinnati.rate` | [[FACT:oh.pit.municipal.cincinnati.rate=1.8]] | % | from 2020-10-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
-| `oh.pit.municipal.dayton.rate` | [[FACT:oh.pit.municipal.dayton.rate=2.5]] | % | from 2017-01-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
-| `oh.pit.municipal.toledo.rate` | [[FACT:oh.pit.municipal.toledo.rate=2.5]] | % | from 2021-01-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
-| `oh.pit.municipal.akron.rate` | [[FACT:oh.pit.municipal.akron.rate=2.5]] | % | from 2018-01-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
-| `oh.pit.municipal.youngstown.rate` | [[FACT:oh.pit.municipal.youngstown.rate=2.75]] | % | from 2003-01-01 | US-OHB5-002 | Row in force on 2026-11-01 in OHMuniRateTable.csv (begin date = effective_from). |
+| `oh.pit.municipal.columbus.rate` | [[FACT:oh.pit.municipal.columbus.rate=2.5]] | % | from 2009-10-01 | US-OHB5-002 |  |
+| `oh.pit.municipal.cleveland.rate` | [[FACT:oh.pit.municipal.cleveland.rate=2.5]] | % | from 2017-01-01 | US-OHB5-002 |  |
+| `oh.pit.municipal.cincinnati.rate` | [[FACT:oh.pit.municipal.cincinnati.rate=1.8]] | % | from 2020-10-01 | US-OHB5-002 |  |
+| `oh.pit.municipal.dayton.rate` | [[FACT:oh.pit.municipal.dayton.rate=2.5]] | % | from 2017-01-01 | US-OHB5-002 |  |
+| `oh.pit.municipal.toledo.rate` | [[FACT:oh.pit.municipal.toledo.rate=2.5]] | % | from 2021-01-01 | US-OHB5-002 |  |
+| `oh.pit.municipal.akron.rate` | [[FACT:oh.pit.municipal.akron.rate=2.5]] | % | from 2018-01-01 | US-OHB5-002 |  |
+| `oh.pit.municipal.youngstown.rate` | [[FACT:oh.pit.municipal.youngstown.rate=2.75]] | % | from 2003-01-01 | US-OHB5-002 |  |
 
 **Open research points**
 

@@ -3,6 +3,8 @@
 import re
 from decimal import Decimal
 
+TY25 = "(TY2025 rule, re-verify on the 2026 instructions)"
+
 from us_common import (DD_REF, CCG_REF, tag, tagr, rid, url, src, fact, num, pct, m2, money, gap, at, per_draft,
                        is_draft, note_use)
 from us_rows import row, section, NONE_OPEN
@@ -203,7 +205,7 @@ def irs_aca():
                     "Applies when the employer files the threshold number of information returns or more.",
                     "Not applicable", "Not applicable", "Count", "Electronic", "Provider hand-off configuration",
                     f"Electronic filing is mandatory at {tagr('fed.aca.efile_threshold')} or more information returns in aggregate "
-                    f"(tax year 2025 rule). The count is the aggregate number of information returns the rule names, not only "
+                    f"(TY2025 rule, re-verify on the 2026 instructions). The count is the aggregate number of information returns the rule names, not only "
                     f"Forms 1095-C; it is held in the provider hand-off configuration as a count and selects the channel of "
                     f"the 1094-C / 1095-C filing. The channel used by this release is the electronic route of the Report "
                     f"Matrix.",
@@ -255,7 +257,7 @@ def irs_aca():
     matrix = [["US-IRS-007", "Forms 1094-C / 1095-C (Affordable Care Act employer reporting)", "Forms 1094-C, 1095-C",
                "Internal Revenue Service (IRS)", "Annual", f"{tag('rspec.fed.aca.ty2026_due')} (per 2026 draft)",
                "file_upload: electronic filing by the reporting agent",
-               f"Electronic filing (threshold per Instructions: {tag('fed.aca.efile_threshold')} returns). {FIELD_MODEL}.",
+               f"Electronic filing (threshold per Instructions: {tag('fed.aca.efile_threshold')} returns {TY25} {gap('rspec.fed.aca.ty2026_due_dates')}). {FIELD_MODEL}.",
                f"[{rid('fed.aca.ale.fte_threshold')}] (2025 instructions) [{rid('fed.aca.affordability.rate')}] "
                f"[{rid('rspec.fed.aca.form1095c.line14_codes')}] (2026 draft); {url('fed.aca.ale.fte_threshold')}",
                accuracy("file_upload", "IRS electronic filing through the reporting agent", url("fed.aca.ale.fte_threshold"), "TO CONFIRM",
@@ -283,7 +285,7 @@ def irs_aca():
          ("AMOUNTS & CALCULATIONS", [("Affordability percentage 2026", "YES", f"{tag('fed.aca.affordability.rate')}%")]),
          ("SPECIAL CASES", [("Employees changing status during the year", "PARTIAL", "Monthly status per row ACA-004.")])],
         rows,
-        [("FILE FORMAT", [f"Electronic filing at {tag('fed.aca.efile_threshold')} or more returns.", f"{FIELD_MODEL}.",
+        [("FILE FORMAT", [f"Electronic filing at {tag('fed.aca.efile_threshold')} or more returns {TY25} {gap('rspec.fed.aca.ty2026_due_dates')}.", f"{FIELD_MODEL}.",
                           "Form 1095-C lines 14 to 17 per employee and month (rows ACA-007 to ACA-010); Form 1094-C lines in "
                           "the transmittal rows.", "FORMAT TO CONFIRM vs a real filing."]),
          ("FORM 1094-C LINE MAP (2026 draft)", fs_line_table("rspec.fed.aca.form1094c.line_map", "Form 1094-C"))],

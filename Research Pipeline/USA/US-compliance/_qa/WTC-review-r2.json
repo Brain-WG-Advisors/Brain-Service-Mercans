@@ -1,0 +1,148 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "WTC",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "02-wtc/US-WTC-001-v1.0.xlsx",
+ "_md5": "117c230d396f617aa828986f35bcf1cf",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "pattern": "F18",
+   "severity": "blocker",
+   "pass": "P2",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D400",
+   "problem": "15 tags (11 cells) still cite the pre-R2 register row. The R2 facts re-bound these keys to rows whose local copy carries the figure, but _pipeline/WTC-bindings.csv and the inline [id] after each tag were not regenerated (the build log says bindings follow the new ids). Against the cited rows, 13 of these tags fail the F44 text check. Against the facts' rows, all pass. D400 nc.pit.wh.rate, nc.pit.allowance.amount, nc.wh.supplemental.rate: cites [US-NC-001], facts US-NCP51-002; D434 ky.sui.wage_base, ky.sui.new_employer.rate: cites [US-KY-003], facts US-KYP51-002; D457 sc.ui.daca.rate, sc.sui.wage_base: cites [US-SCS5-014], facts US-SC-003; D458 sd.sui.wage_base: cites [US-SDS5-002], facts US-SDS5-013; D458 sd.ui.admin_fee.rate: cites [US-SDS5-002], facts US-SDS5-020; D462 va.ui.fund_building.rate: cites [US-VAB5-402], facts US-VAS5-014; D464 wa.ui.rate.new_employer.rule: cites [US-WAS5-029], facts US-WASUI-001; D470 pa.sui.employee.rate: cites [US-PAS5-019], facts US-PA-009; D474 ct.pfml.wage_cap: cites [US-CTP7-001], facts US-FEDB5-401; D476 de.pfml.rate.total: cites [US-DES5-012], facts US-DEP51-001; D480 ma.pfml.split.decision: cites [US-MAS5-012], facts US-MAS5-026. Column AB of rows 400, 434, 464, 470, 474 and 476 also lacks the new id.",
+   "expected": "Builder: bind from each fact's register_id (+ _also_register_ids), not from the cached key -> id map. Regenerate WTC-bindings.csv, the inline citation of each listed tag and column AB (add US-NCP51-002, US-KYP51-002, US-WASUI-001, US-PA-009, US-FEDB5-401, US-DEP51-001, US-SDS5-020, US-MAS5-026). Then re-run the F44 text check against WTC-bindings.csv: 0 misses.",
+   "register_id": "US-NCP51-002",
+   "action": "routed_to_builder",
+   "fact_key": "nc.pit.wh.rate",
+   "evidence": "citechk.py (inline [id] vs facts register_id); f44 against bindings 31 misses, against facts ids 0 unresolved"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D352",
+   "problem": "US-051 (Trump-account employer contribution) says 'excluded ... from the effective date' without the date. The facts fed.bik.trump_account.employer_contribution_max and fed.w2.box12.code.ta are dated 2026-07-04 (iw2w3 2026: 'Beginning July 4, 2026, employers may contribute up to $2,500'). Ruling on C48 TA: the row must carry that effective_from, and this is not a reason for an exemption.",
+   "expected": "Render '(effective from 2026-07-04)' after both tags in column D of US-051, and write 'W-2 box 12 code TA (from 2026-07-04)' in AA. The C48 residual is then a checker limit (it requires validity for the whole year): see the escalated finding.",
+   "register_id": "US-FEDS5-030",
+   "action": "routed_to_builder",
+   "check_id": "C48",
+   "fact_key": "fed.w2.box12.code.ta"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P3",
+   "location": "_pipeline/build-manifest.json!validation_exemptions!C48,C49,C50",
+   "problem": "Three blocking content gates fail on correct content, and no agent may write the exemption. C48: TA is valid from 2026-07-04 by statute (P.L. 119-21, iw2w3 2026), and C48 accepts only codes valid for the whole year. C49: KW-100 is the Kansas withholding guide id (US-KSS5-001) in CCG table 206 r11c2, not a wage-type code; confirmed, no WTC change. C50: US-126 quotes ga.sui.base.section125 = 'employer and employee premiums in a Section 125 plan ... are not considered wages', which is the authority wording on which premiums are excluded, not on who bears the tax. The C50 side regex reads it as 'both sides', so the check misreads it and the fact text is right.",
+   "expected": "The owner records validation_exemptions.C48 (TA mid-year, https://www.irs.gov/pub/irs-pdf/iw2w3.pdf), .C49 (KW-100 form id, KS KW-100 URL) and .C50 (US-126 quoted exclusion text, GA DOL URL of US-GAS5-006), with decided_on. Alternatively the checks are fixed: C48 honours a crosswalk effective_from, C49 matches the {CODE}- prefix only, C50 ignores text inside [[FACT:]] tags. Do not reword the GA fact or rename codes to pass a check.",
+   "register_id": "US-GAS5-006",
+   "action": "escalated_to_human"
+  }
+ ],
+ "checks_run": [
+  "C9",
+  "C12",
+  "C29",
+  "C46",
+  "C48",
+  "C49",
+  "C50",
+  "C70",
+  "C71"
+ ],
+ "manual_review_items": [
+  "r1 closure. Closed: 1 (C48 25/25 rows carry their box 12 codes; the table has 33 codes; TA residual), 2 (C46 period-aware 0 mismatches, 0 missing), 3 (UT values from 2026-04-01 plus a gap for the earlier period), 4 (A3 two classes), 5 (D346 binds fed.obbba.overtime_deduction.level), 6 (O/P283 Yes-No), 7 (advance rows print the RQ-88 gap with no flags), 8 (RENAMED 0), 10 (AB306), 11 (T/U344), 12 (consumed_by), 13 (recon wording), 14 (log), 15 (C49 ruling), 16 (gaps.json). Item 9 is closed for the values, but the re-bindings were not propagated to the WTC citations (blocker above).",
+  "Cell diff vs 02-wtc/_build/_backup/r1fix-2026-11-03: Global WTC Coverage A3, D359, D420; Wage Type Catalogue B x202, D x164, AB x24, O283, P283, T344, U344. Every change maps to a batch item or R2 fact. No other cell changed.",
+  "Baseline: KEPT 300, MISSING 0, RENAMED 0, ADDED 233 (BASELINE INTACT). C71: 6 sheets, 0 differences. C70 PASS. C46 shared: known limit (one value per key).",
+  "Ruling 4: rspec.fed.w2.box_map stays bound to US-FEDS5-007 + US-FEDS5-032 (D345). F44 passes on the facts ids.",
+  "Advance rows (62103 family): an Earning with no tax flag pending WTC-RQ-88 is accepted as a named limitation for the QA report and handover (no flag invented)."
+ ],
+ "propagation": [
+  {
+   "fact": "nc.pit.wh.rate",
+   "consumed_by": [
+    "WTC",
+    "CCG/annex_NC"
+   ],
+   "resynced": false,
+   "register_id": "US-NCP51-002",
+   "_note": "Same for the other 14 re-bound keys. The CCG-annex mirrors keep the old ids (R2 scope note), so re-sync them at the CCG run-close rebuild."
+  },
+  {
+   "fact": "fed.w2.box12.code.ta",
+   "consumed_by": [
+    "WTC",
+    "RSPEC/US-SSA-001"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDS5-007"
+  }
+ ],
+ "escalation": {
+  "reason": "C48, C49 and C50 fail on content the auditor rules correct. Only the owner may record validation_exemptions (contract 1.4.0, F68), and the checks are shared code outside this build.",
+  "decision_needed": "Record validation_exemptions.C48/C49/C50 in build-manifest.json, or authorise the three check fixes.",
+  "options": [
+   "Owner records the 3 exemptions with reason, official URL and decided_on",
+   "Patch C48 (crosswalk effective_from), C49 ({CODE}- prefix) and C50 (ignore FACT tag text)"
+  ]
+ },
+ "cross_checks": [
+  {
+   "name": "WTC x facts (C46 period-aware)",
+   "result": "pass",
+   "note": "1,266 tags, 0 mismatches"
+  },
+  {
+   "name": "WTC citations x facts register_id",
+   "result": "fail",
+   "note": "15 tags cite the pre-R2 row"
+  },
+  {
+   "name": "C48 box 12 codes x IRS table",
+   "result": "fail",
+   "note": "25 rows checked; 1 = TA mid-year (ruled correct, needs the owner)"
+  },
+  {
+   "name": "Global baseline preservation",
+   "result": "pass",
+   "note": "RENAMED 0, MISSING 0"
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 865,
+  "facts_verified": 865,
+  "unverified_keys": [],
+  "method": "Text check of all 1,266 FACT tags (865 keys) against the local copies of each fact's register_id + _also_register_ids. The 7 residuals were closed by hand: ny.dbl.employee.rate ('one-half of one per centum') and .weekly_max ('sixty cents') read in US-NYB5-401; mi.local.uniform.nonresident_rate_default ('1/2%') in US-MIR3-003; co.famli.employee/employer.rate 0.43 = 0.86 x 50/50, both terms in US-COB5-301/003 (G-DERIVE); oh.pit.municipal.rate_table recounted from the local CSV (1,083 rows, 678 municipalities in force on 2026-11-01); multi.mobile_workforce_bill.status (S.1443, H.R.10271 in the copy). Against the stale WTC-bindings.csv, 15 keys fail: see the blocker."
+ },
+ "_batch_fix_list": [
+  {
+   "n": 1,
+   "owner": "builder",
+   "severity": "blocker",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D400,D434,D457,D458,D462,D464,D470,D474,D476,D480 + AB of the same rows; _pipeline/WTC-bindings.csv",
+   "issue": "15 tags cite the pre-R2 register row",
+   "fix": "Bind from the facts' register_id: D400 nc.pit.wh.rate, nc.pit.allowance.amount, nc.wh.supplemental.rate: cites [US-NC-001], facts US-NCP51-002; D434 ky.sui.wage_base, ky.sui.new_employer.rate: cites [US-KY-003], facts US-KYP51-002; D457 sc.ui.daca.rate, sc.sui.wage_base: cites [US-SCS5-014], facts US-SC-003; D458 sd.sui.wage_base: cites [US-SDS5-002], facts US-SDS5-013; D458 sd.ui.admin_fee.rate: cites [US-SDS5-002], facts US-SDS5-020; D462 va.ui.fund_building.rate: cites [US-VAB5-402], facts US-VAS5-014; D464 wa.ui.rate.new_employer.rule: cites [US-WAS5-029], facts US-WASUI-001; D470 pa.sui.employee.rate: cites [US-PAS5-019], facts US-PA-009; D474 ct.pfml.wage_cap: cites [US-CTP7-001], facts US-FEDB5-401; D476 de.pfml.rate.total: cites [US-DES5-012], facts US-DEP51-001; D480 ma.pfml.split.decision: cites [US-MAS5-012], facts US-MAS5-026. Regenerate the bindings CSV, the inline ids and AB, then re-run F44 against the bindings (0 misses), C46 period-aware, C71 and md5."
+  },
+  {
+   "n": 2,
+   "owner": "builder",
+   "severity": "major",
+   "cell": "02-wtc/US-WTC-001-v1.0.xlsx!Wage Type Catalogue!D352 and AA352 (US-051)",
+   "issue": "Trump-account row says 'from the effective date' without the date",
+   "fix": "Add '(effective from 2026-07-04)' after the fed.bik.trump_account.employer_contribution_max and fed.w2.box12.code.ta tags. AA = 'W-2 box 12 code TA (from 2026-07-04)'."
+  },
+  {
+   "n": 3,
+   "owner": "owner",
+   "severity": "major",
+   "cell": "_pipeline/build-manifest.json!validation_exemptions",
+   "issue": "C48 TA, C49 KW-100 and C50 US-126 fail on correct content",
+   "fix": "The owner records validation_exemptions.C48/C49/C50 (reason, official URL, decided_on) or authorises the check patches. No change to the WTC, the GA fact or the codes."
+  }
+ ]
+}

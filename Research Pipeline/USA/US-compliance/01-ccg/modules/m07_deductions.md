@@ -46,10 +46,10 @@ Yes, as salary-reduction arrangements: elective deferrals to retirement plans an
 
 | Deduction | Rule | Fact |
 |---|---|---|
-| Child-support income withholding order (IWO) | [[FACT:fed.iwo.priority=IWO for support ranks before other garnishments, except an IRS levy served before the underlying support order]] | [US-FEDS5-014] |
+| Child-support income withholding order (IWO) | [[FACT:fed.iwo.priority=Withholding for support has priority over any other legal process under state law against the same income (section 466(b)(7) of the Social Security Act); if a federal tax levy is in effect, notify the sender]] | [US-FEDP6-002] |
 | Creditor garnishments, federal tax levies | Limits of §7.3 | `fed.ccpa.*`; `fed.levy.*` |
 | State programme shares classified as after-tax | Example: `me.pfml.employee_deduction.after_tax` [US-MES5-025] | [US-MES5-025] |
-| Workers' compensation employee shares | New Mexico fee USD [[FACT:nm.wc.admin_fee.employee.quarterly=2.25]] per quarter; Washington [[FACT:wa.wc.employee_deduction.rule=50% x (Stay-at-Work + Medical Aid + Supplemental Pension) per hour per risk class]] (coverage row `work_accident_occupational_disease` [US-NMR3-001, US-FEDS5-029]) | [US-NMR3-001]; [US-WAS5-019] |
+| Workers' compensation employee shares | New Mexico fee USD [[FACT:nm.wc.admin_fee.employee.quarterly=2.25]] per quarter; Washington [[FACT:wa.wc.employee_deduction.rule=employer (not self-insured) deducts from each worker one-half of the medical aid premium per hour per risk class]] (coverage row `work_accident_occupational_disease` [US-NMR3-001, US-FEDS5-029]) | [US-NMR3-001]; [US-WAS7-001] |
 | Voluntary after-tax deductions (union dues, loans, charitable) | Employer policy and State wage-deduction law (annexes) | annexes |
 
 Not configured in this release [[GAP:RQ-571]]: The CCPA definition of disposable earnings (which deductions are 'required by law') and the resulting order of voluntary deductions vs garnishments are not established from an official source.
@@ -137,7 +137,7 @@ Group-term life cost above the excluded coverage is FICA wages and income-tax wi
 
 | Order | Rule | Fact |
 |---|---|---|
-| Child-support IWO, interstate | [[FACT:multi.iwo.governing_law=Interstate IWO: apply the income-withholding law of the State of the obligor's PRINCIPAL PLACE OF EMPLOYMENT for the employer fee, the maximum withheld, timing, priority among obligees and terms not in the order]]; remit within [[FACT:multi.iwo.remittance_business_days=7]] business days | [US-MULTIS5-007] |
+| Child-support IWO, interstate | [[FACT:multi.iwo.governing_law=When an employer receives an income withholding order issued by another State, the employer shall apply the income withholding law of the State of the obligor's principal place of employment in determining the employer's fee for processing an income withholding order; the maximum amount permitted to be withheld from the obligor's income; the time periods within which the employer must implement the income withholding order and forward the child support payment; the priorities for withholding and allocating income withheld for multiple child support obligees; and any withholding terms or conditions not specified in the order]]; remit within [[FACT:multi.iwo.remittance_business_days=7]] business days | [US-MULTIS5-007] |
 | IWO form | OMB approval valid to [[FACT:fed.iwo.omb_expiry=2029-08-31]] | [US-FEDS5-028] |
 | Federal tax levy | Exempt amount table below; the employer pays the rest of the take-home pay to the IRS | [US-FEDS5-014] |
 | Creditor garnishment | CCPA limits below; stricter State law applies | [US-FEDS5-023] |
@@ -146,7 +146,7 @@ Not configured in this release [[GAP:RQ-528]]: States go live with the revised (
 
 ### Is there a statutory priority order if an employee has multiple garnishments?
 
-Yes: [[FACT:fed.iwo.priority=IWO for support ranks before other garnishments, except an IRS levy served before the underlying support order]] [US-FEDS5-014]. Among support obligees and for fees and timing, the law of the obligor's principal place of employment governs [US-MULTIS5-007]. State examples: Alabama gives the IWO priority and remits within [[FACT:al.garn.child_support.remit_business_days=7]] business days [US-ALS5-013]; Connecticut remits within [[FACT:ct.garn.child_support.remit_business_days=7]] business days [US-CTS5-025]; California [[FACT:ca.garn.child_support.remit_business_days=7]] business days [US-CAS5-022]; Arizona [[FACT:az.garn.child_support.remit_business_days=2]] business days [US-AZS5-018].
+Yes: [[FACT:fed.iwo.priority=Withholding for support has priority over any other legal process under state law against the same income (section 466(b)(7) of the Social Security Act); if a federal tax levy is in effect, notify the sender]] [US-FEDP6-002]. Among support obligees and for fees and timing, the law of the obligor's principal place of employment governs [US-MULTIS5-007]. State examples: Alabama gives the IWO priority and remits within [[FACT:al.garn.child_support.remit_business_days=7]] business days [US-ALS5-013]; Connecticut remits within [[FACT:ct.garn.child_support.remit_business_days=7]] business days [US-CTS5-025]; California [[FACT:ca.garn.child_support.remit_business_days=7]] business days [US-CAS5-022]; Arizona [[FACT:az.garn.child_support.remit_business_days=2]] business days [US-AZS5-018].
 
 ### Are there protected earnings limits?
 

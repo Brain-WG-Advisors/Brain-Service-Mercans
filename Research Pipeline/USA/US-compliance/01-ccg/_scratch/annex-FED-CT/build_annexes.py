@@ -66,6 +66,14 @@ DOMAIN_TO_SEC = {
 }
 
 
+NOTE_VOCAB = re.compile(r"R\d 20\d\d|effective_from|local copy|script shell|\bbytes?\b", re.I)
+
+
+def drop_vocab_clauses(t):
+    """Printed notes carry no round / history / retrieval wording: drop the ';'-separated clauses that do."""
+    return '; '.join(c for c in re.split(r';\s*', t or '') if not NOTE_VOCAB.search(c))
+
+
 def pack_section_id(title):
     t = title.strip()
     m = re.match(r"^(\d+[a-z]?)\s+—", t)
@@ -658,7 +666,7 @@ def build(unit):
         if rid not in SRC:
             src_cell({rid})
         r = REG.get(rid, {})
-        W(f"| {SRC[rid]} | {autotag(clip(r.get('instrument_name', '')), vidx)} | {clip(r.get('article_or_section', ''), None)} | {clip(r.get('authority', ''), 80)} |")
+        W(f"| {SRC[rid]} | {autotag(clip(r.get('instrument_name', '')), vidx)} | {clip(drop_vocab_clauses(r.get('article_or_section', '')), None)} | {clip(r.get('authority', ''), 80)} |")
     W("")
     text = "\n".join(L).rstrip() + "\n"
     present = set(re.findall(r"\[\[FACT:([a-z0-9_.]+)=", text))

@@ -38,7 +38,7 @@ TEXT = {
     "rspec.ky.w2_state.rs_spec": ("the Kentucky RS record specification and the KUIP upload layout are not part of this release",
                                   "the KY DOR W-2 electronic filing specification and the KUIP ICESA / CSV wage file specification"),
     "rspec.la.w2_state.lawage_format": ("the LaWage bulk upload format and the Louisiana UI upload format are not part of this release",
-                                        "the LDR LaWage file specification and the LWC LAWATS wage file specification"),
+                                        "the LDR LaWage file specification and the LWC online-services wage file specification"),
     "rspec.ma.w2_state.handbook_edition": ("the current Massachusetts W-2 electronic filing handbook edition and the January 31 deadline need confirmation",
                                            "the current MA DOR W-2 electronic filing handbook and the DOR guidance on the deadline"),
     "rspec.ma.pfml_qtr.return": ("Massachusetts PFML: contribution to DFML; the return channel and mechanics are not configured in this release",

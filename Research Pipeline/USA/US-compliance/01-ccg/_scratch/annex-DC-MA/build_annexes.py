@@ -370,6 +370,11 @@ def build(jur):
                     note = f"Derivation recorded in register row {f['register_id']}."
                 b = []
                 note = tag_components(autotag(clean(note), index, sid, b, anchor=f["key"]), f["key"], facts)
+                # Release (C47): a note that opens with "=" is treated as a formula by the release
+                # rewriter and its [[FACT:]] tags would survive; state the derivation in words instead.
+                # Only the two derivation notes (DC, LA); FL "= 378 / 7 per employee" are amounts, not derivations.
+                if f["key"] in ("dc.minwage.tipped.cash_wage", "la.wh.std_deduction.joint") and note.startswith("= "):
+                    note = "Derived as " + note[2:]
                 bindings.append((SEC_NAME[sid], f["key"], f["register_id"], "value"))
                 bindings += [(SEC_NAME[sid], k, None, "auto-note") for k in b]
                 L.append(f"| `{f['key']}` | {esc(val)} | {eff} | {basis} | {esc(note)} |")

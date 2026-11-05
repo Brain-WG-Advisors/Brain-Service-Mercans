@@ -74,7 +74,7 @@ No Nevada rule is configured in this domain; the federal treatment in Annex FED 
 | `nv.mbt.general.rate` | [[FACT:nv.mbt.general.rate=1.17]] percent | 2026-01-01 | open | US-NVP51-002 (A.2, NV Department of Taxation) | quarterly wages above 50,000; frozen by 360.203(4) (US-NVS5-012); employer-only |
 | `nv.mbt.general.quarterly_threshold` | [[FACT:nv.mbt.general.quarterly_threshold=50000]] USD | 2026-01-01 | open | US-NVS5-011 (A.1, Nevada Legislature (Legislative Counsel Bureau)) | - |
 | `nv.mbt.financial_mining.rate` | [[FACT:nv.mbt.financial_mining.rate=1.554]] percent | 2026-01-01 | open | US-NVP51-002 (A.2, NV Department of Taxation) | all wages |
-| `nv.mbt.base` | [[FACT:nv.mbt.base=UI gross wages + tips as reported to ESD less employer-paid health benefits]] | 2026-01-01 | open | US-NVS5-011 (A.1, Nevada Legislature (Legislative Counsel Bureau)) | 363B.115; MBT/ESD wage comparison each quarter from 2026-01-01 (US-NVS5-009) |
+| `nv.mbt.base` | [[FACT:nv.mbt.base=UI gross wages + tips as reported to the Employment Security Division (ESD) less employer-paid health benefits]] | 2026-01-01 | open | US-NVS5-011 (A.1, Nevada Legislature (Legislative Counsel Bureau)) | 363B.115; MBT/ESD wage comparison each quarter from 2026-01-01 (US-NVS5-009) |
 | `nv.sui.employer.rate.min` | [[FACT:nv.sui.employer.rate.min=0.25]] percent | 2026-01-01 | 2026-12-31 | US-NVP51-001 (A.2, NV Dept of Employment, Training and Rehabilitation) | 18 rates |
 | `nv.sui.employer.rate.max` | [[FACT:nv.sui.employer.rate.max=5.4]] percent | 2026-01-01 | 2026-12-31 | US-NVP51-001 (A.2, NV Dept of Employment, Training and Rehabilitation) | - |
 | `nv.sui.employee.rate` | [[FACT:nv.sui.employee.rate=0]] percent | 2026-01-01 | open | US-NVS5-006 (A.1, Nevada Legislature) | - |

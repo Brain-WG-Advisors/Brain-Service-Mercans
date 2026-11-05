@@ -67,7 +67,7 @@ def ca_2025_example():
             continue
         if str(f.get("effective_from") or "").startswith("2025"):
             return f"CA {tag(k, '2025')}% (2025)"
-    return f"2025 list: {tag('rspec.fed.futa.credit_reduction.states', '2025')}"
+    return f"2025 list (wages of 2025, reported on the 2025 Form 940): {tag('rspec.fed.futa.credit_reduction.states', '2025')}"
 
 
 # ===================================================================== 944 ===
@@ -342,7 +342,7 @@ def irs_940():
                     "Q1: 42.00", "Payroll result: FUTA liability per quarter",
                     f"FUTA liability of each quarter and the deposits made for it. FUTA is deposited when the accumulated "
                     f"liability exceeds {tag('fed.futa.deposit_threshold')} [{rid('fed.futa.deposit_threshold')}]; a smaller "
-                    f"amount carries to the next quarter ({tag('rspec.fed.form940.due')}). The quarterly liability is taken "
+                    f"amount carries to the next quarter. The quarterly liability is taken "
                     f"from the FUTA liability accumulator of the payroll results (FUTA wages of the quarter up to "
                     f"{tag('fed.futa.wage_base')} per employee for the year, x the net rate of row F940-006), in cents; a "
                     f"credit reduction of Schedule A is added to the fourth quarter only. The four quarters must add up to "
@@ -379,7 +379,7 @@ def irs_940():
                     "Applies only to FUTA wages paid in a State on the list for the year; back-reference to F940-009.",
                     "Not applicable", "Rate per State", "Percent", ca_2025_example(),
                     "System constant per year (credit-reduction table)",
-                    f"Final list for 2025, shown for reference and for 2025 returns: "
+                    f"Final list for wages of 2025 (reported on the 2025 Form 940), shown for reference and for 2025 returns: "
                     f"{tag('rspec.fed.futa.credit_reduction.states', '2025')} "
                     f"({src('rspec.fed.futa.credit_reduction.states', '2025')}). Potential 2026 figures published by the U.S. "
                     f"Department of Labor (estimates, not final): California {tag('fed.futa.credit_reduction.ca.potential.rate')}%, "

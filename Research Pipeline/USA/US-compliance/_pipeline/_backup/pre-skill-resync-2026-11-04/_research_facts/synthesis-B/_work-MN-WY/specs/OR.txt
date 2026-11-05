@@ -1,0 +1,80 @@
+F|labour.minwage.standard.hourly|15.05|USD|2025-07-01|2026-06-30|US-ORS5-002|high|14.70 x 319.799/312.332 = 15.0514 -> 15.05
+F|labour.minwage.standard.hourly|15.55|USD|2026-07-01|2027-06-30|US-ORS5-002|high|15.05 x 330.213/319.799 = 15.5401 -> 15.55 (US-ORS5-023)
+F|labour.minwage.portland_metro.hourly|16.30|USD|2025-07-01|2026-06-30|US-ORS5-002|high|standard + 1.25
+F|labour.minwage.portland_metro.hourly|16.80|USD|2026-07-01|2027-06-30|US-ORS5-002|high|-
+F|labour.minwage.nonurban.hourly|14.05|USD|2025-07-01|2026-06-30|US-ORS5-002|high|standard - 1.00; 18 counties in ORS 653.026
+F|labour.minwage.nonurban.hourly|14.55|USD|2026-07-01|2027-06-30|US-ORS5-002|high|-
+F|labour.minwage.indexation|CPI-U March/March, nearest 0.05, effective July 1; metro +1.25, nonurban -1.00|-|-|-|US-ORS5-001|high|ORS 653.025; rate of county where 50%+ of weekly hours worked
+F|labour.tip_credit.allowed|false|-|-|-|US-ORS5-002|high|-
+F|labour.overtime.weekly_threshold_hours|40|hours|-|-|US-ORS5-008|high|ORS 653.261; manufacturing daily limits (652.020)
+F|labour.overtime.multiplier|1.5|ratio|-|-|US-ORS5-008|high|-
+F|labour.overtime.agricultural.threshold_hours|48|hours|2025-01-01|2026-12-31|US-ORS5-008|high|ORS 653.272
+F|labour.overtime.agricultural.threshold_hours|40|hours|2027-01-01|-|US-ORS5-008|high|enacted (Or Laws 2022 c.115)
+F|labour.pay_frequency.max_days|35|days|-|-|US-ORS5-006|high|ORS 652.120
+F|labour.paycard.consent|written agreement in employer's principal language; free full withdrawal; revocation 30 days|-|-|-|US-ORS5-006|high|ORS 652.110
+F|pit.method|DOR 150-206-436 annual formula: BASE = wages - federal tax (capped) - std deduction; bands; minus 263 per allowance; / periods|-|2026-01-01|2026-12-31|US-ORS5-009|high|Rev. 12-31-25
+F|pit.std_deduction.single|2910|USD|2026-01-01|2026-12-31|US-ORS5-009|high|single with <3 allowances
+F|pit.std_deduction.married|5820|USD|2026-01-01|2026-12-31|US-ORS5-009|high|also single with 3+ allowances
+F|pit.federal_tax_subtraction.cap|8750|USD|2026-01-01|2026-12-31|US-ORS5-009|medium|pp.6-7 formula; p.5/FAQ3 print 8,500 (internal conflict OR-OQ-2); phases out 125k-145k single / 250k-290k married
+F|pit.allowance.credit|263|USD|2026-01-01|2026-12-31|US-ORS5-009|high|0 allowances for single >100,000 / married >200,000
+F|pit.wh.rates|4.75;6.75;8.75;9.9|-|2026-01-01|2026-12-31|US-ORS5-009|high|percent; constants 263/479/941 single, 263/695/1,620 married (<50,000); 678/10,618 and 1,357/21,237 (>=50,000)
+F|pit.wh.rate.top|9.9|pct|2026-01-01|2026-12-31|US-ORS5-009|high|over 125,000 single / 250,000 married
+F|pit.oracle.example_1.annual_withholding|1789|USD|2026-01-01|2026-12-31|US-ORS5-009|high|wage 25,000, federal 1,000, std 2,910: BASE 21,090; 941 + 9,690 x 0.0875 = 1,789/yr (monthly 149, biweekly 69). DOR prints 21,165/1,798 (misprint; do not use)
+F|pit.supplemental.flat_rate|8|pct|2026-01-01|-|US-ORS5-009|high|optional when paid at a different time; also default when no OR-W-4
+F|pit.rounding|nearest dollar permitted, not required|-|2026-01-01|-|US-ORS5-009|high|-
+F|pit.seasonal_crop.flat_rate|2|pct|-|-|US-ORS5-020|high|elective (316.167)
+F|pit.nonresident.threshold|withhold unless Oregon earnings for the year below the standard deduction|-|2026-01-01|-|US-ORS5-025|high|2026: single 2,910; HoH 4,685; MFJ 5,820
+F|pit.reciprocity.states|none|-|-|-|US-ORS5-025|high|resident credit at assessment (316.082)
+F|pit.local.metro_shs.rate|1|pct|-|-|US-ORS5-024|high|withholding mandatory for workers in Metro earning 200,000+; Portland Revenue Division
+F|pit.local.multnomah_pfa.rate.1|1.5|pct|-|-|US-ORS5-024|high|over 125,000/200,000 (assessment); withholding over 200,000
+F|pit.local.multnomah_pfa.rate.2|3.0|pct|-|-|US-ORS5-024|high|1.5% + 1.5% over 250,000/400,000; +0.8% step year conflicting (2027 vs 2028)
+F|pit.local.withholding_trigger|200000|USD|-|-|US-ORS5-024|high|employees working in Metro/Multnomah earning 200,000+ in the year
+F|pit.local.metro_shs.threshold.single|128000|USD|2026-01-01|2026-12-31|US-ORS5-024|high|assessment; joint 205,000
+F|pit.local.metro_shs.threshold.single|132000|USD|2027-01-01|-|US-ORS5-024|high|joint 211,000
+F|ui.wage_base.annual|56700|USD|2026-01-01|2026-12-31|US-ORS5-003|high|0.80 x AAW(t-2), rounded to 100, never lower (AAW not fetched)
+F|ui.wage_base.annual|54300|USD|2025-01-01|2025-12-31|US-ORS5-003|high|-
+F|ui.rate.new_employer|2.4|pct|2026-01-01|2026-12-31|US-ORS5-003|high|Tax Schedule 3; second authority statute 657.435
+F|ui.rate.min|0.9|pct|2026-01-01|2026-12-31|US-ORS5-015|high|Schedule III 0.9-5.4
+F|ui.rate.experience_max|5.4|pct|2026-01-01|2026-12-31|US-ORS5-015|high|-
+F|ui.employee.rate|0|pct|-|-|US-ORS5-003|high|-
+F|ui.wage_base.other_state_credit|true|-|-|-|US-ORS5-015|medium|657.095(2); OED proof rule not read
+F|pfml.rate.total|1|pct|2026-01-01|2026-12-31|US-ORS5-003|high|statutory cap 1%
+F|pfml.employee.share|60|pct|-|-|US-ORS5-013|high|employer 40%; <25 employees pay no employer share
+F|pfml.wage_cap.annual|184500|USD|2026-01-01|2026-12-31|US-ORS5-003|high|= SS wage base
+F|pfml.small_employer.threshold|25|-|-|-|US-ORS5-013|high|size counts out-of-state employees
+F|stt.employee.rate|0.1|pct|-|-|US-ORS5-011|high|statewide transit tax 0.001; Measure 120 (0.002) did not pass 2026-05-19
+F|transit.trimet.employer.rate|0.8237|pct|2026-01-01|-|US-ORS5-010|high|0.008237
+F|transit.lane.employer.rate|0.80|pct|2026-01-01|-|US-ORS5-010|high|0.0080
+F|wbf.rate.per_hour|0.018|USD|2026-01-01|-|US-ORS5-010|high|Workers' Benefit Fund, split half employee / half employer
+F|payslip.content|payment date; work dates; employee name; employer name, registry no., address, phone; rates; basis; gross; net; each deduction; allowances; regular/OT rates and hours; piece rates|-|-|-|US-ORS5-026|high|ORS 652.610(1)(b); electronic only with express agreement
+F|payslip.new_hire_explanation|written explanation of earnings, deductions and all payroll codes; updated each January 1|-|2026-01-01|-|US-ORS5-022|high|SB 906
+F|records.payroll.retention_years|2|years|-|-|US-ORS5-019|high|ORS 653.045
+F|report.oq.due|Apr 30; Jul 31; Nov 2 (2026); Feb 1 (2027)|-|2026-01-01|2027-02-01|US-ORS5-010|high|combined Form OQ (withholding, UI, PFML, WBF, transit, STT) + Form 132 via Frances Online
+F|report.w2.due|January 31 via iWire (EFW2 or template)|-|-|-|US-ORS5-010|high|ORS 316.202; OR-WR reconciliation
+F|report.local.w2.due|January 31 via Portland Revenue Online, no extension|-|-|-|US-ORS5-024|high|XML ReturnBatch 1.0; 50 per W-2 penalty
+F|report.new_hire.days|20|days|-|-|US-ORS5-016|high|DOJ Child Support; contractors since 2024-01-01
+F|leave.sick.paid_employer_threshold|10|-|-|-|US-ORS5-007|high|unpaid below 10 Oregon employees
+F|leave.sick.accrual_ratio_hours_worked|30|hours|-|-|US-ORS5-007|high|from day 1; cap accrual 40/yr; balance 80
+F|leave.sick.payout_at_separation|false|-|-|-|US-ORS5-007|high|state preempts local (653.661)
+F|term.final_pay.discharge|end of first business day|-|-|-|US-ORS5-006|high|ORS 652.140
+F|term.final_pay.resignation_with_notice|immediately (48 h notice)|-|-|-|US-ORS5-006|high|without notice: 5 business days or next payday whichever first
+F|term.penalty_wage|8 hours per day up to 30 days|-|-|-|US-ORS5-006|high|652.150
+F|term.vacation.payout|per established policy or agreement|-|-|-|US-ORS5-021|high|-
+F|garn.consumer.floor.weekly|338|USD|2025-07-01|2026-06-30|US-ORS5-017|high|ORS 18.385; biweekly 675; semimonthly 737; monthly 1,458
+F|garn.consumer.floor.weekly|400|USD|2026-07-01|2027-06-30|US-ORS5-017|high|biweekly 832; semimonthly 912; monthly 1,792; from 2027-07-01: 30x standard minimum wage
+F|garn.consumer.exempt_rate|75|pct|-|-|US-ORS5-017|high|of disposable earnings, plus floor
+F|garn.support.floor.weekly|254|USD|-|-|US-ORS5-017|high|support/restitution writs
+F|prevailing_wage.threshold|50000|USD|-|-|US-ORP51-004|medium|BOLI; certified payroll WH-38
+F|data.ssn.mail_prohibited|true|-|-|-|US-ORS5-018|high|ORS 646A.620
+U|pit.local.multnomah_pfa.step_year|PFA +0.8% step year conflicts (2027 withholding page vs 2028 personal-tax page).|Multnomah County Code ch. 11 or the county PFA tax page.|y
+U|pit.federal_tax_subtraction.cap_conflict|150-206-436 (2026) states 8,500 on p.5/FAQ3 and 8,750 on pp.6-7; Example 1 misprinted.|DOR written answer (payroll.help.dor@dor.oregon.gov) or DOR calculator run on Example 1.|n
+U|ui.wage_base.derivation|AAW 2024 behind 56,700 not fetched.|OED annual average wage publication.|n
+U|bik.addbacks|Oregon add-back for HSA/125/transit not reviewed.|DOR Publication OR-17 (2025/2026).|n
+U|term.ui_notice_warn|UI separation notice and state WARN not researched.|OED employer handbook and OAR 471-030.|n
+U|garn.iwo.fee_priority|Child-support IWO employer fee and priority not researched.|ORS 25.414 and DOJ employer handbook.|n
+U|rates.next_year|2027 OED UI schedule/base, PFML rate and DOR 2027 formulas not published.|OED November 2026 release and DOR 150-206-436 (2027).|n
+U|leave.sick.out_of_state_hours|Sick-time accrual for hours worked outside Oregon not read.|OAR 839-007-0010 / 0015.|n
+T|Minimum wage changes on JULY 1 (not Jan 1): 15.05 -> 15.55 standard on 2026-07-01; three geographic tiers.
+T|Withholding formula: build on 8,750 federal-tax cap (pp.6-7); DOR Example 1 printed 1,798 is wrong (correct 1,789).
+T|STT stays 0.1% (Measure 120 failed 2026-05-19). Local Metro SHS/Multnomah PFA withholding only for 200,000+ earners working in the districts.
+T|Combined quarterly Form OQ carries withholding, UI, PFML, WBF, transit and STT.

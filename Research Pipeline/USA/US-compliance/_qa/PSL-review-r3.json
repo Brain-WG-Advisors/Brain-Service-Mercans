@@ -1,0 +1,74 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "PSL",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "06-payslip/US_Compliance_Payslip_Generator.xlsx (md5 a34f96d5e0177caed6df89b8280d5b2f = md5_final.txt; compared with r2 copy _build/_backup/US_Compliance_Payslip_Generator.222113f1.xlsx)",
+ "_reviewer": "compliance-qa-auditor (independent; did not build the PSL)",
+ "_built_by": "artifact-builder",
+ "_scope": "Targeted round 3: the r2 items QA2-01..03 and the DD address note, plus F44, C70, C71 and the cell diff against r2. Every r1 item was closed in r2 and the diff shows no other change.",
+ "findings": [],
+ "checks_run": [
+  "C29",
+  "C30",
+  "C46",
+  "C57",
+  "C70",
+  "C71"
+ ],
+ "numeric_verification": {
+  "facts_total": 179,
+  "facts_verified": 179,
+  "unverified_keys": [],
+  "method": "Independent QA F44 (auditor script) over all 179 distinct FACT tags: 179/179 OK (value = fact effective in 2026, register row tier A.x and active, elements found in the local copy). The 2 keys removed since r2 (psl.la.statement.scope, psl.ms.statement.scope) are no longer printed as facts. They print as gaps PSL-RQ-10 / PSL-RQ-14 and sit in PSL-facts 'unresolved' with what would close them (R4-FACTS-READY). No other tag value changed."
+ },
+ "cross_checks": [
+  {
+   "name": "Cell diff r2 (222113f1) to r3 (a34f96d5)",
+   "result": "pass",
+   "note": "Sheet list identical. Only Payslip Spec!E37 and Field Option changed. Row-aligned diff of Field Option, with gap ids normalised: LA (row 42) and MS (row 49) now read 'Not configured in this release [[GAP:]]', the NC 'Not configured' retention row (r2 row 158) is deleted (361 to 360 rows), and the remaining changes are gap-id renumbering only. Matches the builder's statement."
+  },
+  {
+   "name": "Gap id stability (gap_ids.json x gaps.json x workbook x request)",
+   "result": "pass",
+   "note": "Round-1 numbering restored; NY extras = PSL-RQ-29. gaps.json: 13 open + 16 closed PSL entries, every id/key pair equal to gap_ids.json. The 13 open ids are exactly the 13 [[GAP:]] ids in the workbook and the 13 requests in PSL-research-request.json. The NC key (PSL-RQ-15) is closed, and its fact (10 years, US-NC-001) prints once, at Field Option!C149."
+  },
+  {
+   "name": "C70 / C71 / C57",
+   "result": "pass",
+   "note": "content_checks C70 PASS (0 gap problems), C57 PASS (22 items); regen_check_psl C71 0 differences (rebuilt to _build/_scratch, deliverable md5 unchanged)."
+  }
+ ],
+ "_r2_closure": {
+  "QA2-01": "closed: NC 'Not configured' row deleted; RQ-15 closed in gaps.json and absent from the request.",
+  "QA2-02": "closed: LA/MS print as gaps PSL-RQ-10/14; facts marked _limitation and moved to unresolved; no 'saved copy' wording in the workbook.",
+  "QA2-03": "closed: stable ids from 06-payslip/_build/gap_ids.json; closed entries kept.",
+  "DD_note": "closed: Spec E37 now says US-DD-001 holds the employer physical-address fields but no separate mailing-address field."
+ },
+ "_carried_limitations": "13 open PSL research requests (PSL-RQ-02, 03, 07, 08, 10, 11, 14, 22, 23, 24, 26, 28, 29), printed as neutral gap cells; non-blocking. Each must appear as a named limitation in the QA report and handover. Bank, payment method, operating name and mailing address have no DD field (documented limitation, r2 ruling).",
+ "manual_review_items": [
+  "C21: 8-sheet contract applied (PRESUBMISSION_AUDIT.md 5-sheet text diverges); sheet list unchanged from r2."
+ ],
+ "propagation": [
+  {
+   "fact": "psl.la.statement.scope",
+   "register_id": "US-LAR3-002",
+   "consumed_by": [
+    "PSL"
+   ],
+   "resynced": true,
+   "_note": "Now a printed gap; re-check when PSL-RQ-10 closes."
+  },
+  {
+   "fact": "psl.ms.statement.scope",
+   "register_id": "US-MSP9L-001",
+   "consumed_by": [
+    "PSL"
+   ],
+   "resynced": true,
+   "_note": "Now a printed gap; re-check when PSL-RQ-14 closes."
+  }
+ ],
+ "_summary": "PASS round 3: all r2 findings closed; the diff equals the batch; F44 179/179; C70, C71 and C57 PASS; 13 non-blocking gaps carried as named limitations."
+}

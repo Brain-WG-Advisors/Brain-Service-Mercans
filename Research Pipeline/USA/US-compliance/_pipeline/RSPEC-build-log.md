@@ -552,3 +552,39 @@ ebb18c969ce203789ad4daa343efa3a0 *04-reports-spec/_build/us_state_core.py
 c708c295350c1e1c2ede47b04702b057 *04-reports-spec/_build/us_federal.py
 f14f27510aa77604694820101c3509e7 *04-reports-spec/_build/build_specs.py
 ```
+
+## Round 3 bounded fix (2026-11-03, builder; outside the round count, authorised by the human)
+Backup of the 20 workbooks: `_pipeline/_backup/rspec-pre-r3fix-2026-11-03/` (+ `gaps.json.bak`). No numeric fact value changed. Facts edits by agent 2 only (`_research/rspec-r3-fix/FACTS-FIX.md`).
+
+| Item | Change | Where |
+|---|---|---|
+| 1 | Rebuild: UI-001 M33, DOR-001 M59, IRS-001 M20 cite the `_also_register_ids` (matrix I30 / I41 already did). AZ M33 adds the DES wording "Azure / File Transfer Submission" [US-AZB5-006]; the fact value itself still reads "bulk file transfer" (tag must equal the fact; agent 2 to reword) | `us_rows.param_row` |
+| 2 | `filing_portals` prints a portal from a non-RSPEC fact only when the local copy of that fact's own register row(s) contains the name (gzip and PDF handled); LAWATS removed. Side effect: UI-001 G27/J27 (AK "ES Tax portal", not in the held copy) now "not named in the cited channel sources" | `us_state_core.filing_portals`, `_name_in_copies` |
+| 3 | LOC-001 D35 = local EIT/LST tax collector (DCED Address Search) [US-PAS5-018]; G35 / J35 channel "not named in the cited channel sources"; accuracy 75% -> 70% | `us_state.local_tax` matrix_fix PA |
+| 4 | Labels "Taxable wage threshold" (NV) / "Furnishing threshold" (AL) with their own USE / COND / EXAMPLE / MAPPING / KIND text | `us_rows.LABEL_OVERRIDE` |
+| 5 | UI-001 Example Analysis C10-C12 write the AZ rate through the full `late_penalty` tag | `us_state.ui_wage` |
+| 6 | Ledger lines appended; `nv.mbt.base` CCG tag NOT re-synced (CCG not rebuilt now): item for the run-close rebuild | PROPAGATION-LEDGER.md |
+| 7, 10 | Left as documented limitations: RSPEC-GAP-L-R3-07 (SDNH 25 States), RSPEC-GAP-L-R3-10 (US-NY-008 no local copy) | `_research/gaps.json` RSPEC |
+
+Cell diff vs backup: DOR-001 1, DOR-002 7, DOR-003 7, IRS-001 1, LOC-001 3, UI-001 7 (total 26; other 14 workbooks 0). All map to items 1-5 (DOR-002 / DOR-003 label rows also change G/K/L/Population Rules text of the same row; UI-001 G27/J27 is the item-2 side effect).
+Checks: spec_lint C29 0, WORD 0, FRAC 0, PCT 0, UNIT 0, MSENT 0, C30 0, C46 period-aware 1,566 tags / 0 mismatch / 0 missing; C71 PASS 20 files 0 differences; validate_contract --all PASS 86 files. `md5_final.txt` refreshed.
+Accuracy unchanged except LOC-001 PA (70%). Open: RSPEC-GAP-L-R3-07, -10; LAWATS wording in CCG annex_LA / SIR; AZ fact value wording.
+
+Round 3b: filing_portals now cites the row whose copy contains the name (_name_in_copies returns the id); SIR-facts edit (+US-LAP52-005) no longer reprints LAWATS. Regenerated bindings md5 e6b0ea7f = _pipeline/RSPEC-bindings.csv. Cell diff vs installed 0; C71 PASS; md5_final refreshed.
+
+Round 3c: NOT_FILING_CHANNEL exclusion (US-LAP52-005, LAWATS: TPA/PEO POA upload and SIDES only) in us_state_core.py; UI-001 G45/J45 back to 'not named in the cited channel sources'. Diff 2 cells; bindings md5 e6b0ea7f unchanged; C71 PASS; md5_final refreshed.
+
+
+## Round 1 DD-fix propagation (2026-11-03, builder; DD-review-r1 `_batch_fix_list`, RSPEC generator group)
+Backup of the 20 workbooks: `_pipeline/_backup/dd-r1fix-2026-11-03/rspec/`. No facts edited (facts changes by the source hunter, `_research/dd-fix/DD-FACTS-FIX.md` and `R1-FACTS-READY.md`). Rebuilt with `build_specs.py --bindings ../_pipeline/RSPEC-bindings.csv`.
+
+| Item | Change | Where |
+|---|---|---|
+| Finding 4 (C27 / F25) | column L of every row that cites the Data Dictionary (192 mapped rows) = "US-DD-001 v1.0: <exact DD Field Name(s) separated by ' \| '>"; "(forward reference)" removed (0 left); a trailing "payroll result: ..." or "rate table per zone (system constant)" clause is kept | us_book.py reads `_build/dd_l_overlay.json` (written by `05-data-dictionary/_build/build_dd.py` from the reconciliation; keyed spec id and field position) |
+| Finding 5 | US-UI-001 L10 and L13 = "Derived: ..." with the wording of the QA review | dd_rules.L_OVERRIDE -> overlay |
+| Finding 1 | hours rows re-pointed: UI-001 r11 and PFML-001 r5 "Payroll result: hours accumulated from time data (WTC unit of measure)"; IRS-007 r6, PFML-001 r33, UI-001 r14 / r49 / r97 / r107 / r185 keep their other DD names and add "; payroll result: hours accumulated from time data (WTC unit of measure)" (deviation: the other DD names stay mapped) | overlay |
+| Facts | US-LOC-001 M3 regenerated for the reworded dd.ky.locality (the only non-L cell that changed) | generator |
+| Lint | spec_lint C29 now applies the shared v2.12 HARD list | spec_lint.py |
+
+Cell diff vs backup: 195 cells, 194 in column L of the core sheet (DOR-001 33, SSA-001 43, UI-001 28, DOR-002 22, IRS-007 17, IRS-001 9, IRS-006 6, IRS-008 6, IRS-002 5, PFML-001 5, SDNH-001 5, IRS-004 4, LOC-001 3, IRS-003 3, DOR-004 2, IRS-005 2, WC-001 1) and 1 in LOC-001 M3. No other workbook cell changed.
+Checks: spec_lint C29 0, WORD 0, FRAC 0, PCT 0, UNIT 0, MSENT 0, C30 0, C46 period-aware 1,566 tags / 0 mismatch / 0 missing, C12 min 20 columns; C71 PASS 20 files 0 differences; spec_checks C34-C36 SKIP (no norm / validator / plugin, as before); validate_contract --all PASS 88; open_check 20 + DD files 0 not clean; RSPEC x DD recon UNMAPPED 0, forward references 0. Shared C29 X-run tier: 7 pre-existing hits (SSA-001 x5, DOR-002 x2: Signature PIN mask S-XXXXXX-Y, Vermont account mask), same in the backup, not touched.

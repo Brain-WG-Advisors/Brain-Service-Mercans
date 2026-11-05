@@ -90,6 +90,55 @@ def filing_authority(doc, jur, ordered_keys, programme=True):
     return None, None
 
 
+_REG = {}
+_TXT = {}
+# (register id, portal): the copy names the portal in another context, not as the filing channel of the report.
+# US-LAP52-005 names LAWATS only for the TPA/PEO benefits POA upload and SIDES (QA r3b).
+NOT_FILING_CHANNEL = {("US-LAP52-005", "LAWATS")}
+
+
+def _copy_text(path):
+    if path in _TXT:
+        return _TXT[path]
+    import os
+    from us_common import BASE
+    full = os.path.join(BASE, path)
+    txt = ""
+    try:
+        import gzip
+        import io
+        raw = open(full, "rb").read()
+        if raw[:2] == bytes([0x1f, 0x8b]):
+            raw = gzip.decompress(raw)
+        if raw[:4] == b"%PDF":
+            from pypdf import PdfReader
+            txt = " ".join((pg.extract_text() or "") for pg in PdfReader(io.BytesIO(raw)).pages)
+        else:
+            txt = raw.decode("utf-8", errors="ignore")
+    except Exception:
+        txt = ""
+    _TXT[path] = txt
+    return txt
+
+
+def _name_in_copies(name, rids_):
+    """The register id whose local copy contains the portal name, else None."""
+    import csv
+    import os
+    from us_common import BASE
+    if not _REG:
+        with open(os.path.join(BASE, "00-official-sources", "legal-basis-register.csv"), encoding="utf-8", newline="") as fh:
+            for r in csv.DictReader(fh):
+                _REG[r["id"]] = r.get("local_file") or ""
+    for r in rids_:
+        if (r, name) in NOT_FILING_CHANNEL:
+            continue
+        for path in [x.strip() for x in _REG.get(r, "").split(";") if x.strip()]:
+            if re.sub(r"\s+", "", name).lower() in re.sub(r"\s+", "", _copy_text(path)).lower():
+                return r
+    return None
+
+
 def filing_portals(doc, jur, auth, chan_txt):
     """[(portal, register id)] of the filing: portals named by the return's own channel / form facts, else by a
     channel or form fact of the same agency, jurisdiction and programme."""
@@ -101,8 +150,15 @@ def filing_portals(doc, jur, auth, chan_txt):
         if auth and agency(f.get("authority")) != auth:
             continue
         for p in portals_in(f.get("value")):
+            # portal text for RSPEC comes from the RSPEC fact; a CCG / SIR fact may name a portal only when the local copy
+            # of its own cited row contains the name (QA r3 finding 4: LAWATS was in no copy of US-LAS5-007)
+            src_id = f["register_id"]
+            if f["_file"] != "RSPEC-facts.json":
+                src_id = _name_in_copies(p, [f["register_id"]] + list(f.get("_also_register_ids") or []))
+                if not src_id:
+                    continue
             if p not in [x for x, _ in out]:
-                out.append((p, f["register_id"]))
+                out.append((p, src_id))
     return out
 
 

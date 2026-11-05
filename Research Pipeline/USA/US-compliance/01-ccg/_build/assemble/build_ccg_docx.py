@@ -374,7 +374,7 @@ def build():
                     [VERSION, ISSUE,
                      "Initial issue: core modules, population coverage matrix, federal and multistate "
                      "annexes, and one annex per State and the District of Columbia.",
-                     "Draft", ISSUED_BY]])
+                     "For QA" if "placeholder" in str(MAN["package"].get("_note", "")).lower() else "Issued", ISSUED_BY]])
     state = {"started": True}
 
     order = []

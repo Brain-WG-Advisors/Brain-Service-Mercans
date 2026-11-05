@@ -1,0 +1,391 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DD",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-03",
+ "_reviewed_file": "05-data-dictionary/US-DD-001-v1.0.xlsx",
+ "_md5": "9843883fad001547e3b626c9a2d5a478 (equals _build/checks/md5_final.txt)",
+ "_reviewer": "compliance-qa-auditor (independent; built by artifact-builder)",
+ "_summary": "FAIL: 3 blockers, 7 majors, 5 minors. The blockers are two F26 elements (hours worked; the NY/PA working-day counts) and 13 RESEARCH-GAP markers that fail the v2.12 C29 hard list. Clean: structure, source tiers, tag-to-fact (period-aware, 205/205) and the mapper code lists. On the RSPEC side of C27, 148 rows are still forward references and must be re-pointed in this round. F44: 119 of 126 keys verified against the local copy of the bound row(s); 7 unverified (4 already with the source hunter, 3 new).",
+ "findings": [
+  {
+   "pattern": "F26",
+   "severity": "blocker",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!D52:W52",
+   "problem": "'Hours worked (time-data input)' is per-pay-period time data (G52: 'captured from the time and attendance data for each pay period ... accumulated by the report generator'). Builder judgement call 3 REJECTED: this is the Canada F26 case (EI insurable hours by pay period removed from the DD). The approved RSPEC already classifies the same concept as a payroll result: US-WC-001 row 3 'Hours worked ... in the period' = NOT-DD in rspec_dd_recon.csv, while US-UI-001 row 11 maps it to the DD. The same concept is classified two ways.",
+   "expected": "Delete Country Fields row 52 in dd_defs.py. Move the 9 facts tagged in W52 (dd.wa.ui.hours_quarter, dd.mn.ui.paid_hours, dd.ma.ui.hours_work_location [hours part], dd.ct.ui.occupation_hours_zip [hours part], dd.ne.ui.hours_job_title, dd.de.paid_leave.hours, dd.or.form132.hours, dd.wa.pfml_ltc.employee_fields [hours part], dd.fed.aca.fte_tracking) to the build-log EXCLUDE table as 'hours = WTC unit of measure / time data, accumulated per quarter by the report'. Reword W80: drop 'the hours that support it are held in Hours worked' and write 'the supporting hours come from time data, not from this dictionary'. Re-point the 9 RSPEC rows that map to it (US-IRS-007 r6 ACA-004 -> 'ACA monthly employee status' only; US-PFML-001 r5 PFML-C-003, r33 PFML-WA-002; US-UI-001 r11 UI-C-009, r14 UI-C-012, r49 UI-CT-004, r97 UI-MA-003, r107 UI-MN-001, r185 UI-WA-001) to 'Payroll result: hours accumulated from time data (WTC unit of measure)', the same wording class as US-WC-001 r3. Re-run dd_recon.py.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "openpyxl read of G52, W52 and W80; rspec_dd_recon.csv rows US-WC-001 r3 (NOT-DD) and US-UI-001 r11 (MAPPED); country_failure_log.md F26",
+   "pass": "P4"
+  },
+  {
+   "pattern": "F26",
+   "severity": "blocker",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!D94:W95",
+   "problem": "'Working days in the taxing State (nonresident allocation)' (row 94) and 'Total working days in the period' (row 95) are per-period day counts from time data (G94: 'Days ... worked in the taxing State in the period'). Builder judgement call (NY/PA working days as period inputs) REJECTED under F26: a per-period count is transactional per-payrun data. No spec consumes them (dd_element_usage.csv: 0 spec rows, calculation only).",
+   "expected": "Delete rows 94 and 95. Keep facts dd.multi.ny_convenience_days and dd.multi.pa_working_days in the build-log EXCLUDE table as 'day counts = time data / WTC unit of measure feeding NY SIT and PA SIT allocation'. If the NY allocation needs an employee-declared estimate, it arrives with the dd.state.w4.ny fix (IT-2104.1) already with the source hunter. Do not add a field for it in this batch.",
+   "register_id": "US-MULTIS5-013",
+   "fact_key": "dd.multi.ny_convenience_days",
+   "action": "routed_to_builder",
+   "evidence": "openpyxl read of G94, G95 and W94; dd_element_usage.csv",
+   "pass": "P4"
+  },
+  {
+   "pattern": "F6",
+   "severity": "blocker",
+   "check_id": "C29",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields W83,W85 + Country Option Mappers F114,F318,F321,F324,F327,F330,F333,F336,F339,F342,F345",
+   "problem": "13 cells carry the literal marker 'RESEARCH-GAP' (e.g. W83: '... RESEARCH-GAP: the line structure of each State certificate ... (DD-RQ-01)'). In mercans_pipeline_v2_12.sh, C29 lists 'RESEARCH-GAP' as a HARD tier-1 marker (line 3118: 'verdict FAIL anywhere'). dd_lint.json reports C29 = [] because the builder lint does not use the v2.12 pattern list. The research gaps themselves (DD-RQ-01 to RQ-05) are already with the source hunter and are not re-reported. This finding covers the marker wording only.",
+   "expected": "In the generator, replace the marker text with the neutral form the CCG and RSPEC already use: 'Not configured in this release [[GAP:DD-RQ-0n]]'. Keep the sentence that says what is missing; drop the warning sign and the word RESEARCH-GAP. Add the v2.12 HARD list to dd_lint.py C29 (TODO, TBD, FIXME, VERIFY No, RESEARCH-GAP and ??? case-sensitive; [placeholder], [CHECK], [?], 'to be confirmed', 'to be verified' and 'lorem ipsum' case-insensitive) so the lint matches the gate.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "regex of the v2.12 HARD_CS list over every cell of the workbook: 13 hits, listed in location",
+   "pass": "P3"
+  },
+  {
+   "pattern": "F25",
+   "severity": "major",
+   "check_id": "C27",
+   "location": "04-reports-spec/US-*-Spec.xlsx!<Report> Spec!column L, 148 rows (DOR-001 33, SSA-001 23, IRS-007 16, UI-001 16, DOR-002 15, IRS-001 9, IRS-006 6, IRS-008 6, IRS-002 5, IRS-003 3, IRS-004 3, LOC-001 3, SDNH-001 3, DOR-004 2, IRS-005 2, PFML-001 2, WC-001 1)",
+   "problem": "The DD now exists, but 148 of the 192 RSPEC rows that cite it still read 'US-DD-001 v1.0: <free description> (forward reference)'. Example: US-DOR-001 r3 says 'employer FEIN (forward reference)', but the DD field is 'Employer Identification Number (EIN)'. Only 9 rows cite the exact DD field name; 183 resolve only through the builder's mapping rule. Script C27, run on the package, returns MANUAL with 833 unresolved, and the first hits are these DD rows. The C27 cross-check fires at DD close in both directions. Leaving the forward guesses is F25 by construction.",
+   "expected": "RSPEC generator (artifact-builder, as a propagation round of the approved RSPEC): after the deletions in findings 1 and 2, rewrite column L of each MAPPED row in 05-data-dictionary/_build/checks/rspec_dd_recon.csv to 'US-DD-001 v1.0: <dd_elements value: exact DD Field Name(s) separated by ' | '>' and remove '(forward reference)'. Then re-run C71 regen, spec_checks and C27. All 192 DD rows must resolve by exact name.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "rspec_dd_recon.csv (status MAPPED, name_check counts); C27 block of mercans_pipeline_v2_12.sh lines 3030-3070 run locally",
+   "pass": "P5"
+  },
+  {
+   "pattern": "F25",
+   "severity": "major",
+   "location": "04-reports-spec/US-UI-001 Spec.xlsx!<Report> Spec!L10,L13",
+   "problem": "Builder judgement call on the 2 RSPEC exceptions: the classification is ACCEPTED, but the deferral to a later propagation is REJECTED. US-UI-001 rows 10 ('Monthly employment counts') and 13 ('Weeks counted per employee') cite 'US-DD-001 v1.0 ... (forward reference)' but are derived counts with no DD element. The cross-check fires at DD close, not later.",
+   "expected": "In the same RSPEC batch, set L10 to 'Derived: count of employees on the payroll in the pay period including the 12th, computed by the report from US-DD-001 v1.0 Date services first performed (hire date) | Date of separation (termination date) and the payroll calendar'. Set L13 to 'Derived: weeks paid / base weeks / credit weeks computed per quarter by the report from wages (WTC) and pay dates'. The facts dd.state.ui.month12_count, dd.oh.ui.weeks_paid, dd.nj.ui.base_weeks and dd.pa.ui.credit_weeks stay tagged as they are.",
+   "register_id": "US-FLS5-021",
+   "fact_key": "dd.state.ui.month12_count",
+   "action": "routed_to_builder",
+   "evidence": "rspec_dd_recon.csv EXCEPTION rows; DD-build-log.md 'For QA' item 2",
+   "pass": "P5"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "location": "_research/DD-8_sheets-facts.json!facts!dd.state.w4.nd",
+   "problem": "The tag value 'federal W-4 (no state certificate); NDW-R reciprocity' (Country Option Mappers, State withholding certificate block) is bound to US-NDS5-001, the 2026 rates booklet. Its local copy has 0 hits for 'NDW-R' or 'reciproc'.",
+   "expected": "Add '_also_register_ids': ['US-NDS5-002'], with _figure_located quoting its copy: 'provided the employee completes and gives a Form NDW-R, Reciprocity Exemption From Withholding For Qualifying Minnesota and Montana Residents Working in North Dakota'. The US-NDS5-003 copy also carries it. The value is unchanged, so no DD cell changes; the builder re-runs C46 only.",
+   "register_id": "US-NDS5-002",
+   "fact_key": "dd.state.w4.nd",
+   "action": "routed_to_source_hunter",
+   "evidence": "pdftotext of the US-NDS5-001 local copy (121k chars): 0 hits; US-NDS5-002 and US-NDS5-003 copies: hits",
+   "pass": "P2"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "location": "_research/DD-8_sheets-facts.json!facts!dd.multi.transport_worker_type",
+   "problem": "The tag value 'motor carrier / rail / air carrier / seaman flag' (Country Fields W92 and the 'Interstate transport worker type' mapper) is bound only to US-MULTIS5-003, which is 49 U.S.C. 40116(f) on air carriers. Its copy has no 'rail', no 'seaman' and no motor-carrier text. The fact's 'note' names 11502 and 11108, but no _also_register_ids carries them, and 14503 (motor carriers) is not named at all.",
+   "expected": "Add '_also_register_ids': ['US-MULTIS5-001','US-MULTIS5-002','US-MULTIS5-004'] (49 USC 14503 motor carriers, 49 USC 11502 rail carriers, 46 USC 11108 seamen; each copy carries the term, checked). The value is unchanged; the builder re-runs C46 only.",
+   "register_id": "US-MULTIS5-003",
+   "fact_key": "dd.multi.transport_worker_type",
+   "action": "routed_to_source_hunter",
+   "evidence": "local copies: MULTIS5-003 has no rail or seaman text; MULTIS5-001 'motor carrier'; MULTIS5-002 'rail carriers'; MULTIS5-004 'seaman on a vessel'",
+   "pass": "P2"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "location": "_research/DD-8_sheets-facts.json!facts!dd.state.w4.mt",
+   "problem": "The tag value 'MW-4 (exemption claims sent to DOR via TAP)' (Country Option Mappers E299) is bound to US-MTP51-002, the DOR news page on the 2026 tables. The copy names Form MW-4, and names TAP only in the site menu. It says nothing about exemption claims being sent to DOR, through TAP or any other way.",
+   "expected": "Either bind the fact to the register row of the Montana Employer and Information Agent Guide (or the MW-4 instructions) whose copy states the exemption-certificate submission rule, or reduce the value to 'MW-4'. The copy supports 'Montana Employee's Withholding and Exemption Certificate Form MW-4'. The builder then regenerates E299.",
+   "register_id": "US-MTP51-002",
+   "fact_key": "dd.state.w4.mt",
+   "action": "routed_to_source_hunter",
+   "evidence": "local copy revenue-mt-2026-withholding-updates (5,852 chars), read in full around 'MW-4'",
+   "pass": "P2"
+  },
+  {
+   "pattern": "F18",
+   "severity": "major",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!W96",
+   "problem": "dd.oh.school_district_code is bound to US-OHS5-019, the 2025 school district list (effective_to 2025-12-31), in a 2026 dictionary. W96 says 'The cited list is the 2025 list; the changes for 2026 are not named in the cited sources'. However, the register names US-OHS5-018 as the 2026 delta, and the fact's own _also_register_ids row US-OHB5-401 (a 2026 copy) states the four-digit code rule.",
+   "expected": "Source hunter: make the 2026 copy the primary row for the field definition (register_id US-OHB5-401, effective_from 2026-01-01, value unchanged). Keep US-OHS5-019 and the US-OHS5-018 delta as list sources under RQ-02. Builder: then drop the '2025 list' sentence from W96.",
+   "register_id": "US-OHS5-019",
+   "fact_key": "dd.oh.school_district_code",
+   "action": "routed_to_source_hunter",
+   "evidence": "register rows US-OHS5-019 (effective_to 2025-12-31) and US-OHS5-018; the fact's _figure_located quotes US-OHB5-401",
+   "pass": "P2"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!ID Information!C13:V13",
+   "problem": "'State employer account numbers' is a single Text field with the format 'Per State format'. Yet F13 says 'One value per State and programme; the State and programme are recorded with the number', and no field holds the State or the programme. A developer cannot build the multi-valued record from this row.",
+   "expected": "Replace row 13 with three legal-entity rows in the same block. 1) 'State employer account State', with the mapper 'US State or District (USPS code)'. 2) 'State employer account programme', with a new mapper: Withholding / Unemployment insurance / Paid leave. 3) 'State employer account number' (Text), with J = 'Per State format, e.g. UT 14 characters ending in WTH; KS 036#######F##; MD CRN; IA 9-digit permit', taken from the tagged fact. Keep the V13 tags on the account-number row, and set its F text to 'repeat the three fields once per State and programme'. Update the rspec_dd_recon mapping of the DOR, UI and PFML rows to the account-number row.",
+   "register_id": "US-UTR3-001",
+   "fact_key": "dd.employer.state_account_ids",
+   "action": "routed_to_builder",
+   "evidence": "openpyxl read of ID Information row 13",
+   "pass": "P4"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!C121,C129",
+   "problem": "The 'W-2 agent indicator code' and 'W-2 kind of employer' mappers use the pseudo-code '(other)' for the blank value. The 'W-2 tax jurisdiction code' mapper uses 'blank' (C141) for the same EFW2 convention. '(other)' is not a code that a system can store or a file can carry.",
+   "expected": "Set the code in C121 and C129 to 'blank', as in C141. D and E keep 'blank otherwise' and 'blank if Tax Jurisdiction Code (220) is P'.",
+   "register_id": "US-FEDS5-032",
+   "action": "routed_to_builder",
+   "evidence": "openpyxl read of the three mapper blocks against the facts rspec.fed.efw2.re.*.codes",
+   "pass": "P4"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!G120:G122,G125:G128,G139:G140",
+   "problem": "Return-level indicators sit in a master-data sheet with nothing saying they are set per return: no social security or Medicare wages, business closed, final wage payment date, the four Form 941-X items, W-2 terminating business and W-2 resubmission. A developer will model them as standing employer values.",
+   "expected": "Append to each G cell: 'Entered for the return period it applies to (effective-dated per return); not a standing master value.' No row is deleted.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "openpyxl read of rows 120-140",
+   "pass": "P4"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "location": "00-official-sources/legal-basis-register.csv!consumed_by!US-FEDS6-006,US-FEDS5-004,US-FEDS6-011",
+   "problem": "Three register rows behind DD tags do not list DD in consumed_by. They carry the borrowed keys rspec.fed.aca.form1095c.line14_codes, rspec.fed.form944.rule and rspec.fed.w2.box14b.ttoc_codes. A later change to them will propagate blind to the DD mappers.",
+   "expected": "Append 'DD' to consumed_by of US-FEDS6-006, US-FEDS5-004 and US-FEDS6-011.",
+   "register_id": "US-FEDS6-006",
+   "action": "routed_to_source_hunter",
+   "evidence": "register rows read; tag check of all 205 tags",
+   "pass": "P5"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "location": "00-official-sources/legal-basis-register.csv!status!US-OHP51-002",
+   "problem": "dd.state.w4.oh ('IT 4 (zero exemptions if absent)') is re-pointed through _also_register_ids to US-OHP51-002. That row has status 'superseded' with no successor row, although its copy is the current 2026 guideline (Rev. 11/25) and does carry 'the employer must withhold tax based on the employee claiming zero exemptions'. The primary row, US-OH-002, has no local copy.",
+   "expected": "Set US-OHP51-002 status to 'active', since it is the only held copy of the 2026 guideline. Alternatively, register a new active row for the same file and re-point the fact to it.",
+   "register_id": "US-OHP51-002",
+   "fact_key": "dd.state.w4.oh",
+   "action": "routed_to_source_hunter",
+   "evidence": "register status column; grep of the local copy for 'zero exemptions'",
+   "pass": "P2"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "location": "_research/DD-8_sheets-facts.json!facts!dd.ct.ui.occupation_hours_zip",
+   "problem": "The precheck re-point '_also_register_ids': ['US-CTP10-001'] matched 'Third Quarter' in the IP 2026-1 due-date table, which has nothing to do with the claim. The primary row carries the whole claim (CGS 31-225a(j)(1)(B); copy: 'Commencing with the third calendar quarter of 2026 ... occupation ... hours worked ... zip code of such employee's primary worksite').",
+   "expected": "Remove US-CTP10-001 from _also_register_ids and set _figure_located to the CGS 31-225a quote above (US-CTS5-018).",
+   "register_id": "US-CTS5-018",
+   "fact_key": "dd.ct.ui.occupation_hours_zip",
+   "action": "routed_to_source_hunter",
+   "evidence": "grep of the US-CTS5-018 copy; _figure_located text",
+   "pass": "P2"
+  }
+ ],
+ "checks_run": [
+  "C12",
+  "C27",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C46"
+ ],
+ "_sweeps": [
+  "F1",
+  "F6",
+  "F18",
+  "F25",
+  "F26",
+  "F44",
+  "G-BUILD",
+  "G-PROP",
+  "G-SPOT"
+ ],
+ "_checks_results": {
+  "C12": "PASS: 8 sheets in template order; header row 4; ID Information 22 columns A-V; Country Fields B-W. Header labels and fills match CZ_Data_Dictionary_V2_0.xlsx cell by cell. 7 + 137 data rows, with the repeated headers (ID Information row 8 and one per mapper block) counted out. Widths differ from the template only on wide text columns (accepted).",
+  "C27": "Script logic (v2.12 lines 3030-3070) run locally: MANUAL, 833 unresolved. The DD-citing part is finding 4.",
+  "C29": "FAIL: 13 RESEARCH-GAP hits. The dd_lint C29 result of 0 is a lint gap.",
+  "C30": "PASS: every bound register row is A.1, A.2 or A.3. Two rows are A.2/partial (US-FEDS5-012, US-IDS5-013); accepted, because the tagged clause is in their copies.",
+  "C42/C43": "PASS (shared consistency_checks.py).",
+  "C46_shared": "FAIL 418/183 package-wide (known limitation). The 6 unbound DD hits the builder lists are ACCEPTED as false positives under the period-aware ruling. 116, 214, 434, 512 and 604 are numeric ISO 4217 codes in the preserved template sheet 'Currency Codes - ISO 4217', not statutory figures. Country Option Mappers C232 '604' is the Treasury Tipped Occupation Code 'Shampooers', inside the tagged list rspec.fed.w2.box14b.ttoc_codes (US-FEDS6-011); it equals me.garn.creditor.weekly_protected only by coincidence.",
+  "C46_period_aware_auditor": "205 tags, 126 distinct keys, 0 value mismatches, 0 tags without a fact. All 203 rows of DD-bindings.csv match the key, register_id and effective_from of a fact.",
+  "untagged_numbers": "No statutory figure outside a tag; every remaining number is a form, line, box, step or code identifier.",
+  "mapper_code_lists": "These mappers equal their tagged facts: W-2 agent indicator, kind of employer, employment code, tax jurisdiction and third-party sick pay; ACA line 14 and line 16; TTOC (72 codes incl. 000). The '(other)' pseudo-code is finding 11."
+ },
+ "_judgement_calls": {
+  "F26_hours_worked": "REJECTED (finding 1).",
+  "F26_NY_PA_working_days": "REJECTED (finding 2).",
+  "F26_ACA_monthly_status": "ACCEPTED: the status is an employer determination under its own measurement method, entered or imported per month and never computed by the payroll. Keep row 80; reword W80 (finding 1).",
+  "removed_excel_tables": "ACCEPTED: the stale table ranges made Excel refuse the file. The plain ranges keep the template fills, and Table_1, Table_12 and Table_13 are kept.",
+  "removed_precedent_comments": "ACCEPTED: the Czech review comments are C42 leftovers. The Version Control guidance comments are kept.",
+  "two_RSPEC_exceptions": "Classification ACCEPTED; deferral REJECTED (finding 5).",
+  "14_elements_without_spec_consumer": "ACCEPTED as pending. Each names a calculation or notice consumer in its facts; confirm at WTC close and SIR close (propagation entries). Finding 2 removes rows 94/95 from this list, leaving 12.",
+  "precheck_repoints_spot_check": "7 DD re-points read in context. Hold: dd.state.w4.ar, dd.state.w4.hi, dd.state.w4.ut, dd.employer.state_account_ids (UT 'WTH', KS '036#######F##', MD CRN 338-345, IA 9-digit) and dd.oh.municipal_rate_table (5-digit codes in column 3 of the CSV). dd.state.w4.oh holds, but on a superseded row (finding 14). dd.ct.ui.occupation_hours_zip: the re-point is spurious and the primary row holds (finding 15)."
+ },
+ "manual_review_items": [
+  "C5 (classification cites its establishing article): not implemented in v2.12 (L3). Run by hand on the 144 elements: every Additional Notes cell cites a register row or a spec row; no element is uncited.",
+  "C6 (file format vs source PDF): not applicable to the DD, which has no file layout. Layout positions quoted in tags were checked through F44.",
+  "C7 (population-rule depth on conditional fields): run by hand. Every CM row has a non-empty pre-condition (column H / I).",
+  "Version Control C13 shows '2027-03-31' with status 'Issued'. That is the manifest planning date (package.issue_date), the same as in the approved RSPEC: an owner decision, not a DD defect."
+ ],
+ "numeric_verification": {
+  "facts_total": 126,
+  "facts_verified": 119,
+  "unverified_keys": [
+   "dd.ms.new_hire.extra",
+   "dd.ky.locality",
+   "dd.state.w4.ny",
+   "dd.state.w4.nm",
+   "dd.state.w4.nd",
+   "dd.multi.transport_worker_type",
+   "dd.state.w4.mt"
+  ],
+  "method": "Text check of every [[FACT:key=value]] tag in the workbook (205 tags, 126 keys incl. 17 borrowed) against the local copy of the bound register row(s), i.e. register_id + _also_register_ids. Copies were re-extracted today with pdftotext and an HTML strip. Each value went through an element check (forms, numbers, dates, acronyms) and a content-word check; misses were read in context. Accepted on reading: the DOB, IWO, DOR and 5-digit glosses (expansions present in the copies); dd.state.w4.az '2026' (the row URL and title name the 2026 A-4 instructions); dd.state.w4.ri ('Effective January 1, 2020 ... must ... complete Form RI W-4'; 'if line E is more than 10, enter 10'). Unverified: the 4 builder-flagged keys (with the source hunter) and 3 new ones (findings 6-8). No WebFetch was used."
+ },
+ "cross_checks": [
+  {
+   "name": "Report-Specs x DD, direction 1 (spec -> DD)",
+   "result": "fail",
+   "note": "All 192 DD-citing rows map to an element (UNMAPPED 0). However, 148 still read '(forward reference)' and 183 do not use the exact DD field name (finding 4). The 2 exceptions are not re-pointed (finding 5), and 9 rows map to the F26 element 'Hours worked' (finding 1)."
+  },
+  {
+   "name": "Report-Specs x DD, direction 2 (DD -> spec)",
+   "result": "pass",
+   "note": "144/144 elements have a consumer: 130 are spec rows or spec cells tagging their facts, and 14 are calculation or notice consumers pending WTC/SIR."
+  },
+  {
+   "name": "Legal name and home address present (no global master-data file)",
+   "result": "pass",
+   "note": "Country Fields rows 5-17."
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "dd.wa.ui.hours_quarter",
+   "consumed_by": [
+    "RSPEC/US-UI-001",
+    "RSPEC/US-PFML-001",
+    "RSPEC/US-IRS-007",
+    "RSPEC/US-DOR-004",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-WAS5-013",
+   "_note": "Finding 1: the DD element 'Hours worked' is deleted; 9 spec rows re-point to the WTC hours result, and the WTC must carry the hours unit."
+  },
+  {
+   "fact": "dd.multi.ny_convenience_days",
+   "consumed_by": [
+    "WTC",
+    "CCG/annex_NY"
+   ],
+   "resynced": false,
+   "register_id": "US-MULTIS5-013",
+   "_note": "Finding 2: rows 94/95 are deleted; the NY/PA allocation day counts are WTC / time-data inputs."
+  },
+  {
+   "fact": "dd.multi.pa_working_days",
+   "consumed_by": [
+    "WTC",
+    "CCG/annex_PA"
+   ],
+   "resynced": false,
+   "register_id": "US-MULTIS5-014"
+  },
+  {
+   "fact": "dd.state.ui.month12_count",
+   "consumed_by": [
+    "RSPEC/US-UI-001"
+   ],
+   "resynced": false,
+   "register_id": "US-FLS5-021",
+   "_note": "Finding 5: L10 and L13 re-pointed to 'Derived'."
+  },
+  {
+   "fact": "dd.employer.state_account_ids",
+   "consumed_by": [
+    "RSPEC/US-DOR-001",
+    "RSPEC/US-DOR-002",
+    "RSPEC/US-UI-001",
+    "RSPEC/US-PFML-001",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-UTR3-001",
+   "_note": "Finding 10: split into State / programme / number."
+  },
+  {
+   "fact": "dd.state.w4.mt",
+   "consumed_by": [
+    "DD",
+    "CCG/annex_MT",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-MTP51-002"
+  },
+  {
+   "fact": "dd.oh.school_district_code",
+   "consumed_by": [
+    "DD",
+    "RSPEC/US-LOC-001",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-OHS5-019"
+  },
+  {
+   "fact": "fed.w4.input_fields",
+   "consumed_by": [
+    "WTC",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDS5-006",
+   "_note": "Confirm at WTC close and SIR close the 12 DD elements that have no spec consumer: the W-4 steps, State allowances, transport worker type, military spouse election, primary language and WY forfeiture policy."
+  }
+ ],
+ "_ledger_lines_pending": "The caller asked for the review file only. The orchestrator must append the 8 propagation entries above to PROPAGATION-LEDGER.md today, one line each, with status pending_resync.",
+ "_batch_fix_list": [
+  {
+   "owner": "artifact-builder (DD generator, one rebuild)",
+   "items": [
+    "Finding 1: delete Country Fields row 52 and reword W80",
+    "Finding 2: delete rows 94-95",
+    "Finding 3: replace RESEARCH-GAP with 'Not configured in this release [[GAP:DD-RQ-0n]]' in the 13 cells, and add the v2.12 HARD list to dd_lint.py",
+    "Finding 10: split ID Information row 13 into State / programme / number",
+    "Finding 11: in C121 and C129, change '(other)' to 'blank'",
+    "Finding 12: add the per-return sentence to G120-G122, G125-G128 and G139-G140",
+    "After the source-hunter items: regenerate E299 (MT) and W96 (OH), then re-run dd_lint, dd_recon, C71, open_check and md5_final"
+   ]
+  },
+  {
+   "owner": "artifact-builder (RSPEC generator, same day; propagation of the approved RSPEC)",
+   "items": [
+    "Finding 4: in column L of the 192 DD rows, use the exact DD field names and drop '(forward reference)'",
+    "Finding 5: set US-UI-001 L10 and L13 to 'Derived: ...'",
+    "Finding 1: re-point the 9 hours rows to 'Payroll result: hours accumulated from time data (WTC unit of measure)'",
+    "Re-run spec_checks, C71 and C27"
+   ]
+  },
+  {
+   "owner": "compliance-source-hunter (facts and register, one pass)",
+   "items": [
+    "Finding 6: dd.state.w4.nd, add US-NDS5-002",
+    "Finding 7: dd.multi.transport_worker_type, add US-MULTIS5-001/002/004",
+    "Finding 8: dd.state.w4.mt, re-source or reduce to 'MW-4'",
+    "Finding 9: dd.oh.school_district_code, make US-OHB5-401 (2026) the primary row",
+    "Finding 13: add DD to consumed_by of US-FEDS6-006, US-FEDS5-004 and US-FEDS6-011",
+    "Finding 14: set US-OHP51-002 status to active",
+    "Finding 15: dd.ct.ui.occupation_hours_zip, drop US-CTP10-001",
+    "Plus the 4 known keys and DD-RQ-01 to RQ-05 already in hand"
+   ]
+  }
+ ],
+ "_next_action": "Source hunter (findings 6-9 and 13-15, plus the known items) -> artifact-builder DD rebuild and RSPEC propagation in one batch -> QA DD r2"
+}

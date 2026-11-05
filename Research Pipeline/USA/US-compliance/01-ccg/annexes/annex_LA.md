@@ -27,7 +27,7 @@ Certificate R-1300 (L-4); edition not re-fetched (404). 2027 standard deduction 
 |---|---|---|---|---|
 | `la.pit.rate.flat` | [[FACT:la.pit.rate.flat=3.09]] % | 2026-01-01 to open | US-LAS5-001 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) |  |
 | `la.wh.method` | [[FACT:la.wh.method=no deduction: W = S x 0.0309; L-4 "1" (single/MFS): (S - 12,875/N) x 0.0309; L-4 "2" (MFJ/QSS/HoH): (S - 25,750/N) x 0.0309; N = 365/52/26/24/12/1; negative term = 0; round to cent]] | 2026-01-01 to 2026-12-31 | US-LAS5-001 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) |  |
-| `la.wh.std_deduction.joint` | [[FACT:la.wh.std_deduction.joint=25,750]] USD | 2026-01-01 to 2026-12-31 | US-LAS5-001 (Louisiana Department of Revenue; A.2, derived arithmetically, confidence high) | = 2 x [[FACT:la.wh.std_deduction.single=12,875]]. |
+| `la.wh.std_deduction.joint` | [[FACT:la.wh.std_deduction.joint=25,750]] USD | 2026-01-01 to 2026-12-31 | US-LAS5-001 (Louisiana Department of Revenue; A.2, derived arithmetically, confidence high) | Derived as 2 x [[FACT:la.wh.std_deduction.single=12,875]]. |
 | `la.wh.std_deduction.single` | [[FACT:la.wh.std_deduction.single=12,875]] USD | 2026-01-01 to 2026-12-31 | US-LAS5-001 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) | Indexed by prior-year CPI-U (R.S. 47:294(B)); set by emergency rule LAC 61:I.1501 effective 2026-01-01 (RIB 26-005, 2026-01-12) [US-LAS5-011]; official value may differ slightly once Jan-2026 CPI-U applied. |
 | `la.wh.supplemental.method` | [[FACT:la.wh.supplemental.method=withheld like regular wages; no flat supplemental rate (vacation pay likewise)]] | 2026-01-01 to open | US-LAP51-002 (Louisiana Department of Revenue; A.3, quoted from authority page, confidence high) |  |
 | `la.wh.who` | [[FACT:la.wh.who=residents; nonresidents performing services in LA (subject to the 30-day rule); residents working outside LA if not withheld in the other state]] | 2026-01-01 to open | US-LAS5-003 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) |  |
@@ -72,13 +72,13 @@ No itemised pay-statement statute in R.S. 23:631-638 (all read) [US-LAR3-002]; o
 |---|---|---|---|---|
 | `la.newhire.report_days` | [[FACT:la.newhire.report_days=20]] days | 2026-01-01 to open | US-LAS5-010 (Louisiana State Legislature; A.1, direct artifact inspection, confidence high) | DCFS: name, address, SSN, occupation, first day; employer name, address, EIN; rehire incl. return from layoff/furlough/leave (no 60-day threshold in statute); penalty 25 / 500. |
 | `la.report.annual.l3` | [[FACT:la.report.annual.l3=L-3 + W-2s due first business day after January 31 (30 days on closure); electronic mandatory at 50+ W-2s via LaWage; no magnetic media/CD; state boxes 16-18]] | 2026-01-01 to open | US-LAS5-009 (Louisiana Department of Revenue; A.3, quoted from authority page, confidence high) |  |
-| `la.report.sui.quarterly` | [[FACT:la.report.sui.quarterly=due last day of month after quarter; domestic annual Jan 31; mandatory electronic (LAWATS); DE students earning credit not reported]] | 2025-04-01 to open | US-LAS5-007 (Louisiana Workforce Commission; A.3, quoted from authority page, confidence medium) |  |
+| `la.report.sui.quarterly` | [[FACT:la.report.sui.quarterly=due last day of month after quarter; domestic annual Jan 31; electronic filing required for reports due after 2014-01-31 ("Use LWC's online services to file wage reports and pay taxes"); DE students earning credit not reported]] | 2025-04-01 to open | US-LAS5-007 (Louisiana Workforce Commission; A.3, quoted from authority page, confidence medium) |  |
 | `la.report.w2.efile_threshold` | [[FACT:la.report.w2.efile_threshold=50]] forms | 2026-01-01 to open | US-LAS5-009 (Louisiana Department of Revenue; A.3, quoted from authority page, confidence high) |  |
 | `la.report.wh.l1` | [[FACT:la.report.wh.l1=L-1 quarterly, electronic (LaTAP/software), zero returns required, due Apr 30 / Jul 31 / Oct 31 / Jan 31; payment quarterly < 500/month average, monthly 500 to < 5,000, semi-monthly >= 5,000]] | 2026-01-01 to open | US-LAS5-003 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) | [US-LAS5-008]. |
 
 Not configured in this release [[GAP:RQ-239]]: LaWage bulk W-2 file format (EFW2 or LA layout) not read.
 
-Not configured in this release [[GAP:RQ-240]]: UI form name and LAWATS upload format (ICESA?) and a 2026 FAQ copy not read.
+Not configured in this release [[GAP:RQ-597]]: UI quarterly form name and upload layout (US-LAS5-007 names the channel, LWC online services, only).
 
 ## LA.6 Leave
 

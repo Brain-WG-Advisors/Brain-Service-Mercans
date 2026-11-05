@@ -276,7 +276,7 @@ No rule for this jurisdiction is written under this heading.
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| IWO governing law | [[FACT:multi.iwo.governing_law=Interstate IWO: apply the income-withholding law of the State of the obligor's PRINCIPAL PLACE OF EMPLOYMENT for the employer fee, the maximum withheld, timing, priority among obligees and terms not in the order]] | from 2026-01-01 | employer withholding | S120 |  |
+| IWO governing law | [[FACT:multi.iwo.governing_law=When an employer receives an income withholding order issued by another State, the employer shall apply the income withholding law of the State of the obligor's principal place of employment in determining the employer's fee for processing an income withholding order; the maximum amount permitted to be withheld from the obligor's income; the time periods within which the employer must implement the income withholding order and forward the child support payment; the priorities for withholding and allocating income withheld for multiple child support obligees; and any withholding terms or conditions not specified in the order]] | from 2026-01-01 | employer withholding | S120 |  |
 | IWO remittance business days | [[FACT:multi.iwo.remittance_business_days=7]] days | from 2026-01-01 | employer withholding | S120 | Remit to the SDU within [[FACT:multi.iwo.remittance_business_days=7]] business days. |
 
 ## MULTI.10 Collective agreements and prevailing wage

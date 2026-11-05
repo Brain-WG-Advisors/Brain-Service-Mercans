@@ -1,0 +1,61 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_file_round": "r6 = run-close targeted re-check of the C41 rebuild (m10 'Changes during 2026'); schema caps round at 3",
+ "_reviewed_file": "01-ccg/US-CCG-001-v1.0.docx md5 2bdf6f88ebcaa31c6ee743f0ba458096 (vs pre-c41 copy: 11 added lines, all in the m10 table; vs pre-c70 copy: 0 text changes)",
+ "_reviewer": "compliance-qa-auditor (independent, run-close re-check)",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "00-official-sources/legal-basis-register.csv",
+    "sheet_or_section": "row US-RIS5-008",
+    "cell_or_line": "effective_from / instrument_name / status"
+   },
+   "problem": "Row names 'RIGL 28-14-12 (version effective until 2026-01-01)' but the C41/C70 fix set effective_from 2026-11-02 (retrieval) and cleared effective_to, so the row now claims the old version is in force from 2026-11-02. Same pattern, without the false start date, on US-OHR3C-001 (true end 2026-06-15) and US-OHP52-001 (true end 2026-07-31): end dates moved into verification_method text only.",
+   "expected": "Keep the true period on closed-period sources (US-RIS5-008 to 2025-12-31 with the version start from the copy or blank+basis; OHR3C-001 to 2026-06-15; OHP52-001 to 2026-07-31) with status 'historical', and have the shared C41 skip 'historical' like 'superseded' (C70 already ignores it). Until then the active+cleared workaround is accepted only because the facts carry the correct periods (period-aware C46 0 mismatches). US-FEDS5-013, US-CAS5-020 and US-INP51-001 are correctly active (current authority for TY2025 / no successor notice).",
+   "register_id": "US-RIS5-008",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": {
+    "file": "01-ccg/US-CCG-001-v1.0.docx",
+    "sheet_or_section": "Module 6 and Module 13, SC practice row",
+    "cell_or_line": "Sources cell"
+   },
+   "problem": "Still cites only [US-SCS5-004] for the IL 26-20 schedule (carried from CCG-review-r5).",
+   "expected": "[US-SCS5-004; US-SCS5-005] at the next CCG build.",
+   "register_id": "US-SCS5-005",
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C38",
+  "C40",
+  "C41",
+  "C46",
+  "C69",
+  "C70"
+ ],
+ "_checks_run_other": [
+  "F44",
+  "G-DERIVE",
+  "G-PROP"
+ ],
+ "numeric_verification": {
+  "facts_total": 6,
+  "facts_verified": 6,
+  "unverified_keys": [],
+  "method": "m10 table keys checked in the registered copies: futa.credit_reduction 2025 CA 1.2 / VI 4.5 in US-FEDS6-009 (Schedule A 2025); 941ME in US-MEP52-002; M-5008-R (6/26) in US-NJR3-004; D-2848 in US-DCP51-014; C-42 in US-TXP52-008; Form 940 TY2025 'February 2, 2026' / 'February 10' in US-FEDS5-031. Successor period re-derived (G-DERIVE): Jan 31 2027 is a Sunday -> February 1, 2027; Feb 10 2027 is a Wednesday; labelled low-confidence carry-forward."
+ },
+ "_evidence": "07-qa-crosscheck/_runclose/out/c41_c70_diff.txt; _runclose/c41_keys_verify.py; _runclose/sir_diff2.py"
+}

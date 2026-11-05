@@ -3,12 +3,14 @@
 > Escrito **só pela janela "Gmail - Mercans"**. Criado em 2026-10-15. Reescrever a cada "fecha a sessão" desta janela. Última: 2026-10-28 ([[2026-10-28-gmail]]).
 
 ## Instruções vigentes
+- (04/11, usuário) "Vamos fazer somente o que foi pedido": não propor nem fazer alteração em artefato que o e-mail não pediu (ex.: linha 4.6 do VC do DD Espanha fica como está). Achado fora do pedido → só registro no hub.
+- (04/11) Numa conversa que já tem rascunho, não abrir outro Reply/Reply all: o Gmail troca o rascunho existente pelo novo (perdemos o do Ahmed/Abuja e tivemos de recriar). Para uma 2ª resposta na mesma conversa, usar e-mail novo ou pedir que o 1º seja enviado antes. Depois de "enviei", conferir em Enviados recarregando a página (a lista pode vir velha).
 - 27/10: e-mails e mensagens sem cara de IA: texto corrido e natural, poucas listas, sem setas (→), sem estrutura 1/2a/b/c quando não for necessária; citações só onde provam o ponto. Ver memória `texto-sem-cara-de-ia`.
 - 28/10: responder só o que a pessoa perguntou (e o que ela usa como base da dúvida); achado fora do pedido vai para o hub. Rascunho no Gmail só com ok dado nesta janela (ok repassado por outra janela não vale). Conferir rascunho depois de recarregar a página.
 
 ## Última triagem
-- 2026-10-28 ~09h BRT: `rascunhos/2026-10-28-triagem-emails.md` (Inbox de 28/10 + não lidos de 27/10, 10 conversas). Anteriores: 23/10, 21/10, 19/10, 16/10, 15/10.
-- Próxima triagem: a partir de 28/10 ~09h BRT.
+- 2026-11-05 ~11h BRT: `rascunhos/2026-11-05-triagem-emails.md` (05/11 + respostas de 04/11). Anteriores: 28/10, 23/10, 21/10, 19/10, 16/10, 15/10.
+- Próxima triagem: a partir de 05/11 ~11h BRT.
 
 ## Esperando ação (do usuário)
 - **Colômbia, Heidy (PMI Review):** rascunho final saiu da pasta Rascunhos em 28/10; confirmar se foi enviado e registrar em [[Colombia]]. Texto em [[2026-10-28-triagem-emails]].

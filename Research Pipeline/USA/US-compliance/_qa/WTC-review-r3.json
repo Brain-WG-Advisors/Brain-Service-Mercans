@@ -1,0 +1,63 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "WTC",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "02-wtc/US-WTC-001-v1.0.xlsx",
+ "_md5": "dccad368fbcea716ed1637ce88908414",
+ "_scope": "Targeted at the r2 items: cells changed against 02-wtc/_build/_backup/r2fix-2026-11-04/, F44, bindings, C71, C48/C49/C50.",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [],
+ "checks_run": [
+  "C46",
+  "C48",
+  "C49",
+  "C50",
+  "C70",
+  "C71"
+ ],
+ "manual_review_items": [
+  "r2 blocker 1 closed. The inline citation check reports 0 tags whose cited [id] differs from the fact's register_id (was 15). WTC-bindings.csv has 1,257 rows and 0 keys whose primary register_id is missing from the bindings.",
+  "r2 major 2 closed. D352 shows '(effective from 2026-07-04)' after both tags, and AA352 reads 'W-2 box 12 code TA (from 2026-07-04)'.",
+  "Cell diff against the r2fix backup: Wage Type Catalogue D x23, AA x1 (AA352), AB x11, AC x99; Global WTC Coverage D x2. No other cell changed. Every change maps to the r2 batch (rebinding plus the TA date). The AC changes follow the new ids.",
+  "C48/C49/C50 count as SKIP under validation_exemptions (owner US-OWN-011, 2026-11-04). The checker applies exemptions only to missing inputs, so it still prints FAIL. Each residual is exactly the exempted scope: C48 = US-051 TA only (25 codes checked), C49 = CCG table 206 r11c2 KW-100 only, C50 = US-126 only. Re-run the gates if those scopes change.",
+  "C71 PASS (6 sheets, 0 differences). C70 PASS. C46 period-aware was not re-run: no FACT tag value changed, only citations."
+ ],
+ "propagation": [
+  {
+   "fact": "owner.validation_exemptions.wtc",
+   "consumed_by": [
+    "WTC",
+    "CCG"
+   ],
+   "resynced": false,
+   "register_id": null,
+   "_note": "US-OWN-011 is cited by build-manifest.json and MANDATE.md but has no row in legal-basis-register.csv (US-OWN-010 has one). The scaffolder or source hunter adds the row before run close. No WTC cell cites it."
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "WTC citations x facts register_id",
+   "result": "pass",
+   "note": "0 mismatches"
+  },
+  {
+   "name": "WTC-bindings.csv x facts",
+   "result": "pass",
+   "note": "1,257 rows, 0 drift"
+  },
+  {
+   "name": "C48 box 12 codes x IRS table",
+   "result": "pass",
+   "note": "25 rows; TA covered by the US-OWN-011 exemption"
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 865,
+  "facts_verified": 865,
+  "unverified_keys": [],
+  "method": "Own script, text check of all 1,266 FACT tags (865 keys) against the local copies of each fact's register_id + _also_register_ids. Against the bindings CSV (primary ids only), 7 additional keys resolve only through also-ids. The 7 residuals have values identical to r2 and were verified by hand there: NY DBL word forms; MI '1/2%'; CO 0.43 = 0.86 x 50/50 (G-DERIVE); OH table 1,083 rows / 678 municipalities recounted; mobile workforce bill ids present."
+ }
+}

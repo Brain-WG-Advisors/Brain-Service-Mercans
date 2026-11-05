@@ -1,0 +1,171 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "PSL",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "06-payslip/US_Compliance_Payslip_Generator.xlsx (md5 222113f1303fc21dbbdf203208a096fb, equal to 06-payslip/_build/checks/md5_final.txt; r1 copy in 06-payslip/_build/_backup/pre-r1fix/)",
+ "_reviewer": "compliance-qa-auditor (independent; did not build the PSL)",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "_id": "PSL-QA2-01",
+   "pattern": "F6",
+   "severity": "major",
+   "pass": "P3",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Field Option!C158",
+   "problem": "Field Option shows NC withholding-record retention twice, with contradicting status. C149 prints the fact: 'retention withholding records: [[FACT:psl.nc.retention.withholding_records.years=10]] years [US-NC-001]'. C158 (B158 'NC') prints 'Not configured in this release [[GAP:PSL-RQ-06]]' for the same key. Source-hunter fix R1 closed this item (NC-30 (2026) Section 26: ten years), and the key is no longer in PSL-facts.json 'unresolved'. Yet _research/gaps.json and _research/PSL-research-request.json still list PSL-RQ-06 / RQ-06 for psl.nc.retention.withholding_records.years as open. The deliverable says both 'configured' and 'not configured', and a closed question goes back to research.",
+   "expected": "Delete Field Option row 158. Remove PSL-RQ-06 / RQ-06 for this key from gaps.json and PSL-research-request.json (or mark it closed). Builder log: 11 open requests. Derive the gap list from PSL-facts.json 'unresolved', not from a fixed list in the generator.",
+   "register_id": "US-NC-001",
+   "action": "routed_to_builder",
+   "fact_key": "psl.nc.retention.withholding_records.years"
+  },
+  {
+   "_id": "PSL-QA2-02",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Field Option!C42",
+   "problem": "The LA (C42) and MS (C49) STATE_STATEMENT_RULE rows print research status as if it were the rule. LA: 'none read: the saved copy of R.S. 23:631 (payment after discharge or resignation) carries no pay-statement duty; other sections of the chapter are not in the saved copy'. MS: 'none identified: no Mississippi pay-statement statute located; the saved MDES required-posters page lists no pay-statement notice (absence not proven by a statute copy)'. Neither states a proven rule, and both carry pipeline wording ('saved copy', 'not proven'). These are two of the 17 r1 F44 gaps. They pass F44 only because the value has no numeric element to test, so as printed they are unverified statements, not gaps.",
+   "expected": "Source hunter: either a proven, neutral statement (for example 'Louisiana: no pay-statement content statute; federal records rules apply', backed by a copy that shows the absence, as for AL/SD/TN), or mark psl.la.statement.scope and psl.ms.statement.scope unresolved with what would close them. Builder: if unresolved, print 'Not configured in this release [[GAP:PSL-RQ-nn]]' as for the other open States. Either way, no 'saved copy' / 'not proven' wording in the workbook.",
+   "register_id": "US-LAR3-002",
+   "action": "routed_to_source_hunter",
+   "fact_key": "psl.la.statement.scope"
+  },
+  {
+   "_id": "PSL-QA2-03",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "_research/gaps.json!PSL gap entries!PSL-RQ-01..PSL-RQ-12",
+   "problem": "The r2 build renumbered the PSL gaps and reused ids that meant other keys in r1. PSL-RQ-01 was psl.ak.statement.content and is now psl.ca.statement.electronic_consent. PSL-RQ-06 was psl.hi.ssn.rule and is now NC retention. The 18 'closed-R1' entries written by the source hunter are gone from gaps.json. Read against the r1 review, the R1-FACTS-READY log and PROPAGATION-LEDGER.md, the same id now points at a different question.",
+   "expected": "Ids are never reused. Restore the r1 ids, with the closed entries kept as status closed-R1, and give any new item (psl.ny.statement.industry_extras) the next free id, PSL-RQ-29.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C21",
+  "C26",
+  "C28",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C46",
+  "C48",
+  "C49",
+  "C50",
+  "C53",
+  "C56",
+  "C57",
+  "C70"
+ ],
+ "manual_review_items": [
+  "C5/C7 (not implemented, L3): run by hand over Population Range; household/agricultural/non-FLSA conditions now cite the governing facts.",
+  "C21 divergence: PRESUBMISSION_AUDIT.md says a 5-sheet payslip; the toolkit says 8. Applied 8: PASS.",
+  "Excel recalculation: 135 formulas all cached; 0 error cells."
+ ],
+ "propagation": [
+  {
+   "fact": "psl.nc.retention.withholding_records.years",
+   "register_id": "US-NC-001",
+   "consumed_by": [
+    "PSL"
+   ],
+   "resynced": false,
+   "_note": "PSL-QA2-01: remove the stale gap/request."
+  },
+  {
+   "fact": "psl.la.statement.scope",
+   "register_id": "US-LAR3-002",
+   "consumed_by": [
+    "PSL"
+   ],
+   "resynced": false,
+   "_note": "PSL-QA2-02; same for psl.ms.statement.scope (US-MSP9L-001)."
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "Worked example recomputed by hand",
+   "result": "pass",
+   "note": "EN = ES = Compliance Payslip (cached). Gross 20,096.00; total hours 84. FICA wages 20,011.00. Employee SS = min(11,439.00 - 11,253.00, 1,240.68) = 186.00. Employer SS = 186.00 (H90, capped). Medicare 290.16 on each side. Additional Medicare: 181,500 + 20,011 = 201,511, minus 200,000 = 1,511, x 0.9% = 13.60. YTD Medicare 2,631.75 + 290.16 + 13.60 = 2,935.51. YTD SS 11,439.00 (at the maximum). FIT: 1a 19,006.20, 1i 485,561.20, annual 58,448 + 35% x 221,836.20 = 136,090.67, /26 = 5,234.26. Total deductions 6,813.82; net 13,282.18 (= H2 = H48); employer total 476.16. All equal."
+  },
+  {
+   "name": "Payslip field mapping x DD",
+   "result": "pass",
+   "note": "DD fields cited in the Spec resolve. Bank name, account, payment method, employer operating name and mailing address are declared 'no DD master-data field' (see _judgments.DD_fields)."
+  },
+  {
+   "name": "Unit Rate Details x WTC (separate)",
+   "result": "pass",
+   "note": "62104 is now only the rate account of 62100. US-030 appears on time-based lines only (62100, 62110, 62150, 62160, 62170, 62300); the other 19 rows are 'Amount only'. Column F gives a specific basis per row."
+  },
+  {
+   "name": "State pay-statement rules x payslip/Spec (51 + NYC)",
+   "result": "fail",
+   "note": "r1 gaps closed (total hours, AZ/NYC leave, MN 12 items, MD SSN, NM benefits, OR registry). Open: LA/MS printed as unproven statements (PSL-QA2-02)."
+  },
+  {
+   "name": "C57 includes Total Hours Worked",
+   "result": "pass",
+   "note": "PSL-legal-items 'hours' matches 'Total Hours Worked' (Spec B50, EN!A23/G23 =SUM(G19:G21)); C57 PASS, 22 items, 0 problems."
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 181,
+  "facts_verified": 181,
+  "unverified_keys": [],
+  "method": "Independent QA F44 (same auditor script as r1, no builder code) over all 181 distinct FACT tags. Each value equals a fact effective in 2026, the printed register id belongs to the fact, the register row is tier A.x and active, and every numeric, section and date element was found in the local copy: 181/181 OK. The 17 r1 unverified keys are now tagged and pass. psl.la.statement.scope and psl.ms.statement.scope pass only trivially (no testable element), see PSL-QA2-02. Federal figures were confirmed live in r1 (i941 Rev. 3-2026, p15t 2026); the values are unchanged since. Diff of tags r1 to r2: 21 keys added (2 employer rates, household exclusion, NC retention, the 17 former gaps), 0 removed, 4 rewordings (mn content, multi.reach.default, nc.ssn.rule, in.statement.scope), matching R1/R2-FACTS-READY."
+ },
+ "_r1_closure": {
+  "QA1-01": "closed: H37 =H90, capped employer SS 186.00 on all 3 tabs",
+  "QA1-02": "closed: H92 uncapped Medicare YTD input; H99/H100/H101 use it; Additional Medicare 13.60",
+  "QA1-03": "closed: H38 =H96; H67 =H102+H22 (YTD FIT/401(k) remain typed inputs, labelled YTD, accepted)",
+  "QA1-04": "closed: EN!A23 Total Hours Worked; Spec B50; legal-items fixed",
+  "QA1-05": "closed: Spec B30:B35",
+  "QA1-06": "closed: EN!A57:A61 + Spec B41:B45",
+  "QA1-07": "closed: TX leave block 'not printed'",
+  "QA1-08": "closed: Spec D25 IF(work_state='MD';'';...)",
+  "QA1-09": "closed: fact re-issued with 12 items; Spec B36/B37 + MN rows",
+  "QA1-10": "closed: NM benefits row, 4 new bases; NY extras as a gap",
+  "QA1-11": "closed: C12 cites psl.ca.statement.household_exclusion; VA fact removed from C13",
+  "QA1-12": "closed: NOT_CONFIGURED block gone",
+  "QA1-13": "closed: print areas A1:J74/75; 0 tags, register ids or stamps inside them",
+  "QA1-14": "closed: wording removed; 3 fact values reworded",
+  "QA1-15": "closed: diacritics and translations (año, Dirección, Línea, Cada dos semanas, Por hora, ...)",
+  "QA1-16": "closed",
+  "QA1-17": "closed: fills DCDCDC/A9A9A9 only on payslip tabs (Spec keeps Tunisia 0B5394/4BACC6)",
+  "QA1-18": "closed: H47 'Amount', H48 =H34",
+  "QA1-19": "closed: Spec D18 adds the OR State account number",
+  "QA1-20": "closed: PSL in consumed_by of US-FEDS5-001/029/030",
+  "QA1-21": "closed: register row US-OWN-011 present",
+  "QA1-22": "closed: bindings written per sheet!cell (221)"
+ },
+ "_judgments": {
+  "QA1-17_palette": "Accepted. The payslip tabs use only DCDCDC and A9A9A9 plus white, which is the fill inventory of the reference payslips (toolkit SKILL.md contract row 5). The Payslip Spec keeps the Tunisia 0B5394/4BACC6 bands. Toolkit validate_workbook --artifact PSL --totals-check: PASS, 0 findings.",
+  "release_rules": "Accepted, no release_rules.json needed. Inside the print areas of the 3 payslip tabs there are 0 [[FACT:]] tags, 0 register ids and 0 effective stamps. The calculation rows sit below the print area under 'Supporting calculations: not printed with the payslip', and release.py strips their FACT tags anyway.",
+  "C46": "Package-wide shared C46 residue (multi-period wage base, wage-type codes 21100/US-175/US-214/US-225) is covered by validation_exemptions.C46 (US-OWN-011, scoped to the package-wide checker). The period-aware C46 stays mandatory and is 0: builder psl_lint mismatch 0 / unbound 0, and this auditor's F44 finds 0 value mismatches for 2026.",
+  "C49": "KW-100 remains the only C49 hit, a Kansas guide id in the CCG; exempted (US-OWN-011 now in the register). Not a PSL defect.",
+  "DD_fields": "Documented limitation, no DD change required for the PSL to close. Bank name, masked account and payment method are payment-instruction data of the pay run, not country master data. Employer operating name and mailing address are legal-entity configuration ($legal_entity.*), not employee DD fields. The Spec rows state 'No DD master-data field', which is accurate. Correction to the ruling as stated: the DD does have employer physical-address fields (Country Fields 'Employer address delivery line', 'city', 'State', 'ZIP code', ...), and Spec E16 maps to them. Only the mailing address (if different) and the operating name have no DD field. Carry both to the DESIGN stage as legal-entity setup items (MN 181.032(b)); not a PSL finding."
+ },
+ "_batch_fix_list": [
+  {
+   "owner": "compliance-source-hunter",
+   "items": [
+    "QA2-02: psl.la.statement.scope and psl.ms.statement.scope as a proven neutral statement, or moved to 'unresolved' with what closes them."
+   ]
+  },
+  {
+   "owner": "artifact-builder",
+   "items": [
+    "QA2-01: drop Field Option row 158 and RQ-06 (NC retention) from gaps.json and the request; derive gaps from PSL-facts 'unresolved'.",
+    "QA2-03: restore the r1 gap ids (closed ones kept as closed-R1); new items continue at PSL-RQ-29.",
+    "QA2-02 (after the source hunter): LA/MS rows printed as the new fact or as a 'Not configured [[GAP:]]' cell.",
+    "Rebuild, run_checks.py, md5_final.txt; resubmit for PSL round 3 (last round)."
+   ]
+  }
+ ],
+ "_summary": "FAIL round 2: all 22 r1 findings closed and the worked example recomputes exactly. 3 new findings (2 major, 1 minor), all in gap and traceability bookkeeping. F44 181/181, unverified_keys empty. Round 3 is the last."
+}

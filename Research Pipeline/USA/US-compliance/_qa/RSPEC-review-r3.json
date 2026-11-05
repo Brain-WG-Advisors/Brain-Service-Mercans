@@ -1,0 +1,182 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "RSPEC",
+ "round": 3,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-03",
+ "_reviewed_file": "04-reports-spec/US-*-Spec.xlsx (20 workbooks); md5 20/20 equal to 04-reports-spec/_build/checks/md5_final.txt and to the build log 'Round 3 rebuild'. Bindings 5a4aabb0e506dd9e6eeac8eaf0bcf749 (1,674 rows, 590 keys, 340 register ids). RSPEC-facts e44eacff, DD-8_sheets-facts 9374f9b7, CCG-annex_FED-facts b8474744, gaps.json 1da44aab. Register a91fe55d at review start, a6fb461d after the one fixed_in_place edit. build-manifest dfd89170, scope_manifest 8c1b7e8a.",
+ "_reviewer": "compliance-qa-auditor, fresh instance; authored no part of RSPEC, facts or register",
+ "_built_by": "artifact-builder (r3 rebuild); compliance-source-hunter (agent 2 r2-fix, triage A, triage B)",
+ "_summary": "All 9 round-2 findings are closed or correctly reclassified. Finding 2 (AZ) was a reviewer error: the held ADOR page states the 30-day extension for A1-R as well. The mechanical gates are clean: pre-flight 20/20, C12, C29 0, spec_lint FRAC/PCT/UNIT/MSENT 0, C46 period-aware 0 mismatches, C42/C43, C56, C70, C71 0 differences, Excel open 20/20, validate_contract PASS, worked examples recompute. The verdict is still FAIL on F44. Three consumed facts carry a clause that is in no cited row's local copy. Each clause does appear in another held, registered row, so this is the same class as r2 finding 1. The r3 generator also introduced two Report Matrix regressions: LA 'LAWATS (named in [US-LAS5-007])' is a false citation, and the PA EIT/LST authority is now DCED. This is the third FAIL, so it is escalated to a human.",
+ "_r2_findings_status": {
+  "1_F44_19_keys": "CLOSED. 19/19 re-checked element by element against the register_id and _also_register_ids copies; 0 misses after hand reading.",
+  "2_AZ_A1R": "CLOSED, reclassified as a reviewer error. US-AZP52-005 (employer-withholding-filing-obligations_wayback.html), A1-R section: 'Employers may apply for a 30-day extension of time to file Arizona Form A1-R. Employers must show good cause'. The new value cites AZP52-005, AZS5-025 and AZS5-022 and is correct.",
+  "3_decimal_fractions": "CLOSED. 46 + 2 cells re-tagged. An independent scan finds 0 untagged rate fractions; residual 'percent' wording is minor finding 11.",
+  "4_units": "CLOSED for the 21 cells (all re-read). Residual row labels on NV A10 and AL A32 are minor finding 6.",
+  "5_matrix_regressions": "CLOSED for WA D29 (L&I), PA G61 'online_form, paper (myPATH)' and IN J40 INTIME. ND TAP not restored; accepted, because no held ND copy names TAP. New regressions of the same class are findings 4-5.",
+  "6_C35_reason": "CLOSED. The validation_exemptions C34-C36 reason now names AccuWage Online behind BSO (Pub. 42-007 sec. 6.0); US-OWN-010 carries the same text.",
+  "7_taken_from_calculated": "CLOSED. 0 occurrences.",
+  "8_consumed_by_10_rows": "CLOSED, still in place. All 335 cited register ids list RSPEC; the one new bound row (US-FEDP51-002) was fixed in place (finding 8).",
+  "9_NC_local_file": "CLOSED, still in place."
+ },
+ "_rulings_applied": {
+  "documented_limitations": "accepted (47 GAP ids resolve). The new unresolved[] narrowings of agent 2 and triage A/B are honest and are not rendered as values.",
+  "irs_2026_drafts": "accepted; 944/943 Feb 10, 2027 and ACA March 1 / March 31, 2027 matched in the held drafts.",
+  "shared_C46_limitation": "accepted: shared C46 FAIL 412/177 across all deliverables. The gate is the period-aware re-implementation: 1,563 tags, 590 keys, 0 mismatches, 0 missing.",
+  "derived_layout_integers": "applied: 57 integer layout/TTOC coincidences accepted, 0 decimals.",
+  "C34_C36_exempt": "applied (owner exemption, corrected reason).",
+  "known_minor_mn_pfml": "rspec.mn.pfml_qtr.form wording differs between RSPEC-facts and SIR-facts; carried to the SIR build."
+ },
+ "findings": [
+  {
+   "pattern": null, "severity": "blocker", "pass": "P2", "check_id": "C30",
+   "fact_key": "rspec.az.ui_qtr.form", "register_id": "US-AZB5-005",
+   "location": {"file": "_research/RSPEC-facts.json", "sheet_or_section": "rspec.az.ui_qtr.form, rendered in 04-reports-spec/US-UI-001-StateUIWageReports-Spec.xlsx", "cell_or_line": "Report Matrix C30; State UI Wage Report Spec M10, M33"},
+   "problem": "F44 clause-level miss. The value ends with 'online via DES Tax and Wage System or bulk file transfer'. The cited copy (US-AZB5-005, AZ_DES_wage-report-completing_2026-11-02.txt) names only the online option. It contains no 'bulk' and no 'file transfer'. The bulk route is in other held rows, US-AZB5-006 and US-AZB5-402 ('Bulk Filers: Azure / File Transfer Submission'), and the fact cites neither.",
+   "expected": "Add US-AZB5-006 to _also_register_ids with a figure-located quote, add RSPEC to that row's consumed_by, and rebuild. Alternatively, drop 'or bulk file transfer' from the value.",
+   "action": "escalated_to_human",
+   "evidence": "f44.py: independent element check over the 591 bound instances. where.py search of every US-AZ* copy; hand read with ctx.py."
+  },
+  {
+   "pattern": null, "severity": "blocker", "pass": "P2", "check_id": "C30",
+   "fact_key": "rspec.il.wh_return.form", "register_id": "US-ILS5-012",
+   "location": {"file": "_research/RSPEC-facts.json", "sheet_or_section": "rspec.il.wh_return.form, rendered in 04-reports-spec/US-DOR-001-StateWithholdingReturns-Spec.xlsx", "cell_or_line": "Report Matrix C41, F41, G41 'online_form (MyTax)'; State Withholding Spec M59"},
+   "problem": "F44 clause-level miss. The value reads 'IL-941 quarterly, electronic (MyTax or software); ...'. The cited copy (US-ILS5-012, Pub. 131-D) has the dates and 'All Forms IL-941 must be filed electronically', but neither 'MyTax' nor 'software'. Both are in US-ILS5-011 (IL-941 instructions: 'You may use MyTax Illinois an IDOR-approved tax-prep software program ... to file electronically'), which the fact does not cite. Triage A reported this key as 'now matched' after checking dates only.",
+   "expected": "Add US-ILS5-011 to _also_register_ids, with the quote and RSPEC in its consumed_by, then rebuild so that I41/M59 cite [US-ILS5-011].",
+   "action": "escalated_to_human"
+  },
+  {
+   "pattern": null, "severity": "blocker", "pass": "P2", "check_id": "C30",
+   "fact_key": "fed.fica.totalization.exemption_rule", "register_id": "US-FEDR2-003",
+   "location": {"file": "_research/CCG-annex_FED-facts.json", "sheet_or_section": "fed.fica.totalization.exemption_rule, rendered in 04-reports-spec/US-IRS-001-Form941-Spec.xlsx", "cell_or_line": "Form 941 Spec M20"},
+   "problem": "F44 clause-level miss. The value cites 'employer FICA (IRC 3111(c))', but its only row is US-FEDR2-003 (26 USC 3101), which carries 3101(c) only. 3111(c) is in the registered row US-FEDR2-004 (FED_USC-26-3111_govinfo-2024_2026-11-02.htm, '(c) Relief from taxes in cases covered by certain international agreements'), which the fact does not cite.",
+   "expected": "Add US-FEDR2-004 to _also_register_ids, with RSPEC in its consumed_by, then rebuild so that M20 cites [US-FEDR2-003] [US-FEDR2-004].",
+   "action": "escalated_to_human"
+  },
+  {
+   "pattern": "F27", "severity": "major", "pass": "P4",
+   "fact_key": "rspec.la.ui_qtr.due", "register_id": "US-LAS5-007",
+   "location": {"file": "04-reports-spec/US-UI-001-StateUIWageReports-Spec.xlsx", "sheet_or_section": "Report Matrix", "cell_or_line": "G45, J45"},
+   "problem": "Regression from the r3 generator (us_state_core.filing_portals). G45 went from 'online_form' to 'online_form (LAWATS)', and J45 now reads 'Portal: LAWATS (named in [US-LAS5-007])'. The US-LAS5-007 copy contains 0 occurrences of LAWATS. Triage A removed LAWATS from the fact for that reason: C45 now reads 'LWC online services', and rspec.la.ui_qtr.system_name is in unresolved[]. The generator re-imported the name from the CCG/SIR facts on the same row, and the new regression guard accepted it. The only held copy naming LAWATS is US-LAP52-005 (TPA/PEO POA upload), not as the wage-report channel.",
+   "expected": "G45 'online_form'; J45 'Portal: not named in the cited channel sources', consistent with C45. Print 'named in [id]' only when that id's local copy contains the name. Route CCG la.report.sui.quarterly and SIR sir.la.ui.wage_report to the same correction.",
+   "action": "escalated_to_human"
+  },
+  {
+   "pattern": "F27", "severity": "major", "pass": "P4",
+   "fact_key": "rspec.pa.local.eit_lst", "register_id": "US-PAS5-018",
+   "location": {"file": "04-reports-spec/US-LOC-001-LocalIncomeWageTaxReturns-Spec.xlsx", "sheet_or_section": "Report Matrix", "cell_or_line": "D35, G35"},
+   "problem": "r2 finding-5 class, reintroduced. The Authority changed to 'Pennsylvania Department of Community & Economic Development', which is the publisher of the re-pointed source, not the filing recipient. The cited DCED page itself tells employers to 'register your business with the appropriate local tax collector(s)'. G35 'online_form' has no support either: the cited copies contain 0 occurrences of 'online' or 'electronic'.",
+   "expected": "D35 'Local EIT/LST tax collector designated for the worksite PSD (DCED Address Search) [US-PAS5-018]'. G35 should be a sourced channel, or 'not named in the cited channel sources' with a lower accuracy figure.",
+   "action": "escalated_to_human"
+  },
+  {
+   "pattern": "F5", "severity": "minor", "pass": "P4",
+   "location": {"file": "04-reports-spec/US-DOR-003-NevadaMBT-Spec.xlsx", "sheet_or_section": "Nevada MBT Spec", "cell_or_line": "A10, M10 (also US-DOR-002 State Annual Recon W-2 Spec A32/M32)"},
+   "problem": "Residual of r2 finding 4. The NV 50,000 USD MBT wage exclusion and the AL 1,500 USD W-2 furnishing threshold are labelled 'Electronic filing / payment threshold'. Their boilerplate sentence ('switches the filing or payment route') contradicts the first sentence of each cell.",
+   "expected": "Use the labels 'Taxable wage threshold' (NV) and 'Furnishing threshold' (AL), each with a matching second sentence.",
+   "action": "escalated_to_human"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P4",
+   "location": {"file": "04-reports-spec/US-SDNH-001-NewHireReport-Spec.xlsx", "sheet_or_section": "Report Matrix", "cell_or_line": "D and J of 25 State rows (D30, D33-D36, D39, D40, D43-D45, D47, D48, D50, D53, D54, D56, D62, D63, D65-D68, D73, D74, D77)"},
+   "problem": "G-CLEAN. The cells read 'State authority (not named in the cited sources; ...)' and 'Portal: not named', with no GAP id in gaps.json and no closing source.",
+   "expected": "Register one RSPEC GAP (receiving agency and portal for these 25 States; closing source: the ACF/OCSS State new-hire contacts list), and tag the D/J cells with it.",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": "F27", "severity": "minor", "pass": "P5",
+   "fact_key": "fed.futa.rate.net", "register_id": "US-FEDP51-002",
+   "location": "00-official-sources/legal-basis-register.csv!US-FEDP51-002!consumed_by",
+   "problem": "Triage A added US-FEDP51-002 as _also of fed.futa.rate.net, and it is bound in 3 RSPEC locations, but its consumed_by lacked RSPEC.",
+   "expected": "';RSPEC' appended (fixed_in_place). Backup in _pipeline/_backup/register-pre-qa-rspec-r3-2026-11-03/; register md5 a91fe55d -> a6fb461d; C71 re-run: PASS, specs unchanged.",
+   "action": "fixed_in_place"
+  },
+  {
+   "pattern": "F27", "severity": "minor", "pass": "P5",
+   "fact_key": "nv.mbt.base", "register_id": "US-NVS5-011",
+   "location": {"file": "01-ccg/annexes/annex_NV.md", "sheet_or_section": "NV MBT base", "cell_or_line": "[[FACT:nv.mbt.base=...]] tag (and US-CCG-001-v1.0.docx)"},
+   "problem": "Triage B reworded nv.mbt.base ('ESD' spelled out) after the CCG closed. The CCG tag still prints the old wording, so C46 shows a mismatch. No ledger line was written for any agent-2 or triage change: ledger lines 68-71 still say 'not yet changed'.",
+   "expected": "Re-sync the CCG annex_NV tag at the next CCG regeneration (wording only). Ledger lines written by this review.",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P2", "register_id": "US-NY-008",
+   "location": {"file": "04-reports-spec/US-DOR-001-StateWithholdingReturns-Spec.xlsx", "sheet_or_section": "State Withholding Spec", "cell_or_line": "M10"},
+   "problem": "The base rule 'these localities are reported with the State return' cites US-NY-008, which has no local_file (chrome-read 2026-10-29); it cannot be re-verified from disk. This predates r3.",
+   "expected": "Save the DTF withholding filing-requirements page as a local copy, with md5, on US-NY-008.",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P4",
+   "location": {"file": "04-reports-spec/US-UI-001-StateUIWageReports-Spec.xlsx", "sheet_or_section": "Example Analysis", "cell_or_line": "C10, C11, C12"},
+   "problem": "'x 0.1 percent' is a rate written outside a tag. It is derived from the tagged AZ penalty rule in the same row, but it is invisible to PCT because the word 'percent' is used instead of '%'.",
+   "expected": "Reference the tagged rule or tag a numeric fact; extend PCT to cover 'percent'.",
+   "action": "escalated_to_human"
+  }
+ ],
+ "checks_run": ["C12", "C28", "C29", "C30", "C34", "C35", "C36", "C42", "C43", "C44", "C46", "C56", "C70", "C71"],
+ "_checks_results": {
+  "md5": "20/20 equal to md5_final.txt; bindings 5a4aabb0 equal to the build log",
+  "preflight": "PASS 20/20 (0 blocker/major/minor)",
+  "spec_lint_rerun": "C29 0, WORD 0, tags 1,563, mismatch 0, missing 0, unbound 3 (NC URL), DERIVED 31, MSENT 0/949, FRAC 0, PCT 0 (231 declared exceptions), UNIT 0/244, C30 0, gaps 47, unused facts 0",
+  "C46_period_aware_auditor": "1,563 tags, 590 keys, 0 mismatches, 0 missing, 2 tags labelled 2027 (NJ 319), 57 integer layout coincidences (ruling)",
+  "FRAC_PCT_auditor": "0 untagged rate fractions; % only in 'Accuracy NN%' / '98% Offer Method'; 3 'percent' cells (finding 11)",
+  "C12": "PASS: 21 columns A-U on every core sheet, 9 sheets per workbook (180), 949 field rows, 0 repeated headers",
+  "C29": "PASS: 0 hard or bare markers; X-runs are masks only; 'TO CONFIRM. Accuracy' is the status vocabulary",
+  "error_cells": "0; 0 formulas",
+  "C30": "tier PASS (335 ids: A.1 69, A.2 226, A.3 37, owner 3; 331 active + 4 partial). F44 FAIL (findings 1-3)",
+  "C42_C43": "PASS / PASS package 1.0",
+  "C44": "shared SKIP; crosswalk unchanged (scope_manifest md5 unchanged)",
+  "C46_shared": "FAIL 412/177 (ruling)",
+  "C56_C70": "PASS 934 fields / PASS",
+  "C71": "PASS 20 files, 0 differences (also after the register fix)",
+  "C34_C36": "SKIP under the owner exemption",
+  "excel_open": "PASS 20 files, 0 not clean; md5 unchanged",
+  "validate_contract_all": "PASS 85 files before this file",
+  "worked_examples": "PASS, all 20 recomputed (941 279.00/220.40; 940 42.00/546.00; NV 1,404.00; OR 823.70/800.00; MCTMT 6,110.00; ACA 3,585.60/298.80; 941-X 248.00; LOC 50.00/112.50; city 2,500/1,250/1,375; SHT 9,000; CA SDI 130.00; KS 2026-03-30; EFW2 11,439.00/3,628.50; NJ/PA 3/2/5; AZ 50/35/200; NM 4.80; OR WBF 9.36); 0 numeric fact values changed since r2",
+  "regression_vs_r2": "Backup verified equal to the r2-reviewed build. 868 changed cells; the per-workbook counts are identical to the build log; 1 shape change (WC Population Rules 5 -> 7 rows); 0 keys or GAP ids removed. All changes are explained by logged fixes except UI-001 G45/J45 and LOC-001 D35 (findings 4-5)."
+ },
+ "manual_review_items": [
+  "L3: a word-boundary grep of mercans_pipeline_v2_12.sh finds 0 hits for C5/C6/C7, so they were run by hand.",
+  "C5: all 335 cited register/owner ids resolve. PASS.",
+  "C6: EFW2 RS/RO/RU positions and the TY1978-2025 validity re-read in Pub. 42-007 TY2026; CT S record re-read; OH Finder CSV re-counted (678 municipalities in force on 2026-11-01, 5-digit codes in column 3); TTOC page re-parsed (71 codes). PASS. No real filed sample exists.",
+  "C7: no conditional field lacks a rule. WC-001 Population Rules E3-E7 use a generic 'threshold' scenario for fee and rate rows (template weakness).",
+  "F44 method: 591 bound instances checked element by element (dates, form ids, numbers incl. x100, /100 and number words, names, channel words) against register_id + _also copies. 550 mechanical passes; 41 read by hand, of which 38 were confirmed and 3 failed. WebFetch was not used.",
+  "Named residuals read by hand: AZ/LA 'twenty days' (A.R.S. 23-722.01(D); R.S. 46:236.14(E)(1)); FUTA potential CA 0.053 / VI 0.048 = 5.3 % / 4.8 % (DOL xlsx rows 9-10); LA LAC 61:I.1501.B 'first quarterApril 30 ... fourth quarterJanuary 31' (payment dates; accepted as labelled); TTOC 71 counted independently; AZ A1-R 30-day extension confirmed in US-AZP52-005.",
+  "Portal citations: 28 'named in [id]' claims checked; 26 PASS, 1 FAIL (LA, finding 4), AK 'ES Tax portal' accepted in substance.",
+  "C27 fires at DD close. F27: the SIR is not built; ledger line 63 carries the accuracy/scope mirror."
+ ],
+ "numeric_verification": {
+  "facts_total": 591,
+  "facts_verified": 588,
+  "unverified_keys": ["rspec.az.ui_qtr.form", "rspec.il.wh_return.form", "fed.fica.totalization.exemption_rule"],
+  "method": "100 % of the bound fact instances (590 keys + 1 period variant, 18 facts files) re-checked clause by clause against the local copies of register_id + _also_register_ids; every miss read by hand. The 3 unverified keys carry a true clause held in another registered row that they do not cite."
+ },
+ "cross_checks": [
+  {"name": "Round-2 findings closed (9)", "result": "pass", "note": "9/9 closed or correctly reclassified"},
+  {"name": "Regression vs r2 build (every change explained)", "result": "fail", "note": "868 cells match the build log; 2 substantive regressions (findings 4-5)"},
+  {"name": "Scope wording identical (tier verdict; MA PFML)", "result": "pass", "note": "Payroll Scope Summary changes are wording only"},
+  {"name": "Report Specs x DD (C27)", "result": "not_applicable", "note": "fires at DD close"}
+ ],
+ "propagation": [
+  {"fact": "fed.futa.rate.net", "consumed_by": ["RSPEC/US-IRS-004", "CCG/annex_FED", "CCG/m10_reporting", "SIR"], "resynced": true, "register_id": "US-FEDP51-002"},
+  {"fact": "nv.mbt.base", "consumed_by": ["RSPEC/US-DOR-003", "CCG/annex_NV"], "resynced": false, "register_id": "US-NVS5-011"},
+  {"fact": "rspec.la.ui_qtr.due", "consumed_by": ["RSPEC/US-UI-001", "CCG/annex_LA", "SIR"], "resynced": false, "register_id": "US-LAS5-007"},
+  {"fact": "rspec.az.ui_qtr.form", "consumed_by": ["RSPEC/US-UI-001", "SIR"], "resynced": false, "register_id": "US-AZB5-005"},
+  {"fact": "rspec.il.wh_return.form", "consumed_by": ["RSPEC/US-DOR-001", "SIR"], "resynced": false, "register_id": "US-ILS5-012"},
+  {"fact": "fed.fica.totalization.exemption_rule", "consumed_by": ["RSPEC/US-IRS-001", "CCG/annex_FED", "WTC", "DD"], "resynced": false, "register_id": "US-FEDR2-003"},
+  {"fact": "rspec.mn.pfml_qtr.form", "consumed_by": ["RSPEC/US-PFML-001", "SIR"], "resynced": false, "register_id": "US-MNS5-018"},
+  {"fact": "dd.employer.state_account_ids", "consumed_by": ["RSPEC/US-DOR-001", "RSPEC/US-UI-001", "DD"], "resynced": false, "register_id": "US-UTR3-001", "_note": "and 6 other dd.* keys reworded by agent 2/triage; DD not built"}
+ ],
+ "escalation": {
+  "reason": "Round 3 of 3 FAILs and no round 4 is allowed. The 3 blockers are citation-completeness defects: each value is true and its clause sits in a held, registered row that the fact does not cite. Under F44, any unverified key forbids a PASS. Closing them needs a facts edit and a rebuild. The 2 majors are generator regressions in the descriptive Report Matrix columns.",
+  "decision_needed": "Choose one: (a) authorise one bounded fix outside the round count (agent 2 adds US-AZB5-006, US-ILS5-011 and US-FEDR2-004 as _also; the builder fixes the LA portal, the PA authority and the NV/AL labels), followed by a targeted re-check of the touched cells; (b) accept RSPEC with the findings recorded as limitations and start DD; (c) keep RSPEC blocked.",
+  "options": [
+   "(a) Recommended: one bounded fix (3 facts edits + 2 generator rules, rebuild, C71 + spec_lint + diff of the touched cells). No number changes.",
+   "(b) Accept with limitations: the values are correct and the defects are traceability; DD does not consume the Report Matrix authority/portal columns.",
+   "(c) Hold RSPEC blocked; DD does not start."
+  ]
+ },
+ "_ledger": "PROPAGATION-LEDGER.md: 4 lines appended 2026-11-03",
+ "_next_action": "ESCALATE to a human (round-3 FAIL). The orchestrator sets build-manifest RSPEC status to 'blocked' with blocked_reason = escalation.decision_needed (the auditor holds the manifest read-only). DD (stage 4) must not start until the human decides."
+}

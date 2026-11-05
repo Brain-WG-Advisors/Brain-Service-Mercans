@@ -1,0 +1,73 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "m10_reporting",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
+ "_annex_keys_cited": {
+  "fed.deposit.monthly_max_lookback_liability": "CCG-annex_FED-facts.json (US-FEDS5-004)",
+  "fed.deposit.next_day_threshold": "CCG-annex_FED-facts.json (US-FEDS5-004)",
+  "fed.form941.frequency": "CCG-annex_FED-facts.json (US-FED-015)",
+  "fed.form940.due": "CCG-annex_FED-facts.json (US-FEDS5-031)",
+  "fed.w2.due_date": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "fed.w2.no_withholding_threshold": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "fed.w2.box12.new_codes": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "multi.w2.states_per_form": "CCG-annex_MULTI-facts.json (US-MULTIS5-011)",
+  "fed.aca.ale.fte_threshold": "CCG-annex_FED-facts.json (US-FEDS5-012)",
+  "fed.aca.efile_threshold": "CCG-annex_FED-facts.json (US-FEDS5-012)",
+  "fed.davis_bacon.certified_payroll.frequency": "CCG-annex_FED-facts.json (US-FEDS5-027)",
+  "fed.reporting_agent.authorization": "CCG-annex_FED-facts.json (US-FED-008)"
+ },
+ "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
+ "facts": [
+  {
+   "key": "fed.form1042s.channel",
+   "value": "IRIS (FIRE retired for TY2026); due 2027-03-15",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-016",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+   "confidence": "high"
+  }
+ ],
+ "unresolved": [
+  {
+   "key": "fed.efw2.layout",
+   "why": "SSA EFW2 TY2026 (Pub. 42-007) not read: ssa.gov 403, Wayback 404, archive API 429 (US-FEDS5-032 gated).",
+   "attempted": [
+    "https://www.ssa.gov/employer/efw/26efw2.pdf (403)",
+    "https://www.ssa.gov/employer/EFW2&EFW2C.htm (403)"
+   ],
+   "what_would_close_it": "SSA Pub. 42-007 TY2026 downloaded in the browser pass or from a non-blocked network.",
+   "blocking": false
+  },
+  {
+   "key": "fed.form940.instructions_current",
+   "why": "TY2026 Instructions for Forms 940 and 1094-C/1095-C not yet issued; 2025 editions read.",
+   "attempted": [],
+   "what_would_close_it": "IRS releases of the TY2026 instructions (usually Dec-Jan).",
+   "blocking": false
+  },
+  {
+   "key": "multi.newhire.registration_channel",
+   "why": "HHS/OCSS multistate employer registration page returned 202 empty (MULTI-OQ-6); statute 42 U.S.C. 653a(b)(1)(B) carries the rule.",
+   "attempted": [
+    "https://www.acf.hhs.gov/css/form/multistate-employer-registration-form (202 empty)"
+   ],
+   "what_would_close_it": "Browser read of the ACF multistate registration page.",
+   "blocking": false
+  },
+  {
+   "key": "fed.iwo.revised_form.state_golive",
+   "why": "States go live with the revised (gig-field) IWO/e-IWO within the one-year extension; dates not known (FED OQ 8).",
+   "attempted": [],
+   "what_would_close_it": "OCSE Action Transmittal implementing ICR 202607-0970-002.",
+   "blocking": false
+  }
+ ]
+}

@@ -124,7 +124,8 @@ def R(key, on=None):
     """Register id only, binding recorded (for a claim paraphrased from the fact)."""
     f = _pick(key, on)
     _bind(key, f, "(paraphrased)")
-    return f"[{f['register_id']}]"
+    ids = [f["register_id"]] + ([x for x in (f.get("_also_register_ids") or []) if x != f["register_id"]] if key.startswith("practice.") else [])
+    return "[" + "; ".join(ids) + "]"
 
 
 def D(key, on=None, which="from"):

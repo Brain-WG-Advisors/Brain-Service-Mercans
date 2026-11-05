@@ -85,6 +85,7 @@ Os itens de base legal abaixo são **o que buscar**; todo valor e versão é con
 - Antes de começar: **autorização do Wallisson para abrir** o zip com a senha recebida; pedir que próximos envios usem o Drive da Mercans (domínio mercans.me fora da organização).
 - Falta: report(s) + recibo, GL, nome do cliente.
 - Base legal: imposto de renda retido e contribuições DSMF (seguro social), seguro-desemprego e médico obrigatório em vigor 2026; declarações no e-taxes.gov.az.
+- Notas da validação (Mastercard, set/2026): [[internal-certification/Azerbaijan/Client TBD - 2026-09/02 Validation/intake|intake]] · [[internal-certification/Azerbaijan/Client TBD - 2026-09/02 Validation/followups|followups]] · [[internal-certification/Azerbaijan/Client TBD - 2026-09/02 Validation/resumo_PT|resumo PT]] · [[internal-certification/Azerbaijan/Client TBD - 2026-09/02 Validation/summary_EN|summary EN]] · revisão v1.0: [[internal-certification/Azerbaijan/Client TBD - 2026-09/02 Validation/review/resumo_PT_v1.0|PT]] · [[internal-certification/Azerbaijan/Client TBD - 2026-09/02 Validation/review/summary_EN_v1.0|EN]]
 
 ### Onda 3 — aguardando arquivos
 

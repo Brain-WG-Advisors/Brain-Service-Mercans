@@ -1,0 +1,96 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SKILL",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "01-ccg/annexes/annex_UT.md!UT.2 parameter table!lines 72-76 (Note column); same text in ../skills-build/payroll-compliance-united-states/references/12-states/UT.md lines 72-76",
+   "problem": "Notes still read 'From 2026-04-01 (Pub. 14 Rev. 04/26)', i.e. a stated effective date. The facts notes were changed to 'revision dated April 2026; effective date not stated; period start 2026-04-01 follows the register', and the gotcha now says so, but annex_UT was not regenerated (not in the CCG diff). The same annex says on line 47 'do not apply before the effective date is established'. r1 finding 6 is only half closed.",
+   "expected": "Notes in annex_UT and UT.md: 'Period start 2026-04-01 (register); Pub. 14 Rev. 04/26 states no effective date (RQ-343). 2026-01-01 to 2026-03-31: open gap RQ-596.' Then rebuild the CCG and skill.",
+   "register_id": "US-UTPIT-003",
+   "fact_key": "ut.pit.base_allowance.single.annual",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P5",
+   "location": "_research/gaps.json!RQ-240!what_would_close_it (and 01-ccg/annexes/annex_LA.md line 81, now blank)",
+   "problem": "RQ-240 was closed on the channel, and the residual (UI form name and UI wage-file upload layout) was sent to 'RSPEC rspec.la.w2_state.lawage_format'. That item is the LDR LaWage W-2 file, not the LWC UI report, so the UI residual is now tracked nowhere: the CCG line was deleted and no gap names it. A known gap was dropped without a source (G-CLEAN).",
+   "expected": "Keep the channel closed, and add an open gap for 'LA UI quarterly wage report: form name and bulk-upload layout (LWC online services)', closure source = LWC employer file specification. Print it in annex_LA, 12-states/LA.md and 14-known-gaps.",
+   "register_id": "US-LAS5-007",
+   "fact_key": "la.report.sui.quarterly",
+   "action": "routed_to_source_hunter"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C32"
+ ],
+ "manual_review_items": [
+  "Gap bookkeeping: R3C-TN-UI-STATUTE (tn.sui.employee.rate) has no status. The correct status is documented_limitation. The value 0 is in force on US-TNR3C-001 (A.3 DLWD Handbook quoting T.C.A. 50-7-402/403). The residual is the statute text itself, which needs a person to save the LexisNexis page in a browser, so it is non-blocking and depends on access. Once set, counts become documented_limitation 125, no_status 0, and the row should be printed in 14-known-gaps.",
+  "Build log (_pipeline/SKILL-build-log.md Open items) still says '586 open gaps'; gaps.json and 14-known-gaps say 585. Cosmetic, fix with the round-3 build."
+ ],
+ "propagation": [
+  {
+   "fact": "ut.pit.base_allowance.single.annual",
+   "consumed_by": [
+    "CCG/annex_UT",
+    "SKILL/12-states/UT"
+   ],
+   "resynced": false,
+   "register_id": "US-UTPIT-003"
+  },
+  {
+   "fact": "la.report.sui.quarterly",
+   "consumed_by": [
+    "CCG/annex_LA",
+    "RSPEC/US-UI-001",
+    "SKILL/12-states/LA",
+    "SKILL/14-known-gaps"
+   ],
+   "resynced": false,
+   "register_id": "US-LAS5-007"
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "r1 findings closure",
+   "result": "fail",
+   "note": "Closed: 1 LA gotcha/SKILL.md, 2 DC, 3 selection rule, 4 pipeline wording (only remaining hit is Utah Code C34-40, a citation), 5 MS (fact removed; PSL-RQ-14 printed in the CCG annex_MS, m10, skill MS.md and 06-payslip), 7-14. Open: 6 UT (annex_UT notes) and a new LA residual."
+  },
+  {
+   "name": "CCG diff vs _pipeline/_backup/pre-skill-r1-2026-11-04 (docx abcf0e13 -> a5f4db8f)",
+   "result": "pass",
+   "note": "md: annex_DC 2 lines ('the the'), annex_LA 2 lines (RQ-240 line removed), annex_MS 7 (table -> gap PSL-RQ-14, source row removed), m10 2 lines (MS row). The docx text diff matches. Nothing else changed; annex_UT unchanged (see finding 1)."
+  },
+  {
+   "name": "tag_sync_check.py",
+   "result": "pass",
+   "note": "0 stale tags in CCG, SIR, RSPEC, DD, WTC and PSL."
+  },
+  {
+   "name": "Value sample re-run",
+   "result": "pass",
+   "note": "1,557 index rows (federal, multistate, 16 States) + 13-gotchas 41 + MS 48 + m10 265: 0 misses on value, period or register id; 57 multi-period keys complete. selfcheck and selfcheck_strict: 0. md5 99/99."
+  }
+ ],
+ "numeric_verification": {
+  "facts_total": 1911,
+  "facts_verified": 1911,
+  "unverified_keys": [],
+  "method": "Index rows checked against the facts files and the register (value, period and register id). The skill adds no new numbers. Primary re-fetch was not repeated: authority sites return 403 from this exit."
+ },
+ "_batch_fix_list": [
+  "1 builder: annex_UT table notes (lines 72-76) state a period start, not an effective date (RQ-343, RQ-596); rebuild the CCG and the skill.",
+  "2 source hunter: open a new gap for the LA UI form name and bulk-upload layout (LWC), fix the RQ-240 residual pointer; builder prints it in annex_LA, LA.md and 14-known-gaps.",
+  "3 gaps.json: set R3C-TN-UI-STATUTE status = documented_limitation (reason: access); recompute counts; print it in 14-known-gaps.",
+  "4 SKILL-build-log Open items: 585 open gaps.",
+  "Then: tag_sync_check, selfcheck, selfcheck_strict, SKILL-md5.txt; round 3 (last)."
+ ]
+}

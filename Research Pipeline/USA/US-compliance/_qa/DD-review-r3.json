@@ -1,0 +1,56 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DD",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-03",
+ "_scope": "Targeted at the r2 items only: F338, F344, F347, F107 and ID Information V13/V14; F44 on the changed keys; C71; the diff. Nothing else was re-run.",
+ "_reviewed_file": "05-data-dictionary/US-DD-001-v1.0.xlsx md5 e38e8bbc94e483fc5846f9e74d83186d (equals md5_final.txt)",
+ "_reviewer": "compliance-qa-auditor (independent)",
+ "findings": [],
+ "checks_run": [
+  "C46",
+  "C71"
+ ],
+ "_r2_closure": {
+  "major 1 internal paths": "closed: F338, F344 and F347 no longer carry the path clause, and a scan of every workbook cell finds 0 internal-path hits (00-official, _research, _pipeline, code-tables, .json, .py)",
+  "minor 2 qualifiers": "closed: V13 and V14 list the consumers of the account number; dd_element_usage.csv shows 143/143 used",
+  "minor 3 Lexington rate": "closed: F107 cites dd.ky.locality.lexington_name (no rate); US-KYS5-024 copy: 'The Lexington-Fayette Urban County Government assesses an occupational license fee'"
+ },
+ "_diff_note": "No copy of the r2 build (md5 92bf95f3) was kept, so a direct diff was not possible. Instead, the current build was diffed against the r1-fix backup: the structural and row-level change list is identical to the one recorded in r2, and the only content differences are in the cells named in scope. Process note: keep a backup per round so r(n) can be diffed directly against r(n-1).",
+ "_checks_results": {
+  "C46_period_aware": "every [[FACT:]] tag in the workbook equals a fact value (0 mismatches)",
+  "C71": "regen_check_dd PASS, 0 differences"
+ },
+ "manual_review_items": [
+  "C5, C6, C7: not implemented (L3); round-2 hand results carried, since the changed cells are citation text only."
+ ],
+ "numeric_verification": {
+  "facts_total": 126,
+  "facts_verified": 126,
+  "unverified_keys": [],
+  "method": "Changed keys re-checked against their local copies: dd.ky.locality.lexington_name (US-KYS5-024). dd.oh.municipal.code_list, dd.in.county_code.list and dd.md.county_code.list are the r2-verified values minus the path clause. All other keys carried from r2 (126/126)."
+ },
+ "cross_checks": [
+  {
+   "name": "Report-Specs x DD, direction 2",
+   "result": "pass",
+   "note": "143/143 elements used"
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "dd.ky.locality.lexington_name",
+   "consumed_by": [
+    "DD"
+   ],
+   "resynced": true,
+   "register_id": "US-KYS5-024"
+  }
+ ],
+ "_carried_to_run_close": [
+  "Shared C29 X-run checker limitation: the authority masks S-XXXXXX-Y and WHTXXXXXXXX were accepted in r2; the owner decides whether to record an exemption",
+  "Shared C46 checker limitation (package-wide)"
+ ],
+ "_next_action": "DD may close; the next stage may start"
+}

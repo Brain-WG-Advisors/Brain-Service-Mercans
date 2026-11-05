@@ -1,0 +1,5 @@
+@nkeer @lli BIK elements in STG's list and the BIK base 58572 (ingreso a cuenta, RIRPF art. 102.1):
+- In 58572 in full: 65500/65501/65502 Company Car; 65850/65851 Parking; 65812 Life insurance and its adjustment.
+- In 58572 only above the exempt limit: 65670/65671/65672 Meal vouchers, above €11 per day worked (RIRPF art. 45.2.a); 65630 Health insurance and 65852 Medical relatives, above €41.67/month per covered person, €125 with a disability (CR02; LIRPF art. 42.3.c). The exempt parts (58100, 58105) stay out.
+- Out of 58572: 65813 Accident insurance, if it covers work accidents (not income in kind, LIRPF art. 42.2.b); 65815/65836 Flexible remuneration exempt from IRPF; 62149 (salary sacrifice, cash); 75100 (units).
+- Check: in STG, 65222, 65512 and 62149 are used for life insurance adj, accident insurance adj and education benefit, but in the WTC they are "Adjustment – Points benefit", "Car Cash Benefit Adjustment" (cash) and the salary-sacrifice negative earning. Their flags must match the use.

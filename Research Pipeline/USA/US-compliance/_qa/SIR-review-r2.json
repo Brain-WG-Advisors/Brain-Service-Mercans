@@ -1,0 +1,264 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SIR",
+ "unit": "third_party_provider_handoff",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+ "_reviewed_md5": "3fb6d080898397c2e1b6516bf41ac12e (= _build/checks/md5_final.txt)",
+ "_reviewer": "compliance-qa-auditor (independent; did not build)",
+ "findings": [
+  {
+   "pattern": "F44",
+   "severity": "blocker",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "3.3 table T9, 4 table T11, 0.1 list, section 8 (cells now 'Not configured')",
+    "cell_or_line": "SIR-RQ-02,05,07,08,09,10,11,21,24,25,26,30,34,40,48,52"
+   },
+   "problem": "16 cells that are sourced are printed as gaps. Two builder defects: (1) the F44 text cache _build/_scratch/textcache.json is dated 08:11, older than the register (09:00) that bound the source hunter's new copies, so the new copies of US-COP52-003, US-MOP52-008, US-ORP51-005, US-TNR3-002, US-FEDP51-016 and US-CTS5-036 read as missing; (2) the new 2-letter rule treats 'ID' in 'Agent ID' / 'MN ID' as Idaho and 'MD' in a Maryland statute as missing, and 'NOT' (an emphasis word) as an acronym. QA re-extraction of the current copies finds every element of sir.ar/ct/de/co/mo/nm/mn.ui/or/wa/tn agent authorisations, sir.ct.paid_leave.return, sir.me.pfml.return, sir.mn.withholding.returns, sir.multi.new_hire.single_state_election, sir.ca.ui_pit.returns. Batch item SIR-QA1-04 is therefore not applied for 12 of the 15 closures the source hunter delivered, and the recon fails (DD 'Employer health insurance offered' loses its only consumer).",
+   "expected": "f44_textcache.py: rebuild the cache whenever the register or any local_file is newer than the cache (compare mtimes) and fail if a bound row has no cache entry. f44_lib: a 2-letter State code passes when a cited row belongs to that State (register id prefix US-<ST> or the State name in the copy); 'ID' after 'Agent'/a State code and upper-case emphasis words (NOT, ONLY, MUST) are not checked as acronyms. Rebuild; the 16 cells return to their FACT values, recon exits 0.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "scratch qa_sir_r1/gapcheck.py: current copies re-extracted with PyMuPDF/HTML strip; elements missing = [] for the keys listed",
+   "_id": "SIR-QA2-01"
+  },
+  {
+   "pattern": "F27",
+   "severity": "blocker",
+   "pass": "P5",
+   "location": {
+    "file": "01-ccg/US-CCG-001-v1.0.docx",
+    "sheet_or_section": "m07 / annex_MULTI / annex_FED",
+    "cell_or_line": "para 173, 494, 644, 645; table 84 r2c2, 89 r2c2, 184 r20c2, 204 r2c2 (C46 numbering); and 02-wtc/US-WTC-001-v1.0.xlsx Wage Type Catalogue D370"
+   },
+   "problem": "The r1 facts batch reworded fed.iwo.priority and multi.iwo.governing_law (SIR-QA1-03/04), but the CCG (8 tags) and the WTC (D370) still carry the pre-batch values. Shared C46 now reports these as real mismatches (not period entries): the batch was not propagated to all consumers.",
+   "expected": "Regenerate the CCG and WTC from their generators (no hand edit) so the 9 tags carry the current values; re-run C46 package-wide and confirm the only residue is the period-entry false positives (SIR-QA1-19) and the pre-existing wa.wc.employee_deduction.rule. Ledger line the same day.",
+   "register_id": "US-FEDP6-002",
+   "action": "routed_to_builder",
+   "fact_key": "fed.iwo.priority",
+   "evidence": "scratch qa_sir_r1/stale.py: 32 keys changed vs _research/sir-fix/_backup-r1; tags with a value no current entry has",
+   "_id": "SIR-QA2-02"
+  },
+  {
+   "pattern": "F25",
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "05-data-dictionary/US-DD-001-v1.0.xlsx",
+    "sheet_or_section": "Country Fields",
+    "cell_or_line": "W33, W37, W57"
+   },
+   "problem": "dd.state.new_hire.dob now rests on US-NJS5-018 plus 9 _also_register_ids, and the SIR prints all 10 (T23r6), but the DD cells still cite [US-NJS5-018] only for a 10-State statement.",
+   "expected": "DD generator: print register_id plus _also_register_ids after the tag, as the SIR does; regenerate W33/W37/W57.",
+   "register_id": "US-NJS5-018",
+   "action": "routed_to_builder",
+   "fact_key": "dd.state.new_hire.dob",
+   "_id": "SIR-QA2-03"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": {
+    "file": "04-reports-spec/US-IRS-004-Form940-Spec.xlsx",
+    "sheet_or_section": "Form 940 Spec",
+    "cell_or_line": "M10"
+   },
+   "problem": "The relabelled fact rspec.fed.form940.due ('TY2025 rule: Form 940 for 2025 due February 2, 2026 ...') now sits inside the FUTA deposit-carry sentence ('a smaller amount carries to the next quarter (...)'), where it says nothing about the deposit carry.",
+   "expected": "Drop the rspec.fed.form940.due tag from M10 (the deposit rule is already carried by fed.futa.deposit_threshold [US-FEDS5-031]); keep it in M5, B11, F27, C10.",
+   "register_id": "US-FEDS5-031",
+   "action": "routed_to_builder",
+   "fact_key": "rspec.fed.form940.due",
+   "_id": "SIR-QA2-04"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "2.1 table T13 / 7.1 table T14",
+    "cell_or_line": "T13r2 (Form 940) and T14r7 (US-IRS-007, e-file threshold)"
+   },
+   "problem": "The two TY2025 facts are allowed only as printed, dated limitations. T13r2 prints the Form 940 value without its gap id; T14r7 prints fed.aca.efile_threshold=10 with neither the 'TY2025 rule' label nor a gap id (the label and SIR-RQ-03 exist only in P39 and Appendix B).",
+   "expected": "T13r2: append 'Not configured for TY2026 [[GAP:SIR-RQ-04]]'; T14r7: '[[FACT:fed.aca.efile_threshold=10]] returns (TY2025 rule, re-verify on the 2026 instructions) [[GAP:SIR-RQ-03]]'. The RSPEC IRS-007 cell carrying the same fact gets the same label.",
+   "register_id": "US-FEDS5-012",
+   "action": "routed_to_builder",
+   "fact_key": "fed.aca.efile_threshold",
+   "_id": "SIR-QA2-05"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "0.3 open questions list and Appendix B (table T30)",
+    "cell_or_line": "P36-P45; T30r3, r4, r14, r17, r21, r29, r33, r34, r38, r40"
+   },
+   "problem": "Ten new gap lines print internal fact keys as their subject ('sir.nh.ui.tpa_registration:', 'rspec.fed.form940.due.ty2026:', 'Not read: sir.oh.ui.agent_authorization.jfs20106'), unlike the other lines, which are written in words.",
+   "expected": "Use the 'question_short' / plain-language subject, e.g. 'the New Hampshire third-party administrator registration', 'the 2026 Form 940 due date', 'the Ohio Form JFS-20106'.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "SIR-QA2-06"
+  }
+ ],
+ "checks_run": [
+  "C12",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C46",
+  "C53",
+  "C70",
+  "C71"
+ ],
+ "numeric_verification": {
+  "facts_total": 390,
+  "facts_verified": 388,
+  "unverified_keys": [
+   "fed.aca.efile_threshold",
+   "rspec.fed.form940.due"
+  ],
+  "method": "Independent QA F44 (qa_f44.py, fresh text cache from the current register): 456 tags, 390 key/value pairs, all equal to a current fact entry (C46 period-aware, SIR only: 0 mismatches). 17 raw flags; 15 cleared by reading the copy (r1-known spelling cases; OH FSET 'version 4.4'; dd.state.new_hire.dob: all 10 State copies name date of birth; dd.multi.sui_state WA = RCW copy). Remaining 2 rest on 'partial' rows (2025 IRS editions; 2026 not published) and print as gaps SIR-RQ-03/04, but not yet in every cell (SIR-QA2-05)."
+ },
+ "cross_checks": [
+  {
+   "name": "Diff vs _build/_backup/pre-r1-batch maps to batch items",
+   "result": "fail",
+   "note": "Verdict, landscape, 0.4 table, PIN row, P63/P69 gaps, LA wording, F27 gap ids, KS/MS/DE/DC/CO/DOB rewordings all map to SIR-QA1-01..18. Unmapped: 16 previously written or newly closed cells turned into gaps (SIR-QA2-01); gap ids renumbered (SIR-RQ-nn reassigned, consistent with gaps.json, C70 PASS)."
+  },
+  {
+   "name": "HAS_INTEGRATIONS sections vs template (artifact-builder 5.5)",
+   "result": "pass",
+   "note": "0.4 'Integration landscape by authority group': one row per party with Integration, Channel, Direction, Developer portal, Runbook location; provider runbook deferred with GAP; integration-landscape.json now in si-discovery schema with source per authority."
+  },
+  {
+   "name": "SIR x Report Matrix (F27)",
+   "result": "pass",
+   "note": "236/236 rows; RSPEC gap ids now carried in the closing text."
+  },
+  {
+   "name": "SIR x DD recon",
+   "result": "fail",
+   "note": "Exit 1: 'Employer health insurance offered' has no consumer because its SIR row became SIR-RQ-02 through the 2-letter false positive (SIR-QA2-01)."
+  },
+  {
+   "name": "Approved RSPEC/DD cells changed by the batch (22 cells vs _pipeline/_backup/pre-sir-r1-2026-11-04)",
+   "result": "fail",
+   "note": "Exactly the 22 listed cells changed, nothing else. DOR-002 J43/M97/T97 LAWATS -> online-services: OK. PFML-001 C28/F28/M11 (CO, 2027 note removed), C30/H30/M18 (DC dates from US-DCS5-019), O18 (channel class online_form), UI-001 M5, DD W58/W59/W89: OK. IRS-004 M10 misplaced tag (SIR-QA2-04). DD W33/W37/W57 citation incomplete (SIR-QA2-03)."
+  },
+  {
+   "name": "Package C46 after the batch",
+   "result": "fail",
+   "note": "484 mismatches (475 in r1): +9 real stale tags in CCG/WTC (SIR-QA2-02); the rest are the period-entry false positives of SIR-QA1-19."
+  }
+ ],
+ "_rulings": {
+  "recon_md_health_insurance": "A gap row is not an acceptable consumer: a consumer must be a sourced statement, otherwise F25 is open. No re-bind is needed: the US-MDS5-018 copy is the Maryland statute and contains 'health insurance provided by the employing unit' and 'State unemployment insurance account number'. The miss is the builder's 2-letter rule; fix it (SIR-QA2-01) and the row returns as CONSUMED_BY_SIR.",
+  "SIR-QA1-18_issue_date": "Owner item, not an SIR blocker. Needed from the owner: either the real package issue date for build-manifest.package.issue_date, or approval that every artifact prints status 'For QA' (not 'Issued') with no issue date until release. Must be settled before the release gate (release_crosscheck); the SIR then regenerates with the package.",
+  "TY2025_form940_aca": "Acceptable for the 2026 build as a dated, printed limitation: the TY2026 Form 940 and 1094-C/1095-C are filed in 2027 and the 2026 IRS editions are not published (live re-download 2026-11-04 byte-identical to 2025). Conditions: every cell carrying either fact is labelled 'TY2025 rule' and carries its gap id (SIR-QA2-05); register rows stay 'partial'; re-verify against the 2026 editions before the first TY2026 filing (January 2027). Both keys stay in unverified_keys until then."
+ },
+ "_r1_closure": {
+  "closed": [
+   "SIR-QA1-01",
+   "02",
+   "03 (11 reworded; 9 printed)",
+   "05",
+   "06",
+   "07",
+   "08",
+   "09",
+   "10",
+   "11",
+   "12",
+   "13",
+   "14",
+   "15 (as limitation)",
+   "16",
+   "17 (partly: new rule over-triggers)",
+   "19 (documented, shared owner)"
+  ],
+  "open": [
+   "SIR-QA1-04 (12 closures not applied, SIR-QA2-01)",
+   "SIR-QA1-18 (owner)"
+  ]
+ },
+ "manual_review_items": [
+  "PROPAGATION-LEDGER.md not written by QA (writes limited to this file); propagation[] below to be appended by the orchestrator today.",
+  "C71: builder log 0 differences; docx md5 equals md5_final.txt (checked)."
+ ],
+ "propagation": [
+  {
+   "fact": "fed.iwo.priority",
+   "consumed_by": [
+    "CCG/m07_deductions",
+    "CCG/annex_FED",
+    "WTC/country_specific",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDP6-002"
+  },
+  {
+   "fact": "multi.iwo.governing_law",
+   "consumed_by": [
+    "CCG/annex_MULTI",
+    "WTC/country_specific",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-MULTIS5-007"
+  },
+  {
+   "fact": "dd.state.new_hire.dob",
+   "consumed_by": [
+    "DD",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-NJS5-018"
+  },
+  {
+   "fact": "fed.aca.efile_threshold",
+   "consumed_by": [
+    "RSPEC/US-IRS-007",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDS5-012"
+  }
+ ],
+ "_batch_fix_list": [
+  {
+   "owner": "artifact-builder (one pass, then rebuild SIR, CCG, WTC, DD, RSPEC IRS-004/007)",
+   "items": [
+    "SIR-QA2-01: f44_textcache.py rebuild when register/local_file newer than cache; f44_lib 2-letter rule satisfied by the row's State (id prefix or State name), skip 'ID' after 'Agent'/State code and emphasis words NOT/ONLY/MUST; rebuild SIR -> SIR-RQ-02,05,07,08,09,10,11,21,24,25,26,30,34,40,48,52 return to FACT values; recon exit 0.",
+    "SIR-QA2-02: regenerate CCG (paras 173, 494, 644, 645; tables 84, 89, 184, 204) and WTC D370 so fed.iwo.priority / multi.iwo.governing_law tags carry the current values; re-run C46 package-wide.",
+    "SIR-QA2-03: DD generator prints _also_register_ids after the tag; W33, W37, W57.",
+    "SIR-QA2-04: RSPEC IRS-004 Form 940 Spec M10: remove the rspec.fed.form940.due tag.",
+    "SIR-QA2-05: SIR T13r2 add [[GAP:SIR-RQ-04]]; SIR T14r7 and RSPEC IRS-007 cell: '(TY2025 rule, re-verify on the 2026 instructions)' + [[GAP:SIR-RQ-03]].",
+    "SIR-QA2-06: P36-P45 and Appendix B T30 rows: plain-language subjects instead of fact keys.",
+    "Then: sir_lint, f44_self, sir_recon, C71, shared C42/C43/C46, content C53/C70, validate_contract, open check, md5_final last."
+   ]
+  },
+  {
+   "owner": "compliance-source-hunter",
+   "items": [
+    "None this round (the 6 open gaps RQ-11/19/25/27/32/33 equivalents stay as printed gaps)."
+   ]
+  },
+  {
+   "owner": "owner (Wallisson Gomes)",
+   "items": [
+    "SIR-QA1-18: give the package issue date or approve status 'For QA' until release."
+   ]
+  }
+ ],
+ "_summary": "FAIL r2: 2 blocker, 1 major, 3 minor. F44 390 tags, unverified 2 (TY2025 limitation, printed as gaps).",
+ "_next_action": "artifact-builder fix batch; QA SIR r3 (final round)."
+}

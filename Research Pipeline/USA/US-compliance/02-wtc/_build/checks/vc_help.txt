@@ -1,0 +1,21 @@
+Validate Mercans pipeline handoff contracts against their versioned schemas.
+
+    python validate_contract.py <schema-name> <instance.json>
+    python validate_contract.py --all <BASE>        # every contract in a country dossier
+    python validate_contract.py --examples          # self-test against examples/
+    python validate_contract.py --list              # known schema names
+
+<schema-name> is 'build-manifest', 'facts', 'research-request', 'review'
+(a bare name, a file name, or a path all work).
+
+Exit codes:  0 = all valid   |   1 = at least one instance invalid   |   2 = usage/IO error
+
+Uses the `jsonschema` package when it is installed (full draft 2020-12 semantics).
+When it is not, it falls back to a built-in validator covering the subset of
+draft 2020-12 these four schemas actually use: type, required, properties,
+patternProperties, additionalProperties, items, contains, enum, const, pattern,
+minLength/maxLength, minimum/maximum, minItems/maxItems, minProperties,
+uniqueItems, format(date), $ref into $defs, and the allOf/anyOf/oneOf/not/if-then
+combinators that carry the pipeline's hard rules (tier-B number ban, mandate
+gate, blocker-forces-FAIL). It degrades in coverage, never in exit code.
+

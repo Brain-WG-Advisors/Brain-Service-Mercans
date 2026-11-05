@@ -106,7 +106,7 @@
   },
   {
    "key": "dd.multi.sui_state",
-   "value": "single UI state per employee per period under the localization test; also keys WA family and medical leave (RCW Title 50A)",
+   "value": "single UI state per employee per period under the localization test; also applies to WA family and medical leave (RCW Title 50A)",
    "effective_from": "2026-01-01",
    "_effective_from_basis": "register row carries no effective_from or publication_date; build-year start used as in-force-on date (row read in force 2026)",
    "effective_to": "2027-06-30",
@@ -118,7 +118,10 @@
    "confidence": "high",
    "_consumers": "rspec.*.ui_qtr; pfml",
    "_value_before_triage_a": "single UI state per employee per period under the localization test; also keys WA PFML",
-   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage A): \"PFML\" replaced by the statute wording. US-MULTIS5-024 RCW 50A.05.010 (Title 50A, family and medical leave): definition of employment by localization; the held copy says \"family leave\" / \"medical leave\" and never uses the acronym \"PFML\"."
+   "_figure_located": "2026-11-04: US-MULTIS5-017 (DOL UIPL 20-04 reminder): 'localization of work guidance for reporting wages determines the state where individuals may be eligible for unemployment insurance (UI) benefits'; 'cover under one state law all of the service performed by an individual for one employer'",
+   "_also_register_ids": [
+    "US-MULTIS5-017"
+   ]
   },
   {
    "key": "dd.multi.residence_state",
@@ -145,9 +148,15 @@
    "verification_method": "direct artifact inspection",
    "authority": "US Congress / GPO",
    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49-subtitleVII-partA-subparti-chap401-sec40116.htm",
-   "note": "air 40116(f); rail 11502 (US-MULTIS5-002); seamen 11108 (US-MULTIS5-004)",
+   "note": "motor carrier 14503 (US-MULTIS5-001); rail 11502 (US-MULTIS5-002); air 40116(f) (primary row); seamen 11108 (US-MULTIS5-004)",
    "confidence": "high",
-   "_consumers": "calc:SIT sourcing"
+   "_consumers": "calc:SIT sourcing",
+   "_also_register_ids": [
+    "US-MULTIS5-001",
+    "US-MULTIS5-002",
+    "US-MULTIS5-004"
+   ],
+   "_figure_located": "2026-11-03 source hunter (DD r1 finding 7): [motor carrier] US-MULTIS5-001 USC_49-14503 copy: \"No part of the compensation paid by a motor carrier providing transportation subject to jurisdiction under subchapter I of chapter 135 or by a motor private carrier to an employee who performs regularly assigned duties in 2 or more States\" || [rail] US-MULTIS5-002 USC_49-11502 copy: \"No part of the compensation paid by a rail carrier providing transportation subject to the jurisdiction of the Board under this part to an employee who performs regularly assigned duties as such an employee on a rail\" || [seaman] US-MULTIS5-004 USC_46-11108 copy: \"Wages due or accruing to a master or seaman on a vessel in the foreign, coastwise, intercoastal, interstate, or noncontiguous trade\" || [air] US-MULTIS5-003 (primary) 49 U.S.C. 40116(f), air carrier employee"
   },
   {
    "key": "dd.multi.military_spouse",
@@ -205,20 +214,22 @@
   {
    "key": "dd.oh.school_district_code",
    "value": "four-digit Ohio school district code of residence (9999 full-year nonresident); W-2 and SD 101/141",
-   "effective_from": "2025-01-01",
-   "effective_to": "2025-12-31",
-   "register_id": "US-OHS5-019",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-OHB5-401",
    "tier": "A.2",
    "verification_method": "quoted from authority page",
    "authority": "Ohio Department of Taxation",
-   "url": "https://dam.assets.ohio.gov/image/upload/tax.ohio.gov/ohio_individual/2025_All_School_Districts.pdf",
-   "note": "2026 delta in US-OHS5-018",
+   "url": "https://tax.ohio.gov/business/employer-withholding",
+   "note": "2026 list: US-OHB5-001 (full TY2026 list, four-digit School District Number) with delta US-OHS5-018; the 9999 full-year-nonresident entry rests on the 2025 booklet list US-OHS5-019 (effective_to 2025-12-31); no 2026 document restating it was found, so it is carried at its 2025 effective date",
    "confidence": "high",
    "_consumers": "rspec.oh.w2_state; rspec.oh.school_district",
    "_also_register_ids": [
-    "US-OHB5-401"
+    "US-OHB5-001",
+    "US-OHS5-018",
+    "US-OHS5-019"
    ],
-   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [W-2] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Total tax withheld must equal W-2s/1099s submitted\" || [SD 101] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Ohio SD 101 Return for School District Income Tax Withheld\" || [141] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Ohio SD 141 Annual Reconciliation of School District Income Tax Withheld\" || [four-digit] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"School districts and the corresponding four-digit codes can be verified using The Finder\" || [9999] US-OHS5-019 2025_All_School_Districts_dam-ohio_2026-11-02.pdf p1: \"Full-year nonresidents of Ohio should enter 9999\""
+   "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [W-2] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Total tax withheld must equal W-2s/1099s submitted\" || [SD 101] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Ohio SD 101 Return for School District Income Tax Withheld\" || [141] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"Ohio SD 141 Annual Reconciliation of School District Income Tax Withheld\" || [four-digit] US-OHB5-401 OH_Tax_employer-withholding_2026-11-02.txt p1: \"School districts and the corresponding four-digit codes can be verified using The Finder\" || [9999] US-OHS5-019 2025_All_School_Districts_dam-ohio_2026-11-02.pdf p1: \"Full-year nonresidents of Ohio should enter 9999\" || [2026 list] US-OHB5-001 OH_ODT_sdit-list-effective-2026-01 p.2: \"School Districts With an Income Tax as of January 2026 ... School District Number ... Tax Year 2026 Rate\"; US-OHS5-018 p.1: \"When creating W-2s for your employees, identify the school district by its four-digit code.\""
   },
   {
    "key": "dd.pa.psd_code",
@@ -268,7 +279,7 @@
   },
   {
    "key": "dd.ky.locality",
-   "value": "Kentucky locality of work (Louisville Metro, Lexington-Fayette) and residence (school board component)",
+   "value": "Kentucky locality of work (Louisville Metro) and residence (school board component)",
    "effective_from": "2026-01-01",
    "effective_to": null,
    "register_id": "US-KYP9W-001",
@@ -277,7 +288,8 @@
    "authority": "Louisville Metro Revenue Commission",
    "url": "https://louisvilleky.gov/government/revenue-commission/w-1-tax-form-instructions",
    "confidence": "high",
-   "_consumers": "rspec.ky.local"
+   "_consumers": "rspec.ky.local",
+   "note": "Louisville Metro per US-KYP9W-001 (W-1 instructions: wages earned in Louisville Metro; School Boards tax on employees who live in Louisville Metro). Lexington-Fayette is carried by dd.ky.locality.lexington (US-KYS5-024)."
   },
   {
    "key": "dd.or.metro_multnomah",
@@ -329,7 +341,11 @@
    "authority": "Arkansas DFA Withholding Tax Section",
    "url": "https://www.dfa.arkansas.gov/wp-content/uploads/AR4EC2026.pdf",
    "confidence": "high",
-   "_consumers": "calc:AR SIT"
+   "_consumers": "calc:AR SIT",
+   "_also_register_ids": [
+    "US-ARP51-002"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (precheck-next): form 'AR4ECSP' found in US-ARP51-002 00-official-sources/pdfs/AR/AR-Withholding-Tax-Instructions-for-Employers_2026-10-29.pdf p7: \"nual Withholding Reconciliation Certificate (Form AR4ECSP) is used to exempt AR941PT. withholding from employee's wages. Casino Gambling. The curre\""
   },
   {
    "key": "dd.state.w4.ca",
@@ -421,7 +437,11 @@
    "authority": "Hawaii Department of Taxation",
    "url": "https://files.hawaii.gov/tax/forms/current/hw4_i.pdf",
    "confidence": "high",
-   "_consumers": "calc:HI SIT"
+   "_consumers": "calc:HI SIT",
+   "_also_register_ids": [
+    "US-HIP51-001"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (precheck-next): form 'HW-6' found in US-HIP51-001 00-official-sources/pdfs/HI/HI-booklet-A-2025_wayback-20260416120033.pdf p2: \"ning Nonresidence in the State of 16 Hawaii, Form HW-6..........................................................................................\" ; form 'HW-7' found in US-HIP51-001 00-official-sources/pdfs/HI/HI-booklet-A-2025_wayback-20260416120033.pdf p12: \"rvices performed in the State, you must file Form HW-7, Exemption From Withholding on Nonresident Employee's Wages, along with the original Form\""
   },
   {
    "key": "dd.state.w4.ia",
@@ -580,7 +600,11 @@
    "authority": "ND Office of State Tax Commissioner",
    "url": "https://www.tax.nd.gov/sites/www/files/documents/forms/individual/2026-iit/2026-income-tax-withholding-rates-booklet.pdf",
    "confidence": "high",
-   "_consumers": "calc:ND SIT"
+   "_consumers": "calc:ND SIT",
+   "_also_register_ids": [
+    "US-NDS5-002"
+   ],
+   "_figure_located": "2026-11-03 source hunter (DD r1 finding 6): US-NDS5-002 ND-withholding-info-returns-guideline_2026-11-02.pdf: \"provided the employee completes and gives a Form NDW-R, Reciprocity Exemption From Withholding For Qualifying Minnesota and Montana Residents Working in North Dakota, to the employer\""
   },
   {
    "key": "dd.state.w4.nj",
@@ -598,29 +622,37 @@
   },
   {
    "key": "dd.state.w4.ny",
-   "value": "IT-2104 (IT-2104.1 nonresident allocation)",
+   "value": "IT-2104 (Employee's Withholding Allowance Certificate); IT-2104.1 (Certificate of Nonresidence and Allocation of Withholding Tax)",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-NY-001",
+   "register_id": "US-NY-013",
    "tier": "A.2",
-   "verification_method": "direct artifact inspection",
+   "verification_method": "quoted from authority page",
    "authority": "NY Department of Taxation and Finance",
-   "url": "https://www.tax.ny.gov/pdf/publications/withholding/nys50_t_nys.pdf",
+   "url": "https://www.tax.ny.gov/bus/wt/whtax_require.htm",
    "confidence": "high",
-   "_consumers": "calc:NY SIT"
+   "_consumers": "calc:NY SIT",
+   "note": "IT-2104.1 quoted from US-NY-013 (nonresidents certify via Form IT-2104.1); IT-2104 quoted from US-NY-001 (NYS-50-T-NYS, 1/26).",
+   "_also_register_ids": [
+    "US-NY-001"
+   ]
   },
   {
    "key": "dd.state.w4.oh",
    "value": "IT 4 (zero exemptions if absent)",
-   "effective_from": "2026-08-01",
+   "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-OH-002",
+   "register_id": "US-OHP51-002",
    "tier": "A.2",
    "verification_method": "quoted from authority page",
    "authority": "Ohio Department of Taxation",
-   "url": "https://tax.ohio.gov/business/employer-withholding",
+   "url": "https://dam.assets.ohio.gov/image/upload/tax.ohio.gov/employer_withholding/2025-2026%20NYP%20Updates/2026_OH_Employer_School_District_Withholding_Tax_Filing_Guidelines.pdf",
    "confidence": "high",
-   "_consumers": "calc:OH SIT"
+   "_consumers": "calc:OH SIT",
+   "_also_register_ids": [
+    "US-OH-002"
+   ],
+   "_figure_located": "2026-11-03 source hunter (DD r1 finding 14): US-OHP51-002 (Rev. 11/25, now active) 2026_OH_Employer_SD_Withholding_Filing_Guidelines p.1: \"the employer must withhold tax based on the employee claiming zero exemptions\" || \"current IT 4 revised 12/2020\". US-OH-002 (FAQ page) has no local copy."
   },
   {
    "key": "dd.state.w4.ok",
@@ -685,7 +717,11 @@
    "authority": "Utah State Tax Commission via adminrules.utah.gov",
    "url": "https://adminrules.utah.gov/public/rule/R865-9I/Current%20Rules",
    "confidence": "high",
-   "_consumers": "calc:UT SIT"
+   "_consumers": "calc:UT SIT",
+   "_also_register_ids": [
+    "US-UTPIT-002"
+   ],
+   "_figure_located": "2026-11-03 agent 2 (precheck-next): form 'W-4' found in US-UTPIT-002 00-official-sources/pdfs/UT/pub-14_wayback-20260713004805.html p1: \"fied employee must give the employer federal form W-4, Employee’s Withholding Certificate and write “Utah Only - Exempt, Interstate Transportat\""
   },
   {
    "key": "dd.state.w4.va",
@@ -824,7 +860,11 @@
    "url": "https://www.cga.ct.gov/current/pub/chap_567.htm",
    "note": "no positions in 2022 file spec",
    "confidence": "high",
-   "_consumers": "rspec.ct.ui_qtr"
+   "_consumers": "rspec.ct.ui_qtr",
+   "_figure_located": "2026-11-04 source hunter: re-read on saved copy of US-CTS5-018, US-CTS5-016",
+   "_also_register_ids": [
+    "US-CTS5-016"
+   ]
   },
   {
    "key": "dd.mn.ui.paid_hours",
@@ -1051,20 +1091,24 @@
   },
   {
    "key": "dd.ms.new_hire.extra",
-   "value": "DOB, gender, salary, pay frequency, medical-insurance eligibility",
+   "value": "Date of birth, gender, salary, payment frequency and medical insurance eligibility (required employee fields of the Mississippi new hire report beyond name, address, SSN and date of hire)",
    "effective_from": "1998-10-01",
    "effective_to": null,
-   "register_id": "US-MSS5-006",
+   "register_id": "US-MSS5-007",
    "tier": "A.3",
    "verification_method": "quoted from authority page",
    "authority": "Mississippi Department of Human Services (State Directory of New Hires)",
-   "url": "https://www.ms-newhire.com/law",
-   "confidence": "medium",
-   "_consumers": "rspec.ms.new_hire"
+   "url": "https://ms-newhire.com/reporting_fundamentals",
+   "confidence": "high",
+   "_consumers": "rspec.ms.new_hire",
+   "note": "Fields quoted from US-MSS5-007 (What do I have to report): Employee Date of Birth, Gender, Salary, Payment Frequency, Medical Insurance Eligibility. The 1998-10-01 start date and the 15-day period rest on US-MSS5-006.",
+   "_also_register_ids": [
+    "US-MSS5-006"
+   ]
   },
   {
    "key": "dd.ga.new_hire.extra",
-   "value": "DOB, medical-insurance availability, state of hire",
+   "value": "Employee's Date of Birth, Employee's Medical Insurance availability, Employee's State of Hire",
    "effective_from": "1998-10-01",
    "effective_to": null,
    "register_id": "US-GAS5-012",
@@ -1073,7 +1117,11 @@
    "authority": "Georgia Department of Human Services, Georgia State Directory of New Hires",
    "url": "https://newhire-reporting.com/GA-Newhire/faq.aspx",
    "confidence": "high",
-   "_consumers": "rspec.ga.new_hire"
+   "_consumers": "rspec.ga.new_hire",
+   "_precheck_unmatched": [
+    "word:DOB"
+   ],
+   "_figure_located": "2026-11-04 source hunter: GA new-hire FAQ lists 'Employee's Date of Birth Employee's Start Date Employee's Medical Insurance availability Employee's State of Hire' (US-GAS5-012)"
   },
   {
    "key": "dd.la.new_hire.occupation",
@@ -1091,7 +1139,7 @@
   },
   {
    "key": "dd.ia.new_hire.health",
-   "value": "dependent health coverage available and qualifying date; IWO address",
+   "value": "whether the employer has employee dependent health care coverage available and the appropriate date on which the employee may qualify for the coverage; the address to which income withholding orders or the notices of orders and garnishments should be sent",
    "effective_from": "1998-07-01",
    "effective_to": null,
    "register_id": "US-IAS5-012",
@@ -1100,7 +1148,11 @@
    "authority": "Iowa Legislature",
    "url": "https://www.legis.iowa.gov/docs/code/252G.3.pdf",
    "confidence": "high",
-   "_consumers": "rspec.ia.new_hire"
+   "_consumers": "rspec.ia.new_hire",
+   "_precheck_unmatched": [
+    "word:IWO"
+   ],
+   "_figure_located": "2026-11-04 source hunter: Iowa Code 252G.3(2)(c)-(d) (US-IAS5-012)"
   },
   {
    "key": "dd.state.new_hire.dob",
@@ -1115,7 +1167,19 @@
    "url": "https://www.njcsesp.com/reporting_fundamentals",
    "note": "per-state rows in RSPEC facts",
    "confidence": "high",
-   "_consumers": "rspec.*.new_hire"
+   "_consumers": "rspec.*.new_hire",
+   "_also_register_ids": [
+    "US-GAS5-012",
+    "US-IAS5-012",
+    "US-MES5-016",
+    "US-MSS5-007",
+    "US-OHS5-014",
+    "US-ORS5-016",
+    "US-WAS5-018",
+    "US-WIS5-013",
+    "US-WVS5-016"
+   ],
+   "_figure_located": "2026-11-04: 'date of birth' found in the saved copy of each State's new-hire source: GA FAQ, Iowa Code 252G.3, 19-A MRSA 2154, MS SDNH reporting fundamentals, NJ CSESP, ORC 3121.892, Oregon DOJ new-hire form, RCW 26.23, WI UCB-201 handbook, WV employer handbook; no State without a copy"
   },
   {
    "key": "dd.state.new_hire.rehire_gap_days",
@@ -1314,7 +1378,10 @@
    "authority": "Arizona Department of Revenue",
    "url": "https://azdor.gov/sites/default/files/document/FORMS_WITHHOLDING_2026_A-4i.pdf",
    "confidence": "high",
-   "_consumers": "calc:AZ SIT"
+   "_consumers": "calc:AZ SIT",
+   "_precheck_unmatched": [
+    "num:2026"
+   ]
   },
   {
    "key": "dd.state.w4.la",
@@ -1370,16 +1437,20 @@
   },
   {
    "key": "dd.state.w4.mt",
-   "value": "MW-4 (exemption claims sent to DOR via TAP)",
+   "value": "MW-4 (employer submits exemption-claim forms on TAP)",
    "effective_from": "2026-01-01",
    "effective_to": null,
-   "register_id": "US-MTP51-002",
+   "register_id": "US-MTS5-005",
    "tier": "A.2",
    "verification_method": "quoted from authority page",
    "authority": "Montana Department of Revenue",
-   "url": "https://revenue.mt.gov/news/recent-news/2026-withholding-updates",
+   "url": "https://revenuefiles.mt.gov/files/Forms/Montana_Employer_and_Information_Agent_Guide_with_Tax_Tables.pdf",
    "confidence": "high",
-   "_consumers": "calc:MT SIT"
+   "_consumers": "calc:MT SIT",
+   "_also_register_ids": [
+    "US-MTP51-002"
+   ],
+   "_figure_located": "2026-11-03 source hunter (DD r1 finding 8): US-MTS5-005 Employer-Agent-Guide-V4-Nov2025_wayback-2026.pdf p.2: \"Employers with employees claiming an exemption from Montana wage withholding must submit the employee's Form MW-4 by the last day of the payroll period of when the form was submitted to the employer. The exemption must be renewed annually by January 31. The Form MW-4 must be filed on TAP; this requires an active TAP login.\" || p.1: \"Employee's Withholding Allowance and Exemption Certificate (Form MW-4)\"; \"TransAction Portal (TAP)\". Row US-MTP51-002 names Form MW-4 only; it does not state the TAP submission rule."
   },
   {
    "key": "dd.state.w4.ne",
@@ -1396,7 +1467,7 @@
   },
   {
    "key": "dd.state.w4.nm",
-   "value": "federal W-4 marked for NM (optional)",
+   "value": "No New Mexico state W-4: the employee completes the federal W-4 marked \"For New Mexico State Withholding Only\"; this duplicate W-4 is not mandatory (\"a convenience for employer and employee\")",
    "effective_from": "2026-01-01",
    "effective_to": null,
    "register_id": "US-NMP52-001",
@@ -1405,7 +1476,8 @@
    "authority": "New Mexico Taxation and Revenue Department",
    "url": "https://realfile.tax.newmexico.gov/FYI-104.pdf",
    "confidence": "high",
-   "_consumers": "calc:NM SIT"
+   "_consumers": "calc:NM SIT",
+   "note": "Quoted from FYI-104 (US-NMP52-001): \"New Mexico does not have a state equivalent of the Federal Form W-4 ... This duplicate W-4 is not mandatory. It is a convenience for employer and employee.\""
   },
   {
    "key": "dd.state.w4.wi",
@@ -1446,7 +1518,10 @@
    "url": "https://thefinder.tax.ohio.gov/api/file-downloads/content?target=%2Ffinder%2Fapi%2Fv1%2Ftax-rates%2Fdownloads%2FMuni%2FOHMuniRateTable.csv",
    "confidence": "high",
    "_figure_located": "2026-11-03 agent 2 (RSPEC pre-QA-r3 triage B, hand-read): [5-digit] inspected directly: US-OHB5-002 OH_ODT_Finder_OHMuniRateTable_2026-11-02.csv (no header row) column 3 values are 5 characters, e.g. \"20040101,99991231,00142,ABERDEEN,.01000\" and \"20180101,99991231,01000,AKRON,.02500\"",
-   "_value_before_triage_b": "Ohio municipality of work carried as the 5-digit municipal FIPS used by OHMuniRateTable.csv; rate resolved by FIPS and pay date against begin/end date"
+   "_value_before_triage_b": "Ohio municipality of work carried as the 5-digit municipal FIPS used by OHMuniRateTable.csv; rate resolved by FIPS and pay date against begin/end date",
+   "_precheck_unmatched": [
+    "num:5"
+   ]
   },
   {
    "key": "dd.ct.pfml.employee_level_data",
@@ -1505,6 +1580,107 @@
    "confidence": "high",
    "note": "Employer side IRC 3111(c) (US-FEDR2-004). The list of agreements and the certificate-of-coverage procedure are SSA documents not held locally (unresolved fed.fica.totalization.agreements_in_force).",
    "_consumers": "calc:FICA employee and employer"
+  },
+  {
+   "key": "dd.ky.locality.lexington",
+   "value": "Lexington-Fayette Urban County Government occupational license fee of 2.25% on an individual's compensation and a business's net profits",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-KYS5-024",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Lexington-Fayette Urban County Government, Division of Revenue",
+   "url": "https://www.lexingtonky.gov/working/business-licensing-taxes/occupational-license-fee-rates-current-forms",
+   "confidence": "high",
+   "_consumers": "DD"
+  },
+  {
+   "key": "dd.ky.locality.lexington_name",
+   "value": "Lexington-Fayette Urban County Government occupational license fee",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-KYS5-024",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Lexington-Fayette Urban County Government, Division of Revenue",
+   "url": "https://www.lexingtonky.gov/working/business-licensing-taxes/occupational-license-fee-rates-current-forms",
+   "confidence": "high",
+   "_consumers": "DD",
+   "_figure_located": "2026-11-03 source hunter (DD r2): US-KYS5-024 copy: \"The Lexington-Fayette Urban County Government assesses an occupational license fee\"",
+   "note": "locality name only, no rate; the rate stays in dd.ky.locality.lexington (WTC)"
+  },
+  {
+   "key": "dd.fed.depositor_status.codes",
+   "value": "Form 941 deposit schedule names: monthly schedule depositor; semiweekly schedule depositor (from the lookback period: $50,000 or less = monthly; more than $50,000 = semiweekly)",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+   "confidence": "high",
+   "_consumers": "DD",
+   "note": "Quoted from Publication 15 (2026): \"you're a monthly schedule depositor; if you reported more than $50,000, you're a semiweekly schedule depositor\"."
+  },
+  {
+   "key": "dd.md.ui.adjustment_reason.codes",
+   "value": "Maryland UI wage report adjustment codes (XML/EFW2/ICESA two digits 00-10; CSV without leading zero): 00 Original Submission; 01 Employment Adjusted; 02 Employment and Wages adjusted because the workers performed services for a different business; 03 Employment and Wages adjusted because they were not taxable; 04 Employment and Wages adjusted because they were reported to the wrong state; 05 Employment and Wages adjusted for a non-subject employer; 06 Employment and Wages adjusted to correct computer system, data entry or accounting errors; 07 Reversal of Previous Adjustment; 08 Staff Amended (staff facing, selected only if a staff member updates); 09 Wages adjusted because worker(s) were hired/terminated; 10 Other (adjustment reason description required)",
+   "effective_from": "2026-04-20",
+   "effective_to": null,
+   "register_id": "US-MDS5-017",
+   "tier": "A.2",
+   "verification_method": "direct artifact inspection",
+   "authority": "Maryland Department of Labor, Division of Unemployment Insurance",
+   "url": "https://labor.maryland.gov/uim/employer/uimempfileformat.pdf",
+   "confidence": "high",
+   "_consumers": "DD",
+   "note": "Table 1.1.3 of the Employer Wage File Interface File Specifications; row 08/09 alignment checked on the rendered page."
+  },
+  {
+   "key": "dd.in.county_code.list",
+   "value": "Indiana county code: two-digit code 01 (Adams) to 92 (Whitley), 92 counties, as printed in the County Name / County Code / County Tax Rate table of Departmental Notice #1",
+   "effective_from": "2026-10-01",
+   "effective_to": null,
+   "register_id": "US-INS5-007",
+   "tier": "A.2",
+   "verification_method": "direct artifact inspection",
+   "authority": "Indiana Department of Revenue",
+   "url": "https://www.in.gov/dor/files/dn01.pdf",
+   "confidence": "high",
+   "_consumers": "DD",
+   "note": "Edition R47 / 10-26 effective 2026-10-01; 92 codes parsed, 01-92 contiguous.",
+   "_local_table": "00-official-sources/code-tables/US-IN-county.json"
+  },
+  {
+   "key": "dd.md.county_code.list",
+   "value": "Maryland county code: numeric 01 (Allegany) to 24 (Worcester), 24 jurisdictions incl. Baltimore City 04, on the 2026 local income tax withholding attachment; the earnings statement carries a two-letter alpha county code (AA, AL, BA, BC, CE, CH, CL, CR, CV, DR, FR, GR, HF, HW, KT, MD unknown, MG, PG, QA, SM, SO, TA, WA, WI, WO)",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-MDS5-003",
+   "tier": "A.2",
+   "verification_method": "direct artifact inspection",
+   "authority": "Comptroller of Maryland, Central Payroll Bureau",
+   "url": "https://www.marylandcomptroller.gov/content/dam/mdcomp/md/state-payroll/memos/2026/2026-maryland-state-and-local-withholding-information.pdf",
+   "confidence": "medium",
+   "_consumers": "DD",
+   "note": "Attachments 1 and 2 of the 2026 memo. The memo prints 'Sait Mary's' for SM.",
+   "_local_table": "00-official-sources/code-tables/US-MD-county.json"
+  },
+  {
+   "key": "dd.oh.municipal.code_list",
+   "value": "Ohio municipal code = Municipal FIPS Code, 5 digits, column 3 of OHMuniRateTable.csv; 678 codes with a row in force on 2026-11-01 (e.g. 18000 COLUMBUS, 16000 CLEVELAND, 15000 CINCINNATI, 21000 DAYTON)",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-OHB5-403",
+   "tier": "A.2",
+   "verification_method": "direct artifact inspection",
+   "authority": "Ohio Department of Taxation (The Finder)",
+   "url": "https://thefinder.tax.ohio.gov/help/downloads?taxtype=municipality",
+   "confidence": "high",
+   "_consumers": "DD",
+   "note": "Layout (element 3 Municipal FIPS Code) from US-OHB5-403; 1,083 rows and 678 in-force codes counted by script from the CSV of US-OHB5-002 (md5 0e9e60e38a9cbb66fe1bbc007008b6f6).",
+   "_local_table": "00-official-sources/code-tables/US-OH-municipal-fips.json"
   }
  ],
  "unresolved": [
@@ -1537,15 +1713,6 @@
    "what_would_close_it": "the DCED PSD code list (Excel/PDF) or an Address Search Application report showing the PSD code layout"
   },
   {
-   "key": "dd.oh.municipal_rate_table.code_identity",
-   "why": "'FIPS' was removed from dd.oh.municipal_rate_table and rspec.oh.municipal.rate_table: the held OHMuniRateTable.csv has no header row and no held ODT copy names the column-3 code as the FIPS place code.",
-   "attempted": [
-    "US-OHB5-002 CSV (inspected directly)",
-    "all US-OH* local copies searched for FIPS (no hit)"
-   ],
-   "what_would_close_it": "the ODT Finder bulk-download file-layout page (tax.ohio.gov/finder) naming the column-3 code"
-  },
-  {
    "key": "dd.fed.nra.visa_class.examples",
    "why": "H-1B, L-1 and Q-2 were removed from the example list of dd.fed.nra.visa_class: no held copy (26 USC 3121, 26 USC 3306, Pub. 515 2026) names them; the FICA/FUTA exemptions turn only on F, J, M, Q status.",
    "attempted": [
@@ -1554,6 +1721,83 @@
     "US-FEDS5-016 IRS Pub. 515 (2026) p53-55"
    ],
    "what_would_close_it": "IRS Pub. 519 (U.S. Tax Guide for Aliens), section on nonimmigrant visa classes, saved locally and registered, if the DD list should name H-1B/L-1/Q-2 as examples"
+  },
+  {
+   "key": "precheck.next.text_elements_unmatched",
+   "why": "Pre-build text check 2026-11-03: 7 fact values carry text elements (acronym expansions, our own wording, derived numbers, worked-example arithmetic, or rows whose copy is blocked) that do not appear in the local copy of the cited register row(s); each is listed in the fact _precheck_unmatched",
+   "attempted": [
+    "selfcheck over local copies of register_id + _also_register_ids",
+    "same-jurisdiction rows of the register",
+    "re-download of 41 copy-less rows into 00-official-sources/precheck-copies (15 blocked: 403/429/Cloudflare/JS)"
+   ],
+   "what_would_close_it": "Builder treats listed elements as our gloss (not source-quoted); or agent 2 rewrites the value to the copy wording / adds the row carrying it; blocked rows need a browser-read copy",
+   "blocking": false
+  },
+  {
+   "key": "dd.state.w4.line_structure",
+   "why": "Per-State employee withholding certificate field lists and limits were not extracted: the register holds form identifiers and some copies (GA G-4, IA 44-019a, NM FYI-104, NY NYS-50-T-NYS) but no per-State field table; about 40 forms, none read line by line in this round",
+   "attempted": [
+    "local copies of US-GAS5-010, US-IAP52-001, US-NMP52-001, US-NY-001 checked for form identifiers only"
+   ],
+   "what_would_close_it": "each State revenue department's current withholding certificate (2026 edition) read field by field; independent per-State lookups that can be fanned out across agents",
+   "blocking": false
+  },
+  {
+   "key": "dd.oh.school_district.codes",
+   "why": "Official 2026 list is held (US-OHB5-001, \"School Districts With an Income Tax as of January 2026\") but it is a two-column PDF: number-to-name pairing is not reliable by text extraction (wrapped names shift the pairing); the 2025 list US-OHS5-019 has the same defect",
+   "attempted": [
+    "pymupdf word extraction of US-OHS5-019",
+    "pdftotext -layout"
+   ],
+   "what_would_close_it": "Ohio Department of Taxation The Finder school district file download, or a manual transcription of the IT 1040 school district list (2026 edition)",
+   "blocking": false
+  },
+  {
+   "key": "dd.pa.psd_code.values",
+   "why": "PSD code values are not in any held copy (see dd.pa.psd_code.format)",
+   "attempted": [
+    "US-PAS5-017, US-PAS5-018 local copies"
+   ],
+   "what_would_close_it": "the DCED PSD code list or an Address Search Application report",
+   "blocking": false
+  },
+  {
+   "key": "dd.soc_naics.code_lists",
+   "why": "SOC and NAICS are federal statistical standards (BLS/OMB, Census/OMB), about 870 and 1,000 codes; no copy held and no register row; the NAICS 2027 revision is announced for publication in 2026 (search summary only, not fetched), so the edition to carry is not confirmed",
+   "attempted": [
+    "WebSearch census.gov (summary only, not used as a source)"
+   ],
+   "what_would_close_it": "census.gov/naics and bls.gov/soc official code files, with the edition that each State wage report names",
+   "blocking": false
+  },
+  {
+   "key": "dd.ak.occupational_geographic.codes",
+   "why": "Alaska CSV guideline (US-AKS5-014) names a 6- or 8-digit occupational code and a 2-digit geographic code but points to a coding manual (labor.state.ak.us/estax/forms/toc_forms.htm) that is not held",
+   "attempted": [
+    "US-AKS5-014 local copy read"
+   ],
+   "what_would_close_it": "the Alaska ES Tax coding manual PDF named in the CSV guidelines",
+   "blocking": false
+  },
+  {
+   "key": "dd.ma.ui.adjustment_reason.codes",
+   "why": "The Massachusetts DUA wage file specification (mass.gov doc emt-dua-wage-file-upload-specifications-v20) returned HTTP 403 and the held how-to page (US-MAS5-018) states only \"Adjustment reason code, if needed\"; a search summary listed codes but a summary is not a source (G-NUMBER) and is not recorded",
+   "attempted": [
+    "https://www.mass.gov/doc/emt-dua-wage-file-upload-specifications-v20/download (403, WebFetch and HTTP client, 2026-11-03)",
+    "US-MAS5-018 local copy"
+   ],
+   "what_would_close_it": "the DUA EMT wage file upload specifications PDF saved from a browser session, then registered A.2",
+   "blocking": false
+  },
+  {
+   "key": "dd.fed.special_population.category",
+   "why": "Owner scope statement (US-OWN-005, tier owner) cannot be a fact: the facts schema tier enum is A.1/A.2/A.3/B and an owner decision is not a legal source; promoting it needs a legal basis per category",
+   "attempted": [
+    "facts.schema.json tier enum",
+    "_owner_scope of the DD facts"
+   ],
+   "what_would_close_it": "keep in _owner_scope, or bind each category to its own A.1/A.2 row in a separate fact per category (26 USC 3121 statutory employee / agricultural / clergy / household / abroad; Pub. 519 nonresident alien)",
+   "blocking": false
   }
  ],
  "_synthesis_d": "Synthesis D 2026-11-02: browser-pass P1/P2 rows (S5B-P1/P2) and EFW2 TY2026 merged; see _research/synthesis-D/SYNTHESIS-D.md"

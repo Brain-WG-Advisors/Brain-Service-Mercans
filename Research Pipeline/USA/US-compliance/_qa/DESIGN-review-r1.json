@@ -1,0 +1,431 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DESIGN",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "09-design/US_Regulation_Design_v1.0.md",
+ "_reviewed_md5": "70deef338abb3f00e2918fe10dcd0a7f",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840011 / 9840021!L182, L221",
+   "problem": "58501 = SUM(earnings with Subject to Tax = Yes) includes separately identified supplemental wages (bonus 62200-62229, commission US-042, severance 62180-62182). 9840021 annualises 58501 through the regular schedule while 9840022 withholds the flat rate on the same supplemental wages: double withholding. 'supplemental_wages' and 'supplemental_ytd' are used in L274-275, but no account writes them.",
+   "expected": "9840011 writes a separate account (e.g. 58522 'Supplemental wages separately identified', lines with 58413 = 1) and a YTD accumulator. 9840021 reads 58501 minus 58522 (regular wages only); 9840022/23 read 58522. Parts 2 and 3 updated to match.",
+   "register_id": "US-FEDQ1-002",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fit.supplemental.aggregate_method",
+   "_id": "DESIGN-QA1-01"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840022 / 9840023!L274-L275",
+   "problem": "Above USD 1,000,000 of supplemental wages the design withholds 22% on all supplemental wages (58508) AND 37% on the excess (58509), i.e. 59% on the excess. 58509 = 37% x MAX(0; supplemental_ytd - 1,000,000) is not incremental, so the cumulative excess is withheld again at every later payment.",
+   "expected": "58509 = 37% x MAX(0; supp_ytd_after - MAX(1,000,000; supp_ytd_before)), applied whatever 58414 and the Form W-4 say (exempt included). 58508 applies only to MIN(supplemental_wages; MAX(0; 1,000,000 - supp_ytd_before)).",
+   "register_id": "US-FEDS5-003",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fit.supplemental.mandatory_threshold",
+   "evidence": "p15.pdf local copy: 37% if supplemental wages paid during the calendar year exceed $1 million",
+   "_id": "DESIGN-QA1-02"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840022!L274",
+   "problem": "58508 has no gate on 58403 (exempt), 58406 (statutory employee) or 58409 (clergy), so income tax is withheld from the supplemental wages of populations for which the research says no FIT is withheld.",
+   "expected": "58508 = 0 when 58406 = 1 or 58409 = 1. When 58403 = 1 the optional flat rate is not available (no income tax withheld from regular wages), so the aggregate method gives 0. 58509 is gated by 58406/58409 only.",
+   "register_id": "US-FEDR3-005",
+   "action": "routed_to_builder",
+   "fact_key": "fed.statutory_employee.treatment",
+   "_id": "DESIGN-QA1-03"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 1 flag 58414; Part 6 item 3!L100, L702",
+   "problem": "Judgement on DESIGN-RQ-03: not acceptable as a limitation. With 58414 'Not configured', 58508 cannot be evaluated, so package 1.0 cannot withhold on any bonus, commission or severance payment. The research already gives a deterministic rule: the aggregate method is mandatory when no income tax was withheld from regular wages in the current or preceding year; otherwise the payer elects.",
+   "expected": "Declare 58414 FR-style as a legal-entity field '[DERIVED - new DD field required]' (FR precedent 52560). Default 1 = flat rate where income tax was withheld from regular wages in the current or preceding year; forced 2 = aggregate otherwise. Raise the DD change request into DD v1.0 before the package closes, not 1.1.",
+   "register_id": "US-FEDQ1-002",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fit.supplemental.aggregate_method",
+   "_id": "DESIGN-QA1-04"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840052; Part 6 item 4!L407, L411, L703",
+   "problem": "Judgement on DESIGN-RQ-04: not acceptable as a limitation. Without the assigned rate, 58518 can only use the new-employer rate, so SUI employer contributions are wrong for every experienced employer in all 51 jurisdictions (and absent for the 14 RQ-06 States).",
+   "expected": "Add a legal-entity x State x year rate input (e.g. 58424 'SUI assigned contribution rate' '[DERIVED - new DD field required]', FR precedent 52560/52561). Use the new-employer rate only as a fallback when the entity has no assigned rate. DD change request into DD v1.0 before the package closes.",
+   "register_id": "US-MULTIS5-017",
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-05"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 6 items 2 and 5; Part 0!L701, L704, L54",
+   "problem": "Judgement on DESIGN-RQ-02 and DESIGN-RQ-05: acceptable as named limitations of package 1.0, because the populations are narrow (employees first paid before 2020 with no 2020+ Form W-4; citizens abroad with a Form 673 statement). But the design does not say what the engine does with them: a pre-2020 W-4 employee is silently run on the 2020+ method with default fields (wrong withholding), and 58410 = 1 has no effect.",
+   "expected": "State the 1.0 behaviour in Part 0 and Part 6. RQ-05: withhold normally (over-withholding only, recoverable on the return). RQ-02: employee not supported in 1.0; an onboarding check routes them to manual handling. Raise the DD change request for 1.1 (W-4 revision year, allowance count, Form 673 indicator and date).",
+   "register_id": "US-FEDS5-002",
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-06"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840051!L332",
+   "problem": "Mode 58418 = 3 (reciprocity) returns 58517 = 0, so neither State withholds. Under reciprocity the work State stops withholding, but the employer withholds for the residence State (e.g. a PA resident working in NJ files NJ-165, and PA tax is withheld).",
+   "expected": "58418 = 3 -> state_wh(58416) on the residence-State row; 0 only for the work State.",
+   "register_id": "US-MULTI-011",
+   "action": "routed_to_builder",
+   "fact_key": "multi.reciprocity.nj.certificate",
+   "_id": "DESIGN-QA1-07"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840051; Part 2 58517!L333, L143",
+   "problem": "Mode 2 writes MAX(state_wh(work); state_wh(residence)) into one account. The amount cannot be split between the two State rows (US-074..US-115), and the residence-State credit rule is lost.",
+   "expected": "Two results: work-State tax to the work-State row; residence-State tax = MAX(0; residence tax - credit for the work-State tax per the residence annex) to the residence-State row.",
+   "register_id": "US-MULTI-011",
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-08"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840051; Part 3 order 9!L328, L165",
+   "problem": "State withholding reads 58501 (federal income-tax wages), but State wages differ by State: the Part 5 'State' column is Yes-No for the 401(k)/403(b)/457/SIMPLE and section 125 rows, and PA taxes elective deferrals. AL and OR deduct federal withholding (practice.al.fit_before_sit, practice.or.federal_cap), yet 9840051 does not read 58507-58509.",
+   "expected": "Add a State-wage accumulator built from the Part 5 State column for each State, and add 58507-58509 to the Reads of 9840051 in Part 3.",
+   "register_id": "US-ALS5-001",
+   "action": "routed_to_builder",
+   "fact_key": "practice.al.fit_before_sit",
+   "_id": "DESIGN-QA1-09"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4.4 jurisdiction register!L357-L391",
+   "problem": "The 'Flat rate' class carries only the rate, but several flat-rate States withhold after exemptions, a standard deduction or a zero band, or add a surtax: MS (0% band up to 10,000; exemptions 6,000/12,000), MA (4% surtax above 1,107,750), GA, IL, MI, NC, UT. A developer who implements rate x wages will over-withhold.",
+   "expected": "Rename the class 'Flat rate after allowances', give the exact annex section on each row (e.g. 'CCG annex MS, section MS.x') and add the MA surtax.",
+   "register_id": "US-MSS5-001",
+   "action": "routed_to_builder",
+   "fact_key": "ms.pit.rate.zero_band.ceiling",
+   "_id": "DESIGN-QA1-10"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4.4 jurisdiction register!L343, L399",
+   "problem": "Judgement: referencing the State and local tables from the CCG annexes instead of restating them is acceptable. But the rows only say 'Table or formula' and name no annex section, so the trace that template rule 3 requires is missing.",
+   "expected": "Every 'Table or formula' row carries the id of the annex section that holds the table or formula.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-11"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 0; Part 1; Part 4!L23-L42",
+   "problem": "Minimum wage is missing from the design. The facts carry dated minimum wages with mid-year changes (ak.minwage.hourly 13 -> 14 from 2026-07-01 [US-AKS5-002]; CA local rates from 2026-07-01), and the FR precedent carries a minimum-wage account (52572). No regulation or flag selects the rate by the date the hours were worked, and 58420 (payment date) must not be reused for this.",
+   "expected": "Add a minimum-wage check regulation that takes the rate by work State/locality and by the date the hours were worked, splitting the pay period at the change date. Otherwise, add an explicit Part 0/Part 6 scope statement backed by an owner decision.",
+   "register_id": "US-AKS5-002",
+   "action": "routed_to_builder",
+   "fact_key": "ak.minwage.hourly",
+   "_id": "DESIGN-QA1-12"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840053!L540",
+   "problem": "The MA PFML family/medical split is selected by 58420 (payment date), but DFML says 'The new contribution rate applies to wages earned on or after January 1' (local copy MA_DFML-PFML-contribution-rates_2026-11-02.html). Wages earned in December 2026 and paid in January 2027 get the 2027 split. Totals and shares are unchanged (0.46 / 0.42), but the family/medical allocation on the return is wrong.",
+   "expected": "A work-period flag (date earned) selects the MA PFML split. Check the same rule for the other programme rate changes on 2027-01-01 (CA SDI, NY PFL, NJ TDI/FLI, CO FAMLI, WA PFML).",
+   "register_id": "US-MAS5-012",
+   "action": "routed_to_builder",
+   "fact_key": "ma.pfml.family.rate",
+   "_id": "DESIGN-QA1-13"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840031/9840032/9840041; Part 0!L290-L319, L49-L55",
+   "problem": "The special-population gates are incomplete, so the design computes taxes that the research says are not due. (a) Student 58411 is not gated in 58512/58513 (Medicare), although fed.students.treatment says FICA exempt. (b) Clergy 58409 is not gated in 58514. (c) The NRA F/J/M/Q FICA exemption (fed.fica.nra.fjmq_exempt [US-FEDR2-001]) is not implemented, although DD 'Nonresident alien visa class' (Country Fields row 72) exists. (d) The totalization exemption is a DD field named in prose (L294) with no flag and no gate. (e) FUTA applies to all statutory employees, not only drivers and traveling salespersons. (f) The household (3,000/yr FICA; 1,000/quarter FUTA), agricultural (150 / 2,500; 20,000/quarter) and election-worker (2,500) thresholds are tagged but never gated, and 58407/58408 gate nothing. (g) The WA Cares NIV exemption (L75) has no flag, although DD 'Washington Cares exemption status' (row 53) exists.",
+   "expected": "Declare the missing flags from the existing DD fields and gate 58510-58516 and 58520 accordingly, with the threshold tests on YTD/quarter accumulators. The Part 0 dispositions must match the gates.",
+   "register_id": "US-FEDS5-029",
+   "action": "routed_to_builder",
+   "fact_key": "fed.students.treatment",
+   "_id": "DESIGN-QA1-14"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 1; Part 3!L95-L109, L165",
+   "problem": "C45 reachability, checked by hand (the shared C45 PASS counts conditions only): 58408, 58410, 58412, 58421 and 58423 are declared, and Part 0 names them as implementing a population, but no regulation gates on them. 58421 (Utah table) is not even in the Reads of 9840051 (58415-58419). Third-party sick pay (58412) has no regulation at all.",
+   "expected": "Gate each flag in the regulation Part 0 names, or drop it and correct Part 0. Add 58421 to 9840051.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "check_id": "C45",
+   "_id": "DESIGN-QA1-15"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840053!L420, L494-L538",
+   "problem": "The single formula rate x MIN(wages; annual cap) cannot express: per-hour programmes (or.wbf.rate.per_hour, wa.wc.class101.employee_hourly, wa.wc.supplemental_pension.rate); weekly caps (ny.dbl 0.60/week; hi.tdi weekly wage base 1,500.21, max 7.50/week); flat quarterly fees (nm.wc.admin_fee); a quarterly threshold (nv.mbt 50,000); or the employee/employer shares (MA 40%/100%, CO/DE/MN 50%, OR 60/40, WA 71.43%).",
+   "expected": "Add a method-class column to each programme parameter (annual cap / weekly cap / per hour worked / flat per quarter / above quarterly threshold), plus the side and the share. The hour-based ones read hours worked.",
+   "register_id": "US-NYB5-401",
+   "action": "routed_to_builder",
+   "fact_key": "ny.dbl.employee.weekly_max",
+   "_id": "DESIGN-QA1-16"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4.4 rows NJ, NY, OR, IL, WY; Part 4 9840053!L361, L378, L381, L384, L397",
+   "problem": "Programme rows with no parameters and no gap. US-208 OR statewide transit tax: the fact or.stt.employee.rate = 0.1 [US-ORS5-011] exists but is not carried. US-207 NY MCTMT: no rate. US-205 WY monopolistic workers' compensation: employer-specific rate, no gap. US-204 IL Secure Choice is a voluntary Roth IRA deduction, not a rate programme. The NJ employee WF/SWF 0.0425% (nj.ui.employee.wf_swf.rate [US-NJS5-010], live page 0.000425) is missing from 58519, so the NJ employee UI total should be 0.425%, not 0.3825%.",
+   "expected": "Carry or.stt.employee.rate and nj.ui.employee.wf_swf.rate. Give US-205/US-207 their parameters or a gap marker. Move US-204 to the deductions as an elective deduction.",
+   "register_id": "US-NJS5-010",
+   "action": "routed_to_builder",
+   "fact_key": "nj.ui.employee.wf_swf.rate",
+   "evidence": "WebFetch nj.gov/labor/ea/employer-services/rate-info 2026-11-04: worker UI 0.003825, WF/SWF 0.000425",
+   "_id": "DESIGN-QA1-17"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840061!L546-L550",
+   "problem": "Local taxes read only 58415/58416 (State codes), and no locality can be derived from those. The DD has the locality fields (Country Fields rows 49, 50, 85-109: PA PSD codes, Ohio municipality/school district, IN county, MD county, NYC/Yonkers, KY locality, OR Metro/Multnomah, MI city, Denver OPT, IA school district).",
+   "expected": "Declare locality flags from those DD fields and route each local row US-211..US-233 to its locality key. The rates stay in the annexes, which is acceptable.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-18"
+  },
+  {
+   "pattern": "F27",
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "00-official-sources/legal-basis-register.csv",
+    "sheet_or_section": "consumed_by",
+    "cell_or_line": "165 rows listed in _pipeline/DESIGN-bindings.csv"
+   },
+   "problem": "None of the 165 register rows the design consumes lists DESIGN in consumed_by, so a later change to any of them propagates blind (F27 risk).",
+   "expected": "Append 'DESIGN' to consumed_by on the 165 register_ids in DESIGN-bindings.csv, and add a PROPAGATION-LEDGER line.",
+   "register_id": "US-FEDS5-001",
+   "action": "routed_to_source_hunter",
+   "_id": "DESIGN-QA1-19"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 6 statute vs published method!L715-L727",
+   "problem": "F44: the registered source does not carry some elements of 7 practice notes. NE Circular EN 2.26-4.60% is not in Neb. Rev. Stat. 77-2715.03 [US-NES5-018]. OH 3.4% / 5747.06 is not in ORC 5747.02 [US-OHS5-007]. WI W-166 3.54% is not in Wis. Stat. ch. 71 [US-WIS5-010]. SC Act 110 1.99/5.21% is not in WH-1603 [US-SCS5-004]. MA 'Ch. 101 s.45 conflict' is not on the DFML page [US-MAS5-012]. GA 'OPB report 2026-12-01' was not located in the act text [US-GAS5-009]. CT '0.48/period' is not stated by TPG-211 [US-CTS5-010].",
+   "expected": "Add register rows for Circular EN 2026, the ORC 5747.06 tables, W-166, SC Act 110, MA Ch. 101 s.45 and the GA OPB condition. The CT 0.48 figure is either sourced or written as a derived comparison.",
+   "register_id": "US-NES5-018",
+   "action": "routed_to_source_hunter",
+   "fact_key": "practice.ne.use_circular_en_tables",
+   "_id": "DESIGN-QA1-20"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4.4 heading!L341",
+   "problem": "'Part 4.4 - Jurisdiction register' is an H4 nested inside 9840051 with no 4.1-4.3, although 9840052 and 9840053 also use it.",
+   "expected": "Make it its own section at Part 4 level (e.g. '### Jurisdiction register'), referenced by 9840051-9840053.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-21"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840053; Part 6!L446-L450, L698-L710",
+   "problem": "Programme parameters with no 2027 value have no limitation when 58420 = 2. Example: the DE PFML rates end 2026-12-31, and the 2027 rate is set by the Department with a 1% cap (de.pfml.rate.cap).",
+   "expected": "Add a Part 6 item, with a gap id, that lists the programme parameters with no 2027 value.",
+   "register_id": "US-DES5-012",
+   "action": "routed_to_builder",
+   "fact_key": "de.pfml.rate.cap",
+   "_id": "DESIGN-QA1-22"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840021!L221-L230",
+   "problem": "W-4 Steps 3, 4(a), 4(b) and 4(c) appear as prose names, although the DD fields exist (Country Fields rows 62-65).",
+   "expected": "Name them DD:`Form W-4 dependents and other credits (Step 3)`, DD:`Form W-4 other income (Step 4(a))`, DD:`Form W-4 deductions (Step 4(b))`, DD:`Form W-4 extra withholding (Step 4(c))`.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "DESIGN-QA1-23"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840052!L406",
+   "problem": "state_wage_base(58417) has no period selector, although CO, DE, IA, NJ, NV, OK and WY carry dated 2027 bases.",
+   "expected": "state_wage_base(58417; 58420): UI wages follow the payment year.",
+   "register_id": "US-NJS5-010",
+   "action": "routed_to_builder",
+   "fact_key": "nj.sui.wage_base",
+   "_id": "DESIGN-QA1-24"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C45",
+  "C46"
+ ],
+ "_patterns_swept": [
+  "F6",
+  "F25",
+  "F26",
+  "F27",
+  "F44",
+  "G-BUILD",
+  "G-PROP",
+  "G-DERIVE",
+  "G-SPOT"
+ ],
+ "manual_review_items": [
+  "C45: the shared check passes (21 conditions, 0 dead, 0 forward). My own reachability check: 23 flags and every gate value is declared, but 5 population flags have no gate (finding DESIGN-QA1-15).",
+  "C46: the shared check is exempt under validation_exemptions.C46 (US-OWN-011). I reran the period-aware check myself: 438 tags, 397 keys, 0 missing keys and 0 value mismatches against _research/*-facts.json. The unbound-number scan of Parts 0-4 and 6 also found 0.",
+  "C29: 0 residual markers. There are 36 neutral \"Not configured in this release\" limitations, each with a gap id.",
+  "P1 template: Parts 0-7 are all present, as in REFERENCE_FR_Regulation_Design_v1_0.md. Flags declare their values and the Version Control row is present. The issue date 2027-03-31 is the placeholder from the manifest (package.issue_date _note); it applies to the whole package and is not a design defect.",
+  "WTC reconciliation: all 360 codes cited exist in 02-wtc/US-WTC-001-v1.0.xlsx (534 rows). DD reconciliation: all 14 DD field names cited exist in Country Fields column D.",
+  "G-DERIVE: I recomputed the cumulative-tax column of the 2026 Pub. 15-T standard schedule for MFJ, Single and HoH: 0 mismatches.",
+  "The md5 of the reviewed file matches 09-design/_build/checks/md5_final.txt (70deef338abb3f00e2918fe10dcd0a7f).",
+  "I am read-only on deliverables by instruction, so I wrote no PROPAGATION-LEDGER line. The ledger lines to add are in _batch_fix_list."
+ ],
+ "numeric_verification": {
+  "facts_total": 423,
+  "facts_verified": 416,
+  "unverified_keys": [
+   "practice.ne.use_circular_en_tables",
+   "practice.oh.flat_rate_vs_tables",
+   "practice.wi.use_w166_tables",
+   "practice.sc.withholding_rates_2026",
+   "practice.ma.pfml_split",
+   "practice.ga.rate_change_2026",
+   "practice.ct.tables_vs_rules"
+  ],
+  "method": "Every distinct FACT (key,value) pair (423) was checked against its register row. 384 were checked by direct tool inspection of the registered official local copy (pdf/html/xlsx text, number elements located). 32 were checked by targeted inspection of the local copy or by G-DERIVE (DE 0.8 = 0.40+0.08+0.32; CO 0.43 = 0.86 x 50%; CT 1,016.40 = 60 x 16.94; CT cap = SSA base). Live WebFetch on 2026-11-04: irs.gov/publications/p15t (line 1g 12,900/8,600; allowance 4,300; NRA Tables 1 and 2), nj.gov rate-info (8 NJ values for 2026/2027), CO FAMLI bulletin 42d3518 (0.86/0.88), ctpaidleave.org (0.5%), IRS Tax Withholding Estimator (purpose). mass.gov and ssa.gov returned 403, so the local copies were used. 7 practice-note keys remain unverified (finding DESIGN-QA1-20)."
+ },
+ "cross_checks": [
+  {
+   "name": "DESIGN x WTC codes",
+   "result": "pass",
+   "note": "360/360 codes exist. 21900 = Custom Social Security (employee) is a Global baseline row."
+  },
+  {
+   "name": "DESIGN x DD fields",
+   "result": "fail",
+   "note": "All 14 cited fields exist, but the logic does not use DD fields it needs that already exist (visa class, WA Cares exemption, locality fields, W-4 Steps 3/4). 2 new fields are required for 1.0 (RQ-03, RQ-04)."
+  },
+  {
+   "name": "DESIGN x CCG coverage / special populations",
+   "result": "fail",
+   "note": "The Part 0 dispositions are not implemented by gates (QA1-14, QA1-15). Minimum wage is missing (QA1-12)."
+  },
+  {
+   "name": "Period selection (payment date for taxes; hours worked for minimum wage)",
+   "result": "fail",
+   "note": "Taxes are correctly selected by payment date (58420). MA PFML follows the date earned (QA1-13). There is no minimum-wage selection (QA1-12)."
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "nj.ui.employee.wf_swf.rate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_NJ",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-NJS5-010"
+  },
+  {
+   "fact": "or.stt.employee.rate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_OR",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-ORS5-011"
+  },
+  {
+   "fact": "fed.fica.nra.fjmq_exempt",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_FED",
+    "DD"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDR2-001"
+  },
+  {
+   "fact": "ma.pfml.family.rate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_MA",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-MAS5-012"
+  }
+ ],
+ "_rq_judgement": {
+  "DESIGN-RQ-02": "Acceptable as a named 1.0 limitation with the fallback stated (QA1-06); DD change request for 1.1.",
+  "DESIGN-RQ-03": "Blocks 1.0 (QA1-04): supplemental withholding is core. A legal-entity field plus a default rule go into DD v1.0.",
+  "DESIGN-RQ-04": "Blocks 1.0 (QA1-05): every experienced employer has an assigned SUI rate. A legal-entity x State x year field goes into DD v1.0.",
+  "DESIGN-RQ-05": "Acceptable as a named 1.0 limitation (withhold normally; QA1-06); DD change request for 1.1.",
+  "state_local_by_reference": "Acceptable, provided each row names the precise annex section id (QA1-11) and localities are routed (QA1-18)."
+ },
+ "_batch_fix_list": [
+  "B1 build_design.py 9840011: new account 58522 for supplemental wages (lines with 58413=1) plus its YTD. 9840021 reads 58501-58522; 9840022/23 read 58522. (QA1-01)",
+  "B2 9840022/23: 58509 becomes an incremental 37% over MAX(1,000,000; ytd_before), not gated by 58414/58403. 58508 is capped to the part under 1,000,000. Gates 58406/58409 on both, plus 58403 on 58508. (QA1-02, QA1-03)",
+  "B3 DD v1.0 change request (owner): legal-entity fields \"Supplemental wage withholding method\" and \"SUI assigned contribution rate\" (State x year). The design declares 58414 FR-style with a default rule, and a new rate input for 9840052. RQ-03/RQ-04 closed. (QA1-04, QA1-05)",
+  "B4 Part 0/6: fallback text for RQ-02 (unsupported, manual handling) and RQ-05 (withhold normally). The gaps.json entries stay documented_limitation. (QA1-06)",
+  "B5 9840051: mode 3 -> state_wh(58416); mode 2 split into work and residence results with the credit; State-wage accumulator from the Part 5 State column; add 58507-58509 to Reads. (QA1-07..09)",
+  "B6 Part 4.4: class \"Flat rate after allowances\", MA surtax, annex section id on every row. (QA1-10, QA1-11)",
+  "B7 New minimum-wage regulation (rate by work location and by the date the hours were worked, period split), or an owner scope statement in Part 0/6. (QA1-12)",
+  "B8 Select MA PFML (and the other 2027 programme changes) by the date earned. Add a Part 6 item for programme parameters with no 2027 value. (QA1-13, QA1-22)",
+  "B9 Special-population gates: 58411 on 58512/13; 58409 on 58514; new flags from DD \"Nonresident alien visa class\", \"Totalization agreement FICA exemption\" and \"Washington Cares exemption status\"; 58406 on FUTA except drivers/salespersons; household/agricultural/election-worker threshold tests; gate or drop 58408/58410/58412/58421/58423. (QA1-14, QA1-15)",
+  "B10 9840053: method-class/side/share column; per-hour, weekly-cap, flat-fee and threshold methods. (QA1-16)",
+  "B11 Carry or.stt.employee.rate and nj.ui.employee.wf_swf.rate; give US-205/US-207 parameters or a gap; move US-204 to an elective deduction. (QA1-17)",
+  "B12 9840061: locality flags from DD Country Fields rows 49-50 and 85-109; route US-211..US-233. (QA1-18)",
+  "B13 Register (source hunter): add DESIGN to consumed_by on the 165 rows in DESIGN-bindings.csv; add register rows for Circular EN, ORC 5747.06, W-166, SC Act 110, MA Ch.101 s.45, the GA OPB condition and the CT comparison. (QA1-19, QA1-20)",
+  "B14 Editorial: jurisdiction register at Part 4 level; DD: names for W-4 Steps 3/4; state_wage_base(58417;58420). (QA1-21, QA1-23, QA1-24)",
+  "B15 After the fix: rebuild x3 (C71), period-aware C46 = 0, shared C45, C70, tag_sync, recon; a PROPAGATION-LEDGER line for every changed fact; QA round 2."
+ ],
+ "_next_action": "artifact-builder round 2 (batch B1-B15). The owner decides the DD v1.0 change request (B3) first."
+}

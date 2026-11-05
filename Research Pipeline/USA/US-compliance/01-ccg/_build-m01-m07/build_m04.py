@@ -262,7 +262,7 @@ A(f"| IA | {Q('ia.pit.obbba')} | {R('ia.pit.obbba')} |")
 A(f"| DC | {Q('dc.pit.obbba_deductions')} | {R('dc.pit.obbba_deductions')} |")
 A(f"| CO | Colorado's worksheet removes the federal qualified-overtime deduction from W-4 Step 4(b) for State withholding | {K('co.wh.obbba_overtime_deduction.allowed')} |")
 A(f"| CA | {K('ca.obbba.conforms')}: no State tips or overtime deduction | {R('ca.obbba.conforms')} |")
-A(f"| HI | {GAP('hi.pit.tips_overtime_deduction.level', 'the Hawaii treatment of tips and overtime deductions (assessment-only per the build journal) has no fact', 'Does Hawaii allow a State income-tax deduction or exclusion for qualified tips or overtime for tax year 2026, and does it operate only at assessment (no change to withholding)?', 'CCG m04 §4.4 and m06 trap table cannot state the Hawaii level; WTC cannot set the HI flag', 'income_tax', tier='A.1')} | |")
+A(f"| HI | {GAP('hi.pit.tips_overtime_deduction.level', 'the Hawaii treatment of tips and overtime deductions has no fact', 'Does Hawaii allow a State income-tax deduction or exclusion for qualified tips or overtime for tax year 2026, and does it operate only at assessment (no change to withholding)?', 'CCG m04 §4.4 and m06 trap table cannot state the Hawaii level; WTC cannot set the HI flag', 'income_tax', tier='A.1')} | |")
 A("")
 A(f"W-2 reporting of overtime and tips: {Q('fed.w2.box12.new_codes')} {R('fed.w2.box12.new_codes')}.")
 

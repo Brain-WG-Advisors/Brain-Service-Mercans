@@ -1,0 +1,527 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SIR",
+ "unit": "third_party_provider_handoff",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+ "_reviewer": "compliance-qa-auditor (independent instance; did not build the SIR)",
+ "_built_by": "artifact-builder",
+ "_location_convention": "table index = 0-based order of tables in the docx (python-docx), row 0 = header",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": {
+    "file": "03-statutory-integrations/integration-landscape.json",
+    "sheet_or_section": "verdict",
+    "cell_or_line": "line 6 (also 03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx / Document Control table T1 / r5 and section 0 paragraph P14)"
+   },
+   "problem": "Verdict MANUAL_ONLY is wrong under the methodology. si-discovery.md defines MANUAL_ONLY as 'EVERY authority is portal/paper only' and sets HAS_INTEGRATIONS when ANY authority offers a system-to-system channel (API/web service, SFTP/file drop, machine upload, batch service). The SIR's own verified facts show such channels: sir.ca.de9c.efile_spec 'FSET XML web service' and bulk upload (US-CAS5), sir.nj.ui.wage_report 'online or SFTP', sir.ga.ui.wage_report 'SFTP', sir.nv.ui.wage_report 'SFTP EFW2', sir.ct.paid_leave.bulk_format 'XML (XSD) or CSV via SFTP', sir.oh.bulk_filing 'FSET', sir.ny.bulk_spec 'Web Upload'. In addition the scope manifest integrations.outbound[0] is a file hand-off to the provider with product_mapping_required=true, i.e. a machine-to-machine interface Mercans must build. The rationale 'no integration that Mercans operates' redefines the term.",
+   "expected": "verdict HAS_INTEGRATIONS. The single integrable party for Mercans is the third-party filing provider (scope manifest integrations.outbound, owner decision US-MQ-09): one landscape entry 'FILING-PROVIDER' with integration=true, direction out, product_mapping_required=true, runbook_location=null and reason 'P1-P7 runbook deferred until the provider is chosen [[GAP:SIR-RQ-38]]'. Authority entries keep integration=true where the facts above show a machine channel, with operated_by='filing provider (US-MQ-09)' and no Mercans runbook. The extended index is then the correct HAS_INTEGRATIONS shape (index with one row per authority plus the hand-off register), so the 'deviation from the one-page form' note in the build log and P14 is removed. Reword T1r5 and P14 to the same sentence used in the landscape rationale (identical wording, G-BUILD 3).",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "fact_key": "sir.provider.selection",
+   "evidence": "read: mercans-pipeline/.claude/agents/si-discovery.md lines 28-33 and 78-79; shared/si-runbook/README.md; scope_manifest.json integrations; SIR-facts.json (keys listed); integration-landscape.json",
+   "_builder_item": 1,
+   "_id": "SIR-QA1-01"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P1",
+   "location": {
+    "file": "03-statutory-integrations/integration-landscape.json",
+    "sheet_or_section": "authorities[0..7]",
+    "cell_or_line": "all entries"
+   },
+   "problem": "integration-landscape.json does not follow the si-discovery output contract: no top-level 'summary' or 'notes'; authority entries lack 'receives_payroll_data', 'artefacts_public' and, above all, 'source' ('Every classification carries a source'); fields are renamed ('channel_type' for 'channel', 'developer_portal' for 'dev_portal', directions as a list instead of 'out|in|both|none').",
+   "expected": "Re-emit the file in the si-discovery schema: country, code, verdict, summary (2-3 sentences), authorities[] each with code, name, receives_payroll_data, integration, channel, directions, dev_portal, artefacts_public, source (the register id / URL of the channel fact, e.g. US-CAS5-018 for CA, US-NJS5 row of sir.nj.ui.wage_report), notes. Keep the provider_handoff block as an extra key.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "si-discovery.md 'OUTPUT - write exactly this file' block",
+   "_builder_item": 1,
+   "_id": "SIR-QA1-02"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "Appendix B (table T29) and the cells carrying SIR-RQ-02,03,05,10,13,15,20,23,28,29,50",
+    "cell_or_line": "-"
+   },
+   "problem": "11 of the 32 F44 gaps are acronym-only misses where the copy carries the expanded words: dd.ga.new_hire.extra DOB ('date of birth' in US-GAS5-012), dd.ia.new_hire.health IWO ('income withholding order' in US-IAS5-012), multi.iwo.governing_law IWO/PRINCIPAL PLACE OF EMPLOYMENT (both in US-MULTIS5-007), sir.dc.ui.agent_authorization DOES ('Department of Employment Services' in US-DCP52-003), sir.ga.withholding.agent_authorization POA ('power of attorney' x7 in US-GAW1B-003), sir.id.ui.agent_authorization IDOL ('Idaho Department of Labor' in US-IDR3-002), sir.md.withholding.agent_authorization POA (US-MDP51-001), sir.mn.withholding.returns DOR ('Department of Revenue' in US-MNS5-010), sir.nh.ui.agent_authorization TPA ('third-party' in US-NHP6-001), sir.nj.ui.agent_authorization DOL ('Department of Labor' in US-NJR3-005), sir.wy.service_supplier PEO ('employer organization' in US-WYS5-019). These are sourced statements written in shorthand.",
+   "expected": "Restore them, but NOT by loosening the F44 rule or whitelisting acronyms in f44_lib: compliance-source-hunter rewrites each fact value in the copy's own words (e.g. 'RD-1061 power of attorney, RD-1062 disclosure, RD-1063 Reporting Agent Authorization'; 'Idaho Department of Labor Employer Portal Authorization form'; 'date of birth, medical-insurance availability, state of hire'), effective dates unchanged; then the builder regenerates and the 11 SIR-RQ entries are closed in gaps.json and Appendix B.",
+   "register_id": null,
+   "action": "routed_to_source_hunter",
+   "_builder_item": 2,
+   "_id": "SIR-QA1-03"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "Appendix B (table T29) and the cells carrying SIR-RQ-01,04,06,08,09,11,12,14,19,24,25,27,31,32,33,34,35,36,37,45,49",
+    "cell_or_line": "-"
+   },
+   "problem": "The remaining 21 F44 gaps are not wording misses and must stay gaps: a form id, number, date, quarter or file-format claim is absent from the copy (SIR-RQ-01 qtr 3/ZIP; 06 '1M'; 09 xml/csv; 11 RTS-9; 12 XSD; 19 M-2848; 25 J-9; 27 '33'; 32 2,399/200; 33 JFS-20106; 35 paper; 36 UC-2A; 37 '10'; 45 2025-05-27), the copy does not carry the subject at all (04 fed.iwo.priority: US-FEDS5-014 is the levy publication, no 'income withholding' or 'priority'; 14 CPA: no 'accountant' in US-HIP52-003; 31 OHID absent from US-FIL-012), or there is no copy (08 US-COP52-003 and 24 US-MOP52-008 extract to empty text; 34 US-ORP51-005; 49 US-FEDP51-016). Several of these (08, 24) are recorded as 'f44' but are really 'nocopy'.",
+   "expected": "Keep the 21 cells as 'Not configured in this release [[GAP:SIR-RQ-nn]]'. Source hunter: for each, save and read the authority page/form that carries the missing element and add or re-point the register row; for 08 and 24 re-save a readable copy (current file extracts to zero characters). Builder: relabel SIR-RQ-08 and 24 reason 'nocopy' in sir_requests.json/gaps.json.",
+   "register_id": null,
+   "action": "routed_to_source_hunter",
+   "_builder_item": 2,
+   "_id": "SIR-QA1-04"
+  },
+  {
+   "pattern": "F44",
+   "severity": "minor",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.3 table T15",
+    "cell_or_line": "r17 col 5 (US-DOR-002-LA 'Closes with')"
+   },
+   "problem": "The builder's Louisiana choice is right: rspec.la.ui_qtr.due 'LWC online services' is the wording of US-LAS5-007 (copy: 'Use LWC's online services to file wage reports'), and LAWATS does not occur in that copy; LAWATS occurs only in US-LAP52-005 (POA upload, agent accounts), which supports T8r19 only. But T15r17 still prints 'the LWC LAWATS wage file specification' (mirrored from the US-DOR-002 Report Matrix), and SIR fact sir.la.ui.wage_report 'mandatory electronic via LAWATS' rests on US-LAS5-007, whose copy does not name LAWATS.",
+   "expected": "Source hunter: re-word sir.la.ui.wage_report to the copy ('mandatory electronic via LWC online services'), or add a register row whose saved LWC page names LAWATS as the wage-report channel. Builder (RSPEC generator, then SIR mirror): replace 'LWC LAWATS wage file specification' with 'the LWC online-services wage file specification' in US-DOR-002 Report Matrix row US-DOR-002-LA, regenerate RSPEC and SIR the same day (F27).",
+   "register_id": "US-LAS5-007",
+   "action": "routed_to_source_hunter",
+   "fact_key": "sir.la.ui.wage_report",
+   "_builder_item": 3,
+   "_id": "SIR-QA1-05"
+  },
+  {
+   "pattern": "F25",
+   "severity": "minor",
+   "pass": "P4",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "8.1 Per employer entity (table T21)",
+    "cell_or_line": "after r5"
+   },
+   "problem": "sir.fed.efw2.employer_signature_pin is not written because sir_lint's C29 X-run rule treats 'S-XXXXXX-Y' as a placeholder. QA DD r2 (_qa/DD-review-r2.json, ruling C29_X_run_masks) accepted that mask as the authority's own format quoted verbatim from SSA Pub. 42-007 TY2026 (US-FEDS5-032), and the DD and RSPEC carry it. The SIR is therefore the only artifact without the TY2026 RE Employer Signature PIN element in the provider data set, although the provider needs it to sign EFW2 submissions.",
+   "expected": "Add row 'Employer Signature PIN (EFW2 RE record, optional)' | 'Form W-2 file to SSA' | [[FACT:sir.fed.efw2.employer_signature_pin=...]] | [US-FEDS5-032] to section 8.1, and give sir_lint the same allowance the DD lint uses: an X-run inside a FACT tag whose value is quoted from the authority copy is not a C29 hit.",
+   "register_id": "US-FEDS5-032",
+   "action": "routed_to_builder",
+   "check_id": "C29",
+   "fact_key": "sir.fed.efw2.employer_signature_pin",
+   "_builder_item": 4,
+   "_id": "SIR-QA1-06"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "5. Error Handling",
+    "cell_or_line": "P63 and 6.2 State deadlines / P69"
+   },
+   "problem": "No error-code catalogue is acceptable for a provider hand-off, but the limitation is stated as prose without a request id, and P69 makes a negative claim ('Acknowledgement and response-time rules of the authorities were not published in the sources read') that is not a finding about the authorities and points to a 'provider contract' that does not exist yet. G-CLEAN requires a named limitation with what would close it.",
+   "expected": "P63: '... error-code catalogue: Not configured in this release [[GAP:SIR-RQ-52]]', with SIR-RQ-52 in gaps.json/Appendix B: 'the authority reject / business-rule lists per channel class (IRS e-file business rules for Forms 94x, SSA EFW2 resubmission notices, State bulk-file error reports), or an owner decision that error handling belongs to the provider contract (US-MQ-09)'. P69: 'State acknowledgement and response-time rules were not read for this release: Not configured in this release [[GAP:SIR-RQ-53]]'. Same entries in the build log open items.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_builder_item": 5,
+   "_id": "SIR-QA1-07"
+  },
+  {
+   "pattern": "F27",
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "section 7 tables T13-T20",
+    "cell_or_line": "48 rows (e.g. T18r7 US-PFML-001-MA, T14r9 US-DOR-001-DE, T16r6 US-UI-001-CO, T13r9 US-SSA-001)"
+   },
+   "problem": "Status and accuracy are mirrored correctly (independent read: 236 Report Matrix rows = 236 hand-off rows, status token and accuracy figure identical in all 236). But in 48 rows the Report Matrix 'Closes with' text carries an RSPEC gap id ([[GAP:RSPEC-GAP-0nn]] or RSPEC-RQ-nn) and the SIR copy of that text drops it (44 rows have no gap id at all; 4 carry only a different SIR-RQ id). When an RSPEC gap closes, nothing links the SIR row to it, which is the F27 drift path.",
+   "expected": "Mirror the closing text verbatim including the RSPEC gap/request id (as a plain reference 'RSPEC-GAP-019' or the [[GAP:]] tag, whichever C70 accepts for a foreign id), so a search on the RSPEC id finds the SIR row. Re-run sir_recon with a gap-id equality column.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "evidence": "scratch qa_sir_r1/f27.py: Report Matrix column J vs SIR section 7 last column",
+   "_builder_item": 6,
+   "_id": "SIR-QA1-08"
+  },
+  {
+   "pattern": "F44",
+   "severity": "blocker",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "8.2 table T22",
+    "cell_or_line": "r6 col 3"
+   },
+   "problem": "dd.state.new_hire.dob 'date of birth required by GA, IA, ME, MS, NJ, OH, OR, WA, WI, WV new-hire reports' is bound to US-NJS5-018 only, a New Jersey page; none of the other nine States appears in the copy. The builder's F44 passed it because its element extractor ignores 2-letter upper-case tokens.",
+   "expected": "Either narrow the statement to what the copy proves ('date of birth required by the New Jersey new-hire report') or add _also_register_ids for the nine other States' new-hire pages that name date of birth (source hunter). Until then the cell is 'Not configured in this release [[GAP:]]'.",
+   "register_id": "US-NJS5-018",
+   "action": "routed_to_source_hunter",
+   "fact_key": "dd.state.new_hire.dob",
+   "_id": "SIR-QA1-09"
+  },
+  {
+   "pattern": "F44",
+   "severity": "blocker",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.2 table T14",
+    "cell_or_line": "r9 col 4 (US-DOR-001-DE)"
+   },
+   "problem": "sir.de.withholding.returns '... WTH-REC annual reconciliation with W-2s by end of January' rests on US-DES5-005 (30 Del. C. statute). The copy has the filer thresholds but no 'WTH-REC', no 'reconciliation' and no January due date.",
+   "expected": "Source hunter: bind the Delaware Division of Revenue page or WTH-REC instructions that name the form and its due date (add as _also_register_ids), or split the fact so the annual-reconciliation part becomes its own gap.",
+   "register_id": "US-DES5-005",
+   "action": "routed_to_source_hunter",
+   "fact_key": "sir.de.withholding.returns",
+   "_id": "SIR-QA1-10"
+  },
+  {
+   "pattern": "F18",
+   "severity": "blocker",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.3 table T15",
+    "cell_or_line": "r15 col 4 and 4. Technical Specifications table T11 / r6; 7.2 table T14 / r17 col 4"
+   },
+   "problem": "sir.ks.w2.format ('or KW-2CSV; no CF/SF') and sir.ks.withholding.returns ('KW-5 ... KW-3 + W-2s electronically by 31 Jan') are verified only through _also_register_ids US-KS-001, a SUPERSEDED row whose copy is KW-100 'Revised 06/21' (register: 'STALE - no 2026 tables'). The active rows do not carry these elements: US-KSS5-026 (K-2MT Rev. 10-25) has no KW-2CSV/CF/SF; US-KSS5-007 (K.S.A. 79-3298) has none of KW-5, KW-3, W-2. L4/F18: a stale source that still resolves.",
+   "expected": "Source hunter: re-verify KW-5/KW-3 and KW-2CSV on the current KDOR pages (2026 KW-100 or the KDOR withholding/W-2 filing pages), register them active, drop US-KS-001 from _also_register_ids. Builder: regenerate.",
+   "register_id": "US-KS-001",
+   "action": "routed_to_source_hunter",
+   "fact_key": "sir.ks.withholding.returns",
+   "_id": "SIR-QA1-11"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.6 table T18",
+    "cell_or_line": "r4 col 4 (US-PFML-001-DC)"
+   },
+   "problem": "rspec.dc.pfml_qtr.channel 'PFL quarterly via ESSP, same due dates as UI': ESSP and quarterly filing are in US-DCS5-019, but nothing in the copy ties the due dates to UI (no 'unemployment' in the copy).",
+   "expected": "Source hunter: cite the DOES page that states the PFL due dates (or the UI due dates they equal) as _also_register_ids, or drop 'same due dates as UI' from the value.",
+   "register_id": "US-DCS5-019",
+   "action": "routed_to_source_hunter",
+   "fact_key": "rspec.dc.pfml_qtr.channel",
+   "_id": "SIR-QA1-12"
+  },
+  {
+   "pattern": "F44",
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "8.2 table T22",
+    "cell_or_line": "r3 col 3"
+   },
+   "problem": "dd.multi.sui_state 'single UI state per employee per period under the localization test; also keys WA family and medical leave (RCW Title 50A)' rests on US-MULTIS5-024 (RCW 50A, Washington paid leave). The copy supports the localization test for WA paid leave but says nothing about unemployment insurance.",
+   "expected": "Source hunter: add the UI localization source already used for dd.multi.work_state (US-MULTIS5-017, UIPL 20-04) as _also_register_ids, or reword the value to the paid-leave scope of the copy.",
+   "register_id": "US-MULTIS5-024",
+   "action": "routed_to_source_hunter",
+   "fact_key": "dd.multi.sui_state",
+   "_id": "SIR-QA1-13"
+  },
+  {
+   "pattern": "F18",
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.4 table T16",
+    "cell_or_line": "r26 col 4 (US-UI-001-MS)"
+   },
+   "problem": "sir.ms.ui.wage_report '... or EFW2 RS': 'EFW2' is found only in _also_register_ids US-MSP51-005, a SUPERSEDED row (Pub 89-700-25-1). Active US-MSS5-013/014 carry UI-2, UI-3, ICESA and 275 but not EFW2.",
+   "expected": "Source hunter: bind the current MDES wage-file specification that accepts EFW2 RS, or drop 'or EFW2 RS'; remove US-MSP51-005 from _also_register_ids.",
+   "register_id": "US-MSP51-005",
+   "action": "routed_to_source_hunter",
+   "fact_key": "sir.ms.ui.wage_report",
+   "_id": "SIR-QA1-14"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.1 table T13",
+    "cell_or_line": "r7 col 4 (US-IRS-007) and r4 col 4 / 2.1 table T12 / r2 (US-IRS-004)"
+   },
+   "problem": "fed.aca.efile_threshold (US-FEDS5-012) and rspec.fed.form940.due (US-FEDS5-031) rest on register rows with status 'partial' (TY2025 instructions; 2026 i940 and 2026 i109495c not yet read). MANDATE.md lists partial rows as not citable. The rows already state 'TO CONFIRM', but the tag itself is unverified for 2026.",
+   "expected": "Keep the cells, but mark each value '(TY2025 rule, re-verify on the 2026 instructions)' from the fact note, and source hunter closes RSPEC-RQ-08 / the 1094-C 2026 instructions; until then both keys stay in unverified_keys.",
+   "register_id": "US-FEDS5-031",
+   "action": "routed_to_source_hunter",
+   "fact_key": "rspec.fed.form940.due",
+   "_id": "SIR-QA1-15"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "7.6 table T18",
+    "cell_or_line": "r2 col 4 (US-PFML-001-CO)"
+   },
+   "problem": "rspec.co.pfml_qtr.form 'FAMLI quarterly wage report and premium' carries effective_from 2027-01-01 (from register row US-COS5-008, a bulletin about the 2027 rate) but is used for the 2026 filing. The copy itself names Q3 2026 due 2026-10-31, so the rule is in force in 2026: the date stamp is wrong, not the rule.",
+   "expected": "Source hunter: set effective_from of rspec.co.pfml_qtr.form to the date the quarterly report applies from (or 2026-01-01 with _effective_from_basis), leaving the 2027 rate facts unchanged.",
+   "register_id": "US-COS5-008",
+   "action": "routed_to_source_hunter",
+   "fact_key": "rspec.co.pfml_qtr.form",
+   "_id": "SIR-QA1-16"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P3",
+   "location": {
+    "file": "03-statutory-integrations/_build/f44_lib.py",
+    "sheet_or_section": "elements()",
+    "cell_or_line": "word rule and find() kind 'word'"
+   },
+   "problem": "The builder's F44 self-check reports 0 misses but missed the blocker above: elements() keeps only upper-case words of 3+ letters (state codes GA, IA, ... never checked), accepts an acronym when any run of capitalised initials in a 500,000-character statute spells it, and never reads the register row status, so values supported only by superseded rows (US-KS-001, US-MSP51-005) or partial rows pass.",
+   "expected": "In f44_lib: check 2-letter upper-case tokens (state codes) against the copy or the state name; restrict acronym-initials matches to the cited section or to an explicit expansion '(ACR)'; skip _also_register_ids whose status is superseded/partial/MANUAL when deciding a pass. Re-run f44_self; the 10 keys in numeric_verification.unverified_keys must then appear as misses.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "SIR-QA1-17"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": {
+    "file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+    "sheet_or_section": "Document Control table T0",
+    "cell_or_line": "r4, T1 / r9 and Version history T2 / r1"
+   },
+   "problem": "Issue date 2027-03-31 and status 'Issued' are printed, although build-manifest.json package._note says the date is 'a planning placeholder; the owner has not set a date'. A placeholder presented as an issue date.",
+   "expected": "Status 'For QA' (or 'Draft') until the owner sets package.issue_date; owner decision at release. Package-wide (C43): same in CCG/RSPEC/DD/WTC, so it is fixed once in the manifest and regenerated everywhere.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "_id": "SIR-QA1-18"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "C:/Users/instituto/mercans-pipeline/shared/consistency-checks/consistency_checks.py",
+    "sheet_or_section": "c46()",
+    "cell_or_line": "line 'facts[f[\"key\"]] = f.get(\"value\")' (about line 568)"
+   },
+   "problem": "OASDI '184,500 vs 192300' is NOT a wrong value. fed.fica.oasdi.wage_base has two period entries in CCG-annex_FED, RSPEC and WTC-global_baseline facts: 184,500 for 2026-01-01..2026-12-31 (US-FEDS5-005, G-DERIVE 60,600 x 69,846.57 / 22,935.42 = 184,548.71 -> 184,500; also US-FED-003) and 192,300 for 2027-01-01..2027-12-31 (US-FEDB5-401, SSA cbb page 'For earnings in 2027, this base is $192,300'). The CCG tags 184,500 in 2026 contexts (paras 73, 163, 320, 603, 685 in C46 numbering, table 177 r3 '2026-01-01 to 2026-12-31') and 192,300 only where labelled 2027 (P668 'The 2027 OASDI base', P1001, table 177 r4). Shared C46 builds facts as a last-wins dict per key, so it compares every tag to the 2027 entry. Of the 150 mismatches listed in its details, 147 have an artifact value equal to another period entry of the same key; the C46 FAIL is mostly a checker defect.",
+   "expected": "Make C46 period-aware: keep all entries per key and accept a tag equal to any entry whose period overlaps the package year or that the surrounding text dates (the SIR's own sir_common/c46_sir.py already does this). Then re-run C46 package-wide and review only the residue (e.g. nm.wc.admin_fee.*, wa.pfml.total.rate, fed.fit.extra_pay_period.rule). Owner of shared/ decides; no change to CCG/RSPEC/WTC OASDI values.",
+   "register_id": "US-FEDS5-005",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fica.oasdi.wage_base",
+   "evidence": "CCG-annex_FED-facts.json two entries; register rows US-FEDS5-005 (2026) and US-FEDB5-401 (2027); CCG docx tags read with python-docx; WebFetch ssa.gov/oact/cola/cbb.html -> HTTP 403 (local copy FED_SSA_cbb_browser_2026-11-02.txt used)",
+   "_id": "SIR-QA1-19"
+  }
+ ],
+ "checks_run": [
+  "C12",
+  "C29",
+  "C30",
+  "C32",
+  "C42",
+  "C43",
+  "C44",
+  "C46",
+  "C53",
+  "C56",
+  "C70"
+ ],
+ "manual_review_items": [
+  "C5 classification cites establishing article - not implemented (L3); run by hand on the inbound/outbound classification: direction follows scope_manifest.integrations and each spec's Report Type; OK.",
+  "C6 file format vs source - not implemented (L3); by hand: the 10 layouts in section 4 were spot-read against copies (EFW2 TY2026 US-FEDS5-032, FL Flat File v7 US-FLS5-022, SC SUITS v1.6 US-SCS5-006, IA W-2 US-IAS5-018): match.",
+  "C7 population depth - not applicable to the SIR (no conditional field table).",
+  "F44 live re-verification: WebFetch is restricted to registered citations; ssa.gov returned HTTP 403. The 384 tags were checked against the saved copies, which is the register's own verification basis (verified_on 2026-10-29..2026-11-03).",
+  "PROPAGATION-LEDGER.md not written this round: the task restricted writes to _qa/SIR-review-r1.json. The propagation[] entries below are to be appended to the ledger by the orchestrator the same day.",
+  "Shared content_checks C48/C49/C50 FAIL on WTC/CCG rows covered by validation_exemptions C48/C49/C50 (owner, 2026-11-04); not SIR scope. C34/C35/C36 exemptions concern the RSPEC norm/validator and do not apply to the SIR (builder reading confirmed)."
+ ],
+ "numeric_verification": {
+  "facts_total": 384,
+  "facts_verified": 374,
+  "unverified_keys": [
+   "dd.state.new_hire.dob",
+   "sir.de.withholding.returns",
+   "sir.ks.w2.format",
+   "sir.ks.withholding.returns",
+   "rspec.dc.pfml_qtr.channel",
+   "dd.multi.sui_state",
+   "sir.ms.ui.wage_report",
+   "fed.aca.efile_threshold",
+   "rspec.fed.form940.due",
+   "rspec.co.pfml_qtr.form"
+  ],
+  "method": "Independent QA text check (scratch qa_f44.py, not the builder's f44_lib): every [[FACT:key=value]] tag of the SIR (444 occurrences, 384 distinct key/value pairs) matched to its fact (all _research/*-facts.json) and to the local copy of register_id + _also_register_ids, re-extracted with PyMuPDF/HTML strip; every number, form id, ISO date, upper-case token of 2+ letters (state codes included) and format word (xml/csv/sftp/paper/efw2/icesa/fset) must appear; register status must be active, tier not B/C, period must cover 2026. Raw result 25 keys flagged; 15 cleared by hand-reading the copy (acronym expanded in the copy, plural or 'Version 7' spelling); 10 confirmed unverified (list). Live WebFetch re-verification: ssa.gov cbb.html returned HTTP 403 (same block as the register notes); the local copies (verified_on 2026-10-29..11-03, under 120 days) are the basis."
+ },
+ "cross_checks": [
+  {
+   "name": "SIR x Report Matrix (F27): status and accuracy per row",
+   "result": "pass",
+   "note": "236 Report Matrix rows (20 specs) = 236 SIR hand-off rows, 0 only-in-one; status token and accuracy figure identical in 236/236. Gap ids dropped in 48 rows (finding SIR-QA1-08)."
+  },
+  {
+   "name": "SIR x RSPEC direction (C53)",
+   "result": "pass",
+   "note": "shared content_checks C53 PASS: 20 specs, all OUTBOUND, 0 problems; inbound items have no spec."
+  },
+  {
+   "name": "SIR x DD (house style, F25)",
+   "result": "pass",
+   "note": "Section 8 uses box/record identifiers and DD fact tags; no DD internal field code cited. DD elements with no consumer: 0 (builder recon), spot-checked 6 rows of the build log table."
+  },
+  {
+   "name": "Verdict vs methodology and scope manifest",
+   "result": "fail",
+   "note": "MANUAL_ONLY contradicts si-discovery definition and the SIR's own channel facts; HAS_INTEGRATIONS with the filing provider as the single integrable party (SIR-QA1-01)."
+  },
+  {
+   "name": "Shared C46 OASDI (outside SIR)",
+   "result": "fail",
+   "note": "Legitimate 2026/2027 multi-period value; C46 checker not period-aware (SIR-QA1-19)."
+  }
+ ],
+ "propagation": [
+  {
+   "fact": "sir.la.ui.wage_report",
+   "consumed_by": [
+    "SIR",
+    "RSPEC/US-DOR-002",
+    "RSPEC/US-UI-001"
+   ],
+   "resynced": false,
+   "register_id": "US-LAS5-007"
+  },
+  {
+   "fact": "dd.state.new_hire.dob",
+   "consumed_by": [
+    "DD",
+    "RSPEC/US-SDNH-001",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-NJS5-018"
+  },
+  {
+   "fact": "dd.multi.sui_state",
+   "consumed_by": [
+    "DD",
+    "RSPEC/US-UI-001",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-MULTIS5-024"
+  },
+  {
+   "fact": "rspec.dc.pfml_qtr.channel",
+   "consumed_by": [
+    "RSPEC/US-PFML-001",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-DCS5-019"
+  },
+  {
+   "fact": "rspec.co.pfml_qtr.form",
+   "consumed_by": [
+    "RSPEC/US-PFML-001",
+    "SIR"
+   ],
+   "resynced": false,
+   "register_id": "US-COS5-008"
+  },
+  {
+   "fact": "sir.ks.withholding.returns",
+   "consumed_by": [
+    "SIR",
+    "RSPEC/US-DOR-001",
+    "CCG/annex_KS"
+   ],
+   "resynced": false,
+   "register_id": "US-KS-001"
+  },
+  {
+   "fact": "sir.ms.ui.wage_report",
+   "consumed_by": [
+    "SIR",
+    "RSPEC/US-UI-001"
+   ],
+   "resynced": false,
+   "register_id": "US-MSP51-005"
+  },
+  {
+   "fact": "fed.fica.oasdi.wage_base",
+   "consumed_by": [
+    "CCG/annex_FED",
+    "CCG/m05_social_security",
+    "RSPEC",
+    "WTC/global_baseline"
+   ],
+   "resynced": false,
+   "register_id": "US-FEDS5-005"
+  }
+ ],
+ "_sweeps": [
+  "F8 inbound/outbound: pass",
+  "F25 SIR x DD: pass (PIN omission minor)",
+  "F26 section 8 payroll results labelled as results: pass",
+  "F27 Report Matrix mirror: status/accuracy pass, gap ids fail",
+  "F18/L4 stale copies: fail (KS, MS)",
+  "F44 every tag: 10 unverified",
+  "C29 residual markers: 0 hits (own grep of TODO/TBD/FIXME/XXX/placeholder/VERIFY/to be confirmed)",
+  "C30 tier B/C: 0"
+ ],
+ "_rulings_on_builder_items": {
+  "1_verdict": "HAS_INTEGRATIONS, provider as the single integrable party; extended index kept (SIR-QA1-01/02).",
+  "2_f44_acronym_gaps": "11 restore via source-hunter rewording in the copy's words; 21 stay gaps; never loosen F44 (SIR-QA1-03/04).",
+  "3_louisiana": "Builder's choice accepted ('LWC online services'); fix the residual LAWATS wording in T15r17 and the sir.la.ui.wage_report fact (SIR-QA1-05).",
+  "4_signature_pin": "Write it: the mask is the authority's format, accepted in QA DD r2 (SIR-QA1-06).",
+  "5_error_catalogue": "Acceptable as a named limitation with a request id; reword P69 (SIR-QA1-07).",
+  "6_f27_mirror": "Status/accuracy mirror correct 236/236; carry the RSPEC gap ids (SIR-QA1-08)."
+ },
+ "_batch_fix_list": [
+  {
+   "owner": "compliance-source-hunter (one batch; facts and register only, then hand to the builder)",
+   "items": [
+    "SIR-QA1-03: reword 11 fact values in the copy's words (dd.ga.new_hire.extra, dd.ia.new_hire.health, multi.iwo.governing_law, sir.dc.ui.agent_authorization, sir.ga.withholding.agent_authorization, sir.id.ui.agent_authorization, sir.md.withholding.agent_authorization, sir.mn.withholding.returns, sir.nh.ui.agent_authorization, sir.nj.ui.agent_authorization, sir.wy.service_supplier); periods unchanged.",
+    "SIR-QA1-04: research the 21 substantive gaps (SIR-RQ-01,04,06,08,09,11,12,14,19,24,25,27,31,32,33,34,35,36,37,45,49); re-save readable copies for US-COP52-003 and US-MOP52-008 (extract to 0 chars).",
+    "SIR-QA1-05: sir.la.ui.wage_report -> 'Quarterly, mandatory electronic via LWC online services' (US-LAS5-007 wording) or a new LWC row naming LAWATS for wage reports.",
+    "SIR-QA1-09: dd.state.new_hire.dob -> NJ-only wording, or add 9 State new-hire rows as _also_register_ids.",
+    "SIR-QA1-10: sir.de.withholding.returns -> bind the DE Division of Revenue WTH-REC page (form + January due date) or split the fact.",
+    "SIR-QA1-11: KS -> register current KDOR KW-5/KW-3/KW-2CSV pages as active; remove US-KS-001 from _also_register_ids of sir.ks.w2.format and sir.ks.withholding.returns.",
+    "SIR-QA1-12: rspec.dc.pfml_qtr.channel -> source 'same due dates as UI' or drop it.",
+    "SIR-QA1-13: dd.multi.sui_state -> add US-MULTIS5-017 (UIPL 20-04) as _also_register_ids or reword to the paid-leave scope.",
+    "SIR-QA1-14: sir.ms.ui.wage_report -> current MDES spec for EFW2 RS or drop 'or EFW2 RS'; remove US-MSP51-005.",
+    "SIR-QA1-15: fed.aca.efile_threshold / rspec.fed.form940.due -> read the 2026 i109495c and 2026 i940 when published; set rows active.",
+    "SIR-QA1-16: rspec.co.pfml_qtr.form effective_from -> date in force for 2026 (with _effective_from_basis)."
+   ]
+  },
+  {
+   "owner": "artifact-builder (SIR generator; one rebuild after the source-hunter batch)",
+   "items": [
+    "SIR-QA1-01: landscape verdict HAS_INTEGRATIONS; add FILING-PROVIDER entry (integration=true, runbook deferred SIR-RQ-38); authority entries integration=true where a machine channel fact exists, operated_by provider; same sentence in landscape rationale, T1r5 and P14; drop the 'one-page form' deviation note.",
+    "SIR-QA1-02: re-emit integration-landscape.json in the si-discovery schema (summary, notes, receives_payroll_data, channel, dev_portal, artefacts_public, source per authority).",
+    "SIR-QA1-05: RSPEC generator: US-DOR-002-LA Report Matrix 'LWC LAWATS wage file specification' -> 'LWC online-services wage file specification'; regenerate RSPEC and the SIR mirror (T15r17) the same day.",
+    "SIR-QA1-06: section 8.1 new row Employer Signature PIN [[FACT:sir.fed.efw2.employer_signature_pin]] [US-FEDS5-032]; sir_lint: X-run inside a FACT tag quoted from the copy is not a C29 hit.",
+    "SIR-QA1-07: P63 -> [[GAP:SIR-RQ-52]] error catalogue request; P69 -> 'not read for this release' + [[GAP:SIR-RQ-53]]; add both to gaps.json, sir_requests.json, Appendix B, build log.",
+    "SIR-QA1-08: section 7 status cell mirrors the Report Matrix 'Closes with' text including the RSPEC gap/request id (48 rows); add a gap-id column to sir_recon.",
+    "SIR-QA1-17: f44_lib: check 2-letter tokens, restrict acronym-initials matching, ignore superseded/partial/MANUAL _also rows; re-run f44_self (expect the 10 unverified keys as misses until the source-hunter batch lands).",
+    "SIR-QA1-18: Document Control/Version history status 'For QA' until package.issue_date is set by the owner (package-wide).",
+    "Then re-run: build (identical rebuild C71), sir_lint, f44_self, sir_recon, shared C42/C43/C46 (SIR-only and package), content C53/C70, validate_contract, open check; write md5_final last."
+   ]
+  },
+  {
+   "owner": "pipeline owner (shared/, outside the SIR)",
+   "items": [
+    "SIR-QA1-19: consistency_checks.py c46(): make the facts lookup period-aware (all entries per key); re-run C46 package-wide; OASDI 184,500 (2026) / 192,300 (2027) values stay as they are."
+   ]
+  }
+ ],
+ "_next_action": "compliance-source-hunter batch, then artifact-builder SIR round 2 (one rebuild); QA SIR r2.",
+ "_summary": "FAIL. 19 findings: 3 blocker, 11 major, 5 minor. Independent F44: 384 tags, 374 verified, 10 unverified. OASDI 184,500 vs 192,300 = legitimate 2026/2027 periods; shared C46 not period-aware."
+}

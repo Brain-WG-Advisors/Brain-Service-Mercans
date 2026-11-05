@@ -1,0 +1,284 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SKILL",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "../skills-build/payroll-compliance-united-states/ (99 md, md5 list _pipeline/SKILL-md5.txt: 99/99 match)",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "../skills-build/payroll-compliance-united-states/references/13-gotchas.md!4. Channels!line 39 (Louisiana bullet)",
+   "problem": "Says 'The channel and upload format of the quarterly UI wage report are an open gap (RQ-240)'. After the re-sync, la.report.sui.quarterly [US-LAS5-007] states the channel ('Use LWC's online services to file wage reports and pay taxes'; electronic filing required for reports due after 2014-01-31) and 12-states/LA.md line 81 narrows RQ-240 to form name, upload format and a 2026 FAQ copy.",
+   "expected": "Channel = LWC online services, electronic mandatory [US-LAS5-007]; UI form name and wage-file upload format remain open gap RQ-240. Same wording in SKILL.md design clarification 4.",
+   "register_id": "US-LAS5-007",
+   "fact_key": "la.report.sui.quarterly",
+   "action": "routed_to_builder",
+   "evidence": "saved copy 00-official-sources/pdfs/LA/FAQ_UI_EmployerTaxes_wayback-20250422010607.html: quote present verbatim, no 'LAWATS'"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "../skills-build/payroll-compliance-united-states/SKILL.md!Design clarifications!item 3 (and references/13-gotchas.md section 2, DC row)",
+   "problem": "Router and gotcha say DC has no published 2026 withholding method and 'do not configure one'. 12-states/DC.md lines 32 and 41 say the last published instruction is Notice 2022-08 (rate schedule with federal allowance amount), that applying it to 2026 is an inference the payroll calculation must flag, and practice.dc.2026_method_unpublished runs only from 2026-08-13 (D.C. Act 26-416). The instructions conflict, and 'do not configure' leaves DC residents with no withholding.",
+   "expected": "One wording everywhere: no 2026 DC method published after D.C. Act 26-416 (from 2026-08-13); last published instruction is Notice 2022-08 [US-DCP51-002], its use for 2026 is an inference and must be flagged; open gap RQ-138 [US-DCS5-021].",
+   "register_id": "US-DCS5-021",
+   "fact_key": "practice.dc.2026_method_unpublished",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "../skills-build/payroll-compliance-united-states/SKILL.md!How to answer!item 3 (also references/13-gotchas.md section 1, heading and Mid-year line)",
+   "problem": "Rule 'select by payment date; MA PFML is the only exception' is applied to the DC minimum wage 17.95 -> 18.40 from 2026-07-01. Minimum-wage rates apply to hours worked on or after the effective date, not to the payment date: June hours paid in July would wrongly take 18.40.",
+   "expected": "Payment date for withholding and contribution rates/bases; hours worked (work period) for minimum wage and other labour-standard rates; earning date for MA PFML. State the exception list in SKILL.md item 3 and gotchas section 1.",
+   "register_id": "US-DCS5-011",
+   "fact_key": "dc.minwage.hourly",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "../skills-build/payroll-compliance-united-states/references/14-known-gaps.md!Owner decisions and Open research gaps!lines 12,14-19,21,151,182,457,507,573,619,641",
+   "problem": "Pipeline wording survives the scrub (selfcheck WORD=0 because its list lacks these terms): 'build lead', 'owner plan', 'Step-4 report', 'Uninterrupted run authorised', 'P9-LEVY r1/r2', 'stage-1 research gap', 'Checks C34-C36', 'content-check findings C48/C49/C50', 'checker', 'CCG table 206 r11c2', 'orchestrator browser read', 'The merge worker appends ... emit True with that register_id'.",
+   "expected": "Plain decision and gap text (e.g. 'decided by the owner's delegate', 'validation of generated filing files', 'read the page in a browser', closure text with no worker/register_id instruction); add the terms to PIPELINE_WORDS in _build/selfcheck.py.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "01-ccg/modules/m10_reporting.md!PSL table!line 170 (Mississippi); skill references/12-states/MS.md lines 92 and 245",
+   "problem": "CCG and skill state 'payslip, statute, exists: no' / ms.payslip.statute.exists = False on US-MSP9L-001 (A.3 MDES posters page), while PSL marks psl.ms.statement.scope as a limitation (PSL-RQ-14: no statute copy proves presence or absence) and 06-payslip.md line 488 prints 'Not configured in this release (open gap PSL-RQ-14)'. Same fact, two verdicts.",
+   "expected": "Print the MS pay-statement statute as open gap PSL-RQ-14 in CCG m10, annex_MS and 12-states/MS.md, or close PSL-RQ-14 with a Mississippi Code Title 71 copy and keep False everywhere.",
+   "register_id": "US-MSP9L-001",
+   "fact_key": "ms.payslip.statute.exists",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": "../skills-build/payroll-compliance-united-states/references/14-known-gaps.md!Open research gaps!line 381 (RQ-343) vs references/12-states/UT.md lines 72-76",
+   "problem": "RQ-343 (documented limitation) says the effective date of the 485/970 schedules is not stated, while UT.md and gotchas section 1 print them 'from 2026-04-01' [US-UTPIT-003] with new gap RQ-596 for Q1. The 2026-04-01 date comes from the revision label 'Rev. 04/26', not a stated effective date; both cannot be true.",
+   "expected": "Close RQ-343 with the source that states 2026-04-01, or print the UT values as 'effective date not stated; Pub. 14 Rev. 04/26' and keep RQ-343 open; align gaps.json, CCG annex_UT and the skill.",
+   "register_id": "US-UTPIT-003",
+   "fact_key": "ut.pit.base_allowance.single.annual",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "pattern": "F28",
+   "severity": "minor",
+   "pass": "P5",
+   "location": "../skills-build/payroll-compliance-united-states/references/07-qa-report.md!Source-change log and Limitations!lines 21-27",
+   "problem": "CCG (m10 11 psl.* tags, annex_LA RQ-240 text, m04 HI line) and WTC (D411) changed after their QA PASS; the source-change log has one line, and 'Where the CCG modules carry an earlier wording of a payslip rule, this skill prints the current approved fact value' is now false (deviation closed per build log).",
+   "expected": "Dated lines for the 2026-11-04 CCG/WTC re-sync; remove the stale limitation sentence.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "../skills-build/payroll-compliance-united-states/SKILL.md!How to answer!item 2",
+   "problem": "'Every reference file ends with a fact index' is false: 01-ccg.md, 04-reports-spec.md, 07-qa-report.md, 12-states.md, 14-known-gaps.md and 15-sources.md have none.",
+   "expected": "'Every content reference file (modules, States, federal, multistate, WTC, SIR, DD, payslip, Report Specs, gotchas) ends with a fact index.'",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "../skills-build/payroll-compliance-united-states/references/13-gotchas.md!5. Federal FICA!line 50; references/10-federal.md lines 157 and 235",
+   "problem": "Raw booleans leak into prose: 'Medicare wages are not capped (False)', '(True)'.",
+   "expected": "Words in prose ('no wage base'); True/False only in fact-index rows.",
+   "register_id": "US-FEDS5-005",
+   "fact_key": "fed.fica.medicare.wage_base.capped",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!annex_DC configuration warning!(= skill references/12-states/DC.md line 32)",
+   "problem": "Doubled article 'the the payroll calculation must flag this' (inherited from the CCG).",
+   "expected": "'the payroll calculation must flag this'.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "../skills-build/payroll-compliance-united-states/references/13-gotchas.md!1. Values that change over time!Massachusetts PFML bullet",
+   "problem": "Duplicated clause: 'the skill follows the Department: Follow DFML: 2026 split unchanged, swap from 2027-01-01 (...)'.",
+   "expected": "'the skill follows the Department (DFML): 2026 split unchanged, swap from 2027-01-01 [US-MAS5-012].'",
+   "register_id": "US-MAS5-012",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "../skills-build/payroll-compliance-united-states/_build/build_skill.py!OVERRIDES and scrub()!lines 37-41 and the '(LAWATS)' regex",
+   "problem": "Dead override for la.report.sui.quarterly (old LAWATS wording no longer in any source) and a content-rewriting regex remain although the build log says the deviation is closed; silent rewriting of approved text is a drift path.",
+   "expected": "Remove the OVERRIDES entry and the LAWATS regex; keep only pipeline-wording rules.",
+   "register_id": "US-LAS5-007",
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": "F27",
+   "severity": "minor",
+   "pass": "P5",
+   "location": "PROPAGATION-LEDGER.md!2026-11-04!line 128 (and no line for the m04 edit)",
+   "problem": "Line 128 says 'CCG m10 (10 psl.* tags and 12 other payslip fact tags)'; the diff shows 11 changed tags, all psl.* (10 reworded + new psl.ca.statement.household_exclusion). The m04 HI row edit (RQ-563 text, 'build journal' removed) has no ledger line.",
+   "expected": "Line 128: '11 psl.* tags (10 reworded, 1 added: psl.ca.statement.household_exclusion)'; add a line for m04 HI row (wording only, no fact change).",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P5",
+   "location": "_research/gaps.json!counts!top-level",
+   "problem": "counts says open 532 / documented_limitation 40 / closed 13; the gaps list holds 586 / 124 / 29 (the skill prints the correct 586/124).",
+   "expected": "Recompute counts from gaps[].",
+   "register_id": null,
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C32"
+ ],
+ "manual_review_items": [
+  "Precedent: no payroll-compliance-* skill is installed under ~/.claude/skills; compared with ~/mercans-pipeline/skills-build/payroll-compliance-germany (SKILL.md + 7 references, 336 KB). Frontmatter OK: name = folder, description 690 chars, router table covers every reference.",
+  "md5: 99/99 files match _pipeline/SKILL-md5.txt.",
+  "Own sample (independent script, not selfcheck): 1,557 fact-index rows in 10-federal, 11-multistate and 16 States (CA NY TX SC WI NE KS OH DC LA HI MA UT WA NJ PA) plus all 40 rows of 13-gotchas: value, period and register id equal a facts entry, register id exists in the register, value present in the body: 0 misses. 57 multi-period keys: every period value indexed in the same file.",
+  "14-known-gaps vs gaps.json: 586 open + 124 documented limitations, every id present in the skill, statuses equal (formatting only); US-OWN-001..011 all present.",
+  "Traps present: SC Act 110, WI/NE/KS/OH tables, tips/overtime (federal, MI, IA, DC, AL, GA, HI), DC 2026, LAWATS, HI 487J, Additional Medicare separate YTD base. Defects in DC and LAWATS wording are findings.",
+  "selfcheck.py and selfcheck_strict.py re-run: 0 in every category (result files rewritten with identical content).",
+  "Size: 6.35 MB; fact indexes are 1.0 MB (16%, 8,278 rows); largest index CT 640 rows. Keep the index per file: it is found with Grep by key and gives period + register id next to the text. The real weight is 02-wtc.md (834 KB) and 15-sources.md (796 KB); splitting 15-sources by jurisdiction is optional, not required.",
+  "WebFetch: ssa.gov cbb and mass.gov PFML returned 403 from this exit; values checked against the register saved copies and facts only.",
+  "C5/C6/C7 not applicable to a skill; no contract exists for SKILL beyond review."
+ ],
+ "propagation": [
+  {
+   "fact": "la.report.sui.quarterly",
+   "consumed_by": [
+    "CCG/annex_LA",
+    "RSPEC",
+    "SKILL/13-gotchas",
+    "SKILL/SKILL.md"
+   ],
+   "resynced": false,
+   "register_id": "US-LAS5-007"
+  },
+  {
+   "fact": "ms.payslip.statute.exists",
+   "consumed_by": [
+    "CCG/annex_MS",
+    "CCG/m10_reporting",
+    "PSL",
+    "SKILL/12-states/MS"
+   ],
+   "resynced": false,
+   "register_id": "US-MSP9L-001"
+  },
+  {
+   "fact": "practice.dc.2026_method_unpublished",
+   "consumed_by": [
+    "CCG/annex_DC",
+    "WTC",
+    "SKILL/SKILL.md",
+    "SKILL/13-gotchas"
+   ],
+   "resynced": false,
+   "register_id": "US-DCS5-021"
+  },
+  {
+   "fact": "ut.pit.base_allowance.single.annual",
+   "consumed_by": [
+    "CCG/annex_UT",
+    "WTC",
+    "SKILL/13-gotchas",
+    "SKILL/14-known-gaps"
+   ],
+   "resynced": false,
+   "register_id": "US-UTPIT-003"
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "Re-sync CCG: md sources vs _pipeline/_backup/pre-skill-resync-2026-11-04",
+   "result": "pass",
+   "note": "Changed: annex_LA 4 diff lines (la.report.sui.quarterly to US-LAS5-007 wording; RQ-240 text), m10 22 lines (11 rows, 11 psl.* tags: 10 reworded + psl.ca.statement.household_exclusion added; no non-tag text changed), m04 2 lines (HI RQ-563 'build journal' removed). Nothing else differs in 53 annexes + 14 modules."
+  },
+  {
+   "name": "Re-sync CCG docx: text diff vs both backups",
+   "result": "pass",
+   "note": "vs pre-resync: 28 changed paragraphs = 22 m10 + 4 LA + 2 HI; vs pre-journal: 2 (HI only). Every tag value equals a current fact."
+  },
+  {
+   "name": "Re-sync WTC: cell diff vs both backups",
+   "result": "pass",
+   "note": "Only Wage Type Catalogue!D411 (US-110 SC SIT) changed: sc.sit.act110_rates.level reworded, '(journal trap)' removed; equals the current fact; numbers unchanged."
+  },
+  {
+   "name": "tag_sync_check.py",
+   "result": "pass",
+   "note": "CCG 7,924 / SIR 479 / RSPEC 1,565 / DD 198 / WTC 1,266 / PSL 219 tags, 0 stale or unknown."
+  },
+  {
+   "name": "LA wording vs US-LAS5-007 saved copy",
+   "result": "pass",
+   "note": "'Use LWC's online services to file wage reports and pay taxes' and 'required to file electronically for reports due after Jan. 31, 2014' present verbatim; LAWATS absent. Note: fact effective_from 2025-04-01 is the snapshot date, register effective_from 2024-12-05."
+  },
+  {
+   "name": "Known gaps vs gaps.json and US-OWN-001..011",
+   "result": "pass",
+   "note": "Counts and statuses match; wording defects are findings."
+  }
+ ],
+ "_patterns_swept": [
+  "F6",
+  "F18",
+  "F27",
+  "F28",
+  "G-BUILD",
+  "G-PROP",
+  "G-SPOT"
+ ],
+ "numeric_verification": {
+  "facts_total": 1597,
+  "facts_verified": 1597,
+  "unverified_keys": [
+   "fed.fica.oasdi.wage_base",
+   "ma.pfml.family.rate"
+  ],
+  "method": "1,557 index rows + 40 gotcha rows checked against the approved facts files and legal-basis-register.csv (value, period, register id); primary-source re-fetch attempted for 2 keys, HTTP 403 from a non-US exit. The skill adds no new numbers (selfcheck NUM 0); primary verification rests on the artifacts' own PASS reviews."
+ },
+ "_batch_fix_list": [
+  "1 skill 13-gotchas s4 + SKILL.md DC4: LA channel = LWC online services [US-LAS5-007]; RQ-240 = form name + upload format only.",
+  "2 skill SKILL.md DC3 + 13-gotchas s2 DC row: align with DC.md (Notice 2022-08 last published, inference flagged, Act 26-416 from 2026-08-13, RQ-138).",
+  "3 skill SKILL.md How-to-answer 3 + 13-gotchas s1: payment date for tax/contribution; hours worked for minimum wage; earning date for MA PFML.",
+  "4 skill build_skill.py RULES + selfcheck.py PIPELINE_WORDS: neutralise 'build lead', 'owner plan', 'Step-4', 'P9-LEVY', 'stage-1', 'C34-C36', 'C48/C49/C50', 'checker', 'table N rNcN', 'orchestrator', 'merge worker', 'register_id'; rebuild 14-known-gaps.",
+  "5 source hunter: PSL-RQ-14 (MS statute) and RQ-343 vs RQ-596 (UT effective date); then align CCG m10/annex_MS/annex_UT, gaps.json and skill.",
+  "6 skill 07-qa-report: add 2026-11-04 re-sync lines; drop the stale 'earlier wording' sentence.",
+  "7 skill SKILL.md How-to-answer 2: 'every content reference file' fact-index wording.",
+  "8 skill: booleans in prose (13-gotchas l.50, 10-federal l.157/235); MA PFML duplicated clause; CCG annex_DC 'the the'.",
+  "9 build_skill.py: remove dead LA OVERRIDES entry and '(LAWATS)' regex.",
+  "10 ledger line 128 count (11 psl.* tags) + new line for m04 HI; gaps.json counts recomputed.",
+  "Then: rebuild skill, re-run selfcheck, selfcheck_strict, tag_sync_check, rewrite SKILL-md5.txt; round 2."
+ ],
+ "_next_action": "artifact-builder round 2 (items 1-4, 6-10); compliance-source-hunter item 5"
+}

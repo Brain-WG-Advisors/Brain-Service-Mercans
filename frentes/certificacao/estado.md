@@ -101,6 +101,68 @@
   - o documento do Vietnã e do Taiwan, para usar como modelo;
   - se existe prazo do Marko, ou se propomos o prazo depois de medir 1 país;
   - um contato único com o BAU por país para a certificação e para este projeto.
+- **Origem da Internal Certification: reunião de 01/10 "Statutory Filing & Integration Overhaul"** (ata da Manju de 01/10 18:55, Re: da Katrin Rudi de 02/10, encaminhada ao usuário em 07/10 9:42; lida no Gmail em 03/11; não estava no cérebro). Presentes: Marko, Manju, Katrin Rudi (Configuration), Mohit, Illia Virchenko e Yojana.
+  - **O Marko pediu:** "a complete inventory and quality assurance testing of statutory filings and integrations because past implementations included inconsistent custom and client-specific reports that lacked proper sign-offs"; o mapa por país.
+    - O inventário da APAC (piloto da Manju) "failed to verify data accuracy or payroll calculation reconciliation".
+  - **Certificação:** o Marko diz que ela é necessária "to confirm that reports are properly configured as statutory reports rather than client-specific custom reports, citing historical issues in Sweden and the Netherlands". As specs devem ser recertificadas "with external validation".
+  - **Decisões:**
+    - inventário por país de todos os reports e integrações;
+    - o research revisa e certifica as specs, e o compliance development testa contra elas;
+    - **produtizar em 12 meses** fluxos, calendários, cronogramas de envio e validações;
+    - **passar o piloto da APAC para a Europa**, "where greater risks reside".
+  - **Outros pontos:**
+    - Katrin: anexou exemplos de configuração de report (JSON da NZ e da TH: th-sps-1-10, th-sso-001, nz-ei, ReturnEI.xml) e vai fazer o módulo de configuração aceitar o upload de spec.
+    - Illia: a validação do produto só checa o schema XML e os campos obrigatórios e seus tipos.
+    - O Marko quer o fluxo de desenvolvimento e deploy desenhado, com onde fica cada artefato, porque a versão no monday não é controlada.
+- **Weekly de 03/11** (`raw/reunioes/2026-11-03-research-team-weekly.txt`, Manju + Enaakshi + usuário). Partes desta frente: 09:57 a 22:59.
+  - **A Manju viu os e-mails** e perguntou o objetivo (09:57). O usuário respondeu (10:24–11:43): todos os países, inclusive a Noruega. A saída é uma tabela por entrega com estas colunas: integração por API (sim/não), conforme (sim/não), por quê.
+  - **Objetivo do Marko, nas palavras da Manju:**
+    - 11:56: "he wants to automate everything he does not want anything manual to be done by BAU or by Ice". As specs devem ir direto à autoridade: integração direta, arquivo de upload ou envio direto.
+    - 16:32: o Marko disse ao Andy que **não aprova contrato de ICE depois de janeiro** se houver intervenção manual do ICE.
+    - Exemplo da Suécia: o XML vai ao portal, o ICE revisa, completa à mão as lacunas e clica em submit. É esse o passo a eliminar.
+    - **A lista do Andy:** ele marcou **10 países como área de preocupação** (11:56, mostrada pela Manju "no último call"). ⚠️ Não temos essa lista no cérebro: pedir à Manju.
+  - **O que entregar** (15:40–18:26):
+    - Passo a passo de como cada entrega é feita hoje no nosso sistema, mostrando onde há atividade manual.
+    - **Um fluxo por report por país**, com como deveria ser. A lacuna vira template ou spec no produto.
+    - Partes, em ordem: (1) fluxo do report; (2) templates; (3) specs completas.
+    - Modelo: os PPTs da Manju de Taiwan e Vietnã. As entregas dos três precisam ser consistentes (22:41).
+  - **SOPs do Customer Success** (Moharam/QCRM), com o processo passo a passo:
+    - Suécia (`SOP_Arbetsgivardeklaration_End_to_End Cycle`, compartilhado em 03/11);
+    - Noruega (a-melding v0_1, encaminhada em 03/11; cópia em `raw/drive/2026-11-03-sop-amelding-NO/`);
+    - Dinamarca (compartilhado com a Enaakshi).
+    - Usar como insumo da "rota de hoje". O usuário disse (13:56) que não traz o mapeamento nem as respostas do time.
+  - **Calendário de compliance** (18:29–19:36): as datas das entregas de cada país fechado vão para a ferramenta de calendário de compliance, em paralelo. A Manju disse que não dá para esperar tudo.
+  - **Tracker da Manju** (19:37–22:38):
+    - Está na pasta do time de research e cobre os 61 países do board monday de G2N/Payslip; a Europa está com prioridade alta.
+    - Pendente do usuário: **pôr o nosso nome nos países que são nossos** e dizer **o que fechamos em novembro**. Nossa atividade entra em "reporting requirements".
+    - Depois, nova conversa com a Manju.
+  - **Arquivos ligados à reunião** (vasculhados em 03/11):
+    - **Notas do Gemini da weekly de 03/11:** Doc `1Bcg_LveQrXC-9mkrXHUJa0mW8mmQxC8AHbtWMR27I-w`. Próximos passos do usuário: o design dos EUA (frente EUA), falar com a Sadaf sobre o reMarkable USA e explicar o plano ao Marko. Do grupo: atualizar o tracker e o calendário.
+    - **Reunião de 29/10, "Compliance Calendar Review, Reporting automation guide"** (Manju, Enaakshi e usuário). Não estava no cérebro. Notas do Gemini: Doc `1t7SPYLNcoUufhYBjmpL-DQSm3wCoFjt7LOHqn__EsOk`.
+      - É a "lista do Andy": a Manju **mostrou** um documento do Andy com os países de alta exposição de ICE, "where ICE is solely responsible for filings with limited internal control or visibility". DK e CO estão em vermelho.
+      - **Divisão:** DK → Enaakshi; **CO e Indonésia → usuário**; Angola e África do Sul → Manju.
+      - **Decisões:**
+        - revisão cruzada (Manju e usuário validam os outputs de países);
+        - prioridade pela exposição de ICE na lista do Andy, para a revisão de specs e os requisitos de report.
+      - Next step da Manju: "Share Exposure Document". ⚠️ Não está no Drive nem no Gmail; pedir.
+    - **Tracker:** `Research Team Folder/Compliance_Activities_Tracker.xlsx` (03/11 10:29; cópia em `raw/drive/2026-11-03-weekly-research/`).
+      - Três abas de atividade, com 61 países cada:
+        - (1) calendário de compliance, 19 europeus em High;
+        - (2) revisão das specs existentes, os mesmos 19 em High;
+        - (3) requisitos de report por formulário, 20 em High: DK, UK, IE, MY, NL, NO, SE, ZA, AO, CO, EE, ES, FI, MA, NG, TH, TN, TW, UA, VN.
+      - Só a Manju preencheu: TW (até 06/11) e VN (até 30/10), ambos em andamento.
+      - Preencher em cada linha: Owner, Start, Target e Status.
+      - **KZ é Medium e AZ e RU não estão na lista dos 61.**
+    - **SOP da Suécia** (`SOP_Arbetsgivardeklaration_End_to_End Cycle _V1`, Doc `1DwwBcdo72R1BSGHDfn77yowne1qjHs-1_RS2ij3Vfc8`), §5.5:
+      - "Submission to Skatteverket is done exclusively through this outbound integration — the declaration is not keyed in or file-uploaded manually on the Skatteverket portal". A autenticação é por API (scope agd) e o status esperado é DONE_SUCCESS.
+      - §5.6: o ICE só revisa **depois** do envio. Isso difere do exemplo da Suécia que a Manju deu na reunião (upload, e o ICE corrige e envia).
+      - A confirmar com o Athul (e-mail de 03/11).
+    - **SOP da Noruega:** §5.5 diz envio só pela integração do HR Blizz. Conflita com o Umesh (ver `NO_fluxo_entregas.md`).
+    - **Processo de atualizações anuais:** `Research Team Folder/Annual Statutory Updates - Tracking, Development and Release Process.docx` (02/11; cópia em `raw/drive/2026-11-03-weekly-research/`). Trata dos alertas e atualizações; não é desta frente.
+  - **Outras frentes, não desta:**
+    - design dos EUA, teste no payroll engine com o Andre e o cliente reMarkable USA, contato da Sadaf → frente EUA;
+    - explicar ao Marko amanhã e call com o Mohit 04/11 6:30 IST;
+    - skills ou alertas agendados e cross-check entre países.
 
 ## Onde ficou cada coisa
 - Sessão VS Code (07–14/10, `8ae80473…`): validações NO/DK/SE/KZ, painel, Holanda completa + Audit Report.

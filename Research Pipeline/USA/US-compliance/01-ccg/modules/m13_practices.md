@@ -20,19 +20,19 @@ Each row is a build rule established from an official source. It records a point
 
 | Jurisdiction | Practice (value) | Register |
 |---|---|---|
-| SC | [[FACT:practice.sc.withholding_rates_2026=Use WH-1603 tables 0/3/6% for 2026 withholding; Act 110 rates (1.99%/5.21%) apply at the 2026 annual return only]] | US-SCS5-004 |
-| WI | [[FACT:practice.wi.use_w166_tables=Withholding uses W-166 schedule (3.54/4.65/5.30/7.65%), not the assessment brackets (3.50/4.40/5.30/7.65%)]] | US-WIS5-010 |
-| NE | [[FACT:practice.ne.use_circular_en_tables=Withholding uses DOR Circular EN tables (2026 2.26-4.60%), not the statutory 4.55% rate]] | US-NES5-018 |
+| SC | [[FACT:practice.sc.withholding_rates_2026=Withholding tables in force: SCDOR WH-1603 (Rev. 10/30/25) 2026 tables, 0/3/6%; SCDOR Information Letter #26-20 gives the Act 110 2026 schedule 1.99% (0-29,999) / 5.21% minus 966 (30,000+) and says withholding is unchanged until DOR republishes the tables]] | US-SCS5-004; US-SCS5-005 |
+| WI | [[FACT:practice.wi.use_w166_tables=Withholding uses W-166 schedule (3.54/4.65/5.30/7.65%), not the assessment brackets (3.50/4.40/5.30/7.65%)]] | US-WIS5-010; US-WIS5-011 |
+| NE | [[FACT:practice.ne.use_circular_en_tables=Withholding uses the DOR Circular EN 2026 percentage-method tables (2.26% to 4.60% rates); the statute (77-2715.03) sets 4.55% for rate three in tax year 2026]] | US-NES5-010; US-NES5-018 |
 | KS | [[FACT:practice.ks.kw100_header_stale=KW-100 header prints "wages paid on and after January 1, 2021" but figures are the 2024 values in force for 2026 (5.20/5.58%)]] | US-KSS5-001 |
 | MI | [[FACT:practice.mi.tips_ot_deduction_level=MI 2025 PA 24 tips/overtime deduction (TY2026-2028) is ASSESSMENT only; no change to withholding]] | US-MIS5-017 |
 | VA | [[FACT:practice.va.std_deduction_2027_not_modelled=Statute: 2027 standard deduction 9,200/18,400; do not model 2027 withholding until Virginia Tax publishes the 2027 formula (guide Rev. 10/26 says the deduction sunsets - wrong)]] | US-VAS5-018 |
 | DC | [[FACT:practice.dc.2026_method_unpublished=D.C. Act 26-416 (emergency, from 2026-08-13) revoked personal exemptions; no 2026 withholding method published (D-4 under review)]] (from 2026-08-13) | US-DCS5-021 |
-| CT | [[FACT:practice.ct.tables_vs_rules=DRS permits tables or TPG-211 rules; results differ up to 0.48/period; configured: DRS per-period tables up to each table maximum, TPG-211 rules above (CT.2, configuration decision of 2026-11-02)]] | US-CTS5-010 |
-| OH | [[FACT:practice.oh.flat_rate_vs_tables=TY2026 statute flat 2.75% but withholding tables graduated to 3.4% (5747.06 rule vs 5747.02 rate) - use the tables]] | US-OHS5-007 |
+| CT | [[FACT:practice.ct.tables_vs_rules=DRS: 'Use either the withholding calculation rules or the withholding tables' (TPG-211); the two methods can give different amounts; configured: DRS per-period tables up to each table maximum, TPG-211 rules above (CT.2, configuration decision of 2026-11-02)]] | US-CTS5-010; US-CTWH-001 |
+| OH | [[FACT:practice.oh.flat_rate_vs_tables=Ohio withholding follows the tax commissioner's tables under ORC 5747.06, graduated 1.6% / 2.99% / 3.4% from 2026-08-01 (US-OH-006, US-OHS5-001); the ORC 5747.02 statute rate for TY2026 and thereafter is a flat 2.75% over 26,050 (US-OHS5-007) - use the tables for withholding]] | US-OHS5-007; US-OHS5-008; US-OH-006; US-OHS5-001 |
 | OR | [[FACT:practice.or.federal_cap=Use 8,750 federal-tax subtraction cap (pp.6-7 formula); DOR publication also prints 8,500 and its example 1 is mis-computed]] | US-ORS5-009 |
 | HI | [[FACT:practice.hi.2027_tables_pending=Act 24 SLH 2026 changes TY2027 brackets (new 13% top); 2027 withholding indeterminate until DOTAX issues 2027 Booklet A]] | US-HIS5-029 |
-| GA | [[FACT:practice.ga.rate_change_2026=4.99% for TY2026 (5.19% before); 2027 0.125-point step conditional on OPB report of 2026-12-01]] | US-GAS5-009 |
-| MA | [[FACT:practice.ma.pfml_split=Follow DFML: 2026 split unchanged, swap from 2027-01-01 (Ch. 101/2026 s.45 conflict recorded)]] | US-MAS5-012 |
+| GA | [[FACT:practice.ga.rate_change_2026=4.99% for taxable years beginning on/after 2026-01-01 (5.19% before); from 2027-01-01 reduced by 0.125 point annually to 3.99%, each step delayed one year if an OPB trigger holds at 1 December]] | US-GAS5-009 |
+| MA | [[FACT:practice.ma.pfml_split=Follow DFML: 2026 split unchanged, swap from 2027-01-01 (Ch. 101/2026 s.45 conflict recorded)]] | US-MAS5-012; US-MAS5-026 |
 | AL | [[FACT:practice.al.fit_before_sit=AL state base deducts federal withholding: order FIT before AL SIT]] | US-ALS5-001 |
 | FED | [[FACT:practice.fed.estimator_not_oracle=IRS Tax Withholding Estimator is not an employer engine or oracle]] | US-FED-021 |
 | FED | [[FACT:practice.fed.pl119_21_withholding=Do not reduce FIT withholding for tips/overtime deductions except through W-4 Step 4(b)]] | US-FEDS5-030 |

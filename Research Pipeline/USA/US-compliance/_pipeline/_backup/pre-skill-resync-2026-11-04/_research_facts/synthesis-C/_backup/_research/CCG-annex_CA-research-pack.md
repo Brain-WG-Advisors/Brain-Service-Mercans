@@ -1,0 +1,166 @@
+# CCG annex_CA research pack — California
+
+Synthesis B, 2026-11-02. Source: `_research/stage5/CA.md` and the active/partial rows of `00-official-sources/legal-basis-register.csv`; no fetching. Facts file: `_research/CCG-annex_CA-facts.json` (validator: PASS). Every value below is a fact object there; key in backticks, register id in brackets.
+
+**Summary.** Minimum wage 16.90 (2026) / 17.40 (2027, DOF-certified); daily overtime and double time; semimonthly paydays. PIT withheld by EDD on DE 4 (Method A tables or Method B exact; 2026 brackets 1.1%-14.63%); supplemental flat 10.23% bonus/stock options and 6.6% other. UI 7,000 base (employer only, new 3.4%), ETT 0.1%, SDI 1.3% employee with no wage cap (2027 rate unpublished). Lab. Code 226 nine-item wage statement plus sick-leave balance. DE 9/DE 9C quarterly, W-2 not filed with EDD. Local minimum wages not registered (fan-out).
+
+## 1 — Employment / labour code
+Local minimum wages: cities/counties may set higher rates (most favourable applies); DIR keeps no list and the Berkeley inventory is tier B, so no local rate is registered (open, fan-out). Industry minimums (fast food, SB 525 health care) not fetched.
+
+- `ca.minwage.hourly` = **16.9** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-006, quoted from authority page, conf high] — All employers; learners 85% for first 160 hours.
+- `ca.minwage.hourly` = **17.4** USD (2027-01-01 → open) [A.2, US-CAS5-007, second independent authority, conf high] — DOF certified 2026-07-31 (+2.99%); DIR News 2026-66 + Governor release. Check 16.90 x 1.0299 = 17.405 -> 17.40.
+- `ca.minwage.learner.percent` = **85** percent (2026-01-01 → open) [A.2, US-CAS5-006, quoted from authority page, conf high] — First 160 hours of employment.
+- `ca.exempt.salary.annual_min` = **70304** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-006, derived arithmetically, conf high] — 2 x 16.90 x 2,080.
+- `ca.exempt.salary.annual_min` = **72384** USD (2027-01-01 → open) [A.2, US-CAS5-007, second independent authority, conf high] — Quoted by DIR (= 2 x 17.40 x 2,080).
+- `ca.overtime.rule` = **1.5x over 8 h/day, over 40 h/week and first 8 h of 7th consecutive day; 2x over 12 h/day and over 8 h on 7th day (Lab. Code 510); alternative workweek exceptions**  (2026-01-01 → open) [A.1, US-CAS5-008, direct artifact inspection, conf high]
+- `ca.overtime.daily_threshold_hours` = **8** hours (2026-01-01 → open) [A.1, US-CAS5-008, direct artifact inspection, conf high]
+- `ca.overtime.double_time_daily_threshold_hours` = **12** hours (2026-01-01 → open) [A.1, US-CAS5-008, direct artifact inspection, conf high]
+- `ca.pay_frequency.rule` = **twice a month: 1st-15th paid 16th-26th; 16th-end paid 1st-10th next month; EAP monthly by 26th; weekly/biweekly/semimonthly within 7 days of period close; OT by next regular payday (Lab. Code 204)**  (2026-01-01 → open) [A.1, US-CAS5-009, direct artifact inspection, conf high]
+- `ca.direct_deposit.requires_voluntary_authorisation` = **True**  (2026-01-01 → open) [A.1, US-CAS5-009, direct artifact inspection, conf high] — Lab. Code 213(d).
+
+## 2 — Income tax (state withholding)
+- `ca.wh.certificate.form` = **DE 4 Rev. 56 (1-26); federal W-4 for FIT only since 2020; no valid DE 4 = Single 0 allowances; exempt status renewed by Feb 15**  (2026-01-01 → open) [A.2, US-CAS5-015, direct artifact inspection, conf high]
+- `ca.wh.method` = **Method A (wage-bracket tables, wages < 1M) or Method B (exact calculation), DE 44 Rev. 52 (4-26)**  (2026-01-01 → open) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.wh.low_income_exemption.single` = **18896** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Single / Married 0-1 allowances; Married 2+ / HoH 37,791.
+- `ca.wh.low_income_exemption.married_2plus_hoh` = **37791** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.wh.std_deduction.single` = **5706** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.wh.std_deduction.married_2plus_hoh` = **11412** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.wh.allowance_credit.per_allowance` = **168.3** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.wh.estimated_deduction.per_allowance` = **1000** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.1.rate` = **1.1** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.1.ceiling` = **11079** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.2.rate` = **2.2** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.2.ceiling` = **26264** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.3.rate` = **4.4** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.3.ceiling` = **41452** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.4.rate` = **6.6** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.4.ceiling` = **57542** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.5.rate` = **8.8** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.5.ceiling` = **72724** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.6.rate` = **10.23** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.6.ceiling` = **371479** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.7.rate` = **11.33** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.7.ceiling` = **445771** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.8.rate` = **12.43** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.8.ceiling` = **742953** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.9.rate` = **13.53** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.9.ceiling` = **1000000** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+- `ca.pit.bracket.single.10.rate` = **14.63** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Over 1,000,000 (base 114,220.27).
+- `ca.pit.brackets.married.ceilings` = **22,158 / 52,528 / 82,904 / 115,084 / 145,448 / 742,958 / 891,542 / 1,000,000 / 1,485,906; 14.63% over; base 164,228.58**  (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Rates per DE 44 Method B Married table (read the table, not this summary, for the rate attached to each band around the 1,000,000 kink).
+- `ca.pit.brackets.hoh.ceilings` = **22,173 / 52,530 / 67,716 / 83,805 / 98,990 / 505,208 / 606,251 / 1,000,000 / 1,010,417; base 107,334.77**  (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Rates per DE 44 Method B HoH table.
+- `ca.wh.supplemental.rate.bonus_stock_options` = **10.23** percent (2026-01-01 → open) [A.2, US-CAS5-004, direct artifact inspection, conf high] — When paid separately: aggregate or flat; with regular wages: aggregate.
+- `ca.wh.supplemental.rate.other` = **6.6** percent (2026-01-01 → open) [A.2, US-CAS5-004, direct artifact inspection, conf high] — Overtime, commissions, severance, vacation pay etc. paid separately.
+- `ca.wh.household.by_agreement_only` = **True**  (2026-01-01 → open) [A.2, US-CAS5-004, direct artifact inspection, conf high]
+
+## 2b — Non-resident regime and reciprocity
+- `ca.nonres.sourcing` = **residents: all wages with credit for other-state withholding (withhold excess only); nonresidents wholly in CA: all wages; split-state: CA working days / total working days (volume ratio for commissions); military spouse exclusion on DE 4**  (2026-01-01 → open) [A.2, US-CAS5-004, direct artifact inspection, conf high] — No reciprocity agreement and no local wage tax in the full DE 44 scan [US-CA-EDD-005, legacy id].
+
+## 3 — Social insurance (SUI / SDI / PFML / levies)
+- `ca.sui.wage_base` = **7000** USD (2026-01-01 → open) [A.2, US-CAS5-016, quoted from authority page, conf high] — Kept for 2027.
+- `ca.sui.new_employer.rate` = **3.4** percent (2026-01-01 → open) [A.2, US-CAS5-016, quoted from authority page, conf medium] — 2-3 years; range 1.5%-6.2% (Schedule F+ incl. 15% emergency surcharge, US-CAP7-003); employer only; max 434/employee.
+- `ca.sui.employer.rate.min` = **1.5** percent (2026-01-01 → 2026-12-31) [A.2, US-CAP7-003, quoted from authority page, conf high]
+- `ca.sui.employer.rate.max` = **6.2** percent (2026-01-01 → 2026-12-31) [A.2, US-CAP7-003, quoted from authority page, conf high]
+- `ca.ett.rate` = **0.1** percent (2026-01-01 → open) [A.2, US-CAP7-001, quoted from authority page, conf high] — On first 7,000 (max 7/employee); same 2027 [US-CAS5-016].
+- `ca.sdi.employee.rate` = **1.3** percent (2026-01-01 → 2026-12-31) [A.2, US-CAP7-002, quoted from authority page, conf high] — Includes PFL; no wage cap since 2024-01-01 (SB 951); no employer share. A WebFetch summary saying 1.4% is WRONG. 2027 rate unpublished (open).
+- `ca.sdi.wage_cap.exists` = **False**  (2024-01-01 → open) [A.2, US-CAP7-002, quoted from authority page, conf high]
+- `ca.sdi.voluntary_plan.w2_box14_label` = **VPDI**  (2026-01-01 → open) [A.2, US-CAS5-018, direct artifact inspection, conf high]
+
+## 4 — Payslip statute
+- `ca.payslip.items` = **gross wages; total hours (not salaried exempt); piece-rate units and rates; deductions; net wages; pay-period dates; employee name + last 4 SSN or employee ID; employer legal name and address; every hourly rate with hours**  (2026-01-01 → open) [A.1, US-CAS5-005, direct artifact inspection, conf high] — Lab. Code 226(a); semimonthly or with each payment; household excluded (226(d)); public employers only SSN rule (226(i)).
+- `ca.payslip.sick_leave_balance.required` = **True**  (2026-01-01 → open) [A.1, US-CAS5-011, direct artifact inspection, conf high] — On the statement or a separate writing each payday (Lab. Code 246(i)).
+- `ca.payslip.inspection_response_days` = **21** days (2026-01-01 → open) [A.1, US-CAS5-005, direct artifact inspection, conf high]
+- `ca.payslip.penalty.max` = **4000** USD (2026-01-01 → open) [A.1, US-CAS5-005, direct artifact inspection, conf high] — 50 first / 100 subsequent per violation up to 4,000; 750 for failing an inspection request.
+
+## 5 — Statutory reporting instruments
+- `ca.registration.de1.trigger` = **100** USD (2026-01-01 → open) [A.2, US-CAS5-002, direct artifact inspection, conf high] — DE 1 within 15 days after paying more than 100 in wages in a quarter; DE 1P PIT-only.
+- `ca.report.deposit.de88` = **follows federal schedule: next-day if accumulated PIT > 400; semi-weekly; monthly by 15th if >= 350; quarterly if < 350; EFT by 3rd business day; 15% failure-to-deposit penalty**  (2026-01-01 → open) [A.2, US-CAS5-002, direct artifact inspection, conf high]
+- `ca.report.quarterly.de9_de9c` = **DE 9 + DE 9C electronic only, zero returns filed; due Apr 1/Jul 1/Oct 1/Jan 1, delinquent after Apr 30, Jul 31, Nov 2 2026, Feb 1 2027; DE 9C per employee subject wages, PIT wages, PIT withheld; corrections DE 9ADJ**  (2026-01-01 → open) [A.2, US-CAS5-002, direct artifact inspection, conf high]
+- `ca.report.w2.filed_with_state` = **False**  (2026-01-01 → open) [A.2, US-CAS5-018, direct artifact inspection, conf high] — W-2 to employees by 2027-02-01: box 14 CASDI, 16 CA PIT wages, 17 CA PIT withheld; not filed with EDD/FTB. No separate annual reconciliation.
+- `ca.newhire.report_days` = **20** days (2026-01-01 → open) [A.2, US-CAS5-018, direct artifact inspection, conf high] — DE 34 from start-of-work date; rehire after separation of 60+ days; contractors DE 542 at 600+.
+
+## 6 — Leave
+- `ca.leave.sick.accrual.hours_worked_per_hour` = **30** hours (2024-01-01 → open) [A.1, US-CAS5-011, direct artifact inspection, conf high] — Lab. Code 246 (SB 616): eligible after 30 days; alternative 24 h by day 120 and 40 h by day 200; use from day 90; usage cap 40 h/5 days; balance cap 80 h/10 days; front-load 40 h; reinstated on rehire within 1 year; regular rate or 90-day average; increment max 2 h.
+- `ca.leave.sick.usage_cap_hours` = **40** hours (2024-01-01 → open) [A.1, US-CAS5-011, direct artifact inspection, conf high]
+- `ca.leave.sick.accrual_cap_hours` = **80** hours (2024-01-01 → open) [A.1, US-CAS5-011, direct artifact inspection, conf high]
+- `ca.leave.sick.payout_on_separation` = **False**  (2024-01-01 → open) [A.1, US-CAS5-011, direct artifact inspection, conf high]
+
+## 7 — Termination and final pay
+- `ca.final_pay.discharge` = **immediately (72 h for seasonal perishable-food layoffs); quit: within 72 h or last day with 72 h notice; waiting-time penalty 1 day wages per day up to 30 days**  (2026-01-01 → open) [A.1, US-CAS5-010, direct artifact inspection, conf high]
+- `ca.final_pay.waiting_time_penalty_max_days` = **30** days (2026-01-01 → open) [A.1, US-CAS5-010, direct artifact inspection, conf high]
+- `ca.final_pay.vested_vacation_payout` = **True**  (2026-01-01 → open) [A.1, US-CAS5-010, direct artifact inspection, conf high] — Lab. Code 227.3: paid at final rate; forfeiture prohibited.
+- `ca.separation_notice` = **CUIC 1089 Notice to Employee as to Change in Relationship + DE 2320 at discharge, layoff or leave; email only with opt-in**  (2026-01-01 → open) [A.2, US-CAS5-018, direct artifact inspection, conf high]
+- `ca.warn.notice_days` = **60** days (2026-01-01 → open) [A.2, US-CAS5-018, direct artifact inspection, conf high] — Cal-WARN Lab. Code 1400-1408; 75-employee threshold not quoted (open).
+
+## 8 — Benefits in kind / taxable wages
+- `ca.hsa.conforms` = **False**  (2026-01-01 → open) [A.2, US-CAS5-019, direct artifact inspection, conf high] — Employer and employee HSA contributions subject to UI/ETT, SDI and PIT (not UI/SDI via cafeteria plan); employer HSA (W-2 code W) added back for PIT [US-CAS5-020].
+- `ca.wages.401k_deferrals` = **UI/SDI subject; PIT not subject**  (2026-01-01 → open) [A.2, US-CAS5-019, direct artifact inspection, conf high]
+- `ca.wages.gtl_over_50k` = **UI/SDI not subject; PIT not withheld but reportable**  (2026-01-01 → open) [A.2, US-CAS5-019, direct artifact inspection, conf high]
+- `ca.obbba.conforms` = **False**  (2026-01-01 → open) [A.2, US-CAS5-020, second independent authority, conf high] — No state tips or overtime deduction.
+- `ca.meals.value.per_day` = **15.85** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-003, direct artifact inspection, conf high] — Breakfast 3.25, lunch 4.90, dinner 7.70, unidentified 5.70.
+- `ca.meals.value.breakfast` = **3.25** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-003, direct artifact inspection, conf high]
+- `ca.meals.value.lunch` = **4.9** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-003, direct artifact inspection, conf high]
+- `ca.meals.value.dinner` = **7.7** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-003, direct artifact inspection, conf high]
+- `ca.lodging.value.min_weekly` = **66.1** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-003, direct artifact inspection, conf high] — 66 2/3% of rental value, min 66.10/week, max 2,038/month.
+- `ca.lodging.value.max_monthly` = **2038** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-003, direct artifact inspection, conf high]
+
+## 9 — Deductions and garnishments
+- `ca.garn.creditor.max_percent` = **20** percent (2026-01-01 → open) [A.2, US-CAS5-013, direct artifact inspection, conf high] — WG-002 Rev. 2026-01-01: lesser of 20% of disposable earnings or 40% of disposable earnings above minimum wage x 48 (weekly) / 96 (biweekly) / 104 (semimonthly) / 208 (monthly); local MW if higher; support first.
+- `ca.garn.creditor.excess_percent` = **40** percent (2026-01-01 → open) [A.2, US-CAS5-013, direct artifact inspection, conf high]
+- `ca.garn.creditor.minwage_multiple.weekly` = **48** ratio (2026-01-01 → open) [A.2, US-CAS5-013, direct artifact inspection, conf high]
+- `ca.garn.child_support.cap_percent` = **50** percent (2026-01-01 → open) [A.2, US-CAS5-022, direct artifact inspection, conf high] — 50% after taxes; remit to SDU within 7 business days of pay date electronically (Fam. Code 17309.5); IWO kept 1 year after separation.
+- `ca.garn.child_support.remit_business_days` = **7** business days (2026-01-01 → open) [A.2, US-CAS5-022, direct artifact inspection, conf high]
+- `ca.deductions.tip_credit.allowed` = **False**  (2026-01-01 → open) [A.1, US-CAS5-012, direct artifact inspection, conf high] — Lab. Code 224, 351: deductions only if required by law or authorised in writing; no tip credit; card tips without processing fees.
+
+## 10 — Collective agreements / prevailing wage
+State prevailing wage on public works (Lab. Code 1720, 1771) [US-CA-PW-001 legacy]. CBAs may override Lab. Code 204, 227.3 and 510 alternative workweeks.
+
+- `ca.prevailing_wage.certified_payroll` = **electronic to Labor Commissioner via DIR eCPR (XML upload spec available)**  (2026-01-01 → open) [A.2, US-CAS5-017, direct artifact inspection, conf medium] — [partial row]
+
+## 11 — Indexation
+Minimum wage CPI-indexed, DOF certifies by Aug 1 (Lab. Code 1182.12(d)); exempt threshold 2 x MW x 2,080; PIT tables indexed yearly in DE 44; UI base fixed 7,000; SDI set yearly; meals/lodging yearly; EWO thresholds follow MW.
+
+
+## 12 — Payroll data protection / records
+- `ca.records.wage_statement.retention_years` = **3** years (2026-01-01 → open) [A.1, US-CAS5-005, direct artifact inspection, conf high]
+- `ca.records.edd_payroll.retention_years` = **4** years (2026-01-01 → open) [A.2, US-CAS5-003, direct artifact inspection, conf high] — 8 years for non-employee payments.
+- `ca.ccpa.request_response_days` = **45** days (2023-01-01 → open) [A.3, US-CAS5-021, direct artifact inspection, conf medium] — Extendable to 90; employee data in scope since 2023-01-01 (A.3).
+
+## 13 — Live legal change
+2027 SDI rate and 2027 PIT schedules not yet published (December). DE 2088 rate notices by 2026-12-31. All items in force or enacted; no ruling or draft bill.
+
+- `ca.live.ab1514_manicurists` = **Borello test reinstated for licensed manicurists 2026-01-01 to 2028-12-31; commercial-fisher exception extended**  (2026-01-01 → 2028-12-31) [A.2, US-CAS5-016, quoted from authority page, conf high]
+- `ca.delinquent_tax.interest_rate` = **7** percent (2026-01-01 → 2026-12-31) [A.2, US-CAS5-016, quoted from authority page, conf high]
+
+## Oracle — worked examples (C37)
+- `ca.oracle.de44.example_f.withholding_monthly` = **7.17** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — DE 44 Method B example F: annual 57,000 married 4 allowances; 57,000 - 11,412 = 45,588 -> 243.74 + 2.2% x 23,430 = 759.20 - 673.20 = 86.00/yr = 7.17/month. Reproduced in Python.
+- `ca.oracle.de44.example_e.withholding_semimonthly` = **4.13** USD (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — DE 44 Method B example E, reproduced in Python. Single cumulative bases also re-derive (121.87 ... 114,220.27); 34,084.81 derives as 34,084.80 (intermediate rounding residual 0.01).
+- `ca.oracle.suite` = **DE 44 Rev. 52 (4-26) Method B examples A-F**  (2026-01-01 → 2026-12-31) [A.2, US-CAS5-001, derived arithmetically, conf high] — Derivation recorded in register row US-CAS5-001: Annual payroll period: Low-income exemption 18,896 (Single/Married 0-1 allowances) / 37,791 (Married 2+ / HoH); standard deduction 5,706 (S/M 0-1) / 11,412 (M 2+/HoH); exemption allowance credit 168.30 per allowance; estimated deduction 1,000 per additional allowance. Annual brackets Single: 1.1% to
+
+## Special populations (US-OWN-005)
+- Domestic/household: UI/ETT at 1,000 cash in a quarter; SDI at 750 in a quarter; PIT only by agreement; Lab. Code 226 statement does not apply [US-CAS5-014, US-CAS5-004, US-CAS5-005].
+- Agricultural: UI/ETT/SDI subject; PIT withholding not required but PIT wages reportable; H-2A same; AB 1066 phase-in not fetched [US-CAS5-014].
+- Minors: learner 85% rule any age; newspaper carriers under 18 excluded from UI/SDI/PIT [US-CAS5-006, US-CAS5-014].
+- Tipped: no tip credit [US-CAS5-012, US-CAS5-006].
+- Clergy: ministers/religious orders UI/SDI not subject (elective), PIT withholding not required; church employees UI/SDI not subject, PIT subject [US-CAS5-014, US-CAS5-003].
+- Students: own-school students, student nurses, work-study under 22, organized-camp students: UI/SDI not subject, PIT subject [US-CAS5-014].
+- Nonresident aliens F/J/M/Q: excluded from UI/SDI (CUIC 608); PIT subject unless treaty covers state taxes [US-CAS5-014].
+- Statutory employees: UI/SDI covered per DE 231TE/SE; commissioned authors no PIT withholding [US-CAS5-014].
+- Government: UI subject, SDI not unless elective, PIT subject; elected officials/judiciary/National Guard UI/SDI not subject [US-CAS5-014, US-CAS5-005].
+
+## Language seams (US-OWN-006)
+Lab. Code 2810.5 hire notice in the language the employer normally uses [US-CAP6-001]; payslip English (US-OWN-006). CA postings page unreadable (recorded limit).
+
+## Open questions
+Mirrors `unresolved[]` in the facts file (same keys).
+
+- `ca.local_minwage.hourly` (blocking) — Local minimum wages (LA City/County, SF, San Jose, Oakland, Berkeley, etc.) are not kept by DIR; only a tier-B inventory exists. **Would close it:** Each city labor-standards office bulletin (LA OWS, SF OLSE, ...) for 2026-07-01 and 2027-01-01 rates; parallel fan-out per city.
+- `ca.industry_minwage.fast_food_health_care` (blocking) — Fast-food (Lab. Code 1474) and health-care (SB 525) minimums not fetched. **Would close it:** DIR fast-food and health-care minimum wage FAQ pages.
+- `ca.sdi.employee.rate.next_year` (non-blocking) — 2027 SDI rate not on EDD at read time; tier-B 1.4% projection not used. **Would close it:** EDD Rates and Withholding page or DE 44 2027 (normally December 2026).
+- `ca.payslip.electronic_consent` (non-blocking) — Statute says "in writing"; no electronic-consent rule fetched. **Would close it:** DLSE opinion letter or DIR paydays FAQ on electronic wage statements.
+- `ca.report.de9c.file_format` (non-blocking) — DE 9C/DE 34 electronic file specification not fetched (Stage-3 gap). **Would close it:** EDD e-Services for Business File Transfer spec / DE 9C and DE 34 layouts.
+- `ca.sdi.benefit.weekly_max` (non-blocking) — 2026 DI/PFL weekly benefit maximum and replacement rates not fetched. **Would close it:** EDD Quick Statistics page.
+- `ca.warn.employer_threshold` (non-blocking) — Cal-WARN 75-employee coverage threshold not quoted from an authority page. **Would close it:** Lab. Code 1400 text or EDD WARN employer page.
+- `ca.hsa.conformity_2026` (non-blocking) — A search summary claims employer HSA contributions excluded 2026-2030; not verified. **Would close it:** Enacted bill on leginfo, FTB 2026 Schedule CA instructions or FTB What's New.
+- `ca.garn.child_support.employer_fee` (non-blocking) — Employer fee per payment and FTB/EDD order-to-withhold priority not verified. **Would close it:** Family Code 5235 text and FTB "Earnings Withholding Order for Taxes" employer instructions.
+- `ca.prevailing_wage.thresholds` (non-blocking) — Public-works 1,000 threshold and small-project eCPR exemptions not quoted. **Would close it:** Lab. Code 1725.5 / 1771 / 1773.3 text or DIR registration FAQ.
+- `ca.overtime.agricultural_phase_in` (non-blocking) — AB 1066 agricultural overtime phase-in and child-labour permits not fetched. **Would close it:** Lab. Code 860-864 text and DIR agricultural overtime FAQ.

@@ -1,0 +1,1 @@
+@lli Hi Lily, as per the approved CR (https://docs.google.com/document/d/1eBT6Vqe5ylmNgrjalx92f4TJyVrEC3vSQnw_kfIZDng/edit), please set a monthly exemption limit of €41.67 per covered person (€500/12) for health insurance (65630) for STG. Anything above that is taxable.

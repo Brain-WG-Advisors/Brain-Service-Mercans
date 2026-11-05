@@ -69,11 +69,11 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | `ut.reciprocity.states` | [[FACT:ut.reciprocity.states=none]] |  | from 2026-01-01 | US-UTS5-013 | MULTI matrix |
 | `ut.local_wage_tax.exists` | [[FACT:ut.local_wage_tax.exists=False]] |  | from 2026-01-01 | US-UTR3-002 | A.3 |
 | `ut.wh.method` | [[FACT:ut.wh.method=Pub 14 Rev. 04/26: wages x 4.45% minus max(0, base allowance - 1.3% x (wages - threshold)); all lines rounded to whole dollars]] |  | from 2026-01-01 | US-UTPIT-003 | earlier 450/900) |
-| `ut.pit.base_allowance.single.annual` | [[FACT:ut.pit.base_allowance.single.annual=485]] | USD | from 2026-01-01 | US-UTPIT-003 | also HoH; see effective-date question |
-| `ut.pit.base_allowance.married.annual` | [[FACT:ut.pit.base_allowance.married.annual=970]] | USD | from 2026-01-01 | US-UTPIT-003 |  |
-| `ut.pit.phaseout_threshold.single.annual` | [[FACT:ut.pit.phaseout_threshold.single.annual=9348]] | USD | from 2026-01-01 | US-UTPIT-003 |  |
-| `ut.pit.phaseout_threshold.married.annual` | [[FACT:ut.pit.phaseout_threshold.married.annual=18,696]] | USD | from 2026-01-01 | US-UTPIT-003 |  |
-| `ut.pit.phaseout.rate` | [[FACT:ut.pit.phaseout.rate=1.3]] | % | from 2026-01-01 | US-UTPIT-003 |  |
+| `ut.pit.base_allowance.single.annual` | [[FACT:ut.pit.base_allowance.single.annual=485]] | USD | from 2026-04-01 | US-UTPIT-003 | Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]] |
+| `ut.pit.base_allowance.married.annual` | [[FACT:ut.pit.base_allowance.married.annual=970]] | USD | from 2026-04-01 | US-UTPIT-003 | Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]] |
+| `ut.pit.phaseout_threshold.single.annual` | [[FACT:ut.pit.phaseout_threshold.single.annual=9348]] | USD | from 2026-04-01 | US-UTPIT-003 | Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]] |
+| `ut.pit.phaseout_threshold.married.annual` | [[FACT:ut.pit.phaseout_threshold.married.annual=18,696]] | USD | from 2026-04-01 | US-UTPIT-003 | Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]] |
+| `ut.pit.phaseout.rate` | [[FACT:ut.pit.phaseout.rate=1.3]] | % | from 2026-04-01 | US-UTPIT-003 | Period start 2026-04-01; Pub. 14 Rev. 04/26 (revision dated April 2026); effective date not stated. 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:RQ-596]] |
 | `ut.pit.rounding` | [[FACT:ut.pit.rounding=all lines to whole dollars, half up]] |  | from 2026-01-01 | US-UTPIT-003 | 9,000 x 0.0445 = 400.5 -> 401 |
 | `ut.pit.oracle.example_1.withholding` | [[FACT:ut.pit.oracle.example_1.withholding=12]] | USD | from 2026-01-01 | US-UTPIT-003 | weekly single 400 |
 | `ut.pit.oracle.example_2.withholding` | [[FACT:ut.pit.oracle.example_2.withholding=116]] | USD | from 2026-01-01 | US-UTPIT-003 | biweekly single 2,600 |

@@ -1,0 +1,172 @@
+# RSPEC facts, part 1 (FED, MULTI, AK..IA). Source: _research/stage5/{JUR}.md section 5, register ids as cited there.
+# tuple: (key_suffix, value, register_id, note or None, uom or None)
+D = {}
+D['FED'] = [
+ ('deposit.lookback_threshold', 50000, 'US-FEDS5-004', 'Lookback 2024-07-01..2025-06-30; <=50,000 monthly depositor (15th of next month), >50,000 semiweekly; 100,000 accumulated = next business day', None),
+ ('form941.frequency', 'quarterly; due last day of month after quarter; amounts in cents', 'US-FEDS5-004', None, None),
+ ('form944.rule', 'annual, only on written IRS notice, liability of 1,000 or less', 'US-FEDS5-004', None, None),
+ ('form940.due', 'Jan 31 (Feb 10 if all FUTA deposited); FUTA deposited when accumulated liability > 500', 'US-FEDS5-031', 'Row partial: 2026 i940 not yet published, 2025 edition read', None),
+ ('w2.due', '2027-02-01', 'US-FEDS5-007', 'TY2026 W-2/W-3 to SSA and employees', None),
+ ('w2.box12.new_codes', 'TP cash tips; TT qualified overtime; TA Trump-account employer contributions', 'US-FEDS5-007', 'TY2026', None),
+ ('w2.box14b', 'Treasury Tipped Occupation Code(s)', 'US-FEDS5-007', 'Box 14 split into 14a Other and 14b from TY2026', None),
+ ('w2.threshold_no_withholding', 2000, 'US-FEDS5-007', 'W-2 required at 2,000+ wages even with no withholding (was 600)', None),
+ ('w2.ssn_truncation', 'employee copies only; never on Copy A; EIN never truncated', 'US-FEDS5-007', None, None),
+ ('w2.multistate_boxes', 'boxes 15-20 carry up to two states and two localities; more = additional W-2 repeating boxes a-f', 'US-MULTIS5-011', None, None),
+ ('aca.ale_threshold', 50, 'US-FEDS5-012', 'ALE = 50+ full-time incl. FTE in prior year; row partial: TY2026 i1094/1095-C not yet published', 'employees'),
+ ('aca.efile_threshold', 10, 'US-FEDS5-012', 'e-file mandatory at 10+ information returns in aggregate (TY2025 rule)', 'returns'),
+ ('aca.affordability_pct', 9.96, 'US-FEDS5-011', '2026 affordability percentage', 'percent'),
+ ('new_hire.deadline_days', 20, 'US-FEDS5-024', '42 U.S.C. 653a; electronic filers may send 2 monthly transmissions 12-16 days apart', 'days'),
+ ('new_hire.fields', 'employee name, address, SSN, first day of work; employer name, address, FEIN', 'US-FEDS5-024', 'Federal minimum; states add fields', None),
+ ('new_hire.multistate_designation', 'electronic multistate employer may designate one state after notifying HHS', 'US-MULTIS5-006', None, None),
+ ('reporting_agent.form', 'Form 8655', 'US-FED-008', None, None),
+]
+D['MULTI'] = [
+ ('ui_qtr.recipient', 'UI quarterly wage report goes to the sui_state only (localization test); withholding returns to every state where withholding applies', 'US-MULTIS5-017', None, None),
+ ('pfml.state_key', 'WA PFML coverage follows the UI localization test; key premium state to sui_state unless a state unit proves otherwise', 'US-MULTIS5-024', None, None),
+]
+D['AK'] = [
+ ('wh_return.applicable', False, 'US-AK-WT-001', 'No wage tax: no withholding return, reconciliation or state W-2', None),
+ ('ui_qtr.form', 'TQ01C (2/26) with wage schedule', 'US-AKS5-013', None, None),
+ ('ui_qtr.due', 'last day of month after quarter; within 10 days of ceasing business; zero report required', 'US-AKS5-013', None, None),
+ ('ui_qtr.wage_basis', 'wages reported in the quarter paid', 'US-AKS5-005', None, None),
+ ('ui_qtr.channel', 'file_upload (CSV, no headings); online keying in ES Tax portal; paper', 'US-AKS5-014', None, None),
+ ('ui_qtr.layout', 'header 11 columns per employer; wage detail 12 columns incl. occupational code (6/8-digit) and 2-digit geographic code', 'US-AKS5-014', 'CSV guidelines rev. 2016-05-17, inspected', None),
+ ('ui_qtr.online_mandate', '50+ employees in a quarter, or 1M+ taxable wages current/prior year, or a payroll agent files', 'US-AKS5-005', None, None),
+ ('ui_qtr.corrections_form', 'TADJ', 'US-AKS5-013', None, None),
+ ('new_hire.deadline_days', 20, 'US-AKS5-007', 'hire, rehire or return to work; online via myAlaska; fax no longer accepted', 'days'),
+]
+D['AL'] = [
+ ('wh_return.monthly', 'A-6 if more than 1,000 USD withheld in month 1 or 2 of the quarter; due 15th of next month', 'US-ALS5-001', None, None),
+ ('wh_return.quarterly', 'A-1, last day of month after quarter, file even when nil', 'US-ALS5-001', None, None),
+ ('wh_payment.eft_threshold', 750, 'US-ALS5-001', 'e-file and EFT mandatory for any single payment >= 750', 'USD'),
+ ('annual_recon.form', 'A-3 with W-2s (and 1099s with AL tax), due Jan 31', 'US-ALS5-006', None, None),
+ ('w2_state.format', 'EFW2, RS record only, 512 bytes; e-file mandatory for 10+ statements (Form 10, 8/24)', 'US-ALS5-006', None, None),
+ ('w2_state.rs_positions', 'account 248-257; FEIN 258-266; state code AL/01 274-275; state wages 276-286; state tax 287-297; federal income tax withheld 298-307; other income 338-348; payment year 393-396', 'US-ALS5-006', 'Federal tax withheld needed because AL allows the federal deduction', None),
+ ('w2_state.furnish_threshold', 1500, 'US-ALS5-001', 'W-2 to every employee paid 1,500+ AL wages or with AL tax withheld', 'USD'),
+ ('ui_qtr.form', 'Quarterly Contribution and Wage Report; corrections UC-10C', 'US-ALS5-007', None, None),
+ ('ui_qtr.due', 'last day of month after quarter', 'US-ALS5-007', None, None),
+ ('ui_qtr.channel', 'online_form or file_upload via eGov only; computer-generated paper not accepted', 'US-ALR3-001', None, None),
+ ('new_hire.deadline_days', 7, 'US-ALS5-008', 'from hire or recall; electronic twice a month 12-16 days apart; electronic mandatory for 5+ employees', 'days'),
+ ('local.occupational_tax', 'municipal occupational tax per city (e.g. Leeds monthly + annual reconciliation via Avenu)', 'US-ALS5-017', 'Birmingham via HdL rests on partial row US-ALS5-018', None),
+]
+D['AR'] = [
+ ('wh_return.monthly', 'AR941M by 15th of following month, zero voucher when nothing withheld (new registrations)', 'US-AR-P5-1-002', None, None),
+ ('wh_return.annual', 'AR941A by Jan 31 when DFA reclassifies (deposits under 1,000)', 'US-AR-P5-1-002', None, None),
+ ('wh_payment.eft_threshold', 20000, 'US-AR-P5-1-002', 'EFT mandatory at average 20,000+/month', 'USD'),
+ ('annual_recon.form', 'AR3MAR due Feb 28 (or within 30 days of termination of business)', 'US-AR-P5-1-002', None, None),
+ ('w2_state.due', 'Jan 31 with ARW-3', 'US-AR-P5-1-002', None, None),
+ ('w2_state.format', 'EFW2 (SSA 42-007) via ATAP bulk upload or CD/DVD; RA RE RW RS RT RF RCS required; RO RU optional; RV not allowed; 512-byte CR/LF', 'US-AR-P5-1-002', None, None),
+ ('w2_state.efile_threshold', 125, 'US-AR-P5-1-002', None, 'employees'),
+ ('ui_qtr.form', 'DWS-ARK-209B / 209BR / 209BS via Tax21 or paper', 'US-ARP9V-001', None, None),
+ ('ui_qtr.due', 'Apr 30 / Jul 31 / Oct 31 / Jan 31, even when no wages', 'US-ARP9V-001', None, None),
+ ('new_hire.deadline_days', 20, 'US-ARP9V-001', 'via Tax21; covers employees living or working in AR', 'days'),
+]
+D['AZ'] = [
+ ('wh_deposit.schedule', 'avg <200: annual A1-APR Jan 31; 200-1,500: quarterly; >1,500: federal schedule', 'US-AZ-P5-2-005', None, None),
+ ('wh_payment.eft_threshold', 500, 'US-AZ-P5-2-005', 'EFT mandatory at liability 500+', 'USD'),
+ ('wh_return.form', 'A1-QRT quarterly, even with zero; due last day of month after quarter (+10 days for timely payers)', 'US-AZ-P5-2-005', None, None),
+ ('annual_recon.form', 'A1-R with W-2s, due Jan 31 (30-day extension for good cause)', 'US-AZS5-022', None, None),
+ ('w2_state.format', 'EFW2; RS required per employee, RV optional, AZ state code 04; .txt via AZTaxes or AZFSET; electronic mandatory', 'US-AZS5-025', 'Pub 701 rev. Jan 2025; medium on edition', None),
+ ('w2_state.ssn_truncation', 'SSNs and EINs must not be truncated', 'US-AZS5-025', None, None),
+ ('new_hire.deadline_days', 20, 'US-AZS5-012', 'hire, rehire, return to work; to DES; first day of paid work', 'days'),
+ ('registration.form', 'JT-1 registers ADOR withholding and DES UI', 'US-AZ-P5-2-005', None, None),
+]
+D['CA'] = [
+ ('registration.form', 'DE 1 within 15 days after paying >100 wages in a quarter; DE 1P PIT-only', 'US-CAS5-002', None, None),
+ ('wh_deposit.form', 'DE 88 (PIT + SDI), federal-style schedule: next-day >400 PIT accumulated; semi-weekly; monthly >=350; quarterly <350', 'US-CAS5-002', None, None),
+ ('ui_qtr.form', 'DE 9 + DE 9C (per employee subject wages, PIT wages, PIT withheld); corrections DE 9ADJ', 'US-CAS5-002', None, None),
+ ('ui_qtr.due', 'Apr 1 / Jul 1 / Oct 1 / Jan 1; delinquent after Apr 30, Jul 31, Nov 2 2026, Feb 1 2027', 'US-CAS5-002', None, None),
+ ('ui_qtr.channel', 'e-Services for Business (portal and file upload); electronic only; zero payroll still filed', 'US-CAS5-002', None, None),
+ ('annual_recon.applicable', False, 'US-CAS5-002', 'No separate annual reconciliation', None),
+ ('w2_state.filed', False, 'US-CAS5-002', 'W-2 not filed with EDD or FTB; box 14 CASDI, box 16/17 CA PIT wages/withheld', None),
+ ('new_hire.form', 'DE 34 within 20 days of start of work; rehire after separation of 60+ days', 'US-CAS5-002', None, None),
+ ('contractor_report.form', 'DE 542 for independent contractors paid/contracted 600+, within 20 days', 'US-CAS5-002', 'Contractors / 1099-NEC OUT of scope (owner instruction 2026-10-29, SKELETON-MANIFEST scope line); recorded as scope trap', None),
+ ('poa.form', 'DE 48', 'US-CA-EDD-006', None, None),
+]
+D['CO'] = [
+ ('wh_return.frequency', '<7,000/yr quarterly; 7,000-50,000 monthly (15th); >=50,000 weekly, EFT mandatory', 'US-COS5-006', None, None),
+ ('wh_return.zero', 'zero returns required for monthly and quarterly filers; paper DR 1094', 'US-COS5-006', None, None),
+ ('w2_state.due', 'Jan 31 to employees and CDOR', 'US-COS5-006', None, None),
+ ('w2_state.format', 'Revenue Online .txt upload, or CDOR XLSX template for 10-100 employees; paper with DR 1093', 'US-COS5-013', 'e-file mandatory when federal e-file required (10+)', None),
+ ('notice.dr0995', 'annual DR 0995 refundable-credit notice to every employee, English + language usually used', 'US-COS5-006', None, None),
+ ('pfml_qtr.form', 'FAMLI quarterly wage report and premium', 'US-COS5-008', None, None),
+ ('poa.form', 'DR 0145', 'US-CO-P5-1-006', None, None),
+ ('local.denver_opt', 'Denver OPT employee 5.75/month withheld when >=500 earned in month; employer 4.00/month; Denver Treasury return', 'US-CO-P5-2-001', None, None),
+]
+D['CT'] = [
+ ('wh_remit.class', 'weekly >10,000 lookback (Wednesday after week); monthly 2,000-10,000 (15th); quarterly <=2,000', 'US-CTS5-013', None, None),
+ ('wh_return.form', 'CT-941 quarterly, due 4/30 7/31 10/31 1/31, even zero and even for federal 944 filers', 'US-CTS5-013', None, None),
+ ('w2_state.form', 'CT-W3 + all W-2s by Jan 31 via myconneCT: key-and-send, EFW2 upload or DRS CSV', 'US-CTS5-013', 'box 15 = CT + CT Tax Registration Number', None),
+ ('household.forms', 'CT-W3 HHE by Jan 31; CT-941 HHE annually by Apr 15; agricultural annual CT-941', 'US-CTS5-014', None, None),
+ ('ui_qtr.channel', 'ReEmployCT: manual entry, upload, TPA or FSET', 'US-CTS5-031', None, None),
+ ('ui_qtr.due', '4/30 7/31 10/31 1/31; reimbursing employers +15 days; zero report required', 'US-CTS5-018', None, None),
+ ('ui_qtr.layout', '276-character fixed-length .txt; S record per employee (SSN 2-10, last name 11-30, first 31-42, MI 43, state 44-45, qtr+yr 46-51, wages 64-77, entity 143-146, EAN 147-156); T record per employer', 'US-CTS5-032', 'Positions extracted and summed to 276 (inspected); 2022 spec', None),
+ ('ui_qtr.new_optional_fields', 'occupation, hours worked, worksite ZIP from Q3 2026 (31-225a(j)(1)(B)); no positions in the 2022 spec', 'US-CTS5-018', None, None),
+ ('pfml_qtr.channel', 'CT Paid Leave quarterly return: portal or batch XML/CSV', 'US-CTS5-022', 'File Specification Toolkit not downloaded', None),
+ ('new_hire.deadline_days', 20, 'US-CTS5-019', 'rehire = separated >60 days; CT-W4 copy, DOL website or fax', 'days'),
+]
+D['DC'] = [
+ ('wh_return.form', 'FR-900Q quarterly on MyTax.DC.gov (e-file mandatory since TY2023); due Apr 30/Jul 31/Oct 31/Jan 31; zero return required', 'US-DCS5-014', None, None),
+ ('wh_return.annual', 'FR-900A for annual filers under 200 USD/yr, due 2027-01-31 for 2026', 'US-DCS5-014', None, None),
+ ('wh_payment.eft_threshold', 5000, 'US-DCS5-014', 'payments over 5,000 per period electronic; ACH credit tax type 00300', 'USD'),
+ ('w2_state.format', 'EFW2/EFW2C with required RS record via MyTax.DC.gov; due Jan 31', 'US-DCS5-015', 'Edition read is TY2025', None),
+ ('w2_state.efile_threshold', 25, 'US-DCS5-015', '<25 paper with Form WT or online manual entry', 'forms'),
+ ('ui_qtr.form', 'UC-30 (household UC-30-H annual Apr 15) via DOES ESSP; last day of month after quarter', 'US-DCS5-018', None, None),
+ ('ui_qtr.machine_readable_threshold', 250, 'US-DCS5-018', None, 'employees'),
+ ('pfml_qtr.channel', 'PFL quarterly via ESSP, same due dates as UI', 'US-DCS5-019', None, None),
+ ('new_hire.deadline_days', 20, 'US-DCS5-022', 'fields: name, address, SSN; employer name, address, FEIN; hire date', 'days'),
+]
+D['DE'] = [
+ ('wh_return.frequency', 'statutory: quarterly up to 4,500; monthly 4,500-25,000; eighth-monthly >25,000 (indexed under 30 Del. C. 515)', 'US-DES5-005', '2026 indexed values not read; Guide prints 6,020 / 33,460 on superseded row', None),
+ ('annual_recon.form', 'WTH-REC (replaces W-3), last day of January with W-2s; paper only for 10 or fewer forms', 'US-DES5-009', 'revised 02/03/26', None),
+ ('w2_state.format', 'EFW2 with Delaware RS records required, Delaware Taxpayer Portal; no SSN truncation; W-2c/W-3c paper only', 'US-DES5-008', None, None),
+ ('ui_qtr.form', 'UC-8 tax report and UC-8A wage report, end of month after quarter', 'US-DES5-011', 'Electronic file format not read', None),
+ ('pfml_qtr.form', 'Paid Leave quarterly Hours and Wage Report in Delaware LaborFirst', 'US-DES5-013', None, None),
+ ('new_hire.deadline_days', 20, 'US-DES5-005', 'rehire after 60+ days; fine 25', 'days'),
+ ('w2_employee.termination', 'W-2 within 30 days of last wage payment on termination', 'US-DES5-005', None, None),
+ ('local.wilmington', 'Wilmington earned income tax 1.25% residents and nonresidents for work in city; returns to Department of Finance', 'US-DE-P5-2-001', None, None),
+]
+D['FL'] = [
+ ('wh_return.applicable', False, 'US-FL-001', 'No income tax: no withholding return or state W-2', None),
+ ('ui_qtr.form', 'RT-6 (R. 07/23); corrections RT-8A', 'US-FLS5-021', None, None),
+ ('ui_qtr.due', 'Apr 30 / Jul 31 / Oct 31 / Jan 31, next business day; report even when no tax due', 'US-FLS5-021', None, None),
+ ('ui_qtr.efile_threshold', 10, 'US-FLS5-006', '10+ employees in any quarter of prior state fiscal year must e-file and e-pay', 'employees'),
+ ('ui_qtr.flat_file', 'Flat File Web Import v7 (Dec 2023): records 00 header, 01 employer, 02 employee, 03 totals, 99 trailer; 2 implied decimals; zip refused', 'US-FLS5-022', 'inspected', None),
+ ('ui_qtr.xml', 'XML package FL_RT_XML_Schemas_v2026 1.0 (9 XSD, IRS efile envelope); required above 20,000 employee records', 'US-FLS5-023', 'RT-6 sample validated against RT_FLTransmission.xsd', None),
+ ('ui_qtr.everify_block', 'optional E-Verify certification block in FLReturnHeaderState; E-Verify employers certify on first RT-6 of the year', 'US-FLS5-010', '448.095: private employers 25+ employees', None),
+ ('ui_qtr.itin_accepted', False, 'US-FLS5-024', 'ITIN not accepted in place of SSN', None),
+ ('other_forms', 'BLS-3020 multiple worksite; RT-6EW; RT-6NF out-of-state wages; RT-7 annual domestic (due Jan 1, late after Jan 31)', 'US-FLS5-020', None, None),
+ ('new_hire.deadline_days', 20, 'US-FLS5-008', 'DOB optional; non-employees paid 600+ also reported (contractors OUT of scope per owner)', 'days'),
+]
+D['GA'] = [
+ ('wh_status.schedule', 'semi-weekly >50,000 lookback; monthly >200/month (GA-V by 15th); quarterly <=200/month and >800/yr; annual <=800/yr', 'US-GAS5-002', None, None),
+ ('wh_return.form', 'G-7 quarterly (Schedule B for semi-weekly); Q3 due 2026-11-02, Q4 due 2027-02-01; zero G-7 required', 'US-GAS5-002', None, None),
+ ('annual_recon.form', 'G-1003 with W-2s and 1099-NEC with GA withholding, due Jan 31 (TY2026: 2027-02-01)', 'US-GAS5-003', None, None),
+ ('w2_state.channel', 'GTC manual entry, G-1003 Excel/CSV template, or Federal Format (EFW2 + GA RS)', 'US-GAS5-003', None, None),
+ ('w2_state.rs_positions', '248-267 state employer account; 274-275 state code; 276-286 state wages; 287-297 state tax; 298-307 period end; 331-339 withholding number', 'US-GAS5-011', 'Row partial: only Rev 01/18 layout posted; TY2026 layout with GA OT field not posted on 2026-11-02', None),
+ ('ui_qtr.form', 'DOL-4N; corrections DOL-3C; domestic annual DOL-4 by Jan 31', 'US-GAS5-005', None, None),
+ ('ui_qtr.efile_threshold', 25, 'US-GAS5-005', 'portal up to 100 employees, CSV/Excel 100-15,000, SFTP >15,000; June 2026 proposed rule would make e-file universal (partial row US-GAS5-020)', 'employees'),
+ ('ui_qtr.placeholder_ssn', '000-00-000n allowed for missing new-hire SSN; correct within 30 days on DOL-3C', 'US-GAS5-021', None, None),
+ ('new_hire.deadline_days', 10, 'US-GAS5-012', 'fields add DOB, start date, medical-insurance availability, state of hire', 'days'),
+]
+D['HI'] = [
+ ('wh_return.form', 'HW-14 quarterly, due Apr 15 / Jul 15 / Oct 15 / Jan 15; filed even with no wages', 'US-HIS5-005', None, None),
+ ('wh_deposit.schedule', 'VP-1: quarterly <=5,000; monthly 5,000-40,000; semi-weekly >40,000 or federal semi-weekly', 'US-HIS5-005', None, None),
+ ('w2_state.due', 'Jan 31 to employee and DOTAX', 'US-HIS5-006', None, None),
+ ('w2_state.efile_threshold', 10, 'US-HIS5-006', 'from 2026-01-01 (TA 2025-05)', 'forms'),
+ ('w2_state.format', 'federal EFW2 with Hawaii Tax ID via HTO upload; or HTO Simple File Import (<=1,000 records), manual entry, Bulk Filing SFTP ZIP', 'US-HIS5-006', 'Pub EF-10 layout notes not read', None),
+ ('annual_recon.applicable', False, 'US-HIS5-005', 'HW-3 dropped from TY2020; HW-30 only paper transmittal', None),
+ ('ui_qtr.form', 'UC-B6 quarterly wage, contribution and E&T report, last day of month after quarter; wages when paid', 'US-HIS5-012', 'machine format not located', None),
+ ('new_hire.deadline_days', 20, 'US-HIS5-021', 'W-4 copy by fax/mail or SFTP in FLO101 fixed-width (H4/W4/total records); no web upload', 'days'),
+ ('tdi.state_return', False, 'US-HI-003', 'TDI/PHC through insurers; no wage return to the state', None),
+]
+D['IA'] = [
+ ('wh_deposit.schedule', 'quarterly <6,000/yr and <=500/month; monthly 6,000-120,000; semimonthly >5,000 per period (EFT); annual election <=2 employees', 'US-IAS5-016', None, None),
+ ('wh_return.due', 'quarterly, last day of month after quarter, GovConnectIowa; every period even with zero', 'US-IAS5-016', None, None),
+ ('annual_recon.applicable', False, 'US-IAS5-017', 'VSPs are no longer required to be filed', None),
+ ('w2_state.due', 'Feb 15, only W-2s/1099s carrying Iowa withholding; no paper', 'US-IAS5-017', None, None),
+ ('w2_state.format', 'IDR-unique EFW2-based 512-byte ASCII (SSA file rejected); RS state code 19, permit 248-267; Iowa RV total record (RS count, Iowa wages, Iowa tax)', 'US-IAS5-018', 'Spec page dated 2023-01-09; TY2026 edition not seen', None),
+ ('ui_qtr.form', 'Employer Contribution and Payroll Report 65-5300 + wage detail by SSN, electronic, last day of month after quarter', 'US-IAS5-024', 'myIowaUI upload layout not acquired', None),
+ ('new_hire.deadline_days', 15, 'US-IAS5-012', 'fields add DOB, dependent health coverage and qualifying date, IWO address; contractors reported', 'days'),
+ ('permit.format', '9-digit withholding permit since 2021-11-15 (older 12-digit)', 'US-IAS5-018', None, None),
+]

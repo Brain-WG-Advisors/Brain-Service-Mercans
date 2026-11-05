@@ -82,7 +82,13 @@ def value_kind(key):
     return None
 
 
+LABEL_OVERRIDE = {"nv.mbt.general.quarterly_threshold": ("Taxable wage threshold", "Amount or count", "C"),
+                  "rspec.al.w2_state.furnish_threshold": ("Furnishing threshold", "Amount or count", "C")}
+
+
 def classify(key):
+    if key in LABEL_OVERRIDE:
+        return LABEL_OVERRIDE[key]
     vk = value_kind(key)
     if vk:
         return VALUE_CLASSES[vk]
@@ -94,6 +100,8 @@ def classify(key):
 
 
 USE = {
+    "Furnishing threshold": "The payroll compares the wages paid to each employee in the State with this amount to decide whether a State W-2 is furnished to that employee.",
+    "Taxable wage threshold": "The payroll compares the employer's quarterly taxable wages with this amount and applies the rate only to the wages above it.",
     "Electronic filing / payment threshold": "The payroll compares the employer's count or amount with this threshold "
                                              "each period and switches the filing or payment route when it is reached.",
     "Late or incomplete filing penalty rule": "Not a filed value; it states the consequence of a late or incomplete return "
@@ -129,6 +137,8 @@ USE = {
 }
 
 COND = {
+    "Furnishing threshold": "Applies to each employee paid at least the amount stated in column M.",
+    "Taxable wage threshold": "Applies to the quarterly taxable wages stated in column M for employers liable in the jurisdiction.",
     "Electronic filing / payment threshold": "Applies only when the employer reaches the threshold stated in column M; "
                                              "below it the other route of the same jurisdiction applies.",
     "Record layout": "Applies when the return is sent as a file upload; portal entry needs no layout.",
@@ -141,6 +151,8 @@ COND = {
 }
 
 EXAMPLE = {
+    "Furnishing threshold": "Employee wages compared with the threshold",
+    "Taxable wage threshold": "Quarterly wages compared with the threshold",
     "Electronic filing / payment threshold": "Employer at or above the threshold: electronic route",
     "Due date rule": "2026 Q1 return: due per the rule in column M",
     "Return applicability": "Flag read from the jurisdiction rule",
@@ -161,6 +173,8 @@ EXAMPLE = {
 }
 
 MAPPING = {
+    "Furnishing threshold": "Jurisdiction configuration (dated system constant)",
+    "Taxable wage threshold": "Jurisdiction configuration (dated system constant)",
     "Electronic filing / payment threshold": f"{DD_REF}: employer jurisdiction configuration (threshold flag), forward reference",
     "Due date rule": "Filing calendar of the payroll (system constant per jurisdiction)",
     "Return applicability": "Jurisdiction configuration (system constant)",
@@ -181,6 +195,8 @@ MAPPING = {
 }
 
 KIND = {
+    "Furnishing threshold": "system",
+    "Taxable wage threshold": "system",
     "Electronic filing / payment threshold": "system", "Due date rule": "system", "Return applicability": "constant",
     "Zero-return rule": "constant", "Filing and deposit frequency rule": "system",
     "Submission channel and file format": "system", "Record layout": "system", "Data elements reported": "payroll",
@@ -269,7 +285,9 @@ def param_row(jur, key, n, freq, prefix):
         per = f" In force from {eff}; not applied to {YEAR}."
     elif f.get("effective_to") and str(f.get("effective_to")) < f"{YEAR}-12-31":
         per = f" Valid until {f.get('effective_to')}."
-    expl = (f"{name}: {label.lower()}: {tag(key)}{unit}{basis}.{per} {USE[label]} {src(key)}")
+    extra = (" The DES page names the bulk-filer route as \"Azure / File Transfer Submission\" [US-AZB5-006]."
+             if key == "rspec.az.ui_qtr.form" else "")
+    expl = (f"{name}: {label.lower()}: {tag(key)}{unit}{basis}.{per}{extra} {USE[label]} {src(key)}")
     opts = "See Field Options (jurisdiction channel / frequency codes)" if label in (
         "Submission channel and file format", "Filing and deposit frequency rule") else "Value as stated in column M"
     kind = KIND[label]

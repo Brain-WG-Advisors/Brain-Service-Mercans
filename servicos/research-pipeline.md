@@ -30,6 +30,7 @@ O pipeline tem 11 estágios (CCG, Scope Lock-In, Report Specs, DD, WTC, SIR, Pay
 - [[Research Pipeline/CLAUDE|CLAUDE]]: Instrução da pasta Research Pipeline: liga ao brain-service, aponta janela Pipeline, estado e lições.
 - [[rascunhos/2026-10-17-anuncio-pipeline-v2.12|2026-10-17-anuncio-pipeline-v2.12]]: Rascunho de aviso ao time sobre pipeline v2.12 (superado pelo e-mail de 19/10)
 - [[rascunhos/2026-10-19-email-pipeline-v2.12|2026-10-19-email-pipeline-v2.12]]: E-mail final ao time sobre skills v2.12 (3 zips, INSTALL, CHANGELOG)
+- [[Research Pipeline/_distribuicao/2026-10-29-v2.12-guia/CONFERENCIA|Pacote v2.12 corrigido para o time (29/10)]]: conferência do zip e do guia (Manju não conseguia iniciar o pipeline)
 
 ## Como sabemos que ficou certo (qualidade)
 - **Fonte primária alcançada diretamente**; duas fontes secundárias concordando não bastam; esquema/taxa/template copiado de outro artefato não é fonte primária. Piso de 95% de precisão (a reunião de 30/06 falava em ~90% hoje) (chat: mercans-compliance; chat: compliance-research).

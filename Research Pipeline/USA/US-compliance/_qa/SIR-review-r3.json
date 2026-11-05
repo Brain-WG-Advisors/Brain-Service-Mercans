@@ -1,0 +1,137 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SIR",
+ "unit": "third_party_provider_handoff",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx",
+ "_reviewer": "compliance-qa-auditor (independent; did not build)",
+ "findings": [],
+ "checks_run": [
+  "C12",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C46",
+  "C53",
+  "C70",
+  "C71"
+ ],
+ "numeric_verification": {
+  "facts_total": 408,
+  "facts_verified": 408,
+  "unverified_keys": [],
+  "method": "Independent QA F44 (qa_f44.py, text cache rebuilt from the current register): 479 tags, 408 key/value pairs, every one equal to a current fact entry and every element found in the cited copies. 19 raw flags, all hand-cleared: spelling cases already cleared in r1/r2 (SSN, CSV, CR/LF, v7, v1.6, W-2s, EFW2-based, Q1-Q3, NOT), FSET 'version 4.4', 10 State DOB copies, WA RCW. fed.aca.efile_threshold and rspec.fed.form940.due: the printed statement is the labelled TY2025 rule, which the cited 2025 IRS copy carries (verified); the TY2026 value prints as a gap in every cell (SIR T13r2, T14r4: SIR-RQ-03; T14r7: SIR-RQ-02; RSPEC IRS-004/007 with RSPEC-GAP-001/002). Register rows stay 'partial' until the 2026 editions are out."
+ },
+ "_r2_closure": {
+  "SIR-QA2-01": "closed: cache refreshed 09:31 after the register (09:00); 16 cells restored; recon exit 0 (DD 'Employer health insurance offered' CONSUMED_BY_SIR, 0 with no consumer).",
+  "SIR-QA2-02": "closed: no tag in any deliverable carries a value that no current fact entry has (QA stale_all.py over CCG, WTC, RSPEC, DD, SIR); package C46 residue = multi-period entries only (SIR-QA1-19).",
+  "SIR-QA2-03": "closed: DD W33/W37/W57 print all 10 ids.",
+  "SIR-QA2-04": "closed: IRS-004 M10 tag removed, nothing else in the cell changed.",
+  "SIR-QA2-05": "closed: label + gap id in every cell (SIR, RSPEC IRS-004/007).",
+  "SIR-QA2-06": "closed: P36-P45 and Appendix B in plain language."
+ },
+ "cross_checks": [
+  {
+   "name": "SIR diff vs _pipeline/_backup/pre-sir-r2-2026-11-04/sir",
+   "result": "pass",
+   "note": "With SIR-RQ numbers normalised, 138 changed lines: restored FACT cells and their new Appendix A rows, TY2025 gap ids, plain-language gap subjects, status 'For QA'. All map to SIR-QA2-01/05/06 and the status item."
+  },
+  {
+   "name": "Spot-check of 3 of the 8 remaining F44 gaps",
+   "result": "pass",
+   "note": "Genuine. SIR-RQ-23 Ohio municipal: '2,399' absent from the ORC copy US-OHP52-003. SIR-RQ-07 FL RT XML: the guide lists .xsd files but 'IRS efile transmission envelope' is not in US-FLS5-023/022. SIR-RQ-01 CT: occupation, hours and worksite zip code are in the statute copy, but 'optional from Q3 2026' is not."
+  },
+  {
+   "name": "Acronym-by-initials bounded to one page of at most 40,000 characters",
+   "result": "pass",
+   "note": "Accepted. The rule can only turn a pass into a gap, never the reverse, and it closes the r1 hole (initials matched anywhere in a 500,000-character statute). Cost: an acronym in a long statute must now appear literally or the source hunter rewords; that is the correct direction."
+  },
+  {
+   "name": "Approved RSPEC (22 workbook cells vs backup)",
+   "result": "pass",
+   "note": "IRS-004 M10 tag removed; IRS-007 M8/H27/File Structure A4 TY2025 label + RSPEC-GAP-002; D13/E13 'Issued' -> 'For QA' in the 20 Version Control sheets. Nothing else changed."
+  },
+  {
+   "name": "Approved DD (22 cells vs backup)",
+   "result": "pass",
+   "note": "15 Country Fields, 5 Option Mappers, 1 ID Information: only _also ids appended after existing citations (26 ids, all active, tier A); Version Control E13 'For QA'."
+  },
+  {
+   "name": "Approved WTC (vs backup)",
+   "result": "pass",
+   "note": "D370 multi.iwo.governing_law = current fact value; Version Control E13 'For QA'. Nothing else."
+  },
+  {
+   "name": "Approved CCG (regression_guard vs backup, facts_before = backup)",
+   "result": "fail",
+   "note": "51 changed lines: 12 facts diff, 16 Sources renumbering, 23 'UNEXPLAINED'. The 23 are explained: UT effective 2026-04-01 (ledger 2026-11-04 WTC fix R2), WA wa.wc.employee_deduction.rule (ledger 2026-11-03 line 65), NV nv.mbt.base (lines 73/81), FED Sources shift from the new OMB ICR row of this batch and US-FEDR2-004 (lines 77/80), m05/m07 the same WA key. facts_before already holds the new values, so the guard cannot see them as a diff: CCG propagation debt, paid now. Two new defects in those lines, see _other_artifact_findings."
+  }
+ ],
+ "_other_artifact_findings": [
+  {
+   "artifact": "CCG",
+   "severity": "major",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!annex_UT table 843!r7-r11 col 6 (annexes/annex_UT.md, ut.pit.base_allowance.*, ut.pit.phaseout_threshold.*, ut.pit.phaseout.rate)",
+   "problem": "The rebuild prints the fact note as qualification text: 'R2 2026-11-03: effective_from corrected to 2026-04-01 (Pub 14 Rev. 04/26, US-UTPIT-003). Schedule in force 2026-01-01 to 2026-03-31 is not held in any local copy.' This is pipeline-round wording ('R2', 'effective_from', 'local copy', which the r3d vocabulary rule removed), and the January-March gap has no request id.",
+   "expected": "Qualification = 'From 2026-04-01 (Pub. 14 Rev. 04/26). 2026-01-01 to 2026-03-31: Not configured in this release [[GAP:CCG-RQ-nn]]', with one gaps.json entry ('Utah Pub. 14 schedule in force 2026-01-01 to 2026-03-31'). Add 'R2 20', 'effective_from' and 'local copy' to the CCG fact-note vocabulary filter.",
+   "action": "routed_to_builder"
+  },
+  {
+   "artifact": "CCG",
+   "severity": "major",
+   "location": "01-ccg/US-CCG-001-v1.0.docx!annex_WA!P5409 (annexes/annex_WA.md, line after wa.wc.employee_deduction.rule)",
+   "problem": "'Not configured in this release: RCW 51.16.140 fixes ... the L&I rates web page returned a script shell (4,918 bytes) on 2026-11-03.' The limitation has no [[GAP:]] id (G-CLEAN, C70) and carries retrieval details ('script shell', byte count).",
+   "expected": "'Worker share of the Stay-at-Work and Supplemental Pension premiums: Not configured in this release [[GAP:CCG-RQ-nn]]' plus a gaps.json entry carrying the unresolved key from SIR-facts/CCG-annex_WA; retrieval details stay in the register.",
+   "action": "routed_to_builder"
+  }
+ ],
+ "_ccg_questions": {
+  "fact_value_vocab_5_register_hits": "Predates this batch: the same 5 tags carry 'register' in the r2 backup (mi.nonres.rules, pa.pit.local.eit.rule x2, sir.wi.provider_registration, vt.bik.vt_saves.rule x2; tx.report.ui.enhanced_fields.status is in the docx). They are ordinary English ('register and withhold', 'Texas Register'), not pipeline wording: a checker false positive, not a defect.",
+  "unbound_217": "Predates this batch: QA r1 measured 217 unbound on 2026-11-04 before any SIR batch (_qa/SIR-review-r1.json run). Not new."
+ },
+ "_carried_items": [
+  "SIR T13r2/T14r4: 'Not configured for TY2026 Not configured in this release [[GAP:SIR-RQ-03]]' doubles the phrase (QA r2 wording + standard renderer). Cosmetic; drop 'Not configured for TY2026' at the next regeneration.",
+  "SIR-QA1-18 status: settled as 'For QA' in all five artifacts until the owner sets package.issue_date.",
+  "SIR-QA1-19: shared C46 is not period-aware (owner of shared/).",
+  "SIR build log 'Items for QA' 2 still says 'most are acronym misses'; stale text in the log only."
+ ],
+ "manual_review_items": [
+  "PROPAGATION-LEDGER.md not written by QA (writes limited to this file).",
+  "C71: builder 0 differences; not re-run by QA (it writes into _build)."
+ ],
+ "propagation": [
+  {
+   "fact": "ut.pit.base_allowance.single.annual",
+   "consumed_by": [
+    "CCG/annex_UT",
+    "WTC/country_specific"
+   ],
+   "resynced": true,
+   "register_id": "US-UTPIT-003"
+  },
+  {
+   "fact": "wa.wc.employee_deduction.rule",
+   "consumed_by": [
+    "CCG/annex_WA",
+    "CCG/m07_deductions",
+    "RSPEC/US-WC-001"
+   ],
+   "resynced": true,
+   "register_id": "US-WAS7-001"
+  }
+ ],
+ "_batch_fix_list": [
+  {
+   "owner": "artifact-builder (CCG generator; CCG re-check only, the SIR is closed)",
+   "items": [
+    "CCG annex_UT table 843 r7-r11 col 6: clean qualification + [[GAP:CCG-RQ-nn]] for Jan-Mar 2026; vocabulary filter for 'R2 20', 'effective_from', 'local copy' in printed fact notes.",
+    "CCG annex_WA P5409: gap line with [[GAP:CCG-RQ-nn]], no retrieval details; gaps.json entry.",
+    "Rebuild CCG, rerun regression_guard (prev = pre-sir-r2 copy), C46, C70, C38."
+   ]
+  }
+ ],
+ "_summary": "SIR PASS (r2 closed, F44 408/408). RSPEC, DD, WTC diffs OK. CCG: 2 major defects in the rebuilt lines (UT internal wording, WA gap without id), routed for a CCG re-check."
+}

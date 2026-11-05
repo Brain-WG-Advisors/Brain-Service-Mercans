@@ -1,0 +1,10 @@
+import re
+p = "QA-REPORT.md"; s = open(p, encoding="utf-8").read()
+s = re.sub(r"^- \*\*Verdict \(re-check 4, 2026-11-05\): RELEASE-READY\.\*\*.*$", "- **Verdict (release check, re-check 5, 2026-11-05): RELEASE CHECK FAILED (REL-1, CCG C71); not RELEASED-LOCAL.** The content is release-ready (section 12) and C47 passes. The delivered CCG (20307cd3) cannot be reproduced by its generator, and the generator rule also rewrites two Florida notes with the wrong meaning. Section 13 has the details.", s, count=1, flags=re.M)
+s += open("_runclose/section13.md", encoding="utf-8").read()
+open(p, "w", encoding="utf-8").write(s)
+h = "handover_status.md"; t = open(h, encoding="utf-8").read()
+t = t.replace("# US handover status (2026-11-05, re-check 4: C39)", "# US handover status (2026-11-05, re-check 5: release check)")
+t = re.sub(r"^\*\*State: RELEASE-READY \(re-check 4, 2026-11-05\)\.\*\*.*$", "**State: RELEASE CHECK FAILED (REL-1). Not RELEASED-LOCAL.** C47 passes (0 findings) and the content gates all pass (re-check 4). The delivered CCG 20307cd3 cannot be regenerated identically: a full rebuild also rewrites the two Florida notes to \"Derived as 378 / 7 per employee\", which is wrong in meaning. Fix the generator rule, rebuild, run C71 (0 differences), tag_sync and C47, seal the CCG md5_final, and re-release. Details are in QA report section 13.", t, count=1, flags=re.M)
+open(h, "w", encoding="utf-8").write(t)
+print("RELEASE CHECK FAILED" in s[:3000], "REL-1" in t)

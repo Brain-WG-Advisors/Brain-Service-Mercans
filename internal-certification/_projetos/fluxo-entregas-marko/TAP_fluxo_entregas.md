@@ -51,6 +51,7 @@ Ao Marko vai o plano com o status e as datas (13:08).
 | Fontes oficiais já baixadas | Rota-alvo | `raw/docs/oficiais/` e `references/` |
 | Tickets, reuniões e chats | Rota de hoje (portal, upload, login) | `scripts/buscar.py` |
 | Contatos do BAU | Perguntas só para as lacunas | monday, BAU Master Client List |
+| Dados de apoio do projeto | Brief, listas, rotas-alvo e perguntas | [[dados/BRIEF_agentes\|brief dos agentes]] · [[dados/lista_entregas_11paises\|entregas (11 países)]] · [[dados/monday_12paises\|monday (12 países)]] · [[dados/evidencia_hoje_e_dev\|evidência hoje × Dev]] · [[dados/perguntas_por_SBC_certificacao\|perguntas por SBC]] · rotas-alvo [[dados/rota_alvo_FI_EE_IE\|FI/EE/IE]] · [[dados/rota_alvo_UA_KZ_AZ_RU\|UA/KZ/AZ/RU]] · [[dados/rota_alvo_UK_DK_SE_NL\|UK/DK/SE/NL]] |
 
 ## 5. EAP (estrutura analítica: pacotes de trabalho)
 

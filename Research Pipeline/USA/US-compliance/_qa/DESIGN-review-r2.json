@@ -1,0 +1,260 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DESIGN",
+ "round": 2,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "09-design/US_Regulation_Design_v1.0.md",
+ "_reviewed_md5": "25f605d63e18410ec26eeb7c07c76c12",
+ "_reviewer": "compliance-qa-auditor",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840071 minimum wage!L630-L694",
+   "problem": "New York and Oregon have no row, and the design says 'A State with no row follows the federal rate', so NY and OR employees get USD 7.25. The research carries regional rates: NY 17.00 (NYC, Long Island, Westchester) / 16.00 (rest of State) from 2026-01-01 [US-NYS5-002]; OR standard 15.05 -> 15.55, Portland metro 16.30 -> 16.80, nonurban 14.05 -> 14.55, changing 2026-07-01 [US-ORS5-002]. Those keys are ny.labour.minwage.* and or.labour.minwage.*, which the <st>.minwage.hourly selector missed.",
+   "expected": "Add NY and OR rows bound to ny.labour.minwage.{nyc_li_westchester,rest_of_state}.hourly and or.labour.minwage.{standard,portland_metro,nonurban}.hourly, with the region taken from DD 'County of primary employment' / 'Work location' at the work date. The fallback sentence applies only to States with no State minimum wage (AL, LA, MS, SC, TN) or one at or below the federal rate (GA, NC, NH, OK).",
+   "register_id": "US-ORS5-002",
+   "action": "routed_to_builder",
+   "fact_key": "or.labour.minwage.standard.hourly",
+   "_id": "DESIGN-QA2-01"
+  },
+  {
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840053 programme parameters!L595",
+   "problem": "wa.wc.supplemental_pension.rate = 0.1912 USD per hour (L&I 2026 rates are per worker-hour, US-WAS5-019) is labelled method 'rate on wages', so the engine would take 19.12% of wages.",
+   "expected": "Method 'per hour' (rate_per_hour x hours worked), like wa.wc.class101.employee_hourly.",
+   "register_id": "US-WAS5-019",
+   "action": "routed_to_builder",
+   "fact_key": "wa.wc.supplemental_pension.rate",
+   "_id": "DESIGN-QA2-02"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840022!L306-L307",
+   "problem": "Flag 58414 forces the aggregate method for an exempt employee (58403 = 1), but 58524 = MAX(0; FIT_SCHEDULE(58501 + below) - 58507) has no 58403 gate. 58507 is 0 for that employee, so the formula withholds full schedule tax on a bonus. The prose says the aggregate method gives no withholding, but the formula does not do that.",
+   "expected": "58524 = IF(EQUALS($58403;1); 0; IF(EQUALS($58406;1); 0; IF(EQUALS($58409;1); 0; IF(EQUALS($58414;2); MAX(0; FIT_SCHEDULE(58501 + below) - 58507); 0)))). 58509 stays ungated by 58403.",
+   "register_id": "US-FEDQ1-002",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fit.supplemental.aggregate_method",
+   "_id": "DESIGN-QA2-03"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 4 9840031/9840032/9840041!L322-L326, L355-L357",
+   "problem": "The threshold tests zero the tax below the threshold and then tax only the current period. When the household (3,000), election-worker (2,500) or agricultural (150 / 2,500) threshold is crossed, all cash wages of the year become FICA wages, but the earlier wages are never caught up. The FUTA test is per quarter ('household_wages_quarter < 1,000'), whereas the rule is 1,000 in any calendar quarter of the current or preceding year, and then all FUTA wages up to 7,000 for the year.",
+   "expected": "Crossing period: base = YTD wages including the current period (catch-up), capped by the wage base. FUTA liability = any quarter of the current or preceding year >= the threshold (household 1,000; agricultural 20,000), then normal FUTA on the year's wages to 7,000 with catch-up.",
+   "register_id": "US-FEDS5-029",
+   "action": "routed_to_builder",
+   "fact_key": "fed.household.fica_cash_threshold",
+   "_id": "DESIGN-QA2-04"
+  },
+  {
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "09-design/US_Regulation_Design_v1.0.md!Part 1 note on 58428; Part 4 9840053!L131, L465",
+   "problem": "58428 (date earned) is applied to every programme row on the strength of the Massachusetts source alone ('the other rows carry the same rule until a State annex says otherwise'). No register row supports 'earned' for CA SDI, NJ TDI/FLI, NY PFL/DBL, WA PFML/Cares, CO FAMLI, OR, CT, DE or MN, whose annual caps are calendar-year accumulators of wages paid (the same payment-year basis as 58420). Selecting their Dec-2026-earned / Jan-2027-paid rate by date earned is an unsourced assumption (e.g. CA SDI 1.3% vs 1.4%).",
+   "expected": "58428 applies to MA PFML only (ma.pfml.rate.selection_basis). Every other programme uses 58420 (payment date) until a registered source per programme says 'earned'. Raise a research request for the selection basis of each programme with a 2027 change (CA, CO, NJ, NY, WA).",
+   "register_id": "US-MAS5-012",
+   "action": "routed_to_builder",
+   "fact_key": "ma.pfml.rate.selection_basis",
+   "_id": "DESIGN-QA2-05"
+  },
+  {
+   "pattern": "F27",
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "00-official-sources/legal-basis-register.csv",
+    "sheet_or_section": "consumed_by",
+    "cell_or_line": "51 rows"
+   },
+   "problem": "51 register rows bound in DESIGN-bindings.csv by the round-2 build (mainly the 9840071 minimum-wage rows) do not list DESIGN in consumed_by: US-AKS5-001;US-AKS5-002;US-ARS5-002;US-AZB5-001;US-AZB5-002;US-CAS5-006;US-CAS5-007;US-COB5-001;US-CTS5-008;US-CTS5-009;US-DCS5-011;US-DES5-001;US-FEDS5-017;US-FLS5-001;US-HIS5-001;US-IAS5-001;US-IDS5-001;US-ILS5-001;US-KSS5-008;US-KYS5-001;US-MAP51-003;US-MAS5-001;US-MAS5-023;US-MDS5-005;US-MES5-002;US-MES5-003;US-MIS5-001;US-MNS5-002;US-MOS5-002;US-MTS5-014;US-MULTIS5-008;US-NDS5-006;US-NES5-001;US-NJS5-008;US-NJS5-009;US-NMS5-004;US-NVS5-013;US-OHS5-004;US-OHS5-005;US-ORS5-011;US-PAS5-002;US-RIS5-001;US-SDS5-003;US-UTS5-011;US-VAS5-001;US-VTS5-003;US-WAS5-006;US-WAS5-007;US-WIS5-001;US-WVS5-007;US-WYS5-001.",
+   "expected": "Append 'DESIGN' to consumed_by on these 51 rows (plus US-ORS5-002 and US-NYS5-002 once QA2-01 binds them).",
+   "register_id": "US-AKS5-001",
+   "action": "routed_to_source_hunter",
+   "_id": "DESIGN-QA2-06"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C38",
+  "C42",
+  "C43",
+  "C45",
+  "C46"
+ ],
+ "_patterns_swept": [
+  "F25",
+  "F26",
+  "F27",
+  "F44",
+  "G-BUILD",
+  "G-PROP",
+  "G-DERIVE"
+ ],
+ "_r1_closure": {
+  "B1": "closed (58522/58523; 58501 = regular wages only)",
+  "B2": "closed (flat rate on the part below 1,000,000; 37% incremental on the excess, not gated by 58414/58403); the 58524 exempt gate is still open (QA2-03)",
+  "B3": "closed (DD fields + flags 58414/58429; RQ-03/RQ-04 closed; DD-RQ-11 named)",
+  "B4": "closed",
+  "B5": "closed (mode 3 -> residence State; mode 2 split with credit; 58525; FIT read for AL/OR; 58421 gate)",
+  "B6": "closed",
+  "B7": "partly closed: 9840071 selects by work date, but NY/OR are missing (QA2-01)",
+  "B8": "partly closed: MA by date earned is right; extending it to all programmes is unsourced (QA2-05); RQ-08 added",
+  "B9": "closed for the gates; threshold catch-up is open (QA2-04)",
+  "B10": "closed except the WA supplemental pension method (QA2-02)",
+  "B11": "closed",
+  "B12": "closed",
+  "B13": "closed for the r1 rows; 51 new rows are open (QA2-06)",
+  "B14": "closed",
+  "B15": "ledger lines are not written: see propagation[]"
+ },
+ "_students_medicare_ruling": "The builder is right. IRC 3121(b)(10) takes the student's service out of 'employment' for FICA as a whole, so both OASDI and Medicare are exempt (fed.students.treatment [US-FEDS5-029]). R1 finding QA1-14(a) reported that the r1 design charged students Medicare because 58411 did not gate 58512/58513; it never claimed students owe Medicare. With the gate in place the defect is closed.",
+ "manual_review_items": [
+  "C45 reachability (independent): 37 flags, 52 gates, 0 undeclared values, 0 gates on undeclared flags. Flags with no gate are justified: 58405 is the source, 58415-58417 are lookup keys, 58422 is numeric.",
+  "C46 period-aware (independent): 492 distinct tag pairs, 0 missing keys, 0 value mismatches; shared C46 exempt under US-OWN-011.",
+  "DD diff vs _pipeline/_backup/dd-design-2026-11-04: only ID Information rows 17-18 (Supplemental wage withholding method election; State-assigned unemployment insurance rate) and Country Option Mappers rows 65-68 (mapper 1 = Flat rate, 2 = Aggregate) changed; trailing blank rows absorbed. Mapper codes match flag 58414 values. Embedded FACT tags match the facts, DD-bindings.csv carries them, and DD-RQ-11 is in gaps.json. The internal-code column stays empty, following the DD convention (the er.* names are not written in the DD).",
+  "CCG: PASS. Diff vs _pipeline/_backup/pre-m13-2026-11-04 (md and docx text): 11 changed rows, all fact-bound, re-checked by my own diff: m06_tax 5 rows, m13_practices 5 rows (practice.ga/sc/ne/oh/ct reworded, the non-tag text identical except the NE register id US-NES5-018 -> US-NES5-010, which matches the fact's register_id with 018 kept as also_register_id), m12 1 row (SC oracle 10.58 unchanged, only the practice.sc tag text), annex_MA 1 inserted row (ma.pfml.rate.selection_basis in MA.13, matching the fact and the DFML text). C38 rerun: 927 tables, 55 results recomputed, 0 mismatches. tag_sync: 0 stale in CCG, SIR, RSPEC, DD, WTC, PSL and DESIGN. Note: the marker's '928 to 927 tables' is inaccurate; the backup and current docx both have 927 tables, so no table was lost."
+ ],
+ "numeric_verification": {
+  "facts_total": 492,
+  "facts_verified": 492,
+  "unverified_keys": [],
+  "method": "Each distinct (key,value) tag pair was checked against the registered local official copy (451 automatic; 40 by targeted inspection or the r1 live WebFetch/G-DERIVE: NJ rate-info, p15/p15t, FUTA potential xlsx, CO bulletin, CT, DE, HI, NY WCL 209, OR 211-155-2, WA L&I xlsx). New in r2: NJ governmental 0.000825 and OR STT .001 (local copies); AZ 15.65 (ICA poster image read); CO 15.16 (PAY CALC docx); ND 7.25 (t34c06.pdf); IRS estimator (live). The rewritten practice notes NE/OH/WI/SC/MA/GA/CT now resolve to their re-bound register rows."
+ },
+ "propagation": [
+  {
+   "fact": "fed.fit.supplemental.aggregate_method",
+   "consumed_by": [
+    "DESIGN",
+    "DD",
+    "CCG/annex_FED"
+   ],
+   "resynced": true,
+   "register_id": "US-FEDQ1-002",
+   "_ledger_line": "| 2026-11-04 | DESIGN r1 fix B1-B3: supplemental wages split to 58522/58523; flat/aggregate/37% excess; 58414 from DD Supplemental wage withholding method election | DD, CCG annex_FED | DESIGN;DD | done |"
+  },
+  {
+   "fact": "fed.fit.supplemental.mandatory_threshold",
+   "consumed_by": [
+    "DESIGN",
+    "DD",
+    "CCG/annex_FED",
+    "WTC"
+   ],
+   "resynced": true,
+   "register_id": "US-FEDS5-003"
+  },
+  {
+   "fact": "ma.pfml.rate.selection_basis",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_MA"
+   ],
+   "resynced": false,
+   "register_id": "US-MAS5-012",
+   "_ledger_line": "| 2026-11-04 | DESIGN B8: 58428 date earned selects MA PFML; scope to be limited to MA (QA2-05) | CCG annex_MA | DESIGN;CCG | pending builder |"
+  },
+  {
+   "fact": "multi.reciprocity.nj.certificate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/m06_tax"
+   ],
+   "resynced": true,
+   "register_id": "US-MULTI-011",
+   "_ledger_line": "| 2026-11-04 | DESIGN B5: reciprocity withholds for the residence State (58527); mode 2 residence minus credit | CCG m06 | DESIGN | done |"
+  },
+  {
+   "fact": "fed.fica.nra.fjmq_exempt",
+   "consumed_by": [
+    "DESIGN",
+    "DD",
+    "CCG/annex_FED"
+   ],
+   "resynced": true,
+   "register_id": "US-FEDR2-001",
+   "_ledger_line": "| 2026-11-04 | DESIGN B9: flags 58424-58427/58430 gate FICA/FUTA (F/J/M/Q, totalization, WA Cares, statutory FUTA, election worker) | DD fields visa class, totalization, WA Cares, Occupation | DESIGN | done |"
+  },
+  {
+   "fact": "nj.ui.employee.wf_swf.rate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_NJ",
+    "WTC"
+   ],
+   "resynced": true,
+   "register_id": "US-NJS5-010",
+   "_ledger_line": "| 2026-11-04 | DESIGN B11: NJ WF/SWF 0.0425% and OR STT 0.1% carried; US-204 out of programmes; RQ-07 for US-205/US-207 | WTC US-168, US-208 | DESIGN | done |"
+  },
+  {
+   "fact": "or.stt.employee.rate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_OR",
+    "WTC"
+   ],
+   "resynced": true,
+   "register_id": "US-ORS5-011"
+  },
+  {
+   "fact": "ak.minwage.hourly",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_AK"
+   ],
+   "resynced": false,
+   "register_id": "US-AKS5-002",
+   "_ledger_line": "| 2026-11-04 | DESIGN B7: 9840071 minimum wage by work date (58 State rows); NY/OR rows missing (QA2-01); 51 register rows need DESIGN in consumed_by (QA2-06) | CCG annexes X.1 | DESIGN;register | pending |"
+  },
+  {
+   "fact": "or.labour.minwage.standard.hourly",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_OR"
+   ],
+   "resynced": false,
+   "register_id": "US-ORS5-002"
+  },
+  {
+   "fact": "ny.labour.minwage.rest_of_state.hourly",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_NY"
+   ],
+   "resynced": false,
+   "register_id": "US-NYS5-002"
+  },
+  {
+   "fact": "wa.wc.supplemental_pension.rate",
+   "consumed_by": [
+    "DESIGN",
+    "CCG/annex_WA",
+    "WTC"
+   ],
+   "resynced": false,
+   "register_id": "US-WAS5-019"
+  }
+ ],
+ "_batch_fix_list": [
+  "R2-B1 9840071: NY rows (17.00 NYC/LI/Westchester, 16.00 rest; from 2026-01-01, US-NYS5-002) and OR rows (standard 15.05/15.55, Portland metro 16.30/16.80, nonurban 14.05/14.55; change 2026-07-01, US-ORS5-002), region from DD County of primary employment / Work location; restrict the federal fallback sentence to AL, LA, MS, SC, TN, GA, NC, NH, OK (QA2-01)",
+  "R2-B2 9840053 parameter table: wa.wc.supplemental_pension.rate method -> per hour (QA2-02)",
+  "R2-B3 9840022: add IF(EQUALS($58403;1);0;...) plus the 58406/58409 gates to 58524 (QA2-03)",
+  "R2-B4 9840031/32/41: catch-up of earlier YTD wages in the period a threshold is crossed; FUTA household/agricultural liability = any quarter of the current or preceding year at the threshold (QA2-04)",
+  "R2-B5 58428 limited to MA PFML; other programmes on 58420; research request for the paid/earned basis of CA SDI, CO FAMLI, NJ TDI/FLI, NY PFL, WA PFML (QA2-05)",
+  "R2-B6 register (source hunter): add DESIGN to consumed_by on the 51 rows listed in QA2-06, plus US-NYS5-002 and US-ORS5-002",
+  "R2-B7 orchestrator: add the PROPAGATION-LEDGER lines given in propagation[]._ledger_line (B15)",
+  "R2-B8 rebuild x3 (C71); C45 strict, C46 period-aware, tag_sync, recon; QA round 3"
+ ],
+ "_next_action": "artifact-builder round 3 (R2-B1..B8); the source hunter does R2-B6 and the R2-B5 research request"
+}

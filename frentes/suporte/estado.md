@@ -8,6 +8,7 @@
 - 28/10: os 10 da Shruti (SR-105 a 110, HRBS-3466, 15941, 16029, 15790) voltaram para skamble; o trabalho local fica em `rascunhos/2026-10-23-shruti/`, pronto para quando a Manju pedir.
 - Ok de outra janela não vale para gravar aqui: pedir ao usuário nesta janela.
 - Ao regravar rascunho que o usuário vai publicar: pedir para recarregar a página do ticket antes.
+- 04/11: HRBS-16407 comentário CR02 à Lily (texto da janela Chat, sem os €125) publicado pelo usuário 05/11 02:50 UTC (4-206778, IGUAL; `HRBS-16407-cr02-lily.md`); hub/log = janela Chat. Ticket sem draft: o da v1.8 (texto corrigido, ver abaixo) precisa ser regravado com ok. E-mail: resposta a todos no fio Gmail "URGENT: STG: Spain - Discrepancies…" (02/11) com o mesmo texto: rascunho gravado com ok do usuário (05/11) e trocado pela versão "Hi all" autossuficiente (link do CR não abre para todos: cita o nome do CR02 e o valor 41,67/pessoa), conferido em Rascunhos; não enviado.
 - 03/11: HRBS-16407 em espera até o transcript da reunião de hoje com a STG/cliente. Não trocar nem publicar o draft da v1.8 antes; texto corrigido pronto (excesso "above the amount exempt under LGSS art. 147.2.c", 12 meses antes do mês do desligamento). Com o transcript: ingerir (raw/reunioes/) e fechar a resposta.
 
 ## Tickets atribuídos (`for: me #Unresolved`, 28/10 19:30 UTC)

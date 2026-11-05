@@ -1,0 +1,55 @@
+# State references
+
+One file per jurisdiction (50 States and the District of Columbia):
+
+- `12-states/AK.md` - Alaska
+- `12-states/AL.md` - Alabama
+- `12-states/AR.md` - Arkansas
+- `12-states/AZ.md` - Arizona
+- `12-states/CA.md` - California
+- `12-states/CO.md` - Colorado
+- `12-states/CT.md` - Connecticut
+- `12-states/DC.md` - District of Columbia
+- `12-states/DE.md` - Delaware
+- `12-states/FL.md` - Florida
+- `12-states/GA.md` - Georgia
+- `12-states/HI.md` - Hawaii
+- `12-states/IA.md` - Iowa
+- `12-states/ID.md` - Idaho
+- `12-states/IL.md` - Illinois
+- `12-states/IN.md` - Indiana
+- `12-states/KS.md` - Kansas
+- `12-states/KY.md` - Kentucky
+- `12-states/LA.md` - Louisiana
+- `12-states/MA.md` - Massachusetts
+- `12-states/MD.md` - Maryland
+- `12-states/ME.md` - Maine
+- `12-states/MI.md` - Michigan
+- `12-states/MN.md` - Minnesota
+- `12-states/MO.md` - Missouri
+- `12-states/MS.md` - Mississippi
+- `12-states/MT.md` - Montana
+- `12-states/NC.md` - North Carolina
+- `12-states/ND.md` - North Dakota
+- `12-states/NE.md` - Nebraska
+- `12-states/NH.md` - New Hampshire
+- `12-states/NJ.md` - New Jersey
+- `12-states/NM.md` - New Mexico
+- `12-states/NV.md` - Nevada
+- `12-states/NY.md` - New York
+- `12-states/OH.md` - Ohio
+- `12-states/OK.md` - Oklahoma
+- `12-states/OR.md` - Oregon
+- `12-states/PA.md` - Pennsylvania
+- `12-states/RI.md` - Rhode Island
+- `12-states/SC.md` - South Carolina
+- `12-states/SD.md` - South Dakota
+- `12-states/TN.md` - Tennessee
+- `12-states/TX.md` - Texas
+- `12-states/UT.md` - Utah
+- `12-states/VA.md` - Virginia
+- `12-states/VT.md` - Vermont
+- `12-states/WA.md` - Washington
+- `12-states/WI.md` - Wisconsin
+- `12-states/WV.md` - West Virginia
+- `12-states/WY.md` - Wyoming

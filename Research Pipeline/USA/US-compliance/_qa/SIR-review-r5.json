@@ -1,0 +1,42 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "SIR",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_file_round": "r5 = targeted re-check of the F27/minor fix (RC-4, RC-6) against _pipeline/_backup/pre-f27-2026-11-04/",
+ "_reviewer": "compliance-qa-auditor (independent, run-close re-check 3)",
+ "_reviewed_file": "03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx (22/22 = md5_final). 208 raw changed lines = SIR-RQ ids renumbered -2 (the two F44 gaps removed); ids masked: 12 lines, all mapped: Form 940 rows print [[FACT:rspec.fed.form940.due]] (same text as RSPEC IRS-004), OH school district prints the fact + the DD limitation sentence, 4 source-list rows, 2 gap rows removed. gaps.json (39 SIR-RQ) and skill 14-known-gaps agree id by id (0 mismatches).",
+ "findings": [
+  {
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P2",
+   "location": {
+    "file": "03-statutory-integrations/_build/f44_lib.py",
+    "sheet_or_section": "LIMITATION_KEYS",
+    "cell_or_line": "lines 228-252"
+   },
+   "problem": "The F44 self-check skips ALL elements of rspec.fed.form940.due and dd.oh.school_district_code, whatever their value. Today the skip is safe: the auditor found the verifiable elements in the cited copies (US-FEDS5-031: 'February 2, 2026', 'February 10'; US-OHS5-019: '9999'), the derived TY2026 dates re-derive (Jan 31 2027 Sunday -> Feb 1; Feb 10 2027 Wednesday), and both printed values carry their limitation wording. But a later change of either value would pass F44 unchecked.",
+   "expected": "Accepted for package 1.0. At the next SIR build, pin the skip to the current value (key + value hash) or skip only the derived elements, so any new wording is checked again.",
+   "register_id": "US-FEDS5-031",
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C46",
+  "C53",
+  "C70"
+ ],
+ "numeric_verification": {
+  "facts_total": 2,
+  "facts_verified": 2,
+  "unverified_keys": [],
+  "method": "Both tags checked by hand in the registered copies and by G-DERIVE (see finding). SIR f44_self: 409 tags, 0 misses."
+ },
+ "_closes": [
+  "RC-4 (F27 RSPEC x SIR Form 940): closed",
+  "RC-6 (SIR Ohio school district wording): closed"
+ ]
+}

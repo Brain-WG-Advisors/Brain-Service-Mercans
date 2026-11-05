@@ -87,9 +87,9 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 
 ## MS.4 Pay statement
 
-| Item | Value | Valid from | Valid to | Source | Note |
-|---|---|---|---|---|---|
-| `ms.payslip.statute.exists` | [[FACT:ms.payslip.statute.exists=False]] | 2026-01-01 | open | US-MSP9L-001 (A.3, Mississippi Department of Employment Security) | no MS pay-statement statute located (full-text Code search not possible) |
+No Mississippi rule is configured in this domain; the federal treatment in Annex FED applies.
+
+- Not configured in this release [[GAP:PSL-RQ-14]]: Mississippi: only the MDES required-posters page is registered (US-MSP9L-001, A.3); no statute copy proves presence or absence of a pay-statement duty (same limitation as PSL-RQ-14, psl.ms.statement.scope)
 
 ## MS.5 Statutory reporting
 
@@ -202,7 +202,6 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | US-MSP10-001 | Mississippi Department of Revenue |
 | US-MSP51-001 | US Department of Labor, Wage and Hour Division |
 | US-MSP51-004 | Mississippi Department of Employment Security |
-| US-MSP9L-001 | Mississippi Department of Employment Security |
 | US-MSS5-001 | Mississippi Legislature |
 | US-MSS5-002 | Mississippi Department of Revenue |
 | US-MSS5-003 | Mississippi Department of Revenue |

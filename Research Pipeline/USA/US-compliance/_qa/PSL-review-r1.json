@@ -1,0 +1,465 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "PSL",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-04",
+ "_reviewed_file": "06-payslip/US_Compliance_Payslip_Generator.xlsx (md5 5abe71de0f2d1351da978a917119417b, equal to 06-payslip/_build/checks/md5_final.txt)",
+ "_reviewer": "compliance-qa-auditor (independent; did not build the PSL)",
+ "_built_by": "artifact-builder",
+ "findings": [
+  {
+   "_id": "PSL-QA1-01",
+   "pattern": null,
+   "severity": "blocker",
+   "pass": "P2",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!H36",
+   "problem": "Employer social security (US-005) is 195.98 = 6.2% x 3,161 with no wage-base cap. The employee line on the same payslip is capped at 186.00 (H72) because only 3,000 of wage base remains (184,500 - 181,500). The employer share is also limited to the 184,500 base, so the employer block overstates the tax by 9.98. The same typed value sits in United States (ES)!H36 and Compliance Payslip!H36, and the totals in H38 (241.81) are wrong too. Source: generator 06-payslip/_build/build_psl.py line 123, d['er_ss'] = fica_wages x employer rate, with no cap.",
+   "expected": "H36 = 186.00 as a formula, the lesser of (employer rate x wage base - employer tax already paid) and ROUND(H67 x employer rate,2), mirroring H69:H72 (or =H72 where both rates are 6.2%). H38 then = 231.83. Fix it in build_psl.py:123 and rebuild all three tabs.",
+   "register_id": "US-FEDS5-005",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fica.oasdi.rate.employer",
+   "evidence": "Live WebFetch 2026-11-04 of https://www.irs.gov/pub/irs-pdf/i941.pdf (Rev. March 2026): 'The social security tax rate is 6.2% each for the employee and employer. The social security wage base limit is $184,500.' Cached values: H72=186.00, H36=195.98."
+  },
+  {
+   "_id": "PSL-QA1-02",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!H77",
+   "problem": "The Medicare YTD wages are =H68+H67, where H68 is 'Social security wages paid before this payslip'. Social security wages stop at the 184,500 base, so H77 can never pass the 200,000 Additional Medicare threshold. The Additional Medicare line (H78:H79, US-008) therefore always computes 0, whatever the employee earned. H61 (YTD Medicare) uses the same H77 and leaves out Additional Medicare. The sample only gives the right answer because it sits below both limits. The same applies on the ES and Compliance Payslip tabs.",
+   "expected": "Add an input row 'Medicare wages paid before this payslip (year to date)' (uncapped) and use it in H77 and H61. YTD Medicare withheld = prior YTD Medicare tax + H74 + H79. Keep H68 for social security only.",
+   "register_id": "US-FEDS5-005",
+   "action": "routed_to_builder",
+   "fact_key": "fed.fica.addl_medicare.withholding_threshold"
+  },
+  {
+   "_id": "PSL-QA1-03",
+   "pattern": "F26",
+   "severity": "minor",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!H37",
+   "problem": "Employer Medicare 45.83 (H37) and YTD Gross 185,000 (H58) are typed values on rows that should be calculated. The toolkit validate_workbook --artifact PSL --totals-check flags H58 under C26. YTD gross 185,000 also does not reconcile with the YTD social security wages (181,500 before + 3,161 this period = 184,661) plus the cafeteria-plan deductions. The same applies on the ES and Compliance Payslip tabs.",
+   "expected": "H37 =ROUND(H67*employer Medicare rate,2). H58 = an input 'YTD gross before this payslip' + H22, chosen so that YTD gross >= YTD social security wages + YTD section-125 deductions.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "check_id": "C26"
+  },
+  {
+   "_id": "PSL-QA1-04",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Payslip Spec!B36:E37",
+   "problem": "The workbook has no 'Total Hours Worked' field. CA Lab. Code 226(a)(2) requires total hours worked (fact psl.ca.statement.content: 'total hours (not for salaried exempt)'). HI 387-6(c) ('total hours'), CT, IA, IN, MA, MI, NE, NM, PA, RI, VT, WA and WI facts ask for hours worked. The payslip prints hours per line only (G19=80, G20=4) and never the total (84). _research/PSL-legal-items.json item 'hours' (label 'Total hours worked') is matched to 'Regular Hours', so C57 passes on the wrong field.",
+   "expected": "Add a payslip row 'Total hours worked' = sum of the hours of the time-based lines (accumulator US-030) under the earnings block on all three tabs. Add a Payslip Spec row with HRP mapping $payroll.hours.total and the naming States. Change PSL-legal-items 'hours'.match to ['Total Hours Worked'].",
+   "register_id": "US-CAS5-005",
+   "action": "routed_to_builder",
+   "check_id": "C57",
+   "fact_key": "psl.ca.statement.content"
+  },
+  {
+   "_id": "PSL-QA1-05",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!A46:H53",
+   "problem": "Some fields print on the payslip but have no Payslip Spec row or HRP mapping, so a developer cannot build them: Bank name (A46/A47), Account (masked) (C46/C47), Payment method (F46/F47), Compensation sources (A51, DC fact psl.dc.statement.content), Pay-code guide reference (A52, CT), Compensatory time (A53, MI fact psl.mi.statement.content 'comp time earned or paid'). The Spec has rows for Tips (B42), Allowances (B40) and Piece-rate (B39) only.",
+   "expected": "Add 6 Payslip Spec rows (Field Name EN/ES, HRP mapping, 2-4 sentence explanation), each with its DD field (bank account fields) or 'payroll result, no DD field' and the naming States (DC, CT, MI). Account masking rule: last 4 digits.",
+   "register_id": "US-DCS5-010",
+   "action": "routed_to_builder",
+   "fact_key": "psl.dc.statement.content"
+  },
+  {
+   "_id": "PSL-QA1-06",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!A40:H43",
+   "problem": "The paid leave block has accrued, used and available hours only. AZ requires 'the amount of pay received as earned paid sick time' (fact psl.az.sick_leave.on_statement, register US-AZS5-011 subsection C). NYC requires PTO accrued in the period, paid and unpaid PTO used in the period, and unpaid immediately available hours (fact psl.nyc.pto.on_statement, US-NYB5-003). Neither the payslip nor the Spec (B30:B32) can show these, so the AZ and NYC rows of LEAVE_BALANCE_RULE cannot be met.",
+   "expected": "Add switched rows: 'Paid sick leave pay received year to date (USD)' (AZ), plus 'PTO accrued this period', 'Paid PTO used this period', 'Unpaid PTO used this period' and 'Unpaid PTO available' (NYC). Add the matching Spec rows naming AZ and NYC.",
+   "register_id": "US-AZS5-011",
+   "action": "routed_to_builder",
+   "fact_key": "psl.az.sick_leave.on_statement"
+  },
+  {
+   "_id": "PSL-QA1-07",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!H41:H43",
+   "problem": "The sample employee works in TX, which is not in LEAVE_BALANCE_RULE (Field Option rows 72-80: AK, AZ, CA, MD, MN, NM, NV, WA, NYC). The payslip still prints the leave balance (40 / 8 / 32). How to set up Payslip!C14 says to print it only for the listed States, so the sample contradicts its own switching rule. The same applies on the ES and Compliance Payslip tabs.",
+   "expected": "H41:H43 'not printed' / 'no se imprime', as in the State-switched rows 50-55, or a leave State as the sample work location.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "_id": "PSL-QA1-08",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Payslip Spec!D25",
+   "problem": "The SSN mapping CONCAT('***-**-';SUBSTRING($person.ssn;6;4)) prints the last 4 digits for every State. Maryland bars any SSN, even truncated, on the wage check and attachments (psl.md.ssn.rule, US-MDS5-008), but the bar appears only as prose in E25. A developer following column D would breach LE 3-502(d).",
+   "expected": "D25 = IF($employment.work_state='MD';'';CONCAT('***-**-';SUBSTRING($person.ssn;6;4))), with Employee ID as the identifier in MD. E25 should say which States print nothing. The SUBSTRING positions are correct: the DD SSN is N(9).",
+   "register_id": "US-MDS5-008",
+   "action": "routed_to_builder",
+   "fact_key": "psl.md.ssn.rule"
+  },
+  {
+   "_id": "PSL-QA1-09",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Field Option!C43",
+   "problem": "The MN content fact says only '12 content items (181.032)' and does not list the items. The Spec names MN in 4 rows only, so MN coverage cannot be checked. Register US-MNP6-001 lists the items, including some the payslip lacks: employer legal and operating name, main-office physical and mailing address, meal/lodging allowances, and amounts deducted under 268B.14 (paid leave premium).",
+   "expected": "Source hunter: re-issue psl.mn.statement.content with the full 181.032(b) list from US-MNP6-001. Builder: then map every item. Add 'Employer Operating Name (if different)' and 'Employer Mailing Address (if different)' fields, and make sure the MN paid-leave employee deduction line prints.",
+   "register_id": "US-MNP6-001",
+   "action": "routed_to_source_hunter",
+   "fact_key": "psl.mn.statement.content"
+  },
+  {
+   "_id": "PSL-QA1-10",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Payslip Spec!B57",
+   "problem": "Other registered content items are not on the template. NM: 'total wages and benefits earned' (US-NMP8-001; the payslip shows no benefits-earned total). NY 195(3): 'home care aide benefits, prevailing wage supplements' (US-NYS5-006). The NY/OR 'basis' of the rate cannot be shown beyond the 4 RATE_OF_PAY_BASIS options (Field Option B9:B12), and there is no shift, day, week or other basis.",
+   "expected": "Add a switched 'Benefits earned (employer-paid)' row for NM. Add RATE_OF_PAY_BASIS options for Shift, Day, Week and Other. Add NY industry-specific lines as switched rows, or record them as a named limitation.",
+   "register_id": "US-NMP8-001",
+   "action": "routed_to_builder",
+   "fact_key": "psl.nm.statement.content"
+  },
+  {
+   "_id": "PSL-QA1-11",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Population Range!C12",
+   "problem": "The household (domestic) row is CONDITIONAL, but its note cites psl.ca.statement.content (226(a) content items) and GAP PSL-RQ-25 (SC exemptions). Neither states a household condition. Register US-CAS5-005 says 'Household (residential dwelling) employees excluded (226(d))', but no fact carries it. C13 (agricultural) also carries psl.va.statement.content, which says nothing about agricultural workers.",
+   "expected": "Source hunter: fact psl.ca.statement.household_exclusion from US-CAS5-005 (226(d)). Builder: C12 should state the condition (statement still issued, CA content rule not applicable to residential-dwelling employees) and cite that fact. Remove psl.va.statement.content from C13.",
+   "register_id": "US-CAS5-005",
+   "action": "routed_to_source_hunter",
+   "fact_key": "psl.ca.statement.content"
+  },
+  {
+   "_id": "PSL-QA1-12",
+   "pattern": "F6",
+   "severity": "major",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Field Option!A355:D382",
+   "problem": "The NOT_CONFIGURED block (28 rows) is a research to-do list inside the deliverable. It holds dotted fact keys written as prose ('Statement psl hi ssn rule whose wording is not proven in the saved copy of its source'), pipeline instructions ('Closes with: Re-register NC-30 (2026) section 26 with the 10-year figure in figure_or_rule_carried') and request ids. G-CLEAN: an open item is a named limitation in the QA report, not a to-do list in the artifact.",
+   "expected": "Delete rows 355-382. Keep only the neutral 'Not configured in this release [[GAP:PSL-RQ-nn]]' cells already in the rule blocks. The to-do list stays in _research/gaps.json and PSL-research-request.json.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "check_id": "C29"
+  },
+  {
+   "_id": "PSL-QA1-13",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!A65:A89",
+   "problem": "The employee payslip tabs print register ids and pipeline stamps: ' [US-FEDS5-005] (effective 2026-01-01 to 2026-12-31)' and ' [US-FEDS5-001]' in A65, A66, A73, A75, A76, A82, A86, A88 and A89. The same cells are on United States (ES) and Compliance Payslip. No print area is set on any of the three tabs, so the calculation blocks (rows 64-102) print with the payslip. shared/release/release.py strips [[FACT:]] tags only, not register ids or effective stamps, so these reach the released payslip.",
+   "expected": "On the three payslip tabs, print the label and value only (the register binding stays in PSL-bindings.csv). Set a print area of the payslip proper (A1:J62 plus the footer rows), or move the calculation blocks to a non-printing area.",
+   "register_id": "US-FEDS5-005",
+   "action": "routed_to_builder"
+  },
+  {
+   "_id": "PSL-QA1-14",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Payslip Spec!E25",
+   "problem": "Pipeline wording appears in delivered text: 'Build rule:' (Payslip Spec!E25, Field Option!D98), 'Build default' (Field Option!D115, D153), 'computed by the generator from the rates in the facts' (How to set up Payslip!C18). Some fact values printed through tags also carry pipeline wording that release.py keeps: psl.in.statement.scope '...build emits hours/wages/deductions anyway' (Field Option!C34, Population Range!C14), psl.nc.ssn.rule '...safe build = truncated SSN' (Field Option!C88), psl.multi.reach.default '(no other state reach rule researched)' (Payslip Spec!E8, Field Option!C162).",
+   "expected": "Builder: replace with 'Rule:' / 'Default:' / 'computed from the statutory rates'. Source hunter: reword the 3 fact values in neutral statutory language (for example 'IN statute binds only non-FLSA employers; Mercans prints hours, wages and deductions for all IN employees').",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "fact_key": "psl.in.statement.scope"
+  },
+  {
+   "_id": "PSL-QA1-15",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (ES)!A57",
+   "problem": "The Spanish tab has no diacritics: 'Acumulado del ano' (A57; 'ano' is a different word from 'año'), 'periodos de pago por ano' (A84), 'Direccion', 'Telefono', 'Numero', 'deduccion', 'Retencion', 'Linea', 'Metodo', 'calculo', 'maximo' (A8-A102), and the same in Payslip Spec column C (C4, C15-C18, C24-C25, C47, C49, C57). Some values are not translated: C15 'Hourly', H9 'Biweekly', H15 'Single or Married filing separately'.",
+   "expected": "Use proper Spanish in UTF-8: 'Acumulado del año', 'Dirección', 'Teléfono', 'Número', 'Deducción', 'Retención', 'Línea', 'Método', 'Cálculo', 'Máximo'. Translate C15 ('Por hora'), H9 ('Cada dos semanas') and H15 ('Soltero o casado que declara por separado'). Rebuild ES and the Spec column C from psl_content.py.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "_id": "PSL-QA1-16",
+   "pattern": "F26",
+   "severity": "major",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Unit Rate Details!B4:F28",
+   "problem": "Row 4 lists 62104 'Basic salary rate' (WTC category 'Percentage', the rate wage type of 62100) as an earning. Rows 5-28 give the hours accumulator US-030 as Unit Account to amount-only earnings: bonuses 62200/62210/62220, allowances 62310-62599, severance 62180, LTD 62190, 62610, pensions 62640, commission US-042 and cash tips US-043. Column F repeats one sentence on all 26 rows. Read literally, a bonus would be computed as rate x hours.",
+   "expected": "Delete row 4 (62104 stays as the Rate Account of 62100 in D3). Unit Account US-030 only for time-based lines (62100, 62110, 62150, 62160, 62170, 62300). Others: 'Amount only, no unit account'. Column F: one specific basis per row.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "_id": "PSL-QA1-17",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!A1:J5",
+   "problem": "The payslip tabs use fills that no payslip precedent has: 1F3864 navy title band (21 cells per tab), C6EFCE net green (5), F2F2F2 (68) and FCE4D6 (14). mercans-artifact-toolkit SKILL.md (contract row 5, measured fill inventory of REFERENCE_Payslip_Mozambique/Tunisia) says there is no navy title band and no green NET PAY fill in either reference. The build log calls these its own choice.",
+   "expected": "Reference palette: DCDCDC labels, A9A9A9 section bars, 4BACC6 / F79646 accents, no navy band, no green net fill. Or record the owner decision for a new house style.",
+   "register_id": null,
+   "action": "routed_to_builder",
+   "check_id": "C21"
+  },
+  {
+   "_id": "PSL-QA1-18",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P1",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!United States (EN)!H46:H47",
+   "problem": "The Payment details block has 'USD' in both the header (H46) and the value cell (H47) and never shows the amount paid into the account. The same applies on the ES and Compliance Payslip tabs.",
+   "expected": "H46 'Amount', H47 =H33 (net pay), formatted USD with 2 decimals.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  },
+  {
+   "_id": "PSL-QA1-19",
+   "pattern": null,
+   "severity": "minor",
+   "pass": "P4",
+   "location": "06-payslip/US_Compliance_Payslip_Generator.xlsx!Payslip Spec!D18",
+   "problem": "The EIN row maps $legal_entity.ein only. E18 says the State employer account number prints where the State requires an employer registry or ID number (OR, psl.or.statement.content 'employer name and registry/ID number'), but no mapping produces it.",
+   "expected": "D18 = $legal_entity.ein, plus IF($employment.work_state='OR';$legal_entity.state_account_number;'') (DD field 'State employer account number'), or a separate Spec row.",
+   "register_id": "US-ORS5-026",
+   "action": "routed_to_builder",
+   "fact_key": "psl.or.statement.content"
+  },
+  {
+   "_id": "PSL-QA1-20",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P5",
+   "location": "00-official-sources/legal-basis-register.csv!consumed_by!US-FEDS5-001",
+   "problem": "The register is under-filled for propagation. The payslip consumes US-FEDS5-001 (fed.fit.* in EN/ES/Compliance Payslip A82:A89), US-FEDS5-029 (fed.retirement.pretax.tax_treatment, Payslip Spec!E48) and US-FEDS5-030 (fed.plaw119_21.tips_overtime.level, Payslip Spec!E42, Field Option!C160). None of the three rows lists PSL in consumed_by, so a change to the 2026 FIT tables or OASDI rules would not reach the payslip.",
+   "expected": "Add 'PSL' (or 'PSL/8_sheets') to consumed_by of US-FEDS5-001, US-FEDS5-029 and US-FEDS5-030.",
+   "register_id": "US-FEDS5-001",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "_id": "PSL-QA1-21",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P2",
+   "location": "00-official-sources/legal-basis-register.csv!id!US-OWN-011",
+   "problem": "_pipeline/build-manifest.json validation_exemptions C48/C49/C50 and MANDATE.md line 1603 cite owner row US-OWN-011, but legal-basis-register.csv has no such row (it ends at US-OWN-010, line 2698). The exemptions that clear the C49 KW-100 hit therefore point to a register_id that does not exist.",
+   "expected": "Register row US-OWN-011 (governance, owner_decision, decided 2026-11-04, Wallisson Gomes default via orchestrator; consumed_by WTC;CCG;PSL), shaped like US-OWN-010.",
+   "register_id": "US-OWN-011",
+   "action": "routed_to_source_hunter"
+  },
+  {
+   "_id": "PSL-QA1-22",
+   "pattern": null,
+   "severity": "major",
+   "pass": "P5",
+   "location": "_pipeline/PSL-bindings.csv!location!rows labelled United States (ES)",
+   "problem": "75 binding rows have the location 'United States (ES)' (a bare sheet name with no cell), but that tab has 9 tags. The other 66 keys (for example psl.ak.ssn.rule, psl.ar.statement.scope, psl.az.sick_leave.on_statement) are not on that tab: 57 are on Field Option only, 4 are on Payslip Spec (with or without Field Option) and 5 are on Field Option plus Population Range. No binding row carries a Payslip Spec or Population Range location. The build log fact-binding table (_pipeline/PSL-build-log.md line 35, 'United States (ES) | 75') repeats the error. The location-to-register_id map is the P2/P5 instrument and points at the wrong cells.",
+   "expected": "Write the real sheet!cell for every binding: Payslip Spec 7 tags, Population Range 3, ES 9, EN 9, Compliance Payslip 9, Field Option. Regenerate the build-log table.",
+   "register_id": null,
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C21",
+  "C26",
+  "C28",
+  "C29",
+  "C30",
+  "C42",
+  "C43",
+  "C44",
+  "C46",
+  "C48",
+  "C49",
+  "C50",
+  "C53",
+  "C56",
+  "C57",
+  "C70"
+ ],
+ "manual_review_items": [
+  "C5 classification cites its establishing article: not implemented in the pipeline script (L3). Run by hand: every STATE_STATEMENT_RULE row cites a statute section through its fact; 2 rows are classified with the wrong fact (Population Range C12/C13, PSL-QA1-11).",
+  "C6 file format against source: not applicable to the payslip (no authority file format). Recorded, not run.",
+  "C7 population-rules depth: not implemented (L3). Run by hand over Population Range: 5 CONDITIONAL rows; household and agricultural conditions not stated by the cited facts (PSL-QA1-11).",
+  "C9 tax-code check: the payslip consumes WTC codes only; all 160 codes and names checked against US-WTC-001 v1.0, 0 differences (WTC-side tax codes were closed in the WTC reviews).",
+  "C21 divergence: PRESUBMISSION_AUDIT.md says a 5-sheet payslip; v2.9+ and the toolkit say 8 sheets. Applied 8: PASS.",
+  "Release cleaning: shared/release/release.py strips [[FACT:]] only; register ids, effective stamps and [[GAP:]] tags survive into release. Checked by reading GENERIC_RULES (lines 43-81); this is the basis of PSL-QA1-13.",
+  "Excel recalculation: cached values present on all formula cells, 0 error cells (#REF!/#VALUE!/#N/A/#DIV/0!)."
+ ],
+ "propagation": [
+  {
+   "fact": "fed.fica.oasdi.rate.employer",
+   "register_id": "US-FEDS5-005",
+   "consumed_by": [
+    "PSL",
+    "CCG/m05_social_security",
+    "WTC"
+   ],
+   "resynced": false,
+   "_note": "PSL-QA1-01 changes no fact value, only how the generator applies the 2026 base to the employer side. After the fix, re-check that the CCG m05 worked example and WTC US-005 describe the employer cap the same way."
+  },
+  {
+   "fact": "fed.fit.standard.single.thresholds",
+   "register_id": "US-FEDS5-001",
+   "consumed_by": [
+    "PSL",
+    "CCG",
+    "WTC",
+    "DD"
+   ],
+   "resynced": false,
+   "_note": "Register consumed_by lacks PSL (PSL-QA1-20)."
+  },
+  {
+   "fact": "fed.retirement.pretax.tax_treatment",
+   "register_id": "US-FEDS5-029",
+   "consumed_by": [
+    "PSL",
+    "WTC"
+   ],
+   "resynced": false,
+   "_note": "Register consumed_by lacks PSL (PSL-QA1-20)."
+  },
+  {
+   "fact": "fed.plaw119_21.tips_overtime.level",
+   "register_id": "US-FEDS5-030",
+   "consumed_by": [
+    "PSL",
+    "CCG",
+    "WTC"
+   ],
+   "resynced": false,
+   "_note": "Register consumed_by lacks PSL (PSL-QA1-20)."
+  },
+  {
+   "fact": "psl.mn.statement.content",
+   "register_id": "US-MNP6-001",
+   "consumed_by": [
+    "PSL"
+   ],
+   "resynced": false,
+   "_note": "Expanding the fact (PSL-QA1-09) re-opens Payslip Spec rows naming MN."
+  }
+ ],
+ "cross_checks": [
+  {
+   "name": "Payslip field mapping x DD (Payslip Spec column E 'DD fields')",
+   "result": "fail",
+   "note": "Every DD field name cited in Payslip Spec E4:E57 resolves in US-DD-001 v1.0 (Country Fields / ID Information), 0 misses. But printed fields have no Spec row (bank, account, payment method, compensation sources, pay-code guide, comp time: PSL-QA1-05), and the OR registry number has no mapping (PSL-QA1-19)."
+  },
+  {
+   "name": "Unit Rate Details x WTC (run separately)",
+   "result": "fail",
+   "note": "All 26 codes exist in US-WTC-001 v1.0 with matching names. 62104 is a rate (Percentage) wage type listed as an earning, and US-030 hours is the unit account of amount-only earnings (PSL-QA1-16)."
+  },
+  {
+   "name": "Payslip lines x WTC codes and names",
+   "result": "pass",
+   "note": "160 Field Option PAYSLIP_LINE codes and the 11 example lines on EN/ES/Compliance Payslip: code in WTC column A, name equal to the WTC 'Name in Local Language' (column C), 0 differences. Categories match (Earning/Deduction/Tax/Employer Contribution)."
+  },
+  {
+   "name": "State pay-statement rules (all 51 jurisdictions) x payslip/Spec",
+   "result": "fail",
+   "note": "51/51 jurisdictions have a STATE_STATEMENT_RULE row (fact or GAP). Covered elements are missing for CA 226(a)(2) total hours (PSL-QA1-04), AZ sick pay received and NYC PTO detail (PSL-QA1-06), MN 181.032 items (PSL-QA1-09), MD SSN bar not in the mapping (PSL-QA1-08), and NM/NY extras (PSL-QA1-10). The other States' listed elements map to Spec rows."
+  },
+  {
+   "name": "Worked example arithmetic (FICA, FIT) recomputed by hand",
+   "result": "fail",
+   "note": "Recomputed: gross 3,246.00; SS wages 3,161.00; employee OASDI = min(11,439.00-11,253.00, 195.98) = 186.00 (OK); Medicare 45.83 (OK); FIT line 1a 2,998.70, 1c 77,966.20, 1i 69,366.20, annual 5,800 + 22% x 11,466.20 = 8,322.56, /26 = 320.10 (OK); net 2,446.77 (OK). Employer OASDI 195.98 is wrong, should be 186.00 (PSL-QA1-01)."
+  }
+ ],
+ "_checks_run_detail": {
+  "C21/C26": "mercans-artifact-toolkit validate_workbook.py --artifact PSL --totals-check: 8 sheets in contract order, PASS; 2 minor C26 (H58 typed YTD gross on Compliance Payslip and EN), see PSL-QA1-03.",
+  "C28": "USD has 2 minor units; amounts are 2-decimal; not a zero-minor-unit currency. PASS.",
+  "C29": "Residual-marker lint over all 2,570 non-empty cells: 0 hits for placeholder/TODO/TBD/FIXME/XXX/VERIFY No./to be confirmed/to be verified. The pipeline to-do wording is recorded separately as PSL-QA1-12 and PSL-QA1-14.",
+  "C30": "Independent QA F44: all 121 register rows bound by the 160 tags are tier A.1/A.2/A.3 (none B), status active, verified_on 2026-10-29..2026-11-02 (within 120 days).",
+  "C42/C43/C44": "shared consistency_checks.py: C42 PASS (0 hits), C43 PASS (package 1.0, 0 problems), C44 SKIP (no in-scope filing spec to compare).",
+  "C46": "shared C46 on the payslip alone: FAIL, 4 mismatches + 8 unbound, all judged checker false positives (see _judgments.C46). The independent period-aware F44 has 0 value mismatches.",
+  "C48/C49/C50": "shared content_checks.py: one FAIL each, all three covered by validation_exemptions (US-OWN-011); content_checks honours exemptions only for missing inputs, so they stay red. See _judgments.C49 and PSL-QA1-21.",
+  "C53/C56/C57/C70": "shared content_checks.py: PASS (C57 22 items, 0 problems; it passes on the wrong field for total hours, see PSL-QA1-04)."
+ },
+ "numeric_verification": {
+  "facts_total": 177,
+  "facts_verified": 160,
+  "unverified_keys": [
+   "psl.ak.statement.content",
+   "psl.ct.pay_code_guide.url_on_pay_record",
+   "psl.fed.statement.required",
+   "psl.hi.ssn.rule",
+   "psl.ky.statement.content",
+   "psl.la.statement.scope",
+   "psl.me.statement.content",
+   "psl.mo.ssn.rule",
+   "psl.ms.statement.scope",
+   "psl.nd.statement.content",
+   "psl.notice_language.co_comps",
+   "psl.notice_language.ma",
+   "psl.notice_language.mi",
+   "psl.notice_language.ny",
+   "psl.notice_language.or",
+   "psl.sc.statement.exemptions",
+   "psl.tx.ssn.rule"
+  ],
+  "method": "Independent QA F44 (auditor script, no builder code imported) over all 160 distinct [[FACT:key=value]] tags (193 tag occurrences) of the workbook. Each value equals a fact entry effective in 2026, across all _research/*-facts.json files. Each printed register id is one of the fact's register ids. Each register row exists, is tier A.x, active, and verified within 120 days. Every numeric, section and date element of the value was found in the row's local copy (PDF via PyMuPDF, HTML/gzip/txt stripped); 160/160 OK. Live WebFetch 2026-11-04: IRS i941 Rev. 3-2026 confirms 184,500 / 6.2% each side / 1.45% / 0.9% / 200,000. IRS p15t (2026) confirms Worksheet 1A line 1g 8,600/12,900, the STANDARD Single/MFS thresholds 0/7,500/19,900/57,900/113,200/209,275/263,725/648,100 and the 0-37% rates. That is 9/9 payslip-tab federal tags live. SSA cbb.html and leginfo CA 226 returned HTTP 403, so the local copies were used. facts_total = 160 tagged + 17 PSL facts not placed because the builder could not prove their wording in the saved copy (the 17 f44 gaps PSL-RQ-01,04,05,06,09,10,12,13,14,16,17,18,19,20,21,25,27; known item, the source hunter is working on them). The 11 'open' requests are unresolved research, not facts."
+ },
+ "_judgments": {
+  "C49_KW-100": "Not a PSL defect. KW-100 is the Kansas Department of Revenue withholding guide id (register US-KSS5-001 / US-KSP51-003, https://www.ksrevenue.gov/kw100.html) cited in CCG table 206 r11c2. It matches the C49 code pattern by coincidence; no WTC code is involved. The exemption validation_exemptions.C49 has a reason, source URL and decided_on, so it is valid per contract 1.4.0. Its owner row US-OWN-011 is missing from the register (PSL-QA1-21). content_checks.py honours exemptions only for missing inputs, so C49 stays printed as FAIL; that is a shared-tool limitation, carried as in earlier reviews.",
+  "C46": "Checker false positives, not PSL defects. (a) 4 mismatches, at Compliance Payslip!A65, EN!A65, ES!A65 and Payslip Spec!E50: the tag says 184,500 and the checker compares it with the last dated entry, 192,300 (US-FEDB5-401, effective 2027-01-01). The fact effective 2026-01-01..2026-12-31 is 184,500 (US-FEDS5-005) and the sample pay date is 10/23/2026, so the tag is correct (live i941 Rev. 3-2026 confirms). (b) 8 unbound, at Field Option B/D 195, 317, 339 and 348: these are the wage-type identifiers 21100, US-175, US-214 and US-225, whose digits collide with ia.sui.wage_base 21100 (the 2027 value), al.wh...reduction_per_step / ut oracle 175, oh.pit.school_district.count 214 and nv...registration_threshold 225. They are not fact values. Same residue class as SIR-QA1-19 (shared C46 is neither period-aware nor identifier-aware). Owner of shared/ fixes the checker, or the owner records validation_exemptions.C46. The auditor does not write exemptions. Not counted as a PSL finding.",
+  "Spec_42_rows": "Accepted. 25-35 is a target, the minimum of 20 is met, and the union of 51 State element lists plus the federal lines needs more. Round 2 adds rows (PSL-QA1-04, 05, 06, 09, 10), so the count will grow; that is expected, not a defect.",
+  "pay_line_code_form": "Accepted. Real WTC codes ('62100 - Basic salary') instead of 'XXXXX - ...' are traceable: each code and name equals US-WTC-001 v1.0, and the form is C29-clean (an X-run next to a dash trips C29). How to set up Payslip!C13 and Payslip Spec D41/D47 document the code-dash-name form.",
+  "SS_cap_logic_2026": "The employee side is correct for 2026: wage base 184,500 (fact US-FEDS5-005, effective 2026), lesser-of rule, not annualised-then-divided, 186.00. The employer side does not apply the cap (PSL-QA1-01, blocker). The Medicare YTD basis cannot trigger the Additional Medicare tax (PSL-QA1-02)."
+ },
+ "_batch_fix_list": [
+  {
+   "owner": "artifact-builder (06-payslip/_build: build_psl.py, psl_content.py, then run_checks.py)",
+   "items": [
+    "QA1-01 build_psl.py:123: employer OASDI with the wage-base cap, as a formula (H36 = 186.00, H38 = 231.83) on all 3 payslip tabs.",
+    "QA1-02: new input row 'Medicare wages paid before this payslip (YTD)'; H77 and H61 use it; YTD Medicare includes Additional Medicare.",
+    "QA1-03: H37 as a formula; H58 = prior YTD gross input + H22, consistent with the YTD social security wages.",
+    "QA1-04: 'Total hours worked' row on the payslip and a Spec row; PSL-legal-items 'hours'.match = Total Hours Worked.",
+    "QA1-05: Spec rows for Bank name, Account (masked), Payment method, Compensation sources (DC), Pay-code guide reference (CT), Compensatory time (MI).",
+    "QA1-06: leave rows for AZ (sick pay received) and NYC (period accrual, paid and unpaid used, unpaid available), plus Spec rows.",
+    "QA1-07: TX sample leave block shows 'not printed'.",
+    "QA1-08: Spec D25 with the MD bar (no SSN), E25 lists the no-SSN States.",
+    "QA1-10: NM benefits-earned row; RATE_OF_PAY_BASIS options Shift, Day, Week, Other; NY 195(3) extras as switched rows or a named limitation.",
+    "QA1-11 (after the source hunter delivers the fact): Population Range C12 states the household condition with the 226(d) fact; drop the VA fact from C13.",
+    "QA1-12: delete Field Option A355:D382 (NOT_CONFIGURED block).",
+    "QA1-13: no register ids or effective stamps on the 3 payslip tabs; print area = payslip proper.",
+    "QA1-14: 'Build rule/Build default/in the facts/generator' wording out of Spec E25, Field Option D98, D115, D153, How-to C18.",
+    "QA1-15: Spanish with diacritics (año, dirección, número, teléfono, deducción, retención, línea, método, cálculo, máximo); translate Hourly, Biweekly, Single or MFS; Spec column C too.",
+    "QA1-16: Unit Rate Details: drop row 62104; US-030 only on time-based lines; specific column F text.",
+    "QA1-17: reference fill palette (or an owner decision for the new style).",
+    "QA1-18: Payment details H46 'Amount', H47 =H33.",
+    "QA1-19: Spec D18 OR registry/State account mapping.",
+    "QA1-22: PSL-bindings.csv real sheet!cell for every row; regenerate the build-log binding table.",
+    "Then: rebuild, run_checks.py (C71 identical rebuild, psl_lint, f44_self, recon, C57), toolkit validate_workbook --artifact PSL --totals-check, md5_final.txt; resubmit for PSL review r2."
+   ]
+  },
+  {
+   "owner": "compliance-source-hunter (_research/PSL-facts.json, legal-basis-register.csv)",
+   "items": [
+    "QA1-09: re-issue psl.mn.statement.content with the full 181.032(b) item list already carried by US-MNP6-001.",
+    "QA1-11: new fact psl.ca.statement.household_exclusion (226(d)) from US-CAS5-005.",
+    "QA1-14: reword the fact values psl.in.statement.scope ('build emits...'), psl.nc.ssn.rule ('safe build...') and psl.multi.reach.default ('...researched') in neutral statutory language.",
+    "QA1-20: add PSL to consumed_by of US-FEDS5-001, US-FEDS5-029 and US-FEDS5-030.",
+    "QA1-21: register row US-OWN-011 (owner default for validation_exemptions C48/C49/C50, 2026-11-04).",
+    "Known, in progress (not re-reported): the 17 PSL f44 gaps listed in numeric_verification.unverified_keys, plus the 11 open requests."
+   ]
+  },
+  {
+   "owner": "owner of shared/ (not a PSL fix)",
+   "items": [
+    "Shared C46: make it period-aware and identifier-aware (wage-type codes), or the owner records validation_exemptions.C46. content_checks.py C48-C50: honour validation_exemptions for content findings, not only for missing inputs."
+   ]
+  }
+ ],
+ "_summary": "FAIL round 1: 22 findings (1 blocker, 14 major, 7 minor). The blocker is the uncapped employer OASDI in the worked example (195.98 vs 186.00). Independent F44: 160/160 tags proven against the local copies, and the 9 payslip-tab federal figures were verified live (i941, p15t 2026). 17 keys unverified (known PSL f44 gaps). Routed: builder 18, source hunter 4 (+ part of QA1-14)."
+}

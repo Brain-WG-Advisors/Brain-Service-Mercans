@@ -5304,14 +5304,14 @@
       "id": "RSPEC",
       "stage": 3,
       "path": "04-reports-spec/",
-      "status": "built",
+      "status": "qa_pass",
       "units": []
     },
     {
       "id": "DD",
       "stage": 4,
       "path": "05-data-dictionary/",
-      "status": "researched",
+      "status": "qa_pass",
       "units": [
         "8_sheets"
       ]
@@ -5320,7 +5320,7 @@
       "id": "WTC",
       "stage": 5,
       "path": "02-wtc/",
-      "status": "researched",
+      "status": "qa_pass",
       "units": [
         "global_baseline",
         "country_specific"
@@ -5330,7 +5330,7 @@
       "id": "SIR",
       "stage": 6,
       "path": "03-statutory-integrations/",
-      "status": "researched",
+      "status": "qa_pass",
       "units": [
         "third_party_provider_handoff"
       ]
@@ -5339,7 +5339,7 @@
       "id": "PSL",
       "stage": 7,
       "path": "06-payslip/",
-      "status": "researched",
+      "status": "qa_pass",
       "units": [
         "8_sheets"
       ]
@@ -5348,7 +5348,7 @@
       "id": "SKILL",
       "stage": 11,
       "path": "../skills-build/payroll-compliance-united-states/",
-      "status": "scaffolded",
+      "status": "qa_pass",
       "units": [
         "SKILL.md",
         "references"
@@ -5359,7 +5359,7 @@
     "id": "DESIGN",
     "stage": 12,
     "path": "09-design/",
-    "status": "scaffolded",
+    "status": "qa_pass",
     "units": [
       "regulation_design"
     ],
@@ -6205,6 +6205,30 @@
       "source": "https://www.ssa.gov/employer/efw/26efw2.pdf",
       "decided_on": "2026-11-03",
       "decided_by": "owner default (Wallisson Gomes): asked by the orchestrator, no objection; applied 2026-11-03; reversible; owner row US-OWN-010; note: 2026-11-03: reason corrected after _qa/RSPEC-review-r2.json finding 6 (prior text said EFW2 had 'no published validator'; SSA AccuWage Online exists, BSO login required, Pub. 42-007 §6.0). Owner is being re-informed of the corrected reason (2026-11-03); exemption, source, decided_on and decided_by unchanged."
+    },
+    "C48": {
+      "reason": "WTC US-051 (W-2 box 12 code TA) is valid only from 2026-07-04 (iw2w3 2026: 'Beginning July 4, 2026, employers may contribute up to $2,500'; P.L. 119-21). Checker C48 accepts only codes valid for the whole year. The row carries its effective date in column D and AA. Scope: WTC US-051 row only; all other box 12 codes are checked.",
+      "source": "https://www.irs.gov/instructions/iw2w3",
+      "decided_on": "2026-11-04",
+      "decided_by": "owner default via orchestrator (Wallisson Gomes): applied 2026-11-04; reversible; owner row US-OWN-011; same pattern as US-OWN-010; review _qa/WTC-review-r2.json ruling 1 (C48); register US-FEDS5-007."
+    },
+    "C49": {
+      "reason": "False positive: the CCG cites the Kansas withholding guide form id 'KW-100' (US-KSS5-001), which matches the C49 pattern [A-Z]{2}-[0-9]{3} of the WTC code scheme US-nnn. No WTC code is involved. Scope: CCG 01-ccg/US-CCG-001-v1.0.docx table 206 r11c2 only.",
+      "source": "https://www.ksrevenue.gov/kw100.html (register row US-KSS5-001)",
+      "decided_on": "2026-11-04",
+      "decided_by": "owner default via orchestrator (Wallisson Gomes): applied 2026-11-04; reversible; owner row US-OWN-011; review _qa/WTC-review-r1.json (C49 finding) and _qa/WTC-review-r2.json ruling 2."
+    },
+    "C50": {
+      "reason": "WTC US-126 (GA SUI, employer-only) quotes fact ga.sui.base.section125 ('employer and employee premiums'). The phrase names which premiums are excluded from wages, not who pays. QA r2 ruled the fact text correct. Scope: WTC US-126 row only.",
+      "source": "https://dol.georgia.gov/document/unemployment-tax/employer-handbook/download (register row US-GAS5-006)",
+      "decided_on": "2026-11-04",
+      "decided_by": "owner default via orchestrator (Wallisson Gomes): applied 2026-11-04; reversible; owner row US-OWN-011; same pattern as US-OWN-010; review _qa/WTC-review-r2.json ruling 3 (C50)."
+    },
+    "C46": {
+      "reason": "The package-wide shared consistency_checks.py c46() keeps one value per key (facts[key] = value, last wins), so every multi-period key is compared only with its last period (e.g. OASDI wage base 184,500 for 2026 and 192,300 for 2027), and wage-type codes that equal unrelated fact values are counted as unbound. These are checker artefacts, not data errors. Scope: the package-wide shared C46 only. The period-aware C46 run by each generator stays mandatory and must be 0 for every artifact; it is not exempted.",
+      "source": "https://www.ssa.gov/oact/cola/cbb.html",
+      "decided_on": "2026-11-04",
+      "decided_by": "owner default via orchestrator (Wallisson Gomes): applied 2026-11-04; reversible; owner row US-OWN-011; same pattern as C48-C50; evidence _qa/SIR-review-r1.json finding SIR-QA1-19 and the PSL judgement in _qa/PSL-review-r1.json."
     }
   }
 }

@@ -163,6 +163,9 @@ def m_sentences(text):
 
 POS = re.compile(r"^\d{1,3}(-\d{1,3})?$")
 RID = re.compile(r"US-[A-Z0-9]+-\d+")
+# shared pipeline v2.12 C29 HARD tier (case-sensitive word markers, case-insensitive phrase markers)
+HARD_CS = [r"\bTODO\b", r"\bTBD\b", r"\bFIXME\b", r"\bVERIFY\s+No\b", r"RESEARCH-GAP", r"\?\?\?"]
+HARD_CI = [r"\[\s*placeholder\s*\]", r"\[\s*CHECK\s*\]", r"\[\s*\?\s*\]", r"to be confirmed", r"to be verified", r"lorem ipsum"]
 
 
 def tagged_tokens(wb):
@@ -213,10 +216,19 @@ def run(d):
                     loc = f"{name}!{ws.title}!{c.coordinate}"
                     if C.C29.search(v):
                         rep["C29"].append((loc, C.C29.search(v).group(0)))
+                    for _p in HARD_CS:      # shared pipeline v2.12 C29 HARD tier
+                        if re.search(_p, v):
+                            rep["C29"].append((loc, _p))
+                    for _p in HARD_CI:
+                        if re.search(_p, v, re.I):
+                            rep["C29"].append((loc, _p))
                     bare = ANYTAG.sub(" ", v)
                     m = C.PIPELINE_WORDS.search(bare)
                     if m:
                         rep["WORD"].append((loc, m.group(0)))
+                    pm = C.PATH_RX.search(v)
+                    if pm:
+                        rep["WORD"].append((loc, "internal path: " + pm.group(0)))
                     for t in TAG.finditer(v):
                         rep["tags"] += 1
                         k, val = t.group(1), t.group(2)

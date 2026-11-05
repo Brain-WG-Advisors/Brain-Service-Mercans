@@ -570,7 +570,17 @@ def m10():
           f"5. Collect new W-4 exemption claims for the next year ({T('fed.w4.exempt.validity')}) {REG('fed.w4.exempt.validity')}.",
           "6. Reset the annual accumulators (OASDI, FUTA, SUI and PFML bases, Additional Medicare threshold) at the first payment "
           f"date of the new year. The 2027 OASDI base is {T('fed.fica.oasdi.wage_base', ef='2027-01-01')} {REG('fed.fica.oasdi.wage_base', ef='2027-01-01')}.",
-          "", "TY2027 federal indexation is not yet published: " + F.gap(F.GAP_TEXT["fed.indexation.publication_2027"], "fed.indexation.publication_2027")]
+          "", "Changes during 2026 that the year-end process must apply from their date:", ""]
+    L += table(["Item", "Rule or value", "In force from", "Source"], [
+        ["Form 940 due date, return for 2025", T("rspec.fed.form940.due", ef="2026-01-01"), "2026-01-01 to 2026-02-10", REG("rspec.fed.form940.due", ef="2026-01-01")],
+        ["Form 940 due date, from the 2026 instructions", T("rspec.fed.form940.due", ef="2026-02-11"), "2026-02-11", REG("rspec.fed.form940.due", ef="2026-02-11")],
+        ["FUTA credit-reduction States, wages of 2025 (reported on the 2025 Form 940)", T("rspec.fed.futa.credit_reduction.states", ef="2025-01-01"), "2025-01-01 to 2026-02-10", REG("rspec.fed.futa.credit_reduction.states", ef="2025-01-01")],
+        ["FUTA credit-reduction States, wages of 2026", "The 2026 list: " + F.gap("the 2026 list of FUTA credit-reduction States is published by the Department of Labor after November 10, 2026", "fed.futa.credit_reduction.ca"), "2026-02-11", ""],
+        ["Maine withholding return form", T("rspec.me.wh_return.form"), "2026-04-14", REG("rspec.me.wh_return.form")],
+        ["New Jersey withholding representative appointment form", T("sir.nj.withholding.agent_authorization"), "2026-06-09", REG("sir.nj.withholding.agent_authorization")],
+        ["District of Columbia withholding representative form", T("sir.dc.withholding.agent_authorization"), "2026-09-16", REG("sir.dc.withholding.agent_authorization")],
+        ["Texas UI representation form", T("sir.tx.ui.agent_authorization"), "2026-03-13", REG("sir.tx.ui.agent_authorization")]])
+    L += ["", "TY2027 federal indexation is not yet published: " + F.gap(F.GAP_TEXT["fed.indexation.publication_2027"], "fed.indexation.publication_2027")]
     L += H3(M, "10.5", "What documentation or annual statements must be provided to employees?")
     L += [f"- **Form W-2** by {T('fed.w2.due_date')} {REG('fed.w2.due_date')}. For a terminated employee: {T('fed.w2.terminated_employee.furnishing')} "
           f"{REG('fed.w2.terminated_employee.furnishing')}. State examples: Delaware within {T('de.report.w2.employee_on_termination_days')} days of termination on request "

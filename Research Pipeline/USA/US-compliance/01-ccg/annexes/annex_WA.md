@@ -102,7 +102,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
 - **Unemployment insurance (ESD) [US-WAS5-012, US-WAS5-029].** 2026 taxable wage base [[FACT:wa.sui.wage_base=78,200]] USD. Total 2026 rates (experience rate, social cost and administration fund) from [[FACT:wa.ui.rate.min_total=0.27]] % to [[FACT:wa.ui.rate.max_total=6.02]] %. New employers: [[FACT:wa.ui.rate.new_employer.rule=115% of industry average, floor 1%]]. Employee contribution [[FACT:wa.sui.employee.rate=0]] %. UI wages include commissions, bonuses, non-cash pay and reported tips (RCW 50.04.320) [US-WAS5-022].
 - **Paid Family and Medical Leave [US-WAS5-011, US-WAS5-015, US-WAS5-020].** Total premium [[FACT:wa.pfml.total.rate=1.13]] % in 2026, employee share up to [[FACT:wa.pfml.employee.share=71.43]] % of the total; [[FACT:wa.pfml.total.rate=1.2]] % in 2027 (the statutory cap), employee share [[FACT:wa.pfml.employee.share=70.7]] %. Wage cap [[FACT:wa.pfml.wage_cap.annual=184,500]] USD in 2026 (the Social Security wage base). Employers with fewer than [[FACT:wa.pfml.small_employer.threshold=50]] Washington employees owe no employer share but collect the employee share. 2SHB 2345 (effective 2026-06-11, applied from 2027 premiums) reallocates the employee share between the family and medical lines (the 2027 line split is open, below). PFML wages exclude tips (tips included: [[FACT:wa.pfml.wages.tips_included=False]]) [US-WAS5-023]. Penalties and interest on late reports and premiums from [[FACT:wa.pfml.penalties.from=2026-08-01]]; missed premiums cannot be recovered from employees later [US-WAB5-002].
 - **WA Cares Fund (long-term care) [US-WAS5-016, US-WAS5-024]:** employee-only premium of [[FACT:wa.ltc.wa_cares.employee.rate=0.58]] % of gross wages, no cap; same gross-wage definition as Paid Leave ([[FACT:wa.cares.base.same_as_pfml=True]]) [US-WAB5-003]. Exemptions include out-of-state residents, active-duty military and spouses, qualifying veterans, approved private-LTC exemptees, and non-immigrant work-visa holders automatically from 2026-01-01 unless they opt in.
-- **Workers' compensation (L&I state fund) [US-WAS5-019, US-WALTC-002]:** hourly premiums per risk class; employee deduction rule [[FACT:wa.wc.employee_deduction.rule=50% x (Stay-at-Work + Medical Aid + Supplemental Pension) per hour per risk class]]; 2026 supplemental pension rate [[FACT:wa.wc.supplemental_pension.rate=0.1912]] USD per hour for all classes. 2027 rates proposed only (open point below).
+- **Workers' compensation (L&I state fund) [US-WAS5-019, US-WALTC-002]:** hourly premiums per risk class; employee deduction rule [[FACT:wa.wc.employee_deduction.rule=employer (not self-insured) deducts from each worker one-half of the medical aid premium per hour per risk class]]; 2026 supplemental pension rate [[FACT:wa.wc.supplemental_pension.rate=0.1912]] USD per hour for all classes. 2027 rates proposed only (open point below).
 - **Retirement deferrals and cafeteria plans** in UI, PFML and WA Cares wages: open (below).
 
 **Parameters (social insurance and payroll levies)**
@@ -122,7 +122,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
 | `wa.pfml.small_employer.threshold` | [[FACT:wa.pfml.small_employer.threshold=50]] |  | from 2026-01-01 | US-WAS5-011 | <50 WA employees owe no employer share |
 | `wa.pfml.wages.tips_included` | [[FACT:wa.pfml.wages.tips_included=False]] |  | from 2026-01-01 | US-WAS5-023 | PFML excludes tips; UI includes reported tips (US-WAS5-022) |
 | `wa.ltc.wa_cares.employee.rate` | [[FACT:wa.ltc.wa_cares.employee.rate=0.58]] | % | from 2023-07-01 | US-WAS5-016 | employee-only, no cap; non-immigrant visa holders auto-exempt from 2026-01-01 (US-WAS5-024) |
-| `wa.wc.employee_deduction.rule` | [[FACT:wa.wc.employee_deduction.rule=50% x (Stay-at-Work + Medical Aid + Supplemental Pension) per hour per risk class]] |  | 2026-01-01 to 2026-12-31 | US-WAS5-019 |  |
+| `wa.wc.employee_deduction.rule` | [[FACT:wa.wc.employee_deduction.rule=employer (not self-insured) deducts from each worker one-half of the medical aid premium per hour per risk class]] |  | 2026-01-01 to 2026-12-31 | US-WAS7-001 |  |
 | `wa.wc.supplemental_pension.rate` | [[FACT:wa.wc.supplemental_pension.rate=0.1912]] | USD (USD per hour) | 2026-01-01 to 2026-12-31 | US-WAS5-019 | per hour, all classes |
 | `wa.pfml.penalties.from` | [[FACT:wa.pfml.penalties.from=2026-08-01]] |  | from 2026-08-01 | US-WAB5-002 | Penalties on past-due reports and interest on overdue premiums from this date; missed premiums cannot be collected from employees in later pay periods. |
 | `wa.cares.base.same_as_pfml` | [[FACT:wa.cares.base.same_as_pfml=True]] |  | from 2026-06-26 | US-WAB5-003 | 'Paid Leave and WA Cares use the same definition of gross wages and hours.' |
@@ -134,6 +134,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
 - Not configured in this release [[GAP:RQ-374]]: Final 2027 WC rates and RCW 51.32.073 not read.
 - Not configured in this release [[GAP:RQ-380]]: UI exclusions for clergy and students (50.44.040) not read.
 - Not configured in this release [[GAP:RQ-381]]: The 2027 family / medical premium line split under 2SHB 2345 is derived only; the ESD split tables were not readable.
+- Worker share of the Stay-at-Work and Supplemental Pension premiums: Not configured in this release [[GAP:RQ-595]]
 
 ## WA.4 Pay statement
 
@@ -304,6 +305,7 @@ Register ids cited in this annex resolve to the build record; the URL of each va
 - Washington Legislature (Code Reviser): US-WALTC-002
 - Washington State Department of Labor & Industries: US-WAS5-006, US-WAS5-007, US-WAS5-008, US-WAS5-019
 - Washington State Legislature: US-WAP51-002, US-WAR3C-001
+- Washington State Legislature (Code Reviser): US-WAS7-001
 - Washington State Legislature (Code Reviser): US-WAS5-011
 - Washington State Legislature (Code Reviser): US-WAS5-018
 - Washington State Legislature (Code Reviser): US-WAS5-022

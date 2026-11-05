@@ -104,6 +104,7 @@ Valores discutidos nos chats; vigência não registrada. Skill traz o conteúdo 
 - 2026-07-07: retirar 9148041/58126 (teto de 5.000 por filho): o Art. 45-4° não tem teto; base TFE/TAFP literal do Art. 189; base NR 18% = 58008; pré-tax de aposentadoria só "caractère obligatoire" (Art. 47-II); severance indenizatória fora da TFE; forfait BIK do Art. 46 sobre a base em dinheiro — pesquisa primária (CGI 2025, LFI, CdT 1996) (chat: design-dev-kb)
 - 2026-07-07: CT-A-580: produção usa estimativa ×12, 9 forfaits sobre 58105, FLOOR(x+0,5), piso fixo, constantes em 9148009 — Dev (chat: design-dev-kb)
 - 2026-08-25: automação de design começa por países pequenos (CI, Chad, Gabon, Iraq, Yemen); novo design do Chade do zero com Wallisson — Manju/Mohit (chat: design-dev-kb)
+- 2026-11-03: teste de design no motor real: a lógica fica no payroll engine (o Dev constrói e liga ao HRBlizz); proposta da Manju de testar primeiro com os EUA (design já no engine pelo Andre, sem o Mohit) e nós mesmos testarmos; plano a apresentar ao Marko em 04/11 — Manju, weekly (raw/reunioes/2026-11-03-research-team-weekly.txt)
 
 ## Suporte (tickets)
 | Data | Ticket | Assunto | Resolução | Mudou artefato? |
@@ -131,6 +132,12 @@ Valores discutidos nos chats; vigência não registrada. Skill traz o conteúdo 
 - [x] Novo design do zero — Wallisson (chat: design-dev-kb) _(✅ fechada em 2026-11-03 pelo radar: O 'novo design do zero' do Chade já foi feito: existem os designs v5 e v6, com revisão independente aprovada; prova: frentes/chade/estado.md:27)_
 - [ ] Senha dos arquivos criptografados da Baker Hughes — Govind Thakur (chat: mercans-compliance)
 - [ ] Atualizar Chad no Monday; alinhar o design na call de quinta — Wallisson (chat: compliance-research)
+
+## Entregas (conferências)
+- 2026-11-01 · — · Design v5 (rascunho local, rodadas 1–4 pós-QA): [[Research Pipeline/Chad/2026-11-01-design-v5/CONFERENCIA|conferência]]
+- 2026-11-02 · — · Planilha de comparação v5 × Dev: [[Research Pipeline/Chad/2026-11-02-planilha-comparacao/CONFERENCIA|conferência]]
+- 2026-11-02 · — · Design v6 (rascunho local, base v5): [[Research Pipeline/Chad/2026-11-02-design-v6/CONFERENCIA|conferência]]
+- 2026-11-03 · — · Design v6 no formato do export do Dev (conjunto de teste para o Mohit; nada enviado): [[Research Pipeline/Chad/2026-11-03-v6-formato-dev/CONFERENCIA|conferência]]
 
 ## Correções ligadas
 - [[correcoes]]: teto de 5.000/filho no CCG e nas regs do dev (9148032/033), corrigido: Art. 45-4° não tem teto (2026-07-07).

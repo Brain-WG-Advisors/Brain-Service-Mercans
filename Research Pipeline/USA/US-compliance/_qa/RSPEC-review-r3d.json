@@ -1,0 +1,40 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "RSPEC",
+ "round": 3,
+ "verdict": "PASS",
+ "reviewed_on": "2026-11-04",
+ "_file_round": "r3d = run-close targeted re-check of DOR-001 and IRS-004 (C41 rebuild)",
+ "_reviewer": "compliance-qa-auditor (independent, run-close re-check)",
+ "_reviewed_file": "04-reports-spec/US-DOR-001 (3 cells: ME 941ME '(from 2026-04-14)') and US-IRS-004 (7 cells: Form 940 successor rule, credit-reduction labelled 'wages of 2025'); other 18 workbooks 0 text changes; md5 22/22 = md5_final; C71 0 differences",
+ "findings": [
+  {
+   "pattern": "F27",
+   "severity": "major",
+   "pass": "P5",
+   "location": {
+    "file": "04-reports-spec/US-IRS-004-Form940-Spec.xlsx",
+    "sheet_or_section": "Report Matrix",
+    "cell_or_line": "B11 / F27"
+   },
+   "problem": "The RSPEC prints the TY2026 Form 940 due rule (successor period, 'February 1, 2027 ... per the 2025 instructions' rule', low confidence), while the SIR row US-IRS-004 now prints 'Not configured in this release' for the same return because its F44 self-check finds that wording absent from the 2025 copy. Same fact, two treatments.",
+   "expected": "One treatment in both: either both print the labelled carry-forward (derivation is correct: Jan 31 2027 Sunday -> Feb 1) or both print the gap; align at the next SIR/RSPEC build and mirror the same day (F27).",
+   "register_id": "US-FEDS5-031",
+   "action": "routed_to_builder"
+  }
+ ],
+ "checks_run": [
+  "C29",
+  "C46",
+  "C53",
+  "C56",
+  "C71"
+ ],
+ "numeric_verification": {
+  "facts_total": 3,
+  "facts_verified": 3,
+  "unverified_keys": [],
+  "method": "Same keys as CCG-review-r6 (form940.due x2 periods, futa.credit_reduction.states, me.wh_return.form); copies checked by c41_keys_verify.py."
+ },
+ "_evidence": "07-qa-crosscheck/_runclose/out/c41_c70_diff.txt; _runclose/c41_keys_verify.py; _runclose/sir_diff2.py"
+}

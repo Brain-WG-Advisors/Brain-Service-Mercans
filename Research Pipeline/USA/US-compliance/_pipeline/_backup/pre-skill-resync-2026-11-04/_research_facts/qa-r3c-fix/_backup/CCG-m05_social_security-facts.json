@@ -1,0 +1,211 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "m05_social_security",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
+ "_annex_keys_cited": {
+  "fed.fica.oasdi.wage_base": "CCG-annex_FED-facts.json (US-FEDB5-401)",
+  "fed.fica.oasdi.rate.employer": "CCG-annex_FED-facts.json (US-FEDS5-005)",
+  "fed.fica.medicare.rate.employer": "CCG-annex_FED-facts.json (US-FEDS5-005)",
+  "fed.fica.addl_medicare.withholding_threshold": "CCG-annex_FED-facts.json (US-FEDS5-005)",
+  "fed.futa.rate.gross": "CCG-annex_FED-facts.json (US-FED-007)",
+  "fed.futa.credit.max": "CCG-annex_FED-facts.json (US-FED-007)",
+  "fed.futa.rate.net": "CCG-annex_FED-facts.json (US-FED-007)",
+  "fed.futa.wage_base": "CCG-annex_FED-facts.json (US-MULTIS5-009)",
+  "fed.futa.credit_reduction.ca": "CCG-annex_FED-facts.json (US-FEDS5-009)",
+  "fed.futa.credit_reduction.vi": "CCG-annex_FED-facts.json (US-FEDS5-009)",
+  "multi.sui.other_state_wage_credit.ca": "CCG-annex_MULTI-facts.json (US-MULTIS5-010)",
+  "wa.sui.wage_base": "CCG-annex_WA-facts.json (US-WAS5-012)",
+  "ak.sui.wage_base": "CCG-annex_AK-facts.json (US-AKS5-003)",
+  "ak.sui.employee.rate": "CCG-annex_AK-facts.json (US-AKS5-003)",
+  "fed.household.fica_cash_threshold": "CCG-annex_FED-facts.json (US-FEDS5-029)",
+  "fed.household.futa_quarter_threshold": "CCG-annex_FED-facts.json (US-FEDS5-029)",
+  "fed.pfml.employee_contribution.is_w2_wages": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "ca.sdi.employee.rate": "CCG-annex_CA-facts.json (US-CAP7-002)"
+ },
+ "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
+ "facts": [
+  {
+   "key": "wa.pfml.total.rate",
+   "value": 1.13,
+   "unit_of_measure": "percent",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-WAS5-015",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Washington Employment Security Department",
+   "url": "https://esd.wa.gov/about-us/news-release/2026/paid-family-medical-leave-premium-rate-increases-12-2027",
+   "confidence": "high",
+   "note": "Row US-WAS5-015 is dated 2027-01-01 but carries both years; 2026 = 1.13%. Split 29.3% employer / 70.7% employee (annex WA)."
+  },
+  {
+   "key": "wa.pfml.total.rate",
+   "value": 1.2,
+   "unit_of_measure": "percent",
+   "effective_from": "2027-01-01",
+   "effective_to": null,
+   "register_id": "US-WAS5-015",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Washington Employment Security Department",
+   "url": "https://esd.wa.gov/about-us/news-release/2026/paid-family-medical-leave-premium-rate-increases-12-2027",
+   "confidence": "high"
+  },
+  {
+   "key": "dc.pfml.employer.rate",
+   "value": 0.75,
+   "unit_of_measure": "percent",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-DCS5-020",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "Council of the District of Columbia",
+   "url": "https://code.dccouncil.gov/us/dc/council/code/sections/32-541.03",
+   "confidence": "high",
+   "note": "Employer only, no wage cap. | effective_from: register row carries no date; value in force on 2026-01-01 per the row"
+  },
+  {
+   "key": "ma.pfml.total.rate",
+   "value": 0.88,
+   "unit_of_measure": "percent",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-MAS5-012",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Massachusetts Department of Family and Medical Leave",
+   "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
+   "confidence": "high",
+   "note": "25+ covered individuals; <25: 0.46%. Cap = SS wage base."
+  },
+  {
+   "key": "ma.pfml.split",
+   "value": "family 0.18% (up to 100% from employee) + medical 0.70% (employee up to 40% = 0.28%, employer 0.42%)",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-MAS5-012",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Massachusetts Department of Family and Medical Leave",
+   "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
+   "confidence": "high",
+   "note": "DECISION (synthesis B, 2026-11-02): payroll follows DFML - 2026 split unchanged, swap from 2027-01-01. Ch. 101/2026 s.45 (US-MAS5-026) makes ss.25-26 apply \"for taxable years beginning on or after January 1, 2026\"; read on the Act text, s.45 is the tax-year commencement clause shared with the c.62/c.63 provisions, while c.175M contributions are set by DFML under s.7(e) per calendar year and the Act (approved 2026-06-12) gives no retroactive re-split mechanism. Employee maximum share is 0.46% under both DFML years. Residual risk recorded as unresolved pfml.ma.split.effective_date."
+  },
+  {
+   "key": "ma.pfml.split",
+   "value": "family 0.70% (employee up to 40% = 0.28%, employer 0.42%) + medical 0.18% (up to 100% from employee); total 0.88%",
+   "effective_from": "2027-01-01",
+   "effective_to": null,
+   "register_id": "US-MAS5-012",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Massachusetts Department of Family and Medical Leave",
+   "url": "https://www.mass.gov/info-details/paid-family-and-medical-leave-employer-contribution-rates-and-calculator",
+   "confidence": "high"
+  },
+  {
+   "key": "fed.fica.nra.fjmq_exempt",
+   "value": true,
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-001",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap21-subchapC-sec3121.htm",
+   "confidence": "high",
+   "note": "Applies only to pay for services performed to carry out the purpose of the F/J/M/Q admission (IRS Pub. 515 (2026) agrees, incl. authorized CPT/OPT); employee and employer FICA both not due. Level: payroll withholding and employer contribution."
+  },
+  {
+   "key": "fed.fica.nra.fjmq_exempt.scope",
+   "value": "Exempt: pay of a nonresident alien in F-1, J-1, M-1 or Q status for services that carry out the purpose of admission, on or off campus, including authorized Curricular and Optional Practical Training. Not exempt: other employment of the same person (e.g. an unrelated part-time job), and any pay once the person is a resident alien.",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-016",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+   "confidence": "high"
+  },
+  {
+   "key": "fed.futa.nra.fjmq_exempt",
+   "value": true,
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-002",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap23-sec3306.htm",
+   "confidence": "high",
+   "note": "IRC 3306(c)(19) and IRS Pub. 515 (2026): wages of F/J/M/Q nonresident aliens are not subject to FUTA. State UI coverage follows each state statute separately."
+  },
+  {
+   "key": "fed.fica.nra.other_visas.liable",
+   "value": true,
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-016",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+   "confidence": "high",
+   "note": "Nonresident aliens on other nonimmigrant visas (e.g. H-1B, L-1) or in refugee/asylee status are fully liable for social security and Medicare unless a totalization agreement exemption applies."
+  },
+  {
+   "key": "fed.fica.totalization.exemption_rule",
+   "value": "Wages are exempt from employee FICA (IRC 3101(c)) and employer FICA (IRC 3111(c)) while a section 233 Social Security Act agreement is in effect, to the extent the agreement makes them subject exclusively to the foreign social security system.",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR2-003",
+   "tier": "A.1",
+   "verification_method": "second independent authority",
+   "authority": "U.S. Congress (OLRC/GPO, govinfo)",
+   "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleC-chap21-subchapA-sec3101.htm",
+   "confidence": "high",
+   "note": "Employer FICA counterpart: IRC 3111(c) (register US-FEDR2-004). The list of agreements in force and the certificate-of-coverage procedure are SSA documents not held locally (see unresolved)."
+  }
+ ],
+ "unresolved": [
+  {
+   "key": "fed.futa.credit_reduction.potential_2026",
+   "why": "Potential 2026 credit reductions CA 5.3% (1.5 + BCR 3.8) and USVI 4.8% become final only if advances remain unpaid on 2026-11-10 (US-FEDS5-009 partial).",
+   "attempted": [
+    "https://oui.doleta.gov/unemploy/futa_credit.asp"
+   ],
+   "what_would_close_it": "DOL OUI FUTA credit-reduction page/xlsx after 2026-11-10, or the 2026 Schedule A (Form 940) instructions.",
+   "blocking": false
+  },
+  {
+   "key": "multi.sui.other_state_wage_credit.remaining_states",
+   "why": "SUI wage-base credit for wages reported to another State: annex_MULTI now carries multi.sui.other_state_wage_credit.* for 28 States plus CA; the remaining States (incl. AZ, CO, GA, IL, IN, LA, MA, MD, MN, MO, NJ, NM, NY, OH, PA, TN, TX, UT, VA, WA, WI, DC) are not yet keyed at MULTI level.",
+   "attempted": [],
+   "what_would_close_it": "Each remaining State taxable-wage definition (annex rows) or DOL Significant Provisions July 2026.",
+   "blocking": false
+  },
+  {
+   "key": "multi.pfml.coverage_test.remaining_states",
+   "why": "PFML/SDI coverage of multistate workers: annex_MULTI keys CT, DC, DE, MD, ME, OR, RI, WA and a default (localization); CA, NJ, NY, MA, CO, MN, VT not keyed at MULTI level (MULTI-OQ-3).",
+   "attempted": [],
+   "what_would_close_it": "Each programme coverage definition (annex units).",
+   "blocking": false
+  },
+  {
+   "key": "fed.fica.totalization.agreements_in_force",
+   "why": "The list of totalization agreements in force and the certificate-of-coverage procedure are published by SSA; ssa.gov returns HTTP 403 to curl from a non-US exit (2026-11-02).",
+   "attempted": [
+    "https://www.ssa.gov/international/agreements_overview.html - HTTP 403 (2026-11-02)",
+    "https://www.ssa.gov/international/status.html - HTTP 403 (2026-11-02)"
+   ],
+   "what_would_close_it": "SSA Office of International Programs pages \"U.S. International Social Security Agreements\" (ssa.gov/international/agreements_overview.html) and the certificate-of-coverage page, read from a US exit or a browser pass.",
+   "blocking": false
+  }
+ ]
+}

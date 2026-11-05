@@ -454,11 +454,11 @@ def ui_wage():
         (str(sum(1 for w in weeks if w >= pa)), "Pennsylvania credit weeks", f"weeks with wages at or above {tag('pa.report.ui.credit_week.amount')}",
          ", ".join(m2(w) for w in weeks if w < pa) + " do not count"),
     ]), ("WORKED EXAMPLE 2: ARIZONA LATE-REPORT PENALTY (constructed)", [
-        ("50,000.00", "Quarterly wages", f"50,000.00 x {pen_vals[0]} percent = {m2(money(Decimal('50000') * prate))}; within the limits",
+        ("50,000.00", "Quarterly wages", f"50,000.00 x rate of {tag('rspec.az.ui_qtr.late_penalty')} = {m2(money(Decimal('50000') * prate))}; within the limits",
          f"Rule: {tag('rspec.az.ui_qtr.late_penalty')}"),
-        ("20,000.00", "Quarterly wages", f"20,000.00 x {pen_vals[0]} percent = {m2(money(Decimal('20000') * prate))}; minimum applies: {m2(pen(Decimal('20000')))}",
+        ("20,000.00", "Quarterly wages", f"20,000.00 x rate of {tag('rspec.az.ui_qtr.late_penalty')} = {m2(money(Decimal('20000') * prate))}; minimum applies: {m2(pen(Decimal('20000')))}",
          "Minimum from the same rule"),
-        ("500,000.00", "Quarterly wages", f"500,000.00 x {pen_vals[0]} percent = {m2(money(Decimal('500000') * prate))}; maximum applies: {m2(pen(Decimal('500000')))}",
+        ("500,000.00", "Quarterly wages", f"500,000.00 x rate of {tag('rspec.az.ui_qtr.late_penalty')} = {m2(money(Decimal('500000') * prate))}; maximum applies: {m2(pen(Decimal('500000')))}",
          "Maximum from the same rule"),
     ]), ("WORKED EXAMPLE 3: WASHINGTON HOURS ROUNDING (constructed)", [
         ("519.25", "Hours worked in the quarter", "Rounded up to a whole number", f"Rule: {tag('rspec.wa.ui_qtr.fields')}"),
@@ -661,7 +661,13 @@ def local_tax():
                                          "Yes: city fee returns", "Value as stated in column M", "Not applicable", "N", "Rule",
                                          "Quarterly")]},
         skip={"rspec.wv.local.service_fee_returns"},
-        matrix_fix={"WV": {
+        matrix_fix={"PA": {
+            3: f"Local EIT/LST tax collector designated for the worksite PSD (DCED Address Search) [{rid('rspec.pa.local.eit_lst')}]",
+            6: "not named in the cited channel sources",
+            9: accuracy("not named in the cited channel sources", "not named in the cited channel sources",
+                        url("rspec.pa.local.eit_lst"), "TO CONFIRM",
+                        "70% (form and timing read; the filing channel to the local collector is not named in the cited copies)",
+                        "the local collector's filing instructions or a real filing")}, "WV": {
             5: (f"Charleston and Morgantown: quarterly (rows LOC-WV-001 and LOC-WV-002); other municipalities: "
                 f"{gap('rspec.wv.local.other_municipal_service_fees')}"),
             6: "paper",

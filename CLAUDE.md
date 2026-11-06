@@ -59,6 +59,7 @@ As frentes 1–5 ([[rotinas]]) rodam em janelas separadas do Claude Code, cada u
 - "Fecha a sessão" numa janela de frente: nota `sessoes/AAAA-MM-DD-<frente>.md`, reescreve só o seu `frentes/<frente>/estado.md`.
 - Git (commit): só pela janela geral.
 - **Frentes de projeto (2026-10-29):** **Chade** (`frentes/chade`, design do Dev no HRBlizz de teste × nosso design), **EUA** (`frentes/eua`, research por estado, 50 + DC) e **Validação CO** (`frentes/validacaoco`, validação da research da Colômbia no modelo da França). Abrir com `scripts/abrir_frentes.ps1 -Frentes Chade,EUA,ValidacaoCO`.
+- **Frente Alertas (2026-11-05):** `frentes/alertas`, dona de **tudo de alertas, do início ao fim**: kit "Statutory Updates Tracking" da Manju, alerta estatutário por país + board do monday, AI-Generated Alerts, Compliance Calendar (saiu da Certificação) e SCA. Abrir com `scripts/abrir_frentes.ps1 -Frentes Alertas`.
 
 ## Arquivos dentro do cérebro (decidido em 2026-10-16)
 - O cérebro guarda o conhecimento com os **arquivos reais** (xlsx, docx, scripts, logs de conferência), não só notas `.md`. `Research Pipeline/` e `internal-certification/` foram movidas para dentro do brain-service; os caminhos antigos em `Documents\` são atalhos (junction) para as mesmas pastas, então scripts e frentes continuam funcionando.

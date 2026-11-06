@@ -64,7 +64,7 @@ Fontes: `raw/reunioes/2026-11-04-research-team-biweekly.txt` e `raw/reunioes/202
   - processo atual: pedido ao BAU de cada país (board "BAU master clients") só para entender. O manual não é base; o que vale é a nossa pesquisa do jeito certo, comparada com o que acontece hoje;
   - começar pela Europa; o modelo é o Vietnã da Manju;
   - entregar ao Marko um plano com status e datas, e no fim um relatório com gráfico por país.
-  - **Junto, do mesmo pedido:** compliance calendar no ambiente de produção, uns 60 países, 1 a 2 por semana, prioridade aos que têm clientes ativos (BAU master list).
+  - **Junto, do mesmo pedido:** compliance calendar no ambiente de produção, uns 60 países, 1 a 2 por semana, prioridade aos que têm clientes ativos (BAU master list). **Desde 2026-11-05 (decisão do usuário): passou para a frente Alertas** ([[frentes/alertas/estado|estado da frente Alertas]]).
   - **Junto, do mesmo pedido:** plano do projeto de automação (status enviado em 28/10, cerca de 60%).
   - **Dono:** Vinícius executa (call de 27/10, secundário depois de Lituânia e Espanha). Sem início registrado.
   - **Decisão do usuário (28/10):** o projeto fica na frente **Certificação**. Transcrições e nota mandadas à janela em 28/10. Plano, decisões e execução ficam com ela e com o usuário, na janela dela. A janela geral não acompanha; o estado fica em `frentes/certificacao/estado.md`.

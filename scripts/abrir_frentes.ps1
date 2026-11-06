@@ -7,10 +7,11 @@
 #   .\scripts\abrir_frentes.ps1 -Retomar             # volta a ultima conversa de cada frente
 #   .\scripts\abrir_frentes.ps1 -Frentes Suporte     # so uma (ou algumas) frente(s)
 #   .\scripts\abrir_frentes.ps1 -Frentes Chade,EUA,ValidacaoCO   # frentes de 2026-10-29 (pastas chade, eua, validacaoco)
+#   .\scripts\abrir_frentes.ps1 -Frentes Alertas     # frente de 2026-11-05 (pasta alertas)
 #   .\scripts\abrir_frentes.ps1 -DryRun              # so mostra o comando
 
 param(
-    [ValidateSet('Suporte', 'Gmail', 'Chat', 'Pipeline', 'Certificacao', 'Chade', 'EUA', 'ValidacaoCO')]
+    [ValidateSet('Suporte', 'Gmail', 'Chat', 'Pipeline', 'Certificacao', 'Chade', 'EUA', 'ValidacaoCO', 'Alertas')]
     [string[]]$Frentes = @('Suporte', 'Gmail', 'Chat', 'Pipeline', 'Certificacao'),
     [switch]$Retomar,
     [switch]$DryRun

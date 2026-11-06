@@ -6,6 +6,12 @@
 **Pasta:** `C:\Users\instituto\Documents\internal-certification` · Método: [[analise-reports]].
 
 ## Instruções vigentes
+- **(05/11, aviso da janela geral, decisão do usuário) O Compliance Calendar saiu desta frente e passou para a frente Alertas** (`frentes/alertas`): calendário de ~60 países pedido pelo Marko, baseline da Shruti, kit da Manju, alerta por país e monday. Esta frente para de acompanhar o calendário (inclusive a aba "Compliance calendar" do tracker da Manju). O fluxo de entregas (TAP) e a certificação continuam aqui.
+- **(05/11) Escopo e entregável do projeto do Marko, combinado com a Manju no RA Team (resposta do usuário):**
+  - **Entregável por país:** guia de envio passo a passo no formato dos PPTs de Taiwan e Vietnã da Manju, feito com os pacotes da certificação e as respostas do BAU.
+  - **Países do usuário:** NO, NL, SE, UK, UA, EE, IE, KZ, AZ, RU, mais Colômbia e Indonésia (lista do Andy, atribuição de 29/10).
+  - **DK e FI ficam com a Enaakshi:** passar a ela o que o BAU mandou. A certificação DK/FI continua nossa.
+  - O usuário vai à call com o BAU sobre a DK em 06/11.
 - **(02/11, usuário) E-mail, Chat e Suporte por esta frente:** sempre que o pedido envolver e-mail, Chat ou suporte, esta janela usa o Claude in Chrome direto. Não pedir nada à janela/aba Gmail. Rascunho fica em **Rascunhos (draft)** no Gmail; enviar só quando o usuário pedir.
 - **(02/11, usuário) Formato das mensagens a terceiros:** uma pergunta por linha, com opções; tabela para confirmar ou corrigir; ~10 linhas obrigatórias; o resto como opcional. Certificação e projeto do Marko numa mensagem só por pessoa. **Padrão fixo para todos os países:** `internal-certification/_projetos/fluxo-entregas-marko/PADRAO_email_SBC.md` (regras, modelo, checklist, fila). Só entra pergunta com fonte: item "Not provided" do Audit Report final ou Not tested ainda aberto; sem tabela (uma pergunta simples por declaração). **(02/11, usuário) Vale para os 10 contatos, inclusive os rascunhos, de forma flexível.** Padrões assumidos: DK → Deepak com Rakshitha em Cc; AZ/KZ → perguntas do projeto vão à Pari e à Malika.
 - **(29/10, usuário via janela geral)** Não mandar resumo à janela geral: o painel `http://127.0.0.1:8765/frentes.html` lê cada fim de rodada. Usar SendMessage à brain-service-5b só para o que só ela faz (commit, coordenação entre frentes).
@@ -159,6 +165,19 @@
       - A confirmar com o Athul (e-mail de 03/11).
     - **SOP da Noruega:** §5.5 diz envio só pela integração do HR Blizz. Conflita com o Umesh (ver `NO_fluxo_entregas.md`).
     - **Processo de atualizações anuais:** `Research Team Folder/Annual Statutory Updates - Tracking, Development and Release Process.docx` (02/11; cópia em `raw/drive/2026-11-03-weekly-research/`). Trata dos alertas e atualizações; não é desta frente.
+  - **RA Team, lido em 05/11** (Chat, space RA Team):
+    - **29/10 10:53, a Manju compartilhou "ICE Usage Removal Programme"** (dono: Andy Hames; Sheet `1bm_UCZ_Jn-mdOzPYsDRP2znzfBMrjPrb0cMG7tVvQNk`). É a "lista do Andy". Três abas:
+      - **"ICE Used - Last 3 Months"** traz **10 países**, com RAG:
+        - **RED:** Morocco, South Africa, **Sweden** (revisor Nabil), Tunisia;
+        - **AMBER:** Angola, Nigeria, Spain, Taiwan, Thailand, Vietnam.
+      - **"ICE Not Used"** inclui Colombia, Denmark, Estonia, Finland, Netherlands, Norway, UK, Ukraine e Malaysia, entre outros.
+      - **"Client Summary"** marca ICE = Yes em Colombia, **Denmark (6/6)**, Malaysia, Lebanon e UAE, o que contradiz a aba "Not Used". A Enaakshi notou isso para a DK.
+      - **KZ, AZ, RU e IE não aparecem.** Dos nossos 12 países, só a **SE** está na lista do Andy (a DK é ambígua).
+    - **05/11 10:11:** a Manju marca uma call com o BAU em 06/11 ("7.30"), para entender o processo de envio e de rodar a folha, com a Enaakshi liderando por compliance. "Lets do Denmark."
+    - **05/11 12:13, para o usuário:** viu o nosso e-mail ao Deepak e à Rakshitha sobre a DK e convida para a call de amanhã.
+    - **05/11 12:39, para o usuário:** "Can you please tell me your plan on the review you will conduct or exactly what output you will be providing for each country". É para evitar duplicidade com os países dela e da Enaakshi. O usuário respondeu que está com a Espanha e retorna depois. **Pendente: responder.**
+    - **04/11:** regra do change log (o Mohit adiou a CO). Já registrada no CLAUDE.md, regra 10; não é desta frente.
+    - **03/11:** a Manju compartilhou os guias de TW (v2) e VN (6) em PPT.
   - **Outras frentes, não desta:**
     - design dos EUA, teste no payroll engine com o Andre e o cliente reMarkable USA, contato da Sadaf → frente EUA;
     - explicar ao Marko amanhã e call com o Mohit 04/11 6:30 IST;

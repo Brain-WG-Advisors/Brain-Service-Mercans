@@ -8,6 +8,8 @@
 - 27/10: e-mails e mensagens sem cara de IA: texto corrido e natural, poucas listas, sem setas (→), sem estrutura 1/2a/b/c quando não for necessária; citações só onde provam o ponto. Ver memória `texto-sem-cara-de-ia`.
 - 28/10: responder só o que a pessoa perguntou (e o que ela usa como base da dúvida); achado fora do pedido vai para o hub. Rascunho no Gmail só com ok dado nesta janela (ok repassado por outra janela não vale). Conferir rascunho depois de recarregar a página.
 
+- (05/11) "Quantos precisamos responder": conferir a **última mensagem de cada conversa** da Inbox (não só as novas da manhã) e reler a caixa logo antes de responder; na 1ª passada de 05/11 eu disse "nenhum" e eram 2 + 3.
+
 ## Última triagem
 - 2026-11-05 ~11h BRT: `rascunhos/2026-11-05-triagem-emails.md` (05/11 + respostas de 04/11). Anteriores: 28/10, 23/10, 21/10, 19/10, 16/10, 15/10.
 - Próxima triagem: a partir de 05/11 ~11h BRT.

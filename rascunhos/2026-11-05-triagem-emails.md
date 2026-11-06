@@ -20,5 +20,19 @@ Frente Gmail ([[frentes/gmail/estado|estado]]). Lido pelo Claude in Chrome, caix
 ## Ignorar
 Workday Innovation Partner (Mohsin), GitHub (Copilot, convite Brain-WG-Advisors, verificação), Anthropic login, Tactiq/Gemini (transcrições: regra de ingestão em `raw/reunioes/` é da geral), Trello, monday.
 
+## Revisão ~17h BRT (pedido do usuário: quantos responder)
+Erro da 1ª passada: li só as conversas novas da manhã e não conferi a **última mensagem** de cada conversa da caixa; chegaram pedidos depois. Conferido agora, conversa por conversa (Inbox, 10 dias).
+
+**Responder (pedido direto a nós):**
+- **R1. Nihita, "URGENT: STG: Spain – Discrepancies" (05/11 13:40), urgente.** (1) HRBS-16884: cálculo manual detalhado do IRPF dos 2 empregados (IDs no ticket) e como o sistema chega ao percentual; a Lily corrigiu a fórmula do 58294 na entidade, mas a validação do Claude ainda diverge. (2) HRBS-16927: faltam "Imp.Ingr. a Cta. Esp. Cgo.Emp" e "Imp.Ingr.a Cta.Valores Especie" (ingresso a cuenta de rendimentos em espécie; carro, estacionamento), Wallisson e Lily. (3) Coordenação com a Lily (fuso). (4) CR do seguro-saúde configurado para refazer os holerites **amanhã (06/11)**. Pede plano de ação e prazos. Tickets → janela Suporte; e-mail curto com o plano → aqui.
+- **R2. Daniel, Namíbia teto SSC (05/11 15:12):** "ainda sai NAD 99,00 na folha de novembro de 2026, pode verificar?". Nosso valor (NAD 112,50 desde 01/09/2026, HRBS-14605) já foi confirmado em 03/11; a pergunta original (03/11) era se foi publicado em produção (HRBS-16791) = Development/Mohit ([[fronteiras]]). Resposta: valor confirmado; a publicação é do Dev, com Mohit em cópia.
+
+**Analisar e talvez responder (Certificação):**
+- **R3. Nataliia, Ucrânia (05/11 13:57):** arquivos de julho e agosto + respostas ponto a ponto.
+- **R4. Suresh, Holanda/Excerpta (05/11 12:34):** comentários + relatórios anexos, resposta ao nosso e-mail de hoje.
+- **R5. Marju, Estônia/Finlândia (05/11 16:46 e 17:08):** respostas sobre TSD/e-MTA, TÖR etc.; "the filing is done".
+
+**Sem resposta necessária (conferido):** HRBS-16835 (Nihita 15:28 "Yes please Katrin", call), Umesh/Malika/Deepak (última mensagem é nossa, 17:02–17:03), Rússia (nossa à Olga 12:23), skills v2.12 (nossa), Abuja (nossa), Spain Migration (nossa 04/11), France Compliance (Mohit 03/11: artefatos congelados até o fim do desenvolvimento; só saber), Colombia PMI (Mohit 03/11; tratado em 04/11, regra 10), Lituânia (Kevin 02/11 "well noted"), Statutory Leaves EOR (Sadaf → Manju), Manju ×2 (executar, sem resposta).
+
 ## Não aberto (anterior a 04/11, conferir se já tratado)
 Namíbia teto SSC (respondido por nós 03/11), Rússia (Sadaf/Olga → Certificação), Noruega SOP A-Melding e SOP Suécia (Manju 03/11), HRBS-16418 Henkel TN, HRBS-16010 McDermott PGL.

@@ -52,7 +52,7 @@ None [US-FLL-003].
 | `fl.sui.rounding` | [[FACT:fl.sui.rounding=contribution fraction under half a cent dropped; half a cent or more rounds up to 1 cent]] | 2026-01-01 to open | US-FLS5-004 (Florida Senate (2026 Florida Statutes); A.1, quoted from authority page, confidence high) |  |
 | `fl.sui.wage_base` | [[FACT:fl.sui.wage_base=7,000]] USD | 2015-01-01 to open | US-FLS5-003 (Florida Senate (2026 Florida Statutes); A.1, second independent authority, confidence high) | Fixed in statute; successor may count predecessor wages; out-of-state wages credited via RT-6NF [US-FLS5-020, US-FLS5-018]. |
 
-Not yet published [[GAP:RQ-156]]: 443.1217(2)(f) excludes payments to a 401(a) trust and carves out salary reduction only for 403(b); ambiguous against FUTA 3306(r); DOR guide silent.
+Not configured in this release [[GAP:RQ-156]]: 443.1217(2)(f) excludes payments to a 401(a) trust and carves out salary reduction only for 403(b); ambiguous against FUTA 3306(r); DOR guide silent.
 
 ## FL.4 Pay statement
 
@@ -74,8 +74,6 @@ Other: BLS-3020 multiple worksite; RT-6EW; RT-6NF; RT-7 annual for domestic-only
 | `fl.report.sui.xml` | [[FACT:fl.report.sui.xml=FL_RT_XML_Schemas_v2026 1.0: 9 XSD in IRS efile envelope; required above 20,000 employee records; RT-6 sample validates (lxml)]] | 2026-01-01 to open | US-FLS5-023 (Florida Department of Revenue (Software Developer Information and Specifications); A.2, direct artifact inspection, confidence high) |  |
 | `fl.report.sui.xml_required_records` | [[FACT:fl.report.sui.xml_required_records=20,000]] records | 2026-01-01 to open | US-FLS5-023 (Florida Department of Revenue (Software Developer Information and Specifications); A.2, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-157]]: RT_changes.xlsx inside the RT XML package not read.
-
 ## FL.6 Leave
 
 | Parameter (key) | Value | In force | Legal basis | Note |
@@ -89,7 +87,7 @@ Not configured in this release [[GAP:RQ-157]]: RT_changes.xlsx inside the RT XML
 |---|---|---|---|---|
 | `fl.final_pay.state_statute.exists` | [[FACT:fl.final_pay.state_statute.exists=False]] | 2026-01-01 to open | US-FLS5-016 (Florida Senate (2026 Florida Statutes); A.1, quoted from authority page, confidence medium) | No final-pay timing or vacation payout statute; prevailing party fees in wage action (448.08). |
 
-Not configured in this release [[GAP:RQ-158]]: 443.151(1) defers to rules; whether a FloridaCommerce rule requires a separation form was not read.
+Not configured in this release [[GAP:RQ-158]]: Florida rule chapter 73B-10 contains no separation-notice rule; chapter 73B-11 was not verified against the official source, so the absence of an individual separation-notice duty is not established.
 
 ## FL.8 Benefits in kind and taxable wages
 
@@ -122,17 +120,17 @@ MW fixed steps to 15.00 (2026-09-30); CPI-W from 2028-01-01; UI base not indexed
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `fl.breach.notice_days` | [[FACT:fl.breach.notice_days=30]] days | 2026-01-01 to open | US-FLS5-017 (Florida Senate (2026 Florida Statutes); A.1, quoted from authority page, confidence high) | 501.171: notice to Dept. of Legal Affairs for 500+ Floridians within 30 days (+15 for good cause). Amended by ch. 2026-52 s.9 (substance not read). |
+| `fl.breach.notice_days` | [[FACT:fl.breach.notice_days=30]] days | 2026-01-01 to open | US-FLS5-017 (Florida Senate (2026 Florida Statutes); A.1, quoted from authority page, confidence high) | 501.171: notice to Dept. of Legal Affairs for 500+ Floridians within 30 days (+15 for good cause). Amended by ch. 2026-52 s.9 (substance not verified). |
 
 ## FL.13 Live legal change
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
+| `fl.live.ch_2026_52` | [[FACT:fl.live.ch_2026_52=In force: the 2026 Florida Statutes text of 501.171 carries 'History - ... s. 9, ch. 2026-52'. Notice to the Department of Legal Affairs for breaches affecting 500 or more individuals no later than 30 days after determination (15-day extension possible). The subsection changed by ch. 2026-52 s. 9 is not identified in this source.]] | 2026-11-06 to open | US-FLV6-002 (Florida Legislature; A.1, quoted from authority page, confidence medium) | Register: US-FLV6-002 |
 | `fl.live.minwage_2026_09_30` | [[FACT:fl.live.minwage_2026_09_30=minimum wage 15.00 and tipped 11.98 from 2026-09-30, in force]] | 2026-09-30 to open | US-FLS5-001 (Florida Senate (Florida Constitution); A.1, quoted from authority page, confidence high) |  |
+| `fl.report.sui.xml_changes_2026` | [[FACT:fl.report.sui.xml_changes_2026=v2026 1.0: 257 change rows, ALL in User Information (guide/XPath docs/samples; 221 Changed, 18 Inserted, 8 Deleted, 6 Renamed, 3 Added) and none in Schema_Reemployment; RSI replaces BSWA as intake provider. URL is the package landing page]] | 2026-09-28 to open | US-FLV6-001 (Florida Department of Revenue; A.2, quoted from authority page, confidence high) | Register: US-FLV6-001 |
 
-Not configured in this release [[GAP:RQ-159]]: 501.171 was amended by ch. 2026-52 s.9; substance not read.
-
-Not configured in this release [[GAP:RQ-160]]: Full sweep of Laws of Florida 2026 and DOR TIPs 2026 not completed.
+Not configured in this release [[GAP:RQ-160]]: The 2026 Laws of Florida and the Department of Revenue tax information publications were not fully reviewed; only ch. 2026-52 is confirmed.
 
 ## FL.14 Authority worked examples (oracle values)
 

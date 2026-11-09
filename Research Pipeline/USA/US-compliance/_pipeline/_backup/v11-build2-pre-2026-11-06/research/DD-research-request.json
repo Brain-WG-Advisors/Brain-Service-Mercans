@@ -1,0 +1,189 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "DD",
+ "unit": "8_sheets",
+ "requested_by": "artifact-builder",
+ "round": 1,
+ "created_on": "2026-11-03",
+ "_note": "Open points of the DD build round 1. RQ-01 to RQ-05 are new and carry the in-place marker (DD-RQ-nn in the cell); RQ-06 to RQ-10 are the documented limitations of the DD facts and use the neutral wording in the cells. None blocks the artifact.",
+ "requests": [
+  {
+   "id": "RQ-01",
+   "key": "dd.state.w4.line_structure",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!W83",
+   "question": "For each State that levies income tax withholding, which fields does the current employee withholding certificate carry (allowances or exemptions, additional amount, exemption claim, filing status codes) and which limits does the form set, for 2026 (and 2027 where published)?",
+   "why_blocking": "The DD field 'State withholding certificate on file' holds only the form identifier of each State; the certificate fields that the State withholding calculation reads cannot be modelled as DD fields without the form structure.",
+   "domain": "income_tax",
+   "acceptable_tier": "A.2",
+   "severity": "major",
+   "expected_shape": "per State: ordered field list with type and limits, with the register row of the form and its revision",
+   "attempted_by_requester": [
+    "_research/DD-8_sheets-facts.json (dd.state.w4.* carry form identifiers only)",
+    "_research/DD-research-pack.md (tax certificates table)"
+   ],
+   "_status": "open_non_blocking",
+   "_placeholder_written": "in-place marker at Country Fields!W83, Country Fields!W85"
+  },
+  {
+   "id": "RQ-02",
+   "key": "dd.codelists.external",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!F318",
+   "question": "Which values of the Ohio school district codes, Ohio municipal codes, Indiana county codes, Maryland county codes, Pennsylvania PSD codes, SOC codes, NAICS codes and the Alaska occupational and geographic codes must the DD carry as option mapper values, and what are they, with their register rows?",
+   "why_blocking": "The option mappers of these fields are pointer rows; the dictionary cannot list the values without facts that carry them.",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "per list: code, description and effective period, one register row per list",
+   "attempted_by_requester": [
+    "_research/DD-8_sheets-facts.json (field facts carry no list values)",
+    "register rows US-OHS5-019 (school district list, local copy) and US-OHB5-002 (municipal rate table, local copy) hold the Ohio lists but no fact carries their values"
+   ],
+   "_status": "open_non_blocking",
+   "_placeholder_written": "in-place marker at Country Option Mappers!F318, Country Option Mappers!F321, Country Option Mappers!F324, Country Option Mappers!F327, Country Option Mappers!F330, Country Option Mappers!F333, Country Option Mappers!F336, Country Option Mappers!F339, Country Option Mappers!F342"
+  },
+  {
+   "id": "RQ-03",
+   "key": "dd.ui.adjustment_reason.codes",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!F345",
+   "question": "What are the adjustment reason codes of the Maryland and Massachusetts unemployment insurance wage reports (the research pack names the Maryland codes 00-10 on register row US-MDS5-017), effective 2026?",
+   "why_blocking": "The option mapper 'UI adjustment reason code (State list)' has no values: the register row carries the Maryland codes but no DD fact does.",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "code list per State with descriptions, as a DD fact bound to US-MDS5-017 and the Massachusetts row",
+   "attempted_by_requester": [
+    "_research/DD-research-pack.md (Country Option Mappers section)",
+    "_research/DD-8_sheets-facts.json"
+   ],
+   "_status": "open_non_blocking",
+   "_placeholder_written": "in-place marker at Country Option Mappers!F345"
+  },
+  {
+   "id": "RQ-04",
+   "key": "dd.fed.depositor_status.codes",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!F114",
+   "question": "Which federal deposit schedule names does Form 941 use for the depositor status (monthly and semiweekly schedule depositor), per the IRS instructions for the 2026 Form 941?",
+   "why_blocking": "The option mapper 'Federal depositor status' mirrors the two values of the Report Specification US-IRS-001 Field Options; no fact carries them, so they are not bound to a key.",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "a DD fact with the two names bound to register row US-FEDS5-004",
+   "attempted_by_requester": [
+    "_research/*-facts.json searched by key and value (fed.deposit.* carry thresholds only)"
+   ],
+   "_status": "open_non_blocking",
+   "_placeholder_written": "in-place marker at Country Option Mappers!F114"
+  },
+  {
+   "id": "RQ-05",
+   "key": "dd.fed.special_population.category",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!B67",
+   "question": "Can the owner scope statement dd.fed.special_population.category (register row US-OWN-005; held in _owner_scope, not in facts[] of the DD facts file) be promoted to a fact, so that the option mapper 'Employee special population category' can carry a tag?",
+   "why_blocking": "The seven categories are written as a scope decision with a citation; a [[FACT:]] tag needs the statement in facts[].",
+   "domain": "payroll_data_protection",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "facts[] entry dd.fed.special_population.category with register_id US-OWN-005",
+   "attempted_by_requester": [
+    "_research/DD-8_sheets-facts.json _owner_scope"
+   ],
+   "_status": "open_non_blocking"
+  },
+  {
+   "id": "RQ-06",
+   "key": "dd.tx.ui.enhanced_mandatory_from",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!D41",
+   "question": "What closes the documented limitation dd.tx.ui.enhanced_mandatory_from: Which Labor Code 204.0025 fields are mandatory from which quarter is unknown (TWC layout not read)?",
+   "why_blocking": "Documented limitation carried from the DD facts; the cell states it in the neutral wording 'not named in the cited sources' and no value is invented.",
+   "domain": "payroll_data_protection",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "TWC implementing rule/layout for 204.0025",
+   "attempted_by_requester": [
+    "twc.texas.gov"
+   ],
+   "_status": "documented_limitation"
+  },
+  {
+   "id": "RQ-07",
+   "key": "dd.ct.ui.q3_2026_positions",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Fields!D48",
+   "question": "What closes the documented limitation dd.ct.ui.q3_2026_positions: CT optional occupation/hours/worksite ZIP have no positions in the 2022 file spec?",
+   "why_blocking": "Documented limitation carried from the DD facts; the cell states it in the neutral wording 'not named in the cited sources' and no value is invented.",
+   "domain": "statutory_reporting",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "CT DOL file spec edition for Q3 2026",
+   "attempted_by_requester": [
+    "US-CTS5-032"
+   ],
+   "_status": "documented_limitation"
+  },
+  {
+   "id": "RQ-08",
+   "key": "dd.pa.psd_code.format",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!B336",
+   "question": "What closes the documented limitation dd.pa.psd_code.format: The phrase 'format xxxxxx-xx' was removed from dd.pa.psd_code: no held copy (Act 511 US-PAS5-017, DCED page US-PAS5-018) prints the PSD code layout?",
+   "why_blocking": "Documented limitation carried from the DD facts; the cell states it in the neutral wording 'not named in the cited sources' and no value is invented.",
+   "domain": "income_tax",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "the DCED PSD code list (Excel/PDF) or an Address Search Application report showing the PSD code layout",
+   "attempted_by_requester": [
+    "US-PAS5-017 Act 511 text",
+    "US-PAS5-018 DCED employer instructions",
+    "all US-PA* local copies searched for 6- or 8-digit code patterns (only the PA DOR 8-digit Account ID found)"
+   ],
+   "_status": "documented_limitation"
+  },
+  {
+   "id": "RQ-09",
+   "key": "dd.oh.municipal_rate_table.code_identity",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!B333",
+   "question": "What closes the documented limitation dd.oh.municipal_rate_table.code_identity: 'FIPS' was removed from dd.oh.municipal_rate_table and rspec.oh.municipal.rate_table: the held OHMuniRateTable.csv has no header row and no held ODT copy names the column-3 code as the FIPS place code?",
+   "why_blocking": "Documented limitation carried from the DD facts; the cell states it in the neutral wording 'not named in the cited sources' and no value is invented.",
+   "domain": "income_tax",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "the ODT Finder bulk-download file-layout page (tax.ohio.gov/finder) naming the column-3 code",
+   "attempted_by_requester": [
+    "US-OHB5-002 CSV (inspected directly)",
+    "all US-OH* local copies searched for FIPS (no hit)"
+   ],
+   "_status": "documented_limitation"
+  },
+  {
+   "id": "RQ-10",
+   "key": "dd.fed.nra.visa_class.examples",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!Country Option Mappers!B76",
+   "question": "What closes the documented limitation dd.fed.nra.visa_class.examples: H-1B, L-1 and Q-2 were removed from the example list of dd.fed.nra.visa_class: no held copy (26 USC 3121, 26 USC 3306, Pub. 515 2026) names them; the FICA/FUTA exemptions turn only on F, J, M, Q status?",
+   "why_blocking": "Documented limitation carried from the DD facts; the cell states it in the neutral wording 'not named in the cited sources' and no value is invented.",
+   "domain": "income_tax",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "IRS Pub. 519 (U.S. Tax Guide for Aliens), section on nonimmigrant visa classes, saved locally and registered, if the DD list should name H-1B/L-1/Q-2 as examples",
+   "attempted_by_requester": [
+    "US-FEDR2-001 26 USC 3121 (govinfo 2024)",
+    "US-FEDR2-002 26 USC 3306 (govinfo 2024)",
+    "US-FEDS5-016 IRS Pub. 515 (2026) p53-55"
+   ],
+   "_status": "documented_limitation"
+  },
+  {
+   "id": "RQ-11",
+   "key": "dd.state.sui_rate.notice",
+   "location": "05-data-dictionary/US-DD-001-v1.0.xlsx!ID Information!V (State-assigned unemployment insurance rate)",
+   "question": "How does each State unemployment insurance agency notify the employer of the assigned rate (rate notice, portal, date of issue) for 2026 (and 2027 where published)?",
+   "why_blocking": "Documented limitation: the DD field holds the assigned rate per State account; the notice mechanism per State is named in no held copy (the DOL page gives minimum and maximum rates only). No value is invented.",
+   "domain": "payroll_data_protection",
+   "acceptable_tier": "A.2",
+   "severity": "minor",
+   "expected_shape": "each State UI agency employer rate-notice or experience-rating page",
+   "attempted_by_requester": [
+    "US-FEDP51-010 (DOL comparison page: minimum and maximum only)",
+    "_research/design-fix/FACTS-READY.md section 3"
+   ],
+   "_status": "documented_limitation"
+  }
+ ]
+}

@@ -75,7 +75,13 @@ def doc_control(doc):
         ["Discovery verdict", S.clean(f"{D.VERDICT}. " + D.verdict_sentence())], ["Language", "English"],
         ["Currency", f"{S.MANIFEST['currency']}"], ["Package version", f"v{S.PKG}"], ["Issue date", S.ISSUE]], [1.8, 5.3], size=9)
     X.h(doc, "Version history", 2)
-    X.table(doc, ["Version", "Date", "Author", "Status"], [[f"v{S.PKG}", S.ISSUE, S.AUTHOR, S.STATUS]], [1.0, 1.4, 2.6, 2.1], size=9)
+    _rows = S.C.changelog_rows("SIR", S.STATUS)
+    if _rows:   # v1.1: previous version row + this version with what changed, why and the source
+        X.table(doc, ["Version", "Date", "Author", "Status", "Change"],
+                [[f"v{v}", d, S.AUTHOR, st, ("Initial issue." if i == 0 else S.clean(ds))] for i, (v, d, ds, st) in enumerate(_rows)],
+                [0.7, 1.0, 1.4, 0.9, 3.1], size=9)
+    else:
+        X.table(doc, ["Version", "Date", "Author", "Status"], [[f"v{S.PKG}", S.ISSUE, S.AUTHOR, S.STATUS]], [1.0, 1.4, 2.6, 2.1], size=9)
 
 
 def sec0(doc):
@@ -306,14 +312,14 @@ def hand_off_cell(spec, jur, recs):
         gk = re.sub(r"[^a-z0-9_.]", "_", f"sir.state.{spec.lower().replace('-', '_')}.{lab.lower().split()[0]}.missing")
         if not keys:
             continue
-        if not any(k in S.C.FACTS for k in keys):
+        if not any(k.partition("@")[0] in S.C.FACTS for k in keys):
             # nothing in the facts for this label: only the first label of a row is a request (the others are optional detail)
             if lab == chain[0][0]:
                 parts.append(f"{lab}: " + S.gap(gk, "missing", jur))
             continue
         keys = [x for x in keys if x not in used]
         if lab != chain[0][0]:
-            ok_keys = [x for x in keys if S.usable(x)[0]]
+            ok_keys = [x for x in keys if S.usable(x.partition("@")[0], x.partition("@")[2] or None)[0]]
             if not ok_keys:
                 continue        # optional detail unavailable: leave out rather than open a request for it
             keys = ok_keys
@@ -542,9 +548,16 @@ def assemble(final):
     if final:
         used_rids = set()
         for (k, ef) in S.USED:
-            f = S.fact(k) if S.has(k) else None
+            # v1.1 QA r1: the period actually printed (a dated key such as sir.ga.ui.wage_report has two register rows)
+            try:
+                f = S.fact(k, ef) if S.has(k) else None
+            except Exception:  # noqa: BLE001
+                f = S.fact(k) if S.has(k) else None
             if f:
                 used_rids.update(S.rids(f))
+        # v1.1 QA r1: a register id cited in the body text (e.g. 'US-TXV6-005' in the Texas enhanced-content row) is listed too
+        body = [p_.text for p_ in doc.paragraphs] + [c.text for t in doc.tables for r in t.rows for c in r.cells]
+        used_rids.update(rid for rid in re.findall(r"\bUS-[A-Z0-9]+-\d{3}\b", " ".join(body)) if rid in S.REG)
         appendix_a(doc, used_rids)
         appendix_b(doc)
     return doc
@@ -618,17 +631,30 @@ def write_side_files(out):
                     "'Not configured in this release [[GAP:SIR-RQ-nn]]' and an entry in _research/gaps.json.",
            "requests": reqs}
     json.dump(doc, open(os.path.join(S.RESEARCH, "SIR-research-request.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
-    # gaps.json (C70): replace the SIR entries, keep every other entry untouched
+    # gaps.json (C70): v1.1 QA r1 - merge, never replace. gaps.json is owned by the source-hunter: an existing SIR entry
+    # keeps every research-stamped field (status, searched, searched_on, reason, closure_source, decided_by); the build
+    # only repoints its location. A gap id the file does not hold yet is appended. The file is rewritten only when
+    # something changed, so an unchanged build leaves it byte-identical.
     gp = os.path.join(S.RESEARCH, "gaps.json")
-    g = json.load(open(gp, encoding="utf-8"))
-    g["gaps"] = [x for x in g["gaps"] if not str(x.get("id", "")).startswith("SIR-RQ-")]
+    raw = open(gp, encoding="utf-8").read()
+    g = json.loads(raw)
+    have = {str(x.get("id", "")): x for x in g["gaps"]}
+    changed = False
     for key, r in sorted(REQ.items(), key=lambda x: x[1]["gid"]):
+        loc = f"03-statutory-integrations/{S.FILENAME}!Appendix B!{r['gid']}"
+        if r["gid"] in have:
+            if have[r["gid"]].get("location") != loc:
+                have[r["gid"]]["location"] = loc
+                changed = True
+            continue
         g["gaps"].append({"id": r["gid"], "key": key, "subject": f"{r['gid']} - {r['question_short']}",
-                          "location": f"03-statutory-integrations/{S.FILENAME}!Appendix B!{r['gid']}",
+                          "location": loc,
                           "research_request_id": r["rq"], "blocking": False, "severity": "minor",
                           "searched": r["searched"], "searched_on": dt.date.today().isoformat(),
                           "what_would_close_it": r["closes"], "status": "open", "artifact": "SIR"})
-    json.dump(g, open(gp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+        changed = True
+    if changed:
+        json.dump(g, open(gp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     json.dump({k: {**v, "locations": v["locations"][:20]} for k, v in REQ.items()},
               open(os.path.join(S.CHECKS, "sir_requests.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     # recon

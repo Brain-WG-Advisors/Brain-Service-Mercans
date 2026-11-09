@@ -46,7 +46,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nj.labour.direct_deposit.consent_required` | [[FACT:nj.labour.direct_deposit.consent_required=True]] | 1965-01-01 | open | US-NJS5-001 (A.1, NJ Legislature (text as published by NJ DOL Wage and Hour Compliance, Selected NJ State Labor Laws)) | written uncoerced, revocable; paycard same plus fee disclosure, one free withdrawal, opt-out |
 
 - Not configured in this release [[GAP:RQ-106]]: DWBR chapter number and rule adoption status unconfirmed.
-- Not configured in this release [[GAP:RQ-107]]: Minor hour limits not read.
+- Not configured in this release [[GAP:RQ-107]]: Minor hour limits not verified against the official source.
 
 ## NJ.2 Income tax withholding
 
@@ -106,7 +106,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nj.tdi.employee.max_annual` | [[FACT:nj.tdi.employee.max_annual=325.09]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | [[FACT:nj.tdi.employee.rate=0.19]]% x [[FACT:nj.tdi_fli.employee.wage_base.annual=171,100]] |
 | `nj.fli.employee.max_annual` | [[FACT:nj.fli.employee.max_annual=393.53]] USD | 2026-01-01 | 2026-12-31 | US-NJP51-004 (A.2, NJ Division of Taxation) | [[FACT:nj.fli.employee.rate=0.23]]% x [[FACT:nj.tdi_fli.employee.wage_base.annual=171,100]] |
 
-- Not configured in this release [[GAP:RQ-109]]: The multiples of the state average weekly wage and the rounding used to set the unemployment, disability and family-leave wage bases were inferred from the published figures, not read in the statute.
+- Not configured in this release [[GAP:RQ-109]]: The multiples of the state average weekly wage and the rounding used to set the unemployment, disability and family-leave wage bases were inferred from the published figures, not verified against the official source in the statute.
 
 ## NJ.4 Pay statement
 
@@ -143,7 +143,7 @@ Rules:
 
 - Vacation and holiday pay are not required by NJ law; if offered, the policy is enforceable. Jury duty: unpaid time off is protected. (US-NJS5-012)
 
-- Not configured in this release [[GAP:RQ-111]]: ESL carry-over cap and treatment at termination not read in statute.
+- Not configured in this release [[GAP:RQ-111]]: ESL carry-over cap and treatment at termination not verified against the official source in statute.
 
 ## NJ.7 Termination and final pay
 
@@ -158,7 +158,7 @@ Rules:
 - Deductions from final pay for unreturned property: prohibited. (US-NJS5-012)
 
 - Not configured in this release [[GAP:RQ-112]]: Whether employers must also send the Department of Labor an electronic copy of Form BC-10 rests on secondary sources only.
-- Not configured in this release [[GAP:RQ-113]]: NJ WARN statute text and severance payment timing not read.
+- Not configured in this release [[GAP:RQ-113]]: NJ WARN statute text and severance payment timing not verified against the official source.
 
 ## NJ.8 Benefits in kind and taxable wages
 
@@ -177,7 +177,7 @@ Rules:
 | `nj.garn.consumer.floor.weekly` | [[FACT:nj.garn.consumer.floor.weekly=217.5]] USD | 2022-07-01 | open | US-NJS5-021 (A.2, New Jersey Judiciary (Superior Court Clerk)) | 30 x [[FACT:fed.minwage.hourly=7.25]] |
 | `nj.deduction.political.weekly_max` | [[FACT:nj.deduction.political.weekly_max=5]] USD | 2026-01-01 | open | US-NJS5-004 (A.1, NJ Legislature / NJ DOL (text as published by NJ DOL)) | one committee |
 
-- Not configured in this release [[GAP:RQ-114]]: 2A:17-56 above-10% orders and NJ child-support IWO fee/priority not read.
+- Not configured in this release [[GAP:RQ-114]]: 2A:17-56 above-10% orders and NJ child-support IWO fee/priority not verified against the official source.
 
 ## NJ.10 Collective agreements and prevailing wage
 
@@ -197,13 +197,13 @@ Indexation of each value is stated in the note of the value concerned.
 |---|---|---|---|---|---|
 | `nj.records.wage_hour.retention_years` | [[FACT:nj.records.wage_hour.retention_years=6]] years | 2026-01-01 | open | US-NJS5-022 (A.1, NJ Department of Labor and Workforce Development (text as published, Selected NJ State Labor Laws)) | UI/TDI current + 4 prior years; ESL 5 years |
 
-- Not configured in this release [[GAP:RQ-115]]: SSN truncation/printing limits on pay statements (C.56:8-164) not obtained.
+- Not configured in this release [[GAP:RQ-115]]: SSN truncation/printing limits on pay statements (C.56:8-164) not verified against the official source.
 
 ## NJ.13 Live legal change
 
 No New Jersey rule is configured in this domain; the federal treatment in Annex FED applies.
 
-- Not configured in this release [[GAP:RQ-116]]: The 2026 bulletin indexes of the Treasury and the Department of Labor returned errors, and the 2027 contribution-rate notice was not seen.
+- Not configured in this release [[GAP:RQ-116]]: New Jersey Treasury and Department of Labor bulletins for 2026 and the 2027 contribution-rate notice are not verified against the official source.
 
 ## NJ.14 Authority worked examples (oracle values)
 

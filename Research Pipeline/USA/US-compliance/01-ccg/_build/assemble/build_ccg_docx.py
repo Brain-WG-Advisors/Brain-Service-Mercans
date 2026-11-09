@@ -31,6 +31,10 @@ from docx.shared import Pt, RGBColor
 
 BASE = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 MAN = json.load(open(os.path.join(BASE, "_pipeline", "build-manifest.json"), encoding="utf-8"))
+_OVL_P = os.path.join(BASE, "_pipeline", "package-overlay-v1.1.json")   # v1.1 rebuild: package overlay
+OVERLAY = json.load(open(_OVL_P, encoding="utf-8")) if os.path.isfile(_OVL_P) else None
+if OVERLAY:
+    MAN["package"] = dict(MAN["package"], **OVERLAY["package"])
 CODE = MAN["code"]
 VERSION = MAN["package"]["version"]
 ISSUE = MAN["package"]["issue_date"]
@@ -370,11 +374,18 @@ def build():
 
     # ---- Version Control (Bulgaria precedent: first H1, 5-column table)
     doc.add_paragraph("Version Control", style="Heading 1")
-    add_table(doc, [["Version", "Effective Date", "Change Description", "Status", "Updated By"],
-                    [VERSION, ISSUE,
-                     "Initial issue: core modules, population coverage matrix, federal and multistate "
-                     "annexes, and one annex per State and the District of Columbia.",
-                     "For QA" if "placeholder" in str(MAN["package"].get("_note", "")).lower() else "Issued", ISSUED_BY]])
+    _status = "For QA" if "placeholder" in str(MAN["package"].get("_note", "")).lower() else "Issued"
+    _init = ("Initial issue: core modules, population coverage matrix, federal and multistate "
+             "annexes, and one annex per State and the District of Columbia.")
+    if OVERLAY:
+        _pv = OVERLAY["previous"]
+        _vc = [[_pv["version"], _pv["date"], _init, _pv["status"], ISSUED_BY],
+               [VERSION, OVERLAY["package"]["issue_date"],
+                "; ".join(OVERLAY["changes"]["CCG"]) + ". Why: " + OVERLAY["why"] + " Source: "
+                + OVERLAY["sources"]["CCG"] + ".", _status, ISSUED_BY]]
+    else:
+        _vc = [[VERSION, ISSUE, _init, _status, ISSUED_BY]]
+    add_table(doc, [["Version", "Effective Date", "Change Description", "Status", "Updated By"]] + _vc)
     state = {"started": True}
 
     order = []
@@ -407,7 +418,22 @@ def build():
     doc.core_properties.created = now
     doc.core_properties.modified = now
     doc.core_properties.revision = 1
+    # v1.1: fixed document timestamps (build date) so an identical rebuild gives an identical file (C71-style md5)
+    import datetime as _dtm
+    _stamp = _dtm.datetime.strptime(str(ISSUE)[:10], "%Y-%m-%d")
+    doc.core_properties.created = _stamp
+    doc.core_properties.modified = _stamp
     doc.save(OUT)
+    import zipfile as _zf
+    _items = []
+    with _zf.ZipFile(OUT) as _z:
+        for _i in _z.infolist():
+            _items.append((_i.filename, _z.read(_i.filename)))
+    with _zf.ZipFile(OUT, "w", _zf.ZIP_DEFLATED) as _z:
+        for _n, _data in _items:
+            _zi = _zf.ZipInfo(_n, date_time=(_stamp.year, _stamp.month, _stamp.day, 0, 0, 0))
+            _zi.compress_type = _zf.ZIP_DEFLATED
+            _z.writestr(_zi, _data)
     return order
 
 

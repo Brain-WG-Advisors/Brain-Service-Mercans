@@ -57,7 +57,7 @@ Overtime: no state premium rule (ch. 9 read in full); FLSA 1.5x over 40. No loca
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `de.local.wilmington.eit.rate` | [[FACT:de.local.wilmington.eit.rate=1.25]] % | 2023-01-01 to open | US-DEP52-001 (City of Wilmington Department of Finance; A.2, quoted from authority page, confidence high) | Wilmington EIT: residents wherever they earn, nonresidents for work in the City; separate return and reconciliation to City Finance. Regulations rev. 2023 not re-verified; 2026 rate assumed at the 22 Del. C. 901-902 cap. |
+| `de.local.wilmington.eit.rate` | [[FACT:de.local.wilmington.eit.rate=1.25]] % | 2023-01-01 to open | US-DEP52-001 (City of Wilmington Department of Finance; A.2, quoted from authority page, confidence high) | Wilmington EIT: residents wherever they earn, nonresidents for work in the City; separate return and reconciliation to City Finance. Regulations rev. 2023 not confirmed; 2026 rate assumed at the 22 Del. C. 901-902 cap. |
 
 Not configured in this release [[GAP:RQ-148]]: Wilmington EIT regulations (rev. 2023) not re-verified; 2026 rate assumed at the statutory [[FACT:de.local.wilmington.eit.rate=1.25]]% cap.
 
@@ -106,11 +106,11 @@ Not configured in this release [[GAP:RQ-150]]: Unclear whether the 2026 [[FACT:d
 | `de.report.w2.employee_on_termination_days` | [[FACT:de.report.w2.employee_on_termination_days=30]] days | 2026-01-01 to open | US-DES5-005 (Delaware General Assembly (Delaware Code Online); A.1, quoted from authority page, confidence high) | By Jan 31 or within 30 days of last wage payment on termination (1152). |
 | `de.report.w2.paper_max_forms` | [[FACT:de.report.w2.paper_max_forms=10]] forms | 2026-02-03 to open | US-DES5-008 (Delaware Division of Revenue; A.3, quoted from authority page, confidence high) |  |
 | `de.report.wh.calendar` | [[FACT:de.report.wh.calendar=quarterly: last day of month after quarter; monthly: 15th; eighth-monthly: 3 working days after periods ending 3rd/7th/11th/15th/19th/22nd/25th/last; tax type 01106]] | 2026-01-01 to open | US-DES5-007 (Delaware Division of Revenue; A.2, direct artifact inspection, confidence high) |  |
-| `de.report.wh.frequency` | [[FACT:de.report.wh.frequency=July-June lookback: quarterly up to 4,500; monthly 4,500-25,000; eighth-monthly over 25,000 (statutory, indexed under 30 Del. C. 515; 2026 values not read)]] | 2026-01-01 to open | US-DES5-005 (Delaware General Assembly (Delaware Code Online); A.1, quoted from authority page, confidence medium) |  |
+| `de.report.wh.frequency` | [[FACT:de.report.wh.frequency=July-June lookback: quarterly up to 4,500; monthly 4,500-25,000; eighth-monthly over 25,000 (statutory, indexed under 30 Del. C. 515; 2026 values not verified)]] | 2026-01-01 to open | US-DES5-005 (Delaware General Assembly (Delaware Code Online); A.1, quoted from authority page, confidence medium) |  |
 
-Not configured in this release [[GAP:RQ-151]]: 2026 indexed withholding filing thresholds not read (Guide prints 6,020 / 33,460 undated).
+Not configured in this release [[GAP:RQ-151]]: 2026 indexed withholding filing thresholds not verified against the official source (Guide prints 6,020 / 33,460 undated).
 
-Not configured in this release [[GAP:RQ-152]]: UI separation-notice duty and UC-8A electronic wage-file format not read.
+Not configured in this release [[GAP:RQ-152]]: UI separation-notice duty and UC-8A electronic wage-file format not verified against the official source.
 
 ## DE.6 Leave
 
@@ -154,7 +154,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 ## DE.11 Indexation
 
-MW, PIT brackets, standard deduction and 110 credit not indexed; SUI base statutory steps; withholding filing thresholds indexed under 30 Del. C. 515 (2026 values not read; Guide prints 6,020/33,460 undated); Paid Leave rate statutory to 2026 then DOL-set; max benefit CPI after 2027.
+MW, PIT brackets, standard deduction and 110 credit not indexed; SUI base statutory steps; withholding filing thresholds indexed under 30 Del. C. 515 (2026 values not verified against the official source; Guide prints 6,020/33,460 undated); Paid Leave rate statutory to 2026 then DOL-set; max benefit CPI after 2027.
 
 ## DE.12 Payroll data protection and records
 

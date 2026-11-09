@@ -147,6 +147,17 @@ These ids appear in the findings but are not plain `active`; do not cite them fo
   - No reciprocity agreements [US-NYP52-002].
 - **Confidence:** High for state. Medium-High for NYC/Yonkers, which rest on existing rows.
 
+### 2.V11 — Method II / III parameters loaded as facts (2026-11-06, V-01..V-03)
+The package is now self-sufficient for NY withholding; it no longer relies only on a pointer to the publication.
+- **NYS** [US-NYV7-001, NYS-50-T-NYS (1/26)]: `ny.wh.method2.{single,married}.bracket.N.{floor,rate,base}` = the Annual Tax Rate Schedules (single 10 lines up to 1,077,550; married 12 lines up to 2,155,350); `ny.wh.method2.{single,married}.deduction_allowance` 7,400 / 7,950; `ny.wh.method2.exemption_allowance` 1,000; `ny.wh.method3.{single,married}.threshold` 1,077,550 / 2,155,350 and `ny.wh.method3.*.bracket.1-3.{floor,rate}` 10.45 / 11.10 / 11.70% on whole annualized wages (needed for exact calculation above the threshold); `ny.wh.method2.annualisation`, `ny.wh.method3.annualisation` (text).
+- The allowance keys coincide with the existing `ny.sit.deduction_allowance.{single,married}.annual` and `ny.pit.exemption.annual`. It is the same mechanism under two keys. Neither key was renamed.
+- **Annualisation, as printed.** Method II applies per-period tables (or the annual schedule for annual payrolls) to net wages. Annualised net wages are used only for the Method III test, and Method III annualises, applies a flat rate, then divides. Observation, not a rule: the per-period tables equal the annual schedule ÷ periods with floors rounded to whole dollars, so annualise-and-divide does not exactly match the per-period tables.
+- **NYC** [US-NYV7-002, NYS-50-T-NYC (1/26)]: `ny.local.nyc.method2.{single,married}.bracket.1-6.*` (identical schedules, 2.05% to 4.25%); deduction allowance 5,000 / 5,500; exemption 1,000; no Method III.
+- **Yonkers** [US-NYV7-003, NYS-50-T-Y (1/26)]: `ny.local.yonkers.resident.surcharge.rate` 16.75% of the NYS Method II/III amount (`.method`). Nonresident earnings tax `ny.local.yonkers.nonresident.earnings_tax.rate` 0.50% after exclusion (`.method`, Method VIII `method8.bracket.1-5.{floor,exclusion}`, no withholding below 4,000 annualized).
+- **Rounding:** not stated by the publication. Not encoded; see `ny.wh.method2.rounding` (RQ-263).
+- Cross-check: an independent parse of the source text matched every floor/rate/base (34 brackets, 0 mismatches).
+- **PFL accumulator (V-13)** [US-NYP8-001 / US-NYB5-001]: `ny.pfl.employee.max_annual.accumulation`. DFS: contributions stop once they reach the annual maximum "before the end of the calendar year"; the employee "shall not be liable for any additional contributions for that year".
+
 ## 3. social_security
 - **SUI.**
   - 2026 wage base **17,600**. From 2026 the base is 18% of the state average annual wage, rounded up to 100, and is never reduced [US-NYS5-010; US-NY-007].
@@ -337,3 +348,4 @@ Mirrors `unresolved[]` in the facts file (same keys, same wording). Regenerated 
 - `ny.bik.nyc_flex125_addback` (non-blocking) — NYC flexible benefits 125 addback not read. **Would close it:** IT-225-I (DTF).
 - `ny.term.ia12_3.timing` (non-blocking) — IA 12.3 timing rule not read. **Would close it:** 12 NYCRR 472.8 text.
 - `ny.garn.state_tax_levy` (non-blocking) — DTF income execution for tax warrants not researched. **Would close it:** Tax Law 692 / CPLR 5231 guidance.
+- `ny.wh.method2.rounding` (non-blocking) — NYS-50-T-NYS/NYC/Y Method II prints no rounding instruction; Example 2 prints 12.43 / 258.51 where half-up gives 12.42 / 258.50 (RQ-263). **Would close it:** DTF statement of the Method II rounding convention, or the DTF result for Example 2 inputs.

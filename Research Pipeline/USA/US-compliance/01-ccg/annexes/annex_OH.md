@@ -10,10 +10,10 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 ## OH.1 Employment and labour code
 
 - **Minimum wage (Ohio Const. art. II s.34a) [US-OHS5-005, US-OHS5-004].** 2026: [[FACT:oh.minwage.hourly=11.00]] USD per hour non-tipped; tipped cash wage [[FACT:oh.minwage.tipped.cash_wage=5.50]] USD. Employers grossing under [[FACT:oh.labour.minwage.small_employer.gross_threshold=405,000]] USD a year, and employees under 16, are paid the federal minimum wage (Annex FED). 2027 (published): [[FACT:oh.minwage.hourly=11.40]] USD and [[FACT:oh.minwage.tipped.cash_wage=5.70]] USD; small-employer threshold [[FACT:oh.labour.minwage.small_employer.gross_threshold=419,000]] USD.
-- **No local minimum wages.** Local regulation of hours, scheduling and benefits for private employers is preempted (ORC 4113.85): [[FACT:oh.local_mandates.preempted=True]] [US-OHS5-012]. No city minimum wage was located; the minimum-wage preemption text itself (ORC 4111.02) was not read.
+- **No local minimum wages.** Local regulation of hours, scheduling and benefits for private employers is preempted (ORC 4113.85): [[FACT:oh.local_mandates.preempted=True]] [US-OHS5-012]. No city minimum wage was located; the minimum-wage preemption text itself (ORC 4111.02) was not verified against the official source.
 - **Overtime (ORC 4111.03) [US-OHS5-003].** [[FACT:oh.overtime.premium.multiplier=1.5]] times the regular rate over [[FACT:oh.overtime.weekly_threshold_hours=40]] hours per workweek, following FLSA exemptions; no daily overtime. Small employers below the poster's gross-receipts test are outside the state overtime duty [US-OHS5-004, US-OHS5-005].
 - **Pay frequency and pay day (ORC 4113.15) [US-OHS5-015, US-OH-004]:** [[FACT:oh.pay_frequency.rule=at least semimonthly (1-15 by 1st of next month; 16-end by 15th)]]. Daily or weekly pay is allowed, as is a longer customary or contractual lapse; liquidated damages accrue on wages left unpaid beyond the statutory period.
-- **Method of payment** (direct deposit or paycard consent): no Ohio statute read (open point below).
+- **Payment timing and method (ORC 4113.15) [US-OHV6-004]:** [[FACT:oh.payment.method=Wages must be paid by the 1st (for 1st-15th of prior month) and the 15th (for 16th-end of prior month) of each month; section text contains no provision on payment medium (direct deposit/paycard/check)]].
 - **Records:** name, address, occupation, rate, pay per period, hours per day and week, kept [[FACT:oh.records.wage_hour.retention_years=3]] years [US-OHS5-005].
 
 **Parameters (labour code and pay rules)**
@@ -27,14 +27,11 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | `oh.labour.minwage.small_employer.gross_threshold` | [[FACT:oh.labour.minwage.small_employer.gross_threshold=405,000]] | USD | 2026-01-01 to 2026-12-31 | US-OHS5-005 |  |
 | `oh.labour.minwage.small_employer.gross_threshold` | [[FACT:oh.labour.minwage.small_employer.gross_threshold=419,000]] | USD | 2027-01-01 to 2027-12-31 | US-OHS5-004 |  |
 | `oh.minwage.indexation` | [[FACT:oh.minwage.indexation=CPI-W 12 months to September, each 1 January, rounded to 0.05]] |  | from 2007-01-01 | US-OHS5-006 | Ohio Const. art. II s.34a |
-| `oh.local_mandates.preempted` | [[FACT:oh.local_mandates.preempted=True]] |  | from 2017-03-21 | US-OHS5-012 | 4113.85 covers benefits/scheduling; 4111.02 not read |
+| `oh.local_mandates.preempted` | [[FACT:oh.local_mandates.preempted=True]] |  | from 2017-03-21 | US-OHS5-012 | 4113.85 covers benefits/scheduling; 4111.02 not verified |
 | `oh.overtime.weekly_threshold_hours` | [[FACT:oh.overtime.weekly_threshold_hours=40]] | hours | from 2022-07-06 | US-OHS5-004 | FLSA exemptions; employers under 150,000 gross excluded |
 | `oh.overtime.premium.multiplier` | [[FACT:oh.overtime.premium.multiplier=1.5]] | ratio | from 2022-07-06 | US-OHS5-003 |  |
 | `oh.pay_frequency.rule` | [[FACT:oh.pay_frequency.rule=at least semimonthly (1-15 by 1st of next month; 16-end by 15th)]] |  | from 2019-03-20 | US-OHS5-015 | 4113.15; liquidated damages after 30 days |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-273]]: Direct deposit / paycard consent: no statute read.
+| `oh.payment.method` | [[FACT:oh.payment.method=Wages must be paid by the 1st (for 1st-15th of prior month) and the 15th (for 16th-end of prior month) of each month; section text contains no provision on payment medium (direct deposit/paycard/check)]] |  | from 2019-03-20 | US-OHV6-004 | Register: US-OHV6-004 |
 
 ## OH.2 Income tax withholding
 
@@ -124,8 +121,8 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-280]]: 2027 withholding tables, ODJFS rates and SD changes not published.
-- Not configured in this release [[GAP:RQ-282]]: OHMuniRateTable.csv carries rates only: the resident credit (rate and limit) and the collector (RITA, CCA or the city itself) are not in the table.
+- Not yet published [[GAP:RQ-280]]: The 2027 Ohio withholding tables, UI rates and school-district changes are published later in the year.
+- Not configured in this release [[GAP:RQ-282]]: ORC 718.04(D) leaves the resident credit to each municipal ordinance, so there is no statewide credit rate or limit; under ORC 718.03(A) the employer withholds for the work municipality and may withhold for the resident municipality on request. The collector of each municipality is not in the rate table.
 
 ## OH.2b Non-resident regime and reciprocity
 
@@ -138,13 +135,13 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 ## OH.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
 - **Unemployment insurance (ODJFS rate year 2026) [US-OHS5-002, US-OH-005].** Taxable wage base [[FACT:oh.sui.wage_base=9000]] USD. New employer [[FACT:oh.sui.new_employer.rate=2.85]] % (including the Technology and Customer Service Fee); construction new employer [[FACT:oh.ui.rate.new_employer.construction=5.85]] %. Experienced range, fee included: [[FACT:oh.ui.rate.min_total=0.55]] % to [[FACT:oh.ui.rate.max_total=10.25]] %. Technology and Customer Service Fee [[FACT:oh.ui.tcsf.rate=0.15]] % (ORC 4141.251) [US-OHP7-003]. Employee contribution [[FACT:oh.sui.employee.rate=0]] %.
-- **No SDI, TDI or PFML** (open point below on the evidence level) and no transit or workforce levy on wages [US-OHL-002].
+- **No SDI, TDI or PFML** ([[FACT:oh.sdi_pfml.exists=No Ohio state-administered paid family/medical leave or TDI program is listed by DOL (March 2024: CA, NJ, RI, NY, DC, WA, MA, CT, OR, CO, MD, DE, MN, ME; Ohio absent, word not in the text). Live change: SB 396 (136th GA) would establish a Family and Medical Leave Insurance Program; Senate introduced 3-23-2026, referred to committee 3-25-2026, not enacted. Caveat: the DOL document is dated March 2024; absence in Nov 2026 rests on the bill still being in committee.]] [US-OHV6B-001]) and no transit or workforce levy on wages [US-OHL-002].
 
 **Parameters (social insurance and payroll levies)**
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `oh.sui.wage_base` | [[FACT:oh.sui.wage_base=9000]] | USD | 2026-01-01 to 2026-12-31 | US-OHS5-002 | indexation rule (4141.01) not read |
+| `oh.sui.wage_base` | [[FACT:oh.sui.wage_base=9000]] | USD | 2026-01-01 to 2026-12-31 | US-OHS5-002 | indexation rule (4141.01) not verified |
 | `oh.sui.new_employer.rate` | [[FACT:oh.sui.new_employer.rate=2.85]] | % | 2026-01-01 to 2026-12-31 | US-OHS5-002 |  |
 | `oh.ui.rate.new_employer.construction` | [[FACT:oh.ui.rate.new_employer.construction=5.85]] | % | 2026-01-01 to 2026-12-31 | US-OHS5-002 |  |
 | `oh.ui.rate.min_total` | [[FACT:oh.ui.rate.min_total=0.55]] | % | 2026-01-01 to 2026-12-31 | US-OHS5-002 | 0.4-10.1 before fee |
@@ -152,11 +149,8 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 | `oh.ui.tcsf.rate` | [[FACT:oh.ui.tcsf.rate=0.15]] | % | 2026-01-01 to 2026-12-31 | US-OHS5-002 | ORC 4141.251 |
 | `oh.sui.employee.rate` | [[FACT:oh.sui.employee.rate=0]] | % | 2026-01-01 to 2026-06-15 | US-OHR3C-001 | Ohio Rev. Code 4141.23(A): UI contributions are paid by the employer and shall not be deducted, in whole or in part, from employees' remuneration. |
 | `oh.sui.employee.rate` | [[FACT:oh.sui.employee.rate=0]] | % | 2026-06-16 to 2026-12-31 | US-OHR3D-001 | Ohio Rev. Code 4141.23(A), version effective 2026-06-16 (Sub. S.B. 101, 136th GA): contributions are paid by the employer 'and shall not be deducted, in whole or in part, from the remuneration of individuals in the employer's employ.' Division (A) is unchanged from the prior version. |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-274]]: The SUI wage base is read as statutory and fixed (ORC 4141.01(G)); the text was not read.
-- Not configured in this release [[GAP:RQ-281]]: Not established from an official source.
+| `oh.ui.wage_base.indexation` | [[FACT:oh.ui.wage_base.indexation=Statutory fixed wage base, not indexed: 9,000 USD from 1995-01-01; 9,500 USD from 2018-01-01; 9,000 USD from 2020-01-01 (in force for 2026)]] |  | from 2020-01-01 | US-OHV6-001 | Register: US-OHV6-001 |
+| `oh.sdi_pfml.exists` | [[FACT:oh.sdi_pfml.exists=No Ohio state-administered paid family/medical leave or TDI program is listed by DOL (March 2024: CA, NJ, RI, NY, DC, WA, MA, CT, OR, CO, MD, DE, MN, ME; Ohio absent, word not in the text). Live change: SB 396 (136th GA) would establish a Family and Medical Leave Insurance Program; Senate introduced 3-23-2026, referred to committee 3-25-2026, not enacted. Caveat: the DOL document is dated March 2024; absence in Nov 2026 rests on the bill still being in committee.]] |  | from 2024-03-01 (statute); implementing rule proposed only, not in force | US-OHV6B-001 | Register: US-OHV6B-001, US-OHV6B-002 |
 
 ## OH.4 Pay statement
 
@@ -191,7 +185,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-278]]: UI quarterly report channel/format not read.
+- Not configured in this release [[GAP:RQ-278]]: The Ohio UI quarterly report channel and bulk-upload format were not established from an official source on official pages.
 
 ## OH.6 Leave
 
@@ -205,7 +199,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-275]]: Jury duty, military and voting leave with pay impact not read.
+- Not configured in this release [[GAP:RQ-275]]: Ohio voting leave (ORC 3599.06) protects the employee but states no pay rule; the jury-duty (ORC 2313.19) and military-leave (ORC 5903.02) rules were not verified against the official source.
 
 ## OH.7 Termination and final pay
 
@@ -221,7 +215,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-279]]: Individual UI separation notice under OAC 4141 not read.
+- Not configured in this release [[GAP:RQ-279]]: No individual UI separation-notice rule under OAC 4141 was located.
 
 ## OH.8 Benefits in kind and taxable wages
 
@@ -232,7 +226,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 ## OH.9 Deductions and garnishments
 
 - **Creditor garnishment (ORC 2329.66(A)(13)) [US-OHS5-011]:** the exempt amount is the greater of the CCPA percentage of disposable earnings or [[FACT:oh.garn.consumer.exempt_multiple_fmw.weekly=30]] times the federal minimum wage per week (with the corresponding multiples for longer pay periods). This matches the CCPA (Annex FED).
-- **Child support IWO fee (ORC 3121.18):** the employer may deduct a fee of at least [[FACT:oh.garn.iwo.employer_fee.min=2]] USD per withholding, within the statutory percentage of the amount withheld [US-OHS5-010]. Deduction authorisation rules and support priority: open point below.
+- **Child support IWO fee (ORC 3121.18):** the employer may deduct a fee of at least [[FACT:oh.garn.iwo.employer_fee.min=2]] USD per withholding, within the statutory percentage of the amount withheld [US-OHS5-010]. Start of withholding: [[FACT:oh.garn.deduction_rules_priority=Withholding begins no later than 14 business days after the notice is mailed/transmitted, or for employers no later than the first pay period after 14 business days; continues until further notice. Statutory priority between orders (3121.034) and general deduction-authorisation rules (4113.15) not verified]] [US-OHV6-003].
 
 **Parameters (deductions and garnishments)**
 
@@ -240,31 +234,25 @@ The local wage taxes of this jurisdiction, where any exist, are written in OH.2.
 |---|---|---|---|---|---|
 | `oh.garn.consumer.exempt_multiple_fmw.weekly` | [[FACT:oh.garn.consumer.exempt_multiple_fmw.weekly=30]] |  | from 2025-09-30 | US-OHS5-011 | greater of 75% disposable or 30x/60x/65x/130x FMW |
 | `oh.garn.iwo.employer_fee.min` | [[FACT:oh.garn.iwo.employer_fee.min=2]] | USD | from 2001-03-22 | US-OHS5-010 | greater of 2 USD or up to 1% of amount withheld |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-276]]: Deduction authorisation rules and IWO priority not read.
+| `oh.garn.deduction_rules_priority` | [[FACT:oh.garn.deduction_rules_priority=Withholding begins no later than 14 business days after the notice is mailed/transmitted, or for employers no later than the first pay period after 14 business days; continues until further notice. Statutory priority between orders (3121.034) and general deduction-authorisation rules (4113.15) not verified]] |  | from 2017-09-29 | US-OHV6-003 |  |
 
 ## OH.10 Collective agreements and prevailing wage
 
 Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
-- **Prevailing wage (ORC ch. 4115):** rates set by the Director of Commerce (4115.04); new-construction threshold [[FACT:oh.prevailing_wage.threshold.new_construction=250,000]] USD, with other thresholds for remodelling and road work, adjusted biennially (4115.034) [US-OHR3-002, US-OHR3-003, US-OHP51-003]. Certified payroll: open point below.
+- **Prevailing wage (ORC ch. 4115):** rates set by the Director of Commerce (4115.04); new-construction threshold [[FACT:oh.prevailing_wage.threshold.new_construction=250,000]] USD, with other thresholds for remodelling and road work, adjusted biennially (4115.034) [US-OHR3-002, US-OHR3-003, US-OHP51-003]. Certified payroll: [[FACT:oh.prevailing_wage.certified_payroll=Contractors submit complete payroll for each pay date to the public authority's prevailing wage coordinator: employee name, current address, last four SSN digits, hours per day and week, hourly rate, job classification, fringe payments, deductions. 2026 coverage-threshold adjustment (4115.03) not verified]] [US-OHV6-002].
 
 **Parameters (collective agreements and prevailing wage)**
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `oh.prevailing_wage.threshold.new_construction` | [[FACT:oh.prevailing_wage.threshold.new_construction=250,000]] | USD | from 2026-01-01 | US-OHP51-003 | remodeling 75,000; road/sewer/bridge 78,258/23,447; biennial adjustment date unconfirmed |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-277]]: 4115.071 certified payroll and 2026 threshold adjustment date not read.
+| `oh.prevailing_wage.threshold.new_construction` | [[FACT:oh.prevailing_wage.threshold.new_construction=250,000]] | USD | from 2026-01-01 | US-OHP51-003 | remodeling 75,000; road/sewer/bridge 78,258/23,447; the date of the next biennial adjustment is not stated in this source |
+| `oh.prevailing_wage.certified_payroll` | [[FACT:oh.prevailing_wage.certified_payroll=Contractors submit complete payroll for each pay date to the public authority's prevailing wage coordinator: employee name, current address, last four SSN digits, hours per day and week, hourly rate, job classification, fringe payments, deductions. 2026 coverage-threshold adjustment (4115.03) not verified]] |  | from 2017-06-30 | US-OHV6-002 | Register: US-OHV6-002 |
 
 ## OH.11 Indexation
 
 - **Minimum wage:** [[FACT:oh.minwage.indexation=CPI-W 12 months to September, each 1 January, rounded to 0.05]] [US-OHS5-006]. The small-employer threshold uses the same index; the tipped wage is half the minimum wage. The 2026 and 2027 published values follow from the index (derivation in the research pack; values in Section 1).
-- **SUI wage base:** statutory, read as not indexed (open point below).
+- **SUI wage base:** [[FACT:oh.ui.wage_base.indexation=Statutory fixed wage base, not indexed: 9,000 USD from 1995-01-01; 9,500 USD from 2018-01-01; 9,000 USD from 2020-01-01 (in force for 2026)]] [US-OHV6-001].
 - **Withholding tables:** republished after a rate change (OAC 5703-7-10) [US-OHS5-017], hence the 2026-08-01 edition.
 - **Prevailing-wage thresholds:** biennial (4115.034). **School district rates:** annual change list each January [US-OHS5-018].
 
@@ -296,10 +284,10 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 |---|---|---|
 | Domestic / household | No Ohio withholding on domestic service in a private home (5747.06(A)(2)); babysitters in the employer's home and live-in companions are exempt from the minimum wage | US-OHS5-008, US-OHS5-005 |
 | Agricultural | No Ohio withholding on agricultural labour | US-OHS5-008 |
-| Minors | Under 16: federal minimum wage; newspaper carriers who are minors: no withholding; Minor Labor Law (ORC 4109) not read | US-OHS5-005, US-OHS5-008 |
+| Minors | Under 16: federal minimum wage; newspaper carriers who are minors: no withholding; Minor Labor Law (ORC 4109) not verified against the official source | US-OHS5-005, US-OHS5-008 |
 | Tipped | Cash wage per Section 1; tip credit up to the full minimum | US-OHS5-005, US-OHS5-004 |
 | Clergy / religious | No state rule beyond federal located | US-OHS5-008, US-OHS5-022 |
-| Students | No state withholding rule located; UI exclusions in 4141.01(B)(3) not read | - |
+| Students | No state withholding rule located; UI exclusions in 4141.01(B)(3) not verified against the official source | - |
 | Nonresident aliens | No state rule beyond federal; Ohio withholds on nonresidents generally | US-OHS5-008 |
 | Statutory employees | No state rule beyond federal located | US-OHS5-022 |
 | Government employees | State and political subdivisions must withhold (5747.06(A)); public employers are outside the 4113.85 definition | US-OHS5-008, US-OHS5-012, US-OHS5-005 |
@@ -325,14 +313,14 @@ Register ids cited in this annex resolve to the build record; the URL of each va
 - Ohio Dept of Commerce / General Assembly: US-OH-004
 - Ohio Dept of Job and Family Services: US-OH-005
 - Ohio Dept of Taxation: US-MULTI-005
+- Ohio General Assembly: US-OHV6B-002
 - Ohio General Assembly (136th GA), Sub. S.B. 101 as enrolled: US-OHR3D-001
-- Ohio General Assembly (codes.ohio.gov): US-OH-008, US-OHP52-002, US-OHP52-003
 - Ohio General Assembly / LSC: US-OHS5-014
-- Ohio General Assembly / LSC (codes.ohio.gov): US-OHS5-003, US-OHS5-007, US-OHS5-008, US-OHS5-009, US-OHS5-010, US-OHS5-011, US-OHS5-012, US-OHS5-015, US-OHS5-016, US-OHS5-020, US-OHS5-021, US-OHS5-022
+- Ohio General Assembly / LSC (codes.ohio.gov): US-OH-008, US-OHL-001, US-OHP52-002, US-OHP52-003, US-OHR3-002, US-OHR3C-001, US-OHS5-003, US-OHS5-007, US-OHS5-008, US-OHS5-009, US-OHS5-010, US-OHS5-011, US-OHS5-012, US-OHS5-015, US-OHS5-016, US-OHS5-020, US-OHS5-021, US-OHS5-022, US-OHV6-001, US-OHV6-002, US-OHV6-003, US-OHV6-004
 - (authority named in the register): US-OHS5-013
-- Ohio Legislative Service Commission: US-OHL-001, US-OHR3-002, US-OHR3C-001
 - Ohio Revised Code (Legislative Service Commission): US-OHP51-001
 - Owner (Wallisson Gomes): US-OWN-008
 - State of Ohio (codes.ohio.gov): US-OHS5-006
 - US DOL Wage and Hour Division: US-OHR3-003
 - US Department of Labor Wage and Hour Division: US-OHP51-003
+- US Department of Labor, Women's Bureau: US-OHV6B-001

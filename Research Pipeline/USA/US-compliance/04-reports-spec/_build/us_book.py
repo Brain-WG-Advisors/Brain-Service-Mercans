@@ -4,9 +4,14 @@ mercans_spec library (9 sheets, 21-column core sheet)."""
 import json
 import os
 
-from us_common import PKG, ISSUE, AUTHOR, STATUS, CODE, clean, unitize  # sets the shared library path first
+from us_common import PKG, ISSUE, AUTHOR, STATUS, CODE, clean, unitize, changelog_rows  # sets the shared library path first
 
 from mercans_spec import workbook as W  # noqa: E402
+import sys as _sys_dw
+_DW_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "01-ccg", "_build", "common"))
+if _DW_DIR not in _sys_dw.path:
+    _sys_dw.path.insert(0, _DW_DIR)
+import deliverable_wording as DW  # noqa: E402  v1.1 QA r1: open points in deliverable wording
 
 COUNTRY = "United States of America"
 
@@ -50,6 +55,7 @@ def _overlay():
 
 
 def write(d, outdir):
+    d = DW.restate_tree(d)      # v1.1 QA r1: open points in deliverable wording (outside tags)
     d = {k: (_clean_tree(v) if k not in ("spec_rows",) else v) for k, v in d.items()}
     # core sheet columns G (conditional reason) and M (field explanation): every numeric tag carries its unit
     d["spec_rows"] = [r if r[0] == "section" else
@@ -76,7 +82,7 @@ def write(d, outdir):
     wb = W.new_workbook()
     vc = W.sheet_version_control(
         wb, country=COUNTRY, report_name=d["title"], doc_id=d["doc_id"], version=PKG, date=ISSUE,
-        author=AUTHOR, changelog=[(PKG, ISSUE, "Issued." if STATUS == "Issued" else "For QA.", STATUS)], remarks=d["remarks"])
+        author=AUTHOR, changelog=(changelog_rows("RSPEC", STATUS, d["doc_id"]) or [(PKG, ISSUE, "Issued." if STATUS == "Issued" else "For QA.", STATUS)]), remarks=d["remarks"])
     vc.cell(13, 3).number_format = "d-mmm-yy"
     W.sheet_report_matrix(wb, title=d["title"], metadata=metadata(d), matrix_rows=d["matrix_rows"],
                           banner=d.get("banner"))
@@ -89,7 +95,7 @@ def write(d, outdir):
     W.sheet_population_rules(wb, d["pr_blocks"])
     W.sheet_example_analysis(wb, title=d["title"], blocks=d["ex_blocks"])
     W.sheet_sample_file(wb, title=d["title"], note=d["sample_note"], sample_lines=d.get("sample_lines", []))
-    name = f"{d['doc_id']}-{d['report_name']}-Spec.xlsx"
+    name = f"{d['doc_id']}-{d['report_name']}-v{PKG}-Spec.xlsx"
     path = os.path.join(outdir, name)
     W.save(wb, path)
     return path

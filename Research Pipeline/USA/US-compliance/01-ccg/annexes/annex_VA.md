@@ -42,7 +42,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-354]]: Express local preemption not found (only single statewide rate).
+- Not configured in this release [[GAP:RQ-354]]: Express local preemption not established from an official source (only single statewide rate).
 
 ## VA.2 Income tax withholding
 
@@ -102,7 +102,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VA.2.
 
 ## VA.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
-- **Unemployment insurance (VEC) [US-VAB5-401, US-VAS5-014, US-VAR3-002, US-VAB5-402].** Wage base [[FACT:va.sui.wage_base=8000]] USD per employee per year, statutory and not indexed. New employer [[FACT:va.sui.new_employer.rate=2.5]] % "plus add-ons" (60.2-526(B)). Base rates [[FACT:va.sui.employer.rate.min=0.1]] % to [[FACT:va.sui.employer.rate.max=6.2]] %. Add-ons: fund-building charge [[FACT:va.ui.fund_building.rate=0.2]] % when the trust fund is at or below the statutory level, and a pool cost charge set yearly (2026 percentage not obtained; [[GAP:RQ-352]] whether the new-employer rate includes the add-ons is contradictory: blocking open point below). Employee contribution [[FACT:va.sui.employee.rate=0]] %.
+- **Unemployment insurance (VEC) [US-VAB5-401, US-VAS5-014, US-VAR3-002, US-VAB5-402].** Wage base [[FACT:va.sui.wage_base=8000]] USD per employee per year, statutory and not indexed. New employer [[FACT:va.sui.new_employer.rate=2.5]] % "plus add-ons" (60.2-526(B)). Base rates [[FACT:va.sui.employer.rate.min=0.1]] % to [[FACT:va.sui.employer.rate.max=6.2]] %. Add-ons: fund-building charge [[FACT:va.ui.fund_building.rate=0.2]] % when the trust fund is at or below the statutory level, and a pool cost charge set yearly (2026 percentage not verified against the official source; [[GAP:RQ-352]] whether the new-employer rate includes the add-ons is contradictory: blocking open point below). Employee contribution [[FACT:va.sui.employee.rate=0]] %.
 - **UI gross wages [US-VAS5-014]:** after cafeteria-plan deductions (included: [[FACT:va.sui.wages.section125_included=False]]) and before retirement deferrals (included: [[FACT:va.sui.wages.401k_included=True]]).
 - **Coverage:** FUTA-liable employers and the quarterly or 20-week tests; domestic, agricultural and nonprofit tests; churches and ministers excluded [US-VAS5-014, US-VAS5-020, US-VAS5-012].
 - **SDI / TDI:** none.
@@ -125,7 +125,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VA.2.
 
 **Open research points**
 
-- Not yet published [[GAP:RQ-352]]: The 2026 pool cost charge was not obtained at tier A, and whether the new-employer rate of [[FACT:va.sui.new_employer.rate=2.5]] % already includes the add-ons is contradictory between sources.
+- Not configured in this release [[GAP:RQ-352]]: The 2026 pool cost charge was not verified against the official source at tier A, and whether the new-employer rate of [[FACT:va.sui.new_employer.rate=2.5]] % already includes the add-ons is contradictory between sources.
 
 ## VA.4 Pay statement
 
@@ -243,7 +243,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-356]]: CDPA employee-data exemption not read.
+- Not configured in this release [[GAP:RQ-356]]: CDPA employee-data exemption not verified against the official source.
 
 ## VA.13 Live legal change
 
@@ -252,11 +252,11 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 - **2027-01-01:** minimum wage step; farm laborers covered [US-VAS5-001, US-VAS5-002]. **Tax year 2027:** statutory standard deduction (assessment; withholding formula not yet published) [US-VAS5-018].
 - **2027-07-01:** general paid sick leave phase-in; state tax debts within garnishment limits [US-VAS5-022, US-VAS5-007].
 - **2028:** minimum wage step; PFML contributions from 2028-04-01 [US-VAS5-001, US-VAS5-016].
-- Listed but not read: amendments to 58.1-332 (resident credit) and 40.1-100 (child labour) (open point below) [US-VAS5-025].
+- Listed but not verified against the official source: amendments to 58.1-332 (resident credit) and 40.1-100 (child labour) (open point below) [US-VAS5-025].
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-357]]: 2026 amendments to 58.1-332 and 40.1-100 listed but not read.
+- Not configured in this release [[GAP:RQ-357]]: 2026 amendments to 58.1-332 and 40.1-100 listed but not verified against the official source.
 
 ## VA.14 Authority worked examples (oracle values)
 

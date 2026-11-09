@@ -14,7 +14,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 - **Pay frequency and timing (T.C.A. 50-2-103(a)) [US-TNS5-001]:** [[FACT:tn.pay_frequency.rule=employers with 5+ employees: regular paydays at least monthly]], with statutory due dates for wages earned in the first and second half of the month. Piece-work and commission timing from 2026-07-01 (PC 617): open point below.
 - **Meal break (50-2-103(h)):** [[FACT:tn.labour.meal_break.minutes=30]] minutes unpaid for a scheduled run of consecutive hours, unless the business gives ample chance to rest [US-TNS5-001].
 - **Minors [US-TNB5-002]:** hours: [[FACT:tn.labour.child_labour.hours=Ages 14-15: school in session max 3 h/day and 18 h/week, 7am-7pm; not in session max 8 h/day and 40 h/week, 6am-9pm. Ages 16-17: not during required class hours; not 10pm-6am Sun-Thu before a school day (until midnight max 3 nights/week with a Parental Consent Form, T.C.A. 50-5-105). Stricter of state or federal rule applies.]] Unpaid break of [[FACT:tn.labour.child_labour.break_minutes=30]] minutes for minors on the statutory schedule (50-5-115); no waiver.
-- **Method of payment:** not read (open point below).
+- **Method of payment:** not verified against the official source (open point below).
 
 **Parameters (labour code and pay rules)**
 
@@ -29,7 +29,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-328]]: Direct deposit / paycard consent rule not read (Lexis-only T.C.A.).
+- Not configured in this release [[GAP:RQ-328]]: Direct deposit / paycard consent rule not verified against the official source.
 
 ## TN.2 Income tax withholding
 
@@ -76,7 +76,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in TN.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-332]]: The SUI wage exclusions (cafeteria plans, retirement deferrals, tips, students, clergy, corporate officers) were not read.
+- Not configured in this release [[GAP:RQ-332]]: The SUI wage exclusions (cafeteria plans, retirement deferrals, tips, students, clergy, corporate officers) were not verified against the official source.
 
 ## TN.4 Pay statement
 
@@ -86,11 +86,11 @@ The local wage taxes of this jurisdiction, where any exist, are written in TN.2.
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `tn.payslip.statute.exists` | [[FACT:tn.payslip.statute.exists=False]] |  | from 2026-01-01 | US-TNS5-001 | absence via DLWD index; T.C.A. text not read |
+| `tn.payslip.statute.exists` | [[FACT:tn.payslip.statute.exists=False]] |  | from 2026-01-01 | US-TNS5-001 | absence via DLWD index; T.C.A. text not verified |
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-331]]: State payroll record retention not located.
+- Not configured in this release [[GAP:RQ-331]]: State payroll record retention not established from an official source.
 
 ## TN.5 Statutory reporting
 
@@ -141,7 +141,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in TN.2.
 
 ## TN.8 Benefits in kind and taxable wages
 
-- **Income tax:** not applicable (no state wage tax). UI wage exclusions not read (open point below) [US-TNP51-001].
+- **Income tax:** not applicable (no state wage tax). UI wage exclusions not verified against the official source (open point below) [US-TNP51-001].
 
 ## TN.9 Deductions and garnishments
 
@@ -159,7 +159,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in TN.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-330]]: IWO employer fee and priority not located on A source.
+- Not configured in this release [[GAP:RQ-330]]: IWO employer fee and priority not established from an official source on A source.
 
 ## TN.10 Collective agreements and prevailing wage
 
@@ -176,7 +176,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-333]]: State highway certified payroll format not read.
+- Not configured in this release [[GAP:RQ-333]]: State highway certified payroll format not verified against the official source.
 
 ## TN.11 Indexation
 
@@ -218,8 +218,8 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | Agricultural | UI coverage tests | US-TNS5-013 |
 | Minors | Child Labor Act hours and break rules (Section 1); no state minor wage rate | US-TNB5-002 |
 | Tipped | No state rule; FLSA only | US-TNS5-011 |
-| Clergy / religious | No state rule beyond federal; UI exclusion not read | - |
-| Students | No state rule beyond federal located; UI exclusions not read | - |
+| Clergy / religious | No state rule beyond federal; UI exclusion not verified against the official source | - |
+| Students | No state rule beyond federal located; UI exclusions not verified against the official source | - |
 | Nonresident aliens | No state withholding, no state effect | US-TNP51-001 |
 | Statutory employees | No state rule beyond federal | US-TNP51-001 |
 | Government employees | UI liability covers all state and local government units | US-TNS5-013 |

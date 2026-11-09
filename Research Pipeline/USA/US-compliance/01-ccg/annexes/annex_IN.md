@@ -23,8 +23,8 @@ Each parameter row gives its key, the period in force and its legal basis: the l
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `in.pit.rate` | [[FACT:in.pit.rate=2.95]] % | 2026-01-01 to 2026-12-31 | US-INS5-009 (Indiana Department of Revenue; A.2, quoted from authority page, confidence high) | DOR rates page; IC 6-3-2-1 not read. |
-| `in.pit.rate` | [[FACT:in.pit.rate=2.9]] % | 2027-01-01 to open | US-INS5-009 (Indiana Department of Revenue; A.2, quoted from authority page, confidence medium) | DOR: "will adjust in 2027 to [[FACT:in.pit.rate=2.90]]%"; statute not read. |
+| `in.pit.rate` | [[FACT:in.pit.rate=2.95]] % | 2026-01-01 to 2026-12-31 | US-INS5-009 (Indiana Department of Revenue; A.2, quoted from authority page, confidence high) | DOR rates page; IC 6-3-2-1 not verified. |
+| `in.pit.rate` | [[FACT:in.pit.rate=2.9]] % | 2027-01-01 to open | US-INS5-009 (Indiana Department of Revenue; A.2, quoted from authority page, confidence medium) | DOR: "will adjust in 2027 to [[FACT:in.pit.rate=2.90]]%"; statute not verified. |
 | `in.wh.certificate` | [[FACT:in.wh.certificate=WH-4 (State Form 48845, R10/8-23): counties of residence and principal employment as of Jan 1; additional state/county lines 9-10; new WH-4 within 10 days when exemptions decrease]] | 2023-08-01 to open | US-INS5-021 (Indiana Department of Revenue; A.3, direct artifact inspection, confidence high) |  |
 | `in.wh.exemption.adopted_child` | [[FACT:in.wh.exemption.adopted_child=3,000]] USD | 2026-01-01 to open | US-INS5-007 (Indiana Department of Revenue; A.2, derived arithmetically, confidence high) | Line 8. |
 | `in.wh.exemption.dependent` | [[FACT:in.wh.exemption.dependent=1,500]] USD | 2026-01-01 to open | US-INS5-007 (Indiana Department of Revenue; A.2, derived arithmetically, confidence high) | Lines 6 and 7 (first-time dependent one year only). |
@@ -32,9 +32,9 @@ Each parameter row gives its key, the period in force and its legal basis: the l
 | `in.wh.method` | [[FACT:in.wh.method=taxable wages = gross per period - deduction constants (annual / 52, 26, 24, 12, 365); x 2.95% state and x county rate; 2-decimal constants and results]] | 2026-10-01 to open | US-INS5-007 (Indiana Department of Revenue; A.2, derived arithmetically, confidence high) | DN#1 R47/10-26 effective 2026-10-01 supersedes R46/01-26 (US-IN-001, effective_to 2026-09-30). |
 | `in.wh.supplemental.rate` | [[FACT:in.wh.supplemental.rate=2.95]] % | 2026-01-01 to 2026-12-31 | US-INS5-007 (Indiana Department of Revenue; A.2, derived arithmetically, confidence high) | Flat state rate plus county rate, no exemptions; Indiana does not follow IRC 3402(n). |
 
-Source of the 2027 rate [[GAP:RQ-209]]: the 2027 value of [[FACT:in.pit.rate=2.90]]% (table above) is configured from the DOR page [US-INS5-009]; the statute IC 6-3-2-1 was not read.
+Source of the 2027 rate [[GAP:RQ-209]]: the 2027 value of [[FACT:in.pit.rate=2.90]]% (table above) is configured from the DOR page [US-INS5-009]; the statute IC 6-3-2-1 was not verified against the official source.
 
-Not configured in this release [[GAP:RQ-210]]: IRC conformity date and HSA/s.125/transit departures not read.
+Not configured in this release [[GAP:RQ-210]]: IRC conformity date and HSA/s.125/transit departures not verified against the official source.
 
 ## IN.2b Non-resident regime and reciprocity
 
@@ -65,12 +65,12 @@ No SDI/TDI/PFML/LTC/transit/workforce levy [US-INR3-002, US-KYR3-003, US-OWN-007
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
 | `in.sui.employee.rate` | [[FACT:in.sui.employee.rate=0]] % | 2026-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence high) | Derivation recorded in register row US-INS5-014. |
-| `in.sui.employer.rate.max` | [[FACT:in.sui.employer.rate.max=7.4]] % | 2026-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence medium) | Good standing; a delinquent maximum rate applies; penalty rate computed + 2% [US-INS5-015 partial]. 2026 solvency surcharge/schedule not obtained. [[GAP:RQ-211]] |
+| `in.sui.employer.rate.max` | [[FACT:in.sui.employer.rate.max=7.4]] % | 2026-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence medium) | Good standing; a delinquent maximum rate applies; penalty rate computed + 2% [US-INS5-015 partial]. The 2026 solvency surcharge and schedule are not stated in this source. |
 | `in.sui.employer.rate.min` | [[FACT:in.sui.employer.rate.min=0.5]] % | 2026-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence medium) | [[FACT:in.sui.wage_base=9,500]] x [[FACT:in.sui.employer.rate.min=0.50]]% = 47.50 (table check). |
 | `in.sui.new_employer.rate` | [[FACT:in.sui.new_employer.rate=2.5]] % | 2026-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence medium) | First 4 calendar years; construction: the lesser of a statutory rate and the construction average; government employers: their own rate [US-IN-003]. |
-| `in.sui.wage_base` | [[FACT:in.sui.wage_base=9,500]] USD | 2011-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence medium) | Not indexed; no 2026-labelled DWD page; IC 22-4-4-2 not read. |
+| `in.sui.wage_base` | [[FACT:in.sui.wage_base=9,500]] USD | 2011-01-01 to open | US-INS5-014 (Indiana Department of Workforce Development; A.2, derived arithmetically, confidence medium) | Not indexed; no 2026-labelled DWD page; IC 22-4-4-2 not verified. |
 
-Not configured in this release [[GAP:RQ-211]]: 2026 solvency surcharge, applied-rate schedule and a 2026-labelled wage base not obtained (partial row).
+Not configured in this release [[GAP:RQ-211]]: 2026 solvency surcharge, applied-rate schedule and a 2026-labelled wage base not verified against the official source (partial row).
 
 ## IN.4 Pay statement
 
@@ -90,7 +90,7 @@ Not configured in this release [[GAP:RQ-212]]: IC 22-2-2-8 binds only employers 
 | `in.report.w2.efile_threshold` | [[FACT:in.report.w2.efile_threshold=25]] statements | 2026-01-01 to open | US-INS5-011 (Indiana Department of Revenue; A.2, direct artifact inspection, confidence high) |  |
 | `in.report.wh.wh1` | [[FACT:in.report.wh.wh1=WH-1 via INTIME (online or upload < 10 MB) or SFTP; annual if monthly average <= 83.33, monthly if <= 1,000 (30 days after month end), early filer above]] | 2026-01-01 to open | US-INS5-010 (Indiana Department of Revenue; A.2, quoted from authority page, confidence medium) |  |
 
-Not configured in this release [[GAP:RQ-213]]: WH-1/WH-3 XML schema IDORWTH2016V1.0 and business rules not downloaded; EFW2 guide labelled 2025 and prior.
+Not configured in this release [[GAP:RQ-213]]: WH-1/WH-3 XML schema IDORWTH2016V1.0 and business rules not verified against the official source; EFW2 guide labelled 2025 and prior.
 
 ## IN.6 Leave
 
@@ -111,7 +111,7 @@ Not configured in this release [[GAP:RQ-215]]: No payout statute; case law (seco
 
 ## IN.8 Benefits in kind and taxable wages
 
-Federal AGI start; withholding duty follows federal duty [US-INS5-012]. IRC conformity date and HSA/s.125/transit departures not read (low confidence).
+Federal AGI start; withholding duty follows federal duty [US-INS5-012]. IRC conformity date and HSA/s.125/transit departures not verified against the official source (low confidence).
 
 ## IN.9 Deductions and garnishments
 
@@ -122,7 +122,7 @@ Federal AGI start; withholding duty follows federal duty [US-INS5-012]. IRC conf
 | `in.garn.child_support.employer_fee` | [[FACT:in.garn.child_support.employer_fee=2]] USD | 2026-01-01 to open | US-INS5-017 (Indiana Department of Child Services, Child Support Bureau; A.3, quoted from authority page, confidence high) | IC 31-16-15: start first period within 14 days after service; remit INSCCU each payday; 50+ employees with >1 order electronic; priority except current taxes; lump sums subject to arrears. |
 | `in.garn.creditor.max_percent` | [[FACT:in.garn.creditor.max_percent=25]] % | 2026-01-01 to open | US-INS5-017 (Indiana Department of Child Services, Child Support Bureau; A.3, quoted from authority page, confidence high) | Statute moved to IC 37-2-6-4 (P.L.115-2026; effective date: see the open point in this section) [US-INS5-020]. |
 
-Not configured in this release [[GAP:RQ-216]]: IC 37-2-6-4 text, effective date and any employer fee not read.
+Not configured in this release [[GAP:RQ-216]]: IC 37-2-6-4 text, effective date and any employer fee not verified against the official source.
 
 Not configured in this release [[GAP:RQ-585]]: The effective date of the move of the garnishment limit to IC 37-2-6-4 is not established from an official source.
 

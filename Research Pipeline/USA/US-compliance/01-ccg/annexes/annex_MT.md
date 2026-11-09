@@ -38,10 +38,10 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mt.labour.overtime.computer_employee_threshold.hourly` | [[FACT:mt.labour.overtime.computer_employee_threshold.hourly=27.63]] USD | 2026-01-01 | open | US-MTS5-006 (A.1, Montana Legislature (MCA 2025)) | fixed in statute |
 | `mt.labour.pay_timing.max_business_days_after_due` | [[FACT:mt.labour.pay_timing.max_business_days_after_due=10]] days | 2009-10-01 | open | US-MTS5-001 (A.1, Montana Legislature (MCA 2025)) | semimonthly presumed if no period established |
 | `mt.labour.direct_deposit.consent_required` | [[FACT:mt.labour.direct_deposit.consent_required=True]] | 2009-10-01 | open | US-MTS5-001 (A.1, Montana Legislature (MCA 2025)) | cannot be required |
-| `mt.labour.late_wage_penalty.max` | [[FACT:mt.labour.late_wage_penalty.max=110]] percent | 2026-01-01 | open | US-MTS5-019 (A.1, Montana Legislature (MCA 2025)) | 39-3-206; DLI applies 55% under ARM 24.16.7566 (rule not read) |
+| `mt.labour.late_wage_penalty.max` | [[FACT:mt.labour.late_wage_penalty.max=110]] percent | 2026-01-01 | open | US-MTS5-019 (A.1, Montana Legislature (MCA 2025)) | 39-3-206; DLI applies 55% under ARM 24.16.7566 (rule not verified) |
 
-- Not yet published (expected autumn 2026, before the 2027-01-01 effective date) [[GAP:RQ-065]]: The 2027 Montana minimum wage is derived only; the Department of Labor and Industry's 2027 notice could not be read. The 2027 rate is not written and must not be configured.
-- Not configured in this release [[GAP:RQ-066]]: The paycard rules, the written-authorisation rule for deductions and the wage-and-hour record retention period were not read (the state rules site was unreachable).
+- Not yet published (expected autumn 2026, before the 2027-01-01 effective date) [[GAP:RQ-065]]: The 2027 Montana minimum wage is derived only; the Department of Labor and Industry's 2027 notice is not verified against the official source. The 2027 rate is not written and must not be configured.
+- Not configured in this release [[GAP:RQ-066]]: The paycard rules, the written-authorisation rule for deductions and the wage-and-hour record retention period were not verified against the official source.
 
 ## MT.2 Income tax withholding
 
@@ -124,7 +124,7 @@ Rules:
 | `mt.report.ui.quarterly_due` | [[FACT:mt.report.ui.quarterly_due=Apr 30; Jul 31; Oct 31; Jan 31]] | 2025-07-01 | open | US-MTS5-025 (A.3, Montana Department of Labor and Industry, Unemployment Insurance Division) | electronic mandatory from 2025-07-01 |
 | `mt.newhire.report_days` | [[FACT:mt.newhire.report_days=20]] days | 2026-01-01 | open | US-MTS5-012 (A.1, Montana Legislature (MCA 2025)) | DPHHS; electronic twice a month 12-16 days apart |
 
-- Not configured in this release [[GAP:RQ-068]]: UI quarterly report file format not obtained.
+- Not configured in this release [[GAP:RQ-068]]: UI quarterly report file format not verified against the official source.
 
 ## MT.6 Leave
 
@@ -133,7 +133,7 @@ Rules:
 | `mt.leave.vacation.payout_at_separation` | [[FACT:mt.leave.vacation.payout_at_separation=True]] | 2026-01-01 | open | US-MTS5-018 (A.3, Montana Department of Labor and Industry, Office of Administrative Hearings) | accrued vacation is wages, cannot be forfeited (Langager v. Crazy Creek, 1998 MT 44) - read via DLI decision only (A.3) |
 | `mt.leave.sick.state_statute.exists` | [[FACT:mt.leave.sick.state_statute.exists=False]] | 2026-01-01 | open | US-MTP52-002 (A.1, Montana Legislature (MCA)) | no private-sector statute |
 
-- Not configured in this release [[GAP:RQ-069]]: Public-employee sick leave (2-18-618) and child-labour hours not read.
+- Not configured in this release [[GAP:RQ-069]]: Public-employee sick leave (2-18-618) and child-labour hours not verified against the official source.
 - Not configured in this release [[GAP:RQ-070]]: The Langager v. Crazy Creek decision was read only through the Department of Labor and Industry's decision, not in the court's own text.
 
 ## MT.7 Termination and final pay
@@ -149,7 +149,7 @@ Rules:
 
 - Income-tax withholding follows federal: "if a class of employment or service is subject to wage withholding for federal purposes, it is also subject to Montana wage withholding". (US-MTS5-005)
 
-- Not configured in this release [[GAP:RQ-071]]: Income-tax departures from the federal exclusions (HSA, cafeteria plans, transit) were not checked in the statute.
+- Not configured in this release [[GAP:RQ-071]]: Income-tax departures from the federal exclusions (HSA, cafeteria plans, transit) were not verified in the statute.
 
 ## MT.9 Deductions and garnishments
 

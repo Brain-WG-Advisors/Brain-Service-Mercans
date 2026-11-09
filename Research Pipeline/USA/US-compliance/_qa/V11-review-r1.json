@@ -1,0 +1,192 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "V11-package",
+ "round": 1,
+ "verdict": "FAIL",
+ "reviewed_on": "2026-11-06",
+ "_scope": "US v1.1 package review, round 1 of 3: CCG docx, WTC, DD, SIR and the 20 RSPEC workbooks (24 files). `artifact` is CCG only because the schema takes one id; the findings cover all five artifacts.",
+ "_reviewer": "compliance-qa-auditor (independent; did not build v1.1)",
+ "_built_by": "artifact-builder (2 passes, 2026-11-06)",
+ "_reviewed_files": "md5 of all 26 entries in _pipeline/V11-md5.txt re-checked: OK (CCG 1cce7c66..., WTC 0bcfda82..., SIR 3fc61d2e..., DD e3953913..., 20 RSPEC). Compared against the _v1.0/ copies cell by cell (xlsx, openpyxl) and paragraph by paragraph (docx, python-docx text dump).",
+ "_verdict_basis": "There are 0 blockers, 8 majors and 12 minors. The schema allows no 'PASS with comments', so the verdict is FAIL. Excluded as instructed: C43 (manifest still at 1.0) and RQ-598 / RQ-40 on their own.",
+ "findings": [
+  {
+   "pattern": null, "severity": "major", "pass": "P2",
+   "location": {"file": "00-official-sources/legal-basis-register.csv", "sheet_or_section": "rows US-CAV6-002, US-FEDV6-042, US-CAV6-008, US-FLV6-001 (also US-FLV6-002, US-NYV6-004)", "cell_or_line": "column effective_from"},
+   "problem": "The gap merge gave 74 rows a default effective_from of 2026-01-01 with the note 'in force for the whole build year'. In a sample of 25 checked against the saved copies, 4 are wrong. US-CAV6-002 carries the 2027 SDI rate 1.4% (CA/edd-tax-rated.txt: 'The SDI withholding rate for 2027 is 1.4 percent'). US-FEDV6-042 is a PROPOSED regulation published 2026-09-08 (IRB 2026-37), so it is not in force. US-CAV6-008 records a bill that died on 2026-01-31, so nothing is in force. US-FLV6-001 is FL RT XML version 2026_1.0, dated 2026-09-28 (FL/RT_changes_2026-summary.txt). The saved copies do not support 2 more: US-FLV6-002 (ch. 2026-52 amendment; the copy shows only the history line) and US-NYV6-004 (IT-225-I is the TY2025 edition). Result: 4 wrong + 2 unsupported = 6 of 25 (24%). The other 19 are correct for 2026 but drop an earlier date that the saved copy shows (e.g. US-CAV6-009 DE 8300 Rev. 12 (7-24); US-NYV6-005 revision 2024-03-15; US-ILV6-001 text of P.A. 104-468 eff. 6-16-26; US-TXV6B-001 amended eff. 2025-05-27; US-OHV6-001 9,000 from 2020-01-01).",
+   "expected": "US-CAV6-002: effective_from 2027-01-01, or split it into a 2026 row (1.3%) and a 2027 row (1.4%). US-FEDV6-042: status 'proposed', with no 'in force' note and the publication date 2026-09-08. US-CAV6-008: status 'not enacted', dated 2026-01-31. US-FLV6-001: effective_from 2026-09-28. US-FLV6-002 and US-NYV6-004: the date the source shows, or a stated limitation. Then re-check the 49 rows not sampled the same way.",
+   "register_id": "US-CAV6-002", "action": "routed_to_source_hunter",
+   "evidence": "register read with csv; saved copies 00-official-sources/ccg-sources/{CA,FED,FL,NY,IL,TX,MI,OH,NC,PA}; sample of 25: FEDV6-014,-015,-041,-042; CAV6-001,-002,-008,-009; FLV6-001,-002; NYV6-001,-004,-005; NYV6B-001; ILV6-001,-002; ILV6B-002; OHV6-001,-004; TXV6-001; TXV6B-001; MIV6-001; NCV6-007,-008; PAV6B-003",
+   "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P2",
+   "location": {"file": "_research/validation/V11-gap-merge.md", "sheet_or_section": "Register merge", "cell_or_line": "effective_from bullet"},
+   "problem": "The merge log says 75 rows got the default 2026-01-01. The register holds 74 rows with the note 'enactment date not transcribed'.",
+   "expected": "Name the 75th row, or correct the log to 74.",
+   "register_id": null, "action": "routed_to_source_hunter", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P2",
+   "location": {"file": "00-official-sources/legal-basis-register.csv", "sheet_or_section": "rows US-FEDV6-022, US-OHV6B-002; US-OHV6-001..004 vs US-OHV6B-003/004", "cell_or_line": "column authority"},
+   "problem": "All 57 renamed authorities were checked against the shard originals (00-official-sources/_register-shards/S6V-*.csv), and 2 are wrong. US-FEDV6-022 became 'Social Security Administration', but the instrument is IRS Publication 957 on irs.gov (FED/FED_irs-p957.txt is the IRS coversheet). US-OHV6B-002 became 'Ohio General Assembly (codes.ohio.gov)', but its URL is legislature.ohio.gov (SB 396 status). The merge also leaves two spellings for the same codes.ohio.gov host: 'Ohio Legislative Service Commission (codes.ohio.gov)' (OHV6-001..004) and 'Ohio General Assembly (codes.ohio.gov)' (OHV6B-003/004).",
+   "expected": "US-FEDV6-022: 'Internal Revenue Service'. US-OHV6B-002: 'Ohio General Assembly' (legislature.ohio.gov). One spelling for all codes.ohio.gov rows.",
+   "register_id": "US-FEDV6-022", "action": "routed_to_source_hunter", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "major", "pass": "P4",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex GA: Georgia, parameter table", "cell_or_line": "rows ga.live.gdol_rules_2026 and ga.report.sui.efile_threshold_employees (text lines ~5751, ~5798)"},
+   "problem": "Two GA rows still describe the all-employer e-file rule as unadopted. ga.live.gdol_rules_2026 (2026-10-07 to open) says '... proposed all-employer DOL-4N e-file; adopted text/effective date not verified'. The note on ga.report.sui.efile_threshold_employees says 'Proposed all-employer mandate (300-2-2-.02(6)) adoption unconfirmed.' Other parts of the same annex (ga.report.sui.efile_all_employers, US-GAV6B-001), m11 Table 11.1.1 and the SIR say the rule was adopted, effective 2026-08-09. The saved GA/rule-300-2-2-02.txt reads 'Amended: F. July 20, 2026; eff. Aug. 9, 2026.'",
+   "expected": "Restate both rows: Rule 300-2-2-.02(6)(a) is adopted (filed 2026-07-20, eff. 2026-08-09, US-GAV6B-001), and the 25-employee threshold applies to filings up to 2026-08-08.",
+   "register_id": "US-GAV6B-001", "action": "routed_to_source_hunter", "fact_key": "ga.live.gdol_rules_2026", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P2",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex GA: Georgia, parameter table", "cell_or_line": "row ga.oracle.guide.example1.withholding (line ~5815)"},
+   "problem": "The oracle value 27.03 is dated '2026-01-01 to open', but it was computed with the parameters that apply from 2026-05-11 (1,250 semimonthly MFJ deduction, 4.99%). m12 and example GA-1 are already pinned 'from 2026-05-11'.",
+   "expected": "Set effective_from 2026-05-11 on the oracle fact.",
+   "register_id": "US-GAS5-001", "action": "routed_to_source_hunter", "fact_key": "ga.oracle.guide.example1.withholding", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P2",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex GA: Georgia", "cell_or_line": "parameter row ga.wh.std_deduction.mfj 24,000, note (line ~5716); 'Withholding transition (HB 463)' paragraph (line ~5704)"},
+   "problem": "In the note, 'semiannual [[FACT:ga.wh.std_deduction.single=12,000]]' tags the semiannual MFJ amount as the single standard deduction: the number is the same, the meaning is different. In the transition paragraph, 'new rate of 4.99%' (withholding) is tagged ga.pit.rate.flat, which is the assessment key.",
+   "expected": "Leave the semiannual figure untagged or bind it to a per-period key. Tag the withholding rate as ga.wh.rate.",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": "F18", "severity": "major", "pass": "P2",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex GA: Georgia, parameter table", "cell_or_line": "row ga.minwage.state.exemptions (line ~5801)"},
+   "problem": "This new v1.1 fact rests on the existing-law text reproduced in SB 24 (2021-22), a bill that was never enacted. The printed value says '2026 currency not independently confirmed'. A 2021 bill reprint is not evidence of current law (F18), and the caveat is research wording in a deliverable.",
+   "expected": "Cite the current O.C.G.A. 34-4-3 text from the official code and restate the exemptions as a rule, without the caveat.",
+   "register_id": "US-GAV6B-002", "action": "routed_to_source_hunter", "fact_key": "ga.minwage.state.exemptions", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P4",
+   "location": {"file": "03-statutory-integrations/US-SIR-INDEX-001-v1.1.docx", "sheet_or_section": "Section 7, row US-UI-001-GA", "cell_or_line": "hand-off cell (text line ~392)"},
+   "problem": "Period 1 reads '(until 2026-08-08) [US-GAS5-005] (in force for 2026; the source carries no effective date)'. 'In force for 2026' contradicts 'until 2026-08-08'. The register gives US-GAS5-005 effective_from 2024-11-01, so 'no effective date' is also untrue. This is separate from RQ-40, which concerns the wording of the second period.",
+   "expected": "Drop the generic C41 parenthetical when the item has its own end date, and print '(2026-01-01 to 2026-08-08)'.",
+   "register_id": "US-GAS5-005", "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P1",
+   "location": {"file": "03-statutory-integrations/US-SIR-INDEX-001-v1.1.docx", "sheet_or_section": "Appendix A. Sources", "cell_or_line": "source table (text lines 612-952)"},
+   "problem": "Two register ids cited in the body are missing from Appendix A. US-GAS5-005 is cited in the US-UI-001-GA row; v1.0 listed it, v1.1 dropped it. US-TXV6-005 is cited in the Texas enhanced-content row.",
+   "expected": "Add US-GAS5-005 and US-TXV6-005 to Appendix A.",
+   "register_id": "US-TXV6-005", "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "major", "pass": "P2",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex NY: New York, NY.2", "cell_or_line": "paragraph 'Method II exact calculation, New York State [US-NYV7-001]' (line ~9607)"},
+   "problem": "NY.2 says quarterly and semiannual payrolls 'have no Method II table in the publication and are not derived (documented limitation)'. The same paragraph quotes the publication's own conversion rule ('Other periods: convert via a factor ... (p.23)'). NYS-50-T-NYS (1/26) p.23 'Conversion of Tables' gives the official method, including the quarterly case: 'B. Using the monthly table for quarterly payrolls ... factor of 3 ... Multiply the monthly withholding amount by 3' (saved nys50t-nys-1-26.txt lines 1818-1848). The stated limitation therefore contradicts a source already on disk. The change-log rows repeat 'no published table'. This is RQ-598; it is not failed on its own, but the source that closes it is already saved.",
+   "expected": "Close RQ-598 from p.23: quarterly = monthly table result x 3; semiannual by the general rule A (monthly x 6); NYC the same way. Then reword NY.2 and the change-log rows.",
+   "register_id": "US-NYV7-001", "action": "routed_to_source_hunter", "fact_key": "ny.wh.method2.quarterly_semiannual.tables", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "major", "pass": "P1",
+   "location": {"file": "04-reports-spec (19 workbooks: every *-v1.1-Spec.xlsx except US-UI-001)", "sheet_or_section": "Version Control", "cell_or_line": "D14"},
+   "problem": "In 19 of the 20 specs, the 1.1 change-log row claims 'GA: UI wage-report e-filing ...; TX: Labor Code 204.0025 ...; All jurisdictions: fact wording restated as rules'. A cell-by-cell diff against _v1.0 shows that, apart from Version Control, the only change in those 19 workbooks is Report Matrix!B18 (issue date 2027-03-31 -> 2026-11-06). The GA and TX changes exist only in US-UI-001.",
+   "expected": "In the 19 workbooks: 'Package version 1.1; issue date 2026-11-06; no content change in this specification.' In US-UI-001: keep the GA/TX text and add the Population Rules renumbering (rows 45-52).",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "major", "pass": "P1",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Version Control", "cell_or_line": "row 1.1 (text line 23)"},
+   "problem": "The row says 'All jurisdictions: fact wording restated as rules (research-process wording removed from the published text)'. The v1.1 text still has 156 lines with 'not read' (214 in v1.0) and 25 with 'not checked', including the pilot annexes: TX ~12445 ('the TWC records-retention rule was not read'); OH ~10835, ~10890, ~10893; IL ~6350, ~6374; MI ~7521; GA ~5780; FL ~5641; DC '(214-page text not read)'. Process wording also remains inside pilot fact values: ca.report.de9c.file_format ('a newer revision was not checked'), nc.ui.wage_base.derivation ('not obtained ... not re-derived here') and tx.ui.wages.401k_section125 ('TWC guidance not obtained').",
+   "expected": "Either scope the claim to what was actually done (e.g. 'research-process wording reduced in restated facts and the 21 curated limitations') or complete the clean-up. Route the 3 pilot fact values to the source-hunter.",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": "F27", "severity": "major", "pass": "P5",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex OK: Oklahoma; Annex VT: Vermont (parameter tables)", "cell_or_line": "rows ok.pit.wh.married.annual.thresholds (line ~10984); vt.bik.vt_saves.penalty.max_per_employee (lines ~13101-13102)"},
+   "problem": "Unlogged regression from v1.0. In build 2 the note-collision guard dropped notes that v1.0 printed (01-ccg/_build-annex-NY-WY/dropped-notes.json against the v11-build2-pre backup). The OK married base amounts '57.50 at 22,500; 218.50+4.5% above 27,100' are gone; OK.2 gives only thresholds, so the married base tax is no longer in the CCG. Both VT Saves penalty notes are gone ('Maximum penalty per covered employee through 2026-09-30 (3 V.S.A. 535)' / 'Per covered employee per calendar year from 2026-10-01'). The trigger is collisions with the 550 new NY per-period values.",
+   "expected": "Restore the three notes, either by binding 57.50 and 218.50 to their own keys or by excluding NY per-period values from the guard for OK/VT notes. Log any content change in the change log.",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "major", "pass": "P2",
+   "location": {"file": "_research/CCG-annex_WI-facts.json", "sheet_or_section": "wi.minwage.tipped.cash_wage; wi.labour.lodging_credit.weekly", "cell_or_line": "note (lines 63, 78); printed in 01-ccg/US-CCG-001-v1.1.docx Annex WI parameter table (line ~13459)"},
+   "problem": "To get past the note-collision guard, the statutory amounts 2.13 (opportunity cash wage) and 4.15 (meal credit) were rewritten as words: 'two dollars thirteen cents' and 'four dollars fifteen cents' (V11-facts-fix item 4). They are still figures, but no tag binds them now, so C46 and F44 cannot see them. A number spelled out in words still needs a register_id.",
+   "expected": "Bind each figure to its own fact key with a register_id (e.g. wi.minwage.opportunity.cash_wage = 2.13 and wi.labour.meal_credit.per_meal = 4.15, US-WIS5-002 / US-WIS5-001) and print them as numbers.",
+   "register_id": "US-WIS5-002", "action": "routed_to_source_hunter", "fact_key": "wi.minwage.tipped.cash_wage", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P1",
+   "location": {"file": "02-wtc/US-WTC-001-v1.1.xlsx", "sheet_or_section": "Version Control", "cell_or_line": "D14"},
+   "problem": "The row claims 'MI: 2026 PA 39 cited', but no WTC cell cites 2026 PA 39 or US-MIV6-002. Against _v1.0, the Wage Type Catalogue changes are in rows 52, 201, 210, 231, 383, 431, 471 and 509-511, plus the spec file names in the Form Reference Guide. The OR transit wording (509-511) and the renamed spec files are not listed.",
+   "expected": "Remove the MI item. Add 'OR transit rows: wording' and 'Form Reference Guide: spec file names v1.1'.",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P1",
+   "location": {"file": "05-data-dictionary/US-DD-001-v1.1.xlsx", "sheet_or_section": "Version Control", "cell_or_line": "D14"},
+   "problem": "The row claims 'All jurisdictions: fact wording restated as rules', but the only DD content changes are Country Fields W40, W41, W42, W44 and W49 (TX caveat and 'US-UI-001 v1.1').",
+   "expected": "Limit the row to the TX caveat and the v1.1 references.",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P1",
+   "location": {"file": "03-statutory-integrations/US-SIR-INDEX-001-v1.1.docx", "sheet_or_section": "Version history", "cell_or_line": "row v1.1"},
+   "problem": "Two v1.1 changes are not logged. In the section 5 'State workforce / unemployment insurance agencies' row (text line ~81), the GA example was dropped and ND (sir.nd.ui.wage_report) was added. In US-UI-001-GA, 'Closes with' changed from RSPEC-GAP-009 to the generic real-filing wording.",
+   "expected": "Add both changes to the v1.1 row.",
+   "register_id": null, "action": "routed_to_builder", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P4",
+   "location": {"file": "05-data-dictionary/US-DD-001-v1.1.xlsx", "sheet_or_section": "Country Fields", "cell_or_line": "W40, W41, W42, W44, W49"},
+   "problem": "Each of these cells says '[dd.tx.ui.enhanced] ... (in force for 2026; the source carries no effective date)' and then, in the same cell, 'proposed only ... not mandatory for Texas'. The generic parenthetical contradicts the caveat. Column H stays 'CM' with the precondition 'The State wage report asks for ...', which is correct: no TX field is flagged mandatory.",
+   "expected": "Suppress the generic C41 parenthetical for dd.tx.ui.enhanced, which is proposed and not in force.",
+   "register_id": "US-TXV6-005", "action": "routed_to_builder", "fact_key": "dd.tx.ui.enhanced", "_owner": "artifact-builder"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P3",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex TX: Texas, parameter table", "cell_or_line": "row tx.report.ui.enhanced_fields.status (line ~12461)"},
+   "problem": "The note ends with a work instruction: 're-check adopted-rules issues from November 2026'. The printed value describes the research steps instead of the rule: 'Not adopted in the Texas Register adopted-rules issues of 2026-09-25 to 2026-10-30: on 2026-11-02 ...'.",
+   "expected": "State the rule: 'Proposed (51 TexReg 5161, 2026-08-07); not adopted as of 2026-11-06; no field mandatory and no start quarter.' Move the monitoring instruction to the bulletin sweep.",
+   "register_id": "US-TXV6-005", "action": "routed_to_source_hunter", "fact_key": "tx.report.ui.enhanced_fields.status", "_owner": "compliance-source-hunter"
+  },
+  {
+   "pattern": null, "severity": "minor", "pass": "P5",
+   "location": {"file": "01-ccg/US-CCG-001-v1.1.docx", "sheet_or_section": "Annex CA: California (CA.2) and Annex PA: Pennsylvania (PA.2)", "cell_or_line": "withholding method paragraphs"},
+   "problem": "Two validation findings are not carried into v1.1. validacao-estados/compare/FINDINGS.md V-07 asks CA.2 to cite DE 44 Rev. 52 p.45 ('may determine the amount ... for an annual payroll period and prorate the tax back') as a Design choice. V-06 asks PA.2 to record the voluntary H-2A additional-withholding point. The CA annex has no 'prorate' text, and the PA annex does not cover H-2A voluntary withholding.",
+   "expected": "Add both as named open Design choices with the source quote, or record why they were not taken.",
+   "register_id": null, "action": "routed_to_source_hunter", "_owner": "compliance-source-hunter"
+  }
+ ],
+ "checks_run": ["C11", "C12", "C29", "C30", "C41", "C43", "C46", "C48", "C49", "C50"],
+ "_checks_note": "C48/C49/C50 were run by me (content_checks.py --checks C48,C49,C50). Each FAILs with 1 problem, and each is the accepted v1.0 exemption, not a new defect: C48 = WTC US-051 code TA from 2026-07-04; C49 = KW-100 in the CCG; C50 = WTC US-126. C43 was not counted, as instructed. C11/C12/C29/C30/C41/C46 were inspected through the builder's logs and spot-greps (C29: 0 markers in the CCG/SIR text); I did not re-run them in full.",
+ "manual_review_items": [
+  "C49 exemption scope: build-manifest validation_exemptions.C49 names '01-ccg/US-CCG-001-v1.0.docx table 206 r11c2 only'. In v1.1 the same KW-100 item sits at US-CCG-001-v1.1.docx table 207 r11c2 (one table was added before it). This is the same accepted item, but the owner should update the scope when bumping the manifest. I did not write it (owner decision, F68).",
+  "NY.2 spot-check (focus 4): 60+ values checked against nys50t-nys-1-26.txt and NY_DTF_NYS-50-T-NYC_1-26: NYS Table A/B/C allowances for all 6 periods, single and married; weekly II-A single lines 1-10 and married lines 1-12; biweekly II-B lines 1-7; semimonthly II-C single 1-10 and married 1-12; NYC allowances for all periods; NYC II-C and II-D lines 1-6. 0 mismatches.",
+  "TX Labor Code 204.0025 (focus 5): marked 'not mandatory' in RSPEC UI-001 (F171 = C, G171 'Proposed only', Population Rules D45), DD (H = CM; W cells carry the caveat), SIR (row caveat) and CCG TX annex. No mandatory flag was found. One wording contradiction is listed as a finding (DD W40-W49).",
+  "GA (focus 3): the split at 2026-05-11 is consistent in m06 6.1 (Flat rate row), m11 Table 11.1.1, annex GA (rate, standard deductions, dependent allowance, method in both periods) and WTC row 383 (D383, both periods). The GA e-file rule from 2026-08-09 is consistent in m11 (line ~1851), RSPEC UI-001 row 70 and SIR US-UI-001-GA. Stale notes are listed as findings.",
+  "RQ-598 (NY quarterly/semiannual gap entry) and RQ-40 (GA SIR value from 2026-08-09) are still open with the source-hunter and were not failed on their own. RQ-598 can be closed from p.23 of the saved NYS-50-T-NYS (see finding).",
+  "C5 / C6 / C7 not run in this round (scope limited to the v1.1 delta)."
+ ],
+ "numeric_verification": {
+  "facts_total": 4793,
+  "facts_verified": 103,
+  "unverified_keys": ["ALL_OTHER_CCG_FACT_KEYS (4,690): out of scope for the v1.1 delta review; the builder's F44/tag_sync (0 stale) were accepted as evidence, not re-done"],
+  "method": "Checked offline against the saved source copies, not by live WebFetch. One WebFetch of rules.sos.ga.gov (US-GAV6B-001) returned JS shell only, so the saved GA/rule-300-2-2-02.txt was used. Verified: 25 register rows (effective_from), 57 authority renames, 60+ NY Method II values, 8 GA withholding parameters and the GA e-file date, 3 C48-C50 items."
+ },
+ "propagation": [
+  {"fact": "ga.live.gdol_rules_2026", "consumed_by": ["CCG/annex_GA", "SIR", "RSPEC/US-UI-001"], "resynced": false, "register_id": "US-GAS5-021"},
+  {"fact": "ga.report.sui.efile_threshold_employees", "consumed_by": ["CCG/annex_GA", "CCG/m11", "RSPEC/US-UI-001", "SIR"], "resynced": false, "register_id": "US-GAS5-005"},
+  {"fact": "ga.oracle.guide.example1.withholding", "consumed_by": ["CCG/annex_GA", "CCG/m12", "_validation"], "resynced": false, "register_id": "US-GAS5-001"},
+  {"fact": "ny.wh.method2.quarterly_semiannual.tables", "consumed_by": ["CCG/annex_NY", "WTC", "_validation"], "resynced": false, "register_id": "US-NYV7-001"},
+  {"fact": "wi.minwage.tipped.cash_wage", "consumed_by": ["CCG/annex_WI", "WTC", "PSL"], "resynced": false, "register_id": "US-WIS5-002"},
+  {"fact": "ok.pit.wh.married.annual.thresholds", "consumed_by": ["CCG/annex_OK", "WTC"], "resynced": false, "register_id": "US-OK-001"},
+  {"fact": "ca.sdi.employee.rate", "consumed_by": ["CCG/annex_CA", "WTC", "RSPEC/US-PFML-001"], "resynced": false, "register_id": "US-CAV6-002"},
+  {"fact": "dd.tx.ui.enhanced", "consumed_by": ["DD", "RSPEC/US-UI-001", "SIR"], "resynced": false, "register_id": "US-TXV6-005"}
+ ],
+ "cross_checks": [
+  {"name": "Change-log row 1.1 vs actual diff from _v1.0 (all 24 files)", "result": "fail", "note": "CCG: overclaims removal of research wording, and 3 note removals are not logged. RSPEC: 19 of 20 rows claim changes that do not exist. WTC: MI item claimed without a change. DD: 'All jurisdictions' claimed. SIR: 2 changes not logged."},
+  {"name": "GA split 2026-05-11: m06 x annex GA x WTC", "result": "pass", "note": "Values and dates are identical in all three; stale e-file notes are reported separately."},
+  {"name": "GA e-file from 2026-08-09: m11 x SIR x RSPEC UI-001", "result": "pass", "note": "Date and rule are identical. The SIR period-1 parenthetical is wrong (minor)."},
+  {"name": "NY.2 per-period tables vs NYS-50-T-NYS / NYC (1/26)", "result": "pass", "note": "60+ values, 0 mismatches."},
+  {"name": "TX 204.0025 not mandatory: CCG x RSPEC x DD x SIR", "result": "pass", "note": "Not mandatory everywhere; one DD wording contradiction."},
+  {"name": "C48/C49/C50 = accepted v1.0 exemptions", "result": "pass", "note": "Same 3 items; the C49 location moved from table 206 to 207."}
+ ],
+ "_next_action": "artifact-builder and compliance-source-hunter fix the routed findings -> round 2 (2 rounds left)"
+}

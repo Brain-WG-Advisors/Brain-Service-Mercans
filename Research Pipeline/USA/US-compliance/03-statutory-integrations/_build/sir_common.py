@@ -14,6 +14,11 @@ import csv
 import glob
 import json
 import os
+import sys as _sys_dw
+_DW_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "01-ccg", "_build", "common"))
+if _DW_DIR not in _sys_dw.path:
+    _sys_dw.path.insert(0, _DW_DIR)
+import deliverable_wording as DW  # noqa: E402  v1.1 QA r1: deliverable wording + effective-period status
 import re
 import sys
 
@@ -126,6 +131,8 @@ def cite_f(f):
 
 def eff_f(f):
     a, b = f.get("effective_from"), f.get("effective_to")
+    if DW.period_status(f) or (f.get("_effective_from_basis") and b):      # v1.1 QA r1: proposed / historical / own end date
+        return DW.period_wording(f, "")
     if f.get("_effective_from_basis"):
         return f"in force for {YEAR}; the source carries no effective date"
     if a and b:
@@ -184,20 +191,24 @@ def usable(key, period=None):
     return True, None
 
 
-C41_KEYS = {"rspec.me.wh_return.form", "sir.nj.withholding.agent_authorization", "sir.dc.withholding.agent_authorization",
-            "sir.tx.ui.agent_authorization", "rspec.fed.form940.due", "rspec.fed.futa.credit_reduction.states"}
+C41_KEYS = {"sir.ga.ui.wage_report", "rspec.me.wh_return.form", "sir.nj.withholding.agent_authorization", "sir.dc.withholding.agent_authorization",
+            "sir.tx.ui.agent_authorization", "rspec.fed.form940.due", "rspec.fed.futa.credit_reduction.states",
+            "ga.report.sui.efile_all_employers"}   # v1.1: GA all-employer e-filing from 2026-08-09
 TY2025_GAP = {"rspec.fed.form940.due": "rspec.fed.form940.due.ty2026", "fed.aca.efile_threshold": "fed.aca.efile_threshold.ty2026"}
 
 
 def render(key, period=None, with_cite=True, with_eff=False):
     f = fact(key, period)
     t = tag(key, period)
+    dated = False
     if key in C41_KEYS:      # C41: a value that changes during the build year is printed with its date
         ef, et = str(f.get("effective_from") or ""), str(f.get("effective_to") or "")
         if ef.startswith(str(YEAR)) and ef[5:] != "01-01":
             t += f" (from {ef})"
         elif et.startswith(str(YEAR)):
-            t += f" (until {et})"
+            # v1.1 QA r1: an item with its own end date prints its own dates once, with no generic C41 wording
+            t += f" ({ef} to {et})" if ef else f" (until {et})"
+            dated = True
     u = f.get("unit_of_measure")
     if u and isinstance(f["value"], (int, float)) and not isinstance(f["value"], bool):
         if u == "days" and "business" in key:
@@ -205,7 +216,7 @@ def render(key, period=None, with_cite=True, with_eff=False):
         t += f" {u}"
     if with_cite:
         t += f" {cite_f(f)}"
-    if with_eff or f.get("effective_to"):
+    if (with_eff or f.get("effective_to")) and not dated:
         t += f" ({eff_f(f)})"
     if f44_lib.LIMITATION_KEYS.get(key):       # F27: the limitation sentence the DD prints for the same fact
         t += " " + f44_lib.LIMITATION_KEYS[key]
@@ -240,9 +251,11 @@ def pick(keys, jur=None, gap_key=None, with_cite=True, with_eff=False):
     candidate (F44 / open), else on `gap_key` (a grouped request for a missing source)."""
     first_blocked = None
     for k in keys:
-        ok, why = usable(k)
+        k, _, per = k.partition("@")       # v1.1 build 2: 'key@effective_from' selects one dated period
+        per = per or None
+        ok, why = usable(k, per)
         if ok:
-            return render(k, None, with_cite, with_eff), k
+            return render(k, per, with_cite, with_eff), k
         if why != "no_fact" and first_blocked is None:
             first_blocked = (k, why)
     if first_blocked:

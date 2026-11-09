@@ -28,7 +28,7 @@ Not configured in this release [[GAP:RQ-188]]: 45-608 does not address paycards.
 |---|---|---|---|---|
 | `id.pit.rate.flat` | [[FACT:id.pit.rate.flat=5.3]] % | 2025-01-01 to open | US-IDS5-007 (Idaho Legislature (Wayback id_ 20261025225240); A.1, direct artifact inspection, confidence high) | 63-3024 (2025 ch. 13, H 40); applies above CPI-indexed 2,500/5,000; no 2026 amendment; H0589/H0782/H0605 not enacted. |
 | `id.wh.allowance.value` | [[FACT:id.wh.allowance.value=0]] USD | 2026-01-01 to open | US-IDS5-008 (Idaho State Tax Commission (Wayback id_ 20261010115435); A.2, direct artifact inspection, confidence medium) | Child Tax Credit sunset (63-3029L); S1450 (2026) not enacted. |
-| `id.wh.certificate` | [[FACT:id.wh.certificate=federal W-4 required; Form ID W-4 (EFO00307) strongly encouraged: A Single/HoH, B Married, C Married at single rate; allowances = children 16 or under (+2 HoH)]] | 2025-04-28 to open | US-IDS5-013 (Idaho State Tax Commission (Wayback id_ 20250602053713); A.2, direct artifact inspection, confidence medium) | [partial row] Partial row: 2025 edition; 2026 edition not captured. |
+| `id.wh.certificate` | [[FACT:id.wh.certificate=federal W-4 required; Form ID W-4 (EFO00307) strongly encouraged: A Single/HoH, B Married, C Married at single rate; allowances = children 16 or under (+2 HoH)]] | 2025-04-28 to open | US-IDS5-013 (Idaho State Tax Commission (Wayback id_ 20250602053713); A.2, direct artifact inspection, confidence medium) | [partial row] 2025 edition; not verified against a 2026 edition. |
 | `id.wh.method` | [[FACT:id.wh.method=percentage computation (rounded to nearest whole dollar), annualized wage, or wage bracket (EPB00745); allowance value 0 (Idaho CTC sunset)]] | 2026-01-01 to open | US-IDS5-008 (Idaho State Tax Commission (Wayback id_ 20261010115435); A.2, direct artifact inspection, confidence high) | Tables apply prospectively, no retro catch-up. |
 | `id.wh.rounding` | [[FACT:id.wh.rounding=nearest whole dollar]] | 2026-01-01 to open | US-IDS5-008 (Idaho State Tax Commission (Wayback id_ 20261010115435); A.2, direct artifact inspection, confidence high) |  |
 | `id.wh.supplemental.rate` | [[FACT:id.wh.supplemental.rate=5.3]] % | 2026-01-01 to open | US-IDS5-008 (Idaho State Tax Commission (Wayback id_ 20261010115435); A.2, direct artifact inspection, confidence high) | Aggregate or flat [[FACT:id.wh.supplemental.rate=5.3]]% on separately issued payment. |
@@ -39,7 +39,7 @@ Not configured in this release [[GAP:RQ-188]]: 45-608 does not address paycards.
 | `id.wh.zero_bracket.single.biweekly` | [[FACT:id.wh.zero_bracket.single.biweekly=577]] USD | 2025-04-28 to 2026-07-22 | US-IDS5-012 (Idaho State Tax Commission (Wayback id_ 20260120032653); A.2, derived arithmetically, confidence high) | EPB00744 edition 04-28-2025: governs 2026 payrolls through 2026-07-22 (closed period; replaced prospectively by the 07-23-2026 edition, US-IDS5-011). |
 | `id.wh.zero_bracket.single.biweekly` | [[FACT:id.wh.zero_bracket.single.biweekly=619]] USD | 2026-07-23 to open | US-IDS5-011 (Idaho State Tax Commission (Wayback id_ 20261007091254); A.2, derived arithmetically, confidence high) | Derivation recorded in register row US-IDS5-011. |
 
-Not yet published [[GAP:RQ-189]]: Form ID W-4 2026 edition not captured (CDX lists to 04-28-2025); NRA add-ons and multiple-jobs factor (2025: [[FACT:id.wh.zero_bracket.single.annual=15,000]] and 3,868) may have changed.
+Not configured in this release [[GAP:RQ-189]]: Form ID W-4 2026 edition not verified against the official source; NRA add-ons and multiple-jobs factor (2025: [[FACT:id.wh.zero_bracket.single.annual=15,000]] and 3,868) may have changed.
 
 Not configured in this release [[GAP:RQ-190]]: STC computing page married example uses "over 32,000", matching neither EPB00744 edition.
 
@@ -65,10 +65,10 @@ No jurisdiction-specific item was recorded in the research for this domain.
 | `id.sui.new_employer.admin_component.rate` | [[FACT:id.sui.new_employer.admin_component.rate=0.0]] % | 2026-01-01 to 2026-12-31 | US-IDB5-402 (Idaho Department of Labor; A.2, quoted from authority page, confidence high) | Standard (new employer) rate [[FACT:id.sui.new_employer.rate=1.000]]%: administrative rate component 0.00000% (IDOL Rate Class Array effective 01/01/2026, row "Standard"). |
 | `id.sui.new_employer.rate` | [[FACT:id.sui.new_employer.rate=1.0]] % | 2026-01-01 to 2026-12-31 | US-IDP52-004 (Idaho Department of Labor; A.2, quoted from authority page, confidence high) | Standard: [[FACT:id.sui.new_employer.rate=1.000]]% = [[FACT:id.sui.new_employer.ui_component.rate=0.97000]]% UI + [[FACT:id.sui.new_employer.admin_component.rate=0.00000]]% admin + [[FACT:id.sui.workforce_development.rate=0.03000]]% workforce development; standard rate for at least the first six calendar quarters [US-IDS5-021]. IDOL Tax Handbook p.21: "All new employers except cost-reimbursement employers begin with the same standard unemployment insurance tax rate for at least the first six calendar quarters." |
 | `id.sui.new_employer.ui_component.rate` | [[FACT:id.sui.new_employer.ui_component.rate=0.97]] % | 2026-01-01 to 2026-12-31 | US-IDB5-402 (Idaho Department of Labor; A.2, quoted from authority page, confidence high) | Standard (new employer) rate [[FACT:id.sui.new_employer.rate=1.000]]%: UI contribution rate component [[FACT:id.sui.new_employer.ui_component.rate=0.97000]]% (IDOL Rate Class Array effective 01/01/2026, row "Standard"). |
-| `id.sui.wage_base` | [[FACT:id.sui.wage_base=58,300]] USD | 2026-01-01 to 2026-12-31 | US-IDB5-402 (ID official authority; A.2, quoted from authority page, confidence medium) | 72-1350: AAW of penultimate year rounded to 100 or FUTA if higher [US-IDS5-014]; not re-derived from the average annual wage; figure rests on the 2026 rate array (US-IDP52-004). |
+| `id.sui.wage_base` | [[FACT:id.sui.wage_base=58,300]] USD | 2026-01-01 to 2026-12-31 | US-IDB5-402 (ID official authority; A.2, quoted from authority page, confidence medium) | 72-1350: AAW of penultimate year rounded to 100 or FUTA if higher [US-IDS5-014]; not verified by re-derivation (the 2024 AAW is not in this source); figure rests on the 2026 rate array (US-IDP52-004). |
 | `id.sui.workforce_development.rate` | [[FACT:id.sui.workforce_development.rate=0.03]] % | 2026-01-01 to 2026-12-31 | US-IDB5-402 (ID official authority; A.2, quoted from authority page, confidence high) | Inside the UI rate; no other levy. |
 
-Not configured in this release [[GAP:RQ-191]]: 2027 SUI base/rate array unpublished; 2024 AAW needed to derive [[FACT:id.sui.wage_base=58,300]] not obtained.
+Not configured in this release [[GAP:RQ-191]]: 2027 SUI base/rate array unpublished; 2024 AAW needed to derive [[FACT:id.sui.wage_base=58,300]] not verified against the official source.
 
 ## ID.4 Pay statement
 
@@ -85,7 +85,7 @@ Not configured in this release [[GAP:RQ-191]]: 2027 SUI base/rate array unpublis
 | `id.report.sui.tx20` | [[FACT:id.report.sui.tx20=TX20 + TX26 (TX20C amendments) due last day of month after quarter (72-1311), no grace; online Employer Portal mandatory; zero reports required]] | 2026-01-01 to open | US-IDS5-021 (Idaho Department of Labor (Wayback id_ 20260113182918); A.3, direct artifact inspection, confidence high) |  |
 | `id.report.wh.form910` | [[FACT:id.report.wh.form910=Form 910 in TAP: semimonthly if >= 25,000/month or >= 300,000/12 months (20th / 5th); monthly < 25,000 and > 750/quarter (20th); quarterly <= 750/quarter; annual < 750/yr (last day of Jan); zero return required; cycle fixed for the year (changes by Nov 15)]] | 2026-01-01 to open | US-IDS5-009 (Idaho State Tax Commission (Wayback id_ 20260618173701 and 20260412130751); A.2, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-192]]: Idaho EFW2 RS/RV state-record spec not read.
+Not configured in this release [[GAP:RQ-192]]: Idaho EFW2 RS/RV state-record spec not verified against the official source.
 
 ## ID.6 Leave
 
@@ -95,7 +95,7 @@ Not configured in this release [[GAP:RQ-192]]: Idaho EFW2 RS/RV state-record spe
 
 Not configured in this release [[GAP:RQ-193]]: Search lead 44-2701 was the non-compete chapter (secondary-source error); no pre-emption statute or city leave ordinance located.
 
-Not configured in this release [[GAP:RQ-194]]: H0544 (2026) text not read; reach to private employers unknown.
+Not configured in this release [[GAP:RQ-194]]: H0544 (2026) text not verified against the official source; reach to private employers unknown.
 
 ## ID.7 Termination and final pay
 
@@ -134,20 +134,20 @@ MW tracks federal; SUI base AAW penultimate year (2027 unpublished, newest snaps
 
 ## ID.12 Payroll data protection and records
 
-No SSN truncation rule located (ch. 28-51 not read). Full SSN on ID W-4 and new-hire report.
+No SSN truncation rule located (ch. 28-51 not verified against the official source). Full SSN on ID W-4 and new-hire report.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
 | `id.records.retention_years` | [[FACT:id.records.retention_years=3]] years | 2026-01-01 to open | US-IDS5-006 (Idaho Legislature (Wayback id_ 20260516081013); A.1, direct artifact inspection, confidence high) | 45-610(1): from last date of service. |
 
-Not configured in this release [[GAP:RQ-197]]: Idaho Code 28-51 and any SSN display rule not read.
+Not configured in this release [[GAP:RQ-197]]: Idaho Code 28-51 and any SSN display rule not verified against the official source.
 
 ## ID.13 Live legal change
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
 | `id.live.epb00744_2026_07_23` | [[FACT:id.live.epb00744_2026_07_23=new withholding table in force prospectively from 2026-07-23 (mid_year_rate_change); level withholding]] | 2026-07-23 to open | US-IDS5-011 (Idaho State Tax Commission (Wayback id_ 20261007091254); A.2, derived arithmetically, confidence high) | Derivation recorded in register row US-IDS5-011. |
-| `id.live.h0544_military_leave` | [[FACT:id.live.h0544_military_leave=enacted (ch. 57), text not read; private-employer impact open]] | 2026-01-01 to open | US-IDS5-024 (Idaho Legislature (Wayback id_ copy, fetched 2026-11-02); A.1, direct artifact inspection, confidence low) |  |
+| `id.live.h0544_military_leave` | [[FACT:id.live.h0544_military_leave=enacted (ch. 57), text not verified; private-employer impact open]] | 2026-01-01 to open | US-IDS5-024 (Idaho Legislature (Wayback id_ copy); A.1, direct artifact inspection, confidence low) | |
 
 ## ID.14 Authority worked examples (oracle values)
 

@@ -39,7 +39,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nv.payment.method` | [[FACT:nv.payment.method=cash or negotiable check unless employee agrees in writing to another disposition]] | 2025-10-01 | open | US-NVS5-001 (A.1, Nevada Legislature (Legislative Counsel Bureau)) | 608.120 |
 | `nv.labour.lodging_credit.weekly_multiple_of_minwage` | [[FACT:nv.labour.lodging_credit.weekly_multiple_of_minwage=5]] | 2025-10-01 | open | US-NVS5-001 (A.1, Nevada Legislature (Legislative Counsel Bureau)) | meals max 100% of hourly minimum per day; by agreement |
 
-- Not configured in this release [[GAP:RQ-129]]: Paycard rules beyond 608.120 written consent not read.
+- Not configured in this release [[GAP:RQ-129]]: Paycard rules beyond 608.120 written consent not verified against the official source.
 
 ## NV.2 Income tax withholding
 
@@ -168,7 +168,7 @@ Indexation of each value is stated in the note of the value concerned.
 
 No Nevada rule is configured in this domain; the federal treatment in Annex FED applies.
 
-- Not configured in this release [[GAP:RQ-136]]: The AB 307 posting and the related domestic-violence and sexual-assault leave bulletin were not read (the site blocked automated access).
+- Not configured in this release [[GAP:RQ-136]]: The AB 307 posting and the related domestic-violence and sexual-assault leave bulletin were not verified against the official source.
 
 ## NV.14 Authority worked examples (oracle values)
 

@@ -32,7 +32,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `ms.labour.minwage.state.exists` | [[FACT:ms.labour.minwage.state.exists=False]] | 2009-07-24 | open | US-MSS5-010 (A.2, U.S. Department of Labor Wage and Hour Division) | no state law; FLSA [[FACT:fed.minwage.hourly=7.25]] for covered employers (Annex FED) |
 | `ms.local_mandates.preempted` | [[FACT:ms.local_mandates.preempted=True]] | 2013-07-01 | open | US-MSS5-009 (A.1, Mississippi Legislature) | 17-1-51 bars local minimum/living wage and local paid-leave mandates |
 | `ms.labour.overtime.state_rule` | [[FACT:ms.labour.overtime.state_rule=none (FLSA only)]] | 2026-01-01 | open | US-MSS5-016 (A.1, Mississippi Legislature) | negative rests on DOL table and measure sweep; Code full text not searched |
-| `ms.labour.pay_frequency.scope` | [[FACT:ms.labour.pay_frequency.scope=manufacturers 50+ employing public labor: biweekly or semimonthly; public service corporations: semimonthly]] | 2026-01-01 | open | US-MSS5-015 (A.2, U.S. Department of Labor Wage and Hour Division) | 71-1-35 via DOL WHD summary; statute text not read. |
+| `ms.labour.pay_frequency.scope` | [[FACT:ms.labour.pay_frequency.scope=manufacturers 50+ employing public labor: biweekly or semimonthly; public service corporations: semimonthly]] | 2026-01-01 | open | US-MSS5-015 (A.2, U.S. Department of Labor Wage and Hour Division) | 71-1-35 via DOL WHD summary; statute text not verified. |
 
 ## MS.2 Income tax withholding
 
@@ -143,7 +143,7 @@ Rules:
 
 - Under-collected withholding may be recovered from later wages. (US-MSS5-004)
 
-- Not configured in this release [[GAP:RQ-063]]: Creditor garnishment 85-3-4 text not read (Lexis-only Code); secondary lead only.
+- Not configured in this release [[GAP:RQ-063]]: Creditor garnishment 85-3-4 text not verified against the official source; only a secondary source refers to it.
 
 ## MS.10 Collective agreements and prevailing wage
 

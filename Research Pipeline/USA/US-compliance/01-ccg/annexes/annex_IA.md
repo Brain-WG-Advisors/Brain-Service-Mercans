@@ -42,7 +42,7 @@ Configuration rule: the federal tips and overtime deductions are conformed at as
 | `ia.wh.rounding` | [[FACT:ia.wh.rounding=to the cent, half-up (no whole-dollar rounding in 2026)]] | 2026-01-01 to 2026-12-31 | US-IAS5-005 (Iowa Department of Revenue; A.2, derived arithmetically, confidence high) | Tables Step 5: "rounded to the nearest cent" [US-IAS5-015]. Supersedes the whole-dollar rounding clause of US-IA-001. |
 | `ia.wh.supplemental.rate` | [[FACT:ia.wh.supplemental.rate=3.8]] % | 2026-01-01 to open | US-IAS5-016 (Iowa Department of Revenue; A.2, second independent authority, confidence high) | 422.16(2)(e) and 701 IAC 307.2(1)(c) [US-IAS5-006]: when treated separately and federal withheld at flat rate; otherwise aggregate. |
 
-Not configured in this release [[GAP:RQ-180]]: An older register row (US-IA-001) states whole-dollar rounding; the 2026 formula and tables say nearest cent. The 2025 formula was not read.
+Not configured in this release [[GAP:RQ-180]]: An older register row (US-IA-001) states whole-dollar rounding; the 2026 formula and tables say nearest cent. The 2025 formula was not verified against the official source.
 
 ## IA.2b Non-resident regime and reciprocity
 
@@ -125,7 +125,7 @@ Not configured in this release [[GAP:RQ-184]]: Not established from an official 
 | `ia.garn.child_support.remit_business_days` | [[FACT:ia.garn.child_support.remit_business_days=7]] business days | 2026-01-01 to open | US-IAS5-022 (Iowa Legislature; A.1, direct artifact inspection, confidence high) |  |
 | `ia.garn.creditor.annual_cap_schedule` | [[FACT:ia.garn.creditor.annual_cap_schedule=per judgment creditor by expected annual earnings: < 12,000: 250; 12,000-16,000: 400; 16,000-24,000: 800; 24,000-35,000: 1,500; 35,000-50,000: 2,000; >= 50,000: 10% (plus CCPA)]] | 2026-01-01 to open | US-IAS5-013 (Iowa Legislature; A.1, direct artifact inspection, confidence high) | 642.21; not for support; not indexed. |
 
-Not configured in this release [[GAP:RQ-185]]: IDR wage-levy procedure not read.
+Not configured in this release [[GAP:RQ-185]]: IDR wage-levy procedure not verified against the official source.
 
 ## IA.10 Collective agreements and prevailing wage
 
@@ -143,7 +143,7 @@ UI base 1/3 AAW yearly (late-June release); rate table by fund formula; PIT flat
 |---|---|---|---|---|
 | `ia.breach.notice` | [[FACT:ia.breach.notice=without unreasonable delay; processor notifies owner immediately (715C.2)]] | 2026-01-01 to open | US-IAS5-023 (Iowa Legislature; A.1, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-186]]: Iowa Code 715A not read.
+Not configured in this release [[GAP:RQ-186]]: Iowa Code 715A not verified against the official source.
 
 ## IA.13 Live legal change
 

@@ -53,7 +53,16 @@ def main():
     if not os.path.exists(bk):
         shutil.copy(gp, bk)
     g = json.load(open(gp, encoding="utf-8"))
-    g["gaps"] = [x for x in g["gaps"] if not str(x.get("id", "")).startswith("WTC-RQ-")] + entries
+    # v1.1: merge, never overwrite - the research owns status / searched_on / closure of an existing entry (the V11 gap
+    # merge closed WTC-RQ-89 and re-stamped others); the build only refreshes the location and adds new entries
+    new = {e["id"]: e for e in entries}
+    out = []
+    for x in g["gaps"]:
+        e = new.pop(x.get("id"), None)
+        if e is not None:
+            x = dict(x, location=e["location"])
+        out.append(x)
+    g["gaps"] = out + list(new.values())
     json.dump(g, open(gp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     print("requests", len(reqs), "gaps.json entries", len(entries))
 

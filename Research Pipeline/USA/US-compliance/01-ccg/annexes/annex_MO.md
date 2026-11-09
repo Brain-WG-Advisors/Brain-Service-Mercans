@@ -40,7 +40,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mo.labour.pay_frequency.corporations` | [[FACT:mo.labour.pay_frequency.corporations=at least semimonthly, within 16 days of period close]] | 1955-08-28 | open | US-MOP52-002 (A.1, Missouri Revisor of Statutes) | 290.080 |
 
 - Not configured in this release [[GAP:RQ-048]]: No Missouri direct-deposit/paycard consent or electronic pay-statement rule located.
-- Not configured in this release [[GAP:RQ-049]]: Child-labour hours and work certificates not read.
+- Not configured in this release [[GAP:RQ-049]]: Child-labour hours and work certificates not verified against the official source.
 
 ## MO.2 Income tax withholding
 
@@ -68,7 +68,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mo.pit.oracle.example_1.monthly_withholding` | [[FACT:mo.pit.oracle.example_1.monthly_withholding=59]] USD | 2026-01-01 | 2026-12-31 | US-MOS5-001 (A.2, Missouri Department of Revenue) | - |
 
 - Not configured in this release [[GAP:RQ-050]]: 2027 top rate and brackets not published (revenue trigger 143.011(4)).
-- Not configured in this release [[GAP:RQ-051]]: Tie of the standard deductions to the federal amounts (143.131) not read.
+- Not configured in this release [[GAP:RQ-051]]: Tie of the standard deductions to the federal amounts (143.131) not verified against the official source.
 
 ## MO.2b Non-resident regime and reciprocity
 
@@ -84,7 +84,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mo.pit.local.st_louis.payroll_expense_tax.rate` | [[FACT:mo.pit.local.st_louis.payroll_expense_tax.rate=0.5]] percent | 2026-01-01 | open | US-MOP52-006 (A.2, City of St. Louis Collector of Revenue) | employer-paid |
 | `mo.pit.local.kansas_city.earnings_tax.rate` | [[FACT:mo.pit.local.kansas_city.earnings_tax.rate=1]] percent | 2026-01-01 | open | US-MOP9W-001 (A.2, City of Kansas City, Missouri - Revenue Division) | Residents and nonresidents for work in KC; KC earnings tax page (1%). |
 
-- Not configured in this release [[GAP:RQ-052]]: St. Louis and Kansas City earnings-tax April 2026 renewal votes not verified; RSMo 92.105-92.125 not read.
+- Not configured in this release [[GAP:RQ-052]]: St. Louis and Kansas City earnings-tax April 2026 renewal votes not verified; RSMo 92.105-92.125 not verified against the official source.
 
 ## MO.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
@@ -158,7 +158,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 |---|---|---|---|---|---|
 | `mo.prevailing_wage.threshold` | [[FACT:mo.prevailing_wage.threshold=75000]] USD | 2018-08-28 | open | US-MOB5-401 (A.1, Missouri Revisor of Statutes) | projects of 75,000 or less excluded |
 
-- Not configured in this release [[GAP:RQ-054]]: Certified-payroll form and filing (290.290) and current annual wage order not read.
+- Not configured in this release [[GAP:RQ-054]]: Certified-payroll form and filing (290.290) and current annual wage order not verified against the official source.
 
 ## MO.11 Indexation
 

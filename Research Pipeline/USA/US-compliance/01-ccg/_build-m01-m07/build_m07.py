@@ -103,7 +103,9 @@ A("```")
 A(f"imputed_month = (coverage - {T('fed.bik.group_term_life.excluded_coverage')}) / 1000 x rate_for_age_band")
 A("```")
 A("")
-A(UNR("fed.bik.business_mileage.rate"))
+A(f"Business standard mileage rate: USD {T('fed.bik.business_mileage.rate', on='2026-03-01')} per mile for 2026-01-01 to 2026-06-30 "
+  f"{R('fed.bik.business_mileage.rate', on='2026-03-01')}; USD {T('fed.bik.business_mileage.rate', on='2026-09-01')} per mile from 2026-07-01 "
+  f"{R('fed.bik.business_mileage.rate', on='2026-09-01')}.")
 A("")
 # round 3b (QA r3 blocker 1, RQ-572 closed by agent 2 R3): general valuation rule
 A("**Other taxable fringe benefits.** Valuation and timing (Pub. 15-B (2026) sections 3 and 4):")

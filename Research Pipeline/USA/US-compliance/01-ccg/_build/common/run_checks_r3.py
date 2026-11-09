@@ -18,7 +18,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 SH = os.path.expanduser("~/mercans-pipeline/shared")
-DOCX = os.path.join(BASE, "01-ccg", "US-CCG-001-v1.0.docx")
+DOCX = sorted(__import__("glob").glob(os.path.join(BASE, "01-ccg", "US-CCG-001-v*.docx")))[-1]
 OUT = os.path.join(HERE, "out")
 ENV = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
 R = {}

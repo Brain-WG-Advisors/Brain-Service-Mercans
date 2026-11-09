@@ -93,7 +93,7 @@ Not configured in this release [[GAP:RQ-219]]: 44-710a Schedule C table not trac
 | `ks.newhire.report_business_days` | [[FACT:ks.newhire.report_business_days=20]] business days | 2026-01-01 to open | US-KSS5-019 (Kansas Office of the Revisor of Statutes; A.1, direct artifact inspection, confidence high) | K.S.A. 75-5743 (statute governs over KDOL "20 days"); rehire after 60+ days. |
 | `ks.report.annual.kw3` | [[FACT:ks.report.annual.kw3=KW-3 electronic by January 31 with state W-2s and 1099s with KS withholding; closure within 30 days after month of closure]] | 2024-07-01 to open | US-KSS5-001 (Kansas Department of Revenue; A.2, derived arithmetically, confidence high) | Derivation recorded in register row US-KSS5-001. |
 | `ks.report.sui.quarterly` | [[FACT:ks.report.sui.quarterly=wage report + contribution return due Apr 30 / Jul 31 / Oct 31 / Jan 31; MMREF / NASWA upload; paper K-CNS-100 for small employers]] | 2026-01-01 to open | US-KSS5-022 (Kansas Department of Labor; A.2, quoted from authority page, confidence high) | E-file threshold 25+ (EDI, from 2024-07-01) vs 26+ (FAQ) conflict open. |
-| `ks.report.w2.efile_threshold_forms` | [[FACT:ks.report.w2.efile_threshold_forms=51]] forms | 2025-10-01 to open | US-KSS5-026 (Kansas Department of Revenue; A.2, direct artifact inspection, confidence high) | EFW2 with KS RS (K-2MT Rev. 10-25; RA/RE/RW/RS/RT/RF) or KW-2CSV; box 15 carries the Kansas withholding account number in its published layout (prefix 036, account body, suffix F-01); no CF/SF. TY2026 K-2MT not located. |
+| `ks.report.w2.efile_threshold_forms` | [[FACT:ks.report.w2.efile_threshold_forms=51]] forms | 2025-10-01 to open | US-KSS5-026 (Kansas Department of Revenue; A.2, direct artifact inspection, confidence high) | EFW2 with KS RS (K-2MT Rev. 10-25; RA/RE/RW/RS/RT/RF) or KW-2CSV; box 15 carries the Kansas withholding account number in its published layout (prefix 036, account body, suffix F-01); no CF/SF. Not verified against a TY2026 K-2MT. |
 | `ks.report.wh.deposit_frequency` | [[FACT:ks.report.wh.deposit_frequency=quad-monthly > 100,000/yr (7th/15th/21st/last, 3 banking days); semi-monthly 8,000-100,000 (25th / 10th); monthly 1,200-8,000 (15th); quarterly 200-1,200 (25th after quarter); annual <= 200 (Jan 25); KW-5 every period even if zero]] | 2026-01-01 to open | US-KSS5-007 (Kansas Office of the Revisor of Statutes; A.1, second independent authority, confidence high) |  |
 
 Not configured in this release [[GAP:RQ-220]]: KDOL FAQ says 26+ employees, the EDI section says 25+ (from 2024-07-01).
@@ -106,7 +106,7 @@ Not configured in this release [[GAP:RQ-221]]: TY2026 K-2MT edition (RS layout f
 |---|---|---|---|---|
 | `ks.leave.sick.state_mandate.exists` | [[FACT:ks.leave.sick.state_mandate.exists=False]] | 2026-01-01 to open | US-KSS5-012 (Kansas Office of the Revisor of Statutes; A.1, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-222]]: Jury duty (K.S.A. 43-173) and state military leave not read.
+Not configured in this release [[GAP:RQ-222]]: Jury duty (K.S.A. 43-173) and state military leave not verified against the official source.
 
 ## KS.7 Termination and final pay
 
@@ -147,7 +147,7 @@ MW, std deduction, exemptions fixed; PIT revenue-contingent cut certified each A
 
 ## KS.12 Payroll data protection and records
 
-SSN commercial use limited, internal administrative use exempt, penalty up to 1,000 (K.S.A. 75-3520) [US-KSS5-024]; no truncation rule; breach law 50-7a01 not read.
+SSN commercial use limited, internal administrative use exempt, penalty up to 1,000 (K.S.A. 75-3520) [US-KSS5-024]; no truncation rule; breach law 50-7a01 not verified against the official source.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|

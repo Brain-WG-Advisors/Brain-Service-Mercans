@@ -34,9 +34,10 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nc.overtime.weekly_threshold_hours` | [[FACT:nc.overtime.weekly_threshold_hours=40]] hours | 1991-06-19 | open | US-NCS5-003 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | no daily OT; FLSA-covered enterprises governed by FLSA |
 | `nc.overtime.premium.multiplier` | [[FACT:nc.overtime.premium.multiplier=1.5]] ratio | 1991-06-19 | open | US-NCS5-003 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | - |
 | `nc.labour.pay_frequency.allowed` | [[FACT:nc.labour.pay_frequency.allowed=daily; weekly; biweekly; semimonthly; monthly]] | 2026-01-01 | open | US-NCS5-005 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | bonuses/commissions as rarely as annually if scheduled |
+| `nc.labour.minwage.student_learner.hourly` | [[FACT:nc.labour.minwage.student_learner.hourly=6.5]] USD per hour | 2026-01-01 | open | US-NCV6-008 (A.1, NC General Assembly) | Derived: 0.90 x [[FACT:fed.minwage.hourly=7.25]] = 6.525, rounded down to the lowest nickel = 6.50 (G.S. 95-25.3). Register: US-NCV6-008 |
 
-- Not configured in this release [[GAP:RQ-073]]: NC direct deposit / paycard consent rule not located.
-- Not configured in this release [[GAP:RQ-589]]: The full-time student, learner, apprentice and messenger rate of G.S. 95-25.3(b) (ninety percent of the minimum wage) is not configured: no official NCDOL page states the rounded hourly figure.
+- Not configured in this release [[GAP:RQ-073]]: G.S. 95-25.6 sets the payday and the permitted pay periods but says nothing on the payment medium (cash, check, direct deposit, paycard); no North Carolina rule on payment method was located.
+- Not configured in this release [[GAP:RQ-082]]: No North Carolina threshold is configured for special populations; UI employer coverage follows the federal FUTA employer definition (`nc.ui.registration`).
 
 ## NC.2 Income tax withholding
 
@@ -83,9 +84,8 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nc.sui.employer.rate.min` | [[FACT:nc.sui.employer.rate.min=0.06]] percent | 2026-01-01 | 2026-12-31 | US-NCP9V-001 (A.2, North Carolina Division of Employment Security) | - |
 | `nc.sui.employer.rate.max` | [[FACT:nc.sui.employer.rate.max=5.76]] percent | 2026-01-01 | 2026-12-31 | US-NCP9V-001 (A.2, North Carolina Division of Employment Security) | 20% surtax only if trust fund < 1 bn |
 | `nc.sui.employee.rate` | [[FACT:nc.sui.employee.rate=0]] percent | 2026-01-01 | open | US-NCS5-014 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | may not be deducted |
-
-- Not configured in this release [[GAP:RQ-075]]: Reproducing the wage base of [[FACT:nc.sui.wage_base=34200]] USD needs the agency's average weekly insured wage at the 2025 computation date.
-- Not configured in this release [[GAP:RQ-076]]: NCSUITS registration steps and liability thresholds (incl. domestic/agricultural) not read.
+| `nc.ui.wage_base.derivation` | [[FACT:nc.ui.wage_base.derivation=NC taxable wages = greater of FUTA s.3306 wages or 50% of the average yearly insured wage (average weekly wage on the computation date x 52), rounded to the nearest 100 USD. Not verified by re-derivation: the 2026 average weekly insured wage is not published in this source.]] | 2026-01-01 | open | US-NCV6-003 (A.1, NC General Assembly) | Register: US-NCV6-003, US-NCV6-004 |
+| `nc.ui.registration` | [[FACT:nc.ui.registration=NC UI employer = employer under FUTA s.3306 (plus 3309 governmental/nonprofit/tribe units); statute text read; DES registration page not verified]] | 2026-01-01 | open | US-NCV6-002 (A.1, NC General Assembly) | Register: US-NCV6-002 |
 
 ## NC.4 Pay statement
 
@@ -103,20 +103,18 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `nc.report.efile_spec.version` | [[FACT:nc.report.efile_spec.version=9-2026 (TY2026, use beginning January 2027)]] | 2027-01-01 | open | US-NCS5-028 (A.2, NC Department of Revenue) | NC-3/W-2 fixed-field text file. |
 | `nc.report.ui.quarterly_due` | [[FACT:nc.report.ui.quarterly_due=Apr 30; Jul 31; Oct 31; Jan 31]] | 2026-01-01 | open | US-NCS5-025 (A.2, NC Division of Employment Security (NC Department of Commerce)) | NCUI 101 via NCSUITS; electronic mandatory at 10+ wage items |
 | `nc.newhire.report_days` | [[FACT:nc.newhire.report_days=20]] days | 2026-01-01 | open | US-NCS5-020 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | or twice monthly 12-16 days apart electronically |
+| `nc.report.w2.file_format` | [[FACT:nc.report.w2.file_format=NC W-2 file = fixed-field .txt following SSA EFW2 plus NCDOR fields; RE/RW/RS (state) records; file name suggested W2REPORT.txt. TY2026 (9-2026) spec not verified]] | 2025-09-26 | open | US-NCV6-007 (A.2, NC Department of Revenue) | Register: US-NCV6-007 |
 
 Rules:
 
 - Third-party and POA: NCDOR GEN-58 (withholding) and the DES Power of Attorney (UI). (US-NCP51-003, US-FIL-013)
-
-- Not configured in this release [[GAP:RQ-077]]: Whether the North Carolina W-2 file in eNC3 uses the federal EFW2 layout or a state layout is not confirmed; the current state specification was not obtained.
 
 ## NC.6 Leave
 
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `nc.leave.sick.state_statute.exists` | [[FACT:nc.leave.sick.state_statute.exists=False]] | 2023-10-03 | open | US-NCS5-001 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | local mandates preempted |
-
-- Not configured in this release [[GAP:RQ-078]]: Jury-duty, voting and other leave with pay impact not searched.
+| `nc.leave.other` | [[FACT:nc.leave.other=Jury duty: job protection only (no discharge/demotion; civil damages, reinstatement); statute states no employer pay obligation. Military/voting leave statutes not verified]] | 2026-01-01 | open | US-NCV6-006 (A.1, NC General Assembly) | Register: US-NCV6-006 |
 
 ## NC.7 Termination and final pay
 
@@ -125,8 +123,7 @@ Rules:
 | `nc.final_pay.rule` | [[FACT:nc.final_pay.rule=next regular payday (discharge and resignation)]] | 2026-01-01 | open | US-NCS5-006 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | bonuses/commissions first payday after calculable |
 | `nc.term.vacation.payout` | [[FACT:nc.term.vacation.payout=per employer policy; forfeiture only with advance written notice]] | 2026-01-01 | open | US-NCS5-008 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | - |
 | `nc.term.final_w2.days` | [[FACT:nc.term.final_w2.days=30]] days | 2026-01-01 | open | US-NC-001 (A.2, NC Department of Revenue) | after final wage payment |
-
-- Not configured in this release [[GAP:RQ-079]]: Whether NC employers must hand separating employees a UI-availability notice is not confirmed.
+| `nc.term.ui_separation_notice` | [[FACT:nc.term.ui_separation_notice=Employer duty is reactive: when a claim is filed DES sends a Separation Notice request; employer must give reason for separation, last day worked and final pay details by the deadline. No standing employer-to-employee separation notice located on an official host; 04 NCAC 24G .0102 (COVID-era) seen only in secondary sources and not verified]] | 2026-01-01 | open | US-NCV6-009 (A.3, NC Division of Employment Security) | Register: US-NCV6-009 |
 
 ## NC.8 Benefits in kind and taxable wages
 
@@ -141,8 +138,7 @@ Rules:
 | `nc.garn.support.max_rate` | [[FACT:nc.garn.support.max_rate=40]] percent | 2026-01-01 | open | US-NCS5-018 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | of monthly disposable earnings; 1 USD fee per pay period |
 | `nc.garn.support.employer_fee.per_period` | [[FACT:nc.garn.support.employer_fee.per_period=1]] USD | 2026-01-01 | open | US-NCS5-018 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | - |
 | `nc.garn.tax_levy.max_rate` | [[FACT:nc.garn.tax_levy.max_rate=10]] percent | 2026-01-01 | open | US-NCS5-021 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | G.S. 105-242(b) |
-
-- Not configured in this release [[GAP:RQ-080]]: IV-D remittance timing and payor fee (110-136.5 to.8) not extracted.
+| `nc.garn.iwo.payor_duties` | [[FACT:nc.garn.iwo.payor_duties=Payor processing fee 2.00 USD per withholding unless waived; cap 40% of disposable income (one order); multiple orders 45% (supporting spouse/dependents) or 50% (not). 110-136.5/.7/.8 not verified]] | 2026-01-01 | open | US-NCV6-001 (A.1, NC General Assembly) | Register: US-NCV6-001 |
 
 ## NC.10 Collective agreements and prevailing wage
 
@@ -167,8 +163,7 @@ Indexation of each value is stated in the note of the value concerned.
 | `nc.records.wage_hour.retention_years` | [[FACT:nc.records.wage_hour.retention_years=3]] years | 1980-11-01 | open | US-NCS5-022 (A.1, NC Office of Administrative Hearings - NC Administrative Code (13 NCAC 12, NC Department of Labor rules)) | 13 NCAC 12.0802 |
 | `nc.records.withholding.retention_years` | [[FACT:nc.records.withholding.retention_years=10]] years | 2026-01-01 | open | US-NC-001 (A.2, NC Department of Revenue) | NC-30 s.26 |
 | `nc.data.ssn.mailing_restricted` | [[FACT:nc.data.ssn.mailing_restricted=True]] | 2026-01-01 | open | US-NCS5-016 (A.1, NC General Assembly (General Statutes, official host ncleg.gov)) | 75-62; safe build truncates SSN on mailed stubs |
-
-- Not configured in this release [[GAP:RQ-081]]: G.S. 75-65 breach notice not read.
+| `nc.data.breach` | [[FACT:nc.data.breach=Notice to affected persons without unreasonable delay; AG Consumer Protection Division notified; if >1,000 persons notified, also AG and nationwide consumer reporting agencies]] | 2026-01-01 | open | US-NCV6-005 (A.1, NC General Assembly) | Register: US-NCV6-005 |
 
 ## NC.13 Live legal change
 
@@ -185,7 +180,7 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 - Tipped: tips withheld as supplemental. (US-NCS5-002, US-NC-001)
 - Nonresident aliens: treaty-exempt wages exempt. (US-NC-001)
 - Government employees: Only minimum wage and a few Wage and Hour Act provisions apply to public employers. (US-NC-001, US-NCS5-009)
-- Not configured in this release [[GAP:RQ-082]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic / household; Agricultural; Tipped; Clergy / religious; Students; Nonresident aliens; Statutory employees; Government employees; Military spouses (SCRA); Interstate rail, motor carrier, airline; Tribal members on reservation; Seamen.
+- Not configured in this release [[GAP:RQ-082]]: No North Carolina threshold is configured for special populations; UI employer coverage follows the federal FUTA employer definition (`nc.ui.registration`).
 
 ## NC.16 Language
 
@@ -219,4 +214,12 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | US-NCS5-025 | NC Division of Employment Security (NC Department of Commerce) |
 | US-NCS5-028 | NC Department of Revenue |
 | US-NCS5-029 | NC Department of Revenue |
+| US-NCV6-001 | NC General Assembly |
+| US-NCV6-002 | NC General Assembly |
+| US-NCV6-003 | NC General Assembly |
+| US-NCV6-005 | NC General Assembly |
+| US-NCV6-006 | NC General Assembly |
+| US-NCV6-007 | NC Department of Revenue |
+| US-NCV6-008 | NC General Assembly |
+| US-NCV6-009 | NC Division of Employment Security |
 | US-NCW1B-003 | North Carolina General Assembly |

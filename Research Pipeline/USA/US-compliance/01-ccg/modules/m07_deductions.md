@@ -97,7 +97,7 @@ Source [US-FEDS5-008].
 imputed_month = (coverage - [[FACT:fed.bik.group_term_life.excluded_coverage=50,000]]) / 1000 x rate_for_age_band
 ```
 
-Not configured in this release [[GAP:RQ-536]]: The 2026 business standard mileage rate is not printed in Pub. 15-B (FED OQ 7).
+Business standard mileage rate: USD [[FACT:fed.bik.business_mileage.rate=0.725]] per mile for 2026-01-01 to 2026-06-30 [US-FEDV6-011]; USD [[FACT:fed.bik.business_mileage.rate=0.76]] per mile from 2026-07-01 [US-FEDV6-010].
 
 **Other taxable fringe benefits.** Valuation and timing (Pub. 15-B (2026) sections 3 and 4):
 
@@ -142,7 +142,7 @@ Group-term life cost above the excluded coverage is FICA wages and income-tax wi
 | Federal tax levy | Exempt amount table below; the employer pays the rest of the take-home pay to the IRS | [US-FEDS5-014] |
 | Creditor garnishment | CCPA limits below; stricter State law applies | [US-FEDS5-023] |
 
-Not configured in this release [[GAP:RQ-528]]: States go live with the revised (gig-field) IWO/e-IWO within the one-year extension; dates not known (FED OQ 8).
+Not configured in this release [[GAP:RQ-528]]: No federal notice gives the dates on which States go live with the revised income withholding order (gig-worker fields); States have an extension to reprogram, without a fixed date.
 
 ### Is there a statutory priority order if an employee has multiple garnishments?
 

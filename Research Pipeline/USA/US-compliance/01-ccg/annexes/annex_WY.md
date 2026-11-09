@@ -86,7 +86,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WY.2.
 
 - Not yet published [[GAP:RQ-398]]: The 2026 minimum and assigned rates, the industry new-employer rates and the adjustment-factor values are not published on the pages read; the WTC rate set-up cannot be completed.
 - Not configured in this release [[GAP:RQ-399]]: The exact statewide average annual wage behind the 2026 and 2027 bases is not published; only an interval check is possible.
-- Not configured in this release [[GAP:RQ-401]]: Non-cash remuneration valuation rule (commission rule) not read.
+- Not configured in this release [[GAP:RQ-401]]: Non-cash remuneration valuation rule (commission rule) not verified against the official source.
 
 ## WY.4 Pay statement
 
@@ -117,7 +117,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WY.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-400]]: WYUI wage file format and new-hire electronic format not read.
+- Not configured in this release [[GAP:RQ-400]]: WYUI wage file format and new-hire electronic format not verified against the official source.
 
 ## WY.6 Leave
 
@@ -147,7 +147,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WY.2.
 
 ## WY.8 Benefits in kind and taxable wages
 
-- **Income tax:** not applicable. **UI wage definition (27-3-102(a)(xviii)) [US-WYS5-003]:** exclusions follow FUTA (cafeteria-plan benefits other than cash, dependent care, educational assistance, group-term life, employer plan contributions, convenience meals and lodging, employer-paid FICA, among others); employee elective deferrals stay UI wages. Non-cash valuation rule not read (open point below).
+- **Income tax:** not applicable. **UI wage definition (27-3-102(a)(xviii)) [US-WYS5-003]:** exclusions follow FUTA (cafeteria-plan benefits other than cash, dependent care, educational assistance, group-term life, employer plan contributions, convenience meals and lodging, employer-paid FICA, among others); employee elective deferrals stay UI wages. Non-cash valuation rule not verified against the official source (open point below).
 
 ## WY.9 Deductions and garnishments
 

@@ -144,7 +144,14 @@ def _register():
     return _REG
 
 
-def note_collides(text):
+# v1.1 QA r1 (F27 regression, OK/VT): the ~660 New York per-period Method II values (NYS-50-T tables) made the guard
+# drop notes of other States whose numbers merely coincide with a table cell (OK married base amounts 57.50 / 218.50,
+# VT Saves penalty notes). A number that equals only a NY per-period table value is not a value of the other State's
+# own facts, so for a State other than NY those forms are ignored by the guard.
+NY_PER_PERIOD = ("ny.wh.method2.", "ny.local.nyc.method2.", "ny.local.nyc.wh.method2.", "ny.wh.conversion.")
+
+
+def note_collides(text, st=None):
     """True if the note carries a number that C46 would treat as an unbound fact value."""
     global _FORMS
     sys.path.insert(0, os.path.expanduser("~/mercans-pipeline/shared/consistency-checks"))
@@ -154,11 +161,15 @@ def note_collides(text):
         for fp in glob.glob(os.path.join(RES, "*-facts.json")):
             for f in json.load(open(fp, encoding="utf-8")).get("facts", []):
                 for n, pct in cc.distinctive_forms(f["key"], f.get("value")):
-                    _FORMS[(round(n, 6), pct)] = 1
+                    _FORMS.setdefault((round(n, 6), pct), set()).add(f["key"])
     for m in cc.NUM_IN_TEXT.finditer(text):
         n = cc._num(m.group(1))
-        if n is not None and (round(n, 6), bool(m.group(2))) in _FORMS:
-            return True
+        keys = _FORMS.get((round(n, 6), bool(m.group(2)))) if n is not None else None
+        if not keys:
+            continue
+        if st and st != "NY" and all(k.startswith(NY_PER_PERIOD) for k in keys):
+            continue
+        return True
     return False
 
 
@@ -207,7 +218,11 @@ def unit_of(f):
 
 
 def period(f):
+    import deliverable_wording as DW     # v1.1 QA r1: a proposed or historical register row is never shown as an in-force date
     a, b = f.get("effective_from"), f.get("effective_to")
+    st = DW.period_cell(f)
+    if st:
+        return st
     if a and b:
         return f"{a} to {b}"
     if a:
@@ -319,7 +334,7 @@ def render(st, rqmap, gaps_out, bind_log):
                 note = sanitize(note)
                 if f["key"] in NOTE_OVERRIDE:
                     note = NOTE_OVERRIDE[f["key"]]
-                if note and note_collides(note) and f["key"] not in KEEP_NOTE_KEYS:
+                if note and note_collides(note, st) and f["key"] not in KEEP_NOTE_KEYS:
                     DROPPED.append((st, f["key"], note))
                     note = ""
                 if note and f["key"] in KEEP_NOTE_KEYS:

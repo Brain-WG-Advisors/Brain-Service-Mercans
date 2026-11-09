@@ -594,7 +594,7 @@ Every reproduced worked example is a fact under `{jur}.oracle.*` with its regist
 | key | value | unit | from | to | register_id | conf |
 |---|---|---|---|---|---|---|
 | `dc.sit.method` | percentage method or tables similar to IRC 3402; no standard deduction allowance in withholding (47-1812.08(b)(1A)) |  | 2026-01-01 |  | US-DCS5-025 (A.1) | medium |
-| `dc.sit.supplemental` | no flat rate; bonuses withheld as regular wages |  | 2026-01-01 |  | US-DCR3-001 (A.1) | high |
+| `dc.sit.supplemental` | no flat rate; supplemental pay withheld with the regular method, D.C. Code 47-1812.08(b)(1); bonuses/commissions are wages (47-1801.04(56) = IRC 3401(a); 26 CFR 31.3401(a)-1(a)(2)) |  | 2015-10-22 |  | US-DCS5-025 (A.1); US-DCV6C-001; US-FEDW2-002 | high |
 | `dc.sit.nonresident` | DC cannot tax nonresidents (Home Rule Act); D-4A stops withholding |  | 2026-01-01 |  | US-MULTI-016 (A.3) | high |
 | `dc.obbba.deductions.level` | assessment only from TY2026 (D.C. Act 26-416) |  | 2026-01-01 |  | US-DCS5-021 (A.1) | high |
 | `dc.sui.wage_base` | 9000 | USD | 2026-01-01 |  | US-DCS5-017 (A.1) | high |

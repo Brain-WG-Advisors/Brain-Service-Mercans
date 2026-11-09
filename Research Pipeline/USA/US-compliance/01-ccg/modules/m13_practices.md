@@ -24,7 +24,7 @@ Each row is a build rule established from an official source. It records a point
 | WI | [[FACT:practice.wi.use_w166_tables=Withholding uses W-166 schedule (3.54/4.65/5.30/7.65%), not the assessment brackets (3.50/4.40/5.30/7.65%)]] | US-WIS5-010; US-WIS5-011 |
 | NE | [[FACT:practice.ne.use_circular_en_tables=Withholding uses the DOR Circular EN 2026 percentage-method tables (2.26% to 4.60% rates); the statute (77-2715.03) sets 4.55% for rate three in tax year 2026]] | US-NES5-010; US-NES5-018 |
 | KS | [[FACT:practice.ks.kw100_header_stale=KW-100 header prints "wages paid on and after January 1, 2021" but figures are the 2024 values in force for 2026 (5.20/5.58%)]] | US-KSS5-001 |
-| MI | [[FACT:practice.mi.tips_ot_deduction_level=MI 2025 PA 24 tips/overtime deduction (TY2026-2028) is ASSESSMENT only; no change to withholding]] | US-MIS5-017 |
+| MI | [[FACT:practice.mi.tips_ot_deduction_level=MI 2025 PA 24 tips/overtime deduction (TY2026-2028) is ASSESSMENT only; no change to withholding]] | US-MIV6-002 |
 | VA | [[FACT:practice.va.std_deduction_2027_not_modelled=Statute: 2027 standard deduction 9,200/18,400; do not model 2027 withholding until Virginia Tax publishes the 2027 formula (guide Rev. 10/26 says the deduction sunsets - wrong)]] | US-VAS5-018 |
 | DC | [[FACT:practice.dc.2026_method_unpublished=D.C. Act 26-416 (emergency, from 2026-08-13) revoked personal exemptions; no 2026 withholding method published (D-4 under review)]] (from 2026-08-13) | US-DCS5-021 |
 | CT | [[FACT:practice.ct.tables_vs_rules=DRS: 'Use either the withholding calculation rules or the withholding tables' (TPG-211); the two methods can give different amounts; configured: DRS per-period tables up to each table maximum, TPG-211 rules above (CT.2, configuration decision of 2026-11-02)]] | US-CTS5-010; US-CTWH-001 |
@@ -43,7 +43,7 @@ Each row is a build rule established from an official source. It records a point
 
 | State | Rule | Register |
 |---|---|---|
-| MI | [[FACT:mi.pit.tips_overtime_deduction=2025 PA 24 (MCL 206.30(1)(ee)): tax years 2026-2028 deduct federally allowed qualified tips (IRC 224) and overtime (IRC 225); level ASSESSMENT (MI-1040) only - no withholding change]] | [US-MIS5-017] |
+| MI | [[FACT:mi.pit.tips_overtime_deduction=2025 PA 24 (MCL 206.30(1)(ee)): tax years 2026-2028 deduct federally allowed qualified tips (IRC 224) and overtime (IRC 225); level ASSESSMENT (MI-1040) only - no withholding change]] | [US-MIV6-002] |
 | AL | Overtime premium deduction up to [[FACT:al.pit.overtime_premium_deduction.max=1,000]] (tax years 2026-2028); assessment only | [US-ALS5-004] |
 | GA | Overtime subtraction up to [[FACT:ga.pit.overtime_subtraction.max=1,750]] and tip subtraction up to [[FACT:ga.pit.tip_subtraction.max=1,750]]; assessment only | [US-GAS5-009] |
 | IA | [[FACT:ia.pit.obbba=tips, overtime, car-loan interest conformed at ASSESSMENT only (no withholding allowance); senior deduction (up to 6,000) may be claimed as an IA W-4 allowance]] | [US-IAS5-019] |
@@ -53,7 +53,7 @@ Each row is a build rule established from an official source. It records a point
 **Open practice points:**
 
 - Massachusetts PFML split, transition date: Not configured in this release [[GAP:RQ-540]]: Chapter 101 of 2026 (s.45) applies the family/medical split change to taxable years from 2026-01-01, while the Department of Family and Medical Leave applies it from 2027-01-01. The build follows the Department (2026 split unchanged) until a notice or regulation settles the transition.
-- DOL compilation lists: Not configured in this release [[GAP:RQ-541]]: The U.S. DOL compilation of State paid-leave laws could not be read, and the DOL prevailing-wage compilation is out of date for Michigan. Never read Michigan's paid-leave or prevailing-wage status from a DOL compilation table.
+- DOL compilation lists: Not configured in this release [[GAP:RQ-541]]: The U.S. DOL compilation of State paid-leave laws is not verified against the official source, and the DOL prevailing-wage compilation is out of date for Michigan. Never read Michigan's paid-leave or prevailing-wage status from a DOL compilation table.
 - Utah Pub. 14 effective date: Not configured in this release [[GAP:RQ-542]]: The effective date of Utah Pub. 14 (Rev. 04/26) is not established, so its six reproduced examples are not dated results.
 - District of Columbia 2026 method: Not configured in this release [[GAP:RQ-543]]: The District of Columbia has published no 2026 withholding method: an emergency act effective 2026-08-13 revoked personal exemptions and the D-4 is under review.
 - North Dakota booklet: the Section 2 example is a booklet defect. Configure from the table (Module 12, 12.2.1) [US-NDS5-001].

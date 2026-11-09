@@ -274,14 +274,14 @@ def oracle(okey, jur, case, rows, computed, whole_dollar_key=None):
 def state_oracles(loc):
     F.set_loc(loc)
     # GA: (wages - std/24 - dependent/24) x 4.99 %   (MFJ one dependent, semimonthly 2,000)
-    sd, dep = D(V("ga.wh.std_deduction.mfj")), D(V("ga.wh.dependent_allowance"))
+    sd, dep = D(V("ga.wh.std_deduction.mfj", on="2026-06-01")), D(V("ga.wh.dependent_allowance", on="2026-06-01"))
     rate = D(V("ga.wh.rate", on="2026-06-01"))  # round 2: withholding level
     p_sd, p_dep = c2(sd / 24), c2(dep / 24)
     base = D(2000) - p_sd - p_dep
     w = base * rate / 100
     oracle("ga.oracle.mfj_semimonthly.withholding", "GA", "MFJ, one dependent, semimonthly 2,000.00 (from 2026-05-11)", [
-        ("Period standard deduction", f"{T('ga.wh.std_deduction.mfj')} ÷ 24", m(p_sd)),
-        ("Period dependent allowance (1)", f"{T('ga.wh.dependent_allowance')} ÷ 24", m(p_dep)),
+        ("Period standard deduction", f"{T('ga.wh.std_deduction.mfj', on='2026-06-01')} ÷ 24", m(p_sd)),
+        ("Period dependent allowance (1)", f"{T('ga.wh.dependent_allowance', on='2026-06-01')} ÷ 24", m(p_dep)),
         ("Withholding", f"(2,000.00 − {m(p_sd)} − {m(p_dep)}) × {T('ga.wh.rate', on='2026-06-01')}%", m(w, 4))], w)
     # LA: (S - std/N) x 3.09 %
     r = D(V("la.pit.rate.flat"))
@@ -471,9 +471,8 @@ def m12():
     # student loan / special
     F.set_loc("m12_worked_examples.md §12.1 An employee with a student loan or other special tax obligation")
     L += ["### An employee with a student loan or other special tax obligation", "",
-          F.gap("no fact describes a federal or State payroll obligation for student-loan repayment "
-                "(for example an administrative wage garnishment order). The case is not computed.",
-                "fed.student_loan.payroll_obligation"), "",
+          f"Student loans: {T('fed.student_loan.payroll_obligation')} {F.REG('fed.student_loan.payroll_obligation')}. "
+          "The garnishment mechanics follow Module 7; no student-loan case is computed here.", "",
           "#### Worked example 4: Supplemental payment above the mandatory threshold", "",
           "**Special tax obligation computed instead: a supplemental payment above the mandatory threshold.** "
           f"Supplemental wages paid to one employee in excess of {T('fed.fit.supplemental.mandatory_threshold')} in the calendar year "

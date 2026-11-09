@@ -185,7 +185,7 @@ FICA and FUTA apply as to any wage. **Table 9.2.1** lists the State supplemental
 
 ### How are backdated payments and retrospective salary adjustments handled?
 
-Federal payroll taxes follow the **payment date**, not the period the pay relates to ([[FACT:fed.tax_year.basis=calendar year (W-2 on calendar-year basis)]]) [US-FED-006]. A retroactive increase paid in 2026 is 2026 wages. It takes the 2026 tables and the 2026 wage bases, even when it relates to 2025. Massachusetts PFML is the exception: its rate follows the wages earned date [US-MAS5-012]. Not configured in this release [[GAP:RQ-525]]: The federal classification of back pay and retroactive increases (supplemental or regular wages) is not established from an official source.
+Federal payroll taxes follow the **payment date**, not the period the pay relates to ([[FACT:fed.tax_year.basis=calendar year (W-2 on calendar-year basis)]]) [US-FED-006]. A retroactive increase paid in 2026 is 2026 wages. It takes the 2026 tables and the 2026 wage bases, even when it relates to 2025. Massachusetts PFML is the exception: its rate follows the wages earned date [US-MAS5-012]. Back pay and retroactive increases: [[FACT:fed.backpay.treatment=Back pay and retroactive increases are ordinary wages taxed in the year paid (FICA); for income tax withholding Pub. 15 lists back pay and retroactive pay increases among supplemental wages. SSA credits back pay as wages in the year paid.]] [US-FEDV6-018].
 
 ### For arrears, how are contributions and deductions computed?
 

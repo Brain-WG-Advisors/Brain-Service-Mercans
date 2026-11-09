@@ -170,7 +170,11 @@ def value_cell(f):
 
 
 def eff(f):
+    import deliverable_wording as DW     # v1.1 QA r1: a proposed or historical register row is never shown as an in-force date
     a, b = f.get("effective_from") or "", f.get("effective_to") or ""
+    st = DW.period_cell(f)
+    if st:
+        return st
     return f"{a} to {b}" if b else f"from {a}"
 
 

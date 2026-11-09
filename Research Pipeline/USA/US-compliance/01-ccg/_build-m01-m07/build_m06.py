@@ -64,7 +64,7 @@ A("Each layer publishes its own. Federal: IRS Pub. 15-T tables (§6.1.1). States
 A("")
 A("| Pattern | State examples | Fact |")
 A("|---|---|---|")
-A(f"| Flat rate | Indiana {T('in.pit.rate', on=ON)}% in 2026 ({T('in.pit.rate', on='2027-06-30')}% from 2027) plus county tax; Utah {T('ut.pit.rate.flat')}%; Georgia {T('ga.pit.rate.flat')}% statutory for 2026 (withholding {T('ga.wh.rate', on='2026-03-01')}% to 2026-05-10, {T('ga.wh.rate', on='2026-06-30')}% from 2026-05-11 {R('ga.wh.rate', on='2026-03-01')}); Michigan {T('mi.pit.rate.flat')}% plus city taxes | {R('in.pit.rate', on=ON)}; {R('ut.pit.rate.flat')}; {R('ga.pit.rate.flat')}; {R('mi.pit.rate.flat')} |")
+A(f"| Flat rate | Indiana {T('in.pit.rate', on=ON)}% in 2026 ({T('in.pit.rate', on='2027-06-30')}% from 2027) plus county tax; Utah {T('ut.pit.rate.flat')}%; Georgia {T('ga.pit.rate.flat')}% statutory for 2026 (withholding {T('ga.wh.rate', on='2026-03-01')}% with standard deduction USD {T('ga.wh.std_deduction.mfj', on='2026-03-01')} married filing jointly / USD {T('ga.wh.std_deduction.single', on='2026-03-01')} single and dependent allowance USD {T('ga.wh.dependent_allowance', on='2026-03-01')} for wages paid 2026-01-01 to 2026-05-10 {R('ga.wh.rate', on='2026-03-01')} {R('ga.wh.std_deduction.mfj', on='2026-03-01')}; {T('ga.wh.rate', on='2026-06-30')}% with USD {T('ga.wh.std_deduction.mfj', on='2026-06-30')} / USD {T('ga.wh.std_deduction.single', on='2026-06-30')} and USD {T('ga.wh.dependent_allowance', on='2026-06-30')} from 2026-05-11 {R('ga.wh.rate', on='2026-06-30')} {R('ga.wh.std_deduction.mfj', on='2026-06-30')}); Michigan {T('mi.pit.rate.flat')}% plus city taxes | {R('in.pit.rate', on=ON)}; {R('ut.pit.rate.flat')}; {R('ga.pit.rate.flat')}; {R('mi.pit.rate.flat')} |")
 A(f"| Graduated | Maryland top rate {T('md.pit.top_rate')}% plus county tax (default county rate {T('md.local.county_rate.default_unknown')}%); California graduated tables (annex CA) | {R('md.pit.top_rate')}; {R('md.local.county_rate.default_unknown')} |")
 A("| Statute differs from the withholding instrument | Ohio, Wisconsin, Nebraska, Kansas, South Carolina (trap table §6.2) | `practice.*` |")
 A("| No wage income tax | Module 1 §1.0 | `*.no_wage_tax` |")
@@ -286,7 +286,7 @@ A("None beyond the current period. Worksheet 1A annualises the current period's 
 A(H(3, "Are year-end tax adjustments required?"))
 A(f"No employer year-end income-tax adjustment: the employee reconciles at assessment ({COV('annual_regularisation')}). "
   f"The exempt status is renewed yearly ({Q('fed.w4.exempt.validity')}). 2027 parameters: "
-  + UNR("fed.indexation.publication_2027"))
+  f"{Q('fed.indexation.publication_2027')} {R('fed.indexation.publication_2027')}.")
 A(H(3, "Are there minimum or higher tax requirements if employees fail to submit a tax ID or social security number?"))
 # round 3b (QA r3 blocker 1, RQ-568 closed by agent 2 R3)
 A("| Situation | Federal rule | Source |")
@@ -302,11 +302,8 @@ A(H(3, "What is the income tax and social security refund procedure?"))
 A(f"Employee side: income tax and excess OASDI from several employers are refunded at assessment ({COV('multiple_employers')}). "
   "Employer side: corrections run through the federal correction returns.")
 A("")
-A(GAP("fed.employment_tax.adjustment_procedure",
-      "the employer procedure to repay or reimburse over-withheld income tax or over-collected FICA in the same year and after year-end (26 CFR 31.6413, Forms 941-X / W-2c) is not in the facts",
-      "Under 26 CFR 31.6413(a) and the Instructions for Form 941-X (2026), how does an employer repay or reimburse over-withheld federal income tax and over-collected employee FICA within the calendar year and after year-end, and what employee statements are required?",
-      "CCG m06 §6.3 refund procedure unanswered; correction workflow of the engine has no rule",
-      "statutory_reporting", tier="A.2"))
+A(f"Employer adjustment procedure (26 CFR 31.6413): {Q('fed.employment_tax.adjustment_procedure')} "
+  f"{R('fed.employment_tax.adjustment_procedure')}.")
 A(H(3, "Deliverable: Provide detailed worked examples for a standard resident employee, a non-resident employee, and an irregular payment."))
 A("Computed by `01-ccg/_examples/build_examples_m01_m07.py` from the facts; each amount rounded half-up to the cent "
   "(Module 1 §1.5); full precision carried between lines.")

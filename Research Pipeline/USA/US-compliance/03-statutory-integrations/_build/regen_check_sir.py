@@ -8,7 +8,7 @@ import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SIRDIR = os.path.dirname(HERE)
-FN = "US-SIR-INDEX-001-v1.0.docx"
+FN = (sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))) or __import__("sir_common").FILENAME)
 tmp = os.path.join(HERE, "_scratch", "regen.docx")
 r = subprocess.run([sys.executable, "-I", os.path.join(HERE, "build_sir.py"), "--out", tmp, "--no-side"], capture_output=True, text=True)
 if r.returncode:

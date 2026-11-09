@@ -94,7 +94,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in SD.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-324]]: RA record retention period not read.
+- Not configured in this release [[GAP:RQ-324]]: RA record retention period not verified against the official source.
 
 ## SD.5 Statutory reporting
 
@@ -196,11 +196,11 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 - **2026-01-01 (SL 2025 ch 199):** new rate table and administrative fee for rated employers [US-SDS5-002].
 - **SL 2026 ch 205 and ch 204:** investment-fund administration and state apprenticeship agency; payroll-neutral [US-SDS5-002, US-SDS5-001].
-- **2027-01-01:** minimum wage and tipped wage per Section 1 [US-SDS5-003]. The 2027 schedule appears only in unapproved advisory-council minutes [US-SDS5-019]; the 2026 session-law list was not read (open point below).
+- **2027-01-01:** minimum wage and tipped wage per Section 1 [US-SDS5-003]. The 2027 schedule appears only in unapproved advisory-council minutes [US-SDS5-019]; the 2026 session-law list was not verified against the official source (open point below).
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-326]]: LRC 2026 session-law list not read.
+- Not configured in this release [[GAP:RQ-326]]: LRC 2026 session-law list not verified against the official source.
 
 ## SD.14 Authority worked examples (oracle values)
 

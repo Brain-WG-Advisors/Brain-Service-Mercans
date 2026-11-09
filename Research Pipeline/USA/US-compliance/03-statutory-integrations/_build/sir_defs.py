@@ -47,7 +47,14 @@ def chains(spec, jur):
                  f"rspec.{j}.ui_qtr.upload_formats", f"rspec.{j}.ui_qtr.formats", f"rspec.{j}.ui_qtr.layout",
                  f"rspec.{j}.ui_qtr.format", f"sir.{j}.ui.online_mandate", f"rspec.{j}.ui_qtr.online_mandate",
                  f"rspec.{j}.ui_qtr.efile_threshold"]
-        return [("Quarterly wage report", main), ("Format or mandate", extra)]
+        out = [("Quarterly wage report", main), ("Format or mandate", extra)]
+        if jur == "GA":      # v1.1 (US-GAV6B-001): DOL-4N electronic for all employers from 2026-08-09 (dated successor fact)
+            # v1.1 build 2: sir.ga.ui.wage_report carries two dated periods (V11 facts fix); both are printed, each with
+            # its date (key@effective_from is resolved by build_sir.hand_off_cell)
+            out[0] = ("Quarterly wage report", ["sir.ga.ui.wage_report@2026-01-01"] + [k for k in main if k != "sir.ga.ui.wage_report"])
+            out.insert(1, ("Quarterly wage report, successor rule", ["sir.ga.ui.wage_report@2026-08-09"]))
+            out.append(("Electronic filing required for all employers", ["ga.report.sui.efile_all_employers"]))
+        return out
     if spec == "US-SDNH-001":
         main = [f"sir.{j}.new_hire.days", f"{j}.newhire.report_days", f"{j}.newhire.report_business_days",
                 f"sir.{j}.new_hire.recipient", f"rspec.{j}.new_hire.deadline"]
@@ -214,7 +221,8 @@ DATA_SET = {
         ("SOC or job title and county, West Virginia", "West Virginia UI wage report", "dd.wv.ui.soc_county"),
         ("Occupation, hours and worksite ZIP, Connecticut", "Connecticut UI wage report", "dd.ct.ui.occupation_hours_zip"),
         ("Gender and hourly wage, Vermont", "Vermont UI wage report", "dd.vt.ui.gender_hourly"),
-        ("Enhanced content, Texas", "Texas UI wage report", "dd.tx.ui.enhanced"),
+        ("Enhanced content, Texas", "Texas UI wage report: proposed only, not mandatory until the TWC amendment to 40 TAC ch. 815 "
+         "is adopted (US-TXV6-005)", "dd.tx.ui.enhanced"),
         ("Separation dates and probationary flag, Missouri", "Missouri UI wage report", "dd.mo.ui.separation_probation"),
         ("Hours and job title, Nebraska", "Nebraska UI wage report", "dd.ne.ui.hours_job_title"),
         ("Hours, work location and adjustment reason, Massachusetts", "Massachusetts UI wage report", "dd.ma.ui.hours_work_location"),

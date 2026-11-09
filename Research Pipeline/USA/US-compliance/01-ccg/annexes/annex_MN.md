@@ -48,7 +48,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mn.overtime.premium.multiplier` | [[FACT:mn.overtime.premium.multiplier=1.5]] ratio | 2026-01-01 | open | US-MNS5-003 (A.1, Minnesota Office of the Revisor of Statutes) | - |
 | `mn.labour.pay_frequency.max_days` | [[FACT:mn.labour.pay_frequency.max_days=31]] days | 2026-01-01 | open | US-MNS5-005 (A.1, Minnesota Office of the Revisor of Statutes) | commissions at least every 3 months |
 
-- Not configured in this release [[GAP:RQ-037]]: The direct deposit and paycard consent rule was not read.
+- Not configured in this release [[GAP:RQ-037]]: The direct deposit and paycard consent rule was not verified against the official source.
 - Not configured in this release [[GAP:RQ-038]]: St. Paul next-year indexed city rate for macro/large/small is not on the page read.
 
 ## MN.2 Income tax withholding
@@ -118,7 +118,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mn.pfml.wage_cap.annual` | [[FACT:mn.pfml.wage_cap.annual=185000]] USD | 2026-01-01 | 2026-12-31 | US-MNP52-003 (A.2, Minnesota DEED (Paid Leave)) | cap = OASDI base; 2027 cap follows the 2027 OASDI base (Annex FED) |
 | `mn.sdi.exists` | [[FACT:mn.sdi.exists=False]] | 2026-01-01 | open | US-MNP52-003 (A.2, Minnesota DEED (Paid Leave)) | No SDI/TDI program in Minnesota. |
 
-- Not configured in this release [[GAP:RQ-039]]: The due dates and file format of the quarterly unemployment wage-detail report are not in Minn. Stat. 268.044, and the agency site was unreachable.
+- Not configured in this release [[GAP:RQ-039]]: The due dates and file format of the quarterly unemployment wage-detail report are not in Minn. Stat. 268.044.
 - Not configured in this release [[GAP:RQ-040]]: 2027 UI wage base not yet published.
 
 ## MN.4 Pay statement
@@ -141,7 +141,7 @@ Rules:
 
 - POA / agents: REV184b (DOR); UI Agent Self-Service ID. (US-MNP52-005, US-MNP6-003)
 
-- Not configured in this release [[GAP:RQ-041]]: W-2 e-file method changed; DOR Fact Sheets 2 and 2a not read.
+- Not configured in this release [[GAP:RQ-041]]: W-2 e-file method changed; DOR Fact Sheets 2 and 2a not verified against the official source.
 
 ## MN.6 Leave
 
@@ -152,7 +152,7 @@ Rules:
 | `mn.leave.esst.balance_cap_hours` | [[FACT:mn.leave.esst.balance_cap_hours=80]] hours | 2024-01-01 | open | US-MNS5-011 (A.1, Minnesota Office of the Revisor of Statutes) | - |
 | `mn.leave.esst.payout_at_separation` | [[FACT:mn.leave.esst.payout_at_separation=False]] | 2024-01-01 | open | US-MNS5-011 (A.1, Minnesota Office of the Revisor of Statutes) | - |
 
-- Not configured in this release [[GAP:RQ-042]]: Minneapolis / St. Paul / Duluth / Bloomington ESST ordinances not read.
+- Not configured in this release [[GAP:RQ-042]]: Minneapolis / St. Paul / Duluth / Bloomington ESST ordinances not verified against the official source.
 
 ## MN.7 Termination and final pay
 
@@ -181,8 +181,8 @@ Rules:
 | `mn.garn.iwo.remit_business_days` | [[FACT:mn.garn.iwo.remit_business_days=7]] days | 2026-01-01 | open | US-MNS5-014 (A.1, Minnesota Office of the Revisor of Statutes) | Partly confirmed by the published source. |
 | `mn.deduction.uniform.max` | [[FACT:mn.deduction.uniform.max=50]] USD | 2018-01-01 | open | US-MNS5-001 (A.1, Minnesota Office of the Revisor of Statutes) | may not reduce pay below minimum wage |
 
-- Not configured in this release [[GAP:RQ-045]]: Employer fee for processing an IWO not located (US-MNS5-014 partial).
-- Not configured in this release [[GAP:RQ-046]]: State tax levy on wages not read.
+- Not configured in this release [[GAP:RQ-045]]: Employer fee for processing an IWO not established from an official source (US-MNS5-014 partial).
+- Not configured in this release [[GAP:RQ-046]]: State tax levy on wages not verified against the official source.
 
 ## MN.10 Collective agreements and prevailing wage
 

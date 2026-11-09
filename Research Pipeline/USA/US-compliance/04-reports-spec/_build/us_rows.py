@@ -82,7 +82,8 @@ def value_kind(key):
     return None
 
 
-LABEL_OVERRIDE = {"nv.mbt.general.quarterly_threshold": ("Taxable wage threshold", "Amount or count", "C"),
+LABEL_OVERRIDE = {"ga.report.sui.efile_all_employers": ("Electronic filing mandate (all employers)", "Flag", "C"),   # v1.1 (US-GAV6B-001)
+                  "nv.mbt.general.quarterly_threshold": ("Taxable wage threshold", "Amount or count", "C"),
                   "rspec.al.w2_state.furnish_threshold": ("Furnishing threshold", "Amount or count", "C")}
 
 
@@ -100,6 +101,7 @@ def classify(key):
 
 
 USE = {
+    "Electronic filing mandate (all employers)": "From the date stated, every employer files the wage report and pays electronically unless the authority authorises otherwise; the payroll stops applying the employee-count threshold for later filings.",
     "Furnishing threshold": "The payroll compares the wages paid to each employee in the State with this amount to decide whether a State W-2 is furnished to that employee.",
     "Taxable wage threshold": "The payroll compares the employer's quarterly taxable wages with this amount and applies the rate only to the wages above it.",
     "Electronic filing / payment threshold": "The payroll compares the employer's count or amount with this threshold "
@@ -137,6 +139,8 @@ USE = {
 }
 
 COND = {
+    "Electronic filing mandate (all employers)": "Applies to filings made on or after the date stated in column M; earlier filings "
+                                                 "follow the threshold row of the same jurisdiction.",
     "Furnishing threshold": "Applies to each employee paid at least the amount stated in column M.",
     "Taxable wage threshold": "Applies to the quarterly taxable wages stated in column M for employers liable in the jurisdiction.",
     "Electronic filing / payment threshold": "Applies only when the employer reaches the threshold stated in column M; "
@@ -151,6 +155,7 @@ COND = {
 }
 
 EXAMPLE = {
+    "Electronic filing mandate (all employers)": "True (every employer files electronically)",
     "Furnishing threshold": "Employee wages compared with the threshold",
     "Taxable wage threshold": "Quarterly wages compared with the threshold",
     "Electronic filing / payment threshold": "Employer at or above the threshold: electronic route",
@@ -173,6 +178,7 @@ EXAMPLE = {
 }
 
 MAPPING = {
+    "Electronic filing mandate (all employers)": "Provider hand-off configuration per jurisdiction (system constant)",
     "Furnishing threshold": "Jurisdiction configuration (dated system constant)",
     "Taxable wage threshold": "Jurisdiction configuration (dated system constant)",
     "Electronic filing / payment threshold": f"{DD_REF}: employer jurisdiction configuration (threshold flag), forward reference",
@@ -195,6 +201,7 @@ MAPPING = {
 }
 
 KIND = {
+    "Electronic filing mandate (all employers)": "system",
     "Furnishing threshold": "system",
     "Taxable wage threshold": "system",
     "Electronic filing / payment threshold": "system", "Due date rule": "system", "Return applicability": "constant",
@@ -269,10 +276,21 @@ def unit_hint(key):
     return ""
 
 
+# v1.1: keys whose effective_from is a legal change date (other facts carry a source-edition date there)
+IN_FORCE_FROM = {"ga.report.sui.efile_all_employers"}
+# v1.1: per-key mandatory flag and condition (overrides the label class)
+KEY_MAND = {"rspec.tx.ui_qtr.enhanced_content": ("C", "Proposed only: the TWC amendment to 40 TAC ch. 815 that would implement "
+            "Labor Code 204.0025 is not adopted [US-TXV6-005]; not configured as mandatory until the adopted rule and its start quarter "
+            "are published (open point UI-TX-005).")}
+
+
 def param_row(jur, key, n, freq, prefix):
     """One jurisdiction parameter row bound to a fact."""
     at(f"{prefix}-{n:03d}")
     label, vtype, mand = classify(key)
+    kcond = None
+    if key in KEY_MAND:
+        mand, kcond = KEY_MAND[key]
     f = fact(key)
     name = STATE_NAMES.get(jur, jur)
     v = f["value"]
@@ -285,6 +303,8 @@ def param_row(jur, key, n, freq, prefix):
         per = f" In force from {eff}; not applied to {YEAR}."
     elif f.get("effective_to") and str(f.get("effective_to")) < f"{YEAR}-12-31":
         per = f" Valid until {f.get('effective_to')}."
+    elif eff > f"{YEAR}-01-01" and key in IN_FORCE_FROM:
+        per = f" In force from {eff}."   # v1.1: a legal change during the build year carries its date
     extra = (" The DES page names the bulk-filer route as \"Azure / File Transfer Submission\" [US-AZB5-006]."
              if key == "rspec.az.ui_qtr.form" else "")
     expl = (f"{name}: {label.lower()}: {tag(key)}{unit}{basis}.{per}{extra} {USE[label]} {src(key)}")
@@ -306,7 +326,7 @@ def param_row(jur, key, n, freq, prefix):
                f"{prefix}-{n:03d}",
                "N" if kind in ("system", "constant", "excluded") else "Y",
                mand,
-               COND.get(label, "Not conditional: applies to every employer filing this return in the jurisdiction.")
+               kcond or COND.get(label, "Not conditional: applies to every employer filing this return in the jurisdiction.")
                if mand != "Y" else "Not conditional: applies to every employer filing this return in the jurisdiction.",
                "Return level (not a file position)" if label != "Record layout" else "Positions as stated in column M",
                "Not applicable (configuration value)" if label != "Record layout" else "As stated in column M",

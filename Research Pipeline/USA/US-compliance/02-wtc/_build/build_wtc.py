@@ -8,6 +8,11 @@ import csv
 import datetime as dt
 import json
 import os
+import sys as _sys_dw
+_DW_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "01-ccg", "_build", "common"))
+if _DW_DIR not in _sys_dw.path:
+    _sys_dw.path.insert(0, _DW_DIR)
+import deliverable_wording as DW  # noqa: E402  v1.1 QA r1: open points in deliverable wording
 import re
 import sys
 
@@ -45,7 +50,7 @@ def col_letter(i):
 
 
 def g(t):
-    return W.clean(t)
+    return W.clean(DW.restate(t))
 
 
 def tmpl_style(ws, col):
@@ -173,11 +178,19 @@ def build(out_dir=None, sidecars=True):
     vc["B9"].value = f"{W.COUNTRY} | {W.WTC_ID} v{W.PKG}"
     for dv in vc.data_validations.dataValidation:
         if "Released" in str(dv.formula1):
-            dv.formula1 = '"In Progress,Under Review,Approved,Released,Issued,For QA"'
-    vc["B13"].value, vc["C13"].value = float(W.PKG), W.ISSUE
-    vc["D13"].value, vc["E13"].value, vc["F13"].value = "Wage Type Catalogue of the United States payroll package", W.STATUS, W.AUTHOR
-    for col in "BCDEF":
-        vc[f"{col}14"].value = None
+            dv.formula1 = '"In Progress,Under Review,Approved,Released,Issued,For QA,Superseded"'
+    _rows = W.D.C.changelog_rows("WTC", W.STATUS)
+    if _rows:   # v1.1: previous version row + this version with what changed, why and the source
+        import datetime as _dt
+        for r, (ver, eff, desc, st) in zip((13, 14), _rows):
+            vc[f"B{r}"].value, vc[f"C{r}"].value = float(ver), _dt.datetime.strptime(eff, "%Y-%m-%d")
+            vc[f"D{r}"].value = "Wage Type Catalogue of the United States payroll package" if r == 13 else desc
+            vc[f"E{r}"].value, vc[f"F{r}"].value = st, W.AUTHOR
+    else:
+        vc["B13"].value, vc["C13"].value = float(W.PKG), W.ISSUE
+        vc["D13"].value, vc["E13"].value, vc["F13"].value = "Wage Type Catalogue of the United States payroll package", W.STATUS, W.AUTHOR
+        for col in "BCDEF":
+            vc[f"{col}14"].value = None
 
     # ---- Sick leave ----------------------------------------------------------------------------------------
     W.at("Sick Leave Paid By Employer")

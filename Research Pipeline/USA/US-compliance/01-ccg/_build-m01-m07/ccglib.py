@@ -35,6 +35,9 @@ for fp in sorted(glob.glob(os.path.join(RES, "CCG-*-facts.json"))):
         UNRES.setdefault(u["key"], []).append(u)
 
 MANIFEST = json.load(open(os.path.join(BASE, "_pipeline", "build-manifest.json"), encoding="utf-8"))
+_OVL = os.path.join(BASE, "_pipeline", "package-overlay-v1.1.json")   # v1.1 rebuild: package version overlay
+if os.path.isfile(_OVL):
+    MANIFEST["package"] = dict(MANIFEST["package"], **json.load(open(_OVL, encoding="utf-8"))["package"])
 
 STATE = {"unit": None, "loc": None}
 BINDINGS = []      # (unit, loc, key, register_id, value_shown)
@@ -65,6 +68,13 @@ def _pick(key, on=None):
     fs = [u[1] for u in uniq]
     if on is None:
         if len(fs) > 1:
+            # v1.1: a key whose only other periods start in a later year (e.g. a 2027 indexation figure)
+            # binds to the period in force in the build year; a change DURING the build year still raises.
+            yr = str(MANIFEST["year"])
+            cur = [f for f in fs if (f.get("effective_from") or "0000")[:4] <= yr <= (f.get("effective_to") or "9999")[:4]]
+            later = [f for f in fs if (f.get("effective_from") or "0000")[:4] > yr]
+            if len(cur) == 1 and len(cur) + len(later) == len(fs):
+                return cur[0]
             raise ValueError(f"{key} has {len(fs)} dated values; pass on=")
         return fs[0]
     cands = [f for f in fs if (f.get("effective_from") or "0000") <= on <= (f.get("effective_to") or "9999")]
@@ -87,7 +97,7 @@ def _fmt(f, fmt=None):
         return f"{v:,}"
     if float(v).is_integer():
         return f"{int(v):,}"
-    if f.get("currency") == "USD":
+    if f.get("currency") == "USD" and round(float(v), 2) == float(v):   # v1.1: never round a fact (0.725 USD/mile)
         return f"{v:,.2f}"
     s = repr(v)
     return s

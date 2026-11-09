@@ -156,7 +156,7 @@ A(f"| Educational assistance | {T('fed.base.educational_assistance.fit')} | {T('
 A(f"| Dependent-care assistance | {T('fed.base.dependent_care.fit')} | {T('fed.base.dependent_care.fica')} | {T('fed.base.dependent_care.futa')} | {R('fed.base.dependent_care.fica')} |")
 A(f"| Retirement deferrals and Section 125 reductions | See Module 3, Step 2 | See Module 3, Step 2 | See Module 3, Step 2 | {R('fed.retirement.pretax.tax_treatment')} |")
 A(f"| Moving expenses, bicycle commuting | No exclusion (eliminated, except moving for Armed Forces / intelligence community) | No exclusion | No exclusion | {K('fed.bik.moving_and_bicycle.excluded')} |")
-A(f"| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | Not established from an official source [[GAP:RQ-593]] | {K('fed.minister.withholding')} |")
+A(f"| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | {Q('fed.minister.futa')} {R('fed.minister.futa')} | {K('fed.minister.withholding')} |")
 A("")
 A("")
 A("Statutory wage definitions behind the table:")

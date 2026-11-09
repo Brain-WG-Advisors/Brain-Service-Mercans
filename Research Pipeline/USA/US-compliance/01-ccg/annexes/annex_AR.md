@@ -14,7 +14,7 @@ Classification: T3. Separate State withholding and UI; no local wage tax.
 | Minimum wage tipped cash wage | USD [[FACT:ar.minwage.tipped.cash_wage=2.63]] | from 2021-01-01 |  | S1 | Tip credit up to minimum wage; written notice each time the tip-credit amount changes (11 CAR 11). |
 | Overtime weekly threshold hours | [[FACT:ar.overtime.weekly_threshold_hours=40]] hours | from 2026-01-01 |  | S1 | 1.5x over [[FACT:ar.overtime.weekly_threshold_hours=40]]/week (11-4-211); no daily OT; agricultural and FLSA-exempt excluded. |
 | Paycard free withdrawals per load | [[FACT:ar.paycard.free_withdrawals_per_load=1]] count | from 2019-07-24 |  | S2 | 11-4-403(f) (Act 853 of 2019): direct deposit or preloaded card lawful; no employee-consent clause in the text. |
-| Pay frequency rule | [[FACT:ar.pay_frequency.rule=corporations pay semimonthly; corporations with gross income >= 500,000 may pay FLSA-exempt managers earning > 25,000 at least monthly (11-4-401)]] | from 2026-01-01 |  | S3 | 2008 compilation; later amendment not checked. |
+| Pay frequency rule | [[FACT:ar.pay_frequency.rule=corporations pay semimonthly; corporations with gross income >= 500,000 may pay FLSA-exempt managers earning > 25,000 at least monthly (11-4-401)]] | from 2026-01-01 |  | S3 | 2008 compilation; not verified against later amendments. |
 
 ## AR.2 Income tax withholding
 
@@ -61,7 +61,7 @@ Standard deduction USD [[FACT:ar.wh.std_deduction=2,470]]; personal credit USD [
 | PIT high income threshold | USD [[FACT:ar.pit.high_income.threshold=94,700]] | from 2026-01-01 |  | S5 | Above [[FACT:ar.pit.high_income.threshold=94,700]] net income the two-band table applies (0-4,700 2%; 4,701+ [[FACT:ar.pit.rate.top=3.7]] %). |
 | PIT statute tables | [[FACT:ar.pit.statute.tables=Net income <= 94,700: 0-5,599 0%; 5,600-11,199 2%; 11,200-15,999 3%; 16,000-26,399 3.4%; 26,400-94,700 3.7%. Net income > 94,700: 0-4,700 2%; 4,701+ 3.7%; bracket adjustment 290 at 94,701-94,800, stepping down 10 per 100, 0 from 97,601; tables indexed annually under 26-51-201(d)]] | from 2026-01-01 |  | S5 | Ceilings agree with ar.pit.bracket.1-5. |
 
-Not yet published [[GAP:RQ-463]]: Withholding formula switch date: not established from an official source.
+Not configured in this release [[GAP:RQ-463]]: Withholding formula switch date: not established from an official source.
 
 ## AR.2b Non-resident regime and reciprocity
 
@@ -130,7 +130,7 @@ Not configured in this release [[GAP:RQ-467]]: Leave mandated leave: not establi
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| Final pay discharge | [[FACT:ar.final_pay.discharge=next regular payday; double wages if unpaid within 7 days of that payday]] | from 2019-07-24 |  | S2 | 11-4-405 (Act 853 of 2019). Resignation deadline not located. Vacation payout only if policy promises it. |
+| Final pay discharge | [[FACT:ar.final_pay.discharge=next regular payday; double wages if unpaid within 7 days of that payday]] | from 2019-07-24 |  | S2 | 11-4-405 (Act 853 of 2019). The resignation deadline is not stated in this source. Vacation payout only if policy promises it. |
 | Final pay double wages after days | [[FACT:ar.final_pay.double_wages_after_days=7]] days | from 2019-07-24 |  | S2 |  |
 
 Not configured in this release [[GAP:RQ-464]]: Final pay resignation: not established from an official source.

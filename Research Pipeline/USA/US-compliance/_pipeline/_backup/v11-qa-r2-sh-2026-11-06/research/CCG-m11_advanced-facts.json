@@ -1,0 +1,101 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "m11_advanced",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
+ "_annex_keys_cited": {
+  "fed.statutory_employee.treatment": "CCG-annex_FED-facts.json (US-FEDR3-005)",
+  "fed.minister.withholding": "CCG-annex_FED-facts.json (US-FED-030)",
+  "fed.agricultural.per_worker_threshold": "CCG-annex_FED-facts.json (US-FEDR3-006)",
+  "fed.agricultural.total_threshold": "CCG-annex_FED-facts.json (US-FEDR3-006)",
+  "fed.feie.amount": "CCG-annex_FED-facts.json (US-FED-025)",
+  "fed.bik.parking.monthly_exclusion": "CCG-annex_FED-facts.json (US-FEDS5-008)",
+  "fed.bik.transit.monthly_exclusion": "CCG-annex_FED-facts.json (US-FEDS5-008)",
+  "fed.bik.dependent_care.exclusion": "CCG-annex_FED-facts.json (US-FEDS5-008)",
+  "fed.bik.educational_assistance.exclusion": "CCG-annex_FED-facts.json (US-FEDS5-008)",
+  "fed.bik.group_term_life.excluded_coverage": "CCG-annex_FED-facts.json (US-FEDS5-008)",
+  "fed.bik.trump_account.employer_contribution_max": "CCG-annex_FED-facts.json (US-FEDS5-030)",
+  "fed.aca.affordability.rate": "CCG-annex_FED-facts.json (US-FEDS5-011)"
+ },
+ "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
+ "facts": [
+  {
+   "key": "fed.citizen_abroad.form673",
+   "value": "Employer may stop FIT withholding on Form 673 statement (FEIE/housing); citizens only",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDR3-007",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/publications/p54",
+   "confidence": "high",
+   "note": "effective_from: register row carries no date; value in force on 2026-01-01 per the row"
+  },
+  {
+   "key": "fed.fit.supplemental.aggregate_method",
+   "value": "Supplemental wages identified separately, income tax withheld from regular wages in the current or preceding year: either flat 22% or aggregate - add the supplemental wages to the concurrently paid regular wages (or, if none, to the regular wages of the current or preceding payroll period), figure the tax as if one regular-period payment, subtract the tax withheld or to be withheld from the regular wages, withhold the remainder; earlier supplemental payments of the same period are aggregated too. No income tax withheld from regular wages in the current or preceding year: aggregate method only. Supplemental wages paid with regular wages without specifying each amount: withhold on the total as one regular payment.",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-FEDQ1-002",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+   "confidence": "high",
+   "note": "Pub. 15 (2026) sec. 7 Supplemental Wages, p.24."
+  },
+  {
+   "key": "fed.bik.business_mileage.rate",
+   "value": 0.725,
+   "unit_of_measure": "USD per mile",
+   "currency": "USD",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-06-30",
+   "register_id": "US-FEDV6-011",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-drop/n-26-10.pdf",
+   "confidence": "high",
+   "note": "Notice 2026-10 (72.5 cents), modified by Announcement 2026-11 from 2026-07-01. Canonical key; aliases fed.bik.mileage_rate (RQ-409) and fed.bik.mileage.rate (WTC-RQ-89)."
+  },
+  {
+   "key": "fed.bik.business_mileage.rate",
+   "value": 0.76,
+   "unit_of_measure": "USD per mile",
+   "currency": "USD",
+   "effective_from": "2026-07-01",
+   "register_id": "US-FEDV6-010",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "Internal Revenue Service",
+   "url": "https://www.irs.gov/irb/2026-29_irb",
+   "confidence": "high",
+   "note": "Announcement 2026-11, IRB 2026-29 (not \"Notice 2026-29\": 29 is the bulletin number); medical/moving 23.5 cents; charity 14 cents. Quote checked in the saved IRB text 2026-11-06."
+  }
+ ],
+ "unresolved": [
+  {
+   "key": "fed.fit.pay_frequency_change",
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): No federal rule specific to a mid-year change of payroll frequency was found in Pub. 15 or Pub. 15-T 2026. The published rule: with a regular payroll period, withhold for that period; with no regular period use the daily/miscellaneous method counting the days in the period.",
+   "attempted": [
+    "2026-11-06 V11 validation round; register US-FEDV6-018"
+   ],
+   "what_would_close_it": "Pub. 15-T miscellaneous pay period rules read on the authority host (www.irs.gov, www.govinfo.gov).",
+   "blocking": false
+  },
+  {
+   "key": "fed.nra.residency_change",
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): Partly closed. FICA: the F/J exception covers a nonresident alien and does not apply where inconsistent with section 7701(b), so a resident alien is not exempt. Withholding: Pub. 15 states the nonresident add-on and W-4 conditions (single status, no exemption) apply to nonresident aliens. A dual-status-year W-4 replacement procedure was not found in the publications read (Pub. 515 not read).",
+   "attempted": [
+    "2026-11-06 V11 validation round; register US-FEDV6-024, US-FEDV6-018"
+   ],
+   "what_would_close_it": "FED primary source for `fed.nra.residency_change` read on the authority host (www.irs.gov, www.govinfo.gov).",
+   "blocking": false
+  }
+ ]
+}

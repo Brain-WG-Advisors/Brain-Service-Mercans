@@ -21,7 +21,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `wv.minwage.hourly` | [[FACT:wv.minwage.hourly=8.75]] | USD | from 2016-01-01 | US-WVS5-007 | DOL FAQ (A.2); statute 21-5C-2 not read; HB 5485 died 2026-02-13 (US-WVS5-017) |
+| `wv.minwage.hourly` | [[FACT:wv.minwage.hourly=8.75]] | USD | from 2016-01-01 | US-WVS5-007 | DOL FAQ (A.2); statute 21-5C-2 not verified; HB 5485 died 2026-02-13 (US-WVS5-017) |
 | `wv.labour.minwage.coverage_min_employees_at_location` | [[FACT:wv.labour.minwage.coverage_min_employees_at_location=6]] |  | from 2015-01-01 | US-WVS5-005 |  |
 | `wv.minwage.tipped.cash_wage` | [[FACT:wv.minwage.tipped.cash_wage=2.62]] | USD | from 2016-01-01 | US-WVS5-007 | 70% tip credit with written tip records |
 | `wv.labour.meal_credit.daily` | [[FACT:wv.labour.meal_credit.daily=4.00]] | USD | from 2016-01-01 | US-WVS5-007 |  |
@@ -73,9 +73,9 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not yet published [[GAP:RQ-388]]: The WV Tax Division does not state from which pay date employers must apply the March 2026 IT-100.2A tables that implement the retroactive SB 392 rate cut.
+- Not configured in this release [[GAP:RQ-388]]: The WV Tax Division does not state from which pay date employers must apply the March 2026 IT-100.2A tables that implement the retroactive SB 392 rate cut.
 - Not configured in this release [[GAP:RQ-389]]: Not established from an official source.
-- Not yet published [[GAP:RQ-390]]: Municipal service fees of cities other than Charleston rest on secondary sources only; no fee amount is stated for them.
+- Not configured in this release [[GAP:RQ-390]]: Municipal service fees of cities other than Charleston rest on secondary sources only; no fee amount is stated for them.
 
 ## WV.2b Non-resident regime and reciprocity
 
@@ -108,7 +108,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WV.2.
 
 **Open research points**
 
-- Not yet published [[GAP:RQ-391]]: The SB 1053 automation and administration fee is written as a percentage of taxable wages in the statute but designed as a shift of contributions; its base and net effect are unclear, so no fee figure is modelled.
+- Not configured in this release [[GAP:RQ-391]]: The SB 1053 automation and administration fee is written as a percentage of taxable wages in the statute but designed as a shift of contributions; its base and net effect are unclear, so no fee figure is modelled.
 
 ## WV.4 Pay statement
 
@@ -144,7 +144,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WV.2.
 **Open research points**
 
 - Not configured in this release [[GAP:RQ-393]]: IT-105 2026 W-2 spec not listed.
-- Not configured in this release [[GAP:RQ-394]]: The current text of W. Va. Code 11-21-74 (an archived copy shows different employee thresholds from the agency documents) was not read.
+- Not configured in this release [[GAP:RQ-394]]: The current text of W. Va. Code 11-21-74 (an archived copy shows different employee thresholds from the agency documents) was not verified against the official source.
 
 ## WV.6 Leave
 
@@ -195,7 +195,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WV.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-395]]: Child-support IWO fee, priority and 48-14 limits not read.
+- Not configured in this release [[GAP:RQ-395]]: Child-support IWO fee, priority and 48-14 limits not verified against the official source.
 
 ## WV.10 Collective agreements and prevailing wage
 
@@ -241,7 +241,7 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 |---|---|---|
 | Domestic / household | UI registration not required below a quarterly cash test per worker; annual withholding filing permitted; minimum wage only where the location test is met; family excluded | US-WVS5-016, US-WVS5-010, US-WVS5-005 |
 | Agricultural | Excluded from the state minimum wage and overtime; non-cash agricultural pay not UI wages | US-WVS5-005, US-WVS5-001 |
-| Minors | Child-labour law not read; records keep the date of birth of minors | US-WVS5-008, US-WVS5-007 |
+| Minors | Child-labour law not verified against the official source; records keep the date of birth of minors | US-WVS5-008, US-WVS5-007 |
 | Tipped | Cash wage per Section 1; reported tips above a monthly test are UI wages | US-WVS5-007, US-WVS5-001 |
 | Clergy / religious | No state rule beyond federal | US-WVS5-010 |
 | Students | Part-time students excluded from the state minimum wage; enrolled student workers excluded from UI | US-WVS5-005, US-WVS5-016 |

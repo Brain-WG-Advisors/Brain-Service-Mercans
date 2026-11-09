@@ -3,7 +3,7 @@
 - **No local minimum wages.** Local regulation of hours, scheduling and benefits for private employers is preempted (ORC 4113.85): {{oh.local_mandates.preempted}} [US-OHS5-012]. No city minimum wage was located; the minimum-wage preemption text itself (ORC 4111.02) was not read.
 - **Overtime (ORC 4111.03) [US-OHS5-003].** {{oh.overtime.premium.multiplier}} times the regular rate over {{oh.overtime.weekly_threshold_hours}} hours per workweek, following FLSA exemptions; no daily overtime. Small employers below the poster's gross-receipts test are outside the state overtime duty [US-OHS5-004, US-OHS5-005].
 - **Pay frequency and pay day (ORC 4113.15) [US-OHS5-015, US-OH-004]:** {{oh.pay_frequency.rule}}. Daily or weekly pay is allowed, as is a longer customary or contractual lapse; liquidated damages accrue on wages left unpaid beyond the statutory period.
-- **Method of payment** (direct deposit or paycard consent): no Ohio statute read (open point below).
+- **Payment timing and method (ORC 4113.15) [US-OHV6-004]:** {{oh.payment.method}}.
 - **Records:** name, address, occupation, rate, pay per period, hours per day and week, kept {{oh.records.wage_hour.retention_years}} years [US-OHS5-005].
 
 ## @income_tax
@@ -48,7 +48,7 @@
 
 ## @social
 - **Unemployment insurance (ODJFS rate year 2026) [US-OHS5-002, US-OH-005].** Taxable wage base {{oh.sui.wage_base}} USD. New employer {{oh.sui.new_employer.rate}} % (including the Technology and Customer Service Fee); construction new employer {{oh.ui.rate.new_employer.construction}} %. Experienced range, fee included: {{oh.ui.rate.min_total}} % to {{oh.ui.rate.max_total}} %. Technology and Customer Service Fee {{oh.ui.tcsf.rate}} % (ORC 4141.251) [US-OHP7-003]. Employee contribution {{oh.sui.employee.rate}} %.
-- **No SDI, TDI or PFML** (open point below on the evidence level) and no transit or workforce levy on wages [US-OHL-002].
+- **No SDI, TDI or PFML** ({{oh.sdi_pfml.exists}} [US-OHV6B-001]) and no transit or workforce levy on wages [US-OHL-002].
 
 ## @payslip
 - **Content (ORC 4113.14, Pay Stub Protection Act, effective 2025-04-09) [US-OHP51-001, US-OHL-001]:** a written or electronic statement every pay period: {{oh.payslip.items}}. No language clause; the SSN is not required.
@@ -76,14 +76,14 @@
 
 ## @deductions
 - **Creditor garnishment (ORC 2329.66(A)(13)) [US-OHS5-011]:** the exempt amount is the greater of the CCPA percentage of disposable earnings or {{oh.garn.consumer.exempt_multiple_fmw.weekly}} times the federal minimum wage per week (with the corresponding multiples for longer pay periods). This matches the CCPA (Annex FED).
-- **Child support IWO fee (ORC 3121.18):** the employer may deduct a fee of at least {{oh.garn.iwo.employer_fee.min}} USD per withholding, within the statutory percentage of the amount withheld [US-OHS5-010]. Deduction authorisation rules and support priority: open point below.
+- **Child support IWO fee (ORC 3121.18):** the employer may deduct a fee of at least {{oh.garn.iwo.employer_fee.min}} USD per withholding, within the statutory percentage of the amount withheld [US-OHS5-010]. Start of withholding: {{oh.garn.deduction_rules_priority}} [US-OHV6-003].
 
 ## @cba
-- **Prevailing wage (ORC ch. 4115):** rates set by the Director of Commerce (4115.04); new-construction threshold {{oh.prevailing_wage.threshold.new_construction}} USD, with other thresholds for remodelling and road work, adjusted biennially (4115.034) [US-OHR3-002, US-OHR3-003, US-OHP51-003]. Certified payroll: open point below.
+- **Prevailing wage (ORC ch. 4115):** rates set by the Director of Commerce (4115.04); new-construction threshold {{oh.prevailing_wage.threshold.new_construction}} USD, with other thresholds for remodelling and road work, adjusted biennially (4115.034) [US-OHR3-002, US-OHR3-003, US-OHP51-003]. Certified payroll: {{oh.prevailing_wage.certified_payroll}} [US-OHV6-002].
 
 ## @indexation
 - **Minimum wage:** {{oh.minwage.indexation}} [US-OHS5-006]. The small-employer threshold uses the same index; the tipped wage is half the minimum wage. The 2026 and 2027 published values follow from the index (derivation in the research pack; values in Section 1).
-- **SUI wage base:** statutory, read as not indexed (open point below).
+- **SUI wage base:** {{oh.ui.wage_base.indexation}} [US-OHV6-001].
 - **Withholding tables:** republished after a rate change (OAC 5703-7-10) [US-OHS5-017], hence the 2026-08-01 edition.
 - **Prevailing-wage thresholds:** biennial (4115.034). **School district rates:** annual change list each January [US-OHS5-018].
 

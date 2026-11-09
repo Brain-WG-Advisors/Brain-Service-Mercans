@@ -9,7 +9,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 ## VT.1 Employment and labour code
 
-- **Minimum wage (21 V.S.A. 384(a)(1)) [US-VTS5-001, US-VTS5-003]:** [[FACT:vt.minwage.hourly=14.42]] USD per hour from 2026-01-01; the federal rate applies if higher. The 2027 rate is not located (blocking open point below).
+- **Minimum wage (21 V.S.A. 384(a)(1)) [US-VTS5-001, US-VTS5-003]:** [[FACT:vt.minwage.hourly=14.42]] USD per hour from 2026-01-01; the federal rate applies if higher. The 2027 rate is not established from an official source (blocking open point below).
 - **Tipped (service) employees (384(a)(2)):** hotel, motel, tourist-place and restaurant staff above a monthly tip test receive a basic wage of at least half the minimum: [[FACT:vt.minwage.tipped.cash_wage=7.21]] USD per hour from 2026-01-01; the employer makes up any shortfall over the workweek [US-VTS5-003].
 - **Local minimum wages:** none located; municipalities have only local option taxes on sales, meals, alcohol and rooms [US-VTP51-005].
 - **Overtime (384(b)) [US-VTS5-001]:** [[FACT:vt.overtime.premium.multiplier=1.5]] times the regular rate above [[FACT:vt.overtime.weekly_threshold_hours=40]] hours per workweek; no daily overtime. Broad exemptions beyond the FLSA (retail or service establishments, seasonal amusement, hotel, motel and restaurant, certain transport, political subdivisions, FLSA-covered State employees); hospitals and care homes may elect an 8/80 system. Allowed deductions from the minimum: board, lodging, apparel, rent, utilities (384(c)).
@@ -31,7 +31,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not yet published (expected October 2026; not yet found when last checked on 2026-11-02) [[GAP:RQ-358]]: 2027 VT minimum wage not located.
+- Not yet published (expected October 2026; not yet found when last checked on 2026-11-02) [[GAP:RQ-358]]: 2027 VT minimum wage not established from an official source.
 
 ## VT.2 Income tax withholding
 
@@ -102,8 +102,8 @@ The local wage taxes of this jurisdiction, where any exist, are written in VT.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-359]]: 2027 UI wage base not located.
-- Not configured in this release [[GAP:RQ-360]]: The 2026 base of [[FACT:vt.sui.wage_base=15,400]] USD cannot be re-derived from the prior-year base because the state annual average wage (1338(g)) was not read.
+- Not configured in this release [[GAP:RQ-359]]: 2027 UI wage base not established from an official source.
+- Not configured in this release [[GAP:RQ-360]]: The 2026 base of [[FACT:vt.sui.wage_base=15,400]] USD cannot be re-derived from the prior-year base because the state annual average wage (1338(g)) was not verified against the official source.
 - Not configured in this release [[GAP:RQ-361]]: Schedule I-V for the rate year from 2026-07-01 not confirmed.
 - Not configured in this release [[GAP:RQ-369]]: Not established from an official source.
 
@@ -121,7 +121,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VT.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-363]]: Electronic pay statement consent rule not found.
+- Not configured in this release [[GAP:RQ-363]]: Electronic pay statement consent rule not established from an official source.
 
 ## VT.5 Statutory reporting
 
@@ -164,7 +164,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VT.2.
 ## VT.7 Termination and final pay
 
 - **Final pay (342(b)) [US-VTS5-002]:** voluntary quit: the last regular payday (or the following Friday); discharge: within [[FACT:vt.term.final_pay.discharge.hours=72]] hours. Penalties and officer liability (345) [US-VTS5-024].
-- **Accrued vacation:** [[FACT:vt.term.vacation.payout=only if written policy/agreement provides]] (VDOL WH-13) [US-VTS5-025]. Earned sick time: no payout. State WARN (411 ff.): not read (open point below).
+- **Accrued vacation:** [[FACT:vt.term.vacation.payout=only if written policy/agreement provides]] (VDOL WH-13) [US-VTS5-025]. Earned sick time: no payout. State WARN (411 ff.): not verified against the official source (open point below).
 
 **Parameters (termination)**
 
@@ -175,7 +175,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VT.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-366]]: 21 V.S.A. 411-419 not read.
+- Not configured in this release [[GAP:RQ-366]]: 21 V.S.A. 411-419 not verified against the official source.
 
 ## VT.8 Benefits in kind and taxable wages
 
@@ -193,7 +193,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VT.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-370]]: The Treasurer's Vermont Saves page (US-VTB5-003) does not state the default payroll contribution rate or escalation; Program Rules (Feb 2026) not read.
+- Not configured in this release [[GAP:RQ-370]]: The Treasurer's Vermont Saves page (US-VTB5-003) does not state the default payroll contribution rate or escalation; Program Rules (Feb 2026) not verified against the official source.
 
 ## VT.9 Deductions and garnishments
 
@@ -211,7 +211,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in VT.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-367]]: Department of Taxes wage levy not read.
+- Not configured in this release [[GAP:RQ-367]]: Department of Taxes wage levy not verified against the official source.
 
 ## VT.10 Collective agreements and prevailing wage
 
@@ -261,7 +261,7 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 |---|---|---|
 | Domestic / household | Excluded from minimum wage and overtime (383(2)(B)); UI above a quarterly cash test; withholding follows federal | US-VTS5-013, US-VTS5-009, US-VTS5-016 |
 | Agricultural | Excluded from minimum wage and overtime (383(2)(A)); UI coverage tests | US-VTS5-013, US-VTS5-009 |
-| Minors | Not covered by earned sick time; child-labour rules not read | US-VTS5-011 |
+| Minors | Not covered by earned sick time; child-labour rules not verified against the official source | US-VTS5-011 |
 | Tipped | Basic wage per Section 1; employer top-up; tip reports kept | US-VTS5-001, US-VTS5-003, US-VTP9-001 |
 | Clergy / religious | Withholding follows federal; some religious-organisation services exempt from UI | US-VTS5-016, US-VTS5-009 |
 | Students | Excluded from minimum wage and overtime during the school year (383(2)(I)); UI exemptions for own-school, work-experience and some camp work | US-VTS5-013, US-VTS5-009 |

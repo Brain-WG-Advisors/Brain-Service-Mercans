@@ -74,7 +74,7 @@ MW fixed steps to 15.00 (2026-09-30); CPI-W from 2028-01-01; UI base not indexed
 
 
 ## 12 — Payroll data protection / records
-- `fl.breach.notice_days` = **30** days (2026-01-01 → open) [A.1, US-FLS5-017, quoted from authority page, conf high] — 501.171: notice to Dept. of Legal Affairs for 500+ Floridians within 30 days (+15 for good cause). Amended by ch. 2026-52 s.9 (substance not read).
+- `fl.breach.notice_days` = **30** days (2026-01-01 → open) [A.1, US-FLS5-017, quoted from authority page, conf high] — 501.171: notice to Dept. of Legal Affairs for 500+ Floridians within 30 days (+15 for good cause). ch. 2026-52 s. 9 amended only 501.171(11)(d) (public-records exemption, definition of 'proprietary information'), effective 2026-04-23; the 30-day rule is unchanged [US-FLV6C-001].
 
 ## 13 — Live legal change
 - `fl.live.minwage_2026_09_30` = **minimum wage 15.00 and tipped 11.98 from 2026-09-30, in force**  (2026-09-30 → open) [A.1, US-FLS5-001, quoted from authority page, conf high]
@@ -104,7 +104,7 @@ Mirrors `unresolved[]` in the facts file (same keys).
 
 - `fl.sui.wages.401k_deferral` (blocking) — 443.1217(2)(f) excludes payments to a 401(a) trust and carves out salary reduction only for 403(b); ambiguous against FUTA 3306(r); DOR guide silent. **Would close it:** A DOR TIP or an answer from DOR e-vendor / Reemployment Tax FAQ.
 - `fl.termination.separation_notice` (non-blocking) — 443.151(1) defers to rules; whether a FloridaCommerce rule requires a separation form was not read. **Would close it:** Rule chapters 73B-10/73B-11 F.A.C. on flrules.org.
-- `fl.live.ch_2026_52` (non-blocking) — 501.171 was amended by ch. 2026-52 s.9; substance not read. **Would close it:** Laws of Florida ch. 2026-52 on laws.flrules.org.
+- `fl.live.ch_2026_52` — CLOSED (QA r2, 2026-11-06): ch. 2026-52 (SB 7026) read on laws.flrules.org [A.1, US-FLV6C-001]: s. 9 amends 501.171(11)(d) only; in force on becoming law 2026-04-23 (s. 19; approved and filed 2026-04-23). US-FLV6-002 effective_from set to 2026-04-23 (was the retrieval date).
 - `fl.minwage.tipped.poster_confirmation` (non-blocking) — 11.98 is derived from A.1 but not confirmed on the FloridaCommerce 2026 poster (access gap). **Would close it:** FloridaCommerce 2026 minimum wage poster.
 - `fl.report.sui.xml_changes_2026` (non-blocking) — RT_changes.xlsx inside the RT XML package not read. **Would close it:** Read RT_changes.xlsx in FL_DOR_flRtXmlPkg_2026-11-02.zip (Stage 3 / RSPEC).
-- `fl.live.bulletin_sweep` (non-blocking) — Full sweep of Laws of Florida 2026 and DOR TIPs 2026 not run within budget. **Would close it:** Laws of Florida 2026 index and DOR Tax Information Publications 2026 (browser pass).
+- `fl.live.bulletin_sweep` (non-blocking) — Florida 2026 session laws other than ch. 2026-52 and the 2026 DOR Tax Information Publications are not among the sources used, so a further 2026 Florida payroll change is not established. **Would close it:** Laws of Florida 2026 index and DOR Tax Information Publications 2026 (browser pass).

@@ -24,6 +24,7 @@ import glob
 import json
 import os
 import re
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
@@ -184,7 +185,20 @@ def _limitation_text(g, seg):
     body = re.sub(r"^RESEARCH-GAP\s*(\([^)]*\))?\s*:?\s*", "", body).strip()
     body = clean_gap_body(body)
     exp_txt = f" (expected {exp})" if exp else ""
-    return f"Not yet published{exp_txt} [[GAP:{g['id']}]]" + (f": {body}" if body else ".")
+    # v1.1: curated deliverable wording for limitations rewritten by the V11 gap merge as research logs
+    cur = LIMIT_BODIES.get(g["id"])
+    if cur:
+        return f"{cur['label']}{exp_txt} [[GAP:{g['id']}]]: {cur['body']}"
+    body = re.sub(r"^DOCUMENTED LIMITATION\s*\([^)]*\)\s*:\s*", "", body)
+    # v1.1: 'Not yet published' only for an item that awaits a publication; otherwise the neutral label
+    awaiting = exp or re.search(r"\b20(?:2[7-9])\b|not (?:yet )?published|next year", body, re.I)
+    label = "Not yet published" if awaiting else NEUTRAL_PREFIX
+    return f"{label}{exp_txt} [[GAP:{g['id']}]]" + (f": {body}" if body else ".")
+
+
+_lb = os.path.join(HERE, "limitation_bodies_v11.json")
+LIMIT_BODIES = {k: v for k, v in (json.load(open(_lb, encoding="utf-8")) if os.path.exists(_lb) else {}).items()
+                if not k.startswith("_")}
 
 
 # ------------------------------------------------- round 3: no marker text in the deliverable --
@@ -1023,6 +1037,32 @@ def tag_gap_phrases(unit, text):
     return text
 
 
+# v1.1: round bookkeeping that the V11 research merge wrote into fact NOTES (never inside a tag)
+_ROUND_NOTE_RX = [
+    (re.compile(r"\s*Closes (?:WTC-)?RQ-\d+ \(V11\)\.?"), ""),
+    (re.compile(r"\s*\(see V11 changes note\)"), ""),
+    (re.compile(r"\bG-RULING:\s*"), ""),
+    (re.compile(r"\s*Canonical key; aliases [^|]*?\(WTC-RQ-\d+\)\.?"), ""),
+]
+
+
+def strip_round_notes(text):
+    parts = re.split(r"(\[\[(?:FACT|GAP):[^\]]*\]\])", text)
+    for i in range(0, len(parts), 2):
+        for rx, rep in _ROUND_NOTE_RX:
+            parts[i] = rx.sub(rep, parts[i])
+    return "".join(parts)
+
+
+def _deliverable_wording(text):
+    """v1.1 QA r1: research-process wording of open points ('not read', 'fetched', 'returned an error') restated in
+    deliverable language, outside tags only, line by line (deliverable_wording.restate)."""
+    if HERE not in sys.path:
+        sys.path.insert(0, HERE)
+    import deliverable_wording as DW
+    return chr(10).join(DW.restate(ln) for ln in text.split(chr(10)))
+
+
 def finalize(unit_file, text, annex=False):
     before = {k: len(v) for k, v in GAP_LOG.items()}
     npct = len(PCT_LOG)
@@ -1038,7 +1078,9 @@ def finalize(unit_file, text, annex=False):
     text = tag_gap_phrases(unit_file, text)
     text = neutralize_markers(unit_file, text)
     text = apply_text_fixes(unit_file, text, stage="post")
+    text = _deliverable_wording(text)      # v1.1 QA r1: limitation bodies in deliverable language (deliverable_wording.py)
     text = strip_internal(text)
+    text = strip_round_notes(text)
     text = add_prevailing_wage_scope(unit_file, text)
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
     rec = {k: v[before.get(k, 0):] for k, v in GAP_LOG.items()}

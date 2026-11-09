@@ -26,11 +26,11 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | Renton | [[FACT:wa.labour.minwage.local.renton.large.hourly=21.57]] USD | large employers |
 | Renton | [[FACT:wa.labour.minwage.local.renton.mid.hourly=20.57]] USD, then [[FACT:wa.labour.minwage.local.renton.mid.hourly=21.57]] USD from 2026-07-01 | mid-size employers |
 
-  2027 local rates are not obtained [[GAP:RQ-371]] (blocking open point below).
+ 2027 local rates are not verified against the official source [[GAP:RQ-371]] (blocking open point below).
 - **Overtime (RCW 49.46.130) [US-WAS5-001]:** [[FACT:wa.overtime.premium.multiplier=1.5]] times the regular rate over [[FACT:wa.overtime.weekly_threshold_hours=40]] hours per week, including agricultural employees since 2024; no daily overtime.
 - **Exempt salary threshold (WAC 296-128-545) [US-WAS5-005, US-WAS5-007]:** 2026: [[FACT:wa.exempt.salary.weekly_min=1,541.70]] USD per week for any employer size. 2027: [[FACT:wa.labour.exempt_salary.large.weekly=1,773.00]] USD per week for larger employers and [[FACT:wa.labour.exempt_salary.small.weekly=1,595.70]] USD for smaller employers. Computer professionals paid hourly: [[FACT:wa.labour.computer_professional.hourly=59.96]] USD (2026) and [[FACT:wa.labour.computer_professional.hourly=62.06]] USD (2027).
 - **Pay frequency (WAC 296-126-023) [US-WAS5-004]:** [[FACT:wa.pay_frequency.rule=at least monthly; pay day max 10 days after period end for shorter periods]]; overtime paid on the regular payday of the period earned; direct deposit available on payday.
-- **Method of payment:** NSF fees reimbursed (RCW 49.48.010(1)) [US-WAS5-002]; direct-deposit and paycard consent rule not read (open point below).
+- **Method of payment:** NSF fees reimbursed (RCW 49.48.010(1)) [US-WAS5-002]; direct-deposit and paycard consent rule not verified against the official source (open point below).
 
 **Parameters (labour code and pay rules)**
 
@@ -67,8 +67,8 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not yet published (expected autumn 2026, before 2027-01-01) [[GAP:RQ-371]]: 2027 local minimum wages not obtained (seattle.gov blocked).
-- Not configured in this release [[GAP:RQ-378]]: Direct deposit/paycard consent rule not read.
+- Not yet published (expected autumn 2026, before 2027-01-01) [[GAP:RQ-371]]: 2027 local minimum wages not verified against the official source.
+- Not configured in this release [[GAP:RQ-378]]: Direct deposit/paycard consent rule not verified against the official source.
 
 ## WA.2 Income tax withholding
 
@@ -87,7 +87,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-375]]: SB 6346 text not read to confirm no withholding clause before 2028.
+- Not configured in this release [[GAP:RQ-375]]: SB 6346 text not verified against the official source to confirm no withholding clause before 2028.
 
 ## WA.2b Non-resident regime and reciprocity
 
@@ -131,9 +131,9 @@ The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
 
 - Not configured in this release [[GAP:RQ-372]]: No WAC section or ESD publication names an exclusion for employee elective deferrals (cafeteria plans, retirement deferrals, HSA) from Paid Leave or WA Cares wages, and the UI text is silent.
 - Not configured in this release [[GAP:RQ-373]]: 2027 UI wage base not published.
-- Not configured in this release [[GAP:RQ-374]]: Final 2027 WC rates and RCW 51.32.073 not read.
-- Not configured in this release [[GAP:RQ-380]]: UI exclusions for clergy and students (50.44.040) not read.
-- Not configured in this release [[GAP:RQ-381]]: The 2027 family / medical premium line split under 2SHB 2345 is derived only; the ESD split tables were not readable.
+- Not configured in this release [[GAP:RQ-374]]: Final 2027 WC rates and RCW 51.32.073 not verified against the official source.
+- Not configured in this release [[GAP:RQ-380]]: UI exclusions for clergy and students (50.44.040) not verified against the official source.
+- Not configured in this release [[GAP:RQ-381]]: The 2027 family / medical premium line split under 2SHB 2345 is derived only; the ESD split tables were not verified against the official source.
 - Worker share of the Stay-at-Work and Supplemental Pension premiums: Not configured in this release [[GAP:RQ-595]]
 
 ## WA.4 Pay statement
@@ -173,7 +173,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
 
 - **Paid sick leave (RCW 49.46.210) [US-WAS5-001, US-WAS5-005]:** accrual at least one hour per [[FACT:wa.leave.paid_sick.accrual_ratio_hours_worked=40]] hours worked; usable after the statutory waiting period; paid at the greater of minimum wage or normal rate; carry-over may be capped; payout at separation: [[FACT:wa.leave.sick.payout_on_separation=False]] (construction workers excepted); reinstated on rehire within the statutory period.
 - **PFML job protection (RCW 50A.35.010) [US-WAS5-028]:** employers with [[FACT:wa.leave.pfml.job_protection.employer_threshold=25]] or more employees in 2026 (lower thresholds in 2027 and 2028), employee tenure test.
-- Seattle Paid Sick and Safe Time not obtained [[GAP:RQ-576]] (seattle.gov blocked). No vacation statute.
+- Seattle Paid Sick and Safe Time not verified against the official source [[GAP:RQ-576]]. No vacation statute.
 
 **Parameters (leave)**
 
@@ -198,8 +198,8 @@ The local wage taxes of this jurisdiction, where any exist, are written in WA.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-376]]: State mini-WARN and ESD separation-notice rules not read.
-- Not configured in this release [[GAP:RQ-377]]: Vacation payout at separation: L&I policy not read.
+- Not configured in this release [[GAP:RQ-376]]: State mini-WARN and ESD separation-notice rules not verified against the official source.
+- Not configured in this release [[GAP:RQ-377]]: Vacation payout at separation: L&I policy not verified against the official source.
 
 ## WA.8 Benefits in kind and taxable wages
 
@@ -272,8 +272,8 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | Agricultural | Overtime over the weekly threshold since 2024; narrow MWA exclusion for piece-rate hand harvesters | US-WAS5-001, US-WAS5-005 |
 | Minors | Youth rate for 14-15 year olds (Section 1); full rate for 16-17; prohibited occupations | US-WAS5-006, US-WAS5-005 |
 | Tipped | No tip credit; UI includes reported tips, PFML excludes them | US-WAS5-001, US-WAS5-022, US-WAS5-023 |
-| Clergy / religious | Volunteers for religious bodies are not employees without a real employment relationship; UI exemption not read | US-WAS5-001 |
-| Students | Student-learner sub-minimum by certificate; UI exemption not read | US-WAS5-005 |
+| Clergy / religious | Volunteers for religious bodies are not employees without a real employment relationship; UI exemption not verified against the official source | US-WAS5-001 |
+| Students | Student-learner sub-minimum by certificate; UI exemption not verified against the official source | US-WAS5-005 |
 | Nonresident aliens | No state income tax; WA Cares visa-holder exemption; no PFML visa exemption located | US-WAS5-024 |
 | Corporate officers | Exempt from UI by default for for-profit corporations; coverage optional | US-WAS5-027 |
 | Statutory employees | No Washington-specific rule located | - |

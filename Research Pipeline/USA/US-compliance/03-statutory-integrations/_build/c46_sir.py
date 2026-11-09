@@ -10,7 +10,7 @@ BASE = os.path.dirname(os.path.dirname(HERE))
 spec = importlib.util.spec_from_file_location("ccs", os.path.expanduser("~/mercans-pipeline/shared/consistency-checks/consistency_checks.py"))
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
-sir = os.path.join(BASE, "03-statutory-integrations", "US-SIR-INDEX-001-v1.0.docx")
+sir = os.path.join(BASE, "03-statutory-integrations", (sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))) or __import__("sir_common").FILENAME))
 m.deliverables = lambda base: [sir]
 r = m.c46(BASE, "US")
 print("C46 (SIR only):", r["status"], {k: v for k, v in r.items() if not isinstance(v, (list, dict)) and k != "status"})

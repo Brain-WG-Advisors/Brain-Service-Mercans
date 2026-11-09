@@ -42,13 +42,13 @@ if "--skip-office" not in sys.argv:
     d = os.path.join(HERE, "_scratch", "openchk")
     os.makedirs(d, exist_ok=True)
     import shutil
-    shutil.copy2(os.path.join(SIRDIR, "US-SIR-INDEX-001-v1.0.docx"), d)
+    shutil.copy2(os.path.join(SIRDIR, (sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))) or __import__("sir_common").FILENAME)), d)
     rc["open"] = run("Word open check", ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
                                          os.path.join(SH, "release", "open_check.ps1"), "-Root", d, "-Json", os.path.join(CK, "open_check.json")], 3)
 open(os.path.join(CK, "run_summary.txt"), "w", encoding="utf-8").write("\n".join(lines))
 rc["log"] = run("build log", PY + [os.path.join(HERE, "write_buildlog.py")], 2)
 # md5 last
-files = [os.path.join(SIRDIR, "US-SIR-INDEX-001-v1.0.docx"), os.path.join(SIRDIR, "integration-landscape.json")]
+files = [os.path.join(SIRDIR, (sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))) or __import__("sir_common").FILENAME)), os.path.join(SIRDIR, "integration-landscape.json")]
 files += [os.path.join(HERE, f) for f in sorted(os.listdir(HERE)) if f.endswith(".py")]
 files += [os.path.join(CK, f) for f in ("sir_recon.csv", "f44_self.json", "sir_requests.json")]
 files += [os.path.join(BASE, "_pipeline", f) for f in ("SIR-bindings.csv", "SIR-build-log.md")]

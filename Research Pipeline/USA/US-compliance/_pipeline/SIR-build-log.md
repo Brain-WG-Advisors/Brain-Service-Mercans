@@ -1,8 +1,8 @@
 # SIR - build log
-Artifact: SIR | Country: US | Round: 1 | Built: 2026-11-04
-Manifest: _pipeline/build-manifest.json (USD, currency_minor_units 2, rounding payment 0.01 / accounting 0.01, tier T4, package 1.0, year 2026; validation_exemptions C34 and C35 read: they concern the RSPEC norm and validator gates and do not apply to this document)
+Artifact: SIR | Country: US | Round: 1 | Built: 2026-11-06
+Manifest: _pipeline/build-manifest.json (USD, currency_minor_units 2, rounding payment 0.01 / accounting 0.01, tier T4, package 1.1, year 2026; validation_exemptions C34 and C35 read: they concern the RSPEC norm and validator gates and do not apply to this document)
 Pack: _research/SIR-research-pack.md | Facts: _research/SIR-facts.json (299 facts, 23 open questions in unresolved[] plus 1 pre-build text-check entry that is internal)
-Generator: 03-statutory-integrations/_build/build_sir.py (sir_common.py, sir_defs.py, sir_specs.py, sir_docx.py); deliverable 03-statutory-integrations/US-SIR-INDEX-001-v1.0.docx
+Generator: 03-statutory-integrations/_build/build_sir.py (sir_common.py, sir_defs.py, sir_specs.py, sir_docx.py); deliverable 03-statutory-integrations/US-SIR-INDEX-001-v1.1.docx
 Contract of the generator: re-runnable and the only source of the document (C71: rebuilt package identical, 0 differences). Previous builds are copied to _build/_backup/ before each rebuild; md5 of the final set in _build/checks/md5_final.txt (written last).
 
 ## Precedent inspection (L1)
@@ -21,8 +21,8 @@ Template governing: SHARED_TEMPLATES_GUIDE_v2_1.md (SIR row) and shared/si-runbo
 | 1099 contractors | Out of payroll scope; not asserted | The new-hire duty for contractors is not written without a fact. |
 
 ## Lessons applied
-1. Binding: every factual cell is a [[FACT:key=value]] tag (480 tags, 409 distinct keys); priority when a key is in several files: SIR, RSPEC, DD, WTC, CCG last (sir_common.fact). Citations are the fact's register_id plus _also_register_ids. Keys used: SIR-facts 274, RSPEC-facts 72, DD facts 52, CCG facts 11. Binding log: _pipeline/SIR-bindings.csv (478 rows: location, key, register_id, also ids, effective_from, file).
-2. F44: _build/f44_self.py reads the saved copy of every register row bound to a tag and checks every number, form name, date, quarter, channel word and acronym of the value. Result: 409 distinct tags, 0 misses, 0 tags without a local copy. The generator applies the same test before it writes a value (sir_common.usable): a fact with a missing element, or whose cited source has no saved copy, is not written; the cell becomes "Not configured in this release [[GAP:SIR-RQ-nn]]" with a request. A fallback fact of the same row (for example the RSPEC fact for the same return) is used first when it passes.
+1. Binding: every factual cell is a [[FACT:key=value]] tag (481 tags, 410 distinct keys); priority when a key is in several files: SIR, RSPEC, DD, WTC, CCG last (sir_common.fact). Citations are the fact's register_id plus _also_register_ids. Keys used: SIR-facts 274, RSPEC-facts 73, DD facts 52, CCG facts 11. Binding log: _pipeline/SIR-bindings.csv (479 rows: location, key, register_id, also ids, effective_from, file).
+2. F44: _build/f44_self.py reads the saved copy of every register row bound to a tag and checks every number, form name, date, quarter, channel word and acronym of the value. Result: 410 distinct tags, 0 misses, 0 tags without a local copy. The generator applies the same test before it writes a value (sir_common.usable): a fact with a missing element, or whose cited source has no saved copy, is not written; the cell becomes "Not configured in this release [[GAP:SIR-RQ-nn]]" with a request. A fallback fact of the same row (for example the RSPEC fact for the same return) is used first when it passes.
 3. Period-aware: no fact key used here has more than one period or value; facts with an effective_to carry "(effective from to)" in the cell. No key is collapsed.
 4. Gaps: 39 requests (SIR-RQ-01..39): 8 F44, 23 open questions recorded with the facts, 8 grouped "no source recorded". _research/SIR-research-request.json (validated), _research/gaps.json (SIR-RQ entries appended; other entries untouched; C70 PASS), Appendix B.
 5. Text rules: no tier-B figure (C30 0; no fact used rests on a tier B/C or MANUAL row), no internal path or pipeline wording, no percentage or 3-decimal fraction outside a tag, units written from the fact ("business days" when the key says so).
@@ -112,7 +112,7 @@ Direction DD -> SIR: of 145 elements: 112 cited by Report Spec rows, 25 consumed
 ## Checks (latest run; full output in _build/checks/run_summary.txt)
 ```
 ## build (identical rebuild below) (exit 0)
-written C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\03-statutory-integrations\US-SIR-INDEX-001-v1.0.docx
+written C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\03-statutory-integrations\US-SIR-INDEX-001-v1.1.docx
 
 ## C12 / C29 / WORD+PATH / FRAC+PCT+UNIT / C30 / C46 period-aware / GAP (sir_lint) (exit 0)
 {
@@ -125,7 +125,7 @@ written C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-comp
  "FRAC": 0,
  "PCT": 0,
  "UNIT": 0,
- "tags": 480,
+ "tags": 481,
  "C12": 0,
  "GAP": 0,
  "info": {
@@ -134,13 +134,13 @@ written C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-comp
   "handoff_rows": 236,
   "spec_rows": 236,
   "sections": 3,
-  "tags": 480,
+  "tags": 481,
   "gap_ids": 39
  }
 }
 
 ## F44 self-check (exit 0)
-F44 self-check: 409 distinct tags, 0 misses, 0 tags without a local copy
+F44 self-check: 410 distinct tags, 0 misses, 0 tags without a local copy
 
 ## SIR x RSPEC x DD reconciliation (exit 0)
 recon rows 401 {('REPORT_ROW', 'MAPPED'): 229, ('REPORT_ROW', 'MAPPED_LIMITATION'): 7, ('SPEC', 'MAPPED'): 20, ('DD_ELEMENT', 'CONSUMED_BY_SPEC'): 112, ('DD_ELEMENT', 'NOT_A_FILING_INPUT'): 3, ('DD_ELEMENT', 'CONSUMED_BY_SIR'): 5, ('DD_ELEMENT', 'CONSUMED_BY_WTC'): 25}
@@ -151,35 +151,45 @@ C71: 0 differences
 
 ## shared consistency C42 / C43 / C46 (whole package; rows naming 03-statutory-integrations below) (exit 1)
 C42: PASS  {'hits': 0}
-C43: PASS  {'package_version': '1.0', 'problems': 0}
-C46: FAIL  {'facts': 5305, 'tags': 12224, 'mismatches': 537, 'unbound': 235, 'binding': 0.9811, 'problems': ['537 tag(s) disagree with the facts', '235 fact value(s) written without a tag (binding 98.1%, minimum 100%)']}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 70', 'key': 'fed.fit.extra_pay_period.rule', 'why': "artifact 'No IRS rule adjusts withholding for a 27th biweekly or 53rd weekly payday: Pub. 15-T Worksheet 1A annualises e"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 73', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 163', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 288', 'key': 'nm.wc.admin_fee.employer.quarterly', 'why': "artifact '2.55' vs facts 2.68"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 288', 'key': 'nm.wc.admin_fee.employee.quarterly', 'why': "artifact '2.25' vs facts 2.38"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 320', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 603', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 687', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 763', 'key': 'wa.pfml.total.rate', 'why': "artifact '1.13' vs facts 1.2"}
-      {'file': '01-ccg\\US-CCG-001-v1.0.docx', 'where': 'para 798', 'key': 'pa.local.philadelphia.resident.rate', 'why': "artifact '3.735' vs facts 3.74"}
+C43: FAIL  {'package_version': '1.0', 'problems': 51}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '02-wtc\\US-WTC-001-v1.1.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '03-statutory-integrations\\US-SIR-INDEX-001-v1.1.docx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-DOR-001-StateWithholdingReturns-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-DOR-002-StateAnnualReconciliationW2-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-DOR-003-NevadaMBT-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-DOR-004-PayrollTransitLevies-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-IRS-001-Form941-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-IRS-002-Form944-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+      {'file': '04-reports-spec\\US-IRS-003-Form943-v1.1-Spec.xlsx', 'why': 'version 1.1 is not the package version 1.0'}
+C46: FAIL  {'facts': 5513, 'tags': 13145, 'mismatches': 628, 'unbound': 273, 'binding': 0.9797, 'problems': ['628 tag(s) disagree with the facts', '273 fact value(s) written without a tag (binding 98.0%, minimum 100%)']}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 70', 'key': 'fed.fit.extra_pay_period.rule', 'why': "artifact 'No IRS rule adjusts withholding for a 27th biweekly or 53rd weekly payday: Pub. 15-T Worksheet 1A annualises e"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 73', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 163', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 288', 'key': 'nm.wc.admin_fee.employer.quarterly', 'why': "artifact '2.55' vs facts 2.68"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 288', 'key': 'nm.wc.admin_fee.employee.quarterly', 'why': "artifact '2.25' vs facts 2.38"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 320', 'key': 'fed.fica.oasdi.wage_base', 'why': "artifact '184,500' vs facts 192300"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 388', 'key': 'fed.fit.std_deduction.single', 'why': "artifact '16,100' vs facts 16600"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 388', 'key': 'fed.fit.std_deduction.mfj', 'why': "artifact '32,200' vs facts 33200"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 388', 'key': 'fed.fit.std_deduction.hoh', 'why': "artifact '24,150' vs facts 24925"}
+      {'file': '01-ccg\\US-CCG-001-v1.1.docx', 'where': 'para 463', 'key': 'fed.bik.health_fsa.salary_reduction_cap', 'why': "artifact '3,400' vs facts 3500"}
 
 ## shared C46, SIR document only (exit 0)
-C46 (SIR only): PASS {'facts': 5305, 'tags': 480, 'mismatches': 0, 'unbound': 0, 'binding': 1.0}
+C46 (SIR only): PASS {'facts': 5513, 'tags': 481, 'mismatches': 0, 'unbound': 0, 'binding': 1.0}
 
 ## shared content C53 / C70 (exit 0)
-C53: PASS  {'sir': '03-statutory-integrations\\US-SIR-INDEX-001-v1.0.docx', 'specs': 20, 'problems': 0}
+C53: PASS  {'sir': '03-statutory-integrations\\US-SIR-INDEX-001-v1.1.docx', 'specs': 20, 'problems': 0}
 C70: PASS  {'citations_checked': 7, 'not_in_register': 0, 'repealed_cited': 0, 'gap_problems': 0}
 
 ## validate_contract --all (exit 0)
 ok    C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\_qa\WTC-review-r2.json   [review.schema.json]
 ok    C:\Users\instituto\Documents\brain-service\Research Pipeline\USA\US-compliance\_qa\WTC-review-r3.json   [review.schema.json]
-PASS  (115 files)
+PASS  (118 files)
 
 ## Word open check (exit 0)
 
 
-OPEN CHECK: 1 file(s), 0 not clean
+OPEN CHECK: 2 file(s), 0 not clean
 
 ```
 
@@ -205,4 +215,4 @@ OPEN CHECK: 1 file(s), 0 not clean
 shared consistency_checks.py c46() builds its facts lookup as one value per key (last entry wins), so every tag of a key that has two period entries is compared with the last one. Example: fed.fica.oasdi.wage_base is 184,500 (2026-01-01..2026-12-31, US-FEDS5-005) and 192,300 (2027-01-01..2027-12-31, US-FEDB5-401); tags in 2026 contexts are reported as mismatches against 192300. QA evidence: SIR-QA1-19 in _qa/SIR-review-r1.json (147 of the 150 package-wide mismatches equal another period entry of the same key). This document uses c46_sir.py / sir_lint (period-aware) for its own verdict; the package-wide C46 stays FAIL until the owner of shared/ makes c46() period-aware.
 
 ## Accuracy
-Provider hand-off content: 75 to 85 percent (official pages and file layouts read for most rows; no provider layout, no real filing, 39 cells not configured). Per-row figures are those of the Report Matrix (lowest 50 where the specs themselves leave the row open, highest 90). What closes the gap: the chosen provider's import layout and one accepted real filing per channel; the closing sources listed in Appendix B. Document words: about 23948.
+Provider hand-off content: 75 to 85 percent (official pages and file layouts read for most rows; no provider layout, no real filing, 39 cells not configured). Per-row figures are those of the Report Matrix (lowest 50 where the specs themselves leave the row open, highest 90). What closes the gap: the chosen provider's import layout and one accepted real filing per channel; the closing sources listed in Appendix B. Document words: about 24019.

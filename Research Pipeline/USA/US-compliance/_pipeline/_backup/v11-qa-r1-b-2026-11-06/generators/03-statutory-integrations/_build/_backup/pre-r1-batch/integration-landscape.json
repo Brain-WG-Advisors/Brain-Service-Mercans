@@ -1,0 +1,154 @@
+{
+ "country": "United States of America",
+ "code": "US",
+ "year": 2026,
+ "package_version": "1.0",
+ "produced_by": "artifact-builder (SIR build)",
+ "verdict": "MANUAL_ONLY",
+ "verdict_rationale": "No authority offers the payroll engine a system-to-system integration that Mercans operates. Every outbound submission is made by a third-party filing provider (owner decision; the provider choice is outside the build) through the authority's portal, file upload or electronic return channel; every inbound item is a document the employer acts on. The index records the provider hand-off contract; no authority runbook is warranted.",
+ "provider_handoff": {
+  "outbound_integrations": [
+   "Statutory filing data hand-off to the third-party filing provider (all in-scope federal, State and local returns, deposits and new-hire reports)",
+   "New-hire reporting (State Directory of New Hires; electronic two monthly transmissions)"
+  ],
+  "inbound_integrations": [
+   "Child-support income withholding orders (IWO / e-IWO) from State agencies",
+   "IRS notice of levy on wages (Form 668-W) with the employee's exemption statement",
+   "State UI contribution rate notices (annual employer rate per State, e.g. AZ UC-603, CA DE 2088, AK TR02)"
+  ],
+  "report_specs": [
+   "US-DOR-001",
+   "US-DOR-002",
+   "US-DOR-003",
+   "US-DOR-004",
+   "US-IRS-001",
+   "US-IRS-002",
+   "US-IRS-003",
+   "US-IRS-004",
+   "US-IRS-005",
+   "US-IRS-006",
+   "US-IRS-007",
+   "US-IRS-008",
+   "US-LOC-001",
+   "US-LOC-002",
+   "US-LOC-003",
+   "US-PFML-001",
+   "US-SDNH-001",
+   "US-SSA-001",
+   "US-UI-001",
+   "US-WC-001"
+  ]
+ },
+ "summary": {
+  "authority_groups": 8,
+  "authorities_with_system_to_system": 0,
+  "report_specs": 20,
+  "report_rows": 236
+ },
+ "authorities": [
+  {
+   "code": "IRS",
+   "name": "Internal Revenue Service",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-IRS-001 to US-IRS-008",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "SSA",
+   "name": "Social Security Administration",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-SSA-001",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "STATE-REV",
+   "name": "State departments of revenue / taxation (50 States and the District of Columbia)",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-DOR-001 to US-DOR-004",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "STATE-UI",
+   "name": "State workforce / unemployment insurance agencies",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-UI-001",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "STATE-PROG",
+   "name": "State programme agencies (paid leave, disability, workers' compensation)",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-PFML-001; US-WC-001",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "STATE-NH",
+   "name": "State Directories of New Hires",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-SDNH-001",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "LOCAL",
+   "name": "Local taxing authorities (cities, counties, school districts, collectors)",
+   "integration": false,
+   "channel_type": "provider-transmitted portal, file upload or electronic return; no system-to-system integration operated by Mercans",
+   "directions": [
+    "outbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "US-LOC-001 to US-LOC-003",
+   "developer_portal": null,
+   "runbook_location": null
+  },
+  {
+   "code": "INBOUND-DOCS",
+   "name": "Child-support agencies, IRS levy, State UI rate notices",
+   "integration": false,
+   "channel_type": "document received by the employer; not parsed by the engine",
+   "directions": [
+    "inbound"
+   ],
+   "product_mapping_required": true,
+   "report_specs": "none (received, not filed)",
+   "developer_portal": null,
+   "runbook_location": null
+  }
+ ]
+}

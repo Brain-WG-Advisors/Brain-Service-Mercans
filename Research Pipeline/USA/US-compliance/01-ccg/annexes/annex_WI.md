@@ -24,12 +24,14 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | `wi.minwage.hourly` | [[FACT:wi.minwage.hourly=7.25]] | USD | from 2009-07-24 | US-WIS5-001 | 104.035; minors too; no 2026/2027 change |
 | `wi.labour.minwage.opportunity.hourly` | [[FACT:wi.labour.minwage.opportunity.hourly=5.90]] | USD | from 2009-07-24 | US-WIS5-001 | under 20, first 90 consecutive days |
 | `wi.local_mandates.preempted` | [[FACT:wi.local_mandates.preempted=True]] |  | from 2009-07-24 | US-WIS5-001 | 104.001(2) |
-| `wi.minwage.tipped.cash_wage` | [[FACT:wi.minwage.tipped.cash_wage=2.33]] | USD | from 2009-07-24 | US-WIS5-002 |  |
-| `wi.labour.lodging_credit.weekly` | [[FACT:wi.labour.lodging_credit.weekly=58]] | USD | from 2009-07-24 | US-WIS5-001 | 8.30/day; meals 87/week or 4.15/meal |
+| `wi.minwage.tipped.cash_wage` | [[FACT:wi.minwage.tipped.cash_wage=2.33]] | USD | from 2009-07-24 | US-WIS5-002 | Tipped employee who is not an opportunity employee; signed tip declaration every pay period. The opportunity-employee rate is a separate row. |
+| `wi.labour.lodging_credit.weekly` | [[FACT:wi.labour.lodging_credit.weekly=58]] | USD | from 2009-07-24 | US-WIS5-001 | 8.30/day; meals 87/week. The per-meal amount is a separate row. |
 | `wi.overtime.weekly_threshold_hours` | [[FACT:wi.overtime.weekly_threshold_hours=40]] | hours | from 2003-12-01 | US-WIS5-003 | no daily OT; household domestic outside chapter |
 | `wi.overtime.premium.multiplier` | [[FACT:wi.overtime.premium.multiplier=1.5]] | ratio | from 2003-12-01 | US-WIL-001 |  |
 | `wi.pay_frequency.rule` | [[FACT:wi.pay_frequency.rule=at least monthly, wages to a day max 31 days before payment]] |  | from 2026-01-01 | US-WIS5-004 | 109.03(1); logging/farm quarterly |
 | `wi.labour.direct_deposit.employer_may_require` | [[FACT:wi.labour.direct_deposit.employer_may_require=True]] |  | from 2026-01-01 | US-WIS5-005 | at no cost; stub still due (DWD page A.3) |
+| `wi.minwage.tipped.opportunity.cash_wage` | [[FACT:wi.minwage.tipped.opportunity.cash_wage=2.13]] | USD | from 2009-07-24 | US-WIS5-001 | Tipped employee who is an opportunity employee; signed tip declaration every pay period. |
+| `wi.labour.meal_credit.per_meal` | [[FACT:wi.labour.meal_credit.per_meal=4.15]] | USD | from 2009-07-24 | US-WIS5-001 | Meal allowance per meal the employer may deduct. |
 
 **Open research points**
 
@@ -94,7 +96,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 **Open research points**
 
 - Not configured in this release [[GAP:RQ-382]]: Not established from an official source.
-- Not configured in this release [[GAP:RQ-387]]: 2026 CPI-indexed assessment brackets not read (assessment only).
+- Not configured in this release [[GAP:RQ-387]]: 2026 CPI-indexed assessment brackets not verified against the official source (assessment only).
 
 ## WI.2b Non-resident regime and reciprocity
 
@@ -180,7 +182,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WI.2.
 
 ## WI.8 Benefits in kind and taxable wages
 
-- **Conformity:** Wisconsin generally conforms to the IRC; W-166 defers to Pub 15 and 15-A; HSAs follow federal rules [US-WIS5-011]. Individual IRC conformity paragraph not isolated (open point below).
+- **Conformity:** Wisconsin generally conforms to the IRC; W-166 defers to Pub 15 and 15-A; HSAs follow federal rules [US-WIS5-011]. Individual IRC conformity paragraph not established from an official source (open point below).
 - **2026 box-16 differences (Wisconsin wages higher than federal) [US-WIS5-016]:** [[FACT:wi.bik.wi.box16_differences=IRC 112, 127, 128, 129 (above WI exemption), 132 moving/bicycle]].
 - **Transit and parking:** [[FACT:wi.bik.transit_parking.monthly=340]] USD per month each for 2026, federal and Wisconsin alike.
 
@@ -193,7 +195,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in WI.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-384]]: Individual IRC conformity paragraph 71.01(6) not isolated.
+- Not configured in this release [[GAP:RQ-384]]: Individual IRC conformity paragraph 71.01(6) not established from an official source.
 
 ## WI.9 Deductions and garnishments
 
@@ -212,23 +214,23 @@ The local wage taxes of this jurisdiction, where any exist, are written in WI.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-383]]: DOR wage attachment percentage and priority not read.
+- Not configured in this release [[GAP:RQ-383]]: DOR wage attachment percentage and priority not verified against the official source.
 
 ## WI.10 Collective agreements and prevailing wage
 
 Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
-- **No current prevailing-wage regime** (exists: [[FACT:wi.prevailing_wage.exists=False]]) [US-WIP52-002]; the repealing acts were not read (open point below). CBAs may set a different pay frequency (109.03(1)(a)) [US-WIS5-004].
+- **No current prevailing-wage regime** (exists: [[FACT:wi.prevailing_wage.exists=False]]) [US-WIP52-002]; the repealing acts were not verified against the official source (open point below). CBAs may set a different pay frequency (109.03(1)(a)) [US-WIS5-004].
 
 **Parameters (collective agreements and prevailing wage)**
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `wi.prevailing_wage.exists` | [[FACT:wi.prevailing_wage.exists=False]] |  | from 2026-01-01 | US-WIP52-002 | ch. 103 text has no prevailing wage; repealing act not read |
+| `wi.prevailing_wage.exists` | [[FACT:wi.prevailing_wage.exists=False]] |  | from 2026-01-01 | US-WIP52-002 | ch. 103 text has no prevailing wage; repealing act not verified |
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-385]]: Repealing acts (2017 Act 59; 2015 Act 55) not read.
+- Not configured in this release [[GAP:RQ-385]]: Repealing acts (2017 Act 59; 2015 Act 55) not verified against the official source.
 
 ## WI.11 Indexation
 

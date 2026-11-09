@@ -403,7 +403,7 @@ def build(jur):
                 if note.startswith("Derivation recorded in register row"):
                     note = ""
                 note = autotag(esc(sanitize(note)), own_numeric, f["key"], stats)
-                L.append(f"| `{f['key']}` | {esc(val)} | {f['effective_from']} | {f['effective_to'] or 'open'} | "
+                L.append(f"| `{f['key']}` | {esc(val)} | {f['effective_from']} | {f.get('effective_to') or 'open'} | "
                          f"{f['register_id']} ({f['tier']}, {f['authority']}) | {note} |")
                 bindings.append((f"{rel} §{sec}", f["key"], vstr(f["value"])[:60], f["register_id"]))
             L.append("")

@@ -142,7 +142,7 @@ Rules:
 - No make-up time may be required.
 - Pay impact is limited to handling unpaid absence.
 
-- Not configured in this release [[GAP:RQ-102]]: Parental medical leave under RSA 275:37-f rests on a source that cannot be used as a primary source; the statute was not read.
+- Not configured in this release [[GAP:RQ-102]]: Parental medical leave under RSA 275:37-f rests on a source that cannot be used as a primary source; the statute was not verified against the official source.
 
 ## NH.7 Termination and final pay
 
@@ -213,7 +213,7 @@ Rules:
 - Notify affected individuals as soon as possible, and notify the NH Attorney General or the primary regulator.
 - A payroll processor holding the data must notify the data owner immediately.
 
-- Not configured in this release [[GAP:RQ-103]]: RSA 507-H employee-data exemption not read.
+- Not configured in this release [[GAP:RQ-103]]: RSA 507-H employee-data exemption not verified against the official source.
 
 ## NH.13 Live legal change
 

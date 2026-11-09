@@ -2480,8 +2480,9 @@
    "authority": "SSA",
    "url": "https://www.ssa.gov/oact/cola/cbb.html",
    "confidence": "high",
-   "note": "SSA Contribution and Benefit Base page: 'For earnings in 2027, this base is $192,300.'",
-   "_domain": "social_security"
+   "note": "SSA Contribution and Benefit Base page: 'For earnings in 2027, this base is $192,300.' [US-FEDV6-003]",
+   "_domain": "social_security",
+   "_research_note": "note before: SSA Contribution and Benefit Base page: 'For earnings in 2027, this base is $192,300.' Re-verified on ssa.gov/oact/cola/cbb.html 2026-11-06 [US-FEDV6-003]."
   },
   {
    "key": "fed.fica.medicare.rate.employee",
@@ -2938,8 +2939,9 @@
    "authority": "U.S. Congress (OLRC/GPO)",
    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29-chap28-subchapI-sec2612.htm",
    "confidence": "high",
-   "note": "No federal paid sick or annual leave for private employers; contractors under EO 13706 (accrual not transcribed).",
-   "_domain": "leave"
+   "note": "No federal paid sick or annual leave for private employers; federal contractors are covered by EO 13706 (accrual rule not part of this row).",
+   "_domain": "leave",
+   "_research_note": "QA r1 note before: No federal paid sick or annual leave for private employers; contractors under EO 13706 (accrual not transcribed)."
   },
   {
    "key": "fed.pfml.employee_contribution.is_w2_wages",
@@ -3002,7 +3004,7 @@
    "value": 340,
    "currency": "USD",
    "effective_from": "2026-01-01",
-   "effective_to": null,
+   "effective_to": "2026-12-31",
    "register_id": "US-FEDS5-008",
    "tier": "A.2",
    "verification_method": "quoted from authority page",
@@ -4188,10 +4190,11 @@
    "authority": "IRS",
    "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
    "confidence": "medium",
-   "note": "Rows: Pub. 515 (US-FEDQ1-006), Pub. 15-T NRA/supplemental (US-FEDQ1-007), Pub. 15-B (US-FEDQ1-001). The grant-to-vest sourcing period for options/RSUs (Treas. Reg. 1.861-4(b)(2)(ii)(F)) was not read: see unresolved fed.equity.nra.sourcing_period. LEVEL: withholding.",
+   "note": "Rows: Pub. 515 (US-FEDQ1-006), Pub. 15-T NRA/supplemental (US-FEDQ1-007), Pub. 15-B (US-FEDQ1-001). The grant-to-vest sourcing period for options/RSUs (Treas. Reg. 1.861-4(b)(2)(ii)(F)) was not verified: see unresolved fed.equity.nra.sourcing_period. LEVEL: withholding.",
    "_level": "withholding",
    "_domain": "income_tax_nonresident",
-   "_qa_r1": "added 2026-11-02 (agent 2, QA r1)"
+   "_qa_r1": "added 2026-11-02 (agent 2, QA r1)",
+   "_research_note": "note before: Rows: Pub. 515 (US-FEDQ1-006), Pub. 15-T NRA/supplemental (US-FEDQ1-007), Pub. 15-B (US-FEDQ1-001). The grant-to-vest sourcing period for options/RSUs (Treas. Reg. 1.861-4(b)(2)(ii)(F)) was not read: see unresolved fed.equity.nra.sourcing_period. LEVEL: withholding."
   },
   {
    "key": "fed.equity.nso.w2_code",
@@ -4386,6 +4389,170 @@
    "confidence": "high",
    "note": "Pub. 15 (2026) sec. 1 Employer Identification Number (EIN), PDF p.13: 'The EIN is a nine-digit number the IRS issues. The digits are arranged as follows: 00-0000000.'",
    "_domain": "reporting_instruments"
+  },
+  {
+   "key": "fed.fit.pre2020_w4.filing_status_mapping",
+   "value": "Form W-4 2019 or earlier: 'Single' or 'Married, but withhold at higher single rate' -> Single or Married filing separately; 'Married' -> Married filing jointly; Head of household cannot be used (Worksheet 1A Step 2: 'Don't use the Head of Household table if the Form W-4 is from 2019 or earlier'). Line 5 allowances x 4,300 reduce annual wages (line 1k); line 6 additional amount is added per pay period (line 4a).",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-FEDS5-001",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p15t.pdf",
+   "confidence": "high",
+   "note": "Pub. 15-T (2026) p.5-6 computational bridge items 1-4 and Worksheet 1A Steps 1j-1l, 2 and 4a (local copy 00-official-sources/ccg-sources/FED/FED_IRS-p15t-2026_2026-11-02.pdf).",
+   "_domain": "income_tax",
+   "_level": "withholding",
+   "_v11": "2026-11-06 source-hunter (validation V11)"
+  },
+  {
+   "key": "fed.leave.eo13706.accrual",
+   "value": "Accrual: 1 hour of paid sick leave per 30 hours worked on or in connection with a covered contract; a contractor may cap accrual at not less than 56 hours per accrual year. Caveat: the current status of EO 13706 itself is not established from an official source; eCFR still carries 29 CFR 13.5 as of 2026-11-01.",
+   "effective_from": "2017-01-01",
+   "register_id": "US-FEDV6-008",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "U.S. DOL (eCFR)",
+   "url": "https://www.ecfr.gov/current/title-29/subtitle-A/part-13/section-13.5",
+   "confidence": "medium",
+   "note": "Closes RQ-408 (V11). Register: US-FEDV6-008",
+   "_research_note": "value before: Accrual: 1 hour of paid sick leave per 30 hours worked on or in connection with a covered contract; a contractor may cap accrual at not less than 56 hours per accrual year. Caveat: the DOL WHD EO 13706 page returned 404 and the current status of EO 13706 itself was not established from an official source; eCFR still carries 29 CFR 13.5 as of 2026-11-01."
+  },
+  {
+   "key": "fed.equity.nra.sourcing_period",
+   "value": "For stock options the time-basis period is generally grant to vesting (the date all employment-related conditions for exercise are satisfied); U.S.-source share = U.S. days over total days in that period (regulation Example 6: 5-year period, 7/10 U.S.). RSUs are not named in (F); treatment by analogy is not stated in the regulation.",
+   "effective_from": "2005-07-14",
+   "register_id": "US-FEDV6-039",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "Treasury/IRS (eCFR)",
+   "url": "https://www.ecfr.gov/current/title-26/chapter-I/subchapter-A/part-1/section-1.861-4",
+   "confidence": "medium",
+   "note": "Closes RQ-573 (V11). Register: US-FEDV6-039"
+  },
+  {
+   "key": "fed.fica.totalization.agreements_in_force",
+   "value": "SSA lists 31 totalization agreements in force (Italy 1978 through Romania, entry into force 2026-09-01); the status page gives signing and effective dates with legal citations. Certificate-of-coverage procedure: not detailed in the source consulted.",
+   "effective_from": "2026-09-01",
+   "register_id": "US-FEDV6-040",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Social Security Administration",
+   "url": "https://www.ssa.gov/international/agreements_overview.html",
+   "confidence": "high",
+   "note": "Closes RQ-581 (V11). Register: US-FEDV6-040, US-FEDV6-041",
+   "_research_note": "value before: SSA lists 31 totalization agreements in force (Italy 1978 through Romania, entry into force 2026-09-01); the status page gives signing and effective dates with legal citations. Certificate-of-coverage procedure: the overview page's Certificates of Coverage section is collapsed in the browser text and was not captured; coc.html returned 404."
+  },
+  {
+   "key": "fed.bik.business_mileage.rate",
+   "value": 0.725,
+   "unit_of_measure": "USD per mile",
+   "currency": "USD",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-06-30",
+   "register_id": "US-FEDV6-011",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-drop/n-26-10.pdf",
+   "confidence": "high",
+   "note": "Notice 2026-10 (72.5 cents), modified by Announcement 2026-11 from 2026-07-01. Canonical key; aliases fed.bik.mileage_rate (RQ-409) and fed.bik.mileage.rate (WTC-RQ-89)."
+  },
+  {
+   "key": "fed.bik.business_mileage.rate",
+   "value": 0.76,
+   "unit_of_measure": "USD per mile",
+   "currency": "USD",
+   "effective_from": "2026-07-01",
+   "register_id": "US-FEDV6-010",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "Internal Revenue Service",
+   "url": "https://www.irs.gov/irb/2026-29_irb",
+   "confidence": "high",
+   "note": "Announcement 2026-11, IRB 2026-29 (not \"Notice 2026-29\": 29 is the bulletin number); medical/moving 23.5 cents; charity 14 cents. Quote checked in the saved IRB text 2026-11-06."
+  },
+  {
+   "key": "fed.fit.std_deduction.single",
+   "value": 16600,
+   "currency": "USD",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-12-31",
+   "register_id": "US-FEDV6-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts",
+   "confidence": "high",
+   "note": "TY2027 indexation: Rev. Proc. 2026-35 / IR-2026-133 (2026-11-05)."
+  },
+  {
+   "key": "fed.fit.std_deduction.mfj",
+   "value": 33200,
+   "currency": "USD",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-12-31",
+   "register_id": "US-FEDV6-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts",
+   "confidence": "high",
+   "note": "TY2027 indexation: Rev. Proc. 2026-35 / IR-2026-133 (2026-11-05)."
+  },
+  {
+   "key": "fed.fit.std_deduction.hoh",
+   "value": 24925,
+   "currency": "USD",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-12-31",
+   "register_id": "US-FEDV6-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts",
+   "confidence": "high",
+   "note": "TY2027 indexation: Rev. Proc. 2026-35 / IR-2026-133 (2026-11-05)."
+  },
+  {
+   "key": "fed.bik.health_fsa.salary_reduction_cap",
+   "value": 3500,
+   "currency": "USD",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-12-31",
+   "register_id": "US-FEDV6-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts",
+   "confidence": "high",
+   "note": "TY2027 indexation: Rev. Proc. 2026-35 / IR-2026-133 (2026-11-05)."
+  },
+  {
+   "key": "fed.bik.parking.monthly_exclusion",
+   "value": 350,
+   "currency": "USD",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-12-31",
+   "register_id": "US-FEDV6-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts",
+   "confidence": "high",
+   "note": "TY2027 indexation: Rev. Proc. 2026-35 / IR-2026-133 (2026-11-05)."
+  },
+  {
+   "key": "fed.indexation.publication_2027",
+   "value": "Rev. Proc. 2026-35 (IR-2026-133, issued 2026-11-05) publishes the TY2027 inflation adjustments; the 2027 Pub. 15-T and the 2027 retirement-plan limits notice were not yet published on 2026-11-06.",
+   "effective_from": "2026-11-05",
+   "register_id": "US-FEDV6-005",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-drop/rp-26-35.pdf",
+   "confidence": "high"
   }
  ],
  "unresolved": [
@@ -4393,7 +4560,8 @@
    "key": "fed.futa.credit_reduction.ca",
    "why": "The 2026 California credit reduction (potential 5.3% = 1.5% advance + 3.8% BCR add-on) becomes final only if the Title XII advance is outstanding on 2026-11-10; on 2026-11-02 only the potential figure is published (US-FEDS5-009, partial).",
    "attempted": [
-    "https://oui.doleta.gov/unemploy/futa_credit.asp (2026-11-02, page updated 2026-09-11)"
+    "https://oui.doleta.gov/unemploy/futa_credit.asp (2026-11-02, page updated 2026-09-11)",
+    "2026-11-06 V11 validation round: still_blocked: Not final until after 2026-11-10 (today 2026-11-06). Potential 2026 total for California is 0.053 (xlsx cells 0.015 + 0.038 BCR add-on; sum checked). Re-read the DOL page and xlsx after 2026-11-10."
    ],
    "what_would_close_it": "The DOL OUI \"FUTA Credit Reductions\" page/xlsx after 2026-11-10, or the 2026 Schedule A (Form 940) instructions.",
    "blocking": false,
@@ -4405,7 +4573,8 @@
    "key": "fed.futa.credit_reduction.vi",
    "why": "U.S. Virgin Islands 2026 potential 4.8%; same 2026-11-10 determination.",
    "attempted": [
-    "https://oui.doleta.gov/unemploy/futa_credit.asp"
+    "https://oui.doleta.gov/unemploy/futa_credit.asp",
+    "2026-11-06 V11 validation round: still_blocked: Same determination date. Potential 2026 total for the Virgin Islands is 0.048 (xlsx cell 4.8000000000000001E-2). Final value after 2026-11-10."
    ],
    "what_would_close_it": "Same DOL OUI update after 2026-11-10.",
    "blocking": false,
@@ -4417,7 +4586,8 @@
    "key": "fed.indexation.next_year",
    "why": "2027 federal inflation adjustments (Rev. Proc. for TY2027, 401(k)/IRA notice, 2027 Pub. 15-T) not published as of 2026-11-02 (IR-2026-117..129 checked).",
    "attempted": [
-    "IRS news releases October 2026"
+    "IRS news releases October 2026",
+    "2026-11-06 V11 validation round: still_blocked: Partly closed: the TY2027 Rev. Proc. is out (Rev. Proc. 2026-35, 2026-11-05). Still unpublished on 2026-11-06: the 2027 Pub. 15-T and the 2027 retirement-plan limits notice. Re-check irs.gov/pub/irs-pdf/p15t.pdf and the newsroom in Nov-Dec 2026."
    ],
    "what_would_close_it": "IRS releases expected Nov-Dec 2026: the TY2027 Rev. Proc., the 2027 retirement-plan limits notice and the 2027 Pub. 15-T (draft or final).",
    "blocking": false,
@@ -4427,8 +4597,10 @@
   },
   {
    "key": "fed.form940.instructions_edition",
-   "why": "TY2026 Instructions for Form 940 not yet issued; the 2025 edition was read (US-FEDS5-031 partial).",
-   "attempted": [],
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): Final TY2026 Instructions for Form 940 are not issued (irs-pdf/i940.pdf is still the 2025 edition, last modified 2025-11-25). An early-release draft posted 2026-09-22 shows: due date Feb 1, 2027 (Feb 10, 2027 if all FUTA deposited); FUTA wage base 7,000 unchanged; dependent care exclusion limit raised to 7,500. Treat as draft until final.",
+   "attempted": [
+    "2026-11-06 V11 validation round: documented_limitation: Final TY2026 Instructions for Form 940 are not issued (irs-pdf/i940.pdf is still the 2025 edition, last modified 2025-11-25). An early-release draft posted 2026-09-22 shows: due date Feb 1, 2027 (Feb 10, 2027 if all FUTA deposited); FUTA wage base 7,000 unchanged; dependent care exclusion limit raised to 7,500. Treat as draft until final."
+   ],
    "what_would_close_it": "IRS i940 (2026), usually December-January.",
    "blocking": false,
    "_related_register_ids": [
@@ -4437,8 +4609,10 @@
   },
   {
    "key": "fed.aca.instructions_edition",
-   "why": "TY2026 Instructions for Forms 1094-C/1095-C not yet issued; TY2025 edition read (US-FEDS5-012 partial).",
-   "attempted": [],
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): Final 2026 Instructions for Forms 1094-C/1095-C are not issued (i109495c.pdf is still the 2025 edition, last modified 2025-11-05). The early-release draft of 2026-10-16 states the electronic-filing threshold as 10 or more information returns in the aggregate. Draft value only.",
+   "attempted": [
+    "2026-11-06 V11 validation round: documented_limitation: Final 2026 Instructions for Forms 1094-C/1095-C are not issued (i109495c.pdf is still the 2025 edition, last modified 2025-11-05). The early-release draft of 2026-10-16 states the electronic-filing threshold as 10 or more information returns in the aggregate. Draft value only."
+   ],
    "what_would_close_it": "IRS i109495c (2026).",
    "blocking": false,
    "_related_register_ids": [
@@ -4446,59 +4620,17 @@
    ]
   },
   {
-   "key": "fed.leave.eo13706.accrual",
-   "why": "EO 13706 federal-contractor paid-sick-leave accrual figures not transcribed.",
-   "attempted": [],
-   "what_would_close_it": "29 CFR 13.5 from eCFR (one fetch).",
-   "blocking": false,
-   "_related_register_ids": [
-    "US-FEDS5-026"
-   ]
-  },
-  {
-   "key": "fed.bik.mileage_rate",
-   "why": "2026 business standard mileage rate (cents-per-mile valuation) not printed in Pub. 15-B and not fetched.",
-   "attempted": [],
-   "what_would_close_it": "The IRS 2026 standard mileage rate notice.",
-   "blocking": false,
-   "_related_register_ids": [
-    "US-FEDS5-008"
-   ]
-  },
-  {
    "key": "fed.iwo.revised_form_go_live",
-   "why": "The revised IWO/e-IWO (gig-worker fields) must be used after the one-year extension, but the state go-live date is not published.",
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): No OCSE Action Transmittal with state go-live dates for the gig-worker revision (ICR 202607-0970-002) was found. The OIRA record gives states an extension to reprogram and then requires the revised form, without a date. The posted IWO instructions (OMB 0970-0154) show expiry 08/31/2029. Closing document: an OCSE Action Transmittal; two guessed acf.gov/css paths returned 404.",
    "attempted": [
-    "https://www.reginfo.gov/public/do/PRAViewICR?ref_nbr=202607-0970-002"
+    "https://www.reginfo.gov/public/do/PRAViewICR?ref_nbr=202607-0970-002",
+    "2026-11-06 V11 validation round: documented_limitation: No OCSE Action Transmittal with state go-live dates for the gig-worker revision (ICR 202607-0970-002) was found. The OIRA record gives states an extension to reprogram and then requires the revised form, without a date. The posted IWO instructions (OMB 0970-0154) show expiry 08/31/2029. Closing document: an OCSE Action Transmittal; two guessed acf.gov/css paths returned 404."
    ],
    "what_would_close_it": "An OCSE Action Transmittal implementing ICR 202607-0970-002.",
    "blocking": false,
    "_related_register_ids": [
     "US-FEDS5-028"
    ]
-  },
-  {
-   "key": "fed.equity.nra.sourcing_period",
-   "why": "Pub. 515 says multiyear compensation is sourced on a time basis over the period to which it is attributable (facts and circumstances); the specific grant-to-vest period rule for stock options and RSUs in Treas. Reg. 1.861-4(b)(2)(ii)(F) was not read (the eCFR API returned only paragraph (a) of 1.861-4 on 2026-11-02).",
-   "attempted": [
-    "https://www.ecfr.gov/api/versioner/v1/full/2026-10-01/title-26.xml?part=1&section=1.861-4 (200, paragraph (a) only)",
-    "https://www.irs.gov/businesses/corporations/equity-stock-based-compensation-audit-techniques-guide (404)"
-   ],
-   "what_would_close_it": "Full text of 26 CFR 1.861-4(b)(2)(ii)(F) on ecfr.gov (browser) or govinfo CFR annual edition, title 26 vol. 9.",
-   "blocking": false,
-   "_related_register_ids": [
-    "US-FEDQ1-006"
-   ]
-  },
-  {
-   "key": "fed.fica.totalization.agreements_in_force",
-   "why": "The list of totalization agreements in force and the certificate-of-coverage procedure are published by SSA; ssa.gov returns HTTP 403 to curl from a non-US exit (2026-11-02).",
-   "attempted": [
-    "https://www.ssa.gov/international/agreements_overview.html - HTTP 403 (2026-11-02)",
-    "https://www.ssa.gov/international/status.html - HTTP 403 (2026-11-02)"
-   ],
-   "what_would_close_it": "SSA Office of International Programs pages \"U.S. International Social Security Agreements\" (ssa.gov/international/agreements_overview.html) and the certificate-of-coverage page, read from a US exit or a browser pass.",
-   "blocking": false
   }
  ],
  "_synthesis_d": "Synthesis D 2026-11-02: browser-pass P1/P2 rows (S5B-P1/P2) and EFW2 TY2026 merged; see _research/synthesis-D/SYNTHESIS-D.md",

@@ -80,7 +80,7 @@ Withholding stops at [[FACT:hi.wh.bracket.single.8.rate=7.90]]%; the assessment 
 
 Not yet published (expected December 2026) [[GAP:RQ-170]]: TY2027 thresholds/cumulative amounts after Act 24 SLH 2026 and the 2027 withholding tables are unpublished; Act text not accessible (HTTP 403).
 
-Not configured in this release [[GAP:RQ-171]]: Full HRS 235-2.3(b) non-operative IRC list after Act 35 not read (HSA etc.).
+Not configured in this release [[GAP:RQ-171]]: Full HRS 235-2.3(b) non-operative IRC list after Act 35 not verified against the official source (HSA etc.).
 
 ## HI.2b Non-resident regime and reciprocity
 
@@ -94,7 +94,7 @@ No jurisdiction-specific item was recorded in the research for this domain.
 
 ## HI.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
-No PFML (TDI only). Only employer levy is E&T. Schedule C minimum rate not transcribed.
+No PFML (TDI only). Only employer levy is E&T. Schedule C minimum rate not configured.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -112,7 +112,7 @@ No PFML (TDI only). Only employer levy is E&T. Schedule C minimum rate not trans
 
 Not configured in this release [[GAP:RQ-172]]: Minimum rate and full Schedule C table not in the page text (image Table 2).
 
-Not configured in this release [[GAP:RQ-173]]: HRS 392-4/392-5 localization not read; recommendation: key TDI to sui_state = HI meanwhile.
+Not configured in this release [[GAP:RQ-173]]: HRS 392-4/392-5 localization not verified against the official source; recommendation: key TDI to sui_state = HI meanwhile.
 
 Not configured in this release [[GAP:RQ-174]]: December 2026 DLIR (UI base/schedule) and DCD (TDI) notices not yet published.
 
@@ -136,15 +136,15 @@ Registration BB-1 / Hawaii Tax Online. TDI and PHC via insurers, no state wage r
 | `hi.report.wh.hw14` | [[FACT:hi.report.wh.hw14=HW-14 quarterly due Apr 15/Jul 15/Oct 15/Jan 15, filed even with no wages; VP-1 deposits quarterly <= 5,000, monthly 5,000-40,000 (15th), semi-weekly > 40,000 or federal semi-weekly (no lookback)]] | 2026-01-01 to open | US-HIS5-005 (Hawaii Department of Taxation; A.2, quoted from authority page, confidence high) |  |
 | `hi.report.wh.semiweekly_threshold` | [[FACT:hi.report.wh.semiweekly_threshold=40,000]] USD | 2026-01-01 to open | US-HIS5-005 (Hawaii Department of Taxation; A.2, quoted from authority page, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-176]]: Hawaii-specific EFW2 RS requirements (Tax ID position) not read.
+Not configured in this release [[GAP:RQ-176]]: Hawaii-specific EFW2 RS requirements (Tax ID position) not verified against the official source.
 
-Not configured in this release [[GAP:RQ-177]]: Bulk/file format for UC-B6 beyond online entry not located (behind the employer login).
+Not configured in this release [[GAP:RQ-177]]: Bulk/file format for UC-B6 beyond online entry not established from an official source.
 
 ## HI.6 Leave
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `hi.leave.family.employer_threshold` | [[FACT:hi.leave.family.employer_threshold=100]] employees | 2026-01-01 to open | US-HIS5-023 (Hawaii DLIR Wage Standards Division; A.3, quoted from authority page, confidence medium) | HRS ch. 398 (HRS 398-1 not read): 4 weeks unpaid per year after 6 months; up to 10 days accrued sick leave usable [US-HIS5-018]. |
+| `hi.leave.family.employer_threshold` | [[FACT:hi.leave.family.employer_threshold=100]] employees | 2026-01-01 to open | US-HIS5-023 (Hawaii DLIR Wage Standards Division; A.3, quoted from authority page, confidence medium) | HRS ch. 398 (HRS 398-1 not verified): 4 weeks unpaid per year after 6 months; up to 10 days accrued sick leave usable [US-HIS5-018]. |
 | `hi.leave.sick.state_mandate.exists` | [[FACT:hi.leave.sick.state_mandate.exists=False]] | 2026-01-01 to open | US-HIS5-024 (Hawaii DLIR Wage Standards Division; A.2, direct artifact inspection, confidence medium) |  |
 
 ## HI.7 Termination and final pay

@@ -36,11 +36,11 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `ne.labour.minwage.student_learner.min_ratio` | [[FACT:ne.labour.minwage.student_learner.min_ratio=75]] percent | 2026-01-01 | 2026-12-31 | US-NES5-001 (A.1, Nebraska Legislature) | of applicable minimum |
 | `ne.labour.minwage.training.min_ratio_of_federal` | [[FACT:ne.labour.minwage.training.min_ratio_of_federal=75]] percent | 2007-01-01 | open | US-NES5-002 (A.1, Nebraska Legislature) | under 20, 90 days (+90 OJT); max one-fourth of hours paid |
 | `ne.labour.wage_hour_act.coverage_min_employees` | [[FACT:ne.labour.wage_hour_act.coverage_min_employees=4]] | 1993-01-01 | open | US-NES5-003 (A.1, Nebraska Legislature) | excludes agriculture, private-home babysitters, EAP, government, family |
-| `ne.labour.overtime.state_rule` | [[FACT:ne.labour.overtime.state_rule=none located (FLSA applies)]] | 1993-01-01 | open | US-NES5-003 (A.1, Nebraska Legislature) | full art. 12 index not read |
+| `ne.labour.overtime.state_rule` | [[FACT:ne.labour.overtime.state_rule=none located (FLSA applies)]] | 1993-01-01 | open | US-NES5-003 (A.1, Nebraska Legislature) | full art. 12 index not verified |
 | `ne.pay_frequency.rule` | [[FACT:ne.pay_frequency.rule=regular paydays set by employer or agreement; no statutory minimum frequency; 30 days notice to change]] | 2014-01-01 | open | US-NES5-006 (A.1, Nebraska Legislature) | 48-1230(1) |
 | `ne.labour.paycard.rules` | [[FACT:ne.labour.paycard.rules=1693k compulsory-use bar; one free withdrawal per pay period; no card fees to employee]] | 2014-01-01 | open | US-NES5-006 (A.1, Nebraska Legislature) | 48-1230(3) |
 
-- Not configured in this release [[GAP:RQ-089]]: The 2027 adult minimum wage would be derived from the 2026 rate and the statutory step, but the statute has no rounding rule and the Department of Labor publication was not read. The 2027 rate is not written and must not be configured.
+- Not configured in this release [[GAP:RQ-089]]: The 2027 adult minimum wage would be derived from the 2026 rate and the statutory step, but the statute has no rounding rule and the Department of Labor publication was not verified against the official source. The 2027 rate is not written and must not be configured.
 - Not configured in this release [[GAP:RQ-090]]: Absence of state overtime rule and of local minimum wages/preemption not verified against the full article.
 
 ## NE.2 Income tax withholding
@@ -59,12 +59,12 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `ne.pit.wh.single.thresholds` | [[FACT:ne.pit.wh.single.thresholds=3430;6710;21810;31610;40130;75370]] | 2026-01-01 | 2026-12-31 | US-NES5-010 (A.2, Nebraska Department of Revenue) | annual; cumulative 74.13/560.35/972.93/1,343.55/2,922.30 reproduced |
 | `ne.pit.wh.married.thresholds` | [[FACT:ne.pit.wh.married.thresholds=8190;13010;32400;50400;62530;82920]] | 2026-01-01 | 2026-12-31 | US-NES5-010 (A.2, Nebraska Department of Revenue) | cumulative 108.93/733.29/1,491.09/2,018.75 (DOR half-up of 2,018.745)/2,932.22 |
 | `ne.pit.statutory.top_rate` | [[FACT:ne.pit.statutory.top_rate=4.55]] percent | 2026-01-01 | 2026-12-31 | US-NES5-018 (A.1, Nebraska Legislature) | assessment level; lower brackets 2.46/3.51 |
-| `ne.pit.statutory.top_rate` | [[FACT:ne.pit.statutory.top_rate=3.99]] percent | 2027-01-01 | open | US-NES5-018 (A.1, Nebraska Legislature) | LB754 enacted; assessment level; 2027 withholding tables not read |
+| `ne.pit.statutory.top_rate` | [[FACT:ne.pit.statutory.top_rate=3.99]] percent | 2027-01-01 | open | US-NES5-018 (A.1, Nebraska Legislature) | LB754 enacted; assessment level; 2027 withholding tables not verified |
 | `ne.pit.min_withholding.rate` | [[FACT:ne.pit.min_withholding.rate=1.5]] percent | 2026-01-01 | 2026-12-31 | US-NES5-010 (A.2, Nebraska Department of Revenue) | employers with more than 24 employees, unless lower liability documented |
 | `ne.pit.min_withholding.employee_threshold` | [[FACT:ne.pit.min_withholding.employee_threshold=24]] | 2026-01-01 | 2026-12-31 | US-NES5-010 (A.2, Nebraska Department of Revenue) | more than 24 |
 | `ne.wh.supplemental.rate` | [[FACT:ne.wh.supplemental.rate=3.5]] percent | 2026-01-01 | open | US-NEP51-001 (A.2, Nebraska Department of Revenue) | or aggregate |
 
-- Not configured in this release [[GAP:RQ-091]]: The 2027 edition of Circular EN was not obtained.
+- Not configured in this release [[GAP:RQ-091]]: The 2027 edition of Circular EN was not verified against the official source.
 
 ## NE.2b Non-resident regime and reciprocity
 
@@ -109,7 +109,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `ne.report.ui.quarterly_due` | [[FACT:ne.report.ui.quarterly_due=Apr 30; Jul 31; Oct 31; Jan 31]] | 2025-09-11 | open | US-NES5-011 (A.3, Nebraska Department of Labor) | A late-report charge applies (a percentage of gross wages with a minimum and a maximum); its amounts are not configured in this release. |
 | `ne.newhire.report_days` | [[FACT:ne.newhire.report_days=20]] days | 2004-01-01 | open | US-NES5-014 (A.1, Nebraska Legislature) | - |
 
-- Not configured in this release [[GAP:RQ-092]]: Withholding registration form name and the NEworks FTP wage-file spec not read.
+- Not configured in this release [[GAP:RQ-092]]: Withholding registration form name and the NEworks FTP wage-file spec not verified against the official source.
 
 ## NE.6 Leave
 
@@ -121,7 +121,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `ne.leave.paid_sick.annual_cap.other_hours` | [[FACT:ne.leave.paid_sick.annual_cap.other_hours=56]] hours | 2025-10-01 | open | US-NES5-007 (A.1, Nebraska Legislature) | - |
 | `ne.leave.sick.payout_on_separation` | [[FACT:ne.leave.sick.payout_on_separation=False]] | 2025-10-01 | open | US-NES5-007 (A.1, Nebraska Legislature) | 48-3803(10) |
 
-- Not configured in this release [[GAP:RQ-093]]: Jury-duty and voting-leave pay rules and child-labour hours not read.
+- Not configured in this release [[GAP:RQ-093]]: Jury-duty and voting-leave pay rules and child-labour hours not verified against the official source.
 
 ## NE.7 Termination and final pay
 
@@ -141,7 +141,7 @@ No Nebraska rule is configured in this domain; the federal treatment in Annex FE
 | `ne.garn.creditor.max_percent` | [[FACT:ne.garn.creditor.max_percent=25]] percent | 2001-01-01 | open | US-NES5-012 (A.1, Nebraska Legislature) | or excess over 30x FMW; head of family 15% |
 | `ne.garn.consumer.head_of_family.max_rate` | [[FACT:ne.garn.consumer.head_of_family.max_rate=15]] percent | 2001-01-01 | open | US-NES5-012 (A.1, Nebraska Legislature) | - |
 
-- Not configured in this release [[GAP:RQ-094]]: The child-support employer fee, priority and maximum (Neb. Rev. Stat. 43-1720 to 43-1724) were not read.
+- Not configured in this release [[GAP:RQ-094]]: The child-support employer fee, priority and maximum (Neb. Rev. Stat. 43-1720 to 43-1724) were not verified against the official source.
 
 ## NE.10 Collective agreements and prevailing wage
 
@@ -161,7 +161,7 @@ Indexation of each value is stated in the note of the value concerned.
 |---|---|---|---|---|---|
 | `ne.data.ssn.max_digits_displayed` | [[FACT:ne.data.ssn.max_digits_displayed=4]] | 2026-01-01 | open | US-NES5-013 (A.1, Nebraska Legislature) | 48-237 |
 
-- Not configured in this release [[GAP:RQ-095]]: NE payroll-record retention period (UI and wage-hour) not read.
+- Not configured in this release [[GAP:RQ-095]]: NE payroll-record retention period (UI and wage-hour) not verified against the official source.
 
 ## NE.13 Live legal change
 

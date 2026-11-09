@@ -42,7 +42,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `md.pay_frequency.rule` | [[FACT:md.pay_frequency.rule=at least every 2 weeks or twice a month (EAP less often); nonworkday payday moves to preceding workday]] | 2026-01-01 | open | US-MDS5-008 (A.1, Maryland General Assembly) |  |
 | `md.payment.method` | [[FACT:md.payment.method=cash or check at face value; direct deposit only with authorisation; pay card only with authorisation and fees disclosed in writing in >= 12-point type]] | 2026-01-01 | open | US-MDS5-008 (A.1, Maryland General Assembly) |  |
 
-- Not configured in this release [[GAP:RQ-001]]: The county ordinances were not read (the Montgomery County site returned an error); the county minimum wages above come from the state Department of Labor page only.
+- Not configured in this release [[GAP:RQ-001]]: The county ordinances were not verified against the official source; the county minimum wages above come from the state Department of Labor page only.
 
 ## MD.2 Income tax withholding
 
@@ -52,7 +52,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `md.pit.top_rate` | [[FACT:md.pit.top_rate=6.5]] percent | 2025-01-01 | open | US-MDS5-001 (A.1, Maryland General Assembly) |  |
 | `md.wh.method` | [[FACT:md.wh.method=wages - standard deduction - exemptions x per-period exemption; apply the local table that equals or slightly exceeds the county rate (tables start at 4.75%, ignoring 2/3/4% bands); ten tables 2.25, 2.40, 2.65, 2.75, 2.85, 3.00, 3.05, 3.10, 3.20, 3.30]] | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) | The single bases of the 3.30 table reproduce from the state bands plus the county rate; the joint bases reproduce exactly. Per-period exemption / standard deduction: weekly 61.54/65.38, monthly 266.67/283.33; the biweekly (130.76) and semimonthly (141.66) standard deductions are truncated; daily amounts divide the annual amounts by 365. |
 | `md.wh.exemption.annual` | [[FACT:md.wh.exemption.annual=3200]] USD | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
-| `md.wh.std_deduction` | [[FACT:md.wh.std_deduction=3400]] USD | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) | TG 10-217: indexed from 2026 and rounded down to a multiple of 50 [US-MDS5-002]; the Comptroller's published adjustment figure was not read. |
+| `md.wh.std_deduction` | [[FACT:md.wh.std_deduction=3400]] USD | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) | TG 10-217: indexed from 2026 and rounded down to a multiple of 50 [US-MDS5-002]; the Comptroller's published adjustment figure was not verified against the official source. |
 | `md.wh.floor.annual` | [[FACT:md.wh.floor.annual=5000]] USD | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) | No withholding below weekly 96, biweekly 192, semimonthly 208, monthly 417, daily 13.70, annual 5,000. |
 | `md.wh.certificate` | [[FACT:md.wh.certificate=MW507 (MW507M military spouse, MW507P annuity/sick pay); none filed = one exemption; unknown county default 3.30% (state payroll memo)]] | 2026-01-01 | open | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
 | `md.wh.supplemental.lump_sum_bonus` | [[FACT:md.wh.supplemental.lump_sum_bonus=top state rate 6.50% + county top local rate (e.g. 9.80% in 3.30 table; 9.70% in 3.20 table); no flat rate for other supplemental pay; computed in cents (retirement whole dollars)]] | 2026-01-01 | 2026-12-31 | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
@@ -89,7 +89,7 @@ Rules:
 
 - No SDI/TDI; no other levy beyond withholding. (US-MDP9V-002)
 
-- Not configured in this release [[GAP:RQ-002]]: Implied by the BEACON "Out of State taxable wages" field only; taxable-wages statute not located (LE 8-101, 8-606 read).
+- Not configured in this release [[GAP:RQ-002]]: Implied by the BEACON "Out of State taxable wages" field only; taxable-wages statute not established from an official source (LE 8-101, 8-606 read).
 - Not configured in this release [[GAP:RQ-003]]: The domestic-service coverage threshold of Labor and Employment Article Title 8 is not verified.
 
 ## MD.4 Pay statement
@@ -121,7 +121,7 @@ Rules:
 | `md.leave.essl.use_cap_hours` | [[FACT:md.leave.essl.use_cap_hours=64]] hours | 2026-01-01 | open | US-MDS5-013 (A.1, Maryland General Assembly) |  |
 
 - Not configured in this release [[GAP:RQ-005]]: Whether the 12 h/week threshold and accrual count MD hours only.
-- Not configured in this release [[GAP:RQ-006]]: Montgomery County Code ch. 27 Art. XIII (pre-2017 ESSL) not read.
+- Not configured in this release [[GAP:RQ-006]]: Montgomery County Code ch. 27 Art. XIII (pre-2017 ESSL) not verified against the official source.
 
 ## MD.7 Termination and final pay
 
@@ -129,13 +129,13 @@ Rules:
 |---|---|---|---|---|---|
 | `md.final_pay.rule` | [[FACT:md.final_pay.rule=on or before next regular payday, discharge or resignation; accrued vacation payable unless written policy limits payout, employee notified at hire and policy denies it; ESSL not payable]] | 2026-01-01 | open | US-MDS5-010 (A.1, Maryland General Assembly) |  |
 
-- Not configured in this release [[GAP:RQ-007]]: COMAR 09.32.01 separation notice and Economic Stabilization Act (LE 11-301) not read.
+- Not configured in this release [[GAP:RQ-007]]: COMAR 09.32.01 separation notice and Economic Stabilization Act (LE 11-301) not verified against the official source.
 
 ## MD.8 Benefits in kind and taxable wages
 
 No Maryland rule is configured in this domain; the federal treatment in Annex FED applies.
 
-- Not configured in this release [[GAP:RQ-008]]: TG 10-203/204/205 and annual IRC conformity act not read.
+- Not configured in this release [[GAP:RQ-008]]: TG 10-203/204/205 and annual IRC conformity act not verified against the official source.
 
 ## MD.9 Deductions and garnishments
 
@@ -144,7 +144,7 @@ No Maryland rule is configured in this domain; the federal treatment in Annex FE
 | `md.deductions.rule` | [[FACT:md.deductions.rule=only if court-ordered, authorised in writing, allowed by the Commissioner or required by law (LE 3-503)]] | 2026-01-01 | open | US-MDS5-009 (A.1, Maryland General Assembly) |  |
 | `md.garn.creditor.weekly_exempt_floor` | [[FACT:md.garn.creditor.weekly_exempt_floor=450.0]] USD | 2024-01-01 | open | US-MDS5-011 (A.1, Maryland General Assembly) | CL 15-601.1: greater of 75% of disposable or 30 x State MW x weeks = 30 x 15.00; medical insurance deductions also exempt; per pay period. |
 
-- Not configured in this release [[GAP:RQ-009]]: IWO employer fee/remittance (FL 10-123/10-128) and Comptroller salary lien (TG 13-811) not read.
+- Not configured in this release [[GAP:RQ-009]]: IWO employer fee/remittance (FL 10-123/10-128) and Comptroller salary lien (TG 13-811) not verified against the official source.
 
 ## MD.10 Collective agreements and prevailing wage
 
@@ -154,7 +154,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 |---|---|---|---|---|---|
 | `md.prevailing_wage.threshold` | [[FACT:md.prevailing_wage.threshold=250000]] USD | 2026-01-01 | open | US-MDS5-012 (A.1, Maryland General Assembly) | Not for Davis-Bacon-funded parts; extends to TIF-bond construction and mechanical systems service contracts above SCA threshold. |
 
-- Not configured in this release [[GAP:RQ-010]]: SFP 17-220 certified payroll duty not read.
+- Not configured in this release [[GAP:RQ-010]]: SFP 17-220 certified payroll duty not verified against the official source.
 
 ## MD.11 Indexation
 
@@ -167,7 +167,7 @@ Indexation of each value is stated in the note of the value concerned.
 | `md.payslip.ssn.prohibited` | [[FACT:md.payslip.ssn.prohibited=True]] | 2026-01-01 | open | US-MDS5-008 (A.1, Maryland General Assembly) | LE 3-502(d): SSN may not be printed on the wage check, any attachment, direct-deposit notice or card-credit notice; covers governmental units; no truncation safe harbour - treat truncated SSN as barred. |
 | `md.records.withholding.retention_years` | [[FACT:md.records.withholding.retention_years=3]] years | 2026-01-01 | open | US-MDS5-021 (A.2, Comptroller of Maryland) |  |
 
-- Not configured in this release [[GAP:RQ-011]]: LE 3-424 record period and e-delivery consent not read.
+- Not configured in this release [[GAP:RQ-011]]: LE 3-424 record period and e-delivery consent not verified against the official source.
 
 ## MD.13 Live legal change
 

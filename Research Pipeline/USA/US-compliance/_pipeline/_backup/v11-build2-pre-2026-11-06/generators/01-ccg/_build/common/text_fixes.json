@@ -1,0 +1,472 @@
+{
+ "_purpose": "Round 3 (QA r2) wording fixes for text that comes from fact notes or research-pack narrative. Applied by ccg_common.apply_text_fixes() in finalize(), before tagging, outside [[...]] tags unless the find string spans a tag. A find that no longer matches (e.g. agent 2 rewrote the note) is logged with count 0 in out/finalize_<unit>.json.",
+ "annex_FL.md": [
+  {
+   "find": "Title XXXI has no SDI/TDI/PFML chapter",
+   "replace": "Florida Statutes Title 31 has no SDI/TDI/PFML chapter",
+   "why": "QA r2 C29: unsanctioned X-run"
+  }
+ ],
+ "annex_KS.md": [
+  {
+   "find": "box 15 036-XXXXXXXXXF-01",
+   "replace": "box 15 carries the Kansas withholding account number in its published layout (prefix 036, account body, suffix F-01)",
+   "why": "QA r2 C29: unsanctioned X-run"
+  },
+  {
+   "find": "Period thresholds = annual / periods (weekly 69 / 512 / 23.00; semimonthly married 343.33 / 2,260 / 99.67).",
+   "replace": "Period thresholds = the annual thresholds above divided by the number of pay periods in the year.",
+   "why": "QA r2 minor: untagged derived per-period values; formula from the tagged annual inputs"
+  },
+  {
+   "find": "/52; joint 352.31; dependent 44.62.",
+   "replace": "/52; the joint and per-dependent weekly allowances are the annual amounts / 52.",
+   "why": "untagged derived per-period values; formula from the tagged annual inputs"
+  }
+ ],
+ "annex_MA.md": [
+  {
+   "find": "Per person; biweekly 4.23, semimonthly 4.58, monthly 9.17, daily 0.30.",
+   "replace": "Per person; DOR publishes the biweekly, semimonthly, monthly and daily amounts in the same table.",
+   "why": "QA r2 minor: untagged per-period values"
+  },
+  {
+   "find": "Biweekly 4.62, semimonthly 5.00, monthly 10.00, daily 0.33.",
+   "replace": "DOR publishes the biweekly, semimonthly, monthly and daily amounts in the same table.",
+   "why": "QA r2 minor: untagged per-period values"
+  },
+  {
+   "find": "meal deductions max 1.50/2.25; lodging max 35/30/25 per week; UI 1,000 cash/quarter;",
+   "replace": "meal and lodging deductions may not exceed the amounts set by 454 CMR 27 (apply the regulation's amounts); UI coverage per the domestic-service test of the coverage row in MA.3;",
+   "why": "QA r2 minor: untagged statutory values (no fact key) | QA r3 minor 9: no gaps.json entry exists for these amounts (agent 2 R3); worded as a reference to the regulation"
+  },
+  {
+   "find": "UI 40,000/quarter or 10 for 20 weeks",
+   "replace": "UI coverage per the agricultural test of the coverage row in MA.3",
+   "why": "QA r2 minor: untagged values that sit inside the ma.sui.coverage string fact"
+  },
+  {
+   "find": " IP 25-18 (4.67% 2027) excluded from ballot per a secondary source (SJC-13885) - do not model.",
+   "replace": " IP 25-18 is not modelled.",
+   "why": "QA r2 finding 3 (C30): secondary-only number removed from the deliverable; limitation carried in the QA report"
+  },
+  {
+   "stage": "post",
+   "find": "; SJC opinion URL 404.",
+   "replace": "; the SJC opinion could not be read.",
+   "why": "F44 final (pipeline wording)"
+  }
+ ],
+ "annex_IL.md": [
+  {
+   "find": "; OT 23.10 ([[FACT:il.local_minwage.cook.hourly=15.40]] x 1.5); tipped OT 16.94.",
+   "replace": "; the overtime and tipped overtime rates follow from these two rates.",
+   "why": "QA r2 minor: untagged derived values"
+  }
+ ],
+ "annex_IA.md": [
+  {
+   "find": "No SDI/TDI/PFML [US-IAP52-004].",
+   "replace": "No SDI/TDI/PFML programme is configured for Iowa in this release.",
+   "why": "QA r2 C70: statement rested on a MANUAL row only"
+  },
+  {
+   "stage": "post",
+   "find": "No SDI/TDI/PFML located; not a fact: the absence rests only on a secondary source (US-IAP52-004) (open: `ia.pfml.state_program.none`; mandate US-MQ-32).",
+   "replace": "No State SDI, TDI or PFML programme is configured: the absence is not confirmed from an official source [[GAP:RQ-584]].",
+   "why": "F44 final (pipeline wording; C30: no secondary-only statement)"
+  }
+ ],
+ "annex_ME.md": [
+  {
+   "find": "-> [[FACT:me.minwage.hourly=15.70]] not reproduced (CPI not fetched)",
+   "replace": "-> [[FACT:me.minwage.hourly=15.70]] from 2027-01-01 (the CPI-W computation is not reproduced here)",
+   "why": "QA r2 minor: next-year value without its period"
+  },
+  {
+   "find": "\\s*CORRECTS US-MEP51-004 / US-MEP52-006 \\(superseded\\)\\.?",
+   "regex": true,
+   "replace": "",
+   "why": "QA r3 minor 11: correction note; the row cites the active US-MES5-006"
+  }
+ ],
+ "annex_IN.md": [
+  {
+   "find": "-> [[FACT:in.pit.rate=2.9]]%",
+   "replace": "-> [[FACT:in.pit.rate=2.9]]% from 2027-01-01",
+   "why": "QA r2 minor: next-year value without its period"
+  },
+  {
+   "find": ";\\s*effective date per a (?:secondary|tier-B) source\\s*2026-07-01",
+   "regex": true,
+   "replace": "; effective date: see the open point in this section",
+   "why": "QA r3 blocker 4 (C30): secondary-only figure removed; the limitation stays with its GAP tag (IN.9, RQ-585)"
+  },
+  {
+   "stage": "post",
+   "find": "Not configured in this release [[GAP:RQ-209]]: [[FACT:in.pit.rate=2.90]]% for 2027 rests on the DOR page alone; IC 6-3-2-1 unread (iga.in.gov SPA).",
+   "replace": "Source of the 2027 rate [[GAP:RQ-209]]: the 2027 value of [[FACT:in.pit.rate=2.90]]% (table above) is configured from the DOR page [US-INS5-009]; the statute IC 6-3-2-1 was not read.",
+   "why": "QA r3 minor 12: the 2027 rate is configured (table 422); limitation worded without 'Not configured'"
+  },
+  {
+   "find": "SEA 1-2025 municipal LIT from 2028 (secondary-source detail only, US-INS5-019)",
+   "replace": "SEA 1-2025 (municipal local income tax option) is known from a lead source only [US-INS5-019]; no rate or start date is configured",
+   "why": "Round 3b C30 scan: the start year rests only on a MANUAL tier-B row (register: 'LEAD ONLY, no number to be used')"
+  },
+  {
+   "find": "1220 flat file retired 2027-09.",
+   "replace": "1220 flat file retired 2027-09 [US-INS5-010].",
+   "why": "Round 3b C30 scan: cite the active row that carries the date (fact note)"
+  }
+ ],
+ "annex_CT.md": [
+  {
+   "find": "week containing [[FACT:ct.leave.sick.coverage_threshold_employees=1]] Jan",
+   "replace": "week containing 1 January",
+   "why": "QA r2 C46: date bound to the sick-leave threshold (safety net; the FED-CT tagger no longer tags dates)"
+  },
+  {
+   "regex": true,
+   "find": "QA r1b: reproduced from the parsed (weekly|biweekly|semimonthly|monthly) table",
+   "replace": "Reproduced from the DRS \\1 table",
+   "why": "F44 final (QA r3b minor, pipeline wording / binding)"
+  }
+ ],
+ "annex_DE.md": [
+  {
+   "find": "penalties 1,000-[[FACT:de.pit.bracket.2.ceiling=5,000]] + treble",
+   "replace": "penalties 1,000-5,000 + treble",
+   "why": "QA r2 C46: prevailing-wage penalty bound to the PIT bracket ceiling (safety net; the DC-MA tagger no longer binds round numbers across sections); row cites US-DES5-015"
+  },
+  {
+   "find": "UI separation notice and WARN not researched.",
+   "replace": "⚠️ RESEARCH-GAP [[GAPKEY:de.termination.separation_notice_warn]]: the Delaware UI separation notice and any State plant-closing notice duty are not established from an official source; federal WARN applies (Annex FED.7).",
+   "why": "QA r3 minor 10: neutral limitation with a research request (RQ-592, routed to agent 2 for gaps.json)"
+  },
+  {
+   "find": "Corrected in QA r1b (was \"federal W-4\", US-DES5-008): the DOR FAQ answers",
+   "replace": "The Division of Revenue FAQ answers",
+   "why": "F44 final (QA r3b minor, pipeline wording / binding)"
+  },
+  {
+   "find": " Split out of the old de.wh.certificate value in QA r1b, which carried these rules on the FAQ row US-DES5-008.",
+   "replace": "",
+   "why": "F44 final (QA r3b minor, pipeline wording / binding)"
+  },
+  {
+   "stage": "post",
+   "find": "Blue Collar training tax remains an open item (US-DEL-004).",
+   "replace": "The employer training tax of the Blue Collar Jobs Program is not configured in this release [[GAP:RQ-594]]; its rate and wage base are not established from an official source.",
+   "why": "F44 final (QA r3b minor DE.3): no MANUAL-row citation; limitation tagged with research request RQ-594"
+  }
+ ],
+ "annex_FED.md": [
+  {
+   "find": "**Resident / non-resident matrix (federal income tax)**",
+   "replace": "The social-security treatment of nonresident aliens (FICA and FUTA on actual wages, the exemptions of nonresident aliens and totalization agreements) is written in Module 5 (5.1) and Module 6 (6.0).\n\n**Resident / non-resident matrix (federal income tax)**",
+   "why": "QA r2 C31: cross-reference from Annex FED to the NRA FICA/FUTA treatment"
+  },
+  {
+   "stage": "post",
+   "find": " Partial answer to RQ-556: State account-number formats still open (QA r3b).",
+   "replace": " State account-number formats: see Module 2.",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  },
+  {
+   "find": "| Notice 2026-10, 2026-4 IRB 378 |",
+   "replace": "| Notice 2026-10 (applies 2026-01-01 to 2026-06-30; modified by Announcement 2026-11 from 2026-07-01) |",
+   "why": "v1.1 C70: superseded source listed with the period it governs"
+  }
+ ],
+ "annex_OH.md": [
+  {
+   "regex": true,
+   "find": "\\[\\[FACT:oh\\.pit\\.municipal\\.rate_table=[^\\]]*\\]\\]",
+   "replace": "The Finder municipal rate table of the Ohio Department of Taxation (OHMuniRateTable.csv: begin date, end date, municipal FIPS code, name and rate per municipality; rates only, no resident credit and no collector)",
+   "why": "QA r2 finding 38: the fact value still carries an internal local-file path; rendered as a paraphrase citing US-OHB5-002 (row keeps its register id) without the path or untagged counts"
+  }
+ ],
+ "annex_HI.md": [
+  {
+   "find": "FEN125 (2003, secondary source): remit within 5 working days after payday; start first period within 7 business days of mailing; ",
+   "replace": "FEN125 remittance and start timing: not configured in this release [[GAP:RQ-583]]; ",
+   "why": "QA r2 finding 3 (C30): secondary-only number removed from the deliverable; limitation carried in the QA report | QA r3 minor 9: GAP tag"
+  }
+ ],
+ "annex_GA.md": [
+  {
+   "find": "State-rate exclusions (40,000 sales etc.) secondary source only.",
+   "replace": "State-rate exclusion thresholds: not configured in this release [[GAP:RQ-582]].",
+   "why": "QA r2 finding 3 (C30): secondary-only number removed from the deliverable; limitation carried in the QA report | QA r3 minor 9: GAP tag"
+  },
+  {
+   "find": "\\s*\\((?:tier-B|secondary source:?)\\s*0\\.04\\s*[-–]\\s*8\\.10\\s*%\\)",
+   "regex": true,
+   "replace": "",
+   "why": "QA r3 blocker 4 (C30): secondary-only figure removed; the limitation stays with its GAP tag (GA.3, RQ-163)"
+  },
+  {
+   "find": "No SDI/PFML (US-GAP51-003 is not active; absence rests on the US-OWN-007 levy census and US-GAP9W-001/-003).",
+   "replace": "No SDI or PFML programme is configured for Georgia [US-OWN-007; US-GAP9W-001; US-GAP9W-003].",
+   "why": "QA r3 minor 11: cites only active rows"
+  },
+  {
+   "find": "- **V11 (2026-11-06, V-04).** The Jun-2026 guide",
+   "replace": "- **Withholding transition (HB 463).** The Jun-2026 guide",
+   "why": "v1.1: pack narrative label (pipeline round id) replaced by a subject label"
+  },
+  {
+   "find": " `ga.wh.method` (and WTC `ga.sit.method`) are split on the same date. Derivation: every Dec-2025 per-period value = annual / periods (52, 26, 24, 12, 4, 2, 365), half-up to the cent, re-derived, 21/21 match.",
+   "replace": " The withholding method is split on the same date: Table E to 2026-05-10, the current method from 2026-05-11.",
+   "why": "v1.1: research derivation note (unbound numbers, internal key names) removed from the deliverable"
+  },
+  {
+   "find": "1 dependent (Employer's Tax Guide percentage method).**",
+   "replace": "1 dependent (Employer's Tax Guide percentage method), wages paid from 2026-05-11.**",
+   "why": "v1.1: the example uses the parameters in force from 2026-05-11"
+  }
+ ],
+ "annex_LA.md": [
+  {
+   "find": "\\s*\\((?:tier-B|secondary source:?)\\s*7,700 in 2025\\)",
+   "regex": true,
+   "replace": "",
+   "why": "QA r3 blocker 4 (C30): secondary-only figure removed; the limitation stays with its GAP tag (LA.3, la.sui.wage_base mechanism)"
+  },
+  {
+   "find": "(?m)^Not researched\\.\\n\\n?",
+   "regex": true,
+   "replace": "",
+   "why": "QA r3 minor 10: LA.12 limitation stated once by RQ-244"
+  }
+ ],
+ "annex_KY.md": [
+  {
+   "find": "(?m)^Child-support IWO fee[^\\n]*US-KYS5-026\\)\\.[^\\n]*\\n\\n?",
+   "regex": true,
+   "replace": "",
+   "why": "QA r3 blocker 4 (C30): secondary-only figure removed; the limitation stays with its GAP tag (KY.9 paragraph deleted; RQ-233/586/587 state the limitation)"
+  },
+  {
+   "find": "see the open item `ky.wh.rounding.tax` in KY.2",
+   "replace": "see the rounding limitation in KY.2",
+   "why": "QA r3 minor 11: fact key in deliverable prose"
+  }
+ ],
+ "annex_TN.md": [
+  {
+   "find": "(not configured in this release; see the open point below)",
+   "replace": "(not configured in this release [[GAP:RQ-329]])",
+   "why": "QA r3 minor 9: GAP tag (TN PC 617)"
+  }
+ ],
+ "annex_WV.md": [
+  {
+   "find": " Not researched further (open point below).",
+   "replace": "",
+   "why": "QA r3 minor 10: WV.12 limitation stated by RQ-396 below"
+  },
+  {
+   "find": "42 CSR 5 s.7.3; supersedes US-WVLAB-001; ",
+   "replace": "42 CSR 5 s.7.3; ",
+   "why": "QA r3 minor 11: correction note citing a superseded row"
+  }
+ ],
+ "annex_RI.md": [
+  {
+   "find": "or aggregate; US-RI-006 value is wrong (do not use)",
+   "replace": "or aggregate",
+   "why": "QA r3 minor 11: correction note citing a superseded row"
+  }
+ ],
+ "annex_AR.md": [
+  {
+   "stage": "post",
+   "find": "Not configured in this release [[GAP:RQ-590]]: Report SUI efile threshold employees: not established from an official source.",
+   "replace": "Not configured in this release [[GAP:RQ-590]]: the employee count above which Arkansas UI wage reports must be filed electronically is not established from an official source.",
+   "why": "QA r3 / agent 2 R3: AR 250 figure removed (unresolved); readable limitation"
+  }
+ ],
+ "annex_MT.md": [
+  {
+   "stage": "post",
+   "find": "is not confirmed and is not configured (blocking gap in section MT.1).",
+   "replace": "is not confirmed and is not configured [[GAP:RQ-065]] (see MT.1).",
+   "why": "Round 3b (QA r3 minor 9 class): tag the summary 'not configured' statement with the gap of its section"
+  }
+ ],
+ "annex_NE.md": [
+  {
+   "stage": "post",
+   "find": "is not confirmed and is not configured (blocking gap in section NE.1).",
+   "replace": "is not confirmed and is not configured [[GAP:RQ-089]] (see NE.1).",
+   "why": "Round 3b (QA r3 minor 9 class): tag the summary 'not configured' statement with the gap of its section"
+  }
+ ],
+ "annex_NH.md": [
+  {
+   "stage": "post",
+   "find": "Parental medical leave is not configured (non-blocking gap in section NH.6).",
+   "replace": "Parental medical leave is not configured [[GAP:RQ-102]] (see NH.6).",
+   "why": "Round 3b (QA r3 minor 9 class): tag the summary 'not configured' statement with the gap of its section"
+  }
+ ],
+ "annex_AL.md": [
+  {
+   "stage": "post",
+   "find": "[[FACT:al.wh.std_deduction.married.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.single.phaseout.start_gi=25,999]]",
+   "replace": "[[FACT:al.wh.std_deduction.married.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.married.phaseout.start_gi=25,999]]",
+   "why": "F44 final (QA r3b minor AL): the married quote binds to its own status key"
+  },
+  {
+   "stage": "post",
+   "find": "[[FACT:al.wh.std_deduction.head_of_family.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.single.phaseout.start_gi=25,999]]",
+   "replace": "[[FACT:al.wh.std_deduction.head_of_family.phaseout.step_size=500]] increment or part thereof of GI above [[FACT:al.wh.std_deduction.head_of_family.phaseout.start_gi=25,999]]",
+   "why": "F44 final (QA r3b minor AL): the head-of-family quote binds to its own status key"
+  },
+  {
+   "find": "Phase-out steps by gross income are in the source booklet and carry no facts key (gap in AL.2).",
+   "replace": "Phase-out by gross income: see the standard-deduction table in AL.2.",
+   "why": "F44 final: stale note (the phase-out steps are now values in AL.2) and pipeline wording"
+  },
+  {
+   "stage": "post",
+   "find": "[[FACT:al.wh.std_deduction.single.phaseout.floor_from_gi=35,500]] or more the deduction is 2,500;",
+   "replace": "[[FACT:al.wh.std_deduction.single.phaseout.floor_from_gi=35,500]] or more the deduction is [[FACT:al.wh.std_deduction.single.min=2,500]];",
+   "why": "F44 final (QA r3b minor AL): bind the minimum deduction"
+  },
+  {
+   "stage": "post",
+   "find": "[[FACT:al.wh.std_deduction.married_separate.phaseout.floor_from_gi=17,750]] or more the deduction is 2,500;",
+   "replace": "[[FACT:al.wh.std_deduction.married_separate.phaseout.floor_from_gi=17,750]] or more the deduction is [[FACT:al.wh.std_deduction.married_separate.min=2,500]];",
+   "why": "F44 final (QA r3b minor AL): bind the minimum deduction"
+  },
+  {
+   "stage": "post",
+   "find": "[[FACT:al.wh.std_deduction.married.phaseout.floor_from_gi=35,500]] or more the deduction is 5,000;",
+   "replace": "[[FACT:al.wh.std_deduction.married.phaseout.floor_from_gi=35,500]] or more the deduction is [[FACT:al.wh.std_deduction.married.min=5,000]];",
+   "why": "F44 final (QA r3b minor AL): bind the minimum deduction"
+  },
+  {
+   "stage": "post",
+   "find": "[[FACT:al.wh.std_deduction.head_of_family.phaseout.floor_from_gi=35,500]] or more the deduction is 2,500;",
+   "replace": "[[FACT:al.wh.std_deduction.head_of_family.phaseout.floor_from_gi=35,500]] or more the deduction is [[FACT:al.wh.std_deduction.head_of_family.min=2,500]];",
+   "why": "F44 final (QA r3b minor AL): bind the minimum deduction"
+  }
+ ],
+ "annex_CO.md": [
+  {
+   "stage": "post",
+   "regex": true,
+   "find": "and new (\\[\\[FACT:co\\.sui\\.new_employer\\.rate\\.total=[0-9.]+\\]\\]) ?%",
+   "replace": "and 2027 new-employer rate \\1 %",
+   "why": "F44 final (QA r3b minor CO.13): 2027 value is now a CCG fact (agent 2, US-COP51-004); wording"
+  },
+  {
+   "find": " CDLE news and Colorado Register not swept (403).",
+   "replace": " The CDLE news page and the Colorado Register were not reviewed for this release.",
+   "why": "F44 final (QA r3b minor, pipeline wording / binding)"
+  },
+  {
+   "find": " (programme page not read)",
+   "replace": "",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  }
+ ],
+ "annex_ID.md": [
+  {
+   "find": "See the open item `id.wh.example_threshold_discrepancy` in ID.2; use the wage-bracket table for numbers.",
+   "replace": "Use the wage-bracket table for numbers.",
+   "why": "F44 final (QA r3b minor, pipeline wording / binding)"
+  }
+ ],
+ "annex_SC.md": [
+  {
+   "regex": true,
+   "find": " Local copy \\S+ \\(QA r3b, RQ-318\\)\\.",
+   "replace": "",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  },
+  {
+   "find": " In force as at retrieved_on; the subsection applies",
+   "replace": " The subsection applies",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  },
+  {
+   "find": " In force as at retrieved_on; applies",
+   "replace": " It applies",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  }
+ ],
+ "annex_CA.md": [
+  {
+   "find": "UIC 675 and 682 CA UI",
+   "replace": "UIC s.675 and s.682 CA UI",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  },
+  {
+   "find": "UIC 675; UIC 682(a)",
+   "replace": "UIC s.675; UIC s.682(a)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  }
+ ],
+ "m01_foundational.md": [
+  {
+   "find": "no federal statute requires paid holidays for private employers in the facts",
+   "replace": "no federal statute requires paid holidays for private employers",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  }
+ ],
+ "m04_compensation.md": [
+  {
+   "stage": "post",
+   "find": "DOL WB featured-paid-leave page (19 P9 rows reverted to B/MANUAL) returns 404;",
+   "replace": "the DOL Women's Bureau paid-leave page could not be read;",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  }
+ ],
+ "*": [
+  {
+   "stage": "post",
+   "regex": true,
+   "find": "(?m)^- *\\n",
+   "replace": "",
+   "why": "F44 final: remove the empty bullet left where a closed gap marker was dropped (SC RQ-318)"
+  },
+  {
+   "stage": "post",
+   "regex": true,
+   "find": " ?\\(QA r\\d[a-z]?(?:, RQ-\\d+)?\\)",
+   "replace": "",
+   "why": "F44 final (QA r3b minor, pipeline wording)"
+  }
+ ],
+ "annex_WA.md": [
+  {
+   "find": "(?m)^- Not configured in this release (\\[\\[GAP:RQ-595\\]\\]):.*$",
+   "replace": "- Worker share of the Stay-at-Work and Supplemental Pension premiums: Not configured in this release \\1",
+   "regex": true,
+   "stage": "post",
+   "why": "QA SIR r3: no retrieval details in the deliverable"
+  }
+ ],
+ "annex_MI.md": [
+  {
+   "find": "(IRC 225)",
+   "replace": "(IRC s.225)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  }
+ ],
+ "annex_NY.md": [
+  {
+   "find": "Multiply the result by 16.75% (0.1675)",
+   "replace": "Multiply the result by [[FACT:ny.local.yonkers.resident.surcharge.rate=16.75]]% (0.1675)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  },
+  {
+   "find": "0.50% (0.0050)",
+   "replace": "[[FACT:ny.local.yonkers.nonresident.earnings_tax.rate=0.5]]% (0.0050)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  }
+ ]
+}

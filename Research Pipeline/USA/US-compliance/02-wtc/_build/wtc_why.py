@@ -61,7 +61,7 @@ WHY = {
     "co.famli.split.2027": "the cap on the employee share of the 2027 split is not read in the primary text",
     "de.pfml.rate.2027": "the 2027 paid leave rate is not published",
     "ma.pfml.split.transition": "no transition notice settles the conflict on the date from which the employee and employer split changes",
-    "or.levy.transit_rates.2026_verify": "the transit district rates rest on rows that were not re-read in this pass",
+    "or.levy.transit_rates.2026_verify": "the transit district rates rest on sources not re-verified for this release",
     "al.local.occupational_tax.list": "no State list of municipal and county occupational taxes exists, and one city rate is not confirmed by an official source",
     "co.local.sheridan.opt": "the Sheridan occupational privilege tax rests on an unofficial source only",
     "in.local.county_lit.full_table": "only example county rates are carried; the full county rate chart is not carried",

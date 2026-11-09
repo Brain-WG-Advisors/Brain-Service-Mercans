@@ -1,8 +1,9 @@
 {
  "jur": "IL",
- "facts": 56,
+ "facts": 63,
  "keys": [
   "il.bipa.retention_max_years",
+  "il.data_protection.ssn_paystub",
   "il.deductions.rule",
   "il.final_pay.rule",
   "il.final_pay.vacation_payout",
@@ -14,11 +15,13 @@
   "il.leave.cook.paid_leave.carryover_cap.min_hours",
   "il.leave.cook.paid_leave.in_force",
   "il.leave.cook.paid_leave.payout_at_separation",
+  "il.leave.cook.paid_leave.rules_2025",
   "il.leave.plawa.accrual",
   "il.leave.plawa.cap_hours",
   "il.live.14c_end",
   "il.local_minwage.chicago.hourly",
   "il.local_minwage.chicago.tipped",
+  "il.local_minwage.chicago.tipped_schedule",
   "il.local_minwage.cook.hourly",
   "il.local_minwage.cook.tipped",
   "il.local_wage_tax.exists",
@@ -35,9 +38,11 @@
   "il.overtime.weekly_threshold_hours",
   "il.pay_frequency.rule",
   "il.payment.method",
+  "il.payslip.content_list",
   "il.payslip.copy_response_days",
   "il.payslip.rules",
   "il.pit.rate.flat",
+  "il.pit.rate.statutory",
   "il.reciprocity.states",
   "il.records.paystub.retention_years",
   "il.report.sui.monthly.employer_threshold",
@@ -53,6 +58,7 @@
   "il.sui.fund_builder.rate",
   "il.sui.new_employer.rate",
   "il.sui.wage_base",
+  "il.termination.ui_separation_notice",
   "il.wh.certificate",
   "il.wh.exemption.line1",
   "il.wh.exemption.line2",
@@ -313,6 +319,24 @@
    "value"
   ],
   [
+   "Social insurance (unemployment, disability, paid leave, levies)",
+   "il.sui.wage_base",
+   "US-ILV6-002",
+   "value"
+  ],
+  [
+   "Social insurance (unemployment, disability, paid leave, levies)",
+   "il.sui.wage_base",
+   null,
+   "auto-note"
+  ],
+  [
+   "Social insurance (unemployment, disability, paid leave, levies)",
+   "il.sui.wage_base",
+   null,
+   "auto-note"
+  ],
+  [
    "Pay statement",
    "il.payslip.copy_response_days",
    "US-ILS5-024",
@@ -446,6 +470,12 @@
   ],
   [
    "Live legal change",
+   "il.data_protection.ssn_paystub",
+   "US-ILV6-003",
+   "value"
+  ],
+  [
+   "Live legal change",
    "il.leave.cook.paid_leave.accrual",
    "US-ILB5-301",
    "value"
@@ -470,21 +500,39 @@
   ],
   [
    "Live legal change",
+   "il.leave.cook.paid_leave.rules_2025",
+   "US-ILV6B-005",
+   "value"
+  ],
+  [
+   "Live legal change",
    "il.live.14c_end",
    "US-ILS5-002",
    "value"
   ],
   [
    "Live legal change",
-   "il.local_minwage.chicago.tipped",
-   null,
-   "auto-gap"
+   "il.local_minwage.chicago.tipped_schedule",
+   "US-ILV6B-004",
+   "value"
   ],
   [
    "Live legal change",
-   "il.local_minwage.chicago.hourly",
-   null,
-   "auto-gap"
+   "il.payslip.content_list",
+   "US-ILV6B-001",
+   "value"
+  ],
+  [
+   "Live legal change",
+   "il.pit.rate.statutory",
+   "US-ILV6-001",
+   "value"
+  ],
+  [
+   "Live legal change",
+   "il.termination.ui_separation_notice",
+   "US-ILV6B-002",
+   "value"
   ],
   [
    "Worked examples",
@@ -589,37 +637,12 @@
   {
    "section": "2",
    "title": "State income tax withholding",
-   "key": "il.pit.rate.statutory",
-   "why": "35 ILCS 5/201(b)(5.4) not read; no 2027 change confirmed.",
-   "attempted": [],
-   "what_would_close_it": "ftp.ilga.gov/ILCS/Ch 0035/Act 0005 section 201 + IDOR news.",
-   "blocking": false
-  },
-  {
-   "section": "2",
-   "title": "State income tax withholding",
    "key": "il.pit.conformity_statement",
-   "why": "No IDOR decoupling statement (HSA, 125) read.",
-   "attempted": [],
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): IDOR Pub. 101 / IL-1040 instructions are PDFs (not opened; curl to tax.illinois.gov failed). 35 ILCS 5/203(b): base income = federal adjusted gross income as modified; the modification list read contains no HSA or IRC s.125 addition (zero occurrences of \"health savings\"), so federal exclusions flow into base income. That is an inference from the statute, not an IDOR statement.",
+   "attempted": [
+    "2026-11-06 V11 validation round: documented_limitation: IDOR Pub. 101 / IL-1040 instructions are PDFs (not opened; curl to tax.illinois.gov failed). 35 ILCS 5/203(b): base income = federal adjusted gross income as modified; the modification list read contains no HSA or IRC s.125 addition (zero occurrences of \"health savings\"), so federal exclusions flow into base income. That is an inference from the statute, not an IDOR statement."
+   ],
    "what_would_close_it": "IDOR Pub. 101 / IL-1040 subtraction list.",
-   "blocking": false
-  },
-  {
-   "section": "3",
-   "title": "Social insurance (unemployment, disability, paid leave, levies)",
-   "key": "il.sui.wage_base.next_year",
-   "why": "2027 wage base unpublished; 405/235 formula not read.",
-   "attempted": [],
-   "what_would_close_it": "IDES 2027 rate chart (Dec 2026) and 820 ILCS 405/235 via ftp.ilga.gov.",
-   "blocking": false
-  },
-  {
-   "section": "4",
-   "title": "Pay statement",
-   "key": "il.payslip.content_list",
-   "why": "56 Ill. Adm. Code 300.600 content items not read.",
-   "attempted": [],
-   "what_would_close_it": "ftp.ilga.gov/JCAR Title 56 Part 300.",
    "blocking": false
   },
   {
@@ -632,50 +655,13 @@
    "blocking": true
   },
   {
-   "section": "6",
-   "title": "Leave",
-   "key": "il.leave.cook.paid_leave.rules_2025",
-   "why": "The Cook County Paid Leave Substantive and Procedural Rules approved 2025-04-10 are listed on the CCHR page but not read; they may refine the FAQ (corrected 04/2024) details carried in the il.leave.cook.paid_leave.* facts.",
-   "attempted": [
-    "browser pass P3 2026-11-02 (_research/stage5/browser-pass-P3.md): CCHR page and FAQ read (US-ILB5-301)"
-   ],
-   "what_would_close_it": "CCHR Paid Leave Ordinance Rules (approved 2025-04-10) on cookcountyil.gov.",
-   "blocking": false,
-   "_qa_r1b": "2026-11-02"
-  },
-  {
-   "section": "7",
-   "title": "Termination and final pay",
-   "key": "il.termination.ui_separation_notice",
-   "why": "Whether Illinois requires a separation notice to the employee not identified.",
-   "attempted": [],
-   "what_would_close_it": "56 Ill. Adm. Code 2770 / 820 ILCS 405 via ftp.ilga.gov or the IDES employer handbook.",
-   "blocking": false
-  },
-  {
-   "section": "12",
-   "title": "Payroll data protection and records",
-   "key": "il.data_protection.ssn_paystub",
-   "why": "815 ILCS 505/2RR and 815 ILCS 530 not read.",
-   "attempted": [],
-   "what_would_close_it": "Those sections via ftp.ilga.gov.",
-   "blocking": false
-  },
-  {
-   "section": "13",
-   "title": "Live legal change",
-   "key": "il.local_minwage.chicago.tipped_schedule",
-   "why": "One Fair Wage phase-out percentage for 2026 not read (12.96 = 76% of 17.05).",
-   "attempted": [],
-   "what_would_close_it": "MCC 6-105-020 text or BACP 2026 notice.",
-   "blocking": false
-  },
-  {
    "section": "13",
    "title": "Live legal change",
    "key": "il.live.news_sweep",
-   "why": "IDOL/IDOR/IDES newsrooms 2026 not swept.",
-   "attempted": [],
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): IDOR newsroom (past-year window) and IDOL newsroom swept 2026-11-06. Hits: IDOR FY 2027-01 on PA 104-0468 (IITA changes for tax years ending on or after 2026-12-31, issued 2026-07-07); IDOR FY 2026-16 on PA 104-0453, withholding for film production/loan-out companies (from 2025-12-12); IDOL: Family Neonatal Intensive Care Leave Act (PA 104-259) effective 2026-06-01, 2026 prevailing wage rates published. Bulletin bodies not opened. IDES newsroom URLs (ides.illinois.gov/news.html, /resources/news.html) returned 404; IDES not swept.",
+   "attempted": [
+    "2026-11-06 V11 validation round: documented_limitation: IDOR newsroom (past-year window) and IDOL newsroom swept 2026-11-06. Hits: IDOR FY 2027-01 on PA 104-0468 (IITA changes for tax years ending on or after 2026-12-31, issued 2026-07-07); IDOR FY 2026-16 on PA 104-0453, withholding for film production/loan-out companies (from 2025-12-12); IDOL: Family Neonatal Intensive Care Leave Act (PA 104-259) effective 2026-06-01, 2026 prevailing wage rates published. Bulletin bodies not opened. IDES newsroom URLs (ides.illinois.gov/news.html, /resources/news.html) returned 404; IDES not swept."
+   ],
    "what_would_close_it": "One sweep of tax.illinois.gov/research/news.html, labor.illinois.gov/news.html, ides.illinois.gov newsroom.",
    "blocking": false
   }

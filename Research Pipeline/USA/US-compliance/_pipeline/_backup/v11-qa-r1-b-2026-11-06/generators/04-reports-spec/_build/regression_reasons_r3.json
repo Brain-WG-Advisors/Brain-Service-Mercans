@@ -1,0 +1,128 @@
+[
+ {
+  "col": "D",
+  "old": "(?i)legislat|general assembly|revisor|reviser|council of the district|LSC|code online|statutes|code of regulations",
+  "new": ".",
+  "reason": "QA r2 finding 5: Authority is the agency of the filing, not the legislative / code host of the legal-basis document (us_state_core.filing_authority)"
+ },
+ {
+  "col": "D",
+  "old": "(?i)\\((wayback|published by)[^)]*\\)",
+  "new": ".",
+  "reason": "QA r2 finding 5: source-copy note (Wayback id / published by) removed from the authority name; the agency is unchanged"
+ },
+ {
+  "col": "G",
+  "old": "^[a-z_, ]+$",
+  "new": "^[a-z_, ]+ \\(.+\\)$",
+  "reason": "QA r2 finding 5: portal named by a channel or form fact of the same agency, jurisdiction and programme (us_state_core.filing_portals)"
+ },
+ {
+  "col": "G",
+  "old": "^paper \\(",
+  "new": "^online_form, paper \\(",
+  "reason": "QA r2 finding 5: 'electronic through <portal>' is the portal route; paper only below the threshold (fact text)"
+ },
+ {
+  "col": "J",
+  "old": "Portal: (?:[^|]|\\|TAX)*https?://",
+  "new": "Portal: (?:(?!https?://)[^|]|\\|TAX)*\\| Source",
+  "reason": "QA r2 finding 5: the Portal slot no longer holds the source document URL; portal named by a channel fact of the filing agency, or 'not named in the cited channel sources'; the document stays under Source"
+ },
+ {
+  "col": "D",
+  "old": "(?i)official authority$",
+  "new": ".",
+  "reason": "QA r2 finding 5: a generic 'official authority' label is not an agency; the agency named by a fact of the same jurisdiction and programme is used"
+ },
+ {
+  "col": "D",
+  "cells": [
+   "US-DOR-001!D71",
+   "US-DOR-002!D27",
+   "US-LOC-001!D35",
+   "US-UI-001!D34"
+  ],
+  "reason": "Agent 2 r2 fix: the return fact was re-pointed to another register row (UT US-UTB5-002, AL US-ALS5-001, PA US-PAS5-018 DCED, DC US-DCS5-026 DOES); the authority is read from the re-pointed fact"
+ },
+ {
+  "col": "G",
+  "cells": [
+   "US-UI-001!G34"
+  ],
+  "reason": "Agent 2 r2 fix: 'via DOES ESSP' removed from rspec.dc.ui_qtr.form (not in a held copy; now unresolved rspec.dc.ui_qtr.channel), so no portal is named"
+ },
+ {
+  "col": "J",
+  "cells": [
+   "US-DOR-001!J42",
+   "US-DOR-001!J43",
+   "US-DOR-001!J71",
+   "US-DOR-002!J31",
+   "US-DOR-002!J41",
+   "US-LOC-001!J33",
+   "US-LOC-001!J35",
+   "US-UI-001!J34",
+   "US-UI-001!J54"
+  ],
+  "reason": "Agent 2 r2 fix: the channel / form fact was re-pointed or rewritten (IN US-INS5-010, KS US-KSS5-001 / US-KSS5-026, UT US-UTB5-002, CO US-COS5-006, OH US-OHB5-401, PA US-PAS5-018, DC US-DCS5-026, NC NCSUITS wording); Source and accuracy follow the re-pointed row"
+ },
+ {
+  "col": "G",
+  "cells": [
+   "US-DOR-001!G33",
+   "US-DOR-001!G34",
+   "US-DOR-001!G38",
+   "US-DOR-001!G56",
+   "US-DOR-001!G59",
+   "US-DOR-001!G67",
+   "US-DOR-001!G71",
+   "US-DOR-001!G75",
+   "US-UI-001!G48",
+   "US-UI-001!G54"
+  ],
+  "old": "file_upload",
+  "new": "online_form",
+  "reason": "QA r2 finding 5: channel class from the channel facts only; the verb 'file' ('file by Jan 31', 'filed even with no wages') no longer reads as file_upload (us_common.channel_types)"
+ },
+ {
+  "col": "J",
+  "cells": [
+   "US-DOR-001!J33",
+   "US-DOR-001!J34",
+   "US-DOR-001!J38",
+   "US-DOR-001!J56",
+   "US-DOR-001!J59",
+   "US-DOR-001!J67",
+   "US-DOR-001!J71",
+   "US-DOR-001!J75",
+   "US-UI-001!J48",
+   "US-UI-001!J54"
+  ],
+  "old": "Channel: [^|]*file_upload",
+  "new": "Channel: online_form",
+  "reason": "QA r2 finding 5: channel class from the channel facts only; the verb 'file' no longer reads as file_upload (us_common.channel_types)"
+ },
+ {
+  "col": "G",
+  "cells": [
+   "US-UI-001!G43"
+  ],
+  "reason": "Triage A: rspec.ks.ui_qtr.format rewritten to the source wording ('26 or more must file online'), so online_form is read from the fact"
+ },
+ {
+  "col": "J",
+  "cells": [
+   "US-UI-001!J43",
+   "US-DOR-002!J67"
+  ],
+  "reason": "Triage A/B: the channel fact was rewritten to source wording (KS online threshold; WI 'My Tax Account, Data File Transfer, sFTP' with second row US-WIS5-015)"
+ },
+ {
+  "col": "G",
+  "cells": [
+   "US-DOR-002!G67"
+  ],
+  "reason": "Triage B: 'MTA' spelled out as 'My Tax Account' in rspec.wi.w2_state.format; portal list extended with that name"
+ }
+]

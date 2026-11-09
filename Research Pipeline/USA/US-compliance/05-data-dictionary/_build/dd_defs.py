@@ -216,19 +216,23 @@ el("ee.pay_frequency", "Pay frequency",
    facts=["dd.ms.new_hire.extra"], label="Pay frequency",
    note="Held from the payroll calendar assigned to the employee; the salary named in the research is a wage amount "
         "and is not stored here.")
+# v1.1 (V11 gap merge, US-TXV6-005): the Texas enhanced wage-report content is proposed only
+TX_PROPOSED = ("Texas: the enhanced wage-report content of Labor Code 204.0025 is proposed only; the TWC amendment to "
+               "40 TAC ch. 815 is not adopted (US-TXV6-005), so this item is not mandatory for Texas and is not configured "
+               "as mandatory until the adopted rule and its start quarter are published.")
 el("ee.full_part_time", "Full-time or part-time status",
    "Whether the employee works full time or part time, written on the wage reports that ask for it.",
    dt="CM", pre="The State wage report asks for the full-time or part-time status.", grp="Employment",
-   facts=["dd.tx.ui.enhanced"], label="Full/part-time")
+   facts=["dd.tx.ui.enhanced"], label="Full/part-time", note=TX_PROPOSED)
 el("ee.remote_work_status", "Remote-work status",
    "Whether the employee works remotely, written on the wage reports that ask for it.",
    dt="CM", pre="The State wage report asks for the remote-work status.", grp="Employment", om=B,
    facts=["dd.tx.ui.enhanced"], label="Remote-work status",
-   note="The start quarter from which the Texas filing carries this item is not named in the cited sources.")
+   note=TX_PROPOSED)
 el("ee.industry", "Industry of employment",
    "Industry of the employee's place of employment, written on the wage reports that ask for it.",
    dt="CM", pre="The State wage report asks for the industry.", grp="Employment", facts=["dd.tx.ui.enhanced"],
-   label="Industry", note="The code list and layout for this item are not named in the cited sources.")
+   label="Industry", note="The code list and layout for this item are not named in the cited sources. " + TX_PROPOSED)
 el("ee.job_title", "Job title",
    "Job title of the employee as held in the HR record, written on the reports that ask for the job title.",
    dt="CM", pre="The State report asks for the job title.", grp="Employment",
@@ -236,7 +240,7 @@ el("ee.job_title", "Job title",
 el("ee.occupation", "Occupation",
    "Occupation of the employee in words, written on the reports that ask for the occupation.",
    dt="CM", pre="The State report asks for the occupation.", grp="Employment",
-   facts=["dd.la.new_hire.occupation", "dd.ct.ui.occupation_hours_zip", "dd.tx.ui.enhanced"], label="Occupation")
+   facts=["dd.la.new_hire.occupation", "dd.ct.ui.occupation_hours_zip", "dd.tx.ui.enhanced"], label="Occupation", note=TX_PROPOSED)
 el("ee.soc_code", "Standard Occupational Classification (SOC) code",
    "Six-digit Standard Occupational Classification code of the employee's occupation.",
    dt="CM", pre="The State report asks for the SOC code.", ftype="Text", om="SOC occupation code (federal list)",
@@ -258,7 +262,7 @@ el("ee.worksite_zip", "Worksite ZIP code",
 el("ee.county_primary_employment", "County of primary employment",
    "County of the employee's primary place of employment, written on the reports that ask for the county.",
    dt="CM", pre="The State report asks for the county of employment.", grp="Employment",
-   facts=["dd.tx.ui.enhanced", "dd.wv.ui.soc_county"], label="County")
+   facts=["dd.tx.ui.enhanced", "dd.wv.ui.soc_county"], label="County", note=TX_PROPOSED)
 el("ee.work_location", "Work location",
    "Work location of the employee as defined by the employer, written on the State wage report that asks for the work location.",
    dt="CM", pre="The State wage report asks for the work location.", grp="Employment",

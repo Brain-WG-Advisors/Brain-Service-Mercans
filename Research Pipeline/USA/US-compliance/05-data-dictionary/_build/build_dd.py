@@ -118,18 +118,27 @@ def build(out_dir=None, sidecars=True):
     wb["Version Control"]["A1"].comment = None
     for dv in wb["Version Control"].data_validations.dataValidation:
         if "Released" in str(dv.formula1):
-            dv.formula1 = '"In Progress,Under Review,Approved,Released,Issued,For QA"'
+            dv.formula1 = '"In Progress,Under Review,Approved,Released,Issued,For QA,Superseded"'
 
     # ---- Version Control: one row (package version, issue date, "Issued") -------------------------
     ws = wb["Version Control"]
     ws["B9"].value = f"{COUNTRY_NAME} | {D.DD_REF}"
-    ws["B13"].value = float(D.PKG)
-    ws["C13"].value = D.ISSUE
-    ws["D13"].value = "Data Dictionary of the United States payroll package"
-    ws["E13"].value = D.STATUS
-    ws["F13"].value = D.AUTHOR
-    for col in "BCDEF":
-        ws[f"{col}14"].value = None
+    rows = D.C.changelog_rows("DD", D.STATUS)
+    if rows:   # v1.1: previous version row + this version with what changed, why and the source
+        for r, (ver, eff, desc, st) in zip((13, 14), rows):
+            ws[f"B{r}"].value = float(ver)
+            ws[f"C{r}"].value = __import__("datetime").datetime.strptime(eff, "%Y-%m-%d")
+            ws[f"D{r}"].value = ("Data Dictionary of the United States payroll package" if r == 13 else desc)
+            ws[f"E{r}"].value = st
+            ws[f"F{r}"].value = D.AUTHOR
+    else:
+        ws["B13"].value = float(D.PKG)
+        ws["C13"].value = D.ISSUE
+        ws["D13"].value = "Data Dictionary of the United States payroll package"
+        ws["E13"].value = D.STATUS
+        ws["F13"].value = D.AUTHOR
+        for col in "BCDEF":
+            ws[f"{col}14"].value = None
 
     # ---- Introduction: keep the table of contents, evaluate the numbering formulas -----------------
     ws = wb["Introduction"]

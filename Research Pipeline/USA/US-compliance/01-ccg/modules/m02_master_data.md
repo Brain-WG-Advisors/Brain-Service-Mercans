@@ -1,7 +1,7 @@
 # Module 2: Master Data Configuration
 *Purpose: To define the mandatory employer and employee information for processing and reporting.*
 
-Field-level definitions (data types, formats, option lists, validations) are owned by the Data Dictionary US-DD-001 v1.0. This module states which master data the law makes necessary and why; it does not reproduce the field tables.
+Field-level definitions (data types, formats, option lists, validations) are owned by the Data Dictionary US-DD-001 v1.1. This module states which master data the law makes necessary and why; it does not reproduce the field tables.
 
 ## 2.1 Employer Information
 
@@ -47,7 +47,7 @@ State unemployment insurance does **not** follow residence: it follows the local
 
 ### What employee fields are required for processing payroll and statutory reporting?
 
-The full field list is in US-DD-001 v1.0. The law makes the following groups necessary:
+The full field list is in US-DD-001 v1.1. The law makes the following groups necessary:
 
 | Group | Required content | Why (fact) |
 |---|---|---|
@@ -89,12 +89,12 @@ Form W-4 (2020 or later) values, from `fed.w4.input_fields` [US-FEDS5-006]:
 | W-4 field | Combo values / input type |
 |---|---|
 | Step 1(c) filing status | Single or Married filing separately / Married filing jointly or Qualifying surviving spouse / Head of household |
-| Step 2 multiple jobs | Checked / not checked |
+| Step 2 multiple jobs | Checked / not verified |
 | Step 3 dependents | Annual amount (USD) |
 | Step 4(a) other income | Annual amount (USD) |
 | Step 4(b) deductions | Annual amount (USD) |
 | Step 4(c) extra withholding | Amount per pay period (USD) |
-| Exempt | Checked / not checked (one year) |
+| Exempt | Checked / not verified (one year) |
 
 Reciprocity certificates (combo value = certificate on file, yes or no), from the multistate facts:
 
@@ -122,7 +122,7 @@ Reciprocity certificates (combo value = certificate on file, yes or no), from th
 
 None for federal payroll purposes. Each employer applies the withholding method and the wage bases independently (coverage row `multiple_employers` [US-FEDS5-006, US-MULTIS5-009, US-FEDS5-005]): the OASDI and FUTA bases are per employer, the Additional Medicare threshold of USD [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] is applied per employer, and the employee coordinates income tax across jobs on Form W-4 Step 2 [US-FEDS5-006]. Wages paid by a previous employer in the same year do not count toward this employer's FUTA base, except successor carry-over on an acquisition: [[FACT:multi.futa.wage_base.scope=FUTA 7,000 counts remuneration paid by the employer in the calendar year across all States: one base per employer, not per State; successor carry-over]] [US-MULTIS5-009]. Excess OASDI from several employers is refunded to the employee at assessment, not by payroll (coverage row `annual_regularisation` [US-FEDS5-007, US-FEDS5-005, US-FEDS5-006]).
 
-Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief for related employers (multiple_employers row) is not established from an official source.
+Not configured in this release [[GAP:RQ-533]]: The successor-employer wage-base rule for related employers (26 U.S.C. 3121(a)(1) and 3306(b)(1)) is not established from an official source in this release.
 
 ## 2.3 Data Management and Retention
 

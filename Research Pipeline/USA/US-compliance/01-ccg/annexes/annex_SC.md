@@ -28,7 +28,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-319]]: LLR child-labour regulations not read.
+- Not configured in this release [[GAP:RQ-319]]: LLR child-labour regulations not verified against the official source.
 
 ## SC.2 Income tax withholding
 
@@ -193,7 +193,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in SC.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-321]]: 12-6-1130/1140 item-by-item fringe treatment after Act 110 not read.
+- Not configured in this release [[GAP:RQ-321]]: 12-6-1130/1140 item-by-item fringe treatment after Act 110 not verified against the official source.
 
 ## SC.9 Deductions and garnishments
 
@@ -210,7 +210,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in SC.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-320]]: SCDOR wage levy not read.
+- Not configured in this release [[GAP:RQ-320]]: SCDOR wage levy not verified against the official source.
 
 ## SC.10 Collective agreements and prevailing wage
 
@@ -256,7 +256,7 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 |---|---|---|
 | Domestic / household | Exempt from the 41-10-30 notice and pay-statement duties; in-kind pay excluded from UI wages; UI coverage threshold not extracted | US-SCS5-014 |
 | Agricultural | Agricultural labour by students or qualifying part-timers excluded from UI (41-27-260(16)); in-kind pay excluded; minimum wage federal | US-SCS5-014 |
-| Minors | Child-labour rules delegated to LLR regulations (not read); minor newspaper carriers and a minor child employed by a parent excluded from UI | US-SCS5-014 |
+| Minors | Child-labour rules delegated to LLR regulations (not verified against the official source); minor newspaper carriers and a minor child employed by a parent excluded from UI | US-SCS5-014 |
 | Tipped | Federal tipped rules apply; reported tips are UI wages | US-SCS5-014, US-SCS5-012 |
 | Clergy / religious | Churches and ministers excluded from UI (41-27-260(10)); withholding follows the federal wage definition | US-SCS5-014 |
 | Students | Own-school students, student nurses and interns excluded from UI | US-SCS5-014 |

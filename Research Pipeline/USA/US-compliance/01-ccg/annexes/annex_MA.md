@@ -9,7 +9,7 @@ Each parameter row gives its key, the period in force and its legal basis: the l
 
 ## MA.1 Employment and labour code
 
-Pay weekly or biweekly within 6 days of period end (7 if 7-day week); casual within 7 days [US-MAP51-008]. Payment method/e-stub consent not located. No local MW located (commissioner power under c.151 s.7 unused).
+Pay weekly or biweekly within 6 days of period end (7 if 7-day week); casual within 7 days [US-MAP51-008]. Payment method/e-stub consent not established from an official source. No local MW located (commissioner power under c.151 s.7 unused).
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -19,7 +19,7 @@ Pay weekly or biweekly within 6 days of period end (7 if 7-day week); casual wit
 | `ma.minwage.tip_credit.max` | [[FACT:ma.minwage.tip_credit.max=8.25]] USD | 2023-01-01 to open | US-MAS5-003 (Massachusetts General Court (malegislature.gov); A.1, derived arithmetically, confidence high) | [[FACT:ma.minwage.hourly=15.00]] - [[FACT:ma.minwage.service_rate=6.75]]. |
 | `ma.overtime.weekly_threshold_hours` | [[FACT:ma.overtime.weekly_threshold_hours=40]] hours | 2026-01-01 to open | US-MAS5-002 (Massachusetts General Court (malegislature.gov); A.1, direct artifact inspection, confidence high) | 1.5x; no daily OT; commissions/bonuses/incentives excluded from regular rate. |
 
-Not configured in this release [[GAP:RQ-248]]: Direct deposit, paycard and electronic pay-stub consent rules not located.
+Not configured in this release [[GAP:RQ-248]]: Direct deposit, paycard and electronic pay-stub consent rules not established from an official source.
 
 ## MA.2 Income tax withholding
 
@@ -27,7 +27,7 @@ Not configured in this release [[GAP:RQ-248]]: Direct deposit, paycard and elect
 |---|---|---|---|---|
 | `ma.pit.rate` | [[FACT:ma.pit.rate=5.0]] % | 2026-01-01 to open | US-MAB5-402 (Massachusetts Department of Revenue; A.2, quoted from authority page, confidence high) | Plus 4% surtax above [[FACT:ma.pit.surtax.threshold=1,107,750]] (2026); withholding at combined 9% above threshold. IP 25-18 is not modelled. |
 | `ma.pit.surtax.rate` | [[FACT:ma.pit.surtax.rate=4.0]] % | 2026-01-01 to open | US-MAP51-003 (Massachusetts Department of Revenue; A.2, quoted from authority page, confidence high) |  |
-| `ma.pit.surtax.threshold` | [[FACT:ma.pit.surtax.threshold=1,107,750]] USD | 2026-01-01 to 2026-12-31 | US-MAB5-402 (Massachusetts Department of Revenue; A.2, quoted from authority page, confidence high) | Indexed (CPI mechanism not re-read); published in Circular M. |
+| `ma.pit.surtax.threshold` | [[FACT:ma.pit.surtax.threshold=1,107,750]] USD | 2026-01-01 to 2026-12-31 | US-MAB5-402 (Massachusetts Department of Revenue; A.2, quoted from authority page, confidence high) | Indexed (CPI mechanism not confirmed); published in Circular M. |
 | `ma.wh.blind_reduction.weekly` | [[FACT:ma.wh.blind_reduction.weekly=2.12]] USD | 2026-01-01 to open | US-MAS5-013 (Massachusetts Department of Revenue; A.2, quoted from authority page, confidence high) | Per person; DOR publishes the biweekly, semimonthly, monthly and daily amounts in the same table. |
 | `ma.wh.certificate` | [[FACT:ma.wh.certificate=M-4: line 1 personal (1, or 2 if 65+), line 2 spouse (4, or 5 if 65+), line 3 dependents, line 5 additional; boxes A HoH, B blind, C spouse blind, D full-time student <= 8,000 (no withholding); none filed = zero exemptions; new M-4 within 10 days on decrease; exemptions only with principal employer]] | 2026-01-01 to open | US-MAS5-014 (Massachusetts Department of Revenue; A.2, direct artifact inspection, confidence high) | Edition date not printed in extracted text. |
 | `ma.wh.exemption.annual` | [[FACT:ma.wh.exemption.annual=1,000n + 3,400]] | 2026-01-01 to open | US-MAS5-013 (Massachusetts Department of Revenue; A.2, quoted from authority page, confidence high) |  |
@@ -42,7 +42,7 @@ Not configured in this release [[GAP:RQ-248]]: Direct deposit, paycard and elect
 
 Not configured in this release [[GAP:RQ-249]]: M-4 revision date not printed in extracted text.
 
-Not yet published [[GAP:RQ-250]]: 401(k)/403(b), s.125, HSA, transit, GTL treatment not read in a DOR source.
+Not configured in this release [[GAP:RQ-250]]: 401(k)/403(b), s.125, HSA, transit, GTL treatment not verified against the official source in a DOR source.
 
 Not configured in this release [[GAP:RQ-251]]: Subject of the P.L. 119-21 s.70302(f) deduction and any withholding effect unchecked.
 
@@ -93,7 +93,7 @@ No SDI/TDI; PFML the only employee-funded program [US-MAP9W-004]. PFML benefits 
 | `ma.sui.wage_base` | [[FACT:ma.sui.wage_base=15,000]] USD | 2015-01-01 to 2026-12-31 | US-MAP51-005 (Massachusetts Legislature; A.1, direct artifact inspection, confidence high) | Fixed by statute, not indexed. |
 | `ma.wtf.rate` | [[FACT:ma.wtf.rate=0.056]] % | 2026-01-01 to open | US-MAB5-401 (MA official authority; A.2, quoted from authority page, confidence medium) | c.151A s.14L; 2026 DUA value not confirmed (commissioner may adjust). |
 
-Not configured in this release [[GAP:RQ-252]]: 2026 Workforce Training Fund rate as published by DUA not read.
+Not configured in this release [[GAP:RQ-252]]: 2026 Workforce Training Fund rate as published by DUA not verified against the official source.
 
 Not configured in this release [[GAP:RQ-253]]: Ch. 101 s.45 vs DFML effective date (decided for DFML 2027-01-01; totals unaffected).
 
@@ -101,7 +101,7 @@ Not configured in this release [[GAP:RQ-253]]: Ch. 101 s.45 vs DFML effective da
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `ma.payslip.items` | [[FACT:ma.payslip.items=employer name, employee name, date (day/month/year), hours worked, hourly rate, deductions or increases for the period (c.149 s.148)]] | 2026-01-01 to open | US-MAS5-005 (Massachusetts General Court (malegislature.gov); A.1, direct artifact inspection, confidence medium) | Statute row US-MAP51-008; e-delivery consent not located. |
+| `ma.payslip.items` | [[FACT:ma.payslip.items=employer name, employee name, date (day/month/year), hours worked, hourly rate, deductions or increases for the period (c.149 s.148)]] | 2026-01-01 to open | US-MAS5-005 (Massachusetts General Court (malegislature.gov); A.1, direct artifact inspection, confidence medium) | Statute row US-MAP51-008; electronic-delivery consent is not stated in this source. |
 
 ## MA.5 Statutory reporting
 
@@ -121,11 +121,11 @@ Not configured in this release [[GAP:RQ-255]]: The Feb 28 (paper) / Mar 31 (elec
 
 Not configured in this release [[GAP:RQ-256]]: Whether the DUA wage detail report is the only quarterly wage report (DOR guide mentions DOR reports).
 
-Not configured in this release [[GAP:RQ-257]]: PFML quarterly return mechanics not read.
+Not configured in this release [[GAP:RQ-257]]: PFML quarterly return mechanics not verified against the official source.
 
 ## MA.6 Leave
 
-PFML benefit: 7-day wait; 80% of AWW to 50% SAWW + 50% above; caps 20/12/26 weeks. Parental, small necessities, DV, jury leave not read.
+PFML benefit: 7-day wait; 80% of AWW to 50% SAWW + 50% above; caps 20/12/26 weeks. Parental, small necessities, DV, jury leave not verified against the official source.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -133,17 +133,17 @@ PFML benefit: 7-day wait; 80% of AWW to 50% SAWW + 50% above; caps 20/12/26 week
 | `ma.leave.sick.employer_threshold_paid` | [[FACT:ma.leave.sick.employer_threshold_paid=11]] employees | 2026-01-01 to open | US-MAS5-006 (Massachusetts General Court (malegislature.gov); A.1, direct artifact inspection, confidence high) | c.149 s.148C: 1 h per 30 h; use from day 90; 40 h/yr paid (11+) or unpaid; carryover 40; no payout; certification after 24 consecutive scheduled hours. |
 | `ma.leave.sick.payout_on_separation` | [[FACT:ma.leave.sick.payout_on_separation=False]] | 2026-01-01 to open | US-MAS5-006 (Massachusetts General Court (malegislature.gov); A.1, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-258]]: C.149 ss.52D, 52E, 105D, jury c.234A s.48 and child labour ss.60-66 not read.
+Not configured in this release [[GAP:RQ-258]]: C.149 ss.52D, 52E, 105D, jury c.234A s.48 and child labour ss.60-66 not verified against the official source.
 
 ## MA.7 Termination and final pay
 
-Sick time no payout. UI separation notice instrument not located.
+Sick time no payout. UI separation notice instrument not established from an official source.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
 | `ma.final_pay.rule` | [[FACT:ma.final_pay.rule=discharge: in full on the day of discharge; resignation: next regular payday (or following Saturday); agreed vacation/holiday pay are wages payable at termination (c.149 s.148)]] | 2026-01-01 to open | US-MAP51-008 (Massachusetts Legislature; A.1, quoted from authority page, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-259]]: DUA separation notice form/rule not located (430 CMR 5.00 index only).
+Not configured in this release [[GAP:RQ-259]]: DUA separation notice form/rule not established from an official source (430 CMR 5.00 index only).
 
 ## MA.8 Benefits in kind and taxable wages
 
@@ -158,7 +158,7 @@ Not configured in this release [[GAP:RQ-259]]: DUA separation notice form/rule n
 | `ma.garn.creditor.exempt_rule` | [[FACT:ma.garn.creditor.exempt_rule=greater of 85% of gross wages or 50 x higher of federal/MA MW per week; support orders: CCPA (c.246 s.28)]] | 2026-01-01 to open | US-MAS5-009 (Massachusetts General Court (malegislature.gov); A.1, direct artifact inspection, confidence high) |  |
 | `ma.garn.creditor.weekly_exempt_floor` | [[FACT:ma.garn.creditor.weekly_exempt_floor=750]] USD | 2023-01-01 to open | US-MAS5-009 (Massachusetts General Court (malegislature.gov); A.1, derived arithmetically, confidence high) | 50 x 15.00. |
 
-Not configured in this release [[GAP:RQ-260]]: C.149 s.150 deduction authorisation and MA IWO fees/priority not read.
+Not configured in this release [[GAP:RQ-260]]: C.149 s.150 deduction authorisation and MA IWO fees/priority not verified against the official source.
 
 ## MA.10 Collective agreements and prevailing wage
 
@@ -175,7 +175,7 @@ MW and UI base not indexed; UI/COVID and PFML rates yearly; PFML cap = SS base; 
 
 ## MA.12 Payroll data protection and records
 
-No SSN-on-slip rule located; c.93H / 201 CMR 17.00 not read.
+No SSN-on-slip rule located; c.93H / 201 CMR 17.00 not verified against the official source.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -191,7 +191,7 @@ No SSN-on-slip rule located; c.93H / 201 CMR 17.00 not read.
 
 Not configured in this release [[GAP:RQ-261]]: 2026 DOR TIRs/Directives and DUA/DFML news not reviewed.
 
-Not configured in this release [[GAP:RQ-262]]: IP 25-18 exclusion rests on a secondary source (US-MAS5-027); the SJC opinion could not be read.
+Not configured in this release [[GAP:RQ-262]]: IP 25-18 exclusion rests on a secondary source (US-MAS5-027); the SJC opinion is not verified against the official source.
 
 ## MA.14 Authority worked examples (oracle values)
 
@@ -201,7 +201,7 @@ No published state worked example is recorded for this jurisdiction.
 
 - Domestic: MW/OT apply (incl. au pairs); written agreement for 16+ h/week; meal and lodging deductions may not exceed the amounts set by 454 CMR 27 (apply the regulation's amounts); UI coverage per the domestic-service test of the coverage row in MA.3; paystub records 3 years [US-MAS5-028, US-MAS5-022].
 - Agricultural: MW 8.00 (not family/under 18); OT-exempt; UI coverage per the agricultural test of the coverage row in MA.3 [US-MAS5-004, US-MAS5-002, US-MAS5-022].
-- Minors: MW applies; UI-exempt working for a parent; permits/hours not read [US-MAS5-001, US-MAS5-022].
+- Minors: MW applies; UI-exempt working for a parent; permits/hours not verified against the official source [US-MAS5-001, US-MAS5-022].
 - Tipped: service rate [[FACT:ma.minwage.service_rate=6.75]]; tips 20+/month reported by 10th are withheld on [US-MAS5-003, US-MAS5-013].
 - Clergy: religious order members excluded from MW; some religious work UI-exempt; religious organisations still withhold [US-MAS5-017, US-MAS5-022, US-MAS5-013].
 - Students: M-4 box D (<= 8,000) no withholding; nonprofit/public work-training UI-exempt [US-MAS5-014, US-MAS5-024, US-MAS5-022].

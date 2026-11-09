@@ -126,7 +126,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OK.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-285]]: The 2025 and 2026 wage bases reproduce only with the percentages in force before Laws 2025 c. 140 (an inference from arithmetic; the old text was not read).
+- Not configured in this release [[GAP:RQ-285]]: The 2025 and 2026 wage bases reproduce only with the percentages in force before Laws 2025 c. 140 (an inference from arithmetic; the old text was not verified against the official source).
 
 ## OK.4 Pay statement
 
@@ -219,7 +219,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OK.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-289]]: ODOL deduction rule (OAC 380:30-1-3) behind the FAQ not read.
+- Not configured in this release [[GAP:RQ-289]]: ODOL deduction rule (OAC 380:30-1-3) behind the FAQ not verified against the official source.
 
 ## OK.10 Collective agreements and prevailing wage
 

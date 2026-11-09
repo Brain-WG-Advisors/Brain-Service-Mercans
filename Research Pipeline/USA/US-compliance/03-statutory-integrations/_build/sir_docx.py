@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 """python-docx helpers for the SIR index: styles (Arial 11 body, 14 pt H1, 12 pt H2, 11 pt bold H3), cover,
 TOC field, bordered tables with a shaded header row, landscape sections, footer."""
+import os
+import sys as _sys_dw
+_DW_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "01-ccg", "_build", "common"))
+if _DW_DIR not in _sys_dw.path:
+    _sys_dw.path.insert(0, _DW_DIR)
+import deliverable_wording as DW  # noqa: E402  v1.1 QA r1: open points in deliverable wording
 from docx import Document
 from docx.enum.section import WD_ORIENT, WD_SECTION
 from docx.enum.table import WD_TABLE_ALIGNMENT
@@ -50,7 +56,7 @@ def new_document(footer_text, core_title):
 
 def para(doc, text, bold=False, italic=False, size=None, align=None, style=None, after=None):
     p = doc.add_paragraph(style=style)
-    r = p.add_run(text)
+    r = p.add_run(DW.restate(text))
     r.bold = bold
     r.italic = italic
     if size:
@@ -66,7 +72,7 @@ def bullet(doc, text):
     p = doc.add_paragraph()
     p.paragraph_format.left_indent = Inches(0.25)
     p.paragraph_format.first_line_indent = Inches(-0.2)
-    p.add_run("•  " + text)
+    p.add_run("•  " + DW.restate(text))
     return p
 
 
@@ -133,7 +139,7 @@ def _cell(cell, text, bold=False, size=8.5):
     p = cell.paragraphs[0]
     p.paragraph_format.space_before = Pt(2)
     p.paragraph_format.space_after = Pt(2)
-    r = p.add_run(str(text))
+    r = p.add_run(DW.restate(str(text)))
     r.font.name = "Arial"
     r.font.size = Pt(size)
     r.bold = bold

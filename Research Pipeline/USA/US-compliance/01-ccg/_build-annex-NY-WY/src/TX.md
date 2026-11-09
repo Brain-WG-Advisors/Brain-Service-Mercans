@@ -16,25 +16,25 @@
 - **Unemployment insurance (TWC) [US-TXS5-007, US-TXSUI-001].** Taxable wage base {{tx.sui.wage_base}} USD per employee per calendar year, fixed by statute (201.082(1)), not indexed. 2026 rates {{tx.sui.employer.rate.min}} % to {{tx.sui.employer.rate.max}} %, including the obligation assessment of {{tx.ui.obligation_assessment.rate}} % [US-TXS5-019]. New employer {{tx.sui.new_employer.rate}} % for the first six calendar quarters (statute: the greater of the major-group rate less a fixed step, or a statutory floor, 204.006); the published rate cannot be re-derived without the major-group rates (open point below) [US-TXS5-008, US-TXS5-019].
 - **Employee contribution:** {{tx.sui.employee.rate}} %; deduction from wages prohibited (204.003) [US-TXS5-008].
 - **Employment and Training Investment Assessment:** {{tx.ui.etia.rate}} % of taxable wages, employer-paid, offset by an equal cut in the replenishment rate (204.121, 204.0625) [US-TXS5-008].
-- **UI wages (201.081-201.082):** include non-cash pay and FUTA-taxable tips; exclude employer plan payments for retirement, sickness, medical or death benefits and employer-paid FICA. Treatment of employee deferrals and cafeteria-plan reductions: open point below [US-TXS5-007].
+- **UI wages (201.081-201.082):** include non-cash pay and FUTA-taxable tips; exclude employer plan payments for retirement, sickness, medical or death benefits and employer-paid FICA. [US-TXS5-007]. Employee deferrals and cafeteria-plan reductions: {{tx.ui.wages.401k_section125}} [US-TXV6-004].
 - **Coverage:** quarterly wage or 20-week tests; domestic employers above a quarterly cash test with an annual-reporting option (201.027); farm and ranch labour per 201.028 / 201.047 [US-TXS5-007].
 - **No SDI, TDI, PFML or LTC** (exists: {{tx.sdi_pfml.exists}}) [US-TXR3-003].
 
 ## @payslip
 - **Labor Code 62.003 (earnings statement) exists, for employees outside FLSA coverage only [US-TXS5-003].** At the end of each pay period: {{tx.payslip.content.non_flsa}}; any form, including the check voucher; meals or lodging credited toward the wage stated separately (62.053). For FLSA-covered employees Texas has no statutory content rule (federal records rules apply). Never write "Texas has no pay-statement law".
-- **Electronic delivery and retention:** no Texas rule in chapters 61 or 62; retention follows FLSA and UI record rules (TWC rule not read, open point below).
+- **Electronic delivery and retention:** no Texas rule in chapters 61 or 62; retention follows FLSA and UI record rules (the TWC records-retention rule was not read).
 
 ## @reporting
 - **No withholding return or state W-2.**
-- **Quarterly UI wage report and payment [US-TXSUI-006]:** {{tx.report.ui.channel}}. Due date and record retention under the TWC rules: open point below.
-- **Enhanced wage-report content (Labor Code 204.0025, 2025 amendments) [US-TXS5-008]:** {{tx.report.ui.enhanced_fields}}. Which fields are mandatory from which quarter is unknown (blocking open point below); the DD and Report Specs depend on it.
-- **New hire [US-TXS5-012, US-TXS5-016, US-TXS5-017]:** to the OAG Child Support Division state directory within {{tx.newhire.report_days}} calendar days of the first day of work, or twice monthly for electronic reporters. Contractor reporting: open point below.
+- **Quarterly UI wage report and payment [US-TXSUI-006]:** {{tx.report.ui.channel}}. Due dates: {{tx.report.ui.due_date_records}} [US-TXV6-001].
+- **Enhanced wage-report content (Labor Code 204.0025, 2025 amendments) [US-TXS5-008]:** {{tx.report.ui.enhanced_fields}}. Status: {{tx.report.ui.enhanced_fields.status}} [US-TXV6-005]. Proposed only: these fields are not configured as mandatory (open point below).
+- **New hire [US-TXS5-012, US-TXS5-016, US-TXS5-017]:** to the OAG Child Support Division state directory within {{tx.newhire.report_days}} calendar days of the first day of work, or twice monthly for electronic reporters. Who is reported: {{tx.report.new_hire.contractors}} [US-TXV6-002]; independent contractors are out of scope for this guide (US-OWN-008).
 - **Registration:** TWC UI account once the coverage thresholds are met; agent authorisation Form C-42 [US-TXSUI-005, US-TXP52-008].
 
 ## @leave
 - **Paid sick leave:** no state statute (exists: {{tx.leave.sick.state_statute.exists}}); Labor Code 1.005 (H.B. 2127, 2023) preempts city and county leave, benefit and scheduling ordinances for private employers [US-TXS5-005]. No PFML.
 - **Leave pay is wages only if promised in writing** (61.001(7)(B)) [US-TXS5-004].
-- **Voting time (Election Code 276.004):** paid ({{tx.leave.voting.paid}}): no penalty, including lost wages, for time off to vote, unless the polls are open long enough outside working hours [US-TXS5-014]. Jury and military leave: open point below.
+- **Voting time (Election Code 276.004):** paid ({{tx.leave.voting.paid}}): no penalty, including lost wages, for time off to vote, unless the polls are open long enough outside working hours [US-TXS5-014]. Jury and military leave: {{tx.leave.jury_military}} [US-TXV6-003].
 
 ## @termination
 - **Final pay (61.014) [US-TXS5-004]:** a discharged employee is paid within {{tx.term.final_pay.discharge.days}} calendar days of discharge; any other separation: {{tx.term.final_pay.other}}. Commissions and bonuses follow the agreement (61.015).

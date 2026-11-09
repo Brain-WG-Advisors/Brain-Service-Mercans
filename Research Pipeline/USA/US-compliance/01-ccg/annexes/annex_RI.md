@@ -143,7 +143,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in RI.2.
 
 **Open research points**
 
-- Not yet published [[GAP:RQ-308]]: The new record-keeping and hiring-notice section 28-14-12 (effective 2026-01-01) was not read; the 2026 retention period and notice fields are unconfirmed.
+- Not configured in this release [[GAP:RQ-308]]: The new record-keeping and hiring-notice section 28-14-12 (effective 2026-01-01) was not verified against the official source; the 2026 retention period and notice fields are unconfirmed.
 
 ## RI.5 Statutory reporting
 
@@ -166,7 +166,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in RI.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-311]]: 15-24-5 statutory field list not read.
+- Not configured in this release [[GAP:RQ-311]]: 15-24-5 statutory field list not verified against the official source.
 
 ## RI.6 Leave
 
@@ -210,7 +210,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in RI.2.
 ## RI.9 Deductions and garnishments
 
 - **Wage exemption (9-26-4(8)) [US-RIS5-012]:** the state exempt amount for ordinary wages is [[FACT:ri.garn.consumer.state_exempt_amount=50]] USD, less protective than the CCPA, so the federal limits govern ordinary garnishment (Annex FED); debtors on public relief are fully exempt for a period after relief ends.
-- **Child support:** e-IWO accepted; fees and priority not read (open point below).
+- **Child support:** e-IWO accepted; fees and priority not verified against the official source (open point below).
 
 **Parameters (deductions and garnishments)**
 
@@ -227,7 +227,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in RI.2.
 
 Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
-- **Prevailing wage [US-RIP51-003, US-RIP51-005]:** public works contracts above [[FACT:ri.prevailing_wage.threshold=1000]] USD must state the prevailing wages set by the DLT director, paid weekly. Certified-payroll mechanics not read.
+- **Prevailing wage [US-RIP51-003, US-RIP51-005]:** public works contracts above [[FACT:ri.prevailing_wage.threshold=1000]] USD must state the prevailing wages set by the DLT director, paid weekly. Certified-payroll mechanics not verified against the official source.
 
 **Parameters (collective agreements and prevailing wage)**
 
@@ -257,7 +257,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 - **2026-01-01:** minimum wage step; new record-keeping / hiring-notice section 28-14-12 (text unread); TDI rate and base, UI base and schedule change [US-RIS5-001, US-RIS5-008, US-RIP9V-001].
 - **2025-12-15:** PIT emergency regulation 280-RICR-20-55-16; RI decoupled from H.R. 1 [US-RIS5-023].
 - **2027-01-01 (enacted):** minimum wage step [US-RIS5-001].
-- **Sweep limit:** DLT news and the 2026 public laws were not read (rilegislature.gov unreachable).
+- **Sweep limit:** DLT news and the 2026 public laws were not verified against the official source.
 
 **Parameters (live legal change)**
 

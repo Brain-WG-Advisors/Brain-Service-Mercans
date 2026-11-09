@@ -96,3 +96,8 @@
 - Teste das fontes (C39) 55/56 sem exceção; release local em `Research Pipeline/USA/US-compliance/10-release` (26 arquivos, v1.0, emissão 2026-11-05); QA: RELEASED-LOCAL.
 - Espera o usuário: ok para subir ao Drive (`G:\Drives compartilhados\Compliance Team\Country Folders\USA`).
 - Pendências não bloqueantes: reler UT (T51) de IP dos EUA antes de produção; lista FUTA de redução de crédito (~10/11); confirmação formal US-OWN-009/010/011; LIMITATION_KEYS.
+
+## 2026-11-06: canal de acesso pelos EUA (Opera)
+- Opera aberto com `--remote-debugging-port=9333` + VPN do Opera em "Americas" (saída Ashburn, VA, EUA). Leitura automática pelo script `opera_read.py` (CDP; abre aba, pega o texto, fecha). Sem contornar Cloudflare/CAPTCHA.
+- Utah (T51) lido por esse canal: teste das fontes C39 = 56/56 (100%).
+- Lição: VPNs grátis de sistema falharam (Windscribe sem crédito, Proton não funcionou, hide.me sem EUA, Hotspot pago); a VPN do Opera + CDP resolve sem custo.

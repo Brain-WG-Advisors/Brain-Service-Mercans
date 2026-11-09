@@ -20,6 +20,9 @@ The rates and tables in force on the **payment date** apply to the whole payment
 | Change | Value | Source |
 |---|---|---|
 | Georgia income tax | Withholding rate [[FACT:ga.wh.rate=5.19]]% for payments to 2026-05-10, [[FACT:ga.wh.rate=4.99]]% from 2026-05-11; tax year 2026 assessment rate [[FACT:ga.pit.rate.flat=4.99]]% (retroactive to 1 January); law [[FACT:ga.live.hb463.status=in force (signed 2026-05-11, retroactive 2026-01-01); levels withholding + assessment (rate), assessment + reporting (subtractions)]]. Withholding examples dated from 2026-05-11 (Module 12) | [US-GA-001] [US-GAS5-009] |
+| Georgia UI wage report (DOL-4N) electronic filing | Electronic filing for all employers from 2026-08-09 ([[FACT:ga.report.sui.efile_all_employers=True]]); the threshold of [[FACT:ga.report.sui.efile_threshold_employees=25]] employees applies to filings to 2026-08-08 | [US-GAV6B-001] [US-GAS5-005] |
+| US-Romania totalization agreement | In force from 2026-09-01 (SSA list of agreements in force); FICA exemption while the agreement makes the wages subject only to the foreign system (Module 5) | [US-FEDV6-040] [US-FEDR2-003] |
+| Florida reemployment tax XML package (RT-6 file) | From 2026-09-28: [[FACT:fl.report.sui.xml_changes_2026=v2026 1.0: 257 change rows, ALL in User Information (guide/XPath docs/samples; 221 Changed, 18 Inserted, 8 Deleted, 6 Renamed, 3 Added) and none in Schema_Reemployment; RSI replaces BSWA as intake provider. URL is the package landing page]] (Annex FL) | [US-FLV6-001] |
 | Ohio withholding tables | Effective [[FACT:oh.wh.tables.effective_from=2026-08-01]] | [US-OHS5-001] |
 | Indiana county rates | [[FACT:in.county.change_dates=County rates may change in January and October (DN#1 R47/10-26 from 2026-10-01)]] | [US-INS5-009] |
 | Idaho single zero bracket (biweekly) | [[FACT:id.wh.zero_bracket.single.biweekly=577]] (2025-04-28 to 2026-07-22); [[FACT:id.wh.zero_bracket.single.biweekly=619]] (from 2026-07-23) | [US-IDS5-011] |
@@ -46,7 +49,7 @@ Each payment uses the pay-period table of its own frequency ([[FACT:fed.fit.pay_
 
 ### How is taxation handled for employees with multiple employers?
 
-Each employer withholds and applies the wage bases on its own. The OASDI and FUTA bases are per employer. Additional Medicare starts at [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] of wages paid by that employer. Excess OASDI from several employers is refunded at assessment. The employee coordinates FIT through W-4 Step 2. When Step 2 is checked, the Step-2-checked schedule applies and the line 1g amount ([[FACT:fed.fit.worksheet1a.line1g.other=8,600]] / [[FACT:fed.fit.worksheet1a.line1g.mfj=12,900]]) is not subtracted [US-FEDS5-001]. Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief for related employers (IRC 3121(s)) is not established from an official source.
+Each employer withholds and applies the wage bases on its own. The OASDI and FUTA bases are per employer. Additional Medicare starts at [[FACT:fed.fica.addl_medicare.withholding_threshold=200,000]] of wages paid by that employer. Excess OASDI from several employers is refunded at assessment. The employee coordinates FIT through W-4 Step 2. When Step 2 is checked, the Step-2-checked schedule applies and the line 1g amount ([[FACT:fed.fit.worksheet1a.line1g.other=8,600]] / [[FACT:fed.fit.worksheet1a.line1g.mfj=12,900]]) is not subtracted [US-FEDS5-001]. Not configured in this release [[GAP:RQ-533]]: The successor-employer wage-base rule for related employers (26 U.S.C. 3121(a)(1) and 3306(b)(1)) is not established from an official source in this release.
 
 ### What is the treatment of foreign-sourced employment income for residents?
 
@@ -64,7 +67,7 @@ Each employer withholds and applies the wage bases on its own. The OASDI and FUT
 
 ### How is payroll handled for employees who transfer between different legal entities mid-year?
 
-Each legal entity (EIN) is a separate employer. Wage bases restart at the new entity, and each entity files its own 941 and W-2. A successor employer that acquires the business may count the predecessor's wages toward the FUTA base [US-FED-007]. Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief and the OASDI successor rule for related entities are not established from an official source.
+Each legal entity (EIN) is a separate employer. Wage bases restart at the new entity, and each entity files its own 941 and W-2. A successor employer that acquires the business may count the predecessor's wages toward the FUTA base [US-FED-007]. Not configured in this release [[GAP:RQ-533]]: The successor-employer wage-base rule for related employers (26 U.S.C. 3121(a)(1) and 3306(b)(1)) is not established from an official source in this release.
 
 ### What is the process for an employee who changes citizenship or residency status during the fiscal year?
 
@@ -110,7 +113,7 @@ Each legal entity (EIN) is a separate employer. Wage bases restart at the new en
 | Group-term life insurance | Coverage up to [[FACT:fed.bik.group_term_life.excluded_coverage=50,000]]; the cost of coverage above it is FICA wages | [US-FEDS5-008] |
 | Trump-account employer contribution | Up to [[FACT:fed.bik.trump_account.employer_contribution_max=2,500]] (from 2026-07-04) | [US-FEDS5-030] |
 | Moving expenses and bicycle commuting | Not excluded (taxable wages) | [US-FEDS5-008] |
-| Business mileage reimbursement | Not configured in this release [[GAP:RQ-536]]: The 2026 IRS business standard mileage rate is not established from an official source (it is not printed in Pub. 15-B). | — |
+| Business mileage reimbursement | Business standard mileage rate USD [[FACT:fed.bik.business_mileage.rate=0.725]] per mile for 2026-01-01 to 2026-06-30; USD [[FACT:fed.bik.business_mileage.rate=0.76]] per mile from 2026-07-01 | [US-FEDV6-011] [US-FEDV6-010] |
 
 ACA affordability percentage for 2026: [[FACT:fed.aca.affordability.rate=9.96]]% [US-FEDS5-011].
 

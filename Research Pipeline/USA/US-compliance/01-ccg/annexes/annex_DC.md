@@ -41,11 +41,11 @@ Configuration warning: DC 2026 withholding method is unpublished. 47-1812.08 is 
 | `dc.wh.notice_2022_08` | [[FACT:dc.wh.notice_2022_08=apply current rate schedule with the federal allowance amount (no FR-230 after 2018); applying to 2026 is an inference]] | 2022-01-01 to open | US-DCP51-002 (DC Office of Tax and Revenue; A.2, quoted from authority page, confidence high) |  |
 | `dc.wh.statutory_method` | [[FACT:dc.wh.statutory_method=percentage method or tables similar to IRC 3402; no standard-deduction allowance in withholding; wages may be computed to nearest dollar (47-1812.08(b))]] | 2026-01-01 to open | US-DCS5-025 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) |  |
 
-Not yet published [[GAP:RQ-138]]: 2026 DC withholding method after D.C. Act 26-416 repealed personal exemptions is unpublished; D-4/D-4A "under review"; OTR withholding-instructions page 403.
+Not configured in this release [[GAP:RQ-138]]: 2026 DC withholding method after D.C. Act 26-416 repealed personal exemptions is unpublished; D-4/D-4A "under review"; OTR withholding-instructions page 403.
 
 Not configured in this release [[GAP:RQ-139]]: No flat supplemental rate in statute or any FR-230 edition; bonuses modelled as regular wages.
 
-Not configured in this release [[GAP:RQ-140]]: 2026 COLA amount of the DC standard deduction (assessment level) not read.
+Not configured in this release [[GAP:RQ-140]]: 2026 COLA amount of the DC standard deduction (assessment level) not verified against the official source.
 
 ## DC.2b Non-resident regime and reciprocity
 
@@ -67,7 +67,7 @@ None: DC is itself the local layer.
 | `dc.pfl.coverage` | [[FACT:dc.pfl.coverage=> 50% of work time in DC, or DC-based with substantial DC time and <= 50% elsewhere (32-541.01(3)); not by residence]] | 2026-01-01 to open | US-DCS5-007 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) |  |
 | `dc.pfl.employer.rate` | [[FACT:dc.pfl.employer.rate=0.75]] % | 2024-07-01 to open | US-DCS5-019 (DC DOES Office of Paid Family Leave; A.2, second independent authority, confidence high) | 100% employer-funded, not deductible from pay, no wage cap (US-DCS5-020). History: 0.62% to 2022-Q2, 0.26% to 2024-Q2. |
 | `dc.pfl.wage_cap.exists` | [[FACT:dc.pfl.wage_cap.exists=False]] | 2026-01-01 to open | US-DCS5-020 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) |  |
-| `dc.sui.admin_assessment.rate` | [[FACT:dc.sui.admin_assessment.rate=0.2]] % | 2026-01-01 to open | US-DCS5-017 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) | (m)(1) administrative funding assessment on taxable wages [US-DCB5-401]. Interest surcharge (l)(1) billing in 2026 unconfirmed [US-DCP7-003]. |
+| `dc.sui.admin_assessment.rate` | [[FACT:dc.sui.admin_assessment.rate=0.2]] % | 2026-01-01 to open | US-DCS5-017 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) | (m)(1) administrative funding assessment on taxable wages [US-DCB5-401]. Billing of the 0.1% interest surcharge (l)(1) in 2026 not verified [US-DCP7-003]. |
 | `dc.sui.employee.rate` | [[FACT:dc.sui.employee.rate=0]] % | 2026-01-01 to open | US-DCS5-017 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) | Contributions may not be deducted from wages (d). |
 | `dc.sui.employer.rate.max` | [[FACT:dc.sui.employer.rate.max=7.4]] % | 2026-01-01 to open | US-DCS5-017 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) |  |
 | `dc.sui.employer.rate.min` | [[FACT:dc.sui.employer.rate.min=1.9]] % | 2026-01-01 to open | US-DCS5-017 (Council of the District of Columbia; A.1, direct artifact inspection, confidence high) | Tax Table VI [[FACT:dc.sui.employer.rate.min=1.9]]%-[[FACT:dc.sui.employer.rate.max=7.4]]% (51-103(c)(8)(A)). |
@@ -98,7 +98,7 @@ Not configured in this release [[GAP:RQ-142]]: No DC rule found for electronic p
 | `dc.report.w2.efile_threshold` | [[FACT:dc.report.w2.efile_threshold=25]] forms | 2025-01-01 to open | US-DCS5-015 (DC Office of Tax and Revenue; A.2, direct artifact inspection, confidence high) |  |
 | `dc.report.wh.fr900q` | [[FACT:dc.report.wh.fr900q=FR-900Q electronic on MyTax.DC.gov (mandatory since TY2023); deposits weekly/semi-weekly/monthly/quarterly as assigned by 20th of following month; returns due Apr 30, Jul 31, Oct 31, Jan 31; zero return required; payments over 5,000 electronic (ACH code 00300); FR-900A annual if under 200/yr]] | 2026-01-01 to open | US-DCS5-014 (DC Office of Tax and Revenue; A.2, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-143]]: UC-30 / ESSP bulk-upload field layout is behind the employer login (behind the employer login).
+Not configured in this release [[GAP:RQ-143]]: UC-30 / ESSP bulk-upload field layout is behind the employer login.
 
 ## DC.6 Leave
 
@@ -123,11 +123,11 @@ Not configured in this release [[GAP:RQ-145]]: No DC statutory rule found for va
 
 ## DC.8 Benefits in kind and taxable wages
 
-DC income tax starts from federal gross income: federal exclusions (401(k), s.125, HSA, transit, GTL) flow through (47-1803.02 not read). UI wages include non-cash and customary tips, exclude employer retirement/sickness/medical/death plans [US-DCS5-008].
+DC income tax starts from federal gross income: federal exclusions (401(k), s.125, HSA, transit, GTL) flow through (47-1803.02 not verified against the official source). UI wages include non-cash and customary tips, exclude employer retirement/sickness/medical/death plans [US-DCS5-008].
 
 ## DC.9 Deductions and garnishments
 
-Child support: OAG CSSD sends IWO within 2 business days of the new-hire entry [US-DCS5-022]; DC fees/priority not read. No DC wage-deduction authorisation rule read.
+Child support: OAG CSSD sends IWO within 2 business days of the new-hire entry [US-DCS5-022]; DC fees/priority not verified against the official source. No DC wage-deduction authorisation rule read.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -152,7 +152,7 @@ MW July 1 CPI-U Washington MSA (0.05); tipped % of MW; living wage Jan 1 CPI-U c
 
 ## DC.12 Payroll data protection and records
 
-New-hire reports carry the SSN; no truncation rule found; D.C. Code 28-3851 not read.
+New-hire reports carry the SSN; no truncation rule found; D.C. Code 28-3851 not verified against the official source.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -164,9 +164,9 @@ D.C. Act 26-416 (emergency, 2026-08-13 to ~2026-11-11; status of the permanent F
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `dc.live.fy2027_bsa_permanent` | [[FACT:dc.live.fy2027_bsa_permanent=B26-0661 Fiscal Year 2027 Budget Support Act of 2026: enacted without the Mayor's signature 2026-08-14 as D.C. Act 26-418 (73 DCR 11735); transmitted to Congress 2026-08-20; D.C. Law 26-189 effective 2026-10-02 (73 DCR 13120). Status: IN FORCE (congressional review complete), before the emergency Act 26-416 lapses.]] Not yet published [[GAP:RQ-146]]: Value not final. | 2026-10-02 to open | US-DCB5-301 (Council of the District of Columbia; A.1, quoted from authority page, confidence high) | Status confirmed on Council LIMS (verbatim excerpt). NOT checked: that Law 26-189 carries the same tax (7112) and PFL (4051-4053) text as Act 26-416 - see unresolved dc.live.fy2027_bsa_permanent. |
+| `dc.live.fy2027_bsa_permanent` | [[FACT:dc.live.fy2027_bsa_permanent=B26-0661 Fiscal Year 2027 Budget Support Act of 2026: enacted without the Mayor's signature 2026-08-14 as D.C. Act 26-418 (73 DCR 11735); transmitted to Congress 2026-08-20; D.C. Law 26-189 effective 2026-10-02 (73 DCR 13120). Status: IN FORCE (congressional review complete), before the emergency Act 26-416 lapses.]] Not configured in this release [[GAP:RQ-146]]: Value not final. | 2026-10-02 to open | US-DCB5-301 (Council of the District of Columbia; A.1, quoted from authority page, confidence high) | Status per Council LIMS. Not verified: that Law 26-189 carries the same tax (7112) and PFL (4051-4053) text as Act 26-416 (open point dc.live.fy2027_bsa_permanent). |
 
-Not yet published [[GAP:RQ-146]]: The permanent FY2027 BSA is D.C. Law 26-189, in force from 2026-10-02 (fact dc.live.fy2027_bsa_permanent). Whether its tax (secs. 7111-7113) and PFL (secs. 4051-4053) text is identical to the emergency Act 26-416 the annex models was not compared (214-page text not read).
+Not configured in this release [[GAP:RQ-146]]: The permanent FY2027 BSA is D.C. Law 26-189, in force from 2026-10-02 (fact dc.live.fy2027_bsa_permanent). Whether its tax (secs. 7111-7113) and PFL (secs. 4051-4053) text is identical to the emergency Act 26-416 the annex models was not compared (214-page text not verified against the official source).
 
 ## DC.14 Authority worked examples (oracle values)
 

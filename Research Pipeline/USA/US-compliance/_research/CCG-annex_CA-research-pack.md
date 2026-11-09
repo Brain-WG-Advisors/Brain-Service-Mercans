@@ -227,7 +227,7 @@ Mirrors `unresolved[]` in the facts file (same keys, same wording). Regenerated 
 - `ca.report.de9c.file_format` (non-blocking) — DE 9C/DE 34 electronic file specification not fetched (Stage-3 gap). **Would close it:** EDD e-Services for Business File Transfer spec / DE 9C and DE 34 layouts.
 - `ca.sdi.benefit.weekly_max` (non-blocking) — 2026 DI/PFL weekly benefit maximum and replacement rates not fetched. **Would close it:** EDD Quick Statistics page.
 - `ca.warn.employer_threshold` (non-blocking) — Cal-WARN 75-employee coverage threshold not quoted from an authority page. **Would close it:** Lab. Code 1400 text or EDD WARN employer page.
-- `ca.hsa.conformity_2026` (non-blocking) — A search summary claims employer HSA contributions excluded 2026-2030; not verified. **Would close it:** Enacted bill on leginfo, FTB 2026 Schedule CA instructions or FTB What's New.
+- `ca.hsa.conformity_2026` — answered as a fact: AB 781 (HSA conformity) died 2026-01-31, not enacted; no enacted HSA-conformity act in the sources used; level assessment [A.1, US-CAV6-008].
 - `ca.garn.child_support.employer_fee` (non-blocking) — Employer fee per payment and FTB/EDD order-to-withhold priority not verified. **Would close it:** Family Code 5235 text and FTB "Earnings Withholding Order for Taxes" employer instructions.
 - `ca.prevailing_wage.thresholds` (non-blocking) — Public-works 1,000 threshold and small-project eCPR exemptions not quoted. **Would close it:** Lab. Code 1725.5 / 1771 / 1773.3 text or DIR registration FAQ.
 - `ca.overtime.agricultural_phase_in` (non-blocking) — AB 1066 agricultural overtime phase-in and child-labour permits not fetched. **Would close it:** Lab. Code 860-864 text and DIR agricultural overtime FAQ.

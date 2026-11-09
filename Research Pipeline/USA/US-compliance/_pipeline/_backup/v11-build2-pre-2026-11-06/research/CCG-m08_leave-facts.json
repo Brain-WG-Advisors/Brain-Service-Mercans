@@ -1,0 +1,101 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "m08_leave",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
+ "_annex_keys_cited": {
+  "fed.fmla.weeks": "CCG-annex_FED-facts.json (US-FEDS5-026)",
+  "fed.fmla.military_caregiver.weeks": "CCG-annex_FED-facts.json (US-FEDS5-026)",
+  "fed.paid_leave.private_employers.exists": "CCG-annex_FED-facts.json (US-FEDS5-026)",
+  "fed.pfml.employee_contribution.is_w2_wages": "CCG-annex_FED-facts.json (US-FEDS5-007)"
+ },
+ "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
+ "facts": [
+  {
+   "key": "ma.pfml.benefit.weekly_max",
+   "value": 1230.39,
+   "currency": "USD",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-MAS5-025",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Massachusetts Department of Family and Medical Leave",
+   "url": "https://www.mass.gov/info-details/how-pfml-weekly-benefit-amounts-are-calculated-andor-changed",
+   "confidence": "high",
+   "_renamed_from": "ma.pfml.max_weekly_benefit"
+  },
+  {
+   "key": "ma.pfml.benefit.weekly_max",
+   "value": 1284.61,
+   "currency": "USD",
+   "effective_from": "2027-01-01",
+   "effective_to": null,
+   "register_id": "US-MAS5-025",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Massachusetts Department of Family and Medical Leave",
+   "url": "https://www.mass.gov/info-details/how-pfml-weekly-benefit-amounts-are-calculated-andor-changed",
+   "confidence": "high",
+   "_renamed_from": "ma.pfml.max_weekly_benefit"
+  },
+  {
+   "key": "fed.eo13706.sick_leave.accrual",
+   "value": "Accrual: 1 hour of paid sick leave per 30 hours worked on or in connection with a covered contract; a contractor may cap accrual at not less than 56 hours per accrual year. Caveat: the current status of EO 13706 itself is not established from an official source; eCFR still carries 29 CFR 13.5 as of 2026-11-01.",
+   "effective_from": "2017-01-01",
+   "register_id": "US-FEDV6-008",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "U.S. DOL (eCFR)",
+   "url": "https://www.ecfr.gov/current/title-29/subtitle-A/part-13/section-13.5",
+   "confidence": "medium",
+   "note": "Closes RQ-518 (V11). Register: US-FEDV6-008",
+   "_research_note": "value before: Accrual: 1 hour of paid sick leave per 30 hours worked on or in connection with a covered contract; a contractor may cap accrual at not less than 56 hours per accrual year. Caveat: the DOL WHD EO 13706 page returned 404 and the current status of EO 13706 itself was not established from an official source; eCFR still carries 29 CFR 13.5 as of 2026-11-01."
+  },
+  {
+   "key": "fed.fmla.eligibility",
+   "value": "Employer coverage: 50 or more employees for 20 or more workweeks in the current or preceding calendar year (825.104). Employee eligibility: 12 months of employment, 1,250 hours in the prior 12 months, worksite with 50 or more employees within 75 miles (825.110).",
+   "effective_from": "2026-01-01",
+   "register_id": "US-FEDV6-014",
+   "tier": "A.1",
+   "verification_method": "quoted from authority page",
+   "authority": "U.S. DOL (eCFR)",
+   "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-V/part-825/subpart-A/section-825.104",
+   "confidence": "high",
+   "note": "Closes RQ-517 (V11). Register: US-FEDV6-014, US-FEDV6-015, US-FEDV6-016"
+  },
+  {
+   "key": "fed.pfml.employer_top_up.treatment",
+   "value": "An employer-paid supplement is employer sick pay: employee and employer FICA and FUTA apply, and income tax withholding is mandatory. Caveat: Pub. 15-A does not mention State PFML/TDI explicitly; the answer rests on the general sick-pay rule. The State-paid benefit is not employer wages (not addressed in the publication read). W-2 box reporting not separately quoted.",
+   "effective_from": "2026-01-01",
+   "register_id": "US-FEDV6-017",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p15a.pdf",
+   "confidence": "medium",
+   "note": "Closes RQ-521 (V11). Register: US-FEDV6-017"
+  }
+ ],
+ "unresolved": [
+  {
+   "key": "multi.sick_leave.coverage_threshold",
+   "why": "Paid-sick-leave coverage of employees working partly in a State is per State and not researched at MULTI level (MULTI-OQ-4).",
+   "attempted": [],
+   "what_would_close_it": "Per-state statutes in the annexes.",
+   "blocking": false
+  },
+  {
+   "key": "fed.userra.leave_rules",
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): Tax side closed: differential wage payments (active duty over 30 days) are wages for income tax withholding but not FICA or FUTA, reported in W-2 box 1. USERRA statute texts 4312, 4316, 4317 are saved but the cumulative service limit and pension rule (38 U.S.C. 4318, not fetched) were not extracted; read the saved files to close the rest.",
+   "attempted": [
+    "2026-11-06 V11 validation round; register US-FEDV6-018, US-FEDV6-019, US-FEDV6-020, US-FEDV6-021"
+   ],
+   "what_would_close_it": "38 U.S.C. 4301-4335 read on the authority host (www.irs.gov, www.govinfo.gov).",
+   "blocking": false
+  }
+ ]
+}

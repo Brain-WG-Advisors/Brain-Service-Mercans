@@ -174,7 +174,7 @@ Sources: US-FEDS5-018 (29 U.S.C. 207(a)(1)); US-FEDS5-030 (P.L. 119-21); US-CAS5
 
 *Status: answered. Rule carried in: Module 3; Module 5.*
 
-Each employer withholds and applies the wage bases independently. The OASDI and FUTA bases are per employer (successor carry-over only on acquisition). Additional Medicare is triggered per employer. The employee coordinates FIT across jobs on W-4 Step 2: the line 1g amount ([[FACT:fed.fit.worksheet1a.line1g.mfj=12,900]] MFJ) is not subtracted when Step 2 is checked. Not configured in this release [[GAP:RQ-533]]: Common-paymaster relief for related employers (IRC 3121(s)) is not established from an official source.
+Each employer withholds and applies the wage bases independently. The OASDI and FUTA bases are per employer (successor carry-over only on acquisition). Additional Medicare is triggered per employer. The employee coordinates FIT across jobs on W-4 Step 2: the line 1g amount ([[FACT:fed.fit.worksheet1a.line1g.mfj=12,900]] MFJ) is not subtracted when Step 2 is checked. Not configured in this release [[GAP:RQ-533]]: The successor-employer wage-base rule for related employers (26 U.S.C. 3121(a)(1) and 3306(b)(1)) is not established from an official source in this release.
 
 | Effect on | Treatment |
 |---|---|

@@ -33,7 +33,7 @@ Not configured in this release [[GAP:RQ-224]]: 2016 KY Supreme Court Louisville 
 | `ky.wh.std_deduction` | [[FACT:ky.wh.std_deduction=3,360]] USD | 2026-01-01 to 2026-12-31 | US-KY-002 (Kentucky Department of Revenue; A.2, direct artifact inspection, confidence high) | Indexed annually (KRS 141.081(2)(a)). Extra 117.60 for multiple W-2 = [[FACT:ky.wh.std_deduction=3,360]] x [[FACT:ky.pit.rate.flat=3.5]]%. |
 | `ky.wh.supplemental.method` | [[FACT:ky.wh.supplemental.method=no separate rate; bonuses and severance through the same formula; film-incentive companies at max 141.020 rate]] | 2026-01-01 to open | US-KY-001 (Kentucky Department of Revenue; A.2, direct artifact inspection, confidence medium) |  |
 
-Not configured in this release [[GAP:RQ-225]]: TY2027 rate is [[FACT:ky.pit.rate.flat=3.5]]% on the statute; the Budget Director report of 2026-09-05 was not read.
+Not configured in this release [[GAP:RQ-225]]: TY2027 rate is [[FACT:ky.pit.rate.flat=3.5]]% on the statute; the Budget Director report of 2026-09-05 was not verified against the official source.
 
 Not configured in this release [[GAP:RQ-226]]: Formula sheet shows 47 for [[FACT:ky.oracle.biweekly_1500.result=47.98]] bi-weekly; KRS 141.310(4) rounds only wages.
 
@@ -52,9 +52,9 @@ Not configured in this release [[GAP:RQ-226]]: Formula sheet shows 47 for [[FACT
 | `ky.local.louisville.rate.all_wages` | [[FACT:ky.local.louisville.rate.all_wages=1.45]] % | 2026-01-01 to open | US-KYP9W-001 (Louisville Metro Revenue Commission; A.2, quoted from authority page, confidence high) | Metro and TARC rates together on all wages earned in Louisville Metro; residents add the school-board rate, total [[FACT:ky.local.louisville.rate.resident_total=2.2]]%; W-1 quarterly, W-1D monthly if > 3,000/quarter, W-3 by Feb 28 [US-KYP9W-002]. |
 | `ky.local.louisville.rate.resident_total` | [[FACT:ky.local.louisville.rate.resident_total=2.2]] % | 2026-01-01 to open | US-KYP9W-001 (Louisville Metro Revenue Commission; A.2, quoted from authority page, confidence high) |  |
 
-Not yet published [[GAP:RQ-227]]: Only Louisville and Lexington verified; other cities, counties and school districts uncatalogued.
+Not configured in this release [[GAP:RQ-227]]: Only Louisville and Lexington verified; other cities, counties and school districts uncatalogued.
 
-Not configured in this release [[GAP:RQ-228]]: LFUCG withholding base (s.125/deferred comp) and Fayette County Board of Education tax not read; a secondary source says included.
+Not configured in this release [[GAP:RQ-228]]: LFUCG withholding base (s.125/deferred comp) and Fayette County Board of Education tax not verified against the official source; a secondary source says included.
 
 ## KY.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
@@ -86,18 +86,18 @@ No SDI/TDI/PFML; KRS 304.53 only voluntary group PFL insurance [US-KYR3-001..003
 | `ky.report.w2.efile_threshold` | [[FACT:ky.report.w2.efile_threshold=26]] statements | 2026-01-01 to open | US-KYS5-013 (Kentucky Department of Revenue; A.2, direct artifact inspection, confidence high) |  |
 | `ky.report.wh.frequency` | [[FACT:ky.report.wh.frequency=annual < 400 (K-3 Jan 31); quarterly 400-1,999 (K-1 last day of month after quarter); monthly 2,000-49,999 (K-1 15th); twice-monthly >= 50,000 (25th / 10th); >= 100,000 in a period by EFT next banking day; zero returns required; MyTaxes electronic]] | 2026-01-01 to open | US-KYS5-013 (Kentucky Department of Revenue; A.2, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-229]]: KY EFW2 RS-record spec and KUIP wage-file layout not read.
+Not configured in this release [[GAP:RQ-229]]: KY EFW2 RS-record spec and KUIP wage-file layout not verified against the official source.
 
 ## KY.6 Leave
 
-No paid sick leave statute; local PSL pre-emption not read. Court appearance protected (337.415) [US-KYS5-017]; jury/military not read.
+No paid sick leave statute; local PSL pre-emption not verified against the official source. Court appearance protected (337.415) [US-KYS5-017]; jury/military not verified against the official source.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
 | `ky.leave.adoption.weeks` | [[FACT:ky.leave.adoption.weeks=6]] weeks | 2026-01-01 to open | US-KYS5-016 (Kentucky Legislative Research Commission; A.1, direct artifact inspection, confidence high) | KRS 337.015: child under 10; match benefits given to birth parents. |
 | `ky.leave.voting.hours` | [[FACT:ky.leave.voting.hours=4]] hours | 2026-01-01 to open | US-KYS5-025 (Kentucky Legislative Research Commission; A.1, direct artifact inspection, confidence high) | KRS 118.035; no pay rule. |
 
-Not configured in this release [[GAP:RQ-230]]: KRS 29A.160, 38.238/38.460 and KRS 339 / 803 KAR 1:100 not read.
+Not configured in this release [[GAP:RQ-230]]: KRS 29A.160, 38.238/38.460 and KRS 339 / 803 KAR 1:100 not verified against the official source.
 
 ## KY.7 Termination and final pay
 
@@ -150,7 +150,7 @@ No SSN truncation rule read; KRS 141.335 lists SSN on the annual statement; W-2 
 |---|---|---|---|---|
 | `ky.records.retention_years` | [[FACT:ky.records.retention_years=1]] years | 2026-01-01 to open | US-KYP8-002 (Kentucky General Assembly (apps.legislature.ky.gov); A.1, direct artifact inspection, confidence high) | KRS 337.320: pay and hours records at least 1 year. |
 
-Not configured in this release [[GAP:RQ-234]]: SSN truncation statutes not read.
+Not configured in this release [[GAP:RQ-234]]: SSN truncation statutes not verified against the official source.
 
 ## KY.13 Live legal change
 
@@ -189,7 +189,7 @@ The annual tax matches the published figure (match). The formula sheet shows a w
 
 - Domestic: excluded from state MW/OT unless more than one domestic regularly employed; withholding not required; UI 1,000/quarter [US-KYS5-006, US-KYS5-023, US-KYS5-019].
 - Agricultural: excluded from state MW/OT; withholding per IRC 3121(a) test; UI 20,000/quarter or 10 in 20 weeks [US-KYS5-006, US-KYS5-023, US-KYS5-019].
-- Minors: no subminimum; KRS 339 not read.
+- Minors: no subminimum; KRS 339 not verified against the official source.
 - Tipped: federal cash wage; new definition 2026-04-10; tip pools; tips > 20/month withheld [US-KYS5-001, US-KYS5-021, US-KYS5-008, US-KYS5-023].
 - Clergy: withholding not required; religious camps <= 210 days excluded from MW chapter [US-KYS5-023, US-KYS5-006].
 - Students/learners/apprentices: subminimum only with commissioner certificate [US-KYS5-006].

@@ -1,0 +1,183 @@
+{
+ "proration": [
+  [
+   "Scenario: monthly salary 6,300.00; 22 working days in the month; hired on working day 13 (10 working days in service)",
+   ""
+  ],
+  [
+   "6,300.00 × 10 ÷ 22",
+   "2,863.64"
+  ]
+ ],
+ "overtime": [
+  [
+   "Scenario: non-exempt employee, USD 26.50 an hour, 46 hours in the workweek, no State daily overtime",
+   ""
+  ],
+  [
+   "[[FACT:fed.overtime.weekly_threshold_hours=40]] × 26.50",
+   "1,060.00"
+  ],
+  [
+   "46 − [[FACT:fed.overtime.weekly_threshold_hours=40]]",
+   "6"
+  ],
+  [
+   "6 × 26.50 × [[FACT:fed.overtime.premium.multiplier=1.5]]",
+   "238.50"
+  ],
+  [
+   "1,060.00 + 238.50",
+   "1,298.50"
+  ]
+ ],
+ "ex1": {
+  "scenario": "Resident employee, Form W-4 (2026): Single, Step 2 not checked, no Step 3 or Step 4 entries; weekly wages USD 1,640.00; no pre-tax deductions; year-to-date wages below every cap.",
+  "fit": [
+   [
+    "1c. Annualised wages",
+    "1,640.00 × 52",
+    "85,280.00"
+   ],
+   [
+    "1i. Adjusted annual wage (line 1g subtracted, Step 2 not checked)",
+    "85,280.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]]",
+    "76,680.00"
+   ],
+   [
+    "2e. Excess over the bracket floor (STANDARD SINGLE row 4)",
+    "76,680.00 − [[FACT:fed.fit.standard.single.bracket.4.floor=57,900]]",
+    "18,780.00"
+   ],
+   [
+    "2f. Excess × bracket rate",
+    "18,780.00 × [[FACT:fed.fit.standard.single.bracket.4.rate=22]]%",
+    "4,131.60"
+   ],
+   [
+    "2g. Tentative annual withholding",
+    "[[FACT:fed.fit.standard.single.bracket.4.cumulative_tax=5,800]] + 4,131.60",
+    "9,931.60"
+   ],
+   [
+    "2h. Withholding for the period",
+    "9,931.60 ÷ 52",
+    "190.99"
+   ]
+  ],
+  "fica": [
+   [
+    "OASDI employee",
+    "1,640.00",
+    "[[FACT:fed.fica.oasdi.rate.employee=6.2]]%",
+    "101.68"
+   ],
+   [
+    "Medicare employee",
+    "1,640.00",
+    "[[FACT:fed.fica.medicare.rate.employee=1.45]]%",
+    "23.78"
+   ]
+  ],
+  "net": [
+   [
+    "Net pay",
+    "1,640.00 − 190.99 − 101.68 − 23.78",
+    "1,323.55"
+   ]
+  ]
+ },
+ "ex2": {
+  "scenario": "Nonresident alien employee, Form W-4 (2026) completed per Notice 1392 (Single, NRA, Step 2 not checked); weekly wages USD 1,640.00; first paid in 2026 (Table 2 add-on); no treaty exemption.",
+  "fit": [
+   [
+    "1a. Wages for the computation, including the NRA add-on (Table 2, weekly)",
+    "1,640.00 + [[FACT:fed.fit.nra.addon.table2.weekly=309.60]]",
+    "1,949.60"
+   ],
+   [
+    "1c. Annualised wages",
+    "1,949.60 × 52",
+    "101,379.20"
+   ],
+   [
+    "1i. Adjusted annual wage (line 1g subtracted, Step 2 not checked)",
+    "101,379.20 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]]",
+    "92,779.20"
+   ],
+   [
+    "2e. Excess over the bracket floor (STANDARD SINGLE row 4)",
+    "92,779.20 − [[FACT:fed.fit.standard.single.bracket.4.floor=57,900]]",
+    "34,879.20"
+   ],
+   [
+    "2f. Excess × bracket rate",
+    "34,879.20 × [[FACT:fed.fit.standard.single.bracket.4.rate=22]]%",
+    "7,673.42"
+   ],
+   [
+    "2g. Tentative annual withholding",
+    "[[FACT:fed.fit.standard.single.bracket.4.cumulative_tax=5,800]] + 7,673.42",
+    "13,473.42"
+   ],
+   [
+    "2h. Withholding for the period",
+    "13,473.42 ÷ 52",
+    "259.10"
+   ]
+  ],
+  "fica": [
+   [
+    "OASDI employee",
+    "1,640.00",
+    "[[FACT:fed.fica.oasdi.rate.employee=6.2]]%",
+    "101.68"
+   ],
+   [
+    "Medicare employee",
+    "1,640.00",
+    "[[FACT:fed.fica.medicare.rate.employee=1.45]]%",
+    "23.78"
+   ]
+  ],
+  "net": [
+   [
+    "Net pay (the add-on is not paid and not reported)",
+    "1,640.00 − 259.10 − 101.68 − 23.78",
+    "1,255.44"
+   ]
+  ]
+ },
+ "ex3": {
+  "scenario": "Irregular payment: annual bonus USD 12,400.00 paid separately from regular wages to a resident employee whose 2026 supplemental wages stay below the mandatory-rate threshold and whose year-to-date wages are below the OASDI base and the Additional Medicare threshold; the employer uses the optional flat rate.",
+  "fit": [
+   [
+    "Federal income tax (flat supplemental rate)",
+    "12,400.00",
+    "[[FACT:fed.fit.supplemental.flat_rate=22]]%",
+    "2,728.00"
+   ]
+  ],
+  "fica": [
+   [
+    "OASDI employee",
+    "12,400.00",
+    "[[FACT:fed.fica.oasdi.rate.employee=6.2]]%",
+    "768.80"
+   ],
+   [
+    "Medicare employee",
+    "12,400.00",
+    "[[FACT:fed.fica.medicare.rate.employee=1.45]]%",
+    "179.80"
+   ]
+  ],
+  "net": [
+   [
+    "Net bonus",
+    "12,400.00 − 2,728.00 − 768.80 − 179.80",
+    "8,723.40"
+   ]
+  ]
+ }
+}

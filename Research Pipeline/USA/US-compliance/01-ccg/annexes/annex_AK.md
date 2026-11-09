@@ -54,7 +54,7 @@ ak_ui_er = min(period_UI_wages, max(0, ak_wage_base - ytd_UI_wages)) x employer_
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| SUI wage base | USD [[FACT:ak.sui.wage_base=54,200]] | 2026-01-01 to 2026-12-31 |  | S5 | Same figure printed on TQ01C (2/26). Mechanism 75% of the AK average annual wage; not re-derived. |
+| SUI wage base | USD [[FACT:ak.sui.wage_base=54,200]] | 2026-01-01 to 2026-12-31 |  | S5 | Same figure printed on TQ01C (2/26). Mechanism 75% of the AK average annual wage; not verified by re-derivation. |
 | SUI employee rate | [[FACT:ak.sui.employee.rate=0.5]] % | 2026-01-01 to 2026-12-31 |  | S5 | Employee UI contribution deducted by the employer. Derivation: the 0.27 x ABCR product is below the floor, so the [[FACT:ak.sui.employee.rate=0.5]] % floor applies. |
 | SUI employer rate classes 01 20 | [[FACT:ak.sui.employer.rate.classes_01_20=1]] % | 2026-01-01 to 2026-12-31 |  | S5 |  |
 | SUI employer rate class 21 | [[FACT:ak.sui.employer.rate.class_21=5.4]] % | 2026-01-01 to 2026-12-31 |  | S5 |  |
@@ -84,7 +84,7 @@ Not configured in this release [[GAP:RQ-456]]: SUI wage base next year: not esta
 | Report SUI employee fields | [[FACT:ak.report.sui.employee_fields=SSN, name, reportable wages, occupational code (6 or 8 digit), 2-digit geographic code]] | from 2026-01-01 |  | S10 | Alaska-specific DD fields. |
 | Report SUI channel | [[FACT:ak.report.sui.channel=file_upload (CSV, no headings; header 11 cols, detail 12 cols, rev. 2016-05-17) or online keying or paper]] | from 2026-01-01 |  | S12 |  |
 | Report SUI online mandatory threshold employees | [[FACT:ak.report.sui.online_mandatory_threshold_employees=50]] employees | from 2026-01-01 |  | S11 | Also mandatory with 1M+ taxable wages in current or prior year, or when a payroll agent files. |
-| Newhire report days | [[FACT:ak.newhire.report_days=20]] days | from 2026-01-01 |  | S13 | AS 25.27.075 (statute text not read). Online via myAlaska; fax no longer accepted. Penalty 10 USD/employee. |
+| Newhire report days | [[FACT:ak.newhire.report_days=20]] days | from 2026-01-01 |  | S13 | AS 25.27.075 (statute text not verified). Online via myAlaska; fax no longer accepted. Penalty 10 USD/employee. |
 
 ## AK.6 Leave
 
@@ -118,7 +118,7 @@ Not configured in this release [[GAP:RQ-450]]: Final pay accrued vacation payout
 
 | Parameter | Value | Effective | Level | Source | Qualification |
 |---|---|---|---|---|---|
-| Garnishment exempt weekly | USD [[FACT:ak.garn.exempt.weekly=473]] | from 2026-01-01 |  | S14 | Greater of [[FACT:ak.garn.exempt.weekly=473]]/week or 75% of disposable earnings (AS 09.38.030, CPI-adjusted per 8 AAC 95.030, not read; amounts via CIV-530 8/24). Monthly / 4.3, semi-monthly / 2.17. |
+| Garnishment exempt weekly | USD [[FACT:ak.garn.exempt.weekly=473]] | from 2026-01-01 |  | S14 | Greater of [[FACT:ak.garn.exempt.weekly=473]]/week or 75% of disposable earnings (AS 09.38.030, CPI-adjusted per 8 AAC 95.030, not verified; amounts via CIV-530 8/24). Monthly / 4.3, semi-monthly / 2.17. |
 | Garnishment exempt weekly household support | USD [[FACT:ak.garn.exempt.weekly_household_support=743]] | from 2026-01-01 |  | S14 |  |
 | Garnishment exempt liquid assets monthly | USD [[FACT:ak.garn.exempt.liquid_assets_monthly=1,890]] | from 2026-01-01 |  | S14 |  |
 

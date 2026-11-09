@@ -65,6 +65,14 @@ def entry(key, on=None, ef=None, value=None):
     vals = {json.dumps(e["value"]) for e in es}
     if not es:
         raise KeyError(f"no entry of {key} for on={on} ef={ef} value={value}")
+    if len(vals) > 1 and on is None and ef is None:
+        # v1.1: other periods that start in a later year only (e.g. a 2027 indexation figure) -> the
+        # period in force in the build year; a change DURING the build year still raises.
+        yr = str(_m["year"])
+        cur = [e for e in es if (e.get("effective_from") or "0000")[:4] <= yr <= (e.get("effective_to") or "9999")[:4]]
+        later = [e for e in es if (e.get("effective_from") or "0000")[:4] > yr]
+        if len({json.dumps(e["value"]) for e in cur}) == 1 and len(cur) + len(later) == len(es):
+            return cur[0]
     if len(vals) > 1:
         raise ValueError(f"ambiguous key {key}: {sorted(vals)} - pass on= or ef=")
     return es[0]
@@ -89,7 +97,7 @@ def fmt(e):
     if isinstance(v, (int, float)):
         if float(v).is_integer():
             return f"{int(v):,}"
-        if e.get("currency"):
+        if e.get("currency") and round(float(v), 2) == float(v):   # v1.1: never round a fact (0.725 USD/mile)
             return f"{v:,.2f}"
         s = repr(float(v))
         ip, dp = s.split(".")

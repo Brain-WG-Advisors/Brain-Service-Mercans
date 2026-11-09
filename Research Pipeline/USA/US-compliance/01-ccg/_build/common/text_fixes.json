@@ -79,7 +79,7 @@
  ],
  "annex_ME.md": [
   {
-   "find": "-> [[FACT:me.minwage.hourly=15.70]] not reproduced (CPI not fetched)",
+   "find": "-> [[FACT:me.minwage.hourly=15.70]] not reproduced (CPI not verified)",
    "replace": "-> [[FACT:me.minwage.hourly=15.70]] from 2027-01-01 (the CPI-W computation is not reproduced here)",
    "why": "QA r2 minor: next-year value without its period"
   },
@@ -171,6 +171,11 @@
    "find": " Partial answer to RQ-556: State account-number formats still open (QA r3b).",
    "replace": " State account-number formats: see Module 2.",
    "why": "F44 final (QA r3b minor, pipeline wording)"
+  },
+  {
+   "find": "| Notice 2026-10, 2026-4 IRB 378 |",
+   "replace": "| Notice 2026-10 (applies 2026-01-01 to 2026-06-30; modified by Announcement 2026-11 from 2026-07-01) |",
+   "why": "v1.1 C70: superseded source listed with the period it governs"
   }
  ],
  "annex_OH.md": [
@@ -204,6 +209,31 @@
    "find": "No SDI/PFML (US-GAP51-003 is not active; absence rests on the US-OWN-007 levy census and US-GAP9W-001/-003).",
    "replace": "No SDI or PFML programme is configured for Georgia [US-OWN-007; US-GAP9W-001; US-GAP9W-003].",
    "why": "QA r3 minor 11: cites only active rows"
+  },
+  {
+   "find": "- **V11 (2026-11-06, V-04).** The Jun-2026 guide",
+   "replace": "- **Withholding transition (HB 463).** The Jun-2026 guide",
+   "why": "v1.1: pack narrative label (pipeline round id) replaced by a subject label"
+  },
+  {
+   "find": " `ga.wh.method` (and WTC `ga.sit.method`) are split on the same date. Derivation: every Dec-2025 per-period value = annual / periods (52, 26, 24, 12, 4, 2, 365), half-up to the cent, re-derived, 21/21 match.",
+   "replace": " The withholding method is split on the same date: Table E to 2026-05-10, the current method from 2026-05-11.",
+   "why": "v1.1: research derivation note (unbound numbers, internal key names) removed from the deliverable"
+  },
+  {
+   "find": "1 dependent (Employer's Tax Guide percentage method).**",
+   "replace": "1 dependent (Employer's Tax Guide percentage method), wages paid from 2026-05-11.**",
+   "why": "v1.1: the example uses the parameters in force from 2026-05-11"
+  },
+  {
+   "find": "new rate of [[FACT:ga.pit.rate.flat=4.99]]%",
+   "replace": "new rate of [[FACT:ga.wh.rate=4.99]]%",
+   "why": "v1.1 QA r1 (GA tags): the withholding rate from 2026-05-11 is bound to the withholding key ga.wh.rate, not the assessment key ga.pit.rate.flat"
+  },
+  {
+   "find": "semiannual [[FACT:ga.wh.std_deduction.single=12,000]], daily",
+   "replace": "semiannual 12,000, daily",
+   "why": "v1.1 QA r1 (GA tags): the semiannual MFJ amount equals the single annual deduction by number only; no per-period key exists, so the figure is left untagged"
   }
  ],
  "annex_LA.md": [
@@ -218,6 +248,24 @@
    "regex": true,
    "replace": "",
    "why": "QA r3 minor 10: LA.12 limitation stated once by RQ-244"
+  },
+  {
+   "find": "Certificate R-1300 (L-4); edition not re-fetched (404).",
+   "replace": "Certificate R-1300 (L-4); the current edition is not confirmed.",
+   "stage": "post",
+   "why": "v1.1 build 2: research-process wording (HTTP status, fetch) restated for the deliverable; meaning unchanged"
+  },
+  {
+   "find": "GTL not read (LDR FAQ 403/404).",
+   "replace": "GTL not confirmed from an LDR source.",
+   "stage": "post",
+   "why": "v1.1 build 2: research-process wording (HTTP status, fetch) restated for the deliverable; meaning unchanged"
+  },
+  {
+   "find": "No LA source read (LDR cafeteria FAQ 404); LA starts",
+   "replace": "Not confirmed from an LDR source; LA starts",
+   "stage": "post",
+   "why": "v1.1 build 2: research-process wording (HTTP status, fetch) restated for the deliverable; meaning unchanged"
   }
  ],
  "annex_KY.md": [
@@ -378,7 +426,18 @@
    "why": "F44 final (QA r3b minor, pipeline wording)"
   }
  ],
- "annex_CA.md": [],
+ "annex_CA.md": [
+  {
+   "find": "UIC 675 and 682 CA UI",
+   "replace": "UIC s.675 and s.682 CA UI",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  },
+  {
+   "find": "UIC 675; UIC 682(a)",
+   "replace": "UIC s.675; UIC s.682(a)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  }
+ ],
  "m01_foundational.md": [
   {
    "find": "no federal statute requires paid holidays for private employers in the facts",
@@ -417,6 +476,33 @@
    "regex": true,
    "stage": "post",
    "why": "QA SIR r3: no retrieval details in the deliverable"
+  }
+ ],
+ "annex_MI.md": [
+  {
+   "find": "(IRC 225)",
+   "replace": "(IRC s.225)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  }
+ ],
+ "annex_NY.md": [
+  {
+   "find": "Multiply the result by 16.75% (0.1675)",
+   "replace": "Multiply the result by [[FACT:ny.local.yonkers.resident.surcharge.rate=16.75]]% (0.1675)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  },
+  {
+   "find": "0.50% (0.0050)",
+   "replace": "[[FACT:ny.local.yonkers.nonresident.earnings_tax.rate=0.5]]% (0.0050)",
+   "why": "v1.1 C46: statute number written as a section reference / fact value in a note bound to its key"
+  }
+ ],
+ "annex_NJ.md": [
+  {
+   "find": "The 2026 bulletin indexes of the Treasury and the Department of Labor returned errors, and the 2027 contribution-rate notice was not seen.",
+   "replace": "New Jersey Treasury and Department of Labor bulletins for 2026 and the 2027 contribution-rate notice are not verified against the official source.",
+   "stage": "post",
+   "why": "v1.1 QA r1 item 3: research-process wording of the open point restated as a limitation"
   }
  ]
 }

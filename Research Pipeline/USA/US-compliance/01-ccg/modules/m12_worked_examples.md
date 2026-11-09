@@ -6,7 +6,7 @@
 
 ### Provide complete, end-to-end Gross-to-Net calculation examples for common scenarios:
 
-**How these examples are produced.** Every figure below is computed from the verified rates, bases and constants; no number is typed by hand. Amounts are rounded half-up to the cent at each line. The optional whole-dollar rounding that Pub. 15-T allows ([[FACT:fed.fit.rounding=Optional: wages may be rounded to the nearest dollar and the period tax rounded to the nearest dollar (drop under 50 cents, 50-99 cents up)]]) [US-FED-001] is not applied, so the examples show the exact percentage-method result. Employees are on a 2020-or-later Form W-4 with Step 2 not checked and Steps 3 and 4 blank unless stated. The federal layer is shown in full. State and local withholding is shown where the example's work State levies it; per-State figures live in the jurisdiction annexes.
+**How these examples are produced.** Every figure below is computed from the verified rates, bases and constants; no number is typed by hand. Amounts are rounded half-up to the cent at each line. The optional whole-dollar rounding that Pub. 15-T allows ([[FACT:fed.fit.rounding=Optional: wages may be rounded to the nearest dollar and the period tax rounded to the nearest dollar (drop under 50 cents, 50-99 cents up)]]) [US-FED-001] is not applied, so the examples show the exact percentage-method result. Employees are on a 2020-or-later Form W-4 with Step 2 not verified and Steps 3 and 4 blank unless stated. The federal layer is shown in full. State and local withholding is shown where the example's work State levies it; per-State figures live in the jurisdiction annexes.
 
 ### A full-time resident employee on a standard salary
 
@@ -19,7 +19,7 @@
 | Line | Calculation | Result (USD) |
 |---|---|---|
 | Annualised wages | 3,000.00 × 26 (biweekly) | 78,000.00 |
-| Adjusted annual wage (W-4 Step 2 not checked: less the line 1g amount) | 78,000.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 69,400.00 |
+| Adjusted annual wage (W-4 Step 2 not verified: less the line 1g amount) | 78,000.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 69,400.00 |
 | Annual tentative withholding (STANDARD SINGLE schedule, row 4) | [[FACT:fed.fit.standard.single.bracket.4.cumulative_tax=5,800]] + (69,400.00 − [[FACT:fed.fit.standard.single.bracket.4.floor=57,900]]) × [[FACT:fed.fit.standard.single.bracket.4.rate=22]]% | 8,330.00 |
 | Per-period FIT | 8,330.00 ÷ 26 | 320.38 |
 
@@ -63,7 +63,7 @@
 | Line | Calculation | Result (USD) |
 |---|---|---|
 | Annualised wages | 174.00 × 52 (weekly) | 9,048.00 |
-| Adjusted annual wage (W-4 Step 2 not checked: less the line 1g amount) | 9,048.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 448.00 |
+| Adjusted annual wage (W-4 Step 2 not verified: less the line 1g amount) | 9,048.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 448.00 |
 | Annual tentative withholding (STANDARD SINGLE schedule, row 1) | [[FACT:fed.fit.standard.single.bracket.1.cumulative_tax=0]] + (448.00 − [[FACT:fed.fit.standard.single.bracket.1.floor=0]]) × [[FACT:fed.fit.standard.single.bracket.1.rate=0]]% | 0.00 |
 | Per-period FIT | 0.00 ÷ 52 | 0.00 |
 
@@ -115,7 +115,7 @@ The 2026 limits for the main pre-tax plans are: 401(k) elective deferral [[FACT:
 | Line | Calculation | Result (USD) |
 |---|---|---|
 | Annualised wages | 2,700.00 × 26 (biweekly) | 70,200.00 |
-| Adjusted annual wage (W-4 Step 2 not checked: less the line 1g amount) | 70,200.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 61,600.00 |
+| Adjusted annual wage (W-4 Step 2 not verified: less the line 1g amount) | 70,200.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 61,600.00 |
 | Annual tentative withholding (STANDARD SINGLE schedule, row 4) | [[FACT:fed.fit.standard.single.bracket.4.cumulative_tax=5,800]] + (61,600.00 − [[FACT:fed.fit.standard.single.bracket.4.floor=57,900]]) × [[FACT:fed.fit.standard.single.bracket.4.rate=22]]% | 6,614.00 |
 | Per-period FIT | 6,614.00 ÷ 26 | 254.38 |
 
@@ -142,7 +142,7 @@ Compared with Scenario A, only the federal income tax changes; OASDI, Medicare a
 
 ### An employee with a student loan or other special tax obligation
 
-Not configured in this release [[GAP:RQ-546]]: No fact describes a federal or State payroll obligation for student-loan repayment (for example an administrative wage garnishment order). The case is not computed.
+Student loans: [[FACT:fed.student_loan.payroll_obligation=Federal administrative wage garnishment of student loans: maximum 15 percent of disposable pay (more only with written consent), 30 days' written notice, no deduction until 12 months of continuous reemployment after involuntary separation, no retaliation. Disposable pay = after amounts required by law to be withheld.]] [US-FEDV6-025]. The garnishment mechanics follow Module 7; no student-loan case is computed here.
 
 #### Worked example 4: Supplemental payment above the mandatory threshold
 
@@ -168,7 +168,7 @@ Not configured in this release [[GAP:RQ-546]]: No fact describes a federal or St
 | Line | Calculation | Result (USD) |
 |---|---|---|
 | Annualised wages | 20,000.00 × 24 (semimonthly) | 480,000.00 |
-| Adjusted annual wage (W-4 Step 2 not checked: less the line 1g amount) | 480,000.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 471,400.00 |
+| Adjusted annual wage (W-4 Step 2 not verified: less the line 1g amount) | 480,000.00 − [[FACT:fed.fit.worksheet1a.line1g.other=8,600]] | 471,400.00 |
 | Annual tentative withholding (STANDARD SINGLE schedule, row 7) | [[FACT:fed.fit.standard.single.bracket.7.cumulative_tax=58,448]] + (471,400.00 − [[FACT:fed.fit.standard.single.bracket.7.floor=263,725]]) × [[FACT:fed.fit.standard.single.bracket.7.rate=35]]% | 131,134.25 |
 | Per-period FIT | 131,134.25 ÷ 24 | 5,463.93 |
 
@@ -248,6 +248,7 @@ The build manifest names the oracle: IRS Pub. 15-T (2026) for the federal layer,
 | ID | biweekly_1212_single | [[FACT:id.oracle.biweekly_1212_single.withholding=31]] | US-IDS5-008 | re-derived from the published method | Recomputed in 12.2.2: agrees |
 | SC | oracle.example_1 | [[FACT:sc.pit.oracle.example_1.withholding=10.58]] | US-SCP51-002 | re-derived from the published method | Recomputed in 12.2.2: agrees 2026 withholding tables, not the Act 110 return rates ([[FACT:practice.sc.withholding_rates_2026=Withholding tables in force: SCDOR WH-1603 (Rev. 10/30/25) 2026 tables, 0/3/6%; SCDOR Information Letter #26-20 gives the Act 110 2026 schedule 1.99% (0-29,999) / 5.21% minus 966 (30,000+) and says withholding is unchanged until DOR republishes the tables]]). |
 | KS | weekly_threshold_single | [[FACT:ks.oracle.weekly_threshold_single.withholding=69]] | US-KSS5-001 | re-derived from the published method | Recomputed in 12.2.2: agrees |
+| FED | payroll_obligation | [[FACT:fed.student_loan.payroll_obligation=Federal administrative wage garnishment of student loans: maximum 15 percent of disposable pay (more only with written consent), 30 days' written notice, no deduction until 12 months of continuous reemployment after involuntary separation, no retaliation. Disposable pay = after amounts required by law to be withheld.]] | US-FEDV6-025 | quoted | Not recomputed here: scenario inputs not all verified (see the annex). |
 
 **Residuals (published examples not reproduced; not expected results):**
 

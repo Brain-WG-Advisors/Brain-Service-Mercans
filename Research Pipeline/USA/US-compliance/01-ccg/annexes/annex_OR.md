@@ -114,12 +114,12 @@ The local wage taxes of this jurisdiction, where any exist, are written in OR.2.
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `or.sui.wage_base` | [[FACT:or.sui.wage_base=56,700]] | USD | 2026-01-01 to 2026-12-31 | US-ORS5-003 | 0.80 x AAW(t-2), rounded to 100, never lower (AAW not fetched) |
+| `or.sui.wage_base` | [[FACT:or.sui.wage_base=56,700]] | USD | 2026-01-01 to 2026-12-31 | US-ORS5-003 | 0.80 x AAW(t-2), rounded to 100, never lower (AAW not verified) |
 | `or.sui.new_employer.rate` | [[FACT:or.sui.new_employer.rate=2.4]] | % | 2026-01-01 to 2026-12-31 | US-ORS5-003 | Tax Schedule 3; second authority statute 657.435 |
 | `or.sui.employer.rate.min` | [[FACT:or.sui.employer.rate.min=0.9]] | % | 2026-01-01 to 2026-12-31 | US-ORS5-015 | Schedule III 0.9-5.4 |
 | `or.sui.employer.rate.max` | [[FACT:or.sui.employer.rate.max=5.4]] | % | 2026-01-01 to 2026-12-31 | US-ORS5-015 |  |
 | `or.sui.employee.rate` | [[FACT:or.sui.employee.rate=0]] | % | 2026-01-01 to 2026-12-31 | US-ORS5-003 |  |
-| `or.sui.wage_base.other_state_credit` | [[FACT:or.sui.wage_base.other_state_credit=True]] |  | from 2026-01-01 | US-ORS5-015 | 657.095(2); OED proof rule not read |
+| `or.sui.wage_base.other_state_credit` | [[FACT:or.sui.wage_base.other_state_credit=True]] |  | from 2026-01-01 | US-ORS5-015 | 657.095(2); OED proof rule not verified |
 | `or.pfml.rate.total` | [[FACT:or.pfml.rate.total=1]] | % | 2026-01-01 to 2026-12-31 | US-ORS5-003 | statutory cap 1% |
 | `or.pfml.employee.share` | [[FACT:or.pfml.employee.share=60]] | % | from 2023-01-01 | US-ORS5-013 | employer 40%; <25 employees pay no employer share |
 | `or.pfml.wage_cap.annual` | [[FACT:or.pfml.wage_cap.annual=184,500]] | USD | 2026-01-01 to 2026-12-31 | US-ORS5-003 | = SS wage base |
@@ -131,7 +131,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OR.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-293]]: The average annual wage behind the 2026 base of [[FACT:or.sui.wage_base=56,700]] USD was not read, so the base was not re-derived.
+- Not configured in this release [[GAP:RQ-293]]: The average annual wage behind the 2026 base of [[FACT:or.sui.wage_base=56,700]] USD was not verified against the official source, so the base was not re-derived.
 - Not configured in this release [[GAP:RQ-297]]: 2027 OED UI schedule/base, PFML rate and DOR 2027 formulas not published.
 
 ## OR.4 Pay statement
@@ -181,7 +181,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in OR.2.
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-298]]: Sick-time accrual for hours worked outside Oregon not read.
+- Not configured in this release [[GAP:RQ-298]]: Sick-time accrual for hours worked outside Oregon not verified against the official source.
 
 ## OR.7 Termination and final pay
 
@@ -283,7 +283,7 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | Agricultural | Small seasonal crop payments excluded; elective flat [[FACT:or.pit.seasonal_crop.flat_rate=2]] %; UI coverage tests; overtime per Section 1; annual WA / OR-STT-A | US-ORS5-020, US-ORS5-028, US-ORS5-008 |
 | Minors | Same minimum wage as adults; HB 4013 hours rule from 2027 | US-ORS5-002, US-ORS5-022 |
 | Tipped | No tip credit | US-ORS5-002 |
-| Clergy / religious | Excluded from withholding wages (316.162(2)(i)); UI not checked | US-ORS5-020 |
+| Clergy / religious | Excluded from withholding wages (316.162(2)(i)); UI not verified | US-ORS5-020 |
 | Students | UI excludes own-school and for-credit work-experience students; sick time excludes work-study | US-ORS5-028, US-ORS5-027 |
 | Nonresident aliens | No state rule beyond federal; nonresident threshold applies | US-ORS5-025 |
 | Statutory employees | No state rule; independent contractors excluded from withholding wages but reportable as new hires | US-ORS5-020, US-ORS5-016 |

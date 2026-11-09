@@ -43,8 +43,8 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `me.direct_deposit.fee_prohibited` | [[FACT:me.direct_deposit.fee_prohibited=True]] | 2026-01-01 | open | US-MES5-004 (A.1, Maine Legislature, Office of the Revisor of Statutes) | 621-A(7); no consent/paycard rule in text read. |
 
 - Not configured in this release [[GAP:RQ-014]]: The 2027 salary threshold for exempt employees differs by a few cents between the state poster and the statutory formula; the 2027 threshold is not written.
-- Not configured in this release [[GAP:RQ-015]]: The Northeast CPI-W series used for the annual adjustment was not obtained, so the 2027 step was not checked against the index.
-- Not configured in this release [[GAP:RQ-016]]: Other municipal minimum wages (e.g. Rockland) not checked.
+- Not configured in this release [[GAP:RQ-015]]: The Northeast CPI-W series used for the annual adjustment was not verified against the official source, so the 2027 step was not verified against the index.
+- Not configured in this release [[GAP:RQ-016]]: Other municipal minimum wages (e.g. Rockland) not verified.
 - Not configured in this release [[GAP:RQ-017]]: No paycard/direct-deposit consent rule beyond no-fee.
 - Not configured in this release [[GAP:RQ-018]]: The state poster applies the state minimum wage to agriculture, while 26 MRSA 663(3)(A) excludes agricultural workers from the subchapter.
 
@@ -69,7 +69,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `me.wh.bracket.single.1.ceiling` | [[FACT:me.wh.bracket.single.1.ceiling=27400]] USD | 2026-01-01 | 2026-12-31 | US-MEP52-001 (A.2, Maine Revenue Services) | Single: [[FACT:me.wh.bracket.1.rate=5.80]]% below [[FACT:me.wh.bracket.single.1.ceiling=27,400]]; 1,589 + [[FACT:me.wh.bracket.2.rate=6.75]]% to [[FACT:me.wh.bracket.single.2.ceiling=64,850]]; 4,117 + [[FACT:me.wh.bracket.3.rate=7.15]]% above. Use the withholding standard deduction ([[FACT:me.wh.std_deduction.single=12,450]] single / [[FACT:me.wh.std_deduction.married=27,750]] married), not the return-level amounts. |
 | `me.wh.bracket.single.2.ceiling` | [[FACT:me.wh.bracket.single.2.ceiling=64850]] USD | 2026-01-01 | 2026-12-31 | US-MEP52-001 (A.2, Maine Revenue Services) |  |
 
-- Not configured in this release [[GAP:RQ-019]]: Decoupling from federal tips/overtime deductions for 2026 not checked (assessment).
+- Not configured in this release [[GAP:RQ-019]]: Decoupling from federal tips/overtime deductions for 2026 not verified (assessment).
 - Not configured in this release [[GAP:RQ-020]]: 2027 withholding tables not published.
 
 ## ME.2b Non-resident regime and reciprocity
@@ -97,7 +97,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `me.sui.new_employer.rate.total` | [[FACT:me.sui.new_employer.rate.total=2.54]] percent | 2026-01-01 | 2026-12-31 | US-MEP51-001 (A.2, Maine Department of Labor, Bureau of Unemployment Compensation) | 2.23% UI + 0.14% CSSF + [[FACT:me.sui.upaf.rate=0.17]]% UPAF (UPAF conflict vs UC-1 0.16%, Q1). |
 | `me.sui.employer.rate.combined.range` | [[FACT:me.sui.employer.rate.combined.range=0.31% - 6.60% (categories 01-20; adjusted UI 0.00%-6.29%)]] | 2026-01-01 | 2026-12-31 | US-MEP51-001 (A.2, Maine Department of Labor, Bureau of Unemployment Compensation) |  |
 
-- Not yet published [[GAP:RQ-021]]: The 2026 rate-year table and the 2026 Form UC-1 instructions give different rates for the Unemployment Program Administrative Fund component. The component rate is not written, and the combined new-employer rate that includes it is unconfirmed.
+- Not configured in this release [[GAP:RQ-021]]: The 2026 rate-year table and the 2026 Form UC-1 instructions give different rates for the Unemployment Program Administrative Fund component. The component rate is not written, and the combined new-employer rate that includes it is unconfirmed.
 - Not configured in this release [[GAP:RQ-022]]: The split of the total rate by employer size rests on the authority FAQ and the statutory ceiling; no authority rate table was found.
 
 ## ME.4 Pay statement
@@ -118,7 +118,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `me.newhire.contractor_threshold` | [[FACT:me.newhire.contractor_threshold=2500]] USD | 2026-01-01 | open | US-MES5-016 (A.1, Maine Legislature, Office of the Revisor of Statutes) |  |
 | `me.report.wh.semiweekly_threshold` | [[FACT:me.report.wh.semiweekly_threshold=18000]] USD | 2026-01-01 | open | US-MEP52-002 (A.2, Maine Revenue Services) | Look-back 12 months to prior 30 June; semiweekly Wed-Fri -> Wednesday, Sat-Tue -> Friday; electronic payment if combined Maine tax >= 10,000. |
 
-- Not configured in this release [[GAP:RQ-023]]: Maine Tax Portal Bulk File Upload Specifications not read (EFW2 acceptance open).
+- Not configured in this release [[GAP:RQ-023]]: Maine Tax Portal Bulk File Upload Specifications not verified against the official source (EFW2 acceptance open).
 
 ## ME.6 Leave
 
@@ -156,7 +156,7 @@ Rules:
 | `me.garn.employer_fee_per_check` | [[FACT:me.garn.employer_fee_per_check=1]] USD | 2026-01-01 | open | US-MES5-014 (A.1, Maine Legislature, Office of the Revisor of Statutes) | Answer within 20 days; no discharge. |
 | `me.garn.child_support.remit_business_days` | [[FACT:me.garn.child_support.remit_business_days=7]] business days | 2026-01-01 | open | US-MES5-015 (A.1, Maine Legislature, Office of the Revisor of Statutes) | Order adds 2/week; priority over non-support; processing fee only by DHHS rule. |
 
-- Not configured in this release [[GAP:RQ-025]]: 26 MRSA 629/635 not read.
+- Not configured in this release [[GAP:RQ-025]]: 26 MRSA 629/635 not verified against the official source.
 
 ## ME.10 Collective agreements and prevailing wage
 
@@ -176,7 +176,7 @@ Indexation of each value is stated in the note of the value concerned.
 |---|---|---|---|---|---|
 | `me.records.retention_years` | [[FACT:me.records.retention_years=3]] years | 2026-01-01 | open | US-MES5-006 (A.1, Maine Legislature, Office of the Revisor of Statutes) | 665(1); 622 date/amount and daily time records except salaried exempt [US-MES5-026]. SSN not requestable on applications [US-MES5-009]. |
 
-- Not configured in this release [[GAP:RQ-026]]: SSN on pay statements and breach law not read.
+- Not configured in this release [[GAP:RQ-026]]: SSN on pay statements and breach law not verified against the official source.
 
 ## ME.13 Live legal change
 

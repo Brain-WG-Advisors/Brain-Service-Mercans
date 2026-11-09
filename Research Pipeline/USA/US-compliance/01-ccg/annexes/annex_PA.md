@@ -9,14 +9,15 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 ## PA.1 Employment and labour code
 
-- **Minimum wage (MWA Sec. 4(a.1); 34 Pa. Code 231.101a) [US-PAS5-001, US-PAS5-002]:** [[FACT:pa.minwage.hourly=7.25]] USD per hour statewide; the state rate rises automatically to any higher FLSA rate. Not indexed; nothing enacted for 2027 (a House bill is not law, open point below).
+- **Minimum wage (MWA Sec. 4(a.1); 34 Pa. Code 231.101a) [US-PAS5-001, US-PAS5-002]:** [[FACT:pa.minwage.hourly=7.25]] USD per hour statewide; the state rate rises automatically to any higher FLSA rate. Not indexed; nothing enacted for 2027 (pending bills are not law; Section 13).
 - **Local minimum wage:** preempted (MWA Sec. 14.1): [[FACT:pa.local_mandates.preempted=True]] [US-PAS5-001].
 - **Tipped employees [US-PAS5-002, US-PAS5-004]:** cash wage [[FACT:pa.minwage.tipped.cash_wage=2.83]] USD per hour, the employer making up any shortfall to the minimum wage; a tipped employee customarily receives more than [[FACT:pa.labour.tip_credit.monthly_tip_threshold=135]] USD per month in tips (231.1); written notice of the tip credit (231.34); no deduction of card-processing fees from tips.
 - **Overtime [US-PAS5-001, US-PAS5-003]:** [[FACT:pa.overtime.premium.multiplier=1.5]] times the regular rate over [[FACT:pa.overtime.weekly_threshold_hours=40]] hours per workweek; the 8-and-80 system is allowed for hospitals; no daily overtime; comp time in lieu of overtime is not legal. **Departure from the FLSA:** salaried non-exempt regular rate = [[FACT:pa.labour.overtime.salaried_nonexempt_regular_rate=remuneration / 40 hours (no fluctuating workweek)]] (231.43(g)) [US-PAS5-002].
 - **Exempt salary level:** [[FACT:pa.exempt.salary.weekly_min=684]] USD per week with the federal duties tests (the PA-specific salary sections are abrogated) [US-PAS5-003].
 - **Pay timing (WPCL Sec. 3(a)) [US-PAS5-005]:** [[FACT:pa.labour.pay_timing=regular paydays; within contract/customary lapse or 15 days after period end]]; notice at hire of payday, place and rate (Sec. 4).
-- **Method of payment:** "lawful money of the United States or check" (WPCL Sec. 3); no PA rule read on direct deposit or paycards (open point below).
+- **Method of payment:** "lawful money of the United States or check" (WPCL Sec. 3); [[FACT:pa.payment.method=Act 161 of 2016: wages may be paid by credit to a financial-institution account including a payroll card account if the employee authorized it in writing or electronically; employer provides a written or electronic statement of earnings and deductions each pay period; payroll card rules (Reg E card, FDIC/NCUA insured, not a condition of employment, notice of options, switch to direct deposit by the first payday after 14 days).]] [US-PAV6B-002].
 - **Records:** [[FACT:pa.records.retention_years=3]] years (MWA Sec. 8; 231.31) [US-PAS5-001, US-PAS5-002].
+- **Child labour (Act 151 of 2012) [US-PAV6B-010]:** [[FACT:pa.labour.child_labour=Act 151 of 2012 (effective 90 days after enactment): 14-15 years in school week max 3 h/day and 18 h/week, 7 a.m. to 7 p.m. (9 p.m. in vacation), 8 h/day and 40 h/week out of school; 16-17 in school week max 8 h/day and 28 h/week, vacation 10 h/day and 48 h/week (hours over 44 voluntary); max six consecutive days. Work-permit procedure not verified.]].
 
 **Parameters (labour code and pay rules)**
 
@@ -31,11 +32,8 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | `pa.labour.overtime.salaried_nonexempt_regular_rate` | [[FACT:pa.labour.overtime.salaried_nonexempt_regular_rate=remuneration / 40 hours (no fluctuating workweek)]] |  | from 2022-08-05 | US-PAS5-002 | 231.43(g) |
 | `pa.exempt.salary.weekly_min` | [[FACT:pa.exempt.salary.weekly_min=684]] | USD | from 2026-01-01 | US-PAS5-003 | DLI follows 2019 federal level (A.3 FAQ); 231.82-84 abrogated |
 | `pa.labour.pay_timing` | [[FACT:pa.labour.pay_timing=regular paydays; within contract/customary lapse or 15 days after period end]] |  | from 1977-07-14 | US-PAS5-005 | WPCL Sec. 3(a) |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-299]]: Direct deposit, paycards and electronic pay statements: no PA rule located.
-- Not configured in this release [[GAP:RQ-307]]: Child Labor Act 2012 hours/permits not read (no text layer).
+| `pa.payment.method` | [[FACT:pa.payment.method=Act 161 of 2016: wages may be paid by credit to a financial-institution account including a payroll card account if the employee authorized it in writing or electronically; employer provides a written or electronic statement of earnings and deductions each pay period; payroll card rules (Reg E card, FDIC/NCUA insured, not a condition of employment, notice of options, switch to direct deposit by the first payday after 14 days).]] |  | from 2016-11-04 | US-PAV6B-002 | Register: US-PAV6B-002 |
+| `pa.labour.child_labour` | [[FACT:pa.labour.child_labour=Act 151 of 2012 (effective 90 days after enactment): 14-15 years in school week max 3 h/day and 18 h/week, 7 a.m. to 7 p.m. (9 p.m. in vacation), 8 h/day and 40 h/week out of school; 16-17 in school week max 8 h/day and 28 h/week, vacation 10 h/day and 48 h/week (hours over 44 voluntary); max six consecutive days. Work-permit procedure not verified.]] |  | from 2012-10-24 | US-PAV6B-010 | Register: US-PAV6B-010 |
 
 ## PA.2 Income tax withholding
 
@@ -80,10 +78,8 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 | `pa.local.philadelphia.nonresident.rate` | [[FACT:pa.local.philadelphia.nonresident.rate=3.425]] | % | from 2026-07-01 | US-PAS5-022 |  |
 | `pa.pit.local.pittsburgh.payroll_expense.rate` | [[FACT:pa.pit.local.pittsburgh.payroll_expense.rate=0.55]] | % | from 2026-01-01 | US-PAB5-401 | employer |
 | `pa.pit.rounding` | [[FACT:pa.pit.rounding=none published]] |  | from 2026-01-01 | US-PAP52-002 |  |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-302]]: Local EIT compensation base vs PA PIT and DCED register cadence not verified.
+| `pa.pit.local.eit.base` | [[FACT:pa.pit.local.eit.base=LTEA section 501 (as amended by Act 18 of 2018): local earned income = compensation as required to be reported to or determined by PA Revenue under section 303 of the Tax Reform Code, i.e. the same compensation base as PA PIT. DCED register cadence was not verified (stays open as a sub-point).]] |  | from 2018-05-04 | US-PAV6B-005 | Register: US-PAV6B-005 |
+| `pa.wh.h2a.voluntary_withholding` | [[FACT:pa.wh.h2a.voluntary_withholding=No PA withholding is required on agricultural workers and H-2A foreign agricultural workers whose remuneration is not subject to FICA withholding. An H-2A worker may request PA income tax withholding; a payor that agrees becomes subject to all employer withholding rules (61 Pa. Code 113.3(b)). Design choice: whether and how to accept such a request.]] |  | from 2026-01-01 | US-PA-008 | Open Design choice (validation V-06). |
 
 ## PA.2b Non-resident regime and reciprocity
 
@@ -113,7 +109,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in PA.2.
 
 ## PA.4 Pay statement
 
-- **Content (34 Pa. Code 231.36) [US-PAP51-001]:** [[FACT:pa.payslip.items=hours worked, rates, gross, allowances toward minimum wage, deductions, net]]; the DLI FAQ adds tax and other deductions and the pay-period dates [US-PAS5-003]. Retention [[FACT:pa.records.retention_years=3]] years [US-PAS5-002]. No PA rule on electronic delivery located (open point in Section 1).
+- **Content (34 Pa. Code 231.36) [US-PAP51-001]:** [[FACT:pa.payslip.items=hours worked, rates, gross, allowances toward minimum wage, deductions, net]]; the DLI FAQ adds tax and other deductions and the pay-period dates [US-PAS5-003]. Retention [[FACT:pa.records.retention_years=3]] years [US-PAS5-002]. Where wages are paid to an account or a payroll card, the statement of earnings may be written or electronic (Act 161 of 2016; Section 1) [US-PAV6B-002].
 
 **Parameters (payslip statute and payroll records)**
 
@@ -142,7 +138,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in PA.2.
 ## PA.6 Leave
 
 - **State:** no statewide paid sick leave (statewide law: [[FACT:pa.leave.paid_sick.statewide=False]]); vacation, holiday and severance follow policy and become wages once promised (WPCL) [US-PAS5-003, US-PAS5-005].
-- **Philadelphia (Code ch. 9-4100) [US-PAS5-015]:** paid sick time where the employer has at least [[FACT:pa.leave.philadelphia.employer_threshold=10]] employees; accrual and use capped at [[FACT:pa.leave.philadelphia.annual_cap_hours=40]] hours per year; carry-over unless front-loaded; rehire within the statutory period restores the balance. The accrual rate is open (below).
+- **Philadelphia (Code ch. 9-4100) [US-PAS5-015]:** paid sick time where the employer has at least [[FACT:pa.leave.philadelphia.employer_threshold=10]] employees; accrual and use capped at [[FACT:pa.leave.philadelphia.annual_cap_hours=40]] hours per year; carry-over unless front-loaded; rehire within the statutory period restores the balance. Accrual: [[FACT:pa.leave.philadelphia.accrual=Phila. Code 9-4104: 1 hour per 40 hours worked in Philadelphia, cap 40 hours per calendar year unless a higher limit is chosen, use from the 90th calendar day, overtime-exempt assumed 40 h/week.]] [US-PAV6B-003].
 - **Pittsburgh Paid Sick Days Act (from 2026-01-01) [US-PAB5-402]:** one hour per [[FACT:pa.leave.pittsburgh.accrual.hours_worked_per_hour=30]] hours worked in Pittsburgh, all employers; annual cap [[FACT:pa.leave.pittsburgh.annual_cap_hours.15plus=72]] hours for employers with 15 or more employees and [[FACT:pa.leave.pittsburgh.annual_cap_hours.under15=48]] hours below; use from day [[FACT:pa.leave.pittsburgh.waiting_period_days=90]] of employment; payout at separation: [[FACT:pa.leave.pittsburgh.payout_at_separation=False]]. Rule: [[FACT:pa.leave.pittsburgh.rule=Carryover required unless the employer front-loads 72 h (15+) / 48 h (<15) at the start of each year; reinstated on rehire within 6 months; paid at the same base rate and benefits, never below the PA minimum wage; no pay for lost tips or commissions]].
 
 **Parameters (leave)**
@@ -158,10 +154,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in PA.2.
 | `pa.leave.pittsburgh.waiting_period_days` | [[FACT:pa.leave.pittsburgh.waiting_period_days=90]] | days | from 2026-01-01 | US-PAB5-402 | Use from the 90th calendar day of employment. |
 | `pa.leave.pittsburgh.payout_at_separation` | [[FACT:pa.leave.pittsburgh.payout_at_separation=False]] |  | from 2026-01-01 | US-PAB5-402 |  |
 | `pa.leave.pittsburgh.rule` | [[FACT:pa.leave.pittsburgh.rule=Carryover required unless the employer front-loads 72 h (15+) / 48 h (<15) at the start of each year; reinstated on rehire within 6 months; paid at the same base rate and benefits, never below the PA minimum wage; no pay for lost tips or commissions]] |  | from 2026-01-01 | US-PAB5-402 |  |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-300]]: The Philadelphia accrual rate rests on a secondary source only; the ordinance text was not reached.
+| `pa.leave.philadelphia.accrual` | [[FACT:pa.leave.philadelphia.accrual=Phila. Code 9-4104: 1 hour per 40 hours worked in Philadelphia, cap 40 hours per calendar year unless a higher limit is chosen, use from the 90th calendar day, overtime-exempt assumed 40 h/week.]] |  | from 2020-09-17 | US-PAV6B-003 | Register: US-PAV6B-003 |
 
 ## PA.7 Termination and final pay
 
@@ -184,7 +177,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in PA.2.
   - cafeteria-plan salary reductions for dependent care are taxable: [[FACT:pa.bik.pa.dependent_care_125.taxable=True]] (health, accident, disability and life reductions are excluded as federally);
   - employer-paid group-term life is taxable: [[FACT:pa.bik.pa.group_term_life.taxable=False]] (no imputed income at any amount);
   - personal use of employer property, employer parking, meals and lodging are nontaxable fringes.
-- **HSA:** PA follows the federal rules as a deduction [US-PAS5-012]; treatment at withholding open (below). Local EIT base: open (below).
+- **HSA:** PA follows the federal rules as a deduction [US-PAS5-012]; at withholding: [[FACT:pa.bik.hsa_withholding=PA DOR Letter Ruling PIT-06-005 (2006-04-12): employer HSA contributions and HSA elections made through a Section 125 cafeteria plan are excluded from compensation (no withholding); other employee HSA contributions are not exempt (withholding applies). A later superseding ruling was not searched.]] [US-PAV6B-004]. Local EIT base: [[FACT:pa.pit.local.eit.base=LTEA section 501 (as amended by Act 18 of 2018): local earned income = compensation as required to be reported to or determined by PA Revenue under section 303 of the Tax Reform Code, i.e. the same compensation base as PA PIT. DCED register cadence was not verified (stays open as a sub-point).]] [US-PAV6B-005].
 
 **Parameters (benefits in kind and the taxable base)**
 
@@ -193,15 +186,12 @@ The local wage taxes of this jurisdiction, where any exist, are written in PA.2.
 | `pa.bik.pa.401k_403b_457.taxable` | [[FACT:pa.bik.pa.401k_403b_457.taxable=True]] |  | from 2026-01-01 | US-PAS5-011 | employee deferrals taxable for PA PIT |
 | `pa.bik.pa.dependent_care_125.taxable` | [[FACT:pa.bik.pa.dependent_care_125.taxable=True]] |  | from 2026-01-01 | US-PAS5-011 |  |
 | `pa.bik.pa.group_term_life.taxable` | [[FACT:pa.bik.pa.group_term_life.taxable=False]] |  | from 2026-01-01 | US-PAS5-011 | no 50,000 imputed income |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-301]]: HSA salary reductions at PA withholding (exclude vs employee deduction) open.
+| `pa.bik.hsa_withholding` | [[FACT:pa.bik.hsa_withholding=PA DOR Letter Ruling PIT-06-005 (2006-04-12): employer HSA contributions and HSA elections made through a Section 125 cafeteria plan are excluded from compensation (no withholding); other employee HSA contributions are not exempt (withholding applies). A later superseding ruling was not searched.]] |  | from 2006-04-12 | US-PAV6B-004 | Register: US-PAV6B-004 |
 
 ## PA.9 Deductions and garnishments
 
 - **Wage deductions:** limited to the 34 Pa. Code 9.1 list, each with a written authorisation; no blanket authorisation at hire; never below minimum wage [US-PAS5-006, US-PAS5-003].
-- **Wage attachment is narrower than the CCPA (42 Pa.C.S. 8127) [US-PAS5-007]:** ordinary consumer-creditor garnishment available: [[FACT:pa.garn.consumer.available=False]]. Wages are attachable only for support, divorce, short boarding debts, residential-lease judgments (at most [[FACT:pa.garn.lease_judgment.max_rate=10]] % of net wages, or the poverty-guideline floor if less), PHEAA loans and criminal restitution. Support has first priority, restitution second. IWO specifics and state tax levies: open (below).
+- **Wage attachment is narrower than the CCPA (42 Pa.C.S. 8127) [US-PAS5-007]:** ordinary consumer-creditor garnishment available: [[FACT:pa.garn.consumer.available=False]]. Wages are attachable only for support, divorce, short boarding debts, residential-lease judgments (at most [[FACT:pa.garn.lease_judgment.max_rate=10]] % of net wages, or the poverty-guideline floor if less), PHEAA loans and criminal restitution. Support has first priority, restitution second. Support orders: [[FACT:pa.garn.iwo.specifics=23 Pa.C.S. 4348: employer implements within 14 days of notice; remits to the domestic relations section or State disbursement unit within seven business days of the pay date; one-time employer fee 50 USD (not deducted from the support amount); limits per the Consumer Credit Protection Act; employer liable for amounts willfully not withheld.]] [US-PAV6B-001]. State tax levy: [[FACT:pa.garn.state_tax_levy=PA DOR may order an employer to withhold up to 10 percent of the taxpayer's gross wages (Act 46 of 2003) without a court order. Act text (72 P.S.) not verified.]] [US-PAV6B-006].
 
 **Parameters (deductions and garnishments)**
 
@@ -209,27 +199,21 @@ The local wage taxes of this jurisdiction, where any exist, are written in PA.2.
 |---|---|---|---|---|---|
 | `pa.garn.consumer.available` | [[FACT:pa.garn.consumer.available=False]] |  | from 2026-01-01 | US-PAS5-007 | 42 Pa.C.S. 8127: only support, divorce, board, residential lease (max 10% net), PHEAA, restitution |
 | `pa.garn.lease_judgment.max_rate` | [[FACT:pa.garn.lease_judgment.max_rate=10]] | % | from 2026-01-01 | US-PAS5-007 | of net wages or poverty floor |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-303]]: PA DOR administrative wage levy not established from an official source.
-- Not configured in this release [[GAP:RQ-305]]: Child-support IWO fee and SCDU remittance not read.
+| `pa.garn.state_tax_levy` | [[FACT:pa.garn.state_tax_levy=PA DOR may order an employer to withhold up to 10 percent of the taxpayer's gross wages (Act 46 of 2003) without a court order. Act text (72 P.S.) not verified.]] |  | from 2003-01-01 | US-PAV6B-006 | Register: US-PAV6B-006 |
+| `pa.garn.iwo.specifics` | [[FACT:pa.garn.iwo.specifics=23 Pa.C.S. 4348: employer implements within 14 days of notice; remits to the domestic relations section or State disbursement unit within seven business days of the pay date; one-time employer fee 50 USD (not deducted from the support amount); limits per the Consumer Credit Protection Act; employer liable for amounts willfully not withheld.]] |  | from 2016-08-30 | US-PAV6B-001 | Register: US-PAV6B-001 |
 
 ## PA.10 Collective agreements and prevailing wage
 
 Prevailing wage (public works) is an optional informational flag [US-OWN-009]: this guide documents prevailing-wage laws, thresholds and certified-payroll duties as an overlay, and the payroll build does not produce certified payroll reports.
 
-- **Prevailing Wage Act [US-PAP51-003, US-PAP51-006]:** public works above [[FACT:pa.prevailing_wage.threshold=25,000]] USD (DLI Bureau of Labor Law Compliance). Certified payroll: open (below).
+- **Prevailing Wage Act [US-PAP51-003, US-PAP51-006]:** public works above [[FACT:pa.prevailing_wage.threshold=25,000]] USD (DLI Bureau of Labor Law Compliance). Certified payroll: [[FACT:pa.prevailing_wage.certified_payroll=weekly certified statement under oath plus a final statement; records per 9.109 (name, address, SSN, craft/classification, hours per calendar day). The retention period is not stated in this source.]] [US-PAV6B-007].
 
 **Parameters (collective agreements and prevailing wage)**
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
 | `pa.prevailing_wage.threshold` | [[FACT:pa.prevailing_wage.threshold=25,000]] | USD | from 2026-01-01 | US-PAP51-003 | PA Prevailing Wage Act |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-304]]: Certified payroll form/frequency not read.
+| `pa.prevailing_wage.certified_payroll` | [[FACT:pa.prevailing_wage.certified_payroll=weekly certified statement under oath plus a final statement; records per 9.109 (name, address, SSN, craft/classification, hours per calendar day). The retention period is not stated in this source.]] |  | from 2026-01-01 | US-PAV6B-007 | Register: US-PAV6B-007 |
 
 ## PA.11 Indexation
 
@@ -251,11 +235,13 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 - **Act 55 of 2025 (UC Law, domestic-violence eligibility):** benefit side and employer account charging only; no payroll calculation change [US-PAS5-019].
 - **2026-01-01:** Pittsburgh Paid Sick Days Act: higher accrual and caps [US-PAB5-402].
 - **2026-07-01:** Philadelphia wage tax rates (Section 2) [US-PAS5-022]; further cuts announced but not published.
-- **Minimum-wage bill:** passed by the House, not acted on by the Senate; not enacted (open point below).
+- **Minimum-wage bill:** [[FACT:pa.live.minwage_bill=HB 1549 (2025-26, PN 1881), amends the Minimum Wage Act of 1968: House final passage 2025-06-11 (102-101), referred to Senate Labor and Industry 2025-06-18; not enacted. SB 19 (PN 685, "Comprehensive Modernization of the Minimum Wage"): introduced 2025-01-27, last action 2026-10-21 (remarks, Senate Journal); not enacted. Level: statewide minimum wage, not withholding. Bill dollar figures not verified.]] [US-PAV6B-008].
 
-**Open research points**
+**Parameters (live legal change)**
 
-- Not configured in this release [[GAP:RQ-306]]: Not established from an official source.
+| Parameter key | Value | Unit | Effective | Register id | Note |
+|---|---|---|---|---|---|
+| `pa.live.minwage_bill` | [[FACT:pa.live.minwage_bill=HB 1549 (2025-26, PN 1881), amends the Minimum Wage Act of 1968: House final passage 2025-06-11 (102-101), referred to Senate Labor and Industry 2025-06-18; not enacted. SB 19 (PN 685, "Comprehensive Modernization of the Minimum Wage"): introduced 2025-01-27, last action 2026-10-21 (remarks, Senate Journal); not enacted. Level: statewide minimum wage, not withholding. Bill dollar figures not verified.]] |  | from 2025-06-11 | US-PAV6B-008 | Register: US-PAV6B-008, US-PAV6B-009 |
 
 ## PA.14 Authority worked examples (oracle values)
 
@@ -267,7 +253,7 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 |---|---|---|
 | Domestic / household | Exempt from MWA minimum wage and overtime (Sec. 5(a)(2)); UC only above a quarterly cash test; PA withholding not required when not an employee federally; household pay is PA-taxable to the worker | US-PAS5-001, US-PAS5-019, US-PA-001, US-PAS5-011 |
 | Agricultural | Farm labour exempt from the MWA (Sec. 5(a)(1)); UC excludes agricultural labour except covered farms; no PA withholding where FICA does not apply (H-2A may elect) | US-PAS5-001, US-PAS5-019, US-PA-001 |
-| Minors | Mandatory meal break for minors; training wage for young workers for an initial period; UC excludes a minor child working for a parent; Child Labor Act not read | US-PAS5-003, US-PAS5-001, US-PAS5-019 |
+| Minors | Mandatory meal break for minors; training wage for young workers for an initial period; UC excludes a minor child working for a parent; Child Labor Act hours in Section 1 | US-PAS5-003, US-PAS5-001, US-PAS5-019 |
 | Tipped | Cash wage and tip threshold per Section 1; tips paid through the employer are withheld; tips received directly are reported, not withheld | US-PAS5-002, US-PAS5-004, US-PA-001 |
 | Clergy / religious | No PA withholding where federal withholding does not apply; cash housing allowance taxable, parsonage value exempt; church service excluded from UC | US-PA-001, US-PAS5-011, US-PAS5-019 |
 | Students | Special certificates (sub-minimum, weekly hours cap); seasonal students may be excluded from overtime; UC excludes own-school and some camp students | US-PAS5-001, US-PAS5-002, US-PAS5-019 |
@@ -284,6 +270,7 @@ No language rule for employee documents is written for this jurisdiction in this
 Register ids cited in this annex resolve to the build record; the URL of each value is in the facts file. Authorities:
 
 - Build lead (Claude) under owner delegation (Wallisson Gomes): US-OWN-006, US-OWN-007
+- City of Philadelphia (Philadelphia Code, American Legal Publishing official code library): US-PAV6B-003
 - City of Philadelphia Department of Revenue: US-PAS5-022
 - City of Philadelphia, Office of the Managing Director (filed with Department of Records): US-PAS5-015
 - City of Pittsburgh (Office of Equal Protection, Law Department): US-PAB5-402
@@ -298,12 +285,12 @@ Register ids cited in this annex resolve to the build record; the URL of each va
 - Pennsylvania Code (PA Bulletin): US-PAP51-001, US-PAP52-002
 - Pennsylvania DOR: US-MULTI-007
 - Pennsylvania Department of Community & Economic Development: US-PAS5-018
-- Pennsylvania Department of Labor and Industry: US-PAS5-004
+- Pennsylvania Department of Labor and Industry: US-PAS5-004, US-PAV6B-007
 - Pennsylvania Department of Labor and Industry, Bureau of Labor Law Compliance: US-PAS5-003
 - Pennsylvania Department of Labor and Industry, Office of UC Benefits: US-PAS5-014
 - Pennsylvania Department of Labor and Industry, Office of UC Tax Services: US-PAS5-013
-- Pennsylvania Department of Revenue: US-PA-001, US-PAL-002, US-PAS5-009, US-PAS5-010, US-PAS5-011, US-PAS5-012
-- Pennsylvania General Assembly: US-PAS5-005, US-PAS5-017, US-PAS5-019, US-PAS5-020, US-PAS5-021
+- Pennsylvania Department of Revenue: US-PA-001, US-PAL-002, US-PAS5-009, US-PAS5-010, US-PAS5-011, US-PAS5-012, US-PAV6B-004, US-PAV6B-006
+- Pennsylvania General Assembly: US-PAS5-005, US-PAS5-017, US-PAS5-019, US-PAS5-020, US-PAS5-021, US-PAV6B-001, US-PAV6B-002, US-PAV6B-005, US-PAV6B-008, US-PAV6B-009, US-PAV6B-010
 - Pennsylvania General Assembly (Legislative Reference Bureau): US-PAS5-001
 - Pennsylvania General Assembly (palegis.us consolidated statutes): US-PAS5-007, US-PAS5-008
 - Pennsylvania General Assembly; administered by Dept of Labor & Industry (Bureau of Labor Law Compliance): US-PAP51-003

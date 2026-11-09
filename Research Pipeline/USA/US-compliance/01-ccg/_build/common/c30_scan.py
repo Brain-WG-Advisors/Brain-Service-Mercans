@@ -20,7 +20,7 @@ from docx import Document
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-DOCX = os.path.join(BASE, "01-ccg", "US-CCG-001-v1.0.docx")
+DOCX = sorted(glob.glob(os.path.join(BASE, "01-ccg", "US-CCG-001-v*.docx")))[-1]
 
 REG = {r["id"]: r for r in csv.DictReader(open(os.path.join(BASE, "00-official-sources", "legal-basis-register.csv"),
                                                encoding="utf-8"))}

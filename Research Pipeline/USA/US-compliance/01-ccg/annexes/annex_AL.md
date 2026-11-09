@@ -139,7 +139,7 @@ Municipal and county occupational taxes are withheld by the employer and remitte
 | Local occupational tax exists | [[FACT:al.local.occupational_tax.exists=True]] | from 2026-01-01 |  | S3 | Municipal/county occupational taxes withheld by the employer, remitted to the city/county; ADOR does not administer them. No state census. |
 | Local leeds rate | [[FACT:al.local.leeds.rate=1]] % | from 2026-01-01 |  | S8 | City of Leeds: [[FACT:al.local.leeds.rate=1]] % of gross earnings, monthly return to Avenu, annual reconciliation, show on pay stub, records 5 years. A Birmingham occupational tax rate is not confirmed by an official source. |
 
-Not yet published [[GAP:RQ-458]]: Local occupational tax census: not established from an official source.
+Not configured in this release [[GAP:RQ-458]]: Local occupational tax census: not established from an official source.
 
 ## AL.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
@@ -149,7 +149,7 @@ Employer-only UI ([[FACT:al.sui.employee.rate=0]] % employee) on wages up to the
 |---|---|---|---|---|---|
 | SUI wage base | USD [[FACT:al.sui.wage_base=8,000]] | from 2026-01-01 |  | S9 | 25-4-16(b)(1), fixed in statute; other-state UC wages count toward it. |
 | SUI new employer rate | [[FACT:al.sui.new_employer.rate=2.7]] % | from 2026-01-01 |  | S10 |  |
-| SUI employer rate min | [[FACT:al.sui.employer.rate.min=0.2]] % | from 2026-01-01 |  | S10 | Range [[FACT:al.sui.employer.rate.min=0.20]]%-[[FACT:al.sui.employer.rate.max=6.80]]% incl. [[FACT:al.sui.esa.rate=0.06]] % ESA across schedules A-D plus shared cost; 2026 schedule letter/shared cost not located. |
+| SUI employer rate min | [[FACT:al.sui.employer.rate.min=0.2]] % | from 2026-01-01 |  | S10 | Range [[FACT:al.sui.employer.rate.min=0.20]]%-[[FACT:al.sui.employer.rate.max=6.80]]% incl. [[FACT:al.sui.esa.rate=0.06]] % ESA across schedules A-D plus shared cost; the 2026 schedule letter and shared cost are not stated in this source. |
 | SUI employer rate max | [[FACT:al.sui.employer.rate.max=6.8]] % | from 2026-01-01 |  | S10 |  |
 | SUI esa rate | [[FACT:al.sui.esa.rate=0.06]] % | from 2026-01-01 |  | S10 | Employment Security Enhancement Assessment inside the UC rate; no FUTA credit for it. |
 | SUI employee rate | [[FACT:al.sui.employee.rate=0]] % | from 2026-01-01 |  | S11 | No UC tax withheld from employees. |

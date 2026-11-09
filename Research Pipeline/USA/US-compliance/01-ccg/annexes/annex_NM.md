@@ -105,7 +105,7 @@ Rules:
 | `nm.sui.wage_base` | [[FACT:nm.sui.wage_base=34800]] USD | 2026-01-01 | 2026-12-31 | US-NMP51-001 (A.2, NM Department of Workforce Solutions) | 60% of state average earnings rounded up to 100 (not derivable) |
 | `nm.ui.rate.new_employer.min` | [[FACT:nm.ui.rate.new_employer.min=1.0]] percent | 2026-01-01 | 2026-12-31 | US-NMP51-002 (A.2, NM Department of Workforce Solutions) | greater of NAICS average or 1%; 2026 range 1.00-1.28 |
 
-- Not configured in this release [[GAP:RQ-121]]: SUI other-state wage credit and 51-1-42(F) exclusions not read.
+- Not configured in this release [[GAP:RQ-121]]: SUI other-state wage credit and 51-1-42(F) exclusions not verified against the official source.
 
 ## NM.4 Pay statement
 
@@ -130,7 +130,7 @@ Rules:
 - POA: ACD-31102; ES-905 or a third-party administrator login. (US-NMP51-004, US-NMP6-001)
 
 - Not configured in this release [[GAP:RQ-122]]: FYI-330 (31 Jan) vs TRD page (last day of Feb).
-- Not configured in this release [[GAP:RQ-123]]: TRD-41431/TAP bulk schema and TAP W-2 TXT layout not obtained.
+- Not configured in this release [[GAP:RQ-123]]: TRD-41431/TAP bulk schema and TAP W-2 TXT layout not verified against the official source.
 - Not configured in this release [[GAP:RQ-124]]: Filing-frequency thresholds not stated.
 
 ## NM.6 Leave
@@ -149,7 +149,7 @@ Rules:
 | `nm.term.final_pay.quit` | [[FACT:nm.term.final_pay.quit=next regular payday]] | 2026-01-01 | open | US-NMS5-014 (A.3, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | - |
 | `nm.term.vacation.payout` | [[FACT:nm.term.vacation.payout=owed if written policy grants it (vacation pay is wages)]] | 2017-11-14 | open | US-NMS5-003 (A.1, NM State Records Center and Archives (NMAC) / NM DWS Labor Relations Division) | 11.1.4.7(O) NMAC |
 
-- Not configured in this release [[GAP:RQ-125]]: The current text of NMSA 50-4-4 and 50-4-5 was not read; only an older reprint was available.
+- Not configured in this release [[GAP:RQ-125]]: The current text of NMSA 50-4-4 and 50-4-5 was not verified against the official source; only an older reprint was available.
 
 ## NM.8 Benefits in kind and taxable wages
 
@@ -163,7 +163,7 @@ No New Mexico rule is configured in this domain; the federal treatment in Annex 
 | `nm.garn.consumer.exempt.weekly.state` | [[FACT:nm.garn.consumer.exempt.weekly.state=480]] USD | 2023-07-01 | open | US-NMS5-015 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | 40 x 12.00 state minimum (US-NMS5-004) |
 | `nm.garn.support.max_rate` | [[FACT:nm.garn.support.max_rate=50]] percent | 2023-07-01 | open | US-NMS5-015 (A.1, New Mexico Legislature (nmlegis.gov, via Wayback 2026id_)) | - |
 
-- Not configured in this release [[GAP:RQ-126]]: The employer fee for child-support income withholding was not located (the agency site refused access).
+- Not configured in this release [[GAP:RQ-126]]: The employer fee for child-support income withholding was not established from an official source (the agency site refused access).
 
 ## NM.10 Collective agreements and prevailing wage
 
@@ -184,7 +184,7 @@ Indexation of each value is stated in the note of the value concerned.
 |---|---|---|---|---|---|
 | `nm.records.sick_leave.retention_months` | [[FACT:nm.records.sick_leave.retention_months=48]] months | 2022-07-01 | open | US-NMS5-002 (A.1, NM State Records Center and Archives (NMAC) / NM DWS Labor Relations Division) | - |
 
-- Not configured in this release [[GAP:RQ-127]]: The Social Security number truncation rule (NMSA 57-12B), consent for electronic pay statements and the paycard rule were not read (the legislature site refused access).
+- Not configured in this release [[GAP:RQ-127]]: The Social Security number truncation rule (NMSA 57-12B), consent for electronic pay statements and the paycard rule were not verified against the official source (the legislature site refused access).
 
 ## NM.13 Live legal change
 

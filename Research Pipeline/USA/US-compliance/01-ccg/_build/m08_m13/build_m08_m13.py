@@ -131,10 +131,9 @@ def m08():
          + B("fed.paid_leave.private_employers.exists", "a federal paid-leave mandate exists", "no federal paid-leave mandate"),
          "—", REG("fed.paid_leave.private_employers.exists")),
     ])
-    L += ["", "FMLA eligibility (employer size, employee service and hours) is not carried as a fact. "
-          + F.gap("FMLA employer-coverage and employee-eligibility thresholds (29 U.S.C. 2611) are not keyed.", "fed.fmla.eligibility"),
-          "", "Paid sick leave for federal contractors under Executive Order 13706: "
-          + F.gap(F.GAP_TEXT["fed.eo13706.sick_leave.accrual"], "fed.eo13706.sick_leave.accrual"), ""]
+    L += ["", f"FMLA eligibility (29 U.S.C. 2611): {T('fed.fmla.eligibility')} {REG('fed.fmla.eligibility')}.",
+          "", f"Paid sick leave for federal contractors under Executive Order 13706: {T('fed.eo13706.sick_leave.accrual')} "
+          f"{REG('fed.eo13706.sick_leave.accrual')}.", ""]
     # state paid sick leave table
     L += ["**State paid sick leave (Table 8.1.1).** Accrual is per hour worked, so it follows the hours actually worked. "
           "A cap limits either the annual accrual or the use, as the key says. Paid sick leave does not have to be paid out at separation "
@@ -178,8 +177,7 @@ def m08():
           "employer's approved insurer, not by payroll (Table 8.1.5). The employee's PFML contribution withheld by payroll "
           f"counts as W-2 wages ({B('fed.pfml.employee_contribution.is_w2_wages', 'employee contribution is W-2 wages', 'not W-2 wages')}) "
           f"{REG('fed.pfml.employee_contribution.is_w2_wages')}.",
-          "- **Employer top-up of a State benefit.** The facts do not key how an employer supplement paid alongside a State "
-          "benefit is taxed. " + F.gap("treatment of an employer top-up paid during State PFML/TDI leave is not keyed.", "fed.pfml.employer_top_up.treatment")]
+          f"- **Employer top-up of a State benefit.** {T('fed.pfml.employer_top_up.treatment')} {REG('fed.pfml.employer_top_up.treatment')}."]
 
     L += H3(M, "8.1", "Which wage types are affected by unpaid/partially paid leave?")
     L += ["The hours-based earnings for the absent hours are not paid. Every wage type whose base follows those hours "
@@ -404,8 +402,7 @@ def m09():
           f"({T('fed.tax_year.basis')}) {REG('fed.tax_year.basis')}. A retroactive increase paid in 2026 is 2026 wages. It takes the 2026 "
           "tables and the 2026 wage bases, even when it relates to 2025. Massachusetts PFML is the exception: its rate follows the wages "
           f"earned date {REG('ma.pfml.total.rate')}. "
-          + F.gap("the federal classification of back pay and retroactive increases (supplemental or regular wages) is not keyed.",
-                  "fed.backpay.treatment")]
+          f"Back pay and retroactive increases: {T('fed.backpay.treatment')} {REG('fed.backpay.treatment')}."]
 
     L += H3(M, "9.2", "For arrears, how are contributions and deductions computed?")
     L += ["- Arrears paid now are wages of the payment period. OASDI is due on the lesser of the arrears and the remaining "
@@ -580,7 +577,7 @@ def m10():
         ["New Jersey withholding representative appointment form", T("sir.nj.withholding.agent_authorization"), "2026-06-09", REG("sir.nj.withholding.agent_authorization")],
         ["District of Columbia withholding representative form", T("sir.dc.withholding.agent_authorization"), "2026-09-16", REG("sir.dc.withholding.agent_authorization")],
         ["Texas UI representation form", T("sir.tx.ui.agent_authorization"), "2026-03-13", REG("sir.tx.ui.agent_authorization")]])
-    L += ["", "TY2027 federal indexation is not yet published: " + F.gap(F.GAP_TEXT["fed.indexation.publication_2027"], "fed.indexation.publication_2027")]
+    L += ["", f"TY2027 federal indexation: {T('fed.indexation.publication_2027')} {REG('fed.indexation.publication_2027')}."]
     L += H3(M, "10.5", "What documentation or annual statements must be provided to employees?")
     L += [f"- **Form W-2** by {T('fed.w2.due_date')} {REG('fed.w2.due_date')}. For a terminated employee: {T('fed.w2.terminated_employee.furnishing')} "
           f"{REG('fed.w2.terminated_employee.furnishing')}. State examples: Delaware within {T('de.report.w2.employee_on_termination_days')} days of termination on request "
@@ -629,6 +626,17 @@ def m11():
          + T("ga.pit.rate.flat", ef="2026-01-01") + "% (retroactive to 1 January); law " + T("ga.live.hb463.status")
          + ". Withholding examples dated from 2026-05-11 (Module 12)",
          REG("ga.wh.rate", ef="2026-01-01") + " " + REG("ga.wh.rate", ef="2026-05-11")),
+        # v1.1 (V11 gap merge): GA all-employer UI e-filing and the US-Romania totalization agreement (C41 mid-year dates)
+        ("Georgia UI wage report (DOL-4N) electronic filing", "Electronic filing for all employers from 2026-08-09 ("
+         + T("ga.report.sui.efile_all_employers") + "); the threshold of " + T("ga.report.sui.efile_threshold_employees")
+         + " employees applies to filings to 2026-08-08",
+         REG("ga.report.sui.efile_all_employers") + " " + REG("ga.report.sui.efile_threshold_employees")),
+        ("US-Romania totalization agreement", "In force from 2026-09-01 (SSA list of agreements in force); FICA exemption while the agreement "
+         "makes the wages subject only to the foreign system (Module 5)",
+         REG("fed.fica.totalization.agreements_in_force") + " " + REG("fed.fica.totalization.exemption_rule")),
+        # v1.1 QA r1 (C41): the FL reemployment-tax XML package is dated 2026-09-28 (register US-FLV6-001 re-dated)
+        ("Florida reemployment tax XML package (RT-6 file)", "From 2026-09-28: " + T("fl.report.sui.xml_changes_2026") + " (Annex FL)",
+         REG("fl.report.sui.xml_changes_2026")),
         ("Ohio withholding tables", "Effective " + T("oh.wh.tables.effective_from"), REG("oh.wh.tables.effective_from")),
         ("Indiana county rates", T("in.county.change_dates"), REG("in.county.change_dates")),
         ("Idaho single zero bracket (biweekly)", TV("id.wh.zero_bracket.single.biweekly"), REG("id.wh.zero_bracket.single.biweekly", on="2026-08-01")),
@@ -739,7 +747,9 @@ def m11():
          REG("fed.bik.trump_account.employer_contribution_max")),
         ("Moving expenses and bicycle commuting", B("fed.bik.moving_and_bicycle.excluded", "Excluded", "Not excluded (taxable wages)"),
          REG("fed.bik.moving_and_bicycle.excluded")),
-        ("Business mileage reimbursement", F.gap(F.GAP_TEXT["fed.bik.business_mileage.rate"], "fed.bik.business_mileage.rate"), "—"),
+        ("Business mileage reimbursement", f"Business standard mileage rate USD {T('fed.bik.business_mileage.rate', on='2026-03-01')} per mile "
+         f"for 2026-01-01 to 2026-06-30; USD {T('fed.bik.business_mileage.rate', on='2026-09-01')} per mile from 2026-07-01",
+         REG("fed.bik.business_mileage.rate", on="2026-03-01") + " " + REG("fed.bik.business_mileage.rate", on="2026-09-01")),
     ])
     L += ["", f"ACA affordability percentage for 2026: {T('fed.aca.affordability.rate')}% {REG('fed.aca.affordability.rate')}."]
     L += ["", "The population coverage matrix (federal and multistate cut of every special population) follows as §11.3."]

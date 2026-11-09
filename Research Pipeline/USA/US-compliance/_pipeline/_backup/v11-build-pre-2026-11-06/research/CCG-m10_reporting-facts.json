@@ -1,0 +1,95 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "m10_reporting",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
+ "_annex_keys_cited": {
+  "fed.deposit.monthly_max_lookback_liability": "CCG-annex_FED-facts.json (US-FEDS5-004)",
+  "fed.deposit.next_day_threshold": "CCG-annex_FED-facts.json (US-FEDS5-004)",
+  "fed.form941.frequency": "CCG-annex_FED-facts.json (US-FED-015)",
+  "fed.form940.due": "CCG-annex_FED-facts.json (US-FEDS5-031)",
+  "fed.w2.due_date": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "fed.w2.no_withholding_threshold": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "fed.w2.box12.new_codes": "CCG-annex_FED-facts.json (US-FEDS5-007)",
+  "multi.w2.states_per_form": "CCG-annex_MULTI-facts.json (US-MULTIS5-011)",
+  "fed.aca.ale.fte_threshold": "CCG-annex_FED-facts.json (US-FEDS5-012)",
+  "fed.aca.efile_threshold": "CCG-annex_FED-facts.json (US-FEDS5-012)",
+  "fed.davis_bacon.certified_payroll.frequency": "CCG-annex_FED-facts.json (US-FEDS5-027)",
+  "fed.reporting_agent.authorization": "CCG-annex_FED-facts.json (US-FED-008)"
+ },
+ "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
+ "facts": [
+  {
+   "key": "fed.form1042s.channel",
+   "value": "IRIS (FIRE retired for TY2026); due 2027-03-15",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-016",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "IRS",
+   "url": "https://www.irs.gov/pub/irs-pdf/p515.pdf",
+   "confidence": "high"
+  },
+  {
+   "key": "fed.efw2.ty2026_changes",
+   "value": "TY2026 changes: RE adds Employer Signature PIN (319-328); RW adds Box 14b Primary/Secondary Treasury Tipped Occupation Code (490-492 / 493-495); RO/RU split Codes A and B into separate money fields (combined A+B field valid through TY2025 only), add money fields for existing Codes J, K, L, P and new Codes TA, TP, TT; SS wage base 184,500; FIRE replaced by IRIS",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-032",
+   "tier": "A.2",
+   "verification_method": "direct artifact inspection",
+   "authority": "Social Security Administration",
+   "url": "https://www.ssa.gov/employer/efw/26efw2.pdf",
+   "confidence": "high",
+   "note": "LEVEL: employer reporting. Detail in CCG-annex_FED and RSPEC (rspec.fed.efw2.*)."
+  },
+  {
+   "key": "fed.efw2.record_length",
+   "value": 512,
+   "unit_of_measure": "bytes",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-032",
+   "tier": "A.2",
+   "verification_method": "direct artifact inspection",
+   "authority": "Social Security Administration",
+   "url": "https://www.ssa.gov/employer/efw/26efw2.pdf",
+   "confidence": "high"
+  }
+ ],
+ "unresolved": [
+  {
+   "key": "fed.form940.instructions_current",
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): Final TY2026 Instructions for Form 940 are not issued (irs-pdf/i940.pdf is still the 2025 edition, last modified 2025-11-25). An early-release draft posted 2026-09-22 shows: due date Feb 1, 2027 (Feb 10, 2027 if all FUTA deposited); FUTA wage base 7,000 unchanged; dependent care exclusion limit raised to 7,500. Treat as draft until final.",
+   "attempted": [
+    "2026-11-06 V11 validation round: documented_limitation: Final TY2026 Instructions for Form 940 are not issued (irs-pdf/i940.pdf is still the 2025 edition, last modified 2025-11-25). An early-release draft posted 2026-09-22 shows: due date Feb 1, 2027 (Feb 10, 2027 if all FUTA deposited); FUTA wage base 7,000 unchanged; dependent care exclusion limit raised to 7,500. Treat as draft until final."
+   ],
+   "what_would_close_it": "IRS releases of the TY2026 instructions (usually Dec-Jan).",
+   "blocking": false
+  },
+  {
+   "key": "multi.newhire.registration_channel",
+   "why": "HHS/OCSS multistate employer registration page returned 202 empty (MULTI-OQ-6); statute 42 U.S.C. 653a(b)(1)(B) carries the rule.",
+   "attempted": [
+    "https://www.acf.hhs.gov/css/form/multistate-employer-registration-form (202 empty)",
+    "browser pass P1 2026-11-02 (_research/stage5/browser-pass-P1.md): acf.gov new-hire page read (US-FEDB5-001): multistate employers register with HHS and designate one state; guessed acf.gov/css/employers/employer-responsibilities/multistate-employer-registration = 404; MI portal names acf.hhs.gov/css/resource/multistate-employer-registration-form-instructions (not read)"
+   ],
+   "what_would_close_it": "Browser read of the ACF multistate registration page.",
+   "blocking": false
+  },
+  {
+   "key": "fed.iwo.revised_form.state_golive",
+   "why": "DOCUMENTED LIMITATION (V11 2026-11-06): No OCSE Action Transmittal with state go-live dates for the gig-worker revision (ICR 202607-0970-002) was found. The OIRA record gives states an extension to reprogram and then requires the revised form, without a date. The posted IWO instructions (OMB 0970-0154) show expiry 08/31/2029. Closing document: an OCSE Action Transmittal; two guessed acf.gov/css paths returned 404.",
+   "attempted": [
+    "2026-11-06 V11 validation round: documented_limitation: No OCSE Action Transmittal with state go-live dates for the gig-worker revision (ICR 202607-0970-002) was found. The OIRA record gives states an extension to reprogram and then requires the revised form, without a date. The posted IWO instructions (OMB 0970-0154) show expiry 08/31/2029. Closing document: an OCSE Action Transmittal; two guessed acf.gov/css paths returned 404."
+   ],
+   "what_would_close_it": "OCSE Action Transmittal implementing ICR 202607-0970-002.",
+   "blocking": false
+  }
+ ],
+ "_synthesis_d": "Synthesis D 2026-11-02: browser-pass P1/P2 rows (S5B-P1/P2) and EFW2 TY2026 merged; see _research/synthesis-D/SYNTHESIS-D.md"
+}

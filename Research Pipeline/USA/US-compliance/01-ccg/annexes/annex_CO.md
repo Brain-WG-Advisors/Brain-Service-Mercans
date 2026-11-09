@@ -30,7 +30,7 @@ State minimum wage USD [[FACT:co.minwage.hourly=15.16]] for 2026; Denver USD [[F
 | Wage claim max amount | USD [[FACT:co.wage_claim.max_amount=7,500]] | 2026-01-01 to 2026-06-30 |  | S1 | Administrative wage-claim ceiling per employee. |
 | Wage claim max amount | USD [[FACT:co.wage_claim.max_amount=13,000]] | 2026-07-01 to 2027-12-31 |  | S1 |  |
 
-Not yet published [[GAP:RQ-491]]: Local minimum wage other cities: not established from an official source.
+Not configured in this release [[GAP:RQ-491]]: Local minimum wage other cities: not established from an official source.
 
 Not configured in this release [[GAP:RQ-496]]: Minimum wage hourly next year: not established from an official source.
 
@@ -93,8 +93,8 @@ if monthly_city_earnings >= city_threshold: employee_OPT = city_employee_amount;
 | Local OPT glendale employee monthly | USD [[FACT:co.local.opt.glendale.employee_monthly=5]] | from 2026-01-01 |  | S10 | Employer [[FACT:co.local.opt.glendale.employee_monthly=5]]/month; trigger more than 750 in the month. |
 | Local OPT glendale employer monthly | USD [[FACT:co.local.opt.glendale.employer_monthly=5]] | from 2026-01-01 |  | S10 |  |
 | Local OPT glendale threshold monthly | USD [[FACT:co.local.opt.glendale.threshold_monthly=750]] | from 2026-01-01 |  | S10 |  |
-| Local OPT denver employee monthly | USD [[FACT:co.local.opt.denver.employee_monthly=5.75]] | from 2025-01-01 |  | S11 | Earnings >= 500/month; 2025 Tax Guide edition, 2026 edition not read. |
-| Local OPT denver employer monthly | USD [[FACT:co.local.opt.denver.employer_monthly=4]] | from 2025-01-01 |  | S12 | 2026 edition not read. |
+| Local OPT denver employee monthly | USD [[FACT:co.local.opt.denver.employee_monthly=5.75]] | from 2025-01-01 |  | S11 | Earnings >= 500/month; 2025 Tax Guide edition, 2026 edition not verified. |
+| Local OPT denver employer monthly | USD [[FACT:co.local.opt.denver.employer_monthly=4]] | from 2025-01-01 |  | S12 | 2026 edition not verified. |
 | Local OPT denver threshold monthly | USD [[FACT:co.local.opt.denver.threshold_monthly=500]] | from 2025-01-01 |  | S11 |  |
 | Local minimum wage boulder county unincorporated hourly | USD [[FACT:co.local_minwage.boulder_county_unincorporated.hourly=16.82]] | 2026-01-01 to 2026-12-31 |  | S13 | Unincorporated Boulder County (ordinance amended November 2025). |
 | Local minimum wage boulder county unincorporated hourly | USD [[FACT:co.local_minwage.boulder_county_unincorporated.hourly=17.43]] | from 2027-01-01 |  | S13 |  |

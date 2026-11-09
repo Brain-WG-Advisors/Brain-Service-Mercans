@@ -26,6 +26,35 @@ if _LIB not in sys.path:
     sys.path.insert(0, _LIB)
 
 MANIFEST = json.load(open(os.path.join(BASE, "_pipeline", "build-manifest.json"), encoding="utf-8"))
+# v1.1 rebuild: the package overlay (build-side; the manifest is owned by the orchestrator) sets the
+# package version / issue date and carries the Version Control change-log rows.
+_OVL_P = os.path.join(BASE, "_pipeline", "package-overlay-v1.1.json")
+OVERLAY = json.load(open(_OVL_P, encoding="utf-8")) if os.path.isfile(_OVL_P) else None
+if OVERLAY:
+    MANIFEST["package"] = dict(MANIFEST["package"], **OVERLAY["package"])
+
+
+def changelog_rows(artifact, status, unit=None):
+    """[(version, date, description, status)] for the Version Control sheet / table: the previous
+    version first, then the overlay version with what changed (per State), why and the source.
+    v1.1 QA r1: OVERLAY["changes"][artifact] may be a dict keyed by unit (RSPEC: document id), each entry either
+    {"text": <full row>} (no content change) or {"items": [...], "sources": "..."}; rows are written from a diff
+    against the _v1.0 copy, so a specification never claims a change it does not contain."""
+    if not OVERLAY:
+        return None
+    pv = OVERLAY["previous"]
+    rows = [(pv["version"], pv["date"], "Initial issue.", pv["status"])]
+    ch = OVERLAY["changes"][artifact]
+    if isinstance(ch, dict):
+        e = ch[unit]
+        if "text" in e:
+            desc = e["text"]
+        else:
+            desc = "; ".join(e["items"]) + ". Why: " + OVERLAY["why"] + (" Source: " + e["sources"] + "." if e.get("sources") else "")
+    else:
+        desc = "; ".join(ch) + ". Why: " + OVERLAY["why"] + " Source: " + OVERLAY["sources"][artifact] + "."
+    rows.append((OVERLAY["package"]["version"], OVERLAY["package"]["issue_date"], desc, status))
+    return rows
 PKG = MANIFEST["package"]["version"]
 ISSUE = dt.datetime.strptime(MANIFEST["package"]["issue_date"], "%Y-%m-%d")
 AUTHOR = MANIFEST["package"]["issued_by"]

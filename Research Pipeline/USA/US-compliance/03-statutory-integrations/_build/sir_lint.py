@@ -189,8 +189,11 @@ def run(path):
     if ft != S.FOOTER:
         rep["C12"].append(f"footer {ft!r} != {S.FOOTER!r}")
     # version history: exactly one row, package version
-    vh = [t for t in d.tables if [c.text for c in t.rows[0].cells] == ["Version", "Date", "Author", "Status"]]
-    if len(vh) != 1 or len(vh[0].rows) != 2 or vh[0].rows[1].cells[0].text != f"v{S.PKG}":
+    vh = [t for t in d.tables if [c.text for c in t.rows[0].cells][:4] == ["Version", "Date", "Author", "Status"]]
+    # v1.1: with a package overlay the history carries the previous version and this one (change log asked by the
+    # owner, 2026-11-06); the last row must be the package version
+    nrows = 3 if S.C.OVERLAY else 2
+    if len(vh) != 1 or len(vh[0].rows) != nrows or vh[0].rows[-1].cells[0].text != f"v{S.PKG}":
         rep["C12"].append("version history is not one row with the package version")
     # outbound register
     spec_ids = {s["id"]: s for s in P.specs()}
@@ -223,7 +226,7 @@ def run(path):
                        sections=len(d.sections), tags=rep["tags"])
     # ------------------------------------------------------------------------- GAP
     rq = json.load(open(os.path.join(S.RESEARCH, "SIR-research-request.json"), encoding="utf-8"))
-    known = {r["_gap_id"] for r in rq["requests"]}
+    known = {r.get("_gap_id") for r in rq["requests"]} - {None}   # v1.1 build 2: a request without a GAP id (RQ-40) is allowed
     gp = {g["id"] for g in json.load(open(os.path.join(S.RESEARCH, "gaps.json"), encoding="utf-8"))["gaps"]}
     for gid in sorted(rep["gaps"]):
         if gid not in known:

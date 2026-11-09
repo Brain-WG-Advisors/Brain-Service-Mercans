@@ -21,7 +21,7 @@ Not configured in this release [[GAP:RQ-235]]: No consent statute located beyond
 
 ## LA.2 Income tax withholding
 
-Certificate R-1300 (L-4); edition not re-fetched (404). 2027 standard deduction unpublished.
+Certificate R-1300 (L-4); the current edition is not confirmed. 2027 standard deduction unpublished.
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
@@ -32,7 +32,7 @@ Certificate R-1300 (L-4); edition not re-fetched (404). 2027 standard deduction 
 | `la.wh.supplemental.method` | [[FACT:la.wh.supplemental.method=withheld like regular wages; no flat supplemental rate (vacation pay likewise)]] | 2026-01-01 to open | US-LAP51-002 (Louisiana Department of Revenue; A.3, quoted from authority page, confidence high) |  |
 | `la.wh.who` | [[FACT:la.wh.who=residents; nonresidents performing services in LA (subject to the 30-day rule); residents working outside LA if not withheld in the other state]] | 2026-01-01 to open | US-LAS5-003 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) |  |
 
-Not yet published [[GAP:RQ-236]]: State treatment of s.125, 401(k), HSA, transit, GTL not read (LDR FAQ 403/404).
+Not configured in this release [[GAP:RQ-236]]: State treatment of s.125, 401(k), HSA, transit, GTL not confirmed from an LDR source.
 
 ## LA.2b Non-resident regime and reciprocity
 
@@ -40,7 +40,7 @@ Not yet published [[GAP:RQ-236]]: State treatment of s.125, 401(k), HSA, transit
 |---|---|---|---|---|
 | `la.nonres.mobile_workforce.days` | [[FACT:la.nonres.mobile_workforce.days=30]] days | 2026-01-01 to open | US-MULTIS5-021 (Louisiana Legislature; A.1, quoted from authority page, confidence high) | Act 382 (2025) R.S. 47:112.2(A), 47:248 [US-MULTIS5-021]; LAC 61:I.1923 adopted LR 52:358 (2026-03-20): <= 30 days exempt (C.1.a says "less than 30" - statute governs); employee notifies within 10 days from day 31; employer begins withholding and reports on L-1 from the period of the 31st day; exemption lost with other LA-source income; home-state condition repealed. Level withholding. Catch-up of days 1-30 open. Build: per-employee LA workday counter (employer + related entities) and other-LA-income flag. |
 
-Not yet published [[GAP:RQ-237]]: From day 31, whether days 1-30 are withheld as a lump catch-up in the period of the 31st day: MULTI row (Act text) says yes; the regulation only says begin withholding in that period.
+Not configured in this release [[GAP:RQ-237]]: From day 31, whether days 1-30 are withheld as a lump catch-up in the period of the 31st day: MULTI row (Act text) says yes; the regulation only says begin withholding in that period.
 
 ## LA.2c Local wage taxes
 
@@ -58,9 +58,9 @@ No SDI/TDI/PFML [US-LAP52-002, DOL WB list]. No employee contribution.
 | `la.sui.employer.rate.max` | [[FACT:la.sui.employer.rate.max=6.2]] % | 2026-01-01 to 2026-12-31 | US-LAP9V-002 (Louisiana Workforce Commission; A.2, derived arithmetically, confidence medium) | Derivation recorded in register row US-LAP9V-002. |
 | `la.sui.employer.rate.min` | [[FACT:la.sui.employer.rate.min=0.09]] % | 2026-01-01 to 2026-12-31 | US-LASUI-001 (Louisiana Workforce Commission; A.2, quoted from authority page, confidence high) | 2026 LWC rate table: [[FACT:la.sui.employer.rate.min=0.09]]% at reserve ratio 9.5+ to [[FACT:la.sui.employer.rate.max=6.20]]%. |
 | `la.sui.new_employer.rate` | [[FACT:la.sui.new_employer.rate=average rate of its NAICS industrial classification; experience rating after 24 months]] | 2026-01-01 to open | US-LAP9V-001 (Louisiana Workforce Commission; A.2, quoted from authority page, confidence high) | Social charges (non-charge, IWTP, Integrity) inside the total rate; IWTP and Integrity not FUTA-creditable [US-LAS5-007]. |
-| `la.sui.wage_base` | [[FACT:la.sui.wage_base=7,000]] USD | 2026-01-01 to 2026-12-31 | US-LAP9V-001 (Louisiana Workforce Commission; A.2, quoted from authority page, confidence medium) | 23:1536 mechanism not read. |
+| `la.sui.wage_base` | [[FACT:la.sui.wage_base=7,000]] USD | 2026-01-01 to 2026-12-31 | US-LAP9V-001 (Louisiana Workforce Commission; A.2, quoted from authority page, confidence medium) | 23:1536 mechanism not verified. |
 
-Not configured in this release [[GAP:RQ-238]]: R.S. 23:1536 wage-base mechanism and other-state wage credit not read.
+Not configured in this release [[GAP:RQ-238]]: R.S. 23:1536 wage-base mechanism and other-state wage credit not verified against the official source.
 
 ## LA.4 Pay statement
 
@@ -76,7 +76,7 @@ No itemised pay-statement statute in R.S. 23:631-638 (all read) [US-LAR3-002]; o
 | `la.report.w2.efile_threshold` | [[FACT:la.report.w2.efile_threshold=50]] forms | 2026-01-01 to open | US-LAS5-009 (Louisiana Department of Revenue; A.3, quoted from authority page, confidence high) |  |
 | `la.report.wh.l1` | [[FACT:la.report.wh.l1=L-1 quarterly, electronic (LaTAP/software), zero returns required, due Apr 30 / Jul 31 / Oct 31 / Jan 31; payment quarterly < 500/month average, monthly 500 to < 5,000, semi-monthly >= 5,000]] | 2026-01-01 to open | US-LAS5-003 (Louisiana Department of Revenue; A.2, quoted from authority page, confidence high) | [US-LAS5-008]. |
 
-Not configured in this release [[GAP:RQ-239]]: LaWage bulk W-2 file format (EFW2 or LA layout) not read.
+Not configured in this release [[GAP:RQ-239]]: LaWage bulk W-2 file format (EFW2 or LA layout) not verified against the official source.
 
 Not configured in this release [[GAP:RQ-597]]: UI quarterly form name and upload layout (US-LAS5-007 names the channel, LWC online services, only).
 
@@ -86,7 +86,7 @@ Not configured in this release [[GAP:RQ-597]]: UI quarterly form name and upload
 |---|---|---|---|---|
 | `la.leave.jury.paid_days` | [[FACT:la.leave.jury.paid_days=1]] days | 2026-01-01 to open | US-LAS5-013 (Louisiana State Legislature; A.1, direct artifact inspection, confidence high) | R.S. 23:965: one paid day without loss of wages or leave; fines 100-500 / 100-1,000 + reinstatement. |
 
-Not configured in this release [[GAP:RQ-241]]: Voting, military, school conference, bone marrow/organ donation leave not read.
+Not configured in this release [[GAP:RQ-241]]: Voting, military, school conference, bone marrow/organ donation leave not verified against the official source.
 
 ## LA.7 Termination and final pay
 
@@ -97,11 +97,11 @@ Not configured in this release [[GAP:RQ-241]]: Voting, military, school conferen
 | `la.final_pay.rule` | [[FACT:la.final_pay.rule=discharge or resignation: earlier of next regular payday (for the cycle worked) or 15 days; customary place/method or prepaid mail; CBA override; earned eligible vacation is due and cannot be forfeited; commissions/bonuses due if earned (23:631)]] | 2026-01-01 to open | US-LAR3-002 (Louisiana State Legislature; A.1, quoted from authority page, confidence high) |  |
 | `la.test_cost_recovery.working_days` | [[FACT:la.test_cost_recovery.working_days=90]] working days | 2026-01-01 to open | US-LAS5-004 (Louisiana State Legislature; A.1, direct artifact inspection, confidence high) | 23:634(B): only if pay >= federal MW + 1 and not part-time/seasonal. |
 
-Not configured in this release [[GAP:RQ-242]]: LWC Form 1 separation duty not read.
+Not configured in this release [[GAP:RQ-242]]: LWC Form 1 separation duty not verified against the official source.
 
 ## LA.8 Benefits in kind and taxable wages
 
-No LA source read (LDR cafeteria FAQ 404); LA starts from federal AGI (lead). Confidence 30%.
+Not confirmed from an LDR source; LA starts from federal AGI (lead). Confidence 30%.
 
 ## LA.9 Deductions and garnishments
 
@@ -111,7 +111,7 @@ No LA source read (LDR cafeteria FAQ 404); LA starts from federal AGI (lead). Co
 | `la.garn.child_support.max_percent` | [[FACT:la.garn.child_support.max_percent=50]] % | 2026-01-01 to open | US-LAS5-012 (Louisiana State Legislature; A.1, direct artifact inspection, confidence high) | Exemption 50% child support, 60% spousal (stricter than CCPA); mixed/unclear DCFS order = child support. |
 | `la.garn.creditor.exempt_percent` | [[FACT:la.garn.creditor.exempt_percent=75]] % | 2026-01-01 to open | US-LAS5-012 (Louisiana State Legislature; A.1, direct artifact inspection, confidence high) | R.S. 13:3881(A)(1)(a): [[FACT:la.garn.creditor.exempt_percent=75]]% of weekly disposable exempt, never less than 30 x federal MW (CCPA-equivalent); disposable also after retirement/medical/life-insurance deductions and amounts owed to employer. |
 
-Not configured in this release [[GAP:RQ-243]]: IWO employer fee, priority, SDU remittance not read.
+Not configured in this release [[GAP:RQ-243]]: IWO employer fee, priority, SDU remittance not verified against the official source.
 
 ## LA.10 Collective agreements and prevailing wage
 
@@ -177,7 +177,7 @@ Computed result = published [[FACT:la.oracle.biweekly_4600.withholding=111.54]] 
 - FLSA-exempt staff outside 23:633; part-time/seasonal excluded from test-cost recovery [US-LAS5-004].
 - Agricultural, clergy, statutory, government: no state rule read (federal assumed,). Military spouses: L-4E exists (title only).
 
-Not configured in this release [[GAP:RQ-247]]: Household withholding, ag/clergy/statutory/government UI coverage (R.S. 23:1472) and L-4E reporting not read.
+Not configured in this release [[GAP:RQ-247]]: Household withholding, ag/clergy/statutory/government UI coverage (R.S. 23:1472) and L-4E reporting not verified against the official source.
 
 ## LA.16 Language
 

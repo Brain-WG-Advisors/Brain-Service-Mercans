@@ -28,15 +28,13 @@ Each parameter row gives its key, the period in force and its legal basis: the l
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
-| `il.pit.rate.flat` | [[FACT:il.pit.rate.flat=4.95]] % | 2026-01-01 to open | US-ILR3-001 (Illinois Department of Revenue; A.2, quoted from authority page, confidence high) | IL-700-T R-12/25 re-verified byte-identical 2026-11-02; 35 ILCS 5/201 not read this pass. |
+| `il.pit.rate.flat` | [[FACT:il.pit.rate.flat=4.95]] % | 2026-01-01 to open | US-ILR3-001 (Illinois Department of Revenue; A.2, quoted from authority page, confidence high) | IL-700-T R-12/25 confirmed; 35 ILCS 5/201 not verified. |
 | `il.wh.certificate` | [[FACT:il.wh.certificate=IL-W-4 R-07/23 current; no exemptions if AGI > 500k joint / 250k other; none on file = no exemptions; changes effective next quarter date at least 30 days after filing]] | 2023-07-01 to open | US-ILS5-010 (Illinois Department of Revenue; A.2, direct artifact inspection, confidence high) |  |
 | `il.wh.exemption.line1` | [[FACT:il.wh.exemption.line1=2,925]] USD | 2026-01-01 to 2026-12-31 | US-ILR3-001 (Illinois Department of Revenue; A.2, quoted from authority page, confidence high) | Indexed by IDOR. |
 | `il.wh.exemption.line2` | [[FACT:il.wh.exemption.line2=1,000]] USD | 2026-01-01 to 2026-12-31 | US-ILR3-001 (Illinois Department of Revenue; A.2, quoted from authority page, confidence high) |  |
 | `il.wh.method` | [[FACT:il.wh.method=.0495 x (wages - exemptions/periods) + IL-W-4 Line 3; exemptions = Line 1 x 2,925 + Line 2 x 1,000 per year]] | 2026-01-01 to 2026-12-31 | US-ILR3-001 (Illinois Department of Revenue; A.2, quoted from authority page, confidence high) | No rounding rule (tables in cents); no separate supplemental rate - bonus/OT/commission are wages [US-ILR3-002]. |
 
-Not configured in this release [[GAP:RQ-198]]: 35 ILCS 5/201(b)(5.4) not read; no 2027 change confirmed.
-
-Not configured in this release [[GAP:RQ-199]]: No IDOR decoupling statement (HSA, s.125) read.
+Not configured in this release [[GAP:RQ-199]]: No Illinois Department of Revenue statement on the treatment of HSA and s.125 amounts was read. 35 ILCS 5/203(b) starts from federal adjusted gross income and lists no HSA or s.125 addition, so the federal exclusions carry over; this is a reading of the statute, not a Department statement.
 
 ## IL.2b Non-resident regime and reciprocity
 
@@ -63,9 +61,8 @@ Levies: Secure Choice Roth IRA payroll deduction [US-ILP52-002]; no other levy.
 | `il.sui.employer.rate.min` | [[FACT:il.sui.employer.rate.min=0.75]] % | 2026-01-01 to 2026-12-31 | US-ILS5-015 (Illinois Department of Employment Security; A.2, quoted from authority page, confidence high) | Range [[FACT:il.sui.employer.rate.min=0.750]]%-[[FACT:il.sui.employer.rate.max=7.050]]% incl. fund builder [[FACT:il.sui.fund_builder.rate=0.550]]%; small-employer option and state experience factor apply. |
 | `il.sui.fund_builder.rate` | [[FACT:il.sui.fund_builder.rate=0.55]] % | 2026-01-01 to 2026-12-31 | US-ILS5-015 (Illinois Department of Employment Security; A.2, quoted from authority page, confidence high) |  |
 | `il.sui.new_employer.rate` | [[FACT:il.sui.new_employer.rate=3.35]] % | 2026-01-01 to 2026-12-31 | US-ILS5-015 (Illinois Department of Employment Security; A.2, quoted from authority page, confidence high) | Administrative Support & Waste Management 3.450%. |
-| `il.sui.wage_base` | [[FACT:il.sui.wage_base=14,250]] USD | 2026-01-01 to 2026-12-31 | US-ILS5-015 (Illinois Department of Employment Security; A.2, quoted from authority page, confidence high) | same values as US-IL-002; 820 ILCS 405/235 formula not read; 2027 expected Dec 2026. |
-
-Not configured in this release [[GAP:RQ-200]]: 2027 wage base unpublished; 405/235 formula not read.
+| `il.sui.wage_base` | [[FACT:il.sui.wage_base=14,250]] USD | 2026-01-01 to 2026-12-31 | US-ILS5-015 (Illinois Department of Employment Security; A.2, quoted from authority page, confidence high) | same values as US-IL-002; 820 ILCS 405/235 formula not verified; 2027 expected Dec 2026. |
+| `il.sui.wage_base` | [[FACT:il.sui.wage_base=14,592]] USD | 2027-01-01 to open | US-ILV6-002 (Illinois General Assembly; A.1, quoted from authority page, confidence high) | 820 ILCS 405/235: 2027 and each later year [[FACT:il.sui.wage_base=14,592]] (2026: [[FACT:il.sui.wage_base=14,250]]). |
 
 ## IL.4 Pay statement
 
@@ -73,8 +70,6 @@ Not configured in this release [[GAP:RQ-200]]: 2027 wage base unpublished; 405/2
 |---|---|---|---|---|
 | `il.payslip.copy_response_days` | [[FACT:il.payslip.copy_response_days=21]] days | 2025-01-01 to open | US-ILS5-024 (Illinois General Assembly; A.1, direct artifact inspection, confidence high) |  |
 | `il.payslip.rules` | [[FACT:il.payslip.rules=pay stub each pay period; itemized deductions; payroll-card payees also hours, rate, deductions; stubs kept >= 3 years; copies within 21 days on request (max twice/12 months; former employees 1 year after separation); offer prior-year stubs if electronic access ends (115/10, P.A. 103-953)]] | 2025-01-01 to open | US-ILS5-024 (Illinois General Assembly; A.1, direct artifact inspection, confidence high) |  |
-
-Not configured in this release [[GAP:RQ-201]]: 56 Ill. Adm. Code 300.600 content items not read.
 
 ## IL.5 Statutory reporting
 
@@ -96,9 +91,7 @@ Not configured in this release [[GAP:RQ-201]]: 56 Ill. Adm. Code 300.600 content
 | `il.leave.plawa.accrual` | [[FACT:il.leave.plawa.accrual=1 h per 40 h worked up to 40 h per 12 months (front-load allowed); use after 90 days; exempt deemed 40 h/week; no separation payout unless in a vacation/PTO bank; tipped/commissioned paid at least full MW; not in Chicago/Cook]] | 2024-01-01 to open | US-ILS5-019 (Illinois Department of Labor; A.3, quoted from authority page, confidence medium) |  |
 | `il.leave.plawa.cap_hours` | [[FACT:il.leave.plawa.cap_hours=40]] hours | 2024-01-01 to open | US-ILS5-019 (Illinois Department of Labor; A.3, quoted from authority page, confidence medium) |  |
 
-Not yet published [[GAP:RQ-202]]: Chicago Paid Leave caps, carryover and separation payout by employer size not read (partial row).
-
-Not configured in this release [[GAP:RQ-578]]: The Cook County Paid Leave Substantive and Procedural Rules approved 2025-04-10 are listed on the CCHR page but not read; they may refine the FAQ (corrected 04/2024) details written in this annex.
+Not configured in this release [[GAP:RQ-202]]: Chicago Paid Leave caps, carryover and separation payout by employer size not verified against the official source (partial row).
 
 ## IL.7 Termination and final pay
 
@@ -108,8 +101,6 @@ IDES lists "Employee Separation Information" as an employer obligation [US-ILS5-
 |---|---|---|---|---|
 | `il.final_pay.rule` | [[FACT:il.final_pay.rule=in full at separation if possible, no later than next regularly scheduled payday (discharge or resignation); mailed on written request (115/5)]] | 2026-01-01 to open | US-ILS5-023 (Illinois General Assembly; A.1, second independent authority, confidence high) |  |
 | `il.final_pay.vacation_payout` | [[FACT:il.final_pay.vacation_payout=True]] | 2026-01-01 to open | US-ILS5-004 (Illinois Department of Labor; A.3, quoted from authority page, confidence high) | Earned vacation paid at final rate, no forfeiture (CBA exception); use-it-or-lose-it allowed with notice (56 IAC 300.520). No statutory severance. |
-
-Not configured in this release [[GAP:RQ-204]]: Whether Illinois requires a separation notice to the employee not identified.
 
 ## IL.8 Benefits in kind and taxable wages
 
@@ -138,28 +129,30 @@ State MW not indexed; Chicago July 1 CPI (capped); Cook July 1 CPI (suspended ab
 
 ## IL.12 Payroll data protection and records
 
-No SSN truncation rule found (815 ILCS 505/2RR and 530 not read).
+No SSN truncation rule found (815 ILCS 505/2RR and 530 not verified against the official source).
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
 | `il.bipa.retention_max_years` | [[FACT:il.bipa.retention_max_years=3]] years | 2026-01-01 to open | US-ILS5-025 (Illinois General Assembly; A.1, direct artifact inspection, confidence high) | 740 ILCS 14/15: written policy, destroy within 3 years of last interaction; notice + written release before collection (biometric time clocks). |
 | `il.records.paystub.retention_years` | [[FACT:il.records.paystub.retention_years=3]] years | 2025-01-01 to open | US-ILS5-024 (Illinois General Assembly; A.1, direct artifact inspection, confidence high) |  |
 
-Not configured in this release [[GAP:RQ-205]]: 815 ILCS 505/2RR and 815 ILCS 530 not read.
-
 ## IL.13 Live legal change
 
 | Parameter (key) | Value | In force | Legal basis | Note |
 |---|---|---|---|---|
+| `il.data_protection.ssn_paystub` | [[FACT:il.data_protection.ssn_paystub=A person may not publicly post/display an SSN, print it on access cards, transmit it over the Internet unless secure/encrypted, or print it on materials mailed to the individual unless law requires it. Pay statements are not named in the section text read; 815 ILCS 530 (PIPA breach notice) not verified]] | 2012-01-01 to open | US-ILV6-003 (Illinois General Assembly; A.1, quoted from authority page, confidence medium) | Register: US-ILV6-003 |
 | `il.leave.cook.paid_leave.accrual` | [[FACT:il.leave.cook.paid_leave.accrual=1 hour of paid leave per 40 hours worked, usable for any reason; FLSA-exempt employees deemed to work 40 hours a week; front-loading allowed.]] | 2023-12-31 to open | US-ILB5-301 (Cook County Commission on Human Rights; A.3, quoted from authority page, confidence high) |  |
 | `il.leave.cook.paid_leave.carryover_cap.min_hours` | [[FACT:il.leave.cook.paid_leave.carryover_cap.min_hours=40]] hours | 2023-12-31 to open | US-ILB5-301 (Cook County Commission on Human Rights; A.3, quoted from authority page, confidence high) | An employer carry-over cap may not be set below 40 hours. |
 | `il.leave.cook.paid_leave.in_force` | [[FACT:il.leave.cook.paid_leave.in_force=Cook County Paid Leave Ordinance in force from 2023-12-31 (2025-01-01 for park and school districts); does not apply in the City of Chicago (own ordinance); a prior Earned Sick Leave Ordinance opt-out does not carry over.]] | 2023-12-31 to open | US-ILB5-301 (Cook County Commission on Human Rights; A.3, quoted from authority page, confidence high) |  |
 | `il.leave.cook.paid_leave.payout_at_separation` | [[FACT:il.leave.cook.paid_leave.payout_at_separation=Not required, unless the leave is credited to a PTO bank or vacation account; then unused leave is paid within 15 days of separation.]] | 2023-12-31 to open | US-ILB5-301 (Cook County Commission on Human Rights; A.3, quoted from authority page, confidence high) |  |
+| `il.leave.cook.paid_leave.rules_2025` | [[FACT:il.leave.cook.paid_leave.rules_2025=Rules amended April 10, 2025. Accrual 1 hour per 40 hours worked (400.300/400.500); first use 90 days after start of employment; carryover of 40 hours or less may not be restricted unless the employer front-loads at least 40 hours (400.800); unused leave paid at separation if the employer credits a PTO bank (500.600).]] | 2025-04-10 to open | US-ILV6B-005 (Cook County Commission on Human Rights; A.2, quoted from authority page, confidence high) | Register: US-ILV6B-005 |
 | `il.live.14c_end` | [[FACT:il.live.14c_end=14(c) sub-minimum licences end 2029-12-31 (enacted)]] | 2029-12-31 to open | US-ILS5-002 (Illinois Department of Labor; A.2, quoted from authority page, confidence high) |  |
+| `il.local_minwage.chicago.tipped_schedule` | [[FACT:il.local_minwage.chicago.tipped_schedule=From July 1, 2026 Chicago minimum wage 17.05 USD; tipped 12.96 USD, steady until the next scheduled increase on July 1, 2028 (BACP release). Percentage derived: 12.96 / 17.05 = 76.01 percent (17.05 x 0.76 = 12.958, rounds to 12.96), i.e. a 24 percent credit; the percentage is not printed in the BACP release and MCC 6-105-020 is not verified.]] | 2026-07-01 to open | US-ILV6B-004 (City of Chicago, Department of Business Affairs and Consumer Protection; A.2, quoted from authority page, confidence medium) | Register: US-ILV6B-004 |
+| `il.payslip.content_list` | [[FACT:il.payslip.content_list=The content list is statutory, not in 56 Ill. Adm. Code 300.600 (that section is "Payment of Wages": check, voluntary direct deposit, voluntary payroll card). 820 ILCS 115/2 defines "pay stub" as an itemized statement of hours worked, rate of pay, overtime pay and overtime hours, gross wages, deductions and year-to-date totals; 115/10 requires one per pay period, retention 3 years, copies on request within 21 days.]] | 2025-01-01 to open | US-ILV6B-001 (Illinois General Assembly; A.1, quoted from authority page, confidence high) | Register: US-ILV6B-001 |
+| `il.pit.rate.statutory` | [[FACT:il.pit.rate.statutory=Individual/trust/estate rate 4.95% of net income for taxable years beginning on or after 2017-07-01; no different 2027 rate appears in the section text as currently published (header: Text of Section from P.A. 104-468). Level: assessment and withholding base rate]] | 2017-07-01 to open | US-ILV6-001 (Illinois General Assembly; A.1, quoted from authority page, confidence high) | Register: US-ILV6-001 |
+| `il.termination.ui_separation_notice` | [[FACT:il.termination.ui_separation_notice=Yes. 56 Ill. Adm. Code 2720.100(a): the employer delivers the IDES "What Every Worker Should Know About Unemployment Insurance" form at separation, or mails it within 5 days if delivery is impracticable, for separations expected to last 7 or more days. (A search snippet had pointed to 820 ILCS 405/502; that section is the short-time compensation program and was discarded.)]] | 2019-01-15 to open | US-ILV6B-002 (Illinois Department of Employment Security; A.1, quoted from authority page, confidence high) | Register: US-ILV6B-002 |
 
-Not configured in this release [[GAP:RQ-206]]: One Fair Wage phase-out percentage for 2026 not read ([[FACT:il.local_minwage.chicago.tipped=12.96]] = 76% of [[FACT:il.local_minwage.chicago.hourly=17.05]]).
-
-Not configured in this release [[GAP:RQ-207]]: IDOL/IDOR/IDES newsrooms 2026 not reviewed.
+Not configured in this release [[GAP:RQ-207]]: 2026 Illinois changes were reviewed in the Department of Revenue and Department of Labor news releases; the Department of Employment Security news releases were not reviewed.
 
 ## IL.14 Authority worked examples (oracle values)
 

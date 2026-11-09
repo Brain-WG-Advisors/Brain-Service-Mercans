@@ -12,6 +12,11 @@ import csv
 import glob
 import json
 import os
+import sys as _sys_dw
+_DW_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "01-ccg", "_build", "common"))
+if _DW_DIR not in _sys_dw.path:
+    _sys_dw.path.insert(0, _DW_DIR)
+import deliverable_wording as DW  # noqa: E402  v1.1 QA r1: deliverable wording + effective-period status
 import re
 import sys
 from decimal import Decimal
@@ -76,6 +81,8 @@ def eff(key, period=None):
     f = fact(key, period)
     a, b = f.get("effective_from"), f.get("effective_to")
     basis = f.get("_effective_from_basis")
+    if DW.period_status(f) or (basis and b):      # v1.1 QA r1: proposed / historical / own end date
+        return DW.period_wording(f, "")
     if basis:
         return f"in force for {YEAR}; the source carries no effective date"
     if a and b:

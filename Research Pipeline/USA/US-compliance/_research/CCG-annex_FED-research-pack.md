@@ -165,6 +165,8 @@ G-DERIVE: column C of the three STANDARD schedules recomputed in Python from col
 - `fed.w4.input_fields` = **filing status (Single/MFS, MFJ/QSS, HoH); Step 2 flag; Step 3 amount; Step 4(a); Step 4(b); Step 4(c); exempt checkbox**  (2026-01-01 → 2026-12-31) [A.2, US-FEDS5-006, quoted from authority page, conf high]
 - `fed.w4.exempt.validity` = **2026 only: the exemption checkbox certification lapses; a new W-4 is required for 2027**  (2026-01-01 → 2026-12-31) [A.2, US-FEDS5-006, quoted from authority page, conf high]
 
+- **V11 (2026-11-06, V-09)** `fed.fit.pre2020_w4.filing_status_mapping` [US-FEDS5-001, Pub. 15-T (2026) pp.5-6 and Worksheet 1A]: on a 2019-or-earlier W-4, "Single" or "Married, but withhold at higher single rate" maps to Single/MFS, and "Married" maps to MFJ. "You can't convert an employee to a filing status of Head of household". Worksheet 1A Step 2: "Don't use the Head of Household table if the Form W-4 is from 2019 or earlier". Allowances × 4,300 (line 1k); the line 6 extra is added per period (line 4a).
+
 ## 2b — Non-resident regime
 Non-resident aliens are treated at WITHHOLDING level: the Pub. 15-T add-on increases the wage used for the FIT computation only (no W-2, FICA or FUTA effect) and is not applied to 22%/37% supplemental wages. Notice 1392 W-4 rules; Form 8233 treaty wages go to 1042-S (IRIS e-file for TY2026). This satisfies C31 for the federal layer; State non-resident (other-State resident) treatment is annex_MULTI.
 

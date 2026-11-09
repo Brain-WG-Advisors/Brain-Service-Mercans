@@ -29,8 +29,8 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-347]]: Direct-deposit consent rule (34-28-2/-3 current) not read.
-- Not configured in this release [[GAP:RQ-348]]: 34-40-104 exemptions (agricultural, seasonal, domestic) not read.
+- Not configured in this release [[GAP:RQ-347]]: Direct-deposit consent rule (34-28-2/-3 current) not verified against the official source.
+- Not configured in this release [[GAP:RQ-348]]: 34-40-104 exemptions (agricultural, seasonal, domestic) not verified against the official source.
 
 ## UT.2 Income tax withholding
 
@@ -85,7 +85,7 @@ Every value in this annex is bound to a verified fact and carries its legal-basi
 
 **Open research points**
 
-- Not yet published [[GAP:RQ-343]]: Pub 14 Rev. 04/26 does not state from which pay period its base allowances and thresholds apply; a secondary source points to a mid-year 2026 change from lower earlier allowances. Calculations for pay periods before the effective date cannot be fixed.
+- Not configured in this release [[GAP:RQ-343]]: Pub 14 Rev. 04/26 does not state from which pay period its base allowances and thresholds apply; a secondary source points to a mid-year 2026 change from lower earlier allowances. Calculations for pay periods before the effective date cannot be fixed.
 - Not configured in this release [[GAP:RQ-344]]: No Utah supplemental flat rate published; build assumes regular schedules.
 
 ## UT.2b Non-resident regime and reciprocity
@@ -106,7 +106,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in UT.2.
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `ut.sui.wage_base` | [[FACT:ut.sui.wage_base=50,700]] | USD | 2026-01-01 to 2026-12-31 | US-UTS5-005 | not derivable (35A-4-303 not read) |
+| `ut.sui.wage_base` | [[FACT:ut.sui.wage_base=50,700]] | USD | 2026-01-01 to 2026-12-31 | US-UTS5-005 | not derivable (35A-4-303 not verified) |
 | `ut.sui.wages.401k_included` | [[FACT:ut.sui.wages.401k_included=True]] |  | from 2026-01-01 | US-UTS5-004 | also tips, meals, lodging, in-kind |
 | `ut.ui.reserve_factor` | [[FACT:ut.ui.reserve_factor=1.1]] | ratio | 2026-01-01 to 2026-12-31 | US-UTSUI-001 | rate = benefit ratio x reserve factor + social cost |
 | `ut.ui.social_cost.rate` | [[FACT:ut.ui.social_cost.rate=0.1]] | % | 2026-01-01 to 2026-12-31 | US-UTSUI-001 |  |
@@ -154,7 +154,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in UT.2.
 
 ## UT.6 Leave
 
-- **No private-sector paid sick leave statute** (exists: [[FACT:ut.leave.sick.state_statute.exists=False]]); vacation, holiday, sick leave, PTO, severance and bonuses are recoverable wages only if due under an agreement or policy (R610-3-4(B)(1)) [US-UTS5-012]. No PFML. Jury and voting leave not checked.
+- **No private-sector paid sick leave statute** (exists: [[FACT:ut.leave.sick.state_statute.exists=False]]); vacation, holiday, sick leave, PTO, severance and bonuses are recoverable wages only if due under an agreement or policy (R610-3-4(B)(1)) [US-UTS5-012]. No PFML. Jury and voting leave not verified.
 
 **Parameters (leave)**
 
@@ -184,11 +184,11 @@ The local wage taxes of this jurisdiction, where any exist, are written in UT.2.
 ## UT.9 Deductions and garnishments
 
 - **Authorisation (R610-3-18) [US-UTS5-012]:** lawful deductions listed, with written authorisation for benefits, dues and financial-institution deductions; no deduction where wages were paid late.
-- **Garnishment:** valid garnishments in proper amounts are honoured; a state variance from the CCPA was not read, so the CCPA limits apply by default (Annex FED). Child support via ORS (e-IWO, EFT) [US-UTS5-016]; fee and timing open (below).
+- **Garnishment:** valid garnishments in proper amounts are honoured; a state variance from the CCPA was not verified against the official source, so the CCPA limits apply by default (Annex FED). Child support via ORS (e-IWO, EFT) [US-UTS5-016]; fee and timing open (below).
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-349]]: State garnishment limits vs CCPA and ORS IWO fee/timing not read.
+- Not configured in this release [[GAP:RQ-349]]: State garnishment limits vs CCPA and ORS IWO fee/timing not verified against the official source.
 
 ## UT.10 Collective agreements and prevailing wage
 
@@ -205,7 +205,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 ## UT.11 Indexation
 
 - **Minimum wage:** not indexed, capped at the federal rate [US-UTS5-010].
-- **SUI wage base:** recomputed every year and published by DWS by mid-November [US-UTS5-006]; the statutory formula was not read, so no derivation is possible; 2027 open (below).
+- **SUI wage base:** recomputed every year and published by DWS by mid-November [US-UTS5-006]; the statutory formula was not verified against the official source, so no derivation is possible; 2027 open (below).
 - **Income-tax schedules:** revised with the law (Pub 14); the rate is statutory.
 
 ## UT.12 Payroll data protection and records
@@ -214,7 +214,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-350]]: SSN truncation on pay statements (13-45) not read.
+- Not configured in this release [[GAP:RQ-350]]: SSN truncation on pay statements (13-45) not verified against the official source.
 
 ## UT.13 Live legal change
 
@@ -231,11 +231,11 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | Population | Utah rule | Register id |
 |---|---|---|
 | Domestic / household | Utah withholding only by agreement; annual filing with Schedule H; UI annual filing election | US-UTPIT-003, US-UTS5-013, US-UTS5-004 |
-| Agricultural | Minimum-wage exemptions (34-40-104) and UI coverage not read | - |
+| Agricultural | Minimum-wage exemptions (34-40-104) and UI coverage not verified against the official source | - |
 | Minors | Initial-period minor wage per Section 1 | US-UTS5-011 |
 | Tipped | Cash wage per Section 1; credit-card fee deduction allowed; pooling among tipped staff; notice at hire | US-UTS5-011, US-UTS5-008 |
 | Clergy / religious | No Utah withholding where federal withholding does not apply | US-UTS5-013 |
-| Students | No state rule beyond federal for withholding; UI exemption not read | US-UTS5-013 |
+| Students | No state rule beyond federal for withholding; UI exemption not verified against the official source | US-UTS5-013 |
 | Nonresident aliens | Utah wages = federal withholding wages; no separate rule | US-UTS5-013, US-UTPIT-003 |
 | Statutory employees | Utah withholding only where federal withholding applies | US-UTS5-013 |
 | Government employees | Minimum wage covers private and public employees (34-40-103(2)(a)) | US-UTS5-010 |

@@ -133,7 +133,7 @@ Regular wages are paid on the employer's regular payday under the work State's p
 | Dependent-care assistance | [[FACT:fed.base.dependent_care.fit=excluded up to 7,500 a year (3,750 married filing separately)]] | [[FACT:fed.base.dependent_care.fica=excluded up to 7,500 a year (3,750 married filing separately)]] | [[FACT:fed.base.dependent_care.futa=excluded up to 7,500 a year (3,750 married filing separately)]] | [US-FEDS5-008] |
 | Retirement deferrals and Section 125 reductions | See Module 3, Step 2 | See Module 3, Step 2 | See Module 3, Step 2 | [US-FEDS5-029] |
 | Moving expenses, bicycle commuting | No exclusion (eliminated, except moving for Armed Forces / intelligence community) | No exclusion | No exclusion | `fed.bik.moving_and_bicycle.excluded` [US-FEDS5-008] |
-| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | Not established from an official source [[GAP:RQ-593]] | `fed.minister.withholding` [US-FED-030] |
+| Ministers' pay | No withholding (self-employment tax); parsonage allowance excluded from W-2 box 1 | Not withheld | [[FACT:fed.minister.futa=FUTA excludes service in the employ of a 501(c)(3) religious organization (26 U.S.C. 3306(c)(8)); the exemption cannot be waived. A minister's pay is outside FUTA when the employer is a 501(c)(3) church or organization; if the employer is not 501(c)(3) this exclusion does not apply. Pub. 15-A states no separate minister FUTA rule.]] [US-FEDV6-017] | `fed.minister.withholding` [US-FED-030] |
 
 Statutory wage definitions behind the table:
 
@@ -237,7 +237,7 @@ State overtime deductions also operate at assessment only (never reduce State wi
 |---|---|---|
 | AL | Overtime premium deduction up to USD [[FACT:al.pit.overtime_premium_deduction.max=1,000]], assessment only | [US-ALS5-004] |
 | GA | Overtime subtraction up to USD [[FACT:ga.pit.overtime_subtraction.max=1,750]], assessment only | [US-GAS5-009] |
-| MI | [[FACT:mi.pit.tips_overtime_deduction=2025 PA 24 (MCL 206.30(1)(ee)): tax years 2026-2028 deduct federally allowed qualified tips (IRC 224) and overtime (IRC 225); level ASSESSMENT (MI-1040) only - no withholding change]] | [US-MIS5-017] |
+| MI | [[FACT:mi.pit.tips_overtime_deduction=2025 PA 24 (MCL 206.30(1)(ee)): tax years 2026-2028 deduct federally allowed qualified tips (IRC 224) and overtime (IRC 225); level ASSESSMENT (MI-1040) only - no withholding change]] | [US-MIV6-002] |
 | IA | [[FACT:ia.pit.obbba=tips, overtime, car-loan interest conformed at ASSESSMENT only (no withholding allowance); senior deduction (up to 6,000) may be claimed as an IA W-4 allowance]] | [US-IAS5-019] |
 | DC | [[FACT:dc.pit.obbba_deductions=disallowed TY2025; allowed as DC deductions from TY2026; operating level assessment only (no withholding change)]] | [US-DCS5-021] |
 | CO | Colorado's worksheet removes the federal qualified-overtime deduction from W-4 Step 4(b) for State withholding | `co.wh.obbba_overtime_deduction.allowed` [US-COS5-012] |
@@ -298,4 +298,4 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 Prevailing-wage overlay: federal construction contracts over USD [[FACT:fed.davis_bacon.contract_threshold=2,000]] carry Davis-Bacon wage rates and weekly certified payroll ([[FACT:fed.davis_bacon.certified_payroll.frequency=weekly, to the contracting agency; prime responsible for subcontractors; optional form WH-347; records 3 years]]; [US-FEDS5-027]). State prevailing-wage laws are in the annexes; never use the federal DOL State list for Michigan.
 
-Not configured in this release [[GAP:RQ-541]]: the DOL Women's Bureau paid-leave page could not be read; the DOL prevailing-wage list still says MI has no law (MI restored 2023).
+Not configured in this release [[GAP:RQ-541]]: the DOL Women's Bureau paid-leave page is not verified against the official source; the DOL prevailing-wage list still says MI has no law (MI restored 2023).

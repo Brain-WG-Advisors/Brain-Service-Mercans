@@ -95,7 +95,10 @@ atualizado_em: 2026-10-27
 ## Valores-chave (com vigência)
 | Item | Valor | A partir de | Até | Fonte |
 |---|---|---|---|---|
-| | | | | |
+| INPP (ER, sobre remunerações) | privado 3% (1-50) / 2% (51-300) / 1% (>300), segundo a ficha da skill (texto de 2006 não lido por nós) | 2006-02-14 | 2025-09-23 | Arrêté interministériel n°12/MTPS/123, n°007/CAB/MIN/FINANCES/2006, n°001/CAB/MIN/BUD/2006 (revogado pelo art. 2 do arrêté de 2025) |
+| INPP (ER, cotisation mensuelle sobre "rémunérations versées à ses travailleurs") | público 4%; privado 3,5% (1-50) / 3% (51-300) / 2% (>300) | 2025-09-24 | — | Arrêté interministériel N°002/CAB/MET/2025, N°158/CAB/MIN/FINANCES/2025, N°003/CAB/VPM/MIN/BUD/2025 du 24/09/2025, art. 1 (taxas), art. 2 (revogação), art. 3 ("entre en vigueur à la date de sa signature"; "Fait à Kinshasa, le 24 SEP 2025"). Cópia assinada: `raw/docs/oficiais/CD/2026-11-06-arrete-INPP-2025-09-24_New-Rates-INPP.pdf` (Drive: Country Folders/Democratic Republic of Congo/09 - Alerts/New Rates INPP.pdf, md5 8a47fcf3…). Conferido em 2026-11-06 (frente Alertas). |
+
+> ⚠️ 2026-11-06 (frente Alertas): o alerta do CT-4383 dá corretamente 24/09/2025 para o INPP, mas a Lily pediu ao Dev "Effective Date 01-01-2026" em todas as regulations, inclusive a 9180151 (INPP). Prática de mercado (Wayma, 15/02/2026) aplica desde 01/01/2026, sem citar artigo; a lei diz 24/09/2025. Detalhes menores no alerta: nº do Finances escrito "A56" (no original manuscrito lê-se 158). A ficha da skill (item 12, "INPP 2006, 70%") está desatualizada → levar à skill. Decisão do usuário antes de ir ao Dev (regra 10).
 
 ## Decisões
 - AAAA-MM-DD: decisão, por quê, quem decidiu

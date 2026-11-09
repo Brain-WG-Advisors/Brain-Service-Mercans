@@ -55,7 +55,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in TX.2.
 - **Unemployment insurance (TWC) [US-TXS5-007, US-TXSUI-001].** Taxable wage base [[FACT:tx.sui.wage_base=9000]] USD per employee per calendar year, fixed by statute (201.082(1)), not indexed. 2026 rates [[FACT:tx.sui.employer.rate.min=0.32]] % to [[FACT:tx.sui.employer.rate.max=6.32]] %, including the obligation assessment of [[FACT:tx.ui.obligation_assessment.rate=0.01]] % [US-TXS5-019]. New employer [[FACT:tx.sui.new_employer.rate=2.7]] % for the first six calendar quarters (statute: the greater of the major-group rate less a fixed step, or a statutory floor, 204.006); the published rate cannot be re-derived without the major-group rates (open point below) [US-TXS5-008, US-TXS5-019].
 - **Employee contribution:** [[FACT:tx.sui.employee.rate=0]] %; deduction from wages prohibited (204.003) [US-TXS5-008].
 - **Employment and Training Investment Assessment:** [[FACT:tx.ui.etia.rate=0.1]] % of taxable wages, employer-paid, offset by an equal cut in the replenishment rate (204.121, 204.0625) [US-TXS5-008].
-- **UI wages (201.081-201.082):** include non-cash pay and FUTA-taxable tips; exclude employer plan payments for retirement, sickness, medical or death benefits and employer-paid FICA. Treatment of employee deferrals and cafeteria-plan reductions: open point below [US-TXS5-007].
+- **UI wages (201.081-201.082):** include non-cash pay and FUTA-taxable tips; exclude employer plan payments for retirement, sickness, medical or death benefits and employer-paid FICA. [US-TXS5-007]. Employee deferrals and cafeteria-plan reductions: [[FACT:tx.ui.wages.401k_section125=Wages = all remuneration for personal services (201.081). The 201.082 exceptions contain no exclusion for employee elective 401(k) deferrals or IRC s.125 salary reductions; only payments to or from exempt 401(a) trusts are excluded. Not verified against TWC guidance.]] [US-TXV6-004].
 - **Coverage:** quarterly wage or 20-week tests; domestic employers above a quarterly cash test with an annual-reporting option (201.027); farm and ranch labour per 201.028 / 201.047 [US-TXS5-007].
 - **No SDI, TDI, PFML or LTC** (exists: [[FACT:tx.sdi_pfml.exists=False]]) [US-TXR3-003].
 
@@ -71,17 +71,17 @@ The local wage taxes of this jurisdiction, where any exist, are written in TX.2.
 | `tx.sdi_pfml.exists` | [[FACT:tx.sdi_pfml.exists=False]] |  | from 2026-01-01 | US-TXR3-003 |  |
 | `tx.sui.employer.rate.min` | [[FACT:tx.sui.employer.rate.min=0.32]] | % | 2026-01-01 to 2026-12-31 | US-TXSUI-001 |  |
 | `tx.sui.employer.rate.max` | [[FACT:tx.sui.employer.rate.max=6.32]] | % | 2026-01-01 to 2026-12-31 | US-TXSUI-001 |  |
+| `tx.ui.wages.401k_section125` | [[FACT:tx.ui.wages.401k_section125=Wages = all remuneration for personal services (201.081). The 201.082 exceptions contain no exclusion for employee elective 401(k) deferrals or IRC s.125 salary reductions; only payments to or from exempt 401(a) trusts are excluded. Not verified against TWC guidance.]] |  | from 1997-09-01 | US-TXV6-004 | Register: US-TXV6-004 |
 
 **Open research points**
 
 - Not configured in this release [[GAP:RQ-338]]: The published new-employer rate cannot be re-derived without the 2026 major-group rates.
-- Not configured in this release [[GAP:RQ-339]]: TWC treatment of employee retirement deferrals and cafeteria-plan reductions was not read (201.082 is silent).
-- Not configured in this release [[GAP:RQ-342]]: 2027 TWC rates not published; sweep not done (twc blocked).
+- Not yet published [[GAP:RQ-342]]: The 2027 Texas Workforce Commission tax rates are set in November or December and are not yet published.
 
 ## TX.4 Pay statement
 
 - **Labor Code 62.003 (earnings statement) exists, for employees outside FLSA coverage only [US-TXS5-003].** At the end of each pay period: [[FACT:tx.payslip.content.non_flsa=signed statement: name, rate, gross, each deduction and purpose, net, hours or units]]; any form, including the check voucher; meals or lodging credited toward the wage stated separately (62.053). For FLSA-covered employees Texas has no statutory content rule (federal records rules apply). Never write "Texas has no pay-statement law".
-- **Electronic delivery and retention:** no Texas rule in chapters 61 or 62; retention follows FLSA and UI record rules (TWC rule not read, open point below).
+- **Electronic delivery and retention:** no Texas rule in chapters 61 or 62; retention follows FLSA and UI record rules (the TWC records-retention rule was not verified against the official source).
 
 **Parameters (payslip statute and payroll records)**
 
@@ -92,31 +92,31 @@ The local wage taxes of this jurisdiction, where any exist, are written in TX.2.
 ## TX.5 Statutory reporting
 
 - **No withholding return or state W-2.**
-- **Quarterly UI wage report and payment [US-TXSUI-006]:** [[FACT:tx.report.ui.channel=electronic only (Unemployment Tax Services / QuickFile: ICESA, MMREF-1, delimited)]]. Due date and record retention under the TWC rules: open point below.
-- **Enhanced wage-report content (Labor Code 204.0025, 2025 amendments) [US-TXS5-008]:** [[FACT:tx.report.ui.enhanced_fields=wage, industry, occupation, FT/PT, county of primary employment, remote-work status]]. Which fields are mandatory from which quarter is unknown (blocking open point below); the DD and Report Specs depend on it.
-- **New hire [US-TXS5-012, US-TXS5-016, US-TXS5-017]:** to the OAG Child Support Division state directory within [[FACT:tx.newhire.report_days=20]] calendar days of the first day of work, or twice monthly for electronic reporters. Contractor reporting: open point below.
+- **Quarterly UI wage report and payment [US-TXSUI-006]:** [[FACT:tx.report.ui.channel=electronic only (Unemployment Tax Services / QuickFile: ICESA, MMREF-1, delimited)]]. Due dates: [[FACT:tx.report.ui.due_date_records=Quarterly wage report and tax due last day of month after quarter end: Apr 30, Jul 31, Oct 31, Jan 31. Records-retention rule (40 TAC 815.107) not verified]] [US-TXV6-001].
+- **Enhanced wage-report content (Labor Code 204.0025, 2025 amendments) [US-TXS5-008]:** [[FACT:tx.report.ui.enhanced_fields=wage, industry, occupation, FT/PT, county of primary employment, remote-work status]]. Status: [[FACT:tx.report.ui.enhanced_fields.status=Proposed (51 TexReg 5161, 2026-08-07): an amendment to 40 TAC 815.107 under Labor Code 204.0025 would add wages, industry, occupation field, full-time or part-time status, county of primary employment and remote-work status to the quarterly wage report. Not adopted as of 2026-11-06; no field is mandatory and no start quarter is set.]] [US-TXV6-005]. Proposed only: these fields are not configured as mandatory (open point below).
+- **New hire [US-TXS5-012, US-TXS5-016, US-TXS5-017]:** to the OAG Child Support Division state directory within [[FACT:tx.newhire.report_days=20]] calendar days of the first day of work, or twice monthly for electronic reporters. Who is reported: [[FACT:tx.report.new_hire.contractors=For new-hire reporting 'employee' = IRC 3401(c) employee OR an independent contractor as defined by the IRS (also TNC drivers); employers report each newly hired/rehired employee to the state directory per 42 USC 653a]] [US-TXV6-002]; independent contractors are out of scope for this guide (US-OWN-008).
 - **Registration:** TWC UI account once the coverage thresholds are met; agent authorisation Form C-42 [US-TXSUI-005, US-TXP52-008].
 
 **Parameters (statutory reporting)**
 
 | Parameter key | Value | Unit | Effective | Register id | Note |
 |---|---|---|---|---|---|
-| `tx.report.ui.enhanced_fields` | [[FACT:tx.report.ui.enhanced_fields=wage, industry, occupation, FT/PT, county of primary employment, remote-work status]] |  | from 2025-06-01 | US-TXS5-008 | Labor Code 204.0025 (2025) lists the data; TWC implementation is a PROPOSED rule only (tx.report.ui.enhanced_fields.status, US-TXB5-301) - not mandatory on 2026-11-02. |
+| `tx.report.ui.enhanced_fields` | [[FACT:tx.report.ui.enhanced_fields=wage, industry, occupation, FT/PT, county of primary employment, remote-work status]] |  | from 2025-06-01 (statute); implementing rule proposed only, not in force | US-TXS5-008 | Labor Code 204.0025 (2025) lists the data; TWC implementation is a PROPOSED rule only (tx.report.ui.enhanced_fields.status, US-TXB5-301) - not mandatory on 2026-11-02. |
 | `tx.newhire.report_days` | [[FACT:tx.newhire.report_days=20]] | days | from 2026-01-01 | US-TXS5-017 | OAG; second authority US-TXS5-016 form |
-| `tx.report.ui.channel` | [[FACT:tx.report.ui.channel=electronic only (Unemployment Tax Services / QuickFile: ICESA, MMREF-1, delimited)]] |  | from 2026-01-01 | US-TXSUI-006 | due date not read from primary source |
-| `tx.report.ui.enhanced_fields.status` | [[FACT:tx.report.ui.enhanced_fields.status=PROPOSED ONLY: TWC proposed amendment to 40 TAC 815.107 (51 TexReg 5161, 2026-08-07; approved for proposal 2026-07-21, comments to 2026-09-07) would add to the quarterly wage report: wages, industry, occupation field, full/part-time status, county of primary employment, remote-work status (Labor Code 204.0025) and data for the 302.0205 Regional Labor Demand Assessment. Not adopted in the Texas Register adopted-rules issues of 2026-09-25 to 2026-10-30: on 2026-11-02 no field is mandatory and no start quarter is set.]] |  | from 2026-08-07 | US-TXB5-301 | G-RULING: identity 40 TAC 815.107 (proposed), 51 TexReg 5161; status proposal, not adopted; level employer reporting. Configure nothing as mandatory; re-check adopted-rules issues from November 2026. |
+| `tx.report.ui.channel` | [[FACT:tx.report.ui.channel=electronic only (Unemployment Tax Services / QuickFile: ICESA, MMREF-1, delimited)]] |  | from 2026-01-01 | US-TXSUI-006 | due date not verified from primary source |
+| `tx.report.ui.enhanced_fields.status` | [[FACT:tx.report.ui.enhanced_fields.status=Proposed (51 TexReg 5161, 2026-08-07): an amendment to 40 TAC 815.107 under Labor Code 204.0025 would add wages, industry, occupation field, full-time or part-time status, county of primary employment and remote-work status to the quarterly wage report. Not adopted as of 2026-11-06; no field is mandatory and no start quarter is set.]] |  | proposed, not in force (dated 2026-08-07) | US-TXB5-301 | Identity 40 TAC 815.107 (proposed), 51 TexReg 5161; status: proposal, not adopted; level: employer reporting. Configure nothing as mandatory. |
+| `tx.report.ui.due_date_records` | [[FACT:tx.report.ui.due_date_records=Quarterly wage report and tax due last day of month after quarter end: Apr 30, Jul 31, Oct 31, Jan 31. Records-retention rule (40 TAC 815.107) not verified]] |  | from 2026-01-01 | US-TXV6-001 | Register: US-TXV6-001 |
+| `tx.report.new_hire.contractors` | [[FACT:tx.report.new_hire.contractors=For new-hire reporting 'employee' = IRC 3401(c) employee OR an independent contractor as defined by the IRS (also TNC drivers); employers report each newly hired/rehired employee to the state directory per 42 USC 653a]] |  | from 2021-09-01 | US-TXV6-002 | Register: US-TXV6-002 |
 
 **Open research points**
 
-- Not configured in this release [[GAP:RQ-336]]: Quarterly UI due date (40 TAC 815.107) and records retention (815.106) not read.
-- Not configured in this release [[GAP:RQ-340]]: Not established from an official source.
-- Not configured in this release [[GAP:RQ-580]]: The 815.107 amendment is proposed only; adoption date, first mandatory quarter and the TWC file layout are not published (twc.texas.gov layout pages geo-blocked from Brazil).
+- Not yet published [[GAP:RQ-580]]: The Texas Workforce Commission amendment to 40 TAC ch. 815 (new wage-record data elements) is proposed only and not adopted; the adoption date, the first mandatory quarter and the file layout are not published. The fields are not configured as mandatory.
 
 ## TX.6 Leave
 
 - **Paid sick leave:** no state statute (exists: [[FACT:tx.leave.sick.state_statute.exists=False]]); Labor Code 1.005 (H.B. 2127, 2023) preempts city and county leave, benefit and scheduling ordinances for private employers [US-TXS5-005]. No PFML.
 - **Leave pay is wages only if promised in writing** (61.001(7)(B)) [US-TXS5-004].
-- **Voting time (Election Code 276.004):** paid ([[FACT:tx.leave.voting.paid=True]]): no penalty, including lost wages, for time off to vote, unless the polls are open long enough outside working hours [US-TXS5-014]. Jury and military leave: open point below.
+- **Voting time (Election Code 276.004):** paid ([[FACT:tx.leave.voting.paid=True]]): no penalty, including lost wages, for time off to vote, unless the polls are open long enough outside working hours [US-TXS5-014]. Jury and military leave: [[FACT:tx.leave.jury_military=Jury service: permanent employee may not be discharged/threatened/coerced; right to return to same employment on notice; text states no pay obligation. Military leave (Gov. Code 431.005/437.204) not verified]] [US-TXV6-003].
 
 **Parameters (leave)**
 
@@ -124,10 +124,7 @@ The local wage taxes of this jurisdiction, where any exist, are written in TX.2.
 |---|---|---|---|---|---|
 | `tx.leave.sick.state_statute.exists` | [[FACT:tx.leave.sick.state_statute.exists=False]] |  | from 2023-09-01 | US-TXS5-005 | Labor Code 1.005 preempts local ordinances |
 | `tx.leave.voting.paid` | [[FACT:tx.leave.voting.paid=True]] |  | from 2026-01-01 | US-TXS5-014 | unless polls open 2 consecutive hours outside working hours |
-
-**Open research points**
-
-- Not configured in this release [[GAP:RQ-341]]: Jury service and military leave pay rules not read.
+| `tx.leave.jury_military` | [[FACT:tx.leave.jury_military=Jury service: permanent employee may not be discharged/threatened/coerced; right to return to same employment on notice; text states no pay obligation. Military leave (Gov. Code 431.005/437.204) not verified]] |  | from 2019-09-01 | US-TXV6-003 | Register: US-TXV6-003 |
 
 ## TX.7 Termination and final pay
 
@@ -194,7 +191,7 @@ Prevailing wage (public works) is an optional informational flag [US-OWN-009]: t
 
 - **Const. Art. VIII s.24-b (approved 2025-11-04):** capital gains tax ban; no payroll effect [US-TXS5-001].
 - **Labor Code 204.0025:** enhanced wage-filing data; payroll and DD impact depends on TWC implementation (open point below) [US-TXS5-008].
-- **2027 TWC rates** due December 2026; not swept (TWC site blocked).
+- **2027 TWC rates** due December 2026; not swept.
 
 ## TX.14 Authority worked examples (oracle values)
 
@@ -229,7 +226,7 @@ Register ids cited in this annex resolve to the build record; the URL of each va
 - Texas Legislative Council: US-TXS5-015
 - Texas Legislative Council (tcss.legis.texas.gov official statutes file server): US-TXS5-001
 - Texas Legislative Council (tcss.legis.texas.gov): US-TXS5-002, US-TXS5-003, US-TXS5-004, US-TXS5-005, US-TXS5-006, US-TXS5-007, US-TXS5-008, US-TXS5-009, US-TXS5-010, US-TXS5-011, US-TXS5-012, US-TXS5-013, US-TXS5-014
-- Texas Legislature (statutes.capitol.texas.gov): US-TXR3-002
+- Texas Legislature (statutes.capitol.texas.gov): US-TXR3-002, US-TXV6-002, US-TXV6-003, US-TXV6-004
 - Texas Secretary of State (Texas Register) / Texas Workforce Commission: US-TXB5-301
-- Texas Workforce Commission: US-TXP52-008, US-TXR3-003, US-TXS5-017, US-TXS5-019, US-TXSUI-001, US-TXSUI-005, US-TXSUI-006
+- Texas Workforce Commission: US-TXP52-008, US-TXR3-003, US-TXS5-017, US-TXS5-019, US-TXSUI-001, US-TXSUI-005, US-TXSUI-006, US-TXV6-001, US-TXV6-005
 - Texas Workforce Commission (Office of the Commissioner Representing Employers): US-TXS5-018

@@ -1,0 +1,76 @@
+{
+ "schema_version": "1.4.0",
+ "artifact": "CCG",
+ "unit": "m02_master_data",
+ "code": "US",
+ "year": 2026,
+ "generated_on": "2026-11-02",
+ "_note": "Synthesis B (CCG core worker), 2026-11-02. No fetching: every fact is drawn from an active/partial row of legal-basis-register.csv. Per-state detail lives in the annex units (annex_XX); here state rows appear only as examples or comparison tables. consumed_by is NOT written to the register by this worker (final merge worker does it; ids listed in _research/synthesis-B/CCG-core-report.md).",
+ "_annex_keys_cited": {
+  "fed.w4.input_fields": "CCG-annex_FED-facts.json (US-FEDS5-006)",
+  "fed.w4.exempt.validity": "CCG-annex_FED-facts.json (US-FEDS5-006)",
+  "fed.fit.nra.w4.rule": "CCG-annex_FED-facts.json (US-FEDS5-015)",
+  "fed.fit.allowance.pre2020_value": "CCG-annex_FED-facts.json (US-FEDS5-001)",
+  "fed.newhire.deadline_days": "CCG-annex_FED-facts.json (US-FEDS5-024)",
+  "fed.newhire.fields": "CCG-annex_FED-facts.json (US-FEDS5-024)",
+  "multi.newhire.designated_state": "CCG-annex_MULTI-facts.json (US-MULTIS5-006)",
+  "fed.ssn.truncation.format": "CCG-annex_FED-facts.json (US-FEDS5-022)",
+  "fed.records.flsa.retention_years": "CCG-annex_FED-facts.json (US-FEDS5-021)",
+  "multi.sui.localization_test": "CCG-annex_MULTI-facts.json (US-MULTIS5-017)"
+ },
+ "_annex_keys_note": "Keys owned by an annex unit are not duplicated here (one key, one value); the module text cites them from the named annex facts file. Re-run scratch-ccg-core/build.py after the last annex worker so late annex keys are also de-duplicated.",
+ "facts": [
+  {
+   "key": "multi.sit.work_location.rule",
+   "value": "Wages taxed by the State where services are physically performed, plus the residence State on all wages with a resident credit (assessment); exceptions: convenience States, reciprocity, federal transport/military-spouse limits",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-MULTIS5-023",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Illinois Department of Revenue",
+   "url": "https://tax.illinois.gov/content/dam/soi/en/web/tax/research/publications/pubs/documents/pub-130.pdf",
+   "confidence": "high",
+   "note": "IL Pub. 130 restates the sourcing; general rule per MULTI.md 2.1. Routing keys: work_location_jurisdiction, residence_jurisdiction, sui_state."
+  },
+  {
+   "key": "ct.cert.default_no_certificate",
+   "value": "No CT-W4 -> withhold flat 6.99% without exemption",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-CTS5-011",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Connecticut Department of Revenue Services",
+   "url": "https://portal.ct.gov/-/media/drs/publications/pubsip/2026/ip-2026-1.pdf",
+   "confidence": "high",
+   "note": "Example of a state certificate default; each annex carries its own (CA DE 4: Single 0 allowances, US-CAS5-004)."
+  },
+  {
+   "key": "ca.cert.default_no_certificate",
+   "value": "No valid DE 4 -> Single, zero allowances; federal W-4 is for FIT only since 2020",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "register_id": "US-CAS5-004",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "California EDD",
+   "url": "https://edd.ca.gov/siteassets/files/pdf_pub_ctr/de44.pdf",
+   "confidence": "high"
+  },
+  {
+   "key": "fed.ein.format",
+   "value": "nine-digit number issued by the IRS, arranged 00-0000000",
+   "effective_from": "2026-01-01",
+   "effective_to": null,
+   "register_id": "US-FEDS5-029",
+   "tier": "A.2",
+   "verification_method": "quoted from authority page",
+   "authority": "Internal Revenue Service",
+   "url": "https://www.irs.gov/pub/irs-pdf/p15.pdf",
+   "confidence": "high",
+   "note": "Pub. 15 (2026) sec. 1 Employer Identification Number (EIN), PDF p.13: 'The EIN is a nine-digit number the IRS issues. The digits are arranged as follows: 00-0000000.'"
+  }
+ ],
+ "unresolved": []
+}

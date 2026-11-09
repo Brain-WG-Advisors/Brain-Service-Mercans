@@ -192,10 +192,10 @@ def anchor_text(fam, name):
                 W.gap("WTC-RQ-01", "exclusion of lodging furnished for the convenience of the employer is not configured") +
                 f". {W.gap('WTC-RQ-07', 'State unemployment insurance and programme definition')}. " + P.txt_all_taxes())
     if fam == "car":
-        return ("Car, car maintenance, fuel or car and transportation allowance paid in cash: configured as cash remuneration. Business "
-                "mileage reimbursement is not carried: " +
-                W.ug("fed.bik.mileage.rate", WHY["fed.bik.mileage.rate"]) +
-                ". " + W.gap("WTC-RQ-01", "accountable plan treatment of vehicle reimbursement") + ". " + P.txt_all_taxes())
+        # v1.1 (V11 gap merge): WTC-RQ-89 closed by fed.bik.business_mileage.rate (two 2026 periods)
+        return ("Car, car maintenance, fuel or car and transportation allowance paid in cash: configured as cash remuneration. "
+                + line("fed.bik.business_mileage.rate", "Business standard mileage rate (USD per mile)") + ". "
+                + W.gap("WTC-RQ-01", "accountable plan treatment of vehicle reimbursement") + ". " + P.txt_all_taxes())
     if fam == "transp":
         return (f"Transportation allowance. Qualified transportation fringes (transit passes and commuter vehicle) are excluded up to "
                 f"{val('fed.bik.transit.monthly_exclusion')} a month and qualified parking up to {val('fed.bik.parking.monthly_exclusion')} a month "

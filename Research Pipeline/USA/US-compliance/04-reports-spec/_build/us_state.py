@@ -433,7 +433,7 @@ def ui_wage():
             "MN": "rspec.mn.ui_qtr.due_format", "MT": "rspec.mt.ui_qtr.efiling_handbook", "NE": "rspec.ne.ui_qtr.ftp_spec",
             "NH": "rspec.nh.ui_qtr.recheck", "NV": "rspec.nv.ui_qtr.form_name", "OH": "rspec.oh.ui_qtr.channel_format",
             "OK": "rspec.ok.ui_qtr.due_date", "SD": "rspec.sd.ui_qtr.upload_format", "TX": "rspec.tx.ui_qtr.enhanced_layout",
-            "UT": "rspec.ut.ui_qtr.wage_file_layout", "WY": "rspec.wy.ui_qtr.file_spec", "GA": "rspec.ga.ui_qtr.universal_efile",
+            "UT": "rspec.ut.ui_qtr.wage_file_layout", "WY": "rspec.wy.ui_qtr.file_spec",
             "CT": "rspec.ct.ui_qtr.q3_2026_layout", "AR": "rspec.ar.ui_qtr.efile_threshold", "AZ": "rspec.az.ui_qtr.efile_mandate",
             "NM": "rspec.nm.tap.bulk_schema"}
     at(f"{D} example")

@@ -44,6 +44,8 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mi.pay_frequency.rule` | [[FACT:mi.pay_frequency.rule=default semi-monthly (1-15 paid by 1st next month; 16-end by 15th); weekly/biweekly payday <= 14 days after period end; monthly within 15 days; December OT may go to next payday (MCL 408.472)]] | 2026-01-01 | open | US-MIS5-005 (A.1, Michigan Legislature) |  |
 | `mi.payment.method` | [[FACT:mi.payment.method=cash, check, direct deposit, payroll debit card; DD/paycard need full free written consent (mandated DD-or-card election: no return within 30 days = presumed consent); method change within 1 pay period; paycard 1 free withdrawal per period, 21 days notice of fee changes, free balance inquiries; no cost pass-through (MCL 408.476)]] | 2026-01-01 | open | US-MIS5-006 (A.1, Michigan Legislature) |  |
 
+- Not configured in this release [[GAP:RQ-036]]: Michigan coverage thresholds are configured only for agricultural and domestic employment (`mi.sui.coverage.ag_domestic`); thresholds for other special populations are not established.
+
 ## MI.2 Income tax withholding
 
 | Item | Value | Valid from | Valid to | Source | Note |
@@ -54,7 +56,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mi.wh.exemption.biweekly` | [[FACT:mi.wh.exemption.biweekly=226.92]] USD | 2026-01-01 | 2026-12-31 | US-MIS5-019 (A.2, Michigan Department of Treasury) | 5,900/26. |
 | `mi.wh.supplemental.rate` | [[FACT:mi.wh.supplemental.rate=4.25]] percent | 2026-01-01 | open | US-MIPIT-001 (A.2, Michigan Department of Treasury) | Bonuses and separate payments are withheld at the flat rate with no exemption adjustment (Treasury Guide 446). |
 | `mi.wh.certificate` | [[FACT:mi.wh.certificate=MI-W4 (Rev. 12-20); federal W-4 may not substitute; line 6 exemptions, line 7 additional, 8a/8b exempt; none = zero exemptions; copies to Treasury for 10+ exemptions or exempt; nonresidency proof by employer certificate/letter]] | 2020-12-01 | open | US-MIS5-019 (A.2, Michigan Department of Treasury) |  |
-| `mi.pit.tips_overtime_deduction` | [[FACT:mi.pit.tips_overtime_deduction=2025 PA 24 (MCL 206.30(1)(ee)): tax years 2026-2028 deduct federally allowed qualified tips (IRC 224) and overtime (IRC 225); level ASSESSMENT (MI-1040) only - no withholding change]] | 2026-01-01 | 2028-12-31 | US-MIS5-017 (A.2, Michigan Department of Treasury, Bureau of Tax Policy) | Caution: secondary claim that employers stop withholding on tips is unsupported - do not model. 2026 PA 39 (2026-07-22) amended 206.30 again (content open) [US-MIS5-015]. |
+| `mi.pit.tips_overtime_deduction` | [[FACT:mi.pit.tips_overtime_deduction=2025 PA 24 (MCL 206.30(1)(ee)): tax years 2026-2028 deduct federally allowed qualified tips (IRC 224) and overtime (IRC 225); level ASSESSMENT (MI-1040) only - no withholding change]] | 2026-01-01 | 2028-12-31 | US-MIV6-002 (A.1, Michigan Legislature) | Caution: secondary claim that employers stop withholding on tips is unsupported - do not model. 2026 PA 39 (2026-07-22) amended 206.30 again (content open) [US-MIS5-015]. 2026 PA 39 (approved 2026-07-21, eff. 2026-07-22) re-enacts MCL 206.30(1)(ee): TY2026-2028 deduction of federal qualified tips (IRC 224) and overtime (IRC s.225); nonresidents only for MI services; ASSESSMENT level only, no withholding effect stated. |
 | `mi.oracle.state.biweekly_2000_1ex` | [[FACT:mi.oracle.state.biweekly_2000_1ex=75.36]] USD | 2026-01-01 | 2026-12-31 | US-MIS5-019 (A.2, Michigan Department of Treasury) | (2,000 - [[FACT:mi.wh.exemption.biweekly=226.92]]) x 0.0425 = [[FACT:mi.oracle.state.biweekly_2000_1ex=75.36]]. Official oracle: Treasury withholding calculator (michigan.gov/taxes/business-taxes/withholding/tax-calculator). |
 | `mi.oracle.detroit.resident_biweekly_2000` | [[FACT:mi.oracle.detroit.resident_biweekly_2000=47.45]] USD | 2026-01-01 | 2026-12-31 | US-MIR3-002 (A.2, Michigan Department of Treasury - City Tax Administration) | (2,000 - 23.08) x 0.024 = [[FACT:mi.oracle.detroit.resident_biweekly_2000=47.45]]. |
 
@@ -80,7 +82,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mi.local.cities.list` | [[FACT:mi.local.cities.list=Treasury-administered: Detroit. Self-administered (23): Albion, Battle Creek, Benton Harbor, Big Rapids, East Lansing, Grand Rapids, Flint, Grayling, Hamtramck, Highland Park, Hudson, Ionia, Jackson, Lansing, Lapeer, Muskegon, Muskegon Heights, Pontiac, Port Huron, Portland, Saginaw, Springfield, Walker.]] | 2026-01-01 | open | US-MIB5-301 (A.2, Michigan Department of Treasury) | Treasury "Which cities impose an income tax?" page (verbatim text), consistent with mi.local.cities.count = 24 (US-MIB5-401, a different Treasury page). The page gives no rates. |
 | `mi.local.detroit.eservices_from` | [[FACT:mi.local.detroit.eservices_from=2026-11-12]] | 2026-11-12 | open | US-MIB5-301 (A.2, Michigan Department of Treasury) | Detroit city income taxes move to Michigan Treasury eServices on 2026-11-12 (michigan.gov/taxes/citytax, read 2026-11-02). |
 
-- Not yet published [[GAP:RQ-029]]: The rates, forms and due dates of the self-administered city income taxes other than Detroit were not read. No city rate other than Detroit's is configured.
+- Not configured in this release [[GAP:RQ-029]]: The rates, forms and due dates of the self-administered city income taxes other than Detroit were not verified against the official source. No city rate other than Detroit's is configured.
 
 ## MI.3 Social insurance: unemployment, disability, paid leave and payroll levies
 
@@ -92,9 +94,9 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mi.sui.employer.rate.min` | [[FACT:mi.sui.employer.rate.min=0.06]] percent | 2026-01-01 | 2026-12-31 | US-MIP9W-001 (A.2, Michigan Unemployment Insurance Agency (LEO)) | Range [[FACT:mi.sui.employer.rate.min=0.06]]%-[[FACT:mi.sui.employer.rate.max=12.2]]% (15.2% with penalty); no transit/workforce/admin surcharge [US-MIP9V-001, US-MIP9W-002]. |
 | `mi.sui.employer.rate.max` | [[FACT:mi.sui.employer.rate.max=12.2]] percent | 2026-01-01 | 2026-12-31 | US-MIP9W-001 (A.2, Michigan Unemployment Insurance Agency (LEO)) |  |
 | `mi.sui.wages.definition` | [[FACT:mi.sui.wages.definition=FICA-reported tips included; retirement/health plan payments, employer-paid employee FICA, 401(a) trust payments, SUB pay excluded; wages paid in other states count toward the limit]] | 2026-01-01 | open | US-MIS5-010 (A.1, Michigan Legislature) |  |
+| `mi.sui.coverage.ag_domestic` | [[FACT:mi.sui.coverage.ag_domestic=Agricultural: 10+ individuals in 20 weeks or cash remuneration >= 20,000 USD in a quarter; domestic service: cash remuneration >= 1,000 USD in a quarter (current or preceding year)]] | 2016-05-23 | open | US-MIV6-001 (A.1, Michigan Legislature) | Register: US-MIV6-001 |
 
-- Not configured in this release [[GAP:RQ-030]]: The 2027 unemployment wage base depends on the fund balance at 2026-06-30, and the 2027 personal exemption is not yet published.
-- Not configured in this release [[GAP:RQ-031]]: MES Act sec. 41(5)/(6) agricultural and domestic thresholds not read.
+- Not yet published [[GAP:RQ-030]]: The 2027 unemployment wage base depends on the fund balance at 2026-06-30, and the 2027 personal exemption is not yet published.
 
 ## MI.4 Pay statement
 
@@ -102,7 +104,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 |---|---|---|---|---|---|
 | `mi.payslip.items` | [[FACT:mi.payslip.items=hours worked, gross wages, pay-period identification, separate itemisation of deductions (piece-rate hand harvesters: units); hours may be omitted for EAP-exempt, elected officials, political appointees (MCL 408.479(2)); comp time earned/paid]] | 2026-01-01 | open | US-MIS5-009 (A.1, Michigan Legislature) | IWOWA 408.937 repeats hours/wages/deductions; e-delivery: statute silent. |
 
-- Not configured in this release [[GAP:RQ-032]]: Act 390 silent; no LEO guidance read.
+- Not configured in this release [[GAP:RQ-032]]: Whether Michigan allows electronic pay statements (MCL 408.479) is not established from an official source.
 
 ## MI.5 Statutory reporting
 
@@ -117,7 +119,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mi.newhire.channels` | [[FACT:mi.newhire.channels=Michigan New Hires Operation Center (MDHHS Child Support): online entry, file upload, SFTP (800-524-9846), fax 877-318-1659, mail PO Box 51041 Livonia MI 48151-51041; electronic filers two transmissions per month 12-16 days apart]] | 2026-01-01 | open | US-MIB5-001 (A.2, Michigan Department of Health and Human Services, Child Support Division (New Hires Operation Center)) |  |
 | `mi.newhire.rehire_gap_days` | [[FACT:mi.newhire.rehire_gap_days=60]] days | 2026-01-01 | open | US-MIB5-001 (A.2, Michigan Department of Health and Human Services, Child Support Division (New Hires Operation Center)) | Rehire = new W-4 required or 60 consecutive days since last employment; terminations reported only if an income withholding notice was in effect; only tribal enterprises on federal tribal land exempt. |
 
-- Not configured in this release [[GAP:RQ-033]]: The Michigan statute establishing the New Hires Operation Center duty, the state penalty and the required fields was not located.
+- Not configured in this release [[GAP:RQ-033]]: The Michigan statute establishing the New Hires Operation Center duty, the state penalty and the required fields was not established from an official source.
 
 ## MI.6 Leave
 
@@ -148,8 +150,7 @@ Tier key: T1 = no state wage tax (unemployment insurance and levies only); T3 = 
 | `mi.deductions.rule` | [[FACT:mi.deductions.rule=written consent for each deduction not required by law/CBA; for employer benefit consent each pay and not below MW; overpayment recovery within 6 months, clerical error, notice 1 period ahead, max 15% of gross, not below MW (MCL 408.477)]] | 2026-01-01 | open | US-MIS5-008 (A.1, Michigan Legislature) |  |
 | `mi.deductions.overpayment.max_percent_gross` | [[FACT:mi.deductions.overpayment.max_percent_gross=15]] percent | 2026-01-01 | open | US-MIS5-008 (A.1, Michigan Legislature) |  |
 | `mi.garn.child_support.cap_percent` | [[FACT:mi.garn.child_support.cap_percent=50]] percent | 2026-01-01 | open | US-MIS5-016 (A.1, Michigan Legislature) | MCL 552.608: total under all support orders max 50% of disposable (stricter than CCPA); remit to MiSDU [US-MIS5-024]. |
-
-- Not configured in this release [[GAP:RQ-034]]: Employer IWO processing fee and MCL 600.4012 periodic-garnishment procedure not read.
+| `mi.garn.iwo_fee_and_periodic` | [[FACT:mi.garn.iwo_fee_and_periodic=Withheld income paid to FOC/SDU within 3 days after withholding; order binding on source of income 7 days after service of notice; order has priority over other legal process. Payer processing fee NOT found in 552.609/.611 (552.607 and 552.626 also read: no fee); fee remains open]] | 2009-12-28 | open | US-MIV6-003 (A.1, Michigan Legislature) | Register: US-MIV6-003 |
 
 ## MI.10 Collective agreements and prevailing wage
 
@@ -175,8 +176,7 @@ Indexation of each value is stated in the note of the value concerned.
 | Item | Value | Valid from | Valid to | Source | Note |
 |---|---|---|---|---|---|
 | `mi.live.miui` | [[FACT:mi.live.miui=MiUI replaced MiWAM for the UI tax side on 2026-02-23 with new wage-file specs]] | 2026-02-23 | open | US-MIS5-022 (A.2, Michigan LEO - Unemployment Insurance Agency) |  |
-
-- Not configured in this release [[GAP:RQ-035]]: 2026 PA 39 (imd. eff. 2026-07-22) amended MCL 206.30; content not isolated.
+| `mi.live.2026_pa_39` | [[FACT:mi.live.2026_pa_39=Approved 2026-07-21, effective 2026-07-22. MCL 206.30(1)(ee): for tax years beginning after 2025-12-31 and before 2029-01-01 deduct federal qualified tips (IRC s.224) and qualified overtime (IRC s.225); nonresidents only for services performed in MI. Personal exemption base stated 3,700 USD (indexed under 206.30a). Level: assessment (taxable-income computation); withholding effect not stated in act]] | 2026-07-22 | open | US-MIV6-002 (A.1, Michigan Legislature) | Register: US-MIV6-002 |
 
 ## MI.14 Authority worked examples (oracle values)
 
@@ -186,12 +186,12 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 
 - Agricultural: state OT exempt; harvest piece-rate outside act until scale set; H-2A UI-excluded. (US-MIS5-002, US-MIS5-005, US-MIS5-011)
 - Minors: ESTA excludes youth-employment minors; UI excludes child for parent. (US-MIS5-003, US-MIS5-004, US-MIS5-011)
-- Tipped: tips employee property; reported tips UI wages. (US-MIS5-003, US-MIS5-010, US-MIS5-017)
+- Tipped: tips employee property; reported tips UI wages. (US-MIS5-003, US-MIS5-010, US-MIV6-002)
 - Clergy: MI withholding follows federal duty; church employment UI-excluded. (US-MIS5-011)
 - NRAs: follow federal duty; H-2A UI-excluded. (US-MIS5-011)
 - Statutory employees: commission-only real estate/investment/insurance agents and direct sellers UI-excluded. (US-MIS5-011)
 - Government: federal employees excluded from ESTA. (US-MIS5-002, US-MIS5-004)
-- Not configured in this release [[GAP:RQ-036]]: Thresholds, amounts or conditions for these populations are stated in the sources read without a confirmed value record and are not configured from this annex: Domestic; Agricultural; Minors; Tipped; Students; Statutory employees; Government.
+- Not configured in this release [[GAP:RQ-036]]: Michigan coverage thresholds are configured only for agricultural and domestic employment (`mi.sui.coverage.ag_domestic`); thresholds for other special populations are not established.
 
 ## MI.16 Language
 
@@ -224,10 +224,12 @@ No authority worked example is reproduced in this annex; recomputed withholding 
 | US-MIS5-014 | Michigan Legislature |
 | US-MIS5-015 | Michigan Legislature |
 | US-MIS5-016 | Michigan Legislature |
-| US-MIS5-017 | Michigan Department of Treasury, Bureau of Tax Policy |
 | US-MIS5-018 | Michigan Department of Treasury |
 | US-MIS5-019 | Michigan Department of Treasury |
 | US-MIS5-021 | Michigan Department of Treasury |
 | US-MIS5-022 | Michigan LEO - Unemployment Insurance Agency |
 | US-MIS5-023 | Michigan Legislature |
 | US-MIS5-025 | Michigan LEO - Unemployment Insurance Agency |
+| US-MIV6-001 | Michigan Legislature |
+| US-MIV6-002 | Michigan Legislature |
+| US-MIV6-003 | Michigan Legislature |
